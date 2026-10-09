@@ -1,172 +1,461 @@
 {
- "id": "dientamoebiasis",
- "name": "Dientamoeba fragilis infection",
- "aliases": [
-  "dientamoebiasis",
-  "Dientamoeba fragilis",
-  "Dientamoeba infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no recognised cyst stage, existing chiefly as a fragile trophozoite",
-   "It is a common colonic protozoan whose pathogenic role is debated, but it is increasingly linked to chronic non-bloody diarrhoea, abdominal pain, bloating and anorexia, especially in children",
-   "Peripheral eosinophilia can accompany infection, an unusual feature among enteric protozoa",
-   "It is thought to be co-transmitted with the pinworm Enterobius vermicularis, whose eggs may serve as a protective vehicle for the delicate trophozoite",
-   "The trophozoite typically has two nuclei, and the organism degenerates rapidly in stool, so prompt fixation and permanent staining greatly improve detection",
-   "Routine wet-mount microscopy frequently misses it; permanent stained smears or molecular PCR are far more sensitive",
-   "Metronidazole is commonly used for symptomatic infection, and concurrent treatment of coexisting pinworm should be considered"
+  "id": "dientamoebiasis",
+  "name": "Dientamoeba fragilis infection",
+  "aliases": [
+    "dientamoebiasis",
+    "Dientamoeba fragilis",
+    "Dientamoeba infection"
   ],
-  "pathophysiology": "Dientamoeba fragilis is a flagellate protozoan that colonises the lumen and mucosal surface of the large intestine without demonstrable tissue invasion. The trophozoite is osmotically fragile and does not survive well outside the host, and a robust cyst stage has not been reliably demonstrated, which has long puzzled parasitologists regarding its transmission. The leading hypothesis is that it is carried within the eggs of the pinworm Enterobius vermicularis, explaining frequent co-infection. Mucosal irritation and mild inflammation, rather than invasion, are thought to underlie the abdominal pain and diarrhoea attributed to symptomatic infection, and an eosinophilic response may occur.",
-  "additionalDifferentials": [
-   "Giardiasis",
-   "Blastocystis infection",
-   "Enterobiasis",
-   "Irritable bowel syndrome",
-   "Other enteric protozoal infections",
-   "Inflammatory bowel disease"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy using permanent stained smears rather than wet mount alone",
-   "Prompt fixation of stool given rapid trophozoite degeneration",
-   "Molecular PCR, which is highly sensitive",
-   "Perianal tape test for coexisting pinworm",
-   "Full blood count for peripheral eosinophilia",
-   "Testing to exclude other enteric pathogens in persistent symptoms"
-  ],
-  "redFlags": [
-   "Persistent symptoms despite treatment, prompting reassessment for another diagnosis",
-   "Weight loss or growth faltering in an affected child",
-   "Bloody diarrhoea or systemic features atypical for this organism",
-   "Failure to eradicate infection suggesting reinfection from untreated pinworm"
-  ],
-  "prognosis": "Benign overall; symptomatic infection generally responds well to antiprotozoal treatment, though relapse or persistence can occur if coexisting pinworm infection is not also addressed.",
-  "pitfalls": [
-   "Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite",
-   "Delaying stool fixation so the organism degenerates before examination",
-   "Overlooking and failing to treat concurrent pinworm infection",
-   "Attributing all symptoms to Dientamoeba without considering functional bowel disorders"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol",
-   "Identify and treat coexisting Enterobius vermicularis pinworm infection to prevent relapse, as it is thought to co-transmit the organism",
-   "Confirm the diagnosis with prompt stool fixation and permanent stained smears or molecular PCR rather than wet mount alone",
-   "Provide supportive symptomatic care for diarrhoea and abdominal pain with attention to hydration",
-   "Exclude other enteric pathogens where symptoms persist despite treatment",
-   "Reassess and re-treat for persistence or relapse, ensuring coexisting pinworm is also addressed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dientamoebiasis-pathway",
-   "title": "Dientamoeba fragilis infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no recognised cyst stage, existing chiefly as a fragile trophozoite",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent symptoms despite treatment, prompting reassessment for another diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy using permanent stained smears rather than wet mount alone, Prompt fixation of stool given rapid trophozoite degeneration, Molecular PCR, which is highly sensitive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dientamoeba fragilis infection."
-  }
- ],
- "tables": [
-  {
-   "id": "dientamoebiasis-matrix",
-   "title": "Dientamoeba fragilis infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no recognised cyst stage, existing chiefly as a fragile trophozoite",
+      "It is a common colonic protozoan whose pathogenic role is debated, but it is increasingly linked to chronic non-bloody diarrhoea, abdominal pain, bloating and anorexia, especially in children",
+      "Peripheral eosinophilia can accompany infection, an unusual feature among enteric protozoa",
+      "It is thought to be co-transmitted with the pinworm Enterobius vermicularis, whose eggs may serve as a protective vehicle for the delicate trophozoite",
+      "The trophozoite typically has two nuclei, and the organism degenerates rapidly in stool, so prompt fixation and permanent staining greatly improve detection",
+      "Routine wet-mount microscopy frequently misses it; permanent stained smears or molecular PCR are far more sensitive",
+      "Metronidazole is commonly used for symptomatic infection, and concurrent treatment of coexisting pinworm should be considered"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy using permanent stained smears rather than wet mount alone, Prompt fixation of stool given rapid trophozoite",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dientamoeba fragilis is a flagellate protozoan that colonises the lumen and mucosal surface of the large intestine without demonstrable tissue invasion. The trophozoite is osmotically fragile and does not survive well outside the host, and a robust cyst stage has not been reliably demonstrated, which has long puzzled parasitologists regarding its transmission. The leading hypothesis is that it is carried within the eggs of the pinworm Enterobius vermicularis, explaining frequent co-infection. Mucosal irritation and mild inflammation, rather than invasion, are thought to underlie the abdominal pain and diarrhoea attributed to symptomatic infection, and an eosinophilic response may occur.",
+    "additionalDifferentials": [
+      "Giardiasis",
+      "Blastocystis infection",
+      "Enterobiasis",
+      "Irritable bowel syndrome",
+      "Other enteric protozoal infections",
+      "Inflammatory bowel disease"
     ],
-    [
-     "Primary Differentials",
-     "Giardiasis, Blastocystis infection, Enterobiasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy using permanent stained smears rather than wet mount alone",
+      "Prompt fixation of stool given rapid trophozoite degeneration",
+      "Molecular PCR, which is highly sensitive",
+      "Perianal tape test for coexisting pinworm",
+      "Full blood count for peripheral eosinophilia",
+      "Testing to exclude other enteric pathogens in persistent symptoms"
     ],
-    [
-     "Management Strategy",
-     "Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent symptoms despite treatment, prompting reassessment for another diagnosis",
+      "Weight loss or growth faltering in an affected child",
+      "Bloody diarrhoea or systemic features atypical for this organism",
+      "Failure to eradicate infection suggesting reinfection from untreated pinworm"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign overall; symptomatic infection generally responds well to antiprotozoal treatment, though relapse or persistence can occur if coexisting pinworm infection is not also addressed.",
+    "pitfalls": [
+      "Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite",
+      "Delaying stool fixation so the organism degenerates before examination",
+      "Overlooking and failing to treat concurrent pinworm infection",
+      "Attributing all symptoms to Dientamoeba without considering functional bowel disorders"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol",
+      "Identify and treat coexisting Enterobius vermicularis pinworm infection to prevent relapse, as it is thought to co-transmit the organism",
+      "Confirm the diagnosis with prompt stool fixation and permanent stained smears or molecular PCR rather than wet mount alone",
+      "Provide supportive symptomatic care for diarrhoea and abdominal pain with attention to hydration",
+      "Exclude other enteric pathogens where symptoms persist despite treatment",
+      "Reassess and re-treat for persistence or relapse, ensuring coexisting pinworm is also addressed"
     ]
-   ],
-   "caption": "Overview comparison matrix for dientamoeba fragilis infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dientamoebiasis-real-image",
-   "title": "Dientamoeba fragilis infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "dientamoebiasis-pathway",
+      "title": "Dientamoeba fragilis infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no recognised cyst stage, existing chiefly as a fragile trophozoite",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent symptoms despite treatment, prompting reassessment for another diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy using permanent stained smears rather than wet mount alone, Prompt fixation of stool given rapid trophozoite degeneration, Molecular PCR, which is highly sensitive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dientamoeba fragilis infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dientamoebiasis-matrix",
+      "title": "Dientamoeba fragilis infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dientamoeba fragilis is a trichomonad-related flagellate that, despite its name, has no external flagella and historically no",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy using permanent stained smears rather than wet mount alone, Prompt fixation of stool given rapid trophozoite",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giardiasis, Blastocystis infection, Enterobiasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat symptomatic infection with an antiprotozoal agent such as metronidazole, paromomycin or iodoquinol",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on wet-mount microscopy alone, which frequently fails to detect the fragile trophozoite",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dientamoeba fragilis infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dientamoebiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with permanent stained smears",
+          "cells": [
+            {
+              "text": "Trophozoites; wet mount alone often misses them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular PCR",
+          "cells": [
+            {
+              "text": "Highly sensitive detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal tape test",
+          "cells": [
+            {
+              "text": "Coexisting pinworm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for other enteric pathogens",
+          "cells": [
+            {
+              "text": "Other causes when symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dientamoebiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterobiasis",
+          "cells": [
+            {
+              "text": "Coexisting pinworm, identified by perianal tape test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Functional bowel disorders can explain symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea or systemic features atypical for this organism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dientamoebiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiprotozoal treatment",
+          "cells": [
+            {
+              "text": "Metronidazole, paromomycin or iodoquinol for symptomatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting pinworm",
+          "cells": [
+            {
+              "text": "Thought to co-transmit the organism; prevents relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "Prompt fixation; permanent stained smears or PCR rather than wet mount"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Diarrhoea and abdominal pain; attention to hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude other pathogens",
+          "cells": [
+            {
+              "text": "Where symptoms persist despite treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess and re-treat",
+          "cells": [
+            {
+              "text": "For persistence or relapse, with pinworm also addressed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dientamoebiasis-dx-mgmt",
+      "title": "Diagnosis and management of Dientamoeba fragilis infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dientamoeba fragilis infection: diarrhoea or abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss in a child, bloody diarrhoea, treatment failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for bloody diarrhoea or growth faltering; exclude other diagnoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fixed stool with permanent stained smears or PCR; perianal tape test; FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the organism found on fixed stool smear or PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pinworm, giardiasis, Blastocystis, IBS or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metronidazole, paromomycin or iodoquinol for symptomatic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting pinworm to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for diarrhoea and pain, with attention to hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude other enteric pathogens if symptoms persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassess and re-treat for persistence, with pinworm also addressed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; responds to antiprotozoals; relapse occurs if pinworm is not also treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

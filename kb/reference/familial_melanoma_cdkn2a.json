@@ -1,182 +1,480 @@
 {
- "id": "familial_melanoma_cdkn2a",
- "name": "Familial melanoma",
- "aliases": [
-  "CDKN2A",
-  "p16",
-  "familial atypical multiple mole melanoma syndrome",
-  "FAMMM",
-  "melanoma-pancreatic cancer syndrome"
- ],
- "class": "non_infective",
- "system": "Oncology / Genetics",
- "specialty": "Medical Genetics / Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant pattern with penetrance modified by ultraviolet exposure and skin type",
-   "Characterised by multiple primary cutaneous melanomas, often at young ages, and frequently many atypical (dysplastic) naevi",
-   "CDKN2A carriers also have an increased risk of pancreatic cancer, and some families show clustering of both melanoma and pancreatic malignancy",
-   "The gene encodes two proteins from alternative reading frames, p16INK4a and p14ARF, linking it to both the retinoblastoma and p53 tumour-suppressor pathways",
-   "Suspect the syndrome with multiple primary melanomas in one person or several affected close relatives, especially with early onset",
-   "Management emphasises rigorous sun protection, regular total-body skin surveillance with dermoscopy, and patient self-examination",
-   "Pancreatic surveillance is considered in CDKN2A families, particularly where pancreatic cancer has occurred"
+  "id": "familial_melanoma_cdkn2a",
+  "name": "Familial melanoma",
+  "aliases": [
+    "CDKN2A",
+    "p16",
+    "familial atypical multiple mole melanoma syndrome",
+    "FAMMM",
+    "melanoma-pancreatic cancer syndrome"
   ],
-  "pathophysiology": "The syndrome usually results from a germline loss-of-function variant in CDKN2A, which encodes two distinct tumour suppressors through alternative reading frames. p16INK4a inhibits cyclin-dependent kinases 4 and 6 to hold cells in G1 via the retinoblastoma pathway, while p14ARF stabilises p53 by inhibiting its degradation. Loss of these functions removes key restraints on cell-cycle progression and on the apoptotic response to genomic stress, and when combined with ultraviolet-induced DNA damage in melanocytes this permits the accumulation of mutations that drive melanoma and contributes to pancreatic carcinogenesis.",
-  "additionalDifferentials": [
-   "Sporadic melanoma in a person with heavy sun exposure",
-   "CDK4-related familial melanoma",
-   "BAP1 tumour predisposition syndrome",
-   "Xeroderma pigmentosum",
-   "Li-Fraumeni syndrome",
-   "MITF or MC1R-associated melanoma susceptibility"
-  ],
-  "additionalInvestigations": [
-   "Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate",
-   "Regular total-body skin examination with dermoscopy and baseline photography",
-   "Biopsy and histopathology of suspicious pigmented lesions",
-   "Structured patient education in skin self-examination",
-   "Consideration of pancreatic imaging surveillance in CDKN2A families",
-   "Ophthalmological review where uveal involvement or BAP1-related disease is suspected"
-  ],
-  "redFlags": [
-   "A changing, irregular or bleeding pigmented lesion",
-   "A new melanoma in someone with prior primary disease",
-   "Painless jaundice, weight loss or new-onset diabetes suggesting pancreatic cancer",
-   "Rapidly enlarging or symptomatic lymph nodes indicating metastatic melanoma"
-  ],
-  "prognosis": "Melanoma risk is high and lifelong, but early detection through surveillance and prompt excision yields excellent outcomes for thin lesions. Pancreatic cancer, when it occurs, carries a poorer prognosis, underscoring the value of risk reduction and, in selected families, pancreatic surveillance.",
-  "pitfalls": [
-   "Attributing multiple melanomas to sun exposure alone and not considering a germline cause",
-   "Under-recognising the associated pancreatic cancer risk in CDKN2A carriers",
-   "Relying on infrequent examination when frequent dermoscopic surveillance detects earlier lesions",
-   "Failing to reinforce sun protection, which strongly modifies penetrance, and to offer cascade testing"
-  ],
-  "references": [
-   "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
-   "NCCN Guidelines: Genetic/Familial High-Risk Assessment and Melanoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel if CDKN2A is negative but history remains suspicious",
-   "Provide formal genetic counselling before and after testing, with cascade testing offered to first-degree relatives once a pathogenic variant is found",
-   "Discuss pancreatic surveillance and smoking cessation with confirmed carriers, and evaluate for germline testing in any patient with pancreatic cancer plus a family history of multiple melanomas",
-   "Maintain lifelong rigorous photoprotection and structured surveillance (self-exam plus clinician total-body skin exam with dermoscopy and photography) in carriers",
-   "Perform prompt excisional biopsy of any new, changing, or atypical pigmented lesion rather than observation",
-   "Refer for ophthalmological review when uveal melanoma or overlapping BAP1-related features are suspected",
-   "Treat localized (stage I/II) melanoma with surgical excision scaled to lesion depth and sentinel lymph node assessment to guide further nodal management; adjuvant therapy is not routine for low-risk disease and is individualized for higher-risk node-negative disease",
-   "Offer adjuvant PD-1 checkpoint inhibitor therapy as standard for resected high-risk stage III disease",
-   "Offer adjuvant BRAF/MEK inhibitor combination therapy as an alternative for BRAF-mutant resected stage III disease, guided by tumor BRAF/MEK mutation testing",
-   "Consider referral for neoadjuvant checkpoint therapy before surgery in bulky nodal presentations as an emerging strategy",
-   "Use immune checkpoint inhibition (anti-PD-1 alone or with anti-CTLA-4) as a standard systemic option for stage IV or unresectable disease",
-   "Use BRAF/MEK inhibitor combination therapy as a standard alternative for BRAF V600-mutant metastatic disease, checking mutation status to choose between targeted and immunotherapy pathways",
-   "Reserve surgery and radiotherapy for symptomatic, oligometastatic, or CNS disease alongside systemic therapy in the metastatic setting, managed by medical/surgical oncology",
-   "Refer suspected hereditary patterns, biopsy-confirmed melanoma, node-positive or BRAF-mutant disease, and suspected pancreatic cancer in carriers to the appropriate genetics, oncology, or surgical specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_melanoma_cdkn2a-pathway",
-   "title": "Familial melanoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant pattern with penetrance modified by ultraviolet exposure and skin type",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A changing, irregular or bleeding pigmented lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate, Regular total-body skin examination with dermoscopy and baseline photography, Biopsy and histopathology of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel if CDKN2A is negative but history remains suspicious"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing multiple melanomas to sun exposure alone and not considering a germline cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial melanoma."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_melanoma_cdkn2a-matrix",
-   "title": "Familial melanoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Genetics",
+  "specialty": "Medical Genetics / Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant pattern with penetrance modified by ultraviolet exposure and skin type",
+      "Characterised by multiple primary cutaneous melanomas, often at young ages, and frequently many atypical (dysplastic) naevi",
+      "CDKN2A carriers also have an increased risk of pancreatic cancer, and some families show clustering of both melanoma and pancreatic malignancy",
+      "The gene encodes two proteins from alternative reading frames, p16INK4a and p14ARF, linking it to both the retinoblastoma and p53 tumour-suppressor pathways",
+      "Suspect the syndrome with multiple primary melanomas in one person or several affected close relatives, especially with early onset",
+      "Management emphasises rigorous sun protection, regular total-body skin surveillance with dermoscopy, and patient self-examination",
+      "Pancreatic surveillance is considered in CDKN2A families, particularly where pancreatic cancer has occurred"
     ],
-    [
-     "Key Investigations",
-     "Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate, Regular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome usually results from a germline loss-of-function variant in CDKN2A, which encodes two distinct tumour suppressors through alternative reading frames. p16INK4a inhibits cyclin-dependent kinases 4 and 6 to hold cells in G1 via the retinoblastoma pathway, while p14ARF stabilises p53 by inhibiting its degradation. Loss of these functions removes key restraints on cell-cycle progression and on the apoptotic response to genomic stress, and when combined with ultraviolet-induced DNA damage in melanocytes this permits the accumulation of mutations that drive melanoma and contributes to pancreatic carcinogenesis.",
+    "additionalDifferentials": [
+      "Sporadic melanoma in a person with heavy sun exposure",
+      "CDK4-related familial melanoma",
+      "BAP1 tumour predisposition syndrome",
+      "Xeroderma pigmentosum",
+      "Li-Fraumeni syndrome",
+      "MITF or MC1R-associated melanoma susceptibility"
     ],
-    [
-     "Primary Differentials",
-     "Sporadic melanoma in a person with heavy sun exposure, CDK4-related familial melanoma, BAP1 tumour predisposition syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate",
+      "Regular total-body skin examination with dermoscopy and baseline photography",
+      "Biopsy and histopathology of suspicious pigmented lesions",
+      "Structured patient education in skin self-examination",
+      "Consideration of pancreatic imaging surveillance in CDKN2A families",
+      "Ophthalmological review where uveal involvement or BAP1-related disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel",
-     "Core treatment modality"
+    "redFlags": [
+      "A changing, irregular or bleeding pigmented lesion",
+      "A new melanoma in someone with prior primary disease",
+      "Painless jaundice, weight loss or new-onset diabetes suggesting pancreatic cancer",
+      "Rapidly enlarging or symptomatic lymph nodes indicating metastatic melanoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing multiple melanomas to sun exposure alone and not considering a germline cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Melanoma risk is high and lifelong, but early detection through surveillance and prompt excision yields excellent outcomes for thin lesions. Pancreatic cancer, when it occurs, carries a poorer prognosis, underscoring the value of risk reduction and, in selected families, pancreatic surveillance.",
+    "pitfalls": [
+      "Attributing multiple melanomas to sun exposure alone and not considering a germline cause",
+      "Under-recognising the associated pancreatic cancer risk in CDKN2A carriers",
+      "Relying on infrequent examination when frequent dermoscopic surveillance detects earlier lesions",
+      "Failing to reinforce sun protection, which strongly modifies penetrance, and to offer cascade testing"
+    ],
+    "references": [
+      "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+      "NCCN Guidelines: Genetic/Familial High-Risk Assessment and Melanoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel if CDKN2A is negative but history remains suspicious",
+      "Provide formal genetic counselling before and after testing, with cascade testing offered to first-degree relatives once a pathogenic variant is found",
+      "Discuss pancreatic surveillance and smoking cessation with confirmed carriers, and evaluate for germline testing in any patient with pancreatic cancer plus a family history of multiple melanomas",
+      "Maintain lifelong rigorous photoprotection and structured surveillance (self-exam plus clinician total-body skin exam with dermoscopy and photography) in carriers",
+      "Perform prompt excisional biopsy of any new, changing, or atypical pigmented lesion rather than observation",
+      "Refer for ophthalmological review when uveal melanoma or overlapping BAP1-related features are suspected",
+      "Treat localized (stage I/II) melanoma with surgical excision scaled to lesion depth and sentinel lymph node assessment to guide further nodal management; adjuvant therapy is not routine for low-risk disease and is individualized for higher-risk node-negative disease",
+      "Offer adjuvant PD-1 checkpoint inhibitor therapy as standard for resected high-risk stage III disease",
+      "Offer adjuvant BRAF/MEK inhibitor combination therapy as an alternative for BRAF-mutant resected stage III disease, guided by tumor BRAF/MEK mutation testing",
+      "Consider referral for neoadjuvant checkpoint therapy before surgery in bulky nodal presentations as an emerging strategy",
+      "Use immune checkpoint inhibition (anti-PD-1 alone or with anti-CTLA-4) as a standard systemic option for stage IV or unresectable disease",
+      "Use BRAF/MEK inhibitor combination therapy as a standard alternative for BRAF V600-mutant metastatic disease, checking mutation status to choose between targeted and immunotherapy pathways",
+      "Reserve surgery and radiotherapy for symptomatic, oligometastatic, or CNS disease alongside systemic therapy in the metastatic setting, managed by medical/surgical oncology",
+      "Refer suspected hereditary patterns, biopsy-confirmed melanoma, node-positive or BRAF-mutant disease, and suspected pancreatic cancer in carriers to the appropriate genetics, oncology, or surgical specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial melanoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-melanoma-cdkn2a-real-image",
-   "title": "Familial melanoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "familial_melanoma_cdkn2a-pathway",
+      "title": "Familial melanoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant pattern with penetrance modified by ultraviolet exposure and skin type",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A changing, irregular or bleeding pigmented lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate, Regular total-body skin examination with dermoscopy and baseline photography, Biopsy and histopathology of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel if CDKN2A is negative but history remains suspicious"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing multiple melanomas to sun exposure alone and not considering a germline cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial melanoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_melanoma_cdkn2a-matrix",
+      "title": "Familial melanoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most commonly caused by germline pathogenic variants in the CDKN2A tumour-suppressor gene, inherited in an autosomal dominant",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline CDKN2A sequencing and deletion/duplication analysis, with CDK4 and multigene panel testing as appropriate, Regular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sporadic melanoma in a person with heavy sun exposure, CDK4-related familial melanoma, BAP1 tumour predisposition syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the syndrome with germline CDKN2A testing (sequencing plus deletion/duplication analysis), adding CDK4 or a broader panel",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing multiple melanomas to sun exposure alone and not considering a germline cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial melanoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_melanoma_cdkn2a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline CDKN2A sequencing with deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "Causative variant; CDK4 if negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total-body skin examination with dermoscopy and baseline photography",
+          "cells": [
+            {
+              "text": "Naevi and new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and histopathology of suspicious lesions",
+          "cells": [
+            {
+              "text": "Suspicious pigmented lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic imaging surveillance in CDKN2A families",
+          "cells": [
+            {
+              "text": "Pancreatic cancer risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Uveal involvement or BAP1-related disease suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_melanoma_cdkn2a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic melanoma with heavy sun exposure",
+          "cells": [
+            {
+              "text": "Without a germline cause; family history and testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDK4-related familial melanoma",
+          "cells": [
+            {
+              "text": "Germline CDK4 testing when CDKN2A is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAP1 tumour predisposition syndrome",
+          "cells": [
+            {
+              "text": "Uveal disease and other tumours point to BAP1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_melanoma_cdkn2a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline CDKN2A testing with genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade testing of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic surveillance and smoking cessation",
+          "cells": [
+            {
+              "text": "Confirmed carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong photoprotection and surveillance",
+          "cells": [
+            {
+              "text": "Self-examination and clinician total-body examination with dermoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt excisional biopsy",
+          "cells": [
+            {
+              "text": "New, changing or atypical pigmented lesions rather than observation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma excision scaled to depth",
+          "cells": [
+            {
+              "text": "Sentinel node assessment for localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant anti-PD-1 for resected high-risk stage III",
+          "cells": [
+            {
+              "text": "Standard; BRAF/MEK combination alternative for BRAF-mutant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune checkpoint inhibition for stage IV disease",
+          "cells": [
+            {
+              "text": "Anti-PD-1 alone or with anti-CTLA-4; BRAF/MEK for BRAF V600-mutant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_melanoma_cdkn2a-dx-mgmt",
+      "title": "Diagnosis and management of Familial melanoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple primary melanomas or several affected relatives with early-onset melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (changing pigmented lesion, new melanoma, pancreatic signs, enlarging nodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Excisional biopsy; oncology referral for biopsy-proven melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CDKN2A sequencing with deletion analysis; CDK4 if negative; skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic CDKN2A or CDK4 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic melanoma, BAP1, MITF or other susceptibility",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection and total-body skin surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt excisional biopsy of new or atypical lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision with sentinel node assessment for localised melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant anti-PD-1 for resected high-risk stage III disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Immune checkpoint inhibition or BRAF/MEK therapy for metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifetime risk is high; early excision gives excellent outcomes for thin lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,499 @@
 {
- "id": "leigh_syndrome",
- "name": "Leigh syndrome",
- "aliases": [
-  "Subacute necrotising encephalomyelopathy",
-  "Leigh disease",
-  "SURF1",
-  "MT-ATP6"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and often follows an intercurrent illness",
-   "The radiological signature is bilateral symmetrical T2 hyperintense lesions in the basal ganglia and brainstem, frequently with elevated lactate on MR spectroscopy",
-   "It is genetically heterogeneous: causative defects lie in either mitochondrial DNA (for example MT-ATP6, giving maternal inheritance) or numerous nuclear genes such as SURF1 (autosomal recessive)",
-   "The common final pathway is impaired oxidative phosphorylation, most often affecting complex I, complex IV (cytochrome c oxidase) or pyruvate metabolism",
-   "Brainstem involvement can produce respiratory irregularity, abnormal eye movements, nystagmus and central apnoea",
-   "Blood and cerebrospinal fluid lactate are commonly raised, and the CSF-to-blood lactate ratio can be informative",
-   "Management is supportive with attention to nutrition, intercurrent illness and generic cofactor supplementation, avoiding respiratory-chain toxins and, where a pyruvate dehydrogenase defect is confirmed, considering a generically high-fat ketogenic dietary approach under specialist supervision"
+  "id": "leigh_syndrome",
+  "name": "Leigh syndrome",
+  "aliases": [
+    "Subacute necrotising encephalomyelopathy",
+    "Leigh disease",
+    "SURF1",
+    "MT-ATP6"
   ],
-  "pathophysiology": "Leigh syndrome is a genetically diverse but phenotypically convergent disorder of mitochondrial energy metabolism. Whatever the underlying gene, the result is deficient ATP production, most often from defects of respiratory-chain complex I or IV, ATP synthase, or the pyruvate dehydrogenase complex. When the defect resides in mitochondrial DNA the disorder is maternally inherited and heteroplasmic with a threshold effect, whereas nuclear-encoded forms follow Mendelian, usually autosomal recessive, patterns. Chronically energy-starved neurons in the basal ganglia, thalamus, brainstem and cerebellum undergo the characteristic focal, bilaterally symmetrical necrosis with capillary proliferation, gliosis and demyelination that gives the disorder its descriptive name.",
-  "additionalDifferentials": [
-   "Other mitochondrial encephalopathies including MELAS and MERRF",
-   "Biotinidase or biotin-thiamine-responsive basal ganglia disease",
-   "Wilson disease and other basal ganglia metabolic disorders",
-   "Kernicterus or hypoxic-ischaemic basal ganglia injury",
-   "Organic acidaemias such as glutaric aciduria",
-   "Acute disseminated encephalomyelitis"
-  ],
-  "additionalInvestigations": [
-   "Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio",
-   "Brain MRI with spectroscopy demonstrating symmetrical basal ganglia and brainstem lesions and a lactate peak",
-   "Plasma amino acids and urine organic acids to exclude mimicking metabolic disorders",
-   "Molecular genetic testing including mitochondrial DNA analysis and nuclear gene panels (e.g. SURF1)",
-   "Skeletal muscle biopsy for respiratory-chain enzyme assays where genetics are inconclusive",
-   "Pyruvate dehydrogenase complex enzyme activity when a PDH defect is suspected"
-  ],
-  "redFlags": [
-   "Brainstem dysfunction with central hypoventilation or apnoea",
-   "Rapid neurological regression triggered by intercurrent infection or fasting",
-   "Progressive bulbar weakness with aspiration risk",
-   "Decompensating lactic acidosis"
-  ],
-  "prognosis": "Leigh syndrome is generally progressive with a guarded outlook; classic infantile forms often follow a stepwise decline with intercurrent illnesses and reduced survival, though later-onset and some nuclear-gene forms can run a more indolent course.",
-  "pitfalls": [
-   "Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous",
-   "Overlooking treatable phenocopies such as biotin-thiamine-responsive basal ganglia disease or a pyruvate dehydrogenase defect",
-   "Missing brainstem respiratory involvement that can cause sudden deterioration",
-   "Exposing patients to mitochondrial toxins or prolonged fasting that precipitate crises"
-  ],
-  "references": [
-   "GeneReviews: Nuclear Gene-Encoded Leigh Syndrome",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin, with thiamine or a ketogenic diet where a pyruvate dehydrogenase defect is identified",
-   "Avoid mitochondrial toxins and aggravating drugs such as sodium valproate, and prevent catabolism by giving intravenous glucose and treating intercurrent illness promptly",
-   "Provide nutritional support and safe feeding, including nasogastric or gastrostomy feeding for swallowing difficulty, and treat seizures and spasticity",
-   "Manage acute metabolic decompensation with correction of lactic acidosis and aggressive treatment of the precipitating stress",
-   "Monitor for brainstem-related respiratory irregularity and central apnoea, with respiratory support as needed",
-   "Coordinate multidisciplinary care across metabolic medicine, neurology, respiratory, physiotherapy and palliative care",
-   "Offer genetic counselling addressing both maternal mitochondrial DNA and autosomal recessive nuclear-gene inheritance, with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leigh_syndrome-pathway",
-   "title": "Leigh syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and often follows an intercurrent illness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Brainstem dysfunction with central hypoventilation or apnoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio, Brain MRI with spectroscopy demonstrating symmetrical basal ganglia and brainstem lesions and a lactate peak, Plasma amino"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin, with thiamine or a ketogenic diet where a pyruvate dehydrogenase defect is identified"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leigh syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "leigh_syndrome-matrix",
-   "title": "Leigh syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and often follows an intercurrent illness",
+      "The radiological signature is bilateral symmetrical T2 hyperintense lesions in the basal ganglia and brainstem, frequently with elevated lactate on MR spectroscopy",
+      "It is genetically heterogeneous: causative defects lie in either mitochondrial DNA (for example MT-ATP6, giving maternal inheritance) or numerous nuclear genes such as SURF1 (autosomal recessive)",
+      "The common final pathway is impaired oxidative phosphorylation, most often affecting complex I, complex IV (cytochrome c oxidase) or pyruvate metabolism",
+      "Brainstem involvement can produce respiratory irregularity, abnormal eye movements, nystagmus and central apnoea",
+      "Blood and cerebrospinal fluid lactate are commonly raised, and the CSF-to-blood lactate ratio can be informative",
+      "Management is supportive with attention to nutrition, intercurrent illness and generic cofactor supplementation, avoiding respiratory-chain toxins and, where a pyruvate dehydrogenase defect is confirmed, considering a generically high-fat ketogenic dietary approach under specialist supervision"
     ],
-    [
-     "Key Investigations",
-     "Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio, Brain MRI with spectroscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leigh syndrome is a genetically diverse but phenotypically convergent disorder of mitochondrial energy metabolism. Whatever the underlying gene, the result is deficient ATP production, most often from defects of respiratory-chain complex I or IV, ATP synthase, or the pyruvate dehydrogenase complex. When the defect resides in mitochondrial DNA the disorder is maternally inherited and heteroplasmic with a threshold effect, whereas nuclear-encoded forms follow Mendelian, usually autosomal recessive, patterns. Chronically energy-starved neurons in the basal ganglia, thalamus, brainstem and cerebellum undergo the characteristic focal, bilaterally symmetrical necrosis with capillary proliferation, gliosis and demyelination that gives the disorder its descriptive name.",
+    "additionalDifferentials": [
+      "Other mitochondrial encephalopathies including MELAS and MERRF",
+      "Biotinidase or biotin-thiamine-responsive basal ganglia disease",
+      "Wilson disease and other basal ganglia metabolic disorders",
+      "Kernicterus or hypoxic-ischaemic basal ganglia injury",
+      "Organic acidaemias such as glutaric aciduria",
+      "Acute disseminated encephalomyelitis"
     ],
-    [
-     "Primary Differentials",
-     "Other mitochondrial encephalopathies including MELAS and MERRF, Biotinidase or biotin-thiamine-responsive basal ganglia disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio",
+      "Brain MRI with spectroscopy demonstrating symmetrical basal ganglia and brainstem lesions and a lactate peak",
+      "Plasma amino acids and urine organic acids to exclude mimicking metabolic disorders",
+      "Molecular genetic testing including mitochondrial DNA analysis and nuclear gene panels (e.g. SURF1)",
+      "Skeletal muscle biopsy for respiratory-chain enzyme assays where genetics are inconclusive",
+      "Pyruvate dehydrogenase complex enzyme activity when a PDH defect is suspected"
     ],
-    [
-     "Management Strategy",
-     "There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin,",
-     "Core treatment modality"
+    "redFlags": [
+      "Brainstem dysfunction with central hypoventilation or apnoea",
+      "Rapid neurological regression triggered by intercurrent infection or fasting",
+      "Progressive bulbar weakness with aspiration risk",
+      "Decompensating lactic acidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous",
-     "Prevent diagnostic or management error"
+    "prognosis": "Leigh syndrome is generally progressive with a guarded outlook; classic infantile forms often follow a stepwise decline with intercurrent illnesses and reduced survival, though later-onset and some nuclear-gene forms can run a more indolent course.",
+    "pitfalls": [
+      "Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous",
+      "Overlooking treatable phenocopies such as biotin-thiamine-responsive basal ganglia disease or a pyruvate dehydrogenase defect",
+      "Missing brainstem respiratory involvement that can cause sudden deterioration",
+      "Exposing patients to mitochondrial toxins or prolonged fasting that precipitate crises"
+    ],
+    "references": [
+      "GeneReviews: Nuclear Gene-Encoded Leigh Syndrome",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin, with thiamine or a ketogenic diet where a pyruvate dehydrogenase defect is identified",
+      "Avoid mitochondrial toxins and aggravating drugs such as sodium valproate, and prevent catabolism by giving intravenous glucose and treating intercurrent illness promptly",
+      "Provide nutritional support and safe feeding, including nasogastric or gastrostomy feeding for swallowing difficulty, and treat seizures and spasticity",
+      "Manage acute metabolic decompensation with correction of lactic acidosis and aggressive treatment of the precipitating stress",
+      "Monitor for brainstem-related respiratory irregularity and central apnoea, with respiratory support as needed",
+      "Coordinate multidisciplinary care across metabolic medicine, neurology, respiratory, physiotherapy and palliative care",
+      "Offer genetic counselling addressing both maternal mitochondrial DNA and autosomal recessive nuclear-gene inheritance, with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for leigh syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leigh-syndrome-real-image",
-   "title": "Leigh syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "leigh_syndrome-pathway",
+      "title": "Leigh syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and often follows an intercurrent illness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Brainstem dysfunction with central hypoventilation or apnoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio, Brain MRI with spectroscopy demonstrating symmetrical basal ganglia and brainstem lesions and a lactate peak, Plasma amino"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin, with thiamine or a ketogenic diet where a pyruvate dehydrogenase defect is identified"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leigh syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leigh_syndrome-matrix",
+      "title": "Leigh syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and cerebrospinal fluid lactate and pyruvate with calculation of the lactate/pyruvate ratio, Brain MRI with spectroscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other mitochondrial encephalopathies including MELAS and MERRF, Biotinidase or biotin-thiamine-responsive basal ganglia disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no curative therapy; offer mitochondrial supportive supplements such as thiamine, riboflavin, coenzyme Q10 and biotin,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a single gene: Leigh syndrome requires both mitochondrial DNA and nuclear testing because it is highly heterogeneous",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leigh syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leigh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate, with lactate/pyruvate ratio",
+          "cells": [
+            {
+              "text": "Commonly raised lactate; the ratio can be informative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with spectroscopy",
+          "cells": [
+            {
+              "text": "Symmetrical basal ganglia and brainstem lesions with a lactate peak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Excludes mimicking metabolic disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (mtDNA and nuclear panels)",
+          "cells": [
+            {
+              "text": "Genetically heterogeneous; for example SURF1 or MT-ATP6"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal muscle biopsy for respiratory-chain enzymes",
+          "cells": [
+            {
+              "text": "Where genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyruvate dehydrogenase complex activity",
+          "cells": [
+            {
+              "text": "When a PDH defect is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biotin-thiamine-responsive basal ganglia disease",
+          "cells": [
+            {
+              "text": "Treatable phenocopy that must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyruvate dehydrogenase complex deficiency",
+          "cells": [
+            {
+              "text": "Treatable phenocopy; enzyme activity testing is available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS and MERRF",
+          "cells": [
+            {
+              "text": "Other mitochondrial encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glutaric aciduria",
+          "cells": [
+            {
+              "text": "Organic acidaemia; urine organic acids separate it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive supplements",
+          "cells": [
+            {
+              "text": "Thiamine, riboflavin, coenzyme Q10 and biotin; ketogenic diet also considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid toxins",
+          "cells": [
+            {
+              "text": "Mitochondrial toxins and aggravating drugs such as sodium valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent catabolism",
+          "cells": [
+            {
+              "text": "Intravenous glucose and prompt treatment of intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for swallowing difficulty; treat seizures and spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Correction of lactic acidosis and treatment of the precipitating stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Brainstem-related irregularity and central apnoea; support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology, respiratory, physiotherapy and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal mtDNA and autosomal recessive nuclear inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leigh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Leigh syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with psychomotor regression, hypotonia and feeding difficulty after infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (apnoea, rapid regression, bulbar weakness, lactic acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic decompensation care and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate, MRI with spectroscopy, amino acids, organic acids, genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mitochondrial gene defect found, with treatable phenocopies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider biotin-thiamine-responsive disease, PDH deficiency or MELAS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitochondrial supplements: thiamine, riboflavin, coenzyme Q10, biotin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid toxins such as valproate; prevent catabolism with IV glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for swallowing difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct lactic acidosis and treat the precipitating stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor brainstem respiratory irregularity and central apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally progressive with a guarded outlook; classic infantile form has reduced survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,166 +1,399 @@
 {
- "id": "episcleritis",
- "name": "Episcleritis",
- "aliases": [
-  "simple episcleritis",
-  "nodular episcleritis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or grittiness rather than severe pain",
-   "Redness may be sectoral or diffuse with a bright red appearance, and visual acuity is preserved",
-   "The superficial episcleral vessels blanch with topical phenylephrine, unlike the deeper vessels of scleritis",
-   "Classified as simple (diffuse) or nodular; in nodular disease a mobile, tender nodule is seen over the sclera",
-   "Most cases are idiopathic, though a minority are linked to systemic inflammatory conditions such as gout, rosacea, or connective-tissue disease",
-   "It is distinguished from scleritis by the absence of deep boring pain, vessel blanching with phenylephrine, and a benign course",
-   "Management is largely reassurance with lubricants; topical or short courses of oral NSAIDs and, occasionally, mild topical steroids help troublesome or nodular cases"
+  "id": "episcleritis",
+  "name": "Episcleritis",
+  "aliases": [
+    "simple episcleritis",
+    "nodular episcleritis"
   ],
-  "pathophysiology": "Episcleritis is inflammation confined to the episclera, the thin vascular layer of connective tissue between the conjunctiva and the sclera. The process is typically a localised, non-granulomatous inflammatory response affecting the superficial episcleral vascular plexus, producing vasodilatation and mild oedema without the deep scleral destruction of true scleritis. It is usually idiopathic and self-limiting, though recurrent or nodular episodes can occasionally be associated with systemic inflammatory disease.",
-  "additionalDifferentials": [
-   "Scleritis",
-   "Conjunctivitis",
-   "Anterior uveitis",
-   "Inflamed pterygium or pinguecula",
-   "Subconjunctival haemorrhage",
-   "Foreign body or localised irritation"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement",
-   "Assessment of visual acuity to confirm it is preserved",
-   "Limited systemic workup only in recurrent, nodular, or atypical cases (e.g. inflammatory markers, autoimmune screen, urate)"
-  ],
-  "redFlags": [
-   "Severe boring pain, deep violaceous vessels, or failure to blanch with phenylephrine suggesting scleritis instead",
-   "Reduced visual acuity, which should not occur in simple episcleritis",
-   "Frequently recurrent disease suggesting an underlying systemic inflammatory condition"
-  ],
-  "prognosis": "Episcleritis is benign and self-limiting, typically resolving within one to two weeks without lasting visual consequences, although recurrences are common.",
-  "pitfalls": [
-   "Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition",
-   "Conversely, dismissing genuine scleritis as episcleritis and missing sight-threatening disease",
-   "Prolonged unnecessary topical steroid use with its attendant risks of raised intraocular pressure",
-   "Overlooking an associated systemic disease in recurrent cases"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment",
-   "Relieve symptoms with ocular lubricants, artificial tears and cold compresses",
-   "Use topical or oral non-steroidal anti-inflammatory drugs for troublesome discomfort, and a short course of topical corticosteroid for persistent or nodular disease",
-   "Investigate and treat an underlying systemic association in recurrent, nodular or atypical cases, such as gout, rosacea or connective-tissue disease",
-   "Distinguish from scleritis using the topical phenylephrine blanching test, and escalate to ophthalmology if there is deep boring pain or reduced vision suggesting scleritis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "episcleritis-pathway",
-   "title": "Episcleritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or grittiness rather than severe pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe boring pain, deep violaceous vessels, or failure to blanch with phenylephrine suggesting scleritis instead",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement, Assessment of visual acuity to confirm it is preserved, Limited systemic workup only in recurrent, nodular, or atypical cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of episcleritis."
-  }
- ],
- "tables": [
-  {
-   "id": "episcleritis-matrix",
-   "title": "Episcleritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or grittiness rather than severe pain",
+      "Redness may be sectoral or diffuse with a bright red appearance, and visual acuity is preserved",
+      "The superficial episcleral vessels blanch with topical phenylephrine, unlike the deeper vessels of scleritis",
+      "Classified as simple (diffuse) or nodular; in nodular disease a mobile, tender nodule is seen over the sclera",
+      "Most cases are idiopathic, though a minority are linked to systemic inflammatory conditions such as gout, rosacea, or connective-tissue disease",
+      "It is distinguished from scleritis by the absence of deep boring pain, vessel blanching with phenylephrine, and a benign course",
+      "Management is largely reassurance with lubricants; topical or short courses of oral NSAIDs and, occasionally, mild topical steroids help troublesome or nodular cases"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement, Assessment of visual acuity to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Episcleritis is inflammation confined to the episclera, the thin vascular layer of connective tissue between the conjunctiva and the sclera. The process is typically a localised, non-granulomatous inflammatory response affecting the superficial episcleral vascular plexus, producing vasodilatation and mild oedema without the deep scleral destruction of true scleritis. It is usually idiopathic and self-limiting, though recurrent or nodular episodes can occasionally be associated with systemic inflammatory disease.",
+    "additionalDifferentials": [
+      "Scleritis",
+      "Conjunctivitis",
+      "Anterior uveitis",
+      "Inflamed pterygium or pinguecula",
+      "Subconjunctival haemorrhage",
+      "Foreign body or localised irritation"
     ],
-    [
-     "Primary Differentials",
-     "Scleritis, Conjunctivitis, Anterior uveitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement",
+      "Assessment of visual acuity to confirm it is preserved",
+      "Limited systemic workup only in recurrent, nodular, or atypical cases (e.g. inflammatory markers, autoimmune screen, urate)"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe boring pain, deep violaceous vessels, or failure to blanch with phenylephrine suggesting scleritis instead",
+      "Reduced visual acuity, which should not occur in simple episcleritis",
+      "Frequently recurrent disease suggesting an underlying systemic inflammatory condition"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition",
-     "Prevent diagnostic or management error"
+    "prognosis": "Episcleritis is benign and self-limiting, typically resolving within one to two weeks without lasting visual consequences, although recurrences are common.",
+    "pitfalls": [
+      "Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition",
+      "Conversely, dismissing genuine scleritis as episcleritis and missing sight-threatening disease",
+      "Prolonged unnecessary topical steroid use with its attendant risks of raised intraocular pressure",
+      "Overlooking an associated systemic disease in recurrent cases"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment",
+      "Relieve symptoms with ocular lubricants, artificial tears and cold compresses",
+      "Use topical or oral non-steroidal anti-inflammatory drugs for troublesome discomfort, and a short course of topical corticosteroid for persistent or nodular disease",
+      "Investigate and treat an underlying systemic association in recurrent, nodular or atypical cases, such as gout, rosacea or connective-tissue disease",
+      "Distinguish from scleritis using the topical phenylephrine blanching test, and escalate to ophthalmology if there is deep boring pain or reduced vision suggesting scleritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for episcleritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "episcleritis-real-image",
-   "title": "Episcleritis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "episcleritis-pathway",
+      "title": "Episcleritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or grittiness rather than severe pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe boring pain, deep violaceous vessels, or failure to blanch with phenylephrine suggesting scleritis instead",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement, Assessment of visual acuity to confirm it is preserved, Limited systemic workup only in recurrent, nodular, or atypical cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of episcleritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "episcleritis-matrix",
+      "title": "Episcleritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common, benign, usually self-limiting inflammation of the episclera presenting with acute redness and mild discomfort or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination and topical phenylephrine test to confirm superficial vessel involvement, Assessment of visual acuity to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Scleritis, Conjunctivitis, Anterior uveitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient, as episcleritis is benign and usually self-limiting, often needing no active treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing episcleritis with scleritis and over-investigating or over-treating a benign condition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for episcleritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "episcleritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination and topical phenylephrine test",
+          "cells": [
+            {
+              "text": "Superficial vessels blanch with phenylephrine, unlike the deeper vessels of scleritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity",
+          "cells": [
+            {
+              "text": "Preserved in episcleritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited systemic workup",
+          "cells": [
+            {
+              "text": "Inflammatory markers, autoimmune screen and urate, in recurrent, nodular or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episcleritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and usually self-limiting; often needs no active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lubricants and cold compresses",
+          "cells": [
+            {
+              "text": "Ocular lubricants, artificial tears and cold compresses for symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory drugs",
+          "cells": [
+            {
+              "text": "Topical or oral NSAIDs for troublesome discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short topical corticosteroid",
+          "cells": [
+            {
+              "text": "Persistent or nodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic association work-up",
+          "cells": [
+            {
+              "text": "Recurrent, nodular or atypical cases: gout, rosacea or connective-tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenylephrine test and escalation",
+          "cells": [
+            {
+              "text": "Distinguishes from scleritis; escalate for deep boring pain or reduced vision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "episcleritis-dx-mgmt",
+      "title": "Diagnosis and management of Episcleritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute red eye with mild discomfort or grittiness; visual acuity preserved",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (deep boring pain, violaceous vessels, reduced acuity, frequent recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to ophthalmology for suspected scleritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination and topical phenylephrine blanching test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Superficial vessels blanch with phenylephrine and vision preserved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Escalate to ophthalmology and treat as possible scleritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; usually self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lubricants, artificial tears and cold compresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs for troublesome discomfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Short topical corticosteroid for persistent or nodular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Work up systemic association in recurrent or nodular cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; typically resolves within one to two weeks without lasting visual loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,447 @@
 {
- "id": "monocular_elevation_deficiency",
- "name": "monocular elevation deficiency",
- "aliases": [
-  "double elevator palsy",
-  "monocular elevation deficit"
- ],
- "class": "non_infective",
- "system": "Visual system / Ophthalmology",
- "specialty": "Paediatric Ophthalmology / Strabismus",
- "referenceOnly": true,
- "reference": {
-  "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior rectus and inferior oblique), hence the older term double elevator palsy",
-   "Usually congenital: the affected eye is hypotropic in the primary position and the patient adopts a chin-up head posture to maintain binocular single vision",
-   "Ptosis or pseudoptosis is common; true ptosis occurs in roughly half of cases, and pseudoptosis from the hypotropic globe resolves when the eye elevates to fixate",
-   "Three mechanisms are recognised: restriction of the inferior rectus (positive forced duction, the commonest), primary elevator weakness (superior rectus and inferior oblique paresis), and a supranuclear cause",
-   "Forced duction and force generation testing differentiate a tight (restrictive) inferior rectus from a paretic cause and guide the choice of operation",
-   "If the patient fixates with the affected hypotropic eye, the sound eye shows a secondary hypertropia; a preserved Bell's phenomenon points to a supranuclear or paretic rather than restrictive mechanism",
-   "Marcus Gunn jaw-winking and other synkineses should be excluded when ptosis is present",
-   "Surgical choice depends on mechanism: inferior rectus recession for restriction and a Knapp procedure (transposition of the horizontal recti towards the superior rectus) for elevator weakness"
+  "id": "monocular_elevation_deficiency",
+  "name": "monocular elevation deficiency",
+  "aliases": [
+    "double elevator palsy",
+    "monocular elevation deficit"
   ],
-  "pathophysiology": "Monocular elevation deficiency is a heterogeneous condition characterised by defective elevation of one eye. The commonest mechanism is a restrictive, tight inferior rectus (fibrosis) that mechanically prevents elevation; alternatively there may be a primary paresis of the elevator muscles (superior rectus and inferior oblique) or, less often, a supranuclear lesion of the elevation pathway in the pretectal region, in which case Bell's phenomenon is preserved. Many cases are congenital and may fall within the congenital cranial dysinnervation disorder spectrum. The resulting hypotropia in the primary position drives the compensatory chin-up head posture and, where the visual axes are not aligned, amblyopia of the affected eye.",
-  "additionalDifferentials": [
-   "Congenital fibrosis of the extraocular muscles",
-   "Brown syndrome, which limits elevation only in adduction (key distinction)",
-   "Inferior rectus restriction from thyroid eye disease or an orbital floor fracture with entrapment",
-   "Congenital superior-division third nerve palsy",
-   "Superior oblique overaction and other causes of vertical strabismus",
-   "Skew deviation and supranuclear vertical gaze disturbance",
-   "Congenital ptosis with an apparent (pseudo) motility defect"
-  ],
-  "additionalInvestigations": [
-   "Forced duction testing for inferior rectus restriction and force generation testing",
-   "Orthoptic assessment across all positions of gaze with measurement of head posture",
-   "Assessment of Bell's phenomenon and saccadic velocities",
-   "Cycloplegic refraction and amblyopia evaluation",
-   "Distinguishing true ptosis from pseudoptosis by rechecking lid height on fixation with the affected eye",
-   "Orbital CT or MRI if restriction from trauma, thyroid disease or a mass is suspected",
-   "Neuro-imaging if a supranuclear cause is suspected"
-  ],
-  "redFlags": [
-   "An acquired (rather than congenital) elevation deficit suggesting orbital, neurological or thyroid pathology",
-   "Signs of an orbital floor fracture with inferior rectus entrapment, including recent trauma and an oculocardiac reflex",
-   "Pupillary involvement or other neurological signs suggesting a third nerve or midbrain lesion",
-   "Amblyopia in a young child requiring prompt treatment"
-  ],
-  "prognosis": "Congenital cases are non-progressive, and surgery to correct the hypotropia and abnormal head posture, combined with amblyopia treatment and ptosis repair where needed, generally gives good functional and cosmetic outcomes. Some limitation of elevation typically persists.",
-  "pitfalls": [
-   "Confusing the condition with Brown syndrome, which limits elevation only in adduction",
-   "Operating on ptosis before correcting the hypotropia, when pseudoptosis may resolve once the eye is realigned",
-   "Omitting forced ductions and thereby missing a restrictive inferior rectus, leading to the wrong operation",
-   "Overlooking amblyopia in the hypotropic eye",
-   "Assuming every case is paretic and missing a supranuclear cause by not checking Bell's phenomenon"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology",
-   "von Noorden's Binocular Vision and Ocular Motility"
-  ],
-  "crossLinks": [
-   "congenital_fibrosis_of_extraocular_muscles"
-  ],
-  "management": [
-   "Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye",
-   "Surgical correction of the hypotropia and abnormal chin-up head posture, with the procedure guided by forced duction testing, using inferior rectus recession for a restrictive tight muscle or a vertical transposition such as the Knapp procedure for elevator weakness",
-   "Repair true ptosis after ocular alignment, recognising that pseudoptosis from the hypotropic globe resolves once the eye is realigned",
-   "Distinguish restrictive, paretic and supranuclear mechanisms preoperatively to plan the appropriate operation",
-   "Neuroimaging and systemic evaluation where an acquired cause such as trauma, thyroid eye disease or an orbital mass is suspected",
-   "Ongoing orthoptic follow-up to monitor alignment and binocular function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "monocular_elevation_deficiency-pathway",
-   "title": "monocular elevation deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior rectus and inferior oblique), hence the older term double elevator palsy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An acquired (rather than congenital) elevation deficit suggesting orbital, neurological or thyroid pathology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Forced duction testing for inferior rectus restriction and force generation testing, Orthoptic assessment across all positions of gaze with measurement of head posture, Assessment of Bell's phenomenon and saccadic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the condition with Brown syndrome, which limits elevation only in adduction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of monocular elevation deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "monocular_elevation_deficiency-matrix",
-   "title": "monocular elevation deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Visual system / Ophthalmology",
+  "specialty": "Paediatric Ophthalmology / Strabismus",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior rectus and inferior oblique), hence the older term double elevator palsy",
+      "Usually congenital: the affected eye is hypotropic in the primary position and the patient adopts a chin-up head posture to maintain binocular single vision",
+      "Ptosis or pseudoptosis is common; true ptosis occurs in roughly half of cases, and pseudoptosis from the hypotropic globe resolves when the eye elevates to fixate",
+      "Three mechanisms are recognised: restriction of the inferior rectus (positive forced duction, the commonest), primary elevator weakness (superior rectus and inferior oblique paresis), and a supranuclear cause",
+      "Forced duction and force generation testing differentiate a tight (restrictive) inferior rectus from a paretic cause and guide the choice of operation",
+      "If the patient fixates with the affected hypotropic eye, the sound eye shows a secondary hypertropia; a preserved Bell's phenomenon points to a supranuclear or paretic rather than restrictive mechanism",
+      "Marcus Gunn jaw-winking and other synkineses should be excluded when ptosis is present",
+      "Surgical choice depends on mechanism: inferior rectus recession for restriction and a Knapp procedure (transposition of the horizontal recti towards the superior rectus) for elevator weakness"
     ],
-    [
-     "Key Investigations",
-     "Forced duction testing for inferior rectus restriction and force generation testing, Orthoptic assessment across all positions of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Monocular elevation deficiency is a heterogeneous condition characterised by defective elevation of one eye. The commonest mechanism is a restrictive, tight inferior rectus (fibrosis) that mechanically prevents elevation; alternatively there may be a primary paresis of the elevator muscles (superior rectus and inferior oblique) or, less often, a supranuclear lesion of the elevation pathway in the pretectal region, in which case Bell's phenomenon is preserved. Many cases are congenital and may fall within the congenital cranial dysinnervation disorder spectrum. The resulting hypotropia in the primary position drives the compensatory chin-up head posture and, where the visual axes are not aligned, amblyopia of the affected eye.",
+    "additionalDifferentials": [
+      "Congenital fibrosis of the extraocular muscles",
+      "Brown syndrome, which limits elevation only in adduction (key distinction)",
+      "Inferior rectus restriction from thyroid eye disease or an orbital floor fracture with entrapment",
+      "Congenital superior-division third nerve palsy",
+      "Superior oblique overaction and other causes of vertical strabismus",
+      "Skew deviation and supranuclear vertical gaze disturbance",
+      "Congenital ptosis with an apparent (pseudo) motility defect"
     ],
-    [
-     "Primary Differentials",
-     "Congenital fibrosis of the extraocular muscles, Brown syndrome, which limits elevation only in adduction (key distinction),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Forced duction testing for inferior rectus restriction and force generation testing",
+      "Orthoptic assessment across all positions of gaze with measurement of head posture",
+      "Assessment of Bell's phenomenon and saccadic velocities",
+      "Cycloplegic refraction and amblyopia evaluation",
+      "Distinguishing true ptosis from pseudoptosis by rechecking lid height on fixation with the affected eye",
+      "Orbital CT or MRI if restriction from trauma, thyroid disease or a mass is suspected",
+      "Neuro-imaging if a supranuclear cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye",
-     "Core treatment modality"
+    "redFlags": [
+      "An acquired (rather than congenital) elevation deficit suggesting orbital, neurological or thyroid pathology",
+      "Signs of an orbital floor fracture with inferior rectus entrapment, including recent trauma and an oculocardiac reflex",
+      "Pupillary involvement or other neurological signs suggesting a third nerve or midbrain lesion",
+      "Amblyopia in a young child requiring prompt treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the condition with Brown syndrome, which limits elevation only in adduction",
-     "Prevent diagnostic or management error"
+    "prognosis": "Congenital cases are non-progressive, and surgery to correct the hypotropia and abnormal head posture, combined with amblyopia treatment and ptosis repair where needed, generally gives good functional and cosmetic outcomes. Some limitation of elevation typically persists.",
+    "pitfalls": [
+      "Confusing the condition with Brown syndrome, which limits elevation only in adduction",
+      "Operating on ptosis before correcting the hypotropia, when pseudoptosis may resolve once the eye is realigned",
+      "Omitting forced ductions and thereby missing a restrictive inferior rectus, leading to the wrong operation",
+      "Overlooking amblyopia in the hypotropic eye",
+      "Assuming every case is paretic and missing a supranuclear cause by not checking Bell's phenomenon"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology",
+      "von Noorden's Binocular Vision and Ocular Motility"
+    ],
+    "crossLinks": [
+      "congenital_fibrosis_of_extraocular_muscles"
+    ],
+    "management": [
+      "Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye",
+      "Surgical correction of the hypotropia and abnormal chin-up head posture, with the procedure guided by forced duction testing, using inferior rectus recession for a restrictive tight muscle or a vertical transposition such as the Knapp procedure for elevator weakness",
+      "Repair true ptosis after ocular alignment, recognising that pseudoptosis from the hypotropic globe resolves once the eye is realigned",
+      "Distinguish restrictive, paretic and supranuclear mechanisms preoperatively to plan the appropriate operation",
+      "Neuroimaging and systemic evaluation where an acquired cause such as trauma, thyroid eye disease or an orbital mass is suspected",
+      "Ongoing orthoptic follow-up to monitor alignment and binocular function"
     ]
-   ],
-   "caption": "Overview comparison matrix for monocular elevation deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "monocular-elevation-deficiency-real-image",
-   "title": "monocular elevation deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "monocular_elevation_deficiency-pathway",
+      "title": "monocular elevation deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior rectus and inferior oblique), hence the older term double elevator palsy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An acquired (rather than congenital) elevation deficit suggesting orbital, neurological or thyroid pathology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Forced duction testing for inferior rectus restriction and force generation testing, Orthoptic assessment across all positions of gaze with measurement of head posture, Assessment of Bell's phenomenon and saccadic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the condition with Brown syndrome, which limits elevation only in adduction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of monocular elevation deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "monocular_elevation_deficiency-matrix",
+      "title": "monocular elevation deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A unilateral limitation of elevation of one eye in all horizontal positions, affecting the action of both elevators (superior",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Forced duction testing for inferior rectus restriction and force generation testing, Orthoptic assessment across all positions of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital fibrosis of the extraocular muscles, Brown syndrome, which limits elevation only in adduction (key distinction),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat amblyopia first with cycloplegic refractive correction and occlusion or penalisation of the sound eye",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the condition with Brown syndrome, which limits elevation only in adduction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for monocular elevation deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monocular_elevation_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Forced duction testing",
+          "cells": [
+            {
+              "text": "Inferior rectus restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic assessment in all gaze positions",
+          "cells": [
+            {
+              "text": "Deficit pattern and head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bell's phenomenon and saccadic velocities",
+          "cells": [
+            {
+              "text": "Helps separate paretic and supranuclear causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Evaluates amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid height on fixation with affected eye",
+          "cells": [
+            {
+              "text": "Separates true ptosis from pseudoptosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monocular_elevation_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brown syndrome",
+          "cells": [
+            {
+              "text": "Limits elevation only in adduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital fibrosis of the extraocular muscles",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease or orbital floor fracture",
+          "cells": [
+            {
+              "text": "Restrictive inferior rectus; acquired history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monocular_elevation_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Cycloplegic correction and occlusion or penalisation of the sound eye first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for hypotropia and chin-up posture",
+          "cells": [
+            {
+              "text": "Guided by forced duction testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ptosis repair",
+          "cells": [
+            {
+              "text": "After alignment; pseudoptosis resolves once the eye is realigned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanism assessment",
+          "cells": [
+            {
+              "text": "Restrictive, paretic or supranuclear, before planning surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Monitor alignment and binocular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monocular_elevation_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of monocular elevation deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with hypotropia, chin-up posture and limited elevation of one eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acquired deficit, orbital fracture signs, pupil involvement or dense amblyopia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orbital and neuro imaging; fracture entrapment or third nerve lesion review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Forced duction, orthoptic gaze assessment, Bell's phenomenon, refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Congenital elevation deficit in all gaze, not only in adduction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Brown syndrome, restriction, third nerve palsy, skew deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat amblyopia first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgery for hypotropia guided by forced duction testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair true ptosis after realignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthoptic follow-up of alignment and binocular function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Congenital cases are non-progressive; surgery and amblyopia care improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

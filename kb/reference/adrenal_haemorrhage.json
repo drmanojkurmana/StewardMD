@@ -1,178 +1,503 @@
 {
- "id": "adrenal_haemorrhage",
- "name": "adrenal haemorrhage",
- "aliases": [
-  "adrenal haematoma",
-  "bilateral adrenal haemorrhage"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the medullary-cortical junction to haemorrhage under stress.",
-   "Bilateral adrenal haemorrhage typically presents non-specifically with abdominal, flank or back pain, fever and progressive hypotension, so acute adrenal crisis is easily overlooked.",
-   "Suspect it in any critically ill patient with unexplained shock that is refractory to fluids and vasopressors.",
-   "Antiphospholipid syndrome is the classic cause of spontaneous bilateral haemorrhage, and heparin-induced thrombocytopenia can drive adrenal vein thrombosis with subsequent bleeding.",
-   "Waterhouse-Friderichsen syndrome describes haemorrhagic adrenal destruction with disseminated intravascular coagulation, historically in meningococcal sepsis.",
-   "Neonatal adrenal haemorrhage follows difficult delivery or macrosomia and presents with a flank mass, prolonged jaundice and anaemia.",
-   "Unilateral haemorrhage usually preserves adrenal function, whereas bilateral involvement threatens Addisonian crisis and warrants empirical glucocorticoid before biochemical confirmation.",
-   "Hyponatraemia with hyperkalaemia, eosinophilia and hypoglycaemia should prompt urgent cortisol and ACTH testing."
+  "id": "adrenal_haemorrhage",
+  "name": "adrenal haemorrhage",
+  "aliases": [
+    "adrenal haematoma",
+    "bilateral adrenal haemorrhage"
   ],
-  "pathophysiology": "The adrenal cortex receives a rich arterial supply from three separate arteries but drains through a single central vein, so any rise in venous pressure or intra-adrenal arterial flow produces stasis and rupture at the cortico-medullary junction. Physiological stress (sepsis, surgery, burns, trauma) drives an ACTH-mediated surge in adrenal blood flow while catecholamines and cytokines promote vasoconstriction and thrombosis of the small draining veins, culminating in haemorrhagic infarction. Prothrombotic and bleeding states amplify this, including antiphospholipid syndrome, heparin-induced thrombocytopenia, anticoagulation and disseminated intravascular coagulation. When both glands are involved, destruction of cortical tissue produces acute primary adrenal insufficiency with combined glucocorticoid and mineralocorticoid deficiency.",
-  "additionalDifferentials": [
-   "haemorrhagic adrenal adenoma or adrenocortical carcinoma",
-   "phaeochromocytoma with intratumoural haemorrhage",
-   "adrenal metastasis",
-   "adrenal abscess",
-   "retroperitoneal haematoma from other source",
-   "acute pyelonephritis",
-   "acute pancreatitis"
-  ],
-  "additionalInvestigations": [
-   "non-contrast and contrast-enhanced CT of the adrenals",
-   "adrenal MRI with in- and opposed-phase and gradient-echo sequences to characterise and date blood products",
-   "short Synacthen test with paired ACTH to assess adrenal reserve",
-   "plasma renin and aldosterone to confirm mineralocorticoid deficiency",
-   "coagulation screen and platelet count",
-   "antiphospholipid antibody panel and screening for heparin-induced thrombocytopenia",
-   "plasma or urinary metanephrines to exclude phaeochromocytoma"
-  ],
-  "redFlags": [
-   "haemodynamic instability or shock unresponsive to fluids and vasopressors",
-   "hyperkalaemia with hyponatraemia suggesting evolving adrenal crisis",
-   "hypoglycaemia",
-   "bilateral adrenal enlargement on imaging",
-   "reduced consciousness or collapse"
-  ],
-  "prognosis": "Unilateral haemorrhage usually resolves with preservation of adrenal function, whereas bilateral haemorrhage causing acute insufficiency carries substantial mortality if crisis is unrecognised; survivors may recover partially or require lifelong hormone replacement.",
-  "pitfalls": [
-   "attributing hypotension solely to sepsis and missing coexisting adrenal crisis",
-   "withholding glucocorticoid while awaiting confirmatory biochemistry",
-   "mistaking a contrast-enhancing haematoma for a solid tumour",
-   "failing to investigate an underlying antiphospholipid syndrome or heparin-induced thrombocytopenia",
-   "continuing anticoagulation without recognising the adrenal as the bleeding source"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on primary adrenal insufficiency",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for confirmatory tests",
-   "Provide long-term glucocorticoid and, where mineralocorticoid deficiency is confirmed, fludrocortisone replacement in bilateral disease causing adrenal insufficiency",
-   "Identify and treat the underlying cause such as sepsis, anticoagulation, antiphospholipid syndrome or heparin-induced thrombocytopenia, stopping heparin and using an alternative anticoagulant in the latter",
-   "Support haemodynamics and correct coagulopathy while balancing the competing risks of bleeding and thrombosis",
-   "Assess adrenal reserve with a short Synacthen test and paired ACTH once stabilised, and re-image to monitor resolution",
-   "Escalate to critical care for refractory shock, considering interventional or surgical control of ongoing haemorrhage",
-   "Reassess the need for lifelong hormone replacement, as some patients recover partial adrenal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adrenal_haemorrhage-pathway",
-   "title": "adrenal haemorrhage: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the medullary-cortical junction to haemorrhage under stress.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: haemodynamic instability or shock unresponsive to fluids and vasopressors",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: non-contrast and contrast-enhanced CT of the adrenals, adrenal MRI with in- and opposed-phase and gradient-echo sequences to characterise and date blood products, short Synacthen test with paired ACTH to assess adrenal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for confirmatory tests"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: attributing hypotension solely to sepsis and missing coexisting adrenal crisis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adrenal haemorrhage."
-  }
- ],
- "tables": [
-  {
-   "id": "adrenal_haemorrhage-matrix",
-   "title": "adrenal haemorrhage: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the medullary-cortical junction to haemorrhage under stress.",
+      "Bilateral adrenal haemorrhage typically presents non-specifically with abdominal, flank or back pain, fever and progressive hypotension, so acute adrenal crisis is easily overlooked.",
+      "Suspect it in any critically ill patient with unexplained shock that is refractory to fluids and vasopressors.",
+      "Antiphospholipid syndrome is the classic cause of spontaneous bilateral haemorrhage, and heparin-induced thrombocytopenia can drive adrenal vein thrombosis with subsequent bleeding.",
+      "Waterhouse-Friderichsen syndrome describes haemorrhagic adrenal destruction with disseminated intravascular coagulation, historically in meningococcal sepsis.",
+      "Neonatal adrenal haemorrhage follows difficult delivery or macrosomia and presents with a flank mass, prolonged jaundice and anaemia.",
+      "Unilateral haemorrhage usually preserves adrenal function, whereas bilateral involvement threatens Addisonian crisis and warrants empirical glucocorticoid before biochemical confirmation.",
+      "Hyponatraemia with hyperkalaemia, eosinophilia and hypoglycaemia should prompt urgent cortisol and ACTH testing."
     ],
-    [
-     "Key Investigations",
-     "non-contrast and contrast-enhanced CT of the adrenals, adrenal MRI with in- and opposed-phase and gradient-echo sequences to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The adrenal cortex receives a rich arterial supply from three separate arteries but drains through a single central vein, so any rise in venous pressure or intra-adrenal arterial flow produces stasis and rupture at the cortico-medullary junction. Physiological stress (sepsis, surgery, burns, trauma) drives an ACTH-mediated surge in adrenal blood flow while catecholamines and cytokines promote vasoconstriction and thrombosis of the small draining veins, culminating in haemorrhagic infarction. Prothrombotic and bleeding states amplify this, including antiphospholipid syndrome, heparin-induced thrombocytopenia, anticoagulation and disseminated intravascular coagulation. When both glands are involved, destruction of cortical tissue produces acute primary adrenal insufficiency with combined glucocorticoid and mineralocorticoid deficiency.",
+    "additionalDifferentials": [
+      "haemorrhagic adrenal adenoma or adrenocortical carcinoma",
+      "phaeochromocytoma with intratumoural haemorrhage",
+      "adrenal metastasis",
+      "adrenal abscess",
+      "retroperitoneal haematoma from other source",
+      "acute pyelonephritis",
+      "acute pancreatitis"
     ],
-    [
-     "Primary Differentials",
-     "haemorrhagic adrenal adenoma or adrenocortical carcinoma, phaeochromocytoma with intratumoural haemorrhage, adrenal metastasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "non-contrast and contrast-enhanced CT of the adrenals",
+      "adrenal MRI with in- and opposed-phase and gradient-echo sequences to characterise and date blood products",
+      "short Synacthen test with paired ACTH to assess adrenal reserve",
+      "plasma renin and aldosterone to confirm mineralocorticoid deficiency",
+      "coagulation screen and platelet count",
+      "antiphospholipid antibody panel and screening for heparin-induced thrombocytopenia",
+      "plasma or urinary metanephrines to exclude phaeochromocytoma"
     ],
-    [
-     "Management Strategy",
-     "Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for",
-     "Core treatment modality"
+    "redFlags": [
+      "haemodynamic instability or shock unresponsive to fluids and vasopressors",
+      "hyperkalaemia with hyponatraemia suggesting evolving adrenal crisis",
+      "hypoglycaemia",
+      "bilateral adrenal enlargement on imaging",
+      "reduced consciousness or collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "attributing hypotension solely to sepsis and missing coexisting adrenal crisis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Unilateral haemorrhage usually resolves with preservation of adrenal function, whereas bilateral haemorrhage causing acute insufficiency carries substantial mortality if crisis is unrecognised; survivors may recover partially or require lifelong hormone replacement.",
+    "pitfalls": [
+      "attributing hypotension solely to sepsis and missing coexisting adrenal crisis",
+      "withholding glucocorticoid while awaiting confirmatory biochemistry",
+      "mistaking a contrast-enhancing haematoma for a solid tumour",
+      "failing to investigate an underlying antiphospholipid syndrome or heparin-induced thrombocytopenia",
+      "continuing anticoagulation without recognising the adrenal as the bleeding source"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on primary adrenal insufficiency",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for confirmatory tests",
+      "Provide long-term glucocorticoid and, where mineralocorticoid deficiency is confirmed, fludrocortisone replacement in bilateral disease causing adrenal insufficiency",
+      "Identify and treat the underlying cause such as sepsis, anticoagulation, antiphospholipid syndrome or heparin-induced thrombocytopenia, stopping heparin and using an alternative anticoagulant in the latter",
+      "Support haemodynamics and correct coagulopathy while balancing the competing risks of bleeding and thrombosis",
+      "Assess adrenal reserve with a short Synacthen test and paired ACTH once stabilised, and re-image to monitor resolution",
+      "Escalate to critical care for refractory shock, considering interventional or surgical control of ongoing haemorrhage",
+      "Reassess the need for lifelong hormone replacement, as some patients recover partial adrenal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for adrenal haemorrhage."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adrenal-haemorrhage-real-image",
-   "title": "adrenal haemorrhage: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "adrenal_haemorrhage-pathway",
+      "title": "adrenal haemorrhage: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the medullary-cortical junction to haemorrhage under stress.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: haemodynamic instability or shock unresponsive to fluids and vasopressors",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: non-contrast and contrast-enhanced CT of the adrenals, adrenal MRI with in- and opposed-phase and gradient-echo sequences to characterise and date blood products, short Synacthen test with paired ACTH to assess adrenal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for confirmatory tests"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: attributing hypotension solely to sepsis and missing coexisting adrenal crisis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adrenal haemorrhage."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adrenal_haemorrhage-matrix",
+      "title": "adrenal haemorrhage: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The adrenal has a rich arterial supply draining through a single central vein, creating a vascular dam that predisposes the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "non-contrast and contrast-enhanced CT of the adrenals, adrenal MRI with in- and opposed-phase and gradient-echo sequences to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "haemorrhagic adrenal adenoma or adrenocortical carcinoma, phaeochromocytoma with intratumoural haemorrhage, adrenal metastasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat suspected adrenal crisis immediately with parenteral hydrocortisone and intravenous fluid resuscitation without waiting for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "attributing hypotension solely to sepsis and missing coexisting adrenal crisis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adrenal haemorrhage."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_haemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast and contrast-enhanced CT of the adrenals",
+          "cells": [
+            {
+              "text": "Adrenal haemorrhage and mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal MRI with in-phase, opposed-phase and gradient-echo sequences",
+          "cells": [
+            {
+              "text": "Characterises and dates blood products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short Synacthen test with paired ACTH",
+          "cells": [
+            {
+              "text": "Adrenal reserve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Mineralocorticoid deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and platelet count",
+          "cells": [
+            {
+              "text": "Coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody panel and screen for heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Causes of bleeding and thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Excludes phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_haemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemorrhagic adrenal adenoma or adrenocortical carcinoma",
+          "cells": [
+            {
+              "text": "Mass lesion with haemorrhage"
+            },
+            {
+              "text": "CT and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma with intratumoural haemorrhage",
+          "cells": [
+            {
+              "text": "Catecholamine-secreting mass with bleeding"
+            },
+            {
+              "text": "Metanephrines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_haemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate parenteral hydrocortisone and IV fluid resuscitation",
+          "cells": [
+            {
+              "text": "Suspected adrenal crisis"
+            },
+            {
+              "text": "Without waiting for confirmatory tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term glucocorticoid; fludrocortisone if mineralocorticoid deficiency confirmed",
+          "cells": [
+            {
+              "text": "Bilateral disease with adrenal insufficiency"
+            },
+            {
+              "text": "Lifelong replacement if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the cause: sepsis, anticoagulation, antiphospholipid syndrome or HIT",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            },
+            {
+              "text": "Stop heparin and use an alternative anticoagulant in HIT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic support and coagulopathy correction",
+          "cells": [
+            {
+              "text": "Competing bleeding and thrombosis risks"
+            },
+            {
+              "text": "Balance the risks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short Synacthen test and repeat imaging once stabilised",
+          "cells": [
+            {
+              "text": "Adrenal reserve and resolution"
+            },
+            {
+              "text": "After stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation; interventional or surgical control of bleeding",
+          "cells": [
+            {
+              "text": "Refractory shock"
+            },
+            {
+              "text": "Ongoing haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment of the need for lifelong hormone replacement",
+          "cells": [
+            {
+              "text": "Partial recovery is possible"
+            },
+            {
+              "text": "Some recover partial function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_haemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of adrenal haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal, flank or back pain with fever and progressive hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock unresponsive to fluids and vasopressors, or hyperkalaemia with hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate hydrocortisone and fluids; critical care review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT adrenals; coagulation screen; antiphospholipid and HIT screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilateral haemorrhage with adrenal insufficiency confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong glucocorticoid; fludrocortisone if mineralocorticoid deficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review adenoma, phaeochromocytoma with bleed, metastasis and abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat cause: sepsis, anticoagulation, antiphospholipid or HIT",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulopathy; balance bleeding and thrombosis risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Synacthen test and repeat imaging once stabilised",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unilateral haemorrhage often preserves function; bilateral crisis is high risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

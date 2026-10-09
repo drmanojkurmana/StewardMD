@@ -1,172 +1,423 @@
 {
- "id": "terry_nails",
- "name": "Terry nails",
- "aliases": [
-  "Terry's nails",
-  "White nails of Terry"
- ],
- "class": "non_infective",
- "system": "Skin / Hair and nails",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to brown, usually only a couple of millimetres wide.",
-   "The whitening obscures the lunula and typically affects all nails uniformly, being best appreciated on the fingernails.",
-   "It is an apparent leukonychia of nail bed origin, so the white area does not migrate distally with nail growth.",
-   "Classic associations include cirrhosis and chronic liver disease, but Terry nails are also seen in congestive cardiac failure, type 2 diabetes and with advancing age.",
-   "The finding is asymptomatic and matters chiefly as a pointer to underlying systemic disease.",
-   "It is distinguished from half-and-half nails by the position and width of the distal coloured band and the absence of the sharp demarcation seen in renal disease.",
-   "Terry nails can occur in otherwise healthy older people, so context and additional signs guide the extent of investigation.",
-   "Bedside recognition can prompt earlier detection of occult hepatic or cardiac disease."
+  "id": "terry_nails",
+  "name": "Terry nails",
+  "aliases": [
+    "Terry's nails",
+    "White nails of Terry"
   ],
-  "pathophysiology": "Terry nails represent an apparent leukonychia in which the nail plate is normal but the nail bed is altered. The favoured explanation is a combination of reduced nail bed vascularity and an increase in connective tissue within the bed, which together diminish the normal pink translucency and produce a uniform white, ground-glass appearance. A narrow distal zone retains its normal vascular pattern, giving the characteristic band of preserved colour at the free margin. The changes are thought to reflect systemic alterations in the microvasculature and are commonly encountered where there is impaired hepatic function, cardiac failure or the vascular changes of diabetes and ageing. Because the abnormality lies in the bed rather than the plate, the pattern remains fixed as the nail grows.",
-  "additionalDifferentials": [
-   "Half-and-half (Lindsay) nails",
-   "Muehrcke lines",
-   "True leukonychia",
-   "Anaemia-related nail pallor",
-   "Normal ageing nail changes",
-   "Neapolitan nails of the elderly"
-  ],
-  "additionalInvestigations": [
-   "Liver function tests and assessment for chronic liver disease",
-   "Fasting glucose or HbA1c for diabetes",
-   "Cardiac assessment where heart failure is suspected",
-   "Full blood count to exclude anaemia",
-   "Clinical examination of all nails and lunulae",
-   "Review of age and comorbidities to gauge significance"
-  ],
-  "redFlags": [
-   "New Terry nails with stigmata of chronic liver disease or decompensation",
-   "Accompanying breathlessness or oedema suggesting cardiac failure",
-   "Rapid onset in a previously well younger patient",
-   "Coexisting features suggesting the sharp demarcation of half-and-half nails and renal disease"
-  ],
-  "prognosis": "Terry nails are benign in themselves and require no treatment, but they can be an early clue to significant hepatic, cardiac or metabolic disease whose prognosis they reflect. In healthy older individuals they carry no adverse significance.",
-  "pitfalls": [
-   "Confusing Terry nails with half-and-half nails and misdirecting the systemic workup",
-   "Overlooking the sign in older patients where it may still indicate occult disease",
-   "Assuming the change is a primary nail disorder rather than a systemic marker",
-   "Attempting to treat the nail rather than the underlying condition"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Baran and Dawber's Diseases of the Nails and their Management, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no specific therapy",
-   "Identify and manage underlying chronic liver disease or cirrhosis with hepatology input",
-   "Assess for and treat congestive cardiac failure where suspected",
-   "Optimise glycaemic control where type 2 diabetes is identified",
-   "Reassure the patient that the nail change is asymptomatic and benign in itself",
-   "Arrange follow-up directed by the underlying systemic condition, recognising the finding may be an early clue to significant disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "terry_nails-pathway",
-   "title": "Terry nails: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to brown, usually only a couple of millimetres wide.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New Terry nails with stigmata of chronic liver disease or decompensation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver function tests and assessment for chronic liver disease, Fasting glucose or HbA1c for diabetes, Cardiac assessment where heart failure is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no specific therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Terry nails with half-and-half nails and misdirecting the systemic workup"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of terry nails."
-  }
- ],
- "tables": [
-  {
-   "id": "terry_nails-matrix",
-   "title": "Terry nails: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Hair and nails",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to brown, usually only a couple of millimetres wide.",
+      "The whitening obscures the lunula and typically affects all nails uniformly, being best appreciated on the fingernails.",
+      "It is an apparent leukonychia of nail bed origin, so the white area does not migrate distally with nail growth.",
+      "Classic associations include cirrhosis and chronic liver disease, but Terry nails are also seen in congestive cardiac failure, type 2 diabetes and with advancing age.",
+      "The finding is asymptomatic and matters chiefly as a pointer to underlying systemic disease.",
+      "It is distinguished from half-and-half nails by the position and width of the distal coloured band and the absence of the sharp demarcation seen in renal disease.",
+      "Terry nails can occur in otherwise healthy older people, so context and additional signs guide the extent of investigation.",
+      "Bedside recognition can prompt earlier detection of occult hepatic or cardiac disease."
     ],
-    [
-     "Key Investigations",
-     "Liver function tests and assessment for chronic liver disease, Fasting glucose or HbA1c for diabetes, Cardiac assessment where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Terry nails represent an apparent leukonychia in which the nail plate is normal but the nail bed is altered. The favoured explanation is a combination of reduced nail bed vascularity and an increase in connective tissue within the bed, which together diminish the normal pink translucency and produce a uniform white, ground-glass appearance. A narrow distal zone retains its normal vascular pattern, giving the characteristic band of preserved colour at the free margin. The changes are thought to reflect systemic alterations in the microvasculature and are commonly encountered where there is impaired hepatic function, cardiac failure or the vascular changes of diabetes and ageing. Because the abnormality lies in the bed rather than the plate, the pattern remains fixed as the nail grows.",
+    "additionalDifferentials": [
+      "Half-and-half (Lindsay) nails",
+      "Muehrcke lines",
+      "True leukonychia",
+      "Anaemia-related nail pallor",
+      "Normal ageing nail changes",
+      "Neapolitan nails of the elderly"
     ],
-    [
-     "Primary Differentials",
-     "Half-and-half (Lindsay) nails, Muehrcke lines, True leukonychia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver function tests and assessment for chronic liver disease",
+      "Fasting glucose or HbA1c for diabetes",
+      "Cardiac assessment where heart failure is suspected",
+      "Full blood count to exclude anaemia",
+      "Clinical examination of all nails and lunulae",
+      "Review of age and comorbidities to gauge significance"
     ],
-    [
-     "Management Strategy",
-     "Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no",
-     "Core treatment modality"
+    "redFlags": [
+      "New Terry nails with stigmata of chronic liver disease or decompensation",
+      "Accompanying breathlessness or oedema suggesting cardiac failure",
+      "Rapid onset in a previously well younger patient",
+      "Coexisting features suggesting the sharp demarcation of half-and-half nails and renal disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Terry nails with half-and-half nails and misdirecting the systemic workup",
-     "Prevent diagnostic or management error"
+    "prognosis": "Terry nails are benign in themselves and require no treatment, but they can be an early clue to significant hepatic, cardiac or metabolic disease whose prognosis they reflect. In healthy older individuals they carry no adverse significance.",
+    "pitfalls": [
+      "Confusing Terry nails with half-and-half nails and misdirecting the systemic workup",
+      "Overlooking the sign in older patients where it may still indicate occult disease",
+      "Assuming the change is a primary nail disorder rather than a systemic marker",
+      "Attempting to treat the nail rather than the underlying condition"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Baran and Dawber's Diseases of the Nails and their Management, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no specific therapy",
+      "Identify and manage underlying chronic liver disease or cirrhosis with hepatology input",
+      "Assess for and treat congestive cardiac failure where suspected",
+      "Optimise glycaemic control where type 2 diabetes is identified",
+      "Reassure the patient that the nail change is asymptomatic and benign in itself",
+      "Arrange follow-up directed by the underlying systemic condition, recognising the finding may be an early clue to significant disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for terry nails."
-  }
- ],
- "diagrams": [
-  {
-   "id": "terry-nails-real-image",
-   "title": "Terry nails: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "terry_nails-pathway",
+      "title": "Terry nails: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to brown, usually only a couple of millimetres wide.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New Terry nails with stigmata of chronic liver disease or decompensation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver function tests and assessment for chronic liver disease, Fasting glucose or HbA1c for diabetes, Cardiac assessment where heart failure is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no specific therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Terry nails with half-and-half nails and misdirecting the systemic workup"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of terry nails."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "terry_nails-matrix",
+      "title": "Terry nails: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Terry nails show a ground-glass white opacification of most of the nail bed with a preserved narrow distal band of normal pink to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver function tests and assessment for chronic liver disease, Fasting glucose or HbA1c for diabetes, Cardiac assessment where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Half-and-half (Lindsay) nails, Muehrcke lines, True leukonychia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise the finding as a pointer to systemic disease and investigate accordingly, rather than treating the nails, which need no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Terry nails with half-and-half nails and misdirecting the systemic workup",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for terry nails."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "terry_nails-dx-mgmt",
+      "title": "Diagnosis and management of Terry nails",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Terry nails: white nail beds with a narrow distal coloured band",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: liver disease stigmata, heart failure signs, or rapid onset in a young adult?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic review for decompensated liver or heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver function tests; glucose or HbA1c; cardiac assessment; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the systemic workup show chronic liver disease or another systemic cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider half-and-half nails, renal disease or normal ageing; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Investigate and manage underlying chronic liver disease with hepatology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Assess and treat congestive cardiac failure where suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise glycaemic control where type 2 diabetes is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure that the nail change is benign in itself",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow up according to the underlying systemic condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign in itself; can signal significant liver, cardiac or metabolic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "terry_nails-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Chronic liver disease, the classic association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Type 2 diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Congestive heart failure, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of all nails and lunulae",
+          "cells": [
+            {
+              "text": "Distribution, with the distal coloured band"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terry_nails-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Investigate the systemic cause",
+          "cells": [
+            {
+              "text": "Terry nails are a pointer; the nails need no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatology input",
+          "cells": [
+            {
+              "text": "Chronic liver disease or cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure assessment and treatment",
+          "cells": [
+            {
+              "text": "Where congestive cardiac failure is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Where type 2 diabetes is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic and benign in itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Directed by the underlying systemic condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

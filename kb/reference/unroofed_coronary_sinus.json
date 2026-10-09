@@ -1,173 +1,460 @@
 {
- "id": "unroofed_coronary_sinus",
- "name": "Unroofed coronary sinus",
- "aliases": [
-  "coronary sinus septal defect",
-  "coronary sinus atrial septal defect",
-  "unroofed coronary sinus syndrome",
-  "type of ASD"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial communication",
-   "It represents the rarest type of atrial septal defect and produces a left-to-right shunt through the coronary sinus into the right atrium",
-   "There is a strong association with a persistent left superior vena cava draining to the coronary sinus",
-   "When completely unroofed with a persistent left superior vena cava, systemic venous blood can enter the left atrium and cause cyanosis and a risk of paradoxical embolism",
-   "The physiology otherwise resembles other atrial septal defects with right heart volume loading",
-   "It is frequently part of complex congenital heart disease, including heterotaxy syndromes",
-   "Surgical repair reroutes or baffles the anomalous drainage and closes the defect, restoring normal venous return"
+  "id": "unroofed_coronary_sinus",
+  "name": "Unroofed coronary sinus",
+  "aliases": [
+    "coronary sinus septal defect",
+    "coronary sinus atrial septal defect",
+    "unroofed coronary sinus syndrome",
+    "type of ASD"
   ],
-  "pathophysiology": "An unroofed coronary sinus results from a developmental deficiency of the tissue separating the coronary sinus from the left atrium, so that the two communicate along part or all of the coronary sinus course. This creates an interatrial pathway that behaves like an atrial septal defect, allowing left-to-right shunting and right heart volume loading. The lesion is closely linked to a persistent left superior vena cava that drains into the coronary sinus; when the sinus roof is absent, this systemic venous blood may drain directly into the left atrium, introducing a right-to-left component with desaturation and a route for paradoxical emboli. The defect is often seen within complex malformations, particularly heterotaxy, which shapes the overall haemodynamics.",
-  "additionalDifferentials": [
-   "Ostium secundum atrial septal defect",
-   "Sinus venosus atrial septal defect",
-   "Ostium primum atrial septal defect",
-   "Persistent left superior vena cava without unroofing",
-   "Partial anomalous pulmonary venous return",
-   "Other causes of right heart volume overload"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any left superior vena cava",
-   "Cardiac CT or MR angiography to define coronary sinus and systemic venous anatomy",
-   "Cardiac catheterisation for shunt quantification and pressures",
-   "Assessment for a persistent left superior vena cava draining to the coronary sinus",
-   "Electrocardiogram for right heart volume loading",
-   "Screening for associated heterotaxy and complex defects"
-  ],
-  "redFlags": [
-   "Cyanosis or documented paradoxical embolism from right-to-left drainage",
-   "Signs of significant right heart volume overload or pulmonary hypertension",
-   "Association with complex congenital or heterotaxy syndromes",
-   "Unexplained systemic desaturation with a persistent left superior vena cava"
-  ],
-  "prognosis": "Surgical correction generally has a good outcome, though prognosis is influenced by associated complex lesions; isolated defects repaired before pulmonary vascular disease develops do well.",
-  "pitfalls": [
-   "Labelling the lesion a simple secundum defect and missing the coronary sinus communication",
-   "Overlooking a persistent left superior vena cava, which complicates surgical repair",
-   "Failing to appreciate a right-to-left shunt and paradoxical embolism risk",
-   "Not screening for associated heterotaxy and other complex anomalies"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any persistent left superior vena cava away from the left atrium",
-   "Timely repair before pulmonary vascular disease develops in the setting of a significant left-to-right shunt and right heart volume loading",
-   "Management of the right-to-left component and paradoxical embolism risk when the sinus is completely unroofed with a persistent left superior vena cava",
-   "Careful delineation of associated persistent left superior vena cava and systemic venous anatomy to plan the operation",
-   "Evaluation for associated heterotaxy and complex congenital heart disease that shape overall haemodynamics and outcome",
-   "Attention to infective endocarditis risk and postoperative surveillance within a congenital cardiology service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "unroofed_coronary_sinus-pathway",
-   "title": "Unroofed coronary sinus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial communication",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cyanosis or documented paradoxical embolism from right-to-left drainage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any left superior vena cava, Cardiac CT or MR angiography to define coronary sinus and systemic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any persistent left superior vena cava away from the left atrium"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the lesion a simple secundum defect and missing the coronary sinus communication"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of unroofed coronary sinus."
-  }
- ],
- "tables": [
-  {
-   "id": "unroofed_coronary_sinus-matrix",
-   "title": "Unroofed coronary sinus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial communication",
+      "It represents the rarest type of atrial septal defect and produces a left-to-right shunt through the coronary sinus into the right atrium",
+      "There is a strong association with a persistent left superior vena cava draining to the coronary sinus",
+      "When completely unroofed with a persistent left superior vena cava, systemic venous blood can enter the left atrium and cause cyanosis and a risk of paradoxical embolism",
+      "The physiology otherwise resembles other atrial septal defects with right heart volume loading",
+      "It is frequently part of complex congenital heart disease, including heterotaxy syndromes",
+      "Surgical repair reroutes or baffles the anomalous drainage and closes the defect, restoring normal venous return"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An unroofed coronary sinus results from a developmental deficiency of the tissue separating the coronary sinus from the left atrium, so that the two communicate along part or all of the coronary sinus course. This creates an interatrial pathway that behaves like an atrial septal defect, allowing left-to-right shunting and right heart volume loading. The lesion is closely linked to a persistent left superior vena cava that drains into the coronary sinus; when the sinus roof is absent, this systemic venous blood may drain directly into the left atrium, introducing a right-to-left component with desaturation and a route for paradoxical emboli. The defect is often seen within complex malformations, particularly heterotaxy, which shapes the overall haemodynamics.",
+    "additionalDifferentials": [
+      "Ostium secundum atrial septal defect",
+      "Sinus venosus atrial septal defect",
+      "Ostium primum atrial septal defect",
+      "Persistent left superior vena cava without unroofing",
+      "Partial anomalous pulmonary venous return",
+      "Other causes of right heart volume overload"
     ],
-    [
-     "Primary Differentials",
-     "Ostium secundum atrial septal defect, Sinus venosus atrial septal defect, Ostium primum atrial septal defect",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any left superior vena cava",
+      "Cardiac CT or MR angiography to define coronary sinus and systemic venous anatomy",
+      "Cardiac catheterisation for shunt quantification and pressures",
+      "Assessment for a persistent left superior vena cava draining to the coronary sinus",
+      "Electrocardiogram for right heart volume loading",
+      "Screening for associated heterotaxy and complex defects"
     ],
-    [
-     "Management Strategy",
-     "Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any",
-     "Core treatment modality"
+    "redFlags": [
+      "Cyanosis or documented paradoxical embolism from right-to-left drainage",
+      "Signs of significant right heart volume overload or pulmonary hypertension",
+      "Association with complex congenital or heterotaxy syndromes",
+      "Unexplained systemic desaturation with a persistent left superior vena cava"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the lesion a simple secundum defect and missing the coronary sinus communication",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical correction generally has a good outcome, though prognosis is influenced by associated complex lesions; isolated defects repaired before pulmonary vascular disease develops do well.",
+    "pitfalls": [
+      "Labelling the lesion a simple secundum defect and missing the coronary sinus communication",
+      "Overlooking a persistent left superior vena cava, which complicates surgical repair",
+      "Failing to appreciate a right-to-left shunt and paradoxical embolism risk",
+      "Not screening for associated heterotaxy and other complex anomalies"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any persistent left superior vena cava away from the left atrium",
+      "Timely repair before pulmonary vascular disease develops in the setting of a significant left-to-right shunt and right heart volume loading",
+      "Management of the right-to-left component and paradoxical embolism risk when the sinus is completely unroofed with a persistent left superior vena cava",
+      "Careful delineation of associated persistent left superior vena cava and systemic venous anatomy to plan the operation",
+      "Evaluation for associated heterotaxy and complex congenital heart disease that shape overall haemodynamics and outcome",
+      "Attention to infective endocarditis risk and postoperative surveillance within a congenital cardiology service"
     ]
-   ],
-   "caption": "Overview comparison matrix for unroofed coronary sinus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "unroofed-coronary-sinus-real-image",
-   "title": "Unroofed coronary sinus: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "unroofed_coronary_sinus-pathway",
+      "title": "Unroofed coronary sinus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial communication",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cyanosis or documented paradoxical embolism from right-to-left drainage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any left superior vena cava, Cardiac CT or MR angiography to define coronary sinus and systemic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any persistent left superior vena cava away from the left atrium"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the lesion a simple secundum defect and missing the coronary sinus communication"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of unroofed coronary sinus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "unroofed_coronary_sinus-matrix",
+      "title": "Unroofed coronary sinus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A partial or complete deficiency of the wall between the coronary sinus and the left atrium, functioning as a form of interatrial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic and transoesophageal echocardiography, including agitated saline contrast, to demonstrate the communication and any",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ostium secundum atrial septal defect, Sinus venosus atrial septal defect, Ostium primum atrial septal defect",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical correction as the definitive treatment, closing or baffling the coronary sinus communication and redirecting any",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the lesion a simple secundum defect and missing the coronary sinus communication",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for unroofed coronary sinus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unroofed_coronary_sinus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with agitated saline contrast",
+          "cells": [
+            {
+              "text": "Demonstrates the coronary sinus communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "Coronary sinus and systemic venous anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Shunt quantification and pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for persistent left superior vena cava",
+          "cells": [
+            {
+              "text": "Left SVC draining to the coronary sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right heart volume loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for heterotaxy",
+          "cells": [
+            {
+              "text": "Associated heterotaxy and complex defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unroofed_coronary_sinus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ostium secundum atrial septal defect",
+          "cells": [
+            {
+              "text": "A simple secundum label misses the coronary sinus communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent left SVC without unroofing",
+          "cells": [
+            {
+              "text": "Lacks the coronary sinus communication that defines the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus venosus atrial septal defect",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unroofed_coronary_sinus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Closes or baffles the coronary sinus communication and redirects any persistent left SVC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timely repair",
+          "cells": [
+            {
+              "text": "Before pulmonary vascular disease develops, given significant left-to-right shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right-to-left component",
+          "cells": [
+            {
+              "text": "Paradoxical embolism risk when completely unroofed with persistent left SVC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomy delineation",
+          "cells": [
+            {
+              "text": "Persistent left SVC and systemic venous anatomy, to plan the operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterotaxy and complex disease",
+          "cells": [
+            {
+              "text": "Associated lesions that shape haemodynamics and outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis and surveillance",
+          "cells": [
+            {
+              "text": "Infective endocarditis risk and postoperative surveillance in a congenital cardiology service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unroofed_coronary_sinus-dx-mgmt",
+      "title": "Diagnosis and management of Unroofed coronary sinus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected unroofed coronary sinus: right heart overload from an atrial communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyanosis, paradoxical embolism or pulmonary hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent congenital cardiology review for cyanosis or paradoxical embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast echo, cardiac CT or MR angiography, catheterisation and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the coronary sinus communication confirmed on contrast echo or CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secundum or sinus venosus ASD; reassess the atrial septum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical closure or baffling of the coronary sinus communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Timely repair before pulmonary vascular disease develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plan redirection of any persistent left SVC from anatomy delineation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate heterotaxy; endocarditis and postoperative surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the timing of repair and associated anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

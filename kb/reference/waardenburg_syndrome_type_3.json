@@ -1,175 +1,388 @@
 {
- "id": "waardenburg_syndrome_type_3",
- "name": "Waardenburg syndrome type 3",
- "aliases": [
-  "WS3",
-  "Klein-Waardenburg syndrome",
-  "PAX3"
- ],
- "class": "non_infective",
- "system": "Dermatology / Otology / Ophthalmology genetics",
- "specialty": "Clinical genetics / Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Klein-Waardenburg syndrome is caused by variants in PAX3 — the same gene as type 1 — but is distinguished by musculoskeletal anomalies of the upper limbs.",
-   "Limb features include muscle hypoplasia and contractures, flexion contractures, carpal-bone fusion and syndactyly, which are absent in types 1 and 2.",
-   "Like type 1, it shows dystopia canthorum — lateral displacement of the inner canthi — quantified with the W index.",
-   "Other cardinal features are congenital sensorineural hearing loss and pigmentary changes: a white forelock, heterochromia iridis, patchy skin hypopigmentation and premature greying.",
-   "Severe classic cases often reflect homozygous or compound-heterozygous PAX3 variants, whereas milder cases are heterozygous.",
-   "PAX3 encodes a transcription factor essential for neural-crest-derived melanocytes and for musculoskeletal development, explaining the combined pigmentary, auditory and limb phenotype.",
-   "Early audiological assessment and hearing habilitation are critical to speech and language development.",
-   "Inheritance is autosomal dominant, with more severe biallelic forms; genetic counselling is important."
+  "id": "waardenburg_syndrome_type_3",
+  "name": "Waardenburg syndrome type 3",
+  "aliases": [
+    "WS3",
+    "Klein-Waardenburg syndrome",
+    "PAX3"
   ],
-  "pathophysiology": "Waardenburg syndrome type 3 is caused by pathogenic variants in PAX3 on chromosome 2q, encoding a paired-box transcription factor that orchestrates the migration, survival and differentiation of neural-crest cells. PAX3 is essential both for melanocyte development — accounting for the pigmentary skin, hair and iris changes and for the cochlear melanocyte-dependent sensorineural hearing loss — and for limb and axial myogenesis, which underlies the distinctive upper-limb musculoskeletal anomalies. Dystopia canthorum, shared with type 1, reflects the role of PAX3 in facial development. The severe Klein-Waardenburg phenotype typically results from biallelic or dominant-negative PAX3 variants that disrupt neural-crest and muscle development more profoundly than the heterozygous variants causing type 1.",
-  "additionalDifferentials": [
-   "Waardenburg syndrome type 1 (PAX3) — dystopia canthorum but no limb anomalies.",
-   "Waardenburg syndrome type 2 (MITF, SOX10 and others) — no dystopia canthorum.",
-   "Waardenburg syndrome type 4 / Waardenburg-Shah (EDNRB, EDN3, SOX10) — associated with Hirschsprung disease.",
-   "Piebaldism (KIT) — patchy depigmentation with white forelock but without hearing loss.",
-   "Tietz syndrome (MITF) — generalised hypopigmentation with deafness.",
-   "Oculocutaneous or ocular albinism.",
-   "Other syndromes combining congenital sensorineural hearing loss and pigmentary anomalies."
-  ],
-  "additionalInvestigations": [
-   "Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss.",
-   "Ophthalmological assessment including measurement of dystopia canthorum (W index) and iris colour.",
-   "Molecular genetic testing of PAX3.",
-   "Musculoskeletal examination and imaging of the upper limbs for contractures and carpal fusion.",
-   "Dermatological assessment of the pigmentary pattern.",
-   "Detailed pedigree construction and examination of relatives.",
-   "Assessment of bowel function if a type 4 overlap with Hirschsprung disease is suspected."
-  ],
-  "redFlags": [
-   "Profound congenital sensorineural hearing loss requiring urgent habilitation to protect language development.",
-   "Severe limb contractures compromising hand function and needing orthopaedic input.",
-   "Constipation, abdominal distension or delayed passage of meconium suggesting Hirschsprung disease and a type 4 overlap."
-  ],
-  "prognosis": "Lifespan is normal; morbidity is driven by the sensorineural hearing loss and the upper-limb anomalies. Early hearing habilitation supports language development, and orthopaedic and rehabilitative care improve limb function.",
-  "pitfalls": [
-   "Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3.",
-   "Measuring the inner-canthal relationship incorrectly and misjudging dystopia canthorum.",
-   "Failing to identify hearing loss in infancy, delaying essential habilitation.",
-   "Assuming all Waardenburg subtypes share one gene rather than confirming PAX3."
-  ],
-  "references": [
-   "Standard clinical genetics reference texts",
-   "Otolaryngology reference texts",
-   "Dermatology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing loss, supported by speech and language therapy",
-   "Offer orthopaedic and rehabilitative management of the upper-limb musculoskeletal anomalies, including physiotherapy and surgery for contractures, flexion deformities and syndactyly",
-   "Support hand and limb function with occupational therapy and assistive devices",
-   "Refer to ophthalmology and dermatology for the pigmentary features, advising sun protection of depigmented skin",
-   "Provide genetic counselling for PAX3-related disease, noting that severe classic cases may reflect biallelic variants, with cascade testing of relatives",
-   "Coordinate care through a multidisciplinary team spanning audiology, clinical genetics, ophthalmology and orthopaedics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "waardenburg_syndrome_type_3-pathway",
-   "title": "Waardenburg syndrome type 3: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Klein-Waardenburg syndrome is caused by variants in PAX3 - the same gene as type 1 - but is distinguished by musculoskeletal anomalies of the upper limbs.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound congenital sensorineural hearing loss requiring urgent habilitation to protect language development.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss., Ophthalmological assessment including measurement of dystopia canthorum (W index) and iris colour., Molecular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing loss, supported by speech and language therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of waardenburg syndrome type 3."
-  }
- ],
- "tables": [
-  {
-   "id": "waardenburg_syndrome_type_3-matrix",
-   "title": "Waardenburg syndrome type 3: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Klein-Waardenburg syndrome is caused by variants in PAX3 - the same gene as type 1 - but is distinguished by musculoskeletal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Otology / Ophthalmology genetics",
+  "specialty": "Clinical genetics / Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Klein-Waardenburg syndrome is caused by variants in PAX3 — the same gene as type 1 — but is distinguished by musculoskeletal anomalies of the upper limbs.",
+      "Limb features include muscle hypoplasia and contractures, flexion contractures, carpal-bone fusion and syndactyly, which are absent in types 1 and 2.",
+      "Like type 1, it shows dystopia canthorum — lateral displacement of the inner canthi — quantified with the W index.",
+      "Other cardinal features are congenital sensorineural hearing loss and pigmentary changes: a white forelock, heterochromia iridis, patchy skin hypopigmentation and premature greying.",
+      "Severe classic cases often reflect homozygous or compound-heterozygous PAX3 variants, whereas milder cases are heterozygous.",
+      "PAX3 encodes a transcription factor essential for neural-crest-derived melanocytes and for musculoskeletal development, explaining the combined pigmentary, auditory and limb phenotype.",
+      "Early audiological assessment and hearing habilitation are critical to speech and language development.",
+      "Inheritance is autosomal dominant, with more severe biallelic forms; genetic counselling is important."
     ],
-    [
-     "Key Investigations",
-     "Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss., Ophthalmological",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Waardenburg syndrome type 3 is caused by pathogenic variants in PAX3 on chromosome 2q, encoding a paired-box transcription factor that orchestrates the migration, survival and differentiation of neural-crest cells. PAX3 is essential both for melanocyte development — accounting for the pigmentary skin, hair and iris changes and for the cochlear melanocyte-dependent sensorineural hearing loss — and for limb and axial myogenesis, which underlies the distinctive upper-limb musculoskeletal anomalies. Dystopia canthorum, shared with type 1, reflects the role of PAX3 in facial development. The severe Klein-Waardenburg phenotype typically results from biallelic or dominant-negative PAX3 variants that disrupt neural-crest and muscle development more profoundly than the heterozygous variants causing type 1.",
+    "additionalDifferentials": [
+      "Waardenburg syndrome type 1 (PAX3) — dystopia canthorum but no limb anomalies.",
+      "Waardenburg syndrome type 2 (MITF, SOX10 and others) — no dystopia canthorum.",
+      "Waardenburg syndrome type 4 / Waardenburg-Shah (EDNRB, EDN3, SOX10) — associated with Hirschsprung disease.",
+      "Piebaldism (KIT) — patchy depigmentation with white forelock but without hearing loss.",
+      "Tietz syndrome (MITF) — generalised hypopigmentation with deafness.",
+      "Oculocutaneous or ocular albinism.",
+      "Other syndromes combining congenital sensorineural hearing loss and pigmentary anomalies."
     ],
-    [
-     "Primary Differentials",
-     "Waardenburg syndrome type 1 (PAX3) - dystopia canthorum but no limb anomalies., Waardenburg syndrome type 2 (MITF, SOX10 and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss.",
+      "Ophthalmological assessment including measurement of dystopia canthorum (W index) and iris colour.",
+      "Molecular genetic testing of PAX3.",
+      "Musculoskeletal examination and imaging of the upper limbs for contractures and carpal fusion.",
+      "Dermatological assessment of the pigmentary pattern.",
+      "Detailed pedigree construction and examination of relatives.",
+      "Assessment of bowel function if a type 4 overlap with Hirschsprung disease is suspected."
     ],
-    [
-     "Management Strategy",
-     "Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound congenital sensorineural hearing loss requiring urgent habilitation to protect language development.",
+      "Severe limb contractures compromising hand function and needing orthopaedic input.",
+      "Constipation, abdominal distension or delayed passage of meconium suggesting Hirschsprung disease and a type 4 overlap."
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifespan is normal; morbidity is driven by the sensorineural hearing loss and the upper-limb anomalies. Early hearing habilitation supports language development, and orthopaedic and rehabilitative care improve limb function.",
+    "pitfalls": [
+      "Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3.",
+      "Measuring the inner-canthal relationship incorrectly and misjudging dystopia canthorum.",
+      "Failing to identify hearing loss in infancy, delaying essential habilitation.",
+      "Assuming all Waardenburg subtypes share one gene rather than confirming PAX3."
+    ],
+    "references": [
+      "Standard clinical genetics reference texts",
+      "Otolaryngology reference texts",
+      "Dermatology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing loss, supported by speech and language therapy",
+      "Offer orthopaedic and rehabilitative management of the upper-limb musculoskeletal anomalies, including physiotherapy and surgery for contractures, flexion deformities and syndactyly",
+      "Support hand and limb function with occupational therapy and assistive devices",
+      "Refer to ophthalmology and dermatology for the pigmentary features, advising sun protection of depigmented skin",
+      "Provide genetic counselling for PAX3-related disease, noting that severe classic cases may reflect biallelic variants, with cascade testing of relatives",
+      "Coordinate care through a multidisciplinary team spanning audiology, clinical genetics, ophthalmology and orthopaedics"
     ]
-   ],
-   "caption": "Overview comparison matrix for waardenburg syndrome type 3."
-  }
- ],
- "diagrams": [
-  {
-   "id": "waardenburg-syndrome-type-3-real-image",
-   "title": "Waardenburg syndrome type 3: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "waardenburg_syndrome_type_3-pathway",
+      "title": "Waardenburg syndrome type 3: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Klein-Waardenburg syndrome is caused by variants in PAX3 - the same gene as type 1 - but is distinguished by musculoskeletal anomalies of the upper limbs.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound congenital sensorineural hearing loss requiring urgent habilitation to protect language development.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss., Ophthalmological assessment including measurement of dystopia canthorum (W index) and iris colour., Molecular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing loss, supported by speech and language therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of waardenburg syndrome type 3."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "waardenburg_syndrome_type_3-matrix",
+      "title": "Waardenburg syndrome type 3: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Klein-Waardenburg syndrome is caused by variants in PAX3 - the same gene as type 1 - but is distinguished by musculoskeletal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Formal audiological testing, including auditory brainstem responses in infants, for sensorineural hearing loss., Ophthalmological",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Waardenburg syndrome type 1 (PAX3) - dystopia canthorum but no limb anomalies., Waardenburg syndrome type 2 (MITF, SOX10 and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide early auditory rehabilitation with hearing aids and cochlear implantation for severe-to-profound sensorineural hearing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling type 3 as type 1 by overlooking the upper-limb musculoskeletal anomalies that define type 3.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for waardenburg syndrome type 3."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "waardenburg_syndrome_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiological testing with auditory brainstem responses in infants",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Pigmentary and ocular features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Musculoskeletal examination of the upper limbs",
+          "cells": [
+            {
+              "text": "Limb anomalies that define type 3"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Waardenburg syndrome type 1",
+          "cells": [
+            {
+              "text": "Dystopia canthorum but no limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waardenburg syndrome type 2",
+          "cells": [
+            {
+              "text": "No dystopia canthorum; MITF or SOX10 involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "waardenburg_syndrome_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids for sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Severe-to-profound loss, to protect language development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Severe upper limb contractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "waardenburg_syndrome_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Waardenburg syndrome type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Klein-Waardenburg (type 3): hearing loss with upper limb anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (profound congenital deafness or severe limb contractures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent habilitation for profound deafness; orthopaedic review for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Auditory brainstem response, ophthalmic review, upper limb examination, PAX3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are upper limb anomalies present with a PAX3 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Classify as type 1 or type 2 by dystopia canthorum and limb findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early auditory rehabilitation with hearing aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of upper limb musculoskeletal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hearing loss and limb contractures both affect function; early treatment helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

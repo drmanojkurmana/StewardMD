@@ -1,173 +1,422 @@
 {
- "id": "metagonimiasis",
- "name": "Metagonimiasis (intestinal fluke)",
- "aliases": [
-  "Metagonimus yokogawai infection",
-  "Yokogawa's fluke",
-  "minute intestinal fluke infection",
-  "heterophyid intestinal fluke disease"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae, particularly in East Asia",
-   "Light infection is usually asymptomatic; heavier burdens cause colicky abdominal pain, intermittent diarrhoea, nausea and lethargy",
-   "Adult flukes attach to the mucosa of the small intestine and provoke local inflammation and mild malabsorption",
-   "Diagnosis relies on finding small operculated eggs in stool that closely resemble those of Opisthorchis, Clonorchis and other heterophyids",
-   "Rarely, eggs or flukes enter the circulation and embolise to the heart or brain, causing ectopic disease",
-   "Praziquantel is highly effective and the treatment of choice",
-   "Prevention centres on avoiding raw freshwater fish and improving sanitation to reduce egg contamination"
+  "id": "metagonimiasis",
+  "name": "Metagonimiasis (intestinal fluke)",
+  "aliases": [
+    "Metagonimus yokogawai infection",
+    "Yokogawa's fluke",
+    "minute intestinal fluke infection",
+    "heterophyid intestinal fluke disease"
   ],
-  "pathophysiology": "Metagonimus yokogawai is a minute intestinal trematode whose life cycle passes through freshwater snails and then freshwater fish, in which infective metacercariae encyst. Humans and other fish-eating animals acquire infection by consuming raw or undercooked fish. The larvae excyst in the small intestine and mature into tiny adult flukes that burrow among the villi of the jejunum, causing localised mucosal inflammation, villous flattening and superficial ulceration. Heavy infection can impair absorption and produce chronic diarrhoea. Occasionally eggs deposited in the mucosa penetrate vessels and are carried to distant organs such as the myocardium or central nervous system, where they excite a granulomatous reaction. Eggs excreted in faeces continue the cycle by contaminating freshwater.",
-  "additionalDifferentials": [
-   "Heterophyiasis and other heterophyid intestinal fluke infection",
-   "Fasciolopsiasis and other intestinal trematode disease",
-   "Giardiasis and other protozoal enteritis",
-   "Opisthorchiasis or clonorchiasis (from egg morphology overlap)",
-   "Irritable bowel syndrome or functional dyspepsia",
-   "Chronic bacterial or viral gastroenteritis"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for ova and parasites with concentration techniques",
-   "Repeated stool examination given intermittent and low egg output",
-   "Full blood count for eosinophilia",
-   "Careful egg morphometry to distinguish from other small trematode eggs",
-   "Imaging or echocardiography only if ectopic (cardiac or cerebral) disease is suspected",
-   "Serology where available to support the diagnosis"
-  ],
-  "redFlags": [
-   "Neurological deficit or seizures suggesting cerebral egg embolisation",
-   "Cardiac symptoms raising concern for myocardial involvement",
-   "Persistent diarrhoea with weight loss and evidence of malabsorption",
-   "Failure to respond to treatment, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "Prognosis is excellent for intestinal disease, which resolves promptly with anthelmintic therapy; the rare ectopic cardiac or cerebral forms can be serious depending on the site affected.",
-  "pitfalls": [
-   "Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology",
-   "Overlooking light infections when only a single stool sample is examined",
-   "Attributing non-specific gastrointestinal symptoms to functional disease in endemic settings",
-   "Failing to consider ectopic embolisation when unexplained cardiac or neurological signs appear"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection",
-   "Provide supportive rehydration and correct any malabsorption or nutritional deficit from heavy infection",
-   "Confirm cure with follow-up stool microscopy, allowing for intermittent low egg output",
-   "Treat household members and others who shared the same raw or undercooked freshwater fish source",
-   "Manage rare ectopic cardiac or cerebral disease with anthelmintic therapy plus organ-specific supportive or surgical care and relevant specialist referral",
-   "Advise on prevention through thorough cooking of freshwater fish and avoidance of raw preparations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "metagonimiasis-pathway",
-   "title": "Metagonimiasis (intestinal fluke): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae, particularly in East Asia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological deficit or seizures suggesting cerebral egg embolisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for ova and parasites with concentration techniques, Repeated stool examination given intermittent and low egg output, Full blood count for eosinophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of metagonimiasis (intestinal fluke)."
-  }
- ],
- "tables": [
-  {
-   "id": "metagonimiasis-matrix",
-   "title": "Metagonimiasis (intestinal fluke): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae, particularly in East Asia",
+      "Light infection is usually asymptomatic; heavier burdens cause colicky abdominal pain, intermittent diarrhoea, nausea and lethargy",
+      "Adult flukes attach to the mucosa of the small intestine and provoke local inflammation and mild malabsorption",
+      "Diagnosis relies on finding small operculated eggs in stool that closely resemble those of Opisthorchis, Clonorchis and other heterophyids",
+      "Rarely, eggs or flukes enter the circulation and embolise to the heart or brain, causing ectopic disease",
+      "Praziquantel is highly effective and the treatment of choice",
+      "Prevention centres on avoiding raw freshwater fish and improving sanitation to reduce egg contamination"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for ova and parasites with concentration techniques, Repeated stool examination given intermittent and low egg",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Metagonimus yokogawai is a minute intestinal trematode whose life cycle passes through freshwater snails and then freshwater fish, in which infective metacercariae encyst. Humans and other fish-eating animals acquire infection by consuming raw or undercooked fish. The larvae excyst in the small intestine and mature into tiny adult flukes that burrow among the villi of the jejunum, causing localised mucosal inflammation, villous flattening and superficial ulceration. Heavy infection can impair absorption and produce chronic diarrhoea. Occasionally eggs deposited in the mucosa penetrate vessels and are carried to distant organs such as the myocardium or central nervous system, where they excite a granulomatous reaction. Eggs excreted in faeces continue the cycle by contaminating freshwater.",
+    "additionalDifferentials": [
+      "Heterophyiasis and other heterophyid intestinal fluke infection",
+      "Fasciolopsiasis and other intestinal trematode disease",
+      "Giardiasis and other protozoal enteritis",
+      "Opisthorchiasis or clonorchiasis (from egg morphology overlap)",
+      "Irritable bowel syndrome or functional dyspepsia",
+      "Chronic bacterial or viral gastroenteritis"
     ],
-    [
-     "Primary Differentials",
-     "Heterophyiasis and other heterophyid intestinal fluke infection, Fasciolopsiasis and other intestinal trematode disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for ova and parasites with concentration techniques",
+      "Repeated stool examination given intermittent and low egg output",
+      "Full blood count for eosinophilia",
+      "Careful egg morphometry to distinguish from other small trematode eggs",
+      "Imaging or echocardiography only if ectopic (cardiac or cerebral) disease is suspected",
+      "Serology where available to support the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological deficit or seizures suggesting cerebral egg embolisation",
+      "Cardiac symptoms raising concern for myocardial involvement",
+      "Persistent diarrhoea with weight loss and evidence of malabsorption",
+      "Failure to respond to treatment, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent for intestinal disease, which resolves promptly with anthelmintic therapy; the rare ectopic cardiac or cerebral forms can be serious depending on the site affected.",
+    "pitfalls": [
+      "Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology",
+      "Overlooking light infections when only a single stool sample is examined",
+      "Attributing non-specific gastrointestinal symptoms to functional disease in endemic settings",
+      "Failing to consider ectopic embolisation when unexplained cardiac or neurological signs appear"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection",
+      "Provide supportive rehydration and correct any malabsorption or nutritional deficit from heavy infection",
+      "Confirm cure with follow-up stool microscopy, allowing for intermittent low egg output",
+      "Treat household members and others who shared the same raw or undercooked freshwater fish source",
+      "Manage rare ectopic cardiac or cerebral disease with anthelmintic therapy plus organ-specific supportive or surgical care and relevant specialist referral",
+      "Advise on prevention through thorough cooking of freshwater fish and avoidance of raw preparations"
     ]
-   ],
-   "caption": "Overview comparison matrix for metagonimiasis (intestinal fluke)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "metagonimiasis-real-image",
-   "title": "Metagonimiasis (intestinal fluke): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "metagonimiasis-pathway",
+      "title": "Metagonimiasis (intestinal fluke): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae, particularly in East Asia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological deficit or seizures suggesting cerebral egg embolisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for ova and parasites with concentration techniques, Repeated stool examination given intermittent and low egg output, Full blood count for eosinophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of metagonimiasis (intestinal fluke)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "metagonimiasis-matrix",
+      "title": "Metagonimiasis (intestinal fluke): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the smallest human intestinal flukes, acquired by eating raw or undercooked freshwater fish carrying metacercariae,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for ova and parasites with concentration techniques, Repeated stool examination given intermittent and low egg",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Heterophyiasis and other heterophyid intestinal fluke infection, Fasciolopsiasis and other intestinal trematode disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with the anthelmintic praziquantel, which is highly effective and the agent of choice for intestinal fluke infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misidentifying the eggs as those of opisthorchiid liver flukes because of near-identical morphology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for metagonimiasis (intestinal fluke)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metagonimiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration techniques",
+          "cells": [
+            {
+              "text": "Ova and parasites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool examination",
+          "cells": [
+            {
+              "text": "Intermittent, low egg output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Distinguishes from other small trematode eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or echocardiography, if ectopic disease is suspected",
+          "cells": [
+            {
+              "text": "Cardiac or cerebral disease, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology, where available",
+          "cells": [
+            {
+              "text": "Supports the diagnosis where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metagonimiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "Highly effective; the agent of choice for intestinal fluke infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive rehydration",
+          "cells": [
+            {
+              "text": "Correction of malabsorption or nutritional deficit from heavy infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cure check",
+          "cells": [
+            {
+              "text": "Follow-up stool microscopy, allowing for intermittent low egg output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contacts",
+          "cells": [
+            {
+              "text": "Household members and others who shared the same raw or undercooked freshwater fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic disease",
+          "cells": [
+            {
+              "text": "Anthelmintic therapy plus organ-specific care and specialist referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Thorough cooking of freshwater fish; avoid raw preparations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metagonimiasis-dx-mgmt",
+      "title": "Diagnosis and management of Metagonimiasis (intestinal fluke)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diarrhoea or abdominal symptoms after raw or undercooked freshwater fish",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological deficit, seizures, cardiac symptoms, or malabsorption with weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for cerebral or cardiac egg embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration, repeated stools, full blood count, egg morphometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the characteristic eggs confirmed on stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other intestinal flukes, giardiasis or functional bowel disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel, the agent of choice for intestinal fluke infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydration and correction of malabsorption or nutritional deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat household members who shared the same freshwater fish source",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy to confirm cure, allowing for low egg output",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prevention through thorough cooking of freshwater fish; avoid raw preparations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

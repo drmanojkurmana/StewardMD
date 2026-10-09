@@ -232,25 +232,1015 @@
       "caption": "Diagnostic and clinical overview matrix for pulmonary embolism."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "pe-real-image",
-      "title": "Pulmonary embolism: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pulmonary Embolism, 2024",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "MDCalc, Wells' Criteria for Pulmonary Embolism",
+      "url": "https://www.mdcalc.com/calc/115/wells-criteria-pulmonary-embolism",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 118-9",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 58-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 118-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 118-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Pretest probability, testing and risk stratification in pulmonary embolism",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Wells: signs of DVT",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "3",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "Clinical signs and symptoms of DVT"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Wells: PE most likely diagnosis",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "3",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "PE the leading or equally likely diagnosis"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Wells: heart rate over 100, immobilization 3 days or surgery within 4 weeks, prior PE or DVT",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1.5 each",
+              "op": "=",
+              "value": 1.5
+            },
+            {
+              "text": "Each item scored separately"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wells: haemoptysis, malignancy treated within 6 months or palliative",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 each",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "Each item scored separately"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Wells two-tier result",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "Over 4 = PE likely",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "PE in 37.1% if likely vs 12.1% if 0 to 4 points"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PERC rule",
+          "cells": [
+            {
+              "text": "Age under 50, HR under 100, SpO2 95% or more, no prior VTE, no unilateral leg swelling, no estrogen, no haemoptysis, no recent surgery or trauma"
+            },
+            {
+              "text": "Low-risk patient meeting all 8: no testing needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D-dimer",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Under 0.4 is negative",
+              "op": "<",
+              "value": 0.4
+            },
+            {
+              "text": "{{hy:Rules out PE at low or intermediate pretest probability; NPV over 95%}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age-adjusted D-dimer",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Age x 10 cutoff for age over 50"
+            },
+            {
+              "text": "Low or intermediate probability only; not for suspected acute DVT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Preferred imaging test"
+            },
+            {
+              "text": "Less sensitive for subsegmental emboli; shows RV size and alternative diagnoses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V/Q scan",
+          "cells": [
+            {
+              "text": "Normal or near-normal chest x-ray"
+            },
+            {
+              "text": "Use in pregnancy or when contrast is contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia most common; S1Q3T3, new RBBB, T inversion V1 to V4"
+            },
+            {
+              "text": "S1Q3T3 specific but insensitive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High risk (massive)",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "SBP under 90 or fall of 40 or more for 15 min",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "Hypotension with RV dysfunction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intermediate risk (submassive)",
+          "cells": [
+            {
+              "text": "RV dysfunction on imaging and or raised troponin or BNP, normotensive"
+            },
+            {
+              "text": "Intermediate-high if both, intermediate-low if one; ESC also counts sPESI over 0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "sPESI items",
+          "cells": [
+            {
+              "text": "Age over 80, cancer, chronic lung disease, HR over 110, SBP under 100, SaO2 under 90%"
+            },
+            {
+              "text": "sPESI 0 with no RV impairment = low risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Wells three-tier version: under 2 low (1.3%), 2 to 6 moderate (16.2%), over 6 high (37.5%)."
+    },
+    {
+      "id": "pe-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pulmonary embolism",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "Massive PE can give substernal pain mimicking MI; separate with ECG and troponin, then CTPA if PE still suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Infiltrate rather than emboli; CT pulmonary angiography can show this alternative diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Failure to improve on standard therapy should raise suspicion of PE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax",
+          "cells": [
+            {
+              "text": "Listed mimic of acute dyspnoea and chest pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "COPD or asthma exacerbation",
+          "cells": [
+            {
+              "text": "Listed mimic of acute dyspnoea; known airway disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericarditis or tamponade",
+          "cells": [
+            {
+              "text": "Positional pleuritic pain, friction rub; separate with echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Listed non-infectious mimic of PE chest pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety with hyperventilation",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cellulitis (mimicking DVT)",
+          "cells": [
+            {
+              "text": "Fever and chills favour cellulitis; separate with leg Doppler ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pe-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pulmonary embolism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygen, cautious fluids, norepinephrine",
+          "cells": [
+            {
+              "text": "Hypoxaemia or hypotension"
+            },
+            {
+              "text": "Avoid RV overload with fluids; norepinephrine first-line vasopressor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initial anticoagulation (LMWH, fondaparinux, UFH, apixaban or rivaroxaban)",
+          "cells": [
+            {
+              "text": "{{hy:All confirmed PE without contraindication}}"
+            },
+            {
+              "text": "UFH aPTT 1.5 to 2.5 x control; LMWH and fondaparinux contraindicated if CrCl under 30 mL/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edoxaban or dabigatran",
+          "cells": [
+            {
+              "text": "Maintenance option"
+            },
+            {
+              "text": "Need 5 to 10 days of parenteral anticoagulation first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "Maintenance option"
+            },
+            {
+              "text": "INR 2.0 to 3.0; overlap heparin at least 5 days and until INR therapeutic for 24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic thrombolysis (alteplase)",
+          "cells": [
+            {
+              "text": "Hypotension not resolving with fluids; selected severe RV compromise"
+            },
+            {
+              "text": "Check absolute contraindications: prior haemorrhagic stroke, active bleeding, intracranial tumour"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter-directed therapy or suction embolectomy",
+          "cells": [
+            {
+              "text": "Thrombolysis contraindicated or failed"
+            },
+            {
+              "text": "Ultrasound-assisted lysis improved RV/LV ratio at 24 h only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical embolectomy or ECMO",
+          "cells": [
+            {
+              "text": "Persistent SBP 90 mmHg or less despite support, or near arrest"
+            },
+            {
+              "text": "ECMO as bridge in catastrophic PE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVC filter",
+          "cells": [
+            {
+              "text": "Anticoagulation contraindicated, recurrence despite anticoagulation, marginal reserve"
+            },
+            {
+              "text": "Mostly retrievable; migration and thrombosis risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Transient provoking factor: about 3 months"
+            },
+            {
+              "text": "Unprovoked, cancer, thrombophilia or recurrent: may be lifelong with yearly review"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The Merck page gives no alteplase or initial anticoagulant doses, so none are listed."
+    },
+    {
+      "id": "pe-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "pe-treatment-2",
+      "kind": "treatment",
+      "title": "Features of new oral anticoagulants",
+      "rowHeader": "Option",
+      "columns": [
+        "Rivaroxaban",
+        "Apixaban",
+        "Dabigatran etexilate"
+      ],
+      "rows": [
+        {
+          "parameter": "Target",
+          "cells": [
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "IIa"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Molecular weight",
+          "cells": [
+            {
+              "text": "436"
+            },
+            {
+              "text": "460"
+            },
+            {
+              "text": "628"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Prodrug",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Bioavailability (%)",
+          "cells": [
+            {
+              "text": "80"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "6"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Time to peak (h)",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "3"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Half-life (h)",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "9-14"
+            },
+            {
+              "text": "12-17"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Renal excretion (%)",
+          "cells": [
+            {
+              "text": "65"
+            },
+            {
+              "text": "25"
+            },
+            {
+              "text": "80"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Antidote",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The printed table is cut off at the right page edge; any further columns are unreadable."
+    },
+    {
+      "id": "pe-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Risk factors for thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Risk factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous: inherited",
+          "cells": [
+            {
+              "text": "Factor V Leiden; prothrombin G20210A; antithrombin deficiency; protein C deficiency; protein S deficiency; elevated FVIII"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous: acquired",
+          "cells": [
+            {
+              "text": "Age; previous thrombosis; immobilization; major surgery; pregnancy and puerperium; hospitalization; obesity; infection; APC resistance (nongenetic); smoking"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous: unknown (*)",
+          "cells": [
+            {
+              "text": "Elevated factor II, IX, XI; elevated TAFI levels; low levels of TFPI"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: inherited",
+          "cells": [
+            {
+              "text": "Homocystinuria; dysfibrinogenemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: mixed (inherited and acquired)",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: acquired",
+          "cells": [
+            {
+              "text": "Malignancy; antiphospholipid antibody syndrome; hormonal therapy; polycythemia vera; essential thrombocythemia; paroxysmal nocturnal hemoglobinuria; thrombotic thrombocytopenic purpura; heparin-induced thrombocytopenia; disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The footnote text for the asterisk is cut off at the bottom of the printed page."
+    },
+    {
+      "id": "pe-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Advantages of low-molecular-weight heparin over heparin",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Consequence"
+      ],
+      "rows": [
+        {
+          "parameter": "Better bioavailability and longer half-life after subcutaneous injection",
+          "cells": [
+            {
+              "text": "Can be given subcutaneously once or twice daily for both prophylaxis and treatment"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Dose-independent clearance",
+          "cells": [
+            {
+              "text": "Simplified dosing"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Predictable anticoagulant response",
+          "cells": [
+            {
+              "text": "Coagulation monitoring is unnecessary in most patients"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Lower risk of heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Safer than heparin for short- or long-term administration"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Lower risk of osteoporosis",
+          "cells": [
+            {
+              "text": "Safer than heparin for extended administration"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "pe-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Comparison of LMWH and fondaparinux",
+      "rowHeader": "Feature",
+      "columns": [
+        "LMWH",
+        "Fondaparinux"
+      ],
+      "rows": [
+        {
+          "parameter": "Number of saccharide units",
+          "cells": [
+            {
+              "text": "15-17"
+            },
+            {
+              "text": "5"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of factor Xa inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of thrombin inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Bioavailability after subcutaneous administration (%)",
+          "cells": [
+            {
+              "text": "90"
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Plasma half-life (h)",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "17"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Renal excretion",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Induces release of tissue factor pathway inhibitor",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Neutralized by protamine sulfate",
+          "cells": [
+            {
+              "text": "Partially"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pe-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary embolism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PE: dyspnoea, pleuritic pain, tachycardia, syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable (SBP under 90 mmHg)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Bedside echo or CTPA if feasible; start heparin",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Confirmed high-risk PE: thrombolysis, or embolectomy if contraindicated",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Wells: PE likely (over 4 points)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Low risk and PERC all negative?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "No further testing for PE",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "D-dimer negative (age-adjusted if over 50)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "PE excluded; seek another diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "CTPA (or V/Q scan) shows PE?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stratify risk: sPESI, RV imaging, troponin and BNP",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Anticoagulate; monitor intermediate-high risk for decline",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

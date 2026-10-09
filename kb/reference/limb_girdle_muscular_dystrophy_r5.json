@@ -1,175 +1,491 @@
 {
- "id": "limb_girdle_muscular_dystrophy_r5",
- "name": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related)",
- "aliases": [
-  "LGMD R5",
-  "LGMD2C",
-  "SGCG",
-  "gamma-sarcoglycanopathy"
- ],
- "class": "non_infective",
- "system": "Neuromuscular / Limb-girdle muscular dystrophy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive muscular dystrophy of North African populations.",
-   "A recurrent founder deletion in SGCG is particularly common in North African communities, so ancestry and founder-variant testing can shorten the diagnostic pathway.",
-   "The phenotype is typically severe and Duchenne-like, with early childhood onset, calf hypertrophy, Gowers sign and often early loss of ambulation.",
-   "Serum creatine kinase is very high, in the range associated with dystrophinopathy.",
-   "As with the other sarcoglycanopathies, loss of gamma-sarcoglycan usually reduces immunostaining of the whole sarcoglycan complex.",
-   "Cardiac involvement occurs but has generally been reported as less consistent than in the beta- and delta-subtypes (LGMD R4 and R6).",
-   "Cognition is preserved, which helps separate it clinically from Duchenne muscular dystrophy."
+  "id": "limb_girdle_muscular_dystrophy_r5",
+  "name": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related)",
+  "aliases": [
+    "LGMD R5",
+    "LGMD2C",
+    "SGCG",
+    "gamma-sarcoglycanopathy"
   ],
-  "pathophysiology": "LGMD R5 results from biallelic pathogenic variants in SGCG on chromosome 13q12, encoding gamma-sarcoglycan, a transmembrane component of the sarcoglycan subcomplex of the dystrophin-associated glycoprotein complex. Like the other sarcoglycans, gamma assembles interdependently with alpha, beta and delta, so a pathogenic change reduces membrane expression of the whole tetramer and disrupts the structural link between the subsarcolemmal cytoskeleton and the extracellular matrix. The destabilised sarcolemma is vulnerable to mechanical stress during contraction, producing repetitive fibre necrosis and regeneration, inflammation and progressive fibro-fatty replacement. A specific recurrent founder deletion in SGCG accounts for a large share of cases in North African ancestry populations and typically produces a severe, early-onset phenotype, underpinning the historical designation of this subtype as a severe childhood recessive dystrophy.",
-  "additionalDifferentials": [
-   "Duchenne and Becker muscular dystrophy given the severe childhood proximal picture",
-   "Alpha-sarcoglycanopathy / LGMD R3 (SGCA)",
-   "Beta-sarcoglycanopathy / LGMD R4 (SGCB)",
-   "Delta-sarcoglycanopathy / LGMD R6 (SGCD)",
-   "LGMD R9 (FKRP-related) with calf hypertrophy",
-   "Calpainopathy / LGMD R1"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase (very high)",
-   "Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry",
-   "Muscle biopsy with immunohistochemistry for the sarcoglycan complex and dystrophin",
-   "Immunoblot to quantify sarcoglycan reduction",
-   "SGCG sequencing and deletion/duplication analysis or an LGMD gene panel",
-   "Baseline and surveillance echocardiography and pulmonary function testing"
-  ],
-  "redFlags": [
-   "Early loss of independent walking in childhood",
-   "Emerging respiratory muscle weakness with nocturnal hypoventilation",
-   "New cardiac symptoms or reduced ventricular function on imaging",
-   "Rapid scoliosis progression after loss of ambulation"
-  ],
-  "prognosis": "The phenotype is frequently severe, and many affected children lose independent ambulation relatively early, broadly resembling the trajectory of dystrophinopathy. Long-term outlook is shaped by progressive respiratory muscle weakness and, less consistently than in beta- or delta-subtypes, by cardiac involvement.",
-  "pitfalls": [
-   "Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis",
-   "Assuming milder disease by analogy with alpha-sarcoglycanopathy",
-   "Mislabelling as Duchenne muscular dystrophy without genetic confirmation",
-   "Neglecting scoliosis and respiratory surveillance once a child becomes non-ambulant"
-  ],
-  "references": [
-   "Standard neuromuscular and neurogenetics textbooks",
-   "Peer-reviewed limb-girdle muscular dystrophy classification and consensus statements",
-   "Muscular dystrophy clinical care guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team, reflecting the frequently severe Duchenne-like course",
-   "Physiotherapy and occupational therapy to prevent contractures, prolong ambulation and provide orthoses, walking aids and timely wheelchair provision",
-   "Respiratory surveillance with spirometry and introduction of non-invasive ventilation as respiratory muscle weakness advances",
-   "Cardiac surveillance with echocardiography and ECG, treating any cardiomyopathy with standard heart-failure therapy, while noting cardiac involvement is less consistent than in the beta- and delta-subtypes",
-   "Orthopaedic and spinal monitoring for scoliosis with corrective surgery where indicated",
-   "Genetic counselling and family screening given autosomal recessive inheritance, including targeted testing for the recurrent SGCG founder deletion in relatives of North African ancestry",
-   "Escalate to assisted ventilation and coordinated supportive care as ventilatory failure develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r5-pathway",
-   "title": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive muscular dystrophy of North African populations.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Early loss of independent walking in childhood",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase (very high), Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry, Muscle biopsy with immunohistochemistry for the sarcoglycan complex and dystrophin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team, reflecting the frequently severe Duchenne-like course"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r5 (gamma-sarcoglycan-related)."
-  }
- ],
- "tables": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r5-matrix",
-   "title": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive muscular dystrophy of North African populations.",
+      "A recurrent founder deletion in SGCG is particularly common in North African communities, so ancestry and founder-variant testing can shorten the diagnostic pathway.",
+      "The phenotype is typically severe and Duchenne-like, with early childhood onset, calf hypertrophy, Gowers sign and often early loss of ambulation.",
+      "Serum creatine kinase is very high, in the range associated with dystrophinopathy.",
+      "As with the other sarcoglycanopathies, loss of gamma-sarcoglycan usually reduces immunostaining of the whole sarcoglycan complex.",
+      "Cardiac involvement occurs but has generally been reported as less consistent than in the beta- and delta-subtypes (LGMD R4 and R6).",
+      "Cognition is preserved, which helps separate it clinically from Duchenne muscular dystrophy."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase (very high), Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "LGMD R5 results from biallelic pathogenic variants in SGCG on chromosome 13q12, encoding gamma-sarcoglycan, a transmembrane component of the sarcoglycan subcomplex of the dystrophin-associated glycoprotein complex. Like the other sarcoglycans, gamma assembles interdependently with alpha, beta and delta, so a pathogenic change reduces membrane expression of the whole tetramer and disrupts the structural link between the subsarcolemmal cytoskeleton and the extracellular matrix. The destabilised sarcolemma is vulnerable to mechanical stress during contraction, producing repetitive fibre necrosis and regeneration, inflammation and progressive fibro-fatty replacement. A specific recurrent founder deletion in SGCG accounts for a large share of cases in North African ancestry populations and typically produces a severe, early-onset phenotype, underpinning the historical designation of this subtype as a severe childhood recessive dystrophy.",
+    "additionalDifferentials": [
+      "Duchenne and Becker muscular dystrophy given the severe childhood proximal picture",
+      "Alpha-sarcoglycanopathy / LGMD R3 (SGCA)",
+      "Beta-sarcoglycanopathy / LGMD R4 (SGCB)",
+      "Delta-sarcoglycanopathy / LGMD R6 (SGCD)",
+      "LGMD R9 (FKRP-related) with calf hypertrophy",
+      "Calpainopathy / LGMD R1"
     ],
-    [
-     "Primary Differentials",
-     "Duchenne and Becker muscular dystrophy given the severe childhood proximal picture, Alpha-sarcoglycanopathy / LGMD R3 (SGCA),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase (very high)",
+      "Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry",
+      "Muscle biopsy with immunohistochemistry for the sarcoglycan complex and dystrophin",
+      "Immunoblot to quantify sarcoglycan reduction",
+      "SGCG sequencing and deletion/duplication analysis or an LGMD gene panel",
+      "Baseline and surveillance echocardiography and pulmonary function testing"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team,",
-     "Core treatment modality"
+    "redFlags": [
+      "Early loss of independent walking in childhood",
+      "Emerging respiratory muscle weakness with nocturnal hypoventilation",
+      "New cardiac symptoms or reduced ventricular function on imaging",
+      "Rapid scoliosis progression after loss of ambulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The phenotype is frequently severe, and many affected children lose independent ambulation relatively early, broadly resembling the trajectory of dystrophinopathy. Long-term outlook is shaped by progressive respiratory muscle weakness and, less consistently than in beta- or delta-subtypes, by cardiac involvement.",
+    "pitfalls": [
+      "Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis",
+      "Assuming milder disease by analogy with alpha-sarcoglycanopathy",
+      "Mislabelling as Duchenne muscular dystrophy without genetic confirmation",
+      "Neglecting scoliosis and respiratory surveillance once a child becomes non-ambulant"
+    ],
+    "references": [
+      "Standard neuromuscular and neurogenetics textbooks",
+      "Peer-reviewed limb-girdle muscular dystrophy classification and consensus statements",
+      "Muscular dystrophy clinical care guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team, reflecting the frequently severe Duchenne-like course",
+      "Physiotherapy and occupational therapy to prevent contractures, prolong ambulation and provide orthoses, walking aids and timely wheelchair provision",
+      "Respiratory surveillance with spirometry and introduction of non-invasive ventilation as respiratory muscle weakness advances",
+      "Cardiac surveillance with echocardiography and ECG, treating any cardiomyopathy with standard heart-failure therapy, while noting cardiac involvement is less consistent than in the beta- and delta-subtypes",
+      "Orthopaedic and spinal monitoring for scoliosis with corrective surgery where indicated",
+      "Genetic counselling and family screening given autosomal recessive inheritance, including targeted testing for the recurrent SGCG founder deletion in relatives of North African ancestry",
+      "Escalate to assisted ventilation and coordinated supportive care as ventilatory failure develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r5 (gamma-sarcoglycan-related)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "limb-girdle-muscular-dystrophy-r5-real-image",
-   "title": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "limb_girdle_muscular_dystrophy_r5-pathway",
+      "title": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive muscular dystrophy of North African populations.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Early loss of independent walking in childhood",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase (very high), Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry, Muscle biopsy with immunohistochemistry for the sarcoglycan complex and dystrophin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team, reflecting the frequently severe Duchenne-like course"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r5 (gamma-sarcoglycan-related)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5-matrix",
+      "title": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by recessive variants in SGCG encoding gamma-sarcoglycan; historically termed the severe childhood autosomal recessive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase (very high), Targeted testing for the recurrent SGCG founder deletion in patients of relevant ancestry,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Duchenne and Becker muscular dystrophy given the severe childhood proximal picture, Alpha-sarcoglycanopathy / LGMD R3 (SGCA),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific pharmacotherapy exists; management is supportive within a specialist neuromuscular multidisciplinary team,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not testing for the recurrent SGCG founder deletion in patients of North African ancestry, delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r5 (gamma-sarcoglycan-related)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Very high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted SGCG founder deletion testing",
+          "cells": [
+            {
+              "text": "Where the patient is of relevant ancestry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with sarcoglycan and dystrophin immunohistochemistry",
+          "cells": [
+            {
+              "text": "Sarcoglycan complex reduction; excludes dystrophinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoblot",
+          "cells": [
+            {
+              "text": "Quantifies the reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGCG sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and pulmonary function testing",
+          "cells": [
+            {
+              "text": "Cardiac and respiratory surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Duchenne and Becker muscular dystrophy",
+          "cells": [
+            {
+              "text": "Severe childhood proximal picture; dystrophin staining separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-sarcoglycanopathy (LGMD R3)",
+          "cells": [
+            {
+              "text": "Not milder by analogy; genetic testing decides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta- or delta-sarcoglycanopathy (LGMD R4, R6)",
+          "cells": [
+            {
+              "text": "Other sarcoglycan subtypes with different cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LGMD R9 (FKRP-related dystroglycanopathy)",
+          "cells": [
+            {
+              "text": "Calf hypertrophy and cardiorespiratory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Specialist neuromuscular team; no disease-specific pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Prevent contractures and prolong ambulation; orthoses, walking aids, timely wheelchair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Spirometry; non-invasive ventilation as weakness advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echo and ECG; heart-failure therapy for cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and spinal monitoring",
+          "cells": [
+            {
+              "text": "Scoliosis; corrective surgery where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; targeted testing of relatives for the founder deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Assisted ventilation and coordinated supportive care as failure develops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early childhood Duchenne-like proximal weakness with calf hypertrophy and very high CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (early loss of walking, hypoventilation, cardiac change, scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory and cardiac review with ventilation planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, SGCG founder deletion testing if relevant ancestry, biopsy, SGCG sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is SGCG loss confirmed by sequencing or the founder deletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Duchenne or Becker, other sarcoglycanopathies or FKRP-related dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to prevent contractures and prolong ambulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spirometry and non-invasive ventilation as weakness advances",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echo and ECG surveillance with heart-failure therapy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Scoliosis monitoring with corrective surgery where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and targeted testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often severe with early loss of walking, broadly like dystrophinopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

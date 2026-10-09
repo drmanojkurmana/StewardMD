@@ -1,175 +1,473 @@
 {
- "id": "ehlers_danlos_arthrochalasia",
- "name": "Arthrochalasia Ehlers-Danlos syndrome",
- "aliases": [
-  "aEDS",
-  "EDS type VIIA/VIIB",
-  "Arthrochalasis multiplex congenita"
- ],
- "class": "non_infective",
- "system": "Connective tissue / Skeletal",
- "specialty": "Clinical genetics / Paediatric orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and connective tissue disorder references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6, deleting the N-proteinase cleavage site of the proalpha chain of type I collagen.",
-   "The defining clinical feature is congenital bilateral hip dislocation together with severe generalised joint hypermobility and recurrent subluxations and dislocations.",
-   "Skin is hyperextensible with easy bruising and atrophic scarring, alongside muscle hypotonia, kyphoscoliosis and osteopenia.",
-   "It is the substrate-side mirror of dermatosparaxis: the same failure to remove the collagen N-propeptide, but caused by an abnormal collagen chain (dominant) rather than a deficient ADAMTS2 enzyme (recessive).",
-   "Collagen biochemistry from cultured fibroblasts shows retained pN-collagen (uncleaved proalpha chains).",
-   "Congenital hip dislocation may be misread as isolated developmental dysplasia; the accompanying hypermobility and skin findings are the clue.",
-   "Distinguish from Larsen syndrome, which also causes multiple congenital dislocations.",
-   "Management centres on joint protection and carefully planned orthopaedic care, as recurrent dislocation and early osteoarthritis dominate the course."
+  "id": "ehlers_danlos_arthrochalasia",
+  "name": "Arthrochalasia Ehlers-Danlos syndrome",
+  "aliases": [
+    "aEDS",
+    "EDS type VIIA/VIIB",
+    "Arthrochalasis multiplex congenita"
   ],
-  "pathophysiology": "Arthrochalasia Ehlers-Danlos syndrome is caused by heterozygous, usually dominantly acting mutations — most often splice-site variants that delete exon 6 — in COL1A1 (subtype 1, formerly VIIA) or COL1A2 (subtype 2, formerly VIIB). Exon 6 of these genes encodes the region of the amino-terminal propeptide that contains the recognition and cleavage site for procollagen I N-proteinase (ADAMTS2). When exon 6 is skipped, the N-propeptide cannot be removed, so pN-collagen persists and is incorporated into fibrils, disturbing fibril packing and markedly weakening ligaments, joint capsules and skin. The result is profound joint laxity with congenital hip dislocation and recurrent dislocations, skin hyperextensibility and fragility, hypotonia and reduced bone mass. Because the defect lies in the collagen substrate rather than the processing enzyme, inheritance is dominant, in contrast to the recessive, enzyme-deficient dermatosparaxis form that shares the same molecular endpoint.",
-  "additionalDifferentials": [
-   "Other Ehlers-Danlos subtypes (classical, hypermobile and dermatosparaxis)",
-   "Larsen syndrome (FLNB-related multiple congenital dislocations)",
-   "Isolated developmental dysplasia of the hip",
-   "Arthrogryposis and other congenital contracture syndromes",
-   "Marfan and Loeys-Dietz syndromes",
-   "Spondyloepiphyseal dysplasia"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants",
-   "Biochemical collagen analysis of cultured fibroblasts showing uncleaved pN-collagen chains",
-   "Radiographs of the hips and spine for dislocation and kyphoscoliosis",
-   "Electron microscopy of skin for abnormal collagen fibrils",
-   "Bone densitometry for osteopenia",
-   "Orthopaedic assessment of joint stability"
-  ],
-  "redFlags": [
-   "Recurrent or irreducible major joint dislocations",
-   "Congenital bilateral hip dislocation requiring specialist management",
-   "Progressive kyphoscoliosis",
-   "Fragility fracture in the context of low bone mass"
-  ],
-  "prognosis": "Life expectancy is generally normal, but chronic joint instability, pain, recurrent dislocation and early osteoarthritis cause substantial disability, and hip reconstruction is complicated by fragile tissues and a tendency to re-dislocate.",
-  "pitfalls": [
-   "Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome",
-   "Undertaking surgical stabilisation without allowing for fragile tissues and high re-dislocation rates",
-   "Confusing the picture with Larsen syndrome",
-   "Overlooking the skin fragility and atrophic scarring"
-  ],
-  "references": [
-   "Clinical genetics reference texts",
-   "International Ehlers-Danlos syndromes classification guidance",
-   "Connective tissue disorder reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and reduce dislocations",
-   "Manage recurrent dislocations and congenital hip dislocation with orthopaedic care, bracing and reconstructive surgery, anticipating fragile tissues and re-dislocation",
-   "Practise meticulous skin and wound care with careful suturing and support, given hyperextensible, fragile skin with atrophic scarring and easy bruising",
-   "Assess and manage reduced bone mass with bone densitometry, calcium and vitamin D optimisation and weight-bearing exercise, and treat kyphoscoliosis",
-   "Provide analgesia and multidisciplinary chronic-pain management with occupational therapy and mobility aids",
-   "Monitor for early osteoarthritis and progressive spinal deformity",
-   "Coordinate clinical genetics, orthopaedics and physiotherapy, and offer genetic counselling for autosomal dominant COL1A1 or COL1A2 variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ehlers_danlos_arthrochalasia-pathway",
-   "title": "Arthrochalasia Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6, deleting the N-proteinase cleavage site of the proalpha chain of type I collagen.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or irreducible major joint dislocations",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants, Biochemical collagen analysis of cultured fibroblasts showing uncleaved pN-collagen chains, Radiographs of the hips and spine for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and reduce dislocations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arthrochalasia ehlers-danlos syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "ehlers_danlos_arthrochalasia-matrix",
-   "title": "Arthrochalasia Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Connective tissue / Skeletal",
+  "specialty": "Clinical genetics / Paediatric orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and connective tissue disorder references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6, deleting the N-proteinase cleavage site of the proalpha chain of type I collagen.",
+      "The defining clinical feature is congenital bilateral hip dislocation together with severe generalised joint hypermobility and recurrent subluxations and dislocations.",
+      "Skin is hyperextensible with easy bruising and atrophic scarring, alongside muscle hypotonia, kyphoscoliosis and osteopenia.",
+      "It is the substrate-side mirror of dermatosparaxis: the same failure to remove the collagen N-propeptide, but caused by an abnormal collagen chain (dominant) rather than a deficient ADAMTS2 enzyme (recessive).",
+      "Collagen biochemistry from cultured fibroblasts shows retained pN-collagen (uncleaved proalpha chains).",
+      "Congenital hip dislocation may be misread as isolated developmental dysplasia; the accompanying hypermobility and skin findings are the clue.",
+      "Distinguish from Larsen syndrome, which also causes multiple congenital dislocations.",
+      "Management centres on joint protection and carefully planned orthopaedic care, as recurrent dislocation and early osteoarthritis dominate the course."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants, Biochemical collagen analysis of cultured",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Arthrochalasia Ehlers-Danlos syndrome is caused by heterozygous, usually dominantly acting mutations — most often splice-site variants that delete exon 6 — in COL1A1 (subtype 1, formerly VIIA) or COL1A2 (subtype 2, formerly VIIB). Exon 6 of these genes encodes the region of the amino-terminal propeptide that contains the recognition and cleavage site for procollagen I N-proteinase (ADAMTS2). When exon 6 is skipped, the N-propeptide cannot be removed, so pN-collagen persists and is incorporated into fibrils, disturbing fibril packing and markedly weakening ligaments, joint capsules and skin. The result is profound joint laxity with congenital hip dislocation and recurrent dislocations, skin hyperextensibility and fragility, hypotonia and reduced bone mass. Because the defect lies in the collagen substrate rather than the processing enzyme, inheritance is dominant, in contrast to the recessive, enzyme-deficient dermatosparaxis form that shares the same molecular endpoint.",
+    "additionalDifferentials": [
+      "Other Ehlers-Danlos subtypes (classical, hypermobile and dermatosparaxis)",
+      "Larsen syndrome (FLNB-related multiple congenital dislocations)",
+      "Isolated developmental dysplasia of the hip",
+      "Arthrogryposis and other congenital contracture syndromes",
+      "Marfan and Loeys-Dietz syndromes",
+      "Spondyloepiphyseal dysplasia"
     ],
-    [
-     "Primary Differentials",
-     "Other Ehlers-Danlos subtypes (classical, hypermobile and dermatosparaxis), Larsen syndrome (FLNB-related multiple congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants",
+      "Biochemical collagen analysis of cultured fibroblasts showing uncleaved pN-collagen chains",
+      "Radiographs of the hips and spine for dislocation and kyphoscoliosis",
+      "Electron microscopy of skin for abnormal collagen fibrils",
+      "Bone densitometry for osteopenia",
+      "Orthopaedic assessment of joint stability"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or irreducible major joint dislocations",
+      "Congenital bilateral hip dislocation requiring specialist management",
+      "Progressive kyphoscoliosis",
+      "Fragility fracture in the context of low bone mass"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is generally normal, but chronic joint instability, pain, recurrent dislocation and early osteoarthritis cause substantial disability, and hip reconstruction is complicated by fragile tissues and a tendency to re-dislocate.",
+    "pitfalls": [
+      "Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome",
+      "Undertaking surgical stabilisation without allowing for fragile tissues and high re-dislocation rates",
+      "Confusing the picture with Larsen syndrome",
+      "Overlooking the skin fragility and atrophic scarring"
+    ],
+    "references": [
+      "Clinical genetics reference texts",
+      "International Ehlers-Danlos syndromes classification guidance",
+      "Connective tissue disorder reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and reduce dislocations",
+      "Manage recurrent dislocations and congenital hip dislocation with orthopaedic care, bracing and reconstructive surgery, anticipating fragile tissues and re-dislocation",
+      "Practise meticulous skin and wound care with careful suturing and support, given hyperextensible, fragile skin with atrophic scarring and easy bruising",
+      "Assess and manage reduced bone mass with bone densitometry, calcium and vitamin D optimisation and weight-bearing exercise, and treat kyphoscoliosis",
+      "Provide analgesia and multidisciplinary chronic-pain management with occupational therapy and mobility aids",
+      "Monitor for early osteoarthritis and progressive spinal deformity",
+      "Coordinate clinical genetics, orthopaedics and physiotherapy, and offer genetic counselling for autosomal dominant COL1A1 or COL1A2 variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for arthrochalasia ehlers-danlos syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ehlers-danlos-arthrochalasia-real-image",
-   "title": "Arthrochalasia Ehlers-Danlos syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ehlers_danlos_arthrochalasia-pathway",
+      "title": "Arthrochalasia Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6, deleting the N-proteinase cleavage site of the proalpha chain of type I collagen.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or irreducible major joint dislocations",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants, Biochemical collagen analysis of cultured fibroblasts showing uncleaved pN-collagen chains, Radiographs of the hips and spine for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and reduce dislocations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arthrochalasia ehlers-danlos syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ehlers_danlos_arthrochalasia-matrix",
+      "title": "Arthrochalasia Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant subtype caused by mutations in COL1A1 (type 1/VIIA) or COL1A2 (type 2/VIIB) that cause skipping of exon 6,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of COL1A1 and COL1A2, targeting exon 6 splice variants, Biochemical collagen analysis of cultured",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other Ehlers-Danlos subtypes (classical, hypermobile and dermatosparaxis), Larsen syndrome (FLNB-related multiple congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists; centre care on physiotherapy and muscle strengthening to stabilise hypermobile joints and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the congenital hip dislocation as isolated developmental dysplasia and missing the syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arthrochalasia ehlers-danlos syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and connective tissue disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ehlers_danlos_arthrochalasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "COL1A1 and COL1A2 testing, exon 6 splice variants",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroblast collagen analysis",
+          "cells": [
+            {
+              "text": "Uncleaved pN-collagen chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip and spine radiographs",
+          "cells": [
+            {
+              "text": "Dislocation and kyphoscoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin electron microscopy",
+          "cells": [
+            {
+              "text": "Abnormal collagen fibrils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone densitometry",
+          "cells": [
+            {
+              "text": "Osteopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_arthrochalasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classical or hypermobile EDS",
+          "cells": [
+            {
+              "text": "Hypermobility without congenital dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Larsen syndrome",
+          "cells": [
+            {
+              "text": "Multiple congenital dislocations from FLNB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated developmental dysplasia of the hip",
+          "cells": [
+            {
+              "text": "Hip dislocation without syndromic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan or Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "Aortic and skeletal features without dislocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ehlers_danlos_arthrochalasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Muscle strengthening to stabilise hypermobile joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Bracing and reconstruction for dislocation, anticipating re-dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and wound care",
+          "cells": [
+            {
+              "text": "Careful suturing and support for fragile, atrophic skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Densitometry, calcium and vitamin D, weight-bearing exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and function",
+          "cells": [
+            {
+              "text": "Analgesia, chronic-pain management and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant COL1A1 or COL1A2 variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ehlers_danlos_arthrochalasia-dx-mgmt",
+      "title": "Diagnosis and management of Arthrochalasia Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected arthrochalasia EDS: congenital hip dislocation with joint hypermobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (irreducible dislocation, progressive kyphoscoliosis, fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for irreducible or recurrent major dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "COL1A1 and COL1A2 testing; fibroblast collagen study; hip and spine radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an exon 6 splice variant in COL1A1 or COL1A2 found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated hip dysplasia, Larsen syndrome or other EDS subtypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and muscle strengthening for hypermobile joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic bracing and reconstruction, allowing for fragile tissues",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful skin closure and wound support given atrophic scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone density assessment with calcium, vitamin D and weight-bearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life expectancy normal; instability, pain and early osteoarthritis cause disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

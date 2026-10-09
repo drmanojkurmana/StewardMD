@@ -1,175 +1,503 @@
 {
- "id": "alg3_cdg",
- "name": "ALG3-CDG (CDG-Id)",
- "aliases": [
-  "ALG3",
-  "congenital disorder of glycosylation type Id",
-  "CDG-Id",
-  "dolichyl-P-mannose:Man5GlcNAc2-PP-dolichol mannosyltransferase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
-   "Presents with severe developmental delay, profound microcephaly, hypotonia and drug-resistant seizures",
-   "Ophthalmological anomalies including optic atrophy and cortical visual impairment are commonly reported",
-   "Skeletal abnormalities, dysmorphism, feeding difficulties and failure to thrive are part of the phenotype",
-   "Serum transferrin isoelectric focusing shows a type I pattern from under-occupancy of N-glycan sites",
-   "Coagulation and hepatic abnormalities may accompany the neurological picture",
-   "Management is supportive and multidisciplinary; ALG3 sequencing confirms the diagnosis"
+  "id": "alg3_cdg",
+  "name": "ALG3-CDG (CDG-Id)",
+  "aliases": [
+    "ALG3",
+    "congenital disorder of glycosylation type Id",
+    "CDG-Id",
+    "dolichyl-P-mannose:Man5GlcNAc2-PP-dolichol mannosyltransferase deficiency"
   ],
-  "pathophysiology": "ALG3 encodes a dolichol-phosphate-mannose-dependent mannosyltransferase acting on the endoplasmic reticulum-luminal face during assembly of the dolichol-linked oligosaccharide precursor. Loss of function yields a truncated precursor that is transferred inefficiently to protein, leaving N-linked sites under-occupied and generating a type I transferrin pattern. Because the block is in precursor assembly rather than glycan processing, the disorder is classified as type I. Widespread hypoglycosylation impairs neuronal, ocular and other glycoproteins, producing the severe neurodevelopmental and multisystem phenotype.",
-  "additionalDifferentials": [
-   "Other type I CDG subtypes (e.g. ALG1-CDG, ALG12-CDG, PMM2-CDG)",
-   "Genetic causes of severe microcephaly with epileptic encephalopathy",
-   "Peroxisomal biogenesis disorders",
-   "Mitochondrial encephalopathies",
-   "Congenital causes of optic atrophy with developmental delay",
-   "Structural brain malformation syndromes"
-  ],
-  "additionalInvestigations": [
-   "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern",
-   "ALG3 molecular genetic testing",
-   "Neuroimaging for microcephaly and structural change",
-   "Electroencephalography for seizures",
-   "Ophthalmological assessment including optic nerve evaluation",
-   "Coagulation and liver function studies"
-  ],
-  "redFlags": [
-   "Drug-resistant seizures with progressive encephalopathy",
-   "Severe or progressive microcephaly",
-   "Visual deterioration from optic atrophy",
-   "Failure to thrive with multi-organ involvement"
-  ],
-  "prognosis": "ALG3-CDG is a severe disorder with profound neurodevelopmental disability and significant early morbidity and mortality; prognosis is generally poor and correlates with residual enzyme activity and complication burden.",
-  "pitfalls": [
-   "Attributing the transferrin abnormality to secondary causes without genetic confirmation",
-   "Overlooking the coagulopathy before procedures",
-   "Assuming disease-modifying therapy exists when only supportive care is available",
-   "Missing associated ophthalmological complications that need surveillance"
-  ],
-  "references": [
-   "Scriver's OMMBID, congenital disorders of glycosylation",
-   "Nelson Textbook of Paediatrics, disorders of glycosylation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of hypoglycosylation",
-   "Control drug-resistant seizures with antiseizure medication tailored under paediatric neurology guidance",
-   "Optimise nutrition and growth with dietitian-led feeding support and gastrostomy feeding for feeding difficulties and failure to thrive",
-   "Support development and hypotonia with physiotherapy, occupational therapy and speech and language therapy",
-   "Provide ophthalmology input and low-vision support for optic atrophy and cortical visual impairment",
-   "Monitor and correct coagulation and hepatic abnormalities, seeking haematology advice before procedures",
-   "Coordinate multidisciplinary metabolic, neurology and rehabilitation care with early palliative involvement given the severe prognosis",
-   "Offer genetic counselling, prenatal testing and family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alg3_cdg-pathway",
-   "title": "ALG3-CDG (CDG-Id): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Drug-resistant seizures with progressive encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, ALG3 molecular genetic testing, Neuroimaging for microcephaly and structural change"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of hypoglycosylation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the transferrin abnormality to secondary causes without genetic confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alg3-cdg (cdg-id)."
-  }
- ],
- "tables": [
-  {
-   "id": "alg3_cdg-matrix",
-   "title": "ALG3-CDG (CDG-Id): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
+      "Presents with severe developmental delay, profound microcephaly, hypotonia and drug-resistant seizures",
+      "Ophthalmological anomalies including optic atrophy and cortical visual impairment are commonly reported",
+      "Skeletal abnormalities, dysmorphism, feeding difficulties and failure to thrive are part of the phenotype",
+      "Serum transferrin isoelectric focusing shows a type I pattern from under-occupancy of N-glycan sites",
+      "Coagulation and hepatic abnormalities may accompany the neurological picture",
+      "Management is supportive and multidisciplinary; ALG3 sequencing confirms the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, ALG3 molecular genetic testing, Neuroimaging for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ALG3 encodes a dolichol-phosphate-mannose-dependent mannosyltransferase acting on the endoplasmic reticulum-luminal face during assembly of the dolichol-linked oligosaccharide precursor. Loss of function yields a truncated precursor that is transferred inefficiently to protein, leaving N-linked sites under-occupied and generating a type I transferrin pattern. Because the block is in precursor assembly rather than glycan processing, the disorder is classified as type I. Widespread hypoglycosylation impairs neuronal, ocular and other glycoproteins, producing the severe neurodevelopmental and multisystem phenotype.",
+    "additionalDifferentials": [
+      "Other type I CDG subtypes (e.g. ALG1-CDG, ALG12-CDG, PMM2-CDG)",
+      "Genetic causes of severe microcephaly with epileptic encephalopathy",
+      "Peroxisomal biogenesis disorders",
+      "Mitochondrial encephalopathies",
+      "Congenital causes of optic atrophy with developmental delay",
+      "Structural brain malformation syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Other type I CDG subtypes (e.g. ALG1-CDG, ALG12-CDG, PMM2-CDG), Genetic causes of severe microcephaly with epileptic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern",
+      "ALG3 molecular genetic testing",
+      "Neuroimaging for microcephaly and structural change",
+      "Electroencephalography for seizures",
+      "Ophthalmological assessment including optic nerve evaluation",
+      "Coagulation and liver function studies"
     ],
-    [
-     "Management Strategy",
-     "No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of",
-     "Core treatment modality"
+    "redFlags": [
+      "Drug-resistant seizures with progressive encephalopathy",
+      "Severe or progressive microcephaly",
+      "Visual deterioration from optic atrophy",
+      "Failure to thrive with multi-organ involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the transferrin abnormality to secondary causes without genetic confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "ALG3-CDG is a severe disorder with profound neurodevelopmental disability and significant early morbidity and mortality; prognosis is generally poor and correlates with residual enzyme activity and complication burden.",
+    "pitfalls": [
+      "Attributing the transferrin abnormality to secondary causes without genetic confirmation",
+      "Overlooking the coagulopathy before procedures",
+      "Assuming disease-modifying therapy exists when only supportive care is available",
+      "Missing associated ophthalmological complications that need surveillance"
+    ],
+    "references": [
+      "Scriver's OMMBID, congenital disorders of glycosylation",
+      "Nelson Textbook of Paediatrics, disorders of glycosylation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of hypoglycosylation",
+      "Control drug-resistant seizures with antiseizure medication tailored under paediatric neurology guidance",
+      "Optimise nutrition and growth with dietitian-led feeding support and gastrostomy feeding for feeding difficulties and failure to thrive",
+      "Support development and hypotonia with physiotherapy, occupational therapy and speech and language therapy",
+      "Provide ophthalmology input and low-vision support for optic atrophy and cortical visual impairment",
+      "Monitor and correct coagulation and hepatic abnormalities, seeking haematology advice before procedures",
+      "Coordinate multidisciplinary metabolic, neurology and rehabilitation care with early palliative involvement given the severe prognosis",
+      "Offer genetic counselling, prenatal testing and family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for alg3-cdg (cdg-id)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alg3-cdg-real-image",
-   "title": "ALG3-CDG (CDG-Id): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alg3_cdg-pathway",
+      "title": "ALG3-CDG (CDG-Id): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Drug-resistant seizures with progressive encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, ALG3 molecular genetic testing, Neuroimaging for microcephaly and structural change"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of hypoglycosylation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the transferrin abnormality to secondary causes without genetic confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alg3-cdg (cdg-id)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alg3_cdg-matrix",
+      "title": "ALG3-CDG (CDG-Id): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An N-linked type I CDG caused by ALG3 deficiency, a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, ALG3 molecular genetic testing, Neuroimaging for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other type I CDG subtypes (e.g. ALG1-CDG, ALG12-CDG, PMM2-CDG), Genetic causes of severe microcephaly with epileptic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative or disease-specific therapy exists; care is supportive and directed at the multisystem consequences of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the transferrin abnormality to secondary causes without genetic confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alg3-cdg (cdg-id)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alg3_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALG3 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic ALG3 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging for microcephaly and structural change",
+          "cells": [
+            {
+              "text": "Microcephaly and structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment including optic nerve evaluation",
+          "cells": [
+            {
+              "text": "Optic atrophy and visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and liver function studies",
+          "cells": [
+            {
+              "text": "Multi-organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg3_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "ALG1-CDG",
+          "cells": [
+            {
+              "text": "Another type I CDG subtype"
+            },
+            {
+              "text": "Gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALG12-CDG",
+          "cells": [
+            {
+              "text": "Another type I CDG subtype"
+            },
+            {
+              "text": "Gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMM2-CDG",
+          "cells": [
+            {
+              "text": "Another type I CDG subtype"
+            },
+            {
+              "text": "Gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg3_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication tailored under paediatric neurology guidance",
+          "cells": [
+            {
+              "text": "Drug-resistant seizures"
+            },
+            {
+              "text": "Type-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-led feeding support and gastrostomy feeding",
+          "cells": [
+            {
+              "text": "Feeding difficulty and failure to thrive"
+            },
+            {
+              "text": "Gastrostomy when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and speech and language therapy",
+          "cells": [
+            {
+              "text": "Hypotonia and developmental delay"
+            },
+            {
+              "text": "Developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology input and low-vision support",
+          "cells": [
+            {
+              "text": "Optic atrophy and cortical visual impairment"
+            },
+            {
+              "text": "Low-vision support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and hepatic monitoring; haematology advice before procedures",
+          "cells": [
+            {
+              "text": "Coagulation and liver abnormalities"
+            },
+            {
+              "text": "Before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary metabolic, neurology and rehabilitation care with early palliative involvement",
+          "cells": [
+            {
+              "text": "Severe prognosis"
+            },
+            {
+              "text": "Early palliative input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling, prenatal testing and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alg3_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ALG3-CDG (CDG-Id)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe microcephaly, hypotonia, drug-resistant seizures and optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive encephalopathy, severe microcephaly or visual deterioration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and ophthalmology review; seizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin isoelectric focusing or mass spectrometry; EEG; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type I pattern with biallelic ALG3 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling, prenatal testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review ALG1, ALG12, PMM2-CDG and mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication tailored under neurology guidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy feeding and dietitian support for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy; low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe disorder with profound disability; early palliative involvement advised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

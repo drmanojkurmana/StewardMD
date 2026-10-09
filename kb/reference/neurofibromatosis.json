@@ -1,174 +1,434 @@
 {
- "id": "neurofibromatosis",
- "name": "Neurofibromatosis",
- "aliases": [
-  "NF1",
-  "NF2",
-  "von Recklinghausen disease",
-  "neurofibromatosis type 1",
-  "neurofibromatosis type 2"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling, neurofibromas, Lisch nodules, optic pathway glioma, characteristic bony lesions, and an affected first-degree relative",
-   "Cafe-au-lait macules and axillary or inguinal freckling are usually the earliest features in NF1",
-   "Optic pathway gliomas are a recognised childhood complication and warrant ophthalmological and imaging surveillance",
-   "Plexiform neurofibromas can be disfiguring and carry a risk of malignant transformation",
-   "Neurofibromatosis type 2 is distinct, typically presenting with bilateral vestibular schwannomas causing hearing loss, tinnitus, and balance problems",
-   "NF1 is caused by mutations in the NF1 gene encoding neurofibromin, a tumour suppressor regulating RAS signalling; NF2 involves the NF2 gene encoding merlin",
-   "Both are autosomal dominant with high penetrance, variable expressivity, and a high de novo mutation rate",
-   "Learning difficulties, hypertension, and skeletal complications such as scoliosis are common in NF1"
+  "id": "neurofibromatosis",
+  "name": "Neurofibromatosis",
+  "aliases": [
+    "NF1",
+    "NF2",
+    "von Recklinghausen disease",
+    "neurofibromatosis type 1",
+    "neurofibromatosis type 2"
   ],
-  "pathophysiology": "Neurofibromatosis type 1 is caused by loss-of-function mutations in the NF1 gene, which encodes neurofibromin, a GTPase-activating protein that downregulates RAS signalling; loss of neurofibromin increases RAS-pathway activity and predisposes to tumour formation in neural crest-derived tissues. Neurofibromatosis type 2 results from mutations in the NF2 gene encoding merlin (schwannomin), another tumour suppressor, leading characteristically to schwannomas and meningiomas. Both disorders are inherited in an autosomal dominant manner but frequently arise de novo, and tumour development typically follows a second somatic hit inactivating the remaining normal allele, consistent with the two-hit tumour suppressor model.",
-  "additionalDifferentials": [
-   "Legius syndrome (cafe-au-lait macules without neurofibromas)",
-   "McCune-Albright syndrome",
-   "Schwannomatosis",
-   "Constitutional mismatch repair deficiency",
-   "Multiple lipomatosis"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed",
-   "Ophthalmological examination including slit-lamp for Lisch nodules and optic pathway assessment",
-   "Magnetic resonance imaging for suspected central or peripheral nervous system tumours",
-   "Blood pressure monitoring for hypertension including phaeochromocytoma and renal artery stenosis",
-   "Audiological evaluation and brain imaging for suspected NF2"
-  ],
-  "redFlags": [
-   "New or rapidly enlarging, painful, or firm masses suggesting malignant peripheral nerve sheath tumour and needing urgent evaluation",
-   "Visual changes indicating optic pathway glioma progression",
-   "Hypertension that may reflect phaeochromocytoma or renovascular disease",
-   "Progressive hearing loss or neurological signs from vestibular schwannomas or other tumours in NF2"
-  ],
-  "prognosis": "Most people with NF1 have a good quality of life, but morbidity and reduced life expectancy relate to tumour complications, particularly malignant peripheral nerve sheath tumours and vascular disease; NF2 prognosis depends on the burden and location of nervous system tumours.",
-  "pitfalls": [
-   "Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome",
-   "Failing to institute malignancy surveillance for changing plexiform neurofibromas",
-   "Overlooking hypertension and its treatable secondary causes",
-   "Missing NF2 in a young adult with unilateral or bilateral hearing loss"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist neurofibromatosis service",
-   "Monitor children with regular clinical review, blood pressure checks and ophthalmological and visual assessment for optic pathway glioma",
-   "Treat symptomatic or progressive inoperable plexiform neurofibromas with a MEK inhibitor (selumetinib) and refer for surgery where appropriate",
-   "Investigate and manage malignant peripheral nerve sheath tumour promptly with oncological and surgical care when a plexiform lesion becomes painful or rapidly enlarging",
-   "Screen for and manage hypertension, including secondary causes such as phaeochromocytoma and renal artery stenosis",
-   "Address skeletal, learning and psychosocial complications with orthopaedic, educational and psychological support",
-   "For neurofibromatosis type 2, undertake audiological monitoring and MRI surveillance for vestibular schwannomas with hearing-preservation strategies",
-   "Offer genetic counselling and family assessment given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurofibromatosis-pathway",
-   "title": "Neurofibromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling, neurofibromas, Lisch nodules, optic pathway glioma, characteristic bony lesions, and an affected first-degree",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or rapidly enlarging, painful, or firm masses suggesting malignant peripheral nerve sheath tumour and needing urgent evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed, Ophthalmological examination including slit-lamp for Lisch nodules and optic pathway assessment, Magnetic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist neurofibromatosis service"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurofibromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "neurofibromatosis-matrix",
-   "title": "Neurofibromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling, neurofibromas, Lisch nodules, optic pathway glioma, characteristic bony lesions, and an affected first-degree relative",
+      "Cafe-au-lait macules and axillary or inguinal freckling are usually the earliest features in NF1",
+      "Optic pathway gliomas are a recognised childhood complication and warrant ophthalmological and imaging surveillance",
+      "Plexiform neurofibromas can be disfiguring and carry a risk of malignant transformation",
+      "Neurofibromatosis type 2 is distinct, typically presenting with bilateral vestibular schwannomas causing hearing loss, tinnitus, and balance problems",
+      "NF1 is caused by mutations in the NF1 gene encoding neurofibromin, a tumour suppressor regulating RAS signalling; NF2 involves the NF2 gene encoding merlin",
+      "Both are autosomal dominant with high penetrance, variable expressivity, and a high de novo mutation rate",
+      "Learning difficulties, hypertension, and skeletal complications such as scoliosis are common in NF1"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neurofibromatosis type 1 is caused by loss-of-function mutations in the NF1 gene, which encodes neurofibromin, a GTPase-activating protein that downregulates RAS signalling; loss of neurofibromin increases RAS-pathway activity and predisposes to tumour formation in neural crest-derived tissues. Neurofibromatosis type 2 results from mutations in the NF2 gene encoding merlin (schwannomin), another tumour suppressor, leading characteristically to schwannomas and meningiomas. Both disorders are inherited in an autosomal dominant manner but frequently arise de novo, and tumour development typically follows a second somatic hit inactivating the remaining normal allele, consistent with the two-hit tumour suppressor model.",
+    "additionalDifferentials": [
+      "Legius syndrome (cafe-au-lait macules without neurofibromas)",
+      "McCune-Albright syndrome",
+      "Schwannomatosis",
+      "Constitutional mismatch repair deficiency",
+      "Multiple lipomatosis"
     ],
-    [
-     "Primary Differentials",
-     "Legius syndrome (cafe-au-lait macules without neurofibromas), McCune-Albright syndrome, Schwannomatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed",
+      "Ophthalmological examination including slit-lamp for Lisch nodules and optic pathway assessment",
+      "Magnetic resonance imaging for suspected central or peripheral nervous system tumours",
+      "Blood pressure monitoring for hypertension including phaeochromocytoma and renal artery stenosis",
+      "Audiological evaluation and brain imaging for suspected NF2"
     ],
-    [
-     "Management Strategy",
-     "There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist",
-     "Core treatment modality"
+    "redFlags": [
+      "New or rapidly enlarging, painful, or firm masses suggesting malignant peripheral nerve sheath tumour and needing urgent evaluation",
+      "Visual changes indicating optic pathway glioma progression",
+      "Hypertension that may reflect phaeochromocytoma or renovascular disease",
+      "Progressive hearing loss or neurological signs from vestibular schwannomas or other tumours in NF2"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most people with NF1 have a good quality of life, but morbidity and reduced life expectancy relate to tumour complications, particularly malignant peripheral nerve sheath tumours and vascular disease; NF2 prognosis depends on the burden and location of nervous system tumours.",
+    "pitfalls": [
+      "Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome",
+      "Failing to institute malignancy surveillance for changing plexiform neurofibromas",
+      "Overlooking hypertension and its treatable secondary causes",
+      "Missing NF2 in a young adult with unilateral or bilateral hearing loss"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist neurofibromatosis service",
+      "Monitor children with regular clinical review, blood pressure checks and ophthalmological and visual assessment for optic pathway glioma",
+      "Treat symptomatic or progressive inoperable plexiform neurofibromas with a MEK inhibitor (selumetinib) and refer for surgery where appropriate",
+      "Investigate and manage malignant peripheral nerve sheath tumour promptly with oncological and surgical care when a plexiform lesion becomes painful or rapidly enlarging",
+      "Screen for and manage hypertension, including secondary causes such as phaeochromocytoma and renal artery stenosis",
+      "Address skeletal, learning and psychosocial complications with orthopaedic, educational and psychological support",
+      "For neurofibromatosis type 2, undertake audiological monitoring and MRI surveillance for vestibular schwannomas with hearing-preservation strategies",
+      "Offer genetic counselling and family assessment given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurofibromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurofibromatosis-real-image",
-   "title": "Neurofibromatosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neurofibromatosis-pathway",
+      "title": "Neurofibromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling, neurofibromas, Lisch nodules, optic pathway glioma, characteristic bony lesions, and an affected first-degree",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or rapidly enlarging, painful, or firm masses suggesting malignant peripheral nerve sheath tumour and needing urgent evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed, Ophthalmological examination including slit-lamp for Lisch nodules and optic pathway assessment, Magnetic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist neurofibromatosis service"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurofibromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurofibromatosis-matrix",
+      "title": "Neurofibromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neurofibromatosis type 1 is diagnosed clinically using criteria that include multiple cafe-au-lait macules, skinfold freckling,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment against established diagnostic criteria, supported by NF1 or NF2 molecular testing when needed,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Legius syndrome (cafe-au-lait macules without neurofibromas), McCune-Albright syndrome, Schwannomatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no cure, so care centres on structured lifelong surveillance for the many complications, coordinated by a specialist",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing multiple cafe-au-lait macules alone to NF1 without considering mimics such as Legius syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurofibromatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurofibromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment against diagnostic criteria",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules, freckling, neurofibromas, Lisch nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF1 or NF2 molecular testing",
+          "cells": [
+            {
+              "text": "When needed to confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Lisch nodules and optic pathway assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Suspected central or peripheral nervous system tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Hypertension, including phaeochromocytoma and renal artery stenosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurofibromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Legius syndrome",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules without neurofibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 2",
+          "cells": [
+            {
+              "text": "Bilateral vestibular schwannomas causing hearing loss, tinnitus and imbalance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurofibromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Selumetinib",
+          "cells": [
+            {
+              "text": "MEK inhibitor for symptomatic or progressive plexiform neurofibromas; surgery where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant peripheral nerve sheath tumour work-up",
+          "cells": [
+            {
+              "text": "Prompt evaluation when a plexiform lesion becomes painful or rapidly enlarging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure screening",
+          "cells": [
+            {
+              "text": "Including phaeochromocytoma and renal artery stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic surveillance",
+          "cells": [
+            {
+              "text": "For optic pathway glioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurofibromatosis-dx-mgmt",
+      "title": "Diagnosis and management of Neurofibromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple cafe-au-lait macules, axillary freckling or neurofibromas in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (painful or rapidly enlarging mass, visual change, hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncological review for suspected malignant nerve sheath tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic criteria, NF1 testing, slit-lamp, MRI, blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diagnostic criteria met with an NF1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Legius syndrome or NF2; test accordingly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Selumetinib for symptomatic or progressive plexiform neurofibromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Blood pressure screening, including phaeochromocytoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmic surveillance for optic pathway glioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good quality of life for most; tumour complications and malignancy drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

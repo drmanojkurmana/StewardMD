@@ -1,175 +1,473 @@
 {
- "id": "i_cell_disease",
- "name": "I-cell disease (mucolipidosis II)",
- "aliases": [
-  "mucolipidosis II",
-  "ML II",
-  "inclusion cell disease",
-  "GNPTAB deficiency",
-  "N-acetylglucosamine-1-phosphotransferase deficiency (alpha/beta)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single enzyme being deficient",
-   "Clinically resembles a severe mucopolysaccharidosis with early onset of coarse facies, dysostosis multiplex, and organomegaly, but usually without corneal clouding or urinary glycosaminoglycan excess",
-   "Characteristic phase-dense cytoplasmic inclusions in cultured fibroblasts give the disease its name",
-   "Presents in early infancy with growth failure, gingival hypertrophy, and skeletal changes, often noted at or soon after birth",
-   "A key diagnostic clue is markedly elevated activity of several lysosomal enzymes in plasma or serum, with correspondingly low intracellular activity",
-   "Caused by variants in GNPTAB affecting the alpha/beta subunits of GlcNAc-1-phosphotransferase",
-   "Mucolipidosis III (pseudo-Hurler polydystrophy) is the milder, allelic or related disorder in the same pathway"
+  "id": "i_cell_disease",
+  "name": "I-cell disease (mucolipidosis II)",
+  "aliases": [
+    "mucolipidosis II",
+    "ML II",
+    "inclusion cell disease",
+    "GNPTAB deficiency",
+    "N-acetylglucosamine-1-phosphotransferase deficiency (alpha/beta)"
   ],
-  "pathophysiology": "I-cell disease results from deficiency of the enzyme UDP-N-acetylglucosamine-1-phosphotransferase, encoded (alpha/beta subunits) by GNPTAB. This enzyme adds the mannose-6-phosphate recognition marker that normally directs newly synthesised lysosomal hydrolases to the lysosome. Without the marker, multiple enzymes are instead secreted into the extracellular space, so lysosomes are depleted of hydrolases and undigested substrates accumulate as characteristic inclusion bodies within cells. The biochemical signature is therefore paradoxical: low intracellular lysosomal enzyme activity but high activity of the same enzymes in plasma. Widespread lysosomal dysfunction produces severe multisystem storage disease. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Hurler syndrome and other severe mucopolysaccharidoses",
-   "Mucolipidosis III (pseudo-Hurler polydystrophy)",
-   "GM1 gangliosidosis",
-   "Sly syndrome (MPS VII) presenting in infancy",
-   "Congenital hypothyroidism given the coarse features",
-   "Other storage disorders with early coarse facies and skeletal dysplasia"
-  ],
-  "additionalInvestigations": [
-   "Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity",
-   "Cultured fibroblast studies demonstrating low intracellular enzyme activity and inclusion bodies",
-   "Urinary glycosaminoglycan analysis, typically not markedly elevated, helping distinguish it from mucopolysaccharidoses",
-   "GNPTAB gene sequencing",
-   "Skeletal survey documenting dysostosis multiplex",
-   "Echocardiography and developmental assessment for systemic involvement"
-  ],
-  "redFlags": [
-   "Severe early growth failure and feeding difficulty",
-   "Progressive cardiorespiratory compromise from valvular and airway involvement",
-   "Recurrent respiratory infections",
-   "Rapid neurodevelopmental decline"
-  ],
-  "prognosis": "The disorder is severe and progressive, with cardiorespiratory complications commonly limiting survival to early childhood. Management is supportive, as no established disease-modifying therapy exists.",
-  "pitfalls": [
-   "Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans",
-   "Overlooking the diagnostic value of raised plasma lysosomal enzyme activity",
-   "Attributing coarse facies at birth to congenital hypothyroidism alone",
-   "Failing to distinguish severe ML II from the milder ML III phenotype"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established",
-   "Manage recurrent respiratory infections and airway compromise aggressively, as cardiorespiratory complications are the main threat to survival",
-   "Support nutrition and growth, addressing feeding difficulty, and involve dental services for gingival hypertrophy",
-   "Manage the skeletal manifestations of dysostosis multiplex with orthopaedic and physiotherapy input, monitoring for hip dysplasia and spinal deformity",
-   "Undertake cardiac surveillance with echocardiography for valvular and myocardial involvement",
-   "Confirm the diagnosis and offer genetic counselling with carrier and prenatal testing given autosomal recessive GNPTAB inheritance",
-   "Coordinate care through a metabolic and clinical genetics multidisciplinary team, introducing paediatric palliative care as the disease progresses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "i_cell_disease-pathway",
-   "title": "I-cell disease (mucolipidosis II): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single enzyme being deficient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe early growth failure and feeding difficulty",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity, Cultured fibroblast studies demonstrating low intracellular enzyme activity and inclusion bodies, Urinary glycosaminoglycan analysis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of i-cell disease (mucolipidosis ii)."
-  }
- ],
- "tables": [
-  {
-   "id": "i_cell_disease-matrix",
-   "title": "I-cell disease (mucolipidosis II): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single enzyme being deficient",
+      "Clinically resembles a severe mucopolysaccharidosis with early onset of coarse facies, dysostosis multiplex, and organomegaly, but usually without corneal clouding or urinary glycosaminoglycan excess",
+      "Characteristic phase-dense cytoplasmic inclusions in cultured fibroblasts give the disease its name",
+      "Presents in early infancy with growth failure, gingival hypertrophy, and skeletal changes, often noted at or soon after birth",
+      "A key diagnostic clue is markedly elevated activity of several lysosomal enzymes in plasma or serum, with correspondingly low intracellular activity",
+      "Caused by variants in GNPTAB affecting the alpha/beta subunits of GlcNAc-1-phosphotransferase",
+      "Mucolipidosis III (pseudo-Hurler polydystrophy) is the milder, allelic or related disorder in the same pathway"
     ],
-    [
-     "Key Investigations",
-     "Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity, Cultured fibroblast studies demonstrating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "I-cell disease results from deficiency of the enzyme UDP-N-acetylglucosamine-1-phosphotransferase, encoded (alpha/beta subunits) by GNPTAB. This enzyme adds the mannose-6-phosphate recognition marker that normally directs newly synthesised lysosomal hydrolases to the lysosome. Without the marker, multiple enzymes are instead secreted into the extracellular space, so lysosomes are depleted of hydrolases and undigested substrates accumulate as characteristic inclusion bodies within cells. The biochemical signature is therefore paradoxical: low intracellular lysosomal enzyme activity but high activity of the same enzymes in plasma. Widespread lysosomal dysfunction produces severe multisystem storage disease. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Hurler syndrome and other severe mucopolysaccharidoses",
+      "Mucolipidosis III (pseudo-Hurler polydystrophy)",
+      "GM1 gangliosidosis",
+      "Sly syndrome (MPS VII) presenting in infancy",
+      "Congenital hypothyroidism given the coarse features",
+      "Other storage disorders with early coarse facies and skeletal dysplasia"
     ],
-    [
-     "Primary Differentials",
-     "Hurler syndrome and other severe mucopolysaccharidoses, Mucolipidosis III (pseudo-Hurler polydystrophy), GM1 gangliosidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity",
+      "Cultured fibroblast studies demonstrating low intracellular enzyme activity and inclusion bodies",
+      "Urinary glycosaminoglycan analysis, typically not markedly elevated, helping distinguish it from mucopolysaccharidoses",
+      "GNPTAB gene sequencing",
+      "Skeletal survey documenting dysostosis multiplex",
+      "Echocardiography and developmental assessment for systemic involvement"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe early growth failure and feeding difficulty",
+      "Progressive cardiorespiratory compromise from valvular and airway involvement",
+      "Recurrent respiratory infections",
+      "Rapid neurodevelopmental decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is severe and progressive, with cardiorespiratory complications commonly limiting survival to early childhood. Management is supportive, as no established disease-modifying therapy exists.",
+    "pitfalls": [
+      "Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans",
+      "Overlooking the diagnostic value of raised plasma lysosomal enzyme activity",
+      "Attributing coarse facies at birth to congenital hypothyroidism alone",
+      "Failing to distinguish severe ML II from the milder ML III phenotype"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established",
+      "Manage recurrent respiratory infections and airway compromise aggressively, as cardiorespiratory complications are the main threat to survival",
+      "Support nutrition and growth, addressing feeding difficulty, and involve dental services for gingival hypertrophy",
+      "Manage the skeletal manifestations of dysostosis multiplex with orthopaedic and physiotherapy input, monitoring for hip dysplasia and spinal deformity",
+      "Undertake cardiac surveillance with echocardiography for valvular and myocardial involvement",
+      "Confirm the diagnosis and offer genetic counselling with carrier and prenatal testing given autosomal recessive GNPTAB inheritance",
+      "Coordinate care through a metabolic and clinical genetics multidisciplinary team, introducing paediatric palliative care as the disease progresses"
     ]
-   ],
-   "caption": "Overview comparison matrix for i-cell disease (mucolipidosis ii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "i-cell-disease-real-image",
-   "title": "I-cell disease (mucolipidosis II): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "i_cell_disease-pathway",
+      "title": "I-cell disease (mucolipidosis II): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single enzyme being deficient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe early growth failure and feeding difficulty",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity, Cultured fibroblast studies demonstrating low intracellular enzyme activity and inclusion bodies, Urinary glycosaminoglycan analysis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of i-cell disease (mucolipidosis ii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "i_cell_disease-matrix",
+      "title": "I-cell disease (mucolipidosis II): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by defective mannose-6-phosphate tagging of lysosomal enzymes, so multiple enzymes are mislocalised rather than a single",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma or serum assay of multiple lysosomal enzymes, showing markedly raised activity, Cultured fibroblast studies demonstrating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hurler syndrome and other severe mucopolysaccharidoses, Mucolipidosis III (pseudo-Hurler polydystrophy), GM1 gangliosidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, symptom-directed care, as no disease-modifying enzyme or gene therapy is currently established",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as a mucopolysaccharidosis and being misled by near-normal urinary glycosaminoglycans",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for i-cell disease (mucolipidosis ii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "i_cell_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma lysosomal enzyme assay",
+          "cells": [
+            {
+              "text": "Markedly raised enzyme activity in plasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultured fibroblast studies",
+          "cells": [
+            {
+              "text": "Low intracellular enzyme activity and inclusion bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan analysis",
+          "cells": [
+            {
+              "text": "Typically not markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNPTAB gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and developmental assessment",
+          "cells": [
+            {
+              "text": "Valvular, myocardial and neurodevelopmental involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "i_cell_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe mucopolysaccharidoses (Hurler)",
+          "cells": [
+            {
+              "text": "Corneal clouding and urinary glycosaminoglycan excess, typically absent here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucolipidosis III (pseudo-Hurler polydystrophy)",
+          "cells": [
+            {
+              "text": "Milder phenotype than severe mucolipidosis II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital hypothyroidism",
+          "cells": [
+            {
+              "text": "Coarse features at birth should not be attributed to it alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "i_cell_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Symptom-directed care; no established enzyme or gene therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory infections and airway",
+          "cells": [
+            {
+              "text": "Aggressive management, as cardiorespiratory complications threaten survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and dental care",
+          "cells": [
+            {
+              "text": "Feeding difficulty and gingival hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal care",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy input for dysostosis multiplex; monitor hip dysplasia and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for valvular and myocardial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and prenatal testing for autosomal recessive GNPTAB inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "i_cell_disease-dx-mgmt",
+      "title": "Diagnosis and management of I-cell disease (mucolipidosis II)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early coarse facies, dysostosis multiplex and organomegaly in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe growth failure, cardiorespiratory compromise or rapid neurodevelopmental decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Aggressive respiratory infection treatment; cardiorespiratory review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma lysosomal enzymes, fibroblast studies, urinary GAG, GNPTAB, skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised plasma enzymes with GNPTAB variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mucopolysaccharidosis, ML III or other storage disorders; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, symptom-directed care; no established enzyme or gene therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive management of respiratory infections and airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutrition and dental care for gingival hypertrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic and physiotherapy care for dysostosis multiplex",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Echocardiography surveillance and genetic counselling with carrier testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Care aimed at cardiorespiratory complications; palliative support as disease advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,473 @@
 {
- "id": "urethritis",
- "name": "Urethritis",
- "aliases": [
-  "urethral inflammation",
-  "gonococcal urethritis",
-  "non-gonococcal urethritis",
-  "NGU"
- ],
- "class": "infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most often sexually transmitted",
-   "It is broadly divided into gonococcal urethritis (Neisseria gonorrhoeae) and non-gonococcal urethritis, of which Chlamydia trachomatis is the leading cause, along with Mycoplasma genitalium and others",
-   "Gonococcal urethritis classically produces a profuse purulent discharge, whereas non-gonococcal urethritis tends to cause a scantier, more mucoid discharge, though overlap is common and co-infection frequent",
-   "Diagnosis rests on demonstrating urethral inflammation (urethral smear with leucocytes or a positive leucocyte esterase on first-void urine) together with nucleic acid amplification testing for the causative organisms",
-   "Management principles include empirical antibiotic therapy covering both gonococcal and chlamydial infection, guided by local resistance patterns, plus abstinence until treatment is complete",
-   "Partner notification, treatment of sexual contacts, and a full sexually transmitted infection screen (including HIV and syphilis) are essential components of care",
-   "Persistent or recurrent urethritis after treatment may reflect reinfection, non-adherence, or organisms such as Mycoplasma genitalium with antimicrobial resistance",
-   "Reactive arthritis (urethritis, conjunctivitis, arthritis) may follow chlamydial urethritis, particularly in HLA-B27-positive individuals"
+  "id": "urethritis",
+  "name": "Urethritis",
+  "aliases": [
+    "urethral inflammation",
+    "gonococcal urethritis",
+    "non-gonococcal urethritis",
+    "NGU"
   ],
-  "pathophysiology": "Urethritis is inflammation of the urethral mucosa, usually caused by sexually transmitted organisms ascending the urethra. Neisseria gonorrhoeae and Chlamydia trachomatis are the principal pathogens, with Mycoplasma genitalium, Trichomonas vaginalis, and other organisms also implicated. Infection provokes a neutrophilic inflammatory response in the urethral epithelium, producing discharge and dysuria. Non-infective urethritis can follow trauma or instrumentation. Untreated infection may ascend or spread, causing epididymo-orchitis, prostatitis, disseminated gonococcal infection, or, historically, inflammatory urethral stricture, and in women pelvic inflammatory disease.",
-  "additionalDifferentials": [
-   "Cystitis or lower urinary tract infection",
-   "Prostatitis",
-   "Epididymo-orchitis",
-   "Balanitis",
-   "Reactive arthritis-associated urethritis",
-   "Non-infective (traumatic or chemical) urethritis",
-   "Foreign body or instrumentation-related irritation"
-  ],
-  "additionalInvestigations": [
-   "First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia",
-   "Urethral Gram-stain smear for leucocytes and Gram-negative intracellular diplococci",
-   "Culture and antimicrobial sensitivities for Neisseria gonorrhoeae given resistance concerns",
-   "Testing for Mycoplasma genitalium and Trichomonas where indicated",
-   "Full sexually transmitted infection screen including HIV and syphilis serology",
-   "Urinalysis to help exclude urinary tract infection"
-  ],
-  "redFlags": [
-   "Features of disseminated gonococcal infection (fever, skin lesions, arthritis)",
-   "Ascending infection causing epididymo-orchitis or prostatitis",
-   "Persistent or recurrent urethritis suggesting resistant organism or reinfection",
-   "Systemic sexually transmitted co-infection such as HIV requiring identification",
-   "Reactive arthritis with ocular or joint involvement"
-  ],
-  "prognosis": "Uncomplicated urethritis usually resolves rapidly with appropriate antibiotics and partner treatment; outcomes are worsened by reinfection, non-adherence, resistant organisms, and complications such as epididymo-orchitis or reactive arthritis.",
-  "pitfalls": [
-   "Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)",
-   "Neglecting partner notification and treatment, leading to reinfection",
-   "Failing to perform a full STI screen including HIV and syphilis",
-   "Overlooking Mycoplasma genitalium in persistent non-gonococcal urethritis",
-   "Not counselling on abstinence until treatment and partner therapy are complete"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for Neisseria gonorrhoeae and doxycycline for Chlamydia trachomatis, guided by local resistance patterns",
-   "Send gonococcal culture with sensitivities before treatment given rising cephalosporin resistance, and treat identified Mycoplasma genitalium (macrolide or moxifloxacin) or Trichomonas vaginalis (metronidazole) accordingly",
-   "Advise abstinence from sexual contact until the patient and partners have completed treatment",
-   "Arrange partner notification and epidemiological treatment of recent sexual contacts",
-   "Perform a full sexually transmitted infection screen including HIV and syphilis serology",
-   "Reassess persistent or recurrent symptoms for reinfection, resistance or non-gonococcal causes, and manage complications such as epididymo-orchitis or reactive arthritis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "urethritis-pathway",
-   "title": "Urethritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most often sexually transmitted",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of disseminated gonococcal infection (fever, skin lesions, arthritis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia, Urethral Gram-stain smear for leucocytes and Gram-negative intracellular diplococci, Culture and antimicrobial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for Neisseria gonorrhoeae and doxycycline for Chlamydia trachomatis, guided by local resistance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of urethritis."
-  }
- ],
- "tables": [
-  {
-   "id": "urethritis-matrix",
-   "title": "Urethritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most often sexually transmitted",
+      "It is broadly divided into gonococcal urethritis (Neisseria gonorrhoeae) and non-gonococcal urethritis, of which Chlamydia trachomatis is the leading cause, along with Mycoplasma genitalium and others",
+      "Gonococcal urethritis classically produces a profuse purulent discharge, whereas non-gonococcal urethritis tends to cause a scantier, more mucoid discharge, though overlap is common and co-infection frequent",
+      "Diagnosis rests on demonstrating urethral inflammation (urethral smear with leucocytes or a positive leucocyte esterase on first-void urine) together with nucleic acid amplification testing for the causative organisms",
+      "Management principles include empirical antibiotic therapy covering both gonococcal and chlamydial infection, guided by local resistance patterns, plus abstinence until treatment is complete",
+      "Partner notification, treatment of sexual contacts, and a full sexually transmitted infection screen (including HIV and syphilis) are essential components of care",
+      "Persistent or recurrent urethritis after treatment may reflect reinfection, non-adherence, or organisms such as Mycoplasma genitalium with antimicrobial resistance",
+      "Reactive arthritis (urethritis, conjunctivitis, arthritis) may follow chlamydial urethritis, particularly in HLA-B27-positive individuals"
     ],
-    [
-     "Key Investigations",
-     "First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia, Urethral Gram-stain smear for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Urethritis is inflammation of the urethral mucosa, usually caused by sexually transmitted organisms ascending the urethra. Neisseria gonorrhoeae and Chlamydia trachomatis are the principal pathogens, with Mycoplasma genitalium, Trichomonas vaginalis, and other organisms also implicated. Infection provokes a neutrophilic inflammatory response in the urethral epithelium, producing discharge and dysuria. Non-infective urethritis can follow trauma or instrumentation. Untreated infection may ascend or spread, causing epididymo-orchitis, prostatitis, disseminated gonococcal infection, or, historically, inflammatory urethral stricture, and in women pelvic inflammatory disease.",
+    "additionalDifferentials": [
+      "Cystitis or lower urinary tract infection",
+      "Prostatitis",
+      "Epididymo-orchitis",
+      "Balanitis",
+      "Reactive arthritis-associated urethritis",
+      "Non-infective (traumatic or chemical) urethritis",
+      "Foreign body or instrumentation-related irritation"
     ],
-    [
-     "Primary Differentials",
-     "Cystitis or lower urinary tract infection, Prostatitis, Epididymo-orchitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia",
+      "Urethral Gram-stain smear for leucocytes and Gram-negative intracellular diplococci",
+      "Culture and antimicrobial sensitivities for Neisseria gonorrhoeae given resistance concerns",
+      "Testing for Mycoplasma genitalium and Trichomonas where indicated",
+      "Full sexually transmitted infection screen including HIV and syphilis serology",
+      "Urinalysis to help exclude urinary tract infection"
     ],
-    [
-     "Management Strategy",
-     "Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of disseminated gonococcal infection (fever, skin lesions, arthritis)",
+      "Ascending infection causing epididymo-orchitis or prostatitis",
+      "Persistent or recurrent urethritis suggesting resistant organism or reinfection",
+      "Systemic sexually transmitted co-infection such as HIV requiring identification",
+      "Reactive arthritis with ocular or joint involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated urethritis usually resolves rapidly with appropriate antibiotics and partner treatment; outcomes are worsened by reinfection, non-adherence, resistant organisms, and complications such as epididymo-orchitis or reactive arthritis.",
+    "pitfalls": [
+      "Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)",
+      "Neglecting partner notification and treatment, leading to reinfection",
+      "Failing to perform a full STI screen including HIV and syphilis",
+      "Overlooking Mycoplasma genitalium in persistent non-gonococcal urethritis",
+      "Not counselling on abstinence until treatment and partner therapy are complete"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for Neisseria gonorrhoeae and doxycycline for Chlamydia trachomatis, guided by local resistance patterns",
+      "Send gonococcal culture with sensitivities before treatment given rising cephalosporin resistance, and treat identified Mycoplasma genitalium (macrolide or moxifloxacin) or Trichomonas vaginalis (metronidazole) accordingly",
+      "Advise abstinence from sexual contact until the patient and partners have completed treatment",
+      "Arrange partner notification and epidemiological treatment of recent sexual contacts",
+      "Perform a full sexually transmitted infection screen including HIV and syphilis serology",
+      "Reassess persistent or recurrent symptoms for reinfection, resistance or non-gonococcal causes, and manage complications such as epididymo-orchitis or reactive arthritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for urethritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "urethritis-real-image",
-   "title": "Urethritis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "urethritis-pathway",
+      "title": "Urethritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most often sexually transmitted",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of disseminated gonococcal infection (fever, skin lesions, arthritis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia, Urethral Gram-stain smear for leucocytes and Gram-negative intracellular diplococci, Culture and antimicrobial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for Neisseria gonorrhoeae and doxycycline for Chlamydia trachomatis, guided by local resistance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of urethritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "urethritis-matrix",
+      "title": "Urethritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Urethritis is inflammation of the urethra presenting with urethral discharge, dysuria, and urethral itch or discomfort, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "First-void urine or urethral swab nucleic acid amplification testing for gonorrhoea and chlamydia, Urethral Gram-stain smear for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cystitis or lower urinary tract infection, Prostatitis, Epididymo-orchitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give empirical antimicrobial therapy covering both gonococcal and chlamydial infection, using intramuscular ceftriaxone for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating for chlamydia alone and missing co-existing gonococcal infection (or vice versa)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for urethritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "First-void urine or urethral swab NAAT",
+          "cells": [
+            {
+              "text": "Gonorrhoea and chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral Gram-stain smear",
+          "cells": [
+            {
+              "text": "Leucocytes and Gram-negative intracellular diplococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonococcal culture with antimicrobial sensitivities",
+          "cells": [
+            {
+              "text": "Antimicrobial resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium and Trichomonas testing",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full STI screen with HIV and syphilis serology",
+          "cells": [
+            {
+              "text": "Co-existing infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Excludes urinary tract infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystitis or lower urinary tract infection",
+          "cells": [
+            {
+              "text": "Urinalysis separates it from urethritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Ascending complication of urethritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-infective urethritis",
+          "cells": [
+            {
+              "text": "Traumatic or chemical cause without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive arthritis-associated urethritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonococcal culture before treatment",
+          "cells": [
+            {
+              "text": "Given rising cephalosporin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Covers gonococcal and chlamydial infection; intramuscular ceftriaxone for gonorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abstinence",
+          "cells": [
+            {
+              "text": "Until the patient and partners complete treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner notification",
+          "cells": [
+            {
+              "text": "Epidemiological treatment of recent sexual contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full STI screen",
+          "cells": [
+            {
+              "text": "Including HIV and syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Persistent or recurrent symptoms for reinfection or resistance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethritis-dx-mgmt",
+      "title": "Diagnosis and management of Urethritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethritis: urethral discharge, dysuria or itch after sexual exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, skin lesions, arthritis or epididymo-orchitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for disseminated gonococcal infection or ascending infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "First-void NAAT, urethral Gram stain, gonococcal culture, full STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urethral inflammation shown by smear leucocytes or leucocyte esterase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-infective urethritis or cystitis; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gonococcal culture with sensitivities before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical treatment covering gonococcal and chlamydial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Abstinence until patient and partners complete treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Partner notification and epidemiological treatment of recent contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent or recurrent urethritis suggests resistance or reinfection; reassess",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,180 +1,386 @@
 {
- "id": "x_linked_hypophosphataemia",
- "name": "x linked hypophosphataemia",
- "aliases": [
-  "XLH",
-  "X-linked hypophosphataemic rickets",
-  "familial hypophosphataemic rickets"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Metabolic bone medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait caused by loss-of-function mutations in PHEX.",
-   "Loss of PHEX function leads to excess circulating FGF23, which drives renal phosphate wasting and suppresses 1-alpha-hydroxylation, giving an inappropriately normal or low calcitriol.",
-   "Biochemistry shows low phosphate with high urinary phosphate (low TmP/GFR), normal calcium, normal or low 1,25-hydroxyvitamin D, normal or mildly raised PTH, raised alkaline phosphatase and raised or inappropriately normal FGF23.",
-   "Unlike nutritional rickets, calcium and 25-hydroxyvitamin D are normal and there is no hypocalcaemia or tetany.",
-   "Children present with leg bowing, short stature, a waddling gait, delayed walking and spontaneous dental abscesses.",
-   "Conventional treatment with oral phosphate salts plus active vitamin D (alfacalcidol or calcitriol) risks nephrocalcinosis and secondary or tertiary hyperparathyroidism, and requires careful monitoring.",
-   "The anti-FGF23 monoclonal antibody burosumab is now preferred for children and selected adults, improving phosphate handling and healing rickets.",
-   "Adults may have persistent osteomalacia, pseudofractures, enthesopathy, degenerative arthritis, dental sepsis and, from childhood, craniosynostosis."
+  "id": "x_linked_hypophosphataemia",
+  "name": "x linked hypophosphataemia",
+  "aliases": [
+    "XLH",
+    "X-linked hypophosphataemic rickets",
+    "familial hypophosphataemic rickets",
+    "x_linked_hypophosphatemia",
+    "PHEX-related hypophosphataemia"
   ],
-  "pathophysiology": "PHEX encodes an endopeptidase expressed in osteoblasts and osteocytes. Its loss of function leads, through incompletely defined signalling, to overproduction of the phosphaturic hormone FGF23 by bone cells. Elevated FGF23 acts on the proximal renal tubule to downregulate the sodium-phosphate cotransporters NaPi-IIa and NaPi-IIc, causing renal phosphate wasting and hypophosphataemia. FGF23 simultaneously suppresses 1-alpha-hydroxylase and stimulates 24-hydroxylase, so calcitriol is inappropriately low or normal rather than rising in response to hypophosphataemia. Chronic hypophosphataemia impairs mineralisation of the growth plate (rickets) and of osteoid in mature bone (osteomalacia).",
-  "additionalDifferentials": [
-   "nutritional vitamin D-deficiency rickets",
-   "autosomal dominant or recessive hypophosphataemic rickets (FGF23, DMP1, ENPP1)",
-   "hereditary hypophosphataemic rickets with hypercalciuria (HHRH, SLC34A3)",
-   "tumour-induced osteomalacia",
-   "Fanconi syndrome and Dent disease",
-   "McCune-Albright syndrome or fibrous dysplasia",
-   "renal tubular acidosis"
-  ],
-  "additionalInvestigations": [
-   "serum phosphate, calcium, alkaline phosphatase and PTH",
-   "25-hydroxy and 1,25-dihydroxyvitamin D",
-   "renal tubular phosphate reabsorption (TmP/GFR)",
-   "intact FGF23",
-   "PHEX and related gene testing",
-   "renal ultrasound for nephrocalcinosis",
-   "wrist and knee radiographs and DXA"
-  ],
-  "redFlags": [
-   "nephrocalcinosis or declining renal function on conventional treatment",
-   "tertiary hyperparathyroidism developing during phosphate therapy",
-   "craniosynostosis with raised intracranial pressure",
-   "spinal canal stenosis or cord compression from enthesopathy and ligament ossification",
-   "recurrent spontaneous dental abscesses"
-  ],
-  "prognosis": "This is a lifelong condition; with treatment growth and deformity improve, but many adults have residual short stature, enthesopathy, degenerative joint disease and dental problems.",
-  "pitfalls": [
-   "misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective",
-   "failing to monitor for treatment-induced nephrocalcinosis",
-   "over-treatment provoking secondary or tertiary hyperparathyroidism",
-   "not screening at-risk family members",
-   "neglecting regular dental surveillance"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Oxford Textbook of Endocrinology and Diabetes",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to promote mineralisation",
-   "Consideration of the anti-FGF23 monoclonal antibody burosumab in eligible patients as targeted disease-directed therapy",
-   "Regular biochemical monitoring of phosphate, alkaline phosphatase, calcium and parathyroid hormone during treatment",
-   "Renal ultrasound surveillance for nephrocalcinosis and vigilance for secondary or tertiary hyperparathyroidism",
-   "Orthopaedic assessment and corrective surgery for persistent lower-limb deformity",
-   "Dental surveillance and prompt treatment of spontaneous dental abscesses",
-   "Multidisciplinary metabolic bone follow-up spanning paediatric-to-adult transition",
-   "Genetic counselling for the X-linked dominant trait and screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_hypophosphataemia-pathway",
-   "title": "x linked hypophosphataemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait caused by loss-of-function mutations in PHEX.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: nephrocalcinosis or declining renal function on conventional treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: serum phosphate, calcium, alkaline phosphatase and PTH, 25-hydroxy and 1,25-dihydroxyvitamin D, renal tubular phosphate reabsorption (TmP/GFR)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to promote mineralisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x linked hypophosphataemia."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_hypophosphataemia-matrix",
-   "title": "x linked hypophosphataemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Metabolic bone medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait caused by loss-of-function mutations in PHEX.",
+      "Loss of PHEX function leads to excess circulating FGF23, which drives renal phosphate wasting and suppresses 1-alpha-hydroxylation, giving an inappropriately normal or low calcitriol.",
+      "Biochemistry shows low phosphate with high urinary phosphate (low TmP/GFR), normal calcium, normal or low 1,25-hydroxyvitamin D, normal or mildly raised PTH, raised alkaline phosphatase and raised or inappropriately normal FGF23.",
+      "Unlike nutritional rickets, calcium and 25-hydroxyvitamin D are normal and there is no hypocalcaemia or tetany.",
+      "Children present with leg bowing, short stature, a waddling gait, delayed walking and spontaneous dental abscesses.",
+      "Conventional treatment with oral phosphate salts plus active vitamin D (alfacalcidol or calcitriol) risks nephrocalcinosis and secondary or tertiary hyperparathyroidism, and requires careful monitoring.",
+      "The anti-FGF23 monoclonal antibody burosumab is now preferred for children and selected adults, improving phosphate handling and healing rickets.",
+      "Adults may have persistent osteomalacia, pseudofractures, enthesopathy, degenerative arthritis, dental sepsis and, from childhood, craniosynostosis."
     ],
-    [
-     "Key Investigations",
-     "serum phosphate, calcium, alkaline phosphatase and PTH, 25-hydroxy and 1,25-dihydroxyvitamin D, renal tubular phosphate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PHEX encodes an endopeptidase expressed in osteoblasts and osteocytes. Its loss of function leads, through incompletely defined signalling, to overproduction of the phosphaturic hormone FGF23 by bone cells. Elevated FGF23 acts on the proximal renal tubule to downregulate the sodium-phosphate cotransporters NaPi-IIa and NaPi-IIc, causing renal phosphate wasting and hypophosphataemia. FGF23 simultaneously suppresses 1-alpha-hydroxylase and stimulates 24-hydroxylase, so calcitriol is inappropriately low or normal rather than rising in response to hypophosphataemia. Chronic hypophosphataemia impairs mineralisation of the growth plate (rickets) and of osteoid in mature bone (osteomalacia).",
+    "additionalDifferentials": [
+      "nutritional vitamin D-deficiency rickets",
+      "autosomal dominant or recessive hypophosphataemic rickets (FGF23, DMP1, ENPP1)",
+      "hereditary hypophosphataemic rickets with hypercalciuria (HHRH, SLC34A3)",
+      "tumour-induced osteomalacia",
+      "Fanconi syndrome and Dent disease",
+      "McCune-Albright syndrome or fibrous dysplasia",
+      "renal tubular acidosis"
     ],
-    [
-     "Primary Differentials",
-     "nutritional vitamin D-deficiency rickets, autosomal dominant or recessive hypophosphataemic rickets (FGF23, DMP1, ENPP1),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "serum phosphate, calcium, alkaline phosphatase and PTH",
+      "25-hydroxy and 1,25-dihydroxyvitamin D",
+      "renal tubular phosphate reabsorption (TmP/GFR)",
+      "intact FGF23",
+      "PHEX and related gene testing",
+      "renal ultrasound for nephrocalcinosis",
+      "wrist and knee radiographs and DXA"
     ],
-    [
-     "Management Strategy",
-     "Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to",
-     "Core treatment modality"
+    "redFlags": [
+      "nephrocalcinosis or declining renal function on conventional treatment",
+      "tertiary hyperparathyroidism developing during phosphate therapy",
+      "craniosynostosis with raised intracranial pressure",
+      "spinal canal stenosis or cord compression from enthesopathy and ligament ossification",
+      "recurrent spontaneous dental abscesses"
     ],
-    [
-     "Clinical Pitfall",
-     "misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective",
-     "Prevent diagnostic or management error"
+    "prognosis": "This is a lifelong condition; with treatment growth and deformity improve, but many adults have residual short stature, enthesopathy, degenerative joint disease and dental problems.",
+    "pitfalls": [
+      "misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective",
+      "failing to monitor for treatment-induced nephrocalcinosis",
+      "over-treatment provoking secondary or tertiary hyperparathyroidism",
+      "not screening at-risk family members",
+      "neglecting regular dental surveillance"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Oxford Textbook of Endocrinology and Diabetes",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to promote mineralisation",
+      "Consideration of the anti-FGF23 monoclonal antibody burosumab in eligible patients as targeted disease-directed therapy",
+      "Regular biochemical monitoring of phosphate, alkaline phosphatase, calcium and parathyroid hormone during treatment",
+      "Renal ultrasound surveillance for nephrocalcinosis and vigilance for secondary or tertiary hyperparathyroidism",
+      "Orthopaedic assessment and corrective surgery for persistent lower-limb deformity",
+      "Dental surveillance and prompt treatment of spontaneous dental abscesses",
+      "Multidisciplinary metabolic bone follow-up spanning paediatric-to-adult transition",
+      "Genetic counselling for the X-linked dominant trait and screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for x linked hypophosphataemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-hypophosphataemia-real-image",
-   "title": "x linked hypophosphataemia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "x_linked_hypophosphataemia-pathway",
+      "title": "x linked hypophosphataemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait caused by loss-of-function mutations in PHEX.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: nephrocalcinosis or declining renal function on conventional treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: serum phosphate, calcium, alkaline phosphatase and PTH, 25-hydroxy and 1,25-dihydroxyvitamin D, renal tubular phosphate reabsorption (TmP/GFR)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to promote mineralisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x linked hypophosphataemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_hypophosphataemia-matrix",
+      "title": "x linked hypophosphataemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked hypophosphataemia is the commonest heritable form of rickets and osteomalacia, inherited as an X-linked dominant trait",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "serum phosphate, calcium, alkaline phosphatase and PTH, 25-hydroxy and 1,25-dihydroxyvitamin D, renal tubular phosphate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "nutritional vitamin D-deficiency rickets, autosomal dominant or recessive hypophosphataemic rickets (FGF23, DMP1, ENPP1),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conventional therapy with oral phosphate salts combined with an active vitamin D analogue such as alfacalcidol or calcitriol to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "misdiagnosing as nutritional rickets and giving only nutritional vitamin D, which is ineffective",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x linked hypophosphataemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_hypophosphataemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum phosphate, calcium, alkaline phosphatase and PTH",
+          "cells": [
+            {
+              "text": "Hypophosphataemia with normal calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxy and 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Vitamin D status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular phosphate handling",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_hypophosphataemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional vitamin D-deficiency rickets",
+          "cells": [
+            {
+              "text": "Vitamin D alone is ineffective here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant or recessive hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "FGF23-mediated, other genes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_hypophosphataemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral phosphate salts with an active vitamin D analogue",
+          "cells": [
+            {
+              "text": "Alfacalcidol or calcitriol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function and calcium",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and tertiary hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_hypophosphataemia-dx-mgmt",
+      "title": "Diagnosis and management of x linked hypophosphataemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked hypophosphataemia: rickets with low phosphate and renal wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nephrocalcinosis, declining renal function or hyperparathyroidism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent renal and metabolic review for declining renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum phosphate, calcium, ALP, PTH, vitamin D metabolites, renal tubular handling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is renal phosphate wasting confirmed with low serum phosphate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nutritional rickets or other hypophosphataemic rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral phosphate salts with an active vitamin D analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Do not treat with vitamin D alone, which does not correct phosphate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor renal function, nephrocalcinosis and parathyroid function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifelong therapy; complications of treatment need monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

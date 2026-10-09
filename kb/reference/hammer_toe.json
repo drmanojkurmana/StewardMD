@@ -1,177 +1,471 @@
 {
- "id": "hammer_toe",
- "name": "Hammer toe",
- "aliases": [
-  "hammertoe",
-  "hammer toe deformity",
-  "PIP flexion deformity of the lesser toe"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the metatarsophalangeal joint and a neutral or extended distal interphalangeal joint",
-   "This is the key contrast with claw toe (metatarsophalangeal hyperextension plus flexion at both interphalangeal joints) and mallet toe (isolated distal interphalangeal flexion)",
-   "The second toe is most commonly affected, and the deformity frequently accompanies hallux valgus that crowds the lesser toes",
-   "A dorsal corn over the prominent proximal interphalangeal joint and an end-of-toe callosity are typical pressure lesions",
-   "Determining whether the deformity is flexible or fixed is essential, as passively correctable deformities are amenable to soft-tissue procedures while rigid ones require bony correction",
-   "Standing examination and weight-bearing radiographs help define associated metatarsophalangeal subluxation and forefoot alignment",
-   "Conservative care includes roomy, deep toe-box footwear, silicone toe sleeves or splints, corn padding, and toe-crest orthoses",
-   "Surgical options range from flexor-to-extensor tendon transfer and extensor lengthening for flexible deformity to proximal interphalangeal joint arthrodesis or resection for fixed deformity"
+  "id": "hammer_toe",
+  "name": "Hammer toe",
+  "aliases": [
+    "hammertoe",
+    "hammer toe deformity",
+    "PIP flexion deformity of the lesser toe"
   ],
-  "pathophysiology": "Hammer toe arises from an imbalance between the intrinsic and extrinsic muscles of the lesser toe that leaves the proximal interphalangeal joint flexed. When the intrinsic muscles fail to stabilise the metatarsophalangeal joint, the long extensor hyperextends that joint while the long flexor and the geometry of the toe pull the proximal interphalangeal joint into flexion. Ill-fitting, tight, or high-heeled footwear that crowds the toes is a major extrinsic contributor, and adjacent hallux valgus commonly displaces and deforms the second toe. Initially the deformity is flexible and passively correctable, but with time capsular and tendon contractures make it rigid. The elevated proximal interphalangeal joint rubs against the shoe to form a painful dorsal corn, and abnormal loading produces callosities at the tip of the toe and beneath the metatarsal head.",
-  "additionalDifferentials": [
-   "Claw toe with metatarsophalangeal hyperextension and combined interphalangeal flexion",
-   "Mallet toe with isolated distal interphalangeal flexion",
-   "Curly or overlapping toe deformity",
-   "Crossover second toe from plantar plate insufficiency",
-   "Rheumatoid or other inflammatory forefoot deformity",
-   "Freiberg's infraction of a lesser metatarsal head",
-   "Interdigital neuroma causing lesser-toe symptoms"
-  ],
-  "additionalInvestigations": [
-   "Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test",
-   "Weight-bearing dorsoplantar and lateral foot radiographs to assess metatarsophalangeal alignment and subluxation",
-   "Assessment for associated hallux valgus and forefoot deformity",
-   "Neurological examination to detect an underlying neuromuscular cause when deformities are multiple",
-   "Vascular assessment of the toe before considering surgery",
-   "Inflammatory markers and relevant serology if inflammatory arthritis is suspected",
-   "Pedobarography where transfer metatarsalgia accompanies the deformity"
-  ],
-  "redFlags": [
-   "Multiple or symmetrical lesser-toe deformities suggesting an underlying neuromuscular disorder or inflammatory arthritis",
-   "Ulceration or infection of a corn or the toe tip, particularly in diabetes or peripheral vascular disease",
-   "Signs of digital ischaemia or poor perfusion that jeopardise healing",
-   "Rapidly progressive deformity with pain and swelling indicating inflammatory or neuropathic pathology"
-  ],
-  "prognosis": "Flexible hammer toes are often well controlled with footwear and orthotic measures, and soft-tissue surgery corrects them reliably. Fixed deformities respond well to arthrodesis or joint resection with good pain relief, although some residual stiffness, floating toe, recurrence, or malalignment can occur. Outcomes are poorer when an underlying neuromuscular disorder or inflammatory arthritis is not addressed.",
-  "pitfalls": [
-   "Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure",
-   "Overlooking associated hallux valgus that crowds and deforms the second toe and will cause recurrence if untreated",
-   "Missing an underlying neuromuscular cause when several toes are involved",
-   "Neglecting foot perfusion and the diabetic status before operating on the toe",
-   "Ignoring metatarsophalangeal joint subluxation, so that isolated toe surgery leaves the deformity uncorrected"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure",
-   "Protective padding, toe splints or crest pads and regular corn and callus care for pressure lesions",
-   "Stretching and taping for flexible deformities to maintain passive correction",
-   "Flexor tenotomy or tendon transfer for flexible deformities that fail conservative care",
-   "Proximal interphalangeal joint arthrodesis or resection arthroplasty for fixed deformities",
-   "Correct associated hallux valgus and forefoot deformity contributing to lesser-toe crowding",
-   "Evaluate for an underlying neuromuscular cause when multiple toes are involved"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hammer_toe-pathway",
-   "title": "Hammer toe: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the metatarsophalangeal joint and a neutral or extended distal interphalangeal joint",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple or symmetrical lesser-toe deformities suggesting an underlying neuromuscular disorder or inflammatory arthritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test, Weight-bearing dorsoplantar and lateral foot radiographs to assess metatarsophalangeal alignment and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hammer toe."
-  }
- ],
- "tables": [
-  {
-   "id": "hammer_toe-matrix",
-   "title": "Hammer toe: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the metatarsophalangeal joint and a neutral or extended distal interphalangeal joint",
+      "This is the key contrast with claw toe (metatarsophalangeal hyperextension plus flexion at both interphalangeal joints) and mallet toe (isolated distal interphalangeal flexion)",
+      "The second toe is most commonly affected, and the deformity frequently accompanies hallux valgus that crowds the lesser toes",
+      "A dorsal corn over the prominent proximal interphalangeal joint and an end-of-toe callosity are typical pressure lesions",
+      "Determining whether the deformity is flexible or fixed is essential, as passively correctable deformities are amenable to soft-tissue procedures while rigid ones require bony correction",
+      "Standing examination and weight-bearing radiographs help define associated metatarsophalangeal subluxation and forefoot alignment",
+      "Conservative care includes roomy, deep toe-box footwear, silicone toe sleeves or splints, corn padding, and toe-crest orthoses",
+      "Surgical options range from flexor-to-extensor tendon transfer and extensor lengthening for flexible deformity to proximal interphalangeal joint arthrodesis or resection for fixed deformity"
     ],
-    [
-     "Key Investigations",
-     "Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hammer toe arises from an imbalance between the intrinsic and extrinsic muscles of the lesser toe that leaves the proximal interphalangeal joint flexed. When the intrinsic muscles fail to stabilise the metatarsophalangeal joint, the long extensor hyperextends that joint while the long flexor and the geometry of the toe pull the proximal interphalangeal joint into flexion. Ill-fitting, tight, or high-heeled footwear that crowds the toes is a major extrinsic contributor, and adjacent hallux valgus commonly displaces and deforms the second toe. Initially the deformity is flexible and passively correctable, but with time capsular and tendon contractures make it rigid. The elevated proximal interphalangeal joint rubs against the shoe to form a painful dorsal corn, and abnormal loading produces callosities at the tip of the toe and beneath the metatarsal head.",
+    "additionalDifferentials": [
+      "Claw toe with metatarsophalangeal hyperextension and combined interphalangeal flexion",
+      "Mallet toe with isolated distal interphalangeal flexion",
+      "Curly or overlapping toe deformity",
+      "Crossover second toe from plantar plate insufficiency",
+      "Rheumatoid or other inflammatory forefoot deformity",
+      "Freiberg's infraction of a lesser metatarsal head",
+      "Interdigital neuroma causing lesser-toe symptoms"
     ],
-    [
-     "Primary Differentials",
-     "Claw toe with metatarsophalangeal hyperextension and combined interphalangeal flexion, Mallet toe with isolated distal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test",
+      "Weight-bearing dorsoplantar and lateral foot radiographs to assess metatarsophalangeal alignment and subluxation",
+      "Assessment for associated hallux valgus and forefoot deformity",
+      "Neurological examination to detect an underlying neuromuscular cause when deformities are multiple",
+      "Vascular assessment of the toe before considering surgery",
+      "Inflammatory markers and relevant serology if inflammatory arthritis is suspected",
+      "Pedobarography where transfer metatarsalgia accompanies the deformity"
     ],
-    [
-     "Management Strategy",
-     "Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple or symmetrical lesser-toe deformities suggesting an underlying neuromuscular disorder or inflammatory arthritis",
+      "Ulceration or infection of a corn or the toe tip, particularly in diabetes or peripheral vascular disease",
+      "Signs of digital ischaemia or poor perfusion that jeopardise healing",
+      "Rapidly progressive deformity with pain and swelling indicating inflammatory or neuropathic pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Flexible hammer toes are often well controlled with footwear and orthotic measures, and soft-tissue surgery corrects them reliably. Fixed deformities respond well to arthrodesis or joint resection with good pain relief, although some residual stiffness, floating toe, recurrence, or malalignment can occur. Outcomes are poorer when an underlying neuromuscular disorder or inflammatory arthritis is not addressed.",
+    "pitfalls": [
+      "Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure",
+      "Overlooking associated hallux valgus that crowds and deforms the second toe and will cause recurrence if untreated",
+      "Missing an underlying neuromuscular cause when several toes are involved",
+      "Neglecting foot perfusion and the diabetic status before operating on the toe",
+      "Ignoring metatarsophalangeal joint subluxation, so that isolated toe surgery leaves the deformity uncorrected"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure",
+      "Protective padding, toe splints or crest pads and regular corn and callus care for pressure lesions",
+      "Stretching and taping for flexible deformities to maintain passive correction",
+      "Flexor tenotomy or tendon transfer for flexible deformities that fail conservative care",
+      "Proximal interphalangeal joint arthrodesis or resection arthroplasty for fixed deformities",
+      "Correct associated hallux valgus and forefoot deformity contributing to lesser-toe crowding",
+      "Evaluate for an underlying neuromuscular cause when multiple toes are involved"
     ]
-   ],
-   "caption": "Overview comparison matrix for hammer toe."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hammer-toe-real-image",
-   "title": "Hammer toe: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hammer_toe-pathway",
+      "title": "Hammer toe: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the metatarsophalangeal joint and a neutral or extended distal interphalangeal joint",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple or symmetrical lesser-toe deformities suggesting an underlying neuromuscular disorder or inflammatory arthritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test, Weight-bearing dorsoplantar and lateral foot radiographs to assess metatarsophalangeal alignment and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hammer toe."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hammer_toe-matrix",
+      "title": "Hammer toe: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A hammer toe is a flexion deformity at the proximal interphalangeal joint, often with compensatory extension at the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standing clinical examination to define the deformed joints and test flexibility with the push-up or Kelikian test,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Claw toe with metatarsophalangeal hyperextension and combined interphalangeal flexion, Mallet toe with isolated distal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Footwear with a deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test whether the deformity is flexible or fixed, leading to the wrong choice of procedure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hammer toe."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hammer_toe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing examination with push-up or Kelikian test",
+          "cells": [
+            {
+              "text": "Defines the deformed joints and whether the deformity is flexible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing dorsoplantar and lateral radiographs",
+          "cells": [
+            {
+              "text": "Metatarsophalangeal alignment and subluxation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Underlying neuromuscular cause when several toes are affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular assessment of the toe",
+          "cells": [
+            {
+              "text": "Perfusion before considering surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedobarography",
+          "cells": [
+            {
+              "text": "Transfer metatarsalgia that accompanies the deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hammer_toe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Claw toe",
+          "cells": [
+            {
+              "text": "Metatarsophalangeal hyperextension with flexion at both interphalangeal joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mallet toe",
+          "cells": [
+            {
+              "text": "Isolated distal interphalangeal flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crossover second toe",
+          "cells": [
+            {
+              "text": "Caused by plantar plate insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Freiberg's infraction of a lesser metatarsal head",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interdigital neuroma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hammer_toe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear",
+          "cells": [
+            {
+              "text": "Deep, roomy toe-box to accommodate the deformity and relieve dorsal pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective padding and splints",
+          "cells": [
+            {
+              "text": "Toe splints or crest pads; regular corn and callus care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stretching and taping",
+          "cells": [
+            {
+              "text": "Flexible deformities, to maintain passive correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tenotomy or tendon transfer",
+          "cells": [
+            {
+              "text": "Flexible deformities that fail conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proximal interphalangeal arthrodesis or resection arthroplasty",
+          "cells": [
+            {
+              "text": "Fixed deformities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct associated hallux valgus",
+          "cells": [
+            {
+              "text": "Contributes to lesser-toe crowding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluate for neuromuscular cause",
+          "cells": [
+            {
+              "text": "When multiple toes are involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hammer_toe-dx-mgmt",
+      "title": "Diagnosis and management of Hammer toe",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flexion deformity at the proximal interphalangeal joint of a lesser toe",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple symmetrical deformities, ulcer, digital ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for neuromuscular or inflammatory cause; treat ulcer or ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing exam with push-up or Kelikian test; radiographs; vascular check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the deformity flexible on passive testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Fixed deformity: plan joint arthrodesis or resection arthroplasty; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Padding, toe splints, crest pads and deep, roomy footwear",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stretching and taping to maintain passive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flexor tenotomy or tendon transfer if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Pain controlled; surgery reserved for deformities that fail conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

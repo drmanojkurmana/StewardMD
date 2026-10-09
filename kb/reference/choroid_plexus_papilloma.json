@@ -1,176 +1,464 @@
 {
- "id": "choroid_plexus_papilloma",
- "name": "choroid plexus papilloma",
- "aliases": [
-  "CPP",
-  "choroid plexus tumour"
- ],
- "class": "non_infective",
- "system": "nervous",
- "specialty": "neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the Central Nervous System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
-   "Hydrocephalus is the dominant clinical problem, arising from cerebrospinal fluid overproduction, obstruction of flow, or impaired reabsorption after microhaemorrhage.",
-   "Imaging shows a well-defined, lobulated, avidly and homogeneously enhancing intraventricular mass with a cauliflower-like surface.",
-   "Histology recapitulates normal choroid plexus, with delicate fibrovascular fronds lined by a single layer of cuboidal to columnar epithelium.",
-   "Tumour cells commonly express transthyretin and cytokeratins, helping distinguish them from metastatic papillary carcinoma.",
-   "It forms a spectrum with atypical papilloma (grade 2) and choroid plexus carcinoma (grade 3), graded largely on mitotic activity and anaplasia.",
-   "Choroid plexus tumours, especially carcinoma, are associated with Li-Fraumeni syndrome and germline TP53 mutation, and papilloma may occur in Aicardi syndrome.",
-   "Complete surgical resection is usually curative for papilloma and often resolves the hydrocephalus."
+  "id": "choroid_plexus_papilloma",
+  "name": "choroid plexus papilloma",
+  "aliases": [
+    "CPP",
+    "choroid plexus tumour"
   ],
-  "pathophysiology": "Choroid plexus papilloma is a benign neoplasm derived from the modified ependymal epithelium of the choroid plexus, and it faithfully reproduces the papillary architecture of normal plexus with fibrovascular cores covered by a single orderly layer of epithelium. Hydrocephalus results from a combination of active cerebrospinal fluid oversecretion by the expanded epithelial surface, mechanical obstruction of cerebrospinal fluid pathways, and reduced arachnoid reabsorption following recurrent microhaemorrhage that raises fluid protein content. A subset arises in the setting of germline TP53 mutation, linking the choroid plexus tumour spectrum to Li-Fraumeni syndrome, and progression to atypical papilloma and carcinoma is accompanied by increasing mitotic activity, cellular anaplasia and loss of the orderly papillary pattern.",
-  "additionalDifferentials": [
-   "choroid plexus carcinoma",
-   "atypical choroid plexus papilloma",
-   "ependymoma",
-   "papillary meningioma",
-   "metastatic papillary carcinoma",
-   "villous hypertrophy of the choroid plexus",
-   "central neurocytoma"
-  ],
-  "additionalInvestigations": [
-   "contrast-enhanced MRI of the brain showing an enhancing intraventricular mass",
-   "MRI of the whole neuraxis to assess cerebrospinal fluid dissemination",
-   "surgical resection with histological grading",
-   "immunohistochemistry including transthyretin and cytokeratins",
-   "assessment of cerebrospinal fluid dynamics and ventricular size",
-   "germline TP53 testing where carcinoma or a suggestive family history is present",
-   "developmental and ophthalmological assessment when Aicardi syndrome is suspected"
-  ],
-  "redFlags": [
-   "rapidly progressive hydrocephalus with raised intracranial pressure",
-   "macrocephaly and bulging fontanelle in an infant",
-   "intratumoural or intraventricular haemorrhage",
-   "features suggesting carcinoma such as brain invasion or dissemination"
-  ],
-  "prognosis": "Papilloma carries an excellent prognosis with prolonged survival and frequent cure after complete resection, in marked contrast to choroid plexus carcinoma, which behaves aggressively.",
-  "pitfalls": [
-   "assuming hydrocephalus will always resolve after resection when a shunt may still be needed",
-   "misgrading a carcinoma as a benign papilloma on limited sampling",
-   "confusing the tumour with reactive villous hypertrophy or normal plexus",
-   "overlooking an underlying Li-Fraumeni syndrome and the need for family counselling",
-   "underestimating intraoperative bleeding from these vascular tumours"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "Louis et al., cIMPACT-NOW updates on CNS tumour classification",
-   "Youmans and Winn Neurological Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit intraoperative haemorrhage",
-   "Treat hydrocephalus, which often resolves after tumour removal but may require cerebrospinal fluid diversion with a shunt or endoscopic third ventriculostomy",
-   "Obtain histological grading to distinguish benign papilloma from atypical papilloma and carcinoma and guide the need for further therapy",
-   "Undertake surveillance MRI of the brain, with neuraxis imaging where dissemination is a concern, to detect recurrence",
-   "Arrange germline TP53 testing and genetic counselling where the histology or family history is suggestive of Li-Fraumeni syndrome",
-   "Follow up through a neurosurgical multidisciplinary team with management of raised intracranial pressure symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "choroid_plexus_papilloma-pathway",
-   "title": "choroid plexus papilloma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapidly progressive hydrocephalus with raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: contrast-enhanced MRI of the brain showing an enhancing intraventricular mass, MRI of the whole neuraxis to assess cerebrospinal fluid dissemination, surgical resection with histological grading"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit intraoperative haemorrhage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: assuming hydrocephalus will always resolve after resection when a shunt may still be needed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choroid plexus papilloma."
-  }
- ],
- "tables": [
-  {
-   "id": "choroid_plexus_papilloma-matrix",
-   "title": "choroid plexus papilloma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous",
+  "specialty": "neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the Central Nervous System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
+      "Hydrocephalus is the dominant clinical problem, arising from cerebrospinal fluid overproduction, obstruction of flow, or impaired reabsorption after microhaemorrhage.",
+      "Imaging shows a well-defined, lobulated, avidly and homogeneously enhancing intraventricular mass with a cauliflower-like surface.",
+      "Histology recapitulates normal choroid plexus, with delicate fibrovascular fronds lined by a single layer of cuboidal to columnar epithelium.",
+      "Tumour cells commonly express transthyretin and cytokeratins, helping distinguish them from metastatic papillary carcinoma.",
+      "It forms a spectrum with atypical papilloma (grade 2) and choroid plexus carcinoma (grade 3), graded largely on mitotic activity and anaplasia.",
+      "Choroid plexus tumours, especially carcinoma, are associated with Li-Fraumeni syndrome and germline TP53 mutation, and papilloma may occur in Aicardi syndrome.",
+      "Complete surgical resection is usually curative for papilloma and often resolves the hydrocephalus."
     ],
-    [
-     "Key Investigations",
-     "contrast-enhanced MRI of the brain showing an enhancing intraventricular mass, MRI of the whole neuraxis to assess cerebrospinal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choroid plexus papilloma is a benign neoplasm derived from the modified ependymal epithelium of the choroid plexus, and it faithfully reproduces the papillary architecture of normal plexus with fibrovascular cores covered by a single orderly layer of epithelium. Hydrocephalus results from a combination of active cerebrospinal fluid oversecretion by the expanded epithelial surface, mechanical obstruction of cerebrospinal fluid pathways, and reduced arachnoid reabsorption following recurrent microhaemorrhage that raises fluid protein content. A subset arises in the setting of germline TP53 mutation, linking the choroid plexus tumour spectrum to Li-Fraumeni syndrome, and progression to atypical papilloma and carcinoma is accompanied by increasing mitotic activity, cellular anaplasia and loss of the orderly papillary pattern.",
+    "additionalDifferentials": [
+      "choroid plexus carcinoma",
+      "atypical choroid plexus papilloma",
+      "ependymoma",
+      "papillary meningioma",
+      "metastatic papillary carcinoma",
+      "villous hypertrophy of the choroid plexus",
+      "central neurocytoma"
     ],
-    [
-     "Primary Differentials",
-     "choroid plexus carcinoma, atypical choroid plexus papilloma, ependymoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "contrast-enhanced MRI of the brain showing an enhancing intraventricular mass",
+      "MRI of the whole neuraxis to assess cerebrospinal fluid dissemination",
+      "surgical resection with histological grading",
+      "immunohistochemistry including transthyretin and cytokeratins",
+      "assessment of cerebrospinal fluid dynamics and ventricular size",
+      "germline TP53 testing where carcinoma or a suggestive family history is present",
+      "developmental and ophthalmological assessment when Aicardi syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit",
-     "Core treatment modality"
+    "redFlags": [
+      "rapidly progressive hydrocephalus with raised intracranial pressure",
+      "macrocephaly and bulging fontanelle in an infant",
+      "intratumoural or intraventricular haemorrhage",
+      "features suggesting carcinoma such as brain invasion or dissemination"
     ],
-    [
-     "Clinical Pitfall",
-     "assuming hydrocephalus will always resolve after resection when a shunt may still be needed",
-     "Prevent diagnostic or management error"
+    "prognosis": "Papilloma carries an excellent prognosis with prolonged survival and frequent cure after complete resection, in marked contrast to choroid plexus carcinoma, which behaves aggressively.",
+    "pitfalls": [
+      "assuming hydrocephalus will always resolve after resection when a shunt may still be needed",
+      "misgrading a carcinoma as a benign papilloma on limited sampling",
+      "confusing the tumour with reactive villous hypertrophy or normal plexus",
+      "overlooking an underlying Li-Fraumeni syndrome and the need for family counselling",
+      "underestimating intraoperative bleeding from these vascular tumours"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "Louis et al., cIMPACT-NOW updates on CNS tumour classification",
+      "Youmans and Winn Neurological Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit intraoperative haemorrhage",
+      "Treat hydrocephalus, which often resolves after tumour removal but may require cerebrospinal fluid diversion with a shunt or endoscopic third ventriculostomy",
+      "Obtain histological grading to distinguish benign papilloma from atypical papilloma and carcinoma and guide the need for further therapy",
+      "Undertake surveillance MRI of the brain, with neuraxis imaging where dissemination is a concern, to detect recurrence",
+      "Arrange germline TP53 testing and genetic counselling where the histology or family history is suggestive of Li-Fraumeni syndrome",
+      "Follow up through a neurosurgical multidisciplinary team with management of raised intracranial pressure symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for choroid plexus papilloma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "choroid-plexus-papilloma-real-image",
-   "title": "choroid plexus papilloma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "choroid_plexus_papilloma-pathway",
+      "title": "choroid plexus papilloma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapidly progressive hydrocephalus with raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: contrast-enhanced MRI of the brain showing an enhancing intraventricular mass, MRI of the whole neuraxis to assess cerebrospinal fluid dissemination, surgical resection with histological grading"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit intraoperative haemorrhage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: assuming hydrocephalus will always resolve after resection when a shunt may still be needed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choroid plexus papilloma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "choroid_plexus_papilloma-matrix",
+      "title": "choroid plexus papilloma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A CNS WHO grade 1 intraventricular tumour that in children favours the lateral ventricles and in adults the fourth ventricle.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "contrast-enhanced MRI of the brain showing an enhancing intraventricular mass, MRI of the whole neuraxis to assess cerebrospinal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "choroid plexus carcinoma, atypical choroid plexus papilloma, ependymoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve cure with complete surgical resection, the definitive treatment, planning for the tumour's vascularity to limit",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "assuming hydrocephalus will always resolve after resection when a shunt may still be needed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choroid plexus papilloma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the Central Nervous System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choroid_plexus_papilloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Well-defined, lobulated, enhancing intraventricular mass with a cauliflower-like surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole neuraxis MRI",
+          "cells": [
+            {
+              "text": "CSF dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection with histological grading",
+          "cells": [
+            {
+              "text": "Benign versus atypical papilloma or carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry including transthyretin and cytokeratins",
+          "cells": [
+            {
+              "text": "Distinguishes it from metastatic papillary carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline TP53 testing",
+          "cells": [
+            {
+              "text": "Where carcinoma or a suggestive family history is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroid_plexus_papilloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choroid plexus carcinoma",
+          "cells": [
+            {
+              "text": "Brain invasion or dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical choroid plexus papilloma",
+          "cells": [
+            {
+              "text": "Grade 2 atypia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroid_plexus_papilloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Definitive treatment, with planning for vascularity to limit haemorrhage"
+            },
+            {
+              "text": "Usually curative for papilloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus management",
+          "cells": [
+            {
+              "text": "Shunt or endoscopic third ventriculostomy if needed"
+            },
+            {
+              "text": "Often resolves after tumour removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological grading",
+          "cells": [
+            {
+              "text": "Distinguishes benign, atypical papilloma and carcinoma to guide further therapy"
+            },
+            {
+              "text": "Guides further therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Brain MRI, with neuraxis imaging where dissemination is a concern"
+            },
+            {
+              "text": "Recurrence detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline TP53 testing",
+          "cells": [
+            {
+              "text": "Genetic counselling where histology or family history suggests Li-Fraumeni"
+            },
+            {
+              "text": "Li-Fraumeni syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary follow-up for raised pressure symptoms"
+            },
+            {
+              "text": "Ongoing care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choroid_plexus_papilloma-dx-mgmt",
+      "title": "Diagnosis and management of choroid plexus papilloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choroid plexus papilloma: child with hydrocephalus and intraventricular mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid hydrocephalus, bulging fontanelle, haemorrhage, dissemination)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of brain and whole neuraxis; CSF dynamics assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Enhancing intraventricular mass with hydrocephalus confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete surgical resection with haemorrhage planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check choroid plexus carcinoma, atypical papilloma and ependymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Shunt or endoscopic third ventriculostomy if hydrocephalus persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histological grading to guide further therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance MRI for recurrence; TP53 testing where carcinoma is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete resection is usually curative for papilloma and often resolves hydrocephalus",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

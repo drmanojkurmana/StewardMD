@@ -1,172 +1,443 @@
 {
- "id": "chiari_malformation",
- "name": "Chiari malformation",
- "aliases": [
-  "Arnold-Chiari malformation",
-  "Chiari I malformation",
-  "Chiari II malformation",
-  "cerebellar tonsillar ectopia"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth ventricle) through the foramen magnum",
-   "The type I form often presents in adolescence or adulthood with a suboccipital headache classically worsened by coughing, straining, or Valsalva",
-   "Associated features can include neck pain, dizziness, imbalance, and lower cranial nerve or brainstem symptoms such as swallowing difficulty",
-   "A frequent and important association is syringomyelia, a fluid-filled cavity in the cord that can cause a dissociated (cape-like) sensory loss and hand wasting",
-   "The type II form is closely linked with myelomeningocele and hydrocephalus and typically presents in infancy or early childhood",
-   "MRI of the brain and whole spine is the key investigation, quantifying tonsillar descent and detecting an associated syrinx",
-   "Asymptomatic incidental tonsillar ectopia is often simply monitored, whereas symptomatic cases or those with a progressive syrinx may need posterior fossa decompression",
-   "Surgical decompression aims to restore cerebrospinal fluid flow at the craniocervical junction and can stabilise or improve symptoms and an associated syrinx"
+  "id": "chiari_malformation",
+  "name": "Chiari malformation",
+  "aliases": [
+    "Arnold-Chiari malformation",
+    "Chiari I malformation",
+    "Chiari II malformation",
+    "cerebellar tonsillar ectopia"
   ],
-  "pathophysiology": "Chiari malformations involve herniation of hindbrain structures below the foramen magnum. In the type I form the cerebellar tonsils descend into the upper cervical canal, often with a small or crowded posterior fossa, obstructing normal cerebrospinal fluid movement across the craniocervical junction. This altered CSF dynamics is thought to drive syrinx formation within the spinal cord. The type II form is a more complex hindbrain anomaly with caudal displacement of the brainstem and fourth ventricle, strongly associated with open neural tube defects and hydrocephalus. Symptoms arise from direct compression of neural structures and from disturbed CSF flow.",
-  "additionalDifferentials": [
-   "Primary headache disorders (migraine, tension-type)",
-   "Idiopathic intracranial hypertension",
-   "Posterior fossa tumour",
-   "Multiple sclerosis or other myelopathy",
-   "Craniocervical junction anomalies (e.g. basilar invagination)"
-  ],
-  "additionalInvestigations": [
-   "MRI brain and whole spine to measure tonsillar descent and identify a syrinx",
-   "Cine or CSF flow MRI at the craniocervical junction in selected cases",
-   "Assessment for hydrocephalus and, in type II, for an associated neural tube defect",
-   "Dynamic craniocervical imaging when bony instability or basilar invagination is suspected"
-  ],
-  "redFlags": [
-   "Progressive brainstem or lower cranial nerve dysfunction, including swallowing or breathing problems",
-   "Rapidly enlarging syrinx with advancing weakness or sensory loss",
-   "Signs of raised intracranial pressure or associated obstructive hydrocephalus",
-   "Acute deterioration in an infant with type II malformation and myelomeningocele"
-  ],
-  "prognosis": "Many patients with mild or incidental type I malformation remain stable; symptomatic patients often improve or stabilise after decompression, though an established syrinx and any fixed neurological deficits may only partially recover. Type II outcomes depend heavily on the severity of associated anomalies.",
-  "pitfalls": [
-   "Attributing coughing-related occipital headache to migraine without considering the malformation",
-   "Failing to image the whole spine and missing an associated syringomyelia",
-   "Over-treating small, asymptomatic incidental tonsillar ectopia",
-   "Overlooking coexisting hydrocephalus or craniocervical instability"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative observation with serial imaging for asymptomatic or incidental type I malformation",
-   "Posterior fossa (suboccipital) decompression, with or without duraplasty, as the definitive surgery for symptomatic type I disease or a progressive syrinx",
-   "Symptomatic relief of suboccipital headache and neck pain, with advice to limit Valsalva-provoking activities",
-   "Treat associated hydrocephalus with cerebrospinal fluid diversion by shunt or endoscopic third ventriculostomy, particularly in type II",
-   "Neonatal closure of myelomeningocele and coordinated neurosurgical care for type II malformation",
-   "Monitor neurological status and any syrinx with serial MRI of brain and whole spine",
-   "Multidisciplinary neurosurgical and neurological input, with escalation for progressive brainstem or lower cranial nerve dysfunction and swallowing difficulty"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chiari_malformation-pathway",
-   "title": "Chiari malformation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth ventricle) through the foramen magnum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive brainstem or lower cranial nerve dysfunction, including swallowing or breathing problems",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain and whole spine to measure tonsillar descent and identify a syrinx, Cine or CSF flow MRI at the craniocervical junction in selected cases, Assessment for hydrocephalus and, in type II, for an associated neural"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative observation with serial imaging for asymptomatic or incidental type I malformation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing coughing-related occipital headache to migraine without considering the malformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chiari malformation."
-  }
- ],
- "tables": [
-  {
-   "id": "chiari_malformation-matrix",
-   "title": "Chiari malformation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth ventricle) through the foramen magnum",
+      "The type I form often presents in adolescence or adulthood with a suboccipital headache classically worsened by coughing, straining, or Valsalva",
+      "Associated features can include neck pain, dizziness, imbalance, and lower cranial nerve or brainstem symptoms such as swallowing difficulty",
+      "A frequent and important association is syringomyelia, a fluid-filled cavity in the cord that can cause a dissociated (cape-like) sensory loss and hand wasting",
+      "The type II form is closely linked with myelomeningocele and hydrocephalus and typically presents in infancy or early childhood",
+      "MRI of the brain and whole spine is the key investigation, quantifying tonsillar descent and detecting an associated syrinx",
+      "Asymptomatic incidental tonsillar ectopia is often simply monitored, whereas symptomatic cases or those with a progressive syrinx may need posterior fossa decompression",
+      "Surgical decompression aims to restore cerebrospinal fluid flow at the craniocervical junction and can stabilise or improve symptoms and an associated syrinx"
     ],
-    [
-     "Key Investigations",
-     "MRI brain and whole spine to measure tonsillar descent and identify a syrinx, Cine or CSF flow MRI at the craniocervical junction",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chiari malformations involve herniation of hindbrain structures below the foramen magnum. In the type I form the cerebellar tonsils descend into the upper cervical canal, often with a small or crowded posterior fossa, obstructing normal cerebrospinal fluid movement across the craniocervical junction. This altered CSF dynamics is thought to drive syrinx formation within the spinal cord. The type II form is a more complex hindbrain anomaly with caudal displacement of the brainstem and fourth ventricle, strongly associated with open neural tube defects and hydrocephalus. Symptoms arise from direct compression of neural structures and from disturbed CSF flow.",
+    "additionalDifferentials": [
+      "Primary headache disorders (migraine, tension-type)",
+      "Idiopathic intracranial hypertension",
+      "Posterior fossa tumour",
+      "Multiple sclerosis or other myelopathy",
+      "Craniocervical junction anomalies (e.g. basilar invagination)"
     ],
-    [
-     "Primary Differentials",
-     "Primary headache disorders (migraine, tension-type), Idiopathic intracranial hypertension, Posterior fossa tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain and whole spine to measure tonsillar descent and identify a syrinx",
+      "Cine or CSF flow MRI at the craniocervical junction in selected cases",
+      "Assessment for hydrocephalus and, in type II, for an associated neural tube defect",
+      "Dynamic craniocervical imaging when bony instability or basilar invagination is suspected"
     ],
-    [
-     "Management Strategy",
-     "Conservative observation with serial imaging for asymptomatic or incidental type I malformation",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive brainstem or lower cranial nerve dysfunction, including swallowing or breathing problems",
+      "Rapidly enlarging syrinx with advancing weakness or sensory loss",
+      "Signs of raised intracranial pressure or associated obstructive hydrocephalus",
+      "Acute deterioration in an infant with type II malformation and myelomeningocele"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing coughing-related occipital headache to migraine without considering the malformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients with mild or incidental type I malformation remain stable; symptomatic patients often improve or stabilise after decompression, though an established syrinx and any fixed neurological deficits may only partially recover. Type II outcomes depend heavily on the severity of associated anomalies.",
+    "pitfalls": [
+      "Attributing coughing-related occipital headache to migraine without considering the malformation",
+      "Failing to image the whole spine and missing an associated syringomyelia",
+      "Over-treating small, asymptomatic incidental tonsillar ectopia",
+      "Overlooking coexisting hydrocephalus or craniocervical instability"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative observation with serial imaging for asymptomatic or incidental type I malformation",
+      "Posterior fossa (suboccipital) decompression, with or without duraplasty, as the definitive surgery for symptomatic type I disease or a progressive syrinx",
+      "Symptomatic relief of suboccipital headache and neck pain, with advice to limit Valsalva-provoking activities",
+      "Treat associated hydrocephalus with cerebrospinal fluid diversion by shunt or endoscopic third ventriculostomy, particularly in type II",
+      "Neonatal closure of myelomeningocele and coordinated neurosurgical care for type II malformation",
+      "Monitor neurological status and any syrinx with serial MRI of brain and whole spine",
+      "Multidisciplinary neurosurgical and neurological input, with escalation for progressive brainstem or lower cranial nerve dysfunction and swallowing difficulty"
     ]
-   ],
-   "caption": "Overview comparison matrix for chiari malformation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chiari-malformation-real-image",
-   "title": "Chiari malformation: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "chiari_malformation-pathway",
+      "title": "Chiari malformation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth ventricle) through the foramen magnum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive brainstem or lower cranial nerve dysfunction, including swallowing or breathing problems",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain and whole spine to measure tonsillar descent and identify a syrinx, Cine or CSF flow MRI at the craniocervical junction in selected cases, Assessment for hydrocephalus and, in type II, for an associated neural"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative observation with serial imaging for asymptomatic or incidental type I malformation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing coughing-related occipital headache to migraine without considering the malformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chiari malformation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chiari_malformation-matrix",
+      "title": "Chiari malformation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chiari malformation describes downward displacement of the cerebellar tonsils (and, in some types, the brainstem and fourth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain and whole spine to measure tonsillar descent and identify a syrinx, Cine or CSF flow MRI at the craniocervical junction",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary headache disorders (migraine, tension-type), Idiopathic intracranial hypertension, Posterior fossa tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative observation with serial imaging for asymptomatic or incidental type I malformation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing coughing-related occipital headache to migraine without considering the malformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chiari malformation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chiari_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and whole spine",
+          "cells": [
+            {
+              "text": "Tonsillar descent and an associated syrinx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cine or CSF flow MRI at the craniocervical junction",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hydrocephalus",
+          "cells": [
+            {
+              "text": "In type II, with an associated neural tube defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic craniocervical imaging",
+          "cells": [
+            {
+              "text": "Suspected bony instability or basilar invagination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of the cord",
+          "cells": [
+            {
+              "text": "Dissociated sensory loss and hand wasting from syringomyelia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chiari_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Serial imaging for asymptomatic or incidental type I malformation"
+            },
+            {
+              "text": "Asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior fossa decompression",
+          "cells": [
+            {
+              "text": "Suboccipital decompression, with or without duraplasty"
+            },
+            {
+              "text": "Symptomatic type I or progressive syrinx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Headache relief",
+          "cells": [
+            {
+              "text": "Relief of headache and neck pain; limit Valsalva-provoking activity"
+            },
+            {
+              "text": "Suboccipital headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF diversion",
+          "cells": [
+            {
+              "text": "Shunt or endoscopic third ventriculostomy for associated hydrocephalus"
+            },
+            {
+              "text": "Particularly type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelomeningocele closure",
+          "cells": [
+            {
+              "text": "Neonatal closure and coordinated neurosurgical care"
+            },
+            {
+              "text": "Type II malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Serial MRI of brain and whole spine; monitor neurological status and syrinx"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Escalate for progressive brainstem or lower cranial nerve dysfunction and swallowing difficulty"
+            },
+            {
+              "text": "Brainstem involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chiari_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Chiari malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Chiari malformation: suboccipital headache worse on straining, with neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (brainstem or swallowing dysfunction, rapid syrinx, raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for brainstem or cranial nerve dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and whole spine for tonsillar descent and syrinx; flow imaging if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tonsillar descent with syrinx or symptoms confirmed on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observation with serial imaging for asymptomatic or incidental type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check primary headache, intracranial hypertension and posterior fossa tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Suboccipital decompression for symptomatic type I or progressive syrinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Shunt or endoscopic third ventriculostomy for associated hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neonatal closure of myelomeningocele for type II malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery restores CSF flow and can stabilise or improve symptoms and syrinx",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

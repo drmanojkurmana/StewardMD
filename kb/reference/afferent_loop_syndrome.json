@@ -1,172 +1,491 @@
 {
- "id": "afferent_loop_syndrome",
- "name": "Afferent loop syndrome",
- "aliases": [
-  "afferent limb syndrome",
-  "duodenal stump syndrome",
-  "afferent loop obstruction"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic limb becomes obstructed",
-   "Acute obstruction is a surgical emergency and can lead to duodenal stump blowout, pancreatitis, or ischaemia",
-   "Chronic partial obstruction causes postprandial right upper quadrant pain relieved by bilious vomiting that characteristically contains little or no food",
-   "Stasis in the loop predisposes to bacterial overgrowth with malabsorption, fat-soluble vitamin deficiency, and vitamin B12 deficiency",
-   "Cross-sectional imaging shows a dilated, fluid-filled afferent limb, sometimes with a U-shaped configuration",
-   "Definitive management of significant obstruction is surgical revision, with endoscopic or drainage measures in selected cases",
-   "The syndrome should be considered in any patient with prior gastric surgery presenting with bilious vomiting and upper abdominal pain"
+  "id": "afferent_loop_syndrome",
+  "name": "Afferent loop syndrome",
+  "aliases": [
+    "afferent limb syndrome",
+    "duodenal stump syndrome",
+    "afferent loop obstruction"
   ],
-  "pathophysiology": "Afferent loop syndrome develops when the afferent (biliopancreatic) limb of a gastrojejunostomy becomes obstructed by kinking, adhesions, internal herniation, stenosis, recurrent tumour, or a long redundant loop. Bile and pancreatic secretions accumulate in the closed or partially obstructed limb, raising intraluminal pressure; once the pressure overcomes the obstruction the accumulated fluid is discharged suddenly, producing projectile bilious vomiting and relief of pain. Chronic stasis fosters small-intestinal bacterial overgrowth, deconjugation of bile salts, and consequent fat and vitamin malabsorption, while acute complete obstruction risks duodenal stump rupture and pancreatitis.",
-  "additionalDifferentials": [
-   "Efferent loop obstruction",
-   "Gastric outlet obstruction from other causes",
-   "Recurrent or new malignancy at the anastomosis",
-   "Acute pancreatitis or biliary disease",
-   "Internal hernia after gastric surgery",
-   "Marginal ulceration at the anastomosis"
-  ],
-  "additionalInvestigations": [
-   "CT of the abdomen showing a dilated fluid-filled afferent limb",
-   "Upper endoscopy to assess the anastomosis and exclude recurrent tumour",
-   "Hepatobiliary imaging where biliary obstruction is suspected",
-   "Serum amylase/lipase and liver function tests",
-   "Breath testing or clinical assessment for bacterial overgrowth and nutritional deficiencies"
-  ],
-  "redFlags": [
-   "Severe pain with signs of duodenal stump rupture or peritonitis",
-   "Features of acute pancreatitis",
-   "Sepsis or haemodynamic instability suggesting closed-loop obstruction or ischaemia",
-   "Weight loss and a mass suggesting recurrent malignancy"
-  ],
-  "prognosis": "Acute afferent loop obstruction carries significant risk and requires urgent intervention, whereas chronic partial obstruction can often be corrected surgically with good functional outcomes; untreated stasis leads to progressive malabsorption.",
-  "pitfalls": [
-   "Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction",
-   "Overlooking bacterial overgrowth and consequent B12 and fat-soluble vitamin deficiency",
-   "Delaying surgery in acute obstruction, risking duodenal stump blowout",
-   "Failing to exclude recurrent malignancy as the cause of the obstruction"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Maingot's Abdominal Operations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia",
-   "Correct significant chronic obstruction with surgical revision of the anastomosis, typically conversion to a Roux-en-Y configuration that drains the biliopancreatic limb",
-   "Consider endoscopic or percutaneous decompression and stenting in selected patients unfit for surgery or with malignant obstruction",
-   "Treat small-intestinal bacterial overgrowth with rotating antibiotics to relieve malabsorption",
-   "Replace vitamin B12 and fat-soluble vitamins and provide nutritional support for malabsorption",
-   "Investigate for and manage recurrent tumour at the anastomosis as a cause of obstruction",
-   "Provide fluid resuscitation, analgesia and nasogastric decompression as supportive measures in acute presentations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "afferent_loop_syndrome-pathway",
-   "title": "Afferent loop syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic limb becomes obstructed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe pain with signs of duodenal stump rupture or peritonitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the abdomen showing a dilated fluid-filled afferent limb, Upper endoscopy to assess the anastomosis and exclude recurrent tumour, Hepatobiliary imaging where biliary obstruction is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of afferent loop syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "afferent_loop_syndrome-matrix",
-   "title": "Afferent loop syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic limb becomes obstructed",
+      "Acute obstruction is a surgical emergency and can lead to duodenal stump blowout, pancreatitis, or ischaemia",
+      "Chronic partial obstruction causes postprandial right upper quadrant pain relieved by bilious vomiting that characteristically contains little or no food",
+      "Stasis in the loop predisposes to bacterial overgrowth with malabsorption, fat-soluble vitamin deficiency, and vitamin B12 deficiency",
+      "Cross-sectional imaging shows a dilated, fluid-filled afferent limb, sometimes with a U-shaped configuration",
+      "Definitive management of significant obstruction is surgical revision, with endoscopic or drainage measures in selected cases",
+      "The syndrome should be considered in any patient with prior gastric surgery presenting with bilious vomiting and upper abdominal pain"
     ],
-    [
-     "Key Investigations",
-     "CT of the abdomen showing a dilated fluid-filled afferent limb, Upper endoscopy to assess the anastomosis and exclude recurrent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Afferent loop syndrome develops when the afferent (biliopancreatic) limb of a gastrojejunostomy becomes obstructed by kinking, adhesions, internal herniation, stenosis, recurrent tumour, or a long redundant loop. Bile and pancreatic secretions accumulate in the closed or partially obstructed limb, raising intraluminal pressure; once the pressure overcomes the obstruction the accumulated fluid is discharged suddenly, producing projectile bilious vomiting and relief of pain. Chronic stasis fosters small-intestinal bacterial overgrowth, deconjugation of bile salts, and consequent fat and vitamin malabsorption, while acute complete obstruction risks duodenal stump rupture and pancreatitis.",
+    "additionalDifferentials": [
+      "Efferent loop obstruction",
+      "Gastric outlet obstruction from other causes",
+      "Recurrent or new malignancy at the anastomosis",
+      "Acute pancreatitis or biliary disease",
+      "Internal hernia after gastric surgery",
+      "Marginal ulceration at the anastomosis"
     ],
-    [
-     "Primary Differentials",
-     "Efferent loop obstruction, Gastric outlet obstruction from other causes, Recurrent or new malignancy at the anastomosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the abdomen showing a dilated fluid-filled afferent limb",
+      "Upper endoscopy to assess the anastomosis and exclude recurrent tumour",
+      "Hepatobiliary imaging where biliary obstruction is suspected",
+      "Serum amylase/lipase and liver function tests",
+      "Breath testing or clinical assessment for bacterial overgrowth and nutritional deficiencies"
     ],
-    [
-     "Management Strategy",
-     "Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe pain with signs of duodenal stump rupture or peritonitis",
+      "Features of acute pancreatitis",
+      "Sepsis or haemodynamic instability suggesting closed-loop obstruction or ischaemia",
+      "Weight loss and a mass suggesting recurrent malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute afferent loop obstruction carries significant risk and requires urgent intervention, whereas chronic partial obstruction can often be corrected surgically with good functional outcomes; untreated stasis leads to progressive malabsorption.",
+    "pitfalls": [
+      "Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction",
+      "Overlooking bacterial overgrowth and consequent B12 and fat-soluble vitamin deficiency",
+      "Delaying surgery in acute obstruction, risking duodenal stump blowout",
+      "Failing to exclude recurrent malignancy as the cause of the obstruction"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Maingot's Abdominal Operations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia",
+      "Correct significant chronic obstruction with surgical revision of the anastomosis, typically conversion to a Roux-en-Y configuration that drains the biliopancreatic limb",
+      "Consider endoscopic or percutaneous decompression and stenting in selected patients unfit for surgery or with malignant obstruction",
+      "Treat small-intestinal bacterial overgrowth with rotating antibiotics to relieve malabsorption",
+      "Replace vitamin B12 and fat-soluble vitamins and provide nutritional support for malabsorption",
+      "Investigate for and manage recurrent tumour at the anastomosis as a cause of obstruction",
+      "Provide fluid resuscitation, analgesia and nasogastric decompression as supportive measures in acute presentations"
     ]
-   ],
-   "caption": "Overview comparison matrix for afferent loop syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "afferent-loop-syndrome-real-image",
-   "title": "Afferent loop syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "afferent_loop_syndrome-pathway",
+      "title": "Afferent loop syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic limb becomes obstructed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe pain with signs of duodenal stump rupture or peritonitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the abdomen showing a dilated fluid-filled afferent limb, Upper endoscopy to assess the anastomosis and exclude recurrent tumour, Hepatobiliary imaging where biliary obstruction is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of afferent loop syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "afferent_loop_syndrome-matrix",
+      "title": "Afferent loop syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mechanical complication after gastrojejunostomy (classically Billroth II reconstruction) in which the afferent biliopancreatic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the abdomen showing a dilated fluid-filled afferent limb, Upper endoscopy to assess the anastomosis and exclude recurrent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Efferent loop obstruction, Gastric outlet obstruction from other causes, Recurrent or new malignancy at the anastomosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer acute obstruction for emergency surgical decompression to prevent duodenal stump blowout, pancreatitis and ischaemia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing bilious vomiting after gastric surgery to benign causes and missing obstruction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for afferent loop syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "afferent_loop_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the abdomen",
+          "cells": [
+            {
+              "text": "Dilated fluid-filled afferent limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Anastomosis and recurrent tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary imaging",
+          "cells": [
+            {
+              "text": "Biliary obstruction when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amylase, lipase and liver function tests",
+          "cells": [
+            {
+              "text": "Pancreatic and biliary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breath testing or nutritional assessment",
+          "cells": [
+            {
+              "text": "Bacterial overgrowth and deficiencies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "afferent_loop_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Efferent loop obstruction",
+          "cells": [
+            {
+              "text": "Outflow limb obstruction"
+            },
+            {
+              "text": "CT of the abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal hernia after gastric surgery",
+          "cells": [
+            {
+              "text": "Herniation after gastric surgery"
+            },
+            {
+              "text": "CT of the abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or new malignancy at the anastomosis",
+          "cells": [
+            {
+              "text": "Weight loss and a mass"
+            },
+            {
+              "text": "Upper endoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "afferent_loop_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgical decompression for acute obstruction",
+          "cells": [
+            {
+              "text": "Acute obstruction"
+            },
+            {
+              "text": "Prevents stump blowout, pancreatitis and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical revision, typically Roux-en-Y reconstruction",
+          "cells": [
+            {
+              "text": "Chronic significant obstruction"
+            },
+            {
+              "text": "Drains the biliopancreatic limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic or percutaneous decompression and stenting",
+          "cells": [
+            {
+              "text": "Patients unfit for surgery or with malignant obstruction"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rotating antibiotics for small-bowel bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Malabsorption from stasis"
+            },
+            {
+              "text": "Rotating regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replacement of vitamin B12 and fat-soluble vitamins with nutritional support",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            },
+            {
+              "text": "Nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation and treatment of recurrent anastomotic tumour",
+          "cells": [
+            {
+              "text": "Cause of obstruction"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids, analgesia and nasogastric decompression",
+          "cells": [
+            {
+              "text": "Acute presentation"
+            },
+            {
+              "text": "Supportive measures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "afferent_loop_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Afferent loop syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Postprandial pain relieved by bilious vomiting after gastric surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pain with duodenal stump rupture, peritonitis or pancreatitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical decompression to prevent stump blowout and ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT abdomen for dilated afferent limb; endoscopy; amylase and LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dilated fluid-filled afferent limb on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Plan surgical revision, typically Roux-en-Y reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review efferent obstruction, internal hernia and recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic or percutaneous stenting for those unfit for surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rotating antibiotics for small-bowel bacterial overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Replace vitamin B12 and fat-soluble vitamins; nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute obstruction is urgent; chronic partial obstruction often corrects surgically",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

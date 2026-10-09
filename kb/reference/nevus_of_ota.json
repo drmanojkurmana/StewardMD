@@ -1,172 +1,441 @@
 {
- "id": "nevus_of_ota",
- "name": "Naevus of Ota",
- "aliases": [
-  "nevus of Ota",
-  "oculodermal melanocytosis",
-  "naevus fuscoceruleus ophthalmomaxillaris"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of the trigeminal nerve",
-   "Frequently involves the sclera, conjunctiva and other ocular structures (oculodermal melanocytosis), and ipsilateral glaucoma can develop, so ophthalmology review is important",
-   "More common in individuals of Asian and African descent and in females; it may be present at birth or first appear around puberty",
-   "The pigment is dermal, so it is not accentuated by Wood lamp and topical lightening agents are ineffective",
-   "Pigment-specific Q-switched or picosecond lasers are the treatment of choice for the cutaneous component",
-   "Rarely, melanoma may arise within cutaneous, uveal or leptomeningeal melanocytes, so new nodules or visual change require prompt assessment",
-   "Bilateral involvement is uncommon but recognised and warrants consideration of associated conditions"
+  "id": "nevus_of_ota",
+  "name": "Naevus of Ota",
+  "aliases": [
+    "nevus of Ota",
+    "oculodermal melanocytosis",
+    "naevus fuscoceruleus ophthalmomaxillaris"
   ],
-  "pathophysiology": "During embryogenesis melanocytes derived from the neural crest normally migrate to the epidermis, but in naevus of Ota some are arrested within the dermis. These entrapped, melanin-producing dermal melanocytes scatter light to give a characteristic blue-grey (Tyndall) hue, and their distribution follows the ophthalmic and maxillary trigeminal branches. The same melanocytic population can involve ocular tissues, accounting for scleral pigmentation and the associated glaucoma and, rarely, melanoma risk.",
-  "additionalDifferentials": [
-   "Mongolian spot (congenital dermal melanocytosis)",
-   "Naevus of Ito",
-   "Blue naevus",
-   "Melasma",
-   "Post-inflammatory hyperpigmentation",
-   "Minocycline or other drug-induced pigmentation",
-   "Congenital melanocytic naevus"
-  ],
-  "additionalInvestigations": [
-   "Ophthalmic examination with intraocular pressure and glaucoma screening",
-   "Dermoscopy to characterise the dermal pigment pattern",
-   "Serial photography to monitor for change",
-   "Biopsy of any nodular or clinically suspicious area to exclude melanoma",
-   "Neuroimaging if leptomeningeal melanosis or neurological features are suspected"
-  ],
-  "redFlags": [
-   "A new nodule, thickening or focal change suggesting cutaneous or uveal melanoma",
-   "Rising intraocular pressure or visual disturbance indicating glaucoma",
-   "Neurological symptoms raising concern for leptomeningeal melanocytosis",
-   "Rapid extension or ulceration of the pigmented area"
-  ],
-  "prognosis": "The naevus is benign and persists lifelong if untreated, with good cosmetic improvement achievable using pigment-specific lasers; the main long-term concerns are glaucoma and a small risk of ocular or cutaneous melanoma.",
-  "pitfalls": [
-   "Overlooking the need for ophthalmic review and glaucoma screening",
-   "Attempting to treat the dermal pigment with topical lightening agents",
-   "Missing an evolving melanoma within the lesion or eye",
-   "Confusing it with a Mongolian spot or acquired melasma"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or picosecond lasers, as topical lightening agents are ineffective on dermal pigment",
-   "Arrange ophthalmology review with intraocular pressure measurement and glaucoma screening for oculodermal melanocytosis",
-   "Undertake long-term surveillance for melanoma arising in cutaneous, uveal or leptomeningeal melanocytes, assessing new nodules or visual change promptly",
-   "Monitor with serial photography for change",
-   "Biopsy any nodular or clinically suspicious area to exclude melanoma",
-   "Arrange neuroimaging if leptomeningeal melanosis or neurological features are suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nevus_of_ota-pathway",
-   "title": "Naevus of Ota: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of the trigeminal nerve",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A new nodule, thickening or focal change suggesting cutaneous or uveal melanoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmic examination with intraocular pressure and glaucoma screening, Dermoscopy to characterise the dermal pigment pattern, Serial photography to monitor for change"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or picosecond lasers, as topical lightening agents are ineffective on dermal pigment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the need for ophthalmic review and glaucoma screening"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of naevus of ota."
-  }
- ],
- "tables": [
-  {
-   "id": "nevus_of_ota-matrix",
-   "title": "Naevus of Ota: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of the trigeminal nerve",
+      "Frequently involves the sclera, conjunctiva and other ocular structures (oculodermal melanocytosis), and ipsilateral glaucoma can develop, so ophthalmology review is important",
+      "More common in individuals of Asian and African descent and in females; it may be present at birth or first appear around puberty",
+      "The pigment is dermal, so it is not accentuated by Wood lamp and topical lightening agents are ineffective",
+      "Pigment-specific Q-switched or picosecond lasers are the treatment of choice for the cutaneous component",
+      "Rarely, melanoma may arise within cutaneous, uveal or leptomeningeal melanocytes, so new nodules or visual change require prompt assessment",
+      "Bilateral involvement is uncommon but recognised and warrants consideration of associated conditions"
     ],
-    [
-     "Key Investigations",
-     "Ophthalmic examination with intraocular pressure and glaucoma screening, Dermoscopy to characterise the dermal pigment pattern,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During embryogenesis melanocytes derived from the neural crest normally migrate to the epidermis, but in naevus of Ota some are arrested within the dermis. These entrapped, melanin-producing dermal melanocytes scatter light to give a characteristic blue-grey (Tyndall) hue, and their distribution follows the ophthalmic and maxillary trigeminal branches. The same melanocytic population can involve ocular tissues, accounting for scleral pigmentation and the associated glaucoma and, rarely, melanoma risk.",
+    "additionalDifferentials": [
+      "Mongolian spot (congenital dermal melanocytosis)",
+      "Naevus of Ito",
+      "Blue naevus",
+      "Melasma",
+      "Post-inflammatory hyperpigmentation",
+      "Minocycline or other drug-induced pigmentation",
+      "Congenital melanocytic naevus"
     ],
-    [
-     "Primary Differentials",
-     "Mongolian spot (congenital dermal melanocytosis), Naevus of Ito, Blue naevus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmic examination with intraocular pressure and glaucoma screening",
+      "Dermoscopy to characterise the dermal pigment pattern",
+      "Serial photography to monitor for change",
+      "Biopsy of any nodular or clinically suspicious area to exclude melanoma",
+      "Neuroimaging if leptomeningeal melanosis or neurological features are suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or",
-     "Core treatment modality"
+    "redFlags": [
+      "A new nodule, thickening or focal change suggesting cutaneous or uveal melanoma",
+      "Rising intraocular pressure or visual disturbance indicating glaucoma",
+      "Neurological symptoms raising concern for leptomeningeal melanocytosis",
+      "Rapid extension or ulceration of the pigmented area"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the need for ophthalmic review and glaucoma screening",
-     "Prevent diagnostic or management error"
+    "prognosis": "The naevus is benign and persists lifelong if untreated, with good cosmetic improvement achievable using pigment-specific lasers; the main long-term concerns are glaucoma and a small risk of ocular or cutaneous melanoma.",
+    "pitfalls": [
+      "Overlooking the need for ophthalmic review and glaucoma screening",
+      "Attempting to treat the dermal pigment with topical lightening agents",
+      "Missing an evolving melanoma within the lesion or eye",
+      "Confusing it with a Mongolian spot or acquired melasma"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or picosecond lasers, as topical lightening agents are ineffective on dermal pigment",
+      "Arrange ophthalmology review with intraocular pressure measurement and glaucoma screening for oculodermal melanocytosis",
+      "Undertake long-term surveillance for melanoma arising in cutaneous, uveal or leptomeningeal melanocytes, assessing new nodules or visual change promptly",
+      "Monitor with serial photography for change",
+      "Biopsy any nodular or clinically suspicious area to exclude melanoma",
+      "Arrange neuroimaging if leptomeningeal melanosis or neurological features are suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for naevus of ota."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nevus-of-ota-real-image",
-   "title": "Naevus of Ota: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "nevus_of_ota-pathway",
+      "title": "Naevus of Ota: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of the trigeminal nerve",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A new nodule, thickening or focal change suggesting cutaneous or uveal melanoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmic examination with intraocular pressure and glaucoma screening, Dermoscopy to characterise the dermal pigment pattern, Serial photography to monitor for change"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or picosecond lasers, as topical lightening agents are ineffective on dermal pigment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the need for ophthalmic review and glaucoma screening"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of naevus of ota."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nevus_of_ota-matrix",
+      "title": "Naevus of Ota: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Unilateral, mottled blue-grey to brown pigmentation in the distribution of the ophthalmic (V1) and maxillary (V2) divisions of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmic examination with intraocular pressure and glaucoma screening, Dermoscopy to characterise the dermal pigment pattern,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mongolian spot (congenital dermal melanocytosis), Naevus of Ito, Blue naevus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the lesion is benign and treat the cutaneous component for cosmetic reasons with pigment-specific Q-switched or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the need for ophthalmic review and glaucoma screening",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for naevus of ota."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nevus_of_ota-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmic examination with intraocular pressure",
+          "cells": [
+            {
+              "text": "Glaucoma and uveal melanocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Characterises the dermal pigment pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Monitors for change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any nodular or suspicious area",
+          "cells": [
+            {
+              "text": "Excludes melanoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_of_ota-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mongolian spot",
+          "cells": [
+            {
+              "text": "Congenital dermal melanocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naevus of Ito",
+          "cells": [
+            {
+              "text": "Shoulder distribution rather than trigeminal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blue naevus",
+          "cells": [
+            {
+              "text": "Solitary dermal melanocytic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melasma",
+          "cells": [
+            {
+              "text": "Acquired pigmentation without dermal melanocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced pigmentation",
+          "cells": [
+            {
+              "text": "Minocycline and similar agents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_of_ota-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Lesion is benign; cosmetic treatment only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigment-specific laser",
+          "cells": [
+            {
+              "text": "Q-switched or picosecond lasers for cutaneous pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Intraocular pressure and glaucoma screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid topical lightening agents",
+          "cells": [
+            {
+              "text": "Ineffective on dermal pigment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nevus_of_ota-dx-mgmt",
+      "title": "Diagnosis and management of Naevus of Ota",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral blue-grey pigment in the trigeminal V1 or V2 distribution",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new nodule, raised eye pressure, neurological symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review for raised pressure or uveal melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmic examination with eye pressure, dermoscopy, serial photography, biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Trigeminal dermal melanocytosis with eye examination completed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ito naevus or Mongolian spot; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; treat cutaneous pigment for cosmetic reasons",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pigment-specific laser for cosmetic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology review with pressure and glaucoma screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy any suspicious nodule or focal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign skin lesion; main long-term concerns are glaucoma and a small melanoma risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

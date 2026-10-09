@@ -1,178 +1,485 @@
 {
- "id": "pituitary_gigantism",
- "name": "Pituitary gigantism",
- "aliases": [
-  "pituitary gigantism",
-  "gigantism",
-  "childhood growth hormone excess",
-  "paediatric somatotroph adenoma"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall stature, in contrast to acromegaly which occurs after fusion",
-   "Usually caused by a growth-hormone-secreting pituitary somatotroph adenoma, often a macroadenoma at diagnosis in children",
-   "Frequently associated with genetic or syndromic conditions including X-linked acrogigantism (GPR101 duplication), AIP mutations in familial isolated pituitary adenoma, McCune-Albright syndrome (GNAS mosaicism), Carney complex and MEN1",
-   "Acromegalic features such as coarse facies, large hands and feet and prognathism coexist with the tall stature",
-   "Growth hormone excess also causes soft-tissue overgrowth, sweating, headaches and glucose intolerance, and mass effect may cause visual disturbance and hypopituitarism",
-   "Diagnosis rests on an elevated IGF-1 for age and failure of growth hormone to suppress during an oral glucose tolerance test, together with pituitary MRI",
-   "Management combines transsphenoidal surgery with medical therapy using somatostatin analogues and the growth-hormone-receptor antagonist pegvisomant, and radiotherapy for residual disease",
-   "Screening for associated syndromes and genetic testing is important, especially in young patients"
+  "id": "pituitary_gigantism",
+  "name": "Pituitary gigantism",
+  "aliases": [
+    "pituitary gigantism",
+    "gigantism",
+    "childhood growth hormone excess",
+    "paediatric somatotroph adenoma"
   ],
-  "pathophysiology": "Pituitary gigantism results from sustained growth hormone hypersecretion, almost always from a somatotroph pituitary adenoma, occurring while the epiphyseal growth plates are still open. Growth hormone stimulates hepatic and local production of insulin-like growth factor 1, which drives chondrocyte proliferation at the growth plates and accelerated linear growth, giving excessive height, while simultaneous periosteal and soft-tissue growth produces acromegalic features. A substantial proportion of paediatric cases are genetically determined, through germline or mosaic activation of growth-promoting pathways as in X-linked acrogigantism, AIP-related familial pituitary adenomas, McCune-Albright syndrome with activating GNAS mutations, Carney complex and MEN1, and these often produce larger, earlier and more aggressive tumours than sporadic disease.",
-  "additionalDifferentials": [
-   "Familial or constitutional tall stature",
-   "Marfan syndrome and other connective tissue disorders",
-   "Homocystinuria",
-   "Klinefelter syndrome",
-   "Sotos syndrome (cerebral gigantism) and other overgrowth syndromes",
-   "Precocious puberty with early growth acceleration then early fusion",
-   "Ectopic growth-hormone-releasing hormone secretion, which is rare"
-  ],
-  "additionalInvestigations": [
-   "Serum IGF-1 interpreted against age- and sex-specific reference ranges",
-   "Oral glucose tolerance test with growth hormone measurement, showing failure of growth hormone to suppress",
-   "Pituitary MRI to define the somatotroph adenoma and any invasion",
-   "Assessment of the other pituitary axes and prolactin, as co-secretion is common",
-   "Formal visual field testing if there is suprasellar extension",
-   "Genetic testing for GPR101, AIP, GNAS, MEN1 and PRKAR1A with screening for associated syndromic features"
-  ],
-  "redFlags": [
-   "Rapidly accelerating growth crossing height centiles in a child",
-   "Visual field loss or headache from a large invasive adenoma",
-   "Features of McCune-Albright syndrome such as cafe-au-lait patches and fibrous dysplasia, or of Carney complex, prompting syndrome workup",
-   "Cardiovascular or metabolic complications of growth hormone excess"
-  ],
-  "prognosis": "Control can be difficult because these tumours are often large and aggressive, especially in the genetic forms, and frequently require multimodal therapy; with biochemical control final height and complications are limited, but incomplete control risks continued growth and cardiovascular and metabolic morbidity.",
-  "pitfalls": [
-   "Attributing extreme tall stature to familial tall stature without measuring IGF-1",
-   "Failing to test for an underlying genetic syndrome in a young patient with gigantism",
-   "Overlooking prolactin co-secretion or other pituitary hormone deficits",
-   "Underestimating the aggressiveness and treatment resistance of syndromic somatotroph tumours"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on Acromegaly",
-   "Sperling Pediatric Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment",
-   "Somatostatin receptor ligands such as octreotide or lanreotide to suppress growth hormone when surgery is incomplete",
-   "Growth hormone receptor antagonist pegvisomant, alone or in combination, for persistent IGF-1 elevation",
-   "Adjunctive dopamine agonist cabergoline, particularly where prolactin is co-secreted",
-   "Radiotherapy for residual or aggressive tumour not controlled medically",
-   "Replacement of deficient anterior pituitary hormones and management of glucose intolerance",
-   "Serial IGF-1, growth velocity, visual field and metabolic surveillance",
-   "Genetic testing for AIP, GPR101, GNAS, MEN1 and PRKAR1A with counselling and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pituitary_gigantism-pathway",
-   "title": "Pituitary gigantism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall stature, in contrast to acromegaly which occurs after fusion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly accelerating growth crossing height centiles in a child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum IGF-1 interpreted against age- and sex-specific reference ranges, Oral glucose tolerance test with growth hormone measurement, showing failure of growth hormone to suppress, Pituitary MRI to define the somatotroph"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing extreme tall stature to familial tall stature without measuring IGF-1"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pituitary gigantism."
-  }
- ],
- "tables": [
-  {
-   "id": "pituitary_gigantism-matrix",
-   "title": "Pituitary gigantism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall stature, in contrast to acromegaly which occurs after fusion",
+      "Usually caused by a growth-hormone-secreting pituitary somatotroph adenoma, often a macroadenoma at diagnosis in children",
+      "Frequently associated with genetic or syndromic conditions including X-linked acrogigantism (GPR101 duplication), AIP mutations in familial isolated pituitary adenoma, McCune-Albright syndrome (GNAS mosaicism), Carney complex and MEN1",
+      "Acromegalic features such as coarse facies, large hands and feet and prognathism coexist with the tall stature",
+      "Growth hormone excess also causes soft-tissue overgrowth, sweating, headaches and glucose intolerance, and mass effect may cause visual disturbance and hypopituitarism",
+      "Diagnosis rests on an elevated IGF-1 for age and failure of growth hormone to suppress during an oral glucose tolerance test, together with pituitary MRI",
+      "Management combines transsphenoidal surgery with medical therapy using somatostatin analogues and the growth-hormone-receptor antagonist pegvisomant, and radiotherapy for residual disease",
+      "Screening for associated syndromes and genetic testing is important, especially in young patients"
     ],
-    [
-     "Key Investigations",
-     "Serum IGF-1 interpreted against age- and sex-specific reference ranges, Oral glucose tolerance test with growth hormone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pituitary gigantism results from sustained growth hormone hypersecretion, almost always from a somatotroph pituitary adenoma, occurring while the epiphyseal growth plates are still open. Growth hormone stimulates hepatic and local production of insulin-like growth factor 1, which drives chondrocyte proliferation at the growth plates and accelerated linear growth, giving excessive height, while simultaneous periosteal and soft-tissue growth produces acromegalic features. A substantial proportion of paediatric cases are genetically determined, through germline or mosaic activation of growth-promoting pathways as in X-linked acrogigantism, AIP-related familial pituitary adenomas, McCune-Albright syndrome with activating GNAS mutations, Carney complex and MEN1, and these often produce larger, earlier and more aggressive tumours than sporadic disease.",
+    "additionalDifferentials": [
+      "Familial or constitutional tall stature",
+      "Marfan syndrome and other connective tissue disorders",
+      "Homocystinuria",
+      "Klinefelter syndrome",
+      "Sotos syndrome (cerebral gigantism) and other overgrowth syndromes",
+      "Precocious puberty with early growth acceleration then early fusion",
+      "Ectopic growth-hormone-releasing hormone secretion, which is rare"
     ],
-    [
-     "Primary Differentials",
-     "Familial or constitutional tall stature, Marfan syndrome and other connective tissue disorders, Homocystinuria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum IGF-1 interpreted against age- and sex-specific reference ranges",
+      "Oral glucose tolerance test with growth hormone measurement, showing failure of growth hormone to suppress",
+      "Pituitary MRI to define the somatotroph adenoma and any invasion",
+      "Assessment of the other pituitary axes and prolactin, as co-secretion is common",
+      "Formal visual field testing if there is suprasellar extension",
+      "Genetic testing for GPR101, AIP, GNAS, MEN1 and PRKAR1A with screening for associated syndromic features"
     ],
-    [
-     "Management Strategy",
-     "Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly accelerating growth crossing height centiles in a child",
+      "Visual field loss or headache from a large invasive adenoma",
+      "Features of McCune-Albright syndrome such as cafe-au-lait patches and fibrous dysplasia, or of Carney complex, prompting syndrome workup",
+      "Cardiovascular or metabolic complications of growth hormone excess"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing extreme tall stature to familial tall stature without measuring IGF-1",
-     "Prevent diagnostic or management error"
+    "prognosis": "Control can be difficult because these tumours are often large and aggressive, especially in the genetic forms, and frequently require multimodal therapy; with biochemical control final height and complications are limited, but incomplete control risks continued growth and cardiovascular and metabolic morbidity.",
+    "pitfalls": [
+      "Attributing extreme tall stature to familial tall stature without measuring IGF-1",
+      "Failing to test for an underlying genetic syndrome in a young patient with gigantism",
+      "Overlooking prolactin co-secretion or other pituitary hormone deficits",
+      "Underestimating the aggressiveness and treatment resistance of syndromic somatotroph tumours"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on Acromegaly",
+      "Sperling Pediatric Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment",
+      "Somatostatin receptor ligands such as octreotide or lanreotide to suppress growth hormone when surgery is incomplete",
+      "Growth hormone receptor antagonist pegvisomant, alone or in combination, for persistent IGF-1 elevation",
+      "Adjunctive dopamine agonist cabergoline, particularly where prolactin is co-secreted",
+      "Radiotherapy for residual or aggressive tumour not controlled medically",
+      "Replacement of deficient anterior pituitary hormones and management of glucose intolerance",
+      "Serial IGF-1, growth velocity, visual field and metabolic surveillance",
+      "Genetic testing for AIP, GPR101, GNAS, MEN1 and PRKAR1A with counselling and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for pituitary gigantism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pituitary-gigantism-real-image",
-   "title": "Pituitary gigantism: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "pituitary_gigantism-pathway",
+      "title": "Pituitary gigantism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall stature, in contrast to acromegaly which occurs after fusion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly accelerating growth crossing height centiles in a child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum IGF-1 interpreted against age- and sex-specific reference ranges, Oral glucose tolerance test with growth hormone measurement, showing failure of growth hormone to suppress, Pituitary MRI to define the somatotroph"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing extreme tall stature to familial tall stature without measuring IGF-1"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pituitary gigantism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pituitary_gigantism-matrix",
+      "title": "Pituitary gigantism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Growth hormone excess arising before fusion of the epiphyseal growth plates, producing excessive linear growth and very tall",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum IGF-1 interpreted against age- and sex-specific reference ranges, Oral glucose tolerance test with growth hormone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial or constitutional tall stature, Marfan syndrome and other connective tissue disorders, Homocystinuria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Transsphenoidal surgical resection of the somatotroph adenoma as first-line definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing extreme tall stature to familial tall stature without measuring IGF-1",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pituitary gigantism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pituitary_gigantism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IGF-1 against age- and sex-specific ranges",
+          "cells": [
+            {
+              "text": "Growth hormone excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose tolerance test with GH measurement",
+          "cells": [
+            {
+              "text": "Failure of GH to suppress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Somatotroph adenoma and any invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other pituitary axes and prolactin",
+          "cells": [
+            {
+              "text": "Co-secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal visual field testing",
+          "cells": [
+            {
+              "text": "Suprasellar extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (GPR101, AIP, GNAS, MEN1, PRKAR1A)",
+          "cells": [
+            {
+              "text": "Associated syndromic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_gigantism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sotos syndrome",
+          "cells": [
+            {
+              "text": "Cerebral gigantism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "Cafe-au-lait patches and fibrous dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_gigantism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal resection",
+          "cells": [
+            {
+              "text": "First-line definitive treatment of the somatotroph adenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide or lanreotide when surgery is incomplete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pegvisomant",
+          "cells": [
+            {
+              "text": "GH receptor antagonist for persistent IGF-1 elevation, alone or in combination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cabergoline",
+          "cells": [
+            {
+              "text": "Adjunctive dopamine agonist, particularly where prolactin is co-secreted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "For residual or aggressive tumour not controlled medically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Deficient anterior pituitary hormones and glucose intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial IGF-1, growth velocity, visual field and metabolic checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "AIP, GPR101, GNAS, MEN1 and PRKAR1A, with counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pituitary_gigantism-dx-mgmt",
+      "title": "Diagnosis and management of Pituitary gigantism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with accelerating growth crossing height centiles",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual field loss, cafe-au-lait with fibrous dysplasia, metabolic harm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for visual field loss or headache from a large adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum IGF-1; oral glucose tolerance test with GH; pituitary MRI; prolactin and other axes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GH fail to suppress on glucose tolerance with raised IGF-1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional tall stature, Sotos syndrome or Marfan syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection of the somatotroph adenoma as first-line definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Somatostatin receptor ligands such as octreotide or lanreotide if surgery is incomplete",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pegvisomant, a GH receptor antagonist, for persistent IGF-1 elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cabergoline where prolactin is co-secreted",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing for AIP, GPR101, GNAS, MEN1 and PRKAR1A with family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Control is difficult as tumours are often large; multimodal therapy is often needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

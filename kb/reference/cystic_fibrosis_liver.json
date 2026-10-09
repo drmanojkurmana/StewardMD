@@ -1,174 +1,461 @@
 {
- "id": "cystic_fibrosis_liver",
- "name": "Cystic fibrosis liver disease",
- "aliases": [
-  "CFLD",
-  "cystic fibrosis-associated liver disease",
-  "CF liver disease"
- ],
- "class": "non_infective",
- "system": "GI / Hepatology",
- "specialty": "Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AASLD",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important non-pulmonary cause of morbidity and mortality",
-   "The characteristic hepatic lesion is focal biliary cirrhosis, which can progress to multilobular cirrhosis and portal hypertension, often with well-preserved synthetic function until late",
-   "Many patients have only mild, fluctuating enzyme abnormalities or hepatic steatosis without progressive disease, so liver function tests alone are insufficient for assessment",
-   "Portal hypertension with varices and splenomegaly may be the first clinical manifestation, sometimes before overt cirrhosis is apparent",
-   "Biliary complications include microgallbladder, gallstones, and a sclerosing-cholangitis-like biliary abnormality",
-   "The underlying defect is dysfunction of the CFTR chloride channel in biliary epithelium, leading to thick, inspissated bile and obstruction of small bile ducts",
-   "Ursodeoxycholic acid is commonly used to improve bile flow, and management otherwise focuses on nutrition, fat-soluble vitamins, and complications of portal hypertension",
-   "Liver transplantation, sometimes combined with lung transplantation, is considered for end-stage liver disease or decompensated portal hypertension"
+  "id": "cystic_fibrosis_liver",
+  "name": "Cystic fibrosis liver disease",
+  "aliases": [
+    "CFLD",
+    "cystic fibrosis-associated liver disease",
+    "CF liver disease"
   ],
-  "pathophysiology": "Cystic fibrosis is caused by mutations in the CFTR gene encoding a chloride channel expressed in the apical membrane of biliary (cholangiocyte) epithelium as well as in the airways and pancreas. Defective CFTR function reduces chloride and bicarbonate secretion into bile, producing viscous, poorly hydrated bile that becomes inspissated and obstructs the small intrahepatic bile ducts. The resulting bile stasis and retention of toxic bile constituents cause focal periportal inflammation and fibrosis, the lesion termed focal biliary cirrhosis. Over years this may coalesce into multilobular cirrhosis with portal hypertension, while synthetic function is often preserved until advanced disease. The same secretory defect underlies gallbladder abnormalities and gallstone formation.",
-  "additionalDifferentials": [
-   "Primary sclerosing cholangitis",
-   "Other causes of paediatric cirrhosis and portal hypertension",
-   "Non-alcoholic fatty liver disease",
-   "Drug-induced liver injury",
-   "Alpha-1 antitrypsin deficiency",
-   "Progressive familial intrahepatic cholestasis"
-  ],
-  "additionalInvestigations": [
-   "Liver biochemistry with recognition that normal values do not exclude significant disease",
-   "Ultrasound and elastography to assess hepatic texture, fibrosis, and portal system",
-   "Upper endoscopy to screen for varices when portal hypertension is suspected",
-   "Magnetic resonance cholangiopancreatography for biliary abnormalities",
-   "Nutritional and fat-soluble vitamin assessment",
-   "Liver biopsy in selected cases, recognising the patchy distribution of disease"
-  ],
-  "redFlags": [
-   "Variceal haemorrhage from portal hypertension",
-   "Hepatic decompensation with jaundice, ascites, or encephalopathy",
-   "Progressive cholestasis suggesting significant biliary obstruction",
-   "Rapid clinical deterioration warranting transplant assessment"
-  ],
-  "prognosis": "The course is variable; many patients have mild, non-progressive hepatic involvement, while a subset develop multilobular cirrhosis and portal hypertension that contribute significantly to morbidity and mortality, with liver or combined liver-lung transplantation offering benefit in end-stage disease.",
-  "pitfalls": [
-   "Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature",
-   "Missing portal hypertension, which can precede obvious cirrhosis",
-   "Neglecting nutritional support and fat-soluble vitamin supplementation",
-   "Failing to consider transplantation in a patient whose overall condition might still permit it"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AASLD guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree",
-   "Continue CFTR modulator therapy as part of overall cystic fibrosis care, which may benefit the hepatobiliary manifestations",
-   "Optimise nutrition with pancreatic enzyme replacement and generous fat-soluble vitamin supplementation, as cirrhosis and malabsorption compound deficiency",
-   "Screen for and manage portal hypertension with surveillance endoscopy and variceal band ligation or non-selective beta-blockade for oesophageal varices",
-   "Monitor with liver biochemistry, ultrasound and elastography, recognising that normal enzymes do not exclude significant disease",
-   "Refer for liver or combined liver-lung transplantation in decompensated multilobular cirrhosis",
-   "Coordinate hepatology and the specialist cystic fibrosis team for combined management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cystic_fibrosis_liver-pathway",
-   "title": "Cystic fibrosis liver disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important non-pulmonary cause of morbidity and mortality",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Variceal haemorrhage from portal hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver biochemistry with recognition that normal values do not exclude significant disease, Ultrasound and elastography to assess hepatic texture, fibrosis, and portal system, Upper endoscopy to screen for varices when"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cystic fibrosis liver disease."
-  }
- ],
- "tables": [
-  {
-   "id": "cystic_fibrosis_liver-matrix",
-   "title": "Cystic fibrosis liver disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Hepatology",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AASLD",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important non-pulmonary cause of morbidity and mortality",
+      "The characteristic hepatic lesion is focal biliary cirrhosis, which can progress to multilobular cirrhosis and portal hypertension, often with well-preserved synthetic function until late",
+      "Many patients have only mild, fluctuating enzyme abnormalities or hepatic steatosis without progressive disease, so liver function tests alone are insufficient for assessment",
+      "Portal hypertension with varices and splenomegaly may be the first clinical manifestation, sometimes before overt cirrhosis is apparent",
+      "Biliary complications include microgallbladder, gallstones, and a sclerosing-cholangitis-like biliary abnormality",
+      "The underlying defect is dysfunction of the CFTR chloride channel in biliary epithelium, leading to thick, inspissated bile and obstruction of small bile ducts",
+      "Ursodeoxycholic acid is commonly used to improve bile flow, and management otherwise focuses on nutrition, fat-soluble vitamins, and complications of portal hypertension",
+      "Liver transplantation, sometimes combined with lung transplantation, is considered for end-stage liver disease or decompensated portal hypertension"
     ],
-    [
-     "Key Investigations",
-     "Liver biochemistry with recognition that normal values do not exclude significant disease, Ultrasound and elastography to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cystic fibrosis is caused by mutations in the CFTR gene encoding a chloride channel expressed in the apical membrane of biliary (cholangiocyte) epithelium as well as in the airways and pancreas. Defective CFTR function reduces chloride and bicarbonate secretion into bile, producing viscous, poorly hydrated bile that becomes inspissated and obstructs the small intrahepatic bile ducts. The resulting bile stasis and retention of toxic bile constituents cause focal periportal inflammation and fibrosis, the lesion termed focal biliary cirrhosis. Over years this may coalesce into multilobular cirrhosis with portal hypertension, while synthetic function is often preserved until advanced disease. The same secretory defect underlies gallbladder abnormalities and gallstone formation.",
+    "additionalDifferentials": [
+      "Primary sclerosing cholangitis",
+      "Other causes of paediatric cirrhosis and portal hypertension",
+      "Non-alcoholic fatty liver disease",
+      "Drug-induced liver injury",
+      "Alpha-1 antitrypsin deficiency",
+      "Progressive familial intrahepatic cholestasis"
     ],
-    [
-     "Primary Differentials",
-     "Primary sclerosing cholangitis, Other causes of paediatric cirrhosis and portal hypertension, Non-alcoholic fatty liver disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver biochemistry with recognition that normal values do not exclude significant disease",
+      "Ultrasound and elastography to assess hepatic texture, fibrosis, and portal system",
+      "Upper endoscopy to screen for varices when portal hypertension is suspected",
+      "Magnetic resonance cholangiopancreatography for biliary abnormalities",
+      "Nutritional and fat-soluble vitamin assessment",
+      "Liver biopsy in selected cases, recognising the patchy distribution of disease"
     ],
-    [
-     "Management Strategy",
-     "Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree",
-     "Core treatment modality"
+    "redFlags": [
+      "Variceal haemorrhage from portal hypertension",
+      "Hepatic decompensation with jaundice, ascites, or encephalopathy",
+      "Progressive cholestasis suggesting significant biliary obstruction",
+      "Rapid clinical deterioration warranting transplant assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable; many patients have mild, non-progressive hepatic involvement, while a subset develop multilobular cirrhosis and portal hypertension that contribute significantly to morbidity and mortality, with liver or combined liver-lung transplantation offering benefit in end-stage disease.",
+    "pitfalls": [
+      "Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature",
+      "Missing portal hypertension, which can precede obvious cirrhosis",
+      "Neglecting nutritional support and fat-soluble vitamin supplementation",
+      "Failing to consider transplantation in a patient whose overall condition might still permit it"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AASLD guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree",
+      "Continue CFTR modulator therapy as part of overall cystic fibrosis care, which may benefit the hepatobiliary manifestations",
+      "Optimise nutrition with pancreatic enzyme replacement and generous fat-soluble vitamin supplementation, as cirrhosis and malabsorption compound deficiency",
+      "Screen for and manage portal hypertension with surveillance endoscopy and variceal band ligation or non-selective beta-blockade for oesophageal varices",
+      "Monitor with liver biochemistry, ultrasound and elastography, recognising that normal enzymes do not exclude significant disease",
+      "Refer for liver or combined liver-lung transplantation in decompensated multilobular cirrhosis",
+      "Coordinate hepatology and the specialist cystic fibrosis team for combined management"
     ]
-   ],
-   "caption": "Overview comparison matrix for cystic fibrosis liver disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cystic-fibrosis-liver-real-image",
-   "title": "Cystic fibrosis liver disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "cystic_fibrosis_liver-pathway",
+      "title": "Cystic fibrosis liver disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important non-pulmonary cause of morbidity and mortality",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Variceal haemorrhage from portal hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver biochemistry with recognition that normal values do not exclude significant disease, Ultrasound and elastography to assess hepatic texture, fibrosis, and portal system, Upper endoscopy to screen for varices when"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cystic fibrosis liver disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cystic_fibrosis_liver-matrix",
+      "title": "Cystic fibrosis liver disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hepatobiliary involvement is a recognised complication of cystic fibrosis and, after cardiorespiratory disease, is an important",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver biochemistry with recognition that normal values do not exclude significant disease, Ultrasound and elastography to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary sclerosing cholangitis, Other causes of paediatric cirrhosis and portal hypertension, Non-alcoholic fatty liver disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give ursodeoxycholic acid to improve bile flow and hydration in the inspissated, CFTR-deficient biliary tree",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on normal liver enzymes to exclude significant liver disease, given its patchy nature",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cystic fibrosis liver disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystic_fibrosis_liver-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver biochemistry",
+          "cells": [
+            {
+              "text": "Normal values do not exclude significant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound and elastography",
+          "cells": [
+            {
+              "text": "Hepatic texture and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Varices when portal hypertension suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliary abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and fat-soluble vitamin assessment",
+          "cells": [
+            {
+              "text": "Deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_fibrosis_liver-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Named biliary look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Named liver look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive familial intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Named cholestatic look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_fibrosis_liver-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Improves bile flow in the inspissated biliary tree"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFTR modulator therapy",
+          "cells": [
+            {
+              "text": "Continued as part of overall CF care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and vitamins",
+          "cells": [
+            {
+              "text": "Pancreatic enzymes and fat-soluble vitamin supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal hypertension care",
+          "cells": [
+            {
+              "text": "Surveillance endoscopy; band ligation or non-selective beta-blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Biochemistry, ultrasound and elastography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant referral",
+          "cells": [
+            {
+              "text": "Decompensated multilobular cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined team",
+          "cells": [
+            {
+              "text": "Hepatology and CF team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystic_fibrosis_liver-dx-mgmt",
+      "title": "Diagnosis and management of Cystic fibrosis liver disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystic fibrosis liver disease: cholestasis or portal hypertension in CF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (variceal bleeding, decompensation, progressive cholestasis, rapid decline)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent variceal bleed management; transplant assessment for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biochemistry; ultrasound and elastography; endoscopy for varices; MRCP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does elastography or endoscopy show portal hypertension or fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PSC, alpha-1 antitrypsin deficiency or drug injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ursodeoxycholic acid to improve bile flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CFTR modulator and pancreatic enzyme and vitamin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Variceal screening with band ligation or beta-blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transplant referral for decompensated multilobular cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; many are mild, but a subset develop cirrhosis and portal hypertension",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

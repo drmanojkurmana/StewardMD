@@ -1,172 +1,231 @@
 {
- "id": "benzodiazepine_overdose",
- "name": "Benzodiazepine overdose",
- "aliases": [
-  "benzodiazepine poisoning",
-  "benzodiazepine toxicity",
-  "sedative overdose"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with preserved or only mildly depressed vital signs",
-   "Taken alone, benzodiazepines rarely cause death; serious respiratory depression usually reflects co-ingestion of alcohol, opioids, or other sedatives, or the parenteral route",
-   "The mainstay of care is supportive - airway protection, breathing support, and observation - rather than any specific antidote in most cases",
-   "Flumazenil is a competitive antagonist that reverses sedation, but its use is limited because it can precipitate seizures and a withdrawal state, particularly in chronic users or mixed overdoses",
-   "Flumazenil is especially hazardous when a proconvulsant (such as a tricyclic antidepressant) has been co-ingested, as it removes the seizure threshold-raising effect of the benzodiazepine",
-   "Marked or fluctuating conscious level, disproportionate hypotension, or significant respiratory depression should prompt a search for a co-ingested agent",
-   "Activated charcoal offers little benefit and risks aspiration in a drowsy patient, so it is generally not recommended",
-   "Consider alternative causes of coma (hypoglycaemia, head injury, other intoxicants) if the clinical picture does not fit a pure benzodiazepine effect"
+  "id": "benzodiazepine_overdose",
+  "name": "Benzodiazepine overdose",
+  "aliases": [
+    "benzodiazepine poisoning",
+    "benzodiazepine toxicity",
+    "sedative overdose"
   ],
-  "pathophysiology": "Benzodiazepines enhance the inhibitory action of gamma-aminobutyric acid (GABA) at the GABA-A receptor by increasing the frequency of chloride channel opening, producing central nervous system depression. Because they modulate rather than directly open the channel, there is a ceiling to their respiratory depressant effect when taken alone, which explains their relatively wide margin of safety in isolated overdose. When combined with other central depressants such as opioids or alcohol, this ceiling is lost and dangerous synergistic respiratory depression can occur.",
-  "additionalDifferentials": [
-   "Opioid overdose",
-   "Alcohol or other sedative-hypnotic intoxication",
-   "Hypoglycaemia",
-   "Structural or metabolic causes of coma",
-   "Carbon monoxide or other toxic causes of reduced consciousness"
-  ],
-  "additionalInvestigations": [
-   "Capillary blood glucose to exclude hypoglycaemia",
-   "Pulse oximetry and, if indicated, arterial blood gas for hypoventilation",
-   "Paracetamol and salicylate levels and an ECG to screen for co-ingestants",
-   "Urine or serum toxicology where it will change management",
-   "CT head if reduced consciousness is unexplained or focal signs are present"
-  ],
-  "redFlags": [
-   "Significant respiratory depression or hypoxaemia",
-   "Deep or fluctuating coma suggesting a co-ingested agent",
-   "Hypotension out of proportion to isolated benzodiazepine effect",
-   "Loss of airway protective reflexes with aspiration risk",
-   "Seizures, which should raise concern for a proconvulsant co-ingestant rather than benzodiazepine alone"
-  ],
-  "prognosis": "Isolated benzodiazepine overdose usually has an excellent prognosis with supportive care, but outcome worsens considerably with co-ingestion of other central depressants or when aspiration or prolonged hypoxia occurs.",
-  "pitfalls": [
-   "Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose",
-   "Attributing deep coma or hypotension to benzodiazepines alone and missing a co-ingestant",
-   "Overlooking hypoglycaemia or another treatable cause of reduced consciousness",
-   "Administering charcoal to a drowsy patient and causing aspiration"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion",
-   "Reserve flumazenil for carefully selected cases, avoiding it in chronic users or suspected proconvulsant co-ingestion because it can precipitate seizures and a withdrawal state",
-   "Search actively for co-ingested central depressants such as opioids or alcohol when consciousness is disproportionately or fluctuatingly depressed",
-   "Screen with capillary glucose, paracetamol and salicylate levels and an ECG for co-ingestants",
-   "Monitor conscious level, oxygenation and ventilation, escalating to airway support for significant respiratory depression or aspiration risk",
-   "Provide psychiatric assessment and follow-up after recovery where the overdose was intentional"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "benzodiazepine_overdose-pathway",
-   "title": "Benzodiazepine overdose: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with preserved or only mildly depressed vital signs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant respiratory depression or hypoxaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Capillary blood glucose to exclude hypoglycaemia, Pulse oximetry and, if indicated, arterial blood gas for hypoventilation, Paracetamol and salicylate levels and an ECG to screen for co-ingestants"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of benzodiazepine overdose."
-  }
- ],
- "tables": [
-  {
-   "id": "benzodiazepine_overdose-matrix",
-   "title": "Benzodiazepine overdose: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with preserved or only mildly depressed vital signs",
+      "Taken alone, benzodiazepines rarely cause death; serious respiratory depression usually reflects co-ingestion of alcohol, opioids, or other sedatives, or the parenteral route",
+      "The mainstay of care is supportive - airway protection, breathing support, and observation - rather than any specific antidote in most cases",
+      "Flumazenil is a competitive antagonist that reverses sedation, but its use is limited because it can precipitate seizures and a withdrawal state, particularly in chronic users or mixed overdoses",
+      "Flumazenil is especially hazardous when a proconvulsant (such as a tricyclic antidepressant) has been co-ingested, as it removes the seizure threshold-raising effect of the benzodiazepine",
+      "Marked or fluctuating conscious level, disproportionate hypotension, or significant respiratory depression should prompt a search for a co-ingested agent",
+      "Activated charcoal offers little benefit and risks aspiration in a drowsy patient, so it is generally not recommended",
+      "Consider alternative causes of coma (hypoglycaemia, head injury, other intoxicants) if the clinical picture does not fit a pure benzodiazepine effect"
     ],
-    [
-     "Key Investigations",
-     "Capillary blood glucose to exclude hypoglycaemia, Pulse oximetry and, if indicated, arterial blood gas for hypoventilation,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Benzodiazepines enhance the inhibitory action of gamma-aminobutyric acid (GABA) at the GABA-A receptor by increasing the frequency of chloride channel opening, producing central nervous system depression. Because they modulate rather than directly open the channel, there is a ceiling to their respiratory depressant effect when taken alone, which explains their relatively wide margin of safety in isolated overdose. When combined with other central depressants such as opioids or alcohol, this ceiling is lost and dangerous synergistic respiratory depression can occur.",
+    "additionalDifferentials": [
+      "Opioid overdose",
+      "Alcohol or other sedative-hypnotic intoxication",
+      "Hypoglycaemia",
+      "Structural or metabolic causes of coma",
+      "Carbon monoxide or other toxic causes of reduced consciousness"
     ],
-    [
-     "Primary Differentials",
-     "Opioid overdose, Alcohol or other sedative-hypnotic intoxication, Hypoglycaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Capillary blood glucose to exclude hypoglycaemia",
+      "Pulse oximetry and, if indicated, arterial blood gas for hypoventilation",
+      "Paracetamol and salicylate levels and an ECG to screen for co-ingestants",
+      "Urine or serum toxicology where it will change management",
+      "CT head if reduced consciousness is unexplained or focal signs are present"
     ],
-    [
-     "Management Strategy",
-     "Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant respiratory depression or hypoxaemia",
+      "Deep or fluctuating coma suggesting a co-ingested agent",
+      "Hypotension out of proportion to isolated benzodiazepine effect",
+      "Loss of airway protective reflexes with aspiration risk",
+      "Seizures, which should raise concern for a proconvulsant co-ingestant rather than benzodiazepine alone"
     ],
-    [
-     "Clinical Pitfall",
-     "Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated benzodiazepine overdose usually has an excellent prognosis with supportive care, but outcome worsens considerably with co-ingestion of other central depressants or when aspiration or prolonged hypoxia occurs.",
+    "pitfalls": [
+      "Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose",
+      "Attributing deep coma or hypotension to benzodiazepines alone and missing a co-ingestant",
+      "Overlooking hypoglycaemia or another treatable cause of reduced consciousness",
+      "Administering charcoal to a drowsy patient and causing aspiration"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion",
+      "Reserve flumazenil for carefully selected cases, avoiding it in chronic users or suspected proconvulsant co-ingestion because it can precipitate seizures and a withdrawal state",
+      "Search actively for co-ingested central depressants such as opioids or alcohol when consciousness is disproportionately or fluctuatingly depressed",
+      "Screen with capillary glucose, paracetamol and salicylate levels and an ECG for co-ingestants",
+      "Monitor conscious level, oxygenation and ventilation, escalating to airway support for significant respiratory depression or aspiration risk",
+      "Provide psychiatric assessment and follow-up after recovery where the overdose was intentional"
     ]
-   ],
-   "caption": "Overview comparison matrix for benzodiazepine overdose."
-  }
- ],
- "diagrams": [
-  {
-   "id": "benzodiazepine-overdose-real-image",
-   "title": "Benzodiazepine overdose: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "benzodiazepine_overdose-pathway",
+      "title": "Benzodiazepine overdose: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with preserved or only mildly depressed vital signs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant respiratory depression or hypoxaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Capillary blood glucose to exclude hypoglycaemia, Pulse oximetry and, if indicated, arterial blood gas for hypoventilation, Paracetamol and salicylate levels and an ECG to screen for co-ingestants"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of benzodiazepine overdose."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "benzodiazepine_overdose-matrix",
+      "title": "Benzodiazepine overdose: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Produces a sedative-hypnotic toxidrome of drowsiness, slurred speech, ataxia, and depressed consciousness, typically with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Capillary blood glucose to exclude hypoglycaemia, Pulse oximetry and, if indicated, arterial blood gas for hypoventilation,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Opioid overdose, Alcohol or other sedative-hypnotic intoxication, Hypoglycaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise supportive care with airway protection, breathing support and observation, which is the mainstay for isolated ingestion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reflexively giving flumazenil and precipitating seizures or acute withdrawal, especially in chronic users or mixed overdose",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for benzodiazepine overdose."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benzodiazepine_overdose-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benzodiazepine overdose",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Conscious level", "cells": [{"text": "Marked or fluctuating depression suggests a co-ingested agent"}], "cite": "c1"},
+        {"parameter": "Capillary blood glucose", "cells": [{"text": "Excludes hypoglycaemia"}], "cite": "c1"},
+        {"parameter": "Pulse oximetry and arterial blood gas", "cells": [{"text": "Hypoventilation or hypoxaemia, if indicated"}], "cite": "c1"},
+        {"parameter": "Paracetamol and salicylate levels, and ECG", "cells": [{"text": "Screen for co-ingestants"}], "cite": "c1"},
+        {"parameter": "Urine or serum toxicology", "cells": [{"text": "Only where it will change management"}], "cite": "c1"},
+        {"parameter": "CT head", "cells": [{"text": "If reduced consciousness is unexplained or focal signs are present"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benzodiazepine_overdose-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of depressed consciousness",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Opioid overdose", "cells": [{"text": "Co-ingested opioids cause synergistic respiratory depression"}], "cite": "c1"},
+        {"parameter": "Alcohol intoxication", "cells": [{"text": "Co-ingestion removes the ceiling on respiratory depression"}], "cite": "c1"},
+        {"parameter": "Hypoglycaemia", "cells": [{"text": "Excluded by capillary blood glucose"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benzodiazepine_overdose-treatment",
+      "kind": "treatment",
+      "title": "Management options in benzodiazepine overdose",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Airway protection, breathing support and observation"}, {"text": "Mainstay of care; no specific antidote in most cases"}], "cite": "c1"},
+        {"parameter": "Flumazenil", "cells": [{"text": "Reserve for carefully selected cases"}, {"text": "Avoid in chronic users or suspected proconvulsant co-ingestion; can precipitate seizures and withdrawal"}], "cite": "c1"},
+        {"parameter": "Co-ingestant search", "cells": [{"text": "Search for opioids or alcohol when consciousness is disproportionately depressed"}, {"text": "Co-ingested depressants cause the serious respiratory depression"}], "cite": "c1"},
+        {"parameter": "Screening", "cells": [{"text": "Capillary glucose, paracetamol and salicylate levels, and ECG"}, {"text": "Screens for co-ingestants"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Conscious level, oxygenation and ventilation"}, {"text": "Escalate to airway support for significant respiratory depression or aspiration risk"}], "cite": "c1"},
+        {"parameter": "Activated charcoal", "cells": [{"text": "Not generally recommended"}, {"text": "Little benefit and aspiration risk in a drowsy patient"}], "cite": "c1"},
+        {"parameter": "Psychiatric follow-up", "cells": [{"text": "Psychiatric assessment and follow-up after recovery"}, {"text": "Where the overdose was intentional"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benzodiazepine_overdose-dx-mgmt",
+      "title": "Diagnosis and management of benzodiazepine overdose",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Drowsiness, slurred speech, ataxia or depressed consciousness after benzodiazepine ingestion", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: significant respiratory depression, deep or fluctuating coma, or seizures?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: airway protection and ventilatory support; search for co-ingested opioid or alcohol", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Capillary glucose, pulse oximetry, paracetamol and salicylate levels, ECG", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Hypoglycaemia, other cause of coma or co-ingestant excluded?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Supportive care; flumazenil only in selected cases, not chronic users or proconvulsant co-ingestion", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: treat the alternative cause such as hypoglycaemia, head injury or another intoxicant", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Monitor conscious level, oxygenation and ventilation until recovery; no activated charcoal", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Isolated overdose has an excellent prognosis; co-ingestion worsens outcome", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

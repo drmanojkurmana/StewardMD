@@ -1,176 +1,483 @@
 {
- "id": "limb_girdle_muscular_dystrophy_r11",
- "name": "Limb-girdle muscular dystrophy R11 (POMT1-related)",
- "aliases": [
-  "LGMD2K",
-  "POMT1-related dystroglycanopathy",
-  "POMT1"
- ],
- "class": "non_infective",
- "system": "Neuromuscular / Limb-girdle muscular dystrophy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of alpha-dystroglycan.",
-   "Represents the mild end of the POMT1 spectrum, whose severe end is Walker-Warburg syndrome with brain and eye malformation.",
-   "Childhood-onset proximal weakness, frequently accompanied by calf (and sometimes thigh or tongue) hypertrophy.",
-   "Cognitive impairment or microcephaly may occur even when brain imaging is relatively normal.",
-   "Creatine kinase is typically markedly elevated.",
-   "Muscle biopsy shows reduced glycosylated alpha-dystroglycan (for example with the IIH6 antibody) despite a preserved core protein.",
-   "First described in Turkish families.",
-   "Genetic testing distinguishes it from other dystroglycanopathies caused by FKRP, FKTN, POMT2 and POMGNT1."
+  "id": "limb_girdle_muscular_dystrophy_r11",
+  "name": "Limb-girdle muscular dystrophy R11 (POMT1-related)",
+  "aliases": [
+    "LGMD2K",
+    "POMT1-related dystroglycanopathy",
+    "POMT1"
   ],
-  "pathophysiology": "Limb-girdle muscular dystrophy R11 is an alpha-dystroglycanopathy caused by biallelic hypomorphic variants in POMT1 on chromosome 9q34.13, which encodes protein O-mannosyltransferase 1. Working in a complex with POMT2, this enzyme catalyses the first committed step of O-mannosyl glycan synthesis on alpha-dystroglycan; the resulting matriglycan is essential for high-affinity binding of alpha-dystroglycan to laminin and other extracellular-matrix ligands that anchor the sarcolemma. Severe null variants abolish glycosylation and produce lethal Walker-Warburg syndrome with cobblestone lissencephaly and eye malformation, whereas the milder residual-function variants underlying LGMD R11 permit partial glycosylation, giving a limb-girdle phenotype often accompanied by calf hypertrophy and cognitive impairment or microcephaly with relatively preserved brain structure. Muscle shows reduced immunolabelling of glycosylated alpha-dystroglycan despite a normally expressed core protein.",
-  "additionalDifferentials": [
-   "LGMD R9 (FKRP-related dystroglycanopathy)",
-   "LGMD R13 (fukutin/FKTN-related dystroglycanopathy)",
-   "LGMD R14 (POMT2-related dystroglycanopathy)",
-   "LGMD R15 (POMGNT1-related dystroglycanopathy)",
-   "Walker-Warburg syndrome and muscle-eye-brain disease (severe end of the spectrum)",
-   "Duchenne and Becker muscular dystrophy (calf hypertrophy with high creatine kinase)",
-   "Congenital muscular dystrophies"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other dystroglycanopathy genes",
-   "Muscle biopsy with glycosylated alpha-dystroglycan immunostaining",
-   "Brain MRI to exclude structural malformation",
-   "Formal cognitive assessment",
-   "Muscle MRI to map involvement",
-   "Baseline ECG and echocardiography"
-  ],
-  "redFlags": [
-   "Developmental regression or a new focal neurological deficit",
-   "Seizures",
-   "Visual failure suggesting ocular involvement",
-   "Cardiac or respiratory decline"
-  ],
-  "prognosis": "Outcome is variable; the limb-girdle end of the spectrum progresses more slowly than congenital forms, but the rate of motor progression and the degree of cognitive involvement strongly influence prognosis.",
-  "pitfalls": [
-   "Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy.",
-   "A normal brain MRI does not exclude clinically significant cognitive involvement.",
-   "Reduced alpha-dystroglycan glycosylation is shared across dystroglycanopathies and is not gene-specific.",
-   "Milder cases may present later than expected and be misclassified."
-  ],
-  "references": [
-   "Standard neuromuscular medicine textbooks",
-   "Diagnostic guidance for the alpha-dystroglycanopathies",
-   "Clinical neurogenetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function and prevent contractures",
-   "Provide cognitive assessment with educational and developmental support for associated intellectual impairment or microcephaly",
-   "Undertake respiratory surveillance with non-invasive ventilation and cardiac monitoring, as dystroglycanopathies can involve heart and respiratory muscle",
-   "Arrange neuroimaging to exclude a structural brain malformation",
-   "Deliver multidisciplinary paediatric neuromuscular care and rehabilitation",
-   "Provide genetic counselling for autosomal recessive inheritance and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r11-pathway",
-   "title": "Limb-girdle muscular dystrophy R11 (POMT1-related): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of alpha-dystroglycan.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Developmental regression or a new focal neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other dystroglycanopathy genes, Muscle biopsy with glycosylated alpha-dystroglycan immunostaining"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r11 (pomt1-related)."
-  }
- ],
- "tables": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r11-matrix",
-   "title": "Limb-girdle muscular dystrophy R11 (POMT1-related): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of alpha-dystroglycan.",
+      "Represents the mild end of the POMT1 spectrum, whose severe end is Walker-Warburg syndrome with brain and eye malformation.",
+      "Childhood-onset proximal weakness, frequently accompanied by calf (and sometimes thigh or tongue) hypertrophy.",
+      "Cognitive impairment or microcephaly may occur even when brain imaging is relatively normal.",
+      "Creatine kinase is typically markedly elevated.",
+      "Muscle biopsy shows reduced glycosylated alpha-dystroglycan (for example with the IIH6 antibody) despite a preserved core protein.",
+      "First described in Turkish families.",
+      "Genetic testing distinguishes it from other dystroglycanopathies caused by FKRP, FKTN, POMT2 and POMGNT1."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Limb-girdle muscular dystrophy R11 is an alpha-dystroglycanopathy caused by biallelic hypomorphic variants in POMT1 on chromosome 9q34.13, which encodes protein O-mannosyltransferase 1. Working in a complex with POMT2, this enzyme catalyses the first committed step of O-mannosyl glycan synthesis on alpha-dystroglycan; the resulting matriglycan is essential for high-affinity binding of alpha-dystroglycan to laminin and other extracellular-matrix ligands that anchor the sarcolemma. Severe null variants abolish glycosylation and produce lethal Walker-Warburg syndrome with cobblestone lissencephaly and eye malformation, whereas the milder residual-function variants underlying LGMD R11 permit partial glycosylation, giving a limb-girdle phenotype often accompanied by calf hypertrophy and cognitive impairment or microcephaly with relatively preserved brain structure. Muscle shows reduced immunolabelling of glycosylated alpha-dystroglycan despite a normally expressed core protein.",
+    "additionalDifferentials": [
+      "LGMD R9 (FKRP-related dystroglycanopathy)",
+      "LGMD R13 (fukutin/FKTN-related dystroglycanopathy)",
+      "LGMD R14 (POMT2-related dystroglycanopathy)",
+      "LGMD R15 (POMGNT1-related dystroglycanopathy)",
+      "Walker-Warburg syndrome and muscle-eye-brain disease (severe end of the spectrum)",
+      "Duchenne and Becker muscular dystrophy (calf hypertrophy with high creatine kinase)",
+      "Congenital muscular dystrophies"
     ],
-    [
-     "Primary Differentials",
-     "LGMD R9 (FKRP-related dystroglycanopathy), LGMD R13 (fukutin/FKTN-related dystroglycanopathy), LGMD R14 (POMT2-related",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other dystroglycanopathy genes",
+      "Muscle biopsy with glycosylated alpha-dystroglycan immunostaining",
+      "Brain MRI to exclude structural malformation",
+      "Formal cognitive assessment",
+      "Muscle MRI to map involvement",
+      "Baseline ECG and echocardiography"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function",
-     "Core treatment modality"
+    "redFlags": [
+      "Developmental regression or a new focal neurological deficit",
+      "Seizures",
+      "Visual failure suggesting ocular involvement",
+      "Cardiac or respiratory decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable; the limb-girdle end of the spectrum progresses more slowly than congenital forms, but the rate of motor progression and the degree of cognitive involvement strongly influence prognosis.",
+    "pitfalls": [
+      "Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy.",
+      "A normal brain MRI does not exclude clinically significant cognitive involvement.",
+      "Reduced alpha-dystroglycan glycosylation is shared across dystroglycanopathies and is not gene-specific.",
+      "Milder cases may present later than expected and be misclassified."
+    ],
+    "references": [
+      "Standard neuromuscular medicine textbooks",
+      "Diagnostic guidance for the alpha-dystroglycanopathies",
+      "Clinical neurogenetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function and prevent contractures",
+      "Provide cognitive assessment with educational and developmental support for associated intellectual impairment or microcephaly",
+      "Undertake respiratory surveillance with non-invasive ventilation and cardiac monitoring, as dystroglycanopathies can involve heart and respiratory muscle",
+      "Arrange neuroimaging to exclude a structural brain malformation",
+      "Deliver multidisciplinary paediatric neuromuscular care and rehabilitation",
+      "Provide genetic counselling for autosomal recessive inheritance and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r11 (pomt1-related)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "limb-girdle-muscular-dystrophy-r11-real-image",
-   "title": "Limb-girdle muscular dystrophy R11 (POMT1-related): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "limb_girdle_muscular_dystrophy_r11-pathway",
+      "title": "Limb-girdle muscular dystrophy R11 (POMT1-related): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of alpha-dystroglycan.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Developmental regression or a new focal neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other dystroglycanopathy genes, Muscle biopsy with glycosylated alpha-dystroglycan immunostaining"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r11 (pomt1-related)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r11-matrix",
+      "title": "Limb-girdle muscular dystrophy R11 (POMT1-related): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An alpha-dystroglycanopathy caused by biallelic POMT1 variants; POMT1 acts with POMT2 to initiate O-mannosylation of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing covering POMT1 and other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "LGMD R9 (FKRP-related dystroglycanopathy), LGMD R13 (fukutin/FKTN-related dystroglycanopathy), LGMD R14 (POMT2-related",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-specific pharmacotherapy and use physiotherapy and occupational therapy to maintain motor function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Markedly raised creatine kinase with calf hypertrophy can be mistaken for a dystrophinopathy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r11 (pomt1-related)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r11-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Typically markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome covering POMT1 and dystroglycanopathy genes",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with glycosylated alpha-dystroglycan staining",
+          "cells": [
+            {
+              "text": "Reduced glycosylation despite preserved core protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal cognitive assessment",
+          "cells": [
+            {
+              "text": "Cognitive involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Maps involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r11-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Duchenne and Becker muscular dystrophy",
+          "cells": [
+            {
+              "text": "Calf hypertrophy with high CK can mimic a dystrophinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LGMD R9 (FKRP-related dystroglycanopathy)",
+          "cells": [
+            {
+              "text": "Another dystroglycanopathy; genetic testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Walker-Warburg syndrome and muscle-eye-brain disease",
+          "cells": [
+            {
+              "text": "Severe end of the POMT1 spectrum, with brain and eye malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital muscular dystrophies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r11-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain motor function and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and educational support",
+          "cells": [
+            {
+              "text": "For intellectual impairment or microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation and cardiac monitoring; heart and respiratory muscles can be involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Excludes a structural brain malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary paediatric care",
+          "cells": [
+            {
+              "text": "Neuromuscular care and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r11-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy R11 (POMT1-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Childhood proximal weakness with calf hypertrophy, very high CK and cognitive impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (regression, new focal deficit, seizures, visual failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and neuroimaging for regression or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, dystroglycanopathy gene panel, biopsy with alpha-dystroglycan, brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a POMT1 variant confirmed with reduced glycosylated alpha-dystroglycan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other dystroglycanopathies, Duchenne or Becker dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maintain motor function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cognitive assessment with educational and developmental support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-invasive ventilation and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuroimaging to exclude structural malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable; slower than congenital forms of the POMT1 spectrum",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

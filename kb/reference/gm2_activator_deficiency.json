@@ -1,173 +1,451 @@
 {
- "id": "gm2_activator_deficiency",
- "name": "GM2 activator deficiency",
- "aliases": [
-  "AB variant of GM2 gangliosidosis",
-  "GM2 gangliosidosis AB variant",
-  "GM2A deficiency",
-  "GM2 activator protein deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the hexosaminidase enzyme itself",
-   "The activator is an essential cofactor that presents GM2 ganglioside to hexosaminidase A; without it, degradation fails despite normal enzyme activity",
-   "Clinically mimics infantile Tay-Sachs disease with early developmental arrest, hypotonia, progressive neurodegeneration and an exaggerated startle response",
-   "A cherry-red spot at the macula is a characteristic ophthalmological finding",
-   "Standard hexosaminidase A and B enzyme assays are normal, so the diagnosis is missed unless the activator defect is specifically considered",
-   "Diagnosis relies on molecular testing of GM2A or specialised substrate/activator functional studies rather than routine enzyme assays",
-   "No disease-modifying therapy exists; care is supportive with a multidisciplinary neurodegenerative approach"
+  "id": "gm2_activator_deficiency",
+  "name": "GM2 activator deficiency",
+  "aliases": [
+    "AB variant of GM2 gangliosidosis",
+    "GM2 gangliosidosis AB variant",
+    "GM2A deficiency",
+    "GM2 activator protein deficiency"
   ],
-  "pathophysiology": "The GM2 activator protein is a small lysosomal lipid-transfer cofactor that extracts GM2 ganglioside from the membrane and presents it to beta-hexosaminidase A for hydrolysis. In the AB variant the activator is deficient while hexosaminidase activity measured against artificial substrates is normal, so GM2 ganglioside cannot be catabolised and accumulates progressively within neuronal lysosomes. Neuronal storage drives the relentless central nervous system degeneration that clinically resembles the other GM2 gangliosidoses.",
-  "additionalDifferentials": [
-   "Tay-Sachs disease (hexosaminidase A deficiency, HEXA)",
-   "Sandhoff disease (hexosaminidase A and B deficiency, HEXB)",
-   "Other infantile neurodegenerative lysosomal storage disorders",
-   "Neuronal ceroid lipofuscinoses",
-   "Mitochondrial encephalopathies of infancy",
-   "Other causes of a macular cherry-red spot (e.g. sialidosis, Niemann-Pick)"
-  ],
-  "additionalInvestigations": [
-   "Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff)",
-   "GM2A molecular genetic testing to confirm activator deficiency",
-   "Ophthalmological examination for a macular cherry-red spot",
-   "Brain MRI to characterise the neurodegenerative process",
-   "Specialised functional studies of GM2 degradation using natural substrate",
-   "Developmental and neurophysiological assessment to document progression"
-  ],
-  "redFlags": [
-   "Progressive loss of acquired developmental milestones in infancy",
-   "Exaggerated startle response with a cherry-red macular spot",
-   "Feeding difficulty, aspiration and respiratory compromise as disease advances",
-   "Refractory seizures and neurological deterioration"
-  ],
-  "prognosis": "The infantile presentation is progressive and fatal in early childhood, mirroring classic Tay-Sachs disease; management is palliative and supportive as no curative treatment is available.",
-  "pitfalls": [
-   "Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays",
-   "Overlooking the activator defect as a cause of a cherry-red spot with neurodegeneration",
-   "Delaying molecular testing when enzyme results are unexpectedly normal",
-   "Not offering genetic counselling and carrier testing to the family"
-  ],
-  "references": [
-   "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide palliative and supportive care as no curative or disease-modifying therapy exists",
-   "Control seizures with antiseizure medication",
-   "Manage feeding difficulties and aspiration risk with thickened feeds and gastrostomy as swallowing fails",
-   "Provide comfort-directed management of the exaggerated startle, irritability and troublesome secretions",
-   "Coordinate multidisciplinary paediatric neurology, therapy services and palliative care",
-   "Offer genetic counselling with molecular carrier and prenatal testing for autosomal recessive GM2A disease, since enzyme-based screening is unreliable"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gm2_activator_deficiency-pathway",
-   "title": "GM2 activator deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the hexosaminidase enzyme itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive loss of acquired developmental milestones in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff), GM2A molecular genetic testing to confirm activator deficiency, Ophthalmological examination for a macular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide palliative and supportive care as no curative or disease-modifying therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gm2 activator deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "gm2_activator_deficiency-matrix",
-   "title": "GM2 activator deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the hexosaminidase enzyme itself",
+      "The activator is an essential cofactor that presents GM2 ganglioside to hexosaminidase A; without it, degradation fails despite normal enzyme activity",
+      "Clinically mimics infantile Tay-Sachs disease with early developmental arrest, hypotonia, progressive neurodegeneration and an exaggerated startle response",
+      "A cherry-red spot at the macula is a characteristic ophthalmological finding",
+      "Standard hexosaminidase A and B enzyme assays are normal, so the diagnosis is missed unless the activator defect is specifically considered",
+      "Diagnosis relies on molecular testing of GM2A or specialised substrate/activator functional studies rather than routine enzyme assays",
+      "No disease-modifying therapy exists; care is supportive with a multidisciplinary neurodegenerative approach"
     ],
-    [
-     "Key Investigations",
-     "Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff), GM2A molecular genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The GM2 activator protein is a small lysosomal lipid-transfer cofactor that extracts GM2 ganglioside from the membrane and presents it to beta-hexosaminidase A for hydrolysis. In the AB variant the activator is deficient while hexosaminidase activity measured against artificial substrates is normal, so GM2 ganglioside cannot be catabolised and accumulates progressively within neuronal lysosomes. Neuronal storage drives the relentless central nervous system degeneration that clinically resembles the other GM2 gangliosidoses.",
+    "additionalDifferentials": [
+      "Tay-Sachs disease (hexosaminidase A deficiency, HEXA)",
+      "Sandhoff disease (hexosaminidase A and B deficiency, HEXB)",
+      "Other infantile neurodegenerative lysosomal storage disorders",
+      "Neuronal ceroid lipofuscinoses",
+      "Mitochondrial encephalopathies of infancy",
+      "Other causes of a macular cherry-red spot (e.g. sialidosis, Niemann-Pick)"
     ],
-    [
-     "Primary Differentials",
-     "Tay-Sachs disease (hexosaminidase A deficiency, HEXA), Sandhoff disease (hexosaminidase A and B deficiency, HEXB), Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff)",
+      "GM2A molecular genetic testing to confirm activator deficiency",
+      "Ophthalmological examination for a macular cherry-red spot",
+      "Brain MRI to characterise the neurodegenerative process",
+      "Specialised functional studies of GM2 degradation using natural substrate",
+      "Developmental and neurophysiological assessment to document progression"
     ],
-    [
-     "Management Strategy",
-     "Provide palliative and supportive care as no curative or disease-modifying therapy exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive loss of acquired developmental milestones in infancy",
+      "Exaggerated startle response with a cherry-red macular spot",
+      "Feeding difficulty, aspiration and respiratory compromise as disease advances",
+      "Refractory seizures and neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays",
-     "Prevent diagnostic or management error"
+    "prognosis": "The infantile presentation is progressive and fatal in early childhood, mirroring classic Tay-Sachs disease; management is palliative and supportive as no curative treatment is available.",
+    "pitfalls": [
+      "Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays",
+      "Overlooking the activator defect as a cause of a cherry-red spot with neurodegeneration",
+      "Delaying molecular testing when enzyme results are unexpectedly normal",
+      "Not offering genetic counselling and carrier testing to the family"
+    ],
+    "references": [
+      "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide palliative and supportive care as no curative or disease-modifying therapy exists",
+      "Control seizures with antiseizure medication",
+      "Manage feeding difficulties and aspiration risk with thickened feeds and gastrostomy as swallowing fails",
+      "Provide comfort-directed management of the exaggerated startle, irritability and troublesome secretions",
+      "Coordinate multidisciplinary paediatric neurology, therapy services and palliative care",
+      "Offer genetic counselling with molecular carrier and prenatal testing for autosomal recessive GM2A disease, since enzyme-based screening is unreliable"
     ]
-   ],
-   "caption": "Overview comparison matrix for gm2 activator deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gm2-activator-deficiency-real-image",
-   "title": "GM2 activator deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gm2_activator_deficiency-pathway",
+      "title": "GM2 activator deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the hexosaminidase enzyme itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive loss of acquired developmental milestones in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff), GM2A molecular genetic testing to confirm activator deficiency, Ophthalmological examination for a macular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide palliative and supportive care as no curative or disease-modifying therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gm2 activator deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gm2_activator_deficiency-matrix",
+      "title": "GM2 activator deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rarest form of GM2 gangliosidosis, caused by biallelic GM2A variants abolishing the GM2 activator protein rather than the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hexosaminidase A and B enzyme assay (characteristically normal, excluding classic Tay-Sachs and Sandhoff), GM2A molecular genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tay-Sachs disease (hexosaminidase A deficiency, HEXA), Sandhoff disease (hexosaminidase A and B deficiency, HEXB), Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide palliative and supportive care as no curative or disease-modifying therapy exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding GM2 gangliosidosis on the basis of normal hexosaminidase assays",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gm2 activator deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gm2_activator_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hexosaminidase A and B enzyme assay",
+          "cells": [
+            {
+              "text": "Characteristically normal, excluding classic Tay-Sachs and Sandhoff"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM2A molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms activator deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Macular cherry-red spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Neurodegenerative process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional GM2 degradation studies",
+          "cells": [
+            {
+              "text": "Natural substrate degradation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurophysiological assessment",
+          "cells": [
+            {
+              "text": "Documents progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gm2_activator_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tay-Sachs disease",
+          "cells": [
+            {
+              "text": "Hexosaminidase A deficiency due to HEXA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sandhoff disease",
+          "cells": [
+            {
+              "text": "Combined hexosaminidase A and B deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gm2_activator_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Palliative and supportive care",
+          "cells": [
+            {
+              "text": "No curative or disease-modifying therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and aspiration management",
+          "cells": [
+            {
+              "text": "Thickened feeds and gastrostomy as swallowing fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comfort-directed care",
+          "cells": [
+            {
+              "text": "Exaggerated startle, irritability and troublesome secretions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology, therapy services and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Molecular carrier and prenatal testing for autosomal recessive GM2A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gm2_activator_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of GM2 activator deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GM2 activator deficiency: infant regression with cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (loss of milestones, exaggerated startle, refractory seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and airway review as swallowing and respiration decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hexosaminidase A and B assay, GM2A testing, fundoscopy and brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do GM2A variants confirm activator deficiency with normal hexosaminidase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Tay-Sachs, Sandhoff disease, sialidosis or Niemann-Pick disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Palliative and supportive care; no curative therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thickened feeds and gastrostomy as swallowing fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Comfort-directed management of startle and secretions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infantile form is progressive and fatal in early childhood, mirroring classic Tay-Sachs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

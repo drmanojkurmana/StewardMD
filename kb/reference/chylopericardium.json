@@ -1,172 +1,457 @@
 {
- "id": "chylopericardium",
- "name": "Chylopericardium",
- "aliases": [
-  "chylous pericardial effusion",
-  "primary chylopericardium",
-  "chylous pericarditis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and chylomicrons",
-   "May be primary (idiopathic, from abnormal lymphatic communication with the pericardium) or secondary to thoracic surgery, trauma, malignancy, mediastinal irradiation, or lymphangiomatous disorders",
-   "Often accumulates slowly and may be asymptomatic, but a large or rapidly forming effusion can cause tamponade",
-   "The diagnosis is confirmed by analysis of aspirated fluid showing a milky appearance, high triglyceride content, and chylomicrons",
-   "Imaging with lymphangiography or lymphoscintigraphy can localise the abnormal thoracic-duct or lymphatic connection in primary disease",
-   "Initial management combines pericardial drainage with measures to reduce chyle flow, such as a low-fat diet with medium-chain triglycerides or bowel rest",
-   "Persistent or recurrent leakage may need ligation of the thoracic duct, a pericardial window, or pericardiectomy, sometimes with lymphatic embolisation"
+  "id": "chylopericardium",
+  "name": "Chylopericardium",
+  "aliases": [
+    "chylous pericardial effusion",
+    "primary chylopericardium",
+    "chylous pericarditis"
   ],
-  "pathophysiology": "Chylopericardium arises when lymph rich in triglyceride-laden chylomicrons drains abnormally from the thoracic duct or its tributaries into the pericardial sac. In primary disease this reflects congenital or acquired abnormal lymphatic channels communicating with the pericardium, sometimes with reflux from the thoracic duct; in secondary disease the duct or its branches are disrupted by surgery, trauma, tumour, or radiation. The accumulating chyle raises intrapericardial pressure and, if large or rapid, impairs cardiac filling to cause tamponade, while chronic loss of chyle can deplete fat-soluble nutrients, protein, and lymphocytes.",
-  "additionalDifferentials": [
-   "Serous pericardial effusion from other causes",
-   "Purulent (bacterial) pericardial effusion",
-   "Haemopericardium",
-   "Cholesterol (gold-paint) pericardial effusion",
-   "Malignant pericardial effusion",
-   "Pseudochylous effusion from chronic inflammation"
-  ],
-  "additionalInvestigations": [
-   "Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons",
-   "Echocardiography to size the effusion and assess for tamponade",
-   "Cardiac CT or MRI to characterise the effusion and search for a mediastinal cause",
-   "Lymphangiography or lymphoscintigraphy to identify the abnormal lymphatic communication",
-   "Investigation for underlying malignancy or lymphatic disorder when secondary disease is suspected"
-  ],
-  "redFlags": [
-   "Cardiac tamponade from a large or rapidly accumulating chylous effusion",
-   "Recurrent reaccumulation after drainage indicating an unresolved lymphatic leak",
-   "Features suggesting an underlying mediastinal malignancy or lymphangiomatosis",
-   "Nutritional and immune depletion from chronic high-volume chyle loss"
-  ],
-  "prognosis": "Primary chylopericardium often responds to dietary measures and drainage but can recur and require surgical or interventional treatment, whereas the outlook in secondary disease is largely determined by the underlying cause.",
-  "pitfalls": [
-   "Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis",
-   "Confusing chylopericardium with a pseudochylous cholesterol effusion",
-   "Draining the effusion without addressing the ongoing lymphatic leak, leading to recurrence",
-   "Overlooking an underlying malignancy or lymphatic disorder in secondary cases"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the diagnosis and management of pericardial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade",
-   "Reduction of chyle flow with a low-fat diet enriched in medium-chain triglycerides, or bowel rest with parenteral nutrition",
-   "A somatostatin analogue such as octreotide to reduce lymphatic flow in persistent leakage",
-   "Lymphangiography with thoracic-duct embolisation, or surgical thoracic-duct ligation with a pericardial window or pericardiectomy, for refractory or recurrent disease",
-   "Identification and treatment of an underlying cause in secondary disease, such as malignancy or a lymphatic disorder",
-   "Monitoring of nutritional, immune and fat-soluble vitamin status given ongoing chyle loss",
-   "Cardiothoracic and cardiology referral with echocardiographic surveillance for reaccumulation and tamponade"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chylopericardium-pathway",
-   "title": "Chylopericardium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and chylomicrons",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac tamponade from a large or rapidly accumulating chylous effusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons, Echocardiography to size the effusion and assess for tamponade, Cardiac CT or MRI to characterise the effusion and search"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chylopericardium."
-  }
- ],
- "tables": [
-  {
-   "id": "chylopericardium-matrix",
-   "title": "Chylopericardium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and chylomicrons",
+      "May be primary (idiopathic, from abnormal lymphatic communication with the pericardium) or secondary to thoracic surgery, trauma, malignancy, mediastinal irradiation, or lymphangiomatous disorders",
+      "Often accumulates slowly and may be asymptomatic, but a large or rapidly forming effusion can cause tamponade",
+      "The diagnosis is confirmed by analysis of aspirated fluid showing a milky appearance, high triglyceride content, and chylomicrons",
+      "Imaging with lymphangiography or lymphoscintigraphy can localise the abnormal thoracic-duct or lymphatic connection in primary disease",
+      "Initial management combines pericardial drainage with measures to reduce chyle flow, such as a low-fat diet with medium-chain triglycerides or bowel rest",
+      "Persistent or recurrent leakage may need ligation of the thoracic duct, a pericardial window, or pericardiectomy, sometimes with lymphatic embolisation"
     ],
-    [
-     "Key Investigations",
-     "Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons, Echocardiography to size the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chylopericardium arises when lymph rich in triglyceride-laden chylomicrons drains abnormally from the thoracic duct or its tributaries into the pericardial sac. In primary disease this reflects congenital or acquired abnormal lymphatic channels communicating with the pericardium, sometimes with reflux from the thoracic duct; in secondary disease the duct or its branches are disrupted by surgery, trauma, tumour, or radiation. The accumulating chyle raises intrapericardial pressure and, if large or rapid, impairs cardiac filling to cause tamponade, while chronic loss of chyle can deplete fat-soluble nutrients, protein, and lymphocytes.",
+    "additionalDifferentials": [
+      "Serous pericardial effusion from other causes",
+      "Purulent (bacterial) pericardial effusion",
+      "Haemopericardium",
+      "Cholesterol (gold-paint) pericardial effusion",
+      "Malignant pericardial effusion",
+      "Pseudochylous effusion from chronic inflammation"
     ],
-    [
-     "Primary Differentials",
-     "Serous pericardial effusion from other causes, Purulent (bacterial) pericardial effusion, Haemopericardium",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons",
+      "Echocardiography to size the effusion and assess for tamponade",
+      "Cardiac CT or MRI to characterise the effusion and search for a mediastinal cause",
+      "Lymphangiography or lymphoscintigraphy to identify the abnormal lymphatic communication",
+      "Investigation for underlying malignancy or lymphatic disorder when secondary disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac tamponade from a large or rapidly accumulating chylous effusion",
+      "Recurrent reaccumulation after drainage indicating an unresolved lymphatic leak",
+      "Features suggesting an underlying mediastinal malignancy or lymphangiomatosis",
+      "Nutritional and immune depletion from chronic high-volume chyle loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary chylopericardium often responds to dietary measures and drainage but can recur and require surgical or interventional treatment, whereas the outlook in secondary disease is largely determined by the underlying cause.",
+    "pitfalls": [
+      "Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis",
+      "Confusing chylopericardium with a pseudochylous cholesterol effusion",
+      "Draining the effusion without addressing the ongoing lymphatic leak, leading to recurrence",
+      "Overlooking an underlying malignancy or lymphatic disorder in secondary cases"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the diagnosis and management of pericardial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade",
+      "Reduction of chyle flow with a low-fat diet enriched in medium-chain triglycerides, or bowel rest with parenteral nutrition",
+      "A somatostatin analogue such as octreotide to reduce lymphatic flow in persistent leakage",
+      "Lymphangiography with thoracic-duct embolisation, or surgical thoracic-duct ligation with a pericardial window or pericardiectomy, for refractory or recurrent disease",
+      "Identification and treatment of an underlying cause in secondary disease, such as malignancy or a lymphatic disorder",
+      "Monitoring of nutritional, immune and fat-soluble vitamin status given ongoing chyle loss",
+      "Cardiothoracic and cardiology referral with echocardiographic surveillance for reaccumulation and tamponade"
     ]
-   ],
-   "caption": "Overview comparison matrix for chylopericardium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chylopericardium-real-image",
-   "title": "Chylopericardium: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "chylopericardium-pathway",
+      "title": "Chylopericardium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and chylomicrons",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac tamponade from a large or rapidly accumulating chylous effusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons, Echocardiography to size the effusion and assess for tamponade, Cardiac CT or MRI to characterise the effusion and search"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chylopericardium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chylopericardium-matrix",
+      "title": "Chylopericardium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Accumulation of chyle within the pericardial space, producing a characteristically milky effusion rich in triglycerides and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pericardiocentesis with fluid analysis for a milky appearance, triglyceride level, and chylomicrons, Echocardiography to size the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Serous pericardial effusion from other causes, Purulent (bacterial) pericardial effusion, Haemopericardium",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Pericardial drainage by pericardiocentesis for a large or symptomatic effusion, with emergency drainage for tamponade",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking chylous fluid for pus and missing the diagnosis without triglyceride analysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chylopericardium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chylopericardium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardiocentesis with fluid analysis",
+          "cells": [
+            {
+              "text": "Milky appearance, triglyceride level and chylomicrons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Effusion size and tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises the effusion and any mediastinal cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangiography or lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Localises the abnormal lymphatic communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for malignancy or lymphatic disorder",
+          "cells": [
+            {
+              "text": "Secondary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylopericardium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Purulent (bacterial) pericardial effusion",
+          "cells": [
+            {
+              "text": "Infected effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholesterol (gold-paint) pericardial effusion",
+          "cells": [
+            {
+              "text": "Cholesterol-rich effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pericardial effusion",
+          "cells": [
+            {
+              "text": "Neoplastic effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylopericardium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardial drainage",
+          "cells": [
+            {
+              "text": "Pericardiocentesis for large or symptomatic effusion; emergency for tamponade"
+            },
+            {
+              "text": "Tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-fat diet with medium-chain triglycerides",
+          "cells": [
+            {
+              "text": "Or bowel rest with parenteral nutrition to reduce chyle flow"
+            },
+            {
+              "text": "First-line measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Octreotide",
+          "cells": [
+            {
+              "text": "Somatostatin analogue to lower lymphatic flow"
+            },
+            {
+              "text": "Persistent leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic-duct embolisation or ligation",
+          "cells": [
+            {
+              "text": "With pericardial window or pericardiectomy for refractory disease"
+            },
+            {
+              "text": "Refractory or recurrent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of underlying cause",
+          "cells": [
+            {
+              "text": "Malignancy or lymphatic disorder in secondary disease"
+            },
+            {
+              "text": "Secondary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chylopericardium-dx-mgmt",
+      "title": "Diagnosis and management of Chylopericardium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chylopericardium: enlarging pericardial effusion, milky on aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tamponade, rapid reaccumulation, mediastinal malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency pericardial drainage for tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pericardiocentesis for triglycerides, echocardiography and cardiac CT or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Milky fluid with high triglycerides and chylomicrons confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pericardial drainage and low-fat, medium-chain triglyceride diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check purulent, cholesterol and malignant pericardial effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Octreotide to reduce lymphatic flow in persistent leakage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lymphangiography with thoracic-duct embolisation or ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying malignancy or lymphatic disorder in secondary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor nutrition and immunity; echocardiography for reaccumulation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

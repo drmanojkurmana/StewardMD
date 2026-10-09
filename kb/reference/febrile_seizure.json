@@ -1,173 +1,575 @@
 {
- "id": "febrile_seizure",
- "name": "Febrile seizure",
- "aliases": [
-  "febrile convulsion",
-  "fever fit",
-  "simple febrile seizure",
-  "complex febrile seizure"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a metabolic cause, and not in a child with prior afebrile seizures.",
-   "Simple febrile seizures are generalised, last under 15 minutes, and do not recur within 24 hours; complex seizures are focal, prolonged, or recur within a day.",
-   "The diagnosis is clinical, and the main task is to exclude meningitis, encephalitis, and other acute causes of the fever.",
-   "Routine blood tests, neuroimaging, and EEG are not indicated for simple febrile seizures in an otherwise well child.",
-   "Lumbar puncture is considered when meningeal signs are present, in very young or incompletely immunised infants, or when the picture is atypical.",
-   "Most febrile seizures are brief and self-terminating; management centres on reassurance, identifying the febrile illness, and safety advice for parents.",
-   "Prolonged seizures are treated as status epilepticus with benzodiazepine-based abortive therapy and airway support.",
-   "Antipyretics improve comfort but do not reliably prevent recurrence, and daily prophylactic anticonvulsants are generally not recommended for simple febrile seizures."
+  "id": "febrile_seizure",
+  "name": "Febrile seizure",
+  "aliases": [
+    "febrile convulsion",
+    "fever fit",
+    "simple febrile seizure",
+    "complex febrile seizure"
   ],
-  "pathophysiology": "Febrile seizures reflect the heightened seizure susceptibility of the developing brain when exposed to fever, likely mediated by fever-associated cytokines (such as interleukin-1 beta), the effect of raised temperature on neuronal excitability, and a genetic predisposition, as demonstrated by strong familial clustering. The rate of temperature rise and the immaturity of the young brain contribute, and in most children the tendency resolves with neurological maturation.",
-  "additionalDifferentials": [
-   "Meningitis or encephalitis",
-   "Epilepsy with a coincidental febrile illness",
-   "Rigors or shivering mistaken for a seizure",
-   "Metabolic disturbance (e.g. hypoglycaemia, hyponatraemia)",
-   "Breath-holding spell",
-   "Intracranial pathology"
-  ],
-  "additionalInvestigations": [
-   "Assessment to identify and treat the source of fever",
-   "Blood glucose in any child who is drowsy or slow to recover",
-   "Lumbar puncture when CNS infection is suspected or the child is very young",
-   "Electrolytes only when clinically indicated (e.g. dehydration, atypical features)",
-   "EEG and neuroimaging reserved for complex or recurrent focal features or an abnormal neurological exam"
-  ],
-  "redFlags": [
-   "Signs of meningitis or encephalitis (neck stiffness, altered consciousness, bulging fontanelle)",
-   "Prolonged seizure or febrile status epilepticus",
-   "Focal features, or focal neurological deficit after the seizure",
-   "Failure to return to baseline alertness within a reasonable period",
-   "Seizure outside the typical age range or in an unwell, toxic-appearing child"
-  ],
-  "prognosis": "The outlook is excellent: most children have normal development and neurological outcome, though about a third experience a recurrence, and the increase in later epilepsy risk is small for simple febrile seizures.",
-  "pitfalls": [
-   "Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant",
-   "Over-investigating a well child after a simple febrile seizure",
-   "Reassuring families that antipyretics prevent recurrence",
-   "Starting long-term anticonvulsants for simple febrile seizures unnecessarily"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or ongoing seizure",
-   "Identify and treat the underlying febrile illness, using antipyretics such as paracetamol or ibuprofen for the child's comfort",
-   "Exclude central nervous system infection clinically, performing lumbar puncture when meningeal signs are present, in very young or incompletely immunised infants, or when the picture is atypical",
-   "Avoid routine bloods, neuroimaging and EEG in a simple febrile seizure in an otherwise well child, reserving them for complex, focal or recurrent features",
-   "Provide parental reassurance and safety advice, including first-aid seizure management and when to seek urgent help",
-   "Reserve referral to paediatric neurology for complex, atypical or recurrent seizures or an abnormal neurological examination"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "febrile_seizure-pathway",
-   "title": "Febrile seizure: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a metabolic cause, and not in a child with prior afebrile seizures.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of meningitis or encephalitis (neck stiffness, altered consciousness, bulging fontanelle)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assessment to identify and treat the source of fever, Blood glucose in any child who is drowsy or slow to recover, Lumbar puncture when CNS infection is suspected or the child is very young"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or ongoing seizure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of febrile seizure."
-  }
- ],
- "tables": [
-  {
-   "id": "febrile_seizure-matrix",
-   "title": "Febrile seizure: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a metabolic cause, and not in a child with prior afebrile seizures.",
+      "Simple febrile seizures are generalised, last under 15 minutes, and do not recur within 24 hours; complex seizures are focal, prolonged, or recur within a day.",
+      "The diagnosis is clinical, and the main task is to exclude meningitis, encephalitis, and other acute causes of the fever.",
+      "Routine blood tests, neuroimaging, and EEG are not indicated for simple febrile seizures in an otherwise well child.",
+      "Lumbar puncture is considered when meningeal signs are present, in very young or incompletely immunised infants, or when the picture is atypical.",
+      "Most febrile seizures are brief and self-terminating; management centres on reassurance, identifying the febrile illness, and safety advice for parents.",
+      "Prolonged seizures are treated as status epilepticus with benzodiazepine-based abortive therapy and airway support.",
+      "Antipyretics improve comfort but do not reliably prevent recurrence, and daily prophylactic anticonvulsants are generally not recommended for simple febrile seizures."
     ],
-    [
-     "Key Investigations",
-     "Assessment to identify and treat the source of fever, Blood glucose in any child who is drowsy or slow to recover, Lumbar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Febrile seizures reflect the heightened seizure susceptibility of the developing brain when exposed to fever, likely mediated by fever-associated cytokines (such as interleukin-1 beta), the effect of raised temperature on neuronal excitability, and a genetic predisposition, as demonstrated by strong familial clustering. The rate of temperature rise and the immaturity of the young brain contribute, and in most children the tendency resolves with neurological maturation.",
+    "additionalDifferentials": [
+      "Meningitis or encephalitis",
+      "Epilepsy with a coincidental febrile illness",
+      "Rigors or shivering mistaken for a seizure",
+      "Metabolic disturbance (e.g. hypoglycaemia, hyponatraemia)",
+      "Breath-holding spell",
+      "Intracranial pathology"
     ],
-    [
-     "Primary Differentials",
-     "Meningitis or encephalitis, Epilepsy with a coincidental febrile illness, Rigors or shivering mistaken for a seizure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assessment to identify and treat the source of fever",
+      "Blood glucose in any child who is drowsy or slow to recover",
+      "Lumbar puncture when CNS infection is suspected or the child is very young",
+      "Electrolytes only when clinically indicated (e.g. dehydration, atypical features)",
+      "EEG and neuroimaging reserved for complex or recurrent focal features or an abnormal neurological exam"
     ],
-    [
-     "Management Strategy",
-     "Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of meningitis or encephalitis (neck stiffness, altered consciousness, bulging fontanelle)",
+      "Prolonged seizure or febrile status epilepticus",
+      "Focal features, or focal neurological deficit after the seizure",
+      "Failure to return to baseline alertness within a reasonable period",
+      "Seizure outside the typical age range or in an unwell, toxic-appearing child"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent: most children have normal development and neurological outcome, though about a third experience a recurrence, and the increase in later epilepsy risk is small for simple febrile seizures.",
+    "pitfalls": [
+      "Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant",
+      "Over-investigating a well child after a simple febrile seizure",
+      "Reassuring families that antipyretics prevent recurrence",
+      "Starting long-term anticonvulsants for simple febrile seizures unnecessarily"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or ongoing seizure",
+      "Identify and treat the underlying febrile illness, using antipyretics such as paracetamol or ibuprofen for the child's comfort",
+      "Exclude central nervous system infection clinically, performing lumbar puncture when meningeal signs are present, in very young or incompletely immunised infants, or when the picture is atypical",
+      "Avoid routine bloods, neuroimaging and EEG in a simple febrile seizure in an otherwise well child, reserving them for complex, focal or recurrent features",
+      "Provide parental reassurance and safety advice, including first-aid seizure management and when to seek urgent help",
+      "Reserve referral to paediatric neurology for complex, atypical or recurrent seizures or an abnormal neurological examination"
     ]
-   ],
-   "caption": "Overview comparison matrix for febrile seizure."
-  }
- ],
- "diagrams": [
-  {
-   "id": "febrile-seizure-real-image",
-   "title": "Febrile seizure: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "febrile_seizure-pathway",
+      "title": "Febrile seizure: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a metabolic cause, and not in a child with prior afebrile seizures.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of meningitis or encephalitis (neck stiffness, altered consciousness, bulging fontanelle)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assessment to identify and treat the source of fever, Blood glucose in any child who is drowsy or slow to recover, Lumbar puncture when CNS infection is suspected or the child is very young"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or ongoing seizure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of febrile seizure."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "febrile_seizure-matrix",
+      "title": "Febrile seizure: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A seizure occurring with fever in children roughly 6 months to 5 years of age, without central nervous system infection or a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assessment to identify and treat the source of fever, Blood glucose in any child who is drowsy or slow to recover, Lumbar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meningitis or encephalitis, Epilepsy with a coincidental febrile illness, Rigors or shivering mistaken for a seizure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the acute seizure with airway protection and positioning, giving benzodiazepine rescue therapy only for a prolonged or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming fever excludes meningitis and skipping evaluation in a young or unwell infant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for febrile seizure."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 369-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "febrile_seizure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Assessment to identify and treat the source of fever",
+          "cells": [
+            {
+              "text": "Febrile illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose in a drowsy or slow-to-recover child",
+          "cells": [
+            {
+              "text": "Metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture when CNS infection suspected or child very young",
+          "cells": [
+            {
+              "text": "Meningitis or encephalitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes when clinically indicated",
+          "cells": [
+            {
+              "text": "Dehydration or atypical features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and neuroimaging for complex or focal features",
+          "cells": [
+            {
+              "text": "Abnormal neurological examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_seizure-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Neck stiffness, altered consciousness or a bulging fontanelle indicate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breath-holding spell or rigors",
+          "cells": [
+            {
+              "text": "Mistaken for seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic disturbance (hypoglycaemia, hyponatraemia)",
+          "cells": [
+            {
+              "text": "Excluded by blood glucose and electrolytes when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_seizure-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection and positioning",
+          "cells": [
+            {
+              "text": "During the acute seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepine rescue",
+          "cells": [
+            {
+              "text": "Only for a prolonged or ongoing seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretics for comfort",
+          "cells": [
+            {
+              "text": "Paracetamol or ibuprofen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical exclusion of CNS infection",
+          "cells": [
+            {
+              "text": "Lumbar puncture when meningeal signs are present, in very young or incompletely immunised infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine bloods, imaging and EEG in a simple febrile seizure",
+          "cells": [
+            {
+              "text": "Reserved for complex, focal or recurrent features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental reassurance and first-aid advice",
+          "cells": [
+            {
+              "text": "Safety and when to seek urgent help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric neurology referral",
+          "cells": [
+            {
+              "text": "Complex, atypical or recurrent seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "febrile_seizure-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs and substances that can provoke seizures",
+      "rowHeader": "Condition",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Alkylating agents",
+          "cells": [
+            {
+              "text": "busulfan, chlorambucil"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimalarials",
+          "cells": [
+            {
+              "text": "chloroquine, mefloquine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimicrobials and antivirals",
+          "cells": [
+            {
+              "text": "beta-lactams and related compounds, quinolones, acyclovir, isoniazid, ganciclovir"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anesthetics and analgesics",
+          "cells": [
+            {
+              "text": "meperidine, tramadol, local anesthetics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dietary supplements",
+          "cells": [
+            {
+              "text": "ephedra (ma huang), gingko"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immunomodulatory drugs",
+          "cells": [
+            {
+              "text": "cyclosporine, OKT3, tacrolimus, interferons"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychotropics",
+          "cells": [
+            {
+              "text": "antidepressants, antipsychotics, lithium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiographic contrast agents",
+          "cells": [
+            {
+              "text": "no item printed directly beneath; theophylline appears next under this heading"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Theophylline",
+          "cells": [
+            {
+              "text": "theophylline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sedative-hypnotic withdrawal",
+          "cells": [
+            {
+              "text": "alcohol, short-acting barbiturates, short-acting benzodiazepines"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drugs of abuse",
+          "cells": [
+            {
+              "text": "amphetamine, cocaine, phencyclidine"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "febrile_seizure-dx-mgmt",
+      "title": "Diagnosis and management of Febrile seizure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Generalised seizure with fever in a child about 6 months to 5 years old",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (meningeal signs, prolonged seizure, focal deficit, slow recovery, toxic child)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Benzodiazepine for prolonged seizure; urgent CNS infection assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Source of fever; glucose if drowsy; lumbar puncture if meningeal signs or very young",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Simple generalised seizure, under 15 minutes, with no CNS infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as complex seizure or CNS infection; consider EEG and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Airway protection and benzodiazepine only for prolonged seizure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antipyretic and treatment of the febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine investigations in a well child",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Parental reassurance and seizure first-aid advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; about a third have a recurrence, and development is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,500 @@
 {
- "id": "kienbock_disease",
- "name": "Kienbock disease",
- "aliases": [
-  "lunatomalacia",
-  "lunate osteonecrosis",
-  "avascular necrosis of the lunate",
-  "osteochondrosis of the lunate"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
-   "Typically presents in young adults, often manual labourers aged roughly twenty to forty, and is uncommon in children",
-   "Complaints include activity-related dorsal wrist pain, stiffness, swelling, reduced grip strength and limited wrist extension",
-   "The radiographic hallmark is early sclerosis (increased density) of the lunate, progressing to fragmentation, collapse and eventual carpal disruption",
-   "Frequently associated with a negative ulnar variance (relatively short ulna), which is thought to concentrate load across the lunate",
-   "The Lichtman staging system, based on lunate density, collapse and carpal alignment, guides treatment selection",
-   "Early disease may be radiographically silent, so magnetic resonance imaging is valuable for confirming devascularisation and marrow change",
-   "Management ranges from immobilisation and activity modification in early stages to joint-levelling, revascularisation or salvage surgery as needed for advanced collapse"
+  "id": "kienbock_disease",
+  "name": "Kienbock disease",
+  "aliases": [
+    "lunatomalacia",
+    "lunate osteonecrosis",
+    "avascular necrosis of the lunate",
+    "osteochondrosis of the lunate"
   ],
-  "pathophysiology": "Kienbock disease is an osteonecrosis of the lunate in which the bone loses its blood supply and undergoes progressive death, collapse and fragmentation. The cause is regarded as multifactorial, combining interruption of the tenuous intraosseous and extraosseous vascular supply with mechanical overload. A relatively short ulna (negative ulnar variance) is commonly present and is believed to increase compressive stress on the lunate, while repetitive loading and single or repeated microtrauma may precipitate ischaemia. As the necrotic bone weakens it fractures and collapses, altering carpal mechanics, producing proximal migration of the capitate and rotation of the scaphoid, and ultimately leading to secondary degenerative arthritis of the wrist.",
-  "additionalDifferentials": [
-   "Scaphoid fracture or scaphoid nonunion",
-   "Scapholunate ligament injury and carpal instability",
-   "Wrist osteoarthritis or post-traumatic arthritis",
-   "Ulnar impaction syndrome",
-   "De Quervain tenosynovitis or other wrist tendinopathy",
-   "Ganglion cyst causing dorsal wrist pain"
-  ],
-  "additionalInvestigations": [
-   "Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density",
-   "Magnetic resonance imaging to detect early avascular change before collapse is visible on plain films",
-   "Computed tomography to define fragmentation, collapse and articular surface integrity",
-   "Comparison of ulnar variance with the contralateral wrist",
-   "Bone scintigraphy where diagnostic uncertainty remains and cross-sectional imaging is unavailable",
-   "Staging assessment using the Lichtman classification to plan treatment"
-  ],
-  "redFlags": [
-   "Progressive lunate collapse with carpal shortening indicating advanced, potentially irreversible disease",
-   "Established secondary wrist arthritis with persistent pain and functional loss",
-   "Fixed loss of grip and wrist motion suggesting carpal disintegration",
-   "Bilateral or atypical presentation prompting consideration of an underlying systemic cause of osteonecrosis"
-  ],
-  "prognosis": "Outcome depends on the stage at presentation; early disease treated with offloading or joint-levelling procedures may preserve function, whereas advanced lunate collapse and carpal disruption tend to progress to degenerative wrist arthritis with lasting stiffness and reduced grip.",
-  "pitfalls": [
-   "Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films",
-   "Relying on normal early radiographs and failing to obtain magnetic resonance imaging when suspicion is high",
-   "Overlooking negative ulnar variance as a contributing mechanical factor",
-   "Underestimating carpal collapse and applying joint-preserving surgery when salvage is more appropriate"
-  ],
-  "references": [
-   "Campbell's Operative Orthopaedics",
-   "Green's Operative Hand Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and simple analgesia or NSAIDs to offload the lunate.",
-   "Address negative ulnar variance with a joint-levelling operation such as radial shortening osteotomy to reduce compressive load across the lunate.",
-   "Consider procedures to restore lunate vascularity or unload the carpus, such as pedicled vascularised bone grafting, core decompression or capitate-shortening, guided by Lichtman stage.",
-   "For established lunate collapse, use salvage carpal procedures such as proximal row carpectomy or limited intercarpal (scaphotrapeziotrapezoid or scaphocapitate) fusion to relieve pain and preserve function.",
-   "Reserve total wrist arthrodesis or arthroplasty for end-stage degenerative carpal collapse with refractory pain.",
-   "Monitor progression with serial plain radiographs and MRI, restaging by the Lichtman classification to time surgical intervention.",
-   "Involve hand therapy and occupational therapy for splinting, grip strengthening, range-of-motion work and workplace adaptation, and refer to a hand surgeon for progressive collapse or persistent pain."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kienbock_disease-pathway",
-   "title": "Kienbock disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive lunate collapse with carpal shortening indicating advanced, potentially irreversible disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density, Magnetic resonance imaging to detect early avascular change before collapse is visible on plain films, Computed"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and simple analgesia or NSAIDs to offload the lunate."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kienbock disease."
-  }
- ],
- "tables": [
-  {
-   "id": "kienbock_disease-matrix",
-   "title": "Kienbock disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
+      "Typically presents in young adults, often manual labourers aged roughly twenty to forty, and is uncommon in children",
+      "Complaints include activity-related dorsal wrist pain, stiffness, swelling, reduced grip strength and limited wrist extension",
+      "The radiographic hallmark is early sclerosis (increased density) of the lunate, progressing to fragmentation, collapse and eventual carpal disruption",
+      "Frequently associated with a negative ulnar variance (relatively short ulna), which is thought to concentrate load across the lunate",
+      "The Lichtman staging system, based on lunate density, collapse and carpal alignment, guides treatment selection",
+      "Early disease may be radiographically silent, so magnetic resonance imaging is valuable for confirming devascularisation and marrow change",
+      "Management ranges from immobilisation and activity modification in early stages to joint-levelling, revascularisation or salvage surgery as needed for advanced collapse"
     ],
-    [
-     "Key Investigations",
-     "Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density, Magnetic resonance",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kienbock disease is an osteonecrosis of the lunate in which the bone loses its blood supply and undergoes progressive death, collapse and fragmentation. The cause is regarded as multifactorial, combining interruption of the tenuous intraosseous and extraosseous vascular supply with mechanical overload. A relatively short ulna (negative ulnar variance) is commonly present and is believed to increase compressive stress on the lunate, while repetitive loading and single or repeated microtrauma may precipitate ischaemia. As the necrotic bone weakens it fractures and collapses, altering carpal mechanics, producing proximal migration of the capitate and rotation of the scaphoid, and ultimately leading to secondary degenerative arthritis of the wrist.",
+    "additionalDifferentials": [
+      "Scaphoid fracture or scaphoid nonunion",
+      "Scapholunate ligament injury and carpal instability",
+      "Wrist osteoarthritis or post-traumatic arthritis",
+      "Ulnar impaction syndrome",
+      "De Quervain tenosynovitis or other wrist tendinopathy",
+      "Ganglion cyst causing dorsal wrist pain"
     ],
-    [
-     "Primary Differentials",
-     "Scaphoid fracture or scaphoid nonunion, Scapholunate ligament injury and carpal instability, Wrist osteoarthritis or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density",
+      "Magnetic resonance imaging to detect early avascular change before collapse is visible on plain films",
+      "Computed tomography to define fragmentation, collapse and articular surface integrity",
+      "Comparison of ulnar variance with the contralateral wrist",
+      "Bone scintigraphy where diagnostic uncertainty remains and cross-sectional imaging is unavailable",
+      "Staging assessment using the Lichtman classification to plan treatment"
     ],
-    [
-     "Management Strategy",
-     "In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive lunate collapse with carpal shortening indicating advanced, potentially irreversible disease",
+      "Established secondary wrist arthritis with persistent pain and functional loss",
+      "Fixed loss of grip and wrist motion suggesting carpal disintegration",
+      "Bilateral or atypical presentation prompting consideration of an underlying systemic cause of osteonecrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the stage at presentation; early disease treated with offloading or joint-levelling procedures may preserve function, whereas advanced lunate collapse and carpal disruption tend to progress to degenerative wrist arthritis with lasting stiffness and reduced grip.",
+    "pitfalls": [
+      "Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films",
+      "Relying on normal early radiographs and failing to obtain magnetic resonance imaging when suspicion is high",
+      "Overlooking negative ulnar variance as a contributing mechanical factor",
+      "Underestimating carpal collapse and applying joint-preserving surgery when salvage is more appropriate"
+    ],
+    "references": [
+      "Campbell's Operative Orthopaedics",
+      "Green's Operative Hand Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and simple analgesia or NSAIDs to offload the lunate.",
+      "Address negative ulnar variance with a joint-levelling operation such as radial shortening osteotomy to reduce compressive load across the lunate.",
+      "Consider procedures to restore lunate vascularity or unload the carpus, such as pedicled vascularised bone grafting, core decompression or capitate-shortening, guided by Lichtman stage.",
+      "For established lunate collapse, use salvage carpal procedures such as proximal row carpectomy or limited intercarpal (scaphotrapeziotrapezoid or scaphocapitate) fusion to relieve pain and preserve function.",
+      "Reserve total wrist arthrodesis or arthroplasty for end-stage degenerative carpal collapse with refractory pain.",
+      "Monitor progression with serial plain radiographs and MRI, restaging by the Lichtman classification to time surgical intervention.",
+      "Involve hand therapy and occupational therapy for splinting, grip strengthening, range-of-motion work and workplace adaptation, and refer to a hand surgeon for progressive collapse or persistent pain."
     ]
-   ],
-   "caption": "Overview comparison matrix for kienbock disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kienbock-disease-real-image",
-   "title": "Kienbock disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "kienbock_disease-pathway",
+      "title": "Kienbock disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive lunate collapse with carpal shortening indicating advanced, potentially irreversible disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density, Magnetic resonance imaging to detect early avascular change before collapse is visible on plain films, Computed"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and simple analgesia or NSAIDs to offload the lunate."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kienbock disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kienbock_disease-matrix",
+      "title": "Kienbock disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A true osteonecrosis affecting the lunate, the central carpal bone of the proximal row, rather than a traction apophysitis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain wrist radiographs including a neutral posteroanterior view to assess ulnar variance and lunate density, Magnetic resonance",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Scaphoid fracture or scaphoid nonunion, Scapholunate ligament injury and carpal instability, Wrist osteoarthritis or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In early (pre-collapse) disease, trial non-operative care with wrist immobilisation or splinting, activity modification and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing persistent wrist pain to a soft-tissue strain and missing early sclerosis on plain films",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kienbock disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kienbock_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain wrist radiographs with neutral PA view",
+          "cells": [
+            {
+              "text": "Ulnar variance and lunate density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early avascular change before collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Fragmentation, collapse and articular surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral ulnar variance",
+          "cells": [
+            {
+              "text": "Comparison"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "If uncertain and cross-sectional imaging unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichtman staging",
+          "cells": [
+            {
+              "text": "Treatment planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kienbock_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scaphoid fracture or nonunion",
+          "cells": [
+            {
+              "text": "Anatomical snuffbox tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapholunate ligament injury",
+          "cells": [
+            {
+              "text": "Carpal instability on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist osteoarthritis",
+          "cells": [
+            {
+              "text": "Post-traumatic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar impaction syndrome",
+          "cells": [
+            {
+              "text": "Positive ulnar variance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Quervain tenosynovitis",
+          "cells": [
+            {
+              "text": "Radial styloid tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsal ganglion",
+          "cells": [
+            {
+              "text": "Palpable cystic swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kienbock_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early disease",
+          "cells": [
+            {
+              "text": "Immobilisation, activity change, analgesia or NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Negative ulnar variance",
+          "cells": [
+            {
+              "text": "Radial shortening osteotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascularity or unloading",
+          "cells": [
+            {
+              "text": "Vascularised bone graft, core decompression or capitate shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Established collapse",
+          "cells": [
+            {
+              "text": "Proximal row carpectomy or limited intercarpal fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-stage disease",
+          "cells": [
+            {
+              "text": "Total wrist arthrodesis or arthroplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial radiographs and MRI as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kienbock_disease-dx-mgmt",
+      "title": "Diagnosis and management of Kienbock disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young adult with dorsal wrist pain, stiffness and reduced grip",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive lunate collapse, established arthritis, or bilateral presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Orthopaedic hand referral; assess for collapse on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plain radiographs with ulnar variance, MRI if early, CT for collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lunate avascular change on MRI with radiographic density change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider scaphoid injury, ligament injury or arthritis; further imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early disease: immobilisation, activity change and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radial shortening osteotomy for negative ulnar variance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Revascularisation or unloading procedures by Lichtman stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Proximal row carpectomy or limited fusion for collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Total wrist arthrodesis for end-stage degenerative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pre-collapse stages respond to joint-preserving surgery; collapse needs salvage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

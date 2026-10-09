@@ -1,173 +1,481 @@
 {
- "id": "pallister_hall_syndrome",
- "name": "Pallister-Hall syndrome (GLI3)",
- "aliases": [
-  "PHS",
-  "GLI3",
-  "hypothalamic hamartoma-polydactyly syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Ciliopathy",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
-   "Hypothalamic hamartomas may cause gelastic (laughing) seizures, central precocious puberty or hypopituitarism",
-   "A bifid or partially cleft epiglottis is a highly suggestive, if under-recognised, feature",
-   "Other findings include imperforate anus, renal anomalies and, occasionally, laryngotracheal clefts",
-   "Caused by heterozygous truncating GLI3 variants, typically in the middle third of the gene, with autosomal dominant inheritance",
-   "Allelic with Greig cephalopolysyndactyly, which results from a different position or class of GLI3 variant",
-   "GLI3 acts downstream of hedgehog signalling processed at the primary cilium, linking the disorder to ciliary biology"
+  "id": "pallister_hall_syndrome",
+  "name": "Pallister-Hall syndrome (GLI3)",
+  "aliases": [
+    "PHS",
+    "GLI3",
+    "hypothalamic hamartoma-polydactyly syndrome"
   ],
-  "pathophysiology": "Pallister-Hall syndrome results from heterozygous truncating variants in GLI3, typically in the middle third of the gene, that generate a shortened protein biased towards its transcriptional repressor form. GLI3 is the principal transcriptional effector of hedgehog signalling, a pathway that is assembled and processed on the primary cilium, so the disorder is intimately linked to ciliary biology. During development the resulting imbalance of hedgehog output disturbs patterning of the hypothalamus, limbs, larynx and hindgut, producing the hypothalamic hamartoma, central or postaxial polydactyly, bifid epiglottis and anorectal and renal anomalies. The contrasting effect of GLI3 loss-of-function variants elsewhere in the gene explains why Greig cephalopolysyndactyly is allelic yet clinically distinct.",
-  "additionalDifferentials": [
-   "Greig cephalopolysyndactyly syndrome",
-   "McKusick-Kaufman syndrome",
-   "Bardet-Biedl syndrome",
-   "Oral-facial-digital syndromes",
-   "Isolated hypothalamic hamartoma",
-   "Other central (mesoaxial) polydactyly syndromes"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to identify and characterise a hypothalamic hamartoma",
-   "Endocrine evaluation for precocious puberty and anterior pituitary function",
-   "Radiographs of the hands and feet to document central or postaxial polydactyly",
-   "Laryngoscopy for bifid epiglottis and airway assessment where indicated",
-   "Examination and imaging for imperforate anus and renal anomalies",
-   "Molecular testing of GLI3"
-  ],
-  "redFlags": [
-   "Gelastic seizures or intractable epilepsy arising from the hamartoma",
-   "Panhypopituitarism, which can be life-threatening in the neonate through adrenal insufficiency",
-   "Airway compromise from laryngeal anomalies",
-   "Imperforate anus requiring surgical management"
-  ],
-  "prognosis": "With recognition and management of endocrine and airway problems the outlook is generally good and intellect is usually normal; the hypothalamic hamartoma is benign and malformative, though associated seizures can be difficult to control.",
-  "pitfalls": [
-   "Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal",
-   "Attempting resection of a hypothalamic hamartoma without recognising its benign, malformative nature",
-   "Overlooking a bifid epiglottis on airway assessment",
-   "Confusing it with Greig cephalopolysyndactyly despite the shared GLI3 basis"
-  ],
-  "references": [
-   "GeneReviews: GLI3-Related Pallister-Hall Syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation or surgical disconnection for refractory epilepsy",
-   "Endocrine hormone replacement for hypopituitarism and a GnRH analogue to manage central precocious puberty",
-   "Airway assessment and surgical repair of a bifid epiglottis or laryngotracheal cleft where symptomatic",
-   "Surgical correction of imperforate anus and evaluation and management of renal anomalies",
-   "Orthopaedic or plastic surgical review for central or postaxial polydactyly",
-   "Genetic counselling for autosomal dominant GLI3 inheritance and family testing",
-   "Coordinated multidisciplinary care across neurology, endocrinology, ENT, surgery and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pallister_hall_syndrome-pathway",
-   "title": "Pallister-Hall syndrome (GLI3): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Gelastic seizures or intractable epilepsy arising from the hamartoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to identify and characterise a hypothalamic hamartoma, Endocrine evaluation for precocious puberty and anterior pituitary function, Radiographs of the hands and feet to document central or postaxial polydactyly"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation or surgical disconnection for refractory epilepsy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pallister-hall syndrome (gli3)."
-  }
- ],
- "tables": [
-  {
-   "id": "pallister_hall_syndrome-matrix",
-   "title": "Pallister-Hall syndrome (GLI3): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Ciliopathy",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
+      "Hypothalamic hamartomas may cause gelastic (laughing) seizures, central precocious puberty or hypopituitarism",
+      "A bifid or partially cleft epiglottis is a highly suggestive, if under-recognised, feature",
+      "Other findings include imperforate anus, renal anomalies and, occasionally, laryngotracheal clefts",
+      "Caused by heterozygous truncating GLI3 variants, typically in the middle third of the gene, with autosomal dominant inheritance",
+      "Allelic with Greig cephalopolysyndactyly, which results from a different position or class of GLI3 variant",
+      "GLI3 acts downstream of hedgehog signalling processed at the primary cilium, linking the disorder to ciliary biology"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to identify and characterise a hypothalamic hamartoma, Endocrine evaluation for precocious puberty and anterior",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pallister-Hall syndrome results from heterozygous truncating variants in GLI3, typically in the middle third of the gene, that generate a shortened protein biased towards its transcriptional repressor form. GLI3 is the principal transcriptional effector of hedgehog signalling, a pathway that is assembled and processed on the primary cilium, so the disorder is intimately linked to ciliary biology. During development the resulting imbalance of hedgehog output disturbs patterning of the hypothalamus, limbs, larynx and hindgut, producing the hypothalamic hamartoma, central or postaxial polydactyly, bifid epiglottis and anorectal and renal anomalies. The contrasting effect of GLI3 loss-of-function variants elsewhere in the gene explains why Greig cephalopolysyndactyly is allelic yet clinically distinct.",
+    "additionalDifferentials": [
+      "Greig cephalopolysyndactyly syndrome",
+      "McKusick-Kaufman syndrome",
+      "Bardet-Biedl syndrome",
+      "Oral-facial-digital syndromes",
+      "Isolated hypothalamic hamartoma",
+      "Other central (mesoaxial) polydactyly syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Greig cephalopolysyndactyly syndrome, McKusick-Kaufman syndrome, Bardet-Biedl syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to identify and characterise a hypothalamic hamartoma",
+      "Endocrine evaluation for precocious puberty and anterior pituitary function",
+      "Radiographs of the hands and feet to document central or postaxial polydactyly",
+      "Laryngoscopy for bifid epiglottis and airway assessment where indicated",
+      "Examination and imaging for imperforate anus and renal anomalies",
+      "Molecular testing of GLI3"
     ],
-    [
-     "Management Strategy",
-     "Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation",
-     "Core treatment modality"
+    "redFlags": [
+      "Gelastic seizures or intractable epilepsy arising from the hamartoma",
+      "Panhypopituitarism, which can be life-threatening in the neonate through adrenal insufficiency",
+      "Airway compromise from laryngeal anomalies",
+      "Imperforate anus requiring surgical management"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal",
-     "Prevent diagnostic or management error"
+    "prognosis": "With recognition and management of endocrine and airway problems the outlook is generally good and intellect is usually normal; the hypothalamic hamartoma is benign and malformative, though associated seizures can be difficult to control.",
+    "pitfalls": [
+      "Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal",
+      "Attempting resection of a hypothalamic hamartoma without recognising its benign, malformative nature",
+      "Overlooking a bifid epiglottis on airway assessment",
+      "Confusing it with Greig cephalopolysyndactyly despite the shared GLI3 basis"
+    ],
+    "references": [
+      "GeneReviews: GLI3-Related Pallister-Hall Syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation or surgical disconnection for refractory epilepsy",
+      "Endocrine hormone replacement for hypopituitarism and a GnRH analogue to manage central precocious puberty",
+      "Airway assessment and surgical repair of a bifid epiglottis or laryngotracheal cleft where symptomatic",
+      "Surgical correction of imperforate anus and evaluation and management of renal anomalies",
+      "Orthopaedic or plastic surgical review for central or postaxial polydactyly",
+      "Genetic counselling for autosomal dominant GLI3 inheritance and family testing",
+      "Coordinated multidisciplinary care across neurology, endocrinology, ENT, surgery and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for pallister-hall syndrome (gli3)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pallister-hall-syndrome-real-image",
-   "title": "Pallister-Hall syndrome (GLI3): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pallister_hall_syndrome-pathway",
+      "title": "Pallister-Hall syndrome (GLI3): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Gelastic seizures or intractable epilepsy arising from the hamartoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to identify and characterise a hypothalamic hamartoma, Endocrine evaluation for precocious puberty and anterior pituitary function, Radiographs of the hands and feet to document central or postaxial polydactyly"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation or surgical disconnection for refractory epilepsy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pallister-hall syndrome (gli3)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pallister_hall_syndrome-matrix",
+      "title": "Pallister-Hall syndrome (GLI3): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the combination of a hypothalamic hamartoma with central (mesoaxial) or postaxial polydactyly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to identify and characterise a hypothalamic hamartoma, Endocrine evaluation for precocious puberty and anterior",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Greig cephalopolysyndactyly syndrome, McKusick-Kaufman syndrome, Bardet-Biedl syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anti-seizure medication for gelastic and other seizures arising from the hypothalamic hamartoma, with stereotactic laser ablation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing neonatal hypopituitarism and adrenal insufficiency, which can be fatal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pallister-hall syndrome (gli3)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pallister_hall_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypothalamic hamartoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Precocious puberty and anterior pituitary function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot radiographs",
+          "cells": [
+            {
+              "text": "Central or postaxial polydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Bifid epiglottis and airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal and renal examination and imaging",
+          "cells": [
+            {
+              "text": "Imperforate anus and renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLI3 molecular testing",
+          "cells": [
+            {
+              "text": "Truncating variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_hall_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Greig cephalopolysyndactyly syndrome",
+          "cells": [
+            {
+              "text": "Shares the GLI3 basis; a different position or class of variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated hypothalamic hamartoma",
+          "cells": [
+            {
+              "text": "Lacks the polydactyly and GLI3 pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_hall_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-seizure medication",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For gelastic and other seizures from the hamartoma; laser ablation or disconnection if refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine treatment",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Hormone replacement for hypopituitarism; GnRH analogue for central precocious puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Assessment and repair of a symptomatic bifid epiglottis or laryngotracheal cleft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal and renal care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Surgical correction of imperforate anus; evaluation of renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb surgery",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Orthopaedic or plastic review of central or postaxial polydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Autosomal dominant GLI3 inheritance and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pallister_hall_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pallister-Hall syndrome (GLI3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypothalamic hamartoma-related seizures or early puberty with polydactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (gelastic or intractable seizures, hypopituitarism or airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endocrine replacement for neonatal hypopituitarism and adrenal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, endocrine panel, hand and foot films, laryngoscopy, GLI3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GLI3 testing confirm a truncating variant with hamartoma and polydactyly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Greig syndrome, isolated hamartoma or other central polydactyly syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anti-seizure medication, with laser ablation or disconnection for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hormone replacement for hypopituitarism and a GnRH analogue for precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway assessment and repair of a symptomatic bifid epiglottis or laryngeal cleft",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair of imperforate anus; evaluation and treatment of renal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthopaedic review of polydactyly; genetic counselling for autosomal dominant GLI3",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with endocrine and airway care; normal intellect is usual",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -73,7 +73,7 @@ export const SECTION_KINDS = ["recognise", "immediate", "investigations", "treat
 export const REVIEW_STATUS = ["ai_drafted", "reviewed", "approved"];
 // Labels are app-facing text (filter chips, row and reader pills).
 export const BASES = [["international", "International"], ["india", "India"]];
-const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review", "tables", "algorithms", "calculators", "diagrams"];
+const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review", "tables", "algorithms", "calculators", "diagrams", "citations", "flowcharts", "valueTables", "figures"];
 export const DIAGRAM_TYPES = ["ecg", "xray", "ct", "diagram", "ultrasound"];
 const BASIS_KEYS = BASES.map((b) => b[0]);
 
@@ -96,6 +96,9 @@ export function validateProtocol(p, fileId) {
   if (!p || typeof p !== "object" || Array.isArray(p)) return [`${fileId}: not a JSON object`];
   const tag = p.id || fileId;
   Object.keys(p).forEach((k) => { if (TOP_KEYS.indexOf(k) < 0) e.push(`${tag}: unknown key "${k}"`); });
+  // Schema v2 keys (citations, flowcharts, valueTables, figures): shape only here. Graph and cell rules
+  // live in scripts/kb_validate_v2.py, which runs in the pilot review.
+  ["citations", "flowcharts", "valueTables", "figures"].forEach((k) => { if (p[k] !== undefined && !Array.isArray(p[k])) e.push(`${tag}: ${k} must be an array`); });
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.id || "")) e.push(`${tag}: id must be kebab-case`);
   if (fileId && p.id !== fileId) e.push(`${tag}: id does not match file name ${fileId}.json`);
   if (!isStr(p.title) || p.title.length < 3 || p.title.length > 120) e.push(`${tag}: title must be 3..120 chars`);

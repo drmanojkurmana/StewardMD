@@ -1,174 +1,689 @@
 {
- "id": "akinetic_mutism",
- "name": "Akinetic mutism",
- "aliases": [
-  "abulia (severe)",
-  "coma vigil",
-  "apathetic akinetic state"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move and speak",
-   "The patient may appear alert with eyes open and visually track the examiner, yet initiate little or no purposeful activity (coma vigil)",
-   "Represents the extreme end of the abulia spectrum, reflecting a disorder of drive and initiation rather than of motor or language pathways themselves",
-   "The mesial frontal form follows bilateral damage to the anterior cingulate and supplementary motor areas, often from anterior cerebral artery infarction or ruptured anterior communicating artery aneurysm",
-   "A paramedian (diencephalic-midbrain) form results from lesions of the paramedian thalamus and upper midbrain reticular structures",
-   "Causes include stroke, hydrocephalus, trauma, tumour, hypoxic injury, and infective or inflammatory disease",
-   "Management targets the underlying cause, with dopaminergic agents sometimes used to improve drive and initiation"
+  "id": "akinetic_mutism",
+  "name": "Akinetic mutism",
+  "aliases": [
+    "abulia (severe)",
+    "coma vigil",
+    "apathetic akinetic state"
   ],
-  "pathophysiology": "Akinetic mutism results from disruption of the networks that generate motivation and initiate goal-directed behaviour, sparing the primary motor and language systems. The mesial frontal form involves bilateral injury to the anterior cingulate cortex and supplementary motor area, key hubs linking limbic drive to motor action, commonly from anterior cerebral artery territory infarction or anterior communicating artery aneurysm rupture. The paramedian form arises from lesions of the paramedian thalamus and rostral midbrain, disrupting ascending activating and dopaminergic projections that energise cortical activity. In both, dopaminergic mesocortical and frontal-subcortical circuit dysfunction leaves the patient awake but lacking the internal drive to move or speak, which underlies the occasional benefit of dopaminergic therapy.",
-  "additionalDifferentials": [
-   "Locked-in syndrome",
-   "Persistent vegetative or minimally conscious state",
-   "Catatonia",
-   "Severe depression with psychomotor retardation",
-   "Non-convulsive status epilepticus",
-   "Advanced parkinsonism or other hypokinetic disorder"
-  ],
-  "additionalInvestigations": [
-   "MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions",
-   "Vascular imaging for anterior cerebral or communicating artery pathology",
-   "Electroencephalography to exclude non-convulsive status epilepticus and assess arousal",
-   "Cerebrospinal fluid analysis where infection or inflammation is suspected",
-   "Assessment for hydrocephalus with consideration of shunting",
-   "Bloods and metabolic screen"
-  ],
-  "redFlags": [
-   "Acute deterioration suggesting new infarction, haemorrhage, or hydrocephalus",
-   "Fever or meningism indicating an infective or inflammatory cause",
-   "Signs of raised intracranial pressure",
-   "Findings suggesting an alternative reversible cause such as seizures"
-  ],
-  "prognosis": "Recovery varies widely with cause and lesion extent; some patients improve substantially, particularly when a treatable cause such as hydrocephalus is corrected or with dopaminergic therapy, whereas extensive bilateral injury may leave a persistent deficit.",
-  "pitfalls": [
-   "Mistaking the state for coma, vegetative state, or locked-in syndrome",
-   "Attributing the presentation to depression and missing a structural lesion",
-   "Overlooking non-convulsive status epilepticus as a reversible cause",
-   "Failing to consider treatable hydrocephalus",
-   "Not trialling dopaminergic therapy where appropriate"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a ruptured anterior communicating artery aneurysm, or addressing tumour or infection",
-   "Dopaminergic therapy to restore drive using dopamine agonists such as bromocriptine, levodopa, or amantadine",
-   "Supportive nursing care attending to nutrition, hydration, pressure areas and bowel and bladder function in the immobile patient",
-   "Venous thromboembolism prophylaxis and physiotherapy to prevent contractures during the akinetic state",
-   "Exclude and treat non-convulsive status epilepticus and metabolic contributors that can mimic or worsen the state",
-   "Speech-and-language, occupational and physical therapy to encourage re-initiation of purposeful activity",
-   "Rehabilitation and neuropsychiatric follow-up as drive recovers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "akinetic_mutism-pathway",
-   "title": "Akinetic mutism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move and speak",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute deterioration suggesting new infarction, haemorrhage, or hydrocephalus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions, Vascular imaging for anterior cerebral or communicating artery pathology, Electroencephalography to exclude non-convulsive status epilepticus"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a ruptured anterior communicating artery aneurysm, or addressing tumour or infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the state for coma, vegetative state, or locked-in syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of akinetic mutism."
-  }
- ],
- "tables": [
-  {
-   "id": "akinetic_mutism-matrix",
-   "title": "Akinetic mutism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move and speak",
+      "The patient may appear alert with eyes open and visually track the examiner, yet initiate little or no purposeful activity (coma vigil)",
+      "Represents the extreme end of the abulia spectrum, reflecting a disorder of drive and initiation rather than of motor or language pathways themselves",
+      "The mesial frontal form follows bilateral damage to the anterior cingulate and supplementary motor areas, often from anterior cerebral artery infarction or ruptured anterior communicating artery aneurysm",
+      "A paramedian (diencephalic-midbrain) form results from lesions of the paramedian thalamus and upper midbrain reticular structures",
+      "Causes include stroke, hydrocephalus, trauma, tumour, hypoxic injury, and infective or inflammatory disease",
+      "Management targets the underlying cause, with dopaminergic agents sometimes used to improve drive and initiation"
     ],
-    [
-     "Key Investigations",
-     "MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions, Vascular imaging for anterior cerebral or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Akinetic mutism results from disruption of the networks that generate motivation and initiate goal-directed behaviour, sparing the primary motor and language systems. The mesial frontal form involves bilateral injury to the anterior cingulate cortex and supplementary motor area, key hubs linking limbic drive to motor action, commonly from anterior cerebral artery territory infarction or anterior communicating artery aneurysm rupture. The paramedian form arises from lesions of the paramedian thalamus and rostral midbrain, disrupting ascending activating and dopaminergic projections that energise cortical activity. In both, dopaminergic mesocortical and frontal-subcortical circuit dysfunction leaves the patient awake but lacking the internal drive to move or speak, which underlies the occasional benefit of dopaminergic therapy.",
+    "additionalDifferentials": [
+      "Locked-in syndrome",
+      "Persistent vegetative or minimally conscious state",
+      "Catatonia",
+      "Severe depression with psychomotor retardation",
+      "Non-convulsive status epilepticus",
+      "Advanced parkinsonism or other hypokinetic disorder"
     ],
-    [
-     "Primary Differentials",
-     "Locked-in syndrome, Persistent vegetative or minimally conscious state, Catatonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions",
+      "Vascular imaging for anterior cerebral or communicating artery pathology",
+      "Electroencephalography to exclude non-convulsive status epilepticus and assess arousal",
+      "Cerebrospinal fluid analysis where infection or inflammation is suspected",
+      "Assessment for hydrocephalus with consideration of shunting",
+      "Bloods and metabolic screen"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute deterioration suggesting new infarction, haemorrhage, or hydrocephalus",
+      "Fever or meningism indicating an infective or inflammatory cause",
+      "Signs of raised intracranial pressure",
+      "Findings suggesting an alternative reversible cause such as seizures"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the state for coma, vegetative state, or locked-in syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery varies widely with cause and lesion extent; some patients improve substantially, particularly when a treatable cause such as hydrocephalus is corrected or with dopaminergic therapy, whereas extensive bilateral injury may leave a persistent deficit.",
+    "pitfalls": [
+      "Mistaking the state for coma, vegetative state, or locked-in syndrome",
+      "Attributing the presentation to depression and missing a structural lesion",
+      "Overlooking non-convulsive status epilepticus as a reversible cause",
+      "Failing to consider treatable hydrocephalus",
+      "Not trialling dopaminergic therapy where appropriate"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a ruptured anterior communicating artery aneurysm, or addressing tumour or infection",
+      "Dopaminergic therapy to restore drive using dopamine agonists such as bromocriptine, levodopa, or amantadine",
+      "Supportive nursing care attending to nutrition, hydration, pressure areas and bowel and bladder function in the immobile patient",
+      "Venous thromboembolism prophylaxis and physiotherapy to prevent contractures during the akinetic state",
+      "Exclude and treat non-convulsive status epilepticus and metabolic contributors that can mimic or worsen the state",
+      "Speech-and-language, occupational and physical therapy to encourage re-initiation of purposeful activity",
+      "Rehabilitation and neuropsychiatric follow-up as drive recovers"
     ]
-   ],
-   "caption": "Overview comparison matrix for akinetic mutism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "akinetic-mutism-real-image",
-   "title": "Akinetic mutism: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "akinetic_mutism-pathway",
+      "title": "Akinetic mutism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move and speak",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute deterioration suggesting new infarction, haemorrhage, or hydrocephalus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions, Vascular imaging for anterior cerebral or communicating artery pathology, Electroencephalography to exclude non-convulsive status epilepticus"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a ruptured anterior communicating artery aneurysm, or addressing tumour or infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the state for coma, vegetative state, or locked-in syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of akinetic mutism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "akinetic_mutism-matrix",
+      "title": "Akinetic mutism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A state of profound reduction in spontaneous movement and speech despite preserved wakefulness and the apparent capacity to move",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain to localise mesial frontal, paramedian thalamic, or midbrain lesions, Vascular imaging for anterior cerebral or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Locked-in syndrome, Persistent vegetative or minimally conscious state, Catatonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause, including cerebrospinal fluid diversion or shunting for hydrocephalus, securing a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the state for coma, vegetative state, or locked-in syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for akinetic mutism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 26-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "akinetic_mutism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain for mesial frontal, paramedian thalamic or midbrain lesions",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging for anterior cerebral or communicating artery pathology",
+          "cells": [
+            {
+              "text": "Vascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Non-convulsive status and arousal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis where infection or inflammation suspected",
+          "cells": [
+            {
+              "text": "Infective or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hydrocephalus",
+          "cells": [
+            {
+              "text": "Shunting need"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Metabolic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "akinetic_mutism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-convulsive status epilepticus",
+          "cells": [
+            {
+              "text": "Unresponsiveness from seizure activity"
+            },
+            {
+              "text": "Electroencephalography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe depression with psychomotor retardation",
+          "cells": [
+            {
+              "text": "Psychomotor retardation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "akinetic_mutism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treatment of the underlying cause",
+          "cells": [
+            {
+              "text": "CSF diversion for hydrocephalus, securing a ruptured aneurysm, or tumour or infection"
+            },
+            {
+              "text": "Cause-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopaminergic therapy (bromocriptine, levodopa or amantadine)",
+          "cells": [
+            {
+              "text": "Restores drive"
+            },
+            {
+              "text": "Dopamine agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nursing care",
+          "cells": [
+            {
+              "text": "Nutrition, hydration, pressure areas, bowel and bladder"
+            },
+            {
+              "text": "Immobile patient care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous thromboembolism prophylaxis and physiotherapy",
+          "cells": [
+            {
+              "text": "Akinetic state risks"
+            },
+            {
+              "text": "Prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion and treatment of non-convulsive status and metabolic contributors",
+          "cells": [
+            {
+              "text": "Mimics and worsens the state"
+            },
+            {
+              "text": "Treat contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, occupational and physical therapy",
+          "cells": [
+            {
+              "text": "Re-initiation of purposeful activity"
+            },
+            {
+              "text": "Encourages activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and neuropsychiatric follow-up",
+          "cells": [
+            {
+              "text": "Recovery of drive"
+            },
+            {
+              "text": "Ongoing follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "akinetic_mutism-ddx-2",
+      "kind": "ddx",
+      "title": "Aphasia types by language function",
+      "rowHeader": "Condition",
+      "columns": [
+        "Comprehension",
+        "Repetition of spoken language",
+        "Naming",
+        "Fluency"
+      ],
+      "rows": [
+        {
+          "parameter": "Wernicke",
+          "cells": [
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved or increased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Broca",
+          "cells": [
+            {
+              "text": "Preserved (except grammar)"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Global",
+          "cells": [
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Conduction",
+          "cells": [
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonfluent (motor) transcortical",
+          "cells": [
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Impaired"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluent (sensory) transcortical",
+          "cells": [
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Echolalia"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "No purposeful speech"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anomic",
+          "cells": [
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved except for word-finding pauses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pure word deafness",
+          "cells": [
+            {
+              "text": "Impaired only for spoken language"
+            },
+            {
+              "text": "Impaired"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Preserved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pure alexia",
+          "cells": [
+            {
+              "text": "Impaired only for reading"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Preserved"
+            },
+            {
+              "text": "Preserved"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "akinetic_mutism-dx-mgmt",
+      "title": "Diagnosis and management of Akinetic mutism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Profound loss of spontaneous movement and speech with eyes open",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute deterioration, fever or signs of raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and infectious review; treat hydrocephalus or bleed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for mesial frontal, thalamic or midbrain lesion; EEG; vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-convulsive status or hydrocephalus found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause, then dopaminergic therapy to restore drive",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review structural, depressive and parkinsonian causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Shunting or CSF diversion for hydrocephalus when present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dopamine agonists such as bromocriptine, levodopa or amantadine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nursing care, VTE prophylaxis, physiotherapy against contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery varies with cause; hydrocephalus correction and dopaminergic therapy help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

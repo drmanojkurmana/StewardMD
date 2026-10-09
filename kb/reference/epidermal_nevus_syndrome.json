@@ -1,176 +1,434 @@
 {
- "id": "epidermal_nevus_syndrome",
- "name": "Epidermal naevus syndrome",
- "aliases": [
-  "ENS",
-  "Epidermal nevus syndrome",
-  "Schimmelpenning syndrome",
-  "Solomon syndrome",
-  "epidermal naevus syndrome",
-  "keratinocytic epidermal naevus syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and skeletal, anomalies",
-   "The epidermal naevi follow the lines of Blaschko as verrucous, hyperpigmented streaks reflecting cutaneous mosaicism",
-   "Distinct subtypes exist, driven by different mosaic variants (for example FGFR3 or PIK3CA in keratinocytic naevi, HRAS/KRAS in sebaceous/organoid forms)",
-   "Neurological involvement includes seizures, developmental delay and hemimegalencephaly, particularly in extensive keratinocytic disease",
-   "Ocular findings such as lipodermoids and colobomas and skeletal findings such as scoliosis and limb asymmetry may coexist",
-   "Hypophosphataemic rickets from tumour-induced FGF23 excess is a recognised, treatable metabolic association",
-   "Management is generic and multidisciplinary: antiseizure therapy, developmental support, and laser or surgical treatment of symptomatic naevi"
+  "id": "epidermal_nevus_syndrome",
+  "name": "Epidermal naevus syndrome",
+  "aliases": [
+    "ENS",
+    "Epidermal nevus syndrome",
+    "Schimmelpenning syndrome",
+    "Solomon syndrome",
+    "epidermal naevus syndrome",
+    "keratinocytic epidermal naevus syndrome"
   ],
-  "pathophysiology": "Epidermal naevus syndrome results from post-zygotic mosaic variants affecting epidermal progenitor cells during embryogenesis. Depending on the affected gene and cell lineage, the variant produces a keratinocytic, sebaceous or other organoid naevus distributed along the lines of Blaschko. Several causative variants involve growth-signalling pathways, including FGFR3 and PIK3CA in keratinocytic naevi and RAS-pathway genes in sebaceous forms. When the mosaic clone also contributes to neuroectodermal, ocular or mesenchymal tissues, the corresponding brain, eye and skeletal malformations arise, giving the syndrome its characteristic multisystem pattern.",
-  "additionalDifferentials": [
-   "Isolated epidermal or naevus sebaceus without systemic features",
-   "Schimmelpenning syndrome",
-   "Proteus syndrome",
-   "Incontinentia pigmenti (verrucous stage)",
-   "CHILD syndrome",
-   "Linear porokeratosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy to characterise the type of epidermal naevus",
-   "MRI of the brain for hemimegalencephaly and structural anomalies",
-   "MRA when an intracranial vascular malformation is suspected",
-   "Ophthalmological review for choristomas and colobomas",
-   "Serum phosphate and skeletal survey to detect hypophosphataemic rickets and scoliosis",
-   "Molecular analysis of lesional tissue for mosaic variants where available"
-  ],
-  "redFlags": [
-   "New-onset or refractory seizures",
-   "Progressive neurological deficit or developmental regression",
-   "Rapid growth, ulceration or nodularity within a naevus",
-   "Unexplained bone pain or fractures suggesting hypophosphataemic rickets"
-  ],
-  "prognosis": "Outcome is governed by the extent of extracutaneous disease; limited cutaneous involvement carries an excellent prognosis, while extensive neurological disease with intractable seizures and cognitive impairment is associated with greater morbidity.",
-  "pitfalls": [
-   "Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement",
-   "Missing hypophosphataemic rickets as a correctable cause of skeletal symptoms",
-   "Failing to recognise that the syndrome comprises several genetically distinct subtypes",
-   "Delaying neuroimaging in a child with an extensive naevus and seizures"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Happle R. Mosaicism in Human Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical excision where they cause functional or cosmetic problems",
-   "Control seizures with antiseizure medication, and consider epilepsy surgery or hemispherectomy for drug-resistant focal seizures arising from hemimegalencephaly",
-   "Correct tumour-induced hypophosphataemic rickets with oral phosphate and active vitamin D (calcitriol), with FGF23-directed therapy where available",
-   "Provide developmental support, physiotherapy and educational input for delay, and orthopaedic management of scoliosis and limb-length asymmetry",
-   "Arrange ophthalmological care for choristomas and colobomas, and periodic surveillance of serum phosphate, brain imaging and the spine for evolving complications",
-   "Coordinate care through a multidisciplinary team spanning dermatology, neurology, ophthalmology, orthopaedics and clinical genetics",
-   "Offer genetic counselling explaining the post-zygotic mosaic basis and generally low recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "epidermal_nevus_syndrome-pathway",
-   "title": "Epidermal naevus syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and skeletal, anomalies",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset or refractory seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy to characterise the type of epidermal naevus, MRI of the brain for hemimegalencephaly and structural anomalies, MRA when an intracranial vascular malformation is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical excision where they cause functional or cosmetic problems"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of epidermal naevus syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "epidermal_nevus_syndrome-matrix",
-   "title": "Epidermal naevus syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and skeletal, anomalies",
+      "The epidermal naevi follow the lines of Blaschko as verrucous, hyperpigmented streaks reflecting cutaneous mosaicism",
+      "Distinct subtypes exist, driven by different mosaic variants (for example FGFR3 or PIK3CA in keratinocytic naevi, HRAS/KRAS in sebaceous/organoid forms)",
+      "Neurological involvement includes seizures, developmental delay and hemimegalencephaly, particularly in extensive keratinocytic disease",
+      "Ocular findings such as lipodermoids and colobomas and skeletal findings such as scoliosis and limb asymmetry may coexist",
+      "Hypophosphataemic rickets from tumour-induced FGF23 excess is a recognised, treatable metabolic association",
+      "Management is generic and multidisciplinary: antiseizure therapy, developmental support, and laser or surgical treatment of symptomatic naevi"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy to characterise the type of epidermal naevus, MRI of the brain for hemimegalencephaly and structural anomalies, MRA",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Epidermal naevus syndrome results from post-zygotic mosaic variants affecting epidermal progenitor cells during embryogenesis. Depending on the affected gene and cell lineage, the variant produces a keratinocytic, sebaceous or other organoid naevus distributed along the lines of Blaschko. Several causative variants involve growth-signalling pathways, including FGFR3 and PIK3CA in keratinocytic naevi and RAS-pathway genes in sebaceous forms. When the mosaic clone also contributes to neuroectodermal, ocular or mesenchymal tissues, the corresponding brain, eye and skeletal malformations arise, giving the syndrome its characteristic multisystem pattern.",
+    "additionalDifferentials": [
+      "Isolated epidermal or naevus sebaceus without systemic features",
+      "Schimmelpenning syndrome",
+      "Proteus syndrome",
+      "Incontinentia pigmenti (verrucous stage)",
+      "CHILD syndrome",
+      "Linear porokeratosis"
     ],
-    [
-     "Primary Differentials",
-     "Isolated epidermal or naevus sebaceus without systemic features, Schimmelpenning syndrome, Proteus syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy to characterise the type of epidermal naevus",
+      "MRI of the brain for hemimegalencephaly and structural anomalies",
+      "MRA when an intracranial vascular malformation is suspected",
+      "Ophthalmological review for choristomas and colobomas",
+      "Serum phosphate and skeletal survey to detect hypophosphataemic rickets and scoliosis",
+      "Molecular analysis of lesional tissue for mosaic variants where available"
     ],
-    [
-     "Management Strategy",
-     "No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical",
-     "Core treatment modality"
+    "redFlags": [
+      "New-onset or refractory seizures",
+      "Progressive neurological deficit or developmental regression",
+      "Rapid growth, ulceration or nodularity within a naevus",
+      "Unexplained bone pain or fractures suggesting hypophosphataemic rickets"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is governed by the extent of extracutaneous disease; limited cutaneous involvement carries an excellent prognosis, while extensive neurological disease with intractable seizures and cognitive impairment is associated with greater morbidity.",
+    "pitfalls": [
+      "Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement",
+      "Missing hypophosphataemic rickets as a correctable cause of skeletal symptoms",
+      "Failing to recognise that the syndrome comprises several genetically distinct subtypes",
+      "Delaying neuroimaging in a child with an extensive naevus and seizures"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Happle R. Mosaicism in Human Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical excision where they cause functional or cosmetic problems",
+      "Control seizures with antiseizure medication, and consider epilepsy surgery or hemispherectomy for drug-resistant focal seizures arising from hemimegalencephaly",
+      "Correct tumour-induced hypophosphataemic rickets with oral phosphate and active vitamin D (calcitriol), with FGF23-directed therapy where available",
+      "Provide developmental support, physiotherapy and educational input for delay, and orthopaedic management of scoliosis and limb-length asymmetry",
+      "Arrange ophthalmological care for choristomas and colobomas, and periodic surveillance of serum phosphate, brain imaging and the spine for evolving complications",
+      "Coordinate care through a multidisciplinary team spanning dermatology, neurology, ophthalmology, orthopaedics and clinical genetics",
+      "Offer genetic counselling explaining the post-zygotic mosaic basis and generally low recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for epidermal naevus syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "epidermal-nevus-syndrome-real-image",
-   "title": "Epidermal naevus syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "epidermal_nevus_syndrome-pathway",
+      "title": "Epidermal naevus syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and skeletal, anomalies",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset or refractory seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy to characterise the type of epidermal naevus, MRI of the brain for hemimegalencephaly and structural anomalies, MRA when an intracranial vascular malformation is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical excision where they cause functional or cosmetic problems"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of epidermal naevus syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "epidermal_nevus_syndrome-matrix",
+      "title": "Epidermal naevus syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An umbrella term for disorders in which an epidermal naevus is associated with extracutaneous, chiefly neurological, ocular and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy to characterise the type of epidermal naevus, MRI of the brain for hemimegalencephaly and structural anomalies, MRA",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated epidermal or naevus sebaceus without systemic features, Schimmelpenning syndrome, Proteus syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No cure exists; symptomatic epidermal naevi are treated with topical keratolytics or retinoids, laser ablation, or surgical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an extensive epidermal naevus as cosmetic without screening for systemic involvement",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for epidermal naevus syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "epidermal_nevus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Type of epidermal naevus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Hemimegalencephaly and structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRA",
+          "cells": [
+            {
+              "text": "Intracranial vascular malformation, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Choristomas and colobomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate and skeletal survey",
+          "cells": [
+            {
+              "text": "Hypophosphataemic rickets and scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular analysis of lesional tissue",
+          "cells": [
+            {
+              "text": "Mosaic variants, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "epidermal_nevus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Local treatment of the naevus",
+          "cells": [
+            {
+              "text": "Topical keratolytics or retinoids, laser ablation, or excision where there is a functional or cosmetic problem; no cure exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Seizures; epilepsy surgery or hemispherectomy for drug-resistant focal seizures from hemimegalencephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate and calcitriol",
+          "cells": [
+            {
+              "text": "Tumour-induced hypophosphataemic rickets; FGF23-directed therapy where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and orthopaedic care",
+          "cells": [
+            {
+              "text": "Developmental delay, physiotherapy, scoliosis and limb-length asymmetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care and surveillance",
+          "cells": [
+            {
+              "text": "Choristomas and colobomas; periodic serum phosphate, brain imaging and spine review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Dermatology, neurology, ophthalmology, orthopaedics and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Post-zygotic mosaic basis; generally low recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "epidermal_nevus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Epidermal naevus syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Extensive epidermal naevus, with or without seizures or skeletal symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new or refractory seizures, neurological decline, rapid growth, fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurology review for seizures or neurological decline; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, brain MRI, serum phosphate, skeletal survey and ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic involvement of brain, eye or bone identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Limited cutaneous disease: keratolytics, retinoids, laser or excision as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication; epilepsy surgery for drug-resistant focal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phosphate and calcitriol for tumour-induced hypophosphataemic rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental support, physiotherapy and orthopaedic care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology review for choristomas and colobomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome set by extracutaneous disease; limited skin disease has an excellent prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

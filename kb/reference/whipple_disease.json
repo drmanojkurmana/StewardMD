@@ -1,186 +1,855 @@
 {
- "id": "whipple_disease",
- "name": "Whipple Disease",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 181,
- "page": 1367,
- "aliases": [
-  "Tropheryma whipplei infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1367-1370",
-  "clinicalPearls": [
-   "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions, and needs nonroutine tests, years typically pass between symptom onset and diagnosis (p.1367).",
-   "\"Classic\" Whipple disease presents as some combination of migratory arthralgias/seronegative arthritis, weight loss, chronic diarrhea, abdominal pain, and fever, with the duodenum and/or jejunum involved over years (p.1367, p.1368).",
-   "Migratory oligo- or polyarthralgia (knees, wrists, ankles, MCP joints) typically precedes gastrointestinal symptoms by an average of 6-8 years; joint disease is present in >80% of patients (p.1368, p.2546).",
-   "CNS disease (detected by CSF PCR for T. whipplei) develops in roughly 50% of patients and many are asymptomatic; manifestations include cognitive decline progressing to dementia, personality/mood change, and hypothalamic involvement, and portend a poor prognosis (p.1368).",
-   "Oculomasticatory and oculofacial myorhythmia are highly suggestive of Whipple disease; supranuclear gaze palsy (usually vertical) is another neuro-ophthalmologic clue (p.1368).",
-   "Diagnosis rests on small-bowel (postbulbar duodenal) biopsy showing lamina propria infiltration by foamy macrophages with diastase-resistant PAS-positive inclusions, combined with PCR for T. whipplei; PCR has substantially improved sensitivity and specificity (p.1368, p.1369).",
-   "It is prudent to collect CSF even without CNS symptoms, because asymptomatic CNS disease is common and the CNS is the most common site of relapse, informing treatment duration (p.1369).",
-   "Treatment requires prolonged therapy; clinical response is often rapid, but eradication and durable cure are challenged by relapse and host predisposition to reinfection, which can occur years to decades later (p.1369, p.1370).",
-   "WD should be considered in any chronic multisystemic process, especially the combination of rheumatologic and intestinal disease with weight loss, with or without neurologic and cardiac involvement (p.1368, p.1369)."
+  "id": "whipple_disease",
+  "name": "Whipple Disease",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 181,
+  "page": 1367,
+  "aliases": [
+    "Tropheryma whipplei infection"
   ],
-  "pathophysiology": "T. whipplei is a weakly staining gram-positive, non-acid-fast bacillus with a small (<1-megabase) genome and incomplete biosynthetic pathways, consistent with an intracellular/nutritionally dependent pathogen; it is one of the slowest-growing human pathogens (doubling time ~18 days). Exposure is far more common than disease, and chronic infection (WD) is a rare outcome (<0.01% of those exposed). Establishing chronic infection involves both an impaired host inflammatory response and pathogen-driven immune modulation: HLA alleles DRB1*13 and DQB1*06 (favoring humoral over cell-mediated responses) raise risk, an impaired TH1 response with increased anti-inflammatory cytokines and regulatory T-cell activity, M2 macrophage polarization with impaired phagosome-lysosome fusion, and blunted T. whipplei-specific T-cell development occur. The organism has tropism for myeloid cells, which it invades and within which it avoids killing; affected tissue is infiltrated by foamy macrophages containing PAS-staining inclusions (ingested bacteria). In the small intestine, villus atrophy, lymphangiectasia, crypt hyperplasia, and surface epithelial apoptosis lead to malabsorptive diarrhea. (p.1367, p.1368)",
-  "additionalDifferentials": [
-   "Seronegative inflammatory arthritis / rheumatoid arthritis (initial arthralgic phase is often confused with rheumatologic disorders; RF and ANA usually negative) (p.1368)",
-   "Lymphoma (mesenteric/retroperitoneal lymphadenopathy on CT commonly raises this concern) (p.1368)",
-   "Sarcoidosis or granulomatous vasculitis (noncaseating granulomas from lymphatic/hepatic involvement; ocular disease may also be misdiagnosed as sarcoid) (p.1368)",
-   "Behcet's disease (in patients with ocular/uveitic disease) (p.1368)"
-  ],
-  "infectionMimics": [
-   "Mycobacterial infection (PAS positivity is nonspecific and also occurs with mycobacteria and other microorganisms) (p.1369)",
-   "Giardia lamblia co-infection, occasionally identified, can cause diagnostic misdirection (p.1368)",
-   "Other causes of culture-negative endocarditis (T. whipplei causes 2.6-6.3% of culture-negative endocarditis) (p.1368)"
-  ],
-  "nonInfectiousMimics": [
-   "Crohn disease (intestinal phase confusion) (p.1368)",
-   "Celiac disease (intestinal phase confusion; small-bowel biopsy differential) (p.1368, p.2546)",
-   "Other rheumatologic disorders during the early arthralgic stage (p.1368)"
-  ],
-  "additionalInvestigations": [
-   "Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus PCR for T. whipplei (tissue yield exceeds body-fluid yield) (p.1369)",
-   "PCR of duodenal biopsy: a cycle threshold of <=30 can help confirm the diagnosis even when PAS staining is negative (p.1369)",
-   "Immunohistochemistry (greater specificity and sensitivity than PAS, usable on archived fixed tissue) and fluorescence in situ hybridization (FISH) as complementary tools (p.1369)",
-   "Electron microscopy to identify the trilaminar cell wall of T. whipplei (p.1369)",
-   "CSF examination and PCR for T. whipplei (collect even when asymptomatic); CSF may be normal or show lymphocyte-predominant leukocytosis and elevated protein, with low glucose reported (p.1369)",
-   "Brain MRI (lesions usually T2/FLAIR hyperintense, may enhance with gadolinium; may be normal) (p.1368)",
-   "Echocardiography for suspected endocarditis (vegetations seen in 50-75%) (p.1368)",
-   "FDG-PET may show uptake at affected sites and can guide tissue sampling (p.1368, p.1369)",
-   "Biopsy of normal-appearing skin may detect T. whipplei as a minimally invasive diagnostic route in classic WD (p.1369)",
-   "Video-capsule endoscopy to identify more distal small-bowel lesions when initial duodenal biopsy is nondiagnostic (p.1368)",
-   "Urine PCR as a potential noninvasive test and therapeutic-monitoring tool (positive in ~75% of cases pretreatment in one small study); plasma cell-free DNA next-generation sequencing for endocarditis (p.1369, p.1370)"
-  ],
-  "redFlags": [
-   "CNS involvement (cognitive decline/dementia, personality change, hypothalamic dysfunction such as polyuria/polydipsia or sleep-cycle disorder, supranuclear gaze palsy, oculomasticatory myorhythmia) portends a poor prognosis with significant mortality risk and neurologic sequelae (p.1368)",
-   "Endocarditis (often afebrile, Duke criteria rarely met) may be complicated by congestive heart failure (~40%), embolic events, arrhythmias, or mycotic aneurysm (p.1368)",
-   "Progressive weight loss with chronic diarrhea and malabsorption (p.1367, p.1368)",
-   "Immune reconstitution inflammatory syndrome (IRIS) after treatment, with recurrent fever, arthritis, skin lesions, pleuritis, uveitis, and periorbital inflammation; some cases have been fatal (p.1369)"
-  ],
-  "prognosis": "Untreated Whipple disease is often fatal, and delayed diagnosis can lead to irreparable organ damage, particularly in the CNS. With appropriate treatment, clinical response is often rapid and at times remarkable, and timely recognition may yield cure with medical management alone; however, eradication requires prolonged therapy and a durable response is challenged by relapse (especially CNS relapse) and host predisposition to reinfection occurring years to decades later. CNS disease carries a significant mortality risk and may leave neurologic sequelae. (p.1367, p.1368, p.1369, p.1370)",
-  "pitfalls": [
-   "Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely reflects prior exposure and clearance (p.1369)",
-   "A normal macroscopic duodenal appearance is common, and a negative test does not exclude WD; pretest probability must be considered (p.1369)",
-   "Histology/PAS alone is not optimally sensitive and is nonspecific (also positive with mycobacteria and other organisms); anti-TNF-alpha therapy may decrease PAS sensitivity (p.1369)",
-   "Saliva and fecal PCR are inappropriate as sole diagnostic tools because of low positive predictive value (more often reflecting colonization than disease); a positive result needs confirmation from end-organ tissue or body fluid (p.1370)",
-   "Treating presumed inflammatory arthritis or uveitis with glucocorticoids or anti-TNF-alpha agents can accelerate disease progression and unmask/precipitate disease; consider screening for WD before immunosuppression (p.1368)",
-   "Oral tetracycline or TMP-SMX monotherapy has unacceptable relapse rates, particularly for CNS disease; sequence data indicate TMP is not active against T. whipplei (no dihydrofolate reductase) (p.1369, p.1370)",
-   "Detection of T. whipplei sequence in BALF of asymptomatic individuals does not establish disease; caution is needed before diagnosing isolated pneumonia on sequence alone (p.1368)",
-   "Culture is not practical for diagnosis as it takes months to turn positive (p.1370)"
-  ],
-  "severityClassification": "Harrison frames the disease by clinical syndrome rather than a graded severity score: asymptomatic colonization/carriage (PCR-detectable T. whipplei in stool, saliva, or duodenal tissue without symptoms); acute infection (e.g., gastroenteritis in children, febrile bacteremia, acute pneumonia); chronic infection comprising \"classic\" Whipple disease (intestinal involvement with multisystem disease) and \"isolated\" infection (organ disease such as endocarditis, neurologic, ocular, or pulmonary disease without intestinal symptoms); and reinfection/relapsing disease, including treatment-associated IRIS. (p.1367, p.1368, p.1369)",
-  "references": [
-   "Harrison 22e p.1367-1370",
-   "Harrison 22e p.2546"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole for its central nervous system penetration",
-   "Sample and monitor the cerebrospinal fluid by PCR, as central nervous system involvement is common, often subclinical, and demands regimens that cross the blood-brain barrier",
-   "Anticipate and treat immune reconstitution inflammatory syndrome after starting antibiotics, using corticosteroids for severe reactions",
-   "Correct malabsorption with nutritional support and replacement of deficient vitamins, minerals and trace elements",
-   "Avoid immunosuppressive therapy, which can precipitate rapid deterioration",
-   "Maintain prolonged follow-up with clinical review and PCR to confirm eradication and detect relapse, which particularly affects the nervous system",
-   "Coordinate care across infectious diseases, gastroenterology and neurology"
-  ]
- },
- "algorithms": [
-  {
-   "id": "whipple_disease-pathway",
-   "title": "Whipple Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions, and needs nonroutine tests, years typically pass between symptom onset and diagnosis (p.1367).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: CNS involvement (cognitive decline/dementia, personality change, hypothalamic dysfunction such as polyuria/polydipsia or sleep-cycle disorder, supranuclear gaze palsy, oculomasticatory myorhythmia) portends a",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus PCR for T. whipplei (tissue yield exceeds body-fluid yield) (p.1369), PCR of duodenal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole for its central nervous system penetration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely reflects prior exposure and clearance (p.1369)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of whipple disease."
-  }
- ],
- "tables": [
-  {
-   "id": "whipple_disease-matrix",
-   "title": "Whipple Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1367-1370",
+    "clinicalPearls": [
+      "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions, and needs nonroutine tests, years typically pass between symptom onset and diagnosis (p.1367).",
+      "\"Classic\" Whipple disease presents as some combination of migratory arthralgias/seronegative arthritis, weight loss, chronic diarrhea, abdominal pain, and fever, with the duodenum and/or jejunum involved over years (p.1367, p.1368).",
+      "Migratory oligo- or polyarthralgia (knees, wrists, ankles, MCP joints) typically precedes gastrointestinal symptoms by an average of 6-8 years; joint disease is present in >80% of patients (p.1368, p.2546).",
+      "CNS disease (detected by CSF PCR for T. whipplei) develops in roughly 50% of patients and many are asymptomatic; manifestations include cognitive decline progressing to dementia, personality/mood change, and hypothalamic involvement, and portend a poor prognosis (p.1368).",
+      "Oculomasticatory and oculofacial myorhythmia are highly suggestive of Whipple disease; supranuclear gaze palsy (usually vertical) is another neuro-ophthalmologic clue (p.1368).",
+      "Diagnosis rests on small-bowel (postbulbar duodenal) biopsy showing lamina propria infiltration by foamy macrophages with diastase-resistant PAS-positive inclusions, combined with PCR for T. whipplei; PCR has substantially improved sensitivity and specificity (p.1368, p.1369).",
+      "It is prudent to collect CSF even without CNS symptoms, because asymptomatic CNS disease is common and the CNS is the most common site of relapse, informing treatment duration (p.1369).",
+      "Treatment requires prolonged therapy; clinical response is often rapid, but eradication and durable cure are challenged by relapse and host predisposition to reinfection, which can occur years to decades later (p.1369, p.1370).",
+      "WD should be considered in any chronic multisystemic process, especially the combination of rheumatologic and intestinal disease with weight loss, with or without neurologic and cardiac involvement (p.1368, p.1369)."
     ],
-    [
-     "Key Investigations",
-     "Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "T. whipplei is a weakly staining gram-positive, non-acid-fast bacillus with a small (<1-megabase) genome and incomplete biosynthetic pathways, consistent with an intracellular/nutritionally dependent pathogen; it is one of the slowest-growing human pathogens (doubling time ~18 days). Exposure is far more common than disease, and chronic infection (WD) is a rare outcome (<0.01% of those exposed). Establishing chronic infection involves both an impaired host inflammatory response and pathogen-driven immune modulation: HLA alleles DRB1*13 and DQB1*06 (favoring humoral over cell-mediated responses) raise risk, an impaired TH1 response with increased anti-inflammatory cytokines and regulatory T-cell activity, M2 macrophage polarization with impaired phagosome-lysosome fusion, and blunted T. whipplei-specific T-cell development occur. The organism has tropism for myeloid cells, which it invades and within which it avoids killing; affected tissue is infiltrated by foamy macrophages containing PAS-staining inclusions (ingested bacteria). In the small intestine, villus atrophy, lymphangiectasia, crypt hyperplasia, and surface epithelial apoptosis lead to malabsorptive diarrhea. (p.1367, p.1368)",
+    "additionalDifferentials": [
+      "Seronegative inflammatory arthritis / rheumatoid arthritis (initial arthralgic phase is often confused with rheumatologic disorders; RF and ANA usually negative) (p.1368)",
+      "Lymphoma (mesenteric/retroperitoneal lymphadenopathy on CT commonly raises this concern) (p.1368)",
+      "Sarcoidosis or granulomatous vasculitis (noncaseating granulomas from lymphatic/hepatic involvement; ocular disease may also be misdiagnosed as sarcoid) (p.1368)",
+      "Behcet's disease (in patients with ocular/uveitic disease) (p.1368)"
     ],
-    [
-     "Primary Differentials",
-     "Seronegative inflammatory arthritis / rheumatoid arthritis (initial arthralgic phase is often confused with rheumatologic",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Mycobacterial infection (PAS positivity is nonspecific and also occurs with mycobacteria and other microorganisms) (p.1369)",
+      "Giardia lamblia co-infection, occasionally identified, can cause diagnostic misdirection (p.1368)",
+      "Other causes of culture-negative endocarditis (T. whipplei causes 2.6-6.3% of culture-negative endocarditis) (p.1368)"
     ],
-    [
-     "Management Strategy",
-     "Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Crohn disease (intestinal phase confusion) (p.1368)",
+      "Celiac disease (intestinal phase confusion; small-bowel biopsy differential) (p.1368, p.2546)",
+      "Other rheumatologic disorders during the early arthralgic stage (p.1368)"
     ],
-    [
-     "Clinical Pitfall",
-     "Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus PCR for T. whipplei (tissue yield exceeds body-fluid yield) (p.1369)",
+      "PCR of duodenal biopsy: a cycle threshold of <=30 can help confirm the diagnosis even when PAS staining is negative (p.1369)",
+      "Immunohistochemistry (greater specificity and sensitivity than PAS, usable on archived fixed tissue) and fluorescence in situ hybridization (FISH) as complementary tools (p.1369)",
+      "Electron microscopy to identify the trilaminar cell wall of T. whipplei (p.1369)",
+      "CSF examination and PCR for T. whipplei (collect even when asymptomatic); CSF may be normal or show lymphocyte-predominant leukocytosis and elevated protein, with low glucose reported (p.1369)",
+      "Brain MRI (lesions usually T2/FLAIR hyperintense, may enhance with gadolinium; may be normal) (p.1368)",
+      "Echocardiography for suspected endocarditis (vegetations seen in 50-75%) (p.1368)",
+      "FDG-PET may show uptake at affected sites and can guide tissue sampling (p.1368, p.1369)",
+      "Biopsy of normal-appearing skin may detect T. whipplei as a minimally invasive diagnostic route in classic WD (p.1369)",
+      "Video-capsule endoscopy to identify more distal small-bowel lesions when initial duodenal biopsy is nondiagnostic (p.1368)",
+      "Urine PCR as a potential noninvasive test and therapeutic-monitoring tool (positive in ~75% of cases pretreatment in one small study); plasma cell-free DNA next-generation sequencing for endocarditis (p.1369, p.1370)"
+    ],
+    "redFlags": [
+      "CNS involvement (cognitive decline/dementia, personality change, hypothalamic dysfunction such as polyuria/polydipsia or sleep-cycle disorder, supranuclear gaze palsy, oculomasticatory myorhythmia) portends a poor prognosis with significant mortality risk and neurologic sequelae (p.1368)",
+      "Endocarditis (often afebrile, Duke criteria rarely met) may be complicated by congestive heart failure (~40%), embolic events, arrhythmias, or mycotic aneurysm (p.1368)",
+      "Progressive weight loss with chronic diarrhea and malabsorption (p.1367, p.1368)",
+      "Immune reconstitution inflammatory syndrome (IRIS) after treatment, with recurrent fever, arthritis, skin lesions, pleuritis, uveitis, and periorbital inflammation; some cases have been fatal (p.1369)"
+    ],
+    "prognosis": "Untreated Whipple disease is often fatal, and delayed diagnosis can lead to irreparable organ damage, particularly in the CNS. With appropriate treatment, clinical response is often rapid and at times remarkable, and timely recognition may yield cure with medical management alone; however, eradication requires prolonged therapy and a durable response is challenged by relapse (especially CNS relapse) and host predisposition to reinfection occurring years to decades later. CNS disease carries a significant mortality risk and may leave neurologic sequelae. (p.1367, p.1368, p.1369, p.1370)",
+    "pitfalls": [
+      "Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely reflects prior exposure and clearance (p.1369)",
+      "A normal macroscopic duodenal appearance is common, and a negative test does not exclude WD; pretest probability must be considered (p.1369)",
+      "Histology/PAS alone is not optimally sensitive and is nonspecific (also positive with mycobacteria and other organisms); anti-TNF-alpha therapy may decrease PAS sensitivity (p.1369)",
+      "Saliva and fecal PCR are inappropriate as sole diagnostic tools because of low positive predictive value (more often reflecting colonization than disease); a positive result needs confirmation from end-organ tissue or body fluid (p.1370)",
+      "Treating presumed inflammatory arthritis or uveitis with glucocorticoids or anti-TNF-alpha agents can accelerate disease progression and unmask/precipitate disease; consider screening for WD before immunosuppression (p.1368)",
+      "Oral tetracycline or TMP-SMX monotherapy has unacceptable relapse rates, particularly for CNS disease; sequence data indicate TMP is not active against T. whipplei (no dihydrofolate reductase) (p.1369, p.1370)",
+      "Detection of T. whipplei sequence in BALF of asymptomatic individuals does not establish disease; caution is needed before diagnosing isolated pneumonia on sequence alone (p.1368)",
+      "Culture is not practical for diagnosis as it takes months to turn positive (p.1370)"
+    ],
+    "severityClassification": "Harrison frames the disease by clinical syndrome rather than a graded severity score: asymptomatic colonization/carriage (PCR-detectable T. whipplei in stool, saliva, or duodenal tissue without symptoms); acute infection (e.g., gastroenteritis in children, febrile bacteremia, acute pneumonia); chronic infection comprising \"classic\" Whipple disease (intestinal involvement with multisystem disease) and \"isolated\" infection (organ disease such as endocarditis, neurologic, ocular, or pulmonary disease without intestinal symptoms); and reinfection/relapsing disease, including treatment-associated IRIS. (p.1367, p.1368, p.1369)",
+    "references": [
+      "Harrison 22e p.1367-1370",
+      "Harrison 22e p.2546"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole for its central nervous system penetration",
+      "Sample and monitor the cerebrospinal fluid by PCR, as central nervous system involvement is common, often subclinical, and demands regimens that cross the blood-brain barrier",
+      "Anticipate and treat immune reconstitution inflammatory syndrome after starting antibiotics, using corticosteroids for severe reactions",
+      "Correct malabsorption with nutritional support and replacement of deficient vitamins, minerals and trace elements",
+      "Avoid immunosuppressive therapy, which can precipitate rapid deterioration",
+      "Maintain prolonged follow-up with clinical review and PCR to confirm eradication and detect relapse, which particularly affects the nervous system",
+      "Coordinate care across infectious diseases, gastroenterology and neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for whipple disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "whipple-disease-real-image",
-   "title": "Whipple Disease: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "whipple_disease-pathway",
+      "title": "Whipple Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions, and needs nonroutine tests, years typically pass between symptom onset and diagnosis (p.1367).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: CNS involvement (cognitive decline/dementia, personality change, hypothalamic dysfunction such as polyuria/polydipsia or sleep-cycle disorder, supranuclear gaze palsy, oculomasticatory myorhythmia) portends a",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus PCR for T. whipplei (tissue yield exceeds body-fluid yield) (p.1369), PCR of duodenal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole for its central nervous system penetration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely reflects prior exposure and clearance (p.1369)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of whipple disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "whipple_disease-matrix",
+      "title": "Whipple Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Whipple disease is a rare chronic infection caused by Tropheryma whipplei; because it is uncommon, mimics many other conditions,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Postbulbar (more distal) duodenal biopsies with PAS staining for diastase-resistant inclusions in lamina propria macrophages plus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Seronegative inflammatory arthritis / rheumatoid arthritis (initial arthralgic phase is often confused with rheumatologic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Eradicate Tropheryma whipplei with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Serology is of little value: patients with active infection mount a poor IgM/IgG response, and a positive result most likely",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for whipple disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Whipple Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/whipple-disease"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 294-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "whipple_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Whipple disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardinal features",
+          "cells": [
+            {
+              "text": "Arthralgia, diarrhoea, abdominal pain, weight loss"
+            },
+            {
+              "text": "Arthralgia often precedes gut symptoms by years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duodenal biopsy PAS stain",
+          "cells": [
+            {
+              "text": "PAS-positive, diastase-resistant macrophages in lamina propria"
+            },
+            {
+              "text": "{{hy:Take distal postbulbar biopsies}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid-fast stain",
+          "cells": [
+            {
+              "text": "Negative in T. whipplei"
+            },
+            {
+              "text": "Positive in MAC, which looks similar"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duodenal PCR",
+          "unit": "Ct",
+          "cells": [
+            {
+              "text": "Cycle threshold 30 or less",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "Supports diagnosis even if PAS negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "More sensitive and specific than PAS"
+            },
+            {
+              "text": "Works on archived tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF PCR",
+          "cells": [
+            {
+              "text": "Do even without neurological symptoms"
+            },
+            {
+              "text": "CNS disease common and often silent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saliva or stool PCR",
+          "cells": [
+            {
+              "text": "Low positive predictive value"
+            },
+            {
+              "text": "Colonisation; not diagnostic alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-negative endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "T. whipplei causes 2.6 to 6.3%",
+              "range": [
+                2.6,
+                6.3
+              ]
+            },
+            {
+              "text": "Valve PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Of little value"
+            },
+            {
+              "text": "Positive mainly reflects past exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whipple_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Whipple disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Seronegative inflammatory arthritis",
+          "cells": [
+            {
+              "text": "Arthralgic phase; RF and ANA negative"
+            },
+            {
+              "text": "Duodenal biopsy and PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterium avium complex",
+          "cells": [
+            {
+              "text": "Similar PAS-positive macrophages"
+            },
+            {
+              "text": "Acid-fast stain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Mesenteric or retroperitoneal nodes on CT"
+            },
+            {
+              "text": "Node or duodenal biopsy with PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Non-caseating granulomas, uveitis"
+            },
+            {
+              "text": "T. whipplei PCR of tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn or coeliac disease",
+          "cells": [
+            {
+              "text": "Malabsorption and diarrhoea"
+            },
+            {
+              "text": "Small-bowel histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whipple_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating Whipple disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV ceftriaxone or penicillin G",
+          "cells": [
+            {
+              "text": "Induction"
+            },
+            {
+              "text": "2 to 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral TMP-SMX",
+          "cells": [
+            {
+              "text": "Long-term maintenance"
+            },
+            {
+              "text": "Crosses blood-brain barrier"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline plus hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Maintenance alternative"
+            },
+            {
+              "text": "Long term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral penicillin VK or ampicillin",
+          "cells": [
+            {
+              "text": "Sulfa allergy"
+            },
+            {
+              "text": "Maintenance alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe immune reconstitution inflammatory syndrome"
+            },
+            {
+              "text": "Recurrent fever, arthritis, uveitis after starting antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional repletion",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            },
+            {
+              "text": "Vitamins, minerals, trace elements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid immunosuppressants",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Anti-TNF can unmask or worsen disease}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR and biopsy follow-up",
+          "cells": [
+            {
+              "text": "Monitoring and suspected relapse"
+            },
+            {
+              "text": "Relapse common, even years later"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Untreated Whipple disease is progressive and fatal. Fever and joint pain usually settle within days; gut symptoms within 1 to 4 weeks."
+    },
+    {
+      "id": "whipple_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diseases diagnosable by small-intestinal mucosal biopsy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Pattern",
+        "Pathologic findings"
+      ],
+      "rows": [
+        {
+          "parameter": "Whipple's disease",
+          "cells": [
+            {
+              "text": "Diffuse, specific"
+            },
+            {
+              "text": "Lamina propria macrophages containing PAS-positive material"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agammaglobulinemia",
+          "cells": [
+            {
+              "text": "Diffuse, specific"
+            },
+            {
+              "text": "No plasma cells; villi normal or absent (flat mucosa)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Abetalipoproteinemia",
+          "cells": [
+            {
+              "text": "Diffuse, specific"
+            },
+            {
+              "text": "Normal villi; epithelial cells vacuolated with fat after a meal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Intestinal lymphoma",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Malignant cells in lamina propria and submucosa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Intestinal lymphangiectasia",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Dilated lymphatics; clubbed villi"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Eosinophilic gastroenteritis",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Eosinophil infiltration of lamina propria and mucosa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amyloidosis",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Amyloid deposits"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Noncaseating granulomas"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infection by one or more microorganisms",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Specific organisms seen (see text)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mastocytosis",
+          "cells": [
+            {
+              "text": "Patchy, specific"
+            },
+            {
+              "text": "Mast cell infiltration of lamina propria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Celiac disease",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Short or absent villi; mononuclear infiltrate; epithelial cell damage; crypt hypertrophy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tropical sprue",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Similar to celiac disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Patchy villous damage; lymphocyte infiltration"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Short villi; decreased crypt mitosis; megalocytosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Similar to folate deficiency"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Radiation enteritis",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Similar to folate deficiency"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Zollinger-Ellison syndrome",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Mucosal ulceration and erosion from acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Protein-calorie malnutrition",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Villous atrophy; secondary bacterial overgrowth"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug-induced enteritis",
+          "cells": [
+            {
+              "text": "Diffuse, nonspecific"
+            },
+            {
+              "text": "Variable histology"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "PAS, periodic acid-Schiff."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "whipple_disease-dx-mgmt",
+      "title": "Diagnosis and management of Whipple disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthralgia, diarrhoea, weight loss, or unexplained endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Endoscopy with distal duodenal biopsies: PAS, IHC, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "PAS-positive macrophages?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Acid-fast positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Mycobacterium avium complex: treat accordingly",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PCR positive with Ct 30 or less?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Whipple unlikely; reconsider if suspicion persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CSF PCR for all confirmed cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV ceftriaxone or penicillin 2 to 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Long-term TMP-SMX; watch for IRIS and relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

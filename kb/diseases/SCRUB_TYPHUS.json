@@ -274,25 +274,511 @@
       "caption": "Diagnostic and clinical overview matrix for scrub typhus."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "scrub-typhus-real-image",
-      "title": "Scrub Typhus: Diagnostic Microbiological / Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Scrub Typhus",
+      "url": "https://www.merckmanuals.com/en-ca/professional/infectious-diseases/rickettsiae-and-related-organisms/scrub-typhus",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "NHM Himachal Pradesh, Guidelines for the Management of Scrub Typhus, 2015",
+      "url": "https://nhm.hp.gov.in/storage/app/media/uploaded-files/Scrub%20Typhus%20Guidelines%20.pdf",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "INTREST trial, IV doxycycline, azithromycin or both for severe scrub typhus, NEJM 2023 (abstract)",
+      "url": "https://researcher.manipal.edu/en/publications/intravenous-doxycycline-azithromycin-or-both-for-severe-scrub-typ/",
+      "kind": "web"
+    },
+    {
+      "id": "c6",
+      "label": "IAP Guidelines on Rickettsial Diseases in Children, Indian Pediatrics 2017",
+      "url": "https://www.indianpediatrics.net/mar2017/mar-223-229.htm",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "SCRUB_TYPHUS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical and laboratory diagnosis of scrub typhus",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Pathogen Detection",
-          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+          "parameter": "Incubation period",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "9 to 18",
+              "range": [
+                9,
+                18
+              ]
+            },
+            {
+              "text": "Harrison text gives 6 to 21 days"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Inflammatory Response",
-          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+          "parameter": "Eschar",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "35",
+              "op": "=",
+              "value": 35
+            },
+            {
+              "text": "{{hy:Strong clue when present; under 50% of travellers have one, so absence does not exclude}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Diagnostic Confirmation",
-          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+          "parameter": "Rash",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "50",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Macular truncal rash on days 5 to 8 of fever in 25% to 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphadenopathy",
+          "cells": [
+            {
+              "text": "Prominent (+++)"
+            },
+            {
+              "text": "Regional nodes near the eschar; may be generalised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Field, orchard or outdoor work in monsoon and post-monsoon period"
+            },
+            {
+              "text": "Suspected case with high fever, body aches and rash"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Blood counts and chemistry",
+          "cells": [
+            {
+              "text": "Thrombocytopenia, normal or low WBC, hyponatraemia, raised transaminases"
+            },
+            {
+              "text": "Supportive, not specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgM ELISA optical density",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Supports a probable rickettsial case"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "PCR",
+          "cells": [
+            {
+              "text": "Eschar material, blood or tissue"
+            },
+            {
+              "text": "More sensitive on eschar than on blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired IFA serology",
+          "cells": [
+            {
+              "text": "Rising titres on acute and convalescent sera"
+            },
+            {
+              "text": "Confirms but not useful acutely"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Weil-Felix OX-K",
+          "cells": [
+            {
+              "text": "Low sensitivity and specificity"
+            },
+            {
+              "text": "Not recommended"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Defervescence on doxycycline",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Usually begins within 36",
+              "op": "<=",
+              "value": 36
+            },
+            {
+              "text": "Slow response should prompt review"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Incubation differs: Tables PDF 9 to 18 days, Harrison text 6 to 21 days, Merck about 7 days or more. The Weil-Felix view differs: IAP accepts a titre of 1:80 or more for a probable case, Merck does not recommend the test."
+    },
+    {
+      "id": "SCRUB_TYPHUS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic scrub typhus",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spotted fever rickettsiosis",
+          "cells": [
+            {
+              "text": "Tick exposure; rash in most (90% in Rocky Mountain spotted fever)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Murine or epidemic typhus",
+          "cells": [
+            {
+              "text": "Flea or louse exposure; rash 80%, no eschar"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "Tropical febrile illness with thrombocytopenia and transaminitis, no eschar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Same monsoon exposure; overlapping fever with renal and liver involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Undifferentiated tropical fever; exclude by smear or rapid test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric fever",
+          "cells": [
+            {
+              "text": "Undifferentiated fever without eschar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "Cough and dyspnoea from scrub typhus pneumonitis can mimic it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources list these mimics without a single separating test each, so that column was dropped. Search for an eschar in skin folds in every case."
+    },
+    {
+      "id": "SCRUB_TYPHUS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of scrub typhus",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "{{hy:First choice; start empirically on suspicion}}"
+            },
+            {
+              "text": "Adults 100 mg twice daily for 5 to 7 days; children 2 to 4 mg/kg/day"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Duration endpoint",
+          "cells": [
+            {
+              "text": "All treated cases"
+            },
+            {
+              "text": "Until improved, afebrile 48 hours and at least 7 days given"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Pregnancy, doxycycline intolerance or contraindication"
+            },
+            {
+              "text": "500 mg once daily for 3 to 5 days"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV doxycycline plus IV azithromycin",
+          "cells": [
+            {
+              "text": "Severe disease with organ involvement, age 15 and over"
+            },
+            {
+              "text": "7 days; poor outcome 33% versus 47% doxycycline and 48% azithromycin alone"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Alternative agent"
+            },
+            {
+              "text": "Needs blood count monitoring; grey baby syndrome in neonates"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Referral to higher centre",
+          "cells": [
+            {
+              "text": "Multi-organ dysfunction, or no improvement within 48 to 72 hours"
+            },
+            {
+              "text": "Start doxycycline before transfer"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Avoid empirical cephalosporins or quinolones",
+          "cells": [
+            {
+              "text": "Suspected scrub typhus"
+            },
+            {
+              "text": "Not effective first choices"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Duration differs: the HP guideline says 5 to 7 days, Merck says at least 7 days and 48 hours afebrile. INTREST doses were not available in the abstract opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "SCRUB_TYPHUS-dx-mgmt",
+      "title": "Diagnosis and management of scrub typhus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, headache, myalgia after field or outdoor exposure",
+          "cite": "c4"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Search skin folds for eschar; check platelets, sodium, liver enzymes",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Send IgM ELISA or PCR (eschar preferred); exclude malaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Organ involvement (lung, liver, heart, kidney, brain)?",
+          "cite": "c5"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Admit; IV doxycycline plus IV azithromycin for 7 days",
+          "cite": "c5"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Pregnant or doxycycline not tolerated?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral azithromycin 500 mg daily for 3 to 5 days",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral doxycycline 100 mg twice daily",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improving within 48 to 72 hours?",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Complete course; afebrile 48 hours and at least 7 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to higher centre; review diagnosis",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

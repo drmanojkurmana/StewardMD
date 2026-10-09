@@ -1,177 +1,477 @@
 {
- "id": "cholesterol_embolisation_syndrome",
- "name": "cholesterol embolisation syndrome",
- "aliases": [
-  "atheroembolism",
-  "cholesterol crystal embolism"
- ],
- "class": "non_infective",
- "system": "Cardiovascular system",
- "specialty": "Vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small distal arteries, most often after angiography, vascular surgery or anticoagulation in a patient with widespread atherosclerosis.",
-   "The classic triad is livedo reticularis, blue or discoloured toes with preserved peripheral pulses, and acute or subacute kidney injury developing days to weeks after an inciting vascular event.",
-   "Peripheral eosinophilia is a valuable, though transient, clue and helps distinguish atheroembolism from contrast-induced nephropathy, which typically follows a different time course.",
-   "Preserved distal pulses despite ischaemic digits are characteristic because the occlusion is at the microvascular level rather than in the large conduit arteries.",
-   "Hollenhorst plaques, bright refractile cholesterol crystals seen at retinal arteriolar bifurcations on fundoscopy, provide supportive evidence of systemic atheroembolism.",
-   "Renal impairment often progresses in a stepwise fashion over weeks reflecting recurrent showers, in contrast to the rapid rise and recovery of contrast nephropathy.",
-   "Definitive diagnosis requires demonstration of biconvex, needle-shaped cholesterol clefts within occluded small arteries on biopsy of skin, muscle or kidney, though the diagnosis is often clinical.",
-   "Management is largely supportive with aggressive control of atherosclerotic risk factors and statin therapy; anticoagulation may worsen the syndrome by destabilising plaques and is generally avoided if possible."
+  "id": "cholesterol_embolisation_syndrome",
+  "name": "cholesterol embolisation syndrome",
+  "aliases": [
+    "atheroembolism",
+    "cholesterol crystal embolism"
   ],
-  "pathophysiology": "Cholesterol embolisation syndrome arises when the fibrous cap of an ulcerated atheromatous plaque, typically in the aorta or large arteries, is disrupted, releasing cholesterol crystals and atheromatous debris into the circulation. These crystals lodge in small arteries and arterioles of 100-200 micrometres, causing mechanical occlusion followed by a foreign-body inflammatory reaction with endothelial injury, giant-cell infiltration and intimal proliferation that further narrows the lumen. The resulting distal ischaemia produces the cutaneous, renal, gastrointestinal, muscular and neurological manifestations. Because the process is showered and inflammatory rather than a single large occlusion, organ dysfunction typically evolves subacutely and in a stepwise manner. Plaque disruption is frequently precipitated by intravascular instrumentation, vascular surgery, thrombolysis or anticoagulation, the last of which is thought to prevent protective thrombus formation over ulcerated plaque and allow continued embolisation.",
-  "additionalDifferentials": [
-   "Contrast-induced acute kidney injury",
-   "Systemic vasculitis (e.g. polyarteritis nodosa, ANCA-associated)",
-   "Thrombotic thrombocytopenic purpura and other thrombotic microangiopathies",
-   "Infective endocarditis with septic emboli",
-   "Antiphospholipid syndrome",
-   "Drug-induced interstitial nephritis",
-   "Thromboembolic limb ischaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count looking for peripheral eosinophilia",
-   "Renal function, urinalysis and inflammatory markers (often raised ESR/CRP, hypocomplementaemia)",
-   "Fundoscopy for Hollenhorst plaques",
-   "Skin, muscle or renal biopsy demonstrating cholesterol clefts in occluded vessels",
-   "Vascular imaging of the aorta and large arteries to identify the embolic source",
-   "Autoimmune and vasculitis serology to exclude mimics",
-   "Blood cultures and echocardiography where endocarditis is a consideration"
-  ],
-  "redFlags": [
-   "Progressive acute kidney injury following angiography or vascular surgery",
-   "Digital ischaemia or necrosis with intact peripheral pulses",
-   "Mesenteric ischaemia presenting with abdominal pain or gastrointestinal bleeding",
-   "Neurological deficits suggesting cerebral or spinal atheroembolism",
-   "Rapid multi-organ deterioration after an intravascular procedure"
-  ],
-  "prognosis": "Cholesterol embolisation syndrome carries significant morbidity and mortality, particularly when renal and mesenteric involvement occur; renal recovery is often incomplete and many patients progress to chronic kidney disease, with outcome reflecting the extent of atherosclerotic burden and organ ischaemia.",
-  "pitfalls": [
-   "Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course",
-   "Attributing blue toes to large-vessel occlusion despite the preserved pulses",
-   "Continuing or starting anticoagulation, which may perpetuate embolisation",
-   "Overlooking eosinophilia and Hollenhorst plaques as diagnostic clues",
-   "Misdiagnosing the multisystem picture as a primary systemic vasculitis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial catheterisation, angiography and vascular surgery where possible",
-   "Stop or avoid anticoagulation where feasible, as it may perpetuate plaque disruption and embolisation",
-   "Optimise atherosclerotic risk with statin therapy for plaque stabilisation, blood-pressure control and smoking cessation",
-   "Provide organ-supportive care, including renal replacement therapy for severe acute kidney injury and wound and skin care for ischaemic digits and ulcers",
-   "Give attentive nutritional support for mesenteric ischaemia and treat pain from ischaemic tissue",
-   "Consider surgical or endovascular exclusion or repair of an identified aortic or large-artery embolic source in selected patients",
-   "Manage collaboratively across vascular medicine, nephrology and dermatology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cholesterol_embolisation_syndrome-pathway",
-   "title": "cholesterol embolisation syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small distal arteries, most often after angiography, vascular surgery or anticoagulation in a patient with",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive acute kidney injury following angiography or vascular surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count looking for peripheral eosinophilia, Renal function, urinalysis and inflammatory markers (often raised ESR/CRP, hypocomplementaemia), Fundoscopy for Hollenhorst plaques"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial catheterisation, angiography and vascular surgery where possible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cholesterol embolisation syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cholesterol_embolisation_syndrome-matrix",
-   "title": "cholesterol embolisation syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular system",
+  "specialty": "Vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small distal arteries, most often after angiography, vascular surgery or anticoagulation in a patient with widespread atherosclerosis.",
+      "The classic triad is livedo reticularis, blue or discoloured toes with preserved peripheral pulses, and acute or subacute kidney injury developing days to weeks after an inciting vascular event.",
+      "Peripheral eosinophilia is a valuable, though transient, clue and helps distinguish atheroembolism from contrast-induced nephropathy, which typically follows a different time course.",
+      "Preserved distal pulses despite ischaemic digits are characteristic because the occlusion is at the microvascular level rather than in the large conduit arteries.",
+      "Hollenhorst plaques, bright refractile cholesterol crystals seen at retinal arteriolar bifurcations on fundoscopy, provide supportive evidence of systemic atheroembolism.",
+      "Renal impairment often progresses in a stepwise fashion over weeks reflecting recurrent showers, in contrast to the rapid rise and recovery of contrast nephropathy.",
+      "Definitive diagnosis requires demonstration of biconvex, needle-shaped cholesterol clefts within occluded small arteries on biopsy of skin, muscle or kidney, though the diagnosis is often clinical.",
+      "Management is largely supportive with aggressive control of atherosclerotic risk factors and statin therapy; anticoagulation may worsen the syndrome by destabilising plaques and is generally avoided if possible."
     ],
-    [
-     "Key Investigations",
-     "Full blood count looking for peripheral eosinophilia, Renal function, urinalysis and inflammatory markers (often raised ESR/CRP,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cholesterol embolisation syndrome arises when the fibrous cap of an ulcerated atheromatous plaque, typically in the aorta or large arteries, is disrupted, releasing cholesterol crystals and atheromatous debris into the circulation. These crystals lodge in small arteries and arterioles of 100-200 micrometres, causing mechanical occlusion followed by a foreign-body inflammatory reaction with endothelial injury, giant-cell infiltration and intimal proliferation that further narrows the lumen. The resulting distal ischaemia produces the cutaneous, renal, gastrointestinal, muscular and neurological manifestations. Because the process is showered and inflammatory rather than a single large occlusion, organ dysfunction typically evolves subacutely and in a stepwise manner. Plaque disruption is frequently precipitated by intravascular instrumentation, vascular surgery, thrombolysis or anticoagulation, the last of which is thought to prevent protective thrombus formation over ulcerated plaque and allow continued embolisation.",
+    "additionalDifferentials": [
+      "Contrast-induced acute kidney injury",
+      "Systemic vasculitis (e.g. polyarteritis nodosa, ANCA-associated)",
+      "Thrombotic thrombocytopenic purpura and other thrombotic microangiopathies",
+      "Infective endocarditis with septic emboli",
+      "Antiphospholipid syndrome",
+      "Drug-induced interstitial nephritis",
+      "Thromboembolic limb ischaemia"
     ],
-    [
-     "Primary Differentials",
-     "Contrast-induced acute kidney injury, Systemic vasculitis (e.g. polyarteritis nodosa, ANCA-associated), Thrombotic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count looking for peripheral eosinophilia",
+      "Renal function, urinalysis and inflammatory markers (often raised ESR/CRP, hypocomplementaemia)",
+      "Fundoscopy for Hollenhorst plaques",
+      "Skin, muscle or renal biopsy demonstrating cholesterol clefts in occluded vessels",
+      "Vascular imaging of the aorta and large arteries to identify the embolic source",
+      "Autoimmune and vasculitis serology to exclude mimics",
+      "Blood cultures and echocardiography where endocarditis is a consideration"
     ],
-    [
-     "Management Strategy",
-     "There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive acute kidney injury following angiography or vascular surgery",
+      "Digital ischaemia or necrosis with intact peripheral pulses",
+      "Mesenteric ischaemia presenting with abdominal pain or gastrointestinal bleeding",
+      "Neurological deficits suggesting cerebral or spinal atheroembolism",
+      "Rapid multi-organ deterioration after an intravascular procedure"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cholesterol embolisation syndrome carries significant morbidity and mortality, particularly when renal and mesenteric involvement occur; renal recovery is often incomplete and many patients progress to chronic kidney disease, with outcome reflecting the extent of atherosclerotic burden and organ ischaemia.",
+    "pitfalls": [
+      "Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course",
+      "Attributing blue toes to large-vessel occlusion despite the preserved pulses",
+      "Continuing or starting anticoagulation, which may perpetuate embolisation",
+      "Overlooking eosinophilia and Hollenhorst plaques as diagnostic clues",
+      "Misdiagnosing the multisystem picture as a primary systemic vasculitis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial catheterisation, angiography and vascular surgery where possible",
+      "Stop or avoid anticoagulation where feasible, as it may perpetuate plaque disruption and embolisation",
+      "Optimise atherosclerotic risk with statin therapy for plaque stabilisation, blood-pressure control and smoking cessation",
+      "Provide organ-supportive care, including renal replacement therapy for severe acute kidney injury and wound and skin care for ischaemic digits and ulcers",
+      "Give attentive nutritional support for mesenteric ischaemia and treat pain from ischaemic tissue",
+      "Consider surgical or endovascular exclusion or repair of an identified aortic or large-artery embolic source in selected patients",
+      "Manage collaboratively across vascular medicine, nephrology and dermatology"
     ]
-   ],
-   "caption": "Overview comparison matrix for cholesterol embolisation syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cholesterol-embolisation-syndrome-real-image",
-   "title": "cholesterol embolisation syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cholesterol_embolisation_syndrome-pathway",
+      "title": "cholesterol embolisation syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small distal arteries, most often after angiography, vascular surgery or anticoagulation in a patient with",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive acute kidney injury following angiography or vascular surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count looking for peripheral eosinophilia, Renal function, urinalysis and inflammatory markers (often raised ESR/CRP, hypocomplementaemia), Fundoscopy for Hollenhorst plaques"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial catheterisation, angiography and vascular surgery where possible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cholesterol embolisation syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cholesterol_embolisation_syndrome-matrix",
+      "title": "cholesterol embolisation syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cholesterol embolisation syndrome occurs when cholesterol crystals are showered from ulcerated atherosclerotic plaques into small",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count looking for peripheral eosinophilia, Renal function, urinalysis and inflammatory markers (often raised ESR/CRP,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Contrast-induced acute kidney injury, Systemic vasculitis (e.g. polyarteritis nodosa, ANCA-associated), Thrombotic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no specific therapy, so management centres on preventing further crystal showers by avoiding further arterial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the renal injury for contrast-induced nephropathy and missing the atheroembolic time course",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cholesterol embolisation syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholesterol_embolisation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count for peripheral eosinophilia",
+          "cells": [
+            {
+              "text": "Transient clue that helps distinguish it from contrast nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundoscopy for Hollenhorst plaques",
+          "cells": [
+            {
+              "text": "Cholesterol crystals at retinal arteriolar bifurcations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin, muscle or renal biopsy",
+          "cells": [
+            {
+              "text": "Cholesterol clefts in occluded small arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, urinalysis and inflammatory markers",
+          "cells": [
+            {
+              "text": "Raised ESR and CRP, hypocomplementaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging of the aorta and large arteries",
+          "cells": [
+            {
+              "text": "Identifies the embolic source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesterol_embolisation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-induced acute kidney injury",
+          "cells": [
+            {
+              "text": "Different time course, with rapid rise and recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis with septic emboli",
+          "cells": [
+            {
+              "text": "Septic emboli; blood cultures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesterol_embolisation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid further catheterisation",
+          "cells": [
+            {
+              "text": "Avoid further arterial catheterisation, angiography and vascular surgery where possible"
+            },
+            {
+              "text": "Prevents further crystal showers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Stop or avoid anticoagulation where feasible"
+            },
+            {
+              "text": "May perpetuate plaque disruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor control",
+          "cells": [
+            {
+              "text": "Statin therapy, blood pressure control and smoking cessation"
+            },
+            {
+              "text": "Plaque stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Renal replacement therapy for severe acute kidney injury; wound and skin care for ischaemic digits"
+            },
+            {
+              "text": "Organ injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric and pain care",
+          "cells": [
+            {
+              "text": "Nutritional support for mesenteric ischaemia; treatment of pain"
+            },
+            {
+              "text": "Ischaemic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source treatment",
+          "cells": [
+            {
+              "text": "Surgical or endovascular exclusion or repair of an identified large-artery embolic source"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Vascular medicine, nephrology and dermatology"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholesterol_embolisation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of cholesterol embolisation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholesterol embolisation: livedo, blue toes, preserved pulses, kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive AKI after angiography, digital or mesenteric ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vascular and nephrology review; renal replacement if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Eosinophil count, renal function, fundoscopy for Hollenhorst plaques, biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cholesterol clefts on biopsy or retinal crystals with embolic source identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Avoid further arterial catheterisation and angiography where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check contrast nephropathy and infective endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop or avoid anticoagulation where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Statin, blood pressure control and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound and skin care for ischaemic digits; renal replacement if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical or endovascular repair of an identified large-artery source in selected cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

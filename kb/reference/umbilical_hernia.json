@@ -1,170 +1,430 @@
 {
- "id": "umbilical_hernia",
- "name": "Umbilical hernia",
- "aliases": [
-  "paraumbilical hernia",
-  "supraumbilical hernia",
-  "congenital umbilical hernia"
- ],
- "class": "non_infective",
- "system": "GI / Abdominal wall / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of life",
-   "In adults the defect is usually paraumbilical, occurring through the linea alba just above or below the umbilicus, and does not resolve without surgery",
-   "Adult paraumbilical hernias are more frequent in women, and predisposing factors include obesity, multiparity, ascites, and chronically raised intra-abdominal pressure",
-   "The neck is often narrow relative to the sac, so incarceration and strangulation are relatively common, particularly with a fibrous fatty omental content",
-   "Contents may include omentum, small bowel, or transverse colon, and long-standing hernias can become multiloculated",
-   "Elective repair (suture repair for small defects, mesh for larger ones) is advised for symptomatic or enlarging adult hernias to avoid emergency complications",
-   "In children, repair is usually deferred and reserved for defects that persist beyond a few years, are large, or become complicated",
-   "Skin changes over a large tense hernia, such as thinning or ulceration, warrant urgent assessment"
+  "id": "umbilical_hernia",
+  "name": "Umbilical hernia",
+  "aliases": [
+    "paraumbilical hernia",
+    "supraumbilical hernia",
+    "congenital umbilical hernia"
   ],
-  "pathophysiology": "Umbilical and paraumbilical hernias arise from a defect at or adjacent to the umbilical cicatrix. In infants the umbilical ring fails to close fully after cord separation. In adults, weakening and separation of the linea alba fibres around the umbilicus, combined with sustained raised intra-abdominal pressure from obesity, pregnancy, or ascites, allows protrusion of preperitoneal fat, omentum, or bowel through a paraumbilical defect. The characteristically narrow, fibrous neck restricts reduction and readily compromises the vascular supply of trapped contents, predisposing to incarceration and strangulation.",
-  "additionalDifferentials": [
-   "Epigastric hernia",
-   "Incisional hernia near the umbilicus",
-   "Divarication of the recti",
-   "Umbilical granuloma or omphalitis in infants",
-   "Metastatic umbilical nodule (Sister Mary Joseph nodule)",
-   "Lipoma or sebaceous cyst of the umbilicus"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination for reducibility, cough impulse, and defect size",
-   "Ultrasound to confirm the defect and characterise contents when uncertain",
-   "CT in large, recurrent, or complex hernias and to assess in patients with ascites",
-   "Assessment for underlying causes of raised intra-abdominal pressure such as ascites"
-  ],
-  "redFlags": [
-   "Irreducible, tense, tender umbilical swelling indicating incarceration or strangulation (surgical emergency)",
-   "Features of bowel obstruction with an irreducible hernia",
-   "Overlying skin ischaemia, ulceration, or impending rupture over a large hernia",
-   "Systemic sepsis or peritonism suggesting strangulated bowel"
-  ],
-  "prognosis": "Most infantile umbilical hernias close spontaneously. Adult paraumbilical hernias do not resolve and carry a meaningful risk of incarceration and strangulation; elective mesh repair gives good results, whereas emergency surgery, especially in obese or comorbid patients, is associated with higher complication rates.",
-  "pitfalls": [
-   "Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia",
-   "Underestimating strangulation risk because of the narrow neck",
-   "Overlooking uncontrolled ascites, which increases recurrence and complicates repair",
-   "Missing a Sister Mary Joseph nodule by attributing all umbilical lumps to hernia"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the first few years",
-   "Elective surgical repair for adult paraumbilical hernias, which do not resolve, using suture repair for small defects and mesh for larger ones",
-   "Addressing contributory causes of raised intra-abdominal pressure such as obesity and ascites to reduce recurrence risk",
-   "Emergency surgical repair for incarceration or strangulation, given the narrow neck and risk of compromise to trapped omentum or bowel",
-   "Prompt escalation and surgical referral for an irreducible, painful or tender hernia suggesting strangulation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "umbilical_hernia-pathway",
-   "title": "Umbilical hernia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of life",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Irreducible, tense, tender umbilical swelling indicating incarceration or strangulation (surgical emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination for reducibility, cough impulse, and defect size, Ultrasound to confirm the defect and characterise contents when uncertain, CT in large, recurrent, or complex hernias and to assess in patients with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the first few years"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of umbilical hernia."
-  }
- ],
- "tables": [
-  {
-   "id": "umbilical_hernia-matrix",
-   "title": "Umbilical hernia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Abdominal wall / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of life",
+      "In adults the defect is usually paraumbilical, occurring through the linea alba just above or below the umbilicus, and does not resolve without surgery",
+      "Adult paraumbilical hernias are more frequent in women, and predisposing factors include obesity, multiparity, ascites, and chronically raised intra-abdominal pressure",
+      "The neck is often narrow relative to the sac, so incarceration and strangulation are relatively common, particularly with a fibrous fatty omental content",
+      "Contents may include omentum, small bowel, or transverse colon, and long-standing hernias can become multiloculated",
+      "Elective repair (suture repair for small defects, mesh for larger ones) is advised for symptomatic or enlarging adult hernias to avoid emergency complications",
+      "In children, repair is usually deferred and reserved for defects that persist beyond a few years, are large, or become complicated",
+      "Skin changes over a large tense hernia, such as thinning or ulceration, warrant urgent assessment"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination for reducibility, cough impulse, and defect size, Ultrasound to confirm the defect and characterise contents",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Umbilical and paraumbilical hernias arise from a defect at or adjacent to the umbilical cicatrix. In infants the umbilical ring fails to close fully after cord separation. In adults, weakening and separation of the linea alba fibres around the umbilicus, combined with sustained raised intra-abdominal pressure from obesity, pregnancy, or ascites, allows protrusion of preperitoneal fat, omentum, or bowel through a paraumbilical defect. The characteristically narrow, fibrous neck restricts reduction and readily compromises the vascular supply of trapped contents, predisposing to incarceration and strangulation.",
+    "additionalDifferentials": [
+      "Epigastric hernia",
+      "Incisional hernia near the umbilicus",
+      "Divarication of the recti",
+      "Umbilical granuloma or omphalitis in infants",
+      "Metastatic umbilical nodule (Sister Mary Joseph nodule)",
+      "Lipoma or sebaceous cyst of the umbilicus"
     ],
-    [
-     "Primary Differentials",
-     "Epigastric hernia, Incisional hernia near the umbilicus, Divarication of the recti",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination for reducibility, cough impulse, and defect size",
+      "Ultrasound to confirm the defect and characterise contents when uncertain",
+      "CT in large, recurrent, or complex hernias and to assess in patients with ascites",
+      "Assessment for underlying causes of raised intra-abdominal pressure such as ascites"
     ],
-    [
-     "Management Strategy",
-     "Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the",
-     "Core treatment modality"
+    "redFlags": [
+      "Irreducible, tense, tender umbilical swelling indicating incarceration or strangulation (surgical emergency)",
+      "Features of bowel obstruction with an irreducible hernia",
+      "Overlying skin ischaemia, ulceration, or impending rupture over a large hernia",
+      "Systemic sepsis or peritonism suggesting strangulated bowel"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most infantile umbilical hernias close spontaneously. Adult paraumbilical hernias do not resolve and carry a meaningful risk of incarceration and strangulation; elective mesh repair gives good results, whereas emergency surgery, especially in obese or comorbid patients, is associated with higher complication rates.",
+    "pitfalls": [
+      "Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia",
+      "Underestimating strangulation risk because of the narrow neck",
+      "Overlooking uncontrolled ascites, which increases recurrence and complicates repair",
+      "Missing a Sister Mary Joseph nodule by attributing all umbilical lumps to hernia"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the first few years",
+      "Elective surgical repair for adult paraumbilical hernias, which do not resolve, using suture repair for small defects and mesh for larger ones",
+      "Addressing contributory causes of raised intra-abdominal pressure such as obesity and ascites to reduce recurrence risk",
+      "Emergency surgical repair for incarceration or strangulation, given the narrow neck and risk of compromise to trapped omentum or bowel",
+      "Prompt escalation and surgical referral for an irreducible, painful or tender hernia suggesting strangulation"
     ]
-   ],
-   "caption": "Overview comparison matrix for umbilical hernia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "umbilical-hernia-real-image",
-   "title": "Umbilical hernia: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "umbilical_hernia-pathway",
+      "title": "Umbilical hernia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of life",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Irreducible, tense, tender umbilical swelling indicating incarceration or strangulation (surgical emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination for reducibility, cough impulse, and defect size, Ultrasound to confirm the defect and characterise contents when uncertain, CT in large, recurrent, or complex hernias and to assess in patients with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the first few years"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of umbilical hernia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "umbilical_hernia-matrix",
+      "title": "Umbilical hernia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "True umbilical hernias in infants protrude through the umbilical ring and most close spontaneously within the first few years of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination for reducibility, cough impulse, and defect size, Ultrasound to confirm the defect and characterise contents",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epigastric hernia, Incisional hernia near the umbilicus, Divarication of the recti",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative observation of infantile umbilical hernias, most of which close spontaneously through the umbilical ring in the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an adult paraumbilical hernia will behave like a self-resolving infantile hernia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for umbilical hernia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "umbilical_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Reducibility, cough impulse and defect size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms the defect and characterises contents when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Large, recurrent or complex hernias, and patients with ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for raised intra-abdominal pressure",
+          "cells": [
+            {
+              "text": "Causes such as ascites that increase recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "umbilical_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sister Mary Joseph nodule",
+          "cells": [
+            {
+              "text": "A metastatic umbilical lump, which is missed if all umbilical lumps are called hernia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epigastric hernia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Umbilical granuloma or omphalitis in infants",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "umbilical_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation of infantile hernias",
+          "cells": [
+            {
+              "text": "Most close spontaneously through the umbilical ring in the first few years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address contributory causes",
+          "cells": [
+            {
+              "text": "Obesity and ascites that raise intra-abdominal pressure and recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective repair of adult paraumbilical hernia",
+          "cells": [
+            {
+              "text": "Suture repair for small defects; mesh for larger ones, for symptomatic or enlarging hernias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency repair",
+          "cells": [
+            {
+              "text": "Incarceration or strangulation, given the narrow neck and risk to trapped bowel or omentum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical referral",
+          "cells": [
+            {
+              "text": "Irreducible, painful or tender hernia suggesting strangulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "umbilical_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Umbilical hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected umbilical hernia: swelling at the umbilicus in an infant or adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (irreducible, tense or tender swelling, or bowel obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical repair for incarceration or strangulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination for reducibility and cough impulse; ultrasound if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the hernia reducible, with a defined defect confirmed on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sister Mary Joseph nodule, lipoma or other umbilical lumps; image further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe infantile hernias; most close within the first few years",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Address ascites and obesity that raise intra-abdominal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elective suture or mesh repair for symptomatic or enlarging adult hernias",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical referral for any irreducible, painful or tender hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adult paraumbilical hernias do not resolve; strangulation risk rises if unrepaired",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,167 +1,454 @@
 {
- "id": "papillary_muscle_rupture",
- "name": "Papillary muscle rupture",
- "aliases": [
-  "post-infarction papillary muscle rupture"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Cardiac surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Cardiology references / acute coronary syndrome literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
-   "It typically occurs a few days after infarction and presents with abrupt pulmonary oedema and cardiogenic shock",
-   "The posteromedial papillary muscle is more vulnerable because it has a single coronary blood supply",
-   "The murmur may be soft or absent despite severe regurgitation because of rapid pressure equalisation",
-   "Echocardiography (often transoesophageal) is diagnostic, showing a flail leaflet and severe regurgitation",
-   "It is a surgical emergency; temporising measures include afterload reduction and mechanical circulatory support"
+  "id": "papillary_muscle_rupture",
+  "name": "Papillary muscle rupture",
+  "aliases": [
+    "post-infarction papillary muscle rupture"
   ],
-  "pathophysiology": "Papillary muscle rupture results from ischaemic necrosis of a papillary muscle following myocardial infarction, most often affecting the posteromedial muscle owing to its single-vessel supply. Complete or partial rupture disrupts the subvalvular apparatus, producing an acutely flail mitral leaflet and torrential mitral regurgitation. Because the left atrium and ventricle cannot accommodate the sudden volume, pressures equalise rapidly, causing flash pulmonary oedema and cardiogenic shock, and the murmur may therefore be unimpressive despite catastrophic haemodynamics.",
-  "additionalDifferentials": [
-   "Post-infarction ventricular septal rupture",
-   "Free wall rupture with tamponade",
-   "Acute ischaemic mitral regurgitation without rupture",
-   "Infective endocarditis with chordal rupture",
-   "Spontaneous chordal rupture in degenerative valve disease"
-  ],
-  "additionalInvestigations": [
-   "Urgent echocardiography, often transoesophageal",
-   "Assessment of coronary anatomy",
-   "Haemodynamic monitoring for cardiogenic shock",
-   "Electrocardiogram and cardiac biomarkers confirming infarction",
-   "Prompt cardiac surgical assessment"
-  ],
-  "redFlags": [
-   "Acute pulmonary oedema and cardiogenic shock after recent infarction",
-   "A new severe mitral regurgitation, even with a soft murmur",
-   "Haemodynamic instability requiring urgent support",
-   "Multiorgan hypoperfusion"
-  ],
-  "prognosis": "Without surgery mortality is very high; emergency valve surgery, supported by mechanical circulatory support and revascularisation, offers the best chance of survival though operative risk is substantial.",
-  "pitfalls": [
-   "Being falsely reassured by a soft or absent murmur",
-   "Confusing it with post-infarction ventricular septal rupture",
-   "Delaying surgery in a deteriorating patient",
-   "Attributing shock solely to left ventricular dysfunction"
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "Acute coronary syndrome guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed",
-   "Afterload reduction with intravenous vasodilators such as sodium nitroprusside to lower the regurgitant fraction as a temporising measure",
-   "Mechanical circulatory support with intra-aortic balloon counterpulsation, or a short-term ventricular assist device or ECMO, to stabilise cardiogenic shock before theatre",
-   "Concurrent coronary revascularisation by surgical grafting or percutaneous intervention to treat the underlying infarction",
-   "Supportive intensive care with positive-pressure ventilation and diuresis for flash pulmonary oedema, with cautious inotropic support",
-   "Continuous invasive haemodynamic and transoesophageal echocardiographic monitoring within a heart-team and cardiac-surgical setting"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "papillary_muscle_rupture-pathway",
-   "title": "Papillary muscle rupture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute pulmonary oedema and cardiogenic shock after recent infarction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urgent echocardiography, often transoesophageal, Assessment of coronary anatomy, Haemodynamic monitoring for cardiogenic shock"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being falsely reassured by a soft or absent murmur"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of papillary muscle rupture."
-  }
- ],
- "tables": [
-  {
-   "id": "papillary_muscle_rupture-matrix",
-   "title": "Papillary muscle rupture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Cardiac surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cardiology references / acute coronary syndrome literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
+      "It typically occurs a few days after infarction and presents with abrupt pulmonary oedema and cardiogenic shock",
+      "The posteromedial papillary muscle is more vulnerable because it has a single coronary blood supply",
+      "The murmur may be soft or absent despite severe regurgitation because of rapid pressure equalisation",
+      "Echocardiography (often transoesophageal) is diagnostic, showing a flail leaflet and severe regurgitation",
+      "It is a surgical emergency; temporising measures include afterload reduction and mechanical circulatory support"
     ],
-    [
-     "Key Investigations",
-     "Urgent echocardiography, often transoesophageal, Assessment of coronary anatomy, Haemodynamic monitoring for cardiogenic shock",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Papillary muscle rupture results from ischaemic necrosis of a papillary muscle following myocardial infarction, most often affecting the posteromedial muscle owing to its single-vessel supply. Complete or partial rupture disrupts the subvalvular apparatus, producing an acutely flail mitral leaflet and torrential mitral regurgitation. Because the left atrium and ventricle cannot accommodate the sudden volume, pressures equalise rapidly, causing flash pulmonary oedema and cardiogenic shock, and the murmur may therefore be unimpressive despite catastrophic haemodynamics.",
+    "additionalDifferentials": [
+      "Post-infarction ventricular septal rupture",
+      "Free wall rupture with tamponade",
+      "Acute ischaemic mitral regurgitation without rupture",
+      "Infective endocarditis with chordal rupture",
+      "Spontaneous chordal rupture in degenerative valve disease"
     ],
-    [
-     "Primary Differentials",
-     "Post-infarction ventricular septal rupture, Free wall rupture with tamponade, Acute ischaemic mitral regurgitation without rupture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urgent echocardiography, often transoesophageal",
+      "Assessment of coronary anatomy",
+      "Haemodynamic monitoring for cardiogenic shock",
+      "Electrocardiogram and cardiac biomarkers confirming infarction",
+      "Prompt cardiac surgical assessment"
     ],
-    [
-     "Management Strategy",
-     "Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute pulmonary oedema and cardiogenic shock after recent infarction",
+      "A new severe mitral regurgitation, even with a soft murmur",
+      "Haemodynamic instability requiring urgent support",
+      "Multiorgan hypoperfusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Being falsely reassured by a soft or absent murmur",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without surgery mortality is very high; emergency valve surgery, supported by mechanical circulatory support and revascularisation, offers the best chance of survival though operative risk is substantial.",
+    "pitfalls": [
+      "Being falsely reassured by a soft or absent murmur",
+      "Confusing it with post-infarction ventricular septal rupture",
+      "Delaying surgery in a deteriorating patient",
+      "Attributing shock solely to left ventricular dysfunction"
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "Acute coronary syndrome guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed",
+      "Afterload reduction with intravenous vasodilators such as sodium nitroprusside to lower the regurgitant fraction as a temporising measure",
+      "Mechanical circulatory support with intra-aortic balloon counterpulsation, or a short-term ventricular assist device or ECMO, to stabilise cardiogenic shock before theatre",
+      "Concurrent coronary revascularisation by surgical grafting or percutaneous intervention to treat the underlying infarction",
+      "Supportive intensive care with positive-pressure ventilation and diuresis for flash pulmonary oedema, with cautious inotropic support",
+      "Continuous invasive haemodynamic and transoesophageal echocardiographic monitoring within a heart-team and cardiac-surgical setting"
     ]
-   ],
-   "caption": "Overview comparison matrix for papillary muscle rupture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "papillary-muscle-rupture-real-image",
-   "title": "Papillary muscle rupture: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "papillary_muscle_rupture-pathway",
+      "title": "Papillary muscle rupture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute pulmonary oedema and cardiogenic shock after recent infarction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urgent echocardiography, often transoesophageal, Assessment of coronary anatomy, Haemodynamic monitoring for cardiogenic shock"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being falsely reassured by a soft or absent murmur"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of papillary muscle rupture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "papillary_muscle_rupture-matrix",
+      "title": "Papillary muscle rupture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mechanical complication of acute myocardial infarction causing sudden severe mitral regurgitation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urgent echocardiography, often transoesophageal, Assessment of coronary anatomy, Haemodynamic monitoring for cardiogenic shock",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Post-infarction ventricular septal rupture, Free wall rupture with tamponade, Acute ischaemic mitral regurgitation without rupture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emergency mitral valve replacement or repair is the definitive treatment and should not be delayed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being falsely reassured by a soft or absent murmur",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for papillary muscle rupture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cardiology references / acute coronary syndrome literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "papillary_muscle_rupture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Flail leaflet and severe mitral regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary angiography",
+          "cells": [
+            {
+              "text": "Coronary anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Confirms infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic monitoring",
+          "cells": [
+            {
+              "text": "Cardiogenic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgical assessment",
+          "cells": [
+            {
+              "text": "Timing of intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_muscle_rupture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-infarction ventricular septal rupture",
+          "cells": [
+            {
+              "text": "Confused with it; echocardiography distinguishes the lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute ischaemic mitral regurgitation without rupture",
+          "cells": [
+            {
+              "text": "No flail leaflet; regurgitation is less severe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "papillary_muscle_rupture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency mitral valve replacement or repair",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Definitive treatment; should not be delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Afterload reduction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Intravenous sodium nitroprusside to lower the regurgitant fraction as a temporising measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical circulatory support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Intra-aortic balloon counterpulsation, short-term ventricular assist device or ECMO before theatre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Surgical grafting or percutaneous intervention for the underlying infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Supportive care, including ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "papillary_muscle_rupture-dx-mgmt",
+      "title": "Diagnosis and management of Papillary muscle rupture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden pulmonary oedema and shock a few days after myocardial infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiogenic shock, new severe mitral regurgitation or organ hypoperfusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency cardiac surgery and mechanical circulatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent transoesophageal echo, ECG, biomarkers, coronary anatomy, haemodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo show a flail leaflet with severe mitral regurgitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ventricular septal rupture, free wall rupture or ischaemic mitral regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency mitral valve replacement or repair, not to be delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous sodium nitroprusside to reduce regurgitant fraction as a temporising measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intra-aortic balloon pump, short-term ventricular assist device or ECMO before theatre",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Coronary revascularisation to treat the underlying infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Supportive intensive care, including ventilatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mortality very high without surgery; emergency surgery with support gives the best chance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

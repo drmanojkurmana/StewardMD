@@ -1,177 +1,482 @@
 {
- "id": "serpiginous_choroiditis",
- "name": "Serpiginous choroiditis",
- "aliases": [
-  "serpiginous choroidopathy",
-  "geographic choroiditis",
-  "geographic helicoid peripapillary choroidopathy",
-  "GHPC"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral though often asymmetric",
-   "Typically affects healthy middle-aged adults and presents with painless blurring, central or paracentral scotoma and metamorphopsia",
-   "Active lesions are grey-white, geographic patches classically beginning around the optic disc and extending centrifugally in a serpentine (snakelike) pattern",
-   "Healed areas leave scalloped zones of chorioretinal atrophy and pigment clumping, with new activity at the advancing edges of old scars",
-   "Fluorescein angiography shows early hypofluorescence of active lesions with late staining, while healed atrophic areas show window defects",
-   "Choroidal neovascularisation is an important vision-threatening complication, particularly at the margins of atrophic scars",
-   "A tuberculosis-associated serpiginous-like choroiditis must be excluded, as it requires antituberculous therapy rather than immunosuppression alone",
-   "Management principles rely on systemic corticosteroids and steroid-sparing immunosuppression to control inflammation and protect the fovea, with anti-VEGF for secondary neovascularisation"
+  "id": "serpiginous_choroiditis",
+  "name": "Serpiginous choroiditis",
+  "aliases": [
+    "serpiginous choroidopathy",
+    "geographic choroiditis",
+    "geographic helicoid peripapillary choroidopathy",
+    "GHPC"
   ],
-  "pathophysiology": "Serpiginous choroiditis is a chronic, presumed autoimmune inflammatory disorder targeting the choriocapillaris and overlying retinal pigment epithelium and photoreceptors. Recurrent bouts of inflammation cause ischaemia and destruction of the choriocapillaris, producing geographic areas of chorioretinal atrophy that spread centrifugally from the peripapillary region. Each recurrence extends from the edge of previously healed lesions, giving the characteristic serpentine advancing border. Damage to the outer retina and pigment epithelium accounts for the scotomata, and disruption of the choriocapillaris predisposes to secondary choroidal neovascularisation. An infectious (particularly tuberculous) trigger produces a clinically similar multifocal picture in some patients.",
-  "additionalDifferentials": [
-   "Tuberculosis-associated serpiginous-like choroiditis",
-   "Acute posterior multifocal placoid pigment epitheliopathy",
-   "Birdshot chorioretinopathy",
-   "Multifocal choroiditis and panuveitis",
-   "Persistent placoid maculopathy",
-   "Age-related macular degeneration with geographic atrophy",
-   "Syphilitic placoid chorioretinitis"
-  ],
-  "additionalInvestigations": [
-   "Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions",
-   "Indocyanine green angiography to reveal the extent of choriocapillaris involvement",
-   "Fundus autofluorescence to distinguish active borders from atrophic scars and monitor progression",
-   "Optical coherence tomography to assess outer retinal integrity and detect choroidal neovascularisation",
-   "Testing for latent tuberculosis (interferon-gamma release assay or tuberculin skin test) and chest imaging",
-   "Syphilis serology and other infective screening to exclude mimics"
-  ],
-  "redFlags": [
-   "Lesion activity threatening or approaching the fovea",
-   "New subretinal fluid, haemorrhage or exudate suggesting choroidal neovascularisation",
-   "Evidence of underlying tuberculosis requiring antimicrobial rather than purely immunosuppressive therapy",
-   "Rapid centrifugal progression despite treatment"
-  ],
-  "prognosis": "Serpiginous choroiditis is a chronic relapsing disease; vision is preserved when the fovea is spared, but foveal involvement or secondary choroidal neovascularisation can cause permanent central visual loss, and recurrences may continue over many years.",
-  "pitfalls": [
-   "Treating with immunosuppression without excluding tuberculosis-associated disease",
-   "Mistaking healed atrophic scarring for active inflammation, or vice versa",
-   "Missing early choroidal neovascularisation arising at the edge of an old scar",
-   "Undertreating peripapillary activity that then extends unexpectedly toward the fovea",
-   "Confusing the appearance with geographic atrophy of age-related macular degeneration in older patients"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as antimetabolites (mycophenolate or azathioprine) or an alkylating agent for chronic control",
-   "Use adjunctive periocular or intravitreal corticosteroid to gain rapid local control of active lesions",
-   "Exclude and, where present, treat tuberculous serpiginous-like choroiditis with antituberculous therapy under corticosteroid cover before committing to immunosuppression",
-   "Treat secondary choroidal neovascularisation with intravitreal anti-VEGF therapy",
-   "Undertake surveillance with fundus autofluorescence, optical coherence tomography, and angiography to detect advancing lesion edges and neovascular complications",
-   "Refer to a uveitis or ophthalmology specialist and monitor for immunosuppression-related toxicity",
-   "Provide low-vision support where foveal involvement causes permanent central visual loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "serpiginous_choroiditis-pathway",
-   "title": "Serpiginous choroiditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral though often asymmetric",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Lesion activity threatening or approaching the fovea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions, Indocyanine green angiography to reveal the extent of choriocapillaris involvement, Fundus autofluorescence to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as antimetabolites (mycophenolate or azathioprine) or an alkylating agent for chronic control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with immunosuppression without excluding tuberculosis-associated disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of serpiginous choroiditis."
-  }
- ],
- "tables": [
-  {
-   "id": "serpiginous_choroiditis-matrix",
-   "title": "Serpiginous choroiditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral though often asymmetric",
+      "Typically affects healthy middle-aged adults and presents with painless blurring, central or paracentral scotoma and metamorphopsia",
+      "Active lesions are grey-white, geographic patches classically beginning around the optic disc and extending centrifugally in a serpentine (snakelike) pattern",
+      "Healed areas leave scalloped zones of chorioretinal atrophy and pigment clumping, with new activity at the advancing edges of old scars",
+      "Fluorescein angiography shows early hypofluorescence of active lesions with late staining, while healed atrophic areas show window defects",
+      "Choroidal neovascularisation is an important vision-threatening complication, particularly at the margins of atrophic scars",
+      "A tuberculosis-associated serpiginous-like choroiditis must be excluded, as it requires antituberculous therapy rather than immunosuppression alone",
+      "Management principles rely on systemic corticosteroids and steroid-sparing immunosuppression to control inflammation and protect the fovea, with anti-VEGF for secondary neovascularisation"
     ],
-    [
-     "Key Investigations",
-     "Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions, Indocyanine green",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Serpiginous choroiditis is a chronic, presumed autoimmune inflammatory disorder targeting the choriocapillaris and overlying retinal pigment epithelium and photoreceptors. Recurrent bouts of inflammation cause ischaemia and destruction of the choriocapillaris, producing geographic areas of chorioretinal atrophy that spread centrifugally from the peripapillary region. Each recurrence extends from the edge of previously healed lesions, giving the characteristic serpentine advancing border. Damage to the outer retina and pigment epithelium accounts for the scotomata, and disruption of the choriocapillaris predisposes to secondary choroidal neovascularisation. An infectious (particularly tuberculous) trigger produces a clinically similar multifocal picture in some patients.",
+    "additionalDifferentials": [
+      "Tuberculosis-associated serpiginous-like choroiditis",
+      "Acute posterior multifocal placoid pigment epitheliopathy",
+      "Birdshot chorioretinopathy",
+      "Multifocal choroiditis and panuveitis",
+      "Persistent placoid maculopathy",
+      "Age-related macular degeneration with geographic atrophy",
+      "Syphilitic placoid chorioretinitis"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculosis-associated serpiginous-like choroiditis, Acute posterior multifocal placoid pigment epitheliopathy, Birdshot",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions",
+      "Indocyanine green angiography to reveal the extent of choriocapillaris involvement",
+      "Fundus autofluorescence to distinguish active borders from atrophic scars and monitor progression",
+      "Optical coherence tomography to assess outer retinal integrity and detect choroidal neovascularisation",
+      "Testing for latent tuberculosis (interferon-gamma release assay or tuberculin skin test) and chest imaging",
+      "Syphilis serology and other infective screening to exclude mimics"
     ],
-    [
-     "Management Strategy",
-     "Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Lesion activity threatening or approaching the fovea",
+      "New subretinal fluid, haemorrhage or exudate suggesting choroidal neovascularisation",
+      "Evidence of underlying tuberculosis requiring antimicrobial rather than purely immunosuppressive therapy",
+      "Rapid centrifugal progression despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with immunosuppression without excluding tuberculosis-associated disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Serpiginous choroiditis is a chronic relapsing disease; vision is preserved when the fovea is spared, but foveal involvement or secondary choroidal neovascularisation can cause permanent central visual loss, and recurrences may continue over many years.",
+    "pitfalls": [
+      "Treating with immunosuppression without excluding tuberculosis-associated disease",
+      "Mistaking healed atrophic scarring for active inflammation, or vice versa",
+      "Missing early choroidal neovascularisation arising at the edge of an old scar",
+      "Undertreating peripapillary activity that then extends unexpectedly toward the fovea",
+      "Confusing the appearance with geographic atrophy of age-related macular degeneration in older patients"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as antimetabolites (mycophenolate or azathioprine) or an alkylating agent for chronic control",
+      "Use adjunctive periocular or intravitreal corticosteroid to gain rapid local control of active lesions",
+      "Exclude and, where present, treat tuberculous serpiginous-like choroiditis with antituberculous therapy under corticosteroid cover before committing to immunosuppression",
+      "Treat secondary choroidal neovascularisation with intravitreal anti-VEGF therapy",
+      "Undertake surveillance with fundus autofluorescence, optical coherence tomography, and angiography to detect advancing lesion edges and neovascular complications",
+      "Refer to a uveitis or ophthalmology specialist and monitor for immunosuppression-related toxicity",
+      "Provide low-vision support where foveal involvement causes permanent central visual loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for serpiginous choroiditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "serpiginous-choroiditis-real-image",
-   "title": "Serpiginous choroiditis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "serpiginous_choroiditis-pathway",
+      "title": "Serpiginous choroiditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral though often asymmetric",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Lesion activity threatening or approaching the fovea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions, Indocyanine green angiography to reveal the extent of choriocapillaris involvement, Fundus autofluorescence to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as antimetabolites (mycophenolate or azathioprine) or an alkylating agent for chronic control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with immunosuppression without excluding tuberculosis-associated disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of serpiginous choroiditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "serpiginous_choroiditis-matrix",
+      "title": "Serpiginous choroiditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare chronic, recurrent inflammation of the choriocapillaris, retinal pigment epithelium and outer retina, usually bilateral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fluorescein angiography to define active (early hypofluorescent, late staining) versus healed lesions, Indocyanine green",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculosis-associated serpiginous-like choroiditis, Acute posterior multifocal placoid pigment epitheliopathy, Birdshot",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress inflammation with systemic corticosteroids for acute flares, adding steroid-sparing immunosuppression such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with immunosuppression without excluding tuberculosis-associated disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for serpiginous choroiditis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serpiginous_choroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Active lesions: early hypofluorescence, late staining; healed areas: window defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Extent of choriocapillaris involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Separates active borders from atrophic scars; tracks progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Outer retinal integrity and choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interferon-gamma release assay or tuberculin test, chest imaging",
+          "cells": [
+            {
+              "text": "Latent or active tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology and infective screen",
+          "cells": [
+            {
+              "text": "Excludes infective mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serpiginous_choroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculosis-associated serpiginous-like choroiditis",
+          "cells": [
+            {
+              "text": "Needs antituberculous therapy, not immunosuppression alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilitic placoid chorioretinitis",
+          "cells": [
+            {
+              "text": "Excluded by syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AMD with geographic atrophy",
+          "cells": [
+            {
+              "text": "Confused with healed atrophic scars in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute posterior multifocal placoid pigment epitheliopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serpiginous_choroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Acute flares; add antimetabolites (mycophenolate or azathioprine) or an alkylating agent for chronic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periocular or intravitreal corticosteroid",
+          "cells": [
+            {
+              "text": "Rapid local control of active lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude and treat tuberculosis",
+          "cells": [
+            {
+              "text": "Antituberculous therapy under corticosteroid cover before committing to immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF",
+          "cells": [
+            {
+              "text": "Secondary choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Autofluorescence, OCT and angiography for advancing edges and neovascular complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Uveitis service; monitor immunosuppression toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Permanent central visual loss from foveal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serpiginous_choroiditis-dx-mgmt",
+      "title": "Diagnosis and management of Serpiginous choroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless blurring and scotoma; grey-white peripapillary patches spreading serpentine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lesion near the fovea, new subretinal fluid or haemorrhage, or fast progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent uveitis review; start corticosteroid and treat neovascularisation with anti-VEGF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein and ICG angiography; autofluorescence; OCT; tuberculosis and syphilis tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tuberculosis and syphilis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat tuberculous or syphilitic disease with antimicrobials under steroid cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroid for flares; periocular or intravitreal steroid if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppression: mycophenolate, azathioprine or alkylating agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF for choroidal neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial autofluorescence, OCT and angiography; low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic relapsing; vision kept if fovea is spared",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

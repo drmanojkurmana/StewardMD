@@ -1,175 +1,500 @@
 {
- "id": "postpartum_depression",
- "name": "Postpartum depression",
- "aliases": [
-  "postnatal depression",
-  "peripartum depression",
-  "major depressive disorder with peripartum onset",
-  "PPD"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low mood, loss of interest, and the associated features of depression",
-   "It must be distinguished from the common, transient postpartum blues, which are mild and self-limiting within about two weeks, and from the rare psychiatric emergency of postpartum psychosis",
-   "Presentations often include prominent anxiety, guilt about parenting ability, and intrusive thoughts, and mothers may be reluctant to disclose symptoms for fear of judgement",
-   "Actively assess suicidal ideation and any thoughts of harming the infant, as these carry serious risk and require urgent action",
-   "Routine screening in the perinatal period, for example with a validated postnatal depression scale, improves detection of an often hidden condition",
-   "Management combines psychotherapy and, when indicated, antidepressant pharmacotherapy, with treatment choices weighing symptom severity against breastfeeding considerations",
-   "Untreated maternal depression can adversely affect mother-infant bonding and child development, so timely treatment benefits both mother and child",
-   "Postpartum psychosis, with confusion, delusions, or thoughts of harming the infant, is an emergency requiring immediate assessment and usually admission"
+  "id": "postpartum_depression",
+  "name": "Postpartum depression",
+  "aliases": [
+    "postnatal depression",
+    "peripartum depression",
+    "major depressive disorder with peripartum onset",
+    "PPD"
   ],
-  "pathophysiology": "Postpartum depression is thought to result from the interaction of an abrupt drop in reproductive hormones after delivery with a predisposing vulnerability, superimposed on the neurobiology shared with major depression, including monoamine and stress-axis dysregulation. Sleep deprivation, psychosocial stressors, a history of mood disorder, and inadequate support further increase risk in susceptible women.",
-  "additionalDifferentials": [
-   "Postpartum blues (transient and self-limiting)",
-   "Postpartum psychosis",
-   "Bipolar disorder presenting or relapsing in the perinatal period",
-   "Postpartum thyroiditis and other thyroid dysfunction",
-   "Anaemia and other medical causes of fatigue",
-   "Anxiety disorders or obsessive-compulsive disorder with perinatal onset"
-  ],
-  "additionalInvestigations": [
-   "Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale",
-   "Structured suicide risk assessment and assessment of thoughts of harm to the infant",
-   "Thyroid function testing",
-   "Full blood count to exclude anaemia",
-   "Screening for a history of bipolar disorder before starting an antidepressant"
-  ],
-  "redFlags": [
-   "Suicidal ideation with plan or intent",
-   "Thoughts of harming the infant or command-type intrusive urges",
-   "Features of postpartum psychosis such as confusion, delusions, or hallucinations",
-   "Severe self-neglect or inability to care for the infant"
-  ],
-  "prognosis": "Postpartum depression generally responds well to treatment, and most women recover, but there is an increased risk of recurrence in subsequent pregnancies and of future depressive episodes. Prognosis is better with early detection, treatment, and social support, and worse when the condition is unrecognised, when there is a bipolar diathesis, or when comorbidities and psychosocial adversity persist.",
-  "pitfalls": [
-   "Dismissing significant depression as normal postpartum blues",
-   "Failing to ask directly about suicidal thoughts and thoughts of harming the infant",
-   "Missing an underlying bipolar disorder before prescribing an antidepressant",
-   "Overlooking postpartum thyroiditis as a contributor",
-   "Not recognising postpartum psychosis as an emergency requiring urgent care"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate illness",
-   "Prescribe antidepressant pharmacotherapy, typically a selective serotonin reuptake inhibitor, for moderate to severe illness or when psychotherapy is insufficient, choosing an agent compatible with breastfeeding",
-   "Screen for a personal or family history of bipolar disorder before starting an antidepressant to avoid precipitating a manic switch",
-   "Undertake structured assessment of suicidal ideation and thoughts of harming the infant, acting urgently on significant risk",
-   "Distinguish from transient postpartum blues and from the emergency of postpartum psychosis, which requires urgent psychiatric admission and may need antipsychotics or electroconvulsive therapy",
-   "Mobilise practical and social support, address sleep, and involve health visitors and perinatal mental health services",
-   "Arrange follow-up given the risk of recurrence and plan monitoring in future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "postpartum_depression-pathway",
-   "title": "Postpartum depression: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low mood, loss of interest, and the associated features of depression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suicidal ideation with plan or intent",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale, Structured suicide risk assessment and assessment of thoughts of harm to the infant, Thyroid function testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing significant depression as normal postpartum blues"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of postpartum depression."
-  }
- ],
- "tables": [
-  {
-   "id": "postpartum_depression-matrix",
-   "title": "Postpartum depression: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low mood, loss of interest, and the associated features of depression",
+      "It must be distinguished from the common, transient postpartum blues, which are mild and self-limiting within about two weeks, and from the rare psychiatric emergency of postpartum psychosis",
+      "Presentations often include prominent anxiety, guilt about parenting ability, and intrusive thoughts, and mothers may be reluctant to disclose symptoms for fear of judgement",
+      "Actively assess suicidal ideation and any thoughts of harming the infant, as these carry serious risk and require urgent action",
+      "Routine screening in the perinatal period, for example with a validated postnatal depression scale, improves detection of an often hidden condition",
+      "Management combines psychotherapy and, when indicated, antidepressant pharmacotherapy, with treatment choices weighing symptom severity against breastfeeding considerations",
+      "Untreated maternal depression can adversely affect mother-infant bonding and child development, so timely treatment benefits both mother and child",
+      "Postpartum psychosis, with confusion, delusions, or thoughts of harming the infant, is an emergency requiring immediate assessment and usually admission"
     ],
-    [
-     "Key Investigations",
-     "Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale, Structured suicide risk assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Postpartum depression is thought to result from the interaction of an abrupt drop in reproductive hormones after delivery with a predisposing vulnerability, superimposed on the neurobiology shared with major depression, including monoamine and stress-axis dysregulation. Sleep deprivation, psychosocial stressors, a history of mood disorder, and inadequate support further increase risk in susceptible women.",
+    "additionalDifferentials": [
+      "Postpartum blues (transient and self-limiting)",
+      "Postpartum psychosis",
+      "Bipolar disorder presenting or relapsing in the perinatal period",
+      "Postpartum thyroiditis and other thyroid dysfunction",
+      "Anaemia and other medical causes of fatigue",
+      "Anxiety disorders or obsessive-compulsive disorder with perinatal onset"
     ],
-    [
-     "Primary Differentials",
-     "Postpartum blues (transient and self-limiting), Postpartum psychosis, Bipolar disorder presenting or relapsing in the perinatal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale",
+      "Structured suicide risk assessment and assessment of thoughts of harm to the infant",
+      "Thyroid function testing",
+      "Full blood count to exclude anaemia",
+      "Screening for a history of bipolar disorder before starting an antidepressant"
     ],
-    [
-     "Management Strategy",
-     "Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate",
-     "Core treatment modality"
+    "redFlags": [
+      "Suicidal ideation with plan or intent",
+      "Thoughts of harming the infant or command-type intrusive urges",
+      "Features of postpartum psychosis such as confusion, delusions, or hallucinations",
+      "Severe self-neglect or inability to care for the infant"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing significant depression as normal postpartum blues",
-     "Prevent diagnostic or management error"
+    "prognosis": "Postpartum depression generally responds well to treatment, and most women recover, but there is an increased risk of recurrence in subsequent pregnancies and of future depressive episodes. Prognosis is better with early detection, treatment, and social support, and worse when the condition is unrecognised, when there is a bipolar diathesis, or when comorbidities and psychosocial adversity persist.",
+    "pitfalls": [
+      "Dismissing significant depression as normal postpartum blues",
+      "Failing to ask directly about suicidal thoughts and thoughts of harming the infant",
+      "Missing an underlying bipolar disorder before prescribing an antidepressant",
+      "Overlooking postpartum thyroiditis as a contributor",
+      "Not recognising postpartum psychosis as an emergency requiring urgent care"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate illness",
+      "Prescribe antidepressant pharmacotherapy, typically a selective serotonin reuptake inhibitor, for moderate to severe illness or when psychotherapy is insufficient, choosing an agent compatible with breastfeeding",
+      "Screen for a personal or family history of bipolar disorder before starting an antidepressant to avoid precipitating a manic switch",
+      "Undertake structured assessment of suicidal ideation and thoughts of harming the infant, acting urgently on significant risk",
+      "Distinguish from transient postpartum blues and from the emergency of postpartum psychosis, which requires urgent psychiatric admission and may need antipsychotics or electroconvulsive therapy",
+      "Mobilise practical and social support, address sleep, and involve health visitors and perinatal mental health services",
+      "Arrange follow-up given the risk of recurrence and plan monitoring in future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for postpartum depression."
-  }
- ],
- "diagrams": [
-  {
-   "id": "postpartum-depression-real-image",
-   "title": "Postpartum depression: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "postpartum_depression-pathway",
+      "title": "Postpartum depression: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low mood, loss of interest, and the associated features of depression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suicidal ideation with plan or intent",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale, Structured suicide risk assessment and assessment of thoughts of harm to the infant, Thyroid function testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing significant depression as normal postpartum blues"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of postpartum depression."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "postpartum_depression-matrix",
+      "title": "Postpartum depression: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "This is a major depressive episode with onset during pregnancy or in the weeks following delivery, presenting with persistent low",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Validated perinatal depression screening, such as the Edinburgh Postnatal Depression Scale, Structured suicide risk assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Postpartum blues (transient and self-limiting), Postpartum psychosis, Bipolar disorder presenting or relapsing in the perinatal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer psychological therapy such as cognitive behavioural therapy or interpersonal therapy as first-line for mild to moderate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing significant depression as normal postpartum blues",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for postpartum depression."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postpartum_depression-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Edinburgh Postnatal Depression Scale or similar",
+          "cells": [
+            {
+              "text": "Validated perinatal depression screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured suicide risk assessment",
+          "cells": [
+            {
+              "text": "Thoughts of harm to self or infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Postpartum thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar history screen",
+          "cells": [
+            {
+              "text": "Before starting an antidepressant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postpartum_depression-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Postpartum blues",
+          "cells": [
+            {
+              "text": "Transient and self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum psychosis",
+          "cells": [
+            {
+              "text": "Confusion, delusions or hallucinations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar disorder",
+          "cells": [
+            {
+              "text": "Perinatal onset or relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum thyroiditis",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Medical cause of fatigue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety or obsessive-compulsive disorder",
+          "cells": [
+            {
+              "text": "Perinatal onset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postpartum_depression-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychological therapy",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy or interpersonal therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antidepressant",
+          "cells": [
+            {
+              "text": "Typically a selective serotonin reuptake inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar screen",
+          "cells": [
+            {
+              "text": "Personal or family history before antidepressant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide and infant-harm assessment",
+          "cells": [
+            {
+              "text": "Structured and repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish psychosis",
+          "cells": [
+            {
+              "text": "Emergency referral for postpartum psychosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Practical support",
+          "cells": [
+            {
+              "text": "Sleep, social support and health visitor involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Recurrence risk and monitoring in future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postpartum_depression-dx-mgmt",
+      "title": "Diagnosis and management of Postpartum depression",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent low mood, anhedonia or anxiety in the postnatal period",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (suicidal ideation, thoughts of harming infant, psychosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency psychiatric review for suicidal intent or postpartum psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EPDS or similar screen; suicide risk assessment; thyroid tests; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does screening and assessment confirm a depressive episode after childbirth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider postpartum blues, bipolar disorder, thyroid disease or anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offer psychological therapy such as CBT or interpersonal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prescribe an SSRI antidepressant where pharmacotherapy is indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for bipolar disorder before starting an antidepressant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured assessment of suicidal ideation and thoughts of harming the infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Mobilise practical and social support and involve health visitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most women recover with treatment, but recurrence risk is raised in future pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

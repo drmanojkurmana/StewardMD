@@ -1,177 +1,464 @@
 {
- "id": "fgf12_encephalopathy",
- "name": "FGF12 developmental and epileptic encephalopathy",
- "aliases": [
-  "FGF12",
-  "FHF1",
-  "FGF12-related epilepsy",
-  "fibroblast growth factor homologous factor 1 encephalopathy",
-  "EIEE47"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the intracellular tail of voltage-gated sodium channels and modulates their inactivation",
-   "By regulating sodium channels such as Nav1.6 and Nav1.2, FGF12 variants act functionally like a sodium channelopathy, typically with a gain-of-function increase in neuronal excitability",
-   "Presents as an early-onset developmental and epileptic encephalopathy, often with seizures beginning in the first months of life",
-   "Seizures are frequently focal and tonic and may be drug-resistant, with an encephalopathic electroencephalogram",
-   "Because the underlying mechanism enhances sodium channel activity, sodium-channel-blocking antiseizure agents are often preferentially effective, mirroring gain-of-function SCN8A disease",
-   "Development is typically significantly impaired with hypotonia and later motor and cognitive delay",
-   "A recurrent gain-of-function variant is well described, and the diagnosis should be considered in sodium-channel-blocker-responsive infantile epilepsy without a primary SCN mutation"
+  "id": "fgf12_encephalopathy",
+  "name": "FGF12 developmental and epileptic encephalopathy",
+  "aliases": [
+    "FGF12",
+    "FHF1",
+    "FGF12-related epilepsy",
+    "fibroblast growth factor homologous factor 1 encephalopathy",
+    "EIEE47"
   ],
-  "pathophysiology": "FGF12 encodes fibroblast growth factor homologous factor 1, an intracellular protein that, despite its name, does not act as a secreted growth factor but instead binds the cytoplasmic carboxy-terminal domain of voltage-gated sodium channels. There it modulates channel inactivation and availability, thereby tuning neuronal firing. Pathogenic variants alter this interaction, generally producing a gain-of-function effect that slows inactivation or increases channel availability and raises excitability. Because the defect converges on sodium channel behaviour, the phenotype resembles a primary sodium channelopathy and often responds to sodium-channel-blocking medication, whereas the encephalopathy reflects the impact of aberrant firing on the developing brain.",
-  "additionalDifferentials": [
-   "SCN8A and SCN2A developmental and epileptic encephalopathies",
-   "KCNQ2 encephalopathy",
-   "STXBP1 encephalopathy",
-   "CDKL5 deficiency disorder",
-   "Other early infantile epileptic encephalopathies",
-   "Structural or metabolic infantile epilepsies"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant",
-   "Electroencephalography to characterise focal and tonic seizures and interictal abnormalities",
-   "Brain magnetic resonance imaging to exclude structural causes",
-   "Developmental assessment to document trajectory",
-   "Careful observation of response to sodium-channel-blocking therapy",
-   "Functional characterisation of the variant where available"
-  ],
-  "redFlags": [
-   "Refractory seizure clusters or status epilepticus in infancy",
-   "Developmental arrest coinciding with seizure onset",
-   "Feeding and respiratory difficulty with profound hypotonia",
-   "Failure to respond to first-line therapy prompting mechanism-based review"
-  ],
-  "prognosis": "The developmental and epileptic encephalopathy phenotype generally carries significant intellectual disability, though seizures may respond well to sodium-channel-blocking agents given the gain-of-function mechanism, improving seizure burden in some children.",
-  "pitfalls": [
-   "Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator",
-   "Failing to trial sodium-channel blockers despite the gain-of-function mechanism",
-   "Assuming a primary SCN gene must be responsible when panels are negative",
-   "Attributing a normal early MRI to a benign prognosis"
-  ],
-  "references": [
-   "GeneReviews and OMIM resources on FGF12-related epileptic encephalopathy",
-   "ILAE resources on sodium-channel-related developmental and epileptic encephalopathies"
-  ],
-  "crossLinks": [
-   "scn8a_developmental_epileptic_encephalopathy"
-  ],
-  "management": [
-   "Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide given the gain-of-function sodium channel mechanism",
-   "Add further antiseizure agents for drug-resistant seizures and consider the ketogenic diet where seizures remain refractory",
-   "Provide developmental support with physiotherapy, occupational therapy and speech and language therapy for hypotonia and motor and cognitive delay",
-   "Use serial electroencephalography and clinical review to monitor seizure control and encephalopathic features",
-   "Treat status epilepticus and acute seizure clusters with a rescue benzodiazepine protocol",
-   "Coordinate multidisciplinary neurology, epileptology, paediatric and developmental care",
-   "Provide genetic counselling and family testing following identification of the FGF12 variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fgf12_encephalopathy-pathway",
-   "title": "FGF12 developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the intracellular tail of voltage-gated sodium channels and modulates their inactivation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory seizure clusters or status epilepticus in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant, Electroencephalography to characterise focal and tonic seizures and interictal abnormalities, Brain magnetic resonance imaging to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide given the gain-of-function sodium channel mechanism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fgf12 developmental and epileptic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "fgf12_encephalopathy-matrix",
-   "title": "FGF12 developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the intracellular tail of voltage-gated sodium channels and modulates their inactivation",
+      "By regulating sodium channels such as Nav1.6 and Nav1.2, FGF12 variants act functionally like a sodium channelopathy, typically with a gain-of-function increase in neuronal excitability",
+      "Presents as an early-onset developmental and epileptic encephalopathy, often with seizures beginning in the first months of life",
+      "Seizures are frequently focal and tonic and may be drug-resistant, with an encephalopathic electroencephalogram",
+      "Because the underlying mechanism enhances sodium channel activity, sodium-channel-blocking antiseizure agents are often preferentially effective, mirroring gain-of-function SCN8A disease",
+      "Development is typically significantly impaired with hypotonia and later motor and cognitive delay",
+      "A recurrent gain-of-function variant is well described, and the diagnosis should be considered in sodium-channel-blocker-responsive infantile epilepsy without a primary SCN mutation"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant, Electroencephalography to characterise focal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FGF12 encodes fibroblast growth factor homologous factor 1, an intracellular protein that, despite its name, does not act as a secreted growth factor but instead binds the cytoplasmic carboxy-terminal domain of voltage-gated sodium channels. There it modulates channel inactivation and availability, thereby tuning neuronal firing. Pathogenic variants alter this interaction, generally producing a gain-of-function effect that slows inactivation or increases channel availability and raises excitability. Because the defect converges on sodium channel behaviour, the phenotype resembles a primary sodium channelopathy and often responds to sodium-channel-blocking medication, whereas the encephalopathy reflects the impact of aberrant firing on the developing brain.",
+    "additionalDifferentials": [
+      "SCN8A and SCN2A developmental and epileptic encephalopathies",
+      "KCNQ2 encephalopathy",
+      "STXBP1 encephalopathy",
+      "CDKL5 deficiency disorder",
+      "Other early infantile epileptic encephalopathies",
+      "Structural or metabolic infantile epilepsies"
     ],
-    [
-     "Primary Differentials",
-     "SCN8A and SCN2A developmental and epileptic encephalopathies, KCNQ2 encephalopathy, STXBP1 encephalopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant",
+      "Electroencephalography to characterise focal and tonic seizures and interictal abnormalities",
+      "Brain magnetic resonance imaging to exclude structural causes",
+      "Developmental assessment to document trajectory",
+      "Careful observation of response to sodium-channel-blocking therapy",
+      "Functional characterisation of the variant where available"
     ],
-    [
-     "Management Strategy",
-     "Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory seizure clusters or status epilepticus in infancy",
+      "Developmental arrest coinciding with seizure onset",
+      "Feeding and respiratory difficulty with profound hypotonia",
+      "Failure to respond to first-line therapy prompting mechanism-based review"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator",
-     "Prevent diagnostic or management error"
+    "prognosis": "The developmental and epileptic encephalopathy phenotype generally carries significant intellectual disability, though seizures may respond well to sodium-channel-blocking agents given the gain-of-function mechanism, improving seizure burden in some children.",
+    "pitfalls": [
+      "Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator",
+      "Failing to trial sodium-channel blockers despite the gain-of-function mechanism",
+      "Assuming a primary SCN gene must be responsible when panels are negative",
+      "Attributing a normal early MRI to a benign prognosis"
+    ],
+    "references": [
+      "GeneReviews and OMIM resources on FGF12-related epileptic encephalopathy",
+      "ILAE resources on sodium-channel-related developmental and epileptic encephalopathies"
+    ],
+    "crossLinks": [
+      "scn8a_developmental_epileptic_encephalopathy"
+    ],
+    "management": [
+      "Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide given the gain-of-function sodium channel mechanism",
+      "Add further antiseizure agents for drug-resistant seizures and consider the ketogenic diet where seizures remain refractory",
+      "Provide developmental support with physiotherapy, occupational therapy and speech and language therapy for hypotonia and motor and cognitive delay",
+      "Use serial electroencephalography and clinical review to monitor seizure control and encephalopathic features",
+      "Treat status epilepticus and acute seizure clusters with a rescue benzodiazepine protocol",
+      "Coordinate multidisciplinary neurology, epileptology, paediatric and developmental care",
+      "Provide genetic counselling and family testing following identification of the FGF12 variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for fgf12 developmental and epileptic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fgf12-encephalopathy-real-image",
-   "title": "FGF12 developmental and epileptic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "fgf12_encephalopathy-pathway",
+      "title": "FGF12 developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the intracellular tail of voltage-gated sodium channels and modulates their inactivation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory seizure clusters or status epilepticus in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant, Electroencephalography to characterise focal and tonic seizures and interictal abnormalities, Brain magnetic resonance imaging to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide given the gain-of-function sodium channel mechanism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fgf12 developmental and epileptic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fgf12_encephalopathy-matrix",
+      "title": "FGF12 developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in FGF12, which encodes a fibroblast growth factor homologous factor that is not secreted but binds the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing to identify the FGF12 variant, Electroencephalography to characterise focal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCN8A and SCN2A developmental and epileptic encephalopathies, KCNQ2 encephalopathy, STXBP1 encephalopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Preferentially use sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine, phenytoin or lacosamide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking FGF12 because it is a growth-factor-named gene that actually behaves as a sodium channel modulator",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fgf12 developmental and epileptic encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fgf12_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "FGF12 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Focal and tonic seizures; interictal abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Trajectory of development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to sodium-channel blocking therapy",
+          "cells": [
+            {
+              "text": "Mechanism-based response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fgf12_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SCN8A or SCN2A encephalopathy",
+          "cells": [
+            {
+              "text": "Other sodium-channel developmental epileptic encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNQ2 or STXBP1 encephalopathy",
+          "cells": [
+            {
+              "text": "Other early infantile epileptic encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Early infantile epilepsy with developmental delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fgf12_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blocking antiseizure medication",
+          "cells": [
+            {
+              "text": "Carbamazepine, oxcarbazepine, phenytoin or lacosamide preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional antiseizure agents",
+          "cells": [
+            {
+              "text": "Drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Where seizures remain refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational and speech therapy",
+          "cells": [
+            {
+              "text": "Hypotonia and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial EEG and clinical review",
+          "cells": [
+            {
+              "text": "Seizure control and encephalopathic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue benzodiazepine protocol",
+          "cells": [
+            {
+              "text": "Status epilepticus and seizure clusters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "After identification of the FGF12 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fgf12_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of FGF12 developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset developmental and epileptic encephalopathy with focal or tonic seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (refractory clusters, status epilepticus, feeding or respiratory difficulty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rescue benzodiazepine and urgent neurology for status or clusters",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome for FGF12; EEG; brain MRI; developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGF12 variant identified on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other sodium-channel or early infantile epileptic encephalopathy genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium-channel blocking antiseizure medication first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add antiseizure agents and ketogenic diet if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EEG and genetic counselling for family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Significant intellectual disability; seizures may respond well to sodium-channel blockers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

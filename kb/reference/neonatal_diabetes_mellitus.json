@@ -1,172 +1,441 @@
 {
- "id": "neonatal_diabetes_mellitus",
- "name": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS)",
- "aliases": [
-  "NDM",
-  "monogenic neonatal diabetes",
-  "KATP channel neonatal diabetes",
-  "permanent neonatal diabetes",
-  "transient neonatal diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1 diabetes is very unlikely",
-   "Common genetic causes include activating mutations in the KATP channel genes KCNJ11 and ABCC8 and mutations in the insulin gene INS",
-   "Presents with hyperglycaemia, poor weight gain, failure to thrive and sometimes ketoacidosis or dehydration in a young infant",
-   "KATP channel forms are frequently sulfonylurea-responsive, allowing many infants to transition from insulin to oral sulfonylurea therapy",
-   "Can be permanent or transient; transient forms often relate to chromosome 6q24 abnormalities and may relapse later in life",
-   "Some KCNJ11 mutations cause the DEND syndrome with developmental delay, epilepsy and neonatal diabetes, reflecting KATP channels in neural tissue",
-   "Urgent genetic testing is essential because the result directly changes treatment and prognosis"
+  "id": "neonatal_diabetes_mellitus",
+  "name": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS)",
+  "aliases": [
+    "NDM",
+    "monogenic neonatal diabetes",
+    "KATP channel neonatal diabetes",
+    "permanent neonatal diabetes",
+    "transient neonatal diabetes"
   ],
-  "pathophysiology": "In beta cells the ATP-sensitive potassium (KATP) channel links glucose metabolism to insulin release; rising ATP normally closes the channel, depolarising the cell and triggering secretion. Activating mutations in KCNJ11 or ABCC8 hold the channel open, preventing depolarisation and impairing insulin release, yet high-affinity sulfonylureas can close the channel independently of ATP and restore secretion. INS mutations instead cause misfolding of proinsulin and beta-cell stress, while chromosome 6q24 abnormalities perturb imprinted growth-regulating genes and typically produce transient disease.",
-  "additionalDifferentials": [
-   "Type 1 diabetes mellitus presenting in infancy",
-   "Stress or illness-related transient hyperglycaemia of the newborn",
-   "Neonatal diabetes as part of a syndrome such as Wolcott-Rallison or IPEX",
-   "Pancreatic agenesis or hypoplasia",
-   "Iatrogenic hyperglycaemia from glucocorticoids or dextrose infusion"
-  ],
-  "additionalInvestigations": [
-   "Plasma glucose, ketones and blood gas to assess severity and ketoacidosis",
-   "C-peptide and insulin levels to gauge endogenous secretion",
-   "Urgent molecular genetic testing for KCNJ11, ABCC8, INS and 6q24 abnormalities",
-   "Pancreatic autoantibodies, typically negative, to help exclude autoimmune diabetes",
-   "Pancreatic imaging and syndromic assessment when structural or syndromic causes are suspected"
-  ],
-  "redFlags": [
-   "Diabetic ketoacidosis or severe dehydration in a young infant requiring emergency stabilisation",
-   "Neurological features such as developmental delay or seizures suggesting a DEND-type presentation",
-   "Failure to thrive or intractable hyperglycaemia needing rapid diagnostic clarification",
-   "Associated syndromic features indicating a broader multisystem disorder"
-  ],
-  "prognosis": "Prognosis varies by genotype: many KATP channel cases achieve excellent control on sulfonylureas with potential neurodevelopmental benefit, transient forms may remit though relapse is common, while syndromic and INS-related forms carry a more guarded outlook.",
-  "pitfalls": [
-   "Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing",
-   "Missing the opportunity to transition sulfonylurea-responsive cases off insulin",
-   "Overlooking neurodevelopmental features that indicate a KATP channel syndrome",
-   "Failing to plan follow-up for transient neonatal diabetes that can relapse in later life"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration",
-   "After urgent genotyping, trial an oral sulfonylurea in KATP-channel (KCNJ11/ABCC8) disease to close the channel and transition many infants off insulin",
-   "Maintain insulin therapy for INS-gene, 6q24 and sulfonylurea-unresponsive forms",
-   "Monitor glycaemic control, feeding and growth, and screen for the neurodevelopmental features of DEND syndrome in KCNJ11 disease",
-   "Anticipate remission in transient (6q24) forms and follow up for later relapse in childhood or adolescence",
-   "Refer to paediatric endocrinology and clinical genetics, with genetic counselling for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neonatal_diabetes_mellitus-pathway",
-   "title": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1 diabetes is very unlikely",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diabetic ketoacidosis or severe dehydration in a young infant requiring emergency stabilisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma glucose, ketones and blood gas to assess severity and ketoacidosis, C-peptide and insulin levels to gauge endogenous secretion, Urgent molecular genetic testing for KCNJ11, ABCC8, INS and 6q24 abnormalities"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal diabetes mellitus (kcnj11/abcc8/ins)."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal_diabetes_mellitus-matrix",
-   "title": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1 diabetes is very unlikely",
+      "Common genetic causes include activating mutations in the KATP channel genes KCNJ11 and ABCC8 and mutations in the insulin gene INS",
+      "Presents with hyperglycaemia, poor weight gain, failure to thrive and sometimes ketoacidosis or dehydration in a young infant",
+      "KATP channel forms are frequently sulfonylurea-responsive, allowing many infants to transition from insulin to oral sulfonylurea therapy",
+      "Can be permanent or transient; transient forms often relate to chromosome 6q24 abnormalities and may relapse later in life",
+      "Some KCNJ11 mutations cause the DEND syndrome with developmental delay, epilepsy and neonatal diabetes, reflecting KATP channels in neural tissue",
+      "Urgent genetic testing is essential because the result directly changes treatment and prognosis"
     ],
-    [
-     "Key Investigations",
-     "Plasma glucose, ketones and blood gas to assess severity and ketoacidosis, C-peptide and insulin levels to gauge endogenous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In beta cells the ATP-sensitive potassium (KATP) channel links glucose metabolism to insulin release; rising ATP normally closes the channel, depolarising the cell and triggering secretion. Activating mutations in KCNJ11 or ABCC8 hold the channel open, preventing depolarisation and impairing insulin release, yet high-affinity sulfonylureas can close the channel independently of ATP and restore secretion. INS mutations instead cause misfolding of proinsulin and beta-cell stress, while chromosome 6q24 abnormalities perturb imprinted growth-regulating genes and typically produce transient disease.",
+    "additionalDifferentials": [
+      "Type 1 diabetes mellitus presenting in infancy",
+      "Stress or illness-related transient hyperglycaemia of the newborn",
+      "Neonatal diabetes as part of a syndrome such as Wolcott-Rallison or IPEX",
+      "Pancreatic agenesis or hypoplasia",
+      "Iatrogenic hyperglycaemia from glucocorticoids or dextrose infusion"
     ],
-    [
-     "Primary Differentials",
-     "Type 1 diabetes mellitus presenting in infancy, Stress or illness-related transient hyperglycaemia of the newborn, Neonatal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma glucose, ketones and blood gas to assess severity and ketoacidosis",
+      "C-peptide and insulin levels to gauge endogenous secretion",
+      "Urgent molecular genetic testing for KCNJ11, ABCC8, INS and 6q24 abnormalities",
+      "Pancreatic autoantibodies, typically negative, to help exclude autoimmune diabetes",
+      "Pancreatic imaging and syndromic assessment when structural or syndromic causes are suspected"
     ],
-    [
-     "Management Strategy",
-     "Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration",
-     "Core treatment modality"
+    "redFlags": [
+      "Diabetic ketoacidosis or severe dehydration in a young infant requiring emergency stabilisation",
+      "Neurological features such as developmental delay or seizures suggesting a DEND-type presentation",
+      "Failure to thrive or intractable hyperglycaemia needing rapid diagnostic clarification",
+      "Associated syndromic features indicating a broader multisystem disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies by genotype: many KATP channel cases achieve excellent control on sulfonylureas with potential neurodevelopmental benefit, transient forms may remit though relapse is common, while syndromic and INS-related forms carry a more guarded outlook.",
+    "pitfalls": [
+      "Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing",
+      "Missing the opportunity to transition sulfonylurea-responsive cases off insulin",
+      "Overlooking neurodevelopmental features that indicate a KATP channel syndrome",
+      "Failing to plan follow-up for transient neonatal diabetes that can relapse in later life"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration",
+      "After urgent genotyping, trial an oral sulfonylurea in KATP-channel (KCNJ11/ABCC8) disease to close the channel and transition many infants off insulin",
+      "Maintain insulin therapy for INS-gene, 6q24 and sulfonylurea-unresponsive forms",
+      "Monitor glycaemic control, feeding and growth, and screen for the neurodevelopmental features of DEND syndrome in KCNJ11 disease",
+      "Anticipate remission in transient (6q24) forms and follow up for later relapse in childhood or adolescence",
+      "Refer to paediatric endocrinology and clinical genetics, with genetic counselling for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal diabetes mellitus (kcnj11/abcc8/ins)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-diabetes-mellitus-real-image",
-   "title": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "neonatal_diabetes_mellitus-pathway",
+      "title": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1 diabetes is very unlikely",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diabetic ketoacidosis or severe dehydration in a young infant requiring emergency stabilisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma glucose, ketones and blood gas to assess severity and ketoacidosis, C-peptide and insulin levels to gauge endogenous secretion, Urgent molecular genetic testing for KCNJ11, ABCC8, INS and 6q24 abnormalities"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal diabetes mellitus (kcnj11/abcc8/ins)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neonatal_diabetes_mellitus-matrix",
+      "title": "Neonatal diabetes mellitus (KCNJ11/ABCC8/INS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as diabetes diagnosed in the first months of life, most commonly within the first six months, when autoimmune type 1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma glucose, ketones and blood gas to assess severity and ketoacidosis, C-peptide and insulin levels to gauge endogenous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Type 1 diabetes mellitus presenting in infancy, Stress or illness-related transient hyperglycaemia of the newborn, Neonatal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start insulin to control hyperglycaemia at presentation and to treat any ketoacidosis or dehydration",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any infantile diabetes is type 1 and committing to lifelong insulin without genetic testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal diabetes mellitus (kcnj11/abcc8/ins)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma glucose, ketones and blood gas",
+          "cells": [
+            {
+              "text": "Severity and ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide and insulin levels",
+          "cells": [
+            {
+              "text": "Endogenous insulin secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent genetic testing for KCNJ11, ABCC8, INS and 6q24",
+          "cells": [
+            {
+              "text": "The result changes treatment and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Typically negative; helps exclude autoimmune diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic imaging and syndromic assessment",
+          "cells": [
+            {
+              "text": "When a structural or syndromic cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_diabetes_mellitus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 diabetes presenting in infancy",
+          "cells": [
+            {
+              "text": "Autoimmune; pancreatic autoantibodies are typically negative in neonatal diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wolcott-Rallison or IPEX syndrome",
+          "cells": [
+            {
+              "text": "Neonatal diabetes as part of a syndrome; syndromic assessment separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulin at presentation",
+          "cells": [
+            {
+              "text": "Controls hyperglycaemia and treats any ketoacidosis or dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral sulfonylurea trial",
+          "cells": [
+            {
+              "text": "In KATP channel (KCNJ11 or ABCC8) disease, to transition many infants off insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continued insulin",
+          "cells": [
+            {
+              "text": "For INS, 6q24 and sulfonylurea-unresponsive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Glycaemic control, feeding and growth; DEND features in KCNJ11 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remission and relapse follow-up",
+          "cells": [
+            {
+              "text": "Anticipate remission in transient 6q24 forms; follow up for later relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology and clinical genetics, with family genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal diabetes mellitus (KCNJ11/ABCC8/INS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperglycaemia, poor weight gain or ketoacidosis in an infant under six months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ketoacidosis, dehydration, developmental delay or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency insulin, fluids and ketone monitoring; urgent genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose, ketones, blood gas, C-peptide, autoantibodies, KCNJ11, ABCC8, INS, 6q24",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KATP channel or INS variant confirmed with autoantibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes or syndromic neonatal diabetes; reassess autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Insulin to control hyperglycaemia and treat ketoacidosis or dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of oral sulfonylurea in KCNJ11 or ABCC8 disease to transition off insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continue insulin for INS, 6q24 and sulfonylurea-unresponsive forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor glycaemia, feeding and growth; screen for DEND features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sulfonylurea-responsive cases control well; transient forms may relapse later",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

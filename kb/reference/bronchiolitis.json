@@ -1,173 +1,230 @@
 {
- "id": "bronchiolitis",
- "name": "Bronchiolitis",
- "aliases": [
-  "acute bronchiolitis",
-  "RSV bronchiolitis",
-  "viral bronchiolitis"
- ],
- "class": "infective",
- "system": "Respiratory",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused by respiratory syncytial virus (RSV).",
-   "Begins with upper respiratory symptoms (coryza, cough, low-grade fever) that progress over a few days to tachypnoea, wheeze, crackles, and increased work of breathing.",
-   "Diagnosis is clinical; routine viral testing, chest radiographs, and blood tests are usually unnecessary and can be misleading.",
-   "Management is supportive: ensure adequate hydration and feeding, maintain oxygenation, and provide gentle nasal suction as needed.",
-   "Bronchodilators, corticosteroids, and antibiotics are generally not beneficial in typical bronchiolitis and are not routinely recommended.",
-   "Apnoea can be an early and sometimes presenting sign, particularly in young or premature infants.",
-   "Risk factors for severe disease include prematurity, age under 2-3 months, congenital heart disease, chronic lung disease, and immunodeficiency.",
-   "Most cases are self-limiting over 1-2 weeks, though cough can persist longer."
+  "id": "bronchiolitis",
+  "name": "Bronchiolitis",
+  "aliases": [
+    "acute bronchiolitis",
+    "RSV bronchiolitis",
+    "viral bronchiolitis"
   ],
-  "pathophysiology": "Viral infection of the small airway epithelium causes inflammation, oedema, and necrosis of epithelial cells with increased mucus production. Sloughed cellular debris and mucus, together with airway wall swelling, partially or completely obstruct the small bronchioles. Because infant airways are narrow, this obstruction produces air trapping, hyperinflation, atelectasis, and ventilation-perfusion mismatch, leading to wheeze, hypoxaemia, and increased work of breathing.",
-  "additionalDifferentials": [
-   "Viral-induced wheeze / early asthma",
-   "Pneumonia",
-   "Congenital heart disease with heart failure",
-   "Foreign body aspiration",
-   "Gastro-oesophageal reflux with aspiration",
-   "Pertussis"
-  ],
-  "additionalInvestigations": [
-   "Pulse oximetry to assess oxygenation",
-   "Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases)",
-   "Chest radiograph only if diagnosis is unclear or deterioration is unexplained",
-   "Blood gas in severe respiratory distress or impending failure",
-   "Capillary or venous blood tests only when a bacterial complication is suspected"
-  ],
-  "redFlags": [
-   "Apnoea or episodes of colour change",
-   "Persistent hypoxaemia or rising oxygen requirement",
-   "Severe respiratory distress: marked recession, grunting, nasal flaring, head bobbing",
-   "Inability to feed or signs of dehydration",
-   "Exhaustion, lethargy, or signs of impending respiratory failure"
-  ],
-  "prognosis": "Most previously healthy infants recover fully within one to two weeks; a minority, especially high-risk infants, require hospitalisation, and some children have recurrent wheeze afterwards.",
-  "pitfalls": [
-   "Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease",
-   "Relying on transient oxygen desaturation readings and over-treating stable, feeding infants",
-   "Missing apnoea as a presenting feature in very young infants",
-   "Ordering routine chest radiographs, which may prompt unnecessary antibiotics for atelectasis mistaken for infiltrate"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is inadequate",
-   "Give supplemental oxygen for hypoxaemia and perform gentle nasal suction to relieve obstruction",
-   "Avoid bronchodilators, corticosteroids, and antibiotics, which are not beneficial in typical bronchiolitis",
-   "Monitor closely for apnoea and worsening respiratory distress, escalating to high-flow oxygen, CPAP, or mechanical ventilation as needed",
-   "Apply infection-control measures with hand hygiene and cohorting of RSV-positive infants",
-   "Offer RSV prophylaxis with palivizumab to eligible high-risk infants and give parents safety-net advice on warning signs",
-   "Have a low threshold for hospital admission of young, premature, or comorbid infants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bronchiolitis-pathway",
-   "title": "Bronchiolitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused by respiratory syncytial virus (RSV).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Apnoea or episodes of colour change",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulse oximetry to assess oxygenation, Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases), Chest radiograph only if diagnosis is unclear or deterioration is unexplained"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is inadequate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bronchiolitis."
-  }
- ],
- "tables": [
-  {
-   "id": "bronchiolitis-matrix",
-   "title": "Bronchiolitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Respiratory",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused by respiratory syncytial virus (RSV).",
+      "Begins with upper respiratory symptoms (coryza, cough, low-grade fever) that progress over a few days to tachypnoea, wheeze, crackles, and increased work of breathing.",
+      "Diagnosis is clinical; routine viral testing, chest radiographs, and blood tests are usually unnecessary and can be misleading.",
+      "Management is supportive: ensure adequate hydration and feeding, maintain oxygenation, and provide gentle nasal suction as needed.",
+      "Bronchodilators, corticosteroids, and antibiotics are generally not beneficial in typical bronchiolitis and are not routinely recommended.",
+      "Apnoea can be an early and sometimes presenting sign, particularly in young or premature infants.",
+      "Risk factors for severe disease include prematurity, age under 2-3 months, congenital heart disease, chronic lung disease, and immunodeficiency.",
+      "Most cases are self-limiting over 1-2 weeks, though cough can persist longer."
     ],
-    [
-     "Key Investigations",
-     "Pulse oximetry to assess oxygenation, Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases), Chest",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Viral infection of the small airway epithelium causes inflammation, oedema, and necrosis of epithelial cells with increased mucus production. Sloughed cellular debris and mucus, together with airway wall swelling, partially or completely obstruct the small bronchioles. Because infant airways are narrow, this obstruction produces air trapping, hyperinflation, atelectasis, and ventilation-perfusion mismatch, leading to wheeze, hypoxaemia, and increased work of breathing.",
+    "additionalDifferentials": [
+      "Viral-induced wheeze / early asthma",
+      "Pneumonia",
+      "Congenital heart disease with heart failure",
+      "Foreign body aspiration",
+      "Gastro-oesophageal reflux with aspiration",
+      "Pertussis"
     ],
-    [
-     "Primary Differentials",
-     "Viral-induced wheeze / early asthma, Pneumonia, Congenital heart disease with heart failure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulse oximetry to assess oxygenation",
+      "Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases)",
+      "Chest radiograph only if diagnosis is unclear or deterioration is unexplained",
+      "Blood gas in severe respiratory distress or impending failure",
+      "Capillary or venous blood tests only when a bacterial complication is suspected"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is",
-     "Core treatment modality"
+    "redFlags": [
+      "Apnoea or episodes of colour change",
+      "Persistent hypoxaemia or rising oxygen requirement",
+      "Severe respiratory distress: marked recession, grunting, nasal flaring, head bobbing",
+      "Inability to feed or signs of dehydration",
+      "Exhaustion, lethargy, or signs of impending respiratory failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most previously healthy infants recover fully within one to two weeks; a minority, especially high-risk infants, require hospitalisation, and some children have recurrent wheeze afterwards.",
+    "pitfalls": [
+      "Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease",
+      "Relying on transient oxygen desaturation readings and over-treating stable, feeding infants",
+      "Missing apnoea as a presenting feature in very young infants",
+      "Ordering routine chest radiographs, which may prompt unnecessary antibiotics for atelectasis mistaken for infiltrate"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is inadequate",
+      "Give supplemental oxygen for hypoxaemia and perform gentle nasal suction to relieve obstruction",
+      "Avoid bronchodilators, corticosteroids, and antibiotics, which are not beneficial in typical bronchiolitis",
+      "Monitor closely for apnoea and worsening respiratory distress, escalating to high-flow oxygen, CPAP, or mechanical ventilation as needed",
+      "Apply infection-control measures with hand hygiene and cohorting of RSV-positive infants",
+      "Offer RSV prophylaxis with palivizumab to eligible high-risk infants and give parents safety-net advice on warning signs",
+      "Have a low threshold for hospital admission of young, premature, or comorbid infants"
     ]
-   ],
-   "caption": "Overview comparison matrix for bronchiolitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bronchiolitis-real-image",
-   "title": "Bronchiolitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "bronchiolitis-pathway",
+      "title": "Bronchiolitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused by respiratory syncytial virus (RSV).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Apnoea or episodes of colour change",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulse oximetry to assess oxygenation, Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases), Chest radiograph only if diagnosis is unclear or deterioration is unexplained"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is inadequate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bronchiolitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bronchiolitis-matrix",
+      "title": "Bronchiolitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common lower respiratory tract infection of infants, typically under 2 years and peaking around 2-6 months, most often caused",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulse oximetry to assess oxygenation, Nasopharyngeal viral testing (mainly for cohorting or in severe/atypical cases), Chest",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral-induced wheeze / early asthma, Pneumonia, Congenital heart disease with heart failure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care with maintenance of hydration and feeding, using nasogastric or intravenous fluids if oral intake is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overusing bronchodilators, steroids, or antibiotics that provide no benefit in typical disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bronchiolitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bronchiolitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bronchiolitis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Pulse oximetry", "cells": [{"text": "Oxygenation"}], "cite": "c1"},
+        {"parameter": "Nasopharyngeal viral testing", "cells": [{"text": "Cohorting, or severe or atypical cases"}], "cite": "c1"},
+        {"parameter": "Chest radiograph", "cells": [{"text": "Only if diagnosis is unclear or deterioration is unexplained"}], "cite": "c1"},
+        {"parameter": "Blood gas", "cells": [{"text": "Severe respiratory distress or impending failure"}], "cite": "c1"},
+        {"parameter": "Blood tests", "cells": [{"text": "Only when a bacterial complication is suspected"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchiolitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike infant wheeze",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Viral-induced wheeze or early asthma", "cells": [{"text": "Recurrent wheeze after recovery, rather than a self-limiting illness over one to two weeks"}], "cite": "c1"},
+        {"parameter": "Congenital heart disease with heart failure", "cells": [{"text": "Congenital heart disease as a risk factor for severe disease"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchiolitis-treatment",
+      "kind": "treatment",
+      "title": "Management options in bronchiolitis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Hydration and feeding", "cells": [{"text": "Maintain hydration; nasogastric or intravenous fluids if oral intake is inadequate"}, {"text": "Core supportive care"}], "cite": "c1"},
+        {"parameter": "Oxygen and nasal suction", "cells": [{"text": "Supplemental oxygen for hypoxaemia; gentle nasal suction"}, {"text": "Supportive"}], "cite": "c1"},
+        {"parameter": "Avoid non-beneficial drugs", "cells": [{"text": "No bronchodilators, corticosteroids or antibiotics in typical disease"}, {"text": "Not beneficial"}], "cite": "c1"},
+        {"parameter": "Escalation", "cells": [{"text": "High-flow oxygen, CPAP or mechanical ventilation as needed for apnoea or worsening distress"}, {"text": "Severe disease"}], "cite": "c1"},
+        {"parameter": "Infection control", "cells": [{"text": "Hand hygiene and cohorting of RSV-positive infants"}, {"text": "Prevention of spread"}], "cite": "c1"},
+        {"parameter": "RSV prophylaxis", "cells": [{"text": "Palivizumab for eligible high-risk infants"}, {"text": "Eligible infants"}], "cite": "c1"},
+        {"parameter": "Admission threshold", "cells": [{"text": "Low threshold for young, premature or comorbid infants"}, {"text": "High-risk groups"}], "cite": "c1"},
+        {"parameter": "Parental safety-net advice", "cells": [{"text": "Explain warning signs of deterioration"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bronchiolitis-dx-mgmt",
+      "title": "Diagnosis and management of bronchiolitis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Infant with coryza and cough progressing to wheeze, crackles and increased work of breathing", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: apnoea, persistent hypoxaemia, severe distress, inability to feed, or exhaustion?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: admission; high-flow oxygen, CPAP or ventilation as needed; blood gas", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Clinical diagnosis with pulse oximetry; hydration and feeding assessment", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "High-risk infant: premature, under 2 to 3 months, or with heart or lung disease or immunodeficiency?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Low threshold for admission; RSV prophylaxis if eligible; infection control", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Supportive care: fluids, oxygen if hypoxaemic, nasal suction; avoid bronchodilators, steroids and antibiotics", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Most recover fully within one to two weeks; some have recurrent wheeze afterwards", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

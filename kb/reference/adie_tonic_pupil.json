@@ -1,173 +1,501 @@
 {
- "id": "adie_tonic_pupil",
- "name": "Adie tonic pupil",
- "aliases": [
-  "Holmes-Adie pupil",
-  "tonic pupil",
-  "Adie pupil",
-  "Adie syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
-   "The pupil shows light-near dissociation with a slow, tonic constriction to a sustained near effort and a slow tonic redilation afterwards",
-   "Slit-lamp examination often reveals segmental (vermiform) movements of the iris with sectors that fail to contract",
-   "Denervation supersensitivity means dilute pilocarpine constricts the affected pupil but not a normal one, confirming the diagnosis pharmacologically",
-   "Diminished or absent deep tendon reflexes together with a tonic pupil constitutes Holmes-Adie syndrome",
-   "Over time the affected pupil may become smaller than the fellow pupil (the 'little old Adie's pupil')",
-   "The condition is usually benign and idiopathic, thought to follow damage to the ciliary ganglion or short ciliary nerves"
+  "id": "adie_tonic_pupil",
+  "name": "Adie tonic pupil",
+  "aliases": [
+    "Holmes-Adie pupil",
+    "tonic pupil",
+    "Adie pupil",
+    "Adie syndrome"
   ],
-  "pathophysiology": "Adie tonic pupil results from damage to the parasympathetic ciliary ganglion or the short ciliary nerves, interrupting postganglionic innervation to the iris sphincter and ciliary muscle. Aberrant regeneration favours the far more numerous accommodative fibres over the pupillary fibres, so the pupil constricts poorly to light but responds tonically during the near reflex, producing light-near dissociation. Loss of innervation leads to denervation supersensitivity of the sphincter, which underlies the constriction to dilute cholinergic drops. The cause is usually idiopathic, sometimes following viral illness or local orbital injury.",
-  "additionalDifferentials": [
-   "Pharmacological mydriasis from topical or systemic anticholinergic exposure",
-   "Third nerve palsy with pupil involvement",
-   "Argyll Robertson pupils in neurosyphilis",
-   "Traumatic iris sphincter damage",
-   "Physiological anisocoria",
-   "Acute angle closure with a fixed mid-dilated pupil"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination for segmental iris palsy and vermiform movements",
-   "Dilute pilocarpine testing to demonstrate cholinergic supersensitivity",
-   "Assessment of deep tendon reflexes for Holmes-Adie syndrome",
-   "Serological testing for syphilis where light-near dissociation is present",
-   "Autonomic function assessment when widespread dysautonomia is suspected",
-   "Neuroimaging only if atypical features suggest a compressive third nerve lesion"
-  ],
-  "redFlags": [
-   "A dilated pupil with ptosis and ocular motility deficit suggesting a compressive third nerve palsy",
-   "Acute painful red eye with a fixed pupil suggesting angle-closure glaucoma",
-   "Bilateral light-near dissociation raising the possibility of neurosyphilis or midbrain disease",
-   "Associated widespread autonomic failure needing further evaluation"
-  ],
-  "prognosis": "The condition is benign; acuity is unaffected once accommodation adapts, though the pupil generally remains abnormal and may become progressively miotic, and any accompanying areflexia is permanent but harmless.",
-  "pitfalls": [
-   "Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging",
-   "Overlooking the near response and labelling the pupil simply as fixed and dilated",
-   "Failing to consider neurosyphilis when dissociation is bilateral",
-   "Not recognising pharmacological mydriasis, which fails to constrict even to standard pilocarpine"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure regarding the benign nature and preserved visual acuity once accommodation adapts",
-   "Offer dilute pilocarpine drops to improve cosmesis and ease accommodative symptoms and photophobia",
-   "Prescribe near optical correction for accommodative difficulty and tinted or photochromic lenses for photophobia",
-   "Exclude syphilis with serological testing where light-near dissociation is present",
-   "Assess deep tendon reflexes and consider autonomic evaluation, recognising Holmes-Adie syndrome",
-   "Refer to neuro-ophthalmology, reserving neuroimaging for atypical features suggesting a compressive third-nerve lesion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adie_tonic_pupil-pathway",
-   "title": "Adie tonic pupil: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A dilated pupil with ptosis and ocular motility deficit suggesting a compressive third nerve palsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination for segmental iris palsy and vermiform movements, Dilute pilocarpine testing to demonstrate cholinergic supersensitivity, Assessment of deep tendon reflexes for Holmes-Adie syndrome"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure regarding the benign nature and preserved visual acuity once accommodation adapts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adie tonic pupil."
-  }
- ],
- "tables": [
-  {
-   "id": "adie_tonic_pupil-matrix",
-   "title": "Adie tonic pupil: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
+      "The pupil shows light-near dissociation with a slow, tonic constriction to a sustained near effort and a slow tonic redilation afterwards",
+      "Slit-lamp examination often reveals segmental (vermiform) movements of the iris with sectors that fail to contract",
+      "Denervation supersensitivity means dilute pilocarpine constricts the affected pupil but not a normal one, confirming the diagnosis pharmacologically",
+      "Diminished or absent deep tendon reflexes together with a tonic pupil constitutes Holmes-Adie syndrome",
+      "Over time the affected pupil may become smaller than the fellow pupil (the 'little old Adie's pupil')",
+      "The condition is usually benign and idiopathic, thought to follow damage to the ciliary ganglion or short ciliary nerves"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination for segmental iris palsy and vermiform movements, Dilute pilocarpine testing to demonstrate cholinergic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adie tonic pupil results from damage to the parasympathetic ciliary ganglion or the short ciliary nerves, interrupting postganglionic innervation to the iris sphincter and ciliary muscle. Aberrant regeneration favours the far more numerous accommodative fibres over the pupillary fibres, so the pupil constricts poorly to light but responds tonically during the near reflex, producing light-near dissociation. Loss of innervation leads to denervation supersensitivity of the sphincter, which underlies the constriction to dilute cholinergic drops. The cause is usually idiopathic, sometimes following viral illness or local orbital injury.",
+    "additionalDifferentials": [
+      "Pharmacological mydriasis from topical or systemic anticholinergic exposure",
+      "Third nerve palsy with pupil involvement",
+      "Argyll Robertson pupils in neurosyphilis",
+      "Traumatic iris sphincter damage",
+      "Physiological anisocoria",
+      "Acute angle closure with a fixed mid-dilated pupil"
     ],
-    [
-     "Primary Differentials",
-     "Pharmacological mydriasis from topical or systemic anticholinergic exposure, Third nerve palsy with pupil involvement, Argyll",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination for segmental iris palsy and vermiform movements",
+      "Dilute pilocarpine testing to demonstrate cholinergic supersensitivity",
+      "Assessment of deep tendon reflexes for Holmes-Adie syndrome",
+      "Serological testing for syphilis where light-near dissociation is present",
+      "Autonomic function assessment when widespread dysautonomia is suspected",
+      "Neuroimaging only if atypical features suggest a compressive third nerve lesion"
     ],
-    [
-     "Management Strategy",
-     "Reassure regarding the benign nature and preserved visual acuity once accommodation adapts",
-     "Core treatment modality"
+    "redFlags": [
+      "A dilated pupil with ptosis and ocular motility deficit suggesting a compressive third nerve palsy",
+      "Acute painful red eye with a fixed pupil suggesting angle-closure glaucoma",
+      "Bilateral light-near dissociation raising the possibility of neurosyphilis or midbrain disease",
+      "Associated widespread autonomic failure needing further evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign; acuity is unaffected once accommodation adapts, though the pupil generally remains abnormal and may become progressively miotic, and any accompanying areflexia is permanent but harmless.",
+    "pitfalls": [
+      "Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging",
+      "Overlooking the near response and labelling the pupil simply as fixed and dilated",
+      "Failing to consider neurosyphilis when dissociation is bilateral",
+      "Not recognising pharmacological mydriasis, which fails to constrict even to standard pilocarpine"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure regarding the benign nature and preserved visual acuity once accommodation adapts",
+      "Offer dilute pilocarpine drops to improve cosmesis and ease accommodative symptoms and photophobia",
+      "Prescribe near optical correction for accommodative difficulty and tinted or photochromic lenses for photophobia",
+      "Exclude syphilis with serological testing where light-near dissociation is present",
+      "Assess deep tendon reflexes and consider autonomic evaluation, recognising Holmes-Adie syndrome",
+      "Refer to neuro-ophthalmology, reserving neuroimaging for atypical features suggesting a compressive third-nerve lesion"
     ]
-   ],
-   "caption": "Overview comparison matrix for adie tonic pupil."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adie-tonic-pupil-real-image",
-   "title": "Adie tonic pupil: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "adie_tonic_pupil-pathway",
+      "title": "Adie tonic pupil: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A dilated pupil with ptosis and ocular motility deficit suggesting a compressive third nerve palsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination for segmental iris palsy and vermiform movements, Dilute pilocarpine testing to demonstrate cholinergic supersensitivity, Assessment of deep tendon reflexes for Holmes-Adie syndrome"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure regarding the benign nature and preserved visual acuity once accommodation adapts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adie tonic pupil."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adie_tonic_pupil-matrix",
+      "title": "Adie tonic pupil: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents as a unilateral, mid-dilated pupil that reacts poorly and sluggishly to light in a young woman",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination for segmental iris palsy and vermiform movements, Dilute pilocarpine testing to demonstrate cholinergic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pharmacological mydriasis from topical or systemic anticholinergic exposure, Third nerve palsy with pupil involvement, Argyll",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure regarding the benign nature and preserved visual acuity once accommodation adapts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a tonic pupil for a compressive third nerve palsy and initiating unnecessary urgent imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adie tonic pupil."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adie_tonic_pupil-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination for segmental iris palsy and vermiform movements",
+          "cells": [
+            {
+              "text": "Segmental iris palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilute pilocarpine testing",
+          "cells": [
+            {
+              "text": "Cholinergic supersensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of deep tendon reflexes",
+          "cells": [
+            {
+              "text": "Holmes-Adie syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology where light-near dissociation is present",
+          "cells": [
+            {
+              "text": "Excludes neurosyphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function assessment when dysautonomia is suspected",
+          "cells": [
+            {
+              "text": "Widespread dysautonomia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging when atypical features suggest a compressive lesion",
+          "cells": [
+            {
+              "text": "Compressive third nerve lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adie_tonic_pupil-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pharmacological mydriasis from anticholinergic or sympathomimetic exposure",
+          "cells": [
+            {
+              "text": "Drug-induced mydriasis"
+            },
+            {
+              "text": "Dilute pilocarpine testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Third nerve palsy with pupil involvement",
+          "cells": [
+            {
+              "text": "Ptosis and motility deficit"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Argyll Robertson pupils in neurosyphilis",
+          "cells": [
+            {
+              "text": "Bilateral light-near dissociation"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute angle closure with a fixed mid-dilated pupil",
+          "cells": [
+            {
+              "text": "Painful red eye with fixed pupil"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adie_tonic_pupil-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; acuity unaffected once accommodation adapts"
+            },
+            {
+              "text": "Pupil generally remains abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilute pilocarpine drops",
+          "cells": [
+            {
+              "text": "Improves cosmesis and eases accommodative symptoms and photophobia"
+            },
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Near optical correction and tinted or photochromic lenses",
+          "cells": [
+            {
+              "text": "Accommodative difficulty and photophobia"
+            },
+            {
+              "text": "Lens options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Light-near dissociation"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep tendon reflexes and autonomic evaluation",
+          "cells": [
+            {
+              "text": "Holmes-Adie syndrome"
+            },
+            {
+              "text": "Recognise the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmology referral; imaging for atypical features",
+          "cells": [
+            {
+              "text": "Compressive third nerve lesion"
+            },
+            {
+              "text": "Atypical features only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adie_tonic_pupil-dx-mgmt",
+      "title": "Diagnosis and management of Adie tonic pupil",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral mid-dilated pupil reacting slowly to light in a young woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ptosis with motility deficit, painful red eye or bilateral light-near dissociation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging, angle assessment or syphilis testing as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp for vermiform iris movements; dilute pilocarpine test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dilute pilocarpine constricts the affected pupil only?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Adie tonic pupil confirmed; check reflexes and syphilis serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review third nerve palsy, anticholinergic mydriasis and angle closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure; visual acuity preserved once accommodation adapts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dilute pilocarpine drops for cosmesis and accommodative symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Near correction and tinted or photochromic lenses for photophobia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; pupil stays abnormal; acuity unaffected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

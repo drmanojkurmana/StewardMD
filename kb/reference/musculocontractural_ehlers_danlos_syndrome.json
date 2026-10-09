@@ -1,177 +1,464 @@
 {
- "id": "musculocontractural_ehlers_danlos_syndrome",
- "name": "Musculocontractural Ehlers-Danlos syndrome",
- "aliases": [
-  "mcEDS",
-  "adducted thumb-clubfoot syndrome",
-  "CHST14-related EDS"
- ],
- "class": "non_infective",
- "system": "Connective tissue",
- "specialty": "Clinical genetics / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Connective tissue disorder references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE, disrupting dermatan sulfate synthesis.",
-   "Presents at birth with multiple congenital contractures, characteristically adducted thumbs and talipes equinovarus.",
-   "Distinctive craniofacial features include a large or late-closing fontanelle, hypertelorism, short downslanting palpebral fissures, blue sclerae, low-set ears and a small mouth.",
-   "Progressive connective tissue fragility produces hyperextensible, easily bruised and fragile skin with atrophic scarring.",
-   "Recurrent large subcutaneous haematomas can be severe or life-threatening, and visceral or vascular rupture is reported.",
-   "Ophthalmological complications include glaucoma, high refractive errors and retinal detachment.",
-   "Progressive kyphoscoliosis, a tall slender habitus and recurrent joint dislocations develop over time.",
-   "Lifelong multisystem surveillance is required, covering cardiac, ophthalmic, skeletal and vascular systems."
+  "id": "musculocontractural_ehlers_danlos_syndrome",
+  "name": "Musculocontractural Ehlers-Danlos syndrome",
+  "aliases": [
+    "mcEDS",
+    "adducted thumb-clubfoot syndrome",
+    "CHST14-related EDS"
   ],
-  "pathophysiology": "CHST14 encodes dermatan 4-O-sulfotransferase-1, the enzyme that transfers sulfate to the dermatan sulfate glycosaminoglycan chains carried by proteoglycans such as decorin. Loss of enzyme function abolishes normal dermatan sulfate biosynthesis, so decorin bears aberrant chondroitin sulfate chains instead. Because decorin normally coats collagen fibrils and regulates their spacing and lateral assembly, this switch disorganises collagen fibril architecture throughout the extracellular matrix. The consequence is generalised connective tissue fragility affecting skin, joints, blood vessels, eyes and viscera, together with the congenital contractures and craniofacial features that define the subtype. Biallelic variants in DSE, encoding dermatan sulfate epimerase, impair the same pathway and cause a clinically similar phenotype.",
-  "additionalDifferentials": [
-   "Distal arthrogryposis syndromes",
-   "Kyphoscoliotic Ehlers-Danlos syndrome",
-   "Classical Ehlers-Danlos syndrome",
-   "Spondylodysplastic Ehlers-Danlos syndrome",
-   "Loeys-Dietz syndrome",
-   "Cutis laxa syndromes",
-   "Congenital myopathies with contractures"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of CHST14 and DSE",
-   "Analysis of glycosaminoglycan and dermatan sulfate composition where available",
-   "Echocardiography and vascular imaging for structural and rupture risk",
-   "Comprehensive ophthalmological assessment including intraocular pressure",
-   "Spinal and skeletal imaging to monitor scoliosis and contractures",
-   "Cranial or soft-tissue imaging when a large haematoma is suspected"
-  ],
-  "redFlags": [
-   "A large or rapidly expanding subcutaneous haematoma",
-   "Signs of visceral or arterial rupture",
-   "Raised intraocular pressure or acute visual loss",
-   "Rapidly progressive scoliosis with respiratory compromise",
-   "Haemodynamic instability after minor trauma"
-  ],
-  "prognosis": "The course is variable, with multisystem connective tissue fragility causing significant lifelong morbidity. Life-threatening haematomas and vascular or visceral rupture can occur, and life expectancy may be reduced in severely affected individuals.",
-  "pitfalls": [
-   "Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder.",
-   "Overlooking the autosomal recessive inheritance and the recurrence risk for siblings.",
-   "Underestimating the risk of large, potentially life-threatening subcutaneous haematomas.",
-   "Failing to screen for ocular complications such as glaucoma and retinal detachment."
-  ],
-  "references": [
-   "International EDS classification consensus criteria",
-   "Standard medical genetics textbooks",
-   "Peer-reviewed connective tissue disease reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and bleeding risk",
-   "Physiotherapy, splinting and orthopaedic or orthotic management of congenital contractures, talipes and progressive scoliosis",
-   "Meticulous wound and skin care with careful surgical technique and tension-free closure given fragile, atrophic-scarring skin",
-   "Vigilance for large subcutaneous haematomas and vascular or visceral rupture, with prompt imaging and haemostatic or surgical management of significant bleeds",
-   "Cardiovascular surveillance with echocardiography and vascular imaging for structural anomalies and rupture risk",
-   "Regular ophthalmological review including intraocular pressure for glaucoma, high refractive errors and retinal detachment",
-   "Autosomal recessive genetic counselling for CHST14 and DSE variants, with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "musculocontractural_ehlers_danlos_syndrome-pathway",
-   "title": "Musculocontractural Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE, disrupting dermatan sulfate synthesis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A large or rapidly expanding subcutaneous haematoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of CHST14 and DSE, Analysis of glycosaminoglycan and dermatan sulfate composition where available, Echocardiography and vascular imaging for structural and rupture risk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and bleeding risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of musculocontractural ehlers-danlos syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "musculocontractural_ehlers_danlos_syndrome-matrix",
-   "title": "Musculocontractural Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Connective tissue",
+  "specialty": "Clinical genetics / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Connective tissue disorder references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE, disrupting dermatan sulfate synthesis.",
+      "Presents at birth with multiple congenital contractures, characteristically adducted thumbs and talipes equinovarus.",
+      "Distinctive craniofacial features include a large or late-closing fontanelle, hypertelorism, short downslanting palpebral fissures, blue sclerae, low-set ears and a small mouth.",
+      "Progressive connective tissue fragility produces hyperextensible, easily bruised and fragile skin with atrophic scarring.",
+      "Recurrent large subcutaneous haematomas can be severe or life-threatening, and visceral or vascular rupture is reported.",
+      "Ophthalmological complications include glaucoma, high refractive errors and retinal detachment.",
+      "Progressive kyphoscoliosis, a tall slender habitus and recurrent joint dislocations develop over time.",
+      "Lifelong multisystem surveillance is required, covering cardiac, ophthalmic, skeletal and vascular systems."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of CHST14 and DSE, Analysis of glycosaminoglycan and dermatan sulfate composition where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CHST14 encodes dermatan 4-O-sulfotransferase-1, the enzyme that transfers sulfate to the dermatan sulfate glycosaminoglycan chains carried by proteoglycans such as decorin. Loss of enzyme function abolishes normal dermatan sulfate biosynthesis, so decorin bears aberrant chondroitin sulfate chains instead. Because decorin normally coats collagen fibrils and regulates their spacing and lateral assembly, this switch disorganises collagen fibril architecture throughout the extracellular matrix. The consequence is generalised connective tissue fragility affecting skin, joints, blood vessels, eyes and viscera, together with the congenital contractures and craniofacial features that define the subtype. Biallelic variants in DSE, encoding dermatan sulfate epimerase, impair the same pathway and cause a clinically similar phenotype.",
+    "additionalDifferentials": [
+      "Distal arthrogryposis syndromes",
+      "Kyphoscoliotic Ehlers-Danlos syndrome",
+      "Classical Ehlers-Danlos syndrome",
+      "Spondylodysplastic Ehlers-Danlos syndrome",
+      "Loeys-Dietz syndrome",
+      "Cutis laxa syndromes",
+      "Congenital myopathies with contractures"
     ],
-    [
-     "Primary Differentials",
-     "Distal arthrogryposis syndromes, Kyphoscoliotic Ehlers-Danlos syndrome, Classical Ehlers-Danlos syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of CHST14 and DSE",
+      "Analysis of glycosaminoglycan and dermatan sulfate composition where available",
+      "Echocardiography and vascular imaging for structural and rupture risk",
+      "Comprehensive ophthalmological assessment including intraocular pressure",
+      "Spinal and skeletal imaging to monitor scoliosis and contractures",
+      "Cranial or soft-tissue imaging when a large haematoma is suspected"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and",
-     "Core treatment modality"
+    "redFlags": [
+      "A large or rapidly expanding subcutaneous haematoma",
+      "Signs of visceral or arterial rupture",
+      "Raised intraocular pressure or acute visual loss",
+      "Rapidly progressive scoliosis with respiratory compromise",
+      "Haemodynamic instability after minor trauma"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable, with multisystem connective tissue fragility causing significant lifelong morbidity. Life-threatening haematomas and vascular or visceral rupture can occur, and life expectancy may be reduced in severely affected individuals.",
+    "pitfalls": [
+      "Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder.",
+      "Overlooking the autosomal recessive inheritance and the recurrence risk for siblings.",
+      "Underestimating the risk of large, potentially life-threatening subcutaneous haematomas.",
+      "Failing to screen for ocular complications such as glaucoma and retinal detachment."
+    ],
+    "references": [
+      "International EDS classification consensus criteria",
+      "Standard medical genetics textbooks",
+      "Peer-reviewed connective tissue disease reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and bleeding risk",
+      "Physiotherapy, splinting and orthopaedic or orthotic management of congenital contractures, talipes and progressive scoliosis",
+      "Meticulous wound and skin care with careful surgical technique and tension-free closure given fragile, atrophic-scarring skin",
+      "Vigilance for large subcutaneous haematomas and vascular or visceral rupture, with prompt imaging and haemostatic or surgical management of significant bleeds",
+      "Cardiovascular surveillance with echocardiography and vascular imaging for structural anomalies and rupture risk",
+      "Regular ophthalmological review including intraocular pressure for glaucoma, high refractive errors and retinal detachment",
+      "Autosomal recessive genetic counselling for CHST14 and DSE variants, with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for musculocontractural ehlers-danlos syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "musculocontractural-ehlers-danlos-syndrome-real-image",
-   "title": "Musculocontractural Ehlers-Danlos syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "musculocontractural_ehlers_danlos_syndrome-pathway",
+      "title": "Musculocontractural Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE, disrupting dermatan sulfate synthesis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A large or rapidly expanding subcutaneous haematoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of CHST14 and DSE, Analysis of glycosaminoglycan and dermatan sulfate composition where available, Echocardiography and vascular imaging for structural and rupture risk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and bleeding risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of musculocontractural ehlers-danlos syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "musculocontractural_ehlers_danlos_syndrome-matrix",
+      "title": "Musculocontractural Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive, caused by biallelic variants in CHST14, encoding dermatan 4-O-sulfotransferase-1, or less often in DSE,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of CHST14 and DSE, Analysis of glycosaminoglycan and dermatan sulfate composition where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Distal arthrogryposis syndromes, Kyphoscoliotic Ehlers-Danlos syndrome, Classical Ehlers-Danlos syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists; management is supportive and directed at connective tissue fragility, contractures and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the presentation as isolated arthrogryposis and missing the wider connective tissue disorder.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for musculocontractural ehlers-danlos syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Connective tissue disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "musculocontractural_ehlers_danlos_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of CHST14 and DSE",
+          "cells": [
+            {
+              "text": "Biallelic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycosaminoglycan and dermatan sulfate analysis",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and vascular imaging",
+          "cells": [
+            {
+              "text": "Structural anomalies and rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comprehensive ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Intraocular pressure; glaucoma, high refractive errors, retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and skeletal imaging",
+          "cells": [
+            {
+              "text": "Scoliosis and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial or soft-tissue imaging",
+          "cells": [
+            {
+              "text": "When a large haematoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "musculocontractural_ehlers_danlos_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal arthrogryposis syndromes",
+          "cells": [
+            {
+              "text": "Contractures at birth can look like isolated arthrogryposis; the wider connective tissue disorder must not be missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classical Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "musculocontractural_ehlers_danlos_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; directed at fragility, contractures and bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, splinting and orthopaedic management",
+          "cells": [
+            {
+              "text": "Congenital contractures, talipes and progressive scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and skin care",
+          "cells": [
+            {
+              "text": "Careful surgical technique and tension-free closure given fragile skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematoma and rupture vigilance",
+          "cells": [
+            {
+              "text": "Prompt imaging and haemostatic or surgical management of significant bleeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and vascular imaging for structural anomalies and rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Intraocular pressure for glaucoma, refractive errors and retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CHST14 and DSE variants; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "musculocontractural_ehlers_danlos_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Musculocontractural Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple congenital contractures, adducted thumbs and craniofacial features at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (expanding haematoma, visceral or arterial rupture, raised IOP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and haemostatic or surgical management of significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CHST14 and DSE testing, echocardiography, vascular imaging, ophthalmology, spine imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic CHST14 or DSE variants confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider distal arthrogryposis or another Ehlers-Danlos subtype; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, splinting and orthopaedic management of contractures and scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tension-free closure and careful skin and wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiovascular surveillance with echocardiography and vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular ophthalmological review including intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong morbidity; life-threatening haematomas or rupture can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

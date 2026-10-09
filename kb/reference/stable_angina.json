@@ -1,175 +1,692 @@
 {
- "id": "stable_angina",
- "name": "Stable angina pectoris",
- "aliases": [
-  "chronic stable angina",
-  "exertional angina",
-  "stable ischaemic heart disease",
-  "SIHD"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes by rest or short-acting nitrates",
-   "Discomfort commonly radiates to the left arm, neck, or jaw, and anginal equivalents such as exertional breathlessness or fatigue are frequent in older adults, women, and people with diabetes",
-   "Symptoms are reproducible and stable over weeks to months; a change in the threshold, frequency, or duration signals progression toward an acute coronary syndrome",
-   "The resting ECG is often normal between episodes, so a normal tracing does not exclude significant coronary disease",
-   "Functional imaging or stress testing establishes inducible ischaemia, while coronary CT angiography is increasingly used to assess anatomy in patients at low to intermediate risk",
-   "Management combines aggressive risk-factor and lifestyle modification, antianginal therapy to control symptoms, and antiplatelet and statin therapy to reduce cardiovascular events",
-   "Revascularisation is considered for symptoms refractory to medical therapy or for high-risk anatomy such as significant left main or proximal multivessel disease",
-   "Grading anginal severity (for example by the Canadian Cardiovascular Society classes) helps track response to treatment and guide escalation"
+  "id": "stable_angina",
+  "name": "Stable angina pectoris",
+  "aliases": [
+    "chronic stable angina",
+    "exertional angina",
+    "stable ischaemic heart disease",
+    "SIHD"
   ],
-  "pathophysiology": "Stable angina results from a mismatch between myocardial oxygen demand and supply, most often caused by fixed atherosclerotic narrowing of one or more epicardial coronary arteries. When demand rises with exertion, a flow-limiting stenosis cannot augment supply sufficiently, producing transient subendocardial ischaemia and the sensation of angina. Endothelial dysfunction, coronary microvascular disease, and vasospasm can contribute or cause ischaemia even without high-grade obstruction. Ischaemia is reversible and resolves once demand falls, distinguishing it from the sustained supply-demand failure of infarction.",
-  "additionalDifferentials": [
-   "Acute coronary syndrome (unstable angina, NSTEMI, STEMI)",
-   "Gastro-oesophageal reflux and oesophageal spasm",
-   "Musculoskeletal or costochondral chest pain",
-   "Pericarditis",
-   "Aortic dissection",
-   "Pulmonary embolism",
-   "Anxiety or panic disorder"
-  ],
-  "additionalInvestigations": [
-   "Resting 12-lead ECG and comparison with prior tracings",
-   "Exercise or pharmacological stress testing with ECG or imaging to demonstrate inducible ischaemia",
-   "Coronary CT angiography to define anatomy in low to intermediate risk patients",
-   "Invasive coronary angiography when high-risk features or refractory symptoms are present",
-   "Assessment for anaemia, thyroid dysfunction, and metabolic risk factors including lipids and glucose",
-   "Resting echocardiography to assess left ventricular function and exclude structural disease"
-  ],
-  "redFlags": [
-   "Angina occurring at rest, at low workload, or with escalating frequency or duration, suggesting an evolving acute coronary syndrome",
-   "Chest pain with haemodynamic instability, syncope, or new heart failure",
-   "Tearing or interscapular pain suggesting aortic dissection",
-   "Prolonged pain unrelieved by rest or nitrates that may indicate infarction"
-  ],
-  "prognosis": "Prognosis depends on the extent and location of coronary disease, left ventricular function, and control of risk factors; many patients do well for years on guideline-directed medical therapy, but left main or extensive multivessel disease and impaired ventricular function carry higher event rates.",
-  "pitfalls": [
-   "Assuming a normal resting ECG excludes significant coronary disease",
-   "Overlooking atypical or equivalent presentations in women, older adults, and people with diabetes",
-   "Attributing new rest or crescendo symptoms to stable angina rather than recognising an acute coronary syndrome",
-   "Focusing on symptom relief while neglecting event-reducing secondary prevention"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers first-line and long-acting nitrates, ivabradine, ranolazine or nicorandil added as needed",
-   "Event-prevention therapy with antiplatelet (aspirin or clopidogrel) and statin",
-   "Aggressive risk-factor and lifestyle modification: smoking cessation, blood pressure and diabetes control, diet, weight management and regular exercise",
-   "Revascularisation by percutaneous coronary intervention or coronary artery bypass grafting for symptoms refractory to medical therapy or prognostically important anatomy such as left main or multivessel disease",
-   "Identify and treat exacerbating factors such as anaemia, thyroid dysfunction and tachyarrhythmia",
-   "Monitor symptom stability and escalate promptly if the threshold, frequency or duration changes, suggesting progression to an acute coronary syndrome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "stable_angina-pathway",
-   "title": "Stable angina pectoris: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes by rest or short-acting nitrates",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Angina occurring at rest, at low workload, or with escalating frequency or duration, suggesting an evolving acute coronary syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Resting 12-lead ECG and comparison with prior tracings, Exercise or pharmacological stress testing with ECG or imaging to demonstrate inducible ischaemia, Coronary CT angiography to define anatomy in low to intermediate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers first-line and long-acting nitrates, ivabradine, ranolazine or nicorandil added as needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal resting ECG excludes significant coronary disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of stable angina pectoris."
-  }
- ],
- "tables": [
-  {
-   "id": "stable_angina-matrix",
-   "title": "Stable angina pectoris: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes by rest or short-acting nitrates",
+      "Discomfort commonly radiates to the left arm, neck, or jaw, and anginal equivalents such as exertional breathlessness or fatigue are frequent in older adults, women, and people with diabetes",
+      "Symptoms are reproducible and stable over weeks to months; a change in the threshold, frequency, or duration signals progression toward an acute coronary syndrome",
+      "The resting ECG is often normal between episodes, so a normal tracing does not exclude significant coronary disease",
+      "Functional imaging or stress testing establishes inducible ischaemia, while coronary CT angiography is increasingly used to assess anatomy in patients at low to intermediate risk",
+      "Management combines aggressive risk-factor and lifestyle modification, antianginal therapy to control symptoms, and antiplatelet and statin therapy to reduce cardiovascular events",
+      "Revascularisation is considered for symptoms refractory to medical therapy or for high-risk anatomy such as significant left main or proximal multivessel disease",
+      "Grading anginal severity (for example by the Canadian Cardiovascular Society classes) helps track response to treatment and guide escalation"
     ],
-    [
-     "Key Investigations",
-     "Resting 12-lead ECG and comparison with prior tracings, Exercise or pharmacological stress testing with ECG or imaging to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Stable angina results from a mismatch between myocardial oxygen demand and supply, most often caused by fixed atherosclerotic narrowing of one or more epicardial coronary arteries. When demand rises with exertion, a flow-limiting stenosis cannot augment supply sufficiently, producing transient subendocardial ischaemia and the sensation of angina. Endothelial dysfunction, coronary microvascular disease, and vasospasm can contribute or cause ischaemia even without high-grade obstruction. Ischaemia is reversible and resolves once demand falls, distinguishing it from the sustained supply-demand failure of infarction.",
+    "additionalDifferentials": [
+      "Acute coronary syndrome (unstable angina, NSTEMI, STEMI)",
+      "Gastro-oesophageal reflux and oesophageal spasm",
+      "Musculoskeletal or costochondral chest pain",
+      "Pericarditis",
+      "Aortic dissection",
+      "Pulmonary embolism",
+      "Anxiety or panic disorder"
     ],
-    [
-     "Primary Differentials",
-     "Acute coronary syndrome (unstable angina, NSTEMI, STEMI), Gastro-oesophageal reflux and oesophageal spasm, Musculoskeletal or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Resting 12-lead ECG and comparison with prior tracings",
+      "Exercise or pharmacological stress testing with ECG or imaging to demonstrate inducible ischaemia",
+      "Coronary CT angiography to define anatomy in low to intermediate risk patients",
+      "Invasive coronary angiography when high-risk features or refractory symptoms are present",
+      "Assessment for anaemia, thyroid dysfunction, and metabolic risk factors including lipids and glucose",
+      "Resting echocardiography to assess left ventricular function and exclude structural disease"
     ],
-    [
-     "Management Strategy",
-     "Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers",
-     "Core treatment modality"
+    "redFlags": [
+      "Angina occurring at rest, at low workload, or with escalating frequency or duration, suggesting an evolving acute coronary syndrome",
+      "Chest pain with haemodynamic instability, syncope, or new heart failure",
+      "Tearing or interscapular pain suggesting aortic dissection",
+      "Prolonged pain unrelieved by rest or nitrates that may indicate infarction"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal resting ECG excludes significant coronary disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the extent and location of coronary disease, left ventricular function, and control of risk factors; many patients do well for years on guideline-directed medical therapy, but left main or extensive multivessel disease and impaired ventricular function carry higher event rates.",
+    "pitfalls": [
+      "Assuming a normal resting ECG excludes significant coronary disease",
+      "Overlooking atypical or equivalent presentations in women, older adults, and people with diabetes",
+      "Attributing new rest or crescendo symptoms to stable angina rather than recognising an acute coronary syndrome",
+      "Focusing on symptom relief while neglecting event-reducing secondary prevention"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers first-line and long-acting nitrates, ivabradine, ranolazine or nicorandil added as needed",
+      "Event-prevention therapy with antiplatelet (aspirin or clopidogrel) and statin",
+      "Aggressive risk-factor and lifestyle modification: smoking cessation, blood pressure and diabetes control, diet, weight management and regular exercise",
+      "Revascularisation by percutaneous coronary intervention or coronary artery bypass grafting for symptoms refractory to medical therapy or prognostically important anatomy such as left main or multivessel disease",
+      "Identify and treat exacerbating factors such as anaemia, thyroid dysfunction and tachyarrhythmia",
+      "Monitor symptom stability and escalate promptly if the threshold, frequency or duration changes, suggesting progression to an acute coronary syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for stable angina pectoris."
-  }
- ],
- "diagrams": [
-  {
-   "id": "stable-angina-real-image",
-   "title": "Stable angina pectoris: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "stable_angina-pathway",
+      "title": "Stable angina pectoris: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes by rest or short-acting nitrates",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Angina occurring at rest, at low workload, or with escalating frequency or duration, suggesting an evolving acute coronary syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Resting 12-lead ECG and comparison with prior tracings, Exercise or pharmacological stress testing with ECG or imaging to demonstrate inducible ischaemia, Coronary CT angiography to define anatomy in low to intermediate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers first-line and long-acting nitrates, ivabradine, ranolazine or nicorandil added as needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal resting ECG excludes significant coronary disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of stable angina pectoris."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "stable_angina-matrix",
+      "title": "Stable angina pectoris: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic presentation is retrosternal chest discomfort or pressure precipitated by exertion or emotion and relieved within minutes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Resting 12-lead ECG and comparison with prior tracings, Exercise or pharmacological stress testing with ECG or imaging to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute coronary syndrome (unstable angina, NSTEMI, STEMI), Gastro-oesophageal reflux and oesophageal spasm, Musculoskeletal or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antianginal therapy to control symptoms: short-acting nitrates for acute relief, with beta-blockers or calcium-channel blockers",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal resting ECG excludes significant coronary disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for stable angina pectoris."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Manual of Medicine, 20th ed., chart: choice of test for known/suspected CAD",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 243-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Angina Pectoris",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/angina-pectoris",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 230-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cad-test-choice",
+      "title": "Picking a stress test for known or suspected coronary artery disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected CAD: decide what the test must answer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Can the patient exercise adequately?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Plan a pharmacologic (drug-stress) imaging study",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Is structural (wall motion, valve, chamber) information needed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Dobutamine stress echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "LBBB, paced rhythm, or prior myocardial infarction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Pharmacologic nuclear perfusion study; PET is worth considering in morbid obesity or large dense breasts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Dobutamine stress echo or a pharmacologic nuclear study, either is acceptable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Has the patient had coronary revascularization before?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Can the resting ECG be interpreted for ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Exercise ECG (treadmill) test",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Plan an exercise imaging study",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Is structural information needed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Exercise echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n15",
+          "type": "decision",
+          "text": "LBBB or paced rhythm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n16",
+          "type": "outcome",
+          "text": "Pharmacologic nuclear perfusion study",
+          "cite": "c1"
+        },
+        {
+          "id": "n17",
+          "type": "decision",
+          "text": "Prior myocardial infarction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n18",
+          "type": "outcome",
+          "text": "Exercise nuclear perfusion study",
+          "cite": "c1"
+        },
+        {
+          "id": "n19",
+          "type": "outcome",
+          "text": "Exercise nuclear study or exercise echo, either is acceptable",
+          "cite": "c1"
+        },
+        {
+          "id": "n20",
+          "type": "outcome",
+          "text": "Myocardial viability: PET or thallium-201 imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Ischaemia testing"
+        },
+        {
+          "from": "n1",
+          "to": "n20",
+          "label": "Viability question"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        },
+        {
+          "from": "n15",
+          "to": "n16",
+          "label": "Yes"
+        },
+        {
+          "from": "n15",
+          "to": "n17",
+          "label": "No"
+        },
+        {
+          "from": "n17",
+          "to": "n18",
+          "label": "Yes"
+        },
+        {
+          "from": "n17",
+          "to": "n19",
+          "label": "No"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stable_angina-diagnostic",
+      "kind": "diagnostic",
+      "title": "NYHA and CCS functional classes",
+      "rowHeader": "Class",
+      "columns": [
+        "New York Heart Association (NYHA) functional class",
+        "Canadian Cardiovascular Society (CCS) functional class"
+      ],
+      "rows": [
+        {
+          "parameter": "Class I",
+          "cells": [
+            {
+              "text": "Cardiac disease without limitation of physical activity. Ordinary activity does not cause undue fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Ordinary activity such as walking and climbing stairs does not cause angina. Angina occurs with strenuous, rapid or prolonged exertion at work or recreation."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class II",
+          "cells": [
+            {
+              "text": "Cardiac disease with slight limitation of physical activity. Comfortable at rest. Ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Slight limitation of ordinary activity. Angina on walking or climbing stairs rapidly, walking uphill, walking or climbing stairs after meals, in cold, under emotional stress, or only in the few hours after awakening. Angina on walking more than two blocks on the level or climbing more than one flight of stairs at a normal pace in normal conditions."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class III",
+          "cells": [
+            {
+              "text": "Cardiac disease with marked limitation of physical activity. Comfortable at rest. Less than ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Marked limitation of ordinary physical activity. Angina on walking one to two blocks on the level and climbing more than one flight of stairs in normal conditions."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class IV",
+          "cells": [
+            {
+              "text": "Cardiac disease with inability to carry on any physical activity without discomfort. Symptoms of cardiac insufficiency or the anginal syndrome may be present even at rest. Any activity increases discomfort."
+            },
+            {
+              "text": "Inability to carry on any physical activity without discomfort. Anginal syndrome may be present at rest."
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CCS class III wording is kept as printed in the source."
+    },
+    {
+      "id": "stable_angina-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic stable angina",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute coronary syndrome (unstable angina or MI)",
+          "cells": [
+            {
+              "text": "{{hy:Discomfort lasting over 20 minutes, at rest, or with syncope or heart failure}}; new, worsening, nocturnal or decubitus angina is handled as unstable angina"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GI causes (GERD, oesophageal spasm, dyspepsia, gallstones)",
+          "cells": [
+            {
+              "text": "Bloating, wind and upper abdominal discomfort; patients often call it indigestion, and belching may ease it"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pericarditis",
+          "cells": [
+            {
+              "text": "Pain worse lying flat, especially when sharp"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fleeting chest sensations",
+          "cells": [
+            {
+              "text": "Ischaemic pain takes a minute or more to settle, so very brief sensations are rarely angina"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Raised cardiac workload without atherosclerosis (hypertension, aortic stenosis, aortic regurgitation, hypertrophic cardiomyopathy)",
+          "cells": [
+            {
+              "text": "Can cause true angina even with normal coronary arteries"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Costochondritis, aortic dissection, mitral valve prolapse, SVT, atrial fibrillation, anxiety or panic, hyperventilation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The last row lists mimics the source names without separating features. A best-test column was left out because the source gives no separating test for most mimics."
+    },
+    {
+      "id": "stable_angina-treatment",
+      "kind": "treatment",
+      "title": "Treatment of stable angina",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sublingual nitroglycerin",
+          "cells": [
+            {
+              "text": "Acute attacks, or before exertion"
+            },
+            {
+              "text": "Relief in about 1.5 to 3 minutes, complete by about 5 minutes; repeat every 4 to 5 minutes up to 3 times if relief is incomplete"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "{{hy:First line, especially with LVEF 50% or less or prior MI}}"
+            },
+            {
+              "text": "Titrate up until bradycardia or side effects limit; avoid agents other than labetalol or carvedilol in vasospastic angina"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Calcium channel blocker",
+          "cells": [
+            {
+              "text": "Non-dihydropyridine (diltiazem, verapamil) if beta-blocker not tolerated or asthma; dihydropyridine added if symptoms persist on nitrates"
+            },
+            {
+              "text": "Do not use short-acting nifedipine alone; amlodipine can be used in LV systolic dysfunction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Long-acting nitrate (isosorbide dinitrate or mononitrate, nitroglycerin patch)",
+          "cells": [
+            {
+              "text": "Add-on for symptom control"
+            },
+            {
+              "text": "Allow a nitrate-free interval: 8 to 10 hours for nitroglycerin, 12 hours for isosorbide dinitrate; once-daily sustained-release isosorbide mononitrate does not cause tolerance"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ranolazine",
+          "cells": [
+            {
+              "text": "Symptoms persist despite beta-blocker, nitrate or calcium channel blocker"
+            },
+            {
+              "text": "May prolong QT"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ivabradine",
+          "cells": [
+            {
+              "text": "Sinus rhythm at 70 bpm or more and unable to take beta-blockers or other antianginals"
+            },
+            {
+              "text": "Source warns it may be harmful when added to standard therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Clopidogrel alone if aspirin not tolerated; clopidogrel with aspirin after PCI, usually for 12 months (prasugrel or ticagrelor are alternatives)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "High-intensity statin",
+          "cells": [
+            {
+              "text": "All patients who tolerate it"
+            },
+            {
+              "text": "Ezetimibe or PCSK9 inhibitor as add-on or alternative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ACE inhibitor (ARB or ARNI as alternatives)",
+          "cells": [
+            {
+              "text": "Coexisting heart failure, CKD, hypertension or diabetes"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Coronary angiography",
+          "cells": [
+            {
+              "text": "CCS class III or IV angina on medical therapy; high risk on noninvasive testing; chest pain of unclear cause with equivocal noninvasive tests"
+            },
+            {
+              "text": "Indication list from Tables PDF Table 230-1"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Revascularization: PCI",
+          "cells": [
+            {
+              "text": "Angina despite drugs that impairs quality of life, or high-risk anatomy"
+            },
+            {
+              "text": "Usually preferred for 1 to 2 vessel disease with suitable anatomy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Revascularization: CABG",
+          "cells": [
+            {
+              "text": "Diabetes with multivessel disease, or diffuse complex multivessel disease"
+            },
+            {
+              "text": "{{hy:Improves survival in left main disease and in 3-vessel disease with poor LV function}}"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Drug doses are not given because the cited source does not state them. Merck adds that angiography is done mainly when revascularization is being considered, with over 70% diameter narrowing usually significant when FFR is unavailable."
+    }
+  ]
 }

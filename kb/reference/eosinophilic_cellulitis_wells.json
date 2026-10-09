@@ -1,173 +1,462 @@
 {
- "id": "eosinophilic_cellulitis_wells",
- "name": "Eosinophilic cellulitis (Wells syndrome)",
- "aliases": [
-  "Wells syndrome",
-  "eosinophilic cellulitis",
-  "recurrent granulomatous dermatitis with eosinophilia"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail to respond to antibiotics and lack fever",
-   "Lesions may evolve over days into slate-grey or greenish infiltrated plaques as they resolve, and the eruption tends to recur",
-   "It is a reactive hypersensitivity process rather than an infection, often triggered by insect bites, drugs, infections or, occasionally, underlying haematological disease",
-   "Peripheral blood eosinophilia is common but not invariable",
-   "The histological hallmark is dermal eosinophilic infiltration with 'flame figures', formed by eosinophil granule proteins coating collagen bundles",
-   "Diagnosis rests on recognising the mismatch between a cellulitis-like appearance and the biopsy findings",
-   "Treatment is with systemic corticosteroids for troublesome disease and identification of any trigger; many cases eventually remit"
+  "id": "eosinophilic_cellulitis_wells",
+  "name": "Eosinophilic cellulitis (Wells syndrome)",
+  "aliases": [
+    "Wells syndrome",
+    "eosinophilic cellulitis",
+    "recurrent granulomatous dermatitis with eosinophilia"
   ],
-  "pathophysiology": "Wells syndrome is thought to represent a hypersensitivity reaction with abnormal eosinophil recruitment and activation in the skin, often in response to an identifiable stimulus such as an arthropod bite, drug, infection or underlying disorder. Activated eosinophils infiltrate the dermis and degranulate, depositing major basic protein and other granule proteins onto collagen fibres to create the characteristic flame figures, surrounded by histiocytes and giant cells in later stages. This eosinophil-driven tissue reaction produces the oedematous, cellulitis-like plaques and their tendency to recur.",
-  "additionalDifferentials": [
-   "Bacterial cellulitis / erysipelas",
-   "Acute contact dermatitis",
-   "Urticaria and angio-oedema",
-   "Arthropod bite reactions",
-   "Hypereosinophilic syndrome with skin involvement",
-   "Sweet syndrome"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy demonstrating tissue eosinophilia and flame figures",
-   "Full blood count for peripheral eosinophilia",
-   "Investigation for triggers (recent bites, drugs, infections)",
-   "Stool examination for parasites where relevant",
-   "Evaluation for underlying haematological or myeloproliferative disease in persistent cases",
-   "Inflammatory markers to help distinguish from infective cellulitis"
-  ],
-  "redFlags": [
-   "Marked or persistent eosinophilia suggesting hypereosinophilic syndrome with organ involvement",
-   "Failure to respond, prompting reassessment for underlying malignancy or myeloproliferative disease",
-   "Genuine secondary bacterial infection of oedematous skin",
-   "Extensive or blistering lesions with systemic upset"
-  ],
-  "prognosis": "The condition is benign but characteristically relapsing, with individual episodes resolving over weeks, sometimes leaving transient discoloration; most patients eventually enter remission, though recurrent flares can be troublesome and steroid-dependent.",
-  "pitfalls": [
-   "Repeatedly treating it as bacterial cellulitis with escalating antibiotics",
-   "Not biopsying antibiotic-unresponsive 'cellulitis' to reveal the eosinophilic pattern",
-   "Assuming flame figures are specific, when they occur in other eosinophil-rich dermatoses",
-   "Overlooking an underlying haematological disorder in persistent or severe cases"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections",
-   "Topical or tapering systemic corticosteroids as the mainstay for symptomatic oedematous plaques",
-   "Oral antihistamines for pruritus and symptomatic relief",
-   "Steroid-sparing agents such as dapsone or ciclosporin, or anti-IL-5 biologics, for relapsing or steroid-dependent disease",
-   "Confirm the diagnosis on biopsy and avoid unnecessary prolonged antibiotics given the mimicry of bacterial cellulitis",
-   "Investigate for and manage underlying haematological or myeloproliferative disease in persistent cases",
-   "Dermatology referral for recurrent or refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilic_cellulitis_wells-pathway",
-   "title": "Eosinophilic cellulitis (Wells syndrome): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail to respond to antibiotics and lack fever",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked or persistent eosinophilia suggesting hypereosinophilic syndrome with organ involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy demonstrating tissue eosinophilia and flame figures, Full blood count for peripheral eosinophilia, Investigation for triggers (recent bites, drugs, infections)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly treating it as bacterial cellulitis with escalating antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilic cellulitis (wells syndrome)."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilic_cellulitis_wells-matrix",
-   "title": "Eosinophilic cellulitis (Wells syndrome): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail to respond to antibiotics and lack fever",
+      "Lesions may evolve over days into slate-grey or greenish infiltrated plaques as they resolve, and the eruption tends to recur",
+      "It is a reactive hypersensitivity process rather than an infection, often triggered by insect bites, drugs, infections or, occasionally, underlying haematological disease",
+      "Peripheral blood eosinophilia is common but not invariable",
+      "The histological hallmark is dermal eosinophilic infiltration with 'flame figures', formed by eosinophil granule proteins coating collagen bundles",
+      "Diagnosis rests on recognising the mismatch between a cellulitis-like appearance and the biopsy findings",
+      "Treatment is with systemic corticosteroids for troublesome disease and identification of any trigger; many cases eventually remit"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy demonstrating tissue eosinophilia and flame figures, Full blood count for peripheral eosinophilia, Investigation for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Wells syndrome is thought to represent a hypersensitivity reaction with abnormal eosinophil recruitment and activation in the skin, often in response to an identifiable stimulus such as an arthropod bite, drug, infection or underlying disorder. Activated eosinophils infiltrate the dermis and degranulate, depositing major basic protein and other granule proteins onto collagen fibres to create the characteristic flame figures, surrounded by histiocytes and giant cells in later stages. This eosinophil-driven tissue reaction produces the oedematous, cellulitis-like plaques and their tendency to recur.",
+    "additionalDifferentials": [
+      "Bacterial cellulitis / erysipelas",
+      "Acute contact dermatitis",
+      "Urticaria and angio-oedema",
+      "Arthropod bite reactions",
+      "Hypereosinophilic syndrome with skin involvement",
+      "Sweet syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial cellulitis / erysipelas, Acute contact dermatitis, Urticaria and angio-oedema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy demonstrating tissue eosinophilia and flame figures",
+      "Full blood count for peripheral eosinophilia",
+      "Investigation for triggers (recent bites, drugs, infections)",
+      "Stool examination for parasites where relevant",
+      "Evaluation for underlying haematological or myeloproliferative disease in persistent cases",
+      "Inflammatory markers to help distinguish from infective cellulitis"
     ],
-    [
-     "Management Strategy",
-     "Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked or persistent eosinophilia suggesting hypereosinophilic syndrome with organ involvement",
+      "Failure to respond, prompting reassessment for underlying malignancy or myeloproliferative disease",
+      "Genuine secondary bacterial infection of oedematous skin",
+      "Extensive or blistering lesions with systemic upset"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly treating it as bacterial cellulitis with escalating antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but characteristically relapsing, with individual episodes resolving over weeks, sometimes leaving transient discoloration; most patients eventually enter remission, though recurrent flares can be troublesome and steroid-dependent.",
+    "pitfalls": [
+      "Repeatedly treating it as bacterial cellulitis with escalating antibiotics",
+      "Not biopsying antibiotic-unresponsive 'cellulitis' to reveal the eosinophilic pattern",
+      "Assuming flame figures are specific, when they occur in other eosinophil-rich dermatoses",
+      "Overlooking an underlying haematological disorder in persistent or severe cases"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections",
+      "Topical or tapering systemic corticosteroids as the mainstay for symptomatic oedematous plaques",
+      "Oral antihistamines for pruritus and symptomatic relief",
+      "Steroid-sparing agents such as dapsone or ciclosporin, or anti-IL-5 biologics, for relapsing or steroid-dependent disease",
+      "Confirm the diagnosis on biopsy and avoid unnecessary prolonged antibiotics given the mimicry of bacterial cellulitis",
+      "Investigate for and manage underlying haematological or myeloproliferative disease in persistent cases",
+      "Dermatology referral for recurrent or refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilic cellulitis (wells syndrome)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilic-cellulitis-wells-real-image",
-   "title": "Eosinophilic cellulitis (Wells syndrome): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "eosinophilic_cellulitis_wells-pathway",
+      "title": "Eosinophilic cellulitis (Wells syndrome): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail to respond to antibiotics and lack fever",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked or persistent eosinophilia suggesting hypereosinophilic syndrome with organ involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy demonstrating tissue eosinophilia and flame figures, Full blood count for peripheral eosinophilia, Investigation for triggers (recent bites, drugs, infections)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly treating it as bacterial cellulitis with escalating antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilic cellulitis (wells syndrome)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilic_cellulitis_wells-matrix",
+      "title": "Eosinophilic cellulitis (Wells syndrome): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with acute, often itchy or burning, oedematous erythematous plaques that closely resemble bacterial cellulitis but fail",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy demonstrating tissue eosinophilia and flame figures, Full blood count for peripheral eosinophilia, Investigation for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial cellulitis / erysipelas, Acute contact dermatitis, Urticaria and angio-oedema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and remove precipitating triggers such as arthropod bites, culprit drugs and infections",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly treating it as bacterial cellulitis with escalating antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilic cellulitis (wells syndrome)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_cellulitis_wells-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Tissue eosinophilia and flame figures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, which is common but not invariable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Help distinguish it from infective cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool examination for parasites",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_cellulitis_wells-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial cellulitis or erysipelas",
+          "cells": [
+            {
+              "text": "Fails to respond to antibiotics; biopsy shows the eosinophilic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthropod bite reactions",
+          "cells": [
+            {
+              "text": "Insect bites are a common trigger of this eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypereosinophilic syndrome with skin involvement",
+          "cells": [
+            {
+              "text": "Marked or persistent eosinophilia with organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_cellulitis_wells-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove precipitating triggers",
+          "cells": [
+            {
+              "text": "Arthropod bites, culprit drugs and infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Topical or tapering systemic corticosteroids for symptomatic oedematous plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus and symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Dapsone or ciclosporin, or anti-IL-5 biologics, for relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy to confirm; avoid prolonged antibiotics",
+          "cells": [
+            {
+              "text": "Given mimicry of bacterial cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological work-up",
+          "cells": [
+            {
+              "text": "Underlying haematological or myeloproliferative disease in persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Recurrent or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_cellulitis_wells-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic cellulitis (Wells syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy oedematous plaques resembling cellulitis that fail to respond to antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (marked eosinophilia with organ involvement, blistering, systemic upset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for hypereosinophilic syndrome and extensive or blistering disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for eosinophils and flame figures; full blood count; trigger search",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy shows tissue eosinophilia with flame figures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider Sweet syndrome, urticaria or other causes; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and remove triggers such as arthropod bites and culprit drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical or tapering systemic corticosteroids for oedematous plaques",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antihistamines for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dapsone, ciclosporin or anti-IL-5 for relapsing or steroid-dependent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate haematological disease in persistent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but relapsing; individual episodes resolve over weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,171 +1,449 @@
 {
- "id": "scurvy",
- "name": "Scurvy",
- "aliases": [
-  "vitamin C deficiency",
-  "ascorbic acid deficiency",
-  "hypovitaminosis C"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
-   "Impaired collagen formation causes poor wound healing, reopening of old scars, and painful subperiosteal or joint haemorrhages",
-   "It should be suspected in people with very restricted diets, chronic alcohol use, severe mental illness, isolation, or malabsorption",
-   "In infants and children it can cause painful pseudoparalysis from subperiosteal bleeding and bone changes",
-   "A normocytic or, with associated deficiencies, mixed anaemia is common",
-   "Symptoms respond rapidly and dramatically to restoration of dietary vitamin C, which strongly supports the diagnosis",
-   "The diagnosis is largely clinical and dietary, since the vitamin is abundant in fresh fruit and vegetables and deficiency reflects their prolonged absence"
+  "id": "scurvy",
+  "name": "Scurvy",
+  "aliases": [
+    "vitamin C deficiency",
+    "ascorbic acid deficiency",
+    "hypovitaminosis C"
   ],
-  "pathophysiology": "Ascorbic acid is a cofactor for enzymes that hydroxylate proline and lysine residues, a step essential for stable collagen cross-linking. Deficiency yields defective, unstable collagen, weakening blood vessel walls, connective tissue, bone matrix, and wound repair, which manifests as haemorrhage, gum disease, and impaired healing. Vitamin C also acts as an antioxidant and aids intestinal iron absorption, so deficiency can contribute to anaemia. Humans cannot synthesise the vitamin and body stores are limited, so deficiency develops after weeks to months without dietary intake.",
-  "additionalDifferentials": [
-   "Bleeding disorders and thrombocytopenia",
-   "Vasculitis with purpura",
-   "Gingivitis or periodontal disease from other causes",
-   "Child abuse (mimicked by bone and periosteal changes in children)",
-   "Other nutritional deficiencies causing anaemia"
-  ],
-  "additionalInvestigations": [
-   "Careful dietary history for prolonged lack of fruit and vegetables",
-   "Plasma or leucocyte ascorbic acid level where available",
-   "Full blood count and iron studies for associated anaemia",
-   "Coagulation and platelet studies to exclude a primary bleeding disorder",
-   "Radiographs in children showing characteristic metaphyseal and subperiosteal changes"
-  ],
-  "redFlags": [
-   "Significant haemorrhage, including gastrointestinal or intracranial bleeding",
-   "Painful pseudoparalysis in a child from subperiosteal haemorrhage",
-   "Profound weakness and collapse in advanced deficiency",
-   "Coexisting severe malnutrition requiring broader nutritional support"
-  ],
-  "prognosis": "Excellent with restoration of vitamin C intake; bleeding and gum changes resolve within days to weeks and full recovery is expected.",
-  "pitfalls": [
-   "Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause",
-   "Failing to take an adequate dietary history in at-risk individuals",
-   "Misinterpreting childhood bone changes as trauma or abuse",
-   "Overlooking coexisting deficiencies in a globally malnourished patient"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment",
-   "Correct the underlying dietary deficit with vitamin C-rich fruit and vegetables and dietitian input",
-   "Provide analgesia for painful subperiosteal and joint haemorrhages, with gentle handling of children who have pseudoparalysis",
-   "Treat coexisting anaemia, including iron supplementation for associated iron deficiency",
-   "Offer gingival and dental care for spongy, bleeding gums",
-   "Address contributory factors such as chronic alcohol use, eating disorders, social isolation or malabsorption",
-   "Monitor clinical response, expecting rapid resolution of bleeding and gum changes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scurvy-pathway",
-   "title": "Scurvy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant haemorrhage, including gastrointestinal or intracranial bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful dietary history for prolonged lack of fruit and vegetables, Plasma or leucocyte ascorbic acid level where available, Full blood count and iron studies for associated anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scurvy."
-  }
- ],
- "tables": [
-  {
-   "id": "scurvy-matrix",
-   "title": "Scurvy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
+      "Impaired collagen formation causes poor wound healing, reopening of old scars, and painful subperiosteal or joint haemorrhages",
+      "It should be suspected in people with very restricted diets, chronic alcohol use, severe mental illness, isolation, or malabsorption",
+      "In infants and children it can cause painful pseudoparalysis from subperiosteal bleeding and bone changes",
+      "A normocytic or, with associated deficiencies, mixed anaemia is common",
+      "Symptoms respond rapidly and dramatically to restoration of dietary vitamin C, which strongly supports the diagnosis",
+      "The diagnosis is largely clinical and dietary, since the vitamin is abundant in fresh fruit and vegetables and deficiency reflects their prolonged absence"
     ],
-    [
-     "Key Investigations",
-     "Careful dietary history for prolonged lack of fruit and vegetables, Plasma or leucocyte ascorbic acid level where available, Full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ascorbic acid is a cofactor for enzymes that hydroxylate proline and lysine residues, a step essential for stable collagen cross-linking. Deficiency yields defective, unstable collagen, weakening blood vessel walls, connective tissue, bone matrix, and wound repair, which manifests as haemorrhage, gum disease, and impaired healing. Vitamin C also acts as an antioxidant and aids intestinal iron absorption, so deficiency can contribute to anaemia. Humans cannot synthesise the vitamin and body stores are limited, so deficiency develops after weeks to months without dietary intake.",
+    "additionalDifferentials": [
+      "Bleeding disorders and thrombocytopenia",
+      "Vasculitis with purpura",
+      "Gingivitis or periodontal disease from other causes",
+      "Child abuse (mimicked by bone and periosteal changes in children)",
+      "Other nutritional deficiencies causing anaemia"
     ],
-    [
-     "Primary Differentials",
-     "Bleeding disorders and thrombocytopenia, Vasculitis with purpura, Gingivitis or periodontal disease from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful dietary history for prolonged lack of fruit and vegetables",
+      "Plasma or leucocyte ascorbic acid level where available",
+      "Full blood count and iron studies for associated anaemia",
+      "Coagulation and platelet studies to exclude a primary bleeding disorder",
+      "Radiographs in children showing characteristic metaphyseal and subperiosteal changes"
     ],
-    [
-     "Management Strategy",
-     "Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant haemorrhage, including gastrointestinal or intracranial bleeding",
+      "Painful pseudoparalysis in a child from subperiosteal haemorrhage",
+      "Profound weakness and collapse in advanced deficiency",
+      "Coexisting severe malnutrition requiring broader nutritional support"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent with restoration of vitamin C intake; bleeding and gum changes resolve within days to weeks and full recovery is expected.",
+    "pitfalls": [
+      "Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause",
+      "Failing to take an adequate dietary history in at-risk individuals",
+      "Misinterpreting childhood bone changes as trauma or abuse",
+      "Overlooking coexisting deficiencies in a globally malnourished patient"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment",
+      "Correct the underlying dietary deficit with vitamin C-rich fruit and vegetables and dietitian input",
+      "Provide analgesia for painful subperiosteal and joint haemorrhages, with gentle handling of children who have pseudoparalysis",
+      "Treat coexisting anaemia, including iron supplementation for associated iron deficiency",
+      "Offer gingival and dental care for spongy, bleeding gums",
+      "Address contributory factors such as chronic alcohol use, eating disorders, social isolation or malabsorption",
+      "Monitor clinical response, expecting rapid resolution of bleeding and gum changes"
     ]
-   ],
-   "caption": "Overview comparison matrix for scurvy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scurvy-real-image",
-   "title": "Scurvy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "scurvy-pathway",
+      "title": "Scurvy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant haemorrhage, including gastrointestinal or intracranial bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful dietary history for prolonged lack of fruit and vegetables, Plasma or leucocyte ascorbic acid level where available, Full blood count and iron studies for associated anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scurvy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scurvy-matrix",
+      "title": "Scurvy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characteristic features are swollen, spongy, bleeding gums, perifollicular haemorrhages, corkscrew hairs, and easy bruising",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful dietary history for prolonged lack of fruit and vegetables, Plasma or leucocyte ascorbic acid level where available, Full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bleeding disorders and thrombocytopenia, Vasculitis with purpura, Gingivitis or periodontal disease from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore vitamin C with ascorbic acid replacement (oral where tolerated) as the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing bleeding gums or purpura to a primary haematological disorder and missing the dietary cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scurvy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scurvy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary history",
+          "cells": [
+            {
+              "text": "Prolonged lack of fruit and vegetables"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or leucocyte ascorbic acid",
+          "cells": [
+            {
+              "text": "Level where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Associated anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and platelet studies",
+          "cells": [
+            {
+              "text": "Exclude a primary bleeding disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs in children",
+          "cells": [
+            {
+              "text": "Metaphyseal and subperiosteal changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scurvy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bleeding disorders and thrombocytopenia",
+          "cells": [
+            {
+              "text": "Excluded by normal coagulation and platelet studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Child abuse",
+          "cells": [
+            {
+              "text": "Bone and periosteal changes in children can mimic it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scurvy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascorbic acid replacement",
+          "cells": [
+            {
+              "text": "Definitive treatment, oral where tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary correction",
+          "cells": [
+            {
+              "text": "Vitamin C-rich fruit and vegetables with dietitian input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Painful subperiosteal and joint haemorrhages; gentle handling in pseudoparalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia treatment",
+          "cells": [
+            {
+              "text": "Including iron for associated iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gingival and dental care",
+          "cells": [
+            {
+              "text": "Spongy, bleeding gums"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributory factors",
+          "cells": [
+            {
+              "text": "Chronic alcohol use, eating disorders, social isolation or malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Rapid resolution of bleeding and gum changes expected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scurvy-dx-mgmt",
+      "title": "Diagnosis and management of Scurvy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bleeding gums, perifollicular purpura or limb pain with poor diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Major bleeding, pseudoparalysis in a child, collapse or severe malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitamin C replacement, analgesia and broader nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dietary history, ascorbic acid level, FBC, iron studies, coagulation, child radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dietary deficit with low vitamin C or typical findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pursue primary bleeding disorder, vasculitis or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ascorbic acid replacement, oral where tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian input and vitamin C-rich foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat anaemia and give gingival care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address alcohol, eating disorder, isolation or malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; bleeding and gum changes resolve in days to weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

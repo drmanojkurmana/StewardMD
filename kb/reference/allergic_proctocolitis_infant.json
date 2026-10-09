@@ -1,178 +1,518 @@
 {
- "id": "allergic_proctocolitis_infant",
- "name": "Food protein-induced allergic proctocolitis",
- "aliases": [
-  "allergic proctocolitis",
-  "food protein-induced proctocolitis",
-  "cow's milk protein proctocolitis",
-  "eosinophilic proctocolitis of infancy"
- ],
- "class": "non_infective",
- "system": "Paediatrics / Gastroenterology",
- "specialty": "Paediatric Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard paediatric gastroenterology and allergy reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well, thriving baby",
-   "It is most commonly caused by cow's milk protein, and many affected infants are breast-fed and react to protein passed through maternal milk",
-   "The infant is characteristically well, feeding normally and gaining weight, and is not systemically unwell despite the visible blood",
-   "Bleeding is usually low-volume and significant anaemia is uncommon",
-   "Diagnosis is clinical, supported by resolution of bleeding after removing the culprit protein and recurrence on reintroduction",
-   "In breast-fed infants, maternal exclusion of cow's milk and sometimes soy is first-line, while formula-fed infants are switched to an extensively hydrolysed formula",
-   "Allergy tests such as skin-prick and specific IgE are usually negative because the process is non-IgE-mediated",
-   "The prognosis is excellent, with most infants tolerating the protein and the condition resolving within the first year or two of life"
+  "id": "allergic_proctocolitis_infant",
+  "name": "Food protein-induced allergic proctocolitis",
+  "aliases": [
+    "allergic proctocolitis",
+    "food protein-induced proctocolitis",
+    "cow's milk protein proctocolitis",
+    "eosinophilic proctocolitis of infancy"
   ],
-  "pathophysiology": "Food protein-induced allergic proctocolitis is a non-IgE-mediated, eosinophil-predominant immune response to dietary food proteins, most often cow's milk protein reaching the infant directly or through breast milk. The reaction is localised to the distal colon and rectum, where mucosal inflammation causes friability and small-vessel bleeding, producing blood-streaked stools. The condition is benign and self-limiting and is not associated with systemic illness or, in most cases, significant blood loss.",
-  "additionalDifferentials": [
-   "Anal fissure",
-   "Infective colitis from organisms such as Salmonella or Campylobacter",
-   "Necrotising enterocolitis, especially in the preterm or unwell neonate",
-   "Swallowed maternal blood in the breast-fed newborn",
-   "Intussusception or another surgical cause of rectal bleeding",
-   "Coagulopathy or vitamin K deficiency bleeding",
-   "Food protein-induced enterocolitis syndrome or other food allergy"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment confirming a well, thriving infant, which is the key discriminator",
-   "Trial of dietary protein elimination with documented resolution of bleeding",
-   "Full blood count to check for anaemia or eosinophilia when bleeding is notable",
-   "Stool culture and microscopy to exclude infective causes",
-   "Examination for an anal fissure",
-   "Sigmoidoscopy with biopsy only in atypical or non-resolving cases, which shows eosinophilic infiltration",
-   "Planned reintroduction or rechallenge to confirm the diagnosis where appropriate"
-  ],
-  "redFlags": [
-   "A systemically unwell or febrile infant",
-   "Significant or large-volume rectal bleeding, or anaemia",
-   "Poor weight gain or faltering growth",
-   "Abdominal distension, bilious vomiting, or other signs of obstruction",
-   "Bleeding that does not resolve despite appropriate dietary elimination"
-  ],
-  "prognosis": "The outlook is excellent: this is a benign, self-limiting condition, and most infants outgrow it and tolerate the protein by around one to two years of age with no lasting sequelae.",
-  "pitfalls": [
-   "Over-investigating a well, thriving infant with typical features",
-   "Attributing all infant rectal bleeding to allergy and missing a fissure, infection, or surgical cause",
-   "Stopping breast-feeding unnecessarily instead of adjusting the maternal diet",
-   "Not allowing enough time on elimination before judging the response",
-   "Failing to plan a supervised reintroduction to confirm resolution and tolerance"
-  ],
-  "references": [
-   "International guidance on cow's milk protein allergy",
-   "Standard paediatric gastroenterology and allergy reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while continuing breast-feeding",
-   "Switch formula-fed infants to an extensively hydrolysed formula, escalating to an amino-acid formula if bleeding persists",
-   "Provide maternal calcium and vitamin D supplementation when dairy is excluded from the maternal diet",
-   "Reassure and monitor growth and stool pattern, confirming resolution of bleeding after protein removal",
-   "Plan a supervised reintroduction of the protein after a period of exclusion to confirm tolerance and guide dietary liberalisation",
-   "Refer to paediatric gastroenterology and dietetics for atypical, persistent or non-resolving cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "allergic_proctocolitis_infant-pathway",
-   "title": "Food protein-induced allergic proctocolitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well, thriving baby",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A systemically unwell or febrile infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment confirming a well, thriving infant, which is the key discriminator, Trial of dietary protein elimination with documented resolution of bleeding, Full blood count to check for anaemia or eosinophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while continuing breast-feeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-investigating a well, thriving infant with typical features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of food protein-induced allergic proctocolitis."
-  }
- ],
- "tables": [
-  {
-   "id": "allergic_proctocolitis_infant-matrix",
-   "title": "Food protein-induced allergic proctocolitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatrics / Gastroenterology",
+  "specialty": "Paediatric Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard paediatric gastroenterology and allergy reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well, thriving baby",
+      "It is most commonly caused by cow's milk protein, and many affected infants are breast-fed and react to protein passed through maternal milk",
+      "The infant is characteristically well, feeding normally and gaining weight, and is not systemically unwell despite the visible blood",
+      "Bleeding is usually low-volume and significant anaemia is uncommon",
+      "Diagnosis is clinical, supported by resolution of bleeding after removing the culprit protein and recurrence on reintroduction",
+      "In breast-fed infants, maternal exclusion of cow's milk and sometimes soy is first-line, while formula-fed infants are switched to an extensively hydrolysed formula",
+      "Allergy tests such as skin-prick and specific IgE are usually negative because the process is non-IgE-mediated",
+      "The prognosis is excellent, with most infants tolerating the protein and the condition resolving within the first year or two of life"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment confirming a well, thriving infant, which is the key discriminator, Trial of dietary protein elimination with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Food protein-induced allergic proctocolitis is a non-IgE-mediated, eosinophil-predominant immune response to dietary food proteins, most often cow's milk protein reaching the infant directly or through breast milk. The reaction is localised to the distal colon and rectum, where mucosal inflammation causes friability and small-vessel bleeding, producing blood-streaked stools. The condition is benign and self-limiting and is not associated with systemic illness or, in most cases, significant blood loss.",
+    "additionalDifferentials": [
+      "Anal fissure",
+      "Infective colitis from organisms such as Salmonella or Campylobacter",
+      "Necrotising enterocolitis, especially in the preterm or unwell neonate",
+      "Swallowed maternal blood in the breast-fed newborn",
+      "Intussusception or another surgical cause of rectal bleeding",
+      "Coagulopathy or vitamin K deficiency bleeding",
+      "Food protein-induced enterocolitis syndrome or other food allergy"
     ],
-    [
-     "Primary Differentials",
-     "Anal fissure, Infective colitis from organisms such as Salmonella or Campylobacter, Necrotising enterocolitis, especially in the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment confirming a well, thriving infant, which is the key discriminator",
+      "Trial of dietary protein elimination with documented resolution of bleeding",
+      "Full blood count to check for anaemia or eosinophilia when bleeding is notable",
+      "Stool culture and microscopy to exclude infective causes",
+      "Examination for an anal fissure",
+      "Sigmoidoscopy with biopsy only in atypical or non-resolving cases, which shows eosinophilic infiltration",
+      "Planned reintroduction or rechallenge to confirm the diagnosis where appropriate"
     ],
-    [
-     "Management Strategy",
-     "Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while",
-     "Core treatment modality"
+    "redFlags": [
+      "A systemically unwell or febrile infant",
+      "Significant or large-volume rectal bleeding, or anaemia",
+      "Poor weight gain or faltering growth",
+      "Abdominal distension, bilious vomiting, or other signs of obstruction",
+      "Bleeding that does not resolve despite appropriate dietary elimination"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-investigating a well, thriving infant with typical features",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent: this is a benign, self-limiting condition, and most infants outgrow it and tolerate the protein by around one to two years of age with no lasting sequelae.",
+    "pitfalls": [
+      "Over-investigating a well, thriving infant with typical features",
+      "Attributing all infant rectal bleeding to allergy and missing a fissure, infection, or surgical cause",
+      "Stopping breast-feeding unnecessarily instead of adjusting the maternal diet",
+      "Not allowing enough time on elimination before judging the response",
+      "Failing to plan a supervised reintroduction to confirm resolution and tolerance"
+    ],
+    "references": [
+      "International guidance on cow's milk protein allergy",
+      "Standard paediatric gastroenterology and allergy reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while continuing breast-feeding",
+      "Switch formula-fed infants to an extensively hydrolysed formula, escalating to an amino-acid formula if bleeding persists",
+      "Provide maternal calcium and vitamin D supplementation when dairy is excluded from the maternal diet",
+      "Reassure and monitor growth and stool pattern, confirming resolution of bleeding after protein removal",
+      "Plan a supervised reintroduction of the protein after a period of exclusion to confirm tolerance and guide dietary liberalisation",
+      "Refer to paediatric gastroenterology and dietetics for atypical, persistent or non-resolving cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for food protein-induced allergic proctocolitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "allergic-proctocolitis-infant-real-image",
-   "title": "Food protein-induced allergic proctocolitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "allergic_proctocolitis_infant-pathway",
+      "title": "Food protein-induced allergic proctocolitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well, thriving baby",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A systemically unwell or febrile infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment confirming a well, thriving infant, which is the key discriminator, Trial of dietary protein elimination with documented resolution of bleeding, Full blood count to check for anaemia or eosinophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while continuing breast-feeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-investigating a well, thriving infant with typical features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of food protein-induced allergic proctocolitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "allergic_proctocolitis_infant-matrix",
+      "title": "Food protein-induced allergic proctocolitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-IgE-mediated food allergy presenting in early infancy with blood-streaked, sometimes mucousy, stools in an otherwise well,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment confirming a well, thriving infant, which is the key discriminator, Trial of dietary protein elimination with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anal fissure, Infective colitis from organisms such as Salmonella or Campylobacter, Necrotising enterocolitis, especially in the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Eliminate the culprit protein: exclude cow's milk, and sometimes soy, from the maternal diet in breast-fed infants while",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-investigating a well, thriving infant with typical features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for food protein-induced allergic proctocolitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard paediatric gastroenterology and allergy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "allergic_proctocolitis_infant-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment confirming a well, thriving infant",
+          "cells": [
+            {
+              "text": "Key discriminator"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of dietary protein elimination with resolution of bleeding",
+          "cells": [
+            {
+              "text": "Response to elimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count for anaemia or eosinophilia",
+          "cells": [
+            {
+              "text": "Anaemia or eosinophilia when bleeding is notable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture and microscopy",
+          "cells": [
+            {
+              "text": "Excludes infective causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for anal fissure",
+          "cells": [
+            {
+              "text": "Alternative local cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sigmoidoscopy with biopsy in atypical or non-resolving cases",
+          "cells": [
+            {
+              "text": "Eosinophilic infiltration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_proctocolitis_infant-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Anal fissure",
+          "cells": [
+            {
+              "text": "Localised bleeding at the anus"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective colitis (Salmonella, Campylobacter)",
+          "cells": [
+            {
+              "text": "Infective organisms on stool testing"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Necrotising enterocolitis",
+          "cells": [
+            {
+              "text": "Unwell or preterm neonate"
+            },
+            {
+              "text": "Clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intussusception or another surgical cause",
+          "cells": [
+            {
+              "text": "Obstructive or surgical signs"
+            },
+            {
+              "text": "Surgical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowed maternal blood",
+          "cells": [
+            {
+              "text": "Breast-fed newborn with maternal nipple damage"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_proctocolitis_infant-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclusion of cow's milk, and sometimes soy, from the maternal diet",
+          "cells": [
+            {
+              "text": "Removes the culprit protein"
+            },
+            {
+              "text": "Breast-fed infants continue breast-feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensively hydrolysed formula, escalating to amino-acid formula if bleeding persists",
+          "cells": [
+            {
+              "text": "Formula-fed infants"
+            },
+            {
+              "text": "Escalation if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal calcium and vitamin D supplementation",
+          "cells": [
+            {
+              "text": "Dairy exclusion in the mother"
+            },
+            {
+              "text": "When dairy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of growth and stool pattern",
+          "cells": [
+            {
+              "text": "Resolution of bleeding"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised reintroduction of the protein",
+          "cells": [
+            {
+              "text": "Confirms tolerance"
+            },
+            {
+              "text": "After a period of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric gastroenterology and dietetic referral",
+          "cells": [
+            {
+              "text": "Atypical or non-resolving cases"
+            },
+            {
+              "text": "Specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "allergic_proctocolitis_infant-dx-mgmt",
+      "title": "Diagnosis and management of Food protein-induced allergic proctocolitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well, thriving infant with blood-streaked stools",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Systemically unwell, large bleed, poor growth or obstructive signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review; treat as emergency if unwell",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment; FBC; stool culture; fissure check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Well and thriving with bleeding resolving on protein elimination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude cow's milk, and sometimes soy, from maternal diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review fissure, infective colitis and surgical causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extensively hydrolysed formula if formula-fed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maternal calcium and vitamin D if dairy excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor growth and stool; supervised reintroduction later",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; most infants tolerate the protein by 1-2 years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

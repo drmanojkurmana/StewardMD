@@ -1,175 +1,543 @@
 {
- "id": "acrocyanosis",
- "name": "acrocyanosis",
- "aliases": [
-  "acral cyanosis",
-  "Crocq disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular system",
- "specialty": "Vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small cutaneous arteries and arterioles with secondary dilatation of the subpapillary venous plexus.",
-   "It is distinguished from Raynaud phenomenon by its continuous rather than episodic nature and the absence of the sharply demarcated triphasic white-blue-red colour change.",
-   "Affected extremities are typically cold and clammy with associated hyperhidrosis, yet peripheral pulses are normal and there is no ulceration, pain or trophic change in the primary form.",
-   "Primary (idiopathic) acrocyanosis is benign, more common in young women, worsened by cold and emotional stress, and often improves in warm environments and with age.",
-   "Secondary acrocyanosis may reflect connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia nervosa, or drugs, and warrants a search for an underlying disorder.",
-   "Central cyanosis from hypoxaemia must be excluded, as acrocyanosis is purely peripheral and does not affect the tongue or mucous membranes; oxygen saturation is normal in the primary form.",
-   "Diascopy and warming help confirm the vasomotor nature, and the discolouration blanches with elevation of the limb, distinguishing it from fixed vascular occlusion.",
-   "Reassurance, cold avoidance and warmth are the mainstays of management for primary disease; vasodilators are rarely needed and pharmacotherapy is generally unsatisfactory."
+  "id": "acrocyanosis",
+  "name": "acrocyanosis",
+  "aliases": [
+    "acral cyanosis",
+    "Crocq disease"
   ],
-  "pathophysiology": "Acrocyanosis results from persistent vasospasm of the small arterioles and cutaneous arteries supplying the acral skin, causing reduced arterial inflow and sluggish capillary perfusion. Compensatory dilatation of the subpapillary venous plexuses leads to pooling of slow-flowing, deoxygenated blood, which produces the sustained bluish discolouration and the associated coolness and sweating. Unlike Raynaud phenomenon, the vasoconstriction is continuous rather than paroxysmal and does not fully occlude flow, so tissue viability is preserved and ischaemic complications do not occur in the primary form. Increased vasomotor tone, heightened sensitivity to cold, and in some cases increased blood viscosity or circulating cryoproteins in secondary disease all contribute. The precise trigger of the primary form is unknown but is thought to reflect a functional abnormality of local vascular reactivity.",
-  "additionalDifferentials": [
-   "Raynaud phenomenon",
-   "Peripheral cyanosis from central hypoxaemia or cardiac disease",
-   "Cryoglobulinaemia and cold agglutinin disease",
-   "Antiphospholipid syndrome and other thrombophilias",
-   "Chilblains (pernio)",
-   "Peripheral arterial occlusive disease",
-   "Connective-tissue disease-associated vasculopathy"
-  ],
-  "additionalInvestigations": [
-   "Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis",
-   "Nailfold capillaroscopy to help differentiate from connective-tissue disease",
-   "Autoimmune serology including antinuclear and antiphospholipid antibodies",
-   "Cryoglobulins and cold agglutinin titres",
-   "Full blood count and assessment of blood viscosity/paraproteins",
-   "Doppler studies and palpation of peripheral pulses to confirm patent large vessels",
-   "Screening for occult malignancy or eating disorder where clinically suggested"
-  ],
-  "redFlags": [
-   "Digital ulceration, necrosis or pain suggesting a secondary occlusive or ischaemic process",
-   "Asymmetry or involvement of a single digit indicating structural arterial disease",
-   "Central cyanosis with low oxygen saturation pointing to cardiopulmonary pathology",
-   "Systemic features of connective-tissue disease or cryoglobulinaemia",
-   "Rapid onset in an older patient raising concern for underlying malignancy"
-  ],
-  "prognosis": "Primary acrocyanosis is a benign, chronic condition that does not threaten limb viability and frequently improves with warmth and increasing age. The outlook in secondary disease depends on the underlying disorder.",
-  "pitfalls": [
-   "Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up",
-   "Overlooking central cyanosis by assuming all peripheral blueness is acrocyanosis",
-   "Missing a secondary cause such as cryoglobulinaemia, antiphospholipid syndrome or occult malignancy",
-   "Attributing unilateral or single-digit discolouration to acrocyanosis when it indicates arterial occlusion",
-   "Failing to consider anorexia nervosa in a young patient with cold, cyanotic extremities"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance in primary disease, which is benign and does not threaten limb viability",
-   "Conservative measures — cold avoidance, keeping the extremities warm, and smoking cessation",
-   "A trial of vasodilators such as calcium-channel blockers for troublesome cases, though benefit is limited",
-   "Identify and treat any underlying cause in secondary disease, including connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia nervosa or drugs",
-   "Exclude central cyanosis from hypoxaemia before attributing the discolouration to peripheral vasospasm"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acrocyanosis-pathway",
-   "title": "acrocyanosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small cutaneous arteries and arterioles with secondary dilatation of the subpapillary venous plexus.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Digital ulceration, necrosis or pain suggesting a secondary occlusive or ischaemic process",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis, Nailfold capillaroscopy to help differentiate from connective-tissue disease, Autoimmune serology including antinuclear and antiphospholipid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance in primary disease, which is benign and does not threaten limb viability"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acrocyanosis."
-  }
- ],
- "tables": [
-  {
-   "id": "acrocyanosis-matrix",
-   "title": "acrocyanosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular system",
+  "specialty": "Vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small cutaneous arteries and arterioles with secondary dilatation of the subpapillary venous plexus.",
+      "It is distinguished from Raynaud phenomenon by its continuous rather than episodic nature and the absence of the sharply demarcated triphasic white-blue-red colour change.",
+      "Affected extremities are typically cold and clammy with associated hyperhidrosis, yet peripheral pulses are normal and there is no ulceration, pain or trophic change in the primary form.",
+      "Primary (idiopathic) acrocyanosis is benign, more common in young women, worsened by cold and emotional stress, and often improves in warm environments and with age.",
+      "Secondary acrocyanosis may reflect connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia nervosa, or drugs, and warrants a search for an underlying disorder.",
+      "Central cyanosis from hypoxaemia must be excluded, as acrocyanosis is purely peripheral and does not affect the tongue or mucous membranes; oxygen saturation is normal in the primary form.",
+      "Diascopy and warming help confirm the vasomotor nature, and the discolouration blanches with elevation of the limb, distinguishing it from fixed vascular occlusion.",
+      "Reassurance, cold avoidance and warmth are the mainstays of management for primary disease; vasodilators are rarely needed and pharmacotherapy is generally unsatisfactory."
     ],
-    [
-     "Key Investigations",
-     "Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis, Nailfold capillaroscopy to help differentiate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acrocyanosis results from persistent vasospasm of the small arterioles and cutaneous arteries supplying the acral skin, causing reduced arterial inflow and sluggish capillary perfusion. Compensatory dilatation of the subpapillary venous plexuses leads to pooling of slow-flowing, deoxygenated blood, which produces the sustained bluish discolouration and the associated coolness and sweating. Unlike Raynaud phenomenon, the vasoconstriction is continuous rather than paroxysmal and does not fully occlude flow, so tissue viability is preserved and ischaemic complications do not occur in the primary form. Increased vasomotor tone, heightened sensitivity to cold, and in some cases increased blood viscosity or circulating cryoproteins in secondary disease all contribute. The precise trigger of the primary form is unknown but is thought to reflect a functional abnormality of local vascular reactivity.",
+    "additionalDifferentials": [
+      "Raynaud phenomenon",
+      "Peripheral cyanosis from central hypoxaemia or cardiac disease",
+      "Cryoglobulinaemia and cold agglutinin disease",
+      "Antiphospholipid syndrome and other thrombophilias",
+      "Chilblains (pernio)",
+      "Peripheral arterial occlusive disease",
+      "Connective-tissue disease-associated vasculopathy"
     ],
-    [
-     "Primary Differentials",
-     "Raynaud phenomenon, Peripheral cyanosis from central hypoxaemia or cardiac disease, Cryoglobulinaemia and cold agglutinin disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis",
+      "Nailfold capillaroscopy to help differentiate from connective-tissue disease",
+      "Autoimmune serology including antinuclear and antiphospholipid antibodies",
+      "Cryoglobulins and cold agglutinin titres",
+      "Full blood count and assessment of blood viscosity/paraproteins",
+      "Doppler studies and palpation of peripheral pulses to confirm patent large vessels",
+      "Screening for occult malignancy or eating disorder where clinically suggested"
     ],
-    [
-     "Management Strategy",
-     "Reassurance in primary disease, which is benign and does not threaten limb viability",
-     "Core treatment modality"
+    "redFlags": [
+      "Digital ulceration, necrosis or pain suggesting a secondary occlusive or ischaemic process",
+      "Asymmetry or involvement of a single digit indicating structural arterial disease",
+      "Central cyanosis with low oxygen saturation pointing to cardiopulmonary pathology",
+      "Systemic features of connective-tissue disease or cryoglobulinaemia",
+      "Rapid onset in an older patient raising concern for underlying malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary acrocyanosis is a benign, chronic condition that does not threaten limb viability and frequently improves with warmth and increasing age. The outlook in secondary disease depends on the underlying disorder.",
+    "pitfalls": [
+      "Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up",
+      "Overlooking central cyanosis by assuming all peripheral blueness is acrocyanosis",
+      "Missing a secondary cause such as cryoglobulinaemia, antiphospholipid syndrome or occult malignancy",
+      "Attributing unilateral or single-digit discolouration to acrocyanosis when it indicates arterial occlusion",
+      "Failing to consider anorexia nervosa in a young patient with cold, cyanotic extremities"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance in primary disease, which is benign and does not threaten limb viability",
+      "Conservative measures — cold avoidance, keeping the extremities warm, and smoking cessation",
+      "A trial of vasodilators such as calcium-channel blockers for troublesome cases, though benefit is limited",
+      "Identify and treat any underlying cause in secondary disease, including connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia nervosa or drugs",
+      "Exclude central cyanosis from hypoxaemia before attributing the discolouration to peripheral vasospasm"
     ]
-   ],
-   "caption": "Overview comparison matrix for acrocyanosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acrocyanosis-real-image",
-   "title": "acrocyanosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "acrocyanosis-pathway",
+      "title": "acrocyanosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small cutaneous arteries and arterioles with secondary dilatation of the subpapillary venous plexus.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Digital ulceration, necrosis or pain suggesting a secondary occlusive or ischaemic process",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis, Nailfold capillaroscopy to help differentiate from connective-tissue disease, Autoimmune serology including antinuclear and antiphospholipid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance in primary disease, which is benign and does not threaten limb viability"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acrocyanosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acrocyanosis-matrix",
+      "title": "acrocyanosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acrocyanosis is a painless, persistent, symmetrical blue-purple discolouration of the hands and feet caused by vasospasm of small",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulse oximetry and, if indicated, arterial blood gas to exclude central cyanosis, Nailfold capillaroscopy to help differentiate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Raynaud phenomenon, Peripheral cyanosis from central hypoxaemia or cardiac disease, Cryoglobulinaemia and cold agglutinin disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance in primary disease, which is benign and does not threaten limb viability",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing continuous acrocyanosis with episodic Raynaud phenomenon and pursuing the wrong work-up",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acrocyanosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 35-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acrocyanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and arterial blood gas",
+          "cells": [
+            {
+              "text": "Excludes central cyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Differentiates from connective-tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (antinuclear and antiphospholipid antibodies)",
+          "cells": [
+            {
+              "text": "Connective-tissue or thrombophilic associations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulins and cold agglutinin titres",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with blood viscosity and paraproteins",
+          "cells": [
+            {
+              "text": "Viscosity and paraprotein status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler studies and palpation of peripheral pulses",
+          "cells": [
+            {
+              "text": "Patent large vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for occult malignancy or eating disorder",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrocyanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Episodic rather than continuous; triphasic colour change"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemia and cold agglutinin disease",
+          "cells": [
+            {
+              "text": "Cold-related secondary disease"
+            },
+            {
+              "text": "Cryoglobulin and cold agglutinin titres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial occlusive disease",
+          "cells": [
+            {
+              "text": "Pulses normal in acrocyanosis"
+            },
+            {
+              "text": "Doppler studies and pulse palpation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrocyanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance in primary disease",
+          "cells": [
+            {
+              "text": "Benign and does not threaten limb viability"
+            },
+            {
+              "text": "Primary acrocyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold avoidance, warmth and smoking cessation",
+          "cells": [
+            {
+              "text": "Conservative measures"
+            },
+            {
+              "text": "Keeps extremities warm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-channel blockers",
+          "cells": [
+            {
+              "text": "Troublesome cases"
+            },
+            {
+              "text": "Benefit is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause in secondary disease",
+          "cells": [
+            {
+              "text": "Connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia or drugs"
+            },
+            {
+              "text": "Secondary disease only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude hypoxaemia first",
+          "cells": [
+            {
+              "text": "Central cyanosis must be excluded"
+            },
+            {
+              "text": "Before attributing to vasospasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrocyanosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of cyanosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central: decreased arterial oxygen saturation",
+          "cells": [
+            {
+              "text": "Decreased atmospheric pressure (high altitude); impaired pulmonary function (alveolar hypoventilation; uneven ventilation and perfusion with perfusion of hypoventilated alveoli; impaired oxygen diffusion); anatomic shunts (certain congenital heart disease, pulmonary arteriovenous fistulas, multiple small intrapulmonary shunts); hemoglobin with low oxygen affinity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central: hemoglobin abnormalities",
+          "cells": [
+            {
+              "text": "Methemoglobinemia (hereditary, acquired); sulfhemoglobinemia (acquired); carboxyhemoglobinemia (not true cyanosis)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral cyanosis",
+          "cells": [
+            {
+              "text": "Reduced cardiac output; cold exposure; redistribution of blood flow from extremities; arterial obstruction; venous obstruction"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acrocyanosis-dx-mgmt",
+      "title": "Diagnosis and management of acrocyanosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent painless blue-purple discolouration of hands and feet, cold and clammy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulceration, pain, central cyanosis or single-digit involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent work-up for ischaemia, hypoxaemia or structural arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pulse oximetry, arterial blood gas, pulse palpation and Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pulses normal and central oxygen saturation normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nailfold capillaroscopy and autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review peripheral arterial occlusive disease and cardiopulmonary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cold avoidance, warmth and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calcium-channel blockers for troublesome cases; benefit is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat secondary causes: connective tissue disease, cryoglobulinaemia, APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Primary disease is benign and does not threaten limb viability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

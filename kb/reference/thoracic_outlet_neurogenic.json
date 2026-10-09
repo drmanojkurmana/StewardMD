@@ -1,174 +1,463 @@
 {
- "id": "thoracic_outlet_neurogenic",
- "name": "thoracic outlet neurogenic",
- "aliases": [
-  "neurogenic thoracic outlet syndrome",
-  "true neurogenic TOS",
-  "Gilliatt-Sumner hand"
- ],
- "class": "non_infective",
- "system": "Nervous system / Peripheral nervous system",
- "specialty": "Neurology / Vascular and thoracic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression, classically by a cervical rib with a taut fibrous band inserting on the first rib",
-   "The characteristic Gilliatt-Sumner hand shows thenar wasting that is most marked over abductor pollicis brevis, with lesser hypothenar and interosseous wasting, reflecting predominant T1 and C8 involvement",
-   "Sensory symptoms and any sensory loss follow a medial forearm and medial hand (medial antebrachial and ulnar) distribution, and aching pain is common along the medial arm",
-   "It occurs most often in young to middle-aged women, is usually unilateral, and should be sharply distinguished from the far commoner disputed or non-specific thoracic outlet syndrome, which lacks objective neurological or electrophysiological signs",
-   "The classic electrophysiological signature is a reduced median motor response (thenar wasting) with a reduced ulnar sensory response, plus a relatively preserved median sensory and reduced ulnar motor response, indicating a lower-trunk lesion",
-   "Provocative manoeuvres such as the elevated arm stress test and Adson test are suggestive but non-specific and cannot confirm the diagnosis alone",
-   "Imaging looks for a cervical rib, an elongated C7 transverse process or a fibrous band; surgical decompression by band and rib resection is indicated for confirmed true neurogenic disease with objective deficits"
+  "id": "thoracic_outlet_neurogenic",
+  "name": "thoracic outlet neurogenic",
+  "aliases": [
+    "neurogenic thoracic outlet syndrome",
+    "true neurogenic TOS",
+    "Gilliatt-Sumner hand"
   ],
-  "pathophysiology": "The brachial plexus and subclavian vessels traverse the thoracic outlet through the interscalene triangle, the costoclavicular space and the retropectoralis minor space. In true neurogenic thoracic outlet syndrome, a congenital cervical rib or elongated C7 transverse process gives rise to a fibrous band that stretches to the first rib and angulates the lowest components of the plexus, chiefly the T1 fibres and to a lesser extent C8, which form the lower trunk. Chronic traction and compression at this point cause progressive axonal loss preferentially affecting the T1-derived median motor fibres to the thenar muscles, together with C8-T1 sensory fibres, producing the characteristic pattern of thenar-predominant wasting and medial hand sensory loss. This structural, fixed compression contrasts with the intermittent, positional and often purely subjective symptoms of non-specific thoracic outlet syndrome.",
-  "additionalDifferentials": [
-   "Ulnar neuropathy at the elbow",
-   "C8-T1 radiculopathy from cervical spondylosis or disc",
-   "Distal median neuropathy (carpal tunnel syndrome) causing thenar wasting",
-   "Pancoast (superior sulcus) tumour infiltrating the lower plexus",
-   "Motor neurone disease presenting with focal hand wasting",
-   "Disputed or non-specific thoracic outlet syndrome",
-   "Brachial plexus tumour such as a schwannoma"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory preservation",
-   "Needle electromyography of C8-T1 muscles including abductor pollicis brevis and first dorsal interosseous to confirm a lower-trunk pattern",
-   "Cervical spine and chest radiographs to detect a cervical rib or elongated C7 transverse process",
-   "MRI of the brachial plexus and thoracic outlet to identify fibrous bands, a mass or a Pancoast tumour",
-   "Vascular studies if concurrent arterial or venous compression is suspected",
-   "Cervical spine MRI if radiculopathy is a competing diagnosis"
-  ],
-  "redFlags": [
-   "A supraclavicular or apical mass, or Horner syndrome, raising concern for a Pancoast tumour",
-   "Rapidly progressive weakness or widespread wasting suggesting motor neurone disease",
-   "Signs of acute limb ischaemia, distal emboli or subclavian vein thrombosis indicating vascular thoracic outlet compromise",
-   "Constitutional symptoms or weight loss suggesting malignancy"
-  ],
-  "prognosis": "Surgical resection of the responsible cervical rib and fibrous band typically halts progression and relieves pain, but established thenar wasting and axonal sensory loss often recover only partially. The much commoner non-specific form has a variable outcome and does not carry the same structural prognosis.",
-  "pitfalls": [
-   "Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or electrophysiological confirmation",
-   "Overlooking a Pancoast tumour as a cause of lower-plexus signs",
-   "Confusing thenar wasting with carpal tunnel syndrome by not recognising the accompanying medial hand sensory loss",
-   "Mislabelling early motor neurone disease as thoracic outlet syndrome",
-   "Operating on patients with the disputed, non-specific form who lack objective neurological deficits"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Stewart's Focal Peripheral Neuropathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous band, usually with first-rib resection, to relieve traction on the lower trunk",
-   "Use physiotherapy for posture and shoulder-girdle strengthening as an adjunct and while awaiting surgery",
-   "Provide analgesia and neuropathic pain control for the aching medial arm pain",
-   "Offer hand and occupational therapy with rehabilitation for thenar wasting and functional loss",
-   "Exclude a Pancoast tumour or other mass on brachial plexus imaging before attributing symptoms to a cervical rib",
-   "Refer early for surgery and escalate promptly, since established thenar wasting and axonal sensory loss recover only partially once decompression halts progression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thoracic_outlet_neurogenic-pathway",
-   "title": "thoracic outlet neurogenic: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression, classically by a cervical rib with a taut fibrous band inserting on the first rib",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A supraclavicular or apical mass, or Horner syndrome, raising concern for a Pancoast tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory preservation, Needle electromyography of C8-T1 muscles including abductor pollicis brevis and first"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous band, usually with first-rib resection, to relieve traction on the lower trunk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or electrophysiological confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thoracic outlet neurogenic."
-  }
- ],
- "tables": [
-  {
-   "id": "thoracic_outlet_neurogenic-matrix",
-   "title": "thoracic outlet neurogenic: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Peripheral nervous system",
+  "specialty": "Neurology / Vascular and thoracic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression, classically by a cervical rib with a taut fibrous band inserting on the first rib",
+      "The characteristic Gilliatt-Sumner hand shows thenar wasting that is most marked over abductor pollicis brevis, with lesser hypothenar and interosseous wasting, reflecting predominant T1 and C8 involvement",
+      "Sensory symptoms and any sensory loss follow a medial forearm and medial hand (medial antebrachial and ulnar) distribution, and aching pain is common along the medial arm",
+      "It occurs most often in young to middle-aged women, is usually unilateral, and should be sharply distinguished from the far commoner disputed or non-specific thoracic outlet syndrome, which lacks objective neurological or electrophysiological signs",
+      "The classic electrophysiological signature is a reduced median motor response (thenar wasting) with a reduced ulnar sensory response, plus a relatively preserved median sensory and reduced ulnar motor response, indicating a lower-trunk lesion",
+      "Provocative manoeuvres such as the elevated arm stress test and Adson test are suggestive but non-specific and cannot confirm the diagnosis alone",
+      "Imaging looks for a cervical rib, an elongated C7 transverse process or a fibrous band; surgical decompression by band and rib resection is indicated for confirmed true neurogenic disease with objective deficits"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The brachial plexus and subclavian vessels traverse the thoracic outlet through the interscalene triangle, the costoclavicular space and the retropectoralis minor space. In true neurogenic thoracic outlet syndrome, a congenital cervical rib or elongated C7 transverse process gives rise to a fibrous band that stretches to the first rib and angulates the lowest components of the plexus, chiefly the T1 fibres and to a lesser extent C8, which form the lower trunk. Chronic traction and compression at this point cause progressive axonal loss preferentially affecting the T1-derived median motor fibres to the thenar muscles, together with C8-T1 sensory fibres, producing the characteristic pattern of thenar-predominant wasting and medial hand sensory loss. This structural, fixed compression contrasts with the intermittent, positional and often purely subjective symptoms of non-specific thoracic outlet syndrome.",
+    "additionalDifferentials": [
+      "Ulnar neuropathy at the elbow",
+      "C8-T1 radiculopathy from cervical spondylosis or disc",
+      "Distal median neuropathy (carpal tunnel syndrome) causing thenar wasting",
+      "Pancoast (superior sulcus) tumour infiltrating the lower plexus",
+      "Motor neurone disease presenting with focal hand wasting",
+      "Disputed or non-specific thoracic outlet syndrome",
+      "Brachial plexus tumour such as a schwannoma"
     ],
-    [
-     "Primary Differentials",
-     "Ulnar neuropathy at the elbow, C8-T1 radiculopathy from cervical spondylosis or disc, Distal median neuropathy (carpal tunnel",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory preservation",
+      "Needle electromyography of C8-T1 muscles including abductor pollicis brevis and first dorsal interosseous to confirm a lower-trunk pattern",
+      "Cervical spine and chest radiographs to detect a cervical rib or elongated C7 transverse process",
+      "MRI of the brachial plexus and thoracic outlet to identify fibrous bands, a mass or a Pancoast tumour",
+      "Vascular studies if concurrent arterial or venous compression is suspected",
+      "Cervical spine MRI if radiculopathy is a competing diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous",
-     "Core treatment modality"
+    "redFlags": [
+      "A supraclavicular or apical mass, or Horner syndrome, raising concern for a Pancoast tumour",
+      "Rapidly progressive weakness or widespread wasting suggesting motor neurone disease",
+      "Signs of acute limb ischaemia, distal emboli or subclavian vein thrombosis indicating vascular thoracic outlet compromise",
+      "Constitutional symptoms or weight loss suggesting malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical resection of the responsible cervical rib and fibrous band typically halts progression and relieves pain, but established thenar wasting and axonal sensory loss often recover only partially. The much commoner non-specific form has a variable outcome and does not carry the same structural prognosis.",
+    "pitfalls": [
+      "Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or electrophysiological confirmation",
+      "Overlooking a Pancoast tumour as a cause of lower-plexus signs",
+      "Confusing thenar wasting with carpal tunnel syndrome by not recognising the accompanying medial hand sensory loss",
+      "Mislabelling early motor neurone disease as thoracic outlet syndrome",
+      "Operating on patients with the disputed, non-specific form who lack objective neurological deficits"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Stewart's Focal Peripheral Neuropathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous band, usually with first-rib resection, to relieve traction on the lower trunk",
+      "Use physiotherapy for posture and shoulder-girdle strengthening as an adjunct and while awaiting surgery",
+      "Provide analgesia and neuropathic pain control for the aching medial arm pain",
+      "Offer hand and occupational therapy with rehabilitation for thenar wasting and functional loss",
+      "Exclude a Pancoast tumour or other mass on brachial plexus imaging before attributing symptoms to a cervical rib",
+      "Refer early for surgery and escalate promptly, since established thenar wasting and axonal sensory loss recover only partially once decompression halts progression"
     ]
-   ],
-   "caption": "Overview comparison matrix for thoracic outlet neurogenic."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thoracic-outlet-neurogenic-real-image",
-   "title": "thoracic outlet neurogenic: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "thoracic_outlet_neurogenic-pathway",
+      "title": "thoracic outlet neurogenic: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression, classically by a cervical rib with a taut fibrous band inserting on the first rib",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A supraclavicular or apical mass, or Horner syndrome, raising concern for a Pancoast tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory preservation, Needle electromyography of C8-T1 muscles including abductor pollicis brevis and first"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous band, usually with first-rib resection, to relieve traction on the lower trunk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or electrophysiological confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thoracic outlet neurogenic."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thoracic_outlet_neurogenic-matrix",
+      "title": "thoracic outlet neurogenic: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "True neurogenic thoracic outlet syndrome is a rare lower-trunk (C8-T1) brachial plexopathy caused by chronic compression,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies demonstrating a low median motor and low ulnar sensory response with relative median sensory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ulnar neuropathy at the elbow, C8-T1 radiculopathy from cervical spondylosis or disc, Distal median neuropathy (carpal tunnel",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical decompression with resection of the responsible cervical rib and division of the taut fibrous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing true neurogenic disease on positional symptoms and provocative tests alone, without objective wasting or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thoracic outlet neurogenic."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thoracic_outlet_neurogenic-dx-mgmt",
+      "title": "Diagnosis and management of thoracic outlet neurogenic",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected neurogenic thoracic outlet: thenar wasting with medial hand sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: apical mass, Horner syndrome, or rapidly progressive wasting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging for Pancoast tumour or vascular compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction; C8-T1 EMG; cervical rib imaging; plexus MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do nerve studies show a lower-trunk pattern with objective wasting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ulnar neuropathy, C8-T1 radiculopathy, carpal tunnel or motor neurone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical decompression: cervical rib resection and band division",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy for posture and shoulder strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and neuropathic pain control for medial arm pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand and occupational therapy for thenar wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude a Pancoast tumour before attributing symptoms to a cervical rib",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surgery halts progression and relieves pain; established wasting recovers only partly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thoracic_outlet_neurogenic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Low median motor and low ulnar sensory responses, with relative median sensory preservation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle EMG of C8-T1 muscles",
+          "cells": [
+            {
+              "text": "Lower-trunk pattern, including abductor pollicis brevis and first dorsal interosseous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine and chest radiographs",
+          "cells": [
+            {
+              "text": "Cervical rib or elongated C7 transverse process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brachial plexus and thoracic outlet",
+          "cells": [
+            {
+              "text": "Fibrous bands, mass or Pancoast tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular studies",
+          "cells": [
+            {
+              "text": "Concurrent arterial or venous compression, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_outlet_neurogenic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal median neuropathy (carpal tunnel syndrome)",
+          "cells": [
+            {
+              "text": "Thenar wasting, but without the medial hand sensory loss of the lower trunk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancoast tumour",
+          "cells": [
+            {
+              "text": "Lower-plexus signs; supraclavicular mass or Horner syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease",
+          "cells": [
+            {
+              "text": "Focal hand wasting can mimic it; rapid progression raises concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thoracic_outlet_neurogenic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Resection of the cervical rib and division of the fibrous band, usually with first-rib resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Posture and shoulder-girdle strengthening, as adjunct and while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and neuropathic pain control",
+          "cells": [
+            {
+              "text": "Aching medial arm pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and occupational therapy",
+          "cells": [
+            {
+              "text": "Thenar wasting and functional loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mass exclusion",
+          "cells": [
+            {
+              "text": "Pancoast tumour or other mass excluded on plexus imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgical referral",
+          "cells": [
+            {
+              "text": "Established wasting recovers only partially once decompression halts progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

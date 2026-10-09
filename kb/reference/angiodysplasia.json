@@ -1,170 +1,441 @@
 {
- "id": "angiodysplasia",
- "name": "Angiodysplasia",
- "aliases": [
-  "gastrointestinal angiodysplasia",
-  "vascular ectasia"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in older people",
-   "Most often found in the right colon and caecum, but they occur throughout the gut",
-   "Bleeding is typically intermittent, painless and can be occult (iron-deficiency anaemia) or overt",
-   "Associations include chronic kidney disease, aortic stenosis (Heyde syndrome) and von Willebrand disease",
-   "Endoscopy shows characteristic fern-like or spider-like vascular lesions and allows treatment",
-   "Endoscopic ablation is first-line; refractory or diffuse cases may need medical therapy or, rarely, surgery"
+  "id": "angiodysplasia",
+  "name": "Angiodysplasia",
+  "aliases": [
+    "gastrointestinal angiodysplasia",
+    "vascular ectasia"
   ],
-  "pathophysiology": "Angiodysplasia consists of dilated, thin-walled, tortuous vessels in the gut wall, thought to arise from chronic, intermittent low-grade obstruction of submucosal veins leading to dilatation of the venules and overlying capillaries and loss of precapillary sphincter competence. The fragile ectatic vessels bleed intermittently. Systemic factors that impair haemostasis, such as acquired von Willebrand syndrome in aortic stenosis (Heyde syndrome) and platelet dysfunction in chronic kidney disease, increase bleeding from these lesions.",
-  "additionalDifferentials": [
-   "Diverticular bleeding",
-   "Dieulafoy lesion",
-   "Gastric antral vascular ectasia",
-   "Colorectal neoplasm",
-   "Inflammatory or ischaemic colitis",
-   "Hereditary haemorrhagic telangiectasia"
-  ],
-  "additionalInvestigations": [
-   "Upper and lower gastrointestinal endoscopy",
-   "Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions",
-   "CT or catheter angiography during active bleeding",
-   "Full blood count and iron studies",
-   "Assessment for aortic stenosis and von Willebrand disease in recurrent cases"
-  ],
-  "redFlags": [
-   "Haemodynamically significant or transfusion-dependent bleeding",
-   "Recurrent obscure bleeding despite treatment",
-   "Coexisting aortic stenosis (Heyde syndrome)",
-   "Features suggesting malignancy as an alternative source"
-  ],
-  "prognosis": "Many lesions are managed successfully with endoscopic therapy, but recurrence is common, particularly with diffuse lesions or predisposing systemic conditions.",
-  "pitfalls": [
-   "Overlooking Heyde syndrome and the role of aortic valve intervention",
-   "Attributing anaemia to angiodysplasia without excluding malignancy",
-   "Missing small-bowel lesions requiring capsule or enteroscopy",
-   "Not addressing contributory bleeding disorders"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Gastroenterology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions",
-   "Iron replacement and red cell transfusion to correct iron-deficiency anaemia from chronic occult loss",
-   "Catheter angiographic embolisation for active bleeding not controlled endoscopically",
-   "Antiangiogenic medical therapy such as somatostatin analogues or thalidomide for recurrent or diffuse lesions refractory to endoscopy",
-   "Treat contributing systemic factors, including aortic valve replacement for Heyde syndrome and correcting uraemic platelet dysfunction in chronic kidney disease",
-   "Segmental surgical resection reserved for localised, refractory, life-threatening bleeding",
-   "Monitor haemoglobin and iron status given the frequent recurrence of bleeding"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angiodysplasia-pathway",
-   "title": "Angiodysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in older people",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamically significant or transfusion-dependent bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper and lower gastrointestinal endoscopy, Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions, CT or catheter angiography during active bleeding"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking Heyde syndrome and the role of aortic valve intervention"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angiodysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "angiodysplasia-matrix",
-   "title": "Angiodysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in older people",
+      "Most often found in the right colon and caecum, but they occur throughout the gut",
+      "Bleeding is typically intermittent, painless and can be occult (iron-deficiency anaemia) or overt",
+      "Associations include chronic kidney disease, aortic stenosis (Heyde syndrome) and von Willebrand disease",
+      "Endoscopy shows characteristic fern-like or spider-like vascular lesions and allows treatment",
+      "Endoscopic ablation is first-line; refractory or diffuse cases may need medical therapy or, rarely, surgery"
     ],
-    [
-     "Key Investigations",
-     "Upper and lower gastrointestinal endoscopy, Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions, CT or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angiodysplasia consists of dilated, thin-walled, tortuous vessels in the gut wall, thought to arise from chronic, intermittent low-grade obstruction of submucosal veins leading to dilatation of the venules and overlying capillaries and loss of precapillary sphincter competence. The fragile ectatic vessels bleed intermittently. Systemic factors that impair haemostasis, such as acquired von Willebrand syndrome in aortic stenosis (Heyde syndrome) and platelet dysfunction in chronic kidney disease, increase bleeding from these lesions.",
+    "additionalDifferentials": [
+      "Diverticular bleeding",
+      "Dieulafoy lesion",
+      "Gastric antral vascular ectasia",
+      "Colorectal neoplasm",
+      "Inflammatory or ischaemic colitis",
+      "Hereditary haemorrhagic telangiectasia"
     ],
-    [
-     "Primary Differentials",
-     "Diverticular bleeding, Dieulafoy lesion, Gastric antral vascular ectasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper and lower gastrointestinal endoscopy",
+      "Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions",
+      "CT or catheter angiography during active bleeding",
+      "Full blood count and iron studies",
+      "Assessment for aortic stenosis and von Willebrand disease in recurrent cases"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamically significant or transfusion-dependent bleeding",
+      "Recurrent obscure bleeding despite treatment",
+      "Coexisting aortic stenosis (Heyde syndrome)",
+      "Features suggesting malignancy as an alternative source"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking Heyde syndrome and the role of aortic valve intervention",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many lesions are managed successfully with endoscopic therapy, but recurrence is common, particularly with diffuse lesions or predisposing systemic conditions.",
+    "pitfalls": [
+      "Overlooking Heyde syndrome and the role of aortic valve intervention",
+      "Attributing anaemia to angiodysplasia without excluding malignancy",
+      "Missing small-bowel lesions requiring capsule or enteroscopy",
+      "Not addressing contributory bleeding disorders"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Gastroenterology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions",
+      "Iron replacement and red cell transfusion to correct iron-deficiency anaemia from chronic occult loss",
+      "Catheter angiographic embolisation for active bleeding not controlled endoscopically",
+      "Antiangiogenic medical therapy such as somatostatin analogues or thalidomide for recurrent or diffuse lesions refractory to endoscopy",
+      "Treat contributing systemic factors, including aortic valve replacement for Heyde syndrome and correcting uraemic platelet dysfunction in chronic kidney disease",
+      "Segmental surgical resection reserved for localised, refractory, life-threatening bleeding",
+      "Monitor haemoglobin and iron status given the frequent recurrence of bleeding"
     ]
-   ],
-   "caption": "Overview comparison matrix for angiodysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angiodysplasia-real-image",
-   "title": "Angiodysplasia: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "angiodysplasia-pathway",
+      "title": "Angiodysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in older people",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamically significant or transfusion-dependent bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper and lower gastrointestinal endoscopy, Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions, CT or catheter angiography during active bleeding"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking Heyde syndrome and the role of aortic valve intervention"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angiodysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angiodysplasia-matrix",
+      "title": "Angiodysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acquired ectatic submucosal and mucosal blood vessels that are a common cause of obscure gastrointestinal bleeding, especially in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper and lower gastrointestinal endoscopy, Capsule endoscopy or device-assisted enteroscopy for small-bowel lesions, CT or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diverticular bleeding, Dieulafoy lesion, Gastric antral vascular ectasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic ablation, typically argon plasma coagulation, as first-line treatment for accessible bleeding lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking Heyde syndrome and the role of aortic valve intervention",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angiodysplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angiodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper and lower gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy or device-assisted enteroscopy",
+          "cells": [
+            {
+              "text": "Small-bowel lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or catheter angiography",
+          "cells": [
+            {
+              "text": "Used during active bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia from chronic occult loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for aortic stenosis and von Willebrand disease",
+          "cells": [
+            {
+              "text": "Recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic ablation",
+          "cells": [
+            {
+              "text": "Argon plasma coagulation first-line"
+            },
+            {
+              "text": "For accessible bleeding lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement and red cell transfusion",
+          "cells": [
+            {
+              "text": "Correct iron-deficiency anaemia"
+            },
+            {
+              "text": "Anaemia from chronic occult loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiographic embolisation",
+          "cells": [
+            {
+              "text": "For active bleeding not controlled endoscopically"
+            },
+            {
+              "text": "Endoscopic control has failed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiangiogenic medical therapy",
+          "cells": [
+            {
+              "text": "Somatostatin analogues or thalidomide"
+            },
+            {
+              "text": "Recurrent or diffuse lesions refractory to endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat contributing systemic factors",
+          "cells": [
+            {
+              "text": "Aortic valve replacement for Heyde syndrome; correct uraemic platelet dysfunction"
+            },
+            {
+              "text": "Chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Segmental surgical resection",
+          "cells": [
+            {
+              "text": "Surgical resection of the affected segment"
+            },
+            {
+              "text": "Reserved for localised, refractory, life-threatening bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor haemoglobin and iron status",
+          "cells": [
+            {
+              "text": "Track haemoglobin and iron indices"
+            },
+            {
+              "text": "Bleeding frequently recurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angiodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Angiodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ectatic mucosal and submucosal vessels, a common cause of obscure GI bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemodynamic compromise or transfusion-dependent bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of significant bleeding; consider angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper and lower endoscopy; capsule or enteroscopy for small-bowel lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bleeding lesion identified on endoscopy or enteroscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endoscopic argon plasma coagulation for accessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging if bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and transfusion for iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Embolisation, somatostatin analogues or thalidomide if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat Heyde syndrome; correct uraemic platelet dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence is frequent; monitor haemoglobin and iron status",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

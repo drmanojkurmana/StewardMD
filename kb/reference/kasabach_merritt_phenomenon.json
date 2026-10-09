@@ -1,174 +1,463 @@
 {
- "id": "kasabach_merritt_phenomenon",
- "name": "Kasabach-Merritt phenomenon",
- "aliases": [
-  "Kasabach-Merritt syndrome",
-  "KMP",
-  "haemangioma-thrombocytopenia syndrome"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not within an ordinary infantile haemangioma",
-   "It is caused almost exclusively by kaposiform haemangioendothelioma and tufted angioma, which trap and activate platelets",
-   "The associated tumour is typically tense, enlarging, purpuric and warm, with disproportionate swelling and bruising",
-   "Laboratory hallmarks are severe thrombocytopenia, low fibrinogen and a markedly raised D-dimer",
-   "It is distinct from the localised intravascular coagulopathy of pure venous malformations, which produces milder platelet changes with high D-dimer",
-   "Platelet transfusion is generally avoided unless there is active bleeding or surgery, because transfused platelets are consumed and may worsen tumour swelling",
-   "First-line treatment targets the underlying tumour, commonly with sirolimus and corticosteroids",
-   "Prompt haematology and vascular anomalies specialist involvement is essential given the mortality risk"
+  "id": "kasabach_merritt_phenomenon",
+  "name": "Kasabach-Merritt phenomenon",
+  "aliases": [
+    "Kasabach-Merritt syndrome",
+    "KMP",
+    "haemangioma-thrombocytopenia syndrome"
   ],
-  "pathophysiology": "Kasabach-Merritt phenomenon is the severe consumptive coagulopathy that complicates certain vascular tumours, principally kaposiform haemangioendothelioma and tufted angioma. The abnormal, tortuous intratumoral vasculature traps circulating platelets, which become activated and aggregate within the lesion; this intralesional platelet destruction produces profound thrombocytopenia and secondarily consumes fibrinogen and clotting factors, generating a picture that overlaps with disseminated intravascular coagulation. The resulting bleeding tendency, combined with tumour enlargement, can be rapidly life-threatening.",
-  "additionalDifferentials": [
-   "Localised intravascular coagulopathy of a venous malformation (milder, without severe thrombocytopenia)",
-   "Disseminated intravascular coagulation from sepsis or other cause",
-   "Immune thrombocytopenia",
-   "Neonatal alloimmune or infection-related thrombocytopenia",
-   "Bone marrow failure or infiltration",
-   "Hypersplenism"
-  ],
-  "additionalInvestigations": [
-   "Serial full blood counts documenting profound thrombocytopenia",
-   "Fibrinogen, D-dimer and coagulation profile to confirm consumptive coagulopathy",
-   "MRI of the causative lesion to define extent and tissue involvement",
-   "Biopsy of the tumour, with GLUT1 staining, when safe to confirm kaposiform haemangioendothelioma or tufted angioma",
-   "Peripheral blood film to assess for microangiopathic changes",
-   "Baseline organ function tests before systemic therapy"
-  ],
-  "redFlags": [
-   "Rapidly falling platelet count with an enlarging, tense vascular mass",
-   "Active bleeding, mucosal haemorrhage or intracranial bleeding",
-   "Hypofibrinogenaemia with markedly elevated D-dimer",
-   "Haemodynamic instability",
-   "Airway, visceral or retroperitoneal involvement causing mass effect"
-  ],
-  "prognosis": "The phenomenon carries significant mortality if untreated, but with modern therapy directed at the underlying tumour (particularly sirolimus-based regimens) the coagulopathy usually resolves; residual tumour, chronic pain and fibrotic or lymphatic sequelae may remain after the acute phase.",
-  "pitfalls": [
-   "Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour",
-   "Routine prophylactic platelet transfusion, which feeds intralesional consumption and swelling",
-   "Confusing it with the milder localised intravascular coagulopathy of a venous malformation",
-   "Delaying tumour-directed therapy while treating the coagulopathy in isolation"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and corticosteroids as mainstays",
-   "Support the consumptive coagulopathy with fibrinogen or cryoprecipitate and fresh frozen plasma",
-   "Avoid platelet transfusion unless there is active bleeding or planned surgery, as transfused platelets are consumed and may worsen tumour swelling",
-   "Consider embolisation or surgical resection for accessible or refractory lesions",
-   "Monitor platelet count, fibrinogen and D-dimer serially to track response",
-   "Manage acutely in a high-dependency setting with multidisciplinary vascular anomalies and haematology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kasabach_merritt_phenomenon-pathway",
-   "title": "Kasabach-Merritt phenomenon: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not within an ordinary infantile haemangioma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly falling platelet count with an enlarging, tense vascular mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial full blood counts documenting profound thrombocytopenia, Fibrinogen, D-dimer and coagulation profile to confirm consumptive coagulopathy, MRI of the causative lesion to define extent and tissue involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and corticosteroids as mainstays"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kasabach-merritt phenomenon."
-  }
- ],
- "tables": [
-  {
-   "id": "kasabach_merritt_phenomenon-matrix",
-   "title": "Kasabach-Merritt phenomenon: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not within an ordinary infantile haemangioma",
+      "It is caused almost exclusively by kaposiform haemangioendothelioma and tufted angioma, which trap and activate platelets",
+      "The associated tumour is typically tense, enlarging, purpuric and warm, with disproportionate swelling and bruising",
+      "Laboratory hallmarks are severe thrombocytopenia, low fibrinogen and a markedly raised D-dimer",
+      "It is distinct from the localised intravascular coagulopathy of pure venous malformations, which produces milder platelet changes with high D-dimer",
+      "Platelet transfusion is generally avoided unless there is active bleeding or surgery, because transfused platelets are consumed and may worsen tumour swelling",
+      "First-line treatment targets the underlying tumour, commonly with sirolimus and corticosteroids",
+      "Prompt haematology and vascular anomalies specialist involvement is essential given the mortality risk"
     ],
-    [
-     "Key Investigations",
-     "Serial full blood counts documenting profound thrombocytopenia, Fibrinogen, D-dimer and coagulation profile to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kasabach-Merritt phenomenon is the severe consumptive coagulopathy that complicates certain vascular tumours, principally kaposiform haemangioendothelioma and tufted angioma. The abnormal, tortuous intratumoral vasculature traps circulating platelets, which become activated and aggregate within the lesion; this intralesional platelet destruction produces profound thrombocytopenia and secondarily consumes fibrinogen and clotting factors, generating a picture that overlaps with disseminated intravascular coagulation. The resulting bleeding tendency, combined with tumour enlargement, can be rapidly life-threatening.",
+    "additionalDifferentials": [
+      "Localised intravascular coagulopathy of a venous malformation (milder, without severe thrombocytopenia)",
+      "Disseminated intravascular coagulation from sepsis or other cause",
+      "Immune thrombocytopenia",
+      "Neonatal alloimmune or infection-related thrombocytopenia",
+      "Bone marrow failure or infiltration",
+      "Hypersplenism"
     ],
-    [
-     "Primary Differentials",
-     "Localised intravascular coagulopathy of a venous malformation (milder, without severe thrombocytopenia), Disseminated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial full blood counts documenting profound thrombocytopenia",
+      "Fibrinogen, D-dimer and coagulation profile to confirm consumptive coagulopathy",
+      "MRI of the causative lesion to define extent and tissue involvement",
+      "Biopsy of the tumour, with GLUT1 staining, when safe to confirm kaposiform haemangioendothelioma or tufted angioma",
+      "Peripheral blood film to assess for microangiopathic changes",
+      "Baseline organ function tests before systemic therapy"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly falling platelet count with an enlarging, tense vascular mass",
+      "Active bleeding, mucosal haemorrhage or intracranial bleeding",
+      "Hypofibrinogenaemia with markedly elevated D-dimer",
+      "Haemodynamic instability",
+      "Airway, visceral or retroperitoneal involvement causing mass effect"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "The phenomenon carries significant mortality if untreated, but with modern therapy directed at the underlying tumour (particularly sirolimus-based regimens) the coagulopathy usually resolves; residual tumour, chronic pain and fibrotic or lymphatic sequelae may remain after the acute phase.",
+    "pitfalls": [
+      "Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour",
+      "Routine prophylactic platelet transfusion, which feeds intralesional consumption and swelling",
+      "Confusing it with the milder localised intravascular coagulopathy of a venous malformation",
+      "Delaying tumour-directed therapy while treating the coagulopathy in isolation"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and corticosteroids as mainstays",
+      "Support the consumptive coagulopathy with fibrinogen or cryoprecipitate and fresh frozen plasma",
+      "Avoid platelet transfusion unless there is active bleeding or planned surgery, as transfused platelets are consumed and may worsen tumour swelling",
+      "Consider embolisation or surgical resection for accessible or refractory lesions",
+      "Monitor platelet count, fibrinogen and D-dimer serially to track response",
+      "Manage acutely in a high-dependency setting with multidisciplinary vascular anomalies and haematology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for kasabach-merritt phenomenon."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kasabach-merritt-phenomenon-real-image",
-   "title": "Kasabach-Merritt phenomenon: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "kasabach_merritt_phenomenon-pathway",
+      "title": "Kasabach-Merritt phenomenon: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not within an ordinary infantile haemangioma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly falling platelet count with an enlarging, tense vascular mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial full blood counts documenting profound thrombocytopenia, Fibrinogen, D-dimer and coagulation profile to confirm consumptive coagulopathy, MRI of the causative lesion to define extent and tissue involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and corticosteroids as mainstays"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kasabach-merritt phenomenon."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kasabach_merritt_phenomenon-matrix",
+      "title": "Kasabach-Merritt phenomenon: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A life-threatening consumptive coagulopathy characterised by profound thrombocytopenia occurring within a vascular tumour, not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial full blood counts documenting profound thrombocytopenia, Fibrinogen, D-dimer and coagulation profile to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Localised intravascular coagulopathy of a venous malformation (milder, without severe thrombocytopenia), Disseminated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying vascular tumour (kaposiform haemangioendothelioma or tufted angioma), with sirolimus and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a common infantile haemangioma is the cause when the culprit is a kaposiform tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kasabach-merritt phenomenon."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kasabach_merritt_phenomenon-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial full blood counts",
+          "cells": [
+            {
+              "text": "Profound thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen, D-dimer and coagulation profile",
+          "cells": [
+            {
+              "text": "Consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the causative lesion",
+          "cells": [
+            {
+              "text": "Extent and tissue involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour biopsy with GLUT1 staining when safe",
+          "cells": [
+            {
+              "text": "Kaposiform haemangioendothelioma or tufted angioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Microangiopathic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline organ function tests",
+          "cells": [
+            {
+              "text": "Before systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kasabach_merritt_phenomenon-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Localised coagulopathy of a venous malformation",
+          "cells": [
+            {
+              "text": "Milder, without severe thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation from sepsis",
+          "cells": [
+            {
+              "text": "Infection-triggered consumption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kasabach_merritt_phenomenon-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour-directed therapy",
+          "cells": [
+            {
+              "text": "Sirolimus and corticosteroids as mainstays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen",
+          "cells": [
+            {
+              "text": "Fibrinogen or cryoprecipitate and fresh frozen plasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelets",
+          "cells": [
+            {
+              "text": "Avoided unless active bleeding or planned surgery; transfused platelets are consumed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedures",
+          "cells": [
+            {
+              "text": "Embolisation or surgical resection for accessible or refractory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial platelets, fibrinogen and D-dimer to track response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Setting",
+          "cells": [
+            {
+              "text": "High-dependency care with vascular anomalies and haematology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kasabach_merritt_phenomenon-dx-mgmt",
+      "title": "Diagnosis and management of Kasabach-Merritt phenomenon",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tense, enlarging, purpuric vascular mass with falling platelets in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Active bleeding, intracranial bleed, low fibrinogen with high D-dimer or instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "High-dependency care; fibrinogen or cryoprecipitate; avoid routine platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial counts, fibrinogen, D-dimer, coagulation, MRI, GLUT1 biopsy, film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tumour-linked consumptive coagulopathy confirmed (kaposiform or tufted)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous malformation, sepsis-related DIC or immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sirolimus and corticosteroids for the underlying tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrinogen with cryoprecipitate and fresh frozen plasma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withhold platelets unless bleeding or planned surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Embolisation or resection for accessible refractory lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial platelet, fibrinogen and D-dimer monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Coagulopathy tracks tumour activity; tumour-directed therapy is key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

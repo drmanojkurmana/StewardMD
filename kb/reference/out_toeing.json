@@ -1,175 +1,474 @@
 {
- "id": "out_toeing",
- "name": "Out-toeing gait",
- "aliases": [
-  "outtoeing",
-  "toeing-out",
-  "duck feet",
-  "lateral foot progression"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
-   "In early infancy a bilateral out-toeing is often due to an external rotation contracture of the hip from intrauterine positioning, which resolves once the child bears weight and walks",
-   "In older children external tibial torsion and femoral retroversion are the usual causes, and external tibial torsion tends to increase rather than diminish with growth",
-   "The level of the deformity is defined by a rotational profile using the foot progression angle, hip rotation, and the thigh-foot angle",
-   "External tibial torsion may combine with a valgus knee to aggravate patellofemoral maltracking and anterior knee pain in adolescence",
-   "New or unilateral out-toeing in an older or overweight child should raise concern for a slipped capital femoral epiphysis, in which the limb externally rotates",
-   "Most physiological out-toeing needs only reassurance and observation, with surgery reserved for severe, symptomatic, persistent deformity"
+  "id": "out_toeing",
+  "name": "Out-toeing gait",
+  "aliases": [
+    "outtoeing",
+    "toeing-out",
+    "duck feet",
+    "lateral foot progression"
   ],
-  "pathophysiology": "Out-toeing describes an outwardly directed foot progression angle during walking, produced by external rotational alignment at the hip, tibia, or foot. In the infant it commonly reflects a residual external rotation contracture of the hip capsule from intrauterine position, which stretches out with ambulation. In the older child it usually arises from external tibial torsion or reduced femoral anteversion (relative retroversion), representing variation in the normal course of skeletal derotation. Unlike internal torsion, external tibial torsion often progresses with growth. Pathological out-toeing is important to recognise because hip disorders such as a slipped capital femoral epiphysis characteristically hold the limb in external rotation.",
-  "additionalDifferentials": [
-   "External tibial torsion",
-   "Femoral retroversion or reduced femoral anteversion",
-   "External rotation contracture of the hip in infancy",
-   "Slipped capital femoral epiphysis in the older child",
-   "Calcaneovalgus or planovalgus foot deformity",
-   "Neuromuscular gait disorder"
-  ],
-  "additionalInvestigations": [
-   "Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle",
-   "Observation of gait for symmetry and pattern",
-   "Examination of the hips for restricted internal rotation suggesting a slipped epiphysis",
-   "Hip radiographs including a frog-lateral view when a slipped capital femoral epiphysis is suspected",
-   "Assessment of the feet for planovalgus or calcaneovalgus deformity",
-   "Standing lower-limb radiographs where associated angular deformity is present"
-  ],
-  "redFlags": [
-   "New or unilateral out-toeing in an older or overweight child suggesting a slipped capital femoral epiphysis",
-   "Hip or knee pain, limp, or restricted hip internal rotation",
-   "Progressive external tibial torsion with worsening patellofemoral symptoms",
-   "Marked asymmetry between the limbs",
-   "Neurological signs indicating an underlying neuromuscular disorder"
-  ],
-  "prognosis": "Physiological out-toeing generally carries a good prognosis, with infantile hip contractures resolving after walking begins; external tibial torsion is less predictable and may persist or progress, occasionally warranting correction for symptoms.",
-  "pitfalls": [
-   "Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis",
-   "Assuming out-toeing always resolves, when external tibial torsion can worsen with growth",
-   "Failing to localise the deformity with a rotational profile",
-   "Overtreating benign infantile out-toeing with unnecessary orthoses",
-   "Overlooking associated patellofemoral maltracking that may need attention"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Staheli LT, rotational problems of the lower extremity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and walking begin",
-   "Serial monitoring of the rotational profile, including foot progression angle, hip rotation and thigh-foot angle, to track the natural course",
-   "Reserve derotational tibial osteotomy for severe, persistent external tibial torsion causing symptoms or patellofemoral maltracking",
-   "Conservative management of associated planovalgus foot deformity and anterior knee pain",
-   "Urgently exclude and manage a slipped capital femoral epiphysis in a new or unilateral out-toeing older or overweight child, with frog-lateral hip radiographs and prompt orthopaedic referral",
-   "Refer to paediatric orthopaedics when the deformity is unilateral, progressive, painful or outside the expected developmental pattern"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "out_toeing-pathway",
-   "title": "Out-toeing gait: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or unilateral out-toeing in an older or overweight child suggesting a slipped capital femoral epiphysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle, Observation of gait for symmetry and pattern, Examination of the hips for restricted internal rotation suggesting a slipped epiphysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and walking begin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of out-toeing gait."
-  }
- ],
- "tables": [
-  {
-   "id": "out_toeing-matrix",
-   "title": "Out-toeing gait: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
+      "In early infancy a bilateral out-toeing is often due to an external rotation contracture of the hip from intrauterine positioning, which resolves once the child bears weight and walks",
+      "In older children external tibial torsion and femoral retroversion are the usual causes, and external tibial torsion tends to increase rather than diminish with growth",
+      "The level of the deformity is defined by a rotational profile using the foot progression angle, hip rotation, and the thigh-foot angle",
+      "External tibial torsion may combine with a valgus knee to aggravate patellofemoral maltracking and anterior knee pain in adolescence",
+      "New or unilateral out-toeing in an older or overweight child should raise concern for a slipped capital femoral epiphysis, in which the limb externally rotates",
+      "Most physiological out-toeing needs only reassurance and observation, with surgery reserved for severe, symptomatic, persistent deformity"
     ],
-    [
-     "Key Investigations",
-     "Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle, Observation of gait for symmetry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Out-toeing describes an outwardly directed foot progression angle during walking, produced by external rotational alignment at the hip, tibia, or foot. In the infant it commonly reflects a residual external rotation contracture of the hip capsule from intrauterine position, which stretches out with ambulation. In the older child it usually arises from external tibial torsion or reduced femoral anteversion (relative retroversion), representing variation in the normal course of skeletal derotation. Unlike internal torsion, external tibial torsion often progresses with growth. Pathological out-toeing is important to recognise because hip disorders such as a slipped capital femoral epiphysis characteristically hold the limb in external rotation.",
+    "additionalDifferentials": [
+      "External tibial torsion",
+      "Femoral retroversion or reduced femoral anteversion",
+      "External rotation contracture of the hip in infancy",
+      "Slipped capital femoral epiphysis in the older child",
+      "Calcaneovalgus or planovalgus foot deformity",
+      "Neuromuscular gait disorder"
     ],
-    [
-     "Primary Differentials",
-     "External tibial torsion, Femoral retroversion or reduced femoral anteversion, External rotation contracture of the hip in infancy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle",
+      "Observation of gait for symmetry and pattern",
+      "Examination of the hips for restricted internal rotation suggesting a slipped epiphysis",
+      "Hip radiographs including a frog-lateral view when a slipped capital femoral epiphysis is suspected",
+      "Assessment of the feet for planovalgus or calcaneovalgus deformity",
+      "Standing lower-limb radiographs where associated angular deformity is present"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and",
-     "Core treatment modality"
+    "redFlags": [
+      "New or unilateral out-toeing in an older or overweight child suggesting a slipped capital femoral epiphysis",
+      "Hip or knee pain, limp, or restricted hip internal rotation",
+      "Progressive external tibial torsion with worsening patellofemoral symptoms",
+      "Marked asymmetry between the limbs",
+      "Neurological signs indicating an underlying neuromuscular disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Physiological out-toeing generally carries a good prognosis, with infantile hip contractures resolving after walking begins; external tibial torsion is less predictable and may persist or progress, occasionally warranting correction for symptoms.",
+    "pitfalls": [
+      "Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis",
+      "Assuming out-toeing always resolves, when external tibial torsion can worsen with growth",
+      "Failing to localise the deformity with a rotational profile",
+      "Overtreating benign infantile out-toeing with unnecessary orthoses",
+      "Overlooking associated patellofemoral maltracking that may need attention"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Staheli LT, rotational problems of the lower extremity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and walking begin",
+      "Serial monitoring of the rotational profile, including foot progression angle, hip rotation and thigh-foot angle, to track the natural course",
+      "Reserve derotational tibial osteotomy for severe, persistent external tibial torsion causing symptoms or patellofemoral maltracking",
+      "Conservative management of associated planovalgus foot deformity and anterior knee pain",
+      "Urgently exclude and manage a slipped capital femoral epiphysis in a new or unilateral out-toeing older or overweight child, with frog-lateral hip radiographs and prompt orthopaedic referral",
+      "Refer to paediatric orthopaedics when the deformity is unilateral, progressive, painful or outside the expected developmental pattern"
     ]
-   ],
-   "caption": "Overview comparison matrix for out-toeing gait."
-  }
- ],
- "diagrams": [
-  {
-   "id": "out-toeing-real-image",
-   "title": "Out-toeing gait: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "out_toeing-pathway",
+      "title": "Out-toeing gait: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or unilateral out-toeing in an older or overweight child suggesting a slipped capital femoral epiphysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle, Observation of gait for symmetry and pattern, Examination of the hips for restricted internal rotation suggesting a slipped epiphysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and walking begin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of out-toeing gait."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "out_toeing-matrix",
+      "title": "Out-toeing gait: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Out-toeing is less common than in-toeing and, like it, is usually a benign rotational variant",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full rotational profile with foot progression angle, hip rotation, and thigh-foot angle, Observation of gait for symmetry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "External tibial torsion, Femoral retroversion or reduced femoral anteversion, External rotation contracture of the hip in infancy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe physiological out-toeing, as infantile hip external-rotation contractures resolve once weight-bearing and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing unilateral out-toeing in an adolescent and missing a slipped capital femoral epiphysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for out-toeing gait."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "out_toeing-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotational profile (foot progression angle, hip rotation, thigh-foot angle)",
+          "cells": [
+            {
+              "text": "Level of the rotational deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of gait",
+          "cells": [
+            {
+              "text": "Symmetry and pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip examination for restricted internal rotation",
+          "cells": [
+            {
+              "text": "Possible slipped epiphysis when restricted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip radiographs with frog-lateral view",
+          "cells": [
+            {
+              "text": "Slipped capital femoral epiphysis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot assessment",
+          "cells": [
+            {
+              "text": "Planovalgus or calcaneovalgus deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "out_toeing-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "External tibial torsion",
+          "cells": [
+            {
+              "text": "Tends to increase rather than diminish with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slipped capital femoral epiphysis",
+          "cells": [
+            {
+              "text": "New or unilateral out-toeing in an older or overweight child"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "out_toeing-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Physiological out-toeing; infantile hip contractures resolve once the child walks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Foot progression angle, hip rotation and thigh-foot angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Derotational tibial osteotomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Severe, persistent external tibial torsion causing symptoms or patellofemoral maltracking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care of associated deformity",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Planovalgus foot deformity and anterior knee pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude slipped epiphysis urgently",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "In a new or unilateral out-toeing older or overweight child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Paediatric orthopaedics if unilateral, progressive, painful or outside the expected pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "out_toeing-dx-mgmt",
+      "title": "Diagnosis and management of Out-toeing gait",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Outward foot progression during walking in an infant, child or adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new or unilateral out-toeing, hip or knee pain, limp or asymmetry)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent frog-lateral hip radiographs and orthopaedic referral for SCFE",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rotational profile, hip rotation examination, foot assessment, hip radiographs if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the out-toeing bilateral and physiological, with no hip restriction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCFE, femoral retroversion, external tibial torsion or neuromuscular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe physiological out-toeing; infant hip contractures resolve on walking",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial monitoring of foot progression angle, hip rotation and thigh-foot angle",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Derotational tibial osteotomy for severe persistent external tibial torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Conservative care for planovalgus deformity and anterior knee pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to paediatric orthopaedics if unilateral, progressive, painful or atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Physiological out-toeing has a good prognosis; external tibial torsion may progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

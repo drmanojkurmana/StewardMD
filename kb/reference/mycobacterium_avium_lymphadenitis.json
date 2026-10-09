@@ -1,177 +1,473 @@
 {
- "id": "mycobacterium_avium_lymphadenitis",
- "name": "Non-tuberculous mycobacterial cervical lymphadenitis",
- "aliases": [
-  "NTM lymphadenitis",
-  "atypical mycobacterial lymphadenitis",
-  "nontuberculous mycobacterial cervical lymphadenitis",
-  "MAC lymphadenitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium avium complex and less often M. scrofulaceum, M. haemophilum, or M. malmoense",
-   "Typically affects children aged one to five years, who are thought to acquire the organism from soil and water via the mouth",
-   "Presents as a unilateral, firm, painless, slowly enlarging node in the submandibular, cervical, or preauricular region with little systemic upset",
-   "The overlying skin often develops a characteristic violaceous discolouration and may progress to fluctuance and a chronically discharging sinus",
-   "The tuberculin skin test is usually negative or only weakly positive and interferon-gamma release assays are typically negative, helping to distinguish it from tuberculosis",
-   "Complete surgical excision of the affected nodes is the treatment of choice and offers the highest cure rate",
-   "Incision and drainage should be avoided because it commonly leads to a chronic discharging sinus",
-   "Macrolide-based antimicrobial therapy or watchful observation are alternatives when excision is incomplete, high risk to the facial nerve, or declined, as many nodes resolve slowly on their own"
+  "id": "mycobacterium_avium_lymphadenitis",
+  "name": "Non-tuberculous mycobacterial cervical lymphadenitis",
+  "aliases": [
+    "NTM lymphadenitis",
+    "atypical mycobacterial lymphadenitis",
+    "nontuberculous mycobacterial cervical lymphadenitis",
+    "MAC lymphadenitis"
   ],
-  "pathophysiology": "Nontuberculous mycobacterial cervical lymphadenitis develops when environmental mycobacteria, most often Mycobacterium avium complex, enter through the oral mucosa of a young child and spread to the draining submandibular and cervical lymph nodes. A granulomatous immune response with caseation forms within the node; because the child is immunocompetent, disease remains localised with minimal systemic features. Progressive necrosis can liquefy and extend to the skin, producing the typical violaceous discolouration, fluctuance, and eventual sinus formation. Multifocal, bilateral, recurrent, or unusually aggressive disease should prompt consideration of an underlying immune defect.",
-  "additionalDifferentials": [
-   "Tuberculous lymphadenitis",
-   "Reactive or pyogenic bacterial lymphadenitis",
-   "Cat-scratch disease",
-   "Lymphoma",
-   "Branchial cleft cyst or other congenital neck mass",
-   "Other granulomatous disease such as sarcoidosis"
-  ],
-  "additionalInvestigations": [
-   "Excisional lymph-node biopsy, which is both diagnostic and therapeutic",
-   "Mycobacterial culture and molecular testing of tissue with speciation",
-   "Tuberculin skin test and interferon-gamma release assay to help exclude tuberculosis",
-   "Ultrasound of the neck to define nodal extent and proximity to the facial nerve",
-   "Histology showing granulomatous inflammation with or without caseation",
-   "Assessment of immune status in atypical, multifocal, or recurrent disease"
-  ],
-  "redFlags": [
-   "Nodes near the facial nerve (preauricular or periparotid) where surgery risks nerve injury",
-   "Features suggesting tuberculosis, prompting exclusion and contact tracing",
-   "Multifocal, bilateral, or recurrent disease suggesting an underlying immunodeficiency",
-   "Rapidly enlarging or systemically symptomatic swelling suggesting malignancy",
-   "A chronically discharging sinus complicating incision and drainage"
-  ],
-  "prognosis": "The prognosis is excellent, particularly after complete surgical excision, which is usually curative. Untreated or incompletely treated disease tends to resolve over months but may leave scarring or a discharging sinus; recurrence is uncommon after complete excision.",
-  "pitfalls": [
-   "Performing incision and drainage, which promotes a chronic discharging sinus",
-   "Failing to exclude tuberculosis before attributing the adenitis to nontuberculous mycobacteria",
-   "Not sending tissue for mycobacterial culture and molecular testing",
-   "Risking facial-nerve injury during excision of periparotid or preauricular nodes",
-   "Overlooking an underlying immune defect in multifocal or recurrent disease"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate",
-   "Avoid simple incision and drainage, which risks a chronically discharging sinus or fistula",
-   "Reserve macrolide-based antimycobacterial therapy (a macrolide such as clarithromycin combined with rifampicin or ethambutol) for incompletely excised, recurrent, or surgically hazardous disease near the facial nerve",
-   "Consider watchful observation in selected cases, since many nodes resolve slowly over months, weighing this against cosmetic scarring",
-   "Define nodal extent and proximity to the facial nerve with neck ultrasound to plan safe surgery",
-   "Assess immune status where disease is atypical, multifocal, bilateral, or recurrent",
-   "Refer for multidisciplinary care involving paediatric surgery or ENT and infectious diseases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mycobacterium_avium_lymphadenitis-pathway",
-   "title": "Non-tuberculous mycobacterial cervical lymphadenitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium avium complex and less often M. scrofulaceum, M. haemophilum, or M. malmoense",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nodes near the facial nerve (preauricular or periparotid) where surgery risks nerve injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excisional lymph-node biopsy, which is both diagnostic and therapeutic, Mycobacterial culture and molecular testing of tissue with speciation, Tuberculin skin test and interferon-gamma release assay to help exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing incision and drainage, which promotes a chronic discharging sinus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non-tuberculous mycobacterial cervical lymphadenitis."
-  }
- ],
- "tables": [
-  {
-   "id": "mycobacterium_avium_lymphadenitis-matrix",
-   "title": "Non-tuberculous mycobacterial cervical lymphadenitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium avium complex and less often M. scrofulaceum, M. haemophilum, or M. malmoense",
+      "Typically affects children aged one to five years, who are thought to acquire the organism from soil and water via the mouth",
+      "Presents as a unilateral, firm, painless, slowly enlarging node in the submandibular, cervical, or preauricular region with little systemic upset",
+      "The overlying skin often develops a characteristic violaceous discolouration and may progress to fluctuance and a chronically discharging sinus",
+      "The tuberculin skin test is usually negative or only weakly positive and interferon-gamma release assays are typically negative, helping to distinguish it from tuberculosis",
+      "Complete surgical excision of the affected nodes is the treatment of choice and offers the highest cure rate",
+      "Incision and drainage should be avoided because it commonly leads to a chronic discharging sinus",
+      "Macrolide-based antimicrobial therapy or watchful observation are alternatives when excision is incomplete, high risk to the facial nerve, or declined, as many nodes resolve slowly on their own"
     ],
-    [
-     "Key Investigations",
-     "Excisional lymph-node biopsy, which is both diagnostic and therapeutic, Mycobacterial culture and molecular testing of tissue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nontuberculous mycobacterial cervical lymphadenitis develops when environmental mycobacteria, most often Mycobacterium avium complex, enter through the oral mucosa of a young child and spread to the draining submandibular and cervical lymph nodes. A granulomatous immune response with caseation forms within the node; because the child is immunocompetent, disease remains localised with minimal systemic features. Progressive necrosis can liquefy and extend to the skin, producing the typical violaceous discolouration, fluctuance, and eventual sinus formation. Multifocal, bilateral, recurrent, or unusually aggressive disease should prompt consideration of an underlying immune defect.",
+    "additionalDifferentials": [
+      "Tuberculous lymphadenitis",
+      "Reactive or pyogenic bacterial lymphadenitis",
+      "Cat-scratch disease",
+      "Lymphoma",
+      "Branchial cleft cyst or other congenital neck mass",
+      "Other granulomatous disease such as sarcoidosis"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculous lymphadenitis, Reactive or pyogenic bacterial lymphadenitis, Cat-scratch disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Excisional lymph-node biopsy, which is both diagnostic and therapeutic",
+      "Mycobacterial culture and molecular testing of tissue with speciation",
+      "Tuberculin skin test and interferon-gamma release assay to help exclude tuberculosis",
+      "Ultrasound of the neck to define nodal extent and proximity to the facial nerve",
+      "Histology showing granulomatous inflammation with or without caseation",
+      "Assessment of immune status in atypical, multifocal, or recurrent disease"
     ],
-    [
-     "Management Strategy",
-     "Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate",
-     "Core treatment modality"
+    "redFlags": [
+      "Nodes near the facial nerve (preauricular or periparotid) where surgery risks nerve injury",
+      "Features suggesting tuberculosis, prompting exclusion and contact tracing",
+      "Multifocal, bilateral, or recurrent disease suggesting an underlying immunodeficiency",
+      "Rapidly enlarging or systemically symptomatic swelling suggesting malignancy",
+      "A chronically discharging sinus complicating incision and drainage"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing incision and drainage, which promotes a chronic discharging sinus",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, particularly after complete surgical excision, which is usually curative. Untreated or incompletely treated disease tends to resolve over months but may leave scarring or a discharging sinus; recurrence is uncommon after complete excision.",
+    "pitfalls": [
+      "Performing incision and drainage, which promotes a chronic discharging sinus",
+      "Failing to exclude tuberculosis before attributing the adenitis to nontuberculous mycobacteria",
+      "Not sending tissue for mycobacterial culture and molecular testing",
+      "Risking facial-nerve injury during excision of periparotid or preauricular nodes",
+      "Overlooking an underlying immune defect in multifocal or recurrent disease"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate",
+      "Avoid simple incision and drainage, which risks a chronically discharging sinus or fistula",
+      "Reserve macrolide-based antimycobacterial therapy (a macrolide such as clarithromycin combined with rifampicin or ethambutol) for incompletely excised, recurrent, or surgically hazardous disease near the facial nerve",
+      "Consider watchful observation in selected cases, since many nodes resolve slowly over months, weighing this against cosmetic scarring",
+      "Define nodal extent and proximity to the facial nerve with neck ultrasound to plan safe surgery",
+      "Assess immune status where disease is atypical, multifocal, bilateral, or recurrent",
+      "Refer for multidisciplinary care involving paediatric surgery or ENT and infectious diseases"
     ]
-   ],
-   "caption": "Overview comparison matrix for non-tuberculous mycobacterial cervical lymphadenitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycobacterium-avium-lymphadenitis-real-image",
-   "title": "Non-tuberculous mycobacterial cervical lymphadenitis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mycobacterium_avium_lymphadenitis-pathway",
+      "title": "Non-tuberculous mycobacterial cervical lymphadenitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium avium complex and less often M. scrofulaceum, M. haemophilum, or M. malmoense",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nodes near the facial nerve (preauricular or periparotid) where surgery risks nerve injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excisional lymph-node biopsy, which is both diagnostic and therapeutic, Mycobacterial culture and molecular testing of tissue with speciation, Tuberculin skin test and interferon-gamma release assay to help exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing incision and drainage, which promotes a chronic discharging sinus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non-tuberculous mycobacterial cervical lymphadenitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycobacterium_avium_lymphadenitis-matrix",
+      "title": "Non-tuberculous mycobacterial cervical lymphadenitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common form of nontuberculous mycobacterial disease in otherwise healthy young children, usually caused by Mycobacterium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excisional lymph-node biopsy, which is both diagnostic and therapeutic, Mycobacterial culture and molecular testing of tissue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculous lymphadenitis, Reactive or pyogenic bacterial lymphadenitis, Cat-scratch disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake complete surgical excision of the affected nodes as the definitive treatment of choice, offering the highest cure rate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing incision and drainage, which promotes a chronic discharging sinus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non-tuberculous mycobacterial cervical lymphadenitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mycobacterium_avium_lymphadenitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional lymph-node biopsy",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial culture and molecular testing of tissue",
+          "cells": [
+            {
+              "text": "Speciation of the organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculin skin test and interferon-gamma release assay",
+          "cells": [
+            {
+              "text": "Usually negative or only weakly positive, helping to exclude tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Nodal extent and proximity to the facial nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation with or without caseation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "In atypical, multifocal or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_avium_lymphadenitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous lymphadenitis",
+          "cells": [
+            {
+              "text": "Tuberculin test and interferon-gamma release assay are usually negative in this disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive or pyogenic bacterial lymphadenitis",
+          "cells": [
+            {
+              "text": "Little systemic upset; firm, painless, slowly enlarging node"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Rapidly enlarging or systemically symptomatic swelling suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mycobacterium_avium_lymphadenitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive treatment of choice, offering the highest cure rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid incision and drainage",
+          "cells": [
+            {
+              "text": "Commonly leads to a chronic discharging sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide-based therapy",
+          "cells": [
+            {
+              "text": "Such as clarithromycin with rifampicin or ethambutol, for incomplete, recurrent or surgically hazardous disease near the facial nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful observation",
+          "cells": [
+            {
+              "text": "Considered in selected cases, as many nodes resolve slowly, weighed against cosmetic scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Defines nodal extent and facial nerve proximity to plan safe surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Where disease is atypical, multifocal, bilateral or recurrent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Paediatric surgery or ENT, and infectious diseases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mycobacterium_avium_lymphadenitis-dx-mgmt",
+      "title": "Diagnosis and management of Non-tuberculous mycobacterial cervical lymphadenitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless, firm, slowly enlarging neck node in a child aged one to five",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (node near facial nerve, multifocal disease, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Plan imaging and surgery with care near the facial nerve; assess immunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional biopsy with culture and speciation, tuberculin test, interferon-gamma assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tuberculosis excluded and NTM confirmed on tissue culture or molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculous adenitis or lymphoma; repeat tissue sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid simple incision and drainage, which causes a discharging sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Macrolide-based therapy if excision is incomplete or near the facial nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Watchful observation in selected cases, as many nodes resolve slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis after complete excision; recurrence is uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

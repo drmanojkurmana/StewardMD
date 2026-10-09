@@ -1,173 +1,480 @@
 {
- "id": "kluver_bucy_syndrome",
- "name": "Kluver-Bucy syndrome",
- "aliases": [
-  "Kluver-Bucy",
-  "bilateral temporal lobe syndrome",
-  "amygdala syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
-   "Core features include hyperorality (examining and placing objects in the mouth), hypersexuality, and abnormal placidity or blunted fear and anger",
-   "Visual and other agnosias may occur, with an inability to recognise objects or their significance (psychic blindness)",
-   "Hypermetamorphosis, an excessive tendency to attend and react to every visual stimulus, is characteristic",
-   "In humans the full syndrome is uncommon and often partial, arising from herpes simplex encephalitis, head injury, stroke, frontotemporal dementia, or after temporal lobectomy",
-   "Memory impairment frequently accompanies the syndrome because of medial temporal involvement",
-   "Management is supportive and directed at the underlying cause, with behavioural measures and cautious pharmacotherapy for disruptive symptoms"
+  "id": "kluver_bucy_syndrome",
+  "name": "Kluver-Bucy syndrome",
+  "aliases": [
+    "Kluver-Bucy",
+    "bilateral temporal lobe syndrome",
+    "amygdala syndrome"
   ],
-  "pathophysiology": "Kluver-Bucy syndrome follows bilateral destruction or dysfunction of the anterior temporal lobes and amygdalae, structures central to assigning emotional and biological significance to sensory stimuli. Loss of amygdala function disconnects perception from appropriate emotional appraisal, producing tameness and loss of fear (placidity), indiscriminate oral and sexual exploration, and an inability to attach meaning to what is seen despite intact primary vision. Involvement of adjacent hippocampal and temporal cortex accounts for the accompanying amnesia and agnosia. In humans the commonest cause is herpes simplex encephalitis, with other aetiologies including trauma, infarction, neurodegeneration, and bilateral temporal surgery.",
-  "additionalDifferentials": [
-   "Behavioural-variant frontotemporal dementia",
-   "Herpes simplex and other limbic encephalitis",
-   "Anti-NMDA-receptor autoimmune encephalitis",
-   "Post-ictal or interictal behavioural change in temporal lobe epilepsy",
-   "Frontal lobe disinhibition syndromes",
-   "Hypersexuality from medication or endocrine disorder"
-  ],
-  "additionalInvestigations": [
-   "MRI brain to demonstrate bilateral temporal or amygdala lesions",
-   "Cerebrospinal fluid analysis and viral PCR for herpes simplex and autoimmune encephalitis",
-   "Electroencephalography to assess for temporal epileptiform activity",
-   "Autoimmune and paraneoplastic antibody panel where encephalitis is suspected",
-   "Neuropsychological assessment of memory, recognition, and behaviour",
-   "Bloods and metabolic screen"
-  ],
-  "redFlags": [
-   "Fever, headache, and altered consciousness suggesting active encephalitis requiring urgent treatment",
-   "Seizures indicating temporal lobe irritation",
-   "Rapidly progressive behavioural change pointing to autoimmune or neurodegenerative disease",
-   "Hypersexual or disinhibited behaviour posing risk to the patient or others"
-  ],
-  "prognosis": "Outcome depends on the underlying cause; features following herpes simplex encephalitis or extensive bilateral injury may be permanent, whereas some post-ictal or reversible cases improve. Residual memory and behavioural impairment commonly persists.",
-  "pitfalls": [
-   "Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause",
-   "Mistaking the disinhibition for primary psychiatric illness",
-   "Overlooking accompanying amnesia and agnosia when assessing capacity and safety",
-   "Attributing hyperorality or hypersexuality to behavioural choice rather than organic disease"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis",
-   "Structured behavioural management and supervision for hyperorality, hypersexuality and disinhibition",
-   "Pharmacological control of behavioural symptoms with antipsychotics, mood stabilisers such as carbamazepine, or selective serotonin reuptake inhibitors for hypersexuality and aggression",
-   "Environmental safety measures, including removing hazardous objects given indiscriminate oral exploration",
-   "Neurorehabilitation with cognitive and memory support",
-   "Antiseizure medication where temporal lobe seizures occur",
-   "Multidisciplinary neurology and neuropsychiatry input with carer education and support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kluver_bucy_syndrome-pathway",
-   "title": "Kluver-Bucy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever, headache, and altered consciousness suggesting active encephalitis requiring urgent treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain to demonstrate bilateral temporal or amygdala lesions, Cerebrospinal fluid analysis and viral PCR for herpes simplex and autoimmune encephalitis, Electroencephalography to assess for temporal epileptiform activity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kluver-bucy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "kluver_bucy_syndrome-matrix",
-   "title": "Kluver-Bucy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
+      "Core features include hyperorality (examining and placing objects in the mouth), hypersexuality, and abnormal placidity or blunted fear and anger",
+      "Visual and other agnosias may occur, with an inability to recognise objects or their significance (psychic blindness)",
+      "Hypermetamorphosis, an excessive tendency to attend and react to every visual stimulus, is characteristic",
+      "In humans the full syndrome is uncommon and often partial, arising from herpes simplex encephalitis, head injury, stroke, frontotemporal dementia, or after temporal lobectomy",
+      "Memory impairment frequently accompanies the syndrome because of medial temporal involvement",
+      "Management is supportive and directed at the underlying cause, with behavioural measures and cautious pharmacotherapy for disruptive symptoms"
     ],
-    [
-     "Key Investigations",
-     "MRI brain to demonstrate bilateral temporal or amygdala lesions, Cerebrospinal fluid analysis and viral PCR for herpes simplex",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kluver-Bucy syndrome follows bilateral destruction or dysfunction of the anterior temporal lobes and amygdalae, structures central to assigning emotional and biological significance to sensory stimuli. Loss of amygdala function disconnects perception from appropriate emotional appraisal, producing tameness and loss of fear (placidity), indiscriminate oral and sexual exploration, and an inability to attach meaning to what is seen despite intact primary vision. Involvement of adjacent hippocampal and temporal cortex accounts for the accompanying amnesia and agnosia. In humans the commonest cause is herpes simplex encephalitis, with other aetiologies including trauma, infarction, neurodegeneration, and bilateral temporal surgery.",
+    "additionalDifferentials": [
+      "Behavioural-variant frontotemporal dementia",
+      "Herpes simplex and other limbic encephalitis",
+      "Anti-NMDA-receptor autoimmune encephalitis",
+      "Post-ictal or interictal behavioural change in temporal lobe epilepsy",
+      "Frontal lobe disinhibition syndromes",
+      "Hypersexuality from medication or endocrine disorder"
     ],
-    [
-     "Primary Differentials",
-     "Behavioural-variant frontotemporal dementia, Herpes simplex and other limbic encephalitis, Anti-NMDA-receptor autoimmune",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain to demonstrate bilateral temporal or amygdala lesions",
+      "Cerebrospinal fluid analysis and viral PCR for herpes simplex and autoimmune encephalitis",
+      "Electroencephalography to assess for temporal epileptiform activity",
+      "Autoimmune and paraneoplastic antibody panel where encephalitis is suspected",
+      "Neuropsychological assessment of memory, recognition, and behaviour",
+      "Bloods and metabolic screen"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever, headache, and altered consciousness suggesting active encephalitis requiring urgent treatment",
+      "Seizures indicating temporal lobe irritation",
+      "Rapidly progressive behavioural change pointing to autoimmune or neurodegenerative disease",
+      "Hypersexual or disinhibited behaviour posing risk to the patient or others"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the underlying cause; features following herpes simplex encephalitis or extensive bilateral injury may be permanent, whereas some post-ictal or reversible cases improve. Residual memory and behavioural impairment commonly persists.",
+    "pitfalls": [
+      "Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause",
+      "Mistaking the disinhibition for primary psychiatric illness",
+      "Overlooking accompanying amnesia and agnosia when assessing capacity and safety",
+      "Attributing hyperorality or hypersexuality to behavioural choice rather than organic disease"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis",
+      "Structured behavioural management and supervision for hyperorality, hypersexuality and disinhibition",
+      "Pharmacological control of behavioural symptoms with antipsychotics, mood stabilisers such as carbamazepine, or selective serotonin reuptake inhibitors for hypersexuality and aggression",
+      "Environmental safety measures, including removing hazardous objects given indiscriminate oral exploration",
+      "Neurorehabilitation with cognitive and memory support",
+      "Antiseizure medication where temporal lobe seizures occur",
+      "Multidisciplinary neurology and neuropsychiatry input with carer education and support"
     ]
-   ],
-   "caption": "Overview comparison matrix for kluver-bucy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kluver-bucy-syndrome-real-image",
-   "title": "Kluver-Bucy syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "kluver_bucy_syndrome-pathway",
+      "title": "Kluver-Bucy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever, headache, and altered consciousness suggesting active encephalitis requiring urgent treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain to demonstrate bilateral temporal or amygdala lesions, Cerebrospinal fluid analysis and viral PCR for herpes simplex and autoimmune encephalitis, Electroencephalography to assess for temporal epileptiform activity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kluver-bucy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kluver_bucy_syndrome-matrix",
+      "title": "Kluver-Bucy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A behavioural syndrome resulting from bilateral damage to the medial temporal lobes, particularly the amygdalae",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain to demonstrate bilateral temporal or amygdala lesions, Cerebrospinal fluid analysis and viral PCR for herpes simplex",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Behavioural-variant frontotemporal dementia, Herpes simplex and other limbic encephalitis, Anti-NMDA-receptor autoimmune",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause, with aciclovir for herpes simplex encephalitis and immunotherapy for autoimmune encephalitis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise and treat herpes simplex encephalitis promptly as an underlying cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kluver-bucy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kluver_bucy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Bilateral temporal or amygdala lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis and viral PCR",
+          "cells": [
+            {
+              "text": "Herpes simplex and autoimmune encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Temporal epileptiform activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and paraneoplastic antibody panel",
+          "cells": [
+            {
+              "text": "Where encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Memory, recognition and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kluver_bucy_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex and limbic encephalitis",
+          "cells": [
+            {
+              "text": "Fever, headache and altered consciousness; treated with aciclovir"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune encephalitis, including anti-NMDA-receptor",
+          "cells": [
+            {
+              "text": "Separated by antibody panel; treated with immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal lobe epilepsy",
+          "cells": [
+            {
+              "text": "Post-ictal or interictal behavioural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural-variant frontotemporal dementia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kluver_bucy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Aciclovir for herpes simplex encephalitis; immunotherapy for autoimmune encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured behavioural management",
+          "cells": [
+            {
+              "text": "Supervision for hyperorality, hypersexuality and disinhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological control",
+          "cells": [
+            {
+              "text": "Antipsychotics, carbamazepine or SSRIs for disruptive symptoms; cautious use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental safety",
+          "cells": [
+            {
+              "text": "Remove hazardous objects, given indiscriminate oral exploration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Cognitive and memory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Where temporal lobe seizures occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kluver_bucy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kluver-Bucy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Kluver-Bucy: hyperorality, hypersexuality, placidity, visual agnosia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, altered consciousness, seizures, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent aciclovir for suspected herpes simplex encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain, CSF with viral PCR, EEG, autoimmune antibody panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show bilateral temporal or amygdala lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider frontotemporal dementia, limbic or autoimmune encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, such as aciclovir or immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured behavioural management and supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious pharmacotherapy for disruptive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Environmental safety, removing hazardous objects",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurorehabilitation and antiseizure medication where seizures occur",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause; features after herpes encephalitis may be permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

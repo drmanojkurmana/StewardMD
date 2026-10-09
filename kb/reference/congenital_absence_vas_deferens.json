@@ -1,177 +1,455 @@
 {
- "id": "congenital_absence_vas_deferens",
- "name": "Congenital bilateral absence of the vas deferens",
- "aliases": [
-  "CBAVD",
-  "congenital absence of the vas deferens",
-  "vasal agenesis",
-  "congenital bilateral absence of the vas deferens"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in the scrotum",
-   "It classically produces a low-volume, acidic, fructose-negative ejaculate because the seminal vesicles are frequently absent or hypoplastic alongside the missing vasa",
-   "Spermatogenesis is usually normal, so testicular volume and follicle-stimulating hormone are typically preserved, confirming an obstructive rather than a productive problem",
-   "The bilateral form is strongly linked to mutations in the cystic-fibrosis transmembrane conductance regulator gene, and affected men may represent a mild phenotype of cystic fibrosis",
-   "Both the man and his partner should undergo cystic-fibrosis gene testing, with genetic counselling before conception because of the risk of an affected child",
-   "The unilateral form and some bilateral cases are associated with ipsilateral renal anomalies, so upper-tract imaging is recommended, particularly when cystic-fibrosis mutations are not found",
-   "Fertility is achievable through surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection",
-   "The diagnosis is largely clinical, resting on the absence of palpable vasa, and is supported by seminal analysis and imaging"
+  "id": "congenital_absence_vas_deferens",
+  "name": "Congenital bilateral absence of the vas deferens",
+  "aliases": [
+    "CBAVD",
+    "congenital absence of the vas deferens",
+    "vasal agenesis",
+    "congenital bilateral absence of the vas deferens"
   ],
-  "pathophysiology": "Congenital bilateral absence of the vas deferens arises from failure of development of the mesonephric (Wolffian) duct derivatives, so the vasa deferentia, and often the distal epididymis and seminal vesicles, are absent or rudimentary. Because sperm cannot pass from the testis into the ejaculate, the result is obstructive azoospermia with intact testicular sperm production. Most bilateral cases are caused by mutations in the cystic-fibrosis transmembrane conductance regulator gene, placing the condition within the spectrum of cystic-fibrosis-related disease; the same gene defects that impair chloride transport disrupt Wolffian duct development. A subset, more often unilateral, is instead associated with abnormal embryological development of the mesonephric duct and coexisting renal agenesis or ectopia, reflecting the shared origin of the reproductive and upper urinary tracts.",
-  "additionalDifferentials": [
-   "Other causes of obstructive azoospermia such as acquired vasal or epididymal obstruction",
-   "Ejaculatory duct obstruction",
-   "Non-obstructive azoospermia from spermatogenic failure",
-   "Retrograde ejaculation producing low ejaculate volume",
-   "Young syndrome with obstructive azoospermia and sinopulmonary disease",
-   "Isolated seminal-vesicle agenesis or obstruction"
-  ],
-  "additionalInvestigations": [
-   "Scrotal examination confirming non-palpable vasa deferentia",
-   "Semen analysis showing low volume with acidic pH and absent fructose",
-   "Serum follicle-stimulating hormone, luteinising hormone, and testosterone, expected to be normal",
-   "Cystic-fibrosis transmembrane conductance regulator gene testing of the man and his partner",
-   "Renal tract ultrasound to detect associated renal agenesis or ectopia",
-   "Transrectal ultrasound to assess the seminal vesicles and distal ducts",
-   "Diagnostic confirmation of intact spermatogenesis at the time of sperm retrieval"
-  ],
-  "redFlags": [
-   "Detection of cystic-fibrosis gene mutations in the partner, substantially raising the risk of an affected child",
-   "An associated solitary or ectopic kidney requiring surveillance",
-   "Features suggesting overt cystic fibrosis such as recurrent respiratory disease",
-   "Findings inconsistent with obstruction that suggest an alternative diagnosis"
-  ],
-  "prognosis": "General health is usually unaffected in the absence of overt cystic fibrosis, and because spermatogenesis is intact, fatherhood is readily achievable with surgical sperm retrieval and intracytoplasmic sperm injection; the principal consideration is the genetic risk to offspring, which is addressed through partner testing and counselling.",
-  "pitfalls": [
-   "Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man",
-   "Omitting cystic-fibrosis gene testing of the man and, crucially, his partner before assisted conception",
-   "Neglecting renal imaging, particularly in cases without cystic-fibrosis mutations",
-   "Misclassifying the low-volume ejaculate as ejaculatory duct obstruction without checking for palpable vasa",
-   "Proceeding to assisted reproduction without genetic counselling about the risk to children"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "WHO laboratory manual for the examination and processing of human semen",
-   "European Association of Urology guidelines on sexual and reproductive health"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection, since spermatogenesis is intact",
-   "Test the man and his partner for cystic-fibrosis transmembrane conductance regulator mutations before conception",
-   "Provide genetic counselling on the risk of cystic fibrosis in offspring and offer preimplantation or prenatal genetic testing",
-   "Assess for and manage any features of the cystic fibrosis phenotype in affected men",
-   "Arrange upper renal tract imaging to detect associated renal agenesis or ectopia, particularly when no CFTR mutation is found",
-   "Coordinate care through reproductive medicine, andrology and clinical genetics services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_absence_vas_deferens-pathway",
-   "title": "Congenital bilateral absence of the vas deferens: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in the scrotum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Detection of cystic-fibrosis gene mutations in the partner, substantially raising the risk of an affected child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal examination confirming non-palpable vasa deferentia, Semen analysis showing low volume with acidic pH and absent fructose, Serum follicle-stimulating hormone, luteinising hormone, and testosterone, expected to be"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection, since spermatogenesis is intact"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital bilateral absence of the vas deferens."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_absence_vas_deferens-matrix",
-   "title": "Congenital bilateral absence of the vas deferens: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in the scrotum",
+      "It classically produces a low-volume, acidic, fructose-negative ejaculate because the seminal vesicles are frequently absent or hypoplastic alongside the missing vasa",
+      "Spermatogenesis is usually normal, so testicular volume and follicle-stimulating hormone are typically preserved, confirming an obstructive rather than a productive problem",
+      "The bilateral form is strongly linked to mutations in the cystic-fibrosis transmembrane conductance regulator gene, and affected men may represent a mild phenotype of cystic fibrosis",
+      "Both the man and his partner should undergo cystic-fibrosis gene testing, with genetic counselling before conception because of the risk of an affected child",
+      "The unilateral form and some bilateral cases are associated with ipsilateral renal anomalies, so upper-tract imaging is recommended, particularly when cystic-fibrosis mutations are not found",
+      "Fertility is achievable through surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection",
+      "The diagnosis is largely clinical, resting on the absence of palpable vasa, and is supported by seminal analysis and imaging"
     ],
-    [
-     "Key Investigations",
-     "Scrotal examination confirming non-palpable vasa deferentia, Semen analysis showing low volume with acidic pH and absent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital bilateral absence of the vas deferens arises from failure of development of the mesonephric (Wolffian) duct derivatives, so the vasa deferentia, and often the distal epididymis and seminal vesicles, are absent or rudimentary. Because sperm cannot pass from the testis into the ejaculate, the result is obstructive azoospermia with intact testicular sperm production. Most bilateral cases are caused by mutations in the cystic-fibrosis transmembrane conductance regulator gene, placing the condition within the spectrum of cystic-fibrosis-related disease; the same gene defects that impair chloride transport disrupt Wolffian duct development. A subset, more often unilateral, is instead associated with abnormal embryological development of the mesonephric duct and coexisting renal agenesis or ectopia, reflecting the shared origin of the reproductive and upper urinary tracts.",
+    "additionalDifferentials": [
+      "Other causes of obstructive azoospermia such as acquired vasal or epididymal obstruction",
+      "Ejaculatory duct obstruction",
+      "Non-obstructive azoospermia from spermatogenic failure",
+      "Retrograde ejaculation producing low ejaculate volume",
+      "Young syndrome with obstructive azoospermia and sinopulmonary disease",
+      "Isolated seminal-vesicle agenesis or obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of obstructive azoospermia such as acquired vasal or epididymal obstruction, Ejaculatory duct obstruction,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal examination confirming non-palpable vasa deferentia",
+      "Semen analysis showing low volume with acidic pH and absent fructose",
+      "Serum follicle-stimulating hormone, luteinising hormone, and testosterone, expected to be normal",
+      "Cystic-fibrosis transmembrane conductance regulator gene testing of the man and his partner",
+      "Renal tract ultrasound to detect associated renal agenesis or ectopia",
+      "Transrectal ultrasound to assess the seminal vesicles and distal ducts",
+      "Diagnostic confirmation of intact spermatogenesis at the time of sperm retrieval"
     ],
-    [
-     "Management Strategy",
-     "Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection,",
-     "Core treatment modality"
+    "redFlags": [
+      "Detection of cystic-fibrosis gene mutations in the partner, substantially raising the risk of an affected child",
+      "An associated solitary or ectopic kidney requiring surveillance",
+      "Features suggesting overt cystic fibrosis such as recurrent respiratory disease",
+      "Findings inconsistent with obstruction that suggest an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man",
-     "Prevent diagnostic or management error"
+    "prognosis": "General health is usually unaffected in the absence of overt cystic fibrosis, and because spermatogenesis is intact, fatherhood is readily achievable with surgical sperm retrieval and intracytoplasmic sperm injection; the principal consideration is the genetic risk to offspring, which is addressed through partner testing and counselling.",
+    "pitfalls": [
+      "Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man",
+      "Omitting cystic-fibrosis gene testing of the man and, crucially, his partner before assisted conception",
+      "Neglecting renal imaging, particularly in cases without cystic-fibrosis mutations",
+      "Misclassifying the low-volume ejaculate as ejaculatory duct obstruction without checking for palpable vasa",
+      "Proceeding to assisted reproduction without genetic counselling about the risk to children"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "WHO laboratory manual for the examination and processing of human semen",
+      "European Association of Urology guidelines on sexual and reproductive health"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection, since spermatogenesis is intact",
+      "Test the man and his partner for cystic-fibrosis transmembrane conductance regulator mutations before conception",
+      "Provide genetic counselling on the risk of cystic fibrosis in offspring and offer preimplantation or prenatal genetic testing",
+      "Assess for and manage any features of the cystic fibrosis phenotype in affected men",
+      "Arrange upper renal tract imaging to detect associated renal agenesis or ectopia, particularly when no CFTR mutation is found",
+      "Coordinate care through reproductive medicine, andrology and clinical genetics services"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital bilateral absence of the vas deferens."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-absence-vas-deferens-real-image",
-   "title": "Congenital bilateral absence of the vas deferens: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_absence_vas_deferens-pathway",
+      "title": "Congenital bilateral absence of the vas deferens: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in the scrotum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Detection of cystic-fibrosis gene mutations in the partner, substantially raising the risk of an affected child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal examination confirming non-palpable vasa deferentia, Semen analysis showing low volume with acidic pH and absent fructose, Serum follicle-stimulating hormone, luteinising hormone, and testosterone, expected to be"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection, since spermatogenesis is intact"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital bilateral absence of the vas deferens."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_absence_vas_deferens-matrix",
+      "title": "Congenital bilateral absence of the vas deferens: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Congenital absence of the vas deferens is an important cause of obstructive azoospermia in which the vasa cannot be palpated in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal examination confirming non-palpable vasa deferentia, Semen analysis showing low volume with acidic pH and absent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of obstructive azoospermia such as acquired vasal or epididymal obstruction, Ejaculatory duct obstruction,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve fatherhood by surgical sperm retrieval from the epididymis or testis combined with intracytoplasmic sperm injection,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to palpate for the vasa and thus missing the diagnosis in an azoospermic man",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital bilateral absence of the vas deferens."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_absence_vas_deferens-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal examination",
+          "cells": [
+            {
+              "text": "Non-palpable vasa deferentia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Low volume, acidic pH and absent fructose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum FSH, LH and testosterone",
+          "cells": [
+            {
+              "text": "Expected to be normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Renal agenesis or ectopia detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Seminal vesicles and distal ducts assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_absence_vas_deferens-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ejaculatory duct obstruction",
+          "cells": [
+            {
+              "text": "Obstructive azoospermia; distal duct assessed by transrectal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-obstructive azoospermia from spermatogenic failure",
+          "cells": [
+            {
+              "text": "Intact spermatogenesis confirmed at sperm retrieval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Young syndrome with obstructive azoospermia and sinopulmonary disease",
+          "cells": [
+            {
+              "text": "Named look-alike with sinopulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_absence_vas_deferens-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical sperm retrieval with ICSI",
+          "cells": [
+            {
+              "text": "From epididymis or testis; spermatogenesis is intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFTR testing of the man and his partner",
+          "cells": [
+            {
+              "text": "Before conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cystic fibrosis risk in offspring; preimplantation or prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis phenotype care",
+          "cells": [
+            {
+              "text": "Assess and manage features in affected men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper renal tract imaging",
+          "cells": [
+            {
+              "text": "Renal agenesis or ectopia, particularly when no CFTR mutation is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Reproductive medicine, andrology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_absence_vas_deferens-dx-mgmt",
+      "title": "Diagnosis and management of Congenital bilateral absence of the vas deferens",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital bilateral vas absence: azoospermia with non-palpable vasa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (partner CFTR mutation, solitary kidney, overt CF features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent CF assessment and genetic counselling before assisted conception",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal exam; semen analysis; FSH, LH, testosterone; renal ultrasound; CFTR testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the semen profile show absent fructose with non-palpable vasa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ejaculatory duct obstruction or non-obstructive azoospermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical sperm retrieval with intracytoplasmic sperm injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CFTR testing of the man and his partner before conception",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling; preimplantation or prenatal testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Upper renal tract imaging, particularly when no CFTR mutation is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "General health usually unaffected without overt CF; fatherhood is achievable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

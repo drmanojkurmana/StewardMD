@@ -1,171 +1,440 @@
 {
- "id": "dacryocystitis",
- "name": "Dacryocystitis",
- "aliases": [
-  "lacrimal sac infection",
-  "acute dacryocystitis",
-  "chronic dacryocystitis"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
-   "Acute dacryocystitis presents with a painful, red, tender swelling at the medial canthus just below the medial canthal tendon, often with epiphora and discharge",
-   "Pressure over the sac may express mucopurulent material through the puncta, supporting the diagnosis",
-   "The swelling lies below and medial to the medial canthal tendon, which helps distinguish it from preseptal cellulitis and other medial canthal masses",
-   "Common organisms include Staphylococcus species and streptococci; management is with systemic antibiotics and warm compresses in the acute phase",
-   "Incision and drainage may be needed for a pointing abscess, but definitive treatment of the underlying obstruction is dacryocystorhinostomy once inflammation settles",
-   "Congenital dacryocystitis in infants relates to a persistent membrane at the valve of Hasner and may need probing if it does not resolve",
-   "Acute dacryocystitis can be complicated by preseptal or orbital cellulitis and rarely by fistula formation"
+  "id": "dacryocystitis",
+  "name": "Dacryocystitis",
+  "aliases": [
+    "lacrimal sac infection",
+    "acute dacryocystitis",
+    "chronic dacryocystitis"
   ],
-  "pathophysiology": "Dacryocystitis is inflammation of the lacrimal sac, almost always resulting from obstruction of the nasolacrimal duct. Obstruction leads to retention and stagnation of tears and mucus within the sac, providing a medium for bacterial overgrowth. Acute infection produces a tense, inflamed sac that may progress to abscess formation, while chronic obstruction causes a mucocele with recurrent low-grade infection and persistent watering. In infants, incomplete canalisation of the duct at the valve of Hasner is the usual cause.",
-  "additionalDifferentials": [
-   "Preseptal cellulitis",
-   "Orbital cellulitis",
-   "Mucocele of the lacrimal sac",
-   "Ethmoidal or frontal sinus disease",
-   "Lacrimal sac tumour (in atypical or bloody presentations)",
-   "Infected sebaceous or dermoid cyst at the medial canthus"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge",
-   "Swab of expressed discharge for microscopy, culture, and sensitivities",
-   "Syringing and probing of the lacrimal system once acute infection has settled to confirm obstruction",
-   "Imaging (CT or dacryocystography) for atypical, recurrent, or mass-like presentations to exclude tumour"
-  ],
-  "redFlags": [
-   "Spread to preseptal or orbital cellulitis with proptosis, restricted eye movements, or reduced vision",
-   "A firm, irregular, or bloody lacrimal sac mass suggesting a lacrimal sac tumour rather than simple infection",
-   "Systemic features of sepsis in an unwell patient",
-   "Neonatal dacryocystitis, which can progress rapidly and needs prompt treatment"
-  ],
-  "prognosis": "Acute dacryocystitis usually responds well to antibiotics, but recurrence is common until the underlying nasolacrimal duct obstruction is corrected surgically; dacryocystorhinostomy is highly effective at relieving obstruction and preventing further episodes.",
-  "pitfalls": [
-   "Attempting probing or surgery during acute inflammation rather than treating the infection first",
-   "Mislabelling the medial canthal swelling as preseptal cellulitis and missing the underlying sac infection",
-   "Failing to recognise a lacrimal sac tumour presenting as atypical dacryocystitis",
-   "Not addressing the underlying duct obstruction, leading to repeated infections"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and analgesia",
-   "Send expressed lacrimal sac discharge for microscopy, culture and sensitivities to guide antibiotic choice",
-   "Incise and drain a pointing lacrimal sac abscess when one forms",
-   "Relieve the underlying nasolacrimal duct obstruction definitively with dacryocystorhinostomy once acute inflammation has settled",
-   "In infants, manage congenital nasolacrimal duct obstruction with lacrimal sac massage, progressing to probing if it fails to resolve",
-   "Escalate urgently with intravenous antibiotics and imaging if postseptal orbital cellulitis is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dacryocystitis-pathway",
-   "title": "Dacryocystitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spread to preseptal or orbital cellulitis with proptosis, restricted eye movements, or reduced vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge, Swab of expressed discharge for microscopy, culture, and sensitivities, Syringing and probing of the lacrimal system once acute"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting probing or surgery during acute inflammation rather than treating the infection first"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dacryocystitis."
-  }
- ],
- "tables": [
-  {
-   "id": "dacryocystitis-matrix",
-   "title": "Dacryocystitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
+      "Acute dacryocystitis presents with a painful, red, tender swelling at the medial canthus just below the medial canthal tendon, often with epiphora and discharge",
+      "Pressure over the sac may express mucopurulent material through the puncta, supporting the diagnosis",
+      "The swelling lies below and medial to the medial canthal tendon, which helps distinguish it from preseptal cellulitis and other medial canthal masses",
+      "Common organisms include Staphylococcus species and streptococci; management is with systemic antibiotics and warm compresses in the acute phase",
+      "Incision and drainage may be needed for a pointing abscess, but definitive treatment of the underlying obstruction is dacryocystorhinostomy once inflammation settles",
+      "Congenital dacryocystitis in infants relates to a persistent membrane at the valve of Hasner and may need probing if it does not resolve",
+      "Acute dacryocystitis can be complicated by preseptal or orbital cellulitis and rarely by fistula formation"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge, Swab of expressed discharge for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dacryocystitis is inflammation of the lacrimal sac, almost always resulting from obstruction of the nasolacrimal duct. Obstruction leads to retention and stagnation of tears and mucus within the sac, providing a medium for bacterial overgrowth. Acute infection produces a tense, inflamed sac that may progress to abscess formation, while chronic obstruction causes a mucocele with recurrent low-grade infection and persistent watering. In infants, incomplete canalisation of the duct at the valve of Hasner is the usual cause.",
+    "additionalDifferentials": [
+      "Preseptal cellulitis",
+      "Orbital cellulitis",
+      "Mucocele of the lacrimal sac",
+      "Ethmoidal or frontal sinus disease",
+      "Lacrimal sac tumour (in atypical or bloody presentations)",
+      "Infected sebaceous or dermoid cyst at the medial canthus"
     ],
-    [
-     "Primary Differentials",
-     "Preseptal cellulitis, Orbital cellulitis, Mucocele of the lacrimal sac",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge",
+      "Swab of expressed discharge for microscopy, culture, and sensitivities",
+      "Syringing and probing of the lacrimal system once acute infection has settled to confirm obstruction",
+      "Imaging (CT or dacryocystography) for atypical, recurrent, or mass-like presentations to exclude tumour"
     ],
-    [
-     "Management Strategy",
-     "Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and",
-     "Core treatment modality"
+    "redFlags": [
+      "Spread to preseptal or orbital cellulitis with proptosis, restricted eye movements, or reduced vision",
+      "A firm, irregular, or bloody lacrimal sac mass suggesting a lacrimal sac tumour rather than simple infection",
+      "Systemic features of sepsis in an unwell patient",
+      "Neonatal dacryocystitis, which can progress rapidly and needs prompt treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting probing or surgery during acute inflammation rather than treating the infection first",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute dacryocystitis usually responds well to antibiotics, but recurrence is common until the underlying nasolacrimal duct obstruction is corrected surgically; dacryocystorhinostomy is highly effective at relieving obstruction and preventing further episodes.",
+    "pitfalls": [
+      "Attempting probing or surgery during acute inflammation rather than treating the infection first",
+      "Mislabelling the medial canthal swelling as preseptal cellulitis and missing the underlying sac infection",
+      "Failing to recognise a lacrimal sac tumour presenting as atypical dacryocystitis",
+      "Not addressing the underlying duct obstruction, leading to repeated infections"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and analgesia",
+      "Send expressed lacrimal sac discharge for microscopy, culture and sensitivities to guide antibiotic choice",
+      "Incise and drain a pointing lacrimal sac abscess when one forms",
+      "Relieve the underlying nasolacrimal duct obstruction definitively with dacryocystorhinostomy once acute inflammation has settled",
+      "In infants, manage congenital nasolacrimal duct obstruction with lacrimal sac massage, progressing to probing if it fails to resolve",
+      "Escalate urgently with intravenous antibiotics and imaging if postseptal orbital cellulitis is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for dacryocystitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dacryocystitis-real-image",
-   "title": "Dacryocystitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dacryocystitis-pathway",
+      "title": "Dacryocystitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spread to preseptal or orbital cellulitis with proptosis, restricted eye movements, or reduced vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge, Swab of expressed discharge for microscopy, culture, and sensitivities, Syringing and probing of the lacrimal system once acute"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting probing or surgery during acute inflammation rather than treating the infection first"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dacryocystitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dacryocystitis-matrix",
+      "title": "Dacryocystitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Infection of the lacrimal sac, usually secondary to obstruction of the nasolacrimal duct causing stasis of tears and secretions",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination with expression of the lacrimal sac to demonstrate reflux of discharge, Swab of expressed discharge for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Preseptal cellulitis, Orbital cellulitis, Mucocele of the lacrimal sac",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute dacryocystitis with systemic antibiotics covering staphylococci and streptococci, together with warm compresses and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting probing or surgery during acute inflammation rather than treating the infection first",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dacryocystitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dacryocystitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Expression of the lacrimal sac",
+          "cells": [
+            {
+              "text": "Reflux of discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of expressed discharge",
+          "cells": [
+            {
+              "text": "Microscopy, culture and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringing and probing after infection settles",
+          "cells": [
+            {
+              "text": "Obstruction confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or dacryocystography",
+          "cells": [
+            {
+              "text": "Atypical, recurrent or mass-like presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dacryocystitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Preseptal cellulitis",
+          "cells": [
+            {
+              "text": "Pitfall: medial canthal swelling mislabelled as cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucocele of the lacrimal sac",
+          "cells": [
+            {
+              "text": "Named look-alike with non-infected swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lacrimal sac tumour",
+          "cells": [
+            {
+              "text": "Firm, irregular or bloody mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dacryocystitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic antibiotics",
+          "cells": [
+            {
+              "text": "Covering staphylococci and streptococci with warm compresses and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-guided antibiotics",
+          "cells": [
+            {
+              "text": "Discharge sent for microscopy, culture and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Incision of a pointing lacrimal sac abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocystorhinostomy",
+          "cells": [
+            {
+              "text": "Definitive repair once acute inflammation settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant obstruction",
+          "cells": [
+            {
+              "text": "Lacrimal sac massage, then probing if it fails to resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent IV treatment",
+          "cells": [
+            {
+              "text": "Postseptal orbital cellulitis suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dacryocystitis-dx-mgmt",
+      "title": "Diagnosis and management of Dacryocystitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dacryocystitis: painful swelling and discharge at the medial canthus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (orbital spread, firm or bloody mass, sepsis, neonatal presentation)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV antibiotics and imaging for orbital cellulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lacrimal sac expression; swab for culture; probing once settled; CT if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does discharge culture confirm sac infection with obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider preseptal cellulitis, mucocele or lacrimal sac tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic antibiotics covering staphylococci and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Culture-guided antibiotic choice from expressed discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain pointing abscess; avoid probing during acute inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dacryocystorhinostomy once inflammation settles; massage in infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually responds to antibiotics, but recurs until the duct obstruction is corrected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

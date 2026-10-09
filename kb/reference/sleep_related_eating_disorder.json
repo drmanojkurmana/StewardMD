@@ -1,172 +1,441 @@
 {
- "id": "sleep_related_eating_disorder",
- "name": "Sleep-related eating disorder",
- "aliases": [
-  "SRED",
-  "sleep-related eating"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and poor recall the next morning",
-   "Patients may consume high-calorie, peculiar or even inedible or toxic substances during episodes",
-   "Injuries can occur from handling kitchen equipment or eating while not fully awake",
-   "It is considered a non-REM parasomnia and frequently coexists with sleepwalking, restless legs syndrome and periodic limb movements",
-   "Sedative-hypnotics, particularly zolpidem, are well-recognised precipitants",
-   "It differs from night eating syndrome, in which the person is fully awake and consciously eats during nocturnal awakenings",
-   "Management targets any underlying parasomnia or restless legs, withdrawal of precipitating drugs, and a safe sleep and kitchen environment"
+  "id": "sleep_related_eating_disorder",
+  "name": "Sleep-related eating disorder",
+  "aliases": [
+    "SRED",
+    "sleep-related eating"
   ],
-  "pathophysiology": "Sleep-related eating disorder is regarded as a disorder of arousal, a non-REM parasomnia in which incomplete transition from deep sleep to wakefulness allows automatic feeding behaviour to occur while consciousness and memory systems remain largely offline. Conditions that fragment sleep, such as restless legs syndrome and periodic limb movements, and drugs that promote complex sleep-related behaviours, especially certain hypnotics, lower the threshold for these partial arousals and the associated eating.",
-  "additionalDifferentials": [
-   "Night eating syndrome with conscious nocturnal eating",
-   "Sleepwalking without eating",
-   "Nocturnal binge eating of a primary eating disorder",
-   "Nocturnal seizures with automatisms",
-   "Dissociative eating behaviour",
-   "Kleine-Levin syndrome with hyperphagia"
-  ],
-  "additionalInvestigations": [
-   "Collateral history and a food diary documenting nocturnal eating and the degree of awareness",
-   "Review of medications, especially sedative-hypnotics such as zolpidem",
-   "Screening for restless legs syndrome and periodic limb movement disorder",
-   "Video-polysomnography when the diagnosis is unclear or seizures are suspected",
-   "Assessment for a coexisting daytime eating disorder or mood disorder"
-  ],
-  "redFlags": [
-   "Ingestion of toxic or inedible substances",
-   "Injuries or fire risk from cooking during episodes",
-   "Features suggesting nocturnal seizures rather than a parasomnia",
-   "Significant weight gain or metabolic consequences"
-  ],
-  "prognosis": "The disorder tends to be chronic if untreated, but many patients improve substantially once precipitating drugs are stopped and any underlying restless legs or arousal disorder is treated; safety measures reduce the risk of injury in the meantime.",
-  "pitfalls": [
-   "Confusing it with the fully conscious night eating syndrome",
-   "Overlooking zolpidem or another hypnotic as the trigger",
-   "Missing coexisting restless legs syndrome that is driving the arousals",
-   "Neglecting kitchen and home safety, leaving a risk of injury or fire"
-  ],
-  "references": [
-   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-  ],
-  "crossLinks": [
-   "periodic_limb_movement_disorder"
-  ],
-  "management": [
-   "Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem",
-   "Diagnose and treat underlying sleep disorders, including restless legs syndrome and periodic limb movements with dopaminergic agents, and any coexisting parasomnia",
-   "Institute sleep-environment safety measures, securing food, hazardous substances and kitchen appliances to prevent injury and harmful ingestion",
-   "Consider pharmacotherapy such as topiramate where episodes persist despite removal of precipitants",
-   "Optimise sleep hygiene and treat any comorbid mood or daytime eating disorder",
-   "Refer to sleep medicine and arrange video-polysomnography where the diagnosis is unclear or seizures are suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sleep_related_eating_disorder-pathway",
-   "title": "Sleep-related eating disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and poor recall the next morning",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ingestion of toxic or inedible substances",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Collateral history and a food diary documenting nocturnal eating and the degree of awareness, Review of medications, especially sedative-hypnotics such as zolpidem, Screening for restless legs syndrome and periodic limb"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with the fully conscious night eating syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sleep-related eating disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "sleep_related_eating_disorder-matrix",
-   "title": "Sleep-related eating disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and poor recall the next morning",
+      "Patients may consume high-calorie, peculiar or even inedible or toxic substances during episodes",
+      "Injuries can occur from handling kitchen equipment or eating while not fully awake",
+      "It is considered a non-REM parasomnia and frequently coexists with sleepwalking, restless legs syndrome and periodic limb movements",
+      "Sedative-hypnotics, particularly zolpidem, are well-recognised precipitants",
+      "It differs from night eating syndrome, in which the person is fully awake and consciously eats during nocturnal awakenings",
+      "Management targets any underlying parasomnia or restless legs, withdrawal of precipitating drugs, and a safe sleep and kitchen environment"
     ],
-    [
-     "Key Investigations",
-     "Collateral history and a food diary documenting nocturnal eating and the degree of awareness, Review of medications, especially",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sleep-related eating disorder is regarded as a disorder of arousal, a non-REM parasomnia in which incomplete transition from deep sleep to wakefulness allows automatic feeding behaviour to occur while consciousness and memory systems remain largely offline. Conditions that fragment sleep, such as restless legs syndrome and periodic limb movements, and drugs that promote complex sleep-related behaviours, especially certain hypnotics, lower the threshold for these partial arousals and the associated eating.",
+    "additionalDifferentials": [
+      "Night eating syndrome with conscious nocturnal eating",
+      "Sleepwalking without eating",
+      "Nocturnal binge eating of a primary eating disorder",
+      "Nocturnal seizures with automatisms",
+      "Dissociative eating behaviour",
+      "Kleine-Levin syndrome with hyperphagia"
     ],
-    [
-     "Primary Differentials",
-     "Night eating syndrome with conscious nocturnal eating, Sleepwalking without eating, Nocturnal binge eating of a primary eating",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Collateral history and a food diary documenting nocturnal eating and the degree of awareness",
+      "Review of medications, especially sedative-hypnotics such as zolpidem",
+      "Screening for restless legs syndrome and periodic limb movement disorder",
+      "Video-polysomnography when the diagnosis is unclear or seizures are suspected",
+      "Assessment for a coexisting daytime eating disorder or mood disorder"
     ],
-    [
-     "Management Strategy",
-     "Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem",
-     "Core treatment modality"
+    "redFlags": [
+      "Ingestion of toxic or inedible substances",
+      "Injuries or fire risk from cooking during episodes",
+      "Features suggesting nocturnal seizures rather than a parasomnia",
+      "Significant weight gain or metabolic consequences"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with the fully conscious night eating syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder tends to be chronic if untreated, but many patients improve substantially once precipitating drugs are stopped and any underlying restless legs or arousal disorder is treated; safety measures reduce the risk of injury in the meantime.",
+    "pitfalls": [
+      "Confusing it with the fully conscious night eating syndrome",
+      "Overlooking zolpidem or another hypnotic as the trigger",
+      "Missing coexisting restless legs syndrome that is driving the arousals",
+      "Neglecting kitchen and home safety, leaving a risk of injury or fire"
+    ],
+    "references": [
+      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+    ],
+    "crossLinks": [
+      "periodic_limb_movement_disorder"
+    ],
+    "management": [
+      "Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem",
+      "Diagnose and treat underlying sleep disorders, including restless legs syndrome and periodic limb movements with dopaminergic agents, and any coexisting parasomnia",
+      "Institute sleep-environment safety measures, securing food, hazardous substances and kitchen appliances to prevent injury and harmful ingestion",
+      "Consider pharmacotherapy such as topiramate where episodes persist despite removal of precipitants",
+      "Optimise sleep hygiene and treat any comorbid mood or daytime eating disorder",
+      "Refer to sleep medicine and arrange video-polysomnography where the diagnosis is unclear or seizures are suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for sleep-related eating disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sleep-related-eating-disorder-real-image",
-   "title": "Sleep-related eating disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sleep_related_eating_disorder-pathway",
+      "title": "Sleep-related eating disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and poor recall the next morning",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ingestion of toxic or inedible substances",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Collateral history and a food diary documenting nocturnal eating and the degree of awareness, Review of medications, especially sedative-hypnotics such as zolpidem, Screening for restless legs syndrome and periodic limb"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with the fully conscious night eating syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sleep-related eating disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sleep_related_eating_disorder-matrix",
+      "title": "Sleep-related eating disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recurrent episodes of involuntary eating or drinking during partial arousals from sleep, with reduced or absent awareness and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Collateral history and a food diary documenting nocturnal eating and the degree of awareness, Review of medications, especially",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Night eating syndrome with conscious nocturnal eating, Sleepwalking without eating, Nocturnal binge eating of a primary eating",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw or switch precipitating drugs, particularly sedative-hypnotics such as zolpidem",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with the fully conscious night eating syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sleep-related eating disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sleep_related_eating_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Collateral history and food diary",
+          "cells": [
+            {
+              "text": "Nocturnal eating and the degree of awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Sedative-hypnotics such as zolpidem as precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restless legs and periodic limb movement screen",
+          "cells": [
+            {
+              "text": "Arousal-fragmenting conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-polysomnography",
+          "cells": [
+            {
+              "text": "When the diagnosis is unclear or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for daytime eating or mood disorder",
+          "cells": [
+            {
+              "text": "Coexisting disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_eating_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Night eating syndrome",
+          "cells": [
+            {
+              "text": "Fully conscious eating during nocturnal awakenings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal seizures with automatisms",
+          "cells": [
+            {
+              "text": "Features of nocturnal seizures rather than a parasomnia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_eating_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or switch precipitating drugs",
+          "cells": [
+            {
+              "text": "Particularly sedative-hypnotics such as zolpidem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying sleep disorders",
+          "cells": [
+            {
+              "text": "Restless legs or periodic limb movements with dopaminergic agents, and any coexisting parasomnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep-environment safety",
+          "cells": [
+            {
+              "text": "Secure food, hazardous substances and kitchen appliances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topiramate",
+          "cells": [
+            {
+              "text": "Where episodes persist after precipitants are removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep hygiene and comorbidity",
+          "cells": [
+            {
+              "text": "Treat any mood or daytime eating disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep medicine referral",
+          "cells": [
+            {
+              "text": "Video-polysomnography where the diagnosis is unclear or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sleep_related_eating_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Sleep-related eating disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Involuntary night eating, poor recall: suspected sleep-related eating disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (toxic ingestion, cooking injury, features of seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: secure the home and assess for nocturnal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Collateral history and food diary; medication review; restless legs and PLMD screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does history confirm partial-arousal eating with reduced awareness and poor recall?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider night eating syndrome or nocturnal seizures; video-polysomnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or switch precipitating hypnotics such as zolpidem",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat restless legs or periodic limb movements with dopaminergic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secure food, hazardous substances and kitchen appliances",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topiramate where episodes persist after precipitants are removed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic if untreated; many improve once precipitating drugs stop and arousals are treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

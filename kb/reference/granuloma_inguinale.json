@@ -1,178 +1,704 @@
 {
- "id": "granuloma_inguinale",
- "name": "Granuloma inguinale",
- "aliases": [
-  "donovanosis",
-  "Klebsiella granulomatis",
-  "Calymmatobacterium granulomatis",
-  "granuloma venereum"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Genitourinary Medicine / Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell / BASHH-CDC STI guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly through sexual contact, with a long and variable incubation period; classically endemic in scattered tropical and subtropical regions",
-   "The hallmark lesion is a painless, slowly progressive, beefy-red ulcer with a friable granulation-tissue base that bleeds readily on contact",
-   "Involves the genital and inguinal skin most often; a subcutaneous granulomatous groin swelling (pseudobubo) may mimic, but is not, true suppurative lymphadenopathy",
-   "Several clinical variants are described, including ulcerogranulomatous, hypertrophic, necrotic, and sclerotic forms",
-   "Diagnosis rests on demonstrating Donovan bodies, the intracytoplasmic organisms seen within large mononuclear cells on a crush smear or biopsy stained with Giemsa or Wright stain",
-   "The organism is fastidious and difficult to culture, so diagnosis is largely clinical supported by microscopy, with molecular testing used where available",
-   "Prolonged antibiotic therapy (for example azithromycin or doxycycline, with macrolide or co-trimoxazole alternatives) is continued until lesions have fully re-epithelialised, and relapse can occur weeks to months later",
-   "Partner notification and screening for co-existing sexually transmitted infections, including HIV and syphilis, are essential parts of management"
+  "id": "granuloma_inguinale",
+  "name": "Granuloma inguinale",
+  "aliases": [
+    "donovanosis",
+    "Klebsiella granulomatis",
+    "Calymmatobacterium granulomatis",
+    "granuloma venereum"
   ],
-  "pathophysiology": "Granuloma inguinale is a chronic, indolent genital ulcerative disease produced by the encapsulated intracellular bacterium Klebsiella granulomatis. Following sexual (and occasionally close non-sexual) contact, the organism invades and multiplies within mononuclear phagocytes of the genital and perineal skin, where it appears as clusters of Donovan bodies. The infected macrophages drive a chronic granulomatous inflammatory response with vascular proliferation, producing the characteristic friable, beefy-red ulcer that enlarges slowly by direct extension and autoinoculation. Because inflammation is subcutaneous rather than nodal, groin swelling reflects granulomatous tissue rather than true lymphadenitis, and long-standing disease can lead to fibrosis, lymphatic obstruction with genital lymphoedema, and destructive scarring.",
-  "additionalDifferentials": [
-   "Primary syphilis (painless chancre)",
-   "Chancroid caused by Haemophilus ducreyi (painful ulcer)",
-   "Lymphogranuloma venereum",
-   "Genital herpes simplex",
-   "Squamous cell carcinoma of the genitalia",
-   "Cutaneous amoebiasis or other tropical ulcerative infection",
-   "Genital tuberculosis"
-  ],
-  "additionalInvestigations": [
-   "Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies",
-   "Histopathology of biopsy to confirm granulomatous inflammation and exclude malignancy",
-   "Polymerase chain reaction or molecular assay for Klebsiella granulomatis where available",
-   "Syphilis serology together with dark-field microscopy to exclude a chancre",
-   "HIV testing and screening for other sexually transmitted infections",
-   "Nucleic acid amplification testing for gonorrhoea and chlamydia and, where relevant, testing to exclude chancroid"
-  ],
-  "redFlags": [
-   "Extensive tissue destruction or genital mutilation from advanced disease",
-   "Secondary bacterial infection with spreading cellulitis or systemic sepsis",
-   "A chronic non-healing lesion raising suspicion of malignant transformation",
-   "Rare haematogenous dissemination to bone, joints, or viscera"
-  ],
-  "prognosis": "With early and adequately prolonged antibiotic treatment lesions heal well and the outlook is good, but delayed therapy risks progressive tissue destruction, scarring, and genital lymphoedema; relapse can follow apparently successful treatment, so follow-up until complete healing is advised.",
-  "pitfalls": [
-   "Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies",
-   "Stopping antibiotics once the ulcer looks improved rather than continuing until full re-epithelialisation, allowing relapse",
-   "Overlooking concurrent HIV or other sexually transmitted infection",
-   "Failing to biopsy a chronic non-healing ulcer to exclude malignant change"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "BASHH UK national guideline for the management of donovanosis",
-   "CDC Sexually Transmitted Infections Treatment Guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with doxycycline, co-trimoxazole or erythromycin as alternatives",
-   "Continue antibiotics until the lesions have completely re-epithelialised, as therapy shorter than full healing risks relapse",
-   "Add a parenteral aminoglycoside such as gentamicin where lesions respond slowly or in immunocompromised or pregnant patients",
-   "Test for HIV and screen for coexisting sexually transmitted infections including syphilis, gonorrhoea and chlamydia",
-   "Notify and treat recent sexual contacts to prevent reinfection and onward transmission",
-   "Consider surgical intervention for extensive tissue destruction, scarring or genital lymphoedema from long-standing disease",
-   "Follow up until complete healing is confirmed, as relapse can occur after apparently successful treatment",
-   "Manage within a genitourinary medicine service with contact tracing and safe-sex counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "granuloma_inguinale-pathway",
-   "title": "Granuloma inguinale: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly through sexual contact, with a long and variable incubation period; classically endemic in scattered tropical and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive tissue destruction or genital mutilation from advanced disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies, Histopathology of biopsy to confirm granulomatous inflammation and exclude malignancy, Polymerase chain reaction or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with doxycycline, co-trimoxazole or erythromycin as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of granuloma inguinale."
-  }
- ],
- "tables": [
-  {
-   "id": "granuloma_inguinale-matrix",
-   "title": "Granuloma inguinale: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Genitourinary Medicine / Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell / BASHH-CDC STI guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly through sexual contact, with a long and variable incubation period; classically endemic in scattered tropical and subtropical regions",
+      "The hallmark lesion is a painless, slowly progressive, beefy-red ulcer with a friable granulation-tissue base that bleeds readily on contact",
+      "Involves the genital and inguinal skin most often; a subcutaneous granulomatous groin swelling (pseudobubo) may mimic, but is not, true suppurative lymphadenopathy",
+      "Several clinical variants are described, including ulcerogranulomatous, hypertrophic, necrotic, and sclerotic forms",
+      "Diagnosis rests on demonstrating Donovan bodies, the intracytoplasmic organisms seen within large mononuclear cells on a crush smear or biopsy stained with Giemsa or Wright stain",
+      "The organism is fastidious and difficult to culture, so diagnosis is largely clinical supported by microscopy, with molecular testing used where available",
+      "Prolonged antibiotic therapy (for example azithromycin or doxycycline, with macrolide or co-trimoxazole alternatives) is continued until lesions have fully re-epithelialised, and relapse can occur weeks to months later",
+      "Partner notification and screening for co-existing sexually transmitted infections, including HIV and syphilis, are essential parts of management"
     ],
-    [
-     "Key Investigations",
-     "Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies, Histopathology of biopsy to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Granuloma inguinale is a chronic, indolent genital ulcerative disease produced by the encapsulated intracellular bacterium Klebsiella granulomatis. Following sexual (and occasionally close non-sexual) contact, the organism invades and multiplies within mononuclear phagocytes of the genital and perineal skin, where it appears as clusters of Donovan bodies. The infected macrophages drive a chronic granulomatous inflammatory response with vascular proliferation, producing the characteristic friable, beefy-red ulcer that enlarges slowly by direct extension and autoinoculation. Because inflammation is subcutaneous rather than nodal, groin swelling reflects granulomatous tissue rather than true lymphadenitis, and long-standing disease can lead to fibrosis, lymphatic obstruction with genital lymphoedema, and destructive scarring.",
+    "additionalDifferentials": [
+      "Primary syphilis (painless chancre)",
+      "Chancroid caused by Haemophilus ducreyi (painful ulcer)",
+      "Lymphogranuloma venereum",
+      "Genital herpes simplex",
+      "Squamous cell carcinoma of the genitalia",
+      "Cutaneous amoebiasis or other tropical ulcerative infection",
+      "Genital tuberculosis"
     ],
-    [
-     "Primary Differentials",
-     "Primary syphilis (painless chancre), Chancroid caused by Haemophilus ducreyi (painful ulcer), Lymphogranuloma venereum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies",
+      "Histopathology of biopsy to confirm granulomatous inflammation and exclude malignancy",
+      "Polymerase chain reaction or molecular assay for Klebsiella granulomatis where available",
+      "Syphilis serology together with dark-field microscopy to exclude a chancre",
+      "HIV testing and screening for other sexually transmitted infections",
+      "Nucleic acid amplification testing for gonorrhoea and chlamydia and, where relevant, testing to exclude chancroid"
     ],
-    [
-     "Management Strategy",
-     "Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive tissue destruction or genital mutilation from advanced disease",
+      "Secondary bacterial infection with spreading cellulitis or systemic sepsis",
+      "A chronic non-healing lesion raising suspicion of malignant transformation",
+      "Rare haematogenous dissemination to bone, joints, or viscera"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early and adequately prolonged antibiotic treatment lesions heal well and the outlook is good, but delayed therapy risks progressive tissue destruction, scarring, and genital lymphoedema; relapse can follow apparently successful treatment, so follow-up until complete healing is advised.",
+    "pitfalls": [
+      "Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies",
+      "Stopping antibiotics once the ulcer looks improved rather than continuing until full re-epithelialisation, allowing relapse",
+      "Overlooking concurrent HIV or other sexually transmitted infection",
+      "Failing to biopsy a chronic non-healing ulcer to exclude malignant change"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "BASHH UK national guideline for the management of donovanosis",
+      "CDC Sexually Transmitted Infections Treatment Guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with doxycycline, co-trimoxazole or erythromycin as alternatives",
+      "Continue antibiotics until the lesions have completely re-epithelialised, as therapy shorter than full healing risks relapse",
+      "Add a parenteral aminoglycoside such as gentamicin where lesions respond slowly or in immunocompromised or pregnant patients",
+      "Test for HIV and screen for coexisting sexually transmitted infections including syphilis, gonorrhoea and chlamydia",
+      "Notify and treat recent sexual contacts to prevent reinfection and onward transmission",
+      "Consider surgical intervention for extensive tissue destruction, scarring or genital lymphoedema from long-standing disease",
+      "Follow up until complete healing is confirmed, as relapse can occur after apparently successful treatment",
+      "Manage within a genitourinary medicine service with contact tracing and safe-sex counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for granuloma inguinale."
-  }
- ],
- "diagrams": [
-  {
-   "id": "granuloma-inguinale-real-image",
-   "title": "Granuloma inguinale: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "granuloma_inguinale-pathway",
+      "title": "Granuloma inguinale: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly through sexual contact, with a long and variable incubation period; classically endemic in scattered tropical and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive tissue destruction or genital mutilation from advanced disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies, Histopathology of biopsy to confirm granulomatous inflammation and exclude malignancy, Polymerase chain reaction or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with doxycycline, co-trimoxazole or erythromycin as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of granuloma inguinale."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "granuloma_inguinale-matrix",
+      "title": "Granuloma inguinale: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the intracellular bacterium Klebsiella granulomatis (formerly Calymmatobacterium granulomatis) and acquired mainly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Tissue crush smear or punch biopsy stained with Giemsa or Wright stain to identify Donovan bodies, Histopathology of biopsy to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary syphilis (painless chancre), Chancroid caused by Haemophilus ducreyi (painful ulcer), Lymphogranuloma venereum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with prolonged antibiotic therapy active against Klebsiella granulomatis, a macrolide (azithromycin) being first-line, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a painless genital ulcer is syphilis and omitting microscopy for Donovan bodies",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for granuloma inguinale."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granuloma_inguinale-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue smear or biopsy stained with Giemsa or Wright",
+          "cells": [
+            {
+              "text": "Donovan bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of biopsy",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation; excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR for Klebsiella granulomatis where available",
+          "cells": [
+            {
+              "text": "Molecular identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology with dark-field microscopy",
+          "cells": [
+            {
+              "text": "Excludes a chancre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and STI screening",
+          "cells": [
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nucleic acid testing for gonorrhoea and chlamydia",
+          "cells": [
+            {
+              "text": "Coexisting STI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granuloma_inguinale-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary syphilis",
+          "cells": [
+            {
+              "text": "Painless chancre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chancroid",
+          "cells": [
+            {
+              "text": "Painful ulcer from Haemophilus ducreyi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma of the genitalia",
+          "cells": [
+            {
+              "text": "Chronic non-healing lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granuloma_inguinale-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged antibiotic therapy",
+          "cells": [
+            {
+              "text": "Active against Klebsiella granulomatis; azithromycin first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continue until full re-epithelialisation",
+          "cells": [
+            {
+              "text": "Shorter courses risk relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral aminoglycoside",
+          "cells": [
+            {
+              "text": "Gentamicin where slow response, immunocompromise or pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and STI screening",
+          "cells": [
+            {
+              "text": "Syphilis, gonorrhoea and chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact notification and treatment",
+          "cells": [
+            {
+              "text": "Prevents reinfection and onward spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Extensive destruction, scarring or genital lymphoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Until complete healing; relapse can occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granuloma_inguinale-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical features of genital ulcers",
+      "rowHeader": "Feature",
+      "columns": [
+        "Syphilis",
+        "Herpes",
+        "Chancroid",
+        "Lymphogranuloma venereum",
+        "Donovanosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation period",
+          "cells": [
+            {
+              "text": "9 to 90 days"
+            },
+            {
+              "text": "2 to 7 days"
+            },
+            {
+              "text": "1 to 14 days"
+            },
+            {
+              "text": "3 days to 6 weeks"
+            },
+            {
+              "text": "1 to 4 weeks (up to 6 months)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early primary lesions",
+          "cells": [
+            {
+              "text": "Papule"
+            },
+            {
+              "text": "Vesicle"
+            },
+            {
+              "text": "Pustule"
+            },
+            {
+              "text": "Papule, pustule or vesicle"
+            },
+            {
+              "text": "Papule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Number of lesions",
+          "cells": [
+            {
+              "text": "Usually one"
+            },
+            {
+              "text": "Multiple"
+            },
+            {
+              "text": "Usually multiple, may coalesce"
+            },
+            {
+              "text": "Usually one; often not detected, despite lymphadenopathy"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter",
+          "cells": [
+            {
+              "text": "5 to 15 mm"
+            },
+            {
+              "text": "1 to 2 mm"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "2 to 10 mm"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edges",
+          "cells": [
+            {
+              "text": "Sharply demarcated, elevated, round or oval"
+            },
+            {
+              "text": "Erythematous"
+            },
+            {
+              "text": "Undermined, ragged, irregular"
+            },
+            {
+              "text": "Elevated, round or oval"
+            },
+            {
+              "text": "Elevated, irregular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Depth",
+          "cells": [
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Superficial"
+            },
+            {
+              "text": "Excavated"
+            },
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Elevated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Base",
+          "cells": [
+            {
+              "text": "Smooth, nonpurulent, relatively nonvascular"
+            },
+            {
+              "text": "Serous, erythematous, nonvascular"
+            },
+            {
+              "text": "Purulent, bleeds easily"
+            },
+            {
+              "text": "Variable, nonvascular"
+            },
+            {
+              "text": "Red and velvety, bleeds readily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Induration",
+          "cells": [
+            {
+              "text": "Firm"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Soft"
+            },
+            {
+              "text": "Occasionally firm"
+            },
+            {
+              "text": "Firm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain",
+          "cells": [
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "Frequently tender"
+            },
+            {
+              "text": "Usually very tender"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphadenopathy",
+          "cells": [
+            {
+              "text": "Firm, nontender, bilateral"
+            },
+            {
+              "text": "Firm, tender, often bilateral with the initial episode"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "None; pseudobuboes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granuloma_inguinale-dx-mgmt",
+      "title": "Diagnosis and management of Granuloma inguinale",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granuloma inguinale: painless genital ulcer with beefy granulation tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive destruction, sepsis, non-healing lesion, dissemination)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for spreading cellulitis, systemic sepsis or non-healing malignancy concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Smear for Donovan bodies, biopsy, PCR, syphilis serology and HIV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Donovan bodies seen on smear or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider syphilis, chancroid, herpes or squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged antibiotics, with azithromycin first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continue until complete re-epithelialisation to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parenteral gentamicin where response is slow or the patient is immunocompromised",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Contact notification, HIV testing and STI screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good with early and adequately prolonged antibiotics; delay risks tissue destruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,475 @@
 {
- "id": "charcot_marie_tooth_disease_type_2a",
- "name": "Charcot-Marie-Tooth disease type 2A",
- "aliases": [
-  "CMT2A",
-  "HMSN IIA",
-  "MFN2-related CMT"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin 2.",
-   "The neuropathy is axonal: conduction velocities are normal or near-normal while motor and sensory amplitudes are reduced, distinguishing it from the demyelinating CMT1 group.",
-   "Onset is frequently early and the course comparatively severe, with a notable proportion losing independent ambulation, though milder later-onset cases occur.",
-   "Optic atrophy may accompany the neuropathy (a phenotype historically labelled HMSN VI), and some patients show central nervous system or white-matter involvement.",
-   "Mitofusin 2 mediates mitochondrial fusion and axonal mitochondrial transport, explaining the vulnerability of the longest fibres.",
-   "Presents with length-dependent distal weakness, wasting and sensory loss, pes cavus and areflexia.",
-   "Diagnosis is by MFN2 sequencing, usually as part of an axonal-neuropathy gene panel."
+  "id": "charcot_marie_tooth_disease_type_2a",
+  "name": "Charcot-Marie-Tooth disease type 2A",
+  "aliases": [
+    "CMT2A",
+    "HMSN IIA",
+    "MFN2-related CMT"
   ],
-  "pathophysiology": "Charcot-Marie-Tooth disease type 2A is caused, in most cases, by autosomal dominant mutations in MFN2, which encodes mitofusin 2, a GTPase of the outer mitochondrial membrane that mediates mitochondrial fusion and regulates the transport and distribution of mitochondria along axons. Impaired fusion and trafficking deprive the distal reaches of the longest axons of adequate mitochondrial function, producing a length-dependent axonal rather than demyelinating neuropathy, so conduction velocities are relatively preserved while motor and sensory amplitudes fall. The metabolic vulnerability of long fibre tracts also accounts for the associated optic atrophy and occasional central nervous system involvement seen in some patients. Onset is frequently early with a comparatively severe course, although later-onset milder presentations occur, and rare recessive and de novo cases are recognised.",
-  "additionalDifferentials": [
-   "Other CMT2 subtypes (for example late-onset MPZ, RAB7, GARS, HSPB1 disease)",
-   "CMT1 subtypes, if any conduction slowing is present",
-   "Distal hereditary motor neuropathy",
-   "Acquired axonal neuropathies (toxic, metabolic or nutritional)",
-   "Hereditary sensory and autonomic neuropathy",
-   "Mitochondrial disease presenting with peripheral neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities)",
-   "MFN2 gene sequencing",
-   "Ophthalmological assessment including optic nerve evaluation and visual evoked potentials",
-   "MRI brain where central features are suspected",
-   "Needle electromyography for chronic denervation and reinnervation",
-   "Family segregation studies and genetic counselling"
-  ],
-  "redFlags": [
-   "Very early onset with rapid progression and loss of ambulation",
-   "Visual failure indicating optic atrophy",
-   "Central signs such as spasticity or white-matter change",
-   "Respiratory or bulbar involvement"
-  ],
-  "prognosis": "The disease is often more severe than other forms of CMT2; early-onset cases may lose independent ambulation during childhood or adolescence, whereas later-onset disease follows a milder course.",
-  "pitfalls": [
-   "Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities.",
-   "Missing optic atrophy as an integral part of the syndrome.",
-   "Overlooking rare recessive or de novo inheritance when a clear dominant pedigree is absent.",
-   "Attributing an axonal neuropathy to acquired causes without considering a genetic aetiology."
-  ],
-  "references": [
-   "Peripheral neuropathy reference texts",
-   "Neuromuscular genetics reference guidelines",
-   "Clinical neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists",
-   "Fit ankle-foot orthoses and provide podiatry, footwear and walking aids for foot drop and pes cavus, with wheelchair provision where ambulation is lost",
-   "Offer orthopaedic foot surgery for disabling fixed deformity",
-   "Treat neuropathic pain symptomatically and avoid neurotoxic drugs such as vincristine",
-   "Screen for optic atrophy with ophthalmological assessment and visual evoked potentials, and evaluate for central nervous system involvement where features suggest it",
-   "Provide intensive rehabilitation for the frequently severe early-onset cases that lose independent ambulation",
-   "Offer genetic counselling for autosomal dominant inheritance and assess at-risk relatives",
-   "Coordinate multidisciplinary neuromuscular, ophthalmology, orthopaedic and rehabilitation care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_2a-pathway",
-   "title": "Charcot-Marie-Tooth disease type 2A: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin 2.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very early onset with rapid progression and loss of ambulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities), MFN2 gene sequencing, Ophthalmological assessment including optic nerve evaluation and visual evoked potentials"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 2a."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_2a-matrix",
-   "title": "Charcot-Marie-Tooth disease type 2A: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin 2.",
+      "The neuropathy is axonal: conduction velocities are normal or near-normal while motor and sensory amplitudes are reduced, distinguishing it from the demyelinating CMT1 group.",
+      "Onset is frequently early and the course comparatively severe, with a notable proportion losing independent ambulation, though milder later-onset cases occur.",
+      "Optic atrophy may accompany the neuropathy (a phenotype historically labelled HMSN VI), and some patients show central nervous system or white-matter involvement.",
+      "Mitofusin 2 mediates mitochondrial fusion and axonal mitochondrial transport, explaining the vulnerability of the longest fibres.",
+      "Presents with length-dependent distal weakness, wasting and sensory loss, pes cavus and areflexia.",
+      "Diagnosis is by MFN2 sequencing, usually as part of an axonal-neuropathy gene panel."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities), MFN2 gene sequencing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charcot-Marie-Tooth disease type 2A is caused, in most cases, by autosomal dominant mutations in MFN2, which encodes mitofusin 2, a GTPase of the outer mitochondrial membrane that mediates mitochondrial fusion and regulates the transport and distribution of mitochondria along axons. Impaired fusion and trafficking deprive the distal reaches of the longest axons of adequate mitochondrial function, producing a length-dependent axonal rather than demyelinating neuropathy, so conduction velocities are relatively preserved while motor and sensory amplitudes fall. The metabolic vulnerability of long fibre tracts also accounts for the associated optic atrophy and occasional central nervous system involvement seen in some patients. Onset is frequently early with a comparatively severe course, although later-onset milder presentations occur, and rare recessive and de novo cases are recognised.",
+    "additionalDifferentials": [
+      "Other CMT2 subtypes (for example late-onset MPZ, RAB7, GARS, HSPB1 disease)",
+      "CMT1 subtypes, if any conduction slowing is present",
+      "Distal hereditary motor neuropathy",
+      "Acquired axonal neuropathies (toxic, metabolic or nutritional)",
+      "Hereditary sensory and autonomic neuropathy",
+      "Mitochondrial disease presenting with peripheral neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Other CMT2 subtypes (for example late-onset MPZ, RAB7, GARS, HSPB1 disease), CMT1 subtypes, if any conduction slowing is present,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities)",
+      "MFN2 gene sequencing",
+      "Ophthalmological assessment including optic nerve evaluation and visual evoked potentials",
+      "MRI brain where central features are suspected",
+      "Needle electromyography for chronic denervation and reinnervation",
+      "Family segregation studies and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Very early onset with rapid progression and loss of ambulation",
+      "Visual failure indicating optic atrophy",
+      "Central signs such as spasticity or white-matter change",
+      "Respiratory or bulbar involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is often more severe than other forms of CMT2; early-onset cases may lose independent ambulation during childhood or adolescence, whereas later-onset disease follows a milder course.",
+    "pitfalls": [
+      "Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities.",
+      "Missing optic atrophy as an integral part of the syndrome.",
+      "Overlooking rare recessive or de novo inheritance when a clear dominant pedigree is absent.",
+      "Attributing an axonal neuropathy to acquired causes without considering a genetic aetiology."
+    ],
+    "references": [
+      "Peripheral neuropathy reference texts",
+      "Neuromuscular genetics reference guidelines",
+      "Clinical neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists",
+      "Fit ankle-foot orthoses and provide podiatry, footwear and walking aids for foot drop and pes cavus, with wheelchair provision where ambulation is lost",
+      "Offer orthopaedic foot surgery for disabling fixed deformity",
+      "Treat neuropathic pain symptomatically and avoid neurotoxic drugs such as vincristine",
+      "Screen for optic atrophy with ophthalmological assessment and visual evoked potentials, and evaluate for central nervous system involvement where features suggest it",
+      "Provide intensive rehabilitation for the frequently severe early-onset cases that lose independent ambulation",
+      "Offer genetic counselling for autosomal dominant inheritance and assess at-risk relatives",
+      "Coordinate multidisciplinary neuromuscular, ophthalmology, orthopaedic and rehabilitation care"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2a."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-2a-real-image",
-   "title": "Charcot-Marie-Tooth disease type 2A: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_2a-pathway",
+      "title": "Charcot-Marie-Tooth disease type 2A: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin 2.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very early onset with rapid progression and loss of ambulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities), MFN2 gene sequencing, Ophthalmological assessment including optic nerve evaluation and visual evoked potentials"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 2a."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2a-matrix",
+      "title": "Charcot-Marie-Tooth disease type 2A: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common form of axonal CMT (CMT2), caused predominantly by autosomal dominant mutations in MFN2, which encodes mitofusin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies confirming an axonal pattern (low amplitudes, preserved velocities), MFN2 gene sequencing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other CMT2 subtypes (for example late-onset MPZ, RAB7, GARS, HSPB1 disease), CMT1 subtypes, if any conduction slowing is present,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive management with physiotherapy and occupational therapy, since no disease-modifying drug therapy exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting demyelinating slowing, when CMT2A is axonal with near-normal velocities.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2a."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Axonal pattern: low amplitudes with preserved velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MFN2 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms an MFN2 variant, the predominant cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve evaluation and optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Where central features are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle EMG",
+          "cells": [
+            {
+              "text": "Chronic denervation and reinnervation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT1 subtypes",
+          "cells": [
+            {
+              "text": "Any conduction slowing present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired axonal neuropathy",
+          "cells": [
+            {
+              "text": "Toxic, metabolic or nutritional cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            },
+            {
+              "text": "No disease-modifying drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and walking aids",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids; wheelchair when ambulation is lost"
+            },
+            {
+              "text": "Foot drop and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot surgery",
+          "cells": [
+            {
+              "text": "Orthopaedic surgery for disabling fixed deformity"
+            },
+            {
+              "text": "Disabling deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom and drug caution",
+          "cells": [
+            {
+              "text": "Treat neuropathic pain; avoid vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic atrophy and CNS screening",
+          "cells": [
+            {
+              "text": "Ophthalmological assessment and visual evoked potentials; CNS evaluation where suggested"
+            },
+            {
+              "text": "Optic atrophy and central involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive rehabilitation",
+          "cells": [
+            {
+              "text": "For severe early-onset cases that lose independent ambulation"
+            },
+            {
+              "text": "Severe early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; assess at-risk relatives"
+            },
+            {
+              "text": "Relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2a-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 2A",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 2A (MFN2): early-onset axonal neuropathy, length-dependent weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, visual failure, spasticity, respiratory signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for central involvement or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies showing axonal pattern; MFN2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic MFN2 variant with an axonal pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check other CMT2 subtypes, acquired axonal neuropathy and HSAN",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry, footwear and walking aids for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic foot surgery for disabling fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optic nerve assessment; intensive rehabilitation in severe early-onset disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often severe in early onset; autosomal dominant genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

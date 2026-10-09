@@ -1,173 +1,460 @@
 {
- "id": "siderosis",
- "name": "Siderosis",
- "aliases": [
-  "welder's lung",
-  "arc welder's pneumoconiosis",
-  "iron oxide pneumoconiosis",
-  "pulmonary siderosis"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine / Occupational Lung Disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Occupational and Environmental Respiratory Medicine reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry workers",
-   "Pure siderosis is generally a benign, non-fibrotic deposition disease with little or no functional impairment",
-   "Radiographs may show widespread fine nodular or reticular opacities that can be striking despite few symptoms",
-   "Imaging changes may partially regress after exposure ceases, reflecting clearance of iron-laden macrophages",
-   "Iron oxide deposits accumulate as macrophage-laden macules around small airways and vessels without significant collagen deposition",
-   "Mixed exposures, especially to silica (siderosilicosis), can convert a benign picture into a fibrotic one",
-   "A clear welding or metalworking history is essential, as the radiographic burden may otherwise prompt unnecessary invasive workup"
+  "id": "siderosis",
+  "name": "Siderosis",
+  "aliases": [
+    "welder's lung",
+    "arc welder's pneumoconiosis",
+    "iron oxide pneumoconiosis",
+    "pulmonary siderosis"
   ],
-  "pathophysiology": "Fine iron oxide particles generated during welding and metal cutting are inhaled and deposited in the lung, where alveolar macrophages engulf them and accumulate as pigmented aggregates around respiratory bronchioles and perivascular spaces. Because iron oxide is relatively inert and provokes minimal fibrogenic response, pure siderosis produces macule deposition without meaningful interstitial fibrosis, and the process is largely benign and potentially partly reversible. When welding fume also contains silica or other fibrogenic dusts, a mixed pneumoconiosis with genuine fibrosis (siderosilicosis) can develop, and welders additionally face increased risks of airways disease and metal fume fever.",
-  "additionalDifferentials": [
-   "Silicosis or mixed-dust fibrosis (siderosilicosis)",
-   "Sarcoidosis",
-   "Miliary tuberculosis",
-   "Hypersensitivity pneumonitis",
-   "Pulmonary haemosiderosis",
-   "Other nodular pneumoconioses"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph and high-resolution CT to characterise nodular or reticular opacities",
-   "Detailed welding and metalworking occupational history",
-   "Spirometry and diffusing capacity to confirm preserved function in pure disease",
-   "Bronchoalveolar lavage showing iron-laden macrophages where sampling is undertaken",
-   "Assessment for coexisting silica exposure",
-   "Serial imaging to observe partial regression after exposure ends"
-  ],
-  "redFlags": [
-   "Progressive breathlessness or fibrosis suggesting mixed-dust disease rather than pure siderosis",
-   "New mass or cavitation raising concern for malignancy or tuberculosis",
-   "Significant functional decline inconsistent with benign iron deposition",
-   "Systemic symptoms prompting search for an alternative diagnosis"
-  ],
-  "prognosis": "Pure siderosis is benign, usually asymptomatic, and may partially clear after exposure ceases; prognosis worsens only when there is concurrent silica exposure producing fibrosis or coexisting airways disease.",
-  "pitfalls": [
-   "Assuming impressive radiographic nodularity implies severe functional disease",
-   "Failing to identify coexisting silica exposure that changes prognosis",
-   "Proceeding to invasive biopsy when a clear welding history and benign course suffice",
-   "Overlooking welding-related airflow obstruction or metal fume fever as separate entities"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "Parkes' Occupational Lung Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory protection",
-   "Reassurance that pure siderosis is benign and imaging may partly regress after exposure ceases, so no specific drug therapy is required",
-   "Smoking cessation support to limit additional airways disease",
-   "Serial chest imaging and spirometry with diffusing capacity to confirm preserved function and detect any evolving fibrosis",
-   "Assessment for coexisting silica exposure that could cause a fibrotic siderosilicosis",
-   "Occupational health referral and reporting as an occupational lung disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "siderosis-pathway",
-   "title": "Siderosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry workers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive breathlessness or fibrosis suggesting mixed-dust disease rather than pure siderosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph and high-resolution CT to characterise nodular or reticular opacities, Detailed welding and metalworking occupational history, Spirometry and diffusing capacity to confirm preserved function in pure disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory protection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming impressive radiographic nodularity implies severe functional disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of siderosis."
-  }
- ],
- "tables": [
-  {
-   "id": "siderosis-matrix",
-   "title": "Siderosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine / Occupational Lung Disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Occupational and Environmental Respiratory Medicine reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry workers",
+      "Pure siderosis is generally a benign, non-fibrotic deposition disease with little or no functional impairment",
+      "Radiographs may show widespread fine nodular or reticular opacities that can be striking despite few symptoms",
+      "Imaging changes may partially regress after exposure ceases, reflecting clearance of iron-laden macrophages",
+      "Iron oxide deposits accumulate as macrophage-laden macules around small airways and vessels without significant collagen deposition",
+      "Mixed exposures, especially to silica (siderosilicosis), can convert a benign picture into a fibrotic one",
+      "A clear welding or metalworking history is essential, as the radiographic burden may otherwise prompt unnecessary invasive workup"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph and high-resolution CT to characterise nodular or reticular opacities, Detailed welding and metalworking",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fine iron oxide particles generated during welding and metal cutting are inhaled and deposited in the lung, where alveolar macrophages engulf them and accumulate as pigmented aggregates around respiratory bronchioles and perivascular spaces. Because iron oxide is relatively inert and provokes minimal fibrogenic response, pure siderosis produces macule deposition without meaningful interstitial fibrosis, and the process is largely benign and potentially partly reversible. When welding fume also contains silica or other fibrogenic dusts, a mixed pneumoconiosis with genuine fibrosis (siderosilicosis) can develop, and welders additionally face increased risks of airways disease and metal fume fever.",
+    "additionalDifferentials": [
+      "Silicosis or mixed-dust fibrosis (siderosilicosis)",
+      "Sarcoidosis",
+      "Miliary tuberculosis",
+      "Hypersensitivity pneumonitis",
+      "Pulmonary haemosiderosis",
+      "Other nodular pneumoconioses"
     ],
-    [
-     "Primary Differentials",
-     "Silicosis or mixed-dust fibrosis (siderosilicosis), Sarcoidosis, Miliary tuberculosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph and high-resolution CT to characterise nodular or reticular opacities",
+      "Detailed welding and metalworking occupational history",
+      "Spirometry and diffusing capacity to confirm preserved function in pure disease",
+      "Bronchoalveolar lavage showing iron-laden macrophages where sampling is undertaken",
+      "Assessment for coexisting silica exposure",
+      "Serial imaging to observe partial regression after exposure ends"
     ],
-    [
-     "Management Strategy",
-     "Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive breathlessness or fibrosis suggesting mixed-dust disease rather than pure siderosis",
+      "New mass or cavitation raising concern for malignancy or tuberculosis",
+      "Significant functional decline inconsistent with benign iron deposition",
+      "Systemic symptoms prompting search for an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming impressive radiographic nodularity implies severe functional disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pure siderosis is benign, usually asymptomatic, and may partially clear after exposure ceases; prognosis worsens only when there is concurrent silica exposure producing fibrosis or coexisting airways disease.",
+    "pitfalls": [
+      "Assuming impressive radiographic nodularity implies severe functional disease",
+      "Failing to identify coexisting silica exposure that changes prognosis",
+      "Proceeding to invasive biopsy when a clear welding history and benign course suffice",
+      "Overlooking welding-related airflow obstruction or metal fume fever as separate entities"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "Parkes' Occupational Lung Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory protection",
+      "Reassurance that pure siderosis is benign and imaging may partly regress after exposure ceases, so no specific drug therapy is required",
+      "Smoking cessation support to limit additional airways disease",
+      "Serial chest imaging and spirometry with diffusing capacity to confirm preserved function and detect any evolving fibrosis",
+      "Assessment for coexisting silica exposure that could cause a fibrotic siderosilicosis",
+      "Occupational health referral and reporting as an occupational lung disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for siderosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "siderosis-real-image",
-   "title": "Siderosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "siderosis-pathway",
+      "title": "Siderosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry workers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive breathlessness or fibrosis suggesting mixed-dust disease rather than pure siderosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph and high-resolution CT to characterise nodular or reticular opacities, Detailed welding and metalworking occupational history, Spirometry and diffusing capacity to confirm preserved function in pure disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory protection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming impressive radiographic nodularity implies severe functional disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of siderosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "siderosis-matrix",
+      "title": "Siderosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from inhalation of iron oxide fume or dust, classically in electric-arc welders, oxy-acetylene cutters, and foundry",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph and high-resolution CT to characterise nodular or reticular opacities, Detailed welding and metalworking",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Silicosis or mixed-dust fibrosis (siderosilicosis), Sarcoidosis, Miliary tuberculosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Removal from further iron oxide fume and dust exposure, with workplace controls such as local exhaust ventilation and respiratory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming impressive radiographic nodularity implies severe functional disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for siderosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Occupational and Environmental Respiratory Medicine reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "siderosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and HRCT",
+          "cells": [
+            {
+              "text": "Nodular or reticular opacities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational history",
+          "cells": [
+            {
+              "text": "Welding and metalworking exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry and diffusing capacity",
+          "cells": [
+            {
+              "text": "Preserved function in pure disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Iron-laden macrophages where sampled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silica exposure assessment",
+          "cells": [
+            {
+              "text": "Coexisting silica changes prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Partial regression after exposure ends"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "siderosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Siderosilicosis or mixed-dust fibrosis",
+          "cells": [
+            {
+              "text": "Coexisting silica; progressive breathlessness or fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Miliary tuberculosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "siderosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove from exposure",
+          "cells": [
+            {
+              "text": "Iron oxide fume and dust; local exhaust ventilation and respiratory protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Pure siderosis is benign and imaging may partly regress; no drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Limits additional airways disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging and lung function",
+          "cells": [
+            {
+              "text": "Spirometry with diffusing capacity to detect fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silica exposure assessment",
+          "cells": [
+            {
+              "text": "Excludes fibrotic siderosilicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health",
+          "cells": [
+            {
+              "text": "Referral and reporting as an occupational lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "siderosis-dx-mgmt",
+      "title": "Diagnosis and management of Siderosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Welder or metalworker with nodular chest radiograph opacities and few symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive dyspnoea, new mass or cavitation, functional decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for mixed-dust fibrosis, malignancy or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph and HRCT, occupational history, spirometry with diffusing capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is it pure siderosis with preserved function and no silica exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate siderosilicosis, sarcoidosis, miliary TB or hypersensitivity pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove from iron oxide exposure with workplace controls",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure; no specific drug therapy, and imaging may regress",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Smoking cessation and serial imaging with lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational health referral and reporting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often partly reversible; worse only with coexisting silica",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,167 +1,436 @@
 {
- "id": "congenital_ectropion_uveae",
- "name": "Congenital ectropion uveae",
- "aliases": [
-  "congenital ectropion uvea"
- ],
- "class": "non_infective",
- "system": "Eye / Anterior segment",
- "specialty": "Ophthalmology / Paediatric ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
-   "It appears as a dark cuff of pigment around the pupil where the posterior pigment layer is visible anteriorly",
-   "It is usually unilateral and is a marker of anterior segment maldevelopment",
-   "It is strongly associated with glaucoma, which may be present at birth or develop later",
-   "Associations include neurofibromatosis type 1, Prader-Willi syndrome and other anterior segment dysgenesis",
-   "Lifelong glaucoma surveillance is the key management priority"
+  "id": "congenital_ectropion_uveae",
+  "name": "Congenital ectropion uveae",
+  "aliases": [
+    "congenital ectropion uvea"
   ],
-  "pathophysiology": "Congenital ectropion uveae results from abnormal development of the anterior segment in which the iris posterior pigment epithelium migrates anteriorly over the pupillary margin onto the iris face. It is thought to reflect a neural crest-related developmental abnormality, and the same maldevelopment involves the drainage angle, producing a high-insertion or dysgenic angle that impairs aqueous outflow and causes glaucoma. The pigment ectropion itself is stable, but the associated angle anomaly drives the visually important complication.",
-  "additionalDifferentials": [
-   "Acquired ectropion uveae (from rubeosis or chronic inflammation)",
-   "Axenfeld-Rieger spectrum",
-   "Iridocorneal endothelial syndrome",
-   "Iris melanoma or other iris lesion (for pigment change)",
-   "Neurofibromatosis-associated iris changes"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination of the pupillary margin and iris",
-   "Gonioscopy of the drainage angle",
-   "Intraocular pressure measurement and glaucoma assessment",
-   "Evaluation for neurofibromatosis type 1 and other associations",
-   "Serial monitoring for glaucoma over time"
-  ],
-  "redFlags": [
-   "Raised intraocular pressure or glaucomatous optic neuropathy",
-   "Progressive visual field loss",
-   "Features of neurofibromatosis or another syndrome",
-   "New iris changes suggesting an acquired cause"
-  ],
-  "prognosis": "The anomaly is stable, and visual prognosis depends on detecting and controlling the associated glaucoma; with effective glaucoma management outcomes can be good.",
-  "pitfalls": [
-   "Failing to screen for and monitor glaucoma",
-   "Confusing it with acquired ectropion uveae from neovascularisation",
-   "Overlooking neurofibromatosis type 1 and other associations",
-   "Assuming a benign course without angle assessment"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central priority, as the pigment anomaly itself is stable",
-   "Initiate topical pressure-lowering therapy with prostaglandin analogues, beta-blockers, carbonic anhydrase inhibitors or alpha-agonists when glaucoma develops",
-   "Proceed to glaucoma surgery such as angle surgery, trabeculectomy or a drainage device when pressure is inadequately controlled medically",
-   "Detect and treat amblyopia and correct refractive error, particularly in unilateral paediatric cases",
-   "Evaluate for associated conditions including neurofibromatosis type 1 and other anterior segment dysgenesis",
-   "Refer to paediatric ophthalmology and glaucoma specialists for coordinated long-term care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_ectropion_uveae-pathway",
-   "title": "Congenital ectropion uveae: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intraocular pressure or glaucomatous optic neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination of the pupillary margin and iris, Gonioscopy of the drainage angle, Intraocular pressure measurement and glaucoma assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central priority, as the pigment anomaly itself is stable"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to screen for and monitor glaucoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital ectropion uveae."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_ectropion_uveae-matrix",
-   "title": "Congenital ectropion uveae: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Anterior segment",
+  "specialty": "Ophthalmology / Paediatric ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
+      "It appears as a dark cuff of pigment around the pupil where the posterior pigment layer is visible anteriorly",
+      "It is usually unilateral and is a marker of anterior segment maldevelopment",
+      "It is strongly associated with glaucoma, which may be present at birth or develop later",
+      "Associations include neurofibromatosis type 1, Prader-Willi syndrome and other anterior segment dysgenesis",
+      "Lifelong glaucoma surveillance is the key management priority"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination of the pupillary margin and iris, Gonioscopy of the drainage angle, Intraocular pressure measurement and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital ectropion uveae results from abnormal development of the anterior segment in which the iris posterior pigment epithelium migrates anteriorly over the pupillary margin onto the iris face. It is thought to reflect a neural crest-related developmental abnormality, and the same maldevelopment involves the drainage angle, producing a high-insertion or dysgenic angle that impairs aqueous outflow and causes glaucoma. The pigment ectropion itself is stable, but the associated angle anomaly drives the visually important complication.",
+    "additionalDifferentials": [
+      "Acquired ectropion uveae (from rubeosis or chronic inflammation)",
+      "Axenfeld-Rieger spectrum",
+      "Iridocorneal endothelial syndrome",
+      "Iris melanoma or other iris lesion (for pigment change)",
+      "Neurofibromatosis-associated iris changes"
     ],
-    [
-     "Primary Differentials",
-     "Acquired ectropion uveae (from rubeosis or chronic inflammation), Axenfeld-Rieger spectrum, Iridocorneal endothelial syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination of the pupillary margin and iris",
+      "Gonioscopy of the drainage angle",
+      "Intraocular pressure measurement and glaucoma assessment",
+      "Evaluation for neurofibromatosis type 1 and other associations",
+      "Serial monitoring for glaucoma over time"
     ],
-    [
-     "Management Strategy",
-     "Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central",
-     "Core treatment modality"
+    "redFlags": [
+      "Raised intraocular pressure or glaucomatous optic neuropathy",
+      "Progressive visual field loss",
+      "Features of neurofibromatosis or another syndrome",
+      "New iris changes suggesting an acquired cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to screen for and monitor glaucoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The anomaly is stable, and visual prognosis depends on detecting and controlling the associated glaucoma; with effective glaucoma management outcomes can be good.",
+    "pitfalls": [
+      "Failing to screen for and monitor glaucoma",
+      "Confusing it with acquired ectropion uveae from neovascularisation",
+      "Overlooking neurofibromatosis type 1 and other associations",
+      "Assuming a benign course without angle assessment"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central priority, as the pigment anomaly itself is stable",
+      "Initiate topical pressure-lowering therapy with prostaglandin analogues, beta-blockers, carbonic anhydrase inhibitors or alpha-agonists when glaucoma develops",
+      "Proceed to glaucoma surgery such as angle surgery, trabeculectomy or a drainage device when pressure is inadequately controlled medically",
+      "Detect and treat amblyopia and correct refractive error, particularly in unilateral paediatric cases",
+      "Evaluate for associated conditions including neurofibromatosis type 1 and other anterior segment dysgenesis",
+      "Refer to paediatric ophthalmology and glaucoma specialists for coordinated long-term care"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital ectropion uveae."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-ectropion-uveae-real-image",
-   "title": "Congenital ectropion uveae: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_ectropion_uveae-pathway",
+      "title": "Congenital ectropion uveae: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intraocular pressure or glaucomatous optic neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination of the pupillary margin and iris, Gonioscopy of the drainage angle, Intraocular pressure measurement and glaucoma assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central priority, as the pigment anomaly itself is stable"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to screen for and monitor glaucoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital ectropion uveae."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_ectropion_uveae-matrix",
+      "title": "Congenital ectropion uveae: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-progressive anomaly in which iris pigment epithelium extends from the pupillary margin onto the anterior iris surface",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination of the pupillary margin and iris, Gonioscopy of the drainage angle, Intraocular pressure measurement and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired ectropion uveae (from rubeosis or chronic inflammation), Axenfeld-Rieger spectrum, Iridocorneal endothelial syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong glaucoma surveillance with regular intraocular pressure measurement, gonioscopy and optic disc assessment is the central",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to screen for and monitor glaucoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital ectropion uveae."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_ectropion_uveae-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination of pupillary margin and iris",
+          "cells": [
+            {
+              "text": "Ectropion uveae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy of the drainage angle",
+          "cells": [
+            {
+              "text": "Angle assessed for glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Glaucoma assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Associated syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ectropion_uveae-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired ectropion uveae from rubeosis or chronic inflammation",
+          "cells": [
+            {
+              "text": "Pitfall: confused with the congenital form; new vessels or inflammation point to acquired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axenfeld-Rieger spectrum",
+          "cells": [
+            {
+              "text": "Named look-alike anterior segment anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iris melanoma or other iris lesion",
+          "cells": [
+            {
+              "text": "Pigment change prompts review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ectropion_uveae-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong glaucoma surveillance",
+          "cells": [
+            {
+              "text": "Intraocular pressure, gonioscopy and optic disc assessment; central priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical pressure-lowering therapy",
+          "cells": [
+            {
+              "text": "Prostaglandin analogues, beta-blockers, carbonic anhydrase inhibitors or alpha-agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma surgery",
+          "cells": [
+            {
+              "text": "Angle surgery, trabeculectomy or drainage device when medical control is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and refraction",
+          "cells": [
+            {
+              "text": "Detect and treat, particularly unilateral paediatric cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Neurofibromatosis type 1 and other anterior segment dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Paediatric ophthalmology and glaucoma specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_ectropion_uveae-dx-mgmt",
+      "title": "Diagnosis and management of Congenital ectropion uveae",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital ectropion uveae: pupillary margin pulled onto the iris surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised pressure, visual field loss, NF1 or syndrome features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glaucoma assessment and pressure-lowering treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination; gonioscopy; intraocular pressure; NF1 evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonioscopy show a congenital, non-inflamed pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired ectropion from neovascularisation or inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong glaucoma surveillance with pressure, gonioscopy and disc checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical pressure-lowering drops when glaucoma develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glaucoma surgery if pressure is inadequately controlled medically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Detect and treat amblyopia; assess for neurofibromatosis type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anomaly is stable; vision depends on detecting and controlling glaucoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

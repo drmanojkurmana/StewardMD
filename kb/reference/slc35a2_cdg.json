@@ -1,173 +1,460 @@
 {
- "id": "slc35a2_cdg",
- "name": "SLC35A2-CDG (UDP-galactose transporter)",
- "aliases": [
-  "SLC35A2",
-  "UDP-galactose transporter deficiency",
-  "congenital disorder of glycosylation type IIm",
-  "CDG-IIm"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
-   "Presents chiefly as an early-onset epileptic encephalopathy, frequently with infantile spasms and hypsarrhythmia, with developmental delay and hypotonia",
-   "Because it is X-linked with somatic mosaicism, phenotypic severity varies and the transferrin pattern can normalise with age, so a normal screen does not exclude it",
-   "Transferrin analysis, when abnormal, shows a type II pattern reflecting loss of terminal galactose from glycan antennae",
-   "It is one of the potentially treatable CDG subtypes, in which oral galactose supplementation may improve glycosylation and, in some patients, seizures and biochemical markers",
-   "Coagulation, endocrine and dysmorphic features are generally milder than in classic PMM2-CDG",
-   "Diagnosis rests on SLC35A2 sequencing, increasingly identified through epilepsy gene panels and exome sequencing"
+  "id": "slc35a2_cdg",
+  "name": "SLC35A2-CDG (UDP-galactose transporter)",
+  "aliases": [
+    "SLC35A2",
+    "UDP-galactose transporter deficiency",
+    "congenital disorder of glycosylation type IIm",
+    "CDG-IIm"
   ],
-  "pathophysiology": "SLC35A2 encodes the Golgi UDP-galactose transporter that supplies the nucleotide sugar donor for galactosyltransferases. Impaired transport starves the Golgi of UDP-galactose, so galactose is not added to maturing complex N-glycans, leaving truncated antennae and defining a type II processing defect on transferrin analysis. Because the gene is X-linked and the disorder often arises from somatic mosaic variants, the degree of hypoglycosylation and its clinical impact are variable. Providing galactose can partially bypass the transport bottleneck, which underlies the observed biochemical and sometimes clinical response.",
-  "additionalDifferentials": [
-   "Other early-onset epileptic encephalopathies (e.g. genetic developmental and epileptic encephalopathies)",
-   "Other type II CDG subtypes such as TMEM165-CDG and B4GALT1-CDG",
-   "PMM2-CDG and other type I disorders when the transferrin pattern is intermediate",
-   "Structural or metabolic causes of infantile spasms",
-   "Mitochondrial encephalopathy",
-   "Glucose transporter and other treatable metabolic epilepsies"
-  ],
-  "additionalInvestigations": [
-   "Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis)",
-   "SLC35A2 molecular genetic testing, including assessment for somatic mosaicism",
-   "Electroencephalography for hypsarrhythmia or other epileptic patterns",
-   "Neuroimaging for structural or malformative changes",
-   "Developmental and growth assessment",
-   "Trial of galactose supplementation with biochemical monitoring in confirmed cases"
-  ],
-  "redFlags": [
-   "Infantile spasms or drug-resistant seizures requiring prompt evaluation",
-   "Developmental regression or plateau",
-   "Failure to thrive with feeding difficulty",
-   "A normal transferrin screen in a child with a compatible phenotype, which should not stop genetic testing"
-  ],
-  "prognosis": "Outcome is variable and generally dominated by the severity of the epilepsy and developmental delay; some patients show biochemical and clinical improvement with galactose, though epilepsy can remain difficult to control. Milder mosaic presentations exist.",
-  "pitfalls": [
-   "Excluding SLC35A2-CDG on the basis of a normal transferrin test",
-   "Missing somatic mosaicism if only standard blood testing is performed",
-   "Failing to consider a galactose trial in confirmed cases",
-   "Attributing the epilepsy solely to a primary channelopathy without metabolic evaluation"
-  ],
-  "references": [
-   "Scriver's OMMBID, congenital disorders of glycosylation",
-   "Nelson Textbook of Paediatrics, disorders of glycosylation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with biochemical monitoring",
-   "Control the epileptic encephalopathy with antiseizure medication and standard treatment of infantile spasms using hormonal therapy or vigabatrin",
-   "Provide developmental support with physiotherapy and occupational and speech therapy for delay and hypotonia",
-   "Monitor transferrin glycoforms and clinical response to galactose, recognising that the transferrin pattern may normalise with age",
-   "Offer genetic counselling addressing X-linked inheritance and somatic mosaicism",
-   "Coordinate multidisciplinary metabolic, neurology and neurodevelopmental follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "slc35a2_cdg-pathway",
-   "title": "SLC35A2-CDG (UDP-galactose transporter): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infantile spasms or drug-resistant seizures requiring prompt evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis), SLC35A2 molecular genetic testing, including assessment for somatic mosaicism, Electroencephalography for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with biochemical monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding SLC35A2-CDG on the basis of a normal transferrin test"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of slc35a2-cdg (udp-galactose transporter)."
-  }
- ],
- "tables": [
-  {
-   "id": "slc35a2_cdg-matrix",
-   "title": "SLC35A2-CDG (UDP-galactose transporter): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
+      "Presents chiefly as an early-onset epileptic encephalopathy, frequently with infantile spasms and hypsarrhythmia, with developmental delay and hypotonia",
+      "Because it is X-linked with somatic mosaicism, phenotypic severity varies and the transferrin pattern can normalise with age, so a normal screen does not exclude it",
+      "Transferrin analysis, when abnormal, shows a type II pattern reflecting loss of terminal galactose from glycan antennae",
+      "It is one of the potentially treatable CDG subtypes, in which oral galactose supplementation may improve glycosylation and, in some patients, seizures and biochemical markers",
+      "Coagulation, endocrine and dysmorphic features are generally milder than in classic PMM2-CDG",
+      "Diagnosis rests on SLC35A2 sequencing, increasingly identified through epilepsy gene panels and exome sequencing"
     ],
-    [
-     "Key Investigations",
-     "Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis), SLC35A2 molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SLC35A2 encodes the Golgi UDP-galactose transporter that supplies the nucleotide sugar donor for galactosyltransferases. Impaired transport starves the Golgi of UDP-galactose, so galactose is not added to maturing complex N-glycans, leaving truncated antennae and defining a type II processing defect on transferrin analysis. Because the gene is X-linked and the disorder often arises from somatic mosaic variants, the degree of hypoglycosylation and its clinical impact are variable. Providing galactose can partially bypass the transport bottleneck, which underlies the observed biochemical and sometimes clinical response.",
+    "additionalDifferentials": [
+      "Other early-onset epileptic encephalopathies (e.g. genetic developmental and epileptic encephalopathies)",
+      "Other type II CDG subtypes such as TMEM165-CDG and B4GALT1-CDG",
+      "PMM2-CDG and other type I disorders when the transferrin pattern is intermediate",
+      "Structural or metabolic causes of infantile spasms",
+      "Mitochondrial encephalopathy",
+      "Glucose transporter and other treatable metabolic epilepsies"
     ],
-    [
-     "Primary Differentials",
-     "Other early-onset epileptic encephalopathies (e.g. genetic developmental and epileptic encephalopathies), Other type II CDG",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis)",
+      "SLC35A2 molecular genetic testing, including assessment for somatic mosaicism",
+      "Electroencephalography for hypsarrhythmia or other epileptic patterns",
+      "Neuroimaging for structural or malformative changes",
+      "Developmental and growth assessment",
+      "Trial of galactose supplementation with biochemical monitoring in confirmed cases"
     ],
-    [
-     "Management Strategy",
-     "Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Infantile spasms or drug-resistant seizures requiring prompt evaluation",
+      "Developmental regression or plateau",
+      "Failure to thrive with feeding difficulty",
+      "A normal transferrin screen in a child with a compatible phenotype, which should not stop genetic testing"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding SLC35A2-CDG on the basis of a normal transferrin test",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable and generally dominated by the severity of the epilepsy and developmental delay; some patients show biochemical and clinical improvement with galactose, though epilepsy can remain difficult to control. Milder mosaic presentations exist.",
+    "pitfalls": [
+      "Excluding SLC35A2-CDG on the basis of a normal transferrin test",
+      "Missing somatic mosaicism if only standard blood testing is performed",
+      "Failing to consider a galactose trial in confirmed cases",
+      "Attributing the epilepsy solely to a primary channelopathy without metabolic evaluation"
+    ],
+    "references": [
+      "Scriver's OMMBID, congenital disorders of glycosylation",
+      "Nelson Textbook of Paediatrics, disorders of glycosylation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with biochemical monitoring",
+      "Control the epileptic encephalopathy with antiseizure medication and standard treatment of infantile spasms using hormonal therapy or vigabatrin",
+      "Provide developmental support with physiotherapy and occupational and speech therapy for delay and hypotonia",
+      "Monitor transferrin glycoforms and clinical response to galactose, recognising that the transferrin pattern may normalise with age",
+      "Offer genetic counselling addressing X-linked inheritance and somatic mosaicism",
+      "Coordinate multidisciplinary metabolic, neurology and neurodevelopmental follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for slc35a2-cdg (udp-galactose transporter)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "slc35a2-cdg-real-image",
-   "title": "SLC35A2-CDG (UDP-galactose transporter): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "slc35a2_cdg-pathway",
+      "title": "SLC35A2-CDG (UDP-galactose transporter): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infantile spasms or drug-resistant seizures requiring prompt evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis), SLC35A2 molecular genetic testing, including assessment for somatic mosaicism, Electroencephalography for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with biochemical monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding SLC35A2-CDG on the basis of a normal transferrin test"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of slc35a2-cdg (udp-galactose transporter)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "slc35a2_cdg-matrix",
+      "title": "SLC35A2-CDG (UDP-galactose transporter): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked CDG caused by defective transport of UDP-galactose into the Golgi, impairing galactosylation of N-glycans",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin isoelectric focusing or mass spectrometry (may be normal, so does not exclude the diagnosis), SLC35A2 molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other early-onset epileptic encephalopathies (e.g. genetic developmental and epileptic encephalopathies), Other type II CDG",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give oral galactose supplementation to partially bypass the transport defect and improve N-glycan galactosylation, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding SLC35A2-CDG on the basis of a normal transferrin test",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for slc35a2-cdg (udp-galactose transporter)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slc35a2_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type II pattern when abnormal; a normal result does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC35A2 genetic testing",
+          "cells": [
+            {
+              "text": "Variants, including somatic mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Hypsarrhythmia or other epileptic patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Structural or malformative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and growth assessment",
+          "cells": [
+            {
+              "text": "Developmental delay and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactose trial with biochemical monitoring",
+          "cells": [
+            {
+              "text": "Biochemical response in confirmed cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc35a2_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PMM2-CDG and other type I disorders",
+          "cells": [
+            {
+              "text": "An intermediate transferrin pattern points towards a type I disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TMEM165-CDG and B4GALT1-CDG",
+          "cells": [
+            {
+              "text": "Other type II subtypes with a galactosylation defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other early-onset epileptic encephalopathies",
+          "cells": [
+            {
+              "text": "Infantile spasms and hypsarrhythmia occur; metabolic evaluation is still needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc35a2_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral galactose supplementation",
+          "cells": [
+            {
+              "text": "Partially bypasses the transport defect; biochemical monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure treatment and infantile spasms therapy",
+          "cells": [
+            {
+              "text": "Antiseizure medication; hormonal therapy or vigabatrin for infantile spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech therapy for delay and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycoform monitoring",
+          "cells": [
+            {
+              "text": "Transferrin glycoforms and clinical response; the pattern may normalise with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance and somatic mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Metabolic, neurology and neurodevelopmental teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slc35a2_cdg-dx-mgmt",
+      "title": "Diagnosis and management of SLC35A2-CDG (UDP-galactose transporter)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset epilepsy with infantile spasms and delay: suspected SLC35A2-CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infantile spasms, drug-resistant seizures, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent epilepsy review for infantile spasms and drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF or MS; SLC35A2 sequencing with mosaicism; EEG; neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC35A2 testing confirm a variant, including a mosaic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "A normal transferrin test does not exclude; repeat genetic testing and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral galactose supplementation with biochemical monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication; hormonal therapy or vigabatrin for infantile spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy for delay and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on X-linked inheritance and mosaicism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies; epilepsy and delay dominate, though galactose helps some patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

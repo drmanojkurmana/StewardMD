@@ -1,177 +1,483 @@
 {
- "id": "primary_lymphoedema",
- "name": "primary lymphoedema",
- "aliases": [
-  "hereditary lymphoedema",
-  "idiopathic lymphoedema"
- ],
- "class": "non_infective",
- "system": "lymphatic and vascular",
- "specialty": "vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an identifiable external insult, distinguishing it from secondary lymphoedema.",
-   "Classified by age of onset: congenital (present at or shortly after birth, includes Milroy disease), praecox (onset before 35 years, includes Meige disease) and tarda (onset after 35 years).",
-   "A positive Stemmer sign, the inability to pinch and tent a skin fold at the base of the second toe, is a reliable bedside indicator and is rarely falsely positive.",
-   "Swelling typically begins distally at the ankle or dorsum of the foot and ascends, is initially pitting and soft, then becomes non-pitting with dermal thickening, hyperkeratosis and peau d'orange.",
-   "Recurrent cellulitis is both a consequence and an accelerant of disease, each episode causing further lymphatic destruction and worsening oedema.",
-   "Several Mendelian forms exist, including FLT4 (VEGFR3) mutations in Milroy disease and FOXC2 mutations in lymphoedema-distichiasis, so a syndromic and family history is essential.",
-   "Lymphoscintigraphy is the standard confirmatory investigation, demonstrating delayed or absent tracer transport, dermal backflow and abnormal or absent nodes.",
-   "Chronic longstanding disease carries a small but important risk of cutaneous angiosarcoma (Stewart-Treves phenomenon), warranting vigilance for new violaceous lesions."
+  "id": "primary_lymphoedema",
+  "name": "primary lymphoedema",
+  "aliases": [
+    "hereditary lymphoedema",
+    "idiopathic lymphoedema"
   ],
-  "pathophysiology": "Primary lymphoedema results from a constitutional abnormality of lymphatic development or function, which may take the form of aplasia, hypoplasia, hyperplasia with valvular incompetence, or lymph node fibrosis. Impaired lymphatic transport allows protein-rich interstitial fluid to accumulate, and the persistent high-protein oedema drives chronic low-grade inflammation, fibroblast activation, adipose deposition and progressive dermal and subcutaneous fibrosis. This creates a self-perpetuating cycle in which tissue remodelling further compromises the remaining lymphatics and predisposes to recurrent bacterial infection, which in turn accelerates lymphatic obliteration. A growing number of causative germline mutations affecting lymphangiogenesis pathways (for example VEGFR3/FLT4, FOXC2, SOX18, GJC2 and CCBE1) have been identified, explaining the hereditary and syndromic patterns.",
-  "additionalDifferentials": [
-   "chronic venous insufficiency with venous oedema",
-   "lipoedema",
-   "systemic oedema from cardiac, renal or hepatic failure",
-   "hypothyroid myxoedema",
-   "secondary lymphoedema from malignancy, surgery, radiotherapy or filariasis",
-   "deep vein thrombosis and post-thrombotic syndrome",
-   "chronic regional pain syndrome with limb swelling"
-  ],
-  "additionalInvestigations": [
-   "lymphoscintigraphy to assess lymphatic transport",
-   "venous duplex ultrasonography to exclude venous disease",
-   "MR or CT lymphangiography for anatomical mapping",
-   "indocyanine green near-infrared lymphography",
-   "targeted genetic testing and pedigree analysis in early-onset or syndromic cases",
-   "thyroid function and renal, hepatic and cardiac assessment to exclude systemic oedema"
-  ],
-  "redFlags": [
-   "rapidly progressive or markedly asymmetrical swelling raising concern for underlying malignancy",
-   "new violaceous or haemorrhagic cutaneous nodules suggesting angiosarcoma",
-   "recurrent cellulitis with systemic sepsis",
-   "skin breakdown, ulceration or lymphorrhoea",
-   "unilateral limb swelling of recent onset in an older adult, mandating exclusion of pelvic or nodal tumour"
-  ],
-  "prognosis": "Primary lymphoedema is a chronic, incurable condition that tends to progress without treatment, but structured decongestive therapy and infection prevention allow most patients to maintain limb function and quality of life. Prognosis worsens with recurrent cellulitis, advanced fibrosis and the rare development of angiosarcoma.",
-  "pitfalls": [
-   "attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure",
-   "undertreating or delaying antibiotics in cellulitis, allowing further lymphatic damage",
-   "overlooking associated syndromic features such as distichiasis, yellow nails or ptosis",
-   "failing to elicit a family history and thereby missing a hereditary diagnosis",
-   "dismissing new cutaneous lesions on a chronically swollen limb as bruising"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
-   "International Society of Lymphology Consensus Document on the diagnosis and treatment of peripheral lymphoedema"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression garments as the mainstay",
-   "Meticulous skin hygiene with emollients to maintain barrier integrity and reduce infection risk",
-   "Structured exercise, limb elevation and weight optimisation to support lymphatic drainage",
-   "Prompt antibiotic treatment of cellulitis and prophylactic antibiotics for recurrent episodes, since each attack accelerates lymphatic destruction",
-   "Surgical options in selected cases, including lymphaticovenous anastomosis, vascularised lymph node transfer, and liposuction or debulking for advanced fibrotic disease",
-   "Ongoing monitoring of limb volume and function with lymphoedema-specialist follow-up and psychological support",
-   "Genetic counselling and family screening for Mendelian forms such as Milroy disease and lymphoedema-distichiasis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_lymphoedema-pathway",
-   "title": "primary lymphoedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an identifiable external insult, distinguishing it from secondary lymphoedema.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapidly progressive or markedly asymmetrical swelling raising concern for underlying malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: lymphoscintigraphy to assess lymphatic transport, venous duplex ultrasonography to exclude venous disease, MR or CT lymphangiography for anatomical mapping"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression garments as the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary lymphoedema."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_lymphoedema-matrix",
-   "title": "primary lymphoedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "lymphatic and vascular",
+  "specialty": "vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an identifiable external insult, distinguishing it from secondary lymphoedema.",
+      "Classified by age of onset: congenital (present at or shortly after birth, includes Milroy disease), praecox (onset before 35 years, includes Meige disease) and tarda (onset after 35 years).",
+      "A positive Stemmer sign, the inability to pinch and tent a skin fold at the base of the second toe, is a reliable bedside indicator and is rarely falsely positive.",
+      "Swelling typically begins distally at the ankle or dorsum of the foot and ascends, is initially pitting and soft, then becomes non-pitting with dermal thickening, hyperkeratosis and peau d'orange.",
+      "Recurrent cellulitis is both a consequence and an accelerant of disease, each episode causing further lymphatic destruction and worsening oedema.",
+      "Several Mendelian forms exist, including FLT4 (VEGFR3) mutations in Milroy disease and FOXC2 mutations in lymphoedema-distichiasis, so a syndromic and family history is essential.",
+      "Lymphoscintigraphy is the standard confirmatory investigation, demonstrating delayed or absent tracer transport, dermal backflow and abnormal or absent nodes.",
+      "Chronic longstanding disease carries a small but important risk of cutaneous angiosarcoma (Stewart-Treves phenomenon), warranting vigilance for new violaceous lesions."
     ],
-    [
-     "Key Investigations",
-     "lymphoscintigraphy to assess lymphatic transport, venous duplex ultrasonography to exclude venous disease, MR or CT",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary lymphoedema results from a constitutional abnormality of lymphatic development or function, which may take the form of aplasia, hypoplasia, hyperplasia with valvular incompetence, or lymph node fibrosis. Impaired lymphatic transport allows protein-rich interstitial fluid to accumulate, and the persistent high-protein oedema drives chronic low-grade inflammation, fibroblast activation, adipose deposition and progressive dermal and subcutaneous fibrosis. This creates a self-perpetuating cycle in which tissue remodelling further compromises the remaining lymphatics and predisposes to recurrent bacterial infection, which in turn accelerates lymphatic obliteration. A growing number of causative germline mutations affecting lymphangiogenesis pathways (for example VEGFR3/FLT4, FOXC2, SOX18, GJC2 and CCBE1) have been identified, explaining the hereditary and syndromic patterns.",
+    "additionalDifferentials": [
+      "chronic venous insufficiency with venous oedema",
+      "lipoedema",
+      "systemic oedema from cardiac, renal or hepatic failure",
+      "hypothyroid myxoedema",
+      "secondary lymphoedema from malignancy, surgery, radiotherapy or filariasis",
+      "deep vein thrombosis and post-thrombotic syndrome",
+      "chronic regional pain syndrome with limb swelling"
     ],
-    [
-     "Primary Differentials",
-     "chronic venous insufficiency with venous oedema, lipoedema, systemic oedema from cardiac, renal or hepatic failure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "lymphoscintigraphy to assess lymphatic transport",
+      "venous duplex ultrasonography to exclude venous disease",
+      "MR or CT lymphangiography for anatomical mapping",
+      "indocyanine green near-infrared lymphography",
+      "targeted genetic testing and pedigree analysis in early-onset or syndromic cases",
+      "thyroid function and renal, hepatic and cardiac assessment to exclude systemic oedema"
     ],
-    [
-     "Management Strategy",
-     "Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression",
-     "Core treatment modality"
+    "redFlags": [
+      "rapidly progressive or markedly asymmetrical swelling raising concern for underlying malignancy",
+      "new violaceous or haemorrhagic cutaneous nodules suggesting angiosarcoma",
+      "recurrent cellulitis with systemic sepsis",
+      "skin breakdown, ulceration or lymphorrhoea",
+      "unilateral limb swelling of recent onset in an older adult, mandating exclusion of pelvic or nodal tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary lymphoedema is a chronic, incurable condition that tends to progress without treatment, but structured decongestive therapy and infection prevention allow most patients to maintain limb function and quality of life. Prognosis worsens with recurrent cellulitis, advanced fibrosis and the rare development of angiosarcoma.",
+    "pitfalls": [
+      "attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure",
+      "undertreating or delaying antibiotics in cellulitis, allowing further lymphatic damage",
+      "overlooking associated syndromic features such as distichiasis, yellow nails or ptosis",
+      "failing to elicit a family history and thereby missing a hereditary diagnosis",
+      "dismissing new cutaneous lesions on a chronically swollen limb as bruising"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+      "International Society of Lymphology Consensus Document on the diagnosis and treatment of peripheral lymphoedema"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression garments as the mainstay",
+      "Meticulous skin hygiene with emollients to maintain barrier integrity and reduce infection risk",
+      "Structured exercise, limb elevation and weight optimisation to support lymphatic drainage",
+      "Prompt antibiotic treatment of cellulitis and prophylactic antibiotics for recurrent episodes, since each attack accelerates lymphatic destruction",
+      "Surgical options in selected cases, including lymphaticovenous anastomosis, vascularised lymph node transfer, and liposuction or debulking for advanced fibrotic disease",
+      "Ongoing monitoring of limb volume and function with lymphoedema-specialist follow-up and psychological support",
+      "Genetic counselling and family screening for Mendelian forms such as Milroy disease and lymphoedema-distichiasis"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary lymphoedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-lymphoedema-real-image",
-   "title": "primary lymphoedema: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "primary_lymphoedema-pathway",
+      "title": "primary lymphoedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an identifiable external insult, distinguishing it from secondary lymphoedema.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapidly progressive or markedly asymmetrical swelling raising concern for underlying malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: lymphoscintigraphy to assess lymphatic transport, venous duplex ultrasonography to exclude venous disease, MR or CT lymphangiography for anatomical mapping"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression garments as the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary lymphoedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_lymphoedema-matrix",
+      "title": "primary lymphoedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Arises from an intrinsic developmental or functional abnormality of the lymphatic conducting vessels or nodes, not from an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "lymphoscintigraphy to assess lymphatic transport, venous duplex ultrasonography to exclude venous disease, MR or CT",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "chronic venous insufficiency with venous oedema, lipoedema, systemic oedema from cardiac, renal or hepatic failure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete decongestive therapy combining manual lymphatic drainage, multilayer compression bandaging and maintenance compression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "attributing chronic limb swelling to venous disease or simple obesity and missing lymphatic failure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary lymphoedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_lymphoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Lymphatic transport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex ultrasonography",
+          "cells": [
+            {
+              "text": "Venous disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT lymphangiography",
+          "cells": [
+            {
+              "text": "Anatomical mapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green near-infrared lymphography",
+          "cells": [
+            {
+              "text": "Lymphatic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing and pedigree analysis",
+          "cells": [
+            {
+              "text": "Early-onset or syndromic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and renal, hepatic and cardiac assessment",
+          "cells": [
+            {
+              "text": "Systemic oedema excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_lymphoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic venous insufficiency with venous oedema",
+          "cells": [
+            {
+              "text": "Venous oedema"
+            },
+            {
+              "text": "Venous duplex ultrasonography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic oedema from cardiac, renal or hepatic failure",
+          "cells": [
+            {
+              "text": "Systemic oedema"
+            },
+            {
+              "text": "Cardiac, renal and hepatic assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary lymphoedema from malignancy, surgery, radiotherapy or filariasis",
+          "cells": [
+            {
+              "text": "Acquired cause such as malignancy, surgery, radiotherapy or filariasis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_lymphoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete decongestive therapy",
+          "cells": [
+            {
+              "text": "Manual lymphatic drainage, multilayer compression bandaging and maintenance garments as mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin hygiene",
+          "cells": [
+            {
+              "text": "Emollients to maintain barrier integrity and reduce infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise, elevation and weight",
+          "cells": [
+            {
+              "text": "Structured exercise, limb elevation and weight optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Prompt antibiotics; prophylaxis for recurrent episodes, as each attack accelerates lymphatic destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery in selected cases",
+          "cells": [
+            {
+              "text": "Lymphaticovenous anastomosis, vascularised lymph node transfer, or liposuction or debulking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Limb volume and function, lymphoedema-specialist follow-up and psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Mendelian forms such as Milroy disease and lymphoedema-distichiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_lymphoedema-dx-mgmt",
+      "title": "Diagnosis and management of primary lymphoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary lymphoedema: chronic limb swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid or asymmetrical swelling, violaceous nodules, recurrent cellulitis or ulceration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent exclusion of malignancy, angiosarcoma or pelvic or nodal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphoscintigraphy; venous duplex; lymphangiography; thyroid, renal, cardiac tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is lymphatic dysfunction confirmed with venous and systemic causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous, cardiac, renal, hepatic or thyroid oedema; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete decongestive therapy with compression and lymphatic drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Skin hygiene with emollients to reduce infection risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt antibiotics for cellulitis; prophylaxis for recurrent episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery in selected cases, such as lymphaticovenous anastomosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lymphoedema-specialist follow-up; genetic counselling for Mendelian forms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

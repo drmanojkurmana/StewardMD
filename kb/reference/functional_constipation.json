@@ -1,168 +1,455 @@
 {
- "id": "functional_constipation",
- "name": "Functional constipation",
- "aliases": [
-  "chronic idiopathic constipation"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not meeting criteria for irritable bowel syndrome",
-   "Features include straining, hard or lumpy stools, a sense of incomplete evacuation and use of manual manoeuvres",
-   "It differs from constipation-predominant irritable bowel syndrome mainly by the absence of predominant abdominal pain",
-   "Broad mechanisms include normal-transit, slow-transit and evacuation (defecatory) disorders, which guide treatment",
-   "Secondary causes such as hypothyroidism, hypercalcaemia, medications and colorectal obstruction must be excluded",
-   "Management uses fibre and fluid, osmotic and stimulant laxatives, and newer secretagogues or prokinetics for refractory cases"
+  "id": "functional_constipation",
+  "name": "Functional constipation",
+  "aliases": [
+    "chronic idiopathic constipation"
   ],
-  "pathophysiology": "Functional constipation encompasses several mechanisms of impaired stool passage in the absence of an identifiable organic cause. Normal-transit constipation reflects perceived difficulty despite normal colonic transit, slow-transit constipation results from reduced colonic propulsive activity, and defecatory disorders arise from impaired coordination of the pelvic floor and anal sphincter during evacuation. Disordered neuromuscular control of the colon and anorectum, sometimes with altered fluid handling, underlies the symptoms, and overlap between mechanisms is common.",
-  "additionalDifferentials": [
-   "Constipation-predominant irritable bowel syndrome",
-   "Dyssynergic defecation",
-   "Secondary constipation (hypothyroidism, hypercalcaemia, drugs)",
-   "Colorectal obstruction or stricture",
-   "Neurological disease affecting the bowel"
-  ],
-  "additionalInvestigations": [
-   "History and examination including rectal examination for evacuation disorder",
-   "Bloods to exclude metabolic causes such as thyroid dysfunction and hypercalcaemia",
-   "Colonic transit studies where slow transit is suspected",
-   "Anorectal manometry and balloon expulsion for suspected defecatory disorder",
-   "Colonoscopy where alarm features or obstruction are suspected"
-  ],
-  "redFlags": [
-   "Rectal bleeding, anaemia or weight loss",
-   "New or rapidly progressive constipation in an older patient",
-   "Features suggesting obstruction",
-   "Neurological signs suggesting a secondary cause"
-  ],
-  "prognosis": "The condition is chronic but benign, and most patients respond to a stepwise regimen, with defecatory disorders often improving specifically with pelvic floor retraining.",
-  "pitfalls": [
-   "Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone",
-   "Overlooking secondary metabolic or drug causes",
-   "Missing alarm features suggesting malignancy",
-   "Relying on stimulant laxatives without addressing the underlying mechanism"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
-   "Osmotic laxatives such as macrogol as the mainstay of pharmacotherapy",
-   "Stimulant laxatives added when the response is inadequate",
-   "Secretagogues such as linaclotide, or the prokinetic prucalopride, for refractory or slow-transit disease",
-   "Pelvic floor biofeedback and retraining for defecatory (evacuation) disorders",
-   "Review and withdraw constipating medications and exclude secondary causes such as hypothyroidism and hypercalcaemia",
-   "Escalate to specialist anorectal investigation when disease is refractory or alarm features emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_constipation-pathway",
-   "title": "Functional constipation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not meeting criteria for irritable bowel syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding, anaemia or weight loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History and examination including rectal examination for evacuation disorder, Bloods to exclude metabolic causes such as thyroid dysfunction and hypercalcaemia, Colonic transit studies where slow transit is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional constipation."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_constipation-matrix",
-   "title": "Functional constipation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not meeting criteria for irritable bowel syndrome",
+      "Features include straining, hard or lumpy stools, a sense of incomplete evacuation and use of manual manoeuvres",
+      "It differs from constipation-predominant irritable bowel syndrome mainly by the absence of predominant abdominal pain",
+      "Broad mechanisms include normal-transit, slow-transit and evacuation (defecatory) disorders, which guide treatment",
+      "Secondary causes such as hypothyroidism, hypercalcaemia, medications and colorectal obstruction must be excluded",
+      "Management uses fibre and fluid, osmotic and stimulant laxatives, and newer secretagogues or prokinetics for refractory cases"
     ],
-    [
-     "Key Investigations",
-     "History and examination including rectal examination for evacuation disorder, Bloods to exclude metabolic causes such as thyroid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional constipation encompasses several mechanisms of impaired stool passage in the absence of an identifiable organic cause. Normal-transit constipation reflects perceived difficulty despite normal colonic transit, slow-transit constipation results from reduced colonic propulsive activity, and defecatory disorders arise from impaired coordination of the pelvic floor and anal sphincter during evacuation. Disordered neuromuscular control of the colon and anorectum, sometimes with altered fluid handling, underlies the symptoms, and overlap between mechanisms is common.",
+    "additionalDifferentials": [
+      "Constipation-predominant irritable bowel syndrome",
+      "Dyssynergic defecation",
+      "Secondary constipation (hypothyroidism, hypercalcaemia, drugs)",
+      "Colorectal obstruction or stricture",
+      "Neurological disease affecting the bowel"
     ],
-    [
-     "Primary Differentials",
-     "Constipation-predominant irritable bowel syndrome, Dyssynergic defecation, Secondary constipation (hypothyroidism,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History and examination including rectal examination for evacuation disorder",
+      "Bloods to exclude metabolic causes such as thyroid dysfunction and hypercalcaemia",
+      "Colonic transit studies where slow transit is suspected",
+      "Anorectal manometry and balloon expulsion for suspected defecatory disorder",
+      "Colonoscopy where alarm features or obstruction are suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding, anaemia or weight loss",
+      "New or rapidly progressive constipation in an older patient",
+      "Features suggesting obstruction",
+      "Neurological signs suggesting a secondary cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic but benign, and most patients respond to a stepwise regimen, with defecatory disorders often improving specifically with pelvic floor retraining.",
+    "pitfalls": [
+      "Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone",
+      "Overlooking secondary metabolic or drug causes",
+      "Missing alarm features suggesting malignancy",
+      "Relying on stimulant laxatives without addressing the underlying mechanism"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
+      "Osmotic laxatives such as macrogol as the mainstay of pharmacotherapy",
+      "Stimulant laxatives added when the response is inadequate",
+      "Secretagogues such as linaclotide, or the prokinetic prucalopride, for refractory or slow-transit disease",
+      "Pelvic floor biofeedback and retraining for defecatory (evacuation) disorders",
+      "Review and withdraw constipating medications and exclude secondary causes such as hypothyroidism and hypercalcaemia",
+      "Escalate to specialist anorectal investigation when disease is refractory or alarm features emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional constipation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-constipation-real-image",
-   "title": "Functional constipation: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "functional_constipation-pathway",
+      "title": "Functional constipation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not meeting criteria for irritable bowel syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding, anaemia or weight loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History and examination including rectal examination for evacuation disorder, Bloods to exclude metabolic causes such as thyroid dysfunction and hypercalcaemia, Colonic transit studies where slow transit is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional constipation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_constipation-matrix",
+      "title": "Functional constipation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Persistent difficult, infrequent or incomplete defecation not attributable to a structural, metabolic or drug cause and not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History and examination including rectal examination for evacuation disorder, Bloods to exclude metabolic causes such as thyroid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constipation-predominant irritable bowel syndrome, Dyssynergic defecation, Secondary constipation (hypothyroidism,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify a coexisting defecatory disorder that will not respond to laxatives alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional constipation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_constipation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History and examination with rectal examination",
+          "cells": [
+            {
+              "text": "Evaluates for evacuation disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods",
+          "cells": [
+            {
+              "text": "Excludes metabolic causes such as thyroid dysfunction and hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic transit studies",
+          "cells": [
+            {
+              "text": "Where slow transit is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry and balloon expulsion",
+          "cells": [
+            {
+              "text": "For suspected defecatory disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Where alarm features or obstruction are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_constipation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dyssynergic defecation",
+          "cells": [
+            {
+              "text": "Coexisting defecatory disorder that laxatives alone will not treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary constipation (hypothyroidism, hypercalcaemia, drugs)",
+          "cells": [
+            {
+              "text": "Metabolic or drug cause, excluded by bloods and medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal obstruction or stricture",
+          "cells": [
+            {
+              "text": "Features suggesting obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_constipation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "Increased dietary fibre, adequate fluid intake and physical activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic laxatives",
+          "cells": [
+            {
+              "text": "Macrogol as the mainstay of pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant laxatives",
+          "cells": [
+            {
+              "text": "Added when the response is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretagogues or prucalopride",
+          "cells": [
+            {
+              "text": "Linaclotide, or the prokinetic prucalopride, for refractory or slow-transit disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor biofeedback",
+          "cells": [
+            {
+              "text": "For defecatory (evacuation) disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Withdraw constipating drugs; exclude hypothyroidism and hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist anorectal investigation",
+          "cells": [
+            {
+              "text": "When disease is refractory or alarm features emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_constipation-dx-mgmt",
+      "title": "Diagnosis and management of Functional constipation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional constipation: persistent constipation without structural cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rectal bleeding, anaemia, weight loss, obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation of bleeding, anaemia, weight loss or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rectal examination, bloods, transit studies and anorectal manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are secondary causes such as hypothyroidism excluded by bloods?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider colorectal obstruction, dyssynergic defecation or neurological disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibre, fluid and physical activity as first-line lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Macrogol as the mainstay; stimulants if the response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pelvic floor biofeedback for evacuation disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and withdraw constipating medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but benign; most respond to stepwise treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

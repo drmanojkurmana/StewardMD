@@ -1,172 +1,831 @@
 {
- "id": "effusive_constrictive_pericarditis",
- "name": "Effusive-constrictive pericarditis",
- "aliases": [
-  "effusive constrictive pericarditis",
-  "ECP",
-  "mixed effusive and constrictive pericarditis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
-   "The defining feature is that right atrial pressure fails to fall appreciably after the effusion is drained, unmasking underlying constriction",
-   "Presents with features of both tamponade and constriction, including raised jugular venous pressure, breathlessness, and signs of systemic venous congestion",
-   "Causes overlap with those of pericarditis and constriction, including idiopathic and viral disease, tuberculosis, malignancy, radiation, and prior cardiac surgery",
-   "Diagnosis classically requires haemodynamic assessment before and after pericardiocentesis, though echocardiography and cross-sectional imaging increasingly support recognition",
-   "Some cases resolve as the pericardial inflammation settles, so a trial of anti-inflammatory therapy may be appropriate when active inflammation is present",
-   "Persistent constriction after drainage may ultimately require pericardiectomy, which typically means removing the constricting visceral layer"
+  "id": "effusive_constrictive_pericarditis",
+  "name": "Effusive-constrictive pericarditis",
+  "aliases": [
+    "effusive constrictive pericarditis",
+    "ECP",
+    "mixed effusive and constrictive pericarditis"
   ],
-  "pathophysiology": "In effusive-constrictive pericarditis two processes coexist: fluid accumulates within the pericardial space while the visceral pericardium becomes inflamed, thickened, and rigid. Removing the fluid relieves the tamponade component but not the constraint imposed by the stiff visceral layer, so ventricular filling remains impaired and right atrial pressure stays elevated after drainage, which is the haemodynamic hallmark. The constriction reflects the same fibro-inflammatory response seen in constrictive pericarditis and may be transient if the inflammation resolves, or may become established and fixed, mirroring the aetiologies of pericarditis and constriction more generally.",
-  "additionalDifferentials": [
-   "Cardiac tamponade",
-   "Classic constrictive pericarditis",
-   "Restrictive cardiomyopathy",
-   "Right ventricular myocardial infarction",
-   "Severe tricuspid regurgitation with right heart failure",
-   "Superior vena cava obstruction"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling",
-   "Right heart catheterisation with pressure measurement before and after pericardiocentesis",
-   "Cardiac CT and MRI to assess pericardial thickening, inflammation, and calcification",
-   "Analysis of pericardial fluid for infection, tuberculosis, and malignancy when the cause is unclear",
-   "Inflammatory markers to gauge activity and the likelihood of response to anti-inflammatory therapy"
-  ],
-  "redFlags": [
-   "Persistent raised right atrial pressure and low output after apparently adequate pericardiocentesis",
-   "Haemodynamic collapse suggesting the tamponade component predominates",
-   "Features of tuberculous or malignant pericardial disease",
-   "Progressive constriction with worsening right heart failure despite treatment"
-  ],
-  "prognosis": "The outlook depends on the cause; inflammation-related cases may be transient and resolve with medical therapy, whereas established constriction after drainage often requires pericardiectomy and carries the risks of that operation.",
-  "pitfalls": [
-   "Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction",
-   "Failing to measure right atrial pressure before and after drainage to reveal the constrictive component",
-   "Missing tuberculous or malignant aetiology that alters management and prognosis",
-   "Proceeding to early pericardiectomy in cases that would settle with anti-inflammatory treatment"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the diagnosis and management of pericardial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to normalise after drainage",
-   "Treat active pericardial inflammation with anti-inflammatory therapy using NSAIDs and colchicine, with corticosteroids in selected cases, as some cases are transient and resolve",
-   "Treat the underlying cause directly, with antituberculous therapy for tuberculous disease and management of malignancy, uraemia or radiation-related pericarditis",
-   "Offer pericardiectomy with removal of the visceral and parietal layers for established, symptomatic constriction that does not resolve with medical therapy",
-   "Manage congestive symptoms with cautious diuresis while avoiding excessive preload reduction",
-   "Monitor with serial echocardiography, cross-sectional imaging and inflammatory markers to judge resolution versus fixed constriction",
-   "Manage through cardiology with cardiac surgery referral for pericardiectomy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "effusive_constrictive_pericarditis-pathway",
-   "title": "Effusive-constrictive pericarditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent raised right atrial pressure and low output after apparently adequate pericardiocentesis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling, Right heart catheterisation with pressure measurement before and after pericardiocentesis, Cardiac CT and MRI to assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to normalise after drainage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of effusive-constrictive pericarditis."
-  }
- ],
- "tables": [
-  {
-   "id": "effusive_constrictive_pericarditis-matrix",
-   "title": "Effusive-constrictive pericarditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
+      "The defining feature is that right atrial pressure fails to fall appreciably after the effusion is drained, unmasking underlying constriction",
+      "Presents with features of both tamponade and constriction, including raised jugular venous pressure, breathlessness, and signs of systemic venous congestion",
+      "Causes overlap with those of pericarditis and constriction, including idiopathic and viral disease, tuberculosis, malignancy, radiation, and prior cardiac surgery",
+      "Diagnosis classically requires haemodynamic assessment before and after pericardiocentesis, though echocardiography and cross-sectional imaging increasingly support recognition",
+      "Some cases resolve as the pericardial inflammation settles, so a trial of anti-inflammatory therapy may be appropriate when active inflammation is present",
+      "Persistent constriction after drainage may ultimately require pericardiectomy, which typically means removing the constricting visceral layer"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling, Right heart catheterisation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In effusive-constrictive pericarditis two processes coexist: fluid accumulates within the pericardial space while the visceral pericardium becomes inflamed, thickened, and rigid. Removing the fluid relieves the tamponade component but not the constraint imposed by the stiff visceral layer, so ventricular filling remains impaired and right atrial pressure stays elevated after drainage, which is the haemodynamic hallmark. The constriction reflects the same fibro-inflammatory response seen in constrictive pericarditis and may be transient if the inflammation resolves, or may become established and fixed, mirroring the aetiologies of pericarditis and constriction more generally.",
+    "additionalDifferentials": [
+      "Cardiac tamponade",
+      "Classic constrictive pericarditis",
+      "Restrictive cardiomyopathy",
+      "Right ventricular myocardial infarction",
+      "Severe tricuspid regurgitation with right heart failure",
+      "Superior vena cava obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Cardiac tamponade, Classic constrictive pericarditis, Restrictive cardiomyopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling",
+      "Right heart catheterisation with pressure measurement before and after pericardiocentesis",
+      "Cardiac CT and MRI to assess pericardial thickening, inflammation, and calcification",
+      "Analysis of pericardial fluid for infection, tuberculosis, and malignancy when the cause is unclear",
+      "Inflammatory markers to gauge activity and the likelihood of response to anti-inflammatory therapy"
     ],
-    [
-     "Management Strategy",
-     "Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent raised right atrial pressure and low output after apparently adequate pericardiocentesis",
+      "Haemodynamic collapse suggesting the tamponade component predominates",
+      "Features of tuberculous or malignant pericardial disease",
+      "Progressive constriction with worsening right heart failure despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook depends on the cause; inflammation-related cases may be transient and resolve with medical therapy, whereas established constriction after drainage often requires pericardiectomy and carries the risks of that operation.",
+    "pitfalls": [
+      "Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction",
+      "Failing to measure right atrial pressure before and after drainage to reveal the constrictive component",
+      "Missing tuberculous or malignant aetiology that alters management and prognosis",
+      "Proceeding to early pericardiectomy in cases that would settle with anti-inflammatory treatment"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the diagnosis and management of pericardial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to normalise after drainage",
+      "Treat active pericardial inflammation with anti-inflammatory therapy using NSAIDs and colchicine, with corticosteroids in selected cases, as some cases are transient and resolve",
+      "Treat the underlying cause directly, with antituberculous therapy for tuberculous disease and management of malignancy, uraemia or radiation-related pericarditis",
+      "Offer pericardiectomy with removal of the visceral and parietal layers for established, symptomatic constriction that does not resolve with medical therapy",
+      "Manage congestive symptoms with cautious diuresis while avoiding excessive preload reduction",
+      "Monitor with serial echocardiography, cross-sectional imaging and inflammatory markers to judge resolution versus fixed constriction",
+      "Manage through cardiology with cardiac surgery referral for pericardiectomy"
     ]
-   ],
-   "caption": "Overview comparison matrix for effusive-constrictive pericarditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "effusive-constrictive-pericarditis-real-image",
-   "title": "Effusive-constrictive pericarditis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "effusive_constrictive_pericarditis-pathway",
+      "title": "Effusive-constrictive pericarditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent raised right atrial pressure and low output after apparently adequate pericardiocentesis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling, Right heart catheterisation with pressure measurement before and after pericardiocentesis, Cardiac CT and MRI to assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to normalise after drainage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of effusive-constrictive pericarditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "effusive_constrictive_pericarditis-matrix",
+      "title": "Effusive-constrictive pericarditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mixed syndrome in which a pericardial effusion coexists with constriction from an inflamed, non-compliant visceral pericardium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to demonstrate effusion, septal bounce, respiratory variation, and impaired filling, Right heart catheterisation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cardiac tamponade, Classic constrictive pericarditis, Restrictive cardiomyopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve the tamponade component with pericardiocentesis, recognising that constriction persists as right atrial pressure fails to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming pericardiocentesis alone will resolve symptoms and overlooking persistent constriction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for effusive-constrictive pericarditis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "effusive_constrictive_pericarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Effusion, septal bounce, respiratory variation and filling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation before and after drainage",
+          "cells": [
+            {
+              "text": "Persistent raised right atrial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MRI",
+          "cells": [
+            {
+              "text": "Pericardial thickening, inflammation and calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial fluid analysis",
+          "cells": [
+            {
+              "text": "Infection, tuberculosis or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Disease activity and likely response to anti-inflammatory therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "effusive_constrictive_pericarditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Fluid without constrictive physiology; resolves with drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Constriction without a coexisting effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Myocardial rather than pericardial restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior vena cava obstruction",
+          "cells": [
+            {
+              "text": "Venous congestion with a mediastinal mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "effusive_constrictive_pericarditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardiocentesis",
+          "cells": [
+            {
+              "text": "Relieves the tamponade component; constriction may persist after drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "NSAIDs and colchicine; corticosteroids in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Antituberculous therapy, malignancy, uraemia or radiation pericarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardiectomy",
+          "cells": [
+            {
+              "text": "Symptomatic constriction that does not resolve with medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious diuresis",
+          "cells": [
+            {
+              "text": "Congestive symptoms without excessive preload reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, imaging and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "effusive_constrictive_pericarditis-ddx-2",
+      "kind": "ddx",
+      "title": "Tamponade versus constrictive pericarditis, restrictive cardiomyopathy and RV infarction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Tamponade",
+        "Constrictive pericarditis",
+        "Restrictive cardiomyopathy",
+        "RVMI"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical: pulsus paradoxus",
+          "cells": [
+            {
+              "text": "Common"
+            },
+            {
+              "text": "Usually absent"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jugular veins: prominent y descent",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jugular veins: prominent x descent",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kussmaul sign",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Third heart sound",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericardial knock",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Often present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG: low voltage",
+          "cells": [
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG: electrical alternans",
+          "cells": [
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: thickened pericardium",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: pericardial calcification",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Often present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: pericardial effusion",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: RV size",
+          "cells": [
+            {
+              "text": "Usually small"
+            },
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Enlarged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: myocardial thickness",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Usually increased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: right atrial collapse and RVDC",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: increased early filling, increased mitral flow velocity",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "May be present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: exaggerated respiratory variation in flow velocity",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT/MRI: thickened or calcific pericardium",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac catheterization: equalization of diastolic pressures",
+          "cells": [
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Usually present"
+            },
+            {
+              "text": "Usually absent"
+            },
+            {
+              "text": "Absent or present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac biopsy helpful",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Sometimes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "effusive_constrictive_pericarditis-dx-mgmt",
+      "title": "Diagnosis and management of Effusive-constrictive pericarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected effusive-constrictive pericarditis: effusion with raised right-sided pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemodynamic collapse, tuberculous or malignant disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pericardiocentesis for tamponade physiology with low output",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; right heart catheterisation before and after drainage; cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is right atrial pressure still raised after adequate drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tamponade alone, classic constriction or restrictive cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pericardiocentesis to relieve the tamponade component",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and colchicine for active pericardial inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antituberculous or malignancy-directed treatment of the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pericardiectomy for constriction that does not settle medically",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial echo and inflammatory markers to judge resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Inflammatory cases may resolve medically; fixed constriction often needs pericardiectomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

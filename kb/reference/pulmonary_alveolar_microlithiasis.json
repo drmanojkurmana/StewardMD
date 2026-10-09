@@ -1,175 +1,469 @@
 {
- "id": "pulmonary_alveolar_microlithiasis",
- "name": "Pulmonary alveolar microlithiasis",
- "aliases": [
-  "PAM",
-  "alveolar microlithiasis",
-  "SLC34A2-related microlithiasis",
-  "microlithiasis alveolaris pulmonum"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate cotransporter in alveolar type II cells",
-   "Failure to clear alveolar phosphate leads to deposition of countless calcium-phosphate concretions (microliths, calcospherites) filling the alveolar spaces",
-   "Striking clinico-radiological dissociation is characteristic, with extensive calcified change on imaging in a patient who may be minimally symptomatic for years",
-   "The chest radiograph classically shows a diffuse fine sand-like micronodular pattern (a 'sandstorm' lung) that is densest in the lower zones",
-   "High-resolution CT demonstrates calcified micronodules, subpleural calcific interlobular septal thickening, and dense posterior/basal consolidation, sometimes with a subpleural 'black pleural line'",
-   "Diagnosis is often made confidently on imaging in the right context and can be confirmed by identifying microliths in sputum, bronchoalveolar lavage, or biopsy, or by genetic testing",
-   "Familial clustering is common and screening of siblings is worthwhile given the recessive inheritance",
-   "There is no proven disease-modifying therapy; management is supportive and lung transplantation is considered for end-stage disease"
+  "id": "pulmonary_alveolar_microlithiasis",
+  "name": "Pulmonary alveolar microlithiasis",
+  "aliases": [
+    "PAM",
+    "alveolar microlithiasis",
+    "SLC34A2-related microlithiasis",
+    "microlithiasis alveolaris pulmonum"
   ],
-  "pathophysiology": "Pulmonary alveolar microlithiasis results from biallelic loss-of-function variants in SLC34A2, which encodes the sodium-dependent phosphate cotransporter normally expressed on alveolar type II pneumocytes. This transporter clears phosphate liberated by the turnover of surfactant phospholipid from the alveolar lining fluid. When it is deficient, phosphate accumulates and combines with calcium to precipitate as innumerable laminated calcium-phosphate microliths within the alveoli. Progressive filling of the air spaces and later interstitial fibrosis and ossification impair gas exchange and lung compliance over decades, eventually producing restrictive physiology and pulmonary hypertension.",
-  "additionalDifferentials": [
-   "Metastatic pulmonary calcification from chronic renal failure or hypercalcaemia",
-   "Pulmonary alveolar proteinosis",
-   "Miliary tuberculosis or other diffuse micronodular infection",
-   "Sarcoidosis with fine nodularity",
-   "Dendriform pulmonary ossification",
-   "Amiodarone-related or other diffuse calcified deposition"
-  ],
-  "additionalInvestigations": [
-   "High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line",
-   "Genetic testing for pathogenic SLC34A2 variants and screening of first-degree relatives",
-   "Bronchoalveolar lavage or transbronchial biopsy to demonstrate calcospherite microliths when imaging is inconclusive",
-   "Pulmonary function tests with diffusing capacity to quantify restriction and gas-transfer impairment",
-   "Serum calcium, phosphate, and renal function to exclude metastatic calcification",
-   "Echocardiography to screen for pulmonary hypertension in advanced disease"
-  ],
-  "redFlags": [
-   "Progressive breathlessness and hypoxaemia signalling advancing restrictive disease",
-   "Signs of pulmonary hypertension or right heart strain",
-   "Pneumothorax, which can complicate the stiff calcified lung",
-   "Rapid functional decline suggesting need for transplant assessment"
-  ],
-  "prognosis": "The disease usually progresses very slowly over decades, and many patients remain stable for long periods, but a subset develop relentless restrictive fibrosis, respiratory failure, and pulmonary hypertension for which lung transplantation is the only definitive option.",
-  "pitfalls": [
-   "Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately",
-   "Assuming severe disease because imaging looks alarming, when symptoms may be mild for years",
-   "Overlooking the recessive inheritance and failing to screen affected siblings",
-   "Attributing the calcification to renal metabolic disease without checking calcium, phosphate, and renal function"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "European Respiratory Society monograph on rare interstitial lung diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with bisphosphonates and a low-phosphate diet remaining unproven experimental options",
-   "Long-term oxygen therapy for hypoxaemic respiratory failure and pulmonary rehabilitation to support exercise capacity",
-   "Serial pulmonary function testing with diffusing capacity and imaging to monitor restrictive progression",
-   "Echocardiographic surveillance for pulmonary hypertension in advanced disease, with supportive treatment of right heart failure",
-   "Smoking avoidance and prompt treatment of intercurrent respiratory infection",
-   "Lung transplantation as the only definitive option for end-stage restrictive fibrosis and respiratory failure",
-   "Genetic counselling for autosomal recessive inheritance and screening of first-degree relatives for SLC34A2 variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_alveolar_microlithiasis-pathway",
-   "title": "Pulmonary alveolar microlithiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate cotransporter in alveolar type II cells",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive breathlessness and hypoxaemia signalling advancing restrictive disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line, Genetic testing for pathogenic SLC34A2 variants and screening of first-degree relatives,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with bisphosphonates and a low-phosphate diet remaining unproven experimental options"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary alveolar microlithiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_alveolar_microlithiasis-matrix",
-   "title": "Pulmonary alveolar microlithiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate cotransporter in alveolar type II cells",
+      "Failure to clear alveolar phosphate leads to deposition of countless calcium-phosphate concretions (microliths, calcospherites) filling the alveolar spaces",
+      "Striking clinico-radiological dissociation is characteristic, with extensive calcified change on imaging in a patient who may be minimally symptomatic for years",
+      "The chest radiograph classically shows a diffuse fine sand-like micronodular pattern (a 'sandstorm' lung) that is densest in the lower zones",
+      "High-resolution CT demonstrates calcified micronodules, subpleural calcific interlobular septal thickening, and dense posterior/basal consolidation, sometimes with a subpleural 'black pleural line'",
+      "Diagnosis is often made confidently on imaging in the right context and can be confirmed by identifying microliths in sputum, bronchoalveolar lavage, or biopsy, or by genetic testing",
+      "Familial clustering is common and screening of siblings is worthwhile given the recessive inheritance",
+      "There is no proven disease-modifying therapy; management is supportive and lung transplantation is considered for end-stage disease"
     ],
-    [
-     "Key Investigations",
-     "High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary alveolar microlithiasis results from biallelic loss-of-function variants in SLC34A2, which encodes the sodium-dependent phosphate cotransporter normally expressed on alveolar type II pneumocytes. This transporter clears phosphate liberated by the turnover of surfactant phospholipid from the alveolar lining fluid. When it is deficient, phosphate accumulates and combines with calcium to precipitate as innumerable laminated calcium-phosphate microliths within the alveoli. Progressive filling of the air spaces and later interstitial fibrosis and ossification impair gas exchange and lung compliance over decades, eventually producing restrictive physiology and pulmonary hypertension.",
+    "additionalDifferentials": [
+      "Metastatic pulmonary calcification from chronic renal failure or hypercalcaemia",
+      "Pulmonary alveolar proteinosis",
+      "Miliary tuberculosis or other diffuse micronodular infection",
+      "Sarcoidosis with fine nodularity",
+      "Dendriform pulmonary ossification",
+      "Amiodarone-related or other diffuse calcified deposition"
     ],
-    [
-     "Primary Differentials",
-     "Metastatic pulmonary calcification from chronic renal failure or hypercalcaemia, Pulmonary alveolar proteinosis, Miliary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line",
+      "Genetic testing for pathogenic SLC34A2 variants and screening of first-degree relatives",
+      "Bronchoalveolar lavage or transbronchial biopsy to demonstrate calcospherite microliths when imaging is inconclusive",
+      "Pulmonary function tests with diffusing capacity to quantify restriction and gas-transfer impairment",
+      "Serum calcium, phosphate, and renal function to exclude metastatic calcification",
+      "Echocardiography to screen for pulmonary hypertension in advanced disease"
     ],
-    [
-     "Management Strategy",
-     "No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive breathlessness and hypoxaemia signalling advancing restrictive disease",
+      "Signs of pulmonary hypertension or right heart strain",
+      "Pneumothorax, which can complicate the stiff calcified lung",
+      "Rapid functional decline suggesting need for transplant assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease usually progresses very slowly over decades, and many patients remain stable for long periods, but a subset develop relentless restrictive fibrosis, respiratory failure, and pulmonary hypertension for which lung transplantation is the only definitive option.",
+    "pitfalls": [
+      "Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately",
+      "Assuming severe disease because imaging looks alarming, when symptoms may be mild for years",
+      "Overlooking the recessive inheritance and failing to screen affected siblings",
+      "Attributing the calcification to renal metabolic disease without checking calcium, phosphate, and renal function"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "European Respiratory Society monograph on rare interstitial lung diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with bisphosphonates and a low-phosphate diet remaining unproven experimental options",
+      "Long-term oxygen therapy for hypoxaemic respiratory failure and pulmonary rehabilitation to support exercise capacity",
+      "Serial pulmonary function testing with diffusing capacity and imaging to monitor restrictive progression",
+      "Echocardiographic surveillance for pulmonary hypertension in advanced disease, with supportive treatment of right heart failure",
+      "Smoking avoidance and prompt treatment of intercurrent respiratory infection",
+      "Lung transplantation as the only definitive option for end-stage restrictive fibrosis and respiratory failure",
+      "Genetic counselling for autosomal recessive inheritance and screening of first-degree relatives for SLC34A2 variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary alveolar microlithiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-alveolar-microlithiasis-real-image",
-   "title": "Pulmonary alveolar microlithiasis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_alveolar_microlithiasis-pathway",
+      "title": "Pulmonary alveolar microlithiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate cotransporter in alveolar type II cells",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive breathlessness and hypoxaemia signalling advancing restrictive disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line, Genetic testing for pathogenic SLC34A2 variants and screening of first-degree relatives,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with bisphosphonates and a low-phosphate diet remaining unproven experimental options"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary alveolar microlithiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_alveolar_microlithiasis-matrix",
+      "title": "Pulmonary alveolar microlithiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder caused by loss-of-function variants in SLC34A2, encoding a type IIb sodium-phosphate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution CT of the chest to characterise calcified micronodules, septal thickening, and the subpleural black pleural line,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Metastatic pulmonary calcification from chronic renal failure or hypercalcaemia, Pulmonary alveolar proteinosis, Miliary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No established disease-modifying drug therapy exists, so care is largely supportive as the microlith burden accumulates, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the dramatic calcified imaging for widespread infection such as miliary tuberculosis and treating inappropriately",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary alveolar microlithiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine / European Respiratory Monograph on rare lung disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_alveolar_microlithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Calcified micronodules and septal thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC34A2 genetic testing and first-degree relative screening",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage or transbronchial biopsy",
+          "cells": [
+            {
+              "text": "Calcospherite microliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with diffusing capacity",
+          "cells": [
+            {
+              "text": "Restriction and gas-transfer impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and renal function",
+          "cells": [
+            {
+              "text": "Metastatic calcification excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_alveolar_microlithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic pulmonary calcification from chronic renal failure",
+          "cells": [
+            {
+              "text": "Chronic renal failure"
+            },
+            {
+              "text": "Serum calcium, phosphate and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amiodarone-related or other diffuse calcified deposition",
+          "cells": [
+            {
+              "text": "Amiodarone exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_alveolar_microlithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No established disease-modifying drug; care is largely supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and rehabilitation",
+          "cells": [
+            {
+              "text": "Long-term oxygen for hypoxaemic respiratory failure, with pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung function surveillance",
+          "cells": [
+            {
+              "text": "Serial pulmonary function with diffusing capacity and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Echocardiographic surveillance in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking and infection",
+          "cells": [
+            {
+              "text": "Smoking avoidance and prompt treatment of intercurrent respiratory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "The only definitive option for end-stage restrictive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; screening of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_alveolar_microlithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary alveolar microlithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary alveolar microlithiasis: calcified micronodules on HRCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive breathlessness with hypoxaemia, pulmonary hypertension, or pneumothorax?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent respiratory review for hypoxaemia or pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT; SLC34A2 testing; BAL or biopsy; PFTs with DLCO; calcium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are calcospherite microliths shown, with metastatic calcification excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastatic calcification, sarcoidosis or miliary TB; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no established disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term oxygen and pulmonary rehabilitation for hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography for pulmonary hypertension in advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lung transplantation as the only definitive option for end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and screening of first-degree relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

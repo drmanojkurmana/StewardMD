@@ -1,174 +1,736 @@
 {
- "id": "juvenile_dermatomyositis",
- "name": "Juvenile Dermatomyositis",
- "aliases": [
-  "JDM",
-  "juvenile dermatomyositis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin changes.",
-   "Look for the heliotrope rash (violaceous discolouration of the upper eyelids) and Gottron papules over the knuckles, elbows, and knees.",
-   "Weakness is typically symmetrical and proximal, so children struggle to climb stairs, rise from the floor, or lift their arms overhead.",
-   "Nailfold capillary changes (dilated, dropout, or tortuous loops) are a useful bedside clue and correlate with disease activity.",
-   "Calcinosis of skin and soft tissues is a late complication, more likely when treatment is delayed or inadequate.",
-   "Unlike adult dermatomyositis, an underlying malignancy is rarely associated in children.",
-   "A small vessel vasculopathy can affect the gastrointestinal tract, potentially causing ulceration, bleeding, or perforation.",
-   "Early diagnosis and adequate immunosuppression improve outcomes and reduce the risk of chronic disability and calcinosis."
+  "id": "juvenile_dermatomyositis",
+  "name": "Juvenile Dermatomyositis",
+  "aliases": [
+    "JDM",
+    "juvenile dermatomyositis"
   ],
-  "pathophysiology": "Juvenile dermatomyositis is an immune-mediated systemic vasculopathy affecting small vessels of skeletal muscle, skin, and other organs. Complement-mediated injury to the capillary endothelium leads to capillary dropout, ischaemia, and perifascicular muscle fibre atrophy. Interferon-driven inflammation and immune complex deposition contribute to ongoing muscle and skin damage, producing the characteristic weakness and rash.",
-  "additionalDifferentials": [
-   "Muscular dystrophy",
-   "Systemic lupus erythematosus / overlap connective tissue disease",
-   "Viral or post-viral myositis",
-   "Polymyositis",
-   "Hypothyroid or metabolic myopathy",
-   "Spinal muscular atrophy or other neuromuscular disorders"
-  ],
-  "additionalInvestigations": [
-   "Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases)",
-   "MRI of muscle to identify inflammation and guide biopsy site",
-   "Nailfold capillaroscopy",
-   "Myositis-specific and myositis-associated autoantibodies",
-   "Muscle biopsy when the diagnosis is uncertain",
-   "Electromyography in selected cases"
-  ],
-  "redFlags": [
-   "Severe dysphagia or nasal regurgitation indicating pharyngeal muscle involvement with aspiration risk",
-   "Respiratory muscle weakness or interstitial lung disease causing hypoventilation",
-   "Gastrointestinal vasculopathy with abdominal pain, bleeding, or perforation",
-   "Rapidly progressive weakness or inability to protect the airway",
-   "Extensive skin ulceration reflecting severe vasculopathy"
-  ],
-  "prognosis": "With prompt, adequate immunosuppression many children achieve remission and regain function; delayed or insufficient treatment increases the risk of chronic disease, calcinosis, and long-term disability. A monocyclic course carries the best prognosis.",
-  "pitfalls": [
-   "Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis",
-   "Assuming normal muscle enzymes exclude the disease, as they can be near-normal in some children",
-   "Under-treating early disease and thereby increasing the risk of calcinosis",
-   "Overlooking dysphagia and aspiration risk when pharyngeal muscles are involved"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression",
-   "Add methotrexate early as a steroid-sparing agent to control disease and limit steroid toxicity",
-   "Use intravenous immunoglobulin for refractory skin and muscle disease and escalate to ciclosporin, mycophenolate or rituximab when needed",
-   "Provide strict photoprotection with sunscreen and topical therapy for the heliotrope rash and Gottron papules",
-   "Deliver physiotherapy to maintain muscle strength and range and to prevent contractures",
-   "Treat disease adequately and early to prevent calcinosis, and manage established calcinosis actively",
-   "Monitor disease activity with muscle enzymes and nailfold capillaroscopy and watch for dysphagia and respiratory involvement",
-   "Coordinate multidisciplinary paediatric rheumatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_dermatomyositis-pathway",
-   "title": "Juvenile Dermatomyositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin changes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dysphagia or nasal regurgitation indicating pharyngeal muscle involvement with aspiration risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases), MRI of muscle to identify inflammation and guide biopsy site, Nailfold capillaroscopy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile dermatomyositis."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_dermatomyositis-matrix",
-   "title": "Juvenile Dermatomyositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin changes.",
+      "Look for the heliotrope rash (violaceous discolouration of the upper eyelids) and Gottron papules over the knuckles, elbows, and knees.",
+      "Weakness is typically symmetrical and proximal, so children struggle to climb stairs, rise from the floor, or lift their arms overhead.",
+      "Nailfold capillary changes (dilated, dropout, or tortuous loops) are a useful bedside clue and correlate with disease activity.",
+      "Calcinosis of skin and soft tissues is a late complication, more likely when treatment is delayed or inadequate.",
+      "Unlike adult dermatomyositis, an underlying malignancy is rarely associated in children.",
+      "A small vessel vasculopathy can affect the gastrointestinal tract, potentially causing ulceration, bleeding, or perforation.",
+      "Early diagnosis and adequate immunosuppression improve outcomes and reduce the risk of chronic disability and calcinosis."
     ],
-    [
-     "Key Investigations",
-     "Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases), MRI of muscle to identify inflammation and guide biopsy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile dermatomyositis is an immune-mediated systemic vasculopathy affecting small vessels of skeletal muscle, skin, and other organs. Complement-mediated injury to the capillary endothelium leads to capillary dropout, ischaemia, and perifascicular muscle fibre atrophy. Interferon-driven inflammation and immune complex deposition contribute to ongoing muscle and skin damage, producing the characteristic weakness and rash.",
+    "additionalDifferentials": [
+      "Muscular dystrophy",
+      "Systemic lupus erythematosus / overlap connective tissue disease",
+      "Viral or post-viral myositis",
+      "Polymyositis",
+      "Hypothyroid or metabolic myopathy",
+      "Spinal muscular atrophy or other neuromuscular disorders"
     ],
-    [
-     "Primary Differentials",
-     "Muscular dystrophy, Systemic lupus erythematosus / overlap connective tissue disease, Viral or post-viral myositis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases)",
+      "MRI of muscle to identify inflammation and guide biopsy site",
+      "Nailfold capillaroscopy",
+      "Myositis-specific and myositis-associated autoantibodies",
+      "Muscle biopsy when the diagnosis is uncertain",
+      "Electromyography in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dysphagia or nasal regurgitation indicating pharyngeal muscle involvement with aspiration risk",
+      "Respiratory muscle weakness or interstitial lung disease causing hypoventilation",
+      "Gastrointestinal vasculopathy with abdominal pain, bleeding, or perforation",
+      "Rapidly progressive weakness or inability to protect the airway",
+      "Extensive skin ulceration reflecting severe vasculopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt, adequate immunosuppression many children achieve remission and regain function; delayed or insufficient treatment increases the risk of chronic disease, calcinosis, and long-term disability. A monocyclic course carries the best prognosis.",
+    "pitfalls": [
+      "Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis",
+      "Assuming normal muscle enzymes exclude the disease, as they can be near-normal in some children",
+      "Under-treating early disease and thereby increasing the risk of calcinosis",
+      "Overlooking dysphagia and aspiration risk when pharyngeal muscles are involved"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression",
+      "Add methotrexate early as a steroid-sparing agent to control disease and limit steroid toxicity",
+      "Use intravenous immunoglobulin for refractory skin and muscle disease and escalate to ciclosporin, mycophenolate or rituximab when needed",
+      "Provide strict photoprotection with sunscreen and topical therapy for the heliotrope rash and Gottron papules",
+      "Deliver physiotherapy to maintain muscle strength and range and to prevent contractures",
+      "Treat disease adequately and early to prevent calcinosis, and manage established calcinosis actively",
+      "Monitor disease activity with muscle enzymes and nailfold capillaroscopy and watch for dysphagia and respiratory involvement",
+      "Coordinate multidisciplinary paediatric rheumatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile dermatomyositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-dermatomyositis-real-image",
-   "title": "Juvenile Dermatomyositis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "juvenile_dermatomyositis-pathway",
+      "title": "Juvenile Dermatomyositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin changes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dysphagia or nasal regurgitation indicating pharyngeal muscle involvement with aspiration risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases), MRI of muscle to identify inflammation and guide biopsy site, Nailfold capillaroscopy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile dermatomyositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_dermatomyositis-matrix",
+      "title": "Juvenile Dermatomyositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common inflammatory myopathy of childhood, characterised by proximal muscle weakness together with distinctive skin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum muscle enzymes (creatine kinase, aldolase, LDH, transaminases), MRI of muscle to identify inflammation and guide biopsy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Muscular dystrophy, Systemic lupus erythematosus / overlap connective tissue disease, Viral or post-viral myositis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic corticosteroids as the initial mainstay of immunosuppression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing subtle proximal weakness to clumsiness or normal fatigue and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile dermatomyositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 388-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_dermatomyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum muscle enzymes (CK, aldolase, LDH, transaminases)",
+          "cells": [
+            {
+              "text": "Muscle inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of muscle",
+          "cells": [
+            {
+              "text": "Inflammation and biopsy site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Vasculopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis-specific and myositis-associated autoantibodies",
+          "cells": [
+            {
+              "text": "Antibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_dermatomyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscular dystrophy",
+          "cells": [
+            {
+              "text": "Proximal weakness without the skin changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus or overlap disease",
+          "cells": [
+            {
+              "text": "Overlap with systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_dermatomyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Initial mainstay of immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Early steroid-sparing agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Refractory skin and muscle disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Ciclosporin, mycophenolate or rituximab when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and calcinosis",
+          "cells": [
+            {
+              "text": "Photoprotection and topical therapy; prevent and manage calcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Function",
+          "cells": [
+            {
+              "text": "Physiotherapy to maintain strength and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_dermatomyositis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_dermatomyositis-ddx-2",
+      "kind": "ddx",
+      "title": "Polymyositis, dermatomyositis and inclusion body myositis compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age at onset",
+        "Familial association",
+        "Extramuscular manifestations",
+        "Connective tissue diseases",
+        "Systemic autoimmune diseases",
+        "Malignancy",
+        "Viruses",
+        "Drugs",
+        "Parasites and bacteria"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Over 18 years"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes (footnote a)"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "Yes (footnote d)"
+            },
+            {
+              "text": "Yes (footnote e)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dermatomyositis",
+          "cells": [
+            {
+              "text": "Adulthood and childhood"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Scleroderma and mixed connective tissue disease (overlap syndromes)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "Yes, in up to 15% of cases"
+            },
+            {
+              "text": "Unproven"
+            },
+            {
+              "text": "Yes, rarely (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Over 50 years"
+            },
+            {
+              "text": "Yes, in some cases"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes, in up to 20% of cases (footnote a)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "No (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote letters a to e (including b for systemic autoimmune diseases) appear in the source but their text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_dermatomyositis-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile Dermatomyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal weakness with heliotrope rash or Gottron papules in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dysphagia, respiratory muscle weakness, gut vasculopathy or skin ulceration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow and respiratory assessment; gut vasculopathy review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Muscle enzymes, MRI muscle, nailfold capillaroscopy, myositis antibodies, biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical childhood skin and muscle pattern with enzymes or antibodies supportive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider muscular dystrophy or overlap disease; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as initial immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early methotrexate as steroid-sparing agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous immunoglobulin for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ciclosporin, mycophenolate or rituximab if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Photoprotection and physiotherapy to prevent contractures and calcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Disease control with steroid-sparing therapy; calcinosis monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

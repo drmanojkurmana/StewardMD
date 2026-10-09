@@ -1,203 +1,723 @@
 {
- "id": "disorders_of_the_female_reproductive",
- "name": "Disorders of the Female Reproductive System",
- "system": "Reproductive / Endocrine",
- "class": "non_infective",
- "chapter": 404,
- "page": 3124,
- "aliases": [
-  "Female reproductive endocrinology",
-  "Ovarian function disorders",
-  "Disorders of puberty in girls"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3124",
-  "clinicalPearls": [
-   "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and ovary, producing repeating cycles of follicle growth, ovulation, and endometrial preparation; disruption at any level produces menstrual dysfunction (Harrison 22e p.3124, p.3133).",
-   "The ovarian germ cell pool is non-renewable: oogonia peak at roughly 6-7 million by mid-gestation (about 20 weeks) and fall to only 1-2 million primordial follicles at birth, declining further through atresia thereafter (Harrison 22e p.3125, p.3126).",
-   "In a normal ovulatory adult, cycle length averages about 28 days (range 25-35), bleeding lasts about 4-6 days, and the luteal phase is relatively fixed at 12-14 days, so most cycle-length variability reflects differences in follicular phase length (Harrison 22e p.3130).",
-   "Cycle-to-cycle variability for a consistently ovulating woman is only about plus or minus 2 days; cycles tend to shorten after age 35 and become more erratic and anovulatory as menopause approaches (Harrison 22e p.3130).",
-   "Documentation of ovulation can use a mid-luteal serum progesterone above 3 ng/mL (about 7 days after ovulation), a sustained basal body temperature rise of over 0.5 degrees F from the progesterone thermogenic effect, or a urinary LH surge; an apparent LH surge does not guarantee that ovulation actually occurs (Harrison 22e p.3130).",
-   "Estrogen synthesis requires cooperation of two ovarian cell types: theca cells make androgens under LH control, and granulosa cells aromatize these androgens to estradiol under FSH control (the two-cell, two-gonadotropin model) (Harrison 22e p.3127).",
-   "Anti-mullerian hormone (AMH), produced by small growing preantral follicles, restrains FSH-driven recruitment, limiting the number of follicles entering the growing pool; AMH is a clinical marker of ovarian reserve and is elevated in PCOS (Harrison 22e p.3126).",
-   "GnRH neurons originate in the olfactory placode and migrate to the hypothalamus alongside olfactory neurons; failure of this migration links anosmia with hypogonadotropic hypogonadism (Kallmann phenotype) (Harrison 22e p.3126, p.3127).",
-   "FSH and LH are high in the neonatal period, fall into a quiescent childhood phase, and rise again at puberty; early in puberty gonadotropin secretion is detectable only during sleep before extending across the day (Harrison 22e p.3127).",
-   "Menarche occurs late in the pubertal sequence: it is preceded by adrenarche (pubic and axillary hair) and thelarche (breast development), with breast development typically about 2 years before menarche; U.S. average age at menarche is roughly 12.5 years (Harrison 22e p.3130).",
-   "Central precocious puberty in girls is idiopathic in about 85% of cases, but a neurogenic cause must be excluded; it shows pulsatile LH and a brisk LH/FSH response to GnRH stimulation, whereas peripheral precocity has suppressed gonadotropins with elevated estradiol (Harrison 22e p.3130, p.3131).",
-   "Delayed puberty in girls (absence of secondary sexual characteristics by age 13) is of ovarian origin in 25-40% of cases, with Turner syndrome the leading cause; reversible functional causes such as undernutrition, excessive exercise, eating disorders, and chronic illness account for about 25% (Harrison 22e p.3131, p.3132)."
+  "id": "disorders_of_the_female_reproductive",
+  "name": "Disorders of the Female Reproductive System",
+  "system": "Reproductive / Endocrine",
+  "class": "non_infective",
+  "chapter": 404,
+  "page": 3124,
+  "aliases": [
+    "Female reproductive endocrinology",
+    "Ovarian function disorders",
+    "Disorders of puberty in girls"
   ],
-  "pathophysiology": "The female reproductive axis is a tightly regulated hypothalamic-pituitary-ovarian system. Pulsatile GnRH from roughly 7000 hypothalamic neurons, coordinated by pulsatile kisspeptin secretion (modulated by stimulatory neurokinin B and inhibitory dynorphin in KNDy neurons), drives pituitary FSH and LH release. FSH recruits secondary follicles from the resting pool (cyclic recruitment), restrained by AMH from small growing follicles. A single dominant follicle is selected within the first week of the cycle through high FSH-receptor density, high aromatase activity, and rising estradiol and inhibin A, which suppress FSH and the growth of competing follicles. Estradiol is produced by the cooperative two-cell mechanism (LH-driven theca androgen synthesis, FSH-driven granulosa aromatization). The mid-cycle estradiol-induced LH surge triggers resumption of oocyte meiosis, induction of COX-2, prostaglandins, and the progesterone receptor, and ovulation, followed by luteinization of theca and granulosa cells to form the progesterone-secreting corpus luteum. Disorders arise from defects at any level: genetic or anatomic GnRH-neuron migration defects, functional hypothalamic suppression from energy deficit, pituitary lesions, ovarian failure (gonadal dysgenesis, premature ovarian insufficiency, mutations in over 50 genes), or outflow-tract obstruction. Over 50 genes have been implicated in premature ovarian insufficiency, reflecting the genetic complexity of follicle endowment and survival (Harrison 22e p.3125-p.3132).",
-  "additionalDifferentials": [
-   "Pregnancy (the most common cause of amenorrhea, to be excluded in all cases) (Harrison 22e p.3133)",
-   "Polycystic ovary syndrome (PCOS) - leading cause of oligo-/anovulation (Harrison 22e p.3133)",
-   "Premature ovarian insufficiency / gonadal dysgenesis including Turner syndrome (Harrison 22e p.3132, p.3134)",
-   "Functional hypothalamic amenorrhea from undernutrition, excessive exercise, or eating disorders (Harrison 22e p.3132)",
-   "Hyperprolactinemia (pituitary lesions or medications) (Harrison 22e p.3134)",
-   "Hypothalamic/pituitary tumors and infiltrative disease; Sheehan syndrome and lymphocytic hypophysitis postpartum (Harrison 22e p.3134)",
-   "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser syndrome) and androgen insensitivity syndrome as causes of primary amenorrhea (Harrison 22e p.3133)",
-   "Late-onset (nonclassic) congenital adrenal hyperplasia and androgen-secreting tumors in heterosexual precocity (Harrison 22e p.3131)"
-  ],
-  "infectionMimics": [
-   "Genital tuberculosis as a cause of intrauterine adhesions (Asherman syndrome) in endemic regions, mimicking primary endometrial or ovulatory failure (Harrison 22e p.3133)",
-   "CNS infection as a cause of central precocious puberty (Harrison 22e p.3131)"
-  ],
-  "nonInfectiousMimics": [
-   "Constitutional delay of growth and puberty mimicking pathologic delayed puberty (Harrison 22e p.3132)",
-   "Premature thelarche (isolated breast development before age 2) without progression mimicking true precocious puberty (Harrison 22e p.3131)",
-   "Premature adrenarche without progressive pubertal development, to be distinguished from nonclassic CAH and androgen-secreting tumors (Harrison 22e p.3131)",
-   "McCune-Albright syndrome and congenital adrenal hyperplasia, in which initially peripheral precocity may convert to central precocity (Harrison 22e p.3131)"
-  ],
-  "additionalInvestigations": [
-   "Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133)",
-   "Serum FSH and LH to localize the defect (ovarian vs central) (Harrison 22e p.3131, p.3134)",
-   "Estradiol and testosterone; DHEAS and 17-hydroxyprogesterone when hyperandrogenism is suspected (Harrison 22e p.3131)",
-   "Prolactin in all patients with hypogonadotropic hypogonadism (Harrison 22e p.3134)",
-   "TSH and free T4 (Harrison 22e p.3131)",
-   "Bone age and assessment of growth velocity in pubertal disorders (Harrison 22e p.3131)",
-   "Pelvic ultrasound to assess follicle growth, endometrial thickness, corpus luteum, and reproductive-tract anatomy (Harrison 22e p.3130, p.3131)",
-   "Cranial MRI for suspected central/neuroanatomic causes; pelvic MRI to define tract anomalies before surgery (Harrison 22e p.3131, p.3133)",
-   "Karyotype in delayed puberty and suspected gonadal dysgenesis (Harrison 22e p.3131)",
-   "AMH as a marker of ovarian reserve (Harrison 22e p.3126)",
-   "Mid-luteal serum progesterone (>3 ng/mL) to confirm ovulation (Harrison 22e p.3130)"
-  ],
-  "redFlags": [
-   "Primary amenorrhea with absent secondary sexual characteristics, short stature, or height below the third percentile suggesting Turner syndrome or another pathologic cause requiring evaluation by age 13 (Harrison 22e p.3133)",
-   "Amenorrhea with galactorrhea, headache, visual symptoms, or diabetes insipidus suggesting a hypothalamic-pituitary mass (Harrison 22e p.3134)",
-   "Cyclic pelvic pain with primary amenorrhea suggesting outflow-tract obstruction (imperforate hymen, transverse vaginal septum) requiring prompt surgery to limit endometriosis from retrograde flow (Harrison 22e p.3133)",
-   "Secondary sexual development before age 8 (or breast/pubic hair before 6-7) warranting evaluation for precocious puberty, including exclusion of CNS tumors (Harrison 22e p.3130, p.3131)",
-   "Postpartum amenorrhea raising concern for pituitary necrosis (Sheehan syndrome) or lymphocytic hypophysitis (Harrison 22e p.3134)",
-   "Heavy or prolonged bleeding (over 7 days) or markedly irregular intervals (over 35 or under 21 days) prompting evaluation for AUB causes including malignancy/hyperplasia (Harrison 22e p.3133)"
-  ],
-  "prognosis": "Many disorders are highly treatable when the level of the defect is identified. Functional hypothalamic amenorrhea from energy deficit is often reversible with restoration of energy balance. Outflow-tract obstruction has a good outcome with timely surgery, but delay increases the risk of endometriosis from retrograde menstruation. Premature ovarian insufficiency and gonadal dysgenesis carry permanent loss of fertility and require attention to long-term estrogen-deficiency consequences for bone and other tissues. In precocious puberty, untreated central precocity risks premature epiphyseal closure and compromised adult height, while appropriate management preserves height and addresses psychosocial impact (Harrison 22e p.3126, p.3131, p.3132, p.3133).",
-  "pitfalls": [
-   "Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133).",
-   "Assuming the absence of premenstrual moliminal symptoms proves anovulation - their absence does not (Harrison 22e p.3130).",
-   "Treating a detected urinary LH surge as proof of ovulation when ovulation may still fail to occur (Harrison 22e p.3130).",
-   "Overlooking infrequent or absent menses because the patient does not report them, missing an underlying disorder with long-term health consequences (Harrison 22e p.3133).",
-   "Not measuring prolactin in hypogonadotropic hypogonadism, since hyperprolactinemia from lesions or drugs is a common reversible cause (Harrison 22e p.3134).",
-   "Forgetting that peripheral precocious puberty (e.g., McCune-Albright, CAH) can secondarily trigger central precocity, requiring reassessment (Harrison 22e p.3131).",
-   "Misattributing irregular cycles in adolescence or perimenopause to pathology when anovulatory irregularity is physiologic in the first few years after menarche and the years before menopause (Harrison 22e p.3130, p.3133)."
-  ],
-  "severityClassification": "Amenorrhea is classified as primary (menses never occurred without hormonal treatment) versus secondary (cessation for 3-6 months). Abnormal uterine bleeding (AUB) replaces the older term dysfunctional uterine bleeding and is categorized etiologically by the PALM-COEIN system into structural causes (Polyp, Adenomyosis, Leiomyoma, Malignancy/hyperplasia) and nonstructural causes (Coagulopathy, Ovulatory dysfunction, Endometrial, Iatrogenic, Not yet classified). Precocious puberty is divided into central (GnRH-dependent) and peripheral (GnRH-independent) forms, and delayed puberty into hypergonadotropic (ovarian) and hypogonadotropic (central) forms (Harrison 22e p.3131, p.3133).",
-  "references": [
-   "Harrison 22e p.3124",
-   "Harrison 22e p.3125",
-   "Harrison 22e p.3126",
-   "Harrison 22e p.3127",
-   "Harrison 22e p.3130",
-   "Harrison 22e p.3131",
-   "Harrison 22e p.3132",
-   "Harrison 22e p.3133",
-   "Harrison 22e p.3134"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a dopamine agonist for hyperprolactinaemia",
-   "Provide cyclical oestrogen-progestogen replacement in hypogonadism to maintain bone health and secondary sexual characteristics",
-   "Induce ovulation for anovulatory infertility with letrozole, clomifene, or gonadotropins, or pulsatile GnRH in hypothalamic disease",
-   "Manage hyperandrogenism and polycystic ovary syndrome with combined hormonal contraceptives, antiandrogens, and lifestyle and metabolic measures",
-   "Correct outflow-tract obstruction surgically and without delay to limit the risk of endometriosis",
-   "Monitor bone mineral density in oestrogen-deficient states",
-   "Refer to endocrinology and reproductive gynaecology, and offer genetic counselling and screening where a genetic cause such as Turner syndrome is found"
-  ]
- },
- "algorithms": [
-  {
-   "id": "disorders_of_the_female_reproductive-pathway",
-   "title": "Disorders of the Female Reproductive System: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and ovary, producing repeating cycles of follicle growth, ovulation, and endometrial preparation; disruption at any",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Primary amenorrhea with absent secondary sexual characteristics, short stature, or height below the third percentile suggesting Turner syndrome or another pathologic cause requiring evaluation by age 13",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133), Serum FSH and LH to localize the defect (ovarian vs central) (Harrison 22e p.3131, p.3134), Estradiol and testosterone; DHEAS"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a dopamine agonist for hyperprolactinaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of disorders of the female reproductive system."
-  }
- ],
- "tables": [
-  {
-   "id": "disorders_of_the_female_reproductive-matrix",
-   "title": "Disorders of the Female Reproductive System: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3124",
+    "clinicalPearls": [
+      "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and ovary, producing repeating cycles of follicle growth, ovulation, and endometrial preparation; disruption at any level produces menstrual dysfunction (Harrison 22e p.3124, p.3133).",
+      "The ovarian germ cell pool is non-renewable: oogonia peak at roughly 6-7 million by mid-gestation (about 20 weeks) and fall to only 1-2 million primordial follicles at birth, declining further through atresia thereafter (Harrison 22e p.3125, p.3126).",
+      "In a normal ovulatory adult, cycle length averages about 28 days (range 25-35), bleeding lasts about 4-6 days, and the luteal phase is relatively fixed at 12-14 days, so most cycle-length variability reflects differences in follicular phase length (Harrison 22e p.3130).",
+      "Cycle-to-cycle variability for a consistently ovulating woman is only about plus or minus 2 days; cycles tend to shorten after age 35 and become more erratic and anovulatory as menopause approaches (Harrison 22e p.3130).",
+      "Documentation of ovulation can use a mid-luteal serum progesterone above 3 ng/mL (about 7 days after ovulation), a sustained basal body temperature rise of over 0.5 degrees F from the progesterone thermogenic effect, or a urinary LH surge; an apparent LH surge does not guarantee that ovulation actually occurs (Harrison 22e p.3130).",
+      "Estrogen synthesis requires cooperation of two ovarian cell types: theca cells make androgens under LH control, and granulosa cells aromatize these androgens to estradiol under FSH control (the two-cell, two-gonadotropin model) (Harrison 22e p.3127).",
+      "Anti-mullerian hormone (AMH), produced by small growing preantral follicles, restrains FSH-driven recruitment, limiting the number of follicles entering the growing pool; AMH is a clinical marker of ovarian reserve and is elevated in PCOS (Harrison 22e p.3126).",
+      "GnRH neurons originate in the olfactory placode and migrate to the hypothalamus alongside olfactory neurons; failure of this migration links anosmia with hypogonadotropic hypogonadism (Kallmann phenotype) (Harrison 22e p.3126, p.3127).",
+      "FSH and LH are high in the neonatal period, fall into a quiescent childhood phase, and rise again at puberty; early in puberty gonadotropin secretion is detectable only during sleep before extending across the day (Harrison 22e p.3127).",
+      "Menarche occurs late in the pubertal sequence: it is preceded by adrenarche (pubic and axillary hair) and thelarche (breast development), with breast development typically about 2 years before menarche; U.S. average age at menarche is roughly 12.5 years (Harrison 22e p.3130).",
+      "Central precocious puberty in girls is idiopathic in about 85% of cases, but a neurogenic cause must be excluded; it shows pulsatile LH and a brisk LH/FSH response to GnRH stimulation, whereas peripheral precocity has suppressed gonadotropins with elevated estradiol (Harrison 22e p.3130, p.3131).",
+      "Delayed puberty in girls (absence of secondary sexual characteristics by age 13) is of ovarian origin in 25-40% of cases, with Turner syndrome the leading cause; reversible functional causes such as undernutrition, excessive exercise, eating disorders, and chronic illness account for about 25% (Harrison 22e p.3131, p.3132)."
     ],
-    [
-     "Key Investigations",
-     "Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133), Serum FSH and LH to localize the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The female reproductive axis is a tightly regulated hypothalamic-pituitary-ovarian system. Pulsatile GnRH from roughly 7000 hypothalamic neurons, coordinated by pulsatile kisspeptin secretion (modulated by stimulatory neurokinin B and inhibitory dynorphin in KNDy neurons), drives pituitary FSH and LH release. FSH recruits secondary follicles from the resting pool (cyclic recruitment), restrained by AMH from small growing follicles. A single dominant follicle is selected within the first week of the cycle through high FSH-receptor density, high aromatase activity, and rising estradiol and inhibin A, which suppress FSH and the growth of competing follicles. Estradiol is produced by the cooperative two-cell mechanism (LH-driven theca androgen synthesis, FSH-driven granulosa aromatization). The mid-cycle estradiol-induced LH surge triggers resumption of oocyte meiosis, induction of COX-2, prostaglandins, and the progesterone receptor, and ovulation, followed by luteinization of theca and granulosa cells to form the progesterone-secreting corpus luteum. Disorders arise from defects at any level: genetic or anatomic GnRH-neuron migration defects, functional hypothalamic suppression from energy deficit, pituitary lesions, ovarian failure (gonadal dysgenesis, premature ovarian insufficiency, mutations in over 50 genes), or outflow-tract obstruction. Over 50 genes have been implicated in premature ovarian insufficiency, reflecting the genetic complexity of follicle endowment and survival (Harrison 22e p.3125-p.3132).",
+    "additionalDifferentials": [
+      "Pregnancy (the most common cause of amenorrhea, to be excluded in all cases) (Harrison 22e p.3133)",
+      "Polycystic ovary syndrome (PCOS) - leading cause of oligo-/anovulation (Harrison 22e p.3133)",
+      "Premature ovarian insufficiency / gonadal dysgenesis including Turner syndrome (Harrison 22e p.3132, p.3134)",
+      "Functional hypothalamic amenorrhea from undernutrition, excessive exercise, or eating disorders (Harrison 22e p.3132)",
+      "Hyperprolactinemia (pituitary lesions or medications) (Harrison 22e p.3134)",
+      "Hypothalamic/pituitary tumors and infiltrative disease; Sheehan syndrome and lymphocytic hypophysitis postpartum (Harrison 22e p.3134)",
+      "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser syndrome) and androgen insensitivity syndrome as causes of primary amenorrhea (Harrison 22e p.3133)",
+      "Late-onset (nonclassic) congenital adrenal hyperplasia and androgen-secreting tumors in heterosexual precocity (Harrison 22e p.3131)"
     ],
-    [
-     "Primary Differentials",
-     "Pregnancy (the most common cause of amenorrhea, to be excluded in all cases) (Harrison 22e p.3133), Polycystic ovary syndrome",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Genital tuberculosis as a cause of intrauterine adhesions (Asherman syndrome) in endemic regions, mimicking primary endometrial or ovulatory failure (Harrison 22e p.3133)",
+      "CNS infection as a cause of central precocious puberty (Harrison 22e p.3131)"
     ],
-    [
-     "Management Strategy",
-     "Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Constitutional delay of growth and puberty mimicking pathologic delayed puberty (Harrison 22e p.3132)",
+      "Premature thelarche (isolated breast development before age 2) without progression mimicking true precocious puberty (Harrison 22e p.3131)",
+      "Premature adrenarche without progressive pubertal development, to be distinguished from nonclassic CAH and androgen-secreting tumors (Harrison 22e p.3131)",
+      "McCune-Albright syndrome and congenital adrenal hyperplasia, in which initially peripheral precocity may convert to central precocity (Harrison 22e p.3131)"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133).",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133)",
+      "Serum FSH and LH to localize the defect (ovarian vs central) (Harrison 22e p.3131, p.3134)",
+      "Estradiol and testosterone; DHEAS and 17-hydroxyprogesterone when hyperandrogenism is suspected (Harrison 22e p.3131)",
+      "Prolactin in all patients with hypogonadotropic hypogonadism (Harrison 22e p.3134)",
+      "TSH and free T4 (Harrison 22e p.3131)",
+      "Bone age and assessment of growth velocity in pubertal disorders (Harrison 22e p.3131)",
+      "Pelvic ultrasound to assess follicle growth, endometrial thickness, corpus luteum, and reproductive-tract anatomy (Harrison 22e p.3130, p.3131)",
+      "Cranial MRI for suspected central/neuroanatomic causes; pelvic MRI to define tract anomalies before surgery (Harrison 22e p.3131, p.3133)",
+      "Karyotype in delayed puberty and suspected gonadal dysgenesis (Harrison 22e p.3131)",
+      "AMH as a marker of ovarian reserve (Harrison 22e p.3126)",
+      "Mid-luteal serum progesterone (>3 ng/mL) to confirm ovulation (Harrison 22e p.3130)"
+    ],
+    "redFlags": [
+      "Primary amenorrhea with absent secondary sexual characteristics, short stature, or height below the third percentile suggesting Turner syndrome or another pathologic cause requiring evaluation by age 13 (Harrison 22e p.3133)",
+      "Amenorrhea with galactorrhea, headache, visual symptoms, or diabetes insipidus suggesting a hypothalamic-pituitary mass (Harrison 22e p.3134)",
+      "Cyclic pelvic pain with primary amenorrhea suggesting outflow-tract obstruction (imperforate hymen, transverse vaginal septum) requiring prompt surgery to limit endometriosis from retrograde flow (Harrison 22e p.3133)",
+      "Secondary sexual development before age 8 (or breast/pubic hair before 6-7) warranting evaluation for precocious puberty, including exclusion of CNS tumors (Harrison 22e p.3130, p.3131)",
+      "Postpartum amenorrhea raising concern for pituitary necrosis (Sheehan syndrome) or lymphocytic hypophysitis (Harrison 22e p.3134)",
+      "Heavy or prolonged bleeding (over 7 days) or markedly irregular intervals (over 35 or under 21 days) prompting evaluation for AUB causes including malignancy/hyperplasia (Harrison 22e p.3133)"
+    ],
+    "prognosis": "Many disorders are highly treatable when the level of the defect is identified. Functional hypothalamic amenorrhea from energy deficit is often reversible with restoration of energy balance. Outflow-tract obstruction has a good outcome with timely surgery, but delay increases the risk of endometriosis from retrograde menstruation. Premature ovarian insufficiency and gonadal dysgenesis carry permanent loss of fertility and require attention to long-term estrogen-deficiency consequences for bone and other tissues. In precocious puberty, untreated central precocity risks premature epiphyseal closure and compromised adult height, while appropriate management preserves height and addresses psychosocial impact (Harrison 22e p.3126, p.3131, p.3132, p.3133).",
+    "pitfalls": [
+      "Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133).",
+      "Assuming the absence of premenstrual moliminal symptoms proves anovulation - their absence does not (Harrison 22e p.3130).",
+      "Treating a detected urinary LH surge as proof of ovulation when ovulation may still fail to occur (Harrison 22e p.3130).",
+      "Overlooking infrequent or absent menses because the patient does not report them, missing an underlying disorder with long-term health consequences (Harrison 22e p.3133).",
+      "Not measuring prolactin in hypogonadotropic hypogonadism, since hyperprolactinemia from lesions or drugs is a common reversible cause (Harrison 22e p.3134).",
+      "Forgetting that peripheral precocious puberty (e.g., McCune-Albright, CAH) can secondarily trigger central precocity, requiring reassessment (Harrison 22e p.3131).",
+      "Misattributing irregular cycles in adolescence or perimenopause to pathology when anovulatory irregularity is physiologic in the first few years after menarche and the years before menopause (Harrison 22e p.3130, p.3133)."
+    ],
+    "severityClassification": "Amenorrhea is classified as primary (menses never occurred without hormonal treatment) versus secondary (cessation for 3-6 months). Abnormal uterine bleeding (AUB) replaces the older term dysfunctional uterine bleeding and is categorized etiologically by the PALM-COEIN system into structural causes (Polyp, Adenomyosis, Leiomyoma, Malignancy/hyperplasia) and nonstructural causes (Coagulopathy, Ovulatory dysfunction, Endometrial, Iatrogenic, Not yet classified). Precocious puberty is divided into central (GnRH-dependent) and peripheral (GnRH-independent) forms, and delayed puberty into hypergonadotropic (ovarian) and hypogonadotropic (central) forms (Harrison 22e p.3131, p.3133).",
+    "references": [
+      "Harrison 22e p.3124",
+      "Harrison 22e p.3125",
+      "Harrison 22e p.3126",
+      "Harrison 22e p.3127",
+      "Harrison 22e p.3130",
+      "Harrison 22e p.3131",
+      "Harrison 22e p.3132",
+      "Harrison 22e p.3133",
+      "Harrison 22e p.3134"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a dopamine agonist for hyperprolactinaemia",
+      "Provide cyclical oestrogen-progestogen replacement in hypogonadism to maintain bone health and secondary sexual characteristics",
+      "Induce ovulation for anovulatory infertility with letrozole, clomifene, or gonadotropins, or pulsatile GnRH in hypothalamic disease",
+      "Manage hyperandrogenism and polycystic ovary syndrome with combined hormonal contraceptives, antiandrogens, and lifestyle and metabolic measures",
+      "Correct outflow-tract obstruction surgically and without delay to limit the risk of endometriosis",
+      "Monitor bone mineral density in oestrogen-deficient states",
+      "Refer to endocrinology and reproductive gynaecology, and offer genetic counselling and screening where a genetic cause such as Turner syndrome is found"
     ]
-   ],
-   "caption": "Overview comparison matrix for disorders of the female reproductive system."
-  }
- ],
- "diagrams": [
-  {
-   "id": "disorders-of-the-female-reproductive-real-image",
-   "title": "Disorders of the Female Reproductive System: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "disorders_of_the_female_reproductive-pathway",
+      "title": "Disorders of the Female Reproductive System: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and ovary, producing repeating cycles of follicle growth, ovulation, and endometrial preparation; disruption at any",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Primary amenorrhea with absent secondary sexual characteristics, short stature, or height below the third percentile suggesting Turner syndrome or another pathologic cause requiring evaluation by age 13",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133), Serum FSH and LH to localize the defect (ovarian vs central) (Harrison 22e p.3131, p.3134), Estradiol and testosterone; DHEAS"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a dopamine agonist for hyperprolactinaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of disorders of the female reproductive system."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "disorders_of_the_female_reproductive-matrix",
+      "title": "Disorders of the Female Reproductive System: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Normal cyclic reproductive function depends on coordinated signaling among the hypothalamus (GnRH), pituitary (FSH and LH), and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pregnancy test (beta-hCG) as the first step in any menstrual disturbance (Harrison 22e p.3133), Serum FSH and LH to localize the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pregnancy (the most common cause of amenorrhea, to be excluded in all cases) (Harrison 22e p.3133), Polycystic ovary syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct therapy at the identified level of the axis: restore energy balance in functional hypothalamic amenorrhoea and use a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude pregnancy before any other workup of amenorrhea, since it is the most common cause (Harrison 22e p.3133).",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for disorders of the female reproductive system."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Amenorrhea: Diagnosis and Management, 2019",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0701/p39.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_female_reproductive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key definitions and tests in female reproductive disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary amenorrhoea",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "No menses by age 15, or none 3 years after thelarche",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "No pubertal development by 13 also warrants evaluation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary amenorrhoea",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Loss of regular menses for 3, or irregular menses for 6",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "{{hy:Exclude pregnancy first}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal cycle length",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "About 28 (25 to 35)",
+              "range": [
+                25,
+                35
+              ]
+            },
+            {
+              "text": "Luteal phase fixed at 12 to 14 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mid-luteal progesterone",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": ">3 about 7 days after ovulation",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Confirms ovulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSH in ovarian insufficiency",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": ">15, twice at least 1 month apart, age under 40",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Low oestradiol and low AMH; check karyotype and FMR1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FSH and LH in hypothalamic amenorrhoea",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Often <10 (may be normal)",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Low oestradiol, high AMH; check prolactin and MRI if indicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Adenoma, drugs or hypothyroidism; pituitary MRI if persistent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Testosterone, DHEAS, 8 am 17-OHP",
+          "cells": [
+            {
+              "text": "Raised in hyperandrogenism"
+            },
+            {
+              "text": "PCOS, nonclassic CAH, tumour or Cushing syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Progestin challenge",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "Medroxyprogesterone 10 mg daily for 10 days"
+            },
+            {
+              "text": "Withdrawal bleed implies oestrogen exposure; predictive value inconsistent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Precocious puberty in girls",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Secondary sexual development before age 8",
+              "op": "<",
+              "value": 8
+            },
+            {
+              "text": "Central form idiopathic in about 85%; exclude CNS cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison uses age 13 without secondary sexual characteristics as the trigger for evaluating delayed puberty; AAFP 2019 defines primary amenorrhoea as no menses by 15. Laboratory cutoffs are approximate and depend on local reference ranges."
+    },
+    {
+      "id": "disorders_of_the_female_reproductive-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of amenorrhoea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "{{hy:Most common cause of amenorrhoea}}"
+            },
+            {
+              "text": "Beta-hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Oligo-anovulation with hyperandrogenism; high AMH"
+            },
+            {
+              "text": "Androgens, pelvic ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary ovarian insufficiency or Turner syndrome",
+          "cells": [
+            {
+              "text": "High FSH, low oestradiol; short stature in Turner"
+            },
+            {
+              "text": "Repeat FSH, karyotype"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Functional hypothalamic amenorrhoea",
+          "cells": [
+            {
+              "text": "Undernutrition, exercise, stress; low or normal gonadotropins"
+            },
+            {
+              "text": "FSH, LH, oestradiol and history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Galactorrhoea, headache, visual loss; drug history"
+            },
+            {
+              "text": "Prolactin, pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mullerian agenesis or androgen insensitivity",
+          "cells": [
+            {
+              "text": "Primary amenorrhoea with absent or abnormal uterus"
+            },
+            {
+              "text": "Pelvic ultrasound, karyotype"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Outflow obstruction",
+          "cells": [
+            {
+              "text": "Cyclic pelvic pain with primary amenorrhoea"
+            },
+            {
+              "text": "Examination, pelvic ultrasound or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asherman syndrome",
+          "cells": [
+            {
+              "text": "Intrauterine adhesions, including from genital tuberculosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheehan syndrome or lymphocytic hypophysitis",
+          "cells": [
+            {
+              "text": "Postpartum amenorrhoea"
+            },
+            {
+              "text": "Pituitary hormone testing and MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_female_reproductive-treatment",
+      "kind": "treatment",
+      "title": "Treatment by cause",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct energy deficit, nutrition, stress",
+          "cells": [
+            {
+              "text": "Functional hypothalamic amenorrhoea, first line"
+            },
+            {
+              "text": "Check BMD after 6 months of amenorrhoea; avoid COC only for bone; no bisphosphonates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transdermal oestradiol 100 mcg with cyclic medroxyprogesterone 2.5 mg for 10 days per month",
+          "cells": [
+            {
+              "text": "FHA not improved after 6 to 12 months"
+            },
+            {
+              "text": "Bone age 15 or older"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oestradiol 100 mcg patch or conjugated oestrogens 0.625 mg daily, plus micronized progesterone 200 mg for 12 days per month",
+          "cells": [
+            {
+              "text": "{{hy:Primary ovarian insufficiency}}"
+            },
+            {
+              "text": "Continue to about age 50 to 51; add calcium 1,200 mg and vitamin D 1,000 IU"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine agonist",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia"
+            },
+            {
+              "text": "Resection for selected prolactinomas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combined hormonal contraceptive",
+          "cells": [
+            {
+              "text": "PCOS menstrual irregularity, hirsutism, acne"
+            },
+            {
+              "text": "Weight loss and exercise; metformin for cycles and diabetes risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Letrozole",
+          "cells": [
+            {
+              "text": "Anovulatory infertility in PCOS, first line"
+            },
+            {
+              "text": "Preferred over clomifene"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Outflow tract obstruction"
+            },
+            {
+              "text": "Do not delay; retrograde flow causes endometriosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Hormone therapy in ovarian insufficiency may not reliably prevent ovulation, so add contraception if pregnancy is not wanted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_female_reproductive-dx-mgmt",
+      "title": "Diagnosis and management of amenorrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Primary or secondary amenorrhoea",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pregnancy test positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pregnancy: obstetric care",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FSH, LH, prolactin, TSH; androgens if hyperandrogenic",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FSH raised on two tests?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ovarian insufficiency: karyotype, FMR1, oestrogen-progestin to age 50",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Prolactin raised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pituitary MRI; dopamine agonist",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Hyperandrogenism present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PCOS, CAH or tumour workup; COC, lifestyle, letrozole for fertility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low gonadotropins: hypothalamic cause; restore energy balance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Follow-up with BMD where oestrogen deficient",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

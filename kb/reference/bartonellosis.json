@@ -1,179 +1,479 @@
 {
- "id": "bartonellosis",
- "name": "Bartonellosis",
- "aliases": [
-  "cat scratch disease",
-  "Bartonella infection",
-  "bacillary angiomatosis",
-  "Carrion's disease"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically following a scratch or bite from a young cat or flea exposure",
-   "Cat scratch disease classically presents with a papule or pustule at the inoculation site followed by regional lymphadenopathy that is often tender and can suppurate",
-   "Most immunocompetent patients have a self-limiting illness, and management is often supportive with antibiotics reserved for more severe or systemic disease",
-   "In immunocompromised patients, particularly those with advanced HIV, Bartonella can cause bacillary angiomatosis with vascular proliferative skin and visceral lesions",
-   "Bartonella is an important cause of culture-negative endocarditis, so it should be considered when blood cultures remain sterile",
-   "Atypical presentations include prolonged fever of unknown origin, hepatosplenic granulomatous disease, neuroretinitis with a macular star, and encephalopathy",
-   "Diagnosis relies on serology, PCR, or special stains and histology, as the organism is fastidious and difficult to culture by routine methods"
+  "id": "bartonellosis",
+  "name": "Bartonellosis",
+  "aliases": [
+    "cat scratch disease",
+    "Bartonella infection",
+    "bacillary angiomatosis",
+    "Carrion's disease"
   ],
-  "pathophysiology": "Bartonella are fastidious, facultatively intracellular Gram-negative bacteria that infect erythrocytes and endothelial cells. Transmission occurs through animal scratches or bites and arthropod vectors such as fleas and lice depending on species. In immunocompetent hosts the infection typically provokes a granulomatous immune response producing localised lymphadenitis. The bacterium's ability to invade endothelium and stimulate vascular proliferation underlies bacillary angiomatosis and peliosis seen in immunocompromised patients, and its persistence within red cells and on cardiac valves accounts for bacteraemia and endocarditis.",
-  "additionalDifferentials": [
-   "Mycobacterial lymphadenitis (tuberculous or atypical)",
-   "Lymphoma and other causes of regional lymphadenopathy",
-   "Toxoplasmosis",
-   "Pyogenic bacterial lymphadenitis",
-   "Other causes of culture-negative endocarditis (e.g. Coxiella)",
-   "Kaposi sarcoma (for the vascular lesions of bacillary angiomatosis)"
-  ],
-  "infectionMimics": [
-   "Tuberculous lymphadenitis",
-   "Toxoplasmosis",
-   "Coxiella (Q fever) endocarditis",
-   "Pyogenic lymphadenitis"
-  ],
-  "additionalInvestigations": [
-   "Bartonella serology (indirect immunofluorescence or EIA) as a first-line test",
-   "PCR of blood, lymph node aspirate, or tissue for Bartonella DNA",
-   "Histopathology of affected nodes or skin lesions, with special stains such as Warthin-Starry silver stain",
-   "Echocardiography and repeated cultures when endocarditis is suspected",
-   "HIV testing and immune status assessment when bacillary angiomatosis is considered"
-  ],
-  "redFlags": [
-   "Culture-negative endocarditis with embolic phenomena or heart failure",
-   "Neuroretinitis with visual loss, or encephalopathy and seizures",
-   "Disseminated vascular lesions (bacillary angiomatosis) in an immunocompromised patient",
-   "Persistent high fever, hepatosplenic lesions, or systemic deterioration"
-  ],
-  "prognosis": "Cat scratch disease in immunocompetent people usually resolves spontaneously over weeks to months, while endocarditis, disseminated disease, and complications in immunocompromised hosts require prolonged antibiotic therapy and carry greater morbidity.",
-  "pitfalls": [
-   "Overlooking Bartonella as a cause of culture-negative endocarditis",
-   "Failing to elicit a history of cat or flea exposure in regional lymphadenopathy",
-   "Not assessing immune status when vascular proliferative lesions are found",
-   "Draining or excising nodes unnecessarily in what is often a self-limiting illness"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting",
-   "Azithromycin, a macrolide, for significant or bulky lymphadenopathy",
-   "Needle aspiration of tender suppurative nodes for relief, avoiding incision and drainage which risks sinus formation",
-   "Prolonged combination antibiotic therapy for endocarditis, typically a tetracycline with an aminoglycoside or a ceftriaxone-based regimen, with valve surgery where indicated",
-   "Macrolide or tetracycline therapy for bacillary angiomatosis in immunocompromised hosts",
-   "HIV testing and antiretroviral optimisation when bacillary angiomatosis or disseminated disease is found",
-   "Advice on cat and flea exposure to reduce the risk of reinfection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bartonellosis-pathway",
-   "title": "Bartonellosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically following a scratch or bite from a young cat or flea exposure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Culture-negative endocarditis with embolic phenomena or heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bartonella serology (indirect immunofluorescence or EIA) as a first-line test, PCR of blood, lymph node aspirate, or tissue for Bartonella DNA, Histopathology of affected nodes or skin lesions, with special stains such as"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking Bartonella as a cause of culture-negative endocarditis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bartonellosis."
-  }
- ],
- "tables": [
-  {
-   "id": "bartonellosis-matrix",
-   "title": "Bartonellosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically following a scratch or bite from a young cat or flea exposure",
+      "Cat scratch disease classically presents with a papule or pustule at the inoculation site followed by regional lymphadenopathy that is often tender and can suppurate",
+      "Most immunocompetent patients have a self-limiting illness, and management is often supportive with antibiotics reserved for more severe or systemic disease",
+      "In immunocompromised patients, particularly those with advanced HIV, Bartonella can cause bacillary angiomatosis with vascular proliferative skin and visceral lesions",
+      "Bartonella is an important cause of culture-negative endocarditis, so it should be considered when blood cultures remain sterile",
+      "Atypical presentations include prolonged fever of unknown origin, hepatosplenic granulomatous disease, neuroretinitis with a macular star, and encephalopathy",
+      "Diagnosis relies on serology, PCR, or special stains and histology, as the organism is fastidious and difficult to culture by routine methods"
     ],
-    [
-     "Key Investigations",
-     "Bartonella serology (indirect immunofluorescence or EIA) as a first-line test, PCR of blood, lymph node aspirate, or tissue for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bartonella are fastidious, facultatively intracellular Gram-negative bacteria that infect erythrocytes and endothelial cells. Transmission occurs through animal scratches or bites and arthropod vectors such as fleas and lice depending on species. In immunocompetent hosts the infection typically provokes a granulomatous immune response producing localised lymphadenitis. The bacterium's ability to invade endothelium and stimulate vascular proliferation underlies bacillary angiomatosis and peliosis seen in immunocompromised patients, and its persistence within red cells and on cardiac valves accounts for bacteraemia and endocarditis.",
+    "additionalDifferentials": [
+      "Mycobacterial lymphadenitis (tuberculous or atypical)",
+      "Lymphoma and other causes of regional lymphadenopathy",
+      "Toxoplasmosis",
+      "Pyogenic bacterial lymphadenitis",
+      "Other causes of culture-negative endocarditis (e.g. Coxiella)",
+      "Kaposi sarcoma (for the vascular lesions of bacillary angiomatosis)"
     ],
-    [
-     "Primary Differentials",
-     "Mycobacterial lymphadenitis (tuberculous or atypical), Lymphoma and other causes of regional lymphadenopathy, Toxoplasmosis",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculous lymphadenitis",
+      "Toxoplasmosis",
+      "Coxiella (Q fever) endocarditis",
+      "Pyogenic lymphadenitis"
     ],
-    [
-     "Management Strategy",
-     "Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Bartonella serology (indirect immunofluorescence or EIA) as a first-line test",
+      "PCR of blood, lymph node aspirate, or tissue for Bartonella DNA",
+      "Histopathology of affected nodes or skin lesions, with special stains such as Warthin-Starry silver stain",
+      "Echocardiography and repeated cultures when endocarditis is suspected",
+      "HIV testing and immune status assessment when bacillary angiomatosis is considered"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking Bartonella as a cause of culture-negative endocarditis",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Culture-negative endocarditis with embolic phenomena or heart failure",
+      "Neuroretinitis with visual loss, or encephalopathy and seizures",
+      "Disseminated vascular lesions (bacillary angiomatosis) in an immunocompromised patient",
+      "Persistent high fever, hepatosplenic lesions, or systemic deterioration"
+    ],
+    "prognosis": "Cat scratch disease in immunocompetent people usually resolves spontaneously over weeks to months, while endocarditis, disseminated disease, and complications in immunocompromised hosts require prolonged antibiotic therapy and carry greater morbidity.",
+    "pitfalls": [
+      "Overlooking Bartonella as a cause of culture-negative endocarditis",
+      "Failing to elicit a history of cat or flea exposure in regional lymphadenopathy",
+      "Not assessing immune status when vascular proliferative lesions are found",
+      "Draining or excising nodes unnecessarily in what is often a self-limiting illness"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting",
+      "Azithromycin, a macrolide, for significant or bulky lymphadenopathy",
+      "Needle aspiration of tender suppurative nodes for relief, avoiding incision and drainage which risks sinus formation",
+      "Prolonged combination antibiotic therapy for endocarditis, typically a tetracycline with an aminoglycoside or a ceftriaxone-based regimen, with valve surgery where indicated",
+      "Macrolide or tetracycline therapy for bacillary angiomatosis in immunocompromised hosts",
+      "HIV testing and antiretroviral optimisation when bacillary angiomatosis or disseminated disease is found",
+      "Advice on cat and flea exposure to reduce the risk of reinfection"
     ]
-   ],
-   "caption": "Overview comparison matrix for bartonellosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bartonellosis-real-image",
-   "title": "Bartonellosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "bartonellosis-pathway",
+      "title": "Bartonellosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically following a scratch or bite from a young cat or flea exposure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Culture-negative endocarditis with embolic phenomena or heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bartonella serology (indirect immunofluorescence or EIA) as a first-line test, PCR of blood, lymph node aspirate, or tissue for Bartonella DNA, Histopathology of affected nodes or skin lesions, with special stains such as"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking Bartonella as a cause of culture-negative endocarditis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bartonellosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bartonellosis-matrix",
+      "title": "Bartonellosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bartonella species cause a spectrum of illness; Bartonella henselae is the usual agent of cat scratch disease, typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bartonella serology (indirect immunofluorescence or EIA) as a first-line test, PCR of blood, lymph node aspirate, or tissue for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mycobacterial lymphadenitis (tuberculous or atypical), Lymphoma and other causes of regional lymphadenopathy, Toxoplasmosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care alone for most immunocompetent cat scratch disease, which is self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking Bartonella as a cause of culture-negative endocarditis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bartonellosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartonellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartonella serology by IFA or EIA",
+          "cells": [
+            {
+              "text": "First-line test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of blood, node aspirate or tissue",
+          "cells": [
+            {
+              "text": "Bartonella DNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with Warthin-Starry silver stain",
+          "cells": [
+            {
+              "text": "Affected nodes or skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and repeated blood cultures",
+          "cells": [
+            {
+              "text": "Endocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and immune status",
+          "cells": [
+            {
+              "text": "Bacillary angiomatosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartonellosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous lymphadenitis",
+          "cells": [
+            {
+              "text": "Mycobacterial lymphadenitis is separated by culture and stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Regional lymphadenopathy; separated by histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartonellosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Most immunocompetent cat scratch disease is self-limiting"
+            },
+            {
+              "text": "Immunocompetent cat scratch disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "For significant or bulky lymphadenopathy"
+            },
+            {
+              "text": "Bulky lymphadenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "Tender suppurative nodes; avoids incision and drainage"
+            },
+            {
+              "text": "Suppurative nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged combination therapy for endocarditis",
+          "cells": [
+            {
+              "text": "Tetracycline with aminoglycoside or ceftriaxone-based regimen; valve surgery where indicated"
+            },
+            {
+              "text": "Endocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide or tetracycline for bacillary angiomatosis",
+          "cells": [
+            {
+              "text": "In immunocompromised hosts"
+            },
+            {
+              "text": "Immunocompromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral optimisation",
+          "cells": [
+            {
+              "text": "When bacillary angiomatosis or disseminated disease is found"
+            },
+            {
+              "text": "HIV-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure advice",
+          "cells": [
+            {
+              "text": "Cat and flea exposure to reduce reinfection"
+            },
+            {
+              "text": "Reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartonellosis-dx-mgmt",
+      "title": "Diagnosis and management of Bartonellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender regional lymphadenopathy after cat scratch or bite",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Culture-negative endocarditis, neuroretinitis or disseminated vascular lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent echocardiography for suspected endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bartonella serology, PCR, silver-stained histology, echocardiography, HIV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bartonella serology or PCR positive with compatible histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care for most immunocompetent cat scratch disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat PCR or biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azithromycin for bulky lymphadenopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Needle aspiration of suppurative nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prolonged combination therapy for endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Advise on cat and flea exposure to reduce reinfection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

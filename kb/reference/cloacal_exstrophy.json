@@ -1,173 +1,458 @@
 {
- "id": "cloacal_exstrophy",
- "name": "Cloacal exstrophy",
- "aliases": [
-  "OEIS complex",
-  "vesicointestinal fissure",
-  "exstrophy of the cloaca"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two exstrophied bladder halves on the lower abdominal wall",
-   "Frequently occurs as the OEIS complex: Omphalocele, Exstrophy of the cloaca, Imperforate anus, and Spinal defects",
-   "Associated anomalies are the rule and include omphalocele, imperforate anus with a foreshortened or blind-ending hindgut, spinal dysraphism and tethered cord, and skeletal, renal, and genital anomalies",
-   "Genital anomalies are marked; in males the phallus is often bifid or diminutive, historically raising complex questions of gender assignment now guided by multidisciplinary DSD care",
-   "Because of the visceral and neural involvement, management is far more complex than for classic bladder exstrophy",
-   "Neonatal care requires a coordinated team addressing the omphalocele, bowel diversion, staged closure of the exstrophy, and neurosurgical assessment of any spinal cord lesion",
-   "Long-term goals include urinary and faecal continence (often via reconstruction and stomas), preservation of renal function, and attention to sexual and psychosocial outcomes"
+  "id": "cloacal_exstrophy",
+  "name": "Cloacal exstrophy",
+  "aliases": [
+    "OEIS complex",
+    "vesicointestinal fissure",
+    "exstrophy of the cloaca"
   ],
-  "pathophysiology": "Cloacal exstrophy results from a very early and extensive developmental failure of the lower abdominal wall, in which an abnormal, prematurely disrupted cloacal membrane and defective mesenchymal migration occur before the urorectal septum has divided the cloaca. As a result the bladder is split into two halves that flank an exstrophied central plate of hindgut, and the anus is imperforate. Because the insult occurs so early and involves the cloaca, associated omphalocele, spinal dysraphism, and genital and skeletal anomalies are common, reflecting a global disturbance of caudal embryonic development rather than an isolated urinary tract defect.",
-  "additionalDifferentials": [
-   "Classic bladder exstrophy",
-   "Omphalocele or gastroschisis in isolation",
-   "Cloacal malformation (persistent cloaca) in females",
-   "Anorectal malformation with associated anomalies",
-   "Caudal regression syndrome",
-   "Limb-body wall complex"
-  ],
-  "additionalInvestigations": [
-   "Renal and abdominal ultrasound to assess the upper tracts and associated anomalies",
-   "Spinal ultrasound and MRI to detect dysraphism and tethered cord",
-   "Echocardiography and skeletal imaging for associated anomalies",
-   "Karyotype and multidisciplinary DSD evaluation to guide gender and genital management",
-   "Contrast studies of the bowel to define hindgut anatomy",
-   "Serial renal function assessment"
-  ],
-  "redFlags": [
-   "Neonatal instability from the omphalocele, exposed viscera, or associated cardiac disease",
-   "Progressive neurological deficit from a tethered or dysraphic spinal cord",
-   "Upper-tract obstruction or deteriorating renal function",
-   "Sepsis from exposed bowel and bladder plates or after reconstruction"
-  ],
-  "prognosis": "Survival has improved markedly with modern neonatal and staged surgical care, but children face multiple reconstructive operations and lifelong management of urinary and faecal continence, renal function, spinal and orthopaedic issues, and sexual and psychosocial development, so outcomes remain guarded and highly individual.",
-  "pitfalls": [
-   "Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components",
-   "Missing occult spinal dysraphism or tethered cord that needs neurosurgical input",
-   "Making premature or unilateral decisions on gender assignment outside a multidisciplinary DSD framework",
-   "Failing to coordinate the many specialties required for staged reconstruction"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Gearhart, Rink & Mouriquand: Pediatric Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele.",
-   "Staged surgical reconstruction of the exstrophy including bladder closure, often with pelvic osteotomy to approximate the pubic bones.",
-   "Bowel diversion with colostomy while preserving all available hindgut, with later consideration of pull-through or a permanent stoma.",
-   "Neurosurgical assessment and repair of associated spinal dysraphism and tethered cord.",
-   "Multidisciplinary disorders-of-sex-development care to guide gender assignment and staged genital reconstruction, informed by karyotype.",
-   "Long-term surveillance of renal function and the upper tracts, with continence achieved through clean intermittent catheterisation, bladder augmentation or urinary diversion as needed.",
-   "Coordinated multidisciplinary team management across paediatric surgery, urology, neurosurgery, orthopaedics and nephrology, with psychosocial support for child and family."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cloacal_exstrophy-pathway",
-   "title": "Cloacal exstrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two exstrophied bladder halves on the lower abdominal wall",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal instability from the omphalocele, exposed viscera, or associated cardiac disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal and abdominal ultrasound to assess the upper tracts and associated anomalies, Spinal ultrasound and MRI to detect dysraphism and tethered cord, Echocardiography and skeletal imaging for associated anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cloacal exstrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "cloacal_exstrophy-matrix",
-   "title": "Cloacal exstrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two exstrophied bladder halves on the lower abdominal wall",
+      "Frequently occurs as the OEIS complex: Omphalocele, Exstrophy of the cloaca, Imperforate anus, and Spinal defects",
+      "Associated anomalies are the rule and include omphalocele, imperforate anus with a foreshortened or blind-ending hindgut, spinal dysraphism and tethered cord, and skeletal, renal, and genital anomalies",
+      "Genital anomalies are marked; in males the phallus is often bifid or diminutive, historically raising complex questions of gender assignment now guided by multidisciplinary DSD care",
+      "Because of the visceral and neural involvement, management is far more complex than for classic bladder exstrophy",
+      "Neonatal care requires a coordinated team addressing the omphalocele, bowel diversion, staged closure of the exstrophy, and neurosurgical assessment of any spinal cord lesion",
+      "Long-term goals include urinary and faecal continence (often via reconstruction and stomas), preservation of renal function, and attention to sexual and psychosocial outcomes"
     ],
-    [
-     "Key Investigations",
-     "Renal and abdominal ultrasound to assess the upper tracts and associated anomalies, Spinal ultrasound and MRI to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cloacal exstrophy results from a very early and extensive developmental failure of the lower abdominal wall, in which an abnormal, prematurely disrupted cloacal membrane and defective mesenchymal migration occur before the urorectal septum has divided the cloaca. As a result the bladder is split into two halves that flank an exstrophied central plate of hindgut, and the anus is imperforate. Because the insult occurs so early and involves the cloaca, associated omphalocele, spinal dysraphism, and genital and skeletal anomalies are common, reflecting a global disturbance of caudal embryonic development rather than an isolated urinary tract defect.",
+    "additionalDifferentials": [
+      "Classic bladder exstrophy",
+      "Omphalocele or gastroschisis in isolation",
+      "Cloacal malformation (persistent cloaca) in females",
+      "Anorectal malformation with associated anomalies",
+      "Caudal regression syndrome",
+      "Limb-body wall complex"
     ],
-    [
-     "Primary Differentials",
-     "Classic bladder exstrophy, Omphalocele or gastroschisis in isolation, Cloacal malformation (persistent cloaca) in females",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal and abdominal ultrasound to assess the upper tracts and associated anomalies",
+      "Spinal ultrasound and MRI to detect dysraphism and tethered cord",
+      "Echocardiography and skeletal imaging for associated anomalies",
+      "Karyotype and multidisciplinary DSD evaluation to guide gender and genital management",
+      "Contrast studies of the bowel to define hindgut anatomy",
+      "Serial renal function assessment"
     ],
-    [
-     "Management Strategy",
-     "Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele.",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal instability from the omphalocele, exposed viscera, or associated cardiac disease",
+      "Progressive neurological deficit from a tethered or dysraphic spinal cord",
+      "Upper-tract obstruction or deteriorating renal function",
+      "Sepsis from exposed bowel and bladder plates or after reconstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survival has improved markedly with modern neonatal and staged surgical care, but children face multiple reconstructive operations and lifelong management of urinary and faecal continence, renal function, spinal and orthopaedic issues, and sexual and psychosocial development, so outcomes remain guarded and highly individual.",
+    "pitfalls": [
+      "Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components",
+      "Missing occult spinal dysraphism or tethered cord that needs neurosurgical input",
+      "Making premature or unilateral decisions on gender assignment outside a multidisciplinary DSD framework",
+      "Failing to coordinate the many specialties required for staged reconstruction"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Gearhart, Rink & Mouriquand: Pediatric Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele.",
+      "Staged surgical reconstruction of the exstrophy including bladder closure, often with pelvic osteotomy to approximate the pubic bones.",
+      "Bowel diversion with colostomy while preserving all available hindgut, with later consideration of pull-through or a permanent stoma.",
+      "Neurosurgical assessment and repair of associated spinal dysraphism and tethered cord.",
+      "Multidisciplinary disorders-of-sex-development care to guide gender assignment and staged genital reconstruction, informed by karyotype.",
+      "Long-term surveillance of renal function and the upper tracts, with continence achieved through clean intermittent catheterisation, bladder augmentation or urinary diversion as needed.",
+      "Coordinated multidisciplinary team management across paediatric surgery, urology, neurosurgery, orthopaedics and nephrology, with psychosocial support for child and family."
     ]
-   ],
-   "caption": "Overview comparison matrix for cloacal exstrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cloacal-exstrophy-real-image",
-   "title": "Cloacal exstrophy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "cloacal_exstrophy-pathway",
+      "title": "Cloacal exstrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two exstrophied bladder halves on the lower abdominal wall",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal instability from the omphalocele, exposed viscera, or associated cardiac disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal and abdominal ultrasound to assess the upper tracts and associated anomalies, Spinal ultrasound and MRI to detect dysraphism and tethered cord, Echocardiography and skeletal imaging for associated anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cloacal exstrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cloacal_exstrophy-matrix",
+      "title": "Cloacal exstrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most severe form of the exstrophy-epispadias complex, in which an exstrophied segment of hindgut/caecum lies between two",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal and abdominal ultrasound to assess the upper tracts and associated anomalies, Spinal ultrasound and MRI to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic bladder exstrophy, Omphalocele or gastroschisis in isolation, Cloacal malformation (persistent cloaca) in females",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neonatal stabilisation with protection of the exposed bladder and bowel plate and management of the omphalocele.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it as a more severe bladder exstrophy while overlooking the bowel, spinal, and genital components",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cloacal exstrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cloacal_exstrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Upper tracts and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal ultrasound and MRI",
+          "cells": [
+            {
+              "text": "Dysraphism and tethered cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and skeletal imaging",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and multidisciplinary DSD evaluation",
+          "cells": [
+            {
+              "text": "Guides gender and genital management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast studies of the bowel",
+          "cells": [
+            {
+              "text": "Hindgut anatomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloacal_exstrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic bladder exstrophy",
+          "cells": [
+            {
+              "text": "Less severe form without an exposed hindgut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omphalocele or gastroschisis in isolation",
+          "cells": [
+            {
+              "text": "Abdominal wall defect without exstrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cloacal malformation in females",
+          "cells": [
+            {
+              "text": "Single perineal opening with a persistent common channel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloacal_exstrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal stabilisation",
+          "cells": [
+            {
+              "text": "Protects exposed bladder and bowel plate; manages omphalocele"
+            },
+            {
+              "text": "Immediate care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged bladder closure with pelvic osteotomy",
+          "cells": [
+            {
+              "text": "Approximates the pubic bones"
+            },
+            {
+              "text": "Staged reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colostomy bowel diversion",
+          "cells": [
+            {
+              "text": "Preserves all available hindgut"
+            },
+            {
+              "text": "Later pull-through or permanent stoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical repair of spinal dysraphism",
+          "cells": [
+            {
+              "text": "Tethered cord"
+            },
+            {
+              "text": "Neural involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorders-of-sex-development care",
+          "cells": [
+            {
+              "text": "Gender assignment and staged genital reconstruction, informed by karyotype"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cloacal_exstrophy-dx-mgmt",
+      "title": "Diagnosis and management of Cloacal exstrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cloacal exstrophy: exposed hindgut between two bladder halves",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal instability, spinal cord deficit, obstructed upper tract)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal surgical review for instability or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal, spinal and abdominal imaging with karyotype and bowel contrast studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Spinal dysraphism or tethered cord on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neonatal stabilisation and protection of exposed bladder and bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check classic bladder exstrophy, omphalocele and cloacal malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Colostomy diversion preserving all available hindgut",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurosurgical repair of dysraphism and tethered cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged bladder closure with pelvic osteotomy and genital reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal surveillance and continence care with a multidisciplinary team",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,474 @@
 {
- "id": "cranioectodermal_dysplasia_sensenbrenner",
- "name": "Cranioectodermal dysplasia (Sensenbrenner)",
- "aliases": [
-  "Sensenbrenner syndrome",
-  "cranioectodermal dysplasia",
-  "CED",
-  "IFT122",
-  "WDR35",
-  "WDR19",
-  "IFT43"
- ],
- "class": "non_infective",
- "system": "Genetics / Ciliopathy",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal and progressive renal disease",
-   "Ectodermal signs include sparse, fine, slow-growing hair, small widely spaced teeth with taurodontism, and dysplastic nails",
-   "Skeletal features are a narrow thorax with short ribs, rhizomelic limb shortening, and brachydactyly",
-   "Chronic tubulointerstitial nephropathy commonly progresses to renal failure and is a major determinant of long-term outcome",
-   "Hepatic fibrosis and retinal dystrophy also occur, reflecting the multi-organ nature of intraflagellar transport defects",
-   "Caused by biallelic variants in retrograde intraflagellar transport genes such as IFT122, WDR35, WDR19 and IFT43",
-   "Overlaps clinically with other skeletal ciliopathies, particularly Jeune asphyxiating thoracic dystrophy and Ellis-van Creveld syndrome"
+  "id": "cranioectodermal_dysplasia_sensenbrenner",
+  "name": "Cranioectodermal dysplasia (Sensenbrenner)",
+  "aliases": [
+    "Sensenbrenner syndrome",
+    "cranioectodermal dysplasia",
+    "CED",
+    "IFT122",
+    "WDR35",
+    "WDR19",
+    "IFT43"
   ],
-  "pathophysiology": "The disorder arises from biallelic variants in genes of the retrograde intraflagellar transport machinery (the IFT-A complex), including IFT122, WDR35, WDR19 and IFT43. These proteins move cargo back towards the cell body along the primary cilium, and their loss impairs the assembly and maintenance of cilia and the hedgehog and other signalling pathways that depend on them. Because the primary cilium is required for normal growth-plate chondrocyte signalling, epithelial patterning and renal tubular function, the resulting ciliary dysfunction produces the combination of short ribs and limbs, ectodermal abnormalities of hair, teeth and nails, a chronic tubulointerstitial nephropathy, hepatic fibrosis, and retinal degeneration that characterises the condition.",
-  "additionalDifferentials": [
-   "Jeune asphyxiating thoracic dystrophy and the short-rib thoracic dysplasia spectrum",
-   "Ellis-van Creveld syndrome",
-   "Other nephronophthisis-related ciliopathies",
-   "Ectodermal dysplasias with predominant hair and nail involvement",
-   "Cartilage-hair hypoplasia",
-   "Bardet-Biedl syndrome"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to document thoracic narrowing, rib length and limb proportions",
-   "Renal function testing, urinalysis and renal ultrasound for tubulointerstitial disease",
-   "Liver function tests and hepatic imaging to detect fibrosis",
-   "Ophthalmological assessment with electroretinography for retinal dystrophy",
-   "Dental and ectodermal examination of hair, teeth and nails",
-   "Molecular testing with a skeletal ciliopathy gene panel"
-  ],
-  "redFlags": [
-   "Respiratory insufficiency from a constricted thorax in infancy",
-   "Progressive decline in renal function towards end-stage disease",
-   "Features of portal hypertension from hepatic fibrosis",
-   "Deteriorating vision from retinal dystrophy"
-  ],
-  "prognosis": "Outcome is variable; thoracic constriction is usually less severe than in Jeune syndrome, but progressive renal failure is a leading cause of morbidity and may require dialysis or transplantation, and hepatic and retinal disease add to the long-term burden.",
-  "pitfalls": [
-   "Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy",
-   "Failing to monitor renal function so that progressive nephropathy is recognised late",
-   "Overlooking hepatic fibrosis, since liver enzymes may be near normal",
-   "Assuming a single causative gene when several IFT-A genes produce the phenotype"
-  ],
-  "references": [
-   "GeneReviews: Cranioectodermal Dysplasia",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect",
-   "Lifelong renal surveillance for chronic tubulointerstitial nephropathy, managing progression to renal failure with dialysis or transplantation",
-   "Monitoring and management of hepatic fibrosis and portal hypertension",
-   "Respiratory monitoring and support for the narrow thorax and short ribs",
-   "Ophthalmological review with electroretinography for retinal dystrophy",
-   "Dental care for widely spaced teeth, taurodontism and enamel and nail defects",
-   "Neurosurgical assessment for dolichocephaly from sagittal suture synostosis where indicated",
-   "Genetic counselling and gene-panel testing of the autosomal recessive IFT-A genes with cascade family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cranioectodermal_dysplasia_sensenbrenner-pathway",
-   "title": "Cranioectodermal dysplasia (Sensenbrenner): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal and progressive renal disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory insufficiency from a constricted thorax in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to document thoracic narrowing, rib length and limb proportions, Renal function testing, urinalysis and renal ultrasound for tubulointerstitial disease, Liver function tests and hepatic imaging to detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cranioectodermal dysplasia (sensenbrenner)."
-  }
- ],
- "tables": [
-  {
-   "id": "cranioectodermal_dysplasia_sensenbrenner-matrix",
-   "title": "Cranioectodermal dysplasia (Sensenbrenner): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Ciliopathy",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal and progressive renal disease",
+      "Ectodermal signs include sparse, fine, slow-growing hair, small widely spaced teeth with taurodontism, and dysplastic nails",
+      "Skeletal features are a narrow thorax with short ribs, rhizomelic limb shortening, and brachydactyly",
+      "Chronic tubulointerstitial nephropathy commonly progresses to renal failure and is a major determinant of long-term outcome",
+      "Hepatic fibrosis and retinal dystrophy also occur, reflecting the multi-organ nature of intraflagellar transport defects",
+      "Caused by biallelic variants in retrograde intraflagellar transport genes such as IFT122, WDR35, WDR19 and IFT43",
+      "Overlaps clinically with other skeletal ciliopathies, particularly Jeune asphyxiating thoracic dystrophy and Ellis-van Creveld syndrome"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to document thoracic narrowing, rib length and limb proportions, Renal function testing, urinalysis and renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder arises from biallelic variants in genes of the retrograde intraflagellar transport machinery (the IFT-A complex), including IFT122, WDR35, WDR19 and IFT43. These proteins move cargo back towards the cell body along the primary cilium, and their loss impairs the assembly and maintenance of cilia and the hedgehog and other signalling pathways that depend on them. Because the primary cilium is required for normal growth-plate chondrocyte signalling, epithelial patterning and renal tubular function, the resulting ciliary dysfunction produces the combination of short ribs and limbs, ectodermal abnormalities of hair, teeth and nails, a chronic tubulointerstitial nephropathy, hepatic fibrosis, and retinal degeneration that characterises the condition.",
+    "additionalDifferentials": [
+      "Jeune asphyxiating thoracic dystrophy and the short-rib thoracic dysplasia spectrum",
+      "Ellis-van Creveld syndrome",
+      "Other nephronophthisis-related ciliopathies",
+      "Ectodermal dysplasias with predominant hair and nail involvement",
+      "Cartilage-hair hypoplasia",
+      "Bardet-Biedl syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Jeune asphyxiating thoracic dystrophy and the short-rib thoracic dysplasia spectrum, Ellis-van Creveld syndrome, Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to document thoracic narrowing, rib length and limb proportions",
+      "Renal function testing, urinalysis and renal ultrasound for tubulointerstitial disease",
+      "Liver function tests and hepatic imaging to detect fibrosis",
+      "Ophthalmological assessment with electroretinography for retinal dystrophy",
+      "Dental and ectodermal examination of hair, teeth and nails",
+      "Molecular testing with a skeletal ciliopathy gene panel"
     ],
-    [
-     "Management Strategy",
-     "Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory insufficiency from a constricted thorax in infancy",
+      "Progressive decline in renal function towards end-stage disease",
+      "Features of portal hypertension from hepatic fibrosis",
+      "Deteriorating vision from retinal dystrophy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable; thoracic constriction is usually less severe than in Jeune syndrome, but progressive renal failure is a leading cause of morbidity and may require dialysis or transplantation, and hepatic and retinal disease add to the long-term burden.",
+    "pitfalls": [
+      "Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy",
+      "Failing to monitor renal function so that progressive nephropathy is recognised late",
+      "Overlooking hepatic fibrosis, since liver enzymes may be near normal",
+      "Assuming a single causative gene when several IFT-A genes produce the phenotype"
+    ],
+    "references": [
+      "GeneReviews: Cranioectodermal Dysplasia",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect",
+      "Lifelong renal surveillance for chronic tubulointerstitial nephropathy, managing progression to renal failure with dialysis or transplantation",
+      "Monitoring and management of hepatic fibrosis and portal hypertension",
+      "Respiratory monitoring and support for the narrow thorax and short ribs",
+      "Ophthalmological review with electroretinography for retinal dystrophy",
+      "Dental care for widely spaced teeth, taurodontism and enamel and nail defects",
+      "Neurosurgical assessment for dolichocephaly from sagittal suture synostosis where indicated",
+      "Genetic counselling and gene-panel testing of the autosomal recessive IFT-A genes with cascade family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for cranioectodermal dysplasia (sensenbrenner)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cranioectodermal-dysplasia-sensenbrenner-real-image",
-   "title": "Cranioectodermal dysplasia (Sensenbrenner): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cranioectodermal_dysplasia_sensenbrenner-pathway",
+      "title": "Cranioectodermal dysplasia (Sensenbrenner): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal and progressive renal disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory insufficiency from a constricted thorax in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to document thoracic narrowing, rib length and limb proportions, Renal function testing, urinalysis and renal ultrasound for tubulointerstitial disease, Liver function tests and hepatic imaging to detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cranioectodermal dysplasia (sensenbrenner)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cranioectodermal_dysplasia_sensenbrenner-matrix",
+      "title": "Cranioectodermal dysplasia (Sensenbrenner): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A skeletal ciliopathy that combines a distinctive skull shape (dolichocephaly from sagittal suture synostosis) with ectodermal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to document thoracic narrowing, rib length and limb proportions, Renal function testing, urinalysis and renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Jeune asphyxiating thoracic dystrophy and the short-rib thoracic dysplasia spectrum, Ellis-van Creveld syndrome, Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multidisciplinary supportive care, as there is no targeted therapy for the underlying retrograde intraflagellar transport defect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing sparse hair and nail changes to an isolated ectodermal dysplasia and missing the renal and skeletal ciliopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cranioectodermal dysplasia (sensenbrenner)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cranioectodermal_dysplasia_sensenbrenner-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Thoracic narrowing, rib length and limb proportions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, urinalysis and renal ultrasound",
+          "cells": [
+            {
+              "text": "Tubulointerstitial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal ciliopathy gene panel",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cranioectodermal_dysplasia_sensenbrenner-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Jeune asphyxiating thoracic dystrophy",
+          "cells": [
+            {
+              "text": "Short-rib thoracic dysplasia; thorax usually more severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ellis-van Creveld syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with skeletal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cartilage-hair hypoplasia",
+          "cells": [
+            {
+              "text": "Named look-alike with sparse hair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cranioectodermal_dysplasia_sensenbrenner-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "No targeted therapy for the retrograde intraflagellar transport defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong renal surveillance",
+          "cells": [
+            {
+              "text": "Tubulointerstitial nephropathy; dialysis or transplantation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring",
+          "cells": [
+            {
+              "text": "Fibrosis and portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Narrow thorax and short ribs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Electroretinography and retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental care",
+          "cells": [
+            {
+              "text": "Widely spaced teeth, enamel and nail defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical assessment",
+          "cells": [
+            {
+              "text": "Sagittal suture synostosis where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive IFT-A genes; cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cranioectodermal_dysplasia_sensenbrenner-dx-mgmt",
+      "title": "Diagnosis and management of Cranioectodermal dysplasia (Sensenbrenner)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Sensenbrenner cranioectodermal dysplasia: short ribs and sparse hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (infant respiratory insufficiency, falling renal function, portal hypertension)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for infant thoracic constriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; renal tests and ultrasound; liver tests; ERG; ciliopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene testing confirm an IFT-A ciliopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Jeune syndrome, Ellis-van Creveld or Bardet-Biedl",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary supportive care; no targeted therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong renal surveillance with dialysis or transplant planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring for the narrow thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hepatic, ophthalmic and dental care; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Thoracic constriction often milder than Jeune; progressive renal failure is a main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

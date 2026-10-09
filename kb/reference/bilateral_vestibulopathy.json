@@ -1,174 +1,233 @@
 {
- "id": "bilateral_vestibulopathy",
- "name": "Bilateral vestibulopathy",
- "aliases": [
-  "bilateral vestibular hypofunction",
-  "bilateral vestibular failure",
-  "bilateral vestibular areflexia",
-  "BVP"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement or walking",
-   "Vertigo is usually absent because the deficit is symmetrical, which often delays recognition",
-   "A positive bedside head impulse test in both horizontal directions and dynamic visual acuity loss on head shaking are key clinical signs",
-   "Causes include aminoglycoside ototoxicity, bilateral Meniere disease, autoimmune and genetic disorders, and many cases remain idiopathic",
-   "Formal diagnosis requires demonstrating reduced vestibulo-ocular reflex gain bilaterally on quantitative testing",
-   "Vestibular rehabilitation to promote substitution and gaze stabilisation is the mainstay of management",
-   "It may occur with progressive cerebellar ataxia and neuropathy in the CANVAS spectrum, warranting neurological assessment"
+  "id": "bilateral_vestibulopathy",
+  "name": "Bilateral vestibulopathy",
+  "aliases": [
+    "bilateral vestibular hypofunction",
+    "bilateral vestibular failure",
+    "bilateral vestibular areflexia",
+    "BVP"
   ],
-  "pathophysiology": "Bilateral vestibulopathy results from impaired function of both peripheral vestibular organs or their nerves, reducing the vestibulo-ocular and vestibulospinal reflexes that stabilise gaze and posture. Because the loss is symmetrical there is no static imbalance signal to generate spinning vertigo; instead the failure of the vestibulo-ocular reflex causes retinal image slip during head movement, perceived as oscillopsia, and loss of vestibulospinal support causes gait unsteadiness that worsens when vision and proprioception cannot compensate, such as in darkness. Ototoxic aminoglycosides preferentially damage vestibular hair cells, while other cases reflect autoimmune, degenerative, genetic, or idiopathic hair cell and neural loss.",
-  "additionalDifferentials": [
-   "Cerebellar ataxia and degenerative gait disorders",
-   "Sensory peripheral neuropathy causing imbalance",
-   "CANVAS (cerebellar ataxia, neuropathy, vestibular areflexia syndrome)",
-   "Bilateral sequential vestibular neuritis",
-   "Functional or multifactorial dizziness in older adults",
-   "Downbeat nystagmus syndromes from craniocervical junction pathology"
-  ],
-  "additionalInvestigations": [
-   "Bedside head impulse test and dynamic visual acuity assessment",
-   "Video head impulse testing to quantify vestibulo-ocular reflex gain in all canals",
-   "Caloric testing to confirm bilateral reduced responses",
-   "Rotational chair testing for low-frequency vestibular function",
-   "Audiometry to detect associated cochlear involvement",
-   "Neurological evaluation and imaging when ataxia or neuropathy suggests a central or systemic cause"
-  ],
-  "redFlags": [
-   "Progressive ataxia or neuropathy pointing to a central or systemic disorder",
-   "History of aminoglycoside exposure enabling prevention in others",
-   "Falls with injury from severe imbalance",
-   "Rapidly progressive course suggesting autoimmune or paraneoplastic disease"
-  ],
-  "prognosis": "Peripheral vestibular function rarely recovers, but sustained vestibular rehabilitation improves gaze stability and gait, though oscillopsia and darkness-related unsteadiness often persist to some degree.",
-  "pitfalls": [
-   "Attributing symptoms to non-specific dizziness and missing the diagnosis for years",
-   "Overlooking aminoglycoside ototoxicity as a preventable cause",
-   "Not testing both directions on the head impulse test",
-   "Failing to screen for CANVAS and other central or systemic associations"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "Barany Society Consensus: Diagnostic Criteria for Bilateral Vestibulopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment",
-   "Identify and remove the cause, stopping and avoiding aminoglycoside and other ototoxic drugs and treating any bilateral Meniere disease",
-   "Corticosteroids or immunosuppression where an autoimmune aetiology is identified",
-   "Falls prevention through home-hazard reduction, adequate lighting, walking aids and advice about moving in the dark",
-   "Patient education to avoid situations that rely on vestibular input, such as swimming underwater and night driving",
-   "Audiovestibular and neurology referral to evaluate for a central or systemic cause when ataxia or neuropathy coexists",
-   "Consideration of an investigational vestibular implant in severe refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bilateral_vestibulopathy-pathway",
-   "title": "Bilateral vestibulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement or walking",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive ataxia or neuropathy pointing to a central or systemic disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bedside head impulse test and dynamic visual acuity assessment, Video head impulse testing to quantify vestibulo-ocular reflex gain in all canals, Caloric testing to confirm bilateral reduced responses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing symptoms to non-specific dizziness and missing the diagnosis for years"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bilateral vestibulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "bilateral_vestibulopathy-matrix",
-   "title": "Bilateral vestibulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement or walking",
+      "Vertigo is usually absent because the deficit is symmetrical, which often delays recognition",
+      "A positive bedside head impulse test in both horizontal directions and dynamic visual acuity loss on head shaking are key clinical signs",
+      "Causes include aminoglycoside ototoxicity, bilateral Meniere disease, autoimmune and genetic disorders, and many cases remain idiopathic",
+      "Formal diagnosis requires demonstrating reduced vestibulo-ocular reflex gain bilaterally on quantitative testing",
+      "Vestibular rehabilitation to promote substitution and gaze stabilisation is the mainstay of management",
+      "It may occur with progressive cerebellar ataxia and neuropathy in the CANVAS spectrum, warranting neurological assessment"
     ],
-    [
-     "Key Investigations",
-     "Bedside head impulse test and dynamic visual acuity assessment, Video head impulse testing to quantify vestibulo-ocular reflex",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bilateral vestibulopathy results from impaired function of both peripheral vestibular organs or their nerves, reducing the vestibulo-ocular and vestibulospinal reflexes that stabilise gaze and posture. Because the loss is symmetrical there is no static imbalance signal to generate spinning vertigo; instead the failure of the vestibulo-ocular reflex causes retinal image slip during head movement, perceived as oscillopsia, and loss of vestibulospinal support causes gait unsteadiness that worsens when vision and proprioception cannot compensate, such as in darkness. Ototoxic aminoglycosides preferentially damage vestibular hair cells, while other cases reflect autoimmune, degenerative, genetic, or idiopathic hair cell and neural loss.",
+    "additionalDifferentials": [
+      "Cerebellar ataxia and degenerative gait disorders",
+      "Sensory peripheral neuropathy causing imbalance",
+      "CANVAS (cerebellar ataxia, neuropathy, vestibular areflexia syndrome)",
+      "Bilateral sequential vestibular neuritis",
+      "Functional or multifactorial dizziness in older adults",
+      "Downbeat nystagmus syndromes from craniocervical junction pathology"
     ],
-    [
-     "Primary Differentials",
-     "Cerebellar ataxia and degenerative gait disorders, Sensory peripheral neuropathy causing imbalance, CANVAS (cerebellar ataxia,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bedside head impulse test and dynamic visual acuity assessment",
+      "Video head impulse testing to quantify vestibulo-ocular reflex gain in all canals",
+      "Caloric testing to confirm bilateral reduced responses",
+      "Rotational chair testing for low-frequency vestibular function",
+      "Audiometry to detect associated cochlear involvement",
+      "Neurological evaluation and imaging when ataxia or neuropathy suggests a central or systemic cause"
     ],
-    [
-     "Management Strategy",
-     "Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive ataxia or neuropathy pointing to a central or systemic disorder",
+      "History of aminoglycoside exposure enabling prevention in others",
+      "Falls with injury from severe imbalance",
+      "Rapidly progressive course suggesting autoimmune or paraneoplastic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing symptoms to non-specific dizziness and missing the diagnosis for years",
-     "Prevent diagnostic or management error"
+    "prognosis": "Peripheral vestibular function rarely recovers, but sustained vestibular rehabilitation improves gaze stability and gait, though oscillopsia and darkness-related unsteadiness often persist to some degree.",
+    "pitfalls": [
+      "Attributing symptoms to non-specific dizziness and missing the diagnosis for years",
+      "Overlooking aminoglycoside ototoxicity as a preventable cause",
+      "Not testing both directions on the head impulse test",
+      "Failing to screen for CANVAS and other central or systemic associations"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "Barany Society Consensus: Diagnostic Criteria for Bilateral Vestibulopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment",
+      "Identify and remove the cause, stopping and avoiding aminoglycoside and other ototoxic drugs and treating any bilateral Meniere disease",
+      "Corticosteroids or immunosuppression where an autoimmune aetiology is identified",
+      "Falls prevention through home-hazard reduction, adequate lighting, walking aids and advice about moving in the dark",
+      "Patient education to avoid situations that rely on vestibular input, such as swimming underwater and night driving",
+      "Audiovestibular and neurology referral to evaluate for a central or systemic cause when ataxia or neuropathy coexists",
+      "Consideration of an investigational vestibular implant in severe refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bilateral vestibulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bilateral-vestibulopathy-real-image",
-   "title": "Bilateral vestibulopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bilateral_vestibulopathy-pathway",
+      "title": "Bilateral vestibulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement or walking",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive ataxia or neuropathy pointing to a central or systemic disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bedside head impulse test and dynamic visual acuity assessment, Video head impulse testing to quantify vestibulo-ocular reflex gain in all canals, Caloric testing to confirm bilateral reduced responses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing symptoms to non-specific dizziness and missing the diagnosis for years"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bilateral vestibulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bilateral_vestibulopathy-matrix",
+      "title": "Bilateral vestibulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal symptoms are unsteadiness worse in the dark or on uneven ground and oscillopsia (bouncing vision) during head movement",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bedside head impulse test and dynamic visual acuity assessment, Video head impulse testing to quantify vestibulo-ocular reflex",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebellar ataxia and degenerative gait disorders, Sensory peripheral neuropathy causing imbalance, CANVAS (cerebellar ataxia,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vestibular rehabilitation exercises promoting gaze stabilisation and sensory substitution as the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing symptoms to non-specific dizziness and missing the diagnosis for years",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bilateral vestibulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bilateral_vestibulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in bilateral vestibulopathy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Bedside head impulse test", "cells": [{"text": "Positive in both horizontal directions"}], "cite": "c1"},
+        {"parameter": "Dynamic visual acuity", "cells": [{"text": "Acuity loss on head shaking"}], "cite": "c1"},
+        {"parameter": "Video head impulse testing", "cells": [{"text": "Quantifies vestibulo-ocular reflex gain in all canals"}], "cite": "c1"},
+        {"parameter": "Caloric testing", "cells": [{"text": "Bilateral reduced responses"}], "cite": "c1"},
+        {"parameter": "Rotational chair testing", "cells": [{"text": "Low-frequency vestibular function"}], "cite": "c1"},
+        {"parameter": "Audiometry", "cells": [{"text": "Associated cochlear involvement"}], "cite": "c1"},
+        {"parameter": "Neurological evaluation and imaging", "cells": [{"text": "When ataxia or neuropathy suggests a central or systemic cause"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_vestibulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for bilateral vestibulopathy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "CANVAS (cerebellar ataxia, neuropathy, vestibular areflexia)", "cells": [{"text": "Vestibular areflexia with cerebellar ataxia and neuropathy"}], "cite": "c1"},
+        {"parameter": "Cerebellar ataxia and degenerative gait disorders", "cells": [{"text": "Diagnosis requires bilaterally reduced vestibulo-ocular reflex gain on quantitative testing"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_vestibulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in bilateral vestibulopathy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Vestibular rehabilitation", "cells": [{"text": "Exercises for gaze stabilisation and sensory substitution"}, {"text": "Mainstay of treatment"}], "cite": "c1"},
+        {"parameter": "Remove the cause", "cells": [{"text": "Stop and avoid aminoglycosides and other ototoxic drugs; treat bilateral Meniere disease"}, {"text": "Where a cause is identified"}], "cite": "c1"},
+        {"parameter": "Immunosuppression", "cells": [{"text": "Corticosteroids or immunosuppression"}, {"text": "Only when an autoimmune aetiology is identified"}], "cite": "c1"},
+        {"parameter": "Falls prevention", "cells": [{"text": "Home hazard reduction, adequate lighting, walking aids and advice about moving in the dark"}, {"text": "Reduces injury risk"}], "cite": "c1"},
+        {"parameter": "Patient education", "cells": [{"text": "Avoid situations relying on vestibular input, such as swimming underwater and night driving"}, {"text": "Safety advice"}], "cite": "c1"},
+        {"parameter": "Neurology and audiovestibular referral", "cells": [{"text": "Evaluate for a central or systemic cause"}, {"text": "When ataxia or neuropathy coexists"}], "cite": "c1"},
+        {"parameter": "Investigational vestibular implant", "cells": [{"text": "Considered in severe refractory disease"}, {"text": "Investigational"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bilateral_vestibulopathy-dx-mgmt",
+      "title": "Diagnosis and management of bilateral vestibulopathy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Unsteadiness worse in the dark or on uneven ground, with oscillopsia and little vertigo", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive ataxia or neuropathy, injurious falls, or rapid progression?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: neurology review and imaging for a central or systemic cause", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Bedside head impulse test in both directions; dynamic visual acuity", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Video head impulse testing, caloric and rotational chair testing; audiometry", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Reduced vestibulo-ocular reflex gain bilaterally on quantitative testing?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Stop ototoxic drugs; check for autoimmune cause; vestibular rehabilitation", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider CANVAS, cerebellar ataxia, bilateral neuritis or functional dizziness", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Peripheral function rarely recovers; rehabilitation improves gait and gaze stability", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

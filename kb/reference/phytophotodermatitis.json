@@ -1,174 +1,463 @@
 {
- "id": "phytophotodermatitis",
- "name": "Phytophotodermatitis",
- "aliases": [
-  "plant-induced phototoxic dermatitis",
-  "meadow dermatitis",
-  "dermatitis bullosa striata pratensis",
-  "margarita photodermatitis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology / Photodermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently exposed to ultraviolet A light",
-   "Common sources include limes and other citrus, celery, parsnip, figs and giant hogweed, and the classic 'margarita' pattern follows handling limes in the sun",
-   "The eruption has a characteristic streaky, bizarre or drip-like configuration that mirrors where the plant juice ran or was smeared on the skin",
-   "There is an acute phase of erythema and blistering within a day or two of exposure, followed by striking, often long-lasting post-inflammatory hyperpigmentation",
-   "Because it is phototoxic, it can affect anyone given sufficient furocoumarin and ultraviolet A, and it does not require prior sensitisation",
-   "Handprint-shaped marks on a child, for example from an adult with lime or fruit juice on their hands, can be mistaken for non-accidental injury or bruising",
-   "Management is largely supportive with skin cleansing, treatment of the acute reaction, sun avoidance of affected areas and reassurance that the pigmentation fades slowly"
+  "id": "phytophotodermatitis",
+  "name": "Phytophotodermatitis",
+  "aliases": [
+    "plant-induced phototoxic dermatitis",
+    "meadow dermatitis",
+    "dermatitis bullosa striata pratensis",
+    "margarita photodermatitis"
   ],
-  "pathophysiology": "Phytophotodermatitis is a phototoxic reaction in which furocoumarins (psoralens) transferred to the skin from plants absorb ultraviolet A radiation and, in the excited state, form covalent adducts with DNA and damage cell membranes, causing direct keratinocyte injury, inflammation and blistering. This is the same class of psoralen-plus-ultraviolet-A photochemical reaction exploited therapeutically in PUVA. Subsequent stimulation of melanocytes produces the characteristic and often prolonged post-inflammatory hyperpigmentation in the exact distribution of plant contact.",
-  "additionalDifferentials": [
-   "Allergic contact dermatitis, including plant (Compositae) allergy",
-   "Photoallergic contact dermatitis",
-   "Chemical or thermal burn",
-   "Bullous drug photosensitivity",
-   "Non-accidental injury or bruising, particularly in children",
-   "Berloque dermatitis from fragrance-borne psoralens"
-  ],
-  "additionalInvestigations": [
-   "A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution",
-   "Recognition of the streaky or handprint pattern that strongly suggests the diagnosis",
-   "Photopatch testing only where a photoallergic contact dermatitis is being considered",
-   "Skin biopsy in atypical cases, showing phototoxic changes",
-   "Consideration of safeguarding assessment when handprint marks in a child raise concern",
-   "Review of medications and topical products for other photosensitisers if the cause is unclear"
-  ],
-  "redFlags": [
-   "Extensive blistering or involvement of a large body surface requiring burns-type care",
-   "Handprint or bruise-like marks in a child prompting a safeguarding assessment",
-   "Systemic photosensitivity suggesting a drug cause or an underlying porphyria",
-   "Ocular or mucosal involvement from plant sap contact"
-  ],
-  "prognosis": "The acute phototoxic reaction settles over days to a couple of weeks, but the resulting post-inflammatory hyperpigmentation is often marked and can take many weeks to months to fade; the condition is entirely preventable by avoiding the combination of furocoumarin contact and sun exposure, and it does not recur without renewed exposure.",
-  "pitfalls": [
-   "Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing genuine concerns",
-   "Labelling it an allergic reaction and mismanaging it, when it is a phototoxic process affecting anyone",
-   "Failing to elicit the plant or fruit exposure history that explains the bizarre pattern",
-   "Not warning patients that the hyperpigmentation will persist long after the initial reaction resolves"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Photodermatology Group guidance on phototoxic and photosensitivity disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the phototoxic reaction",
-   "Enforce photoprotection with sun avoidance, broad-spectrum UVA sunscreen and protective clothing",
-   "Treat the acute erythema and blistering with topical corticosteroids, cool compresses and simple wound care for blisters",
-   "Manage the prolonged post-inflammatory hyperpigmentation with reassurance and continued sun protection, considering topical depigmenting agents in selected cases",
-   "Provide analgesia and symptomatic care during the acute phase",
-   "Educate on prevention by avoiding the combination of furocoumarin contact (limes, citrus, celery, parsnip, figs, giant hogweed) with sunlight",
-   "Consider a safeguarding assessment when handprint-shaped marks in a child raise concern about non-accidental injury"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phytophotodermatitis-pathway",
-   "title": "Phytophotodermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently exposed to ultraviolet A light",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive blistering or involvement of a large body surface requiring burns-type care",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution, Recognition of the streaky or handprint pattern that strongly suggests the diagnosis, Photopatch testing only"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the phototoxic reaction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing genuine concerns"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phytophotodermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "phytophotodermatitis-matrix",
-   "title": "Phytophotodermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology / Photodermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently exposed to ultraviolet A light",
+      "Common sources include limes and other citrus, celery, parsnip, figs and giant hogweed, and the classic 'margarita' pattern follows handling limes in the sun",
+      "The eruption has a characteristic streaky, bizarre or drip-like configuration that mirrors where the plant juice ran or was smeared on the skin",
+      "There is an acute phase of erythema and blistering within a day or two of exposure, followed by striking, often long-lasting post-inflammatory hyperpigmentation",
+      "Because it is phototoxic, it can affect anyone given sufficient furocoumarin and ultraviolet A, and it does not require prior sensitisation",
+      "Handprint-shaped marks on a child, for example from an adult with lime or fruit juice on their hands, can be mistaken for non-accidental injury or bruising",
+      "Management is largely supportive with skin cleansing, treatment of the acute reaction, sun avoidance of affected areas and reassurance that the pigmentation fades slowly"
     ],
-    [
-     "Key Investigations",
-     "A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution, Recognition of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phytophotodermatitis is a phototoxic reaction in which furocoumarins (psoralens) transferred to the skin from plants absorb ultraviolet A radiation and, in the excited state, form covalent adducts with DNA and damage cell membranes, causing direct keratinocyte injury, inflammation and blistering. This is the same class of psoralen-plus-ultraviolet-A photochemical reaction exploited therapeutically in PUVA. Subsequent stimulation of melanocytes produces the characteristic and often prolonged post-inflammatory hyperpigmentation in the exact distribution of plant contact.",
+    "additionalDifferentials": [
+      "Allergic contact dermatitis, including plant (Compositae) allergy",
+      "Photoallergic contact dermatitis",
+      "Chemical or thermal burn",
+      "Bullous drug photosensitivity",
+      "Non-accidental injury or bruising, particularly in children",
+      "Berloque dermatitis from fragrance-borne psoralens"
     ],
-    [
-     "Primary Differentials",
-     "Allergic contact dermatitis, including plant (Compositae) allergy, Photoallergic contact dermatitis, Chemical or thermal burn",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution",
+      "Recognition of the streaky or handprint pattern that strongly suggests the diagnosis",
+      "Photopatch testing only where a photoallergic contact dermatitis is being considered",
+      "Skin biopsy in atypical cases, showing phototoxic changes",
+      "Consideration of safeguarding assessment when handprint marks in a child raise concern",
+      "Review of medications and topical products for other photosensitisers if the cause is unclear"
     ],
-    [
-     "Management Strategy",
-     "Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive blistering or involvement of a large body surface requiring burns-type care",
+      "Handprint or bruise-like marks in a child prompting a safeguarding assessment",
+      "Systemic photosensitivity suggesting a drug cause or an underlying porphyria",
+      "Ocular or mucosal involvement from plant sap contact"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing",
-     "Prevent diagnostic or management error"
+    "prognosis": "The acute phototoxic reaction settles over days to a couple of weeks, but the resulting post-inflammatory hyperpigmentation is often marked and can take many weeks to months to fade; the condition is entirely preventable by avoiding the combination of furocoumarin contact and sun exposure, and it does not recur without renewed exposure.",
+    "pitfalls": [
+      "Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing genuine concerns",
+      "Labelling it an allergic reaction and mismanaging it, when it is a phototoxic process affecting anyone",
+      "Failing to elicit the plant or fruit exposure history that explains the bizarre pattern",
+      "Not warning patients that the hyperpigmentation will persist long after the initial reaction resolves"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Photodermatology Group guidance on phototoxic and photosensitivity disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the phototoxic reaction",
+      "Enforce photoprotection with sun avoidance, broad-spectrum UVA sunscreen and protective clothing",
+      "Treat the acute erythema and blistering with topical corticosteroids, cool compresses and simple wound care for blisters",
+      "Manage the prolonged post-inflammatory hyperpigmentation with reassurance and continued sun protection, considering topical depigmenting agents in selected cases",
+      "Provide analgesia and symptomatic care during the acute phase",
+      "Educate on prevention by avoiding the combination of furocoumarin contact (limes, citrus, celery, parsnip, figs, giant hogweed) with sunlight",
+      "Consider a safeguarding assessment when handprint-shaped marks in a child raise concern about non-accidental injury"
     ]
-   ],
-   "caption": "Overview comparison matrix for phytophotodermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phytophotodermatitis-real-image",
-   "title": "Phytophotodermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "phytophotodermatitis-pathway",
+      "title": "Phytophotodermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently exposed to ultraviolet A light",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive blistering or involvement of a large body surface requiring burns-type care",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution, Recognition of the streaky or handprint pattern that strongly suggests the diagnosis, Photopatch testing only"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the phototoxic reaction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing genuine concerns"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phytophotodermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phytophotodermatitis-matrix",
+      "title": "Phytophotodermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A phototoxic (not allergic) reaction that occurs when skin contaminated with plant furocoumarins (psoralens) is subsequently",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "A careful history of plant, fruit or vegetable contact followed by sun exposure, and the site distribution, Recognition of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Allergic contact dermatitis, including plant (Compositae) allergy, Photoallergic contact dermatitis, Chemical or thermal burn",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Wash residual plant furocoumarin from the skin promptly and remove the affected area from further sun exposure to halt the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the streaky pigmentation as bruising and raising unwarranted safeguarding concerns, or conversely dismissing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phytophotodermatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phytophotodermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful history of plant, fruit or vegetable contact followed by sun exposure",
+          "cells": [
+            {
+              "text": "Plant contact before sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognition of the streaky or handprint pattern",
+          "cells": [
+            {
+              "text": "Pattern that strongly suggests the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photopatch testing",
+          "cells": [
+            {
+              "text": "Only where photoallergic contact dermatitis is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Phototoxic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications and topical products",
+          "cells": [
+            {
+              "text": "Other photosensitisers, if the cause is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phytophotodermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-accidental injury or bruising in children",
+          "cells": [
+            {
+              "text": "Handprint or bruise-like marks in a child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Berloque dermatitis",
+          "cells": [
+            {
+              "text": "Fragrance-borne psoralens"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phytophotodermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wash off the plant furocoumarin",
+          "cells": [
+            {
+              "text": "Prompt washing; remove the area from further sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, broad-spectrum UVA sunscreen and protective clothing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema and blisters",
+          "cells": [
+            {
+              "text": "Topical corticosteroids, cool compresses and simple wound care for blisters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory hyperpigmentation",
+          "cells": [
+            {
+              "text": "Reassurance and continued sun protection; topical depigmenting agents considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Symptomatic care during the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Avoid combining furocoumarin-containing plants such as limes, celery and giant hogweed with sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding",
+          "cells": [
+            {
+              "text": "Assessment when handprint-shaped marks in a child raise concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phytophotodermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Phytophotodermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Streaky or handprint pigmentation after citrus or celery contact, then sun exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (extensive blistering, handprint marks in a child, systemic photosensitivity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Burns-type care for extensive blistering; safeguarding assessment for a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plant contact and sun history; streaky or handprint pattern; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does plant contact before sun exposure fit the streaky pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic contact dermatitis, photoallergy, burns or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wash off the plant furocoumarin promptly and avoid further sun on the area",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enforce photoprotection with sun avoidance and broad-spectrum UVA sunscreen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids, cool compresses and simple wound care for blisters",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassurance for post-inflammatory hyperpigmentation, with continued sun protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider a safeguarding assessment when handprint marks in a child raise concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute reaction settles in days to weeks, but pigmentation can take months to fade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

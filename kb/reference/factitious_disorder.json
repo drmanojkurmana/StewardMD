@@ -1,176 +1,472 @@
 {
- "id": "factitious_disorder",
- "name": "Factitious Disorder",
- "aliases": [
-  "Munchausen syndrome",
-  "Factitious disorder imposed on self"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan and Sadock's Synopsis of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the absence of obvious external reward.",
-   "Motivation is assumption of the sick role, an internal psychological drive, which distinguishes it from malingering, where the gain is external such as money, drugs, or avoidance of duties.",
-   "Munchausen syndrome denotes a severe chronic form with pathological lying (pseudologia fantastica), travelling between hospitals (peregrination), and repeated presentations.",
-   "Factitious disorder imposed on another, formerly Munchausen by proxy, is a form of abuse and a safeguarding emergency.",
-   "Methods include feigning symptoms, tampering with tests or charts, self-injecting or contaminating wounds, manipulating temperature charts, and inducing hypoglycaemia.",
-   "Often associated with a healthcare background or knowledge and with personality disorder, particularly borderline traits.",
-   "Diagnosis rests on demonstrating deception, which is difficult and requires objective evidence rather than merely the absence of organic disease.",
-   "Confrontation is often counterproductive, and a non-punitive, coordinated, harm-minimisation approach is preferred."
+  "id": "factitious_disorder",
+  "name": "Factitious Disorder",
+  "aliases": [
+    "Munchausen syndrome",
+    "Factitious disorder imposed on self"
   ],
-  "pathophysiology": "Factitious disorder is a psychiatric condition in which the drive to occupy the sick role motivates deliberate simulation or induction of illness. It is not fully explained biologically; psychodynamic formulations emphasise early experiences of illness, trauma, or deprivation, disturbed attachment, and a need for care, control, or attention within the medical system. It is strongly associated with personality pathology, particularly borderline and related traits, and with prior exposure to healthcare environments. The behaviour is intentional, unlike somatic symptom disorder, but the underlying motivation is regarded as a compulsive need beyond straightforward voluntary control, which differentiates it from purely instrumental malingering.",
-  "additionalDifferentials": [
-   "Malingering with an external incentive",
-   "Somatic symptom disorder or illness anxiety disorder",
-   "Conversion (functional neurological) disorder",
-   "Genuine but elusive organic disease",
-   "Substance use disorder where drug-seeking predominates",
-   "Personality disorder presentations",
-   "Delusional disorder, somatic type"
-  ],
-  "additionalInvestigations": [
-   "Careful objective documentation and corroboration of the clinical course",
-   "Review and collation of records from multiple institutions within appropriate governance",
-   "Targeted tests to detect induced pathology, such as toxicology and insulin and C-peptide assays in factitious hypoglycaemia",
-   "Consistency checks comparing charted and directly measured observations within governance frameworks",
-   "Psychiatric assessment including personality assessment",
-   "Safeguarding assessment where the disorder is imposed on another",
-   "Multidisciplinary case conference"
-  ],
-  "redFlags": [
-   "Factitious disorder imposed on another child or dependent adult, a safeguarding emergency",
-   "Self-induced life-threatening pathology such as sepsis, hypoglycaemia, or bleeding",
-   "Escalating invasive investigation or surgery driven by fabricated symptoms",
-   "Access to means of self-harm or symptom induction such as medications or syringes"
-  ],
-  "prognosis": "The chronic Munchausen form has a poor prognosis with repeated presentations and iatrogenic harm, whereas milder or situational cases and those engaging with psychiatric care may do better; overall outcomes are limited by frequent disengagement.",
-  "pitfalls": [
-   "Diagnosing factitious disorder merely from the absence of organic findings",
-   "Premature or aggressive confrontation prompting disengagement and escalation",
-   "Missing factitious disorder imposed on another and failing to safeguard",
-   "Iatrogenic harm from repeated invasive testing and surgery"
-  ],
-  "references": [
-   "Kaplan and Sadock's Synopsis of Psychiatry",
-   "New Oxford Textbook of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm",
-   "Coordination of care through a single lead clinician with an agreed care plan to minimise reinforcement of the sick role and limit hospital-hopping",
-   "Psychiatric assessment and psychotherapy addressing underlying personality pathology and borderline traits",
-   "Pharmacological treatment of comorbid depression or anxiety where present",
-   "Careful objective documentation and collation of records across institutions within appropriate governance",
-   "Safeguarding referral treated as an emergency where the disorder is imposed on another",
-   "Liaison psychiatry involvement with a graded, supportive approach to disclosure and management of engagement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "factitious_disorder-pathway",
-   "title": "Factitious Disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the absence of obvious external reward.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Factitious disorder imposed on another child or dependent adult, a safeguarding emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful objective documentation and corroboration of the clinical course, Review and collation of records from multiple institutions within appropriate governance, Targeted tests to detect induced pathology, such as"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing factitious disorder merely from the absence of organic findings"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of factitious disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "factitious_disorder-matrix",
-   "title": "Factitious Disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan and Sadock's Synopsis of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the absence of obvious external reward.",
+      "Motivation is assumption of the sick role, an internal psychological drive, which distinguishes it from malingering, where the gain is external such as money, drugs, or avoidance of duties.",
+      "Munchausen syndrome denotes a severe chronic form with pathological lying (pseudologia fantastica), travelling between hospitals (peregrination), and repeated presentations.",
+      "Factitious disorder imposed on another, formerly Munchausen by proxy, is a form of abuse and a safeguarding emergency.",
+      "Methods include feigning symptoms, tampering with tests or charts, self-injecting or contaminating wounds, manipulating temperature charts, and inducing hypoglycaemia.",
+      "Often associated with a healthcare background or knowledge and with personality disorder, particularly borderline traits.",
+      "Diagnosis rests on demonstrating deception, which is difficult and requires objective evidence rather than merely the absence of organic disease.",
+      "Confrontation is often counterproductive, and a non-punitive, coordinated, harm-minimisation approach is preferred."
     ],
-    [
-     "Key Investigations",
-     "Careful objective documentation and corroboration of the clinical course, Review and collation of records from multiple",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Factitious disorder is a psychiatric condition in which the drive to occupy the sick role motivates deliberate simulation or induction of illness. It is not fully explained biologically; psychodynamic formulations emphasise early experiences of illness, trauma, or deprivation, disturbed attachment, and a need for care, control, or attention within the medical system. It is strongly associated with personality pathology, particularly borderline and related traits, and with prior exposure to healthcare environments. The behaviour is intentional, unlike somatic symptom disorder, but the underlying motivation is regarded as a compulsive need beyond straightforward voluntary control, which differentiates it from purely instrumental malingering.",
+    "additionalDifferentials": [
+      "Malingering with an external incentive",
+      "Somatic symptom disorder or illness anxiety disorder",
+      "Conversion (functional neurological) disorder",
+      "Genuine but elusive organic disease",
+      "Substance use disorder where drug-seeking predominates",
+      "Personality disorder presentations",
+      "Delusional disorder, somatic type"
     ],
-    [
-     "Primary Differentials",
-     "Malingering with an external incentive, Somatic symptom disorder or illness anxiety disorder, Conversion (functional",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful objective documentation and corroboration of the clinical course",
+      "Review and collation of records from multiple institutions within appropriate governance",
+      "Targeted tests to detect induced pathology, such as toxicology and insulin and C-peptide assays in factitious hypoglycaemia",
+      "Consistency checks comparing charted and directly measured observations within governance frameworks",
+      "Psychiatric assessment including personality assessment",
+      "Safeguarding assessment where the disorder is imposed on another",
+      "Multidisciplinary case conference"
     ],
-    [
-     "Management Strategy",
-     "Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm",
-     "Core treatment modality"
+    "redFlags": [
+      "Factitious disorder imposed on another child or dependent adult, a safeguarding emergency",
+      "Self-induced life-threatening pathology such as sepsis, hypoglycaemia, or bleeding",
+      "Escalating invasive investigation or surgery driven by fabricated symptoms",
+      "Access to means of self-harm or symptom induction such as medications or syringes"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing factitious disorder merely from the absence of organic findings",
-     "Prevent diagnostic or management error"
+    "prognosis": "The chronic Munchausen form has a poor prognosis with repeated presentations and iatrogenic harm, whereas milder or situational cases and those engaging with psychiatric care may do better; overall outcomes are limited by frequent disengagement.",
+    "pitfalls": [
+      "Diagnosing factitious disorder merely from the absence of organic findings",
+      "Premature or aggressive confrontation prompting disengagement and escalation",
+      "Missing factitious disorder imposed on another and failing to safeguard",
+      "Iatrogenic harm from repeated invasive testing and surgery"
+    ],
+    "references": [
+      "Kaplan and Sadock's Synopsis of Psychiatry",
+      "New Oxford Textbook of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm",
+      "Coordination of care through a single lead clinician with an agreed care plan to minimise reinforcement of the sick role and limit hospital-hopping",
+      "Psychiatric assessment and psychotherapy addressing underlying personality pathology and borderline traits",
+      "Pharmacological treatment of comorbid depression or anxiety where present",
+      "Careful objective documentation and collation of records across institutions within appropriate governance",
+      "Safeguarding referral treated as an emergency where the disorder is imposed on another",
+      "Liaison psychiatry involvement with a graded, supportive approach to disclosure and management of engagement"
     ]
-   ],
-   "caption": "Overview comparison matrix for factitious disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "factitious-disorder-real-image",
-   "title": "Factitious Disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "factitious_disorder-pathway",
+      "title": "Factitious Disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the absence of obvious external reward.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Factitious disorder imposed on another child or dependent adult, a safeguarding emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful objective documentation and corroboration of the clinical course, Review and collation of records from multiple institutions within appropriate governance, Targeted tests to detect induced pathology, such as"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing factitious disorder merely from the absence of organic findings"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of factitious disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "factitious_disorder-matrix",
+      "title": "Factitious Disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Intentional falsification, induction, or exaggeration of physical or psychological signs and symptoms, with deception, in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful objective documentation and corroboration of the clinical course, Review and collation of records from multiple",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malingering with an external incentive, Somatic symptom disorder or illness anxiety disorder, Conversion (functional",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Empathic, non-punitive approach that avoids unnecessary investigations and iatrogenic harm",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing factitious disorder merely from the absence of organic findings",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for factitious disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan and Sadock's Synopsis of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factitious_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Objective documentation and corroboration of the course",
+          "cells": [
+            {
+              "text": "Verifies the clinical course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collation of records from multiple institutions",
+          "cells": [
+            {
+              "text": "Within appropriate governance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted tests for induced pathology",
+          "cells": [
+            {
+              "text": "Toxicology; insulin and C-peptide in factitious hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consistency checks of charted and measured observations",
+          "cells": [
+            {
+              "text": "Within governance frameworks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment including personality assessment",
+          "cells": [
+            {
+              "text": "Underlying personality pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding assessment",
+          "cells": [
+            {
+              "text": "Where the disorder is imposed on another"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factitious_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malingering with an external incentive",
+          "cells": [
+            {
+              "text": "Driven by external gain, not the internal drive to assume the sick role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Personality disorder presentations",
+          "cells": [
+            {
+              "text": "Often associated with personality disorder, particularly borderline traits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use disorder",
+          "cells": [
+            {
+              "text": "Drug-seeking predominates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factitious_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empathic, non-punitive approach",
+          "cells": [
+            {
+              "text": "Avoids unnecessary investigation and iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single lead clinician with an agreed care plan",
+          "cells": [
+            {
+              "text": "Limits reinforcement of the sick role and hospital-hopping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment and psychotherapy",
+          "cells": [
+            {
+              "text": "Underlying personality pathology and borderline traits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of comorbid depression or anxiety",
+          "cells": [
+            {
+              "text": "Pharmacological treatment where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Objective documentation across institutions",
+          "cells": [
+            {
+              "text": "Within appropriate governance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding referral as an emergency",
+          "cells": [
+            {
+              "text": "Where the disorder is imposed on another"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liaison psychiatry",
+          "cells": [
+            {
+              "text": "Graded, supportive approach to disclosure and engagement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factitious_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Factitious Disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inconsistent symptoms or signs with suspected deception and no organic explanation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (imposed on a child or dependent adult, life-threatening self-induced illness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Safeguarding referral as an emergency where the disorder is imposed on another",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Objective corroboration of the course; cross-institution records; targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Deception demonstrated by objective evidence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Do not diagnose from absent organic findings; consider somatic or functional disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empathic, non-punitive care through one lead clinician",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit unnecessary investigation and hospital-hopping",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychiatric assessment and psychotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid depression or anxiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic Munchausen form has a poor prognosis; milder or situational cases do better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

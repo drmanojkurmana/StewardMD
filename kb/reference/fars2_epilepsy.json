@@ -1,176 +1,474 @@
 {
- "id": "fars2_epilepsy",
- "name": "FARS2-related epilepsy and mitochondrial encephalopathy",
- "aliases": [
-  "FARS2",
-  "COXPD14",
-  "SPG77"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Metabolic medicine / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Mitochondrial medicine and neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial phenylalanyl-tRNA synthetase.",
-   "Two broad phenotypes are recognised: a severe early-infantile epileptic (mitochondrial) encephalopathy and a milder later-onset spastic paraplegia designated SPG77.",
-   "The encephalopathic form presents with refractory seizures, hypotonia, developmental arrest or regression and frequently lactic acidosis in early infancy.",
-   "Blood and cerebrospinal fluid lactate are commonly raised, reflecting a combined oxidative phosphorylation deficiency (combined oxidative phosphorylation deficiency 14).",
-   "Muscle or fibroblast studies may show a combined deficiency of several respiratory chain complexes rather than an isolated single-complex defect.",
-   "Brain MRI often shows progressive cerebral atrophy with variable white-matter, thalamic or brainstem signal change.",
-   "The SPG77 phenotype presents in childhood with slowly progressive lower-limb spasticity, sometimes with ataxia and milder cognitive involvement.",
-   "Diagnosis rests on molecular genetic testing; enzyme, biochemical and imaging findings are supportive but non-specific."
+  "id": "fars2_epilepsy",
+  "name": "FARS2-related epilepsy and mitochondrial encephalopathy",
+  "aliases": [
+    "FARS2",
+    "COXPD14",
+    "SPG77"
   ],
-  "pathophysiology": "FARS2 on chromosome 6p25.1 encodes the mitochondrial phenylalanyl-tRNA synthetase (mtPheRS), a nuclear-encoded enzyme imported into the mitochondrion where it charges (aminoacylates) mitochondrial tRNA-Phe with phenylalanine, an obligatory step in mitochondrial protein synthesis. Because the mitochondrial ribosome translates the thirteen mtDNA-encoded subunits of the oxidative phosphorylation machinery, biallelic loss-of-function or hypomorphic FARS2 variants impair mitochondrial translation and produce a combined deficiency of multiple respiratory chain complexes (combined oxidative phosphorylation deficiency 14). The resulting bioenergetic failure is most damaging to the highly metabolically active developing brain, giving rise either to a devastating neonatal or early-infantile epileptic encephalopathy with lactic acidosis, or, where residual enzyme activity is greater, to a comparatively mild childhood-onset spastic paraplegia (SPG77).",
-  "additionalDifferentials": [
-   "Other mitochondrial aminoacyl-tRNA synthetase disorders (for example AARS2, EARS2, DARS2, RARS2, NARS2)",
-   "Alpers-Huttenlocher syndrome and other POLG-related disorders",
-   "Leigh syndrome and Leigh-like disease from other causes",
-   "Pyridoxine- and pyridoxal-phosphate-dependent epilepsies",
-   "Other early-infantile epileptic and developmental encephalopathies",
-   "For the SPG77 phenotype, other hereditary spastic paraplegias",
-   "Neonatal or infantile mitochondrial encephalomyopathies with lactic acidosis"
-  ],
-  "additionalInvestigations": [
-   "Blood and cerebrospinal fluid lactate with paired pyruvate",
-   "Plasma amino acids and urine organic acids",
-   "Electroencephalography, which may show an epileptic encephalopathy pattern",
-   "Brain MRI with MR spectroscopy",
-   "Muscle biopsy with respiratory chain (complex) enzyme assays",
-   "Molecular genetic testing (FARS2 sequencing, gene panel or exome)",
-   "Fibroblast studies of mitochondrial translation where available"
-  ],
-  "redFlags": [
-   "Refractory seizures or status epilepticus",
-   "Rapid developmental regression",
-   "Worsening lactic acidosis",
-   "Respiratory insufficiency or feeding failure"
-  ],
-  "prognosis": "The early-infantile epileptic encephalopathy carries a poor prognosis, often with death in infancy or early childhood. The SPG77 phenotype is slowly progressive and compatible with prolonged survival.",
-  "pitfalls": [
-   "A normal lactate does not exclude the diagnosis.",
-   "The wide phenotypic spectrum, from severe encephalopathy to SPG77, leads to under-recognition.",
-   "The spastic paraplegia phenotype can be mislabelled as cerebral palsy.",
-   "Imaging and enzyme findings overlap with other mitochondrial disorders, so genetic confirmation is essential."
-  ],
-  "references": [
-   "Standard textbooks of mitochondrial medicine",
-   "Neurogenetics reference texts",
-   "Peer-reviewed reviews of aminoacyl-tRNA synthetase disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial hepatotoxicity risk",
-   "Provide supportive metabolic care including management of lactic acidosis and consideration of a mitochondrial vitamin and cofactor cocktail",
-   "Manage spasticity in the SPG77 phenotype with antispasticity agents such as baclofen alongside physiotherapy and orthoses",
-   "Support development, nutrition, feeding and respiratory function through multidisciplinary rehabilitation",
-   "Involve neurology, metabolic medicine and palliative care given the poor prognosis of the early-infantile encephalopathic form",
-   "Offer genetic counselling and family testing given autosomal recessive FARS2 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fars2_epilepsy-pathway",
-   "title": "FARS2-related epilepsy and mitochondrial encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial phenylalanyl-tRNA synthetase.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and cerebrospinal fluid lactate with paired pyruvate, Plasma amino acids and urine organic acids, Electroencephalography, which may show an epileptic encephalopathy pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial hepatotoxicity risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A normal lactate does not exclude the diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fars2-related epilepsy and mitochondrial encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "fars2_epilepsy-matrix",
-   "title": "FARS2-related epilepsy and mitochondrial encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Metabolic medicine / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mitochondrial medicine and neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial phenylalanyl-tRNA synthetase.",
+      "Two broad phenotypes are recognised: a severe early-infantile epileptic (mitochondrial) encephalopathy and a milder later-onset spastic paraplegia designated SPG77.",
+      "The encephalopathic form presents with refractory seizures, hypotonia, developmental arrest or regression and frequently lactic acidosis in early infancy.",
+      "Blood and cerebrospinal fluid lactate are commonly raised, reflecting a combined oxidative phosphorylation deficiency (combined oxidative phosphorylation deficiency 14).",
+      "Muscle or fibroblast studies may show a combined deficiency of several respiratory chain complexes rather than an isolated single-complex defect.",
+      "Brain MRI often shows progressive cerebral atrophy with variable white-matter, thalamic or brainstem signal change.",
+      "The SPG77 phenotype presents in childhood with slowly progressive lower-limb spasticity, sometimes with ataxia and milder cognitive involvement.",
+      "Diagnosis rests on molecular genetic testing; enzyme, biochemical and imaging findings are supportive but non-specific."
     ],
-    [
-     "Key Investigations",
-     "Blood and cerebrospinal fluid lactate with paired pyruvate, Plasma amino acids and urine organic acids, Electroencephalography,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FARS2 on chromosome 6p25.1 encodes the mitochondrial phenylalanyl-tRNA synthetase (mtPheRS), a nuclear-encoded enzyme imported into the mitochondrion where it charges (aminoacylates) mitochondrial tRNA-Phe with phenylalanine, an obligatory step in mitochondrial protein synthesis. Because the mitochondrial ribosome translates the thirteen mtDNA-encoded subunits of the oxidative phosphorylation machinery, biallelic loss-of-function or hypomorphic FARS2 variants impair mitochondrial translation and produce a combined deficiency of multiple respiratory chain complexes (combined oxidative phosphorylation deficiency 14). The resulting bioenergetic failure is most damaging to the highly metabolically active developing brain, giving rise either to a devastating neonatal or early-infantile epileptic encephalopathy with lactic acidosis, or, where residual enzyme activity is greater, to a comparatively mild childhood-onset spastic paraplegia (SPG77).",
+    "additionalDifferentials": [
+      "Other mitochondrial aminoacyl-tRNA synthetase disorders (for example AARS2, EARS2, DARS2, RARS2, NARS2)",
+      "Alpers-Huttenlocher syndrome and other POLG-related disorders",
+      "Leigh syndrome and Leigh-like disease from other causes",
+      "Pyridoxine- and pyridoxal-phosphate-dependent epilepsies",
+      "Other early-infantile epileptic and developmental encephalopathies",
+      "For the SPG77 phenotype, other hereditary spastic paraplegias",
+      "Neonatal or infantile mitochondrial encephalomyopathies with lactic acidosis"
     ],
-    [
-     "Primary Differentials",
-     "Other mitochondrial aminoacyl-tRNA synthetase disorders (for example AARS2, EARS2, DARS2, RARS2, NARS2), Alpers-Huttenlocher",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and cerebrospinal fluid lactate with paired pyruvate",
+      "Plasma amino acids and urine organic acids",
+      "Electroencephalography, which may show an epileptic encephalopathy pattern",
+      "Brain MRI with MR spectroscopy",
+      "Muscle biopsy with respiratory chain (complex) enzyme assays",
+      "Molecular genetic testing (FARS2 sequencing, gene panel or exome)",
+      "Fibroblast studies of mitochondrial translation where available"
     ],
-    [
-     "Management Strategy",
-     "Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory seizures or status epilepticus",
+      "Rapid developmental regression",
+      "Worsening lactic acidosis",
+      "Respiratory insufficiency or feeding failure"
     ],
-    [
-     "Clinical Pitfall",
-     "A normal lactate does not exclude the diagnosis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The early-infantile epileptic encephalopathy carries a poor prognosis, often with death in infancy or early childhood. The SPG77 phenotype is slowly progressive and compatible with prolonged survival.",
+    "pitfalls": [
+      "A normal lactate does not exclude the diagnosis.",
+      "The wide phenotypic spectrum, from severe encephalopathy to SPG77, leads to under-recognition.",
+      "The spastic paraplegia phenotype can be mislabelled as cerebral palsy.",
+      "Imaging and enzyme findings overlap with other mitochondrial disorders, so genetic confirmation is essential."
+    ],
+    "references": [
+      "Standard textbooks of mitochondrial medicine",
+      "Neurogenetics reference texts",
+      "Peer-reviewed reviews of aminoacyl-tRNA synthetase disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial hepatotoxicity risk",
+      "Provide supportive metabolic care including management of lactic acidosis and consideration of a mitochondrial vitamin and cofactor cocktail",
+      "Manage spasticity in the SPG77 phenotype with antispasticity agents such as baclofen alongside physiotherapy and orthoses",
+      "Support development, nutrition, feeding and respiratory function through multidisciplinary rehabilitation",
+      "Involve neurology, metabolic medicine and palliative care given the poor prognosis of the early-infantile encephalopathic form",
+      "Offer genetic counselling and family testing given autosomal recessive FARS2 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for fars2-related epilepsy and mitochondrial encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fars2-epilepsy-real-image",
-   "title": "FARS2-related epilepsy and mitochondrial encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "fars2_epilepsy-pathway",
+      "title": "FARS2-related epilepsy and mitochondrial encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial phenylalanyl-tRNA synthetase.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and cerebrospinal fluid lactate with paired pyruvate, Plasma amino acids and urine organic acids, Electroencephalography, which may show an epileptic encephalopathy pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial hepatotoxicity risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A normal lactate does not exclude the diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fars2-related epilepsy and mitochondrial encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fars2_epilepsy-matrix",
+      "title": "FARS2-related epilepsy and mitochondrial encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of mitochondrial translation caused by biallelic FARS2 variants, which encode mitochondrial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and cerebrospinal fluid lactate with paired pyruvate, Plasma amino acids and urine organic acids, Electroencephalography,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other mitochondrial aminoacyl-tRNA synthetase disorders (for example AARS2, EARS2, DARS2, RARS2, NARS2), Alpers-Huttenlocher",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control refractory seizures with antiseizure medications, generally avoiding sodium valproate because of the mitochondrial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal lactate does not exclude the diagnosis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fars2-related epilepsy and mitochondrial encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine and neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fars2_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate with paired pyruvate",
+          "cells": [
+            {
+              "text": "Raised lactate; combined oxidative phosphorylation deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Epileptic encephalopathy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with MR spectroscopy",
+          "cells": [
+            {
+              "text": "Atrophy and white-matter, thalamic or brainstem change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with respiratory chain enzyme assays",
+          "cells": [
+            {
+              "text": "Combined complex deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FARS2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant; genetic diagnosis is required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fars2_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other aminoacyl-tRNA synthetase mitochondrial disorders (AARS2, EARS2, DARS2, RARS2, NARS2)",
+          "cells": [
+            {
+              "text": "Share the mitochondrial translation mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine-dependent epilepsies",
+          "cells": [
+            {
+              "text": "Listed in the differential; a treatable cause to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegias",
+          "cells": [
+            {
+              "text": "For the SPG77 phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fars2_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication, avoiding sodium valproate",
+          "cells": [
+            {
+              "text": "Refractory seizures; valproate avoided because of mitochondrial hepatotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial cofactor and vitamin cocktail",
+          "cells": [
+            {
+              "text": "Supportive metabolic care with lactic acidosis management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agents and physiotherapy",
+          "cells": [
+            {
+              "text": "SPG77 phenotype; baclofen with orthoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Development, nutrition, feeding and respiratory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology, metabolic and palliative care",
+          "cells": [
+            {
+              "text": "Poor prognosis of the early-infantile form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fars2_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of FARS2-related epilepsy and mitochondrial encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Refractory seizures, hypotonia or regression in infancy with raised lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (status epilepticus, rapid regression, worsening acidosis, respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat seizures and acidosis; involve neurology and metabolic medicine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate; amino acids; EEG; MRI with spectroscopy; FARS2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic FARS2 variants confirmed by molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other mitochondrial or early-infantile epileptic encephalopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication, avoiding sodium valproate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mitochondrial cofactor and vitamin cocktail with lactate management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baclofen and physiotherapy for SPG77 spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation for development and feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early-infantile form carries a poor prognosis; SPG77 progresses slowly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

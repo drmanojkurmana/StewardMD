@@ -1,174 +1,491 @@
 {
- "id": "osteogenesis_imperfecta_type_v",
- "name": "Osteogenesis imperfecta type V (IFITM5)",
- "aliases": [
-  "OI type V",
-  "IFITM5-related osteogenesis imperfecta",
-  "OI with hyperplastic callus",
-  "BRIL-related brittle bone disease"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5 (encoding BRIL), not by a collagen defect",
-   "Almost all cases share the same recurrent variant, creating a distinctive and highly consistent phenotype",
-   "Three characteristic features distinguish it: exuberant hyperplastic callus after fractures or surgery, calcification of the forearm interosseous membrane, and a dense radio-opaque metaphyseal band adjacent to the growth plate",
-   "Interosseous membrane calcification restricts forearm rotation, limiting pronation and supination",
-   "Sclerae are typically normal (not blue) and dentinogenesis imperfecta is absent, unlike classic collagen-related OI",
-   "Hyperplastic callus can be large, warm, and painful, mimicking osteosarcoma or infection and prompting unnecessary biopsy",
-   "Management mirrors other OI with fracture care, physiotherapy, and antiresorptive bisphosphonate therapy for skeletal fragility, while avoiding misdiagnosis of the exuberant callus"
+  "id": "osteogenesis_imperfecta_type_v",
+  "name": "Osteogenesis imperfecta type V (IFITM5)",
+  "aliases": [
+    "OI type V",
+    "IFITM5-related osteogenesis imperfecta",
+    "OI with hyperplastic callus",
+    "BRIL-related brittle bone disease"
   ],
-  "pathophysiology": "OI type V is caused by a recurrent point mutation in the 5' untranslated region of IFITM5, which creates a new upstream start codon and adds five amino acids to the BRIL protein expressed by osteoblasts. BRIL participates in bone mineralisation, and the mutant protein disturbs normal osteoblast function and matrix mineralisation, producing brittle bones without the type I collagen abnormality of classic OI. The altered bone biology manifests as an exaggerated reparative response, generating hyperplastic callus, and abnormal soft-tissue mineralisation such as calcification of the forearm interosseous membrane and a characteristic dense metaphyseal band. Bone histology shows a distinctive mesh-like (irregular) lamellar pattern. The result is increased fracture risk with these unique radiological and clinical hallmarks.",
-  "additionalDifferentials": [
-   "Collagen-related osteogenesis imperfecta (types I-IV)",
-   "Osteosarcoma or other bone tumour mimicked by hyperplastic callus",
-   "Osteomyelitis mimicking an inflamed callus",
-   "Non-accidental injury in a child with multiple fractures",
-   "Other rare non-collagen OI subtypes (e.g. SERPINF1-related)",
-   "Fibrous dysplasia"
-  ],
-  "additionalInvestigations": [
-   "Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band",
-   "Assessment of forearm pronation and supination for restriction",
-   "Bone densitometry to quantify skeletal fragility",
-   "Examination of sclerae and dentition, characteristically normal in this subtype",
-   "Bone histology showing the irregular mesh-like lamellar pattern where biopsy is performed",
-   "Targeted IFITM5 mutation testing to confirm the recurrent variant"
-  ],
-  "redFlags": [
-   "A rapidly enlarging, warm, painful callus raising concern for malignancy or infection before OI type V is recognised",
-   "Recurrent fractures with progressive deformity",
-   "Fixed loss of forearm rotation from interosseous calcification",
-   "Spinal fractures or scoliosis compromising function"
-  ],
-  "prognosis": "Skeletal fragility is lifelong but generally responsive to fracture management and antiresorptive therapy; forearm rotation may remain limited, and the main avoidable harm comes from misdiagnosing hyperplastic callus as tumour.",
-  "pitfalls": [
-   "Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus",
-   "Expecting blue sclerae or dentinogenesis imperfecta and discounting OI when they are absent",
-   "Overlooking the diagnostic triad of callus, interosseous calcification, and metaphyseal band on imaging",
-   "Failing to test IFITM5 because collagen gene studies are normal"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
-   "GeneReviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency",
-   "Standard orthopaedic fracture management with awareness that fractures and surgery can provoke exuberant hyperplastic callus",
-   "Recognition of hyperplastic callus as a feature of the disease rather than osteosarcoma or infection, avoiding unnecessary biopsy, with anti-inflammatory analgesia for painful callus",
-   "Physiotherapy and occupational adaptation for restricted forearm pronation and supination from interosseous membrane calcification, with selective corrective surgery",
-   "Monitoring of bone mineral density and fracture pattern over time",
-   "Genetic counselling and confirmatory targeted testing for the recurrent autosomal dominant IFITM5 variant",
-   "Multidisciplinary metabolic bone and clinical genetics follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteogenesis_imperfecta_type_v-pathway",
-   "title": "Osteogenesis imperfecta type V (IFITM5): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5 (encoding BRIL), not by a collagen defect",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rapidly enlarging, warm, painful callus raising concern for malignancy or infection before OI type V is recognised",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band, Assessment of forearm pronation and supination for restriction, Bone densitometry to quantify skeletal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteogenesis imperfecta type v (ifitm5)."
-  }
- ],
- "tables": [
-  {
-   "id": "osteogenesis_imperfecta_type_v-matrix",
-   "title": "Osteogenesis imperfecta type V (IFITM5): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5 (encoding BRIL), not by a collagen defect",
+      "Almost all cases share the same recurrent variant, creating a distinctive and highly consistent phenotype",
+      "Three characteristic features distinguish it: exuberant hyperplastic callus after fractures or surgery, calcification of the forearm interosseous membrane, and a dense radio-opaque metaphyseal band adjacent to the growth plate",
+      "Interosseous membrane calcification restricts forearm rotation, limiting pronation and supination",
+      "Sclerae are typically normal (not blue) and dentinogenesis imperfecta is absent, unlike classic collagen-related OI",
+      "Hyperplastic callus can be large, warm, and painful, mimicking osteosarcoma or infection and prompting unnecessary biopsy",
+      "Management mirrors other OI with fracture care, physiotherapy, and antiresorptive bisphosphonate therapy for skeletal fragility, while avoiding misdiagnosis of the exuberant callus"
     ],
-    [
-     "Key Investigations",
-     "Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band, Assessment of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "OI type V is caused by a recurrent point mutation in the 5' untranslated region of IFITM5, which creates a new upstream start codon and adds five amino acids to the BRIL protein expressed by osteoblasts. BRIL participates in bone mineralisation, and the mutant protein disturbs normal osteoblast function and matrix mineralisation, producing brittle bones without the type I collagen abnormality of classic OI. The altered bone biology manifests as an exaggerated reparative response, generating hyperplastic callus, and abnormal soft-tissue mineralisation such as calcification of the forearm interosseous membrane and a characteristic dense metaphyseal band. Bone histology shows a distinctive mesh-like (irregular) lamellar pattern. The result is increased fracture risk with these unique radiological and clinical hallmarks.",
+    "additionalDifferentials": [
+      "Collagen-related osteogenesis imperfecta (types I-IV)",
+      "Osteosarcoma or other bone tumour mimicked by hyperplastic callus",
+      "Osteomyelitis mimicking an inflamed callus",
+      "Non-accidental injury in a child with multiple fractures",
+      "Other rare non-collagen OI subtypes (e.g. SERPINF1-related)",
+      "Fibrous dysplasia"
     ],
-    [
-     "Primary Differentials",
-     "Collagen-related osteogenesis imperfecta (types I-IV), Osteosarcoma or other bone tumour mimicked by hyperplastic callus,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band",
+      "Assessment of forearm pronation and supination for restriction",
+      "Bone densitometry to quantify skeletal fragility",
+      "Examination of sclerae and dentition, characteristically normal in this subtype",
+      "Bone histology showing the irregular mesh-like lamellar pattern where biopsy is performed",
+      "Targeted IFITM5 mutation testing to confirm the recurrent variant"
     ],
-    [
-     "Management Strategy",
-     "Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency",
-     "Core treatment modality"
+    "redFlags": [
+      "A rapidly enlarging, warm, painful callus raising concern for malignancy or infection before OI type V is recognised",
+      "Recurrent fractures with progressive deformity",
+      "Fixed loss of forearm rotation from interosseous calcification",
+      "Spinal fractures or scoliosis compromising function"
     ],
-    [
-     "Clinical Pitfall",
-     "Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus",
-     "Prevent diagnostic or management error"
+    "prognosis": "Skeletal fragility is lifelong but generally responsive to fracture management and antiresorptive therapy; forearm rotation may remain limited, and the main avoidable harm comes from misdiagnosing hyperplastic callus as tumour.",
+    "pitfalls": [
+      "Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus",
+      "Expecting blue sclerae or dentinogenesis imperfecta and discounting OI when they are absent",
+      "Overlooking the diagnostic triad of callus, interosseous calcification, and metaphyseal band on imaging",
+      "Failing to test IFITM5 because collagen gene studies are normal"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
+      "GeneReviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency",
+      "Standard orthopaedic fracture management with awareness that fractures and surgery can provoke exuberant hyperplastic callus",
+      "Recognition of hyperplastic callus as a feature of the disease rather than osteosarcoma or infection, avoiding unnecessary biopsy, with anti-inflammatory analgesia for painful callus",
+      "Physiotherapy and occupational adaptation for restricted forearm pronation and supination from interosseous membrane calcification, with selective corrective surgery",
+      "Monitoring of bone mineral density and fracture pattern over time",
+      "Genetic counselling and confirmatory targeted testing for the recurrent autosomal dominant IFITM5 variant",
+      "Multidisciplinary metabolic bone and clinical genetics follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteogenesis imperfecta type v (ifitm5)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteogenesis-imperfecta-type-v-real-image",
-   "title": "Osteogenesis imperfecta type V (IFITM5): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteogenesis_imperfecta_type_v-pathway",
+      "title": "Osteogenesis imperfecta type V (IFITM5): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5 (encoding BRIL), not by a collagen defect",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rapidly enlarging, warm, painful callus raising concern for malignancy or infection before OI type V is recognised",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band, Assessment of forearm pronation and supination for restriction, Bone densitometry to quantify skeletal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteogenesis imperfecta type v (ifitm5)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteogenesis_imperfecta_type_v-matrix",
+      "title": "Osteogenesis imperfecta type V (IFITM5): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant form of brittle bone disease caused by a recurrent mutation in the 5' untranslated region of IFITM5",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs demonstrating hyperplastic callus, interosseous membrane calcification, and the dense metaphyseal band, Assessment of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Collagen-related osteogenesis imperfecta (types I-IV), Osteosarcoma or other bone tumour mimicked by hyperplastic callus,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fracture frequency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Biopsying or resecting hyperplastic callus mistaken for osteosarcoma, which can itself provoke more callus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteogenesis imperfecta type v (ifitm5)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteogenesis_imperfecta_type_v-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Hyperplastic callus, interosseous membrane calcification and a dense metaphyseal band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forearm pronation and supination assessment",
+          "cells": [
+            {
+              "text": "Restriction of forearm rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone densitometry",
+          "cells": [
+            {
+              "text": "Skeletal fragility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerae and dentition",
+          "cells": [
+            {
+              "text": "Typically normal in this subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone histology",
+          "cells": [
+            {
+              "text": "Irregular mesh-like lamellar pattern, where biopsy is performed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted IFITM5 testing",
+          "cells": [
+            {
+              "text": "The recurrent variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteogenesis_imperfecta_type_v-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Collagen-related osteogenesis imperfecta",
+          "cells": [
+            {
+              "text": "Blue sclerae and dentinogenesis imperfecta are absent here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma",
+          "cells": [
+            {
+              "text": "Hyperplastic callus can be large, warm and painful, mimicking tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "An inflamed callus can mimic infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteogenesis_imperfecta_type_v-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiresorptive bisphosphonate therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "To reduce skeletal fragility and fracture frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture management",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Standard orthopaedic care, aware that fractures and surgery can provoke exuberant callus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognise hyperplastic callus",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "A disease feature rather than tumour or infection; avoid unnecessary biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia for painful callus",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Anti-inflammatory analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forearm rehabilitation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Physiotherapy and occupational adaptation; selective corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Bone density and fracture pattern; genetic counselling and targeted IFITM5 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteogenesis_imperfecta_type_v-dx-mgmt",
+      "title": "Diagnosis and management of Osteogenesis imperfecta type V (IFITM5)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Forearm rotation loss with a large hyperplastic callus after fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapidly enlarging warm callus, recurrent fractures or spinal deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review to exclude osteosarcoma or osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs for callus, interosseous calcification and metaphyseal band; IFITM5 test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an IFITM5 variant found, with normal sclerae and no dentinogenesis imperfecta?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider collagen-related OI, osteosarcoma, osteomyelitis or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiresorptive bisphosphonate therapy to reduce skeletal fragility and fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recognise hyperplastic callus as a disease feature; avoid unnecessary biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia for painful callus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational adaptation for restricted pronation and supination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and targeted testing for the recurrent IFITM5 variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fragility persists but responds to treatment; misdiagnosing callus as tumour is the harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

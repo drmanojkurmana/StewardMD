@@ -1,179 +1,484 @@
 {
- "id": "engraftment_syndrome",
- "name": "Engraftment syndrome",
- "aliases": [
-  "peri-engraftment syndrome",
-  "engraftment fever",
-  "peri-engraftment respiratory distress syndrome"
- ],
- "class": "non_infective",
- "system": "Immunology / Transplantation",
- "specialty": "Transplantation",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard haematopoietic cell transplantation reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly in autologous transplants",
-   "The cardinal features are non-infective fever, an erythematous skin rash, and increased capillary permeability",
-   "Capillary leak manifests as weight gain, oedema, and non-cardiogenic pulmonary infiltrates with hypoxaemia",
-   "It typically develops within a few days of neutrophil engraftment as recovering cells release inflammatory mediators",
-   "It is a diagnosis of exclusion, so infection and other causes of fever during the recovery period must be considered first",
-   "It overlaps clinically with early acute graft-versus-host disease in allogeneic transplantation, and the two can be difficult to distinguish",
-   "It responds promptly, often dramatically, to a short course of corticosteroids",
-   "Severe cases can progress to respiratory failure and multi-organ involvement if untreated"
+  "id": "engraftment_syndrome",
+  "name": "Engraftment syndrome",
+  "aliases": [
+    "peri-engraftment syndrome",
+    "engraftment fever",
+    "peri-engraftment respiratory distress syndrome"
   ],
-  "pathophysiology": "During neutrophil recovery, a surge of pro-inflammatory cytokines together with newly recovering and activated leucocytes injures the vascular endothelium and increases capillary permeability. The resulting fluid shifts produce oedema, weight gain, and non-cardiogenic pulmonary infiltrates. Because the syndrome occurs in the autologous setting, it is not driven by donor-versus-host alloreactivity, although in allogeneic recipients it overlaps mechanistically and clinically with early acute graft-versus-host disease.",
-  "additionalDifferentials": [
-   "Neutropenic sepsis or bacteraemia",
-   "Invasive fungal infection",
-   "Viral infection such as respiratory viruses or cytomegalovirus",
-   "Acute graft-versus-host disease in allogeneic transplantation",
-   "Drug reaction, including to growth factors or antimicrobials",
-   "Transfusion reaction or fluid overload with cardiogenic pulmonary oedema",
-   "Diffuse alveolar haemorrhage"
-  ],
-  "additionalInvestigations": [
-   "Full septic screen including blood and targeted cultures to exclude infection",
-   "Chest imaging to characterise non-cardiogenic pulmonary infiltrates",
-   "Oxygenation assessment and monitoring",
-   "Full blood count documenting neutrophil recovery and inflammatory markers",
-   "Assessment of fluid balance and weight change for capillary leak",
-   "Echocardiography if a cardiogenic cause of pulmonary oedema is possible",
-   "Viral and fungal studies as clinically indicated"
-  ],
-  "redFlags": [
-   "Progressive hypoxaemia and respiratory distress",
-   "Haemodynamic instability from capillary leak",
-   "Multi-organ dysfunction",
-   "Attributing fever to the syndrome before serious infection has been excluded",
-   "Diffuse alveolar haemorrhage"
-  ],
-  "prognosis": "The syndrome usually responds rapidly to corticosteroids with good recovery, but severe capillary leak with respiratory failure can be life-threatening and may be associated with a higher rate of transplant-related complications.",
-  "pitfalls": [
-   "Labelling the illness as engraftment syndrome before adequately excluding infection",
-   "Delaying corticosteroids in a deteriorating patient",
-   "Confusing it with early acute graft-versus-host disease in allogeneic recipients",
-   "Attributing pulmonary infiltrates solely to fluid overload",
-   "Missing progression to respiratory failure"
-  ],
-  "references": [
-   "Consensus diagnostic criteria for engraftment syndrome",
-   "Standard haematopoietic cell transplantation reference texts",
-   "Transplant reference literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly",
-   "Exclude infection first with a full septic screen, as this is a diagnosis of exclusion during neutrophil recovery, covering empirically with antimicrobials until infection is ruled out",
-   "Provide supportive care for capillary leak, including judicious fluid management, supplemental oxygen and respiratory support for non-cardiogenic pulmonary infiltrates",
-   "Monitor fluid balance, weight and oxygenation closely for evolving capillary-leak syndrome",
-   "Escalate to intensive care and ventilatory support in severe capillary leak with respiratory failure",
-   "Distinguish from and manage overlapping early acute graft-versus-host disease in allogeneic recipients",
-   "Manage within the haematology and transplant team with continued monitoring for transplant-related complications"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "engraftment_syndrome-pathway",
-   "title": "Engraftment syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly in autologous transplants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hypoxaemia and respiratory distress",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full septic screen including blood and targeted cultures to exclude infection, Chest imaging to characterise non-cardiogenic pulmonary infiltrates, Oxygenation assessment and monitoring"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the illness as engraftment syndrome before adequately excluding infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of engraftment syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "engraftment_syndrome-matrix",
-   "title": "Engraftment syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Transplantation",
+  "specialty": "Transplantation",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard haematopoietic cell transplantation reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly in autologous transplants",
+      "The cardinal features are non-infective fever, an erythematous skin rash, and increased capillary permeability",
+      "Capillary leak manifests as weight gain, oedema, and non-cardiogenic pulmonary infiltrates with hypoxaemia",
+      "It typically develops within a few days of neutrophil engraftment as recovering cells release inflammatory mediators",
+      "It is a diagnosis of exclusion, so infection and other causes of fever during the recovery period must be considered first",
+      "It overlaps clinically with early acute graft-versus-host disease in allogeneic transplantation, and the two can be difficult to distinguish",
+      "It responds promptly, often dramatically, to a short course of corticosteroids",
+      "Severe cases can progress to respiratory failure and multi-organ involvement if untreated"
     ],
-    [
-     "Key Investigations",
-     "Full septic screen including blood and targeted cultures to exclude infection, Chest imaging to characterise non-cardiogenic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During neutrophil recovery, a surge of pro-inflammatory cytokines together with newly recovering and activated leucocytes injures the vascular endothelium and increases capillary permeability. The resulting fluid shifts produce oedema, weight gain, and non-cardiogenic pulmonary infiltrates. Because the syndrome occurs in the autologous setting, it is not driven by donor-versus-host alloreactivity, although in allogeneic recipients it overlaps mechanistically and clinically with early acute graft-versus-host disease.",
+    "additionalDifferentials": [
+      "Neutropenic sepsis or bacteraemia",
+      "Invasive fungal infection",
+      "Viral infection such as respiratory viruses or cytomegalovirus",
+      "Acute graft-versus-host disease in allogeneic transplantation",
+      "Drug reaction, including to growth factors or antimicrobials",
+      "Transfusion reaction or fluid overload with cardiogenic pulmonary oedema",
+      "Diffuse alveolar haemorrhage"
     ],
-    [
-     "Primary Differentials",
-     "Neutropenic sepsis or bacteraemia, Invasive fungal infection, Viral infection such as respiratory viruses or cytomegalovirus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full septic screen including blood and targeted cultures to exclude infection",
+      "Chest imaging to characterise non-cardiogenic pulmonary infiltrates",
+      "Oxygenation assessment and monitoring",
+      "Full blood count documenting neutrophil recovery and inflammatory markers",
+      "Assessment of fluid balance and weight change for capillary leak",
+      "Echocardiography if a cardiogenic cause of pulmonary oedema is possible",
+      "Viral and fungal studies as clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hypoxaemia and respiratory distress",
+      "Haemodynamic instability from capillary leak",
+      "Multi-organ dysfunction",
+      "Attributing fever to the syndrome before serious infection has been excluded",
+      "Diffuse alveolar haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the illness as engraftment syndrome before adequately excluding infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome usually responds rapidly to corticosteroids with good recovery, but severe capillary leak with respiratory failure can be life-threatening and may be associated with a higher rate of transplant-related complications.",
+    "pitfalls": [
+      "Labelling the illness as engraftment syndrome before adequately excluding infection",
+      "Delaying corticosteroids in a deteriorating patient",
+      "Confusing it with early acute graft-versus-host disease in allogeneic recipients",
+      "Attributing pulmonary infiltrates solely to fluid overload",
+      "Missing progression to respiratory failure"
+    ],
+    "references": [
+      "Consensus diagnostic criteria for engraftment syndrome",
+      "Standard haematopoietic cell transplantation reference texts",
+      "Transplant reference literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly",
+      "Exclude infection first with a full septic screen, as this is a diagnosis of exclusion during neutrophil recovery, covering empirically with antimicrobials until infection is ruled out",
+      "Provide supportive care for capillary leak, including judicious fluid management, supplemental oxygen and respiratory support for non-cardiogenic pulmonary infiltrates",
+      "Monitor fluid balance, weight and oxygenation closely for evolving capillary-leak syndrome",
+      "Escalate to intensive care and ventilatory support in severe capillary leak with respiratory failure",
+      "Distinguish from and manage overlapping early acute graft-versus-host disease in allogeneic recipients",
+      "Manage within the haematology and transplant team with continued monitoring for transplant-related complications"
     ]
-   ],
-   "caption": "Overview comparison matrix for engraftment syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "engraftment-syndrome-real-image",
-   "title": "Engraftment syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "engraftment_syndrome-pathway",
+      "title": "Engraftment syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly in autologous transplants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hypoxaemia and respiratory distress",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full septic screen including blood and targeted cultures to exclude infection, Chest imaging to characterise non-cardiogenic pulmonary infiltrates, Oxygenation assessment and monitoring"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the illness as engraftment syndrome before adequately excluding infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of engraftment syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "engraftment_syndrome-matrix",
+      "title": "Engraftment syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A clinical syndrome occurring around the time of neutrophil recovery after haematopoietic stem cell transplantation, particularly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full septic screen including blood and targeted cultures to exclude infection, Chest imaging to characterise non-cardiogenic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neutropenic sepsis or bacteraemia, Invasive fungal infection, Viral infection such as respiratory viruses or cytomegalovirus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with systemic corticosteroids as first-line therapy, to which the syndrome usually responds rapidly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the illness as engraftment syndrome before adequately excluding infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for engraftment syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard haematopoietic cell transplantation reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "engraftment_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full septic screen with blood and targeted cultures",
+          "cells": [
+            {
+              "text": "Excludes infection, which must come first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Characterises non-cardiogenic pulmonary infiltrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygenation monitoring",
+          "cells": [
+            {
+              "text": "Hypoxaemia from capillary leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Neutrophil recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid balance and weight change",
+          "cells": [
+            {
+              "text": "Capillary leak: weight gain and oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiogenic cause of pulmonary oedema, if possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral and fungal studies",
+          "cells": [
+            {
+              "text": "As clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "engraftment_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neutropenic sepsis or bacteraemia",
+          "cells": [
+            {
+              "text": "Infection must be excluded first; the syndrome is a diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute graft-versus-host disease",
+          "cells": [
+            {
+              "text": "Overlaps clinically in allogeneic recipients and can be hard to separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid overload or transfusion reaction",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates should not be attributed to fluid overload alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "engraftment_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line; the syndrome usually responds rapidly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full septic screen and empirical antimicrobials",
+          "cells": [
+            {
+              "text": "Covers infection until it is ruled out"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for capillary leak",
+          "cells": [
+            {
+              "text": "Judicious fluid management, supplemental oxygen and respiratory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Fluid balance, weight and oxygenation, closely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care escalation",
+          "cells": [
+            {
+              "text": "Severe capillary leak with respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from early acute GVHD",
+          "cells": [
+            {
+              "text": "Overlapping picture in allogeneic transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology and transplant team",
+          "cells": [
+            {
+              "text": "Ongoing monitoring for transplant-related complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "engraftment_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Engraftment syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, erythematous rash and weight gain around neutrophil recovery after transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive hypoxaemia, instability, multi-organ dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to intensive care and ventilatory support for respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full septic screen and chest imaging to characterise non-cardiogenic infiltrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection excluded and non-cardiogenic infiltrates present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the infection; reassess for early acute GVHD or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start systemic corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive care: judicious fluids and supplemental oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor fluid balance, weight and oxygenation closely",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Distinguish from early acute GVHD in allogeneic recipients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually responds rapidly; monitor for transplant complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

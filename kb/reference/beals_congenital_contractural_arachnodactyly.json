@@ -1,176 +1,236 @@
 {
- "id": "beals_congenital_contractural_arachnodactyly",
- "name": "Beals congenital contractural arachnodactyly",
- "aliases": [
-  "Beals syndrome",
-  "congenital contractural arachnodactyly",
-  "CCA",
-  "FBN2-related disorder"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
-   "Presents from birth with multiple congenital joint contractures, a marfanoid habitus, and arachnodactyly",
-   "Crumpled or folded external ears (a 'crumpled' helix) are a characteristic and helpful diagnostic clue",
-   "Contractures typically affect the elbows, knees, and fingers and often improve gradually with age and physiotherapy",
-   "Progressive kyphoscoliosis is common and may require orthopaedic monitoring and intervention",
-   "Unlike Marfan syndrome, ectopia lentis is not a feature and the aorta is usually only mildly and non-progressively affected",
-   "Baseline echocardiography is nonetheless advisable because occasional aortic root dilatation is reported",
-   "Diagnosis is clinical, supported by the ear and contracture findings, and can be confirmed by FBN2 molecular testing"
+  "id": "beals_congenital_contractural_arachnodactyly",
+  "name": "Beals congenital contractural arachnodactyly",
+  "aliases": [
+    "Beals syndrome",
+    "congenital contractural arachnodactyly",
+    "CCA",
+    "FBN2-related disorder"
   ],
-  "pathophysiology": "Beals syndrome is caused by variants in FBN2, a gene closely related to FBN1 that encodes fibrillin-2, a component of the microfibrils that form during early elastic-fibre assembly. Fibrillin-2 is expressed prominently in developing tissues, so its deficiency chiefly disturbs early skeletal and joint development, producing congenital contractures, long slender digits, and a tall marfanoid build. Because fibrillin-2 has a more limited role in the mature aortic wall and lens zonules than fibrillin-1, the severe progressive aortopathy and ectopia lentis of Marfan syndrome are generally absent, which is the key clinical distinction.",
-  "additionalDifferentials": [
-   "Marfan syndrome",
-   "Distal arthrogryposis syndromes",
-   "Loeys-Dietz syndrome",
-   "Homocystinuria",
-   "Multiple pterygium syndrome",
-   "Ehlers-Danlos syndrome with contractures"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination for crumpled ears, contractures, and arachnodactyly",
-   "Baseline echocardiography to assess the aortic root",
-   "Molecular genetic testing of FBN2, with FBN1 analysis if Marfan syndrome is considered",
-   "Spinal imaging to monitor kyphoscoliosis",
-   "Plasma homocysteine to exclude homocystinuria",
-   "Ophthalmology review to confirm absence of ectopia lentis"
-  ],
-  "redFlags": [
-   "Progressive severe kyphoscoliosis compromising respiratory function",
-   "Aortic root dilatation on surveillance echocardiography",
-   "Fixed contractures causing significant functional impairment",
-   "Neonatal respiratory or feeding difficulty in severe presentations",
-   "Any features suggesting alternative aggressive aortopathy syndromes"
-  ],
-  "prognosis": "The outlook is generally good, with contractures often improving over childhood and a life expectancy usually within the normal range. Kyphoscoliosis is the main source of long-term morbidity, and the aorta, when involved, is usually only mildly affected.",
-  "pitfalls": [
-   "Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance",
-   "Overlooking progressive scoliosis during childhood follow-up",
-   "Missing the diagnostic significance of crumpled ears",
-   "Assuming no cardiac assessment is needed despite occasional aortic involvement",
-   "Failing to distinguish it from arthrogryposis syndromes with different prognoses"
-  ],
-  "references": [
-   "GeneReviews: Congenital contractural arachnodactyly",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through childhood",
-   "Monitor progressive kyphoscoliosis with serial spinal assessment and imaging, using bracing or corrective surgery when indicated",
-   "Perform baseline echocardiography with periodic surveillance of the aortic root, though involvement is usually mild and non-progressive",
-   "Involve orthopaedics and physiotherapy for musculoskeletal deformity and preservation of joint mobility",
-   "Distinguish from Marfan syndrome by confirming the absence of ectopia lentis, which guides the intensity of cardiovascular surveillance",
-   "Offer genetic counselling for this autosomal dominant FBN2 disorder, with cascade testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beals_congenital_contractural_arachnodactyly-pathway",
-   "title": "Beals congenital contractural arachnodactyly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive severe kyphoscoliosis compromising respiratory function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination for crumpled ears, contractures, and arachnodactyly, Baseline echocardiography to assess the aortic root, Molecular genetic testing of FBN2, with FBN1 analysis if Marfan syndrome is considered"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through childhood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beals congenital contractural arachnodactyly."
-  }
- ],
- "tables": [
-  {
-   "id": "beals_congenital_contractural_arachnodactyly-matrix",
-   "title": "Beals congenital contractural arachnodactyly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
+      "Presents from birth with multiple congenital joint contractures, a marfanoid habitus, and arachnodactyly",
+      "Crumpled or folded external ears (a 'crumpled' helix) are a characteristic and helpful diagnostic clue",
+      "Contractures typically affect the elbows, knees, and fingers and often improve gradually with age and physiotherapy",
+      "Progressive kyphoscoliosis is common and may require orthopaedic monitoring and intervention",
+      "Unlike Marfan syndrome, ectopia lentis is not a feature and the aorta is usually only mildly and non-progressively affected",
+      "Baseline echocardiography is nonetheless advisable because occasional aortic root dilatation is reported",
+      "Diagnosis is clinical, supported by the ear and contracture findings, and can be confirmed by FBN2 molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination for crumpled ears, contractures, and arachnodactyly, Baseline echocardiography to assess the aortic root,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Beals syndrome is caused by variants in FBN2, a gene closely related to FBN1 that encodes fibrillin-2, a component of the microfibrils that form during early elastic-fibre assembly. Fibrillin-2 is expressed prominently in developing tissues, so its deficiency chiefly disturbs early skeletal and joint development, producing congenital contractures, long slender digits, and a tall marfanoid build. Because fibrillin-2 has a more limited role in the mature aortic wall and lens zonules than fibrillin-1, the severe progressive aortopathy and ectopia lentis of Marfan syndrome are generally absent, which is the key clinical distinction.",
+    "additionalDifferentials": [
+      "Marfan syndrome",
+      "Distal arthrogryposis syndromes",
+      "Loeys-Dietz syndrome",
+      "Homocystinuria",
+      "Multiple pterygium syndrome",
+      "Ehlers-Danlos syndrome with contractures"
     ],
-    [
-     "Primary Differentials",
-     "Marfan syndrome, Distal arthrogryposis syndromes, Loeys-Dietz syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination for crumpled ears, contractures, and arachnodactyly",
+      "Baseline echocardiography to assess the aortic root",
+      "Molecular genetic testing of FBN2, with FBN1 analysis if Marfan syndrome is considered",
+      "Spinal imaging to monitor kyphoscoliosis",
+      "Plasma homocysteine to exclude homocystinuria",
+      "Ophthalmology review to confirm absence of ectopia lentis"
     ],
-    [
-     "Management Strategy",
-     "Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive severe kyphoscoliosis compromising respiratory function",
+      "Aortic root dilatation on surveillance echocardiography",
+      "Fixed contractures causing significant functional impairment",
+      "Neonatal respiratory or feeding difficulty in severe presentations",
+      "Any features suggesting alternative aggressive aortopathy syndromes"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is generally good, with contractures often improving over childhood and a life expectancy usually within the normal range. Kyphoscoliosis is the main source of long-term morbidity, and the aorta, when involved, is usually only mildly affected.",
+    "pitfalls": [
+      "Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance",
+      "Overlooking progressive scoliosis during childhood follow-up",
+      "Missing the diagnostic significance of crumpled ears",
+      "Assuming no cardiac assessment is needed despite occasional aortic involvement",
+      "Failing to distinguish it from arthrogryposis syndromes with different prognoses"
+    ],
+    "references": [
+      "GeneReviews: Congenital contractural arachnodactyly",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through childhood",
+      "Monitor progressive kyphoscoliosis with serial spinal assessment and imaging, using bracing or corrective surgery when indicated",
+      "Perform baseline echocardiography with periodic surveillance of the aortic root, though involvement is usually mild and non-progressive",
+      "Involve orthopaedics and physiotherapy for musculoskeletal deformity and preservation of joint mobility",
+      "Distinguish from Marfan syndrome by confirming the absence of ectopia lentis, which guides the intensity of cardiovascular surveillance",
+      "Offer genetic counselling for this autosomal dominant FBN2 disorder, with cascade testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for beals congenital contractural arachnodactyly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beals-congenital-contractural-arachnodactyly-real-image",
-   "title": "Beals congenital contractural arachnodactyly: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "beals_congenital_contractural_arachnodactyly-pathway",
+      "title": "Beals congenital contractural arachnodactyly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive severe kyphoscoliosis compromising respiratory function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination for crumpled ears, contractures, and arachnodactyly, Baseline echocardiography to assess the aortic root, Molecular genetic testing of FBN2, with FBN1 analysis if Marfan syndrome is considered"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through childhood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beals congenital contractural arachnodactyly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beals_congenital_contractural_arachnodactyly-matrix",
+      "title": "Beals congenital contractural arachnodactyly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant connective-tissue disorder caused by pathogenic variants in FBN2, which encodes fibrillin-2",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination for crumpled ears, contractures, and arachnodactyly, Baseline echocardiography to assess the aortic root,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marfan syndrome, Distal arthrogryposis syndromes, Loeys-Dietz syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage congenital joint contractures with physiotherapy, stretching and splinting, as they often improve gradually through",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Beals syndrome with Marfan syndrome and imposing unnecessary aggressive aortic surveillance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beals congenital contractural arachnodactyly."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beals_congenital_contractural_arachnodactyly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Beals congenital contractural arachnodactyly",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical examination", "cells": [{"text": "Crumpled ears, contractures and arachnodactyly"}], "cite": "c1"},
+        {"parameter": "Baseline echocardiography", "cells": [{"text": "Aortic root status; occasional aortic root dilatation is reported"}], "cite": "c1"},
+        {"parameter": "Molecular genetic testing of FBN2", "cells": [{"text": "Confirms the diagnosis; FBN1 analysis if Marfan syndrome is considered"}], "cite": "c1"},
+        {"parameter": "Spinal imaging", "cells": [{"text": "Progression of kyphoscoliosis"}], "cite": "c1"},
+        {"parameter": "Plasma homocysteine", "cells": [{"text": "Used to exclude homocystinuria"}], "cite": "c1"},
+        {"parameter": "Ophthalmology review", "cells": [{"text": "Confirms absence of ectopia lentis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beals_congenital_contractural_arachnodactyly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Beals congenital contractural arachnodactyly",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Marfan syndrome", "cells": [{"text": "Ectopia lentis is not a feature here, and the aorta is usually only mildly affected"}], "cite": "c1"},
+        {"parameter": "Homocystinuria", "cells": [{"text": "Excluded by plasma homocysteine testing"}], "cite": "c1"},
+        {"parameter": "Distal arthrogryposis syndromes", "cells": [{"text": "Prognosis differs from this condition"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beals_congenital_contractural_arachnodactyly-treatment",
+      "kind": "treatment",
+      "title": "Management options in Beals congenital contractural arachnodactyly",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Physiotherapy for contractures", "cells": [{"text": "Physiotherapy, stretching and splinting"}, {"text": "Contractures often improve gradually through childhood"}], "cite": "c1"},
+        {"parameter": "Kyphoscoliosis monitoring", "cells": [{"text": "Serial spinal assessment and imaging"}, {"text": "Bracing or corrective surgery when indicated"}], "cite": "c1"},
+        {"parameter": "Aortic surveillance", "cells": [{"text": "Baseline echocardiography, then periodic review of the aortic root"}, {"text": "Involvement is usually mild and non-progressive"}], "cite": "c1"},
+        {"parameter": "Orthopaedic and physiotherapy input", "cells": [{"text": "Care for musculoskeletal deformity and joint mobility"}, {"text": "Preserves joint mobility"}], "cite": "c1"},
+        {"parameter": "Distinguish from Marfan syndrome", "cells": [{"text": "Confirm absence of ectopia lentis"}, {"text": "Guides the intensity of cardiovascular surveillance"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for this autosomal dominant FBN2 disorder, with cascade testing"}, {"text": "Applies to at-risk relatives"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beals_congenital_contractural_arachnodactyly-dx-mgmt",
+      "title": "Diagnosis and management of Beals congenital contractural arachnodactyly",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Birth presentation: joint contractures, crumpled ears, arachnodactyly, marfanoid habitus", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive kyphoscoliosis, aortic root dilatation or respiratory compromise?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent spinal and cardiac assessment with orthopaedic and cardiology review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Ophthalmology review to confirm absence of ectopia lentis", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Baseline echocardiography and FBN2 molecular testing; FBN1 if Marfan is considered", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "FBN2 variant confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Physiotherapy, stretching and splinting; serial spinal imaging for kyphoscoliosis", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: reconsider Marfan, Loeys-Dietz and distal arthrogryposis syndromes", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Genetic counselling with cascade testing of at-risk relatives", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Contractures often improve with age; outlook generally good, kyphoscoliosis is main morbidity", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

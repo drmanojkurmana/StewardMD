@@ -1,177 +1,505 @@
 {
- "id": "chronic_progressive_external_ophthalmoplegia",
- "name": "Chronic Progressive External Ophthalmoplegia",
- "aliases": [
-  "CPEO",
-  "Progressive external ophthalmoplegia"
- ],
- "class": "non_infective",
- "system": "Neuromuscular / Mitochondrial",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular muscles, so diplopia is often mild or absent despite marked limitation of gaze.",
-   "Most commonly caused by a single large-scale mitochondrial DNA deletion, which is usually sporadic; point mutations and nuclear gene defects are also recognised.",
-   "Nuclear genes maintaining mitochondrial DNA — including POLG, POLG2, TWNK (Twinkle), RRM2B and SLC25A4 — cause Mendelian forms with multiple mitochondrial DNA deletions.",
-   "Muscle biopsy classically shows ragged-red fibres on Gomori trichrome staining and cytochrome c oxidase-negative fibres, reflecting accumulation of abnormal mitochondria.",
-   "Ptosis is often the first sign, with patients compensating through frontalis over-action and a chin-up head posture.",
-   "Kearns-Sayre syndrome is a severe early-onset form with pigmentary retinopathy and cardiac conduction disease, and all patients warrant cardiac surveillance.",
-   "Management is largely supportive — prisms or strabismus surgery for diplopia and cautious ptosis correction — with vigilance for systemic involvement.",
-   "The condition is frequently mistaken for myasthenia gravis, but the deficit is fixed and slowly progressive rather than fatigable and fluctuating."
+  "id": "chronic_progressive_external_ophthalmoplegia",
+  "name": "Chronic Progressive External Ophthalmoplegia",
+  "aliases": [
+    "CPEO",
+    "Progressive external ophthalmoplegia"
   ],
-  "pathophysiology": "Chronic progressive external ophthalmoplegia is a mitochondrial cytopathy in which defective oxidative phosphorylation preferentially affects the highly energy-dependent, mitochondria-rich extraocular muscles and the levator palpebrae. The commonest molecular cause is a single large-scale deletion of mitochondrial DNA that removes several genes encoding respiratory chain subunits and transfer RNAs; because the deletion generally arises during oogenesis or early embryogenesis it is usually sporadic. Other cases result from mitochondrial DNA point mutations, or from mutations in nuclear genes responsible for maintaining and replicating the mitochondrial genome — such as the polymerase gene POLG, the helicase gene TWNK, RRM2B and the adenine nucleotide translocator SLC25A4 — which lead to secondary accumulation of multiple mitochondrial DNA deletions and follow Mendelian inheritance. Mutant and wild-type genomes coexist within cells (heteroplasmy), and clinical expression depends on the proportion of mutant molecules exceeding a tissue-specific threshold, which is why the abnormality may be abundant in muscle yet scarce or undetectable in blood. Impaired respiratory chain function produces the histological signatures of subsarcolemmal mitochondrial proliferation (ragged-red fibres) and cytochrome c oxidase deficiency, and when the defect extends beyond the eye muscles it gives rise to the multisystem phenotypes of CPEO-plus and Kearns-Sayre syndrome.",
-  "additionalDifferentials": [
-   "Ocular myasthenia gravis",
-   "Oculopharyngeal muscular dystrophy",
-   "Thyroid eye disease (Graves orbitopathy)",
-   "Myotonic dystrophy",
-   "Congenital fibrosis of the extraocular muscles or congenital ptosis",
-   "Oculopharyngodistal myopathy",
-   "Brainstem or cranial nerve pathology"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG, TWNK, RRM2B and others)",
-   "Muscle biopsy with histochemistry for ragged-red and cytochrome c oxidase-negative fibres and respiratory chain enzyme studies",
-   "Resting and post-exercise lactate measurement",
-   "ECG and echocardiography to detect conduction block and cardiomyopathy, essential where Kearns-Sayre syndrome is suspected",
-   "Ophthalmological and orthoptic assessment including fundoscopy for pigmentary retinopathy",
-   "Acetylcholine receptor antibodies and repetitive nerve stimulation to exclude myasthenia gravis"
-  ],
-  "redFlags": [
-   "Cardiac conduction block, which can cause sudden death and may require pacing",
-   "Onset before adulthood with pigmentary retinopathy, prompting evaluation for Kearns-Sayre syndrome",
-   "Systemic features such as ataxia, deafness, diabetes, short stature, dysphagia or cardiomyopathy",
-   "Fatigable or fluctuating weakness pointing instead to myasthenia gravis"
-  ],
-  "prognosis": "Isolated chronic progressive external ophthalmoplegia is relatively benign and progresses slowly over many years, whereas CPEO-plus and Kearns-Sayre syndrome carry significant systemic morbidity and reduced life expectancy, largely from cardiac conduction disease.",
-  "pitfalls": [
-   "Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy",
-   "Failing to perform an ECG and thereby missing potentially fatal cardiac conduction disease",
-   "Correcting ptosis too aggressively and risking exposure keratopathy because of weak eyelid closure and an impaired Bell's phenomenon",
-   "Relying on a blood sample alone, when a mitochondrial DNA deletion may be detectable only in muscle",
-   "Overlooking a nuclear gene cause and the associated family history"
-  ],
-  "references": [
-   "Mitochondrial disease reference texts",
-   "Neurology and neuromuscular reference texts",
-   "Neuro-ophthalmology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features",
-   "Correction of ptosis with crutch spectacles or ptosis props, and cautious frontalis sling surgery where vision is impaired",
-   "Prisms and, in selected cases, strabismus surgery for symptomatic diplopia",
-   "Cardiac surveillance with ECG and echocardiography, and pacemaker insertion for conduction block, essential in Kearns-Sayre syndrome",
-   "Avoidance of mitochondrial-toxic drugs, with mitochondrial cofactor supplementation such as coenzyme Q10 despite limited evidence",
-   "Regular ophthalmological and orthoptic review including fundoscopy for pigmentary retinopathy",
-   "Genetic counselling reflecting sporadic single-deletion, maternally inherited point-mutation and Mendelian nuclear-gene forms",
-   "Multidisciplinary neurology, cardiology and ophthalmology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_progressive_external_ophthalmoplegia-pathway",
-   "title": "Chronic Progressive External Ophthalmoplegia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular muscles, so diplopia is often mild or absent despite marked limitation of gaze.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac conduction block, which can cause sudden death and may require pacing",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG, TWNK, RRM2B and others), Muscle biopsy with histochemistry for ragged-red and cytochrome c"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic progressive external ophthalmoplegia."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_progressive_external_ophthalmoplegia-matrix",
-   "title": "Chronic Progressive External Ophthalmoplegia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular / Mitochondrial",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular muscles, so diplopia is often mild or absent despite marked limitation of gaze.",
+      "Most commonly caused by a single large-scale mitochondrial DNA deletion, which is usually sporadic; point mutations and nuclear gene defects are also recognised.",
+      "Nuclear genes maintaining mitochondrial DNA — including POLG, POLG2, TWNK (Twinkle), RRM2B and SLC25A4 — cause Mendelian forms with multiple mitochondrial DNA deletions.",
+      "Muscle biopsy classically shows ragged-red fibres on Gomori trichrome staining and cytochrome c oxidase-negative fibres, reflecting accumulation of abnormal mitochondria.",
+      "Ptosis is often the first sign, with patients compensating through frontalis over-action and a chin-up head posture.",
+      "Kearns-Sayre syndrome is a severe early-onset form with pigmentary retinopathy and cardiac conduction disease, and all patients warrant cardiac surveillance.",
+      "Management is largely supportive — prisms or strabismus surgery for diplopia and cautious ptosis correction — with vigilance for systemic involvement.",
+      "The condition is frequently mistaken for myasthenia gravis, but the deficit is fixed and slowly progressive rather than fatigable and fluctuating."
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic progressive external ophthalmoplegia is a mitochondrial cytopathy in which defective oxidative phosphorylation preferentially affects the highly energy-dependent, mitochondria-rich extraocular muscles and the levator palpebrae. The commonest molecular cause is a single large-scale deletion of mitochondrial DNA that removes several genes encoding respiratory chain subunits and transfer RNAs; because the deletion generally arises during oogenesis or early embryogenesis it is usually sporadic. Other cases result from mitochondrial DNA point mutations, or from mutations in nuclear genes responsible for maintaining and replicating the mitochondrial genome — such as the polymerase gene POLG, the helicase gene TWNK, RRM2B and the adenine nucleotide translocator SLC25A4 — which lead to secondary accumulation of multiple mitochondrial DNA deletions and follow Mendelian inheritance. Mutant and wild-type genomes coexist within cells (heteroplasmy), and clinical expression depends on the proportion of mutant molecules exceeding a tissue-specific threshold, which is why the abnormality may be abundant in muscle yet scarce or undetectable in blood. Impaired respiratory chain function produces the histological signatures of subsarcolemmal mitochondrial proliferation (ragged-red fibres) and cytochrome c oxidase deficiency, and when the defect extends beyond the eye muscles it gives rise to the multisystem phenotypes of CPEO-plus and Kearns-Sayre syndrome.",
+    "additionalDifferentials": [
+      "Ocular myasthenia gravis",
+      "Oculopharyngeal muscular dystrophy",
+      "Thyroid eye disease (Graves orbitopathy)",
+      "Myotonic dystrophy",
+      "Congenital fibrosis of the extraocular muscles or congenital ptosis",
+      "Oculopharyngodistal myopathy",
+      "Brainstem or cranial nerve pathology"
     ],
-    [
-     "Primary Differentials",
-     "Ocular myasthenia gravis, Oculopharyngeal muscular dystrophy, Thyroid eye disease (Graves orbitopathy)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG, TWNK, RRM2B and others)",
+      "Muscle biopsy with histochemistry for ragged-red and cytochrome c oxidase-negative fibres and respiratory chain enzyme studies",
+      "Resting and post-exercise lactate measurement",
+      "ECG and echocardiography to detect conduction block and cardiomyopathy, essential where Kearns-Sayre syndrome is suspected",
+      "Ophthalmological and orthoptic assessment including fundoscopy for pigmentary retinopathy",
+      "Acetylcholine receptor antibodies and repetitive nerve stimulation to exclude myasthenia gravis"
     ],
-    [
-     "Management Strategy",
-     "Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac conduction block, which can cause sudden death and may require pacing",
+      "Onset before adulthood with pigmentary retinopathy, prompting evaluation for Kearns-Sayre syndrome",
+      "Systemic features such as ataxia, deafness, diabetes, short stature, dysphagia or cardiomyopathy",
+      "Fatigable or fluctuating weakness pointing instead to myasthenia gravis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated chronic progressive external ophthalmoplegia is relatively benign and progresses slowly over many years, whereas CPEO-plus and Kearns-Sayre syndrome carry significant systemic morbidity and reduced life expectancy, largely from cardiac conduction disease.",
+    "pitfalls": [
+      "Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy",
+      "Failing to perform an ECG and thereby missing potentially fatal cardiac conduction disease",
+      "Correcting ptosis too aggressively and risking exposure keratopathy because of weak eyelid closure and an impaired Bell's phenomenon",
+      "Relying on a blood sample alone, when a mitochondrial DNA deletion may be detectable only in muscle",
+      "Overlooking a nuclear gene cause and the associated family history"
+    ],
+    "references": [
+      "Mitochondrial disease reference texts",
+      "Neurology and neuromuscular reference texts",
+      "Neuro-ophthalmology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features",
+      "Correction of ptosis with crutch spectacles or ptosis props, and cautious frontalis sling surgery where vision is impaired",
+      "Prisms and, in selected cases, strabismus surgery for symptomatic diplopia",
+      "Cardiac surveillance with ECG and echocardiography, and pacemaker insertion for conduction block, essential in Kearns-Sayre syndrome",
+      "Avoidance of mitochondrial-toxic drugs, with mitochondrial cofactor supplementation such as coenzyme Q10 despite limited evidence",
+      "Regular ophthalmological and orthoptic review including fundoscopy for pigmentary retinopathy",
+      "Genetic counselling reflecting sporadic single-deletion, maternally inherited point-mutation and Mendelian nuclear-gene forms",
+      "Multidisciplinary neurology, cardiology and ophthalmology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic progressive external ophthalmoplegia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-progressive-external-ophthalmoplegia-real-image",
-   "title": "Chronic Progressive External Ophthalmoplegia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "chronic_progressive_external_ophthalmoplegia-pathway",
+      "title": "Chronic Progressive External Ophthalmoplegia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular muscles, so diplopia is often mild or absent despite marked limitation of gaze.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac conduction block, which can cause sudden death and may require pacing",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG, TWNK, RRM2B and others), Muscle biopsy with histochemistry for ragged-red and cytochrome c"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic progressive external ophthalmoplegia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-matrix",
+      "title": "Chronic Progressive External Ophthalmoplegia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mitochondrial disorder defined by slowly progressive, usually symmetrical bilateral ptosis and weakness of the extraocular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for mitochondrial DNA deletions and point mutations, ideally on muscle, together with a nuclear gene panel (POLG,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ocular myasthenia gravis, Oculopharyngeal muscular dystrophy, Thyroid eye disease (Graves orbitopathy)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive management, as no disease-modifying cure exists, addressing the ptosis, ophthalmoplegia and systemic features",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as myasthenia gravis and pursuing inappropriate immunotherapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic progressive external ophthalmoplegia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for mitochondrial DNA deletions and point mutations",
+          "cells": [
+            {
+              "text": "Ideally on muscle, with a nuclear gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry",
+          "cells": [
+            {
+              "text": "Ragged-red and cytochrome c oxidase-negative fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting and post-exercise lactate",
+          "cells": [
+            {
+              "text": "Mitochondrial dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Conduction block and cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine receptor antibodies and repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Excludes myasthenia gravis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable or fluctuating weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculopharyngeal muscular dystrophy",
+          "cells": [
+            {
+              "text": "Ptosis with dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Orbital signs with proptosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Crutch spectacles, ptosis props or frontalis sling",
+          "cells": [
+            {
+              "text": "Ptosis where vision is impaired"
+            },
+            {
+              "text": "Cautious correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms or strabismus surgery",
+          "cells": [
+            {
+              "text": "Symptomatic diplopia"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance and pacemaker insertion",
+          "cells": [
+            {
+              "text": "Conduction block, essential in Kearns-Sayre syndrome"
+            },
+            {
+              "text": "Sudden death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coenzyme Q10 supplementation",
+          "cells": [
+            {
+              "text": "Mitochondrial cofactor despite limited evidence"
+            },
+            {
+              "text": "Avoid mitochondrial-toxic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular ophthalmological review",
+          "cells": [
+            {
+              "text": "Fundoscopy for pigmentary retinopathy"
+            },
+            {
+              "text": "Retinopathy surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-ddx-2",
+      "kind": "ddx",
+      "title": "Neuromuscular causes of ptosis or ophthalmoplegia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Guillain-Barre syndrome; Miller-Fisher syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuromuscular junction",
+          "cells": [
+            {
+              "text": "botulism; Lambert-Eaton syndrome; myasthenia gravis; congenital myasthenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "mitochondrial myopathies (Kearns-Sayre syndrome, progressive external ophthalmoplegia); oculopharyngeal and oculopharyngodistal muscular dystrophy; myotonic dystrophy (ptosis only); congenital myopathy (myotubular; nemaline, ptosis only); hyperthyroidism or Graves disease (ophthalmoplegia without ptosis); hereditary inclusion body myopathy type 3"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_progressive_external_ophthalmoplegia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic Progressive External Ophthalmoplegia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CPEO: slowly progressive bilateral ptosis and extraocular weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (conduction block, early onset retinopathy, fatigable weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for conduction block or pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mitochondrial DNA genetics, muscle biopsy, lactate, ECG and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mitochondrial deletion or point mutation confirmed and myasthenia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care: ptosis correction, prisms and ophthalmological review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check ocular myasthenia, oculopharyngeal dystrophy and thyroid eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Crutch spectacles or ptosis props; frontalis sling where vision is impaired",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms or strabismus surgery for symptomatic diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac surveillance; pacemaker for conduction block in Kearns-Sayre",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and avoidance of mitochondrial-toxic drugs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

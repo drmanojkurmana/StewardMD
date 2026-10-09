@@ -1,168 +1,477 @@
 {
- "id": "tricuspid_atresia",
- "name": "Tricuspid atresia",
- "aliases": [
-  "absent tricuspid valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Congenital heart disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Congenital heart disease references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
-   "It is a cyanotic lesion and a form of functionally single ventricle",
-   "An obligatory atrial communication allows systemic venous blood to reach the left heart, and a ventricular septal defect or duct supplies pulmonary flow",
-   "Degree of cyanosis depends on the amount of pulmonary blood flow, which may be duct-dependent",
-   "The electrocardiogram often shows left-axis deviation with left ventricular dominance, unusual for a cyanotic newborn",
-   "Management follows the single-ventricle palliation pathway culminating in a Fontan circulation"
+  "id": "tricuspid_atresia",
+  "name": "Tricuspid atresia",
+  "aliases": [
+    "absent tricuspid valve"
   ],
-  "pathophysiology": "In tricuspid atresia the absent tricuspid connection forces all systemic venous return to cross the atrial septum into the left atrium, where it mixes with pulmonary venous blood, producing cyanosis. The right ventricle is hypoplastic, and pulmonary blood flow depends on a ventricular septal defect, the arterial duct or associated lesions. Because a single functional (left) ventricle supports both circulations, the physiology and surgical approach follow the single-ventricle pathway, ultimately routing systemic venous blood directly to the lungs (Fontan).",
-  "additionalDifferentials": [
-   "Other single-ventricle lesions",
-   "Pulmonary atresia with intact septum",
-   "Ebstein anomaly",
-   "Transposition with restricted pulmonary flow",
-   "Other cyanotic congenital heart disease"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography defining the atretic valve and associated defects",
-   "Assessment of pulmonary blood flow and ductal dependence",
-   "Electrocardiogram (left-axis deviation)",
-   "Pre-operative anatomical imaging",
-   "Single-ventricle pathway evaluation"
-  ],
-  "redFlags": [
-   "Severe cyanosis from inadequate pulmonary blood flow (duct closing)",
-   "Restrictive atrial septum impeding systemic venous egress",
-   "Excessive pulmonary flow causing heart failure",
-   "Failing Fontan circulation later in life"
-  ],
-  "prognosis": "Staged single-ventricle palliation allows survival into adulthood for many, but the Fontan circulation carries long-term risks including arrhythmia, protein-losing enteropathy and circulatory failure.",
-  "pitfalls": [
-   "Not maintaining ductal patency when pulmonary flow is duct-dependent",
-   "Overlooking a restrictive atrial communication",
-   "Misreading the unusual left-axis electrocardiogram",
-   "Underestimating long-term Fontan complications"
-  ],
-  "references": [
-   "Congenital heart disease references (standard reference)",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until intervention",
-   "Perform balloon atrial septostomy if the obligatory atrial communication is restrictive and limits systemic venous egress to the left heart",
-   "Pursue the staged single-ventricle palliation pathway, using an initial aortopulmonary shunt or pulmonary artery band as needed, then a bidirectional Glenn and finally Fontan completion",
-   "Give anticongestive therapy with diuretics for heart failure and institute antithrombotic therapy after Fontan completion to reduce thromboembolic risk",
-   "Undertake lifelong surveillance for Fontan complications including atrial arrhythmia, protein-losing enteropathy, plastic bronchitis, thromboembolism, hepatic disease and ventricular dysfunction, with consideration of transplantation for the failing circulation",
-   "Support with nutrition, immunisations, endocarditis prophylaxis and individualised exercise advice",
-   "Manage through a paediatric and congenital cardiology and cardiac surgery team, with structured transition to adult congenital heart disease services and family counselling with foetal echocardiography in future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tricuspid_atresia-pathway",
-   "title": "Tricuspid atresia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe cyanosis from inadequate pulmonary blood flow (duct closing)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography defining the atretic valve and associated defects, Assessment of pulmonary blood flow and ductal dependence, Electrocardiogram (left-axis deviation)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not maintaining ductal patency when pulmonary flow is duct-dependent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tricuspid atresia."
-  }
- ],
- "tables": [
-  {
-   "id": "tricuspid_atresia-matrix",
-   "title": "Tricuspid atresia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Congenital heart disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Congenital heart disease references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
+      "It is a cyanotic lesion and a form of functionally single ventricle",
+      "An obligatory atrial communication allows systemic venous blood to reach the left heart, and a ventricular septal defect or duct supplies pulmonary flow",
+      "Degree of cyanosis depends on the amount of pulmonary blood flow, which may be duct-dependent",
+      "The electrocardiogram often shows left-axis deviation with left ventricular dominance, unusual for a cyanotic newborn",
+      "Management follows the single-ventricle palliation pathway culminating in a Fontan circulation"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography defining the atretic valve and associated defects, Assessment of pulmonary blood flow and ductal dependence,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In tricuspid atresia the absent tricuspid connection forces all systemic venous return to cross the atrial septum into the left atrium, where it mixes with pulmonary venous blood, producing cyanosis. The right ventricle is hypoplastic, and pulmonary blood flow depends on a ventricular septal defect, the arterial duct or associated lesions. Because a single functional (left) ventricle supports both circulations, the physiology and surgical approach follow the single-ventricle pathway, ultimately routing systemic venous blood directly to the lungs (Fontan).",
+    "additionalDifferentials": [
+      "Other single-ventricle lesions",
+      "Pulmonary atresia with intact septum",
+      "Ebstein anomaly",
+      "Transposition with restricted pulmonary flow",
+      "Other cyanotic congenital heart disease"
     ],
-    [
-     "Primary Differentials",
-     "Other single-ventricle lesions, Pulmonary atresia with intact septum, Ebstein anomaly",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography defining the atretic valve and associated defects",
+      "Assessment of pulmonary blood flow and ductal dependence",
+      "Electrocardiogram (left-axis deviation)",
+      "Pre-operative anatomical imaging",
+      "Single-ventricle pathway evaluation"
     ],
-    [
-     "Management Strategy",
-     "Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe cyanosis from inadequate pulmonary blood flow (duct closing)",
+      "Restrictive atrial septum impeding systemic venous egress",
+      "Excessive pulmonary flow causing heart failure",
+      "Failing Fontan circulation later in life"
     ],
-    [
-     "Clinical Pitfall",
-     "Not maintaining ductal patency when pulmonary flow is duct-dependent",
-     "Prevent diagnostic or management error"
+    "prognosis": "Staged single-ventricle palliation allows survival into adulthood for many, but the Fontan circulation carries long-term risks including arrhythmia, protein-losing enteropathy and circulatory failure.",
+    "pitfalls": [
+      "Not maintaining ductal patency when pulmonary flow is duct-dependent",
+      "Overlooking a restrictive atrial communication",
+      "Misreading the unusual left-axis electrocardiogram",
+      "Underestimating long-term Fontan complications"
+    ],
+    "references": [
+      "Congenital heart disease references (standard reference)",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until intervention",
+      "Perform balloon atrial septostomy if the obligatory atrial communication is restrictive and limits systemic venous egress to the left heart",
+      "Pursue the staged single-ventricle palliation pathway, using an initial aortopulmonary shunt or pulmonary artery band as needed, then a bidirectional Glenn and finally Fontan completion",
+      "Give anticongestive therapy with diuretics for heart failure and institute antithrombotic therapy after Fontan completion to reduce thromboembolic risk",
+      "Undertake lifelong surveillance for Fontan complications including atrial arrhythmia, protein-losing enteropathy, plastic bronchitis, thromboembolism, hepatic disease and ventricular dysfunction, with consideration of transplantation for the failing circulation",
+      "Support with nutrition, immunisations, endocarditis prophylaxis and individualised exercise advice",
+      "Manage through a paediatric and congenital cardiology and cardiac surgery team, with structured transition to adult congenital heart disease services and family counselling with foetal echocardiography in future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for tricuspid atresia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tricuspid-atresia-real-image",
-   "title": "Tricuspid atresia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "tricuspid_atresia-pathway",
+      "title": "Tricuspid atresia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe cyanosis from inadequate pulmonary blood flow (duct closing)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography defining the atretic valve and associated defects, Assessment of pulmonary blood flow and ductal dependence, Electrocardiogram (left-axis deviation)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not maintaining ductal patency when pulmonary flow is duct-dependent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tricuspid atresia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tricuspid_atresia-matrix",
+      "title": "Tricuspid atresia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Congenital absence of the tricuspid valve with no direct connection between the right atrium and right ventricle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography defining the atretic valve and associated defects, Assessment of pulmonary blood flow and ductal dependence,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other single-ventricle lesions, Pulmonary atresia with intact septum, Ebstein anomaly",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stabilise the duct-dependent neonate with a prostaglandin E infusion to maintain ductal patency and pulmonary blood flow until",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not maintaining ductal patency when pulmonary flow is duct-dependent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tricuspid atresia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Congenital heart disease references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tricuspid_atresia-dx-mgmt",
+      "title": "Diagnosis and management of Tricuspid atresia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tricuspid atresia: cyanosis from birth, no tricuspid valve on echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe cyanosis as duct closes, or restrictive atrial septum?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal cardiology: prostaglandin E infusion and septostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; ductal dependence assessment; electrocardiogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo show absent tricuspid connection with an atrial communication?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pulmonary atresia with intact septum, Ebstein or restricted transposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prostaglandin E infusion to keep the duct open",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Balloon atrial septostomy if the atrial communication is restrictive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged single-ventricle palliation to Fontan completion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics for heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antithrombotic therapy after Fontan completion",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Lifelong surveillance for Fontan complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Survival into adulthood possible; Fontan carries long-term arrhythmia and failure risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tricuspid_atresia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Defines atretic valve and associated defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary blood flow and ductal dependence assessment",
+          "cells": [
+            {
+              "text": "Guides neonatal stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Left-axis deviation with left ventricular dominance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative anatomical imaging",
+          "cells": [
+            {
+              "text": "Planning for palliation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-ventricle pathway evaluation",
+          "cells": [
+            {
+              "text": "Staging of palliation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_atresia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary atresia with intact septum",
+          "cells": [
+            {
+              "text": "Atresia at the pulmonary rather than the tricuspid valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ebstein anomaly",
+          "cells": [
+            {
+              "text": "Tricuspid valve present with apical leaflet displacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transposition with restricted pulmonary flow",
+          "cells": [
+            {
+              "text": "Discordant connections with restricted pulmonary flow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricuspid_atresia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin E infusion",
+          "cells": [
+            {
+              "text": "Maintains ductal patency and pulmonary blood flow until intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon atrial septostomy",
+          "cells": [
+            {
+              "text": "Restrictive atrial communication limiting systemic venous egress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged single-ventricle palliation",
+          "cells": [
+            {
+              "text": "Aortopulmonary shunt or pulmonary artery band, bidirectional Glenn, then Fontan completion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "Heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic therapy",
+          "cells": [
+            {
+              "text": "After Fontan completion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong Fontan surveillance",
+          "cells": [
+            {
+              "text": "Arrhythmia, protein-losing enteropathy, plastic bronchitis, thromboembolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition, immunisation and endocarditis prophylaxis",
+          "cells": [
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

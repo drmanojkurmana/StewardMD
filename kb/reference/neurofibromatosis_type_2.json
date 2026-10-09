@@ -1,175 +1,444 @@
 {
- "id": "neurofibromatosis_type_2",
- "name": "Neurofibromatosis type 2",
- "aliases": [
-  "NF2",
-  "NF2-related schwannomatosis",
-  "merlin deficiency",
-  "central neurofibromatosis",
-  "bilateral vestibular schwannoma syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing loss, tinnitus, and imbalance in adolescence or early adulthood",
-   "It is a distinct disorder from neurofibromatosis type 1: NF2 is dominated by schwannomas, meningiomas, and ependymomas rather than the neurofibromas, café-au-lait macules, and Lisch nodules of NF1",
-   "Additional tumours include cranial and spinal meningiomas, spinal and peripheral nerve schwannomas, and intramedullary or cauda equina ependymomas",
-   "A characteristic ophthalmological clue is juvenile posterior subcapsular or cortical cataract, which may predate tumour diagnosis",
-   "The disorder is caused by loss-of-function variants in the NF2 tumour suppressor gene, which encodes merlin (schwannomin); it is inherited in an autosomal dominant pattern but a large proportion of cases are de novo and mosaicism is common",
-   "Management is delivered through specialist multidisciplinary teams, using serial MRI surveillance of the brain and spine and audiological monitoring",
-   "Treatment prioritises hearing preservation; the anti-VEGF agent bevacizumab can shrink vestibular schwannomas and improve hearing in selected cases, alongside microsurgery, stereotactic radiosurgery, and auditory implantation"
+  "id": "neurofibromatosis_type_2",
+  "name": "Neurofibromatosis type 2",
+  "aliases": [
+    "NF2",
+    "NF2-related schwannomatosis",
+    "merlin deficiency",
+    "central neurofibromatosis",
+    "bilateral vestibular schwannoma syndrome"
   ],
-  "pathophysiology": "The disorder results from inactivating germline variants in the NF2 gene on chromosome 22, which encodes merlin (also called schwannomin), a cytoskeletal linker protein that normally suppresses cell proliferation by regulating contact inhibition and several growth-signalling pathways. Loss of functional merlin, following a second somatic hit in Schwann cells, meningeal cells, and ependymal cells, removes this brake and predisposes to multiple nervous-system tumours. Inheritance is autosomal dominant with high penetrance, though many patients harbour de novo variants and somatic mosaicism, which influences severity and the recurrence risk offered during counselling.",
-  "additionalDifferentials": [
-   "Neurofibromatosis type 1",
-   "Schwannomatosis (SMARCB1/LZTR1) without vestibular tumours",
-   "Sporadic unilateral vestibular schwannoma",
-   "Multiple meningiomatosis without NF2",
-   "Von Hippel-Lindau disease (other inherited tumour predisposition)",
-   "Meningioma predisposition from prior cranial irradiation"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine",
-   "Molecular genetic testing of the NF2 gene, with tumour testing where mosaicism is suspected",
-   "Pure-tone audiometry and speech discrimination testing with serial monitoring",
-   "Brainstem auditory evoked responses to assess auditory pathway function",
-   "Ophthalmological examination for juvenile cataract and retinal lesions",
-   "Baseline neurological and dermatological assessment for schwannomas and skin tumours"
-  ],
-  "redFlags": [
-   "Rapidly progressive hearing loss or brainstem compression from an enlarging vestibular schwannoma",
-   "New or worsening myelopathy or radiculopathy from spinal tumours",
-   "Raised intracranial pressure or hydrocephalus from large posterior fossa lesions",
-   "Facial nerve dysfunction or lower cranial nerve palsies indicating local tumour progression"
-  ],
-  "prognosis": "The condition is chronic and progressive, with morbidity driven by cumulative tumour burden, hearing loss, and the risks of surgery near critical neural structures. Early diagnosis, expert multidisciplinary surveillance, and hearing-preservation strategies have improved outcomes, but the disorder shortens life expectancy on average and disease is generally more aggressive when it presents in childhood.",
-  "pitfalls": [
-   "Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas",
-   "Treating a young person's vestibular schwannoma as sporadic and failing to image the contralateral side and spine",
-   "Overlooking mosaicism, which can give falsely reassuring blood genetic testing and complicate counselling",
-   "Delaying referral to a specialist centre, where hearing-preservation and multidisciplinary planning materially affect outcome"
-  ],
-  "references": [
-   "GeneReviews (University of Washington)",
-   "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole spine and regular audiological monitoring",
-   "Manage vestibular schwannomas with a hearing-preservation approach, choosing between observation, microsurgery and stereotactic radiosurgery according to tumour growth and hearing",
-   "Use bevacizumab to reduce vestibular schwannoma volume and stabilise or improve hearing in progressive disease",
-   "Treat meningiomas and ependymomas with surgery or radiosurgery as dictated by symptoms and growth",
-   "Support hearing and communication with hearing aids, and offer auditory brainstem or cochlear implantation when hearing is lost",
-   "Provide ophthalmological review for juvenile cataract and monitor for other nervous-system tumours",
-   "Offer genetic counselling, molecular testing and family screening, accounting for the high rate of de novo variants and mosaicism"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurofibromatosis_type_2-pathway",
-   "title": "Neurofibromatosis type 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing loss, tinnitus, and imbalance in adolescence or early adulthood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive hearing loss or brainstem compression from an enlarging vestibular schwannoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine, Molecular genetic testing of the NF2 gene, with tumour testing where mosaicism is suspected, Pure-tone audiometry and speech"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole spine and regular audiological monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurofibromatosis type 2."
-  }
- ],
- "tables": [
-  {
-   "id": "neurofibromatosis_type_2-matrix",
-   "title": "Neurofibromatosis type 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing loss, tinnitus, and imbalance in adolescence or early adulthood",
+      "It is a distinct disorder from neurofibromatosis type 1: NF2 is dominated by schwannomas, meningiomas, and ependymomas rather than the neurofibromas, café-au-lait macules, and Lisch nodules of NF1",
+      "Additional tumours include cranial and spinal meningiomas, spinal and peripheral nerve schwannomas, and intramedullary or cauda equina ependymomas",
+      "A characteristic ophthalmological clue is juvenile posterior subcapsular or cortical cataract, which may predate tumour diagnosis",
+      "The disorder is caused by loss-of-function variants in the NF2 tumour suppressor gene, which encodes merlin (schwannomin); it is inherited in an autosomal dominant pattern but a large proportion of cases are de novo and mosaicism is common",
+      "Management is delivered through specialist multidisciplinary teams, using serial MRI surveillance of the brain and spine and audiological monitoring",
+      "Treatment prioritises hearing preservation; the anti-VEGF agent bevacizumab can shrink vestibular schwannomas and improve hearing in selected cases, alongside microsurgery, stereotactic radiosurgery, and auditory implantation"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine, Molecular genetic testing of the NF2",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder results from inactivating germline variants in the NF2 gene on chromosome 22, which encodes merlin (also called schwannomin), a cytoskeletal linker protein that normally suppresses cell proliferation by regulating contact inhibition and several growth-signalling pathways. Loss of functional merlin, following a second somatic hit in Schwann cells, meningeal cells, and ependymal cells, removes this brake and predisposes to multiple nervous-system tumours. Inheritance is autosomal dominant with high penetrance, though many patients harbour de novo variants and somatic mosaicism, which influences severity and the recurrence risk offered during counselling.",
+    "additionalDifferentials": [
+      "Neurofibromatosis type 1",
+      "Schwannomatosis (SMARCB1/LZTR1) without vestibular tumours",
+      "Sporadic unilateral vestibular schwannoma",
+      "Multiple meningiomatosis without NF2",
+      "Von Hippel-Lindau disease (other inherited tumour predisposition)",
+      "Meningioma predisposition from prior cranial irradiation"
     ],
-    [
-     "Primary Differentials",
-     "Neurofibromatosis type 1, Schwannomatosis (SMARCB1/LZTR1) without vestibular tumours, Sporadic unilateral vestibular schwannoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine",
+      "Molecular genetic testing of the NF2 gene, with tumour testing where mosaicism is suspected",
+      "Pure-tone audiometry and speech discrimination testing with serial monitoring",
+      "Brainstem auditory evoked responses to assess auditory pathway function",
+      "Ophthalmological examination for juvenile cataract and retinal lesions",
+      "Baseline neurological and dermatological assessment for schwannomas and skin tumours"
     ],
-    [
-     "Management Strategy",
-     "Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive hearing loss or brainstem compression from an enlarging vestibular schwannoma",
+      "New or worsening myelopathy or radiculopathy from spinal tumours",
+      "Raised intracranial pressure or hydrocephalus from large posterior fossa lesions",
+      "Facial nerve dysfunction or lower cranial nerve palsies indicating local tumour progression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and progressive, with morbidity driven by cumulative tumour burden, hearing loss, and the risks of surgery near critical neural structures. Early diagnosis, expert multidisciplinary surveillance, and hearing-preservation strategies have improved outcomes, but the disorder shortens life expectancy on average and disease is generally more aggressive when it presents in childhood.",
+    "pitfalls": [
+      "Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas",
+      "Treating a young person's vestibular schwannoma as sporadic and failing to image the contralateral side and spine",
+      "Overlooking mosaicism, which can give falsely reassuring blood genetic testing and complicate counselling",
+      "Delaying referral to a specialist centre, where hearing-preservation and multidisciplinary planning materially affect outcome"
+    ],
+    "references": [
+      "GeneReviews (University of Washington)",
+      "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole spine and regular audiological monitoring",
+      "Manage vestibular schwannomas with a hearing-preservation approach, choosing between observation, microsurgery and stereotactic radiosurgery according to tumour growth and hearing",
+      "Use bevacizumab to reduce vestibular schwannoma volume and stabilise or improve hearing in progressive disease",
+      "Treat meningiomas and ependymomas with surgery or radiosurgery as dictated by symptoms and growth",
+      "Support hearing and communication with hearing aids, and offer auditory brainstem or cochlear implantation when hearing is lost",
+      "Provide ophthalmological review for juvenile cataract and monitor for other nervous-system tumours",
+      "Offer genetic counselling, molecular testing and family screening, accounting for the high rate of de novo variants and mosaicism"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurofibromatosis type 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurofibromatosis-type-2-real-image",
-   "title": "Neurofibromatosis type 2: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neurofibromatosis_type_2-pathway",
+      "title": "Neurofibromatosis type 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing loss, tinnitus, and imbalance in adolescence or early adulthood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive hearing loss or brainstem compression from an enlarging vestibular schwannoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine, Molecular genetic testing of the NF2 gene, with tumour testing where mosaicism is suspected, Pure-tone audiometry and speech"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole spine and regular audiological monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurofibromatosis type 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurofibromatosis_type_2-matrix",
+      "title": "Neurofibromatosis type 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark of the condition is bilateral vestibular schwannomas, which typically present with progressive sensorineural hearing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced MRI of the brain (including internal auditory meati) and whole spine, Molecular genetic testing of the NF2",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neurofibromatosis type 1, Schwannomatosis (SMARCB1/LZTR1) without vestibular tumours, Sporadic unilateral vestibular schwannoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver care through a specialist multidisciplinary team with serial contrast-enhanced MRI surveillance of the brain and whole",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the disorder as NF1 and expecting neurofibromas and café-au-lait macules rather than schwannomas and meningiomas",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurofibromatosis type 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurofibromatosis_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of brain and whole spine",
+          "cells": [
+            {
+              "text": "Vestibular, spinal and other tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF2 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; mosaicism can occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry and speech discrimination",
+          "cells": [
+            {
+              "text": "Serial hearing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem auditory evoked responses",
+          "cells": [
+            {
+              "text": "Auditory pathway function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurofibromatosis_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Neurofibromas and cafe-au-lait macules rather than schwannomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schwannomatosis",
+          "cells": [
+            {
+              "text": "Schwannomas without vestibular tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic unilateral vestibular schwannoma",
+          "cells": [
+            {
+              "text": "NF2 is bilateral; image the contralateral side and spine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurofibromatosis_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing-preservation strategy",
+          "cells": [
+            {
+              "text": "Observation, microsurgery or stereotactic radiosurgery according to growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bevacizumab",
+          "cells": [
+            {
+              "text": "To shrink vestibular schwannomas and stabilise or improve hearing in progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "Hearing aids, or auditory brainstem or cochlear implantation when hearing is lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningioma and ependymoma care",
+          "cells": [
+            {
+              "text": "Surgery or radiosurgery as dictated by symptoms and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI and audiology",
+          "cells": [
+            {
+              "text": "Under a specialist multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurofibromatosis_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Neurofibromatosis type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adolescent or young adult with progressive hearing loss, tinnitus or imbalance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid hearing loss, brainstem compression, myelopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for brainstem compression or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of brain and spine, NF2 testing, audiometry, evoked responses",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilateral vestibular schwannomas on MRI with an NF2 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider NF1, schwannomatosis or sporadic schwannoma; image the other side",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hearing-preservation strategy: observation, microsurgery or radiosurgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bevacizumab to shrink vestibular schwannomas in progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids, or cochlear or brainstem implantation when deaf",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI and audiology under a specialist team",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and progressive; cumulative tumour burden and hearing loss drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

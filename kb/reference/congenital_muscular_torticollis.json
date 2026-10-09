@@ -1,175 +1,444 @@
 {
- "id": "congenital_muscular_torticollis",
- "name": "Congenital muscular torticollis",
- "aliases": [
-  "wry neck",
-  "congenital torticollis",
-  "sternocleidomastoid tumour of infancy",
-  "CMT"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
-   "The head tilts toward the affected side while the chin rotates to the opposite side, the characteristic posture produced by unilateral sternocleidomastoid tightness",
-   "In early infancy a firm, non-tender sternocleidomastoid tumour, an olive-like swelling within the muscle belly, may be palpable and typically regresses over the following months",
-   "Positional (deformational) plagiocephaly and facial asymmetry commonly accompany the tilt because the infant consistently rests the head in one position",
-   "There is a well-recognised association with developmental dysplasia of the hip and with other packaging deformities, so the hips must always be examined",
-   "Early passive stretching physiotherapy, along with positioning and handling advice, resolves the great majority of cases when begun in the first months of life",
-   "Deformity that persists beyond about one year despite stretching may require surgical release of the sternocleidomastoid"
+  "id": "congenital_muscular_torticollis",
+  "name": "Congenital muscular torticollis",
+  "aliases": [
+    "wry neck",
+    "congenital torticollis",
+    "sternocleidomastoid tumour of infancy",
+    "CMT"
   ],
-  "pathophysiology": "Congenital muscular torticollis results from localised fibrosis and shortening of the sternocleidomastoid, thought to follow a compartment-like injury or ischaemia of the muscle related to intrauterine position or a difficult, often breech, delivery. Fibrous tissue replaces part of the muscle, sometimes forming a palpable tumour early on, and the resulting contracture tethers the head into tilt toward the affected side and rotation away from it. Because the deforming posture is constant, the growing skull and face remodel asymmetrically, producing plagiocephaly and hemifacial flattening. The same intrauterine crowding that injures the muscle is thought to underlie the association with developmental hip dysplasia and other moulding deformities.",
-  "additionalDifferentials": [
-   "Bony torticollis from Klippel-Feil syndrome or other cervical vertebral anomaly",
-   "Atlantoaxial rotatory subluxation or other cervical instability",
-   "Ocular torticollis from strabismus or a cranial nerve palsy",
-   "Neurological causes such as a posterior fossa tumour or Chiari malformation",
-   "Sandifer syndrome associated with gastro-oesophageal reflux",
-   "Inflammatory or infective causes such as cervical lymphadenitis or a retropharyngeal abscess"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of neck range of movement and palpation of the sternocleidomastoid",
-   "Examination of the hips, with ultrasound for developmental dysplasia where indicated",
-   "Ultrasound of the sternocleidomastoid to confirm fibrosis when the diagnosis is uncertain",
-   "Cervical spine radiographs when a bony anomaly or instability is suspected",
-   "Ophthalmological assessment if an ocular cause is considered",
-   "Neuroimaging if neurological signs or an atypical presentation raise concern for a central cause"
-  ],
-  "redFlags": [
-   "Absence of a tight sternocleidomastoid, or a tilt that does not fit a muscular pattern, suggesting a bony, ocular, or neurological cause",
-   "Neurological signs, or torticollis of later or sudden onset",
-   "Failure to improve with, or worsening despite, appropriate stretching physiotherapy",
-   "Associated developmental dysplasia of the hip",
-   "Progressive facial asymmetry or severe fixed contracture"
-  ],
-  "prognosis": "The outlook is excellent when treatment begins early, as most infants achieve full correction with stretching and positioning; later presentation or a persistent tight band carries a greater chance of residual deformity and a need for surgical release.",
-  "pitfalls": [
-   "Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause",
-   "Failing to examine the hips and overlooking coexisting dysplasia",
-   "Delaying stretching physiotherapy, which is most effective in the early months",
-   "Neglecting positioning advice, allowing plagiocephaly and facial asymmetry to worsen",
-   "Persisting with conservative treatment indefinitely when surgical release is indicated"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Lovell and Winter's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy",
-   "Positioning and handling advice encouraging rotation toward the restricted side and reducing the sustained deforming posture",
-   "Repositioning, tummy-time and, where needed, cranial remoulding orthosis to address positional plagiocephaly and facial asymmetry",
-   "Always examine and screen the hips for associated developmental dysplasia",
-   "Surgical sternocleidomastoid release reserved for a persistent tight band or late presentation failing conservative care",
-   "Follow-up to monitor neck range of movement, facial symmetry and correction through growth"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_muscular_torticollis-pathway",
-   "title": "Congenital muscular torticollis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Absence of a tight sternocleidomastoid, or a tilt that does not fit a muscular pattern, suggesting a bony, ocular, or neurological cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of neck range of movement and palpation of the sternocleidomastoid, Examination of the hips, with ultrasound for developmental dysplasia where indicated, Ultrasound of the sternocleidomastoid to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital muscular torticollis."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_muscular_torticollis-matrix",
-   "title": "Congenital muscular torticollis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
+      "The head tilts toward the affected side while the chin rotates to the opposite side, the characteristic posture produced by unilateral sternocleidomastoid tightness",
+      "In early infancy a firm, non-tender sternocleidomastoid tumour, an olive-like swelling within the muscle belly, may be palpable and typically regresses over the following months",
+      "Positional (deformational) plagiocephaly and facial asymmetry commonly accompany the tilt because the infant consistently rests the head in one position",
+      "There is a well-recognised association with developmental dysplasia of the hip and with other packaging deformities, so the hips must always be examined",
+      "Early passive stretching physiotherapy, along with positioning and handling advice, resolves the great majority of cases when begun in the first months of life",
+      "Deformity that persists beyond about one year despite stretching may require surgical release of the sternocleidomastoid"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of neck range of movement and palpation of the sternocleidomastoid, Examination of the hips, with ultrasound",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital muscular torticollis results from localised fibrosis and shortening of the sternocleidomastoid, thought to follow a compartment-like injury or ischaemia of the muscle related to intrauterine position or a difficult, often breech, delivery. Fibrous tissue replaces part of the muscle, sometimes forming a palpable tumour early on, and the resulting contracture tethers the head into tilt toward the affected side and rotation away from it. Because the deforming posture is constant, the growing skull and face remodel asymmetrically, producing plagiocephaly and hemifacial flattening. The same intrauterine crowding that injures the muscle is thought to underlie the association with developmental hip dysplasia and other moulding deformities.",
+    "additionalDifferentials": [
+      "Bony torticollis from Klippel-Feil syndrome or other cervical vertebral anomaly",
+      "Atlantoaxial rotatory subluxation or other cervical instability",
+      "Ocular torticollis from strabismus or a cranial nerve palsy",
+      "Neurological causes such as a posterior fossa tumour or Chiari malformation",
+      "Sandifer syndrome associated with gastro-oesophageal reflux",
+      "Inflammatory or infective causes such as cervical lymphadenitis or a retropharyngeal abscess"
     ],
-    [
-     "Primary Differentials",
-     "Bony torticollis from Klippel-Feil syndrome or other cervical vertebral anomaly, Atlantoaxial rotatory subluxation or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of neck range of movement and palpation of the sternocleidomastoid",
+      "Examination of the hips, with ultrasound for developmental dysplasia where indicated",
+      "Ultrasound of the sternocleidomastoid to confirm fibrosis when the diagnosis is uncertain",
+      "Cervical spine radiographs when a bony anomaly or instability is suspected",
+      "Ophthalmological assessment if an ocular cause is considered",
+      "Neuroimaging if neurological signs or an atypical presentation raise concern for a central cause"
     ],
-    [
-     "Management Strategy",
-     "First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy",
-     "Core treatment modality"
+    "redFlags": [
+      "Absence of a tight sternocleidomastoid, or a tilt that does not fit a muscular pattern, suggesting a bony, ocular, or neurological cause",
+      "Neurological signs, or torticollis of later or sudden onset",
+      "Failure to improve with, or worsening despite, appropriate stretching physiotherapy",
+      "Associated developmental dysplasia of the hip",
+      "Progressive facial asymmetry or severe fixed contracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent when treatment begins early, as most infants achieve full correction with stretching and positioning; later presentation or a persistent tight band carries a greater chance of residual deformity and a need for surgical release.",
+    "pitfalls": [
+      "Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause",
+      "Failing to examine the hips and overlooking coexisting dysplasia",
+      "Delaying stretching physiotherapy, which is most effective in the early months",
+      "Neglecting positioning advice, allowing plagiocephaly and facial asymmetry to worsen",
+      "Persisting with conservative treatment indefinitely when surgical release is indicated"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Lovell and Winter's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy",
+      "Positioning and handling advice encouraging rotation toward the restricted side and reducing the sustained deforming posture",
+      "Repositioning, tummy-time and, where needed, cranial remoulding orthosis to address positional plagiocephaly and facial asymmetry",
+      "Always examine and screen the hips for associated developmental dysplasia",
+      "Surgical sternocleidomastoid release reserved for a persistent tight band or late presentation failing conservative care",
+      "Follow-up to monitor neck range of movement, facial symmetry and correction through growth"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital muscular torticollis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-muscular-torticollis-real-image",
-   "title": "Congenital muscular torticollis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "congenital_muscular_torticollis-pathway",
+      "title": "Congenital muscular torticollis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Absence of a tight sternocleidomastoid, or a tilt that does not fit a muscular pattern, suggesting a bony, ocular, or neurological cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of neck range of movement and palpation of the sternocleidomastoid, Examination of the hips, with ultrasound for developmental dysplasia where indicated, Ultrasound of the sternocleidomastoid to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital muscular torticollis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_muscular_torticollis-matrix",
+      "title": "Congenital muscular torticollis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of a persistent head tilt in infancy, arising from fibrosis and shortening of the sternocleidomastoid muscle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of neck range of movement and palpation of the sternocleidomastoid, Examination of the hips, with ultrasound",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bony torticollis from Klippel-Feil syndrome or other cervical vertebral anomaly, Atlantoaxial rotatory subluxation or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line passive sternocleidomastoid stretching physiotherapy begun early in infancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming every infantile head tilt is muscular and missing a bony, ocular, or neurological cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital muscular torticollis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_muscular_torticollis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of neck range and sternocleidomastoid",
+          "cells": [
+            {
+              "text": "Restricted neck range; tight band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip examination with ultrasound where indicated",
+          "cells": [
+            {
+              "text": "Developmental dysplasia of the hip screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sternocleidomastoid ultrasound",
+          "cells": [
+            {
+              "text": "Fibrosis confirmed when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine radiographs",
+          "cells": [
+            {
+              "text": "Bony anomaly or instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_muscular_torticollis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bony torticollis from Klippel-Feil syndrome or cervical anomaly",
+          "cells": [
+            {
+              "text": "Bony anomaly on cervical spine radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular torticollis from strabismus or cranial nerve palsy",
+          "cells": [
+            {
+              "text": "Ocular cause considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sandifer syndrome with gastro-oesophageal reflux",
+          "cells": [
+            {
+              "text": "Named look-alike associated with reflux"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_muscular_torticollis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Passive SCM stretching physiotherapy",
+          "cells": [
+            {
+              "text": "First-line, begun early in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positioning and handling advice",
+          "cells": [
+            {
+              "text": "Encourage rotation toward the restricted side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repositioning and cranial remoulding orthosis",
+          "cells": [
+            {
+              "text": "Positional plagiocephaly and facial asymmetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip screening",
+          "cells": [
+            {
+              "text": "Examine hips for developmental dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical SCM release",
+          "cells": [
+            {
+              "text": "Persistent tight band or late presentation failing conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Neck range, facial symmetry and correction through growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_muscular_torticollis-dx-mgmt",
+      "title": "Diagnosis and management of Congenital muscular torticollis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital muscular torticollis: infant head tilt with tight SCM",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological signs, sudden onset, no response to stretching)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological or spinal imaging for neurological signs or sudden onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neck examination; SCM palpation or ultrasound; hip exam; spine radiographs if bony",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there a tight sternocleidomastoid with a muscular pattern of tilt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bony, ocular, reflux or neurological torticollis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early passive SCM stretching physiotherapy in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Positioning advice to encourage rotation toward the restricted side",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cranial remoulding orthosis for positional plagiocephaly if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical SCM release only for a persistent tight band",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent when treated early; most infants achieve full correction with stretching",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

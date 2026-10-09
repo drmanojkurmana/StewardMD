@@ -1,186 +1,164 @@
 {
- "id": "neonatal-exchange-transfusion",
- "title": "Exchange transfusion in neonates (double-volume)",
- "subject": "paediatrics",
- "population": "Neonates",
- "basis": "international",
- "setting": "NICU",
- "aliases": [
-  "DVET",
-  "double volume exchange transfusion",
-  "double-volume exchange",
-  "exchange transfusion",
-  "blood exchange newborn",
-  "hyperbilirubinaemia exchange",
-  "isoimmune haemolysis exchange",
-  "Rh disease exchange"
- ],
- "summary": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
- "sections": [
-  {
-   "kind": "recognise",
-   "title": "Indication",
-   "items": [
-    "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed parental consent."
-   ]
-  },
-  {
-   "kind": "immediate",
-   "title": "Prepare",
-   "items": [
-    "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation equipment ready and monitor throughout.",
-    "Continue intensive phototherapy before, during and after the exchange.",
-    "Blood: the blood bank reconstitutes red cells and plasma to a haematocrit of 50 to 60%. With ABO incompatibility use group O red cells and AB plasma. Whole blood must be fresh (under 24 hours).",
-    "Without ABO incompatibility, saline or albumin can replace plasma, and blood of the baby's own group is used; in subgroup incompatibility use blood negative for the causative antigen.",
-    "Cross-match donor blood with the mother's blood for an urgent delivery room exchange or intrauterine transfusion, otherwise with the baby's blood. Irradiate, filter and warm the blood."
-   ]
-  },
-  {
-   "kind": "treatment",
-   "title": "Procedure",
-   "items": [
-    "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
-    "Volume: 2 x total blood volume, taking 100 mL/kg for preterm and 85 mL/kg for term babies (see the procedure calculator). This exchanges about 86% of the baby's blood. Plasma volume = exchange volume minus red cell volume.",
-    "Exchange at most 5 mL/kg at a time, no faster than 2 mL/kg/minute to avoid swings in blood pressure and intracranial pressure; the whole exchange takes 1 to 2 hours.",
-    "Alternative: synchronous peripheral arterial out, venous in, at 3 to 5 mL/min (one Chinese series, which also took neonatal blood volume as about 80 mL/kg).",
-    "Routine calcium infusion during the exchange is not recommended."
-   ]
-  },
-  {
-   "kind": "monitoring",
-   "title": "Monitoring",
-   "items": [
-    "Measure serum bilirubin within 2 hours of the procedure.",
-    "Check blood gas, glucose, electrolytes and calcium before and after; one series drew about 10 mL before and after for bilirubin, liver and renal function, gas, glucose and electrolytes.",
-    "The exchange removes drugs: repeat doses or monitor levels. Antibiotics are not needed afterwards unless infection is suspected."
-   ]
-  },
-  {
-   "kind": "pitfalls",
-   "title": "Complications",
-   "items": [
-    "Apnoea, bradycardia, hypotension or hypertension, hypocalcaemia, hypo- or hyperglycaemia, hyperkalaemia, thrombocytopenia, neutropenia, coagulopathy, DIC, metabolic acidosis, vascular spasm, thrombosis, embolism, feeding intolerance, NEC, omphalitis and sepsis.",
-    "Mortality risk is about 1% in otherwise healthy and 12% in ill babies."
-   ]
-  }
- ],
- "sources": [
-  {
-   "org": "Turkish Neonatal Society (Coban A et al.)",
-   "title": "Guideline to the approach, follow-up, and treatment of neonatal jaundice",
-   "year": 2018,
-   "url": "https://doi.org/10.5152/turkpediatriars.2018.01816"
-  },
-  {
-   "org": "J Med Biochem (Xiong Z et al.)",
-   "title": "Efficacy of single- and double-volume exchange transfusion for neonatal hyperbilirubinemia",
-   "year": 2023,
-   "url": "https://doi.org/10.5937/jomb0-42668"
-  },
-  {
-   "org": "Int J Pediatr (Zubi ZBH et al.)",
-   "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
-   "year": 2023,
-   "url": "https://doi.org/10.1155/2023/3241607"
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-30"
- },
- "algorithms": [
-  {
-   "id": "neonatal-exchange-transfusion-pathway",
-   "title": "Exchange transfusion in neonates (double-volume) Clinical Decision & Management Pathway",
-   "steps": [
+  "id": "neonatal-exchange-transfusion",
+  "title": "Exchange transfusion in neonates (double-volume)",
+  "subject": "paediatrics",
+  "population": "Neonates",
+  "basis": "international",
+  "setting": "NICU",
+  "aliases": [
+    "DVET",
+    "double volume exchange transfusion",
+    "double-volume exchange",
+    "exchange transfusion",
+    "blood exchange newborn",
+    "hyperbilirubinaemia exchange",
+    "isoimmune haemolysis exchange",
+    "Rh disease exchange"
+  ],
+  "summary": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+  "sections": [
     {
-     "step": "Triage & Clinical Presentation",
-     "action": "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed parental consent.",
-     "critical": true
+      "kind": "recognise",
+      "title": "Indication",
+      "items": [
+        "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed parental consent."
+      ]
     },
     {
-     "step": "Immediate Stabilization",
-     "branch": "Emergency Stabilization",
-     "action": "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation equipment ready and monitor throughout.",
-     "critical": true
+      "kind": "immediate",
+      "title": "Prepare",
+      "items": [
+        "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation equipment ready and monitor throughout.",
+        "Continue intensive phototherapy before, during and after the exchange.",
+        "Blood: the blood bank reconstitutes red cells and plasma to a haematocrit of 50 to 60%. With ABO incompatibility use group O red cells and AB plasma. Whole blood must be fresh (under 24 hours).",
+        "Without ABO incompatibility, saline or albumin can replace plasma, and blood of the baby's own group is used; in subgroup incompatibility use blood negative for the causative antigen.",
+        "Cross-match donor blood with the mother's blood for an urgent delivery room exchange or intrauterine transfusion, otherwise with the baby's blood. Irradiate, filter and warm the blood."
+      ]
     },
     {
-     "step": "Diagnostic Workup & Risk Stratification",
-     "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+      "kind": "treatment",
+      "title": "Procedure",
+      "items": [
+        "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
+        "Volume: 2 x total blood volume, taking 100 mL/kg for preterm and 85 mL/kg for term babies (see the procedure calculator). This exchanges about 86% of the baby's blood. Plasma volume = exchange volume minus red cell volume.",
+        "Exchange at most 5 mL/kg at a time, no faster than 2 mL/kg/minute to avoid swings in blood pressure and intracranial pressure; the whole exchange takes 1 to 2 hours.",
+        "Alternative: synchronous peripheral arterial out, venous in, at 3 to 5 mL/min (one Chinese series, which also took neonatal blood volume as about 80 mL/kg).",
+        "Routine calcium infusion during the exchange is not recommended."
+      ]
     },
     {
-     "step": "Definitive Medical Management",
-     "branch": "Targeted Therapy",
-     "action": "Access: umbilical venous catheter, 8 Fr recommended for exchange."
+      "kind": "monitoring",
+      "title": "Monitoring",
+      "items": [
+        "Measure serum bilirubin within 2 hours of the procedure.",
+        "Check blood gas, glucose, electrolytes and calcium before and after; one series drew about 10 mL before and after for bilirubin, liver and renal function, gas, glucose and electrolytes.",
+        "The exchange removes drugs: repeat doses or monitor levels. Antibiotics are not needed afterwards unless infection is suspected."
+      ]
     },
     {
-     "step": "Monitoring & Escalation Thresholds",
-     "action": "Measure serum bilirubin within 2 hours of the procedure."
+      "kind": "pitfalls",
+      "title": "Complications",
+      "items": [
+        "Apnoea, bradycardia, hypotension or hypertension, hypocalcaemia, hypo- or hyperglycaemia, hyperkalaemia, thrombocytopenia, neutropenia, coagulopathy, DIC, metabolic acidosis, vascular spasm, thrombosis, embolism, feeding intolerance, NEC, omphalitis and sepsis.",
+        "Mortality risk is about 1% in otherwise healthy and 12% in ill babies."
+      ]
     }
-   ],
-   "caption": "Evidence-based clinical decision pathway for exchange transfusion in neonates (double-volume)."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal-exchange-transfusion-summary-matrix",
-   "title": "Exchange transfusion in neonates (double-volume) Clinical Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed",
-     "Mandatory clinical criteria"
-    ],
-    [
-     "Immediate Priority",
-     "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation",
-     "Time-critical initial resuscitation"
-    ],
-    [
-     "Key Investigations",
-     "Standard laboratory and imaging workup",
-     "Differentiates etiology and severity"
-    ],
-    [
-     "Targeted Treatment",
-     "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
-     "Definitive management protocol"
-    ],
-    [
-     "Critical Pitfall",
-     "Apnoea, bradycardia, hypotension or hypertension, hypocalcaemia, hypo- or hyperglycaemia, hyperkalaemia, thrombocytopenia, neutropenia,",
-     "Avoid preventable clinical error"
-    ]
-   ],
-   "caption": "Core clinical management matrix for exchange transfusion in neonates (double-volume)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-exchange-transfusion-real-image",
-   "title": "Exchange transfusion in neonates (double-volume): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  ],
+  "sources": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
+      "org": "Turkish Neonatal Society (Coban A et al.)",
+      "title": "Guideline to the approach, follow-up, and treatment of neonatal jaundice",
+      "year": 2018,
+      "url": "https://doi.org/10.5152/turkpediatriars.2018.01816"
     },
     {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+      "org": "J Med Biochem (Xiong Z et al.)",
+      "title": "Efficacy of single- and double-volume exchange transfusion for neonatal hyperbilirubinemia",
+      "year": 2023,
+      "url": "https://doi.org/10.5937/jomb0-42668"
     },
     {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "org": "Int J Pediatr (Zubi ZBH et al.)",
+      "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
+      "year": 2023,
+      "url": "https://doi.org/10.1155/2023/3241607"
     }
-   ]
-  }
- ]
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "compiled": "2026-09-30"
+  },
+  "algorithms": [
+    {
+      "id": "neonatal-exchange-transfusion-pathway",
+      "title": "Exchange transfusion in neonates (double-volume) Clinical Decision & Management Pathway",
+      "steps": [
+        {
+          "step": "Triage & Clinical Presentation",
+          "action": "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed parental consent.",
+          "critical": true
+        },
+        {
+          "step": "Immediate Stabilization",
+          "branch": "Emergency Stabilization",
+          "action": "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation equipment ready and monitor throughout.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Risk Stratification",
+          "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+        },
+        {
+          "step": "Definitive Medical Management",
+          "branch": "Targeted Therapy",
+          "action": "Access: umbilical venous catheter, 8 Fr recommended for exchange."
+        },
+        {
+          "step": "Monitoring & Escalation Thresholds",
+          "action": "Measure serum bilirubin within 2 hours of the procedure."
+        }
+      ],
+      "caption": "Evidence-based clinical decision pathway for exchange transfusion in neonates (double-volume)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "neonatal-exchange-transfusion-summary-matrix",
+      "title": "Exchange transfusion in neonates (double-volume) Clinical Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed",
+          "Mandatory clinical criteria"
+        ],
+        [
+          "Immediate Priority",
+          "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation",
+          "Time-critical initial resuscitation"
+        ],
+        [
+          "Key Investigations",
+          "Standard laboratory and imaging workup",
+          "Differentiates etiology and severity"
+        ],
+        [
+          "Targeted Treatment",
+          "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
+          "Definitive management protocol"
+        ],
+        [
+          "Critical Pitfall",
+          "Apnoea, bradycardia, hypotension or hypertension, hypocalcaemia, hypo- or hyperglycaemia, hyperkalaemia, thrombocytopenia, neutropenia,",
+          "Avoid preventable clinical error"
+        ]
+      ],
+      "caption": "Core clinical management matrix for exchange transfusion in neonates (double-volume)."
+    }
+  ],
+  "diagrams": []
 }

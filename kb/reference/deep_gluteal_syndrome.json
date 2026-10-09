@@ -1,172 +1,441 @@
 {
- "id": "deep_gluteal_syndrome",
- "name": "deep gluteal syndrome",
- "aliases": [
-  "deep gluteal space sciatic nerve entrapment",
-  "non-discogenic sciatic nerve entrapment"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "orthopaedic surgery / sports medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip and buttock pain with sciatica not attributable to the lumbar spine.",
-   "Symptoms are characteristically aggravated by prolonged sitting, and patients often shift weight or cannot tolerate sitting for extended periods.",
-   "Piriformis syndrome is one subset; entrapment may equally arise from fibrovascular bands, the obturator internus and gemelli, proximal hamstring pathology, ischiofemoral narrowing or vascular structures.",
-   "Provocation tests include the seated piriformis stretch test, the active piriformis test, and the flexion-adduction-internal-rotation manoeuvre; the Pace and Freiberg signs may also be positive.",
-   "A normal lumbar spine examination and imaging in a patient with sciatica should prompt consideration of an extraspinal source in the deep gluteal space.",
-   "MR neurography helps localise the entrapment site and characterise the nerve, while lumbar imaging is needed to exclude a discogenic cause.",
-   "Management begins with physiotherapy emphasising neural mobilisation and stretching, alongside image-guided perineural injection that is both therapeutic and diagnostic.",
-   "Endoscopic sciatic nerve decompression offers good outcomes in correctly selected patients who fail conservative treatment."
+  "id": "deep_gluteal_syndrome",
+  "name": "deep gluteal syndrome",
+  "aliases": [
+    "deep gluteal space sciatic nerve entrapment",
+    "non-discogenic sciatic nerve entrapment"
   ],
-  "pathophysiology": "The deep gluteal or subgluteal space is bounded anteriorly by the posterior hip capsule and proximal femur, posteriorly by gluteus maximus, medially by the sacrotuberous and sacrospinous ligaments and the ischium, and superiorly by the sciatic notch. The sciatic nerve courses through this space and may be compressed or tethered by several structures: the piriformis, including anatomical variants in which the nerve or its divisions pierce or straddle the muscle; fibrovascular bands; hypertrophied or inflamed short external rotators such as the obturator internus and gemelli; proximal hamstring scarring; a narrowed ischiofemoral interval; or aberrant vessels. Loss of the normal gliding and excursion of the nerve, often dynamic and posture-dependent, produces neuropathic buttock and posterior thigh pain.",
-  "additionalDifferentials": [
-   "Lumbar radiculopathy from disc herniation or stenosis",
-   "Proximal hamstring tendinopathy or avulsion",
-   "Ischiofemoral impingement",
-   "Sacroiliac joint dysfunction",
-   "Intra-articular hip pathology such as a labral tear",
-   "Pudendal neuralgia",
-   "Ischiogluteal or trochanteric bursitis"
-  ],
-  "additionalInvestigations": [
-   "MRI of the pelvis and hip with MR neurography of the sciatic nerve",
-   "MRI of the lumbar spine to exclude a discogenic cause",
-   "Electrodiagnostic studies including nerve conduction studies and EMG, with positional testing where available",
-   "Dynamic ultrasound of the sciatic nerve in the deep gluteal space",
-   "Image-guided perineural diagnostic local anaesthetic injection"
-  ],
-  "redFlags": [
-   "Progressive motor weakness or foot drop indicating significant nerve compromise",
-   "Bowel or bladder dysfunction or saddle anaesthesia, suggesting cauda equina syndrome from a central cause",
-   "Constant severe night pain with systemic features, raising concern for a pelvic or presacral mass",
-   "Bilateral symptoms with rapidly evolving neurological signs"
-  ],
-  "prognosis": "Many patients improve with conservative treatment and image-guided perineural injection. Endoscopic decompression provides good pain relief and functional recovery in appropriately selected patients with a clearly identified entrapment, although recovery of longstanding neurological deficit can be incomplete.",
-  "pitfalls": [
-   "Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space.",
-   "Failing to exclude the lumbar spine as the true pain generator before attributing symptoms to the deep gluteal space.",
-   "Relying on normal static imaging, since entrapment is frequently dynamic and posture-dependent.",
-   "Injecting near the sciatic nerve without image guidance, risking intraneural injection and nerve injury."
-  ],
-  "references": [
-   "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding and stretching of the piriformis and short external rotators",
-   "Provide analgesia with non-steroidal anti-inflammatory drugs and neuropathic agents for the neuropathic pain component",
-   "Offer image-guided perineural injection, with local anaesthetic and corticosteroid or botulinum toxin to the piriformis, for both diagnosis and treatment",
-   "Confirm the entrapment site with MR neurography and exclude a discogenic cause with lumbar spine imaging before invasive treatment",
-   "Refer for endoscopic sciatic nerve decompression in selected patients with a clearly identified entrapment refractory to conservative care",
-   "Counsel that recovery of a longstanding neurological deficit may be incomplete"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "deep_gluteal_syndrome-pathway",
-   "title": "deep gluteal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip and buttock pain with sciatica not attributable to the lumbar spine.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive motor weakness or foot drop indicating significant nerve compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the pelvis and hip with MR neurography of the sciatic nerve, MRI of the lumbar spine to exclude a discogenic cause, Electrodiagnostic studies including nerve conduction studies and EMG, with positional testing where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding and stretching of the piriformis and short external rotators"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of deep gluteal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "deep_gluteal_syndrome-matrix",
-   "title": "deep gluteal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "orthopaedic surgery / sports medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip and buttock pain with sciatica not attributable to the lumbar spine.",
+      "Symptoms are characteristically aggravated by prolonged sitting, and patients often shift weight or cannot tolerate sitting for extended periods.",
+      "Piriformis syndrome is one subset; entrapment may equally arise from fibrovascular bands, the obturator internus and gemelli, proximal hamstring pathology, ischiofemoral narrowing or vascular structures.",
+      "Provocation tests include the seated piriformis stretch test, the active piriformis test, and the flexion-adduction-internal-rotation manoeuvre; the Pace and Freiberg signs may also be positive.",
+      "A normal lumbar spine examination and imaging in a patient with sciatica should prompt consideration of an extraspinal source in the deep gluteal space.",
+      "MR neurography helps localise the entrapment site and characterise the nerve, while lumbar imaging is needed to exclude a discogenic cause.",
+      "Management begins with physiotherapy emphasising neural mobilisation and stretching, alongside image-guided perineural injection that is both therapeutic and diagnostic.",
+      "Endoscopic sciatic nerve decompression offers good outcomes in correctly selected patients who fail conservative treatment."
     ],
-    [
-     "Key Investigations",
-     "MRI of the pelvis and hip with MR neurography of the sciatic nerve, MRI of the lumbar spine to exclude a discogenic cause,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The deep gluteal or subgluteal space is bounded anteriorly by the posterior hip capsule and proximal femur, posteriorly by gluteus maximus, medially by the sacrotuberous and sacrospinous ligaments and the ischium, and superiorly by the sciatic notch. The sciatic nerve courses through this space and may be compressed or tethered by several structures: the piriformis, including anatomical variants in which the nerve or its divisions pierce or straddle the muscle; fibrovascular bands; hypertrophied or inflamed short external rotators such as the obturator internus and gemelli; proximal hamstring scarring; a narrowed ischiofemoral interval; or aberrant vessels. Loss of the normal gliding and excursion of the nerve, often dynamic and posture-dependent, produces neuropathic buttock and posterior thigh pain.",
+    "additionalDifferentials": [
+      "Lumbar radiculopathy from disc herniation or stenosis",
+      "Proximal hamstring tendinopathy or avulsion",
+      "Ischiofemoral impingement",
+      "Sacroiliac joint dysfunction",
+      "Intra-articular hip pathology such as a labral tear",
+      "Pudendal neuralgia",
+      "Ischiogluteal or trochanteric bursitis"
     ],
-    [
-     "Primary Differentials",
-     "Lumbar radiculopathy from disc herniation or stenosis, Proximal hamstring tendinopathy or avulsion, Ischiofemoral impingement",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the pelvis and hip with MR neurography of the sciatic nerve",
+      "MRI of the lumbar spine to exclude a discogenic cause",
+      "Electrodiagnostic studies including nerve conduction studies and EMG, with positional testing where available",
+      "Dynamic ultrasound of the sciatic nerve in the deep gluteal space",
+      "Image-guided perineural diagnostic local anaesthetic injection"
     ],
-    [
-     "Management Strategy",
-     "Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive motor weakness or foot drop indicating significant nerve compromise",
+      "Bowel or bladder dysfunction or saddle anaesthesia, suggesting cauda equina syndrome from a central cause",
+      "Constant severe night pain with systemic features, raising concern for a pelvic or presacral mass",
+      "Bilateral symptoms with rapidly evolving neurological signs"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients improve with conservative treatment and image-guided perineural injection. Endoscopic decompression provides good pain relief and functional recovery in appropriately selected patients with a clearly identified entrapment, although recovery of longstanding neurological deficit can be incomplete.",
+    "pitfalls": [
+      "Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space.",
+      "Failing to exclude the lumbar spine as the true pain generator before attributing symptoms to the deep gluteal space.",
+      "Relying on normal static imaging, since entrapment is frequently dynamic and posture-dependent.",
+      "Injecting near the sciatic nerve without image guidance, risking intraneural injection and nerve injury."
+    ],
+    "references": [
+      "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding and stretching of the piriformis and short external rotators",
+      "Provide analgesia with non-steroidal anti-inflammatory drugs and neuropathic agents for the neuropathic pain component",
+      "Offer image-guided perineural injection, with local anaesthetic and corticosteroid or botulinum toxin to the piriformis, for both diagnosis and treatment",
+      "Confirm the entrapment site with MR neurography and exclude a discogenic cause with lumbar spine imaging before invasive treatment",
+      "Refer for endoscopic sciatic nerve decompression in selected patients with a clearly identified entrapment refractory to conservative care",
+      "Counsel that recovery of a longstanding neurological deficit may be incomplete"
     ]
-   ],
-   "caption": "Overview comparison matrix for deep gluteal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "deep-gluteal-syndrome-real-image",
-   "title": "deep gluteal syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "deep_gluteal_syndrome-pathway",
+      "title": "deep gluteal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip and buttock pain with sciatica not attributable to the lumbar spine.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive motor weakness or foot drop indicating significant nerve compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the pelvis and hip with MR neurography of the sciatic nerve, MRI of the lumbar spine to exclude a discogenic cause, Electrodiagnostic studies including nerve conduction studies and EMG, with positional testing where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding and stretching of the piriformis and short external rotators"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of deep gluteal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "deep_gluteal_syndrome-matrix",
+      "title": "deep gluteal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Describes non-discogenic entrapment of the sciatic nerve within the deep gluteal (subgluteal) space, presenting as posterior hip",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the pelvis and hip with MR neurography of the sciatic nerve, MRI of the lumbar spine to exclude a discogenic cause,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lumbar radiculopathy from disc herniation or stenosis, Proximal hamstring tendinopathy or avulsion, Ischiofemoral impingement",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with conservative treatment: activity modification avoiding prolonged sitting, and physiotherapy with sciatic nerve gliding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on a diagnosis of piriformis syndrome and overlooking the other entrapment sites within the deep gluteal space.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for deep gluteal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deep_gluteal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MR neurography of the sciatic nerve",
+          "cells": [
+            {
+              "text": "Confirms the entrapment site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spine MRI",
+          "cells": [
+            {
+              "text": "Excludes a discogenic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound of the sciatic nerve",
+          "cells": [
+            {
+              "text": "Dynamic assessment; entrapment is often posture-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided perineural diagnostic injection",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic response in the deep gluteal space"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_gluteal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar radiculopathy",
+          "cells": [
+            {
+              "text": "Separated by lumbar spine MRI for a discogenic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Piriformis syndrome",
+          "cells": [
+            {
+              "text": "Anchoring on it misses other deep gluteal entrapment sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_gluteal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Avoid prolonged sitting; physiotherapy with sciatic nerve gliding and stretching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "NSAIDs and neuropathic agents for the neuropathic component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided perineural injection",
+          "cells": [
+            {
+              "text": "Local anaesthetic with corticosteroid or botulinum toxin to the piriformis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm before invasive treatment",
+          "cells": [
+            {
+              "text": "MR neurography and lumbar imaging first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic decompression",
+          "cells": [
+            {
+              "text": "Selected patients with a clearly identified entrapment refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Recovery of a longstanding neurological deficit may be incomplete"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deep_gluteal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of deep gluteal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected deep gluteal syndrome: buttock pain with sciatic-type symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive weakness or foot drop, bladder or bowel change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: exclude cauda equina syndrome or a pelvic or presacral mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI pelvis and hip with MR neurography; lumbar spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MR neurography confirm sciatic nerve entrapment in the deep gluteal space?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lumbar radiculopathy, labral tear or sacroiliac dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged sitting; physiotherapy with sciatic nerve gliding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and neuropathic agents for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided perineural injection, diagnostic and therapeutic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic sciatic nerve decompression for selected refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with conservative care and injection; deficits may not fully recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

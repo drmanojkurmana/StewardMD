@@ -1,172 +1,452 @@
 {
- "id": "pneumopericardium",
- "name": "Pneumopericardium",
- "aliases": [
-  "air in the pericardium",
-  "pneumo-pericardium",
-  "hydropneumopericardium (with fluid)"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
-   "Causes include chest trauma, mechanical ventilation and barotrauma (especially in neonates), thoracic or cardiac surgery and other procedures, and fistulous communication with an air-containing viscus or infection with gas-forming organisms",
-   "A characteristic auscultatory sign is a metallic or churning sound synchronous with the heartbeat (the bruit de moulin or mill-wheel murmur)",
-   "The chest radiograph shows air outlining the heart bordered by the pericardium, and cardiac CT confirms the diagnosis and its extent",
-   "Tension pneumopericardium is an emergency in which trapped air under pressure compresses the heart and causes tamponade physiology",
-   "Small collections from a self-limiting cause may be managed conservatively with observation and treatment of the underlying process",
-   "Tension physiology requires urgent decompression by pericardiocentesis or a pericardial window, together with correction of the source, such as adjusting ventilation or repairing a fistula"
+  "id": "pneumopericardium",
+  "name": "Pneumopericardium",
+  "aliases": [
+    "air in the pericardium",
+    "pneumo-pericardium",
+    "hydropneumopericardium (with fluid)"
   ],
-  "pathophysiology": "Pneumopericardium develops when air gains access to the pericardial space, either directly through a breach of the pericardium from trauma or surgery, by tracking along tissue planes from alveolar rupture during barotrauma, through a fistula linking the pericardium to an air-containing structure such as the oesophagus or a bronchus, or from gas produced by infection with gas-forming organisms. If the air can escape freely the haemodynamic effect is limited, but when a valve-like mechanism allows air to enter but not leave, intrapericardial pressure rises to compress the cardiac chambers, impairing filling and reproducing the physiology of tamponade with falling output.",
-  "additionalDifferentials": [
-   "Pneumomediastinum",
-   "Pneumothorax, particularly on the medial aspect",
-   "Pericardial effusion or haemopericardium",
-   "Cardiac tamponade from fluid",
-   "Diaphragmatic hernia with bowel adjacent to the heart",
-   "Purulent pericarditis with gas-forming organisms"
-  ],
-  "additionalInvestigations": [
-   "Chest radiography showing air surrounding the heart within the pericardium",
-   "Cardiac CT to confirm and quantify the pericardial air and identify a source or fistula",
-   "Echocardiography to assess haemodynamic effect, though air can limit windows",
-   "Evaluation for a communicating fistula, such as contrast studies or endoscopy when suspected",
-   "Assessment of ventilation and airway pressures in ventilated or neonatal patients"
-  ],
-  "redFlags": [
-   "Haemodynamic instability from tension pneumopericardium requiring emergency decompression",
-   "Rapidly enlarging pericardial air on serial imaging",
-   "A demonstrable fistula between the pericardium and airway or gastrointestinal tract",
-   "Gas-forming infection producing purulent pneumopericardium"
-  ],
-  "prognosis": "Small, non-tension collections from a self-limiting cause often resolve with treatment of the underlying process, whereas tension pneumopericardium is rapidly fatal without prompt decompression, and the overall outlook reflects the precipitating condition.",
-  "pitfalls": [
-   "Failing to recognise tension physiology and delaying decompression",
-   "Mistaking pneumopericardium for pneumomediastinum or a medial pneumothorax on the radiograph",
-   "Decompressing the air without identifying and correcting the source, such as a fistula",
-   "Overlooking barotrauma from ventilator settings as the driver in neonates and ventilated patients"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the diagnosis and management of pericardial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emergency pericardial decompression for tension pneumopericardium with tamponade physiology",
-   "Treat the underlying cause, whether repair of a traumatic or surgical pericardial breach, closure of an oesophageal or bronchial fistula, or antimicrobials for gas-forming infection",
-   "In ventilated or neonatal patients, minimise barotrauma with lung-protective ventilation and reduced airway pressures",
-   "Conservative observation for small, non-tension collections from a self-limiting cause while treating the precipitating process",
-   "Serial echocardiography and monitoring for haemodynamic compromise and re-accumulation",
-   "Cardiothoracic surgical referral for a persistent fistula or when definitive repair is required",
-   "Escalate urgently at any sign of rising intrapericardial pressure or falling cardiac output"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pneumopericardium-pathway",
-   "title": "Pneumopericardium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamic instability from tension pneumopericardium requiring emergency decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiography showing air surrounding the heart within the pericardium, Cardiac CT to confirm and quantify the pericardial air and identify a source or fistula, Echocardiography to assess haemodynamic effect, though"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emergency pericardial decompression for tension pneumopericardium with tamponade physiology"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise tension physiology and delaying decompression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pneumopericardium."
-  }
- ],
- "tables": [
-  {
-   "id": "pneumopericardium-matrix",
-   "title": "Pneumopericardium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
+      "Causes include chest trauma, mechanical ventilation and barotrauma (especially in neonates), thoracic or cardiac surgery and other procedures, and fistulous communication with an air-containing viscus or infection with gas-forming organisms",
+      "A characteristic auscultatory sign is a metallic or churning sound synchronous with the heartbeat (the bruit de moulin or mill-wheel murmur)",
+      "The chest radiograph shows air outlining the heart bordered by the pericardium, and cardiac CT confirms the diagnosis and its extent",
+      "Tension pneumopericardium is an emergency in which trapped air under pressure compresses the heart and causes tamponade physiology",
+      "Small collections from a self-limiting cause may be managed conservatively with observation and treatment of the underlying process",
+      "Tension physiology requires urgent decompression by pericardiocentesis or a pericardial window, together with correction of the source, such as adjusting ventilation or repairing a fistula"
     ],
-    [
-     "Key Investigations",
-     "Chest radiography showing air surrounding the heart within the pericardium, Cardiac CT to confirm and quantify the pericardial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pneumopericardium develops when air gains access to the pericardial space, either directly through a breach of the pericardium from trauma or surgery, by tracking along tissue planes from alveolar rupture during barotrauma, through a fistula linking the pericardium to an air-containing structure such as the oesophagus or a bronchus, or from gas produced by infection with gas-forming organisms. If the air can escape freely the haemodynamic effect is limited, but when a valve-like mechanism allows air to enter but not leave, intrapericardial pressure rises to compress the cardiac chambers, impairing filling and reproducing the physiology of tamponade with falling output.",
+    "additionalDifferentials": [
+      "Pneumomediastinum",
+      "Pneumothorax, particularly on the medial aspect",
+      "Pericardial effusion or haemopericardium",
+      "Cardiac tamponade from fluid",
+      "Diaphragmatic hernia with bowel adjacent to the heart",
+      "Purulent pericarditis with gas-forming organisms"
     ],
-    [
-     "Primary Differentials",
-     "Pneumomediastinum, Pneumothorax, particularly on the medial aspect, Pericardial effusion or haemopericardium",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiography showing air surrounding the heart within the pericardium",
+      "Cardiac CT to confirm and quantify the pericardial air and identify a source or fistula",
+      "Echocardiography to assess haemodynamic effect, though air can limit windows",
+      "Evaluation for a communicating fistula, such as contrast studies or endoscopy when suspected",
+      "Assessment of ventilation and airway pressures in ventilated or neonatal patients"
     ],
-    [
-     "Management Strategy",
-     "Emergency pericardial decompression for tension pneumopericardium with tamponade physiology",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamic instability from tension pneumopericardium requiring emergency decompression",
+      "Rapidly enlarging pericardial air on serial imaging",
+      "A demonstrable fistula between the pericardium and airway or gastrointestinal tract",
+      "Gas-forming infection producing purulent pneumopericardium"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise tension physiology and delaying decompression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small, non-tension collections from a self-limiting cause often resolve with treatment of the underlying process, whereas tension pneumopericardium is rapidly fatal without prompt decompression, and the overall outlook reflects the precipitating condition.",
+    "pitfalls": [
+      "Failing to recognise tension physiology and delaying decompression",
+      "Mistaking pneumopericardium for pneumomediastinum or a medial pneumothorax on the radiograph",
+      "Decompressing the air without identifying and correcting the source, such as a fistula",
+      "Overlooking barotrauma from ventilator settings as the driver in neonates and ventilated patients"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the diagnosis and management of pericardial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emergency pericardial decompression for tension pneumopericardium with tamponade physiology",
+      "Treat the underlying cause, whether repair of a traumatic or surgical pericardial breach, closure of an oesophageal or bronchial fistula, or antimicrobials for gas-forming infection",
+      "In ventilated or neonatal patients, minimise barotrauma with lung-protective ventilation and reduced airway pressures",
+      "Conservative observation for small, non-tension collections from a self-limiting cause while treating the precipitating process",
+      "Serial echocardiography and monitoring for haemodynamic compromise and re-accumulation",
+      "Cardiothoracic surgical referral for a persistent fistula or when definitive repair is required",
+      "Escalate urgently at any sign of rising intrapericardial pressure or falling cardiac output"
     ]
-   ],
-   "caption": "Overview comparison matrix for pneumopericardium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pneumopericardium-real-image",
-   "title": "Pneumopericardium: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "pneumopericardium-pathway",
+      "title": "Pneumopericardium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamic instability from tension pneumopericardium requiring emergency decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiography showing air surrounding the heart within the pericardium, Cardiac CT to confirm and quantify the pericardial air and identify a source or fistula, Echocardiography to assess haemodynamic effect, though"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emergency pericardial decompression for tension pneumopericardium with tamponade physiology"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise tension physiology and delaying decompression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pneumopericardium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pneumopericardium-matrix",
+      "title": "Pneumopericardium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The presence of air or gas within the pericardial sac, ranging from an incidental finding to a life-threatening tension collection",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiography showing air surrounding the heart within the pericardium, Cardiac CT to confirm and quantify the pericardial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pneumomediastinum, Pneumothorax, particularly on the medial aspect, Pericardial effusion or haemopericardium",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emergency pericardial decompression for tension pneumopericardium with tamponade physiology",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise tension physiology and delaying decompression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pneumopericardium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumopericardium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiography",
+          "cells": [
+            {
+              "text": "Air surrounding the heart within the pericardium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Quantifies pericardial air; identifies a source or fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Haemodynamic effect; air can limit windows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fistula evaluation (contrast studies or endoscopy)",
+          "cells": [
+            {
+              "text": "Communicating fistula, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation and airway pressure assessment",
+          "cells": [
+            {
+              "text": "Ventilated or neonatal patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumopericardium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Purulent pericarditis",
+          "cells": [
+            {
+              "text": "Gas-forming organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial effusion or haemopericardium",
+          "cells": [
+            {
+              "text": "Fluid rather than gas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumopericardium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency decompression",
+          "cells": [
+            {
+              "text": "For tension pneumopericardium with tamponade physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause",
+          "cells": [
+            {
+              "text": "Repair of a traumatic or surgical pericardial breach; treat the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation",
+          "cells": [
+            {
+              "text": "Lung-protective ventilation to minimise barotrauma in ventilated or neonatal patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, non-tension collections from a self-limiting cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Haemodynamic compromise and re-accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Persistent fistula or when definitive repair is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumopericardium-dx-mgmt",
+      "title": "Diagnosis and management of Pneumopericardium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Air around the heart on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tension physiology, rapidly enlarging air, fistula, gas-forming infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency pericardial decompression for tension pneumopericardium with tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; cardiac CT; echocardiography; fistula evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm pericardial air with a source or fistula identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pneumomediastinum, pneumothorax, haemopericardium or purulent pericarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, including repair of a pericardial breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation to minimise barotrauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe small, non-tension collections from a self-limiting cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography for haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiothoracic surgical referral for a persistent fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small self-limiting collections resolve; tension pneumopericardium is an emergency",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

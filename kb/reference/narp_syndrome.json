@@ -1,175 +1,471 @@
 {
- "id": "narp_syndrome",
- "name": "NARP syndrome",
- "aliases": [
-  "Neuropathy, ataxia and retinitis pigmentosa",
-  "m.8993T>G",
-  "m.8993T>C",
-  "MT-ATP6",
-  "NARP"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often with developmental delay and seizures",
-   "It is caused by maternally inherited mutations of the mitochondrial MT-ATP6 gene, most commonly m.8993T>G, which impair complex V (ATP synthase)",
-   "NARP and maternally inherited Leigh syndrome form a continuum: the same mutation produces NARP at intermediate mutant load and a Leigh phenotype when heteroplasmy is very high",
-   "The threshold effect means clinical severity tracks the proportion of mutant mitochondrial DNA in affected tissues",
-   "Retinal disease may present with night blindness and constricted visual fields, and salt-and-pepper or bone-spicule pigmentary changes are seen on fundoscopy",
-   "Lactate is often normal or only mildly elevated, unlike some other mitochondrial disorders, so a normal lactate does not exclude the diagnosis",
-   "Care is supportive, including neurorehabilitation, low-vision support, seizure management and avoidance of mitochondrial toxins"
+  "id": "narp_syndrome",
+  "name": "NARP syndrome",
+  "aliases": [
+    "Neuropathy, ataxia and retinitis pigmentosa",
+    "m.8993T>G",
+    "m.8993T>C",
+    "MT-ATP6",
+    "NARP"
   ],
-  "pathophysiology": "NARP arises from point mutations in MT-ATP6, which encodes a subunit of ATP synthase (respiratory-chain complex V). The mutations impair proton flux through the enzyme and reduce ATP generation while altering mitochondrial membrane potential. Because the gene is mitochondrial, inheritance is maternal and the mutation is heteroplasmic, so the phenotype depends on the mutant load within energy-dependent tissues. Neurons of the peripheral nerves, cerebellum and retina, which have high and sustained energy requirements, are preferentially affected, producing the neuropathy, ataxia and retinitis pigmentosa. At very high mutant proportions the same defect causes the more severe maternally inherited Leigh phenotype.",
-  "additionalDifferentials": [
-   "Maternally inherited Leigh syndrome (same gene, higher mutant load)",
-   "Other syndromic retinitis pigmentosa such as Bardet-Biedl or Usher syndrome",
-   "Kearns-Sayre syndrome and other mitochondrial retinopathies",
-   "Spinocerebellar ataxias with sensory neuropathy",
-   "Abetalipoproteinaemia and vitamin E deficiency",
-   "Refsum disease"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification",
-   "Ophthalmological assessment with fundoscopy and electroretinography",
-   "Nerve conduction studies to characterise the peripheral neuropathy",
-   "Brain MRI, which may show cerebellar atrophy or, at high mutant load, Leigh-type lesions",
-   "Resting and post-exercise lactate, recognising these are often normal",
-   "Neurodevelopmental assessment in affected children"
-  ],
-  "redFlags": [
-   "Rapid clinical deterioration suggesting evolution towards a Leigh phenotype",
-   "New seizures or encephalopathy",
-   "Progressive visual loss impairing safety and function",
-   "Cardiorespiratory compromise during metabolic stress"
-  ],
-  "prognosis": "NARP tends to run a slowly progressive course with episodic worsening during metabolic stress; visual, sensory and cerebellar disability accumulate over time, and prognosis is worse at high mutant loads where a Leigh-type picture may supervene.",
-  "pitfalls": [
-   "Excluding a mitochondrial disorder because lactate is normal, which is common in NARP",
-   "Failing to recognise the NARP-Leigh continuum and its dependence on heteroplasmy level",
-   "Attributing retinitis pigmentosa to an isolated retinal dystrophy and missing the systemic mitochondrial cause",
-   "Not counselling about maternal inheritance and variable transmission of mutant load to offspring"
-  ],
-  "references": [
-   "GeneReviews: Mitochondrial DNA-Associated Leigh Syndrome and NARP",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding mitochondrial-toxic agents such as valproate where possible",
-   "Offer low-vision support and ophthalmological management for retinitis pigmentosa, with neurorehabilitation and physiotherapy for ataxia and sensory neuropathy",
-   "Consider a mitochondrial cofactor regimen such as coenzyme Q10, riboflavin and other vitamins, recognising the limited supporting evidence",
-   "Avoid metabolic decompensation triggers such as prolonged fasting and mitochondrial-toxic drugs including aminoglycosides, and treat intercurrent illness promptly",
-   "Monitor for evolving multisystem involvement and progression towards a Leigh-type phenotype, with developmental assessment in children",
-   "Coordinate multidisciplinary care across neurology, ophthalmology, metabolic medicine and rehabilitation",
-   "Offer genetic counselling for maternal (mitochondrial) inheritance, explaining heteroplasmy and the threshold effect, with reproductive options including oocyte or mitochondrial donation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "narp_syndrome-pathway",
-   "title": "NARP syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often with developmental delay and seizures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid clinical deterioration suggesting evolution towards a Leigh phenotype",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification, Ophthalmological assessment with fundoscopy and electroretinography, Nerve conduction studies to characterise the peripheral"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding mitochondrial-toxic agents such as valproate where possible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding a mitochondrial disorder because lactate is normal, which is common in NARP"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of narp syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "narp_syndrome-matrix",
-   "title": "NARP syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often with developmental delay and seizures",
+      "It is caused by maternally inherited mutations of the mitochondrial MT-ATP6 gene, most commonly m.8993T>G, which impair complex V (ATP synthase)",
+      "NARP and maternally inherited Leigh syndrome form a continuum: the same mutation produces NARP at intermediate mutant load and a Leigh phenotype when heteroplasmy is very high",
+      "The threshold effect means clinical severity tracks the proportion of mutant mitochondrial DNA in affected tissues",
+      "Retinal disease may present with night blindness and constricted visual fields, and salt-and-pepper or bone-spicule pigmentary changes are seen on fundoscopy",
+      "Lactate is often normal or only mildly elevated, unlike some other mitochondrial disorders, so a normal lactate does not exclude the diagnosis",
+      "Care is supportive, including neurorehabilitation, low-vision support, seizure management and avoidance of mitochondrial toxins"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification, Ophthalmological assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "NARP arises from point mutations in MT-ATP6, which encodes a subunit of ATP synthase (respiratory-chain complex V). The mutations impair proton flux through the enzyme and reduce ATP generation while altering mitochondrial membrane potential. Because the gene is mitochondrial, inheritance is maternal and the mutation is heteroplasmic, so the phenotype depends on the mutant load within energy-dependent tissues. Neurons of the peripheral nerves, cerebellum and retina, which have high and sustained energy requirements, are preferentially affected, producing the neuropathy, ataxia and retinitis pigmentosa. At very high mutant proportions the same defect causes the more severe maternally inherited Leigh phenotype.",
+    "additionalDifferentials": [
+      "Maternally inherited Leigh syndrome (same gene, higher mutant load)",
+      "Other syndromic retinitis pigmentosa such as Bardet-Biedl or Usher syndrome",
+      "Kearns-Sayre syndrome and other mitochondrial retinopathies",
+      "Spinocerebellar ataxias with sensory neuropathy",
+      "Abetalipoproteinaemia and vitamin E deficiency",
+      "Refsum disease"
     ],
-    [
-     "Primary Differentials",
-     "Maternally inherited Leigh syndrome (same gene, higher mutant load), Other syndromic retinitis pigmentosa such as Bardet-Biedl or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification",
+      "Ophthalmological assessment with fundoscopy and electroretinography",
+      "Nerve conduction studies to characterise the peripheral neuropathy",
+      "Brain MRI, which may show cerebellar atrophy or, at high mutant load, Leigh-type lesions",
+      "Resting and post-exercise lactate, recognising these are often normal",
+      "Neurodevelopmental assessment in affected children"
     ],
-    [
-     "Management Strategy",
-     "Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid clinical deterioration suggesting evolution towards a Leigh phenotype",
+      "New seizures or encephalopathy",
+      "Progressive visual loss impairing safety and function",
+      "Cardiorespiratory compromise during metabolic stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding a mitochondrial disorder because lactate is normal, which is common in NARP",
-     "Prevent diagnostic or management error"
+    "prognosis": "NARP tends to run a slowly progressive course with episodic worsening during metabolic stress; visual, sensory and cerebellar disability accumulate over time, and prognosis is worse at high mutant loads where a Leigh-type picture may supervene.",
+    "pitfalls": [
+      "Excluding a mitochondrial disorder because lactate is normal, which is common in NARP",
+      "Failing to recognise the NARP-Leigh continuum and its dependence on heteroplasmy level",
+      "Attributing retinitis pigmentosa to an isolated retinal dystrophy and missing the systemic mitochondrial cause",
+      "Not counselling about maternal inheritance and variable transmission of mutant load to offspring"
+    ],
+    "references": [
+      "GeneReviews: Mitochondrial DNA-Associated Leigh Syndrome and NARP",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding mitochondrial-toxic agents such as valproate where possible",
+      "Offer low-vision support and ophthalmological management for retinitis pigmentosa, with neurorehabilitation and physiotherapy for ataxia and sensory neuropathy",
+      "Consider a mitochondrial cofactor regimen such as coenzyme Q10, riboflavin and other vitamins, recognising the limited supporting evidence",
+      "Avoid metabolic decompensation triggers such as prolonged fasting and mitochondrial-toxic drugs including aminoglycosides, and treat intercurrent illness promptly",
+      "Monitor for evolving multisystem involvement and progression towards a Leigh-type phenotype, with developmental assessment in children",
+      "Coordinate multidisciplinary care across neurology, ophthalmology, metabolic medicine and rehabilitation",
+      "Offer genetic counselling for maternal (mitochondrial) inheritance, explaining heteroplasmy and the threshold effect, with reproductive options including oocyte or mitochondrial donation"
     ]
-   ],
-   "caption": "Overview comparison matrix for narp syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "narp-syndrome-real-image",
-   "title": "NARP syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "narp_syndrome-pathway",
+      "title": "NARP syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often with developmental delay and seizures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid clinical deterioration suggesting evolution towards a Leigh phenotype",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification, Ophthalmological assessment with fundoscopy and electroretinography, Nerve conduction studies to characterise the peripheral"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding mitochondrial-toxic agents such as valproate where possible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding a mitochondrial disorder because lactate is normal, which is common in NARP"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of narp syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "narp_syndrome-matrix",
+      "title": "NARP syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The core triad is a sensory peripheral neuropathy, cerebellar ataxia and pigmentary retinopathy (retinitis pigmentosa), often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing for MT-ATP6 mutations (m.8993T>G / m.8993T>C) with heteroplasmy quantification, Ophthalmological assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Maternally inherited Leigh syndrome (same gene, higher mutant load), Other syndromic retinitis pigmentosa such as Bardet-Biedl or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide symptomatic and supportive care as no curative therapy exists, treating seizures with anticonvulsants while avoiding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding a mitochondrial disorder because lactate is normal, which is common in NARP",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for narp syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narp_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MT-ATP6 molecular testing with heteroplasmy quantification",
+          "cells": [
+            {
+              "text": "m.8993T>G or m.8993T>C; mutant load measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with fundoscopy and electroretinography",
+          "cells": [
+            {
+              "text": "Pigmentary retinopathy, with salt-and-pepper or bone-spicule changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Characterises the peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy or, at high mutant load, Leigh-type lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting and post-exercise lactate",
+          "cells": [
+            {
+              "text": "Often normal or only mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "In affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narp_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternally inherited Leigh syndrome",
+          "cells": [
+            {
+              "text": "Same gene at a higher mutant load; NARP and Leigh form a continuum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kearns-Sayre syndrome and other mitochondrial retinopathies",
+          "cells": [
+            {
+              "text": "MT-ATP6 testing identifies NARP as the mitochondrial cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic retinitis pigmentosa, such as Bardet-Biedl or Usher syndrome",
+          "cells": [
+            {
+              "text": "The systemic mitochondrial cause is the key pitfall to avoid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narp_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy; anticonvulsants for seizures, avoiding valproate where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision and ophthalmological support",
+          "cells": [
+            {
+              "text": "For retinitis pigmentosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy for ataxia and sensory neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cofactor regimen",
+          "cells": [
+            {
+              "text": "Coenzyme Q10, riboflavin and other vitamins; limited supporting evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid triggers",
+          "cells": [
+            {
+              "text": "Prolonged fasting and mitochondrial-toxic drugs such as aminoglycosides; treat intercurrent illness promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Multisystem progression and Leigh-type change; developmental assessment in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal inheritance, heteroplasmy and the threshold effect; reproductive options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narp_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of NARP syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sensory neuropathy, cerebellar ataxia and pigmentary retinopathy, often with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline towards Leigh, new seizures, progressive visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and metabolic review; treat seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MT-ATP6 testing with heteroplasmy, fundoscopy and ERG, NCS, brain MRI, lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MT-ATP6 m.8993T>G or T>C variant confirmed with heteroplasmy quantified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Leigh syndrome, Kearns-Sayre or syndromic retinitis pigmentosa; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care: anticonvulsants for seizures, avoiding valproate where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-vision support and ophthalmological management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurorehabilitation and physiotherapy for ataxia and neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid fasting and mitochondrial-toxic drugs such as aminoglycosides",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive with episodic worsening under stress; higher mutant load is worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

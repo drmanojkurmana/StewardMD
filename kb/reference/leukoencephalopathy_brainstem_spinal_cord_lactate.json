@@ -1,175 +1,482 @@
 {
- "id": "leukoencephalopathy_brainstem_spinal_cord_lactate",
- "name": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2)",
- "aliases": [
-  "LBSL",
-  "DARS2-related leukoencephalopathy",
-  "mitochondrial aspartyl-tRNA synthetase leukoencephalopathy",
-  "leukoencephalopathy with brainstem and spinal cord involvement and elevated lactate"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
-   "The MRI pattern is highly specific: selective involvement of particular tracts rather than the whole white matter, including the cerebral white matter with sparing of the U-fibres, the pyramidal tracts and dorsal columns of the spinal cord, and defined brainstem tracts such as the medial lemniscus, superior and inferior cerebellar peduncles and the medullary pyramids",
-   "Proton MR spectroscopy typically shows raised lactate within the abnormal white matter, an important confirmatory clue",
-   "Onset ranges from infancy to adulthood; the common presentation is slowly progressive cerebellar ataxia with spasticity and dorsal-column sensory loss causing impaired proprioception and a positive Romberg sign",
-   "Deterioration or acute worsening can be provoked by minor head trauma, febrile illness or other stressors in some patients",
-   "Diagnosis rests on the combination of the selective tract pattern, elevated white-matter lactate on spectroscopy and biallelic DARS2 variants; a common intronic splice variant is frequently paired with a second allele",
-   "There is no specific treatment, so care is supportive and multidisciplinary, with physiotherapy, mobility aids and management of spasticity and sensory ataxia"
+  "id": "leukoencephalopathy_brainstem_spinal_cord_lactate",
+  "name": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2)",
+  "aliases": [
+    "LBSL",
+    "DARS2-related leukoencephalopathy",
+    "mitochondrial aspartyl-tRNA synthetase leukoencephalopathy",
+    "leukoencephalopathy with brainstem and spinal cord involvement and elevated lactate"
   ],
-  "pathophysiology": "LBSL is caused by biallelic variants in DARS2, which encodes the mitochondrial enzyme that charges transfer RNA with aspartate for mitochondrial protein synthesis. Reduced enzyme activity, often driven by a leaky intronic splice-site variant that lowers the amount of correctly spliced transcript, impairs translation of mitochondrially encoded respiratory-chain subunits in neural tissue. The resulting energy deficit and mitochondrial dysfunction selectively affect long myelinated tracts with high metabolic demand, producing the distinctive pattern of tract-specific white-matter signal change and the elevated lactate seen on spectroscopy.",
-  "additionalDifferentials": [
-   "Other mitochondrial leukoencephalopathies and MELAS-spectrum disorders",
-   "Multiple sclerosis and other inflammatory demyelination",
-   "Subacute combined degeneration from vitamin B12 deficiency (dorsal column involvement)",
-   "Hereditary spastic paraplegia with white matter change",
-   "Leukoencephalopathy with brainstem involvement from other tRNA synthetase defects",
-   "Adult-onset vanishing white matter disease and other genetic leukoencephalopathies"
-  ],
-  "additionalInvestigations": [
-   "Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change",
-   "Proton MR spectroscopy to detect elevated lactate within affected white matter",
-   "DARS2 sequencing, including analysis for the common intronic splice variant and a second pathogenic allele",
-   "Nerve conduction and somatosensory evoked potentials to characterise dorsal-column and peripheral involvement",
-   "Blood and CSF lactate as supportive metabolic markers",
-   "Leukodystrophy or mitochondrial gene panel if targeted DARS2 testing is inconclusive"
-  ],
-  "redFlags": [
-   "Acute neurological deterioration following minor head trauma or febrile illness",
-   "Rapidly progressive weakness or bulbar dysfunction requiring reassessment",
-   "Severe sensory ataxia with recurrent falls and injury",
-   "Cognitive decline or seizures suggesting more extensive disease"
-  ],
-  "prognosis": "The course of LBSL is variable but usually slowly progressive, with gradually worsening ataxia, spasticity and dorsal-column dysfunction; some patients remain mildly affected for many years, while early-onset cases can be more severe. Episodic decline after stressors and cumulative disability influence outcome, and life expectancy is often relatively preserved in milder phenotypes.",
-  "pitfalls": [
-   "Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change",
-   "Failing to perform MR spectroscopy and thereby overlooking the elevated white-matter lactate",
-   "Mislabelling the presentation as multiple sclerosis and exposing the patient to unnecessary immunotherapy",
-   "Not testing for the common intronic DARS2 variant, which can be missed by some assays",
-   "Overlooking the risk of stress- or trauma-related deterioration when counselling patients"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar ataxia and spasticity",
-   "Antispasticity treatment such as baclofen for spasticity",
-   "Balance training and falls-prevention measures for dorsal-column proprioceptive loss and a positive Romberg sign",
-   "Avoidance and prompt treatment of stressors such as head trauma and febrile illness that can provoke acute deterioration",
-   "Occupational therapy and speech and swallowing assessment as disability progresses",
-   "Neurology, clinical genetics and rehabilitation multidisciplinary care",
-   "Genetic counselling for this autosomal recessive DARS2 disorder, including the common intronic splice variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-pathway",
-   "title": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute neurological deterioration following minor head trauma or febrile illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change, Proton MR spectroscopy to detect elevated lactate within affected white matter, DARS2 sequencing, including analysis for the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar ataxia and spasticity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leukoencephalopathy with brainstem and spinal cord involvement and lactate (lbsl, dars2)."
-  }
- ],
- "tables": [
-  {
-   "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-matrix",
-   "title": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
+      "The MRI pattern is highly specific: selective involvement of particular tracts rather than the whole white matter, including the cerebral white matter with sparing of the U-fibres, the pyramidal tracts and dorsal columns of the spinal cord, and defined brainstem tracts such as the medial lemniscus, superior and inferior cerebellar peduncles and the medullary pyramids",
+      "Proton MR spectroscopy typically shows raised lactate within the abnormal white matter, an important confirmatory clue",
+      "Onset ranges from infancy to adulthood; the common presentation is slowly progressive cerebellar ataxia with spasticity and dorsal-column sensory loss causing impaired proprioception and a positive Romberg sign",
+      "Deterioration or acute worsening can be provoked by minor head trauma, febrile illness or other stressors in some patients",
+      "Diagnosis rests on the combination of the selective tract pattern, elevated white-matter lactate on spectroscopy and biallelic DARS2 variants; a common intronic splice variant is frequently paired with a second allele",
+      "There is no specific treatment, so care is supportive and multidisciplinary, with physiotherapy, mobility aids and management of spasticity and sensory ataxia"
     ],
-    [
-     "Key Investigations",
-     "Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change, Proton MR spectroscopy to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "LBSL is caused by biallelic variants in DARS2, which encodes the mitochondrial enzyme that charges transfer RNA with aspartate for mitochondrial protein synthesis. Reduced enzyme activity, often driven by a leaky intronic splice-site variant that lowers the amount of correctly spliced transcript, impairs translation of mitochondrially encoded respiratory-chain subunits in neural tissue. The resulting energy deficit and mitochondrial dysfunction selectively affect long myelinated tracts with high metabolic demand, producing the distinctive pattern of tract-specific white-matter signal change and the elevated lactate seen on spectroscopy.",
+    "additionalDifferentials": [
+      "Other mitochondrial leukoencephalopathies and MELAS-spectrum disorders",
+      "Multiple sclerosis and other inflammatory demyelination",
+      "Subacute combined degeneration from vitamin B12 deficiency (dorsal column involvement)",
+      "Hereditary spastic paraplegia with white matter change",
+      "Leukoencephalopathy with brainstem involvement from other tRNA synthetase defects",
+      "Adult-onset vanishing white matter disease and other genetic leukoencephalopathies"
     ],
-    [
-     "Primary Differentials",
-     "Other mitochondrial leukoencephalopathies and MELAS-spectrum disorders, Multiple sclerosis and other inflammatory demyelination,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change",
+      "Proton MR spectroscopy to detect elevated lactate within affected white matter",
+      "DARS2 sequencing, including analysis for the common intronic splice variant and a second pathogenic allele",
+      "Nerve conduction and somatosensory evoked potentials to characterise dorsal-column and peripheral involvement",
+      "Blood and CSF lactate as supportive metabolic markers",
+      "Leukodystrophy or mitochondrial gene panel if targeted DARS2 testing is inconclusive"
     ],
-    [
-     "Management Strategy",
-     "Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute neurological deterioration following minor head trauma or febrile illness",
+      "Rapidly progressive weakness or bulbar dysfunction requiring reassessment",
+      "Severe sensory ataxia with recurrent falls and injury",
+      "Cognitive decline or seizures suggesting more extensive disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course of LBSL is variable but usually slowly progressive, with gradually worsening ataxia, spasticity and dorsal-column dysfunction; some patients remain mildly affected for many years, while early-onset cases can be more severe. Episodic decline after stressors and cumulative disability influence outcome, and life expectancy is often relatively preserved in milder phenotypes.",
+    "pitfalls": [
+      "Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change",
+      "Failing to perform MR spectroscopy and thereby overlooking the elevated white-matter lactate",
+      "Mislabelling the presentation as multiple sclerosis and exposing the patient to unnecessary immunotherapy",
+      "Not testing for the common intronic DARS2 variant, which can be missed by some assays",
+      "Overlooking the risk of stress- or trauma-related deterioration when counselling patients"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar ataxia and spasticity",
+      "Antispasticity treatment such as baclofen for spasticity",
+      "Balance training and falls-prevention measures for dorsal-column proprioceptive loss and a positive Romberg sign",
+      "Avoidance and prompt treatment of stressors such as head trauma and febrile illness that can provoke acute deterioration",
+      "Occupational therapy and speech and swallowing assessment as disability progresses",
+      "Neurology, clinical genetics and rehabilitation multidisciplinary care",
+      "Genetic counselling for this autosomal recessive DARS2 disorder, including the common intronic splice variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for leukoencephalopathy with brainstem and spinal cord involvement and lactate (lbsl, dars2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leukoencephalopathy-brainstem-spinal-cord-lactate-real-image",
-   "title": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-pathway",
+      "title": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute neurological deterioration following minor head trauma or febrile illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change, Proton MR spectroscopy to detect elevated lactate within affected white matter, DARS2 sequencing, including analysis for the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar ataxia and spasticity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leukoencephalopathy with brainstem and spinal cord involvement and lactate (lbsl, dars2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-matrix",
+      "title": "Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukoencephalopathy caused by variants in DARS2, which encodes mitochondrial aspartyl-tRNA synthetase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain and spinal cord MRI to demonstrate the selective tract involvement and cord signal change, Proton MR spectroscopy to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other mitochondrial leukoencephalopathies and MELAS-spectrum disorders, Multiple sclerosis and other inflammatory demyelination,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive management as no disease-modifying therapy exists, with physiotherapy and mobility aids for progressive cerebellar",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis by not appreciating the selective tract pattern and treating it as non-specific white matter change",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leukoencephalopathy with brainstem and spinal cord involvement and lactate (lbsl, dars2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain and spinal cord MRI",
+          "cells": [
+            {
+              "text": "Selective tract involvement and cord signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton MR spectroscopy",
+          "cells": [
+            {
+              "text": "Raised lactate within affected white matter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DARS2 sequencing",
+          "cells": [
+            {
+              "text": "Includes the common intronic variant and a second allele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and somatosensory evoked potentials",
+          "cells": [
+            {
+              "text": "Dorsal-column and peripheral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and CSF lactate",
+          "cells": [
+            {
+              "text": "Supportive metabolic markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "Inflammatory demyelination; a mimic that risks unnecessary immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Also causes dorsal-column involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other mitochondrial leukoencephalopathies and MELAS-spectrum disorders",
+          "cells": [
+            {
+              "text": "Mitochondrial mimics; DARS2 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegia with white matter change",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; physiotherapy and mobility aids for ataxia and spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity treatment",
+          "cells": [
+            {
+              "text": "Baclofen for spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balance and falls prevention",
+          "cells": [
+            {
+              "text": "For dorsal-column proprioceptive loss and a positive Romberg sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stressor avoidance",
+          "cells": [
+            {
+              "text": "Head trauma and febrile illness can provoke deterioration; treat promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and swallow assessment",
+          "cells": [
+            {
+              "text": "As disability progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, clinical genetics and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DARS2 disorder, including the common intronic variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leukoencephalopathy_brainstem_spinal_cord_lactate-dx-mgmt",
+      "title": "Diagnosis and management of Leukoencephalopathy with brainstem and spinal cord involvement and lactate (LBSL, DARS2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive cerebellar ataxia with spasticity and dorsal-column sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deterioration after head trauma or fever, bulbar weakness, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology reassessment for acute deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and cord, MR spectroscopy for lactate, DARS2 sequencing, nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does DARS2 sequencing show biallelic variants, including the common intronic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multiple sclerosis, B12-related myelopathy or another leukoencephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and mobility aids for ataxia and spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Balance training and falls prevention for proprioceptive loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prompt treatment of stressors such as head trauma and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for the autosomal recessive DARS2 disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually slowly progressive; some patients remain mildly affected for many years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

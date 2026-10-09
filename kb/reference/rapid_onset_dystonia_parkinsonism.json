@@ -1,175 +1,395 @@
 {
- "id": "rapid_onset_dystonia_parkinsonism",
- "name": "Rapid-onset dystonia-parkinsonism",
- "aliases": [
-  "RDP",
-  "DYT12",
-  "ATP1A3",
-  "Na+/K+-ATPase alpha-3 disorder",
-  "DYT-ATP1A3"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Movement-disorder textbooks with peer-reviewed reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium ATPase",
-   "Hallmark is abrupt or subacute onset of dystonia and parkinsonism, often over hours to days, frequently triggered by physical or emotional stress, fever, childbirth, or alcohol",
-   "Symptoms characteristically follow a rostrocaudal gradient, with prominent bulbar and upper-limb involvement (dysarthria, dysphagia, arm dystonia) more than lower limbs",
-   "Parkinsonian features such as bradykinesia and postural instability accompany the dystonia, but there is typically little or no tremor and a poor response to levodopa",
-   "After the dramatic initial onset the deficit tends to stabilise, sometimes with a second abrupt worsening, rather than steadily progressing",
-   "ATP1A3 variants cause a spectrum that also includes alternating hemiplegia of childhood and the CAPOS syndrome, which can overlap",
-   "Brain imaging and dopaminergic imaging are typically unremarkable, distinguishing it from degenerative parkinsonism",
-   "Diagnosis rests on the distinctive stress-triggered abrupt onset and is confirmed by ATP1A3 molecular testing; treatment is largely supportive as levodopa is generally ineffective"
+  "id": "rapid_onset_dystonia_parkinsonism",
+  "name": "Rapid-onset dystonia-parkinsonism",
+  "aliases": [
+    "RDP",
+    "DYT12",
+    "ATP1A3",
+    "Na+/K+-ATPase alpha-3 disorder",
+    "DYT-ATP1A3"
   ],
-  "pathophysiology": "Rapid-onset dystonia-parkinsonism is caused by dominant variants in ATP1A3, encoding the alpha-3 subunit of the neuronal sodium-potassium ATPase that maintains transmembrane ion gradients essential for repolarisation and neuronal excitability. The variants reduce pump function, and this reserve deficit is thought to become clinically manifest when metabolic demand rises, which is why physiological stressors such as fever, exertion, emotional stress, or childbirth precipitate the abrupt onset. Impaired ion homeostasis within cerebellar and basal ganglia circuits produces combined dystonia and parkinsonism without frank neurodegeneration, accounting for the normal structural and dopaminergic imaging.",
-  "additionalDifferentials": [
-   "Young-onset Parkinson disease and other genetic parkinsonism",
-   "Dopa-responsive dystonia",
-   "DYT1 and other early-onset dystonias",
-   "Wilson disease",
-   "Functional (psychogenic) movement disorder given the abrupt stress-related onset",
-   "Other ATP1A3-related phenotypes (alternating hemiplegia of childhood, CAPOS syndrome)"
-  ],
-  "additionalInvestigations": [
-   "ATP1A3 molecular genetic testing to confirm the diagnosis",
-   "Brain MRI, expected to be unremarkable, to exclude structural causes",
-   "Dopaminergic (presynaptic) imaging, typically normal, to distinguish degenerative parkinsonism",
-   "A levodopa trial, which characteristically shows little benefit, helping separate it from dopa-responsive conditions",
-   "Serum copper and caeruloplasmin to exclude Wilson disease"
-  ],
-  "redFlags": [
-   "Abrupt bulbar dysfunction with dysphagia and aspiration or airway risk",
-   "Severe generalised dystonia or status dystonicus following a trigger",
-   "Rapid neurological deterioration during febrile illness or physiological stress",
-   "Secondary decompensation with dehydration or immobility during an acute episode"
-  ],
-  "prognosis": "After the characteristic abrupt onset the disorder tends to plateau rather than progress steadily, though a further stepwise deterioration can occur; disability is often significant, particularly from bulbar and upper-limb involvement, and response to medication is generally limited.",
-  "pitfalls": [
-   "Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder",
-   "Expecting and relying on a levodopa response, which is characteristically poor",
-   "Overlooking the diagnosis because imaging is normal",
-   "Not recognising the broader ATP1A3 spectrum and its overlapping phenotypes when counselling families"
-  ],
-  "references": [
-   "GeneReviews: ATP1A3-Related Neurologic Disorders",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that precipitate abrupt onset or stepwise worsening",
-   "A trial of levodopa and other anti-dystonic agents such as benzodiazepines, although the response is characteristically poor",
-   "Botulinum toxin injection for troublesome focal dystonia",
-   "Speech and language therapy with swallow assessment and dysphagia management for prominent bulbar involvement",
-   "Physiotherapy and occupational therapy to address upper-limb dystonia and postural instability",
-   "Multidisciplinary movement-disorder care with a supportive and symptomatic focus given the limited pharmacological response",
-   "Genetic counselling and family testing for this autosomal dominant ATP1A3-related disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rapid_onset_dystonia_parkinsonism-pathway",
-   "title": "Rapid-onset dystonia-parkinsonism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium ATPase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abrupt bulbar dysfunction with dysphagia and aspiration or airway risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ATP1A3 molecular genetic testing to confirm the diagnosis, Brain MRI, expected to be unremarkable, to exclude structural causes, Dopaminergic (presynaptic) imaging, typically normal, to distinguish degenerative parkinsonism"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that precipitate abrupt onset or stepwise worsening"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rapid-onset dystonia-parkinsonism."
-  }
- ],
- "tables": [
-  {
-   "id": "rapid_onset_dystonia_parkinsonism-matrix",
-   "title": "Rapid-onset dystonia-parkinsonism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Movement-disorder textbooks with peer-reviewed reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium ATPase",
+      "Hallmark is abrupt or subacute onset of dystonia and parkinsonism, often over hours to days, frequently triggered by physical or emotional stress, fever, childbirth, or alcohol",
+      "Symptoms characteristically follow a rostrocaudal gradient, with prominent bulbar and upper-limb involvement (dysarthria, dysphagia, arm dystonia) more than lower limbs",
+      "Parkinsonian features such as bradykinesia and postural instability accompany the dystonia, but there is typically little or no tremor and a poor response to levodopa",
+      "After the dramatic initial onset the deficit tends to stabilise, sometimes with a second abrupt worsening, rather than steadily progressing",
+      "ATP1A3 variants cause a spectrum that also includes alternating hemiplegia of childhood and the CAPOS syndrome, which can overlap",
+      "Brain imaging and dopaminergic imaging are typically unremarkable, distinguishing it from degenerative parkinsonism",
+      "Diagnosis rests on the distinctive stress-triggered abrupt onset and is confirmed by ATP1A3 molecular testing; treatment is largely supportive as levodopa is generally ineffective"
     ],
-    [
-     "Key Investigations",
-     "ATP1A3 molecular genetic testing to confirm the diagnosis, Brain MRI, expected to be unremarkable, to exclude structural causes,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rapid-onset dystonia-parkinsonism is caused by dominant variants in ATP1A3, encoding the alpha-3 subunit of the neuronal sodium-potassium ATPase that maintains transmembrane ion gradients essential for repolarisation and neuronal excitability. The variants reduce pump function, and this reserve deficit is thought to become clinically manifest when metabolic demand rises, which is why physiological stressors such as fever, exertion, emotional stress, or childbirth precipitate the abrupt onset. Impaired ion homeostasis within cerebellar and basal ganglia circuits produces combined dystonia and parkinsonism without frank neurodegeneration, accounting for the normal structural and dopaminergic imaging.",
+    "additionalDifferentials": [
+      "Young-onset Parkinson disease and other genetic parkinsonism",
+      "Dopa-responsive dystonia",
+      "DYT1 and other early-onset dystonias",
+      "Wilson disease",
+      "Functional (psychogenic) movement disorder given the abrupt stress-related onset",
+      "Other ATP1A3-related phenotypes (alternating hemiplegia of childhood, CAPOS syndrome)"
     ],
-    [
-     "Primary Differentials",
-     "Young-onset Parkinson disease and other genetic parkinsonism, Dopa-responsive dystonia, DYT1 and other early-onset dystonias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ATP1A3 molecular genetic testing to confirm the diagnosis",
+      "Brain MRI, expected to be unremarkable, to exclude structural causes",
+      "Dopaminergic (presynaptic) imaging, typically normal, to distinguish degenerative parkinsonism",
+      "A levodopa trial, which characteristically shows little benefit, helping separate it from dopa-responsive conditions",
+      "Serum copper and caeruloplasmin to exclude Wilson disease"
     ],
-    [
-     "Management Strategy",
-     "Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that",
-     "Core treatment modality"
+    "redFlags": [
+      "Abrupt bulbar dysfunction with dysphagia and aspiration or airway risk",
+      "Severe generalised dystonia or status dystonicus following a trigger",
+      "Rapid neurological deterioration during febrile illness or physiological stress",
+      "Secondary decompensation with dehydration or immobility during an acute episode"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "After the characteristic abrupt onset the disorder tends to plateau rather than progress steadily, though a further stepwise deterioration can occur; disability is often significant, particularly from bulbar and upper-limb involvement, and response to medication is generally limited.",
+    "pitfalls": [
+      "Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder",
+      "Expecting and relying on a levodopa response, which is characteristically poor",
+      "Overlooking the diagnosis because imaging is normal",
+      "Not recognising the broader ATP1A3 spectrum and its overlapping phenotypes when counselling families"
+    ],
+    "references": [
+      "GeneReviews: ATP1A3-Related Neurologic Disorders",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that precipitate abrupt onset or stepwise worsening",
+      "A trial of levodopa and other anti-dystonic agents such as benzodiazepines, although the response is characteristically poor",
+      "Botulinum toxin injection for troublesome focal dystonia",
+      "Speech and language therapy with swallow assessment and dysphagia management for prominent bulbar involvement",
+      "Physiotherapy and occupational therapy to address upper-limb dystonia and postural instability",
+      "Multidisciplinary movement-disorder care with a supportive and symptomatic focus given the limited pharmacological response",
+      "Genetic counselling and family testing for this autosomal dominant ATP1A3-related disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for rapid-onset dystonia-parkinsonism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rapid-onset-dystonia-parkinsonism-real-image",
-   "title": "Rapid-onset dystonia-parkinsonism: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rapid_onset_dystonia_parkinsonism-pathway",
+      "title": "Rapid-onset dystonia-parkinsonism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium ATPase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abrupt bulbar dysfunction with dysphagia and aspiration or airway risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ATP1A3 molecular genetic testing to confirm the diagnosis, Brain MRI, expected to be unremarkable, to exclude structural causes, Dopaminergic (presynaptic) imaging, typically normal, to distinguish degenerative parkinsonism"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that precipitate abrupt onset or stepwise worsening"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rapid-onset dystonia-parkinsonism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rapid_onset_dystonia_parkinsonism-matrix",
+      "title": "Rapid-onset dystonia-parkinsonism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant disorder caused by variants in ATP1A3, which encodes the alpha-3 subunit of the neuronal sodium-potassium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ATP1A3 molecular genetic testing to confirm the diagnosis, Brain MRI, expected to be unremarkable, to exclude structural causes,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Young-onset Parkinson disease and other genetic parkinsonism, Dopa-responsive dystonia, DYT1 and other early-onset dystonias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Counselling to avoid or mitigate recognised triggers such as fever, physical exertion, emotional stress and alcohol that",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the stress-triggered abrupt onset as a functional movement disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rapid-onset dystonia-parkinsonism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Movement-disorder textbooks with peer-reviewed reviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rapid_onset_dystonia_parkinsonism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATP1A3 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Unremarkable; excludes structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopaminergic response assessment",
+          "cells": [
+            {
+              "text": "Response to levodopa"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rapid_onset_dystonia_parkinsonism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Young-onset Parkinson disease",
+          "cells": [
+            {
+              "text": "Parkinsonism with a genetic cause"
+            },
+            {
+              "text": "ATP1A3 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopa-responsive dystonia",
+          "cells": [
+            {
+              "text": "Dopa-responsive dystonia"
+            },
+            {
+              "text": "Levodopa trial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rapid_onset_dystonia_parkinsonism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Counselling to avoid triggers such as fever and physical exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug trial",
+          "cells": [
+            {
+              "text": "Levodopa and other anti-dystonic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway risk",
+          "cells": [
+            {
+              "text": "Monitor for bulbar dysfunction and aspiration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rapid_onset_dystonia_parkinsonism-dx-mgmt",
+      "title": "Diagnosis and management of Rapid-onset dystonia-parkinsonism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rapid-onset dystonia-parkinsonism: abrupt dystonia after a trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar dysfunction with aspiration, status dystonicus, or airway risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway and neurology review for status dystonicus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATP1A3 testing; brain MRI; dopaminergic trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ATP1A3 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider young-onset Parkinson disease or dopa-responsive dystonia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Counselling to avoid triggers such as fever and exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of levodopa and other anti-dystonic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for bulbar dysfunction and airway risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Genetic counselling and movement disorder follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

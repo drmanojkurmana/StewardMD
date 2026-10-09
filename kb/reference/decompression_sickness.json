@@ -1,174 +1,445 @@
 {
- "id": "decompression_sickness",
- "name": "Decompression sickness",
- "aliases": [
-  "DCS",
-  "the bends",
-  "caisson disease",
-  "decompression illness"
- ],
- "class": "non_infective",
- "system": "Occupational / Environmental",
- "specialty": "Occupational & Environmental Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hunter's Diseases of Occupations / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or aircraft or altitude-chamber exposure, allowing dissolved inert gas to form bubbles",
-   "Type I (mild) disease features joint and limb pain ('the bends'), skin mottling and itching, and lymphatic swelling",
-   "Type II (serious) disease involves the nervous system, lungs or inner ear, with limb weakness, numbness, bladder dysfunction, breathlessness ('the chokes') or vertigo, and is a medical emergency",
-   "Symptoms usually appear within minutes to hours of surfacing or pressure reduction, and delayed onset can occur particularly after flying soon after diving",
-   "First aid centres on high-flow oxygen, keeping the patient flat and hydrated, and urgent contact with a diving or hyperbaric medicine service",
-   "Definitive treatment is recompression in a hyperbaric chamber followed by a staged decompression, and this should not be delayed",
-   "Arterial gas embolism from pulmonary barotrauma can present similarly with sudden collapse or stroke-like signs and is managed along the same emergency pathway",
-   "Prevention relies on adherence to decompression schedules, controlled ascent rates and avoiding flying too soon after diving"
+  "id": "decompression_sickness",
+  "name": "Decompression sickness",
+  "aliases": [
+    "DCS",
+    "the bends",
+    "caisson disease",
+    "decompression illness"
   ],
-  "pathophysiology": "During exposure to raised pressure, inert gas (usually nitrogen) dissolves into body tissues in proportion to the pressure and time. If pressure is reduced faster than the gas can be safely eliminated through the lungs, it comes out of solution and forms bubbles within tissues and blood. These bubbles cause mechanical obstruction of vessels, mechanical tissue distortion, and secondary inflammatory and coagulation responses, producing the musculoskeletal, neurological, pulmonary and other manifestations.",
-  "additionalDifferentials": [
-   "Arterial gas embolism from pulmonary barotrauma",
-   "Musculoskeletal strain or injury",
-   "Inner ear barotrauma",
-   "Stroke or other acute neurological event",
-   "Cardiac or respiratory causes of collapse",
-   "Immersion pulmonary oedema"
-  ],
-  "additionalInvestigations": [
-   "Detailed dive or pressure exposure profile including depth, times and ascent rate",
-   "Neurological examination to detect spinal cord and cerebral involvement",
-   "Oxygen saturation and cardiorespiratory assessment",
-   "Early consultation with a hyperbaric medicine specialist",
-   "Imaging where an alternative diagnosis such as stroke is being considered, without delaying recompression"
-  ],
-  "redFlags": [
-   "MEDICAL EMERGENCY: any neurological features, breathlessness or collapse after decompression require immediate high-flow oxygen and urgent recompression",
-   "Rapid deterioration or evolving spinal cord signs such as leg weakness or urinary retention",
-   "Sudden collapse or stroke-like presentation suggesting arterial gas embolism",
-   "Cardiorespiratory compromise ('the chokes')"
-  ],
-  "prognosis": "Prompt recompression and oxygen therapy give a good chance of full recovery, especially in milder disease; delay in treatment, severe neurological involvement or arterial gas embolism carry a higher risk of permanent deficit.",
-  "pitfalls": [
-   "Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS",
-   "Delaying recompression while arranging non-essential investigations",
-   "Failing to give continuous high-flow oxygen during transfer",
-   "Overlooking the risk of flying or altitude exposure soon after diving",
-   "Assuming that a symptom-free interval excludes serious disease"
-  ],
-  "references": [
-   "Hunter's Diseases of Occupations",
-   "WHO guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid",
-   "Arrange urgent recompression in a hyperbaric chamber followed by staged decompression as the definitive treatment, without delay",
-   "Consult a hyperbaric or diving medicine specialist early",
-   "Treat serious type II neurological, pulmonary or inner-ear disease as a medical emergency",
-   "Avoid any further pressure reduction, including flying, until cleared by a diving physician",
-   "In occupational settings, review the pressure exposure profile and reinforce safe decompression schedules to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "decompression_sickness-pathway",
-   "title": "Decompression sickness: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or aircraft or altitude-chamber exposure, allowing dissolved inert gas to form bubbles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: any neurological features, breathlessness or collapse after decompression require immediate high-flow oxygen and urgent recompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed dive or pressure exposure profile including depth, times and ascent rate, Neurological examination to detect spinal cord and cerebral involvement, Oxygen saturation and cardiorespiratory assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of decompression sickness."
-  }
- ],
- "tables": [
-  {
-   "id": "decompression_sickness-matrix",
-   "title": "Decompression sickness: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Occupational / Environmental",
+  "specialty": "Occupational & Environmental Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hunter's Diseases of Occupations / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or aircraft or altitude-chamber exposure, allowing dissolved inert gas to form bubbles",
+      "Type I (mild) disease features joint and limb pain ('the bends'), skin mottling and itching, and lymphatic swelling",
+      "Type II (serious) disease involves the nervous system, lungs or inner ear, with limb weakness, numbness, bladder dysfunction, breathlessness ('the chokes') or vertigo, and is a medical emergency",
+      "Symptoms usually appear within minutes to hours of surfacing or pressure reduction, and delayed onset can occur particularly after flying soon after diving",
+      "First aid centres on high-flow oxygen, keeping the patient flat and hydrated, and urgent contact with a diving or hyperbaric medicine service",
+      "Definitive treatment is recompression in a hyperbaric chamber followed by a staged decompression, and this should not be delayed",
+      "Arterial gas embolism from pulmonary barotrauma can present similarly with sudden collapse or stroke-like signs and is managed along the same emergency pathway",
+      "Prevention relies on adherence to decompression schedules, controlled ascent rates and avoiding flying too soon after diving"
     ],
-    [
-     "Key Investigations",
-     "Detailed dive or pressure exposure profile including depth, times and ascent rate, Neurological examination to detect spinal cord",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During exposure to raised pressure, inert gas (usually nitrogen) dissolves into body tissues in proportion to the pressure and time. If pressure is reduced faster than the gas can be safely eliminated through the lungs, it comes out of solution and forms bubbles within tissues and blood. These bubbles cause mechanical obstruction of vessels, mechanical tissue distortion, and secondary inflammatory and coagulation responses, producing the musculoskeletal, neurological, pulmonary and other manifestations.",
+    "additionalDifferentials": [
+      "Arterial gas embolism from pulmonary barotrauma",
+      "Musculoskeletal strain or injury",
+      "Inner ear barotrauma",
+      "Stroke or other acute neurological event",
+      "Cardiac or respiratory causes of collapse",
+      "Immersion pulmonary oedema"
     ],
-    [
-     "Primary Differentials",
-     "Arterial gas embolism from pulmonary barotrauma, Musculoskeletal strain or injury, Inner ear barotrauma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed dive or pressure exposure profile including depth, times and ascent rate",
+      "Neurological examination to detect spinal cord and cerebral involvement",
+      "Oxygen saturation and cardiorespiratory assessment",
+      "Early consultation with a hyperbaric medicine specialist",
+      "Imaging where an alternative diagnosis such as stroke is being considered, without delaying recompression"
     ],
-    [
-     "Management Strategy",
-     "Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid",
-     "Core treatment modality"
+    "redFlags": [
+      "MEDICAL EMERGENCY: any neurological features, breathlessness or collapse after decompression require immediate high-flow oxygen and urgent recompression",
+      "Rapid deterioration or evolving spinal cord signs such as leg weakness or urinary retention",
+      "Sudden collapse or stroke-like presentation suggesting arterial gas embolism",
+      "Cardiorespiratory compromise ('the chokes')"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt recompression and oxygen therapy give a good chance of full recovery, especially in milder disease; delay in treatment, severe neurological involvement or arterial gas embolism carry a higher risk of permanent deficit.",
+    "pitfalls": [
+      "Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS",
+      "Delaying recompression while arranging non-essential investigations",
+      "Failing to give continuous high-flow oxygen during transfer",
+      "Overlooking the risk of flying or altitude exposure soon after diving",
+      "Assuming that a symptom-free interval excludes serious disease"
+    ],
+    "references": [
+      "Hunter's Diseases of Occupations",
+      "WHO guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid",
+      "Arrange urgent recompression in a hyperbaric chamber followed by staged decompression as the definitive treatment, without delay",
+      "Consult a hyperbaric or diving medicine specialist early",
+      "Treat serious type II neurological, pulmonary or inner-ear disease as a medical emergency",
+      "Avoid any further pressure reduction, including flying, until cleared by a diving physician",
+      "In occupational settings, review the pressure exposure profile and reinforce safe decompression schedules to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for decompression sickness."
-  }
- ],
- "diagrams": [
-  {
-   "id": "decompression-sickness-real-image",
-   "title": "Decompression sickness: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "decompression_sickness-pathway",
+      "title": "Decompression sickness: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or aircraft or altitude-chamber exposure, allowing dissolved inert gas to form bubbles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: any neurological features, breathlessness or collapse after decompression require immediate high-flow oxygen and urgent recompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed dive or pressure exposure profile including depth, times and ascent rate, Neurological examination to detect spinal cord and cerebral involvement, Oxygen saturation and cardiorespiratory assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of decompression sickness."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "decompression_sickness-matrix",
+      "title": "Decompression sickness: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Decompression sickness arises when ambient pressure falls too quickly, as after diving ascents, tunnel and caisson work, or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed dive or pressure exposure profile including depth, times and ascent rate, Neurological examination to detect spinal cord",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arterial gas embolism from pulmonary barotrauma, Musculoskeletal strain or injury, Inner ear barotrauma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give high-flow oxygen and keep the patient lying flat and well hydrated as first aid",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing joint pain or vague symptoms after diving as musculoskeletal and missing early DCS",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for decompression sickness."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "decompression_sickness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dive or pressure exposure profile",
+          "cells": [
+            {
+              "text": "Depth, times and ascent rate of the exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Spinal cord and cerebral involvement; leg weakness or urinary retention as signs of evolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen saturation and cardiorespiratory assessment",
+          "cells": [
+            {
+              "text": "Breathlessness or collapse, the cardiorespiratory form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging when stroke is considered",
+          "cells": [
+            {
+              "text": "Excludes an alternative such as stroke, without delaying recompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decompression_sickness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial gas embolism",
+          "cells": [
+            {
+              "text": "Stroke-like presentation or sudden collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke or other acute neurological event",
+          "cells": [
+            {
+              "text": "Imaging used to exclude it, without delaying recompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decompression_sickness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First aid high-flow oxygen",
+          "cells": [
+            {
+              "text": "Keep the patient lying flat and well hydrated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent recompression",
+          "cells": [
+            {
+              "text": "Hyperbaric chamber followed by staged decompression; the definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early hyperbaric specialist input",
+          "cells": [
+            {
+              "text": "Consult a hyperbaric or diving medicine specialist early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency for serious disease",
+          "cells": [
+            {
+              "text": "Serious type II neurological, pulmonary or inner-ear disease is a medical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No flying or altitude",
+          "cells": [
+            {
+              "text": "Avoid until cleared by a diving physician"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational prevention",
+          "cells": [
+            {
+              "text": "Review the exposure profile and reinforce safe decompression schedules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "decompression_sickness-dx-mgmt",
+      "title": "Diagnosis and management of Decompression sickness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected decompression sickness: joint pain or neurological signs after diving",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological signs, breathlessness, collapse or chokes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: high-flow oxygen and urgent recompression, without delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exposure profile, neurological examination, SpO2 and cardiorespiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the exposure profile and examination fit decompression sickness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arterial gas embolism, barotrauma, stroke or musculoskeletal strain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-flow oxygen first aid; lie flat and keep well hydrated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent hyperbaric recompression with staged decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consult a hyperbaric or diving medicine specialist early",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "No flying or altitude exposure until cleared by a diving physician",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review the exposure profile and reinforce safe decompression schedules",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good chance of full recovery when treated promptly; delay raises the risk of deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

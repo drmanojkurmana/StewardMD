@@ -1,174 +1,569 @@
 {
- "id": "leber_hereditary_optic_neuropathy",
- "name": "Leber hereditary optic neuropathy",
- "aliases": [
-  "LHON",
-  "mitochondrial optic neuropathy",
-  "MT-ND4",
-  "MT-ND1",
-  "MT-ND6"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I (m.11778, m.3460, m.14484)",
-   "Typically affects young adult males with subacute, painless, severe central visual loss in one eye followed by the fellow eye within weeks to months",
-   "Acute phase shows peripapillary telangiectatic microangiopathy, disc hyperaemia, and swelling of the retinal nerve fibre layer without leakage on angiography",
-   "Progresses to optic atrophy with a dense central or centrocaecal scotoma and impaired colour vision",
-   "Incomplete penetrance and marked male predominance indicate modifying genetic and environmental factors",
-   "Smoking and heavy alcohol use are recognised triggers/aggravators and should be avoided",
-   "The m.14484 mutation carries the best chance of spontaneous visual recovery"
+  "id": "leber_hereditary_optic_neuropathy",
+  "name": "Leber hereditary optic neuropathy",
+  "aliases": [
+    "LHON",
+    "mitochondrial optic neuropathy",
+    "MT-ND4",
+    "MT-ND1",
+    "MT-ND6"
   ],
-  "pathophysiology": "Leber hereditary optic neuropathy is caused by pathogenic point mutations in mitochondrial DNA that impair complex I of the respiratory chain, reducing ATP production and increasing oxidative stress. Retinal ganglion cells, particularly the small fibres of the papillomacular bundle, are exquisitely dependent on mitochondrial energy and are preferentially vulnerable. Energy failure and oxidative damage trigger dysfunction and then apoptotic loss of these ganglion cells, producing the characteristic central visual loss and subsequent optic atrophy. Incomplete penetrance and the male bias reflect the influence of mitochondrial heteroplasmy, nuclear modifiers, hormonal factors, and environmental triggers.",
-  "additionalDifferentials": [
-   "Optic neuritis (demyelinating)",
-   "Toxic or nutritional optic neuropathy",
-   "Dominant optic atrophy (OPA1)",
-   "Compressive or infiltrative optic neuropathy",
-   "Non-arteritic anterior ischaemic optic neuropathy",
-   "Bilateral sequential optic neuropathy from other causes"
-  ],
-  "additionalInvestigations": [
-   "Mitochondrial DNA testing for the primary LHON point mutations",
-   "Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
-   "Automated perimetry documenting central or centrocaecal scotomata",
-   "Fundus fluorescein angiography (characteristically no leakage despite disc appearance)",
-   "MRI of brain and orbits to exclude compressive or demyelinating causes",
-   "Colour vision assessment"
-  ],
-  "redFlags": [
-   "Rapid sequential involvement of the second eye",
-   "Atypical features (pain, response to steroids, or optic disc leakage) suggesting an alternative diagnosis",
-   "Systemic or neurological signs indicating a 'LHON-plus' phenotype",
-   "Continued smoking or alcohol exposure accelerating visual loss"
-  ],
-  "prognosis": "Most patients suffer severe and permanent bilateral central visual loss, although a minority recover useful vision, most commonly those with the m.14484 mutation and younger patients; avoidance of smoking and excess alcohol and emerging gene and pharmacological therapies may modify outcomes.",
-  "pitfalls": [
-   "Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression",
-   "Failing to counsel on maternal inheritance and the risk to relatives",
-   "Overlooking modifiable triggers such as smoking and alcohol in carriers",
-   "Not recognising the disc appearance can mimic true papilloedema early on"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision",
-   "Strongly advise smoking cessation and avoidance of heavy alcohol, which are recognised triggers and aggravators",
-   "Provide low-vision aids and visual rehabilitation for the central scotoma and impaired colour vision",
-   "Monitor both eyes with optical coherence tomography and perimetry, anticipating sequential involvement of the fellow eye",
-   "Offer genetic counselling explaining maternal mitochondrial inheritance, incomplete penetrance and male predominance, with assessment of at-risk maternal relatives",
-   "Refer to neuro-ophthalmology and clinical genetics, and consider emerging mitochondrial-targeted gene therapies within specialist or trial settings"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leber_hereditary_optic_neuropathy-pathway",
-   "title": "Leber hereditary optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I (m.11778, m.3460, m.14484)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid sequential involvement of the second eye",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Mitochondrial DNA testing for the primary LHON point mutations, Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex, Automated perimetry documenting central or centrocaecal scotomata"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leber hereditary optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "leber_hereditary_optic_neuropathy-matrix",
-   "title": "Leber hereditary optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I (m.11778, m.3460, m.14484)",
+      "Typically affects young adult males with subacute, painless, severe central visual loss in one eye followed by the fellow eye within weeks to months",
+      "Acute phase shows peripapillary telangiectatic microangiopathy, disc hyperaemia, and swelling of the retinal nerve fibre layer without leakage on angiography",
+      "Progresses to optic atrophy with a dense central or centrocaecal scotoma and impaired colour vision",
+      "Incomplete penetrance and marked male predominance indicate modifying genetic and environmental factors",
+      "Smoking and heavy alcohol use are recognised triggers/aggravators and should be avoided",
+      "The m.14484 mutation carries the best chance of spontaneous visual recovery"
     ],
-    [
-     "Key Investigations",
-     "Mitochondrial DNA testing for the primary LHON point mutations, Optical coherence tomography of the retinal nerve fibre layer and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leber hereditary optic neuropathy is caused by pathogenic point mutations in mitochondrial DNA that impair complex I of the respiratory chain, reducing ATP production and increasing oxidative stress. Retinal ganglion cells, particularly the small fibres of the papillomacular bundle, are exquisitely dependent on mitochondrial energy and are preferentially vulnerable. Energy failure and oxidative damage trigger dysfunction and then apoptotic loss of these ganglion cells, producing the characteristic central visual loss and subsequent optic atrophy. Incomplete penetrance and the male bias reflect the influence of mitochondrial heteroplasmy, nuclear modifiers, hormonal factors, and environmental triggers.",
+    "additionalDifferentials": [
+      "Optic neuritis (demyelinating)",
+      "Toxic or nutritional optic neuropathy",
+      "Dominant optic atrophy (OPA1)",
+      "Compressive or infiltrative optic neuropathy",
+      "Non-arteritic anterior ischaemic optic neuropathy",
+      "Bilateral sequential optic neuropathy from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Optic neuritis (demyelinating), Toxic or nutritional optic neuropathy, Dominant optic atrophy (OPA1)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Mitochondrial DNA testing for the primary LHON point mutations",
+      "Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex",
+      "Automated perimetry documenting central or centrocaecal scotomata",
+      "Fundus fluorescein angiography (characteristically no leakage despite disc appearance)",
+      "MRI of brain and orbits to exclude compressive or demyelinating causes",
+      "Colour vision assessment"
     ],
-    [
-     "Management Strategy",
-     "Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid sequential involvement of the second eye",
+      "Atypical features (pain, response to steroids, or optic disc leakage) suggesting an alternative diagnosis",
+      "Systemic or neurological signs indicating a 'LHON-plus' phenotype",
+      "Continued smoking or alcohol exposure accelerating visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients suffer severe and permanent bilateral central visual loss, although a minority recover useful vision, most commonly those with the m.14484 mutation and younger patients; avoidance of smoking and excess alcohol and emerging gene and pharmacological therapies may modify outcomes.",
+    "pitfalls": [
+      "Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression",
+      "Failing to counsel on maternal inheritance and the risk to relatives",
+      "Overlooking modifiable triggers such as smoking and alcohol in carriers",
+      "Not recognising the disc appearance can mimic true papilloedema early on"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision",
+      "Strongly advise smoking cessation and avoidance of heavy alcohol, which are recognised triggers and aggravators",
+      "Provide low-vision aids and visual rehabilitation for the central scotoma and impaired colour vision",
+      "Monitor both eyes with optical coherence tomography and perimetry, anticipating sequential involvement of the fellow eye",
+      "Offer genetic counselling explaining maternal mitochondrial inheritance, incomplete penetrance and male predominance, with assessment of at-risk maternal relatives",
+      "Refer to neuro-ophthalmology and clinical genetics, and consider emerging mitochondrial-targeted gene therapies within specialist or trial settings"
     ]
-   ],
-   "caption": "Overview comparison matrix for leber hereditary optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leber-hereditary-optic-neuropathy-real-image",
-   "title": "Leber hereditary optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "leber_hereditary_optic_neuropathy-pathway",
+      "title": "Leber hereditary optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I (m.11778, m.3460, m.14484)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid sequential involvement of the second eye",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Mitochondrial DNA testing for the primary LHON point mutations, Optical coherence tomography of the retinal nerve fibre layer and ganglion cell complex, Automated perimetry documenting central or centrocaecal scotomata"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leber hereditary optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leber_hereditary_optic_neuropathy-matrix",
+      "title": "Leber hereditary optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Maternally inherited mitochondrial disorder, most often from one of three primary mtDNA point mutations affecting complex I",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Mitochondrial DNA testing for the primary LHON point mutations, Optical coherence tomography of the retinal nerve fibre layer and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Optic neuritis (demyelinating), Toxic or nutritional optic neuropathy, Dominant optic atrophy (OPA1)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Consider idebenone, a synthetic short-chain quinone, particularly during the acute or subacute phase to support residual vision",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as atypical optic neuritis and giving prolonged unhelpful immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leber hereditary optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leber_hereditary_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitochondrial DNA testing for primary LHON mutations",
+          "cells": [
+            {
+              "text": "m.11778, m.3460 or m.14484 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography of the nerve fibre layer",
+          "cells": [
+            {
+              "text": "Retinal nerve fibre layer and ganglion cell complex changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Central or centrocaecal scotomata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus fluorescein angiography",
+          "cells": [
+            {
+              "text": "No leakage despite the disc appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and orbits",
+          "cells": [
+            {
+              "text": "Compressive or demyelinating causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision assessment",
+          "cells": [
+            {
+              "text": "Impaired colour vision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_hereditary_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Optic neuritis (demyelinating)",
+          "cells": [
+            {
+              "text": "Pain or steroid response suggests an alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dominant optic atrophy (OPA1)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic or nutritional optic neuropathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_hereditary_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Idebenone",
+          "cells": [
+            {
+              "text": "Consider in the acute or subacute phase to support residual vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking and alcohol avoidance",
+          "cells": [
+            {
+              "text": "Recognised triggers and aggravators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Aids and rehabilitation for central scotoma and colour vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring both eyes",
+          "cells": [
+            {
+              "text": "OCT and perimetry; anticipate sequential fellow-eye involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal mitochondrial inheritance, incomplete penetrance, male predominance; at-risk maternal relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neuro-ophthalmology and clinical genetics; mitochondrial gene therapies in trials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_hereditary_optic_neuropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected mitochondrial diseases",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features"
+      ],
+      "rows": [
+        {
+          "parameter": "MELAS syndrome",
+          "cells": [
+            {
+              "text": "Mitochondrial myopathy with encephalopathy, lactic acidosis, and stroke"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leber's optic atrophy",
+          "cells": [
+            {
+              "text": "Hereditary optic neuropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kearns-Sayre syndrome (KSS)",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, pigmentary degeneration of the retina, cardiomyopathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MERRF syndrome",
+          "cells": [
+            {
+              "text": "Myoclonic epilepsy and ragged-red fibers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NARP",
+          "cells": [
+            {
+              "text": "Neurogenic muscular weakness with ataxia and retinitis pigmentosa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia (CEOP)",
+          "cells": [
+            {
+              "text": "Chronic progressive external ophthalmoplegia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pearson's syndrome (PEAR)",
+          "cells": [
+            {
+              "text": "Bone marrow and pancreatic failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ADMIMY",
+          "cells": [
+            {
+              "text": "Autosomal dominant inherited mitochondrial myopathy with mitochondrial deletion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Somatic mutations in the cytochrome b gene",
+          "cells": [
+            {
+              "text": "Exercise intolerance, lactic acidosis, complex III deficiency, muscle pain, ragged-red fibers (text cut off at the page edge)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leber_hereditary_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of Leber hereditary optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young adult male with subacute, painless, severe central vision loss in one eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (second eye involved, pain, steroid response, systemic signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neuro-ophthalmology review for atypical or LHON-plus features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "mtDNA testing for m.11778, m.3460 or m.14484, OCT, perimetry, angiography, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a primary LHON mutation identified on mtDNA testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider optic neuritis, dominant optic atrophy or toxic optic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider idebenone in the acute or subacute phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop smoking and avoid heavy alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision aids and visual rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor both eyes with OCT and perimetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling on maternal inheritance and at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most suffer severe permanent central loss; a minority recover, mostly with m.14484",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

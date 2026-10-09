@@ -1,168 +1,437 @@
 {
- "id": "congenital_aphakia",
- "name": "Congenital aphakia",
- "aliases": [
-  "primary congenital aphakia",
-  "secondary congenital aphakia"
- ],
- "class": "non_infective",
- "system": "Eye / Anterior segment",
- "specialty": "Ophthalmology / Paediatric ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare congenital absence of the crystalline lens, present from birth",
-   "Primary aphakia reflects failure of lens induction with severe anterior segment dysgenesis",
-   "Secondary aphakia occurs when a lens that did form is resorbed or extruded during development",
-   "It causes high hyperopia and is a cause of visual deprivation and amblyopia in the affected eye",
-   "It is frequently accompanied by other ocular malformations such as microphthalmia and anterior segment dysgenesis",
-   "Management focuses on optical correction and aggressive amblyopia therapy during the critical period"
+  "id": "congenital_aphakia",
+  "name": "Congenital aphakia",
+  "aliases": [
+    "primary congenital aphakia",
+    "secondary congenital aphakia"
   ],
-  "pathophysiology": "Congenital aphakia results from disturbance of lens development. In primary aphakia the surface ectoderm fails to differentiate into lens placode and vesicle, so no lens forms and the anterior segment develops abnormally. In secondary aphakia a lens is initially formed but is subsequently resorbed or expelled in utero, for example after intrauterine inflammation or with other developmental anomalies. Absence of the lens removes a major refractive element, producing marked hyperopia and, without correction, dense form-deprivation amblyopia.",
-  "additionalDifferentials": [
-   "Anterior lenticonus or severe lens coloboma",
-   "Ectopia lentis with a dislocated lens out of the visual axis",
-   "Microphthalmia with lenticular anomalies",
-   "Persistent fetal vasculature",
-   "Surgical (acquired) aphakia"
-  ],
-  "additionalInvestigations": [
-   "Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence",
-   "Assessment for associated anterior segment dysgenesis and microphthalmia",
-   "Refraction and visual development assessment",
-   "Genetic evaluation where syndromic features are present",
-   "Amblyopia assessment and monitoring"
-  ],
-  "redFlags": [
-   "Dense amblyopia risk requiring urgent optical correction",
-   "Associated glaucoma or other sight-threatening malformation",
-   "Bilateral involvement affecting overall visual development",
-   "Syndromic features suggesting a broader disorder"
-  ],
-  "prognosis": "Visual prognosis depends on the severity of associated malformations and on the timeliness of optical correction and amblyopia therapy, and is often guarded, particularly in primary aphakia.",
-  "pitfalls": [
-   "Delaying optical correction and losing the amblyopia treatment window",
-   "Missing associated glaucoma or anterior segment dysgenesis",
-   "Confusing it with ectopia lentis",
-   "Overlooking a syndromic association"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image",
-   "Institute aggressive amblyopia therapy with occlusion of the better-seeing eye during the critical period of visual development",
-   "Consider secondary intraocular lens implantation where the eye is anatomically suitable",
-   "Assess and manage associated anterior segment dysgenesis and microphthalmia, monitoring for glaucoma",
-   "Undertake regular refraction and visual development assessment",
-   "Offer genetic evaluation and counselling where syndromic features are present, with paediatric ophthalmology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_aphakia-pathway",
-   "title": "Congenital aphakia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare congenital absence of the crystalline lens, present from birth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dense amblyopia risk requiring urgent optical correction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence, Assessment for associated anterior segment dysgenesis and microphthalmia, Refraction and visual development assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying optical correction and losing the amblyopia treatment window"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital aphakia."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_aphakia-matrix",
-   "title": "Congenital aphakia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare congenital absence of the crystalline lens, present from birth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Anterior segment",
+  "specialty": "Ophthalmology / Paediatric ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare congenital absence of the crystalline lens, present from birth",
+      "Primary aphakia reflects failure of lens induction with severe anterior segment dysgenesis",
+      "Secondary aphakia occurs when a lens that did form is resorbed or extruded during development",
+      "It causes high hyperopia and is a cause of visual deprivation and amblyopia in the affected eye",
+      "It is frequently accompanied by other ocular malformations such as microphthalmia and anterior segment dysgenesis",
+      "Management focuses on optical correction and aggressive amblyopia therapy during the critical period"
     ],
-    [
-     "Key Investigations",
-     "Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence, Assessment for associated anterior",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital aphakia results from disturbance of lens development. In primary aphakia the surface ectoderm fails to differentiate into lens placode and vesicle, so no lens forms and the anterior segment develops abnormally. In secondary aphakia a lens is initially formed but is subsequently resorbed or expelled in utero, for example after intrauterine inflammation or with other developmental anomalies. Absence of the lens removes a major refractive element, producing marked hyperopia and, without correction, dense form-deprivation amblyopia.",
+    "additionalDifferentials": [
+      "Anterior lenticonus or severe lens coloboma",
+      "Ectopia lentis with a dislocated lens out of the visual axis",
+      "Microphthalmia with lenticular anomalies",
+      "Persistent fetal vasculature",
+      "Surgical (acquired) aphakia"
     ],
-    [
-     "Primary Differentials",
-     "Anterior lenticonus or severe lens coloboma, Ectopia lentis with a dislocated lens out of the visual axis, Microphthalmia with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence",
+      "Assessment for associated anterior segment dysgenesis and microphthalmia",
+      "Refraction and visual development assessment",
+      "Genetic evaluation where syndromic features are present",
+      "Amblyopia assessment and monitoring"
     ],
-    [
-     "Management Strategy",
-     "Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image",
-     "Core treatment modality"
+    "redFlags": [
+      "Dense amblyopia risk requiring urgent optical correction",
+      "Associated glaucoma or other sight-threatening malformation",
+      "Bilateral involvement affecting overall visual development",
+      "Syndromic features suggesting a broader disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying optical correction and losing the amblyopia treatment window",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual prognosis depends on the severity of associated malformations and on the timeliness of optical correction and amblyopia therapy, and is often guarded, particularly in primary aphakia.",
+    "pitfalls": [
+      "Delaying optical correction and losing the amblyopia treatment window",
+      "Missing associated glaucoma or anterior segment dysgenesis",
+      "Confusing it with ectopia lentis",
+      "Overlooking a syndromic association"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image",
+      "Institute aggressive amblyopia therapy with occlusion of the better-seeing eye during the critical period of visual development",
+      "Consider secondary intraocular lens implantation where the eye is anatomically suitable",
+      "Assess and manage associated anterior segment dysgenesis and microphthalmia, monitoring for glaucoma",
+      "Undertake regular refraction and visual development assessment",
+      "Offer genetic evaluation and counselling where syndromic features are present, with paediatric ophthalmology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital aphakia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-aphakia-real-image",
-   "title": "Congenital aphakia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_aphakia-pathway",
+      "title": "Congenital aphakia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare congenital absence of the crystalline lens, present from birth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dense amblyopia risk requiring urgent optical correction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence, Assessment for associated anterior segment dysgenesis and microphthalmia, Refraction and visual development assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying optical correction and losing the amblyopia treatment window"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital aphakia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_aphakia-matrix",
+      "title": "Congenital aphakia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare congenital absence of the crystalline lens, present from birth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination and imaging (for example ultrasound biomicroscopy) to confirm lens absence, Assessment for associated anterior",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anterior lenticonus or severe lens coloboma, Ectopia lentis with a dislocated lens out of the visual axis, Microphthalmia with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the high aphakic hyperopia optically with spectacles or contact lenses to provide a focused retinal image",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying optical correction and losing the amblyopia treatment window",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital aphakia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_aphakia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound biomicroscopy and examination",
+          "cells": [
+            {
+              "text": "Lens absence confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for anterior segment dysgenesis and microphthalmia",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and visual development assessment",
+          "cells": [
+            {
+              "text": "High aphakic hyperopia; visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia assessment",
+          "cells": [
+            {
+              "text": "Amblyopia risk monitored"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_aphakia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopia lentis with a dislocated lens",
+          "cells": [
+            {
+              "text": "Lens dislocated out of the visual axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior lenticonus or severe lens coloboma",
+          "cells": [
+            {
+              "text": "Lens anomaly rather than absence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical (acquired) aphakia",
+          "cells": [
+            {
+              "text": "Acquired rather than congenital"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_aphakia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses for high aphakic hyperopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive amblyopia therapy",
+          "cells": [
+            {
+              "text": "Occlusion of the better-seeing eye during the critical period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary intraocular lens",
+          "cells": [
+            {
+              "text": "Where the eye is anatomically suitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Anterior segment dysgenesis and microphthalmia; monitor for glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular refraction",
+          "cells": [
+            {
+              "text": "Visual development assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Where syndromic features are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_aphakia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital aphakia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital aphakia: absent lens with high hyperopia in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (glaucoma, bilateral involvement, syndromic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent optical correction and amblyopia therapy; check for glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound biomicroscopy; anterior segment and refraction; amblyopia assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm lens absence rather than lens dislocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopia lentis, lenticonus or persistent fetal vasculature",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optical correction with spectacles or contact lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive occlusion therapy during the critical period",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider secondary intraocular lens where suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for glaucoma and anterior segment dysgenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual prognosis depends on malformation severity and timeliness of treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

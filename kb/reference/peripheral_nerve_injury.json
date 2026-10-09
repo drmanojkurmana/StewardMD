@@ -1,174 +1,454 @@
 {
- "id": "peripheral_nerve_injury",
- "name": "Peripheral nerve injury",
- "aliases": [
-  "PNI",
-  "peripheral nerve lesion",
-  "traumatic neuropathy",
-  "nerve injury"
- ],
- "class": "non_infective",
- "system": "Rehabilitation / Pain",
- "specialty": "Rehabilitation Medicine (PM&R)",
- "referenceOnly": true,
- "reference": {
-  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis, and the more detailed Sunderland scheme, which together guide prognosis and management",
-   "Neurapraxia is a conduction block with intact axons that usually recovers fully; axonotmesis involves axonal disruption with preserved connective tissue framework and slow recovery; neurotmesis is complete transection that generally requires surgical repair",
-   "Clinical assessment maps motor, sensory, and autonomic deficits to the affected nerve and helps localise the lesion and estimate its completeness",
-   "Electrodiagnostic studies are most informative after a few weeks, once Wallerian degeneration is established, and are useful for confirming the lesion, grading severity, and tracking reinnervation",
-   "Rehabilitation emphasises preventing complications during recovery: maintaining joint range of motion, protective splinting, skin care in insensate areas, and preventing contracture and disuse",
-   "An advancing Tinel sign along the nerve over successive examinations is a helpful bedside indicator of regenerating axons",
-   "Axonal regrowth proceeds slowly at roughly a millimetre per day, so recovery of distal muscles can take many months and the muscle must remain viable for reinnervation to be useful",
-   "Neuropathic pain following nerve injury is managed with neuropathic agents such as gabapentinoids and antidepressants alongside therapy, and surgical exploration or nerve transfer is considered when there is no recovery within the expected window"
+  "id": "peripheral_nerve_injury",
+  "name": "Peripheral nerve injury",
+  "aliases": [
+    "PNI",
+    "peripheral nerve lesion",
+    "traumatic neuropathy",
+    "nerve injury"
   ],
-  "pathophysiology": "Peripheral nerve injury disrupts axonal continuity and myelin to varying degrees depending on the mechanism, whether compression, traction, laceration, or ischaemia. In neurapraxia there is focal demyelination and conduction block without axonal loss. When axons are disrupted, the segment distal to the injury undergoes Wallerian degeneration, and regeneration then proceeds from the proximal stump along preserved endoneurial tubes, guided by Schwann cells and neurotrophic signals. The integrity of the connective tissue sheaths determines whether regrowing axons reach their correct targets; disrupted architecture leads to misdirection, neuroma formation, and incomplete recovery.",
-  "additionalDifferentials": [
-   "Radiculopathy or plexopathy",
-   "Entrapment neuropathy such as carpal or cubital tunnel syndrome",
-   "Motor neuron disease or other central cause of weakness",
-   "Generalised peripheral polyneuropathy",
-   "Compartment syndrome affecting nerve and muscle",
-   "Tendon rupture mimicking motor loss"
-  ],
-  "additionalInvestigations": [
-   "Detailed motor and sensory examination to localise and grade the lesion",
-   "Nerve conduction studies and electromyography, timed appropriately after injury to assess severity and reinnervation",
-   "Serial examination for an advancing Tinel sign as evidence of regeneration",
-   "Imaging such as ultrasound or MRI to define nerve continuity and identify compression or neuroma",
-   "Assessment for coexisting vascular or musculoskeletal injury in trauma"
-  ],
-  "redFlags": [
-   "Suspected complete nerve transection or a sharp penetrating injury that may need early surgical exploration and repair",
-   "Signs of compartment syndrome in an acutely painful, tense limb",
-   "Rapidly progressive or multifocal deficits suggesting a systemic or inflammatory neuropathy",
-   "Vascular compromise accompanying the nerve injury",
-   "No sign of recovery within the expected timeframe, warranting reassessment for surgery"
-  ],
-  "prognosis": "Prognosis depends chiefly on the injury grade: neurapraxia typically recovers fully within weeks to months, axonotmesis recovers slowly and often incompletely, and neurotmesis requires surgical repair with outcomes limited by the distance to the target and the age of the patient. More proximal injuries and delayed treatment carry a poorer outlook because muscle may atrophy irreversibly before reinnervation occurs.",
-  "pitfalls": [
-   "Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable",
-   "Missing a transection that requires timely surgical repair",
-   "Allowing contractures and joint stiffness to develop during the long recovery period",
-   "Neglecting skin protection in areas rendered insensate by the injury",
-   "Failing to reassess and refer for surgery when expected recovery does not occur"
-  ],
-  "references": [
-   "Braddom's Physical Medicine and Rehabilitation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely manner to optimise reinnervation",
-   "Manage neurapraxia and axonotmesis conservatively with observation, as many recover spontaneously along preserved endoneurial tubes",
-   "Prevent secondary complications with joint range-of-motion exercises, protective splinting, skin care of insensate areas and prevention of contracture and disuse",
-   "Treat neuropathic pain with agents such as gabapentinoids or tricyclic antidepressants and address a symptomatic neuroma if it develops",
-   "Monitor recovery with serial examination for an advancing Tinel sign and with electrodiagnostic studies timed after Wallerian degeneration is established",
-   "Provide physical and occupational therapy for functional rehabilitation, escalating to reconstructive options such as tendon transfers if recovery fails"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "peripheral_nerve_injury-pathway",
-   "title": "Peripheral nerve injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis, and the more detailed Sunderland scheme, which together guide prognosis and management",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suspected complete nerve transection or a sharp penetrating injury that may need early surgical exploration and repair",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed motor and sensory examination to localise and grade the lesion, Nerve conduction studies and electromyography, timed appropriately after injury to assess severity and reinnervation, Serial examination for an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely manner to optimise reinnervation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of peripheral nerve injury."
-  }
- ],
- "tables": [
-  {
-   "id": "peripheral_nerve_injury-matrix",
-   "title": "Peripheral nerve injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rehabilitation / Pain",
+  "specialty": "Rehabilitation Medicine (PM&R)",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis, and the more detailed Sunderland scheme, which together guide prognosis and management",
+      "Neurapraxia is a conduction block with intact axons that usually recovers fully; axonotmesis involves axonal disruption with preserved connective tissue framework and slow recovery; neurotmesis is complete transection that generally requires surgical repair",
+      "Clinical assessment maps motor, sensory, and autonomic deficits to the affected nerve and helps localise the lesion and estimate its completeness",
+      "Electrodiagnostic studies are most informative after a few weeks, once Wallerian degeneration is established, and are useful for confirming the lesion, grading severity, and tracking reinnervation",
+      "Rehabilitation emphasises preventing complications during recovery: maintaining joint range of motion, protective splinting, skin care in insensate areas, and preventing contracture and disuse",
+      "An advancing Tinel sign along the nerve over successive examinations is a helpful bedside indicator of regenerating axons",
+      "Axonal regrowth proceeds slowly at roughly a millimetre per day, so recovery of distal muscles can take many months and the muscle must remain viable for reinnervation to be useful",
+      "Neuropathic pain following nerve injury is managed with neuropathic agents such as gabapentinoids and antidepressants alongside therapy, and surgical exploration or nerve transfer is considered when there is no recovery within the expected window"
     ],
-    [
-     "Key Investigations",
-     "Detailed motor and sensory examination to localise and grade the lesion, Nerve conduction studies and electromyography, timed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Peripheral nerve injury disrupts axonal continuity and myelin to varying degrees depending on the mechanism, whether compression, traction, laceration, or ischaemia. In neurapraxia there is focal demyelination and conduction block without axonal loss. When axons are disrupted, the segment distal to the injury undergoes Wallerian degeneration, and regeneration then proceeds from the proximal stump along preserved endoneurial tubes, guided by Schwann cells and neurotrophic signals. The integrity of the connective tissue sheaths determines whether regrowing axons reach their correct targets; disrupted architecture leads to misdirection, neuroma formation, and incomplete recovery.",
+    "additionalDifferentials": [
+      "Radiculopathy or plexopathy",
+      "Entrapment neuropathy such as carpal or cubital tunnel syndrome",
+      "Motor neuron disease or other central cause of weakness",
+      "Generalised peripheral polyneuropathy",
+      "Compartment syndrome affecting nerve and muscle",
+      "Tendon rupture mimicking motor loss"
     ],
-    [
-     "Primary Differentials",
-     "Radiculopathy or plexopathy, Entrapment neuropathy such as carpal or cubital tunnel syndrome, Motor neuron disease or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed motor and sensory examination to localise and grade the lesion",
+      "Nerve conduction studies and electromyography, timed appropriately after injury to assess severity and reinnervation",
+      "Serial examination for an advancing Tinel sign as evidence of regeneration",
+      "Imaging such as ultrasound or MRI to define nerve continuity and identify compression or neuroma",
+      "Assessment for coexisting vascular or musculoskeletal injury in trauma"
     ],
-    [
-     "Management Strategy",
-     "Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely",
-     "Core treatment modality"
+    "redFlags": [
+      "Suspected complete nerve transection or a sharp penetrating injury that may need early surgical exploration and repair",
+      "Signs of compartment syndrome in an acutely painful, tense limb",
+      "Rapidly progressive or multifocal deficits suggesting a systemic or inflammatory neuropathy",
+      "Vascular compromise accompanying the nerve injury",
+      "No sign of recovery within the expected timeframe, warranting reassessment for surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends chiefly on the injury grade: neurapraxia typically recovers fully within weeks to months, axonotmesis recovers slowly and often incompletely, and neurotmesis requires surgical repair with outcomes limited by the distance to the target and the age of the patient. More proximal injuries and delayed treatment carry a poorer outlook because muscle may atrophy irreversibly before reinnervation occurs.",
+    "pitfalls": [
+      "Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable",
+      "Missing a transection that requires timely surgical repair",
+      "Allowing contractures and joint stiffness to develop during the long recovery period",
+      "Neglecting skin protection in areas rendered insensate by the injury",
+      "Failing to reassess and refer for surgery when expected recovery does not occur"
+    ],
+    "references": [
+      "Braddom's Physical Medicine and Rehabilitation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely manner to optimise reinnervation",
+      "Manage neurapraxia and axonotmesis conservatively with observation, as many recover spontaneously along preserved endoneurial tubes",
+      "Prevent secondary complications with joint range-of-motion exercises, protective splinting, skin care of insensate areas and prevention of contracture and disuse",
+      "Treat neuropathic pain with agents such as gabapentinoids or tricyclic antidepressants and address a symptomatic neuroma if it develops",
+      "Monitor recovery with serial examination for an advancing Tinel sign and with electrodiagnostic studies timed after Wallerian degeneration is established",
+      "Provide physical and occupational therapy for functional rehabilitation, escalating to reconstructive options such as tendon transfers if recovery fails"
     ]
-   ],
-   "caption": "Overview comparison matrix for peripheral nerve injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "peripheral-nerve-injury-real-image",
-   "title": "Peripheral nerve injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "peripheral_nerve_injury-pathway",
+      "title": "Peripheral nerve injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis, and the more detailed Sunderland scheme, which together guide prognosis and management",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suspected complete nerve transection or a sharp penetrating injury that may need early surgical exploration and repair",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed motor and sensory examination to localise and grade the lesion, Nerve conduction studies and electromyography, timed appropriately after injury to assess severity and reinnervation, Serial examination for an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely manner to optimise reinnervation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of peripheral nerve injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "peripheral_nerve_injury-matrix",
+      "title": "Peripheral nerve injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Peripheral nerve injuries are graded by severity using the Seddon classification of neurapraxia, axonotmesis, and neurotmesis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed motor and sensory examination to localise and grade the lesion, Nerve conduction studies and electromyography, timed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Radiculopathy or plexopathy, Entrapment neuropathy such as carpal or cubital tunnel syndrome, Motor neuron disease or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Repair transected nerves surgically by primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing electrodiagnostic studies too early, before Wallerian degeneration makes findings interpretable",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for peripheral nerve injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peripheral_nerve_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor and sensory examination",
+          "cells": [
+            {
+              "text": "Localises and grades the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG, timed after injury",
+          "cells": [
+            {
+              "text": "Severity and reinnervation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination for Tinel sign",
+          "cells": [
+            {
+              "text": "An advancing Tinel sign indicates regeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Nerve continuity, compression or neuroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for vascular or musculoskeletal injury",
+          "cells": [
+            {
+              "text": "Coexisting injury in trauma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripheral_nerve_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Compartment syndrome affecting nerve and muscle",
+          "cells": [
+            {
+              "text": "Acutely painful, tense limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised peripheral polyneuropathy",
+          "cells": [
+            {
+              "text": "Rapidly progressive or multifocal deficits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peripheral_nerve_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Primary coaptation, nerve grafting or nerve transfer for neurotmesis, ideally in a timely manner"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Observation for neurapraxia and axonotmesis, as many recover spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent complications",
+          "cells": [
+            {
+              "text": "Range-of-motion exercises, protective splinting, skin care of insensate areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic antidepressants; address a symptomatic neuroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Tinel sign examination and electrodiagnostic studies timed after Wallerian degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physical and occupational therapy; reconstructive options such as tendon transfer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peripheral_nerve_injury-dx-mgmt",
+      "title": "Diagnosis and management of Peripheral nerve injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb weakness, numbness or pain after nerve trauma or injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (transection, compartment syndrome, multifocal deficits, vascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical exploration for suspected transection or compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Motor and sensory examination; nerve conduction studies and EMG timed after injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do examination and electrodiagnostic studies confirm the level and grade of injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider radiculopathy, entrapment neuropathy, motor neuron disease or polyneuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repair transected nerves by coaptation, grafting or transfer, ideally in a timely manner",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe neurapraxia and axonotmesis, as many recover spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prevent complications with range-of-motion exercise, splinting and skin care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat neuropathic pain with gabapentinoids or tricyclic antidepressants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor with serial Tinel sign examination and timed electrodiagnostic studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neurapraxia recovers within weeks to months; neurotmesis needs surgical repair",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

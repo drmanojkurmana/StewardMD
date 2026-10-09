@@ -1,176 +1,398 @@
 {
- "id": "wolf_hirschhorn_syndrome",
- "name": "Wolf-Hirschhorn syndrome",
- "aliases": [
-  "WHS",
-  "4p deletion syndrome",
-  "4p minus syndrome",
-  "Pitt-Rogers-Danks syndrome",
-  "monosomy 4p"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism and a short philtrum, is characteristic",
-   "Caused by deletion of the distal short arm of chromosome 4, involving the WHS critical regions",
-   "Marked prenatal and postnatal growth restriction, microcephaly and profound feeding difficulty are near-universal",
-   "Seizures, often beginning in infancy and sometimes provoked by fever, are a core feature and a major cause of morbidity",
-   "Intellectual disability is usually severe, with hypotonia and limited speech",
-   "Most deletions are de novo, but roughly a tenth arise from an unbalanced parental translocation, mandating parental karyotyping",
-   "Midline defects such as cleft lip/palate, coloboma, cardiac septal defects and genitourinary anomalies are frequent"
+  "id": "wolf_hirschhorn_syndrome",
+  "name": "Wolf-Hirschhorn syndrome",
+  "aliases": [
+    "WHS",
+    "4p deletion syndrome",
+    "4p minus syndrome",
+    "Pitt-Rogers-Danks syndrome",
+    "monosomy 4p"
   ],
-  "pathophysiology": "Wolf-Hirschhorn syndrome results from haploinsufficiency of contiguous genes within the distal 4p16.3 region, notably the WHS critical regions containing candidate genes such as WHSC1/NSD2 and LETM1. Reduced dosage of these genes, which influence chromatin regulation, calcium/ion homeostasis and neuronal function, disrupts craniofacial, cardiac and central nervous system development. Loss of LETM1 in particular is implicated in the prominent seizure phenotype. Larger deletions generally produce a more severe clinical picture, and unbalanced familial translocations can also cause the condition.",
-  "additionalDifferentials": [
-   "Cri-du-chat syndrome",
-   "Other subtelomeric deletion syndromes",
-   "CHARGE syndrome",
-   "Cornelia de Lange syndrome",
-   "Opitz G/BBB syndrome",
-   "Non-specific syndromic intellectual disability with epilepsy"
-  ],
-  "additionalInvestigations": [
-   "Chromosomal microarray to confirm and size the 4p deletion",
-   "Karyotype and parental karyotypes to identify a familial translocation",
-   "Electroencephalography and neuroimaging to characterise the seizure disorder",
-   "Echocardiography for congenital heart disease",
-   "Renal tract ultrasound for structural anomalies",
-   "Feeding, swallowing and nutritional assessment given severe failure to thrive"
-  ],
-  "redFlags": [
-   "Prolonged or clustered seizures and status epilepticus requiring urgent management",
-   "Failure to thrive and dehydration from severe feeding difficulty",
-   "Undiagnosed congenital heart disease causing cardiorespiratory compromise",
-   "Recurrent aspiration pneumonia"
-  ],
-  "prognosis": "Survival is variable; many infants with larger deletions have high early mortality from malformations and infection, while those surviving infancy live into adulthood with severe intellectual disability. Seizure control and nutritional support strongly influence outcome.",
-  "pitfalls": [
-   "Relying on a normal karyotype when microarray is needed to detect small deletions",
-   "Neglecting parental karyotyping and misjudging recurrence risk with a translocation",
-   "Under-treating a seizure disorder that is central to morbidity",
-   "Attributing poor growth to behaviour rather than oromotor dysfunction, delaying tube feeding"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "GeneReviews: Wolf-Hirschhorn syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs",
-   "Antiepileptic drug therapy for the core seizure disorder, which often begins in infancy and may be fever-provoked, with a rescue plan for prolonged seizures and status epilepticus",
-   "Nutritional support for the profound feeding difficulty and failure to thrive, including thickened feeds and gastrostomy where needed",
-   "Developmental support with physiotherapy, occupational and speech therapy for the hypotonia, severe intellectual disability and limited speech",
-   "Surveillance and management of congenital heart disease and renal tract anomalies",
-   "Multidisciplinary follow-up across neurology, cardiology, dietetics and developmental paediatrics",
-   "Parental karyotyping and genetic counselling, as roughly a tenth of cases arise from an unbalanced parental translocation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "wolf_hirschhorn_syndrome-pathway",
-   "title": "Wolf-Hirschhorn syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism and a short philtrum, is characteristic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prolonged or clustered seizures and status epilepticus requiring urgent management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chromosomal microarray to confirm and size the 4p deletion, Karyotype and parental karyotypes to identify a familial translocation, Electroencephalography and neuroimaging to characterise the seizure disorder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a normal karyotype when microarray is needed to detect small deletions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of wolf-hirschhorn syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "wolf_hirschhorn_syndrome-matrix",
-   "title": "Wolf-Hirschhorn syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism and a short philtrum, is characteristic",
+      "Caused by deletion of the distal short arm of chromosome 4, involving the WHS critical regions",
+      "Marked prenatal and postnatal growth restriction, microcephaly and profound feeding difficulty are near-universal",
+      "Seizures, often beginning in infancy and sometimes provoked by fever, are a core feature and a major cause of morbidity",
+      "Intellectual disability is usually severe, with hypotonia and limited speech",
+      "Most deletions are de novo, but roughly a tenth arise from an unbalanced parental translocation, mandating parental karyotyping",
+      "Midline defects such as cleft lip/palate, coloboma, cardiac septal defects and genitourinary anomalies are frequent"
     ],
-    [
-     "Key Investigations",
-     "Chromosomal microarray to confirm and size the 4p deletion, Karyotype and parental karyotypes to identify a familial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Wolf-Hirschhorn syndrome results from haploinsufficiency of contiguous genes within the distal 4p16.3 region, notably the WHS critical regions containing candidate genes such as WHSC1/NSD2 and LETM1. Reduced dosage of these genes, which influence chromatin regulation, calcium/ion homeostasis and neuronal function, disrupts craniofacial, cardiac and central nervous system development. Loss of LETM1 in particular is implicated in the prominent seizure phenotype. Larger deletions generally produce a more severe clinical picture, and unbalanced familial translocations can also cause the condition.",
+    "additionalDifferentials": [
+      "Cri-du-chat syndrome",
+      "Other subtelomeric deletion syndromes",
+      "CHARGE syndrome",
+      "Cornelia de Lange syndrome",
+      "Opitz G/BBB syndrome",
+      "Non-specific syndromic intellectual disability with epilepsy"
     ],
-    [
-     "Primary Differentials",
-     "Cri-du-chat syndrome, Other subtelomeric deletion syndromes, CHARGE syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chromosomal microarray to confirm and size the 4p deletion",
+      "Karyotype and parental karyotypes to identify a familial translocation",
+      "Electroencephalography and neuroimaging to characterise the seizure disorder",
+      "Echocardiography for congenital heart disease",
+      "Renal tract ultrasound for structural anomalies",
+      "Feeding, swallowing and nutritional assessment given severe failure to thrive"
     ],
-    [
-     "Management Strategy",
-     "No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs",
-     "Core treatment modality"
+    "redFlags": [
+      "Prolonged or clustered seizures and status epilepticus requiring urgent management",
+      "Failure to thrive and dehydration from severe feeding difficulty",
+      "Undiagnosed congenital heart disease causing cardiorespiratory compromise",
+      "Recurrent aspiration pneumonia"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a normal karyotype when microarray is needed to detect small deletions",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survival is variable; many infants with larger deletions have high early mortality from malformations and infection, while those surviving infancy live into adulthood with severe intellectual disability. Seizure control and nutritional support strongly influence outcome.",
+    "pitfalls": [
+      "Relying on a normal karyotype when microarray is needed to detect small deletions",
+      "Neglecting parental karyotyping and misjudging recurrence risk with a translocation",
+      "Under-treating a seizure disorder that is central to morbidity",
+      "Attributing poor growth to behaviour rather than oromotor dysfunction, delaying tube feeding"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "GeneReviews: Wolf-Hirschhorn syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs",
+      "Antiepileptic drug therapy for the core seizure disorder, which often begins in infancy and may be fever-provoked, with a rescue plan for prolonged seizures and status epilepticus",
+      "Nutritional support for the profound feeding difficulty and failure to thrive, including thickened feeds and gastrostomy where needed",
+      "Developmental support with physiotherapy, occupational and speech therapy for the hypotonia, severe intellectual disability and limited speech",
+      "Surveillance and management of congenital heart disease and renal tract anomalies",
+      "Multidisciplinary follow-up across neurology, cardiology, dietetics and developmental paediatrics",
+      "Parental karyotyping and genetic counselling, as roughly a tenth of cases arise from an unbalanced parental translocation"
     ]
-   ],
-   "caption": "Overview comparison matrix for wolf-hirschhorn syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "wolf-hirschhorn-syndrome-real-image",
-   "title": "Wolf-Hirschhorn syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "wolf_hirschhorn_syndrome-pathway",
+      "title": "Wolf-Hirschhorn syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism and a short philtrum, is characteristic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prolonged or clustered seizures and status epilepticus requiring urgent management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chromosomal microarray to confirm and size the 4p deletion, Karyotype and parental karyotypes to identify a familial translocation, Electroencephalography and neuroimaging to characterise the seizure disorder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a normal karyotype when microarray is needed to detect small deletions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of wolf-hirschhorn syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "wolf_hirschhorn_syndrome-matrix",
+      "title": "Wolf-Hirschhorn syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The 'Greek warrior helmet' facial appearance, formed by a broad, high nasal bridge continuing to the forehead with hypertelorism",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chromosomal microarray to confirm and size the 4p deletion, Karyotype and parental karyotypes to identify a familial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cri-du-chat syndrome, Other subtelomeric deletion syndromes, CHARGE syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No treatment corrects the 4p16.3 deletion, so care targets the seizures, feeding failure and developmental needs",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal karyotype when microarray is needed to detect small deletions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for wolf-hirschhorn syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wolf_hirschhorn_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Confirms and sizes the 4p deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and parental karyotypes",
+          "cells": [
+            {
+              "text": "Familial translocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolf_hirschhorn_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cri-du-chat syndrome",
+          "cells": [
+            {
+              "text": "Other chromosomal deletion with a distinct cry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other subtelomeric deletion syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cornelia de Lange syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wolf_hirschhorn_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiepileptic treatment",
+          "cells": [
+            {
+              "text": "Prolonged or clustered seizures and status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Failure to thrive and dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wolf_hirschhorn_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Wolf-Hirschhorn syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Wolf-Hirschhorn syndrome: Greek warrior helmet face with seizures and delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prolonged seizures, status epilepticus or dehydration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of status epilepticus and dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray for the 4p deletion, karyotype and parental karyotypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microarray confirm a 4p16.3 deletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other subtelomeric or malformation syndromes; repeat microarray",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic treatment for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and educational support for delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "No treatment corrects the deletion; care targets seizures and feeding",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

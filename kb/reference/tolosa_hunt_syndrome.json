@@ -1,174 +1,472 @@
 {
- "id": "tolosa_hunt_syndrome",
- "name": "Tolosa-Hunt syndrome",
- "aliases": [
-  "THS",
-  "painful ophthalmoplegia",
-  "idiopathic granulomatous cavernous sinus inflammation"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
-   "Caused by idiopathic granulomatous inflammation of the cavernous sinus or superior orbital fissure",
-   "Any combination of the third, fourth, and sixth cranial nerves may be involved, sometimes with the ophthalmic division of the trigeminal nerve",
-   "Sympathetic fibres may be affected, producing a Horner syndrome, and optic nerve involvement can occur if the inflammation extends to the orbital apex",
-   "It is a diagnosis of exclusion, requiring careful ruling out of tumour, aneurysm, infection, and other inflammatory disease",
-   "MRI may show abnormal soft tissue in the cavernous sinus that enhances with contrast",
-   "The pain and ophthalmoplegia typically respond promptly to corticosteroids, and a dramatic response supports the diagnosis"
+  "id": "tolosa_hunt_syndrome",
+  "name": "Tolosa-Hunt syndrome",
+  "aliases": [
+    "THS",
+    "painful ophthalmoplegia",
+    "idiopathic granulomatous cavernous sinus inflammation"
   ],
-  "pathophysiology": "Tolosa-Hunt syndrome is a non-specific granulomatous inflammation involving the cavernous sinus, superior orbital fissure, or orbital apex. The inflammatory tissue compresses and irritates the ocular motor nerves and the trigeminal fibres passing through this compartment, producing painful ophthalmoplegia. The cause is unknown and the histology resembles that of idiopathic orbital inflammation. Because the same anatomical region can be affected by tumour, aneurysm, infection, and systemic granulomatous disease, the syndrome remains a diagnosis of exclusion supported by imaging and steroid responsiveness.",
-  "additionalDifferentials": [
-   "Cavernous sinus tumour or metastasis",
-   "Intracavernous carotid aneurysm",
-   "Cavernous sinus thrombosis",
-   "Sarcoidosis or granulomatosis with polyangiitis",
-   "Nasopharyngeal carcinoma with skull base extension",
-   "Diabetic ocular motor nerve palsy",
-   "Orbital apex fungal infection such as mucormycosis"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and orbits with contrast focused on the cavernous sinus",
-   "Magnetic resonance or CT angiography to exclude an aneurysm",
-   "Inflammatory markers including erythrocyte sedimentation rate",
-   "Screening for systemic granulomatous disease such as sarcoidosis and vasculitis",
-   "Blood glucose to consider a diabetic nerve palsy",
-   "Biopsy in atypical or steroid-unresponsive cases"
-  ],
-  "redFlags": [
-   "Failure to respond to corticosteroids prompting reconsideration of tumour or infection",
-   "Signs of orbital apex involvement with visual loss",
-   "Features suggesting an aneurysm or invasive infection",
-   "Systemic symptoms pointing to malignancy or vasculitis"
-  ],
-  "prognosis": "The syndrome usually responds well to corticosteroids with resolution of pain and gradual recovery of ophthalmoplegia, but recurrences are common and some patients retain residual nerve deficits.",
-  "pitfalls": [
-   "Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection",
-   "Interpreting any improvement on steroids as confirmation, since some tumours and lymphoma also respond transiently",
-   "Missing orbital apex extension threatening vision",
-   "Overlooking invasive fungal infection in an immunocompromised or diabetic patient"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "International Classification of Headache Disorders criteria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia",
-   "Confirm exclusion of tumour, aneurysm, infection, and systemic granulomatous disease before attributing symptoms and committing to immunosuppression",
-   "Analgesia for the severe retro-orbital pain during the acute phase",
-   "Slow corticosteroid taper guided by symptoms to reduce the risk of relapse",
-   "Steroid-sparing immunosuppression such as azathioprine or methotrexate for recurrent or corticosteroid-dependent disease",
-   "Serial clinical review and contrast MRI surveillance to confirm resolution of cavernous sinus inflammation and detect relapse",
-   "Refer to neurology and ophthalmology, with neurosurgical or biopsy input for atypical or treatment-resistant cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tolosa_hunt_syndrome-pathway",
-   "title": "Tolosa-Hunt syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to respond to corticosteroids prompting reconsideration of tumour or infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and orbits with contrast focused on the cavernous sinus, Magnetic resonance or CT angiography to exclude an aneurysm, Inflammatory markers including erythrocyte sedimentation rate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tolosa-hunt syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tolosa_hunt_syndrome-matrix",
-   "title": "Tolosa-Hunt syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
+      "Caused by idiopathic granulomatous inflammation of the cavernous sinus or superior orbital fissure",
+      "Any combination of the third, fourth, and sixth cranial nerves may be involved, sometimes with the ophthalmic division of the trigeminal nerve",
+      "Sympathetic fibres may be affected, producing a Horner syndrome, and optic nerve involvement can occur if the inflammation extends to the orbital apex",
+      "It is a diagnosis of exclusion, requiring careful ruling out of tumour, aneurysm, infection, and other inflammatory disease",
+      "MRI may show abnormal soft tissue in the cavernous sinus that enhances with contrast",
+      "The pain and ophthalmoplegia typically respond promptly to corticosteroids, and a dramatic response supports the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and orbits with contrast focused on the cavernous sinus, Magnetic resonance or CT angiography to exclude an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tolosa-Hunt syndrome is a non-specific granulomatous inflammation involving the cavernous sinus, superior orbital fissure, or orbital apex. The inflammatory tissue compresses and irritates the ocular motor nerves and the trigeminal fibres passing through this compartment, producing painful ophthalmoplegia. The cause is unknown and the histology resembles that of idiopathic orbital inflammation. Because the same anatomical region can be affected by tumour, aneurysm, infection, and systemic granulomatous disease, the syndrome remains a diagnosis of exclusion supported by imaging and steroid responsiveness.",
+    "additionalDifferentials": [
+      "Cavernous sinus tumour or metastasis",
+      "Intracavernous carotid aneurysm",
+      "Cavernous sinus thrombosis",
+      "Sarcoidosis or granulomatosis with polyangiitis",
+      "Nasopharyngeal carcinoma with skull base extension",
+      "Diabetic ocular motor nerve palsy",
+      "Orbital apex fungal infection such as mucormycosis"
     ],
-    [
-     "Primary Differentials",
-     "Cavernous sinus tumour or metastasis, Intracavernous carotid aneurysm, Cavernous sinus thrombosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and orbits with contrast focused on the cavernous sinus",
+      "Magnetic resonance or CT angiography to exclude an aneurysm",
+      "Inflammatory markers including erythrocyte sedimentation rate",
+      "Screening for systemic granulomatous disease such as sarcoidosis and vasculitis",
+      "Blood glucose to consider a diabetic nerve palsy",
+      "Biopsy in atypical or steroid-unresponsive cases"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to respond to corticosteroids prompting reconsideration of tumour or infection",
+      "Signs of orbital apex involvement with visual loss",
+      "Features suggesting an aneurysm or invasive infection",
+      "Systemic symptoms pointing to malignancy or vasculitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome usually responds well to corticosteroids with resolution of pain and gradual recovery of ophthalmoplegia, but recurrences are common and some patients retain residual nerve deficits.",
+    "pitfalls": [
+      "Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection",
+      "Interpreting any improvement on steroids as confirmation, since some tumours and lymphoma also respond transiently",
+      "Missing orbital apex extension threatening vision",
+      "Overlooking invasive fungal infection in an immunocompromised or diabetic patient"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "International Classification of Headache Disorders criteria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia",
+      "Confirm exclusion of tumour, aneurysm, infection, and systemic granulomatous disease before attributing symptoms and committing to immunosuppression",
+      "Analgesia for the severe retro-orbital pain during the acute phase",
+      "Slow corticosteroid taper guided by symptoms to reduce the risk of relapse",
+      "Steroid-sparing immunosuppression such as azathioprine or methotrexate for recurrent or corticosteroid-dependent disease",
+      "Serial clinical review and contrast MRI surveillance to confirm resolution of cavernous sinus inflammation and detect relapse",
+      "Refer to neurology and ophthalmology, with neurosurgical or biopsy input for atypical or treatment-resistant cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for tolosa-hunt syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tolosa-hunt-syndrome-real-image",
-   "title": "Tolosa-Hunt syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "tolosa_hunt_syndrome-pathway",
+      "title": "Tolosa-Hunt syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to respond to corticosteroids prompting reconsideration of tumour or infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and orbits with contrast focused on the cavernous sinus, Magnetic resonance or CT angiography to exclude an aneurysm, Inflammatory markers including erythrocyte sedimentation rate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tolosa-hunt syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tolosa_hunt_syndrome-matrix",
+      "title": "Tolosa-Hunt syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with unilateral, often severe, retro-orbital or periorbital pain accompanied by ipsilateral ophthalmoplegia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and orbits with contrast focused on the cavernous sinus, Magnetic resonance or CT angiography to exclude an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cavernous sinus tumour or metastasis, Intracavernous carotid aneurysm, Cavernous sinus thrombosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids are the mainstay, typically producing rapid relief of pain and gradual recovery of the ophthalmoplegia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting the diagnosis without adequately excluding tumour, aneurysm, and infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tolosa-hunt syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tolosa_hunt_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tolosa-Hunt syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tolosa-Hunt syndrome: painful ophthalmoplegia with retro-orbital pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: no steroid response, orbital apex signs with visual loss, or systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of tumour, aneurysm or invasive fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of cavernous sinus; MR or CT angiography; ESR; sarcoid and vasculitis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does contrast MRI show cavernous sinus inflammation with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tumour, aneurysm, cavernous sinus thrombosis or fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude tumour, aneurysm, infection and granulomatous disease first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Slow corticosteroid taper to limit relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Azathioprine or methotrexate for recurrent or steroid-dependent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Contrast MRI surveillance for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually responds well to steroids; recurrences are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tolosa_hunt_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of brain and orbits with contrast",
+          "cells": [
+            {
+              "text": "Cavernous sinus soft tissue that enhances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysm excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for sarcoidosis and vasculitis",
+          "cells": [
+            {
+              "text": "Systemic granulomatous disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Diabetic nerve palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical or steroid-unresponsive cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tolosa_hunt_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavernous sinus tumour or metastasis",
+          "cells": [
+            {
+              "text": "Failure to respond to corticosteroids prompts re-evaluation for tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracavernous carotid aneurysm",
+          "cells": [
+            {
+              "text": "Excluded by MR or CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital apex fungal infection such as mucormycosis",
+          "cells": [
+            {
+              "text": "Immunocompromised or diabetic patients; fungal infection must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tolosa_hunt_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid pain relief with gradual recovery of ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of mimics",
+          "cells": [
+            {
+              "text": "Tumour, aneurysm, infection and systemic granulomatous disease before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Acute retro-orbital pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow corticosteroid taper",
+          "cells": [
+            {
+              "text": "Reduces relapse risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine or methotrexate for recurrent or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast MRI surveillance",
+          "cells": [
+            {
+              "text": "Resolution of cavernous sinus inflammation and relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

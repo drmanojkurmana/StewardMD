@@ -1,175 +1,823 @@
 {
- "id": "bacterial_vaginosis",
- "name": "Bacterial Vaginosis",
- "aliases": [
-  "BV",
-  "vaginal dysbiosis",
-  "Gardnerella vaginitis",
-  "anaerobic vaginosis"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of anaerobes rather than a single infecting pathogen",
-   "The characteristic feature is a thin, homogeneous, greyish-white discharge with a fishy odour that is often most noticeable after intercourse",
-   "It is typically not associated with significant inflammation, so vulval itching and soreness are usually mild or absent, distinguishing it from candidiasis and trichomoniasis",
-   "Clinical diagnosis using the Amsel criteria combines discharge characteristics, raised vaginal pH, a positive whiff test with potassium hydroxide, and clue cells on microscopy",
-   "Clue cells are vaginal epithelial cells studded with adherent bacteria and are a hallmark microscopic finding",
-   "Treatment targets anaerobes with agents such as metronidazole or clindamycin, but recurrence is common and reflects failure to re-establish a lactobacillus-dominant flora",
-   "In pregnancy it is associated with an increased risk of preterm birth, late miscarriage, and postpartum endometritis, so symptomatic pregnant women are treated",
-   "It also increases susceptibility to sexually transmitted infections including HIV and to post-procedural pelvic infection"
+  "id": "bacterial_vaginosis",
+  "name": "Bacterial Vaginosis",
+  "aliases": [
+    "BV",
+    "vaginal dysbiosis",
+    "Gardnerella vaginitis",
+    "anaerobic vaginosis"
   ],
-  "pathophysiology": "The healthy vagina is dominated by lactobacilli that produce lactic acid and hydrogen peroxide, maintaining an acidic environment that suppresses other organisms. In bacterial vaginosis this population is depleted and replaced by a polymicrobial overgrowth of anaerobes such as Gardnerella vaginalis, Prevotella, Mobiluncus, and Atopobium, often organised into a biofilm on the epithelium. The resulting rise in vaginal pH and production of amines generates the typical odour and discharge, while the biofilm contributes to treatment resistance and recurrence.",
-  "additionalDifferentials": [
-   "Vulvovaginal candidiasis",
-   "Trichomonas vaginalis infection",
-   "Physiological or cyclical vaginal discharge",
-   "Retained foreign body such as a tampon",
-   "Desquamative inflammatory vaginitis",
-   "Cervicitis from gonorrhoea or chlamydia"
-  ],
-  "additionalInvestigations": [
-   "Measurement of vaginal pH, which is typically elevated above 4.5",
-   "Whiff (amine) test with potassium hydroxide to detect a fishy odour",
-   "Saline wet-mount microscopy for clue cells and reduced lactobacilli",
-   "Gram stain scoring of vaginal flora where laboratory diagnosis is used",
-   "Testing for co-existing sexually transmitted infections when risk factors are present"
-  ],
-  "redFlags": [
-   "Symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and miscarriage",
-   "Signs of ascending infection such as pelvic pain, fever, or cervical motion tenderness suggesting pelvic inflammatory disease",
-   "Bacterial vaginosis before termination or intrauterine procedures, increasing post-procedure infection risk",
-   "Persistent atypical discharge not responding to treatment, prompting reconsideration of the diagnosis",
-   "Coexisting features of a sexually transmitted infection"
-  ],
-  "prognosis": "Symptoms usually respond well to appropriate antibiotic therapy, but recurrence within months is frequent because the protective lactobacillus flora and the biofilm are difficult to eradicate permanently. It is not itself a serious infection but its associations with adverse pregnancy outcomes, post-procedural infection, and enhanced susceptibility to sexually transmitted infections give it clinical importance.",
-  "pitfalls": [
-   "Mistaking it for candidiasis and treating with antifungals",
-   "Overtreating asymptomatic women outside pregnancy or pre-procedure settings",
-   "Failing to consider it in recurrent or malodorous discharge with minimal inflammation",
-   "Not screening for concurrent sexually transmitted infections when risk exists",
-   "Overlooking its role in preterm birth in symptomatic pregnant women"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal clindamycin",
-   "Advise avoidance of alcohol during and shortly after metronidazole because of a disulfiram-like reaction",
-   "Advise against vaginal douching and use of irritant products to help restore lactobacillus-dominant flora",
-   "Treat symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and late miscarriage",
-   "For frequent recurrence, offer suppressive intravaginal metronidazole and consider lactobacillus-restoring or vaginal-pH-lowering measures",
-   "Test for co-existing sexually transmitted infections when risk factors are present"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bacterial_vaginosis-pathway",
-   "title": "Bacterial Vaginosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of anaerobes rather than a single infecting pathogen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and miscarriage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Measurement of vaginal pH, which is typically elevated above 4.5, Whiff (amine) test with potassium hydroxide to detect a fishy odour, Saline wet-mount microscopy for clue cells and reduced lactobacilli"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal clindamycin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for candidiasis and treating with antifungals"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bacterial vaginosis."
-  }
- ],
- "tables": [
-  {
-   "id": "bacterial_vaginosis-matrix",
-   "title": "Bacterial Vaginosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of anaerobes rather than a single infecting pathogen",
+      "The characteristic feature is a thin, homogeneous, greyish-white discharge with a fishy odour that is often most noticeable after intercourse",
+      "It is typically not associated with significant inflammation, so vulval itching and soreness are usually mild or absent, distinguishing it from candidiasis and trichomoniasis",
+      "Clinical diagnosis using the Amsel criteria combines discharge characteristics, raised vaginal pH, a positive whiff test with potassium hydroxide, and clue cells on microscopy",
+      "Clue cells are vaginal epithelial cells studded with adherent bacteria and are a hallmark microscopic finding",
+      "Treatment targets anaerobes with agents such as metronidazole or clindamycin, but recurrence is common and reflects failure to re-establish a lactobacillus-dominant flora",
+      "In pregnancy it is associated with an increased risk of preterm birth, late miscarriage, and postpartum endometritis, so symptomatic pregnant women are treated",
+      "It also increases susceptibility to sexually transmitted infections including HIV and to post-procedural pelvic infection"
     ],
-    [
-     "Key Investigations",
-     "Measurement of vaginal pH, which is typically elevated above 4.5, Whiff (amine) test with potassium hydroxide to detect a fishy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The healthy vagina is dominated by lactobacilli that produce lactic acid and hydrogen peroxide, maintaining an acidic environment that suppresses other organisms. In bacterial vaginosis this population is depleted and replaced by a polymicrobial overgrowth of anaerobes such as Gardnerella vaginalis, Prevotella, Mobiluncus, and Atopobium, often organised into a biofilm on the epithelium. The resulting rise in vaginal pH and production of amines generates the typical odour and discharge, while the biofilm contributes to treatment resistance and recurrence.",
+    "additionalDifferentials": [
+      "Vulvovaginal candidiasis",
+      "Trichomonas vaginalis infection",
+      "Physiological or cyclical vaginal discharge",
+      "Retained foreign body such as a tampon",
+      "Desquamative inflammatory vaginitis",
+      "Cervicitis from gonorrhoea or chlamydia"
     ],
-    [
-     "Primary Differentials",
-     "Vulvovaginal candidiasis, Trichomonas vaginalis infection, Physiological or cyclical vaginal discharge",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Measurement of vaginal pH, which is typically elevated above 4.5",
+      "Whiff (amine) test with potassium hydroxide to detect a fishy odour",
+      "Saline wet-mount microscopy for clue cells and reduced lactobacilli",
+      "Gram stain scoring of vaginal flora where laboratory diagnosis is used",
+      "Testing for co-existing sexually transmitted infections when risk factors are present"
     ],
-    [
-     "Management Strategy",
-     "Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and miscarriage",
+      "Signs of ascending infection such as pelvic pain, fever, or cervical motion tenderness suggesting pelvic inflammatory disease",
+      "Bacterial vaginosis before termination or intrauterine procedures, increasing post-procedure infection risk",
+      "Persistent atypical discharge not responding to treatment, prompting reconsideration of the diagnosis",
+      "Coexisting features of a sexually transmitted infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for candidiasis and treating with antifungals",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually respond well to appropriate antibiotic therapy, but recurrence within months is frequent because the protective lactobacillus flora and the biofilm are difficult to eradicate permanently. It is not itself a serious infection but its associations with adverse pregnancy outcomes, post-procedural infection, and enhanced susceptibility to sexually transmitted infections give it clinical importance.",
+    "pitfalls": [
+      "Mistaking it for candidiasis and treating with antifungals",
+      "Overtreating asymptomatic women outside pregnancy or pre-procedure settings",
+      "Failing to consider it in recurrent or malodorous discharge with minimal inflammation",
+      "Not screening for concurrent sexually transmitted infections when risk exists",
+      "Overlooking its role in preterm birth in symptomatic pregnant women"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal clindamycin",
+      "Advise avoidance of alcohol during and shortly after metronidazole because of a disulfiram-like reaction",
+      "Advise against vaginal douching and use of irritant products to help restore lactobacillus-dominant flora",
+      "Treat symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and late miscarriage",
+      "For frequent recurrence, offer suppressive intravaginal metronidazole and consider lactobacillus-restoring or vaginal-pH-lowering measures",
+      "Test for co-existing sexually transmitted infections when risk factors are present"
     ]
-   ],
-   "caption": "Overview comparison matrix for bacterial vaginosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bacterial-vaginosis-real-image",
-   "title": "Bacterial Vaginosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "bacterial_vaginosis-pathway",
+      "title": "Bacterial Vaginosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of anaerobes rather than a single infecting pathogen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic bacterial vaginosis in pregnancy given the association with preterm birth and miscarriage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Measurement of vaginal pH, which is typically elevated above 4.5, Whiff (amine) test with potassium hydroxide to detect a fishy odour, Saline wet-mount microscopy for clue cells and reduced lactobacilli"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal clindamycin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for candidiasis and treating with antifungals"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bacterial vaginosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bacterial_vaginosis-matrix",
+      "title": "Bacterial Vaginosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bacterial vaginosis reflects a shift in the vaginal microbiome away from protective lactobacilli toward an overgrowth of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Measurement of vaginal pH, which is typically elevated above 4.5, Whiff (amine) test with potassium hydroxide to detect a fishy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vulvovaginal candidiasis, Trichomonas vaginalis infection, Physiological or cyclical vaginal discharge",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat symptomatic infection with an anti-anaerobic antibiotic, either oral or intravaginal metronidazole or intravaginal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for candidiasis and treating with antifungals",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bacterial vaginosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 130-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bacterial_vaginosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vaginal pH",
+          "cells": [
+            {
+              "text": "Typically above 4.5"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whiff test with potassium hydroxide",
+          "cells": [
+            {
+              "text": "Fishy odour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saline wet-mount microscopy",
+          "cells": [
+            {
+              "text": "Clue cells and reduced lactobacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain scoring of vaginal flora",
+          "cells": [
+            {
+              "text": "Laboratory diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for co-existing sexually transmitted infections",
+          "cells": [
+            {
+              "text": "When risk factors are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_vaginosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vulvovaginal candidiasis",
+          "cells": [
+            {
+              "text": "Mistaking BV for it leads to wrong antifungal treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichomonas vaginalis infection",
+          "cells": [
+            {
+              "text": "Co-existing STIs are tested for when risk factors are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_vaginosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-anaerobic antibiotic",
+          "cells": [
+            {
+              "text": "Oral or intravaginal metronidazole, or intravaginal clindamycin"
+            },
+            {
+              "text": "Symptomatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol avoidance",
+          "cells": [
+            {
+              "text": "During and shortly after metronidazole"
+            },
+            {
+              "text": "Disulfiram-like reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No douching or irritant products",
+          "cells": [
+            {
+              "text": "Advice to avoid douching and irritant products"
+            },
+            {
+              "text": "Restores lactobacillus-dominant flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat symptomatic BV in pregnancy",
+          "cells": [
+            {
+              "text": "Treatment in pregnancy"
+            },
+            {
+              "text": "Association with preterm birth and late miscarriage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suppression for recurrence",
+          "cells": [
+            {
+              "text": "Suppressive intravaginal metronidazole; lactobacillus-restoring or pH-lowering measures"
+            },
+            {
+              "text": "Frequent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STI testing",
+          "cells": [
+            {
+              "text": "When risk factors are present"
+            },
+            {
+              "text": "Co-existing infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_vaginosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Anaerobic human flora by anatomic site",
+      "rowHeader": "Anatomic site",
+      "columns": [
+        "Total bacteria",
+        "Anaerobic/aerobic ratio",
+        "Potential pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cavity: saliva",
+          "cells": [
+            {
+              "text": "10^8 to 10^9"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Fusobacterium nucleatum, Prevotella melaninogenica, Prevotella oralis group, Bacteroides ureolyticus group, Peptostreptococcus spp. (listed for the oral cavity as a whole)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral cavity: tooth surface",
+          "cells": [
+            {
+              "text": "10^10 to 10^11"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral cavity: gingival crevices",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gastrointestinal tract: stomach",
+          "cells": [
+            {
+              "text": "0 to 10^5"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Bacteroides spp. (principally the B. fragilis group), Prevotella spp., Clostridium spp., Peptostreptococcus spp. (listed for the GI tract as a whole)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gastrointestinal tract: jejunum/ileum",
+          "cells": [
+            {
+              "text": "10^4 to 10^7"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gastrointestinal tract: terminal ileum and colon",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Female genital tract",
+          "cells": [
+            {
+              "text": "10^7 to 10^9"
+            },
+            {
+              "text": "10:1"
+            },
+            {
+              "text": "Peptostreptococcus spp., Bacteroides spp., Prevotella bivia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote (a) on total bacteria is not shown on the page."
+    },
+    {
+      "id": "bacterial_vaginosis-ddx-2",
+      "kind": "ddx",
+      "title": "Diagnostic features and management of vaginal infection",
+      "rowHeader": "Feature",
+      "columns": [
+        "Normal vaginal examination",
+        "Vulvovaginal candidiasis",
+        "Trichomonal vaginitis",
+        "Bacterial vaginosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Etiology",
+          "cells": [
+            {
+              "text": "Uninfected; lactobacilli predominant"
+            },
+            {
+              "text": "Candida albicans"
+            },
+            {
+              "text": "Trichomonas vaginalis"
+            },
+            {
+              "text": "Associated with Gardnerella vaginalis, various anaerobic and/or noncultured bacteria, and mycoplasmas"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Typical symptoms",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Vulvar itching and/or irritation"
+            },
+            {
+              "text": "Profuse purulent discharge; vulvar itching"
+            },
+            {
+              "text": "Malodorous, slightly increased discharge"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Discharge amount",
+          "cells": [
+            {
+              "text": "Variable; usually scant"
+            },
+            {
+              "text": "Scant"
+            },
+            {
+              "text": "Often profuse"
+            },
+            {
+              "text": "Moderate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Discharge color",
+          "cells": [
+            {
+              "text": "Clear or translucent"
+            },
+            {
+              "text": "White"
+            },
+            {
+              "text": "White or yellow"
+            },
+            {
+              "text": "White or gray"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Discharge consistency",
+          "cells": [
+            {
+              "text": "Nonhomogeneous, floccular"
+            },
+            {
+              "text": "Clumped; adherent plaques"
+            },
+            {
+              "text": "Homogeneous"
+            },
+            {
+              "text": "Homogeneous, low viscosity; uniformly coats vaginal walls"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inflammation of vulvar or vaginal epithelium",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Erythema of vaginal epithelium and introitus; vulvar dermatitis, fissures common"
+            },
+            {
+              "text": "Erythema of vaginal and vulvar epithelium; colpitis macularis"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "pH of vaginal fluid",
+          "cells": [
+            {
+              "text": "Usually <=4.5"
+            },
+            {
+              "text": "Usually <=4.5"
+            },
+            {
+              "text": "Usually >=5"
+            },
+            {
+              "text": "Usually >4.5"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amine (fishy) odor with 10% KOH",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "May be present"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Microscopy",
+          "cells": [
+            {
+              "text": "Normal epithelial cells; lactobacilli predominant"
+            },
+            {
+              "text": "Leukocytes, epithelial cells; mycelia or pseudomycelia in up to 80% of C. albicans culture-positive persons with typical symptoms"
+            },
+            {
+              "text": "Leukocytes; motile trichomonads seen in 80 to 90% of symptomatic patients, less often without symptoms"
+            },
+            {
+              "text": "Clue cells; few leukocytes; no lactobacilli or only a few outnumbered by profuse mixed microbiota, nearly always including G. vaginalis plus anaerobic species on Gram's stain (Nugent's score >=7)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other laboratory findings",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "Isolation of Candida spp."
+            },
+            {
+              "text": "Isolation of T. vaginalis or positive NAAT"
+            },
+            {
+              "text": "None listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Usual treatment",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "Azole cream, tablet or suppository, for example miconazole (100-mg vaginal suppository) or clotrimazole (100-mg vaginal tablet) once daily for 7 days; or fluconazole, 150 mg orally (single dose)"
+            },
+            {
+              "text": "Metronidazole or tinidazole, 2 g orally (single dose); or metronidazole, 500 mg PO bid for 7 days"
+            },
+            {
+              "text": "Metronidazole, 500 mg PO bid for 7 days; or metronidazole gel 0.75%, one applicator (5 g) intravaginally once daily for 5 days; or clindamycin 2% cream, one full applicator vaginally each night for 7 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Usual management of sexual partner",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None; topical treatment if candidal dermatitis of the penis is detected"
+            },
+            {
+              "text": "Examination for STD; treatment with metronidazole, 2 g PO (single dose)"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (d) on color, pH, microscopy and NAAT are not shown on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bacterial_vaginosis-dx-mgmt",
+      "title": "Diagnosis and management of Bacterial Vaginosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Malodorous vaginal discharge with raised vaginal pH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? BV in pregnancy or signs of ascending infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat symptomatic BV in pregnancy promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vaginal pH, whiff test, saline wet mount for clue cells, Gram stain, STI tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clue cells on wet mount with a positive whiff test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Metronidazole oral or intravaginal, or intravaginal clindamycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid alcohol during and after metronidazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid douching and irritant products",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Suppressive metronidazole for frequent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Test for STIs when risk factors are present",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

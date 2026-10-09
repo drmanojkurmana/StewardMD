@@ -272,25 +272,497 @@
       "caption": "Diagnostic and clinical overview matrix for hospital acquired pneumonia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "hap-real-image",
-      "title": "Hospital Acquired Pneumonia: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Kalil et al, IDSA/ATS HAP and VAP Guidelines, Clin Infect Dis 2016",
+      "url": "https://academic.oup.com/cid/article/63/5/e61/2237650",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Hospital-Acquired Pneumonia",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/hospital-acquired-pneumonia",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 257-8",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "HAP-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing hospital-acquired pneumonia and MDR risk",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Timing, HAP",
+          "unit": "h",
+          "cells": [
+            {
+              "text": ">=48 h after admission, not incubating at admission",
+              "op": ">=",
+              "value": 48
+            },
+            {
+              "text": "Defines HAP"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Timing, VAP",
+          "unit": "h",
+          "cells": [
+            {
+              "text": ">48 h after endotracheal intubation",
+              "op": ">",
+              "value": 48
+            },
+            {
+              "text": "Defines VAP"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "New lung opacity plus new fever, purulent sputum, leukocytosis or falling oxygenation"
+            },
+            {
+              "text": "No single finding is sensitive or specific"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Biomarkers to start antibiotics",
+          "cells": [
+            {
+              "text": "Procalcitonin, CRP, sTREM-1, CPIS"
+            },
+            {
+              "text": "Not recommended; use clinical criteria alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Respiratory sampling",
+          "cells": [
+            {
+              "text": "Non-invasive sampling with semiquantitative culture"
+            },
+            {
+              "text": "Suggested for VAP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood or pleural culture",
+          "cells": [
+            {
+              "text": "Positive pleural fluid culture"
+            },
+            {
+              "text": "Only reliable proof of pneumonia and organism; blood cultures specific but insensitive"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MDR risk: prior IV antibiotics",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Within 90 days",
+              "op": "<=",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Strongest MDR risk factor}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MDR risk: VAP context",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Septic shock, preceding ARDS, >=5 days in hospital, acute renal replacement",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Broaden empiric cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Local MRSA prevalence, HAP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">20% of S. aureus methicillin resistant, or unknown",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Add MRSA cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Local gram-negative resistance",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">10% resistant to monotherapy candidate",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Consider two antipseudomonal classes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Common pathogens",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "S. aureus 28.0%, P. aeruginosa 21.8%",
+              "op": "=",
+              "value": 28.0
+            },
+            {
+              "text": "Plus Enterobacter, Klebsiella, E. coli, Serratia, Proteus, Acinetobacter"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "HAP-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic hospital-acquired pneumonia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Why it confuses"
+      ],
+      "rows": [
+        {
+          "parameter": "Atelectasis",
+          "cells": [
+            {
+              "text": "Causes opacity and hypoxaemia without infection"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Fever, hypoxaemia and infiltrate can all occur"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulmonary oedema",
+          "cells": [
+            {
+              "text": "Infiltrates and falling oxygenation without infection"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tracheal colonisation",
+          "cells": [
+            {
+              "text": "{{hy:Frequent in ventilated patients; CAP-type criteria overdiagnose VAP}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other sources of fever",
+          "cells": [
+            {
+              "text": "Many non-pulmonary causes of fever in ICU patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources name these mimics without a specific separating test."
+    },
+    {
+      "id": "HAP-treatment",
+      "kind": "treatment",
+      "title": "Empiric antibiotic treatment of hospital-acquired pneumonia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Narrow empiric therapy",
+          "cells": [
+            {
+              "text": "No MDR risk factors"
+            },
+            {
+              "text": "Ceftriaxone 2 g IV q24h, or moxifloxacin 400 mg IV q24h, ciprofloxacin 400 mg IV q8h, levofloxacin 750 mg IV q24h, ampicillin/sulbactam 3 g IV q6h, or ertapenem 1 g IV q24h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Single antipseudomonal agent",
+          "cells": [
+            {
+              "text": "Lower risk: no shock, no ventilation, no IV antibiotics in 90 days, low local MRSA"
+            },
+            {
+              "text": "Piperacillin-tazobactam or cefepime"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Antipseudomonal beta-lactam",
+          "cells": [
+            {
+              "text": "MDR risk factors (part 1 of 3)"
+            },
+            {
+              "text": "Ceftazidime 2 g IV q8h, cefepime 2 g IV q8 to 12h, piperacillin/tazobactam 4.5 g IV q6h, imipenem 500 mg IV q6h or 1 g IV q8h, or meropenem 1 g IV q8h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Second gram-negative agent",
+          "cells": [
+            {
+              "text": "MDR risk factors (part 2 of 3)"
+            },
+            {
+              "text": "Gentamicin or tobramycin 7 mg/kg IV q24h, amikacin 20 mg/kg IV q24h, ciprofloxacin 400 mg IV q8h, or levofloxacin 750 mg IV q24h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gram-positive (MRSA) agent",
+          "cells": [
+            {
+              "text": "MDR risk factors (part 3 of 3) or MRSA criteria met"
+            },
+            {
+              "text": "Linezolid 600 mg IV q12h or vancomycin 15 mg/kg, up to 1 g IV, q12h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Newer beta-lactam combination",
+          "cells": [
+            {
+              "text": "Prior colonisation with carbapenem-resistant organisms"
+            },
+            {
+              "text": "Ceftazidime-avibactam, ceftolozane-tazobactam, imipenem-relebactam or meropenem-vaborbactam, plus vancomycin or linezolid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aminoglycoside monotherapy",
+          "cells": [
+            {
+              "text": "Never as the sole antipseudomonal agent"
+            },
+            {
+              "text": "Use only in combination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration and de-escalation",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "{{hy:7 days}}; reassess at 2 to 3 days and narrow to cultures"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table 257-8 uses the older health care-associated pneumonia framing; IDSA/ATS 2016 gives risk-based choices without fixed doses and asks for PK/PD-based dosing. Conflict: IDSA/ATS 2016 advises two antipseudomonal classes in high mortality risk, while Merck says dual antipseudomonal therapy is not indicated in that group."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "HAP-dx-mgmt",
+      "title": "Diagnosis and management of hospital-acquired pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New opacity with fever, purulent sputum or worse oxygenation >=48 h after admission",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Respiratory sample culture, blood cultures; consider atelectasis, PE, oedema",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "High mortality risk: ventilation for HAP or septic shock?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Two antipseudomonal classes plus vancomycin or linezolid",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "IV antibiotics in 90 days or MRSA >20% or unknown?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antipseudomonal beta-lactam plus MRSA agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single agent: piperacillin-tazobactam, cefepime, levofloxacin or carbapenem",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassess at 2 to 3 days with cultures",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improving with an identified organism?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "De-escalate; total 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Look for resistant organism, other source or mimic",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

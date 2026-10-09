@@ -1,172 +1,226 @@
 {
- "id": "carasil",
- "name": "CARASIL",
- "aliases": [
-  "cerebral autosomal recessive arteriopathy with subcortical infarcts and leukoencephalopathy",
-  "HTRA1-related arteriopathy",
-  "Maeda syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / cerebral small vessel disease literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
-   "Distinguished from CADASIL by the non-neurological triad of premature alopecia and disabling spondylosis or disc disease",
-   "Presents in early adulthood with subcortical strokes, progressive gait disturbance, and cognitive decline",
-   "Early-onset baldness and low back pain from lumbar spondylosis often precede the neurological events",
-   "MRI shows diffuse leukoencephalopathy and lacunar infarcts similar to other hereditary small-vessel disease",
-   "Confirmed by HTRA1 genetic testing, with a recessive inheritance pattern distinguishing it from CADASIL",
-   "No disease-specific treatment exists, so care focuses on symptom control and vascular risk management"
+  "id": "carasil",
+  "name": "CARASIL",
+  "aliases": [
+    "cerebral autosomal recessive arteriopathy with subcortical infarcts and leukoencephalopathy",
+    "HTRA1-related arteriopathy",
+    "Maeda syndrome"
   ],
-  "pathophysiology": "CARASIL is caused by biallelic mutations in HTRA1, a serine protease that normally represses transforming growth factor-beta signalling. Loss of HTRA1 function dysregulates this pathway and impairs extracellular matrix homeostasis in the walls of small cerebral arteries, leading to intimal thickening, loss of smooth muscle cells, and hyaline arteriosclerosis. The resulting non-atherosclerotic arteriopathy causes chronic ischaemia and a diffuse leukoencephalopathy, while the same signalling disturbance contributes to the associated alopecia and degenerative spondylosis.",
-  "additionalDifferentials": [
-   "CADASIL and other NOTCH3 arteriopathies",
-   "Sporadic hypertensive small-vessel disease",
-   "Multiple sclerosis and demyelinating leukoencephalopathy",
-   "Mitochondrial cytopathies",
-   "Other hereditary leukoencephalopathies",
-   "Cerebral amyloid angiopathy"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts",
-   "HTRA1 genetic testing as the confirmatory investigation",
-   "Spinal imaging documenting early and severe degenerative disc and spondylotic disease",
-   "Detailed family history to identify recessive inheritance and consanguinity",
-   "Exclusion of conventional vascular and demyelinating causes"
-  ],
-  "redFlags": [
-   "Young-onset stroke with premature alopecia and severe spinal degeneration",
-   "Progressive gait failure and cognitive decline",
-   "New focal neurological deficits",
-   "Family history suggesting recessive inheritance"
-  ],
-  "prognosis": "CARASIL is relentlessly progressive, with accumulating motor and cognitive disability from early adulthood and shortened life expectancy; there is no treatment that alters the underlying arteriopathy.",
-  "pitfalls": [
-   "Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient",
-   "Confusing it with CADASIL and missing the recessive inheritance pattern",
-   "Attributing the leukoencephalopathy to demyelination and giving inappropriate therapy",
-   "Failing to counsel families about the recessive genetic risk"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic",
-   "Optimisation of vascular risk factors, including blood pressure control, to limit further ischaemic injury",
-   "Rehabilitation with physiotherapy and occupational therapy for gait disturbance and progressive motor disability",
-   "Management of lumbar spondylosis and disc disease with analgesia, physiotherapy and surgical decompression where indicated",
-   "Cognitive assessment and dementia support with anticipatory care planning as decline progresses",
-   "Coordinated multidisciplinary neurology, rehabilitation and social care input",
-   "Genetic counselling for the family given autosomal recessive inheritance, with attention to consanguinity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carasil-pathway",
-   "title": "CARASIL: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Young-onset stroke with premature alopecia and severe spinal degeneration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts, HTRA1 genetic testing as the confirmatory investigation, Spinal imaging documenting early and severe degenerative disc and spondylotic disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carasil."
-  }
- ],
- "tables": [
-  {
-   "id": "carasil-matrix",
-   "title": "CARASIL: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / cerebral small vessel disease literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
+      "Distinguished from CADASIL by the non-neurological triad of premature alopecia and disabling spondylosis or disc disease",
+      "Presents in early adulthood with subcortical strokes, progressive gait disturbance, and cognitive decline",
+      "Early-onset baldness and low back pain from lumbar spondylosis often precede the neurological events",
+      "MRI shows diffuse leukoencephalopathy and lacunar infarcts similar to other hereditary small-vessel disease",
+      "Confirmed by HTRA1 genetic testing, with a recessive inheritance pattern distinguishing it from CADASIL",
+      "No disease-specific treatment exists, so care focuses on symptom control and vascular risk management"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts, HTRA1 genetic testing as the confirmatory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CARASIL is caused by biallelic mutations in HTRA1, a serine protease that normally represses transforming growth factor-beta signalling. Loss of HTRA1 function dysregulates this pathway and impairs extracellular matrix homeostasis in the walls of small cerebral arteries, leading to intimal thickening, loss of smooth muscle cells, and hyaline arteriosclerosis. The resulting non-atherosclerotic arteriopathy causes chronic ischaemia and a diffuse leukoencephalopathy, while the same signalling disturbance contributes to the associated alopecia and degenerative spondylosis.",
+    "additionalDifferentials": [
+      "CADASIL and other NOTCH3 arteriopathies",
+      "Sporadic hypertensive small-vessel disease",
+      "Multiple sclerosis and demyelinating leukoencephalopathy",
+      "Mitochondrial cytopathies",
+      "Other hereditary leukoencephalopathies",
+      "Cerebral amyloid angiopathy"
     ],
-    [
-     "Primary Differentials",
-     "CADASIL and other NOTCH3 arteriopathies, Sporadic hypertensive small-vessel disease, Multiple sclerosis and demyelinating",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts",
+      "HTRA1 genetic testing as the confirmatory investigation",
+      "Spinal imaging documenting early and severe degenerative disc and spondylotic disease",
+      "Detailed family history to identify recessive inheritance and consanguinity",
+      "Exclusion of conventional vascular and demyelinating causes"
     ],
-    [
-     "Management Strategy",
-     "No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "Young-onset stroke with premature alopecia and severe spinal degeneration",
+      "Progressive gait failure and cognitive decline",
+      "New focal neurological deficits",
+      "Family history suggesting recessive inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "CARASIL is relentlessly progressive, with accumulating motor and cognitive disability from early adulthood and shortened life expectancy; there is no treatment that alters the underlying arteriopathy.",
+    "pitfalls": [
+      "Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient",
+      "Confusing it with CADASIL and missing the recessive inheritance pattern",
+      "Attributing the leukoencephalopathy to demyelination and giving inappropriate therapy",
+      "Failing to counsel families about the recessive genetic risk"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic",
+      "Optimisation of vascular risk factors, including blood pressure control, to limit further ischaemic injury",
+      "Rehabilitation with physiotherapy and occupational therapy for gait disturbance and progressive motor disability",
+      "Management of lumbar spondylosis and disc disease with analgesia, physiotherapy and surgical decompression where indicated",
+      "Cognitive assessment and dementia support with anticipatory care planning as decline progresses",
+      "Coordinated multidisciplinary neurology, rehabilitation and social care input",
+      "Genetic counselling for the family given autosomal recessive inheritance, with attention to consanguinity"
     ]
-   ],
-   "caption": "Overview comparison matrix for carasil."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carasil-real-image",
-   "title": "CARASIL: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "carasil-pathway",
+      "title": "CARASIL: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Young-onset stroke with premature alopecia and severe spinal degeneration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts, HTRA1 genetic testing as the confirmatory investigation, Spinal imaging documenting early and severe degenerative disc and spondylotic disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carasil."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carasil-matrix",
+      "title": "CARASIL: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive small-vessel arteriopathy caused by loss-of-function mutations in the HTRA1 gene",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to demonstrate diffuse white-matter change and lacunar infarcts, HTRA1 genetic testing as the confirmatory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CADASIL and other NOTCH3 arteriopathies, Sporadic hypertensive small-vessel disease, Multiple sclerosis and demyelinating",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No therapy alters the underlying HTRA1 arteriopathy; management is supportive and symptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnostic clues of early alopecia and spondylosis in a young stroke patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carasil."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / cerebral small vessel disease literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carasil-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in CARASIL",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Brain MRI", "cells": [{"text": "Diffuse leukoencephalopathy and lacunar infarcts"}], "cite": "c1"},
+        {"parameter": "HTRA1 genetic testing", "cells": [{"text": "Confirmatory investigation; recessive pattern"}], "cite": "c1"},
+        {"parameter": "Spinal imaging", "cells": [{"text": "Early and severe degenerative disc and spondylotic disease"}], "cite": "c1"},
+        {"parameter": "Family history", "cells": [{"text": "Recessive inheritance and consanguinity"}], "cite": "c1"},
+        {"parameter": "Exclusion of conventional vascular and demyelinating causes", "cells": [{"text": "Alternative diagnoses"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carasil-ddx",
+      "kind": "ddx",
+      "title": "Look-alike hereditary small-vessel disease",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "CADASIL", "cells": [{"text": "Autosomal dominant NOTCH3 disease; CARASIL is recessive with premature alopecia and disabling spondylosis"}], "cite": "c1"},
+        {"parameter": "Sporadic hypertensive small-vessel disease", "cells": [{"text": "Lacks the premature alopecia and disabling spondylosis triad of CARASIL"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carasil-treatment",
+      "kind": "treatment",
+      "title": "Management options in CARASIL",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "No therapy alters the HTRA1 arteriopathy"}, {"text": "Mainstay"}], "cite": "c1"},
+        {"parameter": "Vascular risk control", "cells": [{"text": "Blood pressure control to limit further ischaemic injury"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Rehabilitation", "cells": [{"text": "Physiotherapy and occupational therapy for gait and progressive motor disability"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Spondylosis", "cells": [{"text": "Analgesia, physiotherapy and surgical decompression where indicated"}, {"text": "Symptomatic"}], "cite": "c1"},
+        {"parameter": "Cognitive and dementia support", "cells": [{"text": "Assessment and anticipatory care planning as decline progresses"}, {"text": "Progressive"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Autosomal recessive risk; attention to consanguinity"}, {"text": "Family"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carasil-dx-mgmt",
+      "title": "Diagnosis and management of CARASIL",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Young-onset subcortical stroke with premature alopecia and low back pain from spondylosis", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: new focal deficit, progressive gait failure, or rapid cognitive decline?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent stroke pathway assessment; secondary prevention", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Brain and spine MRI; family history for recessive pattern; HTRA1 testing", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Biallelic HTRA1 variant confirmed?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Supportive care; blood pressure control; rehabilitation; spondylosis management; counselling", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider CADASIL, sporadic small-vessel disease or demyelinating disease", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Relentlessly progressive disability and shortened life expectancy", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

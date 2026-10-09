@@ -1,176 +1,418 @@
 {
- "id": "nursemaids_elbow",
- "name": "nursemaids elbow",
- "aliases": [
-  "Pulled elbow",
-  "Radial head subluxation"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Paediatric Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early childhood, most often in toddlers and pre-school children.",
-   "The classic mechanism is a sudden longitudinal (axial) pull on a pronated, extended forearm, such as lifting or swinging a child by the hand or arm.",
-   "The child typically holds the arm slightly flexed and pronated against the body and declines to use it, yet is otherwise settled with no swelling or deformity.",
-   "The absence of swelling, bruising, focal bony tenderness or deformity helps distinguish it from a fracture.",
-   "When the history and examination are classic, with no bony tenderness or swelling, radiographs are not required before attempting reduction.",
-   "Reduction is achieved by supination-flexion or by hyperpronation of the forearm; a palpable click is often felt and the child usually resumes normal use within minutes.",
-   "If the mechanism is atypical, there is significant swelling, or reduction fails, radiographs should be obtained to exclude a fracture such as a supracondylar or radial neck injury.",
-   "Recurrence is common until the radial head and annular ligament mature, so carers should be advised against pulling the child by the hand or wrist."
+  "id": "nursemaids_elbow",
+  "name": "nursemaids elbow",
+  "aliases": [
+    "Pulled elbow",
+    "Radial head subluxation"
   ],
-  "pathophysiology": "Nursemaid's elbow arises when sudden axial traction is applied to an extended, pronated forearm, causing the annular ligament that encircles the radial neck to slip proximally over the head of the radius and become partially interposed within the radiohumeral joint. In young children the radial head is relatively small and incompletely ossified and the annular ligament is thin and lax, which permits this displacement; the trapped ligament produces pain and reluctance to use the arm while the joint itself remains structurally intact. As the radial head enlarges and the ligament strengthens with growth, the anatomy no longer permits the ligament to slip, and the condition ceases to recur.",
-  "additionalDifferentials": [
-   "Supracondylar fracture of the humerus",
-   "Radial head or radial neck fracture",
-   "Clavicle fracture presenting as a reluctant-to-use arm in a toddler",
-   "Elbow dislocation",
-   "Septic arthritis or osteomyelitis involving the elbow",
-   "Non-accidental injury",
-   "Torus or buckle fracture of the distal forearm"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis alone in classic presentations, with no imaging required",
-   "Elbow radiographs in anteroposterior and lateral views if atypical features, swelling or failed reduction",
-   "Comparison views of the contralateral elbow where there is diagnostic uncertainty",
-   "Ultrasound in selected uncertain cases",
-   "Assessment for non-accidental injury where the history is inconsistent or the injury unexplained",
-   "Observation of spontaneous, pain-free arm use after reduction as confirmation of success"
-  ],
-  "redFlags": [
-   "Significant swelling, bruising, deformity or focal bony tenderness suggesting a fracture",
-   "An inconsistent, absent or implausible mechanism raising concern for non-accidental injury",
-   "Neurovascular compromise of the limb",
-   "Failure to regain normal use after appropriate reduction attempts",
-   "Fever, erythema or warmth around the joint suggesting infection"
-  ],
-  "prognosis": "The prognosis is excellent; reduction is usually rapid and complete with immediate return of function and no long-term sequelae. Recurrence during the toddler years is common, but the tendency resolves with skeletal maturation.",
-  "pitfalls": [
-   "Attempting reduction when swelling or deformity suggests an unrecognised fracture",
-   "Assuming every toddler who will not use an arm has a pulled elbow and thereby missing a supracondylar fracture",
-   "Failing to consider non-accidental injury when the history is inconsistent",
-   "Neglecting to counsel carers on prevention, leading to recurrence",
-   "Obtaining radiographs in every case when the presentation is classic and reduction straightforward"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Tachdjian's Pediatric Orthopaedics",
-   "Rockwood and Wilkins' Fractures in Children"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations",
-   "Confirmation of success by observing spontaneous, pain-free use of the arm within minutes, often after a palpable click",
-   "Simple analgesia and reassurance, with no immobilisation required after successful reduction",
-   "Radiographs and reassessment if reduction fails, the presentation is atypical, or there is swelling or focal bony tenderness suggesting fracture",
-   "Parental education to avoid axial traction on the arm, such as lifting or swinging a child by the hand, as recurrence is common until skeletal maturation",
-   "Consideration of non-accidental injury where the history is inconsistent or the mechanism implausible"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nursemaids_elbow-pathway",
-   "title": "nursemaids elbow: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early childhood, most often in toddlers and pre-school children.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant swelling, bruising, deformity or focal bony tenderness suggesting a fracture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis alone in classic presentations, with no imaging required, Elbow radiographs in anteroposterior and lateral views if atypical features, swelling or failed reduction, Comparison views of the contralateral"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting reduction when swelling or deformity suggests an unrecognised fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nursemaids elbow."
-  }
- ],
- "tables": [
-  {
-   "id": "nursemaids_elbow-matrix",
-   "title": "nursemaids elbow: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Paediatric Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early childhood, most often in toddlers and pre-school children.",
+      "The classic mechanism is a sudden longitudinal (axial) pull on a pronated, extended forearm, such as lifting or swinging a child by the hand or arm.",
+      "The child typically holds the arm slightly flexed and pronated against the body and declines to use it, yet is otherwise settled with no swelling or deformity.",
+      "The absence of swelling, bruising, focal bony tenderness or deformity helps distinguish it from a fracture.",
+      "When the history and examination are classic, with no bony tenderness or swelling, radiographs are not required before attempting reduction.",
+      "Reduction is achieved by supination-flexion or by hyperpronation of the forearm; a palpable click is often felt and the child usually resumes normal use within minutes.",
+      "If the mechanism is atypical, there is significant swelling, or reduction fails, radiographs should be obtained to exclude a fracture such as a supracondylar or radial neck injury.",
+      "Recurrence is common until the radial head and annular ligament mature, so carers should be advised against pulling the child by the hand or wrist."
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis alone in classic presentations, with no imaging required, Elbow radiographs in anteroposterior and lateral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nursemaid's elbow arises when sudden axial traction is applied to an extended, pronated forearm, causing the annular ligament that encircles the radial neck to slip proximally over the head of the radius and become partially interposed within the radiohumeral joint. In young children the radial head is relatively small and incompletely ossified and the annular ligament is thin and lax, which permits this displacement; the trapped ligament produces pain and reluctance to use the arm while the joint itself remains structurally intact. As the radial head enlarges and the ligament strengthens with growth, the anatomy no longer permits the ligament to slip, and the condition ceases to recur.",
+    "additionalDifferentials": [
+      "Supracondylar fracture of the humerus",
+      "Radial head or radial neck fracture",
+      "Clavicle fracture presenting as a reluctant-to-use arm in a toddler",
+      "Elbow dislocation",
+      "Septic arthritis or osteomyelitis involving the elbow",
+      "Non-accidental injury",
+      "Torus or buckle fracture of the distal forearm"
     ],
-    [
-     "Primary Differentials",
-     "Supracondylar fracture of the humerus, Radial head or radial neck fracture, Clavicle fracture presenting as a reluctant-to-use",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis alone in classic presentations, with no imaging required",
+      "Elbow radiographs in anteroposterior and lateral views if atypical features, swelling or failed reduction",
+      "Comparison views of the contralateral elbow where there is diagnostic uncertainty",
+      "Ultrasound in selected uncertain cases",
+      "Assessment for non-accidental injury where the history is inconsistent or the injury unexplained",
+      "Observation of spontaneous, pain-free arm use after reduction as confirmation of success"
     ],
-    [
-     "Management Strategy",
-     "Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant swelling, bruising, deformity or focal bony tenderness suggesting a fracture",
+      "An inconsistent, absent or implausible mechanism raising concern for non-accidental injury",
+      "Neurovascular compromise of the limb",
+      "Failure to regain normal use after appropriate reduction attempts",
+      "Fever, erythema or warmth around the joint suggesting infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting reduction when swelling or deformity suggests an unrecognised fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; reduction is usually rapid and complete with immediate return of function and no long-term sequelae. Recurrence during the toddler years is common, but the tendency resolves with skeletal maturation.",
+    "pitfalls": [
+      "Attempting reduction when swelling or deformity suggests an unrecognised fracture",
+      "Assuming every toddler who will not use an arm has a pulled elbow and thereby missing a supracondylar fracture",
+      "Failing to consider non-accidental injury when the history is inconsistent",
+      "Neglecting to counsel carers on prevention, leading to recurrence",
+      "Obtaining radiographs in every case when the presentation is classic and reduction straightforward"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Tachdjian's Pediatric Orthopaedics",
+      "Rockwood and Wilkins' Fractures in Children"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations",
+      "Confirmation of success by observing spontaneous, pain-free use of the arm within minutes, often after a palpable click",
+      "Simple analgesia and reassurance, with no immobilisation required after successful reduction",
+      "Radiographs and reassessment if reduction fails, the presentation is atypical, or there is swelling or focal bony tenderness suggesting fracture",
+      "Parental education to avoid axial traction on the arm, such as lifting or swinging a child by the hand, as recurrence is common until skeletal maturation",
+      "Consideration of non-accidental injury where the history is inconsistent or the mechanism implausible"
     ]
-   ],
-   "caption": "Overview comparison matrix for nursemaids elbow."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nursemaids-elbow-real-image",
-   "title": "nursemaids elbow: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "nursemaids_elbow-pathway",
+      "title": "nursemaids elbow: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early childhood, most often in toddlers and pre-school children.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant swelling, bruising, deformity or focal bony tenderness suggesting a fracture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis alone in classic presentations, with no imaging required, Elbow radiographs in anteroposterior and lateral views if atypical features, swelling or failed reduction, Comparison views of the contralateral"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting reduction when swelling or deformity suggests an unrecognised fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nursemaids elbow."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nursemaids_elbow-matrix",
+      "title": "nursemaids elbow: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Nursemaid's elbow is a subluxation of the radial head beneath the annular ligament and is the commonest elbow injury of early",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis alone in classic presentations, with no imaging required, Elbow radiographs in anteroposterior and lateral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Supracondylar fracture of the humerus, Radial head or radial neck fracture, Clavicle fracture presenting as a reluctant-to-use",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Closed reduction by supination-flexion or hyperpronation manoeuvre, without radiographs in classic presentations",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting reduction when swelling or deformity suggests an unrecognised fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nursemaids elbow."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nursemaids_elbow-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from history and examination",
+          "cells": [
+            {
+              "text": "No imaging needed in classic presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elbow radiographs, anteroposterior and lateral",
+          "cells": [
+            {
+              "text": "Only if the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the mechanism of injury",
+          "cells": [
+            {
+              "text": "Consistent with traction on the arm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nursemaids_elbow-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Supracondylar fracture of the humerus",
+          "cells": [
+            {
+              "text": "Swelling and deformity rather than a clean reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radial head or radial neck fracture",
+          "cells": [
+            {
+              "text": "Bony tenderness and swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clavicle fracture",
+          "cells": [
+            {
+              "text": "Reluctance to use the arm in a toddler"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nursemaids_elbow-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Closed reduction by supination-flexion",
+          "cells": [
+            {
+              "text": "Or a hyperpronation manoeuvre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No radiographs for classic presentation",
+          "cells": [
+            {
+              "text": "Clinical diagnosis guides reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm success by observing spontaneous use",
+          "cells": [
+            {
+              "text": "Return of normal arm use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid reduction when a fracture is suspected",
+          "cells": [
+            {
+              "text": "Swelling or deformity signals fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nursemaids_elbow-dx-mgmt",
+      "title": "Diagnosis and management of nursemaids elbow",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Toddler holding an arm still after sudden pull on an extended, pronated forearm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (swelling, bruising, deformity, inconsistent mechanism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Image the elbow and manage as fracture if red flags are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment; elbow radiographs only if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classic traction history with no swelling or bony tenderness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider supracondylar or radial fracture; image and treat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Closed reduction by supination-flexion or hyperpronation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiographs not needed for classic presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm reduction by spontaneous use of the arm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid reduction when a fracture is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; reduction is usually rapid and complete, with no lasting effects",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,461 @@
 {
- "id": "scleroedema",
- "name": "scleroedema",
- "aliases": [
-  "scleroedema of Buschke",
-  "scleroedema adultorum",
-  "scleroedema diabeticorum"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior neck, upper back and shoulders",
-   "Three clinical types are recognised: a post-infectious form (often after streptococcal or viral upper respiratory infection) that tends to resolve, a form associated with monoclonal gammopathy, and scleroedema diabeticorum linked to long-standing insulin-dependent diabetes",
-   "The skin over the upper trunk becomes thickened and bound down, sometimes with an orange-peel appearance and reduced ability to pinch or wrinkle the skin",
-   "The hands and feet are characteristically spared, helping to distinguish it from systemic sclerosis, and Raynaud phenomenon and sclerodactyly are absent",
-   "Extensive disease can restrict movement of the neck, back and chest wall, and rarely involves the tongue, pharynx or heart",
-   "Histology shows a thickened reticular dermis with collagen bundles separated by mucin, producing characteristic fenestration, best demonstrated with colloidal iron or Alcian blue",
-   "Treatment is often unsatisfactory; phototherapy (particularly UVA1 or PUVA), optimisation of glycaemic control and physiotherapy are used, and the post-infectious form may resolve spontaneously"
+  "id": "scleroedema",
+  "name": "scleroedema",
+  "aliases": [
+    "scleroedema of Buschke",
+    "scleroedema adultorum",
+    "scleroedema diabeticorum",
+    "Scleredema (of Buschke)",
+    "scleredema",
+    "scleredema of Buschke",
+    "scleredema adultorum",
+    "scleredema diabeticorum",
+    "Buschke disease"
   ],
-  "pathophysiology": "Scleroedema is a primary cutaneous mucinosis in which fibroblasts deposit excess collagen and glycosaminoglycans, chiefly hyaluronic acid, throughout a markedly thickened reticular dermis. In the post-infectious form, an immune response to preceding infection is thought to stimulate fibroblast activity transiently. In the diabetes-associated form, chronic hyperglycaemia is believed to promote non-enzymatic glycation of collagen, increase resistance to degradation and stimulate mucin production, accounting for its persistence. The paraproteinaemic form is associated with a monoclonal gammopathy that, as in scleromyxoedema, may drive fibroblast stimulation, although the mechanism is incompletely defined.",
-  "additionalDifferentials": [
-   "Systemic sclerosis and morphoea",
-   "Scleromyxoedema",
-   "Nephrogenic systemic fibrosis",
-   "Eosinophilic fasciitis",
-   "Myxoedema of hypothyroidism",
-   "Chronic sclerodermatous graft-versus-host disease"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles",
-   "Fasting glucose and glycated haemoglobin to assess for diabetes",
-   "Serum protein electrophoresis and immunofixation to detect a paraprotein",
-   "Antistreptolysin O titre and infection history in the post-infectious form",
-   "Thyroid function tests to exclude myxoedema",
-   "Assessment of chest wall and joint mobility where induration is extensive"
-  ],
-  "redFlags": [
-   "Restriction of chest wall movement causing respiratory compromise",
-   "Cardiac involvement in extensive disease",
-   "Dysphagia or airway symptoms from pharyngeal or tongue involvement",
-   "Rapidly progressive induration or associated systemic symptoms prompting reassessment"
-  ],
-  "prognosis": "The post-infectious form usually resolves over months to a couple of years, whereas the diabetes-associated and paraprotein-related forms tend to be chronic and persistent. Serious systemic complications are uncommon, and prognosis is largely determined by the underlying association and the extent of functional restriction.",
-  "pitfalls": [
-   "Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon",
-   "Overlooking an underlying monoclonal gammopathy requiring monitoring",
-   "Failing to distinguish the self-limiting post-infectious form from the persistent diabetic form when advising on prognosis",
-   "Taking a superficial biopsy that misses the deep dermal mucin and collagen changes",
-   "Neglecting glycaemic optimisation and physiotherapy in the diabetic form"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia, Dermatology"
-  ],
-  "crossLinks": [
-   "scleromyxoedema",
-   "cutaneous_mucinosis",
-   "nephrogenic_systemic_fibrosis"
-  ],
-  "management": [
-   "Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy",
-   "Manage the post-infectious form expectantly as it usually resolves spontaneously, treating any residual streptococcal infection",
-   "Offer physiotherapy and stretching to preserve neck, back, and chest-wall mobility where induration is extensive",
-   "Consider phototherapy (PUVA or UVA1) or immunomodulation such as methotrexate, systemic corticosteroids, or intravenous immunoglobulin for progressive or disabling disease",
-   "Monitor for restrictive complications including chest-wall, cardiac, tongue, and pharyngeal involvement",
-   "Refer to dermatology, with haematology input where a paraprotein is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scleroedema-pathway",
-   "title": "scleroedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior neck, upper back and shoulders",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Restriction of chest wall movement causing respiratory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles, Fasting glucose and glycated haemoglobin to assess for diabetes, Serum protein electrophoresis and immunofixation to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scleroedema."
-  }
- ],
- "tables": [
-  {
-   "id": "scleroedema-matrix",
-   "title": "scleroedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior neck, upper back and shoulders",
+      "Three clinical types are recognised: a post-infectious form (often after streptococcal or viral upper respiratory infection) that tends to resolve, a form associated with monoclonal gammopathy, and scleroedema diabeticorum linked to long-standing insulin-dependent diabetes",
+      "The skin over the upper trunk becomes thickened and bound down, sometimes with an orange-peel appearance and reduced ability to pinch or wrinkle the skin",
+      "The hands and feet are characteristically spared, helping to distinguish it from systemic sclerosis, and Raynaud phenomenon and sclerodactyly are absent",
+      "Extensive disease can restrict movement of the neck, back and chest wall, and rarely involves the tongue, pharynx or heart",
+      "Histology shows a thickened reticular dermis with collagen bundles separated by mucin, producing characteristic fenestration, best demonstrated with colloidal iron or Alcian blue",
+      "Treatment is often unsatisfactory; phototherapy (particularly UVA1 or PUVA), optimisation of glycaemic control and physiotherapy are used, and the post-infectious form may resolve spontaneously"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles, Fasting glucose and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scleroedema is a primary cutaneous mucinosis in which fibroblasts deposit excess collagen and glycosaminoglycans, chiefly hyaluronic acid, throughout a markedly thickened reticular dermis. In the post-infectious form, an immune response to preceding infection is thought to stimulate fibroblast activity transiently. In the diabetes-associated form, chronic hyperglycaemia is believed to promote non-enzymatic glycation of collagen, increase resistance to degradation and stimulate mucin production, accounting for its persistence. The paraproteinaemic form is associated with a monoclonal gammopathy that, as in scleromyxoedema, may drive fibroblast stimulation, although the mechanism is incompletely defined.",
+    "additionalDifferentials": [
+      "Systemic sclerosis and morphoea",
+      "Scleromyxoedema",
+      "Nephrogenic systemic fibrosis",
+      "Eosinophilic fasciitis",
+      "Myxoedema of hypothyroidism",
+      "Chronic sclerodermatous graft-versus-host disease"
     ],
-    [
-     "Primary Differentials",
-     "Systemic sclerosis and morphoea, Scleromyxoedema, Nephrogenic systemic fibrosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles",
+      "Fasting glucose and glycated haemoglobin to assess for diabetes",
+      "Serum protein electrophoresis and immunofixation to detect a paraprotein",
+      "Antistreptolysin O titre and infection history in the post-infectious form",
+      "Thyroid function tests to exclude myxoedema",
+      "Assessment of chest wall and joint mobility where induration is extensive"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy",
-     "Core treatment modality"
+    "redFlags": [
+      "Restriction of chest wall movement causing respiratory compromise",
+      "Cardiac involvement in extensive disease",
+      "Dysphagia or airway symptoms from pharyngeal or tongue involvement",
+      "Rapidly progressive induration or associated systemic symptoms prompting reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon",
-     "Prevent diagnostic or management error"
+    "prognosis": "The post-infectious form usually resolves over months to a couple of years, whereas the diabetes-associated and paraprotein-related forms tend to be chronic and persistent. Serious systemic complications are uncommon, and prognosis is largely determined by the underlying association and the extent of functional restriction.",
+    "pitfalls": [
+      "Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon",
+      "Overlooking an underlying monoclonal gammopathy requiring monitoring",
+      "Failing to distinguish the self-limiting post-infectious form from the persistent diabetic form when advising on prognosis",
+      "Taking a superficial biopsy that misses the deep dermal mucin and collagen changes",
+      "Neglecting glycaemic optimisation and physiotherapy in the diabetic form"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia, Dermatology"
+    ],
+    "crossLinks": [
+      "scleromyxoedema",
+      "cutaneous_mucinosis",
+      "nephrogenic_systemic_fibrosis"
+    ],
+    "management": [
+      "Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy",
+      "Manage the post-infectious form expectantly as it usually resolves spontaneously, treating any residual streptococcal infection",
+      "Offer physiotherapy and stretching to preserve neck, back, and chest-wall mobility where induration is extensive",
+      "Consider phototherapy (PUVA or UVA1) or immunomodulation such as methotrexate, systemic corticosteroids, or intravenous immunoglobulin for progressive or disabling disease",
+      "Monitor for restrictive complications including chest-wall, cardiac, tongue, and pharyngeal involvement",
+      "Refer to dermatology, with haematology input where a paraprotein is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for scleroedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scleroedema-real-image",
-   "title": "scleroedema: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "scleroedema-pathway",
+      "title": "scleroedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior neck, upper back and shoulders",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Restriction of chest wall movement causing respiratory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles, Fasting glucose and glycated haemoglobin to assess for diabetes, Serum protein electrophoresis and immunofixation to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scleroedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scleroedema-matrix",
+      "title": "scleroedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mucinosis characterised by diffuse, symmetrical, non-pitting woody induration of the skin, typically beginning on the posterior",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy from involved back or neck showing dermal thickening with mucin between collagen bundles, Fasting glucose and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic sclerosis and morphoea, Scleromyxoedema, Nephrogenic systemic fibrosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying association: optimise glycaemic control in scleroedema diabeticorum and address any monoclonal gammopathy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing scleroedema with systemic sclerosis, despite the sparing of the hands and absence of Raynaud phenomenon",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scleroedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleroedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of back or neck",
+          "cells": [
+            {
+              "text": "Dermal thickening with mucin between collagen bundles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Paraprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antistreptolysin O titre and infection history",
+          "cells": [
+            {
+              "text": "Post-infectious form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Excludes myxoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall and joint mobility assessment",
+          "cells": [
+            {
+              "text": "Extent of functional restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Hands spared and no Raynaud phenomenon in scleroedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoedema of hypothyroidism",
+          "cells": [
+            {
+              "text": "Excluded by thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the association",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control; address any monoclonal gammopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectant care",
+          "cells": [
+            {
+              "text": "Post-infectious form usually resolves; treat residual streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Preserve neck, back and chest-wall mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or immunomodulation",
+          "cells": [
+            {
+              "text": "PUVA, UVA1, methotrexate, corticosteroids or IVIG for progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for restrictive complications",
+          "cells": [
+            {
+              "text": "Chest wall, cardiac, tongue and pharyngeal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology, with haematology if a paraprotein is found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleroedema-dx-mgmt",
+      "title": "Diagnosis and management of scleroedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woody thickening of neck and upper back: suspected scleroedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Chest-wall restriction, cardiac involvement, dysphagia or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess respiratory, cardiac and swallowing function; reassess diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, glucose and HbA1c, paraprotein screen, ASO titre, thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucin between collagen bundles with an identified association?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider scleromyxoedema, NSF, eosinophilic fasciitis or systemic sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise glycaemia and address any monoclonal gammopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expectant care for post-infectious form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy to keep chest-wall and neck mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PUVA, UVA1 or immunomodulation for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-infectious form resolves; diabetic and paraprotein forms tend to be chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

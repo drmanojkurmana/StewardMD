@@ -1,177 +1,444 @@
 {
- "id": "marfan_syndrome",
- "name": "Marfan syndrome",
- "aliases": [
-  "FBN1-related Marfan syndrome",
-  "fibrillin-1 disorder",
-  "MFS"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1; roughly a quarter of cases arise from de novo variants",
-   "Diagnosis rests on the revised Ghent criteria, which weight aortic root dilatation and ectopia lentis as cardinal features alongside a systemic score and family history",
-   "Skeletal features include disproportionately long limbs and digits (arachnodactyly), tall stature, pectus deformity, scoliosis, joint hypermobility, and a high-arched palate",
-   "Ectopia lentis (typically superotemporal lens dislocation) is a hallmark ocular finding and helps distinguish Marfan syndrome from Loeys-Dietz syndrome",
-   "Progressive aortic root dilatation at the sinuses of Valsalva predisposes to aortic dissection and is the principal cause of premature death",
-   "Lifelong surveillance with transthoracic echocardiography, blood-pressure control, and medical aortic protection (beta-blockers and/or angiotensin-receptor blockers) are central to management",
-   "Prophylactic aortic root surgery is considered once the aortic diameter reaches an at-risk threshold or shows rapid progression, individualised to body size and family history",
-   "Activity advice usually restricts high-intensity isometric exercise, competitive contact sport, and heavy lifting to reduce aortic wall stress"
+  "id": "marfan_syndrome",
+  "name": "Marfan syndrome",
+  "aliases": [
+    "FBN1-related Marfan syndrome",
+    "fibrillin-1 disorder",
+    "MFS"
   ],
-  "pathophysiology": "Marfan syndrome results from loss of normal fibrillin-1, a glycoprotein that assembles into microfibrils forming the scaffold of elastic fibres in the aorta, suspensory ligament of the lens, skin, and periosteum. Deficient or abnormal microfibrils weaken these connective tissues and also dysregulate transforming growth factor beta signalling, since microfibrils normally sequester latent TGF-beta. Excess TGF-beta activity contributes to progressive weakening and dilatation of the aortic media, degeneration of the zonular fibres causing lens subluxation, and overgrowth of the long bones. The combined structural and signalling defects explain the cardiovascular, ocular, skeletal, and dural manifestations.",
-  "additionalDifferentials": [
-   "Loeys-Dietz syndrome",
-   "Vascular Ehlers-Danlos syndrome",
-   "Homocystinuria (which can also cause ectopia lentis and a marfanoid habitus)",
-   "Congenital contractural arachnodactyly (Beals syndrome)",
-   "MASS phenotype and isolated familial thoracic aortic aneurysm",
-   "Familial ectopia lentis"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with aortic root measurement indexed to body size",
-   "Slit-lamp examination through a dilated pupil to detect ectopia lentis",
-   "Cross-sectional aortic imaging (CT or MR angiography) to assess the whole aorta",
-   "Molecular genetic testing of FBN1 and, where indicated, a wider aortopathy gene panel",
-   "Plasma homocysteine or urine amino acids to exclude homocystinuria",
-   "Imaging for dural ectasia and skeletal review for scoliosis and protrusio acetabuli"
-  ],
-  "redFlags": [
-   "Sudden severe chest, back, or abdominal pain suggesting acute aortic dissection",
-   "Rapidly enlarging aortic root or diameter approaching the surgical threshold",
-   "New aortic regurgitation or signs of cardiac failure",
-   "Sudden painless visual loss suggesting retinal detachment or acute lens dislocation",
-   "Symptoms of pneumothorax such as acute breathlessness and pleuritic pain"
-  ],
-  "prognosis": "With regular cardiovascular surveillance, medical aortic protection, and timely prophylactic surgery, life expectancy now approaches that of the general population. Untreated aortic disease carries a high risk of dissection and premature death, so adherence to monitoring and lifestyle advice is critical.",
-  "pitfalls": [
-   "Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management",
-   "Relying on a single aortic measurement rather than tracking the trend over time",
-   "Overlooking non-aortic vascular and ocular complications during follow-up",
-   "Failing to offer cascade family screening and genetic counselling",
-   "Assuming a normal childhood echocardiogram excludes future aortic disease"
-  ],
-  "references": [
-   "GeneReviews: Marfan syndrome",
-   "Revised Ghent nosology for the Marfan syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation",
-   "Maintain lifelong cardiovascular surveillance with serial transthoracic echocardiography, blood-pressure control and periodic whole-aorta cross-sectional imaging",
-   "Advise activity modification, avoiding isometric exertion and high-intensity contact or competitive sport",
-   "Undertake prophylactic aortic root surgery when the root reaches the surgical threshold or shows rapid growth or a family history of dissection",
-   "Manage acute aortic dissection as an emergency with heart-rate and blood-pressure control and immediate surgery for type A dissection",
-   "Provide ophthalmic care for ectopia lentis with refractive correction and amblyopia management",
-   "Monitor and manage skeletal features including scoliosis and pectus deformity and treat symptomatic dural ectasia",
-   "Offer genetic counselling for autosomal dominant FBN1 disease with cascade family screening and pre-pregnancy counselling with close monitoring in pregnancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "marfan_syndrome-pathway",
-   "title": "Marfan syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1; roughly a quarter of cases arise from de novo variants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe chest, back, or abdominal pain suggesting acute aortic dissection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with aortic root measurement indexed to body size, Slit-lamp examination through a dilated pupil to detect ectopia lentis, Cross-sectional aortic imaging (CT or MR angiography) to assess the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of marfan syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "marfan_syndrome-matrix",
-   "title": "Marfan syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1;",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1; roughly a quarter of cases arise from de novo variants",
+      "Diagnosis rests on the revised Ghent criteria, which weight aortic root dilatation and ectopia lentis as cardinal features alongside a systemic score and family history",
+      "Skeletal features include disproportionately long limbs and digits (arachnodactyly), tall stature, pectus deformity, scoliosis, joint hypermobility, and a high-arched palate",
+      "Ectopia lentis (typically superotemporal lens dislocation) is a hallmark ocular finding and helps distinguish Marfan syndrome from Loeys-Dietz syndrome",
+      "Progressive aortic root dilatation at the sinuses of Valsalva predisposes to aortic dissection and is the principal cause of premature death",
+      "Lifelong surveillance with transthoracic echocardiography, blood-pressure control, and medical aortic protection (beta-blockers and/or angiotensin-receptor blockers) are central to management",
+      "Prophylactic aortic root surgery is considered once the aortic diameter reaches an at-risk threshold or shows rapid progression, individualised to body size and family history",
+      "Activity advice usually restricts high-intensity isometric exercise, competitive contact sport, and heavy lifting to reduce aortic wall stress"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with aortic root measurement indexed to body size, Slit-lamp examination through a dilated pupil",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Marfan syndrome results from loss of normal fibrillin-1, a glycoprotein that assembles into microfibrils forming the scaffold of elastic fibres in the aorta, suspensory ligament of the lens, skin, and periosteum. Deficient or abnormal microfibrils weaken these connective tissues and also dysregulate transforming growth factor beta signalling, since microfibrils normally sequester latent TGF-beta. Excess TGF-beta activity contributes to progressive weakening and dilatation of the aortic media, degeneration of the zonular fibres causing lens subluxation, and overgrowth of the long bones. The combined structural and signalling defects explain the cardiovascular, ocular, skeletal, and dural manifestations.",
+    "additionalDifferentials": [
+      "Loeys-Dietz syndrome",
+      "Vascular Ehlers-Danlos syndrome",
+      "Homocystinuria (which can also cause ectopia lentis and a marfanoid habitus)",
+      "Congenital contractural arachnodactyly (Beals syndrome)",
+      "MASS phenotype and isolated familial thoracic aortic aneurysm",
+      "Familial ectopia lentis"
     ],
-    [
-     "Primary Differentials",
-     "Loeys-Dietz syndrome, Vascular Ehlers-Danlos syndrome, Homocystinuria (which can also cause ectopia lentis and a marfanoid",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with aortic root measurement indexed to body size",
+      "Slit-lamp examination through a dilated pupil to detect ectopia lentis",
+      "Cross-sectional aortic imaging (CT or MR angiography) to assess the whole aorta",
+      "Molecular genetic testing of FBN1 and, where indicated, a wider aortopathy gene panel",
+      "Plasma homocysteine or urine amino acids to exclude homocystinuria",
+      "Imaging for dural ectasia and skeletal review for scoliosis and protrusio acetabuli"
     ],
-    [
-     "Management Strategy",
-     "Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe chest, back, or abdominal pain suggesting acute aortic dissection",
+      "Rapidly enlarging aortic root or diameter approaching the surgical threshold",
+      "New aortic regurgitation or signs of cardiac failure",
+      "Sudden painless visual loss suggesting retinal detachment or acute lens dislocation",
+      "Symptoms of pneumothorax such as acute breathlessness and pleuritic pain"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management",
-     "Prevent diagnostic or management error"
+    "prognosis": "With regular cardiovascular surveillance, medical aortic protection, and timely prophylactic surgery, life expectancy now approaches that of the general population. Untreated aortic disease carries a high risk of dissection and premature death, so adherence to monitoring and lifestyle advice is critical.",
+    "pitfalls": [
+      "Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management",
+      "Relying on a single aortic measurement rather than tracking the trend over time",
+      "Overlooking non-aortic vascular and ocular complications during follow-up",
+      "Failing to offer cascade family screening and genetic counselling",
+      "Assuming a normal childhood echocardiogram excludes future aortic disease"
+    ],
+    "references": [
+      "GeneReviews: Marfan syndrome",
+      "Revised Ghent nosology for the Marfan syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation",
+      "Maintain lifelong cardiovascular surveillance with serial transthoracic echocardiography, blood-pressure control and periodic whole-aorta cross-sectional imaging",
+      "Advise activity modification, avoiding isometric exertion and high-intensity contact or competitive sport",
+      "Undertake prophylactic aortic root surgery when the root reaches the surgical threshold or shows rapid growth or a family history of dissection",
+      "Manage acute aortic dissection as an emergency with heart-rate and blood-pressure control and immediate surgery for type A dissection",
+      "Provide ophthalmic care for ectopia lentis with refractive correction and amblyopia management",
+      "Monitor and manage skeletal features including scoliosis and pectus deformity and treat symptomatic dural ectasia",
+      "Offer genetic counselling for autosomal dominant FBN1 disease with cascade family screening and pre-pregnancy counselling with close monitoring in pregnancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for marfan syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "marfan-syndrome-real-image",
-   "title": "Marfan syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "marfan_syndrome-pathway",
+      "title": "Marfan syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1; roughly a quarter of cases arise from de novo variants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe chest, back, or abdominal pain suggesting acute aortic dissection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with aortic root measurement indexed to body size, Slit-lamp examination through a dilated pupil to detect ectopia lentis, Cross-sectional aortic imaging (CT or MR angiography) to assess the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of marfan syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "marfan_syndrome-matrix",
+      "title": "Marfan syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant disorder caused by pathogenic variants in FBN1, which encodes the extracellular matrix protein fibrillin-1;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with aortic root measurement indexed to body size, Slit-lamp examination through a dilated pupil",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Loeys-Dietz syndrome, Vascular Ehlers-Danlos syndrome, Homocystinuria (which can also cause ectopia lentis and a marfanoid",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide medical aortic protection with beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing tall marfanoid habitus to Marfan syndrome without excluding homocystinuria, which needs different management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for marfan syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marfan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with aortic root measurement",
+          "cells": [
+            {
+              "text": "Aortic root diameter, indexed to body size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination through a dilated pupil",
+          "cells": [
+            {
+              "text": "Ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional aortic imaging (CT or MR angiography)",
+          "cells": [
+            {
+              "text": "The whole aorta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of FBN1",
+          "cells": [
+            {
+              "text": "FBN1 variant; a wider aortopathy panel where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma homocysteine or urine amino acids",
+          "cells": [
+            {
+              "text": "Homocystinuria excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for dural ectasia and skeletal review",
+          "cells": [
+            {
+              "text": "Dural ectasia; scoliosis and protrusio acetabuli"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marfan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical aortic protection",
+          "cells": [
+            {
+              "text": "Beta-blockers and/or angiotensin-receptor blockers to slow aortic root dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Serial transthoracic echocardiography, blood pressure control and periodic whole-aorta imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid isometric exertion and high-intensity contact or competitive sport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic aortic root surgery",
+          "cells": [
+            {
+              "text": "At the surgical threshold, with rapid growth, or with a family history of dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute aortic dissection",
+          "cells": [
+            {
+              "text": "Emergency heart-rate and blood-pressure control; immediate surgery for type A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic care",
+          "cells": [
+            {
+              "text": "Refractive correction and amblyopia management for ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dural features",
+          "cells": [
+            {
+              "text": "Scoliosis, pectus deformity and symptomatic dural ectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FBN1 disease; cascade screening; pre-pregnancy counselling and close monitoring in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marfan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Marfan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tall, marfanoid patient with ectopia lentis or aortic root dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest or back pain, rapidly enlarging root or sudden painless visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: heart-rate and blood-pressure control; urgent surgery for type A dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with indexed root size, slit-lamp, whole-aorta imaging, FBN1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an FBN1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude homocystinuria, Loeys-Dietz or vascular Ehlers-Danlos; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockers and/or angiotensin-receptor blockers to slow root dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong echo surveillance, blood pressure control and periodic whole-aorta imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid isometric exertion and competitive contact sport",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylactic aortic root surgery at the surgical threshold or with rapid growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong follow-up with cascade family screening and pre-pregnancy counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

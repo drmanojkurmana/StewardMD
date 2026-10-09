@@ -1,173 +1,501 @@
 {
- "id": "agrin_congenital_myasthenic_syndrome",
- "name": "Agrin-related congenital myasthenic syndrome",
- "aliases": [
-  "AGRN-CMS",
-  "Agrin deficiency CMS"
- ],
- "class": "non_infective",
- "system": "Neuromuscular junction",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate postsynaptic acetylcholine receptor clustering.",
-   "Biallelic AGRN variants cause a synaptic congenital myasthenic syndrome that also disrupts maintenance of the endplate architecture and nerve-terminal integrity.",
-   "Presentation ranges from early-onset weakness to a distinctive later-onset, distal and lower-limb predominant weakness with prominent muscle atrophy that can mimic a distal myopathy or neuropathy.",
-   "Ptosis and mild ophthalmoparesis may occur, but bulbar and respiratory involvement is often less prominent than in some other subtypes.",
-   "Electrophysiology shows a decremental response on repetitive nerve stimulation and increased jitter, reflecting impaired transmission at structurally abnormal endplates.",
-   "Anticholinesterase medication is frequently ineffective or poorly tolerated; sympathomimetic agents such as ephedrine or salbutamol are more commonly beneficial.",
-   "Because weakness can be distal and slowly progressive with wasting, the diagnosis is easily mistaken for a hereditary neuropathy or distal myopathy without electrodiagnostic and genetic clues."
+  "id": "agrin_congenital_myasthenic_syndrome",
+  "name": "Agrin-related congenital myasthenic syndrome",
+  "aliases": [
+    "AGRN-CMS",
+    "Agrin deficiency CMS"
   ],
-  "pathophysiology": "Agrin-related congenital myasthenic syndrome results from biallelic pathogenic variants in AGRN, which encodes agrin, a heparan-sulphate proteoglycan secreted by the motor nerve terminal into the synaptic basal lamina. Neural agrin is the master initiator of postsynaptic differentiation: it binds LRP4 in the muscle membrane, and the agrin-LRP4 complex activates MuSK, which through DOK7 and rapsyn drives dense clustering of acetylcholine receptors opposite the nerve terminal and organises the postsynaptic apparatus. Pathogenic AGRN variants impair either the receptor-clustering activity of agrin or its role in maintaining the mature neuromuscular junction, leading to disorganised, fragmented endplates, altered nerve-terminal architecture with partial denervation, and reduced acetylcholine receptor aggregation. The resulting fall in endplate potential amplitude reduces the safety margin of transmission, producing fatigable and, in many patients, distal-predominant weakness with muscle atrophy that reflects the trophic and structural consequences of chronic junctional disruption. As the defect concerns endplate formation and upkeep rather than acetylcholine hydrolysis, therapies that enhance transmission and endplate stability are favoured over anticholinesterases.",
-  "additionalDifferentials": [
-   "Other postsynaptic congenital myasthenic syndromes involving the same pathway, namely LRP4, MuSK and DOK7 subtypes",
-   "Hereditary motor and sensory neuropathies (Charcot-Marie-Tooth disease) given the distal weakness and wasting",
-   "Distal myopathies and other inherited muscle disorders",
-   "Spinal muscular atrophy and other anterior horn cell diseases",
-   "Autoimmune myasthenia gravis",
-   "Distal presentations of congenital myopathy"
-  ],
-  "additionalInvestigations": [
-   "Repetitive nerve stimulation showing a decremental response",
-   "Single-fibre electromyography demonstrating increased jitter and blocking",
-   "AGRN sequencing within a congenital myasthenic syndrome gene panel with biallelic variant confirmation",
-   "Nerve conduction studies to help distinguish the disorder from a hereditary neuropathy",
-   "Acetylcholine receptor and MuSK antibody testing to exclude autoimmune disease",
-   "Muscle imaging or biopsy where a distal myopathy is being considered"
-  ],
-  "redFlags": [
-   "Emerging respiratory or bulbar weakness in a previously stable patient",
-   "Rapid progression of distal weakness and wasting suggesting an alternative or additional diagnosis",
-   "Deterioration after a trial of anticholinesterase medication",
-   "Recurrent falls or loss of ambulation indicating significant functional decline"
-  ],
-  "prognosis": "The course is often slowly progressive, and while some patients maintain useful mobility with sympathomimetic therapy, others develop increasing distal weakness and atrophy over time. Respiratory involvement, when present, warrants monitoring and may influence long-term outcome.",
-  "pitfalls": [
-   "Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable neuromuscular junction disorder.",
-   "Relying on anticholinesterases, which are commonly ineffective or poorly tolerated in this subtype.",
-   "Assuming all congenital myasthenic syndromes present neonatally and dismissing a later-onset agrin phenotype.",
-   "Overlooking subtle decrement on repetitive nerve stimulation when the clinical picture suggests a neuropathy."
-  ],
-  "references": [
-   "Standard neurology and neuromuscular textbooks",
-   "Peripheral nerve and neuromuscular junction disorder references",
-   "Congenital myasthenic syndrome clinical practice guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype",
-   "Avoid or use with caution anticholinesterase drugs, which are frequently ineffective or worsen symptoms in agrin-related disease",
-   "Provide physiotherapy and rehabilitation to maintain strength and function against progressive distal weakness and atrophy",
-   "Monitor respiratory function periodically and support ventilation if bulbar or respiratory involvement emerges",
-   "Manage troublesome ptosis and ophthalmoparesis with supportive measures such as ptosis props",
-   "Offer genetic counselling and AGRN testing to at-risk relatives given autosomal recessive inheritance",
-   "Coordinate care through a specialist neuromuscular service for congenital myasthenic syndromes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "agrin_congenital_myasthenic_syndrome-pathway",
-   "title": "Agrin-related congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate postsynaptic acetylcholine receptor clustering.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emerging respiratory or bulbar weakness in a previously stable patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repetitive nerve stimulation showing a decremental response, Single-fibre electromyography demonstrating increased jitter and blocking, AGRN sequencing within a congenital myasthenic syndrome gene panel with biallelic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable neuromuscular junction disorder."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of agrin-related congenital myasthenic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "agrin_congenital_myasthenic_syndrome-matrix",
-   "title": "Agrin-related congenital myasthenic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular junction",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate postsynaptic acetylcholine receptor clustering.",
+      "Biallelic AGRN variants cause a synaptic congenital myasthenic syndrome that also disrupts maintenance of the endplate architecture and nerve-terminal integrity.",
+      "Presentation ranges from early-onset weakness to a distinctive later-onset, distal and lower-limb predominant weakness with prominent muscle atrophy that can mimic a distal myopathy or neuropathy.",
+      "Ptosis and mild ophthalmoparesis may occur, but bulbar and respiratory involvement is often less prominent than in some other subtypes.",
+      "Electrophysiology shows a decremental response on repetitive nerve stimulation and increased jitter, reflecting impaired transmission at structurally abnormal endplates.",
+      "Anticholinesterase medication is frequently ineffective or poorly tolerated; sympathomimetic agents such as ephedrine or salbutamol are more commonly beneficial.",
+      "Because weakness can be distal and slowly progressive with wasting, the diagnosis is easily mistaken for a hereditary neuropathy or distal myopathy without electrodiagnostic and genetic clues."
     ],
-    [
-     "Key Investigations",
-     "Repetitive nerve stimulation showing a decremental response, Single-fibre electromyography demonstrating increased jitter and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Agrin-related congenital myasthenic syndrome results from biallelic pathogenic variants in AGRN, which encodes agrin, a heparan-sulphate proteoglycan secreted by the motor nerve terminal into the synaptic basal lamina. Neural agrin is the master initiator of postsynaptic differentiation: it binds LRP4 in the muscle membrane, and the agrin-LRP4 complex activates MuSK, which through DOK7 and rapsyn drives dense clustering of acetylcholine receptors opposite the nerve terminal and organises the postsynaptic apparatus. Pathogenic AGRN variants impair either the receptor-clustering activity of agrin or its role in maintaining the mature neuromuscular junction, leading to disorganised, fragmented endplates, altered nerve-terminal architecture with partial denervation, and reduced acetylcholine receptor aggregation. The resulting fall in endplate potential amplitude reduces the safety margin of transmission, producing fatigable and, in many patients, distal-predominant weakness with muscle atrophy that reflects the trophic and structural consequences of chronic junctional disruption. As the defect concerns endplate formation and upkeep rather than acetylcholine hydrolysis, therapies that enhance transmission and endplate stability are favoured over anticholinesterases.",
+    "additionalDifferentials": [
+      "Other postsynaptic congenital myasthenic syndromes involving the same pathway, namely LRP4, MuSK and DOK7 subtypes",
+      "Hereditary motor and sensory neuropathies (Charcot-Marie-Tooth disease) given the distal weakness and wasting",
+      "Distal myopathies and other inherited muscle disorders",
+      "Spinal muscular atrophy and other anterior horn cell diseases",
+      "Autoimmune myasthenia gravis",
+      "Distal presentations of congenital myopathy"
     ],
-    [
-     "Primary Differentials",
-     "Other postsynaptic congenital myasthenic syndromes involving the same pathway, namely LRP4, MuSK and DOK7 subtypes, Hereditary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repetitive nerve stimulation showing a decremental response",
+      "Single-fibre electromyography demonstrating increased jitter and blocking",
+      "AGRN sequencing within a congenital myasthenic syndrome gene panel with biallelic variant confirmation",
+      "Nerve conduction studies to help distinguish the disorder from a hereditary neuropathy",
+      "Acetylcholine receptor and MuSK antibody testing to exclude autoimmune disease",
+      "Muscle imaging or biopsy where a distal myopathy is being considered"
     ],
-    [
-     "Management Strategy",
-     "Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype",
-     "Core treatment modality"
+    "redFlags": [
+      "Emerging respiratory or bulbar weakness in a previously stable patient",
+      "Rapid progression of distal weakness and wasting suggesting an alternative or additional diagnosis",
+      "Deterioration after a trial of anticholinesterase medication",
+      "Recurrent falls or loss of ambulation indicating significant functional decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is often slowly progressive, and while some patients maintain useful mobility with sympathomimetic therapy, others develop increasing distal weakness and atrophy over time. Respiratory involvement, when present, warrants monitoring and may influence long-term outcome.",
+    "pitfalls": [
+      "Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable neuromuscular junction disorder.",
+      "Relying on anticholinesterases, which are commonly ineffective or poorly tolerated in this subtype.",
+      "Assuming all congenital myasthenic syndromes present neonatally and dismissing a later-onset agrin phenotype.",
+      "Overlooking subtle decrement on repetitive nerve stimulation when the clinical picture suggests a neuropathy."
+    ],
+    "references": [
+      "Standard neurology and neuromuscular textbooks",
+      "Peripheral nerve and neuromuscular junction disorder references",
+      "Congenital myasthenic syndrome clinical practice guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype",
+      "Avoid or use with caution anticholinesterase drugs, which are frequently ineffective or worsen symptoms in agrin-related disease",
+      "Provide physiotherapy and rehabilitation to maintain strength and function against progressive distal weakness and atrophy",
+      "Monitor respiratory function periodically and support ventilation if bulbar or respiratory involvement emerges",
+      "Manage troublesome ptosis and ophthalmoparesis with supportive measures such as ptosis props",
+      "Offer genetic counselling and AGRN testing to at-risk relatives given autosomal recessive inheritance",
+      "Coordinate care through a specialist neuromuscular service for congenital myasthenic syndromes"
     ]
-   ],
-   "caption": "Overview comparison matrix for agrin-related congenital myasthenic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "agrin-congenital-myasthenic-syndrome-real-image",
-   "title": "Agrin-related congenital myasthenic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "agrin_congenital_myasthenic_syndrome-pathway",
+      "title": "Agrin-related congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate postsynaptic acetylcholine receptor clustering.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emerging respiratory or bulbar weakness in a previously stable patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repetitive nerve stimulation showing a decremental response, Single-fibre electromyography demonstrating increased jitter and blocking, AGRN sequencing within a congenital myasthenic syndrome gene panel with biallelic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable neuromuscular junction disorder."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of agrin-related congenital myasthenic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-matrix",
+      "title": "Agrin-related congenital myasthenic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "AGRN encodes agrin, a large proteoglycan released by the motor nerve terminal that binds LRP4 and activates MuSK to initiate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repetitive nerve stimulation showing a decremental response, Single-fibre electromyography demonstrating increased jitter and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other postsynaptic congenital myasthenic syndromes involving the same pathway, namely LRP4, MuSK and DOK7 subtypes, Hereditary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with sympathomimetic agents such as salbutamol or ephedrine, which are the mainstay for this synaptic subtype",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the distal, atrophic phenotype as Charcot-Marie-Tooth disease or a distal myopathy and missing the treatable",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for agrin-related congenital myasthenic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Decremental response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-fibre electromyography",
+          "cells": [
+            {
+              "text": "Increased jitter and blocking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGRN sequencing within a congenital myasthenic syndrome panel",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Distinguishes from hereditary neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine receptor and MuSK antibody testing",
+          "cells": [
+            {
+              "text": "Excludes autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle imaging or biopsy where a distal myopathy is considered",
+          "cells": [
+            {
+              "text": "Distal myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other postsynaptic congenital myasthenic syndromes (LRP4, MuSK, DOK7)",
+          "cells": [
+            {
+              "text": "Same postsynaptic pathway"
+            },
+            {
+              "text": "Congenital myasthenic syndrome gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot-Marie-Tooth disease and other hereditary neuropathies",
+          "cells": [
+            {
+              "text": "Distal weakness and wasting"
+            },
+            {
+              "text": "Nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune myasthenia gravis",
+          "cells": [
+            {
+              "text": "Antibody-mediated disease"
+            },
+            {
+              "text": "Acetylcholine receptor and MuSK antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sympathomimetic agents such as salbutamol or ephedrine",
+          "cells": [
+            {
+              "text": "Mainstay for this synaptic subtype"
+            },
+            {
+              "text": "Salbutamol or ephedrine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance or cautious use of anticholinesterase drugs",
+          "cells": [
+            {
+              "text": "Frequently ineffective or worsen symptoms"
+            },
+            {
+              "text": "Use with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive distal weakness and atrophy"
+            },
+            {
+              "text": "Maintain strength and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic respiratory monitoring and ventilation if needed",
+          "cells": [
+            {
+              "text": "Bulbar or respiratory involvement"
+            },
+            {
+              "text": "Support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive measures for ptosis and ophthalmoparesis",
+          "cells": [
+            {
+              "text": "Ptosis and ophthalmoparesis"
+            },
+            {
+              "text": "Ptosis props"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and AGRN testing of relatives",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist neuromuscular service",
+          "cells": [
+            {
+              "text": "Congenital myasthenic syndromes"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Agrin-related congenital myasthenic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Later-onset distal, lower-limb weakness with atrophy and mild ptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory or bulbar weakness, or decline after anticholinesterase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment and neuromuscular team review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repetitive nerve stimulation, single-fibre EMG, nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Decrement or jitter on testing with antibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "AGRN sequencing for biallelic variants; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review LRP4, MuSK, DOK7 CMS, CMT, distal myopathy and autoimmune MG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sympathomimetic agents such as salbutamol or ephedrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid or use cautiously anticholinesterases, which may worsen symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy; periodic respiratory monitoring; ptosis props",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often slowly progressive; respiratory involvement needs monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,484 @@
 {
- "id": "anorchia",
- "name": "Anorchia",
- "aliases": [
-  "congenital anorchia",
-  "vanishing testis syndrome",
-  "testicular regression syndrome",
-  "bilateral anorchia"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
-   "It is thought to result from a vanishing testis, in which a testis that was present and functional early in fetal life later regresses, often from an intrauterine vascular or torsion event",
-   "Because early testicular function drove normal male differentiation, the external genitalia and Wolffian structures are typically male, distinguishing it from disorders of sex development",
-   "In bilateral anorchia the child presents with an empty scrotum and impalpable testes, and the key task is to distinguish absent testes from bilateral intra-abdominal cryptorchidism",
-   "Hormonal assessment is central: markedly raised gonadotropins with very low or absent inhibin B and anti-Mullerian hormone, and no rise in testosterone after hCG stimulation, support absent functional testicular tissue",
-   "The hCG stimulation test and measurement of inhibin B and anti-Mullerian hormone help confirm anorchia, but laparoscopy is often required to be certain no intra-abdominal testis or nubbin is present",
-   "Management includes androgen replacement to induce and maintain puberty in bilateral cases, consideration of a testicular prosthesis, and psychological support and counselling"
+  "id": "anorchia",
+  "name": "Anorchia",
+  "aliases": [
+    "congenital anorchia",
+    "vanishing testis syndrome",
+    "testicular regression syndrome",
+    "bilateral anorchia"
   ],
-  "pathophysiology": "In congenital anorchia the testis develops and functions early enough in fetal life to drive male differentiation of the genital tract and external genitalia, but subsequently undergoes regression, most likely from an intrauterine vascular accident or perinatal torsion, leaving little or no identifiable testicular tissue, sometimes only a fibrous nubbin with haemosiderin and calcification. The loss of functioning Sertoli and Leydig cells removes the sources of inhibin B, anti-Mullerian hormone, and testosterone, so gonadotropins rise while these markers fall, and there is no testosterone response to hCG stimulation. In bilateral disease this produces hypergonadotropic hypogonadism requiring lifelong androgen replacement.",
-  "additionalDifferentials": [
-   "Bilateral intra-abdominal cryptorchidism (undescended but present testes)",
-   "Disorders of sex development with dysgenetic gonads",
-   "Retractile testes",
-   "Testicular regression with a residual nubbin",
-   "Persistent Mullerian duct syndrome",
-   "Hypogonadotropic hypogonadism (low rather than high gonadotropins)"
-  ],
-  "additionalInvestigations": [
-   "Serum FSH and LH (typically markedly elevated in bilateral anorchia)",
-   "Inhibin B and anti-Mullerian hormone as markers of Sertoli cell tissue",
-   "hCG stimulation test to assess for any testosterone-producing tissue",
-   "Karyotype to confirm 46,XY and exclude a disorder of sex development",
-   "Scrotal and abdominal ultrasound or MRI to search for testicular tissue",
-   "Diagnostic laparoscopy to confirm absence of an intra-abdominal testis or locate a nubbin"
-  ],
-  "redFlags": [
-   "Bilateral impalpable testes requiring urgent distinction from intra-abdominal testes at risk of malignancy",
-   "Ambiguous genitalia or atypical phenotype suggesting a disorder of sex development",
-   "Failure to enter or progress through puberty without treatment",
-   "An intra-abdominal testicular remnant that may need removal because of malignant potential"
-  ],
-  "prognosis": "With appropriate androgen replacement, boys with bilateral anorchia can undergo normal virilisation and pubertal development and maintain secondary sexual characteristics and bone health, though natural fertility is not possible; unilateral anorchia with a normal solitary testis usually allows normal development and fertility.",
-  "pitfalls": [
-   "Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism",
-   "Relying on imaging alone when laparoscopy is often needed to confirm absent testes",
-   "Overlooking the malignant potential of an intra-abdominal remnant or undescended testis",
-   "Delaying androgen replacement and prosthesis discussion, with psychological consequences",
-   "Mislabelling a disorder of sex development as simple anorchia without a karyotype"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Campbell-Walsh-Wein Urology, Pediatric Urology section"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and secondary sexual characteristics",
-   "Safeguard bone health through adequate androgenisation, calcium and vitamin D, and monitoring of bone density",
-   "Confirm the diagnosis and exclude an intra-abdominal testis by laparoscopy, removing any dysgenetic nubbin to eliminate malignancy risk",
-   "Offer a testicular prosthesis for cosmetic and psychological benefit",
-   "Provide psychological support and fertility counselling, since natural fertility is not possible, and discuss donor options",
-   "Monitor growth and pubertal progression through adolescence under endocrine follow-up",
-   "In unilateral anorchia, protect and monitor the function of the solitary testis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anorchia-pathway",
-   "title": "Anorchia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral impalpable testes requiring urgent distinction from intra-abdominal testes at risk of malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum FSH and LH (typically markedly elevated in bilateral anorchia), Inhibin B and anti-Mullerian hormone as markers of Sertoli cell tissue, hCG stimulation test to assess for any testosterone-producing tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and secondary sexual characteristics"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anorchia."
-  }
- ],
- "tables": [
-  {
-   "id": "anorchia-matrix",
-   "title": "Anorchia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
+      "It is thought to result from a vanishing testis, in which a testis that was present and functional early in fetal life later regresses, often from an intrauterine vascular or torsion event",
+      "Because early testicular function drove normal male differentiation, the external genitalia and Wolffian structures are typically male, distinguishing it from disorders of sex development",
+      "In bilateral anorchia the child presents with an empty scrotum and impalpable testes, and the key task is to distinguish absent testes from bilateral intra-abdominal cryptorchidism",
+      "Hormonal assessment is central: markedly raised gonadotropins with very low or absent inhibin B and anti-Mullerian hormone, and no rise in testosterone after hCG stimulation, support absent functional testicular tissue",
+      "The hCG stimulation test and measurement of inhibin B and anti-Mullerian hormone help confirm anorchia, but laparoscopy is often required to be certain no intra-abdominal testis or nubbin is present",
+      "Management includes androgen replacement to induce and maintain puberty in bilateral cases, consideration of a testicular prosthesis, and psychological support and counselling"
     ],
-    [
-     "Key Investigations",
-     "Serum FSH and LH (typically markedly elevated in bilateral anorchia), Inhibin B and anti-Mullerian hormone as markers of Sertoli",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In congenital anorchia the testis develops and functions early enough in fetal life to drive male differentiation of the genital tract and external genitalia, but subsequently undergoes regression, most likely from an intrauterine vascular accident or perinatal torsion, leaving little or no identifiable testicular tissue, sometimes only a fibrous nubbin with haemosiderin and calcification. The loss of functioning Sertoli and Leydig cells removes the sources of inhibin B, anti-Mullerian hormone, and testosterone, so gonadotropins rise while these markers fall, and there is no testosterone response to hCG stimulation. In bilateral disease this produces hypergonadotropic hypogonadism requiring lifelong androgen replacement.",
+    "additionalDifferentials": [
+      "Bilateral intra-abdominal cryptorchidism (undescended but present testes)",
+      "Disorders of sex development with dysgenetic gonads",
+      "Retractile testes",
+      "Testicular regression with a residual nubbin",
+      "Persistent Mullerian duct syndrome",
+      "Hypogonadotropic hypogonadism (low rather than high gonadotropins)"
     ],
-    [
-     "Primary Differentials",
-     "Bilateral intra-abdominal cryptorchidism (undescended but present testes), Disorders of sex development with dysgenetic gonads,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum FSH and LH (typically markedly elevated in bilateral anorchia)",
+      "Inhibin B and anti-Mullerian hormone as markers of Sertoli cell tissue",
+      "hCG stimulation test to assess for any testosterone-producing tissue",
+      "Karyotype to confirm 46,XY and exclude a disorder of sex development",
+      "Scrotal and abdominal ultrasound or MRI to search for testicular tissue",
+      "Diagnostic laparoscopy to confirm absence of an intra-abdominal testis or locate a nubbin"
     ],
-    [
-     "Management Strategy",
-     "Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral impalpable testes requiring urgent distinction from intra-abdominal testes at risk of malignancy",
+      "Ambiguous genitalia or atypical phenotype suggesting a disorder of sex development",
+      "Failure to enter or progress through puberty without treatment",
+      "An intra-abdominal testicular remnant that may need removal because of malignant potential"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate androgen replacement, boys with bilateral anorchia can undergo normal virilisation and pubertal development and maintain secondary sexual characteristics and bone health, though natural fertility is not possible; unilateral anorchia with a normal solitary testis usually allows normal development and fertility.",
+    "pitfalls": [
+      "Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism",
+      "Relying on imaging alone when laparoscopy is often needed to confirm absent testes",
+      "Overlooking the malignant potential of an intra-abdominal remnant or undescended testis",
+      "Delaying androgen replacement and prosthesis discussion, with psychological consequences",
+      "Mislabelling a disorder of sex development as simple anorchia without a karyotype"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Campbell-Walsh-Wein Urology, Pediatric Urology section"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and secondary sexual characteristics",
+      "Safeguard bone health through adequate androgenisation, calcium and vitamin D, and monitoring of bone density",
+      "Confirm the diagnosis and exclude an intra-abdominal testis by laparoscopy, removing any dysgenetic nubbin to eliminate malignancy risk",
+      "Offer a testicular prosthesis for cosmetic and psychological benefit",
+      "Provide psychological support and fertility counselling, since natural fertility is not possible, and discuss donor options",
+      "Monitor growth and pubertal progression through adolescence under endocrine follow-up",
+      "In unilateral anorchia, protect and monitor the function of the solitary testis"
     ]
-   ],
-   "caption": "Overview comparison matrix for anorchia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anorchia-real-image",
-   "title": "Anorchia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anorchia-pathway",
+      "title": "Anorchia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral impalpable testes requiring urgent distinction from intra-abdominal testes at risk of malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum FSH and LH (typically markedly elevated in bilateral anorchia), Inhibin B and anti-Mullerian hormone as markers of Sertoli cell tissue, hCG stimulation test to assess for any testosterone-producing tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and secondary sexual characteristics"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anorchia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anorchia-matrix",
+      "title": "Anorchia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Anorchia is the absence of testicular tissue in a phenotypically male, 46,XY individual, and may be unilateral or bilateral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum FSH and LH (typically markedly elevated in bilateral anorchia), Inhibin B and anti-Mullerian hormone as markers of Sertoli",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bilateral intra-abdominal cryptorchidism (undescended but present testes), Disorders of sex development with dysgenetic gonads,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide androgen (testosterone) replacement in bilateral anorchia to induce and maintain virilisation, pubertal development, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming impalpable testes are absent without excluding intra-abdominal cryptorchidism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anorchia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anorchia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum FSH and LH",
+          "cells": [
+            {
+              "text": "Typically markedly elevated in bilateral anorchia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibin B and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Markers of Sertoli cell tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG stimulation test",
+          "cells": [
+            {
+              "text": "Assesses for testosterone-producing tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Confirms 46,XY and excludes a disorder of sex development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal and abdominal ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Searches for testicular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Confirms absence of an intra-abdominal testis or locates a nubbin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorchia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral intra-abdominal cryptorchidism",
+          "cells": [
+            {
+              "text": "Testes may be present; exclude before assuming absence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular regression with a residual nubbin",
+          "cells": [
+            {
+              "text": "A residual nubbin is located at laparoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorchia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Induce and maintain virilisation and puberty"
+            },
+            {
+              "text": "Bilateral anorchia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Adequate androgenisation, calcium and vitamin D, bone density monitoring"
+            },
+            {
+              "text": "Bone protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy and nubbin removal",
+          "cells": [
+            {
+              "text": "Exclude an intra-abdominal testis; remove any dysgenetic nubbin"
+            },
+            {
+              "text": "Eliminates malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular prosthesis",
+          "cells": [
+            {
+              "text": "Offered for cosmetic and psychological benefit"
+            },
+            {
+              "text": "Optional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support and fertility counselling",
+          "cells": [
+            {
+              "text": "Natural fertility is not possible"
+            },
+            {
+              "text": "Discuss donor options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and puberty monitoring",
+          "cells": [
+            {
+              "text": "Endocrine follow-up through adolescence"
+            },
+            {
+              "text": "Adolescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unilateral anorchia",
+          "cells": [
+            {
+              "text": "Protect and monitor the solitary testis"
+            },
+            {
+              "text": "Unilateral case only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anorchia-dx-mgmt",
+      "title": "Diagnosis and management of Anorchia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Impalpable testes with markedly elevated FSH and LH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Ambiguous genitalia or a testis at malignancy risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent distinction from intra-abdominal testes at risk of malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FSH, LH, inhibin B, AMH, hCG test, karyotype, imaging, laparoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Laparoscopy confirms absent testes, or a nubbin only?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Testosterone replacement to induce and maintain virilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove any dysgenetic nubbin to eliminate malignancy risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calcium, vitamin D and bone density monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer prosthesis; psychological support and fertility counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Natural fertility is not possible; endocrine follow-up through adolescence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

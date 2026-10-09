@@ -1,179 +1,495 @@
 {
- "id": "potts_spine",
- "name": "Pott's spine",
- "aliases": [
-  "Pott's disease",
-  "spinal tuberculosis",
-  "tuberculous spondylitis",
-  "TB spine"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically affecting the lower thoracic and thoracolumbar vertebrae",
-   "It usually begins in the anterior vertebral body adjacent to the disc, spreading beneath the anterior longitudinal ligament to involve adjacent vertebrae with relative disc preservation early on",
-   "Progressive vertebral destruction and anterior collapse produce a sharp angular kyphosis known as a gibbus deformity",
-   "Presentation is insidious with chronic back pain, local tenderness and, in advanced disease, cold paravertebral or psoas abscesses that can track distally",
-   "Neurological deficit (Pott's paraplegia) results from cord compression by abscess, granulation tissue, sequestered bone or deformity and is the most feared complication",
-   "MRI is the investigation of choice to define the extent, abscesses and cord compression, and tissue sampling confirms the diagnosis and drug susceptibility",
-   "Most cases respond to prolonged multidrug anti-tuberculosis therapy, with surgery reserved for significant cord compression, instability, severe deformity or failure of medical treatment"
+  "id": "potts_spine",
+  "name": "Pott's spine",
+  "aliases": [
+    "Pott's disease",
+    "spinal tuberculosis",
+    "tuberculous spondylitis",
+    "TB spine"
   ],
-  "pathophysiology": "Mycobacterium tuberculosis reaches the vertebral bodies by haematogenous spread, often via the paravertebral venous plexus, lodging in the well-vascularised anterior vertebral body near the endplate. Granulomatous infection with caseous necrosis destroys bone and later the intervertebral disc, and spreads beneath the anterior longitudinal ligament to contiguous vertebrae. Vertebral collapse causes angular kyphosis, while caseous material and pus form cold abscesses that dissect along tissue planes. Neurological compromise arises from mechanical compression of the cord by abscess, inflammatory tissue, bony sequestra or deformity, and occasionally from vascular compromise of the cord.",
-  "additionalDifferentials": [
-   "Pyogenic vertebral osteomyelitis and discitis",
-   "Brucellar spondylitis",
-   "Metastatic or primary vertebral malignancy",
-   "Fungal spondylitis",
-   "Osteoporotic vertebral collapse"
-  ],
-  "infectionMimics": [
-   "Pyogenic (bacterial) spondylodiscitis",
-   "Brucellar spondylitis",
-   "Fungal spinal infection",
-   "Actinomycosis of the spine"
-  ],
-  "additionalInvestigations": [
-   "MRI of the spine to assess bone destruction, abscesses and cord compression",
-   "Image-guided biopsy or aspiration for histopathology, molecular testing and culture",
-   "Cartridge-based nucleic acid amplification for rapid diagnosis and rifampicin resistance",
-   "Plain radiography and CT for bony detail and deformity assessment",
-   "HIV testing and screening for concurrent pulmonary tuberculosis"
-  ],
-  "redFlags": [
-   "New or progressive neurological deficit indicating spinal cord compression and requiring urgent evaluation for decompression",
-   "Bladder or bowel dysfunction suggesting significant cord or cauda involvement",
-   "Spinal instability or severe progressive kyphotic deformity",
-   "Large cold abscess with systemic sepsis or rifampicin resistance"
-  ],
-  "prognosis": "With early diagnosis and prolonged multidrug therapy most patients recover well, and even established neurological deficits often improve substantially with treatment and timely surgery; delayed presentation with severe deformity or long-standing cord compression carries a higher risk of permanent disability.",
-  "pitfalls": [
-   "Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress",
-   "Missing evolving cord compression by not reassessing neurology during treatment",
-   "Forgoing tissue diagnosis and drug-susceptibility testing before starting therapy",
-   "Confusing it with pyogenic or malignant vertebral disease without confirmatory sampling"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol followed by an extended continuation phase",
-   "Tailor the regimen to drug-susceptibility results, using second-line agents for rifampicin-resistant or multidrug-resistant disease",
-   "Spinal immobilisation with bracing and adequate analgesia during healing",
-   "Surgical decompression, debridement and instrumented stabilisation for neurological deficit (Pott's paraplegia), spinal instability, progressive kyphosis or a large abscess",
-   "Drainage of cold paravertebral or psoas abscesses where indicated",
-   "Monitor neurological status, treatment adherence and response, and screen for drug-induced hepatotoxicity",
-   "Test for and manage HIV co-infection, screen for concurrent pulmonary tuberculosis, and provide nutritional support",
-   "Multidisciplinary care involving spinal surgery, infectious diseases and the tuberculosis service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "potts_spine-pathway",
-   "title": "Pott's spine: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically affecting the lower thoracic and thoracolumbar vertebrae",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive neurological deficit indicating spinal cord compression and requiring urgent evaluation for decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the spine to assess bone destruction, abscesses and cord compression, Image-guided biopsy or aspiration for histopathology, molecular testing and culture, Cartridge-based nucleic acid amplification for rapid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol followed by an extended continuation phase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pott's spine."
-  }
- ],
- "tables": [
-  {
-   "id": "potts_spine-matrix",
-   "title": "Pott's spine: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically affecting the lower thoracic and thoracolumbar vertebrae",
+      "It usually begins in the anterior vertebral body adjacent to the disc, spreading beneath the anterior longitudinal ligament to involve adjacent vertebrae with relative disc preservation early on",
+      "Progressive vertebral destruction and anterior collapse produce a sharp angular kyphosis known as a gibbus deformity",
+      "Presentation is insidious with chronic back pain, local tenderness and, in advanced disease, cold paravertebral or psoas abscesses that can track distally",
+      "Neurological deficit (Pott's paraplegia) results from cord compression by abscess, granulation tissue, sequestered bone or deformity and is the most feared complication",
+      "MRI is the investigation of choice to define the extent, abscesses and cord compression, and tissue sampling confirms the diagnosis and drug susceptibility",
+      "Most cases respond to prolonged multidrug anti-tuberculosis therapy, with surgery reserved for significant cord compression, instability, severe deformity or failure of medical treatment"
     ],
-    [
-     "Key Investigations",
-     "MRI of the spine to assess bone destruction, abscesses and cord compression, Image-guided biopsy or aspiration for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycobacterium tuberculosis reaches the vertebral bodies by haematogenous spread, often via the paravertebral venous plexus, lodging in the well-vascularised anterior vertebral body near the endplate. Granulomatous infection with caseous necrosis destroys bone and later the intervertebral disc, and spreads beneath the anterior longitudinal ligament to contiguous vertebrae. Vertebral collapse causes angular kyphosis, while caseous material and pus form cold abscesses that dissect along tissue planes. Neurological compromise arises from mechanical compression of the cord by abscess, inflammatory tissue, bony sequestra or deformity, and occasionally from vascular compromise of the cord.",
+    "additionalDifferentials": [
+      "Pyogenic vertebral osteomyelitis and discitis",
+      "Brucellar spondylitis",
+      "Metastatic or primary vertebral malignancy",
+      "Fungal spondylitis",
+      "Osteoporotic vertebral collapse"
     ],
-    [
-     "Primary Differentials",
-     "Pyogenic vertebral osteomyelitis and discitis, Brucellar spondylitis, Metastatic or primary vertebral malignancy",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Pyogenic (bacterial) spondylodiscitis",
+      "Brucellar spondylitis",
+      "Fungal spinal infection",
+      "Actinomycosis of the spine"
     ],
-    [
-     "Management Strategy",
-     "Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "MRI of the spine to assess bone destruction, abscesses and cord compression",
+      "Image-guided biopsy or aspiration for histopathology, molecular testing and culture",
+      "Cartridge-based nucleic acid amplification for rapid diagnosis and rifampicin resistance",
+      "Plain radiography and CT for bony detail and deformity assessment",
+      "HIV testing and screening for concurrent pulmonary tuberculosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "New or progressive neurological deficit indicating spinal cord compression and requiring urgent evaluation for decompression",
+      "Bladder or bowel dysfunction suggesting significant cord or cauda involvement",
+      "Spinal instability or severe progressive kyphotic deformity",
+      "Large cold abscess with systemic sepsis or rifampicin resistance"
+    ],
+    "prognosis": "With early diagnosis and prolonged multidrug therapy most patients recover well, and even established neurological deficits often improve substantially with treatment and timely surgery; delayed presentation with severe deformity or long-standing cord compression carries a higher risk of permanent disability.",
+    "pitfalls": [
+      "Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress",
+      "Missing evolving cord compression by not reassessing neurology during treatment",
+      "Forgoing tissue diagnosis and drug-susceptibility testing before starting therapy",
+      "Confusing it with pyogenic or malignant vertebral disease without confirmatory sampling"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol followed by an extended continuation phase",
+      "Tailor the regimen to drug-susceptibility results, using second-line agents for rifampicin-resistant or multidrug-resistant disease",
+      "Spinal immobilisation with bracing and adequate analgesia during healing",
+      "Surgical decompression, debridement and instrumented stabilisation for neurological deficit (Pott's paraplegia), spinal instability, progressive kyphosis or a large abscess",
+      "Drainage of cold paravertebral or psoas abscesses where indicated",
+      "Monitor neurological status, treatment adherence and response, and screen for drug-induced hepatotoxicity",
+      "Test for and manage HIV co-infection, screen for concurrent pulmonary tuberculosis, and provide nutritional support",
+      "Multidisciplinary care involving spinal surgery, infectious diseases and the tuberculosis service"
     ]
-   ],
-   "caption": "Overview comparison matrix for pott's spine."
-  }
- ],
- "diagrams": [
-  {
-   "id": "potts-spine-real-image",
-   "title": "Pott's spine: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "potts_spine-pathway",
+      "title": "Pott's spine: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically affecting the lower thoracic and thoracolumbar vertebrae",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive neurological deficit indicating spinal cord compression and requiring urgent evaluation for decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the spine to assess bone destruction, abscesses and cord compression, Image-guided biopsy or aspiration for histopathology, molecular testing and culture, Cartridge-based nucleic acid amplification for rapid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol followed by an extended continuation phase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pott's spine."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "potts_spine-matrix",
+      "title": "Pott's spine: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Tuberculosis of the spine is the commonest form of skeletal tuberculosis and a major cause of spinal disease in India, typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the spine to assess bone destruction, abscesses and cord compression, Image-guided biopsy or aspiration for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pyogenic vertebral osteomyelitis and discitis, Brucellar spondylitis, Metastatic or primary vertebral malignancy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prolonged multidrug antituberculous chemotherapy with an intensive phase of rifampicin, isoniazid, pyrazinamide and ethambutol",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic back pain to mechanical causes and delaying imaging, allowing deformity and deficit to progress",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pott's spine."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "potts_spine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine",
+          "cells": [
+            {
+              "text": "Bone destruction, abscess and cord compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided biopsy or aspiration",
+          "cells": [
+            {
+              "text": "Histopathology, molecular testing and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cartridge-based nucleic acid amplification",
+          "cells": [
+            {
+              "text": "Rapid diagnosis and rifampicin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiography and CT",
+          "cells": [
+            {
+              "text": "Bony detail and deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and pulmonary tuberculosis screen",
+          "cells": [
+            {
+              "text": "Concurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "potts_spine-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic vertebral osteomyelitis and discitis",
+          "cells": [
+            {
+              "text": "Bacterial spondylodiscitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brucellar spondylitis",
+          "cells": [
+            {
+              "text": "Brucella infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral malignancy",
+          "cells": [
+            {
+              "text": "Metastatic or primary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal spondylitis",
+          "cells": [
+            {
+              "text": "Fungal spinal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporotic vertebral collapse",
+          "cells": [
+            {
+              "text": "No infective features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "potts_spine-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidrug antituberculous chemotherapy",
+          "cells": [
+            {
+              "text": "Prolonged, with an intensive rifampicin-containing phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility-guided regimen",
+          "cells": [
+            {
+              "text": "Second-line agents if rifampicin resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation and analgesia",
+          "cells": [
+            {
+              "text": "Bracing during healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Debridement and stabilisation for neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Cold paravertebral or psoas abscess where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Neurological status, adherence and drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and pulmonary TB screen",
+          "cells": [
+            {
+              "text": "Co-infection tested and managed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "potts_spine-dx-mgmt",
+      "title": "Diagnosis and management of Pott's spine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain with night sweats, weight loss or low-grade fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive neurological deficit, bladder or bowel dysfunction, instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal surgery review for progressive cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI spine; image-guided biopsy; nucleic acid amplification; radiography and CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy or nucleic acid testing confirm tuberculosis of the spine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pyogenic spondylodiscitis, brucellosis, fungal infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged multidrug antituberculous chemotherapy with an intensive phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tailor the regimen to drug-susceptibility results",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal immobilisation with bracing and adequate analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression and stabilisation for neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Drain cold abscesses where indicated and screen for HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With early diagnosis and prolonged therapy most patients recover well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

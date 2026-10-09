@@ -1,176 +1,493 @@
 {
- "id": "oligoarticular_juvenile_idiopathic_arthritis",
- "name": "Oligoarticular juvenile idiopathic arthritis",
- "aliases": [
-  "oligoarticular JIA",
-  "oligo JIA",
-  "pauciarticular JIA",
-  "persistent and extended oligoarthritis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Paediatrics",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into persistent (never more than four joints) and extended (spreading to five or more thereafter) forms",
-   "Typically affects young girls, often with a positive antinuclear antibody, and commonly involves large joints such as the knee and ankle asymmetrically",
-   "The chief long-term threat is chronic anterior uveitis, which is frequently insidious and asymptomatic (white eye) yet sight-threatening",
-   "Regular slit-lamp surveillance is essential, with the highest uveitis risk in young, antinuclear-antibody-positive girls with early disease onset",
-   "A swollen, warm but often surprisingly non-tender knee with a limp and morning stiffness is a common presentation",
-   "Limb-length discrepancy and localised overgrowth can occur because chronic inflammation accelerates growth at the affected joint",
-   "First-line treatment is NSAIDs and intra-articular corticosteroids, with methotrexate reserved for persistent or extended disease and uveitis"
+  "id": "oligoarticular_juvenile_idiopathic_arthritis",
+  "name": "Oligoarticular juvenile idiopathic arthritis",
+  "aliases": [
+    "oligoarticular JIA",
+    "oligo JIA",
+    "pauciarticular JIA",
+    "persistent and extended oligoarthritis"
   ],
-  "pathophysiology": "Oligoarticular juvenile idiopathic arthritis is a chronic, immune-mediated synovitis in which T-cell-driven inflammation of the synovial membrane produces effusion, pannus formation and, if untreated, cartilage and bone damage. The strong association with antinuclear antibody positivity and chronic anterior uveitis suggests shared autoreactivity between synovial and uveal tissue. Chronic hyperaemia around an inflamed joint can stimulate the adjacent growth plate, producing localised overgrowth and limb-length inequality, while unchecked synovitis eventually causes erosive joint damage in the extended subtype.",
-  "additionalDifferentials": [
-   "Septic arthritis and osteomyelitis",
-   "Reactive or post-viral arthritis",
-   "Lyme arthritis in endemic areas",
-   "Haemarthrosis or trauma",
-   "Malignancy (leukaemia, neuroblastoma) causing joint or bone pain",
-   "Other JIA subtypes including enthesitis-related arthritis"
-  ],
-  "additionalInvestigations": [
-   "Antinuclear antibody to stratify uveitis risk",
-   "Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which may be normal or only mildly raised",
-   "Joint ultrasound or MRI to confirm synovitis and assess disease extent",
-   "Slit-lamp ophthalmological examination at diagnosis and on a scheduled surveillance basis",
-   "Joint aspiration and synovial fluid analysis when infection is a concern",
-   "Full blood count and film to help exclude malignancy",
-   "Rheumatoid factor and HLA-B27 to help distinguish other subtypes"
-  ],
-  "redFlags": [
-   "Painless progressive visual loss or band keratopathy indicating chronic uveitis complications",
-   "Fever, severe pain or systemic upset suggesting infection or malignancy",
-   "Nocturnal bone pain and cytopenias raising concern for leukaemia",
-   "Rapid spread to many joints suggesting extended or polyarticular evolution"
-  ],
-  "prognosis": "The persistent form often has a favourable articular outcome, whereas the extended form carries a higher risk of erosive joint damage and disability. Uveitis, if undetected, can cause cataract, glaucoma and permanent visual loss, making ophthalmic surveillance the key determinant of long-term outcome.",
-  "pitfalls": [
-   "Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic",
-   "Assuming normal inflammatory markers exclude active arthritis",
-   "Missing limb-length discrepancy and consequent gait or postural problems",
-   "Failing to reassess for extension of joint involvement over time",
-   "Overlooking infection or malignancy in an atypical monoarthritis"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology",
-   "ILAR classification of juvenile idiopathic arthritis",
-   "PRINTO/PReS uveitis screening guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory drugs for symptom relief",
-   "Escalate to methotrexate for persistent or extended disease, and to biologic agents such as tumour necrosis factor inhibitors for refractory arthritis or uveitis",
-   "Scheduled slit-lamp surveillance for chronic anterior uveitis stratified by antinuclear-antibody status and age, treated with topical corticosteroids and, if needed, methotrexate or a tumour necrosis factor inhibitor",
-   "Physiotherapy and occupational therapy to preserve joint function, muscle strength and range of movement",
-   "Monitor and manage limb-length discrepancy and localised overgrowth with orthotics and orthopaedic input",
-   "Multidisciplinary paediatric rheumatology and ophthalmology care with disease-modifying drug safety monitoring"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oligoarticular_juvenile_idiopathic_arthritis-pathway",
-   "title": "Oligoarticular juvenile idiopathic arthritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into persistent (never more than four joints) and extended (spreading to five or more thereafter) forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Painless progressive visual loss or band keratopathy indicating chronic uveitis complications",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antinuclear antibody to stratify uveitis risk, Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which may be normal or only mildly raised, Joint ultrasound or MRI to confirm synovitis and assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory drugs for symptom relief"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oligoarticular juvenile idiopathic arthritis."
-  }
- ],
- "tables": [
-  {
-   "id": "oligoarticular_juvenile_idiopathic_arthritis-matrix",
-   "title": "Oligoarticular juvenile idiopathic arthritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Paediatrics",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into persistent (never more than four joints) and extended (spreading to five or more thereafter) forms",
+      "Typically affects young girls, often with a positive antinuclear antibody, and commonly involves large joints such as the knee and ankle asymmetrically",
+      "The chief long-term threat is chronic anterior uveitis, which is frequently insidious and asymptomatic (white eye) yet sight-threatening",
+      "Regular slit-lamp surveillance is essential, with the highest uveitis risk in young, antinuclear-antibody-positive girls with early disease onset",
+      "A swollen, warm but often surprisingly non-tender knee with a limp and morning stiffness is a common presentation",
+      "Limb-length discrepancy and localised overgrowth can occur because chronic inflammation accelerates growth at the affected joint",
+      "First-line treatment is NSAIDs and intra-articular corticosteroids, with methotrexate reserved for persistent or extended disease and uveitis"
     ],
-    [
-     "Key Investigations",
-     "Antinuclear antibody to stratify uveitis risk, Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oligoarticular juvenile idiopathic arthritis is a chronic, immune-mediated synovitis in which T-cell-driven inflammation of the synovial membrane produces effusion, pannus formation and, if untreated, cartilage and bone damage. The strong association with antinuclear antibody positivity and chronic anterior uveitis suggests shared autoreactivity between synovial and uveal tissue. Chronic hyperaemia around an inflamed joint can stimulate the adjacent growth plate, producing localised overgrowth and limb-length inequality, while unchecked synovitis eventually causes erosive joint damage in the extended subtype.",
+    "additionalDifferentials": [
+      "Septic arthritis and osteomyelitis",
+      "Reactive or post-viral arthritis",
+      "Lyme arthritis in endemic areas",
+      "Haemarthrosis or trauma",
+      "Malignancy (leukaemia, neuroblastoma) causing joint or bone pain",
+      "Other JIA subtypes including enthesitis-related arthritis"
     ],
-    [
-     "Primary Differentials",
-     "Septic arthritis and osteomyelitis, Reactive or post-viral arthritis, Lyme arthritis in endemic areas",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antinuclear antibody to stratify uveitis risk",
+      "Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which may be normal or only mildly raised",
+      "Joint ultrasound or MRI to confirm synovitis and assess disease extent",
+      "Slit-lamp ophthalmological examination at diagnosis and on a scheduled surveillance basis",
+      "Joint aspiration and synovial fluid analysis when infection is a concern",
+      "Full blood count and film to help exclude malignancy",
+      "Rheumatoid factor and HLA-B27 to help distinguish other subtypes"
     ],
-    [
-     "Management Strategy",
-     "Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory",
-     "Core treatment modality"
+    "redFlags": [
+      "Painless progressive visual loss or band keratopathy indicating chronic uveitis complications",
+      "Fever, severe pain or systemic upset suggesting infection or malignancy",
+      "Nocturnal bone pain and cytopenias raising concern for leukaemia",
+      "Rapid spread to many joints suggesting extended or polyarticular evolution"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic",
-     "Prevent diagnostic or management error"
+    "prognosis": "The persistent form often has a favourable articular outcome, whereas the extended form carries a higher risk of erosive joint damage and disability. Uveitis, if undetected, can cause cataract, glaucoma and permanent visual loss, making ophthalmic surveillance the key determinant of long-term outcome.",
+    "pitfalls": [
+      "Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic",
+      "Assuming normal inflammatory markers exclude active arthritis",
+      "Missing limb-length discrepancy and consequent gait or postural problems",
+      "Failing to reassess for extension of joint involvement over time",
+      "Overlooking infection or malignancy in an atypical monoarthritis"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology",
+      "ILAR classification of juvenile idiopathic arthritis",
+      "PRINTO/PReS uveitis screening guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory drugs for symptom relief",
+      "Escalate to methotrexate for persistent or extended disease, and to biologic agents such as tumour necrosis factor inhibitors for refractory arthritis or uveitis",
+      "Scheduled slit-lamp surveillance for chronic anterior uveitis stratified by antinuclear-antibody status and age, treated with topical corticosteroids and, if needed, methotrexate or a tumour necrosis factor inhibitor",
+      "Physiotherapy and occupational therapy to preserve joint function, muscle strength and range of movement",
+      "Monitor and manage limb-length discrepancy and localised overgrowth with orthotics and orthopaedic input",
+      "Multidisciplinary paediatric rheumatology and ophthalmology care with disease-modifying drug safety monitoring"
     ]
-   ],
-   "caption": "Overview comparison matrix for oligoarticular juvenile idiopathic arthritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oligoarticular-juvenile-idiopathic-arthritis-real-image",
-   "title": "Oligoarticular juvenile idiopathic arthritis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-pathway",
+      "title": "Oligoarticular juvenile idiopathic arthritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into persistent (never more than four joints) and extended (spreading to five or more thereafter) forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Painless progressive visual loss or band keratopathy indicating chronic uveitis complications",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antinuclear antibody to stratify uveitis risk, Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which may be normal or only mildly raised, Joint ultrasound or MRI to confirm synovitis and assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory drugs for symptom relief"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oligoarticular juvenile idiopathic arthritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-matrix",
+      "title": "Oligoarticular juvenile idiopathic arthritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined under the ILAR framework as arthritis affecting four or fewer joints in the first six months, subclassified into",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antinuclear antibody to stratify uveitis risk, Inflammatory markers (erythrocyte sedimentation rate, C-reactive protein), which",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Septic arthritis and osteomyelitis, Reactive or post-viral arthritis, Lyme arthritis in endemic areas",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intra-articular corticosteroid injection is the mainstay for active oligoarthritis, combined with non-steroidal anti-inflammatory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the child to report eye symptoms, when sight-threatening uveitis is frequently asymptomatic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oligoarticular juvenile idiopathic arthritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antinuclear antibody",
+          "cells": [
+            {
+              "text": "Stratifies uveitis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "May be normal or only mildly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Synovitis and disease extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Chronic anterior uveitis, often asymptomatic; at diagnosis and on schedule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration",
+          "cells": [
+            {
+              "text": "Infection, when concern exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Helps exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid factor and HLA-B27",
+          "cells": [
+            {
+              "text": "Helps distinguish other subtypes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis and osteomyelitis",
+          "cells": [
+            {
+              "text": "Fever, severe pain or systemic upset; joint aspiration when concern exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or other malignancy",
+          "cells": [
+            {
+              "text": "Nocturnal bone pain and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intra-articular corticosteroid with NSAIDs",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mainstay for active oligoarthritis; NSAIDs for symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate, then biologics",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate for persistent or extended disease; TNF inhibitors for refractory arthritis or uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scheduled slit-lamp surveillance",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Stratified by ANA status and age; topical corticosteroids, methotrexate or TNF inhibitor if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Preserve joint function, muscle strength and range of movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb-length discrepancy and overgrowth",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Orthotics and orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Paediatric rheumatology and ophthalmology, with disease-modifying drug safety monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Oligoarticular juvenile idiopathic arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Warm, swollen large joint in a young child; oligoarticular JIA suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (painless visual loss, fever, night bone pain or cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent infection or malignancy work-up before a JIA diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA, ESR and CRP, joint ultrasound or MRI, slit-lamp examination, FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection and malignancy excluded, with arthritis in four or fewer joints?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic arthritis, reactive or Lyme arthritis, or another JIA subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intra-articular corticosteroid injection with NSAIDs for symptom relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate for persistent or extended disease; TNF inhibitors if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scheduled slit-lamp surveillance for chronic anterior uveitis, stratified by ANA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve joint function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthotics and orthopaedic input for limb-length discrepancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Persistent form often fares well; uveitis is the sight-threatening risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

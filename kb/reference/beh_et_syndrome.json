@@ -1,183 +1,557 @@
 {
- "id": "beh_et_syndrome",
- "name": "Behçet Syndrome",
- "system": "Rheumatologic / Multisystem vasculitis",
- "class": "non_infective",
- "chapter": 376,
- "page": 2908,
- "aliases": [
-  "Behçet's disease",
-  "Behcet syndrome",
-  "Behcet disease"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "reference": {
-  "pages": "Harrison 22e p.2908-2909",
-  "clinicalPearls": [
-   "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large vessel (arterial and venous) disease, and gastrointestinal and neurologic involvement, with manifestations appearing in differing sequences over time.",
-   "Oral ulcers occur in essentially all patients (~98%) and are usually the first manifestation; they are typically multiple, resemble ordinary canker sores, last about 10 days, and recur unless treated, with only the uncommon major ulcers tending to scar.",
-   "Genital ulcers are the most specific lesion, most often on the scrotum or labia; they are larger, deeper, slower to heal than oral ulcers, and tend to scar.",
-   "The pathergy reaction (a papule or pustule forming 24-48 h after a needle prick) is a fairly unique nonspecific skin hyperreactivity and is part of the diagnostic criteria.",
-   "Hypopyon (intense anterior chamber inflammation), seen in about 10% of patients with eye disease, is quite specific for Behçet syndrome.",
-   "Superficial thrombophlebitis often occurs in men and is associated with deep-vein thrombosis; its presence should prompt a workup for other vascular involvement including pulmonary artery aneurysm.",
-   "HLA-B*51 is positive in up to 50-60% of patients depending on geographic origin, but it is not diagnostic because roughly 20% of the normal population also carries it.",
-   "Most prevalent in Turkey (about 1 in 250 adults); patients are most commonly from the Middle East, Mediterranean, and Far East. Onset before the late teens or after age 50 is uncommon.",
-   "Sexes are affected roughly equally, but males tend to have more severe disease and worse outcomes; eye involvement may reach ~70% in males.",
-   "Ocular disease (most often bilateral panuveitis) usually appears within the first 2 years after diagnostic criteria are met, is most severe early, then tends to abate.",
-   "Most new manifestations appear within the first 5 years, and the natural history for most patients is one of diminishing symptoms that may culminate in remission."
+  "id": "beh_et_syndrome",
+  "name": "Behçet Syndrome",
+  "system": "Rheumatologic / Multisystem vasculitis",
+  "class": "non_infective",
+  "chapter": 376,
+  "page": 2908,
+  "aliases": [
+    "Behçet's disease",
+    "Behcet syndrome",
+    "Behcet disease"
   ],
-  "pathophysiology": "The cause and pathogenesis are unknown. Family studies suggest a possible genetic predisposition, and heightened inflammation with involvement of both innate and adaptive immunity is implicated. Neutrophil hyperreactivity is present, though it is unclear whether this is primary or secondary to cytokine-driven activation. The disorder sits between classic autoimmune and autoinflammatory conditions: unlike typical autoimmune disease it is not generally associated with autoantibodies, Raynaud's phenomenon, Sjögren's syndrome, thrombocytopenia, hemolytic anemia, photosensitivity, serosal involvement, or increased risk of other autoimmune diseases; unlike classic autoinflammatory disease it tends to abate over time, lacks the mutations seen in autoinflammatory syndromes, and is more prevalent than disorders such as familial Mediterranean fever. Retrospective cohort data suggest distinct disease clusters (e.g., acne lesions clustering with arthritis and enthesitis) that may have differing pathogeneses.",
-  "additionalDifferentials": [
-   "Crohn's disease (gastrointestinal Behçet can be clinically and endoscopically indistinguishable; distinction often relies on extraintestinal features)",
-   "Recurrent aphthous stomatitis / ordinary canker sores",
-   "Acne vulgaris (papulopustular lesions are indistinguishable in appearance and pathology)",
-   "Other systemic vasculitides",
-   "Inflammatory bowel disease more broadly"
-  ],
-  "infectionMimics": [
-   "Herpetic and other infectious genital/oral ulceration causing recurrent ulcers"
-  ],
-  "nonInfectiousMimics": [
-   "Crohn's disease (especially with ileocecal ulcers)",
-   "Acne vulgaris",
-   "Recurrent aphthous stomatitis"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude mimics.",
-   "International Study Group (ISG) criteria: recurrent oral ulceration (at least 3 times in 12 months) plus two of recurrent genital ulcers, skin lesions, eye lesions, or a positive pathergy test (sensitivity ~95%, specificity ~96%).",
-   "Pathergy test: dermal insertion of a 20-gauge (20-21 gauge) needle, read at 24-48 h.",
-   "HLA-B*51 testing may support but cannot establish the diagnosis.",
-   "Endoscopy for suspected gastrointestinal involvement (ulcers typically single or fewer than five, deep, round, confined to the ileocecal area, prone to perforation).",
-   "Vascular and neuroimaging when vascular or CNS involvement is suspected (e.g., pulmonary artery aneurysm, cerebral venous sinus thrombosis, parenchymal CNS lesions)."
-  ],
-  "redFlags": [
-   "Superficial thrombophlebitis in a male should trigger evaluation for deeper vascular involvement including pulmonary artery aneurysm.",
-   "Pulmonary artery aneurysms carry a 5-year mortality of about 20-25%.",
-   "Subacute severe headache with cranial nerve palsy, dysarthria, ataxia, or hemiparesis suggests parenchymal CNS involvement (telencephalic-diencephalic junction, brainstem, spinal cord).",
-   "Deep, round ileocecal ulcers are prone to perforation.",
-   "Clustering thrombotic events (deep-vein thrombosis, Budd-Chiari syndrome, IVC syndrome, intracardiac thrombosis, cerebral venous sinus thrombosis)."
-  ],
-  "prognosis": "Most patients follow a course of diminishing symptoms over time with potential remission, often eventually requiring no ongoing medication, and most new manifestations emerge within the first 5 years. Young male patients tend to have worse outcomes. Poor ocular prognostic factors include male sex, posterior involvement, frequent attacks (>3 per year), strong vitreous opacity, and macular edema. Pulmonary artery aneurysms are associated with a 5-year mortality of about 20-25%.",
-  "pitfalls": [
-   "Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a definitive one.",
-   "HLA-B*51 is not a diagnostic test because it is common in the general population.",
-   "Gastrointestinal Behçet is easily mistaken for Crohn's disease unless extraintestinal manifestations are evident.",
-   "Pathergy and eye lesions each occur in only about half of patients, so their absence does not exclude the diagnosis.",
-   "Regional variation matters: gastrointestinal involvement is common in Japan and seen in ~30% of US patients but rare in Turkey."
-  ],
-  "severityClassification": "No formal severity grade; management and outlook are stratified by the type and severity of organ involvement (mucocutaneous, ocular, vascular, gastrointestinal, neurologic), with young male sex and posterior/severe eye disease marking higher-risk disease.",
-  "references": [
-   "Harrison 22e p.2908",
-   "Harrison 22e p.2909"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and arthritis, adding apremilast for resistant oral ulceration",
-   "Manage sight-threatening uveitis and retinal vasculitis with systemic corticosteroids plus immunosuppression such as azathioprine or ciclosporin, escalating to TNF-alpha inhibitors (infliximab or adalimumab) or interferon-alpha",
-   "Use corticosteroids with an immunosuppressant such as azathioprine or cyclophosphamide, or a biologic, for major organ involvement",
-   "Treat vascular thrombosis primarily with immunosuppression for the underlying inflammation rather than anticoagulation alone, and manage arterial and pulmonary artery aneurysms with immunosuppression and considered intervention",
-   "Manage gastrointestinal disease with corticosteroids, aminosalicylates, azathioprine or anti-TNF therapy, watching for perforation",
-   "Treat parenchymal neuro-Behcet with corticosteroids and immunosuppression, avoiding ciclosporin because of neurotoxicity",
-   "Coordinate multidisciplinary care with ophthalmology, rheumatology and relevant organ specialists, escalating early in organ-threatening disease"
-  ]
- },
- "specialty": "Rheumatology",
- "algorithms": [
-  {
-   "id": "beh_et_syndrome-pathway",
-   "title": "Behçet Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large vessel (arterial and venous) disease, and gastrointestinal and neurologic involvement, with manifestations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Superficial thrombophlebitis in a male should trigger evaluation for deeper vascular involvement including pulmonary artery aneurysm.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude mimics., International Study Group (ISG) criteria: recurrent oral ulceration (at least 3"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and arthritis, adding apremilast for resistant oral ulceration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a definitive one."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of behçet syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "beh_et_syndrome-matrix",
-   "title": "Behçet Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "reference": {
+    "pages": "Harrison 22e p.2908-2909",
+    "clinicalPearls": [
+      "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large vessel (arterial and venous) disease, and gastrointestinal and neurologic involvement, with manifestations appearing in differing sequences over time.",
+      "Oral ulcers occur in essentially all patients (~98%) and are usually the first manifestation; they are typically multiple, resemble ordinary canker sores, last about 10 days, and recur unless treated, with only the uncommon major ulcers tending to scar.",
+      "Genital ulcers are the most specific lesion, most often on the scrotum or labia; they are larger, deeper, slower to heal than oral ulcers, and tend to scar.",
+      "The pathergy reaction (a papule or pustule forming 24-48 h after a needle prick) is a fairly unique nonspecific skin hyperreactivity and is part of the diagnostic criteria.",
+      "Hypopyon (intense anterior chamber inflammation), seen in about 10% of patients with eye disease, is quite specific for Behçet syndrome.",
+      "Superficial thrombophlebitis often occurs in men and is associated with deep-vein thrombosis; its presence should prompt a workup for other vascular involvement including pulmonary artery aneurysm.",
+      "HLA-B*51 is positive in up to 50-60% of patients depending on geographic origin, but it is not diagnostic because roughly 20% of the normal population also carries it.",
+      "Most prevalent in Turkey (about 1 in 250 adults); patients are most commonly from the Middle East, Mediterranean, and Far East. Onset before the late teens or after age 50 is uncommon.",
+      "Sexes are affected roughly equally, but males tend to have more severe disease and worse outcomes; eye involvement may reach ~70% in males.",
+      "Ocular disease (most often bilateral panuveitis) usually appears within the first 2 years after diagnostic criteria are met, is most severe early, then tends to abate.",
+      "Most new manifestations appear within the first 5 years, and the natural history for most patients is one of diminishing symptoms that may culminate in remission."
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The cause and pathogenesis are unknown. Family studies suggest a possible genetic predisposition, and heightened inflammation with involvement of both innate and adaptive immunity is implicated. Neutrophil hyperreactivity is present, though it is unclear whether this is primary or secondary to cytokine-driven activation. The disorder sits between classic autoimmune and autoinflammatory conditions: unlike typical autoimmune disease it is not generally associated with autoantibodies, Raynaud's phenomenon, Sjögren's syndrome, thrombocytopenia, hemolytic anemia, photosensitivity, serosal involvement, or increased risk of other autoimmune diseases; unlike classic autoinflammatory disease it tends to abate over time, lacks the mutations seen in autoinflammatory syndromes, and is more prevalent than disorders such as familial Mediterranean fever. Retrospective cohort data suggest distinct disease clusters (e.g., acne lesions clustering with arthritis and enthesitis) that may have differing pathogeneses.",
+    "additionalDifferentials": [
+      "Crohn's disease (gastrointestinal Behçet can be clinically and endoscopically indistinguishable; distinction often relies on extraintestinal features)",
+      "Recurrent aphthous stomatitis / ordinary canker sores",
+      "Acne vulgaris (papulopustular lesions are indistinguishable in appearance and pathology)",
+      "Other systemic vasculitides",
+      "Inflammatory bowel disease more broadly"
     ],
-    [
-     "Primary Differentials",
-     "Crohn's disease (gastrointestinal Behçet can be clinically and endoscopically indistinguishable; distinction often relies on",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Herpetic and other infectious genital/oral ulceration causing recurrent ulcers"
     ],
-    [
-     "Management Strategy",
-     "Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Crohn's disease (especially with ileocecal ulcers)",
+      "Acne vulgaris",
+      "Recurrent aphthous stomatitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude mimics.",
+      "International Study Group (ISG) criteria: recurrent oral ulceration (at least 3 times in 12 months) plus two of recurrent genital ulcers, skin lesions, eye lesions, or a positive pathergy test (sensitivity ~95%, specificity ~96%).",
+      "Pathergy test: dermal insertion of a 20-gauge (20-21 gauge) needle, read at 24-48 h.",
+      "HLA-B*51 testing may support but cannot establish the diagnosis.",
+      "Endoscopy for suspected gastrointestinal involvement (ulcers typically single or fewer than five, deep, round, confined to the ileocecal area, prone to perforation).",
+      "Vascular and neuroimaging when vascular or CNS involvement is suspected (e.g., pulmonary artery aneurysm, cerebral venous sinus thrombosis, parenchymal CNS lesions)."
+    ],
+    "redFlags": [
+      "Superficial thrombophlebitis in a male should trigger evaluation for deeper vascular involvement including pulmonary artery aneurysm.",
+      "Pulmonary artery aneurysms carry a 5-year mortality of about 20-25%.",
+      "Subacute severe headache with cranial nerve palsy, dysarthria, ataxia, or hemiparesis suggests parenchymal CNS involvement (telencephalic-diencephalic junction, brainstem, spinal cord).",
+      "Deep, round ileocecal ulcers are prone to perforation.",
+      "Clustering thrombotic events (deep-vein thrombosis, Budd-Chiari syndrome, IVC syndrome, intracardiac thrombosis, cerebral venous sinus thrombosis)."
+    ],
+    "prognosis": "Most patients follow a course of diminishing symptoms over time with potential remission, often eventually requiring no ongoing medication, and most new manifestations emerge within the first 5 years. Young male patients tend to have worse outcomes. Poor ocular prognostic factors include male sex, posterior involvement, frequent attacks (>3 per year), strong vitreous opacity, and macular edema. Pulmonary artery aneurysms are associated with a 5-year mortality of about 20-25%.",
+    "pitfalls": [
+      "Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a definitive one.",
+      "HLA-B*51 is not a diagnostic test because it is common in the general population.",
+      "Gastrointestinal Behçet is easily mistaken for Crohn's disease unless extraintestinal manifestations are evident.",
+      "Pathergy and eye lesions each occur in only about half of patients, so their absence does not exclude the diagnosis.",
+      "Regional variation matters: gastrointestinal involvement is common in Japan and seen in ~30% of US patients but rare in Turkey."
+    ],
+    "severityClassification": "No formal severity grade; management and outlook are stratified by the type and severity of organ involvement (mucocutaneous, ocular, vascular, gastrointestinal, neurologic), with young male sex and posterior/severe eye disease marking higher-risk disease.",
+    "references": [
+      "Harrison 22e p.2908",
+      "Harrison 22e p.2909"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and arthritis, adding apremilast for resistant oral ulceration",
+      "Manage sight-threatening uveitis and retinal vasculitis with systemic corticosteroids plus immunosuppression such as azathioprine or ciclosporin, escalating to TNF-alpha inhibitors (infliximab or adalimumab) or interferon-alpha",
+      "Use corticosteroids with an immunosuppressant such as azathioprine or cyclophosphamide, or a biologic, for major organ involvement",
+      "Treat vascular thrombosis primarily with immunosuppression for the underlying inflammation rather than anticoagulation alone, and manage arterial and pulmonary artery aneurysms with immunosuppression and considered intervention",
+      "Manage gastrointestinal disease with corticosteroids, aminosalicylates, azathioprine or anti-TNF therapy, watching for perforation",
+      "Treat parenchymal neuro-Behcet with corticosteroids and immunosuppression, avoiding ciclosporin because of neurotoxicity",
+      "Coordinate multidisciplinary care with ophthalmology, rheumatology and relevant organ specialists, escalating early in organ-threatening disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for behçet syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beh-et-syndrome-real-image",
-   "title": "Behçet Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "specialty": "Rheumatology",
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "beh_et_syndrome-pathway",
+      "title": "Behçet Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large vessel (arterial and venous) disease, and gastrointestinal and neurologic involvement, with manifestations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Superficial thrombophlebitis in a male should trigger evaluation for deeper vascular involvement including pulmonary artery aneurysm.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude mimics., International Study Group (ISG) criteria: recurrent oral ulceration (at least 3"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and arthritis, adding apremilast for resistant oral ulceration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a definitive one."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of behçet syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beh_et_syndrome-matrix",
+      "title": "Behçet Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A systemic vasculitis presenting with various combinations of oral and genital ulcers, skin lesions, uveitis, arthritis, large",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is clinical; no specific laboratory, imaging, or histologic test confirms it, so investigations mainly serve to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Crohn's disease (gastrointestinal Behçet can be clinically and endoscopically indistinguishable; distinction often relies on",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat mucocutaneous disease with topical corticosteroids for oral and genital ulcers and colchicine for mucocutaneous lesions and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosis may take months to years as the full constellation of features evolves; a tentative diagnosis often precedes a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for behçet syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison 22e, p.2908-2909",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 327-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beh_et_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria and findings in Behcet syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold"
+      ],
+      "rows": [
+        {
+          "parameter": "ISG criteria: recurrent oral ulceration",
+          "unit": "episodes in 12 months",
+          "cells": [
+            {
+              "text": "At least 3 in 12 months",
+              "op": ">=",
+              "value": 3
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ISG criteria: additional features",
+          "cells": [
+            {
+              "text": "Two of recurrent genital ulcers, skin lesions, eye lesions or positive pathergy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ISG criteria performance",
+          "cells": [
+            {
+              "text": "Sensitivity ~95%, specificity ~96%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathergy test",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Papule or pustule read at 24-48 h after 20-gauge needle insertion",
+              "range": [
+                24,
+                48
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B*51",
+          "unit": "% positive",
+          "cells": [
+            {
+              "text": "Positive in up to 50-60%; supports but does not establish diagnosis",
+              "range": [
+                50,
+                60
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopyon in eye disease",
+          "unit": "% of patients with eye disease",
+          "cells": [
+            {
+              "text": "About 10%; quite specific for Behcet syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy of ileocecal ulcers",
+          "unit": "ulcers",
+          "cells": [
+            {
+              "text": "Usually single or fewer than five; deep, round, prone to perforation",
+              "op": "<",
+              "value": 5
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity classification",
+          "cells": [
+            {
+              "text": "No formal grade; stratified by organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "No specific test confirms the diagnosis; investigations mainly exclude mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beh_et_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Behcet syndrome",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Gastrointestinal Behcet can look identical; extraintestinal features help separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent aphthous stomatitis",
+          "cells": [
+            {
+              "text": "Genital ulcers are larger, deeper and scar, which favours Behcet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acne vulgaris",
+          "cells": [
+            {
+              "text": "The pathergy reaction is a fairly unique skin hyperreactivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beh_et_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Behcet syndrome",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucocutaneous disease",
+          "cells": [
+            {
+              "text": "Topical corticosteroids for oral and genital ulcers; colchicine for mucocutaneous lesions and arthritis"
+            },
+            {
+              "text": "Add apremilast for resistant oral ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sight-threatening uveitis or retinal vasculitis",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids plus immunosuppression such as azathioprine or ciclosporin"
+            },
+            {
+              "text": "Escalate to TNF-alpha inhibitors (infliximab or adalimumab) or interferon-alpha"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Major organ involvement",
+          "cells": [
+            {
+              "text": "Corticosteroids with azathioprine or cyclophosphamide, or a biologic"
+            },
+            {
+              "text": "Applies to major organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular thrombosis",
+          "cells": [
+            {
+              "text": "Immunosuppression for the underlying inflammation rather than anticoagulation alone"
+            },
+            {
+              "text": "Arterial and pulmonary artery aneurysms managed with immunosuppression and considered intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal disease",
+          "cells": [
+            {
+              "text": "Corticosteroids, aminosalicylates, azathioprine or anti-TNF therapy"
+            },
+            {
+              "text": "Watch for perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenchymal neuro-Behcet",
+          "cells": [
+            {
+              "text": "Corticosteroids and immunosuppression"
+            },
+            {
+              "text": "Avoid ciclosporin because of neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Ophthalmology, rheumatology and relevant organ specialists"
+            },
+            {
+              "text": "Escalate early in organ-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beh_et_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for Behcet disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent oral ulceration",
+          "cells": [
+            {
+              "text": "Required"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plus any two of the following",
+          "cells": [
+            {
+              "text": "Recurrent genital ulceration; eye lesions; skin lesions; positive pathergy test"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beh_et_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Behcet syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent oral ulcers (about 98% of patients), often with genital, eye or skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: thrombophlebitis in a man, neurological signs, or deep ileocecal ulcers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: vascular and neuroimaging for pulmonary artery aneurysm, CNS or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Count ISG features: oral ulcers at least 3 in 12 months plus two other features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Pathergy test read at 24-48 h; HLA-B*51 supportive only; exclude Crohn's and aphthae",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ISG criteria met on clinical features and pathergy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat by organ: topical steroids and colchicine; systemic steroids for eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: diagnosis may take months to years; re-review as features evolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Symptoms often diminish over time; most new features appear within 5 years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

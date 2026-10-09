@@ -1,177 +1,399 @@
 {
- "id": "warthin_tumour",
- "name": "Warthin tumour",
- "aliases": [
-  "Papillary cystadenoma lymphomatosum",
-  "Adenolymphoma"
- ],
- "class": "non_infective",
- "system": "Head and neck / Salivary glands",
- "specialty": "Head and neck surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the gland.",
-   "Strongly associated with cigarette smoking, and notable for being bilateral or multifocal in a substantial minority of patients.",
-   "Histology is distinctive: a bilayered oncocytic (mitochondria-rich) epithelium lining papillary cystic spaces, supported by a dense lymphoid stroma with germinal centres.",
-   "Thought to arise from salivary ductal inclusions trapped within intraparotid or periparotid lymph nodes during development.",
-   "Technetium pertechnetate scintigraphy shows avid uptake because of the abundant mitochondria in oncocytes, a feature shared with oncocytoma.",
-   "Malignant transformation is exceedingly rare, so observation is a reasonable option in elderly or comorbid patients once the diagnosis is secure.",
-   "Aspirated cyst fluid is often mucoid and cellular; oncocytes with a lymphoid background can be mistaken for a cystic or mucoepidermoid lesion.",
-   "The tumour may undergo infarction after fine-needle aspiration, producing squamous and reactive change that can mimic malignancy."
+  "id": "warthin_tumour",
+  "name": "Warthin tumour",
+  "aliases": [
+    "Papillary cystadenoma lymphomatosum",
+    "Adenolymphoma"
   ],
-  "pathophysiology": "Warthin tumour is a benign neoplasm believed to originate from ectopic salivary gland ductal epithelium sequestered within lymphoid tissue in and around the parotid during embryogenesis, an anatomical relationship unique to the parotid. The epithelial component undergoes oncocytic metaplasia, accumulating large numbers of mitochondria that impart the granular eosinophilic cytoplasm and account for technetium avidity. A prominent, immunologically reactive lymphoid stroma with germinal centres accompanies the epithelium, and the striking epidemiological link with tobacco smoke suggests that carcinogen exposure promotes both oncocytic change and the lymphoid reaction. The tumour is frequently multicentric and bilateral, reflecting its origin from multiple ductal inclusions rather than from a single focus.",
-  "additionalDifferentials": [
-   "Pleomorphic adenoma",
-   "Oncocytoma",
-   "Intraparotid or reactive lymph node",
-   "Lymphoepithelial cyst",
-   "Mucoepidermoid carcinoma (cystic, low-grade)",
-   "Acinic cell carcinoma",
-   "Metastatic cystic squamous carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Fine-needle aspiration cytology of the mass",
-   "Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the parotid tail",
-   "Technetium pertechnetate scintigraphy showing focal uptake (historically supportive)",
-   "MRI to characterise multifocal or bilateral disease",
-   "Documentation of smoking history",
-   "Histological examination of the excised specimen"
-  ],
-  "redFlags": [
-   "Rapid enlargement or new pain in a previously stable parotid mass",
-   "Facial nerve weakness, which is atypical and suggests an alternative diagnosis",
-   "Fixation to surrounding structures",
-   "Constitutional symptoms or diffuse nodal enlargement raising concern for lymphoma in the lymphoid stroma",
-   "Persistent or bloody cyst content after aspiration"
-  ],
-  "prognosis": "Prognosis is excellent as the tumour is benign, and malignant change is extremely rare. Apparent recurrence usually reflects a separate multifocal or metachronous lesion rather than inadequate excision.",
-  "pitfalls": [
-   "Failing to recognise bilateral or multifocal disease",
-   "Misinterpreting mucoid, oncocyte-rich aspirate as a low-grade mucoepidermoid carcinoma",
-   "Over-calling post-aspiration infarction as malignancy",
-   "Overlooking lymphoma arising within the lymphoid stroma",
-   "Proceeding to unnecessarily radical surgery for a benign lesion"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours",
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Gnepp's Diagnostic Surgical Pathology of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management",
-   "Offer active surveillance as a valid option in elderly or comorbid patients once the benign diagnosis is secure, given the negligible risk of malignant change",
-   "Undertake surgical excision by extracapsular dissection or superficial parotidectomy for symptomatic or enlarging lesions or where diagnostic uncertainty persists",
-   "Identify and preserve the facial nerve during parotid surgery to avoid iatrogenic weakness",
-   "Advise smoking cessation given the strong causal association with tobacco",
-   "Monitor for the frequently multifocal, bilateral or metachronous nature of the tumour rather than assuming a single lesion",
-   "Refer to head and neck surgery for assessment and operative planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "warthin_tumour-pathway",
-   "title": "Warthin tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the gland.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid enlargement or new pain in a previously stable parotid mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fine-needle aspiration cytology of the mass, Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the parotid tail, Technetium pertechnetate scintigraphy showing focal uptake (historically supportive)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise bilateral or multifocal disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of warthin tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "warthin_tumour-matrix",
-   "title": "Warthin tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Head and neck / Salivary glands",
+  "specialty": "Head and neck surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the gland.",
+      "Strongly associated with cigarette smoking, and notable for being bilateral or multifocal in a substantial minority of patients.",
+      "Histology is distinctive: a bilayered oncocytic (mitochondria-rich) epithelium lining papillary cystic spaces, supported by a dense lymphoid stroma with germinal centres.",
+      "Thought to arise from salivary ductal inclusions trapped within intraparotid or periparotid lymph nodes during development.",
+      "Technetium pertechnetate scintigraphy shows avid uptake because of the abundant mitochondria in oncocytes, a feature shared with oncocytoma.",
+      "Malignant transformation is exceedingly rare, so observation is a reasonable option in elderly or comorbid patients once the diagnosis is secure.",
+      "Aspirated cyst fluid is often mucoid and cellular; oncocytes with a lymphoid background can be mistaken for a cystic or mucoepidermoid lesion.",
+      "The tumour may undergo infarction after fine-needle aspiration, producing squamous and reactive change that can mimic malignancy."
     ],
-    [
-     "Key Investigations",
-     "Fine-needle aspiration cytology of the mass, Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Warthin tumour is a benign neoplasm believed to originate from ectopic salivary gland ductal epithelium sequestered within lymphoid tissue in and around the parotid during embryogenesis, an anatomical relationship unique to the parotid. The epithelial component undergoes oncocytic metaplasia, accumulating large numbers of mitochondria that impart the granular eosinophilic cytoplasm and account for technetium avidity. A prominent, immunologically reactive lymphoid stroma with germinal centres accompanies the epithelium, and the striking epidemiological link with tobacco smoke suggests that carcinogen exposure promotes both oncocytic change and the lymphoid reaction. The tumour is frequently multicentric and bilateral, reflecting its origin from multiple ductal inclusions rather than from a single focus.",
+    "additionalDifferentials": [
+      "Pleomorphic adenoma",
+      "Oncocytoma",
+      "Intraparotid or reactive lymph node",
+      "Lymphoepithelial cyst",
+      "Mucoepidermoid carcinoma (cystic, low-grade)",
+      "Acinic cell carcinoma",
+      "Metastatic cystic squamous carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Pleomorphic adenoma, Oncocytoma, Intraparotid or reactive lymph node",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fine-needle aspiration cytology of the mass",
+      "Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the parotid tail",
+      "Technetium pertechnetate scintigraphy showing focal uptake (historically supportive)",
+      "MRI to characterise multifocal or bilateral disease",
+      "Documentation of smoking history",
+      "Histological examination of the excised specimen"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid enlargement or new pain in a previously stable parotid mass",
+      "Facial nerve weakness, which is atypical and suggests an alternative diagnosis",
+      "Fixation to surrounding structures",
+      "Constitutional symptoms or diffuse nodal enlargement raising concern for lymphoma in the lymphoid stroma",
+      "Persistent or bloody cyst content after aspiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise bilateral or multifocal disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent as the tumour is benign, and malignant change is extremely rare. Apparent recurrence usually reflects a separate multifocal or metachronous lesion rather than inadequate excision.",
+    "pitfalls": [
+      "Failing to recognise bilateral or multifocal disease",
+      "Misinterpreting mucoid, oncocyte-rich aspirate as a low-grade mucoepidermoid carcinoma",
+      "Over-calling post-aspiration infarction as malignancy",
+      "Overlooking lymphoma arising within the lymphoid stroma",
+      "Proceeding to unnecessarily radical surgery for a benign lesion"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours",
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Gnepp's Diagnostic Surgical Pathology of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management",
+      "Offer active surveillance as a valid option in elderly or comorbid patients once the benign diagnosis is secure, given the negligible risk of malignant change",
+      "Undertake surgical excision by extracapsular dissection or superficial parotidectomy for symptomatic or enlarging lesions or where diagnostic uncertainty persists",
+      "Identify and preserve the facial nerve during parotid surgery to avoid iatrogenic weakness",
+      "Advise smoking cessation given the strong causal association with tobacco",
+      "Monitor for the frequently multifocal, bilateral or metachronous nature of the tumour rather than assuming a single lesion",
+      "Refer to head and neck surgery for assessment and operative planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for warthin tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "warthin-tumour-real-image",
-   "title": "Warthin tumour: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "warthin_tumour-pathway",
+      "title": "Warthin tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the gland.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid enlargement or new pain in a previously stable parotid mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fine-needle aspiration cytology of the mass, Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the parotid tail, Technetium pertechnetate scintigraphy showing focal uptake (historically supportive)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise bilateral or multifocal disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of warthin tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "warthin_tumour-matrix",
+      "title": "Warthin tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The second commonest benign parotid tumour, arising almost exclusively in the parotid, characteristically in the tail of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fine-needle aspiration cytology of the mass, Ultrasound demonstrating a well-defined, often cystic, hypoechoic lesion in the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pleomorphic adenoma, Oncocytoma, Intraparotid or reactive lymph node",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis with fine-needle aspiration cytology and ultrasound before deciding on management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise bilateral or multifocal disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for warthin tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "warthin_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fine-needle aspiration cytology",
+          "cells": [
+            {
+              "text": "Diagnostic confirmation before management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Well-defined, often cystic, hypoechoic lesion in the parotid tail"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warthin_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pleomorphic adenoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncocytoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraparotid or reactive lymph node",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucoepidermoid carcinoma, cystic low-grade",
+          "cells": [
+            {
+              "text": "Mucoid, oncocyte-rich aspirate can be misread as this"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "warthin_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fine-needle aspiration and ultrasound first",
+          "cells": [
+            {
+              "text": "Confirm the diagnosis before deciding management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "A valid option for stable lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Enlarging or symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "warthin_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Warthin tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Warthin tumour: stable parotid tail mass in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid enlargement, new pain or facial nerve weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of facial nerve weakness or rapid enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fine-needle aspiration cytology and ultrasound of the parotid mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does cytology confirm a benign Warthin tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pleomorphic adenoma or malignancy; excision or further work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm the diagnosis with fine-needle aspiration and ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Active surveillance for a stable benign-appearing lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision for enlarging or symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Benign; check the other parotid for bilateral or multifocal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

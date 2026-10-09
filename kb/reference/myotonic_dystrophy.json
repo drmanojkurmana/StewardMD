@@ -1,178 +1,758 @@
 {
- "id": "myotonic_dystrophy",
- "name": "Myotonic dystrophy",
- "aliases": [
-  "dystrophia myotonica",
-  "DM1",
-  "DM2",
-  "Steinert disease",
-  "DMPK-related / CNBP-related disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2) by a CCTG repeat expansion in CNBP",
-   "Myotonia (delayed muscle relaxation, for example a slow grip release) is a defining feature, alongside progressive weakness",
-   "DM1 shows a distinctive distal and facial weakness pattern with ptosis, temporal wasting, and neck flexor weakness, whereas DM2 tends to be more proximal",
-   "The repeat expansion is unstable and tends to enlarge across generations, producing genetic anticipation with earlier onset and greater severity in successive generations",
-   "A severe congenital form of DM1 occurs, particularly with maternal transmission, presenting with neonatal hypotonia and respiratory difficulty",
-   "Multisystem involvement includes cardiac conduction defects and arrhythmia, cataracts, insulin resistance, hypersomnolence, and gonadal and cognitive effects",
-   "Cardiac conduction disease can cause sudden death, so regular electrocardiographic surveillance is essential regardless of skeletal muscle severity",
-   "Diagnosis rests on the clinical picture, demonstration of myotonia (clinically or on electromyography), and targeted repeat-expansion genetic testing"
+  "id": "myotonic_dystrophy",
+  "name": "Myotonic dystrophy",
+  "aliases": [
+    "dystrophia myotonica",
+    "DM1",
+    "DM2",
+    "Steinert disease",
+    "DMPK-related / CNBP-related disorder"
   ],
-  "pathophysiology": "Myotonic dystrophy is caused by expanded non-coding repeats (CTG in DMPK for DM1 and CCTG in CNBP for DM2) that are transcribed into RNA containing long repeat tracts. These toxic RNA transcripts accumulate in the nucleus and sequester RNA-binding proteins, particularly muscleblind-like proteins, disrupting the normal alternative splicing of many downstream genes. The resulting misregulated splicing of ion-channel, insulin-receptor, and other transcripts produces myotonia, progressive muscle degeneration, and the wide-ranging systemic features. Repeat instability during transmission enlarges the expansion across generations, underlying the phenomenon of anticipation.",
-  "additionalDifferentials": [
-   "Limb-girdle muscular dystrophies",
-   "Facioscapulohumeral muscular dystrophy",
-   "Non-dystrophic myotonias (channelopathies)",
-   "Mitochondrial myopathy",
-   "Oculopharyngeal muscular dystrophy",
-   "Motor neurone disease with prominent weakness"
-  ],
-  "additionalInvestigations": [
-   "Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2)",
-   "Electromyography demonstrating myotonic discharges",
-   "Electrocardiography and Holter monitoring for conduction disease and arrhythmia",
-   "Echocardiography where cardiomyopathy is suspected",
-   "Slit-lamp examination for characteristic cataracts",
-   "Assessment of glucose tolerance and respiratory function"
-  ],
-  "redFlags": [
-   "Syncope, palpitations, or a high-grade conduction block indicating risk of sudden cardiac death",
-   "Respiratory failure, especially in the congenital form or during anaesthesia",
-   "Neonatal hypotonia and respiratory distress suggesting congenital DM1",
-   "Excessive daytime sleepiness with signs of hypoventilation",
-   "Heightened sensitivity to anaesthetic and sedative agents"
-  ],
-  "prognosis": "Prognosis depends on the type and severity: DM1 tends to be more severe than DM2, and the congenital form carries high neonatal morbidity and mortality. Cardiac conduction disease and respiratory failure are the leading causes of premature death, so lifelong cardiac and respiratory surveillance is central to care.",
-  "pitfalls": [
-   "Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease",
-   "Giving standard doses of anaesthetic or sedative agents to which patients are unusually sensitive",
-   "Not recognising anticipation and its implications for family counselling",
-   "Missing the diagnosis in a mildly affected parent of a floppy neonate",
-   "Overlooking treatable comorbidities such as cataracts, diabetes, and sleep-disordered breathing"
-  ],
-  "references": [
-   "GeneReviews: Myotonic dystrophy type 1 and type 2",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for conduction disease or arrhythmia to prevent sudden death",
-   "Assess respiratory function and use non-invasive ventilation for hypoventilation, taking great care with anaesthesia and sedatives given respiratory and cardiac sensitivity",
-   "Treat symptomatic myotonia with an antimyotonic agent such as mexiletine when required",
-   "Manage the multisystem features with cataract surgery, treatment of insulin resistance or diabetes, and a wakefulness-promoting agent such as modafinil for disabling hypersomnolence",
-   "Support weakness with physiotherapy, ankle-foot orthoses for foot-drop and occupational therapy",
-   "Offer genetic counselling explaining autosomal dominant inheritance and anticipation, screen at-risk relatives and monitor pregnancies for the severe congenital form",
-   "Coordinate multidisciplinary neuromuscular care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myotonic_dystrophy-pathway",
-   "title": "Myotonic dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2) by a CCTG repeat expansion in CNBP",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope, palpitations, or a high-grade conduction block indicating risk of sudden cardiac death",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2), Electromyography demonstrating myotonic discharges, Electrocardiography and Holter monitoring for conduction disease and arrhythmia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for conduction disease or arrhythmia to prevent sudden death"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myotonic dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "myotonic_dystrophy-matrix",
-   "title": "Myotonic dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2) by a CCTG repeat expansion in CNBP",
+      "Myotonia (delayed muscle relaxation, for example a slow grip release) is a defining feature, alongside progressive weakness",
+      "DM1 shows a distinctive distal and facial weakness pattern with ptosis, temporal wasting, and neck flexor weakness, whereas DM2 tends to be more proximal",
+      "The repeat expansion is unstable and tends to enlarge across generations, producing genetic anticipation with earlier onset and greater severity in successive generations",
+      "A severe congenital form of DM1 occurs, particularly with maternal transmission, presenting with neonatal hypotonia and respiratory difficulty",
+      "Multisystem involvement includes cardiac conduction defects and arrhythmia, cataracts, insulin resistance, hypersomnolence, and gonadal and cognitive effects",
+      "Cardiac conduction disease can cause sudden death, so regular electrocardiographic surveillance is essential regardless of skeletal muscle severity",
+      "Diagnosis rests on the clinical picture, demonstration of myotonia (clinically or on electromyography), and targeted repeat-expansion genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2), Electromyography demonstrating myotonic discharges,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myotonic dystrophy is caused by expanded non-coding repeats (CTG in DMPK for DM1 and CCTG in CNBP for DM2) that are transcribed into RNA containing long repeat tracts. These toxic RNA transcripts accumulate in the nucleus and sequester RNA-binding proteins, particularly muscleblind-like proteins, disrupting the normal alternative splicing of many downstream genes. The resulting misregulated splicing of ion-channel, insulin-receptor, and other transcripts produces myotonia, progressive muscle degeneration, and the wide-ranging systemic features. Repeat instability during transmission enlarges the expansion across generations, underlying the phenomenon of anticipation.",
+    "additionalDifferentials": [
+      "Limb-girdle muscular dystrophies",
+      "Facioscapulohumeral muscular dystrophy",
+      "Non-dystrophic myotonias (channelopathies)",
+      "Mitochondrial myopathy",
+      "Oculopharyngeal muscular dystrophy",
+      "Motor neurone disease with prominent weakness"
     ],
-    [
-     "Primary Differentials",
-     "Limb-girdle muscular dystrophies, Facioscapulohumeral muscular dystrophy, Non-dystrophic myotonias (channelopathies)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2)",
+      "Electromyography demonstrating myotonic discharges",
+      "Electrocardiography and Holter monitoring for conduction disease and arrhythmia",
+      "Echocardiography where cardiomyopathy is suspected",
+      "Slit-lamp examination for characteristic cataracts",
+      "Assessment of glucose tolerance and respiratory function"
     ],
-    [
-     "Management Strategy",
-     "Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope, palpitations, or a high-grade conduction block indicating risk of sudden cardiac death",
+      "Respiratory failure, especially in the congenital form or during anaesthesia",
+      "Neonatal hypotonia and respiratory distress suggesting congenital DM1",
+      "Excessive daytime sleepiness with signs of hypoventilation",
+      "Heightened sensitivity to anaesthetic and sedative agents"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the type and severity: DM1 tends to be more severe than DM2, and the congenital form carries high neonatal morbidity and mortality. Cardiac conduction disease and respiratory failure are the leading causes of premature death, so lifelong cardiac and respiratory surveillance is central to care.",
+    "pitfalls": [
+      "Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease",
+      "Giving standard doses of anaesthetic or sedative agents to which patients are unusually sensitive",
+      "Not recognising anticipation and its implications for family counselling",
+      "Missing the diagnosis in a mildly affected parent of a floppy neonate",
+      "Overlooking treatable comorbidities such as cataracts, diabetes, and sleep-disordered breathing"
+    ],
+    "references": [
+      "GeneReviews: Myotonic dystrophy type 1 and type 2",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for conduction disease or arrhythmia to prevent sudden death",
+      "Assess respiratory function and use non-invasive ventilation for hypoventilation, taking great care with anaesthesia and sedatives given respiratory and cardiac sensitivity",
+      "Treat symptomatic myotonia with an antimyotonic agent such as mexiletine when required",
+      "Manage the multisystem features with cataract surgery, treatment of insulin resistance or diabetes, and a wakefulness-promoting agent such as modafinil for disabling hypersomnolence",
+      "Support weakness with physiotherapy, ankle-foot orthoses for foot-drop and occupational therapy",
+      "Offer genetic counselling explaining autosomal dominant inheritance and anticipation, screen at-risk relatives and monitor pregnancies for the severe congenital form",
+      "Coordinate multidisciplinary neuromuscular care"
     ]
-   ],
-   "caption": "Overview comparison matrix for myotonic dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myotonic-dystrophy-real-image",
-   "title": "Myotonic dystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "myotonic_dystrophy-pathway",
+      "title": "Myotonic dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2) by a CCTG repeat expansion in CNBP",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope, palpitations, or a high-grade conduction block indicating risk of sudden cardiac death",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2), Electromyography demonstrating myotonic discharges, Electrocardiography and Holter monitoring for conduction disease and arrhythmia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for conduction disease or arrhythmia to prevent sudden death"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myotonic dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myotonic_dystrophy-matrix",
+      "title": "Myotonic dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant multisystem disorder; type 1 (DM1) is caused by a CTG trinucleotide repeat expansion in DMPK, and type 2 (DM2)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted repeat-expansion genetic testing for DMPK (DM1) and CNBP (DM2), Electromyography demonstrating myotonic discharges,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Limb-girdle muscular dystrophies, Facioscapulohumeral muscular dystrophy, Non-dystrophic myotonias (channelopathies)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide lifelong cardiac surveillance with electrocardiography and Holter monitoring, implanting a pacemaker or defibrillator for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on skeletal weakness and neglecting the potentially fatal cardiac conduction disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myotonic dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myotonic_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat-expansion genetic testing for DMPK and CNBP",
+          "cells": [
+            {
+              "text": "CTG expansion in DMPK (DM1); CCTG expansion in CNBP (DM2)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and Holter monitoring",
+          "cells": [
+            {
+              "text": "Conduction disease and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Characteristic cataracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose tolerance and respiratory function",
+          "cells": [
+            {
+              "text": "Insulin resistance and respiratory involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myotonic_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Limb-girdle muscular dystrophies",
+          "cells": [
+            {
+              "text": "Myotonia and multisystem features point to myotonic dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-dystrophic myotonias (channelopathies)",
+          "cells": [
+            {
+              "text": "Myotonia without the multisystem features of myotonic dystrophy; CLCN1 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myotonic_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG and Holter monitoring; pacemaker or defibrillator for conduction disease or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory assessment",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation for hypoventilation; care with anaesthetics and sedatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimyotonic agent",
+          "cells": [
+            {
+              "text": "Mexiletine for symptomatic myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem features",
+          "cells": [
+            {
+              "text": "Cataract surgery; treatment of insulin resistance or diabetes; modafinil for disabling hypersomnolence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physical support",
+          "cells": [
+            {
+              "text": "Physiotherapy, ankle-foot orthoses and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with anticipation; screen relatives and monitor pregnancies for the congenital form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Coordinated neuromuscular care across specialties"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myotonic_dystrophy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected trinucleotide repeat disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Locus",
+        "Repeat",
+        "Triplet length (normal/disease)",
+        "Inheritance",
+        "Gene product"
+      ],
+      "rows": [
+        {
+          "parameter": "X-chromosomal spinobulbar muscular atrophy (SBMA)",
+          "cells": [
+            {
+              "text": "Xq11-q12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "11-34/40-62"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "Androgen receptor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXA)",
+          "cells": [
+            {
+              "text": "Xq27.3"
+            },
+            {
+              "text": "CGG"
+            },
+            {
+              "text": "6-50/200-300"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-1 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXE)",
+          "cells": [
+            {
+              "text": "Xq28"
+            },
+            {
+              "text": "GCC"
+            },
+            {
+              "text": "6-25/>200"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-2 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystrophia myotonica (DM)",
+          "cells": [
+            {
+              "text": "19q13.2-q13.3"
+            },
+            {
+              "text": "CTG"
+            },
+            {
+              "text": "5-30/200-1000"
+            },
+            {
+              "text": "AD, variable penetrance"
+            },
+            {
+              "text": "Myotonin protein kinase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Huntington's disease (HD)",
+          "cells": [
+            {
+              "text": "4p16.3"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-34/37-180"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Huntingtin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 1 (SCA1)",
+          "cells": [
+            {
+              "text": "6p21.3-21.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-39/40-88"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA2",
+          "cells": [
+            {
+              "text": "12q24.1"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "15-31/34-400"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA3; Machado-Joseph disease (MD)",
+          "cells": [
+            {
+              "text": "14q21"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "13-36/55-86"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA6 (CACNA1A)",
+          "cells": [
+            {
+              "text": "19p13.1-13.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-16/20-33"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Alpha 1A voltage-dependent L-type calcium channel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA7",
+          "cells": [
+            {
+              "text": "3p21.1-p12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-19/37 to >300"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 7"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA12",
+          "cells": [
+            {
+              "text": "5q31"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-26/66-78"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Protein phosphatase 2A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dentorubral pallidoluysian atrophy (DRPLA)",
+          "cells": [
+            {
+              "text": "12p"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "7-23/49-75"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Atrophin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Friedreich ataxia (FRDA1)",
+          "cells": [
+            {
+              "text": "9q13-21"
+            },
+            {
+              "text": "GAA"
+            },
+            {
+              "text": "7-22/200-900"
+            },
+            {
+              "text": "AR"
+            },
+            {
+              "text": "Frataxin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myotonic_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Myotonic dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myotonia with distal or facial weakness, ptosis and multisystem features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope, high-grade conduction block, respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review; pacemaker or defibrillator if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat-expansion testing for DMPK and CNBP, EMG, ECG and Holter, slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Repeat expansion in DMPK or CNBP confirmed alongside myotonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-dystrophic myotonia, limb-girdle dystrophy or mitochondrial myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong cardiac surveillance with ECG and Holter monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pacemaker or defibrillator for conduction disease or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-invasive ventilation for hypoventilation; careful anaesthetic and sedative use",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mexiletine for symptomatic myotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "DM1 more severe than DM2; conduction disease and respiratory failure drive mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

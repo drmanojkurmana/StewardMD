@@ -1,171 +1,470 @@
 {
- "id": "otosclerosis",
- "name": "Otosclerosis",
- "aliases": [
-  "otospongiosis",
-  "stapedial otosclerosis"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the stapes footplate",
-   "Typically presents in young to middle-aged adults with slowly progressive bilateral conductive hearing loss and a family history",
-   "Often worsens during pregnancy, suggesting a hormonal influence, and is more common in women",
-   "Patients frequently hear better in noisy surroundings (paracusis Willisii) and may speak softly",
-   "The tympanic membrane is characteristically normal; a pink flush over the promontory (Schwartze sign) reflects active vascular disease",
-   "Tuning fork tests show a negative Rinne and audiometry reveals conductive loss, often with the characteristic Carhart notch dip in bone conduction around 2 kHz",
-   "Cochlear otosclerosis can add a sensorineural component leading to mixed hearing loss",
-   "Management options include a hearing aid, or stapes surgery (stapedectomy/stapedotomy with a prosthesis) to restore ossicular movement; sodium fluoride may be used to stabilise active disease"
+  "id": "otosclerosis",
+  "name": "Otosclerosis",
+  "aliases": [
+    "otospongiosis",
+    "stapedial otosclerosis"
   ],
-  "pathophysiology": "Otosclerosis is a primary disorder of endochondral bone of the otic capsule in which foci of normal lamellar bone are resorbed and replaced by irregular, highly cellular and vascular spongy bone that later matures into dense sclerotic bone. The commonest site is the region of the fissula ante fenestram just anterior to the oval window; as the focus enlarges it invades and fixes the stapes footplate, producing progressive conductive hearing loss. Extension of foci into the cochlear endosteum can damage the neural elements and cause sensorineural loss. The condition is inherited in an autosomal dominant pattern with incomplete penetrance, and hormonal factors appear to modulate its activity.",
-  "additionalDifferentials": [
-   "Ossicular fixation or discontinuity from other causes",
-   "Congenital stapes fixation",
-   "Adhesive otitis media or tympanosclerosis",
-   "Otitis media with effusion",
-   "Van der Hoeve syndrome (otosclerosis with osteogenesis imperfecta)",
-   "Paget disease of the temporal bone",
-   "Superior semicircular canal dehiscence mimicking conductive loss"
-  ],
-  "additionalInvestigations": [
-   "Pure tone audiometry to document conductive or mixed loss and the Carhart notch",
-   "Tuning fork tests to confirm conductive hearing loss",
-   "Tympanometry, typically showing normal to reduced compliance, with absent stapedial reflexes",
-   "Speech audiometry to assess discrimination before surgery",
-   "High-resolution CT of the temporal bone to map active foci and exclude other pathology in selected cases"
-  ],
-  "redFlags": [
-   "Rapidly progressive or asymmetrical sensorineural loss prompting reconsideration of the diagnosis",
-   "Vertigo or disequilibrium suggesting labyrinthine or alternative pathology",
-   "Sudden deterioration or facial nerve symptoms after stapes surgery requiring urgent review",
-   "Unilateral pulsatile tinnitus or other features that raise concern for a vascular or retrocochlear lesion"
-  ],
-  "prognosis": "The disease is progressive but stapes surgery closes the conductive gap and restores useful hearing in most suitably selected patients, while hearing aids remain an effective non-surgical option; established cochlear involvement, however, is not reversible.",
-  "pitfalls": [
-   "Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion",
-   "Failing to counsel about the small risk of dead ear and sensorineural loss with stapes surgery",
-   "Missing a coexisting sensorineural (cochlear) component that limits surgical benefit",
-   "Not recognising the Carhart notch as a bone conduction artefact rather than true cochlear loss"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably selected patients",
-   "Hearing aids as an effective non-surgical alternative for those unfit for or declining surgery",
-   "Pure-tone and speech audiometry to select surgical candidates and document the conductive or mixed loss",
-   "Cochlear implantation for advanced cochlear (retrofenestral) otosclerosis with profound sensorineural loss",
-   "Consider sodium fluoride or a bisphosphonate to stabilise active otospongiotic foci in selected cochlear disease",
-   "Counsel that established sensorineural cochlear involvement is not reversible by surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "otosclerosis-pathway",
-   "title": "Otosclerosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the stapes footplate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or asymmetrical sensorineural loss prompting reconsideration of the diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure tone audiometry to document conductive or mixed loss and the Carhart notch, Tuning fork tests to confirm conductive hearing loss, Tympanometry, typically showing normal to reduced compliance, with absent stapedial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably selected patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of otosclerosis."
-  }
- ],
- "tables": [
-  {
-   "id": "otosclerosis-matrix",
-   "title": "Otosclerosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the stapes footplate",
+      "Typically presents in young to middle-aged adults with slowly progressive bilateral conductive hearing loss and a family history",
+      "Often worsens during pregnancy, suggesting a hormonal influence, and is more common in women",
+      "Patients frequently hear better in noisy surroundings (paracusis Willisii) and may speak softly",
+      "The tympanic membrane is characteristically normal; a pink flush over the promontory (Schwartze sign) reflects active vascular disease",
+      "Tuning fork tests show a negative Rinne and audiometry reveals conductive loss, often with the characteristic Carhart notch dip in bone conduction around 2 kHz",
+      "Cochlear otosclerosis can add a sensorineural component leading to mixed hearing loss",
+      "Management options include a hearing aid, or stapes surgery (stapedectomy/stapedotomy with a prosthesis) to restore ossicular movement; sodium fluoride may be used to stabilise active disease"
     ],
-    [
-     "Key Investigations",
-     "Pure tone audiometry to document conductive or mixed loss and the Carhart notch, Tuning fork tests to confirm conductive hearing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Otosclerosis is a primary disorder of endochondral bone of the otic capsule in which foci of normal lamellar bone are resorbed and replaced by irregular, highly cellular and vascular spongy bone that later matures into dense sclerotic bone. The commonest site is the region of the fissula ante fenestram just anterior to the oval window; as the focus enlarges it invades and fixes the stapes footplate, producing progressive conductive hearing loss. Extension of foci into the cochlear endosteum can damage the neural elements and cause sensorineural loss. The condition is inherited in an autosomal dominant pattern with incomplete penetrance, and hormonal factors appear to modulate its activity.",
+    "additionalDifferentials": [
+      "Ossicular fixation or discontinuity from other causes",
+      "Congenital stapes fixation",
+      "Adhesive otitis media or tympanosclerosis",
+      "Otitis media with effusion",
+      "Van der Hoeve syndrome (otosclerosis with osteogenesis imperfecta)",
+      "Paget disease of the temporal bone",
+      "Superior semicircular canal dehiscence mimicking conductive loss"
     ],
-    [
-     "Primary Differentials",
-     "Ossicular fixation or discontinuity from other causes, Congenital stapes fixation, Adhesive otitis media or tympanosclerosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure tone audiometry to document conductive or mixed loss and the Carhart notch",
+      "Tuning fork tests to confirm conductive hearing loss",
+      "Tympanometry, typically showing normal to reduced compliance, with absent stapedial reflexes",
+      "Speech audiometry to assess discrimination before surgery",
+      "High-resolution CT of the temporal bone to map active foci and exclude other pathology in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or asymmetrical sensorineural loss prompting reconsideration of the diagnosis",
+      "Vertigo or disequilibrium suggesting labyrinthine or alternative pathology",
+      "Sudden deterioration or facial nerve symptoms after stapes surgery requiring urgent review",
+      "Unilateral pulsatile tinnitus or other features that raise concern for a vascular or retrocochlear lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is progressive but stapes surgery closes the conductive gap and restores useful hearing in most suitably selected patients, while hearing aids remain an effective non-surgical option; established cochlear involvement, however, is not reversible.",
+    "pitfalls": [
+      "Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion",
+      "Failing to counsel about the small risk of dead ear and sensorineural loss with stapes surgery",
+      "Missing a coexisting sensorineural (cochlear) component that limits surgical benefit",
+      "Not recognising the Carhart notch as a bone conduction artefact rather than true cochlear loss"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably selected patients",
+      "Hearing aids as an effective non-surgical alternative for those unfit for or declining surgery",
+      "Pure-tone and speech audiometry to select surgical candidates and document the conductive or mixed loss",
+      "Cochlear implantation for advanced cochlear (retrofenestral) otosclerosis with profound sensorineural loss",
+      "Consider sodium fluoride or a bisphosphonate to stabilise active otospongiotic foci in selected cochlear disease",
+      "Counsel that established sensorineural cochlear involvement is not reversible by surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for otosclerosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "otosclerosis-real-image",
-   "title": "Otosclerosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "otosclerosis-pathway",
+      "title": "Otosclerosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the stapes footplate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or asymmetrical sensorineural loss prompting reconsideration of the diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure tone audiometry to document conductive or mixed loss and the Carhart notch, Tuning fork tests to confirm conductive hearing loss, Tympanometry, typically showing normal to reduced compliance, with absent stapedial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably selected patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of otosclerosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "otosclerosis-matrix",
+      "title": "Otosclerosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A localised disease of the bony labyrinth in which normal bone is replaced by spongy, vascular new bone that most often fixes the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure tone audiometry to document conductive or mixed loss and the Carhart notch, Tuning fork tests to confirm conductive hearing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ossicular fixation or discontinuity from other causes, Congenital stapes fixation, Adhesive otitis media or tympanosclerosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stapes surgery, stapedotomy or stapedectomy, to close the conductive gap by bypassing the fixed stapes footplate in suitably",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking otosclerosis when the drum looks normal and attributing the loss to wax or effusion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for otosclerosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otosclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive or mixed loss with a Carhart notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuning fork tests",
+          "cells": [
+            {
+              "text": "Confirm conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and reflexes",
+          "cells": [
+            {
+              "text": "Normal to reduced compliance with absent stapedial reflexes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech audiometry",
+          "cells": [
+            {
+              "text": "Discrimination before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Active foci and other pathology, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Otitis media with effusion",
+          "cells": [
+            {
+              "text": "Effusion gives a different pattern; the drum is normal in otosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Van der Hoeve syndrome",
+          "cells": [
+            {
+              "text": "Otosclerosis occurring with osteogenesis imperfecta"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stapes surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Stapedotomy or stapedectomy to bypass the fixed footplate in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "An effective alternative for those declining or unfit for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry for selection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Documents the conductive or mixed loss and guides candidacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For advanced cochlear disease with profound sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy for cochlear disease",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Sodium fluoride or a bisphosphonate for active foci in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Established sensorineural cochlear involvement is not reversed by surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otosclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Otosclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive bilateral conductive hearing loss with normal drums in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid asymmetric sensorineural loss, vertigo or facial symptoms after surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT review for post-surgery complication or vascular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone and speech audiometry, tuning fork, tympanometry, HRCT if selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does audiometry show conductive loss with a Carhart notch and normal drum?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ossicular fixation, effusion, tympanosclerosis or canal dehiscence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stapedotomy or stapedectomy to bypass the fixed footplate in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids as an effective alternative for those declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cochlear implantation for advanced cochlear disease with profound sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sodium fluoride or a bisphosphonate for active foci in selected cochlear disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counsel that established sensorineural loss is not reversed by surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surgery restores useful hearing in most suitable patients; cochlear loss is permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

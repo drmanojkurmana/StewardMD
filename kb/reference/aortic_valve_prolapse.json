@@ -1,172 +1,431 @@
 {
- "id": "aortic_valve_prolapse",
- "name": "aortic valve prolapse",
- "aliases": [
-  "aortic cusp prolapse",
-  "prolapsing aortic valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing aortic regurgitation with an eccentric jet.",
-   "A key association is ventricular septal defect, where the right coronary or non-coronary cusp prolapses into a doubly committed subarterial or perimembranous defect, partially occluding the shunt while worsening regurgitation.",
-   "Progressive cusp prolapse is an indication to close a ventricular septal defect even when the shunt is small, to prevent worsening aortic regurgitation.",
-   "It is also seen with bicuspid valve, connective tissue disorders such as Marfan and Ehlers-Danlos syndromes, and myxomatous degeneration.",
-   "Echocardiography shows diastolic cusp displacement below the annular plane with a regurgitant jet directed away from the prolapsing cusp.",
-   "The murmur is an early decrescendo diastolic murmur, and a cusp prolapsing over a ventricular septal defect may reduce the systolic shunt murmur over time.",
-   "Early valve-sparing repair is preferred before the cusp tissue becomes irreversibly elongated and damaged."
+  "id": "aortic_valve_prolapse",
+  "name": "aortic valve prolapse",
+  "aliases": [
+    "aortic cusp prolapse",
+    "prolapsing aortic valve"
   ],
-  "pathophysiology": "Prolapse occurs when a cusp loses adequate support and herniates below the plane of the aortic annulus into the left ventricular outflow tract during diastole, causing malcoaptation and regurgitation. A common mechanism is deficient subvalvar cusp support in ventricular septal defect, where loss of tissue beneath the cusp together with a Venturi effect from the high-velocity shunt draws the right coronary or non-coronary cusp into the defect; doubly committed subarterial and perimembranous defects are the typical culprits. Other causes include redundant myxomatous cusp tissue and connective tissue disease. Sustained prolapse leads to cusp elongation, fibrosis and progressively worsening aortic regurgitation with left ventricular volume overload.",
-  "additionalDifferentials": [
-   "Bicuspid aortic valve with regurgitation",
-   "Aortic root dilatation causing central regurgitation",
-   "Infective endocarditis with cusp perforation",
-   "Rheumatic aortic regurgitation",
-   "Aortic cusp fenestration",
-   "Subaortic membrane with secondary cusp damage"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography assessing cusp motion and the regurgitant jet",
-   "Transoesophageal and 3D echocardiography for cusp morphology",
-   "Cardiac MRI for regurgitant fraction and left ventricular volumes",
-   "Electrocardiography for left ventricular hypertrophy",
-   "Cardiac CT and aortic imaging",
-   "Screening for ventricular septal defect and measurement of aortic root dimensions"
-  ],
-  "redFlags": [
-   "Severe aortic regurgitation with left ventricular dilatation or dysfunction",
-   "Rapidly progressive prolapse over a ventricular septal defect",
-   "Fever, new murmur or emboli suggesting infective endocarditis",
-   "Symptoms of heart failure"
-  ],
-  "prognosis": "Prognosis depends on early recognition and timely surgery; valve-sparing repair before significant cusp degeneration gives good results, whereas late presentation with severe regurgitation and left ventricular dysfunction worsens outcome.",
-  "pitfalls": [
-   "Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation",
-   "Delaying ventricular septal defect closure until regurgitation is already severe",
-   "Misjudging jet severity on off-axis views of an eccentric prolapse jet",
-   "Attributing regurgitation to root dilatation when cusp prolapse is the primary lesion"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-   "ESC/EACTS Guidelines for the Management of Valvular Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular dysfunction develops",
-   "Close an associated ventricular septal defect, even when the shunt is small, once progressive cusp prolapse appears, to prevent worsening aortic regurgitation",
-   "Control blood pressure and afterload and treat any heart failure with diuretics and guideline-directed therapy while awaiting surgery",
-   "Address an underlying connective tissue disorder such as Marfan or Ehlers-Danlos syndrome, slowing aortic root dilatation with a beta-blocker or ARB and monitoring root dimensions",
-   "Maintain good dental hygiene and endocarditis-prevention measures",
-   "Undertake serial echocardiographic surveillance of cusp motion, regurgitant severity and ventricular size, managing through a heart-valve multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aortic_valve_prolapse-pathway",
-   "title": "aortic valve prolapse: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing aortic regurgitation with an eccentric jet.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe aortic regurgitation with left ventricular dilatation or dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography assessing cusp motion and the regurgitant jet, Transoesophageal and 3D echocardiography for cusp morphology, Cardiac MRI for regurgitant fraction and left ventricular volumes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular dysfunction develops"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aortic valve prolapse."
-  }
- ],
- "tables": [
-  {
-   "id": "aortic_valve_prolapse-matrix",
-   "title": "aortic valve prolapse: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing aortic regurgitation with an eccentric jet.",
+      "A key association is ventricular septal defect, where the right coronary or non-coronary cusp prolapses into a doubly committed subarterial or perimembranous defect, partially occluding the shunt while worsening regurgitation.",
+      "Progressive cusp prolapse is an indication to close a ventricular septal defect even when the shunt is small, to prevent worsening aortic regurgitation.",
+      "It is also seen with bicuspid valve, connective tissue disorders such as Marfan and Ehlers-Danlos syndromes, and myxomatous degeneration.",
+      "Echocardiography shows diastolic cusp displacement below the annular plane with a regurgitant jet directed away from the prolapsing cusp.",
+      "The murmur is an early decrescendo diastolic murmur, and a cusp prolapsing over a ventricular septal defect may reduce the systolic shunt murmur over time.",
+      "Early valve-sparing repair is preferred before the cusp tissue becomes irreversibly elongated and damaged."
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography assessing cusp motion and the regurgitant jet, Transoesophageal and 3D echocardiography for cusp",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prolapse occurs when a cusp loses adequate support and herniates below the plane of the aortic annulus into the left ventricular outflow tract during diastole, causing malcoaptation and regurgitation. A common mechanism is deficient subvalvar cusp support in ventricular septal defect, where loss of tissue beneath the cusp together with a Venturi effect from the high-velocity shunt draws the right coronary or non-coronary cusp into the defect; doubly committed subarterial and perimembranous defects are the typical culprits. Other causes include redundant myxomatous cusp tissue and connective tissue disease. Sustained prolapse leads to cusp elongation, fibrosis and progressively worsening aortic regurgitation with left ventricular volume overload.",
+    "additionalDifferentials": [
+      "Bicuspid aortic valve with regurgitation",
+      "Aortic root dilatation causing central regurgitation",
+      "Infective endocarditis with cusp perforation",
+      "Rheumatic aortic regurgitation",
+      "Aortic cusp fenestration",
+      "Subaortic membrane with secondary cusp damage"
     ],
-    [
-     "Primary Differentials",
-     "Bicuspid aortic valve with regurgitation, Aortic root dilatation causing central regurgitation, Infective endocarditis with cusp",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography assessing cusp motion and the regurgitant jet",
+      "Transoesophageal and 3D echocardiography for cusp morphology",
+      "Cardiac MRI for regurgitant fraction and left ventricular volumes",
+      "Electrocardiography for left ventricular hypertrophy",
+      "Cardiac CT and aortic imaging",
+      "Screening for ventricular septal defect and measurement of aortic root dimensions"
     ],
-    [
-     "Management Strategy",
-     "Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe aortic regurgitation with left ventricular dilatation or dysfunction",
+      "Rapidly progressive prolapse over a ventricular septal defect",
+      "Fever, new murmur or emboli suggesting infective endocarditis",
+      "Symptoms of heart failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on early recognition and timely surgery; valve-sparing repair before significant cusp degeneration gives good results, whereas late presentation with severe regurgitation and left ventricular dysfunction worsens outcome.",
+    "pitfalls": [
+      "Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation",
+      "Delaying ventricular septal defect closure until regurgitation is already severe",
+      "Misjudging jet severity on off-axis views of an eccentric prolapse jet",
+      "Attributing regurgitation to root dilatation when cusp prolapse is the primary lesion"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "ESC/EACTS Guidelines for the Management of Valvular Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular dysfunction develops",
+      "Close an associated ventricular septal defect, even when the shunt is small, once progressive cusp prolapse appears, to prevent worsening aortic regurgitation",
+      "Control blood pressure and afterload and treat any heart failure with diuretics and guideline-directed therapy while awaiting surgery",
+      "Address an underlying connective tissue disorder such as Marfan or Ehlers-Danlos syndrome, slowing aortic root dilatation with a beta-blocker or ARB and monitoring root dimensions",
+      "Maintain good dental hygiene and endocarditis-prevention measures",
+      "Undertake serial echocardiographic surveillance of cusp motion, regurgitant severity and ventricular size, managing through a heart-valve multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for aortic valve prolapse."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aortic-valve-prolapse-real-image",
-   "title": "aortic valve prolapse: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "aortic_valve_prolapse-pathway",
+      "title": "aortic valve prolapse: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing aortic regurgitation with an eccentric jet.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe aortic regurgitation with left ventricular dilatation or dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography assessing cusp motion and the regurgitant jet, Transoesophageal and 3D echocardiography for cusp morphology, Cardiac MRI for regurgitant fraction and left ventricular volumes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular dysfunction develops"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aortic valve prolapse."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aortic_valve_prolapse-matrix",
+      "title": "aortic valve prolapse: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Aortic valve prolapse is displacement of one or more cusps into the left ventricular outflow tract during diastole, producing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography assessing cusp motion and the regurgitant jet, Transoesophageal and 3D echocardiography for cusp",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bicuspid aortic valve with regurgitation, Aortic root dilatation causing central regurgitation, Infective endocarditis with cusp",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer for aortic valve repair, favouring valve-sparing techniques, before significant cusp degeneration or left ventricular",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a small ventricular septal defect as the cause of progressive aortic regurgitation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aortic valve prolapse."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortic_valve_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Cusp motion and the regurgitant jet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal and 3D echocardiography",
+          "cells": [
+            {
+              "text": "Cusp morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Regurgitant fraction and left ventricular volumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Left ventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for ventricular septal defect and aortic root dimensions",
+          "cells": [
+            {
+              "text": "Associated defect and root size"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortic_valve_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic valve repair",
+          "cells": [
+            {
+              "text": "Valve-sparing techniques preferred"
+            },
+            {
+              "text": "Before significant cusp degeneration or ventricular dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closure of an associated ventricular septal defect",
+          "cells": [
+            {
+              "text": "Even when the shunt is small, once progressive cusp prolapse appears"
+            },
+            {
+              "text": "Prevents worsening aortic regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Afterload and heart failure control",
+          "cells": [
+            {
+              "text": "Blood pressure control, diuretics and guideline-directed therapy"
+            },
+            {
+              "text": "While awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disorder",
+          "cells": [
+            {
+              "text": "Beta-blocker to slow aortic root dilatation"
+            },
+            {
+              "text": "Marfan or Ehlers-Danlos syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prevention",
+          "cells": [
+            {
+              "text": "Good dental hygiene and endocarditis-prevention measures"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Cusp motion, regurgitant severity and ventricular size"
+            },
+            {
+              "text": "Heart-valve multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortic_valve_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of aortic valve prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aortic regurgitation from a prolapsing aortic valve cusp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe regurgitation, LV dilatation or rapid prolapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent heart-valve team review for severe regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE, TOE and 3D echo, cardiac MRI, ECG, aortic root measurement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ventricular septal defect present with progressive prolapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Close the ventricular septal defect to prevent worsening regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control blood pressure and afterload; diuretics for heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refer for valve-sparing aortic valve repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Beta-blocker to slow root dilatation in connective tissue disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial echo surveillance of cusp motion and regurgitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

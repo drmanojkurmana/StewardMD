@@ -1,179 +1,477 @@
 {
- "id": "pes_cavus",
- "name": "Pes cavus",
- "aliases": [
-  "cavus foot",
-  "high-arched foot",
-  "pes cavovarus",
-  "high instep"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of the toes (cavovarus foot)",
-   "A cavus foot, especially if progressive, asymmetrical, or associated with clawing, should be assumed to have a neurological cause until proven otherwise",
-   "Charcot-Marie-Tooth disease is the classic hereditary neuropathy underlying cavovarus deformity, but other neuromuscular causes and old trauma also occur",
-   "The Coleman block test determines whether hindfoot varus is flexible and driven by the plantarflexed first ray, which corrects when the lateral foot is supported, or fixed",
-   "The high arch reduces the weight-bearing area, so load concentrates under the metatarsal heads and heel, causing metatarsalgia and painful callosities",
-   "Lateral foot overload predisposes to recurrent ankle sprains, peroneal tendon problems, and lateral column stress fractures",
-   "Examination must include a full neurological assessment, family history, and gait analysis, with weight-bearing radiographs to quantify the deformity",
-   "Management ranges from cushioned, supportive footwear and orthoses with lateral posting and metatarsal support, through physiotherapy, to osteotomy, tendon transfer, and arthrodesis for fixed deformity"
+  "id": "pes_cavus",
+  "name": "Pes cavus",
+  "aliases": [
+    "cavus foot",
+    "high-arched foot",
+    "pes cavovarus",
+    "high instep"
   ],
-  "pathophysiology": "Pes cavus is an elevation of the medial longitudinal arch that usually reflects a muscle imbalance across the foot rather than a primary bony abnormality. In the common cavovarus pattern, relative weakness of the tibialis anterior and peroneus brevis with preserved or overactive peroneus longus and tibialis posterior plantarflexes the first ray and drives the hindfoot into varus, while intrinsic weakness produces clawing of the toes. This imbalance is characteristically caused by hereditary motor and sensory neuropathies, most notably Charcot-Marie-Tooth disease, but also by other neuromuscular disorders, spinal pathology, and sequelae of trauma or compartment syndrome. The rigid high arch concentrates load on the heel and metatarsal heads, producing metatarsalgia and callosities, and the varus hindfoot destabilises the ankle, leading to recurrent lateral ankle sprains, peroneal tendon overload, and lateral column stress injuries. Initially flexible, the deformity tends to stiffen and become fixed as it progresses.",
-  "additionalDifferentials": [
-   "Charcot-Marie-Tooth disease and other hereditary neuropathies",
-   "Residual or idiopathic clubfoot deformity",
-   "Post-traumatic cavus following compartment syndrome or malunion",
-   "Spinal dysraphism, tethered cord, or other central neurological causes",
-   "Poliomyelitis or other motor neuropathy sequelae",
-   "Friedreich's ataxia and related hereditary ataxias",
-   "Idiopathic subtle cavus without an identifiable cause"
-  ],
-  "additionalInvestigations": [
-   "Full neurological examination and family history to seek a hereditary neuropathy",
-   "Coleman block test to determine whether hindfoot varus is flexible or fixed",
-   "Weight-bearing foot radiographs to quantify the arch and hindfoot alignment",
-   "Nerve conduction studies and neurology referral where a neuromuscular cause is suspected",
-   "Spinal MRI if a central or cord lesion is considered, particularly in unilateral or rapidly progressive cases",
-   "Genetic testing for Charcot-Marie-Tooth disease when clinically indicated",
-   "Pedobarography to characterise the abnormal loading pattern"
-  ],
-  "redFlags": [
-   "Progressive, asymmetrical, or unilateral cavus deformity suggesting an active neurological process such as a tethered cord or tumour",
-   "New or evolving neurological deficit requiring urgent neurological and spinal evaluation",
-   "Sensory loss with plantar ulceration in a neuropathic foot",
-   "Recurrent giving way with ankle instability and lateral column stress injury",
-   "Rapid deterioration in gait or balance indicating a progressive neuromuscular disorder"
-  ],
-  "prognosis": "Prognosis is closely tied to the underlying cause. Idiopathic or mild cavus may remain stable and manageable with orthoses, but neuropathic cavovarus deformity, as in Charcot-Marie-Tooth disease, tends to be progressive and to recur even after surgery because the causative imbalance persists. Combined bony realignment and tendon transfers can restore a plantigrade, stable foot, but long-term orthotic support and monitoring are usually required.",
-  "pitfalls": [
-   "Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause",
-   "Not performing the Coleman block test, so that a flexible hindfoot is treated as if fixed",
-   "Correcting bony deformity without addressing the tendon imbalance, leading to recurrence",
-   "Overlooking spinal pathology in unilateral or rapidly progressive deformity",
-   "Neglecting ankle instability and lateral overload that accompany the varus hindfoot"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic, commonly Charcot-Marie-Tooth disease",
-   "Custom orthoses and supportive footwear with lateral posting and cushioning to redistribute load and relieve metatarsalgia and callosities",
-   "Physiotherapy for stretching and strengthening with ankle stabilisation, and podiatric callus care",
-   "Surgery for progressive or rigid deformity, including soft-tissue releases, tendon transfers and calcaneal or first-ray osteotomies, with arthrodesis for fixed deformity",
-   "Manage associated lateral ankle instability and peroneal tendon problems with bracing and rehabilitation",
-   "Genetic counselling and testing for Charcot-Marie-Tooth disease with family screening",
-   "Long-term monitoring for progression and for recurrence after surgery, as the causative imbalance persists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pes_cavus-pathway",
-   "title": "Pes cavus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of the toes (cavovarus foot)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive, asymmetrical, or unilateral cavus deformity suggesting an active neurological process such as a tethered cord or tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full neurological examination and family history to seek a hereditary neuropathy, Coleman block test to determine whether hindfoot varus is flexible or fixed, Weight-bearing foot radiographs to quantify the arch and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic, commonly Charcot-Marie-Tooth disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pes cavus."
-  }
- ],
- "tables": [
-  {
-   "id": "pes_cavus-matrix",
-   "title": "Pes cavus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of the toes (cavovarus foot)",
+      "A cavus foot, especially if progressive, asymmetrical, or associated with clawing, should be assumed to have a neurological cause until proven otherwise",
+      "Charcot-Marie-Tooth disease is the classic hereditary neuropathy underlying cavovarus deformity, but other neuromuscular causes and old trauma also occur",
+      "The Coleman block test determines whether hindfoot varus is flexible and driven by the plantarflexed first ray, which corrects when the lateral foot is supported, or fixed",
+      "The high arch reduces the weight-bearing area, so load concentrates under the metatarsal heads and heel, causing metatarsalgia and painful callosities",
+      "Lateral foot overload predisposes to recurrent ankle sprains, peroneal tendon problems, and lateral column stress fractures",
+      "Examination must include a full neurological assessment, family history, and gait analysis, with weight-bearing radiographs to quantify the deformity",
+      "Management ranges from cushioned, supportive footwear and orthoses with lateral posting and metatarsal support, through physiotherapy, to osteotomy, tendon transfer, and arthrodesis for fixed deformity"
     ],
-    [
-     "Key Investigations",
-     "Full neurological examination and family history to seek a hereditary neuropathy, Coleman block test to determine whether",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pes cavus is an elevation of the medial longitudinal arch that usually reflects a muscle imbalance across the foot rather than a primary bony abnormality. In the common cavovarus pattern, relative weakness of the tibialis anterior and peroneus brevis with preserved or overactive peroneus longus and tibialis posterior plantarflexes the first ray and drives the hindfoot into varus, while intrinsic weakness produces clawing of the toes. This imbalance is characteristically caused by hereditary motor and sensory neuropathies, most notably Charcot-Marie-Tooth disease, but also by other neuromuscular disorders, spinal pathology, and sequelae of trauma or compartment syndrome. The rigid high arch concentrates load on the heel and metatarsal heads, producing metatarsalgia and callosities, and the varus hindfoot destabilises the ankle, leading to recurrent lateral ankle sprains, peroneal tendon overload, and lateral column stress injuries. Initially flexible, the deformity tends to stiffen and become fixed as it progresses.",
+    "additionalDifferentials": [
+      "Charcot-Marie-Tooth disease and other hereditary neuropathies",
+      "Residual or idiopathic clubfoot deformity",
+      "Post-traumatic cavus following compartment syndrome or malunion",
+      "Spinal dysraphism, tethered cord, or other central neurological causes",
+      "Poliomyelitis or other motor neuropathy sequelae",
+      "Friedreich's ataxia and related hereditary ataxias",
+      "Idiopathic subtle cavus without an identifiable cause"
     ],
-    [
-     "Primary Differentials",
-     "Charcot-Marie-Tooth disease and other hereditary neuropathies, Residual or idiopathic clubfoot deformity, Post-traumatic cavus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full neurological examination and family history to seek a hereditary neuropathy",
+      "Coleman block test to determine whether hindfoot varus is flexible or fixed",
+      "Weight-bearing foot radiographs to quantify the arch and hindfoot alignment",
+      "Nerve conduction studies and neurology referral where a neuromuscular cause is suspected",
+      "Spinal MRI if a central or cord lesion is considered, particularly in unilateral or rapidly progressive cases",
+      "Genetic testing for Charcot-Marie-Tooth disease when clinically indicated",
+      "Pedobarography to characterise the abnormal loading pattern"
     ],
-    [
-     "Management Strategy",
-     "Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic,",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive, asymmetrical, or unilateral cavus deformity suggesting an active neurological process such as a tethered cord or tumour",
+      "New or evolving neurological deficit requiring urgent neurological and spinal evaluation",
+      "Sensory loss with plantar ulceration in a neuropathic foot",
+      "Recurrent giving way with ankle instability and lateral column stress injury",
+      "Rapid deterioration in gait or balance indicating a progressive neuromuscular disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is closely tied to the underlying cause. Idiopathic or mild cavus may remain stable and manageable with orthoses, but neuropathic cavovarus deformity, as in Charcot-Marie-Tooth disease, tends to be progressive and to recur even after surgery because the causative imbalance persists. Combined bony realignment and tendon transfers can restore a plantigrade, stable foot, but long-term orthotic support and monitoring are usually required.",
+    "pitfalls": [
+      "Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause",
+      "Not performing the Coleman block test, so that a flexible hindfoot is treated as if fixed",
+      "Correcting bony deformity without addressing the tendon imbalance, leading to recurrence",
+      "Overlooking spinal pathology in unilateral or rapidly progressive deformity",
+      "Neglecting ankle instability and lateral overload that accompany the varus hindfoot"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic, commonly Charcot-Marie-Tooth disease",
+      "Custom orthoses and supportive footwear with lateral posting and cushioning to redistribute load and relieve metatarsalgia and callosities",
+      "Physiotherapy for stretching and strengthening with ankle stabilisation, and podiatric callus care",
+      "Surgery for progressive or rigid deformity, including soft-tissue releases, tendon transfers and calcaneal or first-ray osteotomies, with arthrodesis for fixed deformity",
+      "Manage associated lateral ankle instability and peroneal tendon problems with bracing and rehabilitation",
+      "Genetic counselling and testing for Charcot-Marie-Tooth disease with family screening",
+      "Long-term monitoring for progression and for recurrence after surgery, as the causative imbalance persists"
     ]
-   ],
-   "caption": "Overview comparison matrix for pes cavus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pes-cavus-real-image",
-   "title": "Pes cavus: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pes_cavus-pathway",
+      "title": "Pes cavus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of the toes (cavovarus foot)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive, asymmetrical, or unilateral cavus deformity suggesting an active neurological process such as a tethered cord or tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full neurological examination and family history to seek a hereditary neuropathy, Coleman block test to determine whether hindfoot varus is flexible or fixed, Weight-bearing foot radiographs to quantify the arch and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic, commonly Charcot-Marie-Tooth disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pes cavus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pes_cavus-matrix",
+      "title": "Pes cavus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pes cavus is an abnormally high medial longitudinal arch, commonly with hindfoot varus, a plantarflexed first ray, and clawing of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full neurological examination and family history to seek a hereditary neuropathy, Coleman block test to determine whether",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Charcot-Marie-Tooth disease and other hereditary neuropathies, Residual or idiopathic clubfoot deformity, Post-traumatic cavus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and manage the underlying neurological cause and refer to neurology, as most progressive cavovarus is neuropathic,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a cavus foot is idiopathic and failing to search for an underlying neurological cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pes cavus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pes_cavus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full neurological examination and family history",
+          "cells": [
+            {
+              "text": "Hereditary neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coleman block test",
+          "cells": [
+            {
+              "text": "Whether hindfoot varus is flexible or fixed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Arch and hindfoot alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Neuromuscular cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal MRI",
+          "cells": [
+            {
+              "text": "Central or cord lesion, particularly in unilateral or rapidly progressive cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedobarography",
+          "cells": [
+            {
+              "text": "Abnormal loading pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pes_cavus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Charcot-Marie-Tooth disease and other hereditary neuropathies",
+          "cells": [
+            {
+              "text": "Neuropathic cavovarus tends to be progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal dysraphism or tethered cord",
+          "cells": [
+            {
+              "text": "Progressive, asymmetrical or unilateral cavus suggests an active neurological process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pes_cavus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurological cause",
+          "cells": [
+            {
+              "text": "Identify and manage the underlying cause; most progressive cavovarus is neuropathic, so refer to neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Custom orthoses and supportive footwear with lateral posting and cushioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Stretching and strengthening with ankle stabilisation; podiatric callus care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "For progressive or rigid deformity: soft-tissue releases, tendon transfers and osteotomies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral ankle instability",
+          "cells": [
+            {
+              "text": "Bracing and rehabilitation for instability and peroneal tendon problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Testing for Charcot-Marie-Tooth disease with family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Progression, and recurrence after surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pes_cavus-dx-mgmt",
+      "title": "Diagnosis and management of Pes cavus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "High-arched foot with cavovarus alignment and a possible neurological cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive or unilateral cavus, new deficit, plantar ulceration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological and spinal evaluation for an evolving neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neurological exam; Coleman block; weight-bearing radiographs; nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the work-up identify a neuromuscular or central cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic cavus, clubfoot sequelae or post-traumatic cavus; monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and manage the underlying neurological cause; refer to neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Custom orthoses and supportive footwear with lateral posting and cushioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy for stretching, strengthening and ankle stabilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for progressive or rigid deformity, such as tendon transfers and osteotomies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and testing for Charcot-Marie-Tooth disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Idiopathic or mild cavus may stay stable; neuropathic cavovarus tends to progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

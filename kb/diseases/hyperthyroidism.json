@@ -218,25 +218,1053 @@
       "caption": "Diagnostic and clinical overview matrix for thyrotoxicosis (uncomplicated)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "hyperthyroidism-real-image",
-      "title": "Thyrotoxicosis (uncomplicated): Diagnostic Endocrine Cross-Sectional Imaging",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hyperthyroidism",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hyperthyroidism",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 247-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperthyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing thyrotoxicosis and its cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Result",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Gland Morphology",
-          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "Suppressed"
+            },
+            {
+              "text": "{{hy:Best first test}}; high or normal TSH suggests TSH-secreting adenoma"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Focal Lesions",
-          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+          "parameter": "Free T4 and T3",
+          "cells": [
+            {
+              "text": "Raised; T3 alone in T3 toxicosis"
+            },
+            {
+              "text": "Confirms thyrotoxicosis"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Surrounding Structures",
-          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+          "parameter": "Subclinical hyperthyroidism",
+          "cells": [
+            {
+              "text": "Low TSH with normal free T4 and T3"
+            },
+            {
+              "text": "Monitor; treat by risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH receptor antibody",
+          "cells": [
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Graves disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake high, diffuse",
+          "cells": [
+            {
+              "text": "Diffuse increase"
+            },
+            {
+              "text": "Graves disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake high, focal",
+          "cells": [
+            {
+              "text": "Hot nodule or nodules"
+            },
+            {
+              "text": "Toxic adenoma or multinodular goitre"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake low",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Thyroiditis, iodine excess or exogenous hormone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum thyroglobulin",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Factitious thyrotoxicosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia or AF"
+            },
+            {
+              "text": "AF more common over 50"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Mild hypercalcaemia in up to 20%"
+            },
+            {
+              "text": "Bone resorption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of thyrotoxicosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "{{hy:Diffuse goitre with bruit, ophthalmopathy, TRAb positive}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic multinodular goitre or toxic adenoma",
+          "cells": [
+            {
+              "text": "Nodular gland; focal uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute or silent thyroiditis",
+          "cells": [
+            {
+              "text": "Low uptake; transient; tender gland in de Quervain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Low uptake and low thyroglobulin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amiodarone or iodine excess",
+          "cells": [
+            {
+              "text": "Drug or contrast history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "Inappropriately normal or high TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety, panic or mania",
+          "cells": [
+            {
+              "text": "Normal thyroid tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Paroxysmal hypertension; normal thyroid tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism-treatment",
+      "kind": "treatment",
+      "title": "Treatment of thyrotoxicosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Propranolol",
+          "cells": [
+            {
+              "text": "Symptom control while thionamide acts"
+            },
+            {
+              "text": "60 to 80 mg every 4 to 6 h orally in storm; adjust to HR and BP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methimazole (or carbimazole)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred antithyroid drug}}"
+            },
+            {
+              "text": "5 to 20 mg 1 to 3 times daily, then 2.5 to 10 mg daily; at least 1 year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propylthiouracil",
+          "cells": [
+            {
+              "text": "First trimester of pregnancy or thyroid storm"
+            },
+            {
+              "text": "100 to 150 mg every 8 h; liver failure risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop thionamide",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Agranulocytosis (about 0.1%)"
+            },
+            {
+              "text": "Do not switch to the other thionamide; use radioiodine or surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioactive iodine",
+          "cells": [
+            {
+              "text": "Graves or toxic nodular goitre"
+            },
+            {
+              "text": "8 to 15 mCi fixed; not in pregnancy; may worsen eye disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroidectomy",
+          "cells": [
+            {
+              "text": "Large goitre, drug intolerance, relapse declining radioiodine"
+            },
+            {
+              "text": "Make euthyroid, then SSKI for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroid storm: PTU then iodine",
+          "cells": [
+            {
+              "text": "Storm"
+            },
+            {
+              "text": "PTU 600 mg then 200 to 400 mg every 6 to 8 h; iodine after PTU"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroid storm: hydrocortisone",
+          "cells": [
+            {
+              "text": "Storm"
+            },
+            {
+              "text": "100 mg IV every 8 h or dexamethasone 2 mg IV every 6 h"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Graves remission after a 1 to 2 year thionamide course is about 20% to 50%. Toxic nodular goitre rarely remits."
+    },
+    {
+      "id": "hyperthyroidism-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of systolic hypertension with wide pulse pressure",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Decreased vascular compliance",
+          "cells": [
+            {
+              "text": "Arteriosclerosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased cardiac output",
+          "cells": [
+            {
+              "text": "Aortic regurgitation; thyrotoxicosis; hyperkinetic heart syndrome; fever; arteriovenous fistula; patent ductus arteriosus"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperthyroidism-dx-mgmt",
+      "title": "Diagnosis and management of thyrotoxicosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palpitations, weight loss, tremor, heat intolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TSH, free T4, T3; ECG",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "TSH suppressed with raised T4 or T3?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Not thyrotoxic; consider anxiety, phaeochromocytoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever, delirium, heart failure (storm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Storm: PTU, then iodine, hydrocortisone, propranolol, ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blocker; TRAb and radioiodine uptake",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Uptake low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Thyroiditis or exogenous: beta-blocker only",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Graves or toxic nodules: methimazole, radioiodine or surgery",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

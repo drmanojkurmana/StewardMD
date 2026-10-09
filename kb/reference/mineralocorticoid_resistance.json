@@ -1,175 +1,489 @@
 {
- "id": "mineralocorticoid_resistance",
- "name": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)",
- "aliases": [
-  "pseudohypoaldosteronism",
-  "PHA",
-  "pseudohypoaldosteronism type 1",
-  "aldosterone resistance"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather than salt retention",
-   "Pseudohypoaldosteronism type 1 has a renal autosomal dominant form (NR3C2 mineralocorticoid receptor) that is milder and often improves with age, and a systemic autosomal recessive form (epithelial sodium channel subunits SCNN1A, SCNN1B, SCNN1G) that is severe and lifelong",
-   "Typically presents in the neonate with failure to thrive, vomiting, dehydration, hyponatraemia, hyperkalaemia and metabolic acidosis",
-   "The systemic recessive form also affects sweat glands, colon and airways and can mimic cystic fibrosis with salty sweat and respiratory symptoms",
-   "Biochemistry shows hyponatraemia, hyperkalaemia, high plasma renin and markedly elevated aldosterone, in contrast to adrenal insufficiency where aldosterone is low",
-   "Pseudohypoaldosteronism type 2 (Gordon syndrome, WNK/KLHL3/CUL3) is the mirror image, with hyperkalaemia, hypertension and low renin",
-   "Management centres on sodium supplementation and control of hyperkalaemia, since mineralocorticoids are ineffective because the defect is downstream of the hormone"
+  "id": "mineralocorticoid_resistance",
+  "name": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)",
+  "aliases": [
+    "pseudohypoaldosteronism",
+    "PHA",
+    "pseudohypoaldosteronism type 1",
+    "aldosterone resistance"
   ],
-  "pathophysiology": "Mineralocorticoid resistance encompasses the pseudohypoaldosteronism syndromes, in which the distal nephron fails to respond to aldosterone despite elevated hormone levels. In the autosomal dominant renal form of type 1, heterozygous loss-of-function mutations in NR3C2 (the mineralocorticoid receptor) blunt renal sodium reabsorption. In the autosomal recessive systemic form, mutations in the epithelial sodium channel subunits abolish sodium transport across multiple aldosterone-responsive epithelia including kidney, colon, sweat and salivary glands, and lung. Impaired sodium reabsorption drives salt wasting, volume depletion and secondary activation of renin and aldosterone, while reduced electrogenic sodium uptake impairs potassium and hydrogen secretion, producing hyperkalaemia and metabolic acidosis. Type 2 (Gordon syndrome) instead reflects overactive distal sodium chloride reabsorption from mutations in the WNK-kinase pathway.",
-  "additionalDifferentials": [
-   "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia, where aldosterone is low",
-   "Aldosterone synthase deficiency",
-   "Cystic fibrosis, for the systemic form with salty sweat and respiratory features",
-   "Secondary or transient pseudohypoaldosteronism from urinary tract infection or obstructive uropathy in infants",
-   "Renal tubular acidosis",
-   "Gordon syndrome (pseudohypoaldosteronism type 2) for the hyperkalaemic hypertensive phenotype"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis",
-   "Plasma renin activity and aldosterone, both high in type 1",
-   "Urinary sodium and potassium to demonstrate renal salt wasting",
-   "Sweat chloride testing to help distinguish the systemic form from cystic fibrosis, noting both can raise sweat chloride",
-   "Renal tract imaging to exclude secondary or transient pseudohypoaldosteronism",
-   "Genetic testing of NR3C2, the epithelial sodium channel subunit genes, and the WNK pathway genes for type 2"
-  ],
-  "redFlags": [
-   "Neonatal salt-wasting crisis with severe hyperkalaemia and cardiac arrhythmia",
-   "Failure to thrive and dehydration unresponsive to mineralocorticoid replacement",
-   "Respiratory compromise in the systemic form mimicking cystic fibrosis"
-  ],
-  "prognosis": "The autosomal dominant renal form of type 1 is generally mild and tends to improve with age as dietary sodium intake rises, whereas the recessive systemic form requires lifelong aggressive salt supplementation and carries greater morbidity; with careful electrolyte management most patients grow and develop normally.",
-  "pitfalls": [
-   "Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream",
-   "Missing transient or secondary pseudohypoaldosteronism due to infant urinary tract infection or obstruction",
-   "Mislabelling the systemic form as cystic fibrosis on the basis of a raised sweat chloride",
-   "Failing to distinguish salt-wasting type 1 from hypertensive type 2 (Gordon syndrome)"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology",
-   "Sperling Pediatric Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1",
-   "Control hyperkalaemia with dietary potassium restriction and potassium-binding cation-exchange resins",
-   "Correct the metabolic acidosis with sodium bicarbonate or citrate",
-   "Treat acute salt-wasting crises with intravenous saline and emergency measures for severe hyperkalaemia",
-   "In the systemic recessive form, provide skin care and airway and respiratory management for the cystic-fibrosis-like manifestations",
-   "Manage pseudohypoaldosteronism type 2 (Gordon syndrome) differently, with dietary sodium restriction and a thiazide diuretic",
-   "Monitor growth, electrolytes and acid-base status regularly, expecting the dominant renal form to ease with age",
-   "Offer genetic testing and counselling to define the subtype and guide family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mineralocorticoid_resistance-pathway",
-   "title": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather than salt retention",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal salt-wasting crisis with severe hyperkalaemia and cardiac arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis, Plasma renin activity and aldosterone, both high in type 1, Urinary sodium and potassium to demonstrate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)."
-  }
- ],
- "tables": [
-  {
-   "id": "mineralocorticoid_resistance-matrix",
-   "title": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather than salt retention",
+      "Pseudohypoaldosteronism type 1 has a renal autosomal dominant form (NR3C2 mineralocorticoid receptor) that is milder and often improves with age, and a systemic autosomal recessive form (epithelial sodium channel subunits SCNN1A, SCNN1B, SCNN1G) that is severe and lifelong",
+      "Typically presents in the neonate with failure to thrive, vomiting, dehydration, hyponatraemia, hyperkalaemia and metabolic acidosis",
+      "The systemic recessive form also affects sweat glands, colon and airways and can mimic cystic fibrosis with salty sweat and respiratory symptoms",
+      "Biochemistry shows hyponatraemia, hyperkalaemia, high plasma renin and markedly elevated aldosterone, in contrast to adrenal insufficiency where aldosterone is low",
+      "Pseudohypoaldosteronism type 2 (Gordon syndrome, WNK/KLHL3/CUL3) is the mirror image, with hyperkalaemia, hypertension and low renin",
+      "Management centres on sodium supplementation and control of hyperkalaemia, since mineralocorticoids are ineffective because the defect is downstream of the hormone"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis, Plasma",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mineralocorticoid resistance encompasses the pseudohypoaldosteronism syndromes, in which the distal nephron fails to respond to aldosterone despite elevated hormone levels. In the autosomal dominant renal form of type 1, heterozygous loss-of-function mutations in NR3C2 (the mineralocorticoid receptor) blunt renal sodium reabsorption. In the autosomal recessive systemic form, mutations in the epithelial sodium channel subunits abolish sodium transport across multiple aldosterone-responsive epithelia including kidney, colon, sweat and salivary glands, and lung. Impaired sodium reabsorption drives salt wasting, volume depletion and secondary activation of renin and aldosterone, while reduced electrogenic sodium uptake impairs potassium and hydrogen secretion, producing hyperkalaemia and metabolic acidosis. Type 2 (Gordon syndrome) instead reflects overactive distal sodium chloride reabsorption from mutations in the WNK-kinase pathway.",
+    "additionalDifferentials": [
+      "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia, where aldosterone is low",
+      "Aldosterone synthase deficiency",
+      "Cystic fibrosis, for the systemic form with salty sweat and respiratory features",
+      "Secondary or transient pseudohypoaldosteronism from urinary tract infection or obstructive uropathy in infants",
+      "Renal tubular acidosis",
+      "Gordon syndrome (pseudohypoaldosteronism type 2) for the hyperkalaemic hypertensive phenotype"
     ],
-    [
-     "Primary Differentials",
-     "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia, where aldosterone is low, Aldosterone synthase",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis",
+      "Plasma renin activity and aldosterone, both high in type 1",
+      "Urinary sodium and potassium to demonstrate renal salt wasting",
+      "Sweat chloride testing to help distinguish the systemic form from cystic fibrosis, noting both can raise sweat chloride",
+      "Renal tract imaging to exclude secondary or transient pseudohypoaldosteronism",
+      "Genetic testing of NR3C2, the epithelial sodium channel subunit genes, and the WNK pathway genes for type 2"
     ],
-    [
-     "Management Strategy",
-     "Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal salt-wasting crisis with severe hyperkalaemia and cardiac arrhythmia",
+      "Failure to thrive and dehydration unresponsive to mineralocorticoid replacement",
+      "Respiratory compromise in the systemic form mimicking cystic fibrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream",
-     "Prevent diagnostic or management error"
+    "prognosis": "The autosomal dominant renal form of type 1 is generally mild and tends to improve with age as dietary sodium intake rises, whereas the recessive systemic form requires lifelong aggressive salt supplementation and carries greater morbidity; with careful electrolyte management most patients grow and develop normally.",
+    "pitfalls": [
+      "Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream",
+      "Missing transient or secondary pseudohypoaldosteronism due to infant urinary tract infection or obstruction",
+      "Mislabelling the systemic form as cystic fibrosis on the basis of a raised sweat chloride",
+      "Failing to distinguish salt-wasting type 1 from hypertensive type 2 (Gordon syndrome)"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology",
+      "Sperling Pediatric Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1",
+      "Control hyperkalaemia with dietary potassium restriction and potassium-binding cation-exchange resins",
+      "Correct the metabolic acidosis with sodium bicarbonate or citrate",
+      "Treat acute salt-wasting crises with intravenous saline and emergency measures for severe hyperkalaemia",
+      "In the systemic recessive form, provide skin care and airway and respiratory management for the cystic-fibrosis-like manifestations",
+      "Manage pseudohypoaldosteronism type 2 (Gordon syndrome) differently, with dietary sodium restriction and a thiazide diuretic",
+      "Monitor growth, electrolytes and acid-base status regularly, expecting the dominant renal form to ease with age",
+      "Offer genetic testing and counselling to define the subtype and guide family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mineralocorticoid-resistance-real-image",
-   "title": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "mineralocorticoid_resistance-pathway",
+      "title": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather than salt retention",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal salt-wasting crisis with severe hyperkalaemia and cardiac arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis, Plasma renin activity and aldosterone, both high in type 1, Urinary sodium and potassium to demonstrate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mineralocorticoid_resistance-matrix",
+      "title": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of disorders in which target tissues resist aldosterone despite high aldosterone and renin, causing salt wasting rather",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes, urea, creatinine and venous blood gas showing hyponatraemia, hyperkalaemia and metabolic acidosis, Plasma",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia, where aldosterone is low, Aldosterone synthase",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace sodium generously with oral sodium chloride supplementation, the mainstay for salt-wasting pseudohypoaldosteronism type 1",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with adrenal insufficiency and giving mineralocorticoid, which is ineffective because resistance lies downstream",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mineralocorticoid_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, urea, creatinine and venous blood gas",
+          "cells": [
+            {
+              "text": "Hyponatraemia, hyperkalaemia and metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Both high in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary sodium and potassium",
+          "cells": [
+            {
+              "text": "Renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing",
+          "cells": [
+            {
+              "text": "Systemic form versus cystic fibrosis; both can raise sweat chloride"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Secondary or transient pseudohypoaldosteronism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of NR3C2, ENaC subunit genes and WNK pathway genes",
+          "cells": [
+            {
+              "text": "Disease subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Aldosterone is low in these, whereas it is high in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis, for the systemic form",
+          "cells": [
+            {
+              "text": "Salty sweat and respiratory features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary pseudohypoaldosteronism from urinary tract infection or obstructive uropathy",
+          "cells": [
+            {
+              "text": "Infants with urinary tract infection or obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gordon syndrome (pseudohypoaldosteronism type 2)",
+          "cells": [
+            {
+              "text": "Hyperkalaemic hypertensive phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral sodium chloride",
+          "cells": [
+            {
+              "text": "Generous supplementation; the mainstay for salt-wasting pseudohypoaldosteronism type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia control",
+          "cells": [
+            {
+              "text": "Dietary potassium restriction and potassium-binding cation-exchange resins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic acidosis",
+          "cells": [
+            {
+              "text": "Sodium bicarbonate or citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute salt-wasting crises",
+          "cells": [
+            {
+              "text": "Intravenous saline and emergency measures for severe hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic recessive form",
+          "cells": [
+            {
+              "text": "Skin care, airway and respiratory management for cystic-fibrosis-like features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohypoaldosteronism type 2 (Gordon syndrome)",
+          "cells": [
+            {
+              "text": "Dietary sodium restriction and a thiazide diuretic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, electrolytes and acid-base status; the renal form is expected to ease with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Defines the subtype and guides family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mineralocorticoid_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with salt wasting, hyponatraemia and hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Salt-wasting crisis with severe hyperkalaemia or arrhythmia, or failure to thrive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV saline and treatment of severe hyperkalaemia; cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes and blood gas; renin and aldosterone; urinary sodium; sweat chloride; NR3C2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are renin and aldosterone both high, indicating type 1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adrenal insufficiency, CAH, cystic fibrosis or Gordon syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Generous oral sodium chloride, the mainstay for salt-wasting type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary potassium restriction and cation-exchange resins for hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate or citrate for metabolic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous saline for salt-wasting crises; emergency measures for severe hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Growth and electrolyte monitoring; renal form expected to ease; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

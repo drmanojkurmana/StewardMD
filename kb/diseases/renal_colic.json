@@ -207,25 +207,469 @@
       "caption": "Diagnostic and clinical overview matrix for renal / ureteric colic."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "renal-colic-real-image",
-      "title": "Renal / ureteric colic: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Fontenelle and Sarti, Kidney Stones: Treatment and Prevention, Am Fam Physician 2019",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0415/p490.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "EAU Guidelines on Urolithiasis, recommendations",
+      "url": "https://uroweb.org/guidelines/urolithiasis/chapter/guidelines",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_colic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Confirming a ureteric stone and spotting complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "Pain pattern",
+          "cells": [
+            {
+              "text": "Cramping, intermittent flank pain radiating to groin"
+            },
+            {
+              "text": "Visceral pain from a distended, obstructed ureter"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Blood on point-of-care dipstick"
+            },
+            {
+              "text": "Haematuria supports the diagnosis; send culture to exclude infection"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 45%, specificity 94% for ureteral stones"
+            },
+            {
+              "text": "First-line imaging; a negative scan does not exclude obstruction early"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Confirms stone, size and site"
+            },
+            {
+              "text": "{{hy:Reference test to confirm stone in acute flank pain}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Low-dose CT (BMI under 30)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 86% for stones under 3 mm, 100% over 3 mm"
+            },
+            {
+              "text": "Lower radiation option"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stone size and spontaneous passage",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "90% pass if 6 mm or smaller; 59% if over 6 mm",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Larger stones less likely to pass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stone size needing intervention",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 10 mm",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Refer for active removal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever, solitary kidney or diagnostic doubt",
+          "cells": [
+            {
+              "text": "Any present"
+            },
+            {
+              "text": "Immediate imaging indicated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rising creatinine, oliguria or anuria",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Suggests bilateral obstruction or obstructed solitary kidney"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Ultrasound performance figures are from the EAU guideline; AAFP calls non-contrast CT superior without giving figures."
+    },
+    {
+      "id": "renal_colic-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic renal colic",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Leaking abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "{{hy:Age over 60 or arteriopathy with pain to flank, sacrum or genitalia; refer to emergency care}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyelonephritis or obstructed infected kidney",
+          "cells": [
+            {
+              "text": "Fever, chills, pyuria; urine culture plus imaging for obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "Pregnancy or delayed menstruation with groin or pelvic pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Pain out of proportion to examination in a vascular patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis, cholecystitis, bowel obstruction",
+          "cells": [
+            {
+              "text": "Peritoneal signs, GI symptoms, no haematuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ovarian cyst torsion or rupture, testicular torsion",
+          "cells": [
+            {
+              "text": "Acute pelvic or scrotal pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpes zoster or musculoskeletal flank pain",
+          "cells": [
+            {
+              "text": "Dermatomal rash or pain on movement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extrinsic ureteric obstruction (tumour, radiation fibrosis)",
+          "cells": [
+            {
+              "text": "Known pelvic or retroperitoneal malignancy; ultrasound may miss dilation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_colic-treatment",
+      "kind": "treatment",
+      "title": "Management of renal colic",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID (for example ketorolac 30 to 60 mg IM)",
+          "cells": [
+            {
+              "text": "First-line analgesia"
+            },
+            {
+              "text": "{{hy:More effective than opioids with fewer adverse effects}}; consider cardiovascular risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioid (hydromorphone, tramadol) or ketamine",
+          "cells": [
+            {
+              "text": "Second choice when NSAID insufficient or contraindicated"
+            },
+            {
+              "text": "Avoid pethidine (meperidine) because of vomiting"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Alpha blocker: tamsulosin 0.4 mg/day or doxazosin 4 mg/day",
+          "cells": [
+            {
+              "text": "Distal ureteral stone 5 to 10 mm"
+            },
+            {
+              "text": "Medical expulsive therapy; off-label; calcium channel blockers less effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Watchful waiting with imaging within 14 days",
+          "cells": [
+            {
+              "text": "Controlled pain, no significant hydronephrosis"
+            },
+            {
+              "text": "Observe about 4 to 6 weeks, then refer if not passed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent decompression (ureteral stent or percutaneous nephrostomy)",
+          "cells": [
+            {
+              "text": "Obstructed infected kidney"
+            },
+            {
+              "text": "Start antibiotics immediately; delay definitive stone treatment until sepsis resolves"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Active stone removal (for example ureteroscopy)",
+          "cells": [
+            {
+              "text": "Stone over 10 mm, refractory pain, persistent obstruction, renal insufficiency"
+            },
+            {
+              "text": "Urology referral"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prevention: fluid 2.5 to 3 L/day",
+          "cells": [
+            {
+              "text": "After an episode"
+            },
+            {
+              "text": "Target urine output 2 to 2.5 L/day; metabolic work-up for recurrent stones"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_colic-dx-mgmt",
+      "title": "Diagnosis and management of renal colic",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute colicky flank pain radiating to groin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Age over 60, arteriopathy or possible pregnancy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Exclude leaking aneurysm or ectopic pregnancy urgently",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and culture, NSAID analgesia, ultrasound then non-contrast CT",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever or sepsis with obstruction?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Urgent stent or nephrostomy plus antibiotics; defer stone removal",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Anuria, solitary kidney, refractory pain or stone over 10 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urology for active stone removal",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Distal stone 5 to 10 mm: alpha blocker; image again within 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Stone passed within 4 to 6 weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prevention advice; metabolic work-up if recurrent",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Excluded"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Stone confirmed"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n8",
+          "label": "No"
         }
       ]
     }

@@ -1,179 +1,464 @@
 {
- "id": "orbital_pseudotumor",
- "name": "Idiopathic orbital inflammation",
- "aliases": [
-  "idiopathic orbital inflammation",
-  "idiopathic orbital inflammatory syndrome",
-  "nonspecific orbital inflammation",
-  "orbital inflammatory pseudotumour",
-  "orbital inflammatory syndrome",
-  "orbital pseudotumour"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached largely by exclusion",
-   "It classically presents with acute, painful proptosis, periorbital swelling and redness, chemosis, and restricted eye movements with diplopia",
-   "Any orbital structure may be involved, giving subtypes such as myositic, lacrimal (dacryoadenitis), anterior, apical, and diffuse patterns",
-   "Involvement of the orbital apex can threaten vision through optic-nerve compression",
-   "Imaging shows inflammatory infiltration that may involve muscles including their tendons, the lacrimal gland, or diffuse orbital fat, without a discrete mass",
-   "A characteristically rapid and dramatic response to systemic corticosteroids supports the diagnosis, though relapse on withdrawal is common",
-   "Atypical, bilateral, recurrent, or steroid-unresponsive cases require biopsy and workup to exclude lymphoma, specific inflammations, and IgG4-related disease",
-   "It is distinguished from thyroid eye disease, which is usually less painful and spares muscle tendons, and from orbital cellulitis, which is infective"
+  "id": "orbital_pseudotumor",
+  "name": "Idiopathic orbital inflammation",
+  "aliases": [
+    "idiopathic orbital inflammation",
+    "idiopathic orbital inflammatory syndrome",
+    "nonspecific orbital inflammation",
+    "orbital inflammatory pseudotumour",
+    "orbital inflammatory syndrome",
+    "orbital pseudotumour"
   ],
-  "pathophysiology": "Idiopathic orbital inflammation is a polymorphous inflammatory infiltrate of orbital tissues, comprising lymphocytes, plasma cells, and variable fibrosis, that occurs without an identifiable infective, neoplastic, or systemic autoimmune cause. The inflammation may target any orbital component, producing the myositic, dacryoadenitis, anterior, apical, or diffuse patterns, and the resulting swelling and mass effect cause pain, proptosis, congestion, and restriction of eye movement. Some cases represent part of the IgG4-related disease spectrum. The condition is thought to be immune-mediated, which underlies its responsiveness to corticosteroids, but the tendency to relapse and to develop fibrosis reflects an ongoing dysregulated inflammatory drive.",
-  "additionalDifferentials": [
-   "Thyroid eye disease",
-   "Orbital cellulitis",
-   "Orbital lymphoma or other neoplasm",
-   "IgG4-related orbital disease",
-   "Granulomatosis with polyangiitis and other systemic vasculitides",
-   "Sarcoidosis or carotid-cavernous fistula",
-   "Ruptured dermoid cyst causing inflammation"
-  ],
-  "additionalInvestigations": [
-   "Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass",
-   "Assessment of visual acuity, colour vision, and pupils to detect optic-nerve involvement",
-   "Bloods including inflammatory markers, and serum IgG4, with ANCA and thyroid function to exclude mimics",
-   "Orbital biopsy in atypical, recurrent, bilateral, or steroid-unresponsive disease",
-   "Systemic evaluation for sarcoidosis, vasculitis, or lymphoproliferative disease when indicated",
-   "Monitoring of response and relapse during and after corticosteroid treatment"
-  ],
-  "redFlags": [
-   "Reduced acuity or colour vision suggesting apical optic-nerve compression",
-   "Failure to respond promptly to corticosteroids, raising suspicion of lymphoma or specific inflammation",
-   "Bilateral or recurrent disease pointing to a systemic or IgG4-related cause",
-   "Rapidly progressive proptosis with severe pain and congestion"
-  ],
-  "prognosis": "Most patients respond rapidly to corticosteroids with resolution of pain and swelling, but relapses are frequent on tapering, and some develop chronic fibrosis with persistent restriction, proptosis, or visual loss; refractory cases may need steroid-sparing immunosuppression or radiotherapy.",
-  "pitfalls": [
-   "Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy",
-   "Mistaking it for orbital cellulitis and giving antibiotics alone, or vice versa",
-   "Attributing a poor steroid response to inadequate dosing rather than an alternative diagnosis",
-   "Overlooking IgG4-related disease and systemic vasculitis as underlying causes",
-   "Missing apical involvement threatening the optic nerve"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Shields' Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis",
-   "Add steroid-sparing immunosuppression (methotrexate, mycophenolate) or rituximab for frequently relapsing or steroid-dependent disease",
-   "Reserve low-dose orbital radiotherapy for refractory cases",
-   "Treat urgently when apical involvement threatens the optic nerve",
-   "Perform orbital biopsy in atypical, bilateral, recurrent or steroid-unresponsive disease to exclude lymphoma and other mimics",
-   "Monitor closely for relapse during and after corticosteroid tapering",
-   "Manage under an orbital and ophthalmology specialist, with systemic evaluation for sarcoidosis, vasculitis or IgG4-related disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orbital_pseudotumor-pathway",
-   "title": "Idiopathic orbital inflammation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached largely by exclusion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reduced acuity or colour vision suggesting apical optic-nerve compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass, Assessment of visual acuity, colour vision, and pupils to detect optic-nerve involvement, Bloods including inflammatory"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic orbital inflammation."
-  }
- ],
- "tables": [
-  {
-   "id": "orbital_pseudotumor-matrix",
-   "title": "Idiopathic orbital inflammation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached largely by exclusion",
+      "It classically presents with acute, painful proptosis, periorbital swelling and redness, chemosis, and restricted eye movements with diplopia",
+      "Any orbital structure may be involved, giving subtypes such as myositic, lacrimal (dacryoadenitis), anterior, apical, and diffuse patterns",
+      "Involvement of the orbital apex can threaten vision through optic-nerve compression",
+      "Imaging shows inflammatory infiltration that may involve muscles including their tendons, the lacrimal gland, or diffuse orbital fat, without a discrete mass",
+      "A characteristically rapid and dramatic response to systemic corticosteroids supports the diagnosis, though relapse on withdrawal is common",
+      "Atypical, bilateral, recurrent, or steroid-unresponsive cases require biopsy and workup to exclude lymphoma, specific inflammations, and IgG4-related disease",
+      "It is distinguished from thyroid eye disease, which is usually less painful and spares muscle tendons, and from orbital cellulitis, which is infective"
     ],
-    [
-     "Key Investigations",
-     "Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass, Assessment of visual acuity,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic orbital inflammation is a polymorphous inflammatory infiltrate of orbital tissues, comprising lymphocytes, plasma cells, and variable fibrosis, that occurs without an identifiable infective, neoplastic, or systemic autoimmune cause. The inflammation may target any orbital component, producing the myositic, dacryoadenitis, anterior, apical, or diffuse patterns, and the resulting swelling and mass effect cause pain, proptosis, congestion, and restriction of eye movement. Some cases represent part of the IgG4-related disease spectrum. The condition is thought to be immune-mediated, which underlies its responsiveness to corticosteroids, but the tendency to relapse and to develop fibrosis reflects an ongoing dysregulated inflammatory drive.",
+    "additionalDifferentials": [
+      "Thyroid eye disease",
+      "Orbital cellulitis",
+      "Orbital lymphoma or other neoplasm",
+      "IgG4-related orbital disease",
+      "Granulomatosis with polyangiitis and other systemic vasculitides",
+      "Sarcoidosis or carotid-cavernous fistula",
+      "Ruptured dermoid cyst causing inflammation"
     ],
-    [
-     "Primary Differentials",
-     "Thyroid eye disease, Orbital cellulitis, Orbital lymphoma or other neoplasm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass",
+      "Assessment of visual acuity, colour vision, and pupils to detect optic-nerve involvement",
+      "Bloods including inflammatory markers, and serum IgG4, with ANCA and thyroid function to exclude mimics",
+      "Orbital biopsy in atypical, recurrent, bilateral, or steroid-unresponsive disease",
+      "Systemic evaluation for sarcoidosis, vasculitis, or lymphoproliferative disease when indicated",
+      "Monitoring of response and relapse during and after corticosteroid treatment"
     ],
-    [
-     "Management Strategy",
-     "Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Reduced acuity or colour vision suggesting apical optic-nerve compression",
+      "Failure to respond promptly to corticosteroids, raising suspicion of lymphoma or specific inflammation",
+      "Bilateral or recurrent disease pointing to a systemic or IgG4-related cause",
+      "Rapidly progressive proptosis with severe pain and congestion"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients respond rapidly to corticosteroids with resolution of pain and swelling, but relapses are frequent on tapering, and some develop chronic fibrosis with persistent restriction, proptosis, or visual loss; refractory cases may need steroid-sparing immunosuppression or radiotherapy.",
+    "pitfalls": [
+      "Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy",
+      "Mistaking it for orbital cellulitis and giving antibiotics alone, or vice versa",
+      "Attributing a poor steroid response to inadequate dosing rather than an alternative diagnosis",
+      "Overlooking IgG4-related disease and systemic vasculitis as underlying causes",
+      "Missing apical involvement threatening the optic nerve"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Shields' Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis",
+      "Add steroid-sparing immunosuppression (methotrexate, mycophenolate) or rituximab for frequently relapsing or steroid-dependent disease",
+      "Reserve low-dose orbital radiotherapy for refractory cases",
+      "Treat urgently when apical involvement threatens the optic nerve",
+      "Perform orbital biopsy in atypical, bilateral, recurrent or steroid-unresponsive disease to exclude lymphoma and other mimics",
+      "Monitor closely for relapse during and after corticosteroid tapering",
+      "Manage under an orbital and ophthalmology specialist, with systemic evaluation for sarcoidosis, vasculitis or IgG4-related disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic orbital inflammation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orbital-pseudotumor-real-image",
-   "title": "Idiopathic orbital inflammation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "orbital_pseudotumor-pathway",
+      "title": "Idiopathic orbital inflammation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached largely by exclusion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reduced acuity or colour vision suggesting apical optic-nerve compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass, Assessment of visual acuity, colour vision, and pupils to detect optic-nerve involvement, Bloods including inflammatory"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic orbital inflammation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orbital_pseudotumor-matrix",
+      "title": "Idiopathic orbital inflammation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, non-infective inflammatory process of the orbit with no identifiable local or systemic cause, and a diagnosis reached",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Orbital CT or MRI to define the pattern and extent of inflammation and exclude a discrete mass, Assessment of visual acuity,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thyroid eye disease, Orbital cellulitis, Orbital lymphoma or other neoplasm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use systemic corticosteroids as first-line therapy, which typically produce a rapid, dramatic response supporting the diagnosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling an orbital mass idiopathic without excluding lymphoma and specific inflammations by biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic orbital inflammation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_pseudotumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital CT or MRI",
+          "cells": [
+            {
+              "text": "Pattern and extent of inflammation; excludes a discrete mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity, colour vision and pupils",
+          "cells": [
+            {
+              "text": "Optic nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods with serum IgG4, ANCA and thyroid function",
+          "cells": [
+            {
+              "text": "Mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital biopsy",
+          "cells": [
+            {
+              "text": "Atypical, recurrent, bilateral or steroid-unresponsive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Sarcoidosis, vasculitis or lymphoproliferative disease, when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_pseudotumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Usually less painful, and spares the muscle tendons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital cellulitis",
+          "cells": [
+            {
+              "text": "Infective rather than inflammatory; antibiotics alone are inappropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital lymphoma",
+          "cells": [
+            {
+              "text": "A poor steroid response raises suspicion; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_pseudotumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line; a rapid, dramatic response supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate, mycophenolate or rituximab for frequently relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose orbital radiotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of apical disease",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "When apical involvement threatens the optic nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for relapse",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "During and after corticosteroid tapering"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_pseudotumor-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic orbital inflammation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute painful proptosis, swelling and restricted eye movement with diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (reduced acuity or colour, poor steroid response, or bilateral disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent treatment for apical involvement threatening the optic nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Orbital CT or MRI, acuity and pupils, IgG4, ANCA and thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show diffuse inflammation without a discrete mass, mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Atypical or unresponsive disease: orbital biopsy to exclude lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as first-line; rapid response supports the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, mycophenolate or rituximab for frequently relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-dose orbital radiotherapy for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor closely for relapse during and after corticosteroid tapering",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most respond rapidly; relapse on tapering is frequent and fibrosis can persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

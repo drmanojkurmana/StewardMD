@@ -1,171 +1,575 @@
 {
- "id": "inclusion_body_myositis",
- "name": "Sporadic inclusion body myositis",
- "aliases": [
-  "sIBM",
-  "inclusion body myositis",
-  "IBM"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / neuromuscular disease literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest acquired myopathy after middle age, affecting men more often than women",
-   "Characteristic pattern of weakness targets the finger flexors and the quadriceps, often asymmetrically",
-   "Early falls from knee buckling and difficulty with grip and fine hand tasks are typical presentations",
-   "Dysphagia is common and can be an early or dominant feature",
-   "Creatine kinase is normal or only mildly raised, unlike in other inflammatory myopathies",
-   "Muscle biopsy shows rimmed vacuoles, endomysial inflammation, and protein aggregates such as those staining for p62 and TDP-43",
-   "Unlike polymyositis and dermatomyositis, it is largely resistant to corticosteroids and immunosuppression"
+  "id": "inclusion_body_myositis",
+  "name": "Sporadic inclusion body myositis",
+  "aliases": [
+    "sIBM",
+    "inclusion body myositis",
+    "IBM"
   ],
-  "pathophysiology": "Sporadic inclusion body myositis is a slowly progressive myopathy with combined inflammatory and degenerative features. Endomysial T-cell infiltration and up-regulation of major histocompatibility complex on muscle fibres coexist with a degenerative process marked by rimmed vacuoles and intracellular accumulation of misfolded proteins, including beta-amyloid, phosphorylated tau, TDP-43, and p62. The relative contribution of autoimmunity and protein mishandling remains debated, but the degenerative component is thought to explain the characteristic treatment resistance and the selective, progressive involvement of finger flexors and quadriceps.",
-  "additionalDifferentials": [
-   "Polymyositis and immune-mediated necrotising myopathy",
-   "Motor neurone disease and other anterior horn cell disorders",
-   "Muscular dystrophies presenting in adulthood",
-   "Myasthenia gravis with limb and bulbar weakness",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Hereditary inclusion body myopathies"
-  ],
-  "additionalInvestigations": [
-   "Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates",
-   "Creatine kinase measurement, typically normal or only mildly elevated",
-   "Electromyography showing a mixed myopathic and occasionally neurogenic pattern",
-   "Anti-cN1A (NT5C1A) antibody testing as a supportive marker",
-   "Swallowing assessment given the frequency of dysphagia"
-  ],
-  "redFlags": [
-   "Progressive dysphagia with aspiration risk",
-   "Recurrent falls from quadriceps failure",
-   "Rapid functional decline suggesting an alternative diagnosis",
-   "Marked weight loss or bulbar deterioration"
-  ],
-  "prognosis": "The condition progresses slowly but relentlessly over years, leading to significant disability, dependence on mobility aids, and swallowing difficulties; life expectancy is relatively preserved but quality of life declines with functional loss.",
-  "pitfalls": [
-   "Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression",
-   "Being reassured by a normal creatine kinase into excluding a myopathy",
-   "Overlooking the diagnostic finger-flexor and quadriceps weakness pattern",
-   "Failing to recognise and manage dysphagia and aspiration risk"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided",
-   "Physiotherapy with a tailored aerobic and resistance exercise programme to maintain strength and function",
-   "Occupational therapy, mobility aids, ankle-foot orthoses and falls-prevention measures for weakness of the quadriceps and finger flexors",
-   "Speech and language therapy for dysphagia, with dietary modification and consideration of cricopharyngeal dilatation, myotomy or botulinum toxin for troublesome swallowing",
-   "Monitoring of swallowing and respiratory function to anticipate aspiration and nutritional compromise",
-   "Multidisciplinary neuromuscular follow-up with support for progressive disability and advance care planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "inclusion_body_myositis-pathway",
-   "title": "Sporadic inclusion body myositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest acquired myopathy after middle age, affecting men more often than women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysphagia with aspiration risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates, Creatine kinase measurement, typically normal or only mildly elevated, Electromyography showing a mixed myopathic and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sporadic inclusion body myositis."
-  }
- ],
- "tables": [
-  {
-   "id": "inclusion_body_myositis-matrix",
-   "title": "Sporadic inclusion body myositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest acquired myopathy after middle age, affecting men more often than women",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / neuromuscular disease literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest acquired myopathy after middle age, affecting men more often than women",
+      "Characteristic pattern of weakness targets the finger flexors and the quadriceps, often asymmetrically",
+      "Early falls from knee buckling and difficulty with grip and fine hand tasks are typical presentations",
+      "Dysphagia is common and can be an early or dominant feature",
+      "Creatine kinase is normal or only mildly raised, unlike in other inflammatory myopathies",
+      "Muscle biopsy shows rimmed vacuoles, endomysial inflammation, and protein aggregates such as those staining for p62 and TDP-43",
+      "Unlike polymyositis and dermatomyositis, it is largely resistant to corticosteroids and immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates, Creatine kinase",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sporadic inclusion body myositis is a slowly progressive myopathy with combined inflammatory and degenerative features. Endomysial T-cell infiltration and up-regulation of major histocompatibility complex on muscle fibres coexist with a degenerative process marked by rimmed vacuoles and intracellular accumulation of misfolded proteins, including beta-amyloid, phosphorylated tau, TDP-43, and p62. The relative contribution of autoimmunity and protein mishandling remains debated, but the degenerative component is thought to explain the characteristic treatment resistance and the selective, progressive involvement of finger flexors and quadriceps.",
+    "additionalDifferentials": [
+      "Polymyositis and immune-mediated necrotising myopathy",
+      "Motor neurone disease and other anterior horn cell disorders",
+      "Muscular dystrophies presenting in adulthood",
+      "Myasthenia gravis with limb and bulbar weakness",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Hereditary inclusion body myopathies"
     ],
-    [
-     "Primary Differentials",
-     "Polymyositis and immune-mediated necrotising myopathy, Motor neurone disease and other anterior horn cell disorders, Muscular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates",
+      "Creatine kinase measurement, typically normal or only mildly elevated",
+      "Electromyography showing a mixed myopathic and occasionally neurogenic pattern",
+      "Anti-cN1A (NT5C1A) antibody testing as a supportive marker",
+      "Swallowing assessment given the frequency of dysphagia"
     ],
-    [
-     "Management Strategy",
-     "Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysphagia with aspiration risk",
+      "Recurrent falls from quadriceps failure",
+      "Rapid functional decline suggesting an alternative diagnosis",
+      "Marked weight loss or bulbar deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition progresses slowly but relentlessly over years, leading to significant disability, dependence on mobility aids, and swallowing difficulties; life expectancy is relatively preserved but quality of life declines with functional loss.",
+    "pitfalls": [
+      "Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression",
+      "Being reassured by a normal creatine kinase into excluding a myopathy",
+      "Overlooking the diagnostic finger-flexor and quadriceps weakness pattern",
+      "Failing to recognise and manage dysphagia and aspiration risk"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided",
+      "Physiotherapy with a tailored aerobic and resistance exercise programme to maintain strength and function",
+      "Occupational therapy, mobility aids, ankle-foot orthoses and falls-prevention measures for weakness of the quadriceps and finger flexors",
+      "Speech and language therapy for dysphagia, with dietary modification and consideration of cricopharyngeal dilatation, myotomy or botulinum toxin for troublesome swallowing",
+      "Monitoring of swallowing and respiratory function to anticipate aspiration and nutritional compromise",
+      "Multidisciplinary neuromuscular follow-up with support for progressive disability and advance care planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for sporadic inclusion body myositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "inclusion-body-myositis-real-image",
-   "title": "Sporadic inclusion body myositis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "inclusion_body_myositis-pathway",
+      "title": "Sporadic inclusion body myositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest acquired myopathy after middle age, affecting men more often than women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysphagia with aspiration risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates, Creatine kinase measurement, typically normal or only mildly elevated, Electromyography showing a mixed myopathic and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sporadic inclusion body myositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "inclusion_body_myositis-matrix",
+      "title": "Sporadic inclusion body myositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest acquired myopathy after middle age, affecting men more often than women",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Muscle biopsy showing rimmed vacuoles, endomysial inflammation, and characteristic protein aggregates, Creatine kinase",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polymyositis and immune-mediated necrotising myopathy, Motor neurone disease and other anterior horn cell disorders, Muscular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognition that no immunotherapy reliably alters the course, so prolonged immunosuppression is generally avoided",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as treatment-resistant polymyositis and prolonging futile immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sporadic inclusion body myositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / neuromuscular disease literature",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 388-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inclusion_body_myositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Rimmed vacuoles, endomysial inflammation and protein aggregates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Typically normal or only mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Mixed myopathic and occasionally neurogenic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-cN1A (NT5C1A) antibody",
+          "cells": [
+            {
+              "text": "Supportive marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing assessment",
+          "cells": [
+            {
+              "text": "Frequent dysphagia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inclusion_body_myositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Immunotherapy-responsive; inclusion body myositis does not reliably respond"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary inclusion body myopathy",
+          "cells": [
+            {
+              "text": "Familial form; sporadic disease is acquired after middle age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inclusion_body_myositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid prolonged immunosuppression",
+          "cells": [
+            {
+              "text": "No immunotherapy reliably alters the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Tailored aerobic and resistance exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility and falls",
+          "cells": [
+            {
+              "text": "Occupational therapy, mobility aids, ankle-foot orthoses and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia",
+          "cells": [
+            {
+              "text": "Speech and language therapy, diet change, and cricopharyngeal dilatation, myotomy or botulinum toxin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Swallowing and respiratory function to anticipate aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular follow-up and advance care planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inclusion_body_myositis-ddx-2",
+      "kind": "ddx",
+      "title": "Polymyositis, dermatomyositis and inclusion body myositis compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age at onset",
+        "Familial association",
+        "Extramuscular manifestations",
+        "Connective tissue diseases",
+        "Systemic autoimmune diseases",
+        "Malignancy",
+        "Viruses",
+        "Drugs",
+        "Parasites and bacteria"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Over 18 years"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes (footnote a)"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "Yes (footnote d)"
+            },
+            {
+              "text": "Yes (footnote e)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatomyositis",
+          "cells": [
+            {
+              "text": "Adulthood and childhood"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Scleroderma and mixed connective tissue disease (overlap syndromes)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "Yes, in up to 15% of cases"
+            },
+            {
+              "text": "Unproven"
+            },
+            {
+              "text": "Yes, rarely (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Over 50 years"
+            },
+            {
+              "text": "Yes, in some cases"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes, in up to 20% of cases (footnote a)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "No (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a to e (including b for systemic autoimmune diseases) appear in the source but their text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inclusion_body_myositis-dx-mgmt",
+      "title": "Diagnosis and management of Sporadic inclusion body myositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Middle-aged or older man with finger flexor and quadriceps weakness and falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive dysphagia, recurrent falls, bulbar decline or rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow assessment and aspiration precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Muscle biopsy with rimmed vacuoles, EMG, CK, anti-cN1A, swallow study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rimmed vacuoles and inclusion pattern confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polymyositis, myasthenia or motor neurone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged immunosuppression; it does not reliably help",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tailored physiotherapy for strength and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoses, mobility aids and falls prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech therapy and treatment options for dysphagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuromuscular follow-up with advance care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive disability; supportive care and planning",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

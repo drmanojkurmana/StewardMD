@@ -1,175 +1,506 @@
 {
- "id": "acute_abdomen",
- "name": "Acute abdomen",
- "aliases": [
-  "surgical abdomen",
-  "acute abdominal pain",
-  "peritonitis"
- ],
- "class": "non_infective",
- "system": "Emergency / Trauma / Critical care",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
-   "Assess airway, breathing, and circulation first, since perforation, ischaemia, or bleeding can cause rapid haemodynamic collapse",
-   "The character, onset, and migration of pain guide the diagnosis; sudden severe pain suggests perforation, rupture, or vascular catastrophe",
-   "Peritonism (guarding, rigidity, rebound, pain on movement) indicates peritoneal irritation and a likely surgical cause",
-   "Pain out of proportion to examination findings should raise concern for mesenteric ischaemia",
-   "Always consider extra-abdominal and vascular causes such as myocardial infarction, ruptured abdominal aortic aneurysm, and ectopic pregnancy",
-   "Serial examination and reassessment are valuable when the diagnosis is uncertain, as the picture often evolves",
-   "Resuscitate, provide analgesia, and involve surgery early rather than delaying for prolonged investigation in the unstable patient"
+  "id": "acute_abdomen",
+  "name": "Acute abdomen",
+  "aliases": [
+    "surgical abdomen",
+    "acute abdominal pain",
+    "peritonitis"
   ],
-  "pathophysiology": "Acute abdomen results from inflammation, obstruction, perforation, ischaemia, or haemorrhage of intra-abdominal organs. Visceral pain is initially poorly localised because of autonomic innervation, but once inflammation reaches the parietal peritoneum the pain becomes sharp and localised. Perforation releases luminal contents causing chemical then bacterial peritonitis; obstruction causes distension, third-space fluid loss, and potential strangulation; and vascular occlusion causes bowel ischaemia and infarction. These processes can precipitate hypovolaemia, sepsis, and shock, making the acute abdomen a potentially life-threatening presentation.",
-  "additionalDifferentials": [
-   "Ruptured or leaking abdominal aortic aneurysm",
-   "Mesenteric ischaemia or infarction",
-   "Perforated viscus (peptic ulcer, diverticulum, appendix)",
-   "Bowel obstruction with or without strangulation",
-   "Ectopic pregnancy or other gynaecological emergency",
-   "Inferior myocardial infarction or lower-lobe pneumonia mimicking abdominal pain"
-  ],
-  "additionalInvestigations": [
-   "Erect chest and abdominal radiographs to detect free air or obstruction",
-   "Bedside ultrasound and CT abdomen for definitive assessment when stable",
-   "Serum lactate as a marker of ischaemia or hypoperfusion",
-   "Pregnancy test in women of childbearing age",
-   "Amylase/lipase, renal and liver function, and inflammatory markers as part of the workup"
-  ],
-  "redFlags": [
-   "Sudden severe pain with peritonism suggesting perforation or vascular rupture needing immediate surgery",
-   "Haemodynamic instability indicating haemorrhage, ischaemia, or septic shock",
-   "Pain disproportionate to findings, raising suspicion of mesenteric ischaemia",
-   "A pulsatile mass or back pain with collapse suggesting ruptured aortic aneurysm",
-   "Rapidly progressive distension, fever, and toxicity signalling advancing peritonitis"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause and the speed of definitive treatment. Early recognition and surgery for perforation, ischaemia, or haemorrhage improve survival, while delay allows sepsis, bowel infarction, or exsanguination with markedly higher mortality.",
-  "pitfalls": [
-   "Withholding analgesia for fear of masking signs, which is not supported and delays comfort",
-   "Attributing pain to a benign cause in the elderly, in whom signs are often muted despite serious disease",
-   "Overlooking vascular and extra-abdominal causes such as aortic aneurysm or myocardial infarction",
-   "Delaying surgery to complete imaging in an unstable patient",
-   "Failing to reassess when the initial diagnosis is uncertain"
-  ],
-  "references": [
-   "ATLS (Advanced Trauma Life Support)",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside assessment",
-   "Analgesia, antiemetics, nil by mouth and nasogastric decompression where obstruction is present",
-   "Broad-spectrum intravenous antibiotics when peritonitis, perforation or sepsis is suspected",
-   "Urgent surgical intervention by laparotomy or laparoscopy for perforation, ischaemia or uncontrolled haemorrhage",
-   "Targeted treatment of the underlying cause once identified, such as appendicectomy, cholecystectomy or aneurysm repair",
-   "Serial reassessment of the abdomen and vital signs, escalating promptly on deterioration",
-   "Early surgical referral, with active consideration of extra-abdominal causes such as myocardial infarction, ruptured abdominal aortic aneurysm and ectopic pregnancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_abdomen-pathway",
-   "title": "Acute abdomen: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe pain with peritonism suggesting perforation or vascular rupture needing immediate surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Erect chest and abdominal radiographs to detect free air or obstruction, Bedside ultrasound and CT abdomen for definitive assessment when stable, Serum lactate as a marker of ischaemia or hypoperfusion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside assessment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding analgesia for fear of masking signs, which is not supported and delays comfort"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute abdomen."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_abdomen-matrix",
-   "title": "Acute abdomen: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Emergency / Trauma / Critical care",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
+      "Assess airway, breathing, and circulation first, since perforation, ischaemia, or bleeding can cause rapid haemodynamic collapse",
+      "The character, onset, and migration of pain guide the diagnosis; sudden severe pain suggests perforation, rupture, or vascular catastrophe",
+      "Peritonism (guarding, rigidity, rebound, pain on movement) indicates peritoneal irritation and a likely surgical cause",
+      "Pain out of proportion to examination findings should raise concern for mesenteric ischaemia",
+      "Always consider extra-abdominal and vascular causes such as myocardial infarction, ruptured abdominal aortic aneurysm, and ectopic pregnancy",
+      "Serial examination and reassessment are valuable when the diagnosis is uncertain, as the picture often evolves",
+      "Resuscitate, provide analgesia, and involve surgery early rather than delaying for prolonged investigation in the unstable patient"
     ],
-    [
-     "Key Investigations",
-     "Erect chest and abdominal radiographs to detect free air or obstruction, Bedside ultrasound and CT abdomen for definitive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute abdomen results from inflammation, obstruction, perforation, ischaemia, or haemorrhage of intra-abdominal organs. Visceral pain is initially poorly localised because of autonomic innervation, but once inflammation reaches the parietal peritoneum the pain becomes sharp and localised. Perforation releases luminal contents causing chemical then bacterial peritonitis; obstruction causes distension, third-space fluid loss, and potential strangulation; and vascular occlusion causes bowel ischaemia and infarction. These processes can precipitate hypovolaemia, sepsis, and shock, making the acute abdomen a potentially life-threatening presentation.",
+    "additionalDifferentials": [
+      "Ruptured or leaking abdominal aortic aneurysm",
+      "Mesenteric ischaemia or infarction",
+      "Perforated viscus (peptic ulcer, diverticulum, appendix)",
+      "Bowel obstruction with or without strangulation",
+      "Ectopic pregnancy or other gynaecological emergency",
+      "Inferior myocardial infarction or lower-lobe pneumonia mimicking abdominal pain"
     ],
-    [
-     "Primary Differentials",
-     "Ruptured or leaking abdominal aortic aneurysm, Mesenteric ischaemia or infarction, Perforated viscus (peptic ulcer, diverticulum,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Erect chest and abdominal radiographs to detect free air or obstruction",
+      "Bedside ultrasound and CT abdomen for definitive assessment when stable",
+      "Serum lactate as a marker of ischaemia or hypoperfusion",
+      "Pregnancy test in women of childbearing age",
+      "Amylase/lipase, renal and liver function, and inflammatory markers as part of the workup"
     ],
-    [
-     "Management Strategy",
-     "Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe pain with peritonism suggesting perforation or vascular rupture needing immediate surgery",
+      "Haemodynamic instability indicating haemorrhage, ischaemia, or septic shock",
+      "Pain disproportionate to findings, raising suspicion of mesenteric ischaemia",
+      "A pulsatile mass or back pain with collapse suggesting ruptured aortic aneurysm",
+      "Rapidly progressive distension, fever, and toxicity signalling advancing peritonitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding analgesia for fear of masking signs, which is not supported and delays comfort",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause and the speed of definitive treatment. Early recognition and surgery for perforation, ischaemia, or haemorrhage improve survival, while delay allows sepsis, bowel infarction, or exsanguination with markedly higher mortality.",
+    "pitfalls": [
+      "Withholding analgesia for fear of masking signs, which is not supported and delays comfort",
+      "Attributing pain to a benign cause in the elderly, in whom signs are often muted despite serious disease",
+      "Overlooking vascular and extra-abdominal causes such as aortic aneurysm or myocardial infarction",
+      "Delaying surgery to complete imaging in an unstable patient",
+      "Failing to reassess when the initial diagnosis is uncertain"
+    ],
+    "references": [
+      "ATLS (Advanced Trauma Life Support)",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside assessment",
+      "Analgesia, antiemetics, nil by mouth and nasogastric decompression where obstruction is present",
+      "Broad-spectrum intravenous antibiotics when peritonitis, perforation or sepsis is suspected",
+      "Urgent surgical intervention by laparotomy or laparoscopy for perforation, ischaemia or uncontrolled haemorrhage",
+      "Targeted treatment of the underlying cause once identified, such as appendicectomy, cholecystectomy or aneurysm repair",
+      "Serial reassessment of the abdomen and vital signs, escalating promptly on deterioration",
+      "Early surgical referral, with active consideration of extra-abdominal causes such as myocardial infarction, ruptured abdominal aortic aneurysm and ectopic pregnancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute abdomen."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-abdomen-real-image",
-   "title": "Acute abdomen: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "acute_abdomen-pathway",
+      "title": "Acute abdomen: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe pain with peritonism suggesting perforation or vascular rupture needing immediate surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Erect chest and abdominal radiographs to detect free air or obstruction, Bedside ultrasound and CT abdomen for definitive assessment when stable, Serum lactate as a marker of ischaemia or hypoperfusion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside assessment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding analgesia for fear of masking signs, which is not supported and delays comfort"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute abdomen."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_abdomen-matrix",
+      "title": "Acute abdomen: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The immediate task is to identify the patient who needs urgent surgery from among the many with self-limiting abdominal pain",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Erect chest and abdominal radiographs to detect free air or obstruction, Bedside ultrasound and CT abdomen for definitive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ruptured or leaking abdominal aortic aneurysm, Mesenteric ischaemia or infarction, Perforated viscus (peptic ulcer, diverticulum,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate resuscitation of airway, breathing and circulation with intravenous fluids, oxygen and correction of shock alongside",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding analgesia for fear of masking signs, which is not supported and delays comfort",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute abdomen."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_abdomen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Erect chest and abdominal radiographs",
+          "cells": [
+            {
+              "text": "Free air or obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside ultrasound and CT abdomen when stable",
+          "cells": [
+            {
+              "text": "Definitive assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lactate",
+          "cells": [
+            {
+              "text": "Ischaemia or hypoperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test in women of childbearing age",
+          "cells": [
+            {
+              "text": "Excludes a pregnancy-related emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amylase, lipase, renal and liver function, inflammatory markers",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_abdomen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ruptured or leaking abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "Pulsatile mass, back pain with collapse"
+            },
+            {
+              "text": "CT abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric ischaemia or infarction",
+          "cells": [
+            {
+              "text": "Pain disproportionate to findings"
+            },
+            {
+              "text": "Serum lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy or other gynaecological emergency",
+          "cells": [
+            {
+              "text": "Gynaecological emergency in women of reproductive age"
+            },
+            {
+              "text": "Pregnancy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel obstruction",
+          "cells": [
+            {
+              "text": "Rapidly progressive distension"
+            },
+            {
+              "text": "Erect radiographs for obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_abdomen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation of airway, breathing and circulation",
+          "cells": [
+            {
+              "text": "First step"
+            },
+            {
+              "text": "IV fluids, oxygen and correction of shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, antiemetics, nil by mouth, nasogastric decompression",
+          "cells": [
+            {
+              "text": "Where obstruction is present"
+            },
+            {
+              "text": "Analgesia is not withheld"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad-spectrum IV antibiotics",
+          "cells": [
+            {
+              "text": "Peritonitis, perforation or sepsis suspected"
+            },
+            {
+              "text": "Suspected sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent laparotomy or laparoscopy",
+          "cells": [
+            {
+              "text": "Perforation, ischaemia or uncontrolled haemorrhage"
+            },
+            {
+              "text": "Surgical intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Appendicectomy, cholecystectomy or aneurysm repair"
+            },
+            {
+              "text": "Once identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial reassessment of abdomen and vital signs",
+          "cells": [
+            {
+              "text": "Early detection of deterioration"
+            },
+            {
+              "text": "Escalate promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgical referral",
+          "cells": [
+            {
+              "text": "Extra-abdominal causes such as myocardial infarction and ectopic pregnancy"
+            },
+            {
+              "text": "Consider extra-abdominal causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_abdomen-dx-mgmt",
+      "title": "Diagnosis and management of Acute abdomen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute abdominal pain needing rapid triage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonism with sudden severe pain, or haemodynamic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate resuscitation and urgent surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erect chest and abdominal radiographs; lactate; pregnancy test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Free air, obstruction or raised lactate on investigation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Urgent surgery for perforation, ischaemia or haemorrhage; IV antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review AAA, mesenteric ischaemia, ectopic pregnancy and cardiac causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, antiemetics, nil by mouth and nasogastric decompression if obstructed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Targeted treatment: appendicectomy, cholecystectomy or aneurysm repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial abdominal examination and vital signs; escalate on deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival depends on the cause and speed of definitive treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

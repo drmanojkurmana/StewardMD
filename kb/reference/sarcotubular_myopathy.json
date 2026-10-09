@@ -1,175 +1,424 @@
 {
- "id": "sarcotubular_myopathy",
- "name": "Sarcotubular myopathy (TRIM32)",
- "aliases": [
-  "STM",
-  "TRIM32-related myopathy",
-  "sarcotubular myopathy",
-  "LGMD R8",
-  "LGMD2H"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H), first described in the Hutterite population",
-   "Presents with slowly progressive proximal limb-girdle weakness, and mild facial or neck weakness may occur",
-   "Onset is usually in early to mid-adulthood, though it can be earlier, and progression is generally slow with prolonged preservation of ambulation",
-   "Creatine kinase is often moderately elevated and electromyography shows a myopathic pattern",
-   "The muscle biopsy hallmark is dilatation and vacuolation of the sarcotubular system, particularly of type 2 fibres, giving the disease its name",
-   "TRIM32 encodes an E3 ubiquitin ligase, and its dysfunction impairs protein turnover in muscle",
-   "The phenotype overlaps with other limb-girdle muscular dystrophies, so a broad genetic panel is often required",
-   "Diagnosis combines the limb-girdle weakness pattern, the sarcotubular vacuolar biopsy changes, and TRIM32 genetic testing"
+  "id": "sarcotubular_myopathy",
+  "name": "Sarcotubular myopathy (TRIM32)",
+  "aliases": [
+    "STM",
+    "TRIM32-related myopathy",
+    "sarcotubular myopathy",
+    "LGMD R8",
+    "LGMD2H"
   ],
-  "pathophysiology": "Sarcotubular myopathy is caused by recessive variants in TRIM32, which encodes a tripartite-motif E3 ubiquitin ligase that targets specific muscle proteins for degradation through the ubiquitin-proteasome system. Loss of normal TRIM32 function disrupts protein quality control and turnover in skeletal muscle, leading to abnormal accumulation and to dilatation and vacuolation of the sarcotubular (sarcoplasmic reticulum and T-tubule) membranes seen histologically. This membranous disorganisation, preferentially affecting type 2 fibres, produces progressive proximal muscle weakness.",
-  "additionalDifferentials": [
-   "Other limb-girdle muscular dystrophies (calpainopathy, dysferlinopathy, sarcoglycanopathies)",
-   "Inflammatory myopathy",
-   "Metabolic myopathy",
-   "Myofibrillar myopathy",
-   "Congenital myopathy with vacuolar change",
-   "Facioscapulohumeral muscular dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Nerve conduction studies and electromyography",
-   "Muscle biopsy with histochemistry and electron microscopy to demonstrate sarcotubular vacuolation",
-   "Muscle MRI to characterise the pattern of involvement",
-   "Genetic testing with a TRIM32-inclusive limb-girdle muscular dystrophy panel",
-   "Cardiac and respiratory assessment as part of neuromuscular evaluation"
-  ],
-  "redFlags": [
-   "Rapidly progressive or asymmetric weakness suggesting an alternative or inflammatory cause",
-   "Respiratory muscle weakness with declining vital capacity",
-   "Significant cardiac symptoms prompting cardiac evaluation",
-   "Marked dysphagia atypical for the usual phenotype"
-  ],
-  "prognosis": "The disorder generally follows a slowly progressive course with proximal weakness, and many patients retain independent walking for many years; life expectancy is usually normal, though monitoring for respiratory involvement is appropriate in advanced disease.",
-  "pitfalls": [
-   "Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation",
-   "Missing the characteristic sarcotubular vacuolation if electron microscopy is not performed",
-   "Assuming a dominant inheritance pattern in what is a recessive disorder when counselling families",
-   "Overlooking milder facial or neck involvement that can aid recognition"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: TRIM32-related limb-girdle muscular dystrophy / sarcotubular myopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to preserve strength and prevent contractures",
-   "Provide occupational therapy, orthoses, and mobility aids to sustain independence as proximal weakness progresses",
-   "Monitor respiratory function periodically and introduce non-invasive ventilation if nocturnal hypoventilation develops",
-   "Undertake cardiac assessment as part of routine neuromuscular surveillance",
-   "Coordinate care through a multidisciplinary neuromuscular service",
-   "Offer genetic counselling for the autosomal recessive inheritance and arrange testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sarcotubular_myopathy-pathway",
-   "title": "Sarcotubular myopathy (TRIM32): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H), first described in the Hutterite population",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric weakness suggesting an alternative or inflammatory cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry and electron microscopy to demonstrate sarcotubular vacuolation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to preserve strength and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sarcotubular myopathy (trim32)."
-  }
- ],
- "tables": [
-  {
-   "id": "sarcotubular_myopathy-matrix",
-   "title": "Sarcotubular myopathy (TRIM32): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H),",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H), first described in the Hutterite population",
+      "Presents with slowly progressive proximal limb-girdle weakness, and mild facial or neck weakness may occur",
+      "Onset is usually in early to mid-adulthood, though it can be earlier, and progression is generally slow with prolonged preservation of ambulation",
+      "Creatine kinase is often moderately elevated and electromyography shows a myopathic pattern",
+      "The muscle biopsy hallmark is dilatation and vacuolation of the sarcotubular system, particularly of type 2 fibres, giving the disease its name",
+      "TRIM32 encodes an E3 ubiquitin ligase, and its dysfunction impairs protein turnover in muscle",
+      "The phenotype overlaps with other limb-girdle muscular dystrophies, so a broad genetic panel is often required",
+      "Diagnosis combines the limb-girdle weakness pattern, the sarcotubular vacuolar biopsy changes, and TRIM32 genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry and electron microscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sarcotubular myopathy is caused by recessive variants in TRIM32, which encodes a tripartite-motif E3 ubiquitin ligase that targets specific muscle proteins for degradation through the ubiquitin-proteasome system. Loss of normal TRIM32 function disrupts protein quality control and turnover in skeletal muscle, leading to abnormal accumulation and to dilatation and vacuolation of the sarcotubular (sarcoplasmic reticulum and T-tubule) membranes seen histologically. This membranous disorganisation, preferentially affecting type 2 fibres, produces progressive proximal muscle weakness.",
+    "additionalDifferentials": [
+      "Other limb-girdle muscular dystrophies (calpainopathy, dysferlinopathy, sarcoglycanopathies)",
+      "Inflammatory myopathy",
+      "Metabolic myopathy",
+      "Myofibrillar myopathy",
+      "Congenital myopathy with vacuolar change",
+      "Facioscapulohumeral muscular dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Other limb-girdle muscular dystrophies (calpainopathy, dysferlinopathy, sarcoglycanopathies), Inflammatory myopathy, Metabolic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Nerve conduction studies and electromyography",
+      "Muscle biopsy with histochemistry and electron microscopy to demonstrate sarcotubular vacuolation",
+      "Muscle MRI to characterise the pattern of involvement",
+      "Genetic testing with a TRIM32-inclusive limb-girdle muscular dystrophy panel",
+      "Cardiac and respiratory assessment as part of neuromuscular evaluation"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or asymmetric weakness suggesting an alternative or inflammatory cause",
+      "Respiratory muscle weakness with declining vital capacity",
+      "Significant cardiac symptoms prompting cardiac evaluation",
+      "Marked dysphagia atypical for the usual phenotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder generally follows a slowly progressive course with proximal weakness, and many patients retain independent walking for many years; life expectancy is usually normal, though monitoring for respiratory involvement is appropriate in advanced disease.",
+    "pitfalls": [
+      "Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation",
+      "Missing the characteristic sarcotubular vacuolation if electron microscopy is not performed",
+      "Assuming a dominant inheritance pattern in what is a recessive disorder when counselling families",
+      "Overlooking milder facial or neck involvement that can aid recognition"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: TRIM32-related limb-girdle muscular dystrophy / sarcotubular myopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to preserve strength and prevent contractures",
+      "Provide occupational therapy, orthoses, and mobility aids to sustain independence as proximal weakness progresses",
+      "Monitor respiratory function periodically and introduce non-invasive ventilation if nocturnal hypoventilation develops",
+      "Undertake cardiac assessment as part of routine neuromuscular surveillance",
+      "Coordinate care through a multidisciplinary neuromuscular service",
+      "Offer genetic counselling for the autosomal recessive inheritance and arrange testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for sarcotubular myopathy (trim32)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sarcotubular-myopathy-real-image",
-   "title": "Sarcotubular myopathy (TRIM32): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "sarcotubular_myopathy-pathway",
+      "title": "Sarcotubular myopathy (TRIM32): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H), first described in the Hutterite population",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric weakness suggesting an alternative or inflammatory cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry and electron microscopy to demonstrate sarcotubular vacuolation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to preserve strength and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sarcotubular myopathy (trim32)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sarcotubular_myopathy-matrix",
+      "title": "Sarcotubular myopathy (TRIM32): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive myopathy caused by variants in TRIM32, allelic with limb-girdle muscular dystrophy R8 (formerly LGMD2H),",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry and electron microscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other limb-girdle muscular dystrophies (calpainopathy, dysferlinopathy, sarcoglycanopathies), Inflammatory myopathy, Metabolic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific or curative therapy exists, so centre care on maintaining function with individualised physiotherapy to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the presentation to a more common limb-girdle dystrophy without genetic confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sarcotubular myopathy (trim32)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sarcotubular_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle injury marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and EMG",
+          "cells": [
+            {
+              "text": "Separates myopathic from neuropathic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with EM",
+          "cells": [
+            {
+              "text": "Sarcotubular vacuolation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Pattern of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRIM32 limb-girdle panel",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and respiratory assessment",
+          "cells": [
+            {
+              "text": "Part of neuromuscular evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcotubular_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve strength and prevent contractures; no curative therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and aids",
+          "cells": [
+            {
+              "text": "Orthoses and mobility aids as proximal weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation if nocturnal hypoventilation develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Routine neuromuscular surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neuromuscular care",
+          "cells": [
+            {
+              "text": "Coordinated service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sarcotubular_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Sarcotubular myopathy (TRIM32)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive proximal limb-girdle weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Asymmetric rapid weakness, falling vital capacity, cardiac symptoms or marked dysphagia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Consider inflammatory myopathy; respiratory and cardiac assessment urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, EMG, muscle MRI, muscle biopsy with EM, TRIM32 genetic panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do sarcotubular vacuolation and TRIM32 variants confirm it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other limb-girdle dystrophies, inflammatory, metabolic and myofibrillar myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to preserve strength; no curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occupational therapy, orthoses and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring; non-invasive ventilation for hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac surveillance and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; many remain walking for years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

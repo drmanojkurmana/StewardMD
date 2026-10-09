@@ -1,172 +1,532 @@
 {
- "id": "diabetic_nephropathy",
- "name": "Diabetic nephropathy",
- "aliases": [
-  "diabetic kidney disease",
-  "diabetic glomerulosclerosis",
-  "Kimmelstiel-Wilson disease",
-  "diabetic renal disease"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
-   "The earliest clinical marker is moderately increased albuminuria (microalbuminuria), which can progress to overt proteinuria and declining filtration",
-   "Screening with an annual urine albumin-to-creatinine ratio and estimated GFR allows early detection and intervention",
-   "Coexistent diabetic retinopathy supports a diabetic aetiology, and its absence in type 1 diabetes should prompt consideration of an alternative renal diagnosis",
-   "Tight control of both blood glucose and blood pressure slows progression, and blockade of the renin-angiotensin system is renoprotective in albuminuric patients",
-   "SGLT2 inhibitors reduce progression of diabetic kidney disease and cardiovascular risk and have become central to management",
-   "Features such as active urinary sediment, rapid GFR loss, or heavy proteinuria without retinopathy warrant evaluation for a non-diabetic renal disease"
+  "id": "diabetic_nephropathy",
+  "name": "Diabetic nephropathy",
+  "aliases": [
+    "diabetic kidney disease",
+    "diabetic glomerulosclerosis",
+    "Kimmelstiel-Wilson disease",
+    "diabetic renal disease"
   ],
-  "pathophysiology": "Sustained hyperglycaemia and glomerular hypertension drive haemodynamic and metabolic injury to the kidney. Early glomerular hyperfiltration, mesangial expansion, glomerular basement membrane thickening, and podocyte injury progress to nodular and diffuse glomerulosclerosis, the nodular lesions being the classic Kimmelstiel-Wilson change. Advanced glycation end-products, oxidative stress, and activation of the renin-angiotensin system promote albuminuria, tubulointerstitial fibrosis, and progressive loss of filtration.",
-  "additionalDifferentials": [
-   "Hypertensive nephrosclerosis",
-   "Glomerulonephritis or other primary glomerular disease",
-   "Ischaemic or atheroembolic renal disease",
-   "Drug-induced or contrast-associated nephropathy",
-   "Obstructive uropathy or recurrent pyelonephritis",
-   "Membranous nephropathy or minimal change disease presenting with nephrotic-range proteinuria"
-  ],
-  "additionalInvestigations": [
-   "Urine albumin-to-creatinine ratio for albuminuria",
-   "Serum creatinine with estimated GFR",
-   "Urinalysis to assess for haematuria or active sediment suggesting an alternative cause",
-   "Dilated retinal examination to look for concurrent retinopathy",
-   "Renal ultrasound and, in atypical presentations, consideration of renal biopsy"
-  ],
-  "redFlags": [
-   "Rapidly declining GFR out of proportion to expected diabetic course",
-   "Active urinary sediment, red cell casts, or nephrotic syndrome without retinopathy",
-   "Uncontrolled hypertension with worsening renal function",
-   "Signs of advanced uraemia or fluid overload requiring renal replacement planning"
-  ],
-  "prognosis": "Without intervention diabetic nephropathy progresses to end-stage renal disease and carries a high cardiovascular mortality, but early detection and aggressive control of glucose and blood pressure, renin-angiotensin blockade, and SGLT2 inhibition can substantially slow progression.",
-  "pitfalls": [
-   "Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative",
-   "Failing to screen for albuminuria and losing the window for early renoprotective therapy",
-   "Under-using renin-angiotensin blockade and SGLT2 inhibitors in eligible patients",
-   "Neglecting cardiovascular risk, which is the dominant cause of death in these patients"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in albuminuric patients",
-   "Use an SGLT2 inhibitor to slow progression of kidney disease and reduce cardiovascular risk",
-   "Achieve tight control of both blood glucose and blood pressure to slow the decline in filtration",
-   "Consider a non-steroidal mineralocorticoid-receptor antagonist to reduce residual albuminuria in appropriate patients",
-   "Screen and monitor with annual urine albumin-to-creatinine ratio and estimated GFR, and check potassium on renin-angiotensin-blocking therapy",
-   "Manage cardiovascular risk with lipid-lowering therapy and lifestyle measures",
-   "Refer to nephrology when the picture is atypical or disease advances, and prepare for dialysis or transplantation in end-stage disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "diabetic_nephropathy-pathway",
-   "title": "Diabetic nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining GFR out of proportion to expected diabetic course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine albumin-to-creatinine ratio for albuminuria, Serum creatinine with estimated GFR, Urinalysis to assess for haematuria or active sediment suggesting an alternative cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in albuminuric patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of diabetic nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "diabetic_nephropathy-matrix",
-   "title": "Diabetic nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
+      "The earliest clinical marker is moderately increased albuminuria (microalbuminuria), which can progress to overt proteinuria and declining filtration",
+      "Screening with an annual urine albumin-to-creatinine ratio and estimated GFR allows early detection and intervention",
+      "Coexistent diabetic retinopathy supports a diabetic aetiology, and its absence in type 1 diabetes should prompt consideration of an alternative renal diagnosis",
+      "Tight control of both blood glucose and blood pressure slows progression, and blockade of the renin-angiotensin system is renoprotective in albuminuric patients",
+      "SGLT2 inhibitors reduce progression of diabetic kidney disease and cardiovascular risk and have become central to management",
+      "Features such as active urinary sediment, rapid GFR loss, or heavy proteinuria without retinopathy warrant evaluation for a non-diabetic renal disease"
     ],
-    [
-     "Key Investigations",
-     "Urine albumin-to-creatinine ratio for albuminuria, Serum creatinine with estimated GFR, Urinalysis to assess for haematuria or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sustained hyperglycaemia and glomerular hypertension drive haemodynamic and metabolic injury to the kidney. Early glomerular hyperfiltration, mesangial expansion, glomerular basement membrane thickening, and podocyte injury progress to nodular and diffuse glomerulosclerosis, the nodular lesions being the classic Kimmelstiel-Wilson change. Advanced glycation end-products, oxidative stress, and activation of the renin-angiotensin system promote albuminuria, tubulointerstitial fibrosis, and progressive loss of filtration.",
+    "additionalDifferentials": [
+      "Hypertensive nephrosclerosis",
+      "Glomerulonephritis or other primary glomerular disease",
+      "Ischaemic or atheroembolic renal disease",
+      "Drug-induced or contrast-associated nephropathy",
+      "Obstructive uropathy or recurrent pyelonephritis",
+      "Membranous nephropathy or minimal change disease presenting with nephrotic-range proteinuria"
     ],
-    [
-     "Primary Differentials",
-     "Hypertensive nephrosclerosis, Glomerulonephritis or other primary glomerular disease, Ischaemic or atheroembolic renal disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine albumin-to-creatinine ratio for albuminuria",
+      "Serum creatinine with estimated GFR",
+      "Urinalysis to assess for haematuria or active sediment suggesting an alternative cause",
+      "Dilated retinal examination to look for concurrent retinopathy",
+      "Renal ultrasound and, in atypical presentations, consideration of renal biopsy"
     ],
-    [
-     "Management Strategy",
-     "Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining GFR out of proportion to expected diabetic course",
+      "Active urinary sediment, red cell casts, or nephrotic syndrome without retinopathy",
+      "Uncontrolled hypertension with worsening renal function",
+      "Signs of advanced uraemia or fluid overload requiring renal replacement planning"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without intervention diabetic nephropathy progresses to end-stage renal disease and carries a high cardiovascular mortality, but early detection and aggressive control of glucose and blood pressure, renin-angiotensin blockade, and SGLT2 inhibition can substantially slow progression.",
+    "pitfalls": [
+      "Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative",
+      "Failing to screen for albuminuria and losing the window for early renoprotective therapy",
+      "Under-using renin-angiotensin blockade and SGLT2 inhibitors in eligible patients",
+      "Neglecting cardiovascular risk, which is the dominant cause of death in these patients"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in albuminuric patients",
+      "Use an SGLT2 inhibitor to slow progression of kidney disease and reduce cardiovascular risk",
+      "Achieve tight control of both blood glucose and blood pressure to slow the decline in filtration",
+      "Consider a non-steroidal mineralocorticoid-receptor antagonist to reduce residual albuminuria in appropriate patients",
+      "Screen and monitor with annual urine albumin-to-creatinine ratio and estimated GFR, and check potassium on renin-angiotensin-blocking therapy",
+      "Manage cardiovascular risk with lipid-lowering therapy and lifestyle measures",
+      "Refer to nephrology when the picture is atypical or disease advances, and prepare for dialysis or transplantation in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for diabetic nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "diabetic-nephropathy-real-image",
-   "title": "Diabetic nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "diabetic_nephropathy-pathway",
+      "title": "Diabetic nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining GFR out of proportion to expected diabetic course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine albumin-to-creatinine ratio for albuminuria, Serum creatinine with estimated GFR, Urinalysis to assess for haematuria or active sediment suggesting an alternative cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in albuminuric patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of diabetic nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "diabetic_nephropathy-matrix",
+      "title": "Diabetic nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diabetic kidney disease is a leading cause of end-stage renal failure and usually develops after years of diabetes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine albumin-to-creatinine ratio for albuminuria, Serum creatinine with estimated GFR, Urinalysis to assess for haematuria or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypertensive nephrosclerosis, Glomerulonephritis or other primary glomerular disease, Ischaemic or atheroembolic renal disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Blockade the renin-angiotensin system with an ACE inhibitor or angiotensin-receptor blocker, which is renoprotective in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all renal impairment in a diabetic patient is diabetic nephropathy and missing a treatable alternative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for diabetic nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 280-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetic_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine albumin-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Albuminuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine with eGFR",
+          "cells": [
+            {
+              "text": "Declining GFR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for haematuria or active sediment",
+          "cells": [
+            {
+              "text": "Haematuria or active sediment suggests another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated retinal examination",
+          "cells": [
+            {
+              "text": "Retinopathy supports a diabetic cause; its absence raises doubt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Renal imaging; biopsy considered in atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glomerulonephritis",
+          "cells": [
+            {
+              "text": "Active sediment or red cell casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranous nephropathy or minimal change disease",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria without retinopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Renoprotective in albuminuric patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Slows progression and reduces cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tight glucose and blood pressure control",
+          "cells": [
+            {
+              "text": "Slows the decline in filtration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-steroidal MRA",
+          "cells": [
+            {
+              "text": "Reduces residual albuminuria in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Annual screening",
+          "cells": [
+            {
+              "text": "Urine albumin-to-creatinine ratio and eGFR; check potassium on RAS blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-lowering and lifestyle",
+          "cells": [
+            {
+              "text": "Manages cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Atypical or advancing disease; prepare for dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetic_nephropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of chronic kidney disease by GFR",
+      "rowHeader": "Stage",
+      "columns": [
+        "GFR, mL/min per 1.73 m2"
+      ],
+      "rows": [
+        {
+          "parameter": "0",
+          "cells": [
+            {
+              "text": ">90"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "1",
+          "cells": [
+            {
+              "text": ">=90"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "2",
+          "cells": [
+            {
+              "text": "60-89"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "3",
+          "cells": [
+            {
+              "text": "30-59"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "4",
+          "cells": [
+            {
+              "text": "15-29"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "5",
+          "cells": [
+            {
+              "text": "<15"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source marks stages 0 and 1 with footnotes a and b, but the footnote text is not legible on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetic_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Diabetic nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diabetic nephropathy: albuminuria and declining GFR in long-standing diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid GFR fall, red cell casts or nephrosis without retinopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology review for rapid decline, active sediment or nephrotic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine albumin-to-creatinine ratio; creatinine and eGFR; urinalysis; retinal exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are albuminuria and retinopathy present with a bland urinary sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glomerulonephritis, membranous nephropathy, obstruction or drug nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB, renoprotective in albuminuric patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SGLT2 inhibitor to slow progression and reduce cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tight glucose and blood pressure control to slow filtration decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider non-steroidal MRA for residual albuminuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Annual urine ACR and eGFR; check potassium on RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated, progresses to end-stage renal disease; early control slows decline",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

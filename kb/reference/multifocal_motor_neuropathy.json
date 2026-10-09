@@ -1,173 +1,480 @@
 {
- "id": "multifocal_motor_neuropathy",
- "name": "Multifocal motor neuropathy with conduction block",
- "aliases": [
-  "MMN",
-  "multifocal motor neuropathy",
-  "MMNCB"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
-   "Sensation is characteristically preserved, an important feature separating it from other polyneuropathies",
-   "The electrophysiological hallmark is motor conduction block at sites not prone to compression, with normal sensory conduction across the same segments",
-   "Serum anti-GM1 ganglioside antibodies are positive in a substantial proportion and support the diagnosis",
-   "It is often mistaken for motor neuron disease, but the pure motor picture is potentially treatable",
-   "Intravenous immunoglobulin is the mainstay of treatment, whereas corticosteroids and plasma exchange are typically unhelpful or may worsen the condition",
-   "Cerebrospinal fluid protein is usually normal or only mildly raised, unlike CIDP"
+  "id": "multifocal_motor_neuropathy",
+  "name": "Multifocal motor neuropathy with conduction block",
+  "aliases": [
+    "MMN",
+    "multifocal motor neuropathy",
+    "MMNCB"
   ],
-  "pathophysiology": "Multifocal motor neuropathy is an immune-mediated disorder of motor axons in which antibodies, frequently against the GM1 ganglioside enriched at the node of Ranvier, disrupt nodal sodium-channel clusters and paranodal architecture. This produces persistent focal conduction block along motor fibres while sensory fibres are spared, generating the pattern of weakness confined to individual nerve territories without sensory loss. Over time some axonal degeneration occurs, but the primary and treatment-responsive abnormality is the focal motor conduction block, which explains both the clinical picture and the benefit from immunoglobulin therapy.",
-  "additionalDifferentials": [
-   "Motor neuron disease (amyotrophic lateral sclerosis, progressive muscular atrophy)",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy (Lewis-Sumner variant)",
-   "Hereditary neuropathy with liability to pressure palsies",
-   "Compressive mononeuropathies and entrapment",
-   "Inclusion body myositis",
-   "Vasculitic (multiple mononeuropathy) neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction",
-   "Serum anti-GM1 IgM antibody testing",
-   "Cerebrospinal fluid analysis to help distinguish from CIDP",
-   "MRI or ultrasound of nerves and plexus to show focal enlargement or signal change",
-   "Electromyography to assess for denervation and exclude anterior horn cell disease",
-   "Assessment of treatment response to intravenous immunoglobulin as supportive evidence"
-  ],
-  "redFlags": [
-   "Emerging upper motor neuron signs suggesting motor neuron disease rather than MMN",
-   "Development of sensory involvement prompting reconsideration of the diagnosis",
-   "Rapid axonal loss with wasting threatening irreversible weakness",
-   "Loss of previously good response to immunoglobulin therapy"
-  ],
-  "prognosis": "Many patients maintain function with regular intravenous immunoglobulin, though the disorder is usually chronic and requires ongoing treatment; progressive axonal loss can cause slowly accumulating disability over years.",
-  "pitfalls": [
-   "Diagnosing motor neuron disease and missing a treatable neuropathy",
-   "Treating with corticosteroids or plasma exchange, which may be ineffective or harmful",
-   "Excluding the diagnosis when anti-GM1 antibodies are negative",
-   "Failing to search adequately for conduction block outside common entrapment sites"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Peripheral Nervous System Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for maintenance",
-   "Immunosuppressants such as cyclophosphamide or rituximab reserved for immunoglobulin-refractory disease",
-   "Avoid corticosteroids and plasma exchange, which are typically ineffective and may worsen the condition",
-   "Physiotherapy, occupational therapy and orthotic support to maintain function",
-   "Regular assessment of strength, disability and treatment response to titrate the immunoglobulin dosing interval",
-   "Neuromuscular specialist management that distinguishes the disorder from motor neuron disease so that treatable disease is not missed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "multifocal_motor_neuropathy-pathway",
-   "title": "Multifocal motor neuropathy with conduction block: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emerging upper motor neuron signs suggesting motor neuron disease rather than MMN",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction, Serum anti-GM1 IgM antibody testing, Cerebrospinal fluid analysis to help distinguish from CIDP"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for maintenance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing motor neuron disease and missing a treatable neuropathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multifocal motor neuropathy with conduction block."
-  }
- ],
- "tables": [
-  {
-   "id": "multifocal_motor_neuropathy-matrix",
-   "title": "Multifocal motor neuropathy with conduction block: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
+      "Sensation is characteristically preserved, an important feature separating it from other polyneuropathies",
+      "The electrophysiological hallmark is motor conduction block at sites not prone to compression, with normal sensory conduction across the same segments",
+      "Serum anti-GM1 ganglioside antibodies are positive in a substantial proportion and support the diagnosis",
+      "It is often mistaken for motor neuron disease, but the pure motor picture is potentially treatable",
+      "Intravenous immunoglobulin is the mainstay of treatment, whereas corticosteroids and plasma exchange are typically unhelpful or may worsen the condition",
+      "Cerebrospinal fluid protein is usually normal or only mildly raised, unlike CIDP"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction, Serum anti-GM1 IgM antibody",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Multifocal motor neuropathy is an immune-mediated disorder of motor axons in which antibodies, frequently against the GM1 ganglioside enriched at the node of Ranvier, disrupt nodal sodium-channel clusters and paranodal architecture. This produces persistent focal conduction block along motor fibres while sensory fibres are spared, generating the pattern of weakness confined to individual nerve territories without sensory loss. Over time some axonal degeneration occurs, but the primary and treatment-responsive abnormality is the focal motor conduction block, which explains both the clinical picture and the benefit from immunoglobulin therapy.",
+    "additionalDifferentials": [
+      "Motor neuron disease (amyotrophic lateral sclerosis, progressive muscular atrophy)",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy (Lewis-Sumner variant)",
+      "Hereditary neuropathy with liability to pressure palsies",
+      "Compressive mononeuropathies and entrapment",
+      "Inclusion body myositis",
+      "Vasculitic (multiple mononeuropathy) neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Motor neuron disease (amyotrophic lateral sclerosis, progressive muscular atrophy), Chronic inflammatory demyelinating",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction",
+      "Serum anti-GM1 IgM antibody testing",
+      "Cerebrospinal fluid analysis to help distinguish from CIDP",
+      "MRI or ultrasound of nerves and plexus to show focal enlargement or signal change",
+      "Electromyography to assess for denervation and exclude anterior horn cell disease",
+      "Assessment of treatment response to intravenous immunoglobulin as supportive evidence"
     ],
-    [
-     "Management Strategy",
-     "Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for",
-     "Core treatment modality"
+    "redFlags": [
+      "Emerging upper motor neuron signs suggesting motor neuron disease rather than MMN",
+      "Development of sensory involvement prompting reconsideration of the diagnosis",
+      "Rapid axonal loss with wasting threatening irreversible weakness",
+      "Loss of previously good response to immunoglobulin therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing motor neuron disease and missing a treatable neuropathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients maintain function with regular intravenous immunoglobulin, though the disorder is usually chronic and requires ongoing treatment; progressive axonal loss can cause slowly accumulating disability over years.",
+    "pitfalls": [
+      "Diagnosing motor neuron disease and missing a treatable neuropathy",
+      "Treating with corticosteroids or plasma exchange, which may be ineffective or harmful",
+      "Excluding the diagnosis when anti-GM1 antibodies are negative",
+      "Failing to search adequately for conduction block outside common entrapment sites"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Peripheral Nervous System Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for maintenance",
+      "Immunosuppressants such as cyclophosphamide or rituximab reserved for immunoglobulin-refractory disease",
+      "Avoid corticosteroids and plasma exchange, which are typically ineffective and may worsen the condition",
+      "Physiotherapy, occupational therapy and orthotic support to maintain function",
+      "Regular assessment of strength, disability and treatment response to titrate the immunoglobulin dosing interval",
+      "Neuromuscular specialist management that distinguishes the disorder from motor neuron disease so that treatable disease is not missed"
     ]
-   ],
-   "caption": "Overview comparison matrix for multifocal motor neuropathy with conduction block."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multifocal-motor-neuropathy-real-image",
-   "title": "Multifocal motor neuropathy with conduction block: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "multifocal_motor_neuropathy-pathway",
+      "title": "Multifocal motor neuropathy with conduction block: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emerging upper motor neuron signs suggesting motor neuron disease rather than MMN",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction, Serum anti-GM1 IgM antibody testing, Cerebrospinal fluid analysis to help distinguish from CIDP"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for maintenance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing motor neuron disease and missing a treatable neuropathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multifocal motor neuropathy with conduction block."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multifocal_motor_neuropathy-matrix",
+      "title": "Multifocal motor neuropathy with conduction block: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Causes slowly progressive, asymmetrical, distal, upper-limb-predominant weakness in the distribution of individual nerves",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies to demonstrate motor conduction block with preserved sensory conduction, Serum anti-GM1 IgM antibody",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Motor neuron disease (amyotrophic lateral sclerosis, progressive muscular atrophy), Chronic inflammatory demyelinating",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intravenous immunoglobulin as first-line and maintenance therapy, with subcutaneous immunoglobulin as an alternative for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing motor neuron disease and missing a treatable neuropathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multifocal motor neuropathy with conduction block."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multifocal_motor_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Motor conduction block with preserved sensory conduction across the same segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum anti-GM1 IgM antibody testing",
+          "cells": [
+            {
+              "text": "Positive in a substantial proportion; supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Protein usually normal or mildly raised, unlike CIDP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound of nerves and plexus",
+          "cells": [
+            {
+              "text": "Focal enlargement or signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Denervation; excludes anterior horn cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Supportive evidence of the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multifocal_motor_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor neuron disease",
+          "cells": [
+            {
+              "text": "Upper motor neuron signs favour motor neuron disease; this disorder has preserved sensation and focal conduction block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "CSF protein is usually normal here, unlike CIDP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive mononeuropathies and entrapment",
+          "cells": [
+            {
+              "text": "Conduction block must be sought outside the common entrapment sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multifocal_motor_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "First-line and maintenance therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subcutaneous immunoglobulin",
+          "cells": [
+            {
+              "text": "Alternative for maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppressants",
+          "cells": [
+            {
+              "text": "Cyclophosphamide or rituximab for immunoglobulin-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids and plasma exchange",
+          "cells": [
+            {
+              "text": "Typically ineffective and may worsen the condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and orthotic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Strength, disability and treatment response to titrate the immunoglobulin interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist management",
+          "cells": [
+            {
+              "text": "Neuromuscular specialist, to separate the disorder from motor neuron disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multifocal_motor_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of Multifocal motor neuropathy with conduction block",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive asymmetric distal upper-limb weakness with preserved sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (upper motor neuron signs, sensory loss, lost IVIG response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider diagnosis: motor neuron disease or CIDP; specialist neuromuscular review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies for motor conduction block, anti-GM1 IgM, CSF, EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Motor conduction block with normal sensory conduction across the same segments?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search for conduction block outside common entrapment sites; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IVIG as first-line and maintenance therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Subcutaneous immunoglobulin as an alternative for maintenance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab for immunoglobulin-refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid corticosteroids and plasma exchange; typically ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and orthotic support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many keep function on regular IVIG; axonal loss can add disability over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

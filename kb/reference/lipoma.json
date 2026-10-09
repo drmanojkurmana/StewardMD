@@ -1,182 +1,516 @@
 {
- "id": "lipoma",
- "name": "Lipoma",
- "aliases": [
-  "Benign lipomatous tumour",
-  "Simple lipoma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Soft tissue",
- "specialty": "Orthopaedic oncology / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless subcutaneous mass",
-   "Most are superficial and small; deep-seated, intramuscular, or large lesions (over roughly ten centimetres) warrant greater suspicion for an atypical lipomatous tumour",
-   "On MRI a simple lipoma follows subcutaneous fat on all sequences and suppresses completely on fat-saturated images, with no thick septa or non-fatty nodules",
-   "Common cytogenetic events involve rearrangements of the 12q13-15 region affecting HMGA2, distinct from the MDM2 and CDK4 amplification seen in atypical lipomatous tumour",
-   "Multiple lipomas suggest familial multiple lipomatosis or syndromic associations such as Gardner syndrome, Bannayan-Riley-Ruvalcaba syndrome, or benign symmetric lipomatosis (Madelung disease)",
-   "Variants include angiolipoma, spindle cell lipoma, and chondroid lipoma, each with characteristic histology",
-   "Asymptomatic superficial lipomas need no intervention; marginal excision is reserved for symptomatic, enlarging, or cosmetically troublesome lesions",
-   "Any deep or rapidly growing fatty mass should be imaged and, if atypical, biopsied before excision rather than simply shelled out"
+  "id": "lipoma",
+  "name": "Lipoma",
+  "aliases": [
+    "Benign lipomatous tumour",
+    "Simple lipoma"
   ],
-  "pathophysiology": "A lipoma is a benign clonal neoplasm of mature adipocytes rather than a simple overgrowth of normal fat. The majority are solitary, well-circumscribed, and enclosed by a thin fibrous capsule, arising most often in the subcutaneous tissue of the trunk, neck, and proximal limbs. A large proportion harbour clonal chromosomal rearrangements, most frequently involving the high-mobility group gene HMGA2 at 12q13-15, which drives adipocyte proliferation while preserving terminal differentiation, so the cells remain cytologically bland. The key biological distinction is from atypical lipomatous tumour and well-differentiated liposarcoma, which show amplification of MDM2 and CDK4 on 12q and carry a risk of dedifferentiation and local recurrence; this molecular separation, rather than morphology alone, underpins modern classification and management.",
-  "additionalDifferentials": [
-   "Atypical lipomatous tumour and well-differentiated liposarcoma",
-   "Angiolipoma and spindle cell lipoma",
-   "Hibernoma",
-   "Epidermoid or sebaceous cyst",
-   "Nodular fasciitis or other benign soft tissue proliferation",
-   "Myxoid soft tissue tumour when myxoid change is present",
-   "Lipoblastoma in a young child"
-  ],
-  "additionalInvestigations": [
-   "Ultrasound as a first-line assessment of a superficial soft tissue lump",
-   "MRI with fat-saturated sequences to confirm uncomplicated fat and exclude worrying features",
-   "Image-guided core biopsy for deep, large, or radiologically atypical lesions",
-   "MDM2 amplification testing by FISH when atypical lipomatous tumour is a consideration",
-   "Cross-sectional imaging of the affected compartment to define depth and relationship to muscle",
-   "Histological examination of the excised specimen to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Rapid growth, size beyond roughly ten centimetres, or a deep or intramuscular location",
-   "Pain, fixation to deeper structures, or overlying skin change",
-   "Thick or nodular septa, non-fatty enhancing components, or incomplete fat suppression on MRI",
-   "Recurrence after previous excision",
-   "New neurological or vascular symptoms from local mass effect"
-  ],
-  "prognosis": "Simple lipomas are benign with an excellent prognosis and rarely recur after complete marginal excision. The principal clinical task is to identify the minority of fatty masses that are in fact atypical lipomatous tumours, since these carry a risk of local recurrence and, in certain sites, dedifferentiation.",
-  "pitfalls": [
-   "Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour",
-   "Failing to image deep or large lesions before intervention",
-   "Overlooking multiple lipomas as a clue to an underlying syndrome",
-   "Mistaking myxoid or spindle cell change for malignancy, or vice versa, without molecular confirmation"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors",
-   "Bone and Soft Tissue Sarcoma clinical practice guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign",
-   "Observe typical small, superficial, asymptomatic lipomas with no biopsy, imaging, or excision needed if the mass has classic fat signal and no thick septa or non-fatty nodules",
-   "Perform marginal surgical excision for symptomatic, enlarging, or cosmetically troublesome lesions, which is usually curative",
-   "Obtain MRI with fat-saturated sequences before excision for deep, large (roughly above ten centimetres), intramuscular, or radiologically atypical masses, followed by image-guided core biopsy if atypical features are seen, and do not shell out these lesions",
-   "Refer confirmed atypical lipomatous tumour or well-differentiated liposarcoma to a specialist sarcoma service for planned wider excision, as this is a separate pathway from simple lipoma",
-   "There are no systemic lines of therapy for simple lipoma; surgery is the only active treatment when indicated",
-   "Radiotherapy and systemic therapy have no role in confirmed simple lipoma",
-   "No routine surveillance imaging is required for a typical, imaging-confirmed simple lipoma left untreated",
-   "Send excised specimens for histological confirmation as standard practice for any excised soft tissue mass",
-   "Prompt re-imaging rather than reassurance for any new growth, pain, or change in a previously stable fatty mass",
-   "Refer for surgical opinion when a lipoma is symptomatic, enlarging, cosmetically troublesome, or diagnostically uncertain on imaging",
-   "Refer to a sarcoma multidisciplinary team when imaging or biopsy raises concern for atypical lipomatous tumour or liposarcoma, especially for deep, intramuscular, or large fatty masses",
-   "Refer for genetics or syndrome assessment when lipomas are multiple, as this can suggest familial multiple lipomatosis or syndromic associations such as Gardner syndrome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lipoma-pathway",
-   "title": "Lipoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless subcutaneous mass",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, size beyond roughly ten centimetres, or a deep or intramuscular location",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ultrasound as a first-line assessment of a superficial soft tissue lump, MRI with fat-saturated sequences to confirm uncomplicated fat and exclude worrying features, Image-guided core biopsy for deep, large, or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lipoma."
-  }
- ],
- "tables": [
-  {
-   "id": "lipoma-matrix",
-   "title": "Lipoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Soft tissue",
+  "specialty": "Orthopaedic oncology / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless subcutaneous mass",
+      "Most are superficial and small; deep-seated, intramuscular, or large lesions (over roughly ten centimetres) warrant greater suspicion for an atypical lipomatous tumour",
+      "On MRI a simple lipoma follows subcutaneous fat on all sequences and suppresses completely on fat-saturated images, with no thick septa or non-fatty nodules",
+      "Common cytogenetic events involve rearrangements of the 12q13-15 region affecting HMGA2, distinct from the MDM2 and CDK4 amplification seen in atypical lipomatous tumour",
+      "Multiple lipomas suggest familial multiple lipomatosis or syndromic associations such as Gardner syndrome, Bannayan-Riley-Ruvalcaba syndrome, or benign symmetric lipomatosis (Madelung disease)",
+      "Variants include angiolipoma, spindle cell lipoma, and chondroid lipoma, each with characteristic histology",
+      "Asymptomatic superficial lipomas need no intervention; marginal excision is reserved for symptomatic, enlarging, or cosmetically troublesome lesions",
+      "Any deep or rapidly growing fatty mass should be imaged and, if atypical, biopsied before excision rather than simply shelled out"
     ],
-    [
-     "Key Investigations",
-     "Ultrasound as a first-line assessment of a superficial soft tissue lump, MRI with fat-saturated sequences to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A lipoma is a benign clonal neoplasm of mature adipocytes rather than a simple overgrowth of normal fat. The majority are solitary, well-circumscribed, and enclosed by a thin fibrous capsule, arising most often in the subcutaneous tissue of the trunk, neck, and proximal limbs. A large proportion harbour clonal chromosomal rearrangements, most frequently involving the high-mobility group gene HMGA2 at 12q13-15, which drives adipocyte proliferation while preserving terminal differentiation, so the cells remain cytologically bland. The key biological distinction is from atypical lipomatous tumour and well-differentiated liposarcoma, which show amplification of MDM2 and CDK4 on 12q and carry a risk of dedifferentiation and local recurrence; this molecular separation, rather than morphology alone, underpins modern classification and management.",
+    "additionalDifferentials": [
+      "Atypical lipomatous tumour and well-differentiated liposarcoma",
+      "Angiolipoma and spindle cell lipoma",
+      "Hibernoma",
+      "Epidermoid or sebaceous cyst",
+      "Nodular fasciitis or other benign soft tissue proliferation",
+      "Myxoid soft tissue tumour when myxoid change is present",
+      "Lipoblastoma in a young child"
     ],
-    [
-     "Primary Differentials",
-     "Atypical lipomatous tumour and well-differentiated liposarcoma, Angiolipoma and spindle cell lipoma, Hibernoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ultrasound as a first-line assessment of a superficial soft tissue lump",
+      "MRI with fat-saturated sequences to confirm uncomplicated fat and exclude worrying features",
+      "Image-guided core biopsy for deep, large, or radiologically atypical lesions",
+      "MDM2 amplification testing by FISH when atypical lipomatous tumour is a consideration",
+      "Cross-sectional imaging of the affected compartment to define depth and relationship to muscle",
+      "Histological examination of the excised specimen to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, size beyond roughly ten centimetres, or a deep or intramuscular location",
+      "Pain, fixation to deeper structures, or overlying skin change",
+      "Thick or nodular septa, non-fatty enhancing components, or incomplete fat suppression on MRI",
+      "Recurrence after previous excision",
+      "New neurological or vascular symptoms from local mass effect"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple lipomas are benign with an excellent prognosis and rarely recur after complete marginal excision. The principal clinical task is to identify the minority of fatty masses that are in fact atypical lipomatous tumours, since these carry a risk of local recurrence and, in certain sites, dedifferentiation.",
+    "pitfalls": [
+      "Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour",
+      "Failing to image deep or large lesions before intervention",
+      "Overlooking multiple lipomas as a clue to an underlying syndrome",
+      "Mistaking myxoid or spindle cell change for malignancy, or vice versa, without molecular confirmation"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors",
+      "Bone and Soft Tissue Sarcoma clinical practice guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign",
+      "Observe typical small, superficial, asymptomatic lipomas with no biopsy, imaging, or excision needed if the mass has classic fat signal and no thick septa or non-fatty nodules",
+      "Perform marginal surgical excision for symptomatic, enlarging, or cosmetically troublesome lesions, which is usually curative",
+      "Obtain MRI with fat-saturated sequences before excision for deep, large (roughly above ten centimetres), intramuscular, or radiologically atypical masses, followed by image-guided core biopsy if atypical features are seen, and do not shell out these lesions",
+      "Refer confirmed atypical lipomatous tumour or well-differentiated liposarcoma to a specialist sarcoma service for planned wider excision, as this is a separate pathway from simple lipoma",
+      "There are no systemic lines of therapy for simple lipoma; surgery is the only active treatment when indicated",
+      "Radiotherapy and systemic therapy have no role in confirmed simple lipoma",
+      "No routine surveillance imaging is required for a typical, imaging-confirmed simple lipoma left untreated",
+      "Send excised specimens for histological confirmation as standard practice for any excised soft tissue mass",
+      "Prompt re-imaging rather than reassurance for any new growth, pain, or change in a previously stable fatty mass",
+      "Refer for surgical opinion when a lipoma is symptomatic, enlarging, cosmetically troublesome, or diagnostically uncertain on imaging",
+      "Refer to a sarcoma multidisciplinary team when imaging or biopsy raises concern for atypical lipomatous tumour or liposarcoma, especially for deep, intramuscular, or large fatty masses",
+      "Refer for genetics or syndrome assessment when lipomas are multiple, as this can suggest familial multiple lipomatosis or syndromic associations such as Gardner syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for lipoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lipoma-real-image",
-   "title": "Lipoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "lipoma-pathway",
+      "title": "Lipoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless subcutaneous mass",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, size beyond roughly ten centimetres, or a deep or intramuscular location",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ultrasound as a first-line assessment of a superficial soft tissue lump, MRI with fat-saturated sequences to confirm uncomplicated fat and exclude worrying features, Image-guided core biopsy for deep, large, or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lipoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lipoma-matrix",
+      "title": "Lipoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest soft tissue tumour, composed of mature white adipocytes, typically presenting as a soft, mobile, painless",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ultrasound as a first-line assessment of a superficial soft tissue lump, MRI with fat-saturated sequences to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atypical lipomatous tumour and well-differentiated liposarcoma, Angiolipoma and spindle cell lipoma, Hibernoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management depends on clinical behaviour and imaging appearance rather than stage, since lipoma is benign",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any fatty lump is a simple lipoma and shelling out a deep mass that proves to be an atypical lipomatous tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lipoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "First-line assessment of a superficial lump"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with fat-saturated sequences",
+          "cells": [
+            {
+              "text": "Uncomplicated fat; excludes worrying features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided core biopsy",
+          "cells": [
+            {
+              "text": "Deep, large or radiologically atypical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MDM2 amplification testing by FISH",
+          "cells": [
+            {
+              "text": "Where atypical lipomatous tumour is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the compartment",
+          "cells": [
+            {
+              "text": "Depth and relationship to muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised specimen",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atypical lipomatous tumour and well-differentiated liposarcoma",
+          "cells": [
+            {
+              "text": "MDM2 amplification; deep or large lesions need imaging before excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiolipoma and spindle cell lipoma",
+          "cells": [
+            {
+              "text": "Histological variants of lipoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermoid or sebaceous cyst",
+          "cells": [
+            {
+              "text": "Cystic rather than fatty lesion on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hibernoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Typical small, superficial, asymptomatic lipomas with classic fat signal need no intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal excision",
+          "cells": [
+            {
+              "text": "For symptomatic, enlarging or cosmetically troublesome lesions; usually curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI before excision",
+          "cells": [
+            {
+              "text": "Deep, large (above roughly ten centimetres), intramuscular or atypical masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma referral",
+          "cells": [
+            {
+              "text": "Confirmed atypical lipomatous tumour or well-differentiated liposarcoma; planned wider excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy and radiotherapy",
+          "cells": [
+            {
+              "text": "No role for simple lipoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "No routine imaging for a typical, imaging-confirmed lipoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Excised specimens sent for histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-imaging",
+          "cells": [
+            {
+              "text": "For new growth, pain or change in a previously stable fatty mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic referral",
+          "cells": [
+            {
+              "text": "When lipomas are multiple; familial multiple lipomatosis or syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoma-dx-mgmt",
+      "title": "Diagnosis and management of Lipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft, mobile, painless subcutaneous fatty lump",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, deep site, pain or fixation, non-fatty areas)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI and sarcoma referral for suspected atypical lipomatous tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, fat-saturated MRI, core biopsy if deep or atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show uncomplicated fat, with no thick septa or non-fatty nodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atypical lipomatous tumour, liposarcoma or another lump",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe typical small superficial asymptomatic lipomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marginal excision for symptomatic, enlarging or cosmetic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sarcoma referral for confirmed atypical lipomatous tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histology of any excised mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic referral when lipomas are multiple",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Simple lipomas are benign and rarely recur after complete marginal excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

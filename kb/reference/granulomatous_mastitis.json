@@ -1,179 +1,475 @@
 {
- "id": "granulomatous_mastitis",
- "name": "Idiopathic granulomatous mastitis",
- "aliases": [
-  "idiopathic granulomatous mastitis",
-  "granulomatous mastitis",
-  "granulomatous lobular mastitis",
-  "IGM"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard breast surgery textbook and benign breast disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both clinically and on imaging",
-   "It typically affects women of reproductive age, often within a few years of pregnancy or lactation, presenting with a firm, sometimes tender breast mass",
-   "Associated features can include skin inflammation, abscess formation, sinuses, fistulae, and nipple retraction, reinforcing the resemblance to inflammatory or locally advanced cancer",
-   "The diagnosis is one of exclusion, requiring core biopsy showing non-caseating granulomatous lobulitis and active exclusion of tuberculosis and other specific infections",
-   "Microbiological work-up, including tests for mycobacteria and, in some series, Corynebacterium species, is important before attributing the disease to an idiopathic cause",
-   "Because it can look identical to malignancy, triple assessment with core biopsy rather than fine-needle aspiration alone is essential to obtain architecture and exclude cancer",
-   "Management is generic and may include observation, anti-inflammatory or immunosuppressive treatment, and conservative handling of abscesses, with wide surgery avoided where possible because of poor wound healing and recurrence",
-   "The condition often follows a prolonged, relapsing course but is ultimately self-limiting in many women"
+  "id": "granulomatous_mastitis",
+  "name": "Idiopathic granulomatous mastitis",
+  "aliases": [
+    "idiopathic granulomatous mastitis",
+    "granulomatous mastitis",
+    "granulomatous lobular mastitis",
+    "IGM"
   ],
-  "pathophysiology": "Idiopathic granulomatous mastitis is characterised histologically by non-caseating granulomas centred on the breast lobules, formed by epithelioid histiocytes, multinucleate giant cells, and surrounding chronic inflammatory cells. The precise trigger is unknown, but it is thought to represent a localised immune-mediated reaction to extravasated luminal secretions or lobular antigens, sometimes with a contribution from Corynebacterium infection, and it is associated with recent pregnancy, lactation, and hyperprolactinaemic states. The inflammatory process can progress to microabscesses, sinuses, and fistulae. Crucially, the granulomatous appearance is shared with tuberculosis and other infections, so those must be excluded before the label of idiopathic disease is applied.",
-  "additionalDifferentials": [
-   "Breast carcinoma, including inflammatory breast cancer",
-   "Tuberculous mastitis",
-   "Bacterial breast abscess and periductal mastitis",
-   "Fungal or other granulomatous infection",
-   "Sarcoidosis involving the breast",
-   "Fat necrosis",
-   "Duct ectasia with inflammation"
-  ],
-  "additionalInvestigations": [
-   "Core needle biopsy for histology showing non-caseating granulomatous lobulitis",
-   "Ultrasound and mammography as part of triple assessment",
-   "Microbiological testing including stains and culture for mycobacteria and bacteria",
-   "Screening for tuberculosis where clinically or epidemiologically relevant",
-   "Serum prolactin and assessment for causes of hyperprolactinaemia",
-   "Tests to exclude sarcoidosis or other systemic granulomatous disease when indicated"
-  ],
-  "redFlags": [
-   "Imaging or clinical features indistinguishable from malignancy pending biopsy",
-   "Caseating granulomas or other findings suggesting tuberculosis",
-   "Rapidly progressive skin involvement raising concern for inflammatory carcinoma",
-   "Systemic symptoms suggesting disseminated infection or sarcoidosis",
-   "Non-resolving disease despite treatment, warranting repeat biopsy"
-  ],
-  "prognosis": "The condition is benign and often eventually self-limiting, but it is notorious for a protracted, relapsing course with recurrent inflammation and sinus formation; most women recover with conservative or medical management, though scarring can result.",
-  "pitfalls": [
-   "Labelling the disease idiopathic without excluding tuberculosis and other infections",
-   "Relying on fine-needle aspiration and missing the granulomatous architecture or an underlying cancer",
-   "Undertaking wide surgical excision that heals poorly and tends to recur",
-   "Overlooking hyperprolactinaemia as a contributing factor",
-   "Mistaking the presentation for inflammatory breast carcinoma or vice versa"
-  ],
-  "references": [
-   "Standard breast surgery reference text on inflammatory breast conditions",
-   "Guidance on granulomatous breast disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous lobulitis, plus microbiological testing for mycobacteria before labelling disease idiopathic",
-   "Manage mild disease expectantly with simple analgesia and observation, as it is often eventually self-limiting",
-   "Use systemic or topical corticosteroids for symptomatic, extensive or rapidly progressive disease",
-   "Add a steroid-sparing immunosuppressant such as methotrexate for refractory or relapsing disease",
-   "Give targeted antibiotics where Corynebacterium species or another organism is identified on culture",
-   "Reserve surgery for abscess drainage or genuinely refractory localised disease, avoiding wide excision that can worsen scarring and sinus formation",
-   "Measure serum prolactin and address any cause of hyperprolactinaemia contributing to the condition",
-   "Refer to a breast multidisciplinary team and counsel on the protracted, relapsing course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "granulomatous_mastitis-pathway",
-   "title": "Idiopathic granulomatous mastitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both clinically and on imaging",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Imaging or clinical features indistinguishable from malignancy pending biopsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Core needle biopsy for histology showing non-caseating granulomatous lobulitis, Ultrasound and mammography as part of triple assessment, Microbiological testing including stains and culture for mycobacteria and bacteria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous lobulitis, plus microbiological testing for mycobacteria before labelling disease idiopathic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the disease idiopathic without excluding tuberculosis and other infections"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic granulomatous mastitis."
-  }
- ],
- "tables": [
-  {
-   "id": "granulomatous_mastitis-matrix",
-   "title": "Idiopathic granulomatous mastitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard breast surgery textbook and benign breast disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both clinically and on imaging",
+      "It typically affects women of reproductive age, often within a few years of pregnancy or lactation, presenting with a firm, sometimes tender breast mass",
+      "Associated features can include skin inflammation, abscess formation, sinuses, fistulae, and nipple retraction, reinforcing the resemblance to inflammatory or locally advanced cancer",
+      "The diagnosis is one of exclusion, requiring core biopsy showing non-caseating granulomatous lobulitis and active exclusion of tuberculosis and other specific infections",
+      "Microbiological work-up, including tests for mycobacteria and, in some series, Corynebacterium species, is important before attributing the disease to an idiopathic cause",
+      "Because it can look identical to malignancy, triple assessment with core biopsy rather than fine-needle aspiration alone is essential to obtain architecture and exclude cancer",
+      "Management is generic and may include observation, anti-inflammatory or immunosuppressive treatment, and conservative handling of abscesses, with wide surgery avoided where possible because of poor wound healing and recurrence",
+      "The condition often follows a prolonged, relapsing course but is ultimately self-limiting in many women"
     ],
-    [
-     "Key Investigations",
-     "Core needle biopsy for histology showing non-caseating granulomatous lobulitis, Ultrasound and mammography as part of triple",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic granulomatous mastitis is characterised histologically by non-caseating granulomas centred on the breast lobules, formed by epithelioid histiocytes, multinucleate giant cells, and surrounding chronic inflammatory cells. The precise trigger is unknown, but it is thought to represent a localised immune-mediated reaction to extravasated luminal secretions or lobular antigens, sometimes with a contribution from Corynebacterium infection, and it is associated with recent pregnancy, lactation, and hyperprolactinaemic states. The inflammatory process can progress to microabscesses, sinuses, and fistulae. Crucially, the granulomatous appearance is shared with tuberculosis and other infections, so those must be excluded before the label of idiopathic disease is applied.",
+    "additionalDifferentials": [
+      "Breast carcinoma, including inflammatory breast cancer",
+      "Tuberculous mastitis",
+      "Bacterial breast abscess and periductal mastitis",
+      "Fungal or other granulomatous infection",
+      "Sarcoidosis involving the breast",
+      "Fat necrosis",
+      "Duct ectasia with inflammation"
     ],
-    [
-     "Primary Differentials",
-     "Breast carcinoma, including inflammatory breast cancer, Tuberculous mastitis, Bacterial breast abscess and periductal mastitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Core needle biopsy for histology showing non-caseating granulomatous lobulitis",
+      "Ultrasound and mammography as part of triple assessment",
+      "Microbiological testing including stains and culture for mycobacteria and bacteria",
+      "Screening for tuberculosis where clinically or epidemiologically relevant",
+      "Serum prolactin and assessment for causes of hyperprolactinaemia",
+      "Tests to exclude sarcoidosis or other systemic granulomatous disease when indicated"
     ],
-    [
-     "Management Strategy",
-     "Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous",
-     "Core treatment modality"
+    "redFlags": [
+      "Imaging or clinical features indistinguishable from malignancy pending biopsy",
+      "Caseating granulomas or other findings suggesting tuberculosis",
+      "Rapidly progressive skin involvement raising concern for inflammatory carcinoma",
+      "Systemic symptoms suggesting disseminated infection or sarcoidosis",
+      "Non-resolving disease despite treatment, warranting repeat biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the disease idiopathic without excluding tuberculosis and other infections",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and often eventually self-limiting, but it is notorious for a protracted, relapsing course with recurrent inflammation and sinus formation; most women recover with conservative or medical management, though scarring can result.",
+    "pitfalls": [
+      "Labelling the disease idiopathic without excluding tuberculosis and other infections",
+      "Relying on fine-needle aspiration and missing the granulomatous architecture or an underlying cancer",
+      "Undertaking wide surgical excision that heals poorly and tends to recur",
+      "Overlooking hyperprolactinaemia as a contributing factor",
+      "Mistaking the presentation for inflammatory breast carcinoma or vice versa"
+    ],
+    "references": [
+      "Standard breast surgery reference text on inflammatory breast conditions",
+      "Guidance on granulomatous breast disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous lobulitis, plus microbiological testing for mycobacteria before labelling disease idiopathic",
+      "Manage mild disease expectantly with simple analgesia and observation, as it is often eventually self-limiting",
+      "Use systemic or topical corticosteroids for symptomatic, extensive or rapidly progressive disease",
+      "Add a steroid-sparing immunosuppressant such as methotrexate for refractory or relapsing disease",
+      "Give targeted antibiotics where Corynebacterium species or another organism is identified on culture",
+      "Reserve surgery for abscess drainage or genuinely refractory localised disease, avoiding wide excision that can worsen scarring and sinus formation",
+      "Measure serum prolactin and address any cause of hyperprolactinaemia contributing to the condition",
+      "Refer to a breast multidisciplinary team and counsel on the protracted, relapsing course"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic granulomatous mastitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "granulomatous-mastitis-real-image",
-   "title": "Idiopathic granulomatous mastitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "granulomatous_mastitis-pathway",
+      "title": "Idiopathic granulomatous mastitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both clinically and on imaging",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Imaging or clinical features indistinguishable from malignancy pending biopsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Core needle biopsy for histology showing non-caseating granulomatous lobulitis, Ultrasound and mammography as part of triple assessment, Microbiological testing including stains and culture for mycobacteria and bacteria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous lobulitis, plus microbiological testing for mycobacteria before labelling disease idiopathic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the disease idiopathic without excluding tuberculosis and other infections"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic granulomatous mastitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "granulomatous_mastitis-matrix",
+      "title": "Idiopathic granulomatous mastitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Idiopathic granulomatous mastitis is a benign chronic inflammatory breast condition that characteristically mimics carcinoma both",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Core needle biopsy for histology showing non-caseating granulomatous lobulitis, Ultrasound and mammography as part of triple",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Breast carcinoma, including inflammatory breast cancer, Tuberculous mastitis, Bacterial breast abscess and periductal mastitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude carcinoma and specific infection first through triple assessment with core biopsy showing non-caseating granulomatous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the disease idiopathic without excluding tuberculosis and other infections",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic granulomatous mastitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and benign breast disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "granulomatous_mastitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Core needle biopsy",
+          "cells": [
+            {
+              "text": "Non-caseating granulomatous lobulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound and mammography",
+          "cells": [
+            {
+              "text": "Triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stains and culture for mycobacteria and bacteria",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis screening",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis or systemic granuloma screen",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatous_mastitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast carcinoma, including inflammatory breast cancer",
+          "cells": [
+            {
+              "text": "Mimics it; biopsy excludes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous mastitis",
+          "cells": [
+            {
+              "text": "Caseating granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis of the breast",
+          "cells": [
+            {
+              "text": "Systemic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "granulomatous_mastitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude carcinoma and infection first",
+          "cells": [
+            {
+              "text": "Triple assessment with core biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Mild disease with analgesia and observation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic or topical for symptomatic, extensive or rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate for refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "Where Corynebacterium or another organism is cultured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Abscess drainage or refractory localised disease; avoid wide excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Address any cause of hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "granulomatous_mastitis-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic granulomatous mastitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected granulomatous mastitis: breast mass or inflammation needing core biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (caseating granulomas, rapid skin change, systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for caseating granulomas or features of inflammatory carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Core biopsy, ultrasound and mammography, cultures and prolactin level",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does core biopsy show non-caseating granulomatous lobulitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider breast carcinoma, tuberculous mastitis or sarcoidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude carcinoma and infection first with core biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic or extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Methotrexate for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery limited to abscess drainage or refractory localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often self-limiting, but protracted and relapsing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

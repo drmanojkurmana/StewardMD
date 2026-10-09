@@ -1,177 +1,495 @@
 {
- "id": "bartter_syndrome_type_1",
- "name": "Bartter Syndrome Type 1",
- "aliases": [
-  "SLC12A1",
-  "NKCC2",
-  "Antenatal Bartter syndrome type 1"
- ],
- "class": "non_infective",
- "system": "Renal / Tubulopathy",
- "specialty": "Paediatric Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Renal tubulopathy and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule behaves as if chronically exposed to a loop diuretic.",
-   "A prototypical antenatal (neonatal) Bartter subtype presenting with marked polyhydramnios and premature delivery.",
-   "Hallmark biochemistry is a hypokalaemic, hypochloraemic metabolic alkalosis with hyperreninaemic hyperaldosteronism yet normal or low blood pressure.",
-   "Prominent hypercalciuria with early nephrocalcinosis is characteristic and helps separate it from Gitelman syndrome.",
-   "Overproduction of prostaglandin E2 amplifies the salt wasting, polyuria and failure to thrive, and prostaglandin synthetase inhibition improves symptoms.",
-   "Neonates show severe polyuria, salt craving, recurrent dehydration and poor weight gain.",
-   "Blood pressure is preserved or low because chronic volume depletion offsets the high aldosterone.",
-   "Distinguished from type 2 by the absence of an early transient hyperkalaemic phase."
+  "id": "bartter_syndrome_type_1",
+  "name": "Bartter Syndrome Type 1",
+  "aliases": [
+    "SLC12A1",
+    "NKCC2",
+    "Antenatal Bartter syndrome type 1"
   ],
-  "pathophysiology": "Bartter syndrome type 1 arises from biallelic loss-of-function variants in SLC12A1, the gene encoding the apical furosemide-sensitive sodium-potassium-chloride cotransporter NKCC2 of the thick ascending limb of the loop of Henle. NKCC2 drives the bulk of sodium chloride reabsorption in this segment and generates the lumen-positive transepithelial voltage that powers paracellular reabsorption of calcium and magnesium. When NKCC2 is defective, sodium chloride is lost into the urine, exactly reproducing the pharmacological effect of a loop diuretic; the resulting volume contraction activates the renin-angiotensin-aldosterone axis, and enhanced distal sodium delivery drives renal potassium and hydrogen ion secretion, producing a hypokalaemic hypochloraemic metabolic alkalosis. Loss of the lumen-positive voltage impairs paracellular calcium reabsorption, causing hypercalciuria and predisposing to nephrocalcinosis. Compensatory overproduction of prostaglandin E2 further amplifies renin release, salt wasting and polyuria, which is why prostaglandin synthetase inhibition is therapeutically effective.",
-  "additionalDifferentials": [
-   "Bartter syndrome type 2 (KCNJ1 / ROMK) — antenatal, with early transient neonatal hyperkalaemia",
-   "Bartter syndrome type 3 (CLCNKB / ClC-Kb) — classic, later onset with a broader phenotype",
-   "Bartter syndrome type 4 (BSND / barttin) — antenatal salt wasting with sensorineural deafness",
-   "Transient antenatal Bartter syndrome type 5 (MAGED2, X-linked) — severe polyhydramnios that resolves after birth",
-   "Gitelman syndrome (SLC12A3) — hypocalciuria, hypomagnesaemia and later childhood or adult onset",
-   "Surreptitious loop diuretic use or chronic vomiting mimicking the biochemistry",
-   "Congenital chloride diarrhoea causing metabolic alkalosis and volume depletion"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis",
-   "Plasma renin activity and aldosterone, both characteristically elevated",
-   "Spot urinary electrolytes including chloride and a urinary calcium-to-creatinine ratio demonstrating hypercalciuria",
-   "Renal tract ultrasound looking for nephrocalcinosis",
-   "Antenatal ultrasound surveillance for polyhydramnios, with amniotic fluid chloride assessment where available",
-   "Serum magnesium, usually preserved, which helps distinguish from Gitelman syndrome",
-   "Molecular genetic testing of SLC12A1, ideally within an inherited tubulopathy gene panel"
-  ],
-  "redFlags": [
-   "Severe neonatal hypovolaemia and circulatory collapse from combined salt and water loss",
-   "Life-threatening hypokalaemia with cardiac arrhythmia or paralytic ileus",
-   "Complications of extreme prematurity following polyhydramnios",
-   "Progressive nephrocalcinosis with declining kidney function"
-  ],
-  "prognosis": "With early and sustained fluid, salt and potassium replacement together with prostaglandin synthetase inhibition, growth and biochemistry can usually be stabilised. Polyuria persists lifelong, and nephrocalcinosis with a gradual decline in renal function may develop over the long term.",
-  "pitfalls": [
-   "Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting",
-   "Mislabelling it as Gitelman syndrome, which is instead hypocalciuric, hypomagnesaemic and later in onset",
-   "Overlooking prostaglandin-driven symptoms that respond to prostaglandin synthetase inhibition",
-   "Attributing polyhydramnios solely to obstetric causes and missing the underlying tubulopathy"
-  ],
-  "references": [
-   "Standard paediatric nephrology reference texts",
-   "Consensus guidance on inherited salt-losing tubulopathies",
-   "Clinical genetics and inherited disease reference databases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting",
-   "Prostaglandin synthetase inhibition with indometacin to reduce the prostaglandin-driven polyuria, salt wasting and failure to thrive",
-   "Potassium-sparing diuretics such as spironolactone or amiloride to reduce renal potassium loss",
-   "Neonatal support for prematurity and recurrent dehydration, with attention to salt craving and feeding",
-   "Monitoring of electrolytes, growth and renal function, with renal ultrasound surveillance for nephrocalcinosis",
-   "Multidisciplinary paediatric nephrology follow-up",
-   "Genetic counselling for autosomal recessive inheritance and testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bartter_syndrome_type_1-pathway",
-   "title": "Bartter Syndrome Type 1: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule behaves as if chronically exposed to a loop diuretic.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal hypovolaemia and circulatory collapse from combined salt and water loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis, Plasma renin activity and aldosterone, both characteristically elevated, Spot urinary electrolytes including chloride"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bartter syndrome type 1."
-  }
- ],
- "tables": [
-  {
-   "id": "bartter_syndrome_type_1-matrix",
-   "title": "Bartter Syndrome Type 1: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Tubulopathy",
+  "specialty": "Paediatric Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Renal tubulopathy and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule behaves as if chronically exposed to a loop diuretic.",
+      "A prototypical antenatal (neonatal) Bartter subtype presenting with marked polyhydramnios and premature delivery.",
+      "Hallmark biochemistry is a hypokalaemic, hypochloraemic metabolic alkalosis with hyperreninaemic hyperaldosteronism yet normal or low blood pressure.",
+      "Prominent hypercalciuria with early nephrocalcinosis is characteristic and helps separate it from Gitelman syndrome.",
+      "Overproduction of prostaglandin E2 amplifies the salt wasting, polyuria and failure to thrive, and prostaglandin synthetase inhibition improves symptoms.",
+      "Neonates show severe polyuria, salt craving, recurrent dehydration and poor weight gain.",
+      "Blood pressure is preserved or low because chronic volume depletion offsets the high aldosterone.",
+      "Distinguished from type 2 by the absence of an early transient hyperkalaemic phase."
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis, Plasma renin activity and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bartter syndrome type 1 arises from biallelic loss-of-function variants in SLC12A1, the gene encoding the apical furosemide-sensitive sodium-potassium-chloride cotransporter NKCC2 of the thick ascending limb of the loop of Henle. NKCC2 drives the bulk of sodium chloride reabsorption in this segment and generates the lumen-positive transepithelial voltage that powers paracellular reabsorption of calcium and magnesium. When NKCC2 is defective, sodium chloride is lost into the urine, exactly reproducing the pharmacological effect of a loop diuretic; the resulting volume contraction activates the renin-angiotensin-aldosterone axis, and enhanced distal sodium delivery drives renal potassium and hydrogen ion secretion, producing a hypokalaemic hypochloraemic metabolic alkalosis. Loss of the lumen-positive voltage impairs paracellular calcium reabsorption, causing hypercalciuria and predisposing to nephrocalcinosis. Compensatory overproduction of prostaglandin E2 further amplifies renin release, salt wasting and polyuria, which is why prostaglandin synthetase inhibition is therapeutically effective.",
+    "additionalDifferentials": [
+      "Bartter syndrome type 2 (KCNJ1 / ROMK) — antenatal, with early transient neonatal hyperkalaemia",
+      "Bartter syndrome type 3 (CLCNKB / ClC-Kb) — classic, later onset with a broader phenotype",
+      "Bartter syndrome type 4 (BSND / barttin) — antenatal salt wasting with sensorineural deafness",
+      "Transient antenatal Bartter syndrome type 5 (MAGED2, X-linked) — severe polyhydramnios that resolves after birth",
+      "Gitelman syndrome (SLC12A3) — hypocalciuria, hypomagnesaemia and later childhood or adult onset",
+      "Surreptitious loop diuretic use or chronic vomiting mimicking the biochemistry",
+      "Congenital chloride diarrhoea causing metabolic alkalosis and volume depletion"
     ],
-    [
-     "Primary Differentials",
-     "Bartter syndrome type 2 (KCNJ1 / ROMK) - antenatal, with early transient neonatal hyperkalaemia, Bartter syndrome type 3 (CLCNKB",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis",
+      "Plasma renin activity and aldosterone, both characteristically elevated",
+      "Spot urinary electrolytes including chloride and a urinary calcium-to-creatinine ratio demonstrating hypercalciuria",
+      "Renal tract ultrasound looking for nephrocalcinosis",
+      "Antenatal ultrasound surveillance for polyhydramnios, with amniotic fluid chloride assessment where available",
+      "Serum magnesium, usually preserved, which helps distinguish from Gitelman syndrome",
+      "Molecular genetic testing of SLC12A1, ideally within an inherited tubulopathy gene panel"
     ],
-    [
-     "Management Strategy",
-     "Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal hypovolaemia and circulatory collapse from combined salt and water loss",
+      "Life-threatening hypokalaemia with cardiac arrhythmia or paralytic ileus",
+      "Complications of extreme prematurity following polyhydramnios",
+      "Progressive nephrocalcinosis with declining kidney function"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early and sustained fluid, salt and potassium replacement together with prostaglandin synthetase inhibition, growth and biochemistry can usually be stabilised. Polyuria persists lifelong, and nephrocalcinosis with a gradual decline in renal function may develop over the long term.",
+    "pitfalls": [
+      "Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting",
+      "Mislabelling it as Gitelman syndrome, which is instead hypocalciuric, hypomagnesaemic and later in onset",
+      "Overlooking prostaglandin-driven symptoms that respond to prostaglandin synthetase inhibition",
+      "Attributing polyhydramnios solely to obstetric causes and missing the underlying tubulopathy"
+    ],
+    "references": [
+      "Standard paediatric nephrology reference texts",
+      "Consensus guidance on inherited salt-losing tubulopathies",
+      "Clinical genetics and inherited disease reference databases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting",
+      "Prostaglandin synthetase inhibition with indometacin to reduce the prostaglandin-driven polyuria, salt wasting and failure to thrive",
+      "Potassium-sparing diuretics such as spironolactone or amiloride to reduce renal potassium loss",
+      "Neonatal support for prematurity and recurrent dehydration, with attention to salt craving and feeding",
+      "Monitoring of electrolytes, growth and renal function, with renal ultrasound surveillance for nephrocalcinosis",
+      "Multidisciplinary paediatric nephrology follow-up",
+      "Genetic counselling for autosomal recessive inheritance and testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for bartter syndrome type 1."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bartter-syndrome-type-1-real-image",
-   "title": "Bartter Syndrome Type 1: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "bartter_syndrome_type_1-pathway",
+      "title": "Bartter Syndrome Type 1: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule behaves as if chronically exposed to a loop diuretic.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal hypovolaemia and circulatory collapse from combined salt and water loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis, Plasma renin activity and aldosterone, both characteristically elevated, Spot urinary electrolytes including chloride"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bartter syndrome type 1."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bartter_syndrome_type_1-matrix",
+      "title": "Bartter Syndrome Type 1: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by loss-of-function of the apical sodium-potassium-chloride cotransporter NKCC2 in the thick ascending limb, so the tubule",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes with venous blood gas to document hypokalaemic hypochloraemic metabolic alkalosis, Plasma renin activity and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bartter syndrome type 2 (KCNJ1 / ROMK) - antenatal, with early transient neonatal hyperkalaemia, Bartter syndrome type 3 (CLCNKB",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early and sustained sodium chloride, fluid and oral potassium replacement to counter salt and potassium wasting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the metabolic alkalosis with pyloric stenosis or surreptitious vomiting",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bartter syndrome type 1."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Renal tubulopathy and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartter_syndrome_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes with venous blood gas",
+          "cells": [
+            {
+              "text": "Hypokalaemic hypochloraemic metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Characteristically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spot urinary electrolytes and calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound for polyhydramnios",
+          "cells": [
+            {
+              "text": "Antenatal presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum magnesium",
+          "cells": [
+            {
+              "text": "Usually preserved; separates from Gitelman syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of SLC12A1",
+          "cells": [
+            {
+              "text": "NKCC2 defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartter_syndrome_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gitelman syndrome",
+          "cells": [
+            {
+              "text": "Hypocalciuria and later onset separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartter syndrome type 2 (KCNJ1)",
+          "cells": [
+            {
+              "text": "Transient neonatal hyperkalaemia; separated by genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartter_syndrome_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium chloride, fluid and oral potassium replacement",
+          "cells": [
+            {
+              "text": "Counters salt and potassium wasting"
+            },
+            {
+              "text": "Salt and potassium wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indometacin",
+          "cells": [
+            {
+              "text": "Prostaglandin synthetase inhibition for polyuria, salt wasting and failure to thrive"
+            },
+            {
+              "text": "Prostaglandin-driven symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing diuretics",
+          "cells": [
+            {
+              "text": "Spironolactone or amiloride to reduce renal potassium loss"
+            },
+            {
+              "text": "Renal potassium loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal support",
+          "cells": [
+            {
+              "text": "Prematurity and recurrent dehydration; attention to feeding"
+            },
+            {
+              "text": "Neonatal period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and growth monitoring",
+          "cells": [
+            {
+              "text": "Renal function and renal ultrasound for nephrocalcinosis"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric nephrology follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            },
+            {
+              "text": "Long-term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance and testing of relatives"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartter_syndrome_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Bartter Syndrome Type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Antenatal polyhydramnios and neonatal salt wasting with alkalosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe hypovolaemia, hypokalaemia with arrhythmia or ileus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fluid and electrolyte replacement for hypovolaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes with VBG, renin and aldosterone, urinary chloride and calcium ratio, SLC12A1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypochloraemic alkalosis with high renin and aldosterone, normal magnesium?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Sodium, fluid and oral potassium replacement with indometacin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and screen for diuretic misuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium-sparing diuretics to reduce potassium loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neonatal support for prematurity and dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal ultrasound surveillance for nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Paediatric nephrology follow-up and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

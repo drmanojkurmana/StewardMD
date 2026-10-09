@@ -1,174 +1,463 @@
 {
- "id": "task_specific_dystonia",
- "name": "Task-specific (focal) dystonia",
- "aliases": [
-  "task-specific dystonia",
-  "occupational dystonia",
-  "musician's dystonia",
-  "focal task-specific dystonia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
-   "Writer's cramp and musician's dystonia are the classic examples; embouchure dystonia and the sporting yips are others",
-   "The same muscles function normally during other activities, which is the defining feature",
-   "Symptoms often begin as loss of fine control or cramping and progress to overt posturing as the task continues",
-   "A sensory trick may temporarily relieve the dystonia in some patients",
-   "It typically affects adults engaged in repetitive precision tasks and can be occupationally disabling",
-   "Over time the dystonia may spread to related tasks, with loss of the original task specificity"
+  "id": "task_specific_dystonia",
+  "name": "Task-specific (focal) dystonia",
+  "aliases": [
+    "task-specific dystonia",
+    "occupational dystonia",
+    "musician's dystonia",
+    "focal task-specific dystonia"
   ],
-  "pathophysiology": "Task-specific focal dystonia is thought to arise from maladaptive plasticity within the sensorimotor system, with reduced inhibition at cortical, subcortical and spinal levels and abnormal integration of sensory feedback with motor output. Extensive repetitive practice of a skilled task appears to drive aberrant cortical reorganisation that blurs the normally distinct representations of individual digits or muscles, so that performing the specific over-learned movement triggers involuntary co-contraction and abnormal posturing.",
-  "additionalDifferentials": [
-   "Overuse or repetitive strain injury and tenosynovitis",
-   "Peripheral nerve entrapment or focal neuropathy",
-   "Essential tremor affecting the task",
-   "Functional (psychogenic) movement disorder",
-   "Early features of a generalised or secondary dystonia",
-   "Orthopaedic or musculoskeletal disorders of the hand"
-  ],
-  "additionalInvestigations": [
-   "Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an instrument",
-   "Surface electromyography demonstrating co-contraction of agonist and antagonist muscles",
-   "Nerve conduction studies to exclude focal neuropathy or entrapment",
-   "MRI where a structural or secondary cause is suspected",
-   "Copper studies and genetic testing in younger patients or those with wider features",
-   "Video recording of the task to document and monitor the dystonia"
-  ],
-  "redFlags": [
-   "Dystonia at rest or spreading beyond the specific task, suggesting a secondary or generalising process",
-   "Sensory loss, weakness or wasting suggesting a compressive or neuropathic lesion",
-   "Young onset with additional neurological features suggesting an inherited dystonia",
-   "Features of Wilson's disease in a younger patient"
-  ],
-  "prognosis": "Task-specific dystonia is generally chronic and spontaneous remission is uncommon, though severity can fluctuate. It is not life-threatening but may curtail or end a career dependent on the affected skill. Botulinum toxin injection targeted to the overactive muscles is a mainstay of treatment, and some patients benefit from retraining, ergonomic modification or a change of technique, with results that vary between individuals.",
-  "pitfalls": [
-   "Dismissing early symptoms as overuse injury or anxiety",
-   "Not observing the patient performing the actual triggering task",
-   "Neglecting the occupational and psychological impact",
-   "Assuming permanent task specificity, when the dystonia can spread to related tasks"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Fahn and Jankovic, Principles and Practice of Movement Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment",
-   "Modify the triggering task with ergonomic aids, altered technique, grip adaptations or switching to the other hand",
-   "Provide sensorimotor retraining and physiotherapy, including constraint and rehabilitation strategies to restore normal control",
-   "Trial oral anticholinergic therapy such as trihexyphenidyl in selected patients",
-   "Teach use of any effective sensory trick to relieve posturing",
-   "Consider copper studies and genetic testing in younger patients or those with wider dystonic features",
-   "Refer to neurology with movement-disorder expertise and involve occupational or performing-arts medicine support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "task_specific_dystonia-pathway",
-   "title": "Task-specific (focal) dystonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dystonia at rest or spreading beyond the specific task, suggesting a secondary or generalising process",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an instrument, Surface electromyography demonstrating co-contraction of agonist and antagonist"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early symptoms as overuse injury or anxiety"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of task-specific (focal) dystonia."
-  }
- ],
- "tables": [
-  {
-   "id": "task_specific_dystonia-matrix",
-   "title": "Task-specific (focal) dystonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
+      "Writer's cramp and musician's dystonia are the classic examples; embouchure dystonia and the sporting yips are others",
+      "The same muscles function normally during other activities, which is the defining feature",
+      "Symptoms often begin as loss of fine control or cramping and progress to overt posturing as the task continues",
+      "A sensory trick may temporarily relieve the dystonia in some patients",
+      "It typically affects adults engaged in repetitive precision tasks and can be occupationally disabling",
+      "Over time the dystonia may spread to related tasks, with loss of the original task specificity"
     ],
-    [
-     "Key Investigations",
-     "Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Task-specific focal dystonia is thought to arise from maladaptive plasticity within the sensorimotor system, with reduced inhibition at cortical, subcortical and spinal levels and abnormal integration of sensory feedback with motor output. Extensive repetitive practice of a skilled task appears to drive aberrant cortical reorganisation that blurs the normally distinct representations of individual digits or muscles, so that performing the specific over-learned movement triggers involuntary co-contraction and abnormal posturing.",
+    "additionalDifferentials": [
+      "Overuse or repetitive strain injury and tenosynovitis",
+      "Peripheral nerve entrapment or focal neuropathy",
+      "Essential tremor affecting the task",
+      "Functional (psychogenic) movement disorder",
+      "Early features of a generalised or secondary dystonia",
+      "Orthopaedic or musculoskeletal disorders of the hand"
     ],
-    [
-     "Primary Differentials",
-     "Overuse or repetitive strain injury and tenosynovitis, Peripheral nerve entrapment or focal neuropathy, Essential tremor",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an instrument",
+      "Surface electromyography demonstrating co-contraction of agonist and antagonist muscles",
+      "Nerve conduction studies to exclude focal neuropathy or entrapment",
+      "MRI where a structural or secondary cause is suspected",
+      "Copper studies and genetic testing in younger patients or those with wider features",
+      "Video recording of the task to document and monitor the dystonia"
     ],
-    [
-     "Management Strategy",
-     "Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Dystonia at rest or spreading beyond the specific task, suggesting a secondary or generalising process",
+      "Sensory loss, weakness or wasting suggesting a compressive or neuropathic lesion",
+      "Young onset with additional neurological features suggesting an inherited dystonia",
+      "Features of Wilson's disease in a younger patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early symptoms as overuse injury or anxiety",
-     "Prevent diagnostic or management error"
+    "prognosis": "Task-specific dystonia is generally chronic and spontaneous remission is uncommon, though severity can fluctuate. It is not life-threatening but may curtail or end a career dependent on the affected skill. Botulinum toxin injection targeted to the overactive muscles is a mainstay of treatment, and some patients benefit from retraining, ergonomic modification or a change of technique, with results that vary between individuals.",
+    "pitfalls": [
+      "Dismissing early symptoms as overuse injury or anxiety",
+      "Not observing the patient performing the actual triggering task",
+      "Neglecting the occupational and psychological impact",
+      "Assuming permanent task specificity, when the dystonia can spread to related tasks"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Fahn and Jankovic, Principles and Practice of Movement Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment",
+      "Modify the triggering task with ergonomic aids, altered technique, grip adaptations or switching to the other hand",
+      "Provide sensorimotor retraining and physiotherapy, including constraint and rehabilitation strategies to restore normal control",
+      "Trial oral anticholinergic therapy such as trihexyphenidyl in selected patients",
+      "Teach use of any effective sensory trick to relieve posturing",
+      "Consider copper studies and genetic testing in younger patients or those with wider dystonic features",
+      "Refer to neurology with movement-disorder expertise and involve occupational or performing-arts medicine support"
     ]
-   ],
-   "caption": "Overview comparison matrix for task-specific (focal) dystonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "task-specific-dystonia-real-image",
-   "title": "Task-specific (focal) dystonia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "task_specific_dystonia-pathway",
+      "title": "Task-specific (focal) dystonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dystonia at rest or spreading beyond the specific task, suggesting a secondary or generalising process",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an instrument, Surface electromyography demonstrating co-contraction of agonist and antagonist"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early symptoms as overuse injury or anxiety"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of task-specific (focal) dystonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "task_specific_dystonia-matrix",
+      "title": "Task-specific (focal) dystonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Produces abnormal posturing or spasm only during a particular skilled, often over-practised, motor task",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Task-based clinical examination, ideally observing the patient performing the triggering activity such as writing or playing an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Overuse or repetitive strain injury and tenosynovitis, Peripheral nerve entrapment or focal neuropathy, Essential tremor",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use botulinum toxin injection targeted to the overactive muscles as the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early symptoms as overuse injury or anxiety",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for task-specific (focal) dystonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "task_specific_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Task-specific (focal) dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected task-specific dystonia: spasm only during a skilled repetitive task",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dystonia at rest or spreading, sensory loss, or young onset with neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for a secondary, generalising or compressive cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Task-based examination with video; surface EMG; nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dystonia occur only during the task, with nerve studies normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overuse injury, nerve entrapment, essential tremor or functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin targeted to overactive muscles as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ergonomic aids, altered technique or switching hands",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sensorimotor retraining and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trihexyphenidyl trial in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Teach an effective sensory trick to relieve posturing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally chronic and rarely remits; can end a career; botulinum toxin is a mainstay",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "task_specific_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Task-based examination, observing the triggering activity",
+          "cells": [
+            {
+              "text": "Dystonia confined to the skilled task"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface electromyography",
+          "cells": [
+            {
+              "text": "Co-contraction of agonist and antagonist muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Focal neuropathy or entrapment excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Structural or secondary cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video recording of the task",
+          "cells": [
+            {
+              "text": "Documents and monitors the dystonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "task_specific_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Overuse or repetitive strain injury",
+          "cells": [
+            {
+              "text": "Early symptoms are often dismissed as overuse; observing the task separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral nerve entrapment or focal neuropathy",
+          "cells": [
+            {
+              "text": "Excluded by nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "task_specific_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Targeted to overactive muscles; mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Task modification",
+          "cells": [
+            {
+              "text": "Ergonomic aids, altered technique, grip adaptation or switching hands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensorimotor retraining and physiotherapy",
+          "cells": [
+            {
+              "text": "Constraint and rehabilitation strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral anticholinergic trial",
+          "cells": [
+            {
+              "text": "Trihexyphenidyl in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory trick",
+          "cells": [
+            {
+              "text": "Teach use of an effective trick to relieve posturing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and copper studies",
+          "cells": [
+            {
+              "text": "Younger patients or those with wider dystonic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Movement-disorder neurology with occupational or performing-arts medicine support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

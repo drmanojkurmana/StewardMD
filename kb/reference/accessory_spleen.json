@@ -1,175 +1,479 @@
 {
- "id": "accessory_spleen",
- "name": "Accessory spleen",
- "aliases": [
-  "splenunculus",
-  "supernumerary spleen",
-  "splenule"
- ],
- "class": "non_infective",
- "system": "Haematological / Reticuloendothelial system",
- "specialty": "Haematology / General Surgery / Radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Grainger & Allison's Diagnostic Radiology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise in the dorsal mesogastrium; the tissue is histologically identical to normal spleen with its own capsule and splenic-artery blood supply",
-   "Most lie at or near the splenic hilum, but they also occur along the splenic vessels, in the tail of the pancreas, the gastrosplenic and splenocolic ligaments and, rarely, the pelvis or scrotum",
-   "Usually an asymptomatic incidental finding that enhances identically to the spleen on every imaging phase, which is the key to distinguishing it from lymphadenopathy, an adrenal nodule or a pancreatic tail neoplasm",
-   "A residual or hypertrophied accessory spleen is an important cause of persistent or recurrent cytopenia after splenectomy for immune thrombocytopenia or hereditary spherocytosis, so accessory tissue must be actively sought and removed at operation",
-   "An intrapancreatic accessory spleen in the tail closely mimics a hypervascular neuroendocrine tumour and is a classic radiological pitfall",
-   "Splenic tissue can be confirmed non-invasively with technetium-labelled heat-damaged red cell or sulphur colloid scintigraphy (ideally with SPECT/CT) or with superparamagnetic iron oxide MRI, avoiding unnecessary surgery",
-   "Rarely a pedunculated accessory spleen undergoes torsion, infarction or spontaneous rupture and presents as an acute abdomen"
+  "id": "accessory_spleen",
+  "name": "Accessory spleen",
+  "aliases": [
+    "splenunculus",
+    "supernumerary spleen",
+    "splenule"
   ],
-  "pathophysiology": "Accessory spleens arise when the several splenic primordia that develop within the dorsal mesogastrium during embryogenesis fail to coalesce into a single organ, leaving one or more discrete nodules of splenic tissue. Each nodule is invested by its own capsule and is supplied by branches of the splenic artery, and it is histologically and functionally indistinguishable from the main spleen, performing the same filtering, immune and, when demanded, haematopoietic roles. Because the tissue is genuine splenic parenchyma it can hypertrophy when the orthotopic spleen is diseased or has been removed, which underlies relapse of haematological disease after splenectomy.",
-  "additionalDifferentials": [
-   "Hilar or retroperitoneal lymphadenopathy",
-   "Pancreatic tail neuroendocrine tumour or other pancreatic mass (intrapancreatic type)",
-   "Left adrenal nodule or mass",
-   "Exophytic renal or gastric tumour",
-   "Splenosis (acquired autotransplanted splenic implants after trauma or splenectomy)",
-   "Polysplenia within a heterotaxy syndrome",
-   "Peritoneal deposit or nodal metastasis"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases",
-   "Technetium-labelled heat-damaged autologous red cell or sulphur colloid scintigraphy with SPECT/CT to confirm functioning splenic tissue",
-   "Superparamagnetic iron oxide-enhanced MRI for problem-solving, particularly the intrapancreatic type",
-   "Ultrasound with Doppler showing an echotexture matching the spleen and a splenic-artery pedicle",
-   "Blood film for Howell-Jolly bodies after splenectomy, whose absence suggests persistent functioning splenic tissue",
-   "Cross-sectional localisation imaging when relapse of immune thrombocytopenia raises suspicion of a missed accessory spleen"
-  ],
-  "redFlags": [
-   "Acute abdomen from torsion, infarction or spontaneous rupture of a pedunculated accessory spleen",
-   "Recurrent or persistent cytopenia after splenectomy suggesting a missed or hypertrophied accessory spleen",
-   "A lesion mistaken for malignancy leading to unnecessary major surgery",
-   "Haemodynamic compromise from haemorrhage of a ruptured splenule"
-  ],
-  "prognosis": "Accessory spleens are benign and carry an excellent prognosis, becoming clinically relevant only when they undergo torsion, mimic a neoplasm, or hypertrophy and cause relapse of a haematological disorder after splenectomy. Recognition on imaging usually spares the patient unnecessary intervention.",
-  "pitfalls": [
-   "Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or resection",
-   "Failing to search for and remove accessory splenic tissue during splenectomy for immune or haemolytic disease, leading to relapse",
-   "Not recognising retained splenic function (absent Howell-Jolly bodies) as a clue to residual splenic tissue",
-   "Confusing an accessory spleen with acquired splenosis or with polysplenia of heterotaxy",
-   "Overlooking accessory tissue on pre-operative imaging"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Grainger & Allison's Diagnostic Radiology",
-   "Robbins and Cotran Pathologic Basis of Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding unnecessary intervention",
-   "Confirm splenic tissue non-invasively with technetium-labelled heat-damaged red-cell or sulphur-colloid scintigraphy with SPECT/CT, or superparamagnetic iron oxide MRI, to distinguish it from a neoplasm and prevent needless surgery",
-   "At splenectomy for immune thrombocytopenia or hereditary spherocytosis, actively seek and excise accessory splenic tissue to prevent disease relapse",
-   "For persistent or recurrent cytopenia after splenectomy, localise and remove a residual or hypertrophied accessory spleen by completion splenectomy",
-   "Surgical excision for a symptomatic accessory spleen complicated by torsion or infarction presenting as an acute abdomen",
-   "Provide post-splenectomy infection prophylaxis with immunisation against encapsulated organisms and antibiotic prophylaxis where functioning splenic tissue is removed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "accessory_spleen-pathway",
-   "title": "Accessory spleen: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise in the dorsal mesogastrium; the tissue is histologically identical to normal spleen with its own capsule and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute abdomen from torsion, infarction or spontaneous rupture of a pedunculated accessory spleen",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases, Technetium-labelled heat-damaged autologous red cell or sulphur colloid scintigraphy with SPECT/CT to confirm functioning"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding unnecessary intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or resection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of accessory spleen."
-  }
- ],
- "tables": [
-  {
-   "id": "accessory_spleen-matrix",
-   "title": "Accessory spleen: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / Reticuloendothelial system",
+  "specialty": "Haematology / General Surgery / Radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Grainger & Allison's Diagnostic Radiology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise in the dorsal mesogastrium; the tissue is histologically identical to normal spleen with its own capsule and splenic-artery blood supply",
+      "Most lie at or near the splenic hilum, but they also occur along the splenic vessels, in the tail of the pancreas, the gastrosplenic and splenocolic ligaments and, rarely, the pelvis or scrotum",
+      "Usually an asymptomatic incidental finding that enhances identically to the spleen on every imaging phase, which is the key to distinguishing it from lymphadenopathy, an adrenal nodule or a pancreatic tail neoplasm",
+      "A residual or hypertrophied accessory spleen is an important cause of persistent or recurrent cytopenia after splenectomy for immune thrombocytopenia or hereditary spherocytosis, so accessory tissue must be actively sought and removed at operation",
+      "An intrapancreatic accessory spleen in the tail closely mimics a hypervascular neuroendocrine tumour and is a classic radiological pitfall",
+      "Splenic tissue can be confirmed non-invasively with technetium-labelled heat-damaged red cell or sulphur colloid scintigraphy (ideally with SPECT/CT) or with superparamagnetic iron oxide MRI, avoiding unnecessary surgery",
+      "Rarely a pedunculated accessory spleen undergoes torsion, infarction or spontaneous rupture and presents as an acute abdomen"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases, Technetium-labelled",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Accessory spleens arise when the several splenic primordia that develop within the dorsal mesogastrium during embryogenesis fail to coalesce into a single organ, leaving one or more discrete nodules of splenic tissue. Each nodule is invested by its own capsule and is supplied by branches of the splenic artery, and it is histologically and functionally indistinguishable from the main spleen, performing the same filtering, immune and, when demanded, haematopoietic roles. Because the tissue is genuine splenic parenchyma it can hypertrophy when the orthotopic spleen is diseased or has been removed, which underlies relapse of haematological disease after splenectomy.",
+    "additionalDifferentials": [
+      "Hilar or retroperitoneal lymphadenopathy",
+      "Pancreatic tail neuroendocrine tumour or other pancreatic mass (intrapancreatic type)",
+      "Left adrenal nodule or mass",
+      "Exophytic renal or gastric tumour",
+      "Splenosis (acquired autotransplanted splenic implants after trauma or splenectomy)",
+      "Polysplenia within a heterotaxy syndrome",
+      "Peritoneal deposit or nodal metastasis"
     ],
-    [
-     "Primary Differentials",
-     "Hilar or retroperitoneal lymphadenopathy, Pancreatic tail neuroendocrine tumour or other pancreatic mass (intrapancreatic type),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases",
+      "Technetium-labelled heat-damaged autologous red cell or sulphur colloid scintigraphy with SPECT/CT to confirm functioning splenic tissue",
+      "Superparamagnetic iron oxide-enhanced MRI for problem-solving, particularly the intrapancreatic type",
+      "Ultrasound with Doppler showing an echotexture matching the spleen and a splenic-artery pedicle",
+      "Blood film for Howell-Jolly bodies after splenectomy, whose absence suggests persistent functioning splenic tissue",
+      "Cross-sectional localisation imaging when relapse of immune thrombocytopenia raises suspicion of a missed accessory spleen"
     ],
-    [
-     "Management Strategy",
-     "For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute abdomen from torsion, infarction or spontaneous rupture of a pedunculated accessory spleen",
+      "Recurrent or persistent cytopenia after splenectomy suggesting a missed or hypertrophied accessory spleen",
+      "A lesion mistaken for malignancy leading to unnecessary major surgery",
+      "Haemodynamic compromise from haemorrhage of a ruptured splenule"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Accessory spleens are benign and carry an excellent prognosis, becoming clinically relevant only when they undergo torsion, mimic a neoplasm, or hypertrophy and cause relapse of a haematological disorder after splenectomy. Recognition on imaging usually spares the patient unnecessary intervention.",
+    "pitfalls": [
+      "Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or resection",
+      "Failing to search for and remove accessory splenic tissue during splenectomy for immune or haemolytic disease, leading to relapse",
+      "Not recognising retained splenic function (absent Howell-Jolly bodies) as a clue to residual splenic tissue",
+      "Confusing an accessory spleen with acquired splenosis or with polysplenia of heterotaxy",
+      "Overlooking accessory tissue on pre-operative imaging"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Grainger & Allison's Diagnostic Radiology",
+      "Robbins and Cotran Pathologic Basis of Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding unnecessary intervention",
+      "Confirm splenic tissue non-invasively with technetium-labelled heat-damaged red-cell or sulphur-colloid scintigraphy with SPECT/CT, or superparamagnetic iron oxide MRI, to distinguish it from a neoplasm and prevent needless surgery",
+      "At splenectomy for immune thrombocytopenia or hereditary spherocytosis, actively seek and excise accessory splenic tissue to prevent disease relapse",
+      "For persistent or recurrent cytopenia after splenectomy, localise and remove a residual or hypertrophied accessory spleen by completion splenectomy",
+      "Surgical excision for a symptomatic accessory spleen complicated by torsion or infarction presenting as an acute abdomen",
+      "Provide post-splenectomy infection prophylaxis with immunisation against encapsulated organisms and antibiotic prophylaxis where functioning splenic tissue is removed"
     ]
-   ],
-   "caption": "Overview comparison matrix for accessory spleen."
-  }
- ],
- "diagrams": [
-  {
-   "id": "accessory-spleen-real-image",
-   "title": "Accessory spleen: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "accessory_spleen-pathway",
+      "title": "Accessory spleen: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise in the dorsal mesogastrium; the tissue is histologically identical to normal spleen with its own capsule and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute abdomen from torsion, infarction or spontaneous rupture of a pedunculated accessory spleen",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases, Technetium-labelled heat-damaged autologous red cell or sulphur colloid scintigraphy with SPECT/CT to confirm functioning"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding unnecessary intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or resection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of accessory spleen."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "accessory_spleen-matrix",
+      "title": "Accessory spleen: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the commonest congenital anomalies of the spleen, resulting from failure of fusion of the multiple splenic buds that arise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT or MRI demonstrating enhancement paralleling that of the spleen on all phases, Technetium-labelled",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hilar or retroperitoneal lymphadenopathy, Pancreatic tail neuroendocrine tumour or other pancreatic mass (intrapancreatic type),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For an asymptomatic incidental accessory spleen, no treatment is needed beyond confirming its splenic nature and avoiding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an accessory spleen for a pancreatic tail neoplasm, adrenal mass or lymph node and proceeding to unnecessary biopsy or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for accessory spleen."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Grainger & Allison's Diagnostic Radiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "accessory_spleen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT or MRI",
+          "cells": [
+            {
+              "text": "Enhancement matching the spleen on all phases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Technetium-labelled heat-damaged red cell or sulphur colloid scintigraphy with SPECT/CT",
+          "cells": [
+            {
+              "text": "Confirms functioning splenic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superparamagnetic iron oxide-enhanced MRI",
+          "cells": [
+            {
+              "text": "Problem-solving, particularly the intrapancreatic type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Echotexture matching the spleen and a splenic-artery pedicle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film for Howell-Jolly bodies after splenectomy",
+          "cells": [
+            {
+              "text": "Absence suggests persistent functioning splenic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional localisation imaging on relapse of immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Missed accessory spleen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accessory_spleen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic tail neuroendocrine tumour or other pancreatic mass",
+          "cells": [
+            {
+              "text": "Intrapancreatic accessory spleen can mimic it"
+            },
+            {
+              "text": "Enhancement matching the spleen on all phases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenosis",
+          "cells": [
+            {
+              "text": "Autotransplanted splenic implants after trauma or splenectomy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accessory_spleen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment for an incidental asymptomatic accessory spleen",
+          "cells": [
+            {
+              "text": "Confirm splenic nature and avoid intervention"
+            },
+            {
+              "text": "No treatment beyond confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive confirmation by scintigraphy or SPIO MRI",
+          "cells": [
+            {
+              "text": "Distinguishes it from a neoplasm"
+            },
+            {
+              "text": "Prevents needless surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seek and excise accessory tissue at splenectomy",
+          "cells": [
+            {
+              "text": "Prevents relapse of ITP or hereditary spherocytosis"
+            },
+            {
+              "text": "Must be actively sought at operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Completion splenectomy",
+          "cells": [
+            {
+              "text": "Persistent or recurrent cytopenia after splenectomy"
+            },
+            {
+              "text": "Localise and remove the residual or hypertrophied accessory spleen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision for torsion or infarction",
+          "cells": [
+            {
+              "text": "Symptomatic accessory spleen with an acute abdomen"
+            },
+            {
+              "text": "Torsion or infarction of a pedunculated spleen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-splenectomy infection prophylaxis",
+          "cells": [
+            {
+              "text": "Protection after removal of functioning splenic tissue"
+            },
+            {
+              "text": "Immunisation against encapsulated organisms and antibiotic prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "accessory_spleen-dx-mgmt",
+      "title": "Diagnosis and management of Accessory spleen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Splenic-like nodule near the splenic hilum, incidental on CT or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Torsion, infarction or rupture causing an acute abdomen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical excision of the pedunculated accessory spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI: enhancement matching the spleen on all phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Functioning splenic tissue confirmed on scintigraphy or SPIO MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "No treatment if asymptomatic; avoid unnecessary surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review pancreatic tail NET, adrenal nodule and nodal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Seek and excise accessory splenic tissue at splenectomy for ITP or HS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Persistent cytopenia after splenectomy: completion splenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunise and give antibiotic prophylaxis after splenic tissue removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with excellent prognosis; matters only if torsion or relapse occurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

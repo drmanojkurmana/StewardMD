@@ -1,181 +1,466 @@
 {
- "id": "citrullinemia_type_2",
- "name": "Citrullinaemia type 2 (citrin deficiency)",
- "aliases": [
-  "citrin deficiency",
-  "CTLN2",
-  "SLC25A13 deficiency",
-  "adult-onset type II citrullinaemia",
-  "NICCD (neonatal intrahepatic cholestasis caused by citrin deficiency)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme itself",
-   "Age-dependent phenotypes: neonatal cholestasis (NICCD), a childhood failure-to-thrive/dyslipidaemic stage, and adult-onset citrullinaemia (CTLN2)",
-   "NICCD presents with intrahepatic cholestasis, galactosuria, hypoproteinaemia and often self-limited jaundice in infancy",
-   "Adult CTLN2 causes recurrent hyperammonaemic encephalopathy with neuropsychiatric symptoms, often precipitated by alcohol, medication or carbohydrate load",
-   "A striking clue is a self-selected diet rich in protein and fat with an aversion to carbohydrates and sweets",
-   "Biochemistry shows raised citrulline and ammonia with an elevated arginine and abnormal threonine-to-serine ratio; pancreatic secretory trypsin inhibitor (PSTI) may be raised",
-   "Confirmed by SLC25A13 sequencing; the disorder is especially prevalent in East Asian populations",
-   "High-carbohydrate treatment is harmful; management favours a low-carbohydrate, higher-protein/fat diet, avoidance of glycerol/high-glucose infusions, arginine and nitrogen scavengers, with liver transplantation for severe CTLN2"
+  "id": "citrullinemia_type_2",
+  "name": "Citrullinaemia type 2 (citrin deficiency)",
+  "aliases": [
+    "citrin deficiency",
+    "CTLN2",
+    "SLC25A13 deficiency",
+    "adult-onset type II citrullinaemia",
+    "NICCD (neonatal intrahepatic cholestasis caused by citrin deficiency)"
   ],
-  "pathophysiology": "Citrullinaemia type 2 is caused by deficiency of citrin, the liver-type mitochondrial aspartate-glutamate carrier encoded by SLC25A13, a component of the malate-aspartate shuttle. Citrin exports aspartate from mitochondria to the cytosol, where aspartate is required by argininosuccinate synthetase to combine with citrulline in the urea cycle and for the shuttle that transfers reducing equivalents (NADH) into mitochondria. Loss of citrin therefore both limits cytosolic aspartate for ureagenesis, causing citrulline accumulation and hyperammonaemia, and impairs the malate-aspartate shuttle, raising the cytosolic NADH:NAD ratio and disturbing carbohydrate/lipid metabolism. This explains the characteristic carbohydrate intolerance, the harm from glucose loading, and the preference for protein- and fat-rich foods. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Citrullinaemia type 1 (argininosuccinate synthetase deficiency)",
-   "Other urea cycle disorders with hyperammonaemia",
-   "Neonatal cholestasis of other cause (biliary atresia, infection, other metabolic liver disease)",
-   "Alcohol-related or hepatic encephalopathy in adults",
-   "Psychiatric illness (for the neuropsychiatric CTLN2 presentation)",
-   "Galactosaemia and other causes of neonatal galactosuria"
-  ],
-  "additionalInvestigations": [
-   "Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine)",
-   "Liver function tests and coagulation in cholestatic infants",
-   "Plasma and urine galactose/galactitol in NICCD",
-   "Serum pancreatic secretory trypsin inhibitor where available",
-   "SLC25A13 gene sequencing for confirmation",
-   "Fasting lipid profile and glucose tolerance assessment",
-   "Brain imaging in adults with encephalopathy to exclude other causes"
-  ],
-  "redFlags": [
-   "Adult hyperammonaemic encephalopathy with rapid neurological decline",
-   "Cerebral oedema during a CTLN2 crisis",
-   "Precipitation of coma by high-carbohydrate/glucose infusion or glycerol",
-   "Progressive cholestatic liver failure in an affected infant",
-   "Recurrent unexplained neuropsychiatric episodes with hyperammonaemia"
-  ],
-  "prognosis": "NICCD usually resolves with supportive care and appropriate feeding, but adult CTLN2 can be life-threatening with recurrent hyperammonaemic crises and may require liver transplantation; dietary management markedly influences outcome.",
-  "pitfalls": [
-   "Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis",
-   "Applying a standard high-carbohydrate, protein-restricted urea-cycle diet, which is counterproductive here",
-   "Misattributing adult encephalopathy to alcohol or psychiatric disease and missing citrin deficiency",
-   "Overlooking NICCD as a cause of neonatal cholestasis",
-   "Ignoring the diagnostic clue of carbohydrate aversion and protein/fat preference"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics",
-   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the patient's spontaneous food preference",
-   "Avoidance of glucose loading and of glycerol- or fructose-containing infusions, which can precipitate deterioration in this condition",
-   "Supportive management of neonatal intrahepatic cholestasis with a medium-chain-triglyceride and fat-soluble-vitamin-supplemented formula",
-   "Avoidance of adult crisis triggers such as alcohol, certain medications and high carbohydrate intake",
-   "Acute hyperammonaemic encephalopathy managed with nitrogen-scavenging agents and arginine while avoiding glucose overload, with haemodialysis for refractory elevation",
-   "Monitoring of plasma ammonia and amino acids, liver function and the lipid profile over time",
-   "Liver transplantation for recurrent life-threatening hyperammonaemic crises",
-   "Genetic counselling for this autosomal recessive SLC25A13 disorder with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "citrullinemia_type_2-pathway",
-   "title": "Citrullinaemia type 2 (citrin deficiency): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adult hyperammonaemic encephalopathy with rapid neurological decline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine), Liver function tests and coagulation in cholestatic infants, Plasma and urine galactose/galactitol in NICCD"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the patient's spontaneous food preference"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of citrullinaemia type 2 (citrin deficiency)."
-  }
- ],
- "tables": [
-  {
-   "id": "citrullinemia_type_2-matrix",
-   "title": "Citrullinaemia type 2 (citrin deficiency): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme itself",
+      "Age-dependent phenotypes: neonatal cholestasis (NICCD), a childhood failure-to-thrive/dyslipidaemic stage, and adult-onset citrullinaemia (CTLN2)",
+      "NICCD presents with intrahepatic cholestasis, galactosuria, hypoproteinaemia and often self-limited jaundice in infancy",
+      "Adult CTLN2 causes recurrent hyperammonaemic encephalopathy with neuropsychiatric symptoms, often precipitated by alcohol, medication or carbohydrate load",
+      "A striking clue is a self-selected diet rich in protein and fat with an aversion to carbohydrates and sweets",
+      "Biochemistry shows raised citrulline and ammonia with an elevated arginine and abnormal threonine-to-serine ratio; pancreatic secretory trypsin inhibitor (PSTI) may be raised",
+      "Confirmed by SLC25A13 sequencing; the disorder is especially prevalent in East Asian populations",
+      "High-carbohydrate treatment is harmful; management favours a low-carbohydrate, higher-protein/fat diet, avoidance of glycerol/high-glucose infusions, arginine and nitrogen scavengers, with liver transplantation for severe CTLN2"
     ],
-    [
-     "Key Investigations",
-     "Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine), Liver function tests and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Citrullinaemia type 2 is caused by deficiency of citrin, the liver-type mitochondrial aspartate-glutamate carrier encoded by SLC25A13, a component of the malate-aspartate shuttle. Citrin exports aspartate from mitochondria to the cytosol, where aspartate is required by argininosuccinate synthetase to combine with citrulline in the urea cycle and for the shuttle that transfers reducing equivalents (NADH) into mitochondria. Loss of citrin therefore both limits cytosolic aspartate for ureagenesis, causing citrulline accumulation and hyperammonaemia, and impairs the malate-aspartate shuttle, raising the cytosolic NADH:NAD ratio and disturbing carbohydrate/lipid metabolism. This explains the characteristic carbohydrate intolerance, the harm from glucose loading, and the preference for protein- and fat-rich foods. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Citrullinaemia type 1 (argininosuccinate synthetase deficiency)",
+      "Other urea cycle disorders with hyperammonaemia",
+      "Neonatal cholestasis of other cause (biliary atresia, infection, other metabolic liver disease)",
+      "Alcohol-related or hepatic encephalopathy in adults",
+      "Psychiatric illness (for the neuropsychiatric CTLN2 presentation)",
+      "Galactosaemia and other causes of neonatal galactosuria"
     ],
-    [
-     "Primary Differentials",
-     "Citrullinaemia type 1 (argininosuccinate synthetase deficiency), Other urea cycle disorders with hyperammonaemia, Neonatal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine)",
+      "Liver function tests and coagulation in cholestatic infants",
+      "Plasma and urine galactose/galactitol in NICCD",
+      "Serum pancreatic secretory trypsin inhibitor where available",
+      "SLC25A13 gene sequencing for confirmation",
+      "Fasting lipid profile and glucose tolerance assessment",
+      "Brain imaging in adults with encephalopathy to exclude other causes"
     ],
-    [
-     "Management Strategy",
-     "A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the",
-     "Core treatment modality"
+    "redFlags": [
+      "Adult hyperammonaemic encephalopathy with rapid neurological decline",
+      "Cerebral oedema during a CTLN2 crisis",
+      "Precipitation of coma by high-carbohydrate/glucose infusion or glycerol",
+      "Progressive cholestatic liver failure in an affected infant",
+      "Recurrent unexplained neuropsychiatric episodes with hyperammonaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis",
-     "Prevent diagnostic or management error"
+    "prognosis": "NICCD usually resolves with supportive care and appropriate feeding, but adult CTLN2 can be life-threatening with recurrent hyperammonaemic crises and may require liver transplantation; dietary management markedly influences outcome.",
+    "pitfalls": [
+      "Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis",
+      "Applying a standard high-carbohydrate, protein-restricted urea-cycle diet, which is counterproductive here",
+      "Misattributing adult encephalopathy to alcohol or psychiatric disease and missing citrin deficiency",
+      "Overlooking NICCD as a cause of neonatal cholestasis",
+      "Ignoring the diagnostic clue of carbohydrate aversion and protein/fat preference"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics",
+      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the patient's spontaneous food preference",
+      "Avoidance of glucose loading and of glycerol- or fructose-containing infusions, which can precipitate deterioration in this condition",
+      "Supportive management of neonatal intrahepatic cholestasis with a medium-chain-triglyceride and fat-soluble-vitamin-supplemented formula",
+      "Avoidance of adult crisis triggers such as alcohol, certain medications and high carbohydrate intake",
+      "Acute hyperammonaemic encephalopathy managed with nitrogen-scavenging agents and arginine while avoiding glucose overload, with haemodialysis for refractory elevation",
+      "Monitoring of plasma ammonia and amino acids, liver function and the lipid profile over time",
+      "Liver transplantation for recurrent life-threatening hyperammonaemic crises",
+      "Genetic counselling for this autosomal recessive SLC25A13 disorder with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for citrullinaemia type 2 (citrin deficiency)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "citrullinemia-type-2-real-image",
-   "title": "Citrullinaemia type 2 (citrin deficiency): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "citrullinemia_type_2-pathway",
+      "title": "Citrullinaemia type 2 (citrin deficiency): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adult hyperammonaemic encephalopathy with rapid neurological decline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine), Liver function tests and coagulation in cholestatic infants, Plasma and urine galactose/galactitol in NICCD"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the patient's spontaneous food preference"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of citrullinaemia type 2 (citrin deficiency)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "citrullinemia_type_2-matrix",
+      "title": "Citrullinaemia type 2 (citrin deficiency): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic SLC25A13 variants affecting citrin, the mitochondrial aspartate-glutamate carrier, not a urea cycle enzyme",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma ammonia and plasma amino acids (raised citrulline, arginine; abnormal threonine/serine), Liver function tests and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Citrullinaemia type 1 (argininosuccinate synthetase deficiency), Other urea cycle disorders with hyperammonaemia, Neonatal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "A carbohydrate-restricted, protein- and fat-rich diet with medium-chain triglycerides as the mainstay, in keeping with the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving high-glucose or glycerol-containing infusions, which can precipitate or worsen a crisis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for citrullinaemia type 2 (citrin deficiency)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "citrullinemia_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia and amino acids",
+          "cells": [
+            {
+              "text": "Raised citrulline and arginine; abnormal threonine-to-serine ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and urine galactose and galactitol",
+          "cells": [
+            {
+              "text": "Galactosuria in neonatal cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum pancreatic secretory trypsin inhibitor",
+          "cells": [
+            {
+              "text": "May be raised where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC25A13 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile and glucose tolerance",
+          "cells": [
+            {
+              "text": "Dyslipidaemia in the childhood stage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrullinemia_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Citrullinaemia type 1 (ASS1 deficiency)",
+          "cells": [
+            {
+              "text": "Raised citrulline with ASS1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactosaemia",
+          "cells": [
+            {
+              "text": "Galactosuria in neonatal cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol-related or hepatic encephalopathy in adults",
+          "cells": [
+            {
+              "text": "Adult hyperammonaemic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrullinemia_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbohydrate-restricted, protein- and fat-rich diet with MCT",
+          "cells": [
+            {
+              "text": "Dietary mainstay matching spontaneous food preference"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid glucose loading and glycerol or fructose infusions",
+          "cells": [
+            {
+              "text": "Can precipitate deterioration"
+            },
+            {
+              "text": "Infusion caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MCT and fat-soluble vitamin formula",
+          "cells": [
+            {
+              "text": "Neonatal intrahepatic cholestasis"
+            },
+            {
+              "text": "Infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen scavengers and arginine during crisis",
+          "cells": [
+            {
+              "text": "Avoid glucose overload; haemodialysis for refractory elevation"
+            },
+            {
+              "text": "Acute crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Recurrent life-threatening hyperammonaemic crises"
+            },
+            {
+              "text": "Recurrent crises"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "citrullinemia_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Citrullinaemia type 2 (citrin deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected citrullinaemia type 2: infant cholestasis or adult encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, cerebral oedema, progressive cholestatic failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency metabolic review for coma or cerebral oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ammonia, amino acids, galactosuria, liver tests and SLC25A13 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised citrulline and arginine with SLC25A13 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Carbohydrate-restricted, protein- and fat-rich diet with MCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check citrullinaemia type 1, galactosaemia and alcohol encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid glucose loading and glycerol or fructose infusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "MCT and fat-soluble vitamin formula for neonatal cholestasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nitrogen scavengers and arginine in crisis; dialysis if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation for recurrent life-threatening hyperammonaemic crises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,185 +1,396 @@
 {
- "id": "reinke_oedema",
- "name": "Reinke Oedema",
- "aliases": [
-  "Polypoid corditis",
-  "Polypoid degeneration of the vocal folds",
-  "Reinke oedema",
-  "Reinke's oedema",
-  "polypoid corditis",
-  "polypoid degeneration of the vocal folds",
-  "reinke edema",
-  "smoker's polyp"
- ],
- "class": "non_infective",
- "system": "ENT",
- "specialty": "Otolaryngology / Laryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Otolaryngology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds, producing diffuse polypoid swelling that is usually bilateral.",
-   "The hallmark symptom is a progressively low-pitched, gruff, hoarse voice, and it is a classic cause of an abnormally deep, masculine-sounding voice in women.",
-   "Cigarette smoking is the dominant risk factor, with vocal overuse, laryngopharyngeal reflux and hypothyroidism as important contributors.",
-   "Diagnosis is by laryngoscopy and videostroboscopy showing floppy, fluid-filled polypoid folds with an increased mucosal wave.",
-   "Because almost all patients are smokers, coexisting laryngeal dysplasia or carcinoma must be excluded, and any leukoplakia, ulceration or asymmetry warrants biopsy.",
-   "First-line management targets the causes: smoking cessation, voice therapy, and treatment of reflux and hypothyroidism.",
-   "Persistent, severe or airway-compromising disease is treated with microlaryngeal surgery, incising the superior fold and evacuating the gelatinous material while preserving mucosa.",
-   "Overaggressive resection or operating on both folds at the same sitting risks scarring, anterior web formation and permanent dysphonia."
+  "id": "reinke_oedema",
+  "name": "Reinke Oedema",
+  "aliases": [
+    "Polypoid corditis",
+    "Polypoid degeneration of the vocal folds",
+    "Reinke oedema",
+    "Reinke's oedema",
+    "polypoid corditis",
+    "polypoid degeneration of the vocal folds",
+    "reinke edema",
+    "smoker's polyp"
   ],
-  "pathophysiology": "Chronic irritation of the vocal fold epithelium, predominantly from tobacco smoke and compounded by phonotrauma, laryngopharyngeal reflux and hypothyroidism, increases vascular permeability and impairs drainage within Reinke's space. This potential space is normally loose, sparsely vascular and devoid of lymphatics, so fluid and gelatinous mucoid material accumulate readily within the superficial lamina propria and expand the fold into a floppy, polypoid structure. The added mass lowers the fundamental frequency of vocal fold vibration, producing the characteristic deep, hoarse voice, and when severe the redundant tissue can prolapse and obstruct the glottic airway. Changes are typically bilateral and, in early stages, largely reversible once the irritant, particularly smoking, is removed.",
-  "additionalDifferentials": [
-   "Vocal fold polyp or nodule",
-   "Vocal fold cyst",
-   "Laryngeal dysplasia or carcinoma (must be excluded in smokers)",
-   "Recurrent respiratory papillomatosis",
-   "Laryngeal amyloidosis",
-   "Myxoedematous voice change of hypothyroidism",
-   "Muscle tension dysphonia"
-  ],
-  "additionalInvestigations": [
-   "Flexible or rigid laryngoscopy with videostroboscopy",
-   "Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude malignancy",
-   "Thyroid function tests",
-   "Assessment for laryngopharyngeal reflux",
-   "Perceptual and acoustic voice assessment by speech and language therapy",
-   "Documentation of smoking history and cessation support",
-   "Airway assessment where bulky disease causes obstruction"
-  ],
-  "redFlags": [
-   "Stridor or airway obstruction from bulky polypoid folds",
-   "A unilateral lesion, ulceration, leukoplakia or fold fixation suggesting malignancy",
-   "Rapidly progressive or unremitting hoarseness",
-   "Referred otalgia, dysphagia or a neck mass",
-   "Haemoptysis in a heavy smoker"
-  ],
-  "prognosis": "Prognosis is good; with smoking cessation and voice care early disease can regress, and surgery reliably improves the voice. The deep vocal quality may only partly normalise, and continued smoking causes recurrence.",
-  "pitfalls": [
-   "Assuming disease is benign and failing to exclude carcinoma in a smoker.",
-   "Operating on both folds simultaneously and risking an anterior glottic web and scarring.",
-   "Neglecting smoking cessation, leading to recurrence after surgery.",
-   "Overlooking untreated hypothyroidism or reflux as perpetuating factors.",
-   "Setting unrealistic expectations that the voice will return to a high pitch."
-  ],
-  "references": [
-   "Otolaryngology and laryngology textbooks",
-   "Voice disorder clinical guidelines",
-   "Phonosurgery reference literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and prevents recurrence",
-   "Voice therapy with a speech and language therapist to reduce phonotrauma and correct vocal overuse",
-   "Treat contributing laryngopharyngeal reflux with proton-pump inhibitor therapy and antireflux lifestyle measures",
-   "Correct coexisting hypothyroidism with thyroid hormone replacement",
-   "Microlaryngoscopic phonosurgery with a lateral cordotomy and evacuation of the gelatinous material, preserving the mucosal edge, for persistent dysphonia or airway compromise",
-   "Emergency airway assessment and intervention when severe bilateral polypoid folds prolapse and threaten the glottic airway",
-   "Surveillance laryngoscopy with biopsy of any leukoplakia, ulceration or asymmetry to exclude coexisting laryngeal dysplasia or carcinoma",
-   "Refer to laryngology with joint speech and language therapy input for combined voice and structural rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reinke_oedema-pathway",
-   "title": "Reinke Oedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds, producing diffuse polypoid swelling that is usually bilateral.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor or airway obstruction from bulky polypoid folds",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible or rigid laryngoscopy with videostroboscopy, Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude malignancy, Thyroid function tests"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and prevents recurrence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming disease is benign and failing to exclude carcinoma in a smoker."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reinke oedema."
-  }
- ],
- "tables": [
-  {
-   "id": "reinke_oedema-matrix",
-   "title": "Reinke Oedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT",
+  "specialty": "Otolaryngology / Laryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Otolaryngology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds, producing diffuse polypoid swelling that is usually bilateral.",
+      "The hallmark symptom is a progressively low-pitched, gruff, hoarse voice, and it is a classic cause of an abnormally deep, masculine-sounding voice in women.",
+      "Cigarette smoking is the dominant risk factor, with vocal overuse, laryngopharyngeal reflux and hypothyroidism as important contributors.",
+      "Diagnosis is by laryngoscopy and videostroboscopy showing floppy, fluid-filled polypoid folds with an increased mucosal wave.",
+      "Because almost all patients are smokers, coexisting laryngeal dysplasia or carcinoma must be excluded, and any leukoplakia, ulceration or asymmetry warrants biopsy.",
+      "First-line management targets the causes: smoking cessation, voice therapy, and treatment of reflux and hypothyroidism.",
+      "Persistent, severe or airway-compromising disease is treated with microlaryngeal surgery, incising the superior fold and evacuating the gelatinous material while preserving mucosa.",
+      "Overaggressive resection or operating on both folds at the same sitting risks scarring, anterior web formation and permanent dysphonia."
     ],
-    [
-     "Key Investigations",
-     "Flexible or rigid laryngoscopy with videostroboscopy, Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic irritation of the vocal fold epithelium, predominantly from tobacco smoke and compounded by phonotrauma, laryngopharyngeal reflux and hypothyroidism, increases vascular permeability and impairs drainage within Reinke's space. This potential space is normally loose, sparsely vascular and devoid of lymphatics, so fluid and gelatinous mucoid material accumulate readily within the superficial lamina propria and expand the fold into a floppy, polypoid structure. The added mass lowers the fundamental frequency of vocal fold vibration, producing the characteristic deep, hoarse voice, and when severe the redundant tissue can prolapse and obstruct the glottic airway. Changes are typically bilateral and, in early stages, largely reversible once the irritant, particularly smoking, is removed.",
+    "additionalDifferentials": [
+      "Vocal fold polyp or nodule",
+      "Vocal fold cyst",
+      "Laryngeal dysplasia or carcinoma (must be excluded in smokers)",
+      "Recurrent respiratory papillomatosis",
+      "Laryngeal amyloidosis",
+      "Myxoedematous voice change of hypothyroidism",
+      "Muscle tension dysphonia"
     ],
-    [
-     "Primary Differentials",
-     "Vocal fold polyp or nodule, Vocal fold cyst, Laryngeal dysplasia or carcinoma (must be excluded in smokers)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible or rigid laryngoscopy with videostroboscopy",
+      "Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude malignancy",
+      "Thyroid function tests",
+      "Assessment for laryngopharyngeal reflux",
+      "Perceptual and acoustic voice assessment by speech and language therapy",
+      "Documentation of smoking history and cessation support",
+      "Airway assessment where bulky disease causes obstruction"
     ],
-    [
-     "Management Strategy",
-     "Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor or airway obstruction from bulky polypoid folds",
+      "A unilateral lesion, ulceration, leukoplakia or fold fixation suggesting malignancy",
+      "Rapidly progressive or unremitting hoarseness",
+      "Referred otalgia, dysphagia or a neck mass",
+      "Haemoptysis in a heavy smoker"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming disease is benign and failing to exclude carcinoma in a smoker.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is good; with smoking cessation and voice care early disease can regress, and surgery reliably improves the voice. The deep vocal quality may only partly normalise, and continued smoking causes recurrence.",
+    "pitfalls": [
+      "Assuming disease is benign and failing to exclude carcinoma in a smoker.",
+      "Operating on both folds simultaneously and risking an anterior glottic web and scarring.",
+      "Neglecting smoking cessation, leading to recurrence after surgery.",
+      "Overlooking untreated hypothyroidism or reflux as perpetuating factors.",
+      "Setting unrealistic expectations that the voice will return to a high pitch."
+    ],
+    "references": [
+      "Otolaryngology and laryngology textbooks",
+      "Voice disorder clinical guidelines",
+      "Phonosurgery reference literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and prevents recurrence",
+      "Voice therapy with a speech and language therapist to reduce phonotrauma and correct vocal overuse",
+      "Treat contributing laryngopharyngeal reflux with proton-pump inhibitor therapy and antireflux lifestyle measures",
+      "Correct coexisting hypothyroidism with thyroid hormone replacement",
+      "Microlaryngoscopic phonosurgery with a lateral cordotomy and evacuation of the gelatinous material, preserving the mucosal edge, for persistent dysphonia or airway compromise",
+      "Emergency airway assessment and intervention when severe bilateral polypoid folds prolapse and threaten the glottic airway",
+      "Surveillance laryngoscopy with biopsy of any leukoplakia, ulceration or asymmetry to exclude coexisting laryngeal dysplasia or carcinoma",
+      "Refer to laryngology with joint speech and language therapy input for combined voice and structural rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for reinke oedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reinke-oedema-real-image",
-   "title": "Reinke Oedema: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "reinke_oedema-pathway",
+      "title": "Reinke Oedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds, producing diffuse polypoid swelling that is usually bilateral.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor or airway obstruction from bulky polypoid folds",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible or rigid laryngoscopy with videostroboscopy, Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude malignancy, Thyroid function tests"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and prevents recurrence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming disease is benign and failing to exclude carcinoma in a smoker."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reinke oedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reinke_oedema-matrix",
+      "title": "Reinke Oedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The accumulation of gelatinous fluid within Reinke's space (the superficial layer of the lamina propria) of the vocal folds,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible or rigid laryngoscopy with videostroboscopy, Microlaryngoscopy and biopsy of any suspicious mucosal lesion to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vocal fold polyp or nodule, Vocal fold cyst, Laryngeal dysplasia or carcinoma (must be excluded in smokers)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete smoking cessation is the cornerstone, since removal of tobacco irritation allows early polypoid change to regress and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming disease is benign and failing to exclude carcinoma in a smoker.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reinke oedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reinke_oedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Laryngoscopy with videostroboscopy",
+          "cells": [
+            {
+              "text": "Polypoid fold distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microlaryngoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Suspicious lesions and dysplasia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reinke_oedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Laryngeal dysplasia or carcinoma",
+          "cells": [
+            {
+              "text": "Unilateral lesion, ulceration or fixed fold"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal fold polyp or nodule",
+          "cells": [
+            {
+              "text": "Polypoid lesion"
+            },
+            {
+              "text": "Laryngoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reinke_oedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Complete smoking cessation, the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice therapy",
+          "cells": [
+            {
+              "text": "With a speech and language therapist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Assessment for stridor or obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reinke_oedema-dx-mgmt",
+      "title": "Diagnosis and management of Reinke Oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Reinke oedema: bilateral vocal fold oedema in a smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stridor or airway obstruction, unilateral lesion, ulceration, or fixed fold?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway assessment for stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy with videostroboscopy; microlaryngoscopy and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is bilateral reactive oedema confirmed with dysplasia excluded on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysplasia, carcinoma or polyp; biopsy and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Voice therapy with a speech and language therapist",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway assessment for stridor or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Laryngeal follow-up with smoking cessation support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

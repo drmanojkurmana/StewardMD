@@ -1,177 +1,486 @@
 {
- "id": "balkan_endemic_nephropathy",
- "name": "Balkan endemic nephropathy",
- "aliases": [
-  "BEN",
-  "Balkan nephropathy",
-  "aristolochic acid nephropathy (related entity)",
-  "balkan nephropathy",
-  "endemic Balkan nephropathy",
-  "endemic nephropathy"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan region",
-   "Now widely attributed to chronic dietary exposure to aristolochic acid from Aristolochia seeds contaminating locally grown grain",
-   "Characterised by slowly progressive renal impairment with small, shrunken kidneys, tubular proteinuria and relatively bland urinary sediment",
-   "Carries a markedly increased risk of upper urothelial (renal pelvis and ureter) carcinoma, often multifocal",
-   "Biopsy shows hypocellular interstitial fibrosis and tubular atrophy, most pronounced in the outer cortex",
-   "Familial clustering reflects shared environmental exposure rather than a simple inherited disorder, though genetic susceptibility contributes",
-   "There is no specific antidote, so management is avoidance of the causative exposure and supportive care, with lifelong surveillance for urothelial malignancy"
+  "id": "balkan_endemic_nephropathy",
+  "name": "Balkan endemic nephropathy",
+  "aliases": [
+    "BEN",
+    "Balkan nephropathy",
+    "aristolochic acid nephropathy (related entity)",
+    "balkan nephropathy",
+    "endemic Balkan nephropathy",
+    "endemic nephropathy"
   ],
-  "pathophysiology": "Balkan endemic nephropathy is now regarded as a form of chronic aristolochic acid nephropathy resulting from prolonged, low-level dietary exposure to aristolochic acid, a nephrotoxic and carcinogenic compound derived from Aristolochia plants that contaminate wheat in affected regions. Aristolochic acid is metabolised to reactive intermediates that form characteristic DNA adducts, injuring proximal tubular cells and driving progressive interstitial fibrosis and tubular atrophy, predominantly in the superficial cortex. The same adducts induce mutations, including a signature TP53 mutation, in urothelial cells, explaining the strong association with upper-tract urothelial carcinoma. The insidious, cumulative nature of exposure accounts for the slow, relentless decline in renal function and the late age of clinical presentation.",
-  "additionalDifferentials": [
-   "Aristolochic acid nephropathy from herbal remedies",
-   "Analgesic nephropathy",
-   "Chronic pyelonephritis or reflux nephropathy",
-   "Hypertensive nephrosclerosis",
-   "Other chronic tubulointerstitial nephropathies",
-   "Chronic lithium nephropathy"
-  ],
-  "additionalInvestigations": [
-   "Detailed residential, dietary and family history within an endemic region",
-   "Renal function, urinalysis and quantification of tubular (low-molecular-weight) proteinuria",
-   "Renal ultrasound documenting small, symmetrically shrunken kidneys",
-   "Regular urine cytology and upper-tract imaging for urothelial carcinoma surveillance",
-   "Renal biopsy showing outer-cortical interstitial fibrosis in selected cases",
-   "Aristolochic-acid-DNA adduct or mutational signature analysis where available"
-  ],
-  "redFlags": [
-   "Haematuria or an upper-tract mass indicating possible urothelial carcinoma",
-   "Rapid decline in renal function suggesting an additional insult",
-   "New flank pain or hydronephrosis",
-   "Bilateral or multifocal urothelial disease"
-  ],
-  "prognosis": "The nephropathy is slowly but relentlessly progressive, and many patients eventually reach end-stage kidney disease over years to decades. The dominant long-term threat is upper-tract urothelial carcinoma, which is frequently multifocal and requires lifelong surveillance; overall prognosis is heavily influenced by early detection of malignancy.",
-  "pitfalls": [
-   "Failing to appreciate the aristolochic acid link and shared environmental cause",
-   "Missing upper-tract urothelial carcinoma by omitting cytology and imaging surveillance",
-   "Attributing the disease purely to genetics because of familial clustering",
-   "Overlooking tubular proteinuria because dipstick albumin is low",
-   "Assuming stopping exposure halts progression, when established fibrosis may still advance"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Brenner and Rector's The Kidney"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from the diet",
-   "Manage progressive chronic kidney disease with blood-pressure control using renin-angiotensin blockade and treat the complications of declining renal function",
-   "Prepare for and initiate renal replacement therapy by dialysis or transplantation as end-stage kidney disease approaches",
-   "Maintain lifelong surveillance for upper-tract urothelial carcinoma with regular urine cytology and upper-tract imaging",
-   "Investigate haematuria promptly and refer to urology for suspected multifocal urothelial malignancy",
-   "Screen family members and the wider community sharing the same environmental exposure",
-   "Coordinate long-term care between nephrology and urology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "balkan_endemic_nephropathy-pathway",
-   "title": "Balkan endemic nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan region",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haematuria or an upper-tract mass indicating possible urothelial carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed residential, dietary and family history within an endemic region, Renal function, urinalysis and quantification of tubular (low-molecular-weight) proteinuria, Renal ultrasound documenting small, symmetrically"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from the diet"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to appreciate the aristolochic acid link and shared environmental cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of balkan endemic nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "balkan_endemic_nephropathy-matrix",
-   "title": "Balkan endemic nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan region",
+      "Now widely attributed to chronic dietary exposure to aristolochic acid from Aristolochia seeds contaminating locally grown grain",
+      "Characterised by slowly progressive renal impairment with small, shrunken kidneys, tubular proteinuria and relatively bland urinary sediment",
+      "Carries a markedly increased risk of upper urothelial (renal pelvis and ureter) carcinoma, often multifocal",
+      "Biopsy shows hypocellular interstitial fibrosis and tubular atrophy, most pronounced in the outer cortex",
+      "Familial clustering reflects shared environmental exposure rather than a simple inherited disorder, though genetic susceptibility contributes",
+      "There is no specific antidote, so management is avoidance of the causative exposure and supportive care, with lifelong surveillance for urothelial malignancy"
     ],
-    [
-     "Key Investigations",
-     "Detailed residential, dietary and family history within an endemic region, Renal function, urinalysis and quantification of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Balkan endemic nephropathy is now regarded as a form of chronic aristolochic acid nephropathy resulting from prolonged, low-level dietary exposure to aristolochic acid, a nephrotoxic and carcinogenic compound derived from Aristolochia plants that contaminate wheat in affected regions. Aristolochic acid is metabolised to reactive intermediates that form characteristic DNA adducts, injuring proximal tubular cells and driving progressive interstitial fibrosis and tubular atrophy, predominantly in the superficial cortex. The same adducts induce mutations, including a signature TP53 mutation, in urothelial cells, explaining the strong association with upper-tract urothelial carcinoma. The insidious, cumulative nature of exposure accounts for the slow, relentless decline in renal function and the late age of clinical presentation.",
+    "additionalDifferentials": [
+      "Aristolochic acid nephropathy from herbal remedies",
+      "Analgesic nephropathy",
+      "Chronic pyelonephritis or reflux nephropathy",
+      "Hypertensive nephrosclerosis",
+      "Other chronic tubulointerstitial nephropathies",
+      "Chronic lithium nephropathy"
     ],
-    [
-     "Primary Differentials",
-     "Aristolochic acid nephropathy from herbal remedies, Analgesic nephropathy, Chronic pyelonephritis or reflux nephropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed residential, dietary and family history within an endemic region",
+      "Renal function, urinalysis and quantification of tubular (low-molecular-weight) proteinuria",
+      "Renal ultrasound documenting small, symmetrically shrunken kidneys",
+      "Regular urine cytology and upper-tract imaging for urothelial carcinoma surveillance",
+      "Renal biopsy showing outer-cortical interstitial fibrosis in selected cases",
+      "Aristolochic-acid-DNA adduct or mutational signature analysis where available"
     ],
-    [
-     "Management Strategy",
-     "Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from",
-     "Core treatment modality"
+    "redFlags": [
+      "Haematuria or an upper-tract mass indicating possible urothelial carcinoma",
+      "Rapid decline in renal function suggesting an additional insult",
+      "New flank pain or hydronephrosis",
+      "Bilateral or multifocal urothelial disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to appreciate the aristolochic acid link and shared environmental cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The nephropathy is slowly but relentlessly progressive, and many patients eventually reach end-stage kidney disease over years to decades. The dominant long-term threat is upper-tract urothelial carcinoma, which is frequently multifocal and requires lifelong surveillance; overall prognosis is heavily influenced by early detection of malignancy.",
+    "pitfalls": [
+      "Failing to appreciate the aristolochic acid link and shared environmental cause",
+      "Missing upper-tract urothelial carcinoma by omitting cytology and imaging surveillance",
+      "Attributing the disease purely to genetics because of familial clustering",
+      "Overlooking tubular proteinuria because dipstick albumin is low",
+      "Assuming stopping exposure halts progression, when established fibrosis may still advance"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Brenner and Rector's The Kidney"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from the diet",
+      "Manage progressive chronic kidney disease with blood-pressure control using renin-angiotensin blockade and treat the complications of declining renal function",
+      "Prepare for and initiate renal replacement therapy by dialysis or transplantation as end-stage kidney disease approaches",
+      "Maintain lifelong surveillance for upper-tract urothelial carcinoma with regular urine cytology and upper-tract imaging",
+      "Investigate haematuria promptly and refer to urology for suspected multifocal urothelial malignancy",
+      "Screen family members and the wider community sharing the same environmental exposure",
+      "Coordinate long-term care between nephrology and urology"
     ]
-   ],
-   "caption": "Overview comparison matrix for balkan endemic nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "balkan-endemic-nephropathy-real-image",
-   "title": "Balkan endemic nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "balkan_endemic_nephropathy-pathway",
+      "title": "Balkan endemic nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan region",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haematuria or an upper-tract mass indicating possible urothelial carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed residential, dietary and family history within an endemic region, Renal function, urinalysis and quantification of tubular (low-molecular-weight) proteinuria, Renal ultrasound documenting small, symmetrically"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from the diet"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to appreciate the aristolochic acid link and shared environmental cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of balkan endemic nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "balkan_endemic_nephropathy-matrix",
+      "title": "Balkan endemic nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic tubulointerstitial nephropathy occurring in defined rural communities along tributaries of the Danube in the Balkan",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed residential, dietary and family history within an endemic region, Renal function, urinalysis and quantification of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aristolochic acid nephropathy from herbal remedies, Analgesic nephropathy, Chronic pyelonephritis or reflux nephropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Eliminate ongoing aristolochic acid exposure by removing contaminated grain and Aristolochia-containing herbal preparations from",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to appreciate the aristolochic acid link and shared environmental cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for balkan endemic nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "balkan_endemic_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed residential, dietary and family history in an endemic region",
+          "cells": [
+            {
+              "text": "Endemic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, urinalysis and tubular proteinuria quantification",
+          "cells": [
+            {
+              "text": "Tubular (low-molecular-weight) proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Small, symmetrically shrunken kidneys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine cytology and upper-tract imaging",
+          "cells": [
+            {
+              "text": "Urothelial carcinoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy in selected cases",
+          "cells": [
+            {
+              "text": "Outer-cortical interstitial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aristolochic-acid-DNA adduct or mutational signature analysis",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balkan_endemic_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aristolochic acid nephropathy from herbal remedies",
+          "cells": [
+            {
+              "text": "Same toxin, but from herbal exposure rather than the endemic setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesic nephropathy",
+          "cells": [
+            {
+              "text": "Separated by the exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balkan_endemic_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the exposure",
+          "cells": [
+            {
+              "text": "Remove contaminated grain and Aristolochia-containing herbal preparations"
+            },
+            {
+              "text": "Ongoing exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative CKD care",
+          "cells": [
+            {
+              "text": "Blood pressure control with renin-angiotensin blockade; treat complications"
+            },
+            {
+              "text": "Progressive CKD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation as end-stage disease approaches"
+            },
+            {
+              "text": "End-stage kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial surveillance",
+          "cells": [
+            {
+              "text": "Regular urine cytology and upper-tract imaging, lifelong"
+            },
+            {
+              "text": "Upper-tract urothelial carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematuria work-up",
+          "cells": [
+            {
+              "text": "Prompt urology referral for suspected multifocal urothelial malignancy"
+            },
+            {
+              "text": "Haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and community screening",
+          "cells": [
+            {
+              "text": "Relatives and community sharing the same exposure"
+            },
+            {
+              "text": "Shared exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Nephrology and urology"
+            },
+            {
+              "text": "Long-term care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "balkan_endemic_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Balkan endemic nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive kidney disease with tubular proteinuria in an endemic region",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haematuria or upper-tract mass, or rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt urology referral for haematuria or upper-tract mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Residential and dietary history, tubular proteinuria, kidney size, cytology, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Small symmetric kidneys with tubular proteinuria and endemic exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove the exposure and start RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat history and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Renal replacement planning as end-stage disease approaches",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong urothelial surveillance with cytology and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen family members who share the exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated nephrology and urology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

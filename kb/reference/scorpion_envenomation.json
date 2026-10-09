@@ -1,176 +1,434 @@
 {
- "id": "scorpion_envenomation",
- "name": "Scorpion envenomation",
- "aliases": [
-  "scorpion sting",
-  "scorpionism",
-  "Centruroides envenomation",
-  "Leiurus (deathstalker) sting",
-  "Androctonus sting"
- ],
- "class": "non_infective",
- "system": "Toxicology / Envenomation",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in young children",
-   "Medically important genera (Centruroides, Leiurus, Androctonus, Tityus, Hottentotta) produce an autonomic storm from massive neurotransmitter release",
-   "Sympathetic overdrive causes tachycardia, hypertension, sweating, agitation and hyperthermia, sometimes alternating with cholinergic features such as hypersalivation and vomiting",
-   "Neuromuscular excitation may produce roving eye movements, fasciculations, restlessness and involuntary limb movements, especially in children",
-   "Catecholamine surge can precipitate myocarditis, pulmonary oedema and cardiogenic shock, which are the main causes of death",
-   "Grading of severity (local only, systemic autonomic, cardiorespiratory failure) guides the need for antivenom and intensive support",
-   "Management principles include analgesia, species-appropriate antivenom for systemic envenomation, and cautious afterload reduction for the hyperadrenergic state and cardiac dysfunction"
+  "id": "scorpion_envenomation",
+  "name": "Scorpion envenomation",
+  "aliases": [
+    "scorpion sting",
+    "scorpionism",
+    "Centruroides envenomation",
+    "Leiurus (deathstalker) sting",
+    "Androctonus sting"
   ],
-  "pathophysiology": "Scorpion venom contains neurotoxins that bind voltage-gated sodium and potassium channels on excitable membranes, prolonging depolarisation and causing repetitive firing of autonomic and somatic nerves. This triggers a massive release of catecholamines and acetylcholine, producing a mixed sympathetic and parasympathetic autonomic storm. The catecholamine surge increases myocardial oxygen demand and can cause a stress cardiomyopathy or myocarditis with left ventricular dysfunction, capillary leak and pulmonary oedema. Local venom effects on nociceptors account for the severe pain that is often disproportionate to visible tissue changes.",
-  "additionalDifferentials": [
-   "Sympathomimetic toxidrome from drug ingestion",
-   "Anaphylaxis to the sting or another allergen",
-   "Primary myocarditis or acute coronary syndrome",
-   "Seizure disorder or CNS infection in an agitated child",
-   "Hymenoptera or spider envenomation",
-   "Thyroid storm or phaeochromocytoma crisis"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiography for ischaemic changes and arrhythmia",
-   "Cardiac troponin and echocardiography if myocardial involvement is suspected",
-   "Chest imaging for pulmonary oedema",
-   "Blood glucose, electrolytes and lactate given catecholamine-driven derangements",
-   "Creatine kinase and renal function if muscle activity is marked",
-   "Continuous cardiorespiratory monitoring in graded systemic envenomation"
-  ],
-  "redFlags": [
-   "Signs of pulmonary oedema or cardiogenic shock",
-   "Persistent hypertension with end-organ compromise",
-   "Marked neuromuscular excitation or airway-threatening secretions in a young child",
-   "Altered consciousness or seizures",
-   "Rapid clinical deterioration after an initially mild sting"
-  ],
-  "prognosis": "Isolated local stings resolve within hours to a day. Systemic envenomation, particularly in children, carries a risk of life-threatening cardiopulmonary failure, but with timely antivenom and intensive supportive care outcomes are generally good.",
-  "pitfalls": [
-   "Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly",
-   "Attributing pulmonary oedema to fluid overload rather than venom-induced myocardial dysfunction and giving excess fluid",
-   "Delaying antivenom while treating only the autonomic symptoms",
-   "Failing to monitor for evolving cardiac injury after the initial autonomic phase"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "WHO/regional scorpion envenomation management guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation",
-   "Counter the catecholamine storm and reduce left-ventricular afterload with an alpha-blocker such as prazosin",
-   "Provide potent analgesia for the severe local pain with local anaesthetic infiltration or systemic analgesics",
-   "Support cardiorespiratory failure in intensive care, treating myocarditis, pulmonary oedema, and cardiogenic shock with vasoactive support and ventilation",
-   "Grade severity and monitor continuously with electrocardiography, echocardiography, and troponin where myocardial involvement is suspected",
-   "Give supportive wound care and update tetanus prophylaxis",
-   "Recognise young children as highest risk and escalate to paediatric intensive care early"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scorpion_envenomation-pathway",
-   "title": "Scorpion envenomation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in young children",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of pulmonary oedema or cardiogenic shock",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiography for ischaemic changes and arrhythmia, Cardiac troponin and echocardiography if myocardial involvement is suspected, Chest imaging for pulmonary oedema"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scorpion envenomation."
-  }
- ],
- "tables": [
-  {
-   "id": "scorpion_envenomation-matrix",
-   "title": "Scorpion envenomation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Envenomation",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in young children",
+      "Medically important genera (Centruroides, Leiurus, Androctonus, Tityus, Hottentotta) produce an autonomic storm from massive neurotransmitter release",
+      "Sympathetic overdrive causes tachycardia, hypertension, sweating, agitation and hyperthermia, sometimes alternating with cholinergic features such as hypersalivation and vomiting",
+      "Neuromuscular excitation may produce roving eye movements, fasciculations, restlessness and involuntary limb movements, especially in children",
+      "Catecholamine surge can precipitate myocarditis, pulmonary oedema and cardiogenic shock, which are the main causes of death",
+      "Grading of severity (local only, systemic autonomic, cardiorespiratory failure) guides the need for antivenom and intensive support",
+      "Management principles include analgesia, species-appropriate antivenom for systemic envenomation, and cautious afterload reduction for the hyperadrenergic state and cardiac dysfunction"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiography for ischaemic changes and arrhythmia, Cardiac troponin and echocardiography if myocardial involvement is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scorpion venom contains neurotoxins that bind voltage-gated sodium and potassium channels on excitable membranes, prolonging depolarisation and causing repetitive firing of autonomic and somatic nerves. This triggers a massive release of catecholamines and acetylcholine, producing a mixed sympathetic and parasympathetic autonomic storm. The catecholamine surge increases myocardial oxygen demand and can cause a stress cardiomyopathy or myocarditis with left ventricular dysfunction, capillary leak and pulmonary oedema. Local venom effects on nociceptors account for the severe pain that is often disproportionate to visible tissue changes.",
+    "additionalDifferentials": [
+      "Sympathomimetic toxidrome from drug ingestion",
+      "Anaphylaxis to the sting or another allergen",
+      "Primary myocarditis or acute coronary syndrome",
+      "Seizure disorder or CNS infection in an agitated child",
+      "Hymenoptera or spider envenomation",
+      "Thyroid storm or phaeochromocytoma crisis"
     ],
-    [
-     "Primary Differentials",
-     "Sympathomimetic toxidrome from drug ingestion, Anaphylaxis to the sting or another allergen, Primary myocarditis or acute",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiography for ischaemic changes and arrhythmia",
+      "Cardiac troponin and echocardiography if myocardial involvement is suspected",
+      "Chest imaging for pulmonary oedema",
+      "Blood glucose, electrolytes and lactate given catecholamine-driven derangements",
+      "Creatine kinase and renal function if muscle activity is marked",
+      "Continuous cardiorespiratory monitoring in graded systemic envenomation"
     ],
-    [
-     "Management Strategy",
-     "Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of pulmonary oedema or cardiogenic shock",
+      "Persistent hypertension with end-organ compromise",
+      "Marked neuromuscular excitation or airway-threatening secretions in a young child",
+      "Altered consciousness or seizures",
+      "Rapid clinical deterioration after an initially mild sting"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated local stings resolve within hours to a day. Systemic envenomation, particularly in children, carries a risk of life-threatening cardiopulmonary failure, but with timely antivenom and intensive supportive care outcomes are generally good.",
+    "pitfalls": [
+      "Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly",
+      "Attributing pulmonary oedema to fluid overload rather than venom-induced myocardial dysfunction and giving excess fluid",
+      "Delaying antivenom while treating only the autonomic symptoms",
+      "Failing to monitor for evolving cardiac injury after the initial autonomic phase"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "WHO/regional scorpion envenomation management guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation",
+      "Counter the catecholamine storm and reduce left-ventricular afterload with an alpha-blocker such as prazosin",
+      "Provide potent analgesia for the severe local pain with local anaesthetic infiltration or systemic analgesics",
+      "Support cardiorespiratory failure in intensive care, treating myocarditis, pulmonary oedema, and cardiogenic shock with vasoactive support and ventilation",
+      "Grade severity and monitor continuously with electrocardiography, echocardiography, and troponin where myocardial involvement is suspected",
+      "Give supportive wound care and update tetanus prophylaxis",
+      "Recognise young children as highest risk and escalate to paediatric intensive care early"
     ]
-   ],
-   "caption": "Overview comparison matrix for scorpion envenomation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scorpion-envenomation-real-image",
-   "title": "Scorpion envenomation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "scorpion_envenomation-pathway",
+      "title": "Scorpion envenomation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in young children",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of pulmonary oedema or cardiogenic shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiography for ischaemic changes and arrhythmia, Cardiac troponin and echocardiography if myocardial involvement is suspected, Chest imaging for pulmonary oedema"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scorpion envenomation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scorpion_envenomation-matrix",
+      "title": "Scorpion envenomation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most stings cause only intense local pain with minimal swelling; systemic envenomation is species-dependent and most severe in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiography for ischaemic changes and arrhythmia, Cardiac troponin and echocardiography if myocardial involvement is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sympathomimetic toxidrome from drug ingestion, Anaphylaxis to the sting or another allergen, Primary myocarditis or acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Administer species-specific scorpion antivenom early in systemic autonomic or cardiorespiratory envenomation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating a sting in a young child, in whom systemic envenomation and cardiac failure develop rapidly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scorpion envenomation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scorpion_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Ischaemic changes and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin and echocardiography",
+          "cells": [
+            {
+              "text": "Myocardial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, electrolytes, lactate",
+          "cells": [
+            {
+              "text": "Catecholamine-driven derangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and renal function",
+          "cells": [
+            {
+              "text": "If muscle activity is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiorespiratory monitoring",
+          "cells": [
+            {
+              "text": "Graded systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scorpion_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Species-specific antivenom",
+          "cells": [
+            {
+              "text": "Early, in systemic autonomic or cardiorespiratory envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-blocker",
+          "cells": [
+            {
+              "text": "Prazosin to counter the catecholamine storm and reduce left-ventricular afterload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Local anaesthetic infiltration or systemic analgesics for severe local pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care support",
+          "cells": [
+            {
+              "text": "Vasoactive support and ventilation for myocarditis, pulmonary oedema, cardiogenic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity grading and monitoring",
+          "cells": [
+            {
+              "text": "ECG, echocardiography and troponin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Update tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early paediatric ICU escalation",
+          "cells": [
+            {
+              "text": "Young children are highest risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scorpion_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Scorpion envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful scorpion sting: grade for systemic envenomation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulmonary oedema, shock, hypertension with organ injury, seizures or young child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate, give antivenom and prazosin, escalate to intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, troponin, echocardiography, chest imaging, glucose, electrolytes, lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic autonomic or cardiorespiratory envenomation present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Local analgesia, wound care and tetanus update; observe for deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Give species-specific antivenom early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prazosin to reduce afterload",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive care for myocarditis, pulmonary oedema and shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous monitoring with ECG, echo and troponin",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Local stings settle in a day; systemic envenomation in children can be life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

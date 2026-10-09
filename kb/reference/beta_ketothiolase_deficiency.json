@@ -1,175 +1,233 @@
 {
- "id": "beta_ketothiolase_deficiency",
- "name": "Beta-ketothiolase deficiency (T2/ACAT1)",
- "aliases": [
-  "mitochondrial acetoacetyl-CoA thiolase deficiency",
-  "T2 deficiency",
-  "ACAT1 deficiency",
-  "3-oxothiolase deficiency",
-  "2-methylacetoacetyl-CoA thiolase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine catabolism, so the disorder combines a ketolysis defect with an organic aciduria",
-   "Typically presents in infancy or early childhood with intermittent ketoacidotic crises precipitated by intercurrent infection, fasting, or a high-protein load, often with normal health between episodes",
-   "Urine organic acids classically show 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, reflecting the block in isoleucine breakdown",
-   "Blood acylcarnitine profile characteristically shows raised C5:1 (tiglylcarnitine) and C5-OH (2-methyl-3-hydroxybutyrylcarnitine)",
-   "Severe ketoacidosis during crises can be striking, but unlike SCOT deficiency the ketosis is episodic rather than permanent",
-   "Acute management centres on reversing catabolism with intravenous glucose and correcting acidosis; long-term care uses avoidance of prolonged fasting and modest protein moderation with an emergency regimen for illness",
-   "Neurological outcome is variable and basal ganglia injury has been reported after severe crises, so prompt treatment of acidotic episodes is important"
+  "id": "beta_ketothiolase_deficiency",
+  "name": "Beta-ketothiolase deficiency (T2/ACAT1)",
+  "aliases": [
+    "mitochondrial acetoacetyl-CoA thiolase deficiency",
+    "T2 deficiency",
+    "ACAT1 deficiency",
+    "3-oxothiolase deficiency",
+    "2-methylacetoacetyl-CoA thiolase deficiency"
   ],
-  "pathophysiology": "Beta-ketothiolase deficiency results from loss of mitochondrial acetoacetyl-CoA thiolase (T2), encoded by ACAT1. The enzyme participates both in the terminal step of ketone-body metabolism and in the catabolism of isoleucine at the level of 2-methylacetoacetyl-CoA. Its deficiency impairs ketone-body handling and blocks isoleucine degradation, so intermediates such as 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine accumulate. During catabolic stress, when fatty-acid oxidation and ketogenesis are upregulated, the inability to process ketoacids leads to profound ketoacidosis. Episodes are typically intermittent, with metabolic decompensation triggered by fasting, infection, or protein loading.",
-  "additionalDifferentials": [
-   "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency",
-   "Diabetic ketoacidosis",
-   "Other organic acidaemias (methylmalonic, propionic, isovaleric)",
-   "Maple syrup urine disease during decompensation",
-   "Salicylate or other toxic ingestion causing anion-gap acidosis",
-   "Glycogen storage disease with ketotic hypoglycaemia"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine",
-   "Plasma acylcarnitine profile by tandem mass spectrometry looking for raised C5:1 and C5-OH",
-   "Blood gas, glucose, electrolytes and calculated anion gap during acute presentations",
-   "Blood and urine ketone quantification to document ketoacidosis",
-   "Molecular genetic testing of ACAT1 to confirm the diagnosis",
-   "Enzyme assay or in-vitro loading studies in fibroblasts where genetics are inconclusive"
-  ],
-  "redFlags": [
-   "Severe high-anion-gap metabolic acidosis with heavy ketosis in an unwell child",
-   "Reduced consciousness or seizures suggesting cerebral involvement during a crisis",
-   "Recurrent unexplained ketoacidotic episodes triggered by illness or fasting",
-   "Haemodynamic instability from profound dehydration and acidosis"
-  ],
-  "prognosis": "Prognosis is generally favourable when crises are recognised and treated promptly, and many individuals develop normally with few episodes after childhood. However, severe or poorly managed ketoacidotic crises can cause basal ganglia injury and lasting neurological sequelae.",
-  "pitfalls": [
-   "Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder",
-   "Assuming a normal interictal examination excludes a serious inherited condition",
-   "Failing to send urine organic acids and acylcarnitines during the acute episode when abnormalities are most informative",
-   "Under-treating catabolism by not providing adequate intravenous glucose during illness"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of Ketone Body Metabolism",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes",
-   "Prevent decompensation by avoiding prolonged fasting and providing an emergency regimen with glucose-containing feeds during intercurrent illness",
-   "Institute modest dietary protein moderation to reduce isoleucine loading while maintaining adequate growth",
-   "Consider carnitine supplementation to support removal of accumulated acyl intermediates",
-   "Educate the family on sick-day rules and early presentation with a written emergency protocol",
-   "Monitor growth, development and metabolic control with a metabolic dietitian, surveilling for basal ganglia injury after severe crises",
-   "Confirm with ACAT1 testing and offer genetic counselling and family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beta_ketothiolase_deficiency-pathway",
-   "title": "Beta-ketothiolase deficiency (T2/ACAT1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine catabolism, so the disorder combines a ketolysis defect with an organic aciduria",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe high-anion-gap metabolic acidosis with heavy ketosis in an unwell child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, Plasma acylcarnitine profile by tandem mass spectrometry looking for raised C5:1 and C5-OH, Blood gas, glucose,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beta-ketothiolase deficiency (t2/acat1)."
-  }
- ],
- "tables": [
-  {
-   "id": "beta_ketothiolase_deficiency-matrix",
-   "title": "Beta-ketothiolase deficiency (T2/ACAT1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine catabolism, so the disorder combines a ketolysis defect with an organic aciduria",
+      "Typically presents in infancy or early childhood with intermittent ketoacidotic crises precipitated by intercurrent infection, fasting, or a high-protein load, often with normal health between episodes",
+      "Urine organic acids classically show 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, reflecting the block in isoleucine breakdown",
+      "Blood acylcarnitine profile characteristically shows raised C5:1 (tiglylcarnitine) and C5-OH (2-methyl-3-hydroxybutyrylcarnitine)",
+      "Severe ketoacidosis during crises can be striking, but unlike SCOT deficiency the ketosis is episodic rather than permanent",
+      "Acute management centres on reversing catabolism with intravenous glucose and correcting acidosis; long-term care uses avoidance of prolonged fasting and modest protein moderation with an emergency regimen for illness",
+      "Neurological outcome is variable and basal ganglia injury has been reported after severe crises, so prompt treatment of acidotic episodes is important"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, Plasma acylcarnitine profile",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Beta-ketothiolase deficiency results from loss of mitochondrial acetoacetyl-CoA thiolase (T2), encoded by ACAT1. The enzyme participates both in the terminal step of ketone-body metabolism and in the catabolism of isoleucine at the level of 2-methylacetoacetyl-CoA. Its deficiency impairs ketone-body handling and blocks isoleucine degradation, so intermediates such as 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine accumulate. During catabolic stress, when fatty-acid oxidation and ketogenesis are upregulated, the inability to process ketoacids leads to profound ketoacidosis. Episodes are typically intermittent, with metabolic decompensation triggered by fasting, infection, or protein loading.",
+    "additionalDifferentials": [
+      "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency",
+      "Diabetic ketoacidosis",
+      "Other organic acidaemias (methylmalonic, propionic, isovaleric)",
+      "Maple syrup urine disease during decompensation",
+      "Salicylate or other toxic ingestion causing anion-gap acidosis",
+      "Glycogen storage disease with ketotic hypoglycaemia"
     ],
-    [
-     "Primary Differentials",
-     "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency, Diabetic ketoacidosis, Other organic acidaemias (methylmalonic,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine",
+      "Plasma acylcarnitine profile by tandem mass spectrometry looking for raised C5:1 and C5-OH",
+      "Blood gas, glucose, electrolytes and calculated anion gap during acute presentations",
+      "Blood and urine ketone quantification to document ketoacidosis",
+      "Molecular genetic testing of ACAT1 to confirm the diagnosis",
+      "Enzyme assay or in-vitro loading studies in fibroblasts where genetics are inconclusive"
     ],
-    [
-     "Management Strategy",
-     "Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe high-anion-gap metabolic acidosis with heavy ketosis in an unwell child",
+      "Reduced consciousness or seizures suggesting cerebral involvement during a crisis",
+      "Recurrent unexplained ketoacidotic episodes triggered by illness or fasting",
+      "Haemodynamic instability from profound dehydration and acidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable when crises are recognised and treated promptly, and many individuals develop normally with few episodes after childhood. However, severe or poorly managed ketoacidotic crises can cause basal ganglia injury and lasting neurological sequelae.",
+    "pitfalls": [
+      "Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder",
+      "Assuming a normal interictal examination excludes a serious inherited condition",
+      "Failing to send urine organic acids and acylcarnitines during the acute episode when abnormalities are most informative",
+      "Under-treating catabolism by not providing adequate intravenous glucose during illness"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of Ketone Body Metabolism",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes",
+      "Prevent decompensation by avoiding prolonged fasting and providing an emergency regimen with glucose-containing feeds during intercurrent illness",
+      "Institute modest dietary protein moderation to reduce isoleucine loading while maintaining adequate growth",
+      "Consider carnitine supplementation to support removal of accumulated acyl intermediates",
+      "Educate the family on sick-day rules and early presentation with a written emergency protocol",
+      "Monitor growth, development and metabolic control with a metabolic dietitian, surveilling for basal ganglia injury after severe crises",
+      "Confirm with ACAT1 testing and offer genetic counselling and family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for beta-ketothiolase deficiency (t2/acat1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beta-ketothiolase-deficiency-real-image",
-   "title": "Beta-ketothiolase deficiency (T2/ACAT1): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "beta_ketothiolase_deficiency-pathway",
+      "title": "Beta-ketothiolase deficiency (T2/ACAT1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine catabolism, so the disorder combines a ketolysis defect with an organic aciduria",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe high-anion-gap metabolic acidosis with heavy ketosis in an unwell child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, Plasma acylcarnitine profile by tandem mass spectrometry looking for raised C5:1 and C5-OH, Blood gas, glucose,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beta-ketothiolase deficiency (t2/acat1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beta_ketothiolase_deficiency-matrix",
+      "title": "Beta-ketothiolase deficiency (T2/ACAT1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of the mitochondrial enzyme (ACAT1 gene) that acts in both ketone-body utilisation and isoleucine",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acid analysis for 2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine, Plasma acylcarnitine profile",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency, Diabetic ketoacidosis, Other organic acidaemias (methylmalonic,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute ketoacidotic crises with intravenous glucose to reverse catabolism, correcting acidosis with fluids and electrolytes",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe ketoacidosis to presumed diabetes or gastroenteritis and missing the underlying metabolic disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beta-ketothiolase deficiency (t2/acat1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_ketothiolase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta-ketothiolase deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urine organic acids", "cells": [{"text": "2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine"}], "cite": "c1"},
+        {"parameter": "Plasma acylcarnitine profile by tandem mass spectrometry", "cells": [{"text": "Raised C5:1 (tiglylcarnitine) and C5-OH"}], "cite": "c1"},
+        {"parameter": "Blood gas, glucose, electrolytes and anion gap", "cells": [{"text": "Anion-gap acidosis during acute crises"}], "cite": "c1"},
+        {"parameter": "Blood and urine ketones", "cells": [{"text": "Documents ketoacidosis"}], "cite": "c1"},
+        {"parameter": "ACAT1 molecular genetic testing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Enzyme assay or fibroblast loading studies", "cells": [{"text": "Used if genetic testing is inconclusive"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ketothiolase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beta-ketothiolase deficiency",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency", "cells": [{"text": "Ketosis is episodic here, not permanent as in SCOT deficiency"}], "cite": "c1"},
+        {"parameter": "Other organic acidaemias (methylmalonic, propionic, isovaleric)", "cells": [{"text": "Urine organic acid pattern with tiglylglycine and 2-methyl-3-hydroxybutyrate"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ketothiolase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-ketothiolase deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Acute crisis", "cells": [{"text": "Intravenous glucose to reverse catabolism; correct acidosis with fluids and electrolytes"}, {"text": "Treats acute ketoacidotic crises"}], "cite": "c1"},
+        {"parameter": "Preventing decompensation", "cells": [{"text": "Avoid prolonged fasting; emergency regimen with glucose-containing feeds during intercurrent illness"}, {"text": "Triggers include infection and fasting"}], "cite": "c1"},
+        {"parameter": "Protein moderation", "cells": [{"text": "Modest dietary protein moderation to limit isoleucine loading while maintaining growth"}, {"text": "Adequate growth must be preserved"}], "cite": "c1"},
+        {"parameter": "Carnitine supplementation", "cells": [{"text": "Consider carnitine supplementation"}, {"text": "Supports removal of accumulated acyl intermediates"}], "cite": "c1"},
+        {"parameter": "Family education", "cells": [{"text": "Sick-day rules and a written emergency protocol"}, {"text": "Encourages early presentation"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Growth, development and metabolic control with a metabolic dietitian"}, {"text": "Surveillance for basal ganglia injury after severe crises"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "ACAT1 testing, counselling and family screening"}, {"text": "Autosomal recessive disorder"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_ketothiolase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of beta-ketothiolase deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Intermittent ketoacidotic crisis in an infant or child, triggered by fasting, infection or protein load", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: severe high-anion-gap acidosis, reduced consciousness or seizures?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: intravenous glucose to reverse catabolism; correct acidosis and electrolytes", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Blood gas, glucose, ketones; urine organic acids and acylcarnitines during the episode", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Look for urine 2-methyl-3-hydroxybutyrate and tiglylglycine; raised C5:1 and C5-OH", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Organic acid and acylcarnitine pattern consistent with ACAT1 deficiency?", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: consider SCOT deficiency, diabetic ketoacidosis or other organic acidaemias", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "ACAT1 testing; avoid fasting; protein moderation, carnitine, sick-day rules", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Many develop normally with few episodes after childhood; severe crises risk basal ganglia injury", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n8", "label": "Yes"},
+        {"from": "n6", "to": "n7", "label": "No"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

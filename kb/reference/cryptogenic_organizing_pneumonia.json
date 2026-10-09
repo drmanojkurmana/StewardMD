@@ -1,178 +1,465 @@
 {
- "id": "cryptogenic_organizing_pneumonia",
- "name": "Cryptogenic organising pneumonia",
- "aliases": [
-  "BOOP",
-  "COP",
-  "Idiopathic bronchiolitis obliterans organising pneumonia",
-  "cryptogenic organising pneumonia",
-  "idiopathic BOOP",
-  "idiopathic bronchiolitis obliterans organising pneumonia",
-  "organising pneumonia"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATS/ERS classification of idiopathic interstitial pneumonias / Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for a community-acquired pneumonia that fails to respond to antibiotics",
-   "The term cryptogenic denotes the idiopathic form; identical organising pneumonia can be secondary to infection, drugs, connective tissue disease, radiation, or aspiration",
-   "High-resolution CT typically shows patchy peripheral or peribronchial consolidation and ground-glass opacity that is frequently migratory over time",
-   "Suggestive CT signs include the reversed halo (atoll) sign and a perilobular pattern of consolidation",
-   "Histology shows intraluminal plugs of granulation tissue (Masson bodies) within distal airspaces and alveolar ducts, with preserved lung architecture",
-   "Response to corticosteroids is characteristically prompt and often dramatic, which supports the diagnosis",
-   "Relapse is common when steroids are tapered too quickly, so treatment is usually prolonged and reduced gradually",
-   "Always search for a secondary cause before labelling organising pneumonia as cryptogenic"
+  "id": "cryptogenic_organizing_pneumonia",
+  "name": "Cryptogenic organising pneumonia",
+  "aliases": [
+    "BOOP",
+    "COP",
+    "Idiopathic bronchiolitis obliterans organising pneumonia",
+    "cryptogenic organising pneumonia",
+    "idiopathic BOOP",
+    "idiopathic bronchiolitis obliterans organising pneumonia",
+    "organising pneumonia"
   ],
-  "pathophysiology": "Organising pneumonia is a stereotyped repair response of the distal lung to epithelial injury. Damage to the alveolar and bronchiolar epithelium allows leakage of plasma proteins and recruitment of fibroblasts that organise into buds of granulation tissue filling the alveolar ducts and alveoli (Masson bodies), sometimes extending into respiratory bronchioles. Because the underlying lung architecture and interstitial framework are preserved, the process is largely reversible and responds well to corticosteroids. When no trigger such as infection, drug, radiation, or connective tissue disease is identified, the disorder is termed cryptogenic organising pneumonia.",
-  "additionalDifferentials": [
-   "Community-acquired or atypical infective pneumonia",
-   "Chronic eosinophilic pneumonia",
-   "Lymphoma or bronchoalveolar-pattern adenocarcinoma",
-   "Vasculitis (e.g. granulomatosis with polyangiitis)",
-   "Hypersensitivity pneumonitis",
-   "Connective tissue disease-associated interstitial lung disease"
-  ],
-  "additionalInvestigations": [
-   "High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular opacities",
-   "Bronchoalveolar lavage showing mixed cellularity, useful mainly to exclude infection, eosinophilia, and malignancy",
-   "Surgical or transbronchial (including cryobiopsy) lung biopsy demonstrating intraluminal granulation-tissue plugs",
-   "Connective tissue disease and vasculitis serology to detect a secondary cause",
-   "Review of drug history and prior radiotherapy as potential triggers",
-   "Pulmonary function tests, typically showing a restrictive defect with reduced gas transfer"
-  ],
-  "redFlags": [
-   "Rapidly progressive or fulminant respiratory failure suggesting an aggressive fibrosing variant",
-   "Failure to improve with corticosteroids, prompting reconsideration of the diagnosis",
-   "Features pointing to an underlying vasculitis, connective tissue disease, or malignancy",
-   "Frequent relapse on tapering requiring re-evaluation and treatment intensification"
-  ],
-  "prognosis": "Most patients with cryptogenic organising pneumonia respond well and often completely to corticosteroids, although relapses during dose reduction are common; a minority have a progressive fibrosing course with a poorer outcome.",
-  "pitfalls": [
-   "Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia",
-   "Labelling the disease cryptogenic without excluding drug, infection, radiation, and connective tissue disease causes",
-   "Tapering corticosteroids too rapidly and precipitating relapse",
-   "Relying on non-specific bronchoalveolar lavage findings rather than correlating imaging and, when needed, histology"
-  ],
-  "references": [
-   "ATS/ERS international multidisciplinary classification of idiopathic interstitial pneumonias",
-   "Murray & Nadel's Textbook of Respiratory Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response",
-   "Prolonged, gradual corticosteroid taper because relapse commonly occurs during dose reduction",
-   "Add a steroid-sparing immunosuppressant such as azathioprine or mycophenolate, or a macrolide, in relapsing or corticosteroid-dependent disease",
-   "Exclude and treat any secondary trigger, reviewing drug and radiotherapy history and screening for infection or connective tissue disease",
-   "Supportive care with supplemental oxygen, smoking cessation and pulmonary rehabilitation as needed",
-   "Monitor with serial high-resolution CT and pulmonary function tests, with bone protection and glucose monitoring while on corticosteroids",
-   "Refer to a respiratory multidisciplinary team and escalate for a progressive fibrosing course or respiratory failure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cryptogenic_organizing_pneumonia-pathway",
-   "title": "Cryptogenic organising pneumonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for a community-acquired pneumonia that fails to respond to antibiotics",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or fulminant respiratory failure suggesting an aggressive fibrosing variant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular opacities, Bronchoalveolar lavage showing mixed cellularity, useful mainly to exclude infection,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cryptogenic organising pneumonia."
-  }
- ],
- "tables": [
-  {
-   "id": "cryptogenic_organizing_pneumonia-matrix",
-   "title": "Cryptogenic organising pneumonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATS/ERS classification of idiopathic interstitial pneumonias / Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for a community-acquired pneumonia that fails to respond to antibiotics",
+      "The term cryptogenic denotes the idiopathic form; identical organising pneumonia can be secondary to infection, drugs, connective tissue disease, radiation, or aspiration",
+      "High-resolution CT typically shows patchy peripheral or peribronchial consolidation and ground-glass opacity that is frequently migratory over time",
+      "Suggestive CT signs include the reversed halo (atoll) sign and a perilobular pattern of consolidation",
+      "Histology shows intraluminal plugs of granulation tissue (Masson bodies) within distal airspaces and alveolar ducts, with preserved lung architecture",
+      "Response to corticosteroids is characteristically prompt and often dramatic, which supports the diagnosis",
+      "Relapse is common when steroids are tapered too quickly, so treatment is usually prolonged and reduced gradually",
+      "Always search for a secondary cause before labelling organising pneumonia as cryptogenic"
     ],
-    [
-     "Key Investigations",
-     "High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Organising pneumonia is a stereotyped repair response of the distal lung to epithelial injury. Damage to the alveolar and bronchiolar epithelium allows leakage of plasma proteins and recruitment of fibroblasts that organise into buds of granulation tissue filling the alveolar ducts and alveoli (Masson bodies), sometimes extending into respiratory bronchioles. Because the underlying lung architecture and interstitial framework are preserved, the process is largely reversible and responds well to corticosteroids. When no trigger such as infection, drug, radiation, or connective tissue disease is identified, the disorder is termed cryptogenic organising pneumonia.",
+    "additionalDifferentials": [
+      "Community-acquired or atypical infective pneumonia",
+      "Chronic eosinophilic pneumonia",
+      "Lymphoma or bronchoalveolar-pattern adenocarcinoma",
+      "Vasculitis (e.g. granulomatosis with polyangiitis)",
+      "Hypersensitivity pneumonitis",
+      "Connective tissue disease-associated interstitial lung disease"
     ],
-    [
-     "Primary Differentials",
-     "Community-acquired or atypical infective pneumonia, Chronic eosinophilic pneumonia, Lymphoma or bronchoalveolar-pattern",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular opacities",
+      "Bronchoalveolar lavage showing mixed cellularity, useful mainly to exclude infection, eosinophilia, and malignancy",
+      "Surgical or transbronchial (including cryobiopsy) lung biopsy demonstrating intraluminal granulation-tissue plugs",
+      "Connective tissue disease and vasculitis serology to detect a secondary cause",
+      "Review of drug history and prior radiotherapy as potential triggers",
+      "Pulmonary function tests, typically showing a restrictive defect with reduced gas transfer"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or fulminant respiratory failure suggesting an aggressive fibrosing variant",
+      "Failure to improve with corticosteroids, prompting reconsideration of the diagnosis",
+      "Features pointing to an underlying vasculitis, connective tissue disease, or malignancy",
+      "Frequent relapse on tapering requiring re-evaluation and treatment intensification"
     ],
-    [
-     "Clinical Pitfall",
-     "Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients with cryptogenic organising pneumonia respond well and often completely to corticosteroids, although relapses during dose reduction are common; a minority have a progressive fibrosing course with a poorer outcome.",
+    "pitfalls": [
+      "Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia",
+      "Labelling the disease cryptogenic without excluding drug, infection, radiation, and connective tissue disease causes",
+      "Tapering corticosteroids too rapidly and precipitating relapse",
+      "Relying on non-specific bronchoalveolar lavage findings rather than correlating imaging and, when needed, histology"
+    ],
+    "references": [
+      "ATS/ERS international multidisciplinary classification of idiopathic interstitial pneumonias",
+      "Murray & Nadel's Textbook of Respiratory Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response",
+      "Prolonged, gradual corticosteroid taper because relapse commonly occurs during dose reduction",
+      "Add a steroid-sparing immunosuppressant such as azathioprine or mycophenolate, or a macrolide, in relapsing or corticosteroid-dependent disease",
+      "Exclude and treat any secondary trigger, reviewing drug and radiotherapy history and screening for infection or connective tissue disease",
+      "Supportive care with supplemental oxygen, smoking cessation and pulmonary rehabilitation as needed",
+      "Monitor with serial high-resolution CT and pulmonary function tests, with bone protection and glucose monitoring while on corticosteroids",
+      "Refer to a respiratory multidisciplinary team and escalate for a progressive fibrosing course or respiratory failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for cryptogenic organising pneumonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cryptogenic-organizing-pneumonia-real-image",
-   "title": "Cryptogenic organising pneumonia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "cryptogenic_organizing_pneumonia-pathway",
+      "title": "Cryptogenic organising pneumonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for a community-acquired pneumonia that fails to respond to antibiotics",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or fulminant respiratory failure suggesting an aggressive fibrosing variant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular opacities, Bronchoalveolar lavage showing mixed cellularity, useful mainly to exclude infection,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cryptogenic organising pneumonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cryptogenic_organizing_pneumonia-matrix",
+      "title": "Cryptogenic organising pneumonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subacute illness with cough, breathlessness, malaise, low-grade fever, and weight loss over weeks, often mistaken initially for",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution CT to identify migratory peripheral/peribronchial consolidation, the reversed halo sign, and perilobular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Community-acquired or atypical infective pneumonia, Chronic eosinophilic pneumonia, Lymphoma or bronchoalveolar-pattern",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids as first-line disease-specific therapy, typically producing a prompt clinical and radiological response",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Persisting with repeated antibiotic courses for a 'pneumonia' that is actually organising pneumonia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cryptogenic organising pneumonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS classification of idiopathic interstitial pneumonias / Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryptogenic_organizing_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Migratory consolidation, reversed halo sign and perilobular change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Mixed cellularity; infection, eosinophilia and malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy (surgical or cryobiopsy)",
+          "cells": [
+            {
+              "text": "Intraluminal granulation-tissue plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease and vasculitis serology",
+          "cells": [
+            {
+              "text": "Secondary cause excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Restrictive defect with reduced gas transfer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptogenic_organizing_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic eosinophilic pneumonia",
+          "cells": [
+            {
+              "text": "Named look-alike; eosinophilia on lavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or bronchoalveolar-pattern adenocarcinoma",
+          "cells": [
+            {
+              "text": "Malignant look-alikes; lavage and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Vasculitis look-alike; serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptogenic_organizing_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line disease-specific therapy with prompt response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged gradual taper",
+          "cells": [
+            {
+              "text": "Relapse commonly occurs during dose reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agent",
+          "cells": [
+            {
+              "text": "Azathioprine or mycophenolate, or a macrolide, for relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary trigger review",
+          "cells": [
+            {
+              "text": "Drug and radiotherapy history; infection and connective tissue disease screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen, smoking cessation and pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial high-resolution CT and PFTs; bone protection and glucose on steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory team",
+          "cells": [
+            {
+              "text": "Escalate for progressive fibrosis or respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryptogenic_organizing_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Cryptogenic organising pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cryptogenic organising pneumonia: subacute cough with migratory consolidation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (fulminant respiratory failure, no steroid response, vasculitis features)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review for fulminant failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT with reversed halo sign; BAL; lung biopsy; CTD serology; PFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show intraluminal granulation-tissue plugs with secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infection, eosinophilic pneumonia, vasculitis or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged gradual taper because relapse occurs during reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Azathioprine, mycophenolate or macrolide for relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude drug, radiation and connective tissue causes; bone protection on steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most respond well and often completely to corticosteroids; relapses during tapering occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,214 +1,638 @@
 {
- "id": "mumps",
- "name": "Mumps",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 213,
- "page": 1646,
- "aliases": [
-  "epidemic parotitis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1646-1649",
-  "clinicalPearls": [
-   "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any patient with parotitis or mumps complications regardless of age, vaccination status, or travel history (p.1646).",
-   "Parotitis is generally bilateral but may not be synchronous on both sides; unilateral involvement occurs in about one-third of cases, with tenderness and obliteration of the space between the earlobe and angle of the mandible (p.1647).",
-   "Parotitis is often preceded by a several-day prodrome of low-grade fever, malaise, myalgia, headache, and anorexia; it typically lasts ~5 days (range 3-7) with most cases resolving within 10 days (p.1647).",
-   "Infection is asymptomatic in ~20% of unvaccinated patients; it can also present as nonspecific respiratory symptoms (p.1647).",
-   "Fully vaccinated persons can still contract mumps, but are at lower risk for mumps and for mumps complications (p.1647).",
-   "Buccal swabs are the best specimens for virus detection; the parotid gland should be massaged for 30 s before collection, and specimens collected as close to parotitis onset as possible (maximal shedding within 5 days of symptom onset) (p.1649).",
-   "Complications can occur in the absence of parotitis and are more common in adults than children and in males than females (largely due to orchitis) (p.1648)."
+  "id": "mumps",
+  "name": "Mumps",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 213,
+  "page": 1646,
+  "aliases": [
+    "epidemic parotitis"
   ],
-  "pathophysiology": "Caused by mumps virus, a single-stranded negative-sense enveloped RNA paramyxovirus (Rubulavirus genus, Paramyxoviridae); there is only one serotype (p.1646). Humans are the only known natural reservoir; transmission is via direct contact with respiratory droplets or saliva of an infected person. Incubation averages 16-18 days (range 12-25). A person is most infectious from 2 days before until 5 days after onset of parotitis (virus detected in saliva as early as 7 days before to as late as 9 days after onset) (p.1647). Primary replication likely occurs in the nasal/upper respiratory mucosal epithelium, with spread to regional lymph nodes and infection of mononuclear cells facilitating viremia lasting ~3-5 days. Viremia produces acute inflammatory reactions most commonly in the salivary glands (parotitis) and testes (orchitis), with dissemination also to kidneys, CNS, pancreas, heart, ovaries, mammary glands, cochlear perilymph, and (in pregnancy) the fetus. Mumps encephalitis in many cases appears to be a para- or postinfectious demyelinating process rather than direct viral cytotoxicity, though rare primary encephalitis with viral isolation from brain tissue does occur (p.1647-1648).",
-  "additionalDifferentials": [
-   "Influenza A H3N2 (can increase parotitis cases)",
-   "Parainfluenza virus types 1-3",
-   "Epstein-Barr virus",
-   "Human herpesviruses 6A and 6B",
-   "Herpes simplex viruses types 1 and 2",
-   "Coxsackievirus A",
-   "Adenovirus",
-   "Parvovirus B19",
-   "Echovirus",
-   "Lymphocytic choriomeningitis virus",
-   "HIV",
-   "Sarcoidosis",
-   "Sjogren's syndrome",
-   "Mikulicz's syndrome",
-   "Parinaud's oculoglandular syndrome",
-   "Uremia",
-   "Diabetes mellitus",
-   "Laundry starch ingestion / malnutrition / cirrhosis and some drug treatments",
-   "Salivary duct obstruction, cysts, or tumors (cause of unilateral parotitis)",
-   "Testicular torsion (mimics mumps orchitis)",
-   "Bacterial prostatic/urinary tract infection, chlamydia, gonorrhea, and viral orchitis (coxsackievirus, varicella, echovirus, CMV)"
-  ],
-  "infectionMimics": [
-   "Suppurative (bacterial) parotitis",
-   "Parainfluenza virus types 1-3",
-   "Epstein-Barr virus",
-   "Human herpesviruses 6A/6B",
-   "Herpes simplex viruses 1 and 2",
-   "Coxsackievirus A",
-   "Adenovirus",
-   "Parvovirus B19",
-   "Echovirus",
-   "Lymphocytic choriomeningitis virus",
-   "HIV",
-   "Influenza A H3N2",
-   "Enteroviral aseptic meningitis (clinically indistinguishable from mumps meningitis)"
-  ],
-  "nonInfectiousMimics": [
-   "Sarcoidosis",
-   "Sjogren's syndrome",
-   "Mikulicz's syndrome",
-   "Parinaud's oculoglandular syndrome",
-   "Uremia",
-   "Diabetes mellitus",
-   "Malnutrition / laundry starch ingestion / cirrhosis",
-   "Drug-induced parotid swelling",
-   "Salivary ductal obstruction, cysts, or tumors",
-   "Testicular torsion (mimicking orchitis)"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen",
-   "Viral culture",
-   "Mumps-specific IgM serology (note: often undetectable, transient, or delayed in vaccinated patients, and can give false positives from cross-reactions)",
-   "Paired acute- and convalescent-phase IgG for a fourfold rise (IgG testing generally not recommended, as titers may already be elevated in vaccinated/previously infected patients)",
-   "Serum amylase and lipase (both elevated suggests pancreatitis in addition to parotitis)"
-  ],
-  "redFlags": [
-   "Orchitis (most common complication; up to 30% of unvaccinated and 6% of vaccinated postpubertal males) with possible testicular atrophy and temporary subfertility",
-   "Aseptic meningitis (up to 10% of unvaccinated, <=1% of vaccinated patients)",
-   "Encephalitis (<=1% of patients; high fever, altered consciousness, seizures, focal neurologic signs; mortality ~1.5%)",
-   "Sensorineural hearing loss / deafness (usually sudden, unilateral, transient; bilateral and permanent loss are rare)",
-   "Oophoritis (~7% unvaccinated, <=1% vaccinated postpubertal women)",
-   "Pancreatitis (~4% unvaccinated, <1% vaccinated)",
-   "Supraglottic edema (rare, life-threatening) from obstructed lymphatic drainage",
-   "Other CNS complications: cerebellar ataxia, facial palsy, transverse myelitis, hydrocephalus, Guillain-Barre syndrome, flaccid paralysis",
-   "Myocarditis and endocardial fibroelastosis (rare but potentially severe)"
-  ],
-  "prognosis": "Generally a benign, self-resolving illness; death due to mumps is exceedingly rare (p.1648). Aseptic meningitis is self-limited without significant risk of death or long-term sequelae. Encephalitis carries a mortality of ~1.5%, may leave permanent sequelae, and has poorer outcomes in adults than children. Orchitis can cause testicular atrophy in ~30-50% of affected testicles and temporary sterility/subfertility, but no studies have assessed the risk of permanent infertility. Mumps-related hearing loss is usually transient; bilateral permanent loss is rare. Mumps in pregnancy is generally benign and no more severe than in non-pregnant women, and evidence for an association with increased spontaneous abortion or fetal death is inconclusive (p.1648).",
-  "pitfalls": [
-   "A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated patients (p.1649).",
-   "Failure to detect mumps IgM is very common in vaccinated patients (IgM response often undetectable, transient, or delayed); IgM can also yield false positives from cross-reactions (p.1649).",
-   "Presence of parotitis, orchitis, or oophoritis supports a mumps diagnosis but their absence does NOT exclude it; complications can occur without parotitis (p.1648).",
-   "A positive IgG titer indicates only prior exposure (vaccination or natural infection) and does NOT predict protection; IgG titers should NOT be used to infer immunity in close contacts since they may instead reflect acute infection (p.1649).",
-   "Elevated serum amylase can arise from parotitis OR pancreatitis; lipase is needed to distinguish (p.1648).",
-   "Mumps reinfection and recurrent infection can occur and may be more common than previously thought (p.1648).",
-   "MMR vaccine has NOT been shown to prevent illness or alter severity in persons already infected and is NOT recommended as postexposure prophylaxis; mumps immune globulin is also NOT recommended for postexposure prophylaxis or treatment (p.1649)."
-  ],
-  "severityClassification": "No formal severity classification in the source. Spectrum ranges from asymptomatic infection (~20% of unvaccinated) through classic self-limited parotitis to complicated disease (orchitis, oophoritis, pancreatitis, hearing loss, aseptic meningitis, encephalitis); subclinical CNS involvement (CSF pleocytosis) occurs in up to 55% of patients.",
-  "references": [
-   "Harrison 22e p.1646-1649"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting illness",
-   "Local supportive measures for parotitis, including analgesia and avoidance of acidic foods that stimulate painful salivary secretion",
-   "Supportive care for orchitis with scrotal support and anti-inflammatory agents, and monitoring for pancreatitis, oophoritis and mastitis",
-   "Assess and manage complications such as aseptic meningitis and encephalitis with supportive care and hospital admission where indicated",
-   "Isolate the patient with droplet precautions for the infectious period to limit transmission",
-   "Notify public health authorities and arrange post-exposure MMR vaccination of susceptible contacts, since prevention rests on immunisation"
-  ]
- },
- "algorithms": [
-  {
-   "id": "mumps-pathway",
-   "title": "Mumps: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any patient with parotitis or mumps complications regardless of age, vaccination status, or travel history",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Orchitis (most common complication; up to 30% of unvaccinated and 6% of vaccinated postpubertal males) with possible testicular atrophy and temporary subfertility",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen, Viral culture, Mumps-specific IgM serology (note: often undetectable, transient, or delayed in vaccinated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated patients (p.1649)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mumps."
-  }
- ],
- "tables": [
-  {
-   "id": "mumps-matrix",
-   "title": "Mumps: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1646-1649",
+    "clinicalPearls": [
+      "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any patient with parotitis or mumps complications regardless of age, vaccination status, or travel history (p.1646).",
+      "Parotitis is generally bilateral but may not be synchronous on both sides; unilateral involvement occurs in about one-third of cases, with tenderness and obliteration of the space between the earlobe and angle of the mandible (p.1647).",
+      "Parotitis is often preceded by a several-day prodrome of low-grade fever, malaise, myalgia, headache, and anorexia; it typically lasts ~5 days (range 3-7) with most cases resolving within 10 days (p.1647).",
+      "Infection is asymptomatic in ~20% of unvaccinated patients; it can also present as nonspecific respiratory symptoms (p.1647).",
+      "Fully vaccinated persons can still contract mumps, but are at lower risk for mumps and for mumps complications (p.1647).",
+      "Buccal swabs are the best specimens for virus detection; the parotid gland should be massaged for 30 s before collection, and specimens collected as close to parotitis onset as possible (maximal shedding within 5 days of symptom onset) (p.1649).",
+      "Complications can occur in the absence of parotitis and are more common in adults than children and in males than females (largely due to orchitis) (p.1648)."
     ],
-    [
-     "Key Investigations",
-     "RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen, Viral culture,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Caused by mumps virus, a single-stranded negative-sense enveloped RNA paramyxovirus (Rubulavirus genus, Paramyxoviridae); there is only one serotype (p.1646). Humans are the only known natural reservoir; transmission is via direct contact with respiratory droplets or saliva of an infected person. Incubation averages 16-18 days (range 12-25). A person is most infectious from 2 days before until 5 days after onset of parotitis (virus detected in saliva as early as 7 days before to as late as 9 days after onset) (p.1647). Primary replication likely occurs in the nasal/upper respiratory mucosal epithelium, with spread to regional lymph nodes and infection of mononuclear cells facilitating viremia lasting ~3-5 days. Viremia produces acute inflammatory reactions most commonly in the salivary glands (parotitis) and testes (orchitis), with dissemination also to kidneys, CNS, pancreas, heart, ovaries, mammary glands, cochlear perilymph, and (in pregnancy) the fetus. Mumps encephalitis in many cases appears to be a para- or postinfectious demyelinating process rather than direct viral cytotoxicity, though rare primary encephalitis with viral isolation from brain tissue does occur (p.1647-1648).",
+    "additionalDifferentials": [
+      "Influenza A H3N2 (can increase parotitis cases)",
+      "Parainfluenza virus types 1-3",
+      "Epstein-Barr virus",
+      "Human herpesviruses 6A and 6B",
+      "Herpes simplex viruses types 1 and 2",
+      "Coxsackievirus A",
+      "Adenovirus",
+      "Parvovirus B19",
+      "Echovirus",
+      "Lymphocytic choriomeningitis virus",
+      "HIV",
+      "Sarcoidosis",
+      "Sjogren's syndrome",
+      "Mikulicz's syndrome",
+      "Parinaud's oculoglandular syndrome",
+      "Uremia",
+      "Diabetes mellitus",
+      "Laundry starch ingestion / malnutrition / cirrhosis and some drug treatments",
+      "Salivary duct obstruction, cysts, or tumors (cause of unilateral parotitis)",
+      "Testicular torsion (mimics mumps orchitis)",
+      "Bacterial prostatic/urinary tract infection, chlamydia, gonorrhea, and viral orchitis (coxsackievirus, varicella, echovirus, CMV)"
     ],
-    [
-     "Primary Differentials",
-     "Influenza A H3N2 (can increase parotitis cases), Parainfluenza virus types 1-3, Epstein-Barr virus",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Suppurative (bacterial) parotitis",
+      "Parainfluenza virus types 1-3",
+      "Epstein-Barr virus",
+      "Human herpesviruses 6A/6B",
+      "Herpes simplex viruses 1 and 2",
+      "Coxsackievirus A",
+      "Adenovirus",
+      "Parvovirus B19",
+      "Echovirus",
+      "Lymphocytic choriomeningitis virus",
+      "HIV",
+      "Influenza A H3N2",
+      "Enteroviral aseptic meningitis (clinically indistinguishable from mumps meningitis)"
     ],
-    [
-     "Management Strategy",
-     "No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Sarcoidosis",
+      "Sjogren's syndrome",
+      "Mikulicz's syndrome",
+      "Parinaud's oculoglandular syndrome",
+      "Uremia",
+      "Diabetes mellitus",
+      "Malnutrition / laundry starch ingestion / cirrhosis",
+      "Drug-induced parotid swelling",
+      "Salivary ductal obstruction, cysts, or tumors",
+      "Testicular torsion (mimicking orchitis)"
     ],
-    [
-     "Clinical Pitfall",
-     "A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen",
+      "Viral culture",
+      "Mumps-specific IgM serology (note: often undetectable, transient, or delayed in vaccinated patients, and can give false positives from cross-reactions)",
+      "Paired acute- and convalescent-phase IgG for a fourfold rise (IgG testing generally not recommended, as titers may already be elevated in vaccinated/previously infected patients)",
+      "Serum amylase and lipase (both elevated suggests pancreatitis in addition to parotitis)"
+    ],
+    "redFlags": [
+      "Orchitis (most common complication; up to 30% of unvaccinated and 6% of vaccinated postpubertal males) with possible testicular atrophy and temporary subfertility",
+      "Aseptic meningitis (up to 10% of unvaccinated, <=1% of vaccinated patients)",
+      "Encephalitis (<=1% of patients; high fever, altered consciousness, seizures, focal neurologic signs; mortality ~1.5%)",
+      "Sensorineural hearing loss / deafness (usually sudden, unilateral, transient; bilateral and permanent loss are rare)",
+      "Oophoritis (~7% unvaccinated, <=1% vaccinated postpubertal women)",
+      "Pancreatitis (~4% unvaccinated, <1% vaccinated)",
+      "Supraglottic edema (rare, life-threatening) from obstructed lymphatic drainage",
+      "Other CNS complications: cerebellar ataxia, facial palsy, transverse myelitis, hydrocephalus, Guillain-Barre syndrome, flaccid paralysis",
+      "Myocarditis and endocardial fibroelastosis (rare but potentially severe)"
+    ],
+    "prognosis": "Generally a benign, self-resolving illness; death due to mumps is exceedingly rare (p.1648). Aseptic meningitis is self-limited without significant risk of death or long-term sequelae. Encephalitis carries a mortality of ~1.5%, may leave permanent sequelae, and has poorer outcomes in adults than children. Orchitis can cause testicular atrophy in ~30-50% of affected testicles and temporary sterility/subfertility, but no studies have assessed the risk of permanent infertility. Mumps-related hearing loss is usually transient; bilateral permanent loss is rare. Mumps in pregnancy is generally benign and no more severe than in non-pregnant women, and evidence for an association with increased spontaneous abortion or fetal death is inconclusive (p.1648).",
+    "pitfalls": [
+      "A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated patients (p.1649).",
+      "Failure to detect mumps IgM is very common in vaccinated patients (IgM response often undetectable, transient, or delayed); IgM can also yield false positives from cross-reactions (p.1649).",
+      "Presence of parotitis, orchitis, or oophoritis supports a mumps diagnosis but their absence does NOT exclude it; complications can occur without parotitis (p.1648).",
+      "A positive IgG titer indicates only prior exposure (vaccination or natural infection) and does NOT predict protection; IgG titers should NOT be used to infer immunity in close contacts since they may instead reflect acute infection (p.1649).",
+      "Elevated serum amylase can arise from parotitis OR pancreatitis; lipase is needed to distinguish (p.1648).",
+      "Mumps reinfection and recurrent infection can occur and may be more common than previously thought (p.1648).",
+      "MMR vaccine has NOT been shown to prevent illness or alter severity in persons already infected and is NOT recommended as postexposure prophylaxis; mumps immune globulin is also NOT recommended for postexposure prophylaxis or treatment (p.1649)."
+    ],
+    "severityClassification": "No formal severity classification in the source. Spectrum ranges from asymptomatic infection (~20% of unvaccinated) through classic self-limited parotitis to complicated disease (orchitis, oophoritis, pancreatitis, hearing loss, aseptic meningitis, encephalitis); subclinical CNS involvement (CSF pleocytosis) occurs in up to 55% of patients.",
+    "references": [
+      "Harrison 22e p.1646-1649"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting illness",
+      "Local supportive measures for parotitis, including analgesia and avoidance of acidic foods that stimulate painful salivary secretion",
+      "Supportive care for orchitis with scrotal support and anti-inflammatory agents, and monitoring for pancreatitis, oophoritis and mastitis",
+      "Assess and manage complications such as aseptic meningitis and encephalitis with supportive care and hospital admission where indicated",
+      "Isolate the patient with droplet precautions for the infectious period to limit transmission",
+      "Notify public health authorities and arrange post-exposure MMR vaccination of susceptible contacts, since prevention rests on immunisation"
     ]
-   ],
-   "caption": "Overview comparison matrix for mumps."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mumps-real-image",
-   "title": "Mumps: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mumps-pathway",
+      "title": "Mumps: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any patient with parotitis or mumps complications regardless of age, vaccination status, or travel history",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Orchitis (most common complication; up to 30% of unvaccinated and 6% of vaccinated postpubertal males) with possible testicular atrophy and temporary subfertility",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen, Viral culture, Mumps-specific IgM serology (note: often undetectable, transient, or delayed in vaccinated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated patients (p.1649)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mumps."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mumps-matrix",
+      "title": "Mumps: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute, self-limited systemic viral illness typically characterized by parotitis or other salivary gland swelling; suspect in any",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR (preferred virologic confirmation) on blood, saliva, urine, or CSF; buccal swab is the best specimen, Viral culture,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Influenza A H3N2 (can increase parotitis cases), Parainfluenza virus types 1-3, Epstein-Barr virus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific antiviral therapy; management is supportive with analgesia, antipyretics, hydration and rest during the self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A negative virologic or serologic result does NOT rule out mumps in a person with clinical signs, especially in vaccinated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mumps."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Overview of Mumps",
+      "kind": "web",
+      "url": "https://www.cdc.gov/mumps/hcp/clinical-overview/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mumps-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of mumps",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Average 16 to 18 days; range 12 to 25",
+              "range": [
+                12,
+                25
+              ]
+            },
+            {
+              "text": "Infectious 2 days before to 5 days after parotitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parotitis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Lasts about 5 days (3 to 7)",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Unilateral in about one-third; fills space behind jaw angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20% of unvaccinated",
+              "op": "=",
+              "value": 20
+            },
+            {
+              "text": "Vaccinated people can still get mumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Buccal swab RT-PCR",
+          "cells": [
+            {
+              "text": "Massage parotid 30 s, swab early (peak shedding within 5 days)"
+            },
+            {
+              "text": "{{hy:Preferred confirmation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mumps IgM",
+          "cells": [
+            {
+              "text": "Often absent or delayed in vaccinated people"
+            },
+            {
+              "text": "A negative test does not exclude mumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG",
+          "cells": [
+            {
+              "text": "Shows past exposure only"
+            },
+            {
+              "text": "Not used to judge immunity of contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amylase and lipase",
+          "cells": [
+            {
+              "text": "Both high suggests pancreatitis"
+            },
+            {
+              "text": "Amylase alone rises with parotitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 30% of unvaccinated postpubertal males; 6% vaccinated",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Commonest complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aseptic meningitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% unvaccinated; 1% or less vaccinated",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "CSF pleocytosis in up to 55% without symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mumps-ddx",
+      "kind": "ddx",
+      "title": "Causes of parotid swelling and orchitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Suppurative bacterial parotitis",
+          "cells": [
+            {
+              "text": "Pus from Stensen duct, very tender, unilateral"
+            },
+            {
+              "text": "Culture of duct pus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other viral parotitis (influenza A H3N2, parainfluenza, EBV, HIV)",
+          "cells": [
+            {
+              "text": "Same picture with different virus"
+            },
+            {
+              "text": "Respiratory or viral PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salivary stone, cyst or tumour",
+          "cells": [
+            {
+              "text": "Unilateral, often painless or meal-related"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome or sarcoidosis",
+          "cells": [
+            {
+              "text": "Chronic bilateral swelling, dry eyes"
+            },
+            {
+              "text": "Autoantibodies or biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "Sudden severe pain, absent cremasteric reflex"
+            },
+            {
+              "text": "{{hy:Urgent Doppler ultrasound}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Urinary or STI symptoms"
+            },
+            {
+              "text": "Urine culture, GC and chlamydia NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteroviral meningitis",
+          "cells": [
+            {
+              "text": "Indistinguishable from mumps meningitis"
+            },
+            {
+              "text": "CSF PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mumps-treatment",
+      "kind": "treatment",
+      "title": "Management of mumps",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "{{hy:All cases; no specific antiviral}}"
+            },
+            {
+              "text": "Analgesia, antipyretics, fluids, avoid acidic foods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchitis care",
+          "cells": [
+            {
+              "text": "Painful testis"
+            },
+            {
+              "text": "Scrotal support, anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Until 5 days after parotitis onset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Admission",
+          "cells": [
+            {
+              "text": "Encephalitis, meningitis with severe features, pancreatitis"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health notification",
+          "cells": [
+            {
+              "text": "All suspected cases"
+            },
+            {
+              "text": "Contact tracing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Third MMR dose",
+          "cells": [
+            {
+              "text": "People at increased risk during an outbreak"
+            },
+            {
+              "text": "Per ACIP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-exposure MMR or immunoglobulin",
+          "cells": [
+            {
+              "text": "Exposed contacts"
+            },
+            {
+              "text": "Not shown to prevent or modify illness; not recommended as PEP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The entry management list mentions post-exposure MMR for contacts, but Harrison pitfalls and CDC state MMR is not recommended as post-exposure prophylaxis; routine and outbreak doses are recommended."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mumps-dx-mgmt",
+      "title": "Diagnosis and management of mumps",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Parotid or salivary swelling, orchitis or aseptic meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Buccal swab RT-PCR after parotid massage; consider IgM",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Isolate until 5 days after parotitis onset",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Acute scrotal pain without parotitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Urgent Doppler to exclude torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Encephalitis, pancreatitis or hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Admit for supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Home supportive care; notify public health",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

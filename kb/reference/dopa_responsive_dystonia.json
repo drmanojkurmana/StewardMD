@@ -1,176 +1,535 @@
 {
- "id": "dopa_responsive_dystonia",
- "name": "Dopa-responsive dystonia",
- "aliases": [
-  "DRD",
-  "Segawa disease",
-  "GCH1",
-  "GTP cyclohydrolase 1 deficiency",
-  "hereditary progressive dystonia with diurnal fluctuation",
-  "DYT5"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Movement-disorder textbooks with peer-reviewed reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female predominance; recessive forms involve tyrosine hydroxylase and sepiapterin reductase",
-   "Classic presentation is childhood-onset lower-limb dystonia causing gait disturbance, often with a striking diurnal fluctuation (symptoms mild in the morning and worsening through the day)",
-   "The defining feature is a dramatic and sustained response to low-dose levodopa, with near-complete and durable symptom control and without the motor fluctuations seen in Parkinson disease",
-   "Because the levodopa response is so characteristic and life-changing, a therapeutic levodopa trial is essential in any child or young person with unexplained dystonia or an atypical spastic-diplegia-like picture",
-   "Some patients are misdiagnosed with cerebral palsy or hereditary spastic paraplegia for years before a levodopa trial reveals the diagnosis",
-   "Later-onset presentations can mimic parkinsonism, and features may include brisk reflexes and an extensor plantar response, adding to diagnostic confusion",
-   "Diagnosis is supported by cerebrospinal fluid neurotransmitter and pterin analysis and by phenylalanine loading, and confirmed by molecular genetic testing",
-   "Unlike most dystonias the disorder is eminently treatable, so recognition carries a high clinical payoff"
+  "id": "dopa_responsive_dystonia",
+  "name": "Dopa-responsive dystonia",
+  "aliases": [
+    "DRD",
+    "Segawa disease",
+    "GCH1",
+    "GTP cyclohydrolase 1 deficiency",
+    "hereditary progressive dystonia with diurnal fluctuation",
+    "DYT5"
   ],
-  "pathophysiology": "Dopa-responsive dystonia is a disorder of dopamine biosynthesis. In the common autosomal dominant form, variants in GCH1 reduce GTP cyclohydrolase 1 activity, the first and rate-limiting step in producing tetrahydrobiopterin, the essential cofactor for tyrosine hydroxylase. Reduced cofactor availability lowers dopamine synthesis in nigrostriatal neurons without causing their degeneration, so the deficit is biochemical rather than structural. Because the neurons remain intact, replacing the downstream product with levodopa restores near-normal dopaminergic signalling, explaining the sustained and complete response and the absence of levodopa-related motor complications.",
-  "additionalDifferentials": [
-   "Cerebral palsy (spastic diplegia)",
-   "Hereditary spastic paraplegia",
-   "Young-onset Parkinson disease and other genetic parkinsonism",
-   "DYT1 and other early-onset primary dystonias",
-   "Juvenile Huntington disease",
-   "Other inborn errors of neurotransmitter metabolism"
-  ],
-  "additionalInvestigations": [
-   "A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response",
-   "Cerebrospinal fluid neurotransmitter and pterin (biopterin/neopterin) analysis",
-   "Phenylalanine loading test to assess tetrahydrobiopterin metabolism",
-   "Molecular genetic testing of GCH1 and, where indicated, tyrosine hydroxylase and sepiapterin reductase genes",
-   "Brain MRI, typically normal, to exclude structural and neurodegenerative causes"
-  ],
-  "redFlags": [
-   "Diurnally fluctuating dystonia in a child that has been labelled cerebral palsy without a levodopa trial",
-   "Progressive dystonia with developmental regression suggesting a broader neurotransmitter disorder",
-   "Severe generalised dystonia impairing gait, feeding, or respiration",
-   "Failure to respond to an adequate levodopa trial, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "With levodopa treatment the prognosis is excellent: most patients achieve near-complete, durable symptom control and normal or near-normal function, and the benefit is sustained for decades without the motor complications typical of Parkinson disease. Untreated, symptoms progress and cause significant disability.",
-  "pitfalls": [
-   "Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder",
-   "Accepting a longstanding label of cerebral palsy or spastic paraplegia without questioning atypical features such as diurnal fluctuation",
-   "Attributing a partial or absent response to inadequate trial duration rather than reassessing the diagnosis",
-   "Overlooking the recessive tyrosine hydroxylase and sepiapterin reductase forms, which may have a more complex phenotype"
-  ],
-  "references": [
-   "GeneReviews: GTP Cyclohydrolase 1-Deficient Dopa-Responsive Dystonia",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained response, and should be trialled in any child with unexplained dystonia",
-   "Anticholinergic agents or a tetrahydrobiopterin cofactor approach considered in recessive tyrosine hydroxylase or sepiapterin reductase forms where the levodopa response is incomplete",
-   "Long-term levodopa is well tolerated without the motor fluctuations of Parkinson disease, so a stable dose can be maintained with monitoring of response",
-   "Physiotherapy and rehabilitation as adjuncts to optimise gait and function",
-   "Revisit the diagnosis with a levodopa trial in those previously labelled with cerebral palsy or hereditary spastic paraplegia, so the treatable disorder is not missed",
-   "Neurology and clinical genetics follow-up",
-   "Genetic counselling and family testing given autosomal dominant GCH1 inheritance with reduced penetrance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dopa_responsive_dystonia-pathway",
-   "title": "Dopa-responsive dystonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female predominance; recessive forms involve tyrosine hydroxylase and sepiapterin reductase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diurnally fluctuating dystonia in a child that has been labelled cerebral palsy without a levodopa trial",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response, Cerebrospinal fluid neurotransmitter and pterin (biopterin/neopterin) analysis, Phenylalanine loading test to assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained response, and should be trialled in any child with unexplained dystonia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dopa-responsive dystonia."
-  }
- ],
- "tables": [
-  {
-   "id": "dopa_responsive_dystonia-matrix",
-   "title": "Dopa-responsive dystonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Movement-disorder textbooks with peer-reviewed reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female predominance; recessive forms involve tyrosine hydroxylase and sepiapterin reductase",
+      "Classic presentation is childhood-onset lower-limb dystonia causing gait disturbance, often with a striking diurnal fluctuation (symptoms mild in the morning and worsening through the day)",
+      "The defining feature is a dramatic and sustained response to low-dose levodopa, with near-complete and durable symptom control and without the motor fluctuations seen in Parkinson disease",
+      "Because the levodopa response is so characteristic and life-changing, a therapeutic levodopa trial is essential in any child or young person with unexplained dystonia or an atypical spastic-diplegia-like picture",
+      "Some patients are misdiagnosed with cerebral palsy or hereditary spastic paraplegia for years before a levodopa trial reveals the diagnosis",
+      "Later-onset presentations can mimic parkinsonism, and features may include brisk reflexes and an extensor plantar response, adding to diagnostic confusion",
+      "Diagnosis is supported by cerebrospinal fluid neurotransmitter and pterin analysis and by phenylalanine loading, and confirmed by molecular genetic testing",
+      "Unlike most dystonias the disorder is eminently treatable, so recognition carries a high clinical payoff"
     ],
-    [
-     "Key Investigations",
-     "A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response, Cerebrospinal fluid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dopa-responsive dystonia is a disorder of dopamine biosynthesis. In the common autosomal dominant form, variants in GCH1 reduce GTP cyclohydrolase 1 activity, the first and rate-limiting step in producing tetrahydrobiopterin, the essential cofactor for tyrosine hydroxylase. Reduced cofactor availability lowers dopamine synthesis in nigrostriatal neurons without causing their degeneration, so the deficit is biochemical rather than structural. Because the neurons remain intact, replacing the downstream product with levodopa restores near-normal dopaminergic signalling, explaining the sustained and complete response and the absence of levodopa-related motor complications.",
+    "additionalDifferentials": [
+      "Cerebral palsy (spastic diplegia)",
+      "Hereditary spastic paraplegia",
+      "Young-onset Parkinson disease and other genetic parkinsonism",
+      "DYT1 and other early-onset primary dystonias",
+      "Juvenile Huntington disease",
+      "Other inborn errors of neurotransmitter metabolism"
     ],
-    [
-     "Primary Differentials",
-     "Cerebral palsy (spastic diplegia), Hereditary spastic paraplegia, Young-onset Parkinson disease and other genetic parkinsonism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response",
+      "Cerebrospinal fluid neurotransmitter and pterin (biopterin/neopterin) analysis",
+      "Phenylalanine loading test to assess tetrahydrobiopterin metabolism",
+      "Molecular genetic testing of GCH1 and, where indicated, tyrosine hydroxylase and sepiapterin reductase genes",
+      "Brain MRI, typically normal, to exclude structural and neurodegenerative causes"
     ],
-    [
-     "Management Strategy",
-     "Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained",
-     "Core treatment modality"
+    "redFlags": [
+      "Diurnally fluctuating dystonia in a child that has been labelled cerebral palsy without a levodopa trial",
+      "Progressive dystonia with developmental regression suggesting a broader neurotransmitter disorder",
+      "Severe generalised dystonia impairing gait, feeding, or respiration",
+      "Failure to respond to an adequate levodopa trial, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "With levodopa treatment the prognosis is excellent: most patients achieve near-complete, durable symptom control and normal or near-normal function, and the benefit is sustained for decades without the motor complications typical of Parkinson disease. Untreated, symptoms progress and cause significant disability.",
+    "pitfalls": [
+      "Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder",
+      "Accepting a longstanding label of cerebral palsy or spastic paraplegia without questioning atypical features such as diurnal fluctuation",
+      "Attributing a partial or absent response to inadequate trial duration rather than reassessing the diagnosis",
+      "Overlooking the recessive tyrosine hydroxylase and sepiapterin reductase forms, which may have a more complex phenotype"
+    ],
+    "references": [
+      "GeneReviews: GTP Cyclohydrolase 1-Deficient Dopa-Responsive Dystonia",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained response, and should be trialled in any child with unexplained dystonia",
+      "Anticholinergic agents or a tetrahydrobiopterin cofactor approach considered in recessive tyrosine hydroxylase or sepiapterin reductase forms where the levodopa response is incomplete",
+      "Long-term levodopa is well tolerated without the motor fluctuations of Parkinson disease, so a stable dose can be maintained with monitoring of response",
+      "Physiotherapy and rehabilitation as adjuncts to optimise gait and function",
+      "Revisit the diagnosis with a levodopa trial in those previously labelled with cerebral palsy or hereditary spastic paraplegia, so the treatable disorder is not missed",
+      "Neurology and clinical genetics follow-up",
+      "Genetic counselling and family testing given autosomal dominant GCH1 inheritance with reduced penetrance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dopa-responsive dystonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dopa-responsive-dystonia-real-image",
-   "title": "Dopa-responsive dystonia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dopa_responsive_dystonia-pathway",
+      "title": "Dopa-responsive dystonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female predominance; recessive forms involve tyrosine hydroxylase and sepiapterin reductase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diurnally fluctuating dystonia in a child that has been labelled cerebral palsy without a levodopa trial",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response, Cerebrospinal fluid neurotransmitter and pterin (biopterin/neopterin) analysis, Phenylalanine loading test to assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained response, and should be trialled in any child with unexplained dystonia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dopa-responsive dystonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dopa_responsive_dystonia-matrix",
+      "title": "Dopa-responsive dystonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most often caused by autosomal dominant variants in GCH1 (GTP cyclohydrolase 1), with reduced penetrance and a female",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "A carefully monitored therapeutic levodopa trial to demonstrate the characteristic sustained response, Cerebrospinal fluid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebral palsy (spastic diplegia), Hereditary spastic paraplegia, Young-onset Parkinson disease and other genetic parkinsonism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Low-dose levodopa with a peripheral decarboxylase inhibitor is the definitive treatment, giving a dramatic and sustained",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to undertake a levodopa trial in young-onset dystonia and thereby missing an eminently treatable disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dopa-responsive dystonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Movement-disorder textbooks with peer-reviewed reviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dopa_responsive_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Monitored therapeutic levodopa trial",
+          "cells": [
+            {
+              "text": "Characteristic sustained response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF neurotransmitter and pterin analysis",
+          "cells": [
+            {
+              "text": "Neurotransmitter and biopterin or neopterin pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenylalanine loading test",
+          "cells": [
+            {
+              "text": "Tetrahydrobiopterin metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCH1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "GCH1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI, typically normal",
+          "cells": [
+            {
+              "text": "Excludes structural and neurodegenerative causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dopa_responsive_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral palsy (spastic diplegia)",
+          "cells": [
+            {
+              "text": "Diurnal fluctuation is atypical for cerebral palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegia",
+          "cells": [
+            {
+              "text": "Atypical features such as diurnal fluctuation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dopa_responsive_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose levodopa with decarboxylase inhibitor",
+          "cells": [
+            {
+              "text": "Definitive treatment with a dramatic, sustained response; trial in unexplained dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinergics or BH4 approach",
+          "cells": [
+            {
+              "text": "Recessive tyrosine hydroxylase or sepiapterin reductase forms with incomplete response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term levodopa",
+          "cells": [
+            {
+              "text": "Well tolerated without Parkinson-type motor fluctuations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Optimises gait and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revisit the diagnosis",
+          "cells": [
+            {
+              "text": "Children labelled cerebral palsy or spastic paraplegia should have a levodopa trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and genetics follow-up",
+          "cells": [
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant GCH1 with reduced penetrance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dopa_responsive_dystonia-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dopa_responsive_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Dopa-responsive dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dopa-responsive dystonia: diurnally fluctuating dystonia in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive dystonia with regression, severe generalised dystonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for severe dystonia affecting gait, feeding or breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Monitored levodopa trial; CSF neurotransmitters and pterins; GCH1 testing; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does a monitored levodopa trial give a sustained response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cerebral palsy, spastic paraplegia, young-onset parkinsonism or DYT1",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose levodopa with decarboxylase inhibitor; trial in unexplained dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term levodopa is well tolerated without Parkinson-type fluctuations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticholinergics or BH4 approach in recessive TH or sepiapterin reductase forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to optimise gait and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal dominant GCH1",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with levodopa: durable near-normal control for decades",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,494 @@
 {
- "id": "activated_rac2_defect",
- "name": "RAC2 defect",
- "aliases": [
-  "RAC2 defect",
-  "RAC2 deficiency",
-  "Rac2 GTPase defect",
-  "RAC2 dominant-negative neutrophil dysfunction",
-  "RAC2 activating (gain-of-function) immunodeficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in neutrophils and lymphocytes",
-   "Dominant-negative mutations classically cause a neutrophil-function defect that resembles leucocyte adhesion deficiency, with poor wound healing, delayed cord separation, and severe bacterial infection despite a rising neutrophil count",
-   "Activating (gain-of-function) mutations instead drive a combined immunodeficiency with progressive T- and B-lymphopenia, sometimes detectable through newborn severe combined immunodeficiency screening",
-   "Neutrophils show impaired chemotaxis, superoxide generation, and degranulation, so abscesses form poorly and infections are hard to clear",
-   "Presentation is usually in infancy or early childhood with recurrent and invasive bacterial infections",
-   "Diagnosis integrates neutrophil-function testing and lymphocyte studies with confirmatory RAC2 genetic analysis, and the mutation class guides interpretation",
-   "Management includes antimicrobial prophylaxis and treatment of infection, with haematopoietic stem cell transplantation for severe combined phenotypes"
+  "id": "activated_rac2_defect",
+  "name": "RAC2 defect",
+  "aliases": [
+    "RAC2 defect",
+    "RAC2 deficiency",
+    "Rac2 GTPase defect",
+    "RAC2 dominant-negative neutrophil dysfunction",
+    "RAC2 activating (gain-of-function) immunodeficiency"
   ],
-  "pathophysiology": "RAC2 encodes a Rho-family small GTPase expressed almost exclusively in blood cells, where it cycles between active and inactive states to control actin-dependent processes and assembly of the neutrophil oxidase. In neutrophils, RAC2 signalling is needed for directed migration toward chemotactic signals, for the respiratory burst that generates microbicidal superoxide, and for granule release. Dominant-negative mutations block normal RAC2 activity, crippling neutrophil chemotaxis and killing so that bacteria are not cleared despite adequate cell numbers, mimicking a leucocyte adhesion defect. Activating mutations lock the GTPase in a constitutively signalling state that disturbs lymphocyte development and survival, producing progressive lymphopenia and a combined immunodeficiency. The net effect in either case is a serious predisposition to bacterial and, in the activating forms, broader infection.",
-  "additionalDifferentials": [
-   "Leucocyte adhesion deficiency types",
-   "Chronic granulomatous disease",
-   "Severe congenital neutropenia",
-   "Typical severe combined immunodeficiency (for the activating phenotype)",
-   "Other cytoskeletal immune defects such as DOCK2 deficiency",
-   "Glycogen storage disease type Ib with neutrophil dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Neutrophil chemotaxis, oxidative burst, and degranulation assays",
-   "Full blood count with neutrophil counts over time",
-   "Lymphocyte subset enumeration and T-cell receptor excision circle quantification for combined phenotypes",
-   "T-cell proliferation and immunoglobulin studies",
-   "Genetic sequencing of RAC2 with interpretation of mutation type",
-   "Adhesion-molecule expression studies to distinguish leucocyte adhesion deficiency",
-   "Microbiological cultures to guide antimicrobial therapy"
-  ],
-  "redFlags": [
-   "Severe bacterial infection with poor wound healing and delayed cord separation",
-   "Abscesses that fail to form pus despite high neutrophil counts",
-   "Progressive lymphopenia or an abnormal newborn screen in the activating phenotype",
-   "Recurrent invasive infection in infancy",
-   "A family history of early infection consistent with a dominant or other inheritance pattern"
-  ],
-  "prognosis": "Prognosis depends on the mutation class and severity; the neutrophil-function defect can be life-threatening in infancy and the combined immunodeficiency of activating mutations is severe, with haematopoietic stem cell transplantation offering the prospect of cure when infections are controlled.",
-  "pitfalls": [
-   "Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification",
-   "Reassurance based on a normal or high neutrophil count despite defective function",
-   "Overlooking progressive lymphopenia in activating mutations",
-   "Giving live vaccines before a combined defect is excluded",
-   "Delaying definitive treatment while recurrent infections accumulate"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis",
-   "Haematopoietic stem cell transplantation as the definitive curative option for the severe neutrophil-function defect or the combined immunodeficiency",
-   "Immunoglobulin replacement and, for combined phenotypes, antifungal and Pneumocystis prophylaxis",
-   "Protective isolation and expedited transplant work-up for gain-of-function combined immunodeficiency given progressive lymphopenia",
-   "Attentive wound care and monitoring of impaired wound healing and delayed umbilical cord separation",
-   "Coordinated multidisciplinary clinical immunology and transplant team involvement",
-   "Genetic counselling with family testing, and use of newborn severe combined immunodeficiency screening for activating variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "activated_rac2_defect-pathway",
-   "title": "RAC2 defect: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in neutrophils and lymphocytes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe bacterial infection with poor wound healing and delayed cord separation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Neutrophil chemotaxis, oxidative burst, and degranulation assays, Full blood count with neutrophil counts over time, Lymphocyte subset enumeration and T-cell receptor excision circle quantification for combined phenotypes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rac2 defect."
-  }
- ],
- "tables": [
-  {
-   "id": "activated_rac2_defect-matrix",
-   "title": "RAC2 defect: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in neutrophils and lymphocytes",
+      "Dominant-negative mutations classically cause a neutrophil-function defect that resembles leucocyte adhesion deficiency, with poor wound healing, delayed cord separation, and severe bacterial infection despite a rising neutrophil count",
+      "Activating (gain-of-function) mutations instead drive a combined immunodeficiency with progressive T- and B-lymphopenia, sometimes detectable through newborn severe combined immunodeficiency screening",
+      "Neutrophils show impaired chemotaxis, superoxide generation, and degranulation, so abscesses form poorly and infections are hard to clear",
+      "Presentation is usually in infancy or early childhood with recurrent and invasive bacterial infections",
+      "Diagnosis integrates neutrophil-function testing and lymphocyte studies with confirmatory RAC2 genetic analysis, and the mutation class guides interpretation",
+      "Management includes antimicrobial prophylaxis and treatment of infection, with haematopoietic stem cell transplantation for severe combined phenotypes"
     ],
-    [
-     "Key Investigations",
-     "Neutrophil chemotaxis, oxidative burst, and degranulation assays, Full blood count with neutrophil counts over time, Lymphocyte",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "RAC2 encodes a Rho-family small GTPase expressed almost exclusively in blood cells, where it cycles between active and inactive states to control actin-dependent processes and assembly of the neutrophil oxidase. In neutrophils, RAC2 signalling is needed for directed migration toward chemotactic signals, for the respiratory burst that generates microbicidal superoxide, and for granule release. Dominant-negative mutations block normal RAC2 activity, crippling neutrophil chemotaxis and killing so that bacteria are not cleared despite adequate cell numbers, mimicking a leucocyte adhesion defect. Activating mutations lock the GTPase in a constitutively signalling state that disturbs lymphocyte development and survival, producing progressive lymphopenia and a combined immunodeficiency. The net effect in either case is a serious predisposition to bacterial and, in the activating forms, broader infection.",
+    "additionalDifferentials": [
+      "Leucocyte adhesion deficiency types",
+      "Chronic granulomatous disease",
+      "Severe congenital neutropenia",
+      "Typical severe combined immunodeficiency (for the activating phenotype)",
+      "Other cytoskeletal immune defects such as DOCK2 deficiency",
+      "Glycogen storage disease type Ib with neutrophil dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Leucocyte adhesion deficiency types, Chronic granulomatous disease, Severe congenital neutropenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Neutrophil chemotaxis, oxidative burst, and degranulation assays",
+      "Full blood count with neutrophil counts over time",
+      "Lymphocyte subset enumeration and T-cell receptor excision circle quantification for combined phenotypes",
+      "T-cell proliferation and immunoglobulin studies",
+      "Genetic sequencing of RAC2 with interpretation of mutation type",
+      "Adhesion-molecule expression studies to distinguish leucocyte adhesion deficiency",
+      "Microbiological cultures to guide antimicrobial therapy"
     ],
-    [
-     "Management Strategy",
-     "Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe bacterial infection with poor wound healing and delayed cord separation",
+      "Abscesses that fail to form pus despite high neutrophil counts",
+      "Progressive lymphopenia or an abnormal newborn screen in the activating phenotype",
+      "Recurrent invasive infection in infancy",
+      "A family history of early infection consistent with a dominant or other inheritance pattern"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the mutation class and severity; the neutrophil-function defect can be life-threatening in infancy and the combined immunodeficiency of activating mutations is severe, with haematopoietic stem cell transplantation offering the prospect of cure when infections are controlled.",
+    "pitfalls": [
+      "Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification",
+      "Reassurance based on a normal or high neutrophil count despite defective function",
+      "Overlooking progressive lymphopenia in activating mutations",
+      "Giving live vaccines before a combined defect is excluded",
+      "Delaying definitive treatment while recurrent infections accumulate"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis",
+      "Haematopoietic stem cell transplantation as the definitive curative option for the severe neutrophil-function defect or the combined immunodeficiency",
+      "Immunoglobulin replacement and, for combined phenotypes, antifungal and Pneumocystis prophylaxis",
+      "Protective isolation and expedited transplant work-up for gain-of-function combined immunodeficiency given progressive lymphopenia",
+      "Attentive wound care and monitoring of impaired wound healing and delayed umbilical cord separation",
+      "Coordinated multidisciplinary clinical immunology and transplant team involvement",
+      "Genetic counselling with family testing, and use of newborn severe combined immunodeficiency screening for activating variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for rac2 defect."
-  }
- ],
- "diagrams": [
-  {
-   "id": "activated-rac2-defect-real-image",
-   "title": "RAC2 defect: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "activated_rac2_defect-pathway",
+      "title": "RAC2 defect: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in neutrophils and lymphocytes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe bacterial infection with poor wound healing and delayed cord separation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Neutrophil chemotaxis, oxidative burst, and degranulation assays, Full blood count with neutrophil counts over time, Lymphocyte subset enumeration and T-cell receptor excision circle quantification for combined phenotypes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rac2 defect."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "activated_rac2_defect-matrix",
+      "title": "RAC2 defect: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of immunodeficiencies caused by mutations in RAC2, a haematopoietic small GTPase that regulates the actin cytoskeleton in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Neutrophil chemotaxis, oxidative burst, and degranulation assays, Full blood count with neutrophil counts over time, Lymphocyte",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Leucocyte adhesion deficiency types, Chronic granulomatous disease, Severe congenital neutropenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt aggressive treatment of bacterial infections with targeted antibiotics, together with antimicrobial prophylaxis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the neutrophil-function defect with leucocyte adhesion deficiency without genetic clarification",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rac2 defect."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "activated_rac2_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neutrophil chemotaxis, oxidative burst and degranulation assays",
+          "cells": [
+            {
+              "text": "Neutrophil function defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with neutrophil counts over time",
+          "cells": [
+            {
+              "text": "Rising neutrophil count despite infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset enumeration and TREC quantification",
+          "cells": [
+            {
+              "text": "Combined phenotype with lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RAC2 genetic sequencing",
+          "cells": [
+            {
+              "text": "Mutation type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adhesion-molecule expression studies",
+          "cells": [
+            {
+              "text": "Distinguishes leucocyte adhesion deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological cultures",
+          "cells": [
+            {
+              "text": "Guides antimicrobial therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_rac2_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte adhesion deficiency types",
+          "cells": [
+            {
+              "text": "Resembles RAC2 neutrophil defect"
+            },
+            {
+              "text": "Adhesion-molecule expression studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe congenital neutropenia",
+          "cells": [
+            {
+              "text": "Neutrophil count is raised rather than low"
+            },
+            {
+              "text": "Full blood count over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical severe combined immunodeficiency (activating phenotype)",
+          "cells": [
+            {
+              "text": "Progressive T- and B-lymphopenia"
+            },
+            {
+              "text": "TREC quantification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_rac2_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted antibiotics and antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Bacterial infection"
+            },
+            {
+              "text": "Prompt aggressive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive curative option"
+            },
+            {
+              "text": "Severe neutrophil defect or combined immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement; antifungal and Pneumocystis prophylaxis",
+          "cells": [
+            {
+              "text": "Combined phenotypes"
+            },
+            {
+              "text": "Antifungal and PJP prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective isolation and expedited transplant work-up",
+          "cells": [
+            {
+              "text": "Gain-of-function combined immunodeficiency"
+            },
+            {
+              "text": "Progressive lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and monitoring of healing and cord separation",
+          "cells": [
+            {
+              "text": "Impaired wound healing and delayed cord separation"
+            },
+            {
+              "text": "Clinical monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and newborn SCID screening",
+          "cells": [
+            {
+              "text": "Family testing and activating variants"
+            },
+            {
+              "text": "Newborn screen detects activating variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "activated_rac2_defect-dx-mgmt",
+      "title": "Diagnosis and management of RAC2 defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe bacterial infection with poor wound healing or delayed cord separation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abscesses lack pus despite high neutrophil count, or progressive lymphopenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; prompt antibiotics for invasive infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neutrophil function assays, FBC counts over time and lymphocyte subsets",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "RAC2 variant confirmed by sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Determine mutation type; adhesion-molecule expression to exclude LAD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review LAD, CGD, severe congenital neutropenia and cytoskeletal defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Targeted antibiotics and antimicrobial prophylaxis for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement and antifungal or PJP prophylaxis for combined disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Expedited transplant work-up; haematopoietic stem cell transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neutrophil defect can be life-threatening in infancy; HSCT offers cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

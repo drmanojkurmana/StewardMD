@@ -1,175 +1,491 @@
 {
- "id": "acute_zonal_occult_outer_retinopathy",
- "name": "Acute zonal occult outer retinopathy (AZOOR)",
- "aliases": [
-  "AZOOR",
-  "acute zonal occult outer retinopathy",
-  "AZOOR complex"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
-   "Presents with acute onset of photopsia (shimmering or flickering lights) and one or more zones of visual field loss, frequently in the peripapillary region",
-   "The fundus characteristically looks normal or near-normal early in the disease, so the retinopathy is described as occult",
-   "Electroretinography is key to diagnosis, revealing outer retinal dysfunction in affected zones despite an unremarkable fundus appearance",
-   "Fundus autofluorescence commonly shows a demarcating line or trizonal pattern separating normal from affected retina and is very useful for detecting and monitoring lesions",
-   "Optical coherence tomography demonstrates disruption or loss of the outer retinal bands (ellipsoid zone) corresponding to the symptomatic field defect",
-   "Over time affected zones may develop pigmentary changes and retinal pigment epithelial atrophy, and disease can be unilateral or bilateral",
-   "Management is debated and there is no proven therapy; observation is common and immunosuppression is sometimes used in progressive cases"
+  "id": "acute_zonal_occult_outer_retinopathy",
+  "name": "Acute zonal occult outer retinopathy (AZOOR)",
+  "aliases": [
+    "AZOOR",
+    "acute zonal occult outer retinopathy",
+    "AZOOR complex"
   ],
-  "pathophysiology": "Acute zonal occult outer retinopathy is characterised by dysfunction and degeneration of the photoreceptors and outer retina in discrete zones, often beginning adjacent to the optic disc and spreading. The precise mechanism is uncertain, but an autoimmune or inflammatory process targeting photoreceptors, possibly triggered in genetically susceptible individuals, is favoured; a viral prodrome is sometimes reported. Loss of the ellipsoid zone and photoreceptor outer segments produces the field defects and photopsias, while the retinal pigment epithelium and inner retina are relatively preserved early, explaining the near-normal fundus and the value of functional and autofluorescence imaging. Chronic disease leads to zonal outer retinal atrophy.",
-  "additionalDifferentials": [
-   "Cancer-associated and melanoma-associated retinopathy",
-   "Multiple evanescent white dot syndrome",
-   "Multifocal choroiditis and other white dot syndromes",
-   "Retinitis pigmentosa and other inherited photoreceptor dystrophies",
-   "Optic neuritis or other optic neuropathy",
-   "Non-organic (functional) visual loss",
-   "Toxic (for example hydroxychloroquine) retinopathy"
-  ],
-  "additionalInvestigations": [
-   "Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction",
-   "Fundus autofluorescence to identify demarcation lines and the trizonal pattern",
-   "Spectral-domain optical coherence tomography to show ellipsoid zone disruption",
-   "Automated visual field testing to map and monitor the scotoma and often an enlarged blind spot",
-   "Fluorescein angiography, usually unremarkable, to exclude inflammatory or vascular mimics",
-   "Investigation for paraneoplastic retinopathy and antiretinal antibodies when clinically suspected"
-  ],
-  "redFlags": [
-   "Progressive enlargement of field loss threatening central vision",
-   "Bilateral or rapidly advancing disease suggesting a more aggressive process",
-   "Features raising concern for paraneoplastic retinopathy and underlying malignancy",
-   "Development of secondary choroidal neovascularisation"
-  ],
-  "prognosis": "Many patients stabilise with persistent but non-progressive field defects and reasonable central acuity, though photopsias and scotomata may remain; a minority experience progressive or recurrent disease with expanding zones of atrophy and permanent visual field loss.",
-  "pitfalls": [
-   "Dismissing a patient with photopsia and field loss as functional because the fundus looks normal",
-   "Failing to obtain electroretinography and autofluorescence, which reveal the occult pathology",
-   "Missing an underlying malignancy in what is actually paraneoplastic retinopathy",
-   "Confusing AZOOR with retinitis pigmentosa given overlapping photoreceptor dysfunction",
-   "Over-treating stable disease with immunosuppression of unproven benefit"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring",
-   "Consider a trial of systemic corticosteroid or steroid-sparing immunosuppression in progressive disease where an inflammatory mechanism is favoured",
-   "Monitor progression with fundus autofluorescence, spectral-domain optical coherence tomography, electroretinography and automated visual fields",
-   "Investigate for and exclude mimics, including paraneoplastic retinopathy with antiretinal antibodies and infective or inflammatory causes",
-   "Provide low-vision aids and rehabilitation for persistent scotomata and field loss",
-   "Refer to a medical retina or uveitis specialist and escalate treatment when zones expand or vision deteriorates"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_zonal_occult_outer_retinopathy-pathway",
-   "title": "Acute zonal occult outer retinopathy (AZOOR): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive enlargement of field loss threatening central vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction, Fundus autofluorescence to identify demarcation lines and the trizonal pattern, Spectral-domain optical coherence tomography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a patient with photopsia and field loss as functional because the fundus looks normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute zonal occult outer retinopathy (azoor)."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_zonal_occult_outer_retinopathy-matrix",
-   "title": "Acute zonal occult outer retinopathy (AZOOR): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
+      "Presents with acute onset of photopsia (shimmering or flickering lights) and one or more zones of visual field loss, frequently in the peripapillary region",
+      "The fundus characteristically looks normal or near-normal early in the disease, so the retinopathy is described as occult",
+      "Electroretinography is key to diagnosis, revealing outer retinal dysfunction in affected zones despite an unremarkable fundus appearance",
+      "Fundus autofluorescence commonly shows a demarcating line or trizonal pattern separating normal from affected retina and is very useful for detecting and monitoring lesions",
+      "Optical coherence tomography demonstrates disruption or loss of the outer retinal bands (ellipsoid zone) corresponding to the symptomatic field defect",
+      "Over time affected zones may develop pigmentary changes and retinal pigment epithelial atrophy, and disease can be unilateral or bilateral",
+      "Management is debated and there is no proven therapy; observation is common and immunosuppression is sometimes used in progressive cases"
     ],
-    [
-     "Key Investigations",
-     "Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction, Fundus autofluorescence to identify",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute zonal occult outer retinopathy is characterised by dysfunction and degeneration of the photoreceptors and outer retina in discrete zones, often beginning adjacent to the optic disc and spreading. The precise mechanism is uncertain, but an autoimmune or inflammatory process targeting photoreceptors, possibly triggered in genetically susceptible individuals, is favoured; a viral prodrome is sometimes reported. Loss of the ellipsoid zone and photoreceptor outer segments produces the field defects and photopsias, while the retinal pigment epithelium and inner retina are relatively preserved early, explaining the near-normal fundus and the value of functional and autofluorescence imaging. Chronic disease leads to zonal outer retinal atrophy.",
+    "additionalDifferentials": [
+      "Cancer-associated and melanoma-associated retinopathy",
+      "Multiple evanescent white dot syndrome",
+      "Multifocal choroiditis and other white dot syndromes",
+      "Retinitis pigmentosa and other inherited photoreceptor dystrophies",
+      "Optic neuritis or other optic neuropathy",
+      "Non-organic (functional) visual loss",
+      "Toxic (for example hydroxychloroquine) retinopathy"
     ],
-    [
-     "Primary Differentials",
-     "Cancer-associated and melanoma-associated retinopathy, Multiple evanescent white dot syndrome, Multifocal choroiditis and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction",
+      "Fundus autofluorescence to identify demarcation lines and the trizonal pattern",
+      "Spectral-domain optical coherence tomography to show ellipsoid zone disruption",
+      "Automated visual field testing to map and monitor the scotoma and often an enlarged blind spot",
+      "Fluorescein angiography, usually unremarkable, to exclude inflammatory or vascular mimics",
+      "Investigation for paraneoplastic retinopathy and antiretinal antibodies when clinically suspected"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive enlargement of field loss threatening central vision",
+      "Bilateral or rapidly advancing disease suggesting a more aggressive process",
+      "Features raising concern for paraneoplastic retinopathy and underlying malignancy",
+      "Development of secondary choroidal neovascularisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a patient with photopsia and field loss as functional because the fundus looks normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients stabilise with persistent but non-progressive field defects and reasonable central acuity, though photopsias and scotomata may remain; a minority experience progressive or recurrent disease with expanding zones of atrophy and permanent visual field loss.",
+    "pitfalls": [
+      "Dismissing a patient with photopsia and field loss as functional because the fundus looks normal",
+      "Failing to obtain electroretinography and autofluorescence, which reveal the occult pathology",
+      "Missing an underlying malignancy in what is actually paraneoplastic retinopathy",
+      "Confusing AZOOR with retinitis pigmentosa given overlapping photoreceptor dysfunction",
+      "Over-treating stable disease with immunosuppression of unproven benefit"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring",
+      "Consider a trial of systemic corticosteroid or steroid-sparing immunosuppression in progressive disease where an inflammatory mechanism is favoured",
+      "Monitor progression with fundus autofluorescence, spectral-domain optical coherence tomography, electroretinography and automated visual fields",
+      "Investigate for and exclude mimics, including paraneoplastic retinopathy with antiretinal antibodies and infective or inflammatory causes",
+      "Provide low-vision aids and rehabilitation for persistent scotomata and field loss",
+      "Refer to a medical retina or uveitis specialist and escalate treatment when zones expand or vision deteriorates"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute zonal occult outer retinopathy (azoor)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-zonal-occult-outer-retinopathy-real-image",
-   "title": "Acute zonal occult outer retinopathy (AZOOR): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_zonal_occult_outer_retinopathy-pathway",
+      "title": "Acute zonal occult outer retinopathy (AZOOR): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive enlargement of field loss threatening central vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction, Fundus autofluorescence to identify demarcation lines and the trizonal pattern, Spectral-domain optical coherence tomography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a patient with photopsia and field loss as functional because the fundus looks normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute zonal occult outer retinopathy (azoor)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_zonal_occult_outer_retinopathy-matrix",
+      "title": "Acute zonal occult outer retinopathy (AZOOR): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects young to middle-aged adults, with a female predominance, and often in patients who are myopic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full-field and multifocal electroretinography to demonstrate zonal outer retinal dysfunction, Fundus autofluorescence to identify",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cancer-associated and melanoma-associated retinopathy, Multiple evanescent white dot syndrome, Multifocal choroiditis and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no established disease-modifying therapy exists and observe stable, non-progressive disease with serial monitoring",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a patient with photopsia and field loss as functional because the fundus looks normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute zonal occult outer retinopathy (azoor)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_zonal_occult_outer_retinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field and multifocal electroretinography",
+          "cells": [
+            {
+              "text": "Zonal outer retinal dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Demarcation lines and trizonal pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectral-domain optical coherence tomography",
+          "cells": [
+            {
+              "text": "Ellipsoid zone disruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated visual field testing",
+          "cells": [
+            {
+              "text": "Scotoma and enlarged blind spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Usually unremarkable; excludes inflammatory or vascular mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic and antiretinal antibody testing",
+          "cells": [
+            {
+              "text": "When clinically suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_zonal_occult_outer_retinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cancer-associated retinopathy",
+          "cells": [
+            {
+              "text": "Paraneoplastic; antiretinal antibodies"
+            },
+            {
+              "text": "Antiretinal antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa and inherited photoreceptor dystrophies",
+          "cells": [
+            {
+              "text": "Inherited photoreceptor dystrophy"
+            },
+            {
+              "text": "Electroretinography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic retinopathy (for example hydroxychloroquine)",
+          "cells": [
+            {
+              "text": "Drug-induced retinopathy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_zonal_occult_outer_retinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation with serial monitoring",
+          "cells": [
+            {
+              "text": "Stable, non-progressive disease"
+            },
+            {
+              "text": "No established disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroid or steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Progressive disease with an inflammatory mechanism"
+            },
+            {
+              "text": "Trial in progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial autofluorescence, OCT, ERG and visual fields",
+          "cells": [
+            {
+              "text": "Tracks progression"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of mimics, including paraneoplastic and infective causes",
+          "cells": [
+            {
+              "text": "Mimics"
+            },
+            {
+              "text": "Antiretinal antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids and rehabilitation",
+          "cells": [
+            {
+              "text": "Persistent scotomata"
+            },
+            {
+              "text": "Field loss support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical retina or uveitis referral",
+          "cells": [
+            {
+              "text": "Expanding zones or deteriorating vision"
+            },
+            {
+              "text": "Escalate treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_zonal_occult_outer_retinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Acute zonal occult outer retinopathy (AZOOR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute photopsia and field loss in a young or middle-aged myope with normal fundus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive field loss threatening central vision or rapid bilateral spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retina specialist review; check for paraneoplastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field and multifocal ERG, fundus autofluorescence, SD-OCT and fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Zonal outer retinal dysfunction on ERG confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude paraneoplastic retinopathy and mimics; consider steroid if progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review cancer-associated retinopathy, MEWDS, RP and toxic retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe stable disease with serial monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroid or steroid-sparing immunosuppression if progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-vision aids and rehabilitation for persistent scotomata",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many stabilise with reasonable central acuity; some progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

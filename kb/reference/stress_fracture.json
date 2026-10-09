@@ -1,175 +1,453 @@
 {
- "id": "stress_fracture",
- "name": "Stress fracture",
- "aliases": [
-  "fatigue fracture",
-  "insufficiency fracture",
-  "march fracture",
-  "bone stress injury"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Sports & Musculoskeletal Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon / standard sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase in training load",
-   "Fatigue fractures occur when normal bone is subjected to repetitive abnormal load, whereas insufficiency fractures occur when normal load acts on weakened bone such as osteoporotic or pathological bone",
-   "Common sites include the metatarsals (march fracture), tibia, navicular, and femoral neck, with the tibia most frequent in runners",
-   "Focal bony tenderness, pain on hopping or percussion, and pain reproduced by loading the bone support the diagnosis",
-   "Early plain radiographs are often normal, and MRI or bone scan is more sensitive for detecting bone stress injury",
-   "Certain high-risk sites, including the tension side of the femoral neck, anterior tibial cortex, navicular, and base of the fifth metatarsal, are prone to non-union or completion and need protected weight-bearing or surgical referral",
-   "Management of low-risk fractures is relative rest, activity modification, and graduated return to loading once pain-free",
-   "In female athletes consider the female athlete triad / relative energy deficiency in sport, with attention to energy availability, menstrual function, and bone health",
-   "Recurrent or multiple stress fractures warrant assessment for metabolic bone disease, vitamin D deficiency, and endocrine causes"
+  "id": "stress_fracture",
+  "name": "Stress fracture",
+  "aliases": [
+    "fatigue fracture",
+    "insufficiency fracture",
+    "march fracture",
+    "bone stress injury"
   ],
-  "pathophysiology": "A stress fracture develops when repetitive submaximal loading causes microdamage to accumulate faster than bone can remodel and repair it. Osteoclastic resorption temporarily outpaces osteoblastic formation, weakening the cortex and, if loading continues, progressing from a stress reaction to a frank fracture line. Fatigue fractures reflect excessive load on normal bone, while insufficiency fractures reflect normal load on abnormally weak bone.",
-  "additionalDifferentials": [
-   "Medial tibial stress syndrome (shin splints)",
-   "Chronic exertional compartment syndrome",
-   "Tendinopathy or muscle strain",
-   "Nerve entrapment",
-   "Osteomyelitis or bone infection",
-   "Osteoid osteoma or other bone tumour",
-   "Pathological fracture from metastasis or metabolic bone disease"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later",
-   "MRI as the preferred sensitive test to grade bone marrow oedema and confirm the fracture",
-   "Radionuclide bone scan as an alternative sensitive investigation",
-   "CT for suspected navicular or other fractures needing detailed cortical assessment",
-   "Metabolic and endocrine workup, vitamin D, and bone density assessment in recurrent, atypical, or insufficiency fractures"
-  ],
-  "redFlags": [
-   "High-risk sites such as the femoral neck (especially tension side), anterior tibia, tarsal navicular, and fifth metatarsal base that risk non-union or displacement",
-   "Groin or hip pain with weight-bearing suggesting femoral neck stress fracture requiring urgent assessment",
-   "Features of pathological or insufficiency fracture such as minimal trauma, older age, or known malignancy",
-   "Systemic symptoms or signs suggesting infection or tumour"
-  ],
-  "prognosis": "Low-risk stress fractures generally heal fully within six to twelve weeks with load modification and graded return, whereas high-risk fractures may progress to non-union or complete fracture and can require prolonged protection or surgery.",
-  "pitfalls": [
-   "Excluding a stress fracture on the basis of a normal early radiograph",
-   "Failing to recognise high-risk sites and continuing loading with risk of completion or non-union",
-   "Overlooking relative energy deficiency in sport or metabolic bone disease in recurrent cases",
-   "Returning to full training too early before the bone has healed"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage",
-   "Protected weight-bearing with a walking boot or crutches for painful lower-limb fractures",
-   "Analgesia with paracetamol for pain control",
-   "Graded, progressive return to activity once pain-free, correcting training errors and biomechanical factors",
-   "Surgical referral and fixation for high-risk sites prone to non-union, including the tension-side femoral neck, anterior tibial cortex, navicular and base of the fifth metatarsal",
-   "Assess and optimise bone health and energy availability, checking vitamin D, calcium and bone density and addressing relative energy deficiency in recurrent or insufficiency fractures",
-   "Physiotherapy for rehabilitation and prevention of recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "stress_fracture-pathway",
-   "title": "Stress fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase in training load",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High-risk sites such as the femoral neck (especially tension side), anterior tibia, tarsal navicular, and fifth metatarsal base that risk non-union or displacement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later, MRI as the preferred sensitive test to grade bone marrow oedema and confirm the fracture,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding a stress fracture on the basis of a normal early radiograph"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of stress fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "stress_fracture-matrix",
-   "title": "Stress fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Sports & Musculoskeletal Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon / standard sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase in training load",
+      "Fatigue fractures occur when normal bone is subjected to repetitive abnormal load, whereas insufficiency fractures occur when normal load acts on weakened bone such as osteoporotic or pathological bone",
+      "Common sites include the metatarsals (march fracture), tibia, navicular, and femoral neck, with the tibia most frequent in runners",
+      "Focal bony tenderness, pain on hopping or percussion, and pain reproduced by loading the bone support the diagnosis",
+      "Early plain radiographs are often normal, and MRI or bone scan is more sensitive for detecting bone stress injury",
+      "Certain high-risk sites, including the tension side of the femoral neck, anterior tibial cortex, navicular, and base of the fifth metatarsal, are prone to non-union or completion and need protected weight-bearing or surgical referral",
+      "Management of low-risk fractures is relative rest, activity modification, and graduated return to loading once pain-free",
+      "In female athletes consider the female athlete triad / relative energy deficiency in sport, with attention to energy availability, menstrual function, and bone health",
+      "Recurrent or multiple stress fractures warrant assessment for metabolic bone disease, vitamin D deficiency, and endocrine causes"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later, MRI as",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A stress fracture develops when repetitive submaximal loading causes microdamage to accumulate faster than bone can remodel and repair it. Osteoclastic resorption temporarily outpaces osteoblastic formation, weakening the cortex and, if loading continues, progressing from a stress reaction to a frank fracture line. Fatigue fractures reflect excessive load on normal bone, while insufficiency fractures reflect normal load on abnormally weak bone.",
+    "additionalDifferentials": [
+      "Medial tibial stress syndrome (shin splints)",
+      "Chronic exertional compartment syndrome",
+      "Tendinopathy or muscle strain",
+      "Nerve entrapment",
+      "Osteomyelitis or bone infection",
+      "Osteoid osteoma or other bone tumour",
+      "Pathological fracture from metastasis or metabolic bone disease"
     ],
-    [
-     "Primary Differentials",
-     "Medial tibial stress syndrome (shin splints), Chronic exertional compartment syndrome, Tendinopathy or muscle strain",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later",
+      "MRI as the preferred sensitive test to grade bone marrow oedema and confirm the fracture",
+      "Radionuclide bone scan as an alternative sensitive investigation",
+      "CT for suspected navicular or other fractures needing detailed cortical assessment",
+      "Metabolic and endocrine workup, vitamin D, and bone density assessment in recurrent, atypical, or insufficiency fractures"
     ],
-    [
-     "Management Strategy",
-     "Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage",
-     "Core treatment modality"
+    "redFlags": [
+      "High-risk sites such as the femoral neck (especially tension side), anterior tibia, tarsal navicular, and fifth metatarsal base that risk non-union or displacement",
+      "Groin or hip pain with weight-bearing suggesting femoral neck stress fracture requiring urgent assessment",
+      "Features of pathological or insufficiency fracture such as minimal trauma, older age, or known malignancy",
+      "Systemic symptoms or signs suggesting infection or tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding a stress fracture on the basis of a normal early radiograph",
-     "Prevent diagnostic or management error"
+    "prognosis": "Low-risk stress fractures generally heal fully within six to twelve weeks with load modification and graded return, whereas high-risk fractures may progress to non-union or complete fracture and can require prolonged protection or surgery.",
+    "pitfalls": [
+      "Excluding a stress fracture on the basis of a normal early radiograph",
+      "Failing to recognise high-risk sites and continuing loading with risk of completion or non-union",
+      "Overlooking relative energy deficiency in sport or metabolic bone disease in recurrent cases",
+      "Returning to full training too early before the bone has healed"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage",
+      "Protected weight-bearing with a walking boot or crutches for painful lower-limb fractures",
+      "Analgesia with paracetamol for pain control",
+      "Graded, progressive return to activity once pain-free, correcting training errors and biomechanical factors",
+      "Surgical referral and fixation for high-risk sites prone to non-union, including the tension-side femoral neck, anterior tibial cortex, navicular and base of the fifth metatarsal",
+      "Assess and optimise bone health and energy availability, checking vitamin D, calcium and bone density and addressing relative energy deficiency in recurrent or insufficiency fractures",
+      "Physiotherapy for rehabilitation and prevention of recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for stress fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "stress-fracture-real-image",
-   "title": "Stress fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "stress_fracture-pathway",
+      "title": "Stress fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase in training load",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High-risk sites such as the femoral neck (especially tension side), anterior tibia, tarsal navicular, and fifth metatarsal base that risk non-union or displacement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later, MRI as the preferred sensitive test to grade bone marrow oedema and confirm the fracture,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding a stress fracture on the basis of a normal early radiograph"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of stress fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "stress_fracture-matrix",
+      "title": "Stress fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as gradually worsening, activity-related localised bone pain that eases with rest, typically after a change or increase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs, recognising they are frequently normal early and may show periosteal reaction or a fracture line later, MRI as",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Medial tibial stress syndrome (shin splints), Chronic exertional compartment syndrome, Tendinopathy or muscle strain",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relative rest and load modification, reducing the offending repetitive activity to allow remodelling to catch up with microdamage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding a stress fracture on the basis of a normal early radiograph",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for stress fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stress_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Often normal early; later callus or lucency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Bone marrow oedema grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radionuclide bone scan",
+          "cells": [
+            {
+              "text": "Sensitive alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Navicular or cortical assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic, vitamin D and bone density assessment",
+          "cells": [
+            {
+              "text": "Recurrent or multiple fractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stress_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Medial tibial stress syndrome (shin splints)",
+          "cells": [
+            {
+              "text": "Diffuse shin pain rather than focal bony tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoid osteoma or other bone tumour",
+          "cells": [
+            {
+              "text": "Night pain; imaging separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stress_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative rest and load modification",
+          "cells": [
+            {
+              "text": "Reducing the repetitive activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protected weight-bearing",
+          "cells": [
+            {
+              "text": "Walking boot or crutches for painful lower-limb fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol",
+          "cells": [
+            {
+              "text": "Analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to activity",
+          "cells": [
+            {
+              "text": "Once pain-free, correcting training errors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "High-risk sites prone to non-union"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health and energy availability",
+          "cells": [
+            {
+              "text": "Vitamin D and relative energy deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Rehabilitation and prevention of recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stress_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Stress fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gradual activity-related focal bone pain with focal tenderness: suspected stress fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (femoral neck stress, groin pain on weight-bearing, insufficiency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for femoral neck or high-risk stress fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; MRI for marrow oedema; bone scan if needed; CT for navicular",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI or bone scan confirm a stress reaction or fracture at a low-risk site?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider shin splints, compartment syndrome or tendinopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest and reduced repetitive load",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protected weight-bearing with walking boot or crutches",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Paracetamol and graded return to activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone health and energy availability assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early return to loading risks incomplete healing and recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,481 @@
 {
- "id": "menetrier_disease",
- "name": "Menetrier disease (hyperplastic gastropathy)",
- "aliases": [
-  "hyperplastic gastropathy",
-  "giant hypertrophic gastritis",
-  "protein-losing hypertrophic gastropathy",
-  "Menetrier's disease"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
-   "Foveolar (mucous cell) hyperplasia with cystic dilatation of glands and loss of parietal cells produces a thickened, boggy mucosa and excess mucus secretion",
-   "A protein-losing gastropathy causes hypoalbuminaemia, which may present with peripheral oedema and anasarca",
-   "Acid output is characteristically reduced (hypochlorhydria or achlorhydria) because of parietal cell loss",
-   "Overexpression of transforming growth factor-alpha (TGF-alpha) with excessive epidermal growth factor receptor signalling is implicated in the adult form",
-   "In children the disorder is frequently self-limiting and associated with cytomegalovirus infection",
-   "Management is largely supportive, with a high-protein diet and protein replacement; anti-epidermal growth factor receptor antibody therapy has been used in refractory adult disease and gastrectomy is reserved for severe or premalignant cases",
-   "The adult form carries an increased long-term risk of gastric adenocarcinoma, so surveillance is prudent"
+  "id": "menetrier_disease",
+  "name": "Menetrier disease (hyperplastic gastropathy)",
+  "aliases": [
+    "hyperplastic gastropathy",
+    "giant hypertrophic gastritis",
+    "protein-losing hypertrophic gastropathy",
+    "Menetrier's disease"
   ],
-  "pathophysiology": "Menetrier disease is a rare hyperplastic gastropathy in which marked expansion of surface mucous (foveolar) cells with cystic gland dilatation and progressive loss of acid-secreting parietal cells thickens the gastric body and fundus into giant folds. Excessive epidermal growth factor receptor activation, driven by overexpression of transforming growth factor-alpha, is thought to underlie the mucous cell hyperplasia and to suppress acid secretion in the adult form, whereas the paediatric form is often triggered by cytomegalovirus. The abnormal mucosa is leaky, allowing plasma proteins to escape into the gastric lumen, which produces a protein-losing gastropathy with hypoalbuminaemia and dependent oedema.",
-  "additionalDifferentials": [
-   "Zollinger-Ellison syndrome with hypertrophic gastric folds",
-   "Gastric lymphoma including mucosa-associated lymphoid tissue lymphoma",
-   "Infiltrative gastric adenocarcinoma (linitis plastica)",
-   "Hypertrophic lymphocytic gastritis",
-   "Gastric involvement by sarcoidosis or eosinophilic gastritis",
-   "Polyposis syndromes affecting the stomach"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal thickness",
-   "Serum albumin and total protein to document the protein-losing state",
-   "Cross-sectional imaging to assess fold thickness and help exclude malignancy",
-   "Gastric acid studies typically showing hypochlorhydria",
-   "Testing for cytomegalovirus, particularly in children",
-   "Stool alpha-1 antitrypsin clearance to confirm gastrointestinal protein loss",
-   "Fasting serum gastrin to exclude a gastrinoma"
-  ],
-  "redFlags": [
-   "Progressive weight loss, anaemia, or a focal mass raising concern for underlying malignancy",
-   "Severe hypoalbuminaemia with anasarca and effusions",
-   "Biopsy or imaging features overlapping with infiltrative carcinoma or lymphoma",
-   "Persistent bleeding or obstructive symptoms"
-  ],
-  "prognosis": "The adult form is usually chronic and may be complicated by disabling protein loss and an elevated risk of gastric adenocarcinoma, whereas the childhood form associated with cytomegalovirus is typically self-limiting and resolves over weeks to months.",
-  "pitfalls": [
-   "Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa",
-   "Attributing hypoalbuminaemia to hepatic or renal disease and overlooking a protein-losing gastropathy",
-   "Failing to distinguish giant folds from malignant infiltration or a gastrinoma",
-   "Neglecting surveillance for gastric cancer in long-standing adult disease"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to reduce foveolar hyperplasia and protein loss",
-   "High-protein diet with intravenous albumin replacement as needed to counter the protein-losing gastropathy and dependent oedema",
-   "Symptomatic acid suppression, anticholinergics or octreotide to lessen mucus and protein losses",
-   "Eradication of Helicobacter pylori where detected, and antiviral consideration for cytomegalovirus-associated childhood disease, which is often self-limiting",
-   "Endoscopic surveillance with deep biopsies for the recognised risk of gastric adenocarcinoma",
-   "Total or partial gastrectomy reserved for intractable protein loss, uncontrollable symptoms or malignant transformation",
-   "Gastroenterology-led multidisciplinary follow-up with monitoring of serum albumin and nutritional status"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "menetrier_disease-pathway",
-   "title": "Menetrier disease (hyperplastic gastropathy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive weight loss, anaemia, or a focal mass raising concern for underlying malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal thickness, Serum albumin and total protein to document the protein-losing state, Cross-sectional"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to reduce foveolar hyperplasia and protein loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of menetrier disease (hyperplastic gastropathy)."
-  }
- ],
- "tables": [
-  {
-   "id": "menetrier_disease-matrix",
-   "title": "Menetrier disease (hyperplastic gastropathy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
+      "Foveolar (mucous cell) hyperplasia with cystic dilatation of glands and loss of parietal cells produces a thickened, boggy mucosa and excess mucus secretion",
+      "A protein-losing gastropathy causes hypoalbuminaemia, which may present with peripheral oedema and anasarca",
+      "Acid output is characteristically reduced (hypochlorhydria or achlorhydria) because of parietal cell loss",
+      "Overexpression of transforming growth factor-alpha (TGF-alpha) with excessive epidermal growth factor receptor signalling is implicated in the adult form",
+      "In children the disorder is frequently self-limiting and associated with cytomegalovirus infection",
+      "Management is largely supportive, with a high-protein diet and protein replacement; anti-epidermal growth factor receptor antibody therapy has been used in refractory adult disease and gastrectomy is reserved for severe or premalignant cases",
+      "The adult form carries an increased long-term risk of gastric adenocarcinoma, so surveillance is prudent"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Menetrier disease is a rare hyperplastic gastropathy in which marked expansion of surface mucous (foveolar) cells with cystic gland dilatation and progressive loss of acid-secreting parietal cells thickens the gastric body and fundus into giant folds. Excessive epidermal growth factor receptor activation, driven by overexpression of transforming growth factor-alpha, is thought to underlie the mucous cell hyperplasia and to suppress acid secretion in the adult form, whereas the paediatric form is often triggered by cytomegalovirus. The abnormal mucosa is leaky, allowing plasma proteins to escape into the gastric lumen, which produces a protein-losing gastropathy with hypoalbuminaemia and dependent oedema.",
+    "additionalDifferentials": [
+      "Zollinger-Ellison syndrome with hypertrophic gastric folds",
+      "Gastric lymphoma including mucosa-associated lymphoid tissue lymphoma",
+      "Infiltrative gastric adenocarcinoma (linitis plastica)",
+      "Hypertrophic lymphocytic gastritis",
+      "Gastric involvement by sarcoidosis or eosinophilic gastritis",
+      "Polyposis syndromes affecting the stomach"
     ],
-    [
-     "Primary Differentials",
-     "Zollinger-Ellison syndrome with hypertrophic gastric folds, Gastric lymphoma including mucosa-associated lymphoid tissue",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal thickness",
+      "Serum albumin and total protein to document the protein-losing state",
+      "Cross-sectional imaging to assess fold thickness and help exclude malignancy",
+      "Gastric acid studies typically showing hypochlorhydria",
+      "Testing for cytomegalovirus, particularly in children",
+      "Stool alpha-1 antitrypsin clearance to confirm gastrointestinal protein loss",
+      "Fasting serum gastrin to exclude a gastrinoma"
     ],
-    [
-     "Management Strategy",
-     "Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive weight loss, anaemia, or a focal mass raising concern for underlying malignancy",
+      "Severe hypoalbuminaemia with anasarca and effusions",
+      "Biopsy or imaging features overlapping with infiltrative carcinoma or lymphoma",
+      "Persistent bleeding or obstructive symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The adult form is usually chronic and may be complicated by disabling protein loss and an elevated risk of gastric adenocarcinoma, whereas the childhood form associated with cytomegalovirus is typically self-limiting and resolves over weeks to months.",
+    "pitfalls": [
+      "Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa",
+      "Attributing hypoalbuminaemia to hepatic or renal disease and overlooking a protein-losing gastropathy",
+      "Failing to distinguish giant folds from malignant infiltration or a gastrinoma",
+      "Neglecting surveillance for gastric cancer in long-standing adult disease"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to reduce foveolar hyperplasia and protein loss",
+      "High-protein diet with intravenous albumin replacement as needed to counter the protein-losing gastropathy and dependent oedema",
+      "Symptomatic acid suppression, anticholinergics or octreotide to lessen mucus and protein losses",
+      "Eradication of Helicobacter pylori where detected, and antiviral consideration for cytomegalovirus-associated childhood disease, which is often self-limiting",
+      "Endoscopic surveillance with deep biopsies for the recognised risk of gastric adenocarcinoma",
+      "Total or partial gastrectomy reserved for intractable protein loss, uncontrollable symptoms or malignant transformation",
+      "Gastroenterology-led multidisciplinary follow-up with monitoring of serum albumin and nutritional status"
     ]
-   ],
-   "caption": "Overview comparison matrix for menetrier disease (hyperplastic gastropathy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "menetrier-disease-real-image",
-   "title": "Menetrier disease (hyperplastic gastropathy): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "menetrier_disease-pathway",
+      "title": "Menetrier disease (hyperplastic gastropathy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive weight loss, anaemia, or a focal mass raising concern for underlying malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal thickness, Serum albumin and total protein to document the protein-losing state, Cross-sectional"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to reduce foveolar hyperplasia and protein loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of menetrier disease (hyperplastic gastropathy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "menetrier_disease-matrix",
+      "title": "Menetrier disease (hyperplastic gastropathy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by giant, cerebriform rugal folds in the gastric body and fundus that typically spare the antrum",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy demonstrating enlarged folds, with deep (well or jumbo) biopsies to sample the full mucosal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Zollinger-Ellison syndrome with hypertrophic gastric folds, Gastric lymphoma including mucosa-associated lymphoid tissue",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted anti-epidermal growth factor receptor therapy with the monoclonal antibody cetuximab in symptomatic adult disease to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Taking superficial biopsies that miss the diagnosis because the characteristic changes lie deep within the mucosa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for menetrier disease (hyperplastic gastropathy)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "menetrier_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with deep biopsies",
+          "cells": [
+            {
+              "text": "Enlarged folds; deep biopsy samples the full mucosal thickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and total protein",
+          "cells": [
+            {
+              "text": "Protein-losing state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Fold thickness; malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric acid studies",
+          "cells": [
+            {
+              "text": "Hypochlorhydria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytomegalovirus testing, particularly in children",
+          "cells": [
+            {
+              "text": "Cytomegalovirus, especially in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool alpha-1 antitrypsin clearance",
+          "cells": [
+            {
+              "text": "Gastrointestinal protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting serum gastrin",
+          "cells": [
+            {
+              "text": "Gastrinoma excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menetrier_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Zollinger-Ellison syndrome with hypertrophic gastric folds",
+          "cells": [
+            {
+              "text": "Fasting serum gastrin excludes gastrinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric lymphoma, including MALT lymphoma",
+          "cells": [
+            {
+              "text": "Biopsy or imaging features overlapping with lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infiltrative gastric adenocarcinoma (linitis plastica)",
+          "cells": [
+            {
+              "text": "Progressive weight loss or a focal mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "menetrier_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cetuximab",
+          "cells": [
+            {
+              "text": "Targeted anti-EGFR therapy in symptomatic adult disease, to reduce foveolar hyperplasia and protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-protein diet with albumin",
+          "cells": [
+            {
+              "text": "Intravenous albumin as needed for protein-losing gastropathy and dependent oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic acid suppression, anticholinergics or octreotide",
+          "cells": [
+            {
+              "text": "Lessens mucus and protein losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H. pylori and CMV management",
+          "cells": [
+            {
+              "text": "Eradicate H. pylori; antiviral consideration for CMV-associated childhood disease, which is often self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic surveillance",
+          "cells": [
+            {
+              "text": "Deep biopsies for the recognised risk of gastric adenocarcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrectomy",
+          "cells": [
+            {
+              "text": "Partial or total, for intractable protein loss, uncontrollable symptoms or malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Serum albumin and nutritional status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "menetrier_disease-dx-mgmt",
+      "title": "Diagnosis and management of Menetrier disease (hyperplastic gastropathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enlarged gastric folds with protein-losing gastropathy and hypoalbuminaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive weight loss, anaemia, focal mass, or anasarca with effusions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for malignancy; deep biopsies; albumin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with deep biopsies; albumin; stool alpha-1 antitrypsin; gastrin; CMV",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is gastrinoma excluded by fasting gastrin and deep biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Zollinger-Ellison syndrome or gastric lymphoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cetuximab for symptomatic adult disease to reduce protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-protein diet with intravenous albumin as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic acid suppression, anticholinergics or octreotide",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eradicate H. pylori where found; consider antiviral therapy for childhood CMV",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endoscopic surveillance for adenocarcinoma risk; gastrectomy for intractable disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,495 @@
 {
- "id": "factor_v_deficiency",
- "name": "Factor V Deficiency",
- "aliases": [
-  "Owren disease",
-  "Parahaemophilia",
-  "Labile factor deficiency"
- ],
- "class": "non_infective",
- "system": "Haematological / Coagulation",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
-   "Deficiency prolongs both the prothrombin time and the activated partial thromboplastin time because factor V acts in the common pathway.",
-   "Bleeding is predominantly mucocutaneous, with epistaxis, gum bleeding, menorrhagia and bleeding after surgery or trauma; severe cases may have deeper bleeds.",
-   "Around a fifth of total factor V is stored in platelet alpha-granules, and platelet factor V levels may modify the bleeding phenotype.",
-   "Because plasma-derived factor V concentrate is not widely available, fresh frozen plasma is the mainstay of replacement; platelet transfusion can supply factor V in refractory bleeding.",
-   "An acquired form occurs, often from autoantibodies triggered by bovine thrombin exposure, surgery, infection or malignancy.",
-   "Combined factor V and factor VIII deficiency is a distinct disorder caused by defects in the LMAN1 or MCFD2 intracellular transport proteins.",
-   "Distinguish inherited factor V deficiency from factor V Leiden, an unrelated prothrombotic mutation causing activated protein C resistance."
+  "id": "factor_v_deficiency",
+  "name": "Factor V Deficiency",
+  "aliases": [
+    "Owren disease",
+    "Parahaemophilia",
+    "Labile factor deficiency"
   ],
-  "pathophysiology": "Factor V is a large plasma cofactor that circulates in an inactive form and, once activated by thrombin or factor Xa, serves as the essential non-enzymatic cofactor of the prothrombinase complex. In that complex activated factor V dramatically accelerates the factor Xa-mediated conversion of prothrombin to thrombin on phospholipid surfaces, so its deficiency markedly reduces thrombin generation and prolongs both the prothrombin time and the activated partial thromboplastin time. Inherited deficiency, due to mutations in the F5 gene, is usually autosomal recessive and may reduce factor V synthesis or produce a dysfunctional protein; roughly one fifth of the body's factor V is held within platelet alpha-granules and released locally at sites of injury, which helps explain why bleeding severity correlates imperfectly with the plasma level. A clinically important separate entity is combined deficiency of factors V and VIII, caused not by defects in either factor gene but by loss of function of the LMAN1-MCFD2 cargo receptor that chaperones both proteins through the secretory pathway. Acquired factor V deficiency reflects inhibitory autoantibodies, classically after exposure to topical bovine thrombin but also with surgery, infection, autoimmune disease or malignancy, and its clinical impact ranges from an incidental laboratory abnormality to life-threatening haemorrhage.",
-  "additionalDifferentials": [
-   "Factor X deficiency and other common-pathway factor deficiencies",
-   "Combined factor V and factor VIII deficiency (LMAN1/MCFD2 defect)",
-   "Factor II (prothrombin) deficiency",
-   "Vitamin K deficiency, vitamin K antagonist effect or liver disease",
-   "Disseminated intravascular coagulation",
-   "Acquired factor V inhibitor",
-   "von Willebrand disease and platelet function disorders for mucosal bleeding"
-  ],
-  "additionalInvestigations": [
-   "Prothrombin time and activated partial thromboplastin time (both prolonged)",
-   "Specific factor V coagulant assay",
-   "Mixing study to detect an acquired factor V inhibitor",
-   "Concurrent factor VIII assay to identify combined factor V and VIII deficiency",
-   "Assays of other clotting factors to exclude liver disease or vitamin K-related deficiency",
-   "Bethesda-type inhibitor titre where an acquired inhibitor is suspected",
-   "F5 (and LMAN1/MCFD2) genetic testing with family studies"
-  ],
-  "redFlags": [
-   "Intracranial or other central nervous system haemorrhage, particularly in neonates",
-   "Major surgical, gastrointestinal or postpartum bleeding",
-   "Sudden severe bleeding suggesting an acquired factor V inhibitor",
-   "Bleeding poorly responsive to fresh frozen plasma",
-   "Severe menorrhagia causing symptomatic anaemia"
-  ],
-  "prognosis": "Most inherited cases have a mild to moderate bleeding tendency and a good outlook when replacement is provided around surgery, trauma and childbirth. Acquired factor V inhibitors have a more variable course, from spontaneous resolution to severe haemorrhage, with prognosis influenced by the underlying trigger.",
-  "pitfalls": [
-   "Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)",
-   "Missing combined factor V and factor VIII deficiency by not measuring both factors",
-   "Failing to consider an acquired inhibitor after bovine thrombin exposure or surgery",
-   "Relying on plasma factor V levels alone when platelet-stored factor V modifies bleeding",
-   "Expecting a dedicated factor V concentrate to be available when plasma or platelets are usually required"
-  ],
-  "references": [
-   "Williams Hematology (standard reference)",
-   "Practical Haemostasis and Thrombosis (standard reference)",
-   "United Kingdom Haemophilia Centre Doctors' Organisation guidance on rare bleeding disorders (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific concentrate is not widely available",
-   "Platelet transfusion to deliver alpha-granule factor V in refractory bleeding",
-   "Antifibrinolytics such as tranexamic acid for mucocutaneous bleeding and menorrhagia",
-   "Hormonal control of menorrhagia in affected women",
-   "Immunosuppression and removal of the trigger, including avoidance of bovine thrombin re-exposure, for acquired factor V inhibitors",
-   "Haematology-led perioperative and peripartum haemostatic planning, with avoidance of antiplatelet agents and NSAIDs",
-   "Genetic counselling given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "factor_v_deficiency-pathway",
-   "title": "Factor V Deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intracranial or other central nervous system haemorrhage, particularly in neonates",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time (both prolonged), Specific factor V coagulant assay, Mixing study to detect an acquired factor V inhibitor"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific concentrate is not widely available"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of factor v deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "factor_v_deficiency-matrix",
-   "title": "Factor V Deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / Coagulation",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
+      "Deficiency prolongs both the prothrombin time and the activated partial thromboplastin time because factor V acts in the common pathway.",
+      "Bleeding is predominantly mucocutaneous, with epistaxis, gum bleeding, menorrhagia and bleeding after surgery or trauma; severe cases may have deeper bleeds.",
+      "Around a fifth of total factor V is stored in platelet alpha-granules, and platelet factor V levels may modify the bleeding phenotype.",
+      "Because plasma-derived factor V concentrate is not widely available, fresh frozen plasma is the mainstay of replacement; platelet transfusion can supply factor V in refractory bleeding.",
+      "An acquired form occurs, often from autoantibodies triggered by bovine thrombin exposure, surgery, infection or malignancy.",
+      "Combined factor V and factor VIII deficiency is a distinct disorder caused by defects in the LMAN1 or MCFD2 intracellular transport proteins.",
+      "Distinguish inherited factor V deficiency from factor V Leiden, an unrelated prothrombotic mutation causing activated protein C resistance."
     ],
-    [
-     "Key Investigations",
-     "Prothrombin time and activated partial thromboplastin time (both prolonged), Specific factor V coagulant assay, Mixing study to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Factor V is a large plasma cofactor that circulates in an inactive form and, once activated by thrombin or factor Xa, serves as the essential non-enzymatic cofactor of the prothrombinase complex. In that complex activated factor V dramatically accelerates the factor Xa-mediated conversion of prothrombin to thrombin on phospholipid surfaces, so its deficiency markedly reduces thrombin generation and prolongs both the prothrombin time and the activated partial thromboplastin time. Inherited deficiency, due to mutations in the F5 gene, is usually autosomal recessive and may reduce factor V synthesis or produce a dysfunctional protein; roughly one fifth of the body's factor V is held within platelet alpha-granules and released locally at sites of injury, which helps explain why bleeding severity correlates imperfectly with the plasma level. A clinically important separate entity is combined deficiency of factors V and VIII, caused not by defects in either factor gene but by loss of function of the LMAN1-MCFD2 cargo receptor that chaperones both proteins through the secretory pathway. Acquired factor V deficiency reflects inhibitory autoantibodies, classically after exposure to topical bovine thrombin but also with surgery, infection, autoimmune disease or malignancy, and its clinical impact ranges from an incidental laboratory abnormality to life-threatening haemorrhage.",
+    "additionalDifferentials": [
+      "Factor X deficiency and other common-pathway factor deficiencies",
+      "Combined factor V and factor VIII deficiency (LMAN1/MCFD2 defect)",
+      "Factor II (prothrombin) deficiency",
+      "Vitamin K deficiency, vitamin K antagonist effect or liver disease",
+      "Disseminated intravascular coagulation",
+      "Acquired factor V inhibitor",
+      "von Willebrand disease and platelet function disorders for mucosal bleeding"
     ],
-    [
-     "Primary Differentials",
-     "Factor X deficiency and other common-pathway factor deficiencies, Combined factor V and factor VIII deficiency (LMAN1/MCFD2",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prothrombin time and activated partial thromboplastin time (both prolonged)",
+      "Specific factor V coagulant assay",
+      "Mixing study to detect an acquired factor V inhibitor",
+      "Concurrent factor VIII assay to identify combined factor V and VIII deficiency",
+      "Assays of other clotting factors to exclude liver disease or vitamin K-related deficiency",
+      "Bethesda-type inhibitor titre where an acquired inhibitor is suspected",
+      "F5 (and LMAN1/MCFD2) genetic testing with family studies"
     ],
-    [
-     "Management Strategy",
-     "Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific",
-     "Core treatment modality"
+    "redFlags": [
+      "Intracranial or other central nervous system haemorrhage, particularly in neonates",
+      "Major surgical, gastrointestinal or postpartum bleeding",
+      "Sudden severe bleeding suggesting an acquired factor V inhibitor",
+      "Bleeding poorly responsive to fresh frozen plasma",
+      "Severe menorrhagia causing symptomatic anaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most inherited cases have a mild to moderate bleeding tendency and a good outlook when replacement is provided around surgery, trauma and childbirth. Acquired factor V inhibitors have a more variable course, from spontaneous resolution to severe haemorrhage, with prognosis influenced by the underlying trigger.",
+    "pitfalls": [
+      "Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)",
+      "Missing combined factor V and factor VIII deficiency by not measuring both factors",
+      "Failing to consider an acquired inhibitor after bovine thrombin exposure or surgery",
+      "Relying on plasma factor V levels alone when platelet-stored factor V modifies bleeding",
+      "Expecting a dedicated factor V concentrate to be available when plasma or platelets are usually required"
+    ],
+    "references": [
+      "Williams Hematology (standard reference)",
+      "Practical Haemostasis and Thrombosis (standard reference)",
+      "United Kingdom Haemophilia Centre Doctors' Organisation guidance on rare bleeding disorders (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific concentrate is not widely available",
+      "Platelet transfusion to deliver alpha-granule factor V in refractory bleeding",
+      "Antifibrinolytics such as tranexamic acid for mucocutaneous bleeding and menorrhagia",
+      "Hormonal control of menorrhagia in affected women",
+      "Immunosuppression and removal of the trigger, including avoidance of bovine thrombin re-exposure, for acquired factor V inhibitors",
+      "Haematology-led perioperative and peripartum haemostatic planning, with avoidance of antiplatelet agents and NSAIDs",
+      "Genetic counselling given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for factor v deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "factor-v-deficiency-real-image",
-   "title": "Factor V Deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "factor_v_deficiency-pathway",
+      "title": "Factor V Deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intracranial or other central nervous system haemorrhage, particularly in neonates",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prothrombin time and activated partial thromboplastin time (both prolonged), Specific factor V coagulant assay, Mixing study to detect an acquired factor V inhibitor"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific concentrate is not widely available"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of factor v deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "factor_v_deficiency-matrix",
+      "title": "Factor V Deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive deficiency of coagulation factor V, historically termed parahaemophilia or Owren disease.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prothrombin time and activated partial thromboplastin time (both prolonged), Specific factor V coagulant assay, Mixing study to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Factor X deficiency and other common-pathway factor deficiencies, Combined factor V and factor VIII deficiency (LMAN1/MCFD2",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Fresh frozen plasma as the mainstay of factor V replacement for bleeding episodes and surgical cover, since a specific",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing factor V deficiency (a bleeding disorder) with factor V Leiden (a thrombotic mutation)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for factor v deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factor_v_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Both prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific factor V coagulant assay",
+          "cells": [
+            {
+              "text": "Factor V level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Acquired factor V inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII assay",
+          "cells": [
+            {
+              "text": "Combined factor V and VIII deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assays of other clotting factors and liver tests",
+          "cells": [
+            {
+              "text": "Liver disease or vitamin K-related deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethesda-type inhibitor titre",
+          "cells": [
+            {
+              "text": "Acquired inhibitor, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F5 genetic testing with family studies",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_v_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor X and other common-pathway factor deficiencies",
+          "cells": [
+            {
+              "text": "These also prolong both tests; a specific assay is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined factor V and factor VIII deficiency (LMAN1 or MCFD2)",
+          "cells": [
+            {
+              "text": "Both factors must be measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired factor V inhibitor",
+          "cells": [
+            {
+              "text": "Follows bovine thrombin exposure, surgery, infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_v_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Mainstay for bleeding and surgical cover, as a specific concentrate is not widely available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "Delivers alpha-granule factor V in refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytics such as tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucocutaneous bleeding and menorrhagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal control of menorrhagia",
+          "cells": [
+            {
+              "text": "Affected women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression and trigger removal",
+          "cells": [
+            {
+              "text": "Acquired inhibitors; avoid re-exposure to bovine thrombin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology-led perioperative and peripartum planning",
+          "cells": [
+            {
+              "text": "Avoid antiplatelet agents and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factor_v_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Factor V Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Epistaxis, gum bleeding, menorrhagia or surgical bleeding with prolonged PT and APTT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intracranial or major surgical bleeding, FFP-refractory bleeding, inhibitor)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology-led replacement with FFP; platelets if bleeding is refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Specific factor V assay; factor VIII; mixing study; inhibitor titre; liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low factor V with no inhibitor and no liver or vitamin K cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat acquired inhibitor or another cause; consider factor X or VIII deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fresh frozen plasma as the mainstay of replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytic for mucosal bleeding and menorrhagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hormonal control of menorrhagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunosuppression for acquired inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid antiplatelet agents and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Inherited cases are mild to moderate; good outlook with replacement at surgery and birth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,481 @@
 {
- "id": "hereditary_spastic_paraplegia_spg55",
- "name": "Hereditary spastic paraplegia type 55 (SPG55)",
- "aliases": [
-  "SPG55",
-  "C12orf65",
-  "MTRFR"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary spastic paraplegia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which encodes a mitochondrial translation release / rescue factor.",
-   "The molecular defect impairs mitochondrial protein synthesis, producing a combined deficiency of the oxidative-phosphorylation respiratory-chain complexes.",
-   "The hallmark is spastic paraplegia combined with optic atrophy and reduced visual acuity and an axonal sensorimotor peripheral neuropathy.",
-   "Distal amyotrophy is common, and some patients develop external ophthalmoplegia or ptosis.",
-   "C12orf65 / MTRFR disease is a spectrum: the same gene causes combined oxidative-phosphorylation deficiency type 7 and Leigh-like encephalopathy at the severe end.",
-   "The phenotype overlaps that of Behr syndrome (childhood optic atrophy with spasticity, ataxia and neuropathy).",
-   "It should be considered alongside SPG7 as one of the mitochondrial hereditary spastic paraplegias."
+  "id": "hereditary_spastic_paraplegia_spg55",
+  "name": "Hereditary spastic paraplegia type 55 (SPG55)",
+  "aliases": [
+    "SPG55",
+    "C12orf65",
+    "MTRFR"
   ],
-  "pathophysiology": "SPG55 is caused by biallelic loss-of-function mutations in C12orf65, located on chromosome 12q24.31 and now designated MTRFR (mitochondrial translation release factor in rescue). Its protein product is a matrix member of the mitochondrial release-factor family that does not itself terminate normal translation but rescues stalled mitochondrial ribosomes by hydrolysing the bond between peptidyl-tRNA and the stalled nascent chain, freeing ribosomal subunits for reuse. When this quality-control step fails, synthesis of the mitochondrially encoded respiratory-chain subunits is reduced, causing a combined deficiency of the oxidative-phosphorylation complexes. The resulting energy deficit preferentially injures tissues with high and sustained metabolic demand — the long corticospinal and peripheral axons, the optic nerve and, in severe cases, the brainstem and basal ganglia — accounting for the spastic, optic and neuropathic features and, at the severe extreme, Leigh-like decompensation.",
-  "additionalDifferentials": [
-   "SPG7 (paraplegin) — the other classic mitochondrial HSP, which can also show optic atrophy and ophthalmoplegia",
-   "Behr syndrome and other childhood optic-atrophy-plus phenotypes",
-   "OPA1-related autosomal dominant optic atrophy 'plus'",
-   "Friedreich ataxia",
-   "Leigh syndrome and other mitochondrial encephalopathies (including allelic COXPD7)",
-   "SPG5 (CYP7B1) and other complicated HSPs with peripheral neuropathy",
-   "Autosomal recessive spastic ataxia of Charlevoix-Saguenay (ARSACS)"
-  ],
-  "additionalInvestigations": [
-   "MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end",
-   "Nerve conduction studies and EMG to confirm the axonal sensorimotor neuropathy",
-   "Ophthalmological assessment with optical coherence tomography and visual evoked potentials for optic atrophy",
-   "Blood and, where indicated, cerebrospinal-fluid lactate (may be raised, though a normal value does not exclude the diagnosis)",
-   "Genetic testing for C12orf65 / MTRFR, ideally within a mitochondrial or HSP gene panel or exome",
-   "Muscle biopsy with respiratory-chain enzyme analysis in selected cases",
-   "Echocardiography and other assessments for extra-neural mitochondrial involvement"
-  ],
-  "redFlags": [
-   "Rapid loss of vision",
-   "Encephalopathy or developmental regression suggesting Leigh-like metabolic decompensation",
-   "Respiratory or bulbar involvement",
-   "Acute deterioration during intercurrent illness or catabolic stress"
-  ],
-  "prognosis": "The course is variable and progressive; combined pyramidal, visual and neuropathic disability accumulates over years, and the severe Leigh-like end of the spectrum carries a considerably poorer outlook.",
-  "pitfalls": [
-   "Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing",
-   "Overlooking optic atrophy when spasticity dominates the presentation",
-   "Assuming a normal blood lactate rules out a mitochondrial cause",
-   "Failing to recognise the mitochondrial basis, which has implications for anaesthesia, avoidance of metabolic stress and family counselling"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "GeneReviews — hereditary spastic paraplegia overview and mitochondrial HSP",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity",
-   "Physiotherapy and occupational therapy for combined spasticity, distal amyotrophy and neuropathic weakness, with orthoses and adaptive aids",
-   "Ophthalmological review and low-vision support for optic atrophy, with management of ptosis and external ophthalmoplegia",
-   "Surveillance for progression toward the severe Leigh-like end of the spectrum, monitoring lactate and neurological status, and avoiding mitochondrial-toxic drugs",
-   "Supportive mitochondrial care during intercurrent illness and metabolic stress to prevent decompensation",
-   "Genetic counselling for autosomal recessive inheritance with carrier testing of relatives",
-   "Multidisciplinary neurology, ophthalmology, rehabilitation and metabolic-medicine input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg55-pathway",
-   "title": "Hereditary spastic paraplegia type 55 (SPG55): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which encodes a mitochondrial translation release / rescue factor.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid loss of vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end, Nerve conduction studies and EMG to confirm the axonal sensorimotor neuropathy, Ophthalmological assessment with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia type 55 (spg55)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg55-matrix",
-   "title": "Hereditary spastic paraplegia type 55 (SPG55): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary spastic paraplegia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which encodes a mitochondrial translation release / rescue factor.",
+      "The molecular defect impairs mitochondrial protein synthesis, producing a combined deficiency of the oxidative-phosphorylation respiratory-chain complexes.",
+      "The hallmark is spastic paraplegia combined with optic atrophy and reduced visual acuity and an axonal sensorimotor peripheral neuropathy.",
+      "Distal amyotrophy is common, and some patients develop external ophthalmoplegia or ptosis.",
+      "C12orf65 / MTRFR disease is a spectrum: the same gene causes combined oxidative-phosphorylation deficiency type 7 and Leigh-like encephalopathy at the severe end.",
+      "The phenotype overlaps that of Behr syndrome (childhood optic atrophy with spasticity, ataxia and neuropathy).",
+      "It should be considered alongside SPG7 as one of the mitochondrial hereditary spastic paraplegias."
     ],
-    [
-     "Key Investigations",
-     "MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end, Nerve conduction",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SPG55 is caused by biallelic loss-of-function mutations in C12orf65, located on chromosome 12q24.31 and now designated MTRFR (mitochondrial translation release factor in rescue). Its protein product is a matrix member of the mitochondrial release-factor family that does not itself terminate normal translation but rescues stalled mitochondrial ribosomes by hydrolysing the bond between peptidyl-tRNA and the stalled nascent chain, freeing ribosomal subunits for reuse. When this quality-control step fails, synthesis of the mitochondrially encoded respiratory-chain subunits is reduced, causing a combined deficiency of the oxidative-phosphorylation complexes. The resulting energy deficit preferentially injures tissues with high and sustained metabolic demand — the long corticospinal and peripheral axons, the optic nerve and, in severe cases, the brainstem and basal ganglia — accounting for the spastic, optic and neuropathic features and, at the severe extreme, Leigh-like decompensation.",
+    "additionalDifferentials": [
+      "SPG7 (paraplegin) — the other classic mitochondrial HSP, which can also show optic atrophy and ophthalmoplegia",
+      "Behr syndrome and other childhood optic-atrophy-plus phenotypes",
+      "OPA1-related autosomal dominant optic atrophy 'plus'",
+      "Friedreich ataxia",
+      "Leigh syndrome and other mitochondrial encephalopathies (including allelic COXPD7)",
+      "SPG5 (CYP7B1) and other complicated HSPs with peripheral neuropathy",
+      "Autosomal recessive spastic ataxia of Charlevoix-Saguenay (ARSACS)"
     ],
-    [
-     "Primary Differentials",
-     "SPG7 (paraplegin) - the other classic mitochondrial HSP, which can also show optic atrophy and ophthalmoplegia, Behr syndrome and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end",
+      "Nerve conduction studies and EMG to confirm the axonal sensorimotor neuropathy",
+      "Ophthalmological assessment with optical coherence tomography and visual evoked potentials for optic atrophy",
+      "Blood and, where indicated, cerebrospinal-fluid lactate (may be raised, though a normal value does not exclude the diagnosis)",
+      "Genetic testing for C12orf65 / MTRFR, ideally within a mitochondrial or HSP gene panel or exome",
+      "Muscle biopsy with respiratory-chain enzyme analysis in selected cases",
+      "Echocardiography and other assessments for extra-neural mitochondrial involvement"
     ],
-    [
-     "Management Strategy",
-     "Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid loss of vision",
+      "Encephalopathy or developmental regression suggesting Leigh-like metabolic decompensation",
+      "Respiratory or bulbar involvement",
+      "Acute deterioration during intercurrent illness or catabolic stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable and progressive; combined pyramidal, visual and neuropathic disability accumulates over years, and the severe Leigh-like end of the spectrum carries a considerably poorer outlook.",
+    "pitfalls": [
+      "Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing",
+      "Overlooking optic atrophy when spasticity dominates the presentation",
+      "Assuming a normal blood lactate rules out a mitochondrial cause",
+      "Failing to recognise the mitochondrial basis, which has implications for anaesthesia, avoidance of metabolic stress and family counselling"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "GeneReviews — hereditary spastic paraplegia overview and mitochondrial HSP",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity",
+      "Physiotherapy and occupational therapy for combined spasticity, distal amyotrophy and neuropathic weakness, with orthoses and adaptive aids",
+      "Ophthalmological review and low-vision support for optic atrophy, with management of ptosis and external ophthalmoplegia",
+      "Surveillance for progression toward the severe Leigh-like end of the spectrum, monitoring lactate and neurological status, and avoiding mitochondrial-toxic drugs",
+      "Supportive mitochondrial care during intercurrent illness and metabolic stress to prevent decompensation",
+      "Genetic counselling for autosomal recessive inheritance with carrier testing of relatives",
+      "Multidisciplinary neurology, ophthalmology, rehabilitation and metabolic-medicine input"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary spastic paraplegia type 55 (spg55)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-spastic-paraplegia-spg55-real-image",
-   "title": "Hereditary spastic paraplegia type 55 (SPG55): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_spastic_paraplegia_spg55-pathway",
+      "title": "Hereditary spastic paraplegia type 55 (SPG55): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which encodes a mitochondrial translation release / rescue factor.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid loss of vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end, Nerve conduction studies and EMG to confirm the axonal sensorimotor neuropathy, Ophthalmological assessment with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia type 55 (spg55)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg55-matrix",
+      "title": "Hereditary spastic paraplegia type 55 (SPG55): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "SPG55 is an autosomal recessive childhood-onset complicated HSP caused by biallelic mutations in C12orf65 (renamed MTRFR), which",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain, which may show cerebellar or optic-pathway atrophy or Leigh-like signal change at the severe end, Nerve conduction",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SPG7 (paraplegin) - the other classic mitochondrial HSP, which can also show optic atrophy and ophthalmoplegia, Behr syndrome and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Symptomatic antispasticity therapy with baclofen or tizanidine, and botulinum toxin for focal spasticity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the child as having Behr syndrome or SPG7 without pursuing C12orf65 / MTRFR testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary spastic paraplegia type 55 (spg55)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg55-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cerebellar or optic-pathway atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Axonal sensorimotor neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with optical coherence tomography",
+          "cells": [
+            {
+              "text": "Optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and CSF lactate",
+          "cells": [
+            {
+              "text": "Raised lactate in some cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C12orf65 or MTRFR genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis within a mitochondrial panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with respiratory-chain enzyme analysis",
+          "cells": [
+            {
+              "text": "Mitochondrial enzyme defect, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Extra-neural mitochondrial involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg55-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG7 (paraplegin)",
+          "cells": [
+            {
+              "text": "Other classic mitochondrial HSP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behr syndrome and childhood optic atrophy-plus phenotypes",
+          "cells": [
+            {
+              "text": "Optic atrophy with additional features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OPA1-related dominant optic atrophy plus",
+          "cells": [
+            {
+              "text": "Dominant optic atrophy with additional features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg55-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Baclofen or tizanidine",
+          "cells": [
+            {
+              "text": "Symptomatic antispasticity therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Combined spasticity and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and low-vision support",
+          "cells": [
+            {
+              "text": "Optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Progression toward the severe Leigh-like end"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive mitochondrial care",
+          "cells": [
+            {
+              "text": "During intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance, with carrier testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurology, ophthalmology and metabolic care",
+          "cells": [
+            {
+              "text": "Rehabilitation as a team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg55-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia type 55 (SPG55)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spastic paraplegia with optic atrophy and mitochondrial features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid visual loss, encephalopathy or regression, bulbar or breathing involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic and neurology review for encephalopathy or respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "C12orf65 or MTRFR testing; nerve studies; optic OCT; lactate; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic C12orf65 or MTRFR variants found, with SPG7 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG7, Behr syndrome, OPA1 disease, Friedreich ataxia or Leigh syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Baclofen or tizanidine for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for spasticity and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology and low-vision support for optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive mitochondrial care during intercurrent illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; surveillance for Leigh-like progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

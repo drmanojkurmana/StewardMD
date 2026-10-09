@@ -1,176 +1,474 @@
 {
- "id": "isolated_acth_deficiency",
- "name": "Isolated ACTH deficiency",
- "aliases": [
-  "isolated ACTH deficiency",
-  "IAD",
-  "isolated corticotropin deficiency",
-  "isolated secondary adrenal insufficiency"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary adrenal insufficiency",
-   "Presents with fatigue, weight loss, anorexia, hypoglycaemia and hyponatraemia, but without hyperpigmentation because ACTH is low, unlike in primary adrenal insufficiency",
-   "Aldosterone secretion is preserved because it is renin-angiotensin driven, so severe salt wasting and hyperkalaemia are not typical, though hyponatraemia can still occur from cortisol-deficiency-related water retention",
-   "It can be an overlooked cause of unexplained hyponatraemia or recurrent hypoglycaemia",
-   "Causes include lymphocytic hypophysitis (including autoimmune and, increasingly, immune checkpoint inhibitor-induced disease), congenital TBX19 (TPIT) or POMC defects, and idiopathic disease",
-   "Immune checkpoint inhibitor therapy is now an important acquired cause and should be sought in the drug history",
-   "Diagnosis rests on low or inappropriately normal ACTH with low cortisol and an impaired cortisol response to stimulation, with the other pituitary axes intact",
-   "Treatment is glucocorticoid replacement, and mineralocorticoid is not required"
+  "id": "isolated_acth_deficiency",
+  "name": "Isolated ACTH deficiency",
+  "aliases": [
+    "isolated ACTH deficiency",
+    "IAD",
+    "isolated corticotropin deficiency",
+    "isolated secondary adrenal insufficiency"
   ],
-  "pathophysiology": "Isolated ACTH deficiency is characterised by impaired secretion of corticotropin from the pituitary corticotrophs while the other anterior pituitary hormones remain intact, resulting in secondary adrenal insufficiency with glucocorticoid deficiency but preserved mineralocorticoid function. Acquired cases most often reflect autoimmune corticotroph destruction as in lymphocytic hypophysitis, including that triggered by immune checkpoint inhibitor drugs; congenital cases result from mutations in TBX19 (TPIT), a transcription factor essential for pro-opiomelanocortin expression in corticotrophs, or from defects in pro-opiomelanocortin processing. Because aldosterone is regulated by the renin-angiotensin system rather than ACTH, salt and potassium handling is largely maintained, and the absence of ACTH excess explains the lack of hyperpigmentation.",
-  "additionalDifferentials": [
-   "Primary adrenal insufficiency (Addison disease), with high ACTH, hyperpigmentation and mineralocorticoid deficiency",
-   "Panhypopituitarism or multiple pituitary hormone deficiency",
-   "Suppression of the axis by exogenous glucocorticoids, the commonest cause of secondary adrenal insufficiency",
-   "Other causes of hyponatraemia such as SIADH or hypothyroidism",
-   "Chronic fatigue from non-endocrine causes",
-   "Sepsis or another cause of hypoglycaemia"
-  ],
-  "additionalInvestigations": [
-   "Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol",
-   "Dynamic testing of cortisol reserve, such as a short synacthen test or, in specialist settings, insulin tolerance or CRH testing",
-   "Assessment of the other anterior pituitary axes to confirm the deficiency is isolated, covering thyroid, gonadal, growth hormone and prolactin function",
-   "Serum sodium and glucose for hyponatraemia and hypoglycaemia",
-   "Review of glucocorticoid and immune checkpoint inhibitor drug exposure",
-   "Pituitary MRI to look for hypophysitis or another structural lesion"
-  ],
-  "redFlags": [
-   "Adrenal crisis with hypotension, hypoglycaemia, hyponatraemia and collapse, especially during intercurrent illness",
-   "New ACTH deficiency after starting an immune checkpoint inhibitor",
-   "Severe symptomatic hyponatraemia",
-   "Failure to increase glucocorticoid at times of physiological stress"
-  ],
-  "prognosis": "Excellent with appropriate glucocorticoid replacement and sick-day dosing education; the main danger is unrecognised or under-treated adrenal crisis, and checkpoint-inhibitor-induced deficiency is typically permanent and requires lifelong replacement.",
-  "pitfalls": [
-   "Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency",
-   "Attributing hyponatraemia to SIADH without checking cortisol",
-   "Overlooking immune checkpoint inhibitor therapy as a cause",
-   "Failing to give stress-dose glucocorticoid and crisis-prevention advice"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on Adrenal Insufficiency",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is unnecessary because aldosterone secretion is preserved",
-   "Sick-day rules with glucocorticoid dose escalation during intercurrent illness and parenteral steroid for vomiting or major physiological stress",
-   "Emergency treatment of adrenal crisis with parenteral hydrocortisone and intravenous fluid resuscitation",
-   "Patient education, a steroid emergency card and provision of injectable hydrocortisone for home use",
-   "Review immune checkpoint inhibitor and exogenous glucocorticoid exposure as precipitants, continuing replacement as checkpoint-induced deficiency is usually permanent",
-   "Monitor clinical response and periodically assess the other anterior pituitary axes to confirm the deficiency remains isolated",
-   "Endocrinology referral for diagnostic confirmation and long-term supervision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "isolated_acth_deficiency-pathway",
-   "title": "Isolated ACTH deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary adrenal insufficiency",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adrenal crisis with hypotension, hypoglycaemia, hyponatraemia and collapse, especially during intercurrent illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol, Dynamic testing of cortisol reserve, such as a short synacthen test or, in specialist settings, insulin tolerance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is unnecessary because aldosterone secretion is preserved"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of isolated acth deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "isolated_acth_deficiency-matrix",
-   "title": "Isolated ACTH deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary adrenal insufficiency",
+      "Presents with fatigue, weight loss, anorexia, hypoglycaemia and hyponatraemia, but without hyperpigmentation because ACTH is low, unlike in primary adrenal insufficiency",
+      "Aldosterone secretion is preserved because it is renin-angiotensin driven, so severe salt wasting and hyperkalaemia are not typical, though hyponatraemia can still occur from cortisol-deficiency-related water retention",
+      "It can be an overlooked cause of unexplained hyponatraemia or recurrent hypoglycaemia",
+      "Causes include lymphocytic hypophysitis (including autoimmune and, increasingly, immune checkpoint inhibitor-induced disease), congenital TBX19 (TPIT) or POMC defects, and idiopathic disease",
+      "Immune checkpoint inhibitor therapy is now an important acquired cause and should be sought in the drug history",
+      "Diagnosis rests on low or inappropriately normal ACTH with low cortisol and an impaired cortisol response to stimulation, with the other pituitary axes intact",
+      "Treatment is glucocorticoid replacement, and mineralocorticoid is not required"
     ],
-    [
-     "Key Investigations",
-     "Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol, Dynamic testing of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Isolated ACTH deficiency is characterised by impaired secretion of corticotropin from the pituitary corticotrophs while the other anterior pituitary hormones remain intact, resulting in secondary adrenal insufficiency with glucocorticoid deficiency but preserved mineralocorticoid function. Acquired cases most often reflect autoimmune corticotroph destruction as in lymphocytic hypophysitis, including that triggered by immune checkpoint inhibitor drugs; congenital cases result from mutations in TBX19 (TPIT), a transcription factor essential for pro-opiomelanocortin expression in corticotrophs, or from defects in pro-opiomelanocortin processing. Because aldosterone is regulated by the renin-angiotensin system rather than ACTH, salt and potassium handling is largely maintained, and the absence of ACTH excess explains the lack of hyperpigmentation.",
+    "additionalDifferentials": [
+      "Primary adrenal insufficiency (Addison disease), with high ACTH, hyperpigmentation and mineralocorticoid deficiency",
+      "Panhypopituitarism or multiple pituitary hormone deficiency",
+      "Suppression of the axis by exogenous glucocorticoids, the commonest cause of secondary adrenal insufficiency",
+      "Other causes of hyponatraemia such as SIADH or hypothyroidism",
+      "Chronic fatigue from non-endocrine causes",
+      "Sepsis or another cause of hypoglycaemia"
     ],
-    [
-     "Primary Differentials",
-     "Primary adrenal insufficiency (Addison disease), with high ACTH, hyperpigmentation and mineralocorticoid deficiency,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol",
+      "Dynamic testing of cortisol reserve, such as a short synacthen test or, in specialist settings, insulin tolerance or CRH testing",
+      "Assessment of the other anterior pituitary axes to confirm the deficiency is isolated, covering thyroid, gonadal, growth hormone and prolactin function",
+      "Serum sodium and glucose for hyponatraemia and hypoglycaemia",
+      "Review of glucocorticoid and immune checkpoint inhibitor drug exposure",
+      "Pituitary MRI to look for hypophysitis or another structural lesion"
     ],
-    [
-     "Management Strategy",
-     "Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is",
-     "Core treatment modality"
+    "redFlags": [
+      "Adrenal crisis with hypotension, hypoglycaemia, hyponatraemia and collapse, especially during intercurrent illness",
+      "New ACTH deficiency after starting an immune checkpoint inhibitor",
+      "Severe symptomatic hyponatraemia",
+      "Failure to increase glucocorticoid at times of physiological stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent with appropriate glucocorticoid replacement and sick-day dosing education; the main danger is unrecognised or under-treated adrenal crisis, and checkpoint-inhibitor-induced deficiency is typically permanent and requires lifelong replacement.",
+    "pitfalls": [
+      "Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency",
+      "Attributing hyponatraemia to SIADH without checking cortisol",
+      "Overlooking immune checkpoint inhibitor therapy as a cause",
+      "Failing to give stress-dose glucocorticoid and crisis-prevention advice"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on Adrenal Insufficiency",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is unnecessary because aldosterone secretion is preserved",
+      "Sick-day rules with glucocorticoid dose escalation during intercurrent illness and parenteral steroid for vomiting or major physiological stress",
+      "Emergency treatment of adrenal crisis with parenteral hydrocortisone and intravenous fluid resuscitation",
+      "Patient education, a steroid emergency card and provision of injectable hydrocortisone for home use",
+      "Review immune checkpoint inhibitor and exogenous glucocorticoid exposure as precipitants, continuing replacement as checkpoint-induced deficiency is usually permanent",
+      "Monitor clinical response and periodically assess the other anterior pituitary axes to confirm the deficiency remains isolated",
+      "Endocrinology referral for diagnostic confirmation and long-term supervision"
     ]
-   ],
-   "caption": "Overview comparison matrix for isolated acth deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "isolated-acth-deficiency-real-image",
-   "title": "Isolated ACTH deficiency: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "isolated_acth_deficiency-pathway",
+      "title": "Isolated ACTH deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary adrenal insufficiency",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adrenal crisis with hypotension, hypoglycaemia, hyponatraemia and collapse, especially during intercurrent illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol, Dynamic testing of cortisol reserve, such as a short synacthen test or, in specialist settings, insulin tolerance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is unnecessary because aldosterone secretion is preserved"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of isolated acth deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "isolated_acth_deficiency-matrix",
+      "title": "Isolated ACTH deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A selective deficiency of pituitary ACTH secretion with preservation of the other anterior pituitary hormones, causing secondary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Paired morning serum cortisol and plasma ACTH, showing low or inappropriately normal ACTH with low cortisol, Dynamic testing of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary adrenal insufficiency (Addison disease), with high ACTH, hyperpigmentation and mineralocorticoid deficiency,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong glucocorticoid replacement with hydrocortisone to correct cortisol deficiency; mineralocorticoid replacement is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting hyperpigmentation and hyperkalaemia and so missing the diagnosis, since these belong to primary insufficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for isolated acth deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "isolated_acth_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired morning serum cortisol and plasma ACTH",
+          "cells": [
+            {
+              "text": "Low ACTH with low cortisol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic cortisol reserve testing (synacthen, insulin tolerance or CRH)",
+          "cells": [
+            {
+              "text": "Cortisol reserve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other anterior pituitary axes",
+          "cells": [
+            {
+              "text": "Confirms the deficiency is isolated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium and glucose",
+          "cells": [
+            {
+              "text": "Hyponatraemia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of glucocorticoid and checkpoint inhibitor exposure",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Hypophysitis or structural lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_acth_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency (Addison disease)",
+          "cells": [
+            {
+              "text": "High ACTH, hyperpigmentation and mineralocorticoid deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous glucocorticoid suppression",
+          "cells": [
+            {
+              "text": "Commonest cause of secondary adrenal insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panhypopituitarism",
+          "cells": [
+            {
+              "text": "Multiple pituitary hormone deficiencies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "isolated_acth_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "Lifelong glucocorticoid replacement; mineralocorticoid unnecessary as aldosterone is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Dose escalation in intercurrent illness; parenteral steroid for vomiting or major stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone and intravenous fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Steroid emergency card and injectable hydrocortisone for home use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitants",
+          "cells": [
+            {
+              "text": "Review checkpoint inhibitor and exogenous glucocorticoid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Other pituitary axes reviewed periodically; endocrinology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "isolated_acth_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Isolated ACTH deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue, weight loss, anorexia, hypoglycaemia and hyponatraemia; no hyperpigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Adrenal crisis with hypotension, collapse or severe hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral hydrocortisone and intravenous fluid resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired morning cortisol and ACTH, dynamic cortisol reserve, other axes, pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low ACTH and cortisol with other axes intact confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary adrenal insufficiency or drug suppression; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong hydrocortisone; no mineralocorticoid needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sick-day rules with dose escalation and parenteral steroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Steroid emergency card and home injectable hydrocortisone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review checkpoint inhibitor and glucocorticoid precipitants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Endocrinology follow-up and periodic pituitary axis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong replacement; crisis prevention and education are key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

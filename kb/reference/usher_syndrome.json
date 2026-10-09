@@ -1,175 +1,444 @@
 {
- "id": "usher_syndrome",
- "name": "Usher syndrome",
- "aliases": [
-  "deaf-blindness",
-  "retinitis pigmentosa with sensorineural hearing loss",
-  "MYO7A",
-  "USH2A",
-  "CDH23",
-  "hereditary deaf-blindness"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology / Genetics",
- "specialty": "Otology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual sensory (deaf-blind) impairment",
-   "Inheritance is autosomal recessive, with many causative genes encoding proteins of the hair-cell and photoreceptor cilium (the 'Usher interactome'), including MYO7A, USH2A and CDH23",
-   "Type 1 features profound congenital deafness with absent vestibular function and delayed motor milestones from balance impairment",
-   "Type 2 features moderate-to-severe hearing loss with preserved vestibular function, and is the commonest subtype",
-   "Type 3 is characterised by progressive, later-onset hearing loss and variable vestibular findings",
-   "Night blindness and constricting peripheral (tunnel) vision from retinitis pigmentosa often appear later than the hearing loss, so early audiology cases may be missed as isolated deafness",
-   "Suspect Usher in any child with congenital sensorineural hearing loss, and arrange ophthalmology and electroretinography follow-up to detect retinal disease early"
+  "id": "usher_syndrome",
+  "name": "Usher syndrome",
+  "aliases": [
+    "deaf-blindness",
+    "retinitis pigmentosa with sensorineural hearing loss",
+    "MYO7A",
+    "USH2A",
+    "CDH23",
+    "hereditary deaf-blindness"
   ],
-  "pathophysiology": "Usher syndrome is a group of autosomal recessive disorders caused by mutations in genes whose protein products are needed for the structure and function of stereocilia in cochlear hair cells and of the connecting cilium in retinal photoreceptors. Loss of these shared proteins impairs mechanotransduction in the inner ear and progressive degeneration of rod and cone photoreceptors, giving the characteristic combination of sensorineural hearing loss and retinitis pigmentosa. In some subtypes vestibular hair cells are also affected, producing balance disturbance. The clinical subtype reflects which gene is involved and the severity of the resulting protein defect.",
-  "additionalDifferentials": [
-   "Non-syndromic sensorineural hearing loss",
-   "Isolated (non-syndromic) retinitis pigmentosa",
-   "Congenital rubella and other congenital infections affecting eye and ear",
-   "Alstrom syndrome and other ciliopathies with sensory loss",
-   "Refsum disease with retinopathy and neuropathy",
-   "Bardet-Biedl syndrome and mitochondrial disease with combined sensory involvement"
-  ],
-  "additionalInvestigations": [
-   "Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response",
-   "Vestibular function testing to help distinguish subtypes",
-   "Electroretinography to detect early photoreceptor dysfunction before symptomatic visual loss",
-   "Dilated fundus examination and optical coherence tomography for retinitis pigmentosa",
-   "Molecular genetic testing (gene panel) to confirm the diagnosis and subtype"
-  ],
-  "redFlags": [
-   "Congenital deafness with delayed independent walking, suggesting vestibular involvement and type 1 disease",
-   "Progressive night blindness or narrowing visual field in a deaf child",
-   "Family history of combined hearing and visual loss",
-   "Deterioration in mobility and orientation from combined sensory decline"
-  ],
-  "prognosis": "Hearing loss is generally stable or slowly progressive depending on subtype, while retinitis pigmentosa is progressive and can lead to severe visual impairment in adulthood; early cochlear implantation and low-vision support substantially improve communication and independence.",
-  "pitfalls": [
-   "Attributing congenital hearing loss to an isolated cause and not screening for retinal disease",
-   "Mislabelling early balance and motor delay as global developmental delay rather than vestibular loss",
-   "Assuming normal vision excludes Usher, as retinopathy often manifests later",
-   "Failing to arrange genetic counselling for an autosomal recessive condition with recurrence risk"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the moderate loss of type 2",
-   "Provide communication support through sign language, deaf-blind services and structured aural-visual rehabilitation",
-   "Support residual vision with low-vision aids, ultraviolet-protective lenses and management of retinitis pigmentosa complications by ophthalmology",
-   "Offer vestibular and balance physiotherapy where vestibular function is absent or impaired",
-   "Maintain regular audiological and ophthalmological surveillance, using electroretinography and optical coherence tomography to track photoreceptor degeneration",
-   "Coordinate multidisciplinary care across audiology, ophthalmology, clinical genetics and educational or occupational support",
-   "Offer genetic counselling and family testing given autosomal recessive inheritance, and discuss emerging gene-directed therapies for the underlying mutation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "usher_syndrome-pathway",
-   "title": "Usher syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual sensory (deaf-blind) impairment",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Congenital deafness with delayed independent walking, suggesting vestibular involvement and type 1 disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response, Vestibular function testing to help distinguish subtypes, Electroretinography to detect early photoreceptor dysfunction before"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the moderate loss of type 2"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing congenital hearing loss to an isolated cause and not screening for retinal disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of usher syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "usher_syndrome-matrix",
-   "title": "Usher syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology / Genetics",
+  "specialty": "Otology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual sensory (deaf-blind) impairment",
+      "Inheritance is autosomal recessive, with many causative genes encoding proteins of the hair-cell and photoreceptor cilium (the 'Usher interactome'), including MYO7A, USH2A and CDH23",
+      "Type 1 features profound congenital deafness with absent vestibular function and delayed motor milestones from balance impairment",
+      "Type 2 features moderate-to-severe hearing loss with preserved vestibular function, and is the commonest subtype",
+      "Type 3 is characterised by progressive, later-onset hearing loss and variable vestibular findings",
+      "Night blindness and constricting peripheral (tunnel) vision from retinitis pigmentosa often appear later than the hearing loss, so early audiology cases may be missed as isolated deafness",
+      "Suspect Usher in any child with congenital sensorineural hearing loss, and arrange ophthalmology and electroretinography follow-up to detect retinal disease early"
     ],
-    [
-     "Key Investigations",
-     "Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response, Vestibular function testing to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Usher syndrome is a group of autosomal recessive disorders caused by mutations in genes whose protein products are needed for the structure and function of stereocilia in cochlear hair cells and of the connecting cilium in retinal photoreceptors. Loss of these shared proteins impairs mechanotransduction in the inner ear and progressive degeneration of rod and cone photoreceptors, giving the characteristic combination of sensorineural hearing loss and retinitis pigmentosa. In some subtypes vestibular hair cells are also affected, producing balance disturbance. The clinical subtype reflects which gene is involved and the severity of the resulting protein defect.",
+    "additionalDifferentials": [
+      "Non-syndromic sensorineural hearing loss",
+      "Isolated (non-syndromic) retinitis pigmentosa",
+      "Congenital rubella and other congenital infections affecting eye and ear",
+      "Alstrom syndrome and other ciliopathies with sensory loss",
+      "Refsum disease with retinopathy and neuropathy",
+      "Bardet-Biedl syndrome and mitochondrial disease with combined sensory involvement"
     ],
-    [
-     "Primary Differentials",
-     "Non-syndromic sensorineural hearing loss, Isolated (non-syndromic) retinitis pigmentosa, Congenital rubella and other congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response",
+      "Vestibular function testing to help distinguish subtypes",
+      "Electroretinography to detect early photoreceptor dysfunction before symptomatic visual loss",
+      "Dilated fundus examination and optical coherence tomography for retinitis pigmentosa",
+      "Molecular genetic testing (gene panel) to confirm the diagnosis and subtype"
     ],
-    [
-     "Management Strategy",
-     "Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the",
-     "Core treatment modality"
+    "redFlags": [
+      "Congenital deafness with delayed independent walking, suggesting vestibular involvement and type 1 disease",
+      "Progressive night blindness or narrowing visual field in a deaf child",
+      "Family history of combined hearing and visual loss",
+      "Deterioration in mobility and orientation from combined sensory decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing congenital hearing loss to an isolated cause and not screening for retinal disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hearing loss is generally stable or slowly progressive depending on subtype, while retinitis pigmentosa is progressive and can lead to severe visual impairment in adulthood; early cochlear implantation and low-vision support substantially improve communication and independence.",
+    "pitfalls": [
+      "Attributing congenital hearing loss to an isolated cause and not screening for retinal disease",
+      "Mislabelling early balance and motor delay as global developmental delay rather than vestibular loss",
+      "Assuming normal vision excludes Usher, as retinopathy often manifests later",
+      "Failing to arrange genetic counselling for an autosomal recessive condition with recurrence risk"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the moderate loss of type 2",
+      "Provide communication support through sign language, deaf-blind services and structured aural-visual rehabilitation",
+      "Support residual vision with low-vision aids, ultraviolet-protective lenses and management of retinitis pigmentosa complications by ophthalmology",
+      "Offer vestibular and balance physiotherapy where vestibular function is absent or impaired",
+      "Maintain regular audiological and ophthalmological surveillance, using electroretinography and optical coherence tomography to track photoreceptor degeneration",
+      "Coordinate multidisciplinary care across audiology, ophthalmology, clinical genetics and educational or occupational support",
+      "Offer genetic counselling and family testing given autosomal recessive inheritance, and discuss emerging gene-directed therapies for the underlying mutation"
     ]
-   ],
-   "caption": "Overview comparison matrix for usher syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "usher-syndrome-real-image",
-   "title": "Usher syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "usher_syndrome-pathway",
+      "title": "Usher syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual sensory (deaf-blind) impairment",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Congenital deafness with delayed independent walking, suggesting vestibular involvement and type 1 disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response, Vestibular function testing to help distinguish subtypes, Electroretinography to detect early photoreceptor dysfunction before"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the moderate loss of type 2"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing congenital hearing loss to an isolated cause and not screening for retinal disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of usher syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "usher_syndrome-matrix",
+      "title": "Usher syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The defining combination is congenital sensorineural hearing loss together with progressive retinitis pigmentosa, producing dual",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure-tone and paediatric audiometry with otoacoustic emissions and auditory brainstem response, Vestibular function testing to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-syndromic sensorineural hearing loss, Isolated (non-syndromic) retinitis pigmentosa, Congenital rubella and other congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rehabilitate hearing early, with cochlear implantation for profound congenital deafness (notably type 1) and hearing aids for the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing congenital hearing loss to an isolated cause and not screening for retinal disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for usher syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "usher_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paediatric audiometry with otoacoustic emissions and auditory brainstem response",
+          "cells": [
+            {
+              "text": "Congenital sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular function testing",
+          "cells": [
+            {
+              "text": "Distinguishes the Usher subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Early photoreceptor dysfunction before symptomatic visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination and OCT",
+          "cells": [
+            {
+              "text": "Retinitis pigmentosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (gene panel)",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-syndromic sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Hearing loss without retinal involvement; retinal screening is needed to separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Retinal disease without congenital hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refsum disease with retinopathy and neuropathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Cochlear implantation for profound congenital deafness, notably type 1; hearing aids for others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Communication support",
+          "cells": [
+            {
+              "text": "Sign language, deaf-blind services and structured aural-visual rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Low-vision aids and ultraviolet-protective lenses for retinitis pigmentosa complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular physiotherapy",
+          "cells": [
+            {
+              "text": "Where vestibular function is absent or impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular ophthalmic and audiological review",
+          "cells": [
+            {
+              "text": "Monitoring of retinal and hearing status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "usher_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Usher syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Usher syndrome: congenital sensorineural deafness with night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (delayed walking, progressive night blindness or family history)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT and ophthalmic referral for early cochlear implant and vision assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paediatric audiometry, vestibular tests, electroretinography, fundus and OCT, gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm an Usher gene variant and subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-syndromic deafness or isolated retinitis pigmentosa; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early cochlear implantation for profound deafness; hearing aids for others",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sign language and deaf-blind communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision aids and ultraviolet-protective lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vestibular physiotherapy and regular ophthalmic and audiological review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hearing loss is lifelong; retinal decline varies by subtype and affects independence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

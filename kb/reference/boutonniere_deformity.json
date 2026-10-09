@@ -1,173 +1,230 @@
 {
- "id": "boutonniere_deformity",
- "name": "Boutonniere deformity",
- "aliases": [
-  "buttonhole deformity",
-  "central slip injury",
-  "boutonniere finger"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Hand & Peripheral nerve",
- "specialty": "Orthopaedics / Hand Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
-   "The primary lesion is disruption of the central slip at its insertion on the dorsal base of the middle phalanx",
-   "As the central slip fails, the lateral bands migrate volar to the axis of the proximal interphalangeal joint so that they flex it and hyperextend the distal joint",
-   "The Elson test detects an acute central slip injury, showing weak proximal interphalangeal extension and a rigid distal joint when the joint is flexed over an edge",
-   "Common causes include forced flexion of an extended finger, volar dislocation, dorsal laceration, and attritional rupture in rheumatoid arthritis",
-   "The deformity characteristically develops over the days following injury rather than appearing immediately",
-   "It must be distinguished from a pseudo-boutonniere, in which a volar plate injury causes a proximal interphalangeal flexion contracture without distal joint hyperextension",
-   "Generic management is proximal interphalangeal extension splinting with the distal joint left free for closed acute injuries, and surgery for displaced avulsions, open injuries or established deformity"
+  "id": "boutonniere_deformity",
+  "name": "Boutonniere deformity",
+  "aliases": [
+    "buttonhole deformity",
+    "central slip injury",
+    "boutonniere finger"
   ],
-  "pathophysiology": "A boutonniere deformity develops when the central slip insertion at the dorsal base of the middle phalanx is disrupted, removing the principal extensor of the proximal interphalangeal joint. The triangular ligament that normally tethers the lateral bands dorsally becomes attenuated, allowing the lateral bands to subluxate volar to the joint axis. In this displaced position the lateral bands act as flexors of the proximal interphalangeal joint and hyperextensors of the distal interphalangeal joint, and progressive contracture fixes the posture. In rheumatoid arthritis the same imbalance is produced by synovitis-driven attenuation of the extensor mechanism.",
-  "additionalDifferentials": [
-   "Pseudo-boutonniere from a volar plate hyperextension injury",
-   "Proximal interphalangeal joint fracture-dislocation",
-   "Dupuytren contracture of the proximal interphalangeal joint",
-   "Rheumatoid or psoriatic arthropathy with digital deformity",
-   "Congenital contracture or camptodactyly",
-   "A locked trigger finger at the proximal interphalangeal joint"
-  ],
-  "additionalInvestigations": [
-   "The Elson test to identify an acute central slip injury before the deformity is fully established",
-   "Plain radiographs to detect a dorsal avulsion fragment and assess the joint",
-   "Serial clinical assessment to detect an evolving deformity",
-   "Ultrasound or MRI to evaluate the central slip when the diagnosis is unclear",
-   "Screening for an inflammatory arthropathy when the deformity is atraumatic"
-  ],
-  "redFlags": [
-   "An open laceration over the proximal interphalangeal joint involving the extensor mechanism and joint",
-   "A displaced intra-articular avulsion fracture",
-   "Septic arthritis of the joint",
-   "A fixed established contracture that limits treatment options"
-  ],
-  "prognosis": "Early recognition and splinting give good results, whereas an established fixed deformity is difficult to correct and the outcomes of reconstructive surgery are less predictable.",
-  "pitfalls": [
-   "Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid",
-   "Confusing the deformity with a pseudo-boutonniere and mismanaging it",
-   "Unnecessarily splinting the distal interphalangeal joint",
-   "Under-recognising rheumatoid arthritis as the underlying cause"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute closed central slip injuries",
-   "Hand therapy with active and passive exercises to preserve distal interphalangeal and proximal interphalangeal mobility and prevent contracture",
-   "Operative repair or reinsertion of the central slip for open injuries or a displaced dorsal avulsion fragment",
-   "Disease-modifying antirheumatic therapy to control synovitis when the deformity is attritional in rheumatoid arthritis",
-   "Serial clinical review with the Elson test to detect an evolving deformity before it becomes fixed",
-   "Reconstructive surgery such as lateral band relocation or tendon reconstruction for an established fixed deformity",
-   "Referral to hand surgery for chronic, complex or rotationally significant injuries"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "boutonniere_deformity-pathway",
-   "title": "Boutonniere deformity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An open laceration over the proximal interphalangeal joint involving the extensor mechanism and joint",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: The Elson test to identify an acute central slip injury before the deformity is fully established, Plain radiographs to detect a dorsal avulsion fragment and assess the joint, Serial clinical assessment to detect an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute closed central slip injuries"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of boutonniere deformity."
-  }
- ],
- "tables": [
-  {
-   "id": "boutonniere_deformity-matrix",
-   "title": "Boutonniere deformity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Hand & Peripheral nerve",
+  "specialty": "Orthopaedics / Hand Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
+      "The primary lesion is disruption of the central slip at its insertion on the dorsal base of the middle phalanx",
+      "As the central slip fails, the lateral bands migrate volar to the axis of the proximal interphalangeal joint so that they flex it and hyperextend the distal joint",
+      "The Elson test detects an acute central slip injury, showing weak proximal interphalangeal extension and a rigid distal joint when the joint is flexed over an edge",
+      "Common causes include forced flexion of an extended finger, volar dislocation, dorsal laceration, and attritional rupture in rheumatoid arthritis",
+      "The deformity characteristically develops over the days following injury rather than appearing immediately",
+      "It must be distinguished from a pseudo-boutonniere, in which a volar plate injury causes a proximal interphalangeal flexion contracture without distal joint hyperextension",
+      "Generic management is proximal interphalangeal extension splinting with the distal joint left free for closed acute injuries, and surgery for displaced avulsions, open injuries or established deformity"
     ],
-    [
-     "Key Investigations",
-     "The Elson test to identify an acute central slip injury before the deformity is fully established, Plain radiographs to detect a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A boutonniere deformity develops when the central slip insertion at the dorsal base of the middle phalanx is disrupted, removing the principal extensor of the proximal interphalangeal joint. The triangular ligament that normally tethers the lateral bands dorsally becomes attenuated, allowing the lateral bands to subluxate volar to the joint axis. In this displaced position the lateral bands act as flexors of the proximal interphalangeal joint and hyperextensors of the distal interphalangeal joint, and progressive contracture fixes the posture. In rheumatoid arthritis the same imbalance is produced by synovitis-driven attenuation of the extensor mechanism.",
+    "additionalDifferentials": [
+      "Pseudo-boutonniere from a volar plate hyperextension injury",
+      "Proximal interphalangeal joint fracture-dislocation",
+      "Dupuytren contracture of the proximal interphalangeal joint",
+      "Rheumatoid or psoriatic arthropathy with digital deformity",
+      "Congenital contracture or camptodactyly",
+      "A locked trigger finger at the proximal interphalangeal joint"
     ],
-    [
-     "Primary Differentials",
-     "Pseudo-boutonniere from a volar plate hyperextension injury, Proximal interphalangeal joint fracture-dislocation, Dupuytren",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "The Elson test to identify an acute central slip injury before the deformity is fully established",
+      "Plain radiographs to detect a dorsal avulsion fragment and assess the joint",
+      "Serial clinical assessment to detect an evolving deformity",
+      "Ultrasound or MRI to evaluate the central slip when the diagnosis is unclear",
+      "Screening for an inflammatory arthropathy when the deformity is atraumatic"
     ],
-    [
-     "Management Strategy",
-     "Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute",
-     "Core treatment modality"
+    "redFlags": [
+      "An open laceration over the proximal interphalangeal joint involving the extensor mechanism and joint",
+      "A displaced intra-articular avulsion fracture",
+      "Septic arthritis of the joint",
+      "A fixed established contracture that limits treatment options"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early recognition and splinting give good results, whereas an established fixed deformity is difficult to correct and the outcomes of reconstructive surgery are less predictable.",
+    "pitfalls": [
+      "Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid",
+      "Confusing the deformity with a pseudo-boutonniere and mismanaging it",
+      "Unnecessarily splinting the distal interphalangeal joint",
+      "Under-recognising rheumatoid arthritis as the underlying cause"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute closed central slip injuries",
+      "Hand therapy with active and passive exercises to preserve distal interphalangeal and proximal interphalangeal mobility and prevent contracture",
+      "Operative repair or reinsertion of the central slip for open injuries or a displaced dorsal avulsion fragment",
+      "Disease-modifying antirheumatic therapy to control synovitis when the deformity is attritional in rheumatoid arthritis",
+      "Serial clinical review with the Elson test to detect an evolving deformity before it becomes fixed",
+      "Reconstructive surgery such as lateral band relocation or tendon reconstruction for an established fixed deformity",
+      "Referral to hand surgery for chronic, complex or rotationally significant injuries"
     ]
-   ],
-   "caption": "Overview comparison matrix for boutonniere deformity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "boutonniere-deformity-real-image",
-   "title": "Boutonniere deformity: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "boutonniere_deformity-pathway",
+      "title": "Boutonniere deformity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An open laceration over the proximal interphalangeal joint involving the extensor mechanism and joint",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: The Elson test to identify an acute central slip injury before the deformity is fully established, Plain radiographs to detect a dorsal avulsion fragment and assess the joint, Serial clinical assessment to detect an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute closed central slip injuries"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of boutonniere deformity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "boutonniere_deformity-matrix",
+      "title": "Boutonniere deformity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by proximal interphalangeal joint flexion combined with distal interphalangeal joint hyperextension",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "The Elson test to identify an acute central slip injury before the deformity is fully established, Plain radiographs to detect a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudo-boutonniere from a volar plate hyperextension injury, Proximal interphalangeal joint fracture-dislocation, Dupuytren",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Splinting the proximal interphalangeal joint in full extension while leaving the distal interphalangeal joint free, for acute",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the acute central slip injury because the deformity is delayed, which the Elson test helps avoid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for boutonniere deformity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "boutonniere_deformity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in boutonniere deformity",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Elson test", "cells": [{"text": "Weak PIP extension and a rigid DIP when the PIP is flexed over an edge; acute central slip injury"}], "cite": "c1"},
+        {"parameter": "Plain radiographs", "cells": [{"text": "Dorsal avulsion fragment and the joint"}], "cite": "c1"},
+        {"parameter": "Serial clinical assessment", "cells": [{"text": "An evolving deformity over the days after injury"}], "cite": "c1"},
+        {"parameter": "Ultrasound or MRI of the central slip", "cells": [{"text": "Used when the diagnosis is unclear"}], "cite": "c1"},
+        {"parameter": "Inflammatory arthropathy screen", "cells": [{"text": "When the deformity is atraumatic"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "boutonniere_deformity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike finger deformities",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Pseudo-boutonniere (volar plate injury)", "cells": [{"text": "PIP flexion contracture without DIP hyperextension"}], "cite": "c1"},
+        {"parameter": "Rheumatoid or other inflammatory arthropathy", "cells": [{"text": "Synovitis causes attritional extensor rupture; screen for inflammatory disease"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "boutonniere_deformity-treatment",
+      "kind": "treatment",
+      "title": "Management options in boutonniere deformity",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "PIP extension splinting", "cells": [{"text": "PIP splinted in full extension, DIP left free"}, {"text": "For acute closed central slip injuries"}], "cite": "c1"},
+        {"parameter": "Hand therapy", "cells": [{"text": "Active and passive exercises to preserve DIP and PIP mobility"}, {"text": "Prevents contracture"}], "cite": "c1"},
+        {"parameter": "Operative repair", "cells": [{"text": "Central slip repair or reinsertion"}, {"text": "For open injuries or a displaced dorsal avulsion"}], "cite": "c1"},
+        {"parameter": "Disease-modifying therapy", "cells": [{"text": "Disease-modifying antirheumatic therapy to control synovitis"}, {"text": "When the deformity is attritional in rheumatoid arthritis"}], "cite": "c1"},
+        {"parameter": "Serial review", "cells": [{"text": "Serial review with the Elson test"}, {"text": "Detects an evolving deformity before it fixes"}], "cite": "c1"},
+        {"parameter": "Reconstruction", "cells": [{"text": "Lateral band relocation or tendon reconstruction"}, {"text": "For an established fixed deformity"}], "cite": "c1"},
+        {"parameter": "Hand surgery referral", "cells": [{"text": "Chronic, complex or rotationally significant injuries"}, {"text": "Specialist review"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "boutonniere_deformity-dx-mgmt",
+      "title": "Diagnosis and management of boutonniere deformity",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Flexion injury at the PIP with pain; PIP extension weakens and DIP hyperextends over days", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: open laceration over the joint, displaced avulsion, or septic arthritis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent hand surgery review; washout and central slip repair", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Elson test; radiographs for a dorsal avulsion fragment", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Elson test positive, with weak PIP extension and rigid DIP?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Splint the PIP in full extension with the DIP free; hand therapy", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: consider pseudo-boutonniere or an inflammatory arthropathy", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Serial review for an evolving deformity", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Good results when treated early; a fixed deformity is harder to correct", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

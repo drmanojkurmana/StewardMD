@@ -1,167 +1,390 @@
 {
- "id": "reflux_hypersensitivity",
- "name": "Reflux hypersensitivity",
- "aliases": [
-  "oesophageal reflux hypersensitivity"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
-   "It is distinguished from functional heartburn by a positive association between symptoms and reflux episodes on monitoring",
-   "It is distinguished from reflux disease by the absence of excessive acid exposure and of mucosal injury",
-   "Both acidic and weakly acidic reflux events can trigger symptoms in sensitised patients",
-   "Diagnosis rests on endoscopy plus ambulatory pH-impedance monitoring with symptom-association analysis",
-   "Treatment may combine acid suppression or reflux-reducing measures with neuromodulators targeting hypersensitivity"
+  "id": "reflux_hypersensitivity",
+  "name": "Reflux hypersensitivity",
+  "aliases": [
+    "oesophageal reflux hypersensitivity"
   ],
-  "pathophysiology": "Reflux hypersensitivity is a disorder of gut-brain interaction in which the oesophagus perceives physiological reflux as painful. Although total acid exposure is within normal limits and the mucosa is intact, peripheral and central sensitisation lowers the threshold at which reflux events, whether acidic or weakly acidic, provoke symptoms. The positive temporal correlation between reflux episodes and symptoms defines the condition and separates it from functional heartburn, in which no such correlation exists.",
-  "additionalDifferentials": [
-   "Gastro-oesophageal reflux disease",
-   "Functional heartburn",
-   "Eosinophilic oesophagitis",
-   "Oesophageal motility disorder",
-   "Cardiac chest pain"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease",
-   "Ambulatory pH-impedance monitoring showing normal acid exposure but positive symptom association",
-   "Oesophageal manometry to exclude a motility disorder",
-   "Assessment of response to prior acid suppression",
-   "Evaluation of psychological contributors"
-  ],
-  "redFlags": [
-   "Alarm features such as dysphagia, weight loss or bleeding",
-   "Chest pain with cardiac features",
-   "Objective testing not supporting the diagnosis",
-   "Progressive symptoms"
-  ],
-  "prognosis": "The condition is benign, and symptom control is often achievable by reducing reflux events and using neuromodulators to lower hypersensitivity.",
-  "pitfalls": [
-   "Confusing it with functional heartburn (which lacks symptom-reflux correlation)",
-   "Assuming reflux disease and escalating acid suppression alone",
-   "Omitting symptom-association analysis on reflux monitoring",
-   "Missing eosinophilic oesophagitis or cardiac chest pain"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight loss, avoiding late meals and elevating the head of the bed",
-   "Use neuromodulators such as low-dose tricyclic antidepressants or selective serotonin reuptake inhibitors to target oesophageal hypersensitivity",
-   "Confirm the diagnosis with endoscopy and pH-impedance monitoring showing normal acid exposure but positive symptom association",
-   "Address psychological contributors with reassurance and psychological therapies where relevant",
-   "Consider anti-reflux surgery in carefully selected patients with a genuine, well-documented reflux trigger",
-   "Refer to gastroenterology for symptoms refractory to combined acid-suppressing and neuromodulatory treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reflux_hypersensitivity-pathway",
-   "title": "Reflux hypersensitivity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Alarm features such as dysphagia, weight loss or bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease, Ambulatory pH-impedance monitoring showing normal acid exposure but positive symptom association, Oesophageal manometry to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight loss, avoiding late meals and elevating the head of the bed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with functional heartburn (which lacks symptom-reflux correlation)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reflux hypersensitivity."
-  }
- ],
- "tables": [
-  {
-   "id": "reflux_hypersensitivity-matrix",
-   "title": "Reflux hypersensitivity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
+      "It is distinguished from functional heartburn by a positive association between symptoms and reflux episodes on monitoring",
+      "It is distinguished from reflux disease by the absence of excessive acid exposure and of mucosal injury",
+      "Both acidic and weakly acidic reflux events can trigger symptoms in sensitised patients",
+      "Diagnosis rests on endoscopy plus ambulatory pH-impedance monitoring with symptom-association analysis",
+      "Treatment may combine acid suppression or reflux-reducing measures with neuromodulators targeting hypersensitivity"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease, Ambulatory pH-impedance monitoring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reflux hypersensitivity is a disorder of gut-brain interaction in which the oesophagus perceives physiological reflux as painful. Although total acid exposure is within normal limits and the mucosa is intact, peripheral and central sensitisation lowers the threshold at which reflux events, whether acidic or weakly acidic, provoke symptoms. The positive temporal correlation between reflux episodes and symptoms defines the condition and separates it from functional heartburn, in which no such correlation exists.",
+    "additionalDifferentials": [
+      "Gastro-oesophageal reflux disease",
+      "Functional heartburn",
+      "Eosinophilic oesophagitis",
+      "Oesophageal motility disorder",
+      "Cardiac chest pain"
     ],
-    [
-     "Primary Differentials",
-     "Gastro-oesophageal reflux disease, Functional heartburn, Eosinophilic oesophagitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease",
+      "Ambulatory pH-impedance monitoring showing normal acid exposure but positive symptom association",
+      "Oesophageal manometry to exclude a motility disorder",
+      "Assessment of response to prior acid suppression",
+      "Evaluation of psychological contributors"
     ],
-    [
-     "Management Strategy",
-     "Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight",
-     "Core treatment modality"
+    "redFlags": [
+      "Alarm features such as dysphagia, weight loss or bleeding",
+      "Chest pain with cardiac features",
+      "Objective testing not supporting the diagnosis",
+      "Progressive symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with functional heartburn (which lacks symptom-reflux correlation)",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign, and symptom control is often achievable by reducing reflux events and using neuromodulators to lower hypersensitivity.",
+    "pitfalls": [
+      "Confusing it with functional heartburn (which lacks symptom-reflux correlation)",
+      "Assuming reflux disease and escalating acid suppression alone",
+      "Omitting symptom-association analysis on reflux monitoring",
+      "Missing eosinophilic oesophagitis or cardiac chest pain"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight loss, avoiding late meals and elevating the head of the bed",
+      "Use neuromodulators such as low-dose tricyclic antidepressants or selective serotonin reuptake inhibitors to target oesophageal hypersensitivity",
+      "Confirm the diagnosis with endoscopy and pH-impedance monitoring showing normal acid exposure but positive symptom association",
+      "Address psychological contributors with reassurance and psychological therapies where relevant",
+      "Consider anti-reflux surgery in carefully selected patients with a genuine, well-documented reflux trigger",
+      "Refer to gastroenterology for symptoms refractory to combined acid-suppressing and neuromodulatory treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for reflux hypersensitivity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reflux-hypersensitivity-real-image",
-   "title": "Reflux hypersensitivity: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "reflux_hypersensitivity-pathway",
+      "title": "Reflux hypersensitivity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Alarm features such as dysphagia, weight loss or bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease, Ambulatory pH-impedance monitoring showing normal acid exposure but positive symptom association, Oesophageal manometry to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight loss, avoiding late meals and elevating the head of the bed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with functional heartburn (which lacks symptom-reflux correlation)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reflux hypersensitivity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reflux_hypersensitivity-matrix",
+      "title": "Reflux hypersensitivity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Heartburn or chest pain triggered by reflux events despite physiologically normal oesophageal acid exposure",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with biopsies to exclude mucosal and eosinophilic disease, Ambulatory pH-impedance monitoring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gastro-oesophageal reflux disease, Functional heartburn, Eosinophilic oesophagitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce reflux events with a trial of proton pump inhibitor acid suppression and reflux-reducing lifestyle measures such as weight",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with functional heartburn (which lacks symptom-reflux correlation)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reflux hypersensitivity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reflux_hypersensitivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper endoscopy with biopsies",
+          "cells": [
+            {
+              "text": "Mucosal and eosinophilic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory pH-impedance monitoring",
+          "cells": [
+            {
+              "text": "Reflux pattern and symptom association"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reflux_hypersensitivity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Reflux events on pH-impedance"
+            },
+            {
+              "text": "pH-impedance monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Eosinophilic mucosal disease"
+            },
+            {
+              "text": "Biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional heartburn",
+          "cells": [
+            {
+              "text": "Normal reflux on objective testing"
+            },
+            {
+              "text": "pH-impedance monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reflux_hypersensitivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acid suppression",
+          "cells": [
+            {
+              "text": "Trial of proton pump inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromodulators",
+          "cells": [
+            {
+              "text": "Low-dose tricyclic antidepressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle",
+          "cells": [
+            {
+              "text": "Measures to reduce reflux events"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reflux_hypersensitivity-dx-mgmt",
+      "title": "Diagnosis and management of Reflux hypersensitivity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected reflux hypersensitivity: heartburn with normal reflux on objective testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Alarm features, chest pain with cardiac features, or testing not supporting diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for alarm features or cardiac chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsies; ambulatory pH-impedance monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are symptoms without reflux events or eosinophilia on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GORD, eosinophilic oesophagitis or functional heartburn; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial of PPI acid suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuromodulators such as low-dose tricyclic antidepressants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifestyle measures to reduce reflux events",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Gastroenterology review if symptoms persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

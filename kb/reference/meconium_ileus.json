@@ -1,176 +1,434 @@
 {
- "id": "meconium_ileus",
- "name": "Meconium ileus",
- "aliases": [
-  "neonatal meconium obstruction",
-  "inspissated meconium obstruction",
-  "simple meconium ileus",
-  "complicated meconium ileus"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
-   "It is the earliest clinical manifestation of cystic fibrosis in a large proportion of affected infants, so all cases warrant sweat testing and CFTR genetic evaluation",
-   "Presents in the first days of life with abdominal distension, bilious vomiting, and failure to pass meconium",
-   "Abdominal radiographs show dilated small-bowel loops with a soap-bubble or ground-glass appearance in the right lower quadrant and characteristically few air-fluid levels",
-   "Divided into simple obstruction and complicated forms with volvulus, atresia, perforation, or meconium peritonitis with calcification",
-   "A water-soluble contrast (gastrograffin-type) enema is both diagnostic, showing a microcolon and inspissated pellets, and therapeutic in uncomplicated cases",
-   "Surgery is reserved for enemas that fail or for complicated disease, and long-term management addresses the underlying cystic fibrosis"
+  "id": "meconium_ileus",
+  "name": "Meconium ileus",
+  "aliases": [
+    "neonatal meconium obstruction",
+    "inspissated meconium obstruction",
+    "simple meconium ileus",
+    "complicated meconium ileus"
   ],
-  "pathophysiology": "In meconium ileus, deficient CFTR chloride channel function reduces luminal fluid secretion and, together with abnormal pancreatic enzyme delivery, produces meconium that is dehydrated, viscid, and adherent. This inspissated meconium obstructs the distal ileum, causing proximal small-bowel dilatation and an unused microcolon distally. In complicated disease, the heavy, obstructed loops may twist (volvulus), lose their blood supply, become atretic, or perforate in utero, spilling sterile meconium into the peritoneum and producing meconium peritonitis with dystrophic calcification.",
-  "additionalDifferentials": [
-   "Ileal or jejunal atresia",
-   "Hirschsprung disease",
-   "Meconium plug syndrome and small left colon syndrome",
-   "Anorectal malformation with distal obstruction",
-   "Neonatal small left colon in an infant of a diabetic mother",
-   "Malrotation with midgut volvulus"
-  ],
-  "additionalInvestigations": [
-   "Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation",
-   "Water-soluble contrast enema to confirm microcolon and locate inspissated pellets, with therapeutic intent",
-   "Sweat chloride testing and CFTR mutation analysis to confirm cystic fibrosis",
-   "Newborn screening (immunoreactive trypsinogen) follow-up",
-   "Serial examination and imaging to detect complicated features such as volvulus or perforation",
-   "Prenatal ultrasound review for echogenic bowel, dilated loops, or intra-abdominal calcification"
-  ],
-  "redFlags": [
-   "Signs of peritonitis, marked tenderness, or abdominal wall erythema indicating perforation or meconium peritonitis",
-   "Rapid clinical deterioration or haemodynamic instability suggesting volvulus or ischaemia",
-   "Failure of contrast enema to relieve obstruction, mandating operative management",
-   "Free intraperitoneal air or a pseudocyst on imaging",
-   "Respiratory compromise from severe distension"
-  ],
-  "prognosis": "With prompt relief of obstruction, outcomes for the bowel are generally good, but overall prognosis is dominated by the underlying cystic fibrosis and its pulmonary and pancreatic manifestations. Complicated meconium ileus carries higher perioperative morbidity but survival with modern care remains favourable.",
-  "pitfalls": [
-   "Failing to test for cystic fibrosis in every infant with meconium ileus",
-   "Attempting contrast enema treatment when perforation or a complicated lesion is present",
-   "Missing an associated atresia or volvulus behind the obstruction",
-   "Inadequate attention to hydration status during hyperosmolar contrast enema",
-   "Overlooking evolving meconium peritonitis when abdominal calcification is present"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Ashcraft's Pediatric Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact inspissated meconium, with careful concurrent intravenous rehydration",
-   "Nasogastric decompression with fluid and electrolyte correction as initial resuscitation",
-   "Surgical intervention for complicated disease with volvulus, atresia, perforation or meconium peritonitis, using enterotomy and irrigation, resection or a temporary stoma",
-   "Adjunctive N-acetylcysteine to soften and dissolve tenacious meconium",
-   "Confirm underlying cystic fibrosis by sweat chloride and CFTR analysis, and initiate pancreatic enzyme replacement, fat-soluble vitamins, CFTR-modulator and respiratory care through the CF team",
-   "Genetic counselling for cystic fibrosis, an autosomal recessive condition, with family testing",
-   "Multidisciplinary follow-up combining paediatric surgery and the cystic fibrosis service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "meconium_ileus-pathway",
-   "title": "Meconium ileus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of peritonitis, marked tenderness, or abdominal wall erythema indicating perforation or meconium peritonitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation, Water-soluble contrast enema to confirm microcolon and locate inspissated pellets, with therapeutic intent,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact inspissated meconium, with careful concurrent intravenous rehydration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test for cystic fibrosis in every infant with meconium ileus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meconium ileus."
-  }
- ],
- "tables": [
-  {
-   "id": "meconium_ileus-matrix",
-   "title": "Meconium ileus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
+      "It is the earliest clinical manifestation of cystic fibrosis in a large proportion of affected infants, so all cases warrant sweat testing and CFTR genetic evaluation",
+      "Presents in the first days of life with abdominal distension, bilious vomiting, and failure to pass meconium",
+      "Abdominal radiographs show dilated small-bowel loops with a soap-bubble or ground-glass appearance in the right lower quadrant and characteristically few air-fluid levels",
+      "Divided into simple obstruction and complicated forms with volvulus, atresia, perforation, or meconium peritonitis with calcification",
+      "A water-soluble contrast (gastrograffin-type) enema is both diagnostic, showing a microcolon and inspissated pellets, and therapeutic in uncomplicated cases",
+      "Surgery is reserved for enemas that fail or for complicated disease, and long-term management addresses the underlying cystic fibrosis"
     ],
-    [
-     "Key Investigations",
-     "Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation, Water-soluble",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In meconium ileus, deficient CFTR chloride channel function reduces luminal fluid secretion and, together with abnormal pancreatic enzyme delivery, produces meconium that is dehydrated, viscid, and adherent. This inspissated meconium obstructs the distal ileum, causing proximal small-bowel dilatation and an unused microcolon distally. In complicated disease, the heavy, obstructed loops may twist (volvulus), lose their blood supply, become atretic, or perforate in utero, spilling sterile meconium into the peritoneum and producing meconium peritonitis with dystrophic calcification.",
+    "additionalDifferentials": [
+      "Ileal or jejunal atresia",
+      "Hirschsprung disease",
+      "Meconium plug syndrome and small left colon syndrome",
+      "Anorectal malformation with distal obstruction",
+      "Neonatal small left colon in an infant of a diabetic mother",
+      "Malrotation with midgut volvulus"
     ],
-    [
-     "Primary Differentials",
-     "Ileal or jejunal atresia, Hirschsprung disease, Meconium plug syndrome and small left colon syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation",
+      "Water-soluble contrast enema to confirm microcolon and locate inspissated pellets, with therapeutic intent",
+      "Sweat chloride testing and CFTR mutation analysis to confirm cystic fibrosis",
+      "Newborn screening (immunoreactive trypsinogen) follow-up",
+      "Serial examination and imaging to detect complicated features such as volvulus or perforation",
+      "Prenatal ultrasound review for echogenic bowel, dilated loops, or intra-abdominal calcification"
     ],
-    [
-     "Management Strategy",
-     "In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of peritonitis, marked tenderness, or abdominal wall erythema indicating perforation or meconium peritonitis",
+      "Rapid clinical deterioration or haemodynamic instability suggesting volvulus or ischaemia",
+      "Failure of contrast enema to relieve obstruction, mandating operative management",
+      "Free intraperitoneal air or a pseudocyst on imaging",
+      "Respiratory compromise from severe distension"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test for cystic fibrosis in every infant with meconium ileus",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt relief of obstruction, outcomes for the bowel are generally good, but overall prognosis is dominated by the underlying cystic fibrosis and its pulmonary and pancreatic manifestations. Complicated meconium ileus carries higher perioperative morbidity but survival with modern care remains favourable.",
+    "pitfalls": [
+      "Failing to test for cystic fibrosis in every infant with meconium ileus",
+      "Attempting contrast enema treatment when perforation or a complicated lesion is present",
+      "Missing an associated atresia or volvulus behind the obstruction",
+      "Inadequate attention to hydration status during hyperosmolar contrast enema",
+      "Overlooking evolving meconium peritonitis when abdominal calcification is present"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Ashcraft's Pediatric Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact inspissated meconium, with careful concurrent intravenous rehydration",
+      "Nasogastric decompression with fluid and electrolyte correction as initial resuscitation",
+      "Surgical intervention for complicated disease with volvulus, atresia, perforation or meconium peritonitis, using enterotomy and irrigation, resection or a temporary stoma",
+      "Adjunctive N-acetylcysteine to soften and dissolve tenacious meconium",
+      "Confirm underlying cystic fibrosis by sweat chloride and CFTR analysis, and initiate pancreatic enzyme replacement, fat-soluble vitamins, CFTR-modulator and respiratory care through the CF team",
+      "Genetic counselling for cystic fibrosis, an autosomal recessive condition, with family testing",
+      "Multidisciplinary follow-up combining paediatric surgery and the cystic fibrosis service"
     ]
-   ],
-   "caption": "Overview comparison matrix for meconium ileus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meconium-ileus-real-image",
-   "title": "Meconium ileus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "meconium_ileus-pathway",
+      "title": "Meconium ileus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of peritonitis, marked tenderness, or abdominal wall erythema indicating perforation or meconium peritonitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation, Water-soluble contrast enema to confirm microcolon and locate inspissated pellets, with therapeutic intent,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact inspissated meconium, with careful concurrent intravenous rehydration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test for cystic fibrosis in every infant with meconium ileus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meconium ileus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meconium_ileus-matrix",
+      "title": "Meconium ileus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A neonatal distal small-bowel obstruction caused by abnormally thick, tenacious meconium impacting the terminal ileum",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal radiograph for dilated loops, soap-bubble sign, and any peritoneal calcification suggesting perforation, Water-soluble",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ileal or jejunal atresia, Hirschsprung disease, Meconium plug syndrome and small left colon syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In uncomplicated cases, therapeutic water-soluble (gastrografin-type) contrast enema, sometimes repeated, to disimpact",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test for cystic fibrosis in every infant with meconium ileus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meconium ileus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "meconium_ileus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Dilated loops, soap-bubble sign and peritoneal calcification suggesting perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water-soluble contrast enema",
+          "cells": [
+            {
+              "text": "Microcolon and inspissated pellets, with therapeutic intent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing and CFTR analysis",
+          "cells": [
+            {
+              "text": "Confirms cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening (immunoreactive trypsinogen) follow-up",
+          "cells": [
+            {
+              "text": "Immunoreactive trypsinogen follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination and imaging",
+          "cells": [
+            {
+              "text": "Complicated features such as volvulus or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal ultrasound review",
+          "cells": [
+            {
+              "text": "Echogenic bowel, dilated loops or intra-abdominal calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "meconium_ileus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic contrast enema",
+          "cells": [
+            {
+              "text": "Water-soluble, sometimes repeated, to disimpact inspissated meconium, with careful IV rehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasogastric decompression",
+          "cells": [
+            {
+              "text": "Fluid and electrolyte correction as initial resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for complicated disease",
+          "cells": [
+            {
+              "text": "Volvulus, atresia, perforation or meconium peritonitis: enterotomy and irrigation, resection or temporary stoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Adjunct to soften and dissolve tenacious meconium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis confirmation and care",
+          "cells": [
+            {
+              "text": "Sweat chloride and CFTR analysis; pancreatic enzymes, fat-soluble vitamins, CFTR modulator and respiratory care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgery and cystic fibrosis service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "meconium_ileus-dx-mgmt",
+      "title": "Diagnosis and management of Meconium ileus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with abdominal distension and bowel obstruction; suspected meconium ileus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonitis, perforation signs, volvulus or respiratory compromise from distension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery for perforation, volvulus or meconium peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph and water-soluble contrast enema for microcolon and pellets",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the contrast enema show microcolon with inspissated meconium?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intestinal atresia, Hirschsprung disease or meconium plug syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Water-soluble contrast enema, sometimes repeated, with IV rehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasogastric decompression with fluid and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "N-acetylcysteine to soften and dissolve tenacious meconium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sweat chloride and CFTR analysis; cystic fibrosis team for enzymes and respiratory care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery for complicated disease; cystic fibrosis care and family genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

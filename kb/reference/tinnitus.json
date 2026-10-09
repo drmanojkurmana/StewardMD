@@ -1,176 +1,465 @@
 {
- "id": "tinnitus",
- "name": "Tinnitus",
- "aliases": [
-  "ringing in the ears",
-  "subjective tinnitus",
-  "objective tinnitus"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
-   "It is usefully divided into subjective tinnitus, heard only by the patient, and the much rarer objective tinnitus, which can also be detected by the examiner",
-   "Most subjective tinnitus accompanies sensorineural hearing loss from noise exposure, presbycusis, ototoxic drugs or Meniere disease",
-   "Pulsatile tinnitus that is synchronous with the heartbeat suggests a vascular cause such as a glomus tumour, an arteriovenous malformation or a dural sinus abnormality and needs vascular imaging",
-   "Rhythmic clicking that is not pulse-synchronous may be due to palatal or middle ear muscle myoclonus or a patulous Eustachian tube",
-   "Unilateral tinnitus with asymmetrical hearing loss should prompt evaluation for a retrocochlear lesion such as an acoustic neuroma",
-   "Aggravating factors such as ototoxic and other implicated medications, caffeine, stress and poor sleep should be reviewed",
-   "Because there is often no curative treatment, management centres on treating any underlying cause, hearing aids or sound therapy for masking, and cognitive and habituation-based approaches such as tinnitus retraining therapy"
+  "id": "tinnitus",
+  "name": "Tinnitus",
+  "aliases": [
+    "ringing in the ears",
+    "subjective tinnitus",
+    "objective tinnitus"
   ],
-  "pathophysiology": "Subjective tinnitus is thought to arise from aberrant neural activity generated when the cochlea or auditory nerve is damaged; loss of input leads to maladaptive changes and increased spontaneous firing and reorganisation in the central auditory pathways, so the brain perceives sound that is not present. Emotional and attentional networks amplify and sustain the perception, which explains why distress and the loudness of tinnitus are only loosely related. Objective tinnitus, in contrast, has a genuine internal acoustic source: turbulent or pulsatile blood flow in vascular lesions, or repetitive contraction of palatal, tensor tympani or stapedius muscles, generates a real sound transmitted to the ear.",
-  "additionalDifferentials": [
-   "Noise-induced or age-related sensorineural hearing loss",
-   "Meniere disease",
-   "Ototoxicity from drugs",
-   "Otosclerosis or middle ear effusion",
-   "Acoustic neuroma or other retrocochlear lesion",
-   "Vascular causes (glomus tumour, arteriovenous malformation, carotid or dural sinus disease)",
-   "Palatal or middle ear myoclonus and patulous Eustachian tube"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy and pure tone audiometry to characterise associated hearing loss",
-   "Tympanometry and acoustic reflex testing where middle ear or myoclonic causes are suspected",
-   "Tinnitus pitch and loudness matching for assessment and rehabilitation",
-   "MRI of the internal auditory meatus for unilateral or asymmetrical tinnitus",
-   "CT/MR angiography or venography for pulsatile tinnitus",
-   "Blood tests for anaemia, thyroid dysfunction or vascular risk factors where clinically indicated"
-  ],
-  "redFlags": [
-   "Unilateral tinnitus with asymmetrical hearing loss suggesting a retrocochlear tumour",
-   "Pulsatile tinnitus requiring vascular imaging to exclude a treatable vascular lesion",
-   "Associated neurological signs, facial numbness or weakness",
-   "Sudden hearing loss accompanying the tinnitus, which is an emergency",
-   "Tinnitus with severe distress, depression or suicidal ideation needing urgent mental health support"
-  ],
-  "prognosis": "Many patients habituate over time and cope well with reassurance, sound enrichment and psychological approaches, and tinnitus linked to a treatable cause may improve when that cause is addressed; however, some individuals have persistent, distressing tinnitus that requires ongoing support.",
-  "pitfalls": [
-   "Missing an acoustic neuroma behind unilateral tinnitus",
-   "Failing to image pulsatile tinnitus for a vascular source",
-   "Dismissing the symptom without exploring its psychological impact and sleep disturbance",
-   "Overlooking ototoxic medication or reversible contributors",
-   "Promising a cure rather than framing management around control and habituation"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or stopping ototoxic drugs",
-   "Investigate and refer red-flag patterns: unilateral or asymmetrical tinnitus for MRI of the internal auditory meatus to exclude an acoustic neuroma, and pulsatile tinnitus for vascular imaging",
-   "Offer sound enrichment or masking to reduce the prominence of the tinnitus",
-   "Provide psychological therapies such as cognitive behavioural therapy and tinnitus retraining therapy to aid habituation and reduce distress",
-   "Give reassurance and education, explaining that tinnitus is a symptom and that most people habituate over time",
-   "Treat associated anxiety, depression and insomnia, which amplify and sustain the perception",
-   "Consider treatment directed at objective causes, such as intervention for a vascular lesion or management of palatal or middle-ear myoclonus"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tinnitus-pathway",
-   "title": "Tinnitus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral tinnitus with asymmetrical hearing loss suggesting a retrocochlear tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy and pure tone audiometry to characterise associated hearing loss, Tympanometry and acoustic reflex testing where middle ear or myoclonic causes are suspected, Tinnitus pitch and loudness matching for assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or stopping ototoxic drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an acoustic neuroma behind unilateral tinnitus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tinnitus."
-  }
- ],
- "tables": [
-  {
-   "id": "tinnitus-matrix",
-   "title": "Tinnitus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
+      "It is usefully divided into subjective tinnitus, heard only by the patient, and the much rarer objective tinnitus, which can also be detected by the examiner",
+      "Most subjective tinnitus accompanies sensorineural hearing loss from noise exposure, presbycusis, ototoxic drugs or Meniere disease",
+      "Pulsatile tinnitus that is synchronous with the heartbeat suggests a vascular cause such as a glomus tumour, an arteriovenous malformation or a dural sinus abnormality and needs vascular imaging",
+      "Rhythmic clicking that is not pulse-synchronous may be due to palatal or middle ear muscle myoclonus or a patulous Eustachian tube",
+      "Unilateral tinnitus with asymmetrical hearing loss should prompt evaluation for a retrocochlear lesion such as an acoustic neuroma",
+      "Aggravating factors such as ototoxic and other implicated medications, caffeine, stress and poor sleep should be reviewed",
+      "Because there is often no curative treatment, management centres on treating any underlying cause, hearing aids or sound therapy for masking, and cognitive and habituation-based approaches such as tinnitus retraining therapy"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy and pure tone audiometry to characterise associated hearing loss, Tympanometry and acoustic reflex testing where middle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subjective tinnitus is thought to arise from aberrant neural activity generated when the cochlea or auditory nerve is damaged; loss of input leads to maladaptive changes and increased spontaneous firing and reorganisation in the central auditory pathways, so the brain perceives sound that is not present. Emotional and attentional networks amplify and sustain the perception, which explains why distress and the loudness of tinnitus are only loosely related. Objective tinnitus, in contrast, has a genuine internal acoustic source: turbulent or pulsatile blood flow in vascular lesions, or repetitive contraction of palatal, tensor tympani or stapedius muscles, generates a real sound transmitted to the ear.",
+    "additionalDifferentials": [
+      "Noise-induced or age-related sensorineural hearing loss",
+      "Meniere disease",
+      "Ototoxicity from drugs",
+      "Otosclerosis or middle ear effusion",
+      "Acoustic neuroma or other retrocochlear lesion",
+      "Vascular causes (glomus tumour, arteriovenous malformation, carotid or dural sinus disease)",
+      "Palatal or middle ear myoclonus and patulous Eustachian tube"
     ],
-    [
-     "Primary Differentials",
-     "Noise-induced or age-related sensorineural hearing loss, Meniere disease, Ototoxicity from drugs",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy and pure tone audiometry to characterise associated hearing loss",
+      "Tympanometry and acoustic reflex testing where middle ear or myoclonic causes are suspected",
+      "Tinnitus pitch and loudness matching for assessment and rehabilitation",
+      "MRI of the internal auditory meatus for unilateral or asymmetrical tinnitus",
+      "CT/MR angiography or venography for pulsatile tinnitus",
+      "Blood tests for anaemia, thyroid dysfunction or vascular risk factors where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral tinnitus with asymmetrical hearing loss suggesting a retrocochlear tumour",
+      "Pulsatile tinnitus requiring vascular imaging to exclude a treatable vascular lesion",
+      "Associated neurological signs, facial numbness or weakness",
+      "Sudden hearing loss accompanying the tinnitus, which is an emergency",
+      "Tinnitus with severe distress, depression or suicidal ideation needing urgent mental health support"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an acoustic neuroma behind unilateral tinnitus",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients habituate over time and cope well with reassurance, sound enrichment and psychological approaches, and tinnitus linked to a treatable cause may improve when that cause is addressed; however, some individuals have persistent, distressing tinnitus that requires ongoing support.",
+    "pitfalls": [
+      "Missing an acoustic neuroma behind unilateral tinnitus",
+      "Failing to image pulsatile tinnitus for a vascular source",
+      "Dismissing the symptom without exploring its psychological impact and sleep disturbance",
+      "Overlooking ototoxic medication or reversible contributors",
+      "Promising a cure rather than framing management around control and habituation"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or stopping ototoxic drugs",
+      "Investigate and refer red-flag patterns: unilateral or asymmetrical tinnitus for MRI of the internal auditory meatus to exclude an acoustic neuroma, and pulsatile tinnitus for vascular imaging",
+      "Offer sound enrichment or masking to reduce the prominence of the tinnitus",
+      "Provide psychological therapies such as cognitive behavioural therapy and tinnitus retraining therapy to aid habituation and reduce distress",
+      "Give reassurance and education, explaining that tinnitus is a symptom and that most people habituate over time",
+      "Treat associated anxiety, depression and insomnia, which amplify and sustain the perception",
+      "Consider treatment directed at objective causes, such as intervention for a vascular lesion or management of palatal or middle-ear myoclonus"
     ]
-   ],
-   "caption": "Overview comparison matrix for tinnitus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tinnitus-real-image",
-   "title": "Tinnitus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tinnitus-pathway",
+      "title": "Tinnitus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral tinnitus with asymmetrical hearing loss suggesting a retrocochlear tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy and pure tone audiometry to characterise associated hearing loss, Tympanometry and acoustic reflex testing where middle ear or myoclonic causes are suspected, Tinnitus pitch and loudness matching for assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or stopping ototoxic drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an acoustic neuroma behind unilateral tinnitus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tinnitus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tinnitus-matrix",
+      "title": "Tinnitus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Tinnitus is the perception of sound in the absence of an external source and is a symptom rather than a disease in itself",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy and pure tone audiometry to characterise associated hearing loss, Tympanometry and acoustic reflex testing where middle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Noise-induced or age-related sensorineural hearing loss, Meniere disease, Ototoxicity from drugs",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat any underlying cause, such as fitting hearing aids for sensorineural loss, managing Meniere disease or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an acoustic neuroma behind unilateral tinnitus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tinnitus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tinnitus-dx-mgmt",
+      "title": "Diagnosis and management of Tinnitus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tinnitus: subjective sound perception with or without hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: unilateral asymmetric tinnitus, pulsatile tinnitus, or sudden hearing loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for sudden hearing loss; mental health support if distress is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry and tympanometry; MRI for unilateral tinnitus; vascular imaging if pulsatile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging exclude retrocochlear or vascular cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Subjective tinnitus with sensorineural loss: manage with aids and therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, such as hearing aids or stopping ototoxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MRI of the internal auditory meatus for unilateral tinnitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sound enrichment or masking to reduce prominence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cognitive behavioural therapy and tinnitus retraining therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat anxiety, depression and insomnia that sustain the symptom",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many habituate; tinnitus with a treatable cause may improve when that cause is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tinnitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and pure tone audiometry",
+          "cells": [
+            {
+              "text": "Associated sensorineural or conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and acoustic reflex testing",
+          "cells": [
+            {
+              "text": "Middle ear or myoclonic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus",
+          "cells": [
+            {
+              "text": "Unilateral or asymmetrical tinnitus, to exclude acoustic neuroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography or venography",
+          "cells": [
+            {
+              "text": "Pulsatile tinnitus, for vascular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests",
+          "cells": [
+            {
+              "text": "Anaemia, thyroid dysfunction or vascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tinnitus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acoustic neuroma or retrocochlear lesion",
+          "cells": [
+            {
+              "text": "Unilateral tinnitus with asymmetrical hearing loss; MRI excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular causes such as glomus tumour or arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Pulsatile tinnitus synchronous with the heartbeat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palatal or middle ear myoclonus",
+          "cells": [
+            {
+              "text": "Rhythmic clicking that is not pulse-synchronous"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tinnitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Hearing aids for sensorineural loss, Meniere management or stopping ototoxic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of red-flag patterns",
+          "cells": [
+            {
+              "text": "MRI for unilateral tinnitus; vascular imaging for pulsatile tinnitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sound enrichment or masking",
+          "cells": [
+            {
+              "text": "Reduces prominence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapies",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy and tinnitus retraining therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and education",
+          "cells": [
+            {
+              "text": "Most people habituate over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety, depression and insomnia treatment",
+          "cells": [
+            {
+              "text": "These amplify and sustain the perception"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

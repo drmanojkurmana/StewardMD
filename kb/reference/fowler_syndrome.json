@@ -1,177 +1,446 @@
 {
- "id": "fowler_syndrome",
- "name": "Fowler's syndrome",
- "aliases": [
-  "Fowler's syndrome",
-  "Primary disorder of urethral sphincter relaxation"
- ],
- "class": "non_infective",
- "system": "Genitourinary",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuro-urology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a large-capacity bladder and characteristically reduced sensation of bladder fullness.",
-   "Strongly associated with polycystic ovaries and features of polycystic ovary syndrome, implying a hormonal influence on the urethral sphincter muscle.",
-   "Onset is often precipitated by an event such as surgery, childbirth or opioid analgesia.",
-   "The hallmark is abnormal striated urethral sphincter electromyography showing complex repetitive discharges and decelerating bursts, reflecting impaired sphincter relaxation.",
-   "Removal of an indwelling catheter is often difficult and uncomfortable because the sphincter grips the catheter.",
-   "Increased urethral sphincter volume on ultrasound and a raised maximum urethral closure pressure support the diagnosis.",
-   "Sacral neuromodulation is the most effective treatment and can restore spontaneous voiding.",
-   "The disorder is frequently and wrongly labelled as psychogenic retention, delaying appropriate care."
+  "id": "fowler_syndrome",
+  "name": "Fowler's syndrome",
+  "aliases": [
+    "Fowler's syndrome",
+    "Primary disorder of urethral sphincter relaxation"
   ],
-  "pathophysiology": "The primary abnormality is thought to lie within the striated (external) urethral sphincter itself, which fails to relax and instead maintains abnormal, ongoing electrical activity. Concentric needle electromyography reveals complex repetitive discharges and decelerating bursts, a pattern resembling a channelopathy that produces impaired relaxation and apparent sphincter muscle bulk; the strong association with polycystic ovaries suggests that sex steroids influence the stability of the sphincter muscle membrane. The continuously contracting sphincter generates a functional bladder outlet obstruction, but, crucially, the heightened afferent traffic arising from the abnormal sphincter is believed to inhibit the detrusor and suppress bladder sensation through spinal reflex pathways. This explains the characteristic paradox of a large-capacity, poorly sensate bladder that fails to empty, and provides the rationale for sacral neuromodulation, which is thought to restore normal afferent balance and permit voiding.",
-  "additionalDifferentials": [
-   "Neurogenic acontractile or underactive detrusor",
-   "Multiple sclerosis or other central neurological cause of retention",
-   "Cauda equina syndrome or a sacral cord lesion",
-   "Anatomical bladder outlet obstruction such as urethral stricture or stenosis",
-   "Detrusor-sphincter dyssynergia",
-   "Functional (psychogenic) urinary retention",
-   "Pelvic mass causing extrinsic outlet compression"
-  ],
-  "additionalInvestigations": [
-   "Post-void residual measurement or bladder ultrasound",
-   "Concentric needle electromyography of the striated urethral sphincter",
-   "Urethral pressure profilometry",
-   "Ultrasound measurement of urethral sphincter volume",
-   "Video urodynamics",
-   "MRI of the spine and neuroaxis to exclude neurological disease",
-   "Pelvic ultrasound to assess for polycystic ovaries"
-  ],
-  "redFlags": [
-   "New neurological signs such as limb weakness, saddle anaesthesia or bowel dysfunction, suggesting a cord or cauda equina lesion",
-   "Upper urinary tract dilatation or deteriorating renal function",
-   "Fever or loin pain suggesting infection of a chronically retained or catheterised bladder",
-   "Rapidly progressive or bilateral lower limb symptoms"
-  ],
-  "prognosis": "The condition is chronic, but sacral neuromodulation restores spontaneous voiding in a substantial proportion of women. Without effective treatment patients often remain dependent on catheterisation, which may be poorly tolerated.",
-  "pitfalls": [
-   "Misdiagnosis as psychogenic retention, delaying appropriate treatment",
-   "Failure to perform striated sphincter electromyography",
-   "Assuming clean intermittent self-catheterisation will be well tolerated, when it is often painful because of the sphincter abnormality",
-   "Overlooking the association with polycystic ovaries",
-   "Attributing the retention solely to a precipitating event without recognising the underlying disorder"
-  ],
-  "references": [
-   "Neuro-urology and functional urology reference texts",
-   "International continence society terminology and standards documents",
-   "Standard urology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive treatment",
-   "Manage bladder emptying in the interim with clean intermittent self-catheterisation, recognising it is often poorly tolerated because the sphincter grips the catheter",
-   "Avoid opioid analgesia, which can precipitate or worsen retention",
-   "Consider urethral sphincter botulinum toxin injection where neuromodulation is unsuitable or unsuccessful",
-   "Address the associated polycystic ovary syndrome",
-   "Monitor for urinary tract infection and safeguard the upper renal tracts and renal function",
-   "Refer to a specialist urology service and provide psychological support for this chronic condition"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fowler_syndrome-pathway",
-   "title": "Fowler's syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a large-capacity bladder and characteristically reduced sensation of bladder fullness.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New neurological signs such as limb weakness, saddle anaesthesia or bowel dysfunction, suggesting a cord or cauda equina lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Post-void residual measurement or bladder ultrasound, Concentric needle electromyography of the striated urethral sphincter, Urethral pressure profilometry"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosis as psychogenic retention, delaying appropriate treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fowler's syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "fowler_syndrome-matrix",
-   "title": "Fowler's syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuro-urology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a large-capacity bladder and characteristically reduced sensation of bladder fullness.",
+      "Strongly associated with polycystic ovaries and features of polycystic ovary syndrome, implying a hormonal influence on the urethral sphincter muscle.",
+      "Onset is often precipitated by an event such as surgery, childbirth or opioid analgesia.",
+      "The hallmark is abnormal striated urethral sphincter electromyography showing complex repetitive discharges and decelerating bursts, reflecting impaired sphincter relaxation.",
+      "Removal of an indwelling catheter is often difficult and uncomfortable because the sphincter grips the catheter.",
+      "Increased urethral sphincter volume on ultrasound and a raised maximum urethral closure pressure support the diagnosis.",
+      "Sacral neuromodulation is the most effective treatment and can restore spontaneous voiding.",
+      "The disorder is frequently and wrongly labelled as psychogenic retention, delaying appropriate care."
     ],
-    [
-     "Key Investigations",
-     "Post-void residual measurement or bladder ultrasound, Concentric needle electromyography of the striated urethral sphincter,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The primary abnormality is thought to lie within the striated (external) urethral sphincter itself, which fails to relax and instead maintains abnormal, ongoing electrical activity. Concentric needle electromyography reveals complex repetitive discharges and decelerating bursts, a pattern resembling a channelopathy that produces impaired relaxation and apparent sphincter muscle bulk; the strong association with polycystic ovaries suggests that sex steroids influence the stability of the sphincter muscle membrane. The continuously contracting sphincter generates a functional bladder outlet obstruction, but, crucially, the heightened afferent traffic arising from the abnormal sphincter is believed to inhibit the detrusor and suppress bladder sensation through spinal reflex pathways. This explains the characteristic paradox of a large-capacity, poorly sensate bladder that fails to empty, and provides the rationale for sacral neuromodulation, which is thought to restore normal afferent balance and permit voiding.",
+    "additionalDifferentials": [
+      "Neurogenic acontractile or underactive detrusor",
+      "Multiple sclerosis or other central neurological cause of retention",
+      "Cauda equina syndrome or a sacral cord lesion",
+      "Anatomical bladder outlet obstruction such as urethral stricture or stenosis",
+      "Detrusor-sphincter dyssynergia",
+      "Functional (psychogenic) urinary retention",
+      "Pelvic mass causing extrinsic outlet compression"
     ],
-    [
-     "Primary Differentials",
-     "Neurogenic acontractile or underactive detrusor, Multiple sclerosis or other central neurological cause of retention, Cauda",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Post-void residual measurement or bladder ultrasound",
+      "Concentric needle electromyography of the striated urethral sphincter",
+      "Urethral pressure profilometry",
+      "Ultrasound measurement of urethral sphincter volume",
+      "Video urodynamics",
+      "MRI of the spine and neuroaxis to exclude neurological disease",
+      "Pelvic ultrasound to assess for polycystic ovaries"
     ],
-    [
-     "Management Strategy",
-     "Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive",
-     "Core treatment modality"
+    "redFlags": [
+      "New neurological signs such as limb weakness, saddle anaesthesia or bowel dysfunction, suggesting a cord or cauda equina lesion",
+      "Upper urinary tract dilatation or deteriorating renal function",
+      "Fever or loin pain suggesting infection of a chronically retained or catheterised bladder",
+      "Rapidly progressive or bilateral lower limb symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosis as psychogenic retention, delaying appropriate treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic, but sacral neuromodulation restores spontaneous voiding in a substantial proportion of women. Without effective treatment patients often remain dependent on catheterisation, which may be poorly tolerated.",
+    "pitfalls": [
+      "Misdiagnosis as psychogenic retention, delaying appropriate treatment",
+      "Failure to perform striated sphincter electromyography",
+      "Assuming clean intermittent self-catheterisation will be well tolerated, when it is often painful because of the sphincter abnormality",
+      "Overlooking the association with polycystic ovaries",
+      "Attributing the retention solely to a precipitating event without recognising the underlying disorder"
+    ],
+    "references": [
+      "Neuro-urology and functional urology reference texts",
+      "International continence society terminology and standards documents",
+      "Standard urology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive treatment",
+      "Manage bladder emptying in the interim with clean intermittent self-catheterisation, recognising it is often poorly tolerated because the sphincter grips the catheter",
+      "Avoid opioid analgesia, which can precipitate or worsen retention",
+      "Consider urethral sphincter botulinum toxin injection where neuromodulation is unsuitable or unsuccessful",
+      "Address the associated polycystic ovary syndrome",
+      "Monitor for urinary tract infection and safeguard the upper renal tracts and renal function",
+      "Refer to a specialist urology service and provide psychological support for this chronic condition"
     ]
-   ],
-   "caption": "Overview comparison matrix for fowler's syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fowler-syndrome-real-image",
-   "title": "Fowler's syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "fowler_syndrome-pathway",
+      "title": "Fowler's syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a large-capacity bladder and characteristically reduced sensation of bladder fullness.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New neurological signs such as limb weakness, saddle anaesthesia or bowel dysfunction, suggesting a cord or cauda equina lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Post-void residual measurement or bladder ultrasound, Concentric needle electromyography of the striated urethral sphincter, Urethral pressure profilometry"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosis as psychogenic retention, delaying appropriate treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fowler's syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fowler_syndrome-matrix",
+      "title": "Fowler's syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs in premenopausal women, typically presenting with painless complete urinary retention or obstructed voiding, a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Post-void residual measurement or bladder ultrasound, Concentric needle electromyography of the striated urethral sphincter,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neurogenic acontractile or underactive detrusor, Multiple sclerosis or other central neurological cause of retention, Cauda",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer sacral neuromodulation, which restores spontaneous voiding in a substantial proportion of women and is the definitive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosis as psychogenic retention, delaying appropriate treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fowler's syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-urology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fowler_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-void residual measurement or bladder ultrasound",
+          "cells": [
+            {
+              "text": "Quantifies urinary retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concentric needle electromyography of the striated urethral sphincter",
+          "cells": [
+            {
+              "text": "Assesses striated sphincter activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine and neuroaxis",
+          "cells": [
+            {
+              "text": "Excludes neurological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Assesses for polycystic ovaries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fowler_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cauda equina syndrome or sacral cord lesion",
+          "cells": [
+            {
+              "text": "New limb weakness, saddle anaesthesia or bowel dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) urinary retention",
+          "cells": [
+            {
+              "text": "Separated by striated sphincter electromyography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fowler_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sacral neuromodulation",
+          "cells": [
+            {
+              "text": "Definitive treatment; restores spontaneous voiding in a substantial proportion of women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clean intermittent self-catheterisation",
+          "cells": [
+            {
+              "text": "Interim bladder emptying; often poorly tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid opioid analgesia",
+          "cells": [
+            {
+              "text": "Can precipitate or worsen retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin to the urethral sphincter",
+          "cells": [
+            {
+              "text": "Where neuromodulation is unsuitable or unsuccessful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Address the associated condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract and renal surveillance",
+          "cells": [
+            {
+              "text": "Monitor for infection; safeguard upper tracts and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist urology and psychological support",
+          "cells": [
+            {
+              "text": "For this chronic condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fowler_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fowler's syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fowler syndrome: urinary retention with raised post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new neurological signs, upper tract dilatation, infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spine MRI for suspected cord or cauda equina lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Post-void residual, sphincter EMG, pelvic ultrasound and MRI of the neuroaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do sphincter EMG and urodynamics confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neurogenic detrusor failure, urethral stricture or functional retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sacral neuromodulation, the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clean intermittent self-catheterisation in the interim",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid opioid analgesia, which can worsen retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Botulinum toxin to the sphincter where neuromodulation fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic; sacral neuromodulation restores voiding in a substantial proportion of women",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,451 @@
 {
- "id": "congenital_lactase_deficiency",
- "name": "Congenital lactase deficiency",
- "aliases": [
-  "LCT",
-  "CLD",
-  "congenital alactasia",
-  "neonatal lactase deficiency"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
-   "Distinct from common adult-type hypolactasia and from secondary lactase deficiency following mucosal injury",
-   "Presents in the first days of life once milk feeding begins, with profuse watery osmotic diarrhoea and dehydration",
-   "Undigested lactose is fermented in the colon, giving acidic, frothy stool with a low pH and positive reducing substances",
-   "Small-bowel mucosal architecture is normal, but disaccharidase assay shows markedly reduced lactase activity",
-   "Symptoms resolve promptly on a lactose-free feed, confirming the osmotic nature of the diarrhoea",
-   "Lifelong avoidance of lactose allows normal growth and development"
+  "id": "congenital_lactase_deficiency",
+  "name": "Congenital lactase deficiency",
+  "aliases": [
+    "LCT",
+    "CLD",
+    "congenital alactasia",
+    "neonatal lactase deficiency"
   ],
-  "pathophysiology": "Congenital lactase deficiency is an osmotic malabsorption disorder caused by biallelic variants in LCT, the gene encoding the brush-border enzyme lactase-phlorizin hydrolase. Without functional lactase, dietary lactose cannot be hydrolysed to glucose and galactose in the small intestine. The unabsorbed disaccharide is osmotically active, drawing water into the lumen and passing to the colon where bacterial fermentation generates gas and short-chain acids. This produces acidic, watery, gassy diarrhoea from the earliest milk feeds, with a structurally normal mucosa distinguishing it from secondary lactase deficiency due to mucosal damage.",
-  "additionalDifferentials": [
-   "Adult-type (primary) hypolactasia with later onset",
-   "Secondary lactase deficiency after gastroenteritis or mucosal injury",
-   "Glucose-galactose malabsorption",
-   "Congenital sucrase-isomaltase deficiency",
-   "Cow's milk protein intolerance",
-   "Congenital secretory diarrhoeas"
-  ],
-  "additionalInvestigations": [
-   "Stool pH and reducing substances demonstrating acidic sugar-containing stool",
-   "Duodenal biopsy with disaccharidase assay showing low lactase with normal architecture",
-   "Response of diarrhoea to a lactose-free feed",
-   "Lactose hydrogen breath testing where appropriate for age",
-   "Molecular genetic testing for LCT variants to confirm the congenital form"
-  ],
-  "redFlags": [
-   "Severe dehydration and electrolyte disturbance in the neonatal period",
-   "Failure to thrive if lactose is not removed from the diet",
-   "Persistent symptoms on a lactose-free feed suggesting an alternative diagnosis",
-   "Diagnostic confusion with the more common secondary or adult-type lactase deficiency"
-  ],
-  "prognosis": "Prognosis is excellent with a strict lactose-free diet, and growth and development proceed normally. The enzyme deficiency is permanent, so dietary avoidance is lifelong.",
-  "pitfalls": [
-   "Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency",
-   "Assuming normal mucosal histology excludes a disaccharidase defect without performing the enzyme assay",
-   "Overlooking hidden lactose in feeds and medicines",
-   "Failing to consider glucose-galactose malabsorption when a lactose-free but glucose-containing feed does not help"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment",
-   "Rehydration and correction of electrolyte disturbance during the initial osmotic diarrhoea",
-   "Prompt reintroduction of nutrition on the lactose-free feed to support catch-up growth",
-   "Dietitian-guided lactose avoidance as complementary foods and solids are introduced",
-   "Lactase enzyme supplementation to cover any unavoidable lactose exposure",
-   "Monitor growth and ensure adequate calcium and vitamin D intake on the restricted diet",
-   "Genetic counselling for autosomal recessive LCT inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_lactase_deficiency-pathway",
-   "title": "Congenital lactase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dehydration and electrolyte disturbance in the neonatal period",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool pH and reducing substances demonstrating acidic sugar-containing stool, Duodenal biopsy with disaccharidase assay showing low lactase with normal architecture, Response of diarrhoea to a lactose-free feed"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital lactase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_lactase_deficiency-matrix",
-   "title": "Congenital lactase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
+      "Distinct from common adult-type hypolactasia and from secondary lactase deficiency following mucosal injury",
+      "Presents in the first days of life once milk feeding begins, with profuse watery osmotic diarrhoea and dehydration",
+      "Undigested lactose is fermented in the colon, giving acidic, frothy stool with a low pH and positive reducing substances",
+      "Small-bowel mucosal architecture is normal, but disaccharidase assay shows markedly reduced lactase activity",
+      "Symptoms resolve promptly on a lactose-free feed, confirming the osmotic nature of the diarrhoea",
+      "Lifelong avoidance of lactose allows normal growth and development"
     ],
-    [
-     "Key Investigations",
-     "Stool pH and reducing substances demonstrating acidic sugar-containing stool, Duodenal biopsy with disaccharidase assay showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital lactase deficiency is an osmotic malabsorption disorder caused by biallelic variants in LCT, the gene encoding the brush-border enzyme lactase-phlorizin hydrolase. Without functional lactase, dietary lactose cannot be hydrolysed to glucose and galactose in the small intestine. The unabsorbed disaccharide is osmotically active, drawing water into the lumen and passing to the colon where bacterial fermentation generates gas and short-chain acids. This produces acidic, watery, gassy diarrhoea from the earliest milk feeds, with a structurally normal mucosa distinguishing it from secondary lactase deficiency due to mucosal damage.",
+    "additionalDifferentials": [
+      "Adult-type (primary) hypolactasia with later onset",
+      "Secondary lactase deficiency after gastroenteritis or mucosal injury",
+      "Glucose-galactose malabsorption",
+      "Congenital sucrase-isomaltase deficiency",
+      "Cow's milk protein intolerance",
+      "Congenital secretory diarrhoeas"
     ],
-    [
-     "Primary Differentials",
-     "Adult-type (primary) hypolactasia with later onset, Secondary lactase deficiency after gastroenteritis or mucosal injury,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool pH and reducing substances demonstrating acidic sugar-containing stool",
+      "Duodenal biopsy with disaccharidase assay showing low lactase with normal architecture",
+      "Response of diarrhoea to a lactose-free feed",
+      "Lactose hydrogen breath testing where appropriate for age",
+      "Molecular genetic testing for LCT variants to confirm the congenital form"
     ],
-    [
-     "Management Strategy",
-     "Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dehydration and electrolyte disturbance in the neonatal period",
+      "Failure to thrive if lactose is not removed from the diet",
+      "Persistent symptoms on a lactose-free feed suggesting an alternative diagnosis",
+      "Diagnostic confusion with the more common secondary or adult-type lactase deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent with a strict lactose-free diet, and growth and development proceed normally. The enzyme deficiency is permanent, so dietary avoidance is lifelong.",
+    "pitfalls": [
+      "Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency",
+      "Assuming normal mucosal histology excludes a disaccharidase defect without performing the enzyme assay",
+      "Overlooking hidden lactose in feeds and medicines",
+      "Failing to consider glucose-galactose malabsorption when a lactose-free but glucose-containing feed does not help"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment",
+      "Rehydration and correction of electrolyte disturbance during the initial osmotic diarrhoea",
+      "Prompt reintroduction of nutrition on the lactose-free feed to support catch-up growth",
+      "Dietitian-guided lactose avoidance as complementary foods and solids are introduced",
+      "Lactase enzyme supplementation to cover any unavoidable lactose exposure",
+      "Monitor growth and ensure adequate calcium and vitamin D intake on the restricted diet",
+      "Genetic counselling for autosomal recessive LCT inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital lactase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-lactase-deficiency-real-image",
-   "title": "Congenital lactase deficiency: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "congenital_lactase_deficiency-pathway",
+      "title": "Congenital lactase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dehydration and electrolyte disturbance in the neonatal period",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool pH and reducing substances demonstrating acidic sugar-containing stool, Duodenal biopsy with disaccharidase assay showing low lactase with normal architecture, Response of diarrhoea to a lactose-free feed"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital lactase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_lactase_deficiency-matrix",
+      "title": "Congenital lactase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive disorder caused by LCT variants that abolish or severely reduce brush-border lactase activity from birth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool pH and reducing substances demonstrating acidic sugar-containing stool, Duodenal biopsy with disaccharidase assay showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adult-type (primary) hypolactasia with later onset, Secondary lactase deficiency after gastroenteritis or mucosal injury,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong strict lactose-free feeding with a lactose-free or elemental infant formula as the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the rare congenital form with common adult-type or transient secondary lactase deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital lactase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_lactase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool pH and reducing substances",
+          "cells": [
+            {
+              "text": "Acidic sugar-containing stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal biopsy with disaccharidase assay",
+          "cells": [
+            {
+              "text": "Low lactase with normal architecture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response of diarrhoea to a lactose-free feed",
+          "cells": [
+            {
+              "text": "Improvement on lactose-free feed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of LCT variants",
+          "cells": [
+            {
+              "text": "Congenital form confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_lactase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adult-type (primary) hypolactasia",
+          "cells": [
+            {
+              "text": "Later onset rather than neonatal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary lactase deficiency after gastroenteritis",
+          "cells": [
+            {
+              "text": "Mucosal injury; transient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital sucrase-isomaltase deficiency",
+          "cells": [
+            {
+              "text": "Named look-alike; disaccharidase assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_lactase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong lactose-free feeding",
+          "cells": [
+            {
+              "text": "Lactose-free or elemental infant formula, the definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration",
+          "cells": [
+            {
+              "text": "Correction of electrolyte disturbance during osmotic diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt reintroduction of nutrition",
+          "cells": [
+            {
+              "text": "Lactose-free feed to support catch-up growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-guided lactose avoidance",
+          "cells": [
+            {
+              "text": "As complementary foods and solids are introduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactase enzyme supplementation",
+          "cells": [
+            {
+              "text": "For unavoidable lactose exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and bone monitoring",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D on the restricted diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive LCT inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_lactase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Congenital lactase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital lactase deficiency: neonatal watery diarrhoea with acidic stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dehydration, failure to thrive, no response to lactose-free feed)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and electrolyte correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool pH and reducing substances; duodenal disaccharidase assay; LCT testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show low lactase with normal architecture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary or adult-type lactase deficiency or sucrase-isomaltase",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong strict lactose-free feeding as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydration and correction of electrolyte disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt lactose-free feed to support catch-up growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietitian-guided lactose avoidance; calcium and vitamin D intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis excellent with strict lactose-free diet; the enzyme deficiency is permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

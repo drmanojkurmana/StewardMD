@@ -1,176 +1,562 @@
 {
- "id": "eosinophilia",
- "name": "Eosinophilia",
- "aliases": [
-  "peripheral blood eosinophilia",
-  "hypereosinophilia",
-  "eosinophilic disorders"
- ],
- "class": "non_infective",
- "system": "Immunology / Allergy",
- "specialty": "Allergy & Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very high counts; the degree and persistence guide the urgency of evaluation",
-   "A practical framework separates causes into reactive/secondary (allergy, parasites, drugs, malignancy) and primary/clonal (myeloid or lymphoid neoplasms) plus idiopathic disease",
-   "Worldwide, helminth infection is the leading cause, so travel and exposure history and stool and serologic studies are essential, especially before immunosuppression that could disseminate strongyloidiasis",
-   "In high-income settings, atopic disease and drug reactions are common causes, and a careful medication review can reveal the culprit",
-   "Hypereosinophilic syndrome is diagnosed when marked eosinophilia persists with evidence of eosinophil-mediated organ damage and no identifiable secondary cause",
-   "Cardiac involvement (endomyocardial fibrosis and thrombosis) is a major cause of morbidity and mortality, so troponin and echocardiography are important in significant hypereosinophilia",
-   "The FIP1L1-PDGFRA fusion defines an imatinib-responsive myeloid variant, making molecular testing pivotal because it changes treatment entirely",
-   "Corticosteroids are the mainstay for symptomatic reactive and idiopathic hypereosinophilia, but empiric anti-parasitic cover for Strongyloides is prudent before starting them where exposure is possible",
-   "Peripheral counts do not always reflect tissue eosinophilia, so organ-specific disease can occur with only modestly raised or normal blood counts"
+  "id": "eosinophilia",
+  "name": "Eosinophilia",
+  "aliases": [
+    "peripheral blood eosinophilia",
+    "hypereosinophilia",
+    "eosinophilic disorders"
   ],
-  "pathophysiology": "Eosinophil production and survival are driven principally by interleukin-5, along with IL-3 and GM-CSF. In reactive eosinophilia these cytokines are overproduced by activated T cells or tumour cells in response to allergens, parasites, drugs, or malignancy. In clonal (primary) eosinophilia, a genetic lesion in the myeloid lineage-most classically the FIP1L1-PDGFRA fusion, or rearrangements of PDGFRB, FGFR1, and JAK2-produces autonomous eosinophil proliferation. A lymphocytic variant arises from an aberrant T-cell population secreting eosinophilopoietic cytokines. Tissue injury results from release of eosinophil granule proteins (major basic protein, eosinophil cationic protein), reactive oxygen species, and prothrombotic and profibrotic mediators, damaging heart, lungs, skin, gut, and nervous system.",
-  "additionalDifferentials": [
-   "Helminth and other parasitic infections",
-   "Atopic disease: asthma, atopic dermatitis, allergic rhinitis",
-   "Drug hypersensitivity, including DRESS",
-   "Allergic bronchopulmonary aspergillosis and eosinophilic lung diseases",
-   "Eosinophilic granulomatosis with polyangiitis and other vasculitides",
-   "Myeloid/lymphoid neoplasms with eosinophilia and reactive eosinophilia in solid tumours or lymphoma",
-   "Adrenal insufficiency and, rarely, HIV infection"
-  ],
-  "additionalInvestigations": [
-   "Repeat full blood count to confirm and quantify the absolute eosinophil count",
-   "Stool microscopy and relevant parasite serology, with Strongyloides testing before immunosuppression",
-   "Serum tryptase, vitamin B12, and IgE with review of medications",
-   "Molecular testing for FIP1L1-PDGFRA and other tyrosine-kinase fusions, plus marrow examination and cytogenetics when clonal disease is suspected",
-   "Troponin and echocardiography (and cardiac MRI if indicated) to assess cardiac involvement",
-   "Targeted imaging and biopsy of affected organs"
-  ],
-  "redFlags": [
-   "Cardiac involvement with troponin rise, heart failure, or intracardiac thrombus",
-   "Neurologic deficits, thromboembolism, or rapidly progressive organ dysfunction",
-   "Very high, persistent counts (hypereosinophilia) with systemic symptoms suggesting evolving organ damage",
-   "Features of an underlying haematologic malignancy such as splenomegaly, cytopenias, or blasts"
-  ],
-  "prognosis": "Reactive eosinophilia usually resolves once the trigger is removed or treated. Idiopathic hypereosinophilic syndrome outcome depends on organ involvement and treatment response; the FIP1L1-PDGFRA variant generally responds very well to targeted tyrosine-kinase inhibition, whereas untreated cardiac disease carries a poor prognosis.",
-  "pitfalls": [
-   "Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection",
-   "Attributing eosinophilia to allergy without considering clonal or parasitic causes",
-   "Relying on blood counts alone and missing tissue eosinophilic organ damage",
-   "Overlooking treatable molecular subtypes by not sending fusion-gene testing"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Middleton's Allergy: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for parasitic infection",
-   "Empirical ivermectin to cover Strongyloides before starting corticosteroids, to prevent disseminated hyperinfection",
-   "Tyrosine-kinase inhibition with imatinib for FIP1L1-PDGFRA and other PDGFR-rearranged clonal eosinophilia",
-   "Corticosteroids as first-line for symptomatic idiopathic hypereosinophilic syndrome, with steroid-sparing agents and anti-IL-5 biologics such as mepolizumab for maintenance",
-   "Monitor for and manage end-organ damage, particularly cardiac involvement with troponin and echocardiography, and treat eosinophil-related thrombosis with anticoagulation",
-   "Haematology referral for suspected clonal disease with marrow examination, cytogenetics and molecular testing",
-   "Urgent treatment when severe hypereosinophilia threatens the heart or other organs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilia-pathway",
-   "title": "Eosinophilia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very high counts; the degree and persistence guide the urgency of evaluation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac involvement with troponin rise, heart failure, or intracardiac thrombus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeat full blood count to confirm and quantify the absolute eosinophil count, Stool microscopy and relevant parasite serology, with Strongyloides testing before immunosuppression, Serum tryptase, vitamin B12, and IgE with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for parasitic infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilia."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilia-matrix",
-   "title": "Eosinophilia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Allergy",
+  "specialty": "Allergy & Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very high counts; the degree and persistence guide the urgency of evaluation",
+      "A practical framework separates causes into reactive/secondary (allergy, parasites, drugs, malignancy) and primary/clonal (myeloid or lymphoid neoplasms) plus idiopathic disease",
+      "Worldwide, helminth infection is the leading cause, so travel and exposure history and stool and serologic studies are essential, especially before immunosuppression that could disseminate strongyloidiasis",
+      "In high-income settings, atopic disease and drug reactions are common causes, and a careful medication review can reveal the culprit",
+      "Hypereosinophilic syndrome is diagnosed when marked eosinophilia persists with evidence of eosinophil-mediated organ damage and no identifiable secondary cause",
+      "Cardiac involvement (endomyocardial fibrosis and thrombosis) is a major cause of morbidity and mortality, so troponin and echocardiography are important in significant hypereosinophilia",
+      "The FIP1L1-PDGFRA fusion defines an imatinib-responsive myeloid variant, making molecular testing pivotal because it changes treatment entirely",
+      "Corticosteroids are the mainstay for symptomatic reactive and idiopathic hypereosinophilia, but empiric anti-parasitic cover for Strongyloides is prudent before starting them where exposure is possible",
+      "Peripheral counts do not always reflect tissue eosinophilia, so organ-specific disease can occur with only modestly raised or normal blood counts"
     ],
-    [
-     "Key Investigations",
-     "Repeat full blood count to confirm and quantify the absolute eosinophil count, Stool microscopy and relevant parasite serology,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eosinophil production and survival are driven principally by interleukin-5, along with IL-3 and GM-CSF. In reactive eosinophilia these cytokines are overproduced by activated T cells or tumour cells in response to allergens, parasites, drugs, or malignancy. In clonal (primary) eosinophilia, a genetic lesion in the myeloid lineage-most classically the FIP1L1-PDGFRA fusion, or rearrangements of PDGFRB, FGFR1, and JAK2-produces autonomous eosinophil proliferation. A lymphocytic variant arises from an aberrant T-cell population secreting eosinophilopoietic cytokines. Tissue injury results from release of eosinophil granule proteins (major basic protein, eosinophil cationic protein), reactive oxygen species, and prothrombotic and profibrotic mediators, damaging heart, lungs, skin, gut, and nervous system.",
+    "additionalDifferentials": [
+      "Helminth and other parasitic infections",
+      "Atopic disease: asthma, atopic dermatitis, allergic rhinitis",
+      "Drug hypersensitivity, including DRESS",
+      "Allergic bronchopulmonary aspergillosis and eosinophilic lung diseases",
+      "Eosinophilic granulomatosis with polyangiitis and other vasculitides",
+      "Myeloid/lymphoid neoplasms with eosinophilia and reactive eosinophilia in solid tumours or lymphoma",
+      "Adrenal insufficiency and, rarely, HIV infection"
     ],
-    [
-     "Primary Differentials",
-     "Helminth and other parasitic infections, Atopic disease: asthma, atopic dermatitis, allergic rhinitis, Drug hypersensitivity,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repeat full blood count to confirm and quantify the absolute eosinophil count",
+      "Stool microscopy and relevant parasite serology, with Strongyloides testing before immunosuppression",
+      "Serum tryptase, vitamin B12, and IgE with review of medications",
+      "Molecular testing for FIP1L1-PDGFRA and other tyrosine-kinase fusions, plus marrow examination and cytogenetics when clonal disease is suspected",
+      "Troponin and echocardiography (and cardiac MRI if indicated) to assess cardiac involvement",
+      "Targeted imaging and biopsy of affected organs"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac involvement with troponin rise, heart failure, or intracardiac thrombus",
+      "Neurologic deficits, thromboembolism, or rapidly progressive organ dysfunction",
+      "Very high, persistent counts (hypereosinophilia) with systemic symptoms suggesting evolving organ damage",
+      "Features of an underlying haematologic malignancy such as splenomegaly, cytopenias, or blasts"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Reactive eosinophilia usually resolves once the trigger is removed or treated. Idiopathic hypereosinophilic syndrome outcome depends on organ involvement and treatment response; the FIP1L1-PDGFRA variant generally responds very well to targeted tyrosine-kinase inhibition, whereas untreated cardiac disease carries a poor prognosis.",
+    "pitfalls": [
+      "Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection",
+      "Attributing eosinophilia to allergy without considering clonal or parasitic causes",
+      "Relying on blood counts alone and missing tissue eosinophilic organ damage",
+      "Overlooking treatable molecular subtypes by not sending fusion-gene testing"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Middleton's Allergy: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for parasitic infection",
+      "Empirical ivermectin to cover Strongyloides before starting corticosteroids, to prevent disseminated hyperinfection",
+      "Tyrosine-kinase inhibition with imatinib for FIP1L1-PDGFRA and other PDGFR-rearranged clonal eosinophilia",
+      "Corticosteroids as first-line for symptomatic idiopathic hypereosinophilic syndrome, with steroid-sparing agents and anti-IL-5 biologics such as mepolizumab for maintenance",
+      "Monitor for and manage end-organ damage, particularly cardiac involvement with troponin and echocardiography, and treat eosinophil-related thrombosis with anticoagulation",
+      "Haematology referral for suspected clonal disease with marrow examination, cytogenetics and molecular testing",
+      "Urgent treatment when severe hypereosinophilia threatens the heart or other organs"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilia-real-image",
-   "title": "Eosinophilia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "eosinophilia-pathway",
+      "title": "Eosinophilia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very high counts; the degree and persistence guide the urgency of evaluation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac involvement with troponin rise, heart failure, or intracardiac thrombus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeat full blood count to confirm and quantify the absolute eosinophil count, Stool microscopy and relevant parasite serology, with Strongyloides testing before immunosuppression, Serum tryptase, vitamin B12, and IgE with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for parasitic infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilia-matrix",
+      "title": "Eosinophilia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Eosinophilia is defined by an absolute eosinophil count above the normal range, with hypereosinophilia denoting persistently very",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeat full blood count to confirm and quantify the absolute eosinophil count, Stool microscopy and relevant parasite serology,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Helminth and other parasitic infections, Atopic disease: asthma, atopic dermatitis, allergic rhinitis, Drug hypersensitivity,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause: withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting corticosteroids without excluding Strongyloides, risking fatal hyperinfection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table e21-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat full blood count",
+          "cells": [
+            {
+              "text": "Confirms and quantifies the absolute eosinophil count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and parasite serology",
+          "cells": [
+            {
+              "text": "Parasitic cause; Strongyloides testing before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase, vitamin B12, IgE and medication review",
+          "cells": [
+            {
+              "text": "Associated causes of eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIP1L1-PDGFRA molecular testing, marrow and cytogenetics",
+          "cells": [
+            {
+              "text": "Clonal disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac involvement; cardiac MRI if indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Helminth and other parasitic infection",
+          "cells": [
+            {
+              "text": "Worldwide the leading cause; travel and exposure history guides testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug hypersensitivity, including DRESS",
+          "cells": [
+            {
+              "text": "Careful medication review can reveal the culprit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonal myeloid disease (FIP1L1-PDGFRA)",
+          "cells": [
+            {
+              "text": "Fusion defines an imatinib-responsive variant; molecular testing is pivotal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical ivermectin",
+          "cells": [
+            {
+              "text": "Covers Strongyloides before corticosteroids, to prevent disseminated hyperinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "FIP1L1-PDGFRA and other PDGFR-rearranged clonal eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for symptomatic idiopathic hypereosinophilic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents and anti-IL-5 biologics",
+          "cells": [
+            {
+              "text": "Mepolizumab for maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring and anticoagulation",
+          "cells": [
+            {
+              "text": "Troponin and echocardiography for cardiac involvement; anticoagulation for eosinophil-related thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Marrow examination, cytogenetics and molecular testing for suspected clonal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment",
+          "cells": [
+            {
+              "text": "Severe hypereosinophilia threatening the heart or other organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnosis of chronic eosinophilic leukemia and hypereosinophilic syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement"
+      ],
+      "rows": [
+        {
+          "parameter": "Required findings",
+          "cells": [
+            {
+              "text": "Persistent blood eosinophilia of at least 1500/uL, increased marrow eosinophils, and myeloblasts <20% in blood or marrow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 1",
+          "cells": [
+            {
+              "text": "Exclude all causes of reactive eosinophilia: allergy, parasites, infection, pulmonary disease (for example hypersensitivity pneumonitis, Loeffler's), collagen vascular disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 2",
+          "cells": [
+            {
+              "text": "Exclude primary neoplasms with secondary eosinophilia: T cell lymphomas, Hodgkin's disease, acute lymphoid leukemia, mastocytosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 3",
+          "cells": [
+            {
+              "text": "Exclude other primary myeloid neoplasms that may involve eosinophils: chronic myeloid leukemia, acute myeloid leukemia with inv(16) or t(16;16)(p13;q22), other myeloproliferative syndromes and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 4",
+          "cells": [
+            {
+              "text": "Exclude T cell reaction with increased IL-5 or other cytokine production"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypereosinophilic syndrome",
+          "cells": [
+            {
+              "text": "Diagnosed when all of the above are excluded and there is no evidence of a clonal myeloid disorder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic eosinophilic leukemia",
+          "cells": [
+            {
+              "text": "Diagnosed when all of the above are excluded and the myeloid cells show a clonal chromosome abnormality or other evidence of clonality, with blasts >2% in peripheral blood or increased in marrow (but <20%)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilia-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised absolute eosinophil count on full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiac involvement, neurological deficit, thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment when severe hypereosinophilia threatens the heart or organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy, parasite serology, drug review, troponin and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reactive cause identified (parasite, atopy or drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Haematology referral: FIP1L1-PDGFRA testing, marrow examination, cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw culprit drugs, treat atopic disease and parasites",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical ivermectin before corticosteroids to cover Strongyloides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Imatinib for FIP1L1-PDGFRA clonal eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic idiopathic hypereosinophilic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor troponin and echocardiography; anticoagulate eosinophil-related thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Reactive eosinophilia resolves with the trigger; HES outcome depends on organ involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

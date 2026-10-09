@@ -1,175 +1,482 @@
 {
- "id": "karyomegalic_interstitial_nephritis",
- "name": "Karyomegalic interstitial nephritis",
- "aliases": [
-  "KIN",
-  "FAN1"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Renal pathology and nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA interstrand-crosslink repair nuclease.",
-   "Defined histologically by karyomegaly, that is strikingly enlarged, hyperchromatic and bizarre nuclei, of renal tubular epithelial cells.",
-   "Presents insidiously with progressive chronic kidney disease, usually detected in early-to-mid adulthood.",
-   "Urinalysis typically shows a bland sediment with modest tubular proteinuria and little or no haematuria.",
-   "Recurrent respiratory tract infections are a frequently reported association.",
-   "Karyomegaly is a systemic finding, also affecting liver, lung and neurons, although the clinical picture is renal-predominant.",
-   "The underlying DNA-repair defect confers heightened cellular sensitivity to genotoxic agents and a possible predisposition to malignancy.",
-   "Diagnosis requires renal biopsy and is confirmed by FAN1 molecular genetic testing."
+  "id": "karyomegalic_interstitial_nephritis",
+  "name": "Karyomegalic interstitial nephritis",
+  "aliases": [
+    "KIN",
+    "FAN1"
   ],
-  "pathophysiology": "FAN1 on chromosome 15q13.3 encodes the FANCD2/FANCI-associated nuclease 1, a structure-specific DNA nuclease that acts in the repair of DNA interstrand crosslinks and in the protection and restart of stalled replication forks, working in concert with the Fanconi anaemia pathway. Biallelic loss-of-function variants leave cells unable to repair crosslink damage, so they accumulate DNA lesions and undergo repeated rounds of DNA replication without completing mitosis (endoreduplication), generating the polyploid, grossly enlarged karyomegalic nuclei that are the histological signature of the disease. This damage is most conspicuous in renal tubular epithelium, where progressive tubular injury drives chronic interstitial inflammation, tubular atrophy and interstitial fibrosis, and hence slowly progressive chronic kidney disease; the same repair defect underlies the reported sensitivity to genotoxic agents and the concern about cancer risk.",
-  "additionalDifferentials": [
-   "Autosomal dominant tubulointerstitial kidney disease (UMOD, MUC1, REN, HNF1B)",
-   "Nephronophthisis and related ciliopathies",
-   "Analgesic nephropathy and aristolochic acid or Balkan endemic nephropathy",
-   "Chronic lithium and other drug-induced tubulointerstitial nephritis",
-   "Viral cytopathic change (cytomegalovirus, BK polyomavirus, adenovirus) mimicking karyomegaly",
-   "Reflux nephropathy and obstructive uropathy",
-   "Chronic hypokalaemic nephropathy"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy",
-   "Immunohistochemistry or in-situ studies to exclude viral inclusions",
-   "Serum creatinine and estimated glomerular filtration rate",
-   "Urinalysis and quantification of proteinuria",
-   "Renal ultrasound",
-   "Careful drug and environmental or toxin exposure history",
-   "Molecular genetic testing of FAN1 with screening of relatives"
-  ],
-  "redFlags": [
-   "Progressive decline in renal function towards end-stage",
-   "Features of advanced chronic kidney disease",
-   "Recurrent or severe infections",
-   "Signs suggesting malignancy, given the DNA-repair defect"
-  ],
-  "prognosis": "The disease is progressive and most affected individuals reach end-stage renal disease requiring dialysis or transplantation by mid-adulthood; kidney transplantation is feasible as the defect does not recur in the graft.",
-  "pitfalls": [
-   "Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed.",
-   "Karyomegaly can be mistaken for a viral cytopathic effect or for malignancy.",
-   "Genotoxic chemotherapy and other DNA-damaging agents should be used with particular caution.",
-   "Affected relatives may be undiagnosed and warrant screening."
-  ],
-  "references": [
-   "Standard renal pathology texts",
-   "Nephrology reference texts",
-   "Reviews of hereditary tubulointerstitial kidney disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific therapy exists",
-   "Avoid nephrotoxic drugs and adjust medication doses to renal function",
-   "Manage complications of chronic kidney disease including anaemia, metabolic acidosis and mineral-bone disorder",
-   "Treat recurrent respiratory tract infections, a recognised association",
-   "Plan and initiate renal replacement therapy, with transplantation feasible as the defect does not recur in the graft",
-   "Provide genetic counselling and family screening for this autosomal recessive FAN1 disorder with ongoing nephrology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "karyomegalic_interstitial_nephritis-pathway",
-   "title": "Karyomegalic interstitial nephritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA interstrand-crosslink repair nuclease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive decline in renal function towards end-stage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy, Immunohistochemistry or in-situ studies to exclude viral inclusions, Serum creatinine and estimated glomerular filtration rate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of karyomegalic interstitial nephritis."
-  }
- ],
- "tables": [
-  {
-   "id": "karyomegalic_interstitial_nephritis-matrix",
-   "title": "Karyomegalic interstitial nephritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Renal pathology and nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA interstrand-crosslink repair nuclease.",
+      "Defined histologically by karyomegaly, that is strikingly enlarged, hyperchromatic and bizarre nuclei, of renal tubular epithelial cells.",
+      "Presents insidiously with progressive chronic kidney disease, usually detected in early-to-mid adulthood.",
+      "Urinalysis typically shows a bland sediment with modest tubular proteinuria and little or no haematuria.",
+      "Recurrent respiratory tract infections are a frequently reported association.",
+      "Karyomegaly is a systemic finding, also affecting liver, lung and neurons, although the clinical picture is renal-predominant.",
+      "The underlying DNA-repair defect confers heightened cellular sensitivity to genotoxic agents and a possible predisposition to malignancy.",
+      "Diagnosis requires renal biopsy and is confirmed by FAN1 molecular genetic testing."
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy, Immunohistochemistry or in-situ",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FAN1 on chromosome 15q13.3 encodes the FANCD2/FANCI-associated nuclease 1, a structure-specific DNA nuclease that acts in the repair of DNA interstrand crosslinks and in the protection and restart of stalled replication forks, working in concert with the Fanconi anaemia pathway. Biallelic loss-of-function variants leave cells unable to repair crosslink damage, so they accumulate DNA lesions and undergo repeated rounds of DNA replication without completing mitosis (endoreduplication), generating the polyploid, grossly enlarged karyomegalic nuclei that are the histological signature of the disease. This damage is most conspicuous in renal tubular epithelium, where progressive tubular injury drives chronic interstitial inflammation, tubular atrophy and interstitial fibrosis, and hence slowly progressive chronic kidney disease; the same repair defect underlies the reported sensitivity to genotoxic agents and the concern about cancer risk.",
+    "additionalDifferentials": [
+      "Autosomal dominant tubulointerstitial kidney disease (UMOD, MUC1, REN, HNF1B)",
+      "Nephronophthisis and related ciliopathies",
+      "Analgesic nephropathy and aristolochic acid or Balkan endemic nephropathy",
+      "Chronic lithium and other drug-induced tubulointerstitial nephritis",
+      "Viral cytopathic change (cytomegalovirus, BK polyomavirus, adenovirus) mimicking karyomegaly",
+      "Reflux nephropathy and obstructive uropathy",
+      "Chronic hypokalaemic nephropathy"
     ],
-    [
-     "Primary Differentials",
-     "Autosomal dominant tubulointerstitial kidney disease (UMOD, MUC1, REN, HNF1B), Nephronophthisis and related ciliopathies,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy",
+      "Immunohistochemistry or in-situ studies to exclude viral inclusions",
+      "Serum creatinine and estimated glomerular filtration rate",
+      "Urinalysis and quantification of proteinuria",
+      "Renal ultrasound",
+      "Careful drug and environmental or toxin exposure history",
+      "Molecular genetic testing of FAN1 with screening of relatives"
     ],
-    [
-     "Management Strategy",
-     "Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive decline in renal function towards end-stage",
+      "Features of advanced chronic kidney disease",
+      "Recurrent or severe infections",
+      "Signs suggesting malignancy, given the DNA-repair defect"
     ],
-    [
-     "Clinical Pitfall",
-     "Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is progressive and most affected individuals reach end-stage renal disease requiring dialysis or transplantation by mid-adulthood; kidney transplantation is feasible as the defect does not recur in the graft.",
+    "pitfalls": [
+      "Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed.",
+      "Karyomegaly can be mistaken for a viral cytopathic effect or for malignancy.",
+      "Genotoxic chemotherapy and other DNA-damaging agents should be used with particular caution.",
+      "Affected relatives may be undiagnosed and warrant screening."
+    ],
+    "references": [
+      "Standard renal pathology texts",
+      "Nephrology reference texts",
+      "Reviews of hereditary tubulointerstitial kidney disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific therapy exists",
+      "Avoid nephrotoxic drugs and adjust medication doses to renal function",
+      "Manage complications of chronic kidney disease including anaemia, metabolic acidosis and mineral-bone disorder",
+      "Treat recurrent respiratory tract infections, a recognised association",
+      "Plan and initiate renal replacement therapy, with transplantation feasible as the defect does not recur in the graft",
+      "Provide genetic counselling and family screening for this autosomal recessive FAN1 disorder with ongoing nephrology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for karyomegalic interstitial nephritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "karyomegalic-interstitial-nephritis-real-image",
-   "title": "Karyomegalic interstitial nephritis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "karyomegalic_interstitial_nephritis-pathway",
+      "title": "Karyomegalic interstitial nephritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA interstrand-crosslink repair nuclease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive decline in renal function towards end-stage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy, Immunohistochemistry or in-situ studies to exclude viral inclusions, Serum creatinine and estimated glomerular filtration rate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of karyomegalic interstitial nephritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "karyomegalic_interstitial_nephritis-matrix",
+      "title": "Karyomegalic interstitial nephritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive chronic tubulointerstitial nephritis caused by biallelic FAN1 variants; FAN1 encodes a DNA",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy with light microscopy for karyomegaly, interstitial fibrosis and tubular atrophy, Immunohistochemistry or in-situ",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autosomal dominant tubulointerstitial kidney disease (UMOD, MUC1, REN, HNF1B), Nephronophthisis and related ciliopathies,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Slow chronic kidney disease progression with blood-pressure control and renin-angiotensin-system blockade, as no disease-specific",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Frequently dismissed as chronic interstitial nephritis of unknown cause when no biopsy is performed.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for karyomegalic interstitial nephritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Renal pathology and nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "karyomegalic_interstitial_nephritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with light microscopy",
+          "cells": [
+            {
+              "text": "Karyomegaly, interstitial fibrosis and tubular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry or in-situ viral studies",
+          "cells": [
+            {
+              "text": "Viral inclusions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and estimated GFR",
+          "cells": [
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and toxin exposure history",
+          "cells": [
+            {
+              "text": "Toxic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FAN1 genetic testing with relatives",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "karyomegalic_interstitial_nephritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytomegalovirus or BK polyomavirus nephritis",
+          "cells": [
+            {
+              "text": "Viral cytopathic change mimics karyomegaly; immunostaining excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesic or aristolochic acid nephropathy",
+          "cells": [
+            {
+              "text": "Drug or toxin exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant tubulointerstitial kidney disease",
+          "cells": [
+            {
+              "text": "Dominant inheritance (UMOD, MUC1, REN, HNF1B)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "karyomegalic_interstitial_nephritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Control with renin-angiotensin system blockade; no disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotoxins",
+          "cells": [
+            {
+              "text": "Avoid; adjust drug doses to renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CKD complications",
+          "cells": [
+            {
+              "text": "Anaemia, metabolic acidosis and mineral-bone disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Treat recurrent respiratory tract infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "Planned dialysis; transplant feasible as the defect does not recur in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "karyomegalic_interstitial_nephritis-dx-mgmt",
+      "title": "Diagnosis and management of Karyomegalic interstitial nephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insidious progressive chronic kidney disease in early or mid adulthood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid decline, advanced CKD, recurrent infection or features suggesting malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; plan dialysis or transplant; infection management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy for karyomegaly, viral immunostaining, creatinine, proteinuria, FAN1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Karyomegaly on biopsy with biallelic FAN1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tubulointerstitial dominant disease, viral or toxic nephritis; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Blood pressure control with renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid nephrotoxic drugs and adjust doses to renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage anaemia, acidosis and mineral-bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat recurrent respiratory infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Plan renal replacement or transplant; family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive chronic kidney disease; transplant feasible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

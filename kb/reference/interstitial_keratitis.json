@@ -1,174 +1,463 @@
 {
- "id": "interstitial_keratitis",
- "name": "Interstitial keratitis",
- "aliases": [
-  "IK",
-  "non-ulcerative stromal keratitis",
-  "syphilitic interstitial keratitis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic infection rather than direct corneal infection",
-   "Congenital syphilis is the classic cause, typically bilateral and part of the Hutchinson triad (interstitial keratitis, notched incisors, and sensorineural deafness)",
-   "Active disease shows stromal oedema, cellular infiltration, and deep stromal vascularisation; when vessels lose their blood column they leave residual ghost vessels",
-   "Cogan syndrome links interstitial keratitis with vestibuloauditory dysfunction and may herald a systemic vasculitis",
-   "Other infective associations include tuberculosis, Lyme disease, leprosy, and herpes simplex or zoster (which more often cause unilateral disease)",
-   "Chronic sequelae include stromal scarring, thinning, and lipid keratopathy, with vision reduced by scarring and irregular astigmatism",
-   "Management combines treatment of the underlying systemic cause with topical corticosteroids to control stromal inflammation, and later keratoplasty for dense scarring",
-   "Identifying and treating the systemic cause is essential, so serological and systemic workup should accompany ocular treatment"
+  "id": "interstitial_keratitis",
+  "name": "Interstitial keratitis",
+  "aliases": [
+    "IK",
+    "non-ulcerative stromal keratitis",
+    "syphilitic interstitial keratitis"
   ],
-  "pathophysiology": "Interstitial keratitis is an inflammation of the corneal stroma in which the epithelium and endothelium are typically spared and there is no primary ulceration. It usually reflects an immune (often antigen-driven or hypersensitivity) reaction to a systemic infection such as syphilis, tuberculosis, Lyme disease, or a viral agent, rather than active replication of organisms within the cornea. Inflammatory cells infiltrate the stroma, causing oedema and the ingrowth of deep stromal vessels. When inflammation subsides the vessels may empty, leaving ghost vessels, and the stroma is left scarred and sometimes thinned or laden with lipid. The resulting opacity and irregular astigmatism impair vision.",
-  "additionalDifferentials": [
-   "Herpetic stromal (disciform) keratitis",
-   "Bacterial or fungal keratitis with stromal infiltrate",
-   "Acanthamoeba keratitis",
-   "Corneal graft rejection with stromal vascularisation",
-   "Peripheral ulcerative keratitis from systemic vasculitis",
-   "Stromal deposits from corneal dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels",
-   "Syphilis serology (treponemal and non-treponemal tests)",
-   "Tuberculosis testing (interferon-gamma release assay or tuberculin skin test and chest imaging)",
-   "Lyme serology and other targeted infective workup based on exposure history",
-   "Audiovestibular assessment when Cogan syndrome is suspected",
-   "Systemic inflammatory and vasculitis screen when an autoimmune cause is considered"
-  ],
-  "redFlags": [
-   "Associated vestibuloauditory symptoms suggesting Cogan syndrome and possible systemic vasculitis",
-   "Evidence of active systemic infection such as syphilis or tuberculosis requiring urgent treatment",
-   "Progressive stromal thinning with perforation risk",
-   "Dense central scarring causing significant visual loss"
-  ],
-  "prognosis": "Active inflammation usually settles with treatment of the underlying cause and topical corticosteroids, but residual stromal scarring, ghost vessels, and irregular astigmatism can leave lasting visual impairment. Dense central scarring may ultimately require keratoplasty.",
-  "pitfalls": [
-   "Treating the cornea without identifying and treating the underlying systemic infection",
-   "Missing Cogan syndrome and the risk of systemic vasculitis when hearing symptoms coexist",
-   "Confusing immune stromal inflammation with active infective keratitis",
-   "Overlooking congenital syphilis in a child with bilateral disease and systemic stigmata"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the cornea alone",
-   "Use topical corticosteroids to suppress stromal inflammation and limit scarring and deep vascularisation",
-   "Add a cycloplegic agent for pain relief and to prevent posterior synechiae during active inflammation",
-   "Institute systemic immunosuppression urgently for Cogan syndrome to preserve hearing",
-   "Arrange audiovestibular and systemic evaluation for associated disease such as Cogan syndrome or vasculitis",
-   "Follow up long term for residual stromal scarring, lipid keratopathy and irregular astigmatism, with keratoplasty for dense central scarring",
-   "Undertake partner notification and public health measures where an infective cause such as syphilis is confirmed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "interstitial_keratitis-pathway",
-   "title": "Interstitial keratitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic infection rather than direct corneal infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Associated vestibuloauditory symptoms suggesting Cogan syndrome and possible systemic vasculitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels, Syphilis serology (treponemal and non-treponemal tests), Tuberculosis testing (interferon-gamma release assay or tuberculin skin test"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the cornea alone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the cornea without identifying and treating the underlying systemic infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of interstitial keratitis."
-  }
- ],
- "tables": [
-  {
-   "id": "interstitial_keratitis-matrix",
-   "title": "Interstitial keratitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic infection rather than direct corneal infection",
+      "Congenital syphilis is the classic cause, typically bilateral and part of the Hutchinson triad (interstitial keratitis, notched incisors, and sensorineural deafness)",
+      "Active disease shows stromal oedema, cellular infiltration, and deep stromal vascularisation; when vessels lose their blood column they leave residual ghost vessels",
+      "Cogan syndrome links interstitial keratitis with vestibuloauditory dysfunction and may herald a systemic vasculitis",
+      "Other infective associations include tuberculosis, Lyme disease, leprosy, and herpes simplex or zoster (which more often cause unilateral disease)",
+      "Chronic sequelae include stromal scarring, thinning, and lipid keratopathy, with vision reduced by scarring and irregular astigmatism",
+      "Management combines treatment of the underlying systemic cause with topical corticosteroids to control stromal inflammation, and later keratoplasty for dense scarring",
+      "Identifying and treating the systemic cause is essential, so serological and systemic workup should accompany ocular treatment"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels, Syphilis serology (treponemal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Interstitial keratitis is an inflammation of the corneal stroma in which the epithelium and endothelium are typically spared and there is no primary ulceration. It usually reflects an immune (often antigen-driven or hypersensitivity) reaction to a systemic infection such as syphilis, tuberculosis, Lyme disease, or a viral agent, rather than active replication of organisms within the cornea. Inflammatory cells infiltrate the stroma, causing oedema and the ingrowth of deep stromal vessels. When inflammation subsides the vessels may empty, leaving ghost vessels, and the stroma is left scarred and sometimes thinned or laden with lipid. The resulting opacity and irregular astigmatism impair vision.",
+    "additionalDifferentials": [
+      "Herpetic stromal (disciform) keratitis",
+      "Bacterial or fungal keratitis with stromal infiltrate",
+      "Acanthamoeba keratitis",
+      "Corneal graft rejection with stromal vascularisation",
+      "Peripheral ulcerative keratitis from systemic vasculitis",
+      "Stromal deposits from corneal dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Herpetic stromal (disciform) keratitis, Bacterial or fungal keratitis with stromal infiltrate, Acanthamoeba keratitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels",
+      "Syphilis serology (treponemal and non-treponemal tests)",
+      "Tuberculosis testing (interferon-gamma release assay or tuberculin skin test and chest imaging)",
+      "Lyme serology and other targeted infective workup based on exposure history",
+      "Audiovestibular assessment when Cogan syndrome is suspected",
+      "Systemic inflammatory and vasculitis screen when an autoimmune cause is considered"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the",
-     "Core treatment modality"
+    "redFlags": [
+      "Associated vestibuloauditory symptoms suggesting Cogan syndrome and possible systemic vasculitis",
+      "Evidence of active systemic infection such as syphilis or tuberculosis requiring urgent treatment",
+      "Progressive stromal thinning with perforation risk",
+      "Dense central scarring causing significant visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the cornea without identifying and treating the underlying systemic infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Active inflammation usually settles with treatment of the underlying cause and topical corticosteroids, but residual stromal scarring, ghost vessels, and irregular astigmatism can leave lasting visual impairment. Dense central scarring may ultimately require keratoplasty.",
+    "pitfalls": [
+      "Treating the cornea without identifying and treating the underlying systemic infection",
+      "Missing Cogan syndrome and the risk of systemic vasculitis when hearing symptoms coexist",
+      "Confusing immune stromal inflammation with active infective keratitis",
+      "Overlooking congenital syphilis in a child with bilateral disease and systemic stigmata"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the cornea alone",
+      "Use topical corticosteroids to suppress stromal inflammation and limit scarring and deep vascularisation",
+      "Add a cycloplegic agent for pain relief and to prevent posterior synechiae during active inflammation",
+      "Institute systemic immunosuppression urgently for Cogan syndrome to preserve hearing",
+      "Arrange audiovestibular and systemic evaluation for associated disease such as Cogan syndrome or vasculitis",
+      "Follow up long term for residual stromal scarring, lipid keratopathy and irregular astigmatism, with keratoplasty for dense central scarring",
+      "Undertake partner notification and public health measures where an infective cause such as syphilis is confirmed"
     ]
-   ],
-   "caption": "Overview comparison matrix for interstitial keratitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "interstitial-keratitis-real-image",
-   "title": "Interstitial keratitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "interstitial_keratitis-pathway",
+      "title": "Interstitial keratitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic infection rather than direct corneal infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Associated vestibuloauditory symptoms suggesting Cogan syndrome and possible systemic vasculitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels, Syphilis serology (treponemal and non-treponemal tests), Tuberculosis testing (interferon-gamma release assay or tuberculin skin test"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the cornea alone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the cornea without identifying and treating the underlying systemic infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of interstitial keratitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "interstitial_keratitis-matrix",
+      "title": "Interstitial keratitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-ulcerative inflammation of the corneal stroma with intact epithelium, usually representing an immune response to a systemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting stromal oedema, infiltrate, and deep or ghost vessels, Syphilis serology (treponemal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpetic stromal (disciform) keratitis, Bacterial or fungal keratitis with stromal infiltrate, Acanthamoeba keratitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying systemic cause, for example penicillin for syphilis or standard antitubercular therapy, rather than the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the cornea without identifying and treating the underlying systemic infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for interstitial keratitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interstitial_keratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Stromal oedema, infiltrate, and deep or ghost vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Treponemal and non-treponemal tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis testing with chest imaging",
+          "cells": [
+            {
+              "text": "Active tuberculosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme serology and exposure-based infective work-up",
+          "cells": [
+            {
+              "text": "Targeted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiovestibular assessment",
+          "cells": [
+            {
+              "text": "Cogan syndrome when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic inflammatory and vasculitis screen",
+          "cells": [
+            {
+              "text": "Autoimmune cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_keratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective stromal keratitis (herpetic, bacterial or fungal)",
+          "cells": [
+            {
+              "text": "Active infection with stromal infiltrate; immune stromal disease is not infective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral ulcerative keratitis from systemic vasculitis",
+          "cells": [
+            {
+              "text": "Peripheral ulceration, unlike the non-ulcerative stromal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interstitial_keratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic cause first",
+          "cells": [
+            {
+              "text": "Penicillin for syphilis; standard antitubercular therapy for tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid",
+          "cells": [
+            {
+              "text": "Suppresses stromal inflammation; limits scarring and deep vascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic",
+          "cells": [
+            {
+              "text": "Pain relief and prevention of posterior synechiae during active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cogan syndrome",
+          "cells": [
+            {
+              "text": "Urgent systemic immunosuppression to preserve hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated disease",
+          "cells": [
+            {
+              "text": "Audiovestibular and systemic evaluation for Cogan syndrome or vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term care",
+          "cells": [
+            {
+              "text": "Residual scarring, lipid keratopathy and astigmatism; keratoplasty for dense central scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interstitial_keratitis-dx-mgmt",
+      "title": "Diagnosis and management of Interstitial keratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-ulcerative corneal stromal inflammation with deep or ghost vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Vestibular or hearing symptoms, active systemic infection, or perforation risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic treatment; hearing and vasculitis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, syphilis serology, tuberculosis testing, audiovestibular and vasculitis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic cause such as syphilis or tuberculosis identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Cogan syndrome or vasculitis; keep infective keratitis excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat syphilis with penicillin or tuberculosis with standard therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroid to suppress stromal inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic for pain and to prevent synechiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent systemic immunosuppression for Cogan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Partner notification where syphilis is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Scarring and irregular astigmatism may follow; keratoplasty for dense scarring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

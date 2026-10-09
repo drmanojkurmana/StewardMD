@@ -1,172 +1,441 @@
 {
- "id": "imperforate_anus",
- "name": "Imperforate anus",
- "aliases": [
-  "anorectal malformation",
-  "ARM",
-  "anal atresia"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn examination or when meconium fails to pass normally",
-   "Malformations are broadly grouped as low or high depending on whether the rectal pouch ends below or above the levator ani muscle complex, which guides operative approach and prognosis",
-   "Most cases in both sexes involve a fistula connecting the blind rectum to the perineum, urinary tract, or genital tract, and meconium seen at an abnormal site is a useful clue",
-   "The condition frequently forms part of the VACTERL group, so vertebral, cardiac, tracheo-oesophageal, renal, and limb anomalies should be actively sought",
-   "Initial management is to keep the infant nil by mouth, decompress the stomach, and give intravenous fluids while assessing the level of the lesion",
-   "High or complex lesions are typically managed with an initial diverting colostomy followed by definitive posterior sagittal anorectoplasty, whereas some low lesions can be corrected in one stage",
-   "Long-term outcome depends heavily on the quality of the sphincter mechanism and sacral development, so continence must be followed over years",
-   "A distal colostogram and cross-table lateral radiography help define the anatomy before definitive repair"
+  "id": "imperforate_anus",
+  "name": "Imperforate anus",
+  "aliases": [
+    "anorectal malformation",
+    "ARM",
+    "anal atresia"
   ],
-  "pathophysiology": "Imperforate anus results from abnormal development of the hindgut and its separation from the urogenital sinus during early embryogenesis, so the terminal rectum fails to descend and open normally onto the perineum. The rectal pouch commonly ends blindly or communicates through a fistula with the urinary system, vagina, or perineal skin. The relationship of the pouch to the levator ani and external sphincter complex, together with the degree of sacral and spinal development, determines whether continence structures are adequate and largely predicts functional outcome.",
-  "additionalDifferentials": [
-   "Anal stenosis",
-   "Rectal atresia with a normal-appearing anus",
-   "Meconium plug syndrome",
-   "Hirschsprung disease",
-   "Anteriorly displaced (ectopic) anus"
-  ],
-  "additionalInvestigations": [
-   "Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch",
-   "Distal colostogram to delineate fistula anatomy prior to definitive surgery",
-   "Renal and pelvic ultrasound to detect associated urological anomalies",
-   "Echocardiography and spinal imaging as part of a VACTERL screen",
-   "Sacral radiographs to assess sacral ratio, which correlates with continence potential"
-  ],
-  "redFlags": [
-   "Signs of intestinal obstruction (abdominal distension, bilious vomiting) requiring urgent decompression and surgical review",
-   "Meconium in the urine indicating a rectourinary fistula and risk of urinary contamination",
-   "Associated cardiac or renal anomalies that may destabilise the neonate before surgery",
-   "Failure to identify any perineal opening in a distended infant, mandating prompt surgical decompression"
-  ],
-  "prognosis": "Outcomes vary with the type of malformation: low lesions with good sphincter and sacral development often achieve near-normal continence, while high or cloacal lesions carry higher rates of faecal incontinence and constipation requiring long-term bowel management. Associated anomalies significantly influence overall morbidity.",
-  "pitfalls": [
-   "Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance",
-   "Attempting a primary perineal repair on a high lesion without a protective colostomy",
-   "Overlooking associated VACTERL anomalies, particularly cardiac and renal lesions",
-   "Underestimating the long-term need for bowel management and continence follow-up"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous fluids while the level of the lesion is assessed",
-   "Active screening for and management of associated VACTERL anomalies, including cardiac, renal, vertebral and spinal cord abnormalities",
-   "A diverting colostomy for high or complex malformations, followed later by definitive posterior sagittal anorectoplasty",
-   "Primary single-stage anoplasty for selected low lesions",
-   "Postoperative anal dilatations to prevent anastomotic stricture",
-   "Long-term bowel management with laxatives, dietary measures or antegrade enemas to address constipation or faecal incontinence",
-   "Multidisciplinary follow-up involving paediatric surgery, urology and continence services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "imperforate_anus-pathway",
-   "title": "Imperforate anus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn examination or when meconium fails to pass normally",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of intestinal obstruction (abdominal distension, bilious vomiting) requiring urgent decompression and surgical review",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch, Distal colostogram to delineate fistula anatomy prior to definitive surgery, Renal and pelvic ultrasound to detect associated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous fluids while the level of the lesion is assessed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of imperforate anus."
-  }
- ],
- "tables": [
-  {
-   "id": "imperforate_anus-matrix",
-   "title": "Imperforate anus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn examination or when meconium fails to pass normally",
+      "Malformations are broadly grouped as low or high depending on whether the rectal pouch ends below or above the levator ani muscle complex, which guides operative approach and prognosis",
+      "Most cases in both sexes involve a fistula connecting the blind rectum to the perineum, urinary tract, or genital tract, and meconium seen at an abnormal site is a useful clue",
+      "The condition frequently forms part of the VACTERL group, so vertebral, cardiac, tracheo-oesophageal, renal, and limb anomalies should be actively sought",
+      "Initial management is to keep the infant nil by mouth, decompress the stomach, and give intravenous fluids while assessing the level of the lesion",
+      "High or complex lesions are typically managed with an initial diverting colostomy followed by definitive posterior sagittal anorectoplasty, whereas some low lesions can be corrected in one stage",
+      "Long-term outcome depends heavily on the quality of the sphincter mechanism and sacral development, so continence must be followed over years",
+      "A distal colostogram and cross-table lateral radiography help define the anatomy before definitive repair"
     ],
-    [
-     "Key Investigations",
-     "Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch, Distal colostogram to delineate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Imperforate anus results from abnormal development of the hindgut and its separation from the urogenital sinus during early embryogenesis, so the terminal rectum fails to descend and open normally onto the perineum. The rectal pouch commonly ends blindly or communicates through a fistula with the urinary system, vagina, or perineal skin. The relationship of the pouch to the levator ani and external sphincter complex, together with the degree of sacral and spinal development, determines whether continence structures are adequate and largely predicts functional outcome.",
+    "additionalDifferentials": [
+      "Anal stenosis",
+      "Rectal atresia with a normal-appearing anus",
+      "Meconium plug syndrome",
+      "Hirschsprung disease",
+      "Anteriorly displaced (ectopic) anus"
     ],
-    [
-     "Primary Differentials",
-     "Anal stenosis, Rectal atresia with a normal-appearing anus, Meconium plug syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch",
+      "Distal colostogram to delineate fistula anatomy prior to definitive surgery",
+      "Renal and pelvic ultrasound to detect associated urological anomalies",
+      "Echocardiography and spinal imaging as part of a VACTERL screen",
+      "Sacral radiographs to assess sacral ratio, which correlates with continence potential"
     ],
-    [
-     "Management Strategy",
-     "Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of intestinal obstruction (abdominal distension, bilious vomiting) requiring urgent decompression and surgical review",
+      "Meconium in the urine indicating a rectourinary fistula and risk of urinary contamination",
+      "Associated cardiac or renal anomalies that may destabilise the neonate before surgery",
+      "Failure to identify any perineal opening in a distended infant, mandating prompt surgical decompression"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes vary with the type of malformation: low lesions with good sphincter and sacral development often achieve near-normal continence, while high or cloacal lesions carry higher rates of faecal incontinence and constipation requiring long-term bowel management. Associated anomalies significantly influence overall morbidity.",
+    "pitfalls": [
+      "Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance",
+      "Attempting a primary perineal repair on a high lesion without a protective colostomy",
+      "Overlooking associated VACTERL anomalies, particularly cardiac and renal lesions",
+      "Underestimating the long-term need for bowel management and continence follow-up"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous fluids while the level of the lesion is assessed",
+      "Active screening for and management of associated VACTERL anomalies, including cardiac, renal, vertebral and spinal cord abnormalities",
+      "A diverting colostomy for high or complex malformations, followed later by definitive posterior sagittal anorectoplasty",
+      "Primary single-stage anoplasty for selected low lesions",
+      "Postoperative anal dilatations to prevent anastomotic stricture",
+      "Long-term bowel management with laxatives, dietary measures or antegrade enemas to address constipation or faecal incontinence",
+      "Multidisciplinary follow-up involving paediatric surgery, urology and continence services"
     ]
-   ],
-   "caption": "Overview comparison matrix for imperforate anus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "imperforate-anus-real-image",
-   "title": "Imperforate anus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "imperforate_anus-pathway",
+      "title": "Imperforate anus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn examination or when meconium fails to pass normally",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of intestinal obstruction (abdominal distension, bilious vomiting) requiring urgent decompression and surgical review",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch, Distal colostogram to delineate fistula anatomy prior to definitive surgery, Renal and pelvic ultrasound to detect associated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous fluids while the level of the lesion is assessed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of imperforate anus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "imperforate_anus-matrix",
+      "title": "Imperforate anus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital defect in which the anal opening is absent or abnormally positioned; usually detected on the routine newborn",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cross-table lateral prone radiograph (invertogram) to estimate the level of the rectal pouch, Distal colostogram to delineate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anal stenosis, Rectal atresia with a normal-appearing anus, Meconium plug syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial stabilisation keeping the infant nil by mouth, decompressing the stomach with a nasogastric tube and giving intravenous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis when a perineal fistula allows some meconium to pass, giving false reassurance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for imperforate anus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "imperforate_anus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-table lateral prone radiograph (invertogram)",
+          "cells": [
+            {
+              "text": "Level of the rectal pouch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal colostogram",
+          "cells": [
+            {
+              "text": "Fistula anatomy before definitive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Associated urological anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and spinal imaging",
+          "cells": [
+            {
+              "text": "VACTERL screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sacral radiographs",
+          "cells": [
+            {
+              "text": "Sacral ratio, which correlates with continence potential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imperforate_anus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal atresia with a normal-appearing anus",
+          "cells": [
+            {
+              "text": "Rectal atresia rather than a missing or displaced anal opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anteriorly displaced (ectopic) anus",
+          "cells": [
+            {
+              "text": "Anal opening present but displaced anteriorly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imperforate_anus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stabilisation",
+          "cells": [
+            {
+              "text": "Nil by mouth, nasogastric decompression and intravenous fluids while the level is assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VACTERL screen",
+          "cells": [
+            {
+              "text": "Cardiac, renal, vertebral and spinal cord anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High or complex lesion",
+          "cells": [
+            {
+              "text": "Diverting colostomy, followed later by posterior sagittal anorectoplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low lesion",
+          "cells": [
+            {
+              "text": "Primary single-stage anoplasty in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative care",
+          "cells": [
+            {
+              "text": "Anal dilatations to prevent anastomotic stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel management and follow-up",
+          "cells": [
+            {
+              "text": "Laxatives, diet or antegrade enemas; paediatric surgery, urology and continence services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "imperforate_anus-dx-mgmt",
+      "title": "Diagnosis and management of Imperforate anus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Absent or misplaced anal opening, often noticed at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Obstruction, meconium in urine, cardiac or renal instability, or no perineal opening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nasogastric decompression, intravenous fluids and surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Invertogram for pouch level, distal colostogram, renal ultrasound, echo, spinal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low lesion suitable for primary single-stage repair?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Diverting colostomy first; re-image level and fistula before definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Primary single-stage anoplasty for selected low lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Post-operative dilatations to prevent anastomotic stricture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term bowel management with laxatives, diet or enemas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Paediatric surgery, urology and continence follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continence depends on lesion level and bowel management; lifelong follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

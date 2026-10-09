@@ -206,27 +206,426 @@
       "caption": "Diagnostic and clinical overview matrix for hepatic encephalopathy."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "hepatic-enceph-real-image",
-      "title": "Hepatic encephalopathy: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Portosystemic Encephalopathy",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/portosystemic-encephalopathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_enceph-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading and assessing hepatic encephalopathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features",
+        "Notes"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Stage 0",
+          "cells": [
+            {
+              "text": "Subclinical; abnormal only on testing"
+            },
+            {
+              "text": "Number connection test"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Stage 1",
+          "cells": [
+            {
+              "text": "Sleep disturbance, poor concentration, personality change"
+            },
+            {
+              "text": "Early, subtle"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Stage 2",
+          "cells": [
+            {
+              "text": "Drowsiness, disorientation, asterixis"
+            },
+            {
+              "text": "{{hy:Asterixis needs a cooperative patient}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage 3",
+          "cells": [
+            {
+              "text": "Somnolence, confusion, amnesia"
+            },
+            {
+              "text": "Rousable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage 4",
+          "cells": [
+            {
+              "text": "Coma"
+            },
+            {
+              "text": "Protect airway"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trail-making test",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "Normal 15 to 30 s",
+              "range": [
+                15,
+                30
+              ]
+            },
+            {
+              "text": "Markedly prolonged in early HE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood ammonia",
+          "cells": [
+            {
+              "text": "Usually measured"
+            },
+            {
+              "text": "Correlates poorly with severity; diagnosis is clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitant search",
+          "cells": [
+            {
+              "text": "Paracentesis, GI bleed check, electrolytes, drugs"
+            },
+            {
+              "text": "Infection, bleeding, low K, dehydration, sedatives"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_enceph-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic hepatic encephalopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "{{hy:Low glucose; check first}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subdural haematoma",
+          "cells": [
+            {
+              "text": "Falls, coagulopathy, focal signs; CT head"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection including SBP or meningitis",
+          "cells": [
+            {
+              "text": "Fever, ascitic neutrophils, CSF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sedative or alcohol intoxication",
+          "cells": [
+            {
+              "text": "Drug history; can also cause asterixis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wernicke encephalopathy or alcohol withdrawal",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, ataxia, tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Hyponatraemia, uraemia, hypercapnia, hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_enceph-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hepatic encephalopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct the precipitant",
+          "cells": [
+            {
+              "text": "{{hy:Every episode}}"
+            },
+            {
+              "text": "Infection, bleeding, hypokalaemia, dehydration, diuretics, sedatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lactulose",
+          "cells": [
+            {
+              "text": "Overt encephalopathy"
+            },
+            {
+              "text": "Titrate to 2 or 3 soft stools daily; by tube if comatose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifaximin",
+          "cells": [
+            {
+              "text": "Add to lactulose or if not tolerated"
+            },
+            {
+              "text": "Preferred over neomycin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid neomycin",
+          "cells": [
+            {
+              "text": "Where rifaximin available"
+            },
+            {
+              "text": "Ototoxic and nephrotoxic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal protein intake",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Restriction unnecessary and may harm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV L-ornithine L-aspartate",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            },
+            {
+              "text": "Also look for a large spontaneous shunt to embolise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Stage 3 to 4"
+            },
+            {
+              "text": "ICU"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Lactulose and rifaximin doses are not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_enceph-dx-mgmt",
+      "title": "Diagnosis and management of hepatic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cirrhosis with confusion, drowsiness or asterixis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Glucose, electrolytes, ammonia; review drugs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Focal signs, head injury or fever?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT head; infection screen including paracentesis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Grade 3 to 4?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Protect airway; ICU",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat precipitant; start lactulose to 2 to 3 stools",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Improving?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Continue lactulose; add rifaximin to prevent recurrence",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Add rifaximin; consider LOLA, shunt, other causes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }
+  ],
+  "aliases": [
+    "hepatic_encephalopathy",
+    "HE",
+    "Portosystemic encephalopathy"
   ]
 }

@@ -1,182 +1,512 @@
 {
- "id": "primary_effusion_lymphoma",
- "name": "Primary effusion lymphoma (HHV-8)",
- "aliases": [
-  "PEL",
-  "body cavity-based lymphoma",
-  "HHV-8-associated effusion lymphoma",
-  "KSHV-associated lymphoma",
-  "HHV-8+/EBV-variable large B-cell lymphoma"
- ],
- "class": "non_infective",
- "system": "Oncology / Haematologic malignancy",
- "specialty": "Haematology / Haemato-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Haematolymphoid Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour mass",
-   "Universally associated with human herpesvirus 8 (Kaposi sarcoma-associated herpesvirus), and frequently co-infected with Epstein-Barr virus",
-   "Occurs predominantly in the context of immunodeficiency, especially advanced HIV infection, and may coexist with Kaposi sarcoma or multicentric Castleman disease",
-   "Malignant cells have a large, anaplastic or immunoblastic/plasmablastic appearance and a distinctive null or aberrant immunophenotype",
-   "Cells typically lack pan-B-cell markers such as CD20 but express activation and plasma-cell-associated markers like CD30, CD38, and CD138, with HHV-8 latent nuclear antigen detectable in the nuclei",
-   "A rare extracavitary/solid variant can form masses in lymph nodes or extranodal sites while retaining the same viral and immunophenotypic features",
-   "Diagnosis rests on cytology of the effusion combined with HHV-8 demonstration"
+  "id": "primary_effusion_lymphoma",
+  "name": "Primary effusion lymphoma (HHV-8)",
+  "aliases": [
+    "PEL",
+    "body cavity-based lymphoma",
+    "HHV-8-associated effusion lymphoma",
+    "KSHV-associated lymphoma",
+    "HHV-8+/EBV-variable large B-cell lymphoma"
   ],
-  "pathophysiology": "Primary effusion lymphoma is a large B-cell neoplasm driven by human herpesvirus 8, which encodes latent proteins that dysregulate the cell cycle, inhibit apoptosis, and promote proliferation of infected B-cells. Most tumours also harbour Epstein-Barr virus, which is thought to cooperate in transformation. The malignant cells have undergone extensive plasmacytic differentiation, explaining loss of typical B-cell antigens and gain of plasma-cell markers. They proliferate preferentially within serous body cavities, producing lymphomatous effusions rather than solid masses, and the underlying immunodeficiency permits unchecked viral-driven expansion.",
-  "additionalDifferentials": [
-   "Reactive or infective effusions in immunocompromised patients",
-   "Pyothorax-associated (diffuse large B-cell) lymphoma",
-   "Plasmablastic lymphoma involving serous cavities",
-   "Malignant effusion from carcinoma or mesothelioma",
-   "Burkitt lymphoma with effusion",
-   "HHV-8-associated multicentric Castleman disease with effusions"
-  ],
-  "additionalInvestigations": [
-   "Cytological examination of effusion fluid with cell block preparation",
-   "Immunophenotyping showing loss of CD20 with expression of CD30, CD38, CD138",
-   "Detection of HHV-8 latent nuclear antigen by immunohistochemistry and HHV-8 by molecular methods",
-   "In situ hybridisation for EBV-encoded RNA",
-   "HIV testing and assessment of immune status",
-   "Cross-sectional imaging to identify effusions, exclude solid masses, and detect Kaposi sarcoma or Castleman disease"
-  ],
-  "redFlags": [
-   "Large pericardial effusion causing tamponade physiology",
-   "Respiratory compromise from a massive pleural effusion",
-   "Rapid reaccumulation of effusion after drainage",
-   "Concurrent opportunistic infection in the immunodeficient host"
-  ],
-  "prognosis": "The prognosis is generally poor with short median survival, though outcomes improve with combination chemotherapy alongside effective antiretroviral therapy and control of the underlying immunodeficiency.",
-  "pitfalls": [
-   "Dismissing a malignant effusion as reactive because no mass is seen on imaging",
-   "Missing the diagnosis by not testing effusion cells for HHV-8",
-   "Being misled by loss of CD20 into excluding a B-cell lymphoma",
-   "Neglecting optimisation of antiretroviral therapy and immune reconstitution"
-  ],
-  "references": [
-   "WHO Classification of Haematolymphoid Tumours",
-   "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather than local therapy",
-   "Because PEL is typically CD20-negative, use an anthracycline-based combination regimen without an anti-CD20 antibody; add anti-CD20 therapy only if CD20 expression is demonstrated",
-   "An infusional, dose-adjusted anthracycline-based approach is favored over standard cyclical dosing for this CD20-negative, high-proliferation subset",
-   "Continue or start effective antiretroviral therapy alongside chemotherapy as an integral part of disease control",
-   "Consider cerebrospinal fluid examination given the recognized risk of central nervous system involvement in AIDS-related lymphoma",
-   "Provide prophylaxis against Pneumocystis jirovecii pneumonia, herpes zoster, and Candida during treatment",
-   "Use therapeutic drainage such as thoracentesis, pericardiocentesis, or paracentesis for symptomatic effusions alongside systemic therapy, not as a substitute for it",
-   "There is no defined role for surgery or curative-intent radiotherapy; radiotherapy is reserved for localized palliation of a symptomatic solid deposit in the rare extracavitary variant",
-   "Actively look for and manage coexisting HHV-8-driven disease such as Kaposi sarcoma or multicentric Castleman disease",
-   "Relapsed or refractory disease has no established standard; individualize management and consider clinical trial enrollment",
-   "In fit patients who respond, consider autologous stem cell transplantation consolidation, extrapolating from outcomes in AIDS-related lymphoma as a group",
-   "Monitor effusion re-accumulation clinically and with imaging, HIV viral load and CD4 count, and standard chemotherapy toxicity parameters",
-   "Assess response by resolution of the effusion and cytological clearance rather than by solid-tumor size measurement",
-   "Refer promptly to a hemato-oncology or lymphoma multidisciplinary team, involving HIV medicine or infectious disease specialists and interventional radiology as needed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_effusion_lymphoma-pathway",
-   "title": "Primary effusion lymphoma (HHV-8): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour mass",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Large pericardial effusion causing tamponade physiology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cytological examination of effusion fluid with cell block preparation, Immunophenotyping showing loss of CD20 with expression of CD30, CD38, CD138, Detection of HHV-8 latent nuclear antigen by immunohistochemistry and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather than local therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a malignant effusion as reactive because no mass is seen on imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary effusion lymphoma (hhv-8)."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_effusion_lymphoma-matrix",
-   "title": "Primary effusion lymphoma (HHV-8): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Haematologic malignancy",
+  "specialty": "Haematology / Haemato-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Haematolymphoid Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour mass",
+      "Universally associated with human herpesvirus 8 (Kaposi sarcoma-associated herpesvirus), and frequently co-infected with Epstein-Barr virus",
+      "Occurs predominantly in the context of immunodeficiency, especially advanced HIV infection, and may coexist with Kaposi sarcoma or multicentric Castleman disease",
+      "Malignant cells have a large, anaplastic or immunoblastic/plasmablastic appearance and a distinctive null or aberrant immunophenotype",
+      "Cells typically lack pan-B-cell markers such as CD20 but express activation and plasma-cell-associated markers like CD30, CD38, and CD138, with HHV-8 latent nuclear antigen detectable in the nuclei",
+      "A rare extracavitary/solid variant can form masses in lymph nodes or extranodal sites while retaining the same viral and immunophenotypic features",
+      "Diagnosis rests on cytology of the effusion combined with HHV-8 demonstration"
     ],
-    [
-     "Key Investigations",
-     "Cytological examination of effusion fluid with cell block preparation, Immunophenotyping showing loss of CD20 with expression of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary effusion lymphoma is a large B-cell neoplasm driven by human herpesvirus 8, which encodes latent proteins that dysregulate the cell cycle, inhibit apoptosis, and promote proliferation of infected B-cells. Most tumours also harbour Epstein-Barr virus, which is thought to cooperate in transformation. The malignant cells have undergone extensive plasmacytic differentiation, explaining loss of typical B-cell antigens and gain of plasma-cell markers. They proliferate preferentially within serous body cavities, producing lymphomatous effusions rather than solid masses, and the underlying immunodeficiency permits unchecked viral-driven expansion.",
+    "additionalDifferentials": [
+      "Reactive or infective effusions in immunocompromised patients",
+      "Pyothorax-associated (diffuse large B-cell) lymphoma",
+      "Plasmablastic lymphoma involving serous cavities",
+      "Malignant effusion from carcinoma or mesothelioma",
+      "Burkitt lymphoma with effusion",
+      "HHV-8-associated multicentric Castleman disease with effusions"
     ],
-    [
-     "Primary Differentials",
-     "Reactive or infective effusions in immunocompromised patients, Pyothorax-associated (diffuse large B-cell) lymphoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cytological examination of effusion fluid with cell block preparation",
+      "Immunophenotyping showing loss of CD20 with expression of CD30, CD38, CD138",
+      "Detection of HHV-8 latent nuclear antigen by immunohistochemistry and HHV-8 by molecular methods",
+      "In situ hybridisation for EBV-encoded RNA",
+      "HIV testing and assessment of immune status",
+      "Cross-sectional imaging to identify effusions, exclude solid masses, and detect Kaposi sarcoma or Castleman disease"
     ],
-    [
-     "Management Strategy",
-     "Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather",
-     "Core treatment modality"
+    "redFlags": [
+      "Large pericardial effusion causing tamponade physiology",
+      "Respiratory compromise from a massive pleural effusion",
+      "Rapid reaccumulation of effusion after drainage",
+      "Concurrent opportunistic infection in the immunodeficient host"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a malignant effusion as reactive because no mass is seen on imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally poor with short median survival, though outcomes improve with combination chemotherapy alongside effective antiretroviral therapy and control of the underlying immunodeficiency.",
+    "pitfalls": [
+      "Dismissing a malignant effusion as reactive because no mass is seen on imaging",
+      "Missing the diagnosis by not testing effusion cells for HHV-8",
+      "Being misled by loss of CD20 into excluding a B-cell lymphoma",
+      "Neglecting optimisation of antiretroviral therapy and immune reconstitution"
+    ],
+    "references": [
+      "WHO Classification of Haematolymphoid Tumours",
+      "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather than local therapy",
+      "Because PEL is typically CD20-negative, use an anthracycline-based combination regimen without an anti-CD20 antibody; add anti-CD20 therapy only if CD20 expression is demonstrated",
+      "An infusional, dose-adjusted anthracycline-based approach is favored over standard cyclical dosing for this CD20-negative, high-proliferation subset",
+      "Continue or start effective antiretroviral therapy alongside chemotherapy as an integral part of disease control",
+      "Consider cerebrospinal fluid examination given the recognized risk of central nervous system involvement in AIDS-related lymphoma",
+      "Provide prophylaxis against Pneumocystis jirovecii pneumonia, herpes zoster, and Candida during treatment",
+      "Use therapeutic drainage such as thoracentesis, pericardiocentesis, or paracentesis for symptomatic effusions alongside systemic therapy, not as a substitute for it",
+      "There is no defined role for surgery or curative-intent radiotherapy; radiotherapy is reserved for localized palliation of a symptomatic solid deposit in the rare extracavitary variant",
+      "Actively look for and manage coexisting HHV-8-driven disease such as Kaposi sarcoma or multicentric Castleman disease",
+      "Relapsed or refractory disease has no established standard; individualize management and consider clinical trial enrollment",
+      "In fit patients who respond, consider autologous stem cell transplantation consolidation, extrapolating from outcomes in AIDS-related lymphoma as a group",
+      "Monitor effusion re-accumulation clinically and with imaging, HIV viral load and CD4 count, and standard chemotherapy toxicity parameters",
+      "Assess response by resolution of the effusion and cytological clearance rather than by solid-tumor size measurement",
+      "Refer promptly to a hemato-oncology or lymphoma multidisciplinary team, involving HIV medicine or infectious disease specialists and interventional radiology as needed"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary effusion lymphoma (hhv-8)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-effusion-lymphoma-real-image",
-   "title": "Primary effusion lymphoma (HHV-8): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "primary_effusion_lymphoma-pathway",
+      "title": "Primary effusion lymphoma (HHV-8): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour mass",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Large pericardial effusion causing tamponade physiology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cytological examination of effusion fluid with cell block preparation, Immunophenotyping showing loss of CD20 with expression of CD30, CD38, CD138, Detection of HHV-8 latent nuclear antigen by immunohistochemistry and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather than local therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a malignant effusion as reactive because no mass is seen on imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary effusion lymphoma (hhv-8)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_effusion_lymphoma-matrix",
+      "title": "Primary effusion lymphoma (HHV-8): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents characteristically as a malignant effusion in the pleural, pericardial, or peritoneal cavity without a discrete tumour",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cytological examination of effusion fluid with cell block preparation, Immunophenotyping showing loss of CD20 with expression of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Reactive or infective effusions in immunocompromised patients, Pyothorax-associated (diffuse large B-cell) lymphoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat as an AIDS-defining or immunodeficiency-associated aggressive lymphoma requiring systemic combination chemotherapy rather",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a malignant effusion as reactive because no mass is seen on imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary effusion lymphoma (hhv-8)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_effusion_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytological examination of effusion fluid with cell block",
+          "cells": [
+            {
+              "text": "Cells in the effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunophenotyping",
+          "cells": [
+            {
+              "text": "Loss of CD20; expression of CD30, CD38 and CD138"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-8 latent nuclear antigen immunohistochemistry and molecular testing",
+          "cells": [
+            {
+              "text": "HHV-8 infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In situ hybridisation for EBV-encoded RNA",
+          "cells": [
+            {
+              "text": "EBV-encoded RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and immune status",
+          "cells": [
+            {
+              "text": "HIV infection and immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Effusions, solid masses, Kaposi sarcoma or Castleman disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_effusion_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "HHV-8-associated multicentric Castleman disease with effusions",
+          "cells": [
+            {
+              "text": "HHV-8-driven disease such as Castleman disease or Kaposi sarcoma"
+            },
+            {
+              "text": "Cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant effusion from carcinoma or mesothelioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Effusion cytology with cell block"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_effusion_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic combination chemotherapy",
+          "cells": [
+            {
+              "text": "Treated as an immunodeficiency-associated aggressive lymphoma; local therapy is not the approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthracycline-based regimen",
+          "cells": [
+            {
+              "text": "Without anti-CD20 antibody, since PEL is typically CD20-negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose-adjusted approach",
+          "cells": [
+            {
+              "text": "Infusional, dose-adjusted anthracycline-based regimen favoured for this high-proliferation subset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Continue or start alongside chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS assessment",
+          "cells": [
+            {
+              "text": "Consider CSF examination, given the risk of CNS involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis jirovecii pneumonia, herpes zoster and Candida during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Thoracentesis, pericardiocentesis or paracentesis for symptomatic effusions, alongside systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Only for localised palliation of a symptomatic solid deposit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting HHV-8 disease",
+          "cells": [
+            {
+              "text": "Kaposi sarcoma or multicentric Castleman disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsed or refractory disease",
+          "cells": [
+            {
+              "text": "No established standard; individualise and consider trial enrolment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Effusion re-accumulation, HIV viral load, CD4 count and chemotherapy toxicity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_effusion_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary effusion lymphoma (HHV-8)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary effusion lymphoma: lymphoma in a serous effusion, HHV-8 positive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tamponade, respiratory compromise, rapid reaccumulation or opportunistic infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage for tamponade or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Effusion cytology with cell block; immunophenotype; HHV-8 and EBER testing; HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do cytology and immunophenotype confirm PEL (CD20-negative, HHV-8)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive effusion, carcinoma or other lymphoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic anthracycline-based chemotherapy without anti-CD20 antibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiretroviral therapy alongside chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain symptomatic effusions alongside systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylaxis against Pneumocystis, herpes zoster and Candida",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hemato-oncology and HIV specialist care; monitor effusion, viral load and CD4",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

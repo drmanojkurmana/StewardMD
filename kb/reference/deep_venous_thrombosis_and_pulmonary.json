@@ -1,217 +1,949 @@
 {
- "id": "deep_venous_thrombosis_and_pulmonary",
- "name": "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
- "system": "Cardiovascular / Venous (Vascular)",
- "class": "non_infective",
- "chapter": 290,
- "page": 2154,
- "aliases": [
-  "VTE",
-  "Venous thromboembolism",
-  "DVT",
-  "Deep vein thrombosis",
-  "PE",
-  "Pulmonary embolism",
-  "Pulmonary thromboembolism"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2154",
-  "clinicalPearls": [
-   "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common symptom. Failure to improve despite standard therapy for concurrent heart failure or pneumonia is a clue to coexisting PE.",
-   "The most common DVT symptom is a persistent, intensifying calf cramp or 'charley horse'; physical findings may be limited to mild lower-calf tenderness, although massive DVT can produce marked thigh swelling, tenderness, and erythema.",
-   "A diffusely edematous leg makes ordinary DVT unlikely, with the important exception of phlegmasia cerulea dolens, the most severe form of DVT.",
-   "Recurrent left thigh edema, especially in young women, should raise suspicion for May-Thurner syndrome (right common iliac artery compressing the left iliac vein), which may be associated with DVT.",
-   "Wells point scores estimate clinical likelihood of DVT/PE and are validated in ambulatory but not hospitalized patients; low-likelihood DVT or low-to-moderate-likelihood PE can be evaluated with d-dimer alone, while high-likelihood patients should skip d-dimer and go straight to imaging.",
-   "Age-adjusted d-dimer (age x 10 ng/mL as the upper limit for patients over 50 with low/intermediate PE probability) reduces unnecessary CT pulmonary angiograms, but it does NOT apply to suspected acute DVT.",
-   "Venous ultrasound diagnoses DVT chiefly through loss of vein compressibility; a normal vein collapses with gentle transducer pressure (the 'wink'), whereas an acutely thrombosed vein stays distended and non-compressible.",
-   "CT pulmonary angiography is the principal imaging test for PE; an RV-to-LV diameter ratio greater than 1 (RV enlargement) on CT predicts increased 30-day mortality.",
-   "ECG S1Q3T3 is relatively specific but insensitive for PE; the most common ECG abnormalities are sinus tachycardia and T-wave inversion in leads V1-V4 from RV strain/ischemia.",
-   "McConnell's sign on echocardiography (RV free-wall hypokinesis with preserved or hyperkinetic RV apex) is a recognized indirect sign of PE, but most PE patients have a normal echocardiogram, so echo is not a reliable rule-out test.",
-   "Many patients with PE have no demonstrable DVT because the leg thrombus has already embolized; paradoxical embolism to the arterial circulation can occur through a patent foramen ovale or atrial septal defect.",
-   "Antiphospholipid syndrome is an acquired (not inherited) thrombophilia predisposing to both venous and arterial thrombosis, and patients often warrant lifetime anticoagulation even when the index VTE was provoked."
+  "id": "deep_venous_thrombosis_and_pulmonary",
+  "name": "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
+  "system": "Cardiovascular / Venous (Vascular)",
+  "class": "non_infective",
+  "chapter": 290,
+  "page": 2154,
+  "aliases": [
+    "VTE",
+    "Venous thromboembolism",
+    "DVT",
+    "Deep vein thrombosis",
+    "PE",
+    "Pulmonary embolism",
+    "Pulmonary thromboembolism"
   ],
-  "pathophysiology": "VTE arises from Virchow's triad of venous stasis, hypercoagulability, and endothelial injury, typically coupled with an inflammatory trigger. Activated platelets release microparticles bearing proinflammatory mediators that recruit neutrophils to form neutrophil extracellular traps; the contained histones drive platelet aggregation and platelet-dependent thrombin generation, and thrombi flourish in conditions of stasis, low oxygen tension, and upregulated proinflammatory genes. Inherited prothrombotic states include factor V Leiden (resistance to protein C) and the prothrombin gene mutation; deficiencies of antithrombin, protein C, and protein S are associated with VTE but rare. Lower-extremity DVT usually begins in the calf and may propagate to the popliteal, femoral, and iliac veins; when thrombi detach they embolize through the vena cava and right heart to lodge in the pulmonary arteries. PE impairs gas exchange, causing arterial hypoxemia and a widened alveolar-arterial oxygen gradient, increased anatomic and physiologic dead space, increased pulmonary vascular resistance (from mechanical obstruction and vasoconstrictors such as serotonin), reflex hyperventilation, increased airway resistance, and reduced pulmonary compliance. Rising pulmonary artery pressure increases RV wall tension, causing RV dilation and dysfunction with BNP release; the interventricular septum bows into and compresses the left ventricle, impairing LV filling; elevated RV wall tension also compresses the right coronary artery, producing RV ischemia/microinfarction with troponin release, and LV underfilling can culminate in falling cardiac output, hypotension, circulatory collapse, and death.",
-  "additionalDifferentials": [
-   "Ruptured Baker's cyst (suggested by sudden severe calf discomfort)",
-   "Muscle strain or injury",
-   "Cellulitis (fever and chills favor cellulitis over DVT)",
-   "Acute postthrombotic syndrome / chronic venous insufficiency",
-   "Pneumonia, asthma, or COPD",
-   "Congestive heart failure",
-   "Pericarditis",
-   "Pleurisy / viral syndrome / costochondritis / musculoskeletal chest discomfort",
-   "Rib fracture or pneumothorax",
-   "Acute coronary syndrome",
-   "Anxiety",
-   "Vasovagal syncope"
-  ],
-  "infectionMimics": [
-   "Cellulitis mimicking DVT (fever and chills herald cellulitis rather than DVT)",
-   "Pneumonia mimicking PE"
-  ],
-  "nonInfectiousMimics": [
-   "Ruptured Baker's cyst",
-   "Muscle strain/injury",
-   "Postthrombotic syndrome / venous insufficiency",
-   "Congestive heart failure",
-   "Acute coronary syndrome and myocardial infarction",
-   "Pericarditis and pericardial tamponade",
-   "Aortic dissection",
-   "Pneumothorax / rib fracture",
-   "Anxiety and vasovagal syncope"
-  ],
-  "additionalInvestigations": [
-   "Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific - elevated in MI, pneumonia, sepsis, cancer, postoperative state, and 2nd/3rd-trimester pregnancy, so rarely useful in hospitalized patients)",
-   "Serum troponin (rises with RV microinfarction)",
-   "BNP or NT-proBNP (released with RV/myocardial stretch)",
-   "ECG (sinus tachycardia, S1Q3T3, T-wave inversion V1-V4)",
-   "Compression venous ultrasonography with Doppler (first-line for DVT)",
-   "CT pulmonary angiography with contrast (principal PE imaging test; also assesses RV size and alternative diagnoses)",
-   "Ventilation/perfusion lung scan (second-line, for patients unable to tolerate contrast)",
-   "Chest radiograph (Westermark's sign, Hampton's hump, Palla's sign)",
-   "MR venography with gadolinium (for equivocal leg/pelvic ultrasound) and MR pulmonary angiography (detects large proximal PE only)",
-   "Echocardiography (to detect PE mimics and indirect signs such as McConnell's sign)",
-   "Invasive pulmonary angiography and contrast phlebography (reserved for nondiagnostic CT or when intervention is planned)"
-  ],
-  "redFlags": [
-   "Systemic arterial hypotension with extensive thrombosis - massive (high-risk) PE, accounting for 5-10% of cases, presenting with dyspnea, syncope, hypotension, cyanosis, and possible cardiogenic shock and multisystem organ failure",
-   "RV dysfunction on echocardiography or RV enlargement on CT despite normal systemic pressure - submassive (intermediate-risk) PE",
-   "Combination of right heart failure with elevated cardiac biomarkers (troponin), indicating high risk of clinical deterioration",
-   "Phlegmasia cerulea dolens - the most serious form of DVT with diffuse leg edema",
-   "Hemodynamic instability portending high risk of adverse outcomes despite anticoagulation"
-  ],
-  "prognosis": "Prognosis depends on PE severity and RV function. Low-risk PE (about 65-75% of cases) carries an excellent prognosis. Submassive (intermediate-risk) PE (20-25%) with RV dysfunction and biomarker elevation has a high risk of clinical deterioration, and massive (high-risk) PE (5-10%) can cause cardiogenic shock, multisystem organ failure, and death. US PE-related mortality fell from 6 to about 4.5 per 100,000 between 2000 and 2017 but is rising among young and middle-aged adults, with the median age at PE death dropping from 73 (2000) to 68 (2018) and roughly 50% higher mortality in African Americans than Caucasians; mortality is consistently higher in socioeconomically disadvantaged communities. The 30-day all-cause readmission rate after PE hospitalization is about 11% and the 90-day rate about 15%, with recurrent PE the most common readmission cause. Long-term, roughly half of PE patients report persistent dyspnea, fatigue, and reduced exercise capacity and about a quarter have persistent RV dysfunction - the post-PE syndrome; chronic thromboembolic pulmonary hypertension (CTEPH) develops in about 2% of acute PE patients. DVT can lead to postthrombotic syndrome (chronic venous insufficiency) with calf/ankle swelling, leg aching, and, in severe cases, deep skin ulceration.",
-  "pitfalls": [
-   "Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful role in inpatients.",
-   "Applying the age-adjusted d-dimer cutoff to suspected acute DVT - it is validated only for ruling out PE in patients over 50 with low/intermediate probability.",
-   "Using echocardiography as a rule-out test for PE - most PE patients have normal echocardiograms; echo is better for detecting mimics like MI, tamponade, and aortic dissection.",
-   "Assuming absence of DVT excludes PE - the leg thrombus may have already fully embolized.",
-   "Treating antiphospholipid syndrome with DOACs - warfarin, not DOACs, is the standard for APS.",
-   "Mistaking a diffusely edematous leg for routine DVT and overlooking phlegmasia cerulea dolens; conversely attributing all calf pain to DVT (consider ruptured Baker's cyst) and all dyspnea to PE.",
-   "Confusing cellulitis (fever, chills) with DVT.",
-   "Overlooking nonthrombotic embolism (fat, tumor, bone marrow, air, amniotic fluid, cement, talc/hair in IV drug users) as a cause of PE."
-  ],
-  "severityClassification": "Pulmonary embolism is stratified into three categories: Massive (high-risk) PE - 5-10% of cases, systemic arterial hypotension with thrombosis involving at least half the pulmonary vasculature, presenting with dyspnea, syncope, hypotension, and cyanosis and capable of causing cardiogenic shock and death. Submassive (intermediate-risk) PE - 20-25% of cases, RV dysfunction despite normal systemic arterial pressure; right heart failure with biomarker (troponin) release marks high risk of deterioration. Low-risk PE - about 65-75% of cases, excellent prognosis. (Wells clinical decision rules in Table 290-2 stratify pretest probability of DVT and PE rather than anatomic severity.)",
-  "references": [
-   "Harrison 22e p.2154",
-   "Harrison 22e p.2155",
-   "Harrison 22e p.2156",
-   "Harrison 22e p.2157",
-   "Harrison 22e p.2158",
-   "Harrison 22e p.2159",
-   "Harrison 22e p.2160",
-   "Harrison 22e p.2161",
-   "Harrison 22e p.2162",
-   "Harrison 22e p.2163"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin preferred in cancer-associated thrombosis and pregnancy, and a vitamin K antagonist as an alternative",
-   "Risk-stratify pulmonary embolism using clinical severity, right ventricular assessment on echocardiography or CT, and cardiac biomarkers (troponin, natriuretic peptides) to identify high- and intermediate-risk disease",
-   "Give systemic thrombolysis, or catheter-directed therapy or embolectomy, for massive high-risk PE with haemodynamic instability",
-   "Provide supportive care with oxygen, haemodynamic support and analgesia, and consider an inferior vena cava filter when anticoagulation is contraindicated",
-   "Set the duration of anticoagulation by whether the event was provoked or unprovoked, and investigate for underlying malignancy or thrombophilia where appropriate",
-   "Use graduated compression and early mobilisation, and manage phlegmasia cerulea dolens as a limb-threatening emergency",
-   "Escalate to a pulmonary embolism response team or critical care for high-risk disease, and counsel on bleeding risk and, for heritable thrombophilia, family implications"
-  ]
- },
- "algorithms": [
-  {
-   "id": "deep_venous_thrombosis_and_pulmonary-pathway",
-   "title": "Deep-Venous Thrombosis and Pulmonary Thromboembolism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common symptom. Failure to improve despite standard therapy for concurrent heart failure or pneumonia is a clue to",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic arterial hypotension with extensive thrombosis - massive (high-risk) PE, accounting for 5-10% of cases, presenting with dyspnea, syncope, hypotension, cyanosis, and possible cardiogenic shock and",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific - elevated in MI, pneumonia, sepsis, cancer, postoperative state, and 2nd/3rd-trimester pregnancy,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin preferred in cancer-associated thrombosis and pregnancy, and a vitamin K antagonist as"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful role in inpatients."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of deep-venous thrombosis and pulmonary thromboembolism."
-  }
- ],
- "tables": [
-  {
-   "id": "deep_venous_thrombosis_and_pulmonary-matrix",
-   "title": "Deep-Venous Thrombosis and Pulmonary Thromboembolism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2154",
+    "clinicalPearls": [
+      "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common symptom. Failure to improve despite standard therapy for concurrent heart failure or pneumonia is a clue to coexisting PE.",
+      "The most common DVT symptom is a persistent, intensifying calf cramp or 'charley horse'; physical findings may be limited to mild lower-calf tenderness, although massive DVT can produce marked thigh swelling, tenderness, and erythema.",
+      "A diffusely edematous leg makes ordinary DVT unlikely, with the important exception of phlegmasia cerulea dolens, the most severe form of DVT.",
+      "Recurrent left thigh edema, especially in young women, should raise suspicion for May-Thurner syndrome (right common iliac artery compressing the left iliac vein), which may be associated with DVT.",
+      "Wells point scores estimate clinical likelihood of DVT/PE and are validated in ambulatory but not hospitalized patients; low-likelihood DVT or low-to-moderate-likelihood PE can be evaluated with d-dimer alone, while high-likelihood patients should skip d-dimer and go straight to imaging.",
+      "Age-adjusted d-dimer (age x 10 ng/mL as the upper limit for patients over 50 with low/intermediate PE probability) reduces unnecessary CT pulmonary angiograms, but it does NOT apply to suspected acute DVT.",
+      "Venous ultrasound diagnoses DVT chiefly through loss of vein compressibility; a normal vein collapses with gentle transducer pressure (the 'wink'), whereas an acutely thrombosed vein stays distended and non-compressible.",
+      "CT pulmonary angiography is the principal imaging test for PE; an RV-to-LV diameter ratio greater than 1 (RV enlargement) on CT predicts increased 30-day mortality.",
+      "ECG S1Q3T3 is relatively specific but insensitive for PE; the most common ECG abnormalities are sinus tachycardia and T-wave inversion in leads V1-V4 from RV strain/ischemia.",
+      "McConnell's sign on echocardiography (RV free-wall hypokinesis with preserved or hyperkinetic RV apex) is a recognized indirect sign of PE, but most PE patients have a normal echocardiogram, so echo is not a reliable rule-out test.",
+      "Many patients with PE have no demonstrable DVT because the leg thrombus has already embolized; paradoxical embolism to the arterial circulation can occur through a patent foramen ovale or atrial septal defect.",
+      "Antiphospholipid syndrome is an acquired (not inherited) thrombophilia predisposing to both venous and arterial thrombosis, and patients often warrant lifetime anticoagulation even when the index VTE was provoked."
     ],
-    [
-     "Key Investigations",
-     "Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific -",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "VTE arises from Virchow's triad of venous stasis, hypercoagulability, and endothelial injury, typically coupled with an inflammatory trigger. Activated platelets release microparticles bearing proinflammatory mediators that recruit neutrophils to form neutrophil extracellular traps; the contained histones drive platelet aggregation and platelet-dependent thrombin generation, and thrombi flourish in conditions of stasis, low oxygen tension, and upregulated proinflammatory genes. Inherited prothrombotic states include factor V Leiden (resistance to protein C) and the prothrombin gene mutation; deficiencies of antithrombin, protein C, and protein S are associated with VTE but rare. Lower-extremity DVT usually begins in the calf and may propagate to the popliteal, femoral, and iliac veins; when thrombi detach they embolize through the vena cava and right heart to lodge in the pulmonary arteries. PE impairs gas exchange, causing arterial hypoxemia and a widened alveolar-arterial oxygen gradient, increased anatomic and physiologic dead space, increased pulmonary vascular resistance (from mechanical obstruction and vasoconstrictors such as serotonin), reflex hyperventilation, increased airway resistance, and reduced pulmonary compliance. Rising pulmonary artery pressure increases RV wall tension, causing RV dilation and dysfunction with BNP release; the interventricular septum bows into and compresses the left ventricle, impairing LV filling; elevated RV wall tension also compresses the right coronary artery, producing RV ischemia/microinfarction with troponin release, and LV underfilling can culminate in falling cardiac output, hypotension, circulatory collapse, and death.",
+    "additionalDifferentials": [
+      "Ruptured Baker's cyst (suggested by sudden severe calf discomfort)",
+      "Muscle strain or injury",
+      "Cellulitis (fever and chills favor cellulitis over DVT)",
+      "Acute postthrombotic syndrome / chronic venous insufficiency",
+      "Pneumonia, asthma, or COPD",
+      "Congestive heart failure",
+      "Pericarditis",
+      "Pleurisy / viral syndrome / costochondritis / musculoskeletal chest discomfort",
+      "Rib fracture or pneumothorax",
+      "Acute coronary syndrome",
+      "Anxiety",
+      "Vasovagal syncope"
     ],
-    [
-     "Primary Differentials",
-     "Ruptured Baker's cyst (suggested by sudden severe calf discomfort), Muscle strain or injury, Cellulitis (fever and chills favor",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Cellulitis mimicking DVT (fever and chills herald cellulitis rather than DVT)",
+      "Pneumonia mimicking PE"
     ],
-    [
-     "Management Strategy",
-     "Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Ruptured Baker's cyst",
+      "Muscle strain/injury",
+      "Postthrombotic syndrome / venous insufficiency",
+      "Congestive heart failure",
+      "Acute coronary syndrome and myocardial infarction",
+      "Pericarditis and pericardial tamponade",
+      "Aortic dissection",
+      "Pneumothorax / rib fracture",
+      "Anxiety and vasovagal syncope"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific - elevated in MI, pneumonia, sepsis, cancer, postoperative state, and 2nd/3rd-trimester pregnancy, so rarely useful in hospitalized patients)",
+      "Serum troponin (rises with RV microinfarction)",
+      "BNP or NT-proBNP (released with RV/myocardial stretch)",
+      "ECG (sinus tachycardia, S1Q3T3, T-wave inversion V1-V4)",
+      "Compression venous ultrasonography with Doppler (first-line for DVT)",
+      "CT pulmonary angiography with contrast (principal PE imaging test; also assesses RV size and alternative diagnoses)",
+      "Ventilation/perfusion lung scan (second-line, for patients unable to tolerate contrast)",
+      "Chest radiograph (Westermark's sign, Hampton's hump, Palla's sign)",
+      "MR venography with gadolinium (for equivocal leg/pelvic ultrasound) and MR pulmonary angiography (detects large proximal PE only)",
+      "Echocardiography (to detect PE mimics and indirect signs such as McConnell's sign)",
+      "Invasive pulmonary angiography and contrast phlebography (reserved for nondiagnostic CT or when intervention is planned)"
+    ],
+    "redFlags": [
+      "Systemic arterial hypotension with extensive thrombosis - massive (high-risk) PE, accounting for 5-10% of cases, presenting with dyspnea, syncope, hypotension, cyanosis, and possible cardiogenic shock and multisystem organ failure",
+      "RV dysfunction on echocardiography or RV enlargement on CT despite normal systemic pressure - submassive (intermediate-risk) PE",
+      "Combination of right heart failure with elevated cardiac biomarkers (troponin), indicating high risk of clinical deterioration",
+      "Phlegmasia cerulea dolens - the most serious form of DVT with diffuse leg edema",
+      "Hemodynamic instability portending high risk of adverse outcomes despite anticoagulation"
+    ],
+    "prognosis": "Prognosis depends on PE severity and RV function. Low-risk PE (about 65-75% of cases) carries an excellent prognosis. Submassive (intermediate-risk) PE (20-25%) with RV dysfunction and biomarker elevation has a high risk of clinical deterioration, and massive (high-risk) PE (5-10%) can cause cardiogenic shock, multisystem organ failure, and death. US PE-related mortality fell from 6 to about 4.5 per 100,000 between 2000 and 2017 but is rising among young and middle-aged adults, with the median age at PE death dropping from 73 (2000) to 68 (2018) and roughly 50% higher mortality in African Americans than Caucasians; mortality is consistently higher in socioeconomically disadvantaged communities. The 30-day all-cause readmission rate after PE hospitalization is about 11% and the 90-day rate about 15%, with recurrent PE the most common readmission cause. Long-term, roughly half of PE patients report persistent dyspnea, fatigue, and reduced exercise capacity and about a quarter have persistent RV dysfunction - the post-PE syndrome; chronic thromboembolic pulmonary hypertension (CTEPH) develops in about 2% of acute PE patients. DVT can lead to postthrombotic syndrome (chronic venous insufficiency) with calf/ankle swelling, leg aching, and, in severe cases, deep skin ulceration.",
+    "pitfalls": [
+      "Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful role in inpatients.",
+      "Applying the age-adjusted d-dimer cutoff to suspected acute DVT - it is validated only for ruling out PE in patients over 50 with low/intermediate probability.",
+      "Using echocardiography as a rule-out test for PE - most PE patients have normal echocardiograms; echo is better for detecting mimics like MI, tamponade, and aortic dissection.",
+      "Assuming absence of DVT excludes PE - the leg thrombus may have already fully embolized.",
+      "Treating antiphospholipid syndrome with DOACs - warfarin, not DOACs, is the standard for APS.",
+      "Mistaking a diffusely edematous leg for routine DVT and overlooking phlegmasia cerulea dolens; conversely attributing all calf pain to DVT (consider ruptured Baker's cyst) and all dyspnea to PE.",
+      "Confusing cellulitis (fever, chills) with DVT.",
+      "Overlooking nonthrombotic embolism (fat, tumor, bone marrow, air, amniotic fluid, cement, talc/hair in IV drug users) as a cause of PE."
+    ],
+    "severityClassification": "Pulmonary embolism is stratified into three categories: Massive (high-risk) PE - 5-10% of cases, systemic arterial hypotension with thrombosis involving at least half the pulmonary vasculature, presenting with dyspnea, syncope, hypotension, and cyanosis and capable of causing cardiogenic shock and death. Submassive (intermediate-risk) PE - 20-25% of cases, RV dysfunction despite normal systemic arterial pressure; right heart failure with biomarker (troponin) release marks high risk of deterioration. Low-risk PE - about 65-75% of cases, excellent prognosis. (Wells clinical decision rules in Table 290-2 stratify pretest probability of DVT and PE rather than anatomic severity.)",
+    "references": [
+      "Harrison 22e p.2154",
+      "Harrison 22e p.2155",
+      "Harrison 22e p.2156",
+      "Harrison 22e p.2157",
+      "Harrison 22e p.2158",
+      "Harrison 22e p.2159",
+      "Harrison 22e p.2160",
+      "Harrison 22e p.2161",
+      "Harrison 22e p.2162",
+      "Harrison 22e p.2163"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin preferred in cancer-associated thrombosis and pregnancy, and a vitamin K antagonist as an alternative",
+      "Risk-stratify pulmonary embolism using clinical severity, right ventricular assessment on echocardiography or CT, and cardiac biomarkers (troponin, natriuretic peptides) to identify high- and intermediate-risk disease",
+      "Give systemic thrombolysis, or catheter-directed therapy or embolectomy, for massive high-risk PE with haemodynamic instability",
+      "Provide supportive care with oxygen, haemodynamic support and analgesia, and consider an inferior vena cava filter when anticoagulation is contraindicated",
+      "Set the duration of anticoagulation by whether the event was provoked or unprovoked, and investigate for underlying malignancy or thrombophilia where appropriate",
+      "Use graduated compression and early mobilisation, and manage phlegmasia cerulea dolens as a limb-threatening emergency",
+      "Escalate to a pulmonary embolism response team or critical care for high-risk disease, and counsel on bleeding risk and, for heritable thrombophilia, family implications"
     ]
-   ],
-   "caption": "Overview comparison matrix for deep-venous thrombosis and pulmonary thromboembolism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "deep-venous-thrombosis-and-pulmonary-real-image",
-   "title": "Deep-Venous Thrombosis and Pulmonary Thromboembolism: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "deep_venous_thrombosis_and_pulmonary-pathway",
+      "title": "Deep-Venous Thrombosis and Pulmonary Thromboembolism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common symptom. Failure to improve despite standard therapy for concurrent heart failure or pneumonia is a clue to",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic arterial hypotension with extensive thrombosis - massive (high-risk) PE, accounting for 5-10% of cases, presenting with dyspnea, syncope, hypotension, cyanosis, and possible cardiogenic shock and",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific - elevated in MI, pneumonia, sepsis, cancer, postoperative state, and 2nd/3rd-trimester pregnancy,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin preferred in cancer-associated thrombosis and pregnancy, and a vitamin K antagonist as"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful role in inpatients."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of deep-venous thrombosis and pulmonary thromboembolism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-matrix",
+      "title": "Deep-Venous Thrombosis and Pulmonary Thromboembolism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "PE is described as the great masquerader; symptoms and signs are nonspecific, and unexplained breathlessness is its most common",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative plasma d-dimer ELISA (sensitivity over 95% for PE; useful rule-out at low pretest probability but nonspecific -",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ruptured Baker's cyst (suggested by sudden severe calf discomfort), Muscle strain or injury, Cellulitis (fever and chills favor",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start therapeutic anticoagulation promptly: direct oral anticoagulants are first-line for most, with low-molecular-weight heparin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on d-dimer in hospitalized patients - levels are frequently elevated by systemic illness, so d-dimer rarely has a useful",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for deep-venous thrombosis and pulmonary thromboembolism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pulmonary Embolism",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 118-9",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 58-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and risk stratification of DVT and PE",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "PERC rule (all 8 absent)",
+          "cells": [
+            {
+              "text": "Age <50, HR <100, SpO2 95% or more, no prior VTE, no unilateral leg swelling, no oestrogen, no haemoptysis, no surgery or trauma within 4 weeks"
+            },
+            {
+              "text": "Low-risk patient needs no further testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells score",
+          "cells": [
+            {
+              "text": "Likely or unlikely"
+            },
+            {
+              "text": "Validated in outpatients only; high likelihood goes straight to imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-dimer, negative",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "<0.4",
+              "op": "<",
+              "value": 0.4
+            },
+            {
+              "text": "NPV over 95% at low or intermediate probability; rarely useful in inpatients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age-adjusted D-dimer",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Age x 10 if over 50"
+            },
+            {
+              "text": "{{hy:For PE only, not for suspected DVT}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression ultrasound",
+          "cells": [
+            {
+              "text": "Non-compressible vein"
+            },
+            {
+              "text": "First line for DVT; a negative scan does not exclude PE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Preferred PE test"
+            },
+            {
+              "text": "V/Q scan if renal failure, contrast allergy or pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RV to LV diameter ratio on CT",
+          "cells": [
+            {
+              "text": ">1",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Predicts higher 30-day mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk (massive) PE",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP <90 or fall of 40 or more for 15 min",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "5 to 10% of PE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intermediate-risk PE",
+          "cells": [
+            {
+              "text": "RV dysfunction without hypotension"
+            },
+            {
+              "text": "Intermediate-high when imaging and troponin or BNP both abnormal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "sPESI items",
+          "cells": [
+            {
+              "text": "Age >80, cancer, chronic lung disease, HR >110, SBP <100, SaO2 <90%"
+            },
+            {
+              "text": "sPESI 0 = low risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia, T inversion V1 to V4; S1Q3T3 specific but insensitive"
+            },
+            {
+              "text": "Supports, does not exclude"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of DVT and PE",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ruptured Baker's cyst",
+          "cells": [
+            {
+              "text": "Sudden severe calf pain"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "{{hy:Fever and chills favour cellulitis}}"
+            },
+            {
+              "text": "Ultrasound to exclude DVT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle strain",
+          "cells": [
+            {
+              "text": "Injury history"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Fever, productive cough, focal consolidation"
+            },
+            {
+              "text": "Chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Ischaemic ECG changes"
+            },
+            {
+              "text": "ECG and troponin trend"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection or pericardial tamponade",
+          "cells": [
+            {
+              "text": "Chest pain with shock"
+            },
+            {
+              "text": "Echo or CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Failure to improve may hide coexisting PE"
+            },
+            {
+              "text": "Echo and natriuretic peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or rib fracture",
+          "cells": [
+            {
+              "text": "Pleuritic pain after trauma"
+            },
+            {
+              "text": "Chest radiograph"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-treatment",
+      "kind": "treatment",
+      "title": "Treatment of DVT and PE",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Apixaban or rivaroxaban",
+          "cells": [
+            {
+              "text": "{{hy:First line for most patients}}"
+            },
+            {
+              "text": "No parenteral lead-in; edoxaban needs 5 to 10 days of heparin first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH (weight-based)",
+          "cells": [
+            {
+              "text": "Cancer-associated VTE, pregnancy"
+            },
+            {
+              "text": "Avoid if CrCl <30 mL/min"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unfractionated heparin",
+          "cells": [
+            {
+              "text": "High bleeding risk or possible thrombolysis"
+            },
+            {
+              "text": "Titrate to aPTT 1.5 to 2.5 times control; rapidly reversible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "Antiphospholipid syndrome or DOAC unsuitable"
+            },
+            {
+              "text": "Overlap heparin at least 5 days and until INR 2 to 3 for 24 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic thrombolysis (alteplase)",
+          "cells": [
+            {
+              "text": "High-risk PE with haemodynamic compromise"
+            },
+            {
+              "text": "Catheter therapy or embolectomy if lytic contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVC filter",
+          "cells": [
+            {
+              "text": "Anticoagulation contraindicated, or recurrence despite therapy"
+            },
+            {
+              "text": "Also when cardiopulmonary reserve is marginal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration, provoked",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Transient risk factor (surgery, trauma, immobility)"
+            },
+            {
+              "text": "3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extended or indefinite therapy",
+          "cells": [
+            {
+              "text": "Unprovoked VTE, cancer, thrombophilia, recurrence"
+            },
+            {
+              "text": "Review bleeding risk yearly; rivaroxaban 10 mg daily option after 6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-treatment-2",
+      "kind": "treatment",
+      "title": "Features of new oral anticoagulants",
+      "rowHeader": "Option",
+      "columns": [
+        "Rivaroxaban",
+        "Apixaban",
+        "Dabigatran etexilate"
+      ],
+      "rows": [
+        {
+          "parameter": "Target",
+          "cells": [
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "IIa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Molecular weight",
+          "cells": [
+            {
+              "text": "436"
+            },
+            {
+              "text": "460"
+            },
+            {
+              "text": "628"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prodrug",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bioavailability (%)",
+          "cells": [
+            {
+              "text": "80"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "6"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Time to peak (h)",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "3"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Half-life (h)",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "9-14"
+            },
+            {
+              "text": "12-17"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Renal excretion (%)",
+          "cells": [
+            {
+              "text": "65"
+            },
+            {
+              "text": "25"
+            },
+            {
+              "text": "80"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Antidote",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The printed table is cut off at the right page edge; any further columns are unreadable."
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Risk factors for thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Risk factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous: inherited",
+          "cells": [
+            {
+              "text": "Factor V Leiden; prothrombin G20210A; antithrombin deficiency; protein C deficiency; protein S deficiency; elevated FVIII"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Venous: acquired",
+          "cells": [
+            {
+              "text": "Age; previous thrombosis; immobilization; major surgery; pregnancy and puerperium; hospitalization; obesity; infection; APC resistance (nongenetic); smoking"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Venous: unknown (*)",
+          "cells": [
+            {
+              "text": "Elevated factor II, IX, XI; elevated TAFI levels; low levels of TFPI"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Venous and arterial: inherited",
+          "cells": [
+            {
+              "text": "Homocystinuria; dysfibrinogenemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Venous and arterial: mixed (inherited and acquired)",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Venous and arterial: acquired",
+          "cells": [
+            {
+              "text": "Malignancy; antiphospholipid antibody syndrome; hormonal therapy; polycythemia vera; essential thrombocythemia; paroxysmal nocturnal hemoglobinuria; thrombotic thrombocytopenic purpura; heparin-induced thrombocytopenia; disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The footnote text for the asterisk is cut off at the bottom of the printed page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-dx-mgmt",
+      "title": "Diagnosis and management of DVT and PE",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PE: dyspnoea, pleuritic pain, syncope, or leg swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension or shock?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Bedside echo or CTPA if stable enough; heparin",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Thrombolysis or catheter or surgical embolectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Clinical probability: Wells and PERC",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PE likely?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "D-dimer (age-adjusted if over 50)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "D-dimer raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "PE excluded; seek other diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CTPA, or V/Q scan if contrast unsuitable",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "PE confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Risk stratify: RV on imaging, troponin, sPESI; anticoagulate",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "DOAC first line; 3 months if provoked, extended if not",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

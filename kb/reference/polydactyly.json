@@ -1,173 +1,471 @@
 {
- "id": "polydactyly",
- "name": "Polydactyly",
- "aliases": [
-  "supernumerary digit",
-  "preaxial polydactyly",
-  "postaxial polydactyly",
-  "central polydactyly",
-  "duplicated digit"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Hand & Upper Limb",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring), and postaxial (little finger or ulnar side)",
-   "Postaxial polydactyly is common, frequently familial (autosomal dominant), and more prevalent in children of African ancestry; it may be isolated or syndromic",
-   "Preaxial (thumb) duplication is graded by the Wassel-Flatt classification according to the most proximal level of skeletal duplication, from a bifid distal phalanx to a duplicated metacarpal",
-   "Central polydactyly is less common, is often hidden within a syndactyly (polysyndactyly), and involves complex bony and tendinous connections that are difficult to reconstruct",
-   "Syndromic associations must be considered: preaxial forms with conditions such as Holt-Oram syndrome and Fanconi anaemia, and postaxial forms with Ellis-van Creveld, Bardet-Biedl, Meckel-Gruber, and trisomy 13",
-   "A well-formed extra digit is not simply excised; reconstruction preserves the most functional bone, joint, ligaments, tendons, and nail, and reconstructs collateral ligament stability",
-   "Surgery is timed to optimise function and appearance, generally in early childhood"
+  "id": "polydactyly",
+  "name": "Polydactyly",
+  "aliases": [
+    "supernumerary digit",
+    "preaxial polydactyly",
+    "postaxial polydactyly",
+    "central polydactyly",
+    "duplicated digit"
   ],
-  "pathophysiology": "Polydactyly arises from disordered patterning of the developing limb bud along the anteroposterior (radioulnar) axis. Abnormal signalling, notably of the sonic hedgehog pathway acting through the zone of polarising activity, produces one or more supernumerary digits. The duplicated ray may be a rudimentary soft-tissue tag or a fully formed digit with its own bones, joints, and tendons. Depending on which part of the axis is affected, the extra digit lies on the radial (preaxial), central, or ulnar (postaxial) side of the hand, and disturbances of these same signalling pathways underlie the many syndromic forms.",
-  "additionalDifferentials": [
-   "Syndactyly or polysyndactyly, which may coexist",
-   "Macrodactyly (an enlarged rather than duplicated digit)",
-   "Ulnar dimelia (mirror hand)",
-   "Triphalangeal thumb",
-   "Constriction ring sequence with accessory tissue",
-   "Symphalangism"
-  ],
-  "additionalInvestigations": [
-   "Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb)",
-   "Family history and examination of relatives, as postaxial forms are often autosomal dominant",
-   "Clinical screening for syndromic features affecting the heart, kidneys, retina, and growth",
-   "Echocardiography where a heart-hand or VACTERL association is suspected",
-   "Genetic evaluation when the pattern is syndromic, central, or bilateral"
-  ],
-  "redFlags": [
-   "Features suggesting a serious syndrome, such as a cardiac anomaly, renal disease, retinal dystrophy, or marrow-failure risk",
-   "Central polydactyly or polysyndactyly with complex functional impairment",
-   "A duplicated thumb that is unstable or deviating, threatening pinch function"
-  ],
-  "prognosis": "Isolated postaxial and most preaxial duplications have an excellent outcome after well-planned reconstruction; residual problems can include joint instability, angular deviation, stiffness, and a reconstructed thumb that is smaller than normal, while central forms are more prone to stiffness and imperfect appearance.",
-  "pitfalls": [
-   "Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or deviation",
-   "Discarding the more functional of two duplicated thumbs",
-   "Failing to look for syndromic associations",
-   "Underestimating the complexity of central polysyndactyly"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "Tachdjian's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant",
-   "Reconstructive surgery for a well-formed duplicated digit that preserves the most functional bone, joint, tendons and nail and restores collateral ligament stability rather than simple amputation",
-   "Timing and technique of thumb (preaxial) reconstruction guided by the Wassel-Flatt level of skeletal duplication, undertaken by a specialist paediatric hand surgeon",
-   "Complex staged reconstruction for central polysyndactyly given the intricate bony and tendinous interconnections",
-   "Screening for syndromic associations affecting the heart, kidneys, retina and growth, with echocardiography where a heart-hand or VACTERL association is suspected",
-   "Postoperative hand therapy and monitoring for residual joint instability, angular deviation and stiffness",
-   "Genetic counselling and examination of relatives given autosomal dominant inheritance of many postaxial forms, with genetic evaluation for syndromic, central or bilateral patterns"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polydactyly-pathway",
-   "title": "Polydactyly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring), and postaxial (little finger or ulnar side)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting a serious syndrome, such as a cardiac anomaly, renal disease, retinal dystrophy, or marrow-failure risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb), Family history and examination of relatives, as postaxial forms are often autosomal dominant, Clinical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or deviation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polydactyly."
-  }
- ],
- "tables": [
-  {
-   "id": "polydactyly-matrix",
-   "title": "Polydactyly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring),",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Hand & Upper Limb",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring), and postaxial (little finger or ulnar side)",
+      "Postaxial polydactyly is common, frequently familial (autosomal dominant), and more prevalent in children of African ancestry; it may be isolated or syndromic",
+      "Preaxial (thumb) duplication is graded by the Wassel-Flatt classification according to the most proximal level of skeletal duplication, from a bifid distal phalanx to a duplicated metacarpal",
+      "Central polydactyly is less common, is often hidden within a syndactyly (polysyndactyly), and involves complex bony and tendinous connections that are difficult to reconstruct",
+      "Syndromic associations must be considered: preaxial forms with conditions such as Holt-Oram syndrome and Fanconi anaemia, and postaxial forms with Ellis-van Creveld, Bardet-Biedl, Meckel-Gruber, and trisomy 13",
+      "A well-formed extra digit is not simply excised; reconstruction preserves the most functional bone, joint, ligaments, tendons, and nail, and reconstructs collateral ligament stability",
+      "Surgery is timed to optimise function and appearance, generally in early childhood"
     ],
-    [
-     "Key Investigations",
-     "Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb), Family",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Polydactyly arises from disordered patterning of the developing limb bud along the anteroposterior (radioulnar) axis. Abnormal signalling, notably of the sonic hedgehog pathway acting through the zone of polarising activity, produces one or more supernumerary digits. The duplicated ray may be a rudimentary soft-tissue tag or a fully formed digit with its own bones, joints, and tendons. Depending on which part of the axis is affected, the extra digit lies on the radial (preaxial), central, or ulnar (postaxial) side of the hand, and disturbances of these same signalling pathways underlie the many syndromic forms.",
+    "additionalDifferentials": [
+      "Syndactyly or polysyndactyly, which may coexist",
+      "Macrodactyly (an enlarged rather than duplicated digit)",
+      "Ulnar dimelia (mirror hand)",
+      "Triphalangeal thumb",
+      "Constriction ring sequence with accessory tissue",
+      "Symphalangism"
     ],
-    [
-     "Primary Differentials",
-     "Syndactyly or polysyndactyly, which may coexist, Macrodactyly (an enlarged rather than duplicated digit), Ulnar dimelia (mirror",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb)",
+      "Family history and examination of relatives, as postaxial forms are often autosomal dominant",
+      "Clinical screening for syndromic features affecting the heart, kidneys, retina, and growth",
+      "Echocardiography where a heart-hand or VACTERL association is suspected",
+      "Genetic evaluation when the pattern is syndromic, central, or bilateral"
     ],
-    [
-     "Management Strategy",
-     "Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting a serious syndrome, such as a cardiac anomaly, renal disease, retinal dystrophy, or marrow-failure risk",
+      "Central polydactyly or polysyndactyly with complex functional impairment",
+      "A duplicated thumb that is unstable or deviating, threatening pinch function"
     ],
-    [
-     "Clinical Pitfall",
-     "Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated postaxial and most preaxial duplications have an excellent outcome after well-planned reconstruction; residual problems can include joint instability, angular deviation, stiffness, and a reconstructed thumb that is smaller than normal, while central forms are more prone to stiffness and imperfect appearance.",
+    "pitfalls": [
+      "Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or deviation",
+      "Discarding the more functional of two duplicated thumbs",
+      "Failing to look for syndromic associations",
+      "Underestimating the complexity of central polysyndactyly"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "Tachdjian's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant",
+      "Reconstructive surgery for a well-formed duplicated digit that preserves the most functional bone, joint, tendons and nail and restores collateral ligament stability rather than simple amputation",
+      "Timing and technique of thumb (preaxial) reconstruction guided by the Wassel-Flatt level of skeletal duplication, undertaken by a specialist paediatric hand surgeon",
+      "Complex staged reconstruction for central polysyndactyly given the intricate bony and tendinous interconnections",
+      "Screening for syndromic associations affecting the heart, kidneys, retina and growth, with echocardiography where a heart-hand or VACTERL association is suspected",
+      "Postoperative hand therapy and monitoring for residual joint instability, angular deviation and stiffness",
+      "Genetic counselling and examination of relatives given autosomal dominant inheritance of many postaxial forms, with genetic evaluation for syndromic, central or bilateral patterns"
     ]
-   ],
-   "caption": "Overview comparison matrix for polydactyly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polydactyly-real-image",
-   "title": "Polydactyly: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "polydactyly-pathway",
+      "title": "Polydactyly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring), and postaxial (little finger or ulnar side)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting a serious syndrome, such as a cardiac anomaly, renal disease, retinal dystrophy, or marrow-failure risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb), Family history and examination of relatives, as postaxial forms are often autosomal dominant, Clinical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or deviation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polydactyly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polydactyly-matrix",
+      "title": "Polydactyly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Polydactyly is duplication of a digit and is classified by location: preaxial (thumb or radial side), central (index to ring),",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs of the hand to define the level of skeletal duplication (for example Wassel-Flatt grading of the thumb), Family",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Syndactyly or polysyndactyly, which may coexist, Macrodactyly (an enlarged rather than duplicated digit), Ulnar dimelia (mirror",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Excision of a rudimentary pedunculated postaxial digit, by suture ligation or formal removal of the soft-tissue remnant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Simply tying off or amputating a duplicated digit without reconstructing the collateral ligaments, leaving instability or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polydactyly."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polydactyly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand radiographs",
+          "cells": [
+            {
+              "text": "Level of skeletal duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and examination of relatives",
+          "cells": [
+            {
+              "text": "Autosomal dominant postaxial forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical screening for syndromic features",
+          "cells": [
+            {
+              "text": "Heart, kidneys, retina and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Heart-hand or VACTERL association, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndromic, central or bilateral patterns"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polydactyly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syndactyly or polysyndactyly",
+          "cells": [
+            {
+              "text": "Coexisting syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrodactyly",
+          "cells": [
+            {
+              "text": "Enlarged rather than duplicated digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar dimelia",
+          "cells": [
+            {
+              "text": "Mirror hand"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polydactyly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rudimentary digit",
+          "cells": [
+            {
+              "text": "Excision of a rudimentary pedunculated postaxial digit by suture ligation or formal excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplicated well-formed digit",
+          "cells": [
+            {
+              "text": "Reconstruction that preserves the most functional digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thumb reconstruction",
+          "cells": [
+            {
+              "text": "Timing and technique guided by the Wassel-Flatt level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central polysyndactyly",
+          "cells": [
+            {
+              "text": "Complex staged reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome screening",
+          "cells": [
+            {
+              "text": "Heart, kidneys, retina and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Postoperative therapy and monitoring for instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; examination of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polydactyly-dx-mgmt",
+      "title": "Diagnosis and management of Polydactyly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Extra digit on the hand, with a duplicated skeletal level on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (serious syndrome, complex central polydactyly, unstable duplicated thumb)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent genetic and cardiac review for a serious syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hand radiographs; family history; echocardiography if heart-hand suspected; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does radiograph define a duplicated skeletal level consistent with polydactyly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider syndactyly, macrodactyly, ulnar dimelia, triphalangeal thumb or constriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excision of a rudimentary postaxial digit by ligation or formal excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstruction of a well-formed duplicated digit that preserves function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thumb reconstruction timed and planned by the Wassel-Flatt level",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged reconstruction for central polysyndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for syndromic associations affecting heart, kidneys, retina and growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated postaxial and most preaxial duplications do well after reconstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

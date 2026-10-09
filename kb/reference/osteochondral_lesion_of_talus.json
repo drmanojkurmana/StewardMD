@@ -1,169 +1,459 @@
 {
- "id": "osteochondral_lesion_of_talus",
- "name": "Osteochondral lesion of the talus",
- "aliases": [
-  "osteochondral defect of the talus",
-  "talar dome osteochondritis dissecans",
-  "OLT"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Trauma",
- "specialty": "Orthopaedics / Sports Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or fracture",
-   "Medial dome lesions tend to be deeper and posterior; lateral lesions are often shallower and trauma-related",
-   "Presents with persistent deep ankle pain, swelling, catching and giving way after an ankle injury that fails to settle",
-   "Plain radiographs are often normal, so MRI or CT is needed when symptoms persist",
-   "MRI assesses cartilage and bone oedema, while CT best defines bony fragment and cyst geometry",
-   "Stable lesions are treated non-operatively; unstable or displaced lesions and those with subchondral cysts are considered for surgery",
-   "Surgical options range from debridement and microfracture to osteochondral grafting depending on size and chronicity"
+  "id": "osteochondral_lesion_of_talus",
+  "name": "Osteochondral lesion of the talus",
+  "aliases": [
+    "osteochondral defect of the talus",
+    "talar dome osteochondritis dissecans",
+    "OLT"
   ],
-  "pathophysiology": "Shear and compressive forces during an inversion ankle injury damage the talar dome cartilage and subchondral bone, sometimes with an element of impaired subchondral blood supply. Disruption of the osteochondral unit produces bone oedema, cyst formation and, if the fragment separates, an unstable lesion or loose body. Persistent altered joint mechanics cause pain and can progress to ankle osteoarthritis.",
-  "additionalDifferentials": [
-   "Chronic lateral ankle instability",
-   "Ankle impingement (anterolateral or posterior)",
-   "Occult fracture",
-   "Sinus tarsi syndrome",
-   "Ankle osteoarthritis",
-   "Peroneal tendon pathology"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing ankle radiographs",
-   "MRI to evaluate cartilage, bone oedema and stability",
-   "CT to define bony fragment and cyst dimensions",
-   "Assessment of hindfoot alignment and ligamentous stability"
-  ],
-  "redFlags": [
-   "A displaced osteochondral fragment causing locking",
-   "Signs of septic arthritis in a painful swollen ankle",
-   "Progressive joint-space loss indicating established osteoarthritis"
-  ],
-  "prognosis": "Small stable lesions often improve with non-operative care; larger, cystic or unstable lesions have more guarded outcomes, and surgical results decline with lesion size, chronicity and revision surgery.",
-  "pitfalls": [
-   "Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs",
-   "Underestimating lesion size and cyst formation by relying on plain films",
-   "Ignoring hindfoot malalignment or instability that predisposes to failure",
-   "Offering repeat marrow-stimulation for large lesions better served by grafting"
-  ],
-  "references": [
-   "Miller's Review of Orthopaedics",
-   "Brukner and Khan's Clinical Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and physiotherapy",
-   "Analgesia and rehabilitation to restore ankle range of motion and strength",
-   "Arthroscopic debridement with bone-marrow-stimulating microfracture for small unstable lesions, and retrograde drilling where cartilage overlies a subchondral cyst",
-   "Osteochondral autograft or allograft transplantation, autologous chondrocyte implantation or fragment fixation for larger, cystic or failed lesions",
-   "Correction of contributing hindfoot malalignment and lateral ligament instability",
-   "Surveillance for progression to ankle osteoarthritis, with referral to a foot and ankle surgeon for unstable or displaced lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteochondral_lesion_of_talus-pathway",
-   "title": "Osteochondral lesion of the talus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or fracture",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A displaced osteochondral fragment causing locking",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing ankle radiographs, MRI to evaluate cartilage, bone oedema and stability, CT to define bony fragment and cyst dimensions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and physiotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteochondral lesion of the talus."
-  }
- ],
- "tables": [
-  {
-   "id": "osteochondral_lesion_of_talus-matrix",
-   "title": "Osteochondral lesion of the talus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Trauma",
+  "specialty": "Orthopaedics / Sports Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or fracture",
+      "Medial dome lesions tend to be deeper and posterior; lateral lesions are often shallower and trauma-related",
+      "Presents with persistent deep ankle pain, swelling, catching and giving way after an ankle injury that fails to settle",
+      "Plain radiographs are often normal, so MRI or CT is needed when symptoms persist",
+      "MRI assesses cartilage and bone oedema, while CT best defines bony fragment and cyst geometry",
+      "Stable lesions are treated non-operatively; unstable or displaced lesions and those with subchondral cysts are considered for surgery",
+      "Surgical options range from debridement and microfracture to osteochondral grafting depending on size and chronicity"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing ankle radiographs, MRI to evaluate cartilage, bone oedema and stability, CT to define bony fragment and cyst",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Shear and compressive forces during an inversion ankle injury damage the talar dome cartilage and subchondral bone, sometimes with an element of impaired subchondral blood supply. Disruption of the osteochondral unit produces bone oedema, cyst formation and, if the fragment separates, an unstable lesion or loose body. Persistent altered joint mechanics cause pain and can progress to ankle osteoarthritis.",
+    "additionalDifferentials": [
+      "Chronic lateral ankle instability",
+      "Ankle impingement (anterolateral or posterior)",
+      "Occult fracture",
+      "Sinus tarsi syndrome",
+      "Ankle osteoarthritis",
+      "Peroneal tendon pathology"
     ],
-    [
-     "Primary Differentials",
-     "Chronic lateral ankle instability, Ankle impingement (anterolateral or posterior), Occult fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing ankle radiographs",
+      "MRI to evaluate cartilage, bone oedema and stability",
+      "CT to define bony fragment and cyst dimensions",
+      "Assessment of hindfoot alignment and ligamentous stability"
     ],
-    [
-     "Management Strategy",
-     "Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and",
-     "Core treatment modality"
+    "redFlags": [
+      "A displaced osteochondral fragment causing locking",
+      "Signs of septic arthritis in a painful swollen ankle",
+      "Progressive joint-space loss indicating established osteoarthritis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small stable lesions often improve with non-operative care; larger, cystic or unstable lesions have more guarded outcomes, and surgical results decline with lesion size, chronicity and revision surgery.",
+    "pitfalls": [
+      "Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs",
+      "Underestimating lesion size and cyst formation by relying on plain films",
+      "Ignoring hindfoot malalignment or instability that predisposes to failure",
+      "Offering repeat marrow-stimulation for large lesions better served by grafting"
+    ],
+    "references": [
+      "Miller's Review of Orthopaedics",
+      "Brukner and Khan's Clinical Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and physiotherapy",
+      "Analgesia and rehabilitation to restore ankle range of motion and strength",
+      "Arthroscopic debridement with bone-marrow-stimulating microfracture for small unstable lesions, and retrograde drilling where cartilage overlies a subchondral cyst",
+      "Osteochondral autograft or allograft transplantation, autologous chondrocyte implantation or fragment fixation for larger, cystic or failed lesions",
+      "Correction of contributing hindfoot malalignment and lateral ligament instability",
+      "Surveillance for progression to ankle osteoarthritis, with referral to a foot and ankle surgeon for unstable or displaced lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteochondral lesion of the talus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteochondral-lesion-of-talus-real-image",
-   "title": "Osteochondral lesion of the talus: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteochondral_lesion_of_talus-pathway",
+      "title": "Osteochondral lesion of the talus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or fracture",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A displaced osteochondral fragment causing locking",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing ankle radiographs, MRI to evaluate cartilage, bone oedema and stability, CT to define bony fragment and cyst dimensions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and physiotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteochondral lesion of the talus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteochondral_lesion_of_talus-matrix",
+      "title": "Osteochondral lesion of the talus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A focal injury of the talar dome articular cartilage and underlying subchondral bone, frequently following an ankle sprain or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing ankle radiographs, MRI to evaluate cartilage, bone oedema and stability, CT to define bony fragment and cyst",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic lateral ankle instability, Ankle impingement (anterolateral or posterior), Occult fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Non-operative management of stable lesions with a period of protected weight-bearing or immobilisation, activity modification and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing persistent post-sprain ankle pain to soft tissue and never imaging beyond radiographs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteochondral lesion of the talus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteochondral_lesion_of_talus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing ankle radiographs",
+          "cells": [
+            {
+              "text": "Often normal, so they can underestimate the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cartilage, bone oedema and stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Bony fragment and cyst dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hindfoot alignment and ligamentous stability",
+          "cells": [
+            {
+              "text": "Malalignment or instability that predisposes to failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteochondral_lesion_of_talus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic lateral ankle instability",
+          "cells": [
+            {
+              "text": "Ligamentous instability; uncorrected, it contributes to failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle osteoarthritis",
+          "cells": [
+            {
+              "text": "Progressive joint-space loss indicates established arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteochondral_lesion_of_talus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-operative management of stable lesions",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Protected weight-bearing or immobilisation, activity modification and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and rehabilitation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Restore ankle range of motion and strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic debridement and microfracture",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For small unstable lesions; retrograde drilling where cartilage overlies a subchondral cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grafting, chondrocyte implantation or fixation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Osteochondral autograft or allograft, autologous chondrocyte implantation or fragment fixation for larger, cystic or failed lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct contributing factors",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Hindfoot malalignment and lateral ligament instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "For progression to ankle osteoarthritis; foot and ankle surgeon referral for unstable or displaced lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteochondral_lesion_of_talus-dx-mgmt",
+      "title": "Diagnosis and management of Osteochondral lesion of the talus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent deep ankle pain, swelling or catching after an ankle sprain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (displaced fragment locking, septic signs or joint-space loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for septic arthritis or a displaced fragment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs, MRI for cartilage and oedema, CT for fragment and cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion stable on MRI, with alignment and ligament stability assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lateral ankle instability, impingement, sinus tarsi or peroneal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protected weight-bearing or immobilisation, activity modification and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Arthroscopic debridement with microfracture for small unstable lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Retrograde drilling where cartilage overlies a subchondral cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Osteochondral graft, chondrocyte implantation or fixation for larger or cystic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Correct hindfoot malalignment and lateral ligament instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small stable lesions often improve; large cystic or unstable ones fare worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

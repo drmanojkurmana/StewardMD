@@ -1,171 +1,420 @@
 {
- "id": "sarcosinemia",
- "name": "Sarcosinaemia",
- "aliases": [
-  "sarcosinaemia",
-  "sarcosine dehydrogenase deficiency",
-  "SARDH deficiency",
-  "hypersarcosinaemia"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine in the choline-to-glycine pathway",
-   "Regarded as a benign biochemical trait, with sarcosinaemia and sarcosinuria found without a consistent associated clinical disease",
-   "The biochemical signature is raised sarcosine in plasma and urine",
-   "Secondary sarcosinuria can occur in glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) because the electron-transfer flavoprotein pathway is shared, so this should be excluded",
-   "Because sarcosine dehydrogenase depends on the flavin electron-transfer system, its activity may be affected in disorders of that system",
-   "No specific treatment is required for isolated sarcosinaemia",
-   "Inheritance is autosomal recessive",
-   "British spelling applies (sarcosinaemia)"
+  "id": "sarcosinemia",
+  "name": "Sarcosinaemia",
+  "aliases": [
+    "sarcosinaemia",
+    "sarcosine dehydrogenase deficiency",
+    "SARDH deficiency",
+    "hypersarcosinaemia"
   ],
-  "pathophysiology": "Sarcosine (N-methylglycine) is generated during choline degradation and from glycine methylation, and is normally converted back to glycine by the mitochondrial flavoprotein sarcosine dehydrogenase, which transfers electrons to the electron-transfer flavoprotein system. In sarcosinaemia, deficiency of this enzyme causes sarcosine to accumulate in blood and urine. Because the metabolite is not appreciably toxic, isolated sarcosinaemia is considered a benign trait. Notably, the same electron-transfer flavoprotein pathway is impaired in glutaric aciduria type II, which produces secondary sarcosinuria and must be distinguished.",
-  "additionalDifferentials": [
-   "Glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) causing secondary sarcosinuria",
-   "Riboflavin deficiency affecting flavoprotein activity",
-   "Other benign aminoacidaemias on newborn screening",
-   "Dietary sources raising sarcosine transiently",
-   "Renal tubular causes of aminoaciduria"
-  ],
-  "additionalInvestigations": [
-   "Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine",
-   "Urine organic acids to exclude glutaric aciduria type II",
-   "Plasma acylcarnitine profile to screen for multiple acyl-CoA dehydrogenase deficiency",
-   "Riboflavin status assessment",
-   "Molecular analysis of the SARDH gene where confirmation is desired",
-   "Correlation with clinical status to exclude an alternative diagnosis"
-  ],
-  "redFlags": [
-   "Sarcosinuria accompanied by organic aciduria or hypoglycaemia suggesting glutaric aciduria type II",
-   "Metabolic decompensation, which is not a feature of benign sarcosinaemia and points elsewhere",
-   "Attributing unrelated symptoms to the benign biochemical finding"
-  ],
-  "prognosis": "Isolated sarcosinaemia carries an excellent prognosis and is regarded as a benign metabolic variant requiring no treatment.",
-  "pitfalls": [
-   "Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria",
-   "Treating a benign trait as a disease",
-   "Missing riboflavin deficiency as a contributory factor",
-   "Attributing coincidental symptoms to the finding"
-  ],
-  "references": [
-   "Scriver's OMMBID: sarcosinaemia and disorders of glycine/choline metabolism",
-   "Nyhan, Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction",
-   "Exclude glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) with urine organic acids and a plasma acylcarnitine profile, since it causes secondary sarcosinuria and needs active management",
-   "Confirm the diagnosis biochemically with raised plasma and urine sarcosine, and by SARDH molecular analysis where clarification is desired",
-   "Correlate persistently with clinical status so any coexisting condition is not wrongly attributed to the sarcosinaemia",
-   "Offer genetic counselling regarding the autosomal recessive inheritance and reassure relatives about the benign outlook"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sarcosinemia-pathway",
-   "title": "Sarcosinaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine in the choline-to-glycine pathway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sarcosinuria accompanied by organic aciduria or hypoglycaemia suggesting glutaric aciduria type II",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine, Urine organic acids to exclude glutaric aciduria type II, Plasma acylcarnitine profile to screen for multiple acyl-CoA dehydrogenase"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sarcosinaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "sarcosinemia-matrix",
-   "title": "Sarcosinaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine in the choline-to-glycine pathway",
+      "Regarded as a benign biochemical trait, with sarcosinaemia and sarcosinuria found without a consistent associated clinical disease",
+      "The biochemical signature is raised sarcosine in plasma and urine",
+      "Secondary sarcosinuria can occur in glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) because the electron-transfer flavoprotein pathway is shared, so this should be excluded",
+      "Because sarcosine dehydrogenase depends on the flavin electron-transfer system, its activity may be affected in disorders of that system",
+      "No specific treatment is required for isolated sarcosinaemia",
+      "Inheritance is autosomal recessive",
+      "British spelling applies (sarcosinaemia)"
     ],
-    [
-     "Key Investigations",
-     "Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine, Urine organic acids to exclude glutaric",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sarcosine (N-methylglycine) is generated during choline degradation and from glycine methylation, and is normally converted back to glycine by the mitochondrial flavoprotein sarcosine dehydrogenase, which transfers electrons to the electron-transfer flavoprotein system. In sarcosinaemia, deficiency of this enzyme causes sarcosine to accumulate in blood and urine. Because the metabolite is not appreciably toxic, isolated sarcosinaemia is considered a benign trait. Notably, the same electron-transfer flavoprotein pathway is impaired in glutaric aciduria type II, which produces secondary sarcosinuria and must be distinguished.",
+    "additionalDifferentials": [
+      "Glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) causing secondary sarcosinuria",
+      "Riboflavin deficiency affecting flavoprotein activity",
+      "Other benign aminoacidaemias on newborn screening",
+      "Dietary sources raising sarcosine transiently",
+      "Renal tubular causes of aminoaciduria"
     ],
-    [
-     "Primary Differentials",
-     "Glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) causing secondary sarcosinuria, Riboflavin deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine",
+      "Urine organic acids to exclude glutaric aciduria type II",
+      "Plasma acylcarnitine profile to screen for multiple acyl-CoA dehydrogenase deficiency",
+      "Riboflavin status assessment",
+      "Molecular analysis of the SARDH gene where confirmation is desired",
+      "Correlation with clinical status to exclude an alternative diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction",
-     "Core treatment modality"
+    "redFlags": [
+      "Sarcosinuria accompanied by organic aciduria or hypoglycaemia suggesting glutaric aciduria type II",
+      "Metabolic decompensation, which is not a feature of benign sarcosinaemia and points elsewhere",
+      "Attributing unrelated symptoms to the benign biochemical finding"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated sarcosinaemia carries an excellent prognosis and is regarded as a benign metabolic variant requiring no treatment.",
+    "pitfalls": [
+      "Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria",
+      "Treating a benign trait as a disease",
+      "Missing riboflavin deficiency as a contributory factor",
+      "Attributing coincidental symptoms to the finding"
+    ],
+    "references": [
+      "Scriver's OMMBID: sarcosinaemia and disorders of glycine/choline metabolism",
+      "Nyhan, Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction",
+      "Exclude glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) with urine organic acids and a plasma acylcarnitine profile, since it causes secondary sarcosinuria and needs active management",
+      "Confirm the diagnosis biochemically with raised plasma and urine sarcosine, and by SARDH molecular analysis where clarification is desired",
+      "Correlate persistently with clinical status so any coexisting condition is not wrongly attributed to the sarcosinaemia",
+      "Offer genetic counselling regarding the autosomal recessive inheritance and reassure relatives about the benign outlook"
     ]
-   ],
-   "caption": "Overview comparison matrix for sarcosinaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sarcosinemia-real-image",
-   "title": "Sarcosinaemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sarcosinemia-pathway",
+      "title": "Sarcosinaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine in the choline-to-glycine pathway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sarcosinuria accompanied by organic aciduria or hypoglycaemia suggesting glutaric aciduria type II",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine, Urine organic acids to exclude glutaric aciduria type II, Plasma acylcarnitine profile to screen for multiple acyl-CoA dehydrogenase"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sarcosinaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sarcosinemia-matrix",
+      "title": "Sarcosinaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of sarcosine dehydrogenase (SARDH), a flavoprotein that demethylates sarcosine (N-methylglycine) to glycine",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative plasma amino acids and urine analysis demonstrating raised sarcosine, Urine organic acids to exclude glutaric",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glutaric aciduria type II (multiple acyl-CoA dehydrogenase deficiency) causing secondary sarcosinuria, Riboflavin deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that isolated sarcosinaemia is a benign biochemical trait requiring no specific treatment or dietary restriction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking glutaric aciduria type II as a cause of secondary sarcosinuria",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sarcosinaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sarcosinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids and urine analysis",
+          "cells": [
+            {
+              "text": "Raised sarcosine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Exclude glutaric aciduria type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Screens for multiple acyl-CoA dehydrogenase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin status",
+          "cells": [
+            {
+              "text": "Flavoprotein-related cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SARDH gene analysis",
+          "cells": [
+            {
+              "text": "Confirmation where desired"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcosinemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glutaric aciduria type II",
+          "cells": [
+            {
+              "text": "Organic aciduria or hypoglycaemia, with metabolic decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin deficiency",
+          "cells": [
+            {
+              "text": "Affects flavoprotein activity; check riboflavin status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcosinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign biochemical trait; no treatment or dietary restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude glutaric aciduria type II",
+          "cells": [
+            {
+              "text": "Urine organic acids and plasma acylcarnitine profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm biochemically",
+          "cells": [
+            {
+              "text": "Raised plasma and urine sarcosine, with SARDH analysis if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical correlation",
+          "cells": [
+            {
+              "text": "Avoid attributing coexisting conditions to sarcosinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; reassure relatives about benign outlook"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sarcosinemia-dx-mgmt",
+      "title": "Diagnosis and management of Sarcosinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised sarcosine found on amino acid screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Organic aciduria, hypoglycaemia or metabolic decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as glutaric aciduria type II or other metabolic disease; metabolic referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids, plasma acylcarnitines, riboflavin status, SARDH analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the organic acid and acylcarnitine profiles normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pursue glutaric aciduria type II, riboflavin deficiency or renal tubular causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign trait, no dietary restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correlate with clinical status for coexisting disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling on autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Excellent prognosis; benign metabolic variant needing no treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

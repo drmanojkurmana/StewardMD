@@ -1,186 +1,623 @@
 {
- "id": "KAWASAKI_DISEASE",
- "name": "Kawasaki disease",
- "system": "Rheumatology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "kawasaki",
-  "mucocutaneous lymph node",
-  "mucocutaneous lymph node syndrome",
-  "kawasaki syndrome",
-  "infantile polyarteritis",
-  "kd"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the coronary arteries.",
-   "Classic diagnosis needs fever for five or more days plus four of five criteria: bilateral non-exudative conjunctivitis, oral mucosal changes (cracked lips, strawberry tongue), polymorphous rash, extremity changes (edema, erythema, later periungual desquamation), and cervical lymphadenopathy usually unilateral and over 1.5 cm.",
-   "Incomplete (atypical) presentations are common in infants under 6 months and older children, and this group carries a higher, not lower, risk of coronary aneurysm.",
-   "Irritability out of proportion to exam findings and marked perineal desquamation in the diaper area are supportive clues.",
-   "Untreated disease leads to coronary artery aneurysms in roughly a quarter of children; timely therapy sharply reduces this risk.",
-   "Think of Kawasaki disease in any young febrile child with unexplained sterile pyuria, gallbladder hydrops, or aseptic meningitis.",
-   "Highest risk of coronary aneurysm formation is in the subacute phase, roughly one to four weeks after fever onset, coinciding with marked thrombocytosis."
+  "id": "KAWASAKI_DISEASE",
+  "name": "Kawasaki disease",
+  "system": "Rheumatology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "kawasaki",
+    "mucocutaneous lymph node",
+    "mucocutaneous lymph node syndrome",
+    "kawasaki syndrome",
+    "infantile polyarteritis",
+    "kd"
   ],
-  "pathophysiology": "Kawasaki disease is thought to arise from an exaggerated innate and adaptive immune response, possibly triggered by an unidentified infectious agent, in a genetically susceptible host. The resulting medium-vessel vasculitis targets the coronary arteries, causing panvasculitis with destruction of the internal elastic lamina and media, which weakens the vessel wall and predisposes to aneurysm formation and later stenosis or thrombosis. Systemic inflammation also produces the mucocutaneous and lymph node findings that define the clinical syndrome.",
-  "additionalDifferentials": [
-   "Scarlet fever / group A streptococcal infection",
-   "Measles and other viral exanthems",
-   "Staphylococcal or streptococcal toxic shock syndrome",
-   "Stevens-Johnson syndrome / drug hypersensitivity reaction",
-   "Systemic juvenile idiopathic arthritis",
-   "Multisystem inflammatory syndrome in children (MIS-C)"
-  ],
-  "infectionMimics": [
-   "Scarlet fever (group A Streptococcus)",
-   "Measles",
-   "Adenovirus infection",
-   "Staphylococcal scalded skin syndrome / toxic shock syndrome",
-   "Epstein-Barr virus infection",
-   "Leptospirosis"
-  ],
-  "nonInfectiousMimics": [
-   "Multisystem inflammatory syndrome in children (MIS-C)",
-   "Stevens-Johnson syndrome / drug reaction",
-   "Systemic juvenile idiopathic arthritis",
-   "Polyarteritis nodosa"
-  ],
-  "additionalInvestigations": [
-   "Echocardiogram — baseline and serial imaging to detect coronary artery dilation or aneurysm",
-   "CBC with differential — leukocytosis early, thrombocytosis typically emerging in the subacute phase",
-   "ESR and CRP — markedly elevated, supports diagnosis and tracks inflammatory activity",
-   "Liver function tests — mild transaminitis and hypoalbuminemia are common",
-   "Urinalysis — sterile pyuria from urethritis supports the diagnosis",
-   "ECG — screen for arrhythmia or ischemic changes related to coronary involvement",
-   "Blood culture and throat culture — help exclude streptococcal and other bacterial mimics",
-   "Lipid panel — baseline assessment given long-term cardiovascular risk in those with aneurysms"
-  ],
-  "redFlags": [
-   "Evidence of coronary artery dilation or aneurysm on echocardiogram warrants urgent cardiology involvement",
-   "Signs of myocarditis, pericardial effusion, or hemodynamic instability (Kawasaki disease shock syndrome)",
-   "Persistent or recrudescent fever after initial therapy suggesting treatment resistance",
-   "Very young infants or children with incomplete presentations, who are at higher risk of coronary complications",
-   "Marked thrombocytosis in the subacute phase increasing thrombotic risk in dilated vessels"
-  ],
-  "pitfalls": [
-   "Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease with greater cardiac risk",
-   "Delaying treatment while awaiting full criteria, since early therapy within the first ten days of fever meaningfully lowers aneurysm risk",
-   "Overlooking overlap with MIS-C in the appropriate epidemiologic context, which requires additional testing and different considerations",
-   "Failing to arrange long-term cardiology follow-up in children with documented coronary changes"
-  ],
-  "prognosis": "With prompt recognition and treatment most children recover fully with resolution of fever and inflammation within days. Coronary artery aneurysms, when they occur, may regress over time but can also persist, predisposing to late stenosis, thrombosis, or ischemic events, so children with cardiac involvement need long-term surveillance.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Chapter on Vasculitis (Kawasaki Disease)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery aneurysms",
-   "Continue aspirin at anti-inflammatory dosing during the acute phase, switching to antiplatelet dosing once fever settles",
-   "For immunoglobulin resistance, use a repeat immunoglobulin infusion, corticosteroids, or the TNF inhibitor infliximab",
-   "Intensify initial therapy with adjunctive corticosteroids in children at high risk of coronary complications",
-   "Add anticoagulation such as warfarin for large or giant coronary aneurysms to prevent thrombosis",
-   "Perform baseline and serial echocardiography to detect and monitor coronary artery dilation and aneurysm",
-   "Arrange long-term paediatric cardiology follow-up for children with persistent coronary involvement"
-  ]
- },
- "algorithms": [
-  {
-   "id": "kawasaki_disease-pathway",
-   "title": "Kawasaki disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the coronary arteries.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evidence of coronary artery dilation or aneurysm on echocardiogram warrants urgent cardiology involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiogram - baseline and serial imaging to detect coronary artery dilation or aneurysm, CBC with differential - leukocytosis early, thrombocytosis typically emerging in the subacute phase, ESR and CRP - markedly"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery aneurysms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease with greater cardiac risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kawasaki disease."
-  }
- ],
- "tables": [
-  {
-   "id": "kawasaki_disease-matrix",
-   "title": "Kawasaki disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the coronary arteries.",
+      "Classic diagnosis needs fever for five or more days plus four of five criteria: bilateral non-exudative conjunctivitis, oral mucosal changes (cracked lips, strawberry tongue), polymorphous rash, extremity changes (edema, erythema, later periungual desquamation), and cervical lymphadenopathy usually unilateral and over 1.5 cm.",
+      "Incomplete (atypical) presentations are common in infants under 6 months and older children, and this group carries a higher, not lower, risk of coronary aneurysm.",
+      "Irritability out of proportion to exam findings and marked perineal desquamation in the diaper area are supportive clues.",
+      "Untreated disease leads to coronary artery aneurysms in roughly a quarter of children; timely therapy sharply reduces this risk.",
+      "Think of Kawasaki disease in any young febrile child with unexplained sterile pyuria, gallbladder hydrops, or aseptic meningitis.",
+      "Highest risk of coronary aneurysm formation is in the subacute phase, roughly one to four weeks after fever onset, coinciding with marked thrombocytosis."
     ],
-    [
-     "Key Investigations",
-     "Echocardiogram - baseline and serial imaging to detect coronary artery dilation or aneurysm, CBC with differential - leukocytosis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kawasaki disease is thought to arise from an exaggerated innate and adaptive immune response, possibly triggered by an unidentified infectious agent, in a genetically susceptible host. The resulting medium-vessel vasculitis targets the coronary arteries, causing panvasculitis with destruction of the internal elastic lamina and media, which weakens the vessel wall and predisposes to aneurysm formation and later stenosis or thrombosis. Systemic inflammation also produces the mucocutaneous and lymph node findings that define the clinical syndrome.",
+    "additionalDifferentials": [
+      "Scarlet fever / group A streptococcal infection",
+      "Measles and other viral exanthems",
+      "Staphylococcal or streptococcal toxic shock syndrome",
+      "Stevens-Johnson syndrome / drug hypersensitivity reaction",
+      "Systemic juvenile idiopathic arthritis",
+      "Multisystem inflammatory syndrome in children (MIS-C)"
     ],
-    [
-     "Primary Differentials",
-     "Scarlet fever / group A streptococcal infection, Measles and other viral exanthems, Staphylococcal or streptococcal toxic shock",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Scarlet fever (group A Streptococcus)",
+      "Measles",
+      "Adenovirus infection",
+      "Staphylococcal scalded skin syndrome / toxic shock syndrome",
+      "Epstein-Barr virus infection",
+      "Leptospirosis"
     ],
-    [
-     "Management Strategy",
-     "Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Multisystem inflammatory syndrome in children (MIS-C)",
+      "Stevens-Johnson syndrome / drug reaction",
+      "Systemic juvenile idiopathic arthritis",
+      "Polyarteritis nodosa"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Echocardiogram — baseline and serial imaging to detect coronary artery dilation or aneurysm",
+      "CBC with differential — leukocytosis early, thrombocytosis typically emerging in the subacute phase",
+      "ESR and CRP — markedly elevated, supports diagnosis and tracks inflammatory activity",
+      "Liver function tests — mild transaminitis and hypoalbuminemia are common",
+      "Urinalysis — sterile pyuria from urethritis supports the diagnosis",
+      "ECG — screen for arrhythmia or ischemic changes related to coronary involvement",
+      "Blood culture and throat culture — help exclude streptococcal and other bacterial mimics",
+      "Lipid panel — baseline assessment given long-term cardiovascular risk in those with aneurysms"
+    ],
+    "redFlags": [
+      "Evidence of coronary artery dilation or aneurysm on echocardiogram warrants urgent cardiology involvement",
+      "Signs of myocarditis, pericardial effusion, or hemodynamic instability (Kawasaki disease shock syndrome)",
+      "Persistent or recrudescent fever after initial therapy suggesting treatment resistance",
+      "Very young infants or children with incomplete presentations, who are at higher risk of coronary complications",
+      "Marked thrombocytosis in the subacute phase increasing thrombotic risk in dilated vessels"
+    ],
+    "pitfalls": [
+      "Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease with greater cardiac risk",
+      "Delaying treatment while awaiting full criteria, since early therapy within the first ten days of fever meaningfully lowers aneurysm risk",
+      "Overlooking overlap with MIS-C in the appropriate epidemiologic context, which requires additional testing and different considerations",
+      "Failing to arrange long-term cardiology follow-up in children with documented coronary changes"
+    ],
+    "prognosis": "With prompt recognition and treatment most children recover fully with resolution of fever and inflammation within days. Coronary artery aneurysms, when they occur, may regress over time but can also persist, predisposing to late stenosis, thrombosis, or ischemic events, so children with cardiac involvement need long-term surveillance.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Chapter on Vasculitis (Kawasaki Disease)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery aneurysms",
+      "Continue aspirin at anti-inflammatory dosing during the acute phase, switching to antiplatelet dosing once fever settles",
+      "For immunoglobulin resistance, use a repeat immunoglobulin infusion, corticosteroids, or the TNF inhibitor infliximab",
+      "Intensify initial therapy with adjunctive corticosteroids in children at high risk of coronary complications",
+      "Add anticoagulation such as warfarin for large or giant coronary aneurysms to prevent thrombosis",
+      "Perform baseline and serial echocardiography to detect and monitor coronary artery dilation and aneurysm",
+      "Arrange long-term paediatric cardiology follow-up for children with persistent coronary involvement"
     ]
-   ],
-   "caption": "Overview comparison matrix for kawasaki disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kawasaki-disease-real-image",
-   "title": "Kawasaki disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kawasaki_disease-pathway",
+      "title": "Kawasaki disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the coronary arteries.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evidence of coronary artery dilation or aneurysm on echocardiogram warrants urgent cardiology involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiogram - baseline and serial imaging to detect coronary artery dilation or aneurysm, CBC with differential - leukocytosis early, thrombocytosis typically emerging in the subacute phase, ESR and CRP - markedly"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery aneurysms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease with greater cardiac risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kawasaki disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kawasaki_disease-matrix",
+      "title": "Kawasaki disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute self-limited vasculitis of childhood, mainly under age 5, that preferentially targets medium-sized arteries, especially the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiogram - baseline and serial imaging to detect coronary artery dilation or aneurysm, CBC with differential - leukocytosis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Scarlet fever / group A streptococcal infection, Measles and other viral exanthems, Staphylococcal or streptococcal toxic shock",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give intravenous immunoglobulin with aspirin promptly, ideally early in the illness, to reduce the risk of coronary artery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the diagnosis because not all classic criteria are present, especially in infants who often have incomplete disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kawasaki disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Kawasaki Disease",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/miscellaneous-disorders-in-infants-and-children/kawasaki-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "KAWASAKI_DISEASE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for Kawasaki disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fever",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "38.0 deg C or more for 5 or more days",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Plus 4 of the 5 principal features}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Conjunctivae",
+          "cells": [
+            {
+              "text": "Bilateral non-exudative injection"
+            },
+            {
+              "text": "Often limbal sparing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lips and mouth",
+          "cells": [
+            {
+              "text": "Red, dry, fissured lips; strawberry tongue; injected mucosa"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extremities",
+          "cells": [
+            {
+              "text": "Oedema or erythema of hands and feet, later desquamation"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rash",
+          "cells": [
+            {
+              "text": "Polymorphous truncal exanthem"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cervical lymph node",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "At least one node 1.5 or more",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Incomplete Kawasaki disease",
+          "cells": [
+            {
+              "text": "Fever 5 days or more with 2 or more features"
+            },
+            {
+              "text": "Prompt labs and echo; infants under 1 year at higher risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (weeks 2 to 3)",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "450,000 or more",
+              "op": ">=",
+              "value": 450000
+            },
+            {
+              "text": "Supportive with high ESR, CRP, pyuria, low albumin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Giant coronary aneurysm",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Internal diameter above 8",
+              "op": ">",
+              "value": 8
+            },
+            {
+              "text": "Echo at diagnosis, 2 to 3 weeks and 6 to 8 weeks"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "KAWASAKI_DISEASE-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Kawasaki disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "MIS-C",
+          "cells": [
+            {
+              "text": "{{hy:More GI and neurological symptoms; recent SARS-CoV-2; often older children}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "Group A streptococcal throat infection; throat culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Measles and viral exanthems",
+          "cells": [
+            {
+              "text": "Listed mimic with fever and rash; exclude clinically"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staphylococcal or streptococcal toxic shock",
+          "cells": [
+            {
+              "text": "Hypotension with toxin-mediated illness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug reaction or Stevens-Johnson syndrome",
+          "cells": [
+            {
+              "text": "New drug exposure; mucosal blistering"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Arthritis, quotidian fever, evanescent rash"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leptospirosis or Rocky Mountain spotted fever",
+          "cells": [
+            {
+              "text": "Exposure history; less common mimics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "KAWASAKI_DISEASE-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Kawasaki disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "{{hy:All, ideally within the first 10 days}}"
+            },
+            {
+              "text": "2 g/kg single dose over 10 to 12 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose aspirin",
+          "cells": [
+            {
+              "text": "With IVIG in the acute phase"
+            },
+            {
+              "text": "Reduce after 4 to 5 days afebrile; dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "After the acute phase"
+            },
+            {
+              "text": "At least 8 weeks; indefinitely if coronary abnormalities"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat IVIG, corticosteroids or infliximab",
+          "cells": [
+            {
+              "text": "IVIG-resistant disease"
+            },
+            {
+              "text": "With cardiology and rheumatology input"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjunctive corticosteroids",
+          "cells": [
+            {
+              "text": "High risk of coronary complications"
+            },
+            {
+              "text": "Intensified initial therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warfarin or added antiplatelet",
+          "cells": [
+            {
+              "text": "Giant aneurysm above 8 mm"
+            },
+            {
+              "text": "Prevent thrombosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Effective therapy lowers aneurysm rate from about 20% to under 5%; about 25% of untreated children have coronary involvement."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "KAWASAKI_DISEASE-dx-mgmt",
+      "title": "Diagnosis and management of Kawasaki disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with fever for 5 days or more",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "4 or more principal features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "2 or 3 features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for another cause of fever",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CRP, ESR, blood count, albumin, urinalysis, echocardiogram",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Supportive labs or coronary changes?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude scarlet fever, measles, toxic shock, MIS-C",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IVIG 2 g/kg over 10 to 12 hours with high-dose aspirin",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Fever persists after IVIG?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat IVIG, corticosteroids or infliximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-dose aspirin; echo at 2 to 3 and 6 to 8 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Giant aneurysm: add warfarin; long-term cardiology follow-up",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "If aneurysm"
+        }
+      ]
+    }
+  ]
 }

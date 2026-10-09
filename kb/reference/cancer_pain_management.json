@@ -1,175 +1,236 @@
 {
- "id": "cancer_pain_management",
- "name": "Cancer pain management",
- "aliases": [
-  "malignant pain",
-  "cancer-related pain",
-  "palliative pain control",
-  "oncological pain"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as pain severity increases, with adjuvants added at any step",
-   "Distinguish nociceptive from neuropathic pain, since neuropathic pain often needs adjuvant agents such as antidepressants or anticonvulsants rather than opioids alone",
-   "For persistent pain, analgesia is given regularly around the clock with additional as-needed doses available for breakthrough pain",
-   "Breakthrough or incident pain is managed with short-acting rescue analgesia layered on top of the baseline regimen",
-   "Opioid rotation, switching from one opioid to another, can improve the balance of analgesia and side effects when a patient has poor response or troublesome toxicity",
-   "Anticipate and prevent predictable opioid effects, especially constipation, which requires prophylactic laxatives, while nausea and sedation often ease with time",
-   "In older adults, reduced renal function and heightened sensitivity mean starting low, titrating slowly, and being cautious with renally cleared opioids and their metabolites",
-   "Non-pharmacological measures, disease-directed treatment such as palliative radiotherapy for bone pain, and interventional techniques including nerve blocks complement drug therapy",
-   "Total pain acknowledges that physical, psychological, social, and spiritual distress interact, so addressing suffering broadly improves pain control"
+  "id": "cancer_pain_management",
+  "name": "Cancer pain management",
+  "aliases": [
+    "malignant pain",
+    "cancer-related pain",
+    "palliative pain control",
+    "oncological pain"
   ],
-  "pathophysiology": "Cancer pain may be nociceptive (somatic pain from bone or soft-tissue involvement, or visceral pain from organ infiltration and stretch) or neuropathic (from tumour compression or infiltration of nerves, or from treatment such as chemotherapy or radiation). Persistent nociceptive input sensitises peripheral nociceptors and central pathways, producing hyperalgesia and allodynia. Opioids act at central and peripheral opioid receptors to modulate pain transmission, while adjuvants target neuropathic mechanisms, inflammation, or specific complications, and the multiplicity of mechanisms underpins the use of combination therapy.",
-  "additionalDifferentials": [
-   "Pain from a non-malignant comorbidity such as osteoarthritis or neuropathy",
-   "Treatment-related pain (post-surgical, post-radiation, chemotherapy-induced neuropathy)",
-   "Pathological fracture through a bony metastasis",
-   "Infection-related pain",
-   "Oncological emergency such as spinal cord compression or bowel obstruction presenting with pain"
-  ],
-  "additionalInvestigations": [
-   "Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function",
-   "Distinction of nociceptive versus neuropathic components to guide drug selection",
-   "Targeted imaging when a new or changing pain suggests fracture, cord compression, or disease progression",
-   "Renal and hepatic function to guide analgesic choice and titration in older patients",
-   "Assessment of psychological and spiritual distress contributing to total pain"
-  ],
-  "redFlags": [
-   "Signs of opioid toxicity such as excessive sedation, confusion, myoclonus, pinpoint pupils, or slowed respiration requiring urgent dose review",
-   "New back pain with neurological signs suggesting malignant spinal cord compression",
-   "Sudden severe pain suggesting pathological fracture or visceral perforation",
-   "Rapidly escalating opioid requirement indicating disease progression or an emergent complication"
-  ],
-  "prognosis": "Most cancer pain can be well controlled with systematic assessment and stepwise pharmacological management, allowing meaningful quality of life. Poorly controlled or neuropathic pain, or pain complicating advanced disease, may be more difficult and often requires specialist palliative input and multimodal or interventional approaches.",
-  "pitfalls": [
-   "Failing to prescribe prophylactic laxatives when starting an opioid",
-   "Under-dosing because of undue fear of addiction or respiratory depression in appropriate palliative use",
-   "Relying on opioids alone for neuropathic pain that needs adjuvants",
-   "Ignoring reduced renal clearance in older adults, risking accumulation and toxicity",
-   "Treating physical pain while neglecting the psychological and spiritual dimensions of suffering"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases",
-   "Use paracetamol and NSAIDs at the base of the ladder and as opioid-sparing agents",
-   "Give strong opioids regularly around the clock for persistent moderate-to-severe pain, with a short-acting rescue dose for breakthrough pain",
-   "Add adjuvants for neuropathic pain, such as an antidepressant or an anticonvulsant, rather than escalating opioids alone",
-   "Rotate to an alternative opioid when analgesia is poor or toxicity is troublesome",
-   "Prescribe prophylactic laxatives with every opioid and manage nausea and sedation proactively",
-   "Use targeted measures for specific problems, including radiotherapy for painful bone metastases, bisphosphonates and interventional nerve blocks",
-   "Refer to specialist palliative care and address the psychological and spiritual dimensions of total pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cancer_pain_management-pathway",
-   "title": "Cancer pain management: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as pain severity increases, with adjuvants added at any step",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of opioid toxicity such as excessive sedation, confusion, myoclonus, pinpoint pupils, or slowed respiration requiring urgent dose review",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function, Distinction of nociceptive versus neuropathic components to guide drug selection, Targeted imaging when a new or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to prescribe prophylactic laxatives when starting an opioid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cancer pain management."
-  }
- ],
- "tables": [
-  {
-   "id": "cancer_pain_management-matrix",
-   "title": "Cancer pain management: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as pain severity increases, with adjuvants added at any step",
+      "Distinguish nociceptive from neuropathic pain, since neuropathic pain often needs adjuvant agents such as antidepressants or anticonvulsants rather than opioids alone",
+      "For persistent pain, analgesia is given regularly around the clock with additional as-needed doses available for breakthrough pain",
+      "Breakthrough or incident pain is managed with short-acting rescue analgesia layered on top of the baseline regimen",
+      "Opioid rotation, switching from one opioid to another, can improve the balance of analgesia and side effects when a patient has poor response or troublesome toxicity",
+      "Anticipate and prevent predictable opioid effects, especially constipation, which requires prophylactic laxatives, while nausea and sedation often ease with time",
+      "In older adults, reduced renal function and heightened sensitivity mean starting low, titrating slowly, and being cautious with renally cleared opioids and their metabolites",
+      "Non-pharmacological measures, disease-directed treatment such as palliative radiotherapy for bone pain, and interventional techniques including nerve blocks complement drug therapy",
+      "Total pain acknowledges that physical, psychological, social, and spiritual distress interact, so addressing suffering broadly improves pain control"
     ],
-    [
-     "Key Investigations",
-     "Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function, Distinction of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cancer pain may be nociceptive (somatic pain from bone or soft-tissue involvement, or visceral pain from organ infiltration and stretch) or neuropathic (from tumour compression or infiltration of nerves, or from treatment such as chemotherapy or radiation). Persistent nociceptive input sensitises peripheral nociceptors and central pathways, producing hyperalgesia and allodynia. Opioids act at central and peripheral opioid receptors to modulate pain transmission, while adjuvants target neuropathic mechanisms, inflammation, or specific complications, and the multiplicity of mechanisms underpins the use of combination therapy.",
+    "additionalDifferentials": [
+      "Pain from a non-malignant comorbidity such as osteoarthritis or neuropathy",
+      "Treatment-related pain (post-surgical, post-radiation, chemotherapy-induced neuropathy)",
+      "Pathological fracture through a bony metastasis",
+      "Infection-related pain",
+      "Oncological emergency such as spinal cord compression or bowel obstruction presenting with pain"
     ],
-    [
-     "Primary Differentials",
-     "Pain from a non-malignant comorbidity such as osteoarthritis or neuropathy, Treatment-related pain (post-surgical,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function",
+      "Distinction of nociceptive versus neuropathic components to guide drug selection",
+      "Targeted imaging when a new or changing pain suggests fracture, cord compression, or disease progression",
+      "Renal and hepatic function to guide analgesic choice and titration in older patients",
+      "Assessment of psychological and spiritual distress contributing to total pain"
     ],
-    [
-     "Management Strategy",
-     "Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of opioid toxicity such as excessive sedation, confusion, myoclonus, pinpoint pupils, or slowed respiration requiring urgent dose review",
+      "New back pain with neurological signs suggesting malignant spinal cord compression",
+      "Sudden severe pain suggesting pathological fracture or visceral perforation",
+      "Rapidly escalating opioid requirement indicating disease progression or an emergent complication"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to prescribe prophylactic laxatives when starting an opioid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cancer pain can be well controlled with systematic assessment and stepwise pharmacological management, allowing meaningful quality of life. Poorly controlled or neuropathic pain, or pain complicating advanced disease, may be more difficult and often requires specialist palliative input and multimodal or interventional approaches.",
+    "pitfalls": [
+      "Failing to prescribe prophylactic laxatives when starting an opioid",
+      "Under-dosing because of undue fear of addiction or respiratory depression in appropriate palliative use",
+      "Relying on opioids alone for neuropathic pain that needs adjuvants",
+      "Ignoring reduced renal clearance in older adults, risking accumulation and toxicity",
+      "Treating physical pain while neglecting the psychological and spiritual dimensions of suffering"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases",
+      "Use paracetamol and NSAIDs at the base of the ladder and as opioid-sparing agents",
+      "Give strong opioids regularly around the clock for persistent moderate-to-severe pain, with a short-acting rescue dose for breakthrough pain",
+      "Add adjuvants for neuropathic pain, such as an antidepressant or an anticonvulsant, rather than escalating opioids alone",
+      "Rotate to an alternative opioid when analgesia is poor or toxicity is troublesome",
+      "Prescribe prophylactic laxatives with every opioid and manage nausea and sedation proactively",
+      "Use targeted measures for specific problems, including radiotherapy for painful bone metastases, bisphosphonates and interventional nerve blocks",
+      "Refer to specialist palliative care and address the psychological and spiritual dimensions of total pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for cancer pain management."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cancer-pain-management-real-image",
-   "title": "Cancer pain management: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cancer_pain_management-pathway",
+      "title": "Cancer pain management: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as pain severity increases, with adjuvants added at any step",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of opioid toxicity such as excessive sedation, confusion, myoclonus, pinpoint pupils, or slowed respiration requiring urgent dose review",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function, Distinction of nociceptive versus neuropathic components to guide drug selection, Targeted imaging when a new or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to prescribe prophylactic laxatives when starting an opioid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cancer pain management."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cancer_pain_management-matrix",
+      "title": "Cancer pain management: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The WHO analgesic ladder guides a stepwise approach, escalating from non-opioid analgesics to weaker and then stronger opioids as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured pain assessment characterising site, severity, quality, temporal pattern, and impact on function, Distinction of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pain from a non-malignant comorbidity such as osteoarthritis or neuropathy, Treatment-related pain (post-surgical,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Follow the WHO analgesic ladder, escalating from non-opioid analgesics to weak then strong opioids as severity increases",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to prescribe prophylactic laxatives when starting an opioid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cancer pain management."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cancer_pain_management-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessment in cancer pain",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Structured pain assessment", "cells": [{"text": "Site, severity, quality, temporal pattern and functional impact"}], "cite": "c1"},
+        {"parameter": "Nociceptive versus neuropathic component", "cells": [{"text": "Guides choice of adjuvant or opioid"}], "cite": "c1"},
+        {"parameter": "Targeted imaging", "cells": [{"text": "New or changing pain suggesting fracture, cord compression or progression"}], "cite": "c1"},
+        {"parameter": "Renal and hepatic function", "cells": [{"text": "Analgesic choice and titration in older patients"}], "cite": "c1"},
+        {"parameter": "Psychological and spiritual assessment", "cells": [{"text": "Contribution to total pain"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cancer_pain_management-ddx",
+      "kind": "ddx",
+      "title": "Look-alike sources of cancer-related pain",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Pathological fracture through a bony metastasis", "cells": [{"text": "Sudden severe pain suggests fracture or visceral perforation"}], "cite": "c1"},
+        {"parameter": "Malignant spinal cord compression", "cells": [{"text": "New back pain with neurological signs"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cancer_pain_management-treatment",
+      "kind": "treatment",
+      "title": "Management options in cancer pain",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "WHO analgesic ladder", "cells": [{"text": "Escalate from non-opioids to weak then strong opioids as severity increases; adjuvants at any step"}, {"text": "Stepwise"}], "cite": "c1"},
+        {"parameter": "Base analgesia", "cells": [{"text": "Paracetamol and NSAIDs; opioid-sparing"}, {"text": "First step"}], "cite": "c1"},
+        {"parameter": "Regular opioid dosing", "cells": [{"text": "Around the clock for persistent moderate-to-severe pain; short-acting rescue for breakthrough pain"}, {"text": "Persistent pain"}], "cite": "c1"},
+        {"parameter": "Adjuvants for neuropathic pain", "cells": [{"text": "Antidepressant or anticonvulsant rather than escalating opioids alone"}, {"text": "Neuropathic component"}], "cite": "c1"},
+        {"parameter": "Opioid rotation", "cells": [{"text": "Switch opioid when analgesia is poor or toxicity troublesome"}, {"text": "Poor response"}], "cite": "c1"},
+        {"parameter": "Opioid side-effect prevention", "cells": [{"text": "Prophylactic laxatives with every opioid; proactive management of nausea and sedation"}, {"text": "Always"}], "cite": "c1"},
+        {"parameter": "Targeted measures", "cells": [{"text": "Palliative radiotherapy for painful bone metastases; bisphosphonates; interventional nerve blocks"}, {"text": "Problem-specific"}], "cite": "c1"},
+        {"parameter": "Specialist palliative care", "cells": [{"text": "Address psychological and spiritual dimensions of total pain"}, {"text": "Referral"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cancer_pain_management-dx-mgmt",
+      "title": "Assessment and management of cancer pain",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Persistent or new cancer-related pain", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: neurological signs with back pain, sudden severe pain, or signs of opioid toxicity?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent imaging for cord compression or fracture; dose review for toxicity", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Structured assessment; classify nociceptive versus neuropathic pain", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Neuropathic component present?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Add antidepressant or anticonvulsant adjuvant", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "WHO ladder: non-opioids then opioids regularly with rescue dose; laxatives prophylaxis", "cite": "c1"},
+        {"id": "n8", "type": "decision", "text": "Analgesia inadequate or toxicity troublesome?", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Rotate opioid; consider radiotherapy or nerve block; specialist palliative referral", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Most cancer pain controlled with systematic stepwise management", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Yes"},
+        {"from": "n8", "to": "n10", "label": "No"}
+      ]
+    }
+  ]
 }

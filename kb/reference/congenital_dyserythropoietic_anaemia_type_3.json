@@ -1,173 +1,451 @@
 {
- "id": "congenital_dyserythropoietic_anaemia_type_3",
- "name": "Congenital Dyserythropoietic Anaemia Type III",
- "aliases": [
-  "CDA III",
-  "KIF23-related CDA",
-  "familial CDA III"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23 variant.",
-   "The bone marrow shows giant multinucleated erythroblasts ('gigantoblasts') containing many nuclei.",
-   "KIF23 encodes the mitotic kinesin MKLP1, essential for cytokinesis, so nuclear division in erythroblasts fails to complete.",
-   "Anaemia is typically mild with only modest haemolysis, and iron overload is less prominent than in CDA types I or II.",
-   "Long-term associations include monoclonal gammopathy and multiple myeloma, warranting periodic surveillance.",
-   "Retinal angioid streaks and a macular dystrophy may develop and threaten vision.",
-   "Both a well-characterised dominant familial form and sporadic cases are recognised."
+  "id": "congenital_dyserythropoietic_anaemia_type_3",
+  "name": "Congenital Dyserythropoietic Anaemia Type III",
+  "aliases": [
+    "CDA III",
+    "KIF23-related CDA",
+    "familial CDA III"
   ],
-  "pathophysiology": "The familial dominant form of CDA type III is caused by a heterozygous variant in KIF23, which encodes mitotic kinesin-like protein 1 (MKLP1), a component of the centralspindlin complex required for central-spindle assembly and completion of cytokinesis. Impaired cytokinesis in the erythroid lineage yields the characteristic very large, multinucleated erythroblasts (gigantoblasts) and ineffective erythropoiesis; unlike CDA types I and II, haemolysis and pathological iron loading are comparatively mild, which shapes both the milder anaemia and the distinct complication profile.",
-  "additionalDifferentials": [
-   "CDA type I",
-   "CDA type II (HEMPAS)",
-   "Myelodysplastic syndrome",
-   "Acute erythroid leukaemia",
-   "Megaloblastic anaemia",
-   "Multiple myeloma with reactive dyserythropoiesis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count, reticulocyte count and blood film",
-   "Bone marrow examination for giant multinucleated erythroblasts",
-   "Molecular testing of KIF23",
-   "Serum protein electrophoresis with immunoglobulins and free light chains for paraproteinaemia",
-   "Lactate dehydrogenase and haptoglobin",
-   "Ophthalmological assessment for angioid streaks and maculopathy"
-  ],
-  "redFlags": [
-   "Emergence of a monoclonal paraprotein or overt myeloma",
-   "Visual disturbance from angioid streaks or macular degeneration",
-   "Retinal haemorrhage"
-  ],
-  "prognosis": "Generally a mild disorder compatible with a normal or near-normal lifespan; the principal concerns are surveillance for monoclonal gammopathy and myeloma and for sight-threatening retinopathy.",
-  "pitfalls": [
-   "Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia.",
-   "The dominant inheritance means an affected parent is usually identifiable in the pedigree.",
-   "Monitoring for paraproteinaemia and retinopathy should be ongoing rather than a single baseline assessment.",
-   "Its milder haemolysis and iron loading can lead to underestimation compared with CDA types I and II."
-  ],
-  "references": [
-   "Clinical haematology references",
-   "Red cell disorder references",
-   "Medical genetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required given typically mild anaemia",
-   "Monitor iron status periodically, though pathological overload is less prominent than in CDA types I and II so routine chelation is usually unnecessary",
-   "Undertake periodic serum protein electrophoresis with immunoglobulins and free light chains to detect monoclonal gammopathy and progression to multiple myeloma",
-   "Arrange regular ophthalmological surveillance for retinal angioid streaks and macular dystrophy that threaten vision",
-   "Monitor haemolysis markers such as lactate dehydrogenase, haptoglobin and bilirubin and screen for pigment gallstones",
-   "Offer genetic counselling for autosomal dominant KIF23 inheritance and assess at-risk relatives",
-   "Escalate to haematology if paraproteinaemia, worsening anaemia or myeloma-related features emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_dyserythropoietic_anaemia_type_3-pathway",
-   "title": "Congenital Dyserythropoietic Anaemia Type III: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23 variant.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of a monoclonal paraprotein or overt myeloma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count, reticulocyte count and blood film, Bone marrow examination for giant multinucleated erythroblasts, Molecular testing of KIF23"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required given typically mild anaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital dyserythropoietic anaemia type iii."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_dyserythropoietic_anaemia_type_3-matrix",
-   "title": "Congenital Dyserythropoietic Anaemia Type III: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23 variant.",
+      "The bone marrow shows giant multinucleated erythroblasts ('gigantoblasts') containing many nuclei.",
+      "KIF23 encodes the mitotic kinesin MKLP1, essential for cytokinesis, so nuclear division in erythroblasts fails to complete.",
+      "Anaemia is typically mild with only modest haemolysis, and iron overload is less prominent than in CDA types I or II.",
+      "Long-term associations include monoclonal gammopathy and multiple myeloma, warranting periodic surveillance.",
+      "Retinal angioid streaks and a macular dystrophy may develop and threaten vision.",
+      "Both a well-characterised dominant familial form and sporadic cases are recognised."
     ],
-    [
-     "Key Investigations",
-     "Full blood count, reticulocyte count and blood film, Bone marrow examination for giant multinucleated erythroblasts, Molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The familial dominant form of CDA type III is caused by a heterozygous variant in KIF23, which encodes mitotic kinesin-like protein 1 (MKLP1), a component of the centralspindlin complex required for central-spindle assembly and completion of cytokinesis. Impaired cytokinesis in the erythroid lineage yields the characteristic very large, multinucleated erythroblasts (gigantoblasts) and ineffective erythropoiesis; unlike CDA types I and II, haemolysis and pathological iron loading are comparatively mild, which shapes both the milder anaemia and the distinct complication profile.",
+    "additionalDifferentials": [
+      "CDA type I",
+      "CDA type II (HEMPAS)",
+      "Myelodysplastic syndrome",
+      "Acute erythroid leukaemia",
+      "Megaloblastic anaemia",
+      "Multiple myeloma with reactive dyserythropoiesis"
     ],
-    [
-     "Primary Differentials",
-     "CDA type I, CDA type II (HEMPAS), Myelodysplastic syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count, reticulocyte count and blood film",
+      "Bone marrow examination for giant multinucleated erythroblasts",
+      "Molecular testing of KIF23",
+      "Serum protein electrophoresis with immunoglobulins and free light chains for paraproteinaemia",
+      "Lactate dehydrogenase and haptoglobin",
+      "Ophthalmological assessment for angioid streaks and maculopathy"
     ],
-    [
-     "Management Strategy",
-     "Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of a monoclonal paraprotein or overt myeloma",
+      "Visual disturbance from angioid streaks or macular degeneration",
+      "Retinal haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally a mild disorder compatible with a normal or near-normal lifespan; the principal concerns are surveillance for monoclonal gammopathy and myeloma and for sight-threatening retinopathy.",
+    "pitfalls": [
+      "Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia.",
+      "The dominant inheritance means an affected parent is usually identifiable in the pedigree.",
+      "Monitoring for paraproteinaemia and retinopathy should be ongoing rather than a single baseline assessment.",
+      "Its milder haemolysis and iron loading can lead to underestimation compared with CDA types I and II."
+    ],
+    "references": [
+      "Clinical haematology references",
+      "Red cell disorder references",
+      "Medical genetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required given typically mild anaemia",
+      "Monitor iron status periodically, though pathological overload is less prominent than in CDA types I and II so routine chelation is usually unnecessary",
+      "Undertake periodic serum protein electrophoresis with immunoglobulins and free light chains to detect monoclonal gammopathy and progression to multiple myeloma",
+      "Arrange regular ophthalmological surveillance for retinal angioid streaks and macular dystrophy that threaten vision",
+      "Monitor haemolysis markers such as lactate dehydrogenase, haptoglobin and bilirubin and screen for pigment gallstones",
+      "Offer genetic counselling for autosomal dominant KIF23 inheritance and assess at-risk relatives",
+      "Escalate to haematology if paraproteinaemia, worsening anaemia or myeloma-related features emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type iii."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-dyserythropoietic-anaemia-type-3-real-image",
-   "title": "Congenital Dyserythropoietic Anaemia Type III: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "congenital_dyserythropoietic_anaemia_type_3-pathway",
+      "title": "Congenital Dyserythropoietic Anaemia Type III: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23 variant.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of a monoclonal paraprotein or overt myeloma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count, reticulocyte count and blood film, Bone marrow examination for giant multinucleated erythroblasts, Molecular testing of KIF23"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required given typically mild anaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital dyserythropoietic anaemia type iii."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_3-matrix",
+      "title": "Congenital Dyserythropoietic Anaemia Type III: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The rarest classical CDA and the only one classically autosomal dominant; the familial form is caused by a heterozygous KIF23",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count, reticulocyte count and blood film, Bone marrow examination for giant multinucleated erythroblasts, Molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CDA type I, CDA type II (HEMPAS), Myelodysplastic syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide folic acid supplementation to support chronic low-grade ineffective erythropoiesis; transfusion is only rarely required",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giant multinucleated erythroblasts can be mistaken for myelodysplasia or erythroleukaemia.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type iii."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Giant multinucleated erythroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of KIF23",
+          "cells": [
+            {
+              "text": "Causative variant identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum protein electrophoresis with free light chains",
+          "cells": [
+            {
+              "text": "Paraproteinaemia screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Angioid streaks and maculopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CDA type I",
+          "cells": [
+            {
+              "text": "Named look-alike; gene testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDA type II (HEMPAS)",
+          "cells": [
+            {
+              "text": "Named look-alike; SEC23B testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple myeloma with reactive dyserythropoiesis",
+          "cells": [
+            {
+              "text": "Paraprotein screening needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Chronic low-grade ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "Rarely required given typically mild anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron monitoring",
+          "cells": [
+            {
+              "text": "Routine chelation usually unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic SPEP and free light chains",
+          "cells": [
+            {
+              "text": "Detect monoclonal gammopathy and progression to myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Angioid streaks and macular dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis and gallstone screening",
+          "cells": [
+            {
+              "text": "LDH, haptoglobin, bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KIF23; relatives assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Congenital Dyserythropoietic Anaemia Type III",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CDA type III (KIF23): mild anaemia with giant multinucleated erythroblasts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (paraprotein, angioid streaks, retinal haemorrhage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to haematology for paraproteinaemia or worsening anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Marrow for giant erythroblasts; KIF23 testing; SPEP and free light chains; eyes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does KIF23 testing confirm CDA type III?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CDA type I, type II or myelodysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Folic acid for low-grade ineffective erythropoiesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Periodic SPEP and free light chains for monoclonal gammopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular ophthalmological surveillance for angioid streaks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant KIF23 inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally mild, with normal or near-normal lifespan; monitor for myeloma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

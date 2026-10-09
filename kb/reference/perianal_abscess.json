@@ -1,175 +1,482 @@
 {
- "id": "perianal_abscess",
- "name": "Perianal abscess",
- "aliases": [
-  "anorectal abscess",
-  "perirectal abscess",
-  "ischiorectal abscess"
- ],
- "class": "infective",
- "system": "Colorectal / Pelvic floor",
- "specialty": "Colorectal Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
-   "Presents with severe, constant, throbbing perianal pain, a tender fluctuant swelling, erythema, and often fever",
-   "Classified by the anatomical space involved: perianal (most common), ischiorectal (ischioanal), intersphincteric, and supralevator",
-   "Deep abscesses (intersphincteric or supralevator) may cause severe pain and sepsis with little visible external swelling, requiring examination under anaesthesia and imaging",
-   "The mainstay of treatment is prompt incision and drainage; antibiotics alone are inadequate and delay is dangerous",
-   "A significant proportion of drained abscesses subsequently develop a fistula-in-ano",
-   "Recurrent or atypical abscesses should prompt consideration of Crohn's disease, diabetes, immunosuppression, or malignancy",
-   "A spreading, boggy, or crepitant perineum with systemic toxicity suggests necrotising infection (Fournier's gangrene), a surgical emergency"
+  "id": "perianal_abscess",
+  "name": "Perianal abscess",
+  "aliases": [
+    "anorectal abscess",
+    "perirectal abscess",
+    "ischiorectal abscess"
   ],
-  "pathophysiology": "A perianal abscess usually begins with obstruction and infection of an anal gland in the intersphincteric plane (the cryptoglandular mechanism). Pus collects and tracks along planes of least resistance, caudally to the perianal skin, laterally through the external sphincter into the ischioanal fossa, or cephalad above the levators, forming abscesses in the corresponding spaces. It represents the acute phase of the same disease that, once drained or spontaneously discharging, may leave a chronic fistula. Diabetes, immunosuppression, and Crohn's disease predispose to more extensive or recurrent infection.",
-  "additionalDifferentials": [
-   "Thrombosed external haemorrhoid",
-   "Pilonidal abscess",
-   "Hidradenitis suppurativa",
-   "Bartholin's abscess in women",
-   "Fournier's gangrene or other necrotising perineal infection",
-   "Anal canal or rectal malignancy presenting with sepsis"
-  ],
-  "additionalInvestigations": [
-   "Examination under anaesthesia to locate and drain deep collections",
-   "MRI of the pelvis for supralevator, complex, or recurrent collections",
-   "Endoanal ultrasound to assess deep or intersphincteric collections",
-   "Blood glucose and HbA1c, with screening for immunosuppression in recurrent disease",
-   "Blood cultures and inflammatory markers if systemic sepsis is suspected",
-   "Culture of drained pus and, in atypical cases, biopsy of the abscess wall"
-  ],
-  "redFlags": [
-   "Spreading erythema, crepitus, or perineal necrosis suggesting Fournier's gangrene",
-   "Systemic sepsis, or diabetes or immunosuppression with pain out of proportion to findings",
-   "Severe deep pain with minimal external signs suggesting an intersphincteric or supralevator abscess",
-   "Recurrent abscesses suggesting Crohn's disease or underlying malignancy"
-  ],
-  "prognosis": "Prompt incision and drainage resolves most simple abscesses, though a notable minority progress to a chronic fistula; delayed treatment or necrotising infection carries substantial morbidity and mortality.",
-  "pitfalls": [
-   "Relying on antibiotics instead of timely surgical drainage",
-   "Missing a deep intersphincteric or supralevator collection because external signs are minimal",
-   "Inadequate drainage leaving a loculated cavity and early recurrence",
-   "Failing to recognise early Fournier's gangrene in a diabetic or immunosuppressed patient"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate",
-   "Undertake examination under anaesthesia to locate and drain deep intersphincteric or supralevator collections",
-   "Reserve antibiotics for systemic sepsis, surrounding cellulitis, immunosuppression or diabetes",
-   "Provide analgesia, warm baths and wound care with healing by secondary intention",
-   "Send drained pus for culture and biopsy the abscess wall in atypical cases",
-   "Screen for and optimise diabetes, immunosuppression and Crohn's disease in recurrent or extensive infection",
-   "Follow up for fistula-in-ano, which develops in a proportion of drained abscesses",
-   "Escalate urgently if necrotising perianal infection is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "perianal_abscess-pathway",
-   "title": "Perianal abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spreading erythema, crepitus, or perineal necrosis suggesting Fournier's gangrene",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination under anaesthesia to locate and drain deep collections, MRI of the pelvis for supralevator, complex, or recurrent collections, Endoanal ultrasound to assess deep or intersphincteric collections"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on antibiotics instead of timely surgical drainage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of perianal abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "perianal_abscess-matrix",
-   "title": "Perianal abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Colorectal / Pelvic floor",
+  "specialty": "Colorectal Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
+      "Presents with severe, constant, throbbing perianal pain, a tender fluctuant swelling, erythema, and often fever",
+      "Classified by the anatomical space involved: perianal (most common), ischiorectal (ischioanal), intersphincteric, and supralevator",
+      "Deep abscesses (intersphincteric or supralevator) may cause severe pain and sepsis with little visible external swelling, requiring examination under anaesthesia and imaging",
+      "The mainstay of treatment is prompt incision and drainage; antibiotics alone are inadequate and delay is dangerous",
+      "A significant proportion of drained abscesses subsequently develop a fistula-in-ano",
+      "Recurrent or atypical abscesses should prompt consideration of Crohn's disease, diabetes, immunosuppression, or malignancy",
+      "A spreading, boggy, or crepitant perineum with systemic toxicity suggests necrotising infection (Fournier's gangrene), a surgical emergency"
     ],
-    [
-     "Key Investigations",
-     "Examination under anaesthesia to locate and drain deep collections, MRI of the pelvis for supralevator, complex, or recurrent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A perianal abscess usually begins with obstruction and infection of an anal gland in the intersphincteric plane (the cryptoglandular mechanism). Pus collects and tracks along planes of least resistance, caudally to the perianal skin, laterally through the external sphincter into the ischioanal fossa, or cephalad above the levators, forming abscesses in the corresponding spaces. It represents the acute phase of the same disease that, once drained or spontaneously discharging, may leave a chronic fistula. Diabetes, immunosuppression, and Crohn's disease predispose to more extensive or recurrent infection.",
+    "additionalDifferentials": [
+      "Thrombosed external haemorrhoid",
+      "Pilonidal abscess",
+      "Hidradenitis suppurativa",
+      "Bartholin's abscess in women",
+      "Fournier's gangrene or other necrotising perineal infection",
+      "Anal canal or rectal malignancy presenting with sepsis"
     ],
-    [
-     "Primary Differentials",
-     "Thrombosed external haemorrhoid, Pilonidal abscess, Hidradenitis suppurativa",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination under anaesthesia to locate and drain deep collections",
+      "MRI of the pelvis for supralevator, complex, or recurrent collections",
+      "Endoanal ultrasound to assess deep or intersphincteric collections",
+      "Blood glucose and HbA1c, with screening for immunosuppression in recurrent disease",
+      "Blood cultures and inflammatory markers if systemic sepsis is suspected",
+      "Culture of drained pus and, in atypical cases, biopsy of the abscess wall"
     ],
-    [
-     "Management Strategy",
-     "Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate",
-     "Core treatment modality"
+    "redFlags": [
+      "Spreading erythema, crepitus, or perineal necrosis suggesting Fournier's gangrene",
+      "Systemic sepsis, or diabetes or immunosuppression with pain out of proportion to findings",
+      "Severe deep pain with minimal external signs suggesting an intersphincteric or supralevator abscess",
+      "Recurrent abscesses suggesting Crohn's disease or underlying malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on antibiotics instead of timely surgical drainage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt incision and drainage resolves most simple abscesses, though a notable minority progress to a chronic fistula; delayed treatment or necrotising infection carries substantial morbidity and mortality.",
+    "pitfalls": [
+      "Relying on antibiotics instead of timely surgical drainage",
+      "Missing a deep intersphincteric or supralevator collection because external signs are minimal",
+      "Inadequate drainage leaving a loculated cavity and early recurrence",
+      "Failing to recognise early Fournier's gangrene in a diabetic or immunosuppressed patient"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate",
+      "Undertake examination under anaesthesia to locate and drain deep intersphincteric or supralevator collections",
+      "Reserve antibiotics for systemic sepsis, surrounding cellulitis, immunosuppression or diabetes",
+      "Provide analgesia, warm baths and wound care with healing by secondary intention",
+      "Send drained pus for culture and biopsy the abscess wall in atypical cases",
+      "Screen for and optimise diabetes, immunosuppression and Crohn's disease in recurrent or extensive infection",
+      "Follow up for fistula-in-ano, which develops in a proportion of drained abscesses",
+      "Escalate urgently if necrotising perianal infection is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for perianal abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "perianal-abscess-real-image",
-   "title": "Perianal abscess: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "perianal_abscess-pathway",
+      "title": "Perianal abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spreading erythema, crepitus, or perineal necrosis suggesting Fournier's gangrene",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination under anaesthesia to locate and drain deep collections, MRI of the pelvis for supralevator, complex, or recurrent collections, Endoanal ultrasound to assess deep or intersphincteric collections"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on antibiotics instead of timely surgical drainage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of perianal abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "perianal_abscess-matrix",
+      "title": "Perianal abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Represents the acute suppurative phase of cryptoglandular anal gland infection, of which anal fistula is the chronic sequel",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination under anaesthesia to locate and drain deep collections, MRI of the pelvis for supralevator, complex, or recurrent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombosed external haemorrhoid, Pilonidal abscess, Hidradenitis suppurativa",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform prompt incision and drainage as the definitive treatment, as antibiotics alone are inadequate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on antibiotics instead of timely surgical drainage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for perianal abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perianal_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Locates and drains deep collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the pelvis",
+          "cells": [
+            {
+              "text": "Supralevator, complex or recurrent collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Deep or intersphincteric collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes; immunosuppression screened for in recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic sepsis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of drained pus; biopsy of abscess wall",
+          "cells": [
+            {
+              "text": "Organisms; wall biopsy in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perianal_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fournier's gangrene",
+          "cells": [
+            {
+              "text": "Spreading erythema, crepitus or perineal necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal canal or rectal malignancy",
+          "cells": [
+            {
+              "text": "Presents with sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perianal_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Incision and drainage",
+          "cells": [
+            {
+              "text": "Definitive treatment; antibiotics alone are inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Locate and drain deep intersphincteric or supralevator collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for systemic sepsis, surrounding cellulitis, immunosuppression or diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Analgesia, warm baths and healing by secondary intention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specimens",
+          "cells": [
+            {
+              "text": "Culture drained pus; biopsy the abscess wall in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor screen",
+          "cells": [
+            {
+              "text": "Diabetes, immunosuppression and Crohn disease in recurrent or extensive infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Fistula-in-ano develops in a proportion of drained abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Urgent escalation if necrotising perianal infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perianal_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Perianal abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful perianal swelling or fluctuant collection suspected to be a perianal abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (spreading erythema, crepitus, perineal necrosis, systemic sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical escalation for suspected Fournier gangrene or necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia; endoanal ultrasound or MRI for deep collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a collection located and confirmed for drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thrombosed haemorrhoid, pilonidal abscess, hidradenitis or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt incision and drainage as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Examination under anaesthesia to drain deep intersphincteric or supralevator collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reserve antibiotics for sepsis, cellulitis, immunosuppression or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Send pus for culture; biopsy the abscess wall in atypical cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow up for fistula-in-ano, which develops in some drained abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most simple abscesses resolve; a minority progress to chronic fistula",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

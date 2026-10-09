@@ -1,176 +1,510 @@
 {
- "id": "keratoacanthoma",
- "name": "keratoacanthoma",
- "aliases": [
-  "KA",
-  "molluscum sebaceum"
- ],
- "class": "non_infective",
- "system": "Skin and integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed skin of older, fair-skinned patients.",
-   "Classically follows a triphasic natural history of rapid proliferation, a stationary phase and then spontaneous involution over months, often leaving a depressed scar.",
-   "Widely regarded as a well-differentiated variant of squamous cell carcinoma that cannot be reliably distinguished from invasive disease on clinical or histological grounds.",
-   "Complete excision with a deep margin is generally preferred, because superficial or partial biopsy may miss an invasive squamous cell carcinoma at the base.",
-   "Multiple lesions suggest a syndrome: Ferguson-Smith type (multiple self-healing), Grzybowski type (eruptive) or Muir-Torre syndrome with sebaceous neoplasms and visceral malignancy.",
-   "Associations include ultraviolet exposure, immunosuppression, trauma and BRAF inhibitor therapy.",
-   "Dermoscopy typically shows a central keratin mass with surrounding white structures and looped vessels.",
-   "Histology shows a central keratin plug with buttressing (lipping) epidermal edges and a glassy, well-differentiated keratinocyte proliferation."
+  "id": "keratoacanthoma",
+  "name": "keratoacanthoma",
+  "aliases": [
+    "KA",
+    "molluscum sebaceum"
   ],
-  "pathophysiology": "Keratoacanthoma arises from a neoplastic proliferation of keratinocytes, thought to originate from the follicular infundibulum, driven largely by ultraviolet-induced DNA damage and, in some cases, immunosuppression, trauma or drug exposure such as BRAF inhibitors. The proliferative phase produces the characteristic crateriform nodule, while a cell-mediated immune response is believed to underlie the spontaneous involution seen in many lesions. Because the proliferation shares molecular and morphological features with well-differentiated squamous cell carcinoma, the two exist on a continuum.",
-  "additionalDifferentials": [
-   "Invasive squamous cell carcinoma",
-   "Nodular basal cell carcinoma",
-   "Hypertrophic actinic keratosis",
-   "Verruca vulgaris (viral wart)",
-   "Giant molluscum contagiosum",
-   "Amelanotic melanoma",
-   "Merkel cell carcinoma or deep fungal infection"
-  ],
-  "additionalInvestigations": [
-   "Excisional biopsy that includes the deep base to allow assessment for invasion",
-   "Dermoscopy showing central keratin and peripheral white circles or looped vessels",
-   "Review of immunosuppression status and drug history including BRAF inhibitors",
-   "Assessment for multiplicity and family history to identify a syndromic cause",
-   "Mismatch repair immunohistochemistry and colonoscopy when Muir-Torre syndrome is suspected",
-   "Regional lymph node examination if invasive squamous cell carcinoma is confirmed"
-  ],
-  "redFlags": [
-   "Ulceration, induration or continued rapid growth without the expected involution",
-   "Lesions on the lip, ear or in a periungual or mucosal site, where malignant behaviour is more likely",
-   "Occurrence in an immunosuppressed patient",
-   "Recurrence after treatment or perineural symptoms",
-   "Multiple or eruptive lesions suggesting an underlying syndrome or malignancy"
-  ],
-  "prognosis": "Although many lesions involute spontaneously, they leave scars and cannot be reliably distinguished from invasive squamous cell carcinoma, so complete excision is recommended and generally curative, with an excellent outcome.",
-  "pitfalls": [
-   "Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma.",
-   "Relying on a superficial shave or partial biopsy that fails to sample the tumour base.",
-   "Overlooking Muir-Torre syndrome in patients with multiple or atypical lesions.",
-   "Failing to consider drug-induced lesions in patients on BRAF inhibitor therapy."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine",
-   "British Association of Dermatologists guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from invasive squamous cell carcinoma",
-   "Histopathological assessment of the excised deep base to detect underlying invasion",
-   "Intralesional methotrexate or 5-fluorouracil for large lesions or where surgery is difficult",
-   "Systemic retinoids such as acitretin for multiple or eruptive lesions, as in the Grzybowski or Ferguson-Smith types",
-   "Review and modification of contributory factors including immunosuppression and BRAF inhibitor therapy",
-   "Investigation for Muir-Torre syndrome with mismatch-repair immunohistochemistry and colonoscopy when sebaceous neoplasms or multiplicity are present",
-   "Sun protection and dermatological surveillance for further lesions and other keratinocyte skin cancers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "keratoacanthoma-pathway",
-   "title": "keratoacanthoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed skin of older, fair-skinned patients.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ulceration, induration or continued rapid growth without the expected involution",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excisional biopsy that includes the deep base to allow assessment for invasion, Dermoscopy showing central keratin and peripheral white circles or looped vessels, Review of immunosuppression status and drug history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from invasive squamous cell carcinoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of keratoacanthoma."
-  }
- ],
- "tables": [
-  {
-   "id": "keratoacanthoma-matrix",
-   "title": "keratoacanthoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin and integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed skin of older, fair-skinned patients.",
+      "Classically follows a triphasic natural history of rapid proliferation, a stationary phase and then spontaneous involution over months, often leaving a depressed scar.",
+      "Widely regarded as a well-differentiated variant of squamous cell carcinoma that cannot be reliably distinguished from invasive disease on clinical or histological grounds.",
+      "Complete excision with a deep margin is generally preferred, because superficial or partial biopsy may miss an invasive squamous cell carcinoma at the base.",
+      "Multiple lesions suggest a syndrome: Ferguson-Smith type (multiple self-healing), Grzybowski type (eruptive) or Muir-Torre syndrome with sebaceous neoplasms and visceral malignancy.",
+      "Associations include ultraviolet exposure, immunosuppression, trauma and BRAF inhibitor therapy.",
+      "Dermoscopy typically shows a central keratin mass with surrounding white structures and looped vessels.",
+      "Histology shows a central keratin plug with buttressing (lipping) epidermal edges and a glassy, well-differentiated keratinocyte proliferation."
     ],
-    [
-     "Key Investigations",
-     "Excisional biopsy that includes the deep base to allow assessment for invasion, Dermoscopy showing central keratin and peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Keratoacanthoma arises from a neoplastic proliferation of keratinocytes, thought to originate from the follicular infundibulum, driven largely by ultraviolet-induced DNA damage and, in some cases, immunosuppression, trauma or drug exposure such as BRAF inhibitors. The proliferative phase produces the characteristic crateriform nodule, while a cell-mediated immune response is believed to underlie the spontaneous involution seen in many lesions. Because the proliferation shares molecular and morphological features with well-differentiated squamous cell carcinoma, the two exist on a continuum.",
+    "additionalDifferentials": [
+      "Invasive squamous cell carcinoma",
+      "Nodular basal cell carcinoma",
+      "Hypertrophic actinic keratosis",
+      "Verruca vulgaris (viral wart)",
+      "Giant molluscum contagiosum",
+      "Amelanotic melanoma",
+      "Merkel cell carcinoma or deep fungal infection"
     ],
-    [
-     "Primary Differentials",
-     "Invasive squamous cell carcinoma, Nodular basal cell carcinoma, Hypertrophic actinic keratosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Excisional biopsy that includes the deep base to allow assessment for invasion",
+      "Dermoscopy showing central keratin and peripheral white circles or looped vessels",
+      "Review of immunosuppression status and drug history including BRAF inhibitors",
+      "Assessment for multiplicity and family history to identify a syndromic cause",
+      "Mismatch repair immunohistochemistry and colonoscopy when Muir-Torre syndrome is suspected",
+      "Regional lymph node examination if invasive squamous cell carcinoma is confirmed"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from",
-     "Core treatment modality"
+    "redFlags": [
+      "Ulceration, induration or continued rapid growth without the expected involution",
+      "Lesions on the lip, ear or in a periungual or mucosal site, where malignant behaviour is more likely",
+      "Occurrence in an immunosuppressed patient",
+      "Recurrence after treatment or perineural symptoms",
+      "Multiple or eruptive lesions suggesting an underlying syndrome or malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Although many lesions involute spontaneously, they leave scars and cannot be reliably distinguished from invasive squamous cell carcinoma, so complete excision is recommended and generally curative, with an excellent outcome.",
+    "pitfalls": [
+      "Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma.",
+      "Relying on a superficial shave or partial biopsy that fails to sample the tumour base.",
+      "Overlooking Muir-Torre syndrome in patients with multiple or atypical lesions.",
+      "Failing to consider drug-induced lesions in patients on BRAF inhibitor therapy."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine",
+      "British Association of Dermatologists guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from invasive squamous cell carcinoma",
+      "Histopathological assessment of the excised deep base to detect underlying invasion",
+      "Intralesional methotrexate or 5-fluorouracil for large lesions or where surgery is difficult",
+      "Systemic retinoids such as acitretin for multiple or eruptive lesions, as in the Grzybowski or Ferguson-Smith types",
+      "Review and modification of contributory factors including immunosuppression and BRAF inhibitor therapy",
+      "Investigation for Muir-Torre syndrome with mismatch-repair immunohistochemistry and colonoscopy when sebaceous neoplasms or multiplicity are present",
+      "Sun protection and dermatological surveillance for further lesions and other keratinocyte skin cancers"
     ]
-   ],
-   "caption": "Overview comparison matrix for keratoacanthoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "keratoacanthoma-real-image",
-   "title": "keratoacanthoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "keratoacanthoma-pathway",
+      "title": "keratoacanthoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed skin of older, fair-skinned patients.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ulceration, induration or continued rapid growth without the expected involution",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excisional biopsy that includes the deep base to allow assessment for invasion, Dermoscopy showing central keratin and peripheral white circles or looped vessels, Review of immunosuppression status and drug history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from invasive squamous cell carcinoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of keratoacanthoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "keratoacanthoma-matrix",
+      "title": "keratoacanthoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a rapidly growing, dome-shaped, flesh-coloured nodule with a central keratin-filled crater, typically on sun-exposed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excisional biopsy that includes the deep base to allow assessment for invasion, Dermoscopy showing central keratin and peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Invasive squamous cell carcinoma, Nodular basal cell carcinoma, Hypertrophic actinic keratosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision with a deep margin as preferred management, since the lesion cannot be reliably distinguished from",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a lesion is benign and observing it, thereby missing an invasive squamous cell carcinoma.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for keratoacanthoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "keratoacanthoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional biopsy including the deep base",
+          "cells": [
+            {
+              "text": "Assess invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Central keratin, peripheral white circles, looped vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression and drug history",
+          "cells": [
+            {
+              "text": "Including BRAF inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiplicity and family history",
+          "cells": [
+            {
+              "text": "Syndromic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mismatch repair immunohistochemistry",
+          "cells": [
+            {
+              "text": "Muir-Torre syndrome when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional lymph node examination",
+          "cells": [
+            {
+              "text": "If invasive squamous carcinoma confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratoacanthoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Deep invasion on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Peripheral palisading, no keratin crater"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic actinic keratosis",
+          "cells": [
+            {
+              "text": "Thinner, slower growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruca vulgaris",
+          "cells": [
+            {
+              "text": "Viral warty papillomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Central umbilication with core"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Pigmentation absent; histology required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratoacanthoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Complete excision with deep margin as preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathology",
+          "cells": [
+            {
+              "text": "Histology of excised deep base to detect invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large or difficult lesions",
+          "cells": [
+            {
+              "text": "Intralesional methotrexate or 5-fluorouracil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple or eruptive lesions",
+          "cells": [
+            {
+              "text": "Systemic retinoids such as acitretin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drivers",
+          "cells": [
+            {
+              "text": "Review immunosuppression and BRAF inhibitor therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muir-Torre",
+          "cells": [
+            {
+              "text": "Mismatch repair testing and colonoscopy when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Sun protection and dermatological surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "keratoacanthoma-dx-mgmt",
+      "title": "Diagnosis and management of keratoacanthoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly growing dome-shaped nodule with central keratin crater on sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulceration, persistent growth, lip or ear site, immunosuppression, or recurrence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent excision with deep margin; refer if invasive carcinoma suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional biopsy with deep base, dermoscopy, drug history, mismatch repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Keratin-filled crater lesion with no invasion on deep margin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as invasive squamous cell carcinoma or other mimic; widen the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision with deep margin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Histology of deep base to detect invasion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intralesional methotrexate or 5-fluorouracil for large lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Acitretin for multiple or eruptive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review immunosuppression and BRAF inhibitor exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Spontaneous involution may leave scar; cannot reliably exclude invasion clinically",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

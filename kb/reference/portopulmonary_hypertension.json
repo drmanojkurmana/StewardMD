@@ -1,173 +1,498 @@
 {
- "id": "portopulmonary_hypertension",
- "name": "Portopulmonary hypertension",
- "aliases": [
-  "PoPH",
-  "portopulmonary syndrome",
-  "portal hypertension-associated pulmonary arterial hypertension"
- ],
- "class": "non_infective",
- "system": "Respiratory / Pulmonary vascular",
- "specialty": "Pulmonary Hypertension",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Sherlock's Diseases of the Liver and Biliary System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic liver disease",
-   "Diagnosis requires pre-capillary haemodynamics at right heart catheterisation (raised mean pulmonary artery pressure and pulmonary vascular resistance with a normal wedge pressure) together with documented portal hypertension",
-   "The volume overload and hyperdynamic circulation of cirrhosis can raise pulmonary pressures without truly raising resistance, so resistance must be measured to distinguish true PoPH from a high-flow state",
-   "Often asymptomatic early and detected on pre-transplant echocardiographic screening; later causes exertional breathlessness and fatigue",
-   "Severity is important for liver transplant candidacy, as uncontrolled pulmonary hypertension markedly increases perioperative mortality",
-   "Targeted pulmonary vasodilator therapy can lower pulmonary vascular resistance and may render some patients eligible for transplantation",
-   "The severity of portal hypertension does not correlate with the severity of the pulmonary vascular disease"
+  "id": "portopulmonary_hypertension",
+  "name": "Portopulmonary hypertension",
+  "aliases": [
+    "PoPH",
+    "portopulmonary syndrome",
+    "portal hypertension-associated pulmonary arterial hypertension"
   ],
-  "pathophysiology": "Portopulmonary hypertension is a pulmonary arteriopathy that develops in patients with portal hypertension. Portosystemic shunting allows vasoactive and proliferative mediators normally cleared or metabolised by the liver to reach the pulmonary circulation, where, together with the high cardiac output and shear stress of the hyperdynamic cirrhotic state, they promote endothelial dysfunction and vascular remodelling. The small pulmonary arteries undergo intimal proliferation, medial hypertrophy, and in situ thrombosis, raising pulmonary vascular resistance in a manner histologically similar to other forms of arterial pulmonary hypertension. The distinction from a simple high-flow state is critical, because volume overload alone raises pressure without raising resistance, whereas established portopulmonary hypertension reflects fixed remodelling that loads and eventually fails the right ventricle.",
-  "additionalDifferentials": [
-   "Hepatopulmonary syndrome",
-   "High-output pulmonary pressure elevation from the hyperdynamic cirrhotic circulation",
-   "Volume overload with post-capillary pulmonary hypertension",
-   "Idiopathic or heritable pulmonary arterial hypertension",
-   "Chronic thromboembolic pulmonary hypertension",
-   "Left heart disease-related pulmonary hypertension (group 2)"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation",
-   "Right heart catheterisation to confirm pre-capillary physiology and distinguish true PoPH from a high-flow state",
-   "Assessment of portal hypertension (imaging, endoscopy, or hepatic venous pressure measurement)",
-   "Liver function and synthetic tests with assessment of chronic liver disease severity",
-   "Ventilation-perfusion scan to exclude chronic thromboembolic disease",
-   "Cardiopulmonary exercise testing and six-minute walk distance for functional assessment"
-  ],
-  "redFlags": [
-   "Severe pulmonary hypertension in a transplant candidate, which greatly increases perioperative mortality",
-   "Syncope or signs of right heart failure indicating advanced disease",
-   "Rapid deterioration in exercise tolerance or breathlessness",
-   "Pulmonary oedema after vasodilator initiation, prompting reassessment of the haemodynamic profile"
-  ],
-  "prognosis": "Prognosis depends on both the severity of the pulmonary vascular disease and the underlying liver disease; untreated moderate to severe disease carries a poor outlook. Targeted therapy can improve haemodynamics and, in selected patients, restore eligibility for liver transplantation, after which the pulmonary hypertension may stabilise or improve.",
-  "pitfalls": [
-   "Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a high-flow state with true PoPH",
-   "Proceeding to liver transplantation without adequately treating significant pulmonary hypertension",
-   "Confusing portopulmonary hypertension with hepatopulmonary syndrome, which has opposite vascular physiology",
-   "Assuming pulmonary severity tracks liver severity when the two are independent",
-   "Overlooking screening echocardiography in cirrhotic patients being assessed for transplant"
-  ],
-  "references": [
-   "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
-   "Sherlock's Diseases of the Liver and Biliary System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and prostacyclin analogues to lower pulmonary vascular resistance",
-   "Careful diuresis to relieve right ventricular volume overload, avoiding excessive preload reduction",
-   "Avoidance of agents and interventions that worsen the picture, including non-selective beta-blockers that blunt cardiac output and transjugular intrahepatic portosystemic shunting that acutely increases preload",
-   "Right heart catheterisation to confirm pre-capillary physiology and to monitor the haemodynamic response to therapy",
-   "Evaluation for liver transplantation, with pulmonary vasodilator therapy used to reduce pulmonary vascular resistance and restore transplant candidacy in selected patients",
-   "Management at a specialist pulmonary hypertension centre in conjunction with the liver transplant multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "portopulmonary_hypertension-pathway",
-   "title": "Portopulmonary hypertension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic liver disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe pulmonary hypertension in a transplant candidate, which greatly increases perioperative mortality",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation, Right heart catheterisation to confirm pre-capillary physiology and distinguish true PoPH from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and prostacyclin analogues to lower pulmonary vascular resistance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a high-flow state with true PoPH"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of portopulmonary hypertension."
-  }
- ],
- "tables": [
-  {
-   "id": "portopulmonary_hypertension-matrix",
-   "title": "Portopulmonary hypertension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Pulmonary vascular",
+  "specialty": "Pulmonary Hypertension",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Sherlock's Diseases of the Liver and Biliary System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic liver disease",
+      "Diagnosis requires pre-capillary haemodynamics at right heart catheterisation (raised mean pulmonary artery pressure and pulmonary vascular resistance with a normal wedge pressure) together with documented portal hypertension",
+      "The volume overload and hyperdynamic circulation of cirrhosis can raise pulmonary pressures without truly raising resistance, so resistance must be measured to distinguish true PoPH from a high-flow state",
+      "Often asymptomatic early and detected on pre-transplant echocardiographic screening; later causes exertional breathlessness and fatigue",
+      "Severity is important for liver transplant candidacy, as uncontrolled pulmonary hypertension markedly increases perioperative mortality",
+      "Targeted pulmonary vasodilator therapy can lower pulmonary vascular resistance and may render some patients eligible for transplantation",
+      "The severity of portal hypertension does not correlate with the severity of the pulmonary vascular disease"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Portopulmonary hypertension is a pulmonary arteriopathy that develops in patients with portal hypertension. Portosystemic shunting allows vasoactive and proliferative mediators normally cleared or metabolised by the liver to reach the pulmonary circulation, where, together with the high cardiac output and shear stress of the hyperdynamic cirrhotic state, they promote endothelial dysfunction and vascular remodelling. The small pulmonary arteries undergo intimal proliferation, medial hypertrophy, and in situ thrombosis, raising pulmonary vascular resistance in a manner histologically similar to other forms of arterial pulmonary hypertension. The distinction from a simple high-flow state is critical, because volume overload alone raises pressure without raising resistance, whereas established portopulmonary hypertension reflects fixed remodelling that loads and eventually fails the right ventricle.",
+    "additionalDifferentials": [
+      "Hepatopulmonary syndrome",
+      "High-output pulmonary pressure elevation from the hyperdynamic cirrhotic circulation",
+      "Volume overload with post-capillary pulmonary hypertension",
+      "Idiopathic or heritable pulmonary arterial hypertension",
+      "Chronic thromboembolic pulmonary hypertension",
+      "Left heart disease-related pulmonary hypertension (group 2)"
     ],
-    [
-     "Primary Differentials",
-     "Hepatopulmonary syndrome, High-output pulmonary pressure elevation from the hyperdynamic cirrhotic circulation, Volume overload",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation",
+      "Right heart catheterisation to confirm pre-capillary physiology and distinguish true PoPH from a high-flow state",
+      "Assessment of portal hypertension (imaging, endoscopy, or hepatic venous pressure measurement)",
+      "Liver function and synthetic tests with assessment of chronic liver disease severity",
+      "Ventilation-perfusion scan to exclude chronic thromboembolic disease",
+      "Cardiopulmonary exercise testing and six-minute walk distance for functional assessment"
     ],
-    [
-     "Management Strategy",
-     "Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe pulmonary hypertension in a transplant candidate, which greatly increases perioperative mortality",
+      "Syncope or signs of right heart failure indicating advanced disease",
+      "Rapid deterioration in exercise tolerance or breathlessness",
+      "Pulmonary oedema after vasodilator initiation, prompting reassessment of the haemodynamic profile"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on both the severity of the pulmonary vascular disease and the underlying liver disease; untreated moderate to severe disease carries a poor outlook. Targeted therapy can improve haemodynamics and, in selected patients, restore eligibility for liver transplantation, after which the pulmonary hypertension may stabilise or improve.",
+    "pitfalls": [
+      "Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a high-flow state with true PoPH",
+      "Proceeding to liver transplantation without adequately treating significant pulmonary hypertension",
+      "Confusing portopulmonary hypertension with hepatopulmonary syndrome, which has opposite vascular physiology",
+      "Assuming pulmonary severity tracks liver severity when the two are independent",
+      "Overlooking screening echocardiography in cirrhotic patients being assessed for transplant"
+    ],
+    "references": [
+      "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "Sherlock's Diseases of the Liver and Biliary System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and prostacyclin analogues to lower pulmonary vascular resistance",
+      "Careful diuresis to relieve right ventricular volume overload, avoiding excessive preload reduction",
+      "Avoidance of agents and interventions that worsen the picture, including non-selective beta-blockers that blunt cardiac output and transjugular intrahepatic portosystemic shunting that acutely increases preload",
+      "Right heart catheterisation to confirm pre-capillary physiology and to monitor the haemodynamic response to therapy",
+      "Evaluation for liver transplantation, with pulmonary vasodilator therapy used to reduce pulmonary vascular resistance and restore transplant candidacy in selected patients",
+      "Management at a specialist pulmonary hypertension centre in conjunction with the liver transplant multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for portopulmonary hypertension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "portopulmonary-hypertension-real-image",
-   "title": "Portopulmonary hypertension: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "portopulmonary_hypertension-pathway",
+      "title": "Portopulmonary hypertension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic liver disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe pulmonary hypertension in a transplant candidate, which greatly increases perioperative mortality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation, Right heart catheterisation to confirm pre-capillary physiology and distinguish true PoPH from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and prostacyclin analogues to lower pulmonary vascular resistance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a high-flow state with true PoPH"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of portopulmonary hypertension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "portopulmonary_hypertension-matrix",
+      "title": "Portopulmonary hypertension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group 1 pulmonary arterial hypertension occurring in the setting of portal hypertension, with or without underlying chronic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography as the screening tool for elevated pulmonary pressures, especially before liver transplantation,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hepatopulmonary syndrome, High-output pulmonary pressure elevation from the hyperdynamic cirrhotic circulation, Volume overload",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted pulmonary arterial hypertension therapy with endothelin-receptor antagonists, phosphodiesterase-5 inhibitors and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing pulmonary hypertension from pressure alone without measuring pulmonary vascular resistance, thereby confusing a",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for portopulmonary hypertension."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portopulmonary_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Screening for elevated pulmonary pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pre-capillary physiology, confirming true PoPH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal hypertension assessment",
+          "cells": [
+            {
+              "text": "Imaging, endoscopy or hepatic venous pressure measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and synthetic tests",
+          "cells": [
+            {
+              "text": "Severity of chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scan",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiopulmonary exercise testing and six-minute walk",
+          "cells": [
+            {
+              "text": "Functional assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portopulmonary_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatopulmonary syndrome",
+          "cells": [
+            {
+              "text": "Gas exchange abnormality rather than pressure elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-output pulmonary pressure elevation",
+          "cells": [
+            {
+              "text": "Hyperdynamic cirrhotic circulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Volume overload with post-capillary hypertension",
+          "cells": [
+            {
+              "text": "Raised wedge pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic or heritable pulmonary arterial hypertension",
+          "cells": [
+            {
+              "text": "No liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Perfusion defects on V/Q scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left heart disease-related pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Group 2 physiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portopulmonary_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "PAH-targeted therapy",
+          "cells": [
+            {
+              "text": "Endothelin-receptor antagonists and other pulmonary vasodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuresis",
+          "cells": [
+            {
+              "text": "Careful, to relieve right ventricular volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid worsening agents",
+          "cells": [
+            {
+              "text": "Avoid agents and interventions that worsen the picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic monitoring",
+          "cells": [
+            {
+              "text": "Right heart catheterisation to confirm and monitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Evaluation, with vasodilators used to reduce pulmonary pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension centre working with the liver team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portopulmonary_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Portopulmonary hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Portal hypertension with breathlessness or raised pulmonary pressure on echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe PH in transplant candidate, syncope, right heart failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for right heart failure or syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo; right heart catheterisation; portal assessment; LFTs; V/Q scan; exercise testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does right heart catheterisation confirm pre-capillary pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hepatopulmonary syndrome, volume overload or left heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Targeted pulmonary arterial hypertension therapy with endothelin antagonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Careful diuresis to relieve right ventricular volume overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid agents and interventions that worsen the pulmonary picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Right heart catheterisation to confirm physiology and monitor response",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Liver transplantation evaluation, with vasodilators to reduce pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis depends on both the pulmonary vascular disease and the underlying liver disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,387 @@
 {
- "id": "wandering_spleen",
- "name": "wandering spleen",
- "aliases": [
-  "ectopic spleen",
-  "splenoptosis",
-  "floating spleen"
- ],
- "class": "non_infective",
- "system": "Haematological / Reticuloendothelial system",
- "specialty": "General surgery / Paediatric surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Sabiston Textbook of Surgery / Grainger & Allison's Diagnostic Radiology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the spleen to migrate on a long, mobile vascular pedicle",
-   "May be congenital, from failure of the dorsal mesogastrium to fuse, or acquired through multiparity, hormonally mediated ligamentous laxity or splenomegaly",
-   "Typically presents in children and women of reproductive age as a mobile palpable abdominal or pelvic mass, intermittent pain, or an acute abdomen when the pedicle twists",
-   "Torsion of the pedicle is the feared complication, producing venous congestion followed by arterial infarction of the spleen",
-   "Cross-sectional imaging shows an empty splenic fossa with an ectopically sited spleen; a whirl sign of the twisted pedicle with absent Doppler flow indicates torsion",
-   "Splenopexy to fix a viable spleen is preferred, especially in children, to preserve immune function, with splenectomy reserved for a non-viable infarcted organ",
-   "May coexist with gastric volvulus, intestinal malrotation and diaphragmatic or abdominal wall defects, reflecting shared abnormal visceral fixation",
-   "A palpable notched mass that can be manually returned towards the left upper quadrant is a helpful clinical clue"
+  "id": "wandering_spleen",
+  "name": "wandering spleen",
+  "aliases": [
+    "ectopic spleen",
+    "splenoptosis",
+    "floating spleen"
   ],
-  "pathophysiology": "The spleen is normally anchored in the left upper quadrant by peritoneal ligaments derived from the dorsal mesogastrium. When these ligaments fail to develop or become lax, the spleen loses its fixation and hangs from an elongated pedicle carrying the splenic vessels, so that it can migrate freely into the abdomen or pelvis. The mobile, narrow pedicle is prone to rotation; torsion first obstructs the thin-walled splenic vein, producing congestion and enlargement, and if it progresses occludes the arterial supply, causing ischaemia and infarction. Chronic partial torsion may instead produce venous congestion with hypersplenism, while the elongated vessels can also compromise the pancreatic tail and predispose to associated gastric volvulus.",
-  "additionalDifferentials": [
-   "Ovarian or other adnexal mass or torsion",
-   "Mesenteric or omental cyst",
-   "Retroperitoneal or gastrointestinal tumour",
-   "Ectopic or ptotic kidney",
-   "Acute appendicitis when the spleen lies in the right or lower abdomen",
-   "Intra-abdominal lymphadenopathy or lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle",
-   "Doppler ultrasound of the ectopic spleen to assess perfusion and the twisted pedicle",
-   "Technetium sulphur-colloid or heat-damaged red cell scintigraphy to confirm splenic tissue and viability",
-   "MRI, favoured in children to limit ionising radiation",
-   "Full blood count to detect cytopenias from hypersplenism",
-   "Assessment for associated gastric volvulus or malrotation when clinically suspected"
-  ],
-  "redFlags": [
-   "Acute severe abdominal pain with a tender mobile mass, indicating pedicle torsion",
-   "Signs of infarction with peritonism and systemic upset",
-   "Haemodynamic instability suggesting infarction with haemorrhage",
-   "Retching with inability to pass a nasogastric tube, suggesting associated gastric volvulus"
-  ],
-  "prognosis": "When recognised and treated before infarction, splenopexy carries an excellent outcome and preserves splenic immune function. Delayed diagnosis of torsion leads to infarction and loss of the spleen, with the attendant lifelong risks of hyposplenism.",
-  "pitfalls": [
-   "Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection",
-   "Delayed recognition of torsion, converting a salvageable spleen into a non-viable one",
-   "Performing splenectomy when splenopexy would have preserved function, particularly in children",
-   "Omitting post-splenectomy immunisation and antibiotic prophylaxis when the spleen must be removed"
-  ],
-  "references": [
-   "Sabiston Textbook of Surgery",
-   "Grainger & Allison's Diagnostic Radiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function",
-   "Operate as an emergency on acute pedicle torsion, undertaking detorsion and splenopexy if the spleen is viable",
-   "Reserve splenectomy for a non-viable, infarcted spleen or established torsion with infarction",
-   "When splenectomy is unavoidable, give pre- and post-splenectomy pneumococcal, meningococcal and Haemophilus vaccination with antibiotic prophylaxis against overwhelming post-splenectomy infection",
-   "Look for and manage associated gastric volvulus or malrotation at the time of surgery",
-   "Monitor the full blood count for cytopenias arising from hypersplenism",
-   "Educate patients to seek urgent review for acute abdominal pain suggesting torsion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "wandering_spleen-pathway",
-   "title": "wandering spleen: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the spleen to migrate on a long, mobile vascular pedicle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe abdominal pain with a tender mobile mass, indicating pedicle torsion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle, Doppler ultrasound of the ectopic spleen to assess perfusion and the twisted pedicle, Technetium sulphur-colloid or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of wandering spleen."
-  }
- ],
- "tables": [
-  {
-   "id": "wandering_spleen-matrix",
-   "title": "wandering spleen: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / Reticuloendothelial system",
+  "specialty": "General surgery / Paediatric surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sabiston Textbook of Surgery / Grainger & Allison's Diagnostic Radiology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the spleen to migrate on a long, mobile vascular pedicle",
+      "May be congenital, from failure of the dorsal mesogastrium to fuse, or acquired through multiparity, hormonally mediated ligamentous laxity or splenomegaly",
+      "Typically presents in children and women of reproductive age as a mobile palpable abdominal or pelvic mass, intermittent pain, or an acute abdomen when the pedicle twists",
+      "Torsion of the pedicle is the feared complication, producing venous congestion followed by arterial infarction of the spleen",
+      "Cross-sectional imaging shows an empty splenic fossa with an ectopically sited spleen; a whirl sign of the twisted pedicle with absent Doppler flow indicates torsion",
+      "Splenopexy to fix a viable spleen is preferred, especially in children, to preserve immune function, with splenectomy reserved for a non-viable infarcted organ",
+      "May coexist with gastric volvulus, intestinal malrotation and diaphragmatic or abdominal wall defects, reflecting shared abnormal visceral fixation",
+      "A palpable notched mass that can be manually returned towards the left upper quadrant is a helpful clinical clue"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle, Doppler ultrasound of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The spleen is normally anchored in the left upper quadrant by peritoneal ligaments derived from the dorsal mesogastrium. When these ligaments fail to develop or become lax, the spleen loses its fixation and hangs from an elongated pedicle carrying the splenic vessels, so that it can migrate freely into the abdomen or pelvis. The mobile, narrow pedicle is prone to rotation; torsion first obstructs the thin-walled splenic vein, producing congestion and enlargement, and if it progresses occludes the arterial supply, causing ischaemia and infarction. Chronic partial torsion may instead produce venous congestion with hypersplenism, while the elongated vessels can also compromise the pancreatic tail and predispose to associated gastric volvulus.",
+    "additionalDifferentials": [
+      "Ovarian or other adnexal mass or torsion",
+      "Mesenteric or omental cyst",
+      "Retroperitoneal or gastrointestinal tumour",
+      "Ectopic or ptotic kidney",
+      "Acute appendicitis when the spleen lies in the right or lower abdomen",
+      "Intra-abdominal lymphadenopathy or lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Ovarian or other adnexal mass or torsion, Mesenteric or omental cyst, Retroperitoneal or gastrointestinal tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle",
+      "Doppler ultrasound of the ectopic spleen to assess perfusion and the twisted pedicle",
+      "Technetium sulphur-colloid or heat-damaged red cell scintigraphy to confirm splenic tissue and viability",
+      "MRI, favoured in children to limit ionising radiation",
+      "Full blood count to detect cytopenias from hypersplenism",
+      "Assessment for associated gastric volvulus or malrotation when clinically suspected"
     ],
-    [
-     "Management Strategy",
-     "Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe abdominal pain with a tender mobile mass, indicating pedicle torsion",
+      "Signs of infarction with peritonism and systemic upset",
+      "Haemodynamic instability suggesting infarction with haemorrhage",
+      "Retching with inability to pass a nasogastric tube, suggesting associated gastric volvulus"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection",
-     "Prevent diagnostic or management error"
+    "prognosis": "When recognised and treated before infarction, splenopexy carries an excellent outcome and preserves splenic immune function. Delayed diagnosis of torsion leads to infarction and loss of the spleen, with the attendant lifelong risks of hyposplenism.",
+    "pitfalls": [
+      "Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection",
+      "Delayed recognition of torsion, converting a salvageable spleen into a non-viable one",
+      "Performing splenectomy when splenopexy would have preserved function, particularly in children",
+      "Omitting post-splenectomy immunisation and antibiotic prophylaxis when the spleen must be removed"
+    ],
+    "references": [
+      "Sabiston Textbook of Surgery",
+      "Grainger & Allison's Diagnostic Radiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function",
+      "Operate as an emergency on acute pedicle torsion, undertaking detorsion and splenopexy if the spleen is viable",
+      "Reserve splenectomy for a non-viable, infarcted spleen or established torsion with infarction",
+      "When splenectomy is unavoidable, give pre- and post-splenectomy pneumococcal, meningococcal and Haemophilus vaccination with antibiotic prophylaxis against overwhelming post-splenectomy infection",
+      "Look for and manage associated gastric volvulus or malrotation at the time of surgery",
+      "Monitor the full blood count for cytopenias arising from hypersplenism",
+      "Educate patients to seek urgent review for acute abdominal pain suggesting torsion"
     ]
-   ],
-   "caption": "Overview comparison matrix for wandering spleen."
-  }
- ],
- "diagrams": [
-  {
-   "id": "wandering-spleen-real-image",
-   "title": "wandering spleen: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "wandering_spleen-pathway",
+      "title": "wandering spleen: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the spleen to migrate on a long, mobile vascular pedicle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe abdominal pain with a tender mobile mass, indicating pedicle torsion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle, Doppler ultrasound of the ectopic spleen to assess perfusion and the twisted pedicle, Technetium sulphur-colloid or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of wandering spleen."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "wandering_spleen-matrix",
+      "title": "wandering spleen: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Arises from absence or laxity of the splenic suspensory ligaments (gastrosplenic, splenorenal and phrenocolic), allowing the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the abdomen and pelvis, assessing the splenic fossa and the vascular pedicle, Doppler ultrasound of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ovarian or other adnexal mass or torsion, Mesenteric or omental cyst, Retroperitoneal or gastrointestinal tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform splenopexy to fix a viable spleen in its normal position, preferred especially in children to preserve immune function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the ectopic spleen for a tumour and proceeding to biopsy or inappropriate resection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for wandering spleen."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sabiston Textbook of Surgery / Grainger & Allison's Diagnostic Radiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wandering_spleen-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Splenic fossa and vascular pedicle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of the ectopic spleen",
+          "cells": [
+            {
+              "text": "Blood supply and viability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wandering_spleen-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian or other adnexal mass or torsion",
+          "cells": [
+            {
+              "text": "Pelvic mass that can mimic a tender mobile spleen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric or omental cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retroperitoneal or gastrointestinal tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic or ptotic kidney",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wandering_spleen-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Splenopexy",
+          "cells": [
+            {
+              "text": "Fixes a viable spleen in its normal position; preferred in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Non-viable spleen after torsion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wandering_spleen-dx-mgmt",
+      "title": "Diagnosis and management of wandering spleen",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected wandering spleen: mobile abdominal mass in the wrong position",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute pain with tender mobile mass or signs of infarction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for pedicle torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT of the abdomen and pelvis, Doppler ultrasound of the spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a spleen outside the splenic fossa with its pedicle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adnexal mass, mesenteric cyst or tumour; avoid biopsy of the spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Splenopexy to fix a viable spleen in its normal position",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splenectomy if the spleen is non-viable after torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid biopsy or resection of a mistaken tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Torsion of the pedicle can cause spleen infarction; early recognition preserves the organ",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

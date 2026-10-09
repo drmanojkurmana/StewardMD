@@ -1,174 +1,470 @@
 {
- "id": "gyrate_atrophy",
- "name": "Gyrate atrophy of the choroid and retina",
- "aliases": [
-  "gyrate atrophy",
-  "ornithine aminotransferase deficiency",
-  "hyperornithinaemia with gyrate atrophy",
-  "OAT deficiency",
-  "HOGA"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Scriver's Metabolic and Molecular Bases of Inherited Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT gene), leading to hyperornithinaemia",
-   "Presents in childhood or early adult life with progressive night blindness (nyctalopia) and constricting peripheral visual fields",
-   "Fundus shows sharply demarcated, scalloped (gyrate) circular patches of chorioretinal atrophy in the mid-periphery that coalesce and extend centrally over time",
-   "Plasma ornithine concentration is markedly elevated, providing a key biochemical clue that distinguishes it from other retinal dystrophies",
-   "High myopia and posterior subcapsular cataract are common associated ocular features",
-   "The electroretinogram becomes progressively reduced and eventually extinguished as the disease advances",
-   "An arginine-restricted diet to lower plasma ornithine, sometimes with pyridoxine (vitamin B6) supplementation in responsive subtypes, may slow retinal degeneration"
+  "id": "gyrate_atrophy",
+  "name": "Gyrate atrophy of the choroid and retina",
+  "aliases": [
+    "gyrate atrophy",
+    "ornithine aminotransferase deficiency",
+    "hyperornithinaemia with gyrate atrophy",
+    "OAT deficiency",
+    "HOGA"
   ],
-  "pathophysiology": "Gyrate atrophy is caused by biallelic mutations in the OAT gene encoding ornithine aminotransferase, a pyridoxal-phosphate-dependent mitochondrial enzyme that converts ornithine to glutamate semialdehyde. Enzyme deficiency causes ornithine to accumulate in plasma and tissues. Chronically raised ornithine is thought to be toxic to the retinal pigment epithelium and choriocapillaris, producing progressive atrophy of the choroid and outer retina. The metabolic block also disturbs the urea cycle and creatine synthesis pathways. The characteristic well-circumscribed peripheral chorioretinal lesions enlarge and merge, ultimately encroaching on the macula and destroying central vision.",
-  "additionalDifferentials": [
-   "Choroideremia",
-   "Retinitis pigmentosa",
-   "Bietti crystalline dystrophy",
-   "Pathological (high) myopia with chorioretinal atrophy",
-   "Thioridazine or other toxic retinopathy",
-   "Advanced generalised chorioretinal degeneration"
-  ],
-  "additionalInvestigations": [
-   "Fasting plasma amino acid analysis demonstrating markedly elevated ornithine",
-   "Electroretinography showing progressive rod and cone dysfunction",
-   "Optical coherence tomography and fundus autofluorescence to map areas of atrophy",
-   "Visual field testing documenting peripheral constriction",
-   "Assay of ornithine aminotransferase activity in fibroblasts and molecular OAT gene testing",
-   "Assessment of pyridoxine responsiveness of plasma ornithine"
-  ],
-  "redFlags": [
-   "Rapidly constricting visual fields with impending loss of central fixation",
-   "Development of dense cataract compounding retinal visual loss",
-   "Poor dietary adherence with persistently high plasma ornithine accelerating degeneration"
-  ],
-  "prognosis": "The condition is progressive, and most patients experience severe visual impairment or blindness by middle age; dietary control of ornithine and pyridoxine supplementation in responsive individuals may slow but not fully arrest the decline.",
-  "pitfalls": [
-   "Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause",
-   "Failing to check plasma ornithine in a young patient with unexplained progressive chorioretinal atrophy",
-   "Assuming all patients respond to pyridoxine when only a subset are responsive",
-   "Neglecting long-term dietary monitoring and family genetic counselling"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration",
-   "Trial pyridoxine (vitamin B6) supplementation, since a subset are pyridoxine-responsive with lowering of plasma ornithine",
-   "Supplement lysine and creatine to counter the metabolic effects of hyperornithinaemia and support the disturbed creatine pathway",
-   "Correct associated ocular problems with refraction for high myopia, cataract surgery for posterior subcapsular cataract and treatment of cystoid macular oedema",
-   "Monitor plasma ornithine, visual fields, electroretinography, optical coherence tomography and fundus autofluorescence to track progression and dietary adequacy",
-   "Provide low-vision rehabilitation and support for progressive visual loss",
-   "Offer genetic counselling for autosomal recessive OAT-related inheritance with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gyrate_atrophy-pathway",
-   "title": "Gyrate atrophy of the choroid and retina: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT gene), leading to hyperornithinaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly constricting visual fields with impending loss of central fixation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting plasma amino acid analysis demonstrating markedly elevated ornithine, Electroretinography showing progressive rod and cone dysfunction, Optical coherence tomography and fundus autofluorescence to map areas of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gyrate atrophy of the choroid and retina."
-  }
- ],
- "tables": [
-  {
-   "id": "gyrate_atrophy-matrix",
-   "title": "Gyrate atrophy of the choroid and retina: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT gene), leading to hyperornithinaemia",
+      "Presents in childhood or early adult life with progressive night blindness (nyctalopia) and constricting peripheral visual fields",
+      "Fundus shows sharply demarcated, scalloped (gyrate) circular patches of chorioretinal atrophy in the mid-periphery that coalesce and extend centrally over time",
+      "Plasma ornithine concentration is markedly elevated, providing a key biochemical clue that distinguishes it from other retinal dystrophies",
+      "High myopia and posterior subcapsular cataract are common associated ocular features",
+      "The electroretinogram becomes progressively reduced and eventually extinguished as the disease advances",
+      "An arginine-restricted diet to lower plasma ornithine, sometimes with pyridoxine (vitamin B6) supplementation in responsive subtypes, may slow retinal degeneration"
     ],
-    [
-     "Key Investigations",
-     "Fasting plasma amino acid analysis demonstrating markedly elevated ornithine, Electroretinography showing progressive rod and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gyrate atrophy is caused by biallelic mutations in the OAT gene encoding ornithine aminotransferase, a pyridoxal-phosphate-dependent mitochondrial enzyme that converts ornithine to glutamate semialdehyde. Enzyme deficiency causes ornithine to accumulate in plasma and tissues. Chronically raised ornithine is thought to be toxic to the retinal pigment epithelium and choriocapillaris, producing progressive atrophy of the choroid and outer retina. The metabolic block also disturbs the urea cycle and creatine synthesis pathways. The characteristic well-circumscribed peripheral chorioretinal lesions enlarge and merge, ultimately encroaching on the macula and destroying central vision.",
+    "additionalDifferentials": [
+      "Choroideremia",
+      "Retinitis pigmentosa",
+      "Bietti crystalline dystrophy",
+      "Pathological (high) myopia with chorioretinal atrophy",
+      "Thioridazine or other toxic retinopathy",
+      "Advanced generalised chorioretinal degeneration"
     ],
-    [
-     "Primary Differentials",
-     "Choroideremia, Retinitis pigmentosa, Bietti crystalline dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting plasma amino acid analysis demonstrating markedly elevated ornithine",
+      "Electroretinography showing progressive rod and cone dysfunction",
+      "Optical coherence tomography and fundus autofluorescence to map areas of atrophy",
+      "Visual field testing documenting peripheral constriction",
+      "Assay of ornithine aminotransferase activity in fibroblasts and molecular OAT gene testing",
+      "Assessment of pyridoxine responsiveness of plasma ornithine"
     ],
-    [
-     "Management Strategy",
-     "Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly constricting visual fields with impending loss of central fixation",
+      "Development of dense cataract compounding retinal visual loss",
+      "Poor dietary adherence with persistently high plasma ornithine accelerating degeneration"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is progressive, and most patients experience severe visual impairment or blindness by middle age; dietary control of ornithine and pyridoxine supplementation in responsive individuals may slow but not fully arrest the decline.",
+    "pitfalls": [
+      "Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause",
+      "Failing to check plasma ornithine in a young patient with unexplained progressive chorioretinal atrophy",
+      "Assuming all patients respond to pyridoxine when only a subset are responsive",
+      "Neglecting long-term dietary monitoring and family genetic counselling"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration",
+      "Trial pyridoxine (vitamin B6) supplementation, since a subset are pyridoxine-responsive with lowering of plasma ornithine",
+      "Supplement lysine and creatine to counter the metabolic effects of hyperornithinaemia and support the disturbed creatine pathway",
+      "Correct associated ocular problems with refraction for high myopia, cataract surgery for posterior subcapsular cataract and treatment of cystoid macular oedema",
+      "Monitor plasma ornithine, visual fields, electroretinography, optical coherence tomography and fundus autofluorescence to track progression and dietary adequacy",
+      "Provide low-vision rehabilitation and support for progressive visual loss",
+      "Offer genetic counselling for autosomal recessive OAT-related inheritance with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for gyrate atrophy of the choroid and retina."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gyrate-atrophy-real-image",
-   "title": "Gyrate atrophy of the choroid and retina: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gyrate_atrophy-pathway",
+      "title": "Gyrate atrophy of the choroid and retina: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT gene), leading to hyperornithinaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly constricting visual fields with impending loss of central fixation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting plasma amino acid analysis demonstrating markedly elevated ornithine, Electroretinography showing progressive rod and cone dysfunction, Optical coherence tomography and fundus autofluorescence to map areas of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gyrate atrophy of the choroid and retina."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gyrate_atrophy-matrix",
+      "title": "Gyrate atrophy of the choroid and retina: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive chorioretinal dystrophy caused by deficiency of the mitochondrial enzyme ornithine aminotransferase (OAT",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting plasma amino acid analysis demonstrating markedly elevated ornithine, Electroretinography showing progressive rod and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Choroideremia, Retinitis pigmentosa, Bietti crystalline dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute an arginine-restricted diet to lower plasma ornithine, the mainstay that slows chorioretinal degeneration",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the fundus appearance with choroideremia or high myopia and missing the treatable metabolic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gyrate atrophy of the choroid and retina."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gyrate_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting plasma amino acid analysis",
+          "cells": [
+            {
+              "text": "Markedly elevated ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Progressive rod and cone dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Areas of atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Peripheral constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OAT enzyme assay and gene testing",
+          "cells": [
+            {
+              "text": "Ornithine aminotransferase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine responsiveness test",
+          "cells": [
+            {
+              "text": "Change in plasma ornithine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gyrate_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choroideremia",
+          "cells": [
+            {
+              "text": "Chorioretinal atrophy without raised ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Rod-cone dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathological high myopia",
+          "cells": [
+            {
+              "text": "Chorioretinal atrophy from myopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gyrate_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Arginine-restricted diet",
+          "cells": [
+            {
+              "text": "Lowers plasma ornithine; mainstay that slows degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine (vitamin B6) trial",
+          "cells": [
+            {
+              "text": "Subset responds with lowering of plasma ornithine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lysine and creatine supplementation",
+          "cells": [
+            {
+              "text": "Counters hyperornithinaemia effects on creatine pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular correction",
+          "cells": [
+            {
+              "text": "Refraction for high myopia; cataract surgery for posterior subcapsular cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma ornithine, visual fields, ERG, OCT and autofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive OAT-related inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gyrate_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Gyrate atrophy of the choroid and retina",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gyrate atrophy: progressive chorioretinal atrophy with night blindness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly constricting fields, dense cataract, poor dietary adherence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for rapid field constriction threatening central fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ornithine, ERG, OCT, visual fields and OAT testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is plasma ornithine markedly raised with OAT deficiency confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider choroideremia, retinitis pigmentosa, high myopia or toxic retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Arginine-restricted diet to lower plasma ornithine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pyridoxine trial in pyridoxine-responsive patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lysine and creatine supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cataract and myopia correction with low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; most reach severe visual impairment or blindness by middle age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

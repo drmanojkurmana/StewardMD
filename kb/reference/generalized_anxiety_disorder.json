@@ -1,174 +1,461 @@
 {
- "id": "generalized_anxiety_disorder",
- "name": "Generalized anxiety disorder",
- "aliases": [
-  "GAD",
-  "generalised anxiety disorder",
-  "chronic anxiety"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period (on the order of six months or more)",
-   "Worry is accompanied by somatic and cognitive symptoms such as restlessness, fatigue, difficulty concentrating, irritability, muscle tension, and disturbed sleep",
-   "Patients frequently present first to primary care with physical complaints rather than naming anxiety as the problem",
-   "Distinguish from normal worry by the disproportionate intensity, pervasiveness, and functional impairment it causes",
-   "Exclude medical mimics such as hyperthyroidism, caffeine or stimulant excess, and arrhythmias, and screen for comorbid depression and substance use",
-   "First-line management combines cognitive behavioural therapy with pharmacotherapy, typically SSRIs or SNRIs as maintenance treatment",
-   "Benzodiazepines may give rapid short-term relief but carry dependence and tolerance risk and are avoided for long-term routine use",
-   "Comorbidity with depression and other anxiety disorders is common and worsens the overall burden"
+  "id": "generalized_anxiety_disorder",
+  "name": "Generalized anxiety disorder",
+  "aliases": [
+    "GAD",
+    "generalised anxiety disorder",
+    "chronic anxiety"
   ],
-  "pathophysiology": "Generalized anxiety disorder involves dysregulation of fear and worry circuitry, particularly heightened amygdala reactivity with insufficient prefrontal regulation, alongside imbalances in gamma-aminobutyric acid, serotonin, and noradrenaline signalling. Genetic predisposition, temperamental traits such as behavioural inhibition, and chronic stress interact to produce a persistent state of anticipatory apprehension and autonomic arousal.",
-  "additionalDifferentials": [
-   "Major depressive disorder",
-   "Panic disorder",
-   "Social anxiety disorder",
-   "Obsessive-compulsive disorder",
-   "Hyperthyroidism and other endocrine disorders",
-   "Caffeine, stimulant, or substance-related anxiety",
-   "Cardiac arrhythmia or other medical causes of palpitations"
-  ],
-  "additionalInvestigations": [
-   "Standardised anxiety rating scales to quantify severity and monitor response",
-   "Thyroid function testing",
-   "Screening for depression and other anxiety disorders",
-   "Substance and caffeine use history",
-   "Targeted cardiac evaluation when palpitations or chest symptoms predominate"
-  ],
-  "redFlags": [
-   "Emergent suicidal ideation, especially with comorbid depression",
-   "Escalating benzodiazepine or alcohol use to self-manage symptoms",
-   "New or severe physical symptoms suggesting an undiagnosed medical cause",
-   "Marked functional collapse or inability to work or care for self"
-  ],
-  "prognosis": "Generalized anxiety disorder tends to be chronic and fluctuating, often worsening during periods of stress. Outcomes improve with sustained psychotherapy and pharmacotherapy, but comorbid depression and substance use are associated with greater chronicity and disability.",
-  "pitfalls": [
-   "Relying on long-term benzodiazepines and creating dependence",
-   "Missing comorbid depression and its associated suicide risk",
-   "Ordering repeated investigations for somatic complaints without recognising the underlying anxiety disorder",
-   "Discontinuing effective antidepressant treatment prematurely and precipitating relapse"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied relaxation",
-   "First-line pharmacotherapy with an SSRI or SNRI as maintenance treatment, allowing adequate time for response",
-   "Second-line pharmacological options such as pregabalin or buspirone, avoiding long-term benzodiazepine use because of dependence",
-   "Address modifiable contributors including caffeine and stimulant intake and exclude medical mimics such as hyperthyroidism",
-   "Identify and treat comorbid depression and substance misuse, which worsen chronicity and disability",
-   "Monitor severity and treatment response with standardised anxiety rating scales and assess suicide risk",
-   "Refer to specialist psychiatry or step up care for severe, refractory or highly comorbid presentations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "generalized_anxiety_disorder-pathway",
-   "title": "Generalized anxiety disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period (on the order of six months or more)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergent suicidal ideation, especially with comorbid depression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standardised anxiety rating scales to quantify severity and monitor response, Thyroid function testing, Screening for depression and other anxiety disorders"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied relaxation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on long-term benzodiazepines and creating dependence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of generalized anxiety disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "generalized_anxiety_disorder-matrix",
-   "title": "Generalized anxiety disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period (on the order of six months or more)",
+      "Worry is accompanied by somatic and cognitive symptoms such as restlessness, fatigue, difficulty concentrating, irritability, muscle tension, and disturbed sleep",
+      "Patients frequently present first to primary care with physical complaints rather than naming anxiety as the problem",
+      "Distinguish from normal worry by the disproportionate intensity, pervasiveness, and functional impairment it causes",
+      "Exclude medical mimics such as hyperthyroidism, caffeine or stimulant excess, and arrhythmias, and screen for comorbid depression and substance use",
+      "First-line management combines cognitive behavioural therapy with pharmacotherapy, typically SSRIs or SNRIs as maintenance treatment",
+      "Benzodiazepines may give rapid short-term relief but carry dependence and tolerance risk and are avoided for long-term routine use",
+      "Comorbidity with depression and other anxiety disorders is common and worsens the overall burden"
     ],
-    [
-     "Key Investigations",
-     "Standardised anxiety rating scales to quantify severity and monitor response, Thyroid function testing, Screening for depression",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Generalized anxiety disorder involves dysregulation of fear and worry circuitry, particularly heightened amygdala reactivity with insufficient prefrontal regulation, alongside imbalances in gamma-aminobutyric acid, serotonin, and noradrenaline signalling. Genetic predisposition, temperamental traits such as behavioural inhibition, and chronic stress interact to produce a persistent state of anticipatory apprehension and autonomic arousal.",
+    "additionalDifferentials": [
+      "Major depressive disorder",
+      "Panic disorder",
+      "Social anxiety disorder",
+      "Obsessive-compulsive disorder",
+      "Hyperthyroidism and other endocrine disorders",
+      "Caffeine, stimulant, or substance-related anxiety",
+      "Cardiac arrhythmia or other medical causes of palpitations"
     ],
-    [
-     "Primary Differentials",
-     "Major depressive disorder, Panic disorder, Social anxiety disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standardised anxiety rating scales to quantify severity and monitor response",
+      "Thyroid function testing",
+      "Screening for depression and other anxiety disorders",
+      "Substance and caffeine use history",
+      "Targeted cardiac evaluation when palpitations or chest symptoms predominate"
     ],
-    [
-     "Management Strategy",
-     "Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergent suicidal ideation, especially with comorbid depression",
+      "Escalating benzodiazepine or alcohol use to self-manage symptoms",
+      "New or severe physical symptoms suggesting an undiagnosed medical cause",
+      "Marked functional collapse or inability to work or care for self"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on long-term benzodiazepines and creating dependence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generalized anxiety disorder tends to be chronic and fluctuating, often worsening during periods of stress. Outcomes improve with sustained psychotherapy and pharmacotherapy, but comorbid depression and substance use are associated with greater chronicity and disability.",
+    "pitfalls": [
+      "Relying on long-term benzodiazepines and creating dependence",
+      "Missing comorbid depression and its associated suicide risk",
+      "Ordering repeated investigations for somatic complaints without recognising the underlying anxiety disorder",
+      "Discontinuing effective antidepressant treatment prematurely and precipitating relapse"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied relaxation",
+      "First-line pharmacotherapy with an SSRI or SNRI as maintenance treatment, allowing adequate time for response",
+      "Second-line pharmacological options such as pregabalin or buspirone, avoiding long-term benzodiazepine use because of dependence",
+      "Address modifiable contributors including caffeine and stimulant intake and exclude medical mimics such as hyperthyroidism",
+      "Identify and treat comorbid depression and substance misuse, which worsen chronicity and disability",
+      "Monitor severity and treatment response with standardised anxiety rating scales and assess suicide risk",
+      "Refer to specialist psychiatry or step up care for severe, refractory or highly comorbid presentations"
     ]
-   ],
-   "caption": "Overview comparison matrix for generalized anxiety disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "generalized-anxiety-disorder-real-image",
-   "title": "Generalized anxiety disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "generalized_anxiety_disorder-pathway",
+      "title": "Generalized anxiety disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period (on the order of six months or more)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergent suicidal ideation, especially with comorbid depression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standardised anxiety rating scales to quantify severity and monitor response, Thyroid function testing, Screening for depression and other anxiety disorders"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied relaxation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on long-term benzodiazepines and creating dependence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of generalized anxiety disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "generalized_anxiety_disorder-matrix",
+      "title": "Generalized anxiety disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by excessive, hard-to-control worry about numerous everyday matters, present on most days over an extended period",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standardised anxiety rating scales to quantify severity and monitor response, Thyroid function testing, Screening for depression",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Major depressive disorder, Panic disorder, Social anxiety disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cognitive behavioural therapy as the first-line psychological treatment, incorporating worry-focused techniques and applied",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on long-term benzodiazepines and creating dependence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for generalized anxiety disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_anxiety_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standardised anxiety rating scales",
+          "cells": [
+            {
+              "text": "Quantifies severity and monitors response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Thyroid status; hyperthyroidism is a mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression and other anxiety disorders",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance and caffeine use history",
+          "cells": [
+            {
+              "text": "Modifiable contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted cardiac evaluation",
+          "cells": [
+            {
+              "text": "Where palpitations or chest symptoms predominate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_anxiety_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Excluded by thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine, stimulant or substance-related anxiety",
+          "cells": [
+            {
+              "text": "Caffeine and stimulant intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia",
+          "cells": [
+            {
+              "text": "Palpitations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_anxiety_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "First-line psychological treatment, with worry-focused techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRI or SNRI",
+          "cells": [
+            {
+              "text": "First-line maintenance pharmacotherapy; allow adequate time for response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregabalin or buspirone",
+          "cells": [
+            {
+              "text": "Second-line options; avoid long-term benzodiazepines because of dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable contributors",
+          "cells": [
+            {
+              "text": "Caffeine and stimulant intake; exclude medical mimics such as hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid depression and substance misuse",
+          "cells": [
+            {
+              "text": "Worsen chronicity and disability; identify and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Severity with standardised scales; assess suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Severe, refractory or highly comorbid presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_anxiety_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Generalized anxiety disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected generalised anxiety disorder: persistent, excessive worry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suicidal ideation, escalating benzodiazepine or alcohol use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent risk assessment for emergent suicidal ideation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standardised anxiety scales, thyroid function, depression and substance screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are medical mimics and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider depression, panic disorder, social anxiety or obsessive-compulsive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cognitive behavioural therapy as first-line psychological treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "SSRI or SNRI as maintenance pharmacotherapy, allowing time for response",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pregabalin or buspirone second line; avoid long-term benzodiazepines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address caffeine, stimulants and comorbid depression or substance misuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and fluctuating; outcomes improve with sustained psychotherapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

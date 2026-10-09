@@ -1,179 +1,486 @@
 {
- "id": "thyroid_orbitopathy",
- "name": "Thyroid eye disease",
- "aliases": [
-  "Graves ophthalmopathy",
-  "TAO",
-  "TED",
-  "dysthyroid eye disease",
-  "thyroid eye disease",
-  "thyroid orbitopathy",
-  "thyroid-associated orbitopathy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid, or hypothyroid at presentation",
-   "Characteristic features include eyelid retraction, lid lag, proptosis (exophthalmos), and restrictive myopathy causing diplopia",
-   "The enlarged extraocular muscles typically spare their tendinous insertions on orbital imaging, a feature that helps distinguish it from orbital myositis",
-   "Disease runs an active inflammatory phase followed by a quiescent fibrotic phase, and treatment strategy depends on which phase and how severe the disease is",
-   "Smoking is a major modifiable risk factor that worsens severity and reduces treatment response",
-   "The sight-threatening complications are dysthyroid optic neuropathy from apical crowding and corneal exposure from severe proptosis and lid retraction",
-   "Management includes restoring and stabilising thyroid status, ocular surface lubrication, and, in active moderate-to-severe disease, immunosuppression with corticosteroids and, where appropriate, orbital radiotherapy",
-   "Orbital decompression relieves optic-nerve compression or disfiguring proptosis, with squint and lid surgery reserved for the stable phase"
+  "id": "thyroid_orbitopathy",
+  "name": "Thyroid eye disease",
+  "aliases": [
+    "Graves ophthalmopathy",
+    "TAO",
+    "TED",
+    "dysthyroid eye disease",
+    "thyroid eye disease",
+    "thyroid orbitopathy",
+    "thyroid-associated orbitopathy"
   ],
-  "pathophysiology": "Thyroid eye disease is an autoimmune process in which autoantibodies, particularly against the thyrotropin receptor, activate orbital fibroblasts that share antigens with the thyroid gland. Activated fibroblasts proliferate, secrete glycosaminoglycans that draw water into the tissues, and can differentiate into fat cells, causing the extraocular muscles and orbital fat to swell within the bony orbit. This expansion produces proptosis, congestion, and restrictive myopathy, while the muscle bellies enlarge with relative sparing of their tendons. Crowding at the orbital apex can compress the optic nerve, and proptosis with lid retraction exposes the cornea. After the active inflammatory phase the enlarged muscles may fibrose, leaving fixed restriction and deformity.",
-  "additionalDifferentials": [
-   "Idiopathic orbital inflammation (orbital pseudotumour)",
-   "Orbital myositis",
-   "Orbital cellulitis",
-   "Carotid-cavernous fistula",
-   "Orbital tumour or lymphoma",
-   "Orbital metastasis or IgG4-related orbital disease"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies",
-   "Orbital CT or MRI showing fusiform muscle enlargement with tendon sparing",
-   "Assessment of visual acuity, colour vision, pupil reactions, and visual fields to detect optic neuropathy",
-   "Measurement of proptosis (exophthalmometry) and ocular motility with diplopia assessment",
-   "Corneal and ocular surface evaluation for exposure keratopathy",
-   "Disease activity and severity grading to guide treatment"
-  ],
-  "redFlags": [
-   "Reduced acuity, dyschromatopsia, or a relative afferent pupillary defect indicating dysthyroid optic neuropathy",
-   "Severe corneal exposure with breakdown from marked proptosis and lid retraction",
-   "Rapidly progressive proptosis or congestion in the active phase",
-   "Choroidal folds or disc swelling suggesting posterior compression"
-  ],
-  "prognosis": "Many patients stabilise after the active phase with good outcomes, especially with smoking cessation and prompt treatment, but a minority develop sight-threatening optic neuropathy or corneal breakdown, and residual proptosis, lid malposition, and diplopia often require surgical rehabilitation in the stable phase.",
-  "pitfalls": [
-   "Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid",
-   "Missing early dysthyroid optic neuropathy because proptosis and external signs may be modest",
-   "Not counselling about smoking as a key modifiable risk factor",
-   "Operating on lids or muscles before the disease has become inactive",
-   "Confusing tendon-sparing muscle enlargement with orbital myositis, which involves the tendons"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Shields' Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response",
-   "Treat active moderate-to-severe orbitopathy with immunosuppression, principally intravenous glucocorticoids, with orbital radiotherapy, rituximab or the IGF-1 receptor antibody teprotumumab as further options",
-   "Protect the ocular surface with lubricants and manage diplopia with prisms, considering selenium in mild disease",
-   "Grade disease activity and severity and monitor visual acuity, colour vision and pupillary responses to detect dysthyroid optic neuropathy",
-   "Treat sight-threatening optic neuropathy urgently with high-dose intravenous glucocorticoids and surgical orbital decompression when needed",
-   "Defer rehabilitative surgery until the disease is quiescent, performing orbital decompression, then strabismus, then eyelid surgery in sequence",
-   "Coordinate care in a joint ophthalmology-endocrinology clinic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thyroid_orbitopathy-pathway",
-   "title": "Thyroid eye disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid, or hypothyroid at presentation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reduced acuity, dyschromatopsia, or a relative afferent pupillary defect indicating dysthyroid optic neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies, Orbital CT or MRI showing fusiform muscle enlargement with tendon sparing, Assessment of visual acuity, colour vision, pupil"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thyroid eye disease."
-  }
- ],
- "tables": [
-  {
-   "id": "thyroid_orbitopathy-matrix",
-   "title": "Thyroid eye disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid, or hypothyroid at presentation",
+      "Characteristic features include eyelid retraction, lid lag, proptosis (exophthalmos), and restrictive myopathy causing diplopia",
+      "The enlarged extraocular muscles typically spare their tendinous insertions on orbital imaging, a feature that helps distinguish it from orbital myositis",
+      "Disease runs an active inflammatory phase followed by a quiescent fibrotic phase, and treatment strategy depends on which phase and how severe the disease is",
+      "Smoking is a major modifiable risk factor that worsens severity and reduces treatment response",
+      "The sight-threatening complications are dysthyroid optic neuropathy from apical crowding and corneal exposure from severe proptosis and lid retraction",
+      "Management includes restoring and stabilising thyroid status, ocular surface lubrication, and, in active moderate-to-severe disease, immunosuppression with corticosteroids and, where appropriate, orbital radiotherapy",
+      "Orbital decompression relieves optic-nerve compression or disfiguring proptosis, with squint and lid surgery reserved for the stable phase"
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies, Orbital CT or MRI showing fusiform",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thyroid eye disease is an autoimmune process in which autoantibodies, particularly against the thyrotropin receptor, activate orbital fibroblasts that share antigens with the thyroid gland. Activated fibroblasts proliferate, secrete glycosaminoglycans that draw water into the tissues, and can differentiate into fat cells, causing the extraocular muscles and orbital fat to swell within the bony orbit. This expansion produces proptosis, congestion, and restrictive myopathy, while the muscle bellies enlarge with relative sparing of their tendons. Crowding at the orbital apex can compress the optic nerve, and proptosis with lid retraction exposes the cornea. After the active inflammatory phase the enlarged muscles may fibrose, leaving fixed restriction and deformity.",
+    "additionalDifferentials": [
+      "Idiopathic orbital inflammation (orbital pseudotumour)",
+      "Orbital myositis",
+      "Orbital cellulitis",
+      "Carotid-cavernous fistula",
+      "Orbital tumour or lymphoma",
+      "Orbital metastasis or IgG4-related orbital disease"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic orbital inflammation (orbital pseudotumour), Orbital myositis, Orbital cellulitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies",
+      "Orbital CT or MRI showing fusiform muscle enlargement with tendon sparing",
+      "Assessment of visual acuity, colour vision, pupil reactions, and visual fields to detect optic neuropathy",
+      "Measurement of proptosis (exophthalmometry) and ocular motility with diplopia assessment",
+      "Corneal and ocular surface evaluation for exposure keratopathy",
+      "Disease activity and severity grading to guide treatment"
     ],
-    [
-     "Management Strategy",
-     "Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response",
-     "Core treatment modality"
+    "redFlags": [
+      "Reduced acuity, dyschromatopsia, or a relative afferent pupillary defect indicating dysthyroid optic neuropathy",
+      "Severe corneal exposure with breakdown from marked proptosis and lid retraction",
+      "Rapidly progressive proptosis or congestion in the active phase",
+      "Choroidal folds or disc swelling suggesting posterior compression"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients stabilise after the active phase with good outcomes, especially with smoking cessation and prompt treatment, but a minority develop sight-threatening optic neuropathy or corneal breakdown, and residual proptosis, lid malposition, and diplopia often require surgical rehabilitation in the stable phase.",
+    "pitfalls": [
+      "Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid",
+      "Missing early dysthyroid optic neuropathy because proptosis and external signs may be modest",
+      "Not counselling about smoking as a key modifiable risk factor",
+      "Operating on lids or muscles before the disease has become inactive",
+      "Confusing tendon-sparing muscle enlargement with orbital myositis, which involves the tendons"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Shields' Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response",
+      "Treat active moderate-to-severe orbitopathy with immunosuppression, principally intravenous glucocorticoids, with orbital radiotherapy, rituximab or the IGF-1 receptor antibody teprotumumab as further options",
+      "Protect the ocular surface with lubricants and manage diplopia with prisms, considering selenium in mild disease",
+      "Grade disease activity and severity and monitor visual acuity, colour vision and pupillary responses to detect dysthyroid optic neuropathy",
+      "Treat sight-threatening optic neuropathy urgently with high-dose intravenous glucocorticoids and surgical orbital decompression when needed",
+      "Defer rehabilitative surgery until the disease is quiescent, performing orbital decompression, then strabismus, then eyelid surgery in sequence",
+      "Coordinate care in a joint ophthalmology-endocrinology clinic"
     ]
-   ],
-   "caption": "Overview comparison matrix for thyroid eye disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thyroid-orbitopathy-real-image",
-   "title": "Thyroid eye disease: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "thyroid_orbitopathy-pathway",
+      "title": "Thyroid eye disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid, or hypothyroid at presentation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reduced acuity, dyschromatopsia, or a relative afferent pupillary defect indicating dysthyroid optic neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies, Orbital CT or MRI showing fusiform muscle enlargement with tendon sparing, Assessment of visual acuity, colour vision, pupil"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thyroid eye disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thyroid_orbitopathy-matrix",
+      "title": "Thyroid eye disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune inflammatory orbitopathy most often associated with Graves disease, though patients may be hyperthyroid, euthyroid,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests and thyroid autoantibodies including thyrotropin-receptor antibodies, Orbital CT or MRI showing fusiform",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic orbital inflammation (orbital pseudotumour), Orbital myositis, Orbital cellulitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise smoking cessation and restore stable euthyroidism, as smoking worsens severity and reduces treatment response",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming normal thyroid function excludes the diagnosis, since patients can be euthyroid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thyroid eye disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_orbitopathy-dx-mgmt",
+      "title": "Diagnosis and management of Thyroid eye disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid eye disease: lid retraction, proptosis and diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: reduced acuity, colour loss, or afferent pupil defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dose intravenous glucocorticoids and decompression for optic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid tests and antibodies; orbital MRI for tendon-sparing enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show tendon-sparing extraocular muscle enlargement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orbital myositis, pseudotumour or carotid-cavernous fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Advise smoking cessation and restore euthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous glucocorticoids for active moderate-to-severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ocular surface lubrication and prisms for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent treatment for dysthyroid optic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Defer rehabilitative surgery until the disease is quiescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many stabilise; a minority develop sight-threatening optic or corneal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_orbitopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function and thyrotropin-receptor antibodies",
+          "cells": [
+            {
+              "text": "Autoimmune thyroid disease, which may be euthyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital CT or MRI",
+          "cells": [
+            {
+              "text": "Fusiform muscle enlargement with tendon sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity, colour vision, pupils and fields",
+          "cells": [
+            {
+              "text": "Dysthyroid optic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exophthalmometry and motility assessment",
+          "cells": [
+            {
+              "text": "Proptosis and diplopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal and ocular surface evaluation",
+          "cells": [
+            {
+              "text": "Exposure keratopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity and severity grading",
+          "cells": [
+            {
+              "text": "Guides treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_orbitopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital myositis",
+          "cells": [
+            {
+              "text": "Tendon involvement on imaging; thyroid eye disease spares the tendons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic orbital inflammation (pseudotumour)",
+          "cells": [
+            {
+              "text": "Lacks the thyroid-associated tendon-sparing muscle enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid-cavernous fistula",
+          "cells": [
+            {
+              "text": "Vascular orbital signs; distinguished on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_orbitopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Worsens severity and reduces treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore euthyroidism",
+          "cells": [
+            {
+              "text": "Stable thyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous glucocorticoids",
+          "cells": [
+            {
+              "text": "Active moderate-to-severe orbitopathy; orbital radiotherapy, rituximab or teprotumumab as further options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface care and prisms",
+          "cells": [
+            {
+              "text": "Lubricants for exposure; prisms for diplopia; selenium in mild disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of optic neuropathy",
+          "cells": [
+            {
+              "text": "High-dose intravenous glucocorticoids and decompression when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deferred rehabilitative surgery",
+          "cells": [
+            {
+              "text": "Once quiescent: orbital decompression, then strabismus, then eyelid surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint ophthalmology and endocrinology clinic",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

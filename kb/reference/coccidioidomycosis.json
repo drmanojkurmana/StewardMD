@@ -1,190 +1,675 @@
 {
- "id": "coccidioidomycosis",
- "name": "Coccidioidomycosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 219,
- "page": 1696,
- "aliases": [
-  "Valley fever",
-  "Coccidioides"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1696",
-  "clinicalPearls": [
-   "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically indistinguishable; infection follows inhalation of airborne arthroconidia (Harrison 22e p.1696).",
-   "Endemic to the Western Hemisphere between 40 degrees N and 40 degrees S; areas of high endemicity in the US include the southern San Joaquin Valley of California (hence 'Valley fever') and south-central Arizona, with other foci across the southwestern US, northern Mexico, Central America, and parts of South America (Harrison 22e p.1696).",
-   "In endemic areas most human cases occur without obvious soil or dust exposure; periods of aridity following rainy seasons are associated with increases in symptomatic infections (Harrison 22e p.1696).",
-   "After infection, 60% of individuals are completely asymptomatic; the other 40% have symptoms related primarily to pulmonary infection (fever, cough, pleuritic chest pain) appearing several days to up to 3 weeks after inhalation, with risk of symptomatic illness increasing with age (Harrison 22e p.1697).",
-   "Immunologic manifestations of primary pulmonary disease include cutaneous reactions: a diffuse erythematous maculopapular rash ('toxic erythema'), erythema nodosum (typically over the lower extremities), erythema multiforme (often in a necklace distribution), and Sweet syndrome lesions; cutaneous manifestations are especially common in women (Harrison 22e p.1697).",
-   "Symmetrical arthralgias ('desert rheumatism'), often involving the ankles, knees, and hips, may occur with or without cutaneous manifestations (Harrison 22e p.1697).",
-   "Serology is the most common diagnostic method; EIA for IgM and IgG is recommended for initial diagnosis, with positive results confirmed by immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays (Harrison 22e p.1697).",
-   "Rising complement-fixation (CF) titers reflect fungal growth and correlate with clinical progression; high CF titers (e.g., 1:32 or greater) suggest unrestrained fungal growth and the possibility of extrathoracic dissemination, while CF antibody in CSF is indicative of coccidioidal meningitis (Harrison 22e p.1698).",
-   "Spherules (up to 200 microns) are unique to Coccidioides and can be demonstrated in respiratory specimens after Papanicolaou, Gomori methenamine silver, or calcofluor white staining, or in fixed tissue with hematoxylin-eosin or Gomori methenamine silver (Harrison 22e p.1698).",
-   "A commercial coccidioidal antigen test (antigenuria/antigenemia) is useful in immunosuppressed patients with severe or disseminated disease and when assaying CSF in suspected meningitis (Harrison 22e p.1698).",
-   "Coccidioidal meningitis is the most dire disseminated syndrome and is uniformly fatal if untreated; patients present with a persistent dull headache often with lethargy and confusion, and nuchal rigidity, if present, is not severe (Harrison 22e p.1697)."
+  "id": "coccidioidomycosis",
+  "name": "Coccidioidomycosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 219,
+  "page": 1696,
+  "aliases": [
+    "Valley fever",
+    "Coccidioides"
   ],
-  "pathophysiology": "Coccidioides exists as filamentous mold (mycelia) in the environment, producing barrel-shaped airborne spores (arthroconidia, ~2 x 5 microns) that, when inhaled, are small enough to evade mucosal defenses and reach deep into the bronchial tree to initiate infection. Within the host, arthroconidia enlarge into spherules (up to 200 microns, unique to Coccidioides) containing endospores; spherules rupture and release endospores that form new spherules, propagating infection locally. A robust cellular immune response is critical to host control: resolved pulmonary infection shows necrotizing granulomas containing spherules, whereas uncontrolled disseminated disease shows poorly formed or absent granulomas and a polymorphonuclear leukocyte response. In persons with protective cellular immunity, spherules may persist in the lungs for prolonged periods (possibly lifelong) in a latent state, conferring protective immunity but creating a risk of recurrent active disease if that immunity wanes (Harrison 22e p.1696-1697).",
-  "additionalDifferentials": [
-   "Community-acquired bacterial pneumonia (primary pulmonary coccidioidomycosis is often misdiagnosed as this) (Harrison 22e p.1697)",
-   "Pulmonary malignancy (coccidioidal nodules are difficult to distinguish radiographically and, like malignancies, may enhance on PET) (Harrison 22e p.1697)"
-  ],
-  "infectionMimics": [
-   "Histoplasmosis (can cause false-positive coccidioidal antigen results) (Harrison 22e p.1698)",
-   "Blastomycosis (can cause false-positive coccidioidal antigen results) (Harrison 22e p.1698)",
-   "Tuberculosis / other chronic granulomatous pulmonary infections (upper lobe infiltrate, cavities, hilar/mediastinal lymphadenopathy mimic) (Harrison 22e p.1697)"
-  ],
-  "nonInfectiousMimics": [
-   "Pulmonary malignancy (solitary or multiple nodules, PET-avid, may require biopsy to distinguish) (Harrison 22e p.1697)"
-  ],
-  "additionalInvestigations": [
-   "EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698)",
-   "Confirmatory immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays with CF titer (CF titer is an important prognostic tool) (Harrison 22e p.1698)",
-   "Culture of sputum/respiratory fluids and tissue (grows within 3-7 days at 37 degrees C on artificial media including blood agar) (Harrison 22e p.1698)",
-   "Direct microscopy of respiratory specimens (Papanicolaou, Gomori methenamine silver, or calcofluor white) or fixed tissue (H&E or GMS) for spherules (Harrison 22e p.1698)",
-   "Coccidioidal antigen test (antigenuria/antigenemia), including CSF assay in suspected meningitis (Harrison 22e p.1698)",
-   "CSF examination in suspected meningitis (lymphocytic pleocytosis, profound hypoglycorrhachia, elevated protein, occasional CSF eosinophilia; CF antibody in CSF) (Harrison 22e p.1697)",
-   "MRI with gadolinium in meningitis (frequently shows basilar meningeal enhancement; dilated ventricles indicate hydrocephalus) (Harrison 22e p.1697)",
-   "Chest imaging/CT for nodules and cavities (multiple nodules and microsatellite lesions favor coccidioidomycosis over malignancy) (Harrison 22e p.1697)"
-  ],
-  "redFlags": [
-   "Disseminated disease (occurs in approximately 1% of infections; defined as fungus found outside the thoracic cavity), more likely in male patients, those of African and perhaps Filipino ancestry, and persons with depressed cellular immunity (Harrison 22e p.1697)",
-   "Coccidioidal meningitis: persistent dull headache, lethargy, confusion; uniformly fatal if untreated, may progress to communicating hydrocephalus with declining mental status and gait disturbance (Harrison 22e p.1697)",
-   "Immunocompromised hosts at risk for dissemination: HIV-1 infection with CD4 count <250/microL, chronic glucocorticoid therapy, allogeneic solid-organ transplant recipients, and patients on TNF-alpha antagonists or other biological response modifiers (Harrison 22e p.1697)",
-   "New coccidioidal infection acquired during the second or third trimester of pregnancy or postpartum (significant risk for disseminated disease) (Harrison 22e p.1697)",
-   "Diffuse reticulonodular pneumonia with dyspnea and fever in intense exposure or profoundly suppressed cellular immunity (e.g., untreated HIV with markedly low CD4), associated with unrestrained fungal growth and frequent fungemia (Harrison 22e p.1697)",
-   "High serum CF titer (e.g., 1:32 or greater) predicting disease activity and possible extrathoracic dissemination (Harrison 22e p.1698)",
-   "Pulmonary cavity rupture into the pleural space causing pyopneumothorax (acute dyspnea, collapsed lung with pleural air-fluid level) (Harrison 22e p.1697)"
-  ],
-  "prognosis": "In most patients, primary pulmonary coccidioidomycosis resolves without sequelae over several weeks. Clinical dissemination occurs in approximately 1% of infected individuals and, when it occurs, is usually evident within the first 6 months after primary infection. Coccidioidal meningitis is uniformly fatal if untreated; even with treatment, relapse is common after stopping therapy. Antibodies disappear over time in persons whose illness resolves, but the presence of coccidioidal antibodies in serum does not indicate immunity or control of infection (Harrison 22e p.1696-1698).",
-  "pitfalls": [
-   "Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical arthralgias, night sweats, marked fatigue, peripheral-blood eosinophilia, failure to improve with antibacterial therapy, or upper lobe infiltrate / hilar or mediastinal adenopathy should suggest the diagnosis (Harrison 22e p.1697).",
-   "Coccidioides poses a significant laboratory hazard if inadvertently inhaled; the clinical laboratory should always be alerted to the possibility of this diagnosis (Harrison 22e p.1698).",
-   "Coccidioidal pulmonary nodules can be difficult to distinguish radiographically from malignancy and, like malignancies, often enhance on PET; biopsy may be required (Harrison 22e p.1697).",
-   "The IgM EIA in particular is occasionally falsely positive; results should be interpreted cautiously when screening asymptomatic individuals (Harrison 22e p.1698).",
-   "The EIA IgG optical density does not correlate with the IDCF/traditional CF titer and should not be used as a surrogate for a titer (Harrison 22e p.1698).",
-   "Coccidioidal antigen testing may yield false-positive results in histoplasmosis or blastomycosis (Harrison 22e p.1698).",
-   "The fungus is isolated from CSF in fewer than one-third of meningitis cases, so a negative CSF culture does not exclude the diagnosis (Harrison 22e p.1697).",
-   "Potassium hydroxide preparation of sputum is rarely fruitful for identifying Coccidioides (Harrison 22e p.1698).",
-   "PCR genomic detection does not appear to be more sensitive than culture, though it can be more rapid (Harrison 22e p.1698)."
-  ],
-  "severityClassification": "Clinical presentations and their approximate frequencies (Table 219-1, Harrison 22e p.1698): asymptomatic infection (60%); primary focal pneumonia (40%); diffuse pneumonia (<1%); pulmonary sequelae (~5%: nodule, cavity, chronic pneumonia); and disseminated disease (1% or less, including skin/bone/joint/soft tissue disease and meningitis). High CF titers (e.g., 1:32 or greater) and features such as night sweats >3 weeks, weight loss >10%, CF titer >1:16, and extensive pulmonary involvement indicate greater severity.",
-  "references": [
-   "Harrison 22e p.1696"
-  ],
-  "crossLinks": [
-   "CAP",
-   "PULMONARY_TB",
-   "MENINGITIS"
-  ],
-  "management": [
-   "Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve spontaneously",
-   "Treat symptomatic, severe or high-risk pulmonary disease with an oral triazole antifungal such as fluconazole or itraconazole",
-   "Use amphotericin B for severe or rapidly progressive disease, respiratory failure, or infection in pregnancy, transitioning to an azole once stable",
-   "Manage coccidioidal meningitis with lifelong azole therapy, adding intrathecal amphotericin B for azole-refractory cases and shunting for hydrocephalus",
-   "Monitor response with serial complement-fixation antibody titres and interval imaging, watching for dissemination in the immunosuppressed and pregnant",
-   "Surgical intervention for complications such as ruptured cavities, empyema or focal bone and joint disease",
-   "Refer to infectious diseases for disseminated disease, immunocompromise and antifungal selection, with prolonged or lifelong therapy where relapse risk is high",
-   "Escalate for meningeal, miliary or disseminated disease and for treatment failure"
-  ]
- },
- "algorithms": [
-  {
-   "id": "coccidioidomycosis-pathway",
-   "title": "Coccidioidomycosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically indistinguishable; infection follows inhalation of airborne arthroconidia (Harrison 22e p.1696).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated disease (occurs in approximately 1% of infections; defined as fungus found outside the thoracic cavity), more likely in male patients, those of African and perhaps Filipino ancestry, and persons",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698), Confirmatory immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays with CF titer (CF titer is an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical arthralgias, night sweats, marked fatigue, peripheral-blood eosinophilia, failure to improve"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coccidioidomycosis."
-  }
- ],
- "tables": [
-  {
-   "id": "coccidioidomycosis-matrix",
-   "title": "Coccidioidomycosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1696",
+    "clinicalPearls": [
+      "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically indistinguishable; infection follows inhalation of airborne arthroconidia (Harrison 22e p.1696).",
+      "Endemic to the Western Hemisphere between 40 degrees N and 40 degrees S; areas of high endemicity in the US include the southern San Joaquin Valley of California (hence 'Valley fever') and south-central Arizona, with other foci across the southwestern US, northern Mexico, Central America, and parts of South America (Harrison 22e p.1696).",
+      "In endemic areas most human cases occur without obvious soil or dust exposure; periods of aridity following rainy seasons are associated with increases in symptomatic infections (Harrison 22e p.1696).",
+      "After infection, 60% of individuals are completely asymptomatic; the other 40% have symptoms related primarily to pulmonary infection (fever, cough, pleuritic chest pain) appearing several days to up to 3 weeks after inhalation, with risk of symptomatic illness increasing with age (Harrison 22e p.1697).",
+      "Immunologic manifestations of primary pulmonary disease include cutaneous reactions: a diffuse erythematous maculopapular rash ('toxic erythema'), erythema nodosum (typically over the lower extremities), erythema multiforme (often in a necklace distribution), and Sweet syndrome lesions; cutaneous manifestations are especially common in women (Harrison 22e p.1697).",
+      "Symmetrical arthralgias ('desert rheumatism'), often involving the ankles, knees, and hips, may occur with or without cutaneous manifestations (Harrison 22e p.1697).",
+      "Serology is the most common diagnostic method; EIA for IgM and IgG is recommended for initial diagnosis, with positive results confirmed by immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays (Harrison 22e p.1697).",
+      "Rising complement-fixation (CF) titers reflect fungal growth and correlate with clinical progression; high CF titers (e.g., 1:32 or greater) suggest unrestrained fungal growth and the possibility of extrathoracic dissemination, while CF antibody in CSF is indicative of coccidioidal meningitis (Harrison 22e p.1698).",
+      "Spherules (up to 200 microns) are unique to Coccidioides and can be demonstrated in respiratory specimens after Papanicolaou, Gomori methenamine silver, or calcofluor white staining, or in fixed tissue with hematoxylin-eosin or Gomori methenamine silver (Harrison 22e p.1698).",
+      "A commercial coccidioidal antigen test (antigenuria/antigenemia) is useful in immunosuppressed patients with severe or disseminated disease and when assaying CSF in suspected meningitis (Harrison 22e p.1698).",
+      "Coccidioidal meningitis is the most dire disseminated syndrome and is uniformly fatal if untreated; patients present with a persistent dull headache often with lethargy and confusion, and nuchal rigidity, if present, is not severe (Harrison 22e p.1697)."
     ],
-    [
-     "Key Investigations",
-     "EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698), Confirmatory immunodiffusion",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coccidioides exists as filamentous mold (mycelia) in the environment, producing barrel-shaped airborne spores (arthroconidia, ~2 x 5 microns) that, when inhaled, are small enough to evade mucosal defenses and reach deep into the bronchial tree to initiate infection. Within the host, arthroconidia enlarge into spherules (up to 200 microns, unique to Coccidioides) containing endospores; spherules rupture and release endospores that form new spherules, propagating infection locally. A robust cellular immune response is critical to host control: resolved pulmonary infection shows necrotizing granulomas containing spherules, whereas uncontrolled disseminated disease shows poorly formed or absent granulomas and a polymorphonuclear leukocyte response. In persons with protective cellular immunity, spherules may persist in the lungs for prolonged periods (possibly lifelong) in a latent state, conferring protective immunity but creating a risk of recurrent active disease if that immunity wanes (Harrison 22e p.1696-1697).",
+    "additionalDifferentials": [
+      "Community-acquired bacterial pneumonia (primary pulmonary coccidioidomycosis is often misdiagnosed as this) (Harrison 22e p.1697)",
+      "Pulmonary malignancy (coccidioidal nodules are difficult to distinguish radiographically and, like malignancies, may enhance on PET) (Harrison 22e p.1697)"
     ],
-    [
-     "Primary Differentials",
-     "Community-acquired bacterial pneumonia (primary pulmonary coccidioidomycosis is often misdiagnosed as this) (Harrison 22e",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Histoplasmosis (can cause false-positive coccidioidal antigen results) (Harrison 22e p.1698)",
+      "Blastomycosis (can cause false-positive coccidioidal antigen results) (Harrison 22e p.1698)",
+      "Tuberculosis / other chronic granulomatous pulmonary infections (upper lobe infiltrate, cavities, hilar/mediastinal lymphadenopathy mimic) (Harrison 22e p.1697)"
     ],
-    [
-     "Management Strategy",
-     "Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Pulmonary malignancy (solitary or multiple nodules, PET-avid, may require biopsy to distinguish) (Harrison 22e p.1697)"
     ],
-    [
-     "Clinical Pitfall",
-     "Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698)",
+      "Confirmatory immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays with CF titer (CF titer is an important prognostic tool) (Harrison 22e p.1698)",
+      "Culture of sputum/respiratory fluids and tissue (grows within 3-7 days at 37 degrees C on artificial media including blood agar) (Harrison 22e p.1698)",
+      "Direct microscopy of respiratory specimens (Papanicolaou, Gomori methenamine silver, or calcofluor white) or fixed tissue (H&E or GMS) for spherules (Harrison 22e p.1698)",
+      "Coccidioidal antigen test (antigenuria/antigenemia), including CSF assay in suspected meningitis (Harrison 22e p.1698)",
+      "CSF examination in suspected meningitis (lymphocytic pleocytosis, profound hypoglycorrhachia, elevated protein, occasional CSF eosinophilia; CF antibody in CSF) (Harrison 22e p.1697)",
+      "MRI with gadolinium in meningitis (frequently shows basilar meningeal enhancement; dilated ventricles indicate hydrocephalus) (Harrison 22e p.1697)",
+      "Chest imaging/CT for nodules and cavities (multiple nodules and microsatellite lesions favor coccidioidomycosis over malignancy) (Harrison 22e p.1697)"
+    ],
+    "redFlags": [
+      "Disseminated disease (occurs in approximately 1% of infections; defined as fungus found outside the thoracic cavity), more likely in male patients, those of African and perhaps Filipino ancestry, and persons with depressed cellular immunity (Harrison 22e p.1697)",
+      "Coccidioidal meningitis: persistent dull headache, lethargy, confusion; uniformly fatal if untreated, may progress to communicating hydrocephalus with declining mental status and gait disturbance (Harrison 22e p.1697)",
+      "Immunocompromised hosts at risk for dissemination: HIV-1 infection with CD4 count <250/microL, chronic glucocorticoid therapy, allogeneic solid-organ transplant recipients, and patients on TNF-alpha antagonists or other biological response modifiers (Harrison 22e p.1697)",
+      "New coccidioidal infection acquired during the second or third trimester of pregnancy or postpartum (significant risk for disseminated disease) (Harrison 22e p.1697)",
+      "Diffuse reticulonodular pneumonia with dyspnea and fever in intense exposure or profoundly suppressed cellular immunity (e.g., untreated HIV with markedly low CD4), associated with unrestrained fungal growth and frequent fungemia (Harrison 22e p.1697)",
+      "High serum CF titer (e.g., 1:32 or greater) predicting disease activity and possible extrathoracic dissemination (Harrison 22e p.1698)",
+      "Pulmonary cavity rupture into the pleural space causing pyopneumothorax (acute dyspnea, collapsed lung with pleural air-fluid level) (Harrison 22e p.1697)"
+    ],
+    "prognosis": "In most patients, primary pulmonary coccidioidomycosis resolves without sequelae over several weeks. Clinical dissemination occurs in approximately 1% of infected individuals and, when it occurs, is usually evident within the first 6 months after primary infection. Coccidioidal meningitis is uniformly fatal if untreated; even with treatment, relapse is common after stopping therapy. Antibodies disappear over time in persons whose illness resolves, but the presence of coccidioidal antibodies in serum does not indicate immunity or control of infection (Harrison 22e p.1696-1698).",
+    "pitfalls": [
+      "Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical arthralgias, night sweats, marked fatigue, peripheral-blood eosinophilia, failure to improve with antibacterial therapy, or upper lobe infiltrate / hilar or mediastinal adenopathy should suggest the diagnosis (Harrison 22e p.1697).",
+      "Coccidioides poses a significant laboratory hazard if inadvertently inhaled; the clinical laboratory should always be alerted to the possibility of this diagnosis (Harrison 22e p.1698).",
+      "Coccidioidal pulmonary nodules can be difficult to distinguish radiographically from malignancy and, like malignancies, often enhance on PET; biopsy may be required (Harrison 22e p.1697).",
+      "The IgM EIA in particular is occasionally falsely positive; results should be interpreted cautiously when screening asymptomatic individuals (Harrison 22e p.1698).",
+      "The EIA IgG optical density does not correlate with the IDCF/traditional CF titer and should not be used as a surrogate for a titer (Harrison 22e p.1698).",
+      "Coccidioidal antigen testing may yield false-positive results in histoplasmosis or blastomycosis (Harrison 22e p.1698).",
+      "The fungus is isolated from CSF in fewer than one-third of meningitis cases, so a negative CSF culture does not exclude the diagnosis (Harrison 22e p.1697).",
+      "Potassium hydroxide preparation of sputum is rarely fruitful for identifying Coccidioides (Harrison 22e p.1698).",
+      "PCR genomic detection does not appear to be more sensitive than culture, though it can be more rapid (Harrison 22e p.1698)."
+    ],
+    "severityClassification": "Clinical presentations and their approximate frequencies (Table 219-1, Harrison 22e p.1698): asymptomatic infection (60%); primary focal pneumonia (40%); diffuse pneumonia (<1%); pulmonary sequelae (~5%: nodule, cavity, chronic pneumonia); and disseminated disease (1% or less, including skin/bone/joint/soft tissue disease and meningitis). High CF titers (e.g., 1:32 or greater) and features such as night sweats >3 weeks, weight loss >10%, CF titer >1:16, and extensive pulmonary involvement indicate greater severity.",
+    "references": [
+      "Harrison 22e p.1696"
+    ],
+    "crossLinks": [
+      "CAP",
+      "PULMONARY_TB",
+      "MENINGITIS"
+    ],
+    "management": [
+      "Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve spontaneously",
+      "Treat symptomatic, severe or high-risk pulmonary disease with an oral triazole antifungal such as fluconazole or itraconazole",
+      "Use amphotericin B for severe or rapidly progressive disease, respiratory failure, or infection in pregnancy, transitioning to an azole once stable",
+      "Manage coccidioidal meningitis with lifelong azole therapy, adding intrathecal amphotericin B for azole-refractory cases and shunting for hydrocephalus",
+      "Monitor response with serial complement-fixation antibody titres and interval imaging, watching for dissemination in the immunosuppressed and pregnant",
+      "Surgical intervention for complications such as ruptured cavities, empyema or focal bone and joint disease",
+      "Refer to infectious diseases for disseminated disease, immunocompromise and antifungal selection, with prolonged or lifelong therapy where relapse risk is high",
+      "Escalate for meningeal, miliary or disseminated disease and for treatment failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for coccidioidomycosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coccidioidomycosis-real-image",
-   "title": "Coccidioidomycosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "coccidioidomycosis-pathway",
+      "title": "Coccidioidomycosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically indistinguishable; infection follows inhalation of airborne arthroconidia (Harrison 22e p.1696).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated disease (occurs in approximately 1% of infections; defined as fungus found outside the thoracic cavity), more likely in male patients, those of African and perhaps Filipino ancestry, and persons",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698), Confirmatory immunodiffusion (IDTP/IDCF) or traditional tube-precipitin and complement-fixation assays with CF titer (CF titer is an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical arthralgias, night sweats, marked fatigue, peripheral-blood eosinophilia, failure to improve"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coccidioidomycosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coccidioidomycosis-matrix",
+      "title": "Coccidioidomycosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by dimorphic soil-dwelling fungi of the genus Coccidioides (C. immitis and C. posadasii), which are clinically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "EIA for IgM and IgG antibodies (recommended for initial diagnosis) (Harrison 22e p.1698), Confirmatory immunodiffusion",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Community-acquired bacterial pneumonia (primary pulmonary coccidioidomycosis is often misdiagnosed as this) (Harrison 22e",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reserve observation alone for mild, uncomplicated primary pulmonary infection in immunocompetent hosts, since most resolve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Primary pulmonary coccidioidomycosis is often misdiagnosed as community-acquired bacterial pneumonia; rash, symmetrical",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coccidioidomycosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Coccidioidomycosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/coccidioidomycosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coccidioidomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of coccidioidomycosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 40%; 60% asymptomatic"
+            },
+            {
+              "text": "Pneumonia days to 3 weeks after exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune features",
+          "cells": [
+            {
+              "text": "Erythema nodosum, erythema multiforme, toxic erythema, desert rheumatism"
+            },
+            {
+              "text": "{{hy:Clues that separate it from bacterial pneumonia}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EIA IgM and IgG",
+          "cells": [
+            {
+              "text": "Initial test"
+            },
+            {
+              "text": "IgM can be falsely positive; confirm with immunodiffusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement fixation titre",
+          "cells": [
+            {
+              "text": "1:32 or greater",
+              "op": ">=",
+              "value": 32
+            },
+            {
+              "text": "Suggests dissemination; falls with successful therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF CF antibody",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Indicates meningitis; culture positive in under one-third"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spherules on stain",
+          "unit": "microns",
+          "cells": [
+            {
+              "text": "Up to 200",
+              "op": "<=",
+              "value": 200
+            },
+            {
+              "text": "Unique to Coccidioides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Grows in 3 to 7",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Lab biohazard: warn laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen test (urine, serum, CSF)",
+          "cells": [
+            {
+              "text": "Immunosuppressed or meningitis"
+            },
+            {
+              "text": "False positive with histoplasmosis or blastomycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dissemination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 1% of infections"
+            },
+            {
+              "text": "Risk: HIV CD4 <250, steroids, transplant, TNF blockers, late pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coccidioidomycosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of coccidioidomycosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Community-acquired bacterial pneumonia",
+          "cells": [
+            {
+              "text": "{{hy:Commonest misdiagnosis}}; cocci fails antibiotics, has rash, eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodules are PET-avid in both; satellite nodules favour cocci; biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Upper lobe infiltrate, cavities, hilar nodes in both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis or blastomycosis",
+          "cells": [
+            {
+              "text": "Antigen cross-reactivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coccidioidomycosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of coccidioidomycosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild primary pneumonia in immunocompetent"
+            },
+            {
+              "text": "Most resolve over weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole",
+          "cells": [
+            {
+              "text": "Prolonged or severe primary infection, or risk factors"
+            },
+            {
+              "text": "3 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole or itraconazole",
+          "cells": [
+            {
+              "text": "Mild to moderate non-meningeal extrapulmonary disease"
+            },
+            {
+              "text": "Skin, soft tissue, bone usually 1 to 2 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipid amphotericin B",
+          "cells": [
+            {
+              "text": "Severe illness"
+            },
+            {
+              "text": "Switch to triazole once stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole for life",
+          "cells": [
+            {
+              "text": "{{hy:Meningitis}}"
+            },
+            {
+              "text": "Relapse common and fatal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azole maintenance",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Immunocompromised (HIV)"
+            },
+            {
+              "text": "Until CD4 >250 on ART",
+              "op": ">",
+              "value": 250
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amphotericin B",
+          "cells": [
+            {
+              "text": "Severe disease in first trimester"
+            },
+            {
+              "text": "Avoid azoles in first trimester"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Cavity with haemoptysis or rupture risk; osteomyelitis"
+            },
+            {
+              "text": "Plus triazole"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened. Itraconazole needs level monitoring."
+    },
+    {
+      "id": "coccidioidomycosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coccidioidomycosis-dx-mgmt",
+      "title": "Diagnosis and management of coccidioidomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pneumonia or rash with arthralgia after endemic-area exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "EIA IgM and IgG, confirm by immunodiffusion; CF titre; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Coccidioidal infection confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider bacterial pneumonia, TB, cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Headache or confusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "LP: CSF CF antibody, antigen; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Meningitis: lifelong fluconazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Severe, disseminated, CF >=1:32, immunosuppressed or pregnant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Azole or amphotericin by severity; follow CF titres",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Observe; fluconazole if prolonged symptoms",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Positive"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Negative"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,566 @@
 {
- "id": "giardiasis",
- "name": "Giardiasis",
- "aliases": [
-  "Giardia lamblia infection",
-  "Giardia intestinalis infection",
-  "Giardia duodenalis infection",
-  "beaver fever"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated water or food, or person to person",
-   "Highly endemic in India, contributing to childhood diarrhoea, malabsorption and faltering growth",
-   "Typical illness is prolonged, with foul-smelling greasy diarrhoea, bloating, flatulence, abdominal cramps and weight loss rather than blood or fever",
-   "Many infections are asymptomatic, and cyst passage can continue in the absence of symptoms, sustaining transmission",
-   "Chronic infection can cause fat and lactose malabsorption and, in children, nutritional deficiencies and stunting",
-   "Diagnosis traditionally relies on detecting cysts or trophozoites on repeated stool examination, with stool antigen and PCR tests being more sensitive",
-   "Because cyst excretion is intermittent, a single negative stool sample does not exclude infection",
-   "Treatment is with antiprotozoal agents; attention to safe water and hygiene prevents reinfection and outbreaks"
+  "id": "giardiasis",
+  "name": "Giardiasis",
+  "aliases": [
+    "Giardia lamblia infection",
+    "Giardia intestinalis infection",
+    "Giardia duodenalis infection",
+    "beaver fever"
   ],
-  "pathophysiology": "Ingested Giardia cysts excyst in the small intestine and release trophozoites that attach to the duodenal and jejunal mucosa via a ventral adhesive disc. Colonisation causes villous shortening, disruption of the brush-border enzymes and a mucosal inflammatory response, impairing absorption of fats, carbohydrates and other nutrients. This produces the characteristic malabsorptive, non-inflammatory diarrhoea. Trophozoites encyst as they pass down the gut, and the environmentally hardy cysts are excreted to continue the cycle.",
-  "additionalDifferentials": [
-   "Other causes of chronic or malabsorptive diarrhoea (coeliac disease, tropical sprue)",
-   "Cryptosporidiosis and other protozoal enteritides",
-   "Bacterial enteritis",
-   "Lactose intolerance",
-   "Irritable bowel syndrome"
-  ],
-  "infectionMimics": [
-   "Coeliac disease",
-   "Tropical sprue",
-   "Small intestinal bacterial overgrowth",
-   "Inflammatory bowel disease"
-  ],
-  "additionalInvestigations": [
-   "Repeated stool microscopy for cysts and trophozoites",
-   "Stool antigen detection (ELISA) or PCR for greater sensitivity",
-   "Duodenal aspirate or biopsy in difficult cases",
-   "Assessment for malabsorption and nutritional status in chronic disease",
-   "Evaluation for immunoglobulin deficiency in recurrent or refractory infection"
-  ],
-  "redFlags": [
-   "Severe dehydration or significant weight loss, particularly in young children",
-   "Malabsorption with nutritional deficiency and growth faltering",
-   "Persistent or relapsing infection suggesting underlying immunodeficiency",
-   "Failure to respond to standard therapy, prompting reassessment of the diagnosis"
-  ],
-  "prognosis": "Most cases respond well to antiprotozoal therapy with full recovery. Untreated or recurrent infection, especially in children, can cause lasting malabsorption and growth impairment, and reinfection is common where sanitation is poor.",
-  "pitfalls": [
-   "Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding",
-   "Overlooking it as a treatable cause of chronic diarrhoea and malabsorption",
-   "Missing underlying immunodeficiency in recurrent or refractory cases",
-   "Neglecting water and hygiene measures, leading to reinfection or household spread"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or albendazole as alternatives",
-   "Rehydrate and correct malabsorption and nutritional deficiencies, with temporary lactose avoidance where intolerance develops",
-   "Manage refractory infection with extended or combination therapy, checking adherence and excluding reinfection",
-   "Reinforce public health measures of safe water, sanitation, hand hygiene, and treatment of symptomatic household contacts",
-   "Investigate for immunoglobulin deficiency in recurrent or treatment-refractory disease",
-   "Provide nutritional rehabilitation and growth monitoring in affected children"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "giardiasis-pathway",
-   "title": "Giardiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated water or food, or person to person",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dehydration or significant weight loss, particularly in young children",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeated stool microscopy for cysts and trophozoites, Stool antigen detection (ELISA) or PCR for greater sensitivity, Duodenal aspirate or biopsy in difficult cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or albendazole as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of giardiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "giardiasis-matrix",
-   "title": "Giardiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated water or food, or person to person",
+      "Highly endemic in India, contributing to childhood diarrhoea, malabsorption and faltering growth",
+      "Typical illness is prolonged, with foul-smelling greasy diarrhoea, bloating, flatulence, abdominal cramps and weight loss rather than blood or fever",
+      "Many infections are asymptomatic, and cyst passage can continue in the absence of symptoms, sustaining transmission",
+      "Chronic infection can cause fat and lactose malabsorption and, in children, nutritional deficiencies and stunting",
+      "Diagnosis traditionally relies on detecting cysts or trophozoites on repeated stool examination, with stool antigen and PCR tests being more sensitive",
+      "Because cyst excretion is intermittent, a single negative stool sample does not exclude infection",
+      "Treatment is with antiprotozoal agents; attention to safe water and hygiene prevents reinfection and outbreaks"
     ],
-    [
-     "Key Investigations",
-     "Repeated stool microscopy for cysts and trophozoites, Stool antigen detection (ELISA) or PCR for greater sensitivity, Duodenal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ingested Giardia cysts excyst in the small intestine and release trophozoites that attach to the duodenal and jejunal mucosa via a ventral adhesive disc. Colonisation causes villous shortening, disruption of the brush-border enzymes and a mucosal inflammatory response, impairing absorption of fats, carbohydrates and other nutrients. This produces the characteristic malabsorptive, non-inflammatory diarrhoea. Trophozoites encyst as they pass down the gut, and the environmentally hardy cysts are excreted to continue the cycle.",
+    "additionalDifferentials": [
+      "Other causes of chronic or malabsorptive diarrhoea (coeliac disease, tropical sprue)",
+      "Cryptosporidiosis and other protozoal enteritides",
+      "Bacterial enteritis",
+      "Lactose intolerance",
+      "Irritable bowel syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of chronic or malabsorptive diarrhoea (coeliac disease, tropical sprue), Cryptosporidiosis and other protozoal",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Coeliac disease",
+      "Tropical sprue",
+      "Small intestinal bacterial overgrowth",
+      "Inflammatory bowel disease"
     ],
-    [
-     "Management Strategy",
-     "Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Repeated stool microscopy for cysts and trophozoites",
+      "Stool antigen detection (ELISA) or PCR for greater sensitivity",
+      "Duodenal aspirate or biopsy in difficult cases",
+      "Assessment for malabsorption and nutritional status in chronic disease",
+      "Evaluation for immunoglobulin deficiency in recurrent or refractory infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Severe dehydration or significant weight loss, particularly in young children",
+      "Malabsorption with nutritional deficiency and growth faltering",
+      "Persistent or relapsing infection suggesting underlying immunodeficiency",
+      "Failure to respond to standard therapy, prompting reassessment of the diagnosis"
+    ],
+    "prognosis": "Most cases respond well to antiprotozoal therapy with full recovery. Untreated or recurrent infection, especially in children, can cause lasting malabsorption and growth impairment, and reinfection is common where sanitation is poor.",
+    "pitfalls": [
+      "Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding",
+      "Overlooking it as a treatable cause of chronic diarrhoea and malabsorption",
+      "Missing underlying immunodeficiency in recurrent or refractory cases",
+      "Neglecting water and hygiene measures, leading to reinfection or household spread"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or albendazole as alternatives",
+      "Rehydrate and correct malabsorption and nutritional deficiencies, with temporary lactose avoidance where intolerance develops",
+      "Manage refractory infection with extended or combination therapy, checking adherence and excluding reinfection",
+      "Reinforce public health measures of safe water, sanitation, hand hygiene, and treatment of symptomatic household contacts",
+      "Investigate for immunoglobulin deficiency in recurrent or treatment-refractory disease",
+      "Provide nutritional rehabilitation and growth monitoring in affected children"
     ]
-   ],
-   "caption": "Overview comparison matrix for giardiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "giardiasis-real-image",
-   "title": "Giardiasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "giardiasis-pathway",
+      "title": "Giardiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated water or food, or person to person",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dehydration or significant weight loss, particularly in young children",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeated stool microscopy for cysts and trophozoites, Stool antigen detection (ELISA) or PCR for greater sensitivity, Duodenal aspirate or biopsy in difficult cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or albendazole as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of giardiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "giardiasis-matrix",
+      "title": "Giardiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A protozoal infection of the small intestine caused by Giardia, acquired by faecal-oral spread of cysts through contaminated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeated stool microscopy for cysts and trophozoites, Stool antigen detection (ELISA) or PCR for greater sensitivity, Duodenal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of chronic or malabsorptive diarrhoea (coeliac disease, tropical sprue), Cryptosporidiosis and other protozoal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a nitroimidazole antiprotozoal such as metronidazole or tinidazole as first-line therapy, with nitazoxanide or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding giardiasis on the basis of a single negative stool sample despite intermittent cyst shedding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for giardiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 215-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "giardiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated stool microscopy for cysts and trophozoites",
+          "cells": [
+            {
+              "text": "Repeated, since shedding is intermittent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool antigen detection or PCR",
+          "cells": [
+            {
+              "text": "More sensitive detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal aspirate or biopsy",
+          "cells": [
+            {
+              "text": "Difficult cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption and nutritional assessment",
+          "cells": [
+            {
+              "text": "Chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin evaluation",
+          "cells": [
+            {
+              "text": "Recurrent or refractory infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giardiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Chronic malabsorptive diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Inflammatory mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptosporidiosis and other protozoal enteritis",
+          "cells": [
+            {
+              "text": "Same clinical picture from another protozoan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giardiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitroimidazole antiprotozoal",
+          "cells": [
+            {
+              "text": "Metronidazole or tinidazole first-line; nitazoxanide or albendazole as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and nutritional repair",
+          "cells": [
+            {
+              "text": "Correct malabsorption and deficiencies; temporary lactose avoidance if intolerance develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory infection",
+          "cells": [
+            {
+              "text": "Extended or combination therapy; check adherence and exclude reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health measures",
+          "cells": [
+            {
+              "text": "Safe water, sanitation, hand hygiene and treatment of symptomatic household contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin deficiency check",
+          "cells": [
+            {
+              "text": "Recurrent or treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation in children",
+          "cells": [
+            {
+              "text": "Growth monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "giardiasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnosis of intestinal protozoal infections",
+      "rowHeader": "Parasite",
+      "columns": [
+        "Stool O+P",
+        "Fecal acid-fast stain",
+        "Stool antigen immunoassays",
+        "Other"
+      ],
+      "rows": [
+        {
+          "parameter": "Giardia",
+          "cells": [
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryptosporidium",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isospora",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyclospora",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microsporidia",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Special fecal stains, tissue biopsies"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on stool O+P (ova and parasites) is not shown. A blank source cell is shown here as Not listed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "giardiasis-dx-mgmt",
+      "title": "Diagnosis and management of Giardiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected giardiasis: chronic or relapsing diarrhoea with malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, growth faltering, recurrent infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration for severe dehydration, particularly in young children",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated stool microscopy, stool antigen or PCR, and duodenal aspirate if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cysts or trophozoites found on repeated microscopy or antigen testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, bacterial overgrowth, IBD or cryptosporidiosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nitroimidazole such as metronidazole or tinidazole as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rehydrate and correct malabsorption and nutritional deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extended or combination therapy for refractory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Public health measures and treatment of symptomatic household contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover fully; recurrent untreated infection can cause lasting malabsorption",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

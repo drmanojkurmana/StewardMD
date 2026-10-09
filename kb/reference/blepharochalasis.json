@@ -1,167 +1,222 @@
 {
- "id": "blepharochalasis",
- "name": "Blepharochalasis",
- "aliases": [
-  "blepharochalasis syndrome"
- ],
- "class": "non_infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Oculoplastic surgery references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
-   "Repeated attacks stretch and thin the eyelid skin, leaving redundant, atrophic, crinkled tissue",
-   "It is distinct from dermatochalasis, which is age-related redundant lid skin without inflammatory episodes",
-   "Chronic changes can include ptosis, lacrimal gland prolapse and fat atrophy or herniation",
-   "It usually affects the upper lids and may be unilateral or bilateral",
-   "Surgery is deferred until the disease has quiesced, as operating during active swelling gives poor results"
+  "id": "blepharochalasis",
+  "name": "Blepharochalasis",
+  "aliases": [
+    "blepharochalasis syndrome"
   ],
-  "pathophysiology": "Blepharochalasis is characterised by recurrent bouts of eyelid angio-oedema-like swelling of uncertain cause, thought to involve localised inflammation with elastolysis. Repeated inflammatory episodes degrade elastic fibres in the eyelid skin, producing progressive atrophy, laxity and thinning, and can weaken the levator aponeurosis and orbital septum, leading to ptosis, fat herniation and prolapse of the lacrimal gland. The condition tends to enter a quiescent phase in later life once the acute episodes subside.",
-  "additionalDifferentials": [
-   "Dermatochalasis",
-   "Allergic or angioneurotic eyelid oedema",
-   "Floppy eyelid syndrome",
-   "Thyroid eye disease",
-   "Cutis laxa or other elastic-tissue disorder"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the history of recurrent painless lid swelling",
-   "Documentation of episodes and resulting lid changes",
-   "Exclusion of allergic, thyroid and systemic causes of lid oedema",
-   "Assessment of levator function and lacrimal gland position",
-   "Photography to monitor progression and quiescence"
-  ],
-  "redFlags": [
-   "Features suggesting an alternative systemic cause of recurrent oedema",
-   "Rapidly progressive changes",
-   "Functional visual impairment from ptosis or dermatochalasis",
-   "Signs of thyroid eye disease"
-  ],
-  "prognosis": "The condition is benign but episodes can recur for years before quiescence; surgical correction of the residual deformity gives good results once the disease is inactive.",
-  "pitfalls": [
-   "Confusing it with simple age-related dermatochalasis",
-   "Operating during active inflammatory episodes",
-   "Overlooking associated ptosis or lacrimal gland prolapse",
-   "Failing to exclude allergic or systemic causes of lid oedema"
-  ],
-  "references": [
-   "Oculoplastic surgery references (standard reference)",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor results",
-   "Exclude allergic, thyroid and systemic causes of recurrent eyelid oedema during active episodes",
-   "Monitor episodes and progression with serial documentation and photography",
-   "Once quiescent, surgically correct the residual deformity with blepharoplasty and excision of redundant atrophic skin, levator aponeurosis repair for ptosis and repositioning of a prolapsed lacrimal gland",
-   "Reassure the patient that the condition is benign and tends to settle in later life",
-   "Refer to oculoplastic surgery for assessment and reconstruction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blepharochalasis-pathway",
-   "title": "Blepharochalasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting an alternative systemic cause of recurrent oedema",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the history of recurrent painless lid swelling, Documentation of episodes and resulting lid changes, Exclusion of allergic, thyroid and systemic causes of lid oedema"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor results"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with simple age-related dermatochalasis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blepharochalasis."
-  }
- ],
- "tables": [
-  {
-   "id": "blepharochalasis-matrix",
-   "title": "Blepharochalasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oculoplastic surgery references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
+      "Repeated attacks stretch and thin the eyelid skin, leaving redundant, atrophic, crinkled tissue",
+      "It is distinct from dermatochalasis, which is age-related redundant lid skin without inflammatory episodes",
+      "Chronic changes can include ptosis, lacrimal gland prolapse and fat atrophy or herniation",
+      "It usually affects the upper lids and may be unilateral or bilateral",
+      "Surgery is deferred until the disease has quiesced, as operating during active swelling gives poor results"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the history of recurrent painless lid swelling, Documentation of episodes and resulting lid changes,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blepharochalasis is characterised by recurrent bouts of eyelid angio-oedema-like swelling of uncertain cause, thought to involve localised inflammation with elastolysis. Repeated inflammatory episodes degrade elastic fibres in the eyelid skin, producing progressive atrophy, laxity and thinning, and can weaken the levator aponeurosis and orbital septum, leading to ptosis, fat herniation and prolapse of the lacrimal gland. The condition tends to enter a quiescent phase in later life once the acute episodes subside.",
+    "additionalDifferentials": [
+      "Dermatochalasis",
+      "Allergic or angioneurotic eyelid oedema",
+      "Floppy eyelid syndrome",
+      "Thyroid eye disease",
+      "Cutis laxa or other elastic-tissue disorder"
     ],
-    [
-     "Primary Differentials",
-     "Dermatochalasis, Allergic or angioneurotic eyelid oedema, Floppy eyelid syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the history of recurrent painless lid swelling",
+      "Documentation of episodes and resulting lid changes",
+      "Exclusion of allergic, thyroid and systemic causes of lid oedema",
+      "Assessment of levator function and lacrimal gland position",
+      "Photography to monitor progression and quiescence"
     ],
-    [
-     "Management Strategy",
-     "Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting an alternative systemic cause of recurrent oedema",
+      "Rapidly progressive changes",
+      "Functional visual impairment from ptosis or dermatochalasis",
+      "Signs of thyroid eye disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with simple age-related dermatochalasis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but episodes can recur for years before quiescence; surgical correction of the residual deformity gives good results once the disease is inactive.",
+    "pitfalls": [
+      "Confusing it with simple age-related dermatochalasis",
+      "Operating during active inflammatory episodes",
+      "Overlooking associated ptosis or lacrimal gland prolapse",
+      "Failing to exclude allergic or systemic causes of lid oedema"
+    ],
+    "references": [
+      "Oculoplastic surgery references (standard reference)",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor results",
+      "Exclude allergic, thyroid and systemic causes of recurrent eyelid oedema during active episodes",
+      "Monitor episodes and progression with serial documentation and photography",
+      "Once quiescent, surgically correct the residual deformity with blepharoplasty and excision of redundant atrophic skin, levator aponeurosis repair for ptosis and repositioning of a prolapsed lacrimal gland",
+      "Reassure the patient that the condition is benign and tends to settle in later life",
+      "Refer to oculoplastic surgery for assessment and reconstruction"
     ]
-   ],
-   "caption": "Overview comparison matrix for blepharochalasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blepharochalasis-real-image",
-   "title": "Blepharochalasis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "blepharochalasis-pathway",
+      "title": "Blepharochalasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting an alternative systemic cause of recurrent oedema",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the history of recurrent painless lid swelling, Documentation of episodes and resulting lid changes, Exclusion of allergic, thyroid and systemic causes of lid oedema"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor results"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with simple age-related dermatochalasis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blepharochalasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blepharochalasis-matrix",
+      "title": "Blepharochalasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare condition of recurrent episodes of painless upper eyelid oedema, typically beginning in youth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the history of recurrent painless lid swelling, Documentation of episodes and resulting lid changes,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dermatochalasis, Allergic or angioneurotic eyelid oedema, Floppy eyelid syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Defer surgical intervention until the disease has entered a quiescent phase, as operating during active swelling gives poor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with simple age-related dermatochalasis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blepharochalasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oculoplastic surgery references; Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blepharochalasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements in blepharochalasis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "History of recurrent painless lid swelling", "cells": [{"text": "Clinical diagnosis, typically beginning in youth"}], "cite": "c1"},
+        {"parameter": "Documentation of episodes and lid changes", "cells": [{"text": "Repeated attacks with thin, atrophic, crinkled skin"}], "cite": "c1"},
+        {"parameter": "Exclusion of allergic, thyroid and systemic causes", "cells": [{"text": "Excludes other causes of lid oedema"}], "cite": "c1"},
+        {"parameter": "Levator function and lacrimal gland position", "cells": [{"text": "Ptosis and lacrimal gland prolapse"}], "cite": "c1"},
+        {"parameter": "Photography", "cells": [{"text": "Progression and quiescence over time"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharochalasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike eyelid conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Dermatochalasis", "cells": [{"text": "Age-related redundant skin without inflammatory episodes"}], "cite": "c1"},
+        {"parameter": "Thyroid eye disease", "cells": [{"text": "Signs of thyroid eye disease are a red flag; excluded by thyroid assessment"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharochalasis-treatment",
+      "kind": "treatment",
+      "title": "Management options in blepharochalasis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Defer surgery", "cells": [{"text": "Defer surgical intervention until the disease is quiescent"}, {"text": "Surgery during active swelling gives poor results"}], "cite": "c1"},
+        {"parameter": "Exclude other causes", "cells": [{"text": "Exclude allergic, thyroid and systemic causes during active episodes"}, {"text": "Alternative causes of oedema"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Serial documentation and photography"}, {"text": "Tracks progression and quiescence"}], "cite": "c1"},
+        {"parameter": "Surgical correction", "cells": [{"text": "Blepharoplasty, levator aponeurosis repair for ptosis, and repositioning of a prolapsed lacrimal gland"}, {"text": "Once quiescent"}], "cite": "c1"},
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the condition is benign and tends to settle in later life"}, {"text": "Benign course"}], "cite": "c1"},
+        {"parameter": "Oculoplastic referral", "cells": [{"text": "Oculoplastic surgery assessment and reconstruction"}, {"text": "Specialist care"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blepharochalasis-dx-mgmt",
+      "title": "Diagnosis and management of blepharochalasis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Recurrent painless upper eyelid swelling since youth, leaving thin crinkled skin", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: signs of thyroid eye disease, rapid change, or visual impairment from ptosis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: thyroid and systemic assessment; oculoplastic review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Document episodes; exclude allergic and thyroid causes of oedema", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Disease quiescent between episodes?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Surgery: blepharoplasty, levator repair for ptosis, lacrimal gland repositioning", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Defer surgery; monitor episodes and photograph progression", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Good results once inactive; the condition is benign", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

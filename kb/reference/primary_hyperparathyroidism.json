@@ -1,174 +1,542 @@
 {
- "id": "primary_hyperparathyroidism",
- "name": "Primary hyperparathyroidism",
- "aliases": [
-  "PHPT",
-  "primary HPT",
-  "parathyroid adenoma-related hypercalcaemia"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
-   "The biochemical hallmark is hypercalcaemia with a PTH level that is elevated or inappropriately normal rather than suppressed",
-   "Most cases are due to a single parathyroid adenoma; a minority reflect four-gland hyperplasia or, rarely, carcinoma",
-   "Classic symptomatic disease is summarised as stones, bones, abdominal groans, and psychiatric moans, but most patients are now asymptomatic",
-   "Skeletal effects include reduced bone density, particularly at cortical sites such as the distal radius, with fracture risk",
-   "Renal complications include nephrolithiasis, nephrocalcinosis, and impaired renal function; urine calcium helps assess risk",
-   "Familial hypocalciuric hypercalcaemia is a key mimic and is distinguished by a low urinary calcium excretion",
-   "Parathyroidectomy is curative and is indicated for symptomatic disease and for asymptomatic patients meeting defined criteria on calcium, bone density, renal parameters, or age"
+  "id": "primary_hyperparathyroidism",
+  "name": "Primary hyperparathyroidism",
+  "aliases": [
+    "PHPT",
+    "primary HPT",
+    "parathyroid adenoma-related hypercalcaemia"
   ],
-  "pathophysiology": "Primary hyperparathyroidism results from autonomous overproduction of parathyroid hormone by one or more parathyroid glands, usually a benign adenoma. Excess PTH raises serum calcium by increasing bone resorption, enhancing renal tubular calcium reabsorption, and stimulating renal conversion of vitamin D to its active form, which augments intestinal calcium absorption. PTH also promotes renal phosphate excretion, tending to lower serum phosphate. The loss of normal calcium-mediated negative feedback on the parathyroid glands sustains the hypercalcaemia. Chronic PTH excess drives cortical bone loss and contributes to hypercalciuria and stone formation.",
-  "additionalDifferentials": [
-   "Malignancy-associated hypercalcaemia (PTH-related peptide or bony metastases)",
-   "Familial hypocalciuric hypercalcaemia",
-   "Tertiary hyperparathyroidism in chronic kidney disease",
-   "Vitamin D or vitamin A intoxication",
-   "Granulomatous disease producing excess active vitamin D",
-   "Thiazide diuretic or lithium effect on calcium"
-  ],
-  "additionalInvestigations": [
-   "Simultaneous serum calcium (corrected or ionised) and intact PTH",
-   "Serum phosphate, magnesium, and renal function",
-   "25-hydroxyvitamin D level, as deficiency can worsen disease and confound interpretation",
-   "24-hour urinary calcium to help distinguish FHH and assess stone risk",
-   "Bone mineral density including a cortical site such as the distal one-third radius",
-   "Renal imaging for stones or nephrocalcinosis, and parathyroid localisation studies before surgery"
-  ],
-  "redFlags": [
-   "Severe hypercalcaemia with dehydration, confusion, or cardiac dysrhythmia",
-   "Rapidly rising calcium with a palpable neck mass suggesting parathyroid carcinoma",
-   "Acute kidney injury or symptomatic nephrolithiasis",
-   "Very high PTH with markedly elevated calcium out of keeping with a simple adenoma"
-  ],
-  "prognosis": "Successful parathyroidectomy cures the disease, halts bone loss with partial recovery of density, and reduces stone recurrence; asymptomatic patients managed conservatively often remain stable but require monitoring, and parathyroid carcinoma has a worse outlook with a tendency to recur.",
-  "pitfalls": [
-   "Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery",
-   "Overlooking concurrent vitamin D deficiency that masks or modifies the biochemical picture",
-   "Attributing hypercalcaemia to hyperparathyroidism when PTH is actually suppressed, indicating another cause",
-   "Neglecting bone density and renal assessment that determine the need for surgery in asymptomatic patients"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria, guided by preoperative localisation imaging",
-   "Calcimimetic therapy such as cinacalcet to control hypercalcaemia in those unsuitable for or awaiting surgery",
-   "Antiresorptive therapy with a bisphosphonate to protect cortical bone density, with judicious correction of coexisting vitamin D deficiency",
-   "Adequate hydration and avoidance of aggravating factors such as thiazide diuretics, lithium and immobilisation",
-   "Surveillance in conservatively managed patients with serial serum calcium, renal function, bone mineral density and renal tract imaging for stones",
-   "Emergency management of hypercalcaemic crisis with intravenous isotonic saline rehydration followed by calcitonin and an intravenous bisphosphonate",
-   "Referral to an endocrine surgeon, and genetic evaluation for familial syndromes such as multiple endocrine neoplasia when disease is early-onset, multiglandular or familial"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_hyperparathyroidism-pathway",
-   "title": "Primary hyperparathyroidism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypercalcaemia with dehydration, confusion, or cardiac dysrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Simultaneous serum calcium (corrected or ionised) and intact PTH, Serum phosphate, magnesium, and renal function, 25-hydroxyvitamin D level, as deficiency can worsen disease and confound interpretation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria, guided by preoperative localisation imaging"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary hyperparathyroidism."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_hyperparathyroidism-matrix",
-   "title": "Primary hyperparathyroidism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
+      "The biochemical hallmark is hypercalcaemia with a PTH level that is elevated or inappropriately normal rather than suppressed",
+      "Most cases are due to a single parathyroid adenoma; a minority reflect four-gland hyperplasia or, rarely, carcinoma",
+      "Classic symptomatic disease is summarised as stones, bones, abdominal groans, and psychiatric moans, but most patients are now asymptomatic",
+      "Skeletal effects include reduced bone density, particularly at cortical sites such as the distal radius, with fracture risk",
+      "Renal complications include nephrolithiasis, nephrocalcinosis, and impaired renal function; urine calcium helps assess risk",
+      "Familial hypocalciuric hypercalcaemia is a key mimic and is distinguished by a low urinary calcium excretion",
+      "Parathyroidectomy is curative and is indicated for symptomatic disease and for asymptomatic patients meeting defined criteria on calcium, bone density, renal parameters, or age"
     ],
-    [
-     "Key Investigations",
-     "Simultaneous serum calcium (corrected or ionised) and intact PTH, Serum phosphate, magnesium, and renal function,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary hyperparathyroidism results from autonomous overproduction of parathyroid hormone by one or more parathyroid glands, usually a benign adenoma. Excess PTH raises serum calcium by increasing bone resorption, enhancing renal tubular calcium reabsorption, and stimulating renal conversion of vitamin D to its active form, which augments intestinal calcium absorption. PTH also promotes renal phosphate excretion, tending to lower serum phosphate. The loss of normal calcium-mediated negative feedback on the parathyroid glands sustains the hypercalcaemia. Chronic PTH excess drives cortical bone loss and contributes to hypercalciuria and stone formation.",
+    "additionalDifferentials": [
+      "Malignancy-associated hypercalcaemia (PTH-related peptide or bony metastases)",
+      "Familial hypocalciuric hypercalcaemia",
+      "Tertiary hyperparathyroidism in chronic kidney disease",
+      "Vitamin D or vitamin A intoxication",
+      "Granulomatous disease producing excess active vitamin D",
+      "Thiazide diuretic or lithium effect on calcium"
     ],
-    [
-     "Primary Differentials",
-     "Malignancy-associated hypercalcaemia (PTH-related peptide or bony metastases), Familial hypocalciuric hypercalcaemia, Tertiary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Simultaneous serum calcium (corrected or ionised) and intact PTH",
+      "Serum phosphate, magnesium, and renal function",
+      "25-hydroxyvitamin D level, as deficiency can worsen disease and confound interpretation",
+      "24-hour urinary calcium to help distinguish FHH and assess stone risk",
+      "Bone mineral density including a cortical site such as the distal one-third radius",
+      "Renal imaging for stones or nephrocalcinosis, and parathyroid localisation studies before surgery"
     ],
-    [
-     "Management Strategy",
-     "Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria,",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypercalcaemia with dehydration, confusion, or cardiac dysrhythmia",
+      "Rapidly rising calcium with a palpable neck mass suggesting parathyroid carcinoma",
+      "Acute kidney injury or symptomatic nephrolithiasis",
+      "Very high PTH with markedly elevated calcium out of keeping with a simple adenoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "Successful parathyroidectomy cures the disease, halts bone loss with partial recovery of density, and reduces stone recurrence; asymptomatic patients managed conservatively often remain stable but require monitoring, and parathyroid carcinoma has a worse outlook with a tendency to recur.",
+    "pitfalls": [
+      "Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery",
+      "Overlooking concurrent vitamin D deficiency that masks or modifies the biochemical picture",
+      "Attributing hypercalcaemia to hyperparathyroidism when PTH is actually suppressed, indicating another cause",
+      "Neglecting bone density and renal assessment that determine the need for surgery in asymptomatic patients"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria, guided by preoperative localisation imaging",
+      "Calcimimetic therapy such as cinacalcet to control hypercalcaemia in those unsuitable for or awaiting surgery",
+      "Antiresorptive therapy with a bisphosphonate to protect cortical bone density, with judicious correction of coexisting vitamin D deficiency",
+      "Adequate hydration and avoidance of aggravating factors such as thiazide diuretics, lithium and immobilisation",
+      "Surveillance in conservatively managed patients with serial serum calcium, renal function, bone mineral density and renal tract imaging for stones",
+      "Emergency management of hypercalcaemic crisis with intravenous isotonic saline rehydration followed by calcitonin and an intravenous bisphosphonate",
+      "Referral to an endocrine surgeon, and genetic evaluation for familial syndromes such as multiple endocrine neoplasia when disease is early-onset, multiglandular or familial"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary hyperparathyroidism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-hyperparathyroidism-real-image",
-   "title": "Primary hyperparathyroidism: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "primary_hyperparathyroidism-pathway",
+      "title": "Primary hyperparathyroidism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypercalcaemia with dehydration, confusion, or cardiac dysrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Simultaneous serum calcium (corrected or ionised) and intact PTH, Serum phosphate, magnesium, and renal function, 25-hydroxyvitamin D level, as deficiency can worsen disease and confound interpretation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria, guided by preoperative localisation imaging"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary hyperparathyroidism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_hyperparathyroidism-matrix",
+      "title": "Primary hyperparathyroidism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The leading cause of hypercalcaemia in ambulatory patients, most often detected incidentally on routine biochemistry",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Simultaneous serum calcium (corrected or ionised) and intact PTH, Serum phosphate, magnesium, and renal function,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malignancy-associated hypercalcaemia (PTH-related peptide or bony metastases), Familial hypocalciuric hypercalcaemia, Tertiary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Parathyroidectomy as the curative treatment for symptomatic disease and for asymptomatic patients meeting operative criteria,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish familial hypocalciuric hypercalcaemia, leading to unnecessary neck surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary hyperparathyroidism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 353-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hyperparathyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Simultaneous serum calcium (corrected or ionised) and intact PTH",
+          "cells": [
+            {
+              "text": "Calcium and PTH measured together"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate, magnesium and renal function",
+          "cells": [
+            {
+              "text": "Phosphate, magnesium and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D level",
+          "cells": [
+            {
+              "text": "Deficiency, which can worsen disease and confound interpretation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary calcium",
+          "cells": [
+            {
+              "text": "Distinguishes FHH and assesses stone risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density including the distal one-third radius",
+          "cells": [
+            {
+              "text": "Cortical bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging and parathyroid localisation studies",
+          "cells": [
+            {
+              "text": "Stones, nephrocalcinosis and localisation before surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperparathyroidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignancy-associated hypercalcaemia",
+          "cells": [
+            {
+              "text": "PTH-related peptide or bony metastases"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypocalciuric hypercalcaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "24-hour urinary calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tertiary hyperparathyroidism in chronic kidney disease",
+          "cells": [
+            {
+              "text": "Chronic kidney disease"
+            },
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperparathyroidism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parathyroidectomy",
+          "cells": [
+            {
+              "text": "Curative for symptomatic disease and for asymptomatic patients meeting operative criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcimimetic therapy",
+          "cells": [
+            {
+              "text": "Cinacalcet to control hypercalcaemia in those unsuitable for or awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiresorptive therapy",
+          "cells": [
+            {
+              "text": "Bisphosphonate to protect cortical bone; judicious correction of vitamin D deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and avoidance",
+          "cells": [
+            {
+              "text": "Avoid thiazide diuretics, lithium and immobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance if managed conservatively",
+          "cells": [
+            {
+              "text": "Serial calcium, renal function, bone mineral density and renal imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercalcaemic crisis",
+          "cells": [
+            {
+              "text": "IV isotonic saline rehydration, then calcitonin and an IV bisphosphonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and genetics",
+          "cells": [
+            {
+              "text": "Endocrine surgeon; genetic evaluation for familial syndromes such as MEN when early-onset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperparathyroidism-treatment-2",
+      "kind": "treatment",
+      "title": "Guidelines for surgery in asymptomatic primary hyperparathyroidism",
+      "rowHeader": "Option",
+      "columns": [
+        "Guideline"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium (above normal)",
+          "cells": [
+            {
+              "text": "More than 1 mg/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "24-h urinary calcium",
+          "cells": [
+            {
+              "text": "No indication"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Creatinine clearance (calculated)",
+          "cells": [
+            {
+              "text": "Below 60 mL/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone density",
+          "cells": [
+            {
+              "text": "T score below -2.5 at any of 3 sites (b)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age",
+          "cells": [
+            {
+              "text": "Below 50"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes a and b are not shown on the printed page. The same table is printed again on page 150."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hyperparathyroidism-dx-mgmt",
+      "title": "Diagnosis and management of Primary hyperparathyroidism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary hyperparathyroidism: hypercalcaemia with intact PTH measured",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypercalcaemia with dehydration, confusion, dysrhythmia or acute kidney injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency treatment of hypercalcaemic crisis with IV saline and bisphosphonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium and intact PTH; phosphate, magnesium, renal function; vitamin D; urinary calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do calcium and PTH results confirm primary hyperparathyroidism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignancy, FHH or tertiary hyperparathyroidism; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parathyroidectomy as curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cinacalcet where surgery is unsuitable or awaited",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bisphosphonate to protect cortical bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance of conservatively managed patients with calcium and BMD",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endocrine surgical referral; genetic evaluation for early-onset or familial syndromes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

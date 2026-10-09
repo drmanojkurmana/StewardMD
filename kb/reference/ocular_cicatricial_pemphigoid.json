@@ -1,177 +1,489 @@
 {
- "id": "ocular_cicatricial_pemphigoid",
- "name": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid)",
- "aliases": [
-  "OCP",
-  "mucous membrane pemphigoid",
-  "cicatricial pemphigoid",
-  "benign mucous membrane pemphigoid"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / American Academy of Ophthalmology BCSC (External Disease and Cornea)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
-   "Early signs include chronic redness, irritation and a papillary or subtle scarring conjunctivitis that is easily mistaken for dry eye or chronic conjunctivitis",
-   "Progressive subconjunctival fibrosis causes fornix shortening (symblepharon), which is a key clinical marker of disease stage",
-   "Advanced disease leads to trichiasis, entropion, keratinisation, limbal stem cell failure, corneal scarring and blindness",
-   "Part of a systemic autoimmune blistering disorder that can also involve oral, nasopharyngeal, oesophageal and genital mucosae and the skin",
-   "Diagnosis is confirmed by conjunctival biopsy with direct immunofluorescence showing linear deposition of immunoglobulin and complement along the basement membrane zone",
-   "Management principles rely on systemic immunosuppression to halt progression, as topical therapy alone does not control the underlying inflammation",
-   "Ocular surgery can paradoxically flare disease, so inflammation should be controlled before any lid or surface procedure"
+  "id": "ocular_cicatricial_pemphigoid",
+  "name": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid)",
+  "aliases": [
+    "OCP",
+    "mucous membrane pemphigoid",
+    "cicatricial pemphigoid",
+    "benign mucous membrane pemphigoid"
   ],
-  "pathophysiology": "Ocular cicatricial pemphigoid is an autoimmune type II hypersensitivity disorder in which autoantibodies are directed against components of the epithelial basement membrane zone of mucous membranes. Antibody and complement deposition triggers chronic subepithelial inflammation and activation of fibroblasts, leading to progressive subconjunctival fibrosis and scarring. This cicatrisation destroys goblet cells and accessory lacrimal tissue, shortens the fornices and produces symblepharon, while lid malposition and trichiasis further damage the ocular surface. Loss of limbal stem cells and severe aqueous and mucin deficiency culminate in corneal keratinisation, scarring and blindness.",
-  "additionalDifferentials": [
-   "Stevens-Johnson syndrome and toxic epidermal necrolysis with ocular scarring",
-   "Chemical or thermal ocular surface burns",
-   "Chronic atopic keratoconjunctivitis",
-   "Drug-induced (pseudo)pemphigoid from topical medications",
-   "Trachoma-related conjunctival scarring",
-   "Graft-versus-host disease affecting the ocular surface",
-   "Rosacea-associated cicatrising conjunctivitis"
-  ],
-  "additionalInvestigations": [
-   "Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition",
-   "Serial documentation of fornix depth and symblepharon to stage and monitor disease",
-   "Slit-lamp assessment of tear film, corneal surface and lid margins",
-   "Systemic review and referral for oral, nasopharyngeal, oesophageal and cutaneous mucosal involvement",
-   "Serological testing for circulating anti-basement membrane antibodies where available",
-   "Assessment of limbal stem cell function before considering surgical intervention"
-  ],
-  "redFlags": [
-   "Rapidly progressive fornix shortening or corneal involvement indicating aggressive disease",
-   "Oesophageal or laryngeal mucosal involvement risking stricture and airway compromise",
-   "Corneal ulceration or perforation from surface failure",
-   "Acute worsening after ocular surgery signalling a disease flare"
-  ],
-  "prognosis": "Without systemic immunosuppression the disease tends to progress relentlessly to bilateral blindness, but early control of inflammation can arrest scarring and preserve vision; established cicatricial damage is generally irreversible.",
-  "pitfalls": [
-   "Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation",
-   "Relying on topical therapy alone when systemic immunosuppression is required",
-   "Operating on lids or the ocular surface during active inflammation and precipitating a flare",
-   "Overlooking a drug-induced pseudopemphigoid pattern from chronic topical medication",
-   "Failing to screen for extraocular mucosal disease that carries its own morbidity"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "American Academy of Ophthalmology Basic and Clinical Science Course"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate, methotrexate or azathioprine and to cyclophosphamide, with rituximab or intravenous immunoglobulin for refractory or rapidly progressive disease",
-   "Ocular surface support with preservative-free lubricants, treatment of aqueous and mucin deficiency, and punctal occlusion",
-   "Lid and lash management with epilation and surgical correction of trichiasis and entropion, alongside control of associated blepharitis",
-   "Monitoring of disease activity by serial documentation of fornix depth and symblepharon, avoiding elective ocular surgery during active inflammation which can flare cicatrisation",
-   "Treatment of acute inflammatory exacerbations by intensifying systemic immunosuppression rather than relying on topical steroids alone",
-   "Multidisciplinary care with oral medicine, ENT, dermatology and gastroenterology for oral, nasopharyngeal, oesophageal and cutaneous involvement",
-   "Ocular surface reconstruction, including limbal stem cell transplantation and keratoprosthesis, for end-stage disease once inflammation is controlled"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ocular_cicatricial_pemphigoid-pathway",
-   "title": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive fornix shortening or corneal involvement indicating aggressive disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition, Serial documentation of fornix depth and symblepharon to stage and monitor disease, Slit-lamp assessment of tear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate, methotrexate or azathioprine and to cyclophosphamide, with rituximab or intravenous"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ocular cicatricial pemphigoid (mucous membrane pemphigoid)."
-  }
- ],
- "tables": [
-  {
-   "id": "ocular_cicatricial_pemphigoid-matrix",
-   "title": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / American Academy of Ophthalmology BCSC (External Disease and Cornea)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
+      "Early signs include chronic redness, irritation and a papillary or subtle scarring conjunctivitis that is easily mistaken for dry eye or chronic conjunctivitis",
+      "Progressive subconjunctival fibrosis causes fornix shortening (symblepharon), which is a key clinical marker of disease stage",
+      "Advanced disease leads to trichiasis, entropion, keratinisation, limbal stem cell failure, corneal scarring and blindness",
+      "Part of a systemic autoimmune blistering disorder that can also involve oral, nasopharyngeal, oesophageal and genital mucosae and the skin",
+      "Diagnosis is confirmed by conjunctival biopsy with direct immunofluorescence showing linear deposition of immunoglobulin and complement along the basement membrane zone",
+      "Management principles rely on systemic immunosuppression to halt progression, as topical therapy alone does not control the underlying inflammation",
+      "Ocular surgery can paradoxically flare disease, so inflammation should be controlled before any lid or surface procedure"
     ],
-    [
-     "Key Investigations",
-     "Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition, Serial documentation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ocular cicatricial pemphigoid is an autoimmune type II hypersensitivity disorder in which autoantibodies are directed against components of the epithelial basement membrane zone of mucous membranes. Antibody and complement deposition triggers chronic subepithelial inflammation and activation of fibroblasts, leading to progressive subconjunctival fibrosis and scarring. This cicatrisation destroys goblet cells and accessory lacrimal tissue, shortens the fornices and produces symblepharon, while lid malposition and trichiasis further damage the ocular surface. Loss of limbal stem cells and severe aqueous and mucin deficiency culminate in corneal keratinisation, scarring and blindness.",
+    "additionalDifferentials": [
+      "Stevens-Johnson syndrome and toxic epidermal necrolysis with ocular scarring",
+      "Chemical or thermal ocular surface burns",
+      "Chronic atopic keratoconjunctivitis",
+      "Drug-induced (pseudo)pemphigoid from topical medications",
+      "Trachoma-related conjunctival scarring",
+      "Graft-versus-host disease affecting the ocular surface",
+      "Rosacea-associated cicatrising conjunctivitis"
     ],
-    [
-     "Primary Differentials",
-     "Stevens-Johnson syndrome and toxic epidermal necrolysis with ocular scarring, Chemical or thermal ocular surface burns, Chronic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition",
+      "Serial documentation of fornix depth and symblepharon to stage and monitor disease",
+      "Slit-lamp assessment of tear film, corneal surface and lid margins",
+      "Systemic review and referral for oral, nasopharyngeal, oesophageal and cutaneous mucosal involvement",
+      "Serological testing for circulating anti-basement membrane antibodies where available",
+      "Assessment of limbal stem cell function before considering surgical intervention"
     ],
-    [
-     "Management Strategy",
-     "Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate,",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive fornix shortening or corneal involvement indicating aggressive disease",
+      "Oesophageal or laryngeal mucosal involvement risking stricture and airway compromise",
+      "Corneal ulceration or perforation from surface failure",
+      "Acute worsening after ocular surgery signalling a disease flare"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without systemic immunosuppression the disease tends to progress relentlessly to bilateral blindness, but early control of inflammation can arrest scarring and preserve vision; established cicatricial damage is generally irreversible.",
+    "pitfalls": [
+      "Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation",
+      "Relying on topical therapy alone when systemic immunosuppression is required",
+      "Operating on lids or the ocular surface during active inflammation and precipitating a flare",
+      "Overlooking a drug-induced pseudopemphigoid pattern from chronic topical medication",
+      "Failing to screen for extraocular mucosal disease that carries its own morbidity"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "American Academy of Ophthalmology Basic and Clinical Science Course"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate, methotrexate or azathioprine and to cyclophosphamide, with rituximab or intravenous immunoglobulin for refractory or rapidly progressive disease",
+      "Ocular surface support with preservative-free lubricants, treatment of aqueous and mucin deficiency, and punctal occlusion",
+      "Lid and lash management with epilation and surgical correction of trichiasis and entropion, alongside control of associated blepharitis",
+      "Monitoring of disease activity by serial documentation of fornix depth and symblepharon, avoiding elective ocular surgery during active inflammation which can flare cicatrisation",
+      "Treatment of acute inflammatory exacerbations by intensifying systemic immunosuppression rather than relying on topical steroids alone",
+      "Multidisciplinary care with oral medicine, ENT, dermatology and gastroenterology for oral, nasopharyngeal, oesophageal and cutaneous involvement",
+      "Ocular surface reconstruction, including limbal stem cell transplantation and keratoprosthesis, for end-stage disease once inflammation is controlled"
     ]
-   ],
-   "caption": "Overview comparison matrix for ocular cicatricial pemphigoid (mucous membrane pemphigoid)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ocular-cicatricial-pemphigoid-real-image",
-   "title": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ocular_cicatricial_pemphigoid-pathway",
+      "title": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive fornix shortening or corneal involvement indicating aggressive disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition, Serial documentation of fornix depth and symblepharon to stage and monitor disease, Slit-lamp assessment of tear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate, methotrexate or azathioprine and to cyclophosphamide, with rituximab or intravenous"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ocular cicatricial pemphigoid (mucous membrane pemphigoid)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ocular_cicatricial_pemphigoid-matrix",
+      "title": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic, bilateral, progressive cicatrising conjunctivitis, usually affecting older adults and more common in women",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Conjunctival biopsy with direct immunofluorescence for linear basement membrane immunoreactant deposition, Serial documentation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stevens-Johnson syndrome and toxic epidermal necrolysis with ocular scarring, Chemical or thermal ocular surface burns, Chronic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic immunosuppression is the mainstay, stepped from dapsone in mild disease to antimetabolites such as mycophenolate,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic conjunctival inflammation to dry eye and missing early cicatrisation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ocular cicatricial pemphigoid (mucous membrane pemphigoid)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / American Academy of Ophthalmology BCSC (External Disease and Cornea)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ocular_cicatricial_pemphigoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Conjunctival biopsy with direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear deposition of immunoglobulin and complement along the basement membrane zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fornix depth and symblepharon",
+          "cells": [
+            {
+              "text": "Fornix shortening marks disease stage and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp review of tear film, cornea and lid margins",
+          "cells": [
+            {
+              "text": "Advanced disease: trichiasis, entropion, keratinisation and corneal scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mucosal review",
+          "cells": [
+            {
+              "text": "Oral, nasopharyngeal, oesophageal, genital and cutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limbal stem cell function assessment",
+          "cells": [
+            {
+              "text": "Limbal stem cell failure, which limits surgical options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_cicatricial_pemphigoid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced pseudopemphigoid",
+          "cells": [
+            {
+              "text": "Pattern caused by chronic topical medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dry eye disease",
+          "cells": [
+            {
+              "text": "Chronic redness that is easily mistaken for it; early cicatrisation is then missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_cicatricial_pemphigoid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic immunosuppression (mainstay)",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Dapsone for mild disease, then mycophenolate, methotrexate or azathioprine, then cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For refractory or rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Preservative-free lubricants, treatment of aqueous and mucin deficiency, punctal occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid and lash management",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Epilation and surgical correction of trichiasis and entropion; control of blepharitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and surgical timing",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Serial fornix depth; avoid elective ocular surgery during active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flare treatment",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Intensify systemic immunosuppression rather than relying on topical steroids alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Oral medicine, ENT, dermatology and gastroenterology for mucosal and skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface reconstruction for end-stage disease",
+          "cells": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "Limbal stem cell transplantation and keratoprosthesis once inflammation is controlled"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ocular_cicatricial_pemphigoid-dx-mgmt",
+      "title": "Diagnosis and management of Ocular cicatricial pemphigoid (mucous membrane pemphigoid)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic bilateral cicatrising conjunctivitis in an older adult, mistaken for dry eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fast fornix shortening, corneal, oesophageal or laryngeal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensify systemic immunosuppression; urgent corneal and airway review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Conjunctival biopsy with direct immunofluorescence; charting fornix depth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show linear basement membrane immunoreactant deposition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dry eye, drug-induced pseudopemphigoid or other scarring conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic immunosuppression: dapsone, then mycophenolate, methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preservative-free lubricants and punctal occlusion for the ocular surface",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lid surgery for trichiasis and entropion; defer elective surgery during inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary care; surface reconstruction for end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early control can arrest scarring; established scarring is generally irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

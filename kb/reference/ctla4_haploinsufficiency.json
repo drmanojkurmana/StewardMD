@@ -1,178 +1,465 @@
 {
- "id": "ctla4_haploinsufficiency",
- "name": "CTLA4 haploinsufficiency",
- "aliases": [
-  "CTLA4",
-  "CHAI",
-  "CTLA-4 haploinsufficiency with autoimmune infiltration",
-  "CTLA4 insufficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of immunodeficiency rather than pure infection susceptibility",
-   "Common features include autoimmune cytopenias, enteropathy with chronic diarrhoea, and lymphocytic infiltration of the lungs, gut, liver, marrow and central nervous system",
-   "Progressive hypogammaglobulinaemia frequently develops, so the phenotype can overlap with and be misdiagnosed as common variable immunodeficiency",
-   "Respiratory disease may take the form of granulomatous-lymphocytic interstitial lung disease",
-   "Penetrance is incomplete and expressivity highly variable, so asymptomatic carriers occur within affected families",
-   "Inheritance is autosomal dominant, resulting from heterozygous loss-of-function variants that reduce the dose of functional CTLA-4 protein",
-   "There is an increased risk of lymphoma and of end-organ autoimmune damage over time",
-   "CTLA4-Ig fusion therapy (abatacept) can replace the missing inhibitory signal and control severe dysregulation, and haematopoietic stem cell transplantation is used in refractory disease"
+  "id": "ctla4_haploinsufficiency",
+  "name": "CTLA4 haploinsufficiency",
+  "aliases": [
+    "CTLA4",
+    "CHAI",
+    "CTLA-4 haploinsufficiency with autoimmune infiltration",
+    "CTLA4 insufficiency"
   ],
-  "pathophysiology": "CTLA-4 is an inhibitory receptor expressed by regulatory and activated T cells that outcompetes the co-stimulatory receptor CD28 for the ligands CD80 and CD86 and removes them from antigen-presenting cells by transendocytosis, thereby restraining T-cell activation. Heterozygous loss-of-function variants leave insufficient CTLA-4 protein (haploinsufficiency), impairing regulatory T-cell function and allowing unchecked effector T-cell activation and lymphocytic infiltration of multiple organs. The resulting loss of tolerance manifests as widespread autoimmunity and lymphoproliferation, while progressive B-cell dysfunction produces hypogammaglobulinaemia and susceptibility to infection.",
-  "additionalDifferentials": [
-   "Common variable immunodeficiency",
-   "LRBA deficiency",
-   "Autoimmune lymphoproliferative syndrome (ALPS)",
-   "IPEX and IPEX-like syndromes",
-   "Activated PI3K-delta syndrome",
-   "Sarcoidosis or other granulomatous disease"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subsets and quantification of regulatory T cells",
-   "Flow cytometry for CTLA-4 protein expression and transendocytosis function where available",
-   "Serum immunoglobulins and specific antibody responses documenting evolving hypogammaglobulinaemia",
-   "Autoantibody screen and direct antiglobulin test for autoimmune cytopenias",
-   "CTLA4 gene sequencing for heterozygous loss-of-function variants",
-   "Organ-directed imaging and biopsy for interstitial lung disease or enteropathy"
-  ],
-  "redFlags": [
-   "New or progressive neurological deficit from CNS lymphocytic infiltration",
-   "Rapidly enlarging lymphadenopathy or organomegaly suggesting lymphoma",
-   "Severe autoimmune cytopenia with bleeding or profound anaemia",
-   "Progressive breathlessness from interstitial lung disease",
-   "Refractory enteropathy with malnutrition"
-  ],
-  "prognosis": "The disorder is chronic and often progressive with cumulative autoimmune organ damage and a raised lymphoma risk; targeted CTLA4-Ig replacement and, in severe cases, transplantation can achieve substantial disease control and improve outlook.",
-  "pitfalls": [
-   "Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect",
-   "Overlooking asymptomatic carriers because of incomplete penetrance",
-   "Attributing multi-organ infiltration to sarcoidosis or malignancy without immunological evaluation",
-   "Failing to distinguish it from the phenotypically similar LRBA deficiency",
-   "Delaying targeted therapy until irreversible organ damage has occurred"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation",
-   "Immunoglobulin replacement therapy for hypogammaglobulinaemia and recurrent infection",
-   "Immunosuppression for autoimmune and lymphoproliferative manifestations, using corticosteroids and agents such as sirolimus",
-   "Antimicrobial prophylaxis and prompt treatment of infections given the immunodeficiency component",
-   "Haematopoietic stem cell transplantation in severe or refractory disease",
-   "Surveillance for lymphoma and for organ involvement including interstitial lung disease, enteropathy and autoimmune cytopenias",
-   "Clinical genetics referral and family screening, counselling on autosomal dominant inheritance with incomplete penetrance and variable expressivity",
-   "Coordinated care through clinical immunology with organ-specialist input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ctla4_haploinsufficiency-pathway",
-   "title": "CTLA4 haploinsufficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of immunodeficiency rather than pure infection susceptibility",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive neurological deficit from CNS lymphocytic infiltration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subsets and quantification of regulatory T cells, Flow cytometry for CTLA-4 protein expression and transendocytosis function where available, Serum immunoglobulins and specific antibody responses documenting"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ctla4 haploinsufficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "ctla4_haploinsufficiency-matrix",
-   "title": "CTLA4 haploinsufficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of immunodeficiency rather than pure infection susceptibility",
+      "Common features include autoimmune cytopenias, enteropathy with chronic diarrhoea, and lymphocytic infiltration of the lungs, gut, liver, marrow and central nervous system",
+      "Progressive hypogammaglobulinaemia frequently develops, so the phenotype can overlap with and be misdiagnosed as common variable immunodeficiency",
+      "Respiratory disease may take the form of granulomatous-lymphocytic interstitial lung disease",
+      "Penetrance is incomplete and expressivity highly variable, so asymptomatic carriers occur within affected families",
+      "Inheritance is autosomal dominant, resulting from heterozygous loss-of-function variants that reduce the dose of functional CTLA-4 protein",
+      "There is an increased risk of lymphoma and of end-organ autoimmune damage over time",
+      "CTLA4-Ig fusion therapy (abatacept) can replace the missing inhibitory signal and control severe dysregulation, and haematopoietic stem cell transplantation is used in refractory disease"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subsets and quantification of regulatory T cells, Flow cytometry for CTLA-4 protein expression and transendocytosis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CTLA-4 is an inhibitory receptor expressed by regulatory and activated T cells that outcompetes the co-stimulatory receptor CD28 for the ligands CD80 and CD86 and removes them from antigen-presenting cells by transendocytosis, thereby restraining T-cell activation. Heterozygous loss-of-function variants leave insufficient CTLA-4 protein (haploinsufficiency), impairing regulatory T-cell function and allowing unchecked effector T-cell activation and lymphocytic infiltration of multiple organs. The resulting loss of tolerance manifests as widespread autoimmunity and lymphoproliferation, while progressive B-cell dysfunction produces hypogammaglobulinaemia and susceptibility to infection.",
+    "additionalDifferentials": [
+      "Common variable immunodeficiency",
+      "LRBA deficiency",
+      "Autoimmune lymphoproliferative syndrome (ALPS)",
+      "IPEX and IPEX-like syndromes",
+      "Activated PI3K-delta syndrome",
+      "Sarcoidosis or other granulomatous disease"
     ],
-    [
-     "Primary Differentials",
-     "Common variable immunodeficiency, LRBA deficiency, Autoimmune lymphoproliferative syndrome (ALPS)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subsets and quantification of regulatory T cells",
+      "Flow cytometry for CTLA-4 protein expression and transendocytosis function where available",
+      "Serum immunoglobulins and specific antibody responses documenting evolving hypogammaglobulinaemia",
+      "Autoantibody screen and direct antiglobulin test for autoimmune cytopenias",
+      "CTLA4 gene sequencing for heterozygous loss-of-function variants",
+      "Organ-directed imaging and biopsy for interstitial lung disease or enteropathy"
     ],
-    [
-     "Management Strategy",
-     "Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation",
-     "Core treatment modality"
+    "redFlags": [
+      "New or progressive neurological deficit from CNS lymphocytic infiltration",
+      "Rapidly enlarging lymphadenopathy or organomegaly suggesting lymphoma",
+      "Severe autoimmune cytopenia with bleeding or profound anaemia",
+      "Progressive breathlessness from interstitial lung disease",
+      "Refractory enteropathy with malnutrition"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is chronic and often progressive with cumulative autoimmune organ damage and a raised lymphoma risk; targeted CTLA4-Ig replacement and, in severe cases, transplantation can achieve substantial disease control and improve outlook.",
+    "pitfalls": [
+      "Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect",
+      "Overlooking asymptomatic carriers because of incomplete penetrance",
+      "Attributing multi-organ infiltration to sarcoidosis or malignancy without immunological evaluation",
+      "Failing to distinguish it from the phenotypically similar LRBA deficiency",
+      "Delaying targeted therapy until irreversible organ damage has occurred"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation",
+      "Immunoglobulin replacement therapy for hypogammaglobulinaemia and recurrent infection",
+      "Immunosuppression for autoimmune and lymphoproliferative manifestations, using corticosteroids and agents such as sirolimus",
+      "Antimicrobial prophylaxis and prompt treatment of infections given the immunodeficiency component",
+      "Haematopoietic stem cell transplantation in severe or refractory disease",
+      "Surveillance for lymphoma and for organ involvement including interstitial lung disease, enteropathy and autoimmune cytopenias",
+      "Clinical genetics referral and family screening, counselling on autosomal dominant inheritance with incomplete penetrance and variable expressivity",
+      "Coordinated care through clinical immunology with organ-specialist input"
     ]
-   ],
-   "caption": "Overview comparison matrix for ctla4 haploinsufficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ctla4-haploinsufficiency-real-image",
-   "title": "CTLA4 haploinsufficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ctla4_haploinsufficiency-pathway",
+      "title": "CTLA4 haploinsufficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of immunodeficiency rather than pure infection susceptibility",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive neurological deficit from CNS lymphocytic infiltration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subsets and quantification of regulatory T cells, Flow cytometry for CTLA-4 protein expression and transendocytosis function where available, Serum immunoglobulins and specific antibody responses documenting"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ctla4 haploinsufficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ctla4_haploinsufficiency-matrix",
+      "title": "CTLA4 haploinsufficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a disorder of immune dysregulation combining autoimmunity, lymphoproliferation and a variable degree of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subsets and quantification of regulatory T cells, Flow cytometry for CTLA-4 protein expression and transendocytosis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Common variable immunodeficiency, LRBA deficiency, Autoimmune lymphoproliferative syndrome (ALPS)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted replacement of CTLA-4 function with the CTLA4-Ig fusion protein abatacept to restrain effector T-cell activation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing common variable immunodeficiency and stopping short of genetic testing that reveals a treatable pathway defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ctla4 haploinsufficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ctla4_haploinsufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets and regulatory T-cell quantification",
+          "cells": [
+            {
+              "text": "Regulatory T-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for CTLA-4 expression",
+          "cells": [
+            {
+              "text": "Protein expression and function where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and antibody responses",
+          "cells": [
+            {
+              "text": "Evolving hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody screen and direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTLA4 gene sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous loss-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ctla4_haploinsufficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Pitfall: diagnosed without finding the treatable CTLA4 pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LRBA deficiency",
+          "cells": [
+            {
+              "text": "Named look-alike with autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune lymphoproliferative syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with lymphoproliferation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ctla4_haploinsufficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CTLA4-Ig (abatacept)",
+          "cells": [
+            {
+              "text": "Targeted replacement of CTLA-4 function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Hypogammaglobulinaemia and recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Corticosteroids and sirolimus for autoimmune and lymphoproliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Antimicrobial prophylaxis and prompt treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Lymphoma and organ involvement including lung and gut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with incomplete penetrance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ctla4_haploinsufficiency-dx-mgmt",
+      "title": "Diagnosis and management of CTLA4 haploinsufficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CTLA4 haploinsufficiency: autoimmune cytopenias with hypogammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (neurological deficit, lymphoma features, severe cytopenia, lung disease)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review for lymphoma or severe cytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Regulatory T cells; CTLA-4 expression; immunoglobulins; autoantibodies; CTLA4 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CTLA4 sequencing show a heterozygous loss-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CVID, LRBA deficiency or ALPS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Abatacept as targeted replacement of CTLA-4 function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunoglobulin replacement for hypogammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for autoimmune and lymphoproliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for lymphoma and organ involvement; family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and often progressive with cumulative organ damage and raised lymphoma risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

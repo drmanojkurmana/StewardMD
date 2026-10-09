@@ -1,172 +1,432 @@
 {
- "id": "ethylene_glycol_poisoning",
- "name": "Ethylene glycol poisoning",
- "aliases": [
-  "antifreeze poisoning",
-  "ethylene glycol toxicity",
-  "glycol poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids that cause severe high anion-gap metabolic acidosis and organ injury",
-   "The course classically evolves in stages: an early neurological phase resembling alcohol intoxication, then a cardiopulmonary phase, and finally a renal phase with acute kidney injury",
-   "Precipitation of calcium oxalate crystals causes renal tubular damage and produces hypocalcaemia, which may manifest as tetany or QT prolongation",
-   "Suspect it in unexplained high anion-gap metabolic acidosis with a raised osmolal gap; calcium oxalate crystals may be seen on urine microscopy",
-   "Fomepizole is the antidote of choice, inhibiting alcohol dehydrogenase to prevent formation of toxic acids; ethanol is an alternative where fomepizole is not available",
-   "Cofactor therapy with thiamine and pyridoxine is given to divert metabolism toward non-toxic products",
-   "Haemodialysis removes the parent compound and its metabolites and corrects acidosis, and is indicated for severe acidosis, renal failure, or high levels",
-   "Urinary fluorescence under Wood's lamp (from fluorescein added to some antifreeze) is unreliable and should not be used to confirm or exclude the diagnosis"
+  "id": "ethylene_glycol_poisoning",
+  "name": "Ethylene glycol poisoning",
+  "aliases": [
+    "antifreeze poisoning",
+    "ethylene glycol toxicity",
+    "glycol poisoning"
   ],
-  "pathophysiology": "Ethylene glycol is oxidised by alcohol dehydrogenase to glycoaldehyde, then to glycolic acid and finally oxalic acid. Glycolic acid is the main contributor to the profound high anion-gap metabolic acidosis, while oxalic acid combines with calcium to form insoluble calcium oxalate crystals that deposit in renal tubules, causing acute kidney injury, and lower serum calcium. Accumulating toxic metabolites also impair oxidative metabolism, producing lactic acidosis. The parent alcohol raises serum osmolality, giving an early osmolal gap that later falls as the anion gap widens.",
-  "additionalDifferentials": [
-   "Methanol poisoning",
-   "Diabetic ketoacidosis",
-   "Lactic acidosis from other causes",
-   "Salicylate poisoning",
-   "Uraemia and other high anion-gap acidoses"
-  ],
-  "additionalInvestigations": [
-   "Serum ethylene glycol level where available",
-   "Arterial blood gas with calculated anion gap",
-   "Serum osmolality with calculated osmolal gap",
-   "Serum calcium, electrolytes, urea, and creatinine",
-   "Urine microscopy for calcium oxalate crystals and ECG for QT interval"
-  ],
-  "redFlags": [
-   "Severe high anion-gap metabolic acidosis",
-   "Acute kidney injury with oliguria",
-   "Hypocalcaemia with tetany, seizures, or QT prolongation",
-   "Reduced consciousness or coma",
-   "Rising anion gap with a falling osmolal gap indicating ongoing metabolism to toxic acids"
-  ],
-  "prognosis": "Prompt antidote and, when needed, dialysis before significant metabolite accumulation usually allow full recovery; delayed treatment can lead to permanent renal failure, neurological injury, and death.",
-  "pitfalls": [
-   "False reassurance during the early intoxication-like phase before acidosis and renal injury develop",
-   "Delaying antidote to await a confirmatory ethylene glycol level in a suggestive presentation",
-   "Relying on urine fluorescence to make or exclude the diagnosis",
-   "Missing life-threatening hypocalcaemia and its cardiac effects"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an alternative where it is unavailable",
-   "Haemodialysis to remove ethylene glycol and its metabolites and correct acidosis in severe poisoning or established renal failure",
-   "Intravenous sodium bicarbonate to correct the high anion-gap metabolic acidosis",
-   "Cofactor therapy with thiamine and pyridoxine to divert metabolism toward non-toxic products",
-   "Cautious calcium replacement for symptomatic hypocalcaemia, with ECG monitoring of the QT interval",
-   "Contact the toxicology or poisons service and monitor blood gases, the anion and osmolal gaps and renal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ethylene_glycol_poisoning-pathway",
-   "title": "Ethylene glycol poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids that cause severe high anion-gap metabolic acidosis and organ injury",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe high anion-gap metabolic acidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ethylene glycol level where available, Arterial blood gas with calculated anion gap, Serum osmolality with calculated osmolal gap"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an alternative where it is unavailable"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: False reassurance during the early intoxication-like phase before acidosis and renal injury develop"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ethylene glycol poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "ethylene_glycol_poisoning-matrix",
-   "title": "Ethylene glycol poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids that cause severe high anion-gap metabolic acidosis and organ injury",
+      "The course classically evolves in stages: an early neurological phase resembling alcohol intoxication, then a cardiopulmonary phase, and finally a renal phase with acute kidney injury",
+      "Precipitation of calcium oxalate crystals causes renal tubular damage and produces hypocalcaemia, which may manifest as tetany or QT prolongation",
+      "Suspect it in unexplained high anion-gap metabolic acidosis with a raised osmolal gap; calcium oxalate crystals may be seen on urine microscopy",
+      "Fomepizole is the antidote of choice, inhibiting alcohol dehydrogenase to prevent formation of toxic acids; ethanol is an alternative where fomepizole is not available",
+      "Cofactor therapy with thiamine and pyridoxine is given to divert metabolism toward non-toxic products",
+      "Haemodialysis removes the parent compound and its metabolites and corrects acidosis, and is indicated for severe acidosis, renal failure, or high levels",
+      "Urinary fluorescence under Wood's lamp (from fluorescein added to some antifreeze) is unreliable and should not be used to confirm or exclude the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Serum ethylene glycol level where available, Arterial blood gas with calculated anion gap, Serum osmolality with calculated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ethylene glycol is oxidised by alcohol dehydrogenase to glycoaldehyde, then to glycolic acid and finally oxalic acid. Glycolic acid is the main contributor to the profound high anion-gap metabolic acidosis, while oxalic acid combines with calcium to form insoluble calcium oxalate crystals that deposit in renal tubules, causing acute kidney injury, and lower serum calcium. Accumulating toxic metabolites also impair oxidative metabolism, producing lactic acidosis. The parent alcohol raises serum osmolality, giving an early osmolal gap that later falls as the anion gap widens.",
+    "additionalDifferentials": [
+      "Methanol poisoning",
+      "Diabetic ketoacidosis",
+      "Lactic acidosis from other causes",
+      "Salicylate poisoning",
+      "Uraemia and other high anion-gap acidoses"
     ],
-    [
-     "Primary Differentials",
-     "Methanol poisoning, Diabetic ketoacidosis, Lactic acidosis from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum ethylene glycol level where available",
+      "Arterial blood gas with calculated anion gap",
+      "Serum osmolality with calculated osmolal gap",
+      "Serum calcium, electrolytes, urea, and creatinine",
+      "Urine microscopy for calcium oxalate crystals and ECG for QT interval"
     ],
-    [
-     "Management Strategy",
-     "Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe high anion-gap metabolic acidosis",
+      "Acute kidney injury with oliguria",
+      "Hypocalcaemia with tetany, seizures, or QT prolongation",
+      "Reduced consciousness or coma",
+      "Rising anion gap with a falling osmolal gap indicating ongoing metabolism to toxic acids"
     ],
-    [
-     "Clinical Pitfall",
-     "False reassurance during the early intoxication-like phase before acidosis and renal injury develop",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt antidote and, when needed, dialysis before significant metabolite accumulation usually allow full recovery; delayed treatment can lead to permanent renal failure, neurological injury, and death.",
+    "pitfalls": [
+      "False reassurance during the early intoxication-like phase before acidosis and renal injury develop",
+      "Delaying antidote to await a confirmatory ethylene glycol level in a suggestive presentation",
+      "Relying on urine fluorescence to make or exclude the diagnosis",
+      "Missing life-threatening hypocalcaemia and its cardiac effects"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an alternative where it is unavailable",
+      "Haemodialysis to remove ethylene glycol and its metabolites and correct acidosis in severe poisoning or established renal failure",
+      "Intravenous sodium bicarbonate to correct the high anion-gap metabolic acidosis",
+      "Cofactor therapy with thiamine and pyridoxine to divert metabolism toward non-toxic products",
+      "Cautious calcium replacement for symptomatic hypocalcaemia, with ECG monitoring of the QT interval",
+      "Contact the toxicology or poisons service and monitor blood gases, the anion and osmolal gaps and renal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for ethylene glycol poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ethylene-glycol-poisoning-real-image",
-   "title": "Ethylene glycol poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ethylene_glycol_poisoning-pathway",
+      "title": "Ethylene glycol poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids that cause severe high anion-gap metabolic acidosis and organ injury",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe high anion-gap metabolic acidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ethylene glycol level where available, Arterial blood gas with calculated anion gap, Serum osmolality with calculated osmolal gap"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an alternative where it is unavailable"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: False reassurance during the early intoxication-like phase before acidosis and renal injury develop"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ethylene glycol poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ethylene_glycol_poisoning-matrix",
+      "title": "Ethylene glycol poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ethylene glycol, found in antifreeze and coolants, is itself relatively harmless but is metabolised to glycolic and oxalic acids",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ethylene glycol level where available, Arterial blood gas with calculated anion gap, Serum osmolality with calculated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Methanol poisoning, Diabetic ketoacidosis, Lactic acidosis from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Fomepizole, an alcohol dehydrogenase inhibitor, as the antidote of choice to block formation of toxic acids, with ethanol as an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "False reassurance during the early intoxication-like phase before acidosis and renal injury develop",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ethylene glycol poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ethylene_glycol_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ethylene glycol level",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas with calculated anion gap",
+          "cells": [
+            {
+              "text": "High anion-gap metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum osmolality with osmolal gap",
+          "cells": [
+            {
+              "text": "Raised osmolal gap in toxic alcohol ingestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, electrolytes, urea and creatinine",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine microscopy and ECG",
+          "cells": [
+            {
+              "text": "Calcium oxalate crystals; QT interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ethylene_glycol_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fomepizole",
+          "cells": [
+            {
+              "text": "Antidote of choice; blocks alcohol dehydrogenase to prevent formation of toxic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ethanol",
+          "cells": [
+            {
+              "text": "Alternative where fomepizole is not available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Severe poisoning or established renal failure; removes ethylene glycol and metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Correction of high anion-gap metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine and pyridoxine",
+          "cells": [
+            {
+              "text": "Cofactor therapy to divert metabolism to non-toxic products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious calcium replacement",
+          "cells": [
+            {
+              "text": "Symptomatic hypocalcaemia, with ECG monitoring of the QT interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology service and monitoring",
+          "cells": [
+            {
+              "text": "Blood gases, anion and osmolal gaps, renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ethylene_glycol_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Ethylene glycol poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained high anion-gap acidosis with raised osmolal gap after antifreeze exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe acidosis, oliguric kidney injury, hypocalcaemia with QT change, coma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Contact the poisons service; start fomepizole without waiting for levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ethylene glycol level if available; blood gas, anion and osmolal gaps, calcium, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Toxic alcohol poisoning supported by the gaps or an ethylene glycol level?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider methanol poisoning, ketoacidosis, lactic acidosis or uraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fomepizole as antidote of choice; ethanol if unavailable",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thiamine and pyridoxine cofactor therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate for high anion-gap acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haemodialysis for severe acidosis or renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cautious calcium for symptomatic hypocalcaemia, with QT monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt antidote and dialysis usually allow full recovery; delay risks lasting harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

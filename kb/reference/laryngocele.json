@@ -1,172 +1,470 @@
 {
- "id": "laryngocele",
- "name": "Laryngocele",
- "aliases": [
-  "laryngeal air sac",
-  "saccular cyst (air-filled)",
-  "internal laryngocele",
-  "external laryngocele"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external, or combined depending on its relation to the thyrohyoid membrane",
-   "Internal laryngoceles bulge into the false fold and aryepiglottic fold causing hoarseness or a globus sensation, while external ones present as a reducible lateral neck swelling",
-   "Classically expands with raised intralaryngeal pressure, as in glassblowers, wind-instrument players, and chronic coughers",
-   "The lesion may enlarge on a Valsalva manoeuvre and produce a resonant swelling that empties with gentle compression",
-   "An air-filled cavity becoming fluid-filled or infected forms a laryngopyocele, which can present acutely with pain and airway threat",
-   "Imaging with CT demonstrates the air- or fluid-filled sac and defines its internal and external components",
-   "Definitive treatment is surgical excision, by an endoscopic or external cervical approach according to type and size"
+  "id": "laryngocele",
+  "name": "Laryngocele",
+  "aliases": [
+    "laryngeal air sac",
+    "saccular cyst (air-filled)",
+    "internal laryngocele",
+    "external laryngocele"
   ],
-  "pathophysiology": "A laryngocele is an air-containing dilatation of the laryngeal saccule, the small blind-ending pouch that arises from the anterior ventricle between the true and false vocal folds. Persistently raised pressure within the larynx, or narrowing of the saccular opening, allows air to distend the saccule while maintaining its communication with the airway. If it stays medial to the thyrohyoid membrane it remains internal; if it herniates through the membrane alongside the superior laryngeal neurovascular bundle it becomes external. Because a saccular obstruction can also produce a fluid-filled saccular cyst, an important consideration is a coexisting mucosal neoplasm at the saccular opening, particularly in adults.",
-  "additionalDifferentials": [
-   "Saccular cyst (fluid-filled)",
-   "Branchial cleft cyst",
-   "Thyroglossal or other cervical cystic swelling",
-   "Zenker (pharyngeal) pouch",
-   "Laryngopyocele",
-   "Supraglottic tumour obstructing the saccule"
-  ],
-  "additionalInvestigations": [
-   "Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion",
-   "CT of the neck to characterise the air- or fluid-filled sac and its components",
-   "MRI where soft-tissue detail or an underlying tumour is in question",
-   "Careful endoscopic inspection of the ventricle and saccular opening for an obstructing lesion",
-   "Histology of the excised sac and any associated mucosal lesion"
-  ],
-  "redFlags": [
-   "An underlying obstructing tumour at the saccular opening, especially in an older adult who does not overuse the voice",
-   "Features of a laryngopyocele with pain, fever, and rapidly enlarging swelling threatening the airway",
-   "Progressive stridor or dyspnoea from a large internal component",
-   "Rapid or unilateral enlargement without a pressure-related occupation"
-  ],
-  "prognosis": "Surgical excision is usually curative with a low recurrence rate, and the outlook is excellent provided any underlying obstructing neoplasm is identified and treated and infective complications are avoided.",
-  "pitfalls": [
-   "Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult",
-   "Draining a laryngopyocele without addressing the underlying sac and airway risk",
-   "Underestimating the external component and planning an inadequate approach",
-   "Failing to warn wind players or glassblowers about the aggravating role of raised intralaryngeal pressure"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an external cervical approach for external or combined lesions, which is usually curative",
-   "Actively exclude and treat an underlying obstructing mucosal neoplasm at the saccular opening, particularly in adults",
-   "Treat a secondarily infected laryngopyocele with antibiotics and drainage while securing the airway",
-   "Advise modifying activities that raise intralaryngeal pressure, such as wind-instrument playing and glassblowing, and manage chronic cough",
-   "Manage acute airway threat from a large or infected sac with urgent airway protection",
-   "Send the excised sac and any mucosal lesion for histology and follow up for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "laryngocele-pathway",
-   "title": "Laryngocele: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external, or combined depending on its relation to the thyrohyoid membrane",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An underlying obstructing tumour at the saccular opening, especially in an older adult who does not overuse the voice",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion, CT of the neck to characterise the air- or fluid-filled sac and its components, MRI where soft-tissue detail or an underlying"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an external cervical approach for external or combined lesions, which is usually curative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of laryngocele."
-  }
- ],
- "tables": [
-  {
-   "id": "laryngocele-matrix",
-   "title": "Laryngocele: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external, or combined depending on its relation to the thyrohyoid membrane",
+      "Internal laryngoceles bulge into the false fold and aryepiglottic fold causing hoarseness or a globus sensation, while external ones present as a reducible lateral neck swelling",
+      "Classically expands with raised intralaryngeal pressure, as in glassblowers, wind-instrument players, and chronic coughers",
+      "The lesion may enlarge on a Valsalva manoeuvre and produce a resonant swelling that empties with gentle compression",
+      "An air-filled cavity becoming fluid-filled or infected forms a laryngopyocele, which can present acutely with pain and airway threat",
+      "Imaging with CT demonstrates the air- or fluid-filled sac and defines its internal and external components",
+      "Definitive treatment is surgical excision, by an endoscopic or external cervical approach according to type and size"
     ],
-    [
-     "Key Investigations",
-     "Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion, CT of the neck to characterise the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A laryngocele is an air-containing dilatation of the laryngeal saccule, the small blind-ending pouch that arises from the anterior ventricle between the true and false vocal folds. Persistently raised pressure within the larynx, or narrowing of the saccular opening, allows air to distend the saccule while maintaining its communication with the airway. If it stays medial to the thyrohyoid membrane it remains internal; if it herniates through the membrane alongside the superior laryngeal neurovascular bundle it becomes external. Because a saccular obstruction can also produce a fluid-filled saccular cyst, an important consideration is a coexisting mucosal neoplasm at the saccular opening, particularly in adults.",
+    "additionalDifferentials": [
+      "Saccular cyst (fluid-filled)",
+      "Branchial cleft cyst",
+      "Thyroglossal or other cervical cystic swelling",
+      "Zenker (pharyngeal) pouch",
+      "Laryngopyocele",
+      "Supraglottic tumour obstructing the saccule"
     ],
-    [
-     "Primary Differentials",
-     "Saccular cyst (fluid-filled), Branchial cleft cyst, Thyroglossal or other cervical cystic swelling",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion",
+      "CT of the neck to characterise the air- or fluid-filled sac and its components",
+      "MRI where soft-tissue detail or an underlying tumour is in question",
+      "Careful endoscopic inspection of the ventricle and saccular opening for an obstructing lesion",
+      "Histology of the excised sac and any associated mucosal lesion"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an",
-     "Core treatment modality"
+    "redFlags": [
+      "An underlying obstructing tumour at the saccular opening, especially in an older adult who does not overuse the voice",
+      "Features of a laryngopyocele with pain, fever, and rapidly enlarging swelling threatening the airway",
+      "Progressive stridor or dyspnoea from a large internal component",
+      "Rapid or unilateral enlargement without a pressure-related occupation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical excision is usually curative with a low recurrence rate, and the outlook is excellent provided any underlying obstructing neoplasm is identified and treated and infective complications are avoided.",
+    "pitfalls": [
+      "Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult",
+      "Draining a laryngopyocele without addressing the underlying sac and airway risk",
+      "Underestimating the external component and planning an inadequate approach",
+      "Failing to warn wind players or glassblowers about the aggravating role of raised intralaryngeal pressure"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an external cervical approach for external or combined lesions, which is usually curative",
+      "Actively exclude and treat an underlying obstructing mucosal neoplasm at the saccular opening, particularly in adults",
+      "Treat a secondarily infected laryngopyocele with antibiotics and drainage while securing the airway",
+      "Advise modifying activities that raise intralaryngeal pressure, such as wind-instrument playing and glassblowing, and manage chronic cough",
+      "Manage acute airway threat from a large or infected sac with urgent airway protection",
+      "Send the excised sac and any mucosal lesion for histology and follow up for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for laryngocele."
-  }
- ],
- "diagrams": [
-  {
-   "id": "laryngocele-real-image",
-   "title": "Laryngocele: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "laryngocele-pathway",
+      "title": "Laryngocele: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external, or combined depending on its relation to the thyrohyoid membrane",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An underlying obstructing tumour at the saccular opening, especially in an older adult who does not overuse the voice",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion, CT of the neck to characterise the air- or fluid-filled sac and its components, MRI where soft-tissue detail or an underlying"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an external cervical approach for external or combined lesions, which is usually curative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of laryngocele."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "laryngocele-matrix",
+      "title": "Laryngocele: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal air-filled dilatation of the laryngeal saccule that communicates with the airway, classified as internal, external,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible fibreoptic laryngoscopy, ideally with a Valsalva manoeuvre to demonstrate expansion, CT of the neck to characterise the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Saccular cyst (fluid-filled), Branchial cleft cyst, Thyroglossal or other cervical cystic swelling",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical excision, using endoscopic marsupialisation or CO2 laser for internal laryngoceles and an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a laryngocele is purely idiopathic and missing an obstructing saccular tumour in an adult",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for laryngocele."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy with Valsalva",
+          "cells": [
+            {
+              "text": "Demonstrates expansion of the sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the neck",
+          "cells": [
+            {
+              "text": "Air- or fluid-filled sac and its internal and external components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue detail where an underlying tumour is in question"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful endoscopic inspection of the ventricle and saccular opening",
+          "cells": [
+            {
+              "text": "Obstructing lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised sac",
+          "cells": [
+            {
+              "text": "Associated mucosal lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Saccular cyst (fluid-filled)",
+          "cells": [
+            {
+              "text": "Fluid-filled rather than air-filled sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngopyocele",
+          "cells": [
+            {
+              "text": "Air-filled sac that has become fluid-filled or infected; acute pain and airway threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zenker (pharyngeal) pouch",
+          "cells": [
+            {
+              "text": "Pharyngeal pouch, not a laryngeal saccule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supraglottic tumour obstructing the saccule",
+          "cells": [
+            {
+              "text": "Obstructing tumour at the saccular opening, especially in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive excision",
+          "cells": [
+            {
+              "text": "Endoscopic marsupialisation or CO2 laser for internal laryngoceles; external cervical approach for external ones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude an obstructing neoplasm",
+          "cells": [
+            {
+              "text": "Actively excluded and treated, particularly in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infected laryngopyocele",
+          "cells": [
+            {
+              "text": "Antibiotics and drainage while securing the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid raised intralaryngeal pressure",
+          "cells": [
+            {
+              "text": "Wind-instrument playing and glassblowing; manage chronic cough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute airway threat",
+          "cells": [
+            {
+              "text": "Urgent airway protection from a large or infected sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology and follow-up",
+          "cells": [
+            {
+              "text": "Excised sac and any mucosal lesion sent for histology; recurrence surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngocele-dx-mgmt",
+      "title": "Diagnosis and management of Laryngocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Air-filled laryngeal swelling with hoarseness, globus or cough",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (older adult, obstructing mass, infected sac, progressive stridor)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway protection for an infected or large sac",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy with Valsalva, CT of the neck, MRI if tumour is in question",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a laryngocele confirmed, without an obstructing neoplasm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude obstructing saccular tumour; consider laryngopyocele or other cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical excision: endoscopic marsupialisation or CO2 laser for internal type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude and treat any obstructing mucosal neoplasm, especially in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics and drainage for an infected laryngopyocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid raised intralaryngeal pressure: wind instruments, glassblowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Send the excised sac and any mucosal lesion for histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excision usually curative with low recurrence when any neoplasm is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

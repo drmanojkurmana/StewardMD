@@ -1,175 +1,482 @@
 {
- "id": "lesch_nyhan_syndrome",
- "name": "Lesch-Nyhan syndrome",
- "aliases": [
-  "HPRT deficiency",
-  "HGPRT deficiency",
-  "hypoxanthine-guanine phosphoribosyltransferase deficiency",
-  "juvenile gout with choreoathetosis and self-mutilation"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost exclusively affects males",
-   "Loss of purine salvage drives overproduction of uric acid, causing hyperuricaemia, hyperuricosuria, gout and urate nephrolithiasis",
-   "The complete deficiency (classic Lesch-Nyhan syndrome) produces a triad of hyperuricaemia, a dystonic-choreoathetoid movement disorder and compulsive self-injurious behaviour",
-   "Self-mutilation, typically biting of the lips and fingers, is a distinctive and highly characteristic feature",
-   "Early clues include orange 'sand' (urate crystals) in the nappy and delayed motor development with evolving dystonia",
-   "Partial HPRT deficiency (Kelley-Seegmiller syndrome) causes hyperuricaemia and gout with little or no neurological involvement",
-   "Urate-lowering therapy controls the systemic complications but does not improve the neurological or behavioural features",
-   "Protective measures and behavioural strategies are needed to prevent self-inflicted injury"
+  "id": "lesch_nyhan_syndrome",
+  "name": "Lesch-Nyhan syndrome",
+  "aliases": [
+    "HPRT deficiency",
+    "HGPRT deficiency",
+    "hypoxanthine-guanine phosphoribosyltransferase deficiency",
+    "juvenile gout with choreoathetosis and self-mutilation"
   ],
-  "pathophysiology": "Hypoxanthine-guanine phosphoribosyltransferase catalyses the salvage of the purine bases hypoxanthine and guanine back into nucleotides. When the enzyme is deficient, salvage fails and the purine bases are instead degraded to uric acid, while de novo purine synthesis is disinhibited; the combined effect is marked uric acid overproduction with hyperuricaemia and its complications. The neurological and behavioural phenotype is less well understood but is linked to dysfunction of dopaminergic pathways in the basal ganglia, which correlates with the dystonia, choreoathetosis and compulsive self-injury. The severity of the phenotype tracks closely with the amount of residual enzyme activity.",
-  "additionalDifferentials": [
-   "Cerebral palsy (dyskinetic type)",
-   "Other causes of childhood dystonia and choreoathetosis",
-   "Primary or secondary hyperuricaemia and juvenile gout",
-   "Neuroacanthocytosis and other self-mutilation syndromes",
-   "Autism spectrum disorder with self-injurious behaviour",
-   "Other X-linked intellectual disability syndromes"
-  ],
-  "additionalInvestigations": [
-   "Serum and urine uric acid with the urinary urate-to-creatinine ratio",
-   "HPRT enzyme activity assay in erythrocytes or fibroblasts",
-   "Molecular genetic testing of HPRT1",
-   "Renal tract imaging for urate stones and nephrocalcinosis",
-   "Assessment of renal function",
-   "Developmental and behavioural evaluation"
-  ],
-  "redFlags": [
-   "Evolving dystonia with developmental delay in a young boy",
-   "Compulsive self-injurious behaviour, particularly self-biting",
-   "Urate crystals or stones with renal impairment",
-   "Acute urate nephropathy or obstructive uropathy"
-  ],
-  "prognosis": "Systemic urate complications can be controlled with urate-lowering therapy, preventing gout and nephropathy, but the neurological and behavioural features of the complete syndrome are not reversible and cause lifelong disability. Life expectancy is reduced, with renal failure and complications of the movement and behavioural disorder contributing to mortality.",
-  "pitfalls": [
-   "Assuming that urate-lowering therapy will improve neurological or behavioural symptoms",
-   "Misdiagnosing the movement disorder as dyskinetic cerebral palsy",
-   "Overlooking hyperuricaemia as a diagnostic clue in a boy with dystonia and self-injury",
-   "Failing to implement protective measures against self-mutilation"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate nephropathy",
-   "Generous fluid intake and urinary alkalinisation to reduce urate and xanthine stone formation",
-   "Treatment of the dystonic-choreoathetoid movement disorder with agents such as baclofen and benzodiazepines",
-   "Prevention of self-injurious behaviour with protective devices, lip and dental guards, sometimes dental extraction, alongside behavioural therapy",
-   "Multidisciplinary care involving neurology, metabolic medicine, physiotherapy, occupational therapy and psychiatry",
-   "Monitoring of renal function and imaging surveillance for urate stones and nephrocalcinosis",
-   "Genetic counselling and carrier testing for this X-linked recessive HPRT1 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lesch_nyhan_syndrome-pathway",
-   "title": "Lesch-Nyhan syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost exclusively affects males",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evolving dystonia with developmental delay in a young boy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and urine uric acid with the urinary urate-to-creatinine ratio, HPRT enzyme activity assay in erythrocytes or fibroblasts, Molecular genetic testing of HPRT1"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate nephropathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming that urate-lowering therapy will improve neurological or behavioural symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lesch-nyhan syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lesch_nyhan_syndrome-matrix",
-   "title": "Lesch-Nyhan syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost exclusively affects males",
+      "Loss of purine salvage drives overproduction of uric acid, causing hyperuricaemia, hyperuricosuria, gout and urate nephrolithiasis",
+      "The complete deficiency (classic Lesch-Nyhan syndrome) produces a triad of hyperuricaemia, a dystonic-choreoathetoid movement disorder and compulsive self-injurious behaviour",
+      "Self-mutilation, typically biting of the lips and fingers, is a distinctive and highly characteristic feature",
+      "Early clues include orange 'sand' (urate crystals) in the nappy and delayed motor development with evolving dystonia",
+      "Partial HPRT deficiency (Kelley-Seegmiller syndrome) causes hyperuricaemia and gout with little or no neurological involvement",
+      "Urate-lowering therapy controls the systemic complications but does not improve the neurological or behavioural features",
+      "Protective measures and behavioural strategies are needed to prevent self-inflicted injury"
     ],
-    [
-     "Key Investigations",
-     "Serum and urine uric acid with the urinary urate-to-creatinine ratio, HPRT enzyme activity assay in erythrocytes or fibroblasts,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypoxanthine-guanine phosphoribosyltransferase catalyses the salvage of the purine bases hypoxanthine and guanine back into nucleotides. When the enzyme is deficient, salvage fails and the purine bases are instead degraded to uric acid, while de novo purine synthesis is disinhibited; the combined effect is marked uric acid overproduction with hyperuricaemia and its complications. The neurological and behavioural phenotype is less well understood but is linked to dysfunction of dopaminergic pathways in the basal ganglia, which correlates with the dystonia, choreoathetosis and compulsive self-injury. The severity of the phenotype tracks closely with the amount of residual enzyme activity.",
+    "additionalDifferentials": [
+      "Cerebral palsy (dyskinetic type)",
+      "Other causes of childhood dystonia and choreoathetosis",
+      "Primary or secondary hyperuricaemia and juvenile gout",
+      "Neuroacanthocytosis and other self-mutilation syndromes",
+      "Autism spectrum disorder with self-injurious behaviour",
+      "Other X-linked intellectual disability syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Cerebral palsy (dyskinetic type), Other causes of childhood dystonia and choreoathetosis, Primary or secondary hyperuricaemia and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and urine uric acid with the urinary urate-to-creatinine ratio",
+      "HPRT enzyme activity assay in erythrocytes or fibroblasts",
+      "Molecular genetic testing of HPRT1",
+      "Renal tract imaging for urate stones and nephrocalcinosis",
+      "Assessment of renal function",
+      "Developmental and behavioural evaluation"
     ],
-    [
-     "Management Strategy",
-     "Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate",
-     "Core treatment modality"
+    "redFlags": [
+      "Evolving dystonia with developmental delay in a young boy",
+      "Compulsive self-injurious behaviour, particularly self-biting",
+      "Urate crystals or stones with renal impairment",
+      "Acute urate nephropathy or obstructive uropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming that urate-lowering therapy will improve neurological or behavioural symptoms",
-     "Prevent diagnostic or management error"
+    "prognosis": "Systemic urate complications can be controlled with urate-lowering therapy, preventing gout and nephropathy, but the neurological and behavioural features of the complete syndrome are not reversible and cause lifelong disability. Life expectancy is reduced, with renal failure and complications of the movement and behavioural disorder contributing to mortality.",
+    "pitfalls": [
+      "Assuming that urate-lowering therapy will improve neurological or behavioural symptoms",
+      "Misdiagnosing the movement disorder as dyskinetic cerebral palsy",
+      "Overlooking hyperuricaemia as a diagnostic clue in a boy with dystonia and self-injury",
+      "Failing to implement protective measures against self-mutilation"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate nephropathy",
+      "Generous fluid intake and urinary alkalinisation to reduce urate and xanthine stone formation",
+      "Treatment of the dystonic-choreoathetoid movement disorder with agents such as baclofen and benzodiazepines",
+      "Prevention of self-injurious behaviour with protective devices, lip and dental guards, sometimes dental extraction, alongside behavioural therapy",
+      "Multidisciplinary care involving neurology, metabolic medicine, physiotherapy, occupational therapy and psychiatry",
+      "Monitoring of renal function and imaging surveillance for urate stones and nephrocalcinosis",
+      "Genetic counselling and carrier testing for this X-linked recessive HPRT1 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for lesch-nyhan syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lesch-nyhan-syndrome-real-image",
-   "title": "Lesch-Nyhan syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lesch_nyhan_syndrome-pathway",
+      "title": "Lesch-Nyhan syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost exclusively affects males",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evolving dystonia with developmental delay in a young boy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and urine uric acid with the urinary urate-to-creatinine ratio, HPRT enzyme activity assay in erythrocytes or fibroblasts, Molecular genetic testing of HPRT1"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate nephropathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming that urate-lowering therapy will improve neurological or behavioural symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lesch-nyhan syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lesch_nyhan_syndrome-matrix",
+      "title": "Lesch-Nyhan syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive disorder caused by variants in HPRT1, encoding hypoxanthine-guanine phosphoribosyltransferase, so it almost",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and urine uric acid with the urinary urate-to-creatinine ratio, HPRT enzyme activity assay in erythrocytes or fibroblasts,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebral palsy (dyskinetic type), Other causes of childhood dystonia and choreoathetosis, Primary or secondary hyperuricaemia and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urate-lowering therapy with the xanthine oxidase inhibitor allopurinol to prevent gout, urate nephrolithiasis and urate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming that urate-lowering therapy will improve neurological or behavioural symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lesch-nyhan syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lesch_nyhan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and urine uric acid with urinary urate-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hyperuricaemia and hyperuricosuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPRT enzyme activity assay",
+          "cells": [
+            {
+              "text": "Deficiency in erythrocytes or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPRT1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Urate stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function assessment",
+          "cells": [
+            {
+              "text": "Urate nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and behavioural evaluation",
+          "cells": [
+            {
+              "text": "Neurological and behavioural features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lesch_nyhan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral palsy (dyskinetic type)",
+          "cells": [
+            {
+              "text": "Dystonia can be mistaken for it; hyperuricaemia points to Lesch-Nyhan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kelley-Seegmiller syndrome",
+          "cells": [
+            {
+              "text": "Partial HPRT deficiency: hyperuricaemia and gout with little neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroacanthocytosis and other self-mutilation syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lesch_nyhan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urate-lowering therapy",
+          "cells": [
+            {
+              "text": "Allopurinol to prevent gout, urate nephrolithiasis and nephropathy; does not improve neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and urinary alkalinisation",
+          "cells": [
+            {
+              "text": "Reduces urate and xanthine stone formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder",
+          "cells": [
+            {
+              "text": "Baclofen and benzodiazepines for dystonic-choreoathetoid disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-injury prevention",
+          "cells": [
+            {
+              "text": "Protective devices, lip and dental guards, sometimes dental extraction, with behavioural therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, metabolic medicine, physiotherapy, occupational therapy and psychiatry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Renal function and imaging for urate stones and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked recessive HPRT1 disorder; carrier testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lesch_nyhan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lesch-Nyhan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Boy with evolving dystonia, developmental delay and self-biting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (self-injury, urate stones, renal impairment, urate nephropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal assessment for acute urate nephropathy or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and urine uric acid, HPRT enzyme assay, HPRT1 testing, renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is HPRT deficiency confirmed on enzyme assay or HPRT1 testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cerebral palsy, Kelley-Seegmiller syndrome or neuroacanthocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allopurinol to prevent gout, stones and urate nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluids and urinary alkalinisation to reduce stone formation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baclofen or benzodiazepines for dystonia and choreoathetosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective guards and behavioural therapy against self-injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Renal monitoring and genetic counselling for carrier testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Urate complications controllable; neuro and behavioural features irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

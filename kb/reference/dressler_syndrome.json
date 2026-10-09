@@ -1,177 +1,475 @@
 {
- "id": "dressler_syndrome",
- "name": "dressler syndrome",
- "aliases": [
-  "post-myocardial infarction syndrome",
-  "post-cardiac injury syndrome"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops weeks to a few months after myocardial infarction, cardiac surgery or other myocardial or pericardial injury.",
-   "It should be distinguished from early peri-infarction (epistenocardiac) pericarditis, which occurs within the first few days of infarction and reflects direct transmural inflammation rather than an immune mechanism.",
-   "Its incidence has fallen markedly in the reperfusion era, as prompt revascularisation limits the extent of myocardial injury and antigen exposure.",
-   "The typical picture combines pleuritic chest pain relieved by sitting forward, low-grade fever, a pericardial friction rub, a pericardial and/or pleural effusion and raised inflammatory markers.",
-   "Diagnosis rests on the clinical syndrome supported by ECG (diffuse concave ST elevation with PR depression), echocardiographic effusion and elevated CRP/ESR, in the appropriate temporal context after cardiac injury.",
-   "First-line treatment is high-dose non-steroidal anti-inflammatory therapy (aspirin is often preferred after recent myocardial infarction) combined with colchicine, which reduces recurrence.",
-   "Corticosteroids are reserved for refractory or contraindicated cases because they are associated with a higher recurrence rate and, early after infarction, theoretical concern regarding myocardial healing.",
-   "Recognised complications include recurrent pericarditis, large effusion with tamponade and, rarely, constrictive pericarditis."
+  "id": "dressler_syndrome",
+  "name": "dressler syndrome",
+  "aliases": [
+    "post-myocardial infarction syndrome",
+    "post-cardiac injury syndrome"
   ],
-  "pathophysiology": "Dressler syndrome is understood as an autoimmune or immune-mediated inflammatory response triggered by injury to the myocardium and pericardium. Necrosis exposes previously sequestered cardiac (particularly pericardial and myocardial) antigens to the immune system, and in susceptible individuals this provokes the formation of anti-heart antibodies and a delayed hypersensitivity reaction. The resulting immune complex-mediated and cell-mediated inflammation involves the pericardium and frequently the adjacent pleura and lung, producing a pericarditis often accompanied by pericardial and pleural effusions and occasionally pulmonary infiltrates. The characteristic latent interval of weeks to months reflects the time required to mount this adaptive immune response, distinguishing it mechanistically from the immediate, direct inflammation of early peri-infarction pericarditis.",
-  "additionalDifferentials": [
-   "early peri-infarction (epistenocardiac) pericarditis",
-   "recurrent or reinfarction / acute coronary syndrome",
-   "pulmonary embolism with pleuritic pain",
-   "post-pericardiotomy syndrome (when after surgery)",
-   "viral or idiopathic acute pericarditis",
-   "pneumonia or pleurisy of other cause",
-   "heart failure with effusions"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG (diffuse concave ST elevation, PR-segment depression)",
-   "transthoracic echocardiography (pericardial effusion, tamponade assessment)",
-   "inflammatory markers (CRP, ESR) and full blood count",
-   "chest radiography (cardiomegaly, pleural effusion, pulmonary infiltrate)",
-   "cardiac troponin to help exclude reinfarction",
-   "cardiac MRI in equivocal cases (pericardial inflammation/enhancement)",
-   "cross-sectional imaging or catheterisation if constriction is suspected"
-  ],
-  "redFlags": [
-   "hypotension with raised jugular venous pressure and pulsus paradoxus indicating tamponade",
-   "large or rapidly accumulating pericardial effusion",
-   "features suggesting reinfarction or a new acute coronary syndrome rather than pericarditis",
-   "haemodynamic compromise in a patient on anticoagulation with a growing effusion",
-   "signs of evolving constrictive physiology (progressive right heart failure, raised venous pressure)"
-  ],
-  "prognosis": "With appropriate anti-inflammatory therapy the syndrome is usually self-limiting and carries a good prognosis, though recurrences are not uncommon; serious sequelae such as tamponade or constrictive pericarditis are infrequent but clinically important.",
-  "pitfalls": [
-   "Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications.",
-   "Overlooking tamponade in a patient on anticoagulation after myocardial infarction or cardiac surgery.",
-   "Reaching for corticosteroids first line, given their association with higher recurrence rates.",
-   "Attributing recurrent post-infarction chest pain solely to ischaemia and missing the pericardial nature of the pain.",
-   "Omitting colchicine, which reduces the risk of recurrence when added to anti-inflammatory therapy."
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the Diagnosis and Management of Pericardial Diseases",
-   "Imazio M et al. Post-cardiac injury syndromes, review"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined with colchicine to relieve inflammation and reduce recurrence",
-   "Reserve corticosteroids for cases refractory to or intolerant of non-steroidal anti-inflammatory drugs, using them cautiously and at the lowest effective dose",
-   "Provide supportive care with rest and analgesia, and consider gastroprotection during anti-inflammatory therapy",
-   "Monitor with serial echocardiography for pericardial effusion and with inflammatory markers to track response",
-   "Perform urgent pericardiocentesis for a large effusion or cardiac tamponade",
-   "Refer for pericardiectomy if constrictive pericarditis develops, and manage recurrent disease with a prolonged colchicine course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dressler_syndrome-pathway",
-   "title": "dressler syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops weeks to a few months after myocardial infarction, cardiac surgery or other myocardial or pericardial injury.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: hypotension with raised jugular venous pressure and pulsus paradoxus indicating tamponade",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG (diffuse concave ST elevation, PR-segment depression), transthoracic echocardiography (pericardial effusion, tamponade assessment), inflammatory markers (CRP, ESR) and full blood count"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined with colchicine to relieve inflammation and reduce recurrence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dressler syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dressler_syndrome-matrix",
-   "title": "dressler syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops weeks to a few months after myocardial infarction, cardiac surgery or other myocardial or pericardial injury.",
+      "It should be distinguished from early peri-infarction (epistenocardiac) pericarditis, which occurs within the first few days of infarction and reflects direct transmural inflammation rather than an immune mechanism.",
+      "Its incidence has fallen markedly in the reperfusion era, as prompt revascularisation limits the extent of myocardial injury and antigen exposure.",
+      "The typical picture combines pleuritic chest pain relieved by sitting forward, low-grade fever, a pericardial friction rub, a pericardial and/or pleural effusion and raised inflammatory markers.",
+      "Diagnosis rests on the clinical syndrome supported by ECG (diffuse concave ST elevation with PR depression), echocardiographic effusion and elevated CRP/ESR, in the appropriate temporal context after cardiac injury.",
+      "First-line treatment is high-dose non-steroidal anti-inflammatory therapy (aspirin is often preferred after recent myocardial infarction) combined with colchicine, which reduces recurrence.",
+      "Corticosteroids are reserved for refractory or contraindicated cases because they are associated with a higher recurrence rate and, early after infarction, theoretical concern regarding myocardial healing.",
+      "Recognised complications include recurrent pericarditis, large effusion with tamponade and, rarely, constrictive pericarditis."
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG (diffuse concave ST elevation, PR-segment depression), transthoracic echocardiography (pericardial effusion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dressler syndrome is understood as an autoimmune or immune-mediated inflammatory response triggered by injury to the myocardium and pericardium. Necrosis exposes previously sequestered cardiac (particularly pericardial and myocardial) antigens to the immune system, and in susceptible individuals this provokes the formation of anti-heart antibodies and a delayed hypersensitivity reaction. The resulting immune complex-mediated and cell-mediated inflammation involves the pericardium and frequently the adjacent pleura and lung, producing a pericarditis often accompanied by pericardial and pleural effusions and occasionally pulmonary infiltrates. The characteristic latent interval of weeks to months reflects the time required to mount this adaptive immune response, distinguishing it mechanistically from the immediate, direct inflammation of early peri-infarction pericarditis.",
+    "additionalDifferentials": [
+      "early peri-infarction (epistenocardiac) pericarditis",
+      "recurrent or reinfarction / acute coronary syndrome",
+      "pulmonary embolism with pleuritic pain",
+      "post-pericardiotomy syndrome (when after surgery)",
+      "viral or idiopathic acute pericarditis",
+      "pneumonia or pleurisy of other cause",
+      "heart failure with effusions"
     ],
-    [
-     "Primary Differentials",
-     "early peri-infarction (epistenocardiac) pericarditis, recurrent or reinfarction / acute coronary syndrome, pulmonary embolism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG (diffuse concave ST elevation, PR-segment depression)",
+      "transthoracic echocardiography (pericardial effusion, tamponade assessment)",
+      "inflammatory markers (CRP, ESR) and full blood count",
+      "chest radiography (cardiomegaly, pleural effusion, pulmonary infiltrate)",
+      "cardiac troponin to help exclude reinfarction",
+      "cardiac MRI in equivocal cases (pericardial inflammation/enhancement)",
+      "cross-sectional imaging or catheterisation if constriction is suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined",
-     "Core treatment modality"
+    "redFlags": [
+      "hypotension with raised jugular venous pressure and pulsus paradoxus indicating tamponade",
+      "large or rapidly accumulating pericardial effusion",
+      "features suggesting reinfarction or a new acute coronary syndrome rather than pericarditis",
+      "haemodynamic compromise in a patient on anticoagulation with a growing effusion",
+      "signs of evolving constrictive physiology (progressive right heart failure, raised venous pressure)"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate anti-inflammatory therapy the syndrome is usually self-limiting and carries a good prognosis, though recurrences are not uncommon; serious sequelae such as tamponade or constrictive pericarditis are infrequent but clinically important.",
+    "pitfalls": [
+      "Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications.",
+      "Overlooking tamponade in a patient on anticoagulation after myocardial infarction or cardiac surgery.",
+      "Reaching for corticosteroids first line, given their association with higher recurrence rates.",
+      "Attributing recurrent post-infarction chest pain solely to ischaemia and missing the pericardial nature of the pain.",
+      "Omitting colchicine, which reduces the risk of recurrence when added to anti-inflammatory therapy."
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the Diagnosis and Management of Pericardial Diseases",
+      "Imazio M et al. Post-cardiac injury syndromes, review"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined with colchicine to relieve inflammation and reduce recurrence",
+      "Reserve corticosteroids for cases refractory to or intolerant of non-steroidal anti-inflammatory drugs, using them cautiously and at the lowest effective dose",
+      "Provide supportive care with rest and analgesia, and consider gastroprotection during anti-inflammatory therapy",
+      "Monitor with serial echocardiography for pericardial effusion and with inflammatory markers to track response",
+      "Perform urgent pericardiocentesis for a large effusion or cardiac tamponade",
+      "Refer for pericardiectomy if constrictive pericarditis develops, and manage recurrent disease with a prolonged colchicine course"
     ]
-   ],
-   "caption": "Overview comparison matrix for dressler syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dressler-syndrome-real-image",
-   "title": "dressler syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "dressler_syndrome-pathway",
+      "title": "dressler syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops weeks to a few months after myocardial infarction, cardiac surgery or other myocardial or pericardial injury.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: hypotension with raised jugular venous pressure and pulsus paradoxus indicating tamponade",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG (diffuse concave ST elevation, PR-segment depression), transthoracic echocardiography (pericardial effusion, tamponade assessment), inflammatory markers (CRP, ESR) and full blood count"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined with colchicine to relieve inflammation and reduce recurrence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dressler syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dressler_syndrome-matrix",
+      "title": "dressler syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dressler syndrome is a delayed, immune-mediated pericarditis (a form of post-cardiac injury syndrome) that classically develops",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG (diffuse concave ST elevation, PR-segment depression), transthoracic echocardiography (pericardial effusion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "early peri-infarction (epistenocardiac) pericarditis, recurrent or reinfarction / acute coronary syndrome, pulmonary embolism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line therapy is a non-steroidal anti-inflammatory drug, with aspirin preferred after recent myocardial infarction, combined",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing delayed Dressler syndrome with early peri-infarction pericarditis, which differ in timing, mechanism and implications.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dressler syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dressler_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Diffuse concave ST elevation and PR-segment depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Pericardial effusion and tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP, ESR and full blood count",
+          "cells": [
+            {
+              "text": "Inflammatory markers that track response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac troponin",
+          "cells": [
+            {
+              "text": "Helps exclude reinfarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI in equivocal cases",
+          "cells": [
+            {
+              "text": "Pericardial inflammation or enhancement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dressler_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Early peri-infarction pericarditis",
+          "cells": [
+            {
+              "text": "Differs in timing, mechanism and implications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent infarction or acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Reinfarction features rather than pericarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-pericardiotomy syndrome",
+          "cells": [
+            {
+              "text": "Occurs after cardiac surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dressler_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID with aspirin after recent infarction",
+          "cells": [
+            {
+              "text": "First-line; aspirin preferred after recent myocardial infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine",
+          "cells": [
+            {
+              "text": "Relieves inflammation and reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Only if refractory or intolerant to NSAIDs; lowest effective dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rest, analgesia and gastroprotection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography and inflammatory markers to track response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardiocentesis",
+          "cells": [
+            {
+              "text": "Urgent for a large effusion or tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardiectomy",
+          "cells": [
+            {
+              "text": "For constrictive pericarditis; prolonged colchicine for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dressler_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of dressler syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dressler syndrome: delayed pericarditis after infarction or cardiac surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tamponade, large effusion, reinfarction, constrictive physiology)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pericardiocentesis for tamponade or a large effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG; echocardiography; CRP, ESR and FBC; troponin; cardiac MRI if equivocal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is delayed pericarditis confirmed with no reinfarction on troponin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider early peri-infarction pericarditis, reinfarction or pulmonary embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAID first-line, with aspirin preferred after recent myocardial infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add colchicine to relieve inflammation and reduce recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids only if NSAIDs fail or are not tolerated, at lowest dose",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and inflammatory markers to track response",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pericardiectomy for constrictive pericarditis; long colchicine for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting with a good prognosis; recurrences are not uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

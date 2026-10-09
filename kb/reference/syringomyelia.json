@@ -1,173 +1,471 @@
 {
- "id": "syringomyelia",
- "name": "Syringomyelia",
- "aliases": [
-  "syrinx",
-  "spinal cord cavitation",
-  "hydromyelia"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain and temperature but preserved light touch and proprioception",
-   "The dissociated sensory loss often has a cape-like distribution over the shoulders and arms as the central cord and crossing spinothalamic fibres are affected first",
-   "Painless burns or injuries and neuropathic joint degeneration (Charcot joints) can result from the loss of protective pain sensation",
-   "Progressive lower motor neuron signs in the hands and arms occur as the syrinx expands into the anterior horns",
-   "Frequently associated with a Chiari I malformation at the craniocervical junction, and also with prior trauma, tumour, or arachnoiditis",
-   "MRI of the whole spine and craniocervical junction is the definitive investigation and defines the syrinx and any underlying cause",
-   "Management targets the underlying cause, for example posterior fossa decompression for Chiari-associated syrinx, rather than the cavity alone",
-   "Extension of the cavity into the brainstem (syringobulbia) can cause lower cranial nerve and bulbar dysfunction"
+  "id": "syringomyelia",
+  "name": "Syringomyelia",
+  "aliases": [
+    "syrinx",
+    "spinal cord cavitation",
+    "hydromyelia"
   ],
-  "pathophysiology": "Syringomyelia is characterised by a longitudinal cavity within the spinal cord that disrupts neural tissue from the centre outward. Altered cerebrospinal fluid dynamics, often related to obstruction at the craniocervical junction as in Chiari I malformation, are thought to drive fluid accumulation and cavity expansion. The central location preferentially damages the decussating spinothalamic fibres, producing dissociated sensory loss, and progressive enlargement affects anterior horn cells, long tracts, and autonomic pathways.",
-  "additionalDifferentials": [
-   "Intramedullary spinal cord tumour",
-   "Multiple sclerosis and other myelopathies",
-   "Cervical spondylotic myelopathy",
-   "Motor neuron disease when lower motor neuron hand wasting predominates",
-   "Peripheral neuropathy",
-   "Leprosy and other causes of dissociated sensory loss"
-  ],
-  "additionalInvestigations": [
-   "MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause",
-   "MRI of the brain to assess the posterior fossa and hindbrain",
-   "Contrast-enhanced imaging when an underlying tumour is suspected",
-   "CSF flow studies in selected cases to assess craniocervical junction dynamics",
-   "Neurophysiological studies where the differential includes motor neuron disease or neuropathy"
-  ],
-  "redFlags": [
-   "Rapid neurological deterioration or new bulbar symptoms from syringobulbia requiring urgent neurosurgical assessment",
-   "Progressive weakness, sensory loss, or sphincter disturbance indicating cord compromise",
-   "Associated Chiari malformation with brainstem compression signs",
-   "An underlying spinal cord tumour presenting as a secondary syrinx"
-  ],
-  "prognosis": "Syringomyelia often progresses slowly over years, with a stepwise or gradual accumulation of deficits. Treating the underlying cause, particularly decompressing a Chiari malformation, can stabilise or improve symptoms, but established neurological deficits may not fully reverse and some patients continue to deteriorate despite surgery.",
-  "pitfalls": [
-   "Failing to recognise dissociated sensory loss and its localising value",
-   "Overlooking an associated Chiari malformation or underlying tumour as the treatable cause",
-   "Attributing hand wasting solely to motor neuron disease without imaging the cord",
-   "Not counselling patients about protecting insensate areas from burns and injury"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering and adhesiolysis for post-traumatic or arachnoiditis-related syrinx, to halt progression",
-   "Syrinx drainage or shunting when a symptomatic cavity persists or expands",
-   "Neuropathic pain control with anticonvulsant and antidepressant agents",
-   "Protective skin and joint care given loss of protective pain sensation, to prevent painless burns, trophic ulcers, and Charcot joints",
-   "Physiotherapy and occupational therapy to preserve function and manage weakness",
-   "Serial MRI surveillance of the syrinx and craniocervical junction to monitor size and guide re-intervention",
-   "Multidisciplinary follow-up across neurology, neurosurgery, rehabilitation and pain services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syringomyelia-pathway",
-   "title": "Syringomyelia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain and temperature but preserved light touch and proprioception",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid neurological deterioration or new bulbar symptoms from syringobulbia requiring urgent neurosurgical assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause, MRI of the brain to assess the posterior fossa and hindbrain, Contrast-enhanced imaging when an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering and adhesiolysis for post-traumatic or arachnoiditis-related syrinx, to halt progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise dissociated sensory loss and its localising value"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syringomyelia."
-  }
- ],
- "tables": [
-  {
-   "id": "syringomyelia-matrix",
-   "title": "Syringomyelia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain and temperature but preserved light touch and proprioception",
+      "The dissociated sensory loss often has a cape-like distribution over the shoulders and arms as the central cord and crossing spinothalamic fibres are affected first",
+      "Painless burns or injuries and neuropathic joint degeneration (Charcot joints) can result from the loss of protective pain sensation",
+      "Progressive lower motor neuron signs in the hands and arms occur as the syrinx expands into the anterior horns",
+      "Frequently associated with a Chiari I malformation at the craniocervical junction, and also with prior trauma, tumour, or arachnoiditis",
+      "MRI of the whole spine and craniocervical junction is the definitive investigation and defines the syrinx and any underlying cause",
+      "Management targets the underlying cause, for example posterior fossa decompression for Chiari-associated syrinx, rather than the cavity alone",
+      "Extension of the cavity into the brainstem (syringobulbia) can cause lower cranial nerve and bulbar dysfunction"
     ],
-    [
-     "Key Investigations",
-     "MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause, MRI of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Syringomyelia is characterised by a longitudinal cavity within the spinal cord that disrupts neural tissue from the centre outward. Altered cerebrospinal fluid dynamics, often related to obstruction at the craniocervical junction as in Chiari I malformation, are thought to drive fluid accumulation and cavity expansion. The central location preferentially damages the decussating spinothalamic fibres, producing dissociated sensory loss, and progressive enlargement affects anterior horn cells, long tracts, and autonomic pathways.",
+    "additionalDifferentials": [
+      "Intramedullary spinal cord tumour",
+      "Multiple sclerosis and other myelopathies",
+      "Cervical spondylotic myelopathy",
+      "Motor neuron disease when lower motor neuron hand wasting predominates",
+      "Peripheral neuropathy",
+      "Leprosy and other causes of dissociated sensory loss"
     ],
-    [
-     "Primary Differentials",
-     "Intramedullary spinal cord tumour, Multiple sclerosis and other myelopathies, Cervical spondylotic myelopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause",
+      "MRI of the brain to assess the posterior fossa and hindbrain",
+      "Contrast-enhanced imaging when an underlying tumour is suspected",
+      "CSF flow studies in selected cases to assess craniocervical junction dynamics",
+      "Neurophysiological studies where the differential includes motor neuron disease or neuropathy"
     ],
-    [
-     "Management Strategy",
-     "Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid neurological deterioration or new bulbar symptoms from syringobulbia requiring urgent neurosurgical assessment",
+      "Progressive weakness, sensory loss, or sphincter disturbance indicating cord compromise",
+      "Associated Chiari malformation with brainstem compression signs",
+      "An underlying spinal cord tumour presenting as a secondary syrinx"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise dissociated sensory loss and its localising value",
-     "Prevent diagnostic or management error"
+    "prognosis": "Syringomyelia often progresses slowly over years, with a stepwise or gradual accumulation of deficits. Treating the underlying cause, particularly decompressing a Chiari malformation, can stabilise or improve symptoms, but established neurological deficits may not fully reverse and some patients continue to deteriorate despite surgery.",
+    "pitfalls": [
+      "Failing to recognise dissociated sensory loss and its localising value",
+      "Overlooking an associated Chiari malformation or underlying tumour as the treatable cause",
+      "Attributing hand wasting solely to motor neuron disease without imaging the cord",
+      "Not counselling patients about protecting insensate areas from burns and injury"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering and adhesiolysis for post-traumatic or arachnoiditis-related syrinx, to halt progression",
+      "Syrinx drainage or shunting when a symptomatic cavity persists or expands",
+      "Neuropathic pain control with anticonvulsant and antidepressant agents",
+      "Protective skin and joint care given loss of protective pain sensation, to prevent painless burns, trophic ulcers, and Charcot joints",
+      "Physiotherapy and occupational therapy to preserve function and manage weakness",
+      "Serial MRI surveillance of the syrinx and craniocervical junction to monitor size and guide re-intervention",
+      "Multidisciplinary follow-up across neurology, neurosurgery, rehabilitation and pain services"
     ]
-   ],
-   "caption": "Overview comparison matrix for syringomyelia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syringomyelia-real-image",
-   "title": "Syringomyelia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "syringomyelia-pathway",
+      "title": "Syringomyelia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain and temperature but preserved light touch and proprioception",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid neurological deterioration or new bulbar symptoms from syringobulbia requiring urgent neurosurgical assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause, MRI of the brain to assess the posterior fossa and hindbrain, Contrast-enhanced imaging when an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering and adhesiolysis for post-traumatic or arachnoiditis-related syrinx, to halt progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise dissociated sensory loss and its localising value"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syringomyelia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syringomyelia-matrix",
+      "title": "Syringomyelia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fluid-filled cavity (syrinx) within the spinal cord that classically produces a dissociated sensory loss, with impaired pain",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the entire spine and craniocervical junction to define the syrinx and identify Chiari malformation or other cause, MRI of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intramedullary spinal cord tumour, Multiple sclerosis and other myelopathies, Cervical spondylotic myelopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neurosurgical correction of the underlying cause, such as craniocervical decompression for Chiari I malformation or detethering",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise dissociated sensory loss and its localising value",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syringomyelia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syringomyelia-dx-mgmt",
+      "title": "Diagnosis and management of Syringomyelia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected syringomyelia: dissociated sensory loss with painless injury or hand wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid deterioration, cord compromise, or bulbar symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical assessment for rapid deterioration or bulbar symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the whole spine and craniocervical junction; MRI of the brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a cord syrinx, with Chiari I or another cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intramedullary tumour, cervical myelopathy or motor neuron disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Decompress the cause: craniocervical decompression for Chiari I malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drain or shunt a symptomatic or expanding syrinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsant or antidepressant agents for neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective skin and joint care against painless injury and Charcot joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial MRI to guide re-intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow progression over years; decompression can stabilise, but deficits may not reverse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syringomyelia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the whole spine and craniocervical junction",
+          "cells": [
+            {
+              "text": "Defines the syrinx and any Chiari I malformation or other cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Posterior fossa and hindbrain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced imaging",
+          "cells": [
+            {
+              "text": "Underlying tumour, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF flow studies",
+          "cells": [
+            {
+              "text": "Craniocervical junction dynamics, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurophysiological studies",
+          "cells": [
+            {
+              "text": "Motor neuron disease or neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringomyelia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intramedullary spinal cord tumour",
+          "cells": [
+            {
+              "text": "Can present as a secondary syrinx; contrast imaging identifies the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neuron disease",
+          "cells": [
+            {
+              "text": "Lower motor neuron hand wasting predominates; imaging the cord avoids misattribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leprosy and other causes of dissociated sensory loss",
+          "cells": [
+            {
+              "text": "Dissociated sensory loss pattern alone does not confirm syringomyelia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringomyelia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurosurgical correction of the underlying cause",
+          "cells": [
+            {
+              "text": "Craniocervical decompression for Chiari I malformation, or detethering and adhesiolysis for post-traumatic or arachnoiditis-related syrinx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syrinx drainage or shunting",
+          "cells": [
+            {
+              "text": "Symptomatic cavity that persists or expands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain control",
+          "cells": [
+            {
+              "text": "Anticonvulsant and antidepressant agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective skin and joint care",
+          "cells": [
+            {
+              "text": "Prevents painless burns, trophic ulcers and Charcot joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve function and manage weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI surveillance",
+          "cells": [
+            {
+              "text": "Syrinx size and craniocervical junction; guides re-intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurology, neurosurgery, rehabilitation and pain services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

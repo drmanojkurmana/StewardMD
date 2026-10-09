@@ -1,178 +1,634 @@
 {
- "id": "hemochromatosis",
- "name": "Hemochromatosis",
- "system": "Hepatology / Metabolic",
- "class": "non_infective",
- "chapter": 426,
- "page": 3333,
- "aliases": [
-  "iron overload",
-  "HFE hemochromatosis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3333",
-  "clinicalPearls": [
-   "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the HFE gene (Harrison 22e p.2062).",
-   "Up to 10% of the population is heterozygous for one HFE mutation, so clinical prevalence might be as high as 1 in 500, though observed rates are lower because of limited (incomplete) penetrance (Harrison 22e p.2062).",
-   "Increased iron in the skin in types 1 and 2 hemochromatosis stimulates melanin pigment production and leads to the classic bronze color (Harrison 22e p.443).",
-   "Systemic iron overload is diagnosed from serum iron and transferrin saturation, with thresholds noted around >60% in men and >45-50% in women; ferritin and transferrin saturation are the main usable laboratory biomarkers of iron status (Harrison 22e p.2062, p.805).",
-   "MRI is used to quantitate iron stores in the liver and heart; for cardiac iron overload the diagnosis is made principally by MRI, and endomyocardial biopsy (Prussian blue stain) is not usually needed (Harrison 22e p.2062).",
-   "When diagnosed early, hemochromatosis can often be managed by repeated phlebotomy to remove iron (Harrison 22e p.2062).",
-   "Hepcidin-regulating proteins HFE, transferrin receptor 2, and hemojuvelin, whose mutations cause different forms of hemochromatosis, normally contribute to hepcidin upregulation; impaired hepcidin signaling allows excess iron entry into plasma (Harrison 22e p.805).",
-   "There is no regulated mechanism for iron excretion; physiologic iron loss occurs only through cell desquamation and menses, which is why unregulated absorption produces progressive overload (Harrison 22e p.805)."
+  "id": "hemochromatosis",
+  "name": "Hemochromatosis",
+  "system": "Hepatology / Metabolic",
+  "class": "non_infective",
+  "chapter": 426,
+  "page": 3333,
+  "aliases": [
+    "iron overload",
+    "HFE hemochromatosis"
   ],
-  "pathophysiology": "Systemic iron homeostasis is controlled by hepcidin, a hepatocyte-derived peptide that blocks the iron exporter ferroportin, limiting iron flux from duodenal enterocytes, recycling macrophages, and storing hepatocytes. High plasma/liver iron normally raises hepcidin via the BMP-SMAD pathway, with HFE, transferrin receptor 2, and hemojuvelin contributing to hepcidin upregulation. Mutations in these genes (most commonly HFE) lead to inappropriately low hepcidin, increased iron absorption, and rising transferrin saturation. Because no regulated route of iron excretion exists, iron accumulates progressively. When transferrin saturation exceeds ~60%, non-transferrin-bound iron (NTBI) appears in the circulation and is taken up by liver, pancreas, and heart, driving parenchymal injury. In the heart, excess iron deposits in the perinuclear compartment of cardiomyocytes, disrupting intracellular architecture and mitochondrial function (Harrison 22e p.805, p.2062).",
-  "additionalDifferentials": [
-   "Secondary (acquired) iron overload from chronic transfusion in hemoglobinopathies/thalassemia (Harrison 22e p.2062, p.821)",
-   "Other metabolic causes of skin hyperpigmentation: porphyria cutanea tarda, vitamin B12 or folate deficiency, pellagra, malabsorption/Whipple's disease (Harrison 22e p.443)"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Other causes of restrictive or dilated cardiomyopathy; hemochromatosis is listed among restrictive cardiomyopathies but often presents clinically as a dilated cardiomyopathy (Harrison 22e p.2062)",
-   "Other chronic liver diseases progressing to cirrhosis (alcohol, viral hepatitis, metabolic dysfunction-associated steatohepatitis) (Harrison 22e p.702)"
-  ],
-  "additionalInvestigations": [
-   "Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062, p.805)",
-   "Serum ferritin to assess body iron stores (Harrison 22e p.805)",
-   "MRI quantitation of hepatic and cardiac iron stores (Harrison 22e p.2062)",
-   "Genetic testing for HFE mutations (the gene underlying the common autosomal recessive form) (Harrison 22e p.2062, p.702)",
-   "Endomyocardial biopsy with Prussian blue iron stain (reserved; not usually needed when MRI is available) (Harrison 22e p.2062)"
-  ],
-  "redFlags": [
-   "Hemochromatosis (HFE germline mutations) is a recognized risk factor for hepatocellular carcinoma, typically via cirrhosis (Harrison 22e p.702)",
-   "Progression to cirrhosis from hepatic iron loading (Harrison 22e p.2062)",
-   "Cardiomyopathy from cardiac siderosis, which may cause heart failure or arrhythmia (Harrison 22e p.2062)",
-   "Markedly increased susceptibility to Vibrio vulnificus sepsis (primary sepsis develops most often in patients with cirrhosis or hemochromatosis) (Harrison 22e p.1373)",
-   "Increased susceptibility to Yersinia (Y. enterocolitica / Y. pseudotuberculosis) septicemia, with iron overload providing accessible iron; iron chelators such as desferrioxamine can precipitate Yersinia infection (Harrison 22e p.1392)"
-  ],
-  "prognosis": "If diagnosed early, iron overload can often be removed by repeated phlebotomy, and cardiac function can improve with iron removal provided myocyte loss and replacement fibrosis are not too severe. Late disease carries the burden of established cirrhosis (with hepatocellular carcinoma risk) and irreversible cardiac and endocrine damage (Harrison 22e p.2062, p.702).",
-  "pitfalls": [
-   "Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal phenotype, and additional genetic and environmental factors (e.g., alcohol) modify expression (Harrison 22e p.2062).",
-   "Hemochromatosis may present clinically as a dilated cardiomyopathy even though it is categorized among restrictive cardiomyopathies (Harrison 22e p.2062).",
-   "Iron chelation therapy itself (e.g., desferrioxamine) can supply accessible iron to Yersinia and impair neutrophil function, precipitating Yersinia septicemia in iron-overloaded patients (Harrison 22e p.1392)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.3333",
-   "Harrison 22e p.2062",
-   "Harrison 22e p.805",
-   "Harrison 22e p.702",
-   "Harrison 22e p.443",
-   "Harrison 22e p.1373",
-   "Harrison 22e p.1392"
-  ],
-  "crossLinks": [
-   "decomp_cirrhosis",
-   "dilated_cardiomyopathy",
-   "diabetes_mellitus"
-  ],
-  "management": [
-   "Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance venesection",
-   "Use iron chelation with deferoxamine or deferasirox in patients who cannot tolerate phlebotomy, such as those with anaemia or severe cardiac disease",
-   "Advise dietary and lifestyle measures: avoid iron and vitamin C supplements, moderate alcohol intake and avoid raw shellfish given Vibrio vulnificus susceptibility",
-   "Monitor iron status with serum ferritin and transferrin saturation to guide venesection, and quantify hepatic and cardiac iron with MRI",
-   "Manage established organ complications: treat diabetes mellitus, replace pituitary and gonadal hormones for hypogonadism, treat the cardiomyopathy and manage the arthropathy",
-   "Surveil cirrhotic patients for hepatocellular carcinoma with periodic liver imaging",
-   "Offer HFE genetic testing, genetic counselling and screening of first-degree relatives given autosomal recessive inheritance"
-  ]
- },
- "algorithms": [
-  {
-   "id": "hemochromatosis-pathway",
-   "title": "Hemochromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the HFE gene (Harrison 22e p.2062).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hemochromatosis (HFE germline mutations) is a recognized risk factor for hepatocellular carcinoma, typically via cirrhosis (Harrison 22e p.702)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062, p.805), Serum ferritin to assess body iron stores (Harrison 22e p.805), MRI quantitation of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance venesection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal phenotype, and additional genetic and environmental factors (e.g., alcohol) modify"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hemochromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "hemochromatosis-matrix",
-   "title": "Hemochromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3333",
+    "clinicalPearls": [
+      "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the HFE gene (Harrison 22e p.2062).",
+      "Up to 10% of the population is heterozygous for one HFE mutation, so clinical prevalence might be as high as 1 in 500, though observed rates are lower because of limited (incomplete) penetrance (Harrison 22e p.2062).",
+      "Increased iron in the skin in types 1 and 2 hemochromatosis stimulates melanin pigment production and leads to the classic bronze color (Harrison 22e p.443).",
+      "Systemic iron overload is diagnosed from serum iron and transferrin saturation, with thresholds noted around >60% in men and >45-50% in women; ferritin and transferrin saturation are the main usable laboratory biomarkers of iron status (Harrison 22e p.2062, p.805).",
+      "MRI is used to quantitate iron stores in the liver and heart; for cardiac iron overload the diagnosis is made principally by MRI, and endomyocardial biopsy (Prussian blue stain) is not usually needed (Harrison 22e p.2062).",
+      "When diagnosed early, hemochromatosis can often be managed by repeated phlebotomy to remove iron (Harrison 22e p.2062).",
+      "Hepcidin-regulating proteins HFE, transferrin receptor 2, and hemojuvelin, whose mutations cause different forms of hemochromatosis, normally contribute to hepcidin upregulation; impaired hepcidin signaling allows excess iron entry into plasma (Harrison 22e p.805).",
+      "There is no regulated mechanism for iron excretion; physiologic iron loss occurs only through cell desquamation and menses, which is why unregulated absorption produces progressive overload (Harrison 22e p.805)."
     ],
-    [
-     "Key Investigations",
-     "Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Systemic iron homeostasis is controlled by hepcidin, a hepatocyte-derived peptide that blocks the iron exporter ferroportin, limiting iron flux from duodenal enterocytes, recycling macrophages, and storing hepatocytes. High plasma/liver iron normally raises hepcidin via the BMP-SMAD pathway, with HFE, transferrin receptor 2, and hemojuvelin contributing to hepcidin upregulation. Mutations in these genes (most commonly HFE) lead to inappropriately low hepcidin, increased iron absorption, and rising transferrin saturation. Because no regulated route of iron excretion exists, iron accumulates progressively. When transferrin saturation exceeds ~60%, non-transferrin-bound iron (NTBI) appears in the circulation and is taken up by liver, pancreas, and heart, driving parenchymal injury. In the heart, excess iron deposits in the perinuclear compartment of cardiomyocytes, disrupting intracellular architecture and mitochondrial function (Harrison 22e p.805, p.2062).",
+    "additionalDifferentials": [
+      "Secondary (acquired) iron overload from chronic transfusion in hemoglobinopathies/thalassemia (Harrison 22e p.2062, p.821)",
+      "Other metabolic causes of skin hyperpigmentation: porphyria cutanea tarda, vitamin B12 or folate deficiency, pellagra, malabsorption/Whipple's disease (Harrison 22e p.443)"
     ],
-    [
-     "Primary Differentials",
-     "Secondary (acquired) iron overload from chronic transfusion in hemoglobinopathies/thalassemia (Harrison 22e p.2062, p.821), Other",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Other causes of restrictive or dilated cardiomyopathy; hemochromatosis is listed among restrictive cardiomyopathies but often presents clinically as a dilated cardiomyopathy (Harrison 22e p.2062)",
+      "Other chronic liver diseases progressing to cirrhosis (alcohol, viral hepatitis, metabolic dysfunction-associated steatohepatitis) (Harrison 22e p.702)"
     ],
-    [
-     "Management Strategy",
-     "Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062, p.805)",
+      "Serum ferritin to assess body iron stores (Harrison 22e p.805)",
+      "MRI quantitation of hepatic and cardiac iron stores (Harrison 22e p.2062)",
+      "Genetic testing for HFE mutations (the gene underlying the common autosomal recessive form) (Harrison 22e p.2062, p.702)",
+      "Endomyocardial biopsy with Prussian blue iron stain (reserved; not usually needed when MRI is available) (Harrison 22e p.2062)"
     ],
-    [
-     "Clinical Pitfall",
-     "Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Hemochromatosis (HFE germline mutations) is a recognized risk factor for hepatocellular carcinoma, typically via cirrhosis (Harrison 22e p.702)",
+      "Progression to cirrhosis from hepatic iron loading (Harrison 22e p.2062)",
+      "Cardiomyopathy from cardiac siderosis, which may cause heart failure or arrhythmia (Harrison 22e p.2062)",
+      "Markedly increased susceptibility to Vibrio vulnificus sepsis (primary sepsis develops most often in patients with cirrhosis or hemochromatosis) (Harrison 22e p.1373)",
+      "Increased susceptibility to Yersinia (Y. enterocolitica / Y. pseudotuberculosis) septicemia, with iron overload providing accessible iron; iron chelators such as desferrioxamine can precipitate Yersinia infection (Harrison 22e p.1392)"
+    ],
+    "prognosis": "If diagnosed early, iron overload can often be removed by repeated phlebotomy, and cardiac function can improve with iron removal provided myocyte loss and replacement fibrosis are not too severe. Late disease carries the burden of established cirrhosis (with hepatocellular carcinoma risk) and irreversible cardiac and endocrine damage (Harrison 22e p.2062, p.702).",
+    "pitfalls": [
+      "Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal phenotype, and additional genetic and environmental factors (e.g., alcohol) modify expression (Harrison 22e p.2062).",
+      "Hemochromatosis may present clinically as a dilated cardiomyopathy even though it is categorized among restrictive cardiomyopathies (Harrison 22e p.2062).",
+      "Iron chelation therapy itself (e.g., desferrioxamine) can supply accessible iron to Yersinia and impair neutrophil function, precipitating Yersinia septicemia in iron-overloaded patients (Harrison 22e p.1392)."
+    ],
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.3333",
+      "Harrison 22e p.2062",
+      "Harrison 22e p.805",
+      "Harrison 22e p.702",
+      "Harrison 22e p.443",
+      "Harrison 22e p.1373",
+      "Harrison 22e p.1392"
+    ],
+    "crossLinks": [
+      "decomp_cirrhosis",
+      "dilated_cardiomyopathy",
+      "diabetes_mellitus"
+    ],
+    "management": [
+      "Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance venesection",
+      "Use iron chelation with deferoxamine or deferasirox in patients who cannot tolerate phlebotomy, such as those with anaemia or severe cardiac disease",
+      "Advise dietary and lifestyle measures: avoid iron and vitamin C supplements, moderate alcohol intake and avoid raw shellfish given Vibrio vulnificus susceptibility",
+      "Monitor iron status with serum ferritin and transferrin saturation to guide venesection, and quantify hepatic and cardiac iron with MRI",
+      "Manage established organ complications: treat diabetes mellitus, replace pituitary and gonadal hormones for hypogonadism, treat the cardiomyopathy and manage the arthropathy",
+      "Surveil cirrhotic patients for hepatocellular carcinoma with periodic liver imaging",
+      "Offer HFE genetic testing, genetic counselling and screening of first-degree relatives given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hemochromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemochromatosis-real-image",
-   "title": "Hemochromatosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hemochromatosis-pathway",
+      "title": "Hemochromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the HFE gene (Harrison 22e p.2062).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hemochromatosis (HFE germline mutations) is a recognized risk factor for hepatocellular carcinoma, typically via cirrhosis (Harrison 22e p.702)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062, p.805), Serum ferritin to assess body iron stores (Harrison 22e p.805), MRI quantitation of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance venesection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal phenotype, and additional genetic and environmental factors (e.g., alcohol) modify"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hemochromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemochromatosis-matrix",
+      "title": "Hemochromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hemochromatosis is variably classified as a metabolic or storage disease; the common autosomal recessive form is related to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin saturation (serum iron / total iron-binding capacity) as a key screening test for iron overload (Harrison 22e p.2062,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary (acquired) iron overload from chronic transfusion in hemoglobinopathies/thalassemia (Harrison 22e p.2062, p.821), Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deplete iron stores with regular therapeutic phlebotomy until iron indices normalise, then continue lifelong maintenance",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Incomplete penetrance: many HFE mutation carriers never develop clinical iron-overload disease, so genotype does not equal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hemochromatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hereditary Hemochromatosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/iron-overload/hereditary-hemochromatosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Iron overload causes (Harrison table, p38-49 section)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemochromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing hereditary hemochromatosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin saturation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Usually above 50%",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Below 45% has a 97% negative predictive value for iron overload}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transferrin saturation (Harrison)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 60% in men, above 45 to 50% in women",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Systemic iron overload threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ferritin, type 1",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 250 ng/mL in men, above 200 ng/mL in women",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Reflects body iron stores"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ferritin needing liver assessment",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 1000 ng/mL",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Liver biopsy or MRI elastography to stage fibrosis or cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HFE genotype",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "C282Y homozygous in 83% of clinical cases",
+              "op": "=",
+              "value": 83
+            },
+            {
+              "text": "C282Y/H63D gives significant overload in only 0.5 to 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penetrance",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% of C282Y homozygotes have high ferritin, about 10% organ damage",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Genotype does not equal disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical features",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Fatigue 75%, abnormal LFTs 75%, pigmentation 70%, diabetes 50%, arthropathy 45%, cardiomyopathy 15%",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Bronze diabetes picture is late"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac and liver iron",
+          "cells": [
+            {
+              "text": "MRI quantitation"
+            },
+            {
+              "text": "Endomyocardial biopsy rarely needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Transferrin saturation cut-off differs by source: Harrison 22e gives above 60% (men) and above 45 to 50% (women); Merck gives usually above 50%, with below 45% making overload unlikely. Both kept."
+    },
+    {
+      "id": "hemochromatosis-ddx",
+      "kind": "ddx",
+      "title": "Other causes of iron overload and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfusional or anaemia-related overload",
+          "cells": [
+            {
+              "text": "Thalassaemia major, sideroblastic or haemolytic anaemia, many transfusions"
+            },
+            {
+              "text": "Transfusion history; HFE testing negative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic liver disease with secondary iron",
+          "cells": [
+            {
+              "text": "Hepatitis C, alcoholic cirrhosis, NASH, porphyria cutanea tarda, dysmetabolic iron overload"
+            },
+            {
+              "text": "Liver work-up; ferritin high with lower saturation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-HFE hemochromatosis (types 2 to 4)",
+          "cells": [
+            {
+              "text": "Type 2 ferritin above 1000 ng/mL and saturation above 90%; type 4A saturation normal or low"
+            },
+            {
+              "text": "Genetic testing for non-HFE genes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other causes of hyperpigmentation",
+          "cells": [
+            {
+              "text": "Porphyria cutanea tarda, B12 or folate deficiency, pellagra, Whipple disease"
+            },
+            {
+              "text": "Iron studies normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other restrictive or dilated cardiomyopathy",
+          "cells": [
+            {
+              "text": "Haemochromatosis often looks dilated"
+            },
+            {
+              "text": "Cardiac MRI iron quantitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rare inherited causes",
+          "cells": [
+            {
+              "text": "Aceruloplasminaemia, congenital atransferrinaemia, neonatal iron overload"
+            },
+            {
+              "text": "Ceruloplasmin and transferrin levels"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "hemochromatosis-treatment",
+      "kind": "treatment",
+      "title": "Treating hereditary hemochromatosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic phlebotomy",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "{{hy:About 500 mL weekly or every other week until ferritin 50 to 100 ng/mL}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance phlebotomy",
+          "cells": [
+            {
+              "text": "After iron depletion"
+            },
+            {
+              "text": "Intermittent, keeping ferritin 50 to 100 ng/mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron chelation (deferoxamine or deferasirox)",
+          "cells": [
+            {
+              "text": "Cannot tolerate phlebotomy, such as anaemia or severe heart disease"
+            },
+            {
+              "text": "Chelators can precipitate Yersinia sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Avoid iron and vitamin C supplements, limit alcohol, avoid raw shellfish (Vibrio vulnificus)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ complications",
+          "cells": [
+            {
+              "text": "Diabetes, hypogonadism, cardiomyopathy, arthropathy"
+            },
+            {
+              "text": "Treat each; heart function may improve with iron removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCC surveillance",
+          "cells": [
+            {
+              "text": "Cirrhosis"
+            },
+            {
+              "text": "Periodic liver imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "First-degree relatives"
+            },
+            {
+              "text": "Ferritin plus HFE C282Y and H63D testing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemochromatosis-dx-mgmt",
+      "title": "Diagnosis and management of hemochromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised liver tests, fatigue, arthropathy, diabetes or affected relative",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fasting transferrin saturation and ferritin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Saturation 45% or more with high ferritin?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Iron overload unlikely; look for other cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "HFE genotyping",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "C282Y homozygous (or compound with overload)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Look for secondary or non-HFE causes; liver MRI or biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Ferritin above 1000 ng/mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stage liver fibrosis by biopsy or MR elastography",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Weekly phlebotomy to ferritin 50 to 100 ng/mL",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen first-degree relatives",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong maintenance; HCC surveillance if cirrhotic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

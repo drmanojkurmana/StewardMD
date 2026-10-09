@@ -1,175 +1,462 @@
 {
- "id": "glutaric_aciduria",
- "name": "Glutaric aciduria",
- "aliases": [
-  "glutaric aciduria type 1",
-  "GA1",
-  "glutaryl-CoA dehydrogenase deficiency",
-  "glutaric acidemia"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and tryptophan",
-   "Macrocephaly is frequently present at or soon after birth and should prompt consideration of the diagnosis",
-   "The cardinal risk is an acute encephalopathic crisis, usually triggered by an intercurrent illness or fasting between around 6 and 18 months, causing irreversible striatal (basal ganglia) injury and a dystonic movement disorder",
-   "Neuroimaging may show frontotemporal atrophy, widened Sylvian fissures and subdural collections that can be mistaken for non-accidental injury",
-   "Elevated glutarylcarnitine (C5DC) on acylcarnitine profile and glutaric and 3-hydroxyglutaric acids in urine support the diagnosis, though low-excretor phenotypes exist",
-   "Distinguish from glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency), which is a separate disorder of electron transfer flavoprotein affecting many dehydrogenases",
-   "Management principles are lysine-restricted diet, carnitine supplementation, and intensive emergency treatment during illness to prevent catabolic crises",
-   "Detectable on newborn screening via elevated C5DC, and pre-symptomatic treatment substantially reduces the risk of striatal injury"
+  "id": "glutaric_aciduria",
+  "name": "Glutaric aciduria",
+  "aliases": [
+    "glutaric aciduria type 1",
+    "GA1",
+    "glutaryl-CoA dehydrogenase deficiency",
+    "glutaric acidemia"
   ],
-  "pathophysiology": "Glutaric aciduria type 1 is an autosomal recessive deficiency of glutaryl-CoA dehydrogenase, a mitochondrial enzyme in the degradation pathway of lysine, hydroxylysine and tryptophan. Deficiency leads to accumulation of glutaric acid, 3-hydroxyglutaric acid and glutarylcarnitine. These metabolites, particularly 3-hydroxyglutaric acid, are neurotoxic and, during periods of catabolic stress, cause selective injury to the striatum, producing a dystonic-dyskinetic movement disorder. Chronic accumulation is also associated with characteristic structural brain changes and a predisposition to subdural haemorrhage. Unlike the classic organic acidaemias, severe systemic metabolic acidosis is not the dominant feature; the main threat is acute neurological injury.",
-  "additionalDifferentials": [
-   "Glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency)",
-   "Other organic acidaemias (methylmalonic, propionic, isovaleric)",
-   "Non-accidental injury (owing to subdural collections and macrocephaly)",
-   "Mitochondrial and other neurodegenerative disorders",
-   "Cerebral palsy or dystonia of other cause",
-   "Benign familial macrocephaly"
-  ],
-  "additionalInvestigations": [
-   "Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC)",
-   "Urine organic acids for glutaric and 3-hydroxyglutaric acids",
-   "Newborn screening acylcarnitine analysis",
-   "Brain MRI showing frontotemporal atrophy and widened Sylvian fissures",
-   "Molecular testing of the GCDH gene and, when needed, enzyme assay",
-   "Consideration of low-excretor status when urine metabolites are near normal"
-  ],
-  "redFlags": [
-   "Acute encephalopathic crisis during intercurrent illness threatening irreversible striatal injury is an emergency",
-   "New-onset dystonia, loss of motor milestones or altered consciousness in an infant",
-   "Progressive macrocephaly with subdural collections",
-   "Failure to institute emergency metabolic management during fever, vomiting or poor intake"
-  ],
-  "prognosis": "Outcome is largely determined by whether the child suffers a striatal metabolic crisis; presymptomatic detection through newborn screening with dietary treatment and emergency management can prevent the dystonic movement disorder, whereas an established crisis causes permanent and often disabling neurological injury.",
-  "pitfalls": [
-   "Misinterpreting subdural collections and macrocephaly as non-accidental injury",
-   "Missing low-excretor patients whose urine organic acids appear near normal",
-   "Failing to provide aggressive emergency treatment during minor illnesses in the vulnerable age window",
-   "Assuming absence of severe acidosis excludes an organic acid disorder"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the neurotoxic glutaric and 3-hydroxyglutaric acids",
-   "Supplement with L-carnitine to replenish free carnitine and promote excretion of glutarylcarnitine",
-   "Implement an emergency sick-day regimen during intercurrent illness, fasting or surgery, using high-energy glucose-based feeds, temporary protein reduction and intravenous glucose to prevent an encephalopathic crisis",
-   "During the vulnerable early-childhood window, treat catabolic stress aggressively and admit promptly for intravenous glucose and carnitine when oral intake is inadequate",
-   "Manage established dystonia with agents such as baclofen or trihexyphenidyl alongside physiotherapy and supportive neurorehabilitation",
-   "Monitor growth, nutritional and carnitine status and neurological development through a specialist metabolic team and dietitian",
-   "Offer genetic counselling for autosomal recessive inheritance, with newborn screening and testing of siblings for presymptomatic detection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glutaric_aciduria-pathway",
-   "title": "Glutaric aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and tryptophan",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute encephalopathic crisis during intercurrent illness threatening irreversible striatal injury is an emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC), Urine organic acids for glutaric and 3-hydroxyglutaric acids, Newborn screening acylcarnitine analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the neurotoxic glutaric and 3-hydroxyglutaric acids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting subdural collections and macrocephaly as non-accidental injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glutaric aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "glutaric_aciduria-matrix",
-   "title": "Glutaric aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and tryptophan",
+      "Macrocephaly is frequently present at or soon after birth and should prompt consideration of the diagnosis",
+      "The cardinal risk is an acute encephalopathic crisis, usually triggered by an intercurrent illness or fasting between around 6 and 18 months, causing irreversible striatal (basal ganglia) injury and a dystonic movement disorder",
+      "Neuroimaging may show frontotemporal atrophy, widened Sylvian fissures and subdural collections that can be mistaken for non-accidental injury",
+      "Elevated glutarylcarnitine (C5DC) on acylcarnitine profile and glutaric and 3-hydroxyglutaric acids in urine support the diagnosis, though low-excretor phenotypes exist",
+      "Distinguish from glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency), which is a separate disorder of electron transfer flavoprotein affecting many dehydrogenases",
+      "Management principles are lysine-restricted diet, carnitine supplementation, and intensive emergency treatment during illness to prevent catabolic crises",
+      "Detectable on newborn screening via elevated C5DC, and pre-symptomatic treatment substantially reduces the risk of striatal injury"
     ],
-    [
-     "Key Investigations",
-     "Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC), Urine organic acids for glutaric and 3-hydroxyglutaric",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glutaric aciduria type 1 is an autosomal recessive deficiency of glutaryl-CoA dehydrogenase, a mitochondrial enzyme in the degradation pathway of lysine, hydroxylysine and tryptophan. Deficiency leads to accumulation of glutaric acid, 3-hydroxyglutaric acid and glutarylcarnitine. These metabolites, particularly 3-hydroxyglutaric acid, are neurotoxic and, during periods of catabolic stress, cause selective injury to the striatum, producing a dystonic-dyskinetic movement disorder. Chronic accumulation is also associated with characteristic structural brain changes and a predisposition to subdural haemorrhage. Unlike the classic organic acidaemias, severe systemic metabolic acidosis is not the dominant feature; the main threat is acute neurological injury.",
+    "additionalDifferentials": [
+      "Glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency)",
+      "Other organic acidaemias (methylmalonic, propionic, isovaleric)",
+      "Non-accidental injury (owing to subdural collections and macrocephaly)",
+      "Mitochondrial and other neurodegenerative disorders",
+      "Cerebral palsy or dystonia of other cause",
+      "Benign familial macrocephaly"
     ],
-    [
-     "Primary Differentials",
-     "Glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency), Other organic acidaemias (methylmalonic, propionic,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC)",
+      "Urine organic acids for glutaric and 3-hydroxyglutaric acids",
+      "Newborn screening acylcarnitine analysis",
+      "Brain MRI showing frontotemporal atrophy and widened Sylvian fissures",
+      "Molecular testing of the GCDH gene and, when needed, enzyme assay",
+      "Consideration of low-excretor status when urine metabolites are near normal"
     ],
-    [
-     "Management Strategy",
-     "Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute encephalopathic crisis during intercurrent illness threatening irreversible striatal injury is an emergency",
+      "New-onset dystonia, loss of motor milestones or altered consciousness in an infant",
+      "Progressive macrocephaly with subdural collections",
+      "Failure to institute emergency metabolic management during fever, vomiting or poor intake"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting subdural collections and macrocephaly as non-accidental injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by whether the child suffers a striatal metabolic crisis; presymptomatic detection through newborn screening with dietary treatment and emergency management can prevent the dystonic movement disorder, whereas an established crisis causes permanent and often disabling neurological injury.",
+    "pitfalls": [
+      "Misinterpreting subdural collections and macrocephaly as non-accidental injury",
+      "Missing low-excretor patients whose urine organic acids appear near normal",
+      "Failing to provide aggressive emergency treatment during minor illnesses in the vulnerable age window",
+      "Assuming absence of severe acidosis excludes an organic acid disorder"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the neurotoxic glutaric and 3-hydroxyglutaric acids",
+      "Supplement with L-carnitine to replenish free carnitine and promote excretion of glutarylcarnitine",
+      "Implement an emergency sick-day regimen during intercurrent illness, fasting or surgery, using high-energy glucose-based feeds, temporary protein reduction and intravenous glucose to prevent an encephalopathic crisis",
+      "During the vulnerable early-childhood window, treat catabolic stress aggressively and admit promptly for intravenous glucose and carnitine when oral intake is inadequate",
+      "Manage established dystonia with agents such as baclofen or trihexyphenidyl alongside physiotherapy and supportive neurorehabilitation",
+      "Monitor growth, nutritional and carnitine status and neurological development through a specialist metabolic team and dietitian",
+      "Offer genetic counselling for autosomal recessive inheritance, with newborn screening and testing of siblings for presymptomatic detection"
     ]
-   ],
-   "caption": "Overview comparison matrix for glutaric aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glutaric-aciduria-real-image",
-   "title": "Glutaric aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "glutaric_aciduria-pathway",
+      "title": "Glutaric aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and tryptophan",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute encephalopathic crisis during intercurrent illness threatening irreversible striatal injury is an emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC), Urine organic acids for glutaric and 3-hydroxyglutaric acids, Newborn screening acylcarnitine analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the neurotoxic glutaric and 3-hydroxyglutaric acids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting subdural collections and macrocephaly as non-accidental injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glutaric aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glutaric_aciduria-matrix",
+      "title": "Glutaric aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Glutaric aciduria type 1 is caused by deficiency of glutaryl-CoA dehydrogenase in the catabolism of lysine, hydroxylysine and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma acylcarnitine profile with elevated glutarylcarnitine (C5DC), Urine organic acids for glutaric and 3-hydroxyglutaric",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glutaric aciduria type 2 (multiple acyl-CoA dehydrogenase deficiency), Other organic acidaemias (methylmalonic, propionic,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a lysine-restricted diet using lysine-free, arginine-enriched amino-acid supplements to limit production of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting subdural collections and macrocephaly as non-accidental injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glutaric aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glutaric_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Elevated glutarylcarnitine (C5DC)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Glutaric and 3-hydroxyglutaric acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening acylcarnitine analysis",
+          "cells": [
+            {
+              "text": "Presymptomatic detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Frontotemporal atrophy and widened Sylvian fissures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCDH gene testing and enzyme assay",
+          "cells": [
+            {
+              "text": "Molecular confirmation when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-excretor status assessment",
+          "cells": [
+            {
+              "text": "Urine metabolites near normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutaric_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glutaric aciduria type 2",
+          "cells": [
+            {
+              "text": "Multiple acyl-CoA dehydrogenase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Subdural collections and macrocephaly; misreading is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutaric_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lysine-restricted diet",
+          "cells": [
+            {
+              "text": "Lysine-free, arginine-enriched amino-acid supplements to limit neurotoxic metabolite production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine supplementation",
+          "cells": [
+            {
+              "text": "Replenishes free carnitine and promotes excretion of glutarylcarnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency sick-day regimen",
+          "cells": [
+            {
+              "text": "High-energy glucose-based feeds during fever, fasting or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt admission during catabolic stress",
+          "cells": [
+            {
+              "text": "Intravenous glucose in the vulnerable early-childhood window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia management",
+          "cells": [
+            {
+              "text": "Baclofen or trihexyphenidyl alongside physiotherapy and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic monitoring",
+          "cells": [
+            {
+              "text": "Growth, nutrition, carnitine status and neurodevelopment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; newborn screening and testing of siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glutaric_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of Glutaric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glutaric aciduria: encephalopathy or dystonia in an infant with macrocephaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute crisis during illness, new dystonia, progressive macrocephaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency metabolic management with IV glucose for an encephalopathic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile, urine organic acids, brain MRI and GCDH testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do raised glutarylcarnitine and urine glutaric acid confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glutaric aciduria type 2, other organic acidaemias or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lysine-restricted diet with arginine-enriched amino-acid supplements",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "L-carnitine to replenish free carnitine and remove glutarylcarnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency sick-day regimen during illness, fasting or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic dystonia treatment with physiotherapy and neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on striatal metabolic crisis; newborn screening and diet help prevent it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

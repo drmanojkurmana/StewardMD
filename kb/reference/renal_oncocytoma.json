@@ -1,177 +1,397 @@
 {
- "id": "renal_oncocytoma",
- "name": "Renal oncocytoma",
- "aliases": [
-  "oncocytoma of kidney"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Kidney",
- "specialty": "Urology / Uro-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Uro-oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
-   "Usually discovered incidentally as a well-defined solid cortical mass",
-   "May show a central stellate scar on imaging, though this is neither sensitive nor specific",
-   "Cannot be reliably distinguished from chromophobe renal cell carcinoma by imaging alone",
-   "Renal mass biopsy can suggest the diagnosis but sampling and hybrid oncocytic tumours limit certainty",
-   "Multiple oncocytomas or oncocytosis may occur in Birt-Hogg-Dube syndrome",
-   "Because malignancy cannot always be excluded preoperatively, many lesions are still resected"
+  "id": "renal_oncocytoma",
+  "name": "Renal oncocytoma",
+  "aliases": [
+    "oncocytoma of kidney"
   ],
-  "pathophysiology": "Renal oncocytoma is composed of oncocytes, cells packed with mitochondria that give an eosinophilic granular cytoplasm, and is thought to derive from the intercalated cells of the collecting duct. It is a benign neoplasm without metastatic potential, but it shares histological and immunophenotypic features with chromophobe renal cell carcinoma, which complicates diagnosis. Hybrid oncocytic-chromophobe tumours occur, particularly in the setting of Birt-Hogg-Dube syndrome, reflecting overlap in their cell of origin.",
-  "additionalDifferentials": [
-   "Chromophobe renal cell carcinoma",
-   "Clear cell renal cell carcinoma with eosinophilic features",
-   "Papillary renal cell carcinoma, eosinophilic type",
-   "Epithelioid angiomyolipoma",
-   "Hybrid oncocytic tumour in Birt-Hogg-Dube syndrome",
-   "Succinate dehydrogenase-deficient renal tumour"
-  ],
-  "additionalInvestigations": [
-   "CT or MRI to characterise the solid renal mass",
-   "Renal mass biopsy where the result would change management",
-   "Immunohistochemistry to help separate it from chromophobe carcinoma",
-   "Assessment for Birt-Hogg-Dube features when tumours are multiple",
-   "Surveillance imaging when a conservative approach is chosen"
-  ],
-  "redFlags": [
-   "Interval growth or new symptoms suggesting the lesion is not benign",
-   "Imaging features overlapping with malignancy",
-   "Multiple renal and cutaneous lesions suggesting a hereditary syndrome",
-   "Any histological atypia raising doubt about the benign diagnosis"
-  ],
-  "prognosis": "Renal oncocytoma is benign with an excellent prognosis and does not metastasise; the main challenge is diagnostic certainty rather than tumour behaviour, and outcomes are excellent whether managed by surveillance or excision.",
-  "pitfalls": [
-   "Relying on a central scar on imaging to diagnose it confidently",
-   "Assuming biopsy fully excludes chromophobe carcinoma",
-   "Missing an underlying Birt-Hogg-Dube syndrome",
-   "Over-treating a benign lesion or, conversely, under-treating a misclassified carcinoma"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology (standard reference)",
-   "WHO Classification of Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal cell carcinoma; the main challenge is diagnostic certainty, since it cannot be reliably distinguished from chromophobe RCC or hybrid oncocytic-chromophobe tumours by imaging alone.",
-   "Work up an incidentally found renal mass with pre and post contrast CT or MRI; consider renal mass biopsy using a risk stratification approach when the result would change management, keeping in mind grading concordance is only moderate and biopsy does not always change the plan.",
-   "Immunohistochemistry can help separate oncocytoma from chromophobe RCC when biopsy is performed, though sampling limitations and hybrid tumours mean biopsy supports rather than guarantees the diagnosis.",
-   "Sestamibi SPECT/CT has been studied as an adjunct for detecting mitochondria rich tumours (chromophobe RCC and oncocytoma) but remains a research/adjunct tool rather than a required guideline step.",
-   "For lesions confidently characterised as oncocytoma, active imaging surveillance is an appropriate default, mirroring the surveillance approach used for small, localised renal masses generally.",
-   "Continue surveillance with serial cross sectional imaging roughly every 3 to 6 months, then less often once stability is demonstrated, to reassess safety over time.",
-   "Move to treatment, favouring a nephron sparing approach (partial nephrectomy) over radical nephrectomy, when malignancy cannot be confidently excluded, hybrid features are suspected, or the lesion enlarges on surveillance.",
-   "Nephron sparing surgery is preferred over radical nephrectomy whenever technically feasible because it preserves renal parenchyma and avoids the long term renal function decline associated with radical nephrectomy.",
-   "Thermal ablation and other minimally invasive options exist among small renal mass strategies (radical nephrectomy, partial nephrectomy, thermal ablation, active surveillance); involvement of an experienced urologist is essential for choosing among them.",
-   "There is no role for systemic anticancer therapy (chemotherapy, targeted agents, or immunotherapy) and no lines of therapy in the oncologic sense; the only escalation pathway is from surveillance to surgical excision if the diagnosis becomes uncertain or the lesion changes.",
-   "Radiotherapy has no established role in the management of renal oncocytoma.",
-   "After nephron sparing surgery, monitor renal function and confirm final histology, since resected specimens can occasionally reveal chromophobe RCC or a hybrid tumour on full pathologic review.",
-   "Refer to or co-manage with a urologist experienced in renal mass management for decisions between surveillance, biopsy, and surgery, especially when findings are equivocal for malignancy, and refer for genetic counselling when multiple oncocytomas or oncocytosis raise suspicion for Birt-Hogg-Dube syndrome.",
-   "Refer promptly if surveillance imaging shows interval growth, new symptoms, or histological atypia that puts the benign diagnosis in doubt, since these situations may require treating the lesion as if it were renal cell carcinoma."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "renal_oncocytoma-pathway",
-   "title": "Renal oncocytoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Interval growth or new symptoms suggesting the lesion is not benign",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT or MRI to characterise the solid renal mass, Renal mass biopsy where the result would change management, Immunohistochemistry to help separate it from chromophobe carcinoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal cell carcinoma; the main challenge is diagnostic certainty, since it cannot be reliably"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a central scar on imaging to diagnose it confidently"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of renal oncocytoma."
-  }
- ],
- "tables": [
-  {
-   "id": "renal_oncocytoma-matrix",
-   "title": "Renal oncocytoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Kidney",
+  "specialty": "Urology / Uro-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Uro-oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
+      "Usually discovered incidentally as a well-defined solid cortical mass",
+      "May show a central stellate scar on imaging, though this is neither sensitive nor specific",
+      "Cannot be reliably distinguished from chromophobe renal cell carcinoma by imaging alone",
+      "Renal mass biopsy can suggest the diagnosis but sampling and hybrid oncocytic tumours limit certainty",
+      "Multiple oncocytomas or oncocytosis may occur in Birt-Hogg-Dube syndrome",
+      "Because malignancy cannot always be excluded preoperatively, many lesions are still resected"
     ],
-    [
-     "Key Investigations",
-     "CT or MRI to characterise the solid renal mass, Renal mass biopsy where the result would change management, Immunohistochemistry",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Renal oncocytoma is composed of oncocytes, cells packed with mitochondria that give an eosinophilic granular cytoplasm, and is thought to derive from the intercalated cells of the collecting duct. It is a benign neoplasm without metastatic potential, but it shares histological and immunophenotypic features with chromophobe renal cell carcinoma, which complicates diagnosis. Hybrid oncocytic-chromophobe tumours occur, particularly in the setting of Birt-Hogg-Dube syndrome, reflecting overlap in their cell of origin.",
+    "additionalDifferentials": [
+      "Chromophobe renal cell carcinoma",
+      "Clear cell renal cell carcinoma with eosinophilic features",
+      "Papillary renal cell carcinoma, eosinophilic type",
+      "Epithelioid angiomyolipoma",
+      "Hybrid oncocytic tumour in Birt-Hogg-Dube syndrome",
+      "Succinate dehydrogenase-deficient renal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Chromophobe renal cell carcinoma, Clear cell renal cell carcinoma with eosinophilic features, Papillary renal cell carcinoma,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT or MRI to characterise the solid renal mass",
+      "Renal mass biopsy where the result would change management",
+      "Immunohistochemistry to help separate it from chromophobe carcinoma",
+      "Assessment for Birt-Hogg-Dube features when tumours are multiple",
+      "Surveillance imaging when a conservative approach is chosen"
     ],
-    [
-     "Management Strategy",
-     "Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal",
-     "Core treatment modality"
+    "redFlags": [
+      "Interval growth or new symptoms suggesting the lesion is not benign",
+      "Imaging features overlapping with malignancy",
+      "Multiple renal and cutaneous lesions suggesting a hereditary syndrome",
+      "Any histological atypia raising doubt about the benign diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a central scar on imaging to diagnose it confidently",
-     "Prevent diagnostic or management error"
+    "prognosis": "Renal oncocytoma is benign with an excellent prognosis and does not metastasise; the main challenge is diagnostic certainty rather than tumour behaviour, and outcomes are excellent whether managed by surveillance or excision.",
+    "pitfalls": [
+      "Relying on a central scar on imaging to diagnose it confidently",
+      "Assuming biopsy fully excludes chromophobe carcinoma",
+      "Missing an underlying Birt-Hogg-Dube syndrome",
+      "Over-treating a benign lesion or, conversely, under-treating a misclassified carcinoma"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology (standard reference)",
+      "WHO Classification of Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal cell carcinoma; the main challenge is diagnostic certainty, since it cannot be reliably distinguished from chromophobe RCC or hybrid oncocytic-chromophobe tumours by imaging alone.",
+      "Work up an incidentally found renal mass with pre and post contrast CT or MRI; consider renal mass biopsy using a risk stratification approach when the result would change management, keeping in mind grading concordance is only moderate and biopsy does not always change the plan.",
+      "Immunohistochemistry can help separate oncocytoma from chromophobe RCC when biopsy is performed, though sampling limitations and hybrid tumours mean biopsy supports rather than guarantees the diagnosis.",
+      "Sestamibi SPECT/CT has been studied as an adjunct for detecting mitochondria rich tumours (chromophobe RCC and oncocytoma) but remains a research/adjunct tool rather than a required guideline step.",
+      "For lesions confidently characterised as oncocytoma, active imaging surveillance is an appropriate default, mirroring the surveillance approach used for small, localised renal masses generally.",
+      "Continue surveillance with serial cross sectional imaging roughly every 3 to 6 months, then less often once stability is demonstrated, to reassess safety over time.",
+      "Move to treatment, favouring a nephron sparing approach (partial nephrectomy) over radical nephrectomy, when malignancy cannot be confidently excluded, hybrid features are suspected, or the lesion enlarges on surveillance.",
+      "Nephron sparing surgery is preferred over radical nephrectomy whenever technically feasible because it preserves renal parenchyma and avoids the long term renal function decline associated with radical nephrectomy.",
+      "Thermal ablation and other minimally invasive options exist among small renal mass strategies (radical nephrectomy, partial nephrectomy, thermal ablation, active surveillance); involvement of an experienced urologist is essential for choosing among them.",
+      "There is no role for systemic anticancer therapy (chemotherapy, targeted agents, or immunotherapy) and no lines of therapy in the oncologic sense; the only escalation pathway is from surveillance to surgical excision if the diagnosis becomes uncertain or the lesion changes.",
+      "Radiotherapy has no established role in the management of renal oncocytoma.",
+      "After nephron sparing surgery, monitor renal function and confirm final histology, since resected specimens can occasionally reveal chromophobe RCC or a hybrid tumour on full pathologic review.",
+      "Refer to or co-manage with a urologist experienced in renal mass management for decisions between surveillance, biopsy, and surgery, especially when findings are equivocal for malignancy, and refer for genetic counselling when multiple oncocytomas or oncocytosis raise suspicion for Birt-Hogg-Dube syndrome.",
+      "Refer promptly if surveillance imaging shows interval growth, new symptoms, or histological atypia that puts the benign diagnosis in doubt, since these situations may require treating the lesion as if it were renal cell carcinoma."
     ]
-   ],
-   "caption": "Overview comparison matrix for renal oncocytoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "renal-oncocytoma-real-image",
-   "title": "Renal oncocytoma: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "renal_oncocytoma-pathway",
+      "title": "Renal oncocytoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Interval growth or new symptoms suggesting the lesion is not benign",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT or MRI to characterise the solid renal mass, Renal mass biopsy where the result would change management, Immunohistochemistry to help separate it from chromophobe carcinoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal cell carcinoma; the main challenge is diagnostic certainty, since it cannot be reliably"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a central scar on imaging to diagnose it confidently"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of renal oncocytoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "renal_oncocytoma-matrix",
+      "title": "Renal oncocytoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign renal epithelial tumour arising from the intercalated cells of the collecting duct",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT or MRI to characterise the solid renal mass, Renal mass biopsy where the result would change management, Immunohistochemistry",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chromophobe renal cell carcinoma, Clear cell renal cell carcinoma with eosinophilic features, Papillary renal cell carcinoma,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Renal oncocytoma is a benign, non metastasising tumour, so treatment intent is never curative oncologic the way it is for renal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a central scar on imaging to diagnose it confidently",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for renal oncocytoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_oncocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Solid renal mass characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal mass biopsy, where it would change management",
+          "cells": [
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Tumour markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_oncocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromophobe renal cell carcinoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear cell renal cell carcinoma with eosinophilic features",
+          "cells": [
+            {
+              "text": "Imaging features overlapping with malignancy"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_oncocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign tumour",
+          "cells": [
+            {
+              "text": "Benign and non-metastasising"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incidental mass",
+          "cells": [
+            {
+              "text": "Work-up of an incidentally found renal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval change",
+          "cells": [
+            {
+              "text": "Urgent review for interval growth or new symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_oncocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Renal oncocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected renal oncocytoma: solid renal mass, often incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Interval growth, new symptoms, imaging overlapping malignancy, or multiple lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent uro-oncology review for interval growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI; renal mass biopsy if it would change management; IHC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is oncocytoma confirmed with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chromophobe or clear cell RCC; manage as malignancy and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benign, non-metastasising tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Work up an incidentally found renal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent review for interval growth or new symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Imaging surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

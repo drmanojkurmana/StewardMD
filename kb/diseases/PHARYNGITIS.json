@@ -298,25 +298,729 @@
       "caption": "Diagnostic and clinical overview matrix for acute pharyngitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "pharyngitis-real-image",
-      "title": "Acute Pharyngitis: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Guidance for Group A Strep Pharyngitis",
+      "url": "https://www.cdc.gov/group-a-strep/hcp/clinical-guidance/strep-throat.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PHARYNGITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing sore throat for group A strep",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Centor criteria",
+          "cells": [
+            {
+              "text": "1 point each: fever, no cough, tender anterior cervical nodes, tonsillar exudate or swelling"
+            },
+            {
+              "text": "Score 0 to 4"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Centor 0 to 1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "GAS probability about 2% to 3%",
+              "range": [
+                2,
+                3
+              ]
+            },
+            {
+              "text": "Neither test nor treat"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Centor 2 to 3",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "GAS probability about 8% to 19%",
+              "range": [
+                8,
+                19
+              ]
+            },
+            {
+              "text": "Rapid antigen test guides treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Centor 4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "GAS probability about 41%",
+              "op": "=",
+              "value": 41
+            },
+            {
+              "text": "Rapid test or empirical treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral features",
+          "cells": [
+            {
+              "text": "Cough, rhinorrhoea, hoarseness, oral ulcers, conjunctivitis"
+            },
+            {
+              "text": "{{hy:No strep testing needed}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "GAS prevalence",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% of adults; up to about 35% of children, peak age 5 to 15",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Pretest probability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid antigen test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 80%, specificity about 95%",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Swab both tonsils and posterior pharynx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Single swab sensitivity about 85% to 90%",
+              "range": [
+                85,
+                90
+              ]
+            },
+            {
+              "text": "Gold standard; back-up for negative RADT in children over 3 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carriage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 20% of schoolchildren",
+              "op": "<=",
+              "value": 20
+            },
+            {
+              "text": "Tests cannot separate carriage from infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical lymphocytosis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Lymphocytes >4000/uL or >50% with >10% atypical",
+              "op": ">",
+              "value": 4000
+            },
+            {
+              "text": "Points to EBV mononucleosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "PHARYNGITIS-ddx",
+      "kind": "ddx",
+      "title": "Sore throat causes to separate from strep pharyngitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral pharyngitis",
+          "cells": [
+            {
+              "text": "Cough, coryza, hoarseness, conjunctivitis, oral ulcers"
+            },
+            {
+              "text": "Clinical; no testing needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Marked nodes, palatal petechiae, splenomegaly"
+            },
+            {
+              "text": "Heterophil antibody and blood film (heterophil may be negative early)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritonsillar abscess",
+          "cells": [
+            {
+              "text": "{{hy:Trismus, hot potato voice, uvular deviation, drooling}}"
+            },
+            {
+              "text": "Clinical; CT if unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epiglottitis",
+          "cells": [
+            {
+              "text": "Dysphagia, drooling, stridor; airway emergency"
+            },
+            {
+              "text": "Lateral neck film thumb sign, not required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retropharyngeal abscess",
+          "cells": [
+            {
+              "text": "Neck pain and stiffness after URI in children"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lemierre syndrome",
+          "cells": [
+            {
+              "text": "Septic jugular vein thrombophlebitis with metastatic infection"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonococcal pharyngitis",
+          "cells": [
+            {
+              "text": "Sexual exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute HIV infection",
+          "cells": [
+            {
+              "text": "Pharyngitis with risk exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candida",
+          "cells": [
+            {
+              "text": "Cottage-cheese exudate that scrapes off, leaving bleeding surface"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "PHARYNGITIS-treatment",
+      "kind": "treatment",
+      "title": "Antibiotics for confirmed group A strep pharyngitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose as stated (10 days unless noted)"
+      ],
+      "rows": [
+        {
+          "parameter": "No antibiotic",
+          "cells": [
+            {
+              "text": "Viral pharyngitis or negative testing"
+            },
+            {
+              "text": "GAS is the only common cause needing antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penicillin V oral",
+          "cells": [
+            {
+              "text": "{{hy:First choice}}"
+            },
+            {
+              "text": "Adults 250 mg four times daily or 500 mg twice daily; children 250 mg two or three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin oral",
+          "cells": [
+            {
+              "text": "First choice"
+            },
+            {
+              "text": "50 mg/kg once daily (max 1000 mg) or 25 mg/kg twice daily (max 500 mg)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzathine penicillin G IM",
+          "cells": [
+            {
+              "text": "Single dose when adherence is a concern"
+            },
+            {
+              "text": "600,000 units if <27 kg; 1,200,000 units if >=27 kg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cephalexin or cefadroxil",
+          "cells": [
+            {
+              "text": "Penicillin allergy without immediate-type reaction"
+            },
+            {
+              "text": "Cephalexin 20 mg/kg twice daily (max 500 mg); cefadroxil 30 mg/kg once daily (max 1 g)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clindamycin",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "7 mg/kg three times daily (max 300 mg per dose)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "12 mg/kg once (max 500 mg), then 6 mg/kg daily (max 250 mg) for 4 days; 5 days total"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clarithromycin",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "7.5 mg/kg twice daily (max 250 mg per dose)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Return to school or work",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Afebrile and 12 to 24 h after starting antibiotics",
+              "range": [
+                12,
+                24
+              ]
+            },
+            {
+              "text": "No longer contagious"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Allergy regimens are given by CDC as weight-based doses with maxima, not separate adult doses."
+    },
+    {
+      "id": "PHARYNGITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PHARYNGITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute pharyngitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute sore throat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Drooling, stridor, trismus or unilateral palatal bulge?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway or abscess care; CT if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Clear viral features (cough, coryza, hoarseness, ulcers)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Symptomatic care; no test, no antibiotic",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Centor score?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rapid antigen test",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "RADT positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Child over 3 years?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Back-up throat culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Penicillin V or amoxicillin for 10 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Return to school or work when afebrile and 12 to 24 h on antibiotics",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n5",
+          "label": "0 to 1"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "2 to 3"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "4, empirical option"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Culture positive"
+        },
+        {
+          "from": "n10",
+          "to": "n5",
+          "label": "Culture negative"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

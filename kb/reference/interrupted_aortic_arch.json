@@ -1,173 +1,471 @@
 {
- "id": "interrupted_aortic_arch",
- "name": "Interrupted aortic arch",
- "aliases": [
-  "IAA",
-  "aortic arch interruption",
-  "interrupted arch"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through the arterial duct",
-   "Types are classified by the site of interruption relative to the arch vessels, with interruption distal to the left subclavian, between the left carotid and subclavian, or between the carotids",
-   "The systemic circulation to the lower body is duct-dependent, and closure of the duct precipitates shock, acidosis and collapse",
-   "It almost always coexists with a ventricular septal defect, and a subaortic narrowing is common",
-   "Prostaglandin infusion to maintain ductal patency is life-saving while the neonate is stabilised and prepared for surgery",
-   "Type B interruption is strongly associated with 22q11.2 deletion and the DiGeorge phenotype",
-   "Definitive treatment is surgical reconstruction re-establishing arch continuity and repairing associated defects"
+  "id": "interrupted_aortic_arch",
+  "name": "Interrupted aortic arch",
+  "aliases": [
+    "IAA",
+    "aortic arch interruption",
+    "interrupted arch"
   ],
-  "pathophysiology": "Interrupted aortic arch is an extreme conotruncal and arch anomaly in which a segment of the aortic arch is absent, leaving no luminal continuity between the proximal and distal aorta. Perfusion of the lower body and any arch vessels beyond the interruption depends entirely on right-to-left flow through the arterial duct. While the duct remains open the circulation is balanced, but as the duct constricts after birth lower-body perfusion falls abruptly, causing profound metabolic acidosis, renal and gut hypoperfusion and cardiovascular collapse. An almost invariable ventricular septal defect and frequent posterior malalignment causing subaortic obstruction shape the intracardiac haemodynamics and pulmonary overcirculation. The lesion, particularly type B, is closely linked to 22q11.2 microdeletion.",
-  "additionalDifferentials": [
-   "Critical coarctation of the aorta",
-   "Hypoplastic left heart syndrome",
-   "Critical aortic stenosis",
-   "Other duct-dependent systemic circulation lesions",
-   "Sepsis or metabolic disease causing neonatal collapse",
-   "Aortic arch hypoplasia"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy",
-   "Cardiac CT or MR angiography to define the interruption site and arch vessels",
-   "Preductal and postductal saturation and blood pressure comparison",
-   "Genetic testing for 22q11.2 deletion with calcium and immune assessment",
-   "Arterial blood gas to detect metabolic acidosis from lower-body hypoperfusion",
-   "Cardiac catheterisation in selected complex cases"
-  ],
-  "redFlags": [
-   "Circulatory collapse and severe acidosis as the duct closes",
-   "Absent or weak lower-limb pulses with differential upper and lower body perfusion",
-   "Oliguria or signs of gut ischaemia from lower-body hypoperfusion",
-   "Hypocalcaemia and immune deficiency in the DiGeorge spectrum"
-  ],
-  "prognosis": "Untreated the condition is rapidly fatal once the duct closes, but with prostaglandin stabilisation and surgical repair survival is good, although recurrent arch obstruction and residual subaortic stenosis may require reintervention.",
-  "pitfalls": [
-   "Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion",
-   "Allowing the duct to close before prostaglandin is started",
-   "Overlooking subaortic obstruction that complicates surgical planning",
-   "Failing to test for 22q11.2 deletion, with its calcium, immune and irradiated blood product implications"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery",
-   "Stabilise the neonate with correction of metabolic acidosis, inotropic support and mechanical ventilation, avoiding excessive supplemental oxygen to limit pulmonary overcirculation",
-   "Undertake definitive surgical repair re-establishing aortic arch continuity with concurrent ventricular septal defect closure and relief of subaortic obstruction",
-   "Test for 22q11.2 deletion and manage associated hypocalcaemia and immune deficiency, using irradiated blood products and caution with live vaccines",
-   "Maintain lifelong cardiology surveillance for recurrent arch obstruction and progressive residual subaortic stenosis requiring reintervention",
-   "Provide genetic counselling and family assessment given the 22q11.2 microdeletion association",
-   "Coordinate care across neonatal intensive care, congenital cardiology and cardiac surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "interrupted_aortic_arch-pathway",
-   "title": "Interrupted aortic arch: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through the arterial duct",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Circulatory collapse and severe acidosis as the duct closes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy, Cardiac CT or MR angiography to define the interruption site and arch vessels, Preductal and postductal saturation and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of interrupted aortic arch."
-  }
- ],
- "tables": [
-  {
-   "id": "interrupted_aortic_arch-matrix",
-   "title": "Interrupted aortic arch: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through the arterial duct",
+      "Types are classified by the site of interruption relative to the arch vessels, with interruption distal to the left subclavian, between the left carotid and subclavian, or between the carotids",
+      "The systemic circulation to the lower body is duct-dependent, and closure of the duct precipitates shock, acidosis and collapse",
+      "It almost always coexists with a ventricular septal defect, and a subaortic narrowing is common",
+      "Prostaglandin infusion to maintain ductal patency is life-saving while the neonate is stabilised and prepared for surgery",
+      "Type B interruption is strongly associated with 22q11.2 deletion and the DiGeorge phenotype",
+      "Definitive treatment is surgical reconstruction re-establishing arch continuity and repairing associated defects"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy, Cardiac CT or MR angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Interrupted aortic arch is an extreme conotruncal and arch anomaly in which a segment of the aortic arch is absent, leaving no luminal continuity between the proximal and distal aorta. Perfusion of the lower body and any arch vessels beyond the interruption depends entirely on right-to-left flow through the arterial duct. While the duct remains open the circulation is balanced, but as the duct constricts after birth lower-body perfusion falls abruptly, causing profound metabolic acidosis, renal and gut hypoperfusion and cardiovascular collapse. An almost invariable ventricular septal defect and frequent posterior malalignment causing subaortic obstruction shape the intracardiac haemodynamics and pulmonary overcirculation. The lesion, particularly type B, is closely linked to 22q11.2 microdeletion.",
+    "additionalDifferentials": [
+      "Critical coarctation of the aorta",
+      "Hypoplastic left heart syndrome",
+      "Critical aortic stenosis",
+      "Other duct-dependent systemic circulation lesions",
+      "Sepsis or metabolic disease causing neonatal collapse",
+      "Aortic arch hypoplasia"
     ],
-    [
-     "Primary Differentials",
-     "Critical coarctation of the aorta, Hypoplastic left heart syndrome, Critical aortic stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy",
+      "Cardiac CT or MR angiography to define the interruption site and arch vessels",
+      "Preductal and postductal saturation and blood pressure comparison",
+      "Genetic testing for 22q11.2 deletion with calcium and immune assessment",
+      "Arterial blood gas to detect metabolic acidosis from lower-body hypoperfusion",
+      "Cardiac catheterisation in selected complex cases"
     ],
-    [
-     "Management Strategy",
-     "Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery",
-     "Core treatment modality"
+    "redFlags": [
+      "Circulatory collapse and severe acidosis as the duct closes",
+      "Absent or weak lower-limb pulses with differential upper and lower body perfusion",
+      "Oliguria or signs of gut ischaemia from lower-body hypoperfusion",
+      "Hypocalcaemia and immune deficiency in the DiGeorge spectrum"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated the condition is rapidly fatal once the duct closes, but with prostaglandin stabilisation and surgical repair survival is good, although recurrent arch obstruction and residual subaortic stenosis may require reintervention.",
+    "pitfalls": [
+      "Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion",
+      "Allowing the duct to close before prostaglandin is started",
+      "Overlooking subaortic obstruction that complicates surgical planning",
+      "Failing to test for 22q11.2 deletion, with its calcium, immune and irradiated blood product implications"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery",
+      "Stabilise the neonate with correction of metabolic acidosis, inotropic support and mechanical ventilation, avoiding excessive supplemental oxygen to limit pulmonary overcirculation",
+      "Undertake definitive surgical repair re-establishing aortic arch continuity with concurrent ventricular septal defect closure and relief of subaortic obstruction",
+      "Test for 22q11.2 deletion and manage associated hypocalcaemia and immune deficiency, using irradiated blood products and caution with live vaccines",
+      "Maintain lifelong cardiology surveillance for recurrent arch obstruction and progressive residual subaortic stenosis requiring reintervention",
+      "Provide genetic counselling and family assessment given the 22q11.2 microdeletion association",
+      "Coordinate care across neonatal intensive care, congenital cardiology and cardiac surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for interrupted aortic arch."
-  }
- ],
- "diagrams": [
-  {
-   "id": "interrupted-aortic-arch-real-image",
-   "title": "Interrupted aortic arch: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "interrupted_aortic_arch-pathway",
+      "title": "Interrupted aortic arch: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through the arterial duct",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Circulatory collapse and severe acidosis as the duct closes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy, Cardiac CT or MR angiography to define the interruption site and arch vessels, Preductal and postductal saturation and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of interrupted aortic arch."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "interrupted_aortic_arch-matrix",
+      "title": "Interrupted aortic arch: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "There is complete anatomical discontinuity between the ascending and descending aorta, so the lower body depends on flow through",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to confirm arch discontinuity, the ventricular septal defect and subaortic anatomy, Cardiac CT or MR angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Critical coarctation of the aorta, Hypoplastic left heart syndrome, Critical aortic stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence immediate prostaglandin E infusion to maintain ductal patency and preserve lower-body perfusion pending surgery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing neonatal collapse as sepsis and missing the duct-dependent lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for interrupted aortic arch."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interrupted_aortic_arch-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Arch discontinuity, ventricular septal defect and subaortic anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "Interruption site and arch vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre- and post-ductal saturation and blood pressure",
+          "cells": [
+            {
+              "text": "Differential upper and lower body perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "22q11.2 deletion testing with calcium and immune assessment",
+          "cells": [
+            {
+              "text": "Associated deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Metabolic acidosis from lower-body hypoperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Selected complex cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interrupted_aortic_arch-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Critical coarctation of the aorta",
+          "cells": [
+            {
+              "text": "Narrowing rather than complete discontinuity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoplastic left heart syndrome",
+          "cells": [
+            {
+              "text": "Left heart underdevelopment rather than arch interruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis",
+          "cells": [
+            {
+              "text": "Early collapse can be mistaken for sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interrupted_aortic_arch-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin E infusion",
+          "cells": [
+            {
+              "text": "Maintains ductal patency and preserves lower-body perfusion pending surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stabilisation",
+          "cells": [
+            {
+              "text": "Correct acidosis; inotropes and ventilation; avoid excess oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive repair",
+          "cells": [
+            {
+              "text": "Arch continuity restored with ventricular septal defect closure and relief of subaortic obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "22q11.2 deletion",
+          "cells": [
+            {
+              "text": "Manage hypocalcaemia and immune deficiency; irradiated blood products and caution with live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Lifelong cardiology review for arch obstruction and residual subaortic stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "22q11.2 microdeletion association; family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interrupted_aortic_arch-dx-mgmt",
+      "title": "Diagnosis and management of Interrupted aortic arch",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with duct-dependent collapse, acidosis and lower-limb pulse deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Circulatory collapse, oliguria, gut ischaemia or hypocalcaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate prostaglandin E infusion and stabilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo for arch and septal anatomy, CT or MR angiography, saturations, gas, 22q11.2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arch interruption confirmed with ductal dependence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coarctation, HLHS or sepsis; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maintain ductal patency with prostaglandin E infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct acidosis; inotropes and ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Definitive repair with ventricular septal defect closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Test for 22q11.2 deletion; manage calcium and immune issues",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong cardiology surveillance for recurrent obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome after repair depends on arch and subaortic results; lifelong surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

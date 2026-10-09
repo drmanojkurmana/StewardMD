@@ -1,173 +1,453 @@
 {
- "id": "diphyllobothriasis",
- "name": "Diphyllobothriasis (fish tapeworm)",
- "aliases": [
-  "fish tapeworm infection",
-  "broad tapeworm infection",
-  "Diphyllobothrium latum infection",
-  "Dibothriocephalus latus infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked freshwater or anadromous fish containing infective larvae",
-   "It occurs where such fish are eaten uncooked, including in dishes like sushi, sashimi, ceviche and marinated raw fish, and the adult is among the longest human tapeworms",
-   "Most infections cause few symptoms, but some patients report abdominal discomfort, bloating, diarrhoea or the passage of proglottids",
-   "The hallmark complication is vitamin B12 deficiency, because the worm competes for and avidly takes up dietary B12, which can lead to megaloblastic anaemia and, uncommonly, neurological features",
-   "Diagnosis is by finding the characteristic operculated eggs, or chains of proglottids, on stool microscopy",
-   "A dietary history of raw freshwater or migratory fish consumption is an important clue",
-   "Praziquantel is the treatment of choice, with vitamin B12 replacement where deficiency and anaemia have developed"
+  "id": "diphyllobothriasis",
+  "name": "Diphyllobothriasis (fish tapeworm)",
+  "aliases": [
+    "fish tapeworm infection",
+    "broad tapeworm infection",
+    "Diphyllobothrium latum infection",
+    "Dibothriocephalus latus infection"
   ],
-  "pathophysiology": "The adult Diphyllobothrium attaches by its bothria to the small-intestinal mucosa and can reach great length. Humans are infected by eating raw or undercooked fish harbouring the plerocercoid larva, which develops into the adult tapeworm over weeks. Positioned in the proximal small intestine, the worm competes with the host for luminal vitamin B12, binding and absorbing it far more efficiently than the host and thereby depleting available B12; with a favourably situated heavy worm, this can produce B12 deficiency with megaloblastic anaemia and, occasionally, subacute combined degeneration and other neurological manifestations. Local symptoms are otherwise mild and reflect the mechanical presence of the worm rather than tissue invasion.",
-  "additionalDifferentials": [
-   "Other tapeworm infections such as taeniasis and hymenolepiasis",
-   "Pernicious anaemia and other causes of vitamin B12 deficiency",
-   "Other causes of megaloblastic anaemia including folate deficiency",
-   "Malabsorptive disorders",
-   "Irritable bowel syndrome",
-   "Other intestinal helminthiases"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for operculated eggs or proglottids",
-   "Full blood count and film for macrocytosis and megaloblastic changes",
-   "Serum vitamin B12 level",
-   "Additional haematinics such as folate to clarify the anaemia",
-   "Molecular or morphological identification of the tapeworm species",
-   "Dietary and travel history focused on raw fish consumption"
-  ],
-  "redFlags": [
-   "Symptomatic megaloblastic anaemia with cardiovascular compromise",
-   "Neurological features suggesting B12-related subacute combined degeneration",
-   "Intestinal obstruction from a very heavy worm burden",
-   "Persistent infection despite treatment"
-  ],
-  "prognosis": "Excellent; the tapeworm is readily eradicated, and B12 deficiency with its haematological and neurological consequences resolves with treatment and vitamin replacement, though established neurological damage may only partly recover.",
-  "pitfalls": [
-   "Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish",
-   "Overlooking the dietary history that points to the diagnosis",
-   "Treating the anaemia without eradicating the worm",
-   "Assuming all megaloblastic anaemia is due to pernicious anaemia"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative",
-   "Vitamin B12 replacement to correct deficiency and the resulting megaloblastic anaemia",
-   "Confirm cure with follow-up stool examination for eggs or proglottids",
-   "Dietary prevention advice to cook or adequately freeze freshwater and anadromous fish and to avoid raw preparations",
-   "Monitor recovery of the blood count and any neurological features of B12 deficiency",
-   "Public health awareness where locally relevant, given the food-borne source"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "diphyllobothriasis-pathway",
-   "title": "Diphyllobothriasis (fish tapeworm): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked freshwater or anadromous fish containing infective larvae",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic megaloblastic anaemia with cardiovascular compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for operculated eggs or proglottids, Full blood count and film for macrocytosis and megaloblastic changes, Serum vitamin B12 level"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of diphyllobothriasis (fish tapeworm)."
-  }
- ],
- "tables": [
-  {
-   "id": "diphyllobothriasis-matrix",
-   "title": "Diphyllobothriasis (fish tapeworm): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked freshwater or anadromous fish containing infective larvae",
+      "It occurs where such fish are eaten uncooked, including in dishes like sushi, sashimi, ceviche and marinated raw fish, and the adult is among the longest human tapeworms",
+      "Most infections cause few symptoms, but some patients report abdominal discomfort, bloating, diarrhoea or the passage of proglottids",
+      "The hallmark complication is vitamin B12 deficiency, because the worm competes for and avidly takes up dietary B12, which can lead to megaloblastic anaemia and, uncommonly, neurological features",
+      "Diagnosis is by finding the characteristic operculated eggs, or chains of proglottids, on stool microscopy",
+      "A dietary history of raw freshwater or migratory fish consumption is an important clue",
+      "Praziquantel is the treatment of choice, with vitamin B12 replacement where deficiency and anaemia have developed"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for operculated eggs or proglottids, Full blood count and film for macrocytosis and megaloblastic changes, Serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The adult Diphyllobothrium attaches by its bothria to the small-intestinal mucosa and can reach great length. Humans are infected by eating raw or undercooked fish harbouring the plerocercoid larva, which develops into the adult tapeworm over weeks. Positioned in the proximal small intestine, the worm competes with the host for luminal vitamin B12, binding and absorbing it far more efficiently than the host and thereby depleting available B12; with a favourably situated heavy worm, this can produce B12 deficiency with megaloblastic anaemia and, occasionally, subacute combined degeneration and other neurological manifestations. Local symptoms are otherwise mild and reflect the mechanical presence of the worm rather than tissue invasion.",
+    "additionalDifferentials": [
+      "Other tapeworm infections such as taeniasis and hymenolepiasis",
+      "Pernicious anaemia and other causes of vitamin B12 deficiency",
+      "Other causes of megaloblastic anaemia including folate deficiency",
+      "Malabsorptive disorders",
+      "Irritable bowel syndrome",
+      "Other intestinal helminthiases"
     ],
-    [
-     "Primary Differentials",
-     "Other tapeworm infections such as taeniasis and hymenolepiasis, Pernicious anaemia and other causes of vitamin B12 deficiency,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for operculated eggs or proglottids",
+      "Full blood count and film for macrocytosis and megaloblastic changes",
+      "Serum vitamin B12 level",
+      "Additional haematinics such as folate to clarify the anaemia",
+      "Molecular or morphological identification of the tapeworm species",
+      "Dietary and travel history focused on raw fish consumption"
     ],
-    [
-     "Management Strategy",
-     "Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic megaloblastic anaemia with cardiovascular compromise",
+      "Neurological features suggesting B12-related subacute combined degeneration",
+      "Intestinal obstruction from a very heavy worm burden",
+      "Persistent infection despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; the tapeworm is readily eradicated, and B12 deficiency with its haematological and neurological consequences resolves with treatment and vitamin replacement, though established neurological damage may only partly recover.",
+    "pitfalls": [
+      "Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish",
+      "Overlooking the dietary history that points to the diagnosis",
+      "Treating the anaemia without eradicating the worm",
+      "Assuming all megaloblastic anaemia is due to pernicious anaemia"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative",
+      "Vitamin B12 replacement to correct deficiency and the resulting megaloblastic anaemia",
+      "Confirm cure with follow-up stool examination for eggs or proglottids",
+      "Dietary prevention advice to cook or adequately freeze freshwater and anadromous fish and to avoid raw preparations",
+      "Monitor recovery of the blood count and any neurological features of B12 deficiency",
+      "Public health awareness where locally relevant, given the food-borne source"
     ]
-   ],
-   "caption": "Overview comparison matrix for diphyllobothriasis (fish tapeworm)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "diphyllobothriasis-real-image",
-   "title": "Diphyllobothriasis (fish tapeworm): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "diphyllobothriasis-pathway",
+      "title": "Diphyllobothriasis (fish tapeworm): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked freshwater or anadromous fish containing infective larvae",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic megaloblastic anaemia with cardiovascular compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for operculated eggs or proglottids, Full blood count and film for macrocytosis and megaloblastic changes, Serum vitamin B12 level"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of diphyllobothriasis (fish tapeworm)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "diphyllobothriasis-matrix",
+      "title": "Diphyllobothriasis (fish tapeworm): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diphyllobothriasis is caused by broad or fish tapeworms of the genus Diphyllobothrium, acquired by eating raw or undercooked",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for operculated eggs or proglottids, Full blood count and film for macrocytosis and megaloblastic changes, Serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other tapeworm infections such as taeniasis and hymenolepiasis, Pernicious anaemia and other causes of vitamin B12 deficiency,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anthelmintic eradication of the tapeworm with a single course of praziquantel, or niclosamide as an alternative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Investigating megaloblastic anaemia without considering fish tapeworm in those who eat raw fish",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for diphyllobothriasis (fish tapeworm)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diphyllobothriasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy for operculated eggs or proglottids",
+          "cells": [
+            {
+              "text": "Eggs or proglottids in stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Macrocytosis and megaloblastic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum vitamin B12",
+          "cells": [
+            {
+              "text": "B12 deficiency causing the anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate and other haematinics",
+          "cells": [
+            {
+              "text": "Clarifies the cause of the anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and travel history",
+          "cells": [
+            {
+              "text": "Raw fish consumption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphyllobothriasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anaemia",
+          "cells": [
+            {
+              "text": "Assumed in error; the diet history points to the worm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "Another megaloblastic cause, clarified by haematinics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphyllobothriasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel or niclosamide",
+          "cells": [
+            {
+              "text": "Single course to eradicate the tapeworm; niclosamide as alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 replacement",
+          "cells": [
+            {
+              "text": "Corrects the deficiency and megaloblastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cure confirmation",
+          "cells": [
+            {
+              "text": "Follow-up stool examination for eggs or proglottids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary prevention",
+          "cells": [
+            {
+              "text": "Cook or freeze freshwater and anadromous fish; avoid raw preparations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood count recovery and neurological features of B12 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health awareness",
+          "cells": [
+            {
+              "text": "Food-borne source, where locally relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diphyllobothriasis-dx-mgmt",
+      "title": "Diagnosis and management of Diphyllobothriasis (fish tapeworm)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Diphyllobothrium infection: megaloblastic anaemia after raw fish",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiac compromise, neurological B12 signs, obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of obstruction and severe anaemia with cardiovascular compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool for operculated eggs or proglottids; FBC and film; serum B12 and folate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are eggs or proglottids seen with B12 deficiency and a raw-fish history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pernicious anaemia, folate deficiency or another tapeworm infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as a single course, or niclosamide as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vitamin B12 replacement to correct the megaloblastic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Follow-up stool examination to confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cook or freeze freshwater and anadromous fish; avoid raw preparations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor blood count and neurological features of B12 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; tapeworm readily eradicated; neurological damage may partly recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

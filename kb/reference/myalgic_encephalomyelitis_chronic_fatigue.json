@@ -1,200 +1,619 @@
 {
- "id": "myalgic_encephalomyelitis_chronic_fatigue",
- "name": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome",
- "system": "Neurologic / Multisystem",
- "class": "non_infective",
- "chapter": 461,
- "page": 3649,
- "aliases": [
-  "ME/CFS",
-  "Chronic Fatigue Syndrome",
-  "Myalgic Encephalomyelitis",
-  "CFS",
-  "ME"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3649",
-  "clinicalPearls": [
-   "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of multiple sclerosis, rheumatoid arthritis, and congestive heart failure.",
-   "The defining feature is persistent, unexplained fatigue causing substantial functional impairment, together with postexertional malaise (PEM) - worsening of symptoms after physical, mental, or emotional exertion that would not have been a problem before the illness.",
-   "PEM relapses last longer than a day and can persist for weeks; the relationship between a relapse and the preceding activity is often not apparent to the patient, so PEM may go unrecognized.",
-   "Common accompanying symptoms include pain, cognitive dysfunction (patient-described 'brain fog'), unrefreshing sleep, headache, sore throat, tender lymph nodes, muscle and joint aches, feverishness, and orthostatic intolerance.",
-   "There is no diagnostic test; diagnosis rests on a characteristic profile of patient-reported symptoms, requiring evaluation by an experienced clinician.",
-   "The 2015 Institute of Medicine criteria require substantial activity reduction with profound new-onset fatigue not relieved by rest, plus PEM, plus unrefreshing sleep, plus either cognitive impairment or orthostatic intolerance.",
-   "Routine laboratory tests are typically within normal limits in ME/CFS; their value lies in identifying alternative or contributing illnesses rather than confirming the diagnosis.",
-   "Roughly 10% of patients remain ill for 6 months or more after a variety of infections (e.g., Epstein-Barr virus, Ross River virus, Q fever, Ebola, SARS-CoV-1, Giardia); recovery is otherwise the rule.",
-   "Recognition of ME/CFS as a diagnosable component of Long COVID has increased clinical awareness, but patients still encounter stigma and misunderstanding from clinicians.",
-   "An estimated 80% or more of people who meet ME/CFS criteria have never been diagnosed by a health care provider.",
-   "Patients are reported to be more medication-sensitive than the general population, so any drug should begin at lower-than-usual doses and be increased slowly.",
-   "Patients may appear well during an office visit and then relapse afterward from the exertion of attending the consultation."
+  "id": "myalgic_encephalomyelitis_chronic_fatigue",
+  "name": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome",
+  "system": "Neurologic / Multisystem",
+  "class": "non_infective",
+  "chapter": 461,
+  "page": 3649,
+  "aliases": [
+    "ME/CFS",
+    "Chronic Fatigue Syndrome",
+    "Myalgic Encephalomyelitis",
+    "CFS",
+    "ME"
   ],
-  "pathophysiology": "ME/CFS is understood as a complex disorder involving alterations across multiple interrelated homeostatic systems rather than a single mechanism. A wide range of infectious agents (viral and nonviral) can trigger a postinfectious fatiguing illness resembling ME/CFS, and noninfectious stressors - toxins, physical trauma, adverse life events, and cumulative allostatic load ('wear and tear') - are also associated. Twin and family studies suggest contributions from shared environment and genetic factors. Evidence for immunologic dysfunction is inconsistent and not established in most patients; reported findings include modest antinuclear antibody elevations, reduced immunoglobulin subclasses, impaired mitogen-driven lymphocyte proliferation, decreased natural killer cell activity, altered cytokine production, and altered T-cell metabolism. A hypothesis that excess cytokines such as interleukin-1 or interferon-alpha drive the fatigue and flulike symptoms lacks compelling supporting data. Other inconsistent and nondiagnostic findings include nonspecific regional brain MRI changes, autonomic nervous system dysfunction, hypothalamic-pituitary-adrenal (HPA) axis abnormalities, altered metabolism, and gut microbiome dysbiosis. Unifying multisystem models integrate infection, immune, central and autonomic nervous system, metabolic, genetic, lifestyle, and stress factors.",
-  "additionalDifferentials": [
-   "Broad differential of fatigue (medical and psychiatric causes evaluated per chronic fatigue workup)",
-   "Thyroid dysfunction (e.g., hypothyroidism)",
-   "Anemia / iron deficiency or iron overload",
-   "Celiac disease",
-   "Depression and anxiety disorders",
-   "Postural orthostatic tachycardia syndrome (POTS) and other dysautonomia",
-   "Idiopathic chronic fatigue (unexplained chronic fatigue not meeting full ME/CFS criteria)"
-  ],
-  "infectionMimics": [
-   "Postinfectious fatiguing illness following Epstein-Barr virus",
-   "Q fever (Coxiella burnetii) postinfectious fatigue",
-   "Ross River virus infection",
-   "Post-acute sequelae of SARS-CoV-2 (Long COVID) with prolonged fatiguing illness",
-   "Giardia-associated postinfectious fatigue"
-  ],
-  "nonInfectiousMimics": [
-   "Fibromyalgia",
-   "Hypothyroidism and other endocrine disorders",
-   "Depression and other psychiatric conditions presenting with fatigue",
-   "Anemia",
-   "Celiac disease",
-   "Sjogren's syndrome"
-  ],
-  "additionalInvestigations": [
-   "Complete blood count",
-   "Erythrocyte sedimentation rate and C-reactive protein",
-   "Electrolytes, fasting glucose, calcium, phosphate",
-   "Renal function tests (blood urea nitrogen, glomerular filtration rate)",
-   "Liver function panel (bilirubin, ALT, AST, alkaline phosphatase, gamma-glutamyl transferase, total protein, albumin/globulin ratio)",
-   "Thyroid function tests (TSH, free thyroxine)",
-   "Iron studies to assess both deficiency and overload (serum iron, transferrin saturation, ferritin)",
-   "Celiac disease screening tests",
-   "Urinalysis",
-   "Lean/standing (orthostatic) test for POTS",
-   "Mental health assessment screening for depression and anxiety"
-  ],
-  "redFlags": [
-   "Continued decline in function (should prompt evaluation for another illness rather than being attributed to ME/CFS)",
-   "New, worsening, or unusual symptoms warranting further workup for a new illness",
-   "Serious depression and increased suicide risk associated with social isolation and loss of hope",
-   "Severe disease leaving the patient essentially homebound"
-  ],
-  "prognosis": "Severity ranges from mild or moderate (retaining varying degrees of pre-illness function) to severe (essentially homebound). Most patients experience some improvement and stabilize, but a return to the prior level of function is unusual. A continued functional decline is atypical and should trigger evaluation for other illnesses. Because of social isolation and loss of hope, serious depression and an increased risk of suicide are reported, warranting active screening and referral.",
-  "pitfalls": [
-   "Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never diagnosed).",
-   "Failing to recognize PEM because patients do not connect relapses to preceding exertion, and may appear well in clinic only to crash afterward.",
-   "Attributing a continued functional decline to ME/CFS rather than investigating an alternative diagnosis.",
-   "Standard-dose medication initiation in patients who are unusually drug-sensitive, increasing toxicity risk.",
-   "Encouraging overexertion on 'good days' that leads to the 'push and crash' cycle and negates functional gains.",
-   "Relying on laboratory tests for diagnosis - results are usually normal and serve only to exclude other conditions."
-  ],
-  "severityClassification": "Severity is described clinically as mild/moderate (patients retain varying degrees of pre-illness function) versus severe (patients essentially homebound). Diagnostically, the 2015 IOM criteria require substantial activity reduction lasting more than 6 months with profound new-onset fatigue not relieved by rest, plus postexertional malaise, plus unrefreshing sleep, plus either cognitive impairment or orthostatic intolerance, with symptoms present at least half the time and of at least moderate intensity.",
-  "references": [
-   "Harrison 22e p.3649",
-   "Harrison 22e p.3650",
-   "Harrison 22e p.3651"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise, noting that graded exercise therapy is no longer recommended as it can worsen symptoms",
-   "Symptomatic treatment of pain with simple analgesics and neuropathic agents where indicated",
-   "Management of unrefreshing sleep with sleep-hygiene measures and cautious short-term use of sleep aids",
-   "Treat orthostatic intolerance with increased fluid and salt intake, compression garments and pharmacological measures where needed",
-   "Support for cognitive dysfunction with activity structuring and cognitive strategies, plus psychological support for coping with a chronic illness",
-   "Exclude and treat alternative causes of fatigue, such as thyroid disease and anaemia, before settling on the diagnosis",
-   "Multidisciplinary specialist input with re-evaluation for any atypical continued functional decline"
-  ]
- },
- "algorithms": [
-  {
-   "id": "myalgic_encephalomyelitis_chronic_fatigue-pathway",
-   "title": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of multiple sclerosis, rheumatoid arthritis, and congestive heart failure.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Continued decline in function (should prompt evaluation for another illness rather than being attributed to ME/CFS)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Complete blood count, Erythrocyte sedimentation rate and C-reactive protein, Electrolytes, fasting glucose, calcium, phosphate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise, noting that graded exercise therapy is no longer recommended as it can worsen symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never diagnosed)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myalgic encephalomyelitis/ chronic fatigue syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "myalgic_encephalomyelitis_chronic_fatigue-matrix",
-   "title": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3649",
+    "clinicalPearls": [
+      "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of multiple sclerosis, rheumatoid arthritis, and congestive heart failure.",
+      "The defining feature is persistent, unexplained fatigue causing substantial functional impairment, together with postexertional malaise (PEM) - worsening of symptoms after physical, mental, or emotional exertion that would not have been a problem before the illness.",
+      "PEM relapses last longer than a day and can persist for weeks; the relationship between a relapse and the preceding activity is often not apparent to the patient, so PEM may go unrecognized.",
+      "Common accompanying symptoms include pain, cognitive dysfunction (patient-described 'brain fog'), unrefreshing sleep, headache, sore throat, tender lymph nodes, muscle and joint aches, feverishness, and orthostatic intolerance.",
+      "There is no diagnostic test; diagnosis rests on a characteristic profile of patient-reported symptoms, requiring evaluation by an experienced clinician.",
+      "The 2015 Institute of Medicine criteria require substantial activity reduction with profound new-onset fatigue not relieved by rest, plus PEM, plus unrefreshing sleep, plus either cognitive impairment or orthostatic intolerance.",
+      "Routine laboratory tests are typically within normal limits in ME/CFS; their value lies in identifying alternative or contributing illnesses rather than confirming the diagnosis.",
+      "Roughly 10% of patients remain ill for 6 months or more after a variety of infections (e.g., Epstein-Barr virus, Ross River virus, Q fever, Ebola, SARS-CoV-1, Giardia); recovery is otherwise the rule.",
+      "Recognition of ME/CFS as a diagnosable component of Long COVID has increased clinical awareness, but patients still encounter stigma and misunderstanding from clinicians.",
+      "An estimated 80% or more of people who meet ME/CFS criteria have never been diagnosed by a health care provider.",
+      "Patients are reported to be more medication-sensitive than the general population, so any drug should begin at lower-than-usual doses and be increased slowly.",
+      "Patients may appear well during an office visit and then relapse afterward from the exertion of attending the consultation."
     ],
-    [
-     "Key Investigations",
-     "Complete blood count, Erythrocyte sedimentation rate and C-reactive protein, Electrolytes, fasting glucose, calcium, phosphate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ME/CFS is understood as a complex disorder involving alterations across multiple interrelated homeostatic systems rather than a single mechanism. A wide range of infectious agents (viral and nonviral) can trigger a postinfectious fatiguing illness resembling ME/CFS, and noninfectious stressors - toxins, physical trauma, adverse life events, and cumulative allostatic load ('wear and tear') - are also associated. Twin and family studies suggest contributions from shared environment and genetic factors. Evidence for immunologic dysfunction is inconsistent and not established in most patients; reported findings include modest antinuclear antibody elevations, reduced immunoglobulin subclasses, impaired mitogen-driven lymphocyte proliferation, decreased natural killer cell activity, altered cytokine production, and altered T-cell metabolism. A hypothesis that excess cytokines such as interleukin-1 or interferon-alpha drive the fatigue and flulike symptoms lacks compelling supporting data. Other inconsistent and nondiagnostic findings include nonspecific regional brain MRI changes, autonomic nervous system dysfunction, hypothalamic-pituitary-adrenal (HPA) axis abnormalities, altered metabolism, and gut microbiome dysbiosis. Unifying multisystem models integrate infection, immune, central and autonomic nervous system, metabolic, genetic, lifestyle, and stress factors.",
+    "additionalDifferentials": [
+      "Broad differential of fatigue (medical and psychiatric causes evaluated per chronic fatigue workup)",
+      "Thyroid dysfunction (e.g., hypothyroidism)",
+      "Anemia / iron deficiency or iron overload",
+      "Celiac disease",
+      "Depression and anxiety disorders",
+      "Postural orthostatic tachycardia syndrome (POTS) and other dysautonomia",
+      "Idiopathic chronic fatigue (unexplained chronic fatigue not meeting full ME/CFS criteria)"
     ],
-    [
-     "Primary Differentials",
-     "Broad differential of fatigue (medical and psychiatric causes evaluated per chronic fatigue workup), Thyroid dysfunction (e.g.,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Postinfectious fatiguing illness following Epstein-Barr virus",
+      "Q fever (Coxiella burnetii) postinfectious fatigue",
+      "Ross River virus infection",
+      "Post-acute sequelae of SARS-CoV-2 (Long COVID) with prolonged fatiguing illness",
+      "Giardia-associated postinfectious fatigue"
     ],
-    [
-     "Management Strategy",
-     "Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise,",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Fibromyalgia",
+      "Hypothyroidism and other endocrine disorders",
+      "Depression and other psychiatric conditions presenting with fatigue",
+      "Anemia",
+      "Celiac disease",
+      "Sjogren's syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Complete blood count",
+      "Erythrocyte sedimentation rate and C-reactive protein",
+      "Electrolytes, fasting glucose, calcium, phosphate",
+      "Renal function tests (blood urea nitrogen, glomerular filtration rate)",
+      "Liver function panel (bilirubin, ALT, AST, alkaline phosphatase, gamma-glutamyl transferase, total protein, albumin/globulin ratio)",
+      "Thyroid function tests (TSH, free thyroxine)",
+      "Iron studies to assess both deficiency and overload (serum iron, transferrin saturation, ferritin)",
+      "Celiac disease screening tests",
+      "Urinalysis",
+      "Lean/standing (orthostatic) test for POTS",
+      "Mental health assessment screening for depression and anxiety"
+    ],
+    "redFlags": [
+      "Continued decline in function (should prompt evaluation for another illness rather than being attributed to ME/CFS)",
+      "New, worsening, or unusual symptoms warranting further workup for a new illness",
+      "Serious depression and increased suicide risk associated with social isolation and loss of hope",
+      "Severe disease leaving the patient essentially homebound"
+    ],
+    "prognosis": "Severity ranges from mild or moderate (retaining varying degrees of pre-illness function) to severe (essentially homebound). Most patients experience some improvement and stabilize, but a return to the prior level of function is unusual. A continued functional decline is atypical and should trigger evaluation for other illnesses. Because of social isolation and loss of hope, serious depression and an increased risk of suicide are reported, warranting active screening and referral.",
+    "pitfalls": [
+      "Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never diagnosed).",
+      "Failing to recognize PEM because patients do not connect relapses to preceding exertion, and may appear well in clinic only to crash afterward.",
+      "Attributing a continued functional decline to ME/CFS rather than investigating an alternative diagnosis.",
+      "Standard-dose medication initiation in patients who are unusually drug-sensitive, increasing toxicity risk.",
+      "Encouraging overexertion on 'good days' that leads to the 'push and crash' cycle and negates functional gains.",
+      "Relying on laboratory tests for diagnosis - results are usually normal and serve only to exclude other conditions."
+    ],
+    "severityClassification": "Severity is described clinically as mild/moderate (patients retain varying degrees of pre-illness function) versus severe (patients essentially homebound). Diagnostically, the 2015 IOM criteria require substantial activity reduction lasting more than 6 months with profound new-onset fatigue not relieved by rest, plus postexertional malaise, plus unrefreshing sleep, plus either cognitive impairment or orthostatic intolerance, with symptoms present at least half the time and of at least moderate intensity.",
+    "references": [
+      "Harrison 22e p.3649",
+      "Harrison 22e p.3650",
+      "Harrison 22e p.3651"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise, noting that graded exercise therapy is no longer recommended as it can worsen symptoms",
+      "Symptomatic treatment of pain with simple analgesics and neuropathic agents where indicated",
+      "Management of unrefreshing sleep with sleep-hygiene measures and cautious short-term use of sleep aids",
+      "Treat orthostatic intolerance with increased fluid and salt intake, compression garments and pharmacological measures where needed",
+      "Support for cognitive dysfunction with activity structuring and cognitive strategies, plus psychological support for coping with a chronic illness",
+      "Exclude and treat alternative causes of fatigue, such as thyroid disease and anaemia, before settling on the diagnosis",
+      "Multidisciplinary specialist input with re-evaluation for any atypical continued functional decline"
     ]
-   ],
-   "caption": "Overview comparison matrix for myalgic encephalomyelitis/ chronic fatigue syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myalgic-encephalomyelitis-chronic-fatigue-real-image",
-   "title": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-pathway",
+      "title": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of multiple sclerosis, rheumatoid arthritis, and congestive heart failure.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Continued decline in function (should prompt evaluation for another illness rather than being attributed to ME/CFS)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Complete blood count, Erythrocyte sedimentation rate and C-reactive protein, Electrolytes, fasting glucose, calcium, phosphate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise, noting that graded exercise therapy is no longer recommended as it can worsen symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never diagnosed)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myalgic encephalomyelitis/ chronic fatigue syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-matrix",
+      "title": "Myalgic Encephalomyelitis/ Chronic Fatigue Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ME/CFS is a chronic, complex, multisystem illness whose functional impact on daily functioning has been compared to that of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Complete blood count, Erythrocyte sedimentation rate and C-reactive protein, Electrolytes, fasting glucose, calcium, phosphate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Broad differential of fatigue (medical and psychiatric causes evaluated per chronic fatigue workup), Thyroid dysfunction (e.g.,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Energy management or pacing to keep activity within the individual's energy limits and avoid triggering post-exertional malaise,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Trivializing the illness or dismissing patients, contributing to stigma and underdiagnosis (most who meet criteria are never",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myalgic encephalomyelitis/ chronic fatigue syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Diagnosing ME/CFS (for clinicians)",
+      "kind": "web",
+      "url": "https://www.cdc.gov/me-cfs/hcp/diagnosis/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 389-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for ME/CFS",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IOM 2015: core",
+          "cells": [
+            {
+              "text": "Substantial activity reduction with profound new fatigue not relieved by rest"
+            },
+            {
+              "text": "{{hy:Plus post-exertional malaise and unrefreshing sleep}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IOM 2015: one more",
+          "cells": [
+            {
+              "text": "Cognitive impairment or orthostatic intolerance"
+            },
+            {
+              "text": "Symptoms at least half the time, at least moderate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "6 months or more",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Manage as ME/CFS while monitoring if criteria not yet met"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Older criteria: fatigue",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "At least 6 months, new onset, not from exertion or disease, not relieved by rest",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Substantial reduction in prior activities"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Older criteria: symptoms",
+          "unit": "symptoms",
+          "cells": [
+            {
+              "text": "4 or more concurrent for 6 months",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Memory or concentration, sore throat, tender nodes, myalgia, arthralgia, new headache, unrefreshing sleep, post-exertional malaise"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Older criteria: exclusions",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "Medical cause, psychotic depression, bipolar, schizophrenia, dementia, eating disorder, substance misuse, BMI over 40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Exclude before diagnosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Laboratory tests",
+          "cells": [
+            {
+              "text": "CBC, ESR, CRP, electrolytes, glucose, calcium, renal, liver, TSH, iron studies, coeliac screen, urinalysis"
+            },
+            {
+              "text": "Usually normal; used to find other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic stand test",
+          "cells": [
+            {
+              "text": "Lean or standing test"
+            },
+            {
+              "text": "Detects POTS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-infection fatigue",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% stay ill 6 months after EBV, Q fever, Ross River and others",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Long COVID can meet criteria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 389-1 lists the older (1994 CDC) criteria; Harrison 22e and CDC use the 2015 IOM criteria, which make post-exertional malaise mandatory. Both are shown."
+    },
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-ddx",
+      "kind": "ddx",
+      "title": "Causes of chronic fatigue to exclude",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Weight gain, cold intolerance"
+            },
+            {
+              "text": "TSH, free T4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia or iron disorders",
+          "cells": [
+            {
+              "text": "Pallor, low Hb"
+            },
+            {
+              "text": "CBC and iron studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "GI symptoms, iron deficiency"
+            },
+            {
+              "text": "Coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or anxiety",
+          "cells": [
+            {
+              "text": "Low mood and anhedonia; fatigue improves with activity"
+            },
+            {
+              "text": "Mental health assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POTS or dysautonomia",
+          "cells": [
+            {
+              "text": "Symptoms on standing with tachycardia"
+            },
+            {
+              "text": "Stand test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain dominates"
+            },
+            {
+              "text": "Clinical criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Dry eyes and mouth"
+            },
+            {
+              "text": "Anti-Ro and anti-La"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-treatment",
+      "kind": "treatment",
+      "title": "Management of ME/CFS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pacing and energy management",
+          "cells": [
+            {
+              "text": "{{hy:All patients; avoid push and crash}}"
+            },
+            {
+              "text": "Graded exercise therapy no longer recommended"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom-directed treatment",
+          "cells": [
+            {
+              "text": "Pain, sleep, orthostatic intolerance"
+            },
+            {
+              "text": "Start drugs at low dose and increase slowly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthostatic intolerance",
+          "cells": [
+            {
+              "text": "POTS features"
+            },
+            {
+              "text": "Fluids, salt, compression garments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Coping, mood, isolation"
+            },
+            {
+              "text": "Screen for depression and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbidities",
+          "cells": [
+            {
+              "text": "Any identified illness"
+            },
+            {
+              "text": "Re-evaluate periodically"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Re-investigate",
+          "cells": [
+            {
+              "text": "Continued decline or new symptoms"
+            },
+            {
+              "text": "Look for another illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myalgic_encephalomyelitis_chronic_fatigue-dx-mgmt",
+      "title": "Diagnosis and management of ME/CFS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue with reduced function for months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History, exam, baseline labs, stand test, mental health screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Another cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat that cause; reassess fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PEM, unrefreshing sleep, plus cognitive or orthostatic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Idiopathic chronic fatigue; monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Present 6 months or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Manage as probable ME/CFS; monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "ME/CFS: pacing, symptom care, support, periodic review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

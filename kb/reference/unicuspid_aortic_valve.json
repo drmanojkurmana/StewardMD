@@ -1,174 +1,443 @@
 {
- "id": "unicuspid_aortic_valve",
- "name": "unicuspid aortic valve",
- "aliases": [
-  "unicommissural aortic valve",
-  "UAV"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in the third to fourth decade.",
-   "Two morphological subtypes exist: acommissural (dome-shaped orifice with no commissural attachment to the aortic wall) and unicommissural (a single eccentric commissure producing a teardrop or keyhole orifice); the unicommissural type is more common.",
-   "On parasternal short-axis echocardiography the orifice looks eccentric and slit-like, and the classic teardrop shape may be evident only in systole, so image carefully at the leaflet tips.",
-   "The valve is frequently misdiagnosed as bicuspid; transoesophageal or 3D echocardiography and cardiac CT or MRI improve accurate counting of commissures.",
-   "Associated aortopathy with ascending aortic dilatation occurs independently of haemodynamic severity, so serial aortic imaging is warranted.",
-   "Coexisting coarctation of the aorta and other left-heart obstructive lesions should be actively excluded.",
-   "Infective endocarditis risk is increased on the structurally abnormal valve.",
-   "Young patients frequently require surgery, including the Ross procedure, valve repair or replacement, often combined with aortic root or ascending aortic replacement."
+  "id": "unicuspid_aortic_valve",
+  "name": "unicuspid aortic valve",
+  "aliases": [
+    "unicommissural aortic valve",
+    "UAV"
   ],
-  "pathophysiology": "The anomaly arises from failure of separation of the valve cushions during embryogenesis, producing fusion of one or both commissures so that the valve opens through a single eccentric orifice with one functional commissure (unicommissural) or none (acommissural, dome-shaped). The eccentric restrictive orifice generates turbulent transvalvar flow that accelerates leaflet fibrosis and calcification, leading to progressive stenosis, regurgitation, or a mixed lesion. The same developmental disturbance is associated with an intrinsically abnormal aortic wall showing medial degeneration, which predisposes to ascending aortic dilatation and aneurysm irrespective of valve haemodynamics.",
-  "additionalDifferentials": [
-   "Bicuspid aortic valve",
-   "Rheumatic aortic stenosis",
-   "Calcific degenerative tricuspid aortic stenosis",
-   "Quadricuspid aortic valve",
-   "Subvalvar (subaortic membrane) or supravalvar aortic stenosis",
-   "Hypertrophic cardiomyopathy with left ventricular outflow tract obstruction"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with careful short-axis leaflet imaging",
-   "Transoesophageal echocardiography to define commissural morphology",
-   "Three-dimensional echocardiography",
-   "Cardiac CT angiography for valve morphology, calcification and aortic dimensions",
-   "Cardiac MRI for regurgitant fraction and aortic assessment",
-   "Electrocardiography for left ventricular hypertrophy",
-   "Exercise testing in apparently asymptomatic severe stenosis"
-  ],
-  "redFlags": [
-   "Exertional syncope, angina or heart failure symptoms indicating severe stenosis",
-   "Rapidly progressive ascending aortic dilatation",
-   "Fever, new regurgitant murmur or embolic phenomena suggesting infective endocarditis",
-   "Severe aortic regurgitation with left ventricular dilatation or dysfunction"
-  ],
-  "prognosis": "Without intervention severe obstruction or regurgitation develops earlier than in bicuspid disease and often requires surgery in young adulthood. Long-term outcome after valve or root surgery is good, but lifelong surveillance for aortopathy and prosthesis-related complications is required.",
-  "pitfalls": [
-   "Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe",
-   "Assessing morphology only in diastole and missing the systolic teardrop orifice",
-   "Overlooking associated aortopathy and coarctation",
-   "Underestimating stenosis severity when the eccentric orifice lies off-axis to the Doppler beam"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC/EACTS Guidelines for the Management of Valvular Heart Disease",
-   "Feigenbaum's Echocardiography"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or mixed disease, which tends to develop in young adulthood",
-   "Serial aortic imaging with concurrent surgical repair of the ascending aorta at aneurysmal thresholds, given the associated intrinsic aortopathy independent of valve haemodynamics",
-   "Regular surveillance with echocardiography, and cardiac CT or MRI, to track valve severity, ventricular function and aortic dimensions",
-   "Active exclusion and management of coexisting coarctation and other left-heart obstructive lesions",
-   "Attention to dental and oral hygiene with awareness of infective endocarditis risk",
-   "Care within a specialist cardiology and cardiac surgery service, with escalation for symptoms or severe valve dysfunction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "unicuspid_aortic_valve-pathway",
-   "title": "unicuspid aortic valve: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in the third to fourth decade.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exertional syncope, angina or heart failure symptoms indicating severe stenosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with careful short-axis leaflet imaging, Transoesophageal echocardiography to define commissural morphology, Three-dimensional echocardiography"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or mixed disease, which tends to develop in young adulthood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of unicuspid aortic valve."
-  }
- ],
- "tables": [
-  {
-   "id": "unicuspid_aortic_valve-matrix",
-   "title": "unicuspid aortic valve: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in the third to fourth decade.",
+      "Two morphological subtypes exist: acommissural (dome-shaped orifice with no commissural attachment to the aortic wall) and unicommissural (a single eccentric commissure producing a teardrop or keyhole orifice); the unicommissural type is more common.",
+      "On parasternal short-axis echocardiography the orifice looks eccentric and slit-like, and the classic teardrop shape may be evident only in systole, so image carefully at the leaflet tips.",
+      "The valve is frequently misdiagnosed as bicuspid; transoesophageal or 3D echocardiography and cardiac CT or MRI improve accurate counting of commissures.",
+      "Associated aortopathy with ascending aortic dilatation occurs independently of haemodynamic severity, so serial aortic imaging is warranted.",
+      "Coexisting coarctation of the aorta and other left-heart obstructive lesions should be actively excluded.",
+      "Infective endocarditis risk is increased on the structurally abnormal valve.",
+      "Young patients frequently require surgery, including the Ross procedure, valve repair or replacement, often combined with aortic root or ascending aortic replacement."
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with careful short-axis leaflet imaging, Transoesophageal echocardiography to define commissural",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The anomaly arises from failure of separation of the valve cushions during embryogenesis, producing fusion of one or both commissures so that the valve opens through a single eccentric orifice with one functional commissure (unicommissural) or none (acommissural, dome-shaped). The eccentric restrictive orifice generates turbulent transvalvar flow that accelerates leaflet fibrosis and calcification, leading to progressive stenosis, regurgitation, or a mixed lesion. The same developmental disturbance is associated with an intrinsically abnormal aortic wall showing medial degeneration, which predisposes to ascending aortic dilatation and aneurysm irrespective of valve haemodynamics.",
+    "additionalDifferentials": [
+      "Bicuspid aortic valve",
+      "Rheumatic aortic stenosis",
+      "Calcific degenerative tricuspid aortic stenosis",
+      "Quadricuspid aortic valve",
+      "Subvalvar (subaortic membrane) or supravalvar aortic stenosis",
+      "Hypertrophic cardiomyopathy with left ventricular outflow tract obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Bicuspid aortic valve, Rheumatic aortic stenosis, Calcific degenerative tricuspid aortic stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with careful short-axis leaflet imaging",
+      "Transoesophageal echocardiography to define commissural morphology",
+      "Three-dimensional echocardiography",
+      "Cardiac CT angiography for valve morphology, calcification and aortic dimensions",
+      "Cardiac MRI for regurgitant fraction and aortic assessment",
+      "Electrocardiography for left ventricular hypertrophy",
+      "Exercise testing in apparently asymptomatic severe stenosis"
     ],
-    [
-     "Management Strategy",
-     "Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or",
-     "Core treatment modality"
+    "redFlags": [
+      "Exertional syncope, angina or heart failure symptoms indicating severe stenosis",
+      "Rapidly progressive ascending aortic dilatation",
+      "Fever, new regurgitant murmur or embolic phenomena suggesting infective endocarditis",
+      "Severe aortic regurgitation with left ventricular dilatation or dysfunction"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without intervention severe obstruction or regurgitation develops earlier than in bicuspid disease and often requires surgery in young adulthood. Long-term outcome after valve or root surgery is good, but lifelong surveillance for aortopathy and prosthesis-related complications is required.",
+    "pitfalls": [
+      "Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe",
+      "Assessing morphology only in diastole and missing the systolic teardrop orifice",
+      "Overlooking associated aortopathy and coarctation",
+      "Underestimating stenosis severity when the eccentric orifice lies off-axis to the Doppler beam"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC/EACTS Guidelines for the Management of Valvular Heart Disease",
+      "Feigenbaum's Echocardiography"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or mixed disease, which tends to develop in young adulthood",
+      "Serial aortic imaging with concurrent surgical repair of the ascending aorta at aneurysmal thresholds, given the associated intrinsic aortopathy independent of valve haemodynamics",
+      "Regular surveillance with echocardiography, and cardiac CT or MRI, to track valve severity, ventricular function and aortic dimensions",
+      "Active exclusion and management of coexisting coarctation and other left-heart obstructive lesions",
+      "Attention to dental and oral hygiene with awareness of infective endocarditis risk",
+      "Care within a specialist cardiology and cardiac surgery service, with escalation for symptoms or severe valve dysfunction"
     ]
-   ],
-   "caption": "Overview comparison matrix for unicuspid aortic valve."
-  }
- ],
- "diagrams": [
-  {
-   "id": "unicuspid-aortic-valve-real-image",
-   "title": "unicuspid aortic valve: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "unicuspid_aortic_valve-pathway",
+      "title": "unicuspid aortic valve: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in the third to fourth decade.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exertional syncope, angina or heart failure symptoms indicating severe stenosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with careful short-axis leaflet imaging, Transoesophageal echocardiography to define commissural morphology, Three-dimensional echocardiography"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or mixed disease, which tends to develop in young adulthood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of unicuspid aortic valve."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "unicuspid_aortic_valve-matrix",
+      "title": "unicuspid aortic valve: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Unicuspid aortic valve is far rarer than bicuspid disease and typically presents with severe stenosis at a younger age, often in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with careful short-axis leaflet imaging, Transoesophageal echocardiography to define commissural",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bicuspid aortic valve, Rheumatic aortic stenosis, Calcific degenerative tricuspid aortic stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical aortic valve replacement, or repair in selected cases, as definitive treatment for severe stenosis, regurgitation or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling a unicommissural valve as bicuspid because a fused commissure mimics a raphe",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for unicuspid aortic valve."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unicuspid_aortic_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with short-axis imaging",
+          "cells": [
+            {
+              "text": "Eccentric, slit-like orifice; teardrop shape may appear only in systole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal or 3D echocardiography",
+          "cells": [
+            {
+              "text": "Accurate counting of commissures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MRI",
+          "cells": [
+            {
+              "text": "Commissural morphology and aortic dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Left ventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unicuspid_aortic_valve-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bicuspid aortic valve",
+          "cells": [
+            {
+              "text": "Often confused; a fused commissure can mimic a raphe, so count commissures carefully"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatic aortic stenosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcific degenerative tricuspid aortic stenosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unicuspid_aortic_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical aortic valve replacement",
+          "cells": [
+            {
+              "text": "Definitive for severe stenosis, regurgitation or mixed disease; repair in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascending aorta repair",
+          "cells": [
+            {
+              "text": "Concurrent repair at aneurysmal thresholds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and cardiac CT or MRI for valve severity, ventricular function and aortic size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting lesions",
+          "cells": [
+            {
+              "text": "Active exclusion and management of coarctation and other left-heart obstructive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis awareness",
+          "cells": [
+            {
+              "text": "Dental and oral hygiene given the infective endocarditis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Cardiology and cardiac surgery, with escalation for symptoms or severe valve dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unicuspid_aortic_valve-dx-mgmt",
+      "title": "Diagnosis and management of unicuspid aortic valve",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected unicuspid aortic valve: severe stenosis at a young age, slit-like orifice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (exertional syncope, angina, heart failure or rapid aortic dilatation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and cardiac surgery review for severe stenosis or aortic dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Short-axis echo, TOE or 3D echo, and cardiac CT or MRI for commissural count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a unicuspid rather than bicuspid valve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-image with TOE or 3D echo to count commissures accurately",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical aortic valve replacement, or repair in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ascending aorta repair at aneurysmal thresholds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial echo and cardiac CT or MRI for valve severity and aortic size",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess and treat coexisting coarctation and other left-heart lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rare disease with severe stenosis; outcome depends on surgery and aortic surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

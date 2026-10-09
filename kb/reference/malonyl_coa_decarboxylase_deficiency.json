@@ -1,176 +1,472 @@
 {
- "id": "malonyl_coa_decarboxylase_deficiency",
- "name": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria)",
- "aliases": [
-  "MLYCD deficiency",
-  "malonic aciduria",
-  "MCD deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Inborn errors of metabolism references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
-   "The biochemical hallmark is malonic aciduria in which malonic acid characteristically exceeds methylmalonic acid, with raised malonylcarnitine (C3-DC) on acylcarnitine profiling.",
-   "Cardiomyopathy, often dilated, is a characteristic and prognostically dominant feature that is unusual among the organic acidurias.",
-   "Neurodevelopmental delay, hypotonia and seizures are common, and developmental regression may occur.",
-   "Metabolic decompensation presents with hypoglycaemia, metabolic acidosis and ketosis, often with gastrointestinal symptoms such as vomiting, diarrhoea and abdominal distension.",
-   "Malonyl-CoA is a key regulator of fatty-acid oxidation through inhibition of carnitine palmitoyltransferase 1, so its accumulation disturbs cellular energy metabolism.",
-   "It may be detected on newborn screening through the elevated malonylcarnitine (C3-DC) marker."
+  "id": "malonyl_coa_decarboxylase_deficiency",
+  "name": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria)",
+  "aliases": [
+    "MLYCD deficiency",
+    "malonic aciduria",
+    "MCD deficiency"
   ],
-  "pathophysiology": "MLYCD encodes malonyl-CoA decarboxylase, the enzyme that converts malonyl-CoA to acetyl-CoA and thereby sets the cellular concentration of malonyl-CoA. Malonyl-CoA is both a substrate for fatty-acid synthesis and a potent inhibitor of carnitine palmitoyltransferase 1, the gatekeeper of mitochondrial long-chain fatty-acid oxidation. Enzyme deficiency causes malonyl-CoA to accumulate, and it is hydrolysed to malonic acid, producing malonic acidaemia and aciduria, while the raised malonyl-CoA suppresses fatty-acid oxidation; the combination of impaired fatty-acid oxidation and disordered malonate metabolism deprives the heart and brain of energy substrate and explains the cardiomyopathy and neurological features. Malonate additionally inhibits succinate dehydrogenase (mitochondrial complex II), contributing to secondary mitochondrial dysfunction.",
-  "additionalDifferentials": [
-   "Combined malonic and methylmalonic aciduria (ACSF3 deficiency), the key sibling disorder, but there methylmalonate usually exceeds malonate",
-   "Classic methylmalonic acidaemias (MMUT and cobalamin-related defects)",
-   "Fatty-acid oxidation disorders, Barth syndrome and mitochondrial disease presenting with cardiomyopathy",
-   "Primary carnitine deficiency and other carnitine-cycle disorders",
-   "Glutaric aciduria and other organic acidurias presenting with encephalopathy",
-   "Malonate elevation secondary to other mitochondrial dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids (malonate predominant over methylmalonate)",
-   "Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC)",
-   "Echocardiography and ECG for cardiomyopathy surveillance",
-   "Molecular testing of MLYCD or an organic-aciduria gene panel",
-   "Blood glucose, gas, lactate and ketone measurement during illness",
-   "Enzyme assay in fibroblasts or leucocytes where available",
-   "Review of newborn-screening acylcarnitine results"
-  ],
-  "redFlags": [
-   "New or worsening heart failure from dilated cardiomyopathy",
-   "Acute metabolic decompensation with hypoglycaemia and acidosis during illness or fasting",
-   "Arrhythmia in the context of cardiomyopathy",
-   "Rapid neurological deterioration during catabolic stress"
-  ],
-  "prognosis": "Prognosis is largely determined by the cardiomyopathy; with early diagnosis, avoidance of fasting, dietary measures and carnitine support some children do well, whereas progressive cardiac disease or severe decompensation carries significant risk.",
-  "pitfalls": [
-   "Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be distinguished by the malonate-to-methylmalonate ratio.",
-   "Overlooking cardiac surveillance, since cardiomyopathy may dominate the outcome.",
-   "Attributing the dilated cardiomyopathy to a primary cardiac cause and missing the underlying metabolic diagnosis.",
-   "Under-recognising the risk of decompensation during fasting or intercurrent illness."
-  ],
-  "references": [
-   "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
-   "Inborn Metabolic Diseases: Diagnosis and Treatment",
-   "Organic acidurias and fatty-acid metabolism reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired long-chain fatty-acid oxidation",
-   "Supplement with L-carnitine to promote excretion of accumulated acyl-CoA species and correct secondary carnitine depletion",
-   "Provide an emergency regimen during intercurrent illness with increased carbohydrate intake or intravenous glucose to reverse catabolism and prevent decompensation",
-   "Treat acute metabolic decompensation with intravenous dextrose and fluids to correct hypoglycaemia and metabolic acidosis, temporarily withholding fat load",
-   "Undertake cardiac surveillance with serial echocardiography and ECG, treating dilated cardiomyopathy with standard heart-failure therapy",
-   "Support neurodevelopment with developmental assessment, physiotherapy and anticonvulsants for seizures",
-   "Coordinate care through a metabolic multidisciplinary team including metabolic physician, dietitian and cardiologist",
-   "Offer genetic counselling for autosomal recessive inheritance and biallelic MLYCD variants, with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "malonyl_coa_decarboxylase_deficiency-pathway",
-   "title": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or worsening heart failure from dilated cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids (malonate predominant over methylmalonate), Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC), Echocardiography and ECG for cardiomyopathy surveillance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired long-chain fatty-acid oxidation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be distinguished by the malonate-to-methylmalonate ratio."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of malonyl-coa decarboxylase deficiency (malonic aciduria)."
-  }
- ],
- "tables": [
-  {
-   "id": "malonyl_coa_decarboxylase_deficiency-matrix",
-   "title": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inborn errors of metabolism references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
+      "The biochemical hallmark is malonic aciduria in which malonic acid characteristically exceeds methylmalonic acid, with raised malonylcarnitine (C3-DC) on acylcarnitine profiling.",
+      "Cardiomyopathy, often dilated, is a characteristic and prognostically dominant feature that is unusual among the organic acidurias.",
+      "Neurodevelopmental delay, hypotonia and seizures are common, and developmental regression may occur.",
+      "Metabolic decompensation presents with hypoglycaemia, metabolic acidosis and ketosis, often with gastrointestinal symptoms such as vomiting, diarrhoea and abdominal distension.",
+      "Malonyl-CoA is a key regulator of fatty-acid oxidation through inhibition of carnitine palmitoyltransferase 1, so its accumulation disturbs cellular energy metabolism.",
+      "It may be detected on newborn screening through the elevated malonylcarnitine (C3-DC) marker."
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids (malonate predominant over methylmalonate), Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MLYCD encodes malonyl-CoA decarboxylase, the enzyme that converts malonyl-CoA to acetyl-CoA and thereby sets the cellular concentration of malonyl-CoA. Malonyl-CoA is both a substrate for fatty-acid synthesis and a potent inhibitor of carnitine palmitoyltransferase 1, the gatekeeper of mitochondrial long-chain fatty-acid oxidation. Enzyme deficiency causes malonyl-CoA to accumulate, and it is hydrolysed to malonic acid, producing malonic acidaemia and aciduria, while the raised malonyl-CoA suppresses fatty-acid oxidation; the combination of impaired fatty-acid oxidation and disordered malonate metabolism deprives the heart and brain of energy substrate and explains the cardiomyopathy and neurological features. Malonate additionally inhibits succinate dehydrogenase (mitochondrial complex II), contributing to secondary mitochondrial dysfunction.",
+    "additionalDifferentials": [
+      "Combined malonic and methylmalonic aciduria (ACSF3 deficiency), the key sibling disorder, but there methylmalonate usually exceeds malonate",
+      "Classic methylmalonic acidaemias (MMUT and cobalamin-related defects)",
+      "Fatty-acid oxidation disorders, Barth syndrome and mitochondrial disease presenting with cardiomyopathy",
+      "Primary carnitine deficiency and other carnitine-cycle disorders",
+      "Glutaric aciduria and other organic acidurias presenting with encephalopathy",
+      "Malonate elevation secondary to other mitochondrial dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Combined malonic and methylmalonic aciduria (ACSF3 deficiency), the key sibling disorder, but there methylmalonate usually",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids (malonate predominant over methylmalonate)",
+      "Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC)",
+      "Echocardiography and ECG for cardiomyopathy surveillance",
+      "Molecular testing of MLYCD or an organic-aciduria gene panel",
+      "Blood glucose, gas, lactate and ketone measurement during illness",
+      "Enzyme assay in fibroblasts or leucocytes where available",
+      "Review of newborn-screening acylcarnitine results"
     ],
-    [
-     "Management Strategy",
-     "Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired",
-     "Core treatment modality"
+    "redFlags": [
+      "New or worsening heart failure from dilated cardiomyopathy",
+      "Acute metabolic decompensation with hypoglycaemia and acidosis during illness or fasting",
+      "Arrhythmia in the context of cardiomyopathy",
+      "Rapid neurological deterioration during catabolic stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely determined by the cardiomyopathy; with early diagnosis, avoidance of fasting, dietary measures and carnitine support some children do well, whereas progressive cardiac disease or severe decompensation carries significant risk.",
+    "pitfalls": [
+      "Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be distinguished by the malonate-to-methylmalonate ratio.",
+      "Overlooking cardiac surveillance, since cardiomyopathy may dominate the outcome.",
+      "Attributing the dilated cardiomyopathy to a primary cardiac cause and missing the underlying metabolic diagnosis.",
+      "Under-recognising the risk of decompensation during fasting or intercurrent illness."
+    ],
+    "references": [
+      "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
+      "Inborn Metabolic Diseases: Diagnosis and Treatment",
+      "Organic acidurias and fatty-acid metabolism reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired long-chain fatty-acid oxidation",
+      "Supplement with L-carnitine to promote excretion of accumulated acyl-CoA species and correct secondary carnitine depletion",
+      "Provide an emergency regimen during intercurrent illness with increased carbohydrate intake or intravenous glucose to reverse catabolism and prevent decompensation",
+      "Treat acute metabolic decompensation with intravenous dextrose and fluids to correct hypoglycaemia and metabolic acidosis, temporarily withholding fat load",
+      "Undertake cardiac surveillance with serial echocardiography and ECG, treating dilated cardiomyopathy with standard heart-failure therapy",
+      "Support neurodevelopment with developmental assessment, physiotherapy and anticonvulsants for seizures",
+      "Coordinate care through a metabolic multidisciplinary team including metabolic physician, dietitian and cardiologist",
+      "Offer genetic counselling for autosomal recessive inheritance and biallelic MLYCD variants, with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for malonyl-coa decarboxylase deficiency (malonic aciduria)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "malonyl-coa-decarboxylase-deficiency-real-image",
-   "title": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "malonyl_coa_decarboxylase_deficiency-pathway",
+      "title": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or worsening heart failure from dilated cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids (malonate predominant over methylmalonate), Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC), Echocardiography and ECG for cardiomyopathy surveillance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired long-chain fatty-acid oxidation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be distinguished by the malonate-to-methylmalonate ratio."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of malonyl-coa decarboxylase deficiency (malonic aciduria)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "malonyl_coa_decarboxylase_deficiency-matrix",
+      "title": "Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive organic aciduria caused by biallelic MLYCD variants encoding malonyl-CoA decarboxylase.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids (malonate predominant over methylmalonate), Plasma acylcarnitine profile (raised malonylcarnitine, C3-DC),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Combined malonic and methylmalonic aciduria (ACSF3 deficiency), the key sibling disorder, but there methylmalonate usually",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a low-fat, high-carbohydrate diet with strict avoidance of fasting and frequent feeds to reduce reliance on impaired",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming malonic aciduria is always MLYCD deficiency, when combined malonic and methylmalonic aciduria (ACSF3) must be",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for malonyl-coa decarboxylase deficiency (malonic aciduria)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inborn errors of metabolism references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malonyl_coa_decarboxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Malonate predominant over methylmalonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Raised malonylcarnitine (C3-DC)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of MLYCD",
+          "cells": [
+            {
+              "text": "Biallelic MLYCD variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, gas, lactate and ketones during illness",
+          "cells": [
+            {
+              "text": "Metabolic status during illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malonyl_coa_decarboxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Combined malonic and methylmalonic aciduria (ACSF3 deficiency)",
+          "cells": [
+            {
+              "text": "The key sibling disorder, in which methylmalonate usually exceeds malonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty-acid oxidation disorders, Barth syndrome, mitochondrial disease",
+          "cells": [
+            {
+              "text": "Cardiomyopathy presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glutaric aciduria and other organic acidurias",
+          "cells": [
+            {
+              "text": "Presents with encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malonyl_coa_decarboxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-fat, high-carbohydrate diet",
+          "cells": [
+            {
+              "text": "Strict avoidance of fasting and frequent feeds to reduce reliance on impaired fatty-acid oxidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine",
+          "cells": [
+            {
+              "text": "Promotes excretion of accumulated acyl-CoA species; corrects secondary carnitine depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen in illness",
+          "cells": [
+            {
+              "text": "Increased carbohydrate or intravenous glucose to reverse catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Intravenous dextrose and fluids; temporarily withhold the fat load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography and ECG; standard heart-failure therapy for dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Developmental assessment, physiotherapy and anticonvulsants for seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic multidisciplinary team",
+          "cells": [
+            {
+              "text": "Metabolic physician, dietitian and cardiologist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malonyl_coa_decarboxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Malonyl-CoA Decarboxylase Deficiency (Malonic Aciduria)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected MLYCD deficiency: malonate on organic acids, cardiomyopathy or decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia, hypoglycaemia or acidosis during illness present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat decompensation with IV dextrose and fluids; temporarily withhold the fat load",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile (raised C3-DC), echocardiography, ECG and MLYCD testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is malonate predominant over methylmalonate on urine organic acids?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ACSF3 deficiency or classic methylmalonic acidaemia; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-fat, high-carbohydrate diet; avoid prolonged fasting and give frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "L-carnitine supplementation to correct secondary carnitine depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency glucose regimen during illness to prevent decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and ECG with standard heart-failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis set largely by cardiomyopathy; early diet and carnitine help some children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

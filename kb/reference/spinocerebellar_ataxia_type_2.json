@@ -1,173 +1,451 @@
 {
- "id": "spinocerebellar_ataxia_type_2",
- "name": "Spinocerebellar ataxia type 2 (SCA2)",
- "aliases": [
-  "SCA2",
-  "ATXN2-related ataxia",
-  "ataxin-2 CAG repeat expansion",
-  "olivopontocerebellar atrophy type 2"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
-   "A characteristic distinguishing feature is markedly slow saccadic eye movements, often early and prominent",
-   "Early loss of deep tendon reflexes and a sensorimotor peripheral neuropathy are typical, contrasting with the brisk reflexes of SCA1",
-   "Presents with progressive gait and limb ataxia, dysarthria, and later dysphagia; action tremor and parkinsonism can occur",
-   "Demonstrates anticipation, with earlier onset and larger repeats in successive generations, more pronounced with paternal inheritance",
-   "Intermediate-length ATXN2 repeat expansions are an established risk factor for amyotrophic lateral sclerosis",
-   "Confirmed by molecular testing of the ATXN2 CAG repeat; care is supportive and multidisciplinary"
+  "id": "spinocerebellar_ataxia_type_2",
+  "name": "Spinocerebellar ataxia type 2 (SCA2)",
+  "aliases": [
+    "SCA2",
+    "ATXN2-related ataxia",
+    "ataxin-2 CAG repeat expansion",
+    "olivopontocerebellar atrophy type 2"
   ],
-  "pathophysiology": "SCA2 is a polyglutamine disorder driven by expansion of the CAG repeat in the ATXN2 gene. The expanded polyglutamine tract alters ataxin-2, a protein involved in RNA metabolism and stress granule dynamics, causing a toxic gain of function with abnormal protein aggregation and disruption of RNA processing and cellular homeostasis. Neurodegeneration predominantly affects cerebellar Purkinje cells, pontine and olivary brainstem nuclei, and the substantia nigra, together with degeneration of peripheral sensory and motor pathways. This produces the olivopontocerebellar pattern with additional features such as slow saccades, neuropathy, and sometimes parkinsonism. Repeat length correlates inversely with age of onset, underlying anticipation.",
-  "additionalDifferentials": [
-   "Other dominant spinocerebellar ataxias (SCA1, SCA3, SCA6, SCA7)",
-   "Multiple system atrophy (cerebellar type)",
-   "Friedreich ataxia",
-   "Parkinsonism from other causes when extrapyramidal features predominate",
-   "Amyotrophic lateral sclerosis (given the ATXN2 link)",
-   "Acquired or immune-mediated cerebellar degeneration"
-  ],
-  "additionalInvestigations": [
-   "Targeted molecular genetic testing for ATXN2 CAG repeat expansion",
-   "Brain MRI demonstrating olivopontocerebellar atrophy",
-   "Oculomotor recording documenting slowed saccades",
-   "Nerve conduction studies confirming peripheral neuropathy",
-   "Assessment for parkinsonian features when present",
-   "Swallowing evaluation as bulbar dysfunction develops"
-  ],
-  "redFlags": [
-   "Progressive dysphagia with aspiration risk",
-   "Rapid functional deterioration and recurrent falls",
-   "Emergence of motor neurone signs suggesting an ALS phenotype"
-  ],
-  "prognosis": "SCA2 is progressive over years to decades with accumulating disability; life expectancy is shortened, most often by bulbar dysfunction and its respiratory complications.",
-  "pitfalls": [
-   "Overlooking slow saccades and areflexia as clues that point towards SCA2",
-   "Diagnosing a subtype clinically without gene-specific confirmation",
-   "Missing the association between ATXN2 intermediate repeats and ALS risk",
-   "Failing to address anticipation and reproductive counselling"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
-   "Offer a trial of levodopa for parkinsonian features, which can be responsive in SCA2",
-   "Manage the sensorimotor peripheral neuropathy with neuropathic pain agents and orthoses for distal weakness",
-   "Undertake proactive bulbar surveillance with swallow assessment and dietitian input, and consider gastrostomy feeding when dysphagia threatens nutrition or causes aspiration",
-   "Monitor respiratory function, since bulbar dysfunction and its respiratory complications are the main determinants of survival",
-   "Provide genetic counselling addressing anticipation (larger repeats and earlier onset in successive generations, more marked with paternal transmission) and the intermediate-repeat amyotrophic lateral sclerosis risk, offering predictive and prenatal testing",
-   "Coordinate multidisciplinary ataxia clinic care with motor-neurone input where relevant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_2-pathway",
-   "title": "Spinocerebellar ataxia type 2 (SCA2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysphagia with aspiration risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted molecular genetic testing for ATXN2 CAG repeat expansion, Brain MRI demonstrating olivopontocerebellar atrophy, Oculomotor recording documenting slowed saccades"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking slow saccades and areflexia as clues that point towards SCA2"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 2 (sca2)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_2-matrix",
-   "title": "Spinocerebellar ataxia type 2 (SCA2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
+      "A characteristic distinguishing feature is markedly slow saccadic eye movements, often early and prominent",
+      "Early loss of deep tendon reflexes and a sensorimotor peripheral neuropathy are typical, contrasting with the brisk reflexes of SCA1",
+      "Presents with progressive gait and limb ataxia, dysarthria, and later dysphagia; action tremor and parkinsonism can occur",
+      "Demonstrates anticipation, with earlier onset and larger repeats in successive generations, more pronounced with paternal inheritance",
+      "Intermediate-length ATXN2 repeat expansions are an established risk factor for amyotrophic lateral sclerosis",
+      "Confirmed by molecular testing of the ATXN2 CAG repeat; care is supportive and multidisciplinary"
     ],
-    [
-     "Key Investigations",
-     "Targeted molecular genetic testing for ATXN2 CAG repeat expansion, Brain MRI demonstrating olivopontocerebellar atrophy,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA2 is a polyglutamine disorder driven by expansion of the CAG repeat in the ATXN2 gene. The expanded polyglutamine tract alters ataxin-2, a protein involved in RNA metabolism and stress granule dynamics, causing a toxic gain of function with abnormal protein aggregation and disruption of RNA processing and cellular homeostasis. Neurodegeneration predominantly affects cerebellar Purkinje cells, pontine and olivary brainstem nuclei, and the substantia nigra, together with degeneration of peripheral sensory and motor pathways. This produces the olivopontocerebellar pattern with additional features such as slow saccades, neuropathy, and sometimes parkinsonism. Repeat length correlates inversely with age of onset, underlying anticipation.",
+    "additionalDifferentials": [
+      "Other dominant spinocerebellar ataxias (SCA1, SCA3, SCA6, SCA7)",
+      "Multiple system atrophy (cerebellar type)",
+      "Friedreich ataxia",
+      "Parkinsonism from other causes when extrapyramidal features predominate",
+      "Amyotrophic lateral sclerosis (given the ATXN2 link)",
+      "Acquired or immune-mediated cerebellar degeneration"
     ],
-    [
-     "Primary Differentials",
-     "Other dominant spinocerebellar ataxias (SCA1, SCA3, SCA6, SCA7), Multiple system atrophy (cerebellar type), Friedreich ataxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted molecular genetic testing for ATXN2 CAG repeat expansion",
+      "Brain MRI demonstrating olivopontocerebellar atrophy",
+      "Oculomotor recording documenting slowed saccades",
+      "Nerve conduction studies confirming peripheral neuropathy",
+      "Assessment for parkinsonian features when present",
+      "Swallowing evaluation as bulbar dysfunction develops"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysphagia with aspiration risk",
+      "Rapid functional deterioration and recurrent falls",
+      "Emergence of motor neurone signs suggesting an ALS phenotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking slow saccades and areflexia as clues that point towards SCA2",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA2 is progressive over years to decades with accumulating disability; life expectancy is shortened, most often by bulbar dysfunction and its respiratory complications.",
+    "pitfalls": [
+      "Overlooking slow saccades and areflexia as clues that point towards SCA2",
+      "Diagnosing a subtype clinically without gene-specific confirmation",
+      "Missing the association between ATXN2 intermediate repeats and ALS risk",
+      "Failing to address anticipation and reproductive counselling"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
+      "Offer a trial of levodopa for parkinsonian features, which can be responsive in SCA2",
+      "Manage the sensorimotor peripheral neuropathy with neuropathic pain agents and orthoses for distal weakness",
+      "Undertake proactive bulbar surveillance with swallow assessment and dietitian input, and consider gastrostomy feeding when dysphagia threatens nutrition or causes aspiration",
+      "Monitor respiratory function, since bulbar dysfunction and its respiratory complications are the main determinants of survival",
+      "Provide genetic counselling addressing anticipation (larger repeats and earlier onset in successive generations, more marked with paternal transmission) and the intermediate-repeat amyotrophic lateral sclerosis risk, offering predictive and prenatal testing",
+      "Coordinate multidisciplinary ataxia clinic care with motor-neurone input where relevant"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 2 (sca2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-2-real-image",
-   "title": "Spinocerebellar ataxia type 2 (SCA2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_2-pathway",
+      "title": "Spinocerebellar ataxia type 2 (SCA2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysphagia with aspiration risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted molecular genetic testing for ATXN2 CAG repeat expansion, Brain MRI demonstrating olivopontocerebellar atrophy, Oculomotor recording documenting slowed saccades"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking slow saccades and areflexia as clues that point towards SCA2"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 2 (sca2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_2-matrix",
+      "title": "Spinocerebellar ataxia type 2 (SCA2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant ataxia caused by a CAG repeat expansion in the ATXN2 gene producing an expanded polyglutamine tract in ataxin-2",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted molecular genetic testing for ATXN2 CAG repeat expansion, Brain MRI demonstrating olivopontocerebellar atrophy,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other dominant spinocerebellar ataxias (SCA1, SCA3, SCA6, SCA7), Multiple system atrophy (cerebellar type), Friedreich ataxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy is available, so base care on neurorehabilitation: physiotherapy for gait and balance, occupational",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking slow saccades and areflexia as clues that point towards SCA2",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 2 (sca2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN2 CAG repeat sizing",
+          "cells": [
+            {
+              "text": "Expanded repeat confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Olivopontocerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor recording",
+          "cells": [
+            {
+              "text": "Slowed saccades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonism assessment",
+          "cells": [
+            {
+              "text": "When extrapyramidal features are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing evaluation",
+          "cells": [
+            {
+              "text": "Bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other dominant SCAs (SCA1, SCA3, SCA6, SCA7)",
+          "cells": [
+            {
+              "text": "Gene-specific testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Intermediate ATXN2 repeats are an ALS risk factor; motor neurone signs suggest ALS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy for gait; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "For parkinsonian features, which can respond in SCA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents and orthoses",
+          "cells": [
+            {
+              "text": "Sensorimotor neuropathy and distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bulbar surveillance",
+          "cells": [
+            {
+              "text": "Swallow assessment, dietitian input and gastrostomy consideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Bulbar and respiratory complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Anticipation with larger repeats and earlier onset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 2 (SCA2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow saccades, areflexia and ataxia with neuropathy: suspected SCA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysphagia, falls, motor neurone signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow assessment and review for ALS features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN2 CAG repeat sizing; brain MRI; oculomotor recording; nerve conduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN2 CAG repeat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCAs, MSA or Friedreich ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and neurorehabilitation for gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa trial for parkinsonian features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoses and neuropathic pain agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bulbar and respiratory surveillance with swallow review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow saccades point to SCA2; bulbar and respiratory complications drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,473 @@
 {
- "id": "pgm1_cdg",
- "name": "PGM1-CDG (phosphoglucomutase 1)",
- "aliases": [
-  "PGM1",
-  "phosphoglucomutase 1 deficiency",
-  "congenital disorder of glycosylation type It",
-  "CDG-It",
-  "glycogenosis type XIV"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts glucose-1-phosphate and glucose-6-phosphate",
-   "A distinctive clinical clue is a bifid uvula or cleft palate combined with exercise intolerance, myopathy and rhabdomyolysis with raised creatine kinase",
-   "Hypoglycaemia (often ketotic or with fasting), hepatopathy, dilated cardiomyopathy and short stature are recognised features",
-   "It is one of the treatable CDGs: oral galactose supplementation improves the glycosylation defect and several clinical and biochemical markers",
-   "Transferrin analysis characteristically shows a mixed type I and type II pattern, reflecting both reduced site occupancy and abnormal galactosylation",
-   "Endocrine abnormalities including hypogonadotrophic features and thyroid changes can occur",
-   "Management combines dietary galactose supplementation with attention to hypoglycaemia, cardiac and muscle complications; diagnosis is confirmed by PGM1 testing"
+  "id": "pgm1_cdg",
+  "name": "PGM1-CDG (phosphoglucomutase 1)",
+  "aliases": [
+    "PGM1",
+    "phosphoglucomutase 1 deficiency",
+    "congenital disorder of glycosylation type It",
+    "CDG-It",
+    "glycogenosis type XIV"
   ],
-  "pathophysiology": "Phosphoglucomutase 1 interconverts glucose-1-phosphate and glucose-6-phosphate, a step central both to glycogen turnover and to producing the UDP-glucose and UDP-galactose needed for glycosylation. Deficiency simultaneously impairs glycogen handling, causing exercise intolerance and hypoglycaemia, and depletes nucleotide sugars, causing under-glycosylation with abnormal galactosylation. This dual mechanism gives the characteristic mixed type I/type II transferrin pattern. Supplying galactose replenishes UDP-galactose, bypassing part of the block and improving glycosylation, which is why the disorder is treatable.",
-  "additionalDifferentials": [
-   "Glycogen storage disorders with exercise intolerance and rhabdomyolysis (e.g. McArdle disease)",
-   "Other CDGs, particularly those with a mixed transferrin pattern",
-   "Fatty acid oxidation disorders presenting with hypoketotic hypoglycaemia and myopathy",
-   "Congenital cardiomyopathies of metabolic origin",
-   "Isolated cleft palate or bifid uvula syndromes",
-   "Ketotic hypoglycaemia of other causes"
-  ],
-  "additionalInvestigations": [
-   "Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern",
-   "PGM1 molecular genetic testing and enzyme assay",
-   "Serum creatine kinase, particularly during exercise or rhabdomyolysis",
-   "Fasting and provocation studies to characterise hypoglycaemia",
-   "Echocardiography for dilated cardiomyopathy",
-   "Liver function tests, endocrine screen and growth assessment"
-  ],
-  "redFlags": [
-   "Hypoglycaemia, especially with fasting or intercurrent illness",
-   "Rhabdomyolysis or acute muscle injury with exertion",
-   "Signs of heart failure from dilated cardiomyopathy",
-   "Cardiac arrhythmia"
-  ],
-  "prognosis": "With galactose supplementation and careful management of hypoglycaemia and cardiac disease, many patients do well, though dilated cardiomyopathy can be a serious complication; overall outlook is more favourable than most severe CDGs given the available treatment.",
-  "pitfalls": [
-   "Missing the diagnosis by overlooking the cleft palate or bifid uvula clue",
-   "Not recognising PGM1-CDG as galactose-responsive and withholding treatment",
-   "Attributing exercise intolerance solely to a primary glycogenosis",
-   "Failing to screen for and monitor dilated cardiomyopathy"
-  ],
-  "references": [
-   "Scriver's OMMBID, congenital disorders of glycosylation",
-   "Nelson Textbook of Paediatrics, disorders of glycosylation and glycogen metabolism"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers",
-   "Avoidance of prolonged fasting with regular complex-carbohydrate intake to prevent ketotic and fasting hypoglycaemia",
-   "Prevention and treatment of exertional rhabdomyolysis through activity modification and hydration, with monitoring of creatine kinase",
-   "Cardiac surveillance with serial echocardiography for dilated cardiomyopathy and standard heart-failure therapy if it develops",
-   "Monitoring and treatment of hepatopathy, endocrine dysfunction including hypogonadotrophic and thyroid abnormalities, and growth",
-   "Surgical repair of cleft palate or bifid uvula with associated feeding support",
-   "Metabolic medicine and clinical genetics referral with PGM1 testing and family counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pgm1_cdg-pathway",
-   "title": "PGM1-CDG (phosphoglucomutase 1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts glucose-1-phosphate and glucose-6-phosphate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypoglycaemia, especially with fasting or intercurrent illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern, PGM1 molecular genetic testing and enzyme assay, Serum creatine kinase, particularly during exercise or rhabdomyolysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis by overlooking the cleft palate or bifid uvula clue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pgm1-cdg (phosphoglucomutase 1)."
-  }
- ],
- "tables": [
-  {
-   "id": "pgm1_cdg-matrix",
-   "title": "PGM1-CDG (phosphoglucomutase 1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts glucose-1-phosphate and glucose-6-phosphate",
+      "A distinctive clinical clue is a bifid uvula or cleft palate combined with exercise intolerance, myopathy and rhabdomyolysis with raised creatine kinase",
+      "Hypoglycaemia (often ketotic or with fasting), hepatopathy, dilated cardiomyopathy and short stature are recognised features",
+      "It is one of the treatable CDGs: oral galactose supplementation improves the glycosylation defect and several clinical and biochemical markers",
+      "Transferrin analysis characteristically shows a mixed type I and type II pattern, reflecting both reduced site occupancy and abnormal galactosylation",
+      "Endocrine abnormalities including hypogonadotrophic features and thyroid changes can occur",
+      "Management combines dietary galactose supplementation with attention to hypoglycaemia, cardiac and muscle complications; diagnosis is confirmed by PGM1 testing"
     ],
-    [
-     "Key Investigations",
-     "Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern, PGM1 molecular genetic testing and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phosphoglucomutase 1 interconverts glucose-1-phosphate and glucose-6-phosphate, a step central both to glycogen turnover and to producing the UDP-glucose and UDP-galactose needed for glycosylation. Deficiency simultaneously impairs glycogen handling, causing exercise intolerance and hypoglycaemia, and depletes nucleotide sugars, causing under-glycosylation with abnormal galactosylation. This dual mechanism gives the characteristic mixed type I/type II transferrin pattern. Supplying galactose replenishes UDP-galactose, bypassing part of the block and improving glycosylation, which is why the disorder is treatable.",
+    "additionalDifferentials": [
+      "Glycogen storage disorders with exercise intolerance and rhabdomyolysis (e.g. McArdle disease)",
+      "Other CDGs, particularly those with a mixed transferrin pattern",
+      "Fatty acid oxidation disorders presenting with hypoketotic hypoglycaemia and myopathy",
+      "Congenital cardiomyopathies of metabolic origin",
+      "Isolated cleft palate or bifid uvula syndromes",
+      "Ketotic hypoglycaemia of other causes"
     ],
-    [
-     "Primary Differentials",
-     "Glycogen storage disorders with exercise intolerance and rhabdomyolysis (e.g. McArdle disease), Other CDGs, particularly those",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern",
+      "PGM1 molecular genetic testing and enzyme assay",
+      "Serum creatine kinase, particularly during exercise or rhabdomyolysis",
+      "Fasting and provocation studies to characterise hypoglycaemia",
+      "Echocardiography for dilated cardiomyopathy",
+      "Liver function tests, endocrine screen and growth assessment"
     ],
-    [
-     "Management Strategy",
-     "Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypoglycaemia, especially with fasting or intercurrent illness",
+      "Rhabdomyolysis or acute muscle injury with exertion",
+      "Signs of heart failure from dilated cardiomyopathy",
+      "Cardiac arrhythmia"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis by overlooking the cleft palate or bifid uvula clue",
-     "Prevent diagnostic or management error"
+    "prognosis": "With galactose supplementation and careful management of hypoglycaemia and cardiac disease, many patients do well, though dilated cardiomyopathy can be a serious complication; overall outlook is more favourable than most severe CDGs given the available treatment.",
+    "pitfalls": [
+      "Missing the diagnosis by overlooking the cleft palate or bifid uvula clue",
+      "Not recognising PGM1-CDG as galactose-responsive and withholding treatment",
+      "Attributing exercise intolerance solely to a primary glycogenosis",
+      "Failing to screen for and monitor dilated cardiomyopathy"
+    ],
+    "references": [
+      "Scriver's OMMBID, congenital disorders of glycosylation",
+      "Nelson Textbook of Paediatrics, disorders of glycosylation and glycogen metabolism"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers",
+      "Avoidance of prolonged fasting with regular complex-carbohydrate intake to prevent ketotic and fasting hypoglycaemia",
+      "Prevention and treatment of exertional rhabdomyolysis through activity modification and hydration, with monitoring of creatine kinase",
+      "Cardiac surveillance with serial echocardiography for dilated cardiomyopathy and standard heart-failure therapy if it develops",
+      "Monitoring and treatment of hepatopathy, endocrine dysfunction including hypogonadotrophic and thyroid abnormalities, and growth",
+      "Surgical repair of cleft palate or bifid uvula with associated feeding support",
+      "Metabolic medicine and clinical genetics referral with PGM1 testing and family counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for pgm1-cdg (phosphoglucomutase 1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pgm1-cdg-real-image",
-   "title": "PGM1-CDG (phosphoglucomutase 1): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pgm1_cdg-pathway",
+      "title": "PGM1-CDG (phosphoglucomutase 1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts glucose-1-phosphate and glucose-6-phosphate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypoglycaemia, especially with fasting or intercurrent illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern, PGM1 molecular genetic testing and enzyme assay, Serum creatine kinase, particularly during exercise or rhabdomyolysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis by overlooking the cleft palate or bifid uvula clue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pgm1-cdg (phosphoglucomutase 1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pgm1_cdg-matrix",
+      "title": "PGM1-CDG (phosphoglucomutase 1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mixed disorder of glycosylation and glycogen metabolism caused by deficiency of phosphoglucomutase 1, which interconverts",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin isoelectric focusing or mass spectrometry showing a mixed type I/type II pattern, PGM1 molecular genetic testing and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glycogen storage disorders with exercise intolerance and rhabdomyolysis (e.g. McArdle disease), Other CDGs, particularly those",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral D-galactose supplementation to replenish UDP-galactose and improve glycosylation and biochemical markers",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis by overlooking the cleft palate or bifid uvula clue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pgm1-cdg (phosphoglucomutase 1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pgm1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Mixed type I/type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PGM1 molecular genetic testing and enzyme assay",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle injury, particularly during exercise or rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting and provocation studies",
+          "cells": [
+            {
+              "text": "Characterises hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests, endocrine screen and growth assessment",
+          "cells": [
+            {
+              "text": "Hepatopathy, endocrine dysfunction and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pgm1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycogen storage disorders (e.g. McArdle disease)",
+          "cells": [
+            {
+              "text": "Exercise intolerance and rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty acid oxidation disorders",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia and myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pgm1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral D-galactose",
+          "cells": [
+            {
+              "text": "Replenishes UDP-galactose to improve glycosylation and biochemical markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prolonged fasting",
+          "cells": [
+            {
+              "text": "Regular complex-carbohydrate intake to prevent ketotic and fasting hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Activity modification and hydration, with creatine kinase monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography; standard heart-failure therapy if dilated cardiomyopathy develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic, endocrine and growth care",
+          "cells": [
+            {
+              "text": "Monitor and treat hepatopathy, hypogonadotrophic and thyroid abnormalities, and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cleft palate or bifid uvula",
+          "cells": [
+            {
+              "text": "Surgical repair with feeding support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Metabolic medicine and clinical genetics, with PGM1 testing and family counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pgm1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of PGM1-CDG (phosphoglucomutase 1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypoglycaemia with a cleft palate or bifid uvula clue; suspected PGM1-CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypoglycaemia, rhabdomyolysis, heart failure, arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and metabolic review for heart failure, arrhythmia or rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin isoelectric focusing or mass spectrometry; PGM1 testing; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do transferrin pattern and PGM1 testing confirm PGM1-CDG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glycogen storage disease, fatty acid oxidation disorders or another CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral D-galactose supplementation to improve glycosylation and biochemical markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid prolonged fasting with regular complex-carbohydrate intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prevent exertional rhabdomyolysis with activity modification and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and standard heart-failure therapy if cardiomyopathy develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Metabolic medicine and clinical genetics referral with PGM1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With galactose and careful management many do well; dilated cardiomyopathy can be serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

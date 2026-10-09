@@ -267,27 +267,589 @@
       "caption": "Diagnostic and clinical overview matrix for ventilator associated pneumonia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "vap-real-image",
-      "title": "Ventilator Associated Pneumonia: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ventilator-Associated Pneumonia",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/ventilator-associated-pneumonia",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "IDSA/ATS HAP and VAP Guideline, 2016",
+      "url": "https://www.idsociety.org/practice-guideline/hap_vap/",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 257-8",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "VAP-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing ventilator-associated pneumonia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Time on ventilator",
+          "unit": "h",
+          "cells": [
+            {
+              "text": ">=48 h after intubation or within 48 h of extubation",
+              "op": ">=",
+              "value": 48
+            },
+            {
+              "text": "{{hy:Defines VAP as a subset of hospital-acquired pneumonia}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "New or progressive opacity"
+            },
+            {
+              "text": "Needed with clinical signs to suspect VAP"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Clinical signs",
+          "cells": [
+            {
+              "text": "Fever, leukocytosis, purulent tracheal secretions, worsening oxygenation"
+            },
+            {
+              "text": "Nonspecific; no single finding is sensitive or specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygenation trend",
+          "cells": [
+            {
+              "text": "Serial decline in oxygenation"
+            },
+            {
+              "text": "May detect VAP earlier than other signs and tracks response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endotracheal aspirate",
+          "cells": [
+            {
+              "text": "Gram stain with semiquantitative culture"
+            },
+            {
+              "text": "Preferred sampling method; guides therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endotracheal aspirate, quantitative",
+          "unit": "cfu/mL",
+          "cells": [
+            {
+              "text": ">=10^6 cfu/mL",
+              "op": ">=",
+              "value": 1000000
+            },
+            {
+              "text": "Diagnostic threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protected specimen brush",
+          "unit": "cfu/mL",
+          "cells": [
+            {
+              "text": "Below 10^3 cfu/mL",
+              "op": "<",
+              "value": 1000
+            },
+            {
+              "text": "Below threshold: withholding antibiotics is suggested"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "unit": "cfu/mL",
+          "cells": [
+            {
+              "text": "Below 10^4 cfu/mL",
+              "op": "<",
+              "value": 10000
+            },
+            {
+              "text": "Below threshold: withholding antibiotics is suggested"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gram stain without bacteria",
+          "cells": [
+            {
+              "text": "Endotracheal aspirate shows no organisms"
+            },
+            {
+              "text": "Makes pneumonia an unlikely cause of fever or infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Take in all suspected VAP"
+            },
+            {
+              "text": "Low sensitivity, fairly high positive predictive value"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Procalcitonin, CRP, CPIS, sTREM-1",
+          "cells": [
+            {
+              "text": "Not used to decide on starting antibiotics"
+            },
+            {
+              "text": "Use clinical criteria alone"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison gives the endotracheal aspirate quantitative threshold; IDSA/ATS prefers semiquantitative aspirate cultures and gives the PSB and BAL thresholds. Recent antibiotics in the prior 24 to 48 h can make quantitative cultures falsely negative."
+    },
+    {
+      "id": "VAP-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic VAP",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Purulent tracheobronchitis",
+          "cells": [
+            {
+              "text": "Purulent secretions without a new infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atelectasis",
+          "cells": [
+            {
+              "text": "Opacity without infective features"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary embolism or infarction",
+          "cells": [
+            {
+              "text": "Hypoxia and opacity without purulent secretions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary edema",
+          "cells": [
+            {
+              "text": "Atypical edema can mimic infiltrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARDS",
+          "cells": [
+            {
+              "text": "Bilateral infiltrates; may also precede VAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alveolar hemorrhage or pulmonary contusion",
+          "cells": [
+            {
+              "text": "Infiltrate with bleeding or trauma context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction or hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Infiltrate linked to a drug or exposure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fungal or viral pneumonia",
+          "cells": [
+            {
+              "text": "Needs different antimicrobials from bacterial VAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other sources of fever",
+          "cells": [
+            {
+              "text": "Line infection, sinusitis, UTI, C. difficile diarrhea, pancreatitis, drug fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "VAP-treatment",
+      "kind": "treatment",
+      "title": "Empiric and definitive management of VAP",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Coverage of S. aureus, P. aeruginosa and other gram-negative bacilli",
+          "cells": [
+            {
+              "text": "{{hy:Every empiric regimen}}"
+            },
+            {
+              "text": "Choose by local antibiogram"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "No MDR risk: ceftriaxone, a fluoroquinolone, ampicillin-sulbactam or ertapenem",
+          "cells": [
+            {
+              "text": "Patients without MDR risk factors"
+            },
+            {
+              "text": "Ceftriaxone 2 g IV q24h; moxifloxacin 400 mg IV q24h; ciprofloxacin 400 mg IV q8h; levofloxacin 750 mg IV q24h; ampicillin-sulbactam 3 g IV q6h; ertapenem 1 g IV q24h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "MDR risk, step 1: antipseudomonal beta-lactam",
+          "cells": [
+            {
+              "text": "Patients with MDR risk factors"
+            },
+            {
+              "text": "Ceftazidime 2 g IV q8h; cefepime 2 g IV q8 to 12h; piperacillin-tazobactam 4.5 g IV q6h; imipenem 500 mg IV q6h or 1 g IV q8h; meropenem 1 g IV q8h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "MDR risk, step 2: second gram-negative agent",
+          "cells": [
+            {
+              "text": "Added to the beta-lactam"
+            },
+            {
+              "text": "Gentamicin or tobramycin 7 mg/kg IV q24h; amikacin 20 mg/kg IV q24h; ciprofloxacin 400 mg IV q8h; levofloxacin 750 mg IV q24h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "MDR risk, step 3: gram-positive agent",
+          "cells": [
+            {
+              "text": "Added for MRSA cover"
+            },
+            {
+              "text": "Linezolid 600 mg IV q12h; vancomycin 15 mg/kg (up to 1 g) IV q12h"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Piperacillin-tazobactam, cefepime, levofloxacin, imipenem or meropenem",
+          "cells": [
+            {
+              "text": "No MRSA risk and unit MRSA below 10% to 20% of S. aureus"
+            },
+            {
+              "text": "MSSA coverage without an MRSA agent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Add vancomycin or linezolid",
+          "cells": [
+            {
+              "text": "Prior IV antibiotics in 90 days, unit MRSA above 10% to 20%, or MRSA rate unknown"
+            },
+            {
+              "text": "Choice depends on blood counts, SSRI use, renal function, cost"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Two antipseudomonal agents of different classes",
+          "cells": [
+            {
+              "text": "Resistance risk factor, unit gram-negative resistance above 10%, no local data, bronchiectasis or cystic fibrosis"
+            },
+            {
+              "text": "Otherwise one antipseudomonal agent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid aminoglycosides and colistin",
+          "cells": [
+            {
+              "text": "When other active agents exist"
+            },
+            {
+              "text": "Weak recommendation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PK/PD-optimised dosing",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Weight-based, extended or continuous infusion, drug levels"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reassess at 2 to 3 days and de-escalate",
+          "cells": [
+            {
+              "text": "Once culture and clinical data are back"
+            },
+            {
+              "text": "Narrow to the narrowest effective regimen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total duration 7 days",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Most patients"
+            },
+            {
+              "text": "Shorter or longer by clinical, radiologic and lab response; procalcitonin plus clinical criteria can guide stopping"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prevention bundle",
+          "cells": [
+            {
+              "text": "Head of bed 30 to 45 degrees, subglottic suctioning, NIV where it avoids intubation"
+            },
+            {
+              "text": "Balance sedation and extubation timing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source conflict: the Tables PDF (health care-associated pneumonia table) gives triple therapy with an aminoglycoside or fluoroquinolone for all MDR-risk patients; IDSA/ATS 2016 limits two antipseudomonal agents to high-risk settings and advises avoiding aminoglycosides when alternatives exist. Doses are from the Tables PDF; IDSA/ATS favours PK/PD-optimised dosing."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "VAP-dx-mgmt",
+      "title": "Diagnosis and management of ventilator-associated pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ventilated >=48 h: fever, purulent secretions or worse oxygenation",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New or progressive opacity on chest imaging?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Look for other causes: tracheobronchitis, line, sinus, urine, drug fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endotracheal aspirate Gram stain and culture plus blood cultures",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MDR risk, septic shock or high local resistance?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "One antipseudomonal agent covering MSSA",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Two antipseudomonal agents plus vancomycin or linezolid",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassess at 2 to 3 days with cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Clinical improvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "De-escalate; stop at 7 days if improved",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Re-sample, review resistance, other diagnoses or complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }
+  ],
+  "aliases": [
+    "Ventilator-associated pneumonia",
+    "ventilator_associated_pneumonia",
+    "VAP",
+    "ventilator associated pneumonia",
+    "ventilator-associated lower respiratory infection"
   ]
 }

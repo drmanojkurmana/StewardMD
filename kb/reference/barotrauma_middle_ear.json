@@ -1,171 +1,471 @@
 {
- "id": "barotrauma_middle_ear",
- "name": "Middle ear barotrauma",
- "aliases": [
-  "aural barotrauma",
-  "ear squeeze",
-  "barotitis media"
- ],
- "class": "non_infective",
- "system": "Ear",
- "specialty": "Diving and hyperbaric medicine / Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Diving and hyperbaric medicine / otolaryngology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during descent",
-   "Inability to open the Eustachian tube, often from upper respiratory congestion, prevents pressure equalisation",
-   "Features range from ear fullness and pain to tympanic membrane haemorrhage, effusion and, in severe cases, rupture",
-   "Conductive hearing loss and vertigo may occur, and forceful equalisation can cause inner ear barotrauma",
-   "Otoscopy grades the injury from mild retraction and erythema to frank haemorrhage or perforation",
-   "Prevention centres on gentle equalisation techniques and avoiding diving or flying with nasal congestion"
+  "id": "barotrauma_middle_ear",
+  "name": "Middle ear barotrauma",
+  "aliases": [
+    "aural barotrauma",
+    "ear squeeze",
+    "barotitis media"
   ],
-  "pathophysiology": "During descent the ambient pressure rises and, unless the middle ear is equalised through the Eustachian tube, the relative negative pressure in the middle ear draws the tympanic membrane inward and engorges and ruptures mucosal vessels, producing effusion and haemorrhage. If the tube cannot be actively opened, the pressure differential increases until tissue injury or membrane rupture occurs. Forceful attempts at equalisation against a blocked tube can transmit pressure to the inner ear and cause more serious inner ear barotrauma.",
-  "additionalDifferentials": [
-   "Inner ear barotrauma or perilymph fistula",
-   "External ear barotrauma",
-   "Acute otitis media",
-   "Eustachian tube dysfunction without barotrauma",
-   "Decompression sickness affecting the vestibular system"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy to grade the tympanic membrane injury",
-   "Audiometry and tympanometry if hearing loss or effusion is present",
-   "Assessment for inner ear involvement if vertigo or sensorineural loss occurs",
-   "Evaluation of Eustachian tube function and nasal pathology",
-   "Consideration of a diving-medicine review before return to diving"
-  ],
-  "redFlags": [
-   "Sensorineural hearing loss or persistent vertigo suggesting inner ear barotrauma",
-   "Tympanic membrane rupture",
-   "Signs of secondary infection",
-   "Symptoms suggesting vestibular decompression sickness"
-  ],
-  "prognosis": "Most cases resolve over days to weeks with conservative care; perforations often heal spontaneously, but inner ear barotrauma can cause permanent hearing loss.",
-  "pitfalls": [
-   "Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss",
-   "Advising continued diving or flying with nasal congestion",
-   "Confusing it with acute otitis media",
-   "Overlooking a perforation requiring follow-up"
-  ],
-  "references": [
-   "Diving and hyperbaric medicine references (standard reference)",
-   "Otolaryngology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative management with analgesia and avoidance of further pressure exposure until healing",
-   "Decongestants and treatment of underlying nasal or upper respiratory congestion",
-   "Instruction in gentle, controlled Eustachian tube equalisation techniques such as autoinflation",
-   "Avoidance of diving or flying while symptomatic or congested",
-   "Otoscopic follow-up, as most tympanic membrane perforations heal spontaneously",
-   "Myringotomy or ventilation tube insertion for persistent middle-ear effusion",
-   "Urgent otolaryngology referral if inner-ear barotrauma is suspected from vertigo or sensorineural hearing loss",
-   "Diving-medicine review before return to diving"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "barotrauma_middle_ear-pathway",
-   "title": "Middle ear barotrauma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during descent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sensorineural hearing loss or persistent vertigo suggesting inner ear barotrauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy to grade the tympanic membrane injury, Audiometry and tympanometry if hearing loss or effusion is present, Assessment for inner ear involvement if vertigo or sensorineural loss occurs"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative management with analgesia and avoidance of further pressure exposure until healing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of middle ear barotrauma."
-  }
- ],
- "tables": [
-  {
-   "id": "barotrauma_middle_ear-matrix",
-   "title": "Middle ear barotrauma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear",
+  "specialty": "Diving and hyperbaric medicine / Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Diving and hyperbaric medicine / otolaryngology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during descent",
+      "Inability to open the Eustachian tube, often from upper respiratory congestion, prevents pressure equalisation",
+      "Features range from ear fullness and pain to tympanic membrane haemorrhage, effusion and, in severe cases, rupture",
+      "Conductive hearing loss and vertigo may occur, and forceful equalisation can cause inner ear barotrauma",
+      "Otoscopy grades the injury from mild retraction and erythema to frank haemorrhage or perforation",
+      "Prevention centres on gentle equalisation techniques and avoiding diving or flying with nasal congestion"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy to grade the tympanic membrane injury, Audiometry and tympanometry if hearing loss or effusion is present, Assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During descent the ambient pressure rises and, unless the middle ear is equalised through the Eustachian tube, the relative negative pressure in the middle ear draws the tympanic membrane inward and engorges and ruptures mucosal vessels, producing effusion and haemorrhage. If the tube cannot be actively opened, the pressure differential increases until tissue injury or membrane rupture occurs. Forceful attempts at equalisation against a blocked tube can transmit pressure to the inner ear and cause more serious inner ear barotrauma.",
+    "additionalDifferentials": [
+      "Inner ear barotrauma or perilymph fistula",
+      "External ear barotrauma",
+      "Acute otitis media",
+      "Eustachian tube dysfunction without barotrauma",
+      "Decompression sickness affecting the vestibular system"
     ],
-    [
-     "Primary Differentials",
-     "Inner ear barotrauma or perilymph fistula, External ear barotrauma, Acute otitis media",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy to grade the tympanic membrane injury",
+      "Audiometry and tympanometry if hearing loss or effusion is present",
+      "Assessment for inner ear involvement if vertigo or sensorineural loss occurs",
+      "Evaluation of Eustachian tube function and nasal pathology",
+      "Consideration of a diving-medicine review before return to diving"
     ],
-    [
-     "Management Strategy",
-     "Conservative management with analgesia and avoidance of further pressure exposure until healing",
-     "Core treatment modality"
+    "redFlags": [
+      "Sensorineural hearing loss or persistent vertigo suggesting inner ear barotrauma",
+      "Tympanic membrane rupture",
+      "Signs of secondary infection",
+      "Symptoms suggesting vestibular decompression sickness"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve over days to weeks with conservative care; perforations often heal spontaneously, but inner ear barotrauma can cause permanent hearing loss.",
+    "pitfalls": [
+      "Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss",
+      "Advising continued diving or flying with nasal congestion",
+      "Confusing it with acute otitis media",
+      "Overlooking a perforation requiring follow-up"
+    ],
+    "references": [
+      "Diving and hyperbaric medicine references (standard reference)",
+      "Otolaryngology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative management with analgesia and avoidance of further pressure exposure until healing",
+      "Decongestants and treatment of underlying nasal or upper respiratory congestion",
+      "Instruction in gentle, controlled Eustachian tube equalisation techniques such as autoinflation",
+      "Avoidance of diving or flying while symptomatic or congested",
+      "Otoscopic follow-up, as most tympanic membrane perforations heal spontaneously",
+      "Myringotomy or ventilation tube insertion for persistent middle-ear effusion",
+      "Urgent otolaryngology referral if inner-ear barotrauma is suspected from vertigo or sensorineural hearing loss",
+      "Diving-medicine review before return to diving"
     ]
-   ],
-   "caption": "Overview comparison matrix for middle ear barotrauma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "barotrauma-middle-ear-real-image",
-   "title": "Middle ear barotrauma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "barotrauma_middle_ear-pathway",
+      "title": "Middle ear barotrauma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during descent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sensorineural hearing loss or persistent vertigo suggesting inner ear barotrauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy to grade the tympanic membrane injury, Audiometry and tympanometry if hearing loss or effusion is present, Assessment for inner ear involvement if vertigo or sensorineural loss occurs"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative management with analgesia and avoidance of further pressure exposure until healing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of middle ear barotrauma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "barotrauma_middle_ear-matrix",
+      "title": "Middle ear barotrauma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest injury in divers and a frequent problem in air travellers, caused by failure to equalise middle ear pressure during",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy to grade the tympanic membrane injury, Audiometry and tympanometry if hearing loss or effusion is present, Assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inner ear barotrauma or perilymph fistula, External ear barotrauma, Acute otitis media",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative management with analgesia and avoidance of further pressure exposure until healing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing coexisting inner ear barotrauma when there is vertigo or sensorineural loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for middle ear barotrauma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Diving and hyperbaric medicine / otolaryngology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "barotrauma_middle_ear-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy to grade tympanic membrane injury",
+          "cells": [
+            {
+              "text": "Tympanic membrane injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and tympanometry",
+          "cells": [
+            {
+              "text": "Hearing loss or effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for inner-ear involvement",
+          "cells": [
+            {
+              "text": "Vertigo or sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eustachian tube and nasal assessment",
+          "cells": [
+            {
+              "text": "Eustachian tube function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diving-medicine review before return to diving",
+          "cells": [
+            {
+              "text": "Fitness to dive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barotrauma_middle_ear-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inner-ear barotrauma or perilymph fistula",
+          "cells": [
+            {
+              "text": "Separated by vertigo or sensorineural loss on audiometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute otitis media",
+          "cells": [
+            {
+              "text": "Distinguished by otoscopy and the pressure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barotrauma_middle_ear-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Analgesia and avoidance of further pressure exposure until healing"
+            },
+            {
+              "text": "Acute injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decongestants",
+          "cells": [
+            {
+              "text": "Treat underlying nasal or upper respiratory congestion"
+            },
+            {
+              "text": "Congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Equalisation technique teaching",
+          "cells": [
+            {
+              "text": "Gentle, controlled Eustachian tube equalisation such as autoinflation"
+            },
+            {
+              "text": "Eustachian tube dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid diving or flying",
+          "cells": [
+            {
+              "text": "While symptomatic or congested"
+            },
+            {
+              "text": "Symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopic follow-up",
+          "cells": [
+            {
+              "text": "Most tympanic membrane perforations heal spontaneously"
+            },
+            {
+              "text": "Perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myringotomy or ventilation tube",
+          "cells": [
+            {
+              "text": "For persistent middle-ear effusion"
+            },
+            {
+              "text": "Persistent effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent otolaryngology referral",
+          "cells": [
+            {
+              "text": "If inner-ear barotrauma is suspected"
+            },
+            {
+              "text": "Vertigo or sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "barotrauma_middle_ear-dx-mgmt",
+      "title": "Diagnosis and management of Middle ear barotrauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ear pain and reduced hearing after descent in a diver or air traveller",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Sensorineural loss, persistent vertigo or tympanic rupture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent otolaryngology referral for suspected inner-ear barotrauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, audiometry, tympanometry, vestibular assessment, Eustachian tube review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tympanic membrane injury with pressure history and no inner-ear involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Conservative management with decongestants and equalisation technique",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and refer for inner-ear assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Myringotomy or ventilation tube for persistent effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid diving or flying while symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diving-medicine review before return to diving",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Otoscopic follow-up; perforations often heal spontaneously",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

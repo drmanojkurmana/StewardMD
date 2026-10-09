@@ -1,179 +1,486 @@
 {
- "id": "dextrocardia",
- "name": "dextrocardia",
- "aliases": [
-  "dextrocardia situs solitus",
-  "isolated dextrocardia",
-  "dextroversion"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an extracardiac process merely displaces a normally formed heart rightward.",
-   "The clinical significance depends entirely on the accompanying visceral situs: dextrocardia with situs inversus usually accompanies a structurally normal heart, whereas dextrocardia with situs solitus carries a high burden of complex congenital heart disease.",
-   "Dextrocardia with situs solitus (isolated dextrocardia) is frequently associated with congenitally corrected transposition, ventricular septal defect and pulmonary stenosis.",
-   "A segmental sequential analysis of atrial situs, ventricular loop and great-artery connection is essential to characterise the malformation before any intervention.",
-   "On examination the apex beat and heart sounds are maximal on the right, and the ECG shows reversed praecordial R-wave progression with abnormal frontal axis unless leads are repositioned.",
-   "Right-sided praecordial leads or mirror-image electrode placement are required to obtain an interpretable ECG.",
-   "Dextroposition from right pulmonary hypoplasia, diaphragmatic hernia or large left effusion should be excluded before labelling true dextrocardia.",
-   "Association with primary ciliary dyskinesia should be considered when dextrocardia accompanies situs inversus and chronic respiratory disease."
+  "id": "dextrocardia",
+  "name": "dextrocardia",
+  "aliases": [
+    "dextrocardia situs solitus",
+    "isolated dextrocardia",
+    "dextroversion"
   ],
-  "pathophysiology": "Dextrocardia arises from abnormal direction of embryonic cardiac looping and its interaction with overall body situs. In normal development the straight heart tube undergoes rightward (D-loop) looping so the morphological right ventricle lies rightward and the apex swings left. When looping and situs are coordinately reversed, as in situs inversus totalis, the apex points right but atrioventricular and ventriculoarterial concordance is preserved in mirror image, usually yielding a normal heart. When cardiac position is reversed independently of visceral situs (dextrocardia with situs solitus), there is a mismatch between the direction of looping and atrial arrangement, which strongly predisposes to segmental discordances such as congenitally corrected transposition and to septal and outflow malformations. True dextrocardia is thus an intrinsic developmental malposition, in contrast to dextroposition, where a normally formed and normally looped heart is secondarily shifted rightward by loss of lung volume or a space-occupying process in the left hemithorax.",
-  "additionalDifferentials": [
-   "dextroposition from pulmonary hypoplasia or agenesis",
-   "dextroposition from congenital diaphragmatic hernia",
-   "mediastinal shift from large left pleural effusion or pneumothorax",
-   "situs inversus totalis with mirror-image heart",
-   "isolated levocardia with abdominal situs anomaly",
-   "congenitally corrected transposition of the great arteries",
-   "heterotaxy syndrome"
-  ],
-  "additionalInvestigations": [
-   "transthoracic echocardiography with full segmental analysis",
-   "chest radiograph localising apex, gastric bubble and aortic arch",
-   "ECG with right-sided or mirror-image lead placement",
-   "abdominal ultrasound to define visceral situs and spleen number",
-   "cross-sectional cardiac imaging (CT or MRI) for complex anatomy",
-   "assessment for primary ciliary dyskinesia when situs inversus coexists with respiratory disease",
-   "genetic and laterality evaluation in selected cases"
-  ],
-  "redFlags": [
-   "neonatal cyanosis or heart failure indicating complex associated congenital heart disease",
-   "rapid respiratory distress suggesting dextroposition from an acute intrathoracic process",
-   "murmur, abnormal pulses or failure to thrive in an infant with rightward apex",
-   "chronic sinopulmonary disease pointing to primary ciliary dyskinesia",
-   "planned surgery or line placement where malposition risks a wrong-side procedure"
-  ],
-  "prognosis": "Dextrocardia associated with situs inversus and an otherwise normal heart has an excellent outlook, whereas dextrocardia with situs solitus often accompanies complex congenital heart disease and carries a prognosis governed by those lesions and their reparability. Outcome therefore ranges from normal life expectancy to that of severe cyanotic congenital heart disease.",
-  "pitfalls": [
-   "Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause.",
-   "Interpreting the standard-placement ECG as ischaemic or lead-reversed artefact.",
-   "Assuming a normal heart without performing full segmental echocardiography, especially in situs solitus.",
-   "Overlooking congenitally corrected transposition and its late complications.",
-   "Failing to alert procedural teams to the reversed cardiac position."
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-   "Nadas' Pediatric Cardiology",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection before any intervention",
-   "Isolated dextrocardia with situs inversus and a structurally normal heart needs no cardiac treatment, only documentation and reassurance",
-   "Surgically correct or palliate associated congenital lesions such as congenitally corrected transposition, ventricular septal defect and pulmonary stenosis as indicated",
-   "Ensure interpretable ECGs with right-sided or mirror-image lead placement and flag the diagnosis for future imaging and procedures",
-   "Endocarditis prophylaxis and arrhythmia surveillance where structural or conduction abnormality is present",
-   "Assess for primary ciliary dyskinesia when situs inversus coexists with chronic respiratory disease",
-   "Manage complex disease through a congenital cardiology and cardiac surgery multidisciplinary team, escalating to specialist centres for complex repairs or heart failure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dextrocardia-pathway",
-   "title": "dextrocardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an extracardiac process merely displaces a normally formed heart rightward.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: neonatal cyanosis or heart failure indicating complex associated congenital heart disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: transthoracic echocardiography with full segmental analysis, chest radiograph localising apex, gastric bubble and aortic arch, ECG with right-sided or mirror-image lead placement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection before any intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dextrocardia."
-  }
- ],
- "tables": [
-  {
-   "id": "dextrocardia-matrix",
-   "title": "dextrocardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an extracardiac process merely displaces a normally formed heart rightward.",
+      "The clinical significance depends entirely on the accompanying visceral situs: dextrocardia with situs inversus usually accompanies a structurally normal heart, whereas dextrocardia with situs solitus carries a high burden of complex congenital heart disease.",
+      "Dextrocardia with situs solitus (isolated dextrocardia) is frequently associated with congenitally corrected transposition, ventricular septal defect and pulmonary stenosis.",
+      "A segmental sequential analysis of atrial situs, ventricular loop and great-artery connection is essential to characterise the malformation before any intervention.",
+      "On examination the apex beat and heart sounds are maximal on the right, and the ECG shows reversed praecordial R-wave progression with abnormal frontal axis unless leads are repositioned.",
+      "Right-sided praecordial leads or mirror-image electrode placement are required to obtain an interpretable ECG.",
+      "Dextroposition from right pulmonary hypoplasia, diaphragmatic hernia or large left effusion should be excluded before labelling true dextrocardia.",
+      "Association with primary ciliary dyskinesia should be considered when dextrocardia accompanies situs inversus and chronic respiratory disease."
     ],
-    [
-     "Key Investigations",
-     "transthoracic echocardiography with full segmental analysis, chest radiograph localising apex, gastric bubble and aortic arch,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dextrocardia arises from abnormal direction of embryonic cardiac looping and its interaction with overall body situs. In normal development the straight heart tube undergoes rightward (D-loop) looping so the morphological right ventricle lies rightward and the apex swings left. When looping and situs are coordinately reversed, as in situs inversus totalis, the apex points right but atrioventricular and ventriculoarterial concordance is preserved in mirror image, usually yielding a normal heart. When cardiac position is reversed independently of visceral situs (dextrocardia with situs solitus), there is a mismatch between the direction of looping and atrial arrangement, which strongly predisposes to segmental discordances such as congenitally corrected transposition and to septal and outflow malformations. True dextrocardia is thus an intrinsic developmental malposition, in contrast to dextroposition, where a normally formed and normally looped heart is secondarily shifted rightward by loss of lung volume or a space-occupying process in the left hemithorax.",
+    "additionalDifferentials": [
+      "dextroposition from pulmonary hypoplasia or agenesis",
+      "dextroposition from congenital diaphragmatic hernia",
+      "mediastinal shift from large left pleural effusion or pneumothorax",
+      "situs inversus totalis with mirror-image heart",
+      "isolated levocardia with abdominal situs anomaly",
+      "congenitally corrected transposition of the great arteries",
+      "heterotaxy syndrome"
     ],
-    [
-     "Primary Differentials",
-     "dextroposition from pulmonary hypoplasia or agenesis, dextroposition from congenital diaphragmatic hernia, mediastinal shift from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "transthoracic echocardiography with full segmental analysis",
+      "chest radiograph localising apex, gastric bubble and aortic arch",
+      "ECG with right-sided or mirror-image lead placement",
+      "abdominal ultrasound to define visceral situs and spleen number",
+      "cross-sectional cardiac imaging (CT or MRI) for complex anatomy",
+      "assessment for primary ciliary dyskinesia when situs inversus coexists with respiratory disease",
+      "genetic and laterality evaluation in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection",
-     "Core treatment modality"
+    "redFlags": [
+      "neonatal cyanosis or heart failure indicating complex associated congenital heart disease",
+      "rapid respiratory distress suggesting dextroposition from an acute intrathoracic process",
+      "murmur, abnormal pulses or failure to thrive in an infant with rightward apex",
+      "chronic sinopulmonary disease pointing to primary ciliary dyskinesia",
+      "planned surgery or line placement where malposition risks a wrong-side procedure"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dextrocardia associated with situs inversus and an otherwise normal heart has an excellent outlook, whereas dextrocardia with situs solitus often accompanies complex congenital heart disease and carries a prognosis governed by those lesions and their reparability. Outcome therefore ranges from normal life expectancy to that of severe cyanotic congenital heart disease.",
+    "pitfalls": [
+      "Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause.",
+      "Interpreting the standard-placement ECG as ischaemic or lead-reversed artefact.",
+      "Assuming a normal heart without performing full segmental echocardiography, especially in situs solitus.",
+      "Overlooking congenitally corrected transposition and its late complications.",
+      "Failing to alert procedural teams to the reversed cardiac position."
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "Nadas' Pediatric Cardiology",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection before any intervention",
+      "Isolated dextrocardia with situs inversus and a structurally normal heart needs no cardiac treatment, only documentation and reassurance",
+      "Surgically correct or palliate associated congenital lesions such as congenitally corrected transposition, ventricular septal defect and pulmonary stenosis as indicated",
+      "Ensure interpretable ECGs with right-sided or mirror-image lead placement and flag the diagnosis for future imaging and procedures",
+      "Endocarditis prophylaxis and arrhythmia surveillance where structural or conduction abnormality is present",
+      "Assess for primary ciliary dyskinesia when situs inversus coexists with chronic respiratory disease",
+      "Manage complex disease through a congenital cardiology and cardiac surgery multidisciplinary team, escalating to specialist centres for complex repairs or heart failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for dextrocardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dextrocardia-real-image",
-   "title": "dextrocardia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "dextrocardia-pathway",
+      "title": "dextrocardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an extracardiac process merely displaces a normally formed heart rightward.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: neonatal cyanosis or heart failure indicating complex associated congenital heart disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: transthoracic echocardiography with full segmental analysis, chest radiograph localising apex, gastric bubble and aortic arch, ECG with right-sided or mirror-image lead placement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection before any intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dextrocardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dextrocardia-matrix",
+      "title": "dextrocardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dextrocardia denotes a heart whose apex points to the right hemithorax and must be distinguished from dextroposition, where an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "transthoracic echocardiography with full segmental analysis, chest radiograph localising apex, gastric bubble and aortic arch,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "dextroposition from pulmonary hypoplasia or agenesis, dextroposition from congenital diaphragmatic hernia, mediastinal shift from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Characterise the anatomy with full segmental sequential analysis of atrial situs, ventricular loop and great-artery connection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing true dextrocardia with dextroposition and missing the underlying pulmonary or diaphragmatic cause.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dextrocardia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dextrocardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with full segmental analysis",
+          "cells": [
+            {
+              "text": "Atrial situs, ventricular loop and great-artery connection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Apex, gastric bubble and aortic arch position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with right-sided or mirror-image leads",
+          "cells": [
+            {
+              "text": "A readable ECG in the reversed heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Visceral situs and spleen number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for primary ciliary dyskinesia",
+          "cells": [
+            {
+              "text": "Situs inversus with chronic respiratory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dextrocardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypoplasia, agenesis or diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "Dextroposition from an underlying pulmonary or diaphragmatic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal shift from effusion or pneumothorax",
+          "cells": [
+            {
+              "text": "Shift of the heart, not true dextrocardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Situs inversus totalis",
+          "cells": [
+            {
+              "text": "Mirror-image heart with normal structure; excellent outlook"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenitally corrected transposition",
+          "cells": [
+            {
+              "text": "Late complications are easily overlooked"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dextrocardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Full segmental analysis",
+          "cells": [
+            {
+              "text": "Characterise atrial situs, ventricular loop and great-artery connection before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated situs inversus",
+          "cells": [
+            {
+              "text": "Normal heart needs documentation and reassurance only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated lesions",
+          "cells": [
+            {
+              "text": "Surgically correct or palliate congenitally corrected transposition, VSD or pulmonary stenosis as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and procedural flagging",
+          "cells": [
+            {
+              "text": "Right-sided or mirror-image leads; flag the reversed position for future procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis prophylaxis and rhythm surveillance",
+          "cells": [
+            {
+              "text": "Where a structural or conduction abnormality is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliary dyskinesia assessment",
+          "cells": [
+            {
+              "text": "When situs inversus coexists with chronic respiratory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complex disease referral",
+          "cells": [
+            {
+              "text": "Congenital cardiology and cardiac surgery team; specialist centres for complex repairs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dextrocardia-dx-mgmt",
+      "title": "Diagnosis and management of dextrocardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dextrocardia: heart on the right side of the chest on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal cyanosis, heart failure, or chronic sinopulmonary disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent echocardiography and congenital cardiology review for cyanosis or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Segmental echocardiography; chest X-ray; right-sided ECG; abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does segmental analysis show situs inversus with a structurally normal heart?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider situs solitus with complex heart disease, or dextroposition from lung",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full segmental analysis of situs, ventricular loop and great arteries",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isolated situs inversus with a normal heart needs documentation and reassurance only",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgically correct or palliate associated lesions as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Right-sided or mirror-image ECG leads; flag the reversed position for procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess for primary ciliary dyskinesia when chronic respiratory disease coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with situs inversus and a normal heart; otherwise set by associated lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

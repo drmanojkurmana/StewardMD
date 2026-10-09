@@ -1,175 +1,473 @@
 {
- "id": "etv6_thrombocytopenia",
- "name": "ETV6-related thrombocytopenia with leukaemia predisposition",
- "aliases": [
-  "ETV6",
-  "thrombocytopenia 5",
-  "THC5",
-  "TEL",
-  "ETV6-related familial leukaemia"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
-   "Bleeding is generally mild but the platelets often show a functional defect contributing to symptoms",
-   "There is a predisposition to haematological malignancy, notably B-cell acute lymphoblastic leukaemia in childhood as well as myeloid neoplasms",
-   "Unlike RUNX1 and ANKRD26 disorders, the leukaemia spectrum prominently includes lymphoid as well as myeloid malignancy",
-   "A family history spanning thrombocytopenia and childhood leukaemia is an important clue",
-   "Some carriers also show mild red-cell macrocytosis or other subtle blood-count changes",
-   "Diagnosis relies on germline ETV6 sequencing, ideally confirmed on non-haematopoietic tissue",
-   "Relatives considered as stem-cell donors must be screened for the familial variant"
+  "id": "etv6_thrombocytopenia",
+  "name": "ETV6-related thrombocytopenia with leukaemia predisposition",
+  "aliases": [
+    "ETV6",
+    "thrombocytopenia 5",
+    "THC5",
+    "TEL",
+    "ETV6-related familial leukaemia"
   ],
-  "pathophysiology": "ETV6 encodes an ETS-family transcriptional repressor essential for haematopoietic stem-cell function and megakaryocyte development. Germline mutations, often affecting the DNA-binding domain, act in a dominant-negative fashion and mislocalise the protein, impairing normal transcriptional repression and disturbing megakaryopoiesis to reduce platelet output. The same disruption of a key haematopoietic regulator destabilises lymphoid and myeloid progenitors, so affected individuals carry a heightened risk of acute lymphoblastic leukaemia and myeloid neoplasms once additional somatic changes accumulate.",
-  "additionalDifferentials": [
-   "RUNX1 familial platelet disorder with myeloid malignancy",
-   "ANKRD26-related thrombocytopenia",
-   "Immune thrombocytopenia (acquired)",
-   "Familial acute lymphoblastic leukaemia from other predisposition genes (for example PAX5)",
-   "Other inherited thrombocytopenias with normal platelet size",
-   "Constitutional bone marrow failure syndromes"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with film review for platelet size and red-cell indices",
-   "Germline ETV6 sequencing on a non-haematopoietic source such as fibroblasts",
-   "Platelet function testing where bleeding is disproportionate",
-   "Bone marrow examination with cytogenetics at baseline and for surveillance",
-   "Periodic monitoring of the blood count for evolving cytopenias or blasts",
-   "Screening of potential related stem-cell donors for the familial mutation"
-  ],
-  "redFlags": [
-   "New lymphadenopathy, hepatosplenomegaly, bone pain, or circulating blasts suggesting acute leukaemia",
-   "Progressive or additional cytopenias on surveillance",
-   "Emergence of a clonal cytogenetic or molecular abnormality",
-   "Constitutional symptoms such as fever, weight loss, or night sweats"
-  ],
-  "prognosis": "The thrombocytopenia itself is usually mild, but the disorder carries a meaningful lifetime risk of leukaemia, particularly childhood acute lymphoblastic leukaemia; prognosis depends on early recognition of malignant transformation and on the outcome of leukaemia-directed treatment.",
-  "pitfalls": [
-   "Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression",
-   "Failing to recognise the lymphoid (not only myeloid) leukaemia predisposition",
-   "Testing only peripheral blood DNA when a clone may obscure the germline variant",
-   "Neglecting germline screening of related potential transplant donors"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or antifibrinolytics for significant bleeding or surgical cover",
-   "Avoid antiplatelet drugs and provide bleeding precautions given the associated platelet functional defect",
-   "Lifelong haematological surveillance with periodic blood counts and bone marrow examination for evolving cytopenias, dysplasia or blasts",
-   "Prompt leukaemia-directed treatment if B-cell acute lymphoblastic leukaemia or a myeloid neoplasm develops",
-   "Autosomal dominant genetic counselling with germline ETV6 testing on a non-haematopoietic source such as fibroblasts",
-   "Screen potential related stem-cell donors for the familial ETV6 mutation before transplantation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "etv6_thrombocytopenia-pathway",
-   "title": "ETV6-related thrombocytopenia with leukaemia predisposition: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New lymphadenopathy, hepatosplenomegaly, bone pain, or circulating blasts suggesting acute leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with film review for platelet size and red-cell indices, Germline ETV6 sequencing on a non-haematopoietic source such as fibroblasts, Platelet function testing where bleeding is disproportionate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or antifibrinolytics for significant bleeding or surgical cover"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of etv6-related thrombocytopenia with leukaemia predisposition."
-  }
- ],
- "tables": [
-  {
-   "id": "etv6_thrombocytopenia-matrix",
-   "title": "ETV6-related thrombocytopenia with leukaemia predisposition: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
+      "Bleeding is generally mild but the platelets often show a functional defect contributing to symptoms",
+      "There is a predisposition to haematological malignancy, notably B-cell acute lymphoblastic leukaemia in childhood as well as myeloid neoplasms",
+      "Unlike RUNX1 and ANKRD26 disorders, the leukaemia spectrum prominently includes lymphoid as well as myeloid malignancy",
+      "A family history spanning thrombocytopenia and childhood leukaemia is an important clue",
+      "Some carriers also show mild red-cell macrocytosis or other subtle blood-count changes",
+      "Diagnosis relies on germline ETV6 sequencing, ideally confirmed on non-haematopoietic tissue",
+      "Relatives considered as stem-cell donors must be screened for the familial variant"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with film review for platelet size and red-cell indices, Germline ETV6 sequencing on a non-haematopoietic source",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ETV6 encodes an ETS-family transcriptional repressor essential for haematopoietic stem-cell function and megakaryocyte development. Germline mutations, often affecting the DNA-binding domain, act in a dominant-negative fashion and mislocalise the protein, impairing normal transcriptional repression and disturbing megakaryopoiesis to reduce platelet output. The same disruption of a key haematopoietic regulator destabilises lymphoid and myeloid progenitors, so affected individuals carry a heightened risk of acute lymphoblastic leukaemia and myeloid neoplasms once additional somatic changes accumulate.",
+    "additionalDifferentials": [
+      "RUNX1 familial platelet disorder with myeloid malignancy",
+      "ANKRD26-related thrombocytopenia",
+      "Immune thrombocytopenia (acquired)",
+      "Familial acute lymphoblastic leukaemia from other predisposition genes (for example PAX5)",
+      "Other inherited thrombocytopenias with normal platelet size",
+      "Constitutional bone marrow failure syndromes"
     ],
-    [
-     "Primary Differentials",
-     "RUNX1 familial platelet disorder with myeloid malignancy, ANKRD26-related thrombocytopenia, Immune thrombocytopenia (acquired)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with film review for platelet size and red-cell indices",
+      "Germline ETV6 sequencing on a non-haematopoietic source such as fibroblasts",
+      "Platelet function testing where bleeding is disproportionate",
+      "Bone marrow examination with cytogenetics at baseline and for surveillance",
+      "Periodic monitoring of the blood count for evolving cytopenias or blasts",
+      "Screening of potential related stem-cell donors for the familial mutation"
     ],
-    [
-     "Management Strategy",
-     "Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or",
-     "Core treatment modality"
+    "redFlags": [
+      "New lymphadenopathy, hepatosplenomegaly, bone pain, or circulating blasts suggesting acute leukaemia",
+      "Progressive or additional cytopenias on surveillance",
+      "Emergence of a clonal cytogenetic or molecular abnormality",
+      "Constitutional symptoms such as fever, weight loss, or night sweats"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The thrombocytopenia itself is usually mild, but the disorder carries a meaningful lifetime risk of leukaemia, particularly childhood acute lymphoblastic leukaemia; prognosis depends on early recognition of malignant transformation and on the outcome of leukaemia-directed treatment.",
+    "pitfalls": [
+      "Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression",
+      "Failing to recognise the lymphoid (not only myeloid) leukaemia predisposition",
+      "Testing only peripheral blood DNA when a clone may obscure the germline variant",
+      "Neglecting germline screening of related potential transplant donors"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or antifibrinolytics for significant bleeding or surgical cover",
+      "Avoid antiplatelet drugs and provide bleeding precautions given the associated platelet functional defect",
+      "Lifelong haematological surveillance with periodic blood counts and bone marrow examination for evolving cytopenias, dysplasia or blasts",
+      "Prompt leukaemia-directed treatment if B-cell acute lymphoblastic leukaemia or a myeloid neoplasm develops",
+      "Autosomal dominant genetic counselling with germline ETV6 testing on a non-haematopoietic source such as fibroblasts",
+      "Screen potential related stem-cell donors for the familial ETV6 mutation before transplantation"
     ]
-   ],
-   "caption": "Overview comparison matrix for etv6-related thrombocytopenia with leukaemia predisposition."
-  }
- ],
- "diagrams": [
-  {
-   "id": "etv6-thrombocytopenia-real-image",
-   "title": "ETV6-related thrombocytopenia with leukaemia predisposition: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "etv6_thrombocytopenia-pathway",
+      "title": "ETV6-related thrombocytopenia with leukaemia predisposition: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New lymphadenopathy, hepatosplenomegaly, bone pain, or circulating blasts suggesting acute leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with film review for platelet size and red-cell indices, Germline ETV6 sequencing on a non-haematopoietic source such as fibroblasts, Platelet function testing where bleeding is disproportionate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or antifibrinolytics for significant bleeding or surgical cover"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of etv6-related thrombocytopenia with leukaemia predisposition."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "etv6_thrombocytopenia-matrix",
+      "title": "ETV6-related thrombocytopenia with leukaemia predisposition: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder from germline ETV6 mutations causing mild-to-moderate thrombocytopenia with normal-sized platelets",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with film review for platelet size and red-cell indices, Germline ETV6 sequencing on a non-haematopoietic source",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "RUNX1 familial platelet disorder with myeloid malignancy, ANKRD26-related thrombocytopenia, Immune thrombocytopenia (acquired)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that the mild-to-moderate thrombocytopenia usually needs no routine treatment, reserving platelet transfusion or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the low count to immune thrombocytopenia and giving unnecessary immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for etv6-related thrombocytopenia with leukaemia predisposition."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "etv6_thrombocytopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with film review",
+          "cells": [
+            {
+              "text": "Platelet size and red-cell indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline ETV6 sequencing on a non-haematopoietic source",
+          "cells": [
+            {
+              "text": "Germline variant, since a clone can obscure it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet function testing",
+          "cells": [
+            {
+              "text": "Bleeding that is disproportionate to the count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with cytogenetics",
+          "cells": [
+            {
+              "text": "Baseline and surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial blood counts",
+          "cells": [
+            {
+              "text": "Evolving cytopenias or blasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening of potential related stem-cell donors",
+          "cells": [
+            {
+              "text": "Familial mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "etv6_thrombocytopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "RUNX1 familial platelet disorder",
+          "cells": [
+            {
+              "text": "Leukaemia spectrum here includes lymphoid as well as myeloid malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANKRD26-related thrombocytopenia",
+          "cells": [
+            {
+              "text": "Unlike this condition, its leukaemia spectrum is less lymphoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia (acquired)",
+          "cells": [
+            {
+              "text": "Platelets are normal-sized with a functional defect; immunosuppression is not indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "etv6_thrombocytopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No routine treatment",
+          "cells": [
+            {
+              "text": "Mild-to-moderate thrombocytopenia; transfusion or antifibrinolytics only for significant bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet drugs",
+          "cells": [
+            {
+              "text": "Bleeding precautions because of the platelet functional defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong haematological surveillance",
+          "cells": [
+            {
+              "text": "Blood counts and marrow examination for cytopenias, dysplasia or blasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia-directed treatment",
+          "cells": [
+            {
+              "text": "If B-cell acute lymphoblastic leukaemia or a myeloid neoplasm develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; germline ETV6 testing on fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor screening",
+          "cells": [
+            {
+              "text": "Potential related stem-cell donors screened for the familial variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "etv6_thrombocytopenia-dx-mgmt",
+      "title": "Diagnosis and management of ETV6-related thrombocytopenia with leukaemia predisposition",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mild-to-moderate thrombocytopenia with normal-sized platelets in a family with leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (lymphadenopathy, organomegaly, bone pain, circulating blasts)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology review for suspected acute leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; germline ETV6 sequencing on non-haematopoietic tissue; marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline ETV6 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider RUNX1 or ANKRD26 disorder or immune thrombocytopenia; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No routine treatment; transfusion only for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid antiplatelet drugs and give bleeding precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong surveillance with counts and marrow for evolving cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Leukaemia-directed treatment if B-ALL or a myeloid neoplasm develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen related potential stem-cell donors for the familial variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually mild thrombocytopenia; meaningful leukaemia risk, especially childhood B-ALL",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

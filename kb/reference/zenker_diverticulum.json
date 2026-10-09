@@ -1,171 +1,375 @@
 {
- "id": "zenker_diverticulum",
- "name": "Zenker diverticulum",
- "aliases": [
-  "pharyngeal pouch",
-  "pharyngo-oesophageal diverticulum",
-  "hypopharyngeal diverticulum"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes a palpable neck swelling",
-   "Regurgitation of retained food, especially at night, predisposes to cough and aspiration pneumonia",
-   "It is a false (pulsion) diverticulum, a mucosal herniation through Killian's dehiscence, a weak area between the two parts of the inferior pharyngeal constrictor",
-   "Underlying incoordination and impaired relaxation of the upper oesophageal sphincter (cricopharyngeus) drives pouch formation",
-   "Barium swallow is the preferred diagnostic test and clearly outlines the posterior midline pouch above the sphincter",
-   "Passing an endoscope or nasogastric tube blindly risks perforating the pouch, so caution is required",
-   "Symptomatic pouches are treated by dividing the cricopharyngeus with endoscopic stapling or laser, or by open surgical diverticulectomy with myotomy"
+  "id": "zenker_diverticulum",
+  "name": "Zenker diverticulum",
+  "aliases": [
+    "pharyngeal pouch",
+    "pharyngo-oesophageal diverticulum",
+    "hypopharyngeal diverticulum"
   ],
-  "pathophysiology": "Zenker diverticulum is an acquired outpouching of pharyngeal mucosa through Killian's dehiscence, a triangular zone of muscular weakness between the oblique and horizontal fibres of the inferior pharyngeal constrictor just above the upper oesophageal sphincter. Impaired relaxation and reduced compliance of the cricopharyngeus muscle raise hypopharyngeal pressure during swallowing, and this repeated pressure forces the mucosa and submucosa through the weak point, creating a false (pulsion) diverticulum. As the pouch enlarges it retains food and secretions, causing regurgitation, halitosis and a risk of aspiration.",
-  "additionalDifferentials": [
-   "Oesophageal or pharyngeal malignancy",
-   "Achalasia and other oesophageal motility disorders",
-   "Peptic or other benign oesophageal stricture",
-   "Globus sensation",
-   "Neurological causes of oropharyngeal dysphagia such as stroke or Parkinson disease"
-  ],
-  "additionalInvestigations": [
-   "Barium swallow to demonstrate and size the pouch",
-   "Careful upper endoscopy where malignancy needs exclusion, with awareness of perforation risk",
-   "Videofluoroscopic swallow study to assess swallowing mechanics",
-   "Assessment for aspiration including chest imaging when respiratory symptoms are present",
-   "Oesophageal manometry in selected cases to characterise sphincter dysfunction"
-  ],
-  "redFlags": [
-   "Recurrent aspiration pneumonia",
-   "Significant weight loss or rapidly progressive dysphagia raising concern for malignancy",
-   "A new hard neck mass or bleeding, since carcinoma can rarely arise within a long-standing pouch",
-   "Complete dysphagia or inability to maintain nutrition and hydration"
-  ],
-  "prognosis": "Small asymptomatic pouches may be observed, while symptomatic pouches respond well to endoscopic or surgical treatment, though recurrence and, rarely, malignant change within a chronic pouch can occur.",
-  "pitfalls": [
-   "Blindly intubating the oesophagus or passing tubes and perforating the pouch",
-   "Attributing dysphagia to age or reflux without imaging the pharynx",
-   "Overlooking aspiration as a cause of recurrent chest infection",
-   "Failing to divide the cricopharyngeus, which risks recurrence after simple pouch removal"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Cummings Otolaryngology - Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including per-oral endoscopic myotomy) or open cricopharyngeal myotomy with diverticulectomy, diverticulopexy or inversion",
-   "Observe small, asymptomatic pouches with dietary and postural measures",
-   "Address the underlying upper-oesophageal-sphincter dysfunction, since cricopharyngeal myotomy is key to relieving symptoms and preventing recurrence",
-   "Reduce aspiration risk with eating advice, and treat aspiration pneumonia when it occurs",
-   "Exercise caution with blind passage of endoscopes or nasogastric tubes because of the perforation risk",
-   "Monitor for recurrence and, rarely, malignant change within a long-standing pouch",
-   "Refer to ENT or upper-gastrointestinal surgical services for definitive treatment and manage postoperative complications such as leak or fistula"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "zenker_diverticulum-pathway",
-   "title": "Zenker diverticulum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes a palpable neck swelling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent aspiration pneumonia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Barium swallow to demonstrate and size the pouch, Careful upper endoscopy where malignancy needs exclusion, with awareness of perforation risk, Videofluoroscopic swallow study to assess swallowing mechanics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including per-oral endoscopic myotomy) or open cricopharyngeal myotomy with diverticulectomy,"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Blindly intubating the oesophagus or passing tubes and perforating the pouch"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of zenker diverticulum."
-  }
- ],
- "tables": [
-  {
-   "id": "zenker_diverticulum-matrix",
-   "title": "Zenker diverticulum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes a palpable neck swelling",
+      "Regurgitation of retained food, especially at night, predisposes to cough and aspiration pneumonia",
+      "It is a false (pulsion) diverticulum, a mucosal herniation through Killian's dehiscence, a weak area between the two parts of the inferior pharyngeal constrictor",
+      "Underlying incoordination and impaired relaxation of the upper oesophageal sphincter (cricopharyngeus) drives pouch formation",
+      "Barium swallow is the preferred diagnostic test and clearly outlines the posterior midline pouch above the sphincter",
+      "Passing an endoscope or nasogastric tube blindly risks perforating the pouch, so caution is required",
+      "Symptomatic pouches are treated by dividing the cricopharyngeus with endoscopic stapling or laser, or by open surgical diverticulectomy with myotomy"
     ],
-    [
-     "Key Investigations",
-     "Barium swallow to demonstrate and size the pouch, Careful upper endoscopy where malignancy needs exclusion, with awareness of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Zenker diverticulum is an acquired outpouching of pharyngeal mucosa through Killian's dehiscence, a triangular zone of muscular weakness between the oblique and horizontal fibres of the inferior pharyngeal constrictor just above the upper oesophageal sphincter. Impaired relaxation and reduced compliance of the cricopharyngeus muscle raise hypopharyngeal pressure during swallowing, and this repeated pressure forces the mucosa and submucosa through the weak point, creating a false (pulsion) diverticulum. As the pouch enlarges it retains food and secretions, causing regurgitation, halitosis and a risk of aspiration.",
+    "additionalDifferentials": [
+      "Oesophageal or pharyngeal malignancy",
+      "Achalasia and other oesophageal motility disorders",
+      "Peptic or other benign oesophageal stricture",
+      "Globus sensation",
+      "Neurological causes of oropharyngeal dysphagia such as stroke or Parkinson disease"
     ],
-    [
-     "Primary Differentials",
-     "Oesophageal or pharyngeal malignancy, Achalasia and other oesophageal motility disorders, Peptic or other benign oesophageal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Barium swallow to demonstrate and size the pouch",
+      "Careful upper endoscopy where malignancy needs exclusion, with awareness of perforation risk",
+      "Videofluoroscopic swallow study to assess swallowing mechanics",
+      "Assessment for aspiration including chest imaging when respiratory symptoms are present",
+      "Oesophageal manometry in selected cases to characterise sphincter dysfunction"
     ],
-    [
-     "Management Strategy",
-     "Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent aspiration pneumonia",
+      "Significant weight loss or rapidly progressive dysphagia raising concern for malignancy",
+      "A new hard neck mass or bleeding, since carcinoma can rarely arise within a long-standing pouch",
+      "Complete dysphagia or inability to maintain nutrition and hydration"
     ],
-    [
-     "Clinical Pitfall",
-     "Blindly intubating the oesophagus or passing tubes and perforating the pouch",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small asymptomatic pouches may be observed, while symptomatic pouches respond well to endoscopic or surgical treatment, though recurrence and, rarely, malignant change within a chronic pouch can occur.",
+    "pitfalls": [
+      "Blindly intubating the oesophagus or passing tubes and perforating the pouch",
+      "Attributing dysphagia to age or reflux without imaging the pharynx",
+      "Overlooking aspiration as a cause of recurrent chest infection",
+      "Failing to divide the cricopharyngeus, which risks recurrence after simple pouch removal"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Cummings Otolaryngology - Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including per-oral endoscopic myotomy) or open cricopharyngeal myotomy with diverticulectomy, diverticulopexy or inversion",
+      "Observe small, asymptomatic pouches with dietary and postural measures",
+      "Address the underlying upper-oesophageal-sphincter dysfunction, since cricopharyngeal myotomy is key to relieving symptoms and preventing recurrence",
+      "Reduce aspiration risk with eating advice, and treat aspiration pneumonia when it occurs",
+      "Exercise caution with blind passage of endoscopes or nasogastric tubes because of the perforation risk",
+      "Monitor for recurrence and, rarely, malignant change within a long-standing pouch",
+      "Refer to ENT or upper-gastrointestinal surgical services for definitive treatment and manage postoperative complications such as leak or fistula"
     ]
-   ],
-   "caption": "Overview comparison matrix for zenker diverticulum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "zenker-diverticulum-real-image",
-   "title": "Zenker diverticulum: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "zenker_diverticulum-pathway",
+      "title": "Zenker diverticulum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes a palpable neck swelling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent aspiration pneumonia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Barium swallow to demonstrate and size the pouch, Careful upper endoscopy where malignancy needs exclusion, with awareness of perforation risk, Videofluoroscopic swallow study to assess swallowing mechanics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including per-oral endoscopic myotomy) or open cricopharyngeal myotomy with diverticulectomy,"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Blindly intubating the oesophagus or passing tubes and perforating the pouch"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of zenker diverticulum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "zenker_diverticulum-matrix",
+      "title": "Zenker diverticulum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in older adults with oropharyngeal dysphagia, regurgitation of undigested food, halitosis, a gurgling neck and sometimes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Barium swallow to demonstrate and size the pouch, Careful upper endoscopy where malignancy needs exclusion, with awareness of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oesophageal or pharyngeal malignancy, Achalasia and other oesophageal motility disorders, Peptic or other benign oesophageal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat symptomatic pouches by dividing the cricopharyngeus, using endoscopic rigid stapling or flexible septotomy (including",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Blindly intubating the oesophagus or passing tubes and perforating the pouch",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for zenker diverticulum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zenker_diverticulum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium swallow",
+          "cells": [
+            {
+              "text": "Demonstrates and sizes the pouch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy with care",
+          "cells": [
+            {
+              "text": "Excludes malignancy; avoids perforating the pouch"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zenker_diverticulum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oesophageal or pharyngeal malignancy",
+          "cells": [
+            {
+              "text": "Excluded by endoscopy before attributing dysphagia to pouch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achalasia or other motility disorder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic stricture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zenker_diverticulum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Division of the cricopharyngeus",
+          "cells": [
+            {
+              "text": "Symptomatic pouches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic rigid stapling or flexible endoscopic division",
+          "cells": [
+            {
+              "text": "Alternative approaches"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zenker_diverticulum-dx-mgmt",
+      "title": "Diagnosis and management of Zenker diverticulum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zenker diverticulum: dysphagia, regurgitation and halitosis in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent aspiration pneumonia or rapid weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of aspiration or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium swallow for pouch, careful upper endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does barium swallow show a pharyngeal pouch?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignancy or motility disorder; endoscopic assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Division of the cricopharyngeus for symptomatic pouches",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic stapling or flexible endoscopic division",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid blind intubation of the oesophagus, which risks pouch perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Symptomatic pouches respond to division; aspiration is the main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

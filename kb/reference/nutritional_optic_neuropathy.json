@@ -1,174 +1,434 @@
 {
- "id": "nutritional_optic_neuropathy",
- "name": "nutritional optic neuropathy",
- "aliases": [
-  "deficiency optic neuropathy",
-  "nutritional amblyopia"
- ],
- "class": "non_infective",
- "system": "Ophthalmic",
- "specialty": "Neuro-ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and prominent dyschromatopsia.",
-   "Key deficiencies include vitamin B12, folate, thiamine, pyridoxine, riboflavin and copper, often on a background of protein-calorie malnutrition.",
-   "Important settings are chronic alcohol misuse, bariatric surgery, malabsorption, highly restrictive diets and famine, and combined nutritional and toxic injury is common.",
-   "Red-green colour vision is disturbed early and disproportionately to the level of acuity.",
-   "The disc is normal or mildly hyperaemic early and develops temporal pallor as the papillomacular bundle atrophies.",
-   "Pupillary light responses are relatively preserved and a relative afferent pupillary defect is absent when involvement is symmetric.",
-   "Early recognition and repletion, including empirical thiamine in at-risk patients, can reverse or arrest visual loss.",
-   "A hereditary mitochondrial optic neuropathy such as Leber hereditary optic neuropathy can mimic the picture and should be considered."
+  "id": "nutritional_optic_neuropathy",
+  "name": "nutritional optic neuropathy",
+  "aliases": [
+    "deficiency optic neuropathy",
+    "nutritional amblyopia"
   ],
-  "pathophysiology": "The small-calibre fibres of the papillomacular bundle have exceptionally high metabolic demand and depend on efficient mitochondrial oxidative phosphorylation. B-group vitamins act as cofactors in the enzymatic pathways generating cellular energy, so their deficiency impairs adenosine triphosphate production, disrupts axonal transport and myelin maintenance, and increases oxidative stress. These fibres are therefore selectively vulnerable, producing the characteristic central and centrocaecal field loss, with copper deficiency causing an analogous metabolic injury.",
-  "additionalDifferentials": [
-   "Toxic optic neuropathy",
-   "Leber hereditary optic neuropathy",
-   "Dominant optic atrophy",
-   "Compressive optic neuropathy or chiasmal lesion",
-   "Demyelinating optic neuritis",
-   "Maculopathy such as occult macular dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Serum vitamin B12 with folate and red-cell folate",
-   "Thiamine and serum copper with caeruloplasmin",
-   "Full blood count and blood film looking for macrocytosis",
-   "Magnetic resonance imaging to exclude a compressive or chiasmal lesion",
-   "Automated perimetry and colour vision testing",
-   "Optical coherence tomography of the retinal nerve fibre layer",
-   "Mitochondrial DNA testing for Leber hereditary optic neuropathy where suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive or markedly asymmetric loss, prompting reconsideration of a compressive or other cause",
-   "Accompanying neurological signs or features of Wernicke encephalopathy",
-   "Failure to improve after adequate nutritional repletion",
-   "Coexisting toxic exposure that may accelerate the injury"
-  ],
-  "prognosis": "The outcome is variable and depends on the duration of deficiency; vision may recover substantially with early repletion. Prolonged, untreated deficiency leads to optic atrophy and permanent visual impairment.",
-  "pitfalls": [
-   "Attributing loss to alcohol alone without measuring B12 and folate",
-   "Overlooking a coexisting toxic contribution to the neuropathy",
-   "Delaying thiamine replacement in at-risk or alcohol-dependent patients",
-   "Failing to consider copper deficiency, for example after bariatric surgery or with excess zinc intake"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper",
-   "Correction of underlying protein-calorie malnutrition with dietary optimisation and nutritional support",
-   "Abstinence from alcohol and elimination of contributory toxins where combined nutritional and toxic injury is suspected",
-   "Parenteral vitamin replacement in malabsorption or post-bariatric states where oral repletion is inadequate",
-   "Serial monitoring of visual acuity, colour vision and visual fields to track recovery",
-   "Multidisciplinary input from neuro-ophthalmology, dietetics and addiction services, with treatment of the primary malabsorptive or surgical cause, since delayed repletion leads to irreversible optic atrophy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nutritional_optic_neuropathy-pathway",
-   "title": "nutritional optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and prominent dyschromatopsia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or markedly asymmetric loss, prompting reconsideration of a compressive or other cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum vitamin B12 with folate and red-cell folate, Thiamine and serum copper with caeruloplasmin, Full blood count and blood film looking for macrocytosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing loss to alcohol alone without measuring B12 and folate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nutritional optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "nutritional_optic_neuropathy-matrix",
-   "title": "nutritional optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic",
+  "specialty": "Neuro-ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and prominent dyschromatopsia.",
+      "Key deficiencies include vitamin B12, folate, thiamine, pyridoxine, riboflavin and copper, often on a background of protein-calorie malnutrition.",
+      "Important settings are chronic alcohol misuse, bariatric surgery, malabsorption, highly restrictive diets and famine, and combined nutritional and toxic injury is common.",
+      "Red-green colour vision is disturbed early and disproportionately to the level of acuity.",
+      "The disc is normal or mildly hyperaemic early and develops temporal pallor as the papillomacular bundle atrophies.",
+      "Pupillary light responses are relatively preserved and a relative afferent pupillary defect is absent when involvement is symmetric.",
+      "Early recognition and repletion, including empirical thiamine in at-risk patients, can reverse or arrest visual loss.",
+      "A hereditary mitochondrial optic neuropathy such as Leber hereditary optic neuropathy can mimic the picture and should be considered."
     ],
-    [
-     "Key Investigations",
-     "Serum vitamin B12 with folate and red-cell folate, Thiamine and serum copper with caeruloplasmin, Full blood count and blood film",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The small-calibre fibres of the papillomacular bundle have exceptionally high metabolic demand and depend on efficient mitochondrial oxidative phosphorylation. B-group vitamins act as cofactors in the enzymatic pathways generating cellular energy, so their deficiency impairs adenosine triphosphate production, disrupts axonal transport and myelin maintenance, and increases oxidative stress. These fibres are therefore selectively vulnerable, producing the characteristic central and centrocaecal field loss, with copper deficiency causing an analogous metabolic injury.",
+    "additionalDifferentials": [
+      "Toxic optic neuropathy",
+      "Leber hereditary optic neuropathy",
+      "Dominant optic atrophy",
+      "Compressive optic neuropathy or chiasmal lesion",
+      "Demyelinating optic neuritis",
+      "Maculopathy such as occult macular dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Toxic optic neuropathy, Leber hereditary optic neuropathy, Dominant optic atrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum vitamin B12 with folate and red-cell folate",
+      "Thiamine and serum copper with caeruloplasmin",
+      "Full blood count and blood film looking for macrocytosis",
+      "Magnetic resonance imaging to exclude a compressive or chiasmal lesion",
+      "Automated perimetry and colour vision testing",
+      "Optical coherence tomography of the retinal nerve fibre layer",
+      "Mitochondrial DNA testing for Leber hereditary optic neuropathy where suspected"
     ],
-    [
-     "Management Strategy",
-     "Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or markedly asymmetric loss, prompting reconsideration of a compressive or other cause",
+      "Accompanying neurological signs or features of Wernicke encephalopathy",
+      "Failure to improve after adequate nutritional repletion",
+      "Coexisting toxic exposure that may accelerate the injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing loss to alcohol alone without measuring B12 and folate",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outcome is variable and depends on the duration of deficiency; vision may recover substantially with early repletion. Prolonged, untreated deficiency leads to optic atrophy and permanent visual impairment.",
+    "pitfalls": [
+      "Attributing loss to alcohol alone without measuring B12 and folate",
+      "Overlooking a coexisting toxic contribution to the neuropathy",
+      "Delaying thiamine replacement in at-risk or alcohol-dependent patients",
+      "Failing to consider copper deficiency, for example after bariatric surgery or with excess zinc intake"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper",
+      "Correction of underlying protein-calorie malnutrition with dietary optimisation and nutritional support",
+      "Abstinence from alcohol and elimination of contributory toxins where combined nutritional and toxic injury is suspected",
+      "Parenteral vitamin replacement in malabsorption or post-bariatric states where oral repletion is inadequate",
+      "Serial monitoring of visual acuity, colour vision and visual fields to track recovery",
+      "Multidisciplinary input from neuro-ophthalmology, dietetics and addiction services, with treatment of the primary malabsorptive or surgical cause, since delayed repletion leads to irreversible optic atrophy"
     ]
-   ],
-   "caption": "Overview comparison matrix for nutritional optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nutritional-optic-neuropathy-real-image",
-   "title": "nutritional optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "nutritional_optic_neuropathy-pathway",
+      "title": "nutritional optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and prominent dyschromatopsia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or markedly asymmetric loss, prompting reconsideration of a compressive or other cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum vitamin B12 with folate and red-cell folate, Thiamine and serum copper with caeruloplasmin, Full blood count and blood film looking for macrocytosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing loss to alcohol alone without measuring B12 and folate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nutritional optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nutritional_optic_neuropathy-matrix",
+      "title": "nutritional optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with bilateral, symmetric, painless and slowly progressive visual loss with a central or centrocaecal scotoma and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum vitamin B12 with folate and red-cell folate, Thiamine and serum copper with caeruloplasmin, Full blood count and blood film",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Toxic optic neuropathy, Leber hereditary optic neuropathy, Dominant optic atrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt repletion of the causative deficiency, notably vitamin B12, folate, thiamine and other B-group vitamins, and copper",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing loss to alcohol alone without measuring B12 and folate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nutritional optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nutritional_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum vitamin B12, folate and red-cell folate",
+          "cells": [
+            {
+              "text": "Deficiency states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine level",
+          "cells": [
+            {
+              "text": "Wernicke-associated deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Copper deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Macrocytosis or anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutritional_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Toxic optic neuropathy",
+          "cells": [
+            {
+              "text": "Toxin or drug exposure with similar loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "Painless central loss in young men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dominant optic atrophy",
+          "cells": [
+            {
+              "text": "Inherited optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive optic neuropathy",
+          "cells": [
+            {
+              "text": "Asymmetric or rapidly progressive loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nutritional_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt repletion of the deficiency",
+          "cells": [
+            {
+              "text": "Vitamin B12, folate, thiamine, B-group vitamins and copper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of underlying nutritional problem",
+          "cells": [
+            {
+              "text": "Protein and calorie intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop toxic exposure",
+          "cells": [
+            {
+              "text": "Alcohol and other neurotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor visual fields and acuity",
+          "cells": [
+            {
+              "text": "Recovery over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nutritional_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of nutritional optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless bilateral central visual loss with colour defect in a malnourished patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid or asymmetric loss, neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging if loss is rapid or asymmetric to exclude compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vitamin B12, folate, thiamine, copper, full blood count, visual fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vitamin or copper deficiency with symmetric central visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider toxic or hereditary optic neuropathy; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repletion of B12, folate, thiamine, B-group vitamins and copper",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct the underlying nutritional problem",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop alcohol and other neurotoxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acuity and fields during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; vision may recover substantially with early repletion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

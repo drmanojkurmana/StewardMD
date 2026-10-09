@@ -1,176 +1,474 @@
 {
- "id": "infantile_scoliosis",
- "name": "Infantile idiopathic scoliosis",
- "aliases": [
-  "early-onset idiopathic scoliosis",
-  "infantile scoliosis",
-  "idiopathic scoliosis of infancy"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
-   "Unlike the adolescent pattern, it is more frequent in boys and the curves are more often left-sided and thoracic",
-   "The curve magnitude is measured by the Cobb angle on a standing (or supine, in the non-ambulant infant) posteroanterior spinal radiograph",
-   "The rib-vertebral angle difference (Mehta angle) on the initial films helps predict which curves will resolve and which will progress",
-   "Curve behaviour during the rapid growth of early childhood is critical, as progressive early-onset curves threaten chest and lung development (thoracic insufficiency)",
-   "The higher rate of underlying neural-axis abnormality means whole-spine magnetic resonance imaging is indicated, particularly for atypical, left-sided, or progressive curves",
-   "Many curves resolve spontaneously with observation, whereas progressive curves are managed with serial derotation casting or bracing to control the deformity while allowing growth"
+  "id": "infantile_scoliosis",
+  "name": "Infantile idiopathic scoliosis",
+  "aliases": [
+    "early-onset idiopathic scoliosis",
+    "infantile scoliosis",
+    "idiopathic scoliosis of infancy"
   ],
-  "pathophysiology": "Infantile idiopathic scoliosis is a three-dimensional deformity of the spine, with lateral curvature and vertebral rotation, that arises in the absence of any congenital vertebral anomaly or identifiable neuromuscular disease. Its cause is uncertain, with proposed contributions from intrauterine moulding and postnatal positioning as well as asymmetric growth of the immature spine. Because it develops during the period of most rapid spinal and pulmonary growth, progressive curves can restrict thoracic volume and impair lung development, producing thoracic insufficiency. A subset of apparently idiopathic infantile curves in fact harbour an intraspinal abnormality such as a Chiari malformation, syrinx, or tethered cord, which is why magnetic resonance imaging is important before attributing the deformity to a purely idiopathic cause.",
-  "additionalDifferentials": [
-   "Congenital scoliosis from vertebral formation or segmentation anomalies",
-   "Neuromuscular scoliosis in cerebral palsy or spinal muscular atrophy",
-   "Scoliosis secondary to an intraspinal anomaly such as syrinx or tethered cord",
-   "Syndromic scoliosis, for example in neurofibromatosis or a connective-tissue disorder",
-   "Postural or compensatory curve from leg-length discrepancy",
-   "Scoliosis associated with a spinal tumour"
-  ],
-  "additionalInvestigations": [
-   "Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement",
-   "Rib-vertebral angle difference (Mehta angle) to assess progression risk",
-   "Whole-spine magnetic resonance imaging to exclude an intraspinal or neural-axis anomaly",
-   "Neurological examination for signs of an underlying cord abnormality",
-   "Assessment of growth, chest shape, and respiratory function in progressive curves",
-   "Evaluation for congenital or syndromic features and, where indicated, genetic assessment"
-  ],
-  "redFlags": [
-   "A progressive curve or a high rib-vertebral angle difference predicting progression",
-   "A left thoracic curve or other atypical pattern raising concern for an intraspinal anomaly",
-   "Neurological signs such as abnormal reflexes, weakness, or asymmetric abdominal reflexes",
-   "Impaired chest growth or respiratory compromise suggesting thoracic insufficiency",
-   "Rapid progression during periods of accelerated growth"
-  ],
-  "prognosis": "Many infantile curves, especially those with a low rib-vertebral angle difference, resolve spontaneously with a good outcome, whereas progressive early-onset curves can become severe and threaten pulmonary development, making early identification and growth-friendly management essential.",
-  "pitfalls": [
-   "Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis",
-   "Failing to use the rib-vertebral angle difference to stratify progression risk",
-   "Underestimating the impact of a progressive curve on chest and lung growth",
-   "Delaying treatment of a progressive curve until the deformity is severe",
-   "Overlooking neurological signs that point to an intraspinal cause"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Lovell and Winter's Pediatric Orthopaedics",
-   "Mehta MH, rib-vertebral angle difference in infantile scoliosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of the Cobb angle",
-   "Apply serial derotation (Mehta/EDF elongation-derotation-flexion) casting as first-line active treatment for progressive curves in young children, which can be curative",
-   "Use bracing to hold correction between casting phases or once casting is completed",
-   "Obtain whole-spine MRI to exclude an intraspinal anomaly such as Chiari malformation, syrinx or tethered cord before attributing a curve to idiopathic disease",
-   "Consider growth-friendly surgical instrumentation such as growing rods for severe progressive curves to preserve spinal and thoracic growth",
-   "Monitor chest shape and respiratory function to detect thoracic insufficiency in progressive early-onset curves",
-   "Refer to paediatric spinal orthopaedics and involve neurosurgery where a neural-axis abnormality is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infantile_scoliosis-pathway",
-   "title": "Infantile idiopathic scoliosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A progressive curve or a high rib-vertebral angle difference predicting progression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement, Rib-vertebral angle difference (Mehta angle) to assess progression risk, Whole-spine magnetic resonance imaging to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of the Cobb angle"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile idiopathic scoliosis."
-  }
- ],
- "tables": [
-  {
-   "id": "infantile_scoliosis-matrix",
-   "title": "Infantile idiopathic scoliosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
+      "Unlike the adolescent pattern, it is more frequent in boys and the curves are more often left-sided and thoracic",
+      "The curve magnitude is measured by the Cobb angle on a standing (or supine, in the non-ambulant infant) posteroanterior spinal radiograph",
+      "The rib-vertebral angle difference (Mehta angle) on the initial films helps predict which curves will resolve and which will progress",
+      "Curve behaviour during the rapid growth of early childhood is critical, as progressive early-onset curves threaten chest and lung development (thoracic insufficiency)",
+      "The higher rate of underlying neural-axis abnormality means whole-spine magnetic resonance imaging is indicated, particularly for atypical, left-sided, or progressive curves",
+      "Many curves resolve spontaneously with observation, whereas progressive curves are managed with serial derotation casting or bracing to control the deformity while allowing growth"
     ],
-    [
-     "Key Investigations",
-     "Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement, Rib-vertebral angle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile idiopathic scoliosis is a three-dimensional deformity of the spine, with lateral curvature and vertebral rotation, that arises in the absence of any congenital vertebral anomaly or identifiable neuromuscular disease. Its cause is uncertain, with proposed contributions from intrauterine moulding and postnatal positioning as well as asymmetric growth of the immature spine. Because it develops during the period of most rapid spinal and pulmonary growth, progressive curves can restrict thoracic volume and impair lung development, producing thoracic insufficiency. A subset of apparently idiopathic infantile curves in fact harbour an intraspinal abnormality such as a Chiari malformation, syrinx, or tethered cord, which is why magnetic resonance imaging is important before attributing the deformity to a purely idiopathic cause.",
+    "additionalDifferentials": [
+      "Congenital scoliosis from vertebral formation or segmentation anomalies",
+      "Neuromuscular scoliosis in cerebral palsy or spinal muscular atrophy",
+      "Scoliosis secondary to an intraspinal anomaly such as syrinx or tethered cord",
+      "Syndromic scoliosis, for example in neurofibromatosis or a connective-tissue disorder",
+      "Postural or compensatory curve from leg-length discrepancy",
+      "Scoliosis associated with a spinal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Congenital scoliosis from vertebral formation or segmentation anomalies, Neuromuscular scoliosis in cerebral palsy or spinal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement",
+      "Rib-vertebral angle difference (Mehta angle) to assess progression risk",
+      "Whole-spine magnetic resonance imaging to exclude an intraspinal or neural-axis anomaly",
+      "Neurological examination for signs of an underlying cord abnormality",
+      "Assessment of growth, chest shape, and respiratory function in progressive curves",
+      "Evaluation for congenital or syndromic features and, where indicated, genetic assessment"
     ],
-    [
-     "Management Strategy",
-     "Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of",
-     "Core treatment modality"
+    "redFlags": [
+      "A progressive curve or a high rib-vertebral angle difference predicting progression",
+      "A left thoracic curve or other atypical pattern raising concern for an intraspinal anomaly",
+      "Neurological signs such as abnormal reflexes, weakness, or asymmetric abdominal reflexes",
+      "Impaired chest growth or respiratory compromise suggesting thoracic insufficiency",
+      "Rapid progression during periods of accelerated growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many infantile curves, especially those with a low rib-vertebral angle difference, resolve spontaneously with a good outcome, whereas progressive early-onset curves can become severe and threaten pulmonary development, making early identification and growth-friendly management essential.",
+    "pitfalls": [
+      "Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis",
+      "Failing to use the rib-vertebral angle difference to stratify progression risk",
+      "Underestimating the impact of a progressive curve on chest and lung growth",
+      "Delaying treatment of a progressive curve until the deformity is severe",
+      "Overlooking neurological signs that point to an intraspinal cause"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Lovell and Winter's Pediatric Orthopaedics",
+      "Mehta MH, rib-vertebral angle difference in infantile scoliosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of the Cobb angle",
+      "Apply serial derotation (Mehta/EDF elongation-derotation-flexion) casting as first-line active treatment for progressive curves in young children, which can be curative",
+      "Use bracing to hold correction between casting phases or once casting is completed",
+      "Obtain whole-spine MRI to exclude an intraspinal anomaly such as Chiari malformation, syrinx or tethered cord before attributing a curve to idiopathic disease",
+      "Consider growth-friendly surgical instrumentation such as growing rods for severe progressive curves to preserve spinal and thoracic growth",
+      "Monitor chest shape and respiratory function to detect thoracic insufficiency in progressive early-onset curves",
+      "Refer to paediatric spinal orthopaedics and involve neurosurgery where a neural-axis abnormality is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile idiopathic scoliosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infantile-scoliosis-real-image",
-   "title": "Infantile idiopathic scoliosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "infantile_scoliosis-pathway",
+      "title": "Infantile idiopathic scoliosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A progressive curve or a high rib-vertebral angle difference predicting progression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement, Rib-vertebral angle difference (Mehta angle) to assess progression risk, Whole-spine magnetic resonance imaging to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of the Cobb angle"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile idiopathic scoliosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infantile_scoliosis-matrix",
+      "title": "Infantile idiopathic scoliosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Idiopathic scoliosis presenting before three years of age, an uncommon form that behaves differently from the adolescent type",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standing or supine posteroanterior and lateral whole-spine radiographs with Cobb angle measurement, Rib-vertebral angle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital scoliosis from vertebral formation or segmentation anomalies, Neuromuscular scoliosis in cerebral palsy or spinal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe curves at low progression risk, indicated by a low rib-vertebral angle difference, with serial radiographic monitoring of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an infantile curve is benign idiopathic and omitting magnetic resonance imaging of the neural axis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile idiopathic scoliosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_scoliosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing or supine PA and lateral radiographs",
+          "cells": [
+            {
+              "text": "Cobb angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rib-vertebral angle difference",
+          "cells": [
+            {
+              "text": "Progression risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Intraspinal or neural-axis anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Signs of cord abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, chest shape and respiratory assessment",
+          "cells": [
+            {
+              "text": "Progressive curves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital, syndromic or genetic evaluation",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_scoliosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intraspinal anomaly (syrinx, tethered cord)",
+          "cells": [
+            {
+              "text": "Left thoracic curve or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular scoliosis",
+          "cells": [
+            {
+              "text": "Cerebral palsy or spinal muscular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensatory curve from leg-length discrepancy",
+          "cells": [
+            {
+              "text": "Postural curve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_scoliosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Curves at low progression risk, with serial Cobb angle measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial casting",
+          "cells": [
+            {
+              "text": "Elongation-derotation-flexion casting as first-line for progressive curves in young children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing",
+          "cells": [
+            {
+              "text": "Holds correction between casting phases or after casting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-spine MRI",
+          "cells": [
+            {
+              "text": "Excludes Chiari malformation, syrinx or tethered cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growing rods",
+          "cells": [
+            {
+              "text": "Severe progressive curves, preserving spinal and thoracic growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest monitoring",
+          "cells": [
+            {
+              "text": "Chest shape and respiratory function for thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_scoliosis-dx-mgmt",
+      "title": "Diagnosis and management of Infantile idiopathic scoliosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral spinal curve detected before three years of age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive curve, left thoracic curve, neurological signs or poor chest growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Whole-spine MRI and neurosurgical review; monitor respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cobb angle, rib-vertebral angle difference, neurological examination, whole-spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Idiopathic pattern with no intraspinal anomaly on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the intraspinal, congenital or neuromuscular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe low-risk curves with serial Cobb measurement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial elongation-derotation-flexion casting for progressive curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing between casting phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growing rods for severe progressive curves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor chest shape and respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Low-risk curves observed; progressive curves treated to protect chest growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

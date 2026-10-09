@@ -1,175 +1,462 @@
 {
- "id": "cyclic_vomiting_syndrome",
- "name": "Cyclic vomiting syndrome",
- "aliases": [
-  "CVS",
-  "cyclical vomiting syndrome",
-  "abdominal migraine variant",
-  "periodic vomiting"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of completely normal health",
-   "Attacks are strikingly similar for a given patient in onset time, duration, and symptom pattern, often starting in the early morning",
-   "Strong personal or family history of migraine is common, and the disorder is regarded as part of the migraine spectrum",
-   "Episodes may be triggered by psychological or physical stress, excitement, infection, sleep deprivation, or fasting",
-   "Prolonged hot bathing or showering to relieve symptoms should prompt consideration of coexisting cannabinoid hyperemesis",
-   "Management is split into prophylaxis between attacks (prophylactic anti-migraine agents) and abortive/supportive care during episodes with antiemetics, rehydration, and a calm dark environment",
-   "Diagnosis is largely clinical and requires exclusion of metabolic, neurological, and obstructive mimics",
-   "Coalescence of attacks or loss of symptom-free intervals suggests an alternative diagnosis or transformation"
+  "id": "cyclic_vomiting_syndrome",
+  "name": "Cyclic vomiting syndrome",
+  "aliases": [
+    "CVS",
+    "cyclical vomiting syndrome",
+    "abdominal migraine variant",
+    "periodic vomiting"
   ],
-  "pathophysiology": "Cyclic vomiting syndrome is a functional gut-brain disorder in which recurrent, discrete episodes of severe nausea and vomiting arise on a background of normal health between attacks. The mechanism is thought to overlap with migraine, involving dysregulation of the brain-gut axis, autonomic instability, and heightened activation of central emetic pathways, with possible roles for mitochondrial energy dysfunction, hypothalamic-pituitary-adrenal stress responses, and altered neuroendocrine signalling. Triggers such as stress, infection, and fasting appear to lower the threshold for a stereotyped emetic cascade that then runs a self-limiting course.",
-  "additionalDifferentials": [
-   "Cannabinoid hyperemesis syndrome",
-   "Intestinal malrotation with intermittent volvulus or other partial obstruction",
-   "Inborn errors of metabolism (e.g. urea cycle or fatty-acid oxidation defects)",
-   "Raised intracranial pressure or posterior fossa lesion",
-   "Adrenal insufficiency and other endocrine causes",
-   "Chronic nausea and vomiting syndrome or gastroparesis"
-  ],
-  "additionalInvestigations": [
-   "Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack",
-   "Upper gastrointestinal contrast study or cross-sectional imaging to exclude malrotation and obstruction",
-   "Neuroimaging when neurological signs or atypical features are present",
-   "Metabolic screen (ammonia, lactate, organic acids) especially in younger or atypical patients",
-   "Upper endoscopy to exclude mucosal or structural upper-gut disease",
-   "Gastric emptying study when a motility disorder is suspected"
-  ],
-  "redFlags": [
-   "Bilious vomiting, abdominal distension, or signs of mechanical obstruction",
-   "Focal neurological deficit, severe headache, or vomiting worse on waking with papilloedema",
-   "Onset associated with fasting, intercurrent illness, or lethargy suggesting a metabolic crisis",
-   "Progressive weight loss or loss of the characteristic symptom-free intervals"
-  ],
-  "prognosis": "Many children improve or remit with maturity, although a proportion evolve into migraine headaches, and adult-onset disease tends to be more chronic. With effective prophylaxis and trigger avoidance, attack frequency and severity can often be substantially reduced.",
-  "pitfalls": [
-   "Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern",
-   "Overlooking cannabinoid hyperemesis in patients who compulsively hot-bathe for relief",
-   "Failing to exclude malrotation or a metabolic disorder before labelling the illness functional",
-   "Under-treating dehydration and electrolyte loss during severe attacks"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Rome Foundation diagnostic criteria for functional gastrointestinal disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using cyproheptadine in younger children",
-   "Abort or attenuate episodes early with antiemetics such as ondansetron and consider triptans given the migraine overlap",
-   "Provide supportive care during attacks with intravenous rehydration, dextrose-containing fluids, electrolyte correction and a calm, dark, quiet environment",
-   "Identify and avoid triggers including psychological or physical stress, sleep deprivation, excitement and fasting",
-   "Screen for compulsive hot bathing suggesting coexisting cannabinoid hyperemesis and advise cannabis cessation where relevant",
-   "Monitor hydration and acid-base status during severe episodes and correct disturbances",
-   "Coordinate gastroenterology and neurology input with psychological support and reassurance about the self-limiting nature of attacks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cyclic_vomiting_syndrome-pathway",
-   "title": "Cyclic vomiting syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of completely normal health",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilious vomiting, abdominal distension, or signs of mechanical obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack, Upper gastrointestinal contrast study or cross-sectional imaging to exclude malrotation and obstruction, Neuroimaging when"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using cyproheptadine in younger children"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cyclic vomiting syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cyclic_vomiting_syndrome-matrix",
-   "title": "Cyclic vomiting syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of completely normal health",
+      "Attacks are strikingly similar for a given patient in onset time, duration, and symptom pattern, often starting in the early morning",
+      "Strong personal or family history of migraine is common, and the disorder is regarded as part of the migraine spectrum",
+      "Episodes may be triggered by psychological or physical stress, excitement, infection, sleep deprivation, or fasting",
+      "Prolonged hot bathing or showering to relieve symptoms should prompt consideration of coexisting cannabinoid hyperemesis",
+      "Management is split into prophylaxis between attacks (prophylactic anti-migraine agents) and abortive/supportive care during episodes with antiemetics, rehydration, and a calm dark environment",
+      "Diagnosis is largely clinical and requires exclusion of metabolic, neurological, and obstructive mimics",
+      "Coalescence of attacks or loss of symptom-free intervals suggests an alternative diagnosis or transformation"
     ],
-    [
-     "Key Investigations",
-     "Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack, Upper gastrointestinal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cyclic vomiting syndrome is a functional gut-brain disorder in which recurrent, discrete episodes of severe nausea and vomiting arise on a background of normal health between attacks. The mechanism is thought to overlap with migraine, involving dysregulation of the brain-gut axis, autonomic instability, and heightened activation of central emetic pathways, with possible roles for mitochondrial energy dysfunction, hypothalamic-pituitary-adrenal stress responses, and altered neuroendocrine signalling. Triggers such as stress, infection, and fasting appear to lower the threshold for a stereotyped emetic cascade that then runs a self-limiting course.",
+    "additionalDifferentials": [
+      "Cannabinoid hyperemesis syndrome",
+      "Intestinal malrotation with intermittent volvulus or other partial obstruction",
+      "Inborn errors of metabolism (e.g. urea cycle or fatty-acid oxidation defects)",
+      "Raised intracranial pressure or posterior fossa lesion",
+      "Adrenal insufficiency and other endocrine causes",
+      "Chronic nausea and vomiting syndrome or gastroparesis"
     ],
-    [
-     "Primary Differentials",
-     "Cannabinoid hyperemesis syndrome, Intestinal malrotation with intermittent volvulus or other partial obstruction, Inborn errors",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack",
+      "Upper gastrointestinal contrast study or cross-sectional imaging to exclude malrotation and obstruction",
+      "Neuroimaging when neurological signs or atypical features are present",
+      "Metabolic screen (ammonia, lactate, organic acids) especially in younger or atypical patients",
+      "Upper endoscopy to exclude mucosal or structural upper-gut disease",
+      "Gastric emptying study when a motility disorder is suspected"
     ],
-    [
-     "Management Strategy",
-     "Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilious vomiting, abdominal distension, or signs of mechanical obstruction",
+      "Focal neurological deficit, severe headache, or vomiting worse on waking with papilloedema",
+      "Onset associated with fasting, intercurrent illness, or lethargy suggesting a metabolic crisis",
+      "Progressive weight loss or loss of the characteristic symptom-free intervals"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many children improve or remit with maturity, although a proportion evolve into migraine headaches, and adult-onset disease tends to be more chronic. With effective prophylaxis and trigger avoidance, attack frequency and severity can often be substantially reduced.",
+    "pitfalls": [
+      "Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern",
+      "Overlooking cannabinoid hyperemesis in patients who compulsively hot-bathe for relief",
+      "Failing to exclude malrotation or a metabolic disorder before labelling the illness functional",
+      "Under-treating dehydration and electrolyte loss during severe attacks"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Rome Foundation diagnostic criteria for functional gastrointestinal disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using cyproheptadine in younger children",
+      "Abort or attenuate episodes early with antiemetics such as ondansetron and consider triptans given the migraine overlap",
+      "Provide supportive care during attacks with intravenous rehydration, dextrose-containing fluids, electrolyte correction and a calm, dark, quiet environment",
+      "Identify and avoid triggers including psychological or physical stress, sleep deprivation, excitement and fasting",
+      "Screen for compulsive hot bathing suggesting coexisting cannabinoid hyperemesis and advise cannabis cessation where relevant",
+      "Monitor hydration and acid-base status during severe episodes and correct disturbances",
+      "Coordinate gastroenterology and neurology input with psychological support and reassurance about the self-limiting nature of attacks"
     ]
-   ],
-   "caption": "Overview comparison matrix for cyclic vomiting syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cyclic-vomiting-syndrome-real-image",
-   "title": "Cyclic vomiting syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "cyclic_vomiting_syndrome-pathway",
+      "title": "Cyclic vomiting syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of completely normal health",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilious vomiting, abdominal distension, or signs of mechanical obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack, Upper gastrointestinal contrast study or cross-sectional imaging to exclude malrotation and obstruction, Neuroimaging when"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using cyproheptadine in younger children"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cyclic vomiting syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cyclic_vomiting_syndrome-matrix",
+      "title": "Cyclic vomiting syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by recurrent, stereotyped episodes of intense vomiting that are self-limiting and separated by well intervals of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Basic metabolic panel, glucose, and assessment of hydration and acid-base status during an attack, Upper gastrointestinal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cannabinoid hyperemesis syndrome, Intestinal malrotation with intermittent volvulus or other partial obstruction, Inborn errors",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish prophylaxis between attacks with anti-migraine agents such as amitriptyline, propranolol or topiramate, using",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing repeated presentations to a psychiatric or behavioural cause and missing the stereotyped pattern",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cyclic vomiting syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cyclic_vomiting_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basic metabolic panel, glucose and acid-base during an attack",
+          "cells": [
+            {
+              "text": "Hydration and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI contrast study or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Malrotation and obstruction excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen (ammonia, lactate, organic acids)",
+          "cells": [
+            {
+              "text": "Metabolic crisis excluded in atypical patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Structural upper-gut disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying study",
+          "cells": [
+            {
+              "text": "Motility disorder when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclic_vomiting_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cannabinoid hyperemesis syndrome",
+          "cells": [
+            {
+              "text": "Compulsive hot bathing; cannabis history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal malrotation with intermittent volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting; imaging excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Urea cycle or fatty-acid oxidation defects; fasting-triggered attacks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclic_vomiting_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylaxis between attacks",
+          "cells": [
+            {
+              "text": "Amitriptyline, propranolol or topiramate; cyproheptadine in younger children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early abortion of attacks",
+          "cells": [
+            {
+              "text": "Ondansetron; triptans considered given migraine overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care during attacks",
+          "cells": [
+            {
+              "text": "IV rehydration, dextrose-containing fluids, electrolyte correction; calm dark room"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Stress, sleep deprivation, excitement and fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cannabis cessation",
+          "cells": [
+            {
+              "text": "Where cannabinoid hyperemesis coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration monitoring",
+          "cells": [
+            {
+              "text": "During severe episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology, neurology and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cyclic_vomiting_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cyclic vomiting syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cyclic vomiting syndrome: stereotyped vomiting episodes, symptom-free gaps",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (bilious vomiting, focal deficit, papilloedema, metabolic crisis features)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic and imaging review for obstruction or raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes and glucose; contrast study or imaging; metabolic screen; endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do stereotyped episodes occur with no structural or metabolic cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cannabinoid hyperemesis, malrotation or metabolic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylaxis with amitriptyline, propranolol or topiramate between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early ondansetron or triptan to abort attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV rehydration and electrolyte correction during episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trigger avoidance and cannabis cessation where relevant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with maturity; a proportion evolve into migraine",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

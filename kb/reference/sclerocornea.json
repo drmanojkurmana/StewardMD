@@ -1,168 +1,408 @@
 {
- "id": "sclerocornea",
- "name": "Sclerocornea",
- "aliases": [
-  "corneal opacification with scleralisation"
- ],
- "class": "non_infective",
- "system": "Eye / Anterior segment",
- "specialty": "Ophthalmology / Paediatric ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal boundary",
-   "The cornea is opaque and vascularised peripherally, and the corneo-scleral junction is indistinct",
-   "It ranges from mild peripheral scleralisation to total sclerocornea with a completely opaque cornea",
-   "It is frequently bilateral and associated with other anterior segment dysgenesis and systemic malformations",
-   "Total sclerocornea causes severe visual deprivation and amblyopia",
-   "Management ranges from observation of mild cases to corneal transplantation for total involvement, with guarded results"
+  "id": "sclerocornea",
+  "name": "Sclerocornea",
+  "aliases": [
+    "corneal opacification with scleralisation"
   ],
-  "pathophysiology": "Sclerocornea is a developmental anomaly of the anterior segment in which the cornea fails to differentiate distinctly from the adjacent sclera, so scleral-like opaque, vascularised tissue extends into the cornea and the limbus is ill-defined. It reflects abnormal neural crest-derived anterior segment development and often coexists with other dysgenetic features. The corneal opacification obstructs the visual axis in severe cases, causing form-deprivation amblyopia, while the abnormal anterior segment can predispose to glaucoma.",
-  "additionalDifferentials": [
-   "Peters anomaly",
-   "Congenital hereditary endothelial dystrophy",
-   "Congenital glaucoma with corneal clouding",
-   "Birth trauma with Descemet tears",
-   "Mucopolysaccharidoses and metabolic corneal clouding",
-   "Limbal dermoid"
-  ],
-  "additionalInvestigations": [
-   "Examination of corneal clarity and the limbal boundary",
-   "Anterior segment imaging to define the extent and associated anomalies",
-   "Intraocular pressure assessment for associated glaucoma",
-   "Systemic evaluation for associated malformations",
-   "Amblyopia and visual development assessment"
-  ],
-  "redFlags": [
-   "Total corneal opacification threatening visual development",
-   "Associated glaucoma",
-   "Bilateral severe involvement",
-   "Systemic malformations suggesting a syndrome"
-  ],
-  "prognosis": "Mild peripheral sclerocornea has little visual impact, whereas total sclerocornea carries a poor visual prognosis even with corneal transplantation because of associated dysgenesis and amblyopia.",
-  "pitfalls": [
-   "Confusing it with other causes of congenital corneal opacity",
-   "Overlooking associated glaucoma",
-   "Underestimating amblyopia risk",
-   "Missing systemic associations"
-  ],
-  "references": [
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual development",
-   "Correct any refractive error and institute aggressive amblyopia therapy with occlusion to counter form-deprivation amblyopia",
-   "Consider penetrating keratoplasty (corneal transplantation) for total sclerocornea obstructing the visual axis, counselling parents on guarded graft outcomes",
-   "Screen for and treat associated glaucoma, lowering intraocular pressure with topical antiglaucoma agents or surgery",
-   "Undertake systemic evaluation for coexisting anterior segment dysgenesis and extraocular malformations",
-   "Refer to paediatric ophthalmology and low-vision services, and offer genetic counselling given the developmental anterior segment associations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sclerocornea-pathway",
-   "title": "Sclerocornea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal boundary",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Total corneal opacification threatening visual development",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination of corneal clarity and the limbal boundary, Anterior segment imaging to define the extent and associated anomalies, Intraocular pressure assessment for associated glaucoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual development"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with other causes of congenital corneal opacity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sclerocornea."
-  }
- ],
- "tables": [
-  {
-   "id": "sclerocornea-matrix",
-   "title": "Sclerocornea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Anterior segment",
+  "specialty": "Ophthalmology / Paediatric ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal boundary",
+      "The cornea is opaque and vascularised peripherally, and the corneo-scleral junction is indistinct",
+      "It ranges from mild peripheral scleralisation to total sclerocornea with a completely opaque cornea",
+      "It is frequently bilateral and associated with other anterior segment dysgenesis and systemic malformations",
+      "Total sclerocornea causes severe visual deprivation and amblyopia",
+      "Management ranges from observation of mild cases to corneal transplantation for total involvement, with guarded results"
     ],
-    [
-     "Key Investigations",
-     "Examination of corneal clarity and the limbal boundary, Anterior segment imaging to define the extent and associated anomalies,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sclerocornea is a developmental anomaly of the anterior segment in which the cornea fails to differentiate distinctly from the adjacent sclera, so scleral-like opaque, vascularised tissue extends into the cornea and the limbus is ill-defined. It reflects abnormal neural crest-derived anterior segment development and often coexists with other dysgenetic features. The corneal opacification obstructs the visual axis in severe cases, causing form-deprivation amblyopia, while the abnormal anterior segment can predispose to glaucoma.",
+    "additionalDifferentials": [
+      "Peters anomaly",
+      "Congenital hereditary endothelial dystrophy",
+      "Congenital glaucoma with corneal clouding",
+      "Birth trauma with Descemet tears",
+      "Mucopolysaccharidoses and metabolic corneal clouding",
+      "Limbal dermoid"
     ],
-    [
-     "Primary Differentials",
-     "Peters anomaly, Congenital hereditary endothelial dystrophy, Congenital glaucoma with corneal clouding",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination of corneal clarity and the limbal boundary",
+      "Anterior segment imaging to define the extent and associated anomalies",
+      "Intraocular pressure assessment for associated glaucoma",
+      "Systemic evaluation for associated malformations",
+      "Amblyopia and visual development assessment"
     ],
-    [
-     "Management Strategy",
-     "Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual",
-     "Core treatment modality"
+    "redFlags": [
+      "Total corneal opacification threatening visual development",
+      "Associated glaucoma",
+      "Bilateral severe involvement",
+      "Systemic malformations suggesting a syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with other causes of congenital corneal opacity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild peripheral sclerocornea has little visual impact, whereas total sclerocornea carries a poor visual prognosis even with corneal transplantation because of associated dysgenesis and amblyopia.",
+    "pitfalls": [
+      "Confusing it with other causes of congenital corneal opacity",
+      "Overlooking associated glaucoma",
+      "Underestimating amblyopia risk",
+      "Missing systemic associations"
+    ],
+    "references": [
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual development",
+      "Correct any refractive error and institute aggressive amblyopia therapy with occlusion to counter form-deprivation amblyopia",
+      "Consider penetrating keratoplasty (corneal transplantation) for total sclerocornea obstructing the visual axis, counselling parents on guarded graft outcomes",
+      "Screen for and treat associated glaucoma, lowering intraocular pressure with topical antiglaucoma agents or surgery",
+      "Undertake systemic evaluation for coexisting anterior segment dysgenesis and extraocular malformations",
+      "Refer to paediatric ophthalmology and low-vision services, and offer genetic counselling given the developmental anterior segment associations"
     ]
-   ],
-   "caption": "Overview comparison matrix for sclerocornea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sclerocornea-real-image",
-   "title": "Sclerocornea: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sclerocornea-pathway",
+      "title": "Sclerocornea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal boundary",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Total corneal opacification threatening visual development",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination of corneal clarity and the limbal boundary, Anterior segment imaging to define the extent and associated anomalies, Intraocular pressure assessment for associated glaucoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual development"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with other causes of congenital corneal opacity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sclerocornea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sclerocornea-matrix",
+      "title": "Sclerocornea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital non-progressive condition in which peripheral or entire cornea resembles sclera, with loss of the normal limbal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination of corneal clarity and the limbal boundary, Anterior segment imaging to define the extent and associated anomalies,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peters anomaly, Congenital hereditary endothelial dystrophy, Congenital glaucoma with corneal clouding",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe mild peripheral sclerocornea where the visual axis remains clear, with regular monitoring of corneal clarity and visual",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with other causes of congenital corneal opacity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sclerocornea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sclerocornea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal clarity and limbal boundary examination",
+          "cells": [
+            {
+              "text": "Extent of corneal opacification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment imaging",
+          "cells": [
+            {
+              "text": "Extent and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure assessment",
+          "cells": [
+            {
+              "text": "Associated glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Associated malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and visual development assessment",
+          "cells": [
+            {
+              "text": "Form-deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerocornea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild peripheral sclerocornea with a clear visual axis; monitor clarity and visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and amblyopia therapy",
+          "cells": [
+            {
+              "text": "Correct refractive error; aggressive occlusion for form-deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penetrating keratoplasty",
+          "cells": [
+            {
+              "text": "Total sclerocornea obstructing the visual axis; counsel on guarded graft outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma screening and treatment",
+          "cells": [
+            {
+              "text": "Topical agents or surgery to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Coexisting anterior segment dysgenesis and extraocular malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and counselling",
+          "cells": [
+            {
+              "text": "Paediatric ophthalmology, low-vision services and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sclerocornea-dx-mgmt",
+      "title": "Diagnosis and management of Sclerocornea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with scleralised, opaque cornea: suspected sclerocornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Total opacification, glaucoma, bilateral severe disease or systemic malformations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric ophthalmology: visual axis, pressure and syndrome work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal and limbal exam, anterior segment imaging, IOP, systemic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the visual axis obstructed by total sclerocornea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe with monitoring of corneal clarity and visual development",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct refractive error and give occlusion for amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for and treat associated glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Penetrating keratoplasty for total opacity, with guarded counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-vision services and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild peripheral disease has little visual impact; total disease has poor outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,483 @@
 {
- "id": "auditory_neuropathy_spectrum_disorder",
- "name": "Auditory neuropathy spectrum disorder",
- "aliases": [
-  "ANSD",
-  "auditory neuropathy",
-  "auditory dyssynchrony",
-  "auditory neuropathy/dyssynchrony"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic) with an absent or grossly abnormal auditory brainstem response",
-   "Speech discrimination is often disproportionately poor relative to the pure-tone audiogram, and hearing may appear to fluctuate",
-   "Risk factors include prematurity, hyperbilirubinaemia, hypoxia, and neonatal intensive care, alongside genetic causes such as OTOF variants",
-   "Behavioural thresholds can range from near-normal to profound, so the audiogram alone underestimates the functional deficit",
-   "Standard newborn screening using otoacoustic emissions alone will miss ANSD, so automated brainstem response screening is needed in at-risk infants",
-   "Amplification benefit is variable and unpredictable, whereas cochlear implantation is often effective, particularly with a synaptopathic (presynaptic) lesion",
-   "Distinguishing a presynaptic cochlear synaptopathy from a true neural (nerve) lesion guides prognosis and implant candidacy"
+  "id": "auditory_neuropathy_spectrum_disorder",
+  "name": "Auditory neuropathy spectrum disorder",
+  "aliases": [
+    "ANSD",
+    "auditory neuropathy",
+    "auditory dyssynchrony",
+    "auditory neuropathy/dyssynchrony"
   ],
-  "pathophysiology": "In auditory neuropathy spectrum disorder the cochlear outer hair cells continue to function, so otoacoustic emissions and the cochlear microphonic persist, but transmission of a synchronised signal along the auditory pathway is disrupted. The lesion may be presynaptic, at the inner hair cell to auditory nerve synapse (synaptopathy, as with otoferlin dysfunction), or neural, affecting spiral ganglion neurones or the auditory nerve itself. Loss of neural synchrony degrades the timing cues that underpin speech understanding, especially in noise, which explains why discrimination is far worse than the pure-tone thresholds would predict. The distinction between synaptopathic and neural forms is central because a functioning nerve can be stimulated directly by a cochlear implant.",
-  "additionalDifferentials": [
-   "Otoferlin-related deafness (DFNB9) as a specific synaptopathic cause",
-   "Cochlear sensorineural loss with absent emissions from outer hair cell damage",
-   "Retrocochlear pathology such as vestibular schwannoma or demyelination",
-   "Charcot-Marie-Tooth and other peripheral neuropathies with auditory involvement",
-   "Non-organic or functional hearing loss",
-   "Central auditory processing disorder"
-  ],
-  "additionalInvestigations": [
-   "Auditory brainstem response demonstrating absent or dyssynchronous waveforms",
-   "Otoacoustic emissions and dedicated cochlear microphonic recording with stimulus polarity reversal",
-   "Behavioural audiometry and speech perception testing appropriate to age",
-   "Genetic testing including OTOF and broader deafness and neuropathy panels",
-   "Cross-sectional imaging to assess the cochlear nerve and exclude retrocochlear lesions",
-   "Assessment for associated peripheral neuropathy where clinically suggested"
-  ],
-  "redFlags": [
-   "Speech understanding far worse than the audiogram implies, with resulting language delay",
-   "Missed diagnosis in an at-risk neonate screened by emissions alone",
-   "Signs of a wider peripheral neuropathy or a retrocochlear mass",
-   "Progressive deterioration suggesting an evolving neural process"
-  ],
-  "prognosis": "Outcomes vary widely; some children with milder or maturational forms improve, whereas persistent cases, especially synaptopathic ones, often do well with cochlear implantation, while true neural lesions carry a more guarded prognosis.",
-  "pitfalls": [
-   "Relying on otoacoustic-emission-only newborn screening and missing the diagnosis",
-   "Interpreting present emissions as normal hearing without brainstem response testing",
-   "Failing to reverse stimulus polarity, mistaking a cochlear microphonic for a genuine neural response",
-   "Assuming hearing aids will suffice without evaluating implant candidacy in poor discriminators"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "GeneReviews: OTOF-Related Deafness"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions where the auditory nerve can be stimulated directly",
-   "Individualised trial of amplification with hearing aids, recognising that benefit is variable and unpredictable",
-   "Communication and language support with speech and language therapy and visual or sign communication options",
-   "Address contributing perinatal factors such as hyperbilirubinaemia and hypoxia and treat where reversible",
-   "Serial behavioural audiometry and speech-perception testing to track the fluctuating or maturational course and guide device decisions",
-   "Genetic testing (OTOF and broader deafness and neuropathy panels) with counselling, and assessment for associated peripheral neuropathy",
-   "Multidisciplinary audiovestibular medicine, otology and educational and family support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "auditory_neuropathy_spectrum_disorder-pathway",
-   "title": "Auditory neuropathy spectrum disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic) with an absent or grossly abnormal auditory brainstem response",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Speech understanding far worse than the audiogram implies, with resulting language delay",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Auditory brainstem response demonstrating absent or dyssynchronous waveforms, Otoacoustic emissions and dedicated cochlear microphonic recording with stimulus polarity reversal, Behavioural audiometry and speech perception"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions where the auditory nerve can be stimulated directly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on otoacoustic-emission-only newborn screening and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of auditory neuropathy spectrum disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "auditory_neuropathy_spectrum_disorder-matrix",
-   "title": "Auditory neuropathy spectrum disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic) with an absent or grossly abnormal auditory brainstem response",
+      "Speech discrimination is often disproportionately poor relative to the pure-tone audiogram, and hearing may appear to fluctuate",
+      "Risk factors include prematurity, hyperbilirubinaemia, hypoxia, and neonatal intensive care, alongside genetic causes such as OTOF variants",
+      "Behavioural thresholds can range from near-normal to profound, so the audiogram alone underestimates the functional deficit",
+      "Standard newborn screening using otoacoustic emissions alone will miss ANSD, so automated brainstem response screening is needed in at-risk infants",
+      "Amplification benefit is variable and unpredictable, whereas cochlear implantation is often effective, particularly with a synaptopathic (presynaptic) lesion",
+      "Distinguishing a presynaptic cochlear synaptopathy from a true neural (nerve) lesion guides prognosis and implant candidacy"
     ],
-    [
-     "Key Investigations",
-     "Auditory brainstem response demonstrating absent or dyssynchronous waveforms, Otoacoustic emissions and dedicated cochlear",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In auditory neuropathy spectrum disorder the cochlear outer hair cells continue to function, so otoacoustic emissions and the cochlear microphonic persist, but transmission of a synchronised signal along the auditory pathway is disrupted. The lesion may be presynaptic, at the inner hair cell to auditory nerve synapse (synaptopathy, as with otoferlin dysfunction), or neural, affecting spiral ganglion neurones or the auditory nerve itself. Loss of neural synchrony degrades the timing cues that underpin speech understanding, especially in noise, which explains why discrimination is far worse than the pure-tone thresholds would predict. The distinction between synaptopathic and neural forms is central because a functioning nerve can be stimulated directly by a cochlear implant.",
+    "additionalDifferentials": [
+      "Otoferlin-related deafness (DFNB9) as a specific synaptopathic cause",
+      "Cochlear sensorineural loss with absent emissions from outer hair cell damage",
+      "Retrocochlear pathology such as vestibular schwannoma or demyelination",
+      "Charcot-Marie-Tooth and other peripheral neuropathies with auditory involvement",
+      "Non-organic or functional hearing loss",
+      "Central auditory processing disorder"
     ],
-    [
-     "Primary Differentials",
-     "Otoferlin-related deafness (DFNB9) as a specific synaptopathic cause, Cochlear sensorineural loss with absent emissions from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Auditory brainstem response demonstrating absent or dyssynchronous waveforms",
+      "Otoacoustic emissions and dedicated cochlear microphonic recording with stimulus polarity reversal",
+      "Behavioural audiometry and speech perception testing appropriate to age",
+      "Genetic testing including OTOF and broader deafness and neuropathy panels",
+      "Cross-sectional imaging to assess the cochlear nerve and exclude retrocochlear lesions",
+      "Assessment for associated peripheral neuropathy where clinically suggested"
     ],
-    [
-     "Management Strategy",
-     "Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "Speech understanding far worse than the audiogram implies, with resulting language delay",
+      "Missed diagnosis in an at-risk neonate screened by emissions alone",
+      "Signs of a wider peripheral neuropathy or a retrocochlear mass",
+      "Progressive deterioration suggesting an evolving neural process"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on otoacoustic-emission-only newborn screening and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes vary widely; some children with milder or maturational forms improve, whereas persistent cases, especially synaptopathic ones, often do well with cochlear implantation, while true neural lesions carry a more guarded prognosis.",
+    "pitfalls": [
+      "Relying on otoacoustic-emission-only newborn screening and missing the diagnosis",
+      "Interpreting present emissions as normal hearing without brainstem response testing",
+      "Failing to reverse stimulus polarity, mistaking a cochlear microphonic for a genuine neural response",
+      "Assuming hearing aids will suffice without evaluating implant candidacy in poor discriminators"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "GeneReviews: OTOF-Related Deafness"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions where the auditory nerve can be stimulated directly",
+      "Individualised trial of amplification with hearing aids, recognising that benefit is variable and unpredictable",
+      "Communication and language support with speech and language therapy and visual or sign communication options",
+      "Address contributing perinatal factors such as hyperbilirubinaemia and hypoxia and treat where reversible",
+      "Serial behavioural audiometry and speech-perception testing to track the fluctuating or maturational course and guide device decisions",
+      "Genetic testing (OTOF and broader deafness and neuropathy panels) with counselling, and assessment for associated peripheral neuropathy",
+      "Multidisciplinary audiovestibular medicine, otology and educational and family support"
     ]
-   ],
-   "caption": "Overview comparison matrix for auditory neuropathy spectrum disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "auditory-neuropathy-spectrum-disorder-real-image",
-   "title": "Auditory neuropathy spectrum disorder: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "auditory_neuropathy_spectrum_disorder-pathway",
+      "title": "Auditory neuropathy spectrum disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic) with an absent or grossly abnormal auditory brainstem response",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Speech understanding far worse than the audiogram implies, with resulting language delay",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Auditory brainstem response demonstrating absent or dyssynchronous waveforms, Otoacoustic emissions and dedicated cochlear microphonic recording with stimulus polarity reversal, Behavioural audiometry and speech perception"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions where the auditory nerve can be stimulated directly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on otoacoustic-emission-only newborn screening and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of auditory neuropathy spectrum disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "auditory_neuropathy_spectrum_disorder-matrix",
+      "title": "Auditory neuropathy spectrum disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined electrophysiologically by preserved outer hair cell function (present otoacoustic emissions and/or cochlear microphonic)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Auditory brainstem response demonstrating absent or dyssynchronous waveforms, Otoacoustic emissions and dedicated cochlear",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Otoferlin-related deafness (DFNB9) as a specific synaptopathic cause, Cochlear sensorineural loss with absent emissions from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cochlear implantation as the definitive intervention, particularly effective in presynaptic (synaptopathic, OTOF-related) lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on otoacoustic-emission-only newborn screening and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for auditory neuropathy spectrum disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "auditory_neuropathy_spectrum_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Auditory brainstem response",
+          "cells": [
+            {
+              "text": "Absent or dyssynchronous waveforms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and cochlear microphonic with polarity reversal",
+          "cells": [
+            {
+              "text": "Emissions and cochlear microphonic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural audiometry and speech perception testing",
+          "cells": [
+            {
+              "text": "Age-appropriate testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including OTOF and broader deafness and neuropathy panels",
+          "cells": [
+            {
+              "text": "OTOF and broader panels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the cochlear nerve",
+          "cells": [
+            {
+              "text": "Retrocochlear lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for associated peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "auditory_neuropathy_spectrum_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoferlin-related deafness (DFNB9)",
+          "cells": [
+            {
+              "text": "A specific synaptopathic cause; tested by OTOF testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear sensorineural loss with outer hair cell damage",
+          "cells": [
+            {
+              "text": "Absent emissions point to outer hair cell damage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "auditory_neuropathy_spectrum_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Definitive intervention; particularly effective in presynaptic OTOF-related lesions"
+            },
+            {
+              "text": "Presynaptic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aid trial",
+          "cells": [
+            {
+              "text": "Individualised trial of amplification"
+            },
+            {
+              "text": "Benefit variable and unpredictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Communication and language support",
+          "cells": [
+            {
+              "text": "Speech and language therapy; visual or sign communication options"
+            },
+            {
+              "text": "Language development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal factors",
+          "cells": [
+            {
+              "text": "Hyperbilirubinaemia and hypoxia"
+            },
+            {
+              "text": "Treat where reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Behavioural audiometry and speech perception testing"
+            },
+            {
+              "text": "Fluctuating or maturational course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and neuropathy assessment",
+          "cells": [
+            {
+              "text": "OTOF and deafness panels; assess peripheral neuropathy"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary audiovestibular care",
+          "cells": [
+            {
+              "text": "Otology, educational and family support"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "auditory_neuropathy_spectrum_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Auditory neuropathy spectrum disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Speech understanding worse than the audiogram suggests, with language delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Emissions present but ABR absent or dyssynchronous?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent audiovestibular referral for language delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABR, otoacoustic emissions and cochlear microphonic, behavioural audiometry, OTOF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Absent or dyssynchronous ABR with preserved emissions confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cochlear implantation, particularly for OTOF-related presynaptic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat electrophysiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Individualised hearing aid trial with variable benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech and language therapy with visual or sign options",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry to track the fluctuating course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; screen for associated peripheral neuropathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "chronic_recurrent_multifocal_osteomyelitis",
- "name": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
- "aliases": [
-  "CNO",
-  "CRMO",
-  "Chronic recurrent multifocal osteomyelitis",
-  "chronic non-bacterial osteitis",
-  "chronic non-bacterial osteomyelitis",
-  "chronic nonbacterial osteomyelitis",
-  "chronic recurrent osteomyelitis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
-   "Lesions are frequently multifocal and symmetrical, favouring the metaphyses of long bones, the clavicle, pelvis and vertebrae",
-   "Regarded as the paediatric counterpart of SAPHO syndrome, sharing autoinflammatory pathophysiology",
-   "Commonly associated with psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
-   "Whole-body MRI is the key modality to detect clinically silent lesions and define the multifocal distribution",
-   "A diagnosis of exclusion made after infection and malignancy are ruled out, often confirmed by biopsy showing sterile inflammation",
-   "Treated with NSAIDs first-line, escalating to bisphosphonates, TNF inhibitors or other DMARDs for persistent or spinal disease"
+  "id": "chronic_recurrent_multifocal_osteomyelitis",
+  "name": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
+  "aliases": [
+    "CNO",
+    "CRMO",
+    "Chronic recurrent multifocal osteomyelitis",
+    "chronic non-bacterial osteitis",
+    "chronic non-bacterial osteomyelitis",
+    "chronic nonbacterial osteomyelitis",
+    "chronic recurrent osteomyelitis"
   ],
-  "pathophysiology": "Chronic recurrent multifocal osteomyelitis, also termed chronic non-bacterial osteomyelitis, is an autoinflammatory disease driven by dysregulated innate immunity rather than infection. An imbalance between pro-inflammatory cytokines (including interleukin-1, tumour necrosis factor and interleukin-17) and anti-inflammatory signalling leads to sterile osteoclast-mediated bone inflammation with reactive sclerosis and hyperostosis. Genetic contributions are recognised, with monogenic forms such as those involving IL-1 pathway dysregulation informing understanding of the sporadic disease. The process produces recurrent, often multifocal and symmetrical osteitis, and overlaps mechanistically with SAPHO syndrome as part of the same sterile osteomyelitis spectrum.",
-  "additionalDifferentials": [
-   "Bacterial (pyogenic) osteomyelitis",
-   "Ewing sarcoma and osteosarcoma",
-   "Leukaemia and lymphoma with bone involvement",
-   "Langerhans cell histiocytosis",
-   "Bone metastasis (e.g. neuroblastoma)",
-   "SAPHO syndrome (adult overlap)"
-  ],
-  "additionalInvestigations": [
-   "Whole-body MRI to identify multifocal, often asymptomatic, bone lesions",
-   "Plain radiographs showing lytic lesions with surrounding sclerosis and hyperostosis",
-   "Inflammatory markers (ESR, CRP), typically normal or mildly elevated",
-   "Bone biopsy with microbiology and histology to exclude infection and malignancy",
-   "Screening for associated psoriasis, palmoplantar pustulosis and inflammatory bowel disease"
-  ],
-  "redFlags": [
-   "Systemic features (persistent fever, weight loss, night pain) raising concern for malignancy",
-   "Solitary aggressive lytic lesion where sarcoma or infection cannot be excluded without biopsy",
-   "Vertebral involvement with collapse or neurological signs",
-   "Failure to respond to treatment, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "Many children have a self-limiting or relapsing-remitting course with eventual remission, but a substantial minority develop chronic disease; vertebral involvement can lead to fracture and deformity, so early detection and treatment are important.",
-  "pitfalls": [
-   "Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures",
-   "Missing additional silent lesions by relying on targeted rather than whole-body imaging",
-   "Overlooking vertebral disease that risks compression fracture",
-   "Not screening for associated skin and bowel inflammatory conditions"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Textbook of Pediatric Rheumatology (Petty/Cassidy)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain",
-   "Bisphosphonates (such as pamidronate) for inadequate NSAID response and for vertebral disease to protect against collapse",
-   "TNF-alpha inhibitors or conventional DMARDs such as methotrexate or sulfasalazine, with corticosteroids, for refractory or multifocal disease",
-   "Whole-body MRI to detect clinically silent lesions and monitor the multifocal distribution",
-   "Screening for and management of associated psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
-   "Physiotherapy and pain management to maintain mobility and function",
-   "Rheumatology-led multidisciplinary care with monitoring for vertebral fracture and deformity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_recurrent_multifocal_osteomyelitis-pathway",
-   "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic features (persistent fever, weight loss, night pain) raising concern for malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-body MRI to identify multifocal, often asymptomatic, bone lesions, Plain radiographs showing lytic lesions with surrounding sclerosis and hyperostosis, Inflammatory markers (ESR, CRP), typically normal or mildly"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic recurrent multifocal osteomyelitis (crmo/cno)."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_recurrent_multifocal_osteomyelitis-matrix",
-   "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
+      "Lesions are frequently multifocal and symmetrical, favouring the metaphyses of long bones, the clavicle, pelvis and vertebrae",
+      "Regarded as the paediatric counterpart of SAPHO syndrome, sharing autoinflammatory pathophysiology",
+      "Commonly associated with psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
+      "Whole-body MRI is the key modality to detect clinically silent lesions and define the multifocal distribution",
+      "A diagnosis of exclusion made after infection and malignancy are ruled out, often confirmed by biopsy showing sterile inflammation",
+      "Treated with NSAIDs first-line, escalating to bisphosphonates, TNF inhibitors or other DMARDs for persistent or spinal disease"
     ],
-    [
-     "Key Investigations",
-     "Whole-body MRI to identify multifocal, often asymptomatic, bone lesions, Plain radiographs showing lytic lesions with surrounding",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic recurrent multifocal osteomyelitis, also termed chronic non-bacterial osteomyelitis, is an autoinflammatory disease driven by dysregulated innate immunity rather than infection. An imbalance between pro-inflammatory cytokines (including interleukin-1, tumour necrosis factor and interleukin-17) and anti-inflammatory signalling leads to sterile osteoclast-mediated bone inflammation with reactive sclerosis and hyperostosis. Genetic contributions are recognised, with monogenic forms such as those involving IL-1 pathway dysregulation informing understanding of the sporadic disease. The process produces recurrent, often multifocal and symmetrical osteitis, and overlaps mechanistically with SAPHO syndrome as part of the same sterile osteomyelitis spectrum.",
+    "additionalDifferentials": [
+      "Bacterial (pyogenic) osteomyelitis",
+      "Ewing sarcoma and osteosarcoma",
+      "Leukaemia and lymphoma with bone involvement",
+      "Langerhans cell histiocytosis",
+      "Bone metastasis (e.g. neuroblastoma)",
+      "SAPHO syndrome (adult overlap)"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial (pyogenic) osteomyelitis, Ewing sarcoma and osteosarcoma, Leukaemia and lymphoma with bone involvement",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-body MRI to identify multifocal, often asymptomatic, bone lesions",
+      "Plain radiographs showing lytic lesions with surrounding sclerosis and hyperostosis",
+      "Inflammatory markers (ESR, CRP), typically normal or mildly elevated",
+      "Bone biopsy with microbiology and histology to exclude infection and malignancy",
+      "Screening for associated psoriasis, palmoplantar pustulosis and inflammatory bowel disease"
     ],
-    [
-     "Management Strategy",
-     "First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic features (persistent fever, weight loss, night pain) raising concern for malignancy",
+      "Solitary aggressive lytic lesion where sarcoma or infection cannot be excluded without biopsy",
+      "Vertebral involvement with collapse or neurological signs",
+      "Failure to respond to treatment, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many children have a self-limiting or relapsing-remitting course with eventual remission, but a substantial minority develop chronic disease; vertebral involvement can lead to fracture and deformity, so early detection and treatment are important.",
+    "pitfalls": [
+      "Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures",
+      "Missing additional silent lesions by relying on targeted rather than whole-body imaging",
+      "Overlooking vertebral disease that risks compression fracture",
+      "Not screening for associated skin and bowel inflammatory conditions"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Textbook of Pediatric Rheumatology (Petty/Cassidy)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain",
+      "Bisphosphonates (such as pamidronate) for inadequate NSAID response and for vertebral disease to protect against collapse",
+      "TNF-alpha inhibitors or conventional DMARDs such as methotrexate or sulfasalazine, with corticosteroids, for refractory or multifocal disease",
+      "Whole-body MRI to detect clinically silent lesions and monitor the multifocal distribution",
+      "Screening for and management of associated psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
+      "Physiotherapy and pain management to maintain mobility and function",
+      "Rheumatology-led multidisciplinary care with monitoring for vertebral fracture and deformity"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic recurrent multifocal osteomyelitis (crmo/cno)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-recurrent-multifocal-osteomyelitis-real-image",
-   "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "chronic_recurrent_multifocal_osteomyelitis-pathway",
+      "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic features (persistent fever, weight loss, night pain) raising concern for malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-body MRI to identify multifocal, often asymptomatic, bone lesions, Plain radiographs showing lytic lesions with surrounding sclerosis and hyperostosis, Inflammatory markers (ESR, CRP), typically normal or mildly"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic recurrent multifocal osteomyelitis (crmo/cno)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_recurrent_multifocal_osteomyelitis-matrix",
+      "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A sterile autoinflammatory bone disorder of children and adolescents, with recurrent bone pain and swelling but negative cultures",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-body MRI to identify multifocal, often asymptomatic, bone lesions, Plain radiographs showing lytic lesions with surrounding",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial (pyogenic) osteomyelitis, Ewing sarcoma and osteosarcoma, Leukaemia and lymphoma with bone involvement",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line non-steroidal anti-inflammatory drugs to control the sterile osteitis and pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating as bacterial osteomyelitis with repeated antibiotics or surgery despite sterile cultures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic recurrent multifocal osteomyelitis (crmo/cno)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "chronic-recurrent-multifocal-osteomyelitis-real-image",
+      "title": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO): Diagnostic Musculoskeletal Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+      "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+      "annotations": [
+        {
+          "label": "Cortical Margins",
+          "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+        },
+        {
+          "label": "Trabecular Architecture",
+          "description": "Medullary bone density, lucencies, and subchondral mineralization."
+        },
+        {
+          "label": "Joint Articulation",
+          "description": "Joint space width, alignment, and periarticular soft tissue contours."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_recurrent_multifocal_osteomyelitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body MRI",
+          "cells": [
+            {
+              "text": "Clinically silent multifocal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Lytic lesions with sclerosis and hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Typically normal or mildly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy with microbiology and histology",
+          "cells": [
+            {
+              "text": "Excludes infection and malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_recurrent_multifocal_osteomyelitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic osteomyelitis",
+          "cells": [
+            {
+              "text": "Culture-positive infection; CRMO cultures are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma or osteosarcoma",
+          "cells": [
+            {
+              "text": "Malignant bone lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAPHO syndrome",
+          "cells": [
+            {
+              "text": "Adult overlap with the same autoinflammatory pathway"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_recurrent_multifocal_osteomyelitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for sterile osteitis and pain"
+            },
+            {
+              "text": "Initial therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates such as pamidronate",
+          "cells": [
+            {
+              "text": "Inadequate NSAID response and vertebral disease"
+            },
+            {
+              "text": "Protects against vertebral collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF-alpha inhibitors or DMARDs",
+          "cells": [
+            {
+              "text": "Methotrexate or sulfasalazine, with corticosteroids, for refractory disease"
+            },
+            {
+              "text": "Refractory or multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and pain management",
+          "cells": [
+            {
+              "text": "Maintains mobility and function"
+            },
+            {
+              "text": "Function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated conditions",
+          "cells": [
+            {
+              "text": "Psoriasis, palmoplantar pustulosis and inflammatory bowel disease"
+            },
+            {
+              "text": "Associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_recurrent_multifocal_osteomyelitis-dx-mgmt",
+      "title": "Diagnosis and management of Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CRMO: recurrent sterile bone pain and swelling in a child or adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent fever, weight loss, vertebral collapse, aggressive lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy for suspected sarcoma, infection or vertebral collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body MRI, radiographs, inflammatory markers and bone biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sterile multifocal osteitis with infection and malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "First-line NSAIDs for sterile osteitis and pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check pyogenic osteomyelitis, Ewing sarcoma and SAPHO syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bisphosphonates for inadequate NSAID response or vertebral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "TNF-alpha inhibitors or DMARDs for refractory or spinal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for psoriasis, palmoplantar pustulosis and inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rheumatology-led care with monitoring for vertebral fracture and deformity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

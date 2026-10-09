@@ -1,192 +1,636 @@
 {
- "id": "disorders_of_ventilation",
- "name": "Disorders of Ventilation",
- "system": "Respiratory",
- "class": "non_infective",
- "chapter": 307,
- "page": 2273,
- "aliases": [
-  "Alveolar hypoventilation",
-  "Hypoventilation syndromes",
-  "Chronic hyperventilation",
-  "Obesity hypoventilation syndrome",
-  "Central hypoventilation syndrome",
-  "Ondine's curse"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2273",
-  "clinicalPearls": [
-   "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal Paco2 (Harrison 22e p.2273).",
-   "Because Paco2 is governed by Paco2 = k(VCO2)/VA, every disturbance reflects altered CO2 production, minute ventilation, or dead-space fraction; a patient can breathe rapidly with a high minute ventilation yet still hypoventilate at the alveolar level if dead space is increased (Harrison 22e p.2273).",
-   "Respiratory rhythm is generated in the brainstem (dorsal respiratory group and ventral respiratory column); the pre-Botzinger complex within the VRC is critical for inspiration, and its lesioning abolishes breathing entirely (Harrison 22e p.2273).",
-   "Normal sleep brings an attenuated response to hypercapnia and hypoxemia, producing mild nocturnal hypoventilation that corrects on awakening (Harrison 22e p.2273).",
-   "New-onset orthopnea is one of the earliest signs of reduced diaphragmatic force generation; 'paradoxical breathing' (abdomen moving inward on deep inspiration while supine) signals significant diaphragmatic weakness or paralysis (Harrison 22e p.2274).",
-   "Chronic hypoventilation follows a characteristic sequence: an asymptomatic stage with normal daytime gases, then nocturnal hypoventilation appearing first in REM then non-REM sleep, then falling vital capacity, and finally daytime hypercapnia (Harrison 22e p.2274).",
-   "The shared hallmark of all alveolar hypoventilation syndromes is a rise in alveolar and arterial Pco2 with a compensatory increase in plasma bicarbonate; the rising Paco2 displaces alveolar oxygen and commonly causes hypoxemia (Harrison 22e p.2274).",
-   "Chronic hypoxemia from hypoventilation can drive secondary erythrocytosis, and the combination of chronic hypoxemia and hypercapnia can cause pulmonary vasoconstriction leading to pulmonary hypertension, right ventricular hypertrophy, and right heart failure (Harrison 22e p.2274).",
-   "Obesity hypoventilation syndrome (OHS) requires BMI >=30 kg/m2 plus chronic daytime hypoventilation (Paco2 >=45 mmHg) with no other explanation; obstructive sleep apnea coexists in nearly 90% of cases, with about 70% having severe OSA (Harrison 22e p.2275).",
-   "In OHS, the depressed ventilatory responsiveness appears to be a consequence rather than a primary cause, since central drive often improves once sleep-disordered breathing is treated without weight change (Harrison 22e p.2276).",
-   "Congenital central hypoventilation syndrome (Ondine's curse, CCHS) is linked to PHOX2b gene abnormalities; affected patients lack ventilatory responses to hypoxia/hypercapnia, have mild waking hypercapnia, markedly elevated Paco2 in non-REM sleep, yet can paradoxically normalize Paco2 during exercise and REM sleep (Harrison 22e p.2276).",
-   "In chronic hyperventilation, anxiety/panic are not synonymous with the condition; sustaining hypocapnia needs only about a 10% increase in alveolar ventilation, achievable through subtle pattern changes such as occasional sigh breaths or frequent yawning (Harrison 22e p.2277)."
+  "id": "disorders_of_ventilation",
+  "name": "Disorders of Ventilation",
+  "system": "Respiratory",
+  "class": "non_infective",
+  "chapter": 307,
+  "page": 2273,
+  "aliases": [
+    "Alveolar hypoventilation",
+    "Hypoventilation syndromes",
+    "Chronic hyperventilation",
+    "Obesity hypoventilation syndrome",
+    "Central hypoventilation syndrome",
+    "Ondine's curse"
   ],
-  "pathophysiology": "Adequate ventilation depends on a balance between respiratory drive and neuromuscular strength on one side and the elastic plus resistive loads of the respiratory system on the other. Reduced drive, impaired neuromuscular competence, or a markedly increased load lowers effective minute ventilation and produces hypercapnia; conversely, normal muscle strength combined with excessive drive yields hyperventilation and hypocapnia. Diseases reducing minute ventilation or increasing dead space fall into four broad categories: parenchymal lung/chest wall disease, obesity hypoventilation, neuromuscular disease, and respiratory drive disorders. 'Pump failure' encompasses disorders of drive, neural pathways, the neuromuscular junction, and muscle. In OHS the mechanism is multifactorial, combining OSA, increased work of breathing, respiratory muscle impairment against an excess-adiposity load, ventilation-perfusion mismatch, and blunted central responsiveness to hypoxemia and hypercapnia. Chronic hyperventilation is conceptualized as having initiating and sustaining factors, with an initial event dropping Paco2 toward ~20 mmHg and resultant symptoms perpetuating overbreathing (Harrison 22e p.2273-2277).",
-  "additionalDifferentials": [
-   "Parenchymal lung disease (obstructive such as COPD; restrictive such as interstitial lung disease; atelectasis; pulmonary embolus)",
-   "Chest wall disorders (kyphoscoliosis, obesity, abdominal distention/ascites)",
-   "Neuromuscular disease (amyotrophic lateral sclerosis, myasthenia gravis, phrenic nerve injury, spinal cord lesion, myopathy, muscular dystrophy)",
-   "Depressed respiratory drive (narcotic/sedative use, brainstem stroke, hypothyroidism, primary alveolar hypoventilation)",
-   "Brainstem structural lesions of the pons or medulla (stroke, tumor)"
-  ],
-  "infectionMimics": [
-   "Recurrent pneumonia from ineffective cough in neuromuscular disease can mimic or precipitate acute respiratory deterioration"
-  ],
-  "nonInfectiousMimics": [
-   "Anxiety disorders and panic attacks (overlap with but are not equivalent to chronic hyperventilation)",
-   "Mild asthma producing respiratory alkalosis (must be excluded before diagnosing chronic hyperventilation)",
-   "Diabetic ketoacidosis presenting as acute hyperventilation"
-  ],
-  "additionalInvestigations": [
-   "Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative, recognizing venous Pco2 runs a few points higher than arterial",
-   "Serum bicarbonate (total CO2) as a sensitive but nonspecific screen: a level <27 mmol/L with normal renal function makes hypoventilation very unlikely, while >=27 mmol/L should prompt Paco2 measurement",
-   "Chest x-ray and/or CT to identify lung/chest wall disease",
-   "Pulmonary function testing including seated-versus-supine FVC (a 15-25% supine drop suggests diaphragmatic weakness) plus maximal inspiratory and expiratory pressures",
-   "Polysomnography to demonstrate nocturnal hypercapnia, central versus obstructive apneas/hypopneas, and to screen for OSA",
-   "Brain CT or MRI to detect pontine/medullary structural lesions",
-   "OSA screening tools (Epworth Sleepiness Scale, Berlin Questionnaire, STOP-Bang) recognizing their limited sensitivity/specificity",
-   "Genetic testing for PHOX2b abnormalities in suspected congenital central hypoventilation syndrome"
-  ],
-  "redFlags": [
-   "Paradoxical (abdominal) breathing while supine indicating significant diaphragmatic weakness or paralysis",
-   "New-onset orthopnea heralding reduced respiratory muscle force in neuromuscular disease",
-   "Progressive 15-25% supine fall in FVC signaling impending chronic respiratory failure",
-   "Daytime hypercapnia developing on top of established nocturnal hypoventilation",
-   "Signs of secondary erythrocytosis, pulmonary hypertension, or right heart failure from chronic hypoxemia/hypercapnia"
-  ],
-  "prognosis": "Chronic hypercapnia in COPD marks more advanced disease and carries worse survival than in equally severe normocapnic patients. Documented daytime hypercapnia treated with nocturnal noninvasive positive-pressure ventilation is associated with improved daytime gas exchange, prolonged survival, and better health-related quality of life. In OHS with severe OSA, both CPAP and NIPPV improve long-term Paco2/bicarbonate and reduce cardiovascular and overall mortality. Progressive neuromuscular disease tends to advance from sleep-only to round-the-clock ventilatory support need, though modern home ventilation can delay tracheostomy and institutionalization (Harrison 22e p.2275-2276).",
-  "pitfalls": [
-   "Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation despite rapid breathing (Harrison 22e p.2273).",
-   "Diagnosing primary respiratory drive disorder without excluding far more common secondary causes such as sedatives, chronic narcotics, and significant hypothyroidism (Harrison 22e p.2275).",
-   "Misattributing chronic hyperventilation symptoms to cardiopulmonary disease and failing to exclude acute causes (e.g., diabetic ketoacidosis, mild asthma) before labeling it chronic (Harrison 22e p.2276-2277).",
-   "Overlooking that supplemental oxygen, even at low concentrations, can worsen hypercapnia in some hypoventilating patients (Harrison 22e p.2276).",
-   "Failing to recognize that a serum bicarbonate elevated out of proportion to chronic respiratory acidosis (excess metabolic alkalosis) can itself aggravate hypoventilation (Harrison 22e p.2276)."
-  ],
-  "severityClassification": "Diagnostic thresholds rather than a formal grading scale: hypoventilation is defined by Paco2 >=45 mmHg; OHS requires BMI >=30 kg/m2 plus Paco2 >=45 mmHg without another cause; severe OSA is an apnea-hypopnea index >30 events/h; stable chronic hypercapnic COPD considered for home high-intensity ventilation typically has Paco2 >52 mmHg with normal pH (Harrison 22e p.2275-2276).",
-  "references": [
-   "Harrison 22e p.2273",
-   "Harrison 22e p.2274",
-   "Harrison 22e p.2275",
-   "Harrison 22e p.2276",
-   "Harrison 22e p.2277"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation syndrome",
-   "Pursue weight loss (including bariatric measures) and treat coexisting obstructive sleep apnoea with CPAP in obesity hypoventilation",
-   "Treat the underlying disorder, whether neuromuscular disease, chest-wall disease, or a respiratory drive disorder",
-   "Use supplemental oxygen cautiously as an adjunct to avoid suppressing residual respiratory drive, and avoid sedatives that depress ventilation",
-   "Monitor progression with serial vital capacity, blood gases, and polysomnography",
-   "Escalate to tracheostomy and long-term ventilation when non-invasive support fails or bulbar and respiratory muscle failure advances",
-   "Provide vaccination and prompt treatment of respiratory infections",
-   "Coordinate care through a respiratory and, in neuromuscular disease, neurology multidisciplinary team"
-  ]
- },
- "algorithms": [
-  {
-   "id": "disorders_of_ventilation-pathway",
-   "title": "Disorders of Ventilation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal Paco2 (Harrison 22e p.2273).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Paradoxical (abdominal) breathing while supine indicating significant diaphragmatic weakness or paralysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative, recognizing venous Pco2 runs a few points higher than arterial, Serum bicarbonate (total CO2) as a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation despite rapid breathing (Harrison 22e p.2273)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of disorders of ventilation."
-  }
- ],
- "tables": [
-  {
-   "id": "disorders_of_ventilation-matrix",
-   "title": "Disorders of Ventilation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2273",
+    "clinicalPearls": [
+      "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal Paco2 (Harrison 22e p.2273).",
+      "Because Paco2 is governed by Paco2 = k(VCO2)/VA, every disturbance reflects altered CO2 production, minute ventilation, or dead-space fraction; a patient can breathe rapidly with a high minute ventilation yet still hypoventilate at the alveolar level if dead space is increased (Harrison 22e p.2273).",
+      "Respiratory rhythm is generated in the brainstem (dorsal respiratory group and ventral respiratory column); the pre-Botzinger complex within the VRC is critical for inspiration, and its lesioning abolishes breathing entirely (Harrison 22e p.2273).",
+      "Normal sleep brings an attenuated response to hypercapnia and hypoxemia, producing mild nocturnal hypoventilation that corrects on awakening (Harrison 22e p.2273).",
+      "New-onset orthopnea is one of the earliest signs of reduced diaphragmatic force generation; 'paradoxical breathing' (abdomen moving inward on deep inspiration while supine) signals significant diaphragmatic weakness or paralysis (Harrison 22e p.2274).",
+      "Chronic hypoventilation follows a characteristic sequence: an asymptomatic stage with normal daytime gases, then nocturnal hypoventilation appearing first in REM then non-REM sleep, then falling vital capacity, and finally daytime hypercapnia (Harrison 22e p.2274).",
+      "The shared hallmark of all alveolar hypoventilation syndromes is a rise in alveolar and arterial Pco2 with a compensatory increase in plasma bicarbonate; the rising Paco2 displaces alveolar oxygen and commonly causes hypoxemia (Harrison 22e p.2274).",
+      "Chronic hypoxemia from hypoventilation can drive secondary erythrocytosis, and the combination of chronic hypoxemia and hypercapnia can cause pulmonary vasoconstriction leading to pulmonary hypertension, right ventricular hypertrophy, and right heart failure (Harrison 22e p.2274).",
+      "Obesity hypoventilation syndrome (OHS) requires BMI >=30 kg/m2 plus chronic daytime hypoventilation (Paco2 >=45 mmHg) with no other explanation; obstructive sleep apnea coexists in nearly 90% of cases, with about 70% having severe OSA (Harrison 22e p.2275).",
+      "In OHS, the depressed ventilatory responsiveness appears to be a consequence rather than a primary cause, since central drive often improves once sleep-disordered breathing is treated without weight change (Harrison 22e p.2276).",
+      "Congenital central hypoventilation syndrome (Ondine's curse, CCHS) is linked to PHOX2b gene abnormalities; affected patients lack ventilatory responses to hypoxia/hypercapnia, have mild waking hypercapnia, markedly elevated Paco2 in non-REM sleep, yet can paradoxically normalize Paco2 during exercise and REM sleep (Harrison 22e p.2276).",
+      "In chronic hyperventilation, anxiety/panic are not synonymous with the condition; sustaining hypocapnia needs only about a 10% increase in alveolar ventilation, achievable through subtle pattern changes such as occasional sigh breaths or frequent yawning (Harrison 22e p.2277)."
     ],
-    [
-     "Key Investigations",
-     "Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adequate ventilation depends on a balance between respiratory drive and neuromuscular strength on one side and the elastic plus resistive loads of the respiratory system on the other. Reduced drive, impaired neuromuscular competence, or a markedly increased load lowers effective minute ventilation and produces hypercapnia; conversely, normal muscle strength combined with excessive drive yields hyperventilation and hypocapnia. Diseases reducing minute ventilation or increasing dead space fall into four broad categories: parenchymal lung/chest wall disease, obesity hypoventilation, neuromuscular disease, and respiratory drive disorders. 'Pump failure' encompasses disorders of drive, neural pathways, the neuromuscular junction, and muscle. In OHS the mechanism is multifactorial, combining OSA, increased work of breathing, respiratory muscle impairment against an excess-adiposity load, ventilation-perfusion mismatch, and blunted central responsiveness to hypoxemia and hypercapnia. Chronic hyperventilation is conceptualized as having initiating and sustaining factors, with an initial event dropping Paco2 toward ~20 mmHg and resultant symptoms perpetuating overbreathing (Harrison 22e p.2273-2277).",
+    "additionalDifferentials": [
+      "Parenchymal lung disease (obstructive such as COPD; restrictive such as interstitial lung disease; atelectasis; pulmonary embolus)",
+      "Chest wall disorders (kyphoscoliosis, obesity, abdominal distention/ascites)",
+      "Neuromuscular disease (amyotrophic lateral sclerosis, myasthenia gravis, phrenic nerve injury, spinal cord lesion, myopathy, muscular dystrophy)",
+      "Depressed respiratory drive (narcotic/sedative use, brainstem stroke, hypothyroidism, primary alveolar hypoventilation)",
+      "Brainstem structural lesions of the pons or medulla (stroke, tumor)"
     ],
-    [
-     "Primary Differentials",
-     "Parenchymal lung disease (obstructive such as COPD; restrictive such as interstitial lung disease; atelectasis; pulmonary",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Recurrent pneumonia from ineffective cough in neuromuscular disease can mimic or precipitate acute respiratory deterioration"
     ],
-    [
-     "Management Strategy",
-     "Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Anxiety disorders and panic attacks (overlap with but are not equivalent to chronic hyperventilation)",
+      "Mild asthma producing respiratory alkalosis (must be excluded before diagnosing chronic hyperventilation)",
+      "Diabetic ketoacidosis presenting as acute hyperventilation"
     ],
-    [
-     "Clinical Pitfall",
-     "Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative, recognizing venous Pco2 runs a few points higher than arterial",
+      "Serum bicarbonate (total CO2) as a sensitive but nonspecific screen: a level <27 mmol/L with normal renal function makes hypoventilation very unlikely, while >=27 mmol/L should prompt Paco2 measurement",
+      "Chest x-ray and/or CT to identify lung/chest wall disease",
+      "Pulmonary function testing including seated-versus-supine FVC (a 15-25% supine drop suggests diaphragmatic weakness) plus maximal inspiratory and expiratory pressures",
+      "Polysomnography to demonstrate nocturnal hypercapnia, central versus obstructive apneas/hypopneas, and to screen for OSA",
+      "Brain CT or MRI to detect pontine/medullary structural lesions",
+      "OSA screening tools (Epworth Sleepiness Scale, Berlin Questionnaire, STOP-Bang) recognizing their limited sensitivity/specificity",
+      "Genetic testing for PHOX2b abnormalities in suspected congenital central hypoventilation syndrome"
+    ],
+    "redFlags": [
+      "Paradoxical (abdominal) breathing while supine indicating significant diaphragmatic weakness or paralysis",
+      "New-onset orthopnea heralding reduced respiratory muscle force in neuromuscular disease",
+      "Progressive 15-25% supine fall in FVC signaling impending chronic respiratory failure",
+      "Daytime hypercapnia developing on top of established nocturnal hypoventilation",
+      "Signs of secondary erythrocytosis, pulmonary hypertension, or right heart failure from chronic hypoxemia/hypercapnia"
+    ],
+    "prognosis": "Chronic hypercapnia in COPD marks more advanced disease and carries worse survival than in equally severe normocapnic patients. Documented daytime hypercapnia treated with nocturnal noninvasive positive-pressure ventilation is associated with improved daytime gas exchange, prolonged survival, and better health-related quality of life. In OHS with severe OSA, both CPAP and NIPPV improve long-term Paco2/bicarbonate and reduce cardiovascular and overall mortality. Progressive neuromuscular disease tends to advance from sleep-only to round-the-clock ventilatory support need, though modern home ventilation can delay tracheostomy and institutionalization (Harrison 22e p.2275-2276).",
+    "pitfalls": [
+      "Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation despite rapid breathing (Harrison 22e p.2273).",
+      "Diagnosing primary respiratory drive disorder without excluding far more common secondary causes such as sedatives, chronic narcotics, and significant hypothyroidism (Harrison 22e p.2275).",
+      "Misattributing chronic hyperventilation symptoms to cardiopulmonary disease and failing to exclude acute causes (e.g., diabetic ketoacidosis, mild asthma) before labeling it chronic (Harrison 22e p.2276-2277).",
+      "Overlooking that supplemental oxygen, even at low concentrations, can worsen hypercapnia in some hypoventilating patients (Harrison 22e p.2276).",
+      "Failing to recognize that a serum bicarbonate elevated out of proportion to chronic respiratory acidosis (excess metabolic alkalosis) can itself aggravate hypoventilation (Harrison 22e p.2276)."
+    ],
+    "severityClassification": "Diagnostic thresholds rather than a formal grading scale: hypoventilation is defined by Paco2 >=45 mmHg; OHS requires BMI >=30 kg/m2 plus Paco2 >=45 mmHg without another cause; severe OSA is an apnea-hypopnea index >30 events/h; stable chronic hypercapnic COPD considered for home high-intensity ventilation typically has Paco2 >52 mmHg with normal pH (Harrison 22e p.2275-2276).",
+    "references": [
+      "Harrison 22e p.2273",
+      "Harrison 22e p.2274",
+      "Harrison 22e p.2275",
+      "Harrison 22e p.2276",
+      "Harrison 22e p.2277"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation syndrome",
+      "Pursue weight loss (including bariatric measures) and treat coexisting obstructive sleep apnoea with CPAP in obesity hypoventilation",
+      "Treat the underlying disorder, whether neuromuscular disease, chest-wall disease, or a respiratory drive disorder",
+      "Use supplemental oxygen cautiously as an adjunct to avoid suppressing residual respiratory drive, and avoid sedatives that depress ventilation",
+      "Monitor progression with serial vital capacity, blood gases, and polysomnography",
+      "Escalate to tracheostomy and long-term ventilation when non-invasive support fails or bulbar and respiratory muscle failure advances",
+      "Provide vaccination and prompt treatment of respiratory infections",
+      "Coordinate care through a respiratory and, in neuromuscular disease, neurology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for disorders of ventilation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "disorders-of-ventilation-real-image",
-   "title": "Disorders of Ventilation: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "disorders_of_ventilation-pathway",
+      "title": "Disorders of Ventilation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal Paco2 (Harrison 22e p.2273).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Paradoxical (abdominal) breathing while supine indicating significant diaphragmatic weakness or paralysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative, recognizing venous Pco2 runs a few points higher than arterial, Serum bicarbonate (total CO2) as a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation despite rapid breathing (Harrison 22e p.2273)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of disorders of ventilation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "disorders_of_ventilation-matrix",
+      "title": "Disorders of Ventilation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Normal arterial CO2 (Paco2) sits between roughly 37 and 43 mmHg at sea level; all ventilatory disorders manifest as an abnormal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas (the diagnostic hallmark): Paco2 >=45 mmHg defines hypoventilation; venous blood gas is an alternative,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parenchymal lung disease (obstructive such as COPD; restrictive such as interstitial lung disease; atelectasis; pulmonary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nocturnal non-invasive positive-pressure ventilation is the mainstay for chronic hypoventilation and obesity hypoventilation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Equating high minute ventilation with adequate alveolar ventilation: increased dead space can produce alveolar hypoventilation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for disorders of ventilation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS guideline on obesity hypoventilation syndrome, 2019 (Newswise summary)",
+      "url": "https://www.newswise.com/articles/ats-publishes-clinical-guideline-on-obesity-hypoventilation-syndrome/sc-rsmn",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_ventilation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic thresholds in disorders of ventilation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal PaCO2 at sea level",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "37 to 43",
+              "range": [
+                37,
+                43
+              ]
+            },
+            {
+              "text": "All ventilatory disorders show abnormal PaCO2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoventilation",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaCO2 45 or more",
+              "op": ">=",
+              "value": 45
+            },
+            {
+              "text": "{{hy:Diagnostic hallmark}}; venous PCO2 runs a few points higher"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum bicarbonate screen",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<27 makes hypoventilation very unlikely",
+              "op": "<",
+              "value": 27
+            },
+            {
+              "text": "27 or more: measure PaCO2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation syndrome",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "BMI 30 or more with PaCO2 45 or more",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "No other cause; OSA in nearly 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seated to supine FVC fall",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15 to 25",
+              "range": [
+                15,
+                25
+              ]
+            },
+            {
+              "text": "Diaphragmatic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe OSA",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI >30",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "On polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercapnic COPD for home ventilation",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaCO2 >52 with normal pH",
+              "op": ">",
+              "value": 52
+            },
+            {
+              "text": "High-intensity NIV considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PHOX2B testing",
+          "cells": [
+            {
+              "text": "Congenital central hypoventilation"
+            },
+            {
+              "text": "Absent hypoxic and hypercapnic responses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_ventilation-ddx",
+      "kind": "ddx",
+      "title": "Causes of hypercapnic hypoventilation and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Depressed drive: opioids, sedatives, hypothyroidism",
+          "cells": [
+            {
+              "text": "{{hy:Exclude before primary drive disorder}}"
+            },
+            {
+              "text": "Drug history, TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem lesion",
+          "cells": [
+            {
+              "text": "Pontine or medullary stroke or tumour"
+            },
+            {
+              "text": "Brain MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular disease",
+          "cells": [
+            {
+              "text": "Orthopnoea, paradoxical breathing"
+            },
+            {
+              "text": "Seated and supine FVC, mouth pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall disease",
+          "cells": [
+            {
+              "text": "Kyphoscoliosis, massive ascites"
+            },
+            {
+              "text": "Chest imaging, PFT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD or other lung disease",
+          "cells": [
+            {
+              "text": "Raised dead space despite high minute ventilation"
+            },
+            {
+              "text": "Spirometry, CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation",
+          "cells": [
+            {
+              "text": "BMI 30 or more with coexisting OSA"
+            },
+            {
+              "text": "ABG and polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hyperventilation (opposite state)",
+          "cells": [
+            {
+              "text": "Low PaCO2, sighing, yawning"
+            },
+            {
+              "text": "ABG; exclude asthma and ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_ventilation-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hypoventilation syndromes",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positive airway pressure during sleep",
+          "cells": [
+            {
+              "text": "Stable ambulatory OHS"
+            },
+            {
+              "text": "Conditional ATS recommendation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CPAP first line",
+          "cells": [
+            {
+              "text": "{{hy:OHS with severe OSA}}"
+            },
+            {
+              "text": "Switch to NIV if gas exchange or symptoms do not improve"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Discharge on NIV",
+          "cells": [
+            {
+              "text": "Hospitalised with respiratory failure and suspected OHS"
+            },
+            {
+              "text": "Until sleep lab titration, ideally within 2 to 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sustained weight loss of 25 to 30%",
+          "cells": [
+            {
+              "text": "OHS"
+            },
+            {
+              "text": "Bariatric surgery most likely to achieve it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nocturnal NIPPV",
+          "cells": [
+            {
+              "text": "Daytime hypercapnia in neuromuscular or chest wall disease, hypercapnic COPD"
+            },
+            {
+              "text": "Improves gas exchange, survival and quality of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious oxygen, avoid sedatives",
+          "cells": [
+            {
+              "text": "All hypoventilating patients"
+            },
+            {
+              "text": "Even low-flow oxygen can worsen hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheostomy ventilation",
+          "cells": [
+            {
+              "text": "Failure of non-invasive support"
+            },
+            {
+              "text": "Advanced neuromuscular failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_ventilation-dx-mgmt",
+      "title": "Diagnosis and management of hypoventilation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected hypoventilation: orthopnoea, morning headache, sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Serum bicarbonate 27 mmol/L or more, or high suspicion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Hypoventilation very unlikely",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Arterial blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PaCO2 45 mmHg or more?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Look for drugs, hypothyroidism; imaging, PFT, supine FVC, polysomnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Obese (BMI 30 or more) with severe OSA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CPAP; aim for 25 to 30% weight loss",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nocturnal NIV; treat underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor gases and vital capacity; escalate if failing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

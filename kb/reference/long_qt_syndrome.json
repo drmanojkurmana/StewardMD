@@ -1,176 +1,501 @@
 {
- "id": "long_qt_syndrome",
- "name": "Long QT syndrome",
- "aliases": [
-  "LQTS",
-  "congenital long QT syndrome",
-  "acquired long QT",
-  "prolonged QT interval"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic ventricular tachycardia torsades de pointes",
-   "It may be congenital, from ion-channel gene mutations, or acquired, most often from QT-prolonging drugs and electrolyte disturbances such as hypokalaemia, hypomagnesaemia, and hypocalcaemia",
-   "Presentations range from an incidental ECG finding to palpitations, syncope, seizures, or sudden cardiac death, frequently triggered by exertion, emotion, or auditory stimuli depending on the genotype",
-   "The QT interval must be corrected for heart rate, and serial or exercise ECGs may be needed because the interval can be borderline at rest",
-   "A careful family history of syncope, seizures, or premature sudden death supports a congenital cause",
-   "Management of acquired LQTS centres on withdrawing offending drugs and correcting electrolytes; congenital LQTS is often managed with beta-blockade and activity modification",
-   "An implantable cardioverter-defibrillator is considered for survivors of cardiac arrest or those with high-risk features despite therapy",
-   "Torsades is treated acutely with magnesium, correction of precipitants, and measures to raise the heart rate, with defibrillation if it degenerates to a sustained unstable rhythm"
+  "id": "long_qt_syndrome",
+  "name": "Long QT syndrome",
+  "aliases": [
+    "LQTS",
+    "congenital long QT syndrome",
+    "acquired long QT",
+    "prolonged QT interval"
   ],
-  "pathophysiology": "The QT interval reflects the duration of ventricular repolarisation. In congenital LQTS, mutations affecting cardiac potassium, sodium, or calcium channels delay repolarisation by reducing outward current or increasing inward current, prolonging the action potential. This heterogeneous prolongation favours early afterdepolarisations that can trigger torsades de pointes. Acquired LQTS most often results from drugs that block the rapid delayed rectifier potassium current or from electrolyte disturbances that impair repolarisation. Bradycardia and pauses further lengthen the QT and can precipitate pause-dependent torsades.",
-  "additionalDifferentials": [
-   "Acquired QT prolongation from drugs or electrolyte disturbance",
-   "Other inherited arrhythmia syndromes such as Brugada syndrome and catecholaminergic polymorphic VT",
-   "Vasovagal or other non-cardiac syncope",
-   "Epilepsy",
-   "Short QT syndrome (opposite repolarisation abnormality)",
-   "Structural causes of ventricular arrhythmia"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG with accurate rate-corrected QT measurement, repeated as needed",
-   "Electrolyte panel including potassium, magnesium, and calcium",
-   "Review of all medications for QT-prolonging agents",
-   "Exercise or ambulatory ECG to unmask latent QT prolongation and assess dynamics",
-   "Genetic testing and family screening when a congenital syndrome is suspected",
-   "Echocardiography to exclude structural heart disease"
-  ],
-  "redFlags": [
-   "MEDICAL EMERGENCY: torsades de pointes, which may cause syncope and can degenerate into ventricular fibrillation and cardiac arrest",
-   "Syncope or seizures in a patient with a prolonged QT, indicating a high risk of malignant arrhythmia",
-   "Family history of sudden cardiac death at a young age",
-   "Marked QT prolongation compounded by multiple QT-prolonging drugs or profound electrolyte disturbance"
-  ],
-  "prognosis": "With recognition, avoidance of QT-prolonging triggers, and appropriate therapy including beta-blockade or a defibrillator, prognosis is generally favourable; risk of sudden death rises with greater QT prolongation, prior syncope or arrhythmia, and specific high-risk genotypes.",
-  "pitfalls": [
-   "Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG",
-   "Overlooking cumulative QT effects when several QT-prolonging drugs or electrolyte disturbances coexist",
-   "Attributing syncope or seizures to a neurological cause without measuring the QT",
-   "Neglecting family screening once a congenital syndrome is diagnosed"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT syndrome",
-   "For congenital disease, start beta-blockade with a non-selective agent such as propranolol or nadolol and advise activity and trigger modification",
-   "Treat torsades de pointes acutely with intravenous magnesium, electrolyte correction, and rate support using temporary pacing or isoprenaline for pause-dependent, bradycardia-related episodes",
-   "Provide immediate defibrillation for sustained polymorphic ventricular tachycardia or cardiac arrest",
-   "Implant a cardioverter-defibrillator for arrest survivors or those with recurrent syncope or arrhythmia despite therapy, and consider left cardiac sympathetic denervation in refractory cases",
-   "Educate patients to avoid QT-prolonging medications lifelong and to maintain electrolyte balance during illness",
-   "Offer genetic testing and cascade family screening when a congenital syndrome is suspected, with ECG evaluation of relatives",
-   "Refer to a cardiologist or inherited cardiac conditions service and provide resuscitation planning for high-risk individuals"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "long_qt_syndrome-pathway",
-   "title": "Long QT syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic ventricular tachycardia torsades de pointes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: torsades de pointes, which may cause syncope and can degenerate into ventricular fibrillation and cardiac arrest",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG with accurate rate-corrected QT measurement, repeated as needed, Electrolyte panel including potassium, magnesium, and calcium, Review of all medications for QT-prolonging agents"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of long qt syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "long_qt_syndrome-matrix",
-   "title": "Long QT syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic ventricular tachycardia torsades de pointes",
+      "It may be congenital, from ion-channel gene mutations, or acquired, most often from QT-prolonging drugs and electrolyte disturbances such as hypokalaemia, hypomagnesaemia, and hypocalcaemia",
+      "Presentations range from an incidental ECG finding to palpitations, syncope, seizures, or sudden cardiac death, frequently triggered by exertion, emotion, or auditory stimuli depending on the genotype",
+      "The QT interval must be corrected for heart rate, and serial or exercise ECGs may be needed because the interval can be borderline at rest",
+      "A careful family history of syncope, seizures, or premature sudden death supports a congenital cause",
+      "Management of acquired LQTS centres on withdrawing offending drugs and correcting electrolytes; congenital LQTS is often managed with beta-blockade and activity modification",
+      "An implantable cardioverter-defibrillator is considered for survivors of cardiac arrest or those with high-risk features despite therapy",
+      "Torsades is treated acutely with magnesium, correction of precipitants, and measures to raise the heart rate, with defibrillation if it degenerates to a sustained unstable rhythm"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG with accurate rate-corrected QT measurement, repeated as needed, Electrolyte panel including potassium, magnesium,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The QT interval reflects the duration of ventricular repolarisation. In congenital LQTS, mutations affecting cardiac potassium, sodium, or calcium channels delay repolarisation by reducing outward current or increasing inward current, prolonging the action potential. This heterogeneous prolongation favours early afterdepolarisations that can trigger torsades de pointes. Acquired LQTS most often results from drugs that block the rapid delayed rectifier potassium current or from electrolyte disturbances that impair repolarisation. Bradycardia and pauses further lengthen the QT and can precipitate pause-dependent torsades.",
+    "additionalDifferentials": [
+      "Acquired QT prolongation from drugs or electrolyte disturbance",
+      "Other inherited arrhythmia syndromes such as Brugada syndrome and catecholaminergic polymorphic VT",
+      "Vasovagal or other non-cardiac syncope",
+      "Epilepsy",
+      "Short QT syndrome (opposite repolarisation abnormality)",
+      "Structural causes of ventricular arrhythmia"
     ],
-    [
-     "Primary Differentials",
-     "Acquired QT prolongation from drugs or electrolyte disturbance, Other inherited arrhythmia syndromes such as Brugada syndrome and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG with accurate rate-corrected QT measurement, repeated as needed",
+      "Electrolyte panel including potassium, magnesium, and calcium",
+      "Review of all medications for QT-prolonging agents",
+      "Exercise or ambulatory ECG to unmask latent QT prolongation and assess dynamics",
+      "Genetic testing and family screening when a congenital syndrome is suspected",
+      "Echocardiography to exclude structural heart disease"
     ],
-    [
-     "Management Strategy",
-     "Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT",
-     "Core treatment modality"
+    "redFlags": [
+      "MEDICAL EMERGENCY: torsades de pointes, which may cause syncope and can degenerate into ventricular fibrillation and cardiac arrest",
+      "Syncope or seizures in a patient with a prolonged QT, indicating a high risk of malignant arrhythmia",
+      "Family history of sudden cardiac death at a young age",
+      "Marked QT prolongation compounded by multiple QT-prolonging drugs or profound electrolyte disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG",
-     "Prevent diagnostic or management error"
+    "prognosis": "With recognition, avoidance of QT-prolonging triggers, and appropriate therapy including beta-blockade or a defibrillator, prognosis is generally favourable; risk of sudden death rises with greater QT prolongation, prior syncope or arrhythmia, and specific high-risk genotypes.",
+    "pitfalls": [
+      "Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG",
+      "Overlooking cumulative QT effects when several QT-prolonging drugs or electrolyte disturbances coexist",
+      "Attributing syncope or seizures to a neurological cause without measuring the QT",
+      "Neglecting family screening once a congenital syndrome is diagnosed"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT syndrome",
+      "For congenital disease, start beta-blockade with a non-selective agent such as propranolol or nadolol and advise activity and trigger modification",
+      "Treat torsades de pointes acutely with intravenous magnesium, electrolyte correction, and rate support using temporary pacing or isoprenaline for pause-dependent, bradycardia-related episodes",
+      "Provide immediate defibrillation for sustained polymorphic ventricular tachycardia or cardiac arrest",
+      "Implant a cardioverter-defibrillator for arrest survivors or those with recurrent syncope or arrhythmia despite therapy, and consider left cardiac sympathetic denervation in refractory cases",
+      "Educate patients to avoid QT-prolonging medications lifelong and to maintain electrolyte balance during illness",
+      "Offer genetic testing and cascade family screening when a congenital syndrome is suspected, with ECG evaluation of relatives",
+      "Refer to a cardiologist or inherited cardiac conditions service and provide resuscitation planning for high-risk individuals"
     ]
-   ],
-   "caption": "Overview comparison matrix for long qt syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "long-qt-syndrome-real-image",
-   "title": "Long QT syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "long_qt_syndrome-pathway",
+      "title": "Long QT syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic ventricular tachycardia torsades de pointes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: torsades de pointes, which may cause syncope and can degenerate into ventricular fibrillation and cardiac arrest",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG with accurate rate-corrected QT measurement, repeated as needed, Electrolyte panel including potassium, magnesium, and calcium, Review of all medications for QT-prolonging agents"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of long qt syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "long_qt_syndrome-matrix",
+      "title": "Long QT syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "LQTS is characterised by prolongation of the rate-corrected QT interval on ECG and a predisposition to the polymorphic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG with accurate rate-corrected QT measurement, repeated as needed, Electrolyte panel including potassium, magnesium,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired QT prolongation from drugs or electrolyte disturbance, Other inherited arrhythmia syndromes such as Brugada syndrome and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw all QT-prolonging drugs and correct hypokalaemia, hypomagnesaemia and hypocalcaemia, the mainstay for acquired long QT",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to correct the QT for heart rate or missing intermittent prolongation on a single resting ECG",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for long qt syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "long_qt_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG with rate-corrected QT",
+          "cells": [
+            {
+              "text": "QTc prolongation; repeated as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte panel (potassium, magnesium, calcium)",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "QT-prolonging agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise or ambulatory ECG",
+          "cells": [
+            {
+              "text": "Latent QT prolongation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and family screening",
+          "cells": [
+            {
+              "text": "Congenital syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structural heart disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired QT prolongation from drugs or electrolytes",
+          "cells": [
+            {
+              "text": "Reversible by withdrawal and electrolyte correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Another inherited arrhythmia syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholaminergic polymorphic VT",
+          "cells": [
+            {
+              "text": "Another inherited arrhythmia; exercise-triggered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy",
+          "cells": [
+            {
+              "text": "Seizures can mimic; measuring the QT distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short QT syndrome",
+          "cells": [
+            {
+              "text": "Opposite repolarisation abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw QT-prolonging drugs",
+          "cells": [
+            {
+              "text": "And correct hypokalaemia, hypomagnesaemia and hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Non-selective agent such as propranolol or nadolol for congenital disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades de pointes",
+          "cells": [
+            {
+              "text": "Intravenous magnesium, electrolyte correction and rate support by pacing or isoprenaline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defibrillation",
+          "cells": [
+            {
+              "text": "Sustained polymorphic VT or cardiac arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Arrest survivors, or recurrent syncope or arrhythmia despite therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong avoidance",
+          "cells": [
+            {
+              "text": "QT-prolonging medications; electrolyte balance during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "ECG evaluation of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "long_qt_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Long QT syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Syncope, seizure or palpitations with a prolonged QTc on ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (torsades, syncope or seizures with long QT, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intravenous magnesium and immediate defibrillation if torsades or arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated 12-lead ECG with QTc, electrolytes, medication review, exercise ECG, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is QTc prolongation confirmed with precipitants excluded, or a congenital pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Brugada syndrome, CPVT, epilepsy or non-cardiac syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw QT-prolonging drugs and correct electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockade with propranolol or nadolol for congenital disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acute intravenous magnesium and rate support for torsades",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardioverter-defibrillator for arrest survivors or recurrent events despite therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With recognition and avoidance of triggers, the prognosis is generally favourable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

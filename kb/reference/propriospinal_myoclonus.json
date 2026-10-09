@@ -1,167 +1,455 @@
 {
- "id": "propriospinal_myoclonus",
- "name": "Propriospinal myoclonus",
- "aliases": [
-  "PSM"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal cord",
-   "Jerks characteristically appear or worsen during relaxed wakefulness and the transition to sleep, often when lying down",
-   "The movements spread slowly up and down the cord from a thoracic or abdominal origin, reflecting conduction along propriospinal pathways",
-   "Neurophysiology can demonstrate the slow rostro-caudal propagation and a consistent muscle recruitment pattern",
-   "A substantial proportion of clinically diagnosed cases are ultimately shown to be functional",
-   "Back-averaging and the presence of a Bereitschaftspotential help distinguish organic from functional cases"
+  "id": "propriospinal_myoclonus",
+  "name": "Propriospinal myoclonus",
+  "aliases": [
+    "PSM"
   ],
-  "pathophysiology": "Propriospinal myoclonus is generated within the spinal cord, with an initial focus in the mid-thoracic region from which activity propagates slowly up and down the cord along propriospinal interneuronal pathways, producing axial jerks. In some patients a structural spinal lesion is found, but many have no identifiable lesion and a significant number are demonstrated to be functional, in which a premovement Bereitschaftspotential and variable, distractible features indicate a voluntary-type mechanism experienced as involuntary.",
-  "additionalDifferentials": [
-   "Functional (psychogenic) axial jerks",
-   "Hypnic jerks (sleep starts)",
-   "Spinal segmental myoclonus",
-   "Cortical or subcortical myoclonus",
-   "Startle syndromes"
-  ],
-  "additionalInvestigations": [
-   "Surface electromyography with polygraphy to show slow propagation and recruitment pattern",
-   "Back-averaging to seek a premovement Bereitschaftspotential (suggesting functional origin)",
-   "MRI of the spinal cord to exclude a structural lesion",
-   "Assessment for functional signs such as variability and distractibility",
-   "Sleep study if the relationship to sleep onset is prominent"
-  ],
-  "redFlags": [
-   "A structural spinal cord lesion on imaging",
-   "Associated sensory level, weakness or sphincter disturbance",
-   "Rapid progression",
-   "Features suggesting a broader neurological disorder"
-  ],
-  "prognosis": "Prognosis varies with cause; lesional cases depend on the underlying pathology, while functional cases can improve with appropriate explanation and therapy, though the disorder is often persistent.",
-  "pitfalls": [
-   "Assuming an organic spinal cause without seeking a Bereitschaftspotential",
-   "Missing a structural spinal lesion in genuinely lesional cases",
-   "Confusing it with benign hypnic jerks",
-   "Not recognising the high proportion of functional cases"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Movement Disorders textbook (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Image the spinal cord and treat any identified structural lesion driving the axial jerks",
-   "For symptomatic organic myoclonus, trial pharmacotherapy such as clonazepam, with levetiracetam or zonisamide as alternatives",
-   "When investigation indicates a functional disorder, deliver a clear, positive explanation of the diagnosis as the basis of treatment",
-   "Treat functional cases with tailored physiotherapy and cognitive behavioural therapy rather than escalating drug therapy",
-   "Address the sleep-onset relationship with sleep hygiene advice and reassurance",
-   "Manage through a multidisciplinary team including neurology, physiotherapy and neuropsychiatry or clinical psychology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "propriospinal_myoclonus-pathway",
-   "title": "Propriospinal myoclonus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal cord",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A structural spinal cord lesion on imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Surface electromyography with polygraphy to show slow propagation and recruitment pattern, Back-averaging to seek a premovement Bereitschaftspotential (suggesting functional origin), MRI of the spinal cord to exclude a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Image the spinal cord and treat any identified structural lesion driving the axial jerks"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an organic spinal cause without seeking a Bereitschaftspotential"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of propriospinal myoclonus."
-  }
- ],
- "tables": [
-  {
-   "id": "propriospinal_myoclonus-matrix",
-   "title": "Propriospinal myoclonus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal cord",
+      "Jerks characteristically appear or worsen during relaxed wakefulness and the transition to sleep, often when lying down",
+      "The movements spread slowly up and down the cord from a thoracic or abdominal origin, reflecting conduction along propriospinal pathways",
+      "Neurophysiology can demonstrate the slow rostro-caudal propagation and a consistent muscle recruitment pattern",
+      "A substantial proportion of clinically diagnosed cases are ultimately shown to be functional",
+      "Back-averaging and the presence of a Bereitschaftspotential help distinguish organic from functional cases"
     ],
-    [
-     "Key Investigations",
-     "Surface electromyography with polygraphy to show slow propagation and recruitment pattern, Back-averaging to seek a premovement",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Propriospinal myoclonus is generated within the spinal cord, with an initial focus in the mid-thoracic region from which activity propagates slowly up and down the cord along propriospinal interneuronal pathways, producing axial jerks. In some patients a structural spinal lesion is found, but many have no identifiable lesion and a significant number are demonstrated to be functional, in which a premovement Bereitschaftspotential and variable, distractible features indicate a voluntary-type mechanism experienced as involuntary.",
+    "additionalDifferentials": [
+      "Functional (psychogenic) axial jerks",
+      "Hypnic jerks (sleep starts)",
+      "Spinal segmental myoclonus",
+      "Cortical or subcortical myoclonus",
+      "Startle syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Functional (psychogenic) axial jerks, Hypnic jerks (sleep starts), Spinal segmental myoclonus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Surface electromyography with polygraphy to show slow propagation and recruitment pattern",
+      "Back-averaging to seek a premovement Bereitschaftspotential (suggesting functional origin)",
+      "MRI of the spinal cord to exclude a structural lesion",
+      "Assessment for functional signs such as variability and distractibility",
+      "Sleep study if the relationship to sleep onset is prominent"
     ],
-    [
-     "Management Strategy",
-     "Image the spinal cord and treat any identified structural lesion driving the axial jerks",
-     "Core treatment modality"
+    "redFlags": [
+      "A structural spinal cord lesion on imaging",
+      "Associated sensory level, weakness or sphincter disturbance",
+      "Rapid progression",
+      "Features suggesting a broader neurological disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an organic spinal cause without seeking a Bereitschaftspotential",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies with cause; lesional cases depend on the underlying pathology, while functional cases can improve with appropriate explanation and therapy, though the disorder is often persistent.",
+    "pitfalls": [
+      "Assuming an organic spinal cause without seeking a Bereitschaftspotential",
+      "Missing a structural spinal lesion in genuinely lesional cases",
+      "Confusing it with benign hypnic jerks",
+      "Not recognising the high proportion of functional cases"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Movement Disorders textbook (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Image the spinal cord and treat any identified structural lesion driving the axial jerks",
+      "For symptomatic organic myoclonus, trial pharmacotherapy such as clonazepam, with levetiracetam or zonisamide as alternatives",
+      "When investigation indicates a functional disorder, deliver a clear, positive explanation of the diagnosis as the basis of treatment",
+      "Treat functional cases with tailored physiotherapy and cognitive behavioural therapy rather than escalating drug therapy",
+      "Address the sleep-onset relationship with sleep hygiene advice and reassurance",
+      "Manage through a multidisciplinary team including neurology, physiotherapy and neuropsychiatry or clinical psychology"
     ]
-   ],
-   "caption": "Overview comparison matrix for propriospinal myoclonus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "propriospinal-myoclonus-real-image",
-   "title": "Propriospinal myoclonus: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "propriospinal_myoclonus-pathway",
+      "title": "Propriospinal myoclonus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal cord",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A structural spinal cord lesion on imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Surface electromyography with polygraphy to show slow propagation and recruitment pattern, Back-averaging to seek a premovement Bereitschaftspotential (suggesting functional origin), MRI of the spinal cord to exclude a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Image the spinal cord and treat any identified structural lesion driving the axial jerks"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an organic spinal cause without seeking a Bereitschaftspotential"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of propriospinal myoclonus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "propriospinal_myoclonus-matrix",
+      "title": "Propriospinal myoclonus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sudden jerks producing flexion (or occasionally extension) of the trunk, neck and hips, arising from a generator in the spinal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Surface electromyography with polygraphy to show slow propagation and recruitment pattern, Back-averaging to seek a premovement",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Functional (psychogenic) axial jerks, Hypnic jerks (sleep starts), Spinal segmental myoclonus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Image the spinal cord and treat any identified structural lesion driving the axial jerks",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an organic spinal cause without seeking a Bereitschaftspotential",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for propriospinal myoclonus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "propriospinal_myoclonus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Surface electromyography with polygraphy",
+          "cells": [
+            {
+              "text": "Slow propagation and recruitment pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Back-averaging",
+          "cells": [
+            {
+              "text": "Premovement Bereitschaftspotential, suggesting functional origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spinal cord",
+          "cells": [
+            {
+              "text": "Structural lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for functional signs",
+          "cells": [
+            {
+              "text": "Variability and distractibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study, if sleep-onset relationship is prominent",
+          "cells": [
+            {
+              "text": "Relationship to sleep onset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "propriospinal_myoclonus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional (psychogenic) axial jerks",
+          "cells": [
+            {
+              "text": "Premovement Bereitschaftspotential"
+            },
+            {
+              "text": "Back-averaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypnic jerks (sleep starts)",
+          "cells": [
+            {
+              "text": "Relationship to sleep onset"
+            },
+            {
+              "text": "Sleep study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal segmental myoclonus",
+          "cells": [
+            {
+              "text": "Structural spinal cord lesion"
+            },
+            {
+              "text": "MRI of the spinal cord"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "propriospinal_myoclonus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural lesion",
+          "cells": [
+            {
+              "text": "Image the spinal cord; treat any structural lesion driving the axial jerks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organic myoclonus drugs",
+          "cells": [
+            {
+              "text": "Clonazepam, with levetiracetam or zonisamide as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positive explanation",
+          "cells": [
+            {
+              "text": "A clear, positive explanation of a functional diagnosis is the basis of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional cases",
+          "cells": [
+            {
+              "text": "Tailored physiotherapy and cognitive behavioural therapy rather than escalating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep-onset relationship",
+          "cells": [
+            {
+              "text": "Sleep hygiene advice and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neurology, physiotherapy and neuropsychiatry or clinical psychology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "propriospinal_myoclonus-dx-mgmt",
+      "title": "Diagnosis and management of Propriospinal myoclonus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected propriospinal myoclonus: axial jerks with slow spinal propagation on EMG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Structural lesion, sensory level, weakness, sphincter loss or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal imaging and neurology review for structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Surface EMG with polygraphy; back-averaging; spinal MRI; functional signs; sleep study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does back-averaging show a premovement Bereitschaftspotential (functional)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Organic myoclonus: trial clonazepam, levetiracetam or zonisamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Image the spinal cord and treat any structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clonazepam trial; levetiracetam or zonisamide as alternatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Clear, positive explanation of a functional diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and cognitive behavioural therapy for functional cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care with neurology, physiotherapy and psychology input",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

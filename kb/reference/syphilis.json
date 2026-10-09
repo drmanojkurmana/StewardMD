@@ -1,188 +1,697 @@
 {
- "id": "syphilis",
- "name": "Syphilis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 187,
- "page": 1428,
- "aliases": [
-  "lues",
-  "Treponema pallidum infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1428-1436",
-  "clinicalPearls": [
-   "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of active disease separated by asymptomatic latent periods (Harrison 22e p.1428).",
-   "Staging is the organizing framework: a primary chancre at the site of inoculation, then generalized secondary mucocutaneous disease, followed by latency, and in a minority of untreated patients tertiary disease (gumma, cardiovascular, late neurosyphilis) (Harrison 22e p.1428, p.1430).",
-   "Primary chancre is typically a single painless papule that erodes into an indurated ulcer with a firm cartilaginous edge; it is accompanied by regional (usually inguinal) lymphadenopathy that is firm, nonsuppurative, and painless, and heals spontaneously in about 4-6 weeks (Harrison 22e p.1430).",
-   "Secondary syphilis classically produces a widespread macular-to-papular, nonpruritic rash that frequently involves the palms and soles, plus generalized nontender lymphadenopathy (noted in ~85% of patients) (Harrison 22e p.1430-1431).",
-   "Condylomata lata (broad, moist, highly infectious lesions in intertriginous areas, ~10% of secondary cases) and mucous patches (painless silver-gray erosions of oral/genital mucosa) are characteristic secondary lesions (Harrison 22e p.1431).",
-   "Latent syphilis is defined by reactive serology with a normal CSF and no clinical manifestations; early latent is within the first year, late latent is >=1 year or of unknown duration (Harrison 22e p.1431).",
-   "Two classes of serologic tests: lipoidal (nontreponemal) RPR/VDRL, which are quantitative and reflect disease activity, and treponemal tests (FTA-ABS, TPPA, EIA/CIA); a reactive lipoidal screen must be confirmed by a treponemal test (Harrison 22e p.1433).",
-   "RPR is preferred for rapid serologic diagnosis; the VDRL remains the standard for CSF examination and is superior to RPR for that purpose (Harrison 22e p.1433-1434).",
-   "After treatment of early syphilis a fourfold (two-dilution) fall in VDRL/RPR titer (e.g., 1:32 to 1:8) signals adequate response; treponemal tests typically remain reactive and are not useful for monitoring therapy (Harrison 22e p.1433, p.1435).",
-   "Penicillin is the drug of choice for all stages as a principle; its efficacy against T. pallidum remains undiminished after decades of use (Harrison 22e p.1434).",
-   "Jarisch-Herxheimer reaction (fever, chills, myalgia, headache, tachycardia) may follow the start of therapy, thought to be a response to lipoproteins released by dying treponemes; it occurs in ~50% of primary and ~90% of secondary cases, defervesces within 12-24 h, is self-limited, and does not require steroids (Harrison 22e p.1435).",
-   "Earliest manifestations of early congenital syphilis include rhinitis ('snuffles'), mucocutaneous lesions, periostitis/bone changes, and hepatosplenomegaly; classic late stigmata include Hutchinson's teeth, mulberry molars, saddle nose, and saber shins (Harrison 22e p.1432-1433)."
+  "id": "syphilis",
+  "name": "Syphilis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 187,
+  "page": 1428,
+  "aliases": [
+    "lues",
+    "Treponema pallidum infection"
   ],
-  "pathophysiology": "Treponema pallidum subsp. pallidum is a thin spiral organism with a lipid-rich outer membrane and periplasmic endoflagella that drive motility; it has severely limited metabolic capacity and depends on host amino acids, carbohydrates, and lipids. Humans are the only known natural host. After penetrating intact mucous membranes or skin abrasions, treponemes reach the lymphatics and blood within hours, producing systemic dissemination and metastatic foci well before the primary lesion appears (median incubation ~21 days, rarely >6 weeks). Tissue damage reflects the host immune response rather than a direct treponemal toxin: lesions show perivascular infiltration by CD4+ and CD8+ T cells, plasma cells, and macrophages with endarteritis obliterans (obliteration of small vessels). Antigenic variation of the TprK outer-membrane protein allows immune evasion and persistence, explaining the paradoxical appearance of secondary lesions after primary lesions clear. Tertiary lesions (gumma, aortitis of the vasa vasorum of the ascending aorta, parenchymal neurosyphilis) arise from a slowly progressive inflammatory process that begins early in infection (Harrison 22e p.1428-1430, p.1432).",
-  "additionalDifferentials": [
-   "Primary chancre vs herpes simplex virus genital ulceration (Harrison 22e p.1430)",
-   "Primary chancre vs chancroid (Harrison 22e p.1430)",
-   "Primary chancre vs donovanosis (granuloma inguinale) (Harrison 22e p.1430)",
-   "Primary chancre vs traumatic genital injury (Harrison 22e p.1430)",
-   "Neonatal congenital syphilis vs rubella, cytomegalovirus, herpes simplex, toxoplasmosis, and erythroblastosis fetalis (Harrison 22e p.1432)"
-  ],
-  "infectionMimics": [
-   "Genital herpes simplex virus infection (Harrison 22e p.1430)",
-   "Chancroid (Harrison 22e p.1430)",
-   "Donovanosis (Harrison 22e p.1430)",
-   "Other treponemal infections (yaws, pinta, bejel) that also give reactive treponemal serology (Harrison 22e p.1433)"
-  ],
-  "nonInfectiousMimics": [
-   "Traumatic genital injury mimicking a primary chancre (Harrison 22e p.1430)",
-   "Rectosigmoid mass of secondary syphilis mistaken for malignancy (Harrison 22e p.1431)",
-   "Ocular syphilis (uveitis/iritis) mistaken for non-infectious uveitis when it fails to respond to topical steroids (Harrison 22e p.1431)"
-  ],
-  "additionalInvestigations": [
-   "RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA) (Harrison 22e p.1433)",
-   "Treponemal EIA/CIA automated assays as screening tests in large laboratories, with reflex TPPA confirmation (Harrison 22e p.1433-1434)",
-   "Dark-field microscopy or direct fluorescent antibody of moist lesions to demonstrate T. pallidum (rarely available outside research settings) (Harrison 22e p.1433)",
-   "PCR of lesion swabs, tissue, blood, CSF, ocular fluid, urine, or oropharyngeal/rectal swabs (not commercially available; in-house validated assays) (Harrison 22e p.1433)",
-   "CSF examination (mononuclear pleocytosis >5/uL, protein >45 mg/dL, CSF VDRL) for suspected neurosyphilis; CSF VDRL is highly specific but insensitive (Harrison 22e p.1432, p.1434)",
-   "HIV testing in all patients with newly diagnosed syphilis (Harrison 22e p.1434)"
-  ],
-  "redFlags": [
-   "Neurosyphilis at any stage: meningeal syphilis (headache, neck stiffness, cranial nerve involvement, seizures, mental status change), meningovascular syphilis (stroke syndrome in a relatively young adult), or late parenchymatous disease (general paresis, tabes dorsalis) (Harrison 22e p.1432)",
-   "Ocular syphilis (uveitis, iritis, optic neuritis, pupillary abnormalities)—permanent blindness may result without prompt diagnosis and treatment (Harrison 22e p.1431)",
-   "Otic syphilis (sensorineural hearing loss, vertigo, tinnitus)—deafness may result if untreated (Harrison 22e p.1431)",
-   "Cardiovascular syphilis: aortitis with aortic regurgitation, saccular aneurysm of the ascending aorta, or coronary ostial stenosis (Harrison 22e p.1432)",
-   "Maternal syphilis in pregnancy: high risk of fetal loss, stillbirth, prematurity, neonatal death, and congenital syphilis (Harrison 22e p.1432)",
-   "Serum RPR titer >=1:32 marks higher risk of neurosyphilis (Harrison 22e p.1432, p.1434)"
-  ],
-  "prognosis": "Untreated primary and secondary lesions resolve spontaneously, but infection persists. In the preantibiotic era about one-third of untreated patients with latent infection progressed to tertiary disease; the Tuskegee Study showed untreated syphilis raised the death rate ~17%, largely from cardiovascular disease. With early treatment, prognosis is excellent and tertiary syphilis is now nearly eliminated in Western countries; the clinical response to therapy for benign tertiary (gumma) disease is usually impressive. Congenital syphilis prognosis is poor when fulminant disease is clinically apparent at birth, but adequate maternal treatment before the 16th week of pregnancy should prevent fetal damage. Response to therapy is monitored by a fourfold decline in VDRL/RPR titer (Harrison 22e p.1430, p.1432, p.1435).",
-  "pitfalls": [
-   "Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that becomes reactive only on dilution—a falsely negative screen if dilution is not performed (Harrison 22e p.1433).",
-   "Primary syphilis is often missed in women and in MSM because chancres on the cervix, vaginal wall, anal canal, rectum, or mouth go unseen; atypical or trivial dark-field-negative genital lesions should still prompt consideration of syphilis (Harrison 22e p.1430).",
-   "Both lipoidal and treponemal tests may be nonreactive in early primary syphilis; an early primary ulcer can present with nonreactive serology, so negative serology does not exclude it (Harrison 22e p.1431-1433).",
-   "Biological false-positive lipoidal tests occur (usually titer <=1:8, e.g., in autoimmune disease or injection drug use); a nonreactive treponemal test excludes syphilis in this setting (Harrison 22e p.1433-1434).",
-   "Treponemal tests usually remain reactive for life after treatment and cannot distinguish active from past infection or gauge response to therapy (Harrison 22e p.1433, p.1435).",
-   "CSF VDRL is highly specific but insensitive—it may be nonreactive even in symptomatic neurosyphilis—and RPR must not be substituted for VDRL on CSF (Harrison 22e p.1434).",
-   "Benzathine penicillin does not achieve treponemicidal levels in CSF even at high doses, so it is inadequate for neurosyphilis and viable T. pallidum has been recovered from CSF after such treatment (Harrison 22e p.1434).",
-   "Syphilis is a 'great imitator': its protean mucocutaneous and systemic features overlap with many other diseases, so it must be considered broadly (Harrison 22e p.1430-1431)."
-  ],
-  "severityClassification": "Disease is described by clinical stage rather than a graded severity score: primary syphilis (chancre with regional lymphadenopathy); secondary syphilis (generalized mucocutaneous rash including palms and soles, condylomata lata, mucous patches, constitutional symptoms); latent syphilis (reactive serology, normal CSF, no clinical signs; early latent <1 year vs late latent >=1 year or unknown duration); tertiary/late syphilis (gumma, cardiovascular syphilis, late neurosyphilis). Neurosyphilis spans a continuum: early (asymptomatic meningitis, meningeal and meningovascular syphilis) and late parenchymatous disease (general paresis, tabes dorsalis). Congenital syphilis is divided into early (within first 2 years) and late (after 2 years) (Harrison 22e p.1428, p.1431-1433).",
-  "references": [
-   "Harrison 22e p.1428-1436"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged course for late latent infection",
-   "Intravenous aqueous crystalline (or intramuscular procaine) penicillin for neurosyphilis, ocular or otic disease",
-   "Doxycycline as an alternative in non-pregnant penicillin-allergic patients, with penicillin desensitisation in pregnancy as penicillin remains the only reliable agent",
-   "Counsel on the self-limiting Jarisch-Herxheimer reaction that may follow the first dose",
-   "Serological follow-up with quantitative non-treponemal titres to confirm response and detect treatment failure or reinfection",
-   "Partner notification, contact tracing, and presumptive treatment of sexual contacts",
-   "Test for HIV and other sexually transmitted infections, with repeat HIV testing where appropriate"
-  ]
- },
- "algorithms": [
-  {
-   "id": "syphilis-pathway",
-   "title": "Syphilis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of active disease separated by asymptomatic latent periods (Harrison 22e p.1428).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurosyphilis at any stage: meningeal syphilis (headache, neck stiffness, cranial nerve involvement, seizures, mental status change), meningovascular syphilis (stroke syndrome in a relatively young adult), or",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA) (Harrison 22e p.1433), Treponemal EIA/CIA automated assays as screening tests in large"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged course for late latent infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that becomes reactive only on dilution - a falsely negative screen if dilution is not"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syphilis."
-  }
- ],
- "tables": [
-  {
-   "id": "syphilis-matrix",
-   "title": "Syphilis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1428-1436",
+    "clinicalPearls": [
+      "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of active disease separated by asymptomatic latent periods (Harrison 22e p.1428).",
+      "Staging is the organizing framework: a primary chancre at the site of inoculation, then generalized secondary mucocutaneous disease, followed by latency, and in a minority of untreated patients tertiary disease (gumma, cardiovascular, late neurosyphilis) (Harrison 22e p.1428, p.1430).",
+      "Primary chancre is typically a single painless papule that erodes into an indurated ulcer with a firm cartilaginous edge; it is accompanied by regional (usually inguinal) lymphadenopathy that is firm, nonsuppurative, and painless, and heals spontaneously in about 4-6 weeks (Harrison 22e p.1430).",
+      "Secondary syphilis classically produces a widespread macular-to-papular, nonpruritic rash that frequently involves the palms and soles, plus generalized nontender lymphadenopathy (noted in ~85% of patients) (Harrison 22e p.1430-1431).",
+      "Condylomata lata (broad, moist, highly infectious lesions in intertriginous areas, ~10% of secondary cases) and mucous patches (painless silver-gray erosions of oral/genital mucosa) are characteristic secondary lesions (Harrison 22e p.1431).",
+      "Latent syphilis is defined by reactive serology with a normal CSF and no clinical manifestations; early latent is within the first year, late latent is >=1 year or of unknown duration (Harrison 22e p.1431).",
+      "Two classes of serologic tests: lipoidal (nontreponemal) RPR/VDRL, which are quantitative and reflect disease activity, and treponemal tests (FTA-ABS, TPPA, EIA/CIA); a reactive lipoidal screen must be confirmed by a treponemal test (Harrison 22e p.1433).",
+      "RPR is preferred for rapid serologic diagnosis; the VDRL remains the standard for CSF examination and is superior to RPR for that purpose (Harrison 22e p.1433-1434).",
+      "After treatment of early syphilis a fourfold (two-dilution) fall in VDRL/RPR titer (e.g., 1:32 to 1:8) signals adequate response; treponemal tests typically remain reactive and are not useful for monitoring therapy (Harrison 22e p.1433, p.1435).",
+      "Penicillin is the drug of choice for all stages as a principle; its efficacy against T. pallidum remains undiminished after decades of use (Harrison 22e p.1434).",
+      "Jarisch-Herxheimer reaction (fever, chills, myalgia, headache, tachycardia) may follow the start of therapy, thought to be a response to lipoproteins released by dying treponemes; it occurs in ~50% of primary and ~90% of secondary cases, defervesces within 12-24 h, is self-limited, and does not require steroids (Harrison 22e p.1435).",
+      "Earliest manifestations of early congenital syphilis include rhinitis ('snuffles'), mucocutaneous lesions, periostitis/bone changes, and hepatosplenomegaly; classic late stigmata include Hutchinson's teeth, mulberry molars, saddle nose, and saber shins (Harrison 22e p.1432-1433)."
     ],
-    [
-     "Key Investigations",
-     "RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Treponema pallidum subsp. pallidum is a thin spiral organism with a lipid-rich outer membrane and periplasmic endoflagella that drive motility; it has severely limited metabolic capacity and depends on host amino acids, carbohydrates, and lipids. Humans are the only known natural host. After penetrating intact mucous membranes or skin abrasions, treponemes reach the lymphatics and blood within hours, producing systemic dissemination and metastatic foci well before the primary lesion appears (median incubation ~21 days, rarely >6 weeks). Tissue damage reflects the host immune response rather than a direct treponemal toxin: lesions show perivascular infiltration by CD4+ and CD8+ T cells, plasma cells, and macrophages with endarteritis obliterans (obliteration of small vessels). Antigenic variation of the TprK outer-membrane protein allows immune evasion and persistence, explaining the paradoxical appearance of secondary lesions after primary lesions clear. Tertiary lesions (gumma, aortitis of the vasa vasorum of the ascending aorta, parenchymal neurosyphilis) arise from a slowly progressive inflammatory process that begins early in infection (Harrison 22e p.1428-1430, p.1432).",
+    "additionalDifferentials": [
+      "Primary chancre vs herpes simplex virus genital ulceration (Harrison 22e p.1430)",
+      "Primary chancre vs chancroid (Harrison 22e p.1430)",
+      "Primary chancre vs donovanosis (granuloma inguinale) (Harrison 22e p.1430)",
+      "Primary chancre vs traumatic genital injury (Harrison 22e p.1430)",
+      "Neonatal congenital syphilis vs rubella, cytomegalovirus, herpes simplex, toxoplasmosis, and erythroblastosis fetalis (Harrison 22e p.1432)"
     ],
-    [
-     "Primary Differentials",
-     "Primary chancre vs herpes simplex virus genital ulceration (Harrison 22e p.1430), Primary chancre vs chancroid (Harrison 22e",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Genital herpes simplex virus infection (Harrison 22e p.1430)",
+      "Chancroid (Harrison 22e p.1430)",
+      "Donovanosis (Harrison 22e p.1430)",
+      "Other treponemal infections (yaws, pinta, bejel) that also give reactive treponemal serology (Harrison 22e p.1433)"
     ],
-    [
-     "Management Strategy",
-     "Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Traumatic genital injury mimicking a primary chancre (Harrison 22e p.1430)",
+      "Rectosigmoid mass of secondary syphilis mistaken for malignancy (Harrison 22e p.1431)",
+      "Ocular syphilis (uveitis/iritis) mistaken for non-infectious uveitis when it fails to respond to topical steroids (Harrison 22e p.1431)"
     ],
-    [
-     "Clinical Pitfall",
-     "Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA) (Harrison 22e p.1433)",
+      "Treponemal EIA/CIA automated assays as screening tests in large laboratories, with reflex TPPA confirmation (Harrison 22e p.1433-1434)",
+      "Dark-field microscopy or direct fluorescent antibody of moist lesions to demonstrate T. pallidum (rarely available outside research settings) (Harrison 22e p.1433)",
+      "PCR of lesion swabs, tissue, blood, CSF, ocular fluid, urine, or oropharyngeal/rectal swabs (not commercially available; in-house validated assays) (Harrison 22e p.1433)",
+      "CSF examination (mononuclear pleocytosis >5/uL, protein >45 mg/dL, CSF VDRL) for suspected neurosyphilis; CSF VDRL is highly specific but insensitive (Harrison 22e p.1432, p.1434)",
+      "HIV testing in all patients with newly diagnosed syphilis (Harrison 22e p.1434)"
+    ],
+    "redFlags": [
+      "Neurosyphilis at any stage: meningeal syphilis (headache, neck stiffness, cranial nerve involvement, seizures, mental status change), meningovascular syphilis (stroke syndrome in a relatively young adult), or late parenchymatous disease (general paresis, tabes dorsalis) (Harrison 22e p.1432)",
+      "Ocular syphilis (uveitis, iritis, optic neuritis, pupillary abnormalities)—permanent blindness may result without prompt diagnosis and treatment (Harrison 22e p.1431)",
+      "Otic syphilis (sensorineural hearing loss, vertigo, tinnitus)—deafness may result if untreated (Harrison 22e p.1431)",
+      "Cardiovascular syphilis: aortitis with aortic regurgitation, saccular aneurysm of the ascending aorta, or coronary ostial stenosis (Harrison 22e p.1432)",
+      "Maternal syphilis in pregnancy: high risk of fetal loss, stillbirth, prematurity, neonatal death, and congenital syphilis (Harrison 22e p.1432)",
+      "Serum RPR titer >=1:32 marks higher risk of neurosyphilis (Harrison 22e p.1432, p.1434)"
+    ],
+    "prognosis": "Untreated primary and secondary lesions resolve spontaneously, but infection persists. In the preantibiotic era about one-third of untreated patients with latent infection progressed to tertiary disease; the Tuskegee Study showed untreated syphilis raised the death rate ~17%, largely from cardiovascular disease. With early treatment, prognosis is excellent and tertiary syphilis is now nearly eliminated in Western countries; the clinical response to therapy for benign tertiary (gumma) disease is usually impressive. Congenital syphilis prognosis is poor when fulminant disease is clinically apparent at birth, but adequate maternal treatment before the 16th week of pregnancy should prevent fetal damage. Response to therapy is monitored by a fourfold decline in VDRL/RPR titer (Harrison 22e p.1430, p.1432, p.1435).",
+    "pitfalls": [
+      "Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that becomes reactive only on dilution—a falsely negative screen if dilution is not performed (Harrison 22e p.1433).",
+      "Primary syphilis is often missed in women and in MSM because chancres on the cervix, vaginal wall, anal canal, rectum, or mouth go unseen; atypical or trivial dark-field-negative genital lesions should still prompt consideration of syphilis (Harrison 22e p.1430).",
+      "Both lipoidal and treponemal tests may be nonreactive in early primary syphilis; an early primary ulcer can present with nonreactive serology, so negative serology does not exclude it (Harrison 22e p.1431-1433).",
+      "Biological false-positive lipoidal tests occur (usually titer <=1:8, e.g., in autoimmune disease or injection drug use); a nonreactive treponemal test excludes syphilis in this setting (Harrison 22e p.1433-1434).",
+      "Treponemal tests usually remain reactive for life after treatment and cannot distinguish active from past infection or gauge response to therapy (Harrison 22e p.1433, p.1435).",
+      "CSF VDRL is highly specific but insensitive—it may be nonreactive even in symptomatic neurosyphilis—and RPR must not be substituted for VDRL on CSF (Harrison 22e p.1434).",
+      "Benzathine penicillin does not achieve treponemicidal levels in CSF even at high doses, so it is inadequate for neurosyphilis and viable T. pallidum has been recovered from CSF after such treatment (Harrison 22e p.1434).",
+      "Syphilis is a 'great imitator': its protean mucocutaneous and systemic features overlap with many other diseases, so it must be considered broadly (Harrison 22e p.1430-1431)."
+    ],
+    "severityClassification": "Disease is described by clinical stage rather than a graded severity score: primary syphilis (chancre with regional lymphadenopathy); secondary syphilis (generalized mucocutaneous rash including palms and soles, condylomata lata, mucous patches, constitutional symptoms); latent syphilis (reactive serology, normal CSF, no clinical signs; early latent <1 year vs late latent >=1 year or unknown duration); tertiary/late syphilis (gumma, cardiovascular syphilis, late neurosyphilis). Neurosyphilis spans a continuum: early (asymptomatic meningitis, meningeal and meningovascular syphilis) and late parenchymatous disease (general paresis, tabes dorsalis). Congenital syphilis is divided into early (within first 2 years) and late (after 2 years) (Harrison 22e p.1428, p.1431-1433).",
+    "references": [
+      "Harrison 22e p.1428-1436"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged course for late latent infection",
+      "Intravenous aqueous crystalline (or intramuscular procaine) penicillin for neurosyphilis, ocular or otic disease",
+      "Doxycycline as an alternative in non-pregnant penicillin-allergic patients, with penicillin desensitisation in pregnancy as penicillin remains the only reliable agent",
+      "Counsel on the self-limiting Jarisch-Herxheimer reaction that may follow the first dose",
+      "Serological follow-up with quantitative non-treponemal titres to confirm response and detect treatment failure or reinfection",
+      "Partner notification, contact tracing, and presumptive treatment of sexual contacts",
+      "Test for HIV and other sexually transmitted infections, with repeat HIV testing where appropriate"
     ]
-   ],
-   "caption": "Overview comparison matrix for syphilis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syphilis-real-image",
-   "title": "Syphilis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "syphilis-pathway",
+      "title": "Syphilis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of active disease separated by asymptomatic latent periods (Harrison 22e p.1428).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurosyphilis at any stage: meningeal syphilis (headache, neck stiffness, cranial nerve involvement, seizures, mental status change), meningovascular syphilis (stroke syndrome in a relatively young adult), or",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA) (Harrison 22e p.1433), Treponemal EIA/CIA automated assays as screening tests in large"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged course for late latent infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that becomes reactive only on dilution - a falsely negative screen if dilution is not"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syphilis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syphilis-matrix",
+      "title": "Syphilis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chronic systemic infection by Treponema pallidum subsp. pallidum, usually sexually transmitted, characterized by episodes of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RPR or VDRL lipoidal (nontreponemal) serology for screening and quantitation, confirmed by a treponemal test (FTA-ABS or TPPA)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary chancre vs herpes simplex virus genital ulceration (Harrison 22e p.1430), Primary chancre vs chancroid (Harrison 22e",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stage-directed parenteral penicillin is the treatment of choice, with benzathine penicillin for early disease and a prolonged",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prozone phenomenon: a high-titer specimen may give a nonreactive or only weakly reactive lipoidal test with undiluted serum that",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syphilis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "CDC STI Treatment Guidelines 2021, Syphilis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/syphilis.htm"
+    },
+    {
+      "id": "c4",
+      "label": "CDC STI Treatment Guidelines 2021, Primary and Secondary Syphilis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/p-and-s-syphilis.htm"
+    },
+    {
+      "id": "c5",
+      "label": "CDC STI Treatment Guidelines 2021, Latent Syphilis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/latent-syphilis.htm"
+    },
+    {
+      "id": "c6",
+      "label": "CDC STI Treatment Guidelines 2021, Neurosyphilis, Ocular and Otosyphilis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/neurosyphilis.htm"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syphilis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing syphilis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Two-test serology",
+          "cells": [
+            {
+              "text": "Nontreponemal (RPR or VDRL) plus treponemal (TP-PA, EIA, CIA)"
+            },
+            {
+              "text": "{{hy:One test type alone is not enough}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reverse algorithm discordance",
+          "cells": [
+            {
+              "text": "Treponemal positive, RPR negative"
+            },
+            {
+              "text": "Second treponemal test (TP-PA) adjudicates"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chancre",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Usually single, 5 to 15 mm, firm, painless; incubation 9 to 90 days",
+              "range": [
+                5,
+                15
+              ]
+            },
+            {
+              "text": "Firm nontender bilateral nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early primary serology",
+          "cells": [
+            {
+              "text": "Both tests may be nonreactive"
+            },
+            {
+              "text": "Negative serology does not exclude early chancre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prozone",
+          "cells": [
+            {
+              "text": "Very high titre gives false negative undiluted"
+            },
+            {
+              "text": "Ask lab to dilute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latent stage",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Early latent under 1 year; late latent 1 year or more or unknown",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Sets treatment length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF-VDRL",
+          "cells": [
+            {
+              "text": "Reactive in patient with neuro signs"
+            },
+            {
+              "text": "Diagnostic of neurosyphilis; specific but insensitive"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF white cells in HIV",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": "Over 20 cells/mm3 improves specificity",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Over 5 is common in HIV"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treatment response",
+          "unit": "fold",
+          "cells": [
+            {
+              "text": "Fourfold (two-dilution) fall in nontreponemal titre within 12 months",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "10 to 20% never reach this"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "syphilis-ddx",
+      "kind": "ddx",
+      "title": "Genital ulcers and other syphilis mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Genital herpes",
+          "cells": [
+            {
+              "text": "Multiple 1 to 2 mm tender vesicles, incubation 2 to 7 days"
+            },
+            {
+              "text": "HSV PCR of lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chancroid",
+          "cells": [
+            {
+              "text": "Very tender, ragged undermined purulent ulcers; suppurating unilateral node"
+            },
+            {
+              "text": "Culture or exclusion of syphilis and HSV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphogranuloma venereum",
+          "cells": [
+            {
+              "text": "Small often unnoticed ulcer, tender loculated node"
+            },
+            {
+              "text": "Chlamydia NAAT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Donovanosis",
+          "cells": [
+            {
+              "text": "Red velvety ulcer that bleeds; pseudobuboes, no true nodes"
+            },
+            {
+              "text": "Tissue smear for Donovan bodies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Traumatic genital ulcer",
+          "cells": [
+            {
+              "text": "History of injury"
+            },
+            {
+              "text": "Negative serology on follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-infectious uveitis",
+          "cells": [
+            {
+              "text": "Ocular syphilis fails topical steroids"
+            },
+            {
+              "text": "Syphilis serology in all uveitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syphilis-treatment",
+      "kind": "treatment",
+      "title": "Treating syphilis (CDC 2021)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzathine penicillin G 2.4 million units IM once",
+          "cells": [
+            {
+              "text": "Primary, secondary, early latent"
+            },
+            {
+              "text": "Extra doses add nothing"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Benzathine penicillin G 2.4 million units IM weekly x3",
+          "cells": [
+            {
+              "text": "Late latent or unknown duration"
+            },
+            {
+              "text": "7.2 million units total"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Doxycycline 100 mg twice daily",
+          "cells": [
+            {
+              "text": "Penicillin allergy, not pregnant"
+            },
+            {
+              "text": "14 days early syphilis; 28 days late latent"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Tetracycline 500 mg four times daily",
+          "cells": [
+            {
+              "text": "Penicillin allergy alternative"
+            },
+            {
+              "text": "14 days early; 28 days late latent"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Ceftriaxone",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "1 g daily for 10 days in early syphilis; optimal dose not defined"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Aqueous penicillin G IV",
+          "cells": [
+            {
+              "text": "Neurosyphilis, ocular or otosyphilis"
+            },
+            {
+              "text": "18 to 24 million units/day (3 to 4 MU every 4 h) for 10 to 14 days"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Procaine penicillin plus probenecid",
+          "cells": [
+            {
+              "text": "Neurosyphilis alternative if adherence assured"
+            },
+            {
+              "text": "2.4 MU IM daily plus probenecid 500 mg four times daily, 10 to 14 days"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Desensitise and give penicillin",
+          "cells": [
+            {
+              "text": "Pregnancy with penicillin allergy"
+            },
+            {
+              "text": "{{hy:Penicillin is the only proven therapy in pregnancy}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Macrolide resistance and failures"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Warn about Jarisch-Herxheimer reaction within 24 h of the first dose; it is not an allergy. Follow up clinically and with titres at 6 and 12 months."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syphilis-dx-mgmt",
+      "title": "Diagnosis and management of syphilis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Genital ulcer, rash, exposure or positive screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Nontreponemal plus treponemal serology",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Both tests reactive?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Discordant: second treponemal test; repeat if early chancre",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neurological, ocular or otic signs?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "IV aqueous penicillin 10 to 14 days; CSF if cranial nerve signs",
+          "cite": "c6"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Primary, secondary or early latent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzathine penicillin 2.4 MU IM once",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzathine penicillin 2.4 MU IM weekly for 3 weeks",
+          "cite": "c5"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Titres at 6 and 12 months; treat partners",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Fourfold titre rise or persisting signs?",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Failure or reinfection: CSF exam, retreat",
+          "cite": "c4"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Responded: routine follow-up",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,459 @@
 {
- "id": "subglottic_hemangioma",
- "name": "Subglottic haemangioma",
- "aliases": [
-  "infantile subglottic haemangioma",
-  "subglottic hemangioma",
-  "congenital subglottic haemangioma"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the typical proliferate-then-involute natural history",
-   "Presents in the first months of life with biphasic stridor and a barky cough, often initially misdiagnosed as croup",
-   "Symptoms characteristically worsen during the proliferative phase and with intercurrent upper respiratory infection or crying",
-   "A cutaneous haemangioma in a beard distribution should raise suspicion of airway involvement and prompt endoscopy",
-   "Large segmental facial haemangiomas may be part of PHACE association, warranting broader evaluation",
-   "Endoscopy typically reveals a compressible, often asymmetrical, reddish or bluish submucosal swelling, usually on the left posterolateral subglottis",
-   "Propranolol has become the mainstay of medical treatment, with surgery or airway support reserved for selected or resistant cases"
+  "id": "subglottic_hemangioma",
+  "name": "Subglottic haemangioma",
+  "aliases": [
+    "infantile subglottic haemangioma",
+    "subglottic hemangioma",
+    "congenital subglottic haemangioma"
   ],
-  "pathophysiology": "A subglottic haemangioma is an infantile haemangioma, a benign proliferation of endothelial cells, located in the submucosa of the subglottic airway. Like cutaneous infantile haemangiomas it is typically absent or minimal at birth, proliferates over the first months of life, and then slowly involutes over subsequent years. During proliferation the lesion enlarges and encroaches on the already narrow infant subglottis, and because this is the least distensible part of the paediatric airway even modest swelling produces significant obstruction and biphasic stridor. Mucosal engorgement with crying or infection transiently worsens the narrowing, and spontaneous regression during the involutional phase underlies the tendency for symptoms to abate with time.",
-  "additionalDifferentials": [
-   "Croup (laryngotracheobronchitis)",
-   "Subglottic stenosis",
-   "Laryngomalacia",
-   "Subglottic cyst",
-   "Recurrent respiratory papillomatosis",
-   "Vascular malformation or other airway tumour"
-  ],
-  "additionalInvestigations": [
-   "Flexible fibreoptic laryngoscopy for initial airway assessment",
-   "Rigid endoscopy under anaesthesia, the key investigation to confirm a compressible subglottic vascular lesion",
-   "MRI to define the extent of a segmental or transspatial lesion",
-   "Cardiac, cerebrovascular, and ophthalmological evaluation where PHACE association is suspected",
-   "Examination of the skin for cutaneous haemangiomas in a beard distribution"
-  ],
-  "redFlags": [
-   "Increasing biphasic stridor and respiratory distress during the proliferative phase",
-   "A beard-distribution cutaneous haemangioma indicating likely airway involvement",
-   "Features suggesting PHACE association requiring cardiovascular and intracranial assessment",
-   "Recurrent 'croup' that fails to resolve as expected, prompting airway endoscopy"
-  ],
-  "prognosis": "The natural history is favourable because the lesion ultimately involutes, and with propranolol many infants avoid surgery and do well; the risk lies in airway obstruction during the proliferative phase, so timely diagnosis and treatment are important.",
-  "pitfalls": [
-   "Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma",
-   "Overlooking the beard-distribution skin clue to airway involvement",
-   "Failing to evaluate for PHACE association before commencing systemic treatment",
-   "Assuming spontaneous involution is safe without controlling airway obstruction during proliferation"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral propranolol is first-line to accelerate involution and relieve airway obstruction",
-   "Screen for PHACE association and perform baseline cardiovascular assessment before starting propranolol, then monitor for bradycardia and hypoglycaemia",
-   "Systemic or intralesional corticosteroids as an alternative or adjunct where beta-blockade is contraindicated or insufficient",
-   "Endoscopic intervention such as laser ablation, or open surgical excision, for lesions refractory to medical therapy",
-   "Secure the airway during the proliferative phase, reserving tracheostomy for severe obstruction unresponsive to other measures",
-   "Serial airway endoscopy to monitor response, with cautious weaning of propranolol after involution while watching for rebound growth",
-   "Manage within a paediatric otolaryngology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subglottic_hemangioma-pathway",
-   "title": "Subglottic haemangioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the typical proliferate-then-involute natural history",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Increasing biphasic stridor and respiratory distress during the proliferative phase",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible fibreoptic laryngoscopy for initial airway assessment, Rigid endoscopy under anaesthesia, the key investigation to confirm a compressible subglottic vascular lesion, MRI to define the extent of a segmental or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral propranolol is first-line to accelerate involution and relieve airway obstruction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subglottic haemangioma."
-  }
- ],
- "tables": [
-  {
-   "id": "subglottic_hemangioma-matrix",
-   "title": "Subglottic haemangioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the typical proliferate-then-involute natural history",
+      "Presents in the first months of life with biphasic stridor and a barky cough, often initially misdiagnosed as croup",
+      "Symptoms characteristically worsen during the proliferative phase and with intercurrent upper respiratory infection or crying",
+      "A cutaneous haemangioma in a beard distribution should raise suspicion of airway involvement and prompt endoscopy",
+      "Large segmental facial haemangiomas may be part of PHACE association, warranting broader evaluation",
+      "Endoscopy typically reveals a compressible, often asymmetrical, reddish or bluish submucosal swelling, usually on the left posterolateral subglottis",
+      "Propranolol has become the mainstay of medical treatment, with surgery or airway support reserved for selected or resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Flexible fibreoptic laryngoscopy for initial airway assessment, Rigid endoscopy under anaesthesia, the key investigation to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A subglottic haemangioma is an infantile haemangioma, a benign proliferation of endothelial cells, located in the submucosa of the subglottic airway. Like cutaneous infantile haemangiomas it is typically absent or minimal at birth, proliferates over the first months of life, and then slowly involutes over subsequent years. During proliferation the lesion enlarges and encroaches on the already narrow infant subglottis, and because this is the least distensible part of the paediatric airway even modest swelling produces significant obstruction and biphasic stridor. Mucosal engorgement with crying or infection transiently worsens the narrowing, and spontaneous regression during the involutional phase underlies the tendency for symptoms to abate with time.",
+    "additionalDifferentials": [
+      "Croup (laryngotracheobronchitis)",
+      "Subglottic stenosis",
+      "Laryngomalacia",
+      "Subglottic cyst",
+      "Recurrent respiratory papillomatosis",
+      "Vascular malformation or other airway tumour"
     ],
-    [
-     "Primary Differentials",
-     "Croup (laryngotracheobronchitis), Subglottic stenosis, Laryngomalacia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible fibreoptic laryngoscopy for initial airway assessment",
+      "Rigid endoscopy under anaesthesia, the key investigation to confirm a compressible subglottic vascular lesion",
+      "MRI to define the extent of a segmental or transspatial lesion",
+      "Cardiac, cerebrovascular, and ophthalmological evaluation where PHACE association is suspected",
+      "Examination of the skin for cutaneous haemangiomas in a beard distribution"
     ],
-    [
-     "Management Strategy",
-     "Oral propranolol is first-line to accelerate involution and relieve airway obstruction",
-     "Core treatment modality"
+    "redFlags": [
+      "Increasing biphasic stridor and respiratory distress during the proliferative phase",
+      "A beard-distribution cutaneous haemangioma indicating likely airway involvement",
+      "Features suggesting PHACE association requiring cardiovascular and intracranial assessment",
+      "Recurrent 'croup' that fails to resolve as expected, prompting airway endoscopy"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is favourable because the lesion ultimately involutes, and with propranolol many infants avoid surgery and do well; the risk lies in airway obstruction during the proliferative phase, so timely diagnosis and treatment are important.",
+    "pitfalls": [
+      "Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma",
+      "Overlooking the beard-distribution skin clue to airway involvement",
+      "Failing to evaluate for PHACE association before commencing systemic treatment",
+      "Assuming spontaneous involution is safe without controlling airway obstruction during proliferation"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral propranolol is first-line to accelerate involution and relieve airway obstruction",
+      "Screen for PHACE association and perform baseline cardiovascular assessment before starting propranolol, then monitor for bradycardia and hypoglycaemia",
+      "Systemic or intralesional corticosteroids as an alternative or adjunct where beta-blockade is contraindicated or insufficient",
+      "Endoscopic intervention such as laser ablation, or open surgical excision, for lesions refractory to medical therapy",
+      "Secure the airway during the proliferative phase, reserving tracheostomy for severe obstruction unresponsive to other measures",
+      "Serial airway endoscopy to monitor response, with cautious weaning of propranolol after involution while watching for rebound growth",
+      "Manage within a paediatric otolaryngology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for subglottic haemangioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subglottic-hemangioma-real-image",
-   "title": "Subglottic haemangioma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "subglottic_hemangioma-pathway",
+      "title": "Subglottic haemangioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the typical proliferate-then-involute natural history",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Increasing biphasic stridor and respiratory distress during the proliferative phase",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible fibreoptic laryngoscopy for initial airway assessment, Rigid endoscopy under anaesthesia, the key investigation to confirm a compressible subglottic vascular lesion, MRI to define the extent of a segmental or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral propranolol is first-line to accelerate involution and relieve airway obstruction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subglottic haemangioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subglottic_hemangioma-matrix",
+      "title": "Subglottic haemangioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of a vascular subglottic mass in infancy, being an infantile haemangioma of the subglottis that follows the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible fibreoptic laryngoscopy for initial airway assessment, Rigid endoscopy under anaesthesia, the key investigation to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Croup (laryngotracheobronchitis), Subglottic stenosis, Laryngomalacia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral propranolol is first-line to accelerate involution and relieve airway obstruction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly diagnosing recurrent croup and missing an underlying subglottic haemangioma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subglottic haemangioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subglottic_hemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Initial airway assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigid endoscopy under anaesthesia",
+          "cells": [
+            {
+              "text": "Compressible subglottic vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Extent of segmental or transspatial lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination for beard-distribution haemangioma",
+          "cells": [
+            {
+              "text": "Likely airway involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac, cerebrovascular and eye evaluation",
+          "cells": [
+            {
+              "text": "PHACE association suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subglottic_hemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Croup (laryngotracheobronchitis)",
+          "cells": [
+            {
+              "text": "Biphasic stridor that mimics the haemangioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subglottic stenosis",
+          "cells": [
+            {
+              "text": "Fixed narrowing rather than a compressible swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngomalacia",
+          "cells": [
+            {
+              "text": "Dynamic airway collapse in infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subglottic_hemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral propranolol",
+          "cells": [
+            {
+              "text": "First-line to accelerate involution and relieve obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline cardiovascular assessment",
+          "cells": [
+            {
+              "text": "Before propranolol, with monitoring for bradycardia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Where beta-blockade is contraindicated or insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser ablation or open excision",
+          "cells": [
+            {
+              "text": "Lesions refractory to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway securing during proliferation",
+          "cells": [
+            {
+              "text": "Tracheostomy reserved for severe obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial airway endoscopy",
+          "cells": [
+            {
+              "text": "Monitor response and wean propranolol after involution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric otolaryngology team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subglottic_hemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Subglottic haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Biphasic stridor and barky cough in an infant: suspected subglottic haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (worsening stridor, beard haemangioma, facial segmental lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment and securing for worsening respiratory distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible laryngoscopy; rigid endoscopy under anaesthesia; MRI; skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a compressible subglottic vascular swelling seen on endoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider croup, subglottic stenosis or laryngomalacia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral propranolol as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cardiovascular baseline and monitoring for bradycardia and hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids where beta-blockade is contraindicated or insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laser or open excision for lesions refractory to medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often involutes with time; airway obstruction during proliferation is the risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

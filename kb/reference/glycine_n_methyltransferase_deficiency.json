@@ -1,175 +1,453 @@
 {
- "id": "glycine_n_methyltransferase_deficiency",
- "name": "Glycine N-methyltransferase deficiency",
- "aliases": [
-  "GNMT deficiency",
-  "glycine methyltransferase deficiency",
-  "hypermethioninaemia due to GNMT deficiency",
-  "GNMT"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to S-adenosylhomocysteine by using surplus SAM to methylate glycine to sarcosine",
-   "Presents as mild persistent hypermethioninaemia, typically with a characteristically raised rather than low S-adenosylmethionine",
-   "The elevated SAM contrasts with MAT I/III deficiency, in which SAM is normal or low, and is a useful discriminator",
-   "Mild chronic hepatopathy with modestly raised transaminases is the usual clinical finding",
-   "Overall a benign disorder; serious neurological or hepatic decompensation is not characteristic",
-   "Total homocysteine is normal, helping to exclude the remethylation defects and classical homocystinuria",
-   "Diagnosis is by plasma amino acids, SAM/SAH measurement and GNMT gene sequencing",
-   "No specific treatment is generally required, though a moderately methionine-restricted diet has been used empirically"
+  "id": "glycine_n_methyltransferase_deficiency",
+  "name": "Glycine N-methyltransferase deficiency",
+  "aliases": [
+    "GNMT deficiency",
+    "glycine methyltransferase deficiency",
+    "hypermethioninaemia due to GNMT deficiency",
+    "GNMT"
   ],
-  "pathophysiology": "Glycine N-methyltransferase provides a regulatory outlet for excess S-adenosylmethionine, transferring a methyl group to glycine to form sarcosine and thereby preventing SAM accumulation and maintaining the SAM to S-adenosylhomocysteine ratio that governs cellular methylation. When the enzyme is deficient, this buffering capacity is lost, so S-adenosylmethionine and, secondarily, methionine accumulate. The high SAM and disturbed methylation balance are thought to underlie the mild liver involvement, but most methylation-dependent processes remain adequate, which accounts for the generally benign clinical picture.",
-  "additionalDifferentials": [
-   "Methionine adenosyltransferase I/III deficiency",
-   "S-adenosylhomocysteine hydrolase deficiency",
-   "Adenosine kinase deficiency",
-   "Classical homocystinuria with secondary hypermethioninaemia",
-   "Hepatic dysfunction from other causes producing raised methionine and transaminases",
-   "High dietary methionine or protein intake"
-  ],
-  "additionalInvestigations": [
-   "Plasma amino acids showing mildly raised methionine",
-   "S-adenosylmethionine measurement, expected to be elevated",
-   "S-adenosylhomocysteine measurement to distinguish AHCY deficiency",
-   "Plasma total homocysteine to exclude remethylation defects",
-   "Liver function tests to document mild hepatopathy",
-   "GNMT gene sequencing for confirmation"
-  ],
-  "redFlags": [
-   "Progressive or marked hepatic dysfunction, which is atypical and warrants an alternative explanation",
-   "Development of neurological signs, prompting reassessment of the diagnosis",
-   "Elevated S-adenosylhomocysteine, which would point towards AHCY deficiency instead",
-   "Rising homocysteine suggesting a coexisting remethylation problem"
-  ],
-  "prognosis": "The condition is benign with a favourable long-term outlook; the mild hepatopathy is generally stable and normal growth and development are expected.",
-  "pitfalls": [
-   "Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs",
-   "Attributing the raised transaminases to primary liver disease and initiating unnecessary hepatological workup",
-   "Imposing aggressive dietary restriction for a benign biochemical trait",
-   "Failing to exclude AHCY deficiency, a treatable disorder, by not checking S-adenosylhomocysteine"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Mudd SH. Hypermethioninemias of genetic and non-genetic origin",
-   "Luka Z et al. Glycine N-methyltransferase and regulation of S-adenosylmethionine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook",
-   "Consider modest dietary methionine restriction if the hypermethioninaemia is marked, guided by a metabolic dietitian",
-   "Monitor liver function periodically to document and follow the mild chronic hepatopathy",
-   "Confirm the diagnosis and distinguish it from other causes of hypermethioninaemia using S-adenosylmethionine, which is characteristically raised, together with S-adenosylhomocysteine and total homocysteine",
-   "Avoid unnecessary investigation or treatment once benign GNMT deficiency is established",
-   "Offer genetic counselling for autosomal recessive inheritance and recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glycine_n_methyltransferase_deficiency-pathway",
-   "title": "Glycine N-methyltransferase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to S-adenosylhomocysteine by using surplus SAM to methylate glycine to sarcosine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or marked hepatic dysfunction, which is atypical and warrants an alternative explanation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma amino acids showing mildly raised methionine, S-adenosylmethionine measurement, expected to be elevated, S-adenosylhomocysteine measurement to distinguish AHCY deficiency"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glycine n-methyltransferase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "glycine_n_methyltransferase_deficiency-matrix",
-   "title": "Glycine N-methyltransferase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to S-adenosylhomocysteine by using surplus SAM to methylate glycine to sarcosine",
+      "Presents as mild persistent hypermethioninaemia, typically with a characteristically raised rather than low S-adenosylmethionine",
+      "The elevated SAM contrasts with MAT I/III deficiency, in which SAM is normal or low, and is a useful discriminator",
+      "Mild chronic hepatopathy with modestly raised transaminases is the usual clinical finding",
+      "Overall a benign disorder; serious neurological or hepatic decompensation is not characteristic",
+      "Total homocysteine is normal, helping to exclude the remethylation defects and classical homocystinuria",
+      "Diagnosis is by plasma amino acids, SAM/SAH measurement and GNMT gene sequencing",
+      "No specific treatment is generally required, though a moderately methionine-restricted diet has been used empirically"
     ],
-    [
-     "Key Investigations",
-     "Plasma amino acids showing mildly raised methionine, S-adenosylmethionine measurement, expected to be elevated,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glycine N-methyltransferase provides a regulatory outlet for excess S-adenosylmethionine, transferring a methyl group to glycine to form sarcosine and thereby preventing SAM accumulation and maintaining the SAM to S-adenosylhomocysteine ratio that governs cellular methylation. When the enzyme is deficient, this buffering capacity is lost, so S-adenosylmethionine and, secondarily, methionine accumulate. The high SAM and disturbed methylation balance are thought to underlie the mild liver involvement, but most methylation-dependent processes remain adequate, which accounts for the generally benign clinical picture.",
+    "additionalDifferentials": [
+      "Methionine adenosyltransferase I/III deficiency",
+      "S-adenosylhomocysteine hydrolase deficiency",
+      "Adenosine kinase deficiency",
+      "Classical homocystinuria with secondary hypermethioninaemia",
+      "Hepatic dysfunction from other causes producing raised methionine and transaminases",
+      "High dietary methionine or protein intake"
     ],
-    [
-     "Primary Differentials",
-     "Methionine adenosyltransferase I/III deficiency, S-adenosylhomocysteine hydrolase deficiency, Adenosine kinase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma amino acids showing mildly raised methionine",
+      "S-adenosylmethionine measurement, expected to be elevated",
+      "S-adenosylhomocysteine measurement to distinguish AHCY deficiency",
+      "Plasma total homocysteine to exclude remethylation defects",
+      "Liver function tests to document mild hepatopathy",
+      "GNMT gene sequencing for confirmation"
     ],
-    [
-     "Management Strategy",
-     "Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or marked hepatic dysfunction, which is atypical and warrants an alternative explanation",
+      "Development of neurological signs, prompting reassessment of the diagnosis",
+      "Elevated S-adenosylhomocysteine, which would point towards AHCY deficiency instead",
+      "Rising homocysteine suggesting a coexisting remethylation problem"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign with a favourable long-term outlook; the mild hepatopathy is generally stable and normal growth and development are expected.",
+    "pitfalls": [
+      "Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs",
+      "Attributing the raised transaminases to primary liver disease and initiating unnecessary hepatological workup",
+      "Imposing aggressive dietary restriction for a benign biochemical trait",
+      "Failing to exclude AHCY deficiency, a treatable disorder, by not checking S-adenosylhomocysteine"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Mudd SH. Hypermethioninemias of genetic and non-genetic origin",
+      "Luka Z et al. Glycine N-methyltransferase and regulation of S-adenosylmethionine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook",
+      "Consider modest dietary methionine restriction if the hypermethioninaemia is marked, guided by a metabolic dietitian",
+      "Monitor liver function periodically to document and follow the mild chronic hepatopathy",
+      "Confirm the diagnosis and distinguish it from other causes of hypermethioninaemia using S-adenosylmethionine, which is characteristically raised, together with S-adenosylhomocysteine and total homocysteine",
+      "Avoid unnecessary investigation or treatment once benign GNMT deficiency is established",
+      "Offer genetic counselling for autosomal recessive inheritance and recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for glycine n-methyltransferase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glycine-n-methyltransferase-deficiency-real-image",
-   "title": "Glycine N-methyltransferase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "glycine_n_methyltransferase_deficiency-pathway",
+      "title": "Glycine N-methyltransferase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to S-adenosylhomocysteine by using surplus SAM to methylate glycine to sarcosine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or marked hepatic dysfunction, which is atypical and warrants an alternative explanation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma amino acids showing mildly raised methionine, S-adenosylmethionine measurement, expected to be elevated, S-adenosylhomocysteine measurement to distinguish AHCY deficiency"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glycine n-methyltransferase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glycine_n_methyltransferase_deficiency-matrix",
+      "title": "Glycine N-methyltransferase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive deficiency of glycine N-methyltransferase, an enzyme that regulates the ratio of S-adenosylmethionine to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma amino acids showing mildly raised methionine, S-adenosylmethionine measurement, expected to be elevated,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Methionine adenosyltransferase I/III deficiency, S-adenosylhomocysteine hydrolase deficiency, Adenosine kinase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage as a benign disorder requiring no specific pharmacotherapy, with reassurance regarding the favourable outlook",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with MAT I/III deficiency without measuring SAM, since the SAM direction differs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glycine n-methyltransferase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glycine_n_methyltransferase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Mildly raised methionine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylmethionine measurement",
+          "cells": [
+            {
+              "text": "Expected to be elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylhomocysteine measurement",
+          "cells": [
+            {
+              "text": "Distinguishes AHCY deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine",
+          "cells": [
+            {
+              "text": "Excludes remethylation defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Mild hepatopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNMT gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycine_n_methyltransferase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Methionine adenosyltransferase I/III deficiency",
+          "cells": [
+            {
+              "text": "SAM direction differs; measuring SAM distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylhomocysteine hydrolase deficiency",
+          "cells": [
+            {
+              "text": "Raised S-adenosylhomocysteine points to this instead"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycine_n_methyltransferase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign disorder",
+          "cells": [
+            {
+              "text": "No specific pharmacotherapy; reassurance on the favourable outlook"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary methionine restriction",
+          "cells": [
+            {
+              "text": "Considered only if hypermethioninaemia is marked, guided by a dietitian"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function monitoring",
+          "cells": [
+            {
+              "text": "Periodic checks of the mild chronic hepatopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation by SAM",
+          "cells": [
+            {
+              "text": "Distinguishes from other causes of hypermethioninaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation",
+          "cells": [
+            {
+              "text": "Once benign GNMT deficiency is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glycine_n_methyltransferase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Glycine N-methyltransferase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GNMT deficiency: mildly raised methionine with mild transaminase rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive liver dysfunction, neurological signs, raised SAH)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reassess the diagnosis urgently for progressive liver disease or neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma amino acids, SAM, SAH, homocysteine, liver tests and GNMT sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is SAM raised with normal SAH, confirming GNMT deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MAT I/III deficiency, AHCY deficiency or homocystinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benign disorder: reassurance and no specific drug therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary methionine restriction if hypermethioninaemia is marked",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Periodic liver function monitoring for the mild hepatopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with a favourable outlook; mild hepatopathy is generally stable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

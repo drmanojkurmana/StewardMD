@@ -1,183 +1,624 @@
 {
- "id": "babesiosis",
- "name": "Babesiosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 232,
- "page": 1775,
- "aliases": [
-  "Babesia"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1775",
-  "clinicalPearls": [
-   "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells; most U.S. cases are due to Babesia microti, transmitted by the deer tick Ixodes scapularis, with ~90% presenting June through August (p.1775, 1777).",
-   "Presents as a flu-like illness: gradual-onset fatigue/malaise followed within days by fever (can reach 40.9 C) with chills, night sweats, headache, myalgia, and anorexia; dark urine and jaundice raise suspicion of severe hemolytic anemia (p.1777).",
-   "Because the same I. scapularis tick co-transmits Borrelia burgdorferi and Anaplasma phagocytophilum, co-infection is common: about one-half of patients diagnosed with babesiosis are also infected with B. burgdorferi, so a babesiosis diagnosis should prompt evaluation for Lyme disease, and vice versa (p.1778).",
-   "Most symptomatic patients (~80%) are 50 years or older; hospitalized patients are roughly a decade older (median 68 years) (p.1777).",
-   "Splenic complications (infarction, subcapsular hematoma, rupture) can occur even with low-grade parasitemia (median ~1%) and typically affect young, healthy patients (p.1777, 1780)."
+  "id": "babesiosis",
+  "name": "Babesiosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 232,
+  "page": 1775,
+  "aliases": [
+    "Babesia"
   ],
-  "pathophysiology": "Babesia parasites invade and lyse red blood cells. RBC debris from hemolysis can accumulate in the renal vasculature and cause renal failure. Free hemoglobin is complexed by haptoglobin, then the oxidized heme group by hemopexin; excess free hemoglobin scavenges nitric oxide, promoting thrombus formation and vascular inflammation. RBC lysis in splenic capillaries can trigger localized necrosis and splenic infarction; oxidatively stressed, poorly deformable RBCs are filtered and phagocytosed by splenic macrophages, and erythrophagocytosis with the immune response contributes to splenomegaly and rupture. Fever, chills, and sweats reflect a systemic inflammatory response to RBC lysis, and excessive inflammation drives end-organ (renal and pulmonary) damage. The spleen is the immunodominant organ, explaining why asplenia is a major risk factor for severe disease; protective immunity involves CD4+ Th1 cells (severe disease in AIDS and transplant recipients), and B cells/antibodies appear critical for clearance in some patients (relapsing disease after rituximab). Persistent anemia after infection clears has been attributed to autoantibodies tagging RBCs for clearance (p.1778).",
-  "additionalDifferentials": [
-   "Lyme disease (concurrent or co-transmitted by the same tick)",
-   "Anaplasmosis (Anaplasma phagocytophilum)",
-   "Borrelia miyamotoi infection",
-   "HELLP syndrome in pregnant women at risk of tick exposure (babesiosis is an imitator)",
-   "Other causes of febrile hemolytic anemia"
-  ],
-  "infectionMimics": [
-   "Malaria (Plasmodium falciparum and others) — intraerythrocytic febrile illness most readily confused with babesiosis",
-   "Lyme disease (Borrelia burgdorferi)",
-   "Anaplasmosis (Anaplasma phagocytophilum)",
-   "Borrelia miyamotoi infection"
-  ],
-  "nonInfectiousMimics": [
-   "HELLP syndrome (hemolysis, elevated liver enzymes, low platelets) in pregnancy",
-   "Other hemolytic anemias / thrombotic microangiopathies presenting with hemolysis and thrombocytopenia"
-  ],
-  "additionalInvestigations": [
-   "Giemsa-stained thin blood smear (microscopy) — definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites arranged in tetrads form the pathognomonic 'Maltese cross'",
-   "Real-time PCR amplifying the parasite 18S rRNA gene (detects 1–10 parasites/uL; allows speciation; used to monitor low-grade infection and relapse risk)",
-   "Complete blood count (anemia, often severe thrombocytopenia preceding severe anemia; WBC may be low, normal, or high) and reticulocyte count",
-   "Hemolysis markers: low haptoglobin, elevated LDH, elevated total bilirubin",
-   "Liver enzymes (alkaline phosphatase, AST, ALT) and renal function (BUN, creatinine)",
-   "Urinalysis (urobilinogen, hemoglobinuria, proteinuria)",
-   "Indirect fluorescent antibody serology (IgM and IgG titers) — a single positive result is NOT sufficient for diagnosis because antibodies can persist for over a year",
-   "CT for suspected splenic infarction or rupture"
-  ],
-  "redFlags": [
-   "Severe disease especially in asplenic (congenital, functional, or post-splenectomy), elderly, and immunocompromised (HIV/AIDS, transplant, malignancy, B-cell-depleting/rituximab therapy) patients",
-   "Dark urine and jaundice indicating severe hemolytic anemia, with scleral icterus on examination",
-   "Left-sided abdominal pain, unexplained hypotension with tachycardia, or hemodynamic instability suggesting splenic infarction or rupture",
-   "Acute renal failure (leading complication, ~20%) and acute respiratory failure (~7%); also DIC, shock, arrhythmia, heart failure",
-   "Parasitemia >4% (risk factor for severe, complicated disease; can reach 30–40% in immunocompromised patients)",
-   "Diagnosis delayed >7 days after symptom onset predisposes to severe complicated disease",
-   "Hemophagocytic lymphohistiocytosis from massive phagocytosis of blood cells (fatal)"
-  ],
-  "prognosis": "With first-line atovaquone plus azithromycin, a fatal outcome is rare; of 7612 CDC-reported cases in 2011–2015, 46 (0.6%) ended in death. Older regimens (clindamycin plus quinine) had fatality rates of 5–9%. Death is more frequent in those 65 years or older. Among Medicare recipients diagnosed 2006–2013, ~1% died within 30 days; fatality was ~3% among hospitalized patients. Fatality is high in immunocompromised patients (~20%) and in those with splenic rupture or infarction (~6%). Fatigue may persist for weeks to months after treatment. Highly immunocompromised patients are at risk of persistent, relapsing infection (p.1778).",
-  "pitfalls": [
-   "Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of extracellular merozoites, absence of gametocytes and schizonts, and the pathognomonic tetrad ('Maltese cross'); a negative BinaxNOW malaria test helps rule out falciparum malaria when microscopy is ambiguous (p.1779).",
-   "Relying on a single positive serology for diagnosis — antibodies persist for over a year after the parasite is cleared (p.1779).",
-   "Missing co-infection: failing to evaluate for Lyme disease (and other tick-borne pathogens) when babesiosis is diagnosed, or for babesiosis when Lyme symptoms worsen or fail to abate on appropriate antibiotics (p.1778).",
-   "Overlooking splenic complications, which can occur with low-grade parasitemia and in young, otherwise healthy patients (p.1777, 1780).",
-   "Routine follow-up PCR is not recommended in immunocompetent patients (parasite DNA detectable up to 3 months) since relapse is unlikely, and persistent fatigue alone does not warrant extending or resuming therapy (p.1779)."
-  ],
-  "severityClassification": "Severe babesiosis requires hospital admission (median stay 4 days). Severe, complicated babesiosis is defined as illness requiring ICU admission; complicated by ARDS, heart failure, or shock; or requiring dialysis, intubation, or RBC exchange. Diarrhea and nausea/vomiting are strong predictors of severe disease, and asplenia and autoimmune disorders predispose to it. Parasitemia is typically 0.1–10% in immunocompetent patients (up to 30–40% in immunocompromised); parasitemia >4% is a risk factor for severe complicated disease (p.1777-1778).",
-  "references": [
-   "Harrison 22e p.1775"
-  ],
-  "crossLinks": [
-   "MALARIA",
-   "lyme_disease",
-   "hemolytic_anemia"
-  ],
-  "management": [
-   "Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin plus quinine for severe illness",
-   "Provide supportive care with intravenous fluids and antipyretics, and red cell transfusion for severe haemolytic anaemia",
-   "Consider red cell exchange transfusion for high-grade parasitaemia, severe haemolysis or end-organ compromise",
-   "Screen for and treat co-transmitted Ixodes-borne infections, particularly Lyme disease and anaplasmosis",
-   "Monitor parasitaemia on serial blood films with haemolysis and renal markers, watching asplenic, elderly or immunocompromised patients for splenic rupture and organ failure",
-   "Extend and intensify therapy in immunocompromised or relapsing disease, guided by clearance of parasite PCR",
-   "Escalate to intensive care for respiratory or renal failure, managing alongside infectious-diseases specialists"
-  ]
- },
- "algorithms": [
-  {
-   "id": "babesiosis-pathway",
-   "title": "Babesiosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells; most U.S. cases are due to Babesia microti, transmitted by the deer tick Ixodes scapularis, with ~90% presenting",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe disease especially in asplenic (congenital, functional, or post-splenectomy), elderly, and immunocompromised (HIV/AIDS, transplant, malignancy, B-cell-depleting/rituximab therapy) patients",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Giemsa-stained thin blood smear (microscopy) - definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites arranged in tetrads form the pathognomonic 'Maltese cross', Real-time PCR amplifying the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin plus quinine for severe illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of extracellular merozoites, absence of gametocytes and schizonts, and the pathognomonic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of babesiosis."
-  }
- ],
- "tables": [
-  {
-   "id": "babesiosis-matrix",
-   "title": "Babesiosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells;",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1775",
+    "clinicalPearls": [
+      "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells; most U.S. cases are due to Babesia microti, transmitted by the deer tick Ixodes scapularis, with ~90% presenting June through August (p.1775, 1777).",
+      "Presents as a flu-like illness: gradual-onset fatigue/malaise followed within days by fever (can reach 40.9 C) with chills, night sweats, headache, myalgia, and anorexia; dark urine and jaundice raise suspicion of severe hemolytic anemia (p.1777).",
+      "Because the same I. scapularis tick co-transmits Borrelia burgdorferi and Anaplasma phagocytophilum, co-infection is common: about one-half of patients diagnosed with babesiosis are also infected with B. burgdorferi, so a babesiosis diagnosis should prompt evaluation for Lyme disease, and vice versa (p.1778).",
+      "Most symptomatic patients (~80%) are 50 years or older; hospitalized patients are roughly a decade older (median 68 years) (p.1777).",
+      "Splenic complications (infarction, subcapsular hematoma, rupture) can occur even with low-grade parasitemia (median ~1%) and typically affect young, healthy patients (p.1777, 1780)."
     ],
-    [
-     "Key Investigations",
-     "Giemsa-stained thin blood smear (microscopy) - definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Babesia parasites invade and lyse red blood cells. RBC debris from hemolysis can accumulate in the renal vasculature and cause renal failure. Free hemoglobin is complexed by haptoglobin, then the oxidized heme group by hemopexin; excess free hemoglobin scavenges nitric oxide, promoting thrombus formation and vascular inflammation. RBC lysis in splenic capillaries can trigger localized necrosis and splenic infarction; oxidatively stressed, poorly deformable RBCs are filtered and phagocytosed by splenic macrophages, and erythrophagocytosis with the immune response contributes to splenomegaly and rupture. Fever, chills, and sweats reflect a systemic inflammatory response to RBC lysis, and excessive inflammation drives end-organ (renal and pulmonary) damage. The spleen is the immunodominant organ, explaining why asplenia is a major risk factor for severe disease; protective immunity involves CD4+ Th1 cells (severe disease in AIDS and transplant recipients), and B cells/antibodies appear critical for clearance in some patients (relapsing disease after rituximab). Persistent anemia after infection clears has been attributed to autoantibodies tagging RBCs for clearance (p.1778).",
+    "additionalDifferentials": [
+      "Lyme disease (concurrent or co-transmitted by the same tick)",
+      "Anaplasmosis (Anaplasma phagocytophilum)",
+      "Borrelia miyamotoi infection",
+      "HELLP syndrome in pregnant women at risk of tick exposure (babesiosis is an imitator)",
+      "Other causes of febrile hemolytic anemia"
     ],
-    [
-     "Primary Differentials",
-     "Lyme disease (concurrent or co-transmitted by the same tick), Anaplasmosis (Anaplasma phagocytophilum), Borrelia miyamotoi",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Malaria (Plasmodium falciparum and others) — intraerythrocytic febrile illness most readily confused with babesiosis",
+      "Lyme disease (Borrelia burgdorferi)",
+      "Anaplasmosis (Anaplasma phagocytophilum)",
+      "Borrelia miyamotoi infection"
     ],
-    [
-     "Management Strategy",
-     "Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "HELLP syndrome (hemolysis, elevated liver enzymes, low platelets) in pregnancy",
+      "Other hemolytic anemias / thrombotic microangiopathies presenting with hemolysis and thrombocytopenia"
     ],
-    [
-     "Clinical Pitfall",
-     "Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Giemsa-stained thin blood smear (microscopy) — definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites arranged in tetrads form the pathognomonic 'Maltese cross'",
+      "Real-time PCR amplifying the parasite 18S rRNA gene (detects 1–10 parasites/uL; allows speciation; used to monitor low-grade infection and relapse risk)",
+      "Complete blood count (anemia, often severe thrombocytopenia preceding severe anemia; WBC may be low, normal, or high) and reticulocyte count",
+      "Hemolysis markers: low haptoglobin, elevated LDH, elevated total bilirubin",
+      "Liver enzymes (alkaline phosphatase, AST, ALT) and renal function (BUN, creatinine)",
+      "Urinalysis (urobilinogen, hemoglobinuria, proteinuria)",
+      "Indirect fluorescent antibody serology (IgM and IgG titers) — a single positive result is NOT sufficient for diagnosis because antibodies can persist for over a year",
+      "CT for suspected splenic infarction or rupture"
+    ],
+    "redFlags": [
+      "Severe disease especially in asplenic (congenital, functional, or post-splenectomy), elderly, and immunocompromised (HIV/AIDS, transplant, malignancy, B-cell-depleting/rituximab therapy) patients",
+      "Dark urine and jaundice indicating severe hemolytic anemia, with scleral icterus on examination",
+      "Left-sided abdominal pain, unexplained hypotension with tachycardia, or hemodynamic instability suggesting splenic infarction or rupture",
+      "Acute renal failure (leading complication, ~20%) and acute respiratory failure (~7%); also DIC, shock, arrhythmia, heart failure",
+      "Parasitemia >4% (risk factor for severe, complicated disease; can reach 30–40% in immunocompromised patients)",
+      "Diagnosis delayed >7 days after symptom onset predisposes to severe complicated disease",
+      "Hemophagocytic lymphohistiocytosis from massive phagocytosis of blood cells (fatal)"
+    ],
+    "prognosis": "With first-line atovaquone plus azithromycin, a fatal outcome is rare; of 7612 CDC-reported cases in 2011–2015, 46 (0.6%) ended in death. Older regimens (clindamycin plus quinine) had fatality rates of 5–9%. Death is more frequent in those 65 years or older. Among Medicare recipients diagnosed 2006–2013, ~1% died within 30 days; fatality was ~3% among hospitalized patients. Fatality is high in immunocompromised patients (~20%) and in those with splenic rupture or infarction (~6%). Fatigue may persist for weeks to months after treatment. Highly immunocompromised patients are at risk of persistent, relapsing infection (p.1778).",
+    "pitfalls": [
+      "Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of extracellular merozoites, absence of gametocytes and schizonts, and the pathognomonic tetrad ('Maltese cross'); a negative BinaxNOW malaria test helps rule out falciparum malaria when microscopy is ambiguous (p.1779).",
+      "Relying on a single positive serology for diagnosis — antibodies persist for over a year after the parasite is cleared (p.1779).",
+      "Missing co-infection: failing to evaluate for Lyme disease (and other tick-borne pathogens) when babesiosis is diagnosed, or for babesiosis when Lyme symptoms worsen or fail to abate on appropriate antibiotics (p.1778).",
+      "Overlooking splenic complications, which can occur with low-grade parasitemia and in young, otherwise healthy patients (p.1777, 1780).",
+      "Routine follow-up PCR is not recommended in immunocompetent patients (parasite DNA detectable up to 3 months) since relapse is unlikely, and persistent fatigue alone does not warrant extending or resuming therapy (p.1779)."
+    ],
+    "severityClassification": "Severe babesiosis requires hospital admission (median stay 4 days). Severe, complicated babesiosis is defined as illness requiring ICU admission; complicated by ARDS, heart failure, or shock; or requiring dialysis, intubation, or RBC exchange. Diarrhea and nausea/vomiting are strong predictors of severe disease, and asplenia and autoimmune disorders predispose to it. Parasitemia is typically 0.1–10% in immunocompetent patients (up to 30–40% in immunocompromised); parasitemia >4% is a risk factor for severe complicated disease (p.1777-1778).",
+    "references": [
+      "Harrison 22e p.1775"
+    ],
+    "crossLinks": [
+      "MALARIA",
+      "lyme_disease",
+      "hemolytic_anemia"
+    ],
+    "management": [
+      "Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin plus quinine for severe illness",
+      "Provide supportive care with intravenous fluids and antipyretics, and red cell transfusion for severe haemolytic anaemia",
+      "Consider red cell exchange transfusion for high-grade parasitaemia, severe haemolysis or end-organ compromise",
+      "Screen for and treat co-transmitted Ixodes-borne infections, particularly Lyme disease and anaplasmosis",
+      "Monitor parasitaemia on serial blood films with haemolysis and renal markers, watching asplenic, elderly or immunocompromised patients for splenic rupture and organ failure",
+      "Extend and intensify therapy in immunocompromised or relapsing disease, guided by clearance of parasite PCR",
+      "Escalate to intensive care for respiratory or renal failure, managing alongside infectious-diseases specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for babesiosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "babesiosis-real-image",
-   "title": "Babesiosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "babesiosis-pathway",
+      "title": "Babesiosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells; most U.S. cases are due to Babesia microti, transmitted by the deer tick Ixodes scapularis, with ~90% presenting",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe disease especially in asplenic (congenital, functional, or post-splenectomy), elderly, and immunocompromised (HIV/AIDS, transplant, malignancy, B-cell-depleting/rituximab therapy) patients",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Giemsa-stained thin blood smear (microscopy) - definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites arranged in tetrads form the pathognomonic 'Maltese cross', Real-time PCR amplifying the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin plus quinine for severe illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of extracellular merozoites, absence of gametocytes and schizonts, and the pathognomonic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of babesiosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "babesiosis-matrix",
+      "title": "Babesiosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Emerging tick-borne infection caused by intraerythrocytic protozoa of the genus Babesia that invade and lyse red blood cells;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Giemsa-stained thin blood smear (microscopy) - definitive diagnosis; trophozoites appear as ring/ameboid forms, and merozoites",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lyme disease (concurrent or co-transmitted by the same tick), Anaplasmosis (Anaplasma phagocytophilum), Borrelia miyamotoi",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with antiparasitic combination therapy, using atovaquone plus azithromycin for mild-to-moderate disease and clindamycin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misidentifying Babesia as malaria on the blood smear: distinguish by absence of central brownish hemozoin pigment, presence of",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for babesiosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Babesiosis",
+      "url": "https://www.cdc.gov/babesiosis/hcp/clinical-care/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "babesiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of babesiosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Giemsa thin smear",
+          "cells": [
+            {
+              "text": "{{hy:Tetrads (Maltese cross)}}, rings, extracellular merozoites, no pigment"
+            },
+            {
+              "text": "Definitive; separates from malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Real-time PCR (18S rRNA)",
+          "unit": "parasites/uL",
+          "cells": [
+            {
+              "text": "Detects 1 to 10",
+              "range": [
+                1,
+                10
+              ]
+            },
+            {
+              "text": "Speciation and low-grade infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IFA serology",
+          "cells": [
+            {
+              "text": "IgM and IgG"
+            },
+            {
+              "text": "Single positive not enough; persists over 1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Low haptoglobin, raised LDH and bilirubin"
+            },
+            {
+              "text": "Dark urine and jaundice suggest severe haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count",
+          "cells": [
+            {
+              "text": "Anaemia; thrombocytopenia often precedes severe anaemia"
+            },
+            {
+              "text": "WBC variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitaemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">4% predicts severe disease",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Can reach 30 to 40% in immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age of symptomatic patients",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "About 80% are 50 or older",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Asplenic and immunocompromised at highest risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme co-infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About half"
+            },
+            {
+              "text": "Test for Lyme and anaplasmosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic delay",
+          "unit": "days",
+          "cells": [
+            {
+              "text": ">7 after onset",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Predisposes to complicated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "babesiosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of babesiosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "{{hy:Hemozoin pigment, gametocytes, schizonts}}; travel history"
+            },
+            {
+              "text": "Smear morphology; rapid malaria antigen test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Same tick; often coexists"
+            },
+            {
+              "text": "Lyme serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaplasmosis",
+          "cells": [
+            {
+              "text": "Same tick; leukopenia, morulae"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Borrelia miyamotoi infection",
+          "cells": [
+            {
+              "text": "Tick-borne relapsing fever"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HELLP syndrome",
+          "cells": [
+            {
+              "text": "Pregnancy with haemolysis, high enzymes, low platelets"
+            },
+            {
+              "text": "Smear for parasites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other haemolytic anaemia or TMA",
+          "cells": [
+            {
+              "text": "Haemolysis with low platelets without parasites"
+            },
+            {
+              "text": "Smear and PCR negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "babesiosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of babesiosis (adults)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Atovaquone plus azithromycin (oral)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred}}, mild to moderate outpatient"
+            },
+            {
+              "text": "Atovaquone 750 mg twice daily with fatty food; azithromycin 500 mg day 1 then 250 mg daily; 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clindamycin plus quinine (oral)",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "Clindamycin 600 mg three times daily plus quinine 650 mg three times daily; 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atovaquone plus IV azithromycin",
+          "cells": [
+            {
+              "text": "Hospitalised severe illness"
+            },
+            {
+              "text": "Atovaquone 750 mg twice daily; azithromycin 500 mg IV daily; step down to oral to complete 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV clindamycin plus oral quinine",
+          "cells": [
+            {
+              "text": "Severe illness alternative"
+            },
+            {
+              "text": "Clindamycin 600 mg IV four times daily; quinine 650 mg three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Higher-dose azithromycin",
+          "cells": [
+            {
+              "text": "Immunocompromised or more severe"
+            },
+            {
+              "text": "1000 mg then 500 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Immunocompromised"
+            },
+            {
+              "text": "At least 6 weeks; until smears negative for 2 consecutive weeks",
+              "op": ">=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell exchange transfusion",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Parasitaemia >10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Or high parasitaemia with severe haemolysis or organ decline"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison reports fatality 0.6% with atovaquone plus azithromycin versus 5 to 9% with older clindamycin plus quinine. Routine follow-up PCR is not advised in immunocompetent patients."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "babesiosis-dx-mgmt",
+      "title": "Diagnosis and management of babesiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and fatigue after tick exposure in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Thin smear, Babesia PCR, CBC, haemolysis markers, Lyme test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Parasites on smear or PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider Lyme, anaplasmosis, malaria, other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe: high parasitaemia, organ failure, asplenia, immunosuppression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral atovaquone plus azithromycin for 7 to 10 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit; atovaquone plus IV azithromycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Parasitaemia >10% or severe haemolysis or organ decline?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red cell exchange transfusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Smear monitoring; prolonged course if immunocompromised",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

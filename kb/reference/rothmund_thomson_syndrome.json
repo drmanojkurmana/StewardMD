@@ -1,174 +1,387 @@
 {
- "id": "rothmund_thomson_syndrome",
- "name": "Rothmund-Thomson syndrome",
- "aliases": [
-  "RTS",
-  "RECQL4",
-  "poikiloderma congenitale",
-  "poikiloderma atrophicans and cataract"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase involved in genome maintenance",
-   "The hallmark is poikiloderma, a rash of reticulated erythema, telangiectasia, atrophy and pigmentary change beginning in infancy on the cheeks and spreading to the limbs and buttocks",
-   "Associated features include sparse hair (including eyebrows and eyelashes), small stature, skeletal anomalies and dental and nail abnormalities",
-   "Juvenile cataracts are characteristic of the condition, particularly historically associated forms",
-   "There is a substantially increased risk of osteosarcoma, especially in RECQL4-associated (type 2) disease, and of skin cancers later in life",
-   "RECQL4 variants also underlie overlapping RECQL4-related disorders such as RAPADILINO and Baller-Gerold syndromes",
-   "Surveillance emphasises skeletal vigilance for osteosarcoma, sun protection and skin cancer monitoring, and photoprotection given photosensitivity"
+  "id": "rothmund_thomson_syndrome",
+  "name": "Rothmund-Thomson syndrome",
+  "aliases": [
+    "RTS",
+    "RECQL4",
+    "poikiloderma congenitale",
+    "poikiloderma atrophicans and cataract"
   ],
-  "pathophysiology": "Rothmund-Thomson syndrome type 2 is caused by biallelic loss-of-function variants in RECQL4, encoding a RecQ-family DNA helicase that participates in DNA replication and repair and in maintaining genomic and mitochondrial stability. Deficient RECQL4 function leads to genomic instability, which underlies the predisposition to osteosarcoma and other tumours and contributes to the poikilodermatous skin changes, growth failure and skeletal defects. A proportion of clinically diagnosed cases (type 1) lack an identified RECQL4 variant and are associated more strongly with juvenile cataract, indicating genetic heterogeneity within the phenotype.",
-  "additionalDifferentials": [
-   "Bloom syndrome and other RecQ helicase disorders (Werner syndrome)",
-   "Fanconi anaemia",
-   "Dyskeratosis congenita",
-   "Cockayne syndrome and xeroderma pigmentosum",
-   "Kindler syndrome and other poikiloderma-associated genodermatoses",
-   "Other RECQL4-related disorders (RAPADILINO, Baller-Gerold syndrome)"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of RECQL4 to confirm biallelic variants",
-   "Skeletal radiographs to characterise bone anomalies and provide a baseline for osteosarcoma surveillance",
-   "Ophthalmological assessment for juvenile cataract",
-   "Dermatological examination and biopsy where skin malignancy is suspected",
-   "Growth and endocrine evaluation for short stature",
-   "Directed imaging of any painful or swollen bony lesion to exclude osteosarcoma"
-  ],
-  "redFlags": [
-   "New bone pain, swelling or a mass, particularly around the knee, suggesting osteosarcoma",
-   "A changing or non-healing skin lesion raising concern for skin malignancy",
-   "Rapidly progressive visual impairment from cataract",
-   "Signs of a second primary tumour in an affected individual"
-  ],
-  "prognosis": "For individuals without malignancy, life expectancy may be near normal, but the elevated risk of osteosarcoma, most pronounced in RECQL4-associated disease and typically in childhood or adolescence, is the main determinant of outcome. Later skin cancers and the cumulative effects of photosensitivity add to long-term morbidity.",
-  "pitfalls": [
-   "Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma",
-   "Confusing the poikiloderma with eczema or other common childhood rashes",
-   "Neglecting rigorous photoprotection and skin cancer surveillance",
-   "Assuming a single clinical entity and overlooking the RECQL4-related and genetically heterogeneous forms"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Rothmund-Thomson Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and skin cancer risk",
-   "Osteosarcoma surveillance with a low threshold for imaging any persistent bony pain or swelling, especially during childhood and adolescence",
-   "Regular dermatological surveillance with prompt biopsy or excision of suspicious skin lesions",
-   "Ophthalmological monitoring and surgical treatment of juvenile cataract",
-   "Growth and endocrine assessment and support for short stature",
-   "Cautious use of ionising radiation and DNA-damaging chemotherapy given the underlying genomic instability, with oncology input if osteosarcoma develops",
-   "Genetic counselling for autosomal recessive inheritance, with RECQL4 testing and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rothmund_thomson_syndrome-pathway",
-   "title": "Rothmund-Thomson syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase involved in genome maintenance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New bone pain, swelling or a mass, particularly around the knee, suggesting osteosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of RECQL4 to confirm biallelic variants, Skeletal radiographs to characterise bone anomalies and provide a baseline for osteosarcoma surveillance, Ophthalmological assessment for juvenile cataract"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and skin cancer risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rothmund-thomson syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "rothmund_thomson_syndrome-matrix",
-   "title": "Rothmund-Thomson syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase involved in genome maintenance",
+      "The hallmark is poikiloderma, a rash of reticulated erythema, telangiectasia, atrophy and pigmentary change beginning in infancy on the cheeks and spreading to the limbs and buttocks",
+      "Associated features include sparse hair (including eyebrows and eyelashes), small stature, skeletal anomalies and dental and nail abnormalities",
+      "Juvenile cataracts are characteristic of the condition, particularly historically associated forms",
+      "There is a substantially increased risk of osteosarcoma, especially in RECQL4-associated (type 2) disease, and of skin cancers later in life",
+      "RECQL4 variants also underlie overlapping RECQL4-related disorders such as RAPADILINO and Baller-Gerold syndromes",
+      "Surveillance emphasises skeletal vigilance for osteosarcoma, sun protection and skin cancer monitoring, and photoprotection given photosensitivity"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of RECQL4 to confirm biallelic variants, Skeletal radiographs to characterise bone anomalies and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rothmund-Thomson syndrome type 2 is caused by biallelic loss-of-function variants in RECQL4, encoding a RecQ-family DNA helicase that participates in DNA replication and repair and in maintaining genomic and mitochondrial stability. Deficient RECQL4 function leads to genomic instability, which underlies the predisposition to osteosarcoma and other tumours and contributes to the poikilodermatous skin changes, growth failure and skeletal defects. A proportion of clinically diagnosed cases (type 1) lack an identified RECQL4 variant and are associated more strongly with juvenile cataract, indicating genetic heterogeneity within the phenotype.",
+    "additionalDifferentials": [
+      "Bloom syndrome and other RecQ helicase disorders (Werner syndrome)",
+      "Fanconi anaemia",
+      "Dyskeratosis congenita",
+      "Cockayne syndrome and xeroderma pigmentosum",
+      "Kindler syndrome and other poikiloderma-associated genodermatoses",
+      "Other RECQL4-related disorders (RAPADILINO, Baller-Gerold syndrome)"
     ],
-    [
-     "Primary Differentials",
-     "Bloom syndrome and other RecQ helicase disorders (Werner syndrome), Fanconi anaemia, Dyskeratosis congenita",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of RECQL4 to confirm biallelic variants",
+      "Skeletal radiographs to characterise bone anomalies and provide a baseline for osteosarcoma surveillance",
+      "Ophthalmological assessment for juvenile cataract",
+      "Dermatological examination and biopsy where skin malignancy is suspected",
+      "Growth and endocrine evaluation for short stature",
+      "Directed imaging of any painful or swollen bony lesion to exclude osteosarcoma"
     ],
-    [
-     "Management Strategy",
-     "Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and",
-     "Core treatment modality"
+    "redFlags": [
+      "New bone pain, swelling or a mass, particularly around the knee, suggesting osteosarcoma",
+      "A changing or non-healing skin lesion raising concern for skin malignancy",
+      "Rapidly progressive visual impairment from cataract",
+      "Signs of a second primary tumour in an affected individual"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "For individuals without malignancy, life expectancy may be near normal, but the elevated risk of osteosarcoma, most pronounced in RECQL4-associated disease and typically in childhood or adolescence, is the main determinant of outcome. Later skin cancers and the cumulative effects of photosensitivity add to long-term morbidity.",
+    "pitfalls": [
+      "Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma",
+      "Confusing the poikiloderma with eczema or other common childhood rashes",
+      "Neglecting rigorous photoprotection and skin cancer surveillance",
+      "Assuming a single clinical entity and overlooking the RECQL4-related and genetically heterogeneous forms"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Rothmund-Thomson Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and skin cancer risk",
+      "Osteosarcoma surveillance with a low threshold for imaging any persistent bony pain or swelling, especially during childhood and adolescence",
+      "Regular dermatological surveillance with prompt biopsy or excision of suspicious skin lesions",
+      "Ophthalmological monitoring and surgical treatment of juvenile cataract",
+      "Growth and endocrine assessment and support for short stature",
+      "Cautious use of ionising radiation and DNA-damaging chemotherapy given the underlying genomic instability, with oncology input if osteosarcoma develops",
+      "Genetic counselling for autosomal recessive inheritance, with RECQL4 testing and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for rothmund-thomson syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rothmund-thomson-syndrome-real-image",
-   "title": "Rothmund-Thomson syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rothmund_thomson_syndrome-pathway",
+      "title": "Rothmund-Thomson syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase involved in genome maintenance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New bone pain, swelling or a mass, particularly around the knee, suggesting osteosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of RECQL4 to confirm biallelic variants, Skeletal radiographs to characterise bone anomalies and provide a baseline for osteosarcoma surveillance, Ophthalmological assessment for juvenile cataract"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and skin cancer risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rothmund-thomson syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rothmund_thomson_syndrome-matrix",
+      "title": "Rothmund-Thomson syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive genodermatosis, with the type-2 form caused by biallelic variants in RECQL4, a RecQ-family DNA helicase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of RECQL4 to confirm biallelic variants, Skeletal radiographs to characterise bone anomalies and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bloom syndrome and other RecQ helicase disorders (Werner syndrome), Fanconi anaemia, Dyskeratosis congenita",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Strict lifelong photoprotection with sun avoidance, protective clothing and broad-spectrum sunscreen to limit poikiloderma and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing limb pain as growing pains and delaying imaging that could detect osteosarcoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rothmund-thomson syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rothmund_thomson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of RECQL4",
+          "cells": [
+            {
+              "text": "Biallelic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Bone anomalies and baseline for osteosarcoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological examination",
+          "cells": [
+            {
+              "text": "Poikiloderma and suspicious skin lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rothmund_thomson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, protective clothing and broad-spectrum sunscreen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma surveillance",
+          "cells": [
+            {
+              "text": "Low threshold to image persistent bone pain or swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological surveillance",
+          "cells": [
+            {
+              "text": "Prompt biopsy or excision of suspicious lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Monitoring and surgical treatment of juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rothmund_thomson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Rothmund-Thomson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with poikiloderma, skin changes and bony or ocular anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new bone pain or mass, changing skin lesion, rapid visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and biopsy for suspected osteosarcoma or skin malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RECQL4 genetic testing, skeletal radiographs, ophthalmology and skin review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic RECQL4 variants found on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bloom, Werner, Fanconi or Cockayne syndrome and other poikiloderma disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection and sun avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Osteosarcoma surveillance with low threshold for bone imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dermatological surveillance with prompt biopsy of suspicious lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological monitoring and surgery for juvenile cataract",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong surveillance for skin cancer, osteosarcoma and cataract",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

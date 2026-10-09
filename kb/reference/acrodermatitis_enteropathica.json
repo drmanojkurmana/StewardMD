@@ -1,172 +1,431 @@
 {
- "id": "acrodermatitis_enteropathica",
- "name": "Acrodermatitis enteropathica",
- "aliases": [
-  "SLC39A4",
-  "ZIP4 deficiency",
-  "hereditary zinc deficiency",
-  "AE"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
-   "Classic triad is periorificial and acral dermatitis, alopecia and diarrhoea, often emerging when breast-feeding is stopped",
-   "Skin lesions are sharply demarcated, scaly, erythematous or vesiculobullous around the mouth, nappy area and over the hands and feet",
-   "Associated features include irritability, poor growth, recurrent infections and impaired wound healing",
-   "A low serum zinc with reduced alkaline phosphatase (a zinc-dependent enzyme) supports the diagnosis",
-   "Acquired zinc deficiency from inadequate intake or malabsorption can mimic the inherited disorder and must be considered",
-   "Skin, gut and growth abnormalities respond rapidly and dramatically to zinc replacement"
+  "id": "acrodermatitis_enteropathica",
+  "name": "Acrodermatitis enteropathica",
+  "aliases": [
+    "SLC39A4",
+    "ZIP4 deficiency",
+    "hereditary zinc deficiency",
+    "AE"
   ],
-  "pathophysiology": "Acrodermatitis enteropathica is caused by variants in SLC39A4, which encodes the intestinal zinc transporter ZIP4 responsible for zinc uptake at the enterocyte apical membrane. Impaired transport leads to systemic zinc deficiency. Zinc is a cofactor for numerous metalloenzymes and is essential for epithelial integrity, immune function and cell proliferation, so its deficiency produces the characteristic dermatitis at sites of friction and around orifices, hair loss, impaired healing and immune dysfunction, together with malabsorptive diarrhoea. Because human milk contains a zinc-binding ligand that aids absorption, symptoms often surface after weaning from breast milk.",
-  "additionalDifferentials": [
-   "Acquired zinc deficiency from poor intake, malabsorption or parenteral nutrition",
-   "Biotinidase and other biotin-responsive disorders",
-   "Essential fatty acid deficiency dermatitis",
-   "Nutritional dermatoses such as kwashiorkor",
-   "Epidermolysis bullosa and other blistering skin disorders",
-   "Candidiasis and seborrhoeic or atopic dermatitis"
-  ],
-  "additionalInvestigations": [
-   "Serum zinc concentration, ideally in a zinc-free container to avoid contamination",
-   "Serum alkaline phosphatase as a zinc-dependent enzyme marker",
-   "Molecular genetic testing for SLC39A4 variants to distinguish inherited from acquired deficiency",
-   "Dietary and nutritional assessment for causes of acquired deficiency",
-   "Skin examination and, where uncertain, biopsy to characterise the dermatitis"
-  ],
-  "redFlags": [
-   "Extensive erosive or secondarily infected skin disease",
-   "Severe failure to thrive and immune compromise with recurrent infections",
-   "Rapid clinical deterioration in an untreated infant",
-   "Persistent symptoms despite replacement suggesting non-adherence or an alternative diagnosis"
-  ],
-  "prognosis": "The inherited form requires lifelong zinc replacement but carries an excellent prognosis once treatment is established, with rapid resolution of skin, gastrointestinal and growth abnormalities. Untreated disease can be life-threatening.",
-  "pitfalls": [
-   "Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment",
-   "Falsely low or high zinc levels from sample contamination or handling",
-   "Misdiagnosing the rash as candidiasis or eczema and delaying zinc therapy",
-   "Stopping zinc prematurely in the genetic form, allowing relapse"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and diarrhoea",
-   "Monitor serum zinc, alkaline phosphatase and growth to titrate replacement",
-   "Watch for copper deficiency arising from excessive zinc supplementation",
-   "Distinguish the inherited disorder from acquired zinc deficiency and address any dietary or malabsorptive cause",
-   "Genetic counselling and family screening given autosomal recessive SLC39A4 inheritance",
-   "Paediatric and dietetic multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acrodermatitis_enteropathica-pathway",
-   "title": "Acrodermatitis enteropathica: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive erosive or secondarily infected skin disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum zinc concentration, ideally in a zinc-free container to avoid contamination, Serum alkaline phosphatase as a zinc-dependent enzyme marker, Molecular genetic testing for SLC39A4 variants to distinguish inherited from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and diarrhoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acrodermatitis enteropathica."
-  }
- ],
- "tables": [
-  {
-   "id": "acrodermatitis_enteropathica-matrix",
-   "title": "Acrodermatitis enteropathica: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
+      "Classic triad is periorificial and acral dermatitis, alopecia and diarrhoea, often emerging when breast-feeding is stopped",
+      "Skin lesions are sharply demarcated, scaly, erythematous or vesiculobullous around the mouth, nappy area and over the hands and feet",
+      "Associated features include irritability, poor growth, recurrent infections and impaired wound healing",
+      "A low serum zinc with reduced alkaline phosphatase (a zinc-dependent enzyme) supports the diagnosis",
+      "Acquired zinc deficiency from inadequate intake or malabsorption can mimic the inherited disorder and must be considered",
+      "Skin, gut and growth abnormalities respond rapidly and dramatically to zinc replacement"
     ],
-    [
-     "Key Investigations",
-     "Serum zinc concentration, ideally in a zinc-free container to avoid contamination, Serum alkaline phosphatase as a zinc-dependent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acrodermatitis enteropathica is caused by variants in SLC39A4, which encodes the intestinal zinc transporter ZIP4 responsible for zinc uptake at the enterocyte apical membrane. Impaired transport leads to systemic zinc deficiency. Zinc is a cofactor for numerous metalloenzymes and is essential for epithelial integrity, immune function and cell proliferation, so its deficiency produces the characteristic dermatitis at sites of friction and around orifices, hair loss, impaired healing and immune dysfunction, together with malabsorptive diarrhoea. Because human milk contains a zinc-binding ligand that aids absorption, symptoms often surface after weaning from breast milk.",
+    "additionalDifferentials": [
+      "Acquired zinc deficiency from poor intake, malabsorption or parenteral nutrition",
+      "Biotinidase and other biotin-responsive disorders",
+      "Essential fatty acid deficiency dermatitis",
+      "Nutritional dermatoses such as kwashiorkor",
+      "Epidermolysis bullosa and other blistering skin disorders",
+      "Candidiasis and seborrhoeic or atopic dermatitis"
     ],
-    [
-     "Primary Differentials",
-     "Acquired zinc deficiency from poor intake, malabsorption or parenteral nutrition, Biotinidase and other biotin-responsive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum zinc concentration, ideally in a zinc-free container to avoid contamination",
+      "Serum alkaline phosphatase as a zinc-dependent enzyme marker",
+      "Molecular genetic testing for SLC39A4 variants to distinguish inherited from acquired deficiency",
+      "Dietary and nutritional assessment for causes of acquired deficiency",
+      "Skin examination and, where uncertain, biopsy to characterise the dermatitis"
     ],
-    [
-     "Management Strategy",
-     "Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive erosive or secondarily infected skin disease",
+      "Severe failure to thrive and immune compromise with recurrent infections",
+      "Rapid clinical deterioration in an untreated infant",
+      "Persistent symptoms despite replacement suggesting non-adherence or an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The inherited form requires lifelong zinc replacement but carries an excellent prognosis once treatment is established, with rapid resolution of skin, gastrointestinal and growth abnormalities. Untreated disease can be life-threatening.",
+    "pitfalls": [
+      "Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment",
+      "Falsely low or high zinc levels from sample contamination or handling",
+      "Misdiagnosing the rash as candidiasis or eczema and delaying zinc therapy",
+      "Stopping zinc prematurely in the genetic form, allowing relapse"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and diarrhoea",
+      "Monitor serum zinc, alkaline phosphatase and growth to titrate replacement",
+      "Watch for copper deficiency arising from excessive zinc supplementation",
+      "Distinguish the inherited disorder from acquired zinc deficiency and address any dietary or malabsorptive cause",
+      "Genetic counselling and family screening given autosomal recessive SLC39A4 inheritance",
+      "Paediatric and dietetic multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for acrodermatitis enteropathica."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acrodermatitis-enteropathica-real-image",
-   "title": "Acrodermatitis enteropathica: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "acrodermatitis_enteropathica-pathway",
+      "title": "Acrodermatitis enteropathica: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive erosive or secondarily infected skin disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum zinc concentration, ideally in a zinc-free container to avoid contamination, Serum alkaline phosphatase as a zinc-dependent enzyme marker, Molecular genetic testing for SLC39A4 variants to distinguish inherited from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and diarrhoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acrodermatitis enteropathica."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acrodermatitis_enteropathica-matrix",
+      "title": "Acrodermatitis enteropathica: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of intestinal zinc uptake caused by SLC39A4 variants affecting the ZIP4 transporter",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum zinc concentration, ideally in a zinc-free container to avoid contamination, Serum alkaline phosphatase as a zinc-dependent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired zinc deficiency from poor intake, malabsorption or parenteral nutrition, Biotinidase and other biotin-responsive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong oral zinc replacement (zinc sulphate, gluconate or acetate), which rapidly reverses the dermatitis, alopecia and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not distinguishing inherited ZIP4 deficiency from acquired zinc deficiency, which alters duration of treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acrodermatitis enteropathica."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acrodermatitis_enteropathica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum zinc, in a zinc-free container",
+          "cells": [
+            {
+              "text": "Systemic zinc deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Zinc-dependent enzyme marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC39A4 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Separates inherited from acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and nutritional assessment",
+          "cells": [
+            {
+              "text": "Causes of acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination, with biopsy if uncertain",
+          "cells": [
+            {
+              "text": "Characterises the dermatitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrodermatitis_enteropathica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral zinc (sulphate, gluconate or acetate)",
+          "cells": [
+            {
+              "text": "Reverses dermatitis, alopecia and diarrhoea"
+            },
+            {
+              "text": "Rapidly reverses the features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor serum zinc, alkaline phosphatase and growth",
+          "cells": [
+            {
+              "text": "Titrates replacement"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watch for copper deficiency",
+          "cells": [
+            {
+              "text": "Complication of excessive zinc supplementation"
+            },
+            {
+              "text": "Avoid excess zinc"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address dietary or malabsorptive cause",
+          "cells": [
+            {
+              "text": "Acquired zinc deficiency"
+            },
+            {
+              "text": "Distinguish from inherited form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC39A4 inheritance"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric and dietetic follow-up",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acrodermatitis_enteropathica-dx-mgmt",
+      "title": "Diagnosis and management of Acrodermatitis enteropathica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Periorificial and acral dermatitis, alopecia and diarrhoea, often after weaning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive erosive or infected skin, severe failure to thrive or recurrent infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review; start zinc replacement and treat infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum zinc (zinc-free container) and alkaline phosphatase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low serum zinc confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "SLC39A4 testing to separate inherited from acquired deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review dietary, malabsorption and biotin-responsive causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong oral zinc sulphate, gluconate or acetate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Titrate with serum zinc, alkaline phosphatase and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Watch for copper deficiency from excess zinc; treat dietary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis once replacement starts; untreated disease can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

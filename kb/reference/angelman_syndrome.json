@@ -1,172 +1,444 @@
 {
- "id": "angelman_syndrome",
- "name": "Angelman syndrome",
- "aliases": [
-  "AS",
-  "happy puppet syndrome",
-  "15q11-q13 maternal deletion syndrome",
-  "UBE3A-related syndrome"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
-   "Movement disorder features ataxia, jerky limb movements, and a characteristic wide-based, stiff gait",
-   "A history of frequent bursts of laughter, hand-flapping, and excitable behaviour is a helpful clinical clue",
-   "Seizures usually begin in early childhood and are often accompanied by a distinctive EEG pattern even between clinical seizures",
-   "Microcephaly, a wide mouth with widely spaced teeth, and a prominent chin become more apparent with age",
-   "Caused by loss of function of the maternally inherited UBE3A gene at 15q11-q13, most commonly a maternal deletion",
-   "Represents the reciprocal imprinting disorder to Prader-Willi syndrome at the same chromosomal locus",
-   "Sleep disturbance with reduced sleep need is common and can be very disruptive for families"
+  "id": "angelman_syndrome",
+  "name": "Angelman syndrome",
+  "aliases": [
+    "AS",
+    "happy puppet syndrome",
+    "15q11-q13 maternal deletion syndrome",
+    "UBE3A-related syndrome"
   ],
-  "pathophysiology": "Angelman syndrome is caused by loss of function of the maternally expressed UBE3A gene within the imprinted 15q11-q13 region. In neurons, only the maternal UBE3A copy is active because the paternal copy is silenced, so loss of the maternal allele leaves neurons without functional UBE3A, which encodes a ubiquitin ligase important for synaptic regulation. The most common mechanism is a de novo maternal deletion; other causes include paternal uniparental disomy, an imprinting defect, and UBE3A point mutations. The resulting neuronal dysfunction produces the severe developmental impairment, movement disorder, and epilepsy.",
-  "additionalDifferentials": [
-   "Rett syndrome",
-   "Mowat-Wilson syndrome",
-   "Non-specific cerebral palsy with ataxia",
-   "Pitt-Hopkins syndrome",
-   "Other syndromic epileptic encephalopathies"
-  ],
-  "additionalInvestigations": [
-   "DNA methylation analysis of 15q11-q13 as the initial diagnostic test",
-   "Follow-up studies to define mechanism, including UBE3A sequencing when methylation is normal but suspicion persists",
-   "Electroencephalography, which often shows a characteristic pattern",
-   "Neurodevelopmental assessment and communication evaluation",
-   "Sleep assessment when disturbance is significant"
-  ],
-  "redFlags": [
-   "Frequent or prolonged seizures, including status epilepticus, requiring prompt management",
-   "Feeding and swallowing difficulties with aspiration risk in infancy",
-   "Scoliosis developing with age needing orthopaedic surveillance",
-   "Severe communication impairment necessitating augmentative communication support"
-  ],
-  "prognosis": "Life expectancy is near normal, but severe intellectual disability and lack of speech persist lifelong; seizures often improve after childhood, and quality of life depends on multidisciplinary support and communication aids.",
-  "pitfalls": [
-   "Misdiagnosing as cerebral palsy and missing the genetic cause",
-   "Assuming a normal methylation test excludes the diagnosis when UBE3A mutation testing is still needed",
-   "Underrecognising the characteristic EEG changes",
-   "Overlooking the marked and treatable sleep disturbance"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding drugs that may aggravate the seizures",
-   "Communication intervention with augmentative and alternative communication systems given the near-absent speech",
-   "Physiotherapy and occupational therapy for ataxia, gait and motor function, with orthotics where needed",
-   "Management of sleep disturbance through sleep-hygiene measures and melatonin",
-   "Behavioural strategies and support for hyperactivity and feeding, with surveillance for scoliosis and gastro-oesophageal reflux",
-   "Coordinated multidisciplinary neurodevelopmental follow-up with family and carer support",
-   "Genetic counselling with recurrence-risk assessment tailored to the underlying mechanism, whether maternal deletion, uniparental disomy, imprinting defect or UBE3A mutation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angelman_syndrome-pathway",
-   "title": "Angelman syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent or prolonged seizures, including status epilepticus, requiring prompt management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: DNA methylation analysis of 15q11-q13 as the initial diagnostic test, Follow-up studies to define mechanism, including UBE3A sequencing when methylation is normal but suspicion persists, Electroencephalography, which often"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding drugs that may aggravate the seizures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing as cerebral palsy and missing the genetic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angelman syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "angelman_syndrome-matrix",
-   "title": "Angelman syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
+      "Movement disorder features ataxia, jerky limb movements, and a characteristic wide-based, stiff gait",
+      "A history of frequent bursts of laughter, hand-flapping, and excitable behaviour is a helpful clinical clue",
+      "Seizures usually begin in early childhood and are often accompanied by a distinctive EEG pattern even between clinical seizures",
+      "Microcephaly, a wide mouth with widely spaced teeth, and a prominent chin become more apparent with age",
+      "Caused by loss of function of the maternally inherited UBE3A gene at 15q11-q13, most commonly a maternal deletion",
+      "Represents the reciprocal imprinting disorder to Prader-Willi syndrome at the same chromosomal locus",
+      "Sleep disturbance with reduced sleep need is common and can be very disruptive for families"
     ],
-    [
-     "Key Investigations",
-     "DNA methylation analysis of 15q11-q13 as the initial diagnostic test, Follow-up studies to define mechanism, including UBE3A",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angelman syndrome is caused by loss of function of the maternally expressed UBE3A gene within the imprinted 15q11-q13 region. In neurons, only the maternal UBE3A copy is active because the paternal copy is silenced, so loss of the maternal allele leaves neurons without functional UBE3A, which encodes a ubiquitin ligase important for synaptic regulation. The most common mechanism is a de novo maternal deletion; other causes include paternal uniparental disomy, an imprinting defect, and UBE3A point mutations. The resulting neuronal dysfunction produces the severe developmental impairment, movement disorder, and epilepsy.",
+    "additionalDifferentials": [
+      "Rett syndrome",
+      "Mowat-Wilson syndrome",
+      "Non-specific cerebral palsy with ataxia",
+      "Pitt-Hopkins syndrome",
+      "Other syndromic epileptic encephalopathies"
     ],
-    [
-     "Primary Differentials",
-     "Rett syndrome, Mowat-Wilson syndrome, Non-specific cerebral palsy with ataxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "DNA methylation analysis of 15q11-q13 as the initial diagnostic test",
+      "Follow-up studies to define mechanism, including UBE3A sequencing when methylation is normal but suspicion persists",
+      "Electroencephalography, which often shows a characteristic pattern",
+      "Neurodevelopmental assessment and communication evaluation",
+      "Sleep assessment when disturbance is significant"
     ],
-    [
-     "Management Strategy",
-     "Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent or prolonged seizures, including status epilepticus, requiring prompt management",
+      "Feeding and swallowing difficulties with aspiration risk in infancy",
+      "Scoliosis developing with age needing orthopaedic surveillance",
+      "Severe communication impairment necessitating augmentative communication support"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing as cerebral palsy and missing the genetic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is near normal, but severe intellectual disability and lack of speech persist lifelong; seizures often improve after childhood, and quality of life depends on multidisciplinary support and communication aids.",
+    "pitfalls": [
+      "Misdiagnosing as cerebral palsy and missing the genetic cause",
+      "Assuming a normal methylation test excludes the diagnosis when UBE3A mutation testing is still needed",
+      "Underrecognising the characteristic EEG changes",
+      "Overlooking the marked and treatable sleep disturbance"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding drugs that may aggravate the seizures",
+      "Communication intervention with augmentative and alternative communication systems given the near-absent speech",
+      "Physiotherapy and occupational therapy for ataxia, gait and motor function, with orthotics where needed",
+      "Management of sleep disturbance through sleep-hygiene measures and melatonin",
+      "Behavioural strategies and support for hyperactivity and feeding, with surveillance for scoliosis and gastro-oesophageal reflux",
+      "Coordinated multidisciplinary neurodevelopmental follow-up with family and carer support",
+      "Genetic counselling with recurrence-risk assessment tailored to the underlying mechanism, whether maternal deletion, uniparental disomy, imprinting defect or UBE3A mutation"
     ]
-   ],
-   "caption": "Overview comparison matrix for angelman syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angelman-syndrome-real-image",
-   "title": "Angelman syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "angelman_syndrome-pathway",
+      "title": "Angelman syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent or prolonged seizures, including status epilepticus, requiring prompt management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: DNA methylation analysis of 15q11-q13 as the initial diagnostic test, Follow-up studies to define mechanism, including UBE3A sequencing when methylation is normal but suspicion persists, Electroencephalography, which often"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding drugs that may aggravate the seizures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing as cerebral palsy and missing the genetic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angelman syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angelman_syndrome-matrix",
+      "title": "Angelman syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by severe intellectual disability, near-absent speech, and a happy demeanour with frequent laughter and smiling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "DNA methylation analysis of 15q11-q13 as the initial diagnostic test, Follow-up studies to define mechanism, including UBE3A",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rett syndrome, Mowat-Wilson syndrome, Non-specific cerebral palsy with ataxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anticonvulsant therapy for the epilepsy, favouring agents such as valproate, levetiracetam and benzodiazepines while avoiding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing as cerebral palsy and missing the genetic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angelman syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angelman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DNA methylation analysis of 15q11-q13",
+          "cells": [
+            {
+              "text": "Initial diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UBE3A sequencing",
+          "cells": [
+            {
+              "text": "Used when methylation is normal but suspicion persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Often shows a characteristic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental and communication assessment",
+          "cells": [
+            {
+              "text": "Evaluates communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep assessment",
+          "cells": [
+            {
+              "text": "Used when sleep disturbance is significant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "angelman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam or benzodiazepines"
+            },
+            {
+              "text": "Avoid drugs that may aggravate seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Augmentative and alternative communication",
+          "cells": [
+            {
+              "text": "Communication systems"
+            },
+            {
+              "text": "Speech is near-absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Ataxia, gait and motor function"
+            },
+            {
+              "text": "Orthotics where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep management",
+          "cells": [
+            {
+              "text": "Sleep-hygiene measures and melatonin"
+            },
+            {
+              "text": "Sleep disturbance is marked and treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural strategies",
+          "cells": [
+            {
+              "text": "Support for hyperactivity and feeding"
+            },
+            {
+              "text": "Surveillance for scoliosis and gastro-oesophageal reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurodevelopmental follow-up",
+          "cells": [
+            {
+              "text": "Coordinated care with family and carer support"
+            },
+            {
+              "text": "Family and carer support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Recurrence-risk assessment by mechanism"
+            },
+            {
+              "text": "Maternal deletion, uniparental disomy, imprinting defect or UBE3A mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angelman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Angelman syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe intellectual disability, near-absent speech, frequent laughter",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Frequent or prolonged seizures or status epilepticus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt treatment of seizures or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "15q11-q13 methylation, EEG, communication and sleep assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Abnormal 15q11-q13 methylation confirms the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anticonvulsant therapy favouring valproate or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Normal methylation: sequence UBE3A and repeat the targeted studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Augmentative communication systems for near-absent speech",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; orthotics where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sleep-hygiene measures and melatonin for sleep disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated neurodevelopmental follow-up with recurrence-risk counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

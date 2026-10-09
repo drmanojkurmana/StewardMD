@@ -1,171 +1,478 @@
 {
- "id": "abca3_deficiency",
- "name": "ABCA3 deficiency",
- "aliases": [
-  "ABCA3 transporter deficiency",
-  "ABCA3-related interstitial lung disease"
- ],
- "class": "non_infective",
- "system": "Respiratory / Genetic interstitial lung disease",
- "specialty": "Neonatology / Respiratory",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric respiratory and genetic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
-   "It is one of the more common genetic causes of surfactant dysfunction and can mimic surfactant protein B deficiency in neonates",
-   "Severe biallelic loss of function causes fatal neonatal respiratory failure; milder alleles cause childhood interstitial lung disease",
-   "Electron microscopy classically shows small, abnormal lamellar bodies with dense inclusions",
-   "Chest imaging shows a diffuse ground-glass pattern, later with cysts or fibrosis in survivors",
-   "Response to exogenous surfactant is typically poor, as in other intrinsic surfactant disorders",
-   "Diagnosis is confirmed by genetic testing, supported by histology and electron microscopy"
+  "id": "abca3_deficiency",
+  "name": "ABCA3 deficiency",
+  "aliases": [
+    "ABCA3 transporter deficiency",
+    "ABCA3-related interstitial lung disease"
   ],
-  "pathophysiology": "ABCA3 is a lipid transporter located in the limiting membrane of lamellar bodies within alveolar type II cells, where it is required for the transport of phospholipids into these surfactant storage organelles. Loss of ABCA3 function impairs lamellar body formation and surfactant lipid packaging, producing dysfunctional surfactant, characteristic small malformed lamellar bodies and type II cell injury. The severity depends on the residual transporter activity, so complete loss causes lethal neonatal disease while partial function produces a chronic interstitial lung disease phenotype.",
-  "additionalDifferentials": [
-   "Surfactant protein B deficiency",
-   "Surfactant protein C deficiency",
-   "Neonatal respiratory distress syndrome of prematurity",
-   "Congenital pneumonia",
-   "Other childhood interstitial lung disease entities",
-   "Pulmonary alveolar proteinosis of other cause"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for ABCA3 mutations",
-   "High-resolution CT of the chest",
-   "Lung biopsy with electron microscopy showing abnormal lamellar bodies",
-   "Immunostaining for surfactant proteins to exclude related disorders",
-   "Exclusion of infection and cardiac disease"
-  ],
-  "redFlags": [
-   "Severe neonatal respiratory failure without another explanation",
-   "Poor response to exogenous surfactant",
-   "Progressive hypoxaemia and increasing respiratory support",
-   "Family history of unexplained neonatal or childhood lung disease"
-  ],
-  "prognosis": "Complete loss-of-function disease is often fatal in infancy without lung transplantation; partial-function variants cause chronic interstitial lung disease with a variable, sometimes protracted, course.",
-  "pitfalls": [
-   "Attributing term-neonate respiratory failure only to infection or transient causes",
-   "Assuming a poor surfactant response rules out a surfactant disorder",
-   "Not pursuing electron microscopy or genetics in unexplained diffuse lung disease",
-   "Overlooking milder ABCA3 disease in older children with interstitial lung disease"
-  ],
-  "references": [
-   "Kendig's Disorders of the Respiratory Tract in Children (standard reference)",
-   "Paediatric interstitial lung disease guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal respiratory failure titrated to the severity phenotype",
-   "Trial empirical anti-inflammatory therapy in childhood interstitial lung disease with systemic corticosteroids, adding hydroxychloroquine and/or azithromycin, recognising that responses are variable",
-   "Optimise nutrition and growth and prevent respiratory infection with immunisations including RSV prophylaxis and prompt treatment of intercurrent infection",
-   "Recognise that exogenous surfactant replacement gives at best transient benefit in this intrinsic surfactant disorder",
-   "Refer severe or progressive disease for lung transplantation, the only definitive option for lethal loss-of-function disease",
-   "Offer genetic counselling and family testing for this autosomal recessive disorder, including reproductive-genetics advice",
-   "Manage within a specialist paediatric respiratory or neonatal multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "abca3_deficiency-pathway",
-   "title": "ABCA3 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal respiratory failure without another explanation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for ABCA3 mutations, High-resolution CT of the chest, Lung biopsy with electron microscopy showing abnormal lamellar bodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal respiratory failure titrated to the severity phenotype"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing term-neonate respiratory failure only to infection or transient causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of abca3 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "abca3_deficiency-matrix",
-   "title": "ABCA3 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Genetic interstitial lung disease",
+  "specialty": "Neonatology / Respiratory",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric respiratory and genetic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
+      "It is one of the more common genetic causes of surfactant dysfunction and can mimic surfactant protein B deficiency in neonates",
+      "Severe biallelic loss of function causes fatal neonatal respiratory failure; milder alleles cause childhood interstitial lung disease",
+      "Electron microscopy classically shows small, abnormal lamellar bodies with dense inclusions",
+      "Chest imaging shows a diffuse ground-glass pattern, later with cysts or fibrosis in survivors",
+      "Response to exogenous surfactant is typically poor, as in other intrinsic surfactant disorders",
+      "Diagnosis is confirmed by genetic testing, supported by histology and electron microscopy"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for ABCA3 mutations, High-resolution CT of the chest, Lung biopsy with electron microscopy showing abnormal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ABCA3 is a lipid transporter located in the limiting membrane of lamellar bodies within alveolar type II cells, where it is required for the transport of phospholipids into these surfactant storage organelles. Loss of ABCA3 function impairs lamellar body formation and surfactant lipid packaging, producing dysfunctional surfactant, characteristic small malformed lamellar bodies and type II cell injury. The severity depends on the residual transporter activity, so complete loss causes lethal neonatal disease while partial function produces a chronic interstitial lung disease phenotype.",
+    "additionalDifferentials": [
+      "Surfactant protein B deficiency",
+      "Surfactant protein C deficiency",
+      "Neonatal respiratory distress syndrome of prematurity",
+      "Congenital pneumonia",
+      "Other childhood interstitial lung disease entities",
+      "Pulmonary alveolar proteinosis of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Surfactant protein B deficiency, Surfactant protein C deficiency, Neonatal respiratory distress syndrome of prematurity",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for ABCA3 mutations",
+      "High-resolution CT of the chest",
+      "Lung biopsy with electron microscopy showing abnormal lamellar bodies",
+      "Immunostaining for surfactant proteins to exclude related disorders",
+      "Exclusion of infection and cardiac disease"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal respiratory failure without another explanation",
+      "Poor response to exogenous surfactant",
+      "Progressive hypoxaemia and increasing respiratory support",
+      "Family history of unexplained neonatal or childhood lung disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing term-neonate respiratory failure only to infection or transient causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Complete loss-of-function disease is often fatal in infancy without lung transplantation; partial-function variants cause chronic interstitial lung disease with a variable, sometimes protracted, course.",
+    "pitfalls": [
+      "Attributing term-neonate respiratory failure only to infection or transient causes",
+      "Assuming a poor surfactant response rules out a surfactant disorder",
+      "Not pursuing electron microscopy or genetics in unexplained diffuse lung disease",
+      "Overlooking milder ABCA3 disease in older children with interstitial lung disease"
+    ],
+    "references": [
+      "Kendig's Disorders of the Respiratory Tract in Children (standard reference)",
+      "Paediatric interstitial lung disease guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal respiratory failure titrated to the severity phenotype",
+      "Trial empirical anti-inflammatory therapy in childhood interstitial lung disease with systemic corticosteroids, adding hydroxychloroquine and/or azithromycin, recognising that responses are variable",
+      "Optimise nutrition and growth and prevent respiratory infection with immunisations including RSV prophylaxis and prompt treatment of intercurrent infection",
+      "Recognise that exogenous surfactant replacement gives at best transient benefit in this intrinsic surfactant disorder",
+      "Refer severe or progressive disease for lung transplantation, the only definitive option for lethal loss-of-function disease",
+      "Offer genetic counselling and family testing for this autosomal recessive disorder, including reproductive-genetics advice",
+      "Manage within a specialist paediatric respiratory or neonatal multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for abca3 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "abca3-deficiency-real-image",
-   "title": "ABCA3 deficiency: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "abca3_deficiency-pathway",
+      "title": "ABCA3 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal respiratory failure without another explanation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for ABCA3 mutations, High-resolution CT of the chest, Lung biopsy with electron microscopy showing abnormal lamellar bodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal respiratory failure titrated to the severity phenotype"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing term-neonate respiratory failure only to infection or transient causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of abca3 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "abca3_deficiency-matrix",
+      "title": "ABCA3 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive surfactant disorder caused by biallelic mutations in the ABCA3 lipid-transporter gene",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for ABCA3 mutations, High-resolution CT of the chest, Lung biopsy with electron microscopy showing abnormal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Surfactant protein B deficiency, Surfactant protein C deficiency, Neonatal respiratory distress syndrome of prematurity",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive respiratory care as the foundation, with supplemental oxygen and mechanical ventilation for neonatal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing term-neonate respiratory failure only to infection or transient causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for abca3 deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric respiratory and genetic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "abca3_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ABCA3 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic ABCA3 variants, the cause of the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Small, abnormal lamellar bodies with dense inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunostaining for surfactant proteins",
+          "cells": [
+            {
+              "text": "Excludes related surfactant disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of infection and cardiac disease",
+          "cells": [
+            {
+              "text": "Alternative causes of respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abca3_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Surfactant protein B deficiency",
+          "cells": [
+            {
+              "text": "Also a neonatal surfactant disorder that ABCA3 can mimic"
+            },
+            {
+              "text": "Surfactant protein immunostaining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital pneumonia",
+          "cells": [
+            {
+              "text": "Excluded, with cardiac disease, before attributing failure to ABCA3"
+            },
+            {
+              "text": "Infection and cardiac exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abca3_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive respiratory care",
+          "cells": [
+            {
+              "text": "Foundation of care; oxygen and ventilation titrated to severity"
+            },
+            {
+              "text": "Phenotype-guided support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids with hydroxychloroquine or azithromycin",
+          "cells": [
+            {
+              "text": "Empirical trial in childhood interstitial lung disease"
+            },
+            {
+              "text": "Responses are variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition, growth and immunisation including RSV prophylaxis",
+          "cells": [
+            {
+              "text": "Prevents respiratory infection"
+            },
+            {
+              "text": "Prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous surfactant replacement",
+          "cells": [
+            {
+              "text": "Intrinsic surfactant disorder"
+            },
+            {
+              "text": "At best transient benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "Severe or progressive loss-of-function disease"
+            },
+            {
+              "text": "The only definitive option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Includes reproductive-genetics advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist multidisciplinary team care",
+          "cells": [
+            {
+              "text": "Paediatric respiratory or neonatal team"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "abca3_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of ABCA3 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe neonatal respiratory failure or childhood interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal respiratory failure without another explanation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review; consider lung transplant referral if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABCA3 genetic testing and high-resolution chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic ABCA3 variants found on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm with electron microscopy of lamellar bodies on lung biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude infection, cardiac disease and surfactant protein B or C deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive respiratory care with oxygen or ventilation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trial corticosteroids with hydroxychloroquine or azithromycin in childhood ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunisation including RSV prophylaxis; family genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete loss of function is often fatal in infancy without transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

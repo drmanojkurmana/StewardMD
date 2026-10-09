@@ -1,186 +1,632 @@
 {
- "id": "PYODERMA_GANGRENOSUM",
- "name": "Pyoderma gangrenosum",
- "system": "Dermatology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "pyoderma gangrenosum",
-  "PG",
-  "pyoderma gangraenosum",
-  "neutrophilic ulcerative dermatosis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
-   "Classic feature is pathergy — new or worsening ulceration at sites of minor trauma, injection, or surgical incision",
-   "About half of cases are associated with an underlying systemic disease, most commonly inflammatory bowel disease, rheumatoid arthritis, or a hematologic malignancy/paraproteinemia",
-   "Diagnosis is one of exclusion; there is no single confirmatory laboratory or histologic test",
-   "Ulcer base often shows purulent, necrotic tissue with a boggy, undermined edge rather than a clean granulating base",
-   "Lower extremities (especially pretibial region) are the most common site, but PG can occur anywhere including peristomal skin",
-   "Debridement and skin grafting can worsen lesions via pathergy and should generally be avoided until disease activity is controlled",
-   "Response to immunosuppressive therapy, when it occurs, supports the diagnosis retrospectively"
+  "id": "PYODERMA_GANGRENOSUM",
+  "name": "Pyoderma gangrenosum",
+  "system": "Dermatology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "pyoderma gangrenosum",
+    "PG",
+    "pyoderma gangraenosum",
+    "neutrophilic ulcerative dermatosis"
   ],
-  "pathophysiology": "Pyoderma gangrenosum is a neutrophilic dermatosis thought to arise from dysregulated innate immune activation and neutrophil chemotaxis/function, often in a genetically predisposed host. Cytokine-driven neutrophilic infiltration in the skin, without a demonstrable infectious trigger, produces sterile abscess-like tissue destruction. The tendency for lesions to develop at sites of trauma (pathergy) reflects this exaggerated local inflammatory response. Its frequent association with inflammatory bowel disease, inflammatory arthritides, and myeloid dyscrasias suggests a shared systemic inflammatory or clonal process in many patients.",
-  "additionalDifferentials": [
-   "Necrotizing fasciitis or other necrotizing soft-tissue infection",
-   "Vasculitic ulcer (e.g., ANCA-associated vasculitis)",
-   "Venous or arterial (ischemic) leg ulcer",
-   "Calciphylaxis",
-   "Cutaneous malignancy (e.g., ulcerated squamous cell carcinoma)",
-   "Brown recluse spider bite / factitial ulceration"
-  ],
-  "infectionMimics": [
-   "Necrotizing fasciitis",
-   "Ecthyma gangrenosum",
-   "Deep fungal or atypical mycobacterial ulcer",
-   "Cutaneous anthrax or other bacterial ulcerative infection"
-  ],
-  "nonInfectiousMimics": [
-   "Vasculitic ulceration",
-   "Venous stasis or arterial insufficiency ulcer",
-   "Calciphylaxis",
-   "Factitial (self-induced) ulcer",
-   "Ulcerated cutaneous malignancy"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with histology and tissue culture — helps exclude infection and vasculitis, though PG findings are nonspecific",
-   "Tissue and blood cultures — to rule out an infectious ulcer before immunosuppression is started",
-   "Complete blood count with differential and peripheral smear — screens for underlying myeloproliferative or myelodysplastic disease",
-   "Serum protein electrophoresis/immunofixation — evaluates for paraproteinemia associated with PG",
-   "Colonoscopy or evaluation for inflammatory bowel disease — assesses for a common associated condition",
-   "ANCA, rheumatoid factor, and autoimmune serologies — helps exclude vasculitis and screens for associated rheumatologic disease",
-   "Ankle-brachial index or vascular studies — excludes arterial/venous insufficiency contributing to ulceration",
-   "Coagulation/hypercoagulability workup if calciphylaxis or thrombotic ulcer is a concern"
-  ],
-  "redFlags": [
-   "Rapidly expanding ulcer with systemic toxicity — reconsider necrotizing infection and seek urgent surgical/infectious disease input",
-   "Worsening of the ulcer after debridement or grafting, consistent with pathergy, warrants stopping surgical intervention and escalating immunosuppression",
-   "New PG lesions in a patient with known IBD may signal a disease flare requiring gastroenterology involvement",
-   "Unexplained cytopenias or monoclonal gammopathy alongside PG should prompt hematologic evaluation for underlying malignancy",
-   "Peristomal PG in patients with ostomies can be mistaken for a wound infection and mismanaged"
-  ],
-  "pitfalls": [
-   "Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy",
-   "Assuming a positive wound culture confirms infection rather than colonization of a chronic ulcer",
-   "Delaying diagnosis by relying on a single confirmatory test rather than the clinical picture and exclusion of mimics",
-   "Missing an underlying systemic disease (IBD, arthritis, hematologic disorder) that drives disease activity and recurrence risk"
-  ],
-  "prognosis": "Course is variable and often relapsing, particularly when an underlying systemic disease remains active; lesions can heal with characteristic cribriform (atrophic, often hyperpigmented) scarring. Prompt recognition, avoidance of unnecessary surgical intervention, and treatment of any associated systemic condition improve outcomes.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Chapter on Cutaneous Manifestations of Internal Disease / Neutrophilic Dermatoses"
-  ],
-  "crossLinks": [
-   "inflammatory_bowel_disease"
-  ],
-  "management": [
-   "Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an alternative or steroid-sparing agent",
-   "Escalate refractory or inflammatory-bowel-disease-associated disease to TNF-alpha inhibitors such as infliximab or adalimumab",
-   "Treat localised disease with potent topical or intralesional corticosteroids or a topical calcineurin inhibitor such as tacrolimus",
-   "Provide meticulous moist wound care with non-adherent dressings and adequate analgesia, avoiding aggressive surgical debridement or unnecessary grafting because of pathergy",
-   "Protect the skin from trauma, injections and surgery at new sites to prevent pathergy-induced ulceration",
-   "Identify and treat any associated condition, most often inflammatory bowel disease, inflammatory arthritis or a haematological or myeloproliferative disorder",
-   "Coordinate care across dermatology with gastroenterology, rheumatology or haematology as dictated by the underlying association"
-  ]
- },
- "algorithms": [
-  {
-   "id": "pyoderma_gangrenosum-pathway",
-   "title": "Pyoderma gangrenosum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly expanding ulcer with systemic toxicity - reconsider necrotizing infection and seek urgent surgical/infectious disease input",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with histology and tissue culture - helps exclude infection and vasculitis, though PG findings are nonspecific, Tissue and blood cultures - to rule out an infectious ulcer before immunosuppression is started,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an alternative or steroid-sparing agent"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyoderma gangrenosum."
-  }
- ],
- "tables": [
-  {
-   "id": "pyoderma_gangrenosum-matrix",
-   "title": "Pyoderma gangrenosum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
+      "Classic feature is pathergy — new or worsening ulceration at sites of minor trauma, injection, or surgical incision",
+      "About half of cases are associated with an underlying systemic disease, most commonly inflammatory bowel disease, rheumatoid arthritis, or a hematologic malignancy/paraproteinemia",
+      "Diagnosis is one of exclusion; there is no single confirmatory laboratory or histologic test",
+      "Ulcer base often shows purulent, necrotic tissue with a boggy, undermined edge rather than a clean granulating base",
+      "Lower extremities (especially pretibial region) are the most common site, but PG can occur anywhere including peristomal skin",
+      "Debridement and skin grafting can worsen lesions via pathergy and should generally be avoided until disease activity is controlled",
+      "Response to immunosuppressive therapy, when it occurs, supports the diagnosis retrospectively"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with histology and tissue culture - helps exclude infection and vasculitis, though PG findings are nonspecific,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyoderma gangrenosum is a neutrophilic dermatosis thought to arise from dysregulated innate immune activation and neutrophil chemotaxis/function, often in a genetically predisposed host. Cytokine-driven neutrophilic infiltration in the skin, without a demonstrable infectious trigger, produces sterile abscess-like tissue destruction. The tendency for lesions to develop at sites of trauma (pathergy) reflects this exaggerated local inflammatory response. Its frequent association with inflammatory bowel disease, inflammatory arthritides, and myeloid dyscrasias suggests a shared systemic inflammatory or clonal process in many patients.",
+    "additionalDifferentials": [
+      "Necrotizing fasciitis or other necrotizing soft-tissue infection",
+      "Vasculitic ulcer (e.g., ANCA-associated vasculitis)",
+      "Venous or arterial (ischemic) leg ulcer",
+      "Calciphylaxis",
+      "Cutaneous malignancy (e.g., ulcerated squamous cell carcinoma)",
+      "Brown recluse spider bite / factitial ulceration"
     ],
-    [
-     "Primary Differentials",
-     "Necrotizing fasciitis or other necrotizing soft-tissue infection, Vasculitic ulcer (e.g., ANCA-associated vasculitis), Venous or",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Necrotizing fasciitis",
+      "Ecthyma gangrenosum",
+      "Deep fungal or atypical mycobacterial ulcer",
+      "Cutaneous anthrax or other bacterial ulcerative infection"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Vasculitic ulceration",
+      "Venous stasis or arterial insufficiency ulcer",
+      "Calciphylaxis",
+      "Factitial (self-induced) ulcer",
+      "Ulcerated cutaneous malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Skin biopsy with histology and tissue culture — helps exclude infection and vasculitis, though PG findings are nonspecific",
+      "Tissue and blood cultures — to rule out an infectious ulcer before immunosuppression is started",
+      "Complete blood count with differential and peripheral smear — screens for underlying myeloproliferative or myelodysplastic disease",
+      "Serum protein electrophoresis/immunofixation — evaluates for paraproteinemia associated with PG",
+      "Colonoscopy or evaluation for inflammatory bowel disease — assesses for a common associated condition",
+      "ANCA, rheumatoid factor, and autoimmune serologies — helps exclude vasculitis and screens for associated rheumatologic disease",
+      "Ankle-brachial index or vascular studies — excludes arterial/venous insufficiency contributing to ulceration",
+      "Coagulation/hypercoagulability workup if calciphylaxis or thrombotic ulcer is a concern"
+    ],
+    "redFlags": [
+      "Rapidly expanding ulcer with systemic toxicity — reconsider necrotizing infection and seek urgent surgical/infectious disease input",
+      "Worsening of the ulcer after debridement or grafting, consistent with pathergy, warrants stopping surgical intervention and escalating immunosuppression",
+      "New PG lesions in a patient with known IBD may signal a disease flare requiring gastroenterology involvement",
+      "Unexplained cytopenias or monoclonal gammopathy alongside PG should prompt hematologic evaluation for underlying malignancy",
+      "Peristomal PG in patients with ostomies can be mistaken for a wound infection and mismanaged"
+    ],
+    "pitfalls": [
+      "Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy",
+      "Assuming a positive wound culture confirms infection rather than colonization of a chronic ulcer",
+      "Delaying diagnosis by relying on a single confirmatory test rather than the clinical picture and exclusion of mimics",
+      "Missing an underlying systemic disease (IBD, arthritis, hematologic disorder) that drives disease activity and recurrence risk"
+    ],
+    "prognosis": "Course is variable and often relapsing, particularly when an underlying systemic disease remains active; lesions can heal with characteristic cribriform (atrophic, often hyperpigmented) scarring. Prompt recognition, avoidance of unnecessary surgical intervention, and treatment of any associated systemic condition improve outcomes.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Chapter on Cutaneous Manifestations of Internal Disease / Neutrophilic Dermatoses"
+    ],
+    "crossLinks": [
+      "inflammatory_bowel_disease"
+    ],
+    "management": [
+      "Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an alternative or steroid-sparing agent",
+      "Escalate refractory or inflammatory-bowel-disease-associated disease to TNF-alpha inhibitors such as infliximab or adalimumab",
+      "Treat localised disease with potent topical or intralesional corticosteroids or a topical calcineurin inhibitor such as tacrolimus",
+      "Provide meticulous moist wound care with non-adherent dressings and adequate analgesia, avoiding aggressive surgical debridement or unnecessary grafting because of pathergy",
+      "Protect the skin from trauma, injections and surgery at new sites to prevent pathergy-induced ulceration",
+      "Identify and treat any associated condition, most often inflammatory bowel disease, inflammatory arthritis or a haematological or myeloproliferative disorder",
+      "Coordinate care across dermatology with gastroenterology, rheumatology or haematology as dictated by the underlying association"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyoderma gangrenosum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyoderma-gangrenosum-real-image",
-   "title": "Pyoderma gangrenosum: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pyoderma_gangrenosum-pathway",
+      "title": "Pyoderma gangrenosum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly expanding ulcer with systemic toxicity - reconsider necrotizing infection and seek urgent surgical/infectious disease input",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with histology and tissue culture - helps exclude infection and vasculitis, though PG findings are nonspecific, Tissue and blood cultures - to rule out an infectious ulcer before immunosuppression is started,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an alternative or steroid-sparing agent"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyoderma gangrenosum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyoderma_gangrenosum-matrix",
+      "title": "Pyoderma gangrenosum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Starts as a tender pustule or nodule that rapidly breaks down into an ulcer with a violaceous, undermined, overhanging border",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with histology and tissue culture - helps exclude infection and vasculitis, though PG findings are nonspecific,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Necrotizing fasciitis or other necrotizing soft-tissue infection, Vasculitic ulcer (e.g., ANCA-associated vasculitis), Venous or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic immunosuppression, using high-potency corticosteroids as first line and ciclosporin as an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating PG as an infected wound and pursuing aggressive debridement, which can worsen the ulcer through pathergy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyoderma gangrenosum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "DermNet, Pyoderma gangrenosum",
+      "url": "https://dermnetnz.org/topics/pyoderma-gangrenosum",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PYODERMA_GANGRENOSUM-diagnostic",
+      "kind": "diagnostic",
+      "title": "Delphi consensus criteria for pyoderma gangrenosum (2018)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Major criterion",
+          "cells": [
+            {
+              "text": "Neutrophilic infiltrate on biopsy of the ulcer edge"
+            },
+            {
+              "text": "Required; may be absent once treated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor criteria needed",
+          "cells": [
+            {
+              "text": "4 or more of 8",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "86% sensitive, 90% specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: infection excluded",
+          "cells": [
+            {
+              "text": "Swab, culture and histology"
+            },
+            {
+              "text": "Organisms are colonisers, not the cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: pathergy",
+          "cells": [
+            {
+              "text": "Ulcer after minor trauma"
+            },
+            {
+              "text": "{{hy:Debridement can enlarge the ulcer}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: IBD or inflammatory arthritis",
+          "cells": [
+            {
+              "text": "History present"
+            },
+            {
+              "text": "PG occurs in 1% to 3% of IBD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: rapid evolution",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Papule, vesicle or pustule ulcerating within 4",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Early lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: ulcer edge",
+          "cells": [
+            {
+              "text": "Peripheral erythema, undermined border, tenderness"
+            },
+            {
+              "text": "Violaceous undermined border is classic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: distribution",
+          "cells": [
+            {
+              "text": "Multiple ulcers, one or more on anterior lower leg"
+            },
+            {
+              "text": "Typical site"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: scars",
+          "cells": [
+            {
+              "text": "Cribriform or wrinkled paper scars"
+            },
+            {
+              "text": "Healed ulcers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: treatment response",
+          "cells": [
+            {
+              "text": "Ulcer shrinks within 1 month of immunosuppression"
+            },
+            {
+              "text": "Supports diagnosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PYODERMA_GANGRENOSUM-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of pyoderma gangrenosum",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous or arterial ulcer",
+          "cells": [
+            {
+              "text": "Vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vasculitis or occlusive vasculopathy",
+          "cells": [
+            {
+              "text": "Vascular inflammatory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ecthyma, ecthyma gangrenosum, Buruli ulcer, tuberculosis, sporotrichosis, amoebiasis",
+          "cells": [
+            {
+              "text": "{{hy:Infection; exclude with culture and biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ulcerating skin tumour or lymphoma",
+          "cells": [
+            {
+              "text": "Neoplastic; biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug-induced ulcer (hydroxycarbamide, nicorandil, halogens)",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factitious ulcer",
+          "cells": [
+            {
+              "text": "Artefact"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PYODERMA_GANGRENOSUM-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pyoderma gangrenosum",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentle wound care",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Avoid wide surgical debridement while active}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potent topical steroid or tacrolimus ointment",
+          "cells": [
+            {
+              "text": "Small ulcers"
+            },
+            {
+              "text": "Intralesional steroid at the edge is an option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral doxycycline or minocycline",
+          "cells": [
+            {
+              "text": "Small or mild ulcers"
+            },
+            {
+              "text": "Anti-inflammatory use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral prednisone or IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Larger or rapidly spreading ulcers"
+            },
+            {
+              "text": "IV pulses for 3 to 5 days; taper slowly over months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciclosporin",
+          "cells": [
+            {
+              "text": "Alternative to prednisone"
+            },
+            {
+              "text": "Similar efficacy; about half healed within a year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infliximab, adalimumab or etanercept",
+          "cells": [
+            {
+              "text": "Refractory or IBD-associated disease"
+            },
+            {
+              "text": "Growing evidence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat associated disease",
+          "cells": [
+            {
+              "text": "Active IBD, arthritis, haematological disease"
+            },
+            {
+              "text": "IBD active in over half of IBD-related episodes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses were not stated in the source opened. Antibiotics such as flucloxacillin help only with secondary infection."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PYODERMA_GANGRENOSUM-dx-mgmt",
+      "title": "Diagnosis and management of pyoderma gangrenosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging painful ulcer with violaceous undermined edge",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Swab and culture; biopsy of ulcer edge",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection, vasculitis or tumour found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neutrophilic infiltrate and 4 or more minor criteria?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Reconsider diagnosis; repeat biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for IBD, arthritis, haematological disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Small, limited ulcer?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical steroid or tacrolimus, intralesional steroid",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic prednisone or ciclosporin",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Healing?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Add anti-TNF agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Slow taper; avoid trauma",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

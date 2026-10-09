@@ -1,174 +1,470 @@
 {
- "id": "gabab_receptor_encephalitis",
- "name": "GABA-B receptor encephalitis",
- "aliases": [
-  "anti-GABA-B receptor encephalitis",
-  "GABA(B) receptor antibody limbic encephalitis",
-  "gamma-aminobutyric acid B receptor encephalitis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
-   "Subacute memory impairment, confusion, and behavioural change accompany the seizures",
-   "Antibodies target the B1 subunit of the metabotropic GABA-B receptor",
-   "Has a strong paraneoplastic association, most often with small-cell lung carcinoma, so thoracic imaging and tumour screening are essential",
-   "Coexisting antibodies to other onconeural or surface antigens are not uncommon and may modify the phenotype",
-   "MRI typically shows medial temporal signal change consistent with limbic encephalitis",
-   "Management pairs seizure control and immunotherapy (corticosteroids, intravenous immunoglobulin, plasma exchange, escalating to rituximab) with treatment of any underlying tumour"
+  "id": "gabab_receptor_encephalitis",
+  "name": "GABA-B receptor encephalitis",
+  "aliases": [
+    "anti-GABA-B receptor encephalitis",
+    "GABA(B) receptor antibody limbic encephalitis",
+    "gamma-aminobutyric acid B receptor encephalitis"
   ],
-  "pathophysiology": "Antibodies are directed against the B1 subunit of the metabotropic gamma-aminobutyric acid type B (GABA-B) receptor, which mediates slow inhibitory neurotransmission. Impaired GABA-B signalling reduces inhibition within limbic and cortical circuits, lowering seizure threshold and disrupting memory networks. The disorder is frequently paraneoplastic, with an immune response cross-reacting with receptor expressed by an underlying tumour, most commonly small-cell lung carcinoma; identification and treatment of that tumour is central to management.",
-  "additionalDifferentials": [
-   "Other autoimmune limbic encephalitides (LGI1, NMDA receptor, AMPA receptor)",
-   "Paraneoplastic encephalitis with intracellular antibodies",
-   "Infective encephalitis including herpes simplex",
-   "Status epilepticus of other cause",
-   "Metabolic or toxic encephalopathy",
-   "Rapidly progressive dementia"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel",
-   "MRI of the brain to demonstrate limbic involvement",
-   "Electroencephalography to characterise seizures and subclinical activity",
-   "CT of the chest and whole-body imaging to detect small-cell lung carcinoma",
-   "Cerebrospinal fluid analysis for inflammation and to exclude infection",
-   "Screening for coexisting onconeural antibodies"
-  ],
-  "redFlags": [
-   "Refractory seizures or status epilepticus",
-   "Rapid cognitive decline and encephalopathy",
-   "Evidence of an underlying malignancy requiring urgent oncological input",
-   "Deteriorating consciousness needing critical care"
-  ],
-  "prognosis": "Seizures and cognition often improve with immunotherapy and tumour treatment, but outcome is heavily influenced by the underlying malignancy, and paraneoplastic cases carry a more guarded prognosis.",
-  "pitfalls": [
-   "Failing to search thoroughly for small-cell lung carcinoma",
-   "Treating seizures without initiating immunotherapy",
-   "Overlooking coexisting antibodies that alter management",
-   "Assuming a benign course when the disorder is paraneoplastic"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Autoimmune Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange",
-   "Escalation to second-line immunotherapy such as rituximab or cyclophosphamide in refractory or relapsing disease",
-   "Diligent search for and treatment of an underlying tumour, most often small-cell lung carcinoma, as tumour treatment is central to disease control",
-   "Control of the frequently refractory seizures with antiseizure medications, escalating to intensive care management for status epilepticus",
-   "Supportive and rehabilitative care for the cognitive and behavioural impairment",
-   "Ongoing surveillance for tumour recurrence and neurological relapse",
-   "Multidisciplinary care coordinated between neurology and oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gabab_receptor_encephalitis-pathway",
-   "title": "GABA-B receptor encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel, MRI of the brain to demonstrate limbic involvement, Electroencephalography to characterise seizures and subclinical activity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to search thoroughly for small-cell lung carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gaba-b receptor encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "gabab_receptor_encephalitis-matrix",
-   "title": "GABA-B receptor encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
+      "Subacute memory impairment, confusion, and behavioural change accompany the seizures",
+      "Antibodies target the B1 subunit of the metabotropic GABA-B receptor",
+      "Has a strong paraneoplastic association, most often with small-cell lung carcinoma, so thoracic imaging and tumour screening are essential",
+      "Coexisting antibodies to other onconeural or surface antigens are not uncommon and may modify the phenotype",
+      "MRI typically shows medial temporal signal change consistent with limbic encephalitis",
+      "Management pairs seizure control and immunotherapy (corticosteroids, intravenous immunoglobulin, plasma exchange, escalating to rituximab) with treatment of any underlying tumour"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel, MRI of the brain to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Antibodies are directed against the B1 subunit of the metabotropic gamma-aminobutyric acid type B (GABA-B) receptor, which mediates slow inhibitory neurotransmission. Impaired GABA-B signalling reduces inhibition within limbic and cortical circuits, lowering seizure threshold and disrupting memory networks. The disorder is frequently paraneoplastic, with an immune response cross-reacting with receptor expressed by an underlying tumour, most commonly small-cell lung carcinoma; identification and treatment of that tumour is central to management.",
+    "additionalDifferentials": [
+      "Other autoimmune limbic encephalitides (LGI1, NMDA receptor, AMPA receptor)",
+      "Paraneoplastic encephalitis with intracellular antibodies",
+      "Infective encephalitis including herpes simplex",
+      "Status epilepticus of other cause",
+      "Metabolic or toxic encephalopathy",
+      "Rapidly progressive dementia"
     ],
-    [
-     "Primary Differentials",
-     "Other autoimmune limbic encephalitides (LGI1, NMDA receptor, AMPA receptor), Paraneoplastic encephalitis with intracellular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel",
+      "MRI of the brain to demonstrate limbic involvement",
+      "Electroencephalography to characterise seizures and subclinical activity",
+      "CT of the chest and whole-body imaging to detect small-cell lung carcinoma",
+      "Cerebrospinal fluid analysis for inflammation and to exclude infection",
+      "Screening for coexisting onconeural antibodies"
     ],
-    [
-     "Management Strategy",
-     "Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory seizures or status epilepticus",
+      "Rapid cognitive decline and encephalopathy",
+      "Evidence of an underlying malignancy requiring urgent oncological input",
+      "Deteriorating consciousness needing critical care"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to search thoroughly for small-cell lung carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Seizures and cognition often improve with immunotherapy and tumour treatment, but outcome is heavily influenced by the underlying malignancy, and paraneoplastic cases carry a more guarded prognosis.",
+    "pitfalls": [
+      "Failing to search thoroughly for small-cell lung carcinoma",
+      "Treating seizures without initiating immunotherapy",
+      "Overlooking coexisting antibodies that alter management",
+      "Assuming a benign course when the disorder is paraneoplastic"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Autoimmune Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange",
+      "Escalation to second-line immunotherapy such as rituximab or cyclophosphamide in refractory or relapsing disease",
+      "Diligent search for and treatment of an underlying tumour, most often small-cell lung carcinoma, as tumour treatment is central to disease control",
+      "Control of the frequently refractory seizures with antiseizure medications, escalating to intensive care management for status epilepticus",
+      "Supportive and rehabilitative care for the cognitive and behavioural impairment",
+      "Ongoing surveillance for tumour recurrence and neurological relapse",
+      "Multidisciplinary care coordinated between neurology and oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for gaba-b receptor encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gabab-receptor-encephalitis-real-image",
-   "title": "GABA-B receptor encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "gabab_receptor_encephalitis-pathway",
+      "title": "GABA-B receptor encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel, MRI of the brain to demonstrate limbic involvement, Electroencephalography to characterise seizures and subclinical activity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to search thoroughly for small-cell lung carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gaba-b receptor encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gabab_receptor_encephalitis-matrix",
+      "title": "GABA-B receptor encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a limbic encephalitis with early, frequently prominent and refractory seizures",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid testing for GABA-B receptor antibodies and a wider autoimmune panel, MRI of the brain to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autoimmune limbic encephalitides (LGI1, NMDA receptor, AMPA receptor), Paraneoplastic encephalitis with intracellular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt first-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to search thoroughly for small-cell lung carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gaba-b receptor encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gabab_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF GABA-B receptor antibodies",
+          "cells": [
+            {
+              "text": "Detects GABA-B receptor antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Demonstrates limbic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Characterises seizures and subclinical activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest and whole-body imaging",
+          "cells": [
+            {
+              "text": "Detects small-cell lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Inflammation; excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for coexisting onconeural antibodies",
+          "cells": [
+            {
+              "text": "Coexisting antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabab_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other autoimmune limbic encephalitides (LGI1, NMDA, AMPA)",
+          "cells": [
+            {
+              "text": "Distinguished by antibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic encephalitis with intracellular antibodies",
+          "cells": [
+            {
+              "text": "Intracellular rather than cell-surface antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective encephalitis, including herpes simplex",
+          "cells": [
+            {
+              "text": "Excluded by CSF analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gabab_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunotherapy",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide for refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour search and treatment",
+          "cells": [
+            {
+              "text": "Most often small-cell lung carcinoma; tumour treatment is central"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For refractory seizures; intensive care for status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive and rehabilitative care",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Tumour recurrence and neurological relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology and oncology coordination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gabab_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of GABA-B receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GABA-B receptor encephalitis: limbic encephalopathy with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory seizures, rapid decline, falling consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care for status epilepticus or deteriorating consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF GABA-B antibodies, MRI, EEG and chest CT for lung cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are GABA-B receptor antibodies confirmed in serum or CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider LGI1, NMDA or AMPA encephalitis, paraneoplastic or infective causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line immunotherapy with corticosteroids, IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Second-line rituximab or cyclophosphamide if refractory or relapsing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Search for and treat the underlying tumour, most often small-cell lung carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication for refractory seizures, with intensive care if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Seizures and cognition often improve with immunotherapy and tumour treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -238,25 +238,568 @@
       "caption": "Diagnostic and clinical overview matrix for seizure / epilepsy."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "seizure-epilepsy-real-image",
-      "title": "Seizure / epilepsy: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Seizure Disorders",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/seizure-disorders/seizure-disorders",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "American Epilepsy Society, Convulsive status epilepticus guideline 2016",
+      "url": "https://aesnet.org/clinical-care/clinical-guidance/guideline-prolonged-seizures",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 369-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 369-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "seizure_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and working up seizures and epilepsy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Epilepsy definition",
+          "cells": [
+            {
+              "text": "2 or more unprovoked seizures, or 1 with high recurrence risk",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "A provoked seizure from a correctable cause is not epilepsy"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Status epilepticus",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Convulsion over 5 min, or 2 or more seizures without recovery between",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Treat as an emergency; older definition was 30 min}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Seizure type (ILAE 2017)",
+          "cells": [
+            {
+              "text": "Focal, generalised or unknown onset"
+            },
+            {
+              "text": "Focal onset may evolve to bilateral tonic-clonic; look for aura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence after first unprovoked seizure",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 31 to 71% in first 12 months",
+              "range": [
+                31,
+                71
+              ]
+            },
+            {
+              "text": "Higher with brain insult, epileptiform EEG, imaging lesion, nocturnal seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods",
+          "cells": [
+            {
+              "text": "Glucose, sodium, calcium, magnesium, phosphate, renal and liver tests"
+            },
+            {
+              "text": "Find metabolic or provoking causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Provoking drugs and substances",
+          "cells": [
+            {
+              "text": "Beta-lactams, quinolones, isoniazid, tramadol, antidepressants, antipsychotics, lithium, theophylline, cocaine, amphetamine; alcohol or benzodiazepine withdrawal"
+            },
+            {
+              "text": "Check drug list and toxicology"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "CT immediately if needed; MRI preferred for structural lesions"
+            },
+            {
+              "text": "Focal features suggest a structural cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Interictal EEG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Normal in 50 to 80% of known epilepsy initially",
+              "range": [
+                50,
+                80
+              ]
+            },
+            {
+              "text": "A normal EEG does not exclude epilepsy; repeat or sleep-deprived EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent coma after convulsions stop",
+          "cells": [
+            {
+              "text": "No recovery of consciousness"
+            },
+            {
+              "text": "EEG to exclude nonconvulsive status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Suspected CNS infection with normal imaging; all HIV patients"
+            },
+            {
+              "text": "Meningitis or encephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seizure_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic seizures",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syncope (including convulsive syncope)",
+          "cells": [
+            {
+              "text": "Brief jerks at onset of faint, quick recovery; ECG if cardiac cause suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychogenic nonepileptic seizures",
+          "cells": [
+            {
+              "text": "Long events, no postictal confusion, normal vitals, resistance to eye opening; video-EEG decides"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transient ischaemic attack (especially basilar)",
+          "cells": [
+            {
+              "text": "Listed by Harrison as a seizure mimic; vascular risk profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine (confusional, basilar)",
+          "cells": [
+            {
+              "text": "Listed by Harrison as a seizure mimic; migraine history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep disorders (narcolepsy, cataplexy, sleep myoclonus)",
+          "cells": [
+            {
+              "text": "Events tied to sleep; listed by Harrison as mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorders (tics, myoclonus, paroxysmal choreoathetosis)",
+          "cells": [
+            {
+              "text": "Non-epileptic movements; video-EEG when unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic or toxic seizures",
+          "cells": [
+            {
+              "text": "Hypoglycaemia, hyponatraemia, hypocalcaemia, withdrawal; treat cause, not chronic antiseizure drugs"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "seizure_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Treatment of status epilepticus and epilepsy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stabilise: airway, oxygen, glucose check",
+          "cells": [
+            {
+              "text": "0 to 5 min"
+            },
+            {
+              "text": "First aid and monitoring"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lorazepam IV 0.05 to 0.1 mg/kg (typically 4 mg adult) at 2 mg/min",
+          "cells": [
+            {
+              "text": "{{hy:5 to 20 min: benzodiazepine first}}"
+            },
+            {
+              "text": "Alternatives: midazolam IV 0.2 mg/kg up to 10 mg, IM midazolam, or diazepam IV 0.15 to 0.2 mg/kg up to 10 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fosphenytoin, valproate or levetiracetam IV",
+          "cells": [
+            {
+              "text": "20 to 40 min, seizure continues"
+            },
+            {
+              "text": "No agent clearly better; phenobarbital if none available"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Anaesthetic infusion (midazolam, propofol, pentobarbital, thiopental)",
+          "cells": [
+            {
+              "text": "Over 40 min, refractory status"
+            },
+            {
+              "text": "Intubate; continuous EEG; continue at least 24 h then reassess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat provoking cause only",
+          "cells": [
+            {
+              "text": "Seizure from correctable metabolic or drug cause"
+            },
+            {
+              "text": "Chronic antiseizure drugs usually unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term antiseizure medication",
+          "cells": [
+            {
+              "text": "Epilepsy, or first seizure with high recurrence risk"
+            },
+            {
+              "text": "Decision after first seizure is shared with patient"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Safety advice",
+          "cells": [
+            {
+              "text": "Until seizures controlled"
+            },
+            {
+              "text": "No driving (most US states 6 to 12 months seizure-free), swimming, climbing or tub baths"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Second-line doses for fosphenytoin, valproate and levetiracetam were not stated in the sources opened; use local protocol."
+    },
+    {
+      "id": "seizure_epilepsy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Mesial temporal lobe epilepsy features",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Findings"
+      ],
+      "rows": [
+        {
+          "parameter": "History",
+          "cells": [
+            {
+              "text": "febrile seizures in childhood; family history of epilepsy; early onset; generalized seizures rare; seizures may remit and reappear; often intractable"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Clinical observations",
+          "cells": [
+            {
+              "text": "common aura; behavioral arrest or stare; complex automatisms; unilateral posturing; postictal disorientation; memory loss; dysphasia if focus is in the dominant hemisphere"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Laboratory studies",
+          "cells": [
+            {
+              "text": "unilateral or bilateral anterior temporal spikes on EEG; hypometabolism on interictal PET; hypoperfusion on interictal SPECT; material-specific memory deficits on intracranial amobarbital (Wada) test"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "MRI findings",
+          "cells": [
+            {
+              "text": "small hippocampus with increased T2 signal; small temporal lobe; enlarged temporal horn"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Pathologic findings",
+          "cells": [
+            {
+              "text": "highly selective loss of specific cell populations within the hippocampus in most cases"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Abbreviations: EEG, electroencephalogram; PET, positron emission tomography; SPECT, single photon emission computed tomography."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "seizure_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of seizures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with seizure or transient loss of consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Still seizing over 5 min or no recovery between seizures?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Airway, oxygen, glucose; IV lorazepam or IM midazolam",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Seizure stopped by 20 min?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "IV fosphenytoin, valproate or levetiracetam",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Seizure stopped by 40 min?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Intubate, anaesthetic infusion, continuous EEG in ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bloods, toxicology, CT or MRI, EEG; LP if infection suspected",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Correctable provoking cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat the cause; long-term drugs usually unnecessary",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Second unprovoked seizure or high recurrence risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Start antiseizure medication; safety and driving advice",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Discuss risks; observe with safety advice",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

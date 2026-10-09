@@ -1,174 +1,752 @@
 {
- "id": "loa_loa_filariasis",
- "name": "Loiasis (Loa loa filariasis)",
- "aliases": [
-  "loiasis",
-  "Loa loa infection",
-  "African eye worm",
-  "Calabar swellings",
-  "loa loa filariasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / WHO guidance on filariasis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West and Central Africa",
-   "The classic features are transient, localised, non-pitting angio-oedematous 'Calabar swellings', often around joints, and the sensation or sight of an adult worm migrating across the subconjunctiva of the eye",
-   "Peripheral eosinophilia is typically prominent, and symptoms are often more marked in expatriates and visitors than in endemic residents",
-   "Diagnosis rests on detecting sheathed microfilariae with daytime (midday) periodicity on a stained blood film, reflecting the vector's daytime biting",
-   "Adult worms may be identified during their migration across the eye or under the skin",
-   "Treatment options include diethylcarbamazine (which targets microfilariae and adult worms) and albendazole, with careful attention to microfilarial load",
-   "High Loa loa microfilarial loads carry a risk of severe encephalopathy when treated with certain antifilarial drugs, so the burden must be assessed before therapy"
+  "id": "loa_loa_filariasis",
+  "name": "Loiasis (Loa loa filariasis)",
+  "aliases": [
+    "loiasis",
+    "Loa loa infection",
+    "African eye worm",
+    "Calabar swellings",
+    "loa loa filariasis"
   ],
-  "pathophysiology": "Loiasis is caused by infection with the filarial worm Loa loa. Infective larvae are deposited when an infected Chrysops fly takes a blood meal; the larvae mature into adult worms that migrate through subcutaneous and connective tissues over years. Adult females release sheathed microfilariae that circulate in the peripheral blood with a diurnal periodicity matching the daytime feeding of the vector, allowing onward transmission. Host immune and hypersensitivity responses to migrating adults and their products produce the transient inflammatory Calabar swellings and eosinophilia, while migration across the bulbar conjunctiva gives the classic 'eye worm'. Heavy microfilaraemia is largely asymptomatic itself but becomes clinically important because rapid microfilarial killing during treatment can trigger severe inflammatory reactions, including encephalopathy.",
-  "additionalDifferentials": [
-   "Onchocerciasis",
-   "Lymphatic filariasis (Wuchereria bancrofti, Brugia species)",
-   "Other causes of angio-oedema or urticaria",
-   "Gnathostomiasis and other migratory helminths",
-   "Cutaneous larva migrans",
-   "Tropical pulmonary eosinophilia"
-  ],
-  "additionalInvestigations": [
-   "Daytime (midday) peripheral blood film for sheathed microfilariae",
-   "Full blood count documenting eosinophilia",
-   "Quantification of Loa loa microfilarial density before treatment",
-   "Filarial serology or antigen/antibody testing where available",
-   "Slit-lamp or direct examination if a worm is visible in the eye",
-   "Molecular (PCR) assays for species confirmation where accessible"
-  ],
-  "redFlags": [
-   "Very high microfilarial load, given the risk of treatment-associated encephalopathy",
-   "Neurological deterioration or encephalopathy during antifilarial therapy",
-   "Renal involvement or severe systemic hypersensitivity reactions"
-  ],
-  "prognosis": "Loiasis is generally a chronic, non-fatal infection with a good prognosis when managed carefully; the principal danger is treatment-related severe reactions, especially encephalopathy in heavily microfilaraemic individuals.",
-  "pitfalls": [
-   "Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk",
-   "Timing the diagnostic blood film incorrectly and missing the daytime-periodic microfilariae",
-   "Co-treating without recognising overlap with onchocerciasis or lymphatic filariasis in co-endemic regions",
-   "Attributing Calabar swellings to simple allergy in a returning traveller"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "WHO guidance on filarial infections"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial density",
-   "Reduce heavy microfilaraemia first with albendazole or apheresis to lower the risk of treatment-related encephalopathy",
-   "Avoid or use extreme caution with ivermectin and diethylcarbamazine in high microfilarial loads because of severe post-treatment reactions",
-   "Remove an adult worm surgically or mechanically when it migrates across the conjunctiva or subcutis and is accessible",
-   "Monitor closely during treatment for encephalopathy and other reactions, providing supportive care",
-   "Advise vector-avoidance measures against the day-biting Chrysops fly",
-   "Involve tropical medicine or infectious diseases specialists and consider repeat courses given relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "loa_loa_filariasis-pathway",
-   "title": "Loiasis (Loa loa filariasis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West and Central Africa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very high microfilarial load, given the risk of treatment-associated encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Daytime (midday) peripheral blood film for sheathed microfilariae, Full blood count documenting eosinophilia, Quantification of Loa loa microfilarial density before treatment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial density"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of loiasis (loa loa filariasis)."
-  }
- ],
- "tables": [
-  {
-   "id": "loa_loa_filariasis-matrix",
-   "title": "Loiasis (Loa loa filariasis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / WHO guidance on filariasis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West and Central Africa",
+      "The classic features are transient, localised, non-pitting angio-oedematous 'Calabar swellings', often around joints, and the sensation or sight of an adult worm migrating across the subconjunctiva of the eye",
+      "Peripheral eosinophilia is typically prominent, and symptoms are often more marked in expatriates and visitors than in endemic residents",
+      "Diagnosis rests on detecting sheathed microfilariae with daytime (midday) periodicity on a stained blood film, reflecting the vector's daytime biting",
+      "Adult worms may be identified during their migration across the eye or under the skin",
+      "Treatment options include diethylcarbamazine (which targets microfilariae and adult worms) and albendazole, with careful attention to microfilarial load",
+      "High Loa loa microfilarial loads carry a risk of severe encephalopathy when treated with certain antifilarial drugs, so the burden must be assessed before therapy"
     ],
-    [
-     "Key Investigations",
-     "Daytime (midday) peripheral blood film for sheathed microfilariae, Full blood count documenting eosinophilia, Quantification of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Loiasis is caused by infection with the filarial worm Loa loa. Infective larvae are deposited when an infected Chrysops fly takes a blood meal; the larvae mature into adult worms that migrate through subcutaneous and connective tissues over years. Adult females release sheathed microfilariae that circulate in the peripheral blood with a diurnal periodicity matching the daytime feeding of the vector, allowing onward transmission. Host immune and hypersensitivity responses to migrating adults and their products produce the transient inflammatory Calabar swellings and eosinophilia, while migration across the bulbar conjunctiva gives the classic 'eye worm'. Heavy microfilaraemia is largely asymptomatic itself but becomes clinically important because rapid microfilarial killing during treatment can trigger severe inflammatory reactions, including encephalopathy.",
+    "additionalDifferentials": [
+      "Onchocerciasis",
+      "Lymphatic filariasis (Wuchereria bancrofti, Brugia species)",
+      "Other causes of angio-oedema or urticaria",
+      "Gnathostomiasis and other migratory helminths",
+      "Cutaneous larva migrans",
+      "Tropical pulmonary eosinophilia"
     ],
-    [
-     "Primary Differentials",
-     "Onchocerciasis, Lymphatic filariasis (Wuchereria bancrofti, Brugia species), Other causes of angio-oedema or urticaria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Daytime (midday) peripheral blood film for sheathed microfilariae",
+      "Full blood count documenting eosinophilia",
+      "Quantification of Loa loa microfilarial density before treatment",
+      "Filarial serology or antigen/antibody testing where available",
+      "Slit-lamp or direct examination if a worm is visible in the eye",
+      "Molecular (PCR) assays for species confirmation where accessible"
     ],
-    [
-     "Management Strategy",
-     "Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial",
-     "Core treatment modality"
+    "redFlags": [
+      "Very high microfilarial load, given the risk of treatment-associated encephalopathy",
+      "Neurological deterioration or encephalopathy during antifilarial therapy",
+      "Renal involvement or severe systemic hypersensitivity reactions"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Loiasis is generally a chronic, non-fatal infection with a good prognosis when managed carefully; the principal danger is treatment-related severe reactions, especially encephalopathy in heavily microfilaraemic individuals.",
+    "pitfalls": [
+      "Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk",
+      "Timing the diagnostic blood film incorrectly and missing the daytime-periodic microfilariae",
+      "Co-treating without recognising overlap with onchocerciasis or lymphatic filariasis in co-endemic regions",
+      "Attributing Calabar swellings to simple allergy in a returning traveller"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "WHO guidance on filarial infections"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial density",
+      "Reduce heavy microfilaraemia first with albendazole or apheresis to lower the risk of treatment-related encephalopathy",
+      "Avoid or use extreme caution with ivermectin and diethylcarbamazine in high microfilarial loads because of severe post-treatment reactions",
+      "Remove an adult worm surgically or mechanically when it migrates across the conjunctiva or subcutis and is accessible",
+      "Monitor closely during treatment for encephalopathy and other reactions, providing supportive care",
+      "Advise vector-avoidance measures against the day-biting Chrysops fly",
+      "Involve tropical medicine or infectious diseases specialists and consider repeat courses given relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for loiasis (loa loa filariasis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "loa-loa-filariasis-real-image",
-   "title": "Loiasis (Loa loa filariasis): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "loa_loa_filariasis-pathway",
+      "title": "Loiasis (Loa loa filariasis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West and Central Africa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very high microfilarial load, given the risk of treatment-associated encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Daytime (midday) peripheral blood film for sheathed microfilariae, Full blood count documenting eosinophilia, Quantification of Loa loa microfilarial density before treatment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial density"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of loiasis (loa loa filariasis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "loa_loa_filariasis-matrix",
+      "title": "Loiasis (Loa loa filariasis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the filarial nematode Loa loa, transmitted by the day-biting Chrysops (mango or deer) fly in the rainforests of West",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Daytime (midday) peripheral blood film for sheathed microfilariae, Full blood count documenting eosinophilia, Quantification of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Onchocerciasis, Lymphatic filariasis (Wuchereria bancrofti, Brugia species), Other causes of angio-oedema or urticaria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give diethylcarbamazine as definitive therapy targeting microfilariae and adult worms, but only after quantifying microfilarial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting antifilarial treatment without first measuring the microfilarial load and considering encephalopathy risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for loiasis (loa loa filariasis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / WHO guidance on filariasis",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 218-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loa_loa_filariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Daytime (midday) blood film for sheathed microfilariae",
+          "cells": [
+            {
+              "text": "Diagnosis, given daytime periodicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantification of microfilarial density",
+          "cells": [
+            {
+              "text": "Before treatment; sets encephalopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Filarial serology or antigen testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp or direct examination",
+          "cells": [
+            {
+              "text": "If a worm is visible in the eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR for species confirmation",
+          "cells": [
+            {
+              "text": "Where accessible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loa_loa_filariasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Onchocerciasis",
+          "cells": [
+            {
+              "text": "Co-endemic; overlapping treatment considerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphatic filariasis",
+          "cells": [
+            {
+              "text": "Co-endemic; overlapping treatment considerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gnathostomiasis and other migratory helminths",
+          "cells": [
+            {
+              "text": "Migratory worm mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous larva migrans",
+          "cells": [
+            {
+              "text": "Migratory skin lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loa_loa_filariasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diethylcarbamazine",
+          "cells": [
+            {
+              "text": "Definitive therapy against microfilariae and adult worms; only after quantifying microfilarial density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albendazole or apheresis",
+          "cells": [
+            {
+              "text": "Reduce heavy microfilaraemia first, to lower encephalopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ivermectin and DEC caution",
+          "cells": [
+            {
+              "text": "Avoid, or use extreme caution, with high microfilarial loads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal of worm",
+          "cells": [
+            {
+              "text": "When a worm migrates across the conjunctiva or subcutis and is accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Encephalopathy and other reactions during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vector avoidance",
+          "cells": [
+            {
+              "text": "Against the day-biting Chrysops fly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Tropical medicine or infectious diseases; repeat courses given relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loa_loa_filariasis-ddx-2",
+      "kind": "ddx",
+      "title": "Characteristics of the filariae",
+      "rowHeader": "Organism",
+      "columns": [
+        "Periodicity",
+        "Distribution",
+        "Vector",
+        "Location of adult",
+        "Microfilarial location",
+        "Sheath"
+      ],
+      "rows": [
+        {
+          "parameter": "Wuchereria bancrofti (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Cosmopolitan areas worldwide, including South America, Africa, southern Asia, Papua New Guinea, China, Indonesia"
+            },
+            {
+              "text": "Culex, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "W. bancrofti (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Eastern Pacific"
+            },
+            {
+              "text": "Aedes (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brugia malayi (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Southeast Asia, Indonesia, India"
+            },
+            {
+              "text": "Mansonia, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. malayi (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Indonesia, Southeast Asia"
+            },
+            {
+              "text": "Coquillettidia, Mansonia (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. timori",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Indonesia"
+            },
+            {
+              "text": "Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loa loa",
+          "cells": [
+            {
+              "text": "Diurnal"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Chrysops (deerflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Onchocerca volvulus",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Simulium (blackflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin, eye"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mansonella ozzardi",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America (Culicoides, midges); Caribbean (Simulium, blackflies)"
+            },
+            {
+              "text": "Not stated separately in the source row"
+            },
+            {
+              "text": "Undetermined site"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. perstans",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Body cavities, mesentery, perirenal tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. streptocerca",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "For M. ozzardi the vector names appear inside the distribution cell in the source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loa_loa_filariasis-dx-mgmt",
+      "title": "Diagnosis and management of Loiasis (Loa loa filariasis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Transient localised angio-oedema and a migrating worm, with peripheral eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (very high microfilarial load, neurological change, renal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurological management if encephalopathy occurs during therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Midday blood film, FBC, microfilarial density, filarial serology or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are sheathed microfilariae found on a midday blood film?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider onchocerciasis, lymphatic filariasis or other migratory helminths",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Quantify microfilarial density before any treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce heavy microfilaraemia with albendazole or apheresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diethylcarbamazine for microfilariae and adult worms, when safe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical removal of accessible migrating worms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor closely for encephalopathy and reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, non-fatal; good prognosis when managed; severe reactions are the danger",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

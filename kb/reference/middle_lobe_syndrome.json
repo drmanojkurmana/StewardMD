@@ -1,178 +1,436 @@
 {
- "id": "middle_lobe_syndrome",
- "name": "middle lobe syndrome",
- "aliases": [
-  "right middle lobe syndrome",
-  "Brock syndrome"
- ],
- "class": "non_infective",
- "system": "respiratory",
- "specialty": "respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray and Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by extension the lingula.",
-   "Anatomical predisposition is central: the right middle lobe bronchus is long and narrow, arises at an acute angle, and is surrounded by a collar of lymph nodes, with relatively poor collateral ventilation to the lobe.",
-   "It is classified into obstructive forms (endobronchial tumour, broncholith, extrinsic nodal compression, foreign body) and non-obstructive forms (recurrent infection, asthma, impaired clearance).",
-   "In adults, a persistently collapsed middle lobe must prompt exclusion of an endobronchial neoplasm before it is assumed to be benign.",
-   "In children and non-smokers, asthma, recurrent infection and impaired mucociliary clearance are common non-obstructive causes.",
-   "Presentation includes chronic cough, recurrent focal pneumonia, wheeze and haemoptysis, or it may be an incidental radiographic finding.",
-   "The lateral chest radiograph shows a characteristic thin, wedge-shaped opacity overlying the cardiac shadow; CT delineates bronchiectasis, volume loss and any obstructing lesion.",
-   "Bronchoscopy is central to excluding an obstructing lesion and obtaining microbiological and cytological samples; non-tuberculous mycobacterial infection (the 'Lady Windermere' pattern) is an important association."
+  "id": "middle_lobe_syndrome",
+  "name": "middle lobe syndrome",
+  "aliases": [
+    "right middle lobe syndrome",
+    "Brock syndrome"
   ],
-  "pathophysiology": "The right middle lobe is anatomically vulnerable: its bronchus is comparatively long and slender, branches at an acute angle from the bronchus intermedius, and is encircled by hilar and interlobar lymph nodes, while collateral ventilation from adjacent lobes is limited because the lobe is largely surrounded by fissures. Any process that narrows the bronchus — an endobronchial tumour, broncholith, aspirated foreign body, or extrinsic compression by enlarged nodes — readily produces atelectasis with impaired clearance and post-obstructive infection. In non-obstructive disease, recurrent infection, asthma or ciliary and clearance defects lead to mucus retention and repeated inflammation; because collateral ventilation cannot easily re-expand the lobe, atelectasis persists and a cycle of infection, inflammation and bronchial wall damage ensues, culminating in bronchiectasis and chronic volume loss. Non-tuberculous mycobacterial infection may both result from and perpetuate this process, classically in the middle lobe and lingula.",
-  "additionalDifferentials": [
-   "endobronchial carcinoma or carcinoid tumour",
-   "broncholithiasis obstructing the middle lobe bronchus",
-   "aspirated foreign body",
-   "non-tuberculous mycobacterial pulmonary infection",
-   "bronchiectasis from other causes",
-   "extrinsic nodal compression from sarcoidosis, tuberculosis or malignancy",
-   "recurrent aspiration or asthma-related mucus plugging"
-  ],
-  "additionalInvestigations": [
-   "chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis",
-   "flexible bronchoscopy to exclude obstruction and obtain samples",
-   "sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi",
-   "cytology or biopsy of any endobronchial lesion",
-   "pulmonary function testing and assessment for asthma",
-   "evaluation for impaired mucociliary clearance or immunodeficiency in recurrent disease",
-   "tuberculin or interferon-gamma release testing where granulomatous disease is suspected"
-  ],
-  "redFlags": [
-   "haemoptysis or an endobronchial lesion suggesting malignancy",
-   "persistent lobar collapse in an adult smoker",
-   "systemic features such as weight loss or night sweats",
-   "recurrent pneumonia confined to the same lobe despite treatment",
-   "progressive bronchiectasis with worsening sputum burden"
-  ],
-  "prognosis": "Non-obstructive disease often improves with treatment of infection, airway inflammation and clearance, whereas established bronchiectasis or an obstructing lesion may require targeted therapy or surgical resection; outcome is generally good once malignancy is excluded and the underlying cause addressed.",
-  "pitfalls": [
-   "Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe.",
-   "Overlooking non-tuberculous mycobacterial infection as both cause and consequence of the syndrome.",
-   "Missing a small obstructing broncholith or foreign body on low-resolution imaging.",
-   "Attributing recurrent focal pneumonia to simple community infection without pursuing the anatomical explanation.",
-   "Proceeding to resection without adequately characterising and treating a reversible infective or inflammatory cause."
-  ],
-  "references": [
-   "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
-   "Fishman's Pulmonary Diseases and Disorders, current edition",
-   "Contemporary reviews of right middle lobe syndrome and non-tuberculous mycobacterial lung disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any endobronchial tumour",
-   "Treat non-obstructive causes by optimising asthma control with inhaled corticosteroids and treating infection with appropriate antibiotics",
-   "Promote airway clearance with chest physiotherapy and secretion-clearance techniques, especially where bronchiectasis is present",
-   "Treat recurrent or post-obstructive infection with targeted antibiotic therapy guided by sputum and lavage cultures",
-   "Consider surgical resection (middle lobectomy) for refractory disease, established localised bronchiectasis or a resectable obstructing lesion",
-   "Investigate and manage underlying impaired mucociliary clearance or immunodeficiency in recurrent disease",
-   "Follow up with imaging to confirm resolution and ensure malignancy has been excluded"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "middle_lobe_syndrome-pathway",
-   "title": "middle lobe syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by extension the lingula.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: haemoptysis or an endobronchial lesion suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis, flexible bronchoscopy to exclude obstruction and obtain samples, sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any endobronchial tumour"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of middle lobe syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "middle_lobe_syndrome-matrix",
-   "title": "middle lobe syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "respiratory",
+  "specialty": "respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray and Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by extension the lingula.",
+      "Anatomical predisposition is central: the right middle lobe bronchus is long and narrow, arises at an acute angle, and is surrounded by a collar of lymph nodes, with relatively poor collateral ventilation to the lobe.",
+      "It is classified into obstructive forms (endobronchial tumour, broncholith, extrinsic nodal compression, foreign body) and non-obstructive forms (recurrent infection, asthma, impaired clearance).",
+      "In adults, a persistently collapsed middle lobe must prompt exclusion of an endobronchial neoplasm before it is assumed to be benign.",
+      "In children and non-smokers, asthma, recurrent infection and impaired mucociliary clearance are common non-obstructive causes.",
+      "Presentation includes chronic cough, recurrent focal pneumonia, wheeze and haemoptysis, or it may be an incidental radiographic finding.",
+      "The lateral chest radiograph shows a characteristic thin, wedge-shaped opacity overlying the cardiac shadow; CT delineates bronchiectasis, volume loss and any obstructing lesion.",
+      "Bronchoscopy is central to excluding an obstructing lesion and obtaining microbiological and cytological samples; non-tuberculous mycobacterial infection (the 'Lady Windermere' pattern) is an important association."
     ],
-    [
-     "Key Investigations",
-     "chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis, flexible bronchoscopy to exclude obstruction and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The right middle lobe is anatomically vulnerable: its bronchus is comparatively long and slender, branches at an acute angle from the bronchus intermedius, and is encircled by hilar and interlobar lymph nodes, while collateral ventilation from adjacent lobes is limited because the lobe is largely surrounded by fissures. Any process that narrows the bronchus — an endobronchial tumour, broncholith, aspirated foreign body, or extrinsic compression by enlarged nodes — readily produces atelectasis with impaired clearance and post-obstructive infection. In non-obstructive disease, recurrent infection, asthma or ciliary and clearance defects lead to mucus retention and repeated inflammation; because collateral ventilation cannot easily re-expand the lobe, atelectasis persists and a cycle of infection, inflammation and bronchial wall damage ensues, culminating in bronchiectasis and chronic volume loss. Non-tuberculous mycobacterial infection may both result from and perpetuate this process, classically in the middle lobe and lingula.",
+    "additionalDifferentials": [
+      "endobronchial carcinoma or carcinoid tumour",
+      "broncholithiasis obstructing the middle lobe bronchus",
+      "aspirated foreign body",
+      "non-tuberculous mycobacterial pulmonary infection",
+      "bronchiectasis from other causes",
+      "extrinsic nodal compression from sarcoidosis, tuberculosis or malignancy",
+      "recurrent aspiration or asthma-related mucus plugging"
     ],
-    [
-     "Primary Differentials",
-     "endobronchial carcinoma or carcinoid tumour, broncholithiasis obstructing the middle lobe bronchus, aspirated foreign body",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis",
+      "flexible bronchoscopy to exclude obstruction and obtain samples",
+      "sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi",
+      "cytology or biopsy of any endobronchial lesion",
+      "pulmonary function testing and assessment for asthma",
+      "evaluation for impaired mucociliary clearance or immunodeficiency in recurrent disease",
+      "tuberculin or interferon-gamma release testing where granulomatous disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any",
-     "Core treatment modality"
+    "redFlags": [
+      "haemoptysis or an endobronchial lesion suggesting malignancy",
+      "persistent lobar collapse in an adult smoker",
+      "systemic features such as weight loss or night sweats",
+      "recurrent pneumonia confined to the same lobe despite treatment",
+      "progressive bronchiectasis with worsening sputum burden"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Non-obstructive disease often improves with treatment of infection, airway inflammation and clearance, whereas established bronchiectasis or an obstructing lesion may require targeted therapy or surgical resection; outcome is generally good once malignancy is excluded and the underlying cause addressed.",
+    "pitfalls": [
+      "Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe.",
+      "Overlooking non-tuberculous mycobacterial infection as both cause and consequence of the syndrome.",
+      "Missing a small obstructing broncholith or foreign body on low-resolution imaging.",
+      "Attributing recurrent focal pneumonia to simple community infection without pursuing the anatomical explanation.",
+      "Proceeding to resection without adequately characterising and treating a reversible infective or inflammatory cause."
+    ],
+    "references": [
+      "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
+      "Fishman's Pulmonary Diseases and Disorders, current edition",
+      "Contemporary reviews of right middle lobe syndrome and non-tuberculous mycobacterial lung disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any endobronchial tumour",
+      "Treat non-obstructive causes by optimising asthma control with inhaled corticosteroids and treating infection with appropriate antibiotics",
+      "Promote airway clearance with chest physiotherapy and secretion-clearance techniques, especially where bronchiectasis is present",
+      "Treat recurrent or post-obstructive infection with targeted antibiotic therapy guided by sputum and lavage cultures",
+      "Consider surgical resection (middle lobectomy) for refractory disease, established localised bronchiectasis or a resectable obstructing lesion",
+      "Investigate and manage underlying impaired mucociliary clearance or immunodeficiency in recurrent disease",
+      "Follow up with imaging to confirm resolution and ensure malignancy has been excluded"
     ]
-   ],
-   "caption": "Overview comparison matrix for middle lobe syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "middle-lobe-syndrome-real-image",
-   "title": "middle lobe syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "middle_lobe_syndrome-pathway",
+      "title": "middle lobe syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by extension the lingula.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: haemoptysis or an endobronchial lesion suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis, flexible bronchoscopy to exclude obstruction and obtain samples, sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any endobronchial tumour"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of middle lobe syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "middle_lobe_syndrome-matrix",
+      "title": "middle lobe syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Middle lobe syndrome denotes recurrent or chronic collapse, consolidation or bronchiectasis of the right middle lobe, and by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis, flexible bronchoscopy to exclude obstruction and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "endobronchial carcinoma or carcinoid tumour, broncholithiasis obstructing the middle lobe bronchus, aspirated foreign body",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude and relieve endobronchial obstruction bronchoscopically, removing a foreign body or broncholith and treating any",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming benign disease and omitting bronchoscopy in an adult with a persistently collapsed middle lobe.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for middle lobe syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray and Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "middle_lobe_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis",
+          "cells": [
+            {
+              "text": "Middle lobe bronchus and bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible bronchoscopy",
+          "cells": [
+            {
+              "text": "Obstruction; samples obtained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi",
+          "cells": [
+            {
+              "text": "Causative organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytology or biopsy of any endobronchial lesion",
+          "cells": [
+            {
+              "text": "Endobronchial lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing and assessment for asthma",
+          "cells": [
+            {
+              "text": "Asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for impaired mucociliary clearance or immunodeficiency",
+          "cells": [
+            {
+              "text": "Impaired clearance or immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "middle_lobe_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchoscopic relief of obstruction",
+          "cells": [
+            {
+              "text": "Foreign body or broncholith removed; endobronchial tumour treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma control",
+          "cells": [
+            {
+              "text": "Inhaled corticosteroids for non-obstructive causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance",
+          "cells": [
+            {
+              "text": "Chest physiotherapy and secretion-clearance techniques, especially with bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "Recurrent or post-obstructive infection, guided by sputum and lavage cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Middle lobectomy for refractory disease, localised bronchiectasis or a resectable obstructing lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying defects",
+          "cells": [
+            {
+              "text": "Impaired mucociliary clearance or immunodeficiency in recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging follow-up",
+          "cells": [
+            {
+              "text": "Confirm resolution and ensure malignancy has been excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "middle_lobe_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of middle lobe syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent or persistent middle lobe disease with bronchiectasis on CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoptysis or endobronchial lesion, lobar collapse in a smoker, or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bronchoscopy and tissue sampling for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest CT of the middle lobe bronchus; bronchoscopy; sputum and BAL cultures; PFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is endobronchial obstruction confirmed on bronchoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-obstructive disease: optimise asthma, treat infection and check clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bronchoscopic removal of foreign body or broncholith; treat endobronchial tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled corticosteroids and antibiotics guided by sputum and lavage cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chest physiotherapy and secretion-clearance techniques for bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Middle lobectomy for refractory disease or a resectable obstructing lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Investigate clearance or immunodeficiency; imaging to confirm resolution",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

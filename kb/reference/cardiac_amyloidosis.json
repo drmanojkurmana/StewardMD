@@ -1,173 +1,714 @@
 {
- "id": "cardiac_amyloidosis",
- "name": "Cardiac amyloidosis",
- "aliases": [
-  "amyloid cardiomyopathy",
-  "ATTR cardiac amyloidosis",
-  "AL cardiac amyloidosis",
-  "transthyretin amyloidosis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease / infiltrative cardiomyopathy consensus documents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
-   "ATTR includes a hereditary variant from TTR mutations and a wild-type form of older age, formerly termed senile amyloidosis",
-   "Classic clue is left ventricular wall thickening on echo with paradoxically low voltages on the ECG",
-   "Echocardiography often shows a granular sparkling myocardial texture and impaired longitudinal strain with apical sparing",
-   "Red-flag associations include carpal tunnel syndrome, lumbar spinal stenosis, and biceps tendon rupture, especially in ATTR",
-   "Bone-avid scintigraphy strongly supports ATTR once a monoclonal protein has been excluded, sometimes avoiding biopsy",
-   "AL disease needs urgent haematology-directed treatment, while ATTR is managed with transthyretin stabilisers or gene-silencing therapy"
+  "id": "cardiac_amyloidosis",
+  "name": "Cardiac amyloidosis",
+  "aliases": [
+    "amyloid cardiomyopathy",
+    "ATTR cardiac amyloidosis",
+    "AL cardiac amyloidosis",
+    "transthyretin amyloidosis"
   ],
-  "pathophysiology": "Cardiac amyloidosis results from extracellular deposition of misfolded protein as insoluble amyloid fibrils within the myocardium. In AL amyloidosis the fibrils derive from immunoglobulin light chains produced by a clonal plasma cell disorder, whereas in ATTR they derive from transthyretin, either mutated in the hereditary form or wild-type in older patients. Progressive infiltration stiffens the ventricular walls, producing restrictive physiology with impaired diastolic filling, and disrupts conduction tissue; light chains additionally exert a direct cardiotoxic effect, contributing to the more rapid deterioration seen in AL disease.",
-  "additionalDifferentials": [
-   "Hypertrophic cardiomyopathy",
-   "Hypertensive heart disease",
-   "Constrictive pericarditis",
-   "Other infiltrative or storage cardiomyopathies such as Fabry disease",
-   "Endomyocardial fibrosis and other restrictive cardiomyopathies",
-   "Athletic or physiological remodelling"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing",
-   "ECG demonstrating low voltages, pseudo-infarct pattern, and conduction disease",
-   "Serum free light chains, serum and urine immunofixation to identify a monoclonal protein",
-   "Bone-avid scintigraphy such as pyrophosphate imaging to detect ATTR uptake",
-   "Cardiac MRI showing diffuse late enhancement and abnormal T1 mapping, with tissue biopsy and typing when needed"
-  ],
-  "redFlags": [
-   "Rapidly progressive heart failure, particularly in AL disease",
-   "High-grade conduction block or syncope",
-   "Disproportionate hypotension limiting heart-failure therapy",
-   "A newly identified monoclonal protein requiring urgent haematology assessment"
-  ],
-  "prognosis": "Prognosis depends on subtype and stage; untreated AL cardiac amyloidosis has a particularly poor outlook, whereas earlier diagnosis and modern ATTR therapies can slow progression and improve survival.",
-  "pitfalls": [
-   "Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis",
-   "Interpreting bone-avid scintigraphy as diagnostic of ATTR without excluding a monoclonal protein",
-   "Using standard heart-failure agents that provoke hypotension in restrictive physiology",
-   "Delaying haematology referral in suspected AL disease"
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "ESC guidance on cardiac amyloidosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin stabilisers or silencers for ATTR",
-   "AL disease treated with plasma-cell-directed therapy such as bortezomib-based regimens with daratumumab to suppress the clonal light chains, alongside haematology",
-   "ATTR disease treated with a transthyretin stabiliser such as tafamidis or a gene-silencing agent such as patisiran or inotersen to slow progression",
-   "Heart failure managed with cautious diuresis, avoiding agents poorly tolerated in restrictive amyloid physiology such as beta-blockers, calcium-channel blockers and digoxin",
-   "Management of conduction disease and arrhythmia, with pacing where indicated and anticoagulation for atrial arrhythmias",
-   "Surveillance with echocardiography, cardiac biomarkers and staging, and awareness of red-flag features such as carpal tunnel syndrome",
-   "Genetic counselling and family screening in hereditary ATTR, with cardiac or combined transplantation considered in selected patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cardiac_amyloidosis-pathway",
-   "title": "Cardiac amyloidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive heart failure, particularly in AL disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing, ECG demonstrating low voltages, pseudo-infarct pattern, and conduction disease, Serum free light chains, serum and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin stabilisers or silencers for ATTR"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cardiac amyloidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cardiac_amyloidosis-matrix",
-   "title": "Cardiac amyloidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease / infiltrative cardiomyopathy consensus documents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
+      "ATTR includes a hereditary variant from TTR mutations and a wild-type form of older age, formerly termed senile amyloidosis",
+      "Classic clue is left ventricular wall thickening on echo with paradoxically low voltages on the ECG",
+      "Echocardiography often shows a granular sparkling myocardial texture and impaired longitudinal strain with apical sparing",
+      "Red-flag associations include carpal tunnel syndrome, lumbar spinal stenosis, and biceps tendon rupture, especially in ATTR",
+      "Bone-avid scintigraphy strongly supports ATTR once a monoclonal protein has been excluded, sometimes avoiding biopsy",
+      "AL disease needs urgent haematology-directed treatment, while ATTR is managed with transthyretin stabilisers or gene-silencing therapy"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing, ECG demonstrating low",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cardiac amyloidosis results from extracellular deposition of misfolded protein as insoluble amyloid fibrils within the myocardium. In AL amyloidosis the fibrils derive from immunoglobulin light chains produced by a clonal plasma cell disorder, whereas in ATTR they derive from transthyretin, either mutated in the hereditary form or wild-type in older patients. Progressive infiltration stiffens the ventricular walls, producing restrictive physiology with impaired diastolic filling, and disrupts conduction tissue; light chains additionally exert a direct cardiotoxic effect, contributing to the more rapid deterioration seen in AL disease.",
+    "additionalDifferentials": [
+      "Hypertrophic cardiomyopathy",
+      "Hypertensive heart disease",
+      "Constrictive pericarditis",
+      "Other infiltrative or storage cardiomyopathies such as Fabry disease",
+      "Endomyocardial fibrosis and other restrictive cardiomyopathies",
+      "Athletic or physiological remodelling"
     ],
-    [
-     "Primary Differentials",
-     "Hypertrophic cardiomyopathy, Hypertensive heart disease, Constrictive pericarditis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing",
+      "ECG demonstrating low voltages, pseudo-infarct pattern, and conduction disease",
+      "Serum free light chains, serum and urine immunofixation to identify a monoclonal protein",
+      "Bone-avid scintigraphy such as pyrophosphate imaging to detect ATTR uptake",
+      "Cardiac MRI showing diffuse late enhancement and abnormal T1 mapping, with tissue biopsy and typing when needed"
     ],
-    [
-     "Management Strategy",
-     "Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive heart failure, particularly in AL disease",
+      "High-grade conduction block or syncope",
+      "Disproportionate hypotension limiting heart-failure therapy",
+      "A newly identified monoclonal protein requiring urgent haematology assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on subtype and stage; untreated AL cardiac amyloidosis has a particularly poor outlook, whereas earlier diagnosis and modern ATTR therapies can slow progression and improve survival.",
+    "pitfalls": [
+      "Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis",
+      "Interpreting bone-avid scintigraphy as diagnostic of ATTR without excluding a monoclonal protein",
+      "Using standard heart-failure agents that provoke hypotension in restrictive physiology",
+      "Delaying haematology referral in suspected AL disease"
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "ESC guidance on cardiac amyloidosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin stabilisers or silencers for ATTR",
+      "AL disease treated with plasma-cell-directed therapy such as bortezomib-based regimens with daratumumab to suppress the clonal light chains, alongside haematology",
+      "ATTR disease treated with a transthyretin stabiliser such as tafamidis or a gene-silencing agent such as patisiran or inotersen to slow progression",
+      "Heart failure managed with cautious diuresis, avoiding agents poorly tolerated in restrictive amyloid physiology such as beta-blockers, calcium-channel blockers and digoxin",
+      "Management of conduction disease and arrhythmia, with pacing where indicated and anticoagulation for atrial arrhythmias",
+      "Surveillance with echocardiography, cardiac biomarkers and staging, and awareness of red-flag features such as carpal tunnel syndrome",
+      "Genetic counselling and family screening in hereditary ATTR, with cardiac or combined transplantation considered in selected patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for cardiac amyloidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cardiac-amyloidosis-real-image",
-   "title": "Cardiac amyloidosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cardiac_amyloidosis-pathway",
+      "title": "Cardiac amyloidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive heart failure, particularly in AL disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing, ECG demonstrating low voltages, pseudo-infarct pattern, and conduction disease, Serum free light chains, serum and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin stabilisers or silencers for ATTR"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cardiac amyloidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cardiac_amyloidosis-matrix",
+      "title": "Cardiac amyloidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A leading cause of restrictive cardiomyopathy, with the two main forms being AL (light-chain) and ATTR (transthyretin) amyloidosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography assessing wall thickness, diastolic function, and longitudinal strain with apical sparing, ECG demonstrating low",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypertrophic cardiomyopathy, Hypertensive heart disease, Constrictive pericarditis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm and type the amyloid first, since treatment is subtype-specific: anti-plasma-cell therapy for AL and transthyretin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the wall thickening for hypertensive or hypertrophic disease and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cardiac amyloidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease / infiltrative cardiomyopathy consensus documents",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiac_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in cardiac amyloidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Wall thickening, granular sparkling texture, impaired longitudinal strain with apical sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Paradoxically low voltages, pseudo-infarct pattern, conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal protein excluded or identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-avid scintigraphy (pyrophosphate imaging)",
+          "cells": [
+            {
+              "text": "ATTR uptake once a monoclonal protein is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Diffuse late enhancement and abnormal T1 mapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy and typing",
+          "cells": [
+            {
+              "text": "When needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in cardiac amyloidosis",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Typing first",
+          "cells": [
+            {
+              "text": "Confirm and type the amyloid; therapy is subtype-specific"
+            },
+            {
+              "text": "Essential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AL disease",
+          "cells": [
+            {
+              "text": "Plasma-cell-directed therapy such as bortezomib-based regimens with daratumumab, alongside haematology"
+            },
+            {
+              "text": "Urgent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATTR disease",
+          "cells": [
+            {
+              "text": "Transthyretin stabiliser such as tafamidis, or gene silencing with patisiran or inotersen"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Cautious diuresis; avoid beta-blockers, calcium-channel blockers and digoxin"
+            },
+            {
+              "text": "Restrictive physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction disease and arrhythmia",
+          "cells": [
+            {
+              "text": "Pacing where indicated; anticoagulation for atrial arrhythmias"
+            },
+            {
+              "text": "As indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, cardiac biomarkers and staging; awareness of carpal tunnel and other red flags"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and transplant considerations",
+          "cells": [
+            {
+              "text": "Family screening in hereditary ATTR; cardiac or combined transplantation in selected patients"
+            },
+            {
+              "text": "Selected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiac_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of cardiac amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure with wall thickening, low ECG voltages, or unexplained restrictive physiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapidly progressive heart failure, high-grade block, or newly found monoclonal protein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent haematology and cardiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with strain; ECG; serum free light chains and immunofixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Monoclonal protein present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Tissue typing; AL-directed plasma-cell therapy with haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bone-avid scintigraphy for ATTR; transthyretin stabiliser or gene silencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "AL needs urgent treatment; ATTR managed to slow progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

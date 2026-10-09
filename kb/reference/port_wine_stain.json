@@ -1,174 +1,454 @@
 {
- "id": "port_wine_stain",
- "name": "Port-Wine Stain",
- "aliases": [
-  "naevus flammeus",
-  "capillary malformation",
-  "PWS"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not proliferate and does not spontaneously resolve",
-   "It appears as a flat, sharply demarcated pink to red patch that often follows a segmental or dermatomal distribution and tends to darken and thicken with age",
-   "Over decades some lesions develop cobblestoning, nodularity, and soft-tissue or bony overgrowth of the affected area",
-   "A facial stain involving the ophthalmic (forehead and upper eyelid) distribution raises concern for Sturge-Weber syndrome, with associated leptomeningeal vascular malformation and glaucoma",
-   "Any child with a periocular or ophthalmic-distribution stain needs ophthalmological assessment for glaucoma and appropriate neurological evaluation",
-   "Extensive limb capillary malformations can be a feature of overgrowth syndromes, so assess for limb asymmetry and hypertrophy",
-   "Pulsed-dye laser is the mainstay of treatment and works best when started early, though multiple sessions are needed and complete clearance is not guaranteed",
-   "The visible facial lesion carries a significant psychosocial burden, and support and camouflage advice are an important part of holistic care"
+  "id": "port_wine_stain",
+  "name": "Port-Wine Stain",
+  "aliases": [
+    "naevus flammeus",
+    "capillary malformation",
+    "PWS"
   ],
-  "pathophysiology": "A port-wine stain results from a developmental malformation of the superficial dermal capillaries and postcapillary venules, which are abnormally dilated and increase in ectasia over time. Many cases are associated with somatic activating mutations in genes of the GNAQ/GNA11 pathway, arising during embryogenesis and affecting a clone of vascular and surrounding cells. Because the abnormality is structural rather than proliferative, the number of vessels is essentially fixed, but progressive vascular dilatation and, in some cases, associated soft-tissue overgrowth account for the darkening and thickening seen with age. The same mosaic mutations underlie the neurological and ocular features when the malformation extends beyond the skin.",
-  "additionalDifferentials": [
-   "Infantile haemangioma (proliferates then involutes, unlike a port-wine stain)",
-   "Naevus simplex / salmon patch (transient, midline, fades)",
-   "Other capillary malformations within overgrowth syndromes",
-   "Angioma serpiginosum and other acquired vascular patches",
-   "Early or atypical vascular tumours",
-   "Reticulate vascular patterns such as cutis marmorata telangiectatica congenita"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch",
-   "Ophthalmological review for glaucoma with ophthalmic-distribution facial lesions",
-   "Brain MRI to assess for leptomeningeal involvement when Sturge-Weber syndrome is suspected",
-   "Assessment for limb overgrowth and, if indicated, imaging for associated vascular or overgrowth syndromes",
-   "Genetic evaluation in syndromic or extensive presentations where appropriate"
-  ],
-  "redFlags": [
-   "Ophthalmic-distribution facial stain raising concern for Sturge-Weber syndrome, seizures, and developmental effects",
-   "Signs of glaucoma such as a large or cloudy eye, tearing, or photophobia requiring urgent ophthalmology input",
-   "Progressive soft-tissue or skeletal overgrowth of the affected region",
-   "Extensive limb capillary malformation with asymmetry suggesting an overgrowth syndrome",
-   "New nodularity, bleeding, or ulceration within a long-standing lesion prompting reassessment"
-  ],
-  "prognosis": "A port-wine stain is a lifelong lesion that persists and typically darkens and thickens over time; the skin lesion itself is benign, but associated syndromic features determine broader outcome, and laser treatment can substantially lighten many lesions though results vary and maintenance may be required.",
-  "pitfalls": [
-   "Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear",
-   "Missing the association with Sturge-Weber syndrome in an ophthalmic-distribution facial lesion",
-   "Failing to arrange glaucoma screening in at-risk infants",
-   "Overlooking limb overgrowth syndromes in extensive capillary malformations",
-   "Neglecting the psychological impact and the value of early laser referral"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions persist and darken over time",
-   "Ophthalmological review for glaucoma in any lesion involving the ophthalmic distribution, with pressure-lowering treatment as required",
-   "Brain MRI and neurology referral when Sturge-Weber syndrome is suspected, with anticonvulsant therapy for associated seizures",
-   "Assessment for limb asymmetry and soft-tissue or bony overgrowth, with orthopaedic and vascular input where an overgrowth syndrome is identified",
-   "Psychological support and skin camouflage for the cosmetic and social impact of a visible facial lesion",
-   "Genetic evaluation in syndromic or extensive presentations where appropriate"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "port_wine_stain-pathway",
-   "title": "Port-Wine Stain: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not proliferate and does not spontaneously resolve",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ophthalmic-distribution facial stain raising concern for Sturge-Weber syndrome, seizures, and developmental effects",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch, Ophthalmological review for glaucoma with ophthalmic-distribution facial lesions, Brain MRI to assess for leptomeningeal involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions persist and darken over time"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of port-wine stain."
-  }
- ],
- "tables": [
-  {
-   "id": "port_wine_stain-matrix",
-   "title": "Port-Wine Stain: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not proliferate and does not spontaneously resolve",
+      "It appears as a flat, sharply demarcated pink to red patch that often follows a segmental or dermatomal distribution and tends to darken and thicken with age",
+      "Over decades some lesions develop cobblestoning, nodularity, and soft-tissue or bony overgrowth of the affected area",
+      "A facial stain involving the ophthalmic (forehead and upper eyelid) distribution raises concern for Sturge-Weber syndrome, with associated leptomeningeal vascular malformation and glaucoma",
+      "Any child with a periocular or ophthalmic-distribution stain needs ophthalmological assessment for glaucoma and appropriate neurological evaluation",
+      "Extensive limb capillary malformations can be a feature of overgrowth syndromes, so assess for limb asymmetry and hypertrophy",
+      "Pulsed-dye laser is the mainstay of treatment and works best when started early, though multiple sessions are needed and complete clearance is not guaranteed",
+      "The visible facial lesion carries a significant psychosocial burden, and support and camouflage advice are an important part of holistic care"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch, Ophthalmological review for glaucoma",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A port-wine stain results from a developmental malformation of the superficial dermal capillaries and postcapillary venules, which are abnormally dilated and increase in ectasia over time. Many cases are associated with somatic activating mutations in genes of the GNAQ/GNA11 pathway, arising during embryogenesis and affecting a clone of vascular and surrounding cells. Because the abnormality is structural rather than proliferative, the number of vessels is essentially fixed, but progressive vascular dilatation and, in some cases, associated soft-tissue overgrowth account for the darkening and thickening seen with age. The same mosaic mutations underlie the neurological and ocular features when the malformation extends beyond the skin.",
+    "additionalDifferentials": [
+      "Infantile haemangioma (proliferates then involutes, unlike a port-wine stain)",
+      "Naevus simplex / salmon patch (transient, midline, fades)",
+      "Other capillary malformations within overgrowth syndromes",
+      "Angioma serpiginosum and other acquired vascular patches",
+      "Early or atypical vascular tumours",
+      "Reticulate vascular patterns such as cutis marmorata telangiectatica congenita"
     ],
-    [
-     "Primary Differentials",
-     "Infantile haemangioma (proliferates then involutes, unlike a port-wine stain), Naevus simplex / salmon patch (transient, midline,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch",
+      "Ophthalmological review for glaucoma with ophthalmic-distribution facial lesions",
+      "Brain MRI to assess for leptomeningeal involvement when Sturge-Weber syndrome is suspected",
+      "Assessment for limb overgrowth and, if indicated, imaging for associated vascular or overgrowth syndromes",
+      "Genetic evaluation in syndromic or extensive presentations where appropriate"
     ],
-    [
-     "Management Strategy",
-     "Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "Ophthalmic-distribution facial stain raising concern for Sturge-Weber syndrome, seizures, and developmental effects",
+      "Signs of glaucoma such as a large or cloudy eye, tearing, or photophobia requiring urgent ophthalmology input",
+      "Progressive soft-tissue or skeletal overgrowth of the affected region",
+      "Extensive limb capillary malformation with asymmetry suggesting an overgrowth syndrome",
+      "New nodularity, bleeding, or ulceration within a long-standing lesion prompting reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear",
-     "Prevent diagnostic or management error"
+    "prognosis": "A port-wine stain is a lifelong lesion that persists and typically darkens and thickens over time; the skin lesion itself is benign, but associated syndromic features determine broader outcome, and laser treatment can substantially lighten many lesions though results vary and maintenance may be required.",
+    "pitfalls": [
+      "Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear",
+      "Missing the association with Sturge-Weber syndrome in an ophthalmic-distribution facial lesion",
+      "Failing to arrange glaucoma screening in at-risk infants",
+      "Overlooking limb overgrowth syndromes in extensive capillary malformations",
+      "Neglecting the psychological impact and the value of early laser referral"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions persist and darken over time",
+      "Ophthalmological review for glaucoma in any lesion involving the ophthalmic distribution, with pressure-lowering treatment as required",
+      "Brain MRI and neurology referral when Sturge-Weber syndrome is suspected, with anticonvulsant therapy for associated seizures",
+      "Assessment for limb asymmetry and soft-tissue or bony overgrowth, with orthopaedic and vascular input where an overgrowth syndrome is identified",
+      "Psychological support and skin camouflage for the cosmetic and social impact of a visible facial lesion",
+      "Genetic evaluation in syndromic or extensive presentations where appropriate"
     ]
-   ],
-   "caption": "Overview comparison matrix for port-wine stain."
-  }
- ],
- "diagrams": [
-  {
-   "id": "port-wine-stain-real-image",
-   "title": "Port-Wine Stain: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "port_wine_stain-pathway",
+      "title": "Port-Wine Stain: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not proliferate and does not spontaneously resolve",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ophthalmic-distribution facial stain raising concern for Sturge-Weber syndrome, seizures, and developmental effects",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch, Ophthalmological review for glaucoma with ophthalmic-distribution facial lesions, Brain MRI to assess for leptomeningeal involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions persist and darken over time"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of port-wine stain."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "port_wine_stain-matrix",
+      "title": "Port-Wine Stain: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A port-wine stain is a capillary (vascular) malformation present at birth that, unlike an infantile haemangioma, does not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on a congenital, non-involuting, well-demarcated vascular patch, Ophthalmological review for glaucoma",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infantile haemangioma (proliferates then involutes, unlike a port-wine stain), Naevus simplex / salmon patch (transient, midline,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Pulsed-dye laser therapy as the mainstay to lighten the malformation, begun early and repeated as maintenance since lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with an infantile haemangioma and wrongly reassuring parents it will disappear",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for port-wine stain."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "port_wine_stain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from a congenital, well-demarcated vascular patch",
+          "cells": [
+            {
+              "text": "Non-involuting lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Glaucoma with ophthalmic-distribution lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leptomeningeal involvement in suspected Sturge-Weber"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb overgrowth assessment",
+          "cells": [
+            {
+              "text": "Associated vascular or overgrowth anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndromic or extensive presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "port_wine_stain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infantile haemangioma",
+          "cells": [
+            {
+              "text": "Proliferates, then involutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naevus simplex (salmon patch)",
+          "cells": [
+            {
+              "text": "Transient and midline; fades"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "port_wine_stain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed-dye laser",
+          "cells": [
+            {
+              "text": "Mainstay to lighten the malformation, started early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye review",
+          "cells": [
+            {
+              "text": "Glaucoma screening for ophthalmic-distribution lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sturge-Weber",
+          "cells": [
+            {
+              "text": "Brain MRI and neurology referral when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overgrowth",
+          "cells": [
+            {
+              "text": "Limb asymmetry assessment with orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Skin camouflage and support for cosmetic and social impact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Syndromic or extensive presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "port_wine_stain-dx-mgmt",
+      "title": "Diagnosis and management of Port-Wine Stain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital, well-demarcated vascular facial or limb stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ophthalmic-distribution stain, eye signs, progressive overgrowth, ulceration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology and neurology review for glaucoma or Sturge-Weber",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; ophthalmology; brain MRI if Sturge-Weber suspected; limb assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a congenital, non-involuting capillary malformation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infantile haemangioma, naevus simplex, angioma serpiginosum or cutis marmorata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pulsed-dye laser therapy as mainstay, started early",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmological review for glaucoma in ophthalmic-distribution lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Brain MRI and neurology referral when Sturge-Weber is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assessment for limb asymmetry and overgrowth with orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychological support and skin camouflage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "A lifelong lesion that darkens and thickens over time; the skin lesion itself is benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

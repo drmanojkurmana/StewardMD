@@ -1,178 +1,467 @@
 {
- "id": "elastofibroma",
- "name": "Elastofibroma dorsi",
- "aliases": [
-  "elastofibroma",
-  "elastofibroma dorsi",
-  "subscapular elastofibroma"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower scapular tip",
-   "Typically occurs in older adults, more often women, and is frequently bilateral",
-   "Associated with repetitive manual work and mechanical friction of the scapula against the ribs",
-   "Presents as a firm, ill-defined mass that may cause a snapping or clicking sensation with shoulder movement",
-   "Characteristic location and imaging appearance often allow a confident diagnosis without biopsy",
-   "Histology shows collagen intermixed with abnormal, fragmented, beaded elastic fibres that are highlighted by elastic stains",
-   "Asymptomatic lesions can be observed, with marginal excision reserved for symptomatic cases"
+  "id": "elastofibroma",
+  "name": "Elastofibroma dorsi",
+  "aliases": [
+    "elastofibroma",
+    "elastofibroma dorsi",
+    "subscapular elastofibroma"
   ],
-  "pathophysiology": "Elastofibroma dorsi is a benign fibroelastic proliferation widely regarded as a reactive, degenerative process rather than a true neoplasm. Chronic mechanical friction between the inferior scapula and the underlying rib cage is thought to induce abnormal production and degeneration of elastic fibres within a dense collagenous stroma. The result is a poorly circumscribed mass characterised by numerous swollen, fragmented and beaded elastic fibres admixed with collagen and entrapped fat. Its stereotyped deep periscapular location reflects this mechanical aetiology.",
-  "additionalDifferentials": [
-   "Soft-tissue sarcoma of the chest wall or back",
-   "Desmoid-type fibromatosis",
-   "Lipoma or fibrolipoma",
-   "Nodular fasciitis",
-   "Metastatic soft-tissue deposit",
-   "Fibromatosis colli in atypical presentations"
-  ],
-  "additionalInvestigations": [
-   "MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location",
-   "CT to demonstrate the characteristic location and internal fat streaks",
-   "Ultrasound to confirm the deep subscapular position and layered appearance",
-   "Elastic-fibre stains on histology to highlight fragmented beaded elastic fibres if biopsied",
-   "Bilateral imaging assessment given the frequency of contralateral lesions"
-  ],
-  "redFlags": [
-   "Atypical location outside the classic periscapular region",
-   "Rapid growth or invasive features suggesting an alternative diagnosis",
-   "New neurological or vascular symptoms from local compression",
-   "Uncertain imaging appearance prompting histological confirmation"
-  ],
-  "prognosis": "Elastofibroma dorsi is entirely benign with no malignant potential, and observation is appropriate for asymptomatic lesions. Marginal excision is curative for symptomatic disease, and recurrence is rare.",
-  "pitfalls": [
-   "Overinvestigating or resecting an asymptomatic lesion with a classic appearance",
-   "Mistaking the mass for a sarcoma when the typical location is not recognised",
-   "Failing to consider bilateral disease",
-   "Omitting elastic stains when histological confirmation is sought"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management is a choice between observation and symptom directed local treatment, not curative oncologic therapy.",
-   "Familial, bilateral subscapular disease can often be diagnosed on history and imaging alone without biopsy.",
-   "Unilateral, sporadic lesions are commonly confirmed with biopsy before a treatment decision, given the differential includes other chest wall or back soft tissue masses.",
-   "Asymptomatic, radiologically typical lesions are managed with observation alone, with no systemic therapy, radiotherapy, or urgent surgery indicated.",
-   "Symptomatic lesions, such as pain or mechanical snapping or clicking with shoulder movement, can be treated with marginal excision once the diagnosis is definitive, and this is generally curative with a low recurrence rate.",
-   "Atypical or diagnostically uncertain lesions need further work up, including imaging and biopsy if needed, to exclude sarcoma before any excision decision, since mislabeling an atypical mass as elastofibroma risks missing a true chest wall sarcoma.",
-   "There are no lines of systemic therapy for elastofibroma, and no chemotherapy or other drug class treatment is described for it.",
-   "Neither radiotherapy nor systemic anticancer therapy has an established role in this condition.",
-   "Surgical technique should include attention to adequate drainage or compression of the resection cavity, since seroma or haematoma is the main complication of excision in this deep periscapular space.",
-   "Patients managed with observation are followed clinically for new symptoms, such as pain, snapping, or restricted shoulder movement, that would prompt reconsideration of excision.",
-   "Because contralateral lesions are common, especially in familial disease, bilateral imaging assessment is reasonable at diagnosis.",
-   "After excision, follow up focuses on local recurrence and early postoperative seroma or haematoma, with recurrence after marginal excision being uncommon.",
-   "Referral to a soft tissue or orthopaedic oncology or surgical service is appropriate for symptomatic lesions being considered for excision, atypical presentations where sarcoma cannot be confidently excluded, or when biopsy is needed to confirm diagnosis in unilateral, non-familial disease."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "elastofibroma-pathway",
-   "title": "Elastofibroma dorsi: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower scapular tip",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical location outside the classic periscapular region",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location, CT to demonstrate the characteristic location and internal fat streaks, Ultrasound to confirm the deep"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management is a choice between observation and symptom directed local treatment, not curative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overinvestigating or resecting an asymptomatic lesion with a classic appearance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of elastofibroma dorsi."
-  }
- ],
- "tables": [
-  {
-   "id": "elastofibroma-matrix",
-   "title": "Elastofibroma dorsi: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower scapular tip",
+      "Typically occurs in older adults, more often women, and is frequently bilateral",
+      "Associated with repetitive manual work and mechanical friction of the scapula against the ribs",
+      "Presents as a firm, ill-defined mass that may cause a snapping or clicking sensation with shoulder movement",
+      "Characteristic location and imaging appearance often allow a confident diagnosis without biopsy",
+      "Histology shows collagen intermixed with abnormal, fragmented, beaded elastic fibres that are highlighted by elastic stains",
+      "Asymptomatic lesions can be observed, with marginal excision reserved for symptomatic cases"
     ],
-    [
-     "Key Investigations",
-     "MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location, CT to demonstrate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Elastofibroma dorsi is a benign fibroelastic proliferation widely regarded as a reactive, degenerative process rather than a true neoplasm. Chronic mechanical friction between the inferior scapula and the underlying rib cage is thought to induce abnormal production and degeneration of elastic fibres within a dense collagenous stroma. The result is a poorly circumscribed mass characterised by numerous swollen, fragmented and beaded elastic fibres admixed with collagen and entrapped fat. Its stereotyped deep periscapular location reflects this mechanical aetiology.",
+    "additionalDifferentials": [
+      "Soft-tissue sarcoma of the chest wall or back",
+      "Desmoid-type fibromatosis",
+      "Lipoma or fibrolipoma",
+      "Nodular fasciitis",
+      "Metastatic soft-tissue deposit",
+      "Fibromatosis colli in atypical presentations"
     ],
-    [
-     "Primary Differentials",
-     "Soft-tissue sarcoma of the chest wall or back, Desmoid-type fibromatosis, Lipoma or fibrolipoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location",
+      "CT to demonstrate the characteristic location and internal fat streaks",
+      "Ultrasound to confirm the deep subscapular position and layered appearance",
+      "Elastic-fibre stains on histology to highlight fragmented beaded elastic fibres if biopsied",
+      "Bilateral imaging assessment given the frequency of contralateral lesions"
     ],
-    [
-     "Management Strategy",
-     "Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical location outside the classic periscapular region",
+      "Rapid growth or invasive features suggesting an alternative diagnosis",
+      "New neurological or vascular symptoms from local compression",
+      "Uncertain imaging appearance prompting histological confirmation"
     ],
-    [
-     "Clinical Pitfall",
-     "Overinvestigating or resecting an asymptomatic lesion with a classic appearance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Elastofibroma dorsi is entirely benign with no malignant potential, and observation is appropriate for asymptomatic lesions. Marginal excision is curative for symptomatic disease, and recurrence is rare.",
+    "pitfalls": [
+      "Overinvestigating or resecting an asymptomatic lesion with a classic appearance",
+      "Mistaking the mass for a sarcoma when the typical location is not recognised",
+      "Failing to consider bilateral disease",
+      "Omitting elastic stains when histological confirmation is sought"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management is a choice between observation and symptom directed local treatment, not curative oncologic therapy.",
+      "Familial, bilateral subscapular disease can often be diagnosed on history and imaging alone without biopsy.",
+      "Unilateral, sporadic lesions are commonly confirmed with biopsy before a treatment decision, given the differential includes other chest wall or back soft tissue masses.",
+      "Asymptomatic, radiologically typical lesions are managed with observation alone, with no systemic therapy, radiotherapy, or urgent surgery indicated.",
+      "Symptomatic lesions, such as pain or mechanical snapping or clicking with shoulder movement, can be treated with marginal excision once the diagnosis is definitive, and this is generally curative with a low recurrence rate.",
+      "Atypical or diagnostically uncertain lesions need further work up, including imaging and biopsy if needed, to exclude sarcoma before any excision decision, since mislabeling an atypical mass as elastofibroma risks missing a true chest wall sarcoma.",
+      "There are no lines of systemic therapy for elastofibroma, and no chemotherapy or other drug class treatment is described for it.",
+      "Neither radiotherapy nor systemic anticancer therapy has an established role in this condition.",
+      "Surgical technique should include attention to adequate drainage or compression of the resection cavity, since seroma or haematoma is the main complication of excision in this deep periscapular space.",
+      "Patients managed with observation are followed clinically for new symptoms, such as pain, snapping, or restricted shoulder movement, that would prompt reconsideration of excision.",
+      "Because contralateral lesions are common, especially in familial disease, bilateral imaging assessment is reasonable at diagnosis.",
+      "After excision, follow up focuses on local recurrence and early postoperative seroma or haematoma, with recurrence after marginal excision being uncommon.",
+      "Referral to a soft tissue or orthopaedic oncology or surgical service is appropriate for symptomatic lesions being considered for excision, atypical presentations where sarcoma cannot be confidently excluded, or when biopsy is needed to confirm diagnosis in unilateral, non-familial disease."
     ]
-   ],
-   "caption": "Overview comparison matrix for elastofibroma dorsi."
-  }
- ],
- "diagrams": [
-  {
-   "id": "elastofibroma-real-image",
-   "title": "Elastofibroma dorsi: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "elastofibroma-pathway",
+      "title": "Elastofibroma dorsi: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower scapular tip",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical location outside the classic periscapular region",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location, CT to demonstrate the characteristic location and internal fat streaks, Ultrasound to confirm the deep"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management is a choice between observation and symptom directed local treatment, not curative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overinvestigating or resecting an asymptomatic lesion with a classic appearance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of elastofibroma dorsi."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "elastofibroma-matrix",
+      "title": "Elastofibroma dorsi: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, slow-growing fibroelastic lesion arising almost exclusively deep to the scapula between the chest wall and the lower",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI showing a lens-shaped mass with alternating fibrous and fatty signal in the classic periscapular location, CT to demonstrate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Soft-tissue sarcoma of the chest wall or back, Desmoid-type fibromatosis, Lipoma or fibrolipoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Elastofibroma is a rare, slow growing benign soft tissue lesion, typically deep to the scapula, that can be bilateral; management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overinvestigating or resecting an asymptomatic lesion with a classic appearance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for elastofibroma dorsi."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "elastofibroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Lens-shaped mass with fibrous and fatty signal, periscapular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Location and internal fat streaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Deep subscapular position and layered appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elastic-fibre stain on biopsy",
+          "cells": [
+            {
+              "text": "Fragmented beaded elastic fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral imaging",
+          "cells": [
+            {
+              "text": "Frequent contralateral lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elastofibroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Soft-tissue sarcoma of the chest wall or back",
+          "cells": [
+            {
+              "text": "Atypical or invasive features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoid-type fibromatosis",
+          "cells": [
+            {
+              "text": "Infiltrative fibrous lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipoma or fibrolipoma",
+          "cells": [
+            {
+              "text": "Fat-predominant mass without fibrous signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic soft-tissue deposit",
+          "cells": [
+            {
+              "text": "Known malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "elastofibroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic, radiologically typical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marginal excision",
+          "cells": [
+            {
+              "text": "Symptomatic pain or snapping once diagnosis is definitive; low recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Unilateral sporadic lesions or diagnostic uncertainty before excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavity drainage",
+          "cells": [
+            {
+              "text": "Seroma or haematoma prevention after excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Soft tissue or orthopaedic oncology for atypical or excision-bound lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "elastofibroma-dx-mgmt",
+      "title": "Diagnosis and management of Elastofibroma dorsi",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected elastofibroma dorsi: deep periscapular mass, often bilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical site, rapid growth, neurological or vascular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma assessment for rapid growth or invasive features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI and CT; ultrasound; biopsy with elastic stain if uncertain; bilateral imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a typical periscapular lesion found on MRI or CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sarcoma, desmoid fibromatosis, lipoma or metastatic deposit",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for asymptomatic lesions with a typical appearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marginal excision for symptomatic lesions once diagnosis is secure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy with elastic stain for unilateral or uncertain lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain or compress the cavity to limit seroma after excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology referral for atypical lesions where sarcoma is not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; marginal excision is curative for symptomatic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

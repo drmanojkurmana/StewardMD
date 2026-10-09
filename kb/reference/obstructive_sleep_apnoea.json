@@ -1,174 +1,558 @@
 {
- "id": "obstructive_sleep_apnoea",
- "name": "Obstructive sleep apnoea",
- "aliases": [
-  "OSA",
-  "OSAS",
-  "obstructive sleep apnoea-hypopnoea syndrome",
-  "sleep-disordered breathing"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Pulmonology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen desaturations and arousals",
-   "Typical features include loud habitual snoring, witnessed breathing pauses, choking or gasping at night, and unrefreshing sleep",
-   "Excessive daytime sleepiness, morning headache, poor concentration, and mood disturbance are common daytime consequences",
-   "Obesity, increased neck circumference, male sex, retrognathia, and enlarged tonsils are important predisposing factors",
-   "Polysomnography is the diagnostic standard, with severity graded by the apnoea-hypopnoea index; home sleep testing can be used in selected patients",
-   "Continuous positive airway pressure is the mainstay of therapy for moderate-to-severe disease, splinting the airway open during sleep",
-   "Weight reduction, avoidance of alcohol and sedatives, positional therapy, and treatment of nasal obstruction are useful adjuncts",
-   "Untreated OSA is linked to hypertension, arrhythmias, ischaemic heart disease, stroke, insulin resistance, and increased motor-vehicle accident risk"
+  "id": "obstructive_sleep_apnoea",
+  "name": "Obstructive sleep apnoea",
+  "aliases": [
+    "OSA",
+    "OSAS",
+    "obstructive sleep apnoea-hypopnoea syndrome",
+    "sleep-disordered breathing"
   ],
-  "pathophysiology": "During sleep, reduced tone of the pharyngeal dilator muscles allows the anatomically narrowed or collapsible upper airway to close, producing partial (hypopnoea) or complete (apnoea) obstruction despite continued respiratory effort. The resulting hypoxaemia, hypercapnia, and rising respiratory effort trigger brief cortical arousals that restore airway patency but fragment sleep. Recurrent cycles of desaturation-reoxygenation and arousal drive sympathetic activation, surges in blood pressure, oxidative stress, and systemic inflammation, which over time contribute to cardiovascular and metabolic disease.",
-  "additionalDifferentials": [
-   "Central sleep apnoea",
-   "Obesity hypoventilation syndrome",
-   "Narcolepsy and other primary hypersomnias",
-   "Insufficient sleep or poor sleep hygiene",
-   "Hypothyroidism-related somnolence",
-   "Depression-related fatigue"
-  ],
-  "additionalInvestigations": [
-   "In-laboratory polysomnography to confirm diagnosis and grade severity",
-   "Home sleep apnoea testing in appropriately selected patients without significant comorbidity",
-   "Overnight or nocturnal oximetry as a screening adjunct",
-   "Validated questionnaires and sleepiness scales to assess pretest probability and symptom burden",
-   "Assessment for associated conditions including hypertension, thyroid dysfunction, and metabolic disease"
-  ],
-  "redFlags": [
-   "Severe daytime sleepiness in occupational drivers or machine operators posing safety risk",
-   "Signs of daytime hypoventilation or right heart failure suggesting overlap with hypoventilation syndromes",
-   "Resistant hypertension or nocturnal arrhythmias",
-   "Rapidly progressive symptoms or marked nocturnal desaturation"
-  ],
-  "prognosis": "With consistent adherence to positive airway pressure and weight management, symptoms and quality of life usually improve markedly and cardiovascular risk is reduced; poorly controlled or untreated disease carries substantial long-term cardiovascular, metabolic, and accident-related morbidity.",
-  "pitfalls": [
-   "Attributing daytime sleepiness solely to lifestyle and missing significant OSA",
-   "Overlooking OSA as a driver of resistant hypertension or atrial fibrillation",
-   "Assuming all patients are obese; OSA can occur with normal body habitus due to craniofacial anatomy",
-   "Failing to address poor CPAP adherence, which undermines treatment benefit"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "GOLD/ATS guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep",
-   "Weight reduction and lifestyle measures, including avoidance of alcohol and sedatives before sleep",
-   "Mandibular advancement devices for mild-to-moderate disease or CPAP intolerance",
-   "Positional therapy and treatment of nasal obstruction as adjuncts",
-   "Upper airway or bariatric surgery in selected patients, including adenotonsillectomy where enlarged tonsils are causative",
-   "Management of associated conditions such as hypertension, metabolic disease and thyroid dysfunction",
-   "Advice on driving safety, with monitoring of therapy adherence and residual daytime symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "obstructive_sleep_apnoea-pathway",
-   "title": "Obstructive sleep apnoea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen desaturations and arousals",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe daytime sleepiness in occupational drivers or machine operators posing safety risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: In-laboratory polysomnography to confirm diagnosis and grade severity, Home sleep apnoea testing in appropriately selected patients without significant comorbidity, Overnight or nocturnal oximetry as a screening adjunct"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing daytime sleepiness solely to lifestyle and missing significant OSA"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of obstructive sleep apnoea."
-  }
- ],
- "tables": [
-  {
-   "id": "obstructive_sleep_apnoea-matrix",
-   "title": "Obstructive sleep apnoea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Pulmonology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen desaturations and arousals",
+      "Typical features include loud habitual snoring, witnessed breathing pauses, choking or gasping at night, and unrefreshing sleep",
+      "Excessive daytime sleepiness, morning headache, poor concentration, and mood disturbance are common daytime consequences",
+      "Obesity, increased neck circumference, male sex, retrognathia, and enlarged tonsils are important predisposing factors",
+      "Polysomnography is the diagnostic standard, with severity graded by the apnoea-hypopnoea index; home sleep testing can be used in selected patients",
+      "Continuous positive airway pressure is the mainstay of therapy for moderate-to-severe disease, splinting the airway open during sleep",
+      "Weight reduction, avoidance of alcohol and sedatives, positional therapy, and treatment of nasal obstruction are useful adjuncts",
+      "Untreated OSA is linked to hypertension, arrhythmias, ischaemic heart disease, stroke, insulin resistance, and increased motor-vehicle accident risk"
     ],
-    [
-     "Key Investigations",
-     "In-laboratory polysomnography to confirm diagnosis and grade severity, Home sleep apnoea testing in appropriately selected",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During sleep, reduced tone of the pharyngeal dilator muscles allows the anatomically narrowed or collapsible upper airway to close, producing partial (hypopnoea) or complete (apnoea) obstruction despite continued respiratory effort. The resulting hypoxaemia, hypercapnia, and rising respiratory effort trigger brief cortical arousals that restore airway patency but fragment sleep. Recurrent cycles of desaturation-reoxygenation and arousal drive sympathetic activation, surges in blood pressure, oxidative stress, and systemic inflammation, which over time contribute to cardiovascular and metabolic disease.",
+    "additionalDifferentials": [
+      "Central sleep apnoea",
+      "Obesity hypoventilation syndrome",
+      "Narcolepsy and other primary hypersomnias",
+      "Insufficient sleep or poor sleep hygiene",
+      "Hypothyroidism-related somnolence",
+      "Depression-related fatigue"
     ],
-    [
-     "Primary Differentials",
-     "Central sleep apnoea, Obesity hypoventilation syndrome, Narcolepsy and other primary hypersomnias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "In-laboratory polysomnography to confirm diagnosis and grade severity",
+      "Home sleep apnoea testing in appropriately selected patients without significant comorbidity",
+      "Overnight or nocturnal oximetry as a screening adjunct",
+      "Validated questionnaires and sleepiness scales to assess pretest probability and symptom burden",
+      "Assessment for associated conditions including hypertension, thyroid dysfunction, and metabolic disease"
     ],
-    [
-     "Management Strategy",
-     "Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe daytime sleepiness in occupational drivers or machine operators posing safety risk",
+      "Signs of daytime hypoventilation or right heart failure suggesting overlap with hypoventilation syndromes",
+      "Resistant hypertension or nocturnal arrhythmias",
+      "Rapidly progressive symptoms or marked nocturnal desaturation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing daytime sleepiness solely to lifestyle and missing significant OSA",
-     "Prevent diagnostic or management error"
+    "prognosis": "With consistent adherence to positive airway pressure and weight management, symptoms and quality of life usually improve markedly and cardiovascular risk is reduced; poorly controlled or untreated disease carries substantial long-term cardiovascular, metabolic, and accident-related morbidity.",
+    "pitfalls": [
+      "Attributing daytime sleepiness solely to lifestyle and missing significant OSA",
+      "Overlooking OSA as a driver of resistant hypertension or atrial fibrillation",
+      "Assuming all patients are obese; OSA can occur with normal body habitus due to craniofacial anatomy",
+      "Failing to address poor CPAP adherence, which undermines treatment benefit"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "GOLD/ATS guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep",
+      "Weight reduction and lifestyle measures, including avoidance of alcohol and sedatives before sleep",
+      "Mandibular advancement devices for mild-to-moderate disease or CPAP intolerance",
+      "Positional therapy and treatment of nasal obstruction as adjuncts",
+      "Upper airway or bariatric surgery in selected patients, including adenotonsillectomy where enlarged tonsils are causative",
+      "Management of associated conditions such as hypertension, metabolic disease and thyroid dysfunction",
+      "Advice on driving safety, with monitoring of therapy adherence and residual daytime symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for obstructive sleep apnoea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "obstructive-sleep-apnoea-real-image",
-   "title": "Obstructive sleep apnoea: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "obstructive_sleep_apnoea-pathway",
+      "title": "Obstructive sleep apnoea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen desaturations and arousals",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe daytime sleepiness in occupational drivers or machine operators posing safety risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: In-laboratory polysomnography to confirm diagnosis and grade severity, Home sleep apnoea testing in appropriately selected patients without significant comorbidity, Overnight or nocturnal oximetry as a screening adjunct"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing daytime sleepiness solely to lifestyle and missing significant OSA"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of obstructive sleep apnoea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "obstructive_sleep_apnoea-matrix",
+      "title": "Obstructive sleep apnoea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by repetitive collapse of the upper airway during sleep, producing apnoeas and hypopnoeas with recurrent oxygen",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "In-laboratory polysomnography to confirm diagnosis and grade severity, Home sleep apnoea testing in appropriately selected",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Central sleep apnoea, Obesity hypoventilation syndrome, Narcolepsy and other primary hypersomnias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Continuous positive airway pressure as the mainstay for moderate-to-severe disease, splinting the upper airway open during sleep",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing daytime sleepiness solely to lifestyle and missing significant OSA",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for obstructive sleep apnoea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 265-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "obstructive_sleep_apnoea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "In-laboratory polysomnography",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and grades severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home sleep apnoea testing",
+          "cells": [
+            {
+              "text": "In appropriately selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for daytime hypoventilation",
+          "cells": [
+            {
+              "text": "Gas exchange and bicarbonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for right heart failure",
+          "cells": [
+            {
+              "text": "Signs in severe disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstructive_sleep_apnoea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central sleep apnoea",
+          "cells": [
+            {
+              "text": "No respiratory effort during apnoeas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation syndrome",
+          "cells": [
+            {
+              "text": "Daytime hypercapnia with obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narcolepsy or other primary hypersomnia",
+          "cells": [
+            {
+              "text": "Sleepiness without airway collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insufficient or poor sleep",
+          "cells": [
+            {
+              "text": "Lifestyle cause of tiredness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstructive_sleep_apnoea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Mainstay for moderate-to-severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight reduction",
+          "cells": [
+            {
+              "text": "Improves airway and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and positional measures",
+          "cells": [
+            {
+              "text": "Adjunctive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety advice on sleepiness",
+          "cells": [
+            {
+              "text": "For drivers and machine operators"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obstructive_sleep_apnoea-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical indicators in the sleepy patient",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age of onset (years)",
+        "Cataplexy",
+        "Night sleep: duration",
+        "Night sleep: awakenings",
+        "Night sleep: snoring",
+        "Night sleep: morning drunkenness",
+        "Daytime naps: frequency",
+        "Daytime naps: time of day",
+        "Daytime naps: duration"
+      ],
+      "rows": [
+        {
+          "parameter": "OSAHS",
+          "cells": [
+            {
+              "text": "35-60"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Yes, loud"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Usually few"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Many"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IHS",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Long"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Common"
+            },
+            {
+              "text": "Few"
+            },
+            {
+              "text": "Morning"
+            },
+            {
+              "text": ">1 h"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "OSAHS, obstructive sleep apnea/hypopnea syndrome; IHS, idiopathic hypersomnolence."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "obstructive_sleep_apnoea-dx-mgmt",
+      "title": "Diagnosis and management of Obstructive sleep apnoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loud snoring with witnessed apnoeas and daytime sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dangerous sleepiness, hypoventilation, right heart failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Advise against driving while dangerously sleepy; urgent review if heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography or home testing, gas exchange, cardiac review if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Repetitive upper airway collapse with desaturations on polysomnography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central apnoea or narcolepsy; refer for sleep medicine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CPAP as the mainstay for moderate-to-severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Weight reduction to improve the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifestyle and positional measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Safety advice about sleepiness and driving",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With CPAP adherence and weight control, symptoms and quality of life improve markedly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,468 @@
 {
- "id": "protothecosis",
- "name": "Protothecosis (Prototheca algae)",
- "aliases": [
-  "Prototheca infection",
-  "Prototheca wickerhamii",
-  "Prototheca zopfii",
-  "algal infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
-   "The commonest human forms are localised cutaneous or subcutaneous lesions and olecranon bursitis, often after traumatic inoculation",
-   "Disseminated and systemic disease is largely confined to immunosuppressed hosts, including those on corticosteroids or with malignancy or transplantation",
-   "Skin lesions are indolent and polymorphic, presenting as papules, plaques, ulcers or verrucous nodules",
-   "Diagnosis rests on histology and culture: tissue shows characteristic sporangia containing endospores arranged like a morula, and the organism grows on fungal media",
-   "Antifungal azoles or amphotericin-based therapy are typically used, and surgical excision is valuable for localised disease",
-   "Response can be slow, and relapse is common when immunosuppression persists"
+  "id": "protothecosis",
+  "name": "Protothecosis (Prototheca algae)",
+  "aliases": [
+    "Prototheca infection",
+    "Prototheca wickerhamii",
+    "Prototheca zopfii",
+    "algal infection"
   ],
-  "pathophysiology": "Prototheca species are ubiquitous unicellular algae that lack chlorophyll and reproduce asexually by internal division to form sporangia packed with endospores. Human disease follows inoculation of the organism through skin trauma or, less often, through mucosal or catheter-associated routes. In immunocompetent hosts, infection tends to remain localised as a granulomatous cutaneous or bursal lesion, whereas defects in cell-mediated immunity permit deeper and disseminated spread. The relatively indolent, granulomatous tissue response reflects the organism's slow replication and its resistance to clearance by impaired host defences.",
-  "additionalDifferentials": [
-   "Cutaneous and subcutaneous fungal infections such as sporotrichosis and chromoblastomycosis",
-   "Atypical mycobacterial skin infection",
-   "Cutaneous nocardiosis or actinomycosis",
-   "Non-infective granulomatous dermatoses",
-   "Bacterial or crystal-induced olecranon bursitis",
-   "Cutaneous leishmaniasis"
-  ],
-  "additionalInvestigations": [
-   "Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like)",
-   "Culture of tissue or aspirate on fungal media (e.g. Sabouraud agar)",
-   "Special stains such as periodic acid-Schiff and Gomori methenamine silver to highlight the organism",
-   "Aspiration and analysis of bursal fluid in olecranon bursitis",
-   "Assessment of immune status, including HIV testing and review of immunosuppression",
-   "Imaging or blood cultures if disseminated disease is suspected"
-  ],
-  "redFlags": [
-   "Disseminated or systemic protothecosis in a profoundly immunosuppressed patient",
-   "Progressive, non-healing skin lesions despite empirical antibacterial therapy",
-   "New infection in a transplant recipient or patient on high-dose corticosteroids",
-   "Signs of deep or visceral involvement such as fever with organ dysfunction"
-  ],
-  "prognosis": "Localised cutaneous and bursal disease in immunocompetent hosts responds reasonably well to excision and antifungal therapy, but disseminated infection in the immunocompromised is difficult to treat and carries a poorer outcome, with relapse likely if immune suppression cannot be reduced.",
-  "pitfalls": [
-   "Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology",
-   "Failing to send tissue for both histology and culture",
-   "Overlooking underlying immunosuppression that predisposes to dissemination",
-   "Expecting rapid resolution and abandoning therapy prematurely"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for deeper or disseminated infection",
-   "Surgical excision or debridement of localised cutaneous, subcutaneous or olecranon bursal lesions, usually combined with antifungal cover",
-   "Aspiration and drainage of bursal fluid in olecranon bursitis, with attentive wound care",
-   "Where feasible, reduce or reverse immunosuppression (taper corticosteroids, optimise malignancy or transplant management) to aid clearance",
-   "Assess and address host immune status, including HIV testing and review of iatrogenic immunosuppression",
-   "Surveillance for dissemination in immunocompromised hosts, with prolonged treatment and monitoring for relapse",
-   "Referral to infectious diseases specialists, with susceptibility-guided therapy for resistant disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "protothecosis-pathway",
-   "title": "Protothecosis (Prototheca algae): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated or systemic protothecosis in a profoundly immunosuppressed patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like), Culture of tissue or aspirate on fungal media (e.g. Sabouraud agar), Special stains such as periodic acid-Schiff and Gomori"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for deeper or disseminated infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of protothecosis (prototheca algae)."
-  }
- ],
- "tables": [
-  {
-   "id": "protothecosis-matrix",
-   "title": "Protothecosis (Prototheca algae): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
+      "The commonest human forms are localised cutaneous or subcutaneous lesions and olecranon bursitis, often after traumatic inoculation",
+      "Disseminated and systemic disease is largely confined to immunosuppressed hosts, including those on corticosteroids or with malignancy or transplantation",
+      "Skin lesions are indolent and polymorphic, presenting as papules, plaques, ulcers or verrucous nodules",
+      "Diagnosis rests on histology and culture: tissue shows characteristic sporangia containing endospores arranged like a morula, and the organism grows on fungal media",
+      "Antifungal azoles or amphotericin-based therapy are typically used, and surgical excision is valuable for localised disease",
+      "Response can be slow, and relapse is common when immunosuppression persists"
     ],
-    [
-     "Key Investigations",
-     "Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like), Culture of tissue or aspirate on",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prototheca species are ubiquitous unicellular algae that lack chlorophyll and reproduce asexually by internal division to form sporangia packed with endospores. Human disease follows inoculation of the organism through skin trauma or, less often, through mucosal or catheter-associated routes. In immunocompetent hosts, infection tends to remain localised as a granulomatous cutaneous or bursal lesion, whereas defects in cell-mediated immunity permit deeper and disseminated spread. The relatively indolent, granulomatous tissue response reflects the organism's slow replication and its resistance to clearance by impaired host defences.",
+    "additionalDifferentials": [
+      "Cutaneous and subcutaneous fungal infections such as sporotrichosis and chromoblastomycosis",
+      "Atypical mycobacterial skin infection",
+      "Cutaneous nocardiosis or actinomycosis",
+      "Non-infective granulomatous dermatoses",
+      "Bacterial or crystal-induced olecranon bursitis",
+      "Cutaneous leishmaniasis"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous and subcutaneous fungal infections such as sporotrichosis and chromoblastomycosis, Atypical mycobacterial skin",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like)",
+      "Culture of tissue or aspirate on fungal media (e.g. Sabouraud agar)",
+      "Special stains such as periodic acid-Schiff and Gomori methenamine silver to highlight the organism",
+      "Aspiration and analysis of bursal fluid in olecranon bursitis",
+      "Assessment of immune status, including HIV testing and review of immunosuppression",
+      "Imaging or blood cultures if disseminated disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated or systemic protothecosis in a profoundly immunosuppressed patient",
+      "Progressive, non-healing skin lesions despite empirical antibacterial therapy",
+      "New infection in a transplant recipient or patient on high-dose corticosteroids",
+      "Signs of deep or visceral involvement such as fever with organ dysfunction"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised cutaneous and bursal disease in immunocompetent hosts responds reasonably well to excision and antifungal therapy, but disseminated infection in the immunocompromised is difficult to treat and carries a poorer outcome, with relapse likely if immune suppression cannot be reduced.",
+    "pitfalls": [
+      "Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology",
+      "Failing to send tissue for both histology and culture",
+      "Overlooking underlying immunosuppression that predisposes to dissemination",
+      "Expecting rapid resolution and abandoning therapy prematurely"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for deeper or disseminated infection",
+      "Surgical excision or debridement of localised cutaneous, subcutaneous or olecranon bursal lesions, usually combined with antifungal cover",
+      "Aspiration and drainage of bursal fluid in olecranon bursitis, with attentive wound care",
+      "Where feasible, reduce or reverse immunosuppression (taper corticosteroids, optimise malignancy or transplant management) to aid clearance",
+      "Assess and address host immune status, including HIV testing and review of iatrogenic immunosuppression",
+      "Surveillance for dissemination in immunocompromised hosts, with prolonged treatment and monitoring for relapse",
+      "Referral to infectious diseases specialists, with susceptibility-guided therapy for resistant disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for protothecosis (prototheca algae)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "protothecosis-real-image",
-   "title": "Protothecosis (Prototheca algae): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "protothecosis-pathway",
+      "title": "Protothecosis (Prototheca algae): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated or systemic protothecosis in a profoundly immunosuppressed patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like), Culture of tissue or aspirate on fungal media (e.g. Sabouraud agar), Special stains such as periodic acid-Schiff and Gomori"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for deeper or disseminated infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of protothecosis (prototheca algae)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "protothecosis-matrix",
+      "title": "Protothecosis (Prototheca algae): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Protothecosis is caused by Prototheca, achlorophyllous (colourless) algae found in soil, water and organic matter",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or tissue biopsy for histology showing sporangia with internal endospores (morula-like), Culture of tissue or aspirate on",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous and subcutaneous fungal infections such as sporotrichosis and chromoblastomycosis, Atypical mycobacterial skin",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antifungal therapy as the pharmacological mainstay, using an azole such as itraconazole or voriconazole, or amphotericin B for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking indolent skin lesions for a fungal infection without confirming the algal aetiology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for protothecosis (prototheca algae)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "protothecosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or tissue biopsy for histology",
+          "cells": [
+            {
+              "text": "Sporangia with internal endospores (morula-like)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture on fungal media",
+          "cells": [
+            {
+              "text": "Organism growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic acid-Schiff and Gomori methenamine silver stains",
+          "cells": [
+            {
+              "text": "Organism highlighted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of bursal fluid in olecranon bursitis",
+          "cells": [
+            {
+              "text": "Bursal fluid analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and review of immunosuppression",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or blood cultures",
+          "cells": [
+            {
+              "text": "Dissemination, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protothecosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous and subcutaneous fungal infections (sporotrichosis, chromoblastomycosis)",
+          "cells": [
+            {
+              "text": "Fungal infection"
+            },
+            {
+              "text": "Culture on fungal media"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial or crystal-induced olecranon bursitis",
+          "cells": [
+            {
+              "text": "Olecranon bursitis"
+            },
+            {
+              "text": "Bursal fluid analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protothecosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Azole antifungal",
+          "cells": [
+            {
+              "text": "Itraconazole or voriconazole; amphotericin B for deeper or disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or debridement",
+          "cells": [
+            {
+              "text": "Localised cutaneous, subcutaneous or olecranon bursal lesions, usually with antifungal cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bursal drainage",
+          "cells": [
+            {
+              "text": "Aspiration and drainage of bursal fluid, with attentive wound care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce immunosuppression",
+          "cells": [
+            {
+              "text": "Taper corticosteroids or optimise malignancy or transplant management where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host immune status",
+          "cells": [
+            {
+              "text": "HIV testing and review of iatrogenic immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Dissemination in immunocompromised hosts; prolonged treatment and relapse monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases specialists; susceptibility-guided therapy for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "protothecosis-dx-mgmt",
+      "title": "Diagnosis and management of Protothecosis (Prototheca algae)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected protothecosis: non-healing skin lesions or olecranon bursitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Disseminated disease, antibacterial failure, or infection after transplant or steroids?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent infectious diseases review for disseminated or visceral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy histology; fungal culture; PAS and GMS stains; bursal fluid; HIV; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are sporangia with endospores seen on biopsy, with culture confirming?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporotrichosis, nocardiosis, atypical mycobacteria or leishmaniasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Azole such as itraconazole or voriconazole; amphotericin B if disseminated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical excision or debridement of localised lesions, with antifungal cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspiration and drainage of bursal fluid in olecranon bursitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reduce or reverse immunosuppression where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infectious diseases follow-up with prolonged treatment and relapse monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

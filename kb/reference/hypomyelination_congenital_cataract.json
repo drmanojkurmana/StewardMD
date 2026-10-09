@@ -1,175 +1,462 @@
 {
- "id": "hypomyelination_congenital_cataract",
- "name": "Hypomyelination with congenital cataract (FAM126A)",
- "aliases": [
-  "HCC",
-  "FAM126A-related leukodystrophy",
-  "hyccin deficiency",
-  "hypomyelinating leukodystrophy with cataract"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
-   "The combination of congenital or early-infantile cataract with a hypomyelinating leukodystrophy is the diagnostic signature and should prompt FAM126A testing",
-   "Children typically develop cataract in the first months of life, followed by delayed motor milestones, progressive spasticity, cerebellar ataxia and a peripheral neuropathy",
-   "The peripheral neuropathy is an important feature that distinguishes this disorder from many other hypomyelinating leukodystrophies confined to the central nervous system",
-   "MRI shows diffuse hypomyelination together with additional periventricular white matter T2 hyperintensity that extends beyond the background hypomyelination",
-   "Cognition is often relatively preserved compared with the degree of motor disability, at least earlier in the course",
-   "Diagnosis rests on the cataract-plus-leukodystrophy phenotype with neuropathy, supported by MRI and confirmed by FAM126A sequencing; management is supportive with cataract surgery, physiotherapy and rehabilitation"
+  "id": "hypomyelination_congenital_cataract",
+  "name": "Hypomyelination with congenital cataract (FAM126A)",
+  "aliases": [
+    "HCC",
+    "FAM126A-related leukodystrophy",
+    "hyccin deficiency",
+    "hypomyelinating leukodystrophy with cataract"
   ],
-  "pathophysiology": "Hypomyelination with congenital cataract is caused by biallelic variants in FAM126A, which encodes hyccin, a membrane-associated protein that forms part of a complex regulating phosphatidylinositol-4-phosphate synthesis at the plasma membrane. This lipid signalling is important for the function of myelinating cells and the lens. Loss of hyccin impairs central myelination by oligodendrocytes and peripheral myelination by Schwann cells, producing a combined central hypomyelination and peripheral neuropathy, while disturbed lens homeostasis leads to the characteristic early cataract.",
-  "additionalDifferentials": [
-   "Other hypomyelinating leukodystrophies (Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease)",
-   "POLR3-related (4H) leukodystrophy",
-   "Congenital cataract with metabolic disease (galactosaemia, peroxisomal and Lowe syndrome)",
-   "Cockayne syndrome and other disorders combining cataract with leukoencephalopathy",
-   "Cerebrotendinous xanthomatosis (juvenile cataract with neurological decline)",
-   "Marinesco-Sjogren syndrome (cataract, ataxia and myopathy)"
-  ],
-  "additionalInvestigations": [
-   "Ophthalmological assessment to confirm and characterise the cataract",
-   "Brain MRI to demonstrate hypomyelination with additional periventricular white matter signal change",
-   "Nerve conduction studies to document the associated peripheral neuropathy",
-   "FAM126A sequencing, with hypomyelinating leukodystrophy panel or exome if negative",
-   "Metabolic screen to exclude treatable causes of infantile cataract",
-   "Developmental and physiotherapy assessment to guide rehabilitation"
-  ],
-  "redFlags": [
-   "Untreated dense cataract threatening irreversible amblyopia in infancy",
-   "Rapid neurological regression prompting reassessment for an alternative diagnosis",
-   "Dysphagia with aspiration as bulbar involvement progresses",
-   "Loss of ambulation from combined spasticity and neuropathy"
-  ],
-  "prognosis": "The disorder is progressive but often relatively slow, with gradually worsening spasticity, ataxia and neuropathy over childhood; many children lose independent walking in later childhood or adolescence, though cognition may be comparatively spared. Prognosis varies with the specific variants and the degree of peripheral nerve involvement.",
-  "pitfalls": [
-   "Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy",
-   "Overlooking the peripheral neuropathy, a key clue separating this from other hypomyelinating disorders",
-   "Not obtaining MRI to identify the additional periventricular white matter change",
-   "Assuming an isolated congenital cataract syndrome and missing FAM126A genetics",
-   "Failing to provide autosomal recessive genetic counselling"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia",
-   "Manage progressive spasticity with physiotherapy, orthoses and antispasticity agents such as baclofen, with botulinum toxin for focal spasticity",
-   "Address the peripheral neuropathy with rehabilitation, orthotics and gait and foot care",
-   "Provide developmental support and neurorehabilitation, harnessing the relatively preserved cognition",
-   "Monitor for contractures, scoliosis and mobility decline over the progressive course",
-   "Coordinate multidisciplinary care across ophthalmology, neurology, physiotherapy and orthopaedics",
-   "Offer genetic counselling for this autosomal recessive FAM126A disorder and test at-risk siblings"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypomyelination_congenital_cataract-pathway",
-   "title": "Hypomyelination with congenital cataract (FAM126A): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Untreated dense cataract threatening irreversible amblyopia in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmological assessment to confirm and characterise the cataract, Brain MRI to demonstrate hypomyelination with additional periventricular white matter signal change, Nerve conduction studies to document the associated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypomyelination with congenital cataract (fam126a)."
-  }
- ],
- "tables": [
-  {
-   "id": "hypomyelination_congenital_cataract-matrix",
-   "title": "Hypomyelination with congenital cataract (FAM126A): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
+      "The combination of congenital or early-infantile cataract with a hypomyelinating leukodystrophy is the diagnostic signature and should prompt FAM126A testing",
+      "Children typically develop cataract in the first months of life, followed by delayed motor milestones, progressive spasticity, cerebellar ataxia and a peripheral neuropathy",
+      "The peripheral neuropathy is an important feature that distinguishes this disorder from many other hypomyelinating leukodystrophies confined to the central nervous system",
+      "MRI shows diffuse hypomyelination together with additional periventricular white matter T2 hyperintensity that extends beyond the background hypomyelination",
+      "Cognition is often relatively preserved compared with the degree of motor disability, at least earlier in the course",
+      "Diagnosis rests on the cataract-plus-leukodystrophy phenotype with neuropathy, supported by MRI and confirmed by FAM126A sequencing; management is supportive with cataract surgery, physiotherapy and rehabilitation"
     ],
-    [
-     "Key Investigations",
-     "Ophthalmological assessment to confirm and characterise the cataract, Brain MRI to demonstrate hypomyelination with additional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypomyelination with congenital cataract is caused by biallelic variants in FAM126A, which encodes hyccin, a membrane-associated protein that forms part of a complex regulating phosphatidylinositol-4-phosphate synthesis at the plasma membrane. This lipid signalling is important for the function of myelinating cells and the lens. Loss of hyccin impairs central myelination by oligodendrocytes and peripheral myelination by Schwann cells, producing a combined central hypomyelination and peripheral neuropathy, while disturbed lens homeostasis leads to the characteristic early cataract.",
+    "additionalDifferentials": [
+      "Other hypomyelinating leukodystrophies (Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease)",
+      "POLR3-related (4H) leukodystrophy",
+      "Congenital cataract with metabolic disease (galactosaemia, peroxisomal and Lowe syndrome)",
+      "Cockayne syndrome and other disorders combining cataract with leukoencephalopathy",
+      "Cerebrotendinous xanthomatosis (juvenile cataract with neurological decline)",
+      "Marinesco-Sjogren syndrome (cataract, ataxia and myopathy)"
     ],
-    [
-     "Primary Differentials",
-     "Other hypomyelinating leukodystrophies (Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease), POLR3-related (4H)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmological assessment to confirm and characterise the cataract",
+      "Brain MRI to demonstrate hypomyelination with additional periventricular white matter signal change",
+      "Nerve conduction studies to document the associated peripheral neuropathy",
+      "FAM126A sequencing, with hypomyelinating leukodystrophy panel or exome if negative",
+      "Metabolic screen to exclude treatable causes of infantile cataract",
+      "Developmental and physiotherapy assessment to guide rehabilitation"
     ],
-    [
-     "Management Strategy",
-     "Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia",
-     "Core treatment modality"
+    "redFlags": [
+      "Untreated dense cataract threatening irreversible amblyopia in infancy",
+      "Rapid neurological regression prompting reassessment for an alternative diagnosis",
+      "Dysphagia with aspiration as bulbar involvement progresses",
+      "Loss of ambulation from combined spasticity and neuropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive but often relatively slow, with gradually worsening spasticity, ataxia and neuropathy over childhood; many children lose independent walking in later childhood or adolescence, though cognition may be comparatively spared. Prognosis varies with the specific variants and the degree of peripheral nerve involvement.",
+    "pitfalls": [
+      "Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy",
+      "Overlooking the peripheral neuropathy, a key clue separating this from other hypomyelinating disorders",
+      "Not obtaining MRI to identify the additional periventricular white matter change",
+      "Assuming an isolated congenital cataract syndrome and missing FAM126A genetics",
+      "Failing to provide autosomal recessive genetic counselling"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia",
+      "Manage progressive spasticity with physiotherapy, orthoses and antispasticity agents such as baclofen, with botulinum toxin for focal spasticity",
+      "Address the peripheral neuropathy with rehabilitation, orthotics and gait and foot care",
+      "Provide developmental support and neurorehabilitation, harnessing the relatively preserved cognition",
+      "Monitor for contractures, scoliosis and mobility decline over the progressive course",
+      "Coordinate multidisciplinary care across ophthalmology, neurology, physiotherapy and orthopaedics",
+      "Offer genetic counselling for this autosomal recessive FAM126A disorder and test at-risk siblings"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypomyelination with congenital cataract (fam126a)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypomyelination-congenital-cataract-real-image",
-   "title": "Hypomyelination with congenital cataract (FAM126A): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hypomyelination_congenital_cataract-pathway",
+      "title": "Hypomyelination with congenital cataract (FAM126A): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Untreated dense cataract threatening irreversible amblyopia in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmological assessment to confirm and characterise the cataract, Brain MRI to demonstrate hypomyelination with additional periventricular white matter signal change, Nerve conduction studies to document the associated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypomyelination with congenital cataract (fam126a)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypomyelination_congenital_cataract-matrix",
+      "title": "Hypomyelination with congenital cataract (FAM126A): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive hypomyelinating leukodystrophy caused by variants in FAM126A, which encodes the protein hyccin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmological assessment to confirm and characterise the cataract, Brain MRI to demonstrate hypomyelination with additional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other hypomyelinating leukodystrophies (Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease), POLR3-related (4H)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer early for cataract surgery to preserve vision and prevent deprivation amblyopia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the cataract in isolation without recognising the associated leukodystrophy and neuropathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypomyelination with congenital cataract (fam126a)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypomyelination_congenital_cataract-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Confirms and characterises the cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypomyelination with periventricular white matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FAM126A sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes treatable causes of infantile cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and physiotherapy assessment",
+          "cells": [
+            {
+              "text": "Guides rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_congenital_cataract-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marinesco-Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Cataract with ataxia and myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrotendinous xanthomatosis",
+          "cells": [
+            {
+              "text": "Juvenile cataract with neurological decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cataract with metabolic disease",
+          "cells": [
+            {
+              "text": "Galactosaemia, peroxisomal disorders and Lowe syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypomyelination_congenital_cataract-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early cataract surgery",
+          "cells": [
+            {
+              "text": "Preserves vision and prevents deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Physiotherapy, orthoses and baclofen; botulinum toxin for focal spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy care",
+          "cells": [
+            {
+              "text": "Rehabilitation, orthotics, gait and foot care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Neurorehabilitation using relatively preserved cognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Contractures, scoliosis and mobility decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FAM126A disorder; test at-risk siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypomyelination_congenital_cataract-dx-mgmt",
+      "title": "Diagnosis and management of Hypomyelination with congenital cataract (FAM126A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital or early-infantile cataract with delayed motor milestones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Dense cataract threatening amblyopia, regression or dysphagia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology referral for cataract surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ophthalmology, brain MRI, nerve conduction, FAM126A sequencing, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FAM126A variant confirmed with leukodystrophy on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude metabolic cataract causes and other leukodystrophies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early cataract surgery to prevent deprivation amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, orthoses and baclofen for progressive spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathy rehabilitation, orthotics and foot care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor contractures, scoliosis and mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision preserved by early surgery; mobility managed as disease progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,490 @@
 {
- "id": "hyperhaemolysis_syndrome",
- "name": "Hyperhaemolysis syndrome",
- "aliases": [
-  "Hyperhaemolytic transfusion reaction",
-  "Bystander haemolysis syndrome"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion medicine",
- "specialty": "Haematology / Transfusion medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "British Society for Haematology guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the patient's own red cells are destroyed.",
-   "The hallmark is a post-transfusion haemoglobin that falls below the pre-transfusion level, so the patient is worse off after being transfused.",
-   "Markedly raised lactate dehydrogenase, low haptoglobin, haemoglobinuria and often a reticulocytopenia despite severe anaemia are characteristic.",
-   "Acute and delayed forms are described; the delayed form frequently coincides with an alloantibody response while the acute form may occur without detectable new antibodies.",
-   "Further transfusion typically worsens haemolysis and should be avoided unless anaemia is immediately life-threatening.",
-   "Immunosuppression with corticosteroids and immunoglobulin is the mainstay, with complement inhibition and other agents considered in refractory cases.",
-   "In sickle cell disease it may be mistaken for a painful crisis, delaying recognition and prompting harmful further transfusion.",
-   "Bystander destruction of autologous cells is thought to involve activated macrophages and complement, extending haemolysis beyond antigen-incompatible cells."
+  "id": "hyperhaemolysis_syndrome",
+  "name": "Hyperhaemolysis syndrome",
+  "aliases": [
+    "Hyperhaemolytic transfusion reaction",
+    "Bystander haemolysis syndrome"
   ],
-  "pathophysiology": "Hyperhaemolysis syndrome is characterised by destruction of red cells in excess of the transfused incompatible units, so that autologous cells are also lost. The mechanism is incompletely understood but is thought to involve intense macrophage activation and complement dysregulation triggered by transfusion in a chronically alloimmunised and inflamed host. Activated macrophages destroy both antibody-coated transfused cells and innocent bystander autologous red cells, while suppression of erythropoiesis (a relative reticulocytopenia) compounds the fall in haemoglobin. In the delayed form an anamnestic alloantibody response is often demonstrable, whereas the acute form may occur without new detectable antibodies, suggesting antibody-independent mechanisms. The result is profound, worsening anaemia with brisk intravascular and extravascular haemolysis.",
-  "additionalDifferentials": [
-   "Delayed haemolytic transfusion reaction",
-   "Acute haemolytic transfusion reaction",
-   "Sickle cell vaso-occlusive crisis with anaemia",
-   "Autoimmune haemolytic anaemia",
-   "Aplastic or parvovirus-associated crisis",
-   "Ongoing haemorrhage"
-  ],
-  "additionalInvestigations": [
-   "Serial haemoglobin demonstrating a fall below the pre-transfusion value",
-   "Lactate dehydrogenase, bilirubin and haptoglobin confirming brisk haemolysis",
-   "Reticulocyte count, which may be inappropriately low",
-   "Direct antiglobulin test and extended antibody identification",
-   "Urinalysis for haemoglobinuria",
-   "Review of transfusion history and haemoglobin electrophoresis to quantify remaining donor haemoglobin"
-  ],
-  "redFlags": [
-   "Post-transfusion haemoglobin lower than before transfusion",
-   "Worsening anaemia and haemoglobinuria after each transfused unit",
-   "Reticulocytopenia in the face of severe anaemia",
-   "Rapid clinical deterioration in a patient with sickle cell disease",
-   "Signs of end-organ ischaemia from profound anaemia"
-  ],
-  "prognosis": "The syndrome can be life-threatening, particularly if unrecognised and further transfusion is given, but it often responds to immunosuppression and avoidance of transfusion, with recovery of haemoglobin over days to weeks. Recurrence on re-exposure is a major concern, so future transfusion requires specialist planning.",
-  "pitfalls": [
-   "Giving more blood in response to worsening anaemia and accelerating haemolysis.",
-   "Mistaking the presentation for a sickle cell painful crisis.",
-   "Assuming a negative antibody screen excludes the diagnosis, as the acute form may lack new antibodies.",
-   "Failing to start immunosuppression promptly in a deteriorating patient.",
-   "Not flagging the patient for specialist input before any future transfusion."
-  ],
-  "references": [
-   "British Society for Haematology guidelines on the management of haemoglobinopathy transfusion",
-   "AABB Technical Manual, current edition",
-   "Mollison's Blood Transfusion in Clinical Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the haemolysis",
-   "Start immunosuppression with corticosteroids and intravenous immunoglobulin as first-line therapy",
-   "Consider complement inhibition such as eculizumab and rituximab in severe or refractory cases",
-   "Support endogenous erythropoiesis with erythropoietin and provide folate and iron as appropriate while treating the underlying haemoglobinopathy",
-   "Monitor serial haemoglobin, lactate dehydrogenase, haptoglobin and reticulocyte count to track haemolysis and marrow recovery",
-   "If transfusion becomes unavoidable, use extended antigen-matched units in close liaison with the transfusion laboratory",
-   "Flag the diagnosis prominently to prevent inadvertent re-exposure and manage jointly with haematology and transfusion medicine"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyperhaemolysis_syndrome-pathway",
-   "title": "Hyperhaemolysis syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the patient's own red cells are destroyed.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Post-transfusion haemoglobin lower than before transfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial haemoglobin demonstrating a fall below the pre-transfusion value, Lactate dehydrogenase, bilirubin and haptoglobin confirming brisk haemolysis, Reticulocyte count, which may be inappropriately low"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the haemolysis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving more blood in response to worsening anaemia and accelerating haemolysis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyperhaemolysis syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hyperhaemolysis_syndrome-matrix",
-   "title": "Hyperhaemolysis syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion medicine",
+  "specialty": "Haematology / Transfusion medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "British Society for Haematology guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the patient's own red cells are destroyed.",
+      "The hallmark is a post-transfusion haemoglobin that falls below the pre-transfusion level, so the patient is worse off after being transfused.",
+      "Markedly raised lactate dehydrogenase, low haptoglobin, haemoglobinuria and often a reticulocytopenia despite severe anaemia are characteristic.",
+      "Acute and delayed forms are described; the delayed form frequently coincides with an alloantibody response while the acute form may occur without detectable new antibodies.",
+      "Further transfusion typically worsens haemolysis and should be avoided unless anaemia is immediately life-threatening.",
+      "Immunosuppression with corticosteroids and immunoglobulin is the mainstay, with complement inhibition and other agents considered in refractory cases.",
+      "In sickle cell disease it may be mistaken for a painful crisis, delaying recognition and prompting harmful further transfusion.",
+      "Bystander destruction of autologous cells is thought to involve activated macrophages and complement, extending haemolysis beyond antigen-incompatible cells."
     ],
-    [
-     "Key Investigations",
-     "Serial haemoglobin demonstrating a fall below the pre-transfusion value, Lactate dehydrogenase, bilirubin and haptoglobin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyperhaemolysis syndrome is characterised by destruction of red cells in excess of the transfused incompatible units, so that autologous cells are also lost. The mechanism is incompletely understood but is thought to involve intense macrophage activation and complement dysregulation triggered by transfusion in a chronically alloimmunised and inflamed host. Activated macrophages destroy both antibody-coated transfused cells and innocent bystander autologous red cells, while suppression of erythropoiesis (a relative reticulocytopenia) compounds the fall in haemoglobin. In the delayed form an anamnestic alloantibody response is often demonstrable, whereas the acute form may occur without new detectable antibodies, suggesting antibody-independent mechanisms. The result is profound, worsening anaemia with brisk intravascular and extravascular haemolysis.",
+    "additionalDifferentials": [
+      "Delayed haemolytic transfusion reaction",
+      "Acute haemolytic transfusion reaction",
+      "Sickle cell vaso-occlusive crisis with anaemia",
+      "Autoimmune haemolytic anaemia",
+      "Aplastic or parvovirus-associated crisis",
+      "Ongoing haemorrhage"
     ],
-    [
-     "Primary Differentials",
-     "Delayed haemolytic transfusion reaction, Acute haemolytic transfusion reaction, Sickle cell vaso-occlusive crisis with anaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial haemoglobin demonstrating a fall below the pre-transfusion value",
+      "Lactate dehydrogenase, bilirubin and haptoglobin confirming brisk haemolysis",
+      "Reticulocyte count, which may be inappropriately low",
+      "Direct antiglobulin test and extended antibody identification",
+      "Urinalysis for haemoglobinuria",
+      "Review of transfusion history and haemoglobin electrophoresis to quantify remaining donor haemoglobin"
     ],
-    [
-     "Management Strategy",
-     "Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the",
-     "Core treatment modality"
+    "redFlags": [
+      "Post-transfusion haemoglobin lower than before transfusion",
+      "Worsening anaemia and haemoglobinuria after each transfused unit",
+      "Reticulocytopenia in the face of severe anaemia",
+      "Rapid clinical deterioration in a patient with sickle cell disease",
+      "Signs of end-organ ischaemia from profound anaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving more blood in response to worsening anaemia and accelerating haemolysis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome can be life-threatening, particularly if unrecognised and further transfusion is given, but it often responds to immunosuppression and avoidance of transfusion, with recovery of haemoglobin over days to weeks. Recurrence on re-exposure is a major concern, so future transfusion requires specialist planning.",
+    "pitfalls": [
+      "Giving more blood in response to worsening anaemia and accelerating haemolysis.",
+      "Mistaking the presentation for a sickle cell painful crisis.",
+      "Assuming a negative antibody screen excludes the diagnosis, as the acute form may lack new antibodies.",
+      "Failing to start immunosuppression promptly in a deteriorating patient.",
+      "Not flagging the patient for specialist input before any future transfusion."
+    ],
+    "references": [
+      "British Society for Haematology guidelines on the management of haemoglobinopathy transfusion",
+      "AABB Technical Manual, current edition",
+      "Mollison's Blood Transfusion in Clinical Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the haemolysis",
+      "Start immunosuppression with corticosteroids and intravenous immunoglobulin as first-line therapy",
+      "Consider complement inhibition such as eculizumab and rituximab in severe or refractory cases",
+      "Support endogenous erythropoiesis with erythropoietin and provide folate and iron as appropriate while treating the underlying haemoglobinopathy",
+      "Monitor serial haemoglobin, lactate dehydrogenase, haptoglobin and reticulocyte count to track haemolysis and marrow recovery",
+      "If transfusion becomes unavoidable, use extended antigen-matched units in close liaison with the transfusion laboratory",
+      "Flag the diagnosis prominently to prevent inadvertent re-exposure and manage jointly with haematology and transfusion medicine"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyperhaemolysis syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyperhaemolysis-syndrome-real-image",
-   "title": "Hyperhaemolysis syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hyperhaemolysis_syndrome-pathway",
+      "title": "Hyperhaemolysis syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the patient's own red cells are destroyed.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Post-transfusion haemoglobin lower than before transfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial haemoglobin demonstrating a fall below the pre-transfusion value, Lactate dehydrogenase, bilirubin and haptoglobin confirming brisk haemolysis, Reticulocyte count, which may be inappropriately low"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the haemolysis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving more blood in response to worsening anaemia and accelerating haemolysis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyperhaemolysis syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyperhaemolysis_syndrome-matrix",
+      "title": "Hyperhaemolysis syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe transfusion reaction, most often seen in sickle cell disease and thalassaemia, in which both transfused and the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial haemoglobin demonstrating a fall below the pre-transfusion value, Lactate dehydrogenase, bilirubin and haptoglobin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Delayed haemolytic transfusion reaction, Acute haemolytic transfusion reaction, Sickle cell vaso-occlusive crisis with anaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid further red-cell transfusion unless anaemia is immediately life-threatening, as additional units typically worsen the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving more blood in response to worsening anaemia and accelerating haemolysis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyperhaemolysis syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Society for Haematology guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperhaemolysis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial haemoglobin falling below the pre-transfusion value",
+          "cells": [
+            {
+              "text": "Post-transfusion fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate dehydrogenase, bilirubin and haptoglobin",
+          "cells": [
+            {
+              "text": "Brisk haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulocyte count",
+          "cells": [
+            {
+              "text": "Often inappropriately low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test and antibody identification",
+          "cells": [
+            {
+              "text": "Alloantibody or autoantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for haemoglobinuria",
+          "cells": [
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion history and haemoglobin electrophoresis",
+          "cells": [
+            {
+              "text": "Donor haemoglobin remaining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperhaemolysis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Delayed haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Alloantibody response after prior transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Onset during or soon after transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell vaso-occlusive crisis",
+          "cells": [
+            {
+              "text": "Pain without a fall in haemoglobin below the pre-transfusion level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Positive direct antiglobulin test with autoantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing haemorrhage",
+          "cells": [
+            {
+              "text": "Blood loss rather than haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperhaemolysis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid further red cell transfusion",
+          "cells": [
+            {
+              "text": "Unless anaemia is immediately life-threatening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "First-line immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eculizumab or rituximab",
+          "cells": [
+            {
+              "text": "Severe or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietin, folate and iron",
+          "cells": [
+            {
+              "text": "Support erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial haemoglobin, LDH, haptoglobin and reticulocytes",
+          "cells": [
+            {
+              "text": "Tracks haemolysis and marrow recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-matched units",
+          "cells": [
+            {
+              "text": "If transfusion becomes unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flag the diagnosis on the record",
+          "cells": [
+            {
+              "text": "Prevents inadvertent re-exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperhaemolysis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperhaemolysis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Falling haemoglobin after transfusion in sickle cell disease or thalassaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoglobinuria, low reticulocytes, rapid deterioration, or end-organ ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for profound anaemia with ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial Hb; LDH, bilirubin and haptoglobin; reticulocytes; DAT; antibody screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is post-transfusion haemoglobin below the pre-transfusion level with brisk haemolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider delayed or acute transfusion reaction, VOC, autoimmune haemolysis or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid further transfusion unless immediately life-threatening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids and intravenous immunoglobulin as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eculizumab or rituximab in severe or refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antigen-matched units with transfusion laboratory input if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemolysis settled and marrow recovering; diagnosis flagged on record",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

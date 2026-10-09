@@ -1,176 +1,485 @@
 {
- "id": "bacillary_angiomatosis",
- "name": "Bacillary angiomatosis",
- "aliases": [
-  "Bartonella henselae infection",
-  "Bartonella quintana infection",
-  "epithelioid angiomatosis",
-  "bacillary peliosis (visceral form)"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative response to infection",
-   "Occurs predominantly in immunocompromised hosts, especially those with advanced HIV and low CD4 counts, and rarely in immunocompetent individuals",
-   "Bartonella henselae is associated with cat and cat-flea exposure, whereas Bartonella quintana is linked to body lice, homelessness and poor hygiene",
-   "The hallmark is one or more friable, red to purple vascular papules or nodules that can bleed readily and may resemble pyogenic granuloma or Kaposi sarcoma",
-   "Visceral disease includes hepatic and splenic bacillary peliosis, and lesions may also involve bone, causing painful osteolytic lesions, and other organs",
-   "Histology of a lesion shows lobular vascular proliferation with clumps of bacilli demonstrable on Warthin-Starry silver staining",
-   "Prolonged antimicrobial therapy is required, and the condition responds well, distinguishing it from the Kaposi sarcoma it can mimic clinically"
+  "id": "bacillary_angiomatosis",
+  "name": "Bacillary angiomatosis",
+  "aliases": [
+    "Bartonella henselae infection",
+    "Bartonella quintana infection",
+    "epithelioid angiomatosis",
+    "bacillary peliosis (visceral form)"
   ],
-  "pathophysiology": "Bartonella species are fastidious Gram-negative bacteria that, in the susceptible host, invade endothelial cells and stimulate a marked angioproliferative response. Bacterial factors promote endothelial cell proliferation and inhibit apoptosis, generating the characteristic lobular capillary proliferations seen in skin, liver, spleen, bone and other tissues. The impaired cellular immunity of the host permits this proliferative, rather than granulomatous or self-limiting, response, and the resulting friable neovascular lesions account for the bleeding tendency and the peliotic blood-filled spaces in affected viscera.",
-  "additionalDifferentials": [
-   "Kaposi sarcoma",
-   "Pyogenic granuloma",
-   "Cutaneous lymphoma or metastatic vascular tumour",
-   "Verruga peruana (Bartonella bacilliformis) in endemic regions",
-   "Disseminated fungal infection with cutaneous lesions",
-   "Angiosarcoma"
-  ],
-  "additionalInvestigations": [
-   "Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli",
-   "PCR of tissue for Bartonella species",
-   "Serology for Bartonella (of variable sensitivity)",
-   "Prolonged-incubation blood cultures where bacteraemia is suspected",
-   "HIV testing and CD4 count to assess immune status",
-   "Cross-sectional imaging of liver and spleen if visceral peliosis is suspected"
-  ],
-  "redFlags": [
-   "Haemorrhage from friable lesions",
-   "Hepatosplenic peliosis with abdominal pain, fever or cytopenias",
-   "Undiagnosed underlying HIV or other profound immunosuppression",
-   "Systemic bacteraemic illness with fever and weight loss",
-   "Misidentification as Kaposi sarcoma delaying curative antibiotic therapy"
-  ],
-  "prognosis": "Bacillary angiomatosis is a treatable and generally curable infection that responds well to prolonged antibiotics, but untreated visceral or disseminated disease can be life-threatening, and relapse may occur if therapy is too short.",
-  "pitfalls": [
-   "Mistaking lesions for Kaposi sarcoma and missing a treatable infection",
-   "Using too short an antibiotic course, leading to relapse",
-   "Failing to test for and address underlying immunosuppression",
-   "Overlooking visceral or osseous involvement in a patient with cutaneous disease",
-   "Not eliciting cat, flea or body-louse exposure that points to the causative species"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as doxycycline",
-   "Add rifampicin or use combination therapy for severe or disseminated disease including hepatic or splenic peliosis",
-   "Give an extended treatment course to prevent relapse, as premature discontinuation predisposes to recurrence",
-   "Restore immune function by starting or optimising antiretroviral therapy in HIV-associated disease",
-   "Reduce ongoing exposure with advice on cat and flea contact for Bartonella henselae and on body-louse eradication and hygiene for Bartonella quintana",
-   "Monitor for a Jarisch-Herxheimer-type reaction on initiating treatment and manage bleeding from friable lesions",
-   "Refer to infectious diseases and coordinate multidisciplinary care for visceral or osteolytic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bacillary_angiomatosis-pathway",
-   "title": "Bacillary angiomatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative response to infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemorrhage from friable lesions",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli, PCR of tissue for Bartonella species, Serology for Bartonella (of variable sensitivity)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as doxycycline"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking lesions for Kaposi sarcoma and missing a treatable infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bacillary angiomatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "bacillary_angiomatosis-matrix",
-   "title": "Bacillary angiomatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative response to infection",
+      "Occurs predominantly in immunocompromised hosts, especially those with advanced HIV and low CD4 counts, and rarely in immunocompetent individuals",
+      "Bartonella henselae is associated with cat and cat-flea exposure, whereas Bartonella quintana is linked to body lice, homelessness and poor hygiene",
+      "The hallmark is one or more friable, red to purple vascular papules or nodules that can bleed readily and may resemble pyogenic granuloma or Kaposi sarcoma",
+      "Visceral disease includes hepatic and splenic bacillary peliosis, and lesions may also involve bone, causing painful osteolytic lesions, and other organs",
+      "Histology of a lesion shows lobular vascular proliferation with clumps of bacilli demonstrable on Warthin-Starry silver staining",
+      "Prolonged antimicrobial therapy is required, and the condition responds well, distinguishing it from the Kaposi sarcoma it can mimic clinically"
     ],
-    [
-     "Key Investigations",
-     "Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli, PCR of tissue for Bartonella species,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bartonella species are fastidious Gram-negative bacteria that, in the susceptible host, invade endothelial cells and stimulate a marked angioproliferative response. Bacterial factors promote endothelial cell proliferation and inhibit apoptosis, generating the characteristic lobular capillary proliferations seen in skin, liver, spleen, bone and other tissues. The impaired cellular immunity of the host permits this proliferative, rather than granulomatous or self-limiting, response, and the resulting friable neovascular lesions account for the bleeding tendency and the peliotic blood-filled spaces in affected viscera.",
+    "additionalDifferentials": [
+      "Kaposi sarcoma",
+      "Pyogenic granuloma",
+      "Cutaneous lymphoma or metastatic vascular tumour",
+      "Verruga peruana (Bartonella bacilliformis) in endemic regions",
+      "Disseminated fungal infection with cutaneous lesions",
+      "Angiosarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Kaposi sarcoma, Pyogenic granuloma, Cutaneous lymphoma or metastatic vascular tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli",
+      "PCR of tissue for Bartonella species",
+      "Serology for Bartonella (of variable sensitivity)",
+      "Prolonged-incubation blood cultures where bacteraemia is suspected",
+      "HIV testing and CD4 count to assess immune status",
+      "Cross-sectional imaging of liver and spleen if visceral peliosis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemorrhage from friable lesions",
+      "Hepatosplenic peliosis with abdominal pain, fever or cytopenias",
+      "Undiagnosed underlying HIV or other profound immunosuppression",
+      "Systemic bacteraemic illness with fever and weight loss",
+      "Misidentification as Kaposi sarcoma delaying curative antibiotic therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking lesions for Kaposi sarcoma and missing a treatable infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bacillary angiomatosis is a treatable and generally curable infection that responds well to prolonged antibiotics, but untreated visceral or disseminated disease can be life-threatening, and relapse may occur if therapy is too short.",
+    "pitfalls": [
+      "Mistaking lesions for Kaposi sarcoma and missing a treatable infection",
+      "Using too short an antibiotic course, leading to relapse",
+      "Failing to test for and address underlying immunosuppression",
+      "Overlooking visceral or osseous involvement in a patient with cutaneous disease",
+      "Not eliciting cat, flea or body-louse exposure that points to the causative species"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as doxycycline",
+      "Add rifampicin or use combination therapy for severe or disseminated disease including hepatic or splenic peliosis",
+      "Give an extended treatment course to prevent relapse, as premature discontinuation predisposes to recurrence",
+      "Restore immune function by starting or optimising antiretroviral therapy in HIV-associated disease",
+      "Reduce ongoing exposure with advice on cat and flea contact for Bartonella henselae and on body-louse eradication and hygiene for Bartonella quintana",
+      "Monitor for a Jarisch-Herxheimer-type reaction on initiating treatment and manage bleeding from friable lesions",
+      "Refer to infectious diseases and coordinate multidisciplinary care for visceral or osteolytic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bacillary angiomatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bacillary-angiomatosis-real-image",
-   "title": "Bacillary angiomatosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "bacillary_angiomatosis-pathway",
+      "title": "Bacillary angiomatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative response to infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemorrhage from friable lesions",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli, PCR of tissue for Bartonella species, Serology for Bartonella (of variable sensitivity)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as doxycycline"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking lesions for Kaposi sarcoma and missing a treatable infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bacillary angiomatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bacillary_angiomatosis-matrix",
+      "title": "Bacillary angiomatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Bartonella species, principally Bartonella henselae and Bartonella quintana, and characterised by a vasoproliferative",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or tissue biopsy with Warthin-Starry silver stain demonstrating clustered bacilli, PCR of tissue for Bartonella species,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Kaposi sarcoma, Pyogenic granuloma, Cutaneous lymphoma or metastatic vascular tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with prolonged oral antibiotics active against Bartonella, using a macrolide such as erythromycin or a tetracycline such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking lesions for Kaposi sarcoma and missing a treatable infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bacillary angiomatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bacillary_angiomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or tissue biopsy with Warthin-Starry silver stain",
+          "cells": [
+            {
+              "text": "Clustered bacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of tissue for Bartonella species",
+          "cells": [
+            {
+              "text": "Bartonella species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for Bartonella",
+          "cells": [
+            {
+              "text": "Variable sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged-incubation blood cultures",
+          "cells": [
+            {
+              "text": "Where bacteraemia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and CD4 count",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of liver and spleen",
+          "cells": [
+            {
+              "text": "Visceral peliosis, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacillary_angiomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kaposi sarcoma",
+          "cells": [
+            {
+              "text": "Mistaken for it, a treatable infection is missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruga peruana (Bartonella bacilliformis) in endemic regions",
+          "cells": [
+            {
+              "text": "Caused by Bartonella bacilliformis in endemic regions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacillary_angiomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged oral antibiotics",
+          "cells": [
+            {
+              "text": "Macrolide such as erythromycin or tetracycline such as doxycycline"
+            },
+            {
+              "text": "Active against Bartonella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin or combination therapy",
+          "cells": [
+            {
+              "text": "Severe or disseminated disease, including hepatic or splenic peliosis"
+            },
+            {
+              "text": "Severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended treatment course",
+          "cells": [
+            {
+              "text": "Prevents relapse"
+            },
+            {
+              "text": "Premature discontinuation predisposes to recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Start or optimise in HIV-associated disease"
+            },
+            {
+              "text": "Restores immune function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure reduction",
+          "cells": [
+            {
+              "text": "Cat and flea contact advice; body-louse eradication and hygiene"
+            },
+            {
+              "text": "Ongoing exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for reaction and bleeding",
+          "cells": [
+            {
+              "text": "Jarisch-Herxheimer-type reaction; bleeding from friable lesions"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Visceral or osteolytic disease"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bacillary_angiomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Bacillary angiomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vascular skin lesions in a patient with HIV or immune compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemorrhage from friable lesions or hepatosplenic peliosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage bleeding from friable lesions; urgent review of peliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with Warthin-Starry stain, Bartonella PCR, serology, blood culture, HIV and CD4",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clustered bacilli on silver stain or Bartonella PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prolonged oral antibiotics such as doxycycline or erythromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin or combination therapy for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Start or optimise antiretroviral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advise on cat and flea contact and body-louse hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Extended course to prevent relapse; infectious diseases follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

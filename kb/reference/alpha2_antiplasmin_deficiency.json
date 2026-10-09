@@ -1,173 +1,525 @@
 {
- "id": "alpha2_antiplasmin_deficiency",
- "name": "Alpha-2-antiplasmin deficiency",
- "aliases": [
-  "SERPINF2 deficiency",
-  "plasmin inhibitor deficiency",
-  "alpha-2-plasmin inhibitor deficiency",
-  "Miyasato disease"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological inhibitor of plasmin",
-   "Homozygotes bleed severely with a pattern resembling haemophilia, including delayed bleeding, haematomas, and umbilical stump or mucosal bleeding, while heterozygotes are usually mildly affected or asymptomatic",
-   "Bleeding is characteristically delayed and prolonged because clots form normally but are dissolved prematurely by unopposed plasmin",
-   "Routine coagulation screening tests (prothrombin time, activated partial thromboplastin time, platelet count, fibrinogen) are typically normal, which can obscure the diagnosis",
-   "A specific alpha-2-antiplasmin activity assay demonstrates the deficiency and is the key diagnostic test",
-   "Euglobulin clot lysis time is shortened, reflecting accelerated fibrinolysis",
-   "Antifibrinolytic therapy is the mainstay of treatment and prophylaxis around surgery and trauma"
+  "id": "alpha2_antiplasmin_deficiency",
+  "name": "Alpha-2-antiplasmin deficiency",
+  "aliases": [
+    "SERPINF2 deficiency",
+    "plasmin inhibitor deficiency",
+    "alpha-2-plasmin inhibitor deficiency",
+    "Miyasato disease"
   ],
-  "pathophysiology": "Alpha-2-antiplasmin, encoded by SERPINF2, is the main serpin that rapidly neutralises free plasmin and is cross-linked into the fibrin clot by factor XIII to protect it from lysis. In its deficiency, plasmin generated during fibrinolysis is inadequately restrained, so newly formed clots are degraded prematurely. Haemostatic plugs therefore form but fail to persist, producing a delayed bleeding phenotype despite normal clot formation and normal routine coagulation tests. The severity broadly parallels the residual inhibitor level, with homozygous patients most affected.",
-  "additionalDifferentials": [
-   "Plasminogen activator inhibitor-1 deficiency",
-   "Factor XIII deficiency (also causes delayed bleeding with normal screening tests)",
-   "Haemophilia A or B",
-   "Von Willebrand disease",
-   "Quebec platelet disorder",
-   "Acquired hyperfibrinolysis (e.g. liver disease, disseminated intravascular coagulation)"
-  ],
-  "additionalInvestigations": [
-   "Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency",
-   "Euglobulin clot lysis time to detect accelerated fibrinolysis",
-   "Standard coagulation screen (prothrombin time, activated partial thromboplastin time, fibrinogen), which is characteristically normal",
-   "Factor XIII assay to exclude a delayed-bleeding mimic",
-   "SERPINF2 gene analysis to confirm a congenital deficiency",
-   "Liver function tests to distinguish acquired hyperfibrinolysis"
-  ],
-  "redFlags": [
-   "Severe delayed bleeding after surgery, trauma, or dental extraction",
-   "Intracranial or other deep-tissue haemorrhage",
-   "Umbilical stump or mucosal bleeding in a homozygous neonate",
-   "Bleeding out of proportion to normal routine coagulation results"
-  ],
-  "prognosis": "Homozygous patients can experience serious bleeding but generally respond well to antifibrinolytic therapy, allowing safe surgery and a good long-term outlook. Heterozygotes usually have a mild course. Prognosis depends on prompt recognition, as the normal screening tests can delay diagnosis.",
-  "pitfalls": [
-   "Concluding there is no bleeding disorder because the routine coagulation screen is normal",
-   "Confusing it with factor XIII deficiency, which also causes delayed bleeding",
-   "Overlooking accelerated fibrinolysis by not requesting a clot lysis time",
-   "Failing to provide antifibrinolytic cover before invasive procedures"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding",
-   "Use antifibrinolytic cover prophylactically around surgery, dental procedures and childbirth",
-   "Give targeted antifibrinolytic treatment for acute bleeding, recognising that bleeding is characteristically delayed",
-   "Provide local haemostatic measures and avoid unnecessary antiplatelet and anticoagulant drugs",
-   "Educate patients to seek early treatment for bleeding and consider a medical alert and personalised management plan",
-   "Offer genetic counselling and family testing for this autosomal recessive disorder, screening relatives with the specific antiplasmin activity assay"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alpha2_antiplasmin_deficiency-pathway",
-   "title": "Alpha-2-antiplasmin deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological inhibitor of plasmin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe delayed bleeding after surgery, trauma, or dental extraction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency, Euglobulin clot lysis time to detect accelerated fibrinolysis, Standard coagulation screen (prothrombin time, activated partial thromboplastin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Concluding there is no bleeding disorder because the routine coagulation screen is normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alpha-2-antiplasmin deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "alpha2_antiplasmin_deficiency-matrix",
-   "title": "Alpha-2-antiplasmin deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological inhibitor of plasmin",
+      "Homozygotes bleed severely with a pattern resembling haemophilia, including delayed bleeding, haematomas, and umbilical stump or mucosal bleeding, while heterozygotes are usually mildly affected or asymptomatic",
+      "Bleeding is characteristically delayed and prolonged because clots form normally but are dissolved prematurely by unopposed plasmin",
+      "Routine coagulation screening tests (prothrombin time, activated partial thromboplastin time, platelet count, fibrinogen) are typically normal, which can obscure the diagnosis",
+      "A specific alpha-2-antiplasmin activity assay demonstrates the deficiency and is the key diagnostic test",
+      "Euglobulin clot lysis time is shortened, reflecting accelerated fibrinolysis",
+      "Antifibrinolytic therapy is the mainstay of treatment and prophylaxis around surgery and trauma"
     ],
-    [
-     "Key Investigations",
-     "Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency, Euglobulin clot lysis time to detect accelerated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alpha-2-antiplasmin, encoded by SERPINF2, is the main serpin that rapidly neutralises free plasmin and is cross-linked into the fibrin clot by factor XIII to protect it from lysis. In its deficiency, plasmin generated during fibrinolysis is inadequately restrained, so newly formed clots are degraded prematurely. Haemostatic plugs therefore form but fail to persist, producing a delayed bleeding phenotype despite normal clot formation and normal routine coagulation tests. The severity broadly parallels the residual inhibitor level, with homozygous patients most affected.",
+    "additionalDifferentials": [
+      "Plasminogen activator inhibitor-1 deficiency",
+      "Factor XIII deficiency (also causes delayed bleeding with normal screening tests)",
+      "Haemophilia A or B",
+      "Von Willebrand disease",
+      "Quebec platelet disorder",
+      "Acquired hyperfibrinolysis (e.g. liver disease, disseminated intravascular coagulation)"
     ],
-    [
-     "Primary Differentials",
-     "Plasminogen activator inhibitor-1 deficiency, Factor XIII deficiency (also causes delayed bleeding with normal screening tests),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency",
+      "Euglobulin clot lysis time to detect accelerated fibrinolysis",
+      "Standard coagulation screen (prothrombin time, activated partial thromboplastin time, fibrinogen), which is characteristically normal",
+      "Factor XIII assay to exclude a delayed-bleeding mimic",
+      "SERPINF2 gene analysis to confirm a congenital deficiency",
+      "Liver function tests to distinguish acquired hyperfibrinolysis"
     ],
-    [
-     "Management Strategy",
-     "Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe delayed bleeding after surgery, trauma, or dental extraction",
+      "Intracranial or other deep-tissue haemorrhage",
+      "Umbilical stump or mucosal bleeding in a homozygous neonate",
+      "Bleeding out of proportion to normal routine coagulation results"
     ],
-    [
-     "Clinical Pitfall",
-     "Concluding there is no bleeding disorder because the routine coagulation screen is normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Homozygous patients can experience serious bleeding but generally respond well to antifibrinolytic therapy, allowing safe surgery and a good long-term outlook. Heterozygotes usually have a mild course. Prognosis depends on prompt recognition, as the normal screening tests can delay diagnosis.",
+    "pitfalls": [
+      "Concluding there is no bleeding disorder because the routine coagulation screen is normal",
+      "Confusing it with factor XIII deficiency, which also causes delayed bleeding",
+      "Overlooking accelerated fibrinolysis by not requesting a clot lysis time",
+      "Failing to provide antifibrinolytic cover before invasive procedures"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding",
+      "Use antifibrinolytic cover prophylactically around surgery, dental procedures and childbirth",
+      "Give targeted antifibrinolytic treatment for acute bleeding, recognising that bleeding is characteristically delayed",
+      "Provide local haemostatic measures and avoid unnecessary antiplatelet and anticoagulant drugs",
+      "Educate patients to seek early treatment for bleeding and consider a medical alert and personalised management plan",
+      "Offer genetic counselling and family testing for this autosomal recessive disorder, screening relatives with the specific antiplasmin activity assay"
     ]
-   ],
-   "caption": "Overview comparison matrix for alpha-2-antiplasmin deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alpha2-antiplasmin-deficiency-real-image",
-   "title": "Alpha-2-antiplasmin deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "alpha2_antiplasmin_deficiency-pathway",
+      "title": "Alpha-2-antiplasmin deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological inhibitor of plasmin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe delayed bleeding after surgery, trauma, or dental extraction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency, Euglobulin clot lysis time to detect accelerated fibrinolysis, Standard coagulation screen (prothrombin time, activated partial thromboplastin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Concluding there is no bleeding disorder because the routine coagulation screen is normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alpha-2-antiplasmin deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alpha2_antiplasmin_deficiency-matrix",
+      "title": "Alpha-2-antiplasmin deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inherited hyperfibrinolytic bleeding disorder caused by deficiency of alpha-2-antiplasmin, the principal physiological",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Alpha-2-antiplasmin activity assay to demonstrate the specific deficiency, Euglobulin clot lysis time to detect accelerated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Plasminogen activator inhibitor-1 deficiency, Factor XIII deficiency (also causes delayed bleeding with normal screening tests),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antifibrinolytic therapy with tranexamic acid, or aminocaproic acid, is the mainstay to control and prevent bleeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Concluding there is no bleeding disorder because the routine coagulation screen is normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alpha-2-antiplasmin deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alpha2_antiplasmin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha-2-antiplasmin activity assay",
+          "cells": [
+            {
+              "text": "Specific deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Euglobulin clot lysis time",
+          "cells": [
+            {
+              "text": "Accelerated fibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard coagulation screen (PT, APTT, fibrinogen)",
+          "cells": [
+            {
+              "text": "Characteristically normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII assay",
+          "cells": [
+            {
+              "text": "Excludes delayed-bleeding mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SERPINF2 gene analysis",
+          "cells": [
+            {
+              "text": "Congenital deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired hyperfibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha2_antiplasmin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen activator inhibitor-1 deficiency",
+          "cells": [
+            {
+              "text": "Bleeding with hyperfibrinolysis"
+            },
+            {
+              "text": "Specific assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII deficiency",
+          "cells": [
+            {
+              "text": "Delayed bleeding with normal screen"
+            },
+            {
+              "text": "Factor XIII assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia A or B",
+          "cells": [
+            {
+              "text": "Bleeding with prolonged APTT"
+            },
+            {
+              "text": "Factor assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Mucosal bleeding"
+            },
+            {
+              "text": "von Willebrand assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired hyperfibrinolysis (liver disease, DIC)",
+          "cells": [
+            {
+              "text": "Acquired state"
+            },
+            {
+              "text": "Liver function tests and clinical context"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha2_antiplasmin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid or aminocaproic acid",
+          "cells": [
+            {
+              "text": "Mainstay to control and prevent bleeding"
+            },
+            {
+              "text": "Antifibrinolytic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytic prophylaxis around surgery, dental work and childbirth",
+          "cells": [
+            {
+              "text": "Prevention"
+            },
+            {
+              "text": "Peri-procedural cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antifibrinolytic for acute bleeding",
+          "cells": [
+            {
+              "text": "Delayed bleeding"
+            },
+            {
+              "text": "Acute treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local haemostatic measures",
+          "cells": [
+            {
+              "text": "Mucosal and surgical bleeding"
+            },
+            {
+              "text": "Local care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of unnecessary antiplatelet and anticoagulant drugs",
+          "cells": [
+            {
+              "text": "Bleeding risk"
+            },
+            {
+              "text": "Drug review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical alert and personalised management plan",
+          "cells": [
+            {
+              "text": "Patient safety"
+            },
+            {
+              "text": "Education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening with antiplasmin activity assay",
+          "cells": [
+            {
+              "text": "Autosomal recessive"
+            },
+            {
+              "text": "Family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alpha2_antiplasmin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Alpha-2-antiplasmin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Delayed or prolonged bleeding after surgery, dental work or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial or deep haemorrhage, or umbilical bleeding in a neonate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; start antifibrinolytic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antiplasmin activity; euglobulin lysis time; normal screen; FXIII",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low alpha-2-antiplasmin with accelerated fibrinolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Tranexamic or aminocaproic acid for bleeding and procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review FXIII deficiency, haemophilia, von Willebrand and PAI-1",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytic cover before surgery and dental work",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local haemostasis; avoid unnecessary antiplatelet drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Medical alert card and early-treatment education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Homozygotes respond well to antifibrinolytics; heterozygotes mild",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

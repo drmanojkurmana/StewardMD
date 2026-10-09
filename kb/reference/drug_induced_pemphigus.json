@@ -1,175 +1,646 @@
 {
- "id": "drug_induced_pemphigus",
- "name": "Drug-induced pemphigus",
- "aliases": [
-  "drug-triggered pemphigus",
-  "penicillamine-induced pemphigus",
-  "captopril-induced pemphigus",
-  "thiol-induced pemphigus",
-  "drug-related pemphigus foliaceus"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
-   "Non-thiol drugs (including some antibiotics and other ACE inhibitors) can also induce it, often with a picture resembling idiopathic pemphigus",
-   "Presents with flaccid blisters and erosions of skin and sometimes mucosae, with a pemphigus foliaceus-like pattern being common with thiol drugs",
-   "A positive Nikolsky sign (shearing of the epidermis with lateral pressure) reflects loss of keratinocyte adhesion",
-   "Histology shows intraepidermal acantholysis, and direct immunofluorescence demonstrates intercellular IgG deposition",
-   "Circulating antibodies target desmoglein 1 and/or desmoglein 3, as in idiopathic pemphigus",
-   "Thiol-induced cases often remit after drug withdrawal, whereas non-thiol-induced disease may behave more like classical pemphigus and require immunosuppression",
-   "The cornerstone of management is identifying and withdrawing the culprit drug, with corticosteroids or immunosuppressants for persistent disease"
+  "id": "drug_induced_pemphigus",
+  "name": "Drug-induced pemphigus",
+  "aliases": [
+    "drug-triggered pemphigus",
+    "penicillamine-induced pemphigus",
+    "captopril-induced pemphigus",
+    "thiol-induced pemphigus",
+    "drug-related pemphigus foliaceus"
   ],
-  "pathophysiology": "Drug-induced pemphigus involves loss of adhesion between keratinocytes (acantholysis) mediated by autoantibodies against the desmosomal proteins desmoglein 1 and desmoglein 3. Thiol-containing drugs such as penicillamine are thought to interact directly with sulphydryl groups in the desmoglein molecules or in the enzymes maintaining desmosomal integrity, disrupting cell-cell adhesion and, in some patients, provoking a true autoantibody response. Non-thiol drugs may act as haptens or otherwise trigger an autoimmune reaction that more closely mirrors idiopathic pemphigus. The result is intraepidermal blistering with flaccid bullae and erosions. Because part of the mechanism can be biochemical rather than purely immune, thiol-induced disease frequently resolves once the drug is cleared, whereas antibody-driven non-thiol cases can persist.",
-  "additionalDifferentials": [
-   "Idiopathic pemphigus vulgaris or foliaceus",
-   "Bullous pemphigoid and other subepidermal blistering diseases",
-   "Paraneoplastic pemphigus",
-   "Stevens-Johnson syndrome / toxic epidermal necrolysis",
-   "Bullous drug eruptions",
-   "Linear IgA bullous dermatosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy for histology showing intraepidermal acantholysis",
-   "Direct immunofluorescence for intercellular IgG and C3 deposition",
-   "Indirect immunofluorescence and desmoglein 1 and 3 antibody assays",
-   "Detailed drug history focusing on thiol and other implicated agents",
-   "Assessment of mucosal involvement",
-   "Screening for underlying malignancy where paraneoplastic disease is possible"
-  ],
-  "redFlags": [
-   "Extensive skin denudation with risk of fluid loss and secondary infection",
-   "Significant mucosal involvement impairing intake or airway",
-   "Rapidly progressive blistering despite drug withdrawal",
-   "Features suggesting paraneoplastic pemphigus"
-  ],
-  "prognosis": "Thiol-induced pemphigus often remits within weeks to months of stopping the drug, whereas non-thiol-induced disease may persist and require ongoing immunosuppression. Overall prognosis is generally better than idiopathic pemphigus when the trigger is identified and removed early.",
-  "pitfalls": [
-   "Failing to review the medication list and missing the causative drug",
-   "Assuming all cases resolve on withdrawal, when non-thiol-induced disease may need immunosuppression",
-   "Mistaking it for idiopathic pemphigus and not stopping the trigger",
-   "Overlooking mucosal disease and its complications"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission without further treatment",
-   "For persistent disease, especially non-thiol-induced, give systemic corticosteroids with steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil",
-   "Use rituximab for refractory or severe disease, as in idiopathic pemphigus",
-   "Provide supportive skin and erosion care and attentive oral and mucosal hygiene where mucosae are involved",
-   "Monitor clinical activity and desmoglein 1 and 3 antibody titres to guide tapering of immunosuppression",
-   "Screen for underlying malignancy where paraneoplastic pemphigus is possible, and manage under dermatology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "drug_induced_pemphigus-pathway",
-   "title": "Drug-induced pemphigus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive skin denudation with risk of fluid loss and secondary infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy for histology showing intraepidermal acantholysis, Direct immunofluorescence for intercellular IgG and C3 deposition, Indirect immunofluorescence and desmoglein 1 and 3 antibody assays"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission without further treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to review the medication list and missing the causative drug"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of drug-induced pemphigus."
-  }
- ],
- "tables": [
-  {
-   "id": "drug_induced_pemphigus-matrix",
-   "title": "Drug-induced pemphigus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
+      "Non-thiol drugs (including some antibiotics and other ACE inhibitors) can also induce it, often with a picture resembling idiopathic pemphigus",
+      "Presents with flaccid blisters and erosions of skin and sometimes mucosae, with a pemphigus foliaceus-like pattern being common with thiol drugs",
+      "A positive Nikolsky sign (shearing of the epidermis with lateral pressure) reflects loss of keratinocyte adhesion",
+      "Histology shows intraepidermal acantholysis, and direct immunofluorescence demonstrates intercellular IgG deposition",
+      "Circulating antibodies target desmoglein 1 and/or desmoglein 3, as in idiopathic pemphigus",
+      "Thiol-induced cases often remit after drug withdrawal, whereas non-thiol-induced disease may behave more like classical pemphigus and require immunosuppression",
+      "The cornerstone of management is identifying and withdrawing the culprit drug, with corticosteroids or immunosuppressants for persistent disease"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy for histology showing intraepidermal acantholysis, Direct immunofluorescence for intercellular IgG and C3 deposition,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Drug-induced pemphigus involves loss of adhesion between keratinocytes (acantholysis) mediated by autoantibodies against the desmosomal proteins desmoglein 1 and desmoglein 3. Thiol-containing drugs such as penicillamine are thought to interact directly with sulphydryl groups in the desmoglein molecules or in the enzymes maintaining desmosomal integrity, disrupting cell-cell adhesion and, in some patients, provoking a true autoantibody response. Non-thiol drugs may act as haptens or otherwise trigger an autoimmune reaction that more closely mirrors idiopathic pemphigus. The result is intraepidermal blistering with flaccid bullae and erosions. Because part of the mechanism can be biochemical rather than purely immune, thiol-induced disease frequently resolves once the drug is cleared, whereas antibody-driven non-thiol cases can persist.",
+    "additionalDifferentials": [
+      "Idiopathic pemphigus vulgaris or foliaceus",
+      "Bullous pemphigoid and other subepidermal blistering diseases",
+      "Paraneoplastic pemphigus",
+      "Stevens-Johnson syndrome / toxic epidermal necrolysis",
+      "Bullous drug eruptions",
+      "Linear IgA bullous dermatosis"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic pemphigus vulgaris or foliaceus, Bullous pemphigoid and other subepidermal blistering diseases, Paraneoplastic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy for histology showing intraepidermal acantholysis",
+      "Direct immunofluorescence for intercellular IgG and C3 deposition",
+      "Indirect immunofluorescence and desmoglein 1 and 3 antibody assays",
+      "Detailed drug history focusing on thiol and other implicated agents",
+      "Assessment of mucosal involvement",
+      "Screening for underlying malignancy where paraneoplastic disease is possible"
     ],
-    [
-     "Management Strategy",
-     "Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive skin denudation with risk of fluid loss and secondary infection",
+      "Significant mucosal involvement impairing intake or airway",
+      "Rapidly progressive blistering despite drug withdrawal",
+      "Features suggesting paraneoplastic pemphigus"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to review the medication list and missing the causative drug",
-     "Prevent diagnostic or management error"
+    "prognosis": "Thiol-induced pemphigus often remits within weeks to months of stopping the drug, whereas non-thiol-induced disease may persist and require ongoing immunosuppression. Overall prognosis is generally better than idiopathic pemphigus when the trigger is identified and removed early.",
+    "pitfalls": [
+      "Failing to review the medication list and missing the causative drug",
+      "Assuming all cases resolve on withdrawal, when non-thiol-induced disease may need immunosuppression",
+      "Mistaking it for idiopathic pemphigus and not stopping the trigger",
+      "Overlooking mucosal disease and its complications"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission without further treatment",
+      "For persistent disease, especially non-thiol-induced, give systemic corticosteroids with steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil",
+      "Use rituximab for refractory or severe disease, as in idiopathic pemphigus",
+      "Provide supportive skin and erosion care and attentive oral and mucosal hygiene where mucosae are involved",
+      "Monitor clinical activity and desmoglein 1 and 3 antibody titres to guide tapering of immunosuppression",
+      "Screen for underlying malignancy where paraneoplastic pemphigus is possible, and manage under dermatology"
     ]
-   ],
-   "caption": "Overview comparison matrix for drug-induced pemphigus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "drug-induced-pemphigus-real-image",
-   "title": "Drug-induced pemphigus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "drug_induced_pemphigus-pathway",
+      "title": "Drug-induced pemphigus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive skin denudation with risk of fluid loss and secondary infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy for histology showing intraepidermal acantholysis, Direct immunofluorescence for intercellular IgG and C3 deposition, Indirect immunofluorescence and desmoglein 1 and 3 antibody assays"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission without further treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to review the medication list and missing the causative drug"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of drug-induced pemphigus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "drug_induced_pemphigus-matrix",
+      "title": "Drug-induced pemphigus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune blistering disorder triggered by drugs, most classically thiol-containing agents such as penicillamine and captopril",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy for histology showing intraepidermal acantholysis, Direct immunofluorescence for intercellular IgG and C3 deposition,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic pemphigus vulgaris or foliaceus, Bullous pemphigoid and other subepidermal blistering diseases, Paraneoplastic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw the triggering drug, particularly thiol agents such as penicillamine and captopril, which frequently leads to remission",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to review the medication list and missing the causative drug",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for drug-induced pemphigus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 54-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_pemphigus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy for histology",
+          "cells": [
+            {
+              "text": "Intraepidermal acantholysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Intercellular IgG and C3 deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoglein 1 and 3 antibody assays",
+          "cells": [
+            {
+              "text": "Autoantibodies against desmosomal proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed drug history for thiol agents",
+          "cells": [
+            {
+              "text": "Thiol agents such as penicillamine and captopril"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for underlying malignancy",
+          "cells": [
+            {
+              "text": "Paraneoplastic disease, where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_pemphigus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic pemphigus vulgaris or foliaceus",
+          "cells": [
+            {
+              "text": "Idiopathic disease; the trigger is not stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Screen for underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous drug eruptions",
+          "cells": [
+            {
+              "text": "Blistering from other drug reactions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_pemphigus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the triggering drug",
+          "cells": [
+            {
+              "text": "Especially thiol agents; often leads to remission without further treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with steroid-sparing agent",
+          "cells": [
+            {
+              "text": "For persistent non-thiol-induced disease; azathioprine or mycophenolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and mucosal care",
+          "cells": [
+            {
+              "text": "Erosion care and oral hygiene where mucosae are involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical activity and desmoglein titres to guide tapering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Where paraneoplastic pemphigus is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_pemphigus-ddx-2",
+      "kind": "ddx",
+      "title": "Immunologically mediated blistering diseases compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "Histology",
+        "Immunopathology",
+        "Autoantigens"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Crusts and shallow erosions on scalp, central face, upper chest and back"
+            },
+            {
+              "text": "Acantholytic blister in the superficial epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "Flaccid blisters, denuded skin, oromucosal lesions"
+            },
+            {
+              "text": "Acantholytic blister in the suprabasal epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg3 (plus Dsg1 in patients with skin involvement)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Painful stomatitis with papulosquamous or lichenoid eruptions progressing to blisters"
+            },
+            {
+              "text": "Acantholysis, keratinocyte necrosis and vacuolar interface dermatitis"
+            },
+            {
+              "text": "Cell surface IgG and C3 on keratinocytes and, variably, similar deposits in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Plakin protein family members and desmosomal cadherins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Large tense blisters on flexor surfaces and trunk"
+            },
+            {
+              "text": "Subepidermal blister with eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG1, BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Pruritic urticarial plaques rimmed by vesicles and bullae on trunk and extremities"
+            },
+            {
+              "text": "Teardrop-shaped subepidermal blisters in dermal papillae; eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2 (plus BPAG1 in some patients)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linear IgA disease",
+          "cells": [
+            {
+              "text": "Pruritic small papules on extensor surfaces; occasionally larger arciform blisters"
+            },
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgA in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Erosive and/or blistering lesions of mucous membranes and possibly skin; scarring at some sites"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG, IgA and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2, laminin-332, or others"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "Blisters, erosions, scars and milia at trauma-exposed sites; widespread inflammatory tense blisters may be seen initially"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Type VII collagen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "Extremely pruritic small papules and vesicles on elbows, knees, buttocks and posterior neck"
+            },
+            {
+              "text": "Subepidermal blister with neutrophils in dermal papillae"
+            },
+            {
+              "text": "Granular IgA deposits in dermal papillae"
+            },
+            {
+              "text": "Epidermal transglutaminase"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Dsg1, desmoglein 1; Dsg3, desmoglein 3; BPAG1, bullous pemphigoid antigen 1; BPAG2, bullous pemphigoid antigen 2."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_pemphigus-dx-mgmt",
+      "title": "Diagnosis and management of Drug-induced pemphigus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced pemphigus: blistering after a thiol drug such as penicillamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive denudation, mucosal disease, progression after withdrawal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skin and fluid care for extensive denudation; check airway if mucosa involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for acantholysis; direct immunofluorescence; desmoglein 1 and 3 assays",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show acantholysis with IgG and C3 at intercellular spaces?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic pemphigus, pemphigoid, paraneoplastic disease or SJS or TEN",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the triggering drug, especially thiol agents, often enough for remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids with azathioprine or mycophenolate for persistent non-thiol disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab for refractory or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin erosion care and oral hygiene where mucosa is involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor activity and desmoglein titres to guide immunosuppression tapering",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thiol-induced disease often remits in weeks to months; non-thiol disease may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

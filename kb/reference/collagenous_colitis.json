@@ -1,171 +1,440 @@
 {
- "id": "collagenous_colitis",
- "name": "Collagenous colitis",
- "aliases": [
-  "microscopic colitis, collagenous type",
-  "collagenous type microscopic colitis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and abdominal cramps",
-   "Predominantly affects middle-aged and older women",
-   "The endoscopic appearance of the colon is usually normal, so the diagnosis depends entirely on histology from biopsies",
-   "The defining feature is a thickened subepithelial collagen band beneath the surface epithelium, distinguishing it from lymphocytic colitis",
-   "Associated with autoimmune conditions such as coeliac disease and thyroid disease, and with drugs including non-steroidal anti-inflammatory drugs and proton-pump inhibitors",
-   "Random biopsies should be taken from several segments because histological changes can be patchy and are often more pronounced in the right colon",
-   "Budesonide for microscopic colitis is the mainstay of treatment, alongside stopping culprit drugs"
+  "id": "collagenous_colitis",
+  "name": "Collagenous colitis",
+  "aliases": [
+    "microscopic colitis, collagenous type",
+    "collagenous type microscopic colitis"
   ],
-  "pathophysiology": "Collagenous colitis is a form of microscopic colitis in which the colonic mucosa appears macroscopically normal but shows a characteristic thickened subepithelial band of collagen together with increased chronic inflammatory cells in the lamina propria and surface epithelial injury. The mechanism is thought to involve an abnormal mucosal immune response to luminal antigens, including drugs and possibly bile acids, in genetically predisposed individuals, leading to altered fluid and electrolyte handling and a secretory, watery diarrhoea. The thickened collagen band, rather than being purely structural, reflects abnormal subepithelial fibroblast activity.",
-  "additionalDifferentials": [
-   "Lymphocytic colitis",
-   "Coeliac disease",
-   "Irritable bowel syndrome with diarrhoea",
-   "Bile acid diarrhoea",
-   "Infective and post-infective diarrhoea",
-   "Inflammatory bowel disease"
-  ],
-  "additionalInvestigations": [
-   "Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa",
-   "Histological measurement of the subepithelial collagen band thickness",
-   "Coeliac serology and thyroid function tests",
-   "Stool studies to exclude infection",
-   "Medication review for non-steroidal anti-inflammatory drugs and proton-pump inhibitors"
-  ],
-  "redFlags": [
-   "Bloody diarrhoea, which is atypical and should prompt reconsideration of the diagnosis",
-   "Significant unintentional weight loss requiring exclusion of malignancy or coeliac disease",
-   "Severe dehydration or electrolyte disturbance from high-volume diarrhoea",
-   "New iron-deficiency anaemia suggesting an alternative diagnosis"
-  ],
-  "prognosis": "The condition is benign and does not carry an increased colorectal cancer risk; symptoms often respond well to treatment, although relapse after stopping therapy is common and some patients require maintenance treatment.",
-  "pitfalls": [
-   "Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa",
-   "Taking biopsies from only one colonic segment and missing patchy disease",
-   "Failing to review and stop drugs that can trigger or perpetuate the condition",
-   "Confusing it with lymphocytic colitis rather than distinguishing by the collagen band"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "British Society of Gastroenterology guidance on microscopic colitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with oral budesonide as first-line therapy",
-   "Withdraw implicated drugs, particularly non-steroidal anti-inflammatory drugs and proton-pump inhibitors",
-   "Symptomatic relief of mild disease with antidiarrhoeals such as loperamide",
-   "Consider a bile-acid sequestrant such as colestyramine where bile-acid malabsorption contributes",
-   "Identify and treat associated coeliac disease and thyroid dysfunction",
-   "Low-dose maintenance budesonide for frequent relapse, reserving immunomodulators or biologics for refractory disease",
-   "Advise smoking cessation and arrange gastroenterology follow-up given the relapsing course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "collagenous_colitis-pathway",
-   "title": "Collagenous colitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and abdominal cramps",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bloody diarrhoea, which is atypical and should prompt reconsideration of the diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa, Histological measurement of the subepithelial collagen band thickness, Coeliac serology and thyroid function tests"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with oral budesonide as first-line therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of collagenous colitis."
-  }
- ],
- "tables": [
-  {
-   "id": "collagenous_colitis-matrix",
-   "title": "Collagenous colitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and abdominal cramps",
+      "Predominantly affects middle-aged and older women",
+      "The endoscopic appearance of the colon is usually normal, so the diagnosis depends entirely on histology from biopsies",
+      "The defining feature is a thickened subepithelial collagen band beneath the surface epithelium, distinguishing it from lymphocytic colitis",
+      "Associated with autoimmune conditions such as coeliac disease and thyroid disease, and with drugs including non-steroidal anti-inflammatory drugs and proton-pump inhibitors",
+      "Random biopsies should be taken from several segments because histological changes can be patchy and are often more pronounced in the right colon",
+      "Budesonide for microscopic colitis is the mainstay of treatment, alongside stopping culprit drugs"
     ],
-    [
-     "Key Investigations",
-     "Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa, Histological measurement of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Collagenous colitis is a form of microscopic colitis in which the colonic mucosa appears macroscopically normal but shows a characteristic thickened subepithelial band of collagen together with increased chronic inflammatory cells in the lamina propria and surface epithelial injury. The mechanism is thought to involve an abnormal mucosal immune response to luminal antigens, including drugs and possibly bile acids, in genetically predisposed individuals, leading to altered fluid and electrolyte handling and a secretory, watery diarrhoea. The thickened collagen band, rather than being purely structural, reflects abnormal subepithelial fibroblast activity.",
+    "additionalDifferentials": [
+      "Lymphocytic colitis",
+      "Coeliac disease",
+      "Irritable bowel syndrome with diarrhoea",
+      "Bile acid diarrhoea",
+      "Infective and post-infective diarrhoea",
+      "Inflammatory bowel disease"
     ],
-    [
-     "Primary Differentials",
-     "Lymphocytic colitis, Coeliac disease, Irritable bowel syndrome with diarrhoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa",
+      "Histological measurement of the subepithelial collagen band thickness",
+      "Coeliac serology and thyroid function tests",
+      "Stool studies to exclude infection",
+      "Medication review for non-steroidal anti-inflammatory drugs and proton-pump inhibitors"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with oral budesonide as first-line therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Bloody diarrhoea, which is atypical and should prompt reconsideration of the diagnosis",
+      "Significant unintentional weight loss requiring exclusion of malignancy or coeliac disease",
+      "Severe dehydration or electrolyte disturbance from high-volume diarrhoea",
+      "New iron-deficiency anaemia suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and does not carry an increased colorectal cancer risk; symptoms often respond well to treatment, although relapse after stopping therapy is common and some patients require maintenance treatment.",
+    "pitfalls": [
+      "Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa",
+      "Taking biopsies from only one colonic segment and missing patchy disease",
+      "Failing to review and stop drugs that can trigger or perpetuate the condition",
+      "Confusing it with lymphocytic colitis rather than distinguishing by the collagen band"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "British Society of Gastroenterology guidance on microscopic colitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with oral budesonide as first-line therapy",
+      "Withdraw implicated drugs, particularly non-steroidal anti-inflammatory drugs and proton-pump inhibitors",
+      "Symptomatic relief of mild disease with antidiarrhoeals such as loperamide",
+      "Consider a bile-acid sequestrant such as colestyramine where bile-acid malabsorption contributes",
+      "Identify and treat associated coeliac disease and thyroid dysfunction",
+      "Low-dose maintenance budesonide for frequent relapse, reserving immunomodulators or biologics for refractory disease",
+      "Advise smoking cessation and arrange gastroenterology follow-up given the relapsing course"
     ]
-   ],
-   "caption": "Overview comparison matrix for collagenous colitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "collagenous-colitis-real-image",
-   "title": "Collagenous colitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "collagenous_colitis-pathway",
+      "title": "Collagenous colitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and abdominal cramps",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bloody diarrhoea, which is atypical and should prompt reconsideration of the diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa, Histological measurement of the subepithelial collagen band thickness, Coeliac serology and thyroid function tests"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with oral budesonide as first-line therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of collagenous colitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "collagenous_colitis-matrix",
+      "title": "Collagenous colitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with chronic or intermittent watery, non-bloody diarrhoea, often with urgency, nocturnal stools, mild weight loss and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Colonoscopy or flexible sigmoidoscopy with multiple segmental biopsies despite normal mucosa, Histological measurement of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphocytic colitis, Coeliac disease, Irritable bowel syndrome with diarrhoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with oral budesonide as first-line therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the patient as irritable bowel syndrome and not taking biopsies of normal-looking mucosa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for collagenous colitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collagenous_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonoscopy with multiple segmental biopsies",
+          "cells": [
+            {
+              "text": "Normal endoscopic appearance; diagnosis rests on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological subepithelial collagen band thickness",
+          "cells": [
+            {
+              "text": "Collagen band thickness measured on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and thyroid function tests",
+          "cells": [
+            {
+              "text": "Associated coeliac disease or thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Mislabelled without biopsy of normal-looking mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile acid diarrhoea",
+          "cells": [
+            {
+              "text": "Bile-acid malabsorption may contribute; a sequestrant can help"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Budesonide induction",
+          "cells": [
+            {
+              "text": "Oral budesonide as first-line therapy to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw implicated drugs",
+          "cells": [
+            {
+              "text": "Particularly NSAIDs and proton-pump inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antidiarrhoeal for mild disease",
+          "cells": [
+            {
+              "text": "Symptomatic relief with loperamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile-acid sequestrant",
+          "cells": [
+            {
+              "text": "Colestyramine where bile-acid malabsorption contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat associated conditions",
+          "cells": [
+            {
+              "text": "Coeliac disease and thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance budesonide",
+          "cells": [
+            {
+              "text": "Low dose for frequent relapse; immunomodulators or biologics for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and follow-up",
+          "cells": [
+            {
+              "text": "Smoking cessation; gastroenterology follow-up given the relapsing course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collagenous_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Collagenous colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collagenous colitis: chronic watery non-bloody diarrhoea, middle-aged women",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bloody diarrhoea, weight loss, dehydration, iron deficiency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider the diagnosis; exclude malignancy or coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Colonoscopy with multiple segmental biopsies; coeliac serology; thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show a thickened subepithelial collagen band?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphocytic colitis, IBS or bile acid diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral budesonide to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw NSAIDs and proton-pump inhibitors where implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat coeliac disease and thyroid dysfunction if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-dose maintenance budesonide for frequent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with no increased colorectal cancer risk; relapse after stopping is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

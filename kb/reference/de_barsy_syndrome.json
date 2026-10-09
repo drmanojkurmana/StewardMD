@@ -1,174 +1,425 @@
 {
- "id": "de_barsy_syndrome",
- "name": "De Barsy syndrome",
- "aliases": [
-  "progeroid cutis laxa",
-  "ALDH18A1",
-  "PYCR1",
-  "autosomal recessive cutis laxa type 3",
-  "De Barsy-Moens-Dierckx syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
-   "Combines lax, thin, wrinkled skin with corneal clouding or cataract, intrauterine and postnatal growth restriction, and a large-appearing forehead",
-   "Neurological features are prominent: developmental delay, hypotonia, movement disorder (often athetoid) and sometimes hyperreflexia",
-   "Caused by variants in genes of the proline/glutamate biosynthesis pathway, chiefly ALDH18A1 and PYCR1, linking it to the wider cutis laxa spectrum",
-   "The face may show a triangular shape with a prominent forehead and sparse subcutaneous fat contributing to the aged look",
-   "Joint laxity and dislocations may occur alongside the skin findings",
-   "Management is supportive, addressing feeding, growth, developmental needs and the ophthalmic abnormalities"
+  "id": "de_barsy_syndrome",
+  "name": "De Barsy syndrome",
+  "aliases": [
+    "progeroid cutis laxa",
+    "ALDH18A1",
+    "PYCR1",
+    "autosomal recessive cutis laxa type 3",
+    "De Barsy-Moens-Dierckx syndrome"
   ],
-  "pathophysiology": "De Barsy syndrome is a progeroid cutis laxa caused by biallelic variants in ALDH18A1 or PYCR1, enzymes of the mitochondrial pathway that synthesises proline and ornithine from glutamate. Disruption of this pathway impairs collagen and elastin synthesis and mitochondrial function, weakening dermal connective tissue to produce lax, aged-looking skin and contributing to the neurological, ocular and growth abnormalities. The combined connective tissue and metabolic effects explain the striking progeroid appearance alongside the movement disorder and developmental delay.",
-  "additionalDifferentials": [
-   "Other autosomal recessive cutis laxa types",
-   "Gerodermia osteodysplastica",
-   "Wrinkly skin syndrome (ATP6V0A2-related)",
-   "Cockayne syndrome and other progeroid disorders",
-   "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
-   "Ehlers-Danlos syndromes"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel",
-   "Ophthalmic examination for corneal clouding and cataract",
-   "Developmental and neurological assessment including for movement disorder",
-   "Skin examination and dermal histology for elastic fibre abnormalities where needed",
-   "Growth monitoring and feeding assessment",
-   "Plasma amino acid studies where a metabolic contribution is investigated"
-  ],
-  "redFlags": [
-   "Failure to thrive with significant feeding difficulty",
-   "Progressive neurological deterioration or intractable movement disorder",
-   "Visual impairment from cataract or corneal clouding",
-   "Complications of severe hypotonia such as recurrent aspiration"
-  ],
-  "prognosis": "The outlook is variable and often guarded, with significant developmental impairment and growth failure; some children have a shortened lifespan while milder cases survive longer with supportive care.",
-  "pitfalls": [
-   "Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation",
-   "Overlooking the movement disorder and attributing hypotonia to a non-specific cause",
-   "Missing the ophthalmic abnormalities that need early assessment",
-   "Assuming a uniformly poor prognosis when expressivity varies considerably"
-  ],
-  "references": [
-   "GeneReviews: ALDH18A1- and PYCR1-Related Cutis Laxa",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy",
-   "Refer for ophthalmic assessment and treat corneal clouding and cataract surgically where indicated",
-   "Provide neurodevelopmental support with physiotherapy and occupational therapy for hypotonia, movement disorder and developmental delay",
-   "Monitor growth and give feeding and nutritional support for intrauterine and postnatal growth restriction",
-   "Protect the fragile, lax skin and manage joint laxity and dislocations with physiotherapy and orthopaedic input",
-   "Offer genetic counselling for this autosomal recessive disorder (ALDH18A1, PYCR1), with carrier and reproductive counselling for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "de_barsy_syndrome-pathway",
-   "title": "De Barsy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to thrive with significant feeding difficulty",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel, Ophthalmic examination for corneal clouding and cataract, Developmental and neurological assessment including for movement disorder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of de barsy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "de_barsy_syndrome-matrix",
-   "title": "De Barsy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
+      "Combines lax, thin, wrinkled skin with corneal clouding or cataract, intrauterine and postnatal growth restriction, and a large-appearing forehead",
+      "Neurological features are prominent: developmental delay, hypotonia, movement disorder (often athetoid) and sometimes hyperreflexia",
+      "Caused by variants in genes of the proline/glutamate biosynthesis pathway, chiefly ALDH18A1 and PYCR1, linking it to the wider cutis laxa spectrum",
+      "The face may show a triangular shape with a prominent forehead and sparse subcutaneous fat contributing to the aged look",
+      "Joint laxity and dislocations may occur alongside the skin findings",
+      "Management is supportive, addressing feeding, growth, developmental needs and the ophthalmic abnormalities"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel, Ophthalmic examination for corneal clouding and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "De Barsy syndrome is a progeroid cutis laxa caused by biallelic variants in ALDH18A1 or PYCR1, enzymes of the mitochondrial pathway that synthesises proline and ornithine from glutamate. Disruption of this pathway impairs collagen and elastin synthesis and mitochondrial function, weakening dermal connective tissue to produce lax, aged-looking skin and contributing to the neurological, ocular and growth abnormalities. The combined connective tissue and metabolic effects explain the striking progeroid appearance alongside the movement disorder and developmental delay.",
+    "additionalDifferentials": [
+      "Other autosomal recessive cutis laxa types",
+      "Gerodermia osteodysplastica",
+      "Wrinkly skin syndrome (ATP6V0A2-related)",
+      "Cockayne syndrome and other progeroid disorders",
+      "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+      "Ehlers-Danlos syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal recessive cutis laxa types, Gerodermia osteodysplastica, Wrinkly skin syndrome (ATP6V0A2-related)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel",
+      "Ophthalmic examination for corneal clouding and cataract",
+      "Developmental and neurological assessment including for movement disorder",
+      "Skin examination and dermal histology for elastic fibre abnormalities where needed",
+      "Growth monitoring and feeding assessment",
+      "Plasma amino acid studies where a metabolic contribution is investigated"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to thrive with significant feeding difficulty",
+      "Progressive neurological deterioration or intractable movement disorder",
+      "Visual impairment from cataract or corneal clouding",
+      "Complications of severe hypotonia such as recurrent aspiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is variable and often guarded, with significant developmental impairment and growth failure; some children have a shortened lifespan while milder cases survive longer with supportive care.",
+    "pitfalls": [
+      "Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation",
+      "Overlooking the movement disorder and attributing hypotonia to a non-specific cause",
+      "Missing the ophthalmic abnormalities that need early assessment",
+      "Assuming a uniformly poor prognosis when expressivity varies considerably"
+    ],
+    "references": [
+      "GeneReviews: ALDH18A1- and PYCR1-Related Cutis Laxa",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy",
+      "Refer for ophthalmic assessment and treat corneal clouding and cataract surgically where indicated",
+      "Provide neurodevelopmental support with physiotherapy and occupational therapy for hypotonia, movement disorder and developmental delay",
+      "Monitor growth and give feeding and nutritional support for intrauterine and postnatal growth restriction",
+      "Protect the fragile, lax skin and manage joint laxity and dislocations with physiotherapy and orthopaedic input",
+      "Offer genetic counselling for this autosomal recessive disorder (ALDH18A1, PYCR1), with carrier and reproductive counselling for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for de barsy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "de-barsy-syndrome-real-image",
-   "title": "De Barsy syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "de_barsy_syndrome-pathway",
+      "title": "De Barsy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to thrive with significant feeding difficulty",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel, Ophthalmic examination for corneal clouding and cataract, Developmental and neurological assessment including for movement disorder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of de barsy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "de_barsy_syndrome-matrix",
+      "title": "De Barsy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A progeroid form of autosomal recessive cutis laxa with a prematurely aged, wizened appearance from birth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of ALDH18A1 and PYCR1, usually via a cutis laxa gene panel, Ophthalmic examination for corneal clouding and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal recessive cutis laxa types, Gerodermia osteodysplastica, Wrinkly skin syndrome (ATP6V0A2-related)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively through clinical genetics and paediatrics, as there is no disease-modifying therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with other progeroid or cutis laxa syndromes without molecular confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for de barsy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "de_barsy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ALDH18A1 and PYCR1 molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic variants in ALDH18A1 or PYCR1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic examination",
+          "cells": [
+            {
+              "text": "Corneal clouding and cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Hypotonia, movement disorder and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and feeding assessment",
+          "cells": [
+            {
+              "text": "Intrauterine and postnatal growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermal histology where needed",
+          "cells": [
+            {
+              "text": "Elastic fibre abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "de_barsy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; clinical genetics and paediatrics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic care",
+          "cells": [
+            {
+              "text": "Surgical treatment of corneal clouding and cataract where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy for hypotonia, movement disorder and delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutrition",
+          "cells": [
+            {
+              "text": "Serial growth monitoring with feeding and nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and joint care",
+          "cells": [
+            {
+              "text": "Protect fragile lax skin; physiotherapy and orthopaedic input for joint laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and reproductive counselling for the family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "de_barsy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of De Barsy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected De Barsy syndrome: cutis laxa with growth failure and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (feeding failure, progressive neurological decline, visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and aspiration management for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cutis laxa gene panel for ALDH18A1 and PYCR1; eye and developmental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do ALDH18A1 or PYCR1 tests show biallelic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other autosomal recessive cutis laxa and progeroid syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clinical genetics and paediatric supportive care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmic referral; surgery for corneal clouding or cataract",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for hypotonia and movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growth and nutritional monitoring; protect lax skin and joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable, often guarded outlook with significant developmental impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

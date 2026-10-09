@@ -1,168 +1,475 @@
 {
- "id": "acute_urticaria",
- "name": "Acute urticaria",
- "aliases": [
-  "acute hives",
-  "acute wheals"
- ],
- "class": "non_infective",
- "system": "Skin / Immunology",
- "specialty": "Dermatology / Allergy",
- "referenceOnly": true,
- "reference": {
-  "source": "Allergy and dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
-   "Individual weals are transient, each resolving within a day without leaving a mark",
-   "Common triggers include viral infection, foods, drugs and insect stings, though many cases are idiopathic",
-   "When accompanied by airway, breathing or circulatory compromise it may be part of anaphylaxis and needs adrenaline",
-   "It is largely a clinical diagnosis, and extensive investigation is usually unnecessary",
-   "Non-sedating antihistamines are first-line, with a short corticosteroid course for severe flares"
+  "id": "acute_urticaria",
+  "name": "Acute urticaria",
+  "aliases": [
+    "acute hives",
+    "acute wheals"
   ],
-  "pathophysiology": "Acute urticaria results from activation and degranulation of cutaneous mast cells and basophils, releasing histamine and other mediators that cause vasodilatation, increased vascular permeability (producing weals and angio-oedema) and pruritus. Degranulation may be immunological, classically IgE-mediated in allergy, or non-immunological through direct mast-cell activation by drugs, infections or other stimuli. The transient nature of individual weals reflects the short-lived local mediator response.",
-  "additionalDifferentials": [
-   "Anaphylaxis (with systemic features)",
-   "Urticarial vasculitis (weals lasting more than a day, leaving bruising)",
-   "Angio-oedema without weals (including bradykinin-mediated)",
-   "Erythema multiforme",
-   "Mastocytosis"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the history and transient weals",
-   "Assessment for anaphylaxis features requiring immediate treatment",
-   "Targeted allergy evaluation only where a specific trigger is suspected",
-   "Consideration of urticarial vasculitis if weals persist or bruise",
-   "Limited testing, as most acute cases are self-limiting"
-  ],
-  "redFlags": [
-   "Airway compromise, wheeze or hypotension indicating anaphylaxis",
-   "Angio-oedema of the tongue or throat",
-   "Weals lasting more than a day or leaving bruising (urticarial vasculitis)",
-   "Systemic symptoms suggesting another cause"
-  ],
-  "prognosis": "Acute urticaria is usually self-limiting, resolving within days to a few weeks; a minority evolve into chronic urticaria.",
-  "pitfalls": [
-   "Missing evolving anaphylaxis in a patient with urticaria",
-   "Over-investigating self-limiting acute urticaria",
-   "Failing to recognise urticarial vasculitis",
-   "Overlooking bradykinin-mediated angio-oedema, which does not respond to antihistamines"
-  ],
-  "references": [
-   "Allergy reference texts (standard reference)",
-   "Urticaria clinical guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection",
-   "Give a second-generation non-sedating H1 antihistamine as first-line treatment, up-dosing within recommended limits if the response is inadequate",
-   "Add a short course of oral corticosteroid for severe or extensive flares",
-   "Recognise accompanying anaphylaxis and treat immediately with intramuscular adrenaline and supportive resuscitation",
-   "Reassure that the condition is usually self-limiting and avoid extensive investigation in typical cases",
-   "Reassess and refer to allergy or dermatology if weals persist beyond six weeks or if painful, bruising or long-lasting lesions suggest urticarial vasculitis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_urticaria-pathway",
-   "title": "Acute urticaria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Airway compromise, wheeze or hypotension indicating anaphylaxis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the history and transient weals, Assessment for anaphylaxis features requiring immediate treatment, Targeted allergy evaluation only where a specific trigger is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing evolving anaphylaxis in a patient with urticaria"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute urticaria."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_urticaria-matrix",
-   "title": "Acute urticaria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Immunology",
+  "specialty": "Dermatology / Allergy",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Allergy and dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
+      "Individual weals are transient, each resolving within a day without leaving a mark",
+      "Common triggers include viral infection, foods, drugs and insect stings, though many cases are idiopathic",
+      "When accompanied by airway, breathing or circulatory compromise it may be part of anaphylaxis and needs adrenaline",
+      "It is largely a clinical diagnosis, and extensive investigation is usually unnecessary",
+      "Non-sedating antihistamines are first-line, with a short corticosteroid course for severe flares"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the history and transient weals, Assessment for anaphylaxis features requiring immediate treatment,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute urticaria results from activation and degranulation of cutaneous mast cells and basophils, releasing histamine and other mediators that cause vasodilatation, increased vascular permeability (producing weals and angio-oedema) and pruritus. Degranulation may be immunological, classically IgE-mediated in allergy, or non-immunological through direct mast-cell activation by drugs, infections or other stimuli. The transient nature of individual weals reflects the short-lived local mediator response.",
+    "additionalDifferentials": [
+      "Anaphylaxis (with systemic features)",
+      "Urticarial vasculitis (weals lasting more than a day, leaving bruising)",
+      "Angio-oedema without weals (including bradykinin-mediated)",
+      "Erythema multiforme",
+      "Mastocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Anaphylaxis (with systemic features), Urticarial vasculitis (weals lasting more than a day, leaving bruising), Angio-oedema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the history and transient weals",
+      "Assessment for anaphylaxis features requiring immediate treatment",
+      "Targeted allergy evaluation only where a specific trigger is suspected",
+      "Consideration of urticarial vasculitis if weals persist or bruise",
+      "Limited testing, as most acute cases are self-limiting"
     ],
-    [
-     "Management Strategy",
-     "Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection",
-     "Core treatment modality"
+    "redFlags": [
+      "Airway compromise, wheeze or hypotension indicating anaphylaxis",
+      "Angio-oedema of the tongue or throat",
+      "Weals lasting more than a day or leaving bruising (urticarial vasculitis)",
+      "Systemic symptoms suggesting another cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing evolving anaphylaxis in a patient with urticaria",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute urticaria is usually self-limiting, resolving within days to a few weeks; a minority evolve into chronic urticaria.",
+    "pitfalls": [
+      "Missing evolving anaphylaxis in a patient with urticaria",
+      "Over-investigating self-limiting acute urticaria",
+      "Failing to recognise urticarial vasculitis",
+      "Overlooking bradykinin-mediated angio-oedema, which does not respond to antihistamines"
+    ],
+    "references": [
+      "Allergy reference texts (standard reference)",
+      "Urticaria clinical guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection",
+      "Give a second-generation non-sedating H1 antihistamine as first-line treatment, up-dosing within recommended limits if the response is inadequate",
+      "Add a short course of oral corticosteroid for severe or extensive flares",
+      "Recognise accompanying anaphylaxis and treat immediately with intramuscular adrenaline and supportive resuscitation",
+      "Reassure that the condition is usually self-limiting and avoid extensive investigation in typical cases",
+      "Reassess and refer to allergy or dermatology if weals persist beyond six weeks or if painful, bruising or long-lasting lesions suggest urticarial vasculitis"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute urticaria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-urticaria-real-image",
-   "title": "Acute urticaria: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "acute_urticaria-pathway",
+      "title": "Acute urticaria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Airway compromise, wheeze or hypotension indicating anaphylaxis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the history and transient weals, Assessment for anaphylaxis features requiring immediate treatment, Targeted allergy evaluation only where a specific trigger is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing evolving anaphylaxis in a patient with urticaria"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute urticaria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_urticaria-matrix",
+      "title": "Acute urticaria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sudden-onset itchy weals, angio-oedema, or both, lasting less than six weeks",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the history and transient weals, Assessment for anaphylaxis features requiring immediate treatment,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anaphylaxis (with systemic features), Urticarial vasculitis (weals lasting more than a day, leaving bruising), Angio-oedema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and remove the precipitant where one is apparent, such as a culprit drug, food or infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing evolving anaphylaxis in a patient with urticaria",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute urticaria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Allergy and dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from history and transient weals",
+          "cells": [
+            {
+              "text": "Individual weals resolve within a day"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for anaphylaxis features",
+          "cells": [
+            {
+              "text": "Features needing immediate treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted allergy evaluation where a trigger is suspected",
+          "cells": [
+            {
+              "text": "Specific trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for urticarial vasculitis if weals persist or bruise",
+          "cells": [
+            {
+              "text": "Persistent or bruising weals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited testing in typical acute cases",
+          "cells": [
+            {
+              "text": "Most acute cases are self-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Anaphylaxis",
+          "cells": [
+            {
+              "text": "Airway, breathing or circulatory compromise"
+            },
+            {
+              "text": "Assessment for anaphylaxis features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urticarial vasculitis",
+          "cells": [
+            {
+              "text": "Weals lasting more than a day, leaving bruising"
+            },
+            {
+              "text": "Persistence and bruising assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angio-oedema without weals",
+          "cells": [
+            {
+              "text": "Angio-oedema without weals, including bradykinin-mediated"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the precipitant",
+          "cells": [
+            {
+              "text": "Culprit drug, food or infection"
+            },
+            {
+              "text": "Where one is apparent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-generation non-sedating H1 antihistamine",
+          "cells": [
+            {
+              "text": "First-line treatment"
+            },
+            {
+              "text": "Up-dose within limits if inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short course of oral corticosteroid",
+          "cells": [
+            {
+              "text": "Severe or extensive flares"
+            },
+            {
+              "text": "Short course only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intramuscular adrenaline for accompanying anaphylaxis",
+          "cells": [
+            {
+              "text": "Anaphylaxis"
+            },
+            {
+              "text": "Immediate treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and avoidance of extensive investigation",
+          "cells": [
+            {
+              "text": "Typical cases are usually self-limiting"
+            },
+            {
+              "text": "Reassure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refer to allergy or dermatology",
+          "cells": [
+            {
+              "text": "Weals beyond six weeks or features of vasculitis"
+            },
+            {
+              "text": "Painful or bruising lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Acute urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden itchy weals or angio-oedema lasting under six weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway, breathing or circulatory compromise present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intramuscular adrenaline and emergency resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History for triggers; check weals are transient and not bruising",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Persistent weals or bruising suggesting urticarial vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer to allergy or dermatology; consider urticarial vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove precipitant if apparent; second-generation H1 antihistamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Up-dose antihistamine within limits if response inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short oral corticosteroid for severe or extensive flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: usually self-limiting; avoid extensive investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually resolves in days to weeks; a minority evolve into chronic urticaria",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,165 +1,802 @@
 {
- "id": "dyslipidemia",
- "name": "Dyslipidemia",
- "system": "Endocrine / Metabolic",
- "class": "non_infective",
- "chapter": 419,
- "page": 3237,
- "aliases": [
-  "hyperlipidemia",
-  "hypercholesterolemia",
-  "hypertriglyceridemia"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3237",
-  "clinicalPearls": [
-   "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
-   "Lipoprotein(a) appears to be an independent predictor of cardiovascular risk beyond total or LDL cholesterol, and is elevated in roughly 20% of the global population; levels are reported higher in those of African descent and intermediate in East and South Asians (Harrison 22e p.2017).",
-   "Tendon xanthomas (e.g., Achilles and extensor finger tendons), xanthelasma, and plane/tuberous xanthomas reflect hypercholesterolemia (hyperlipoproteinemia types II and III); eruptive xanthomas are most commonly associated with hypertriglyceridemia (types I, IV, V) (Harrison 22e p.234, p.1860).",
-   "Palmar (palmar crease) xanthomas are specific for type III hyperlipoproteinemia, and severe hypertriglyceridemia can produce eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860).",
-   "Loss-of-function PCSK9 variants are associated with lower LDL cholesterol and reduced coronary artery disease, which led to development of PCSK9 monoclonal antibodies; rare gain-of-function PCSK9 variants are a cause of familial hypercholesterolemia (Harrison 22e p.260)."
+  "id": "dyslipidemia",
+  "name": "Dyslipidemia",
+  "system": "Endocrine / Metabolic",
+  "class": "non_infective",
+  "chapter": 419,
+  "page": 3237,
+  "aliases": [
+    "hyperlipidemia",
+    "hypercholesterolemia",
+    "hypertriglyceridemia"
   ],
-  "pathophysiology": "Atherogenic lipoproteins, principally LDL, deposit cholesterol within the arterial wall and disturb normal endothelial functions (control of vascular tone, maintenance of an antithrombotic surface, and regulation of inflammatory cell adhesion and diapedesis), promoting atherosclerosis; LDL, cigarette smoking, hypertension, and diabetes mellitus vary in their relative impact on these endothelial functions. Lipoprotein(a) is thought to add risk through increased cellular lipid accumulation, endothelial dysfunction, and effects on coagulation. Severe hypertriglyceridemia (chylomicron/VLDL accumulation) can precipitate acute pancreatitis (Harrison 22e p.2017, p.2046).",
-  "additionalDifferentials": [],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046).",
-   "Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).",
-   "Apolipoprotein B as a marker of atherogenic particle burden (Harrison 22e p.3237).",
-   "Screening for secondary contributors: glucose/HbA1c and urinalysis for diabetes and renal disease, and thyroid function testing when indicated (Harrison 22e p.2046).",
-   "High-sensitivity C-reactive protein may be considered as an independent cardiovascular risk marker informing therapeutic decisions (Harrison 22e p.2046)."
-  ],
-  "redFlags": [
-   "Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
-   "Severe hypertriglyceridemia, which can precipitate acute pancreatitis and may manifest with eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860)."
-  ],
-  "prognosis": "LDL-driven dyslipidemia is a leading contributor to atherosclerotic cardiovascular morbidity and mortality, including ischemic heart disease and stroke; lowering LDL (e.g., a 50% or greater reduction with high-intensity statin therapy in patients with established atherosclerotic disease) reduces the risk of myocardial infarction, stroke, and death (Harrison 22e p.2017, p.2056).",
-  "pitfalls": [
-   "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046).",
-   "Underrecognizing familial hypercholesterolemia in patients with tendon xanthomas and premature coronary disease (Harrison 22e p.234, p.260)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.3237",
-   "Harrison 22e p.2017",
-   "Harrison 22e p.2046",
-   "Harrison 22e p.234",
-   "Harrison 22e p.1860",
-   "Harrison 22e p.260"
-  ],
-  "crossLinks": [
-   "acs",
-   "pancreatitis",
-   "diabetes_mellitus"
-  ],
-  "management": [
-   "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
-   "Add ezetimibe and, where LDL remains elevated or in familial hypercholesterolaemia, a PCSK9 monoclonal antibody",
-   "Advise lifestyle modification: saturated-fat reduction, weight management, regular physical activity and smoking cessation",
-   "For severe hypertriglyceridaemia, restrict dietary fat, reduce alcohol and add a fibrate or omega-3 fatty acids to lower pancreatitis risk",
-   "Identify and treat secondary contributors such as diabetes mellitus, hypothyroidism and renal disease",
-   "Measure lipoprotein(a) for residual-risk assessment and undertake cascade screening of families with familial hypercholesterolaemia",
-   "Monitor lipid response and statin tolerability, including myopathy and transaminase changes, and titrate therapy to the individual's cardiovascular risk"
-  ]
- },
- "algorithms": [
-  {
-   "id": "dyslipidemia-pathway",
-   "title": "Dyslipidemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dyslipidemia."
-  }
- ],
- "tables": [
-  {
-   "id": "dyslipidemia-matrix",
-   "title": "Dyslipidemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3237",
+    "clinicalPearls": [
+      "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
+      "Lipoprotein(a) appears to be an independent predictor of cardiovascular risk beyond total or LDL cholesterol, and is elevated in roughly 20% of the global population; levels are reported higher in those of African descent and intermediate in East and South Asians (Harrison 22e p.2017).",
+      "Tendon xanthomas (e.g., Achilles and extensor finger tendons), xanthelasma, and plane/tuberous xanthomas reflect hypercholesterolemia (hyperlipoproteinemia types II and III); eruptive xanthomas are most commonly associated with hypertriglyceridemia (types I, IV, V) (Harrison 22e p.234, p.1860).",
+      "Palmar (palmar crease) xanthomas are specific for type III hyperlipoproteinemia, and severe hypertriglyceridemia can produce eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860).",
+      "Loss-of-function PCSK9 variants are associated with lower LDL cholesterol and reduced coronary artery disease, which led to development of PCSK9 monoclonal antibodies; rare gain-of-function PCSK9 variants are a cause of familial hypercholesterolemia (Harrison 22e p.260)."
     ],
-    [
-     "Key Investigations",
-     "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Atherogenic lipoproteins, principally LDL, deposit cholesterol within the arterial wall and disturb normal endothelial functions (control of vascular tone, maintenance of an antithrombotic surface, and regulation of inflammatory cell adhesion and diapedesis), promoting atherosclerosis; LDL, cigarette smoking, hypertension, and diabetes mellitus vary in their relative impact on these endothelial functions. Lipoprotein(a) is thought to add risk through increased cellular lipid accumulation, endothelial dysfunction, and effects on coagulation. Severe hypertriglyceridemia (chylomicron/VLDL accumulation) can precipitate acute pancreatitis (Harrison 22e p.2017, p.2046).",
+    "additionalDifferentials": [],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046).",
+      "Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).",
+      "Apolipoprotein B as a marker of atherogenic particle burden (Harrison 22e p.3237).",
+      "Screening for secondary contributors: glucose/HbA1c and urinalysis for diabetes and renal disease, and thyroid function testing when indicated (Harrison 22e p.2046).",
+      "High-sensitivity C-reactive protein may be considered as an independent cardiovascular risk marker informing therapeutic decisions (Harrison 22e p.2046)."
     ],
-    [
-     "Primary Differentials",
-     "Alternative etiologies and clinical mimics",
-     "Rule out key mimics"
+    "redFlags": [
+      "Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
+      "Severe hypertriglyceridemia, which can precipitate acute pancreatitis and may manifest with eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860)."
     ],
-    [
-     "Management Strategy",
-     "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
-     "Core treatment modality"
+    "prognosis": "LDL-driven dyslipidemia is a leading contributor to atherosclerotic cardiovascular morbidity and mortality, including ischemic heart disease and stroke; lowering LDL (e.g., a 50% or greater reduction with high-intensity statin therapy in patients with established atherosclerotic disease) reduces the risk of myocardial infarction, stroke, and death (Harrison 22e p.2017, p.2056).",
+    "pitfalls": [
+      "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046).",
+      "Underrecognizing familial hypercholesterolemia in patients with tendon xanthomas and premature coronary disease (Harrison 22e p.234, p.260)."
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus,",
-     "Prevent diagnostic or management error"
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.3237",
+      "Harrison 22e p.2017",
+      "Harrison 22e p.2046",
+      "Harrison 22e p.234",
+      "Harrison 22e p.1860",
+      "Harrison 22e p.260"
+    ],
+    "crossLinks": [
+      "acs",
+      "pancreatitis",
+      "diabetes_mellitus"
+    ],
+    "management": [
+      "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
+      "Add ezetimibe and, where LDL remains elevated or in familial hypercholesterolaemia, a PCSK9 monoclonal antibody",
+      "Advise lifestyle modification: saturated-fat reduction, weight management, regular physical activity and smoking cessation",
+      "For severe hypertriglyceridaemia, restrict dietary fat, reduce alcohol and add a fibrate or omega-3 fatty acids to lower pancreatitis risk",
+      "Identify and treat secondary contributors such as diabetes mellitus, hypothyroidism and renal disease",
+      "Measure lipoprotein(a) for residual-risk assessment and undertake cascade screening of families with familial hypercholesterolaemia",
+      "Monitor lipid response and statin tolerability, including myopathy and transaminase changes, and titrate therapy to the individual's cardiovascular risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for dyslipidemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dyslipidemia-real-image",
-   "title": "Dyslipidemia: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "dyslipidemia-pathway",
+      "title": "Dyslipidemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dyslipidemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dyslipidemia-matrix",
+      "title": "Dyslipidemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alternative etiologies and clinical mimics",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus,",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dyslipidemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Cholesterol Management: ACC/AHA Updates Guideline, 2019",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0501/p589.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 356-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 241-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyslipidemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Lipid thresholds and risk categories (ACC/AHA 2018)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "LDL-C",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "190 or more",
+              "op": ">=",
+              "value": 190
+            },
+            {
+              "text": "{{hy:Severe hypercholesterolaemia}}; maximally tolerated statin, check secondary causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-fasting triglycerides",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "400 or more",
+              "op": ">=",
+              "value": 400
+            },
+            {
+              "text": "Repeat fasting panel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "10-year ASCVD risk, low",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<5",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Lifestyle emphasis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "10-year risk, borderline",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 7.4",
+              "range": [
+                5,
+                7.4
+              ]
+            },
+            {
+              "text": "Discuss statin if risk enhancers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "10-year risk, intermediate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "7.5 to 19.9",
+              "range": [
+                7.5,
+                19.9
+              ]
+            },
+            {
+              "text": "Moderate-intensity statin; CAC scoring if uncertain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "10-year risk, high",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 or more",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Aim for 50% or more LDL-C reduction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipoprotein(a) risk enhancer",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "50 or more",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Also TG 175 or more, hsCRP 2.0 mg/L or more, apoB 130 or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coronary artery calcium",
+          "unit": "Agatston",
+          "cells": [
+            {
+              "text": "0 / 1 to 99 / 100 or more",
+              "op": ">=",
+              "value": 100
+            },
+            {
+              "text": "Withhold statin at 0 unless smoker, diabetes or strong family history; statin at 100 or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Follow-up lipid panel",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "4 to 12 after starting or changing statin",
+              "range": [
+                4,
+                12
+              ]
+            },
+            {
+              "text": "Then every 3 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tendon xanthomas",
+          "cells": [
+            {
+              "text": "Achilles or finger extensors"
+            },
+            {
+              "text": "Familial hypercholesterolaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eruptive xanthomas, lipaemia retinalis",
+          "cells": [
+            {
+              "text": "Severe hypertriglyceridaemia"
+            },
+            {
+              "text": "Pancreatitis risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyslipidemia-ddx",
+      "kind": "ddx",
+      "title": "Primary and secondary causes of dyslipidaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "{{hy:Tendon xanthomas and premature CAD}}"
+            },
+            {
+              "text": "LDL-C 190 mg/dL or more; cascade family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type III hyperlipoproteinaemia",
+          "cells": [
+            {
+              "text": "Palmar crease xanthomas"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe hypertriglyceridaemia",
+          "cells": [
+            {
+              "text": "Eruptive xanthomas, pancreatitis"
+            },
+            {
+              "text": "Fasting triglycerides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes mellitus",
+          "cells": [
+            {
+              "text": "Secondary cause"
+            },
+            {
+              "text": "Glucose, HbA1c"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Secondary cause"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome or renal disease",
+          "cells": [
+            {
+              "text": "Secondary cause"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excess alcohol",
+          "cells": [
+            {
+              "text": "Raised triglycerides"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised lipoprotein(a)",
+          "cells": [
+            {
+              "text": "Risk despite normal LDL; about 20% of people"
+            },
+            {
+              "text": "Lp(a) level"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyslipidemia-treatment",
+      "kind": "treatment",
+      "title": "Lipid-lowering drugs and their use",
+      "rowHeader": "Option",
+      "columns": [
+        "Dose (start to maximum) or target",
+        "Indication and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-intensity statin",
+          "cells": [
+            {
+              "text": "{{hy:LDL-C reduction 50% or more}}"
+            },
+            {
+              "text": "Clinical ASCVD up to age 75; diabetes with multiple risk factors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate-intensity statin",
+          "cells": [
+            {
+              "text": "LDL-C reduction 30 to 49%"
+            },
+            {
+              "text": "Diabetes age 40 to 75; intermediate risk with LDL 70 to 189"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Statins: lovastatin 20 to 80 mg daily; pravastatin 40 to 80 mg; simvastatin 20 to 80 mg; fluvastatin 20 to 80 mg; atorvastatin 10 to 80 mg; rosuvastatin 10 to 40 mg (at night)",
+          "cells": [
+            {
+              "text": "Raised LDL-C"
+            },
+            {
+              "text": "Less cholesterol synthesis, more LDL receptors; myalgia, arthralgia, raised transaminases, dyspepsia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ezetimibe",
+          "cells": [
+            {
+              "text": "10 mg daily"
+            },
+            {
+              "text": "Raised LDL-C; add if LDL 70 or more in very high risk, or 100 or more in LDL 190 group; raised transaminases"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PCSK9 inhibitor",
+          "cells": [
+            {
+              "text": "After maximal statin plus ezetimibe"
+            },
+            {
+              "text": "Very high-risk ASCVD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bile acid sequestrants: cholestyramine 4 to 32 g; colestipol 5 to 40 g; colesevelam 3750 to 4375 mg daily",
+          "cells": [
+            {
+              "text": "Raised LDL-C"
+            },
+            {
+              "text": "Bloating, constipation, raise triglycerides"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nicotinic acid: immediate-release 100 mg to 1 g three times daily; sustained-release 250 mg to 1.5 g twice daily; extended-release 500 mg to 2 g at night",
+          "cells": [
+            {
+              "text": "Raised LDL-C, low HDL-C, raised TG"
+            },
+            {
+              "text": "Flushing, GI upset, raised glucose, uric acid and liver tests"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fibric acid derivatives",
+          "cells": [
+            {
+              "text": "Raised TG and remnants"
+            },
+            {
+              "text": "More LPL, less VLDL; dyspepsia, myalgia, gallstones, raised transaminases"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lifestyle and treat secondary causes",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Diet, weight, activity, stop smoking; restrict fat and alcohol in severe hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 356-6 continues past the page shown in the Tables PDF; fibrate and omega-3 doses were not on that page and are not given here."
+    },
+    {
+      "id": "dyslipidemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Metabolic syndrome: any three risk factors",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Defining level"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal obesity, men (waist circumference)",
+          "cells": [
+            {
+              "text": ">102 cm (>40 in.)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Abdominal obesity, women (waist circumference)",
+          "cells": [
+            {
+              "text": ">88 cm (>35 in.)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Triglycerides",
+          "cells": [
+            {
+              "text": ">1.7 mmol/L (>150 mg/dL)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HDL cholesterol, men",
+          "cells": [
+            {
+              "text": "<1 mmol/L (<40 mg/dL)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HDL cholesterol, women",
+          "cells": [
+            {
+              "text": "<1.3 mmol/L (<50 mg/dL)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": ">=130 / >=85 mmHg"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fasting glucose",
+          "cells": [
+            {
+              "text": ">6.1 mmol/L (>110 mg/dL)"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnotes a and b are not shown on the source page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyslipidemia-dx-mgmt",
+      "title": "Statin decision pathway (ACC/AHA 2018)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with lipid panel",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical ASCVD?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "High-intensity statin; add ezetimibe then PCSK9i if very high risk and LDL 70 or more",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "LDL-C 190 mg/dL or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Maximally tolerated statin; check secondary causes and family",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Diabetes, age 40 to 75?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Moderate-intensity statin; high intensity if multiple risk factors",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Estimate 10-year ASCVD risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Risk 7.5% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Statin; use risk enhancers or CAC if uncertain",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifestyle; reassess risk periodically",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recheck lipids 4 to 12 weeks after start",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

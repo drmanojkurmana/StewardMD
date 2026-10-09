@@ -1,174 +1,513 @@
 {
- "id": "high_altitude_pulmonary_edema",
- "name": "High-altitude pulmonary oedema",
- "aliases": [
-  "HAPE",
-  "high-altitude pulmonary edema",
-  "altitude pulmonary oedema"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a rapid ascent to high altitude, often above around 2500 metres",
-   "Early features are a decline in exercise tolerance and a dry cough progressing to breathlessness at rest, and later to a productive cough with pink or frothy sputum",
-   "It is the most common cause of altitude-related death and can coexist with high-altitude cerebral oedema",
-   "Examination may reveal tachycardia, tachypnoea, crackles, cyanosis, and a low oxygen saturation for the altitude",
-   "The key intervention is immediate descent to lower altitude, together with supplemental oxygen and rest, which usually produces rapid improvement",
-   "Where descent is delayed, a portable hyperbaric chamber and pulmonary vasodilator therapy can be used as temporising measures",
-   "Rapid ascent, heavy exertion, cold, and a previous episode all increase risk, and susceptibility varies between individuals"
+  "id": "high_altitude_pulmonary_edema",
+  "name": "High-altitude pulmonary oedema",
+  "aliases": [
+    "HAPE",
+    "high-altitude pulmonary edema",
+    "altitude pulmonary oedema"
   ],
-  "pathophysiology": "High-altitude pulmonary oedema is driven by hypoxia at altitude, which causes pulmonary vasoconstriction. In susceptible people this vasoconstriction is exaggerated and uneven, so blood flow is redistributed and some pulmonary capillary beds are exposed to high pressure. The resulting pulmonary hypertension and regional overperfusion damage the alveolar-capillary barrier, producing a high-permeability leak of protein-rich fluid and red cells into the alveoli. This is a non-cardiogenic oedema, occurring with normal left heart function. Impaired alveolar fluid clearance and inflammatory changes contribute, and the accumulation of alveolar fluid worsens gas exchange and hypoxaemia, which further intensifies pulmonary vasoconstriction in a vicious cycle.",
-  "additionalDifferentials": [
-   "Pneumonia or other lower respiratory tract infection",
-   "Acute asthma or bronchospasm",
-   "Cardiogenic pulmonary oedema from underlying heart disease",
-   "Pulmonary embolism",
-   "High-altitude cerebral oedema or severe acute mountain sickness",
-   "Pneumothorax or airway obstruction"
-  ],
-  "additionalInvestigations": [
-   "Pulse oximetry showing hypoxaemia disproportionate to the altitude",
-   "Chest auscultation for crackles and clinical assessment of respiratory distress",
-   "Chest radiograph, where available, showing patchy non-cardiogenic infiltrates",
-   "Portable ultrasound demonstrating pulmonary interstitial fluid (comet-tail artefacts)",
-   "Assessment for concurrent neurological signs of high-altitude cerebral oedema",
-   "Electrocardiogram and cardiac evaluation to exclude a cardiac cause when in doubt"
-  ],
-  "redFlags": [
-   "Breathlessness at rest with pink or frothy sputum and severe hypoxaemia",
-   "Cyanosis, marked tachycardia, and rapidly worsening respiratory distress",
-   "Coexisting neurological signs such as ataxia or altered consciousness suggesting cerebral oedema",
-   "Failure to improve despite oxygen when descent has not been possible"
-  ],
-  "prognosis": "With prompt descent and oxygen the prognosis is excellent and recovery is usually rapid and complete. Delay in recognition and treatment, or continued ascent, can be rapidly fatal. Individuals with a prior episode remain susceptible and should ascend gradually and consider preventive measures on future trips.",
-  "pitfalls": [
-   "Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend",
-   "Relying on oxygen or medication as a substitute for descent when descent is feasible",
-   "Missing concurrent high-altitude cerebral oedema in a breathless patient",
-   "Assuming a normal chest examination excludes early disease",
-   "Underestimating recurrence risk and advising an unsafe re-ascent profile"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Wilderness Medical Society Practice Guidelines for Acute Altitude Illness"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate descent to lower altitude with rest as the key intervention",
-   "Supplemental oxygen to reverse hypoxaemia and hypoxic pulmonary vasoconstriction",
-   "Pulmonary vasodilator such as nifedipine as an adjunct or temporising measure",
-   "Portable hyperbaric chamber to temporise when descent is impossible",
-   "Preventive gradual ascent with prophylactic nifedipine or a phosphodiesterase-5 inhibitor in susceptible individuals",
-   "Assessment for and treatment of coexisting high-altitude cerebral oedema",
-   "Avoidance of further ascent until fully recovered"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "high_altitude_pulmonary_edema-pathway",
-   "title": "High-altitude pulmonary oedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a rapid ascent to high altitude, often above around 2500 metres",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Breathlessness at rest with pink or frothy sputum and severe hypoxaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulse oximetry showing hypoxaemia disproportionate to the altitude, Chest auscultation for crackles and clinical assessment of respiratory distress, Chest radiograph, where available, showing patchy non-cardiogenic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate descent to lower altitude with rest as the key intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of high-altitude pulmonary oedema."
-  }
- ],
- "tables": [
-  {
-   "id": "high_altitude_pulmonary_edema-matrix",
-   "title": "High-altitude pulmonary oedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a rapid ascent to high altitude, often above around 2500 metres",
+      "Early features are a decline in exercise tolerance and a dry cough progressing to breathlessness at rest, and later to a productive cough with pink or frothy sputum",
+      "It is the most common cause of altitude-related death and can coexist with high-altitude cerebral oedema",
+      "Examination may reveal tachycardia, tachypnoea, crackles, cyanosis, and a low oxygen saturation for the altitude",
+      "The key intervention is immediate descent to lower altitude, together with supplemental oxygen and rest, which usually produces rapid improvement",
+      "Where descent is delayed, a portable hyperbaric chamber and pulmonary vasodilator therapy can be used as temporising measures",
+      "Rapid ascent, heavy exertion, cold, and a previous episode all increase risk, and susceptibility varies between individuals"
     ],
-    [
-     "Key Investigations",
-     "Pulse oximetry showing hypoxaemia disproportionate to the altitude, Chest auscultation for crackles and clinical assessment of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "High-altitude pulmonary oedema is driven by hypoxia at altitude, which causes pulmonary vasoconstriction. In susceptible people this vasoconstriction is exaggerated and uneven, so blood flow is redistributed and some pulmonary capillary beds are exposed to high pressure. The resulting pulmonary hypertension and regional overperfusion damage the alveolar-capillary barrier, producing a high-permeability leak of protein-rich fluid and red cells into the alveoli. This is a non-cardiogenic oedema, occurring with normal left heart function. Impaired alveolar fluid clearance and inflammatory changes contribute, and the accumulation of alveolar fluid worsens gas exchange and hypoxaemia, which further intensifies pulmonary vasoconstriction in a vicious cycle.",
+    "additionalDifferentials": [
+      "Pneumonia or other lower respiratory tract infection",
+      "Acute asthma or bronchospasm",
+      "Cardiogenic pulmonary oedema from underlying heart disease",
+      "Pulmonary embolism",
+      "High-altitude cerebral oedema or severe acute mountain sickness",
+      "Pneumothorax or airway obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Pneumonia or other lower respiratory tract infection, Acute asthma or bronchospasm, Cardiogenic pulmonary oedema from underlying",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulse oximetry showing hypoxaemia disproportionate to the altitude",
+      "Chest auscultation for crackles and clinical assessment of respiratory distress",
+      "Chest radiograph, where available, showing patchy non-cardiogenic infiltrates",
+      "Portable ultrasound demonstrating pulmonary interstitial fluid (comet-tail artefacts)",
+      "Assessment for concurrent neurological signs of high-altitude cerebral oedema",
+      "Electrocardiogram and cardiac evaluation to exclude a cardiac cause when in doubt"
     ],
-    [
-     "Management Strategy",
-     "Immediate descent to lower altitude with rest as the key intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Breathlessness at rest with pink or frothy sputum and severe hypoxaemia",
+      "Cyanosis, marked tachycardia, and rapidly worsening respiratory distress",
+      "Coexisting neurological signs such as ataxia or altered consciousness suggesting cerebral oedema",
+      "Failure to improve despite oxygen when descent has not been possible"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt descent and oxygen the prognosis is excellent and recovery is usually rapid and complete. Delay in recognition and treatment, or continued ascent, can be rapidly fatal. Individuals with a prior episode remain susceptible and should ascend gradually and consider preventive measures on future trips.",
+    "pitfalls": [
+      "Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend",
+      "Relying on oxygen or medication as a substitute for descent when descent is feasible",
+      "Missing concurrent high-altitude cerebral oedema in a breathless patient",
+      "Assuming a normal chest examination excludes early disease",
+      "Underestimating recurrence risk and advising an unsafe re-ascent profile"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Wilderness Medical Society Practice Guidelines for Acute Altitude Illness"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate descent to lower altitude with rest as the key intervention",
+      "Supplemental oxygen to reverse hypoxaemia and hypoxic pulmonary vasoconstriction",
+      "Pulmonary vasodilator such as nifedipine as an adjunct or temporising measure",
+      "Portable hyperbaric chamber to temporise when descent is impossible",
+      "Preventive gradual ascent with prophylactic nifedipine or a phosphodiesterase-5 inhibitor in susceptible individuals",
+      "Assessment for and treatment of coexisting high-altitude cerebral oedema",
+      "Avoidance of further ascent until fully recovered"
     ]
-   ],
-   "caption": "Overview comparison matrix for high-altitude pulmonary oedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "high-altitude-pulmonary-edema-real-image",
-   "title": "High-altitude pulmonary oedema: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "high_altitude_pulmonary_edema-pathway",
+      "title": "High-altitude pulmonary oedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a rapid ascent to high altitude, often above around 2500 metres",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Breathlessness at rest with pink or frothy sputum and severe hypoxaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulse oximetry showing hypoxaemia disproportionate to the altitude, Chest auscultation for crackles and clinical assessment of respiratory distress, Chest radiograph, where available, showing patchy non-cardiogenic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate descent to lower altitude with rest as the key intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of high-altitude pulmonary oedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "high_altitude_pulmonary_edema-matrix",
+      "title": "High-altitude pulmonary oedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "High-altitude pulmonary oedema is a non-cardiogenic pulmonary oedema that typically develops within the first few days after a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulse oximetry showing hypoxaemia disproportionate to the altitude, Chest auscultation for crackles and clinical assessment of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pneumonia or other lower respiratory tract infection, Acute asthma or bronchospasm, Cardiogenic pulmonary oedema from underlying",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate descent to lower altitude with rest as the key intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early symptoms to a chest infection or simple deconditioning and continuing to ascend",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for high-altitude pulmonary oedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "high_altitude_pulmonary_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry",
+          "cells": [
+            {
+              "text": "Hypoxaemia disproportionate to the altitude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest auscultation",
+          "cells": [
+            {
+              "text": "Crackles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph, where available",
+          "cells": [
+            {
+              "text": "Patchy non-cardiogenic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portable ultrasound",
+          "cells": [
+            {
+              "text": "Pulmonary interstitial oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment",
+          "cells": [
+            {
+              "text": "Concurrent high-altitude cerebral oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Excludes a cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_pulmonary_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiogenic pulmonary oedema from heart disease",
+          "cells": [
+            {
+              "text": "Underlying heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-altitude cerebral oedema or severe acute mountain sickness",
+          "cells": [
+            {
+              "text": "Ataxia or altered mentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia or other lower respiratory infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_pulmonary_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate descent with rest",
+          "cells": [
+            {
+              "text": "The key treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen",
+          "cells": [
+            {
+              "text": "Reverses hypoxaemia and hypoxic pulmonary vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nifedipine",
+          "cells": [
+            {
+              "text": "Pulmonary vasodilator adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portable hyperbaric chamber",
+          "cells": [
+            {
+              "text": "Temporises when descent is delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic nifedipine",
+          "cells": [
+            {
+              "text": "With gradual ascent, for prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting altitude illness",
+          "cells": [
+            {
+              "text": "Assessed and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid further ascent",
+          "cells": [
+            {
+              "text": "Until fully recovered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_pulmonary_edema-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "high_altitude_pulmonary_edema-dx-mgmt",
+      "title": "Diagnosis and management of High-altitude pulmonary oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness at rest with crackles and hypoxaemia at altitude",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Breathless at rest, frothy sputum, cyanosis, rapid worsening, or neurological signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate descent; oxygen and portable hyperbaric treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oximetry; chest auscultation; chest radiograph or ultrasound; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is non-cardiogenic oedema confirmed with hypoxaemia at altitude?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pneumonia, asthma, cardiac oedema, pulmonary embolism or pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate descent with rest as the key treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supplemental oxygen to reverse hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nifedipine as an adjunct pulmonary vasodilator",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Portable hyperbaric chamber to temporise when descent is delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery on descent; no further ascent until well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

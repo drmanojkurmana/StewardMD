@@ -1,171 +1,449 @@
 {
- "id": "spinal_stenosis",
- "name": "Spinal stenosis",
- "aliases": [
-  "lumbar spinal stenosis",
-  "cervical spinal stenosis",
-  "spinal canal stenosis"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking that eases with sitting or leaning forward",
-   "The forward-flexed posture that relieves symptoms explains why patients often report easier walking uphill or when leaning on a trolley",
-   "Cervical stenosis can produce cervical myelopathy, with clumsy hands, gait imbalance, and upper motor neuron signs in the legs",
-   "It is usually a degenerative condition of older adults driven by disc bulging, facet hypertrophy, and ligamentum flavum thickening narrowing the canal or neural foramina",
-   "Distinguishing neurogenic from vascular claudication rests on the posture-dependent pattern, preserved peripheral pulses, and provocation by standing rather than a fixed walking distance",
-   "Initial management is usually conservative with physiotherapy, activity modification, and analgesia; decompressive surgery is considered for disabling or progressive symptoms",
-   "Progressive myelopathy in cervical stenosis or any sphincter disturbance warrants prompt specialist assessment",
-   "Imaging findings of stenosis are common with age and must be correlated with symptoms rather than treated in isolation"
+  "id": "spinal_stenosis",
+  "name": "Spinal stenosis",
+  "aliases": [
+    "lumbar spinal stenosis",
+    "cervical spinal stenosis",
+    "spinal canal stenosis"
   ],
-  "pathophysiology": "Spinal stenosis is narrowing of the spinal canal, lateral recesses, or neural foramina that compresses the cord, cauda equina, or nerve roots. It is most often degenerative, resulting from intervertebral disc bulging, osteophyte formation, facet joint hypertrophy, and buckling or thickening of the ligamentum flavum, sometimes compounded by spondylolisthesis or congenitally narrow canals. In the lumbar spine, compression of the cauda equina and roots produces neurogenic claudication, aggravated by extension which further narrows the canal and relieved by flexion. In the cervical spine, cord compression can cause myelopathy through direct pressure and ischaemia.",
-  "additionalDifferentials": [
-   "Peripheral vascular (vascular) claudication",
-   "Lumbar disc herniation with radiculopathy",
-   "Peripheral neuropathy",
-   "Hip or knee osteoarthritis",
-   "Other causes of myelopathy in cervical disease (e.g. tumour, demyelination)"
-  ],
-  "additionalInvestigations": [
-   "MRI of the relevant spinal region to characterise the level and severity of compression",
-   "CT or CT myelography when MRI is contraindicated or bony detail is needed",
-   "Plain radiographs including flexion-extension views to assess instability or spondylolisthesis",
-   "Nerve conduction studies or EMG when peripheral neuropathy is a competing diagnosis",
-   "Ankle-brachial index or vascular studies to exclude arterial claudication"
-  ],
-  "redFlags": [
-   "New or progressive cauda equina symptoms such as saddle anaesthesia, urinary retention, or bowel dysfunction requiring urgent evaluation",
-   "Rapidly progressive cervical myelopathy with worsening gait or hand function",
-   "Bilateral neurological deficit or significant motor weakness",
-   "Features suggesting infection or malignancy, such as fever, night pain, or weight loss"
-  ],
-  "prognosis": "Symptoms often follow a fluctuating or slowly progressive course; many patients are managed conservatively for years, and decompression can relieve claudication and stabilise myelopathy, though established cord damage in cervical disease may not fully reverse.",
-  "pitfalls": [
-   "Treating incidental imaging stenosis that does not match the clinical picture",
-   "Confusing neurogenic with vascular claudication and missing peripheral arterial disease",
-   "Overlooking early cervical myelopathy, mistaking gait and hand changes for ageing",
-   "Failing to recognise cauda equina features as an emergency"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia",
-   "Add neuropathic-pain agents such as gabapentinoids and consider epidural corticosteroid injection for radicular symptoms",
-   "Offer decompressive surgery, such as laminectomy with fusion where instability or spondylolisthesis coexists, for disabling or progressive neurogenic claudication",
-   "Treat cervical myelopathy with timely surgical decompression to arrest progression, as established cord damage may not reverse",
-   "Distinguish neurogenic from vascular claudication before treatment using the posture-dependent pattern, peripheral pulses and ankle-brachial index",
-   "Monitor for progressive deficit and escalate urgently if myelopathy, bladder or bowel dysfunction, or cauda equina features emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_stenosis-pathway",
-   "title": "Spinal stenosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking that eases with sitting or leaning forward",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive cauda equina symptoms such as saddle anaesthesia, urinary retention, or bowel dysfunction requiring urgent evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the relevant spinal region to characterise the level and severity of compression, CT or CT myelography when MRI is contraindicated or bony detail is needed, Plain radiographs including flexion-extension views to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating incidental imaging stenosis that does not match the clinical picture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal stenosis."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_stenosis-matrix",
-   "title": "Spinal stenosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking that eases with sitting or leaning forward",
+      "The forward-flexed posture that relieves symptoms explains why patients often report easier walking uphill or when leaning on a trolley",
+      "Cervical stenosis can produce cervical myelopathy, with clumsy hands, gait imbalance, and upper motor neuron signs in the legs",
+      "It is usually a degenerative condition of older adults driven by disc bulging, facet hypertrophy, and ligamentum flavum thickening narrowing the canal or neural foramina",
+      "Distinguishing neurogenic from vascular claudication rests on the posture-dependent pattern, preserved peripheral pulses, and provocation by standing rather than a fixed walking distance",
+      "Initial management is usually conservative with physiotherapy, activity modification, and analgesia; decompressive surgery is considered for disabling or progressive symptoms",
+      "Progressive myelopathy in cervical stenosis or any sphincter disturbance warrants prompt specialist assessment",
+      "Imaging findings of stenosis are common with age and must be correlated with symptoms rather than treated in isolation"
     ],
-    [
-     "Key Investigations",
-     "MRI of the relevant spinal region to characterise the level and severity of compression, CT or CT myelography when MRI is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spinal stenosis is narrowing of the spinal canal, lateral recesses, or neural foramina that compresses the cord, cauda equina, or nerve roots. It is most often degenerative, resulting from intervertebral disc bulging, osteophyte formation, facet joint hypertrophy, and buckling or thickening of the ligamentum flavum, sometimes compounded by spondylolisthesis or congenitally narrow canals. In the lumbar spine, compression of the cauda equina and roots produces neurogenic claudication, aggravated by extension which further narrows the canal and relieved by flexion. In the cervical spine, cord compression can cause myelopathy through direct pressure and ischaemia.",
+    "additionalDifferentials": [
+      "Peripheral vascular (vascular) claudication",
+      "Lumbar disc herniation with radiculopathy",
+      "Peripheral neuropathy",
+      "Hip or knee osteoarthritis",
+      "Other causes of myelopathy in cervical disease (e.g. tumour, demyelination)"
     ],
-    [
-     "Primary Differentials",
-     "Peripheral vascular (vascular) claudication, Lumbar disc herniation with radiculopathy, Peripheral neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the relevant spinal region to characterise the level and severity of compression",
+      "CT or CT myelography when MRI is contraindicated or bony detail is needed",
+      "Plain radiographs including flexion-extension views to assess instability or spondylolisthesis",
+      "Nerve conduction studies or EMG when peripheral neuropathy is a competing diagnosis",
+      "Ankle-brachial index or vascular studies to exclude arterial claudication"
     ],
-    [
-     "Management Strategy",
-     "Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia",
-     "Core treatment modality"
+    "redFlags": [
+      "New or progressive cauda equina symptoms such as saddle anaesthesia, urinary retention, or bowel dysfunction requiring urgent evaluation",
+      "Rapidly progressive cervical myelopathy with worsening gait or hand function",
+      "Bilateral neurological deficit or significant motor weakness",
+      "Features suggesting infection or malignancy, such as fever, night pain, or weight loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating incidental imaging stenosis that does not match the clinical picture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms often follow a fluctuating or slowly progressive course; many patients are managed conservatively for years, and decompression can relieve claudication and stabilise myelopathy, though established cord damage in cervical disease may not fully reverse.",
+    "pitfalls": [
+      "Treating incidental imaging stenosis that does not match the clinical picture",
+      "Confusing neurogenic with vascular claudication and missing peripheral arterial disease",
+      "Overlooking early cervical myelopathy, mistaking gait and hand changes for ageing",
+      "Failing to recognise cauda equina features as an emergency"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia",
+      "Add neuropathic-pain agents such as gabapentinoids and consider epidural corticosteroid injection for radicular symptoms",
+      "Offer decompressive surgery, such as laminectomy with fusion where instability or spondylolisthesis coexists, for disabling or progressive neurogenic claudication",
+      "Treat cervical myelopathy with timely surgical decompression to arrest progression, as established cord damage may not reverse",
+      "Distinguish neurogenic from vascular claudication before treatment using the posture-dependent pattern, peripheral pulses and ankle-brachial index",
+      "Monitor for progressive deficit and escalate urgently if myelopathy, bladder or bowel dysfunction, or cauda equina features emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal stenosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-stenosis-real-image",
-   "title": "Spinal stenosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_stenosis-pathway",
+      "title": "Spinal stenosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking that eases with sitting or leaning forward",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive cauda equina symptoms such as saddle anaesthesia, urinary retention, or bowel dysfunction requiring urgent evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the relevant spinal region to characterise the level and severity of compression, CT or CT myelography when MRI is contraindicated or bony detail is needed, Plain radiographs including flexion-extension views to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating incidental imaging stenosis that does not match the clinical picture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal stenosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_stenosis-matrix",
+      "title": "Spinal stenosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lumbar spinal stenosis classically causes neurogenic claudication, with leg pain, heaviness, or numbness on standing and walking",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the relevant spinal region to characterise the level and severity of compression, CT or CT myelography when MRI is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peripheral vascular (vascular) claudication, Lumbar disc herniation with radiculopathy, Peripheral neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin conservative management with physiotherapy, activity modification, flexion-based exercise and simple analgesia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating incidental imaging stenosis that does not match the clinical picture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal stenosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spinal region",
+          "cells": [
+            {
+              "text": "Level and severity of compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or CT myelography",
+          "cells": [
+            {
+              "text": "When MRI is contraindicated or bony detail is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Instability or spondylolisthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies or EMG",
+          "cells": [
+            {
+              "text": "When peripheral neuropathy is a competing diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index or vascular studies",
+          "cells": [
+            {
+              "text": "Arterial claudication excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral vascular claudication",
+          "cells": [
+            {
+              "text": "Distinguished by the posture-dependent pattern; peripheral pulses are preserved in neurogenic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar disc herniation with radiculopathy",
+          "cells": [
+            {
+              "text": "Radicular pain from a single level, defined on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "A competing diagnosis; nerve conduction studies or EMG separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Physiotherapy, flexion-based exercise, activity modification and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Gabapentinoids; epidural corticosteroid for radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompressive surgery",
+          "cells": [
+            {
+              "text": "Laminectomy with fusion where instability or spondylolisthesis coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical decompression",
+          "cells": [
+            {
+              "text": "Timely surgery to arrest progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claudication assessment",
+          "cells": [
+            {
+              "text": "Neurogenic versus vascular claudication, before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Escalate for myelopathy, bladder or bowel dysfunction, or cauda equina features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Spinal stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain, heaviness or numbness on standing or walking: suspected lumbar stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cauda equina, rapid myelopathy, bilateral deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency spinal surgery review for cauda equina syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the spinal region; flexion-extension films; ABI if vascular doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI correlate with posture-dependent symptoms, with vascular causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular claudication or neuropathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, flexion-based exercise, activity change and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoids or epidural corticosteroid for radicular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laminectomy with fusion where instability coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Timely decompression for cervical myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Initial conservative care is usual; progressive myelopathy needs prompt surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

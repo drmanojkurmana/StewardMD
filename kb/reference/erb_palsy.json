@@ -1,169 +1,458 @@
 {
- "id": "erb_palsy",
- "name": "Erb's palsy",
- "aliases": [
-  "Erb-Duchenne palsy",
-  "upper brachial plexus birth palsy"
- ],
- "class": "non_infective",
- "system": "Neonatal / Nervous system / Musculoskeletal",
- "specialty": "Neonatology / Paediatrics / Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neonatology and paediatric orthopaedic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
-   "The affected arm lies adducted and internally rotated with the forearm pronated and wrist flexed, the classic waiter's tip posture",
-   "The Moro reflex is asymmetric, but grasp is preserved because the lower roots are spared",
-   "Risk factors include shoulder dystocia, macrosomia, instrumental delivery and breech birth",
-   "An intact grasp helps distinguish it from lower plexus (Klumpke) palsy, and Horner syndrome suggests a more severe root avulsion",
-   "Most cases recover with early physiotherapy; persistent deficit at a few months warrants specialist referral for possible surgery"
+  "id": "erb_palsy",
+  "name": "Erb's palsy",
+  "aliases": [
+    "Erb-Duchenne palsy",
+    "upper brachial plexus birth palsy"
   ],
-  "pathophysiology": "Erb's palsy results from traction on the upper brachial plexus during delivery, typically when the shoulder is depressed as the head is delivered, as in shoulder dystocia. Stretching injures the C5-C6 (and sometimes C7) nerve roots, ranging from neurapraxia to rupture or root avulsion. The upper-root distribution explains the weakness of shoulder abduction and external rotation, elbow flexion and forearm supination, producing the characteristic posture, while preserved lower roots maintain hand function. The severity of the nerve injury determines the potential for recovery.",
-  "additionalDifferentials": [
-   "Klumpke (lower plexus) palsy",
-   "Clavicular or humeral fracture causing pseudoparalysis",
-   "Total brachial plexus palsy",
-   "Cervical spinal cord injury",
-   "Osteomyelitis or septic arthritis of the shoulder (as a cause of a still arm)"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of the posture, active movement and reflexes",
-   "Assessment for Horner syndrome suggesting root avulsion",
-   "Radiographs to exclude clavicular or humeral fracture",
-   "Neurophysiology and MRI in persistent or severe cases",
-   "Serial examination to track recovery"
-  ],
-  "redFlags": [
-   "Horner syndrome or a flail arm suggesting severe avulsion or total plexus injury",
-   "Respiratory distress suggesting phrenic nerve involvement",
-   "No recovery of biceps function by a few months of age",
-   "Bilateral involvement"
-  ],
-  "prognosis": "The majority of infants recover spontaneously or with physiotherapy over weeks to months; a minority with severe injury have persistent weakness and may benefit from nerve or later orthopaedic surgery.",
-  "pitfalls": [
-   "Missing an associated fracture causing pseudoparalysis",
-   "Overlooking Horner syndrome as a marker of severe injury",
-   "Failing to refer non-recovering cases in time for surgical options",
-   "Neglecting early physiotherapy and joint contracture prevention"
-  ],
-  "references": [
-   "Neonatology reference texts (standard reference)",
-   "Paediatric orthopaedic references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent contractures of the shoulder and elbow",
-   "Parental education on careful handling, positioning and daily exercise of the affected arm",
-   "Serial neurological examination to track return of shoulder abduction, external rotation and elbow flexion",
-   "Referral to a specialist brachial plexus multidisciplinary team when biceps and elbow flexion have not recovered by a few months of age",
-   "Microsurgical nerve reconstruction with grafting or nerve transfer for severe injury or suspected root avulsion",
-   "Botulinum toxin to the internal rotators to rebalance muscle forces and delay fixed deformity in selected infants",
-   "Later orthopaedic surgery such as tendon transfer or rotational osteotomy for residual shoulder contracture or deformity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erb_palsy-pathway",
-   "title": "Erb's palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Horner syndrome or a flail arm suggesting severe avulsion or total plexus injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of the posture, active movement and reflexes, Assessment for Horner syndrome suggesting root avulsion, Radiographs to exclude clavicular or humeral fracture"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent contractures of the shoulder and elbow"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an associated fracture causing pseudoparalysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erb's palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "erb_palsy-matrix",
-   "title": "Erb's palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatal / Nervous system / Musculoskeletal",
+  "specialty": "Neonatology / Paediatrics / Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neonatology and paediatric orthopaedic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
+      "The affected arm lies adducted and internally rotated with the forearm pronated and wrist flexed, the classic waiter's tip posture",
+      "The Moro reflex is asymmetric, but grasp is preserved because the lower roots are spared",
+      "Risk factors include shoulder dystocia, macrosomia, instrumental delivery and breech birth",
+      "An intact grasp helps distinguish it from lower plexus (Klumpke) palsy, and Horner syndrome suggests a more severe root avulsion",
+      "Most cases recover with early physiotherapy; persistent deficit at a few months warrants specialist referral for possible surgery"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of the posture, active movement and reflexes, Assessment for Horner syndrome suggesting root avulsion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erb's palsy results from traction on the upper brachial plexus during delivery, typically when the shoulder is depressed as the head is delivered, as in shoulder dystocia. Stretching injures the C5-C6 (and sometimes C7) nerve roots, ranging from neurapraxia to rupture or root avulsion. The upper-root distribution explains the weakness of shoulder abduction and external rotation, elbow flexion and forearm supination, producing the characteristic posture, while preserved lower roots maintain hand function. The severity of the nerve injury determines the potential for recovery.",
+    "additionalDifferentials": [
+      "Klumpke (lower plexus) palsy",
+      "Clavicular or humeral fracture causing pseudoparalysis",
+      "Total brachial plexus palsy",
+      "Cervical spinal cord injury",
+      "Osteomyelitis or septic arthritis of the shoulder (as a cause of a still arm)"
     ],
-    [
-     "Primary Differentials",
-     "Klumpke (lower plexus) palsy, Clavicular or humeral fracture causing pseudoparalysis, Total brachial plexus palsy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of the posture, active movement and reflexes",
+      "Assessment for Horner syndrome suggesting root avulsion",
+      "Radiographs to exclude clavicular or humeral fracture",
+      "Neurophysiology and MRI in persistent or severe cases",
+      "Serial examination to track recovery"
     ],
-    [
-     "Management Strategy",
-     "Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent",
-     "Core treatment modality"
+    "redFlags": [
+      "Horner syndrome or a flail arm suggesting severe avulsion or total plexus injury",
+      "Respiratory distress suggesting phrenic nerve involvement",
+      "No recovery of biceps function by a few months of age",
+      "Bilateral involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an associated fracture causing pseudoparalysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of infants recover spontaneously or with physiotherapy over weeks to months; a minority with severe injury have persistent weakness and may benefit from nerve or later orthopaedic surgery.",
+    "pitfalls": [
+      "Missing an associated fracture causing pseudoparalysis",
+      "Overlooking Horner syndrome as a marker of severe injury",
+      "Failing to refer non-recovering cases in time for surgical options",
+      "Neglecting early physiotherapy and joint contracture prevention"
+    ],
+    "references": [
+      "Neonatology reference texts (standard reference)",
+      "Paediatric orthopaedic references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent contractures of the shoulder and elbow",
+      "Parental education on careful handling, positioning and daily exercise of the affected arm",
+      "Serial neurological examination to track return of shoulder abduction, external rotation and elbow flexion",
+      "Referral to a specialist brachial plexus multidisciplinary team when biceps and elbow flexion have not recovered by a few months of age",
+      "Microsurgical nerve reconstruction with grafting or nerve transfer for severe injury or suspected root avulsion",
+      "Botulinum toxin to the internal rotators to rebalance muscle forces and delay fixed deformity in selected infants",
+      "Later orthopaedic surgery such as tendon transfer or rotational osteotomy for residual shoulder contracture or deformity"
     ]
-   ],
-   "caption": "Overview comparison matrix for erb's palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erb-palsy-real-image",
-   "title": "Erb's palsy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "erb_palsy-pathway",
+      "title": "Erb's palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Horner syndrome or a flail arm suggesting severe avulsion or total plexus injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of the posture, active movement and reflexes, Assessment for Horner syndrome suggesting root avulsion, Radiographs to exclude clavicular or humeral fracture"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent contractures of the shoulder and elbow"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an associated fracture causing pseudoparalysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erb's palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erb_palsy-matrix",
+      "title": "Erb's palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A birth-related brachial plexus injury affecting the upper roots (C5-C6, sometimes C7)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of the posture, active movement and reflexes, Assessment for Horner syndrome suggesting root avulsion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Klumpke (lower plexus) palsy, Clavicular or humeral fracture causing pseudoparalysis, Total brachial plexus palsy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early physiotherapy and occupational therapy with gentle passive range-of-motion exercises to preserve joint mobility and prevent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an associated fracture causing pseudoparalysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erb's palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology and paediatric orthopaedic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erb_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of posture, active movement and reflexes",
+          "cells": [
+            {
+              "text": "Arm adducted and internally rotated, forearm pronated, wrist flexed; grasp is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Horner syndrome",
+          "cells": [
+            {
+              "text": "Suggests root avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Excludes clavicular or humeral fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurophysiology and MRI",
+          "cells": [
+            {
+              "text": "Persistent or severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurological examination",
+          "cells": [
+            {
+              "text": "Recovery of shoulder abduction, external rotation and elbow flexion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erb_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Klumpke (lower plexus) palsy",
+          "cells": [
+            {
+              "text": "Grasp is preserved in Erb palsy, which helps separate the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clavicular or humeral fracture causing pseudoparalysis",
+          "cells": [
+            {
+              "text": "Must be excluded on radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erb_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Gentle passive range of motion to preserve joint mobility and prevent shoulder contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental education",
+          "cells": [
+            {
+              "text": "Careful handling, positioning and daily exercise of the arm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurological examination",
+          "cells": [
+            {
+              "text": "Tracks return of shoulder abduction, external rotation and elbow flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist brachial plexus referral",
+          "cells": [
+            {
+              "text": "Biceps and elbow flexion not recovered by a few months of age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical nerve reconstruction",
+          "cells": [
+            {
+              "text": "Grafting or nerve transfer for severe injury or suspected root avulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin to internal rotators",
+          "cells": [
+            {
+              "text": "Selected infants, to rebalance muscle forces and delay fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Later orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Tendon transfer or rotational osteotomy for residual contracture or deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erb_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Erb's palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Newborn with birth-related arm weakness; arm adducted and internally rotated",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (Horner syndrome, flail arm, respiratory distress, bilateral involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for severe avulsion or phrenic nerve injury; specialist referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine posture, movement and reflexes; radiographs to exclude fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fracture excluded and grasp preserved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat any fracture; consider lower plexus or total brachial plexus palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early physiotherapy with gentle passive range of motion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Parental education on handling and daily exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial examination of shoulder abduction, rotation and elbow flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specialist brachial plexus referral if biceps has not recovered by a few months",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Microsurgical reconstruction for severe or avulsion injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover over weeks to months; severe injury can leave persistent weakness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,464 @@
 {
- "id": "strychnine_poisoning",
- "name": "Strychnine poisoning",
- "aliases": [
-  "strychnine toxicity",
-  "strychnine intoxication",
-  "nux vomica poisoning",
-  "rodenticide strychnine poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of consciousness between episodes",
-   "Classic signs include opisthotonos, risus sardonicus and trismus, closely mimicking tetanus but with much more rapid onset after ingestion",
-   "Spasms are triggered by minimal sensory stimulation, so a dark, quiet environment with minimal handling is an important supportive measure",
-   "Unlike a true seizure there is no post-ictal confusion, because the mechanism is spinal disinhibition rather than cortical discharge",
-   "Severe sustained contractions can cause hyperthermia, rhabdomyolysis, lactic acidosis and myoglobinuric renal injury",
-   "Death results from respiratory failure due to spasm of the muscles of respiration and diaphragm rather than direct central depression",
-   "Management is supportive: aggressive control of spasms with sedation and neuromuscular blockade with ventilation when needed, plus treatment of hyperthermia and rhabdomyolysis",
-   "Sources include some rodenticides and adulterated illicit drugs, and diagnosis is largely clinical with confirmatory analytical testing"
+  "id": "strychnine_poisoning",
+  "name": "Strychnine poisoning",
+  "aliases": [
+    "strychnine toxicity",
+    "strychnine intoxication",
+    "nux vomica poisoning",
+    "rodenticide strychnine poisoning"
   ],
-  "pathophysiology": "Strychnine competitively antagonises glycine, the principal inhibitory neurotransmitter at postsynaptic receptors of spinal cord and brainstem motor neurons. Loss of this inhibitory tone removes the normal reciprocal control of motor neurons, so both agonist and antagonist muscle groups contract simultaneously in response to any stimulus. The result is generalised rigidity with intermittent violent extensor spasms while consciousness is spared, because the toxin acts on the spinal cord rather than the cortex. Sustained muscular hyperactivity generates heat, acid and muscle breakdown, and respiratory muscle involvement causes fatal hypoventilation.",
-  "additionalDifferentials": [
-   "Tetanus",
-   "Generalised seizure or status epilepticus",
-   "Dystonic reaction to antidopaminergic drugs",
-   "Neuroleptic malignant syndrome or serotonin syndrome",
-   "Stiff-person syndrome",
-   "Hypocalcaemic tetany"
-  ],
-  "additionalInvestigations": [
-   "Creatine kinase and myoglobin to assess rhabdomyolysis",
-   "Arterial blood gas and lactate for acidosis and ventilation",
-   "Renal function and electrolytes including potassium and calcium",
-   "Core temperature monitoring for hyperthermia",
-   "Analytical confirmation of strychnine in blood, urine or gastric contents",
-   "Electrocardiogram and continuous cardiac monitoring"
-  ],
-  "redFlags": [
-   "Frequent or prolonged spasms involving respiratory muscles",
-   "Hyperthermia with rigidity",
-   "Marked rhabdomyolysis or myoglobinuric renal injury",
-   "Metabolic acidosis or haemodynamic instability",
-   "Inability to maintain the airway or adequate ventilation"
-  ],
-  "prognosis": "If ventilation and spasms are controlled early and complications such as hyperthermia and rhabdomyolysis are managed, recovery within a few days is usual as the toxin is metabolised; untreated severe poisoning is rapidly fatal from respiratory failure.",
-  "pitfalls": [
-   "Mistaking spasms for epileptic seizures and overlooking preserved consciousness",
-   "Excessive stimulation, examination or lighting that provokes further spasms",
-   "Failing to secure the airway and provide ventilation once neuromuscular blockade is used",
-   "Underestimating hyperthermia and rhabdomyolysis",
-   "Delaying sedation while awaiting analytical confirmation"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "UpToDate: Strychnine poisoning"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers",
-   "Control muscle spasms with benzodiazepines as first line, escalating to neuromuscular blockade with mechanical ventilation for refractory spasms",
-   "Secure the airway early and provide controlled ventilation to prevent fatal respiratory-muscle spasm and hypoventilation",
-   "Aggressively manage hyperthermia with active cooling and treat rhabdomyolysis with intravenous fluids to protect renal function",
-   "Correct lactic acidosis and electrolyte disturbance and maintain continuous cardiac monitoring",
-   "Gastrointestinal decontamination with activated charcoal where the airway is protected and presentation is early, as no specific antidote exists",
-   "Manage in intensive care with continuous monitoring and involve the clinical toxicology or poisons service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "strychnine_poisoning-pathway",
-   "title": "Strychnine poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of consciousness between episodes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent or prolonged spasms involving respiratory muscles",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Creatine kinase and myoglobin to assess rhabdomyolysis, Arterial blood gas and lactate for acidosis and ventilation, Renal function and electrolytes including potassium and calcium"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking spasms for epileptic seizures and overlooking preserved consciousness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of strychnine poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "strychnine_poisoning-matrix",
-   "title": "Strychnine poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of consciousness between episodes",
+      "Classic signs include opisthotonos, risus sardonicus and trismus, closely mimicking tetanus but with much more rapid onset after ingestion",
+      "Spasms are triggered by minimal sensory stimulation, so a dark, quiet environment with minimal handling is an important supportive measure",
+      "Unlike a true seizure there is no post-ictal confusion, because the mechanism is spinal disinhibition rather than cortical discharge",
+      "Severe sustained contractions can cause hyperthermia, rhabdomyolysis, lactic acidosis and myoglobinuric renal injury",
+      "Death results from respiratory failure due to spasm of the muscles of respiration and diaphragm rather than direct central depression",
+      "Management is supportive: aggressive control of spasms with sedation and neuromuscular blockade with ventilation when needed, plus treatment of hyperthermia and rhabdomyolysis",
+      "Sources include some rodenticides and adulterated illicit drugs, and diagnosis is largely clinical with confirmatory analytical testing"
     ],
-    [
-     "Key Investigations",
-     "Creatine kinase and myoglobin to assess rhabdomyolysis, Arterial blood gas and lactate for acidosis and ventilation, Renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Strychnine competitively antagonises glycine, the principal inhibitory neurotransmitter at postsynaptic receptors of spinal cord and brainstem motor neurons. Loss of this inhibitory tone removes the normal reciprocal control of motor neurons, so both agonist and antagonist muscle groups contract simultaneously in response to any stimulus. The result is generalised rigidity with intermittent violent extensor spasms while consciousness is spared, because the toxin acts on the spinal cord rather than the cortex. Sustained muscular hyperactivity generates heat, acid and muscle breakdown, and respiratory muscle involvement causes fatal hypoventilation.",
+    "additionalDifferentials": [
+      "Tetanus",
+      "Generalised seizure or status epilepticus",
+      "Dystonic reaction to antidopaminergic drugs",
+      "Neuroleptic malignant syndrome or serotonin syndrome",
+      "Stiff-person syndrome",
+      "Hypocalcaemic tetany"
     ],
-    [
-     "Primary Differentials",
-     "Tetanus, Generalised seizure or status epilepticus, Dystonic reaction to antidopaminergic drugs",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Creatine kinase and myoglobin to assess rhabdomyolysis",
+      "Arterial blood gas and lactate for acidosis and ventilation",
+      "Renal function and electrolytes including potassium and calcium",
+      "Core temperature monitoring for hyperthermia",
+      "Analytical confirmation of strychnine in blood, urine or gastric contents",
+      "Electrocardiogram and continuous cardiac monitoring"
     ],
-    [
-     "Management Strategy",
-     "Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent or prolonged spasms involving respiratory muscles",
+      "Hyperthermia with rigidity",
+      "Marked rhabdomyolysis or myoglobinuric renal injury",
+      "Metabolic acidosis or haemodynamic instability",
+      "Inability to maintain the airway or adequate ventilation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking spasms for epileptic seizures and overlooking preserved consciousness",
-     "Prevent diagnostic or management error"
+    "prognosis": "If ventilation and spasms are controlled early and complications such as hyperthermia and rhabdomyolysis are managed, recovery within a few days is usual as the toxin is metabolised; untreated severe poisoning is rapidly fatal from respiratory failure.",
+    "pitfalls": [
+      "Mistaking spasms for epileptic seizures and overlooking preserved consciousness",
+      "Excessive stimulation, examination or lighting that provokes further spasms",
+      "Failing to secure the airway and provide ventilation once neuromuscular blockade is used",
+      "Underestimating hyperthermia and rhabdomyolysis",
+      "Delaying sedation while awaiting analytical confirmation"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "UpToDate: Strychnine poisoning"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers",
+      "Control muscle spasms with benzodiazepines as first line, escalating to neuromuscular blockade with mechanical ventilation for refractory spasms",
+      "Secure the airway early and provide controlled ventilation to prevent fatal respiratory-muscle spasm and hypoventilation",
+      "Aggressively manage hyperthermia with active cooling and treat rhabdomyolysis with intravenous fluids to protect renal function",
+      "Correct lactic acidosis and electrolyte disturbance and maintain continuous cardiac monitoring",
+      "Gastrointestinal decontamination with activated charcoal where the airway is protected and presentation is early, as no specific antidote exists",
+      "Manage in intensive care with continuous monitoring and involve the clinical toxicology or poisons service"
     ]
-   ],
-   "caption": "Overview comparison matrix for strychnine poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "strychnine-poisoning-real-image",
-   "title": "Strychnine poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "strychnine_poisoning-pathway",
+      "title": "Strychnine poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of consciousness between episodes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent or prolonged spasms involving respiratory muscles",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Creatine kinase and myoglobin to assess rhabdomyolysis, Arterial blood gas and lactate for acidosis and ventilation, Renal function and electrolytes including potassium and calcium"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking spasms for epileptic seizures and overlooking preserved consciousness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of strychnine poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "strychnine_poisoning-matrix",
+      "title": "Strychnine poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Strychnine causes generalised muscle rigidity and violent, exaggerated startle-provoked spasms with a fully preserved level of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Creatine kinase and myoglobin to assess rhabdomyolysis, Arterial blood gas and lactate for acidosis and ventilation, Renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tetanus, Generalised seizure or status epilepticus, Dystonic reaction to antidopaminergic drugs",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Minimise sensory stimulation by nursing in a dark, quiet environment with minimal handling to reduce spasm-provoking triggers",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking spasms for epileptic seizures and overlooking preserved consciousness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for strychnine poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "strychnine_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase and myoglobin",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Acidosis and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Potassium and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analytical confirmation in blood, urine or gastric content",
+          "cells": [
+            {
+              "text": "Strychnine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Cardiac effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strychnine_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetanus",
+          "cells": [
+            {
+              "text": "Trismus and spasm; the wound history and onset separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff-person syndrome",
+          "cells": [
+            {
+              "text": "Stimulus-triggered spasm; antibody testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "strychnine_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Minimise sensory stimulation",
+          "cells": [
+            {
+              "text": "Dark, quiet environment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "First-line spasm control, with escalation as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early airway control",
+          "cells": [
+            {
+              "text": "Controlled ventilation to prevent failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active cooling",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis and acidosis care",
+          "cells": [
+            {
+              "text": "Lactic acidosis and electrolyte correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Where the airway is protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care and toxicology input",
+          "cells": [
+            {
+              "text": "Continuous monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "strychnine_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Strychnine poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Triggered spasms with opisthotonos and risus sardonicus: suspected strychnine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory muscle spasm, hyperthermia, myoglobinuria, acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway control and controlled ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK and myoglobin; ABG and lactate; electrolytes; core temperature; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is strychnine detected analytically, with the typical spasm pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetanus, seizures or stiff-person syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Minimise sensory stimulation in a dark, quiet room",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines as first-line spasm control, with escalation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secure the airway early and provide controlled ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Active cooling and rhabdomyolysis care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Death follows respiratory failure from spasm; supportive intensive care is the mainstay",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,480 @@
 {
- "id": "hyper_ige_syndrome",
- "name": "Hyper-IgE syndrome",
- "aliases": [
-  "HIES",
-  "hyperimmunoglobulin E syndrome",
-  "Job syndrome (autosomal dominant form)"
- ],
- "class": "non_infective",
- "system": "Immunology",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung infections, and often connective tissue or skeletal abnormalities",
-   "The classic autosomal dominant form results from dominant-negative STAT3 mutations, while autosomal recessive forms (for example DOCK8 deficiency) show overlapping but distinct features",
-   "The infection pattern is dominated by Staphylococcus aureus skin abscesses that may be surprisingly non-inflamed ('cold' abscesses) and recurrent pneumonias that can leave pneumatoceles",
-   "Chronic mucocutaneous candidiasis and other fungal infections are common, reflecting impaired Th17-mediated immunity in the STAT3 form",
-   "DOCK8 deficiency is distinguished by severe cutaneous viral infections, food allergies, eosinophilia, and a high risk of malignancy",
-   "Non-immune features of the STAT3 form include a characteristic coarse facial appearance, retained primary teeth, hyperextensible joints, scoliosis, and a tendency to bone fractures",
-   "Serum IgE is often very high but does not correlate tightly with disease activity, and eosinophilia is frequent",
-   "Management centres on long-term antistaphylococcal and antifungal prophylaxis, aggressive treatment of infections, and skin care; haematopoietic stem cell transplantation can correct the recessive DOCK8 form"
+  "id": "hyper_ige_syndrome",
+  "name": "Hyper-IgE syndrome",
+  "aliases": [
+    "HIES",
+    "hyperimmunoglobulin E syndrome",
+    "Job syndrome (autosomal dominant form)"
   ],
-  "pathophysiology": "Hyper-IgE syndromes arise from defects in signalling pathways that govern T-helper cell differentiation and epithelial immunity. In the autosomal dominant form, dominant-negative mutations in STAT3 impair the development of Th17 cells and the response to several cytokines, reducing antimicrobial peptide production at skin and mucosal surfaces and blunting the acute inflammatory response, which explains the 'cold' abscesses. STAT3 also influences tissue remodelling and skeletal biology, accounting for the connective tissue, dental, and bony features. Autosomal recessive forms such as DOCK8 deficiency disrupt cytoskeletal function and lymphocyte survival, producing profound susceptibility to cutaneous viruses and severe allergic disease. Dysregulated IgE production and eosinophilia are shared consequences of the altered T-cell cytokine milieu.",
-  "additionalDifferentials": [
-   "Severe atopic dermatitis with recurrent skin infection",
-   "DOCK8 deficiency and other combined immunodeficiencies",
-   "Chronic granulomatous disease",
-   "Cystic fibrosis (recurrent pneumonia with structural lung change)",
-   "Wiskott-Aldrich syndrome",
-   "Omenn syndrome and other conditions with eosinophilia and high IgE"
-  ],
-  "additionalInvestigations": [
-   "Serum IgE level and eosinophil count",
-   "Genetic testing for STAT3, DOCK8, and related genes",
-   "Lymphocyte subset analysis and Th17 cell enumeration where available",
-   "Clinical scoring (for example an NIH-type score) to gauge probability of the STAT3 form",
-   "Chest imaging to detect pneumatoceles, bronchiectasis, and fungal colonisation",
-   "Skeletal and dental assessment for fractures, scoliosis, and retained teeth"
-  ],
-  "redFlags": [
-   "Recurrent or severe deep-seated infections, including 'cold' abscesses and pneumonia with cavitation, warranting urgent immunological workup",
-   "Aspergillus or other fungal infection colonising pneumatoceles, risking invasive disease or haemorrhage",
-   "Severe disseminated viral skin infection in suspected DOCK8 deficiency",
-   "New or accelerating malignancy, particularly in the recessive form",
-   "Vascular aneurysms in the STAT3 form"
-  ],
-  "prognosis": "With sustained prophylaxis and prompt treatment of infections, many patients with the autosomal dominant STAT3 form reach adulthood, though pulmonary complications and vascular aneurysms remain important causes of morbidity. The autosomal recessive DOCK8 form carries a poorer outlook because of severe viral infections and malignancy, and haematopoietic stem cell transplantation offers the best chance of cure.",
-  "pitfalls": [
-   "Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency",
-   "Assuming a very high IgE alone confirms the diagnosis, since it is neither fully sensitive nor specific",
-   "Overlooking the skeletal, dental, and vascular features that distinguish the STAT3 form",
-   "Failing to recognise DOCK8 deficiency as a transplantable condition with a different management path",
-   "Not monitoring pneumatoceles for secondary fungal infection"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to reduce recurrent skin and pulmonary infection",
-   "Provide antifungal prophylaxis, treat chronic mucocutaneous candidiasis, and maintain skin care with drainage of cold abscesses",
-   "Treat pneumonias aggressively and manage sequelae such as pneumatoceles and bronchiectasis, watching for secondary Aspergillus or non-tuberculous infection",
-   "Consider allogeneic haematopoietic stem cell transplantation, which is potentially curative in DOCK8 deficiency and other severe autosomal recessive forms",
-   "In DOCK8 deficiency manage severe cutaneous viral infection and allergic disease, maintain malignancy surveillance, and give immunoglobulin replacement where antibody responses are poor",
-   "Monitor with periodic chest imaging and provide dental and skeletal assessment for retained primary teeth, scoliosis and fracture risk in the STAT3 form",
-   "Offer genetic counselling and coordinate care through clinical immunology with multidisciplinary specialist input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyper_ige_syndrome-pathway",
-   "title": "Hyper-IgE syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung infections, and often connective tissue or skeletal abnormalities",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe deep-seated infections, including 'cold' abscesses and pneumonia with cavitation, warranting urgent immunological workup",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum IgE level and eosinophil count, Genetic testing for STAT3, DOCK8, and related genes, Lymphocyte subset analysis and Th17 cell enumeration where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to reduce recurrent skin and pulmonary infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyper-ige syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hyper_ige_syndrome-matrix",
-   "title": "Hyper-IgE syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung infections, and often connective tissue or skeletal abnormalities",
+      "The classic autosomal dominant form results from dominant-negative STAT3 mutations, while autosomal recessive forms (for example DOCK8 deficiency) show overlapping but distinct features",
+      "The infection pattern is dominated by Staphylococcus aureus skin abscesses that may be surprisingly non-inflamed ('cold' abscesses) and recurrent pneumonias that can leave pneumatoceles",
+      "Chronic mucocutaneous candidiasis and other fungal infections are common, reflecting impaired Th17-mediated immunity in the STAT3 form",
+      "DOCK8 deficiency is distinguished by severe cutaneous viral infections, food allergies, eosinophilia, and a high risk of malignancy",
+      "Non-immune features of the STAT3 form include a characteristic coarse facial appearance, retained primary teeth, hyperextensible joints, scoliosis, and a tendency to bone fractures",
+      "Serum IgE is often very high but does not correlate tightly with disease activity, and eosinophilia is frequent",
+      "Management centres on long-term antistaphylococcal and antifungal prophylaxis, aggressive treatment of infections, and skin care; haematopoietic stem cell transplantation can correct the recessive DOCK8 form"
     ],
-    [
-     "Key Investigations",
-     "Serum IgE level and eosinophil count, Genetic testing for STAT3, DOCK8, and related genes, Lymphocyte subset analysis and Th17",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyper-IgE syndromes arise from defects in signalling pathways that govern T-helper cell differentiation and epithelial immunity. In the autosomal dominant form, dominant-negative mutations in STAT3 impair the development of Th17 cells and the response to several cytokines, reducing antimicrobial peptide production at skin and mucosal surfaces and blunting the acute inflammatory response, which explains the 'cold' abscesses. STAT3 also influences tissue remodelling and skeletal biology, accounting for the connective tissue, dental, and bony features. Autosomal recessive forms such as DOCK8 deficiency disrupt cytoskeletal function and lymphocyte survival, producing profound susceptibility to cutaneous viruses and severe allergic disease. Dysregulated IgE production and eosinophilia are shared consequences of the altered T-cell cytokine milieu.",
+    "additionalDifferentials": [
+      "Severe atopic dermatitis with recurrent skin infection",
+      "DOCK8 deficiency and other combined immunodeficiencies",
+      "Chronic granulomatous disease",
+      "Cystic fibrosis (recurrent pneumonia with structural lung change)",
+      "Wiskott-Aldrich syndrome",
+      "Omenn syndrome and other conditions with eosinophilia and high IgE"
     ],
-    [
-     "Primary Differentials",
-     "Severe atopic dermatitis with recurrent skin infection, DOCK8 deficiency and other combined immunodeficiencies, Chronic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum IgE level and eosinophil count",
+      "Genetic testing for STAT3, DOCK8, and related genes",
+      "Lymphocyte subset analysis and Th17 cell enumeration where available",
+      "Clinical scoring (for example an NIH-type score) to gauge probability of the STAT3 form",
+      "Chest imaging to detect pneumatoceles, bronchiectasis, and fungal colonisation",
+      "Skeletal and dental assessment for fractures, scoliosis, and retained teeth"
     ],
-    [
-     "Management Strategy",
-     "Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe deep-seated infections, including 'cold' abscesses and pneumonia with cavitation, warranting urgent immunological workup",
+      "Aspergillus or other fungal infection colonising pneumatoceles, risking invasive disease or haemorrhage",
+      "Severe disseminated viral skin infection in suspected DOCK8 deficiency",
+      "New or accelerating malignancy, particularly in the recessive form",
+      "Vascular aneurysms in the STAT3 form"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "With sustained prophylaxis and prompt treatment of infections, many patients with the autosomal dominant STAT3 form reach adulthood, though pulmonary complications and vascular aneurysms remain important causes of morbidity. The autosomal recessive DOCK8 form carries a poorer outlook because of severe viral infections and malignancy, and haematopoietic stem cell transplantation offers the best chance of cure.",
+    "pitfalls": [
+      "Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency",
+      "Assuming a very high IgE alone confirms the diagnosis, since it is neither fully sensitive nor specific",
+      "Overlooking the skeletal, dental, and vascular features that distinguish the STAT3 form",
+      "Failing to recognise DOCK8 deficiency as a transplantable condition with a different management path",
+      "Not monitoring pneumatoceles for secondary fungal infection"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to reduce recurrent skin and pulmonary infection",
+      "Provide antifungal prophylaxis, treat chronic mucocutaneous candidiasis, and maintain skin care with drainage of cold abscesses",
+      "Treat pneumonias aggressively and manage sequelae such as pneumatoceles and bronchiectasis, watching for secondary Aspergillus or non-tuberculous infection",
+      "Consider allogeneic haematopoietic stem cell transplantation, which is potentially curative in DOCK8 deficiency and other severe autosomal recessive forms",
+      "In DOCK8 deficiency manage severe cutaneous viral infection and allergic disease, maintain malignancy surveillance, and give immunoglobulin replacement where antibody responses are poor",
+      "Monitor with periodic chest imaging and provide dental and skeletal assessment for retained primary teeth, scoliosis and fracture risk in the STAT3 form",
+      "Offer genetic counselling and coordinate care through clinical immunology with multidisciplinary specialist input"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyper-ige syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyper-ige-syndrome-real-image",
-   "title": "Hyper-IgE syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hyper_ige_syndrome-pathway",
+      "title": "Hyper-IgE syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung infections, and often connective tissue or skeletal abnormalities",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe deep-seated infections, including 'cold' abscesses and pneumonia with cavitation, warranting urgent immunological workup",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum IgE level and eosinophil count, Genetic testing for STAT3, DOCK8, and related genes, Lymphocyte subset analysis and Th17 cell enumeration where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to reduce recurrent skin and pulmonary infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyper-ige syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyper_ige_syndrome-matrix",
+      "title": "Hyper-IgE syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hyper-IgE syndrome is a group of primary immunodeficiencies characterised by markedly elevated serum IgE, recurrent skin and lung",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum IgE level and eosinophil count, Genetic testing for STAT3, DOCK8, and related genes, Lymphocyte subset analysis and Th17",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe atopic dermatitis with recurrent skin infection, DOCK8 deficiency and other combined immunodeficiencies, Chronic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give long-term antistaphylococcal antibiotic prophylaxis (for example an antistaphylococcal penicillin or co-trimoxazole) to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent staphylococcal abscesses to simple atopic dermatitis and missing the underlying immunodeficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyper-ige syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyper_ige_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgE level and eosinophil count",
+          "cells": [
+            {
+              "text": "Raised IgE and eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT3 and DOCK8 genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset analysis and Th17 enumeration",
+          "cells": [
+            {
+              "text": "Immune profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical scoring",
+          "cells": [
+            {
+              "text": "Severity of the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pneumatoceles and bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dental assessment",
+          "cells": [
+            {
+              "text": "Fractures, scoliosis and dental anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_ige_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "DOCK8 deficiency and other combined immunodeficiencies",
+          "cells": [
+            {
+              "text": "Different gene; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Recurrent pneumonia with structural lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic granulomatous disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiskott-Aldrich syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_ige_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Long-term antistaphylococcal prophylaxis",
+          "cells": [
+            {
+              "text": "Recurrent deep-seated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal prophylaxis",
+          "cells": [
+            {
+              "text": "Chronic mucocutaneous candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive pneumonia treatment",
+          "cells": [
+            {
+              "text": "And management of sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Considered for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOCK8 deficiency",
+          "cells": [
+            {
+              "text": "Management of severe cutaneous viral infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic chest imaging",
+          "cells": [
+            {
+              "text": "Surveillance for lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyper_ige_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyper-IgE syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent deep staphylococcal abscesses, pneumonias and eczema with raised IgE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Deep infections, fungal lung colonisation, disseminated viral disease, or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for fungal infection or disseminated viral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgE and eosinophils; STAT3 and DOCK8 testing; lymphocyte subsets; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a STAT3 or DOCK8 variant found, with cystic fibrosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe atopic dermatitis, CGD, cystic fibrosis or Wiskott-Aldrich syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-term antistaphylococcal antibiotic prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifungal prophylaxis and treatment of chronic candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive treatment of pneumonias and their sequelae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation considered for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infections prevented; chest surveillance continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

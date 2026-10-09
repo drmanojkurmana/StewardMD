@@ -1,172 +1,470 @@
 {
- "id": "laryngomalacia",
- "name": "Laryngomalacia",
- "aliases": [
-  "floppy larynx",
-  "congenital laryngeal stridor",
-  "soft larynx"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic structures during inspiration.",
-   "The typical presentation is inspiratory stridor that begins in the first weeks of life, worsens with feeding, crying, agitation, or lying supine, and improves when the infant is calm or prone.",
-   "In most infants the condition is mild and self-limiting, with symptoms peaking in the early months and resolving as the airway matures, usually within the first one to two years.",
-   "Flexible laryngoscopy in the awake infant is the diagnostic gold standard, demonstrating the characteristic dynamic supraglottic collapse.",
-   "Gastro-oesophageal reflux commonly coexists and can aggravate symptoms, so it is often addressed as part of management.",
-   "Feeding difficulty, choking or coughing with feeds, and poor weight gain indicate more significant disease and warrant closer evaluation.",
-   "Severe disease with significant obstruction, apnoea, or failure to thrive may require surgical intervention such as supraglottoplasty.",
-   "Persistent or atypical stridor should prompt evaluation for additional or synchronous airway lesions."
+  "id": "laryngomalacia",
+  "name": "Laryngomalacia",
+  "aliases": [
+    "floppy larynx",
+    "congenital laryngeal stridor",
+    "soft larynx"
   ],
-  "pathophysiology": "In laryngomalacia the supraglottic tissues, including the epiglottis and aryepiglottic folds, are excessively soft and poorly supported, and there is often associated neuromuscular immaturity affecting airway tone and coordination. During inspiration the negative airway pressure draws these floppy structures inward, causing dynamic collapse over the laryngeal inlet and producing turbulent airflow and inspiratory stridor. The obstruction is worse when airflow demand or negative pressure increases, such as with crying, feeding, or agitation, and lessens with maturation as the tissues become firmer and neuromuscular control improves. Coexisting reflux can worsen supraglottic oedema and symptoms.",
-  "additionalDifferentials": [
-   "Vocal cord paralysis",
-   "Subglottic stenosis",
-   "Vascular ring or other extrinsic airway compression",
-   "Laryngeal web, cyst, or haemangioma",
-   "Tracheomalacia",
-   "Acquired causes of stridor such as croup or foreign body"
-  ],
-  "additionalInvestigations": [
-   "Flexible awake laryngoscopy",
-   "Assessment of feeding and growth",
-   "Pulse oximetry or sleep study if obstruction or apnoea is suspected",
-   "Bronchoscopy or airway endoscopy to exclude synchronous lesions in severe or atypical cases",
-   "Evaluation for gastro-oesophageal reflux when contributory"
-  ],
-  "redFlags": [
-   "Cyanosis, apnoea, or significant desaturation",
-   "Marked work of breathing or worsening obstruction",
-   "Feeding difficulty with choking, aspiration, or failure to thrive",
-   "Stridor that is severe, progressive, or atypical for laryngomalacia",
-   "Life-threatening obstructive episodes"
-  ],
-  "prognosis": "The outlook is excellent for the majority, in whom mild laryngomalacia resolves spontaneously as the airway matures; a minority with severe disease require surgery, which is generally effective.",
-  "pitfalls": [
-   "Assuming all infant stridor is laryngomalacia and missing another airway lesion",
-   "Underestimating severity by not assessing feeding, growth, and oxygenation",
-   "Overlooking a synchronous second airway abnormality",
-   "Failing to recognise and manage contributing gastro-oesophageal reflux"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as the supraglottic airway matures",
-   "Treat coexisting gastro-oesophageal reflux with anti-reflux measures and acid suppression, as reflux aggravates supraglottic oedema",
-   "Support feeding with modified feed consistency and positioning, monitoring weight gain to prevent faltering growth",
-   "Reserve supraglottoplasty, dividing the aryepiglottic folds and trimming redundant supraglottic tissue, for severe disease with airway obstruction or failure to thrive",
-   "Monitor growth, oxygen saturation, and sleep study where obstructive apnoea is suspected",
-   "Escalate promptly for feeding failure, cyanotic episodes, or significant obstruction, and exclude synchronous airway lesions by endoscopy in severe or atypical cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "laryngomalacia-pathway",
-   "title": "Laryngomalacia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic structures during inspiration.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cyanosis, apnoea, or significant desaturation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible awake laryngoscopy, Assessment of feeding and growth, Pulse oximetry or sleep study if obstruction or apnoea is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as the supraglottic airway matures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all infant stridor is laryngomalacia and missing another airway lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of laryngomalacia."
-  }
- ],
- "tables": [
-  {
-   "id": "laryngomalacia-matrix",
-   "title": "Laryngomalacia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic structures during inspiration.",
+      "The typical presentation is inspiratory stridor that begins in the first weeks of life, worsens with feeding, crying, agitation, or lying supine, and improves when the infant is calm or prone.",
+      "In most infants the condition is mild and self-limiting, with symptoms peaking in the early months and resolving as the airway matures, usually within the first one to two years.",
+      "Flexible laryngoscopy in the awake infant is the diagnostic gold standard, demonstrating the characteristic dynamic supraglottic collapse.",
+      "Gastro-oesophageal reflux commonly coexists and can aggravate symptoms, so it is often addressed as part of management.",
+      "Feeding difficulty, choking or coughing with feeds, and poor weight gain indicate more significant disease and warrant closer evaluation.",
+      "Severe disease with significant obstruction, apnoea, or failure to thrive may require surgical intervention such as supraglottoplasty.",
+      "Persistent or atypical stridor should prompt evaluation for additional or synchronous airway lesions."
     ],
-    [
-     "Key Investigations",
-     "Flexible awake laryngoscopy, Assessment of feeding and growth, Pulse oximetry or sleep study if obstruction or apnoea is suspected",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In laryngomalacia the supraglottic tissues, including the epiglottis and aryepiglottic folds, are excessively soft and poorly supported, and there is often associated neuromuscular immaturity affecting airway tone and coordination. During inspiration the negative airway pressure draws these floppy structures inward, causing dynamic collapse over the laryngeal inlet and producing turbulent airflow and inspiratory stridor. The obstruction is worse when airflow demand or negative pressure increases, such as with crying, feeding, or agitation, and lessens with maturation as the tissues become firmer and neuromuscular control improves. Coexisting reflux can worsen supraglottic oedema and symptoms.",
+    "additionalDifferentials": [
+      "Vocal cord paralysis",
+      "Subglottic stenosis",
+      "Vascular ring or other extrinsic airway compression",
+      "Laryngeal web, cyst, or haemangioma",
+      "Tracheomalacia",
+      "Acquired causes of stridor such as croup or foreign body"
     ],
-    [
-     "Primary Differentials",
-     "Vocal cord paralysis, Subglottic stenosis, Vascular ring or other extrinsic airway compression",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible awake laryngoscopy",
+      "Assessment of feeding and growth",
+      "Pulse oximetry or sleep study if obstruction or apnoea is suspected",
+      "Bronchoscopy or airway endoscopy to exclude synchronous lesions in severe or atypical cases",
+      "Evaluation for gastro-oesophageal reflux when contributory"
     ],
-    [
-     "Management Strategy",
-     "Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as",
-     "Core treatment modality"
+    "redFlags": [
+      "Cyanosis, apnoea, or significant desaturation",
+      "Marked work of breathing or worsening obstruction",
+      "Feeding difficulty with choking, aspiration, or failure to thrive",
+      "Stridor that is severe, progressive, or atypical for laryngomalacia",
+      "Life-threatening obstructive episodes"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all infant stridor is laryngomalacia and missing another airway lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent for the majority, in whom mild laryngomalacia resolves spontaneously as the airway matures; a minority with severe disease require surgery, which is generally effective.",
+    "pitfalls": [
+      "Assuming all infant stridor is laryngomalacia and missing another airway lesion",
+      "Underestimating severity by not assessing feeding, growth, and oxygenation",
+      "Overlooking a synchronous second airway abnormality",
+      "Failing to recognise and manage contributing gastro-oesophageal reflux"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as the supraglottic airway matures",
+      "Treat coexisting gastro-oesophageal reflux with anti-reflux measures and acid suppression, as reflux aggravates supraglottic oedema",
+      "Support feeding with modified feed consistency and positioning, monitoring weight gain to prevent faltering growth",
+      "Reserve supraglottoplasty, dividing the aryepiglottic folds and trimming redundant supraglottic tissue, for severe disease with airway obstruction or failure to thrive",
+      "Monitor growth, oxygen saturation, and sleep study where obstructive apnoea is suspected",
+      "Escalate promptly for feeding failure, cyanotic episodes, or significant obstruction, and exclude synchronous airway lesions by endoscopy in severe or atypical cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for laryngomalacia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "laryngomalacia-real-image",
-   "title": "Laryngomalacia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "laryngomalacia-pathway",
+      "title": "Laryngomalacia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic structures during inspiration.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cyanosis, apnoea, or significant desaturation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible awake laryngoscopy, Assessment of feeding and growth, Pulse oximetry or sleep study if obstruction or apnoea is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as the supraglottic airway matures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all infant stridor is laryngomalacia and missing another airway lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of laryngomalacia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "laryngomalacia-matrix",
+      "title": "Laryngomalacia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Laryngomalacia is the most common cause of chronic stridor in infants and results from collapse of soft, immature supraglottic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible awake laryngoscopy, Assessment of feeding and growth, Pulse oximetry or sleep study if obstruction or apnoea is suspected",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vocal cord paralysis, Subglottic stenosis, Vascular ring or other extrinsic airway compression",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the mild majority expectantly with parental reassurance, as symptoms peak in early infancy and resolve spontaneously as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all infant stridor is laryngomalacia and missing another airway lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for laryngomalacia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible awake laryngoscopy",
+          "cells": [
+            {
+              "text": "Dynamic supraglottic collapse; the diagnostic gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of feeding and growth",
+          "cells": [
+            {
+              "text": "Choking with feeds and poor weight gain indicate significant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry or sleep study",
+          "cells": [
+            {
+              "text": "Obstruction or apnoea, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy or airway endoscopy",
+          "cells": [
+            {
+              "text": "Synchronous lesions in severe or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for reflux",
+          "cells": [
+            {
+              "text": "Where contributory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Laryngeal web, cyst or haemangioma",
+          "cells": [
+            {
+              "text": "Synchronous airway lesion, found on endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular ring or other extrinsic compression",
+          "cells": [
+            {
+              "text": "Persistent or atypical stridor prompts evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Croup or foreign body",
+          "cells": [
+            {
+              "text": "Acquired cause, unlike stridor that begins in the first weeks of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal cord paralysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Most mild cases; symptoms peak early and resolve as the airway matures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux treatment",
+          "cells": [
+            {
+              "text": "Anti-reflux measures and acid suppression, as reflux aggravates supraglottic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Modified feed consistency and positioning; monitor weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supraglottoplasty",
+          "cells": [
+            {
+              "text": "Dividing the aryepiglottic folds and trimming redundant tissue for severe obstruction or faltering growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, oxygen saturation and sleep study where obstructive apnoea is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Feeding failure, cyanotic episodes or significant obstruction; endoscopy for synchronous lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngomalacia-dx-mgmt",
+      "title": "Diagnosis and management of Laryngomalacia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with inspiratory stridor from the first weeks, worse with feeds or supine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyanosis, apnoea, feeding failure, atypical stridor)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway assessment for apnoea or significant obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible awake laryngoscopy, feeding and growth review, oximetry or sleep study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does awake laryngoscopy show dynamic supraglottic collapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vocal cord palsy, subglottic stenosis, vascular ring or other lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management with reassurance for mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting reflux with anti-reflux measures and acid suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Modified feeds and positioning; monitor weight gain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supraglottoplasty for severe obstruction or faltering growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor growth, oxygen saturation and sleep study if apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent outlook; mild disease resolves as the airway matures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

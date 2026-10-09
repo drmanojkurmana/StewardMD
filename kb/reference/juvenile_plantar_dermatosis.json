@@ -1,178 +1,476 @@
 {
- "id": "juvenile_plantar_dermatosis",
- "name": "juvenile plantar dermatosis",
- "aliases": [
-  "forefoot dermatitis",
-  "sweaty sock dermatitis"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "paediatric dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harper's Textbook of Paediatric Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and plantar surfaces of the great toes.",
-   "The instep and the interdigital web spaces are characteristically spared, a pattern that helps distinguish it from tinea pedis and allergic contact dermatitis.",
-   "Occlusive synthetic footwear and socks with alternating sweating and rapid drying are central to the process, hence the descriptive term sweaty sock dermatitis.",
-   "It is often painful rather than itchy, with a smooth glazed cracked-porcelain appearance and painful fissures that impair walking.",
-   "There is an association with atopy, and many affected children have a personal or family history of eczema, asthma or hay fever.",
-   "Management centres on reducing occlusion and friction with breathable leather or open footwear, cotton socks, emollients and greasy barrier ointments.",
-   "Potassium hydroxide microscopy and fungal culture should be negative and are useful to exclude tinea, which typically involves the web spaces and instep.",
-   "The condition tends to settle around puberty, so reassurance about eventual spontaneous resolution is an important part of counselling."
+  "id": "juvenile_plantar_dermatosis",
+  "name": "juvenile plantar dermatosis",
+  "aliases": [
+    "forefoot dermatitis",
+    "sweaty sock dermatitis"
   ],
-  "pathophysiology": "Juvenile plantar dermatosis is a friction and moisture-related dermatitis of the weight-bearing plantar skin, thought to arise from repeated cycles of hyperhydration and rapid dehydration within occlusive modern footwear and synthetic socks. Sweat is trapped against the skin during activity, then evaporates quickly, and this alternating wetting and drying, combined with mechanical friction on pressure-bearing surfaces, disrupts the stratum corneum barrier of the forefoot. The resulting impaired barrier produces the glazed, fissured appearance. An atopic tendency predisposes to the disorder through an inherently compromised epidermal barrier, and the condition is not primarily allergic or infective, although secondary irritant and, occasionally, contact factors may aggravate it.",
-  "additionalDifferentials": [
-   "tinea pedis with web-space and instep involvement",
-   "allergic contact dermatitis to footwear components such as rubber or chromate",
-   "atopic dermatitis of the feet",
-   "palmoplantar psoriasis",
-   "pitted keratolysis",
-   "hereditary or acquired palmoplantar keratoderma",
-   "dyshidrotic (pompholyx) eczema"
-  ],
-  "additionalInvestigations": [
-   "potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis",
-   "patch testing when footwear allergic contact dermatitis is suspected",
-   "bacterial swab if secondary infection or pitted keratolysis is considered",
-   "clinical assessment for atopic stigmata elsewhere on the skin",
-   "skin biopsy only in atypical or treatment-resistant cases",
-   "examination of footwear and sock materials as part of history",
-   "review for koebnerising psoriasis at other sites such as nails and scalp"
-  ],
-  "redFlags": [
-   "web-space maceration or unilateral disease suggesting tinea rather than juvenile plantar dermatosis",
-   "spreading vesiculation or oozing indicating secondary bacterial infection",
-   "nail pitting, onycholysis or plaques elsewhere pointing to psoriasis",
-   "onset outside the typical prepubertal age range prompting reconsideration of the diagnosis",
-   "severe painful fissuring limiting mobility and quality of life"
-  ],
-  "prognosis": "The condition is benign and self-limiting, characteristically improving and resolving spontaneously around puberty. Symptoms fluctuate with footwear and activity, and consistent barrier and footwear measures usually control discomfort in the interim.",
-  "pitfalls": [
-   "misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help",
-   "overlooking the diagnostic sparing of the instep and web spaces",
-   "relying on potent topical corticosteroids alone rather than addressing footwear occlusion and friction",
-   "failing to reassure families that resolution around puberty is expected",
-   "missing coexisting atopic dermatitis or early psoriasis"
-  ],
-  "references": [
-   "Harper's Textbook of Paediatric Dermatology",
-   "Rook's Textbook of Dermatology",
-   "Neonatal and Infant Dermatology (Eichenfield, Frieden)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow drying",
-   "Apply liberal greasy emollients and barrier ointments to restore the disrupted stratum corneum barrier",
-   "Use a short course of a topical corticosteroid ointment for inflamed fissured areas, with topical calcineurin inhibitors as a steroid-sparing option",
-   "Protect painful fissures with occlusive hydrocolloid dressings or tape to aid healing and walking",
-   "Treat any confirmed secondary bacterial infection or coexisting tinea pedis identified on swab or mycology",
-   "Address coexisting atopic eczema and refer to paediatric dermatology for atypical or treatment-resistant cases",
-   "Reassure that the condition is benign and self-limiting, usually resolving around puberty, while reinforcing footwear measures"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_plantar_dermatosis-pathway",
-   "title": "juvenile plantar dermatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and plantar surfaces of the great toes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: web-space maceration or unilateral disease suggesting tinea rather than juvenile plantar dermatosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis, patch testing when footwear allergic contact dermatitis is suspected, bacterial swab if secondary infection or pitted keratolysis is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow drying"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile plantar dermatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_plantar_dermatosis-matrix",
-   "title": "juvenile plantar dermatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "paediatric dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harper's Textbook of Paediatric Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and plantar surfaces of the great toes.",
+      "The instep and the interdigital web spaces are characteristically spared, a pattern that helps distinguish it from tinea pedis and allergic contact dermatitis.",
+      "Occlusive synthetic footwear and socks with alternating sweating and rapid drying are central to the process, hence the descriptive term sweaty sock dermatitis.",
+      "It is often painful rather than itchy, with a smooth glazed cracked-porcelain appearance and painful fissures that impair walking.",
+      "There is an association with atopy, and many affected children have a personal or family history of eczema, asthma or hay fever.",
+      "Management centres on reducing occlusion and friction with breathable leather or open footwear, cotton socks, emollients and greasy barrier ointments.",
+      "Potassium hydroxide microscopy and fungal culture should be negative and are useful to exclude tinea, which typically involves the web spaces and instep.",
+      "The condition tends to settle around puberty, so reassurance about eventual spontaneous resolution is an important part of counselling."
     ],
-    [
-     "Key Investigations",
-     "potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis, patch testing when footwear allergic contact",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile plantar dermatosis is a friction and moisture-related dermatitis of the weight-bearing plantar skin, thought to arise from repeated cycles of hyperhydration and rapid dehydration within occlusive modern footwear and synthetic socks. Sweat is trapped against the skin during activity, then evaporates quickly, and this alternating wetting and drying, combined with mechanical friction on pressure-bearing surfaces, disrupts the stratum corneum barrier of the forefoot. The resulting impaired barrier produces the glazed, fissured appearance. An atopic tendency predisposes to the disorder through an inherently compromised epidermal barrier, and the condition is not primarily allergic or infective, although secondary irritant and, occasionally, contact factors may aggravate it.",
+    "additionalDifferentials": [
+      "tinea pedis with web-space and instep involvement",
+      "allergic contact dermatitis to footwear components such as rubber or chromate",
+      "atopic dermatitis of the feet",
+      "palmoplantar psoriasis",
+      "pitted keratolysis",
+      "hereditary or acquired palmoplantar keratoderma",
+      "dyshidrotic (pompholyx) eczema"
     ],
-    [
-     "Primary Differentials",
-     "tinea pedis with web-space and instep involvement, allergic contact dermatitis to footwear components such as rubber or chromate,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis",
+      "patch testing when footwear allergic contact dermatitis is suspected",
+      "bacterial swab if secondary infection or pitted keratolysis is considered",
+      "clinical assessment for atopic stigmata elsewhere on the skin",
+      "skin biopsy only in atypical or treatment-resistant cases",
+      "examination of footwear and sock materials as part of history",
+      "review for koebnerising psoriasis at other sites such as nails and scalp"
     ],
-    [
-     "Management Strategy",
-     "Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow",
-     "Core treatment modality"
+    "redFlags": [
+      "web-space maceration or unilateral disease suggesting tinea rather than juvenile plantar dermatosis",
+      "spreading vesiculation or oozing indicating secondary bacterial infection",
+      "nail pitting, onycholysis or plaques elsewhere pointing to psoriasis",
+      "onset outside the typical prepubertal age range prompting reconsideration of the diagnosis",
+      "severe painful fissuring limiting mobility and quality of life"
     ],
-    [
-     "Clinical Pitfall",
-     "misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and self-limiting, characteristically improving and resolving spontaneously around puberty. Symptoms fluctuate with footwear and activity, and consistent barrier and footwear measures usually control discomfort in the interim.",
+    "pitfalls": [
+      "misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help",
+      "overlooking the diagnostic sparing of the instep and web spaces",
+      "relying on potent topical corticosteroids alone rather than addressing footwear occlusion and friction",
+      "failing to reassure families that resolution around puberty is expected",
+      "missing coexisting atopic dermatitis or early psoriasis"
+    ],
+    "references": [
+      "Harper's Textbook of Paediatric Dermatology",
+      "Rook's Textbook of Dermatology",
+      "Neonatal and Infant Dermatology (Eichenfield, Frieden)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow drying",
+      "Apply liberal greasy emollients and barrier ointments to restore the disrupted stratum corneum barrier",
+      "Use a short course of a topical corticosteroid ointment for inflamed fissured areas, with topical calcineurin inhibitors as a steroid-sparing option",
+      "Protect painful fissures with occlusive hydrocolloid dressings or tape to aid healing and walking",
+      "Treat any confirmed secondary bacterial infection or coexisting tinea pedis identified on swab or mycology",
+      "Address coexisting atopic eczema and refer to paediatric dermatology for atypical or treatment-resistant cases",
+      "Reassure that the condition is benign and self-limiting, usually resolving around puberty, while reinforcing footwear measures"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile plantar dermatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-plantar-dermatosis-real-image",
-   "title": "juvenile plantar dermatosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "juvenile_plantar_dermatosis-pathway",
+      "title": "juvenile plantar dermatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and plantar surfaces of the great toes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: web-space maceration or unilateral disease suggesting tinea rather than juvenile plantar dermatosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis, patch testing when footwear allergic contact dermatitis is suspected, bacterial swab if secondary infection or pitted keratolysis is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow drying"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile plantar dermatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_plantar_dermatosis-matrix",
+      "title": "juvenile plantar dermatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in prepubertal children as symmetrical, shiny, glazed erythema with fissuring over the weight-bearing forefoot and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "potassium hydroxide microscopy and fungal culture of scale to exclude tinea pedis, patch testing when footwear allergic contact",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "tinea pedis with web-space and instep involvement, allergic contact dermatitis to footwear components such as rubber or chromate,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce occlusion and friction by switching to breathable leather or open footwear and cotton socks, alternating pairs to allow",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "misdiagnosing it as tinea pedis and prescribing prolonged antifungals that do not help",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile plantar dermatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harper's Textbook of Paediatric Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_plantar_dermatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Potassium hydroxide microscopy and fungal culture",
+          "cells": [
+            {
+              "text": "Tinea pedis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Footwear allergic contact dermatitis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial swab",
+          "cells": [
+            {
+              "text": "Secondary infection or pitted keratolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for atopic stigmata",
+          "cells": [
+            {
+              "text": "Atopic eczema elsewhere"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical or treatment-resistant cases only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of footwear and socks",
+          "cells": [
+            {
+              "text": "Occlusive materials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_plantar_dermatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tinea pedis",
+          "cells": [
+            {
+              "text": "Web-space and instep involvement; the instep and webs are spared here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic contact dermatitis to footwear components",
+          "cells": [
+            {
+              "text": "Positive patch test to a footwear component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palmoplantar psoriasis",
+          "cells": [
+            {
+              "text": "Nail or plaque disease elsewhere"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_plantar_dermatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear",
+          "cells": [
+            {
+              "text": "Breathable leather or open footwear and cotton socks; alternate pairs to dry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients",
+          "cells": [
+            {
+              "text": "Liberal greasy emollients and barrier ointments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid",
+          "cells": [
+            {
+              "text": "Short course for inflamed fissured areas; calcineurin inhibitor as steroid-sparing option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fissures",
+          "cells": [
+            {
+              "text": "Occlusive hydrocolloid dressings or tape to aid healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection or tinea",
+          "cells": [
+            {
+              "text": "Treat confirmed secondary infection or coexisting tinea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; usually resolves around puberty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_plantar_dermatosis-dx-mgmt",
+      "title": "Diagnosis and management of juvenile plantar dermatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shiny glazed erythema with fissuring on forefoot and great toes in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Web-space maceration, spreading vesicles, nail changes or severe fissuring?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Swab and mycology; exclude tinea, infection or psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium hydroxide and fungal culture, bacterial swab, footwear history, patch testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Forefoot pattern with instep and webs spared and no fungus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat tinea, infection, footwear allergy or psoriasis as found",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Breathable footwear and cotton socks; alternate pairs to dry",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Liberal emollients and barrier ointments",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short topical corticosteroid course; calcineurin inhibitor as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occlusive hydrocolloid dressings for fissures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassurance: resolves around puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and self-limiting; resolves around puberty with footwear changes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

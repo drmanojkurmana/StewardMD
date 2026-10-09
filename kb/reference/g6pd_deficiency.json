@@ -1,173 +1,689 @@
 {
- "id": "g6pd_deficiency",
- "name": "Glucose-6-Phosphate Dehydrogenase Deficiency",
- "aliases": [
-  "G6PD deficiency",
-  "favism",
-  "G6PD"
- ],
- "class": "non_infective",
- "system": "Haematological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous females show variable expression.",
-   "Most individuals are asymptomatic between episodes and present only with acute haemolysis triggered by oxidative stress.",
-   "Common triggers include certain infections, fava (broad) beans, and oxidant drugs such as some antimalarials, sulphonamides, and nitrofurantoin.",
-   "Acute haemolysis produces sudden pallor, jaundice, dark urine, and fatigue, typically 1-3 days after exposure to a trigger.",
-   "It is an important cause of neonatal jaundice, which can be severe and lead to kernicterus if unrecognised.",
-   "The blood film during a crisis may show bite cells, blister cells, and Heinz bodies, with a rise in reticulocytes.",
-   "Enzyme activity assay is diagnostic but can be falsely normal during an acute crisis because young reticulocytes have higher enzyme levels, so retesting after recovery is advised.",
-   "Management centres on avoiding known triggers; acute severe haemolysis may require transfusion, and neonatal jaundice is managed with phototherapy or exchange transfusion as needed."
+  "id": "g6pd_deficiency",
+  "name": "Glucose-6-Phosphate Dehydrogenase Deficiency",
+  "aliases": [
+    "G6PD deficiency",
+    "favism",
+    "G6PD"
   ],
-  "pathophysiology": "Glucose-6-phosphate dehydrogenase is the rate-limiting enzyme of the pentose phosphate pathway and generates NADPH, which maintains reduced glutathione in red cells. Deficiency impairs this antioxidant defence, so under oxidative stress haemoglobin is oxidised and denatured, precipitating as Heinz bodies within red cells. These damaged cells are removed by splenic macrophages (producing bite cells) and undergo intravascular haemolysis, resulting in episodic anaemia, jaundice, and haemoglobinuria.",
-  "additionalDifferentials": [
-   "Autoimmune haemolytic anaemia",
-   "Hereditary spherocytosis",
-   "Other red cell enzyme defects (e.g. pyruvate kinase deficiency)",
-   "Unstable haemoglobin disorders",
-   "Drug- or toxin-induced haemolysis from other causes",
-   "Neonatal jaundice of other aetiology (ABO/Rh incompatibility, sepsis)"
-  ],
-  "additionalInvestigations": [
-   "Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis)",
-   "Full blood count and reticulocyte count",
-   "Peripheral blood film for bite cells, blister cells, and Heinz body preparation",
-   "Markers of haemolysis: bilirubin, lactate dehydrogenase, haptoglobin",
-   "Urinalysis for haemoglobinuria",
-   "Direct antiglobulin (Coombs) test to help exclude immune haemolysis"
-  ],
-  "redFlags": [
-   "Rapidly falling haemoglobin with haemodynamic compromise",
-   "Massive haemolysis with haemoglobinuria and acute kidney injury",
-   "Severe neonatal hyperbilirubinaemia risking kernicterus",
-   "Marked jaundice with lethargy or poor feeding in a neonate",
-   "Ongoing exposure to an unrecognised oxidative trigger"
-  ],
-  "prognosis": "Most affected individuals lead normal lives with trigger avoidance; haemolytic episodes are usually self-limiting once the trigger is removed, though neonatal jaundice and rare severe crises can cause serious harm if not promptly managed.",
-  "pitfalls": [
-   "Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis",
-   "Failing to counsel families about drug, food, and infection triggers",
-   "Underestimating the risk of severe neonatal jaundice and kernicterus",
-   "Prescribing oxidant medications without checking G6PD status in at-risk populations"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other antimalarials, sulphonamides, dapsone and nitrofurantoin, supported by a patient-held list of agents to avoid",
-   "Prompt treatment of intercurrent infections, which are a common precipitant of acute haemolysis",
-   "Supportive care during haemolytic crises with hydration and red-cell transfusion for severe anaemia, most episodes being self-limiting once the trigger is removed",
-   "Manage neonatal jaundice with phototherapy and exchange transfusion where needed to prevent kernicterus",
-   "Screen enzyme activity before prescribing known oxidant drugs, repeating the assay after recovery if it was measured during a crisis when reticulocytosis can mask deficiency",
-   "Offer genetic counselling for this X-linked disorder, including testing of at-risk female carriers and relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "g6pd_deficiency-pathway",
-   "title": "Glucose-6-Phosphate Dehydrogenase Deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous females show variable expression.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly falling haemoglobin with haemodynamic compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis), Full blood count and reticulocyte count, Peripheral blood film for bite cells, blister cells, and Heinz body preparation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other antimalarials, sulphonamides, dapsone and nitrofurantoin, supported by a patient-held"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glucose-6-phosphate dehydrogenase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "g6pd_deficiency-matrix",
-   "title": "Glucose-6-Phosphate Dehydrogenase Deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous females show variable expression.",
+      "Most individuals are asymptomatic between episodes and present only with acute haemolysis triggered by oxidative stress.",
+      "Common triggers include certain infections, fava (broad) beans, and oxidant drugs such as some antimalarials, sulphonamides, and nitrofurantoin.",
+      "Acute haemolysis produces sudden pallor, jaundice, dark urine, and fatigue, typically 1-3 days after exposure to a trigger.",
+      "It is an important cause of neonatal jaundice, which can be severe and lead to kernicterus if unrecognised.",
+      "The blood film during a crisis may show bite cells, blister cells, and Heinz bodies, with a rise in reticulocytes.",
+      "Enzyme activity assay is diagnostic but can be falsely normal during an acute crisis because young reticulocytes have higher enzyme levels, so retesting after recovery is advised.",
+      "Management centres on avoiding known triggers; acute severe haemolysis may require transfusion, and neonatal jaundice is managed with phototherapy or exchange transfusion as needed."
     ],
-    [
-     "Key Investigations",
-     "Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis), Full blood count and reticulocyte",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glucose-6-phosphate dehydrogenase is the rate-limiting enzyme of the pentose phosphate pathway and generates NADPH, which maintains reduced glutathione in red cells. Deficiency impairs this antioxidant defence, so under oxidative stress haemoglobin is oxidised and denatured, precipitating as Heinz bodies within red cells. These damaged cells are removed by splenic macrophages (producing bite cells) and undergo intravascular haemolysis, resulting in episodic anaemia, jaundice, and haemoglobinuria.",
+    "additionalDifferentials": [
+      "Autoimmune haemolytic anaemia",
+      "Hereditary spherocytosis",
+      "Other red cell enzyme defects (e.g. pyruvate kinase deficiency)",
+      "Unstable haemoglobin disorders",
+      "Drug- or toxin-induced haemolysis from other causes",
+      "Neonatal jaundice of other aetiology (ABO/Rh incompatibility, sepsis)"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune haemolytic anaemia, Hereditary spherocytosis, Other red cell enzyme defects (e.g. pyruvate kinase deficiency)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis)",
+      "Full blood count and reticulocyte count",
+      "Peripheral blood film for bite cells, blister cells, and Heinz body preparation",
+      "Markers of haemolysis: bilirubin, lactate dehydrogenase, haptoglobin",
+      "Urinalysis for haemoglobinuria",
+      "Direct antiglobulin (Coombs) test to help exclude immune haemolysis"
     ],
-    [
-     "Management Strategy",
-     "Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly falling haemoglobin with haemodynamic compromise",
+      "Massive haemolysis with haemoglobinuria and acute kidney injury",
+      "Severe neonatal hyperbilirubinaemia risking kernicterus",
+      "Marked jaundice with lethargy or poor feeding in a neonate",
+      "Ongoing exposure to an unrecognised oxidative trigger"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most affected individuals lead normal lives with trigger avoidance; haemolytic episodes are usually self-limiting once the trigger is removed, though neonatal jaundice and rare severe crises can cause serious harm if not promptly managed.",
+    "pitfalls": [
+      "Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis",
+      "Failing to counsel families about drug, food, and infection triggers",
+      "Underestimating the risk of severe neonatal jaundice and kernicterus",
+      "Prescribing oxidant medications without checking G6PD status in at-risk populations"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other antimalarials, sulphonamides, dapsone and nitrofurantoin, supported by a patient-held list of agents to avoid",
+      "Prompt treatment of intercurrent infections, which are a common precipitant of acute haemolysis",
+      "Supportive care during haemolytic crises with hydration and red-cell transfusion for severe anaemia, most episodes being self-limiting once the trigger is removed",
+      "Manage neonatal jaundice with phototherapy and exchange transfusion where needed to prevent kernicterus",
+      "Screen enzyme activity before prescribing known oxidant drugs, repeating the assay after recovery if it was measured during a crisis when reticulocytosis can mask deficiency",
+      "Offer genetic counselling for this X-linked disorder, including testing of at-risk female carriers and relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for glucose-6-phosphate dehydrogenase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "g6pd-deficiency-real-image",
-   "title": "Glucose-6-Phosphate Dehydrogenase Deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "g6pd_deficiency-pathway",
+      "title": "Glucose-6-Phosphate Dehydrogenase Deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous females show variable expression.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly falling haemoglobin with haemodynamic compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis), Full blood count and reticulocyte count, Peripheral blood film for bite cells, blister cells, and Heinz body preparation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other antimalarials, sulphonamides, dapsone and nitrofurantoin, supported by a patient-held"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glucose-6-phosphate dehydrogenase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "g6pd_deficiency-matrix",
+      "title": "Glucose-6-Phosphate Dehydrogenase Deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common human enzyme defect, inherited in an X-linked pattern so that males are predominantly affected while heterozygous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative G6PD enzyme activity assay (repeat after recovery if measured during crisis), Full blood count and reticulocyte",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune haemolytic anaemia, Hereditary spherocytosis, Other red cell enzyme defects (e.g. pyruvate kinase deficiency)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cornerstone is strict avoidance of oxidant triggers, including fava (broad) beans and oxidant drugs such as primaquine and other",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a normal enzyme level during acute haemolysis as excluding the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glucose-6-phosphate dehydrogenase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 106-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "g6pd_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative G6PD enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity; repeat after recovery if measured in crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocyte response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Bite cells, blister cells and Heinz body preparation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Bilirubin, lactate dehydrogenase and haptoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Haemoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin (Coombs) test",
+          "cells": [
+            {
+              "text": "Helps exclude immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Excluded by direct antiglobulin (Coombs) test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal jaundice of other cause",
+          "cells": [
+            {
+              "text": "ABO or Rh incompatibility, or sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict avoidance of oxidant triggers",
+          "cells": [
+            {
+              "text": "Fava (broad) beans and oxidant drugs such as primaquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of intercurrent infections",
+          "cells": [
+            {
+              "text": "Common precipitants of acute haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care in crisis",
+          "cells": [
+            {
+              "text": "Hydration; red-cell transfusion for severe anaemia; most episodes are self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal jaundice management",
+          "cells": [
+            {
+              "text": "Phototherapy and exchange transfusion where needed, to prevent kernicterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen before oxidant drugs",
+          "cells": [
+            {
+              "text": "Check enzyme activity before prescribing; repeat after recovery if measured in a crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; testing of at-risk female carriers and relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-ddx-2",
+      "kind": "ddx",
+      "title": "Hemolysis risk of drugs in G6PD deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "Definite risk",
+        "Possible risk",
+        "Doubtful risk"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimalarials",
+          "cells": [
+            {
+              "text": "primaquine; dapsone/chlorproguanil (asterisk printed, no footnote shown)"
+            },
+            {
+              "text": "chloroquine"
+            },
+            {
+              "text": "quinine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulphonamides and sulphones",
+          "cells": [
+            {
+              "text": "sulfamethoxazole; others; dapsone"
+            },
+            {
+              "text": "sulfasalazine; sulfadimidine"
+            },
+            {
+              "text": "sulfisoxazole; sulfadiazine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibacterials and antibiotics",
+          "cells": [
+            {
+              "text": "cotrimoxazole; nalidixic acid; nitrofurantoin; niridazole"
+            },
+            {
+              "text": "ciprofloxacin; norfloxacin"
+            },
+            {
+              "text": "chloramphenicol; p-aminosalicylic acid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antipyretics and analgesics",
+          "cells": [
+            {
+              "text": "acetanilide; phenazopyridine"
+            },
+            {
+              "text": "acetylsalicylic acid at high dose (above 3 g/day)"
+            },
+            {
+              "text": "acetylsalicylic acid (below 3 g/day); acetaminophen; phenacetin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other",
+          "cells": [
+            {
+              "text": "naphthalene; methylene blue"
+            },
+            {
+              "text": "vitamin K analogues; ascorbic acid above 1 g; rasburicase"
+            },
+            {
+              "text": "doxorubicin; probenecid"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "g6pd_deficiency-ddx-3",
+      "kind": "ddx",
+      "title": "Predominantly intravascular hemolysis situations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Onset/time course",
+        "Main mechanism",
+        "Appropriate diagnostic procedure",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Mismatched blood transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Nearly always ABO incompatibility"
+            },
+            {
+              "text": "Repeat cross-match"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal hemoglobinuria (PNH)",
+          "cells": [
+            {
+              "text": "Chronic with acute exacerbations"
+            },
+            {
+              "text": "Complement-mediated destruction of CD59-negative red cells"
+            },
+            {
+              "text": "Flow cytometry to display a CD59-negative red cell population"
+            },
+            {
+              "text": "Exacerbations due to complement activation through any pathway"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal cold hemoglobinuria (PCH)",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Immune lysis of normal red cells"
+            },
+            {
+              "text": "Test for Donath-Landsteiner antibody"
+            },
+            {
+              "text": "Often triggered by viral infection"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Septicemia",
+          "cells": [
+            {
+              "text": "Very acute"
+            },
+            {
+              "text": "Exotoxins produced by Clostridium perfringens"
+            },
+            {
+              "text": "Blood cultures"
+            },
+            {
+              "text": "Other organisms may be responsible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Microangiopathic",
+          "cells": [
+            {
+              "text": "Acute or chronic"
+            },
+            {
+              "text": "Red cell fragmentation"
+            },
+            {
+              "text": "Red cell morphology on blood smear"
+            },
+            {
+              "text": "Causes range from endothelial damage to hemangioma to leaky prosthetic heart valve"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "March hemoglobinuria",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Mechanical destruction"
+            },
+            {
+              "text": "Targeted history taking"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Favism",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Destruction of the older fraction of G6PD-deficient red cells"
+            },
+            {
+              "text": "G6PD assay"
+            },
+            {
+              "text": "Triggered by a large dish of fava beans, but infection or a drug can be the trigger instead"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "g6pd_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Glucose-6-Phosphate Dehydrogenase Deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected G6PD deficiency: haemolysis after an oxidant trigger or neonatal jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling haemoglobin, haemoglobinuria with AKI, severe jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent phototherapy and exchange transfusion for risk of kernicterus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "G6PD enzyme assay, blood film, haemolysis markers and direct antiglobulin test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does G6PD activity confirm deficiency, with immune haemolysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider autoimmune haemolysis, spherocytosis or other red cell enzyme defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance of oxidant triggers such as fava beans and oxidant drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt treatment of intercurrent infections, a common precipitant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care in crisis: hydration and transfusion for severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for this X-linked disorder, including carrier testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most lead normal lives with trigger avoidance; haemolysis is usually self-limiting",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

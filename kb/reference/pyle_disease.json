@@ -1,176 +1,425 @@
 {
- "id": "pyle_disease",
- "name": "Pyle disease (metaphyseal dysplasia, SFRP4)",
- "aliases": [
-  "Pyle metaphyseal dysplasia",
-  "familial metaphyseal dysplasia",
-  "SFRP4",
-  "Erlenmeyer flask deformity dysplasia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity, most obvious at the distal femur",
-   "In contrast to craniometaphyseal dysplasia, the skull and facial bones are relatively spared, and cranial-nerve compression is not a prominent feature",
-   "Caused by autosomal recessive loss-of-function variants in SFRP4, a secreted WNT antagonist important for bone modelling",
-   "The widened metaphyses have thin cortices, so bone can be fragile and fractures may occur despite the expanded appearance",
-   "Clinical features are often mild and may include genu valgum, mild limb deformity and joint discomfort, with many individuals otherwise well",
-   "Dental problems and mild vertebral changes can occur, but intelligence and life expectancy are typically normal",
-   "Management is orthopaedic and supportive, addressing limb deformity and fractures, since the disorder is comparatively benign"
+  "id": "pyle_disease",
+  "name": "Pyle disease (metaphyseal dysplasia, SFRP4)",
+  "aliases": [
+    "Pyle metaphyseal dysplasia",
+    "familial metaphyseal dysplasia",
+    "SFRP4",
+    "Erlenmeyer flask deformity dysplasia"
   ],
-  "pathophysiology": "Pyle disease results from biallelic loss-of-function variants in SFRP4, which encodes a secreted frizzled-related protein that normally antagonises WNT signalling and helps regulate the modelling of bone during growth. Loss of this antagonist disturbs the coordinated resorption and shaping that narrows the metaphysis into the diaphysis, so the metaphyses remain broad and undermodelled, giving the Erlenmeyer-flask appearance. The expanded metaphyseal bone has thinned cortices, accounting for a degree of fragility despite the bulky radiographic appearance. Because the skull is relatively spared compared with the craniotubular dysplasias, the disorder lacks the severe cranial-nerve and craniofacial complications seen in those conditions.",
-  "additionalDifferentials": [
-   "Craniometaphyseal dysplasia",
-   "Frontometaphyseal dysplasia",
-   "Osteopetrosis (which can also cause an Erlenmeyer-flask deformity)",
-   "Gaucher disease with metaphyseal remodelling failure",
-   "Multiple hereditary exostoses",
-   "Dysosteosclerosis"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees",
-   "Skeletal survey to assess the extent of metaphyseal undermodelling and cortical thinning",
-   "Skull imaging to confirm relative sparing and distinguish from craniometaphyseal dysplasia",
-   "Assessment of limb alignment for genu valgum and deformity",
-   "SFRP4 molecular genetic testing to confirm the diagnosis",
-   "Dental evaluation where dental anomalies are present"
-  ],
-  "redFlags": [
-   "Fractures through thinned metaphyseal cortices despite the expanded bone",
-   "Progressive limb deformity impairing function and requiring orthopaedic correction",
-   "Atypical skull involvement or cranial-nerve symptoms prompting reconsideration towards craniometaphyseal dysplasia",
-   "Features suggesting an alternative marrow-storage or sclerosing disorder"
-  ],
-  "prognosis": "The prognosis is generally good, with normal intelligence and life expectancy; morbidity relates mainly to limb deformity and occasional fractures rather than the neurological complications of the craniotubular dysplasias.",
-  "pitfalls": [
-   "Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression",
-   "Assuming the bulky metaphyses are strong when the thin cortices predispose to fracture",
-   "Attributing an Erlenmeyer-flask deformity solely to Pyle disease without considering osteopetrosis or Gaucher disease",
-   "Overlooking the autosomal recessive inheritance when counselling families"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: SFRP4-related Pyle disease"
-  ],
-  "crossLinks": [
-   "frontometaphyseal_dysplasia"
-  ],
-  "management": [
-   "No disease-specific treatment exists; care is supportive because most individuals are only mildly affected",
-   "Refer for orthopaedic correction of genu valgum and limb deformity, with corrective osteotomy where alignment is significantly disturbed",
-   "Manage fractures with awareness that the expanded metaphyses have thin, fragile cortices",
-   "Provide simple analgesia and physiotherapy for joint discomfort",
-   "Arrange dental evaluation where dental anomalies are present",
-   "Monitor limb alignment and growth periodically during childhood",
-   "Offer genetic counselling for this autosomal recessive SFRP4 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pyle_disease-pathway",
-   "title": "Pyle disease (metaphyseal dysplasia, SFRP4): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity, most obvious at the distal femur",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fractures through thinned metaphyseal cortices despite the expanded bone",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees, Skeletal survey to assess the extent of metaphyseal undermodelling and cortical thinning, Skull imaging to confirm relative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific treatment exists; care is supportive because most individuals are only mildly affected"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyle disease (metaphyseal dysplasia, sfrp4)."
-  }
- ],
- "tables": [
-  {
-   "id": "pyle_disease-matrix",
-   "title": "Pyle disease (metaphyseal dysplasia, SFRP4): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity, most obvious at the distal femur",
+      "In contrast to craniometaphyseal dysplasia, the skull and facial bones are relatively spared, and cranial-nerve compression is not a prominent feature",
+      "Caused by autosomal recessive loss-of-function variants in SFRP4, a secreted WNT antagonist important for bone modelling",
+      "The widened metaphyses have thin cortices, so bone can be fragile and fractures may occur despite the expanded appearance",
+      "Clinical features are often mild and may include genu valgum, mild limb deformity and joint discomfort, with many individuals otherwise well",
+      "Dental problems and mild vertebral changes can occur, but intelligence and life expectancy are typically normal",
+      "Management is orthopaedic and supportive, addressing limb deformity and fractures, since the disorder is comparatively benign"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees, Skeletal survey to assess the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyle disease results from biallelic loss-of-function variants in SFRP4, which encodes a secreted frizzled-related protein that normally antagonises WNT signalling and helps regulate the modelling of bone during growth. Loss of this antagonist disturbs the coordinated resorption and shaping that narrows the metaphysis into the diaphysis, so the metaphyses remain broad and undermodelled, giving the Erlenmeyer-flask appearance. The expanded metaphyseal bone has thinned cortices, accounting for a degree of fragility despite the bulky radiographic appearance. Because the skull is relatively spared compared with the craniotubular dysplasias, the disorder lacks the severe cranial-nerve and craniofacial complications seen in those conditions.",
+    "additionalDifferentials": [
+      "Craniometaphyseal dysplasia",
+      "Frontometaphyseal dysplasia",
+      "Osteopetrosis (which can also cause an Erlenmeyer-flask deformity)",
+      "Gaucher disease with metaphyseal remodelling failure",
+      "Multiple hereditary exostoses",
+      "Dysosteosclerosis"
     ],
-    [
-     "Primary Differentials",
-     "Craniometaphyseal dysplasia, Frontometaphyseal dysplasia, Osteopetrosis (which can also cause an Erlenmeyer-flask deformity)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees",
+      "Skeletal survey to assess the extent of metaphyseal undermodelling and cortical thinning",
+      "Skull imaging to confirm relative sparing and distinguish from craniometaphyseal dysplasia",
+      "Assessment of limb alignment for genu valgum and deformity",
+      "SFRP4 molecular genetic testing to confirm the diagnosis",
+      "Dental evaluation where dental anomalies are present"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific treatment exists; care is supportive because most individuals are only mildly affected",
-     "Core treatment modality"
+    "redFlags": [
+      "Fractures through thinned metaphyseal cortices despite the expanded bone",
+      "Progressive limb deformity impairing function and requiring orthopaedic correction",
+      "Atypical skull involvement or cranial-nerve symptoms prompting reconsideration towards craniometaphyseal dysplasia",
+      "Features suggesting an alternative marrow-storage or sclerosing disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally good, with normal intelligence and life expectancy; morbidity relates mainly to limb deformity and occasional fractures rather than the neurological complications of the craniotubular dysplasias.",
+    "pitfalls": [
+      "Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression",
+      "Assuming the bulky metaphyses are strong when the thin cortices predispose to fracture",
+      "Attributing an Erlenmeyer-flask deformity solely to Pyle disease without considering osteopetrosis or Gaucher disease",
+      "Overlooking the autosomal recessive inheritance when counselling families"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: SFRP4-related Pyle disease"
+    ],
+    "crossLinks": [
+      "frontometaphyseal_dysplasia"
+    ],
+    "management": [
+      "No disease-specific treatment exists; care is supportive because most individuals are only mildly affected",
+      "Refer for orthopaedic correction of genu valgum and limb deformity, with corrective osteotomy where alignment is significantly disturbed",
+      "Manage fractures with awareness that the expanded metaphyses have thin, fragile cortices",
+      "Provide simple analgesia and physiotherapy for joint discomfort",
+      "Arrange dental evaluation where dental anomalies are present",
+      "Monitor limb alignment and growth periodically during childhood",
+      "Offer genetic counselling for this autosomal recessive SFRP4 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyle disease (metaphyseal dysplasia, sfrp4)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyle-disease-real-image",
-   "title": "Pyle disease (metaphyseal dysplasia, SFRP4): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pyle_disease-pathway",
+      "title": "Pyle disease (metaphyseal dysplasia, SFRP4): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity, most obvious at the distal femur",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fractures through thinned metaphyseal cortices despite the expanded bone",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees, Skeletal survey to assess the extent of metaphyseal undermodelling and cortical thinning, Skull imaging to confirm relative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific treatment exists; care is supportive because most individuals are only mildly affected"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyle disease (metaphyseal dysplasia, sfrp4)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyle_disease-matrix",
+      "title": "Pyle disease (metaphyseal dysplasia, SFRP4): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Radiographic hallmark is marked flaring and undermodelling of the metaphyses, producing the classic Erlenmeyer-flask deformity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs demonstrating the Erlenmeyer-flask metaphyseal flaring, especially at the knees, Skeletal survey to assess the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Craniometaphyseal dysplasia, Frontometaphyseal dysplasia, Osteopetrosis (which can also cause an Erlenmeyer-flask deformity)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific treatment exists; care is supportive because most individuals are only mildly affected",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Pyle disease with craniometaphyseal dysplasia, which has prominent skull involvement and cranial-nerve compression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyle disease (metaphyseal dysplasia, sfrp4)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyle_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Erlenmeyer-flask metaphyseal flaring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Metaphyseal undermodelling and cortical thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Relative sparing of the skull"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb alignment assessment",
+          "cells": [
+            {
+              "text": "Genu valgum and deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyle_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniometaphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Skull involvement"
+            },
+            {
+              "text": "Skull imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis",
+          "cells": [
+            {
+              "text": "Sclerosis and marrow failure"
+            },
+            {
+              "text": "Full blood count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyle_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic correction",
+          "cells": [
+            {
+              "text": "Genu valgum and limb deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractures",
+          "cells": [
+            {
+              "text": "Careful management of fractures through thin cortices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyle_disease-dx-mgmt",
+      "title": "Diagnosis and management of Pyle disease (metaphyseal dysplasia, SFRP4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Pyle disease: metaphyseal flaring with genu valgum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fractures through thin cortices, progressive deformity, or atypical skull involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orthopaedic review for fracture or progressive deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; skeletal survey; skull imaging; limb alignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is metaphyseal flaring with skull sparing confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider craniometaphyseal or frontometaphyseal dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic correction of genu valgum",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful management of fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Simple analgesia and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term orthopaedic follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

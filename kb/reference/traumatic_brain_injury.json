@@ -1,174 +1,472 @@
 {
- "id": "traumatic_brain_injury",
- "name": "Traumatic brain injury",
- "aliases": [
-  "TBI",
-  "head injury",
-  "traumatic head injury"
- ],
- "class": "non_infective",
- "system": "Emergency / Trauma / Critical care",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
-   "The overriding aim is to prevent secondary brain injury by avoiding hypoxia and hypotension, which independently worsen outcome",
-   "Maintain adequate oxygenation and cerebral perfusion pressure while controlling intracranial pressure",
-   "Unequal or fixed dilated pupils, deteriorating consciousness, and a lateralising motor deficit suggest an expanding mass lesion and impending herniation",
-   "Cushing's response (hypertension with bradycardia) is a late and ominous sign of dangerously raised intracranial pressure",
-   "Early CT imaging identifies surgically evacuable lesions such as extradural and subdural haematomas",
-   "Head-injured patients frequently have concomitant injuries, and hypotension should prompt a search for extracranial bleeding rather than being attributed to the brain injury alone",
-   "Basic measures to lower intracranial pressure include head-of-bed elevation, avoiding venous obstruction, and preventing fever, seizures, and hypercarbia"
+  "id": "traumatic_brain_injury",
+  "name": "Traumatic brain injury",
+  "aliases": [
+    "TBI",
+    "head injury",
+    "traumatic head injury"
   ],
-  "pathophysiology": "The primary injury is the mechanical damage sustained at impact, which cannot be reversed. Secondary injury develops over hours to days from hypoxia, hypotension, oedema, haematoma expansion, seizures, and disturbed autoregulation. Because the skull is a fixed compartment, expanding blood or oedema raises intracranial pressure; once compensatory mechanisms are exhausted, small volume increases cause steep pressure rises. Rising intracranial pressure reduces cerebral perfusion pressure and drives ischaemia, and pressure gradients can force brain tissue across dural folds or the foramen magnum, producing herniation and brainstem compression.",
-  "additionalDifferentials": [
-   "Ischaemic or haemorrhagic stroke presenting with a fall or collapse",
-   "Hypoglycaemia or other metabolic causes of reduced consciousness",
-   "Intoxication or drug overdose",
-   "Post-ictal state after seizure",
-   "Non-traumatic intracranial haemorrhage (e.g. aneurysmal subarachnoid haemorrhage)"
-  ],
-  "additionalInvestigations": [
-   "Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture",
-   "Cervical spine imaging given the frequent association of head and neck injury",
-   "Blood glucose and coagulation studies, including reversal assessment for anticoagulated patients",
-   "Invasive intracranial pressure monitoring in selected severe cases",
-   "Repeat imaging if neurological status deteriorates or bleeding may progress"
-  ],
-  "redFlags": [
-   "Falling GCS or a drop of two or more points indicating deterioration",
-   "Unequal, dilated, or unreactive pupil suggesting uncal herniation from a mass lesion needing urgent decompression",
-   "Cushing's response (hypertension with bradycardia) signalling critically raised intracranial pressure",
-   "New focal neurological deficit or seizures",
-   "Hypoxia or hypotension, which must be corrected immediately to limit secondary injury"
-  ],
-  "prognosis": "Outcome ranges from full recovery in mild injury to death or severe disability in severe injury. Prevention of secondary insults, timely evacuation of surgical lesions, and control of intracranial pressure improve results, whereas sustained raised pressure and low cerebral perfusion predict poor recovery.",
-  "pitfalls": [
-   "Attributing hypotension to the brain injury and overlooking extracranial haemorrhage",
-   "Allowing hypoxia, hypercarbia, or hypotension that aggravate secondary injury",
-   "Missing an expanding haematoma by not repeating imaging after clinical deterioration",
-   "Over-sedating so that neurological reassessment becomes impossible",
-   "Failing to reverse anticoagulation promptly in a bleeding head injury"
-  ],
-  "references": [
-   "ATLS (Advanced Trauma Life Support)",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension",
-   "Optimise cerebral perfusion pressure and control raised intracranial pressure with head-of-bed elevation, sedation and analgesia, and osmotherapy using hypertonic saline or mannitol",
-   "Obtain urgent non-contrast CT head and refer for neurosurgical evacuation of surgically accessible lesions such as extradural and subdural haematomas",
-   "Reverse anticoagulation, correct coagulopathy and give antiseizure prophylaxis to reduce early post-traumatic seizures",
-   "Institute invasive intracranial pressure monitoring in selected severe injuries and manage within a neurocritical care and trauma team",
-   "Repeat imaging and reassess if the Glasgow Coma Scale deteriorates or bleeding may progress, watching for pupillary change and the Cushing response",
-   "Arrange multidisciplinary neurorehabilitation for surviving patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "traumatic_brain_injury-pathway",
-   "title": "Traumatic brain injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Falling GCS or a drop of two or more points indicating deterioration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture, Cervical spine imaging given the frequent association of head and neck injury, Blood glucose and coagulation studies, including reversal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing hypotension to the brain injury and overlooking extracranial haemorrhage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of traumatic brain injury."
-  }
- ],
- "tables": [
-  {
-   "id": "traumatic_brain_injury-matrix",
-   "title": "Traumatic brain injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Emergency / Trauma / Critical care",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
+      "The overriding aim is to prevent secondary brain injury by avoiding hypoxia and hypotension, which independently worsen outcome",
+      "Maintain adequate oxygenation and cerebral perfusion pressure while controlling intracranial pressure",
+      "Unequal or fixed dilated pupils, deteriorating consciousness, and a lateralising motor deficit suggest an expanding mass lesion and impending herniation",
+      "Cushing's response (hypertension with bradycardia) is a late and ominous sign of dangerously raised intracranial pressure",
+      "Early CT imaging identifies surgically evacuable lesions such as extradural and subdural haematomas",
+      "Head-injured patients frequently have concomitant injuries, and hypotension should prompt a search for extracranial bleeding rather than being attributed to the brain injury alone",
+      "Basic measures to lower intracranial pressure include head-of-bed elevation, avoiding venous obstruction, and preventing fever, seizures, and hypercarbia"
     ],
-    [
-     "Key Investigations",
-     "Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture, Cervical spine imaging given the frequent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The primary injury is the mechanical damage sustained at impact, which cannot be reversed. Secondary injury develops over hours to days from hypoxia, hypotension, oedema, haematoma expansion, seizures, and disturbed autoregulation. Because the skull is a fixed compartment, expanding blood or oedema raises intracranial pressure; once compensatory mechanisms are exhausted, small volume increases cause steep pressure rises. Rising intracranial pressure reduces cerebral perfusion pressure and drives ischaemia, and pressure gradients can force brain tissue across dural folds or the foramen magnum, producing herniation and brainstem compression.",
+    "additionalDifferentials": [
+      "Ischaemic or haemorrhagic stroke presenting with a fall or collapse",
+      "Hypoglycaemia or other metabolic causes of reduced consciousness",
+      "Intoxication or drug overdose",
+      "Post-ictal state after seizure",
+      "Non-traumatic intracranial haemorrhage (e.g. aneurysmal subarachnoid haemorrhage)"
     ],
-    [
-     "Primary Differentials",
-     "Ischaemic or haemorrhagic stroke presenting with a fall or collapse, Hypoglycaemia or other metabolic causes of reduced",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture",
+      "Cervical spine imaging given the frequent association of head and neck injury",
+      "Blood glucose and coagulation studies, including reversal assessment for anticoagulated patients",
+      "Invasive intracranial pressure monitoring in selected severe cases",
+      "Repeat imaging if neurological status deteriorates or bleeding may progress"
     ],
-    [
-     "Management Strategy",
-     "Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension",
-     "Core treatment modality"
+    "redFlags": [
+      "Falling GCS or a drop of two or more points indicating deterioration",
+      "Unequal, dilated, or unreactive pupil suggesting uncal herniation from a mass lesion needing urgent decompression",
+      "Cushing's response (hypertension with bradycardia) signalling critically raised intracranial pressure",
+      "New focal neurological deficit or seizures",
+      "Hypoxia or hypotension, which must be corrected immediately to limit secondary injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing hypotension to the brain injury and overlooking extracranial haemorrhage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome ranges from full recovery in mild injury to death or severe disability in severe injury. Prevention of secondary insults, timely evacuation of surgical lesions, and control of intracranial pressure improve results, whereas sustained raised pressure and low cerebral perfusion predict poor recovery.",
+    "pitfalls": [
+      "Attributing hypotension to the brain injury and overlooking extracranial haemorrhage",
+      "Allowing hypoxia, hypercarbia, or hypotension that aggravate secondary injury",
+      "Missing an expanding haematoma by not repeating imaging after clinical deterioration",
+      "Over-sedating so that neurological reassessment becomes impossible",
+      "Failing to reverse anticoagulation promptly in a bleeding head injury"
+    ],
+    "references": [
+      "ATLS (Advanced Trauma Life Support)",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension",
+      "Optimise cerebral perfusion pressure and control raised intracranial pressure with head-of-bed elevation, sedation and analgesia, and osmotherapy using hypertonic saline or mannitol",
+      "Obtain urgent non-contrast CT head and refer for neurosurgical evacuation of surgically accessible lesions such as extradural and subdural haematomas",
+      "Reverse anticoagulation, correct coagulopathy and give antiseizure prophylaxis to reduce early post-traumatic seizures",
+      "Institute invasive intracranial pressure monitoring in selected severe injuries and manage within a neurocritical care and trauma team",
+      "Repeat imaging and reassess if the Glasgow Coma Scale deteriorates or bleeding may progress, watching for pupillary change and the Cushing response",
+      "Arrange multidisciplinary neurorehabilitation for surviving patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for traumatic brain injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "traumatic-brain-injury-real-image",
-   "title": "Traumatic brain injury: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "traumatic_brain_injury-pathway",
+      "title": "Traumatic brain injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Falling GCS or a drop of two or more points indicating deterioration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture, Cervical spine imaging given the frequent association of head and neck injury, Blood glucose and coagulation studies, including reversal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing hypotension to the brain injury and overlooking extracranial haemorrhage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of traumatic brain injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "traumatic_brain_injury-matrix",
+      "title": "Traumatic brain injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Severity is graded with the Glasgow Coma Scale, and a trend in the score matters more than any single reading",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Non-contrast CT head to detect haemorrhage, contusion, oedema, and skull fracture, Cervical spine imaging given the frequent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ischaemic or haemorrhagic stroke presenting with a fall or collapse, Hypoglycaemia or other metabolic causes of reduced",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent secondary brain injury by maintaining oxygenation and blood pressure, avoiding hypoxia and hypotension",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing hypotension to the brain injury and overlooking extracranial haemorrhage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for traumatic brain injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "traumatic_brain_injury-dx-mgmt",
+      "title": "Diagnosis and management of Traumatic brain injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected traumatic brain injury: head injury with altered consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: falling GCS, unequal pupils, Cushing response, or new seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent CT head, airway and blood pressure control, and neurosurgical referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glasgow Coma Scale trend; CT head; cervical spine imaging; coagulation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT show an evacuable haematoma or intracranial injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metabolic cause, stroke or subarachnoid haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maintain oxygenation and blood pressure to prevent secondary injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control intracranial pressure with head elevation, sedation and osmotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurosurgical evacuation of surgically accessible haematomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reverse anticoagulation and give antiseizure prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat imaging and monitor for deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Ranges from full recovery to death; secondary insults and raised pressure drive outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "traumatic_brain_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Haemorrhage, contusion, oedema and skull fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "Associated neck injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, coagulation and anticoagulant reversal review",
+          "cells": [
+            {
+              "text": "Metabolic and bleeding factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive intracranial pressure monitoring",
+          "cells": [
+            {
+              "text": "Selected severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat imaging",
+          "cells": [
+            {
+              "text": "Deterioration or progressive bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traumatic_brain_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-traumatic intracranial haemorrhage such as subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Collapse without a clear head injury; CT angiography identifies an aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or other metabolic causes",
+          "cells": [
+            {
+              "text": "Reduced consciousness with low glucose; glucose check separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or haemorrhagic stroke with a fall",
+          "cells": [
+            {
+              "text": "Focal neurological deficit and CT findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traumatic_brain_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent secondary injury",
+          "cells": [
+            {
+              "text": "Maintain oxygenation and blood pressure; avoid hypoxia and hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control intracranial pressure",
+          "cells": [
+            {
+              "text": "Head-of-bed elevation, sedation, analgesia and hypertonic saline or mannitol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical evacuation",
+          "cells": [
+            {
+              "text": "Surgically accessible extradural or subdural haematomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulant reversal and antiseizure prophylaxis",
+          "cells": [
+            {
+              "text": "Coagulopathy corrected; early post-traumatic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive pressure monitoring",
+          "cells": [
+            {
+              "text": "Selected severe injuries in neurocritical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat imaging",
+          "cells": [
+            {
+              "text": "Falling Glasgow Coma Scale, pupillary change or Cushing response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Survivors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

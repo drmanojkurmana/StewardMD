@@ -1,180 +1,467 @@
 {
- "id": "congenital_generalized_lipodystrophy",
- "name": "Congenital generalised lipodystrophy (Berardinelli-Seip)",
- "aliases": [
-  "Berardinelli-Seip congenital lipodystrophy",
-  "BSCL",
-  "CGL",
-  "AGPAT2",
-  "BSCL2 (seipin)",
-  "CAV1",
-  "PTRF/CAVIN1"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a strikingly muscular, prominent-veined appearance",
-   "Commonest subtypes arise from AGPAT2 (triglyceride synthesis) and BSCL2/seipin (adipocyte differentiation) mutations, with CAV1 and PTRF/CAVIN1 causing rarer variants",
-   "Very low circulating leptin drives voracious appetite, and fat that cannot be stored subcutaneously accumulates ectopically in liver and muscle",
-   "Severe insulin resistance with acanthosis nigricans, marked hypertriglyceridaemia, hepatic steatosis with hepatomegaly, and early-onset diabetes are characteristic",
-   "Acromegaloid features, prominent musculature, umbilical prominence, and in some subtypes hypertrophic cardiomyopathy or intellectual impairment (BSCL2) may occur",
-   "Leptin (metreleptin) replacement is a cornerstone therapy in leptin-deficient generalised lipodystrophy, improving glycaemia, triglycerides, and hepatic fat",
-   "Recurrent pancreatitis from extreme hypertriglyceridaemia is a major avoidable complication",
-   "Diagnosis integrates the generalised fat-loss pattern, very low leptin, the metabolic panel, and confirmatory genetic testing"
+  "id": "congenital_generalized_lipodystrophy",
+  "name": "Congenital generalised lipodystrophy (Berardinelli-Seip)",
+  "aliases": [
+    "Berardinelli-Seip congenital lipodystrophy",
+    "BSCL",
+    "CGL",
+    "AGPAT2",
+    "BSCL2 (seipin)",
+    "CAV1",
+    "PTRF/CAVIN1"
   ],
-  "pathophysiology": "Congenital generalised lipodystrophy is an inherited near-total failure to develop or maintain functional adipose tissue, caused by biallelic mutations in genes governing triglyceride synthesis (AGPAT2), lipid-droplet/adipocyte formation (BSCL2/seipin), or caveolar structure (CAV1, PTRF/CAVIN1). Without a normal fat depot, dietary and endogenous lipid cannot be stored subcutaneously and is deposited ectopically in liver, skeletal muscle, and other organs, driving profound insulin resistance. The tiny fat mass secretes very little leptin, removing satiety signalling and provoking hyperphagia that worsens the lipid overload. The resulting phenotype combines hypertriglyceridaemia, hepatic steatosis, acanthosis nigricans, and early insulin-resistant diabetes.",
-  "additionalDifferentials": [
-   "Acquired generalised lipodystrophy (Lawrence syndrome)",
-   "Familial partial lipodystrophy presenting in childhood",
-   "Severe malnutrition or cachexia",
-   "Leprechaunism/Donohue syndrome and other extreme INSR defects",
-   "Neonatal progeroid (Wiedemann-Rautenstrauch) syndrome",
-   "Mandibuloacral dysplasia with generalised fat loss",
-   "Poorly controlled type 1 diabetes with marked wasting"
-  ],
-  "additionalInvestigations": [
-   "Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance",
-   "Fasting lipid profile focusing on triglycerides, and glucose/HbA1c for diabetes",
-   "Liver function tests and hepatic imaging to assess steatosis and hepatomegaly",
-   "Whole-body or regional fat imaging (MRI/DEXA) to map the near-total fat deficit",
-   "Targeted genetic testing of AGPAT2, BSCL2, CAV1, and PTRF/CAVIN1",
-   "Echocardiography where a cardiomyopathy-associated subtype is suspected"
-  ],
-  "redFlags": [
-   "Acute pancreatitis from extreme hypertriglyceridaemia",
-   "Rapidly progressive fatty liver toward steatohepatitis and cirrhosis",
-   "Hypertrophic cardiomyopathy with arrhythmia in susceptible subtypes",
-   "Uncontrolled insulin-resistant diabetes with severe hyperglycaemia"
-  ],
-  "prognosis": "Prognosis depends on metabolic control; leptin (metreleptin) replacement and aggressive management of triglycerides and glucose substantially improve outcomes, but untreated disease carries risks of pancreatitis, progressive liver disease, and cardiac complications.",
-  "pitfalls": [
-   "Attributing the muscular, veiny habitus to athleticism and missing the diagnosis",
-   "Overlooking very low leptin as the key discriminating biochemical clue",
-   "Underestimating pancreatitis risk when triglycerides are extremely high",
-   "Assuming standard insulin regimens will control the diabetes despite severe resistance",
-   "Failing to arrange genetic confirmation and family counselling"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on lipodystrophy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy, improving glycaemia, hypertriglyceridaemia, hepatic steatosis and hyperphagia",
-   "Treat the severe insulin-resistant diabetes with high-dose insulin regimens and insulin sensitisers such as metformin",
-   "Aggressively lower triglycerides with fibrates and omega-3 fatty acids to reduce the risk of pancreatitis",
-   "Institute a controlled, low-fat balanced diet with dietitian input to limit ectopic lipid accumulation",
-   "Monitor and manage hepatic steatosis and steatohepatitis, and screen for hypertrophic cardiomyopathy and other organ complications with echocardiography where indicated",
-   "Manage acute severe hypertriglyceridaemic pancreatitis promptly and consider apheresis for extreme hypertriglyceridaemia",
-   "Offer genetic counselling and family testing for autosomal recessive AGPAT2, BSCL2, CAV1 and CAVIN1 inheritance, and coordinate specialist endocrine and metabolic care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_generalized_lipodystrophy-pathway",
-   "title": "Congenital generalised lipodystrophy (Berardinelli-Seip): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a strikingly muscular, prominent-veined appearance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute pancreatitis from extreme hypertriglyceridaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance, Fasting lipid profile focusing on triglycerides, and glucose/HbA1c for diabetes, Liver function tests and hepatic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy, improving glycaemia, hypertriglyceridaemia, hepatic steatosis and hyperphagia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the muscular, veiny habitus to athleticism and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital generalised lipodystrophy (berardinelli-seip)."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_generalized_lipodystrophy-matrix",
-   "title": "Congenital generalised lipodystrophy (Berardinelli-Seip): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a strikingly muscular, prominent-veined appearance",
+      "Commonest subtypes arise from AGPAT2 (triglyceride synthesis) and BSCL2/seipin (adipocyte differentiation) mutations, with CAV1 and PTRF/CAVIN1 causing rarer variants",
+      "Very low circulating leptin drives voracious appetite, and fat that cannot be stored subcutaneously accumulates ectopically in liver and muscle",
+      "Severe insulin resistance with acanthosis nigricans, marked hypertriglyceridaemia, hepatic steatosis with hepatomegaly, and early-onset diabetes are characteristic",
+      "Acromegaloid features, prominent musculature, umbilical prominence, and in some subtypes hypertrophic cardiomyopathy or intellectual impairment (BSCL2) may occur",
+      "Leptin (metreleptin) replacement is a cornerstone therapy in leptin-deficient generalised lipodystrophy, improving glycaemia, triglycerides, and hepatic fat",
+      "Recurrent pancreatitis from extreme hypertriglyceridaemia is a major avoidable complication",
+      "Diagnosis integrates the generalised fat-loss pattern, very low leptin, the metabolic panel, and confirmatory genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance, Fasting lipid profile",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital generalised lipodystrophy is an inherited near-total failure to develop or maintain functional adipose tissue, caused by biallelic mutations in genes governing triglyceride synthesis (AGPAT2), lipid-droplet/adipocyte formation (BSCL2/seipin), or caveolar structure (CAV1, PTRF/CAVIN1). Without a normal fat depot, dietary and endogenous lipid cannot be stored subcutaneously and is deposited ectopically in liver, skeletal muscle, and other organs, driving profound insulin resistance. The tiny fat mass secretes very little leptin, removing satiety signalling and provoking hyperphagia that worsens the lipid overload. The resulting phenotype combines hypertriglyceridaemia, hepatic steatosis, acanthosis nigricans, and early insulin-resistant diabetes.",
+    "additionalDifferentials": [
+      "Acquired generalised lipodystrophy (Lawrence syndrome)",
+      "Familial partial lipodystrophy presenting in childhood",
+      "Severe malnutrition or cachexia",
+      "Leprechaunism/Donohue syndrome and other extreme INSR defects",
+      "Neonatal progeroid (Wiedemann-Rautenstrauch) syndrome",
+      "Mandibuloacral dysplasia with generalised fat loss",
+      "Poorly controlled type 1 diabetes with marked wasting"
     ],
-    [
-     "Primary Differentials",
-     "Acquired generalised lipodystrophy (Lawrence syndrome), Familial partial lipodystrophy presenting in childhood, Severe",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance",
+      "Fasting lipid profile focusing on triglycerides, and glucose/HbA1c for diabetes",
+      "Liver function tests and hepatic imaging to assess steatosis and hepatomegaly",
+      "Whole-body or regional fat imaging (MRI/DEXA) to map the near-total fat deficit",
+      "Targeted genetic testing of AGPAT2, BSCL2, CAV1, and PTRF/CAVIN1",
+      "Echocardiography where a cardiomyopathy-associated subtype is suspected"
     ],
-    [
-     "Management Strategy",
-     "Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute pancreatitis from extreme hypertriglyceridaemia",
+      "Rapidly progressive fatty liver toward steatohepatitis and cirrhosis",
+      "Hypertrophic cardiomyopathy with arrhythmia in susceptible subtypes",
+      "Uncontrolled insulin-resistant diabetes with severe hyperglycaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the muscular, veiny habitus to athleticism and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on metabolic control; leptin (metreleptin) replacement and aggressive management of triglycerides and glucose substantially improve outcomes, but untreated disease carries risks of pancreatitis, progressive liver disease, and cardiac complications.",
+    "pitfalls": [
+      "Attributing the muscular, veiny habitus to athleticism and missing the diagnosis",
+      "Overlooking very low leptin as the key discriminating biochemical clue",
+      "Underestimating pancreatitis risk when triglycerides are extremely high",
+      "Assuming standard insulin regimens will control the diabetes despite severe resistance",
+      "Failing to arrange genetic confirmation and family counselling"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on lipodystrophy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy, improving glycaemia, hypertriglyceridaemia, hepatic steatosis and hyperphagia",
+      "Treat the severe insulin-resistant diabetes with high-dose insulin regimens and insulin sensitisers such as metformin",
+      "Aggressively lower triglycerides with fibrates and omega-3 fatty acids to reduce the risk of pancreatitis",
+      "Institute a controlled, low-fat balanced diet with dietitian input to limit ectopic lipid accumulation",
+      "Monitor and manage hepatic steatosis and steatohepatitis, and screen for hypertrophic cardiomyopathy and other organ complications with echocardiography where indicated",
+      "Manage acute severe hypertriglyceridaemic pancreatitis promptly and consider apheresis for extreme hypertriglyceridaemia",
+      "Offer genetic counselling and family testing for autosomal recessive AGPAT2, BSCL2, CAV1 and CAVIN1 inheritance, and coordinate specialist endocrine and metabolic care"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital generalised lipodystrophy (berardinelli-seip)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-generalized-lipodystrophy-real-image",
-   "title": "Congenital generalised lipodystrophy (Berardinelli-Seip): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "congenital_generalized_lipodystrophy-pathway",
+      "title": "Congenital generalised lipodystrophy (Berardinelli-Seip): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a strikingly muscular, prominent-veined appearance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute pancreatitis from extreme hypertriglyceridaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance, Fasting lipid profile focusing on triglycerides, and glucose/HbA1c for diabetes, Liver function tests and hepatic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy, improving glycaemia, hypertriglyceridaemia, hepatic steatosis and hyperphagia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the muscular, veiny habitus to athleticism and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital generalised lipodystrophy (berardinelli-seip)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_generalized_lipodystrophy-matrix",
+      "title": "Congenital generalised lipodystrophy (Berardinelli-Seip): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive near-total absence of metabolically active adipose tissue evident from birth or early infancy, producing a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum leptin (characteristically very low) and fasting insulin/C-peptide to document insulin resistance, Fasting lipid profile",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired generalised lipodystrophy (Lawrence syndrome), Familial partial lipodystrophy presenting in childhood, Severe",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Metreleptin (recombinant leptin) replacement is the disease-specific cornerstone in leptin-deficient generalised lipodystrophy,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the muscular, veiny habitus to athleticism and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital generalised lipodystrophy (berardinelli-seip)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_generalized_lipodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum leptin with fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Leptin characteristically very low; insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile and HbA1c",
+          "cells": [
+            {
+              "text": "Triglycerides and diabetes assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging",
+          "cells": [
+            {
+              "text": "Steatosis and hepatomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body or regional fat imaging (MRI or DEXA)",
+          "cells": [
+            {
+              "text": "Near-total fat deficit mapped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing (AGPAT2, BSCL2, CAV1, PTRF/CAVIN1)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_generalized_lipodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired generalised lipodystrophy (Lawrence syndrome)",
+          "cells": [
+            {
+              "text": "Acquired rather than congenital"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial partial lipodystrophy presenting in childhood",
+          "cells": [
+            {
+              "text": "Partial rather than generalised fat loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poorly controlled type 1 diabetes with marked wasting",
+          "cells": [
+            {
+              "text": "Diabetic wasting; leptin is characteristically very low in this disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_generalized_lipodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Metreleptin",
+          "cells": [
+            {
+              "text": "Recombinant leptin, disease-specific cornerstone in leptin-deficient disease; improves glycaemia and hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin-resistant diabetes",
+          "cells": [
+            {
+              "text": "High-dose insulin and insulin sensitisers such as metformin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglyceride lowering",
+          "cells": [
+            {
+              "text": "Fibrates and omega-3 fatty acids to reduce pancreatitis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-fat diet",
+          "cells": [
+            {
+              "text": "Controlled, balanced diet with dietitian input to limit ectopic lipid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring",
+          "cells": [
+            {
+              "text": "Hepatic steatosis and steatohepatitis; echocardiography for cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Prompt management; apheresis for extreme hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AGPAT2, BSCL2, CAV1, CAVIN1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_generalized_lipodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Congenital generalised lipodystrophy (Berardinelli-Seip)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital generalised lipodystrophy: near-total fat loss, low leptin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pancreatitis, steatohepatitis, cardiomyopathy, severe hyperglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pancreatitis and triglyceride management; metabolic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum leptin; insulin and C-peptide; lipids; liver tests; fat imaging; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is leptin very low with generalised fat loss on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired lipodystrophy, partial lipodystrophy or malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metreleptin replacement, the disease-specific cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-dose insulin and metformin for insulin-resistant diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fibrates and omega-3 fatty acids to lower triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor liver and heart; genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis depends on metabolic control; metreleptin substantially improves it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

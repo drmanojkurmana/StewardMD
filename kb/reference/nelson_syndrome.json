@@ -1,176 +1,463 @@
 {
- "id": "nelson_syndrome",
- "name": "Nelson syndrome",
- "aliases": [
-  "Nelson's syndrome",
-  "corticotroph tumour progression",
-  "post-adrenalectomy corticotroph adenoma"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
-   "Loss of cortisol negative feedback allows the residual corticotroph adenoma to enlarge and secrete large amounts of adrenocorticotrophic hormone",
-   "Very high circulating adrenocorticotrophic hormone drives striking skin hyperpigmentation",
-   "An expanding sellar mass can cause headache, visual field defects and hypopituitarism",
-   "Risk is greater in younger patients and when adrenalectomy is done without pituitary irradiation",
-   "Regular monitoring of adrenocorticotrophic hormone levels and pituitary imaging after bilateral adrenalectomy allows early detection",
-   "Prophylactic pituitary radiotherapy at the time of adrenalectomy reduces the likelihood of later tumour progression",
-   "Management centres on transsphenoidal surgery, with radiotherapy and medical therapy for residual or aggressive disease"
+  "id": "nelson_syndrome",
+  "name": "Nelson syndrome",
+  "aliases": [
+    "Nelson's syndrome",
+    "corticotroph tumour progression",
+    "post-adrenalectomy corticotroph adenoma"
   ],
-  "pathophysiology": "Nelson syndrome develops when a corticotroph adenoma, previously the source of Cushing disease, continues to grow after the adrenal glands are surgically removed. With cortisol production abolished, the normal suppressive feedback on the pituitary is lost, unleashing the tumour to proliferate and to secrete high levels of adrenocorticotrophic hormone and its related pro-opiomelanocortin peptides. The excess melanocyte-stimulating activity of these peptides produces marked hyperpigmentation, while the enlarging adenoma exerts local mass effect on adjacent structures. A subset behave aggressively with invasive growth.",
-  "additionalDifferentials": [
-   "Recurrent or persistent Cushing disease before adrenalectomy",
-   "Other enlarging pituitary macroadenoma",
-   "Primary adrenal insufficiency hyperpigmentation without tumour progression",
-   "Ectopic adrenocorticotrophic hormone secretion",
-   "Non-functioning pituitary tumour",
-   "Hypophysitis"
-  ],
-  "additionalInvestigations": [
-   "Serial plasma adrenocorticotrophic hormone measurement",
-   "Magnetic resonance imaging of the pituitary to assess tumour size and invasion",
-   "Formal visual field testing",
-   "Anterior pituitary hormone profile to detect hypopituitarism",
-   "Assessment of glucocorticoid and mineralocorticoid replacement adequacy",
-   "Histological and proliferative characterisation of resected tumour"
-  ],
-  "redFlags": [
-   "Rapid visual field loss from chiasmal compression",
-   "Aggressive or invasive tumour behaviour",
-   "New hypopituitarism from an enlarging mass",
-   "Very high and rising adrenocorticotrophic hormone with worsening pigmentation",
-   "Adrenal crisis from inadequate replacement during tumour-related stress"
-  ],
-  "prognosis": "Early detection and effective transsphenoidal resection, with adjuvant radiotherapy where needed, give a reasonable outlook, but aggressive corticotroph tumours can be difficult to control and cause significant morbidity through mass effect and hypopituitarism.",
-  "pitfalls": [
-   "Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy",
-   "Attributing hyperpigmentation solely to adrenal insufficiency without checking for tumour progression",
-   "Delaying intervention until visual compromise occurs",
-   "Not considering prophylactic pituitary radiotherapy in high-risk patients",
-   "Overlooking new anterior pituitary deficiencies from the enlarging adenoma"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment",
-   "Adjuvant pituitary radiotherapy or stereotactic radiosurgery for residual or aggressive tumour",
-   "Medical therapy to control ACTH secretion and tumour growth, such as pasireotide, cabergoline or temozolomide for aggressive disease",
-   "Optimisation of glucocorticoid and mineralocorticoid replacement following bilateral adrenalectomy",
-   "Replacement of deficient anterior pituitary hormones and monitoring of visual fields for chiasmal compression",
-   "Surveillance with serial plasma ACTH measurement and pituitary MRI for early detection of tumour growth",
-   "Management through an endocrinology and pituitary neurosurgery multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nelson_syndrome-pathway",
-   "title": "Nelson syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid visual field loss from chiasmal compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial plasma adrenocorticotrophic hormone measurement, Magnetic resonance imaging of the pituitary to assess tumour size and invasion, Formal visual field testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nelson syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "nelson_syndrome-matrix",
-   "title": "Nelson syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
+      "Loss of cortisol negative feedback allows the residual corticotroph adenoma to enlarge and secrete large amounts of adrenocorticotrophic hormone",
+      "Very high circulating adrenocorticotrophic hormone drives striking skin hyperpigmentation",
+      "An expanding sellar mass can cause headache, visual field defects and hypopituitarism",
+      "Risk is greater in younger patients and when adrenalectomy is done without pituitary irradiation",
+      "Regular monitoring of adrenocorticotrophic hormone levels and pituitary imaging after bilateral adrenalectomy allows early detection",
+      "Prophylactic pituitary radiotherapy at the time of adrenalectomy reduces the likelihood of later tumour progression",
+      "Management centres on transsphenoidal surgery, with radiotherapy and medical therapy for residual or aggressive disease"
     ],
-    [
-     "Key Investigations",
-     "Serial plasma adrenocorticotrophic hormone measurement, Magnetic resonance imaging of the pituitary to assess tumour size and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nelson syndrome develops when a corticotroph adenoma, previously the source of Cushing disease, continues to grow after the adrenal glands are surgically removed. With cortisol production abolished, the normal suppressive feedback on the pituitary is lost, unleashing the tumour to proliferate and to secrete high levels of adrenocorticotrophic hormone and its related pro-opiomelanocortin peptides. The excess melanocyte-stimulating activity of these peptides produces marked hyperpigmentation, while the enlarging adenoma exerts local mass effect on adjacent structures. A subset behave aggressively with invasive growth.",
+    "additionalDifferentials": [
+      "Recurrent or persistent Cushing disease before adrenalectomy",
+      "Other enlarging pituitary macroadenoma",
+      "Primary adrenal insufficiency hyperpigmentation without tumour progression",
+      "Ectopic adrenocorticotrophic hormone secretion",
+      "Non-functioning pituitary tumour",
+      "Hypophysitis"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent or persistent Cushing disease before adrenalectomy, Other enlarging pituitary macroadenoma, Primary adrenal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial plasma adrenocorticotrophic hormone measurement",
+      "Magnetic resonance imaging of the pituitary to assess tumour size and invasion",
+      "Formal visual field testing",
+      "Anterior pituitary hormone profile to detect hypopituitarism",
+      "Assessment of glucocorticoid and mineralocorticoid replacement adequacy",
+      "Histological and proliferative characterisation of resected tumour"
     ],
-    [
-     "Management Strategy",
-     "Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid visual field loss from chiasmal compression",
+      "Aggressive or invasive tumour behaviour",
+      "New hypopituitarism from an enlarging mass",
+      "Very high and rising adrenocorticotrophic hormone with worsening pigmentation",
+      "Adrenal crisis from inadequate replacement during tumour-related stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early detection and effective transsphenoidal resection, with adjuvant radiotherapy where needed, give a reasonable outlook, but aggressive corticotroph tumours can be difficult to control and cause significant morbidity through mass effect and hypopituitarism.",
+    "pitfalls": [
+      "Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy",
+      "Attributing hyperpigmentation solely to adrenal insufficiency without checking for tumour progression",
+      "Delaying intervention until visual compromise occurs",
+      "Not considering prophylactic pituitary radiotherapy in high-risk patients",
+      "Overlooking new anterior pituitary deficiencies from the enlarging adenoma"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment",
+      "Adjuvant pituitary radiotherapy or stereotactic radiosurgery for residual or aggressive tumour",
+      "Medical therapy to control ACTH secretion and tumour growth, such as pasireotide, cabergoline or temozolomide for aggressive disease",
+      "Optimisation of glucocorticoid and mineralocorticoid replacement following bilateral adrenalectomy",
+      "Replacement of deficient anterior pituitary hormones and monitoring of visual fields for chiasmal compression",
+      "Surveillance with serial plasma ACTH measurement and pituitary MRI for early detection of tumour growth",
+      "Management through an endocrinology and pituitary neurosurgery multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for nelson syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nelson-syndrome-real-image",
-   "title": "Nelson syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "nelson_syndrome-pathway",
+      "title": "Nelson syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid visual field loss from chiasmal compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial plasma adrenocorticotrophic hormone measurement, Magnetic resonance imaging of the pituitary to assess tumour size and invasion, Formal visual field testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nelson syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nelson_syndrome-matrix",
+      "title": "Nelson syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Refers to progressive growth of a corticotroph pituitary tumour after bilateral adrenalectomy performed for Cushing disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial plasma adrenocorticotrophic hormone measurement, Magnetic resonance imaging of the pituitary to assess tumour size and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent or persistent Cushing disease before adrenalectomy, Other enlarging pituitary macroadenoma, Primary adrenal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Transsphenoidal surgical resection of the corticotroph adenoma as the primary treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to monitor adrenocorticotrophic hormone and pituitary imaging after bilateral adrenalectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nelson syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nelson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial plasma adrenocorticotrophic hormone",
+          "cells": [
+            {
+              "text": "Very high circulating ACTH, monitored over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the pituitary",
+          "cells": [
+            {
+              "text": "Tumour size and invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal visual field testing",
+          "cells": [
+            {
+              "text": "Chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary hormone profile",
+          "cells": [
+            {
+              "text": "Hypopituitarism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid and mineralocorticoid replacement assessment",
+          "cells": [
+            {
+              "text": "Adequacy of replacement after adrenalectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological and proliferative characterisation of resected tumour",
+          "cells": [
+            {
+              "text": "Aggressive behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nelson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent or persistent Cushing disease before adrenalectomy",
+          "cells": [
+            {
+              "text": "Occurs before bilateral adrenalectomy; this syndrome follows it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary adrenal insufficiency with hyperpigmentation",
+          "cells": [
+            {
+              "text": "Hyperpigmentation with high ACTH; tumour progression must be shown on pituitary imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nelson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal surgical resection",
+          "cells": [
+            {
+              "text": "Primary treatment of the corticotroph adenoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy or radiosurgery",
+          "cells": [
+            {
+              "text": "For residual or aggressive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Pasireotide, cabergoline or temozolomide for aggressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replacement after adrenalectomy",
+          "cells": [
+            {
+              "text": "Optimise glucocorticoid and mineralocorticoid replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary hormone replacement and visual monitoring",
+          "cells": [
+            {
+              "text": "Replace deficient hormones; monitor visual fields for chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial plasma ACTH and pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Endocrinology and pituitary neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nelson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nelson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Growing pituitary tumour with very high ACTH and hyperpigmentation after adrenalectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid visual field loss, invasive behaviour, new hypopituitarism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pituitary neurosurgical review; check replacement against adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial plasma ACTH, pituitary MRI, visual fields, anterior pituitary profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rising ACTH with tumour growth on pituitary MRI after adrenalectomy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adrenal insufficiency alone or recurrent Cushing disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection of the corticotroph adenoma as primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy or radiosurgery for residual or aggressive tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pasireotide, cabergoline or temozolomide for aggressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial plasma ACTH and pituitary MRI surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early resection gives a reasonable outlook; aggressive tumours cause mass effect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

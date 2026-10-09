@@ -1,174 +1,481 @@
 {
- "id": "leber_plus_dystonia",
- "name": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus)",
- "aliases": [
-  "LHON-plus",
-  "Leber hereditary optic neuropathy plus dystonia",
-  "LHON with extraocular features",
-  "MT-ND"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews Leber Hereditary Optic Neuropathy / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most characteristically dystonia and other movement or neurological disorders",
-   "The visual component is a subacute, painless, usually sequential bilateral central visual loss from optic nerve degeneration, typically in young adult men",
-   "It is maternally inherited, caused by mitochondrial DNA point mutations affecting complex I subunits, classically m.11778G>A, m.3460G>A and m.14484T>C",
-   "Incomplete penetrance and a strong male predominance mean many mutation carriers never lose vision, and additional environmental factors such as tobacco and alcohol modify risk",
-   "In LHON-plus, dystonia often reflects bilateral striatal (putaminal) lesions, and MRI may show basal ganglia signal change",
-   "Some pedigrees combine optic neuropathy with dystonia and additional features resembling other mitochondrial or extrapyramidal syndromes",
-   "Management is supportive with low-vision rehabilitation, avoidance of mitochondrial toxins including tobacco and excess alcohol, and generic use of quinone-based cofactor therapy under specialist guidance"
+  "id": "leber_plus_dystonia",
+  "name": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus)",
+  "aliases": [
+    "LHON-plus",
+    "Leber hereditary optic neuropathy plus dystonia",
+    "LHON with extraocular features",
+    "MT-ND"
   ],
-  "pathophysiology": "Leber hereditary optic neuropathy results from maternally inherited point mutations in mitochondrial DNA that encode subunits of respiratory-chain complex I, impairing electron transport, reducing ATP synthesis and increasing reactive oxygen species. Retinal ganglion cells, whose small unmyelinated axons in the papillomacular bundle have high energy demand, are selectively vulnerable, leading to their degeneration and central visual loss. In LHON-plus the same energy failure and oxidative stress extend to other high-demand neurons, particularly in the basal ganglia, producing dystonia and additional neurological features; the reasons some carriers develop the extended phenotype relate to mutant load, nuclear and mitochondrial genetic background, hormonal factors and environmental exposures.",
-  "additionalDifferentials": [
-   "Isolated classic Leber hereditary optic neuropathy without extraocular features",
-   "Dominant optic atrophy (OPA1) and other hereditary optic neuropathies",
-   "Optic neuritis from demyelinating disease",
-   "Toxic or nutritional optic neuropathy",
-   "Primary dystonia syndromes and Wilson disease",
-   "Leigh syndrome and other complex I mitochondrial disorders"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment",
-   "Ophthalmological evaluation including visual fields, colour vision and optical coherence tomography of the retinal nerve fibre layer",
-   "Brain MRI to assess basal ganglia and optic pathway involvement",
-   "Visual evoked potentials to document optic nerve dysfunction",
-   "Blood lactate and, where indicated, muscle respiratory-chain enzymology",
-   "Assessment for modifiable risk factors including tobacco and alcohol use"
-  ],
-  "redFlags": [
-   "Rapidly progressive bilateral visual loss requiring urgent specialist assessment",
-   "New or worsening generalised dystonia impairing function",
-   "Additional bulbar or extrapyramidal deterioration suggesting a broader mitochondrial syndrome",
-   "Continued exposure to mitochondrial toxins during acute visual decline"
-  ],
-  "prognosis": "Visual prognosis is generally poor with most affected individuals reaching legal blindness, though the m.14484T>C mutation carries a better chance of partial recovery; when dystonia and other extraocular features are present the neurological disability tends to persist and may progress.",
-  "pitfalls": [
-   "Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias",
-   "Overlooking dystonia and basal ganglia lesions that distinguish LHON-plus from isolated LHON",
-   "Failing to counsel about maternal inheritance and avoidance of tobacco and alcohol",
-   "Misattributing subacute visual loss to optic neuritis and delaying mitochondrial testing"
-  ],
-  "references": [
-   "GeneReviews: Leber Hereditary Optic Neuropathy",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators",
-   "Manage dystonia symptomatically with agents such as anticholinergics, baclofen, a trial of levodopa, or focal botulinum toxin injections",
-   "Consider deep brain stimulation for disabling, medically refractory dystonia in appropriate patients",
-   "Provide visual rehabilitation and low-vision aids alongside physiotherapy and occupational therapy for motor disability",
-   "Monitor visual and neurological status with ophthalmic imaging, perimetry and neuroimaging of the basal ganglia",
-   "Offer genetic counselling for maternal mitochondrial inheritance with heteroplasmy assessment and evaluation of maternal relatives",
-   "Coordinate care through mitochondrial medicine, movement-disorder neurology and neuro-ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leber_plus_dystonia-pathway",
-   "title": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most characteristically dystonia and other movement or neurological disorders",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive bilateral visual loss requiring urgent specialist assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment, Ophthalmological evaluation including visual fields, colour vision and optical coherence tomography of the retinal nerve fibre"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leber hereditary optic neuropathy plus / dystonia (lhon-plus)."
-  }
- ],
- "tables": [
-  {
-   "id": "leber_plus_dystonia-matrix",
-   "title": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews Leber Hereditary Optic Neuropathy / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most characteristically dystonia and other movement or neurological disorders",
+      "The visual component is a subacute, painless, usually sequential bilateral central visual loss from optic nerve degeneration, typically in young adult men",
+      "It is maternally inherited, caused by mitochondrial DNA point mutations affecting complex I subunits, classically m.11778G>A, m.3460G>A and m.14484T>C",
+      "Incomplete penetrance and a strong male predominance mean many mutation carriers never lose vision, and additional environmental factors such as tobacco and alcohol modify risk",
+      "In LHON-plus, dystonia often reflects bilateral striatal (putaminal) lesions, and MRI may show basal ganglia signal change",
+      "Some pedigrees combine optic neuropathy with dystonia and additional features resembling other mitochondrial or extrapyramidal syndromes",
+      "Management is supportive with low-vision rehabilitation, avoidance of mitochondrial toxins including tobacco and excess alcohol, and generic use of quinone-based cofactor therapy under specialist guidance"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment, Ophthalmological evaluation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Leber hereditary optic neuropathy results from maternally inherited point mutations in mitochondrial DNA that encode subunits of respiratory-chain complex I, impairing electron transport, reducing ATP synthesis and increasing reactive oxygen species. Retinal ganglion cells, whose small unmyelinated axons in the papillomacular bundle have high energy demand, are selectively vulnerable, leading to their degeneration and central visual loss. In LHON-plus the same energy failure and oxidative stress extend to other high-demand neurons, particularly in the basal ganglia, producing dystonia and additional neurological features; the reasons some carriers develop the extended phenotype relate to mutant load, nuclear and mitochondrial genetic background, hormonal factors and environmental exposures.",
+    "additionalDifferentials": [
+      "Isolated classic Leber hereditary optic neuropathy without extraocular features",
+      "Dominant optic atrophy (OPA1) and other hereditary optic neuropathies",
+      "Optic neuritis from demyelinating disease",
+      "Toxic or nutritional optic neuropathy",
+      "Primary dystonia syndromes and Wilson disease",
+      "Leigh syndrome and other complex I mitochondrial disorders"
     ],
-    [
-     "Primary Differentials",
-     "Isolated classic Leber hereditary optic neuropathy without extraocular features, Dominant optic atrophy (OPA1) and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment",
+      "Ophthalmological evaluation including visual fields, colour vision and optical coherence tomography of the retinal nerve fibre layer",
+      "Brain MRI to assess basal ganglia and optic pathway involvement",
+      "Visual evoked potentials to document optic nerve dysfunction",
+      "Blood lactate and, where indicated, muscle respiratory-chain enzymology",
+      "Assessment for modifiable risk factors including tobacco and alcohol use"
     ],
-    [
-     "Management Strategy",
-     "Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive bilateral visual loss requiring urgent specialist assessment",
+      "New or worsening generalised dystonia impairing function",
+      "Additional bulbar or extrapyramidal deterioration suggesting a broader mitochondrial syndrome",
+      "Continued exposure to mitochondrial toxins during acute visual decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual prognosis is generally poor with most affected individuals reaching legal blindness, though the m.14484T>C mutation carries a better chance of partial recovery; when dystonia and other extraocular features are present the neurological disability tends to persist and may progress.",
+    "pitfalls": [
+      "Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias",
+      "Overlooking dystonia and basal ganglia lesions that distinguish LHON-plus from isolated LHON",
+      "Failing to counsel about maternal inheritance and avoidance of tobacco and alcohol",
+      "Misattributing subacute visual loss to optic neuritis and delaying mitochondrial testing"
+    ],
+    "references": [
+      "GeneReviews: Leber Hereditary Optic Neuropathy",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators",
+      "Manage dystonia symptomatically with agents such as anticholinergics, baclofen, a trial of levodopa, or focal botulinum toxin injections",
+      "Consider deep brain stimulation for disabling, medically refractory dystonia in appropriate patients",
+      "Provide visual rehabilitation and low-vision aids alongside physiotherapy and occupational therapy for motor disability",
+      "Monitor visual and neurological status with ophthalmic imaging, perimetry and neuroimaging of the basal ganglia",
+      "Offer genetic counselling for maternal mitochondrial inheritance with heteroplasmy assessment and evaluation of maternal relatives",
+      "Coordinate care through mitochondrial medicine, movement-disorder neurology and neuro-ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for leber hereditary optic neuropathy plus / dystonia (lhon-plus)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leber-plus-dystonia-real-image",
-   "title": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "leber_plus_dystonia-pathway",
+      "title": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most characteristically dystonia and other movement or neurological disorders",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive bilateral visual loss requiring urgent specialist assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment, Ophthalmological evaluation including visual fields, colour vision and optical coherence tomography of the retinal nerve fibre"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leber hereditary optic neuropathy plus / dystonia (lhon-plus)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leber_plus_dystonia-matrix",
+      "title": "Leber hereditary optic neuropathy plus / dystonia (LHON-plus): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "LHON-plus denotes the optic neuropathy of Leber hereditary optic neuropathy accompanied by extraocular features, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing for the common LHON mitochondrial DNA mutations with heteroplasmy assessment, Ophthalmological evaluation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated classic Leber hereditary optic neuropathy without extraocular features, Dominant optic atrophy (OPA1) and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Consider idebenone to support residual vision, and advise avoidance of tobacco and alcohol as recognised aggravators",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming carriers will inevitably lose vision, ignoring the marked incomplete penetrance and sex bias",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leber hereditary optic neuropathy plus / dystonia (lhon-plus)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews Leber Hereditary Optic Neuropathy / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leber_plus_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing for common LHON mtDNA mutations",
+          "cells": [
+            {
+              "text": "Mutation identity and heteroplasmy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual fields, colour vision and OCT of the nerve fibre layer",
+          "cells": [
+            {
+              "text": "Optic nerve degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Basal ganglia signal change and optic pathway involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood lactate and muscle respiratory-chain enzymology",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_plus_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated classic LHON",
+          "cells": [
+            {
+              "text": "No extraocular features such as dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary dystonia syndromes",
+          "cells": [
+            {
+              "text": "Dystonia without optic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leigh syndrome and other complex I disorders",
+          "cells": [
+            {
+              "text": "Other complex I mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dominant optic atrophy (OPA1)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leber_plus_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Idebenone",
+          "cells": [
+            {
+              "text": "Considered to support residual vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tobacco and alcohol avoidance",
+          "cells": [
+            {
+              "text": "Recognised aggravators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia medication",
+          "cells": [
+            {
+              "text": "Anticholinergics, baclofen, a trial of levodopa, or focal botulinum toxin injections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Disabling, medically refractory dystonia in appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual rehabilitation and therapy",
+          "cells": [
+            {
+              "text": "Low-vision aids with physiotherapy and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Ophthalmic imaging, perimetry and basal ganglia neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal inheritance with heteroplasmy assessment; evaluation of maternal relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leber_plus_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Leber hereditary optic neuropathy plus / dystonia (LHON-plus)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute painless bilateral visual loss in a young man with new dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid bilateral loss, worsening dystonia, bulbar decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist assessment for rapid bilateral visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "mtDNA testing, visual fields, OCT, VEP, brain MRI, lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a primary LHON mtDNA mutation identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dominant optic atrophy, optic neuritis or Leigh syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Idebenone to support residual vision; avoid tobacco and alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptomatic dystonia treatment: anticholinergics, baclofen, levodopa or botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Deep brain stimulation for disabling, refractory dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-vision aids with physiotherapy and occupational therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor vision and basal ganglia with imaging and perimetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual prognosis generally poor; m.14484 carries a better chance of partial recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

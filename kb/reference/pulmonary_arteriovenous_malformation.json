@@ -1,174 +1,432 @@
 {
- "id": "pulmonary_arteriovenous_malformation",
- "name": "Pulmonary arteriovenous malformation",
- "aliases": [
-  "pulmonary AVM",
-  "PAVM",
-  "pulmonary arteriovenous fistula",
-  "pulmonary arteriovenous aneurysm"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine / Occupational Lung Disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory Medicine and Interventional Radiology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
-   "The majority are associated with hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu disease), so screening and family assessment are important",
-   "The right-to-left shunt causes hypoxaemia, and the loss of capillary filtration allows paradoxical embolism, predisposing to stroke and brain abscess",
-   "Classic features include dyspnoea, cyanosis, digital clubbing, and, when related to HHT, epistaxis and mucocutaneous telangiectasia",
-   "Platypnoea and orthodeoxia (breathlessness and desaturation on sitting or standing) can occur with basal lesions",
-   "Contrast (bubble) echocardiography is a sensitive screening test for right-to-left shunt, with CT pulmonary angiography defining the feeding vessels",
-   "Transcatheter embolisation of feeding arteries is the mainstay of treatment and reduces the risk of neurological complications and haemorrhage"
+  "id": "pulmonary_arteriovenous_malformation",
+  "name": "Pulmonary arteriovenous malformation",
+  "aliases": [
+    "pulmonary AVM",
+    "PAVM",
+    "pulmonary arteriovenous fistula",
+    "pulmonary arteriovenous aneurysm"
   ],
-  "pathophysiology": "A pulmonary arteriovenous malformation is a thin-walled abnormal vascular sac or channel connecting a feeding pulmonary artery directly to a draining pulmonary vein, bypassing the normal capillary network. This produces a right-to-left shunt that lowers arterial oxygenation and, critically, removes the capillary filter that normally traps small emboli and bacteria, so venous clots and septic material can pass directly into the systemic circulation and cause paradoxical stroke and cerebral abscess. Most lesions arise in the context of hereditary haemorrhagic telangiectasia, an autosomal dominant disorder of vascular development, and they tend to enlarge over time and during pregnancy. The fragile vessel walls can also rupture, causing haemoptysis or haemothorax.",
-  "additionalDifferentials": [
-   "Intracardiac right-to-left shunt (e.g. patent foramen ovale, atrial septal defect)",
-   "Hepatopulmonary syndrome",
-   "Solitary pulmonary nodule of other aetiology",
-   "Pulmonary varix",
-   "Other causes of hypoxaemia and clubbing",
-   "Vascular tumours of the lung"
-  ],
-  "additionalInvestigations": [
-   "Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt",
-   "CT pulmonary angiography to characterise feeding and draining vessels",
-   "Shunt fraction estimation (e.g. by the 100% oxygen method or nuclear perfusion scan)",
-   "Screening and genetic assessment for hereditary haemorrhagic telangiectasia",
-   "Cerebral imaging when neurological symptoms or abscess are suspected",
-   "Assessment for anaemia and iron deficiency from associated bleeding"
-  ],
-  "redFlags": [
-   "Neurological symptoms suggesting paradoxical stroke or cerebral abscess",
-   "Massive haemoptysis or haemothorax from lesion rupture",
-   "Progressive hypoxaemia and cyanosis",
-   "Enlarging lesions, especially during pregnancy, increasing complication risk"
-  ],
-  "prognosis": "With embolisation of the feeding arteries, oxygenation improves and the risk of serious neurological and haemorrhagic complications falls substantially; untreated lesions carry a significant risk of stroke, brain abscess, and life-threatening haemorrhage, and lifelong surveillance is needed as lesions can recur or grow.",
-  "pitfalls": [
-   "Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism",
-   "Not screening for hereditary haemorrhagic telangiectasia and missing familial disease",
-   "Omitting antibiotic prophylaxis advice for procedures given the risk of brain abscess",
-   "Overlooking small lesions that still permit paradoxical embolism despite minimal hypoxaemia"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "International guidelines on hereditary haemorrhagic telangiectasia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt",
-   "Surgical resection for lesions unsuitable for embolisation",
-   "Antibiotic prophylaxis before dental and other bacteraemia-prone procedures to prevent cerebral abscess from paradoxical infection",
-   "Meticulous intravenous line air-filter and bubble precautions to prevent paradoxical air embolism",
-   "Screening and family assessment for hereditary haemorrhagic telangiectasia, with genetic counselling",
-   "Treat iron-deficiency anaemia from associated bleeding and manage recurrent epistaxis",
-   "Serial imaging surveillance for reperfusion or growth of lesions, including after pregnancy, with prompt neuroimaging and treatment for stroke or brain abscess"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_arteriovenous_malformation-pathway",
-   "title": "Pulmonary arteriovenous malformation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological symptoms suggesting paradoxical stroke or cerebral abscess",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt, CT pulmonary angiography to characterise feeding and draining vessels, Shunt fraction estimation (e.g. by the 100% oxygen method"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary arteriovenous malformation."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_arteriovenous_malformation-matrix",
-   "title": "Pulmonary arteriovenous malformation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine / Occupational Lung Disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory Medicine and Interventional Radiology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
+      "The majority are associated with hereditary haemorrhagic telangiectasia (Osler-Weber-Rendu disease), so screening and family assessment are important",
+      "The right-to-left shunt causes hypoxaemia, and the loss of capillary filtration allows paradoxical embolism, predisposing to stroke and brain abscess",
+      "Classic features include dyspnoea, cyanosis, digital clubbing, and, when related to HHT, epistaxis and mucocutaneous telangiectasia",
+      "Platypnoea and orthodeoxia (breathlessness and desaturation on sitting or standing) can occur with basal lesions",
+      "Contrast (bubble) echocardiography is a sensitive screening test for right-to-left shunt, with CT pulmonary angiography defining the feeding vessels",
+      "Transcatheter embolisation of feeding arteries is the mainstay of treatment and reduces the risk of neurological complications and haemorrhage"
     ],
-    [
-     "Key Investigations",
-     "Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt, CT pulmonary angiography to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A pulmonary arteriovenous malformation is a thin-walled abnormal vascular sac or channel connecting a feeding pulmonary artery directly to a draining pulmonary vein, bypassing the normal capillary network. This produces a right-to-left shunt that lowers arterial oxygenation and, critically, removes the capillary filter that normally traps small emboli and bacteria, so venous clots and septic material can pass directly into the systemic circulation and cause paradoxical stroke and cerebral abscess. Most lesions arise in the context of hereditary haemorrhagic telangiectasia, an autosomal dominant disorder of vascular development, and they tend to enlarge over time and during pregnancy. The fragile vessel walls can also rupture, causing haemoptysis or haemothorax.",
+    "additionalDifferentials": [
+      "Intracardiac right-to-left shunt (e.g. patent foramen ovale, atrial septal defect)",
+      "Hepatopulmonary syndrome",
+      "Solitary pulmonary nodule of other aetiology",
+      "Pulmonary varix",
+      "Other causes of hypoxaemia and clubbing",
+      "Vascular tumours of the lung"
     ],
-    [
-     "Primary Differentials",
-     "Intracardiac right-to-left shunt (e.g. patent foramen ovale, atrial septal defect), Hepatopulmonary syndrome, Solitary pulmonary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt",
+      "CT pulmonary angiography to characterise feeding and draining vessels",
+      "Shunt fraction estimation (e.g. by the 100% oxygen method or nuclear perfusion scan)",
+      "Screening and genetic assessment for hereditary haemorrhagic telangiectasia",
+      "Cerebral imaging when neurological symptoms or abscess are suspected",
+      "Assessment for anaemia and iron deficiency from associated bleeding"
     ],
-    [
-     "Management Strategy",
-     "Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological symptoms suggesting paradoxical stroke or cerebral abscess",
+      "Massive haemoptysis or haemothorax from lesion rupture",
+      "Progressive hypoxaemia and cyanosis",
+      "Enlarging lesions, especially during pregnancy, increasing complication risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism",
-     "Prevent diagnostic or management error"
+    "prognosis": "With embolisation of the feeding arteries, oxygenation improves and the risk of serious neurological and haemorrhagic complications falls substantially; untreated lesions carry a significant risk of stroke, brain abscess, and life-threatening haemorrhage, and lifelong surveillance is needed as lesions can recur or grow.",
+    "pitfalls": [
+      "Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism",
+      "Not screening for hereditary haemorrhagic telangiectasia and missing familial disease",
+      "Omitting antibiotic prophylaxis advice for procedures given the risk of brain abscess",
+      "Overlooking small lesions that still permit paradoxical embolism despite minimal hypoxaemia"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "International guidelines on hereditary haemorrhagic telangiectasia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt",
+      "Surgical resection for lesions unsuitable for embolisation",
+      "Antibiotic prophylaxis before dental and other bacteraemia-prone procedures to prevent cerebral abscess from paradoxical infection",
+      "Meticulous intravenous line air-filter and bubble precautions to prevent paradoxical air embolism",
+      "Screening and family assessment for hereditary haemorrhagic telangiectasia, with genetic counselling",
+      "Treat iron-deficiency anaemia from associated bleeding and manage recurrent epistaxis",
+      "Serial imaging surveillance for reperfusion or growth of lesions, including after pregnancy, with prompt neuroimaging and treatment for stroke or brain abscess"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary arteriovenous malformation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-arteriovenous-malformation-real-image",
-   "title": "Pulmonary arteriovenous malformation: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_arteriovenous_malformation-pathway",
+      "title": "Pulmonary arteriovenous malformation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological symptoms suggesting paradoxical stroke or cerebral abscess",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt, CT pulmonary angiography to characterise feeding and draining vessels, Shunt fraction estimation (e.g. by the 100% oxygen method"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary arteriovenous malformation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_arteriovenous_malformation-matrix",
+      "title": "Pulmonary arteriovenous malformation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal direct connection between a pulmonary artery and vein that bypasses the capillary bed, creating a right-to-left shunt",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast (agitated saline bubble) echocardiography to detect and grade right-to-left shunt, CT pulmonary angiography to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intracardiac right-to-left shunt (e.g. patent foramen ovale, atrial septal defect), Hepatopulmonary syndrome, Solitary pulmonary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Transcatheter embolisation of the feeding arteries as the definitive treatment to abolish the right-to-left shunt",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to consider a pulmonary AVM in unexplained hypoxaemia, clubbing, or paradoxical embolism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary arteriovenous malformation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Interventional Radiology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_arteriovenous_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Agitated saline bubble echocardiography",
+          "cells": [
+            {
+              "text": "Grade of right-to-left shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Feeding and draining vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shunt fraction estimation (100% oxygen method or nuclear perfusion)",
+          "cells": [
+            {
+              "text": "Shunt fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening and genetic assessment for hereditary haemorrhagic telangiectasia",
+          "cells": [
+            {
+              "text": "Hereditary haemorrhagic telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral imaging",
+          "cells": [
+            {
+              "text": "Neurological symptoms or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for anaemia",
+          "cells": [
+            {
+              "text": "Iron deficiency from associated bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_arteriovenous_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Embolisation",
+          "cells": [
+            {
+              "text": "Transcatheter embolisation of feeding arteries as definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "For lesions unsuitable for embolisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Before dental and other bacteraemia-prone procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Air and bubble precautions",
+          "cells": [
+            {
+              "text": "Intravenous line air-filter and bubble precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHT screening",
+          "cells": [
+            {
+              "text": "Screening and family assessment with genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and epistaxis",
+          "cells": [
+            {
+              "text": "Treat iron-deficiency anaemia from bleeding; manage recurrent epistaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial imaging for reperfusion or growth, including after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_arteriovenous_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary arteriovenous malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary arteriovenous malformation: right-to-left shunt on bubble echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological symptoms, massive haemoptysis, progressive hypoxaemia, or enlarging lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and respiratory review for stroke or haemoptysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Agitated saline echo; CT pulmonary angiography; shunt fraction; HHT screening; anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the shunt confirmed with feeding and draining vessels on CTPA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intracardiac shunt or hepatopulmonary syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transcatheter embolisation of feeding arteries as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical resection for lesions unsuitable for embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotic prophylaxis and air-filter precautions for IV lines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "HHT screening and family assessment; treat iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial imaging surveillance for reperfusion or growth after treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,462 @@
 {
- "id": "mast_syndrome_spg21",
- "name": "MAST syndrome (SPG21)",
- "aliases": [
-  "SPG21",
-  "Mast syndrome",
-  "ACP33-related spastic paraplegia",
-  "maspardin deficiency",
-  "locus 15q22.31"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
-   "Classically described in the Old Order Amish, in whom a founder frameshift variant is responsible",
-   "Onset is usually in early adulthood with slowly progressive spastic paraparesis followed by cognitive decline and dementia",
-   "Additional features include cerebellar and extrapyramidal signs, dysarthria and sometimes psychiatric disturbance",
-   "Neuroimaging characteristically shows a thin corpus callosum and periventricular white-matter change",
-   "Maspardin is thought to regulate endosomal trafficking and receptor recycling, linking SPG21 to other trafficking-related complicated HSPs",
-   "Management is symptomatic and supportive, with physiotherapy, spasticity control and cognitive and psychiatric support"
+  "id": "mast_syndrome_spg21",
+  "name": "MAST syndrome (SPG21)",
+  "aliases": [
+    "SPG21",
+    "Mast syndrome",
+    "ACP33-related spastic paraplegia",
+    "maspardin deficiency",
+    "locus 15q22.31"
   ],
-  "pathophysiology": "MAST syndrome (SPG21) is caused by biallelic loss-of-function variants in the gene encoding maspardin, a protein associated with endosomal and trans-Golgi membranes that appears to regulate intracellular trafficking and receptor recycling, including modulation of CD4-related signalling. Loss of maspardin is thought to disturb endosomal sorting and membrane homeostasis in neurons, leading to a diffuse neurodegenerative process. This affects the corticospinal tracts, cerebral white matter (with the characteristic thin corpus callosum), cerebellum and basal ganglia, producing the combination of spastic paraparesis, dementia and mixed cerebellar and extrapyramidal features that defines the syndrome.",
-  "additionalDifferentials": [
-   "SPG11 and SPG15 complicated hereditary spastic paraplegia with thin corpus callosum",
-   "Other autosomal recessive hereditary spastic paraplegias",
-   "Early-onset dementias with pyramidal features",
-   "Metabolic leukodystrophies",
-   "Wilson disease and other treatable movement-disorder mimics",
-   "Frontotemporal dementia with motor features"
-  ],
-  "additionalInvestigations": [
-   "SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel",
-   "MRI of brain showing thin corpus callosum and white-matter change",
-   "Neuropsychological assessment to characterise cognitive decline",
-   "Nerve conduction studies to identify any peripheral involvement",
-   "Metabolic screen and copper studies to exclude treatable mimics",
-   "Family history and consanguinity assessment supporting recessive inheritance"
-  ],
-  "redFlags": [
-   "Rapidly progressive cognitive decline requiring exclusion of treatable dementias",
-   "New extrapyramidal signs suggesting an alternative or coexisting movement disorder",
-   "Acute behavioural or psychiatric deterioration needing urgent support",
-   "Loss of safe swallowing or mobility indicating advancing disease"
-  ],
-  "prognosis": "MAST syndrome progresses slowly but is a multisystem neurodegenerative disorder, and over years affected individuals develop increasing motor disability and dementia with substantial dependence.",
-  "pitfalls": [
-   "Overlooking the diagnosis outside the Amish population, where it is rarer and less expected",
-   "Attributing early spastic gait to a pure HSP and missing evolving cognitive decline",
-   "Failing to recognise thin corpus callosum as a clue to a complicated recessive HSP",
-   "Neglecting psychiatric and cognitive needs while focusing only on spasticity"
-  ],
-  "references": [
-   "GeneReviews: Hereditary Spastic Paraplegia Overview",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures in the spastic paraparesis",
-   "Antispasticity treatment with agents such as baclofen or tizanidine, and focal botulinum toxin injection for troublesome spasticity",
-   "Mobility aids, orthoses and occupational therapy as disability progresses",
-   "Cognitive assessment and dementia support, with management of psychiatric and behavioural disturbance",
-   "Speech and language therapy for dysarthria and swallowing safety",
-   "Autosomal recessive with founder variants: offer genetic counselling and family screening, addressing consanguinity",
-   "Coordinate care through a neurology-led multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mast_syndrome_spg21-pathway",
-   "title": "MAST syndrome (SPG21): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive cognitive decline requiring exclusion of treatable dementias",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel, MRI of brain showing thin corpus callosum and white-matter change, Neuropsychological assessment to characterise cognitive decline"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures in the spastic paraparesis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis outside the Amish population, where it is rarer and less expected"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mast syndrome (spg21)."
-  }
- ],
- "tables": [
-  {
-   "id": "mast_syndrome_spg21-matrix",
-   "title": "MAST syndrome (SPG21): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
+      "Classically described in the Old Order Amish, in whom a founder frameshift variant is responsible",
+      "Onset is usually in early adulthood with slowly progressive spastic paraparesis followed by cognitive decline and dementia",
+      "Additional features include cerebellar and extrapyramidal signs, dysarthria and sometimes psychiatric disturbance",
+      "Neuroimaging characteristically shows a thin corpus callosum and periventricular white-matter change",
+      "Maspardin is thought to regulate endosomal trafficking and receptor recycling, linking SPG21 to other trafficking-related complicated HSPs",
+      "Management is symptomatic and supportive, with physiotherapy, spasticity control and cognitive and psychiatric support"
     ],
-    [
-     "Key Investigations",
-     "SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel, MRI of brain showing thin corpus callosum and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MAST syndrome (SPG21) is caused by biallelic loss-of-function variants in the gene encoding maspardin, a protein associated with endosomal and trans-Golgi membranes that appears to regulate intracellular trafficking and receptor recycling, including modulation of CD4-related signalling. Loss of maspardin is thought to disturb endosomal sorting and membrane homeostasis in neurons, leading to a diffuse neurodegenerative process. This affects the corticospinal tracts, cerebral white matter (with the characteristic thin corpus callosum), cerebellum and basal ganglia, producing the combination of spastic paraparesis, dementia and mixed cerebellar and extrapyramidal features that defines the syndrome.",
+    "additionalDifferentials": [
+      "SPG11 and SPG15 complicated hereditary spastic paraplegia with thin corpus callosum",
+      "Other autosomal recessive hereditary spastic paraplegias",
+      "Early-onset dementias with pyramidal features",
+      "Metabolic leukodystrophies",
+      "Wilson disease and other treatable movement-disorder mimics",
+      "Frontotemporal dementia with motor features"
     ],
-    [
-     "Primary Differentials",
-     "SPG11 and SPG15 complicated hereditary spastic paraplegia with thin corpus callosum, Other autosomal recessive hereditary spastic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel",
+      "MRI of brain showing thin corpus callosum and white-matter change",
+      "Neuropsychological assessment to characterise cognitive decline",
+      "Nerve conduction studies to identify any peripheral involvement",
+      "Metabolic screen and copper studies to exclude treatable mimics",
+      "Family history and consanguinity assessment supporting recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive cognitive decline requiring exclusion of treatable dementias",
+      "New extrapyramidal signs suggesting an alternative or coexisting movement disorder",
+      "Acute behavioural or psychiatric deterioration needing urgent support",
+      "Loss of safe swallowing or mobility indicating advancing disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis outside the Amish population, where it is rarer and less expected",
-     "Prevent diagnostic or management error"
+    "prognosis": "MAST syndrome progresses slowly but is a multisystem neurodegenerative disorder, and over years affected individuals develop increasing motor disability and dementia with substantial dependence.",
+    "pitfalls": [
+      "Overlooking the diagnosis outside the Amish population, where it is rarer and less expected",
+      "Attributing early spastic gait to a pure HSP and missing evolving cognitive decline",
+      "Failing to recognise thin corpus callosum as a clue to a complicated recessive HSP",
+      "Neglecting psychiatric and cognitive needs while focusing only on spasticity"
+    ],
+    "references": [
+      "GeneReviews: Hereditary Spastic Paraplegia Overview",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures in the spastic paraparesis",
+      "Antispasticity treatment with agents such as baclofen or tizanidine, and focal botulinum toxin injection for troublesome spasticity",
+      "Mobility aids, orthoses and occupational therapy as disability progresses",
+      "Cognitive assessment and dementia support, with management of psychiatric and behavioural disturbance",
+      "Speech and language therapy for dysarthria and swallowing safety",
+      "Autosomal recessive with founder variants: offer genetic counselling and family screening, addressing consanguinity",
+      "Coordinate care through a neurology-led multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for mast syndrome (spg21)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mast-syndrome-spg21-real-image",
-   "title": "MAST syndrome (SPG21): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "mast_syndrome_spg21-pathway",
+      "title": "MAST syndrome (SPG21): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive cognitive decline requiring exclusion of treatable dementias",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel, MRI of brain showing thin corpus callosum and white-matter change, Neuropsychological assessment to characterise cognitive decline"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures in the spastic paraparesis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis outside the Amish population, where it is rarer and less expected"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mast syndrome (spg21)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mast_syndrome_spg21-matrix",
+      "title": "MAST syndrome (SPG21): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive complicated hereditary spastic paraplegia caused by biallelic loss of maspardin, encoded by SPG21 (ACP33)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SPG21 sequencing within a hereditary spastic paraplegia or complicated-HSP panel, MRI of brain showing thin corpus callosum and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SPG11 and SPG15 complicated hereditary spastic paraplegia with thin corpus callosum, Other autosomal recessive hereditary spastic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy; management is supportive with regular physiotherapy to maintain mobility and prevent contractures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis outside the Amish population, where it is rarer and less expected",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mast syndrome (spg21)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mast_syndrome_spg21-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG21 sequencing within a hereditary spastic paraplegia panel",
+          "cells": [
+            {
+              "text": "SPG21 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Thin corpus callosum and white-matter change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen and copper studies",
+          "cells": [
+            {
+              "text": "Treatable mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and consanguinity assessment",
+          "cells": [
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mast_syndrome_spg21-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG11 and SPG15 complicated hereditary spastic paraplegia",
+          "cells": [
+            {
+              "text": "Complicated HSP with thin corpus callosum; SPG21 sequencing distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease and other treatable movement-disorder mimics",
+          "cells": [
+            {
+              "text": "Excluded by the metabolic and copper screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mast_syndrome_spg21-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying therapy",
+          "cells": [
+            {
+              "text": "Supportive; regular physiotherapy to maintain mobility and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity treatment",
+          "cells": [
+            {
+              "text": "Baclofen or tizanidine; focal botulinum toxin for troublesome spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility aids and orthoses",
+          "cells": [
+            {
+              "text": "Occupational therapy as disability progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and psychiatric support",
+          "cells": [
+            {
+              "text": "Cognitive assessment, dementia support, and management of psychiatric and behavioural disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Dysarthria and swallowing safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive with founder variants; family screening, addressing consanguinity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology-led team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mast_syndrome_spg21-dx-mgmt",
+      "title": "Diagnosis and management of MAST syndrome (SPG21)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young patient with spastic paraparesis, cognitive decline and thin corpus callosum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid cognitive decline, new extrapyramidal signs or loss of safe swallowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude treatable dementias and treatable movement disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SPG21 sequencing in HSP panel; brain MRI for thin corpus callosum; copper studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SPG21 variant confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG11, SPG15 or Wilson disease; reassess the mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain mobility and prevent contractures in spastic paraparesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antispasticity drugs such as baclofen or tizanidine; focal botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive assessment, dementia support and psychiatric and behavioural care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy for dysarthria and swallowing safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; supportive, neurology-led multidisciplinary care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

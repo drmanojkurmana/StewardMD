@@ -1,175 +1,471 @@
 {
- "id": "hyaline_body_myopathy",
- "name": "Hyaline body myopathy (MYH7)",
- "aliases": [
-  "myosin storage myopathy",
-  "MYH7-related myosin storage myopathy",
-  "hyaline body myopathy",
-  "MSM"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with autosomal dominant inheritance",
-   "Weakness may be predominantly proximal (scapuloperoneal or limb-girdle) or distal, with considerable phenotypic variability even within families",
-   "Because MYH7 also causes cardiomyopathy, associated hypertrophic or dilated cardiomyopathy can occur and mandates cardiac assessment",
-   "Onset ranges from childhood to adulthood with generally slow progression",
-   "The muscle biopsy hallmark is subsarcolemmal hyaline bodies within type 1 fibres, which stain for myosin and are pale on routine oxidative enzyme stains",
-   "Creatine kinase is normal or mildly elevated and electromyography shows a myopathic pattern",
-   "The hyaline bodies represent accumulation of the mutant myosin, distinguishing the entity on histochemistry and electron microscopy",
-   "Diagnosis combines the histological finding of hyaline bodies with MYH7 genetic confirmation and cardiac evaluation"
+  "id": "hyaline_body_myopathy",
+  "name": "Hyaline body myopathy (MYH7)",
+  "aliases": [
+    "myosin storage myopathy",
+    "MYH7-related myosin storage myopathy",
+    "hyaline body myopathy",
+    "MSM"
   ],
-  "pathophysiology": "Hyaline body (myosin storage) myopathy is caused by dominant variants in MYH7, encoding the slow/beta-cardiac myosin heavy chain expressed in type 1 skeletal fibres and the heart. The mutations, often clustered in the distal rod domain of the protein, impair proper folding and assembly of the myosin thick filament, causing the abnormal myosin to accumulate as subsarcolemmal hyaline inclusions. Disruption of the contractile apparatus in slow-twitch fibres produces skeletal muscle weakness, and because the same protein is essential in cardiac muscle, patients are at risk of an associated cardiomyopathy.",
-  "additionalDifferentials": [
-   "Laing distal myopathy and other MYH7-related phenotypes",
-   "Scapuloperoneal muscular dystrophy of other cause",
-   "Limb-girdle muscular dystrophy",
-   "Congenital myopathies including core and rod myopathies",
-   "Myofibrillar myopathies",
-   "Facioscapulohumeral muscular dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Nerve conduction studies and electromyography",
-   "Muscle biopsy with histochemistry, immunostaining for myosin, and electron microscopy to demonstrate hyaline bodies",
-   "Muscle MRI to define the distribution of involvement",
-   "Cardiac evaluation with ECG and echocardiography",
-   "Targeted MYH7 sequencing or a congenital myopathy/distal myopathy panel"
-  ],
-  "redFlags": [
-   "Symptoms or signs of hypertrophic or dilated cardiomyopathy",
-   "Arrhythmia or syncope in the patient or affected relatives",
-   "Respiratory muscle weakness with reduced vital capacity",
-   "Rapidly progressive weakness suggesting an alternative diagnosis"
-  ],
-  "prognosis": "Skeletal muscle weakness generally progresses slowly and many patients remain ambulant, but the overall prognosis is strongly influenced by any associated MYH7 cardiomyopathy, so cardiac surveillance is a key determinant of outcome.",
-  "pitfalls": [
-   "Neglecting cardiac screening despite the well-recognised MYH7 cardiac association",
-   "Confusing hyaline bodies with other inclusions such as cytoplasmic or reducing bodies without appropriate stains",
-   "Assuming normal creatine kinase excludes a myopathy",
-   "Missing the diagnosis when weakness is proximal and mistaken for limb-girdle dystrophy"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: MYH7-related myopathy (myosin storage myopathy)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and mobility and prevent contractures",
-   "Regular cardiac surveillance with ECG and echocardiography, treating any associated hypertrophic or dilated cardiomyopathy with heart-failure and antiarrhythmic therapy and considering an implantable defibrillator where indicated",
-   "Respiratory monitoring for respiratory muscle weakness with non-invasive ventilatory support once hypoventilation develops",
-   "Orthopaedic management of contractures and spinal deformity with orthoses, stretching, and mobility aids",
-   "Careful anaesthetic assessment given the cardiac and respiratory involvement",
-   "Multidisciplinary neuromuscular care including neurology, cardiology, and respiratory medicine",
-   "Genetic counselling for autosomal dominant inheritance with cascade cardiac and clinical screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyaline_body_myopathy-pathway",
-   "title": "Hyaline body myopathy (MYH7): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with autosomal dominant inheritance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms or signs of hypertrophic or dilated cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry, immunostaining for myosin, and electron microscopy to demonstrate hyaline bodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and mobility and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Neglecting cardiac screening despite the well-recognised MYH7 cardiac association"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyaline body myopathy (myh7)."
-  }
- ],
- "tables": [
-  {
-   "id": "hyaline_body_myopathy-matrix",
-   "title": "Hyaline body myopathy (MYH7): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with autosomal dominant inheritance",
+      "Weakness may be predominantly proximal (scapuloperoneal or limb-girdle) or distal, with considerable phenotypic variability even within families",
+      "Because MYH7 also causes cardiomyopathy, associated hypertrophic or dilated cardiomyopathy can occur and mandates cardiac assessment",
+      "Onset ranges from childhood to adulthood with generally slow progression",
+      "The muscle biopsy hallmark is subsarcolemmal hyaline bodies within type 1 fibres, which stain for myosin and are pale on routine oxidative enzyme stains",
+      "Creatine kinase is normal or mildly elevated and electromyography shows a myopathic pattern",
+      "The hyaline bodies represent accumulation of the mutant myosin, distinguishing the entity on histochemistry and electron microscopy",
+      "Diagnosis combines the histological finding of hyaline bodies with MYH7 genetic confirmation and cardiac evaluation"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry, immunostaining for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyaline body (myosin storage) myopathy is caused by dominant variants in MYH7, encoding the slow/beta-cardiac myosin heavy chain expressed in type 1 skeletal fibres and the heart. The mutations, often clustered in the distal rod domain of the protein, impair proper folding and assembly of the myosin thick filament, causing the abnormal myosin to accumulate as subsarcolemmal hyaline inclusions. Disruption of the contractile apparatus in slow-twitch fibres produces skeletal muscle weakness, and because the same protein is essential in cardiac muscle, patients are at risk of an associated cardiomyopathy.",
+    "additionalDifferentials": [
+      "Laing distal myopathy and other MYH7-related phenotypes",
+      "Scapuloperoneal muscular dystrophy of other cause",
+      "Limb-girdle muscular dystrophy",
+      "Congenital myopathies including core and rod myopathies",
+      "Myofibrillar myopathies",
+      "Facioscapulohumeral muscular dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Laing distal myopathy and other MYH7-related phenotypes, Scapuloperoneal muscular dystrophy of other cause, Limb-girdle muscular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Nerve conduction studies and electromyography",
+      "Muscle biopsy with histochemistry, immunostaining for myosin, and electron microscopy to demonstrate hyaline bodies",
+      "Muscle MRI to define the distribution of involvement",
+      "Cardiac evaluation with ECG and echocardiography",
+      "Targeted MYH7 sequencing or a congenital myopathy/distal myopathy panel"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms or signs of hypertrophic or dilated cardiomyopathy",
+      "Arrhythmia or syncope in the patient or affected relatives",
+      "Respiratory muscle weakness with reduced vital capacity",
+      "Rapidly progressive weakness suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Neglecting cardiac screening despite the well-recognised MYH7 cardiac association",
-     "Prevent diagnostic or management error"
+    "prognosis": "Skeletal muscle weakness generally progresses slowly and many patients remain ambulant, but the overall prognosis is strongly influenced by any associated MYH7 cardiomyopathy, so cardiac surveillance is a key determinant of outcome.",
+    "pitfalls": [
+      "Neglecting cardiac screening despite the well-recognised MYH7 cardiac association",
+      "Confusing hyaline bodies with other inclusions such as cytoplasmic or reducing bodies without appropriate stains",
+      "Assuming normal creatine kinase excludes a myopathy",
+      "Missing the diagnosis when weakness is proximal and mistaken for limb-girdle dystrophy"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: MYH7-related myopathy (myosin storage myopathy)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and mobility and prevent contractures",
+      "Regular cardiac surveillance with ECG and echocardiography, treating any associated hypertrophic or dilated cardiomyopathy with heart-failure and antiarrhythmic therapy and considering an implantable defibrillator where indicated",
+      "Respiratory monitoring for respiratory muscle weakness with non-invasive ventilatory support once hypoventilation develops",
+      "Orthopaedic management of contractures and spinal deformity with orthoses, stretching, and mobility aids",
+      "Careful anaesthetic assessment given the cardiac and respiratory involvement",
+      "Multidisciplinary neuromuscular care including neurology, cardiology, and respiratory medicine",
+      "Genetic counselling for autosomal dominant inheritance with cascade cardiac and clinical screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyaline body myopathy (myh7)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyaline-body-myopathy-real-image",
-   "title": "Hyaline body myopathy (MYH7): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hyaline_body_myopathy-pathway",
+      "title": "Hyaline body myopathy (MYH7): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with autosomal dominant inheritance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms or signs of hypertrophic or dilated cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry, immunostaining for myosin, and electron microscopy to demonstrate hyaline bodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and mobility and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Neglecting cardiac screening despite the well-recognised MYH7 cardiac association"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyaline body myopathy (myh7)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyaline_body_myopathy-matrix",
+      "title": "Hyaline body myopathy (MYH7): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Also termed myosin storage myopathy, caused by variants in MYH7 encoding slow/beta-cardiac myosin heavy chain, usually with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Nerve conduction studies and electromyography, Muscle biopsy with histochemistry, immunostaining for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Laing distal myopathy and other MYH7-related phenotypes, Scapuloperoneal muscular dystrophy of other cause, Limb-girdle muscular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy exists, so care centres on physiotherapy and occupational therapy to preserve strength and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Neglecting cardiac screening despite the well-recognised MYH7 cardiac association",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyaline body myopathy (myh7)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyaline_body_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry and immunostaining",
+          "cells": [
+            {
+              "text": "Hyaline bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Distribution of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted MYH7 sequencing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyaline_body_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Laing distal myopathy and other MYH7-related phenotypes",
+          "cells": [
+            {
+              "text": "Overlapping MYH7 phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myofibrillar myopathies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facioscapulohumeral muscular dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyaline_body_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-specific drug therapy",
+          "cells": [
+            {
+              "text": "Care centres on supportive measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Regular ECG and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Contractures and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic assessment",
+          "cells": [
+            {
+              "text": "Cardiac and respiratory risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neuromuscular care",
+          "cells": [
+            {
+              "text": "Neurology, cardiology and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyaline_body_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hyaline body myopathy (MYH7)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive proximal weakness with a family history and cardiac concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia or syncope, respiratory weakness, or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for arrhythmia or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK; EMG; muscle biopsy for hyaline bodies; muscle MRI; ECG and echo; MYH7 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a MYH7 variant found, with other myopathies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Laing distal myopathy, myofibrillar myopathy, congenital myopathy or FSHD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No disease-specific drug therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular ECG and echocardiography surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring for weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for contractures and spinal deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive neuromuscular care; cardiac and respiratory surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

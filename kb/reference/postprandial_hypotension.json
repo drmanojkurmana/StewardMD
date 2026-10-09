@@ -1,172 +1,497 @@
 {
- "id": "postprandial_hypotension",
- "name": "Postprandial hypotension",
- "aliases": [
-  "post-meal hypotension",
-  "postprandial hypotensive syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a symptomatic threshold",
-   "Symptoms include light-headedness, weakness, visual disturbance, falls, or syncope after meals, and angina in susceptible patients",
-   "Particularly common in older people and in those with autonomic failure, Parkinson disease, or diabetes",
-   "Large, carbohydrate-rich meals and alcohol are the strongest provokers",
-   "An important but often overlooked cause of postprandial falls and syncope in the elderly",
-   "Frequently coexists with orthostatic hypotension, which compounds the risk",
-   "Diagnosis rests on measuring blood pressure before and serially after a standardised meal",
-   "Management is non-pharmacological first: smaller, more frequent, lower-carbohydrate meals, adequate water intake before meals, reduced alcohol, and avoiding standing soon after eating"
+  "id": "postprandial_hypotension",
+  "name": "Postprandial hypotension",
+  "aliases": [
+    "post-meal hypotension",
+    "postprandial hypotensive syndrome"
   ],
-  "pathophysiology": "After a meal, blood pools in the splanchnic circulation as digestion increases mesenteric blood flow, and vasoactive gastrointestinal peptides promote splanchnic vasodilatation. In a healthy person the baroreflex compensates through increased sympathetic outflow, vasoconstriction elsewhere, and a modest rise in heart rate, keeping blood pressure stable. In postprandial hypotension this compensation is inadequate, typically because of impaired baroreflex or sympathetic function as in autonomic failure, ageing, diabetes, or Parkinson disease, so that splanchnic pooling causes a sustained fall in blood pressure. Rapid gastric emptying and carbohydrate-rich meals, which accelerate the insulin and gut-peptide response, exaggerate the effect.",
-  "additionalDifferentials": [
-   "Orthostatic hypotension",
-   "Reflex (vasovagal) syncope",
-   "Cardiac arrhythmia or structural heart disease",
-   "Medication-induced hypotension",
-   "Reactive (post-meal) hypoglycaemia",
-   "Dumping syndrome after gastric surgery"
-  ],
-  "additionalInvestigations": [
-   "Serial blood-pressure measurement before and after a standardised meal",
-   "Lying-to-standing blood pressure to detect coexisting orthostatic hypotension",
-   "Medication review, particularly of antihypertensives and diuretics taken with meals",
-   "Autonomic function testing where autonomic failure is suspected",
-   "ECG and ambulatory monitoring to exclude arrhythmia",
-   "Blood glucose assessment around symptomatic episodes"
-  ],
-  "redFlags": [
-   "Recurrent syncope causing injury",
-   "Postprandial angina or evidence of cardiac ischaemia",
-   "Marked coexisting orthostatic hypotension suggesting autonomic failure",
-   "Neurological features suggesting an underlying synucleinopathy"
-  ],
-  "prognosis": "Postprandial hypotension is usually manageable with dietary and behavioural measures, but in frail older people and those with autonomic failure it is an important, sometimes recurrent cause of falls, syncope, and reduced quality of life.",
-  "pitfalls": [
-   "Overlooking meals as the trigger for falls or syncope in older patients",
-   "Timing antihypertensive medication so that its peak effect coincides with the postprandial fall",
-   "Failing to look for coexisting orthostatic hypotension",
-   "Attributing symptoms solely to hypoglycaemia without measuring blood pressure"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood pooling",
-   "Recommend behavioural measures such as drinking water before meals, remaining seated after eating and avoiding exertion in the postprandial period",
-   "Review and reschedule antihypertensives and diuretics away from mealtimes, or reduce their dose",
-   "Consider acarbose to slow carbohydrate absorption, caffeine as an adjunct, and octreotide in refractory autonomic failure",
-   "Identify and manage coexisting orthostatic hypotension, which compounds the risk of falls and syncope",
-   "Optimise treatment of the underlying condition such as autonomic failure, Parkinson disease or diabetes with the relevant specialist"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "postprandial_hypotension-pathway",
-   "title": "Postprandial hypotension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a symptomatic threshold",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent syncope causing injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial blood-pressure measurement before and after a standardised meal, Lying-to-standing blood pressure to detect coexisting orthostatic hypotension, Medication review, particularly of antihypertensives and diuretics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood pooling"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking meals as the trigger for falls or syncope in older patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of postprandial hypotension."
-  }
- ],
- "tables": [
-  {
-   "id": "postprandial_hypotension-matrix",
-   "title": "Postprandial hypotension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a symptomatic threshold",
+      "Symptoms include light-headedness, weakness, visual disturbance, falls, or syncope after meals, and angina in susceptible patients",
+      "Particularly common in older people and in those with autonomic failure, Parkinson disease, or diabetes",
+      "Large, carbohydrate-rich meals and alcohol are the strongest provokers",
+      "An important but often overlooked cause of postprandial falls and syncope in the elderly",
+      "Frequently coexists with orthostatic hypotension, which compounds the risk",
+      "Diagnosis rests on measuring blood pressure before and serially after a standardised meal",
+      "Management is non-pharmacological first: smaller, more frequent, lower-carbohydrate meals, adequate water intake before meals, reduced alcohol, and avoiding standing soon after eating"
     ],
-    [
-     "Key Investigations",
-     "Serial blood-pressure measurement before and after a standardised meal, Lying-to-standing blood pressure to detect coexisting",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "After a meal, blood pools in the splanchnic circulation as digestion increases mesenteric blood flow, and vasoactive gastrointestinal peptides promote splanchnic vasodilatation. In a healthy person the baroreflex compensates through increased sympathetic outflow, vasoconstriction elsewhere, and a modest rise in heart rate, keeping blood pressure stable. In postprandial hypotension this compensation is inadequate, typically because of impaired baroreflex or sympathetic function as in autonomic failure, ageing, diabetes, or Parkinson disease, so that splanchnic pooling causes a sustained fall in blood pressure. Rapid gastric emptying and carbohydrate-rich meals, which accelerate the insulin and gut-peptide response, exaggerate the effect.",
+    "additionalDifferentials": [
+      "Orthostatic hypotension",
+      "Reflex (vasovagal) syncope",
+      "Cardiac arrhythmia or structural heart disease",
+      "Medication-induced hypotension",
+      "Reactive (post-meal) hypoglycaemia",
+      "Dumping syndrome after gastric surgery"
     ],
-    [
-     "Primary Differentials",
-     "Orthostatic hypotension, Reflex (vasovagal) syncope, Cardiac arrhythmia or structural heart disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial blood-pressure measurement before and after a standardised meal",
+      "Lying-to-standing blood pressure to detect coexisting orthostatic hypotension",
+      "Medication review, particularly of antihypertensives and diuretics taken with meals",
+      "Autonomic function testing where autonomic failure is suspected",
+      "ECG and ambulatory monitoring to exclude arrhythmia",
+      "Blood glucose assessment around symptomatic episodes"
     ],
-    [
-     "Management Strategy",
-     "Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent syncope causing injury",
+      "Postprandial angina or evidence of cardiac ischaemia",
+      "Marked coexisting orthostatic hypotension suggesting autonomic failure",
+      "Neurological features suggesting an underlying synucleinopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking meals as the trigger for falls or syncope in older patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Postprandial hypotension is usually manageable with dietary and behavioural measures, but in frail older people and those with autonomic failure it is an important, sometimes recurrent cause of falls, syncope, and reduced quality of life.",
+    "pitfalls": [
+      "Overlooking meals as the trigger for falls or syncope in older patients",
+      "Timing antihypertensive medication so that its peak effect coincides with the postprandial fall",
+      "Failing to look for coexisting orthostatic hypotension",
+      "Attributing symptoms solely to hypoglycaemia without measuring blood pressure"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood pooling",
+      "Recommend behavioural measures such as drinking water before meals, remaining seated after eating and avoiding exertion in the postprandial period",
+      "Review and reschedule antihypertensives and diuretics away from mealtimes, or reduce their dose",
+      "Consider acarbose to slow carbohydrate absorption, caffeine as an adjunct, and octreotide in refractory autonomic failure",
+      "Identify and manage coexisting orthostatic hypotension, which compounds the risk of falls and syncope",
+      "Optimise treatment of the underlying condition such as autonomic failure, Parkinson disease or diabetes with the relevant specialist"
     ]
-   ],
-   "caption": "Overview comparison matrix for postprandial hypotension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "postprandial-hypotension-real-image",
-   "title": "Postprandial hypotension: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "postprandial_hypotension-pathway",
+      "title": "Postprandial hypotension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a symptomatic threshold",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent syncope causing injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial blood-pressure measurement before and after a standardised meal, Lying-to-standing blood pressure to detect coexisting orthostatic hypotension, Medication review, particularly of antihypertensives and diuretics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood pooling"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking meals as the trigger for falls or syncope in older patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of postprandial hypotension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "postprandial_hypotension-matrix",
+      "title": "Postprandial hypotension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fall in systolic blood pressure, conventionally at least 20 mmHg, within about two hours of eating, or a fall below a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial blood-pressure measurement before and after a standardised meal, Lying-to-standing blood pressure to detect coexisting",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orthostatic hypotension, Reflex (vasovagal) syncope, Cardiac arrhythmia or structural heart disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise smaller, more frequent meals lower in rapidly absorbed carbohydrate and reduced alcohol intake to lessen splanchnic blood",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking meals as the trigger for falls or syncope in older patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for postprandial hypotension."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "postprandial_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure before and after a standard meal",
+          "cells": [
+            {
+              "text": "Postprandial fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lying-to-standing blood pressure",
+          "cells": [
+            {
+              "text": "Coexisting orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives and diuretics taken with meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing",
+          "cells": [
+            {
+              "text": "Autonomic failure suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose around episodes",
+          "cells": [
+            {
+              "text": "Hypoglycaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postprandial_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Postural rather than meal-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflex (vasovagal) syncope",
+          "cells": [
+            {
+              "text": "Triggered by standing or emotion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia or structural heart disease",
+          "cells": [
+            {
+              "text": "Syncope without meal trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-induced hypotension",
+          "cells": [
+            {
+              "text": "Drug timing with meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive hypoglycaemia",
+          "cells": [
+            {
+              "text": "Low glucose after eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dumping syndrome",
+          "cells": [
+            {
+              "text": "Gastric surgery history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "postprandial_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diet change",
+          "cells": [
+            {
+              "text": "Smaller, frequent meals low in rapidly absorbed carbohydrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural measures",
+          "cells": [
+            {
+              "text": "Water before meals, remaining seated after eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication timing",
+          "cells": [
+            {
+              "text": "Reschedule antihypertensives and diuretics away from meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological adjuncts",
+          "cells": [
+            {
+              "text": "Acarbose, caffeine or octreotide where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting orthostatic hypotension",
+          "cells": [
+            {
+              "text": "Identify and manage, as it compounds the risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying condition",
+          "cells": [
+            {
+              "text": "Treat autonomic failure or Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "postprandial_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Postprandial hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dizziness or syncope within an hour of eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (recurrent syncope with injury, postprandial angina, synucleinopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac review for postprandial angina or syncope with injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Postprandial blood pressure; lying-to-standing BP; medication review; ECG; glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does a standard meal reproduce a significant fall in blood pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orthostatic hypotension, reflex syncope, arrhythmia or dumping",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Smaller, more frequent meals low in rapidly absorbed carbohydrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drink water before meals and remain seated after eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reschedule antihypertensives and diuretics away from mealtimes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider acarbose, caffeine or octreotide as adjuncts where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Identify and manage coexisting orthostatic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually manageable with diet and behaviour; higher risk in frailty or autonomic failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

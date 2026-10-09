@@ -1,174 +1,434 @@
 {
- "id": "erysipeloid",
- "name": "Erysipeloid",
- "aliases": [
-  "Erysipelothrix rhusiopathiae infection",
-  "erysipeloid of Rosenbach",
-  "fish-handler's disease",
-  "seal finger (related occupational presentation)"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired through occupational skin inoculation",
-   "Typically affects butchers, abattoir workers, fishermen, fish handlers and veterinarians, so an occupational history is central to recognition",
-   "The usual localised cutaneous form appears after a short incubation of about 1-4 days as a well-demarcated, violaceous, painful and often intensely itchy plaque, characteristically on a finger or hand",
-   "The lesion tends to spread slowly at its advancing edge while clearing centrally and is not usually associated with suppuration or systemic upset",
-   "A rarer diffuse cutaneous form with more widespread skin involvement and a serious systemic form with bacteraemia and endocarditis also occur",
-   "The organism has a notable propensity to cause endocarditis, which may affect previously normal valves, so unexplained bacteraemia warrants echocardiography",
-   "Penicillin-class agents are highly active and are first-line; importantly the organism is intrinsically resistant to vancomycin, a key point when treating suspected bacteraemia empirically"
+  "id": "erysipeloid",
+  "name": "Erysipeloid",
+  "aliases": [
+    "Erysipelothrix rhusiopathiae infection",
+    "erysipeloid of Rosenbach",
+    "fish-handler's disease",
+    "seal finger (related occupational presentation)"
   ],
-  "pathophysiology": "Erysipelothrix rhusiopathiae is introduced through minor cuts or abrasions during handling of contaminated animal or fish products. In the localised form it multiplies in the dermis, producing a slowly advancing inflammatory plaque with the characteristic violaceous colour and central clearing, generally without pus formation. In susceptible hosts the organism can invade the bloodstream, and its ability to adhere to and colonise cardiac valve endothelium underlies its striking tendency to cause endocarditis, sometimes on structurally normal valves, with the potential for systemic embolic and destructive valvular complications.",
-  "additionalDifferentials": [
-   "Erysipelas or cellulitis due to streptococci or staphylococci",
-   "Contact or irritant dermatitis",
-   "Herpetic whitlow",
-   "Orf or other parapoxvirus infection",
-   "Tularaemia or other inoculation zoonoses",
-   "Gout or acute inflammatory arthritis of a digit"
-  ],
-  "additionalInvestigations": [
-   "Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding)",
-   "Blood cultures where systemic infection or endocarditis is suspected",
-   "Echocardiography, including transoesophageal study, in bacteraemic patients",
-   "Gram stain of biopsy material showing Gram-positive bacilli",
-   "Inflammatory markers to gauge severity of invasive disease"
-  ],
-  "redFlags": [
-   "New or changing murmur, embolic phenomena or heart failure suggesting endocarditis",
-   "Fever and systemic toxicity indicating invasive rather than localised disease",
-   "Rapidly spreading or diffuse skin involvement",
-   "Sepsis in an occupationally exposed patient",
-   "Empirical use of vancomycin, which is ineffective, in suspected Erysipelothrix bacteraemia"
-  ],
-  "prognosis": "The localised cutaneous form is self-limiting and resolves within a few weeks, and responds promptly to penicillin; invasive disease and endocarditis carry a much more serious prognosis and require prolonged intravenous therapy and sometimes valve surgery.",
-  "pitfalls": [
-   "Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis",
-   "Relying on surface swabs rather than a deep biopsy for culture",
-   "Choosing empirical vancomycin, to which the organism is intrinsically resistant",
-   "Failing to investigate for endocarditis when bacteraemia is documented",
-   "Assuming all cases are trivial and overlooking the diffuse and systemic forms"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a macrolide for penicillin-allergic patients",
-   "Avoidance of empirical vancomycin, to which Erysipelothrix rhusiopathiae is intrinsically resistant",
-   "Wound care and analgesia for the painful violaceous plaque, which is usually self-limiting",
-   "Blood cultures and echocardiography, including a transoesophageal study, where bacteraemia or endocarditis is suspected",
-   "Prolonged intravenous penicillin for invasive disease and endocarditis, with valve surgery where the valve is destroyed or vegetations are large",
-   "Occupational preventive advice on protective gloves and hand hygiene when handling animal, fish or shellfish products to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erysipeloid-pathway",
-   "title": "Erysipeloid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired through occupational skin inoculation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or changing murmur, embolic phenomena or heart failure suggesting endocarditis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding), Blood cultures where systemic infection or endocarditis is suspected, Echocardiography, including"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a macrolide for penicillin-allergic patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erysipeloid."
-  }
- ],
- "tables": [
-  {
-   "id": "erysipeloid-matrix",
-   "title": "Erysipeloid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired through occupational skin inoculation",
+      "Typically affects butchers, abattoir workers, fishermen, fish handlers and veterinarians, so an occupational history is central to recognition",
+      "The usual localised cutaneous form appears after a short incubation of about 1-4 days as a well-demarcated, violaceous, painful and often intensely itchy plaque, characteristically on a finger or hand",
+      "The lesion tends to spread slowly at its advancing edge while clearing centrally and is not usually associated with suppuration or systemic upset",
+      "A rarer diffuse cutaneous form with more widespread skin involvement and a serious systemic form with bacteraemia and endocarditis also occur",
+      "The organism has a notable propensity to cause endocarditis, which may affect previously normal valves, so unexplained bacteraemia warrants echocardiography",
+      "Penicillin-class agents are highly active and are first-line; importantly the organism is intrinsically resistant to vancomycin, a key point when treating suspected bacteraemia empirically"
     ],
-    [
-     "Key Investigations",
-     "Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding), Blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erysipelothrix rhusiopathiae is introduced through minor cuts or abrasions during handling of contaminated animal or fish products. In the localised form it multiplies in the dermis, producing a slowly advancing inflammatory plaque with the characteristic violaceous colour and central clearing, generally without pus formation. In susceptible hosts the organism can invade the bloodstream, and its ability to adhere to and colonise cardiac valve endothelium underlies its striking tendency to cause endocarditis, sometimes on structurally normal valves, with the potential for systemic embolic and destructive valvular complications.",
+    "additionalDifferentials": [
+      "Erysipelas or cellulitis due to streptococci or staphylococci",
+      "Contact or irritant dermatitis",
+      "Herpetic whitlow",
+      "Orf or other parapoxvirus infection",
+      "Tularaemia or other inoculation zoonoses",
+      "Gout or acute inflammatory arthritis of a digit"
     ],
-    [
-     "Primary Differentials",
-     "Erysipelas or cellulitis due to streptococci or staphylococci, Contact or irritant dermatitis, Herpetic whitlow",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding)",
+      "Blood cultures where systemic infection or endocarditis is suspected",
+      "Echocardiography, including transoesophageal study, in bacteraemic patients",
+      "Gram stain of biopsy material showing Gram-positive bacilli",
+      "Inflammatory markers to gauge severity of invasive disease"
     ],
-    [
-     "Management Strategy",
-     "Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a",
-     "Core treatment modality"
+    "redFlags": [
+      "New or changing murmur, embolic phenomena or heart failure suggesting endocarditis",
+      "Fever and systemic toxicity indicating invasive rather than localised disease",
+      "Rapidly spreading or diffuse skin involvement",
+      "Sepsis in an occupationally exposed patient",
+      "Empirical use of vancomycin, which is ineffective, in suspected Erysipelothrix bacteraemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The localised cutaneous form is self-limiting and resolves within a few weeks, and responds promptly to penicillin; invasive disease and endocarditis carry a much more serious prognosis and require prolonged intravenous therapy and sometimes valve surgery.",
+    "pitfalls": [
+      "Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis",
+      "Relying on surface swabs rather than a deep biopsy for culture",
+      "Choosing empirical vancomycin, to which the organism is intrinsically resistant",
+      "Failing to investigate for endocarditis when bacteraemia is documented",
+      "Assuming all cases are trivial and overlooking the diffuse and systemic forms"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a macrolide for penicillin-allergic patients",
+      "Avoidance of empirical vancomycin, to which Erysipelothrix rhusiopathiae is intrinsically resistant",
+      "Wound care and analgesia for the painful violaceous plaque, which is usually self-limiting",
+      "Blood cultures and echocardiography, including a transoesophageal study, where bacteraemia or endocarditis is suspected",
+      "Prolonged intravenous penicillin for invasive disease and endocarditis, with valve surgery where the valve is destroyed or vegetations are large",
+      "Occupational preventive advice on protective gloves and hand hygiene when handling animal, fish or shellfish products to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for erysipeloid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erysipeloid-real-image",
-   "title": "Erysipeloid: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "erysipeloid-pathway",
+      "title": "Erysipeloid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired through occupational skin inoculation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or changing murmur, embolic phenomena or heart failure suggesting endocarditis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding), Blood cultures where systemic infection or endocarditis is suspected, Echocardiography, including"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a macrolide for penicillin-allergic patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erysipeloid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erysipeloid-matrix",
+      "title": "Erysipeloid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Erysipelothrix rhusiopathiae, a Gram-positive bacillus widely distributed in animals, fish and shellfish, and acquired",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Culture of a full-thickness skin biopsy from the advancing edge of the lesion (surface swabs are often unrewarding), Blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erysipelas or cellulitis due to streptococci or staphylococci, Contact or irritant dermatitis, Herpetic whitlow",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Penicillin as the antimicrobial of choice for the localised cutaneous form, with a cephalosporin, ciprofloxacin, clindamycin or a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the occupational exposure and misdiagnosing the plaque as ordinary cellulitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erysipeloid."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erysipeloid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Culture of full-thickness skin biopsy from the advancing edge",
+          "cells": [
+            {
+              "text": "Causative organism; surface swabs are often unrewarding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain of biopsy material",
+          "cells": [
+            {
+              "text": "Gram-positive bacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Systemic infection or endocarditis suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, including transoesophageal study",
+          "cells": [
+            {
+              "text": "Bacteraemic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Severity of invasive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erysipeloid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Penicillin",
+          "cells": [
+            {
+              "text": "Antimicrobial of choice for the localised cutaneous form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternatives in penicillin allergy",
+          "cells": [
+            {
+              "text": "A cephalosporin, ciprofloxacin, clindamycin or a macrolide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid empirical vancomycin",
+          "cells": [
+            {
+              "text": "The organism is intrinsically resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and analgesia",
+          "cells": [
+            {
+              "text": "For the painful violaceous plaque, which is usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and echocardiography",
+          "cells": [
+            {
+              "text": "Where bacteraemia or endocarditis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged intravenous penicillin",
+          "cells": [
+            {
+              "text": "Invasive disease and endocarditis; valve surgery where the valve is destroyed or vegetations are large"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational prevention",
+          "cells": [
+            {
+              "text": "Protective gloves and hand hygiene when handling animal, fish or shellfish products"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erysipeloid-dx-mgmt",
+      "title": "Diagnosis and management of Erysipeloid",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful, well-demarcated violaceous plaque after injury handling animal or fish products",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (murmur, embolic signs, fever or systemic toxicity, diffuse spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Blood cultures, echocardiography and intravenous penicillin for endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep biopsy from the advancing edge for culture and Gram stain; inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gram-positive bacilli grown from deep biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Avoid vancomycin; repeat deep sampling and consider erysipelas",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Penicillin as first-line for the localised cutaneous form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid empirical vancomycin, to which the organism is resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wound care and analgesia for the usually self-limiting lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood cultures and echocardiography if bacteraemia is documented",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prolonged intravenous penicillin and valve surgery for endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised form self-limiting within weeks; endocarditis is the serious risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

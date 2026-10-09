@@ -1,174 +1,470 @@
 {
- "id": "sensorimotor_lacunar_stroke",
- "name": "sensorimotor lacunar stroke",
- "aliases": [
-  "sensorimotor lacunar syndrome",
-  "thalamocapsular lacunar stroke"
- ],
- "class": "non_infective",
- "system": "nervous",
- "specialty": "stroke_neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the junction of the thalamus and adjacent posterior internal capsule.",
-   "The lesion typically involves thalamocapsular territory supplied by penetrating arteries, interrupting both ascending sensory relay and descending corticospinal fibres.",
-   "Absence of aphasia, neglect, hemianopia and gaze palsy distinguishes it from a large middle cerebral artery cortical infarct.",
-   "It is one of the classical Fisher lacunar syndromes and shares hypertensive small-vessel pathology with the pure motor and pure sensory variants.",
-   "A comparable clinical picture can arise from a small primary intracerebral haemorrhage in the same region, so imaging is essential.",
-   "Diffusion-weighted MRI reliably localises the small deep infarct when CT is unrevealing.",
-   "Because the deficit is 'complete' across motor and sensory domains, functional impact can exceed that of the single-modality lacunar syndromes.",
-   "Secondary prevention rests on blood pressure, glycaemic and lipid control together with antiplatelet therapy."
+  "id": "sensorimotor_lacunar_stroke",
+  "name": "sensorimotor lacunar stroke",
+  "aliases": [
+    "sensorimotor lacunar syndrome",
+    "thalamocapsular lacunar stroke"
   ],
-  "pathophysiology": "Sensorimotor lacunar stroke is produced by occlusion of a small penetrating artery supplying the region where the ventral posterior thalamic nuclei lie immediately adjacent to the posterior limb of the internal capsule. A single lacune here simultaneously interrupts the crossed sensory pathways relaying through the thalamus and the descending corticospinal motor fibres in the capsule, yielding combined contralateral sensory loss and weakness affecting face, arm and leg. As with other lacunar strokes, the responsible arteriopathy is usually hypertensive lipohyalinosis or microatheroma of a deep perforating end-artery, producing a small cavitated infarct without involvement of the overlying cortex.",
-  "additionalDifferentials": [
-   "Large-vessel cortical infarct with combined sensorimotor deficit",
-   "Thalamocapsular or capsular intracerebral haemorrhage",
-   "Pure motor hemiparesis or pure sensory stroke early in evolution",
-   "Space-occupying lesion compressing thalamus and capsule",
-   "Demyelinating lesion involving sensory and motor tracts",
-   "Postictal (Todd's) deficit after a focal seizure"
-  ],
-  "additionalInvestigations": [
-   "Diffusion-weighted and T2/FLAIR MRI of the brain",
-   "Non-contrast CT head to exclude deep haemorrhage",
-   "Carotid duplex and intracranial vascular imaging",
-   "ECG and extended cardiac rhythm monitoring",
-   "Fasting glucose, HbA1c and lipid profile",
-   "Ambulatory blood pressure measurement"
-  ],
-  "redFlags": [
-   "Deteriorating conscious level or severe headache suggesting haemorrhage",
-   "Emergence of cortical signs indicating larger-territory infarction",
-   "Stuttering or crescendo progression of the deficit",
-   "New brainstem signs implying more extensive posterior-circulation ischaemia"
-  ],
-  "prognosis": "Recovery is variable and often slower than in single-modality lacunar syndromes because both motor and sensory function are affected, though many patients still regain useful independence; recurrent small-vessel events and vascular cognitive decline remain important risks.",
-  "pitfalls": [
-   "Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging.",
-   "Classifying the event as cortical and pursuing unnecessary investigation when cortical signs are genuinely absent.",
-   "Assuming a normal early CT excludes infarction rather than proceeding to diffusion MRI.",
-   "Underestimating rehabilitation needs given the combined sensory and motor loss.",
-   "Failing to screen for a co-existent embolic source in a patient with small-vessel disease."
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice",
-   "Caplan's Stroke: A Clinical Approach"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or tenecteplase to eligible patients within the treatment window",
-   "Start antiplatelet therapy with aspirin acutely, transitioning to long-term secondary prevention",
-   "Institute secondary prevention with a long-term antiplatelet agent and high-intensity statin",
-   "Control blood pressure with antihypertensive therapy as the key modifier of hypertensive small-vessel disease, alongside glycaemic control and smoking cessation",
-   "Begin early multidisciplinary rehabilitation with physiotherapy, occupational therapy, and sensory retraining for the combined motor and sensory deficit",
-   "Monitor for recurrent lacunar events and vascular cognitive decline, escalating to specialist stroke review as needed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sensorimotor_lacunar_stroke-pathway",
-   "title": "sensorimotor lacunar stroke: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the junction of the thalamus and adjacent posterior internal capsule.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Deteriorating conscious level or severe headache suggesting haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diffusion-weighted and T2/FLAIR MRI of the brain, Non-contrast CT head to exclude deep haemorrhage, Carotid duplex and intracranial vascular imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or tenecteplase to eligible patients within the treatment window"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sensorimotor lacunar stroke."
-  }
- ],
- "tables": [
-  {
-   "id": "sensorimotor_lacunar_stroke-matrix",
-   "title": "sensorimotor lacunar stroke: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous",
+  "specialty": "stroke_neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the junction of the thalamus and adjacent posterior internal capsule.",
+      "The lesion typically involves thalamocapsular territory supplied by penetrating arteries, interrupting both ascending sensory relay and descending corticospinal fibres.",
+      "Absence of aphasia, neglect, hemianopia and gaze palsy distinguishes it from a large middle cerebral artery cortical infarct.",
+      "It is one of the classical Fisher lacunar syndromes and shares hypertensive small-vessel pathology with the pure motor and pure sensory variants.",
+      "A comparable clinical picture can arise from a small primary intracerebral haemorrhage in the same region, so imaging is essential.",
+      "Diffusion-weighted MRI reliably localises the small deep infarct when CT is unrevealing.",
+      "Because the deficit is 'complete' across motor and sensory domains, functional impact can exceed that of the single-modality lacunar syndromes.",
+      "Secondary prevention rests on blood pressure, glycaemic and lipid control together with antiplatelet therapy."
     ],
-    [
-     "Key Investigations",
-     "Diffusion-weighted and T2/FLAIR MRI of the brain, Non-contrast CT head to exclude deep haemorrhage, Carotid duplex and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sensorimotor lacunar stroke is produced by occlusion of a small penetrating artery supplying the region where the ventral posterior thalamic nuclei lie immediately adjacent to the posterior limb of the internal capsule. A single lacune here simultaneously interrupts the crossed sensory pathways relaying through the thalamus and the descending corticospinal motor fibres in the capsule, yielding combined contralateral sensory loss and weakness affecting face, arm and leg. As with other lacunar strokes, the responsible arteriopathy is usually hypertensive lipohyalinosis or microatheroma of a deep perforating end-artery, producing a small cavitated infarct without involvement of the overlying cortex.",
+    "additionalDifferentials": [
+      "Large-vessel cortical infarct with combined sensorimotor deficit",
+      "Thalamocapsular or capsular intracerebral haemorrhage",
+      "Pure motor hemiparesis or pure sensory stroke early in evolution",
+      "Space-occupying lesion compressing thalamus and capsule",
+      "Demyelinating lesion involving sensory and motor tracts",
+      "Postictal (Todd's) deficit after a focal seizure"
     ],
-    [
-     "Primary Differentials",
-     "Large-vessel cortical infarct with combined sensorimotor deficit, Thalamocapsular or capsular intracerebral haemorrhage, Pure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diffusion-weighted and T2/FLAIR MRI of the brain",
+      "Non-contrast CT head to exclude deep haemorrhage",
+      "Carotid duplex and intracranial vascular imaging",
+      "ECG and extended cardiac rhythm monitoring",
+      "Fasting glucose, HbA1c and lipid profile",
+      "Ambulatory blood pressure measurement"
     ],
-    [
-     "Management Strategy",
-     "Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or",
-     "Core treatment modality"
+    "redFlags": [
+      "Deteriorating conscious level or severe headache suggesting haemorrhage",
+      "Emergence of cortical signs indicating larger-territory infarction",
+      "Stuttering or crescendo progression of the deficit",
+      "New brainstem signs implying more extensive posterior-circulation ischaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery is variable and often slower than in single-modality lacunar syndromes because both motor and sensory function are affected, though many patients still regain useful independence; recurrent small-vessel events and vascular cognitive decline remain important risks.",
+    "pitfalls": [
+      "Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging.",
+      "Classifying the event as cortical and pursuing unnecessary investigation when cortical signs are genuinely absent.",
+      "Assuming a normal early CT excludes infarction rather than proceeding to diffusion MRI.",
+      "Underestimating rehabilitation needs given the combined sensory and motor loss.",
+      "Failing to screen for a co-existent embolic source in a patient with small-vessel disease."
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice",
+      "Caplan's Stroke: A Clinical Approach"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or tenecteplase to eligible patients within the treatment window",
+      "Start antiplatelet therapy with aspirin acutely, transitioning to long-term secondary prevention",
+      "Institute secondary prevention with a long-term antiplatelet agent and high-intensity statin",
+      "Control blood pressure with antihypertensive therapy as the key modifier of hypertensive small-vessel disease, alongside glycaemic control and smoking cessation",
+      "Begin early multidisciplinary rehabilitation with physiotherapy, occupational therapy, and sensory retraining for the combined motor and sensory deficit",
+      "Monitor for recurrent lacunar events and vascular cognitive decline, escalating to specialist stroke review as needed"
     ]
-   ],
-   "caption": "Overview comparison matrix for sensorimotor lacunar stroke."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sensorimotor-lacunar-stroke-real-image",
-   "title": "sensorimotor lacunar stroke: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "sensorimotor_lacunar_stroke-pathway",
+      "title": "sensorimotor lacunar stroke: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the junction of the thalamus and adjacent posterior internal capsule.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Deteriorating conscious level or severe headache suggesting haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diffusion-weighted and T2/FLAIR MRI of the brain, Non-contrast CT head to exclude deep haemorrhage, Carotid duplex and intracranial vascular imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or tenecteplase to eligible patients within the treatment window"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sensorimotor lacunar stroke."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sensorimotor_lacunar_stroke-matrix",
+      "title": "sensorimotor lacunar stroke: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Combines unilateral weakness and sensory loss of the face, arm and leg without cortical signs, classically from a lacune at the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diffusion-weighted and T2/FLAIR MRI of the brain, Non-contrast CT head to exclude deep haemorrhage, Carotid duplex and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Large-vessel cortical infarct with combined sensorimotor deficit, Thalamocapsular or capsular intracerebral haemorrhage, Pure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm ischaemia and exclude deep haemorrhage with urgent imaging, then offer intravenous thrombolysis with alteplase or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a thalamocapsular haemorrhage for ischaemic lacunar stroke without imaging.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sensorimotor lacunar stroke."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sensorimotor_lacunar_stroke-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted and T2/FLAIR MRI",
+          "cells": [
+            {
+              "text": "Localises the small deep infarct when CT is unrevealing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Excludes deep haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid duplex and intracranial vascular imaging",
+          "cells": [
+            {
+              "text": "Vascular and embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and extended rhythm monitoring",
+          "cells": [
+            {
+              "text": "Cardiac embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and lipids",
+          "cells": [
+            {
+              "text": "Vascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory blood pressure",
+          "cells": [
+            {
+              "text": "Hypertensive small-vessel disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sensorimotor_lacunar_stroke-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Large-vessel cortical infarct",
+          "cells": [
+            {
+              "text": "Cortical signs (aphasia, neglect, hemianopia, gaze palsy) are absent in lacunar stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thalamocapsular intracerebral haemorrhage",
+          "cells": [
+            {
+              "text": "Comparable clinical picture; imaging is essential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure motor or pure sensory lacunar stroke",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sensorimotor_lacunar_stroke-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent imaging",
+          "cells": [
+            {
+              "text": "Confirm ischaemia and exclude deep haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous thrombolysis",
+          "cells": [
+            {
+              "text": "Alteplase or tenecteplase for eligible patients within the treatment window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin acutely, then long-term secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin",
+          "cells": [
+            {
+              "text": "High-intensity statin for secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Key modifier of hypertensive small-vessel disease; also glycaemic control and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and sensory retraining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrent lacunar events and vascular cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sensorimotor_lacunar_stroke-dx-mgmt",
+      "title": "Diagnosis and management of sensorimotor lacunar stroke",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute unilateral face, arm and leg weakness with sensory loss and no cortical signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling consciousness, severe headache, cortical signs or stuttering progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent CT for haemorrhage; stroke team review for larger-territory infarct",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT head, then diffusion MRI; vascular imaging; ECG and rhythm monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a small deep thalamocapsular infarct?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat haemorrhage, cortical infarct or other lesion per imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thrombolysis with alteplase or tenecteplase if eligible and within window",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirin acutely, then long-term antiplatelet and high-intensity statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Blood pressure, glycaemic control and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early physiotherapy, occupational therapy and sensory retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable, slower recovery; recurrent events and cognitive decline are risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,473 @@
 {
- "id": "lupus_miliaris_disseminatus_faciei",
- "name": "Lupus miliaris disseminatus faciei",
- "aliases": [
-  "LMDF",
-  "acne agminata",
-  "FIGURE (facial idiopathic granulomas with regressive evolution)",
-  "lupus miliaris disseminatus faciei"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
-   "The eyelids and periocular region are characteristically involved, and lesions may cluster around the lower eyelids and upper cheeks",
-   "Diascopy typically shows an apple-jelly colour, reflecting the underlying dermal granulomata",
-   "Histology reveals dermal epithelioid granulomata that frequently show central caseation-like necrosis, once causing confusion with a tuberculid",
-   "It is now regarded as an idiopathic granulomatous disorder unrelated to tuberculosis, despite the historical name",
-   "The condition is self-limiting but often persists for months to years and characteristically resolves with pitted or depressed scars",
-   "Its relationship to granulomatous rosacea is debated, and the two share overlapping clinical and histological features",
-   "Management is difficult and largely empirical, using oral tetracyclines and other systemic agents while avoiding potent topical corticosteroids"
+  "id": "lupus_miliaris_disseminatus_faciei",
+  "name": "Lupus miliaris disseminatus faciei",
+  "aliases": [
+    "LMDF",
+    "acne agminata",
+    "FIGURE (facial idiopathic granulomas with regressive evolution)",
+    "lupus miliaris disseminatus faciei"
   ],
-  "pathophysiology": "The cause of lupus miliaris disseminatus faciei is unknown. It is characterised by dermal granulomatous inflammation, classically epithelioid granulomata with central caseation-like necrosis, arising in a symmetrical facial distribution. Although the historical name and the necrotising histology suggested a tuberculid, no consistent link to mycobacterial infection has been demonstrated, and tuberculin reactions and mycobacterial studies are typically negative. It is now considered an idiopathic granulomatous reaction pattern, possibly related to a follicular or perifollicular process, and is discussed alongside granulomatous rosacea as part of a shared spectrum. The tendency to scar reflects destruction of dermal structures by the granulomatous infiltrate.",
-  "additionalDifferentials": [
-   "Granulomatous rosacea",
-   "Cutaneous sarcoidosis of the face",
-   "Cutaneous tuberculosis (lupus vulgaris) and tuberculids",
-   "Papular acne vulgaris",
-   "Perioral (periorificial) dermatitis, including its granulomatous form",
-   "Demodex folliculitis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy demonstrating caseating epithelioid granulomata",
-   "Mycobacterial stains, culture and molecular testing to exclude tuberculosis",
-   "Investigations for sarcoidosis, including chest imaging, when granulomata are found",
-   "Tuberculin or interferon-gamma release testing to help exclude active tuberculosis",
-   "Assessment of Demodex density where clinically relevant",
-   "Review of previous topical corticosteroid exposure as an aggravating factor"
-  ],
-  "redFlags": [
-   "Necrotising facial granulomata requiring exclusion of tuberculosis before immunosuppression",
-   "Rapidly progressive or ulcerating lesions atypical for the condition",
-   "Periocular involvement threatening the eyelids or ocular surface",
-   "Development of disfiguring scarring during the active phase"
-  ],
-  "prognosis": "The disorder is self-limiting and usually resolves spontaneously over one to two years, but it frequently leaves permanent pitted or depressed scars, and treatment often produces only modest benefit.",
-  "pitfalls": [
-   "Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology",
-   "Using potent topical corticosteroids, which tend to aggravate the eruption",
-   "Delaying treatment and allowing avoidable scarring to develop",
-   "Overlooking sarcoidosis as an alternative cause of facial granulomata"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists clinical guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their anti-inflammatory rather than antimicrobial effect",
-   "Consider oral isotretinoin or dapsone in refractory or heavily scarring disease",
-   "Short courses of oral corticosteroids to dampen intense granulomatous inflammation",
-   "Discontinue any provoking topical corticosteroids, which act as an aggravating factor",
-   "Exclude tuberculosis and sarcoidosis before and during immunomodulatory treatment given the caseation-like granulomata",
-   "Address residual pitted or depressed scarring with laser resurfacing or other scar-revision once active disease has settled",
-   "Refer to dermatology to confirm the diagnosis and set realistic expectations of a self-limiting course with only modest treatment benefit"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lupus_miliaris_disseminatus_faciei-pathway",
-   "title": "Lupus miliaris disseminatus faciei: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Necrotising facial granulomata requiring exclusion of tuberculosis before immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy demonstrating caseating epithelioid granulomata, Mycobacterial stains, culture and molecular testing to exclude tuberculosis, Investigations for sarcoidosis, including chest imaging, when granulomata are found"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their anti-inflammatory rather than antimicrobial effect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lupus miliaris disseminatus faciei."
-  }
- ],
- "tables": [
-  {
-   "id": "lupus_miliaris_disseminatus_faciei-matrix",
-   "title": "Lupus miliaris disseminatus faciei: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
+      "The eyelids and periocular region are characteristically involved, and lesions may cluster around the lower eyelids and upper cheeks",
+      "Diascopy typically shows an apple-jelly colour, reflecting the underlying dermal granulomata",
+      "Histology reveals dermal epithelioid granulomata that frequently show central caseation-like necrosis, once causing confusion with a tuberculid",
+      "It is now regarded as an idiopathic granulomatous disorder unrelated to tuberculosis, despite the historical name",
+      "The condition is self-limiting but often persists for months to years and characteristically resolves with pitted or depressed scars",
+      "Its relationship to granulomatous rosacea is debated, and the two share overlapping clinical and histological features",
+      "Management is difficult and largely empirical, using oral tetracyclines and other systemic agents while avoiding potent topical corticosteroids"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy demonstrating caseating epithelioid granulomata, Mycobacterial stains, culture and molecular testing to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The cause of lupus miliaris disseminatus faciei is unknown. It is characterised by dermal granulomatous inflammation, classically epithelioid granulomata with central caseation-like necrosis, arising in a symmetrical facial distribution. Although the historical name and the necrotising histology suggested a tuberculid, no consistent link to mycobacterial infection has been demonstrated, and tuberculin reactions and mycobacterial studies are typically negative. It is now considered an idiopathic granulomatous reaction pattern, possibly related to a follicular or perifollicular process, and is discussed alongside granulomatous rosacea as part of a shared spectrum. The tendency to scar reflects destruction of dermal structures by the granulomatous infiltrate.",
+    "additionalDifferentials": [
+      "Granulomatous rosacea",
+      "Cutaneous sarcoidosis of the face",
+      "Cutaneous tuberculosis (lupus vulgaris) and tuberculids",
+      "Papular acne vulgaris",
+      "Perioral (periorificial) dermatitis, including its granulomatous form",
+      "Demodex folliculitis"
     ],
-    [
-     "Primary Differentials",
-     "Granulomatous rosacea, Cutaneous sarcoidosis of the face, Cutaneous tuberculosis (lupus vulgaris) and tuberculids",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy demonstrating caseating epithelioid granulomata",
+      "Mycobacterial stains, culture and molecular testing to exclude tuberculosis",
+      "Investigations for sarcoidosis, including chest imaging, when granulomata are found",
+      "Tuberculin or interferon-gamma release testing to help exclude active tuberculosis",
+      "Assessment of Demodex density where clinically relevant",
+      "Review of previous topical corticosteroid exposure as an aggravating factor"
     ],
-    [
-     "Management Strategy",
-     "Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their",
-     "Core treatment modality"
+    "redFlags": [
+      "Necrotising facial granulomata requiring exclusion of tuberculosis before immunosuppression",
+      "Rapidly progressive or ulcerating lesions atypical for the condition",
+      "Periocular involvement threatening the eyelids or ocular surface",
+      "Development of disfiguring scarring during the active phase"
     ],
-    [
-     "Clinical Pitfall",
-     "Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is self-limiting and usually resolves spontaneously over one to two years, but it frequently leaves permanent pitted or depressed scars, and treatment often produces only modest benefit.",
+    "pitfalls": [
+      "Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology",
+      "Using potent topical corticosteroids, which tend to aggravate the eruption",
+      "Delaying treatment and allowing avoidable scarring to develop",
+      "Overlooking sarcoidosis as an alternative cause of facial granulomata"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists clinical guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their anti-inflammatory rather than antimicrobial effect",
+      "Consider oral isotretinoin or dapsone in refractory or heavily scarring disease",
+      "Short courses of oral corticosteroids to dampen intense granulomatous inflammation",
+      "Discontinue any provoking topical corticosteroids, which act as an aggravating factor",
+      "Exclude tuberculosis and sarcoidosis before and during immunomodulatory treatment given the caseation-like granulomata",
+      "Address residual pitted or depressed scarring with laser resurfacing or other scar-revision once active disease has settled",
+      "Refer to dermatology to confirm the diagnosis and set realistic expectations of a self-limiting course with only modest treatment benefit"
     ]
-   ],
-   "caption": "Overview comparison matrix for lupus miliaris disseminatus faciei."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lupus-miliaris-disseminatus-faciei-real-image",
-   "title": "Lupus miliaris disseminatus faciei: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "lupus_miliaris_disseminatus_faciei-pathway",
+      "title": "Lupus miliaris disseminatus faciei: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Necrotising facial granulomata requiring exclusion of tuberculosis before immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy demonstrating caseating epithelioid granulomata, Mycobacterial stains, culture and molecular testing to exclude tuberculosis, Investigations for sarcoidosis, including chest imaging, when granulomata are found"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their anti-inflammatory rather than antimicrobial effect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lupus miliaris disseminatus faciei."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-matrix",
+      "title": "Lupus miliaris disseminatus faciei: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with crops of monomorphic reddish-brown to yellowish dome-shaped papules symmetrically distributed over the central face",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy demonstrating caseating epithelioid granulomata, Mycobacterial stains, culture and molecular testing to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Granulomatous rosacea, Cutaneous sarcoidosis of the face, Cutaneous tuberculosis (lupus vulgaris) and tuberculids",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prolonged oral tetracycline-class antibiotics (such as doxycycline or minocycline) as the mainstay, used for their",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being misled by the caseating histology into diagnosing tuberculosis without supporting microbiology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lupus miliaris disseminatus faciei."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diascopy",
+          "cells": [
+            {
+              "text": "Apple-jelly colour of dermal granulomata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal epithelioid granulomata, sometimes with central necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial stains, culture and molecular testing",
+          "cells": [
+            {
+              "text": "Tuberculosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and sarcoidosis work-up",
+          "cells": [
+            {
+              "text": "Sarcoidosis excluded when granulomata are found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of previous topical steroid use",
+          "cells": [
+            {
+              "text": "Aggravating factor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatous rosacea",
+          "cells": [
+            {
+              "text": "Overlapping features; relationship debated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous sarcoidosis of the face",
+          "cells": [
+            {
+              "text": "Granulomata; chest work-up separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous tuberculosis and tuberculids",
+          "cells": [
+            {
+              "text": "Caseating histology; microbiology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioral dermatitis, granulomatous form",
+          "cells": [
+            {
+              "text": "Periorificial distribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral tetracyclines",
+          "cells": [
+            {
+              "text": "Doxycycline or minocycline as mainstay, used for anti-inflammatory effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or scarring disease",
+          "cells": [
+            {
+              "text": "Isotretinoin or dapsone considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short oral corticosteroid courses",
+          "cells": [
+            {
+              "text": "To dampen intense granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop topical corticosteroids",
+          "cells": [
+            {
+              "text": "Provoking agents that aggravate the eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tuberculosis and sarcoidosis",
+          "cells": [
+            {
+              "text": "Before and during immunomodulatory treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scar revision",
+          "cells": [
+            {
+              "text": "Laser resurfacing once active disease settles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-dx-mgmt",
+      "title": "Diagnosis and management of Lupus miliaris disseminatus faciei",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Crops of monomorphic dome-shaped papules on the central face and periocular skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (necrosis, ulceration, eyelid or ocular threat, heavy scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent tuberculosis exclusion and dermatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, mycobacterial testing, tuberculin or interferon-gamma test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are epithelioid granulomata seen with tuberculosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granulomatous rosacea, sarcoidosis or cutaneous tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-course oral tetracycline-class antibiotics as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isotretinoin or dapsone for refractory or scarring disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short oral corticosteroid course for intense inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stop provoking topical corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Laser resurfacing for residual scars once quiescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting over one to two years, often with permanent pitted scars",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,479 @@
 {
- "id": "prune_belly_syndrome",
- "name": "Prune belly syndrome",
- "aliases": [
-  "Eagle-Barrett syndrome",
-  "triad syndrome",
-  "abdominal muscle deficiency syndrome"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the urinary tract (large hypotonic bladder, dilated tortuous ureters, and hydronephrosis)",
-   "Predominantly affects males; the wrinkled, lax abdominal wall gives the characteristic prune-like appearance in the neonate",
-   "The urinary tract dilatation is typically non-obstructive, reflecting a dysmorphic smooth-muscle wall rather than mechanical blockage",
-   "Renal outcome is dictated by the degree of associated renal dysplasia, which is present in a substantial proportion",
-   "Associated anomalies are common, including pulmonary hypoplasia (potentially lethal, related to oligohydramnios), cardiac defects, and musculoskeletal deformities such as talipes",
-   "Antenatal ultrasound may show a distended bladder, hydroureteronephrosis, and oligohydramnios",
-   "Management is individualised and ranges from conservative surveillance to abdominoplasty, orchidopexy, and urinary tract reconstruction, with prophylactic antibiotics and monitoring of renal function"
+  "id": "prune_belly_syndrome",
+  "name": "Prune belly syndrome",
+  "aliases": [
+    "Eagle-Barrett syndrome",
+    "triad syndrome",
+    "abdominal muscle deficiency syndrome"
   ],
-  "pathophysiology": "Prune belly syndrome is a rare congenital disorder whose precise cause is uncertain. Leading hypotheses include a primary mesodermal developmental defect affecting the abdominal wall and urinary tract smooth muscle, and transient early urinary tract obstruction producing massive bladder and ureteric distension that secondarily damages the abdominal wall musculature and prevents testicular descent. The result is a thin, poorly muscular abdominal wall, a large hypotonic bladder that often empties incompletely, dilated tortuous ureters with deficient peristalsis, and variable renal dysplasia. Bilateral intra-abdominal testes and, frequently, pulmonary hypoplasia from oligohydramnios complete the picture.",
-  "additionalDifferentials": [
-   "Posterior urethral valves with secondary bladder and upper-tract dilatation",
-   "Megacystis-microcolon-intestinal hypoperistalsis syndrome",
-   "Congenital bladder outlet obstruction of other cause",
-   "Primary bilateral vesicoureteric reflux with dysplasia",
-   "Urethral atresia or stenosis",
-   "Non-syndromic bilateral cryptorchidism with unrelated hydronephrosis"
-  ],
-  "additionalInvestigations": [
-   "Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology",
-   "Micturating cystourethrogram (MCUG) to assess reflux, bladder shape, and urethral anatomy",
-   "MAG3 (or other radionuclide) renogram to assess differential function and drainage",
-   "Serum creatinine and electrolytes with serial renal function monitoring",
-   "Antenatal ultrasound findings and amniotic fluid assessment",
-   "Echocardiography and skeletal/chest imaging for associated anomalies"
-  ],
-  "redFlags": [
-   "Neonatal respiratory distress from pulmonary hypoplasia, which is a leading cause of early mortality",
-   "Rising creatinine or oliguria signalling significant renal dysplasia or impairment",
-   "Recurrent febrile urinary tract infections in a poorly draining, dilated system",
-   "Signs of true obstruction (e.g. urethral atresia) superimposed on the baseline dilatation"
-  ],
-  "prognosis": "Outcome varies widely and is largely determined by the severity of renal dysplasia and pulmonary hypoplasia; severely affected neonates may die from respiratory or renal failure, whereas mildly affected children can have near-normal life expectancy with careful urological and nephrological follow-up.",
-  "pitfalls": [
-   "Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive",
-   "Underestimating pulmonary hypoplasia as the immediate life-threatening problem in the neonate",
-   "Overlooking associated cardiac, gastrointestinal, and orthopaedic anomalies",
-   "Delaying orchidopexy for the intra-abdominal testes with implications for fertility and malignancy risk"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Gearhart, Rink & Mouriquand: Pediatric Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival",
-   "Preserve renal function by monitoring creatinine and electrolytes and ensuring adequate bladder drainage and emptying",
-   "Antibiotic prophylaxis and prompt treatment of urinary tract infections, with management of vesicoureteric reflux",
-   "Reconstructive urological surgery where indicated, including abdominal wall repair (abdominoplasty) and urinary tract reconstruction",
-   "Orchidopexy for the bilateral intra-abdominal testes",
-   "Long-term nephrology surveillance for chronic kidney disease, with renal replacement or transplantation in severe renal dysplasia",
-   "Multidisciplinary care spanning neonatology, urology, nephrology and orthopaedics, with family and genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prune_belly_syndrome-pathway",
-   "title": "Prune belly syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the urinary tract (large hypotonic bladder, dilated tortuous ureters, and hydronephrosis)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal respiratory distress from pulmonary hypoplasia, which is a leading cause of early mortality",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology, Micturating cystourethrogram (MCUG) to assess reflux, bladder shape, and urethral anatomy, MAG3 (or other radionuclide) renogram to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prune belly syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "prune_belly_syndrome-matrix",
-   "title": "Prune belly syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the urinary tract (large hypotonic bladder, dilated tortuous ureters, and hydronephrosis)",
+      "Predominantly affects males; the wrinkled, lax abdominal wall gives the characteristic prune-like appearance in the neonate",
+      "The urinary tract dilatation is typically non-obstructive, reflecting a dysmorphic smooth-muscle wall rather than mechanical blockage",
+      "Renal outcome is dictated by the degree of associated renal dysplasia, which is present in a substantial proportion",
+      "Associated anomalies are common, including pulmonary hypoplasia (potentially lethal, related to oligohydramnios), cardiac defects, and musculoskeletal deformities such as talipes",
+      "Antenatal ultrasound may show a distended bladder, hydroureteronephrosis, and oligohydramnios",
+      "Management is individualised and ranges from conservative surveillance to abdominoplasty, orchidopexy, and urinary tract reconstruction, with prophylactic antibiotics and monitoring of renal function"
     ],
-    [
-     "Key Investigations",
-     "Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology, Micturating cystourethrogram (MCUG) to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prune belly syndrome is a rare congenital disorder whose precise cause is uncertain. Leading hypotheses include a primary mesodermal developmental defect affecting the abdominal wall and urinary tract smooth muscle, and transient early urinary tract obstruction producing massive bladder and ureteric distension that secondarily damages the abdominal wall musculature and prevents testicular descent. The result is a thin, poorly muscular abdominal wall, a large hypotonic bladder that often empties incompletely, dilated tortuous ureters with deficient peristalsis, and variable renal dysplasia. Bilateral intra-abdominal testes and, frequently, pulmonary hypoplasia from oligohydramnios complete the picture.",
+    "additionalDifferentials": [
+      "Posterior urethral valves with secondary bladder and upper-tract dilatation",
+      "Megacystis-microcolon-intestinal hypoperistalsis syndrome",
+      "Congenital bladder outlet obstruction of other cause",
+      "Primary bilateral vesicoureteric reflux with dysplasia",
+      "Urethral atresia or stenosis",
+      "Non-syndromic bilateral cryptorchidism with unrelated hydronephrosis"
     ],
-    [
-     "Primary Differentials",
-     "Posterior urethral valves with secondary bladder and upper-tract dilatation, Megacystis-microcolon-intestinal hypoperistalsis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology",
+      "Micturating cystourethrogram (MCUG) to assess reflux, bladder shape, and urethral anatomy",
+      "MAG3 (or other radionuclide) renogram to assess differential function and drainage",
+      "Serum creatinine and electrolytes with serial renal function monitoring",
+      "Antenatal ultrasound findings and amniotic fluid assessment",
+      "Echocardiography and skeletal/chest imaging for associated anomalies"
     ],
-    [
-     "Management Strategy",
-     "Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal respiratory distress from pulmonary hypoplasia, which is a leading cause of early mortality",
+      "Rising creatinine or oliguria signalling significant renal dysplasia or impairment",
+      "Recurrent febrile urinary tract infections in a poorly draining, dilated system",
+      "Signs of true obstruction (e.g. urethral atresia) superimposed on the baseline dilatation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely and is largely determined by the severity of renal dysplasia and pulmonary hypoplasia; severely affected neonates may die from respiratory or renal failure, whereas mildly affected children can have near-normal life expectancy with careful urological and nephrological follow-up.",
+    "pitfalls": [
+      "Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive",
+      "Underestimating pulmonary hypoplasia as the immediate life-threatening problem in the neonate",
+      "Overlooking associated cardiac, gastrointestinal, and orthopaedic anomalies",
+      "Delaying orchidopexy for the intra-abdominal testes with implications for fertility and malignancy risk"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Gearhart, Rink & Mouriquand: Pediatric Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival",
+      "Preserve renal function by monitoring creatinine and electrolytes and ensuring adequate bladder drainage and emptying",
+      "Antibiotic prophylaxis and prompt treatment of urinary tract infections, with management of vesicoureteric reflux",
+      "Reconstructive urological surgery where indicated, including abdominal wall repair (abdominoplasty) and urinary tract reconstruction",
+      "Orchidopexy for the bilateral intra-abdominal testes",
+      "Long-term nephrology surveillance for chronic kidney disease, with renal replacement or transplantation in severe renal dysplasia",
+      "Multidisciplinary care spanning neonatology, urology, nephrology and orthopaedics, with family and genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for prune belly syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prune-belly-syndrome-real-image",
-   "title": "Prune belly syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "prune_belly_syndrome-pathway",
+      "title": "Prune belly syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the urinary tract (large hypotonic bladder, dilated tortuous ureters, and hydronephrosis)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal respiratory distress from pulmonary hypoplasia, which is a leading cause of early mortality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology, Micturating cystourethrogram (MCUG) to assess reflux, bladder shape, and urethral anatomy, MAG3 (or other radionuclide) renogram to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prune belly syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prune_belly_syndrome-matrix",
+      "title": "Prune belly syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by a classic triad: deficient or absent abdominal wall musculature, bilateral cryptorchidism, and dilatation of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal and bladder ultrasound to characterise hydroureteronephrosis and bladder morphology, Micturating cystourethrogram (MCUG) to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posterior urethral valves with secondary bladder and upper-tract dilatation, Megacystis-microcolon-intestinal hypoperistalsis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neonatal stabilisation with respiratory support for pulmonary hypoplasia, the leading early threat to survival",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all upper-tract dilatation is obstructive and intervening surgically when the tract is non-obstructive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prune belly syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prune_belly_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Hydroureteronephrosis and bladder morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Reflux, bladder shape and urethral anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAG3 renogram",
+          "cells": [
+            {
+              "text": "Differential function and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and electrolytes, serially",
+          "cells": [
+            {
+              "text": "Renal function over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound and amniotic fluid assessment",
+          "cells": [
+            {
+              "text": "Antenatal findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and skeletal or chest imaging",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prune_belly_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Posterior urethral valves with bladder and upper-tract dilatation",
+          "cells": [
+            {
+              "text": "Secondary bladder and upper-tract dilatation"
+            },
+            {
+              "text": "Micturating cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary bilateral vesicoureteric reflux with dysplasia",
+          "cells": [
+            {
+              "text": "Bilateral reflux with dysplasia"
+            },
+            {
+              "text": "Micturating cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral atresia or stenosis",
+          "cells": [
+            {
+              "text": "True obstruction, such as urethral atresia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prune_belly_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal respiratory support",
+          "cells": [
+            {
+              "text": "For pulmonary hypoplasia, the leading early threat to survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preserve renal function",
+          "cells": [
+            {
+              "text": "Monitor creatinine and electrolytes; ensure adequate bladder drainage and emptying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and reflux",
+          "cells": [
+            {
+              "text": "Antibiotic prophylaxis and prompt treatment of UTI; management of vesicoureteric reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstruction",
+          "cells": [
+            {
+              "text": "Abdominal wall repair (abdominoplasty) and urinary tract reconstruction where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Bilateral intra-abdominal testes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term nephrology",
+          "cells": [
+            {
+              "text": "Surveillance for CKD; renal replacement or transplantation in severe dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neonatology, urology, nephrology and orthopaedics, with family and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prune_belly_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Prune belly syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prune belly syndrome: abdominal wall deficiency with urinary tract dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory distress, rising creatinine, oliguria, or febrile UTI in a dilated system?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neonatal respiratory support for pulmonary hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal and bladder ultrasound; MCUG; MAG3 renogram; creatinine and electrolytes; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are renal and bladder anatomy and function defined on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider posterior urethral valves or primary VUR with dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory support for pulmonary hypoplasia in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor creatinine and electrolytes; ensure bladder drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotic prophylaxis and prompt UTI treatment; manage reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Abdominal wall and urinary tract reconstruction; orchidopexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term nephrology surveillance; renal replacement or transplant in severe dysplasia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

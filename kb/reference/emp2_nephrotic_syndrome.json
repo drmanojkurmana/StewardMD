@@ -1,179 +1,495 @@
 {
- "id": "emp2_nephrotic_syndrome",
- "name": "EMP2-associated nephrotic syndrome",
- "aliases": [
-  "EMP2-related nephrotic syndrome",
-  "Epithelial membrane protein 2 nephropathy"
- ],
- "class": "non_infective",
- "system": "Renal / Glomerular",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2 (epithelial membrane protein 2).",
-   "EMP2 is a tetraspan membrane protein of the GAS3/PMP22 family that regulates caveolae and caveolin-1 trafficking; it is expressed in podocytes and glomerular endothelium.",
-   "Typically presents in early childhood with oedema, heavy proteinuria and hypoalbuminaemia, often in a consanguineous or familial setting.",
-   "Clinical behaviour is variable: both steroid-sensitive and steroid-resistant phenotypes have been described, and some children show spontaneous or relapsing-remitting courses.",
-   "Renal histology most often shows minimal-change disease or focal segmental glomerulosclerosis rather than a specific diagnostic lesion.",
-   "Should be considered when a targeted genetic panel is indicated: young age of onset, family history, consanguinity, or atypical response to immunosuppression.",
-   "A confirmed genetic (podocyte-gene) diagnosis reshapes management, generally arguing against escalating immunosuppression and predicting low risk of disease recurrence after transplantation.",
-   "Distinguished from acquired immune-mediated nephrotic syndrome only by genetic testing; light microscopy alone cannot make the diagnosis."
+  "id": "emp2_nephrotic_syndrome",
+  "name": "EMP2-associated nephrotic syndrome",
+  "aliases": [
+    "EMP2-related nephrotic syndrome",
+    "Epithelial membrane protein 2 nephropathy"
   ],
-  "pathophysiology": "EMP2 encodes a small four-transmembrane-domain glycoprotein belonging to the growth-arrest-specific 3 (GAS3)/peripheral myelin protein 22 (PMP22) family. These proteins partition into cholesterol-rich lipid rafts and caveolae, where EMP2 governs the surface trafficking and abundance of caveolin-1 and of several partner membrane receptors and adhesion molecules. Within the glomerulus EMP2 is expressed in podocytes and glomerular endothelial cells, compartments whose integrity depends on tightly regulated caveolar membrane organisation. Biallelic loss-of-function variants are thought to disrupt caveolae-dependent membrane dynamics and mechanotransduction at the filtration barrier, impairing podocyte foot-process architecture and slit-diaphragm signalling. The resulting breakdown of glomerular permselectivity produces the massive albuminuria and hypoalbuminaemia of the nephrotic state. Because the defect is intrinsic to the filtration barrier rather than driven by a circulating immune factor, the disorder behaves as a structural podocytopathy, which helps explain its variable and often immunotherapy-independent course.",
-  "additionalDifferentials": [
-   "Other monogenic podocytopathies (NPHS1/nephrin, NPHS2/podocin, PLCE1, WT1-related disease)",
-   "Idiopathic minimal-change disease",
-   "Primary focal segmental glomerulosclerosis",
-   "Congenital and infantile nephrotic syndrome of other genetic causes",
-   "Secondary focal segmental glomerulosclerosis (adaptive, viral, drug-related)",
-   "Syndromic nephrotic syndrome with extrarenal features",
-   "Membranous nephropathy in older children"
-  ],
-  "additionalInvestigations": [
-   "Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage",
-   "Renal biopsy with light microscopy, immunofluorescence and electron microscopy",
-   "Quantification of proteinuria (urine protein-to-creatinine ratio) and serum albumin",
-   "Family segregation and parental carrier testing",
-   "Screening for secondary and infective causes before ascribing to a genetic cause",
-   "Assessment of thromboembolic and infection risk associated with the nephrotic state",
-   "Baseline renal function and growth/developmental assessment"
-  ],
-  "redFlags": [
-   "Steroid resistance or progressive decline in kidney function",
-   "Thromboembolic complications of the nephrotic state",
-   "Severe hypoalbuminaemia with anasarca and effusions",
-   "Serious infection in an immunosuppressed or hypogammaglobulinaemic child",
-   "Rapidly worsening oedema with haemodynamic compromise"
-  ],
-  "prognosis": "The course is heterogeneous, ranging from responsive or self-limiting disease to steroid-resistant nephrotic syndrome that progresses to kidney failure. Establishing a genetic diagnosis clarifies prognosis, limits futile immunosuppression and supports favourable counselling regarding post-transplant recurrence.",
-  "pitfalls": [
-   "Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression",
-   "Failing to pursue genetic testing in familial, consanguineous or steroid-resistant presentations",
-   "Prolonging or escalating immunosuppression once a monogenic cause is confirmed",
-   "Overlooking family counselling and cascade carrier testing",
-   "Attributing a non-specific minimal-change or focal segmental glomerulosclerosis biopsy to acquired disease without genetic correlation"
-  ],
-  "references": [
-   "Comprehensive paediatric nephrology textbook",
-   "Reference text on the genetics of steroid-resistant nephrotic syndrome",
-   "Clinical practice guidance on glomerular disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness",
-   "A trial of corticosteroids where clinically appropriate since steroid-sensitive phenotypes occur, with calcineurin inhibitors in steroid-resistant disease under specialist guidance",
-   "Supportive nephrotic-syndrome care with dietary sodium restriction, diuretics for oedema and renin-angiotensin blockade to reduce proteinuria",
-   "Thromboprophylaxis and infection vigilance with appropriate vaccination given the hypercoagulable, immunocompromised nephrotic state",
-   "Monitoring of proteinuria, serum albumin and renal function with surveillance for progression to kidney failure",
-   "Renal replacement planning with dialysis or transplantation in progressive disease, with reassurance regarding the low post-transplant recurrence of monogenic disease",
-   "Paediatric nephrology referral and multidisciplinary care",
-   "Genetic counselling with parental carrier testing and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "emp2_nephrotic_syndrome-pathway",
-   "title": "EMP2-associated nephrotic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2 (epithelial membrane protein 2).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Steroid resistance or progressive decline in kidney function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage, Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Quantification of proteinuria (urine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of emp2-associated nephrotic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "emp2_nephrotic_syndrome-matrix",
-   "title": "EMP2-associated nephrotic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Glomerular",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2 (epithelial membrane protein 2).",
+      "EMP2 is a tetraspan membrane protein of the GAS3/PMP22 family that regulates caveolae and caveolin-1 trafficking; it is expressed in podocytes and glomerular endothelium.",
+      "Typically presents in early childhood with oedema, heavy proteinuria and hypoalbuminaemia, often in a consanguineous or familial setting.",
+      "Clinical behaviour is variable: both steroid-sensitive and steroid-resistant phenotypes have been described, and some children show spontaneous or relapsing-remitting courses.",
+      "Renal histology most often shows minimal-change disease or focal segmental glomerulosclerosis rather than a specific diagnostic lesion.",
+      "Should be considered when a targeted genetic panel is indicated: young age of onset, family history, consanguinity, or atypical response to immunosuppression.",
+      "A confirmed genetic (podocyte-gene) diagnosis reshapes management, generally arguing against escalating immunosuppression and predicting low risk of disease recurrence after transplantation.",
+      "Distinguished from acquired immune-mediated nephrotic syndrome only by genetic testing; light microscopy alone cannot make the diagnosis."
     ],
-    [
-     "Key Investigations",
-     "Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage, Renal biopsy with light",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "EMP2 encodes a small four-transmembrane-domain glycoprotein belonging to the growth-arrest-specific 3 (GAS3)/peripheral myelin protein 22 (PMP22) family. These proteins partition into cholesterol-rich lipid rafts and caveolae, where EMP2 governs the surface trafficking and abundance of caveolin-1 and of several partner membrane receptors and adhesion molecules. Within the glomerulus EMP2 is expressed in podocytes and glomerular endothelial cells, compartments whose integrity depends on tightly regulated caveolar membrane organisation. Biallelic loss-of-function variants are thought to disrupt caveolae-dependent membrane dynamics and mechanotransduction at the filtration barrier, impairing podocyte foot-process architecture and slit-diaphragm signalling. The resulting breakdown of glomerular permselectivity produces the massive albuminuria and hypoalbuminaemia of the nephrotic state. Because the defect is intrinsic to the filtration barrier rather than driven by a circulating immune factor, the disorder behaves as a structural podocytopathy, which helps explain its variable and often immunotherapy-independent course.",
+    "additionalDifferentials": [
+      "Other monogenic podocytopathies (NPHS1/nephrin, NPHS2/podocin, PLCE1, WT1-related disease)",
+      "Idiopathic minimal-change disease",
+      "Primary focal segmental glomerulosclerosis",
+      "Congenital and infantile nephrotic syndrome of other genetic causes",
+      "Secondary focal segmental glomerulosclerosis (adaptive, viral, drug-related)",
+      "Syndromic nephrotic syndrome with extrarenal features",
+      "Membranous nephropathy in older children"
     ],
-    [
-     "Primary Differentials",
-     "Other monogenic podocytopathies (NPHS1/nephrin, NPHS2/podocin, PLCE1, WT1-related disease), Idiopathic minimal-change disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage",
+      "Renal biopsy with light microscopy, immunofluorescence and electron microscopy",
+      "Quantification of proteinuria (urine protein-to-creatinine ratio) and serum albumin",
+      "Family segregation and parental carrier testing",
+      "Screening for secondary and infective causes before ascribing to a genetic cause",
+      "Assessment of thromboembolic and infection risk associated with the nephrotic state",
+      "Baseline renal function and growth/developmental assessment"
     ],
-    [
-     "Management Strategy",
-     "Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness",
-     "Core treatment modality"
+    "redFlags": [
+      "Steroid resistance or progressive decline in kidney function",
+      "Thromboembolic complications of the nephrotic state",
+      "Severe hypoalbuminaemia with anasarca and effusions",
+      "Serious infection in an immunosuppressed or hypogammaglobulinaemic child",
+      "Rapidly worsening oedema with haemodynamic compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is heterogeneous, ranging from responsive or self-limiting disease to steroid-resistant nephrotic syndrome that progresses to kidney failure. Establishing a genetic diagnosis clarifies prognosis, limits futile immunosuppression and supports favourable counselling regarding post-transplant recurrence.",
+    "pitfalls": [
+      "Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression",
+      "Failing to pursue genetic testing in familial, consanguineous or steroid-resistant presentations",
+      "Prolonging or escalating immunosuppression once a monogenic cause is confirmed",
+      "Overlooking family counselling and cascade carrier testing",
+      "Attributing a non-specific minimal-change or focal segmental glomerulosclerosis biopsy to acquired disease without genetic correlation"
+    ],
+    "references": [
+      "Comprehensive paediatric nephrology textbook",
+      "Reference text on the genetics of steroid-resistant nephrotic syndrome",
+      "Clinical practice guidance on glomerular disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness",
+      "A trial of corticosteroids where clinically appropriate since steroid-sensitive phenotypes occur, with calcineurin inhibitors in steroid-resistant disease under specialist guidance",
+      "Supportive nephrotic-syndrome care with dietary sodium restriction, diuretics for oedema and renin-angiotensin blockade to reduce proteinuria",
+      "Thromboprophylaxis and infection vigilance with appropriate vaccination given the hypercoagulable, immunocompromised nephrotic state",
+      "Monitoring of proteinuria, serum albumin and renal function with surveillance for progression to kidney failure",
+      "Renal replacement planning with dialysis or transplantation in progressive disease, with reassurance regarding the low post-transplant recurrence of monogenic disease",
+      "Paediatric nephrology referral and multidisciplinary care",
+      "Genetic counselling with parental carrier testing and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for emp2-associated nephrotic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "emp2-nephrotic-syndrome-real-image",
-   "title": "EMP2-associated nephrotic syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "emp2_nephrotic_syndrome-pathway",
+      "title": "EMP2-associated nephrotic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2 (epithelial membrane protein 2).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Steroid resistance or progressive decline in kidney function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage, Renal biopsy with light microscopy, immunofluorescence and electron microscopy, Quantification of proteinuria (urine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of emp2-associated nephrotic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "emp2_nephrotic_syndrome-matrix",
+      "title": "EMP2-associated nephrotic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare monogenic, autosomal recessive cause of childhood nephrotic syndrome caused by biallelic loss-of-function variants in EMP2",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted next-generation-sequencing podocyte-gene panel or exome sequencing with EMP2 coverage, Renal biopsy with light",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other monogenic podocytopathies (NPHS1/nephrin, NPHS2/podocin, PLCE1, WT1-related disease), Idiopathic minimal-change disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establishing the genetic diagnosis to guide therapy and limit futile immunosuppression, given the variable steroid responsiveness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all childhood nephrotic syndrome is immune-mediated and treatable with immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for emp2-associated nephrotic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "emp2_nephrotic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Podocyte-gene panel or exome with EMP2",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with light, immunofluorescence and electron microscopy",
+          "cells": [
+            {
+              "text": "Histological pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine protein-to-creatinine ratio and serum albumin",
+          "cells": [
+            {
+              "text": "Severity of proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation and parental carrier testing",
+          "cells": [
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for secondary and infective causes",
+          "cells": [
+            {
+              "text": "Non-genetic causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emp2_nephrotic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "NPHS1 or NPHS2 podocytopathy",
+          "cells": [
+            {
+              "text": "Other monogenic nephrotic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimal change disease",
+          "cells": [
+            {
+              "text": "Steroid-sensitive idiopathic nephrotic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary focal segmental glomerulosclerosis",
+          "cells": [
+            {
+              "text": "Non-genetic podocyte injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary FSGS",
+          "cells": [
+            {
+              "text": "Adaptive, viral or drug-related sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranous nephropathy",
+          "cells": [
+            {
+              "text": "Older children with immune-mediated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "emp2_nephrotic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic diagnosis",
+          "cells": [
+            {
+              "text": "Guides therapy and limits futile immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid trial",
+          "cells": [
+            {
+              "text": "Where steroid-sensitive phenotypes may occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Steroid-resistant disease under specialist guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic supportive care",
+          "cells": [
+            {
+              "text": "Sodium restriction, diuretics and renin-angiotensin blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis and vaccination",
+          "cells": [
+            {
+              "text": "Hypercoagulable and immunocompromised state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney failure planning",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation with low recurrence of monogenic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental carrier testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "emp2_nephrotic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of EMP2-associated nephrotic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected EMP2 nephrotic syndrome: steroid-resistant or familial nephrotic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive kidney decline, thrombosis, serious infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of thrombosis or serious infection in the nephrotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Podocyte gene panel or exome with EMP2; renal biopsy; proteinuria and albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biallelic EMP2 variant found with a steroid-resistant phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other podocytopathies, minimal change, FSGS or secondary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic diagnosis to avoid futile immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroid trial where a steroid-sensitive phenotype is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium restriction, diuretics and renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis, infection vigilance and vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Parental carrier testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Course varies; a genetic diagnosis clarifies prognosis and steers therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

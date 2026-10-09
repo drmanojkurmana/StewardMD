@@ -1,178 +1,447 @@
 {
- "id": "neurotoxic_shellfish_poisoning",
- "name": "Neurotoxic shellfish poisoning",
- "aliases": [
-  "NSP",
-  "Brevetoxin poisoning"
- ],
- "class": "non_infective",
- "system": "Nervous system / Respiratory",
- "specialty": "Toxicology / Emergency medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type and Gulf of Mexico red tides, accumulated in filter-feeding shellfish.",
-   "Characteristic feature is reversal of temperature sensation, in which cold objects feel burning hot and hot objects feel cold, alongside circumoral and distal paraesthesiae.",
-   "Brevetoxins bind voltage-gated sodium channels and hold them open, causing persistent neuronal and muscle depolarisation, in contrast to the channel-blocking saxitoxins of paralytic shellfish poisoning.",
-   "Illness combines gastrointestinal symptoms with sensory neurological features, ataxia, vertigo and myalgia, but unlike paralytic poisoning life-threatening flaccid paralysis is rare.",
-   "Aerosolised brevetoxin from surf and sea spray during a red tide causes a distinct inhalational syndrome of cough, wheeze, rhinorrhoea and eye irritation, especially troublesome in people with asthma.",
-   "The toxin is heat-stable so contaminated shellfish remain hazardous after cooking, and affected shellfish look and taste normal.",
-   "Diagnosis is clinical and epidemiological, confirmed by brevetoxin assay of shellfish or body fluids at reference laboratories; management is supportive with no specific antidote.",
-   "Symptoms usually resolve within a few days, and the reported case-fatality is very low compared with paralytic shellfish poisoning."
+  "id": "neurotoxic_shellfish_poisoning",
+  "name": "Neurotoxic shellfish poisoning",
+  "aliases": [
+    "NSP",
+    "Brevetoxin poisoning"
   ],
-  "pathophysiology": "Neurotoxic shellfish poisoning is produced by brevetoxins, a family of lipophilic cyclic polyether neurotoxins elaborated by the marine dinoflagellate Karenia brevis, whose proliferation generates the characteristic red tides. Filter-feeding bivalves concentrate the toxin, which is also released into sea-spray aerosols when wave action lyses the organisms. Brevetoxins bind with high affinity to a specific receptor site on voltage-gated sodium channels of excitable membranes, shifting their activation to more negative potentials and inhibiting inactivation. The channels therefore remain persistently open, causing repetitive firing, sustained depolarisation and enhanced neurotransmitter release across sensory nerves, motor nerves and autonomic fibres. This mechanism, the opposite of the sodium-channel blockade caused by saxitoxin in paralytic shellfish poisoning, explains the prominent sensory disturbances including paradoxical temperature reversal, paraesthesiae and myalgia, together with gastrointestinal and mild motor features. When inhaled, the same channel activation on airway sensory nerves and smooth muscle provokes bronchoconstriction, cough and mucosal irritation. Because the toxins are heat-stable and lipid-soluble, cooking does not detoxify contaminated shellfish.",
-  "additionalDifferentials": [
-   "Paralytic shellfish poisoning (saxitoxin) with more severe paralysis",
-   "Ciguatera fish poisoning, which also causes temperature-sensation reversal and paraesthesiae",
-   "Amnesic shellfish poisoning (domoic acid)",
-   "Scombroid (histamine) fish poisoning",
-   "Acute asthma or reactive airways from another trigger in the inhalational form",
-   "Viral or bacterial gastroenteritis",
-   "Anxiety or hyperventilation syndrome producing paraesthesiae"
-  ],
-  "additionalInvestigations": [
-   "Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory",
-   "Pulse oximetry, peak flow or spirometry in patients with inhalational or respiratory symptoms",
-   "Chest radiograph if lower-respiratory involvement or aspiration is suspected",
-   "Serum electrolytes and renal function to guide fluid and supportive management",
-   "Electrocardiogram and cardiac monitoring in patients with autonomic symptoms",
-   "Neurological examination documenting sensory reversal, ataxia and reflexes",
-   "Environmental and public-health confirmation of a concurrent Karenia brevis bloom"
-  ],
-  "redFlags": [
-   "Reversal of hot and cold sensation after a shellfish meal or coastal exposure",
-   "Bronchospasm, severe wheeze or respiratory distress in the inhalational form",
-   "Ataxia, vertigo or difficulty with coordinated movement",
-   "Marked bradycardia or other autonomic disturbance",
-   "Symptoms in a person with pre-existing asthma or chronic lung disease"
-  ],
-  "prognosis": "The prognosis is generally excellent, with most patients recovering fully within a few days and deaths being exceptionally rare. Inhalational symptoms settle once exposure to the aerosol ceases, although those with asthma may have a more troublesome course.",
-  "pitfalls": [
-   "Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating",
-   "Mistaking the inhalational syndrome for ordinary asthma or an allergic reaction and missing the red-tide link",
-   "Assuming cooking renders contaminated shellfish safe, as brevetoxins are heat-stable",
-   "Discounting temperature-sensation reversal as a functional complaint",
-   "Overlooking vulnerable patients with chronic respiratory disease exposed to sea-spray aerosol"
-  ],
-  "references": [
-   "Standard clinical toxicology textbooks",
-   "Marine biotoxin and harmful-algal-bloom guidance documents",
-   "Emergency medicine reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote",
-   "Remove the source by stopping ingestion of contaminated shellfish, which remain hazardous after cooking as the toxin is heat-stable, and moving affected people away from red-tide aerosol exposure",
-   "Give antiemetics and rehydrate with fluids for gastrointestinal losses",
-   "Manage inhalational symptoms by removal from the aerosol and use of bronchodilators and inhaled therapy, with heightened vigilance in people with asthma",
-   "Monitor oxygenation and respiratory function and support ventilation in the rare severe case",
-   "Observe with cardiac monitoring where autonomic features are present, and provide analgesia and reassurance for paraesthesiae and myalgia",
-   "Notify public-health authorities to support red-tide surveillance and shellfish-bed closure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurotoxic_shellfish_poisoning-pathway",
-   "title": "Neurotoxic shellfish poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type and Gulf of Mexico red tides, accumulated in filter-feeding shellfish.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reversal of hot and cold sensation after a shellfish meal or coastal exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory, Pulse oximetry, peak flow or spirometry in patients with inhalational or respiratory symptoms, Chest radiograph if"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurotoxic shellfish poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "neurotoxic_shellfish_poisoning-matrix",
-   "title": "Neurotoxic shellfish poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Respiratory",
+  "specialty": "Toxicology / Emergency medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type and Gulf of Mexico red tides, accumulated in filter-feeding shellfish.",
+      "Characteristic feature is reversal of temperature sensation, in which cold objects feel burning hot and hot objects feel cold, alongside circumoral and distal paraesthesiae.",
+      "Brevetoxins bind voltage-gated sodium channels and hold them open, causing persistent neuronal and muscle depolarisation, in contrast to the channel-blocking saxitoxins of paralytic shellfish poisoning.",
+      "Illness combines gastrointestinal symptoms with sensory neurological features, ataxia, vertigo and myalgia, but unlike paralytic poisoning life-threatening flaccid paralysis is rare.",
+      "Aerosolised brevetoxin from surf and sea spray during a red tide causes a distinct inhalational syndrome of cough, wheeze, rhinorrhoea and eye irritation, especially troublesome in people with asthma.",
+      "The toxin is heat-stable so contaminated shellfish remain hazardous after cooking, and affected shellfish look and taste normal.",
+      "Diagnosis is clinical and epidemiological, confirmed by brevetoxin assay of shellfish or body fluids at reference laboratories; management is supportive with no specific antidote.",
+      "Symptoms usually resolve within a few days, and the reported case-fatality is very low compared with paralytic shellfish poisoning."
     ],
-    [
-     "Key Investigations",
-     "Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory, Pulse oximetry, peak flow or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neurotoxic shellfish poisoning is produced by brevetoxins, a family of lipophilic cyclic polyether neurotoxins elaborated by the marine dinoflagellate Karenia brevis, whose proliferation generates the characteristic red tides. Filter-feeding bivalves concentrate the toxin, which is also released into sea-spray aerosols when wave action lyses the organisms. Brevetoxins bind with high affinity to a specific receptor site on voltage-gated sodium channels of excitable membranes, shifting their activation to more negative potentials and inhibiting inactivation. The channels therefore remain persistently open, causing repetitive firing, sustained depolarisation and enhanced neurotransmitter release across sensory nerves, motor nerves and autonomic fibres. This mechanism, the opposite of the sodium-channel blockade caused by saxitoxin in paralytic shellfish poisoning, explains the prominent sensory disturbances including paradoxical temperature reversal, paraesthesiae and myalgia, together with gastrointestinal and mild motor features. When inhaled, the same channel activation on airway sensory nerves and smooth muscle provokes bronchoconstriction, cough and mucosal irritation. Because the toxins are heat-stable and lipid-soluble, cooking does not detoxify contaminated shellfish.",
+    "additionalDifferentials": [
+      "Paralytic shellfish poisoning (saxitoxin) with more severe paralysis",
+      "Ciguatera fish poisoning, which also causes temperature-sensation reversal and paraesthesiae",
+      "Amnesic shellfish poisoning (domoic acid)",
+      "Scombroid (histamine) fish poisoning",
+      "Acute asthma or reactive airways from another trigger in the inhalational form",
+      "Viral or bacterial gastroenteritis",
+      "Anxiety or hyperventilation syndrome producing paraesthesiae"
     ],
-    [
-     "Primary Differentials",
-     "Paralytic shellfish poisoning (saxitoxin) with more severe paralysis, Ciguatera fish poisoning, which also causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory",
+      "Pulse oximetry, peak flow or spirometry in patients with inhalational or respiratory symptoms",
+      "Chest radiograph if lower-respiratory involvement or aspiration is suspected",
+      "Serum electrolytes and renal function to guide fluid and supportive management",
+      "Electrocardiogram and cardiac monitoring in patients with autonomic symptoms",
+      "Neurological examination documenting sensory reversal, ataxia and reflexes",
+      "Environmental and public-health confirmation of a concurrent Karenia brevis bloom"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote",
-     "Core treatment modality"
+    "redFlags": [
+      "Reversal of hot and cold sensation after a shellfish meal or coastal exposure",
+      "Bronchospasm, severe wheeze or respiratory distress in the inhalational form",
+      "Ataxia, vertigo or difficulty with coordinated movement",
+      "Marked bradycardia or other autonomic disturbance",
+      "Symptoms in a person with pre-existing asthma or chronic lung disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally excellent, with most patients recovering fully within a few days and deaths being exceptionally rare. Inhalational symptoms settle once exposure to the aerosol ceases, although those with asthma may have a more troublesome course.",
+    "pitfalls": [
+      "Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating",
+      "Mistaking the inhalational syndrome for ordinary asthma or an allergic reaction and missing the red-tide link",
+      "Assuming cooking renders contaminated shellfish safe, as brevetoxins are heat-stable",
+      "Discounting temperature-sensation reversal as a functional complaint",
+      "Overlooking vulnerable patients with chronic respiratory disease exposed to sea-spray aerosol"
+    ],
+    "references": [
+      "Standard clinical toxicology textbooks",
+      "Marine biotoxin and harmful-algal-bloom guidance documents",
+      "Emergency medicine reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote",
+      "Remove the source by stopping ingestion of contaminated shellfish, which remain hazardous after cooking as the toxin is heat-stable, and moving affected people away from red-tide aerosol exposure",
+      "Give antiemetics and rehydrate with fluids for gastrointestinal losses",
+      "Manage inhalational symptoms by removal from the aerosol and use of bronchodilators and inhaled therapy, with heightened vigilance in people with asthma",
+      "Monitor oxygenation and respiratory function and support ventilation in the rare severe case",
+      "Observe with cardiac monitoring where autonomic features are present, and provide analgesia and reassurance for paraesthesiae and myalgia",
+      "Notify public-health authorities to support red-tide surveillance and shellfish-bed closure"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurotoxic shellfish poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurotoxic-shellfish-poisoning-real-image",
-   "title": "Neurotoxic shellfish poisoning: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "neurotoxic_shellfish_poisoning-pathway",
+      "title": "Neurotoxic shellfish poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type and Gulf of Mexico red tides, accumulated in filter-feeding shellfish.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reversal of hot and cold sensation after a shellfish meal or coastal exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory, Pulse oximetry, peak flow or spirometry in patients with inhalational or respiratory symptoms, Chest radiograph if"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurotoxic shellfish poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurotoxic_shellfish_poisoning-matrix",
+      "title": "Neurotoxic shellfish poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by brevetoxins, lipid-soluble polyether toxins produced by the dinoflagellate Karenia brevis responsible for Florida-type",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brevetoxin detection in implicated shellfish and in serum or urine at a reference laboratory, Pulse oximetry, peak flow or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Paralytic shellfish poisoning (saxitoxin) with more severe paralysis, Ciguatera fish poisoning, which also causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as the mainstay, since the illness is self-limiting and has no specific antidote",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with the more dangerous paralytic shellfish poisoning and either over- or under-treating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurotoxic shellfish poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurotoxic_shellfish_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brevetoxin detection in shellfish, serum or urine",
+          "cells": [
+            {
+              "text": "Reference laboratory confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry, peak flow or spirometry",
+          "cells": [
+            {
+              "text": "Inhalational or respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Lower respiratory involvement or aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical history of shellfish meal or coastal exposure",
+          "cells": [
+            {
+              "text": "Red tide link"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurotoxic_shellfish_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paralytic shellfish poisoning",
+          "cells": [
+            {
+              "text": "Saxitoxin with more severe paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciguatera fish poisoning",
+          "cells": [
+            {
+              "text": "Temperature reversal and paraesthesiae from fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amnesic shellfish poisoning",
+          "cells": [
+            {
+              "text": "Domoic acid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scombroid fish poisoning",
+          "cells": [
+            {
+              "text": "Histamine reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma or allergic reaction",
+          "cells": [
+            {
+              "text": "Inhalational syndrome can mimic these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurotoxic_shellfish_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "The mainstay; illness is self-limiting with no antidote"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop eating contaminated shellfish",
+          "cells": [
+            {
+              "text": "Toxin is heat-stable and survives cooking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Move affected people from the aerosol",
+          "cells": [
+            {
+              "text": "Inhalational symptoms settle after exposure ends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilator for wheeze",
+          "cells": [
+            {
+              "text": "Particularly in people with asthma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurotoxic_shellfish_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Neurotoxic shellfish poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reversed hot and cold sensation after a shellfish meal or coastal exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bronchospasm, ataxia or vertigo, marked bradycardia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway and respiratory support; monitor for autonomic disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brevetoxin testing, oximetry, peak flow or spirometry, chest radiograph if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Temperature reversal after shellfish or red tide exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paralytic shellfish or ciguatera poisoning; reassess the exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop eating contaminated shellfish, even if cooked",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Move people out of the aerosol and treat wheeze",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor respiratory and autonomic function until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; most recover within days, though asthma can make the course harder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

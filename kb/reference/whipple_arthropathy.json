@@ -1,172 +1,338 @@
 {
- "id": "whipple_arthropathy",
- "name": "Whipple disease arthropathy",
- "aliases": [
-  "Whipple arthritis",
-  "Tropheryma whipplei arthropathy",
-  "articular Whipple disease"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding gastrointestinal symptoms by years",
-   "Typically a migratory or intermittent, non-destructive, seronegative oligo- or polyarthritis of large and medium joints",
-   "Later systemic features include weight loss, chronic diarrhoea, malabsorption, abdominal pain, lymphadenopathy and low-grade fever",
-   "Neurological and ophthalmological involvement and culture-negative endocarditis are important extra-articular manifestations",
-   "Should be suspected in a middle-aged man with unexplained seronegative arthritis who paradoxically worsens or develops systemic illness on immunosuppression",
-   "Diagnosis rests on identifying Tropheryma whipplei, classically PAS-positive macrophages on small-bowel biopsy and confirmatory PCR",
-   "Requires prolonged antibiotic therapy, often with an initial course able to penetrate the central nervous system followed by extended oral treatment"
+  "id": "whipple_arthropathy",
+  "name": "Whipple disease arthropathy",
+  "aliases": [
+    "Whipple arthritis",
+    "Tropheryma whipplei arthropathy",
+    "articular Whipple disease"
   ],
-  "pathophysiology": "Whipple disease is a chronic systemic infection caused by the actinomycete Tropheryma whipplei, and the joints are among the earliest and most frequently affected sites. Although driven by an organism, the articular manifestation behaves as a seronegative inflammatory arthropathy: infiltration of tissues by bacteria-laden macrophages provokes chronic inflammation with a characteristically non-erosive, migratory joint disease. A subtle underlying defect in host macrophage handling of the organism is thought to permit persistent infection. The arthritis often long predates the classic intestinal malabsorptive phase, and immunosuppressive treatment given for a presumed primary inflammatory arthritis can accelerate the systemic disease.",
-  "additionalDifferentials": [
-   "Seronegative rheumatoid arthritis",
-   "Spondyloarthropathy including reactive arthritis",
-   "Palindromic rheumatism",
-   "Sarcoid arthropathy",
-   "Inflammatory bowel disease-associated arthritis",
-   "Adult-onset Still disease or other systemic inflammatory disease"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages",
-   "PCR for Tropheryma whipplei on biopsy, synovial fluid, blood or cerebrospinal fluid",
-   "Inflammatory markers (ESR, CRP) and screening for anaemia and malabsorption",
-   "Cerebrospinal fluid analysis and echocardiography to assess neurological and cardiac involvement",
-   "Rheumatoid factor and anti-CCP antibodies, characteristically negative"
-  ],
-  "redFlags": [
-   "Weight loss, chronic diarrhoea and malabsorption accompanying a seronegative arthritis",
-   "Neurological features (cognitive change, ophthalmoplegia, myorhythmia) suggesting CNS involvement",
-   "Paradoxical clinical deterioration after starting corticosteroids or immunosuppression",
-   "Culture-negative endocarditis in a patient with unexplained arthropathy"
-  ],
-  "prognosis": "Untreated Whipple disease is progressive and can be fatal, but the arthropathy and systemic disease usually respond well to prolonged appropriate antibiotic therapy; central nervous system involvement carries a poorer prognosis and relapse can occur, warranting long-term follow-up.",
-  "pitfalls": [
-   "Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection",
-   "Failing to consider Whipple disease in seronegative arthritis with systemic or gastrointestinal features",
-   "Relying on histology alone without confirmatory PCR",
-   "Under-treating by not addressing potential central nervous system involvement"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole",
-   "Avoid immunosuppression and biologics such as anti-TNF agents, which can accelerate or unmask systemic Whipple disease when the arthritis is misdiagnosed as a primary inflammatory arthropathy",
-   "Secure the diagnosis before treatment by demonstrating Tropheryma whipplei on small-bowel biopsy with PAS staining and confirmatory PCR",
-   "Assess for central nervous system involvement with cerebrospinal fluid PCR, as neurological disease carries a poorer prognosis and influences antibiotic choice",
-   "Provide nutritional support and correct deficiencies arising from malabsorption",
-   "Monitor the clinical and microbiological response and maintain long-term follow-up given the risk of relapse",
-   "Coordinate care across infectious diseases, rheumatology and gastroenterology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "whipple_arthropathy-pathway",
-   "title": "Whipple disease arthropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding gastrointestinal symptoms by years",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Weight loss, chronic diarrhoea and malabsorption accompanying a seronegative arthritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages, PCR for Tropheryma whipplei on biopsy, synovial fluid, blood or cerebrospinal fluid, Inflammatory markers (ESR, CRP) and screening"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of whipple disease arthropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "whipple_arthropathy-matrix",
-   "title": "Whipple disease arthropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding gastrointestinal symptoms by years",
+      "Typically a migratory or intermittent, non-destructive, seronegative oligo- or polyarthritis of large and medium joints",
+      "Later systemic features include weight loss, chronic diarrhoea, malabsorption, abdominal pain, lymphadenopathy and low-grade fever",
+      "Neurological and ophthalmological involvement and culture-negative endocarditis are important extra-articular manifestations",
+      "Should be suspected in a middle-aged man with unexplained seronegative arthritis who paradoxically worsens or develops systemic illness on immunosuppression",
+      "Diagnosis rests on identifying Tropheryma whipplei, classically PAS-positive macrophages on small-bowel biopsy and confirmatory PCR",
+      "Requires prolonged antibiotic therapy, often with an initial course able to penetrate the central nervous system followed by extended oral treatment"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages, PCR for Tropheryma whipplei on biopsy,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Whipple disease is a chronic systemic infection caused by the actinomycete Tropheryma whipplei, and the joints are among the earliest and most frequently affected sites. Although driven by an organism, the articular manifestation behaves as a seronegative inflammatory arthropathy: infiltration of tissues by bacteria-laden macrophages provokes chronic inflammation with a characteristically non-erosive, migratory joint disease. A subtle underlying defect in host macrophage handling of the organism is thought to permit persistent infection. The arthritis often long predates the classic intestinal malabsorptive phase, and immunosuppressive treatment given for a presumed primary inflammatory arthritis can accelerate the systemic disease.",
+    "additionalDifferentials": [
+      "Seronegative rheumatoid arthritis",
+      "Spondyloarthropathy including reactive arthritis",
+      "Palindromic rheumatism",
+      "Sarcoid arthropathy",
+      "Inflammatory bowel disease-associated arthritis",
+      "Adult-onset Still disease or other systemic inflammatory disease"
     ],
-    [
-     "Primary Differentials",
-     "Seronegative rheumatoid arthritis, Spondyloarthropathy including reactive arthritis, Palindromic rheumatism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages",
+      "PCR for Tropheryma whipplei on biopsy, synovial fluid, blood or cerebrospinal fluid",
+      "Inflammatory markers (ESR, CRP) and screening for anaemia and malabsorption",
+      "Cerebrospinal fluid analysis and echocardiography to assess neurological and cardiac involvement",
+      "Rheumatoid factor and anti-CCP antibodies, characteristically negative"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin",
-     "Core treatment modality"
+    "redFlags": [
+      "Weight loss, chronic diarrhoea and malabsorption accompanying a seronegative arthritis",
+      "Neurological features (cognitive change, ophthalmoplegia, myorhythmia) suggesting CNS involvement",
+      "Paradoxical clinical deterioration after starting corticosteroids or immunosuppression",
+      "Culture-negative endocarditis in a patient with unexplained arthropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated Whipple disease is progressive and can be fatal, but the arthropathy and systemic disease usually respond well to prolonged appropriate antibiotic therapy; central nervous system involvement carries a poorer prognosis and relapse can occur, warranting long-term follow-up.",
+    "pitfalls": [
+      "Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection",
+      "Failing to consider Whipple disease in seronegative arthritis with systemic or gastrointestinal features",
+      "Relying on histology alone without confirmatory PCR",
+      "Under-treating by not addressing potential central nervous system involvement"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole",
+      "Avoid immunosuppression and biologics such as anti-TNF agents, which can accelerate or unmask systemic Whipple disease when the arthritis is misdiagnosed as a primary inflammatory arthropathy",
+      "Secure the diagnosis before treatment by demonstrating Tropheryma whipplei on small-bowel biopsy with PAS staining and confirmatory PCR",
+      "Assess for central nervous system involvement with cerebrospinal fluid PCR, as neurological disease carries a poorer prognosis and influences antibiotic choice",
+      "Provide nutritional support and correct deficiencies arising from malabsorption",
+      "Monitor the clinical and microbiological response and maintain long-term follow-up given the risk of relapse",
+      "Coordinate care across infectious diseases, rheumatology and gastroenterology"
     ]
-   ],
-   "caption": "Overview comparison matrix for whipple disease arthropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "whipple-arthropathy-real-image",
-   "title": "Whipple disease arthropathy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "whipple_arthropathy-pathway",
+      "title": "Whipple disease arthropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding gastrointestinal symptoms by years",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Weight loss, chronic diarrhoea and malabsorption accompanying a seronegative arthritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages, PCR for Tropheryma whipplei on biopsy, synovial fluid, blood or cerebrospinal fluid, Inflammatory markers (ESR, CRP) and screening"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin followed by long-term oral co-trimoxazole"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of whipple disease arthropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "whipple_arthropathy-matrix",
+      "title": "Whipple disease arthropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic seronegative arthropathy that is frequently the earliest manifestation of Whipple disease, often preceding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with small-bowel biopsy showing PAS-positive macrophages, PCR for Tropheryma whipplei on biopsy,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Seronegative rheumatoid arthritis, Spondyloarthropathy including reactive arthritis, Palindromic rheumatism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying infection with prolonged antibiotics, typically parenteral induction using ceftriaxone or penicillin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the arthritis as primary inflammatory disease with immunosuppression and worsening the underlying infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for whipple disease arthropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "whipple_arthropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper gastrointestinal endoscopy with small-bowel biopsy",
+          "cells": [
+            {
+              "text": "PAS-positive macrophages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR for Tropheryma whipplei",
+          "cells": [
+            {
+              "text": "Organism in tissue or fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whipple_arthropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged antibiotics",
+          "cells": [
+            {
+              "text": "Parenteral induction with ceftriaxone or penicillin, then oral maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid immunosuppression",
+          "cells": [
+            {
+              "text": "Immunosuppression worsens the underlying infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "whipple_arthropathy-dx-mgmt",
+      "title": "Diagnosis and management of Whipple disease arthropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Whipple arthropathy: seronegative arthritis with weight loss or diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, malabsorption or neurological features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for neurological involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with small-bowel biopsy for PAS-positive macrophages, PCR for T. whipplei",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy or PCR confirm Tropheryma whipplei infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as seronegative arthritis of another cause; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged antibiotics, starting with parenteral ceftriaxone or penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid immunosuppression for the arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Follow-up for relapse and neurological involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treatable infection; the arthritis often improves with antibiotics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

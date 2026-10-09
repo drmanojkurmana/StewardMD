@@ -1,197 +1,755 @@
 {
- "id": "disorders_of_the_pleura",
- "name": "Disorders of the Pleura",
- "system": "Respiratory",
- "class": "non_infective",
- "chapter": 305,
- "page": 2267,
- "aliases": [
-  "Pleural effusion",
-  "Pneumothorax",
-  "Empyema",
-  "Hemothorax",
-  "Chylothorax",
-  "Mesothelioma"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2267",
-  "clinicalPearls": [
-   "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the balance between lung elastic recoil (visceral pleura) and chest-wall outward expansion (parietal pleura).",
-   "The first diagnostic step in any pleural effusion is distinguishing transudate from exudate via thoracentesis; this dictates whether further work-up is needed, since exudates require investigation to define their cause.",
-   "Light's criteria define an exudate when at least one is met: pleural fluid/serum protein >0.5, pleural fluid/serum LDH >0.6, or pleural fluid LDH greater than two-thirds the upper normal serum limit; transudates meet none.",
-   "Light's criteria misclassify about 25% of transudates as exudates ('pseudoexudates'), often in a diuresed transudate; a serum-to-pleural-fluid protein gradient >3.1 g/dL or albumin gradient >1.2 g/dL helps reclassify these (high sensitivity in heart failure and hepatothorax).",
-   "Left ventricular failure is the single most common cause of pleural effusion (a transudate from raised hydrostatic pressure); cirrhosis is the next leading transudative cause in the United States.",
-   "Parapneumonic effusions occur in up to 50% of community-acquired pneumonias and are generally the most common exudative effusion in the U.S.; about 10% become complicated or progress to empyema (fibrinopurulent or grossly purulent fluid).",
-   "Malignant pleural effusions are the second most common exudate; lung carcinoma, breast carcinoma, and lymphoma together cause roughly 75% of cases, and dyspnea is often out of proportion to effusion size.",
-   "Pulmonary embolism is the diagnosis most commonly overlooked in an undiagnosed exudative effusion; the fluid is almost always exudative and dyspnea is the predominant symptom.",
-   "Tuberculous pleuritis arises largely as a hypersensitivity reaction to tuberculous protein in the pleural space and yields a lymphocyte-predominant exudate; pleural biopsy culture yield exceeds that of pleural fluid.",
-   "Chylothorax produces milky fluid with a triglyceride level exceeding 110 mg/dL (1.2 mmol/L); prolonged chest-tube drainage should be avoided because chyle loss causes malnutrition and immunologic incompetence.",
-   "Hemothorax is defined when pleural fluid hematocrit exceeds half the peripheral blood hematocrit; most are traumatic.",
-   "About half of patients with an initial primary spontaneous pneumothorax (from rupture of apical subpleural blebs) will have a recurrence.",
-   "Tension pneumothorax is a medical emergency: positive intrapleural pressure throughout the respiratory cycle impairs ventilation and reduces venous return, lowering cardiac output."
+  "id": "disorders_of_the_pleura",
+  "name": "Disorders of the Pleura",
+  "system": "Respiratory",
+  "class": "non_infective",
+  "chapter": 305,
+  "page": 2267,
+  "aliases": [
+    "Pleural effusion",
+    "Pneumothorax",
+    "Empyema",
+    "Hemothorax",
+    "Chylothorax",
+    "Mesothelioma"
   ],
-  "pathophysiology": "Pleural fluid normally enters from parietal pleural capillaries and is cleared by parietal pleural lymphatics, which can absorb up to 20 times the normal rate of fluid formation; fluid can also enter from lung interstitium via the visceral pleura or from the peritoneal cavity through diaphragmatic openings. An effusion forms when the hydrostatic-oncotic balance is disturbed and fluid production overwhelms lymphatic removal. Transudates result from altered systemic factors (e.g., elevated left atrial and pulmonary venous pressure in heart failure raising hydrostatic pressure, or low oncotic pressure), whereas exudates result from altered local factors such as inflammation, infection, or malignancy increasing capillary permeability or impairing lymphatic drainage. Parapneumonic effusions begin as a sterile reactive exudate and can progress through exudative, fibrinopurulent, and organizing (pleural peel) phases. Hepatic hydrothorax reflects direct movement of ascitic fluid through small diaphragmatic defects into the pleural space. Pneumothorax results from gas entering the pleural space, abolishing the negative pressure that couples lung to chest wall; in tension pneumothorax a one-way mechanism produces sustained positive pleural pressure.",
-  "additionalDifferentials": [
-   "Transudates: congestive heart failure, cirrhosis, nephrotic syndrome, peritoneal dialysis, superior vena cava obstruction, myxedema, urinothorax",
-   "Exudates from neoplasm: metastatic disease, mesothelioma, lymphoma",
-   "Exudates from infection: bacterial (parapneumonic/empyema), tuberculous, fungal, viral, parasitic",
-   "Pulmonary embolism",
-   "Gastrointestinal causes: esophageal perforation, pancreatic disease, intraabdominal abscess, diaphragmatic hernia, post-abdominal surgery, post liver transplant, variceal sclerotherapy",
-   "Collagen vascular disease: rheumatoid pleuritis, SLE, drug-induced lupus, Sjogren syndrome, granulomatosis with polyangiitis, Churg-Strauss",
-   "Other: post-CABG, asbestos exposure, sarcoidosis, uremia, Meigs' syndrome, yellow nail syndrome, trapped lung, radiation, post-cardiac injury syndrome, hemothorax, chylothorax, ovarian hyperstimulation syndrome, pericardial disease, drug-induced (nitrofurantoin, dantrolene, methysergide, bromocriptine, procarbazine, amiodarone, dasatinib)"
-  ],
-  "infectionMimics": [
-   "Tuberculous pleuritis presenting with fever, weight loss, and pleuritic pain mimicking malignancy or other chronic exudate",
-   "Intraabdominal abscess producing a febrile, polymorphonuclear effusion without pulmonary parenchymal abnormality",
-   "Hepatic hydrothorax that can be complicated by spontaneous bacterial empyema"
-  ],
-  "nonInfectiousMimics": [
-   "Pulmonary embolism mimicking infectious pleuritis with an exudative effusion and pleuritic pain",
-   "Malignant effusion (including mesothelioma) mimicking empyema or chronic infection",
-   "Rheumatoid or lupus pleuritis mimicking infectious exudate (low glucose in rheumatoid disease)",
-   "Pleural effusion ex vacuo / trapped lung mimicking persistent active disease"
-  ],
-  "additionalInvestigations": [
-   "Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated fluid, and to guide sampling/drainage",
-   "Diagnostic thoracentesis with pleural fluid protein and LDH (Light's criteria)",
-   "Pleural fluid glucose, differential cell count, Gram stain/culture, and cytology",
-   "Disease-specific pleural fluid tests: amylase (pancreatic disease/esophageal rupture), eosinophils (drug-induced), NT-proBNP (heart failure, >1500 pg/mL suggests cardiac origin), cholesterol/triglycerides (chylothorax, triglyceride >110 mg/dL), hematocrit (hemothorax), glucose and pH (rheumatoid disease), Congo red staining (amyloidosis), flow cytometry (lymphoma)",
-   "TB markers: pleural fluid adenosine deaminase >40 IU/L or interferon-gamma >140 pg/mL; AFB culture, pleural biopsy",
-   "CT/ultrasound-guided pleural biopsy or thoracoscopy when cytology is non-diagnostic",
-   "CT angiography for suspected pulmonary embolism; lymphangiogram and chest CT for chylothorax without obvious trauma",
-   "Pleural manometry to help confirm trapped lung"
-  ],
-  "redFlags": [
-   "Tension pneumothorax: enlarged hemithorax with absent breath sounds, hyperresonance, contralateral mediastinal shift, and hypotension; treat as an emergency with immediate needle decompression (large-bore needle in the second anterior intercostal space).",
-   "Difficulty ventilating or high peak inspiratory pressures during mechanical ventilation/resuscitation strongly suggest tension pneumothorax.",
-   "Complicated parapneumonic effusion/empyema markers indicating need for drainage: loculated fluid, pleural fluid pH <7.20, glucose <60 mg/dL (<3.3 mmol/L), positive Gram stain or culture, gross pus, and elevated pleural fluid LDH (>900 IU/L).",
-   "Hemothorax with ongoing pleural hemorrhage exceeding 200 mL/h warrants angiographic embolization, thoracoscopy, or thoracotomy.",
-   "Secondary pneumothorax in a patient with underlying lung disease can be more life-threatening because of reduced pulmonary reserve."
-  ],
-  "prognosis": "Prognosis depends on the underlying cause. Transudative effusions from heart failure or cirrhosis improve when the primary condition is treated, and undiagnosed viral effusions usually resolve spontaneously without long-term residua. A malignant pleural effusion usually portends a poor prognosis (often less than 6-month survival) and reflects disseminated disease that is generally not curable with chemotherapy. Untreated complicated parapneumonic effusions can organize into a restrictive pleural peel (trapped lung). Tension pneumothorax is rapidly fatal from inadequate cardiac output or marked hypoxemia if not relieved. Surgical pleurodesis prevents pneumothorax recurrence in nearly 100% of cases.",
-  "pitfalls": [
-   "Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin gradients in a clinically transudative setting leads to unnecessary work-up.",
-   "Overlooking pulmonary embolism as the cause of an otherwise undiagnosed exudative effusion.",
-   "Being overly aggressive in pursuing a diagnosis in a clinically improving patient whose effusion is likely viral and self-limited.",
-   "Failing to recognize trapped lung: a thick pleural rind, air on imaging after thoracentesis (pneumothorax ex vacuo), and rapid re-accumulation indicate a lung that will not re-expand without decortication.",
-   "Prolonged tube thoracostomy drainage of a chylothorax, which can cause malnutrition and immunologic incompetence.",
-   "Not performing diagnostic thoracentesis in a presumed heart-failure effusion that is unilateral, asymmetric, febrile, or pleuritic, or that persists despite therapy."
-  ],
-  "severityClassification": "Parapneumonic effusions are staged along a continuum from simple (free-flowing, reactive) to complicated (loculated, pH <7.20, glucose <60 mg/dL, positive Gram stain/culture) to empyema (frank pus), with progression through exudative, fibrinopurulent, and organizing (pleural peel) phases guiding the need for escalating intervention. Pneumothorax is categorized as primary spontaneous, secondary, traumatic (including iatrogenic), and tension.",
-  "references": [
-   "Harrison 22e p.2267",
-   "Harrison 22e p.2268",
-   "Harrison 22e p.2269",
-   "Harrison 22e p.2270"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis",
-   "Perform therapeutic thoracentesis to relieve dyspnoea from large effusions",
-   "Treat complicated parapneumonic effusion and empyema with prompt intercostal chest-tube drainage and antibiotics, adding intrapleural fibrinolytics or surgical (VATS) decortication for loculated collections",
-   "Control malignant effusion with an indwelling pleural catheter or chemical pleurodesis",
-   "Treat tuberculous effusion with standard antituberculous chemotherapy",
-   "Manage pneumothorax with needle aspiration or intercostal drainage according to size and symptoms",
-   "Investigate and follow up undiagnosed exudates to define their cause"
-  ]
- },
- "algorithms": [
-  {
-   "id": "disorders_of_the_pleura-pathway",
-   "title": "Disorders of the Pleura: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the balance between lung elastic recoil (visceral pleura) and chest-wall outward expansion (parietal pleura).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Tension pneumothorax: enlarged hemithorax with absent breath sounds, hyperresonance, contralateral mediastinal shift, and hypotension; treat as an emergency with immediate needle decompression (large-bore",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated fluid, and to guide sampling/drainage, Diagnostic thoracentesis with pleural fluid protein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin gradients in a clinically transudative setting leads to unnecessary work-up."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of disorders of the pleura."
-  }
- ],
- "tables": [
-  {
-   "id": "disorders_of_the_pleura-matrix",
-   "title": "Disorders of the Pleura: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2267",
+    "clinicalPearls": [
+      "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the balance between lung elastic recoil (visceral pleura) and chest-wall outward expansion (parietal pleura).",
+      "The first diagnostic step in any pleural effusion is distinguishing transudate from exudate via thoracentesis; this dictates whether further work-up is needed, since exudates require investigation to define their cause.",
+      "Light's criteria define an exudate when at least one is met: pleural fluid/serum protein >0.5, pleural fluid/serum LDH >0.6, or pleural fluid LDH greater than two-thirds the upper normal serum limit; transudates meet none.",
+      "Light's criteria misclassify about 25% of transudates as exudates ('pseudoexudates'), often in a diuresed transudate; a serum-to-pleural-fluid protein gradient >3.1 g/dL or albumin gradient >1.2 g/dL helps reclassify these (high sensitivity in heart failure and hepatothorax).",
+      "Left ventricular failure is the single most common cause of pleural effusion (a transudate from raised hydrostatic pressure); cirrhosis is the next leading transudative cause in the United States.",
+      "Parapneumonic effusions occur in up to 50% of community-acquired pneumonias and are generally the most common exudative effusion in the U.S.; about 10% become complicated or progress to empyema (fibrinopurulent or grossly purulent fluid).",
+      "Malignant pleural effusions are the second most common exudate; lung carcinoma, breast carcinoma, and lymphoma together cause roughly 75% of cases, and dyspnea is often out of proportion to effusion size.",
+      "Pulmonary embolism is the diagnosis most commonly overlooked in an undiagnosed exudative effusion; the fluid is almost always exudative and dyspnea is the predominant symptom.",
+      "Tuberculous pleuritis arises largely as a hypersensitivity reaction to tuberculous protein in the pleural space and yields a lymphocyte-predominant exudate; pleural biopsy culture yield exceeds that of pleural fluid.",
+      "Chylothorax produces milky fluid with a triglyceride level exceeding 110 mg/dL (1.2 mmol/L); prolonged chest-tube drainage should be avoided because chyle loss causes malnutrition and immunologic incompetence.",
+      "Hemothorax is defined when pleural fluid hematocrit exceeds half the peripheral blood hematocrit; most are traumatic.",
+      "About half of patients with an initial primary spontaneous pneumothorax (from rupture of apical subpleural blebs) will have a recurrence.",
+      "Tension pneumothorax is a medical emergency: positive intrapleural pressure throughout the respiratory cycle impairs ventilation and reduces venous return, lowering cardiac output."
     ],
-    [
-     "Key Investigations",
-     "Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pleural fluid normally enters from parietal pleural capillaries and is cleared by parietal pleural lymphatics, which can absorb up to 20 times the normal rate of fluid formation; fluid can also enter from lung interstitium via the visceral pleura or from the peritoneal cavity through diaphragmatic openings. An effusion forms when the hydrostatic-oncotic balance is disturbed and fluid production overwhelms lymphatic removal. Transudates result from altered systemic factors (e.g., elevated left atrial and pulmonary venous pressure in heart failure raising hydrostatic pressure, or low oncotic pressure), whereas exudates result from altered local factors such as inflammation, infection, or malignancy increasing capillary permeability or impairing lymphatic drainage. Parapneumonic effusions begin as a sterile reactive exudate and can progress through exudative, fibrinopurulent, and organizing (pleural peel) phases. Hepatic hydrothorax reflects direct movement of ascitic fluid through small diaphragmatic defects into the pleural space. Pneumothorax results from gas entering the pleural space, abolishing the negative pressure that couples lung to chest wall; in tension pneumothorax a one-way mechanism produces sustained positive pleural pressure.",
+    "additionalDifferentials": [
+      "Transudates: congestive heart failure, cirrhosis, nephrotic syndrome, peritoneal dialysis, superior vena cava obstruction, myxedema, urinothorax",
+      "Exudates from neoplasm: metastatic disease, mesothelioma, lymphoma",
+      "Exudates from infection: bacterial (parapneumonic/empyema), tuberculous, fungal, viral, parasitic",
+      "Pulmonary embolism",
+      "Gastrointestinal causes: esophageal perforation, pancreatic disease, intraabdominal abscess, diaphragmatic hernia, post-abdominal surgery, post liver transplant, variceal sclerotherapy",
+      "Collagen vascular disease: rheumatoid pleuritis, SLE, drug-induced lupus, Sjogren syndrome, granulomatosis with polyangiitis, Churg-Strauss",
+      "Other: post-CABG, asbestos exposure, sarcoidosis, uremia, Meigs' syndrome, yellow nail syndrome, trapped lung, radiation, post-cardiac injury syndrome, hemothorax, chylothorax, ovarian hyperstimulation syndrome, pericardial disease, drug-induced (nitrofurantoin, dantrolene, methysergide, bromocriptine, procarbazine, amiodarone, dasatinib)"
     ],
-    [
-     "Primary Differentials",
-     "Transudates: congestive heart failure, cirrhosis, nephrotic syndrome, peritoneal dialysis, superior vena cava obstruction,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculous pleuritis presenting with fever, weight loss, and pleuritic pain mimicking malignancy or other chronic exudate",
+      "Intraabdominal abscess producing a febrile, polymorphonuclear effusion without pulmonary parenchymal abnormality",
+      "Hepatic hydrothorax that can be complicated by spontaneous bacterial empyema"
     ],
-    [
-     "Management Strategy",
-     "Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Pulmonary embolism mimicking infectious pleuritis with an exudative effusion and pleuritic pain",
+      "Malignant effusion (including mesothelioma) mimicking empyema or chronic infection",
+      "Rheumatoid or lupus pleuritis mimicking infectious exudate (low glucose in rheumatoid disease)",
+      "Pleural effusion ex vacuo / trapped lung mimicking persistent active disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated fluid, and to guide sampling/drainage",
+      "Diagnostic thoracentesis with pleural fluid protein and LDH (Light's criteria)",
+      "Pleural fluid glucose, differential cell count, Gram stain/culture, and cytology",
+      "Disease-specific pleural fluid tests: amylase (pancreatic disease/esophageal rupture), eosinophils (drug-induced), NT-proBNP (heart failure, >1500 pg/mL suggests cardiac origin), cholesterol/triglycerides (chylothorax, triglyceride >110 mg/dL), hematocrit (hemothorax), glucose and pH (rheumatoid disease), Congo red staining (amyloidosis), flow cytometry (lymphoma)",
+      "TB markers: pleural fluid adenosine deaminase >40 IU/L or interferon-gamma >140 pg/mL; AFB culture, pleural biopsy",
+      "CT/ultrasound-guided pleural biopsy or thoracoscopy when cytology is non-diagnostic",
+      "CT angiography for suspected pulmonary embolism; lymphangiogram and chest CT for chylothorax without obvious trauma",
+      "Pleural manometry to help confirm trapped lung"
+    ],
+    "redFlags": [
+      "Tension pneumothorax: enlarged hemithorax with absent breath sounds, hyperresonance, contralateral mediastinal shift, and hypotension; treat as an emergency with immediate needle decompression (large-bore needle in the second anterior intercostal space).",
+      "Difficulty ventilating or high peak inspiratory pressures during mechanical ventilation/resuscitation strongly suggest tension pneumothorax.",
+      "Complicated parapneumonic effusion/empyema markers indicating need for drainage: loculated fluid, pleural fluid pH <7.20, glucose <60 mg/dL (<3.3 mmol/L), positive Gram stain or culture, gross pus, and elevated pleural fluid LDH (>900 IU/L).",
+      "Hemothorax with ongoing pleural hemorrhage exceeding 200 mL/h warrants angiographic embolization, thoracoscopy, or thoracotomy.",
+      "Secondary pneumothorax in a patient with underlying lung disease can be more life-threatening because of reduced pulmonary reserve."
+    ],
+    "prognosis": "Prognosis depends on the underlying cause. Transudative effusions from heart failure or cirrhosis improve when the primary condition is treated, and undiagnosed viral effusions usually resolve spontaneously without long-term residua. A malignant pleural effusion usually portends a poor prognosis (often less than 6-month survival) and reflects disseminated disease that is generally not curable with chemotherapy. Untreated complicated parapneumonic effusions can organize into a restrictive pleural peel (trapped lung). Tension pneumothorax is rapidly fatal from inadequate cardiac output or marked hypoxemia if not relieved. Surgical pleurodesis prevents pneumothorax recurrence in nearly 100% of cases.",
+    "pitfalls": [
+      "Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin gradients in a clinically transudative setting leads to unnecessary work-up.",
+      "Overlooking pulmonary embolism as the cause of an otherwise undiagnosed exudative effusion.",
+      "Being overly aggressive in pursuing a diagnosis in a clinically improving patient whose effusion is likely viral and self-limited.",
+      "Failing to recognize trapped lung: a thick pleural rind, air on imaging after thoracentesis (pneumothorax ex vacuo), and rapid re-accumulation indicate a lung that will not re-expand without decortication.",
+      "Prolonged tube thoracostomy drainage of a chylothorax, which can cause malnutrition and immunologic incompetence.",
+      "Not performing diagnostic thoracentesis in a presumed heart-failure effusion that is unilateral, asymmetric, febrile, or pleuritic, or that persists despite therapy."
+    ],
+    "severityClassification": "Parapneumonic effusions are staged along a continuum from simple (free-flowing, reactive) to complicated (loculated, pH <7.20, glucose <60 mg/dL, positive Gram stain/culture) to empyema (frank pus), with progression through exudative, fibrinopurulent, and organizing (pleural peel) phases guiding the need for escalating intervention. Pneumothorax is categorized as primary spontaneous, secondary, traumatic (including iatrogenic), and tension.",
+    "references": [
+      "Harrison 22e p.2267",
+      "Harrison 22e p.2268",
+      "Harrison 22e p.2269",
+      "Harrison 22e p.2270"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis",
+      "Perform therapeutic thoracentesis to relieve dyspnoea from large effusions",
+      "Treat complicated parapneumonic effusion and empyema with prompt intercostal chest-tube drainage and antibiotics, adding intrapleural fibrinolytics or surgical (VATS) decortication for loculated collections",
+      "Control malignant effusion with an indwelling pleural catheter or chemical pleurodesis",
+      "Treat tuberculous effusion with standard antituberculous chemotherapy",
+      "Manage pneumothorax with needle aspiration or intercostal drainage according to size and symptoms",
+      "Investigate and follow up undiagnosed exudates to define their cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for disorders of the pleura."
-  }
- ],
- "diagrams": [
-  {
-   "id": "disorders-of-the-pleura-real-image",
-   "title": "Disorders of the Pleura: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "disorders_of_the_pleura-pathway",
+      "title": "Disorders of the Pleura: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the balance between lung elastic recoil (visceral pleura) and chest-wall outward expansion (parietal pleura).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Tension pneumothorax: enlarged hemithorax with absent breath sounds, hyperresonance, contralateral mediastinal shift, and hypotension; treat as an emergency with immediate needle decompression (large-bore",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated fluid, and to guide sampling/drainage, Diagnostic thoracentesis with pleural fluid protein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin gradients in a clinically transudative setting leads to unnecessary work-up."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of disorders of the pleura."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "disorders_of_the_pleura-matrix",
+      "title": "Disorders of the Pleura: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The pleural space normally holds only a thin film of fluid acting as a coupling system, kept at roughly -3 to -5 cmH2O by the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest imaging: chest x-ray with lateral decubitus films, chest ultrasound, and CT to assess extent, free-flowing versus loculated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transudates: congestive heart failure, cirrhosis, nephrotic syndrome, peritoneal dialysis, superior vena cava obstruction,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the underlying cause of transudative effusions with diuretics and treatment of heart failure or cirrhosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on Light's criteria alone can misclassify roughly 25% of transudates as exudates; failing to apply protein/albumin",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for disorders of the pleura."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pleural Effusion",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pleural-effusion",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Pneumothorax",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_pleura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Pleural fluid and pneumothorax criteria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluid/serum protein",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Light criterion for exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid/serum LDH",
+          "cells": [
+            {
+              "text": ">0.6",
+              "op": ">",
+              "value": 0.6
+            },
+            {
+              "text": "Light criterion for exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid LDH",
+          "cells": [
+            {
+              "text": ">2/3 of upper normal serum limit"
+            },
+            {
+              "text": "{{hy:Any one Light criterion means exudate}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum minus fluid albumin gradient",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">1.2 (protein gradient >3.1)",
+              "op": ">",
+              "value": 1.2
+            },
+            {
+              "text": "Reclassifies about 25% pseudoexudates as transudates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid NT-proBNP",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": ">1500",
+              "op": ">",
+              "value": 1500
+            },
+            {
+              "text": "Effusion of cardiac origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural pH",
+          "cells": [
+            {
+              "text": "<7.20",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Complicated parapneumonic effusion; drain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<60",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Complicated parapneumonic effusion; also rheumatoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine deaminase",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Tuberculous pleuritis (or interferon-gamma >140 pg/mL)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglyceride",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">110",
+              "op": ">",
+              "value": 110
+            },
+            {
+              "text": "Chylothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid/blood haematocrit",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax size",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<10 is small",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Estimated from lung-to-hemithorax width ratio"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_pleura-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of pleural effusion",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "{{hy:Most common cause}}; bilateral transudate"
+            },
+            {
+              "text": "Fluid NT-proBNP, albumin gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis (hepatic hydrothorax)",
+          "cells": [
+            {
+              "text": "Transudate with ascites"
+            },
+            {
+              "text": "Albumin gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parapneumonic effusion or empyema",
+          "cells": [
+            {
+              "text": "Most common exudate; fever, pneumonia"
+            },
+            {
+              "text": "pH, glucose, Gram stain, culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant effusion",
+          "cells": [
+            {
+              "text": "Second commonest exudate; lung, breast, lymphoma"
+            },
+            {
+              "text": "Cytology, thoracoscopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Most often overlooked cause of undiagnosed exudate"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous pleuritis",
+          "cells": [
+            {
+              "text": "Lymphocytic exudate"
+            },
+            {
+              "text": "ADA over 40 IU/L; pleural biopsy culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid or lupus pleuritis",
+          "cells": [
+            {
+              "text": "Low glucose in rheumatoid disease"
+            },
+            {
+              "text": "Fluid glucose, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic disease or oesophageal rupture",
+          "cells": [
+            {
+              "text": "Exudate with GI history"
+            },
+            {
+              "text": "Fluid amylase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chylothorax",
+          "cells": [
+            {
+              "text": "Milky fluid"
+            },
+            {
+              "text": "Triglyceride over 110 mg/dL"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_pleura-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pleural disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat cause (diuretics for heart failure or cirrhosis)",
+          "cells": [
+            {
+              "text": "Transudates"
+            },
+            {
+              "text": "Tap if unilateral, febrile, pleuritic or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic thoracentesis, about 1 to 1.5 L per session",
+          "cells": [
+            {
+              "text": "Symptomatic large effusion"
+            },
+            {
+              "text": "Stop for chest tightness, pain or cough; ultrasound guidance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete drainage by thoracentesis or chest tube plus antibiotics",
+          "cells": [
+            {
+              "text": "{{hy:pH <7.20, glucose <60 mg/dL, positive stain or culture, loculation}}"
+            },
+            {
+              "text": "Add intrapleural alteplase plus dornase alfa if drainage incomplete"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VATS decortication",
+          "cells": [
+            {
+              "text": "Failed intrapleural therapy"
+            },
+            {
+              "text": "Also for trapped lung"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Indwelling pleural catheter or talc, doxycycline or bleomycin pleurodesis",
+          "cells": [
+            {
+              "text": "Recurrent symptomatic malignant effusion"
+            },
+            {
+              "text": "Equally effective; catheter if lung does not expand"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observation with repeat film at about 4 h",
+          "cells": [
+            {
+              "text": "Asymptomatic primary spontaneous pneumothorax"
+            },
+            {
+              "text": "Any size if stable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aspiration via 7 to 9 Fr catheter, 2nd intercostal space",
+          "cells": [
+            {
+              "text": "Symptomatic primary pneumothorax"
+            },
+            {
+              "text": "Chest tube under 14 Fr if lung fails to expand"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "14 or 16 gauge needle, 2nd intercostal space midclavicular line",
+          "cells": [
+            {
+              "text": "Tension pneumothorax"
+            },
+            {
+              "text": "Do not wait for x-ray; then tube thoracostomy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "VATS bleb stapling plus pleurodesis",
+          "cells": [
+            {
+              "text": "Second primary episode, secondary pneumothorax, persistent leak"
+            },
+            {
+              "text": "Recurrence 19 to 29% at 1 year after first primary episode"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison states about half of primary spontaneous pneumothoraces recur; Merck gives 19 to 29% at 1 year. The figures differ in follow-up time. Merck does not state intrapleural alteplase or dornase doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_pleura-dx-mgmt",
+      "title": "Diagnosis and management of pleural effusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pleural effusion on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Typical heart failure, bilateral, afebrile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Treat heart failure; tap if it persists or is atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound-guided thoracentesis: protein, LDH, glucose, pH, cells, culture, cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Exudate by Light criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Transudate: treat heart, liver or kidney cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "pH <7.20, glucose <60, pus or positive culture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chest tube drainage, antibiotics; fibrinolytic or VATS if loculated",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ADA, cytology, CT angiography for PE as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat cause; catheter or pleurodesis if malignant",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thoracoscopic biopsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

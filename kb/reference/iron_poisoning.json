@@ -1,173 +1,453 @@
 {
- "id": "iron_poisoning",
- "name": "Iron poisoning",
- "aliases": [
-  "iron overdose",
-  "iron toxicity",
-  "ferrous sulfate poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be identified",
-   "The classic course has recognised stages: early GI toxicity, a deceptive latent phase of apparent improvement, then shock and metabolic acidosis, hepatic failure, and finally late gastric scarring and outlet obstruction",
-   "Early severe vomiting, diarrhoea, and haematemesis reflect direct corrosive injury to the gut mucosa",
-   "Do not be misled by the quiescent second phase; serious systemic toxicity can still evolve after the patient seems to settle",
-   "Radiopaque tablets may be visible on an abdominal radiograph and can confirm ingestion and guide decontamination",
-   "Whole-bowel irrigation is the preferred decontamination method for significant ingestions, as activated charcoal does not bind iron",
-   "Deferoxamine is the specific chelating antidote, indicated for systemic toxicity, shock, significant acidosis, or high serum iron levels",
-   "A high anion-gap metabolic acidosis, hypotension, and progressive hepatic injury mark severe poisoning requiring urgent chelation and intensive support"
+  "id": "iron_poisoning",
+  "name": "Iron poisoning",
+  "aliases": [
+    "iron overdose",
+    "iron toxicity",
+    "ferrous sulfate poisoning"
   ],
-  "pathophysiology": "In overdose, free iron overwhelms the body's binding capacity (transferrin) and circulates unbound. It is directly corrosive to the gastrointestinal mucosa, causing haemorrhagic gastroenteritis and fluid loss. Absorbed free iron is a potent catalyst of free-radical formation and disrupts mitochondrial oxidative phosphorylation, causing cellular injury most prominently in the liver, along with a high anion-gap metabolic (lactic) acidosis. Iron-induced vasodilatation, increased capillary permeability, and myocardial depression produce shock. Healing of the corrosive gastric injury can later cause strictures and gastric outlet obstruction.",
-  "additionalDifferentials": [
-   "Other corrosive or caustic ingestions",
-   "Acute gastroenteritis of infective cause",
-   "Other causes of high anion-gap metabolic acidosis",
-   "Paracetamol or other hepatotoxic ingestion",
-   "Sepsis with shock"
-  ],
-  "additionalInvestigations": [
-   "Serum iron level, ideally timed to peak absorption",
-   "Abdominal radiograph for radiopaque tablets",
-   "Arterial blood gas with anion gap and lactate",
-   "Liver function tests and coagulation profile to track hepatic injury",
-   "Full blood count, electrolytes, renal function, and glucose"
-  ],
-  "redFlags": [
-   "Haematemesis or melaena indicating corrosive GI injury",
-   "Hypotension, shock, or lethargy signalling systemic toxicity",
-   "High anion-gap metabolic acidosis with elevated lactate",
-   "Evidence of hepatic injury or coagulopathy",
-   "Persistent or worsening symptoms after the apparent latent phase"
-  ],
-  "prognosis": "Small ingestions causing only GI upset usually resolve, but severe poisoning with shock, acidosis, and hepatic failure carries significant mortality; early recognition, decontamination, and deferoxamine chelation greatly improve survival, though late gastric strictures may still occur.",
-  "pitfalls": [
-   "Calculating dose from tablet weight rather than elemental iron content",
-   "Discharging a patient during the deceptive latent phase before systemic toxicity manifests",
-   "Giving activated charcoal, which does not adsorb iron",
-   "Delaying deferoxamine in a patient with shock, acidosis, or high iron levels"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock",
-   "Decontaminate the gut with whole-bowel irrigation for significant ingestions, since activated charcoal does not bind iron, confirming clearance with abdominal radiography",
-   "Chelate with intravenous deferoxamine in severe poisoning marked by shock, metabolic acidosis, high serum iron or significant symptoms",
-   "Correct the metabolic acidosis and support evolving hepatic failure and coagulopathy",
-   "Monitor closely through the deceptive latent phase, as systemic toxicity can progress after apparent improvement",
-   "Anticipate and manage late gastric outlet obstruction from strictures with endoscopy or surgery",
-   "Involve the poisons information service and, in children, assess safeguarding and future prevention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "iron_poisoning-pathway",
-   "title": "Iron poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be identified",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haematemesis or melaena indicating corrosive GI injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum iron level, ideally timed to peak absorption, Abdominal radiograph for radiopaque tablets, Arterial blood gas with anion gap and lactate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Calculating dose from tablet weight rather than elemental iron content"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iron poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "iron_poisoning-matrix",
-   "title": "Iron poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be identified",
+      "The classic course has recognised stages: early GI toxicity, a deceptive latent phase of apparent improvement, then shock and metabolic acidosis, hepatic failure, and finally late gastric scarring and outlet obstruction",
+      "Early severe vomiting, diarrhoea, and haematemesis reflect direct corrosive injury to the gut mucosa",
+      "Do not be misled by the quiescent second phase; serious systemic toxicity can still evolve after the patient seems to settle",
+      "Radiopaque tablets may be visible on an abdominal radiograph and can confirm ingestion and guide decontamination",
+      "Whole-bowel irrigation is the preferred decontamination method for significant ingestions, as activated charcoal does not bind iron",
+      "Deferoxamine is the specific chelating antidote, indicated for systemic toxicity, shock, significant acidosis, or high serum iron levels",
+      "A high anion-gap metabolic acidosis, hypotension, and progressive hepatic injury mark severe poisoning requiring urgent chelation and intensive support"
     ],
-    [
-     "Key Investigations",
-     "Serum iron level, ideally timed to peak absorption, Abdominal radiograph for radiopaque tablets, Arterial blood gas with anion",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In overdose, free iron overwhelms the body's binding capacity (transferrin) and circulates unbound. It is directly corrosive to the gastrointestinal mucosa, causing haemorrhagic gastroenteritis and fluid loss. Absorbed free iron is a potent catalyst of free-radical formation and disrupts mitochondrial oxidative phosphorylation, causing cellular injury most prominently in the liver, along with a high anion-gap metabolic (lactic) acidosis. Iron-induced vasodilatation, increased capillary permeability, and myocardial depression produce shock. Healing of the corrosive gastric injury can later cause strictures and gastric outlet obstruction.",
+    "additionalDifferentials": [
+      "Other corrosive or caustic ingestions",
+      "Acute gastroenteritis of infective cause",
+      "Other causes of high anion-gap metabolic acidosis",
+      "Paracetamol or other hepatotoxic ingestion",
+      "Sepsis with shock"
     ],
-    [
-     "Primary Differentials",
-     "Other corrosive or caustic ingestions, Acute gastroenteritis of infective cause, Other causes of high anion-gap metabolic acidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum iron level, ideally timed to peak absorption",
+      "Abdominal radiograph for radiopaque tablets",
+      "Arterial blood gas with anion gap and lactate",
+      "Liver function tests and coagulation profile to track hepatic injury",
+      "Full blood count, electrolytes, renal function, and glucose"
     ],
-    [
-     "Management Strategy",
-     "Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock",
-     "Core treatment modality"
+    "redFlags": [
+      "Haematemesis or melaena indicating corrosive GI injury",
+      "Hypotension, shock, or lethargy signalling systemic toxicity",
+      "High anion-gap metabolic acidosis with elevated lactate",
+      "Evidence of hepatic injury or coagulopathy",
+      "Persistent or worsening symptoms after the apparent latent phase"
     ],
-    [
-     "Clinical Pitfall",
-     "Calculating dose from tablet weight rather than elemental iron content",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small ingestions causing only GI upset usually resolve, but severe poisoning with shock, acidosis, and hepatic failure carries significant mortality; early recognition, decontamination, and deferoxamine chelation greatly improve survival, though late gastric strictures may still occur.",
+    "pitfalls": [
+      "Calculating dose from tablet weight rather than elemental iron content",
+      "Discharging a patient during the deceptive latent phase before systemic toxicity manifests",
+      "Giving activated charcoal, which does not adsorb iron",
+      "Delaying deferoxamine in a patient with shock, acidosis, or high iron levels"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock",
+      "Decontaminate the gut with whole-bowel irrigation for significant ingestions, since activated charcoal does not bind iron, confirming clearance with abdominal radiography",
+      "Chelate with intravenous deferoxamine in severe poisoning marked by shock, metabolic acidosis, high serum iron or significant symptoms",
+      "Correct the metabolic acidosis and support evolving hepatic failure and coagulopathy",
+      "Monitor closely through the deceptive latent phase, as systemic toxicity can progress after apparent improvement",
+      "Anticipate and manage late gastric outlet obstruction from strictures with endoscopy or surgery",
+      "Involve the poisons information service and, in children, assess safeguarding and future prevention"
     ]
-   ],
-   "caption": "Overview comparison matrix for iron poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iron-poisoning-real-image",
-   "title": "Iron poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "iron_poisoning-pathway",
+      "title": "Iron poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be identified",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haematemesis or melaena indicating corrosive GI injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum iron level, ideally timed to peak absorption, Abdominal radiograph for radiopaque tablets, Arterial blood gas with anion gap and lactate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Calculating dose from tablet weight rather than elemental iron content"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iron poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iron_poisoning-matrix",
+      "title": "Iron poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Toxicity relates to the amount of elemental iron ingested, not the total salt weight, so the specific preparation must be",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum iron level, ideally timed to peak absorption, Abdominal radiograph for radiopaque tablets, Arterial blood gas with anion",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other corrosive or caustic ingestions, Acute gastroenteritis of infective cause, Other causes of high anion-gap metabolic acidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Resuscitate aggressively with intravenous fluids to counter corrosive gastrointestinal losses and iron-induced vasodilatory shock",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Calculating dose from tablet weight rather than elemental iron content",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iron poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iron_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum iron level",
+          "cells": [
+            {
+              "text": "Timed to peak absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Radiopaque tablets and bowel clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas with anion gap and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and coagulation profile",
+          "cells": [
+            {
+              "text": "Hepatic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, electrolytes, renal function and glucose",
+          "cells": [
+            {
+              "text": "Systemic effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iron_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paracetamol or other hepatotoxic ingestion",
+          "cells": [
+            {
+              "text": "Hepatic injury from a hepatotoxic drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis with shock",
+          "cells": [
+            {
+              "text": "Shock from an infective source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iron_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids for corrosive losses and iron-induced vasodilatory shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gut decontamination",
+          "cells": [
+            {
+              "text": "Whole-bowel irrigation for significant ingestion; activated charcoal does not bind iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Intravenous deferoxamine in shock, metabolic acidosis, high serum iron or significant symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis and organ support",
+          "cells": [
+            {
+              "text": "Correct acidosis; support hepatic failure and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latent phase",
+          "cells": [
+            {
+              "text": "Close monitoring as systemic toxicity can progress after apparent improvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late complications",
+          "cells": [
+            {
+              "text": "Gastric outlet obstruction from strictures managed by endoscopy or surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iron_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Iron poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Iron tablet ingestion with early vomiting, diarrhoea and abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haematemesis, shock, lethargy, rising lactate or hepatic injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate; start deferoxamine for shock or high iron; poisons advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum iron timed to peak, abdominal radiograph, gas with anion gap, LFT and coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe poisoning with shock, acidosis or high serum iron?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Mild poisoning: decontaminate and observe through the latent phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous deferoxamine chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Whole-bowel irrigation for significant ingestion, not charcoal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct acidosis; support liver and coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor through the latent phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Anticipate late gastric outlet obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Late scarring and outlet obstruction watched for after recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

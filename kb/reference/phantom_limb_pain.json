@@ -1,173 +1,471 @@
 {
- "id": "phantom_limb_pain",
- "name": "Phantom limb pain",
- "aliases": [
-  "PLP",
-  "phantom pain",
-  "post-amputation pain"
- ],
- "class": "non_infective",
- "system": "Rehabilitation / Pain",
- "specialty": "Rehabilitation Medicine (PM&R)",
- "referenceOnly": true,
- "reference": {
-  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from non-painful phantom sensation and from residual limb (stump) pain",
-   "Most amputees experience some phantom phenomena; pain often begins within the first days to weeks after amputation and may follow a telescoping pattern where the phantom seems to shorten over time",
-   "Pre-amputation limb pain and its intensity are recognised risk factors, and the phantom pain may echo the character of the pain felt before surgery",
-   "Careful examination of the residual limb is essential to separate phantom pain from stump pain caused by neuroma, poor prosthetic fit, infection, or ischaemia",
-   "Non-pharmacological approaches including mirror therapy, graded motor imagery, desensitisation, and early prosthetic use address the cortical reorganisation thought to drive the pain",
-   "Pharmacological principles favour neuropathic agents such as gabapentinoids and certain antidepressants, with opioids reserved and used cautiously",
-   "A multidisciplinary rehabilitation approach that combines prosthetic training, psychological support, and pain management gives the best functional outcomes",
-   "Perioperative and preventive analgesic strategies may reduce the likelihood or severity of later phantom pain"
+  "id": "phantom_limb_pain",
+  "name": "Phantom limb pain",
+  "aliases": [
+    "PLP",
+    "phantom pain",
+    "post-amputation pain"
   ],
-  "pathophysiology": "Phantom limb pain arises from maladaptive changes at multiple levels of the nervous system after amputation. Peripherally, injured axons form neuromas that generate ectopic and spontaneous discharge. In the spinal cord, deafferentation leads to central sensitisation and disinhibition of dorsal horn neurons. Within the brain, the somatosensory and motor cortices undergo reorganisation, with cortical territory representing the missing limb being invaded by adjacent regions; the degree of this remapping correlates with pain intensity. Psychological factors and pre-existing pain memory further modulate the experience.",
-  "additionalDifferentials": [
-   "Residual limb (stump) pain from neuroma",
-   "Prosthetic-related mechanical pain or pressure injury",
-   "Residual limb infection or wound breakdown",
-   "Ischaemia of the residual limb",
-   "Referred pain from the spine or proximal joints",
-   "Heterotopic ossification in the residual limb"
-  ],
-  "additionalInvestigations": [
-   "Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation",
-   "Inspection and palpation of the residual limb for neuroma, tenderness, and prosthetic fit",
-   "Imaging of the residual limb where neuroma, heterotopic ossification, or bony spur is suspected",
-   "Vascular assessment if ischaemia of the residual limb is a concern",
-   "Assessment for infection when there are local inflammatory signs or wound problems"
-  ],
-  "redFlags": [
-   "Residual limb signs of infection or wound dehiscence requiring urgent treatment",
-   "Features of critical ischaemia in the residual limb",
-   "Rapidly worsening or new pain pattern suggesting an alternative surgical or vascular cause",
-   "Severe intractable pain with mood deterioration and suicidal ideation"
-  ],
-  "prognosis": "Phantom pain often diminishes in frequency and intensity over the months to years following amputation, and many patients cope well with a combination of therapy and prosthetic use. A subset develop persistent, treatment-resistant pain that requires ongoing multidisciplinary management.",
-  "pitfalls": [
-   "Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem",
-   "Neglecting early prosthetic fitting and rehabilitation, which can worsen cortical reorganisation",
-   "Dismissing patient reports of pain in an absent limb as psychological",
-   "Over-reliance on opioids for a fundamentally neuropathic pain problem",
-   "Overlooking pre-amputation pain control that could reduce later phantom pain"
-  ],
-  "references": [
-   "Braddom's Physical Medicine and Rehabilitation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to counter maladaptive cortical reorganisation",
-   "Neuropathic pharmacotherapy with gabapentinoids and antidepressants such as tricyclics or SNRIs, with opioids reserved and used cautiously",
-   "Optimisation of the residual limb and prosthetic fit, with treatment of stump pathology such as neuroma, poor fit, infection or ischaemia that mimics or aggravates the pain",
-   "Perioperative and preventive analgesia around amputation, addressing pre-amputation pain as a recognised risk factor",
-   "Interventional options for refractory pain including nerve blocks, targeted muscle reinnervation and neuromodulation or spinal cord stimulation",
-   "Psychological support such as cognitive behavioural therapy for the affective component and pain-related distress",
-   "Coordinated rehabilitation medicine and pain-team care for persistent, treatment-resistant pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phantom_limb_pain-pathway",
-   "title": "Phantom limb pain: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from non-painful phantom sensation and from residual limb (stump) pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Residual limb signs of infection or wound dehiscence requiring urgent treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation, Inspection and palpation of the residual limb for neuroma, tenderness, and prosthetic fit, Imaging of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to counter maladaptive cortical reorganisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phantom limb pain."
-  }
- ],
- "tables": [
-  {
-   "id": "phantom_limb_pain-matrix",
-   "title": "Phantom limb pain: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rehabilitation / Pain",
+  "specialty": "Rehabilitation Medicine (PM&R)",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from non-painful phantom sensation and from residual limb (stump) pain",
+      "Most amputees experience some phantom phenomena; pain often begins within the first days to weeks after amputation and may follow a telescoping pattern where the phantom seems to shorten over time",
+      "Pre-amputation limb pain and its intensity are recognised risk factors, and the phantom pain may echo the character of the pain felt before surgery",
+      "Careful examination of the residual limb is essential to separate phantom pain from stump pain caused by neuroma, poor prosthetic fit, infection, or ischaemia",
+      "Non-pharmacological approaches including mirror therapy, graded motor imagery, desensitisation, and early prosthetic use address the cortical reorganisation thought to drive the pain",
+      "Pharmacological principles favour neuropathic agents such as gabapentinoids and certain antidepressants, with opioids reserved and used cautiously",
+      "A multidisciplinary rehabilitation approach that combines prosthetic training, psychological support, and pain management gives the best functional outcomes",
+      "Perioperative and preventive analgesic strategies may reduce the likelihood or severity of later phantom pain"
     ],
-    [
-     "Key Investigations",
-     "Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation, Inspection and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phantom limb pain arises from maladaptive changes at multiple levels of the nervous system after amputation. Peripherally, injured axons form neuromas that generate ectopic and spontaneous discharge. In the spinal cord, deafferentation leads to central sensitisation and disinhibition of dorsal horn neurons. Within the brain, the somatosensory and motor cortices undergo reorganisation, with cortical territory representing the missing limb being invaded by adjacent regions; the degree of this remapping correlates with pain intensity. Psychological factors and pre-existing pain memory further modulate the experience.",
+    "additionalDifferentials": [
+      "Residual limb (stump) pain from neuroma",
+      "Prosthetic-related mechanical pain or pressure injury",
+      "Residual limb infection or wound breakdown",
+      "Ischaemia of the residual limb",
+      "Referred pain from the spine or proximal joints",
+      "Heterotopic ossification in the residual limb"
     ],
-    [
-     "Primary Differentials",
-     "Residual limb (stump) pain from neuroma, Prosthetic-related mechanical pain or pressure injury, Residual limb infection or wound",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation",
+      "Inspection and palpation of the residual limb for neuroma, tenderness, and prosthetic fit",
+      "Imaging of the residual limb where neuroma, heterotopic ossification, or bony spur is suspected",
+      "Vascular assessment if ischaemia of the residual limb is a concern",
+      "Assessment for infection when there are local inflammatory signs or wound problems"
     ],
-    [
-     "Management Strategy",
-     "Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to",
-     "Core treatment modality"
+    "redFlags": [
+      "Residual limb signs of infection or wound dehiscence requiring urgent treatment",
+      "Features of critical ischaemia in the residual limb",
+      "Rapidly worsening or new pain pattern suggesting an alternative surgical or vascular cause",
+      "Severe intractable pain with mood deterioration and suicidal ideation"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem",
-     "Prevent diagnostic or management error"
+    "prognosis": "Phantom pain often diminishes in frequency and intensity over the months to years following amputation, and many patients cope well with a combination of therapy and prosthetic use. A subset develop persistent, treatment-resistant pain that requires ongoing multidisciplinary management.",
+    "pitfalls": [
+      "Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem",
+      "Neglecting early prosthetic fitting and rehabilitation, which can worsen cortical reorganisation",
+      "Dismissing patient reports of pain in an absent limb as psychological",
+      "Over-reliance on opioids for a fundamentally neuropathic pain problem",
+      "Overlooking pre-amputation pain control that could reduce later phantom pain"
+    ],
+    "references": [
+      "Braddom's Physical Medicine and Rehabilitation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to counter maladaptive cortical reorganisation",
+      "Neuropathic pharmacotherapy with gabapentinoids and antidepressants such as tricyclics or SNRIs, with opioids reserved and used cautiously",
+      "Optimisation of the residual limb and prosthetic fit, with treatment of stump pathology such as neuroma, poor fit, infection or ischaemia that mimics or aggravates the pain",
+      "Perioperative and preventive analgesia around amputation, addressing pre-amputation pain as a recognised risk factor",
+      "Interventional options for refractory pain including nerve blocks, targeted muscle reinnervation and neuromodulation or spinal cord stimulation",
+      "Psychological support such as cognitive behavioural therapy for the affective component and pain-related distress",
+      "Coordinated rehabilitation medicine and pain-team care for persistent, treatment-resistant pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for phantom limb pain."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phantom-limb-pain-real-image",
-   "title": "Phantom limb pain: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phantom_limb_pain-pathway",
+      "title": "Phantom limb pain: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from non-painful phantom sensation and from residual limb (stump) pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Residual limb signs of infection or wound dehiscence requiring urgent treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation, Inspection and palpation of the residual limb for neuroma, tenderness, and prosthetic fit, Imaging of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to counter maladaptive cortical reorganisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phantom limb pain."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phantom_limb_pain-matrix",
+      "title": "Phantom limb pain: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phantom limb pain is painful sensation perceived in a limb or body part that has been amputated, and must be distinguished from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical history and examination distinguishing phantom pain from stump pain and non-painful phantom sensation, Inspection and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Residual limb (stump) pain from neuroma, Prosthetic-related mechanical pain or pressure injury, Residual limb infection or wound",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Non-pharmacological cortical retraining with mirror therapy, graded motor imagery, desensitisation and early prosthetic use to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing phantom pain with stump pain and missing a treatable neuroma or prosthetic-fit problem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phantom limb pain."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phantom_limb_pain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history and examination",
+          "cells": [
+            {
+              "text": "Distinguishes phantom pain from stump pain and non-painful phantom sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inspection and palpation of the residual limb",
+          "cells": [
+            {
+              "text": "Neuroma, tenderness and prosthetic fit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the residual limb",
+          "cells": [
+            {
+              "text": "Neuroma, heterotopic ossification or bony spur, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular assessment",
+          "cells": [
+            {
+              "text": "Residual limb ischaemia, when a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection assessment",
+          "cells": [
+            {
+              "text": "Local inflammatory signs or wound problems"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phantom_limb_pain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prosthetic-related mechanical pain",
+          "cells": [
+            {
+              "text": "Prosthetic fit assessed on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterotopic ossification in the residual limb",
+          "cells": [
+            {
+              "text": "Identified on imaging when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Residual limb infection or wound breakdown",
+          "cells": [
+            {
+              "text": "Local inflammatory signs or wound problems"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phantom_limb_pain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cortical retraining",
+          "cells": [
+            {
+              "text": "Mirror therapy, graded motor imagery, desensitisation and early prosthetic use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pharmacotherapy",
+          "cells": [
+            {
+              "text": "Gabapentinoids and antidepressants such as tricyclics or SNRIs; opioids reserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb and prosthesis optimisation",
+          "cells": [
+            {
+              "text": "Residual limb and prosthetic fit; treat neuroma, poor fit or infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative analgesia",
+          "cells": [
+            {
+              "text": "Preventive analgesia around amputation, addressing pre-amputation pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interventional options",
+          "cells": [
+            {
+              "text": "Nerve blocks, targeted muscle reinnervation and neuromodulation for refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy for the affective component and pain-related distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "Rehabilitation medicine and pain team for persistent, treatment-resistant pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phantom_limb_pain-dx-mgmt",
+      "title": "Diagnosis and management of Phantom limb pain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pain felt in an absent limb after amputation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (residual limb infection or wound breakdown, ischaemia, severe mood change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical or vascular review for infection, wound breakdown or ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History distinguishing phantom from stump pain; residual limb examination and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pain phantom rather than stump pain from neuroma or poor prosthetic fit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat stump pathology such as neuroma, poor prosthetic fit or ossification",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cortical retraining with mirror therapy, graded motor imagery and desensitisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoids or antidepressants such as tricyclics or SNRIs for neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise the residual limb and prosthetic fit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Preventive analgesia around amputation, addressing pre-amputation pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nerve blocks, targeted muscle reinnervation or neuromodulation for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pain often lessens over months to years; a subset develop persistent, resistant pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

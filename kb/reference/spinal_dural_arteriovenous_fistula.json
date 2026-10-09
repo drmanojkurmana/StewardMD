@@ -1,176 +1,463 @@
 {
- "id": "spinal_dural_arteriovenous_fistula",
- "name": "Spinal dural arteriovenous fistula",
- "aliases": [
-  "SDAVF",
-  "type I spinal arteriovenous malformation",
-  "dural AV fistula of the spine"
- ],
- "class": "non_infective",
- "system": "Nervous system / Spinal cord (vascular)",
- "specialty": "Neurology / Interventional neuroradiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at thoracolumbar levels",
-   "The lesion is an acquired arteriovenous shunt within the dura of a nerve root sleeve, where a radiculomeningeal artery drains directly into a radicular vein and arterialises the coronal venous plexus",
-   "The resulting venous hypertension impairs cord drainage and produces a progressive congestive myelopathy rather than haemorrhage",
-   "Patients present with insidious, often stepwise, ascending paraparesis, sensory disturbance and sphincter dysfunction that can be mistaken for a degenerative or inflammatory process",
-   "Symptoms characteristically worsen with exertion, prolonged standing, heat or the Valsalva manoeuvre, reflecting the underlying venous congestion",
-   "MRI typically shows central cord T2 hyperintensity with cord swelling and serpentine flow voids on the dorsal cord surface, and often patchy enhancement",
-   "Catheter spinal digital subtraction angiography remains the gold standard to localise the fistulous point before treatment",
-   "The advanced, thrombotic and often irreversible form is known as the Foix-Alajouanine syndrome"
+  "id": "spinal_dural_arteriovenous_fistula",
+  "name": "Spinal dural arteriovenous fistula",
+  "aliases": [
+    "SDAVF",
+    "type I spinal arteriovenous malformation",
+    "dural AV fistula of the spine"
   ],
-  "pathophysiology": "A spinal dural arteriovenous fistula is an acquired direct shunt situated in the dura near a spinal nerve root, where a dural branch of a radiculomeningeal artery connects to a radicular (medullary) vein without an intervening capillary bed. Arterial pressure is transmitted into the normally low-pressure, valveless coronal venous plexus that drains the cord, raising spinal venous pressure and reducing the arteriovenous pressure gradient. The consequent failure of venous drainage causes chronic venous congestion, interstitial oedema and cord hypoxia, producing a progressive myelopathy; unlike intramedullary arteriovenous malformations, the low-flow dural shunt rarely bleeds, and superimposed venous thrombosis can precipitate abrupt, often irreversible deterioration.",
-  "additionalDifferentials": [
-   "Transverse myelitis and other inflammatory myelopathies",
-   "Degenerative compressive myelopathy",
-   "Intramedullary spinal cord tumour such as ependymoma or astrocytoma",
-   "Intramedullary arteriovenous malformation or perimedullary fistula",
-   "Subacute combined degeneration of the cord",
-   "Motor neurone disease when weakness predominates"
-  ],
-  "additionalInvestigations": [
-   "MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement",
-   "MR angiography of the spine to help localise the level of the shunt",
-   "Catheter digital subtraction spinal angiography as the definitive study to identify the feeding artery and fistulous point",
-   "Cerebrospinal fluid analysis, which may show a mildly raised protein, to help exclude inflammatory causes",
-   "Serum vitamin B12 and metabolic screen to exclude mimics of a progressive myelopathy",
-   "Baseline functional and bladder assessment to monitor response to treatment"
-  ],
-  "redFlags": [
-   "Progressive gait decline with exertional or postural worsening in an older man",
-   "Ascending sensory level with developing sphincter involvement",
-   "Abrupt deterioration suggesting venous thrombosis or the Foix-Alajouanine syndrome",
-   "Neurological worsening after corticosteroid administration"
-  ],
-  "prognosis": "Gait and motor function commonly improve after treatment by endovascular embolisation or surgical ligation, provided intervention occurs before fixed deficits develop, whereas sphincter recovery is less reliable. Delayed diagnosis allows irreversible cord injury and can result in permanent paraplegia.",
-  "pitfalls": [
-   "Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration",
-   "Overlooking the dorsal serpentine flow voids on MRI that signal the diagnosis",
-   "Failing to proceed to spinal angiography when imaging suggests a vascular myelopathy",
-   "Attributing progressive myelopathy to degenerative spinal disease and missing a treatable fistula",
-   "Not recognising exertional and postural symptom fluctuation as a clue to venous congestion"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Youmans and Winn Neurological Surgery",
-   "Osborn's Diagnostic Imaging: Brain and Spine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve the venous hypertension driving the congestive myelopathy",
-   "Localise the feeding artery and fistulous point with catheter digital subtraction spinal angiography to plan definitive treatment",
-   "Time intervention early, before fixed deficits develop, as motor and gait recovery is more reliable than sphincter recovery",
-   "Avoid corticosteroids, which can precipitate acute neurological deterioration in venous congestive myelopathy",
-   "Provide gait rehabilitation and physiotherapy and manage neurogenic bladder and bowel dysfunction",
-   "Monitor with serial functional and bladder assessment and post-treatment MRI or angiography to confirm fistula closure and detect recurrence",
-   "Refer to interventional neuroradiology and spinal neurosurgery for combined decision-making on embolisation versus open ligation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_dural_arteriovenous_fistula-pathway",
-   "title": "Spinal dural arteriovenous fistula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at thoracolumbar levels",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive gait decline with exertional or postural worsening in an older man",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement, MR angiography of the spine to help localise the level of the shunt, Catheter digital subtraction spinal angiography"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve the venous hypertension driving the congestive myelopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal dural arteriovenous fistula."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_dural_arteriovenous_fistula-matrix",
-   "title": "Spinal dural arteriovenous fistula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Spinal cord (vascular)",
+  "specialty": "Neurology / Interventional neuroradiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at thoracolumbar levels",
+      "The lesion is an acquired arteriovenous shunt within the dura of a nerve root sleeve, where a radiculomeningeal artery drains directly into a radicular vein and arterialises the coronal venous plexus",
+      "The resulting venous hypertension impairs cord drainage and produces a progressive congestive myelopathy rather than haemorrhage",
+      "Patients present with insidious, often stepwise, ascending paraparesis, sensory disturbance and sphincter dysfunction that can be mistaken for a degenerative or inflammatory process",
+      "Symptoms characteristically worsen with exertion, prolonged standing, heat or the Valsalva manoeuvre, reflecting the underlying venous congestion",
+      "MRI typically shows central cord T2 hyperintensity with cord swelling and serpentine flow voids on the dorsal cord surface, and often patchy enhancement",
+      "Catheter spinal digital subtraction angiography remains the gold standard to localise the fistulous point before treatment",
+      "The advanced, thrombotic and often irreversible form is known as the Foix-Alajouanine syndrome"
     ],
-    [
-     "Key Investigations",
-     "MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement, MR angiography of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A spinal dural arteriovenous fistula is an acquired direct shunt situated in the dura near a spinal nerve root, where a dural branch of a radiculomeningeal artery connects to a radicular (medullary) vein without an intervening capillary bed. Arterial pressure is transmitted into the normally low-pressure, valveless coronal venous plexus that drains the cord, raising spinal venous pressure and reducing the arteriovenous pressure gradient. The consequent failure of venous drainage causes chronic venous congestion, interstitial oedema and cord hypoxia, producing a progressive myelopathy; unlike intramedullary arteriovenous malformations, the low-flow dural shunt rarely bleeds, and superimposed venous thrombosis can precipitate abrupt, often irreversible deterioration.",
+    "additionalDifferentials": [
+      "Transverse myelitis and other inflammatory myelopathies",
+      "Degenerative compressive myelopathy",
+      "Intramedullary spinal cord tumour such as ependymoma or astrocytoma",
+      "Intramedullary arteriovenous malformation or perimedullary fistula",
+      "Subacute combined degeneration of the cord",
+      "Motor neurone disease when weakness predominates"
     ],
-    [
-     "Primary Differentials",
-     "Transverse myelitis and other inflammatory myelopathies, Degenerative compressive myelopathy, Intramedullary spinal cord tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement",
+      "MR angiography of the spine to help localise the level of the shunt",
+      "Catheter digital subtraction spinal angiography as the definitive study to identify the feeding artery and fistulous point",
+      "Cerebrospinal fluid analysis, which may show a mildly raised protein, to help exclude inflammatory causes",
+      "Serum vitamin B12 and metabolic screen to exclude mimics of a progressive myelopathy",
+      "Baseline functional and bladder assessment to monitor response to treatment"
     ],
-    [
-     "Management Strategy",
-     "Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive gait decline with exertional or postural worsening in an older man",
+      "Ascending sensory level with developing sphincter involvement",
+      "Abrupt deterioration suggesting venous thrombosis or the Foix-Alajouanine syndrome",
+      "Neurological worsening after corticosteroid administration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration",
-     "Prevent diagnostic or management error"
+    "prognosis": "Gait and motor function commonly improve after treatment by endovascular embolisation or surgical ligation, provided intervention occurs before fixed deficits develop, whereas sphincter recovery is less reliable. Delayed diagnosis allows irreversible cord injury and can result in permanent paraplegia.",
+    "pitfalls": [
+      "Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration",
+      "Overlooking the dorsal serpentine flow voids on MRI that signal the diagnosis",
+      "Failing to proceed to spinal angiography when imaging suggests a vascular myelopathy",
+      "Attributing progressive myelopathy to degenerative spinal disease and missing a treatable fistula",
+      "Not recognising exertional and postural symptom fluctuation as a clue to venous congestion"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Youmans and Winn Neurological Surgery",
+      "Osborn's Diagnostic Imaging: Brain and Spine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve the venous hypertension driving the congestive myelopathy",
+      "Localise the feeding artery and fistulous point with catheter digital subtraction spinal angiography to plan definitive treatment",
+      "Time intervention early, before fixed deficits develop, as motor and gait recovery is more reliable than sphincter recovery",
+      "Avoid corticosteroids, which can precipitate acute neurological deterioration in venous congestive myelopathy",
+      "Provide gait rehabilitation and physiotherapy and manage neurogenic bladder and bowel dysfunction",
+      "Monitor with serial functional and bladder assessment and post-treatment MRI or angiography to confirm fistula closure and detect recurrence",
+      "Refer to interventional neuroradiology and spinal neurosurgery for combined decision-making on embolisation versus open ligation"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal dural arteriovenous fistula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-dural-arteriovenous-fistula-real-image",
-   "title": "Spinal dural arteriovenous fistula: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_dural_arteriovenous_fistula-pathway",
+      "title": "Spinal dural arteriovenous fistula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at thoracolumbar levels",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive gait decline with exertional or postural worsening in an older man",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement, MR angiography of the spine to help localise the level of the shunt, Catheter digital subtraction spinal angiography"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve the venous hypertension driving the congestive myelopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal dural arteriovenous fistula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_dural_arteriovenous_fistula-matrix",
+      "title": "Spinal dural arteriovenous fistula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "This is the commonest spinal vascular malformation and characteristically affects middle-aged and older men, most often at",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the whole spine with contrast to show cord oedema, dorsal serpentine flow voids and enhancement, MR angiography of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transverse myelitis and other inflammatory myelopathies, Degenerative compressive myelopathy, Intramedullary spinal cord tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Obliterate the fistula definitively by endovascular embolisation or surgical ligation of the draining radicular vein to relieve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as transverse myelitis and giving corticosteroids, which may precipitate marked deterioration",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal dural arteriovenous fistula."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_dural_arteriovenous_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the whole spine with contrast",
+          "cells": [
+            {
+              "text": "Cord oedema and dorsal serpentine flow voids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography of the spine",
+          "cells": [
+            {
+              "text": "Level of the shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter digital subtraction spinal angiography",
+          "cells": [
+            {
+              "text": "Feeding artery and fistulous point; the gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Mildly raised protein; inflammatory causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and metabolic screen",
+          "cells": [
+            {
+              "text": "Mimics of progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional and bladder assessment",
+          "cells": [
+            {
+              "text": "Baseline for response to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_dural_arteriovenous_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transverse myelitis",
+          "cells": [
+            {
+              "text": "An inflammatory myelopathy; corticosteroids can worsen the fistula-related picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative compressive myelopathy",
+          "cells": [
+            {
+              "text": "Attribution to degenerative disease misses a treatable fistula"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_dural_arteriovenous_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive obliteration",
+          "cells": [
+            {
+              "text": "Endovascular embolisation or surgical ligation of the draining radicular vein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiographic localisation",
+          "cells": [
+            {
+              "text": "Catheter digital subtraction angiography to plan treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early intervention",
+          "cells": [
+            {
+              "text": "Before fixed deficits develop; motor and gait recovery is more reliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids",
+          "cells": [
+            {
+              "text": "Can precipitate deterioration in venous congestive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait rehabilitation and bladder and bowel care",
+          "cells": [
+            {
+              "text": "Physiotherapy and neurogenic bladder management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment follow-up",
+          "cells": [
+            {
+              "text": "Serial functional and bladder assessment; MRI or angiography to confirm closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Interventional neuroradiology and spinal neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_dural_arteriovenous_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Spinal dural arteriovenous fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive paraparesis worse on standing in an older man: suspected spinal dural AVF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abrupt deterioration, sensory level, worsening after steroids)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroradiology review for abrupt deterioration or suspected thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the whole spine with contrast; MR angiography; catheter spinal angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does spinal angiography localise a fistula with a feeding artery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transverse myelitis, degenerative myelopathy or other mimics; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Definitive obliteration by endovascular embolisation or surgical ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early intervention, before fixed deficits develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid corticosteroids, which can worsen venous congestive myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gait rehabilitation with bladder and bowel management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Motor and gait recovery is more reliable than sphincter recovery after treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

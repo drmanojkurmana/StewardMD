@@ -1,174 +1,443 @@
 {
- "id": "new_daily_persistent_headache",
- "name": "New daily persistent headache",
- "aliases": [
-  "NDPH"
- ],
- "class": "non_infective",
- "system": "Nervous system / Headache",
- "specialty": "Neurology / Headache",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name the exact date it began",
-   "The headache is continuous from close to its onset, unlike chronic migraine which evolves from episodic attacks",
-   "It is a diagnosis of exclusion, and secondary causes with a similar abrupt daily pattern must be sought",
-   "The phenotype may resemble migraine or tension-type headache, which does not exclude the diagnosis",
-   "A preceding infection, stressful life event or minor procedure is sometimes reported around the time of onset",
-   "Important secondary mimics include low- and high-cerebrospinal-fluid-pressure headaches, cerebral venous sinus thrombosis and, in older patients, giant cell arteritis",
-   "It is often refractory to treatment, which is generally guided by the predominant migrainous or tension-type phenotype"
+  "id": "new_daily_persistent_headache",
+  "name": "New daily persistent headache",
+  "aliases": [
+    "NDPH"
   ],
-  "pathophysiology": "The mechanism of new daily persistent headache is unclear. Proposed contributors include a post-infectious or post-inflammatory state with persistent cytokine activation, cervical or ligamentous factors, and disordered central pain processing. Because the abrupt, unremitting pattern can also be produced by disorders of cerebrospinal fluid pressure or venous drainage, these secondary processes must be excluded before the primary label is applied.",
-  "additionalDifferentials": [
-   "Chronic migraine",
-   "Chronic tension-type headache",
-   "Low-cerebrospinal-fluid-pressure (spontaneous intracranial hypotension) headache",
-   "Idiopathic intracranial hypertension",
-   "Cerebral venous sinus thrombosis",
-   "Giant cell arteritis in older patients",
-   "Medication-overuse headache"
-  ],
-  "additionalInvestigations": [
-   "MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs",
-   "MR or CT venography to exclude cerebral venous sinus thrombosis",
-   "Consideration of lumbar puncture with opening pressure when a cerebrospinal-fluid-pressure disorder is suspected",
-   "Inflammatory markers such as ESR and CRP in older patients to screen for giant cell arteritis",
-   "Review of headache-onset timing, triggers and medication use"
-  ],
-  "redFlags": [
-   "A postural component suggesting a cerebrospinal-fluid-pressure disorder",
-   "Papilloedema, visual symptoms or pulsatile tinnitus",
-   "Focal neurological deficit, seizures or a thunderclap onset",
-   "Age over fifty with scalp tenderness or jaw claudication",
-   "Fever, neck stiffness or immunocompromise"
-  ],
-  "prognosis": "Outcome is variable: some patients remit spontaneously over months, while a persisting subgroup proves refractory to preventive treatment; the prognosis is better when a treatable secondary cause is identified.",
-  "pitfalls": [
-   "Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis",
-   "Overlooking giant cell arteritis in an older patient",
-   "Allowing medication-overuse headache to develop during treatment",
-   "Assuming a migrainous phenotype rules out a secondary cause"
-  ],
-  "references": [
-   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-   "The Headaches (Olesen et al.)"
-  ],
-  "crossLinks": [
-   "hemicrania_continua"
-  ],
-  "management": [
-   "Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders and, in older patients, giant cell arteritis, before applying the primary label",
-   "Direct treatment at the identified secondary cause when found (for example anticoagulation for venous sinus thrombosis, an epidural blood patch for spontaneous intracranial hypotension, or corticosteroids for giant cell arteritis)",
-   "Give phenotype-directed prevention: migraine-type preventives such as amitriptyline, topiramate or a beta-blocker for a migrainous picture, and amitriptyline for a tension-type phenotype",
-   "Consider adjuncts for refractory pain such as gabapentinoids, occipital nerve blocks or a short bridging course of corticosteroids",
-   "Limit acute analgesics and triptans and counsel on sleep, mood and stress to prevent superimposed medication-overuse headache",
-   "Refer to a specialist headache service for refractory disease and consider CGRP-targeted therapy",
-   "Safety-net with clear advice on red-flag features prompting urgent reassessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "new_daily_persistent_headache-pathway",
-   "title": "New daily persistent headache: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name the exact date it began",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A postural component suggesting a cerebrospinal-fluid-pressure disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs, MR or CT venography to exclude cerebral venous sinus thrombosis, Consideration of lumbar puncture with opening pressure when a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders and, in older patients, giant cell arteritis, before applying the primary label"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of new daily persistent headache."
-  }
- ],
- "tables": [
-  {
-   "id": "new_daily_persistent_headache-matrix",
-   "title": "New daily persistent headache: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Headache",
+  "specialty": "Neurology / Headache",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name the exact date it began",
+      "The headache is continuous from close to its onset, unlike chronic migraine which evolves from episodic attacks",
+      "It is a diagnosis of exclusion, and secondary causes with a similar abrupt daily pattern must be sought",
+      "The phenotype may resemble migraine or tension-type headache, which does not exclude the diagnosis",
+      "A preceding infection, stressful life event or minor procedure is sometimes reported around the time of onset",
+      "Important secondary mimics include low- and high-cerebrospinal-fluid-pressure headaches, cerebral venous sinus thrombosis and, in older patients, giant cell arteritis",
+      "It is often refractory to treatment, which is generally guided by the predominant migrainous or tension-type phenotype"
     ],
-    [
-     "Key Investigations",
-     "MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs, MR or CT venography to exclude cerebral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mechanism of new daily persistent headache is unclear. Proposed contributors include a post-infectious or post-inflammatory state with persistent cytokine activation, cervical or ligamentous factors, and disordered central pain processing. Because the abrupt, unremitting pattern can also be produced by disorders of cerebrospinal fluid pressure or venous drainage, these secondary processes must be excluded before the primary label is applied.",
+    "additionalDifferentials": [
+      "Chronic migraine",
+      "Chronic tension-type headache",
+      "Low-cerebrospinal-fluid-pressure (spontaneous intracranial hypotension) headache",
+      "Idiopathic intracranial hypertension",
+      "Cerebral venous sinus thrombosis",
+      "Giant cell arteritis in older patients",
+      "Medication-overuse headache"
     ],
-    [
-     "Primary Differentials",
-     "Chronic migraine, Chronic tension-type headache, Low-cerebrospinal-fluid-pressure (spontaneous intracranial hypotension) headache",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs",
+      "MR or CT venography to exclude cerebral venous sinus thrombosis",
+      "Consideration of lumbar puncture with opening pressure when a cerebrospinal-fluid-pressure disorder is suspected",
+      "Inflammatory markers such as ESR and CRP in older patients to screen for giant cell arteritis",
+      "Review of headache-onset timing, triggers and medication use"
     ],
-    [
-     "Management Strategy",
-     "Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders",
-     "Core treatment modality"
+    "redFlags": [
+      "A postural component suggesting a cerebrospinal-fluid-pressure disorder",
+      "Papilloedema, visual symptoms or pulsatile tinnitus",
+      "Focal neurological deficit, seizures or a thunderclap onset",
+      "Age over fifty with scalp tenderness or jaw claudication",
+      "Fever, neck stiffness or immunocompromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable: some patients remit spontaneously over months, while a persisting subgroup proves refractory to preventive treatment; the prognosis is better when a treatable secondary cause is identified.",
+    "pitfalls": [
+      "Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis",
+      "Overlooking giant cell arteritis in an older patient",
+      "Allowing medication-overuse headache to develop during treatment",
+      "Assuming a migrainous phenotype rules out a secondary cause"
+    ],
+    "references": [
+      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+      "The Headaches (Olesen et al.)"
+    ],
+    "crossLinks": [
+      "hemicrania_continua"
+    ],
+    "management": [
+      "Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders and, in older patients, giant cell arteritis, before applying the primary label",
+      "Direct treatment at the identified secondary cause when found (for example anticoagulation for venous sinus thrombosis, an epidural blood patch for spontaneous intracranial hypotension, or corticosteroids for giant cell arteritis)",
+      "Give phenotype-directed prevention: migraine-type preventives such as amitriptyline, topiramate or a beta-blocker for a migrainous picture, and amitriptyline for a tension-type phenotype",
+      "Consider adjuncts for refractory pain such as gabapentinoids, occipital nerve blocks or a short bridging course of corticosteroids",
+      "Limit acute analgesics and triptans and counsel on sleep, mood and stress to prevent superimposed medication-overuse headache",
+      "Refer to a specialist headache service for refractory disease and consider CGRP-targeted therapy",
+      "Safety-net with clear advice on red-flag features prompting urgent reassessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for new daily persistent headache."
-  }
- ],
- "diagrams": [
-  {
-   "id": "new-daily-persistent-headache-real-image",
-   "title": "New daily persistent headache: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "new_daily_persistent_headache-pathway",
+      "title": "New daily persistent headache: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name the exact date it began",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A postural component suggesting a cerebrospinal-fluid-pressure disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs, MR or CT venography to exclude cerebral venous sinus thrombosis, Consideration of lumbar puncture with opening pressure when a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders and, in older patients, giant cell arteritis, before applying the primary label"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of new daily persistent headache."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "new_daily_persistent_headache-matrix",
+      "title": "New daily persistent headache: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by an abrupt onset of persistent daily headache that becomes unremitting within a day, in a patient who can often name",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain with contrast, looking for pachymeningeal enhancement or other secondary signs, MR or CT venography to exclude cerebral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic migraine, Chronic tension-type headache, Low-cerebrospinal-fluid-pressure (spontaneous intracranial hypotension) headache",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude and treat secondary mimics first: cerebral venous sinus thrombosis, low- and high-cerebrospinal-fluid-pressure disorders",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting the diagnosis without excluding cerebrospinal-fluid-pressure disorders or venous thrombosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for new daily persistent headache."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "new_daily_persistent_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with contrast",
+          "cells": [
+            {
+              "text": "Pachymeningeal enhancement or other secondary signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT venography",
+          "cells": [
+            {
+              "text": "Excludes cerebral venous sinus thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with opening pressure",
+          "cells": [
+            {
+              "text": "Considered to assess intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp and temporal artery assessment with ESR or CRP",
+          "cells": [
+            {
+              "text": "Giant cell arteritis in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "new_daily_persistent_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic migraine",
+          "cells": [
+            {
+              "text": "Earlier onset and a migrainous pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic tension-type headache",
+          "cells": [
+            {
+              "text": "Non-pulsatile daily headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous intracranial hypotension",
+          "cells": [
+            {
+              "text": "Postural headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic intracranial hypertension",
+          "cells": [
+            {
+              "text": "Papilloedema and pulsatile tinnitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Venography separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "new_daily_persistent_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat secondary mimics first",
+          "cells": [
+            {
+              "text": "Venous thrombosis, CSF pressure disorders and giant cell arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the identified secondary cause",
+          "cells": [
+            {
+              "text": "Direct therapy where one is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive therapy for persistent cases",
+          "cells": [
+            {
+              "text": "Refractory subgroup needs ongoing care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid medication-overuse headache",
+          "cells": [
+            {
+              "text": "Limit analgesic and triptan use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "new_daily_persistent_headache-dx-mgmt",
+      "title": "Diagnosis and management of New daily persistent headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt onset of unremitting daily headache, with a known date of onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (postural pattern, papilloedema, focal deficit, age over fifty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and venography; urgent steroids if giant cell arteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with contrast, MR or CT venography, opening pressure, inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary causes excluded on imaging and pressure measurement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic migraine or tension-type headache; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude and treat venous thrombosis, CSF pressure disorders and arteritis first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Direct treatment at any identified secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preventive therapy for persistent primary cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid medication-overuse headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; some remit over months, and a refractory subgroup persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

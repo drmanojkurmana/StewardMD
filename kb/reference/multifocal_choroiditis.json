@@ -1,176 +1,499 @@
 {
- "id": "multifocal_choroiditis",
- "name": "multifocal choroiditis",
- "aliases": [
-  "multifocal choroiditis and panuveitis",
-  "MCP"
- ],
- "class": "non_infective",
- "system": "ophthalmology",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
-   "Fundoscopy shows multiple small, round, yellow-grey lesions at the level of the choroid and retinal pigment epithelium in the posterior pole and mid-periphery that evolve into punched-out atrophic scars with pigmented margins.",
-   "When accompanied by anterior chamber and vitreous inflammation it is termed multifocal choroiditis and panuveitis, distinguishing it from the non-inflammatory punctate inner choroidopathy.",
-   "Choroidal neovascular membranes are a major sight-threatening complication and a common cause of central visual loss.",
-   "It is an important cause of the enlarged blind spot syndrome and can produce photopsia and progressive scotomata.",
-   "Infective mimics, especially ocular tuberculosis, sarcoidosis and syphilis, must be excluded before attributing lesions to idiopathic disease.",
-   "Active inflammatory lesions respond to corticosteroids and steroid-sparing immunosuppression, whereas choroidal neovascularisation is treated with anti-vascular endothelial growth factor therapy.",
-   "Optical coherence tomography and fundus autofluorescence help distinguish active inflammatory lesions from inactive atrophic scars and detect new neovascular activity."
+  "id": "multifocal_choroiditis",
+  "name": "multifocal choroiditis",
+  "aliases": [
+    "multifocal choroiditis and panuveitis",
+    "MCP"
   ],
-  "pathophysiology": "Multifocal choroiditis is considered an idiopathic inflammatory disorder within the spectrum of white dot syndromes, in which an aberrant immune response targets the outer retina, retinal pigment epithelium and choriocapillaris. Focal collections of lymphocytes accumulate at the level of the retinal pigment epithelium and inner choroid, producing the characteristic discrete lesions. Repeated or ongoing inflammation disrupts Bruch's membrane and the retinal pigment epithelium, leaving punched-out chorioretinal scars and predisposing to the ingrowth of choroidal neovascular membranes through the breaks in Bruch's membrane. An autoimmune reaction against retinal or retinal pigment epithelial antigens, in a genetically susceptible host, is the leading hypothesis, and the disorder frequently coexists with intraocular inflammation in the anterior chamber and vitreous.",
-  "additionalDifferentials": [
-   "punctate inner choroidopathy",
-   "presumed ocular histoplasmosis syndrome",
-   "ocular sarcoidosis",
-   "ocular tuberculosis",
-   "syphilitic chorioretinitis",
-   "birdshot chorioretinopathy",
-   "primary vitreoretinal lymphoma masquerade"
-  ],
-  "additionalInvestigations": [
-   "fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation",
-   "indocyanine green angiography showing hypofluorescent spots",
-   "optical coherence tomography for sub-retinal fluid, neovascular membranes and outer retinal disruption",
-   "fundus autofluorescence to map active and atrophic lesions",
-   "chest imaging and interferon-gamma release assay to exclude tuberculosis and sarcoidosis",
-   "serum angiotensin-converting enzyme and syphilis serology",
-   "visual field testing for blind spot enlargement and scotomata"
-  ],
-  "redFlags": [
-   "sudden central visual loss or metamorphopsia suggesting choroidal neovascularisation",
-   "rapidly progressive or confluent lesions threatening the fovea",
-   "features suggesting an infective cause such as tuberculosis or syphilis",
-   "unilateral progressive vitritis in an older patient raising concern for masquerade lymphoma"
-  ],
-  "prognosis": "Visual outcome is variable and depends largely on foveal involvement and the development of choroidal neovascularisation; many retain good vision with prompt control of inflammation and neovascular activity, but recurrent disease and macular scarring can cause permanent central loss.",
-  "pitfalls": [
-   "Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis.",
-   "Missing a choroidal neovascular membrane as the cause of new central visual symptoms.",
-   "Confusing inflammatory reactivation with a new neovascular membrane, leading to inappropriate therapy.",
-   "Overlooking a masquerade syndrome such as vitreoretinal lymphoma in older or atypical patients.",
-   "Treating with corticosteroids alone in aggressive disease when steroid-sparing immunosuppression is needed."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
-   "Standardisation of Uveitis Nomenclature classification criteria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing immunosuppressants for chronic or recurrent disease",
-   "Intravitreal anti-VEGF injections for sight-threatening choroidal neovascular membranes",
-   "Exclude infective mimics such as tuberculosis, sarcoidosis and syphilis before committing to immunosuppression",
-   "Regular monitoring with optical coherence tomography, angiography and fundus autofluorescence to detect neovascular activity and new lesions, with Amsler grid home self-monitoring",
-   "Management by an ophthalmologist or uveitis specialist",
-   "Prompt escalation of anti-inflammatory and anti-VEGF treatment when the fovea is threatened or neovascularisation appears"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "multifocal_choroiditis-pathway",
-   "title": "multifocal choroiditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: sudden central visual loss or metamorphopsia suggesting choroidal neovascularisation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation, indocyanine green angiography showing hypofluorescent spots, optical coherence tomography for sub-retinal fluid, neovascular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing immunosuppressants for chronic or recurrent disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multifocal choroiditis."
-  }
- ],
- "tables": [
-  {
-   "id": "multifocal_choroiditis-matrix",
-   "title": "multifocal choroiditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmology",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
+      "Fundoscopy shows multiple small, round, yellow-grey lesions at the level of the choroid and retinal pigment epithelium in the posterior pole and mid-periphery that evolve into punched-out atrophic scars with pigmented margins.",
+      "When accompanied by anterior chamber and vitreous inflammation it is termed multifocal choroiditis and panuveitis, distinguishing it from the non-inflammatory punctate inner choroidopathy.",
+      "Choroidal neovascular membranes are a major sight-threatening complication and a common cause of central visual loss.",
+      "It is an important cause of the enlarged blind spot syndrome and can produce photopsia and progressive scotomata.",
+      "Infective mimics, especially ocular tuberculosis, sarcoidosis and syphilis, must be excluded before attributing lesions to idiopathic disease.",
+      "Active inflammatory lesions respond to corticosteroids and steroid-sparing immunosuppression, whereas choroidal neovascularisation is treated with anti-vascular endothelial growth factor therapy.",
+      "Optical coherence tomography and fundus autofluorescence help distinguish active inflammatory lesions from inactive atrophic scars and detect new neovascular activity."
     ],
-    [
-     "Key Investigations",
-     "fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation, indocyanine green angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Multifocal choroiditis is considered an idiopathic inflammatory disorder within the spectrum of white dot syndromes, in which an aberrant immune response targets the outer retina, retinal pigment epithelium and choriocapillaris. Focal collections of lymphocytes accumulate at the level of the retinal pigment epithelium and inner choroid, producing the characteristic discrete lesions. Repeated or ongoing inflammation disrupts Bruch's membrane and the retinal pigment epithelium, leaving punched-out chorioretinal scars and predisposing to the ingrowth of choroidal neovascular membranes through the breaks in Bruch's membrane. An autoimmune reaction against retinal or retinal pigment epithelial antigens, in a genetically susceptible host, is the leading hypothesis, and the disorder frequently coexists with intraocular inflammation in the anterior chamber and vitreous.",
+    "additionalDifferentials": [
+      "punctate inner choroidopathy",
+      "presumed ocular histoplasmosis syndrome",
+      "ocular sarcoidosis",
+      "ocular tuberculosis",
+      "syphilitic chorioretinitis",
+      "birdshot chorioretinopathy",
+      "primary vitreoretinal lymphoma masquerade"
     ],
-    [
-     "Primary Differentials",
-     "punctate inner choroidopathy, presumed ocular histoplasmosis syndrome, ocular sarcoidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation",
+      "indocyanine green angiography showing hypofluorescent spots",
+      "optical coherence tomography for sub-retinal fluid, neovascular membranes and outer retinal disruption",
+      "fundus autofluorescence to map active and atrophic lesions",
+      "chest imaging and interferon-gamma release assay to exclude tuberculosis and sarcoidosis",
+      "serum angiotensin-converting enzyme and syphilis serology",
+      "visual field testing for blind spot enlargement and scotomata"
     ],
-    [
-     "Management Strategy",
-     "Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing",
-     "Core treatment modality"
+    "redFlags": [
+      "sudden central visual loss or metamorphopsia suggesting choroidal neovascularisation",
+      "rapidly progressive or confluent lesions threatening the fovea",
+      "features suggesting an infective cause such as tuberculosis or syphilis",
+      "unilateral progressive vitritis in an older patient raising concern for masquerade lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual outcome is variable and depends largely on foveal involvement and the development of choroidal neovascularisation; many retain good vision with prompt control of inflammation and neovascular activity, but recurrent disease and macular scarring can cause permanent central loss.",
+    "pitfalls": [
+      "Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis.",
+      "Missing a choroidal neovascular membrane as the cause of new central visual symptoms.",
+      "Confusing inflammatory reactivation with a new neovascular membrane, leading to inappropriate therapy.",
+      "Overlooking a masquerade syndrome such as vitreoretinal lymphoma in older or atypical patients.",
+      "Treating with corticosteroids alone in aggressive disease when steroid-sparing immunosuppression is needed."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
+      "Standardisation of Uveitis Nomenclature classification criteria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing immunosuppressants for chronic or recurrent disease",
+      "Intravitreal anti-VEGF injections for sight-threatening choroidal neovascular membranes",
+      "Exclude infective mimics such as tuberculosis, sarcoidosis and syphilis before committing to immunosuppression",
+      "Regular monitoring with optical coherence tomography, angiography and fundus autofluorescence to detect neovascular activity and new lesions, with Amsler grid home self-monitoring",
+      "Management by an ophthalmologist or uveitis specialist",
+      "Prompt escalation of anti-inflammatory and anti-VEGF treatment when the fovea is threatened or neovascularisation appears"
     ]
-   ],
-   "caption": "Overview comparison matrix for multifocal choroiditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multifocal-choroiditis-real-image",
-   "title": "multifocal choroiditis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "multifocal_choroiditis-pathway",
+      "title": "multifocal choroiditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: sudden central visual loss or metamorphopsia suggesting choroidal neovascularisation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation, indocyanine green angiography showing hypofluorescent spots, optical coherence tomography for sub-retinal fluid, neovascular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing immunosuppressants for chronic or recurrent disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multifocal choroiditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multifocal_choroiditis-matrix",
+      "title": "multifocal choroiditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects young to middle-aged, moderately myopic women and is often bilateral though frequently asymmetric.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "fundus fluorescein angiography to characterise lesions and detect choroidal neovascularisation, indocyanine green angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "punctate inner choroidopathy, presumed ocular histoplasmosis syndrome, ocular sarcoidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Corticosteroid therapy (systemic, periocular or intravitreal) to control active intraocular inflammation, with steroid-sparing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing idiopathic disease without excluding tuberculosis, sarcoidosis and syphilis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multifocal choroiditis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multifocal_choroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fundus fluorescein angiography",
+          "cells": [
+            {
+              "text": "Characterises lesions and detects choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Hypofluorescent spots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Sub-retinal fluid, neovascular membranes and outer retinal disruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Maps active and atrophic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and interferon-gamma release assay",
+          "cells": [
+            {
+              "text": "Excludes tuberculosis and sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum angiotensin-converting enzyme and syphilis serology",
+          "cells": [
+            {
+              "text": "Sarcoidosis and syphilis screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing",
+          "cells": [
+            {
+              "text": "Blind spot enlargement and scotomata"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multifocal_choroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Punctate inner choroidopathy",
+          "cells": [
+            {
+              "text": "Non-inflammatory; multifocal choroiditis has anterior chamber and vitreous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular tuberculosis",
+          "cells": [
+            {
+              "text": "Infective mimic; excluded with chest imaging and interferon-gamma release assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular sarcoidosis",
+          "cells": [
+            {
+              "text": "Assessed with serum angiotensin-converting enzyme and chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilitic chorioretinitis",
+          "cells": [
+            {
+              "text": "Excluded with syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary vitreoretinal lymphoma masquerade",
+          "cells": [
+            {
+              "text": "Unilateral progressive vitritis in an older patient raises concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multifocal_choroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic, periocular or intravitreal, to control active intraocular inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppressants",
+          "cells": [
+            {
+              "text": "For chronic or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF injections",
+          "cells": [
+            {
+              "text": "For sight-threatening choroidal neovascular membranes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infective mimics",
+          "cells": [
+            {
+              "text": "Tuberculosis, sarcoidosis and syphilis, before committing to immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Optical coherence tomography, angiography and fundus autofluorescence; Amsler grid at home"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Ophthalmologist or uveitis specialist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Prompt escalation when the fovea is threatened or neovascularisation appears"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multifocal_choroiditis-dx-mgmt",
+      "title": "Diagnosis and management of multifocal choroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple yellow-grey choroidal lesions, often bilateral, in a young or middle-aged myope",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden central loss, foveal threat, infective features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal review; anti-VEGF for any choroidal neovascular membrane",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Angiography, OCT, fundus autofluorescence, chest imaging, interferon-gamma assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tuberculosis, sarcoidosis and syphilis excluded before immunosuppression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-evaluate infective mimics and masquerade lymphoma before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids (systemic, periocular or intravitreal) for active inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppressants for chronic or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF injections for choroidal neovascular membranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "OCT, angiography and fundus autofluorescence monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision varies; foveal involvement and neovascularisation decide the outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

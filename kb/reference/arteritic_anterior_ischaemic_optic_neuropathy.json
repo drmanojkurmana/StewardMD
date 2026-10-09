@@ -1,174 +1,454 @@
 {
- "id": "arteritic_anterior_ischaemic_optic_neuropathy",
- "name": "arteritic anterior ischaemic optic neuropathy",
- "aliases": [
-  "AAION",
-  "giant cell arteritis optic neuropathy"
- ],
- "class": "non_infective",
- "system": "Ophthalmic",
- "specialty": "Neuro-ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically over 70.",
-   "Visual loss is usually severe, frequently counting fingers or worse, and may be preceded by transient obscurations (amaurosis fugax).",
-   "The swollen disc is characteristically chalky-white and pallid, in contrast to the hyperaemic oedema of the non-arteritic form.",
-   "Systemic features include jaw claudication, scalp tenderness, new headache, polymyalgia rheumatica, malaise, weight loss and fever.",
-   "Inflammatory markers are markedly raised, with high erythrocyte sedimentation rate and C-reactive protein and often a reactive thrombocytosis.",
-   "High-dose systemic corticosteroids must be started immediately on clinical suspicion to protect the fellow eye, without waiting for biopsy.",
-   "Temporal artery biopsy confirms the diagnosis but skip lesions occur, so a negative biopsy does not exclude the disease and treatment should not be delayed.",
-   "A concurrent cilioretinal artery occlusion may accompany the optic nerve head infarction and is highly suggestive of an arteritic mechanism."
+  "id": "arteritic_anterior_ischaemic_optic_neuropathy",
+  "name": "arteritic anterior ischaemic optic neuropathy",
+  "aliases": [
+    "AAION",
+    "giant cell arteritis optic neuropathy"
   ],
-  "pathophysiology": "Giant cell arteritis is a granulomatous vasculitis of medium and large arteries with a predilection for branches of the external and internal carotid arteries, including the posterior ciliary arteries that supply the anterior optic nerve head. Inflammatory infiltration disrupts the internal elastic lamina, with giant cells and intimal hyperplasia narrowing and occluding the lumen. The resulting thrombotic occlusion produces infarction of the optic nerve head, and the widespread vascular involvement explains the high risk of rapid, bilateral, and often devastating visual loss.",
-  "additionalDifferentials": [
-   "Non-arteritic anterior ischaemic optic neuropathy",
-   "Central retinal artery occlusion",
-   "Posterior ischaemic optic neuropathy",
-   "Optic neuritis",
-   "Other systemic vasculitides affecting the eye",
-   "Ocular ischaemic syndrome from carotid disease"
-  ],
-  "additionalInvestigations": [
-   "Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment",
-   "Full blood count for thrombocytosis and anaemia of chronic disease",
-   "Temporal artery biopsy of an adequate length segment",
-   "Colour Doppler ultrasonography of the temporal arteries seeking the halo sign",
-   "Fluorescein angiography showing delayed or patchy choroidal filling",
-   "Large-vessel imaging such as positron emission tomography or magnetic resonance angiography where extracranial involvement is suspected"
-  ],
-  "redFlags": [
-   "Any systemic symptoms of giant cell arteritis in an older patient with visual loss",
-   "Transient visual obscurations preceding fixed loss, signalling imminent infarction",
-   "Symptoms in the fellow eye indicating impending bilateral blindness",
-   "New diplopia or ocular motor palsy accompanying visual loss"
-  ],
-  "prognosis": "Visual loss in the affected eye is usually severe and permanent, with meaningful recovery rare. Prompt high-dose corticosteroid therapy is highly effective at preventing catastrophic fellow-eye involvement, which is the principal goal of treatment.",
-  "pitfalls": [
-   "Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised",
-   "Delaying corticosteroids to await biopsy and risking bilateral blindness",
-   "Treating with an inadequate corticosteroid dose or tapering too quickly",
-   "Missing occult giant cell arteritis presenting with visual loss and few or no systemic symptoms"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology",
-   "British Society for Rheumatology guideline on the management of giant cell arteritis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous methylprednisolone for visual loss followed by oral prednisolone, principally to protect the fellow eye",
-   "Confirm the diagnosis with temporal artery biopsy or temporal artery ultrasound, ideally soon after starting steroids so treatment is not delayed",
-   "Slow corticosteroid taper guided by symptoms and inflammatory markers over many months",
-   "Steroid-sparing therapy with the interleukin-6 receptor antagonist tocilizumab to reduce relapse and cumulative steroid exposure",
-   "Bone protection with a bisphosphonate and calcium and vitamin D, gastroprotection, and glycaemic monitoring during prolonged steroids, with low-dose aspirin in selected patients",
-   "Monitor for relapse and large-vessel complications such as aortitis",
-   "Low-vision rehabilitation for established visual loss, with urgent rheumatology and ophthalmology referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arteritic_anterior_ischaemic_optic_neuropathy-pathway",
-   "title": "arteritic anterior ischaemic optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically over 70.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any systemic symptoms of giant cell arteritis in an older patient with visual loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment, Full blood count for thrombocytosis and anaemia of chronic disease, Temporal artery biopsy of an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous methylprednisolone for visual loss followed by oral prednisolone, principally to protect the fellow eye"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arteritic anterior ischaemic optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "arteritic_anterior_ischaemic_optic_neuropathy-matrix",
-   "title": "arteritic anterior ischaemic optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic",
+  "specialty": "Neuro-ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically over 70.",
+      "Visual loss is usually severe, frequently counting fingers or worse, and may be preceded by transient obscurations (amaurosis fugax).",
+      "The swollen disc is characteristically chalky-white and pallid, in contrast to the hyperaemic oedema of the non-arteritic form.",
+      "Systemic features include jaw claudication, scalp tenderness, new headache, polymyalgia rheumatica, malaise, weight loss and fever.",
+      "Inflammatory markers are markedly raised, with high erythrocyte sedimentation rate and C-reactive protein and often a reactive thrombocytosis.",
+      "High-dose systemic corticosteroids must be started immediately on clinical suspicion to protect the fellow eye, without waiting for biopsy.",
+      "Temporal artery biopsy confirms the diagnosis but skip lesions occur, so a negative biopsy does not exclude the disease and treatment should not be delayed.",
+      "A concurrent cilioretinal artery occlusion may accompany the optic nerve head infarction and is highly suggestive of an arteritic mechanism."
     ],
-    [
-     "Key Investigations",
-     "Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Giant cell arteritis is a granulomatous vasculitis of medium and large arteries with a predilection for branches of the external and internal carotid arteries, including the posterior ciliary arteries that supply the anterior optic nerve head. Inflammatory infiltration disrupts the internal elastic lamina, with giant cells and intimal hyperplasia narrowing and occluding the lumen. The resulting thrombotic occlusion produces infarction of the optic nerve head, and the widespread vascular involvement explains the high risk of rapid, bilateral, and often devastating visual loss.",
+    "additionalDifferentials": [
+      "Non-arteritic anterior ischaemic optic neuropathy",
+      "Central retinal artery occlusion",
+      "Posterior ischaemic optic neuropathy",
+      "Optic neuritis",
+      "Other systemic vasculitides affecting the eye",
+      "Ocular ischaemic syndrome from carotid disease"
     ],
-    [
-     "Primary Differentials",
-     "Non-arteritic anterior ischaemic optic neuropathy, Central retinal artery occlusion, Posterior ischaemic optic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment",
+      "Full blood count for thrombocytosis and anaemia of chronic disease",
+      "Temporal artery biopsy of an adequate length segment",
+      "Colour Doppler ultrasonography of the temporal arteries seeking the halo sign",
+      "Fluorescein angiography showing delayed or patchy choroidal filling",
+      "Large-vessel imaging such as positron emission tomography or magnetic resonance angiography where extracranial involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous",
-     "Core treatment modality"
+    "redFlags": [
+      "Any systemic symptoms of giant cell arteritis in an older patient with visual loss",
+      "Transient visual obscurations preceding fixed loss, signalling imminent infarction",
+      "Symptoms in the fellow eye indicating impending bilateral blindness",
+      "New diplopia or ocular motor palsy accompanying visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual loss in the affected eye is usually severe and permanent, with meaningful recovery rare. Prompt high-dose corticosteroid therapy is highly effective at preventing catastrophic fellow-eye involvement, which is the principal goal of treatment.",
+    "pitfalls": [
+      "Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised",
+      "Delaying corticosteroids to await biopsy and risking bilateral blindness",
+      "Treating with an inadequate corticosteroid dose or tapering too quickly",
+      "Missing occult giant cell arteritis presenting with visual loss and few or no systemic symptoms"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology",
+      "British Society for Rheumatology guideline on the management of giant cell arteritis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous methylprednisolone for visual loss followed by oral prednisolone, principally to protect the fellow eye",
+      "Confirm the diagnosis with temporal artery biopsy or temporal artery ultrasound, ideally soon after starting steroids so treatment is not delayed",
+      "Slow corticosteroid taper guided by symptoms and inflammatory markers over many months",
+      "Steroid-sparing therapy with the interleukin-6 receptor antagonist tocilizumab to reduce relapse and cumulative steroid exposure",
+      "Bone protection with a bisphosphonate and calcium and vitamin D, gastroprotection, and glycaemic monitoring during prolonged steroids, with low-dose aspirin in selected patients",
+      "Monitor for relapse and large-vessel complications such as aortitis",
+      "Low-vision rehabilitation for established visual loss, with urgent rheumatology and ophthalmology referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for arteritic anterior ischaemic optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arteritic-anterior-ischaemic-optic-neuropathy-real-image",
-   "title": "arteritic anterior ischaemic optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "arteritic_anterior_ischaemic_optic_neuropathy-pathway",
+      "title": "arteritic anterior ischaemic optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically over 70.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any systemic symptoms of giant cell arteritis in an older patient with visual loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment, Full blood count for thrombocytosis and anaemia of chronic disease, Temporal artery biopsy of an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous methylprednisolone for visual loss followed by oral prednisolone, principally to protect the fellow eye"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arteritic anterior ischaemic optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arteritic_anterior_ischaemic_optic_neuropathy-matrix",
+      "title": "arteritic anterior ischaemic optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An ophthalmic emergency caused by giant cell (temporal) arteritis, occurring almost exclusively in patients over 50 and typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Erythrocyte sedimentation rate and C-reactive protein, ideally before starting steroids but never delaying treatment, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-arteritic anterior ischaemic optic neuropathy, Central retinal artery occlusion, Posterior ischaemic optic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate high-dose systemic corticosteroids on clinical suspicion without waiting for biopsy, using intravenous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal erythrocyte sedimentation rate excludes the disease, when C-reactive protein and platelets may still be raised",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arteritic anterior ischaemic optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arteritic_anterior_ischaemic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Ideally before steroids; treatment is never delayed for them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Thrombocytosis and anaemia of chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy",
+          "cells": [
+            {
+              "text": "Adequate length segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour Doppler ultrasonography of the temporal arteries",
+          "cells": [
+            {
+              "text": "Halo sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Delayed or patchy choroidal filling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET or MR angiography",
+          "cells": [
+            {
+              "text": "Where extracranial involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arteritic_anterior_ischaemic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Intravenous methylprednisolone for visual loss, started without waiting for biopsy"
+            },
+            {
+              "text": "Immediate on clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy or ultrasound",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            },
+            {
+              "text": "Soon after steroids are started"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow corticosteroid taper",
+          "cells": [
+            {
+              "text": "Guided by symptoms and inflammatory markers over many months"
+            },
+            {
+              "text": "Long taper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tocilizumab",
+          "cells": [
+            {
+              "text": "Interleukin-6 receptor antagonist as steroid-sparing therapy"
+            },
+            {
+              "text": "Reduces relapse and cumulative steroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and gastric protection",
+          "cells": [
+            {
+              "text": "Bisphosphonate, calcium and vitamin D, gastroprotection, glycaemic monitoring"
+            },
+            {
+              "text": "Prolonged steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse and aortitis surveillance",
+          "cells": [
+            {
+              "text": "Monitor for relapse and large-vessel complications"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Established visual loss, with urgent rheumatology and ophthalmology referral"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arteritic_anterior_ischaemic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of arteritic anterior ischaemic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden visual loss in an older patient with systemic arteritis symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Systemic GCA symptoms or transient visual obscurations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate high-dose IV methylprednisolone without waiting for biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ESR, CRP, FBC, temporal artery ultrasound for halo sign, biopsy, fluorescein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Temporal artery biopsy or ultrasound confirms giant cell arteritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue steroids with a slow taper guided by markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat temporal artery testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add tocilizumab as steroid-sparing therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone and gastric protection during prolonged steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for relapse and aortitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-vision rehabilitation for established visual loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

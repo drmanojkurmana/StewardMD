@@ -1,175 +1,424 @@
 {
- "id": "endometriosis",
- "name": "Endometriosis",
- "aliases": [
-  "endometriotic disease",
-  "pelvic endometriosis",
-  "endometrioma (ovarian)"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral ligaments, and pelvic peritoneum",
-   "Cardinal symptoms are cyclical and chronic pelvic pain, dysmenorrhoea, deep dyspareunia, and subfertility, though some women are asymptomatic",
-   "Symptom severity correlates poorly with the anatomical extent of disease",
-   "Ovarian endometriomas (chocolate cysts) contain altered, dark, degenerated blood",
-   "Definitive diagnosis has traditionally required laparoscopic visualisation, ideally with histological confirmation, though imaging can identify deep disease and endometriomas",
-   "Medical treatment suppresses cyclical ovarian activity to reduce pain, using hormonal therapies that induce a hypo-oestrogenic or progestogen-dominant state",
-   "Surgical management aims to excise or ablate deposits and restore anatomy, and can improve both pain and fertility",
-   "There is a recognised diagnostic delay of years, so a high index of suspicion in women with chronic cyclical pelvic pain is important"
+  "id": "endometriosis",
+  "name": "Endometriosis",
+  "aliases": [
+    "endometriotic disease",
+    "pelvic endometriosis",
+    "endometrioma (ovarian)"
   ],
-  "pathophysiology": "The most widely cited mechanism is retrograde menstruation, in which viable endometrial cells reflux through the fallopian tubes and implant on peritoneal surfaces. Additional contributions come from coelomic metaplasia, altered immune surveillance that fails to clear ectopic cells, lymphatic or vascular spread, and genetic predisposition. The ectopic tissue is oestrogen-dependent and responds to cyclical hormonal changes, causing local inflammation, repeated microhaemorrhage, fibrosis, adhesion formation, and distortion of pelvic anatomy. Chronic inflammation and nerve involvement generate pain and contribute to subfertility.",
-  "additionalDifferentials": [
-   "Pelvic inflammatory disease and chronic pelvic infection",
-   "Irritable bowel syndrome and other gastrointestinal disorders",
-   "Interstitial cystitis or painful bladder syndrome",
-   "Ovarian cysts or masses of other aetiology",
-   "Adenomyosis",
-   "Musculoskeletal or myofascial pelvic pain"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease",
-   "Pelvic MRI for mapping deep infiltrating endometriosis before surgery",
-   "Diagnostic laparoscopy with biopsy for definitive diagnosis and staging",
-   "Assessment of ovarian reserve and semen analysis when subfertility is a concern",
-   "Investigations to exclude bowel or bladder involvement when symptoms suggest it"
-  ],
-  "redFlags": [
-   "Cyclical bowel or bladder symptoms such as haematochezia or haematuria suggesting deep infiltrating disease",
-   "Ureteric involvement threatening silent renal obstruction and loss of kidney function",
-   "An enlarging or complex ovarian mass requiring exclusion of malignancy",
-   "Acute severe pain from a ruptured or torted endometrioma",
-   "Bowel obstruction from extensive adhesive or infiltrating disease"
-  ],
-  "prognosis": "Endometriosis is a chronic, often relapsing condition. Pain and fertility frequently improve with medical or surgical treatment, but recurrence after stopping hormonal suppression or following surgery is common. Many affected women conceive spontaneously or with assisted reproduction, and symptoms typically regress after the menopause.",
-  "pitfalls": [
-   "Dismissing severe dysmenorrhoea as normal and delaying diagnosis",
-   "Assuming minimal imaging findings exclude significant disease",
-   "Overlooking ureteric or bowel involvement in deep infiltrating disease",
-   "Relying on symptom severity to gauge disease extent",
-   "Neglecting the long-term and psychological impact and the need for a multidisciplinary approach"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to induce a progestogen-dominant, hypo-oestrogenic state and reduce pain",
-   "Escalate to second-line GnRH agonists or antagonists with hormonal add-back therapy to limit hypo-oestrogenic side effects",
-   "Offer the levonorgestrel intrauterine system as an effective progestogen-delivery option for pain and menstrual bleeding",
-   "Perform laparoscopic excision or ablation of endometriotic deposits with adhesiolysis when pain is not controlled medically or fertility is affected",
-   "For subfertility, refer to reproductive medicine for assisted reproduction rather than relying on hormonal suppression, which prevents conception",
-   "Refer deep infiltrating or bowel and bladder disease to a specialist endometriosis multidisciplinary team for excisional surgery",
-   "Provide long-term support for this chronic relapsing condition, addressing recurrence, chronic pain and psychological impact"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "endometriosis-pathway",
-   "title": "Endometriosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral ligaments, and pelvic peritoneum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cyclical bowel or bladder symptoms such as haematochezia or haematuria suggesting deep infiltrating disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease, Pelvic MRI for mapping deep infiltrating endometriosis before surgery, Diagnostic laparoscopy with biopsy for definitive diagnosis and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to induce a progestogen-dominant, hypo-oestrogenic state and reduce pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing severe dysmenorrhoea as normal and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of endometriosis."
-  }
- ],
- "tables": [
-  {
-   "id": "endometriosis-matrix",
-   "title": "Endometriosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral ligaments, and pelvic peritoneum",
+      "Cardinal symptoms are cyclical and chronic pelvic pain, dysmenorrhoea, deep dyspareunia, and subfertility, though some women are asymptomatic",
+      "Symptom severity correlates poorly with the anatomical extent of disease",
+      "Ovarian endometriomas (chocolate cysts) contain altered, dark, degenerated blood",
+      "Definitive diagnosis has traditionally required laparoscopic visualisation, ideally with histological confirmation, though imaging can identify deep disease and endometriomas",
+      "Medical treatment suppresses cyclical ovarian activity to reduce pain, using hormonal therapies that induce a hypo-oestrogenic or progestogen-dominant state",
+      "Surgical management aims to excise or ablate deposits and restore anatomy, and can improve both pain and fertility",
+      "There is a recognised diagnostic delay of years, so a high index of suspicion in women with chronic cyclical pelvic pain is important"
     ],
-    [
-     "Key Investigations",
-     "Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease, Pelvic MRI for mapping deep infiltrating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The most widely cited mechanism is retrograde menstruation, in which viable endometrial cells reflux through the fallopian tubes and implant on peritoneal surfaces. Additional contributions come from coelomic metaplasia, altered immune surveillance that fails to clear ectopic cells, lymphatic or vascular spread, and genetic predisposition. The ectopic tissue is oestrogen-dependent and responds to cyclical hormonal changes, causing local inflammation, repeated microhaemorrhage, fibrosis, adhesion formation, and distortion of pelvic anatomy. Chronic inflammation and nerve involvement generate pain and contribute to subfertility.",
+    "additionalDifferentials": [
+      "Pelvic inflammatory disease and chronic pelvic infection",
+      "Irritable bowel syndrome and other gastrointestinal disorders",
+      "Interstitial cystitis or painful bladder syndrome",
+      "Ovarian cysts or masses of other aetiology",
+      "Adenomyosis",
+      "Musculoskeletal or myofascial pelvic pain"
     ],
-    [
-     "Primary Differentials",
-     "Pelvic inflammatory disease and chronic pelvic infection, Irritable bowel syndrome and other gastrointestinal disorders,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease",
+      "Pelvic MRI for mapping deep infiltrating endometriosis before surgery",
+      "Diagnostic laparoscopy with biopsy for definitive diagnosis and staging",
+      "Assessment of ovarian reserve and semen analysis when subfertility is a concern",
+      "Investigations to exclude bowel or bladder involvement when symptoms suggest it"
     ],
-    [
-     "Management Strategy",
-     "Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to",
-     "Core treatment modality"
+    "redFlags": [
+      "Cyclical bowel or bladder symptoms such as haematochezia or haematuria suggesting deep infiltrating disease",
+      "Ureteric involvement threatening silent renal obstruction and loss of kidney function",
+      "An enlarging or complex ovarian mass requiring exclusion of malignancy",
+      "Acute severe pain from a ruptured or torted endometrioma",
+      "Bowel obstruction from extensive adhesive or infiltrating disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing severe dysmenorrhoea as normal and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Endometriosis is a chronic, often relapsing condition. Pain and fertility frequently improve with medical or surgical treatment, but recurrence after stopping hormonal suppression or following surgery is common. Many affected women conceive spontaneously or with assisted reproduction, and symptoms typically regress after the menopause.",
+    "pitfalls": [
+      "Dismissing severe dysmenorrhoea as normal and delaying diagnosis",
+      "Assuming minimal imaging findings exclude significant disease",
+      "Overlooking ureteric or bowel involvement in deep infiltrating disease",
+      "Relying on symptom severity to gauge disease extent",
+      "Neglecting the long-term and psychological impact and the need for a multidisciplinary approach"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to induce a progestogen-dominant, hypo-oestrogenic state and reduce pain",
+      "Escalate to second-line GnRH agonists or antagonists with hormonal add-back therapy to limit hypo-oestrogenic side effects",
+      "Offer the levonorgestrel intrauterine system as an effective progestogen-delivery option for pain and menstrual bleeding",
+      "Perform laparoscopic excision or ablation of endometriotic deposits with adhesiolysis when pain is not controlled medically or fertility is affected",
+      "For subfertility, refer to reproductive medicine for assisted reproduction rather than relying on hormonal suppression, which prevents conception",
+      "Refer deep infiltrating or bowel and bladder disease to a specialist endometriosis multidisciplinary team for excisional surgery",
+      "Provide long-term support for this chronic relapsing condition, addressing recurrence, chronic pain and psychological impact"
     ]
-   ],
-   "caption": "Overview comparison matrix for endometriosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "endometriosis-real-image",
-   "title": "Endometriosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "endometriosis-pathway",
+      "title": "Endometriosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral ligaments, and pelvic peritoneum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cyclical bowel or bladder symptoms such as haematochezia or haematuria suggesting deep infiltrating disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease, Pelvic MRI for mapping deep infiltrating endometriosis before surgery, Diagnostic laparoscopy with biopsy for definitive diagnosis and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to induce a progestogen-dominant, hypo-oestrogenic state and reduce pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing severe dysmenorrhoea as normal and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of endometriosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "endometriosis-matrix",
+      "title": "Endometriosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Endometriosis is the presence of endometrial-like tissue outside the uterine cavity, most often on the ovaries, uterosacral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal ultrasound to detect endometriomas and signs of deep infiltrating disease, Pelvic MRI for mapping deep infiltrating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pelvic inflammatory disease and chronic pelvic infection, Irritable bowel syndrome and other gastrointestinal disorders,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start first-line analgesia with NSAIDs alongside hormonal suppression using combined hormonal contraceptives or progestogens to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing severe dysmenorrhoea as normal and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for endometriosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endometriosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Endometriomas and signs of deep infiltrating disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Mapping of deep infiltrating endometriosis before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Definitive diagnosis and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian reserve and semen analysis",
+          "cells": [
+            {
+              "text": "Assessed when subfertility is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel and bladder investigations",
+          "cells": [
+            {
+              "text": "Exclude involvement when symptoms suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endometriosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line analgesia with hormonal suppression",
+          "cells": [
+            {
+              "text": "NSAIDs alongside combined hormonal contraceptives or progestogens for a hypo-oestrogenic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levonorgestrel intrauterine system",
+          "cells": [
+            {
+              "text": "Progestogen option for pain and menstrual bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line GnRH agonists or antagonists",
+          "cells": [
+            {
+              "text": "With hormonal add-back therapy to limit hypo-oestrogenic side effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic excision or ablation",
+          "cells": [
+            {
+              "text": "With adhesiolysis when pain is not controlled medically or fertility is affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subfertility",
+          "cells": [
+            {
+              "text": "Reproductive medicine referral for assisted reproduction; hormonal suppression prevents conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist endometriosis MDT",
+          "cells": [
+            {
+              "text": "Deep infiltrating, bowel or bladder disease needing excisional surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term support",
+          "cells": [
+            {
+              "text": "Recurrence, chronic pain and psychological impact of this relapsing condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endometriosis-dx-mgmt",
+      "title": "Diagnosis and management of Endometriosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cyclical pelvic pain, dysmenorrhoea, deep dyspareunia or subfertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haematuria or haematochezia, ureteric involvement, complex mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to specialist endometriosis MDT; exclude ureteric obstruction or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound and pelvic MRI to look for endometriomas and deep disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diagnosis confirmed by laparoscopy with biopsy or imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat laparoscopy or imaging; keep a high index of suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs with hormonal suppression as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levonorgestrel intrauterine system for pain and menstrual bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "GnRH analogue with add-back therapy if medical treatment fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laparoscopic excision or ablation with adhesiolysis when pain persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term support for a chronic relapsing condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

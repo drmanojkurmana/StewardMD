@@ -1,175 +1,395 @@
 {
- "id": "red_man_syndrome",
- "name": "Vancomycin infusion (red man) reaction",
- "aliases": [
-  "red man syndrome",
-  "red neck syndrome",
-  "vancomycin flushing reaction",
-  "vancomycin infusion reaction",
-  "vancomycin flushing syndrome"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / Mandell's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
-   "It is a non-immune (anaphylactoid) reaction driven by direct mast-cell degranulation, not a true IgE-mediated allergy",
-   "Onset is typically during or shortly after a rapid infusion, and it often eases when the infusion is slowed or paused",
-   "More severe episodes can include hypotension, chest and back pain, and muscle spasm",
-   "Prevention centres on slowing the infusion rate; antihistamine pre-treatment can reduce or blunt the reaction",
-   "Distinguishing it from true anaphylaxis is important, as the reaction does not necessarily contraindicate future vancomycin use with a slower infusion",
-   "Other agents that provoke histamine release (for example certain opioids or muscle relaxants) can potentiate the reaction",
-   "The presence of urticaria beyond the infusion, angio-oedema or bronchospasm should raise concern for true allergic anaphylaxis"
+  "id": "red_man_syndrome",
+  "name": "Vancomycin infusion (red man) reaction",
+  "aliases": [
+    "red man syndrome",
+    "red neck syndrome",
+    "vancomycin flushing reaction",
+    "vancomycin infusion reaction",
+    "vancomycin flushing syndrome"
   ],
-  "pathophysiology": "The reaction results from direct, non-immunological degranulation of mast cells and basophils provoked by vancomycin, releasing histamine into the circulation. Because it does not require prior sensitisation or drug-specific IgE, it can occur on first exposure and is closely related to the rate and concentration of the infusion, with rapid administration causing a larger histamine surge. Histamine produces cutaneous vasodilatation and flushing, pruritus and, when release is marked, hypotension and muscle discomfort. This anaphylactoid mechanism contrasts with true type I hypersensitivity, in which drug-specific IgE cross-links mast-cell receptors; the distinction guides whether the drug can be cautiously continued at a slower rate.",
-  "additionalDifferentials": [
-   "True IgE-mediated anaphylaxis to vancomycin or a co-administered drug",
-   "Other drug-induced anaphylactoid reactions",
-   "Carcinoid or mastocytosis-related flushing",
-   "Sepsis with vasodilatation",
-   "Systemic hypersensitivity or DRESS from vancomycin (linear IgA disease with vancomycin is a separate entity)",
-   "Panic or vasovagal reaction"
-  ],
-  "additionalInvestigations": [
-   "Clinical observation of the temporal relationship to infusion rate",
-   "Vital sign monitoring for hypotension during infusion",
-   "Serum tryptase where true anaphylaxis needs to be excluded",
-   "Review of co-administered histamine-releasing drugs",
-   "Assessment for urticaria, angio-oedema or bronchospasm suggesting true allergy",
-   "Trial of slowed infusion with observation under supervision"
-  ],
-  "redFlags": [
-   "Significant hypotension or cardiovascular instability during infusion",
-   "Angio-oedema, bronchospasm or stridor suggesting true anaphylaxis",
-   "Widespread urticaria persisting after the infusion",
-   "Chest pain or severe muscle spasm"
-  ],
-  "prognosis": "The reaction is usually mild and self-limiting once the infusion is slowed or stopped, and vancomycin can often be continued with a slower infusion and antihistamine cover. Severe hypotensive episodes are uncommon but require prompt supportive treatment.",
-  "pitfalls": [
-   "Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic",
-   "Failing to slow the infusion and instead abandoning treatment unnecessarily",
-   "Missing genuine anaphylaxis by assuming all vancomycin flushing is benign",
-   "Overlooking co-administered histamine-releasing drugs that potentiate the reaction"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles",
-   "Prevent recurrence by extending the infusion duration for subsequent doses",
-   "Give antihistamine premedication with an H1 blocker, with or without an H2 blocker, to blunt the histamine-mediated reaction",
-   "Provide supportive treatment with intravenous fluids for hypotension in severe episodes",
-   "Distinguish the reaction from true IgE-mediated anaphylaxis using serum tryptase and features such as urticaria, angio-oedema or bronchospasm, since it does not contraindicate future cautious use",
-   "Review and minimise co-administered histamine-releasing drugs, and consider an alternative glycopeptide only if reactions persist despite rate reduction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "red_man_syndrome-pathway",
-   "title": "Vancomycin infusion (red man) reaction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant hypotension or cardiovascular instability during infusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical observation of the temporal relationship to infusion rate, Vital sign monitoring for hypotension during infusion, Serum tryptase where true anaphylaxis needs to be excluded"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vancomycin infusion (red man) reaction."
-  }
- ],
- "tables": [
-  {
-   "id": "red_man_syndrome-matrix",
-   "title": "Vancomycin infusion (red man) reaction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / Mandell's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
+      "It is a non-immune (anaphylactoid) reaction driven by direct mast-cell degranulation, not a true IgE-mediated allergy",
+      "Onset is typically during or shortly after a rapid infusion, and it often eases when the infusion is slowed or paused",
+      "More severe episodes can include hypotension, chest and back pain, and muscle spasm",
+      "Prevention centres on slowing the infusion rate; antihistamine pre-treatment can reduce or blunt the reaction",
+      "Distinguishing it from true anaphylaxis is important, as the reaction does not necessarily contraindicate future vancomycin use with a slower infusion",
+      "Other agents that provoke histamine release (for example certain opioids or muscle relaxants) can potentiate the reaction",
+      "The presence of urticaria beyond the infusion, angio-oedema or bronchospasm should raise concern for true allergic anaphylaxis"
     ],
-    [
-     "Key Investigations",
-     "Clinical observation of the temporal relationship to infusion rate, Vital sign monitoring for hypotension during infusion, Serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The reaction results from direct, non-immunological degranulation of mast cells and basophils provoked by vancomycin, releasing histamine into the circulation. Because it does not require prior sensitisation or drug-specific IgE, it can occur on first exposure and is closely related to the rate and concentration of the infusion, with rapid administration causing a larger histamine surge. Histamine produces cutaneous vasodilatation and flushing, pruritus and, when release is marked, hypotension and muscle discomfort. This anaphylactoid mechanism contrasts with true type I hypersensitivity, in which drug-specific IgE cross-links mast-cell receptors; the distinction guides whether the drug can be cautiously continued at a slower rate.",
+    "additionalDifferentials": [
+      "True IgE-mediated anaphylaxis to vancomycin or a co-administered drug",
+      "Other drug-induced anaphylactoid reactions",
+      "Carcinoid or mastocytosis-related flushing",
+      "Sepsis with vasodilatation",
+      "Systemic hypersensitivity or DRESS from vancomycin (linear IgA disease with vancomycin is a separate entity)",
+      "Panic or vasovagal reaction"
     ],
-    [
-     "Primary Differentials",
-     "True IgE-mediated anaphylaxis to vancomycin or a co-administered drug, Other drug-induced anaphylactoid reactions, Carcinoid or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical observation of the temporal relationship to infusion rate",
+      "Vital sign monitoring for hypotension during infusion",
+      "Serum tryptase where true anaphylaxis needs to be excluded",
+      "Review of co-administered histamine-releasing drugs",
+      "Assessment for urticaria, angio-oedema or bronchospasm suggesting true allergy",
+      "Trial of slowed infusion with observation under supervision"
     ],
-    [
-     "Management Strategy",
-     "Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant hypotension or cardiovascular instability during infusion",
+      "Angio-oedema, bronchospasm or stridor suggesting true anaphylaxis",
+      "Widespread urticaria persisting after the infusion",
+      "Chest pain or severe muscle spasm"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic",
-     "Prevent diagnostic or management error"
+    "prognosis": "The reaction is usually mild and self-limiting once the infusion is slowed or stopped, and vancomycin can often be continued with a slower infusion and antihistamine cover. Severe hypotensive episodes are uncommon but require prompt supportive treatment.",
+    "pitfalls": [
+      "Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic",
+      "Failing to slow the infusion and instead abandoning treatment unnecessarily",
+      "Missing genuine anaphylaxis by assuming all vancomycin flushing is benign",
+      "Overlooking co-administered histamine-releasing drugs that potentiate the reaction"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles",
+      "Prevent recurrence by extending the infusion duration for subsequent doses",
+      "Give antihistamine premedication with an H1 blocker, with or without an H2 blocker, to blunt the histamine-mediated reaction",
+      "Provide supportive treatment with intravenous fluids for hypotension in severe episodes",
+      "Distinguish the reaction from true IgE-mediated anaphylaxis using serum tryptase and features such as urticaria, angio-oedema or bronchospasm, since it does not contraindicate future cautious use",
+      "Review and minimise co-administered histamine-releasing drugs, and consider an alternative glycopeptide only if reactions persist despite rate reduction"
     ]
-   ],
-   "caption": "Overview comparison matrix for vancomycin infusion (red man) reaction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "red-man-syndrome-real-image",
-   "title": "Vancomycin infusion (red man) reaction: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "red_man_syndrome-pathway",
+      "title": "Vancomycin infusion (red man) reaction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant hypotension or cardiovascular instability during infusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical observation of the temporal relationship to infusion rate, Vital sign monitoring for hypotension during infusion, Serum tryptase where true anaphylaxis needs to be excluded"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vancomycin infusion (red man) reaction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "red_man_syndrome-matrix",
+      "title": "Vancomycin infusion (red man) reaction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An infusion-rate-related reaction to vancomycin causing flushing, erythema and pruritus over the face, neck and upper trunk",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical observation of the temporal relationship to infusion rate, Vital sign monitoring for hypotension during infusion, Serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "True IgE-mediated anaphylaxis to vancomycin or a co-administered drug, Other drug-induced anaphylactoid reactions, Carcinoid or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stop or slow the vancomycin infusion at symptom onset, then recommence at a slower rate once the reaction settles",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the reaction as a true penicillin-class-style allergy and permanently avoiding an effective antibiotic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vancomycin infusion (red man) reaction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Mandell's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "red_man_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Timing relative to infusion rate",
+          "cells": [
+            {
+              "text": "Temporal relationship to infusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vital sign monitoring",
+          "cells": [
+            {
+              "text": "Hypotension during infusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase where indicated",
+          "cells": [
+            {
+              "text": "Anaphylaxis excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "red_man_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "True IgE-mediated anaphylaxis to vancomycin",
+          "cells": [
+            {
+              "text": "Angio-oedema, bronchospasm or stridor"
+            },
+            {
+              "text": "Serum tryptase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other drug-induced anaphylactoid reactions",
+          "cells": [
+            {
+              "text": "Drug reaction"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "red_man_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop or slow the infusion",
+          "cells": [
+            {
+              "text": "Stop or slow the vancomycin infusion at symptom onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restart slower",
+          "cells": [
+            {
+              "text": "Recommence at a slower infusion rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Extend the infusion duration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "red_man_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Vancomycin infusion (red man) reaction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected red man syndrome: flushing and hypotension during vancomycin infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Significant hypotension, angio-oedema, bronchospasm, or stridor?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent anaphylaxis management for airway or cardiovascular compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Timing with infusion; vital signs; serum tryptase where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is infusion-rate related flushing without IgE features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider true anaphylaxis or other drug reaction; manage as anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop or slow the vancomycin infusion at symptom onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Restart at a slower infusion rate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extend infusion duration to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Document the reaction; slower future infusions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

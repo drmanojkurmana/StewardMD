@@ -1,175 +1,462 @@
 {
- "id": "spinocerebellar_ataxia_type_7",
- "name": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy)",
- "aliases": [
-  "SCA7",
-  "ATXN7 CAG repeat expansion",
-  "autosomal dominant cerebellar ataxia with retinal degeneration",
-  "ADCA type II"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual loss and eventual blindness",
-   "Caused by a CAG repeat expansion in ATXN7 producing an expanded polyglutamine ataxin-7 protein",
-   "Shows striking anticipation; large expansions can present with a severe infantile form featuring failure to thrive and rapid multisystem decline",
-   "Visual symptoms (impaired colour vision, reduced acuity, central scotoma) may precede, coincide with, or follow the onset of ataxia",
-   "Fundoscopy shows macular changes and pigmentary maculopathy; the electroretinogram reveals cone-then-rod dysfunction",
-   "Cerebellar ataxia is accompanied by dysarthria, dysphagia, pyramidal signs and slowed saccades",
-   "The combination of cerebellar ataxia with retinal degeneration should prompt directed ATXN7 testing",
-   "Care is multidisciplinary and supportive, including low-vision rehabilitation, physiotherapy and swallowing assessment"
+  "id": "spinocerebellar_ataxia_type_7",
+  "name": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy)",
+  "aliases": [
+    "SCA7",
+    "ATXN7 CAG repeat expansion",
+    "autosomal dominant cerebellar ataxia with retinal degeneration",
+    "ADCA type II"
   ],
-  "pathophysiology": "SCA7 is caused by expansion of a CAG trinucleotide repeat in ATXN7, translated into an elongated polyglutamine tract in the ataxin-7 protein, a component of transcriptional coactivator complexes. The mutant protein misfolds, forms nuclear inclusions and disrupts transcriptional regulation, producing toxic gain-of-function degeneration. Unlike other polyglutamine SCAs, ataxin-7 dysfunction also injures retinal photoreceptors, giving the characteristic cone-rod dystrophy alongside degeneration of the cerebellum, brainstem and spinal tracts. The repeat is highly unstable, especially on paternal transmission, underlying pronounced anticipation and severe early-onset cases.",
-  "additionalDifferentials": [
-   "Other autosomal dominant spinocerebellar ataxias without retinopathy (SCA1, SCA2, SCA3)",
-   "Retinitis pigmentosa or isolated cone-rod dystrophy from other causes",
-   "Mitochondrial disorders combining ataxia and retinal degeneration",
-   "Neuronal ceroid lipofuscinosis and other neurodegenerations with visual loss",
-   "Abetalipoproteinaemia and vitamin E deficiency ataxia with retinopathy",
-   "Paraneoplastic syndromes affecting cerebellum and retina"
-  ],
-  "additionalInvestigations": [
-   "Targeted ATXN7 CAG repeat-expansion analysis",
-   "Formal ophthalmological assessment with fundoscopy, colour vision testing and visual fields",
-   "Electroretinography and optical coherence tomography to characterise the retinal dystrophy",
-   "MRI brain showing cerebellar and brainstem (olivopontocerebellar) atrophy",
-   "Nerve conduction studies to assess associated tract involvement",
-   "Metabolic and vitamin screening to exclude treatable mimics"
-  ],
-  "redFlags": [
-   "Infantile or early-childhood presentation with failure to thrive and rapid deterioration indicating a large expansion",
-   "Rapidly progressive visual loss threatening independence and safety",
-   "Severe dysphagia with aspiration risk",
-   "Marked anticipation across a pedigree signalling risk of a severe phenotype in offspring"
-  ],
-  "prognosis": "Prognosis correlates with repeat size: adult-onset disease progresses over one to a few decades with combined visual and motor disability, whereas large expansions cause severe infantile disease with early death. Blindness and loss of ambulation are common in advanced cases.",
-  "pitfalls": [
-   "Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis",
-   "Omitting an eye examination in a patient with dominant ataxia, thereby overlooking the key discriminating feature",
-   "Underestimating anticipation when counselling families about offspring risk",
-   "Mistaking the retinal dystrophy for simple age-related macular degeneration"
-  ],
-  "references": [
-   "GeneReviews: Spinocerebellar Ataxia Type 7",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy; management is supportive across the neurological and visual domains",
-   "Physiotherapy with gait and balance rehabilitation, and occupational therapy for mobility aids and falls",
-   "Speech and language therapy for dysarthria, with proactive management of dysphagia including nutritional support and aspiration prevention",
-   "Ophthalmology-led low-vision rehabilitation and visual aids for the progressive cone-rod dystrophy, with support towards eventual blindness",
-   "Regular ophthalmological and neurological surveillance to track retinal and motor progression, monitoring for aspiration and weight loss",
-   "In the severe infantile form, paediatric multidisciplinary care addressing feeding, failure to thrive and rapid multisystem decline",
-   "Genetic counselling emphasising anticipation, particularly on paternal transmission, with cascade and predictive testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_7-pathway",
-   "title": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual loss and eventual blindness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infantile or early-childhood presentation with failure to thrive and rapid deterioration indicating a large expansion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted ATXN7 CAG repeat-expansion analysis, Formal ophthalmological assessment with fundoscopy, colour vision testing and visual fields, Electroretinography and optical coherence tomography to characterise the retinal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy; management is supportive across the neurological and visual domains"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 7 (atxn7, with retinopathy)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_7-matrix",
-   "title": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual loss and eventual blindness",
+      "Caused by a CAG repeat expansion in ATXN7 producing an expanded polyglutamine ataxin-7 protein",
+      "Shows striking anticipation; large expansions can present with a severe infantile form featuring failure to thrive and rapid multisystem decline",
+      "Visual symptoms (impaired colour vision, reduced acuity, central scotoma) may precede, coincide with, or follow the onset of ataxia",
+      "Fundoscopy shows macular changes and pigmentary maculopathy; the electroretinogram reveals cone-then-rod dysfunction",
+      "Cerebellar ataxia is accompanied by dysarthria, dysphagia, pyramidal signs and slowed saccades",
+      "The combination of cerebellar ataxia with retinal degeneration should prompt directed ATXN7 testing",
+      "Care is multidisciplinary and supportive, including low-vision rehabilitation, physiotherapy and swallowing assessment"
     ],
-    [
-     "Key Investigations",
-     "Targeted ATXN7 CAG repeat-expansion analysis, Formal ophthalmological assessment with fundoscopy, colour vision testing and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA7 is caused by expansion of a CAG trinucleotide repeat in ATXN7, translated into an elongated polyglutamine tract in the ataxin-7 protein, a component of transcriptional coactivator complexes. The mutant protein misfolds, forms nuclear inclusions and disrupts transcriptional regulation, producing toxic gain-of-function degeneration. Unlike other polyglutamine SCAs, ataxin-7 dysfunction also injures retinal photoreceptors, giving the characteristic cone-rod dystrophy alongside degeneration of the cerebellum, brainstem and spinal tracts. The repeat is highly unstable, especially on paternal transmission, underlying pronounced anticipation and severe early-onset cases.",
+    "additionalDifferentials": [
+      "Other autosomal dominant spinocerebellar ataxias without retinopathy (SCA1, SCA2, SCA3)",
+      "Retinitis pigmentosa or isolated cone-rod dystrophy from other causes",
+      "Mitochondrial disorders combining ataxia and retinal degeneration",
+      "Neuronal ceroid lipofuscinosis and other neurodegenerations with visual loss",
+      "Abetalipoproteinaemia and vitamin E deficiency ataxia with retinopathy",
+      "Paraneoplastic syndromes affecting cerebellum and retina"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal dominant spinocerebellar ataxias without retinopathy (SCA1, SCA2, SCA3), Retinitis pigmentosa or isolated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted ATXN7 CAG repeat-expansion analysis",
+      "Formal ophthalmological assessment with fundoscopy, colour vision testing and visual fields",
+      "Electroretinography and optical coherence tomography to characterise the retinal dystrophy",
+      "MRI brain showing cerebellar and brainstem (olivopontocerebellar) atrophy",
+      "Nerve conduction studies to assess associated tract involvement",
+      "Metabolic and vitamin screening to exclude treatable mimics"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy; management is supportive across the neurological and visual domains",
-     "Core treatment modality"
+    "redFlags": [
+      "Infantile or early-childhood presentation with failure to thrive and rapid deterioration indicating a large expansion",
+      "Rapidly progressive visual loss threatening independence and safety",
+      "Severe dysphagia with aspiration risk",
+      "Marked anticipation across a pedigree signalling risk of a severe phenotype in offspring"
     ],
-    [
-     "Clinical Pitfall",
-     "Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis correlates with repeat size: adult-onset disease progresses over one to a few decades with combined visual and motor disability, whereas large expansions cause severe infantile disease with early death. Blindness and loss of ambulation are common in advanced cases.",
+    "pitfalls": [
+      "Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis",
+      "Omitting an eye examination in a patient with dominant ataxia, thereby overlooking the key discriminating feature",
+      "Underestimating anticipation when counselling families about offspring risk",
+      "Mistaking the retinal dystrophy for simple age-related macular degeneration"
+    ],
+    "references": [
+      "GeneReviews: Spinocerebellar Ataxia Type 7",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy; management is supportive across the neurological and visual domains",
+      "Physiotherapy with gait and balance rehabilitation, and occupational therapy for mobility aids and falls",
+      "Speech and language therapy for dysarthria, with proactive management of dysphagia including nutritional support and aspiration prevention",
+      "Ophthalmology-led low-vision rehabilitation and visual aids for the progressive cone-rod dystrophy, with support towards eventual blindness",
+      "Regular ophthalmological and neurological surveillance to track retinal and motor progression, monitoring for aspiration and weight loss",
+      "In the severe infantile form, paediatric multidisciplinary care addressing feeding, failure to thrive and rapid multisystem decline",
+      "Genetic counselling emphasising anticipation, particularly on paternal transmission, with cascade and predictive testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 7 (atxn7, with retinopathy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-7-real-image",
-   "title": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_7-pathway",
+      "title": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual loss and eventual blindness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infantile or early-childhood presentation with failure to thrive and rapid deterioration indicating a large expansion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted ATXN7 CAG repeat-expansion analysis, Formal ophthalmological assessment with fundoscopy, colour vision testing and visual fields, Electroretinography and optical coherence tomography to characterise the retinal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy; management is supportive across the neurological and visual domains"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 7 (atxn7, with retinopathy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_7-matrix",
+      "title": "Spinocerebellar ataxia type 7 (ATXN7, with retinopathy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant ataxia distinguished from all other SCAs by a progressive cone-rod retinal dystrophy causing central visual",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted ATXN7 CAG repeat-expansion analysis, Formal ophthalmological assessment with fundoscopy, colour vision testing and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal dominant spinocerebellar ataxias without retinopathy (SCA1, SCA2, SCA3), Retinitis pigmentosa or isolated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy; management is supportive across the neurological and visual domains",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Investigating cerebellar ataxia and visual loss as separate problems and missing the unifying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 7 (atxn7, with retinopathy)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_7-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN7 CAG repeat sizing",
+          "cells": [
+            {
+              "text": "Expansion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with fundoscopy, colour vision and fields",
+          "cells": [
+            {
+              "text": "Cone-rod retinopathy and macular change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography and OCT",
+          "cells": [
+            {
+              "text": "Characterises the retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and brainstem (olivopontocerebellar) atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated tract involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and vitamin screen",
+          "cells": [
+            {
+              "text": "Treatable mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_7-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxias 1, 2 and 3",
+          "cells": [
+            {
+              "text": "Dominant ataxias without retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abetalipoproteinaemia and vitamin E deficiency ataxia",
+          "cells": [
+            {
+              "text": "Ataxia with retinopathy; a treatable mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa or cone-rod dystrophy from other causes",
+          "cells": [
+            {
+              "text": "Retinal dystrophy without ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_7-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmology-led low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Visual aids for the progressive cone-rod dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Gait, balance and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow management",
+          "cells": [
+            {
+              "text": "Dysarthria and proactive dysphagia management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmology and neurology review of retinal and motor progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric care for the severe infantile form",
+          "cells": [
+            {
+              "text": "Feeding and failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Anticipation, particularly on paternal transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_7-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 7 (ATXN7, with retinopathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dominant ataxia with cone-rod retinal degeneration and visual loss: suspected SCA7",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infantile form, rapid visual loss, severe dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for the infantile form; low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN7 CAG sizing; ophthalmology with ERG and OCT; brain MRI; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN7 CAG repeat confirmed with cone-rod retinopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA1, SCA2, SCA3 or vitamin E deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ophthalmology-led low-vision rehabilitation and visual aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for gait and aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proactive dysphagia management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular ophthalmology and neurology surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; visual loss progresses and needs active support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

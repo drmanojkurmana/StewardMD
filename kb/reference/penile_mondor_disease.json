@@ -1,167 +1,436 @@
 {
- "id": "penile_mondor_disease",
- "name": "Penile Mondor disease",
- "aliases": [
-  "superficial dorsal penile vein thrombophlebitis"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Vascular",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Urology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
-   "Presents as a palpable, cord-like, sometimes tender indurated structure along the dorsum of the penis",
-   "It often follows vigorous or prolonged sexual activity, and other precipitants include trauma and pelvic procedures",
-   "It is the penile analogue of Mondor disease of the chest/breast wall",
-   "Diagnosis is usually clinical, supported by Doppler ultrasound showing a thrombosed non-compressible dorsal vein",
-   "It resolves spontaneously over weeks with conservative measures such as anti-inflammatory treatment and abstinence"
+  "id": "penile_mondor_disease",
+  "name": "Penile Mondor disease",
+  "aliases": [
+    "superficial dorsal penile vein thrombophlebitis"
   ],
-  "pathophysiology": "Penile Mondor disease is a localised thrombophlebitis of the superficial dorsal vein of the penis. Endothelial injury and venous stasis, often from prolonged sexual activity, trauma or compression, promote thrombosis of the superficial vein, producing a palpable thrombosed cord with surrounding inflammation. It is a benign, self-limiting vascular condition confined to the superficial penile venous system, and recanalisation occurs over time.",
-  "additionalDifferentials": [
-   "Peyronie disease",
-   "Penile lymphangitis (non-venereal sclerosing lymphangitis)",
-   "Penile cellulitis or other infection",
-   "Dorsal nerve or other penile pathology",
-   "Thrombosed penile vascular malformation"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the palpable thrombosed dorsal cord",
-   "Doppler ultrasound of the dorsal penile vein",
-   "History of precipitating activity or trauma",
-   "Assessment for a hypercoagulable state if recurrent",
-   "Exclusion of Peyronie disease and infection"
-  ],
-  "redFlags": [
-   "Features suggesting infection (fever, purulence)",
-   "Recurrent episodes suggesting a thrombophilia",
-   "Progressive induration suggesting Peyronie disease",
-   "Persistent symptoms beyond the expected course"
-  ],
-  "prognosis": "The condition is benign and resolves spontaneously over a few weeks with conservative management, with a good prognosis and low recurrence.",
-  "pitfalls": [
-   "Confusing it with Peyronie disease or sclerosing lymphangitis",
-   "Investigating or treating it as an infection",
-   "Overlooking a hypercoagulable tendency in recurrent cases",
-   "Causing undue alarm about a benign self-limiting condition"
-  ],
-  "references": [
-   "Urology reference texts (standard reference)",
-   "Andrology references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
-   "Advise temporary abstinence from sexual activity and avoidance of penile trauma while the thrombosed vein recanalises",
-   "Provide warm compresses and topical anti-inflammatory measures for symptomatic relief",
-   "Consider a short course of anticoagulation only in extensive or persistent thrombosis",
-   "Investigate for an underlying hypercoagulable state if episodes recur",
-   "Exclude Peyronie disease and infection and reassure regarding spontaneous resolution"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "penile_mondor_disease-pathway",
-   "title": "Penile Mondor disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting infection (fever, purulence)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of precipitating activity or trauma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Peyronie disease or sclerosing lymphangitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of penile mondor disease."
-  }
- ],
- "tables": [
-  {
-   "id": "penile_mondor_disease-matrix",
-   "title": "Penile Mondor disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Vascular",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Urology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+      "Presents as a palpable, cord-like, sometimes tender indurated structure along the dorsum of the penis",
+      "It often follows vigorous or prolonged sexual activity, and other precipitants include trauma and pelvic procedures",
+      "It is the penile analogue of Mondor disease of the chest/breast wall",
+      "Diagnosis is usually clinical, supported by Doppler ultrasound showing a thrombosed non-compressible dorsal vein",
+      "It resolves spontaneously over weeks with conservative measures such as anti-inflammatory treatment and abstinence"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Penile Mondor disease is a localised thrombophlebitis of the superficial dorsal vein of the penis. Endothelial injury and venous stasis, often from prolonged sexual activity, trauma or compression, promote thrombosis of the superficial vein, producing a palpable thrombosed cord with surrounding inflammation. It is a benign, self-limiting vascular condition confined to the superficial penile venous system, and recanalisation occurs over time.",
+    "additionalDifferentials": [
+      "Peyronie disease",
+      "Penile lymphangitis (non-venereal sclerosing lymphangitis)",
+      "Penile cellulitis or other infection",
+      "Dorsal nerve or other penile pathology",
+      "Thrombosed penile vascular malformation"
     ],
-    [
-     "Primary Differentials",
-     "Peyronie disease, Penile lymphangitis (non-venereal sclerosing lymphangitis), Penile cellulitis or other infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the palpable thrombosed dorsal cord",
+      "Doppler ultrasound of the dorsal penile vein",
+      "History of precipitating activity or trauma",
+      "Assessment for a hypercoagulable state if recurrent",
+      "Exclusion of Peyronie disease and infection"
     ],
-    [
-     "Management Strategy",
-     "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting infection (fever, purulence)",
+      "Recurrent episodes suggesting a thrombophilia",
+      "Progressive induration suggesting Peyronie disease",
+      "Persistent symptoms beyond the expected course"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Peyronie disease or sclerosing lymphangitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and resolves spontaneously over a few weeks with conservative management, with a good prognosis and low recurrence.",
+    "pitfalls": [
+      "Confusing it with Peyronie disease or sclerosing lymphangitis",
+      "Investigating or treating it as an infection",
+      "Overlooking a hypercoagulable tendency in recurrent cases",
+      "Causing undue alarm about a benign self-limiting condition"
+    ],
+    "references": [
+      "Urology reference texts (standard reference)",
+      "Andrology references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
+      "Advise temporary abstinence from sexual activity and avoidance of penile trauma while the thrombosed vein recanalises",
+      "Provide warm compresses and topical anti-inflammatory measures for symptomatic relief",
+      "Consider a short course of anticoagulation only in extensive or persistent thrombosis",
+      "Investigate for an underlying hypercoagulable state if episodes recur",
+      "Exclude Peyronie disease and infection and reassure regarding spontaneous resolution"
     ]
-   ],
-   "caption": "Overview comparison matrix for penile mondor disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "penile-mondor-disease-real-image",
-   "title": "Penile Mondor disease: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "penile_mondor_disease-pathway",
+      "title": "Penile Mondor disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting infection (fever, purulence)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of precipitating activity or trauma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Peyronie disease or sclerosing lymphangitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of penile mondor disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "penile_mondor_disease-matrix",
+      "title": "Penile Mondor disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peyronie disease, Penile lymphangitis (non-venereal sclerosing lymphangitis), Penile cellulitis or other infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Peyronie disease or sclerosing lymphangitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for penile mondor disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Urology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "penile_mondor_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Palpable thrombosed dorsal cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of the dorsal penile vein",
+          "cells": [
+            {
+              "text": "Dorsal penile vein assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History",
+          "cells": [
+            {
+              "text": "Precipitating activity or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercoagulable state assessment",
+          "cells": [
+            {
+              "text": "Assessed if episodes recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of Peyronie disease and infection",
+          "cells": [
+            {
+              "text": "Separates the diagnosis from Peyronie disease and infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "penile_mondor_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peyronie disease",
+          "cells": [
+            {
+              "text": "Progressive induration suggests Peyronie disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile cellulitis or other infection",
+          "cells": [
+            {
+              "text": "Fever and purulence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "penile_mondor_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs and reassurance",
+          "cells": [
+            {
+              "text": "Conservative management as a benign, self-limiting condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abstinence and trauma avoidance",
+          "cells": [
+            {
+              "text": "Temporary abstinence while the thrombosed vein recanalises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm compresses",
+          "cells": [
+            {
+              "text": "Topical anti-inflammatory measures for symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Only in extensive or persistent thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia work-up",
+          "cells": [
+            {
+              "text": "Investigate for a hypercoagulable state if episodes recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion",
+          "cells": [
+            {
+              "text": "Exclude Peyronie disease and infection; reassure about spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "penile_mondor_disease-dx-mgmt",
+      "title": "Diagnosis and management of Penile Mondor disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful palpable thrombosed dorsal penile cord (penile Mondor disease)",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, purulence, recurrence, persistent symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for infection or Peyronie disease; specialist review if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler ultrasound of the dorsal penile vein; history of trauma or activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is benign dorsal vein thrombosis confirmed without Peyronie disease or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Peyronie disease, penile lymphangitis or infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs, reassurance and warm compresses for a benign self-limiting condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Temporary abstinence and avoidance of penile trauma during recanalisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider anticoagulation only in extensive or persistent thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate for a hypercoagulable state if episodes recur",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves spontaneously over a few weeks with low recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

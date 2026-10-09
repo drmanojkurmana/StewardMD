@@ -1,173 +1,218 @@
 {
- "id": "canavan_disease",
- "name": "Canavan disease",
- "aliases": [
-  "aspartoacylase deficiency",
-  "ASPA deficiency",
-  "spongy degeneration of the brain"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
-   "Enzyme deficiency leads to accumulation of N-acetylaspartate, which is measurably elevated in urine and can be detected as a raised NAA peak on MR spectroscopy",
-   "Classic infantile disease presents in the first months with hypotonia, poor head control, macrocephaly, and progressive developmental failure",
-   "As disease progresses, hypotonia often gives way to spasticity, with seizures, feeding difficulties, and optic atrophy",
-   "It is one of the leukodystrophies with increased carrier frequency in the Ashkenazi Jewish population, making carrier screening relevant in that group",
-   "MRI shows diffuse, symmetric white matter disease, and elevated N-acetylaspartate on spectroscopy strongly supports the diagnosis",
-   "Diagnosis is confirmed by demonstrating elevated urinary N-acetylaspartate and by ASPA gene testing",
-   "Macrocephaly in an infant with developmental regression should raise suspicion and prompt appropriate metabolic and imaging workup"
+  "id": "canavan_disease",
+  "name": "Canavan disease",
+  "aliases": [
+    "aspartoacylase deficiency",
+    "ASPA deficiency",
+    "spongy degeneration of the brain"
   ],
-  "pathophysiology": "Canavan disease arises from biallelic ASPA mutations causing deficiency of aspartoacylase, the enzyme that hydrolyses N-acetylaspartate in the brain. The resulting accumulation of N-acetylaspartate is thought to disturb myelin maintenance and fluid balance, producing spongy vacuolar degeneration of white matter. The intramyelinic oedema and dysmyelination give the characteristic diffuse leukodystrophy and clinical picture of progressive neurological failure with macrocephaly.",
-  "additionalDifferentials": [
-   "Other infantile leukodystrophies including Alexander disease",
-   "Metachromatic leukodystrophy and Krabbe disease",
-   "Megalencephalic leukoencephalopathy with subcortical cysts",
-   "Mitochondrial encephalopathies",
-   "Other causes of macrocephaly with developmental regression"
-  ],
-  "additionalInvestigations": [
-   "Urinary N-acetylaspartate measurement",
-   "ASPA gene sequencing to confirm the diagnosis",
-   "Brain MRI showing diffuse symmetric white matter change",
-   "MR spectroscopy demonstrating an elevated N-acetylaspartate peak",
-   "Carrier screening and genetic counselling for at-risk families",
-   "Developmental and feeding assessments for supportive care"
-  ],
-  "redFlags": [
-   "Progressive loss of milestones with seizures in an infant",
-   "Feeding and swallowing failure risking aspiration and malnutrition",
-   "Rapidly enlarging head circumference",
-   "Respiratory compromise in advanced disease"
-  ],
-  "prognosis": "Classic infantile Canavan disease is progressive with limited life expectancy and no curative therapy, so care is supportive; milder variants with later onset follow a more variable and slower course.",
-  "pitfalls": [
-   "Attributing macrocephaly to benign causes without considering a leukodystrophy",
-   "Overlooking the diagnostic value of urinary N-acetylaspartate and MR spectroscopy",
-   "Failing to offer carrier screening and counselling in high-risk populations",
-   "Delaying supportive measures for feeding and seizures"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as the mainstay, since no curative or disease-specific therapy is established",
-   "Control seizures with anticonvulsant therapy",
-   "Reduce spasticity with antispasticity agents such as baclofen alongside physiotherapy and positioning",
-   "Support nutrition and manage feeding difficulties, with gastrostomy feeding where swallowing is unsafe",
-   "Manage secretions and provide respiratory care as neurological function declines",
-   "Offer genetic counselling and carrier screening, particularly for families of Ashkenazi Jewish origin, with prenatal testing options",
-   "Coordinate multidisciplinary and palliative support across neurology, therapy services and the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "canavan_disease-pathway",
-   "title": "Canavan disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive loss of milestones with seizures in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinary N-acetylaspartate measurement, ASPA gene sequencing to confirm the diagnosis, Brain MRI showing diffuse symmetric white matter change"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as the mainstay, since no curative or disease-specific therapy is established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing macrocephaly to benign causes without considering a leukodystrophy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of canavan disease."
-  }
- ],
- "tables": [
-  {
-   "id": "canavan_disease-matrix",
-   "title": "Canavan disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
+      "Enzyme deficiency leads to accumulation of N-acetylaspartate, which is measurably elevated in urine and can be detected as a raised NAA peak on MR spectroscopy",
+      "Classic infantile disease presents in the first months with hypotonia, poor head control, macrocephaly, and progressive developmental failure",
+      "As disease progresses, hypotonia often gives way to spasticity, with seizures, feeding difficulties, and optic atrophy",
+      "It is one of the leukodystrophies with increased carrier frequency in the Ashkenazi Jewish population, making carrier screening relevant in that group",
+      "MRI shows diffuse, symmetric white matter disease, and elevated N-acetylaspartate on spectroscopy strongly supports the diagnosis",
+      "Diagnosis is confirmed by demonstrating elevated urinary N-acetylaspartate and by ASPA gene testing",
+      "Macrocephaly in an infant with developmental regression should raise suspicion and prompt appropriate metabolic and imaging workup"
     ],
-    [
-     "Key Investigations",
-     "Urinary N-acetylaspartate measurement, ASPA gene sequencing to confirm the diagnosis, Brain MRI showing diffuse symmetric white",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Canavan disease arises from biallelic ASPA mutations causing deficiency of aspartoacylase, the enzyme that hydrolyses N-acetylaspartate in the brain. The resulting accumulation of N-acetylaspartate is thought to disturb myelin maintenance and fluid balance, producing spongy vacuolar degeneration of white matter. The intramyelinic oedema and dysmyelination give the characteristic diffuse leukodystrophy and clinical picture of progressive neurological failure with macrocephaly.",
+    "additionalDifferentials": [
+      "Other infantile leukodystrophies including Alexander disease",
+      "Metachromatic leukodystrophy and Krabbe disease",
+      "Megalencephalic leukoencephalopathy with subcortical cysts",
+      "Mitochondrial encephalopathies",
+      "Other causes of macrocephaly with developmental regression"
     ],
-    [
-     "Primary Differentials",
-     "Other infantile leukodystrophies including Alexander disease, Metachromatic leukodystrophy and Krabbe disease, Megalencephalic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinary N-acetylaspartate measurement",
+      "ASPA gene sequencing to confirm the diagnosis",
+      "Brain MRI showing diffuse symmetric white matter change",
+      "MR spectroscopy demonstrating an elevated N-acetylaspartate peak",
+      "Carrier screening and genetic counselling for at-risk families",
+      "Developmental and feeding assessments for supportive care"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as the mainstay, since no curative or disease-specific therapy is established",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive loss of milestones with seizures in an infant",
+      "Feeding and swallowing failure risking aspiration and malnutrition",
+      "Rapidly enlarging head circumference",
+      "Respiratory compromise in advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing macrocephaly to benign causes without considering a leukodystrophy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Classic infantile Canavan disease is progressive with limited life expectancy and no curative therapy, so care is supportive; milder variants with later onset follow a more variable and slower course.",
+    "pitfalls": [
+      "Attributing macrocephaly to benign causes without considering a leukodystrophy",
+      "Overlooking the diagnostic value of urinary N-acetylaspartate and MR spectroscopy",
+      "Failing to offer carrier screening and counselling in high-risk populations",
+      "Delaying supportive measures for feeding and seizures"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as the mainstay, since no curative or disease-specific therapy is established",
+      "Control seizures with anticonvulsant therapy",
+      "Reduce spasticity with antispasticity agents such as baclofen alongside physiotherapy and positioning",
+      "Support nutrition and manage feeding difficulties, with gastrostomy feeding where swallowing is unsafe",
+      "Manage secretions and provide respiratory care as neurological function declines",
+      "Offer genetic counselling and carrier screening, particularly for families of Ashkenazi Jewish origin, with prenatal testing options",
+      "Coordinate multidisciplinary and palliative support across neurology, therapy services and the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for canavan disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "canavan-disease-real-image",
-   "title": "Canavan disease: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "canavan_disease-pathway",
+      "title": "Canavan disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive loss of milestones with seizures in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinary N-acetylaspartate measurement, ASPA gene sequencing to confirm the diagnosis, Brain MRI showing diffuse symmetric white matter change"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as the mainstay, since no curative or disease-specific therapy is established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing macrocephaly to benign causes without considering a leukodystrophy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of canavan disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "canavan_disease-matrix",
+      "title": "Canavan disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukodystrophy caused by mutations in the ASPA gene resulting in deficiency of aspartoacylase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinary N-acetylaspartate measurement, ASPA gene sequencing to confirm the diagnosis, Brain MRI showing diffuse symmetric white",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other infantile leukodystrophies including Alexander disease, Metachromatic leukodystrophy and Krabbe disease, Megalencephalic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as the mainstay, since no curative or disease-specific therapy is established",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing macrocephaly to benign causes without considering a leukodystrophy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for canavan disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "canavan_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Canavan disease",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urinary N-acetylaspartate", "cells": [{"text": "Elevated; supports the diagnosis"}], "cite": "c1"},
+        {"parameter": "ASPA gene sequencing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Brain MRI", "cells": [{"text": "Diffuse, symmetric white-matter disease"}], "cite": "c1"},
+        {"parameter": "MR spectroscopy", "cells": [{"text": "Elevated N-acetylaspartate peak"}], "cite": "c1"},
+        {"parameter": "Carrier screening", "cells": [{"text": "At-risk families, particularly Ashkenazi Jewish ancestry"}], "cite": "c1"},
+        {"parameter": "Developmental and feeding assessment", "cells": [{"text": "Supportive care planning"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "canavan_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options in Canavan disease",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Mainstay; no curative or disease-specific therapy established"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Seizure control", "cells": [{"text": "Anticonvulsant therapy"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Spasticity", "cells": [{"text": "Antispasticity agents such as baclofen with physiotherapy and positioning"}, {"text": "Once spasticity develops"}], "cite": "c1"},
+        {"parameter": "Nutrition and feeding", "cells": [{"text": "Feeding support; gastrostomy where swallowing is unsafe"}, {"text": "Feeding difficulties"}], "cite": "c1"},
+        {"parameter": "Respiratory and secretion care", "cells": [{"text": "Secretion management and respiratory care as function declines"}, {"text": "Advanced disease"}], "cite": "c1"},
+        {"parameter": "Genetic counselling and carrier screening", "cells": [{"text": "Carrier screening for families, particularly Ashkenazi Jewish origin; prenatal testing options"}, {"text": "Autosomal recessive"}], "cite": "c1"},
+        {"parameter": "Palliative support", "cells": [{"text": "Multidisciplinary palliative and therapy support for the family"}, {"text": "Progressive disease"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "canavan_disease-dx-mgmt",
+      "title": "Diagnosis and management of Canavan disease",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Infant with hypotonia, macrocephaly and developmental failure", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: feeding or swallowing failure, progressive seizures, or respiratory compromise?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent nutritional, respiratory and seizure management; palliative input", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Brain MRI and MR spectroscopy; urinary N-acetylaspartate", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Elevated N-acetylaspartate with ASPA variants confirmed?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Supportive care; seizure, spasticity and feeding management; carrier screening for family", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider other leukodystrophies or metabolic causes of macrocephaly", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Classic infantile form progressive with limited life expectancy", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

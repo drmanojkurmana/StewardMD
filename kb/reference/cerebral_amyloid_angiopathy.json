@@ -1,174 +1,763 @@
 {
- "id": "cerebral_amyloid_angiopathy",
- "name": "Cerebral amyloid angiopathy",
- "aliases": [
-  "CAA",
-  "congophilic angiopathy",
-  "cerebral amyloid angiopathy (sporadic, amyloid-beta type)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Cognitive & Movement",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected by hypertensive haemorrhage",
-   "Susceptibility-weighted MRI reveals lobar cerebral microbleeds and cortical superficial siderosis, which are key imaging biomarkers",
-   "Transient focal neurological episodes, sometimes called amyloid spells, can mimic transient ischaemic attacks or seizures and are associated with superficial siderosis",
-   "Progressive cognitive impairment is common, and the condition frequently coexists with Alzheimer disease pathology",
-   "The Boston criteria integrate clinical and imaging features to estimate the probability of cerebral amyloid angiopathy",
-   "Anticoagulation and antiplatelet therapy substantially raise the risk of further haemorrhage and require careful individual risk assessment",
-   "A rare inflammatory form, cerebral amyloid angiopathy-related inflammation, presents with subacute encephalopathy and oedematous white matter change that may respond to immunosuppression"
+  "id": "cerebral_amyloid_angiopathy",
+  "name": "Cerebral amyloid angiopathy",
+  "aliases": [
+    "CAA",
+    "congophilic angiopathy",
+    "cerebral amyloid angiopathy (sporadic, amyloid-beta type)"
   ],
-  "pathophysiology": "Cerebral amyloid angiopathy is caused by progressive deposition of amyloid-beta protein within the walls of small and medium-sized arteries and arterioles of the cerebral cortex and leptomeninges. The amyloid-laden vessels become fragile and prone to rupture, producing lobar haemorrhages, microbleeds and cortical superficial siderosis from repeated small bleeds, and impaired vascular function contributes to cognitive decline. The same amyloid-beta peptide is central to Alzheimer disease, explaining the frequent overlap, and an immune reaction against vascular amyloid can produce the inflammatory subtype. Deposition of vascular amyloid also underlies the amyloid-related imaging abnormalities (ARIA) seen with anti-amyloid antibody therapies.",
-  "additionalDifferentials": [
-   "Hypertensive deep intracerebral haemorrhage",
-   "Haemorrhage from an underlying tumour or vascular malformation",
-   "Coagulopathy or anticoagulant-related haemorrhage",
-   "Hypertensive or other microangiopathy causing microbleeds",
-   "Ischaemic stroke or transient ischaemic attack when presenting with transient episodes",
-   "Primary or secondary CNS vasculitis in the inflammatory subtype",
-   "Reversible cerebral vasoconstriction syndrome with cortical bleeding"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis",
-   "CT of the head in the acute setting to identify and localise haemorrhage",
-   "Blood pressure assessment and coagulation studies to evaluate contributing factors",
-   "Vascular imaging to exclude an underlying structural lesion in appropriate cases",
-   "Amyloid PET and cerebrospinal fluid amyloid and tau markers where cognitive assessment or Alzheimer overlap is relevant",
-   "Cerebrospinal fluid analysis and, rarely, biopsy when the inflammatory subtype is suspected"
-  ],
-  "redFlags": [
-   "Acute lobar intracerebral haemorrhage with rising intracranial pressure or deteriorating consciousness",
-   "Recurrent haemorrhage, particularly in patients on antithrombotic therapy",
-   "Subacute encephalopathy with oedematous white matter change suggesting the inflammatory subtype",
-   "Amyloid-related imaging abnormalities developing during anti-amyloid antibody treatment"
-  ],
-  "prognosis": "Cerebral amyloid angiopathy carries a high risk of recurrent lobar haemorrhage and progressive cognitive decline, with prognosis depending on haemorrhage burden and comorbidity; the inflammatory subtype may improve with immunosuppression, but there is no disease-modifying treatment for the underlying angiopathy.",
-  "pitfalls": [
-   "Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid angiopathy",
-   "Misinterpreting transient focal episodes as transient ischaemic attacks and starting antithrombotic therapy",
-   "Overlooking the treatable inflammatory subtype in a patient with subacute encephalopathy and white matter oedema",
-   "Failing to recognise amyloid-related imaging abnormalities as a caveat of anti-amyloid antibody therapy"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given the high lobar haemorrhage risk",
-   "Optimise blood pressure control to reduce recurrent lobar intracerebral haemorrhage",
-   "Manage acute lobar haemorrhage with supportive neurocritical care, reversal of any anticoagulation and neurosurgical evaluation",
-   "Treat the inflammatory subtype (amyloid-related angiitis) with corticosteroids and further immunosuppression",
-   "Control seizures and amyloid spells with antiseizure medication, avoiding misdiagnosis as transient ischaemic attack and inappropriate anticoagulation",
-   "Exercise caution with anti-amyloid antibody therapies owing to the risk of amyloid-related imaging abnormalities, and provide cognitive assessment and dementia support",
-   "Refer to neurology or stroke services and undertake surveillance susceptibility-weighted MRI for microbleeds and cortical superficial siderosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cerebral_amyloid_angiopathy-pathway",
-   "title": "Cerebral amyloid angiopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected by hypertensive haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute lobar intracerebral haemorrhage with rising intracranial pressure or deteriorating consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis, CT of the head in the acute setting to identify and localise haemorrhage, Blood pressure assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given the high lobar haemorrhage risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid angiopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebral amyloid angiopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "cerebral_amyloid_angiopathy-matrix",
-   "title": "Cerebral amyloid angiopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Cognitive & Movement",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected by hypertensive haemorrhage",
+      "Susceptibility-weighted MRI reveals lobar cerebral microbleeds and cortical superficial siderosis, which are key imaging biomarkers",
+      "Transient focal neurological episodes, sometimes called amyloid spells, can mimic transient ischaemic attacks or seizures and are associated with superficial siderosis",
+      "Progressive cognitive impairment is common, and the condition frequently coexists with Alzheimer disease pathology",
+      "The Boston criteria integrate clinical and imaging features to estimate the probability of cerebral amyloid angiopathy",
+      "Anticoagulation and antiplatelet therapy substantially raise the risk of further haemorrhage and require careful individual risk assessment",
+      "A rare inflammatory form, cerebral amyloid angiopathy-related inflammation, presents with subacute encephalopathy and oedematous white matter change that may respond to immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis, CT of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cerebral amyloid angiopathy is caused by progressive deposition of amyloid-beta protein within the walls of small and medium-sized arteries and arterioles of the cerebral cortex and leptomeninges. The amyloid-laden vessels become fragile and prone to rupture, producing lobar haemorrhages, microbleeds and cortical superficial siderosis from repeated small bleeds, and impaired vascular function contributes to cognitive decline. The same amyloid-beta peptide is central to Alzheimer disease, explaining the frequent overlap, and an immune reaction against vascular amyloid can produce the inflammatory subtype. Deposition of vascular amyloid also underlies the amyloid-related imaging abnormalities (ARIA) seen with anti-amyloid antibody therapies.",
+    "additionalDifferentials": [
+      "Hypertensive deep intracerebral haemorrhage",
+      "Haemorrhage from an underlying tumour or vascular malformation",
+      "Coagulopathy or anticoagulant-related haemorrhage",
+      "Hypertensive or other microangiopathy causing microbleeds",
+      "Ischaemic stroke or transient ischaemic attack when presenting with transient episodes",
+      "Primary or secondary CNS vasculitis in the inflammatory subtype",
+      "Reversible cerebral vasoconstriction syndrome with cortical bleeding"
     ],
-    [
-     "Primary Differentials",
-     "Hypertensive deep intracerebral haemorrhage, Haemorrhage from an underlying tumour or vascular malformation, Coagulopathy or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis",
+      "CT of the head in the acute setting to identify and localise haemorrhage",
+      "Blood pressure assessment and coagulation studies to evaluate contributing factors",
+      "Vascular imaging to exclude an underlying structural lesion in appropriate cases",
+      "Amyloid PET and cerebrospinal fluid amyloid and tau markers where cognitive assessment or Alzheimer overlap is relevant",
+      "Cerebrospinal fluid analysis and, rarely, biopsy when the inflammatory subtype is suspected"
     ],
-    [
-     "Management Strategy",
-     "Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute lobar intracerebral haemorrhage with rising intracranial pressure or deteriorating consciousness",
+      "Recurrent haemorrhage, particularly in patients on antithrombotic therapy",
+      "Subacute encephalopathy with oedematous white matter change suggesting the inflammatory subtype",
+      "Amyloid-related imaging abnormalities developing during anti-amyloid antibody treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cerebral amyloid angiopathy carries a high risk of recurrent lobar haemorrhage and progressive cognitive decline, with prognosis depending on haemorrhage burden and comorbidity; the inflammatory subtype may improve with immunosuppression, but there is no disease-modifying treatment for the underlying angiopathy.",
+    "pitfalls": [
+      "Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid angiopathy",
+      "Misinterpreting transient focal episodes as transient ischaemic attacks and starting antithrombotic therapy",
+      "Overlooking the treatable inflammatory subtype in a patient with subacute encephalopathy and white matter oedema",
+      "Failing to recognise amyloid-related imaging abnormalities as a caveat of anti-amyloid antibody therapy"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given the high lobar haemorrhage risk",
+      "Optimise blood pressure control to reduce recurrent lobar intracerebral haemorrhage",
+      "Manage acute lobar haemorrhage with supportive neurocritical care, reversal of any anticoagulation and neurosurgical evaluation",
+      "Treat the inflammatory subtype (amyloid-related angiitis) with corticosteroids and further immunosuppression",
+      "Control seizures and amyloid spells with antiseizure medication, avoiding misdiagnosis as transient ischaemic attack and inappropriate anticoagulation",
+      "Exercise caution with anti-amyloid antibody therapies owing to the risk of amyloid-related imaging abnormalities, and provide cognitive assessment and dementia support",
+      "Refer to neurology or stroke services and undertake surveillance susceptibility-weighted MRI for microbleeds and cortical superficial siderosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebral amyloid angiopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cerebral-amyloid-angiopathy-real-image",
-   "title": "Cerebral amyloid angiopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cerebral_amyloid_angiopathy-pathway",
+      "title": "Cerebral amyloid angiopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected by hypertensive haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute lobar intracerebral haemorrhage with rising intracranial pressure or deteriorating consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis, CT of the head in the acute setting to identify and localise haemorrhage, Blood pressure assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given the high lobar haemorrhage risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid angiopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebral amyloid angiopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cerebral_amyloid_angiopathy-matrix",
+      "title": "Cerebral amyloid angiopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A major cause of spontaneous lobar intracerebral haemorrhage in older adults, typically sparing the deep grey structures affected",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain including susceptibility-weighted imaging to detect lobar microbleeds and cortical superficial siderosis, CT of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypertensive deep intracerebral haemorrhage, Haemorrhage from an underlying tumour or vascular malformation, Coagulopathy or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid antithrombotics where possible, carefully weighing and generally withholding anticoagulants and antiplatelet agents given",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing anticoagulants or antiplatelets without weighing the elevated haemorrhage risk in known or suspected cerebral amyloid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebral amyloid angiopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebral_amyloid_angiopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with susceptibility-weighted imaging",
+          "cells": [
+            {
+              "text": "Lobar microbleeds and cortical superficial siderosis are key biomarkers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the head in the acute setting",
+          "cells": [
+            {
+              "text": "Identifies and localises haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET and CSF amyloid and tau markers",
+          "cells": [
+            {
+              "text": "Where cognitive assessment or Alzheimer overlap is relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis and rarely biopsy",
+          "cells": [
+            {
+              "text": "When the inflammatory subtype is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Excludes an underlying structural lesion in appropriate cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_amyloid_angiopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertensive deep intracerebral haemorrhage",
+          "cells": [
+            {
+              "text": "Involves deep grey structures, which amyloid angiopathy typically spares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic stroke or transient ischaemic attack",
+          "cells": [
+            {
+              "text": "Transient focal episodes; amyloid spells can mimic these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_amyloid_angiopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid antithrombotics",
+          "cells": [
+            {
+              "text": "Generally withhold anticoagulants and antiplatelet agents where possible"
+            },
+            {
+              "text": "High lobar haemorrhage risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Optimise blood pressure to reduce recurrent lobar haemorrhage"
+            },
+            {
+              "text": "Recurrence prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemorrhage care",
+          "cells": [
+            {
+              "text": "Supportive neurocritical care, reversal of anticoagulation, neurosurgical evaluation"
+            },
+            {
+              "text": "Acute lobar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory subtype",
+          "cells": [
+            {
+              "text": "Corticosteroids and further immunosuppression"
+            },
+            {
+              "text": "Amyloid-related angiitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and amyloid spells",
+          "cells": [
+            {
+              "text": "Antiseizure medication"
+            },
+            {
+              "text": "Avoids misdiagnosis as TIA and inappropriate anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-amyloid antibody caution",
+          "cells": [
+            {
+              "text": "Caution, with monitoring for amyloid-related imaging abnormalities"
+            },
+            {
+              "text": "Treatment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Serial susceptibility-weighted MRI for microbleeds and superficial siderosis"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_amyloid_angiopathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebral_amyloid_angiopathy-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral amyloid angiopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebral amyloid angiopathy: older adult with lobar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute lobar bleed with raised pressure, rebleed, encephalopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurocritical care, reversal of anticoagulation, neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Susceptibility-weighted MRI for microbleeds and superficial siderosis; CT head",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lobar microbleeds or superficial siderosis present, deep haemorrhage excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Withhold anticoagulants and antiplatelets where possible; lobar bleed risk high",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hypertensive deep haemorrhage and transient ischaemic attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise blood pressure to reduce recurrent lobar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids and immunosuppression for the inflammatory subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication for seizures and amyloid spells",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High recurrent-bleed risk; no disease-modifying treatment for the angiopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

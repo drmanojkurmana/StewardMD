@@ -1,175 +1,397 @@
 {
- "id": "vitreous_hemorrhage",
- "name": "Vitreous haemorrhage",
- "aliases": [
-  "vitreous hemorrhage",
-  "bleeding into the vitreous",
-  "VH"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
-   "Proliferative diabetic retinopathy and retinal tears (with or without detachment) are among the commonest causes, alongside retinal vein occlusion and trauma",
-   "A key priority is to identify a retinal tear or detachment, as these are urgently treatable causes",
-   "When the fundus cannot be seen because of dense blood, B-scan ultrasound is essential to look for a retinal tear or detachment",
-   "The loss of the red reflex and inability to visualise retinal detail on ophthalmoscopy indicate significant haemorrhage",
-   "Initial management often involves upright rest to allow blood to settle inferiorly and improve the view, with treatment of the underlying cause once identified",
-   "Persistent non-clearing haemorrhage or an associated retinal detachment is managed surgically with vitrectomy",
-   "In children, non-accidental injury must be considered, and spontaneous haemorrhage warrants a search for an underlying vascular or neovascular cause"
+  "id": "vitreous_hemorrhage",
+  "name": "Vitreous haemorrhage",
+  "aliases": [
+    "vitreous hemorrhage",
+    "bleeding into the vitreous",
+    "VH"
   ],
-  "pathophysiology": "Vitreous haemorrhage is extravasation of blood into or around the vitreous cavity. It occurs when abnormal new vessels (as in proliferative diabetic retinopathy or ischaemic vein occlusion) bleed, when normal retinal vessels are torn during posterior vitreous detachment or a retinal tear, or when trauma ruptures vessels. Blood disperses through the vitreous gel, scattering light and obscuring vision. Clearance is slow because the avascular vitreous reabsorbs blood inefficiently, and long-standing blood can lead to fibrosis and tractional complications.",
-  "additionalDifferentials": [
-   "Proliferative diabetic retinopathy",
-   "Retinal tear or rhegmatogenous retinal detachment",
-   "Posterior vitreous detachment",
-   "Retinal vein occlusion with neovascularisation",
-   "Ocular trauma",
-   "Age-related macular degeneration with subretinal bleed, or other neovascular disease",
-   "Terson syndrome (associated with intracranial haemorrhage)"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination of both eyes when the view allows",
-   "B-scan ultrasonography when the retina cannot be visualised, to exclude a tear or detachment",
-   "Assessment of the fellow eye for clues to the underlying cause (e.g. diabetic changes)",
-   "Optical coherence tomography and fluorescein angiography once the media clear",
-   "Systemic evaluation for diabetes, hypertension, and bleeding tendency as appropriate"
-  ],
-  "redFlags": [
-   "An underlying retinal tear or detachment requiring urgent treatment to preserve vision",
-   "Sudden profound visual loss with an obscured fundus needing prompt ultrasound assessment",
-   "Neovascularisation from proliferative diabetic retinopathy or ischaemic vein occlusion requiring timely treatment",
-   "Vitreous haemorrhage in a child raising concern for non-accidental injury",
-   "Bilateral haemorrhage or associated neurological symptoms suggesting Terson syndrome"
-  ],
-  "prognosis": "Prognosis depends on the cause; haemorrhage from a posterior vitreous detachment often clears well, whereas bleeding from proliferative retinopathy or an associated retinal detachment carries a higher risk of recurrence and permanent visual loss without treatment.",
-  "pitfalls": [
-   "Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood",
-   "Attributing the bleed to an obvious cause without examining for a retinal tear",
-   "Overlooking non-accidental injury in a child with vitreous haemorrhage",
-   "Delaying treatment of proliferative retinopathy while awaiting spontaneous clearance"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Upright rest with head elevation to let blood settle inferiorly and clear the visual axis",
-   "Urgently identify and treat any retinal tear or detachment, using laser retinopexy or cryotherapy for tears and surgical repair for detachment",
-   "Treat the underlying cause, with panretinal photocoagulation and intravitreal anti-VEGF therapy for proliferative retinopathy",
-   "B-scan ultrasound surveillance while the fundus is obscured to exclude a tear or detachment",
-   "Pars plana vitrectomy for non-clearing haemorrhage or when an underlying detachment is suspected",
-   "Optimise systemic contributors including glycaemic and blood pressure control and review of anticoagulants",
-   "Ophthalmology referral with close monitoring for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vitreous_hemorrhage-pathway",
-   "title": "Vitreous haemorrhage: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An underlying retinal tear or detachment requiring urgent treatment to preserve vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination of both eyes when the view allows, B-scan ultrasonography when the retina cannot be visualised, to exclude a tear or detachment, Assessment of the fellow eye for clues to the underlying cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Upright rest with head elevation to let blood settle inferiorly and clear the visual axis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vitreous haemorrhage."
-  }
- ],
- "tables": [
-  {
-   "id": "vitreous_hemorrhage-matrix",
-   "title": "Vitreous haemorrhage: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
+      "Proliferative diabetic retinopathy and retinal tears (with or without detachment) are among the commonest causes, alongside retinal vein occlusion and trauma",
+      "A key priority is to identify a retinal tear or detachment, as these are urgently treatable causes",
+      "When the fundus cannot be seen because of dense blood, B-scan ultrasound is essential to look for a retinal tear or detachment",
+      "The loss of the red reflex and inability to visualise retinal detail on ophthalmoscopy indicate significant haemorrhage",
+      "Initial management often involves upright rest to allow blood to settle inferiorly and improve the view, with treatment of the underlying cause once identified",
+      "Persistent non-clearing haemorrhage or an associated retinal detachment is managed surgically with vitrectomy",
+      "In children, non-accidental injury must be considered, and spontaneous haemorrhage warrants a search for an underlying vascular or neovascular cause"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination of both eyes when the view allows, B-scan ultrasonography when the retina cannot be visualised, to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vitreous haemorrhage is extravasation of blood into or around the vitreous cavity. It occurs when abnormal new vessels (as in proliferative diabetic retinopathy or ischaemic vein occlusion) bleed, when normal retinal vessels are torn during posterior vitreous detachment or a retinal tear, or when trauma ruptures vessels. Blood disperses through the vitreous gel, scattering light and obscuring vision. Clearance is slow because the avascular vitreous reabsorbs blood inefficiently, and long-standing blood can lead to fibrosis and tractional complications.",
+    "additionalDifferentials": [
+      "Proliferative diabetic retinopathy",
+      "Retinal tear or rhegmatogenous retinal detachment",
+      "Posterior vitreous detachment",
+      "Retinal vein occlusion with neovascularisation",
+      "Ocular trauma",
+      "Age-related macular degeneration with subretinal bleed, or other neovascular disease",
+      "Terson syndrome (associated with intracranial haemorrhage)"
     ],
-    [
-     "Primary Differentials",
-     "Proliferative diabetic retinopathy, Retinal tear or rhegmatogenous retinal detachment, Posterior vitreous detachment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination of both eyes when the view allows",
+      "B-scan ultrasonography when the retina cannot be visualised, to exclude a tear or detachment",
+      "Assessment of the fellow eye for clues to the underlying cause (e.g. diabetic changes)",
+      "Optical coherence tomography and fluorescein angiography once the media clear",
+      "Systemic evaluation for diabetes, hypertension, and bleeding tendency as appropriate"
     ],
-    [
-     "Management Strategy",
-     "Upright rest with head elevation to let blood settle inferiorly and clear the visual axis",
-     "Core treatment modality"
+    "redFlags": [
+      "An underlying retinal tear or detachment requiring urgent treatment to preserve vision",
+      "Sudden profound visual loss with an obscured fundus needing prompt ultrasound assessment",
+      "Neovascularisation from proliferative diabetic retinopathy or ischaemic vein occlusion requiring timely treatment",
+      "Vitreous haemorrhage in a child raising concern for non-accidental injury",
+      "Bilateral haemorrhage or associated neurological symptoms suggesting Terson syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the cause; haemorrhage from a posterior vitreous detachment often clears well, whereas bleeding from proliferative retinopathy or an associated retinal detachment carries a higher risk of recurrence and permanent visual loss without treatment.",
+    "pitfalls": [
+      "Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood",
+      "Attributing the bleed to an obvious cause without examining for a retinal tear",
+      "Overlooking non-accidental injury in a child with vitreous haemorrhage",
+      "Delaying treatment of proliferative retinopathy while awaiting spontaneous clearance"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Upright rest with head elevation to let blood settle inferiorly and clear the visual axis",
+      "Urgently identify and treat any retinal tear or detachment, using laser retinopexy or cryotherapy for tears and surgical repair for detachment",
+      "Treat the underlying cause, with panretinal photocoagulation and intravitreal anti-VEGF therapy for proliferative retinopathy",
+      "B-scan ultrasound surveillance while the fundus is obscured to exclude a tear or detachment",
+      "Pars plana vitrectomy for non-clearing haemorrhage or when an underlying detachment is suspected",
+      "Optimise systemic contributors including glycaemic and blood pressure control and review of anticoagulants",
+      "Ophthalmology referral with close monitoring for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for vitreous haemorrhage."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vitreous-hemorrhage-real-image",
-   "title": "Vitreous haemorrhage: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vitreous_hemorrhage-pathway",
+      "title": "Vitreous haemorrhage: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An underlying retinal tear or detachment requiring urgent treatment to preserve vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination of both eyes when the view allows, B-scan ultrasonography when the retina cannot be visualised, to exclude a tear or detachment, Assessment of the fellow eye for clues to the underlying cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Upright rest with head elevation to let blood settle inferiorly and clear the visual axis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vitreous haemorrhage."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vitreous_hemorrhage-matrix",
+      "title": "Vitreous haemorrhage: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with the sudden painless onset of floaters, cobwebs, a reddish haze, or, with dense bleeding, profound loss of vision",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination of both eyes when the view allows, B-scan ultrasonography when the retina cannot be visualised, to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Proliferative diabetic retinopathy, Retinal tear or rhegmatogenous retinal detachment, Posterior vitreous detachment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Upright rest with head elevation to let blood settle inferiorly and clear the visual axis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to perform B-scan ultrasound and missing an underlying retinal detachment behind dense blood",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vitreous haemorrhage."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitreous_hemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination of both eyes",
+          "cells": [
+            {
+              "text": "Underlying retinal pathology when the view allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Retinal tear or detachment when the retina cannot be seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the fellow eye",
+          "cells": [
+            {
+              "text": "Co-existing disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreous_hemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proliferative diabetic retinopathy",
+          "cells": [
+            {
+              "text": "Common cause of vitreous haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal tear or rhegmatogenous retinal detachment",
+          "cells": [
+            {
+              "text": "Underlying retinal tear requiring urgent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior vitreous detachment",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal vein occlusion with neovascularisation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitreous_hemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Upright rest with head elevation",
+          "cells": [
+            {
+              "text": "Lets blood settle inferiorly and clears the visual axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment of retinal tear or detachment",
+          "cells": [
+            {
+              "text": "Laser retinopexy or cryotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitreous_hemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of Vitreous haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vitreous haemorrhage: sudden painless floaters, haze or profound visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (retinal tear, detachment or neovascularisation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal treatment to preserve vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus examination, B-scan ultrasound if fundus obscured, fellow eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a retinal tear or detachment excluded on examination or B-scan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause of bleeding, such as diabetic retinopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Upright rest with head elevation to clear the visual axis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent laser retinopexy or cryotherapy for any retinal tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying retinal disease such as proliferative diabetic retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on the underlying retinal cause and timing of treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

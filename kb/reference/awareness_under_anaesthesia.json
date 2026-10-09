@@ -1,173 +1,473 @@
 {
- "id": "awareness_under_anaesthesia",
- "name": "Awareness under anaesthesia",
- "aliases": [
-  "intraoperative awareness",
-  "accidental awareness during general anaesthesia",
-  "AAGA",
-  "anaesthesia awareness"
- ],
- "class": "non_infective",
- "system": "Anaesthesia / Perioperative",
- "specialty": "Anaesthesiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Anesthesia / standard perioperative references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit (remembered) or implicit",
-   "Experiences range from vague auditory recall to distressing sensations of paralysis and pain, and can lead to lasting psychological harm including post-traumatic stress",
-   "Risk factors include use of neuromuscular blockade (which masks movement), difficult airway management, haemodynamic instability limiting anaesthetic depth, and certain high-risk settings such as obstetric, cardiac, and trauma anaesthesia",
-   "Total intravenous techniques carry particular risk if drug delivery fails or is interrupted, so vigilance over the infusion is essential",
-   "Prevention includes confirming delivery and adequate dosing of anaesthetic, monitoring end-tidal volatile concentration, checking equipment, and considering processed EEG depth-of-anaesthesia monitoring in high-risk cases",
-   "When paralysed, patients cannot signal distress, so clinical signs of light anaesthesia (movement, autonomic changes) may be blunted and must be interpreted with care",
-   "If awareness is suspected or reported, a compassionate response, honest explanation, and structured psychological support and follow-up are important",
-   "Documentation and use of a structured interview help confirm the event and guide support and any formal reporting"
+  "id": "awareness_under_anaesthesia",
+  "name": "Awareness under anaesthesia",
+  "aliases": [
+    "intraoperative awareness",
+    "accidental awareness during general anaesthesia",
+    "AAGA",
+    "anaesthesia awareness"
   ],
-  "pathophysiology": "General anaesthesia suppresses consciousness by acting on the brain, and adequate depth depends on delivering sufficient anaesthetic to the effect site relative to individual requirement and surgical stimulation. Awareness occurs when brain anaesthetic concentration is inadequate to prevent consciousness while the patient is unable to communicate, often because neuromuscular blockade prevents movement. Contributing mechanisms include underdosing to protect a compromised circulation, equipment or infusion failure, increased anaesthetic requirement, and pharmacokinetic variability. Explicit memory formation during light anaesthesia can lead to conscious recall and psychological sequelae.",
-  "additionalDifferentials": [
-   "Dreaming during anaesthesia without true awareness",
-   "Recall of events during emergence rather than maintenance",
-   "Sedation-level consciousness where full anaesthesia was not intended",
-   "False memory or confabulation",
-   "Postoperative delirium affecting recall"
-  ],
-  "additionalInvestigations": [
-   "Structured interview (such as a modified Brice questionnaire) to characterise recall",
-   "Review of anaesthetic records, drug delivery, and end-tidal agent concentrations",
-   "Equipment and infusion pump checks to identify delivery failure",
-   "Processed EEG depth-of-anaesthesia data where recorded",
-   "Psychological assessment and referral for affected patients"
-  ],
-  "redFlags": [
-   "Reports of explicit recall with pain or the sensation of paralysis",
-   "Evidence of severe psychological distress or post-traumatic stress after surgery",
-   "Recognised anaesthetic delivery failure during a paralysed case",
-   "Signs of inadequate anaesthesia in a paralysed patient at high risk"
-  ],
-  "prognosis": "Many episodes are brief with limited recall, but distressing awareness can cause persistent anxiety, sleep disturbance, and post-traumatic stress disorder; early acknowledgement and psychological support improve outcomes.",
-  "pitfalls": [
-   "Relying on movement to gauge depth in a neuromuscularly blocked patient",
-   "Failing to notice interrupted or failed intravenous anaesthetic delivery",
-   "Dismissing or disbelieving a patient's report of awareness",
-   "Not offering timely psychological support and follow-up",
-   "Omitting depth monitoring in recognised high-risk situations"
-  ],
-  "references": [
-   "Miller's Anesthesia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and guarding vigilantly against total intravenous infusion failure",
-   "Use processed EEG depth-of-anaesthesia monitoring in high-risk cases such as obstetric, cardiac and trauma anaesthesia, and whenever neuromuscular blockade masks movement",
-   "When circulatory instability forces light anaesthesia, supplement with an amnesic agent such as a benzodiazepine to reduce explicit recall",
-   "If awareness is suspected intraoperatively, immediately deepen anaesthesia with a hypnotic such as propofol or increased volatile agent and secure amnesia",
-   "After a suspected event, acknowledge the experience with empathic disclosure and characterise recall using a structured interview such as the modified Brice questionnaire",
-   "Arrange early psychological support and referral to prevent and treat post-traumatic stress disorder",
-   "Review the anaesthetic record, drug delivery and equipment, and report the episode through critical-incident governance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "awareness_under_anaesthesia-pathway",
-   "title": "Awareness under anaesthesia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit (remembered) or implicit",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Reports of explicit recall with pain or the sensation of paralysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured interview (such as a modified Brice questionnaire) to characterise recall, Review of anaesthetic records, drug delivery, and end-tidal agent concentrations, Equipment and infusion pump checks to identify"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and guarding vigilantly against total intravenous infusion failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on movement to gauge depth in a neuromuscularly blocked patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of awareness under anaesthesia."
-  }
- ],
- "tables": [
-  {
-   "id": "awareness_under_anaesthesia-matrix",
-   "title": "Awareness under anaesthesia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Anaesthesia / Perioperative",
+  "specialty": "Anaesthesiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Anesthesia / standard perioperative references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit (remembered) or implicit",
+      "Experiences range from vague auditory recall to distressing sensations of paralysis and pain, and can lead to lasting psychological harm including post-traumatic stress",
+      "Risk factors include use of neuromuscular blockade (which masks movement), difficult airway management, haemodynamic instability limiting anaesthetic depth, and certain high-risk settings such as obstetric, cardiac, and trauma anaesthesia",
+      "Total intravenous techniques carry particular risk if drug delivery fails or is interrupted, so vigilance over the infusion is essential",
+      "Prevention includes confirming delivery and adequate dosing of anaesthetic, monitoring end-tidal volatile concentration, checking equipment, and considering processed EEG depth-of-anaesthesia monitoring in high-risk cases",
+      "When paralysed, patients cannot signal distress, so clinical signs of light anaesthesia (movement, autonomic changes) may be blunted and must be interpreted with care",
+      "If awareness is suspected or reported, a compassionate response, honest explanation, and structured psychological support and follow-up are important",
+      "Documentation and use of a structured interview help confirm the event and guide support and any formal reporting"
     ],
-    [
-     "Key Investigations",
-     "Structured interview (such as a modified Brice questionnaire) to characterise recall, Review of anaesthetic records, drug",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "General anaesthesia suppresses consciousness by acting on the brain, and adequate depth depends on delivering sufficient anaesthetic to the effect site relative to individual requirement and surgical stimulation. Awareness occurs when brain anaesthetic concentration is inadequate to prevent consciousness while the patient is unable to communicate, often because neuromuscular blockade prevents movement. Contributing mechanisms include underdosing to protect a compromised circulation, equipment or infusion failure, increased anaesthetic requirement, and pharmacokinetic variability. Explicit memory formation during light anaesthesia can lead to conscious recall and psychological sequelae.",
+    "additionalDifferentials": [
+      "Dreaming during anaesthesia without true awareness",
+      "Recall of events during emergence rather than maintenance",
+      "Sedation-level consciousness where full anaesthesia was not intended",
+      "False memory or confabulation",
+      "Postoperative delirium affecting recall"
     ],
-    [
-     "Primary Differentials",
-     "Dreaming during anaesthesia without true awareness, Recall of events during emergence rather than maintenance, Sedation-level",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured interview (such as a modified Brice questionnaire) to characterise recall",
+      "Review of anaesthetic records, drug delivery, and end-tidal agent concentrations",
+      "Equipment and infusion pump checks to identify delivery failure",
+      "Processed EEG depth-of-anaesthesia data where recorded",
+      "Psychological assessment and referral for affected patients"
     ],
-    [
-     "Management Strategy",
-     "Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and",
-     "Core treatment modality"
+    "redFlags": [
+      "Reports of explicit recall with pain or the sensation of paralysis",
+      "Evidence of severe psychological distress or post-traumatic stress after surgery",
+      "Recognised anaesthetic delivery failure during a paralysed case",
+      "Signs of inadequate anaesthesia in a paralysed patient at high risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on movement to gauge depth in a neuromuscularly blocked patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many episodes are brief with limited recall, but distressing awareness can cause persistent anxiety, sleep disturbance, and post-traumatic stress disorder; early acknowledgement and psychological support improve outcomes.",
+    "pitfalls": [
+      "Relying on movement to gauge depth in a neuromuscularly blocked patient",
+      "Failing to notice interrupted or failed intravenous anaesthetic delivery",
+      "Dismissing or disbelieving a patient's report of awareness",
+      "Not offering timely psychological support and follow-up",
+      "Omitting depth monitoring in recognised high-risk situations"
+    ],
+    "references": [
+      "Miller's Anesthesia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and guarding vigilantly against total intravenous infusion failure",
+      "Use processed EEG depth-of-anaesthesia monitoring in high-risk cases such as obstetric, cardiac and trauma anaesthesia, and whenever neuromuscular blockade masks movement",
+      "When circulatory instability forces light anaesthesia, supplement with an amnesic agent such as a benzodiazepine to reduce explicit recall",
+      "If awareness is suspected intraoperatively, immediately deepen anaesthesia with a hypnotic such as propofol or increased volatile agent and secure amnesia",
+      "After a suspected event, acknowledge the experience with empathic disclosure and characterise recall using a structured interview such as the modified Brice questionnaire",
+      "Arrange early psychological support and referral to prevent and treat post-traumatic stress disorder",
+      "Review the anaesthetic record, drug delivery and equipment, and report the episode through critical-incident governance"
     ]
-   ],
-   "caption": "Overview comparison matrix for awareness under anaesthesia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "awareness-under-anaesthesia-real-image",
-   "title": "Awareness under anaesthesia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "awareness_under_anaesthesia-pathway",
+      "title": "Awareness under anaesthesia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit (remembered) or implicit",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Reports of explicit recall with pain or the sensation of paralysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured interview (such as a modified Brice questionnaire) to characterise recall, Review of anaesthetic records, drug delivery, and end-tidal agent concentrations, Equipment and infusion pump checks to identify"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and guarding vigilantly against total intravenous infusion failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on movement to gauge depth in a neuromuscularly blocked patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of awareness under anaesthesia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "awareness_under_anaesthesia-matrix",
+      "title": "Awareness under anaesthesia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Refers to a patient becoming conscious during intended general anaesthesia and later recalling events, which may be explicit",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured interview (such as a modified Brice questionnaire) to characterise recall, Review of anaesthetic records, drug",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dreaming during anaesthesia without true awareness, Recall of events during emergence rather than maintenance, Sedation-level",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent awareness by confirming delivery of an adequate anaesthetic dose, monitoring end-tidal volatile agent concentration and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on movement to gauge depth in a neuromuscularly blocked patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for awareness under anaesthesia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "awareness_under_anaesthesia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured interview such as a modified Brice questionnaire",
+          "cells": [
+            {
+              "text": "Characterises recall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of anaesthetic records, drug delivery and end-tidal agent concentrations",
+          "cells": [
+            {
+              "text": "Delivery of the anaesthetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Equipment and infusion pump checks",
+          "cells": [
+            {
+              "text": "Delivery failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Processed EEG depth-of-anaesthesia data",
+          "cells": [
+            {
+              "text": "Where recorded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological assessment and referral",
+          "cells": [
+            {
+              "text": "Affected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "awareness_under_anaesthesia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dreaming during anaesthesia without true awareness",
+          "cells": [
+            {
+              "text": "Distinguished from awareness by the structured recall interview"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recall of events during emergence rather than maintenance",
+          "cells": [
+            {
+              "text": "Recall timed to emergence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "awareness_under_anaesthesia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirm adequate anaesthetic dose",
+          "cells": [
+            {
+              "text": "Monitor end-tidal volatile agent concentration; vigilant guarding"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Processed EEG depth-of-anaesthesia monitoring",
+          "cells": [
+            {
+              "text": "High-risk cases: obstetric, cardiac and trauma anaesthesia; whenever neuromuscular block is used"
+            },
+            {
+              "text": "Depth monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amnesic agent",
+          "cells": [
+            {
+              "text": "Benzodiazepine when circulatory instability forces light anaesthesia"
+            },
+            {
+              "text": "Reduces explicit recall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immediate deepening",
+          "cells": [
+            {
+              "text": "Hypnotic such as propofol or increased volatile agent if awareness suspected"
+            },
+            {
+              "text": "Intraoperative awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empathic disclosure and structured recall",
+          "cells": [
+            {
+              "text": "Acknowledge the experience; characterise recall with a structured interview"
+            },
+            {
+              "text": "After a suspected event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Early referral to prevent and treat post-traumatic stress disorder"
+            },
+            {
+              "text": "PTSD prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Governance review",
+          "cells": [
+            {
+              "text": "Review anaesthetic record and equipment; critical-incident reporting"
+            },
+            {
+              "text": "Reporting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "awareness_under_anaesthesia-dx-mgmt",
+      "title": "Diagnosis and management of Awareness under anaesthesia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Explicit recall of surgery reported after an anaesthetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Recall with pain, paralysis or severe distress?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Deepen anaesthesia immediately if awareness is ongoing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Structured recall interview, record review, pump checks, processed EEG data",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Delivery failure or inadequate depth found on record review?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Governance review and critical-incident reporting",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat record review",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepine amnesia when light anaesthesia is forced",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Processed EEG monitoring in high-risk cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early psychological support to prevent PTSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Empathic disclosure to the patient after a suspected event",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

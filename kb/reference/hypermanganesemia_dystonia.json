@@ -1,176 +1,544 @@
 {
- "id": "hypermanganesemia_dystonia",
- "name": "Hypermanganesaemia with dystonia",
- "aliases": [
-  "hypermanganesaemia with dystonia, polycythaemia and cirrhosis",
-  "HMDPC",
-  "inherited manganese transporter deficiency",
-  "SLC30A10",
-  "SLC39A14"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping cock-walk",
-   "Two forms exist: SLC30A10 deficiency (type 1) causing manganese retention with liver disease, and SLC39A14 deficiency (type 2) causing childhood-onset dystonia usually without hepatic involvement",
-   "Whole-blood manganese is markedly elevated, and this should be measured whenever unexplained dystonia is combined with polycythaemia or liver disease",
-   "Brain MRI shows symmetrical T1-weighted hyperintensity in the basal ganglia (and often the white matter, pituitary, and cerebellum) from paramagnetic manganese deposition",
-   "Polycythaemia arises because manganese stimulates erythropoietin production; iron studies typically show low ferritin with high total iron-binding capacity",
-   "In SLC30A10 disease hepatic manganese accumulation drives fibrosis and cirrhosis",
-   "Treatment centres on chelation to enhance urinary manganese excretion, dietary manganese restriction, and iron supplementation to competitively reduce manganese uptake",
-   "Early recognition and chelation can arrest or improve neurological and hepatic disease"
+  "id": "hypermanganesemia_dystonia",
+  "name": "Hypermanganesaemia with dystonia",
+  "aliases": [
+    "hypermanganesaemia with dystonia, polycythaemia and cirrhosis",
+    "HMDPC",
+    "inherited manganese transporter deficiency",
+    "SLC30A10",
+    "SLC39A14"
   ],
-  "pathophysiology": "This group of disorders reflects disrupted whole-body manganese homeostasis. SLC30A10 encodes a manganese efflux transporter that exports manganese from hepatocytes into bile and from enterocytes and neurons; its loss causes manganese to accumulate in the liver and brain. SLC39A14 encodes an importer required for hepatic manganese uptake and biliary clearance; its loss paradoxically raises circulating manganese and drives brain deposition while sparing the liver. Excess manganese is neurotoxic to the basal ganglia, producing extrapyramidal features that resemble manganese-induced parkinsonism, and it deposits as a paramagnetic species giving the characteristic T1 basal-ganglia signal. Manganese also upregulates erythropoietin, explaining the polycythaemia, and interacts with iron handling, producing a low-ferritin state.",
-  "additionalDifferentials": [
-   "Wilson disease and other inherited metal-storage disorders",
-   "Acquired manganese toxicity (parenteral nutrition, environmental or occupational exposure, chronic liver failure)",
-   "Neurodegeneration with brain iron accumulation syndromes",
-   "Dopa-responsive and other genetic dystonias",
-   "Juvenile parkinsonism",
-   "Primary polycythaemia (JAK2-related) when the neurological picture is overlooked"
-  ],
-  "additionalInvestigations": [
-   "Whole-blood manganese concentration",
-   "Brain MRI looking for T1 basal-ganglia hyperintensity",
-   "Full blood count for polycythaemia and iron studies (ferritin, transferrin saturation)",
-   "Liver function tests and hepatic imaging or elastography",
-   "Molecular genetic testing of SLC30A10 and SLC39A14",
-   "24-hour urinary manganese excretion to guide and monitor chelation"
-  ],
-  "redFlags": [
-   "Rapidly progressive dystonia or gait failure in a child or young adult",
-   "Decompensated liver disease or established cirrhosis in SLC30A10 disease",
-   "Hyperviscosity symptoms from marked polycythaemia",
-   "Deterioration despite treatment, prompting review of chelation adequacy"
-  ],
-  "prognosis": "Outcome depends on early diagnosis; chelation and manganese restriction can stabilise or improve neurological and hepatic disease, but delayed treatment risks fixed dystonia and, in SLC30A10 disease, progressive cirrhosis.",
-  "pitfalls": [
-   "Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease",
-   "Misreading the T1 basal-ganglia signal as hepatic encephalopathy of unknown cause",
-   "Attributing the polycythaemia to a primary myeloproliferative disorder",
-   "Delaying chelation and iron supplementation while awaiting genetic confirmation"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Journal of Inherited Metabolic Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to guide treatment courses",
-   "Give oral iron supplementation to compete with manganese uptake and lower its absorption and deposition, particularly in SLC30A10 disease",
-   "Restrict dietary and environmental manganese exposure",
-   "Treat dystonia symptomatically with agents such as anticholinergics, baclofen or botulinum toxin injections, supported by physiotherapy",
-   "Monitor whole-blood manganese, full blood count for polycythaemia, iron studies, and liver function with hepatic imaging or elastography in SLC30A10 disease",
-   "Consider liver transplantation for end-stage hepatic disease in SLC30A10 deficiency",
-   "Offer genetic counselling for autosomal recessive inheritance and coordinate metabolic, neurology and hepatology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypermanganesemia_dystonia-pathway",
-   "title": "Hypermanganesaemia with dystonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping cock-walk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive dystonia or gait failure in a child or young adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-blood manganese concentration, Brain MRI looking for T1 basal-ganglia hyperintensity, Full blood count for polycythaemia and iron studies (ferritin, transferrin saturation)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to guide treatment courses"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypermanganesaemia with dystonia."
-  }
- ],
- "tables": [
-  {
-   "id": "hypermanganesemia_dystonia-matrix",
-   "title": "Hypermanganesaemia with dystonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping cock-walk",
+      "Two forms exist: SLC30A10 deficiency (type 1) causing manganese retention with liver disease, and SLC39A14 deficiency (type 2) causing childhood-onset dystonia usually without hepatic involvement",
+      "Whole-blood manganese is markedly elevated, and this should be measured whenever unexplained dystonia is combined with polycythaemia or liver disease",
+      "Brain MRI shows symmetrical T1-weighted hyperintensity in the basal ganglia (and often the white matter, pituitary, and cerebellum) from paramagnetic manganese deposition",
+      "Polycythaemia arises because manganese stimulates erythropoietin production; iron studies typically show low ferritin with high total iron-binding capacity",
+      "In SLC30A10 disease hepatic manganese accumulation drives fibrosis and cirrhosis",
+      "Treatment centres on chelation to enhance urinary manganese excretion, dietary manganese restriction, and iron supplementation to competitively reduce manganese uptake",
+      "Early recognition and chelation can arrest or improve neurological and hepatic disease"
     ],
-    [
-     "Key Investigations",
-     "Whole-blood manganese concentration, Brain MRI looking for T1 basal-ganglia hyperintensity, Full blood count for polycythaemia",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "This group of disorders reflects disrupted whole-body manganese homeostasis. SLC30A10 encodes a manganese efflux transporter that exports manganese from hepatocytes into bile and from enterocytes and neurons; its loss causes manganese to accumulate in the liver and brain. SLC39A14 encodes an importer required for hepatic manganese uptake and biliary clearance; its loss paradoxically raises circulating manganese and drives brain deposition while sparing the liver. Excess manganese is neurotoxic to the basal ganglia, producing extrapyramidal features that resemble manganese-induced parkinsonism, and it deposits as a paramagnetic species giving the characteristic T1 basal-ganglia signal. Manganese also upregulates erythropoietin, explaining the polycythaemia, and interacts with iron handling, producing a low-ferritin state.",
+    "additionalDifferentials": [
+      "Wilson disease and other inherited metal-storage disorders",
+      "Acquired manganese toxicity (parenteral nutrition, environmental or occupational exposure, chronic liver failure)",
+      "Neurodegeneration with brain iron accumulation syndromes",
+      "Dopa-responsive and other genetic dystonias",
+      "Juvenile parkinsonism",
+      "Primary polycythaemia (JAK2-related) when the neurological picture is overlooked"
     ],
-    [
-     "Primary Differentials",
-     "Wilson disease and other inherited metal-storage disorders, Acquired manganese toxicity (parenteral nutrition, environmental or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-blood manganese concentration",
+      "Brain MRI looking for T1 basal-ganglia hyperintensity",
+      "Full blood count for polycythaemia and iron studies (ferritin, transferrin saturation)",
+      "Liver function tests and hepatic imaging or elastography",
+      "Molecular genetic testing of SLC30A10 and SLC39A14",
+      "24-hour urinary manganese excretion to guide and monitor chelation"
     ],
-    [
-     "Management Strategy",
-     "Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive dystonia or gait failure in a child or young adult",
+      "Decompensated liver disease or established cirrhosis in SLC30A10 disease",
+      "Hyperviscosity symptoms from marked polycythaemia",
+      "Deterioration despite treatment, prompting review of chelation adequacy"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on early diagnosis; chelation and manganese restriction can stabilise or improve neurological and hepatic disease, but delayed treatment risks fixed dystonia and, in SLC30A10 disease, progressive cirrhosis.",
+    "pitfalls": [
+      "Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease",
+      "Misreading the T1 basal-ganglia signal as hepatic encephalopathy of unknown cause",
+      "Attributing the polycythaemia to a primary myeloproliferative disorder",
+      "Delaying chelation and iron supplementation while awaiting genetic confirmation"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Journal of Inherited Metabolic Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to guide treatment courses",
+      "Give oral iron supplementation to compete with manganese uptake and lower its absorption and deposition, particularly in SLC30A10 disease",
+      "Restrict dietary and environmental manganese exposure",
+      "Treat dystonia symptomatically with agents such as anticholinergics, baclofen or botulinum toxin injections, supported by physiotherapy",
+      "Monitor whole-blood manganese, full blood count for polycythaemia, iron studies, and liver function with hepatic imaging or elastography in SLC30A10 disease",
+      "Consider liver transplantation for end-stage hepatic disease in SLC30A10 deficiency",
+      "Offer genetic counselling for autosomal recessive inheritance and coordinate metabolic, neurology and hepatology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypermanganesaemia with dystonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypermanganesemia-dystonia-real-image",
-   "title": "Hypermanganesaemia with dystonia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hypermanganesemia_dystonia-pathway",
+      "title": "Hypermanganesaemia with dystonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping cock-walk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive dystonia or gait failure in a child or young adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-blood manganese concentration, Brain MRI looking for T1 basal-ganglia hyperintensity, Full blood count for polycythaemia and iron studies (ferritin, transferrin saturation)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to guide treatment courses"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypermanganesaemia with dystonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypermanganesemia_dystonia-matrix",
+      "title": "Hypermanganesaemia with dystonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inherited manganese-overload disorder presenting with dystonia and a parkinsonian gait, sometimes described as a high-stepping",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-blood manganese concentration, Brain MRI looking for T1 basal-ganglia hyperintensity, Full blood count for polycythaemia",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Wilson disease and other inherited metal-storage disorders, Acquired manganese toxicity (parenteral nutrition, environmental or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce the manganese burden with chelation using intravenous disodium calcium edetate, monitoring urinary manganese excretion to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to measure blood manganese in unexplained dystonia with polycythaemia or liver disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypermanganesaemia with dystonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypermanganesemia_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-blood manganese concentration",
+          "cells": [
+            {
+              "text": "Markedly elevated manganese"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetrical T1 hyperintensity in basal ganglia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Polycythaemia; low ferritin with high total iron-binding capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging or elastography",
+          "cells": [
+            {
+              "text": "Hepatic involvement; fibrosis or cirrhosis in SLC30A10 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC30A10 and SLC39A14 genetic testing",
+          "cells": [
+            {
+              "text": "Type 1 (SLC30A10) or type 2 (SLC39A14) disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary manganese excretion",
+          "cells": [
+            {
+              "text": "Guides and monitors chelation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermanganesemia_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired manganese toxicity",
+          "cells": [
+            {
+              "text": "Parenteral nutrition, environmental or occupational exposure, or chronic liver failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polycythaemia (JAK2-related)",
+          "cells": [
+            {
+              "text": "Polycythaemia here is driven by manganese-stimulated erythropoietin, with dystonia present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermanganesemia_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chelation",
+          "cells": [
+            {
+              "text": "Intravenous disodium calcium edetate; urinary manganese monitored to guide courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral iron",
+          "cells": [
+            {
+              "text": "Competes with manganese uptake, particularly in SLC30A10 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and environmental restriction",
+          "cells": [
+            {
+              "text": "Restrict manganese exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic dystonia treatment",
+          "cells": [
+            {
+              "text": "Anticholinergics, baclofen or botulinum toxin injections, with physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Whole-blood manganese, full blood count, iron studies, liver function and hepatic imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Considered for end-stage hepatic disease in SLC30A10 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; coordinate metabolic, neurology and hepatology care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypermanganesemia_dystonia-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypermanganesemia_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Hypermanganesaemia with dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dystonia with parkinsonian gait; polycythaemia or liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly progressive dystonia, gait failure or decompensated liver disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of liver status and adequacy of chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood manganese, T1 basal-ganglia MRI, iron studies, SLC30A10 or SLC39A14 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised manganese with characteristic MRI confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired manganese toxicity or other genetic dystonias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Chelation with intravenous disodium calcium edetate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral iron to compete with manganese uptake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict dietary and environmental manganese",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic dystonia treatment with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider liver transplantation for end-stage SLC30A10 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early treatment can stabilise or improve neurological and hepatic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

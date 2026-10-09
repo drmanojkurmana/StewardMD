@@ -1,175 +1,512 @@
 {
- "id": "acute_interstitial_pneumonia",
- "name": "Acute interstitial pneumonia",
- "aliases": [
-  "AIP",
-  "Hamman-Rich syndrome"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
-   "Presents like the acute respiratory distress syndrome but without an identifiable cause, frequently after a viral-like prodrome.",
-   "Rapidly progressive breathlessness and hypoxaemic respiratory failure evolve over days to a few weeks.",
-   "HRCT shows bilateral ground-glass opacity and consolidation, often diffuse, with traction bronchiectasis emerging in the organising phase.",
-   "Histology demonstrates diffuse alveolar damage, the same pattern seen in the acute respiratory distress syndrome.",
-   "It is a diagnosis of exclusion, requiring the ruling out of infection, sepsis, drugs, aspiration, connective tissue disease, acute eosinophilic pneumonia and acute exacerbation of pre-existing interstitial lung disease.",
-   "Management is largely supportive with lung-protective ventilation; corticosteroids are often given although supporting evidence is weak.",
-   "Short-term mortality is high."
+  "id": "acute_interstitial_pneumonia",
+  "name": "Acute interstitial pneumonia",
+  "aliases": [
+    "AIP",
+    "Hamman-Rich syndrome"
   ],
-  "pathophysiology": "Acute interstitial pneumonia is the idiopathic form of diffuse alveolar damage. Acute injury to the alveolar-capillary membrane produces an exudative phase with interstitial and alveolar oedema and hyaline membranes, followed by an organising or proliferative phase with fibroblast proliferation and alveolar septal thickening. The absence of an identifiable trigger distinguishes it from the acute respiratory distress syndrome of known cause.",
-  "additionalDifferentials": [
-   "Acute respiratory distress syndrome from infection or sepsis",
-   "Acute exacerbation of idiopathic pulmonary fibrosis or other interstitial lung disease",
-   "Acute eosinophilic pneumonia",
-   "Diffuse alveolar haemorrhage",
-   "Acute hypersensitivity pneumonitis",
-   "Drug-induced lung injury",
-   "Cardiogenic pulmonary oedema"
-  ],
-  "additionalInvestigations": [
-   "HRCT thorax to define the extent and phase of alveolar damage",
-   "Bronchoalveolar lavage to exclude infection, haemorrhage and eosinophilia",
-   "Comprehensive microbiology including atypical and viral pathogens",
-   "Autoimmune and vasculitis serology",
-   "Echocardiography to exclude cardiogenic pulmonary oedema",
-   "Surgical lung biopsy where feasible to confirm diffuse alveolar damage and exclude mimics",
-   "Arterial blood gas analysis"
-  ],
-  "redFlags": [
-   "Refractory hypoxaemia requiring mechanical ventilation",
-   "Multi-organ dysfunction",
-   "Rapid radiological progression",
-   "Failure to identify a reversible or treatable cause"
-  ],
-  "prognosis": "Mortality is high, often exceeding half of patients in the acute phase; survivors may regain normal lung function or develop residual fibrosis, and recurrence has been described.",
-  "pitfalls": [
-   "Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia",
-   "Missing an acute exacerbation of previously undiagnosed underlying interstitial lung disease",
-   "Delaying supportive lung-protective ventilation",
-   "Overlooking diffuse alveolar haemorrhage or acute eosinophilic pneumonia, which are treatable"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure",
-   "Empirical high-dose systemic corticosteroids, given the underlying diffuse alveolar damage, once mimics are excluded",
-   "Broad empirical antimicrobial cover until infection is excluded by bronchoalveolar lavage and microbiology",
-   "Exclude and treat mimics including sepsis, drug reactions, aspiration, and connective tissue disease",
-   "Intensive care support with consideration of extracorporeal membrane oxygenation in refractory hypoxaemia",
-   "Monitor for progression to fibrosis and consider lung transplantation assessment in survivors with residual disease",
-   "Multidisciplinary management with respiratory medicine, radiology, and intensive care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_interstitial_pneumonia-pathway",
-   "title": "Acute interstitial pneumonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory hypoxaemia requiring mechanical ventilation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: HRCT thorax to define the extent and phase of alveolar damage, Bronchoalveolar lavage to exclude infection, haemorrhage and eosinophilia, Comprehensive microbiology including atypical and viral pathogens"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute interstitial pneumonia."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_interstitial_pneumonia-matrix",
-   "title": "Acute interstitial pneumonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
+      "Presents like the acute respiratory distress syndrome but without an identifiable cause, frequently after a viral-like prodrome.",
+      "Rapidly progressive breathlessness and hypoxaemic respiratory failure evolve over days to a few weeks.",
+      "HRCT shows bilateral ground-glass opacity and consolidation, often diffuse, with traction bronchiectasis emerging in the organising phase.",
+      "Histology demonstrates diffuse alveolar damage, the same pattern seen in the acute respiratory distress syndrome.",
+      "It is a diagnosis of exclusion, requiring the ruling out of infection, sepsis, drugs, aspiration, connective tissue disease, acute eosinophilic pneumonia and acute exacerbation of pre-existing interstitial lung disease.",
+      "Management is largely supportive with lung-protective ventilation; corticosteroids are often given although supporting evidence is weak.",
+      "Short-term mortality is high."
     ],
-    [
-     "Key Investigations",
-     "HRCT thorax to define the extent and phase of alveolar damage, Bronchoalveolar lavage to exclude infection, haemorrhage and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute interstitial pneumonia is the idiopathic form of diffuse alveolar damage. Acute injury to the alveolar-capillary membrane produces an exudative phase with interstitial and alveolar oedema and hyaline membranes, followed by an organising or proliferative phase with fibroblast proliferation and alveolar septal thickening. The absence of an identifiable trigger distinguishes it from the acute respiratory distress syndrome of known cause.",
+    "additionalDifferentials": [
+      "Acute respiratory distress syndrome from infection or sepsis",
+      "Acute exacerbation of idiopathic pulmonary fibrosis or other interstitial lung disease",
+      "Acute eosinophilic pneumonia",
+      "Diffuse alveolar haemorrhage",
+      "Acute hypersensitivity pneumonitis",
+      "Drug-induced lung injury",
+      "Cardiogenic pulmonary oedema"
     ],
-    [
-     "Primary Differentials",
-     "Acute respiratory distress syndrome from infection or sepsis, Acute exacerbation of idiopathic pulmonary fibrosis or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "HRCT thorax to define the extent and phase of alveolar damage",
+      "Bronchoalveolar lavage to exclude infection, haemorrhage and eosinophilia",
+      "Comprehensive microbiology including atypical and viral pathogens",
+      "Autoimmune and vasculitis serology",
+      "Echocardiography to exclude cardiogenic pulmonary oedema",
+      "Surgical lung biopsy where feasible to confirm diffuse alveolar damage and exclude mimics",
+      "Arterial blood gas analysis"
     ],
-    [
-     "Management Strategy",
-     "Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory hypoxaemia requiring mechanical ventilation",
+      "Multi-organ dysfunction",
+      "Rapid radiological progression",
+      "Failure to identify a reversible or treatable cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mortality is high, often exceeding half of patients in the acute phase; survivors may regain normal lung function or develop residual fibrosis, and recurrence has been described.",
+    "pitfalls": [
+      "Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia",
+      "Missing an acute exacerbation of previously undiagnosed underlying interstitial lung disease",
+      "Delaying supportive lung-protective ventilation",
+      "Overlooking diffuse alveolar haemorrhage or acute eosinophilic pneumonia, which are treatable"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure",
+      "Empirical high-dose systemic corticosteroids, given the underlying diffuse alveolar damage, once mimics are excluded",
+      "Broad empirical antimicrobial cover until infection is excluded by bronchoalveolar lavage and microbiology",
+      "Exclude and treat mimics including sepsis, drug reactions, aspiration, and connective tissue disease",
+      "Intensive care support with consideration of extracorporeal membrane oxygenation in refractory hypoxaemia",
+      "Monitor for progression to fibrosis and consider lung transplantation assessment in survivors with residual disease",
+      "Multidisciplinary management with respiratory medicine, radiology, and intensive care"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute interstitial pneumonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-interstitial-pneumonia-real-image",
-   "title": "Acute interstitial pneumonia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "acute_interstitial_pneumonia-pathway",
+      "title": "Acute interstitial pneumonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory hypoxaemia requiring mechanical ventilation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: HRCT thorax to define the extent and phase of alveolar damage, Bronchoalveolar lavage to exclude infection, haemorrhage and eosinophilia, Comprehensive microbiology including atypical and viral pathogens"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute interstitial pneumonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_interstitial_pneumonia-matrix",
+      "title": "Acute interstitial pneumonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Also known as Hamman-Rich syndrome; a fulminant idiopathic interstitial pneumonia.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "HRCT thorax to define the extent and phase of alveolar damage, Bronchoalveolar lavage to exclude infection, haemorrhage and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute respiratory distress syndrome from infection or sepsis, Acute exacerbation of idiopathic pulmonary fibrosis or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lung-protective mechanical ventilation with low tidal volumes and supplemental oxygen for hypoxaemic respiratory failure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude treatable infection before attributing the illness to acute interstitial pneumonia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute interstitial pneumonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_interstitial_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT of the thorax",
+          "cells": [
+            {
+              "text": "Extent and phase of alveolar damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Excludes infection, haemorrhage and eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comprehensive microbiology, including atypical and viral pathogens",
+          "cells": [
+            {
+              "text": "Excludes infective causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and vasculitis serology",
+          "cells": [
+            {
+              "text": "Excludes connective tissue disease or vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Excludes cardiogenic pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical lung biopsy where feasible",
+          "cells": [
+            {
+              "text": "Confirms diffuse alveolar damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas analysis",
+          "cells": [
+            {
+              "text": "Degree of hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_interstitial_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "ARDS from infection or sepsis",
+          "cells": [
+            {
+              "text": "Identifiable infection or sepsis"
+            },
+            {
+              "text": "Microbiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute eosinophilic pneumonia",
+          "cells": [
+            {
+              "text": "Marked eosinophilia on lavage"
+            },
+            {
+              "text": "Bronchoalveolar lavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiogenic pulmonary oedema",
+          "cells": [
+            {
+              "text": "Cardiac cause of oedema"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_interstitial_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung-protective mechanical ventilation with low tidal volumes",
+          "cells": [
+            {
+              "text": "Hypoxaemic respiratory failure"
+            },
+            {
+              "text": "Supplemental oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Diffuse alveolar damage"
+            },
+            {
+              "text": "Given once mimics are excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad empirical antimicrobial cover",
+          "cells": [
+            {
+              "text": "Until infection is excluded"
+            },
+            {
+              "text": "By lavage and microbiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat mimics: sepsis, drug reactions, aspiration, connective tissue disease",
+          "cells": [
+            {
+              "text": "Mimics of the illness"
+            },
+            {
+              "text": "Exclude before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care support, with ECMO for refractory hypoxaemia",
+          "cells": [
+            {
+              "text": "Refractory hypoxaemia"
+            },
+            {
+              "text": "Extracorporeal membrane oxygenation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for fibrosis; lung transplant assessment",
+          "cells": [
+            {
+              "text": "Survivors with residual disease"
+            },
+            {
+              "text": "Residual fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary management",
+          "cells": [
+            {
+              "text": "Respiratory medicine, radiology and intensive care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_interstitial_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Acute interstitial pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly progressive breathlessness and hypoxaemia over days after a viral-like prodrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory hypoxaemia requiring mechanical ventilation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "ICU ventilation with lung-protective strategy; consider ECMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT, bronchoalveolar lavage, microbiology, serology and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection, eosinophilia and cardiac cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Empirical high-dose corticosteroids; continue to exclude mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the identified mimic: sepsis, eosinophilic pneumonia or cardiogenic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation with low tidal volumes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Broad empirical antimicrobial cover until infection excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for fibrosis; lung transplant assessment if residual disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High acute mortality; survivors may have residual fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

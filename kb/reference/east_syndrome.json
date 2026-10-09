@@ -1,176 +1,483 @@
 {
- "id": "east_syndrome",
- "name": "EAST/SeSAME syndrome (KCNJ10)",
- "aliases": [
-  "EAST syndrome",
-  "SeSAME syndrome",
-  "epilepsy ataxia sensorineural deafness tubulopathy",
-  "KCNJ10",
-  "Kir4.1 channelopathy"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel Kir4.1",
-   "Remember the acronyms: EAST (Epilepsy, Ataxia, Sensorineural deafness, Tubulopathy) and SeSAME (Seizures, Sensorineural deafness, Ataxia, Mental retardation, Electrolyte imbalance)",
-   "Seizures usually begin in infancy, followed by a non-progressive cerebellar ataxia and developmental delay",
-   "The renal phenotype resembles a Gitelman-like salt-losing tubulopathy with hypokalaemic metabolic alkalosis, hypomagnesaemia, and hypocalciuria",
-   "Sensorineural hearing loss reflects Kir4.1 expression in the stria vascularis of the inner ear",
-   "Management is supportive: anticonvulsants for seizures, potassium and magnesium supplementation, and rehabilitative support for deafness and ataxia",
-   "Consider the diagnosis in any child with early seizures plus an unexplained salt-losing tubulopathy, and confirm with KCNJ10 sequencing"
+  "id": "east_syndrome",
+  "name": "EAST/SeSAME syndrome (KCNJ10)",
+  "aliases": [
+    "EAST syndrome",
+    "SeSAME syndrome",
+    "epilepsy ataxia sensorineural deafness tubulopathy",
+    "KCNJ10",
+    "Kir4.1 channelopathy"
   ],
-  "pathophysiology": "Kir4.1 is an inwardly rectifying potassium channel expressed in glial cells of the brain, the stria vascularis of the cochlea, and the basolateral membrane of the distal convoluted tubule. In the kidney it recycles potassium to maintain the activity of the basolateral sodium-potassium ATPase, so that loss of Kir4.1 function impairs sodium chloride reabsorption in the distal tubule, producing a Gitelman-like picture of renal salt wasting, hypokalaemic alkalosis, hypomagnesaemia, and reduced urinary calcium. Loss of the channel in astrocytes disturbs potassium buffering and glutamate handling, giving rise to epilepsy and cerebellar dysfunction, while its absence in the inner ear disrupts the endocochlear potential and causes sensorineural deafness.",
-  "additionalDifferentials": [
-   "Gitelman syndrome",
-   "Bartter syndrome",
-   "Mitochondrial cytopathies with deafness and tubulopathy",
-   "Other genetic epileptic encephalopathies",
-   "Congenital sensorineural deafness syndromes (e.g. Pendred, Usher)",
-   "Primary cerebellar ataxias"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia",
-   "Venous blood gas showing metabolic alkalosis",
-   "Spot urinary calcium-to-creatinine ratio showing hypocalciuria",
-   "Audiometry and brainstem auditory evoked responses for sensorineural loss",
-   "MRI brain and electroencephalography for seizures and cerebellar signs",
-   "KCNJ10 gene sequencing to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Poorly controlled or status epilepticus in infancy",
-   "Severe symptomatic hypokalaemia risking cardiac arrhythmia",
-   "Profound hypomagnesaemia precipitating tetany or seizures",
-   "Failure to thrive and developmental regression"
-  ],
-  "prognosis": "Seizures and electrolyte disturbances are usually manageable with treatment and the ataxia is typically non-progressive, but neurodevelopmental delay and permanent sensorineural deafness contribute to long-term disability; renal salt wasting generally does not progress to renal failure.",
-  "pitfalls": [
-   "Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features",
-   "Attributing the seizures to a primary epilepsy without checking electrolytes",
-   "Under-recognising hypomagnesaemia as a contributor to seizure threshold",
-   "Missing early hearing loss that would benefit from amplification"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM entry for EAST/SeSAME syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control the infantile-onset seizures with antiseizure medication",
-   "Correct the Gitelman-like salt-losing tubulopathy with oral potassium and magnesium supplementation",
-   "Add potassium-sparing or aldosterone-antagonist therapy and sodium supplementation as needed for renal salt wasting and hypokalaemic alkalosis",
-   "Provide rehabilitative support for cerebellar ataxia and developmental delay through physiotherapy, occupational therapy and educational support",
-   "Offer hearing rehabilitation for sensorineural deafness, including hearing aids or cochlear implantation",
-   "Monitor serum electrolytes, magnesium and renal function over the long term",
-   "Offer genetic counselling and family testing given autosomal recessive KCNJ10 inheritance",
-   "Coordinate multidisciplinary care across nephrology, neurology, audiology and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "east_syndrome-pathway",
-   "title": "EAST/SeSAME syndrome (KCNJ10): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel Kir4.1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Poorly controlled or status epilepticus in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia, Venous blood gas showing metabolic alkalosis, Spot urinary calcium-to-creatinine ratio showing hypocalciuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control the infantile-onset seizures with antiseizure medication"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of east/sesame syndrome (kcnj10)."
-  }
- ],
- "tables": [
-  {
-   "id": "east_syndrome-matrix",
-   "title": "EAST/SeSAME syndrome (KCNJ10): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel Kir4.1",
+      "Remember the acronyms: EAST (Epilepsy, Ataxia, Sensorineural deafness, Tubulopathy) and SeSAME (Seizures, Sensorineural deafness, Ataxia, Mental retardation, Electrolyte imbalance)",
+      "Seizures usually begin in infancy, followed by a non-progressive cerebellar ataxia and developmental delay",
+      "The renal phenotype resembles a Gitelman-like salt-losing tubulopathy with hypokalaemic metabolic alkalosis, hypomagnesaemia, and hypocalciuria",
+      "Sensorineural hearing loss reflects Kir4.1 expression in the stria vascularis of the inner ear",
+      "Management is supportive: anticonvulsants for seizures, potassium and magnesium supplementation, and rehabilitative support for deafness and ataxia",
+      "Consider the diagnosis in any child with early seizures plus an unexplained salt-losing tubulopathy, and confirm with KCNJ10 sequencing"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia, Venous blood gas showing metabolic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kir4.1 is an inwardly rectifying potassium channel expressed in glial cells of the brain, the stria vascularis of the cochlea, and the basolateral membrane of the distal convoluted tubule. In the kidney it recycles potassium to maintain the activity of the basolateral sodium-potassium ATPase, so that loss of Kir4.1 function impairs sodium chloride reabsorption in the distal tubule, producing a Gitelman-like picture of renal salt wasting, hypokalaemic alkalosis, hypomagnesaemia, and reduced urinary calcium. Loss of the channel in astrocytes disturbs potassium buffering and glutamate handling, giving rise to epilepsy and cerebellar dysfunction, while its absence in the inner ear disrupts the endocochlear potential and causes sensorineural deafness.",
+    "additionalDifferentials": [
+      "Gitelman syndrome",
+      "Bartter syndrome",
+      "Mitochondrial cytopathies with deafness and tubulopathy",
+      "Other genetic epileptic encephalopathies",
+      "Congenital sensorineural deafness syndromes (e.g. Pendred, Usher)",
+      "Primary cerebellar ataxias"
     ],
-    [
-     "Primary Differentials",
-     "Gitelman syndrome, Bartter syndrome, Mitochondrial cytopathies with deafness and tubulopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia",
+      "Venous blood gas showing metabolic alkalosis",
+      "Spot urinary calcium-to-creatinine ratio showing hypocalciuria",
+      "Audiometry and brainstem auditory evoked responses for sensorineural loss",
+      "MRI brain and electroencephalography for seizures and cerebellar signs",
+      "KCNJ10 gene sequencing to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Control the infantile-onset seizures with antiseizure medication",
-     "Core treatment modality"
+    "redFlags": [
+      "Poorly controlled or status epilepticus in infancy",
+      "Severe symptomatic hypokalaemia risking cardiac arrhythmia",
+      "Profound hypomagnesaemia precipitating tetany or seizures",
+      "Failure to thrive and developmental regression"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Seizures and electrolyte disturbances are usually manageable with treatment and the ataxia is typically non-progressive, but neurodevelopmental delay and permanent sensorineural deafness contribute to long-term disability; renal salt wasting generally does not progress to renal failure.",
+    "pitfalls": [
+      "Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features",
+      "Attributing the seizures to a primary epilepsy without checking electrolytes",
+      "Under-recognising hypomagnesaemia as a contributor to seizure threshold",
+      "Missing early hearing loss that would benefit from amplification"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM entry for EAST/SeSAME syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control the infantile-onset seizures with antiseizure medication",
+      "Correct the Gitelman-like salt-losing tubulopathy with oral potassium and magnesium supplementation",
+      "Add potassium-sparing or aldosterone-antagonist therapy and sodium supplementation as needed for renal salt wasting and hypokalaemic alkalosis",
+      "Provide rehabilitative support for cerebellar ataxia and developmental delay through physiotherapy, occupational therapy and educational support",
+      "Offer hearing rehabilitation for sensorineural deafness, including hearing aids or cochlear implantation",
+      "Monitor serum electrolytes, magnesium and renal function over the long term",
+      "Offer genetic counselling and family testing given autosomal recessive KCNJ10 inheritance",
+      "Coordinate multidisciplinary care across nephrology, neurology, audiology and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for east/sesame syndrome (kcnj10)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "east-syndrome-real-image",
-   "title": "EAST/SeSAME syndrome (KCNJ10): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "east_syndrome-pathway",
+      "title": "EAST/SeSAME syndrome (KCNJ10): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel Kir4.1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Poorly controlled or status epilepticus in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia, Venous blood gas showing metabolic alkalosis, Spot urinary calcium-to-creatinine ratio showing hypocalciuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control the infantile-onset seizures with antiseizure medication"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of east/sesame syndrome (kcnj10)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "east_syndrome-matrix",
+      "title": "EAST/SeSAME syndrome (KCNJ10): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by loss-of-function variants in KCNJ10, encoding the inwardly rectifying potassium channel",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes including magnesium demonstrating hypokalaemia and hypomagnesaemia, Venous blood gas showing metabolic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gitelman syndrome, Bartter syndrome, Mitochondrial cytopathies with deafness and tubulopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control the infantile-onset seizures with antiseizure medication",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the tubulopathy as isolated Gitelman syndrome and overlooking the neurological features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for east/sesame syndrome (kcnj10)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "east_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes including magnesium",
+          "cells": [
+            {
+              "text": "Hypokalaemia and hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spot urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypocalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and brainstem auditory evoked responses",
+          "cells": [
+            {
+              "text": "Sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain and EEG",
+          "cells": [
+            {
+              "text": "Seizures and cerebellar signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNJ10 gene sequencing",
+          "cells": [
+            {
+              "text": "KCNJ10 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "east_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gitelman syndrome",
+          "cells": [
+            {
+              "text": "Salt-losing tubulopathy without neurological features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartter syndrome",
+          "cells": [
+            {
+              "text": "Salt-losing tubulopathy with a different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pendred or Usher syndrome",
+          "cells": [
+            {
+              "text": "Deafness without the tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "east_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For infantile-onset seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral potassium and magnesium",
+          "cells": [
+            {
+              "text": "Corrects the Gitelman-like tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing or aldosterone antagonist",
+          "cells": [
+            {
+              "text": "Renal salt wasting and hypokalaemic alkalosis, with sodium as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and educational support for ataxia and delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes, magnesium and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive KCNJ10; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "east_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of EAST/SeSAME syndrome (KCNJ10)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected EAST/SeSAME syndrome: infant seizures with salt-losing tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, severe hypokalaemia, profound hypomagnesaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium and magnesium replacement with cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes with magnesium; venous gas; urine calcium ratio; audiometry; KCNJ10",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a KCNJ10 variant found with hypokalaemia and hypocalciuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman, Bartter, mitochondrial tubulopathy or other epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication for infantile-onset seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral potassium and magnesium to correct the tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium-sparing agent and sodium supplementation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for sensorineural deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term electrolyte, magnesium and renal monitoring; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Seizures and electrolytes manageable; deafness and developmental delay add disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

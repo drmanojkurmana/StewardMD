@@ -1,172 +1,461 @@
 {
- "id": "mal_de_debarquement_syndrome",
- "name": "Mal de debarquement syndrome",
- "aliases": [
-  "MdDS",
-  "disembarkment syndrome",
-  "sickness of disembarkment"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following passive motion, most often a sea voyage or long flight",
-   "The perceived self-motion is typically relieved, at least temporarily, by re-exposure to passive motion such as driving a car",
-   "Unlike motion sickness, there is usually no nausea or vertigo, and the dominant complaint is the internal sense of movement",
-   "Diagnosis is clinical and requires exclusion of vestibular, neurological, and other causes of imbalance",
-   "Symptoms lasting only days after travel are common and self-limiting; the syndrome proper is diagnosed when the rocking persists for weeks or longer",
-   "Vestibular rehabilitation and habituation strategies are central to management, and stress or fatigue tends to aggravate symptoms",
-   "It is thought to reflect a failure of the brain to readapt from the motion-adapted state back to a stable environment"
+  "id": "mal_de_debarquement_syndrome",
+  "name": "Mal de debarquement syndrome",
+  "aliases": [
+    "MdDS",
+    "disembarkment syndrome",
+    "sickness of disembarkment"
   ],
-  "pathophysiology": "Mal de debarquement syndrome is understood as a disorder of central vestibular adaptation. During sustained passive motion the brain adapts its internal model of self-motion and postural control; on return to a stable environment this adaptation normally reverses quickly, but in MdDS the maladaptive state persists, so the person continues to perceive rocking or swaying. Re-exposure to motion transiently restores the adapted state and eases symptoms, which supports a central sensory reweighting mechanism rather than peripheral vestibular dysfunction.",
-  "additionalDifferentials": [
-   "Vestibular migraine",
-   "Persistent postural-perceptual dizziness",
-   "Peripheral vestibular disorders (e.g. vestibular neuritis, benign paroxysmal positional vertigo)",
-   "Central neurological causes of imbalance",
-   "Ordinary motion sickness or transient post-voyage unsteadiness",
-   "Anxiety-related dizziness"
-  ],
-  "additionalInvestigations": [
-   "Detailed clinical history linking onset to a period of passive motion",
-   "Neurological and vestibular examination to exclude central and peripheral disease",
-   "Audiometry and vestibular function testing where a peripheral cause is suspected",
-   "Brain imaging (MRI) if focal neurological features or atypical presentation",
-   "Assessment for migraine and psychological contributors"
-  ],
-  "redFlags": [
-   "Focal neurological signs suggesting a central lesion",
-   "True rotational vertigo, hearing loss, or tinnitus pointing to a vestibular disorder",
-   "Progressive or asymmetric symptoms atypical for MdDS",
-   "Severe functional impairment or associated mood disturbance"
-  ],
-  "prognosis": "Many cases that follow travel resolve spontaneously within days to weeks, but a proportion become persistent and can wax and wane over months to years; vestibular rehabilitation and habituation help, though a subset have a chronic, relapsing course.",
-  "pitfalls": [
-   "Confusing MdDS with ordinary motion sickness or peripheral vertigo",
-   "Failing to note the characteristic relief with re-exposure to motion",
-   "Missing vestibular migraine or persistent postural-perceptual dizziness as alternatives",
-   "Under-recognising the impact of stress, fatigue, and anxiety on symptoms"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation",
-   "Reassurance and explanation, with early expectation that many travel-triggered cases resolve spontaneously",
-   "Avoid habitual re-exposure to passive motion as a coping strategy despite its transient relief, and manage stress and fatigue that aggravate symptoms",
-   "Optic-flow readaptation protocols, using full-field visual stimulation synchronised to head roll, in specialised centres for persistent cases",
-   "Pharmacological adjuncts targeting central mechanisms, such as a benzodiazepine (clonazepam) or an SSRI/SNRI, for symptom relief, with treatment of coexisting migraine",
-   "Address psychological comorbidity such as anxiety and depression with cognitive behavioural therapy and support",
-   "Neuro-otology referral with confirmation of the diagnosis by excluding vestibular and neurological causes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mal_de_debarquement_syndrome-pathway",
-   "title": "Mal de debarquement syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following passive motion, most often a sea voyage or long flight",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal neurological signs suggesting a central lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed clinical history linking onset to a period of passive motion, Neurological and vestibular examination to exclude central and peripheral disease, Audiometry and vestibular function testing where a peripheral cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing MdDS with ordinary motion sickness or peripheral vertigo"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mal de debarquement syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mal_de_debarquement_syndrome-matrix",
-   "title": "Mal de debarquement syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following passive motion, most often a sea voyage or long flight",
+      "The perceived self-motion is typically relieved, at least temporarily, by re-exposure to passive motion such as driving a car",
+      "Unlike motion sickness, there is usually no nausea or vertigo, and the dominant complaint is the internal sense of movement",
+      "Diagnosis is clinical and requires exclusion of vestibular, neurological, and other causes of imbalance",
+      "Symptoms lasting only days after travel are common and self-limiting; the syndrome proper is diagnosed when the rocking persists for weeks or longer",
+      "Vestibular rehabilitation and habituation strategies are central to management, and stress or fatigue tends to aggravate symptoms",
+      "It is thought to reflect a failure of the brain to readapt from the motion-adapted state back to a stable environment"
     ],
-    [
-     "Key Investigations",
-     "Detailed clinical history linking onset to a period of passive motion, Neurological and vestibular examination to exclude central",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mal de debarquement syndrome is understood as a disorder of central vestibular adaptation. During sustained passive motion the brain adapts its internal model of self-motion and postural control; on return to a stable environment this adaptation normally reverses quickly, but in MdDS the maladaptive state persists, so the person continues to perceive rocking or swaying. Re-exposure to motion transiently restores the adapted state and eases symptoms, which supports a central sensory reweighting mechanism rather than peripheral vestibular dysfunction.",
+    "additionalDifferentials": [
+      "Vestibular migraine",
+      "Persistent postural-perceptual dizziness",
+      "Peripheral vestibular disorders (e.g. vestibular neuritis, benign paroxysmal positional vertigo)",
+      "Central neurological causes of imbalance",
+      "Ordinary motion sickness or transient post-voyage unsteadiness",
+      "Anxiety-related dizziness"
     ],
-    [
-     "Primary Differentials",
-     "Vestibular migraine, Persistent postural-perceptual dizziness, Peripheral vestibular disorders (e.g. vestibular neuritis, benign",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed clinical history linking onset to a period of passive motion",
+      "Neurological and vestibular examination to exclude central and peripheral disease",
+      "Audiometry and vestibular function testing where a peripheral cause is suspected",
+      "Brain imaging (MRI) if focal neurological features or atypical presentation",
+      "Assessment for migraine and psychological contributors"
     ],
-    [
-     "Management Strategy",
-     "Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal neurological signs suggesting a central lesion",
+      "True rotational vertigo, hearing loss, or tinnitus pointing to a vestibular disorder",
+      "Progressive or asymmetric symptoms atypical for MdDS",
+      "Severe functional impairment or associated mood disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing MdDS with ordinary motion sickness or peripheral vertigo",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many cases that follow travel resolve spontaneously within days to weeks, but a proportion become persistent and can wax and wane over months to years; vestibular rehabilitation and habituation help, though a subset have a chronic, relapsing course.",
+    "pitfalls": [
+      "Confusing MdDS with ordinary motion sickness or peripheral vertigo",
+      "Failing to note the characteristic relief with re-exposure to motion",
+      "Missing vestibular migraine or persistent postural-perceptual dizziness as alternatives",
+      "Under-recognising the impact of stress, fatigue, and anxiety on symptoms"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation",
+      "Reassurance and explanation, with early expectation that many travel-triggered cases resolve spontaneously",
+      "Avoid habitual re-exposure to passive motion as a coping strategy despite its transient relief, and manage stress and fatigue that aggravate symptoms",
+      "Optic-flow readaptation protocols, using full-field visual stimulation synchronised to head roll, in specialised centres for persistent cases",
+      "Pharmacological adjuncts targeting central mechanisms, such as a benzodiazepine (clonazepam) or an SSRI/SNRI, for symptom relief, with treatment of coexisting migraine",
+      "Address psychological comorbidity such as anxiety and depression with cognitive behavioural therapy and support",
+      "Neuro-otology referral with confirmation of the diagnosis by excluding vestibular and neurological causes"
     ]
-   ],
-   "caption": "Overview comparison matrix for mal de debarquement syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mal-de-debarquement-syndrome-real-image",
-   "title": "Mal de debarquement syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mal_de_debarquement_syndrome-pathway",
+      "title": "Mal de debarquement syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following passive motion, most often a sea voyage or long flight",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal neurological signs suggesting a central lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed clinical history linking onset to a period of passive motion, Neurological and vestibular examination to exclude central and peripheral disease, Audiometry and vestibular function testing where a peripheral cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing MdDS with ordinary motion sickness or peripheral vertigo"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mal de debarquement syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mal_de_debarquement_syndrome-matrix",
+      "title": "Mal de debarquement syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a persistent sensation of rocking, swaying, or bobbing that continues after returning to stable ground following",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed clinical history linking onset to a period of passive motion, Neurological and vestibular examination to exclude central",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vestibular migraine, Persistent postural-perceptual dizziness, Peripheral vestibular disorders (e.g. vestibular neuritis, benign",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vestibular rehabilitation and habituation exercises are the mainstay, retraining central vestibular adaptation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing MdDS with ordinary motion sickness or peripheral vertigo",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mal de debarquement syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mal_de_debarquement_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History linking onset to passive motion",
+          "cells": [
+            {
+              "text": "Typical trigger and relief pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and vestibular examination",
+          "cells": [
+            {
+              "text": "Central and peripheral causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and vestibular function testing",
+          "cells": [
+            {
+              "text": "Peripheral cause suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Focal signs or atypical presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine and psychological assessment",
+          "cells": [
+            {
+              "text": "Contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mal_de_debarquement_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vestibular migraine",
+          "cells": [
+            {
+              "text": "Migrainous features and triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent postural-perceptual dizziness",
+          "cells": [
+            {
+              "text": "Symptoms on standing and in busy environments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral vestibular disorders",
+          "cells": [
+            {
+              "text": "Rotational vertigo, hearing loss or tinnitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ordinary motion sickness",
+          "cells": [
+            {
+              "text": "Nausea and short duration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mal_de_debarquement_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vestibular rehabilitation",
+          "cells": [
+            {
+              "text": "Habituation exercises as the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Many travel-triggered cases resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coping",
+          "cells": [
+            {
+              "text": "Avoid habitual re-exposure to motion; manage stress and fatigue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic-flow readaptation",
+          "cells": [
+            {
+              "text": "Specialist centres for persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological adjuncts",
+          "cells": [
+            {
+              "text": "Clonazepam or SSRI or SNRI for symptom relief"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mal_de_debarquement_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mal de debarquement syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent rocking sensation after a period of passive motion such as sea or air travel",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal neurological signs or true vertigo with hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neuro-otology review for central signs or atypical features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical history, neurological and vestibular examination, audiometry if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the rocking persist for weeks with vestibular and neurological causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vestibular migraine, postural-perceptual dizziness or peripheral vertigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vestibular rehabilitation and habituation exercises",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure that travel-triggered cases often settle",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage stress and fatigue that worsen symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clonazepam or an SSRI or SNRI for severe symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neuro-otology referral for persistent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many resolve within days to weeks; some persist for months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

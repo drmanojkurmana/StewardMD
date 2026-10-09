@@ -1,0 +1,563 @@
+{
+  "id": "adult_jaundice",
+  "name": "Jaundice in adults: diagnostic approach",
+  "aliases": [
+    "adult jaundice",
+    "hyperbilirubinaemia in adults",
+    "icterus",
+    "approach to jaundice"
+  ],
+  "class": "non_infective",
+  "system": "Hepatobiliary / Gastrointestinal",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Manual of Medicine",
+    "sourceEdition": "20e",
+    "pages": null,
+    "clinicalPearls": [],
+    "pathophysiology": "",
+    "additionalDifferentials": [],
+    "additionalInvestigations": [],
+    "redFlags": [],
+    "prognosis": "",
+    "pitfalls": [],
+    "references": [
+      "Harrison's Manual of Medicine, 20th ed."
+    ],
+    "crossLinks": [
+      "neonatal_jaundice",
+      "evaluation_of_liver_function"
+    ],
+    "management": []
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [],
+  "tables": [],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c5",
+      "label": "Harrison's Manual of Medicine, 20th ed., chart: algorithm for the patient with jaundice",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Merck Manual Professional, Jaundice",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/jaundice",
+      "kind": "web"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adult-jaundice-approach",
+      "title": "Working up jaundice in an adult",
+      "start": "j1",
+      "nodes": [
+        {
+          "id": "j1",
+          "type": "start",
+          "text": "Take a history (including every medicine and drug exposure), examine, and send bilirubin with direct/indirect split, ALT, AST, alkaline phosphatase, PT and albumin",
+          "cite": "c5"
+        },
+        {
+          "id": "j2",
+          "type": "decision",
+          "text": "Is bilirubin the only abnormal liver test?",
+          "cite": "c5"
+        },
+        {
+          "id": "j3",
+          "type": "decision",
+          "text": "What share of total bilirubin is direct (conjugated)?",
+          "cite": "c5"
+        },
+        {
+          "id": "j4",
+          "type": "outcome",
+          "text": "Consider inherited conjugated hyperbilirubinaemia: Dubin-Johnson or Rotor syndrome",
+          "cite": "c5"
+        },
+        {
+          "id": "j5",
+          "type": "outcome",
+          "text": "Consider drugs (rifampicin, probenecid), inherited causes (Gilbert, Crigler-Najjar), haemolysis, or ineffective erythropoiesis",
+          "cite": "c5"
+        },
+        {
+          "id": "j6",
+          "type": "decision",
+          "text": "Which pattern dominates the other liver tests?",
+          "cite": "c5"
+        },
+        {
+          "id": "j7",
+          "type": "action",
+          "text": "Hepatocellular work-up: hepatitis A IgM, HBsAg and hepatitis B core IgM, HCV RNA; toxicology screen with paracetamol (acetaminophen) level; ceruloplasmin if under 40 years; ANA, smooth-muscle antibody, serum protein electrophoresis",
+          "cite": "c5"
+        },
+        {
+          "id": "j8",
+          "type": "decision",
+          "text": "Did the first-line hepatocellular tests find a cause?",
+          "cite": "c5"
+        },
+        {
+          "id": "j9",
+          "type": "action",
+          "text": "Second-line tests: CMV DNA, EBV capsid antigen, hepatitis D antibody if indicated, hepatitis E IgM if indicated",
+          "cite": "c5"
+        },
+        {
+          "id": "j10",
+          "type": "decision",
+          "text": "Did the second-line tests find a cause?",
+          "cite": "c5"
+        },
+        {
+          "id": "j11",
+          "type": "outcome",
+          "text": "Liver biopsy",
+          "cite": "c5"
+        },
+        {
+          "id": "j12",
+          "type": "outcome",
+          "text": "Cause identified by testing; cause-specific management is outside this chart (needs-source)",
+          "cite": "c5"
+        },
+        {
+          "id": "j13",
+          "type": "action",
+          "text": "Cholestatic work-up: abdominal ultrasound",
+          "cite": "c5"
+        },
+        {
+          "id": "j14",
+          "type": "decision",
+          "text": "Are the bile ducts dilated?",
+          "cite": "c5"
+        },
+        {
+          "id": "j15",
+          "type": "outcome",
+          "text": "CT, MRCP or ERCP",
+          "cite": "c5"
+        },
+        {
+          "id": "j16",
+          "type": "action",
+          "text": "Serology: antimitochondrial antibody (AMA), hepatitis serologies including hepatitis A, CMV, EBV; review the drug list",
+          "cite": "c5"
+        },
+        {
+          "id": "j17",
+          "type": "decision",
+          "text": "Serology result?",
+          "cite": "c5"
+        },
+        {
+          "id": "j18",
+          "type": "outcome",
+          "text": "MRCP or liver biopsy",
+          "cite": "c5"
+        }
+      ],
+      "edges": [
+        {
+          "from": "j1",
+          "to": "j2",
+          "label": "Next"
+        },
+        {
+          "from": "j2",
+          "to": "j3",
+          "label": "Yes, bilirubin alone"
+        },
+        {
+          "from": "j2",
+          "to": "j6",
+          "label": "No, other liver tests also raised"
+        },
+        {
+          "from": "j3",
+          "to": "j4",
+          "label": "Direct over 15% of total"
+        },
+        {
+          "from": "j3",
+          "to": "j5",
+          "label": "Direct under 15% (mainly indirect)"
+        },
+        {
+          "from": "j6",
+          "to": "j7",
+          "label": "Hepatocellular: ALT/AST raised out of proportion to ALP"
+        },
+        {
+          "from": "j6",
+          "to": "j13",
+          "label": "Cholestatic: ALP raised out of proportion to ALT/AST"
+        },
+        {
+          "from": "j7",
+          "to": "j8",
+          "label": "Next"
+        },
+        {
+          "from": "j8",
+          "to": "j12",
+          "label": "Yes"
+        },
+        {
+          "from": "j8",
+          "to": "j9",
+          "label": "No, all negative"
+        },
+        {
+          "from": "j9",
+          "to": "j10",
+          "label": "Next"
+        },
+        {
+          "from": "j10",
+          "to": "j12",
+          "label": "Yes"
+        },
+        {
+          "from": "j10",
+          "to": "j11",
+          "label": "No, all negative"
+        },
+        {
+          "from": "j13",
+          "to": "j14",
+          "label": "Next"
+        },
+        {
+          "from": "j14",
+          "to": "j15",
+          "label": "Yes"
+        },
+        {
+          "from": "j14",
+          "to": "j16",
+          "label": "No"
+        },
+        {
+          "from": "j16",
+          "to": "j17",
+          "label": "Next"
+        },
+        {
+          "from": "j17",
+          "to": "j11",
+          "label": "AMA positive"
+        },
+        {
+          "from": "j17",
+          "to": "j18",
+          "label": "All negative"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adult_jaundice-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key values in jaundice",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilirubin at which jaundice is visible",
+          "cells": [
+            {
+              "text": "about 2 to 3 mg/dL (34 to 51 micromol/L)",
+              "range": [
+                2,
+                3
+              ]
+            },
+            {
+              "text": "Mild jaundice is best seen in the sclerae in daylight, usually from 2 to 2.5 mg/dL"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hepatocellular pattern",
+          "cells": [
+            {
+              "text": "Aminotransferases >500 U/L with ALP <3 times normal",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Points to hepatocellular dysfunction"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Cholestatic pattern",
+          "cells": [
+            {
+              "text": "Aminotransferases <200 U/L with ALP and GGT >3 times normal",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "{{hy:Points to cholestasis; image the bile ducts}}"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Haemolysis",
+          "cells": [
+            {
+              "text": "Bilirubin usually <3.5 mg/dL (<59 micromol/L)",
+              "op": "<",
+              "value": 3.5
+            },
+            {
+              "text": "No bilirubinuria and normal aminotransferases; confirm on peripheral smear"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Direct fraction when bilirubin is the only abnormal test",
+          "cells": [
+            {
+              "text": "Direct >15% of total",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Suggests Dubin-Johnson or Rotor syndrome; under 15% suggests Gilbert, haemolysis or drugs"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Urine bilirubin",
+          "cells": [
+            {
+              "text": "Present only with conjugated hyperbilirubinaemia"
+            },
+            {
+              "text": "Unconjugated bilirubin does not appear in urine"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The 15% direct-fraction cut-off comes from the Harrison's chart; Merck uses fractionation without a stated cut-off."
+    },
+    {
+      "id": "adult_jaundice-ddx",
+      "kind": "ddx",
+      "title": "Causes of jaundice and how they differ",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolysis",
+          "cells": [
+            {
+              "text": "Few liver signs, sometimes anaemia; unconjugated rise"
+            },
+            {
+              "text": "Peripheral smear"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gilbert syndrome",
+          "cells": [
+            {
+              "text": "Recurrent mild jaundice with no liver dysfunction, often familial"
+            },
+            {
+              "text": "Bilirubin fractionation with normal liver enzymes"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Viral hepatitis",
+          "cells": [
+            {
+              "text": "Acute jaundice in a young healthy person, often after fever, malaise and myalgia, or with risk factors"
+            },
+            {
+              "text": "Hepatitis A IgM, HBsAg and hepatitis B core IgM, HCV RNA"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Drug-induced liver injury",
+          "cells": [
+            {
+              "text": "Acute jaundice after a new exposure: paracetamol, amiodarone, isoniazid, NSAIDs, statins (hepatocellular); amoxicillin-clavulanate, anabolic steroids, oral contraceptives (cholestatic)"
+            },
+            {
+              "text": "Drug history; paracetamol level"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Alcohol-related liver disease",
+          "cells": [
+            {
+              "text": "Long heavy drinking; Dupuytren contracture, palmar erythema, spider angiomas, gynaecomastia, testicular atrophy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Common bile duct stone",
+          "cells": [
+            {
+              "text": "Colicky right upper quadrant pain; constant pain with fever and rigors suggests cholangitis"
+            },
+            {
+              "text": "{{hy:Abdominal ultrasound first}}, then MRCP, EUS or ERCP"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pancreatic or biliary cancer",
+          "cells": [
+            {
+              "text": "Older patient, painless jaundice, weight loss, abdominal mass, little itch"
+            },
+            {
+              "text": "CT (better for pancreatic lesions)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Primary biliary cholangitis",
+          "cells": [
+            {
+              "text": "Itch, xanthomas, hyperpigmentation"
+            },
+            {
+              "text": "Antimitochondrial antibody"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Primary sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Associated with inflammatory bowel disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Dubin-Johnson or Rotor syndrome",
+          "cells": [
+            {
+              "text": "Conjugated rise with normal liver enzymes"
+            },
+            {
+              "text": "Bilirubin fractionation"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Features are from Merck; the viral serology panel and the AMA test are from the Harrison's jaundice chart (c5)."
+    },
+    {
+      "id": "adult_jaundice-treatment",
+      "kind": "treatment",
+      "title": "Managing jaundice in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause and its complications",
+          "cells": [
+            {
+              "text": "Every patient"
+            },
+            {
+              "text": "{{hy:Jaundice itself needs no treatment in adults}}"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Cholestyramine 2 to 8 g orally twice daily",
+          "cells": [
+            {
+              "text": "Itch from cholestasis"
+            },
+            {
+              "text": "Does not work in complete biliary obstruction"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "ERCP",
+          "cells": [
+            {
+              "text": "Extrahepatic obstruction from stones or strictures"
+            },
+            {
+              "text": "Removes stones and places stents; more invasive than MRCP or EUS"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Cause still unclear after serology and imaging"
+            },
+            {
+              "text": "Helps in intrahepatic cholestasis, some hepatitides, infiltrative disease, haemochromatosis, Wilson disease"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    }
+  ]
+}

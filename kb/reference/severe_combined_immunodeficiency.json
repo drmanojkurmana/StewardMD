@@ -1,172 +1,430 @@
 {
- "id": "severe_combined_immunodeficiency",
- "name": "Severe combined immunodeficiency",
- "aliases": [
-  "SCID",
-  "bubble boy disease",
-  "combined T- and B-cell immunodeficiency"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell involvement, causing severe combined immune failure",
-   "Affected infants typically present in the first months of life with recurrent, severe, or opportunistic infections, chronic diarrhoea, and failure to thrive",
-   "Persistent or unusual infections such as Pneumocystis pneumonia, chronic candidiasis, and disseminated viral disease are characteristic",
-   "Absence of a thymic shadow and marked lymphopenia are important early clues",
-   "Genetic causes are heterogeneous and include X-linked common gamma-chain defects, adenosine deaminase deficiency, and several autosomal recessive gene defects",
-   "Newborn screening using T-cell receptor excision circles enables presymptomatic detection and early treatment",
-   "Definitive treatment is immune reconstitution, principally haematopoietic stem cell transplantation, with gene therapy and enzyme replacement for specific subtypes",
-   "Early diagnosis before infections develop markedly improves transplant outcomes"
+  "id": "severe_combined_immunodeficiency",
+  "name": "Severe combined immunodeficiency",
+  "aliases": [
+    "SCID",
+    "bubble boy disease",
+    "combined T- and B-cell immunodeficiency"
   ],
-  "pathophysiology": "Severe combined immunodeficiency comprises a genetically diverse group of disorders that share a failure of adaptive immunity due to absent or non-functional T lymphocytes, with associated defects in B-cell and sometimes natural killer cell function. Underlying defects disrupt lymphocyte development or function through varied mechanisms, such as impaired cytokine receptor signalling in common gamma-chain deficiency, toxic metabolite accumulation in adenosine deaminase deficiency, or failure of antigen-receptor gene rearrangement. Without functional T cells, the coordinated immune response to pathogens collapses, leaving infants unable to clear common and opportunistic organisms. Most forms are inherited in an autosomal recessive manner, with the common gamma-chain form being X-linked.",
-  "additionalDifferentials": [
-   "HIV infection in infancy",
-   "Other combined immunodeficiencies of lesser severity",
-   "DiGeorge syndrome with severe thymic hypoplasia",
-   "Wiskott-Aldrich syndrome",
-   "Secondary immunodeficiency and severe malnutrition"
-  ],
-  "additionalInvestigations": [
-   "Newborn screening for low T-cell receptor excision circles where available",
-   "Full blood count with lymphocyte subset quantification",
-   "Immunoglobulin levels and functional lymphocyte proliferation studies",
-   "Molecular genetic testing to define the specific subtype",
-   "Adenosine deaminase enzyme assay and chest imaging for thymic assessment"
-  ],
-  "redFlags": [
-   "This is a paediatric emergency: suspected SCID requires immediate specialist referral and protective isolation",
-   "Live vaccines, including BCG and rotavirus, are contraindicated and can cause fatal disseminated infection",
-   "Blood products must be irradiated, cytomegalovirus-safe, and leucodepleted to prevent transfusion-associated graft-versus-host disease",
-   "Any infection can rapidly become life-threatening and needs urgent aggressive management"
-  ],
-  "prognosis": "Without immune reconstitution the condition is usually fatal within the first year or two of life, but early haematopoietic stem cell transplantation, particularly before infections occur, offers a high chance of long-term survival and immune recovery.",
-  "pitfalls": [
-   "Administering live vaccines before immunodeficiency is excluded",
-   "Transfusing non-irradiated blood products",
-   "Delaying referral by attributing recurrent infections to ordinary childhood illness",
-   "Overlooking lymphopenia on a routine full blood count"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop",
-   "Gene therapy for selected genotypes and enzyme replacement with pegademase for adenosine deaminase deficiency as a bridge",
-   "Protective isolation and strict infection-prevention measures pending immune reconstitution",
-   "Antimicrobial prophylaxis against Pneumocystis with co-trimoxazole, plus antifungal and antiviral cover",
-   "Immunoglobulin replacement therapy to cover the antibody deficiency",
-   "Use only irradiated, cytomegalovirus-safe, leucodepleted blood products and withhold live vaccines",
-   "Genetic counselling, carrier testing, and family screening, with newborn screening of siblings",
-   "Manage through immunology and transplant multidisciplinary teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "severe_combined_immunodeficiency-pathway",
-   "title": "Severe combined immunodeficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell involvement, causing severe combined immune failure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: This is a paediatric emergency: suspected SCID requires immediate specialist referral and protective isolation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Newborn screening for low T-cell receptor excision circles where available, Full blood count with lymphocyte subset quantification, Immunoglobulin levels and functional lymphocyte proliferation studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering live vaccines before immunodeficiency is excluded"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of severe combined immunodeficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "severe_combined_immunodeficiency-matrix",
-   "title": "Severe combined immunodeficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell involvement, causing severe combined immune failure",
+      "Affected infants typically present in the first months of life with recurrent, severe, or opportunistic infections, chronic diarrhoea, and failure to thrive",
+      "Persistent or unusual infections such as Pneumocystis pneumonia, chronic candidiasis, and disseminated viral disease are characteristic",
+      "Absence of a thymic shadow and marked lymphopenia are important early clues",
+      "Genetic causes are heterogeneous and include X-linked common gamma-chain defects, adenosine deaminase deficiency, and several autosomal recessive gene defects",
+      "Newborn screening using T-cell receptor excision circles enables presymptomatic detection and early treatment",
+      "Definitive treatment is immune reconstitution, principally haematopoietic stem cell transplantation, with gene therapy and enzyme replacement for specific subtypes",
+      "Early diagnosis before infections develop markedly improves transplant outcomes"
     ],
-    [
-     "Key Investigations",
-     "Newborn screening for low T-cell receptor excision circles where available, Full blood count with lymphocyte subset",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Severe combined immunodeficiency comprises a genetically diverse group of disorders that share a failure of adaptive immunity due to absent or non-functional T lymphocytes, with associated defects in B-cell and sometimes natural killer cell function. Underlying defects disrupt lymphocyte development or function through varied mechanisms, such as impaired cytokine receptor signalling in common gamma-chain deficiency, toxic metabolite accumulation in adenosine deaminase deficiency, or failure of antigen-receptor gene rearrangement. Without functional T cells, the coordinated immune response to pathogens collapses, leaving infants unable to clear common and opportunistic organisms. Most forms are inherited in an autosomal recessive manner, with the common gamma-chain form being X-linked.",
+    "additionalDifferentials": [
+      "HIV infection in infancy",
+      "Other combined immunodeficiencies of lesser severity",
+      "DiGeorge syndrome with severe thymic hypoplasia",
+      "Wiskott-Aldrich syndrome",
+      "Secondary immunodeficiency and severe malnutrition"
     ],
-    [
-     "Primary Differentials",
-     "HIV infection in infancy, Other combined immunodeficiencies of lesser severity, DiGeorge syndrome with severe thymic hypoplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Newborn screening for low T-cell receptor excision circles where available",
+      "Full blood count with lymphocyte subset quantification",
+      "Immunoglobulin levels and functional lymphocyte proliferation studies",
+      "Molecular genetic testing to define the specific subtype",
+      "Adenosine deaminase enzyme assay and chest imaging for thymic assessment"
     ],
-    [
-     "Management Strategy",
-     "Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop",
-     "Core treatment modality"
+    "redFlags": [
+      "This is a paediatric emergency: suspected SCID requires immediate specialist referral and protective isolation",
+      "Live vaccines, including BCG and rotavirus, are contraindicated and can cause fatal disseminated infection",
+      "Blood products must be irradiated, cytomegalovirus-safe, and leucodepleted to prevent transfusion-associated graft-versus-host disease",
+      "Any infection can rapidly become life-threatening and needs urgent aggressive management"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering live vaccines before immunodeficiency is excluded",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without immune reconstitution the condition is usually fatal within the first year or two of life, but early haematopoietic stem cell transplantation, particularly before infections occur, offers a high chance of long-term survival and immune recovery.",
+    "pitfalls": [
+      "Administering live vaccines before immunodeficiency is excluded",
+      "Transfusing non-irradiated blood products",
+      "Delaying referral by attributing recurrent infections to ordinary childhood illness",
+      "Overlooking lymphopenia on a routine full blood count"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop",
+      "Gene therapy for selected genotypes and enzyme replacement with pegademase for adenosine deaminase deficiency as a bridge",
+      "Protective isolation and strict infection-prevention measures pending immune reconstitution",
+      "Antimicrobial prophylaxis against Pneumocystis with co-trimoxazole, plus antifungal and antiviral cover",
+      "Immunoglobulin replacement therapy to cover the antibody deficiency",
+      "Use only irradiated, cytomegalovirus-safe, leucodepleted blood products and withhold live vaccines",
+      "Genetic counselling, carrier testing, and family screening, with newborn screening of siblings",
+      "Manage through immunology and transplant multidisciplinary teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for severe combined immunodeficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "severe-combined-immunodeficiency-real-image",
-   "title": "Severe combined immunodeficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "severe_combined_immunodeficiency-pathway",
+      "title": "Severe combined immunodeficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell involvement, causing severe combined immune failure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: This is a paediatric emergency: suspected SCID requires immediate specialist referral and protective isolation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Newborn screening for low T-cell receptor excision circles where available, Full blood count with lymphocyte subset quantification, Immunoglobulin levels and functional lymphocyte proliferation studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering live vaccines before immunodeficiency is excluded"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of severe combined immunodeficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "severe_combined_immunodeficiency-matrix",
+      "title": "Severe combined immunodeficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Group of inherited disorders defined by profound impairment of T-cell development, with variable B-cell and natural killer cell",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Newborn screening for low T-cell receptor excision circles where available, Full blood count with lymphocyte subset",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "HIV infection in infancy, Other combined immunodeficiencies of lesser severity, DiGeorge syndrome with severe thymic hypoplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Haematopoietic stem cell transplantation is the definitive curative therapy, ideally performed early before infections develop",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering live vaccines before immunodeficiency is excluded",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for severe combined immunodeficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "severe_combined_immunodeficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn screening for T-cell receptor excision circles",
+          "cells": [
+            {
+              "text": "Low TRECs; presymptomatic detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Marked lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulins and lymphocyte proliferation studies",
+          "cells": [
+            {
+              "text": "Functional antibody and T-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Defines the subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine deaminase assay and chest imaging",
+          "cells": [
+            {
+              "text": "ADA deficiency; absent thymic shadow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "severe_combined_immunodeficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive cure, ideally early before infections develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene therapy or enzyme replacement",
+          "cells": [
+            {
+              "text": "Selected genotypes; pegademase as a bridge in ADA deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective isolation",
+          "cells": [
+            {
+              "text": "Strict infection prevention pending reconstitution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Co-trimoxazole for Pneumocystis, plus antifungal and antiviral cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Covers the antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products and vaccines",
+          "cells": [
+            {
+              "text": "Irradiated, CMV-safe, leucodepleted products only; withhold live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing, family screening, newborn screening of siblings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology and transplant team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "severe_combined_immunodeficiency-dx-mgmt",
+      "title": "Diagnosis and management of Severe combined immunodeficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with severe or opportunistic infection, chronic diarrhoea, failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Suspected SCID is a paediatric emergency; live vaccine or unirradiated blood given?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate immunology referral and protective isolation; withhold live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TREC screen; lymphocyte subsets; immunoglobulins; ADA assay; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Profound T-cell lymphopenia with a genetic subtype identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for HIV, DiGeorge, Wiskott-Aldrich or secondary immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protective isolation; co-trimoxazole prophylaxis; immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Irradiated, CMV-safe, leucodepleted blood only; no live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplantation, ideally before infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gene therapy or pegademase for selected genotypes; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fatal in first years untreated; early transplant gives high survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

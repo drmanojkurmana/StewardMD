@@ -1,171 +1,470 @@
 {
- "id": "orbital_cellulitis",
- "name": "Orbital cellulitis",
- "aliases": [
-  "postseptal cellulitis",
-  "post-septal cellulitis",
-  "orbital infection"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent (especially ethmoid) sinusitis",
-   "Key features distinguishing it from preseptal cellulitis are painful or restricted eye movements (ophthalmoplegia), proptosis, and pain on eye movement",
-   "Systemic signs of fever and malaise accompany a red, swollen, tender lid; a relative afferent pupillary defect signals optic nerve compromise",
-   "Reduced visual acuity, colour vision loss, or an afferent pupillary defect indicate optic nerve threat and demand emergency intervention",
-   "Commonest in children and frequently caused by Staphylococcus, Streptococcus, and Haemophilus species, sometimes anaerobes",
-   "Urgent contrast CT of the orbit and sinuses identifies subperiosteal or orbital abscess and sinus involvement",
-   "Requires admission and prompt intravenous broad-spectrum antibiotics, with surgical drainage of abscesses or sinuses when needed"
+  "id": "orbital_cellulitis",
+  "name": "Orbital cellulitis",
+  "aliases": [
+    "postseptal cellulitis",
+    "post-septal cellulitis",
+    "orbital infection"
   ],
-  "pathophysiology": "Orbital cellulitis is infection of the soft tissues posterior to the orbital septum. Infection most commonly extends directly from the paranasal sinuses (particularly the ethmoid, separated from the orbit only by the thin lamina papyracea), but can also arise from trauma, dacryocystitis, dental infection, or haematogenous spread. Inflammation and oedema within the confined bony orbit raise pressure, displace the globe forward (proptosis), impair extraocular muscle function, and can compress or ischaemically injure the optic nerve. Spread posteriorly risks cavernous sinus thrombosis, meningitis, and intracranial abscess.",
-  "additionalDifferentials": [
-   "Preseptal (periorbital) cellulitis",
-   "Idiopathic orbital inflammation (orbital pseudotumour)",
-   "Thyroid eye disease",
-   "Cavernous sinus thrombosis",
-   "Orbital tumour or rhabdomyosarcoma in children",
-   "Allergic or traumatic periorbital oedema"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease",
-   "Assessment of visual acuity, colour vision, pupil reactions, and eye movements",
-   "Blood cultures and inflammatory markers",
-   "Swabs/cultures of any discharge or drained material",
-   "Ophthalmology and ENT review; consider MRI if intracranial extension is suspected"
-  ],
-  "redFlags": [
-   "Emergency — threatens vision (optic nerve compression) and life (cavernous sinus thrombosis, meningitis, intracranial abscess)",
-   "Reduced acuity, impaired colour vision, or a relative afferent pupillary defect indicate imminent optic nerve damage",
-   "Restricted or painful eye movements and proptosis distinguishing it from benign preseptal cellulitis",
-   "Bilateral involvement, drowsiness, or cranial nerve palsies suggesting cavernous sinus or intracranial spread"
-  ],
-  "prognosis": "With prompt intravenous antibiotics and timely drainage the outlook is good, but delay can lead to permanent visual loss, intracranial complications, and death.",
-  "pitfalls": [
-   "Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic nerve function",
-   "Delaying CT imaging and abscess drainage",
-   "Treating as an outpatient rather than admitting for intravenous therapy",
-   "Overlooking the underlying sinusitis that needs concurrent treatment"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and anaerobes",
-   "Arrange surgical drainage of subperiosteal or orbital abscess and sinus drainage (functional endoscopic sinus surgery) for abscess or failure to improve on antibiotics",
-   "Obtain urgent contrast CT of orbit, sinuses and brain with combined ophthalmology and ENT assessment",
-   "Monitor visual acuity, colour vision and pupillary reactions serially, with emergency intervention including orbital decompression if the optic nerve is threatened",
-   "Treat the underlying source, most often paranasal sinusitis, with nasal decongestants and supportive analgesia and antipyretics",
-   "Escalate to neurosurgery for intracranial extension, cavernous sinus thrombosis or brain abscess"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orbital_cellulitis-pathway",
-   "title": "Orbital cellulitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent (especially ethmoid) sinusitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergency - threatens vision (optic nerve compression) and life (cavernous sinus thrombosis, meningitis, intracranial abscess)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease, Assessment of visual acuity, colour vision, pupil reactions, and eye movements, Blood cultures and inflammatory markers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and anaerobes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic nerve function"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of orbital cellulitis."
-  }
- ],
- "tables": [
-  {
-   "id": "orbital_cellulitis-matrix",
-   "title": "Orbital cellulitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent (especially ethmoid) sinusitis",
+      "Key features distinguishing it from preseptal cellulitis are painful or restricted eye movements (ophthalmoplegia), proptosis, and pain on eye movement",
+      "Systemic signs of fever and malaise accompany a red, swollen, tender lid; a relative afferent pupillary defect signals optic nerve compromise",
+      "Reduced visual acuity, colour vision loss, or an afferent pupillary defect indicate optic nerve threat and demand emergency intervention",
+      "Commonest in children and frequently caused by Staphylococcus, Streptococcus, and Haemophilus species, sometimes anaerobes",
+      "Urgent contrast CT of the orbit and sinuses identifies subperiosteal or orbital abscess and sinus involvement",
+      "Requires admission and prompt intravenous broad-spectrum antibiotics, with surgical drainage of abscesses or sinuses when needed"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease, Assessment of visual acuity, colour",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Orbital cellulitis is infection of the soft tissues posterior to the orbital septum. Infection most commonly extends directly from the paranasal sinuses (particularly the ethmoid, separated from the orbit only by the thin lamina papyracea), but can also arise from trauma, dacryocystitis, dental infection, or haematogenous spread. Inflammation and oedema within the confined bony orbit raise pressure, displace the globe forward (proptosis), impair extraocular muscle function, and can compress or ischaemically injure the optic nerve. Spread posteriorly risks cavernous sinus thrombosis, meningitis, and intracranial abscess.",
+    "additionalDifferentials": [
+      "Preseptal (periorbital) cellulitis",
+      "Idiopathic orbital inflammation (orbital pseudotumour)",
+      "Thyroid eye disease",
+      "Cavernous sinus thrombosis",
+      "Orbital tumour or rhabdomyosarcoma in children",
+      "Allergic or traumatic periorbital oedema"
     ],
-    [
-     "Primary Differentials",
-     "Preseptal (periorbital) cellulitis, Idiopathic orbital inflammation (orbital pseudotumour), Thyroid eye disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease",
+      "Assessment of visual acuity, colour vision, pupil reactions, and eye movements",
+      "Blood cultures and inflammatory markers",
+      "Swabs/cultures of any discharge or drained material",
+      "Ophthalmology and ENT review; consider MRI if intracranial extension is suspected"
     ],
-    [
-     "Management Strategy",
-     "Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergency — threatens vision (optic nerve compression) and life (cavernous sinus thrombosis, meningitis, intracranial abscess)",
+      "Reduced acuity, impaired colour vision, or a relative afferent pupillary defect indicate imminent optic nerve damage",
+      "Restricted or painful eye movements and proptosis distinguishing it from benign preseptal cellulitis",
+      "Bilateral involvement, drowsiness, or cranial nerve palsies suggesting cavernous sinus or intracranial spread"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt intravenous antibiotics and timely drainage the outlook is good, but delay can lead to permanent visual loss, intracranial complications, and death.",
+    "pitfalls": [
+      "Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic nerve function",
+      "Delaying CT imaging and abscess drainage",
+      "Treating as an outpatient rather than admitting for intravenous therapy",
+      "Overlooking the underlying sinusitis that needs concurrent treatment"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and anaerobes",
+      "Arrange surgical drainage of subperiosteal or orbital abscess and sinus drainage (functional endoscopic sinus surgery) for abscess or failure to improve on antibiotics",
+      "Obtain urgent contrast CT of orbit, sinuses and brain with combined ophthalmology and ENT assessment",
+      "Monitor visual acuity, colour vision and pupillary reactions serially, with emergency intervention including orbital decompression if the optic nerve is threatened",
+      "Treat the underlying source, most often paranasal sinusitis, with nasal decongestants and supportive analgesia and antipyretics",
+      "Escalate to neurosurgery for intracranial extension, cavernous sinus thrombosis or brain abscess"
     ]
-   ],
-   "caption": "Overview comparison matrix for orbital cellulitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orbital-cellulitis-real-image",
-   "title": "Orbital cellulitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "orbital_cellulitis-pathway",
+      "title": "Orbital cellulitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent (especially ethmoid) sinusitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergency - threatens vision (optic nerve compression) and life (cavernous sinus thrombosis, meningitis, intracranial abscess)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease, Assessment of visual acuity, colour vision, pupil reactions, and eye movements, Blood cultures and inflammatory markers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and anaerobes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic nerve function"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of orbital cellulitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orbital_cellulitis-matrix",
+      "title": "Orbital cellulitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A sight- and life-threatening infection of the orbital tissues behind the orbital septum, most often spreading from adjacent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the orbit, sinuses, and brain to detect abscess and sinus disease, Assessment of visual acuity, colour",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Preseptal (periorbital) cellulitis, Idiopathic orbital inflammation (orbital pseudotumour), Thyroid eye disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start prompt intravenous broad-spectrum antibiotics covering staphylococci (including MRSA), streptococci, Haemophilus and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking sight-threatening orbital cellulitis for benign preseptal cellulitis and failing to assess eye movements and optic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for orbital cellulitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_cellulitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of orbit, sinuses and brain",
+          "cells": [
+            {
+              "text": "Abscess and sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity, colour vision, pupils and eye movements",
+          "cells": [
+            {
+              "text": "Optic nerve and motility involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swabs or cultures of discharge or drained material",
+          "cells": [
+            {
+              "text": "Causative organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and ENT review; MRI if intracranial spread suspected",
+          "cells": [
+            {
+              "text": "Intracranial extension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_cellulitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Preseptal (periorbital) cellulitis",
+          "cells": [
+            {
+              "text": "Painful or restricted eye movements and proptosis mark the orbital disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavernous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Bilateral involvement, drowsiness or cranial nerve palsies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_cellulitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Covering staphylococci (MRSA), streptococci, Haemophilus and anaerobes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical drainage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Subperiosteal or orbital abscess; sinus drainage by functional endoscopic sinus surgery if antibiotics fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent contrast imaging",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "CT of orbit, sinuses and brain with ophthalmology and ENT assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial optic nerve checks",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Acuity, colour vision and pupils; orbital decompression if the optic nerve is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the source",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Usually paranasal sinusitis, with nasal decongestants, analgesia and antipyretics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical escalation",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Intracranial extension, cavernous sinus thrombosis or brain abscess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_cellulitis-dx-mgmt",
+      "title": "Diagnosis and management of Orbital cellulitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful swollen red lid with restricted eye movement and fever in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (reduced acuity, colour loss, RAPD or intracranial signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency orbital decompression and neurosurgery for intracranial spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT of orbit, sinuses and brain; cultures; bloods; ophthalmic and ENT review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT show an orbital abscess or sinus disease needing drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider preseptal cellulitis, idiopathic orbital inflammation or thyroid eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV broad-spectrum antibiotics covering staphylococci (MRSA), streptococci and anaerobes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical drainage of subperiosteal or orbital abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic sinus surgery for a sinus source that fails antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial acuity, colour and pupil checks; decompression if the optic nerve is threatened",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the source, most often sinusitis, with decongestants and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good with prompt IV antibiotics and drainage; delay risks vision and brain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

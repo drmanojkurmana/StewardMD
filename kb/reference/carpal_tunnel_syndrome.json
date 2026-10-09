@@ -1,172 +1,443 @@
 {
- "id": "carpal_tunnel_syndrome",
- "name": "Carpal tunnel syndrome",
- "aliases": [
-  "median nerve compression at the wrist",
-  "CTS",
-  "median neuropathy at the carpal tunnel"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
-   "Typically presents with numbness, tingling, and pain in the thumb, index, middle, and radial half of the ring finger, characteristically worse at night and relieved by shaking the hand",
-   "Symptoms may radiate up the forearm; in advanced cases there is weakness and wasting of the thenar muscles (abductor pollicis brevis)",
-   "Often idiopathic but associated with pregnancy, diabetes, hypothyroidism, rheumatoid arthritis, obesity, and repetitive wrist use",
-   "Provocative signs include Tinel's (tapping over the nerve) and Phalen's (sustained wrist flexion) tests, though their sensitivity is limited",
-   "Nerve conduction studies confirm the diagnosis and grade severity, and are useful before surgery or in atypical cases",
-   "Mild or intermittent disease often responds to nocturnal wrist splinting, activity modification, and treatment of any underlying condition; corticosteroid injection can give temporary relief",
-   "Surgical division of the flexor retinaculum (carpal tunnel release) is indicated for persistent symptoms, failure of conservative treatment, or established motor deficit and sensory loss"
+  "id": "carpal_tunnel_syndrome",
+  "name": "Carpal tunnel syndrome",
+  "aliases": [
+    "median nerve compression at the wrist",
+    "CTS",
+    "median neuropathy at the carpal tunnel"
   ],
-  "pathophysiology": "The carpal tunnel is a rigid osseofibrous canal bounded by the carpal bones and roofed by the flexor retinaculum, through which the median nerve passes alongside the flexor tendons. Any increase in the contents or reduction in the capacity of this fixed space raises pressure on the median nerve. Compression impairs the nerve's microcirculation and, if sustained, causes segmental demyelination and eventually axonal loss. Conditions that increase tissue volume (fluid retention in pregnancy, synovial thickening in rheumatoid arthritis, tenosynovitis from overuse) or reduce tunnel size (wrist fractures, deformity) precipitate symptoms. Sensory fibres are usually affected first, with motor weakness and thenar wasting appearing later.",
-  "additionalDifferentials": [
-   "Cervical radiculopathy (particularly C6/C7)",
-   "Proximal median nerve entrapment (e.g. pronator syndrome)",
-   "Peripheral polyneuropathy (e.g. diabetic)",
-   "Thoracic outlet syndrome",
-   "Other nerve entrapments (ulnar neuropathy)",
-   "Thenar osteoarthritis (first carpometacarpal joint)"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies and electromyography to confirm and grade median nerve compression",
-   "Clinical provocative tests (Tinel's and Phalen's) and thenar strength assessment",
-   "Blood tests for associated conditions (glucose/HbA1c, thyroid function) where indicated",
-   "Wrist radiographs if there is a history of fracture, deformity, or arthritis",
-   "Ultrasound of the nerve in selected or atypical cases"
-  ],
-  "redFlags": [
-   "Progressive thenar muscle wasting and weakness indicating advanced nerve damage warranting timely decompression",
-   "Persistent dense sensory loss that may not fully recover",
-   "Acute severe symptoms after a wrist fracture suggesting acute median nerve compression",
-   "Bilateral or rapidly progressive neuropathy suggesting a systemic cause needing investigation"
-  ],
-  "prognosis": "Most patients with mild to moderate disease improve with conservative measures or gain lasting relief from surgical release; however, longstanding severe compression with thenar wasting and marked axonal loss may leave incomplete recovery of strength and sensation despite decompression.",
-  "pitfalls": [
-   "Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion",
-   "Delaying surgery until irreversible thenar wasting and sensory loss develop",
-   "Overlooking a treatable underlying condition such as hypothyroidism or diabetes",
-   "Relying solely on provocative clinical tests, which can be falsely negative"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nocturnal neutral-position wrist splinting for mild to moderate symptoms",
-   "Activity modification to reduce aggravating repetitive wrist movements",
-   "Local corticosteroid injection into the carpal tunnel for symptomatic relief",
-   "Identification and treatment of contributory conditions such as hypothyroidism, diabetes, rheumatoid arthritis and pregnancy-related fluid retention, which often resolves post partum",
-   "Surgical decompression by flexor retinaculum release for severe, persistent or progressive disease, particularly with thenar wasting or axonal loss",
-   "Nerve conduction studies to grade severity and guide the decision to operate",
-   "Postoperative hand therapy, with counselling that longstanding severe compression may leave incomplete recovery of strength and sensation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carpal_tunnel_syndrome-pathway",
-   "title": "Carpal tunnel syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive thenar muscle wasting and weakness indicating advanced nerve damage warranting timely decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies and electromyography to confirm and grade median nerve compression, Clinical provocative tests (Tinel's and Phalen's) and thenar strength assessment, Blood tests for associated conditions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nocturnal neutral-position wrist splinting for mild to moderate symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carpal tunnel syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "carpal_tunnel_syndrome-matrix",
-   "title": "Carpal tunnel syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
+      "Typically presents with numbness, tingling, and pain in the thumb, index, middle, and radial half of the ring finger, characteristically worse at night and relieved by shaking the hand",
+      "Symptoms may radiate up the forearm; in advanced cases there is weakness and wasting of the thenar muscles (abductor pollicis brevis)",
+      "Often idiopathic but associated with pregnancy, diabetes, hypothyroidism, rheumatoid arthritis, obesity, and repetitive wrist use",
+      "Provocative signs include Tinel's (tapping over the nerve) and Phalen's (sustained wrist flexion) tests, though their sensitivity is limited",
+      "Nerve conduction studies confirm the diagnosis and grade severity, and are useful before surgery or in atypical cases",
+      "Mild or intermittent disease often responds to nocturnal wrist splinting, activity modification, and treatment of any underlying condition; corticosteroid injection can give temporary relief",
+      "Surgical division of the flexor retinaculum (carpal tunnel release) is indicated for persistent symptoms, failure of conservative treatment, or established motor deficit and sensory loss"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies and electromyography to confirm and grade median nerve compression, Clinical provocative tests (Tinel's",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The carpal tunnel is a rigid osseofibrous canal bounded by the carpal bones and roofed by the flexor retinaculum, through which the median nerve passes alongside the flexor tendons. Any increase in the contents or reduction in the capacity of this fixed space raises pressure on the median nerve. Compression impairs the nerve's microcirculation and, if sustained, causes segmental demyelination and eventually axonal loss. Conditions that increase tissue volume (fluid retention in pregnancy, synovial thickening in rheumatoid arthritis, tenosynovitis from overuse) or reduce tunnel size (wrist fractures, deformity) precipitate symptoms. Sensory fibres are usually affected first, with motor weakness and thenar wasting appearing later.",
+    "additionalDifferentials": [
+      "Cervical radiculopathy (particularly C6/C7)",
+      "Proximal median nerve entrapment (e.g. pronator syndrome)",
+      "Peripheral polyneuropathy (e.g. diabetic)",
+      "Thoracic outlet syndrome",
+      "Other nerve entrapments (ulnar neuropathy)",
+      "Thenar osteoarthritis (first carpometacarpal joint)"
     ],
-    [
-     "Primary Differentials",
-     "Cervical radiculopathy (particularly C6/C7), Proximal median nerve entrapment (e.g. pronator syndrome), Peripheral polyneuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies and electromyography to confirm and grade median nerve compression",
+      "Clinical provocative tests (Tinel's and Phalen's) and thenar strength assessment",
+      "Blood tests for associated conditions (glucose/HbA1c, thyroid function) where indicated",
+      "Wrist radiographs if there is a history of fracture, deformity, or arthritis",
+      "Ultrasound of the nerve in selected or atypical cases"
     ],
-    [
-     "Management Strategy",
-     "Nocturnal neutral-position wrist splinting for mild to moderate symptoms",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive thenar muscle wasting and weakness indicating advanced nerve damage warranting timely decompression",
+      "Persistent dense sensory loss that may not fully recover",
+      "Acute severe symptoms after a wrist fracture suggesting acute median nerve compression",
+      "Bilateral or rapidly progressive neuropathy suggesting a systemic cause needing investigation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients with mild to moderate disease improve with conservative measures or gain lasting relief from surgical release; however, longstanding severe compression with thenar wasting and marked axonal loss may leave incomplete recovery of strength and sensation despite decompression.",
+    "pitfalls": [
+      "Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion",
+      "Delaying surgery until irreversible thenar wasting and sensory loss develop",
+      "Overlooking a treatable underlying condition such as hypothyroidism or diabetes",
+      "Relying solely on provocative clinical tests, which can be falsely negative"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nocturnal neutral-position wrist splinting for mild to moderate symptoms",
+      "Activity modification to reduce aggravating repetitive wrist movements",
+      "Local corticosteroid injection into the carpal tunnel for symptomatic relief",
+      "Identification and treatment of contributory conditions such as hypothyroidism, diabetes, rheumatoid arthritis and pregnancy-related fluid retention, which often resolves post partum",
+      "Surgical decompression by flexor retinaculum release for severe, persistent or progressive disease, particularly with thenar wasting or axonal loss",
+      "Nerve conduction studies to grade severity and guide the decision to operate",
+      "Postoperative hand therapy, with counselling that longstanding severe compression may leave incomplete recovery of strength and sensation"
     ]
-   ],
-   "caption": "Overview comparison matrix for carpal tunnel syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carpal-tunnel-syndrome-real-image",
-   "title": "Carpal tunnel syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "carpal_tunnel_syndrome-pathway",
+      "title": "Carpal tunnel syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive thenar muscle wasting and weakness indicating advanced nerve damage warranting timely decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies and electromyography to confirm and grade median nerve compression, Clinical provocative tests (Tinel's and Phalen's) and thenar strength assessment, Blood tests for associated conditions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nocturnal neutral-position wrist splinting for mild to moderate symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carpal tunnel syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carpal_tunnel_syndrome-matrix",
+      "title": "Carpal tunnel syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest peripheral nerve entrapment, caused by compression of the median nerve beneath the flexor retinaculum at the wrist",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies and electromyography to confirm and grade median nerve compression, Clinical provocative tests (Tinel's",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cervical radiculopathy (particularly C6/C7), Proximal median nerve entrapment (e.g. pronator syndrome), Peripheral polyneuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nocturnal neutral-position wrist splinting for mild to moderate symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing hand symptoms to carpal tunnel syndrome when the cause is cervical radiculopathy or a more proximal lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carpal tunnel syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carpal_tunnel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and electromyography",
+          "cells": [
+            {
+              "text": "Confirm and grade median nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinel's and Phalen's tests",
+          "cells": [
+            {
+              "text": "Provocative signs; sensitivity limited and can be falsely negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thenar strength assessment",
+          "cells": [
+            {
+              "text": "Weakness and wasting of abductor pollicis brevis in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests (glucose or HbA1c, thyroid function)",
+          "cells": [
+            {
+              "text": "Screen for associated conditions where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist radiographs",
+          "cells": [
+            {
+              "text": "Indicated after fracture, deformity or arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carpal_tunnel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nocturnal wrist splinting",
+          "cells": [
+            {
+              "text": "Neutral-position wrist splint at night"
+            },
+            {
+              "text": "For mild to moderate symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Reduce aggravating repetitive wrist movements"
+            },
+            {
+              "text": "Repetitive wrist use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Local injection into the carpal tunnel"
+            },
+            {
+              "text": "Temporary relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat contributory conditions",
+          "cells": [
+            {
+              "text": "Hypothyroidism, diabetes, rheumatoid arthritis, pregnancy-related fluid retention"
+            },
+            {
+              "text": "Pregnancy-related fluid retention often resolves post partum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal tunnel release",
+          "cells": [
+            {
+              "text": "Surgical division of the flexor retinaculum"
+            },
+            {
+              "text": "Persistent, progressive or severe disease with thenar wasting or axonal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Grade severity and guide the decision to operate"
+            },
+            {
+              "text": "Also used in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative hand therapy",
+          "cells": [
+            {
+              "text": "Counsel on possible incomplete recovery"
+            },
+            {
+              "text": "Longstanding severe compression may leave incomplete recovery of strength and sensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carpal_tunnel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Carpal tunnel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected carpal tunnel syndrome: night-worse numbness in median nerve digits",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thenar wasting, dense sensory loss, post-fracture or bilateral)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: timely decompression for progressive thenar wasting or weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies and electromyography; Tinel's and Phalen's tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Nerve conduction studies confirm and grade median nerve compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nocturnal neutral-position wrist splinting for mild to moderate symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check for cervical radiculopathy or a more proximal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity modification and corticosteroid injection for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat hypothyroidism, diabetes, rheumatoid arthritis or pregnancy fluid retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carpal tunnel release for severe, persistent or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hand therapy; incomplete recovery possible after longstanding severe compression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

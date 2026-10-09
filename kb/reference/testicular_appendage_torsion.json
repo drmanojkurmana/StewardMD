@@ -1,168 +1,408 @@
 {
- "id": "testicular_appendage_torsion",
- "name": "Torsion of a testicular appendage",
- "aliases": [
-  "torsion of the appendix testis",
-  "torted hydatid of Morgagni"
- ],
- "class": "non_infective",
- "system": "Genitourinary",
- "specialty": "Paediatric surgery / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric urology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
-   "Pain is usually more gradual and less severe than in testicular torsion, and systemic upset is uncommon",
-   "The classic sign is a tender blue dot at the upper pole of the testis seen through the scrotal skin",
-   "The testis itself lies normally with a normal cremasteric reflex, unlike in testicular torsion",
-   "It is a key differential of the acute scrotum, where the priority is to exclude testicular torsion",
-   "It is self-limiting and managed conservatively once torsion of the testis is excluded"
+  "id": "testicular_appendage_torsion",
+  "name": "Torsion of a testicular appendage",
+  "aliases": [
+    "torsion of the appendix testis",
+    "torted hydatid of Morgagni"
   ],
-  "pathophysiology": "The testis and epididymis carry small vestigial embryological appendages. Torsion of one of these pedunculated appendages, most often the appendix testis (hydatid of Morgagni), causes ischaemia and infarction of the remnant with local inflammation and pain. Because the testicular blood supply is unaffected, the testis remains viable, and the process settles as the infarcted appendage necroses and resolves. The main clinical importance is distinguishing it from true testicular torsion, which is a surgical emergency.",
-  "additionalDifferentials": [
-   "Testicular torsion",
-   "Epididymo-orchitis",
-   "Incarcerated inguinal hernia",
-   "Idiopathic scrotal oedema",
-   "Henoch-Schonlein purpura affecting the scrotum"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment, including looking for the blue dot sign",
-   "Doppler ultrasound showing normal testicular blood flow when the diagnosis is uncertain",
-   "Assessment of the cremasteric reflex and testicular lie",
-   "Urinalysis to help exclude infection",
-   "Surgical exploration if testicular torsion cannot be excluded"
-  ],
-  "redFlags": [
-   "Features suggesting testicular torsion (severe sudden pain, high-riding testis, absent cremasteric reflex)",
-   "Diagnostic uncertainty requiring exploration",
-   "Signs of infection",
-   "Worsening rather than settling pain"
-  ],
-  "prognosis": "The condition is benign and self-limiting, resolving over days with conservative management and analgesia, with no long-term testicular consequences.",
-  "pitfalls": [
-   "Missing testicular torsion by over-diagnosing appendage torsion",
-   "Delaying exploration when torsion cannot be excluded",
-   "Relying on the blue dot sign, which is not always present",
-   "Attributing pain to infection without considering torsion"
-  ],
-  "references": [
-   "Paediatric urology references (standard reference)",
-   "Emergency urology references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum",
-   "Manage conservatively once torsion is excluded, with simple analgesia or NSAIDs, rest and scrotal support, as the condition is self-limiting",
-   "Reassure that the infarcted appendage necroses and resolves over days without long-term testicular consequence",
-   "Reserve surgical exploration and excision of the appendage for cases where testicular torsion cannot be excluded or where pain is severe or persistent",
-   "Give safety-net advice to return urgently if pain worsens or acute features develop",
-   "Involve paediatric surgery or urology in assessment of the acute scrotum"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "testicular_appendage_torsion-pathway",
-   "title": "Torsion of a testicular appendage: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting testicular torsion (severe sudden pain, high-riding testis, absent cremasteric reflex)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment, including looking for the blue dot sign, Doppler ultrasound showing normal testicular blood flow when the diagnosis is uncertain, Assessment of the cremasteric reflex and testicular lie"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing testicular torsion by over-diagnosing appendage torsion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of torsion of a testicular appendage."
-  }
- ],
- "tables": [
-  {
-   "id": "testicular_appendage_torsion-matrix",
-   "title": "Torsion of a testicular appendage: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary",
+  "specialty": "Paediatric surgery / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric urology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
+      "Pain is usually more gradual and less severe than in testicular torsion, and systemic upset is uncommon",
+      "The classic sign is a tender blue dot at the upper pole of the testis seen through the scrotal skin",
+      "The testis itself lies normally with a normal cremasteric reflex, unlike in testicular torsion",
+      "It is a key differential of the acute scrotum, where the priority is to exclude testicular torsion",
+      "It is self-limiting and managed conservatively once torsion of the testis is excluded"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment, including looking for the blue dot sign, Doppler ultrasound showing normal testicular blood flow when the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The testis and epididymis carry small vestigial embryological appendages. Torsion of one of these pedunculated appendages, most often the appendix testis (hydatid of Morgagni), causes ischaemia and infarction of the remnant with local inflammation and pain. Because the testicular blood supply is unaffected, the testis remains viable, and the process settles as the infarcted appendage necroses and resolves. The main clinical importance is distinguishing it from true testicular torsion, which is a surgical emergency.",
+    "additionalDifferentials": [
+      "Testicular torsion",
+      "Epididymo-orchitis",
+      "Incarcerated inguinal hernia",
+      "Idiopathic scrotal oedema",
+      "Henoch-Schonlein purpura affecting the scrotum"
     ],
-    [
-     "Primary Differentials",
-     "Testicular torsion, Epididymo-orchitis, Incarcerated inguinal hernia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment, including looking for the blue dot sign",
+      "Doppler ultrasound showing normal testicular blood flow when the diagnosis is uncertain",
+      "Assessment of the cremasteric reflex and testicular lie",
+      "Urinalysis to help exclude infection",
+      "Surgical exploration if testicular torsion cannot be excluded"
     ],
-    [
-     "Management Strategy",
-     "First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting testicular torsion (severe sudden pain, high-riding testis, absent cremasteric reflex)",
+      "Diagnostic uncertainty requiring exploration",
+      "Signs of infection",
+      "Worsening rather than settling pain"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing testicular torsion by over-diagnosing appendage torsion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and self-limiting, resolving over days with conservative management and analgesia, with no long-term testicular consequences.",
+    "pitfalls": [
+      "Missing testicular torsion by over-diagnosing appendage torsion",
+      "Delaying exploration when torsion cannot be excluded",
+      "Relying on the blue dot sign, which is not always present",
+      "Attributing pain to infection without considering torsion"
+    ],
+    "references": [
+      "Paediatric urology references (standard reference)",
+      "Emergency urology references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum",
+      "Manage conservatively once torsion is excluded, with simple analgesia or NSAIDs, rest and scrotal support, as the condition is self-limiting",
+      "Reassure that the infarcted appendage necroses and resolves over days without long-term testicular consequence",
+      "Reserve surgical exploration and excision of the appendage for cases where testicular torsion cannot be excluded or where pain is severe or persistent",
+      "Give safety-net advice to return urgently if pain worsens or acute features develop",
+      "Involve paediatric surgery or urology in assessment of the acute scrotum"
     ]
-   ],
-   "caption": "Overview comparison matrix for torsion of a testicular appendage."
-  }
- ],
- "diagrams": [
-  {
-   "id": "testicular-appendage-torsion-real-image",
-   "title": "Torsion of a testicular appendage: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "testicular_appendage_torsion-pathway",
+      "title": "Torsion of a testicular appendage: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting testicular torsion (severe sudden pain, high-riding testis, absent cremasteric reflex)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment, including looking for the blue dot sign, Doppler ultrasound showing normal testicular blood flow when the diagnosis is uncertain, Assessment of the cremasteric reflex and testicular lie"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing testicular torsion by over-diagnosing appendage torsion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of torsion of a testicular appendage."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "testicular_appendage_torsion-matrix",
+      "title": "Torsion of a testicular appendage: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common cause of acute scrotal pain in prepubertal boys, from twisting of an embryological remnant (usually the appendix testis)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment, including looking for the blue dot sign, Doppler ultrasound showing normal testicular blood flow when the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Testicular torsion, Epididymo-orchitis, Incarcerated inguinal hernia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First exclude true testicular torsion, since distinguishing the two is the key priority in the acute scrotum",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing testicular torsion by over-diagnosing appendage torsion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for torsion of a testicular appendage."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric urology references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "testicular_appendage_torsion-dx-mgmt",
+      "title": "Diagnosis and management of Torsion of a testicular appendage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected appendage torsion: acute scrotal pain in a prepubertal boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: sudden severe pain, high-riding testis, or absent cremasteric reflex?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exploration, as testicular torsion cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical check for the blue dot sign; Doppler ultrasound; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is testicular blood flow normal, with the cremasteric reflex present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as testicular torsion until excluded; explore urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia or NSAIDs, rest and scrotal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure that the appendage resolves over days",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision of appendage if pain is severe or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Safety-net advice to return if pain worsens",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting, with no long-term testicular consequence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "testicular_appendage_torsion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment for the blue dot sign",
+          "cells": [
+            {
+              "text": "Tender blue dot at the upper pole of the testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Normal testicular blood flow when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cremasteric reflex and testicular lie",
+          "cells": [
+            {
+              "text": "Normal in appendage torsion, unlike testicular torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Only if testicular torsion cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "testicular_appendage_torsion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude testicular torsion first",
+          "cells": [
+            {
+              "text": "Key priority in the acute scrotum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Simple analgesia or NSAIDs, rest and scrotal support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Infarcted appendage resolves over days without testicular consequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision of appendage",
+          "cells": [
+            {
+              "text": "Torsion cannot be excluded, or pain is severe or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net advice",
+          "cells": [
+            {
+              "text": "Return urgently if pain worsens or acute features develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist assessment",
+          "cells": [
+            {
+              "text": "Paediatric surgery or urology for the acute scrotum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,536 @@
 {
- "id": "dihydrofolate_reductase_deficiency",
- "name": "Dihydrofolate reductase deficiency",
- "aliases": [
-  "DHFR deficiency",
-  "megaloblastic anaemia due to DHFR deficiency",
-  "hereditary folate metabolism disorder (DHFR)",
-  "cerebral folate deficiency due to DHFR deficiency",
-  "DHFR"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to active tetrahydrofolate",
-   "Presents in infancy with megaloblastic anaemia together with cerebral folate deficiency",
-   "Neurological features include seizures, developmental delay and, in some, features overlapping cerebral folate deficiency syndromes",
-   "Cerebrospinal fluid 5-methyltetrahydrofolate is characteristically low despite normal or high blood folate",
-   "The therapeutic key is that reduced folates such as folinic acid bypass the enzymatic block, whereas ordinary folic acid is ineffective because it requires DHFR to be activated",
-   "Folinic acid crosses into the central nervous system and is needed to correct the cerebral folate deficit",
-   "Diagnosis is supported by the blood picture, cerebrospinal fluid folate and DHFR gene sequencing",
-   "It should be distinguished from cerebral folate deficiency due to folate receptor (FOLR1) defects and from nutritional folate deficiency"
+  "id": "dihydrofolate_reductase_deficiency",
+  "name": "Dihydrofolate reductase deficiency",
+  "aliases": [
+    "DHFR deficiency",
+    "megaloblastic anaemia due to DHFR deficiency",
+    "hereditary folate metabolism disorder (DHFR)",
+    "cerebral folate deficiency due to DHFR deficiency",
+    "DHFR"
   ],
-  "pathophysiology": "Dihydrofolate reductase regenerates tetrahydrofolate from dihydrofolate produced during thymidylate synthesis and also performs the initial reduction of dietary folic acid to usable reduced folates. When the enzyme is deficient, the supply of tetrahydrofolate and its derivatives, including the 5-methyltetrahydrofolate needed in the central nervous system and the folate cofactors required for nucleotide synthesis, falls. Impaired DNA synthesis in the marrow produces megaloblastic anaemia, while depletion of reduced folate in the brain causes cerebral folate deficiency with seizures and developmental problems. Because folic acid needs this same enzyme to become active, treatment relies on already-reduced folates such as folinic acid.",
-  "additionalDifferentials": [
-   "Cerebral folate deficiency due to FOLR1 (folate receptor) defects",
-   "Nutritional folate deficiency",
-   "Vitamin B12 deficiency and cobalamin metabolism defects",
-   "Hereditary folate malabsorption (PCFT/SLC46A1)",
-   "Other congenital megaloblastic anaemias",
-   "Methylenetetrahydrofolate reductase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and film showing megaloblastic anaemia",
-   "Serum and red cell folate and vitamin B12",
-   "Cerebrospinal fluid 5-methyltetrahydrofolate measurement",
-   "DHFR gene sequencing for confirmation",
-   "Brain MRI in the neurological presentation",
-   "Bone marrow examination where the anaemia is unexplained"
-  ],
-  "redFlags": [
-   "Seizures and developmental regression indicating cerebral folate deficiency",
-   "Severe megaloblastic anaemia with cytopenias",
-   "Low cerebrospinal fluid folate despite adequate blood folate",
-   "Failure to respond to folic acid, signalling the need for reduced folate"
-  ],
-  "prognosis": "With early recognition and treatment using reduced folates the haematological abnormality corrects and neurological outcome can be favourable, but delayed treatment of the cerebral folate deficit may leave lasting neurological impairment.",
-  "pitfalls": [
-   "Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid",
-   "Being reassured by normal or high blood folate while cerebrospinal fluid folate is low",
-   "Overlooking the diagnosis in an infant with megaloblastic anaemia and seizures",
-   "Confusing it with FOLR1-related cerebral folate deficiency or nutritional deficiency"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Banka S et al. Dihydrofolate reductase deficiency causing megaloblastic anaemia and cerebral folate deficiency",
-   "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is ineffective because it requires the deficient enzyme for activation",
-   "Ensure the folinic acid dose is sufficient to cross into the central nervous system and correct the cerebral folate deficiency",
-   "Anticonvulsant therapy for seizures accompanying the cerebral folate deficit",
-   "Transfusion support for symptomatic severe megaloblastic anaemia at presentation",
-   "Monitor the full blood count and cerebrospinal fluid 5-methyltetrahydrofolate response with developmental surveillance",
-   "Genetic counselling and family screening given autosomal recessive inheritance",
-   "Long-term follow-up through metabolic medicine and neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dihydrofolate_reductase_deficiency-pathway",
-   "title": "Dihydrofolate reductase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to active tetrahydrofolate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures and developmental regression indicating cerebral folate deficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and film showing megaloblastic anaemia, Serum and red cell folate and vitamin B12, Cerebrospinal fluid 5-methyltetrahydrofolate measurement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is ineffective because it requires the deficient enzyme for activation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dihydrofolate reductase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "dihydrofolate_reductase_deficiency-matrix",
-   "title": "Dihydrofolate reductase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to active tetrahydrofolate",
+      "Presents in infancy with megaloblastic anaemia together with cerebral folate deficiency",
+      "Neurological features include seizures, developmental delay and, in some, features overlapping cerebral folate deficiency syndromes",
+      "Cerebrospinal fluid 5-methyltetrahydrofolate is characteristically low despite normal or high blood folate",
+      "The therapeutic key is that reduced folates such as folinic acid bypass the enzymatic block, whereas ordinary folic acid is ineffective because it requires DHFR to be activated",
+      "Folinic acid crosses into the central nervous system and is needed to correct the cerebral folate deficit",
+      "Diagnosis is supported by the blood picture, cerebrospinal fluid folate and DHFR gene sequencing",
+      "It should be distinguished from cerebral folate deficiency due to folate receptor (FOLR1) defects and from nutritional folate deficiency"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and film showing megaloblastic anaemia, Serum and red cell folate and vitamin B12, Cerebrospinal fluid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dihydrofolate reductase regenerates tetrahydrofolate from dihydrofolate produced during thymidylate synthesis and also performs the initial reduction of dietary folic acid to usable reduced folates. When the enzyme is deficient, the supply of tetrahydrofolate and its derivatives, including the 5-methyltetrahydrofolate needed in the central nervous system and the folate cofactors required for nucleotide synthesis, falls. Impaired DNA synthesis in the marrow produces megaloblastic anaemia, while depletion of reduced folate in the brain causes cerebral folate deficiency with seizures and developmental problems. Because folic acid needs this same enzyme to become active, treatment relies on already-reduced folates such as folinic acid.",
+    "additionalDifferentials": [
+      "Cerebral folate deficiency due to FOLR1 (folate receptor) defects",
+      "Nutritional folate deficiency",
+      "Vitamin B12 deficiency and cobalamin metabolism defects",
+      "Hereditary folate malabsorption (PCFT/SLC46A1)",
+      "Other congenital megaloblastic anaemias",
+      "Methylenetetrahydrofolate reductase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Cerebral folate deficiency due to FOLR1 (folate receptor) defects, Nutritional folate deficiency, Vitamin B12 deficiency and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and film showing megaloblastic anaemia",
+      "Serum and red cell folate and vitamin B12",
+      "Cerebrospinal fluid 5-methyltetrahydrofolate measurement",
+      "DHFR gene sequencing for confirmation",
+      "Brain MRI in the neurological presentation",
+      "Bone marrow examination where the anaemia is unexplained"
     ],
-    [
-     "Management Strategy",
-     "Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures and developmental regression indicating cerebral folate deficiency",
+      "Severe megaloblastic anaemia with cytopenias",
+      "Low cerebrospinal fluid folate despite adequate blood folate",
+      "Failure to respond to folic acid, signalling the need for reduced folate"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition and treatment using reduced folates the haematological abnormality corrects and neurological outcome can be favourable, but delayed treatment of the cerebral folate deficit may leave lasting neurological impairment.",
+    "pitfalls": [
+      "Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid",
+      "Being reassured by normal or high blood folate while cerebrospinal fluid folate is low",
+      "Overlooking the diagnosis in an infant with megaloblastic anaemia and seizures",
+      "Confusing it with FOLR1-related cerebral folate deficiency or nutritional deficiency"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Banka S et al. Dihydrofolate reductase deficiency causing megaloblastic anaemia and cerebral folate deficiency",
+      "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is ineffective because it requires the deficient enzyme for activation",
+      "Ensure the folinic acid dose is sufficient to cross into the central nervous system and correct the cerebral folate deficiency",
+      "Anticonvulsant therapy for seizures accompanying the cerebral folate deficit",
+      "Transfusion support for symptomatic severe megaloblastic anaemia at presentation",
+      "Monitor the full blood count and cerebrospinal fluid 5-methyltetrahydrofolate response with developmental surveillance",
+      "Genetic counselling and family screening given autosomal recessive inheritance",
+      "Long-term follow-up through metabolic medicine and neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for dihydrofolate reductase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dihydrofolate-reductase-deficiency-real-image",
-   "title": "Dihydrofolate reductase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dihydrofolate_reductase_deficiency-pathway",
+      "title": "Dihydrofolate reductase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to active tetrahydrofolate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures and developmental regression indicating cerebral folate deficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and film showing megaloblastic anaemia, Serum and red cell folate and vitamin B12, Cerebrospinal fluid 5-methyltetrahydrofolate measurement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is ineffective because it requires the deficient enzyme for activation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dihydrofolate reductase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dihydrofolate_reductase_deficiency-matrix",
+      "title": "Dihydrofolate reductase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive deficiency of dihydrofolate reductase, the enzyme that reduces dihydrofolate, and dietary folic acid, to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and film showing megaloblastic anaemia, Serum and red cell folate and vitamin B12, Cerebrospinal fluid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebral folate deficiency due to FOLR1 (folate receptor) defects, Nutritional folate deficiency, Vitamin B12 deficiency and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replacement with a pre-reduced folate, folinic acid, which bypasses the enzymatic block, whereas ordinary folic acid is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing folic acid, which cannot be activated when DHFR is deficient, instead of folinic acid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dihydrofolate reductase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 105-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dihydrofolate_reductase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Megaloblastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and red cell folate and vitamin B12",
+          "cells": [
+            {
+              "text": "Blood folate can be normal despite a cerebral deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid 5-methyltetrahydrofolate",
+          "cells": [
+            {
+              "text": "Low CSF folate despite adequate blood folate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DHFR gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms DHFR deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydrofolate_reductase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral folate deficiency from FOLR1 defects",
+          "cells": [
+            {
+              "text": "Confused with DHFR deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional folate deficiency",
+          "cells": [
+            {
+              "text": "Low CSF folate despite adequate blood folate separates the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydrofolate_reductase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Folinic acid",
+          "cells": [
+            {
+              "text": "Pre-reduced folate that bypasses the enzyme block; folic acid is ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dosing for the central nervous system",
+          "cells": [
+            {
+              "text": "Dose must be sufficient to cross into the CNS and correct the cerebral deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "For seizures accompanying the cerebral folate deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "For symptomatic severe megaloblastic anaemia at presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood count, CSF 5-methyltetrahydrofolate response and developmental surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Metabolic medicine and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydrofolate_reductase_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of megaloblastic anemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Cobalamin deficiency or abnormal cobalamin metabolism",
+          "cells": [
+            {
+              "text": "See Tables 105-3 and 105-4 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Folate deficiency or abnormal folate metabolism",
+          "cells": [
+            {
+              "text": "See Table 105-5 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifolate drug therapy",
+          "cells": [
+            {
+              "text": "For example methotrexate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: leukemia and myelodysplasia",
+          "cells": [
+            {
+              "text": "Some cases of acute myeloid leukemia and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: DNA synthesis inhibitors",
+          "cells": [
+            {
+              "text": "Cytosine arabinoside, hydroxyurea, 6-mercaptopurine, azidothymidine (AZT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: orotic aciduria",
+          "cells": [
+            {
+              "text": "Responds to uridine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: thiamine-responsive",
+          "cells": [
+            {
+              "text": "Thiamine-responsive megaloblastic anemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dihydrofolate_reductase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dihydrofolate reductase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DHFR deficiency: megaloblastic anaemia with seizures in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures or regression, severe megaloblastic anaemia, low CSF folate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion for severe anaemia and anticonvulsants for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; CSF 5-methyltetrahydrofolate; blood folate and B12; DHFR gene",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CSF folate low with DHFR gene variants identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FOLR1 cerebral folate deficiency, nutritional folate or B12 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Folinic acid, which bypasses the enzyme block; folic acid is ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dose folinic acid to reach the CNS and correct cerebral folate deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsants for seizures accompanying the cerebral folate deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transfusion for symptomatic severe megaloblastic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor blood count and CSF response with developmental follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early reduced-folate treatment corrects blood changes; delay leaves lasting deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

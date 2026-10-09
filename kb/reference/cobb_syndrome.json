@@ -1,173 +1,458 @@
 {
- "id": "cobb_syndrome",
- "name": "Cobb syndrome",
- "aliases": [
-  "cutaneomeningospinal angiomatosis",
-  "spinal arteriovenous metameric syndrome",
-  "cutaneous-spinal angiomatosis"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Adams and Victor's Principles of Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment (metamere)",
-   "The skin lesion is typically a vascular stain or angioma overlying the trunk or back in the dermatome corresponding to the affected spinal level",
-   "Patients commonly present with a progressive myelopathy: limb weakness, sensory disturbance, and bladder or bowel dysfunction, sometimes with acute deterioration",
-   "The spinal lesion is usually an arteriovenous malformation or fistula that can compromise the cord through mass effect, venous hypertension, or haemorrhage",
-   "The metameric distribution reflects a developmental origin affecting a single embryological segment, and it is generally sporadic rather than inherited",
-   "Recognition of a segmental cutaneous vascular lesion in someone with myelopathy should prompt dedicated spinal vascular imaging",
-   "Management is by a neurovascular multidisciplinary team, with catheter angiography defining the lesion and endovascular embolisation and/or microsurgery used to protect cord function"
+  "id": "cobb_syndrome",
+  "name": "Cobb syndrome",
+  "aliases": [
+    "cutaneomeningospinal angiomatosis",
+    "spinal arteriovenous metameric syndrome",
+    "cutaneous-spinal angiomatosis"
   ],
-  "pathophysiology": "Cobb syndrome is a metameric neurocutaneous vascular disorder in which a vascular malformation of the spinal cord and its coverings coexists with a cutaneous vascular lesion in the matching body segment. The shared segmental distribution is thought to arise from a developmental event affecting cells destined for a single metamere, so that skin, vertebral, meningeal, and cord tissues derived from that segment carry the vascular anomaly. The neurological consequences stem from the spinal arteriovenous malformation, which can injure the cord by direct compression, by diverting blood and raising venous pressure with resulting cord ischaemia, or by haemorrhage. The condition is characteristically sporadic.",
-  "additionalDifferentials": [
-   "Isolated spinal arteriovenous malformation or dural arteriovenous fistula",
-   "Spinal cavernous malformation",
-   "Klippel-Trenaunay syndrome",
-   "Parkes Weber syndrome",
-   "Sturge-Weber syndrome (a cephalic metameric analogue)",
-   "Spinal tumour causing progressive myelopathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change",
-   "Spinal catheter angiography to define the vascular anatomy and feeding vessels",
-   "Clinical mapping of the cutaneous vascular lesion to the corresponding dermatome",
-   "Neurological examination to localise the spinal level and grade deficit",
-   "Dermatological assessment of the cutaneous vascular lesion",
-   "MRI of the brain if a more extensive metameric syndrome is suspected"
-  ],
-  "redFlags": [
-   "Acute or rapidly progressive paraparesis or sensory level suggesting cord compromise or haemorrhage",
-   "New bladder or bowel dysfunction indicating significant cord involvement",
-   "Sudden severe back pain with neurological signs suggesting spinal haemorrhage",
-   "Progressive deterioration despite conservative measures, requiring urgent neurovascular intervention"
-  ],
-  "prognosis": "Outcome depends on the size, location, and haemodynamics of the spinal malformation and on the degree of cord injury at presentation. Timely diagnosis and treatment can stabilise or improve neurological function, whereas late presentation with established cord damage or haemorrhage carries a risk of permanent disability.",
-  "pitfalls": [
-   "Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation",
-   "Attributing progressive myelopathy to more common causes without considering a spinal vascular lesion",
-   "Delaying spinal vascular imaging in a patient with segmental cutaneous and neurological findings",
-   "Underestimating the risk of haemorrhage and cord ischaemia from an untreated arteriovenous malformation"
-  ],
-  "references": [
-   "GeneReviews (University of Washington)",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical resection to decompress and protect the cord",
-   "Urgent neurosurgical intervention for cord compression, venous hypertension or haemorrhage causing acute or progressive myelopathy",
-   "Symptomatic and rehabilitative care: physiotherapy, spasticity management, and bladder and bowel programmes for neurogenic dysfunction",
-   "Dermatological management of the segmental cutaneous vascular lesion (angioma or capillary malformation), with laser therapy if symptomatic or cosmetically troubling",
-   "Serial neurological examination and interval spinal MRI to monitor the malformation and detect recurrence or progression",
-   "Multidisciplinary care coordinated between interventional neuroradiology, spinal neurosurgery, neurology, dermatology and rehabilitation",
-   "Escalate immediately for acute neurological deterioration, which may signal intralesional haemorrhage requiring emergency angiography and intervention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cobb_syndrome-pathway",
-   "title": "Cobb syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment (metamere)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute or rapidly progressive paraparesis or sensory level suggesting cord compromise or haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change, Spinal catheter angiography to define the vascular anatomy and feeding vessels, Clinical mapping of the cutaneous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical resection to decompress and protect the cord"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cobb syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cobb_syndrome-matrix",
-   "title": "Cobb syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Adams and Victor's Principles of Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment (metamere)",
+      "The skin lesion is typically a vascular stain or angioma overlying the trunk or back in the dermatome corresponding to the affected spinal level",
+      "Patients commonly present with a progressive myelopathy: limb weakness, sensory disturbance, and bladder or bowel dysfunction, sometimes with acute deterioration",
+      "The spinal lesion is usually an arteriovenous malformation or fistula that can compromise the cord through mass effect, venous hypertension, or haemorrhage",
+      "The metameric distribution reflects a developmental origin affecting a single embryological segment, and it is generally sporadic rather than inherited",
+      "Recognition of a segmental cutaneous vascular lesion in someone with myelopathy should prompt dedicated spinal vascular imaging",
+      "Management is by a neurovascular multidisciplinary team, with catheter angiography defining the lesion and endovascular embolisation and/or microsurgery used to protect cord function"
     ],
-    [
-     "Key Investigations",
-     "MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change, Spinal catheter angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cobb syndrome is a metameric neurocutaneous vascular disorder in which a vascular malformation of the spinal cord and its coverings coexists with a cutaneous vascular lesion in the matching body segment. The shared segmental distribution is thought to arise from a developmental event affecting cells destined for a single metamere, so that skin, vertebral, meningeal, and cord tissues derived from that segment carry the vascular anomaly. The neurological consequences stem from the spinal arteriovenous malformation, which can injure the cord by direct compression, by diverting blood and raising venous pressure with resulting cord ischaemia, or by haemorrhage. The condition is characteristically sporadic.",
+    "additionalDifferentials": [
+      "Isolated spinal arteriovenous malformation or dural arteriovenous fistula",
+      "Spinal cavernous malformation",
+      "Klippel-Trenaunay syndrome",
+      "Parkes Weber syndrome",
+      "Sturge-Weber syndrome (a cephalic metameric analogue)",
+      "Spinal tumour causing progressive myelopathy"
     ],
-    [
-     "Primary Differentials",
-     "Isolated spinal arteriovenous malformation or dural arteriovenous fistula, Spinal cavernous malformation, Klippel-Trenaunay",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change",
+      "Spinal catheter angiography to define the vascular anatomy and feeding vessels",
+      "Clinical mapping of the cutaneous vascular lesion to the corresponding dermatome",
+      "Neurological examination to localise the spinal level and grade deficit",
+      "Dermatological assessment of the cutaneous vascular lesion",
+      "MRI of the brain if a more extensive metameric syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute or rapidly progressive paraparesis or sensory level suggesting cord compromise or haemorrhage",
+      "New bladder or bowel dysfunction indicating significant cord involvement",
+      "Sudden severe back pain with neurological signs suggesting spinal haemorrhage",
+      "Progressive deterioration despite conservative measures, requiring urgent neurovascular intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the size, location, and haemodynamics of the spinal malformation and on the degree of cord injury at presentation. Timely diagnosis and treatment can stabilise or improve neurological function, whereas late presentation with established cord damage or haemorrhage carries a risk of permanent disability.",
+    "pitfalls": [
+      "Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation",
+      "Attributing progressive myelopathy to more common causes without considering a spinal vascular lesion",
+      "Delaying spinal vascular imaging in a patient with segmental cutaneous and neurological findings",
+      "Underestimating the risk of haemorrhage and cord ischaemia from an untreated arteriovenous malformation"
+    ],
+    "references": [
+      "GeneReviews (University of Washington)",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical resection to decompress and protect the cord",
+      "Urgent neurosurgical intervention for cord compression, venous hypertension or haemorrhage causing acute or progressive myelopathy",
+      "Symptomatic and rehabilitative care: physiotherapy, spasticity management, and bladder and bowel programmes for neurogenic dysfunction",
+      "Dermatological management of the segmental cutaneous vascular lesion (angioma or capillary malformation), with laser therapy if symptomatic or cosmetically troubling",
+      "Serial neurological examination and interval spinal MRI to monitor the malformation and detect recurrence or progression",
+      "Multidisciplinary care coordinated between interventional neuroradiology, spinal neurosurgery, neurology, dermatology and rehabilitation",
+      "Escalate immediately for acute neurological deterioration, which may signal intralesional haemorrhage requiring emergency angiography and intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for cobb syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cobb-syndrome-real-image",
-   "title": "Cobb syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cobb_syndrome-pathway",
+      "title": "Cobb syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment (metamere)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute or rapidly progressive paraparesis or sensory level suggesting cord compromise or haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change, Spinal catheter angiography to define the vascular anatomy and feeding vessels, Clinical mapping of the cutaneous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical resection to decompress and protect the cord"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cobb syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cobb_syndrome-matrix",
+      "title": "Cobb syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The syndrome links a spinal cord vascular malformation with a cutaneous vascular lesion, both localised to the same body segment",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the spine with contrast to identify the cord vascular malformation and any cord signal change, Spinal catheter angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated spinal arteriovenous malformation or dural arteriovenous fistula, Spinal cavernous malformation, Klippel-Trenaunay",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment of the spinal arteriovenous malformation or fistula by endovascular embolisation and/or microsurgical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a truncal vascular birthmark as purely cosmetic and missing the associated spinal malformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cobb syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cobb_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine with contrast",
+          "cells": [
+            {
+              "text": "Cord vascular malformation and cord signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal catheter angiography",
+          "cells": [
+            {
+              "text": "Vascular anatomy and feeding vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical mapping of the cutaneous lesion to the dermatome",
+          "cells": [
+            {
+              "text": "Segmental match"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Spinal level and grade of deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Extensive metameric syndrome suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobb_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated spinal arteriovenous malformation or dural fistula",
+          "cells": [
+            {
+              "text": "No segmental cutaneous lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Capillary and venous malformation syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sturge-Weber syndrome",
+          "cells": [
+            {
+              "text": "Cephalic metameric analogue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobb_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endovascular embolisation and or microsurgical resection",
+          "cells": [
+            {
+              "text": "Decompresses and protects the cord"
+            },
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent neurosurgical intervention",
+          "cells": [
+            {
+              "text": "Cord compression, venous hypertension or haemorrhage"
+            },
+            {
+              "text": "Acute or progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, spasticity care and bladder and bowel programmes",
+          "cells": [
+            {
+              "text": "Neurogenic dysfunction"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser therapy for the cutaneous vascular lesion",
+          "cells": [
+            {
+              "text": "Angioma or capillary malformation if symptomatic or cosmetically troubling"
+            },
+            {
+              "text": "Dermatological care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurological examination and interval spinal MRI",
+          "cells": [
+            {
+              "text": "Monitors the malformation and detects recurrence"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cobb_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cobb syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cobb syndrome: progressive myelopathy with a segmental cutaneous vascular stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute paraparesis, new bladder or bowel loss, sudden back pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurovascular intervention for haemorrhage or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast spinal MRI and catheter angiography of the vascular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cord vascular malformation matches the cutaneous dermatome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endovascular embolisation and or microsurgical resection of the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check isolated spinal AVM, Klippel-Trenaunay and Sturge-Weber",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, spasticity care and bladder and bowel programmes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser therapy for the cutaneous vascular lesion if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neurological examination and interval spinal MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurovascular care; escalate for acute deterioration",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,168 +1,457 @@
 {
- "id": "dermatochalasis",
- "name": "Dermatochalasis",
- "aliases": [
-  "baggy eyelids",
-  "redundant eyelid skin"
- ],
- "class": "non_infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Oculoplastic surgery references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
-   "Very common in older adults and usually affects the upper lids most noticeably",
-   "Excess upper lid tissue can droop over the lashes and obscure the superior visual field",
-   "It is distinct from ptosis (a low lid margin) and from blepharochalasis (recurrent inflammatory episodes)",
-   "Superior visual field testing can document functional impairment to justify surgery",
-   "Blepharoplasty is the treatment when there is functional or significant cosmetic concern"
+  "id": "dermatochalasis",
+  "name": "Dermatochalasis",
+  "aliases": [
+    "baggy eyelids",
+    "redundant eyelid skin"
   ],
-  "pathophysiology": "Dermatochalasis results from age-related degeneration of eyelid skin and supporting tissues, with loss of skin elasticity, attenuation of the orbital septum and pseudoherniation of orbital fat. Gravity and chronic sun exposure contribute to the redundant, lax skin. The excess upper eyelid tissue can hang over the lid margin and lashes, mechanically limiting the superior visual field, while lower-lid changes are largely cosmetic.",
-  "additionalDifferentials": [
-   "Blepharoptosis (aponeurotic ptosis)",
-   "Blepharochalasis",
-   "Brow ptosis",
-   "Thyroid eye disease",
-   "Floppy eyelid syndrome"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis",
-   "Superior visual field testing to document functional impairment",
-   "Assessment of levator function and lid crease",
-   "Photography for documentation",
-   "Exclusion of thyroid and other secondary causes of lid change"
-  ],
-  "redFlags": [
-   "Rapidly progressive or asymmetric changes suggesting another cause",
-   "Coexisting ptosis needing separate correction",
-   "Signs of thyroid eye disease",
-   "Lesions suggesting eyelid neoplasm within redundant skin"
-  ],
-  "prognosis": "The condition is benign and slowly progressive; blepharoplasty reliably improves the visual field and appearance, though ageing changes may continue.",
-  "pitfalls": [
-   "Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis",
-   "Overlooking thyroid eye disease",
-   "Attributing all upper-lid heaviness to skin when the brow is the problem",
-   "Missing an eyelid tumour hidden within redundant folds"
-  ],
-  "references": [
-   "Oculoplastic surgery references (standard reference)",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field impairment or significant cosmetic concern",
-   "Document functional impairment with superior visual-field testing to justify surgical intervention",
-   "Identify and address coexisting brow ptosis with a brow lift, and distinguish and manage true ptosis where present",
-   "Exclude secondary causes such as thyroid eye disease before surgery",
-   "Observe mild or asymptomatic cases conservatively as the condition is benign",
-   "Refer to oculoplastic surgery and monitor postoperatively"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatochalasis-pathway",
-   "title": "Dermatochalasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric changes suggesting another cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis, Superior visual field testing to document functional impairment, Assessment of levator function and lid crease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field impairment or significant cosmetic concern"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatochalasis."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatochalasis-matrix",
-   "title": "Dermatochalasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oculoplastic surgery references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
+      "Very common in older adults and usually affects the upper lids most noticeably",
+      "Excess upper lid tissue can droop over the lashes and obscure the superior visual field",
+      "It is distinct from ptosis (a low lid margin) and from blepharochalasis (recurrent inflammatory episodes)",
+      "Superior visual field testing can document functional impairment to justify surgery",
+      "Blepharoplasty is the treatment when there is functional or significant cosmetic concern"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis, Superior visual field testing to document",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatochalasis results from age-related degeneration of eyelid skin and supporting tissues, with loss of skin elasticity, attenuation of the orbital septum and pseudoherniation of orbital fat. Gravity and chronic sun exposure contribute to the redundant, lax skin. The excess upper eyelid tissue can hang over the lid margin and lashes, mechanically limiting the superior visual field, while lower-lid changes are largely cosmetic.",
+    "additionalDifferentials": [
+      "Blepharoptosis (aponeurotic ptosis)",
+      "Blepharochalasis",
+      "Brow ptosis",
+      "Thyroid eye disease",
+      "Floppy eyelid syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Blepharoptosis (aponeurotic ptosis), Blepharochalasis, Brow ptosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis",
+      "Superior visual field testing to document functional impairment",
+      "Assessment of levator function and lid crease",
+      "Photography for documentation",
+      "Exclusion of thyroid and other secondary causes of lid change"
     ],
-    [
-     "Management Strategy",
-     "Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or asymmetric changes suggesting another cause",
+      "Coexisting ptosis needing separate correction",
+      "Signs of thyroid eye disease",
+      "Lesions suggesting eyelid neoplasm within redundant skin"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and slowly progressive; blepharoplasty reliably improves the visual field and appearance, though ageing changes may continue.",
+    "pitfalls": [
+      "Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis",
+      "Overlooking thyroid eye disease",
+      "Attributing all upper-lid heaviness to skin when the brow is the problem",
+      "Missing an eyelid tumour hidden within redundant folds"
+    ],
+    "references": [
+      "Oculoplastic surgery references (standard reference)",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field impairment or significant cosmetic concern",
+      "Document functional impairment with superior visual-field testing to justify surgical intervention",
+      "Identify and address coexisting brow ptosis with a brow lift, and distinguish and manage true ptosis where present",
+      "Exclude secondary causes such as thyroid eye disease before surgery",
+      "Observe mild or asymptomatic cases conservatively as the condition is benign",
+      "Refer to oculoplastic surgery and monitor postoperatively"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatochalasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatochalasis-real-image",
-   "title": "Dermatochalasis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dermatochalasis-pathway",
+      "title": "Dermatochalasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric changes suggesting another cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis, Superior visual field testing to document functional impairment, Assessment of levator function and lid crease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field impairment or significant cosmetic concern"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatochalasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatochalasis-matrix",
+      "title": "Dermatochalasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Age-related redundancy and laxity of eyelid skin, with weakening of the orbital septum and herniation of orbital fat",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis, Superior visual field testing to document",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Blepharoptosis (aponeurotic ptosis), Blepharochalasis, Brow ptosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer upper-lid blepharoplasty with excision of redundant skin and pseudoherniated orbital fat for functional visual-field",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking coexisting ptosis or brow ptosis for simple dermatochalasis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatochalasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oculoplastic surgery references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatochalasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment distinguishing skin redundancy from ptosis and brow ptosis",
+          "cells": [
+            {
+              "text": "Separates redundancy from true ptosis and brow ptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior visual field testing",
+          "cells": [
+            {
+              "text": "Documents functional impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of thyroid and other secondary causes",
+          "cells": [
+            {
+              "text": "Thyroid eye disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photography",
+          "cells": [
+            {
+              "text": "Documentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatochalasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Blepharoptosis (aponeurotic ptosis)",
+          "cells": [
+            {
+              "text": "True ptosis needs separate correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brow ptosis",
+          "cells": [
+            {
+              "text": "The brow, not the skin, is the problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Signs of thyroid eye disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid neoplasm within redundant skin",
+          "cells": [
+            {
+              "text": "Lesions suggesting neoplasm hidden in folds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatochalasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper-lid blepharoplasty",
+          "cells": [
+            {
+              "text": "Excision of redundant skin and pseudoherniated fat for visual-field impairment or cosmetic concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual-field documentation",
+          "cells": [
+            {
+              "text": "Superior visual-field testing justifies surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brow lift and ptosis correction",
+          "cells": [
+            {
+              "text": "For coexisting brow ptosis; true ptosis managed separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude secondary causes",
+          "cells": [
+            {
+              "text": "Thyroid eye disease before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "Mild or asymptomatic cases; the condition is benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculoplastic referral",
+          "cells": [
+            {
+              "text": "Surgical planning and postoperative monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatochalasis-dx-mgmt",
+      "title": "Diagnosis and management of Dermatochalasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatochalasis: redundant upper-lid skin with heaviness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid or asymmetric change, thyroid signs, lid lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: assess for thyroid eye disease or eyelid neoplasm before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Separate redundancy from ptosis and brow ptosis; visual-field test; thyroid screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the visual field impaired by redundant skin alone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe mild cases; treat coexisting ptosis or brow ptosis separately",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Upper-lid blepharoplasty for functional impairment or cosmetic concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Document visual-field impairment to justify surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Brow lift for coexisting brow ptosis; correct true ptosis separately",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude thyroid eye disease before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to oculoplastics and monitor after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and slowly progressive; blepharoplasty reliably improves field and appearance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

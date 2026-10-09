@@ -1,174 +1,452 @@
 {
- "id": "coronary_artery_fistula",
- "name": "Coronary artery fistula",
- "aliases": [
-  "coronary arteriovenous fistula",
-  "coronary cameral fistula",
-  "congenital coronary fistula",
-  "coronary AV fistula"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
-   "Most drain into low-pressure right-sided structures such as the right ventricle, right atrium, coronary sinus or pulmonary artery",
-   "A continuous murmur is characteristic and is often louder in diastole, differing from the classic ductus murmur in location",
-   "Coronary steal can divert flow away from the myocardium distal to the fistula, causing ischaemia despite normal epicardial arteries",
-   "Many small fistulae are asymptomatic and found incidentally, whereas large ones cause a significant left-to-right shunt and volume loading",
-   "Complications include heart failure, arrhythmia, aneurysmal dilatation of the feeding artery, thrombosis and rarely rupture",
-   "Closure by transcatheter device or coil, or surgical ligation, is considered for large or symptomatic fistulae"
+  "id": "coronary_artery_fistula",
+  "name": "Coronary artery fistula",
+  "aliases": [
+    "coronary arteriovenous fistula",
+    "coronary cameral fistula",
+    "congenital coronary fistula",
+    "coronary AV fistula"
   ],
-  "pathophysiology": "A coronary artery fistula is a direct channel connecting a coronary artery to a cardiac chamber or great vessel, so blood bypasses the intramyocardial capillary network. Because the drainage site is usually a lower-pressure right-sided structure, flow runs continuously throughout the cardiac cycle, producing a continuous murmur and a left-to-right shunt when drainage is into the venous circulation. The chronically high flow dilates and can aneurysmally enlarge the feeding artery. Flow preferentially runs down the low-resistance fistulous track rather than into the higher-resistance distal myocardial bed, a coronary steal that may cause regional ischaemia. Large shunts impose volume loading on the receiving chambers and can lead to heart failure and pulmonary overcirculation over time.",
-  "additionalDifferentials": [
-   "Patent ductus arteriosus",
-   "Aortopulmonary window",
-   "Ruptured sinus of Valsalva aneurysm",
-   "Systemic or pulmonary arteriovenous malformation",
-   "Anomalous origin of a coronary artery from the pulmonary artery",
-   "Venous hum"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography with colour Doppler to localise the fistula and its drainage site",
-   "Coronary CT angiography to define the course and drainage of the fistula",
-   "Cardiac catheterisation with coronary angiography as the reference standard and for shunt quantification",
-   "Cardiac MRI to assess chamber volumes and shunt magnitude",
-   "Electrocardiogram and exercise testing for evidence of ischaemia",
-   "Chest radiograph for cardiomegaly and pulmonary plethora in large shunts"
-  ],
-  "redFlags": [
-   "Anginal symptoms or evidence of myocardial ischaemia from coronary steal",
-   "Heart failure from a large left-to-right shunt",
-   "A rapidly enlarging or aneurysmal feeding coronary artery",
-   "Arrhythmia, thrombosis or signs of impending rupture"
-  ],
-  "prognosis": "Small fistulae often remain benign and may close spontaneously, while large or symptomatic fistulae carry risks of ischaemia, heart failure and aneurysm; outcomes after device or surgical closure are generally favourable.",
-  "pitfalls": [
-   "Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels",
-   "Assuming normal epicardial coronaries exclude ischaemia despite ongoing steal",
-   "Underestimating the shunt in a large fistula draining to the right heart",
-   "Overlooking aneurysmal dilatation of the feeding artery and its thrombotic risk"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously",
-   "Close large or symptomatic fistulae definitively by transcatheter device occlusion or surgical ligation",
-   "Use antiplatelet or anticoagulant therapy where the feeding artery is aneurysmally dilated or thrombotic risk is high, and following closure",
-   "Treat volume-loading heart failure with diuretics and address ischaemia arising from coronary steal",
-   "Monitor with echocardiography, cross-sectional imaging and, where needed, angiography for shunt size, aneurysm and post-closure patency",
-   "Refer to a congenital cardiology service for intervention planning",
-   "Escalate for heart failure, arrhythmia, aneurysmal enlargement or thrombotic complications"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coronary_artery_fistula-pathway",
-   "title": "Coronary artery fistula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Anginal symptoms or evidence of myocardial ischaemia from coronary steal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography with colour Doppler to localise the fistula and its drainage site, Coronary CT angiography to define the course and drainage of the fistula, Cardiac catheterisation with coronary angiography as the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coronary artery fistula."
-  }
- ],
- "tables": [
-  {
-   "id": "coronary_artery_fistula-matrix",
-   "title": "Coronary artery fistula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+      "Most drain into low-pressure right-sided structures such as the right ventricle, right atrium, coronary sinus or pulmonary artery",
+      "A continuous murmur is characteristic and is often louder in diastole, differing from the classic ductus murmur in location",
+      "Coronary steal can divert flow away from the myocardium distal to the fistula, causing ischaemia despite normal epicardial arteries",
+      "Many small fistulae are asymptomatic and found incidentally, whereas large ones cause a significant left-to-right shunt and volume loading",
+      "Complications include heart failure, arrhythmia, aneurysmal dilatation of the feeding artery, thrombosis and rarely rupture",
+      "Closure by transcatheter device or coil, or surgical ligation, is considered for large or symptomatic fistulae"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography with colour Doppler to localise the fistula and its drainage site, Coronary CT angiography to define the course",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A coronary artery fistula is a direct channel connecting a coronary artery to a cardiac chamber or great vessel, so blood bypasses the intramyocardial capillary network. Because the drainage site is usually a lower-pressure right-sided structure, flow runs continuously throughout the cardiac cycle, producing a continuous murmur and a left-to-right shunt when drainage is into the venous circulation. The chronically high flow dilates and can aneurysmally enlarge the feeding artery. Flow preferentially runs down the low-resistance fistulous track rather than into the higher-resistance distal myocardial bed, a coronary steal that may cause regional ischaemia. Large shunts impose volume loading on the receiving chambers and can lead to heart failure and pulmonary overcirculation over time.",
+    "additionalDifferentials": [
+      "Patent ductus arteriosus",
+      "Aortopulmonary window",
+      "Ruptured sinus of Valsalva aneurysm",
+      "Systemic or pulmonary arteriovenous malformation",
+      "Anomalous origin of a coronary artery from the pulmonary artery",
+      "Venous hum"
     ],
-    [
-     "Primary Differentials",
-     "Patent ductus arteriosus, Aortopulmonary window, Ruptured sinus of Valsalva aneurysm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography with colour Doppler to localise the fistula and its drainage site",
+      "Coronary CT angiography to define the course and drainage of the fistula",
+      "Cardiac catheterisation with coronary angiography as the reference standard and for shunt quantification",
+      "Cardiac MRI to assess chamber volumes and shunt magnitude",
+      "Electrocardiogram and exercise testing for evidence of ischaemia",
+      "Chest radiograph for cardiomegaly and pulmonary plethora in large shunts"
     ],
-    [
-     "Management Strategy",
-     "Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously",
-     "Core treatment modality"
+    "redFlags": [
+      "Anginal symptoms or evidence of myocardial ischaemia from coronary steal",
+      "Heart failure from a large left-to-right shunt",
+      "A rapidly enlarging or aneurysmal feeding coronary artery",
+      "Arrhythmia, thrombosis or signs of impending rupture"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small fistulae often remain benign and may close spontaneously, while large or symptomatic fistulae carry risks of ischaemia, heart failure and aneurysm; outcomes after device or surgical closure are generally favourable.",
+    "pitfalls": [
+      "Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels",
+      "Assuming normal epicardial coronaries exclude ischaemia despite ongoing steal",
+      "Underestimating the shunt in a large fistula draining to the right heart",
+      "Overlooking aneurysmal dilatation of the feeding artery and its thrombotic risk"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously",
+      "Close large or symptomatic fistulae definitively by transcatheter device occlusion or surgical ligation",
+      "Use antiplatelet or anticoagulant therapy where the feeding artery is aneurysmally dilated or thrombotic risk is high, and following closure",
+      "Treat volume-loading heart failure with diuretics and address ischaemia arising from coronary steal",
+      "Monitor with echocardiography, cross-sectional imaging and, where needed, angiography for shunt size, aneurysm and post-closure patency",
+      "Refer to a congenital cardiology service for intervention planning",
+      "Escalate for heart failure, arrhythmia, aneurysmal enlargement or thrombotic complications"
     ]
-   ],
-   "caption": "Overview comparison matrix for coronary artery fistula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coronary-artery-fistula-real-image",
-   "title": "Coronary artery fistula: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "coronary_artery_fistula-pathway",
+      "title": "Coronary artery fistula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Anginal symptoms or evidence of myocardial ischaemia from coronary steal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography with colour Doppler to localise the fistula and its drainage site, Coronary CT angiography to define the course and drainage of the fistula, Cardiac catheterisation with coronary angiography as the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coronary artery fistula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coronary_artery_fistula-matrix",
+      "title": "Coronary artery fistula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography with colour Doppler to localise the fistula and its drainage site, Coronary CT angiography to define the course",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Patent ductus arteriosus, Aortopulmonary window, Ruptured sinus of Valsalva aneurysm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe small asymptomatic fistulae with periodic imaging, as many remain benign and some close spontaneously",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a continuous murmur to a ductus and missing the fistula on the coronary vessels",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coronary artery fistula."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_artery_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with colour Doppler",
+          "cells": [
+            {
+              "text": "Fistula and drainage site localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary CT angiography",
+          "cells": [
+            {
+              "text": "Course and drainage defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation with coronary angiography",
+          "cells": [
+            {
+              "text": "Reference standard; shunt quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and exercise testing",
+          "cells": [
+            {
+              "text": "Ischaemia evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and pulmonary plethora in large shunts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_artery_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patent ductus arteriosus",
+          "cells": [
+            {
+              "text": "Pitfall: fistula missed when attributed to the ductus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortopulmonary window",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous hum",
+          "cells": [
+            {
+              "text": "Named murmur look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_artery_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small asymptomatic fistulae; many remain benign and some close spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive closure",
+          "cells": [
+            {
+              "text": "Transcatheter device occlusion or surgical ligation for large or symptomatic fistulae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet or anticoagulant therapy",
+          "cells": [
+            {
+              "text": "Dilated feeding artery, high thrombotic risk, and after closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure and steal",
+          "cells": [
+            {
+              "text": "Diuretics for volume-loading failure; ischaemia from coronary steal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, cross-sectional imaging and angiography for patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiology referral",
+          "cells": [
+            {
+              "text": "Intervention planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_artery_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Coronary artery fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary artery fistula: continuous murmur with coronary steal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (anginal symptoms, heart failure, rapidly enlarging artery, arrhythmia)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for ischaemia or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo Doppler; coronary CT; catheterisation; cardiac MRI; ECG and exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does catheterisation define the fistula and its shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PDA, aortopulmonary window or venous hum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small asymptomatic fistulae with periodic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Close large or symptomatic fistulae by device or surgical ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics for heart failure; monitor for aneurysm and residual flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Small fistulae often remain benign; large ones risk ischaemia and heart failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,425 @@
 {
- "id": "mesenteric_cyst",
- "name": "mesenteric cyst",
- "aliases": [
-  "mesenteric lymphangioma",
-  "chylolymphatic cyst"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Schwartz's Principles of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and particularly the ileum.",
-   "The de Perrot classification groups them by origin into lymphatic, mesothelial, enteric, urogenital, dermoid, and non-pancreatic pseudocyst types, with lymphatic (lymphangiomatous) lesions predominating.",
-   "Many are asymptomatic incidental findings; symptomatic lesions cause abdominal distension, vague pain, or a palpable mass.",
-   "The classic Tillaux sign is a mass that moves freely in a plane perpendicular to the axis of the mesentery but is restricted along it.",
-   "Complications include torsion, intracystic haemorrhage, infection, rupture, and bowel obstruction, any of which can produce an acute abdomen.",
-   "Ultrasound and CT typically show a thin-walled, well-defined, fluid-filled lesion; internal septation or chylous fluid suggests a lymphatic origin.",
-   "Complete surgical excision is the treatment of choice and may require resection of intimately adherent bowel to ensure clearance.",
-   "Chylous ascites can accompany or follow lymphatic cysts and complicate surgical management."
+  "id": "mesenteric_cyst",
+  "name": "mesenteric cyst",
+  "aliases": [
+    "mesenteric lymphangioma",
+    "chylolymphatic cyst"
   ],
-  "pathophysiology": "Mesenteric cysts are benign lesions most often thought to result from proliferation of ectopic or maldeveloped lymphatic tissue that fails to establish communication with the normal lymphatic system, leading to progressive accumulation of lymph or chyle. Other histogenetic origins account for the mesothelial, enteric, and urogenital variants, reflecting entrapped embryonic tissues within the mesenteric leaves. The cyst enlarges as fluid accumulates, exerting mass effect on adjacent bowel and mesenteric vessels; because the lesion lies between the mesenteric leaves it can twist on its pedicle, bleed, become infected, or rupture. The lining varies with origin — endothelial in lymphatic cysts and mesothelial in mesothelial cysts — a distinction confirmed histologically and with immunohistochemistry.",
-  "additionalDifferentials": [
-   "omental cyst",
-   "intestinal duplication cyst",
-   "ovarian cyst",
-   "pancreatic pseudocyst",
-   "hydatid cyst",
-   "cystic mesothelioma",
-   "choledochal cyst"
-  ],
-  "additionalInvestigations": [
-   "abdominal ultrasound to characterise the cyst and its septa",
-   "contrast-enhanced CT to define anatomy and vascular relationships",
-   "MRI for soft-tissue characterisation and surgical planning",
-   "analysis of aspirated fluid for chyle versus serous content",
-   "histopathology with endothelial and mesothelial immunohistochemical markers",
-   "diagnostic laparoscopy in equivocal cases"
-  ],
-  "redFlags": [
-   "acute abdomen from torsion, intracystic haemorrhage, or rupture",
-   "features of bowel obstruction",
-   "rapid enlargement or systemic signs suggesting infection",
-   "development of chylous ascites",
-   "solid or thickened components raising concern for cystic mesothelioma"
-  ],
-  "prognosis": "Prognosis is excellent after complete excision, with cure and low recurrence. Incomplete removal of lymphatic lesions may be followed by recurrence.",
-  "pitfalls": [
-   "misinterpreting a large cyst as free ascites on imaging",
-   "confusing the lesion with an ovarian cyst in female patients",
-   "incomplete excision of a lymphatic cyst leading to recurrence",
-   "underestimating the need for adjacent bowel resection when the cyst is inseparable from the mesenteric vessels",
-   "overlooking postoperative chylous leak after excision of a lymphatic cyst"
-  ],
-  "references": [
-   "Schwartz's Principles of Surgery",
-   "Sabiston Textbook of Surgery",
-   "Ashcraft's Pediatric Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible",
-   "Segmental bowel resection when the cyst is inseparable from adjacent bowel or its blood supply",
-   "Urgent surgery for acute complications such as torsion, intracystic haemorrhage, infection, rupture or bowel obstruction",
-   "Histopathological confirmation with immunohistochemistry to define origin and exclude malignancy",
-   "Marsupialisation or sclerotherapy only when complete excision is not feasible, accepting a higher recurrence risk",
-   "Follow-up for recurrence, particularly after incomplete removal of lymphatic lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mesenteric_cyst-pathway",
-   "title": "mesenteric cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and particularly the ileum.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: acute abdomen from torsion, intracystic haemorrhage, or rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: abdominal ultrasound to characterise the cyst and its septa, contrast-enhanced CT to define anatomy and vascular relationships, MRI for soft-tissue characterisation and surgical planning"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: misinterpreting a large cyst as free ascites on imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mesenteric cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "mesenteric_cyst-matrix",
-   "title": "mesenteric cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Schwartz's Principles of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and particularly the ileum.",
+      "The de Perrot classification groups them by origin into lymphatic, mesothelial, enteric, urogenital, dermoid, and non-pancreatic pseudocyst types, with lymphatic (lymphangiomatous) lesions predominating.",
+      "Many are asymptomatic incidental findings; symptomatic lesions cause abdominal distension, vague pain, or a palpable mass.",
+      "The classic Tillaux sign is a mass that moves freely in a plane perpendicular to the axis of the mesentery but is restricted along it.",
+      "Complications include torsion, intracystic haemorrhage, infection, rupture, and bowel obstruction, any of which can produce an acute abdomen.",
+      "Ultrasound and CT typically show a thin-walled, well-defined, fluid-filled lesion; internal septation or chylous fluid suggests a lymphatic origin.",
+      "Complete surgical excision is the treatment of choice and may require resection of intimately adherent bowel to ensure clearance.",
+      "Chylous ascites can accompany or follow lymphatic cysts and complicate surgical management."
     ],
-    [
-     "Key Investigations",
-     "abdominal ultrasound to characterise the cyst and its septa, contrast-enhanced CT to define anatomy and vascular relationships,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mesenteric cysts are benign lesions most often thought to result from proliferation of ectopic or maldeveloped lymphatic tissue that fails to establish communication with the normal lymphatic system, leading to progressive accumulation of lymph or chyle. Other histogenetic origins account for the mesothelial, enteric, and urogenital variants, reflecting entrapped embryonic tissues within the mesenteric leaves. The cyst enlarges as fluid accumulates, exerting mass effect on adjacent bowel and mesenteric vessels; because the lesion lies between the mesenteric leaves it can twist on its pedicle, bleed, become infected, or rupture. The lining varies with origin — endothelial in lymphatic cysts and mesothelial in mesothelial cysts — a distinction confirmed histologically and with immunohistochemistry.",
+    "additionalDifferentials": [
+      "omental cyst",
+      "intestinal duplication cyst",
+      "ovarian cyst",
+      "pancreatic pseudocyst",
+      "hydatid cyst",
+      "cystic mesothelioma",
+      "choledochal cyst"
     ],
-    [
-     "Primary Differentials",
-     "omental cyst, intestinal duplication cyst, ovarian cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "abdominal ultrasound to characterise the cyst and its septa",
+      "contrast-enhanced CT to define anatomy and vascular relationships",
+      "MRI for soft-tissue characterisation and surgical planning",
+      "analysis of aspirated fluid for chyle versus serous content",
+      "histopathology with endothelial and mesothelial immunohistochemical markers",
+      "diagnostic laparoscopy in equivocal cases"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible",
-     "Core treatment modality"
+    "redFlags": [
+      "acute abdomen from torsion, intracystic haemorrhage, or rupture",
+      "features of bowel obstruction",
+      "rapid enlargement or systemic signs suggesting infection",
+      "development of chylous ascites",
+      "solid or thickened components raising concern for cystic mesothelioma"
     ],
-    [
-     "Clinical Pitfall",
-     "misinterpreting a large cyst as free ascites on imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent after complete excision, with cure and low recurrence. Incomplete removal of lymphatic lesions may be followed by recurrence.",
+    "pitfalls": [
+      "misinterpreting a large cyst as free ascites on imaging",
+      "confusing the lesion with an ovarian cyst in female patients",
+      "incomplete excision of a lymphatic cyst leading to recurrence",
+      "underestimating the need for adjacent bowel resection when the cyst is inseparable from the mesenteric vessels",
+      "overlooking postoperative chylous leak after excision of a lymphatic cyst"
+    ],
+    "references": [
+      "Schwartz's Principles of Surgery",
+      "Sabiston Textbook of Surgery",
+      "Ashcraft's Pediatric Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible",
+      "Segmental bowel resection when the cyst is inseparable from adjacent bowel or its blood supply",
+      "Urgent surgery for acute complications such as torsion, intracystic haemorrhage, infection, rupture or bowel obstruction",
+      "Histopathological confirmation with immunohistochemistry to define origin and exclude malignancy",
+      "Marsupialisation or sclerotherapy only when complete excision is not feasible, accepting a higher recurrence risk",
+      "Follow-up for recurrence, particularly after incomplete removal of lymphatic lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for mesenteric cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mesenteric-cyst-real-image",
-   "title": "mesenteric cyst: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "mesenteric_cyst-pathway",
+      "title": "mesenteric cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and particularly the ileum.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: acute abdomen from torsion, intracystic haemorrhage, or rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: abdominal ultrasound to characterise the cyst and its septa, contrast-enhanced CT to define anatomy and vascular relationships, MRI for soft-tissue characterisation and surgical planning"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: misinterpreting a large cyst as free ascites on imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mesenteric cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mesenteric_cyst-matrix",
+      "title": "mesenteric cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mesenteric cysts are rare intra-abdominal cysts arising within the mesentery, most commonly in the small bowel mesentery and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "abdominal ultrasound to characterise the cyst and its septa, contrast-enhanced CT to define anatomy and vascular relationships,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "omental cyst, intestinal duplication cyst, ovarian cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision as the definitive treatment, by laparoscopy or laparotomy, with enucleation where possible",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "misinterpreting a large cyst as free ascites on imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mesenteric cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Schwartz's Principles of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mesenteric_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Cyst and septa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Anatomy and vascular relationships"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analysis of aspirated fluid",
+          "cells": [
+            {
+              "text": "Chyle versus serous content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with endothelial and mesothelial markers",
+          "cells": [
+            {
+              "text": "Origin of the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Equivocal cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mesenteric_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive; laparoscopy or laparotomy, with enucleation where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Segmental bowel resection",
+          "cells": [
+            {
+              "text": "When the cyst is inseparable from adjacent bowel or its blood supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery for complications",
+          "cells": [
+            {
+              "text": "Torsion, intracystic haemorrhage, infection, rupture or bowel obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological confirmation",
+          "cells": [
+            {
+              "text": "Immunohistochemistry to define origin and exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation or sclerotherapy",
+          "cells": [
+            {
+              "text": "Only when complete excision is not feasible; higher recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for recurrence",
+          "cells": [
+            {
+              "text": "Particularly after incomplete removal of lymphatic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mesenteric_cyst-dx-mgmt",
+      "title": "Diagnosis and management of mesenteric cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intra-abdominal cyst with septa on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Torsion, rupture, bowel obstruction, infection, chylous ascites or solid components?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery for torsion, haemorrhage, rupture or bowel obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound; contrast CT for anatomy; MRI; aspirate for chyle versus serous content",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cyst confirmed as a mesenteric cyst on histopathology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cystic mesothelioma, duplication cyst or pseudocyst; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision by laparoscopy or laparotomy, with enucleation where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Segmental bowel resection when the cyst is inseparable from bowel or its blood supply",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histopathology with immunohistochemistry to define origin and exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Marsupialisation or sclerotherapy only when complete excision is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up for recurrence, particularly after incomplete removal of lymphatic lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

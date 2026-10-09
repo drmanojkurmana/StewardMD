@@ -1,176 +1,685 @@
 {
- "id": "paragonimiasis",
- "name": "Paragonimiasis",
- "aliases": [
-  "Paragonimus westermani",
-  "lung fluke infection",
-  "oriental lung fluke",
-  "pulmonary distomiasis",
-  "endemic haemoptysis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with other species in Africa and the Americas",
-   "Infection follows eating raw, undercooked or pickled freshwater crabs or crayfish, or in some regions raw meat of paratenic hosts, containing infective metacercariae",
-   "After ingestion the larvae penetrate the gut and diaphragm and produce migratory subcutaneous swellings before settling in the lungs to form parasitic cysts",
-   "The pulmonary syndrome mimics tuberculosis: chronic cough, chest pain and haemoptysis with rusty-brown or blood-streaked sputum, often in an otherwise well patient",
-   "Ectopic (extrapulmonary) disease is important, particularly cerebral paragonimiasis, which can cause seizures, focal deficits and space-occupying lesions",
-   "Diagnosis rests on finding the characteristic operculated eggs in sputum or stool, supported by serology, eosinophilia and imaging showing cysts, ring shadows or pleural effusion",
-   "Praziquantel is the treatment of choice for paragonimiasis, with corticosteroid cover considered in cerebral disease to limit inflammatory reaction"
+  "id": "paragonimiasis",
+  "name": "Paragonimiasis",
+  "aliases": [
+    "Paragonimus westermani",
+    "lung fluke infection",
+    "oriental lung fluke",
+    "pulmonary distomiasis",
+    "endemic haemoptysis"
   ],
-  "pathophysiology": "Ingested metacercariae excyst in the small intestine, penetrate the intestinal wall into the peritoneal cavity, and migrate through the diaphragm into the pleural space and lungs, where paired adult flukes become enclosed in fibrous cysts that communicate with bronchioles. Eggs are coughed up and either expectorated or swallowed and passed in stool. Local inflammation, cyst formation and rupture into airways produce the chronic cough and haemoptysis, while pleural involvement causes effusion. Aberrant migration of larvae to the brain, subcutaneous tissue, abdomen or other sites produces ectopic disease, with cerebral involvement being the most serious.",
-  "additionalDifferentials": [
-   "Pulmonary tuberculosis (closely mimicked and often co-endemic)",
-   "Bronchiectasis or chronic bacterial lung infection",
-   "Lung abscess or necrotising pneumonia",
-   "Bronchogenic carcinoma",
-   "Other causes of haemoptysis and pleural effusion",
-   "Neurocysticercosis or other space-occupying lesions (for cerebral disease)"
-  ],
-  "additionalInvestigations": [
-   "Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield)",
-   "Stool microscopy for swallowed eggs when sputum is negative",
-   "Serology (antibody detection), useful especially in ectopic disease and light infection",
-   "Full blood count for eosinophilia",
-   "Chest imaging (radiograph/CT) for cysts, ring shadows, infiltrates or pleural effusion",
-   "Brain imaging when cerebral involvement is suspected"
-  ],
-  "redFlags": [
-   "Neurological features (seizures, focal deficit, raised intracranial pressure) suggesting cerebral paragonimiasis",
-   "Massive or persistent haemoptysis",
-   "Large pleural effusion or empyema causing respiratory compromise",
-   "Diagnostic confusion with tuberculosis leading to inappropriate anti-TB therapy",
-   "Extensive or multiorgan ectopic disease"
-  ],
-  "prognosis": "Pulmonary paragonimiasis usually responds well to anthelmintic therapy with a good outlook, but cerebral and other ectopic disease can leave lasting neurological deficits, and misdiagnosis as tuberculosis often delays effective treatment.",
-  "pitfalls": [
-   "Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum",
-   "Relying on a single sputum sample, which may miss eggs",
-   "Not considering cerebral paragonimiasis in an endemic patient with seizures",
-   "Neglecting dietary counselling, allowing reinfection from raw crab or crayfish",
-   "Omitting corticosteroid cover in cerebral disease where an inflammatory reaction to dying flukes is a concern"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative",
-   "Adjunctive corticosteroids to control the inflammatory reaction in cerebral disease and heavy infection",
-   "Anticonvulsants for seizures and neurosurgical intervention for selected space-occupying cerebral cysts",
-   "Drainage of significant pleural effusion or empyema with supportive respiratory care",
-   "Follow-up sputum and stool microscopy to confirm parasitological cure, given frequent misdiagnosis as tuberculosis",
-   "Patient education to avoid raw or undercooked freshwater crabs and crayfish, with public health notification"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paragonimiasis-pathway",
-   "title": "Paragonimiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with other species in Africa and the Americas",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological features (seizures, focal deficit, raised intracranial pressure) suggesting cerebral paragonimiasis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield), Stool microscopy for swallowed eggs when sputum is negative, Serology (antibody detection), useful especially in ectopic disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paragonimiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "paragonimiasis-matrix",
-   "title": "Paragonimiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with other species in Africa and the Americas",
+      "Infection follows eating raw, undercooked or pickled freshwater crabs or crayfish, or in some regions raw meat of paratenic hosts, containing infective metacercariae",
+      "After ingestion the larvae penetrate the gut and diaphragm and produce migratory subcutaneous swellings before settling in the lungs to form parasitic cysts",
+      "The pulmonary syndrome mimics tuberculosis: chronic cough, chest pain and haemoptysis with rusty-brown or blood-streaked sputum, often in an otherwise well patient",
+      "Ectopic (extrapulmonary) disease is important, particularly cerebral paragonimiasis, which can cause seizures, focal deficits and space-occupying lesions",
+      "Diagnosis rests on finding the characteristic operculated eggs in sputum or stool, supported by serology, eosinophilia and imaging showing cysts, ring shadows or pleural effusion",
+      "Praziquantel is the treatment of choice for paragonimiasis, with corticosteroid cover considered in cerebral disease to limit inflammatory reaction"
     ],
-    [
-     "Key Investigations",
-     "Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield), Stool microscopy for swallowed eggs",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ingested metacercariae excyst in the small intestine, penetrate the intestinal wall into the peritoneal cavity, and migrate through the diaphragm into the pleural space and lungs, where paired adult flukes become enclosed in fibrous cysts that communicate with bronchioles. Eggs are coughed up and either expectorated or swallowed and passed in stool. Local inflammation, cyst formation and rupture into airways produce the chronic cough and haemoptysis, while pleural involvement causes effusion. Aberrant migration of larvae to the brain, subcutaneous tissue, abdomen or other sites produces ectopic disease, with cerebral involvement being the most serious.",
+    "additionalDifferentials": [
+      "Pulmonary tuberculosis (closely mimicked and often co-endemic)",
+      "Bronchiectasis or chronic bacterial lung infection",
+      "Lung abscess or necrotising pneumonia",
+      "Bronchogenic carcinoma",
+      "Other causes of haemoptysis and pleural effusion",
+      "Neurocysticercosis or other space-occupying lesions (for cerebral disease)"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary tuberculosis (closely mimicked and often co-endemic), Bronchiectasis or chronic bacterial lung infection, Lung abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield)",
+      "Stool microscopy for swallowed eggs when sputum is negative",
+      "Serology (antibody detection), useful especially in ectopic disease and light infection",
+      "Full blood count for eosinophilia",
+      "Chest imaging (radiograph/CT) for cysts, ring shadows, infiltrates or pleural effusion",
+      "Brain imaging when cerebral involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological features (seizures, focal deficit, raised intracranial pressure) suggesting cerebral paragonimiasis",
+      "Massive or persistent haemoptysis",
+      "Large pleural effusion or empyema causing respiratory compromise",
+      "Diagnostic confusion with tuberculosis leading to inappropriate anti-TB therapy",
+      "Extensive or multiorgan ectopic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pulmonary paragonimiasis usually responds well to anthelmintic therapy with a good outlook, but cerebral and other ectopic disease can leave lasting neurological deficits, and misdiagnosis as tuberculosis often delays effective treatment.",
+    "pitfalls": [
+      "Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum",
+      "Relying on a single sputum sample, which may miss eggs",
+      "Not considering cerebral paragonimiasis in an endemic patient with seizures",
+      "Neglecting dietary counselling, allowing reinfection from raw crab or crayfish",
+      "Omitting corticosteroid cover in cerebral disease where an inflammatory reaction to dying flukes is a concern"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative",
+      "Adjunctive corticosteroids to control the inflammatory reaction in cerebral disease and heavy infection",
+      "Anticonvulsants for seizures and neurosurgical intervention for selected space-occupying cerebral cysts",
+      "Drainage of significant pleural effusion or empyema with supportive respiratory care",
+      "Follow-up sputum and stool microscopy to confirm parasitological cure, given frequent misdiagnosis as tuberculosis",
+      "Patient education to avoid raw or undercooked freshwater crabs and crayfish, with public health notification"
     ]
-   ],
-   "caption": "Overview comparison matrix for paragonimiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paragonimiasis-real-image",
-   "title": "Paragonimiasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "paragonimiasis-pathway",
+      "title": "Paragonimiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with other species in Africa and the Americas",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological features (seizures, focal deficit, raised intracranial pressure) suggesting cerebral paragonimiasis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield), Stool microscopy for swallowed eggs when sputum is negative, Serology (antibody detection), useful especially in ectopic disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paragonimiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paragonimiasis-matrix",
+      "title": "Paragonimiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Paragonimiasis is caused by lung flukes of the genus Paragonimus, chiefly P. westermani, endemic in East and Southeast Asia, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Microscopy of sputum for characteristic operculated eggs (repeated samples improve yield), Stool microscopy for swallowed eggs",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary tuberculosis (closely mimicked and often co-endemic), Bronchiectasis or chronic bacterial lung infection, Lung abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anthelmintic therapy with praziquantel as first-line treatment, with triclabendazole as an alternative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the patient as smear-negative tuberculosis and overlooking lung fluke eggs in sputum",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paragonimiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 219-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paragonimiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sputum microscopy for operculated eggs",
+          "cells": [
+            {
+              "text": "Repeated samples improve yield"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Swallowed eggs when sputum is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Useful in ectopic disease and light infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Cysts, ring shadows, infiltrates or pleural effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Cerebral involvement, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paragonimiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Closely mimicked and co-endemic; operculated eggs in sputum distinguish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis",
+          "cells": [
+            {
+              "text": "A space-occupying cerebral lesion mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paragonimiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line anthelmintic; triclabendazole as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Control of inflammation in cerebral disease and heavy infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Anticonvulsants for seizures; neurosurgery for selected space-occupying cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural disease",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Drainage of significant effusion or empyema with respiratory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cure confirmation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Follow-up sputum and stool microscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paragonimiasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Major human trematode infections",
+      "rowHeader": "Trematode",
+      "columns": [
+        "Group",
+        "Transmission",
+        "Endemic area(s)"
+      ],
+      "rows": [
+        {
+          "parameter": "Schistosoma mansoni",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Africa, South America, Middle East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. japonicum",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "China, Philippines, Indonesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. intercalatum",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "West Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. mekongi",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Southeast Asia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. haematobium",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Africa, Middle East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clonorchis sinensis",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opisthorchis viverrini",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East, Thailand"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "O. felineus",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East, Europe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasciola hepatica",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants or in water"
+            },
+            {
+              "text": "Worldwide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "F. gigantica",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants or in water"
+            },
+            {
+              "text": "Sporadic, Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasciolopsis buski",
+          "cells": [
+            {
+              "text": "Intestinal fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants"
+            },
+            {
+              "text": "Southeast Asia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heterophyes heterophyes",
+          "cells": [
+            {
+              "text": "Intestinal fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater or brackish-water fish"
+            },
+            {
+              "text": "Far East, North Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paragonimus westermani",
+          "cells": [
+            {
+              "text": "Lung fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in crayfish or crabs"
+            },
+            {
+              "text": "Global except North America and Europe"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paragonimiasis-dx-mgmt",
+      "title": "Diagnosis and management of Paragonimiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough with rusty sputum or haemoptysis after eating raw crab or crayfish",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (seizures, massive haemoptysis, large effusion or TB misdiagnosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology or thoracic review for cerebral or empyema disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated sputum and stool microscopy, serology, FBC, chest and brain imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are operculated fluke eggs found in sputum or stool?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculosis, bronchiectasis, lung abscess or neurocysticercosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as first-line anthelmintic; triclabendazole as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids to control inflammation in cerebral disease and heavy infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsants for seizures; neurosurgery for selected space-occupying cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drainage of significant pleural effusion or empyema with respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow-up sputum and stool microscopy to confirm parasitological cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pulmonary disease responds well; cerebral disease can leave lasting deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

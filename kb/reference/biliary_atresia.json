@@ -1,176 +1,236 @@
 {
- "id": "biliary_atresia",
- "name": "Biliary Atresia",
- "aliases": [
-  "extrahepatic biliary atresia",
-  "EHBA"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory obliteration of the extrahepatic bile ducts.",
-   "Classic presentation is a term infant with prolonged jaundice, pale (acholic) stools, and dark urine, usually with otherwise good early growth.",
-   "Any infant jaundiced beyond about two weeks of age should have a fractionated bilirubin measured; a raised conjugated (direct) fraction signals cholestasis and needs urgent evaluation.",
-   "Early diagnosis is critical because the success of surgery falls sharply with age, ideally before about 8 weeks (60 days) of life.",
-   "The Kasai hepatoportoenterostomy aims to restore bile drainage; the earlier it is performed, the better the chance of clearing jaundice.",
-   "Even after a successful Kasai procedure, many children progress to cirrhosis and ultimately require liver transplantation.",
-   "A subset have the biliary atresia splenic malformation syndrome with situs and other congenital anomalies.",
-   "Ultrasound may show an absent or small gallbladder and the 'triangular cord' sign; a hepatobiliary scan shows hepatic uptake without excretion into the bowel."
+  "id": "biliary_atresia",
+  "name": "Biliary Atresia",
+  "aliases": [
+    "extrahepatic biliary atresia",
+    "EHBA"
   ],
-  "pathophysiology": "A fibro-obliterative process destroys the extrahepatic and often intrahepatic bile ducts, obstructing bile flow. Retained bile causes progressive hepatocellular injury, portal tract inflammation, and bile ductular proliferation, leading to fibrosis and, if untreated, biliary cirrhosis with portal hypertension and liver failure. The initiating cause is uncertain and probably heterogeneous, involving developmental, immune, and possibly viral mechanisms.",
-  "additionalDifferentials": [
-   "Neonatal (idiopathic) hepatitis",
-   "Alpha-1-antitrypsin deficiency",
-   "Choledochal cyst",
-   "Alagille syndrome and other intrahepatic cholestatic syndromes",
-   "Progressive familial intrahepatic cholestasis",
-   "Inspissated bile / bile plug syndrome",
-   "Congenital infection (TORCH)"
-  ],
-  "additionalInvestigations": [
-   "Fractionated (total and conjugated) serum bilirubin",
-   "Liver function tests including GGT and aminotransferases",
-   "Abdominal ultrasound (gallbladder, triangular cord sign, exclusion of choledochal cyst)",
-   "Hepatobiliary scintigraphy assessing excretion into the intestine",
-   "Percutaneous liver biopsy",
-   "Intraoperative cholangiogram to confirm the diagnosis",
-   "Studies to exclude alpha-1-antitrypsin deficiency and metabolic causes"
-  ],
-  "redFlags": [
-   "Acholic (pale, clay-coloured) stools",
-   "Conjugated hyperbilirubinaemia at any age in an infant",
-   "Jaundice persisting beyond two weeks of life",
-   "Signs of coagulopathy or vitamin K deficiency bleeding",
-   "Hepatosplenomegaly, ascites, or other features of advanced liver disease"
-  ],
-  "prognosis": "Outcome depends heavily on the age at surgery; early Kasai portoenterostomy can restore bile flow and delay or avoid transplantation, but many children eventually progress to end-stage liver disease. Overall long-term survival is good when transplantation is available.",
-  "pitfalls": [
-   "Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin",
-   "Failing to inspect stool colour",
-   "Delaying referral and surgery beyond the window where the Kasai procedure is most effective",
-   "Relying on a normal ultrasound to exclude the diagnosis",
-   "Overlooking associated congenital anomalies in the splenic malformation syndrome"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since success falls sharply with age",
-   "Post-Kasai ursodeoxycholic acid to promote bile flow and prophylactic antibiotics against ascending cholangitis",
-   "Aggressive nutritional support with high-energy medium-chain-triglyceride feeds and supplementation of fat-soluble vitamins A, D, E and K",
-   "Prompt recognition and antibiotic treatment of cholangitis episodes",
-   "Surveillance and management of evolving biliary cirrhosis and portal hypertension, including varices, ascites and growth",
-   "Liver transplantation for a failed Kasai procedure or progression to end-stage liver disease",
-   "Paediatric hepatology and transplant multidisciplinary care with family support and counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "biliary_atresia-pathway",
-   "title": "Biliary Atresia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory obliteration of the extrahepatic bile ducts.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acholic (pale, clay-coloured) stools",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fractionated (total and conjugated) serum bilirubin, Liver function tests including GGT and aminotransferases, Abdominal ultrasound (gallbladder, triangular cord sign, exclusion of choledochal cyst)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since success falls sharply with age"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of biliary atresia."
-  }
- ],
- "tables": [
-  {
-   "id": "biliary_atresia-matrix",
-   "title": "Biliary Atresia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory obliteration of the extrahepatic bile ducts.",
+      "Classic presentation is a term infant with prolonged jaundice, pale (acholic) stools, and dark urine, usually with otherwise good early growth.",
+      "Any infant jaundiced beyond about two weeks of age should have a fractionated bilirubin measured; a raised conjugated (direct) fraction signals cholestasis and needs urgent evaluation.",
+      "Early diagnosis is critical because the success of surgery falls sharply with age, ideally before about 8 weeks (60 days) of life.",
+      "The Kasai hepatoportoenterostomy aims to restore bile drainage; the earlier it is performed, the better the chance of clearing jaundice.",
+      "Even after a successful Kasai procedure, many children progress to cirrhosis and ultimately require liver transplantation.",
+      "A subset have the biliary atresia splenic malformation syndrome with situs and other congenital anomalies.",
+      "Ultrasound may show an absent or small gallbladder and the 'triangular cord' sign; a hepatobiliary scan shows hepatic uptake without excretion into the bowel."
     ],
-    [
-     "Key Investigations",
-     "Fractionated (total and conjugated) serum bilirubin, Liver function tests including GGT and aminotransferases, Abdominal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A fibro-obliterative process destroys the extrahepatic and often intrahepatic bile ducts, obstructing bile flow. Retained bile causes progressive hepatocellular injury, portal tract inflammation, and bile ductular proliferation, leading to fibrosis and, if untreated, biliary cirrhosis with portal hypertension and liver failure. The initiating cause is uncertain and probably heterogeneous, involving developmental, immune, and possibly viral mechanisms.",
+    "additionalDifferentials": [
+      "Neonatal (idiopathic) hepatitis",
+      "Alpha-1-antitrypsin deficiency",
+      "Choledochal cyst",
+      "Alagille syndrome and other intrahepatic cholestatic syndromes",
+      "Progressive familial intrahepatic cholestasis",
+      "Inspissated bile / bile plug syndrome",
+      "Congenital infection (TORCH)"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal (idiopathic) hepatitis, Alpha-1-antitrypsin deficiency, Choledochal cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fractionated (total and conjugated) serum bilirubin",
+      "Liver function tests including GGT and aminotransferases",
+      "Abdominal ultrasound (gallbladder, triangular cord sign, exclusion of choledochal cyst)",
+      "Hepatobiliary scintigraphy assessing excretion into the intestine",
+      "Percutaneous liver biopsy",
+      "Intraoperative cholangiogram to confirm the diagnosis",
+      "Studies to exclude alpha-1-antitrypsin deficiency and metabolic causes"
     ],
-    [
-     "Management Strategy",
-     "Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since",
-     "Core treatment modality"
+    "redFlags": [
+      "Acholic (pale, clay-coloured) stools",
+      "Conjugated hyperbilirubinaemia at any age in an infant",
+      "Jaundice persisting beyond two weeks of life",
+      "Signs of coagulopathy or vitamin K deficiency bleeding",
+      "Hepatosplenomegaly, ascites, or other features of advanced liver disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on the age at surgery; early Kasai portoenterostomy can restore bile flow and delay or avoid transplantation, but many children eventually progress to end-stage liver disease. Overall long-term survival is good when transplantation is available.",
+    "pitfalls": [
+      "Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin",
+      "Failing to inspect stool colour",
+      "Delaying referral and surgery beyond the window where the Kasai procedure is most effective",
+      "Relying on a normal ultrasound to exclude the diagnosis",
+      "Overlooking associated congenital anomalies in the splenic malformation syndrome"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since success falls sharply with age",
+      "Post-Kasai ursodeoxycholic acid to promote bile flow and prophylactic antibiotics against ascending cholangitis",
+      "Aggressive nutritional support with high-energy medium-chain-triglyceride feeds and supplementation of fat-soluble vitamins A, D, E and K",
+      "Prompt recognition and antibiotic treatment of cholangitis episodes",
+      "Surveillance and management of evolving biliary cirrhosis and portal hypertension, including varices, ascites and growth",
+      "Liver transplantation for a failed Kasai procedure or progression to end-stage liver disease",
+      "Paediatric hepatology and transplant multidisciplinary care with family support and counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for biliary atresia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "biliary-atresia-real-image",
-   "title": "Biliary Atresia: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "biliary_atresia-pathway",
+      "title": "Biliary Atresia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory obliteration of the extrahepatic bile ducts.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acholic (pale, clay-coloured) stools",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fractionated (total and conjugated) serum bilirubin, Liver function tests including GGT and aminotransferases, Abdominal ultrasound (gallbladder, triangular cord sign, exclusion of choledochal cyst)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since success falls sharply with age"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of biliary atresia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "biliary_atresia-matrix",
+      "title": "Biliary Atresia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common cause of neonatal cholestasis leading to liver transplantation, resulting from progressive inflammatory",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fractionated (total and conjugated) serum bilirubin, Liver function tests including GGT and aminotransferases, Abdominal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal (idiopathic) hepatitis, Alpha-1-antitrypsin deficiency, Choledochal cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early Kasai hepatoportoenterostomy to restore bile drainage, performed as soon as possible while the infant is young, since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing prolonged neonatal jaundice as physiological or breast-milk jaundice without checking a split bilirubin",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for biliary atresia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biliary_atresia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in biliary atresia",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Fractionated serum bilirubin", "cells": [{"text": "A raised conjugated fraction signals cholestasis and needs urgent evaluation"}], "cite": "c1"},
+        {"parameter": "Liver function tests including GGT and aminotransferases", "cells": [{"text": "Liver function and cholestatic markers"}], "cite": "c1"},
+        {"parameter": "Abdominal ultrasound", "cells": [{"text": "Absent or small gallbladder; triangular cord sign"}], "cite": "c1"},
+        {"parameter": "Hepatobiliary scintigraphy", "cells": [{"text": "Hepatic uptake without excretion into the bowel"}], "cite": "c1"},
+        {"parameter": "Percutaneous liver biopsy", "cells": [{"text": "Tissue assessment of the liver"}], "cite": "c1"},
+        {"parameter": "Intraoperative cholangiogram", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_atresia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of neonatal cholestasis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Choledochal cyst", "cells": [{"text": "Excluded on abdominal ultrasound"}], "cite": "c1"},
+        {"parameter": "Alpha-1-antitrypsin deficiency", "cells": [{"text": "Excluded by specific studies"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_atresia-treatment",
+      "kind": "treatment",
+      "title": "Management options in biliary atresia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Early Kasai hepatoportoenterostomy", "cells": [{"text": "Performed as soon as possible to restore bile drainage"}, {"text": "Success falls sharply with age; ideally before about 8 weeks"}], "cite": "c1"},
+        {"parameter": "Post-Kasai ursodeoxycholic acid and antibiotics", "cells": [{"text": "Ursodeoxycholic acid to promote bile flow; prophylactic antibiotics against ascending cholangitis"}, {"text": "After the Kasai procedure"}], "cite": "c1"},
+        {"parameter": "Nutrition", "cells": [{"text": "High-energy medium-chain-triglyceride feeds and vitamins A, D, E and K"}, {"text": "Aggressive nutritional support"}], "cite": "c1"},
+        {"parameter": "Cholangitis", "cells": [{"text": "Prompt recognition and antibiotic treatment"}, {"text": "For each episode"}], "cite": "c1"},
+        {"parameter": "Cirrhosis and portal hypertension", "cells": [{"text": "Surveillance and management of varices, ascites and growth"}, {"text": "Evolving biliary cirrhosis"}], "cite": "c1"},
+        {"parameter": "Liver transplantation", "cells": [{"text": "For a failed Kasai procedure or end-stage liver disease"}, {"text": "Transplant pathway"}], "cite": "c1"},
+        {"parameter": "Paediatric hepatology and transplant care", "cells": [{"text": "Multidisciplinary care with family support and counselling"}, {"text": "Multidisciplinary"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biliary_atresia-dx-mgmt",
+      "title": "Diagnosis and management of biliary atresia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Term infant with prolonged jaundice, pale stools and dark urine", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: raised conjugated bilirubin, bleeding from coagulopathy, or hepatosplenomegaly?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent paediatric hepatology referral; vitamin K", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Fractionated bilirubin; check stool colour; liver function and GGT", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Abdominal ultrasound for gallbladder and triangular cord; hepatobiliary scintigraphy", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Hepatic uptake without bowel excretion on scintigraphy?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Surgical exploration with intraoperative cholangiogram; Kasai before about 8 weeks", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider neonatal hepatitis, Alagille, PFIC or alpha-1 antitrypsin deficiency", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Post-Kasai ursodeoxycholic acid, antibiotics, medium-chain feeds and vitamins", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Early Kasai clears jaundice in some; many still progress to transplantation", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

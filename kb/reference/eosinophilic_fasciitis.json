@@ -1,175 +1,473 @@
 {
- "id": "eosinophilic_fasciitis",
- "name": "Eosinophilic fasciitis",
- "aliases": [
-  "Shulman syndrome",
-  "diffuse fasciitis with eosinophilia",
-  "eosinophilic fasciitis (Shulman)"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Immunology",
- "specialty": "Rheumatology / Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
-   "The skin develops a woody, peau d'orange appearance with the characteristic 'groove sign' where veins appear depressed along indurated fascia",
-   "In contrast to systemic sclerosis, the fingers, face, and internal organs are typically spared and Raynaud phenomenon and nailfold changes are absent",
-   "Peripheral blood eosinophilia is common early but may be transient and is not required for diagnosis",
-   "Full-thickness biopsy including fascia shows thickened, inflamed fascia with lymphocytes, plasma cells, and eosinophils",
-   "MRI demonstrates fascial thickening and enhancement and helps guide biopsy site and monitor response",
-   "Most patients respond well to systemic corticosteroids, sometimes with a steroid-sparing agent such as methotrexate",
-   "An association with haematological disorders means a search for underlying malignancy is prudent in atypical or refractory cases"
+  "id": "eosinophilic_fasciitis",
+  "name": "Eosinophilic fasciitis",
+  "aliases": [
+    "Shulman syndrome",
+    "diffuse fasciitis with eosinophilia",
+    "eosinophilic fasciitis (Shulman)"
   ],
-  "pathophysiology": "Eosinophilic fasciitis is an uncommon fibrosing disorder characterised by inflammation and thickening of the deep fascia. The trigger is unknown but strenuous physical exertion frequently precedes onset. An immune-mediated process recruits eosinophils, lymphocytes, and plasma cells into the fascia, with release of profibrotic mediators driving collagen deposition and fascial fibrosis. The resulting induration tethers overlying skin and can cause joint contractures. Peripheral eosinophilia and hypergammaglobulinaemia reflect the underlying inflammatory activation, and an association with clonal haematological disease is recognised.",
-  "additionalDifferentials": [
-   "Systemic sclerosis (scleroderma)",
-   "Scleromyxoedema",
-   "Nephrogenic systemic fibrosis",
-   "Hypereosinophilic syndrome",
-   "Morphoea (localised scleroderma), especially deep or generalised variants",
-   "Eosinophilia-myalgia syndrome"
-  ],
-  "additionalInvestigations": [
-   "Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis",
-   "Full blood count with differential to detect peripheral eosinophilia",
-   "MRI of affected limbs showing fascial thickening and contrast enhancement",
-   "Serum immunoglobulins and inflammatory markers (often raised gammaglobulins, ESR, aldolase)",
-   "Autoantibody panel to help exclude systemic sclerosis and overlap conditions",
-   "Screening for associated haematological disorders in atypical or resistant disease"
-  ],
-  "redFlags": [
-   "Rapidly progressive contractures threatening limb function",
-   "Cytopenias or other features suggesting an associated haematological malignancy",
-   "Poor response to corticosteroids raising concern for an alternative fibrosing disorder",
-   "Aplastic anaemia or myeloproliferative features in association with the fasciitis"
-  ],
-  "prognosis": "Many patients achieve substantial improvement or remission with prompt corticosteroid therapy, though residual induration or contractures may persist, and relapse can occur on tapering. An associated haematological disorder worsens the outlook.",
-  "pitfalls": [
-   "Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon",
-   "Taking too superficial a biopsy that fails to sample the fascia and yields a non-diagnostic result",
-   "Assuming a normal eosinophil count excludes the diagnosis when eosinophilia is transient",
-   "Delaying treatment and allowing fixed contractures to develop",
-   "Failing to screen for an underlying haematological disorder in refractory cases"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper",
-   "Early steroid-sparing immunosuppression, usually methotrexate, especially with morphoea-like skin change or incomplete corticosteroid response",
-   "Physiotherapy and stretching to prevent and treat joint contractures and preserve function",
-   "Additional agents such as mycophenolate, ciclosporin, tocilizumab, intravenous immunoglobulin or rituximab for refractory disease",
-   "Monitor response clinically and with MRI, tracking peripheral eosinophilia and inflammatory markers",
-   "Screen for and manage an associated clonal haematological disorder",
-   "Rheumatology referral with occupational therapy input for hand function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilic_fasciitis-pathway",
-   "title": "Eosinophilic fasciitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive contractures threatening limb function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis, Full blood count with differential to detect peripheral eosinophilia, MRI of affected limbs showing fascial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilic fasciitis."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilic_fasciitis-matrix",
-   "title": "Eosinophilic fasciitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Immunology",
+  "specialty": "Rheumatology / Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
+      "The skin develops a woody, peau d'orange appearance with the characteristic 'groove sign' where veins appear depressed along indurated fascia",
+      "In contrast to systemic sclerosis, the fingers, face, and internal organs are typically spared and Raynaud phenomenon and nailfold changes are absent",
+      "Peripheral blood eosinophilia is common early but may be transient and is not required for diagnosis",
+      "Full-thickness biopsy including fascia shows thickened, inflamed fascia with lymphocytes, plasma cells, and eosinophils",
+      "MRI demonstrates fascial thickening and enhancement and helps guide biopsy site and monitor response",
+      "Most patients respond well to systemic corticosteroids, sometimes with a steroid-sparing agent such as methotrexate",
+      "An association with haematological disorders means a search for underlying malignancy is prudent in atypical or refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis, Full blood count",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eosinophilic fasciitis is an uncommon fibrosing disorder characterised by inflammation and thickening of the deep fascia. The trigger is unknown but strenuous physical exertion frequently precedes onset. An immune-mediated process recruits eosinophils, lymphocytes, and plasma cells into the fascia, with release of profibrotic mediators driving collagen deposition and fascial fibrosis. The resulting induration tethers overlying skin and can cause joint contractures. Peripheral eosinophilia and hypergammaglobulinaemia reflect the underlying inflammatory activation, and an association with clonal haematological disease is recognised.",
+    "additionalDifferentials": [
+      "Systemic sclerosis (scleroderma)",
+      "Scleromyxoedema",
+      "Nephrogenic systemic fibrosis",
+      "Hypereosinophilic syndrome",
+      "Morphoea (localised scleroderma), especially deep or generalised variants",
+      "Eosinophilia-myalgia syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Systemic sclerosis (scleroderma), Scleromyxoedema, Nephrogenic systemic fibrosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis",
+      "Full blood count with differential to detect peripheral eosinophilia",
+      "MRI of affected limbs showing fascial thickening and contrast enhancement",
+      "Serum immunoglobulins and inflammatory markers (often raised gammaglobulins, ESR, aldolase)",
+      "Autoantibody panel to help exclude systemic sclerosis and overlap conditions",
+      "Screening for associated haematological disorders in atypical or resistant disease"
     ],
-    [
-     "Management Strategy",
-     "Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive contractures threatening limb function",
+      "Cytopenias or other features suggesting an associated haematological malignancy",
+      "Poor response to corticosteroids raising concern for an alternative fibrosing disorder",
+      "Aplastic anaemia or myeloproliferative features in association with the fasciitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients achieve substantial improvement or remission with prompt corticosteroid therapy, though residual induration or contractures may persist, and relapse can occur on tapering. An associated haematological disorder worsens the outlook.",
+    "pitfalls": [
+      "Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon",
+      "Taking too superficial a biopsy that fails to sample the fascia and yields a non-diagnostic result",
+      "Assuming a normal eosinophil count excludes the diagnosis when eosinophilia is transient",
+      "Delaying treatment and allowing fixed contractures to develop",
+      "Failing to screen for an underlying haematological disorder in refractory cases"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper",
+      "Early steroid-sparing immunosuppression, usually methotrexate, especially with morphoea-like skin change or incomplete corticosteroid response",
+      "Physiotherapy and stretching to prevent and treat joint contractures and preserve function",
+      "Additional agents such as mycophenolate, ciclosporin, tocilizumab, intravenous immunoglobulin or rituximab for refractory disease",
+      "Monitor response clinically and with MRI, tracking peripheral eosinophilia and inflammatory markers",
+      "Screen for and manage an associated clonal haematological disorder",
+      "Rheumatology referral with occupational therapy input for hand function"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilic fasciitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilic-fasciitis-real-image",
-   "title": "Eosinophilic fasciitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "eosinophilic_fasciitis-pathway",
+      "title": "Eosinophilic fasciitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive contractures threatening limb function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis, Full blood count with differential to detect peripheral eosinophilia, MRI of affected limbs showing fascial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilic fasciitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilic_fasciitis-matrix",
+      "title": "Eosinophilic fasciitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with the rapid onset of symmetrical limb swelling and induration, often following unaccustomed strenuous exercise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full-thickness incisional biopsy extending to fascia and muscle to confirm fascial inflammation and fibrosis, Full blood count",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic sclerosis (scleroderma), Scleromyxoedema, Nephrogenic systemic fibrosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt high-dose systemic corticosteroids to control fascial inflammation, followed by a gradual taper",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for systemic sclerosis and missing the sparing of digits and absence of Raynaud phenomenon",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilic fasciitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_fasciitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-thickness incisional biopsy to fascia and muscle",
+          "cells": [
+            {
+              "text": "Fascial inflammation and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, which may be transient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected limbs",
+          "cells": [
+            {
+              "text": "Fascial thickening and contrast enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins, ESR and aldolase",
+          "cells": [
+            {
+              "text": "Often raised gammaglobulins, ESR and aldolase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody panel",
+          "cells": [
+            {
+              "text": "Helps exclude systemic sclerosis and overlap conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for haematological disorder",
+          "cells": [
+            {
+              "text": "Atypical or resistant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_fasciitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis (scleroderma)",
+          "cells": [
+            {
+              "text": "Fingers, face and internal organs are spared, and Raynaud phenomenon is absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypereosinophilic syndrome",
+          "cells": [
+            {
+              "text": "Persistent eosinophilia with organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_fasciitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Controls fascial inflammation, followed by a gradual taper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Early steroid-sparing agent, especially with morphoea-like skin change or incomplete steroid response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Prevents and treats joint contractures and preserves function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional agents for refractory disease",
+          "cells": [
+            {
+              "text": "Mycophenolate, ciclosporin, tocilizumab, intravenous immunoglobulin or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical and MRI response, with peripheral eosinophilia and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for clonal haematological disorder",
+          "cells": [
+            {
+              "text": "Searched for and managed if found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatology and occupational therapy",
+          "cells": [
+            {
+              "text": "Hand function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_fasciitis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic fasciitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid symmetrical limb swelling and induration, often after strenuous exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapidly progressive contractures, cytopenias, poor steroid response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Screen for haematological malignancy; consider an alternative fibrosing disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-thickness fascial biopsy, MRI, FBC, inflammatory markers and autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fascial inflammation and fibrosis on full-thickness biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic sclerosis, morphoea or hypereosinophilic syndrome; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt high-dose systemic corticosteroids, then gradual taper",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate as early steroid-sparing agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and stretching for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mycophenolate, ciclosporin or rituximab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for an associated clonal haematological disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve substantially; residual induration or contractures may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

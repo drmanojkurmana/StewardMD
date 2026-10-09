@@ -1,172 +1,461 @@
 {
- "id": "duplex_collecting_system",
- "name": "Duplex collecting system",
- "aliases": [
-  "duplex kidney",
-  "duplicated collecting system",
-  "ureteral duplication"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters join before the bladder, to complete duplication with two separate ureteric orifices",
-   "The Weigert-Meyer rule governs complete duplication: the upper-pole ureter inserts more caudally and medially (ectopic, prone to obstruction and ureterocele), while the lower-pole ureter inserts more superolaterally and is prone to vesicoureteric reflux",
-   "Many duplex systems are incidental and asymptomatic and require no treatment",
-   "Symptomatic presentations include urinary tract infection, antenatal hydronephrosis, obstruction of the upper moiety, reflux into the lower moiety, and continuous incontinence in girls from an ectopic ureter inserting below the sphincter",
-   "In partial duplication, ureteroureteral (yo-yo) reflux between the two limbs can cause stasis and infection",
-   "Imaging aims to define which moiety is affected, its function, and the presence of reflux, obstruction, or an ectopic insertion/ureterocele",
-   "Management is dictated by function and pathology, from surveillance to upper-pole heminephrectomy, ureteric reimplantation, or ureteroureterostomy"
+  "id": "duplex_collecting_system",
+  "name": "Duplex collecting system",
+  "aliases": [
+    "duplex kidney",
+    "duplicated collecting system",
+    "ureteral duplication"
   ],
-  "pathophysiology": "A duplex collecting system arises when the ureteric bud undergoes abnormal branching during development. Early splitting of a single bud produces incomplete duplication with a bifid system joining before the bladder, whereas two separate ureteric buds produce complete duplication with two ureters and orifices. The differing sites at which the buds contact the developing bladder explain the Weigert-Meyer relationship: the more caudally arising upper-pole ureter inserts ectopically and inferomedially, predisposing to obstruction and ureterocele, while the lower-pole ureter inserts superolaterally with a short intramural tunnel, predisposing to reflux. The associated renal moieties may show variable dysplasia depending on the position of bud contact with the metanephric blastema.",
-  "additionalDifferentials": [
-   "Ureteropelvic junction obstruction of a single system",
-   "Ureterocele or ectopic ureter in a single system",
-   "Vesicoureteric reflux without duplication",
-   "Primary obstructive megaureter",
-   "Multicystic dysplastic upper-pole moiety",
-   "Continuous incontinence from other cause in girls"
-  ],
-  "additionalInvestigations": [
-   "Renal and bladder ultrasound to demonstrate duplication and moiety dilatation",
-   "Micturating cystourethrogram (MCUG) to detect reflux, usually into the lower moiety",
-   "MAG3 or DMSA renography to assess function of each moiety and drainage",
-   "MR urography to define complex ductal anatomy and ectopic insertions",
-   "Cystoscopy to locate ureteric orifices and any ureterocele",
-   "Urinalysis and culture during infection"
-  ],
-  "redFlags": [
-   "Obstruction of the upper moiety with declining function or infection",
-   "High-grade reflux into the lower moiety with recurrent pyelonephritis or scarring",
-   "Continuous urinary leakage from an ectopic ureter indicating an insertion below the sphincter",
-   "Urosepsis in an obstructed or refluxing duplex system"
-  ],
-  "prognosis": "Asymptomatic duplex systems have an excellent prognosis and need no intervention; symptomatic systems generally do well when the specific pathology (obstruction, reflux, or ectopia) is appropriately treated, with overall renal function usually preserved.",
-  "pitfalls": [
-   "Misapplying the Weigert-Meyer rule and treating the wrong moiety",
-   "Missing an ectopic ureter as the cause of continuous incontinence in a girl",
-   "Overlooking a poorly functioning obstructed upper pole on standard imaging",
-   "Assuming all duplex systems require surgery when many are incidental"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Gearhart, Rink & Mouriquand: Pediatric Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe incidental, asymptomatic duplex systems, which require no intervention",
-   "Prevent and treat urinary tract infection promptly, using antibiotic prophylaxis where there is significant vesicoureteric reflux or recurrent infection",
-   "Decompress an obstructing ureterocele endoscopically by incision or puncture",
-   "Offer reconstructive surgery for symptomatic disease: upper-pole heminephrectomy for a non-functioning obstructed moiety, ureteric reimplantation for troublesome reflux, or ureteroureterostomy",
-   "Assess and monitor moiety function and drainage with MAG3 or DMSA renography, and surveil for reflux nephropathy and scarring",
-   "Manage jointly through urology and paediatric nephrology, tailoring treatment to the affected moiety and its pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "duplex_collecting_system-pathway",
-   "title": "Duplex collecting system: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters join before the bladder, to complete duplication with two separate ureteric orifices",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Obstruction of the upper moiety with declining function or infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal and bladder ultrasound to demonstrate duplication and moiety dilatation, Micturating cystourethrogram (MCUG) to detect reflux, usually into the lower moiety, MAG3 or DMSA renography to assess function of each moiety"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe incidental, asymptomatic duplex systems, which require no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misapplying the Weigert-Meyer rule and treating the wrong moiety"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of duplex collecting system."
-  }
- ],
- "tables": [
-  {
-   "id": "duplex_collecting_system-matrix",
-   "title": "Duplex collecting system: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters join before the bladder, to complete duplication with two separate ureteric orifices",
+      "The Weigert-Meyer rule governs complete duplication: the upper-pole ureter inserts more caudally and medially (ectopic, prone to obstruction and ureterocele), while the lower-pole ureter inserts more superolaterally and is prone to vesicoureteric reflux",
+      "Many duplex systems are incidental and asymptomatic and require no treatment",
+      "Symptomatic presentations include urinary tract infection, antenatal hydronephrosis, obstruction of the upper moiety, reflux into the lower moiety, and continuous incontinence in girls from an ectopic ureter inserting below the sphincter",
+      "In partial duplication, ureteroureteral (yo-yo) reflux between the two limbs can cause stasis and infection",
+      "Imaging aims to define which moiety is affected, its function, and the presence of reflux, obstruction, or an ectopic insertion/ureterocele",
+      "Management is dictated by function and pathology, from surveillance to upper-pole heminephrectomy, ureteric reimplantation, or ureteroureterostomy"
     ],
-    [
-     "Key Investigations",
-     "Renal and bladder ultrasound to demonstrate duplication and moiety dilatation, Micturating cystourethrogram (MCUG) to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A duplex collecting system arises when the ureteric bud undergoes abnormal branching during development. Early splitting of a single bud produces incomplete duplication with a bifid system joining before the bladder, whereas two separate ureteric buds produce complete duplication with two ureters and orifices. The differing sites at which the buds contact the developing bladder explain the Weigert-Meyer relationship: the more caudally arising upper-pole ureter inserts ectopically and inferomedially, predisposing to obstruction and ureterocele, while the lower-pole ureter inserts superolaterally with a short intramural tunnel, predisposing to reflux. The associated renal moieties may show variable dysplasia depending on the position of bud contact with the metanephric blastema.",
+    "additionalDifferentials": [
+      "Ureteropelvic junction obstruction of a single system",
+      "Ureterocele or ectopic ureter in a single system",
+      "Vesicoureteric reflux without duplication",
+      "Primary obstructive megaureter",
+      "Multicystic dysplastic upper-pole moiety",
+      "Continuous incontinence from other cause in girls"
     ],
-    [
-     "Primary Differentials",
-     "Ureteropelvic junction obstruction of a single system, Ureterocele or ectopic ureter in a single system, Vesicoureteric reflux",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal and bladder ultrasound to demonstrate duplication and moiety dilatation",
+      "Micturating cystourethrogram (MCUG) to detect reflux, usually into the lower moiety",
+      "MAG3 or DMSA renography to assess function of each moiety and drainage",
+      "MR urography to define complex ductal anatomy and ectopic insertions",
+      "Cystoscopy to locate ureteric orifices and any ureterocele",
+      "Urinalysis and culture during infection"
     ],
-    [
-     "Management Strategy",
-     "Observe incidental, asymptomatic duplex systems, which require no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Obstruction of the upper moiety with declining function or infection",
+      "High-grade reflux into the lower moiety with recurrent pyelonephritis or scarring",
+      "Continuous urinary leakage from an ectopic ureter indicating an insertion below the sphincter",
+      "Urosepsis in an obstructed or refluxing duplex system"
     ],
-    [
-     "Clinical Pitfall",
-     "Misapplying the Weigert-Meyer rule and treating the wrong moiety",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asymptomatic duplex systems have an excellent prognosis and need no intervention; symptomatic systems generally do well when the specific pathology (obstruction, reflux, or ectopia) is appropriately treated, with overall renal function usually preserved.",
+    "pitfalls": [
+      "Misapplying the Weigert-Meyer rule and treating the wrong moiety",
+      "Missing an ectopic ureter as the cause of continuous incontinence in a girl",
+      "Overlooking a poorly functioning obstructed upper pole on standard imaging",
+      "Assuming all duplex systems require surgery when many are incidental"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Gearhart, Rink & Mouriquand: Pediatric Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe incidental, asymptomatic duplex systems, which require no intervention",
+      "Prevent and treat urinary tract infection promptly, using antibiotic prophylaxis where there is significant vesicoureteric reflux or recurrent infection",
+      "Decompress an obstructing ureterocele endoscopically by incision or puncture",
+      "Offer reconstructive surgery for symptomatic disease: upper-pole heminephrectomy for a non-functioning obstructed moiety, ureteric reimplantation for troublesome reflux, or ureteroureterostomy",
+      "Assess and monitor moiety function and drainage with MAG3 or DMSA renography, and surveil for reflux nephropathy and scarring",
+      "Manage jointly through urology and paediatric nephrology, tailoring treatment to the affected moiety and its pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for duplex collecting system."
-  }
- ],
- "diagrams": [
-  {
-   "id": "duplex-collecting-system-real-image",
-   "title": "Duplex collecting system: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "duplex_collecting_system-pathway",
+      "title": "Duplex collecting system: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters join before the bladder, to complete duplication with two separate ureteric orifices",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Obstruction of the upper moiety with declining function or infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal and bladder ultrasound to demonstrate duplication and moiety dilatation, Micturating cystourethrogram (MCUG) to detect reflux, usually into the lower moiety, MAG3 or DMSA renography to assess function of each moiety"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe incidental, asymptomatic duplex systems, which require no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misapplying the Weigert-Meyer rule and treating the wrong moiety"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of duplex collecting system."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "duplex_collecting_system-matrix",
+      "title": "Duplex collecting system: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the commonest congenital urinary tract anomalies, ranging from a partial (incomplete) duplication where the two ureters",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal and bladder ultrasound to demonstrate duplication and moiety dilatation, Micturating cystourethrogram (MCUG) to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ureteropelvic junction obstruction of a single system, Ureterocele or ectopic ureter in a single system, Vesicoureteric reflux",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe incidental, asymptomatic duplex systems, which require no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misapplying the Weigert-Meyer rule and treating the wrong moiety",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for duplex collecting system."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "duplex_collecting_system-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Duplication and moiety dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Reflux, usually into the lower moiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAG3 or DMSA renography",
+          "cells": [
+            {
+              "text": "Function and drainage of each moiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR urography",
+          "cells": [
+            {
+              "text": "Complex ductal anatomy and ectopic insertions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Ureteric orifices and any ureterocele"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duplex_collecting_system-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ureteropelvic junction obstruction of a single system",
+          "cells": [
+            {
+              "text": "Obstruction without duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureterocele or ectopic ureter in a single system",
+          "cells": [
+            {
+              "text": "Ectopia without duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary obstructive megaureter",
+          "cells": [
+            {
+              "text": "Dilated ureter without duplication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "duplex_collecting_system-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Incidental, asymptomatic duplex systems need no intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Prompt treatment; prophylaxis for significant reflux or recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic decompression",
+          "cells": [
+            {
+              "text": "Incision or puncture of an obstructing ureterocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive surgery",
+          "cells": [
+            {
+              "text": "Heminephrectomy for a non-functioning moiety, reimplantation for reflux, or ureteroureterostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Function monitoring",
+          "cells": [
+            {
+              "text": "MAG3 or DMSA renography; surveillance for reflux nephropathy and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Urology and paediatric nephrology, tailored to the moiety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "duplex_collecting_system-dx-mgmt",
+      "title": "Diagnosis and management of Duplex collecting system",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected duplex collecting system: duplicated kidney system on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (upper moiety obstruction, high-grade reflux, urosepsis, ectopic leak)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of urosepsis in an obstructed or refluxing duplex system",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound; MCUG; MAG3 or DMSA renography; MR urography; cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm duplication with obstruction, reflux or ectopia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Asymptomatic duplication: observe; consider single-system obstruction or reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe incidental, asymptomatic duplex systems without intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt infection treatment; prophylaxis for significant reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic decompression of an obstructing ureterocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Heminephrectomy, ureteric reimplantation or ureteroureterostomy for symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Function surveillance with renography and monitoring for scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Asymptomatic systems have excellent outcome; symptomatic ones do well after treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

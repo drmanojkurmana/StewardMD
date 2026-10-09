@@ -1,170 +1,419 @@
 {
- "id": "map_dot_fingerprint_dystrophy",
- "name": "Map-dot-fingerprint dystrophy",
- "aliases": [
-  "epithelial basement membrane dystrophy",
-  "Cogan microcystic dystrophy",
-  "anterior basement membrane dystrophy"
- ],
- "class": "non_infective",
- "system": "Eye / Cornea",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
-   "Slit-lamp examination shows map-like patches, dot-like microcysts and fingerprint lines in the epithelium",
-   "Many patients are asymptomatic, but it is a leading cause of recurrent corneal erosion syndrome",
-   "Recurrent erosions cause episodes of sharp pain, watering and photophobia, classically on waking",
-   "It can transiently blur vision and cause irregular astigmatism",
-   "Management targets recurrent erosions with lubrication and, if needed, procedures such as epithelial debridement or stromal micropuncture"
+  "id": "map_dot_fingerprint_dystrophy",
+  "name": "Map-dot-fingerprint dystrophy",
+  "aliases": [
+    "epithelial basement membrane dystrophy",
+    "Cogan microcystic dystrophy",
+    "anterior basement membrane dystrophy"
   ],
-  "pathophysiology": "Map-dot-fingerprint dystrophy is characterised by abnormal production and organisation of the epithelial basement membrane, with reduplicated membrane and intraepithelial cysts. Poor adhesion of the corneal epithelium to this faulty basement membrane predisposes to recurrent breakdown, so the epithelium detaches, producing recurrent corneal erosions. The abnormal membrane and microcysts create the characteristic map, dot and fingerprint patterns and can distort the overlying epithelial surface.",
-  "additionalDifferentials": [
-   "Recurrent corneal erosion from prior trauma",
-   "Meesmann corneal dystrophy",
-   "Dry eye disease",
-   "Epithelial infectious keratitis (during an acute erosion)",
-   "Other anterior corneal dystrophies"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination, including retroillumination, for the characteristic patterns",
-   "Fluorescein staining to identify epithelial defects during erosions",
-   "Corneal topography if irregular astigmatism affects vision",
-   "History focused on recurrent erosion episodes",
-   "Exclusion of infection during an acute painful episode"
-  ],
-  "redFlags": [
-   "Signs of infective keratitis complicating an erosion",
-   "Persistent or non-healing epithelial defect",
-   "Significant visual loss from irregular astigmatism or scarring",
-   "Frequent disabling erosion episodes"
-  ],
-  "prognosis": "The dystrophy is benign and often asymptomatic; recurrent erosions can be troublesome but are usually controllable, and vision is generally preserved.",
-  "pitfalls": [
-   "Missing an infective keratitis during an acute erosion",
-   "Overlooking the dystrophy as the underlying cause of recurrent erosions",
-   "Under-treating erosions and allowing recurrent episodes",
-   "Attributing visual blur solely to refractive error"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "IC3D classification of corneal dystrophies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions",
-   "Apply a bandage contact lens to promote healing during an acute recurrent erosion",
-   "Manage the acute erosion with lubrication, cycloplegia for pain and topical antibiotic prophylaxis, while excluding infection",
-   "Offer procedural treatment for refractory erosions such as epithelial debridement, anterior stromal micropuncture or phototherapeutic keratectomy",
-   "Reassure asymptomatic patients that the dystrophy is benign with generally preserved vision",
-   "Correct irregular astigmatism where it degrades vision",
-   "Follow up under ophthalmology and cornea services for recurrent erosion syndrome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "map_dot_fingerprint_dystrophy-pathway",
-   "title": "Map-dot-fingerprint dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of infective keratitis complicating an erosion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination, including retroillumination, for the characteristic patterns, Fluorescein staining to identify epithelial defects during erosions, Corneal topography if irregular astigmatism affects vision"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an infective keratitis during an acute erosion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of map-dot-fingerprint dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "map_dot_fingerprint_dystrophy-matrix",
-   "title": "Map-dot-fingerprint dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Cornea",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
+      "Slit-lamp examination shows map-like patches, dot-like microcysts and fingerprint lines in the epithelium",
+      "Many patients are asymptomatic, but it is a leading cause of recurrent corneal erosion syndrome",
+      "Recurrent erosions cause episodes of sharp pain, watering and photophobia, classically on waking",
+      "It can transiently blur vision and cause irregular astigmatism",
+      "Management targets recurrent erosions with lubrication and, if needed, procedures such as epithelial debridement or stromal micropuncture"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination, including retroillumination, for the characteristic patterns, Fluorescein staining to identify epithelial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Map-dot-fingerprint dystrophy is characterised by abnormal production and organisation of the epithelial basement membrane, with reduplicated membrane and intraepithelial cysts. Poor adhesion of the corneal epithelium to this faulty basement membrane predisposes to recurrent breakdown, so the epithelium detaches, producing recurrent corneal erosions. The abnormal membrane and microcysts create the characteristic map, dot and fingerprint patterns and can distort the overlying epithelial surface.",
+    "additionalDifferentials": [
+      "Recurrent corneal erosion from prior trauma",
+      "Meesmann corneal dystrophy",
+      "Dry eye disease",
+      "Epithelial infectious keratitis (during an acute erosion)",
+      "Other anterior corneal dystrophies"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent corneal erosion from prior trauma, Meesmann corneal dystrophy, Dry eye disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination, including retroillumination, for the characteristic patterns",
+      "Fluorescein staining to identify epithelial defects during erosions",
+      "Corneal topography if irregular astigmatism affects vision",
+      "History focused on recurrent erosion episodes",
+      "Exclusion of infection during an acute painful episode"
     ],
-    [
-     "Management Strategy",
-     "Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of infective keratitis complicating an erosion",
+      "Persistent or non-healing epithelial defect",
+      "Significant visual loss from irregular astigmatism or scarring",
+      "Frequent disabling erosion episodes"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an infective keratitis during an acute erosion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The dystrophy is benign and often asymptomatic; recurrent erosions can be troublesome but are usually controllable, and vision is generally preserved.",
+    "pitfalls": [
+      "Missing an infective keratitis during an acute erosion",
+      "Overlooking the dystrophy as the underlying cause of recurrent erosions",
+      "Under-treating erosions and allowing recurrent episodes",
+      "Attributing visual blur solely to refractive error"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "IC3D classification of corneal dystrophies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions",
+      "Apply a bandage contact lens to promote healing during an acute recurrent erosion",
+      "Manage the acute erosion with lubrication, cycloplegia for pain and topical antibiotic prophylaxis, while excluding infection",
+      "Offer procedural treatment for refractory erosions such as epithelial debridement, anterior stromal micropuncture or phototherapeutic keratectomy",
+      "Reassure asymptomatic patients that the dystrophy is benign with generally preserved vision",
+      "Correct irregular astigmatism where it degrades vision",
+      "Follow up under ophthalmology and cornea services for recurrent erosion syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for map-dot-fingerprint dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "map-dot-fingerprint-dystrophy-real-image",
-   "title": "Map-dot-fingerprint dystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "map_dot_fingerprint_dystrophy-pathway",
+      "title": "Map-dot-fingerprint dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of infective keratitis complicating an erosion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination, including retroillumination, for the characteristic patterns, Fluorescein staining to identify epithelial defects during erosions, Corneal topography if irregular astigmatism affects vision"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an infective keratitis during an acute erosion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of map-dot-fingerprint dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "map_dot_fingerprint_dystrophy-matrix",
+      "title": "Map-dot-fingerprint dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest anterior corneal dystrophy, involving abnormal epithelial basement membrane",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination, including retroillumination, for the characteristic patterns, Fluorescein staining to identify epithelial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent corneal erosion from prior trauma, Meesmann corneal dystrophy, Dry eye disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lubricate the ocular surface with topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an infective keratitis during an acute erosion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for map-dot-fingerprint dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "map_dot_fingerprint_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination with retroillumination",
+          "cells": [
+            {
+              "text": "Characteristic corneal patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining",
+          "cells": [
+            {
+              "text": "Epithelial defects during erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Irregular astigmatism affecting vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of recurrent erosion episodes",
+          "cells": [
+            {
+              "text": "Recurrent erosion pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of infection during an acute painful episode",
+          "cells": [
+            {
+              "text": "Infection excluded during the acute episode"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "map_dot_fingerprint_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lubrication",
+          "cells": [
+            {
+              "text": "Topical tear substitutes and a hypertonic saline ointment at night to reduce recurrent erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bandage contact lens",
+          "cells": [
+            {
+              "text": "Promotes healing during an acute recurrent erosion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute erosion care",
+          "cells": [
+            {
+              "text": "Lubrication, cycloplegia for pain and topical antibiotic prophylaxis, while excluding infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedural treatment for refractory erosions",
+          "cells": [
+            {
+              "text": "Epithelial debridement, anterior stromal micropuncture or phototherapeutic keratectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic patients: the dystrophy is benign with generally preserved vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct irregular astigmatism",
+          "cells": [
+            {
+              "text": "Where it degrades vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Ophthalmology and cornea services for recurrent erosion syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "map_dot_fingerprint_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Map-dot-fingerprint dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent painful corneal erosions with a characteristic pattern on slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infective keratitis, non-healing epithelial defect or significant visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cornea review; exclude and treat infective keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp with retroillumination, fluorescein staining and topography if astigmatism",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the epithelial pattern consistent with map-dot-fingerprint dystrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider recurrent trauma erosion, Meesmann dystrophy or dry eye; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lubrication with tear substitutes and nightly hypertonic saline ointment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bandage contact lens to promote healing during an acute erosion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Procedural treatment for refractory erosions: debridement, micropuncture or keratectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct irregular astigmatism where it degrades vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign dystrophy with generally preserved vision; recurrent erosions can be disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

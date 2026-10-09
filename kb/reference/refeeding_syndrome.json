@@ -1,169 +1,380 @@
 {
- "id": "refeeding_syndrome",
- "name": "Refeeding syndrome",
- "aliases": [
-  "refeeding hypophosphataemia",
-  "nutritional recovery syndrome"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a malnourished or starved patient",
-   "The hallmark biochemical abnormality is a sharp fall in serum phosphate, often with falls in potassium and magnesium and fluid retention",
-   "Highest-risk groups include those with very low body mass index, prolonged fasting or minimal intake, chronic alcohol use, anorexia nervosa, and severe malnutrition",
-   "Clinical consequences include cardiac arrhythmia and failure, respiratory muscle weakness, seizures, confusion, and rhabdomyolysis",
-   "Prevention is key: identify at-risk patients, correct electrolytes, give thiamine before feeding, and start nutrition cautiously with slow escalation",
-   "Electrolytes must be monitored frequently during early refeeding and replaced as they fall rather than waiting for symptoms",
-   "It can complicate refeeding in any setting, including treatment of severe childhood malnutrition and hospital nutritional support"
+  "id": "refeeding_syndrome",
+  "name": "Refeeding syndrome",
+  "aliases": [
+    "refeeding hypophosphataemia",
+    "nutritional recovery syndrome"
   ],
-  "pathophysiology": "During prolonged starvation the body shifts to fat and protein catabolism, depletes intracellular electrolytes and vitamins despite near-normal serum levels, and reduces insulin secretion. Reintroducing carbohydrate causes a surge of insulin that drives glucose, phosphate, potassium, and magnesium into cells and stimulates synthesis of phosphorylated intermediates, abruptly lowering their serum concentrations. Thiamine, needed for carbohydrate metabolism, is rapidly consumed and can become critically deficient. Insulin also promotes sodium and water retention. The combination of hypophosphataemia, hypokalaemia, hypomagnesaemia, thiamine deficiency, and fluid overload produces the cardiac, neurological, and neuromuscular manifestations.",
-  "additionalDifferentials": [
-   "Sepsis with metabolic derangement",
-   "Primary cardiac failure or arrhythmia of other cause",
-   "Other causes of hypophosphataemia such as renal loss",
-   "Diabetic ketoacidosis and its treatment-related electrolyte shifts",
-   "Adrenal insufficiency"
-  ],
-  "additionalInvestigations": [
-   "Baseline and frequent monitoring of phosphate, potassium, and magnesium",
-   "Glucose, sodium, and fluid balance assessment during refeeding",
-   "ECG monitoring for arrhythmia in high-risk patients",
-   "Assessment of nutritional risk before starting feeding",
-   "Renal function and, where indicated, markers of rhabdomyolysis"
-  ],
-  "redFlags": [
-   "Rapidly falling phosphate, potassium, or magnesium after feeding begins",
-   "Cardiac arrhythmia or acute heart failure during refeeding",
-   "Respiratory muscle weakness or respiratory failure",
-   "Seizures, confusion, or reduced consciousness attributable to electrolyte shifts or thiamine deficiency"
-  ],
-  "prognosis": "With early identification of at-risk patients, cautious feeding, thiamine, and proactive electrolyte replacement the syndrome is largely preventable and recoverable; unrecognised, it can cause fatal arrhythmia and multi-organ dysfunction.",
-  "pitfalls": [
-   "Starting full-rate nutrition immediately in a severely malnourished patient",
-   "Being falsely reassured by normal pre-feeding serum electrolytes despite depleted body stores",
-   "Omitting thiamine before a carbohydrate load",
-   "Monitoring electrolytes too infrequently to catch the early post-feeding fall"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake",
-   "Give thiamine and other B vitamins before and during the early stages of feeding to prevent Wernicke encephalopathy",
-   "Correct and pre-emptively replace phosphate, potassium and magnesium, replacing as levels fall rather than awaiting symptoms",
-   "Monitor electrolytes, glucose and fluid balance frequently during early refeeding",
-   "Manage fluid and sodium carefully to avoid overload and cardiac decompensation",
-   "Provide cardiac monitoring for arrhythmia in high-risk patients, with dietitian-led nutrition support and escalation to critical care for severe derangement or cardiac compromise"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "refeeding_syndrome-pathway",
-   "title": "Refeeding syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a malnourished or starved patient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly falling phosphate, potassium, or magnesium after feeding begins",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Baseline and frequent monitoring of phosphate, potassium, and magnesium, Glucose, sodium, and fluid balance assessment during refeeding, ECG monitoring for arrhythmia in high-risk patients"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting full-rate nutrition immediately in a severely malnourished patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of refeeding syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "refeeding_syndrome-matrix",
-   "title": "Refeeding syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a malnourished or starved patient",
+      "The hallmark biochemical abnormality is a sharp fall in serum phosphate, often with falls in potassium and magnesium and fluid retention",
+      "Highest-risk groups include those with very low body mass index, prolonged fasting or minimal intake, chronic alcohol use, anorexia nervosa, and severe malnutrition",
+      "Clinical consequences include cardiac arrhythmia and failure, respiratory muscle weakness, seizures, confusion, and rhabdomyolysis",
+      "Prevention is key: identify at-risk patients, correct electrolytes, give thiamine before feeding, and start nutrition cautiously with slow escalation",
+      "Electrolytes must be monitored frequently during early refeeding and replaced as they fall rather than waiting for symptoms",
+      "It can complicate refeeding in any setting, including treatment of severe childhood malnutrition and hospital nutritional support"
     ],
-    [
-     "Key Investigations",
-     "Baseline and frequent monitoring of phosphate, potassium, and magnesium, Glucose, sodium, and fluid balance assessment during",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During prolonged starvation the body shifts to fat and protein catabolism, depletes intracellular electrolytes and vitamins despite near-normal serum levels, and reduces insulin secretion. Reintroducing carbohydrate causes a surge of insulin that drives glucose, phosphate, potassium, and magnesium into cells and stimulates synthesis of phosphorylated intermediates, abruptly lowering their serum concentrations. Thiamine, needed for carbohydrate metabolism, is rapidly consumed and can become critically deficient. Insulin also promotes sodium and water retention. The combination of hypophosphataemia, hypokalaemia, hypomagnesaemia, thiamine deficiency, and fluid overload produces the cardiac, neurological, and neuromuscular manifestations.",
+    "additionalDifferentials": [
+      "Sepsis with metabolic derangement",
+      "Primary cardiac failure or arrhythmia of other cause",
+      "Other causes of hypophosphataemia such as renal loss",
+      "Diabetic ketoacidosis and its treatment-related electrolyte shifts",
+      "Adrenal insufficiency"
     ],
-    [
-     "Primary Differentials",
-     "Sepsis with metabolic derangement, Primary cardiac failure or arrhythmia of other cause, Other causes of hypophosphataemia such",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Baseline and frequent monitoring of phosphate, potassium, and magnesium",
+      "Glucose, sodium, and fluid balance assessment during refeeding",
+      "ECG monitoring for arrhythmia in high-risk patients",
+      "Assessment of nutritional risk before starting feeding",
+      "Renal function and, where indicated, markers of rhabdomyolysis"
     ],
-    [
-     "Management Strategy",
-     "Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly falling phosphate, potassium, or magnesium after feeding begins",
+      "Cardiac arrhythmia or acute heart failure during refeeding",
+      "Respiratory muscle weakness or respiratory failure",
+      "Seizures, confusion, or reduced consciousness attributable to electrolyte shifts or thiamine deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting full-rate nutrition immediately in a severely malnourished patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early identification of at-risk patients, cautious feeding, thiamine, and proactive electrolyte replacement the syndrome is largely preventable and recoverable; unrecognised, it can cause fatal arrhythmia and multi-organ dysfunction.",
+    "pitfalls": [
+      "Starting full-rate nutrition immediately in a severely malnourished patient",
+      "Being falsely reassured by normal pre-feeding serum electrolytes despite depleted body stores",
+      "Omitting thiamine before a carbohydrate load",
+      "Monitoring electrolytes too infrequently to catch the early post-feeding fall"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake",
+      "Give thiamine and other B vitamins before and during the early stages of feeding to prevent Wernicke encephalopathy",
+      "Correct and pre-emptively replace phosphate, potassium and magnesium, replacing as levels fall rather than awaiting symptoms",
+      "Monitor electrolytes, glucose and fluid balance frequently during early refeeding",
+      "Manage fluid and sodium carefully to avoid overload and cardiac decompensation",
+      "Provide cardiac monitoring for arrhythmia in high-risk patients, with dietitian-led nutrition support and escalation to critical care for severe derangement or cardiac compromise"
     ]
-   ],
-   "caption": "Overview comparison matrix for refeeding syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "refeeding-syndrome-real-image",
-   "title": "Refeeding syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "refeeding_syndrome-pathway",
+      "title": "Refeeding syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a malnourished or starved patient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly falling phosphate, potassium, or magnesium after feeding begins",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Baseline and frequent monitoring of phosphate, potassium, and magnesium, Glucose, sodium, and fluid balance assessment during refeeding, ECG monitoring for arrhythmia in high-risk patients"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting full-rate nutrition immediately in a severely malnourished patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of refeeding syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "refeeding_syndrome-matrix",
+      "title": "Refeeding syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "It is a potentially fatal set of metabolic shifts triggered when nutrition, especially carbohydrate, is reintroduced to a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Baseline and frequent monitoring of phosphate, potassium, and magnesium, Glucose, sodium, and fluid balance assessment during",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sepsis with metabolic derangement, Primary cardiac failure or arrhythmia of other cause, Other causes of hypophosphataemia such",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify at-risk patients and start nutrition cautiously with slow escalation of caloric intake",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting full-rate nutrition immediately in a severely malnourished patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for refeeding syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "refeeding_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Phosphate, potassium and magnesium monitoring",
+          "cells": [
+            {
+              "text": "Electrolyte levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, sodium and fluid balance",
+          "cells": [
+            {
+              "text": "Balance during refeeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refeeding_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis with metabolic derangement",
+          "cells": [
+            {
+              "text": "Metabolic derangement"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of hypophosphataemia",
+          "cells": [
+            {
+              "text": "Low phosphate"
+            },
+            {
+              "text": "Electrolyte levels"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refeeding_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "At-risk patients",
+          "cells": [
+            {
+              "text": "Start nutrition cautiously with slow escalation of calories"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamins",
+          "cells": [
+            {
+              "text": "Thiamine and B vitamins before feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Replacement with cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "refeeding_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Refeeding syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected refeeding syndrome: electrolyte fall after nutrition restarted",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling phosphate, potassium or magnesium, arrhythmia, or heart failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac monitoring for arrhythmia or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phosphate, potassium and magnesium; glucose; sodium and fluid balance",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hypophosphataemia confirmed after feeding started?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis or other causes of low phosphate; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify at-risk patients and start nutrition cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give thiamine and B vitamins before feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Electrolyte replacement with cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Dietetic follow-up and monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

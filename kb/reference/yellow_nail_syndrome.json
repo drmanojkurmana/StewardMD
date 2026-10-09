@@ -1,173 +1,377 @@
 {
- "id": "yellow_nail_syndrome",
- "name": "Yellow nail syndrome",
- "aliases": [
-  "YNS",
-  "primary lymphoedema with yellow nails",
-  "yellow nail-lymphoedema syndrome"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory Medicine / Occupational Lung Disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory Medicine and Dermatology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all three need be present",
-   "Pleural effusions are the hallmark respiratory feature and are typically exudative, sometimes chylous, and often recurrent",
-   "Other respiratory features include chronic cough, bronchiectasis, and recurrent sinopulmonary infections",
-   "Nails show a yellow-green discolouration, transverse over-curvature, absent lunula and cuticle, and may lift from the nail bed (onycholysis)",
-   "Usually seen in middle-aged or older adults and generally sporadic rather than inherited",
-   "An association with malignancy and immunodeficiency is recognised, so a search for occult disease may be warranted",
-   "Diagnosis is clinical, based on recognising the characteristic combination of features, as no specific test exists"
+  "id": "yellow_nail_syndrome",
+  "name": "Yellow nail syndrome",
+  "aliases": [
+    "YNS",
+    "primary lymphoedema with yellow nails",
+    "yellow nail-lymphoedema syndrome"
   ],
-  "pathophysiology": "Yellow nail syndrome is thought to reflect a functional or structural abnormality of lymphatic drainage, with impaired and often ectatic lymphatics leading to the peripheral lymphoedema, pleural effusions, and impaired clearance predisposing to bronchiectasis and sinus disease. The abnormal lymphatic function is believed to slow nail growth and cause the characteristic discolouration and thickening. Microvascular and lymphatic dysfunction, sometimes with associated protein leakage, underlies the exudative and occasionally chylous nature of the effusions. The precise cause is unknown, and the syndrome is generally acquired, sometimes appearing in association with malignancy, autoimmune disease, or immunodeficiency.",
-  "additionalDifferentials": [
-   "Onychomycosis and other nail dystrophies",
-   "Congenital or acquired lymphoedema of other cause",
-   "Nephrotic syndrome or hypoalbuminaemia causing effusions and oedema",
-   "Congestive cardiac failure",
-   "Chylothorax from thoracic duct injury or malignancy",
-   "Bronchiectasis of other aetiology"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of the characteristic nail changes, lymphoedema, and effusions",
-   "Pleural fluid analysis to characterise the effusion as exudative or chylous",
-   "Chest imaging including CT to assess effusions and bronchiectasis",
-   "Nail examination and, where needed, exclusion of fungal infection",
-   "Investigation for associated malignancy or immunodeficiency when clinically indicated",
-   "Lymphoscintigraphy in selected cases to assess lymphatic function"
-  ],
-  "redFlags": [
-   "Features suggesting underlying malignancy requiring investigation",
-   "Large or rapidly reaccumulating pleural effusions causing breathlessness",
-   "Recurrent severe respiratory infections indicating significant bronchiectasis or immunodeficiency",
-   "Chylous effusion prompting evaluation of the thoracic duct and lymphatics"
-  ],
-  "prognosis": "The course is chronic and variable; nail changes may occasionally improve spontaneously, respiratory and lymphatic features often persist and require symptomatic management, and prognosis is influenced by any associated malignancy or immunodeficiency.",
-  "pitfalls": [
-   "Dismissing the nail changes as simple fungal infection and missing the syndrome",
-   "Failing to recognise the association with occult malignancy",
-   "Attributing recurrent effusions to more common causes without considering the triad",
-   "Overlooking bronchiectasis as a driver of recurrent infection"
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical options such as decortication or a pleuroperitoneal shunt, adopting a low-fat, medium-chain-triglyceride diet for chylous effusions",
-   "Treat bronchiectasis and recurrent sinopulmonary infection with airway clearance physiotherapy and antibiotics, and manage chronic rhinosinusitis",
-   "Manage lymphoedema with compression garments, limb elevation and complex decongestive physiotherapy",
-   "Trial nail-directed measures such as oral vitamin E and zinc, recognising that nail changes may improve spontaneously",
-   "Search for an associated malignancy or immunodeficiency when clinically indicated",
-   "Monitor the chronic respiratory and lymphatic course with clinical review and chest imaging",
-   "Coordinate care across respiratory medicine, ENT and lymphoedema services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "yellow_nail_syndrome-pathway",
-   "title": "Yellow nail syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all three need be present",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting underlying malignancy requiring investigation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of the characteristic nail changes, lymphoedema, and effusions, Pleural fluid analysis to characterise the effusion as exudative or chylous, Chest imaging including CT to assess effusions and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical options such as decortication or a pleuroperitoneal shunt, adopting a low-fat,"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the nail changes as simple fungal infection and missing the syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of yellow nail syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "yellow_nail_syndrome-matrix",
-   "title": "Yellow nail syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory Medicine / Occupational Lung Disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory Medicine and Dermatology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all three need be present",
+      "Pleural effusions are the hallmark respiratory feature and are typically exudative, sometimes chylous, and often recurrent",
+      "Other respiratory features include chronic cough, bronchiectasis, and recurrent sinopulmonary infections",
+      "Nails show a yellow-green discolouration, transverse over-curvature, absent lunula and cuticle, and may lift from the nail bed (onycholysis)",
+      "Usually seen in middle-aged or older adults and generally sporadic rather than inherited",
+      "An association with malignancy and immunodeficiency is recognised, so a search for occult disease may be warranted",
+      "Diagnosis is clinical, based on recognising the characteristic combination of features, as no specific test exists"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of the characteristic nail changes, lymphoedema, and effusions, Pleural fluid analysis to characterise the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Yellow nail syndrome is thought to reflect a functional or structural abnormality of lymphatic drainage, with impaired and often ectatic lymphatics leading to the peripheral lymphoedema, pleural effusions, and impaired clearance predisposing to bronchiectasis and sinus disease. The abnormal lymphatic function is believed to slow nail growth and cause the characteristic discolouration and thickening. Microvascular and lymphatic dysfunction, sometimes with associated protein leakage, underlies the exudative and occasionally chylous nature of the effusions. The precise cause is unknown, and the syndrome is generally acquired, sometimes appearing in association with malignancy, autoimmune disease, or immunodeficiency.",
+    "additionalDifferentials": [
+      "Onychomycosis and other nail dystrophies",
+      "Congenital or acquired lymphoedema of other cause",
+      "Nephrotic syndrome or hypoalbuminaemia causing effusions and oedema",
+      "Congestive cardiac failure",
+      "Chylothorax from thoracic duct injury or malignancy",
+      "Bronchiectasis of other aetiology"
     ],
-    [
-     "Primary Differentials",
-     "Onychomycosis and other nail dystrophies, Congenital or acquired lymphoedema of other cause, Nephrotic syndrome or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of the characteristic nail changes, lymphoedema, and effusions",
+      "Pleural fluid analysis to characterise the effusion as exudative or chylous",
+      "Chest imaging including CT to assess effusions and bronchiectasis",
+      "Nail examination and, where needed, exclusion of fungal infection",
+      "Investigation for associated malignancy or immunodeficiency when clinically indicated",
+      "Lymphoscintigraphy in selected cases to assess lymphatic function"
     ],
-    [
-     "Management Strategy",
-     "Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting underlying malignancy requiring investigation",
+      "Large or rapidly reaccumulating pleural effusions causing breathlessness",
+      "Recurrent severe respiratory infections indicating significant bronchiectasis or immunodeficiency",
+      "Chylous effusion prompting evaluation of the thoracic duct and lymphatics"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the nail changes as simple fungal infection and missing the syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is chronic and variable; nail changes may occasionally improve spontaneously, respiratory and lymphatic features often persist and require symptomatic management, and prognosis is influenced by any associated malignancy or immunodeficiency.",
+    "pitfalls": [
+      "Dismissing the nail changes as simple fungal infection and missing the syndrome",
+      "Failing to recognise the association with occult malignancy",
+      "Attributing recurrent effusions to more common causes without considering the triad",
+      "Overlooking bronchiectasis as a driver of recurrent infection"
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical options such as decortication or a pleuroperitoneal shunt, adopting a low-fat, medium-chain-triglyceride diet for chylous effusions",
+      "Treat bronchiectasis and recurrent sinopulmonary infection with airway clearance physiotherapy and antibiotics, and manage chronic rhinosinusitis",
+      "Manage lymphoedema with compression garments, limb elevation and complex decongestive physiotherapy",
+      "Trial nail-directed measures such as oral vitamin E and zinc, recognising that nail changes may improve spontaneously",
+      "Search for an associated malignancy or immunodeficiency when clinically indicated",
+      "Monitor the chronic respiratory and lymphatic course with clinical review and chest imaging",
+      "Coordinate care across respiratory medicine, ENT and lymphoedema services"
     ]
-   ],
-   "caption": "Overview comparison matrix for yellow nail syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "yellow-nail-syndrome-real-image",
-   "title": "Yellow nail syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "yellow_nail_syndrome-pathway",
+      "title": "Yellow nail syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all three need be present",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting underlying malignancy requiring investigation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of the characteristic nail changes, lymphoedema, and effusions, Pleural fluid analysis to characterise the effusion as exudative or chylous, Chest imaging including CT to assess effusions and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical options such as decortication or a pleuroperitoneal shunt, adopting a low-fat,"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the nail changes as simple fungal infection and missing the syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of yellow nail syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "yellow_nail_syndrome-matrix",
+      "title": "Yellow nail syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic triad of yellow, thickened, slow-growing dystrophic nails, lymphoedema, and respiratory manifestations, though not all",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of the characteristic nail changes, lymphoedema, and effusions, Pleural fluid analysis to characterise the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Onychomycosis and other nail dystrophies, Congenital or acquired lymphoedema of other cause, Nephrotic syndrome or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage recurrent pleural effusions with therapeutic drainage and, for refractory or chylous effusions, pleurodesis or surgical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the nail changes as simple fungal infection and missing the syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for yellow nail syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "yellow_nail_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of nail changes, lymphoedema and effusions",
+          "cells": [
+            {
+              "text": "Triad of yellow dystrophic nails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid analysis",
+          "cells": [
+            {
+              "text": "Exudative or lymphatic effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yellow_nail_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Onychomycosis and other nail dystrophies",
+          "cells": [
+            {
+              "text": "Dismissed as fungal infection, which misses the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital or acquired lymphoedema of other cause",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Effusions with proteinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "yellow_nail_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic drainage of effusions",
+          "cells": [
+            {
+              "text": "Recurrent pleural effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of refractory or chylous effusions",
+          "cells": [
+            {
+              "text": "Specialist treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "yellow_nail_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Yellow nail syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected yellow nail syndrome: yellow thickened nails with lymphoedema and effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features of malignancy or large rapidly reaccumulating effusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent investigation for malignancy or drainage of large effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Assessment of nails and lymphoedema, pleural fluid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the nail, lymphoedema and effusion features present together?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider onychomycosis, other lymphoedema or nephrotic effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic drainage of recurrent pleural effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialist treatment for refractory or chylous effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not dismiss the nail changes as simple fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Chronic; effusions are the main respiratory complication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

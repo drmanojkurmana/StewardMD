@@ -1,173 +1,228 @@
 {
- "id": "capillary_malformation",
- "name": "Capillary malformation",
- "aliases": [
-  "Port-wine stain",
-  "Naevus flammeus"
- ],
- "class": "non_infective",
- "system": "Skin / Vascular",
- "specialty": "Dermatology / Vascular anomalies / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child and does not involute.",
-   "Caused by somatic activating mutations in GNAQ (and related genes such as GNA11), the same pathway implicated in Sturge-Weber syndrome.",
-   "Facial lesions in the frontal or ophthalmic (V1) distribution carry a risk of Sturge-Weber syndrome with leptomeningeal and ocular involvement.",
-   "Tends to darken, thicken and develop nodular cobblestoning with age.",
-   "Overgrowth of underlying soft tissue and bone can occur, especially with segmental facial or limb lesions.",
-   "Pulsed dye laser is the treatment of choice for cosmetically significant lesions and is most effective when started early.",
-   "Distinguish from the common, transient naevus simplex (salmon patch or stork bite), which usually fades in infancy.",
-   "A geographic, well-demarcated capillary stain on a limb may signal an overgrowth syndrome such as capillary malformation-arteriovenous malformation (RASA1) or a PIK3CA-related overgrowth disorder."
+  "id": "capillary_malformation",
+  "name": "Capillary malformation",
+  "aliases": [
+    "Port-wine stain",
+    "Naevus flammeus"
   ],
-  "pathophysiology": "Capillary malformation is a congenital slow-flow malformation of dermal capillaries and postcapillary venules arising from somatic mosaic activating mutations, most commonly in GNAQ, which constitutively activate Galpha-q signalling through the MAPK/ERK pathway in endothelial cells. This causes progressive ectasia of superficial dermal vessels and deficient perivascular neural regulation. Unlike vascular tumours there is no endothelial proliferation; the vessels are structurally abnormal and dilate over time, accounting for progressive darkening and thickening of the lesion.",
-  "additionalDifferentials": [
-   "Naevus simplex (salmon patch)",
-   "Macular precursor of an early infantile haemangioma",
-   "Arteriovenous malformation",
-   "Capillary malformation of an overgrowth syndrome (Klippel-Trenaunay, CLOVES, Sturge-Weber)",
-   "Angioma serpiginosum",
-   "Cutis marmorata telangiectatica congenita"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis, with dermoscopy as an adjunct",
-   "Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1 distribution)",
-   "Ophthalmology review with intraocular pressure measurement for at-risk facial lesions",
-   "Limb imaging and length assessment where overgrowth is suspected",
-   "Genetic testing (GNAQ, RASA1, PIK3CA) in syndromic presentations"
-  ],
-  "redFlags": [
-   "V1 or forehead facial distribution with seizures or developmental concern (Sturge-Weber syndrome)",
-   "Glaucoma risk with periocular lesions",
-   "Progressive limb overgrowth or asymmetry",
-   "Warmth, thrill or bruit suggesting a high-flow arteriovenous malformation"
-  ],
-  "prognosis": "A capillary malformation is a lifelong lesion that tends to darken and thicken with age. Laser therapy lightens most lesions, and the wider prognosis depends on any associated syndromic features.",
-  "pitfalls": [
-   "Confusing a persistent port-wine stain with a self-resolving salmon patch.",
-   "Failing to screen V1-distribution facial lesions for Sturge-Weber syndrome and glaucoma.",
-   "Overlooking a limb overgrowth syndrome behind an apparently simple capillary stain.",
-   "Missing an evolving arteriovenous malformation masquerading as a capillary stain."
-  ],
-  "references": [
-   "Standard textbook of paediatric dermatology",
-   "ISSVA classification of vascular anomalies",
-   "Reviews of capillary malformations and Sturge-Weber syndrome genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early",
-   "Contrast-enhanced brain MRI and ophthalmology review for high-risk facial (V1) lesions to detect Sturge-Weber syndrome",
-   "Ophthalmic surveillance with intraocular pressure monitoring for glaucoma in at-risk facial lesions",
-   "Monitoring for soft-tissue and bony overgrowth in segmental facial or limb lesions, with limb-length assessment",
-   "Psychological support and camouflage cosmetics for visible lesions",
-   "Referral to a vascular anomalies multidisciplinary team for syndromic or extensive disease",
-   "Genetic evaluation in syndromic presentations, recognising the underlying somatic mosaic GNAQ mutation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "capillary_malformation-pathway",
-   "title": "Capillary malformation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child and does not involute.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: V1 or forehead facial distribution with seizures or developmental concern (Sturge-Weber syndrome)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis, with dermoscopy as an adjunct, Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1 distribution), Ophthalmology review with intraocular pressure measurement for at-risk facial lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a persistent port-wine stain with a self-resolving salmon patch."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of capillary malformation."
-  }
- ],
- "tables": [
-  {
-   "id": "capillary_malformation-matrix",
-   "title": "Capillary malformation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Vascular",
+  "specialty": "Dermatology / Vascular anomalies / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child and does not involute.",
+      "Caused by somatic activating mutations in GNAQ (and related genes such as GNA11), the same pathway implicated in Sturge-Weber syndrome.",
+      "Facial lesions in the frontal or ophthalmic (V1) distribution carry a risk of Sturge-Weber syndrome with leptomeningeal and ocular involvement.",
+      "Tends to darken, thicken and develop nodular cobblestoning with age.",
+      "Overgrowth of underlying soft tissue and bone can occur, especially with segmental facial or limb lesions.",
+      "Pulsed dye laser is the treatment of choice for cosmetically significant lesions and is most effective when started early.",
+      "Distinguish from the common, transient naevus simplex (salmon patch or stork bite), which usually fades in infancy.",
+      "A geographic, well-demarcated capillary stain on a limb may signal an overgrowth syndrome such as capillary malformation-arteriovenous malformation (RASA1) or a PIK3CA-related overgrowth disorder."
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis, with dermoscopy as an adjunct, Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Capillary malformation is a congenital slow-flow malformation of dermal capillaries and postcapillary venules arising from somatic mosaic activating mutations, most commonly in GNAQ, which constitutively activate Galpha-q signalling through the MAPK/ERK pathway in endothelial cells. This causes progressive ectasia of superficial dermal vessels and deficient perivascular neural regulation. Unlike vascular tumours there is no endothelial proliferation; the vessels are structurally abnormal and dilate over time, accounting for progressive darkening and thickening of the lesion.",
+    "additionalDifferentials": [
+      "Naevus simplex (salmon patch)",
+      "Macular precursor of an early infantile haemangioma",
+      "Arteriovenous malformation",
+      "Capillary malformation of an overgrowth syndrome (Klippel-Trenaunay, CLOVES, Sturge-Weber)",
+      "Angioma serpiginosum",
+      "Cutis marmorata telangiectatica congenita"
     ],
-    [
-     "Primary Differentials",
-     "Naevus simplex (salmon patch), Macular precursor of an early infantile haemangioma, Arteriovenous malformation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis, with dermoscopy as an adjunct",
+      "Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1 distribution)",
+      "Ophthalmology review with intraocular pressure measurement for at-risk facial lesions",
+      "Limb imaging and length assessment where overgrowth is suspected",
+      "Genetic testing (GNAQ, RASA1, PIK3CA) in syndromic presentations"
     ],
-    [
-     "Management Strategy",
-     "Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early",
-     "Core treatment modality"
+    "redFlags": [
+      "V1 or forehead facial distribution with seizures or developmental concern (Sturge-Weber syndrome)",
+      "Glaucoma risk with periocular lesions",
+      "Progressive limb overgrowth or asymmetry",
+      "Warmth, thrill or bruit suggesting a high-flow arteriovenous malformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a persistent port-wine stain with a self-resolving salmon patch.",
-     "Prevent diagnostic or management error"
+    "prognosis": "A capillary malformation is a lifelong lesion that tends to darken and thicken with age. Laser therapy lightens most lesions, and the wider prognosis depends on any associated syndromic features.",
+    "pitfalls": [
+      "Confusing a persistent port-wine stain with a self-resolving salmon patch.",
+      "Failing to screen V1-distribution facial lesions for Sturge-Weber syndrome and glaucoma.",
+      "Overlooking a limb overgrowth syndrome behind an apparently simple capillary stain.",
+      "Missing an evolving arteriovenous malformation masquerading as a capillary stain."
+    ],
+    "references": [
+      "Standard textbook of paediatric dermatology",
+      "ISSVA classification of vascular anomalies",
+      "Reviews of capillary malformations and Sturge-Weber syndrome genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early",
+      "Contrast-enhanced brain MRI and ophthalmology review for high-risk facial (V1) lesions to detect Sturge-Weber syndrome",
+      "Ophthalmic surveillance with intraocular pressure monitoring for glaucoma in at-risk facial lesions",
+      "Monitoring for soft-tissue and bony overgrowth in segmental facial or limb lesions, with limb-length assessment",
+      "Psychological support and camouflage cosmetics for visible lesions",
+      "Referral to a vascular anomalies multidisciplinary team for syndromic or extensive disease",
+      "Genetic evaluation in syndromic presentations, recognising the underlying somatic mosaic GNAQ mutation"
     ]
-   ],
-   "caption": "Overview comparison matrix for capillary malformation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "capillary-malformation-real-image",
-   "title": "Capillary malformation: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "capillary_malformation-pathway",
+      "title": "Capillary malformation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child and does not involute.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: V1 or forehead facial distribution with seizures or developmental concern (Sturge-Weber syndrome)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis, with dermoscopy as an adjunct, Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1 distribution), Ophthalmology review with intraocular pressure measurement for at-risk facial lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a persistent port-wine stain with a self-resolving salmon patch."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of capillary malformation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "capillary_malformation-matrix",
+      "title": "Capillary malformation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Slow-flow malformation present at birth as a flat, sharply demarcated pink to red patch that grows proportionately with the child",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis, with dermoscopy as an adjunct, Contrast-enhanced brain MRI when Sturge-Weber syndrome is suspected (V1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Naevus simplex (salmon patch), Macular precursor of an early infantile haemangioma, Arteriovenous malformation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Pulsed dye laser as the treatment of choice for cosmetically significant lesions, most effective when started early",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a persistent port-wine stain with a self-resolving salmon patch.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for capillary malformation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "capillary_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in capillary malformation",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical diagnosis with dermoscopy", "cells": [{"text": "Flat, sharply demarcated pink to red patch that grows with the child"}], "cite": "c1"},
+        {"parameter": "Contrast-enhanced brain MRI", "cells": [{"text": "Sturge-Weber syndrome where facial V1 distribution"}], "cite": "c1"},
+        {"parameter": "Ophthalmology review and intraocular pressure", "cells": [{"text": "Glaucoma risk with at-risk facial lesions"}], "cite": "c1"},
+        {"parameter": "Limb imaging and length assessment", "cells": [{"text": "Overgrowth when suspected"}], "cite": "c1"},
+        {"parameter": "Genetic testing (GNAQ, RASA1, PIK3CA)", "cells": [{"text": "Syndromic presentations"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "capillary_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike vascular stains",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Naevus simplex (salmon patch or stork bite)", "cells": [{"text": "Transient and usually fades in infancy; a capillary malformation does not involute"}], "cite": "c1"},
+        {"parameter": "Arteriovenous malformation", "cells": [{"text": "Warmth, thrill or bruit suggesting a high-flow lesion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "capillary_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options in capillary malformation",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Pulsed dye laser", "cells": [{"text": "Treatment of choice for cosmetically significant lesions"}, {"text": "Most effective when started early"}], "cite": "c1"},
+        {"parameter": "Brain MRI and ophthalmology for V1 lesions", "cells": [{"text": "Detects Sturge-Weber syndrome"}, {"text": "High-risk facial lesions"}], "cite": "c1"},
+        {"parameter": "Ophthalmic surveillance", "cells": [{"text": "Intraocular pressure monitoring for glaucoma"}, {"text": "At-risk facial lesions"}], "cite": "c1"},
+        {"parameter": "Overgrowth monitoring", "cells": [{"text": "Soft-tissue and bony overgrowth in segmental facial or limb lesions; limb-length assessment"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Camouflage and psychological support", "cells": [{"text": "Camouflage cosmetics and support for visible lesions"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Referral", "cells": [{"text": "Vascular anomalies multidisciplinary team for syndromic or extensive disease"}, {"text": "Specialist"}], "cite": "c1"},
+        {"parameter": "Genetic evaluation", "cells": [{"text": "Syndromic presentations; somatic GNAQ mutation"}, {"text": "As indicated"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "capillary_malformation-dx-mgmt",
+      "title": "Diagnosis and management of capillary malformation",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Flat sharply demarcated pink to red congenital patch that does not involute", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: V1 facial distribution with seizures or developmental concern, periocular lesion, or warmth or bruit?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: contrast brain MRI; ophthalmology with intraocular pressure; vascular anomaly team", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Clinical diagnosis with dermoscopy; limb length if overgrowth suspected", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Cosmetically significant lesion?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Pulsed dye laser, started early where possible; camouflage and support", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Surveillance for overgrowth and syndromic features; genetic evaluation if indicated", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Lifelong lesion that darkens and thickens with age; laser lightens most lesions", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

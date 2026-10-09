@@ -1,190 +1,978 @@
 {
- "id": "amoebiasis",
- "name": "Amoebiasis (Intestinal)",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 230,
- "page": 1753,
- "aliases": [
-  "Entamoeba histolytica infection",
-  "amebic dysentery"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1753",
-  "clinicalPearls": [
-   "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and only ~10% are invasive (p.1753).",
-   "Symptomatic amebic colitis develops 2-6 weeks after ingestion of infectious cysts, with gradual-onset lower abdominal pain and mild diarrhea progressing to malaise, weight loss, and dysentery (p.1755).",
-   "In full-blown dysentery patients may pass 10-12 stools per day consisting mainly of blood and mucus with little fecal material; virtually all have heme-positive stools (p.1755).",
-   "In contrast to bacterial diarrhea, fewer than 40% of patients with amebic dysentery are febrile and stools show a paucity of neutrophils (p.1755).",
-   "Cecal involvement may mimic acute appendicitis (p.1755).",
-   "Definitive diagnosis of amebic colitis requires demonstration of hematophagous (erythrocyte-ingesting) trophozoites of E. histolytica; this is the only way microscopy can identify the species (p.1756).",
-   "Because trophozoites are rapidly killed by water, drying, or barium, at least three fresh stool specimens should be examined; wet mounts, iodine-stained concentrates, and trichrome-stained preparations confirm diagnosis in 75-95% of cases (p.1756).",
-   "Stool antigen detection (Gal/GalNAc lectin EIA, sensitivity 87%, specificity >90%) and multiplex PCR (sensitivity/specificity approaching 100%) are more sensitive, specific, and rapid than microscopy (p.1757).",
-   "Serology (ELISA) is positive in >90% of cases of colitis, ameboma, or liver abscess; results usually revert to negative within 6-12 months, so positivity with a compatible syndrome suggests active disease (p.1756).",
-   "E. histolytica infection is widespread in the Indian subcontinent, Africa, parts of East Asia, and Central/South America, often affecting children under 5 in areas of poor sanitation; in developed countries returning travelers, immigrants, MSM, military personnel, and institutional inmates are the main at-risk groups (p.1753).",
-   "Invasive amebiasis does not elicit eosinophilia (p.1757)."
+  "id": "amoebiasis",
+  "name": "Amoebiasis (Intestinal)",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 230,
+  "page": 1753,
+  "aliases": [
+    "Entamoeba histolytica infection",
+    "amebic dysentery"
   ],
-  "pathophysiology": "E. histolytica is acquired by ingesting viable cysts from fecally contaminated water, food, or hands (food-borne exposure being most common). Motile trophozoites excyst in the small intestine; in most patients they remain as harmless commensals in the large bowel and re-encyst, shedding infectious cysts in stool. In some patients trophozoites invade the colonic mucosa (causing colitis) or enter the portal bloodstream (causing distant abscesses, most often hepatic). Trophozoites attach to colonic mucus and epithelium via the Gal/GalNAc adherence lectin and release glycosidases, proteases, and cysteine proteinases that degrade mucus, collagen, elastin, immunoglobulins, and complement anaphylatoxins; mucosal damage follows via contact-dependent cytotoxicity (apoptosis, trogocytosis, lysis of inflammatory and epithelial cells) and contact-independent mechanisms (inflammatory mediators such as prostaglandin E2). Resistance to reactive oxygen/nitrogen species and to complement-mediated lysis are virulence factors. The earliest lesions are mucosal microulcerations of the cecum, sigmoid, or rectum; submucosal extension beneath viable surface mucosa produces the classic 'flask-shaped' ulcer with trophozoites at the margins. Human infection is notable for a paucity of inflammatory cells (in part because trophozoites kill neutrophils) (p.1753-1755).",
-  "additionalDifferentials": [
-   "Bacterial dysentery / inflammatory diarrhea (Campylobacter, enteroinvasive E. coli, Shigella, Salmonella, Vibrio)",
-   "Inflammatory bowel disease (ulcerative colitis, Crohn disease)",
-   "Carcinoma of the colon (especially when an ameboma mass is present)",
-   "Acute appendicitis (with cecal involvement)"
-  ],
-  "infectionMimics": [
-   "Shigellosis (bacillary dysentery)",
-   "Campylobacter colitis",
-   "Enteroinvasive Escherichia coli infection",
-   "Salmonella enterocolitis",
-   "Vibrio enteritis"
-  ],
-  "nonInfectiousMimics": [
-   "Inflammatory bowel disease (ulcerative colitis / Crohn disease)",
-   "Colonic carcinoma (mimicked by ameboma on barium studies)",
-   "Acute appendicitis"
-  ],
-  "additionalInvestigations": [
-   "Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for cysts/trophozoites",
-   "Stool test for occult blood (heme) and microscopy for neutrophils",
-   "Stool antigen detection assay (monoclonal anti-Gal/GalNAc lectin enzyme immunoassay)",
-   "Stool multiplex PCR / nucleic acid amplification for GI protozoa",
-   "Serology (ELISA / indirect hemagglutination) for invasive amebiasis",
-   "Sigmoidoscopy with biopsy of the edge of ulcers if stool studies negative (avoid in fulminant colitis)",
-   "Biopsy of a colonic mass to confirm ameboma and exclude carcinoma",
-   "Stool culture for bacterial pathogens to exclude bacterial dysentery"
-  ],
-  "redFlags": [
-   "Fulminant intestinal infection with severe abdominal pain, high fever, and profuse diarrhea (rare; predominantly in children)",
-   "Toxic megacolon with severe bowel dilation and intramural air",
-   "Full-thickness necrosis and bowel perforation",
-   "Patients receiving glucocorticoids are at risk for severe amebiasis"
-  ],
-  "prognosis": "Outcome relates to the clinical syndrome: about 90% of infections are asymptomatic and self-limited, and uncomplicated amebic colitis responds well to therapy with ulcers characteristically healing with little or no scarring. Fulminant colitis, toxic megacolon, and perforation are rare but carry a poor prognosis. Treated colitis generally resolves, but severe disease (notably in those given glucocorticoids or in children with fulminant infection) markedly worsens outcome (p.1755-1756).",
-  "pitfalls": [
-   "E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E. bangladeshi); most asymptomatic carriers actually harbor E. dispar, which is incapable of invasive disease and does not warrant treatment, so species-specific antigen detection or PCR is needed (p.1754, p.1756).",
-   "Cysts must also be differentiated from non-pathogenic Entamoeba hartmanni, Entamoeba coli, and Endolimax nana, which do not cause disease (p.1756).",
-   "Amebiasis must be excluded before starting glucocorticoid therapy for suspected inflammatory bowel disease; unsuspected amebiasis treated with steroids can precipitate severe colitis or toxic megacolon (p.1755-1757).",
-   "An ameboma can be mistaken for cancer on barium studies; positive serology or biopsy can prevent unnecessary surgery (p.1755).",
-   "Sigmoidoscopy/biopsy and barium studies are dangerous during fulminant or acute colitis because of the risk of perforation (p.1756-1757).",
-   "Trophozoites are rapidly killed by water, drying, and barium and may be confused with neutrophils, so examination must use multiple fresh specimens with experienced microscopy (p.1756)."
-  ],
-  "severityClassification": "Harrison describes a clinical spectrum rather than a formal grading scheme: (1) asymptomatic cyst passage (~90% of infections); (2) symptomatic amebic colitis/dysentery with bloody mucoid stools; and (3) rare fulminant intestinal infection (severe pain, high fever, profuse diarrhea, predominantly in children) that may progress to toxic megacolon, full-thickness necrosis, or perforation (p.1753, p.1755).",
-  "references": [
-   "Harrison 22e p.1753",
-   "Harrison 22e p.1754",
-   "Harrison 22e p.1755",
-   "Harrison 22e p.1756",
-   "Harrison 22e p.1757"
-  ],
-  "crossLinks": [
-   "AMOEBIC_LIVER_ABSCESS"
-  ],
-  "management": [
-   "Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites",
-   "Follow the tissue amoebicide with a luminal agent such as paromomycin or diloxanide furoate to clear intraluminal cysts and prevent relapse and transmission",
-   "Provide supportive rehydration and correction of electrolyte disturbance during dysentery",
-   "Avoid antimotility drugs and corticosteroids, which can precipitate toxic megacolon in amoebic colitis",
-   "Involve surgery urgently for suspected fulminant colitis, perforation or toxic megacolon",
-   "Confirm parasitological clearance and reinforce safe water, food hygiene and handwashing to prevent reinfection and onward spread"
-  ]
- },
- "algorithms": [
-  {
-   "id": "amoebiasis-pathway",
-   "title": "Amoebiasis (Intestinal): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and only ~10% are invasive (p.1753).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fulminant intestinal infection with severe abdominal pain, high fever, and profuse diarrhea (rare; predominantly in children)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for cysts/trophozoites, Stool test for occult blood (heme) and microscopy for neutrophils, Stool"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E. bangladeshi); most asymptomatic carriers actually harbor E. dispar, which is"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amoebiasis (intestinal)."
-  }
- ],
- "tables": [
-  {
-   "id": "amoebiasis-matrix",
-   "title": "Amoebiasis (Intestinal): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1753",
+    "clinicalPearls": [
+      "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and only ~10% are invasive (p.1753).",
+      "Symptomatic amebic colitis develops 2-6 weeks after ingestion of infectious cysts, with gradual-onset lower abdominal pain and mild diarrhea progressing to malaise, weight loss, and dysentery (p.1755).",
+      "In full-blown dysentery patients may pass 10-12 stools per day consisting mainly of blood and mucus with little fecal material; virtually all have heme-positive stools (p.1755).",
+      "In contrast to bacterial diarrhea, fewer than 40% of patients with amebic dysentery are febrile and stools show a paucity of neutrophils (p.1755).",
+      "Cecal involvement may mimic acute appendicitis (p.1755).",
+      "Definitive diagnosis of amebic colitis requires demonstration of hematophagous (erythrocyte-ingesting) trophozoites of E. histolytica; this is the only way microscopy can identify the species (p.1756).",
+      "Because trophozoites are rapidly killed by water, drying, or barium, at least three fresh stool specimens should be examined; wet mounts, iodine-stained concentrates, and trichrome-stained preparations confirm diagnosis in 75-95% of cases (p.1756).",
+      "Stool antigen detection (Gal/GalNAc lectin EIA, sensitivity 87%, specificity >90%) and multiplex PCR (sensitivity/specificity approaching 100%) are more sensitive, specific, and rapid than microscopy (p.1757).",
+      "Serology (ELISA) is positive in >90% of cases of colitis, ameboma, or liver abscess; results usually revert to negative within 6-12 months, so positivity with a compatible syndrome suggests active disease (p.1756).",
+      "E. histolytica infection is widespread in the Indian subcontinent, Africa, parts of East Asia, and Central/South America, often affecting children under 5 in areas of poor sanitation; in developed countries returning travelers, immigrants, MSM, military personnel, and institutional inmates are the main at-risk groups (p.1753).",
+      "Invasive amebiasis does not elicit eosinophilia (p.1757)."
     ],
-    [
-     "Key Investigations",
-     "Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "E. histolytica is acquired by ingesting viable cysts from fecally contaminated water, food, or hands (food-borne exposure being most common). Motile trophozoites excyst in the small intestine; in most patients they remain as harmless commensals in the large bowel and re-encyst, shedding infectious cysts in stool. In some patients trophozoites invade the colonic mucosa (causing colitis) or enter the portal bloodstream (causing distant abscesses, most often hepatic). Trophozoites attach to colonic mucus and epithelium via the Gal/GalNAc adherence lectin and release glycosidases, proteases, and cysteine proteinases that degrade mucus, collagen, elastin, immunoglobulins, and complement anaphylatoxins; mucosal damage follows via contact-dependent cytotoxicity (apoptosis, trogocytosis, lysis of inflammatory and epithelial cells) and contact-independent mechanisms (inflammatory mediators such as prostaglandin E2). Resistance to reactive oxygen/nitrogen species and to complement-mediated lysis are virulence factors. The earliest lesions are mucosal microulcerations of the cecum, sigmoid, or rectum; submucosal extension beneath viable surface mucosa produces the classic 'flask-shaped' ulcer with trophozoites at the margins. Human infection is notable for a paucity of inflammatory cells (in part because trophozoites kill neutrophils) (p.1753-1755).",
+    "additionalDifferentials": [
+      "Bacterial dysentery / inflammatory diarrhea (Campylobacter, enteroinvasive E. coli, Shigella, Salmonella, Vibrio)",
+      "Inflammatory bowel disease (ulcerative colitis, Crohn disease)",
+      "Carcinoma of the colon (especially when an ameboma mass is present)",
+      "Acute appendicitis (with cecal involvement)"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial dysentery / inflammatory diarrhea (Campylobacter, enteroinvasive E. coli, Shigella, Salmonella, Vibrio), Inflammatory",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Shigellosis (bacillary dysentery)",
+      "Campylobacter colitis",
+      "Enteroinvasive Escherichia coli infection",
+      "Salmonella enterocolitis",
+      "Vibrio enteritis"
     ],
-    [
-     "Management Strategy",
-     "Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Inflammatory bowel disease (ulcerative colitis / Crohn disease)",
+      "Colonic carcinoma (mimicked by ameboma on barium studies)",
+      "Acute appendicitis"
     ],
-    [
-     "Clinical Pitfall",
-     "E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E.",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for cysts/trophozoites",
+      "Stool test for occult blood (heme) and microscopy for neutrophils",
+      "Stool antigen detection assay (monoclonal anti-Gal/GalNAc lectin enzyme immunoassay)",
+      "Stool multiplex PCR / nucleic acid amplification for GI protozoa",
+      "Serology (ELISA / indirect hemagglutination) for invasive amebiasis",
+      "Sigmoidoscopy with biopsy of the edge of ulcers if stool studies negative (avoid in fulminant colitis)",
+      "Biopsy of a colonic mass to confirm ameboma and exclude carcinoma",
+      "Stool culture for bacterial pathogens to exclude bacterial dysentery"
+    ],
+    "redFlags": [
+      "Fulminant intestinal infection with severe abdominal pain, high fever, and profuse diarrhea (rare; predominantly in children)",
+      "Toxic megacolon with severe bowel dilation and intramural air",
+      "Full-thickness necrosis and bowel perforation",
+      "Patients receiving glucocorticoids are at risk for severe amebiasis"
+    ],
+    "prognosis": "Outcome relates to the clinical syndrome: about 90% of infections are asymptomatic and self-limited, and uncomplicated amebic colitis responds well to therapy with ulcers characteristically healing with little or no scarring. Fulminant colitis, toxic megacolon, and perforation are rare but carry a poor prognosis. Treated colitis generally resolves, but severe disease (notably in those given glucocorticoids or in children with fulminant infection) markedly worsens outcome (p.1755-1756).",
+    "pitfalls": [
+      "E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E. bangladeshi); most asymptomatic carriers actually harbor E. dispar, which is incapable of invasive disease and does not warrant treatment, so species-specific antigen detection or PCR is needed (p.1754, p.1756).",
+      "Cysts must also be differentiated from non-pathogenic Entamoeba hartmanni, Entamoeba coli, and Endolimax nana, which do not cause disease (p.1756).",
+      "Amebiasis must be excluded before starting glucocorticoid therapy for suspected inflammatory bowel disease; unsuspected amebiasis treated with steroids can precipitate severe colitis or toxic megacolon (p.1755-1757).",
+      "An ameboma can be mistaken for cancer on barium studies; positive serology or biopsy can prevent unnecessary surgery (p.1755).",
+      "Sigmoidoscopy/biopsy and barium studies are dangerous during fulminant or acute colitis because of the risk of perforation (p.1756-1757).",
+      "Trophozoites are rapidly killed by water, drying, and barium and may be confused with neutrophils, so examination must use multiple fresh specimens with experienced microscopy (p.1756)."
+    ],
+    "severityClassification": "Harrison describes a clinical spectrum rather than a formal grading scheme: (1) asymptomatic cyst passage (~90% of infections); (2) symptomatic amebic colitis/dysentery with bloody mucoid stools; and (3) rare fulminant intestinal infection (severe pain, high fever, profuse diarrhea, predominantly in children) that may progress to toxic megacolon, full-thickness necrosis, or perforation (p.1753, p.1755).",
+    "references": [
+      "Harrison 22e p.1753",
+      "Harrison 22e p.1754",
+      "Harrison 22e p.1755",
+      "Harrison 22e p.1756",
+      "Harrison 22e p.1757"
+    ],
+    "crossLinks": [
+      "AMOEBIC_LIVER_ABSCESS"
+    ],
+    "management": [
+      "Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites",
+      "Follow the tissue amoebicide with a luminal agent such as paromomycin or diloxanide furoate to clear intraluminal cysts and prevent relapse and transmission",
+      "Provide supportive rehydration and correction of electrolyte disturbance during dysentery",
+      "Avoid antimotility drugs and corticosteroids, which can precipitate toxic megacolon in amoebic colitis",
+      "Involve surgery urgently for suspected fulminant colitis, perforation or toxic megacolon",
+      "Confirm parasitological clearance and reinforce safe water, food hygiene and handwashing to prevent reinfection and onward spread"
     ]
-   ],
-   "caption": "Overview comparison matrix for amoebiasis (intestinal)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amoebiasis-real-image",
-   "title": "Amoebiasis (Intestinal): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "amoebiasis-pathway",
+      "title": "Amoebiasis (Intestinal): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and only ~10% are invasive (p.1753).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fulminant intestinal infection with severe abdominal pain, high fever, and profuse diarrhea (rare; predominantly in children)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for cysts/trophozoites, Stool test for occult blood (heme) and microscopy for neutrophils, Stool"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E. bangladeshi); most asymptomatic carriers actually harbor E. dispar, which is"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amoebiasis (intestinal)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amoebiasis-matrix",
+      "title": "Amoebiasis (Intestinal): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amebiasis is infection with Entamoeba histolytica, an intestinal protozoan; ~90% of infections are asymptomatic cyst passage and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination of at least three fresh stool specimens (wet mount, iodine-stained concentrate, trichrome-stained preparation) for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial dysentery / inflammatory diarrhea (Campylobacter, enteroinvasive E. coli, Shigella, Salmonella, Vibrio), Inflammatory",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat invasive colitis with a tissue-active nitroimidazole such as metronidazole or tinidazole to eradicate trophozoites",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "E. histolytica cannot be distinguished microscopically from the non-pathogenic commensal E. dispar (nor from E. moshkovskii or E.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amoebiasis (intestinal)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Amebiasis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/intestinal-protozoa-and-microsporidia/amebiasis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 209-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 120-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amoebiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in intestinal amoebiasis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or performance",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool appearance",
+          "cells": [
+            {
+              "text": "Blood and mucus with little faecal matter; heme-positive in nearly all with dysentery"
+            },
+            {
+              "text": "Few neutrophils, unlike bacterial dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever in amoebic dysentery",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 40% of patients",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Low fever rate helps separate it from bacterial dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy (3 fresh specimens)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Confirms 75 to 95%",
+              "range": [
+                75,
+                95
+              ]
+            },
+            {
+              "text": "{{hy:Only erythrocyte-ingesting trophozoites prove E. histolytica}}; cysts look like E. dispar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool antigen EIA (Gal/GalNAc lectin)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 87%, specificity >90%"
+            },
+            {
+              "text": "Species-specific; faster than microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool PCR",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity approach 100%"
+            },
+            {
+              "text": "Most sensitive; separates E. histolytica from other amoebae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (ELISA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >90% of colitis, ameboma or liver abscess",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Usually negative again by 6 to 12 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology in active intestinal infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >70%",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Antibodies can persist for years; most useful in travellers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sigmoidoscopy with ulcer-edge biopsy",
+          "cells": [
+            {
+              "text": "Flask-shaped ulcers or nonspecific inflammation"
+            },
+            {
+              "text": "Use when stool tests are negative; avoid in fulminant colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood eosinophils",
+          "cells": [
+            {
+              "text": "Not raised"
+            },
+            {
+              "text": "Invasive amoebiasis does not cause eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources give different serology positivity: Harrison over 90% across invasive syndromes, Merck over 70% in active intestinal infection."
+    },
+    {
+      "id": "amoebiasis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of amoebic colitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shigellosis and other bacterial dysentery (Campylobacter, Salmonella, enteroinvasive E. coli)",
+          "cells": [
+            {
+              "text": "Fever and stool neutrophils more typical; amoebic stools are less frequent and less watery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ulcerative colitis or Crohn disease",
+          "cells": [
+            {
+              "text": "{{hy:Exclude amoebiasis before starting steroids}}, which can trigger toxic megacolon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colon carcinoma",
+          "cells": [
+            {
+              "text": "Ameboma can mimic cancer on barium study; serology or biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis",
+          "cells": [
+            {
+              "text": "Caecal amoebic involvement can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal tuberculosis, actinomycosis or lymphoma",
+          "cells": [
+            {
+              "text": "Considered with a right-sided colonic mass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schistosomiasis",
+          "cells": [
+            {
+              "text": "Can be confused with amoebic dysentery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-pathogenic E. dispar carriage",
+          "cells": [
+            {
+              "text": "Same cyst morphology; needs antigen test or PCR; no treatment needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amoebiasis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of intestinal amoebiasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "{{hy:Tissue amoebicide for colitis}} and liver abscess"
+            },
+            {
+              "text": "750 mg three times daily orally or IV for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole",
+          "cells": [
+            {
+              "text": "Alternative tissue amoebicide; better tolerated"
+            },
+            {
+              "text": "2 g/day orally with food for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole, severe colitis",
+          "cells": [
+            {
+              "text": "Severe GI symptoms"
+            },
+            {
+              "text": "5-day course"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ornidazole or secnidazole",
+          "cells": [
+            {
+              "text": "Other nitroimidazoles where available"
+            },
+            {
+              "text": "Ornidazole 5 days; secnidazole single dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paromomycin (luminal)",
+          "cells": [
+            {
+              "text": "After tissue agent, and for asymptomatic E. histolytica carriers"
+            },
+            {
+              "text": "30 mg/kg/day orally in 3 divided doses for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Iodoquinol (luminal)",
+          "cells": [
+            {
+              "text": "Alternative luminal agent"
+            },
+            {
+              "text": "650 mg orally three times daily for 20 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diloxanide furoate (luminal)",
+          "cells": [
+            {
+              "text": "Alternative luminal agent"
+            },
+            {
+              "text": "10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitazoxanide",
+          "cells": [
+            {
+              "text": "Non-invasive intestinal disease only when others are contraindicated"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid and electrolyte replacement",
+          "cells": [
+            {
+              "text": "Significant dysentery or diarrhoea"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "Fulminant colitis, perforation or toxic megacolon"
+            },
+            {
+              "text": "Avoid antimotility drugs and steroids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Metronidazole duration differs: Tables PDF 5 to 10 days, Merck 7 to 10 days. Paromomycin: Tables PDF 5 to 10 days, Merck 7 days. Avoid alcohol with nitroimidazoles."
+    },
+    {
+      "id": "amoebiasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Examples of microbial ligand-receptor interactions",
+      "rowHeader": "Microorganism",
+      "columns": [
+        "Microbial ligand",
+        "Host receptor"
+      ],
+      "rows": [
+        {
+          "parameter": "Influenza virus",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Sialic acid"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Measles virus, vaccine strain",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "CD46/moesin"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Measles virus, wild-type strains",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Signaling lymphocytic activation molecule (SLAM)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Human herpesvirus type 6",
+          "cells": [
+            {
+              "text": "Not stated (question mark in source)"
+            },
+            {
+              "text": "CD46"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Herpes simplex virus",
+          "cells": [
+            {
+              "text": "Glycoprotein C"
+            },
+            {
+              "text": "Heparan sulfate"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HIV",
+          "cells": [
+            {
+              "text": "Surface glycoprotein"
+            },
+            {
+              "text": "CD4 and chemokine receptors (CCR5 and CXCR4)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Epstein-Barr virus",
+          "cells": [
+            {
+              "text": "Envelope protein"
+            },
+            {
+              "text": "CD21 (CR2)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Adenovirus",
+          "cells": [
+            {
+              "text": "Fiber protein"
+            },
+            {
+              "text": "Coxsackie-adenovirus receptor (CAR)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Coxsackievirus",
+          "cells": [
+            {
+              "text": "Viral coat proteins"
+            },
+            {
+              "text": "CAR and major histocompatibility class I antigens"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Neisseria spp.",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Membrane co-factor protein (CD46)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (pili and flagella)",
+          "cells": [
+            {
+              "text": "Pili and flagella"
+            },
+            {
+              "text": "Asialo-GM1"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (lipopolysaccharide)",
+          "cells": [
+            {
+              "text": "Lipopolysaccharide"
+            },
+            {
+              "text": "Cystic fibrosis transmembrane conductance regulator (CFTR)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Escherichia coli",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Ceramides/mannose and digalactosyl residues"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Streptococcus pyogenes",
+          "cells": [
+            {
+              "text": "Hyaluronic acid capsule"
+            },
+            {
+              "text": "CD44"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Yersinia spp.",
+          "cells": [
+            {
+              "text": "Invasin/accessory invasin locus"
+            },
+            {
+              "text": "Beta1 integrins"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bordetella pertussis",
+          "cells": [
+            {
+              "text": "Filamentous hemagglutinin"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Legionella pneumophila",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycobacterium tuberculosis",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3; DC-SIGN (footnote a, text not on page)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Blastomyces dermatitidis",
+          "cells": [
+            {
+              "text": "WI-1"
+            },
+            {
+              "text": "Possibly matrix proteins and integrins"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Candida albicans",
+          "cells": [
+            {
+              "text": "Int1p"
+            },
+            {
+              "text": "Extracellular matrix proteins"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Plasmodium vivax",
+          "cells": [
+            {
+              "text": "Merozoite form"
+            },
+            {
+              "text": "Duffy Fy antigen"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Plasmodium falciparum",
+          "cells": [
+            {
+              "text": "Erythrocyte-binding protein 175 (EBA-175)"
+            },
+            {
+              "text": "Glycophorin A"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Entamoeba histolytica",
+          "cells": [
+            {
+              "text": "Surface lectin"
+            },
+            {
+              "text": "N-Acetylglucosamine"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The source groups rows as viral, bacterial, fungal and protozoal pathogens."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amoebiasis-dx-mgmt",
+      "title": "Diagnosis and management of intestinal amoebiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloody mucoid diarrhoea or dysentery with exposure in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fulminant colitis: severe pain, high fever, distension or peritonism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Resuscitate, IV nitroimidazole, urgent surgical review; no sigmoidoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three fresh stools: microscopy, antigen EIA or PCR; stool culture; serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "E. histolytica confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Symptomatic or invasive disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metronidazole or tinidazole, then a luminal agent such as paromomycin",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Luminal agent alone (paromomycin, iodoquinol or diloxanide)",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Stool tests negative but suspicion high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sigmoidoscopy with biopsy of ulcer edges",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Consider bacterial dysentery, IBD or carcinoma",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rehydrate, hygiene advice, confirm clearance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Asymptomatic carrier"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n5",
+          "label": "Result"
+        }
+      ]
+    }
+  ]
 }

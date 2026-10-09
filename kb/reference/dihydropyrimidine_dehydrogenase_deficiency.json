@@ -1,175 +1,435 @@
 {
- "id": "dihydropyrimidine_dehydrogenase_deficiency",
- "name": "Dihydropyrimidine dehydrogenase deficiency",
- "aliases": [
-  "DPD deficiency",
-  "DPYD deficiency",
-  "familial pyrimidinaemia",
-  "fluoropyrimidine toxicity susceptibility"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and rate-limiting enzyme degrading uracil and thymine",
-   "The most clinically important consequence is severe, sometimes fatal, toxicity from fluoropyrimidine chemotherapy (5-fluorouracil and its prodrug capecitabine)",
-   "Because DPD normally clears the great majority of administered fluorouracil, deficient patients accumulate active drug and suffer profound myelosuppression, mucositis, diarrhoea, and neurotoxicity",
-   "Constitutional (non-drug) presentations range from asymptomatic carriers to a paediatric encephalopathic phenotype with developmental delay, seizures and hypotonia",
-   "The biochemical signature is raised uracil and thymine in urine, plasma and cerebrospinal fluid",
-   "Pre-treatment DPYD genotyping and/or measurement of the uracil-to-dihydrouracil ratio identifies at-risk patients before fluoropyrimidine exposure",
-   "In deficient patients fluoropyrimidines should be avoided or given at substantially reduced exposure with close monitoring; uridine triacetate is the rescue therapy for established overdose or severe early toxicity"
+  "id": "dihydropyrimidine_dehydrogenase_deficiency",
+  "name": "Dihydropyrimidine dehydrogenase deficiency",
+  "aliases": [
+    "DPD deficiency",
+    "DPYD deficiency",
+    "familial pyrimidinaemia",
+    "fluoropyrimidine toxicity susceptibility"
   ],
-  "pathophysiology": "Dihydropyrimidine dehydrogenase catalyses the rate-limiting first step in the degradation of the pyrimidine bases uracil and thymine. Deficiency causes accumulation of these bases and their precursors in body fluids. Clinically, the disorder has two faces. As an inborn error it can cause a variable neurological phenotype, thought to relate to accumulated metabolites and, in some, associated abnormalities of the neurotransmitter pool. More importantly for adult medicine, fluoropyrimidine drugs are analogues of uracil that are normally inactivated by this enzyme; when it is deficient, the active drug and its cytotoxic metabolites persist, producing severe dose-related toxicity even at standard doses.",
-  "additionalDifferentials": [
-   "Other pyrimidine degradation defects (dihydropyrimidinase and beta-ureidopropionase deficiency)",
-   "Chemotherapy toxicity from causes other than DPD deficiency",
-   "Other inherited metabolic epileptic encephalopathies in the paediatric phenotype",
-   "Drug interactions or overdose accounting for severe fluoropyrimidine toxicity",
-   "Sepsis or mucositis of other cause during chemotherapy",
-   "Thiamine or other deficiency states causing neurological decline"
-  ],
-  "additionalInvestigations": [
-   "DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy",
-   "Plasma uracil concentration or uracil-to-dihydrouracil ratio as a phenotype test",
-   "Urinary uracil and thymine quantification",
-   "DPD enzyme activity assay in peripheral blood mononuclear cells where available",
-   "Cerebrospinal fluid pyrimidine analysis in the neurological phenotype",
-   "Monitoring of full blood count and mucosal/gastrointestinal toxicity during any fluoropyrimidine exposure"
-  ],
-  "redFlags": [
-   "Rapid, severe myelosuppression, mucositis or diarrhoea early in a fluoropyrimidine course",
-   "Neurotoxicity such as encephalopathy or cerebellar signs during chemotherapy",
-   "Planned fluoropyrimidine treatment in a patient not yet tested for DPD deficiency",
-   "Progressive neurological deterioration in an affected child"
-  ],
-  "prognosis": "Constitutional cases range from entirely asymptomatic to significant neurodevelopmental impairment; the critical determinant of outcome is recognition before fluoropyrimidine exposure, since unrecognised deficiency can cause life-threatening or fatal drug toxicity.",
-  "pitfalls": [
-   "Giving standard-dose fluoropyrimidines without checking DPD status",
-   "Assuming a normal genotype excludes deficiency, as phenotype testing may add information",
-   "Attributing severe early chemotherapy toxicity to chance rather than to enzyme deficiency",
-   "Failing to use the specific antidote promptly when severe toxicity occurs",
-   "Overlooking that heterozygous partial deficiency can still cause serious toxicity"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD genotyping and phenotype testing",
-   "Administer uridine triacetate as the antidote for fluoropyrimidine overexposure or emerging severe toxicity",
-   "Intensive supportive care for fluoropyrimidine toxicity, including granulocyte colony-stimulating factor and transfusion for myelosuppression, and management of mucositis, diarrhoea and neurotoxicity",
-   "Supportive and anticonvulsant management with developmental support for the constitutional paediatric encephalopathic phenotype",
-   "Flag the drug intolerance prominently in the record and undertake careful medication review",
-   "Monitor full blood count and mucosal or gastrointestinal toxicity closely during any unavoidable fluoropyrimidine exposure",
-   "Genetic counselling and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dihydropyrimidine_dehydrogenase_deficiency-pathway",
-   "title": "Dihydropyrimidine dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and rate-limiting enzyme degrading uracil and thymine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid, severe myelosuppression, mucositis or diarrhoea early in a fluoropyrimidine course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy, Plasma uracil concentration or uracil-to-dihydrouracil ratio as a phenotype test, Urinary uracil and thymine quantification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD genotyping and phenotype testing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving standard-dose fluoropyrimidines without checking DPD status"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dihydropyrimidine dehydrogenase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "dihydropyrimidine_dehydrogenase_deficiency-matrix",
-   "title": "Dihydropyrimidine dehydrogenase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and rate-limiting enzyme degrading uracil and thymine",
+      "The most clinically important consequence is severe, sometimes fatal, toxicity from fluoropyrimidine chemotherapy (5-fluorouracil and its prodrug capecitabine)",
+      "Because DPD normally clears the great majority of administered fluorouracil, deficient patients accumulate active drug and suffer profound myelosuppression, mucositis, diarrhoea, and neurotoxicity",
+      "Constitutional (non-drug) presentations range from asymptomatic carriers to a paediatric encephalopathic phenotype with developmental delay, seizures and hypotonia",
+      "The biochemical signature is raised uracil and thymine in urine, plasma and cerebrospinal fluid",
+      "Pre-treatment DPYD genotyping and/or measurement of the uracil-to-dihydrouracil ratio identifies at-risk patients before fluoropyrimidine exposure",
+      "In deficient patients fluoropyrimidines should be avoided or given at substantially reduced exposure with close monitoring; uridine triacetate is the rescue therapy for established overdose or severe early toxicity"
     ],
-    [
-     "Key Investigations",
-     "DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy, Plasma uracil concentration or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dihydropyrimidine dehydrogenase catalyses the rate-limiting first step in the degradation of the pyrimidine bases uracil and thymine. Deficiency causes accumulation of these bases and their precursors in body fluids. Clinically, the disorder has two faces. As an inborn error it can cause a variable neurological phenotype, thought to relate to accumulated metabolites and, in some, associated abnormalities of the neurotransmitter pool. More importantly for adult medicine, fluoropyrimidine drugs are analogues of uracil that are normally inactivated by this enzyme; when it is deficient, the active drug and its cytotoxic metabolites persist, producing severe dose-related toxicity even at standard doses.",
+    "additionalDifferentials": [
+      "Other pyrimidine degradation defects (dihydropyrimidinase and beta-ureidopropionase deficiency)",
+      "Chemotherapy toxicity from causes other than DPD deficiency",
+      "Other inherited metabolic epileptic encephalopathies in the paediatric phenotype",
+      "Drug interactions or overdose accounting for severe fluoropyrimidine toxicity",
+      "Sepsis or mucositis of other cause during chemotherapy",
+      "Thiamine or other deficiency states causing neurological decline"
     ],
-    [
-     "Primary Differentials",
-     "Other pyrimidine degradation defects (dihydropyrimidinase and beta-ureidopropionase deficiency), Chemotherapy toxicity from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy",
+      "Plasma uracil concentration or uracil-to-dihydrouracil ratio as a phenotype test",
+      "Urinary uracil and thymine quantification",
+      "DPD enzyme activity assay in peripheral blood mononuclear cells where available",
+      "Cerebrospinal fluid pyrimidine analysis in the neurological phenotype",
+      "Monitoring of full blood count and mucosal/gastrointestinal toxicity during any fluoropyrimidine exposure"
     ],
-    [
-     "Management Strategy",
-     "Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid, severe myelosuppression, mucositis or diarrhoea early in a fluoropyrimidine course",
+      "Neurotoxicity such as encephalopathy or cerebellar signs during chemotherapy",
+      "Planned fluoropyrimidine treatment in a patient not yet tested for DPD deficiency",
+      "Progressive neurological deterioration in an affected child"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving standard-dose fluoropyrimidines without checking DPD status",
-     "Prevent diagnostic or management error"
+    "prognosis": "Constitutional cases range from entirely asymptomatic to significant neurodevelopmental impairment; the critical determinant of outcome is recognition before fluoropyrimidine exposure, since unrecognised deficiency can cause life-threatening or fatal drug toxicity.",
+    "pitfalls": [
+      "Giving standard-dose fluoropyrimidines without checking DPD status",
+      "Assuming a normal genotype excludes deficiency, as phenotype testing may add information",
+      "Attributing severe early chemotherapy toxicity to chance rather than to enzyme deficiency",
+      "Failing to use the specific antidote promptly when severe toxicity occurs",
+      "Overlooking that heterozygous partial deficiency can still cause serious toxicity"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD genotyping and phenotype testing",
+      "Administer uridine triacetate as the antidote for fluoropyrimidine overexposure or emerging severe toxicity",
+      "Intensive supportive care for fluoropyrimidine toxicity, including granulocyte colony-stimulating factor and transfusion for myelosuppression, and management of mucositis, diarrhoea and neurotoxicity",
+      "Supportive and anticonvulsant management with developmental support for the constitutional paediatric encephalopathic phenotype",
+      "Flag the drug intolerance prominently in the record and undertake careful medication review",
+      "Monitor full blood count and mucosal or gastrointestinal toxicity closely during any unavoidable fluoropyrimidine exposure",
+      "Genetic counselling and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dihydropyrimidine dehydrogenase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dihydropyrimidine-dehydrogenase-deficiency-real-image",
-   "title": "Dihydropyrimidine dehydrogenase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-pathway",
+      "title": "Dihydropyrimidine dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and rate-limiting enzyme degrading uracil and thymine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid, severe myelosuppression, mucositis or diarrhoea early in a fluoropyrimidine course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy, Plasma uracil concentration or uracil-to-dihydrouracil ratio as a phenotype test, Urinary uracil and thymine quantification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD genotyping and phenotype testing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving standard-dose fluoropyrimidines without checking DPD status"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dihydropyrimidine dehydrogenase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-matrix",
+      "title": "Dihydropyrimidine dehydrogenase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of pyrimidine catabolism caused by deficiency of dihydropyrimidine dehydrogenase, the first and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "DPYD genotyping for the common deleterious variants before fluoropyrimidine therapy, Plasma uracil concentration or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other pyrimidine degradation defects (dihydropyrimidinase and beta-ureidopropionase deficiency), Chemotherapy toxicity from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid fluoropyrimidines such as 5-fluorouracil and capecitabine, or substantially dose-reduce guided by pre-treatment DPYD",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving standard-dose fluoropyrimidines without checking DPD status",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dihydropyrimidine dehydrogenase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "DPYD genotyping for common deleterious variants",
+          "cells": [
+            {
+              "text": "Deleterious DPYD variants before fluoropyrimidines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma uracil or uracil-to-dihydrouracil ratio",
+          "cells": [
+            {
+              "text": "Phenotype test, which can add information beyond genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary uracil and thymine",
+          "cells": [
+            {
+              "text": "Accumulation of uracil and thymine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DPD enzyme activity in peripheral blood mononuclear cells",
+          "cells": [
+            {
+              "text": "Reduced DPD enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid pyrimidine analysis",
+          "cells": [
+            {
+              "text": "The neurological phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid or dose-reduce fluoropyrimidines",
+          "cells": [
+            {
+              "text": "5-fluorouracil and capecitabine, guided by DPYD genotype and phenotype testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uridine triacetate",
+          "cells": [
+            {
+              "text": "Antidote for fluoropyrimidine overexposure or emerging severe toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "G-CSF and transfusion for myelosuppression; mucositis, diarrhoea and neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional paediatric phenotype",
+          "cells": [
+            {
+              "text": "Supportive and anticonvulsant care with developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flag the intolerance",
+          "cells": [
+            {
+              "text": "Record it prominently and review medications carefully"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count and mucosal or GI toxicity during any unavoidable exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dihydropyrimidine_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dihydropyrimidine dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DPD deficiency: severe early toxicity during fluoropyrimidine therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid myelosuppression, mucositis, neurotoxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent uridine triacetate and intensive supportive care for severe toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DPYD genotyping; plasma uracil or uracil-to-dihydrouracil ratio; DPD activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DPYD variants found or plasma uracil raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes of chemotherapy toxicity, sepsis or pyrimidine defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid fluoropyrimidines or dose-reduce, guided by DPYD and phenotype testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Uridine triacetate as antidote for overexposure or severe toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "G-CSF and transfusion with mucositis and diarrhoea management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Flag the drug intolerance in the record; careful medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Close blood count and mucosal monitoring during any exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recognition before exposure determines outcome; unrecognised deficiency can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

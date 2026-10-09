@@ -1,193 +1,617 @@
 {
- "id": "salmonellosis",
- "name": "Nontyphoidal Salmonellosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 171,
- "page": 1314,
- "aliases": [
-  "nontyphoidal Salmonella",
-  "NTS",
-  "nontyphoidal Salmonella gastroenteritis",
-  "invasive NTS disease"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "1314, 1319-1321",
-  "clinicalPearls": [
-   "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric pathogens, with nausea, vomiting, and diarrhea beginning 6-48 h after ingestion of contaminated food or water; stools are usually loose, nonbloody, and of moderate volume, though large-volume watery stools, bloody stools, or frank dysentery can occur (p.1320).",
-   "NTS gastroenteritis is usually self-limited: diarrhea resolves within 3-7 days and fever within 72 h; stool cultures may remain positive for 4-5 weeks after infection (p.1320).",
-   "Globally S. Typhimurium and S. Enteritidis are the most common serotypes causing human disease; in the United States NTS is the second most common cause of foodborne outbreaks after norovirus (p.1319).",
-   "Unlike S. Typhi and S. Paratyphi (human-only reservoir), NTS is acquired from multiple animal and plant reservoirs - especially eggs, poultry, undercooked ground meat, and dairy, plus produce contaminated with animal waste and contact with animals (reptiles, amphibians, chicks, etc.) (p.1319).",
-   "Up to 8% of patients with NTS gastroenteritis develop bacteremia, and of those 5-10% develop localized (metastatic) infections; bacteremia and metastatic infection are most common with S. Choleraesuis and S. Dublin and among infants, the elderly, and the immunocompromised, especially those with HIV (p.1320).",
-   "Invasive NTS disease (predominantly S. Typhimurium ST313 and S. Enteritidis ST11) is a leading cause of bacteremia in children and HIV-infected adults in sub-Saharan Africa and Southeast Asia; it typically presents as a nonspecific febrile illness resembling enteric fever and uncommonly causes diarrhea (p.1319-1320).",
-   "Diagnosis rests on isolating the organism from freshly passed stool or from blood or another normally sterile fluid; culture-independent molecular tests are increasingly used but positive specimens should still undergo primary isolation, and all NTS isolates should be referred to public health for serotyping (p.1320-1321).",
-   "Reactive arthritis can follow NTS gastroenteritis, occurring most frequently in persons carrying the HLA-B27 antigen (p.1321).",
-   "Localized NTS infections include intraabdominal (hepatic/splenic abscess, cholecystitis), CNS (meningitis - chiefly in infants 1-4 months and HIV-infected adults), pulmonary (lobar pneumonia), urinary/genital, and bone/joint disease; Salmonella osteomyelitis classically affects the femur, tibia, humerus, or lumbar vertebrae and is strongly linked to sickle cell disease and hemoglobinopathies (p.1320-1321)."
+  "id": "salmonellosis",
+  "name": "Nontyphoidal Salmonellosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 171,
+  "page": 1314,
+  "aliases": [
+    "nontyphoidal Salmonella",
+    "NTS",
+    "nontyphoidal Salmonella gastroenteritis",
+    "invasive NTS disease"
   ],
-  "pathophysiology": "All Salmonella infections begin with ingestion of organisms, usually in contaminated food or water; the infectious dose ranges from ~200 to 10^6 CFU, and the ingested dose helps determine incubation period and severity. Conditions reducing gastric acidity (age <1 year, acid-suppression therapy, achlorhydria) or compromising intestinal integrity (inflammatory bowel disease, cytotoxic chemotherapy, prior GI surgery, antibiotic-induced microbiome alteration) increase susceptibility. In contrast to enteric fever (mononuclear infiltration of small-bowel mucosa), NTS gastroenteritis is characterized by massive polymorphonuclear leukocyte infiltration into both large- and small-bowel mucosa. This response depends largely on induction of interleukin 8, a strong neutrophil chemoattractant secreted by intestinal cells in response to NTS colonization and translocation of bacterial proteins and LPS into host cytoplasm with subsequent inflammasome activation; neutrophil degranulation and release of toxic substances damages the mucosa, producing inflammatory diarrhea. NTS persistence is aided by its ability to use tetrathionate (generated from thiosulfate via inflammatory reactive oxygen species) for metabolism in a microaerophilic, inflamed gut, allowing it to outcompete endogenous flora. Unlike typhoidal serotypes, NTS effectively colonizes the intestinal tract rather than evolving as a primarily systemic pathogen.",
-  "additionalDifferentials": [
-   "Other bacterial enteric pathogens (Campylobacter, Shigella, enteroinvasive/enterotoxigenic E. coli)",
-   "Norovirus and other viral gastroenteritis",
-   "Intestinal parasites",
-   "Pseudoappendicitis (NTS can mimic acute appendicitis)",
-   "Inflammatory bowel disease (NTS rarely produces an IBD-like illness)",
-   "Enteric (typhoid) fever - especially with invasive NTS presenting as nonspecific febrile illness"
-  ],
-  "infectionMimics": [
-   "Enteric (typhoid/paratyphoid) fever from S. Typhi/S. Paratyphi presenting as undifferentiated febrile illness",
-   "Other causes of community-acquired bloodstream infection in endemic regions (malaria co-infection common)",
-   "Other bacterial gastroenteritides (Campylobacter, Shigella, E. coli)"
-  ],
-  "nonInfectiousMimics": [
-   "Acute appendicitis (pseudoappendicitis)",
-   "Inflammatory bowel disease",
-   "Postinfectious irritable bowel syndrome / functional dyspepsia (recognized sequelae)"
-  ],
-  "additionalInvestigations": [
-   "Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection",
-   "Blood cultures - obtain whenever fever is prolonged or recurrent; high-grade bacteremia defined as >50% of three or more blood-culture sets positive suggests endovascular infection",
-   "Culture-independent molecular diagnostic panels for enteric pathogens",
-   "Serotyping of all NTS isolates via public health laboratories",
-   "Echocardiography to evaluate suspected endocarditis",
-   "CT imaging to localize deep/focal infection",
-   "Indium-labeled white-cell scanning to identify localized infection",
-   "Culture of joint fluid aspirate, bone biopsy, abscess drainage, or CSF when localized infection is suspected",
-   "Antimicrobial susceptibility testing with attention to ciprofloxacin MIC (Etest or alternative method) given the lowered susceptibility breakpoint and decreased-ciprofloxacin-susceptibility strains not reliably detected by nalidixic acid screening or standard disk diffusion"
-  ],
-  "redFlags": [
-   "Invasive disease / bacteremia and endovascular seeding in the elderly, immunocompromised (including HIV), infants/neonates, and patients with sickle cell disease or other hemoglobinopathies",
-   "High-grade or persistent bacteremia, particularly with preexisting valvular heart disease, atherosclerotic vascular disease, prosthetic vascular graft, or aortic aneurysm - suspect NTS endovascular infection",
-   "Prolonged fever with back, chest, or abdominal pain after an episode of gastroenteritis in an elderly patient - suspect arteritis/mycotic aneurysm",
-   "NTS meningitis in infants 1-4 months of age or HIV-infected adults - severe sequelae and death in up to 60% of cases",
-   "Persons >50 years with known or suspected atherosclerosis (increased risk of invasive infection and endovascular seeding)"
-  ],
-  "prognosis": "NTS gastroenteritis is usually self-limited, with diarrhea resolving in 3-7 days and fever within 72 h; chronic carriage develops in <1% of cases. Outcomes worsen markedly with invasive disease: endocarditis and arteritis are rare (<1%) but carry serious, potentially fatal complications (valve perforation, endomyocardial abscess, infected mural thrombus, pericarditis, mycotic aneurysm, aneurysm rupture, aortoenteric fistula, vertebral osteomyelitis), and NTS meningitis is fatal in up to 60% of cases. In 2017 there were ~535,000 invasive NTS cases and ~77,500 deaths worldwide, ~80% in sub-Saharan Africa. Acute NTS gastroenteritis was associated with a threefold increased risk of dyspepsia and irritable bowel syndrome at 1 year in a Spanish study.",
-  "pitfalls": [
-   "Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and antibiotics do not significantly shorten fever or diarrhea, while they have been associated with increased relapse rates, prolonged fecal/gastrointestinal carriage, and adverse drug reactions.",
-   "Only ~1% of clinical isolates ferment lactose, so a high index of suspicion is needed to detect rare lactose-fermenting strains.",
-   "Decreased-ciprofloxacin-susceptibility NTS strains may not be reliably detected by nalidixic acid susceptibility testing or standard ciprofloxacin disk diffusion, risking missed resistance and treatment failure.",
-   "Neonates, the elderly, and immunosuppressed patients with NTS gastroenteritis are especially prone to dehydration and invasive infection and may need hospitalization and antibiotic therapy - they are exceptions to the no-routine-antibiotics rule."
-  ],
-  "severityClassification": "Harrison does not provide a formal graded severity score for NTS. Disease is described along a clinical spectrum: (1) uncomplicated self-limited gastroenteritis; (2) bacteremia (low-grade defined as <50% of blood cultures positive vs high-grade >50% of three or more sets positive, the latter raising concern for endovascular infection); and (3) localized/metastatic infection (intraabdominal, CNS, pulmonary, urinary/genital, bone/joint/soft tissue) and endovascular infection (endocarditis, arteritis). Host-risk stratification for invasive disease includes neonates (up to ~3 months), persons >50 years with atherosclerosis, and those with immunosuppression, cardiac valvular/endovascular abnormalities, or significant joint disease.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22nd edition, Chapter 171: Salmonellosis (Pegues DA, Miller SI), pp.1314, 1319-1321",
-   "Marchello CS et al: Complications and mortality of non-typhoidal salmonella invasive disease: A global systematic review and meta-analysis. Lancet Infect Dis 22:692, 2022",
-   "Medalla F et al: Increased Incidence of Antimicrobial-Resistant Nontyphoidal Salmonella Infections, United States, 2004-2016. Emerg Infect Dis 27:1662, 2021",
-   "Onwuezobe IA et al: Antimicrobials for treating symptomatic non-typhoidal Salmonella infection. Cochrane Database Syst Rev 11:CD001167, 2012",
-   "Pulford CV et al: Stepwise evolution of Salmonella Typhimurium ST313 causing bloodstream infection in Africa. Nat Microbiol 6:327, 2021"
-  ],
-  "crossLinks": [
-   "GASTROENTERITIS",
-   "ENTERIC_FEVER",
-   "DYSENTERY"
-  ],
-  "management": [
-   "Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics which prolong carriage",
-   "Antimicrobial therapy with a fluoroquinolone, third-generation cephalosporin or azithromycin reserved for severe, invasive or high-risk disease (infants, the elderly and the immunocompromised, especially those with HIV)",
-   "Blood cultures and prompt treatment of bacteraemia, with prolonged antimicrobial courses for endovascular or metastatic infection",
-   "Surgical drainage of focal abscesses and repair of any infected (mycotic) aneurysm alongside antimicrobials",
-   "Avoidance of antimotility agents, which can worsen invasive disease",
-   "Monitoring for metastatic complications such as endocarditis and arteritis in those with high-grade or persistent bacteraemia",
-   "Public health notification with serotyping of isolates and source tracing to control outbreaks"
-  ]
- },
- "algorithms": [
-  {
-   "id": "salmonellosis-pathway",
-   "title": "Nontyphoidal Salmonellosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric pathogens, with nausea, vomiting, and diarrhea beginning 6-48 h after ingestion of contaminated food or water;",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Invasive disease / bacteremia and endovascular seeding in the elderly, immunocompromised (including HIV), infants/neonates, and patients with sickle cell disease or other hemoglobinopathies",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection, Blood cultures - obtain whenever fever is prolonged or recurrent; high-grade bacteremia defined as >50% of three or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics which prolong carriage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and antibiotics do not significantly shorten fever or diarrhea, while they have been"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nontyphoidal salmonellosis."
-  }
- ],
- "tables": [
-  {
-   "id": "salmonellosis-matrix",
-   "title": "Nontyphoidal Salmonellosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "1314, 1319-1321",
+    "clinicalPearls": [
+      "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric pathogens, with nausea, vomiting, and diarrhea beginning 6-48 h after ingestion of contaminated food or water; stools are usually loose, nonbloody, and of moderate volume, though large-volume watery stools, bloody stools, or frank dysentery can occur (p.1320).",
+      "NTS gastroenteritis is usually self-limited: diarrhea resolves within 3-7 days and fever within 72 h; stool cultures may remain positive for 4-5 weeks after infection (p.1320).",
+      "Globally S. Typhimurium and S. Enteritidis are the most common serotypes causing human disease; in the United States NTS is the second most common cause of foodborne outbreaks after norovirus (p.1319).",
+      "Unlike S. Typhi and S. Paratyphi (human-only reservoir), NTS is acquired from multiple animal and plant reservoirs - especially eggs, poultry, undercooked ground meat, and dairy, plus produce contaminated with animal waste and contact with animals (reptiles, amphibians, chicks, etc.) (p.1319).",
+      "Up to 8% of patients with NTS gastroenteritis develop bacteremia, and of those 5-10% develop localized (metastatic) infections; bacteremia and metastatic infection are most common with S. Choleraesuis and S. Dublin and among infants, the elderly, and the immunocompromised, especially those with HIV (p.1320).",
+      "Invasive NTS disease (predominantly S. Typhimurium ST313 and S. Enteritidis ST11) is a leading cause of bacteremia in children and HIV-infected adults in sub-Saharan Africa and Southeast Asia; it typically presents as a nonspecific febrile illness resembling enteric fever and uncommonly causes diarrhea (p.1319-1320).",
+      "Diagnosis rests on isolating the organism from freshly passed stool or from blood or another normally sterile fluid; culture-independent molecular tests are increasingly used but positive specimens should still undergo primary isolation, and all NTS isolates should be referred to public health for serotyping (p.1320-1321).",
+      "Reactive arthritis can follow NTS gastroenteritis, occurring most frequently in persons carrying the HLA-B27 antigen (p.1321).",
+      "Localized NTS infections include intraabdominal (hepatic/splenic abscess, cholecystitis), CNS (meningitis - chiefly in infants 1-4 months and HIV-infected adults), pulmonary (lobar pneumonia), urinary/genital, and bone/joint disease; Salmonella osteomyelitis classically affects the femur, tibia, humerus, or lumbar vertebrae and is strongly linked to sickle cell disease and hemoglobinopathies (p.1320-1321)."
     ],
-    [
-     "Key Investigations",
-     "Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection, Blood cultures - obtain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "All Salmonella infections begin with ingestion of organisms, usually in contaminated food or water; the infectious dose ranges from ~200 to 10^6 CFU, and the ingested dose helps determine incubation period and severity. Conditions reducing gastric acidity (age <1 year, acid-suppression therapy, achlorhydria) or compromising intestinal integrity (inflammatory bowel disease, cytotoxic chemotherapy, prior GI surgery, antibiotic-induced microbiome alteration) increase susceptibility. In contrast to enteric fever (mononuclear infiltration of small-bowel mucosa), NTS gastroenteritis is characterized by massive polymorphonuclear leukocyte infiltration into both large- and small-bowel mucosa. This response depends largely on induction of interleukin 8, a strong neutrophil chemoattractant secreted by intestinal cells in response to NTS colonization and translocation of bacterial proteins and LPS into host cytoplasm with subsequent inflammasome activation; neutrophil degranulation and release of toxic substances damages the mucosa, producing inflammatory diarrhea. NTS persistence is aided by its ability to use tetrathionate (generated from thiosulfate via inflammatory reactive oxygen species) for metabolism in a microaerophilic, inflamed gut, allowing it to outcompete endogenous flora. Unlike typhoidal serotypes, NTS effectively colonizes the intestinal tract rather than evolving as a primarily systemic pathogen.",
+    "additionalDifferentials": [
+      "Other bacterial enteric pathogens (Campylobacter, Shigella, enteroinvasive/enterotoxigenic E. coli)",
+      "Norovirus and other viral gastroenteritis",
+      "Intestinal parasites",
+      "Pseudoappendicitis (NTS can mimic acute appendicitis)",
+      "Inflammatory bowel disease (NTS rarely produces an IBD-like illness)",
+      "Enteric (typhoid) fever - especially with invasive NTS presenting as nonspecific febrile illness"
     ],
-    [
-     "Primary Differentials",
-     "Other bacterial enteric pathogens (Campylobacter, Shigella, enteroinvasive/enterotoxigenic E. coli), Norovirus and other viral",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Enteric (typhoid/paratyphoid) fever from S. Typhi/S. Paratyphi presenting as undifferentiated febrile illness",
+      "Other causes of community-acquired bloodstream infection in endemic regions (malaria co-infection common)",
+      "Other bacterial gastroenteritides (Campylobacter, Shigella, E. coli)"
     ],
-    [
-     "Management Strategy",
-     "Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Acute appendicitis (pseudoappendicitis)",
+      "Inflammatory bowel disease",
+      "Postinfectious irritable bowel syndrome / functional dyspepsia (recognized sequelae)"
     ],
-    [
-     "Clinical Pitfall",
-     "Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection",
+      "Blood cultures - obtain whenever fever is prolonged or recurrent; high-grade bacteremia defined as >50% of three or more blood-culture sets positive suggests endovascular infection",
+      "Culture-independent molecular diagnostic panels for enteric pathogens",
+      "Serotyping of all NTS isolates via public health laboratories",
+      "Echocardiography to evaluate suspected endocarditis",
+      "CT imaging to localize deep/focal infection",
+      "Indium-labeled white-cell scanning to identify localized infection",
+      "Culture of joint fluid aspirate, bone biopsy, abscess drainage, or CSF when localized infection is suspected",
+      "Antimicrobial susceptibility testing with attention to ciprofloxacin MIC (Etest or alternative method) given the lowered susceptibility breakpoint and decreased-ciprofloxacin-susceptibility strains not reliably detected by nalidixic acid screening or standard disk diffusion"
+    ],
+    "redFlags": [
+      "Invasive disease / bacteremia and endovascular seeding in the elderly, immunocompromised (including HIV), infants/neonates, and patients with sickle cell disease or other hemoglobinopathies",
+      "High-grade or persistent bacteremia, particularly with preexisting valvular heart disease, atherosclerotic vascular disease, prosthetic vascular graft, or aortic aneurysm - suspect NTS endovascular infection",
+      "Prolonged fever with back, chest, or abdominal pain after an episode of gastroenteritis in an elderly patient - suspect arteritis/mycotic aneurysm",
+      "NTS meningitis in infants 1-4 months of age or HIV-infected adults - severe sequelae and death in up to 60% of cases",
+      "Persons >50 years with known or suspected atherosclerosis (increased risk of invasive infection and endovascular seeding)"
+    ],
+    "prognosis": "NTS gastroenteritis is usually self-limited, with diarrhea resolving in 3-7 days and fever within 72 h; chronic carriage develops in <1% of cases. Outcomes worsen markedly with invasive disease: endocarditis and arteritis are rare (<1%) but carry serious, potentially fatal complications (valve perforation, endomyocardial abscess, infected mural thrombus, pericarditis, mycotic aneurysm, aneurysm rupture, aortoenteric fistula, vertebral osteomyelitis), and NTS meningitis is fatal in up to 60% of cases. In 2017 there were ~535,000 invasive NTS cases and ~77,500 deaths worldwide, ~80% in sub-Saharan Africa. Acute NTS gastroenteritis was associated with a threefold increased risk of dyspepsia and irritable bowel syndrome at 1 year in a Spanish study.",
+    "pitfalls": [
+      "Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and antibiotics do not significantly shorten fever or diarrhea, while they have been associated with increased relapse rates, prolonged fecal/gastrointestinal carriage, and adverse drug reactions.",
+      "Only ~1% of clinical isolates ferment lactose, so a high index of suspicion is needed to detect rare lactose-fermenting strains.",
+      "Decreased-ciprofloxacin-susceptibility NTS strains may not be reliably detected by nalidixic acid susceptibility testing or standard ciprofloxacin disk diffusion, risking missed resistance and treatment failure.",
+      "Neonates, the elderly, and immunosuppressed patients with NTS gastroenteritis are especially prone to dehydration and invasive infection and may need hospitalization and antibiotic therapy - they are exceptions to the no-routine-antibiotics rule."
+    ],
+    "severityClassification": "Harrison does not provide a formal graded severity score for NTS. Disease is described along a clinical spectrum: (1) uncomplicated self-limited gastroenteritis; (2) bacteremia (low-grade defined as <50% of blood cultures positive vs high-grade >50% of three or more sets positive, the latter raising concern for endovascular infection); and (3) localized/metastatic infection (intraabdominal, CNS, pulmonary, urinary/genital, bone/joint/soft tissue) and endovascular infection (endocarditis, arteritis). Host-risk stratification for invasive disease includes neonates (up to ~3 months), persons >50 years with atherosclerosis, and those with immunosuppression, cardiac valvular/endovascular abnormalities, or significant joint disease.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22nd edition, Chapter 171: Salmonellosis (Pegues DA, Miller SI), pp.1314, 1319-1321",
+      "Marchello CS et al: Complications and mortality of non-typhoidal salmonella invasive disease: A global systematic review and meta-analysis. Lancet Infect Dis 22:692, 2022",
+      "Medalla F et al: Increased Incidence of Antimicrobial-Resistant Nontyphoidal Salmonella Infections, United States, 2004-2016. Emerg Infect Dis 27:1662, 2021",
+      "Onwuezobe IA et al: Antimicrobials for treating symptomatic non-typhoidal Salmonella infection. Cochrane Database Syst Rev 11:CD001167, 2012",
+      "Pulford CV et al: Stepwise evolution of Salmonella Typhimurium ST313 causing bloodstream infection in Africa. Nat Microbiol 6:327, 2021"
+    ],
+    "crossLinks": [
+      "GASTROENTERITIS",
+      "ENTERIC_FEVER",
+      "DYSENTERY"
+    ],
+    "management": [
+      "Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics which prolong carriage",
+      "Antimicrobial therapy with a fluoroquinolone, third-generation cephalosporin or azithromycin reserved for severe, invasive or high-risk disease (infants, the elderly and the immunocompromised, especially those with HIV)",
+      "Blood cultures and prompt treatment of bacteraemia, with prolonged antimicrobial courses for endovascular or metastatic infection",
+      "Surgical drainage of focal abscesses and repair of any infected (mycotic) aneurysm alongside antimicrobials",
+      "Avoidance of antimotility agents, which can worsen invasive disease",
+      "Monitoring for metastatic complications such as endocarditis and arteritis in those with high-grade or persistent bacteraemia",
+      "Public health notification with serotyping of isolates and source tracing to control outbreaks"
     ]
-   ],
-   "caption": "Overview comparison matrix for nontyphoidal salmonellosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "salmonellosis-real-image",
-   "title": "Nontyphoidal Salmonellosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "salmonellosis-pathway",
+      "title": "Nontyphoidal Salmonellosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric pathogens, with nausea, vomiting, and diarrhea beginning 6-48 h after ingestion of contaminated food or water;",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Invasive disease / bacteremia and endovascular seeding in the elderly, immunocompromised (including HIV), infants/neonates, and patients with sickle cell disease or other hemoglobinopathies",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection, Blood cultures - obtain whenever fever is prolonged or recurrent; high-grade bacteremia defined as >50% of three or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics which prolong carriage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and antibiotics do not significantly shorten fever or diarrhea, while they have been"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nontyphoidal salmonellosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "salmonellosis-matrix",
+      "title": "Nontyphoidal Salmonellosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "NTS infection most often produces a gastroenteritis that is clinically indistinguishable from that caused by other enteric",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool culture (freshly passed) with primary isolation even after culture-independent molecular detection, Blood cultures - obtain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other bacterial enteric pathogens (Campylobacter, Shigella, enteroinvasive/enterotoxigenic E. coli), Norovirus and other viral",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral rehydration and fluid and electrolyte replacement for the usually self-limited gastroenteritis, avoiding routine antibiotics",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Antibiotics should NOT be used routinely to treat uncomplicated NTS gastroenteritis - the illness is usually self-limited and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nontyphoidal salmonellosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Nontyphoidal Salmonella Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "salmonellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing nontyphoidal Salmonella infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "6 to 48 h after contaminated food or water",
+              "range": [
+                6,
+                48
+              ]
+            },
+            {
+              "text": "Beef, poultry, eggs, dairy; inflammatory diarrhea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Course",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Diarrhea settles in 3 to 7 days, fever within 72 h",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Stool may stay culture positive 4 to 5 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and gives susceptibility"
+            },
+            {
+              "text": "Culture even after a positive PCR panel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Prolonged or recurrent fever, high-risk host"
+            },
+            {
+              "text": "Positive in bacteremic and focal disease even if stool negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-grade bacteremia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 50% of 3 or more blood culture sets positive",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Suspect endovascular infection}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% of bacteremic patients",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Bone, joint, meninges, aneurysm, urinary tract"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic carriage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 1% of cases",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Usually self-limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Echocardiography, CT or white-cell scan"
+            },
+            {
+              "text": "For persistent bacteremia or focal pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salmonellosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NTS infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Campylobacter enteritis",
+          "cells": [
+            {
+              "text": "Poultry and raw milk; inflammatory diarrhea"
+            },
+            {
+              "text": "Stool culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Shigellosis",
+          "cells": [
+            {
+              "text": "Dysentery, low infective dose"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterohemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhea, little fever, HUS risk"
+            },
+            {
+              "text": "Shiga toxin testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Viral gastroenteritis (norovirus)",
+          "cells": [
+            {
+              "text": "Vomiting prominent, outbreaks"
+            },
+            {
+              "text": "Stool PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric fever (S. Typhi or Paratyphi)",
+          "cells": [
+            {
+              "text": "Prolonged fever, little diarrhea"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis",
+          "cells": [
+            {
+              "text": "NTS can cause pseudoappendicitis"
+            },
+            {
+              "text": "CT abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic course"
+            },
+            {
+              "text": "Colonoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salmonellosis-treatment",
+      "kind": "treatment",
+      "title": "Treating nontyphoidal salmonellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration and fluids",
+          "cells": [
+            {
+              "text": "All gastroenteritis"
+            },
+            {
+              "text": "Avoid antimotility drugs in invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antibiotics",
+          "cells": [
+            {
+              "text": "Uncomplicated gastroenteritis in healthy hosts"
+            },
+            {
+              "text": "{{hy:Antibiotics prolong carriage and raise relapse}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin, azithromycin or ceftriaxone (TMP-SMX in children)",
+          "cells": [
+            {
+              "text": "Infants, elderly nursing home residents, hemoglobinopathy, HIV or immunosuppression"
+            },
+            {
+              "text": "3 to 5 days if not immunocompromised; check ciprofloxacin susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "cells": [
+            {
+              "text": "Sustained bacteremia"
+            },
+            {
+              "text": "Generally 4 to 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage plus 4 weeks or more of antibiotics",
+          "cells": [
+            {
+              "text": "Abscess"
+            },
+            {
+              "text": "Count from surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery plus prolonged antibiotics",
+          "cells": [
+            {
+              "text": "Mycotic aneurysm, endocarditis, bone or joint infection"
+            },
+            {
+              "text": "Repair or resect infected aneurysm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin for 1 month",
+          "cells": [
+            {
+              "text": "Carrier who is a food handler or health worker"
+            },
+            {
+              "text": "Confirm clearance with stool cultures"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "salmonellosis-dx-mgmt",
+      "title": "Diagnosis and management of nontyphoidal salmonellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and diarrhea 6 to 48 h after suspect food",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool culture; oral rehydration",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "High-risk host or systemic toxicity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Supportive care only; no antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Blood cultures; start ciprofloxacin, azithromycin or ceftriaxone",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Persistent or high-grade bacteremia, or focal pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Echo, CT or white-cell scan for endovascular or focal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Drain or repair focus; 4 to 6 weeks of antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Complete 3 to 5 days (longer if immunocompromised)",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

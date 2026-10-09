@@ -1,175 +1,475 @@
 {
- "id": "charcot_marie_tooth_disease_type_4g",
- "name": "Charcot-Marie-Tooth Disease Type 4G",
- "aliases": [
-  "CMT4G",
-  "HMSN-Russe",
-  "HMSNR",
-  "HK1"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary motor and sensory neuropathy Russe type (HMSN-Russe or HMSNR).",
-   "A founder disorder classically identified in Roma populations, with the causative change lying in a nerve-specific alternative 5' untranslated region of HK1 rather than in the coding sequence.",
-   "Onset in childhood to early adolescence with distal lower-limb weakness and wasting that later spreads to the hands.",
-   "Prominent distal sensory loss develops, and severe distal muscle atrophy can cause substantial disability by adulthood.",
-   "Electrophysiology shows an intermediate to slowed conduction pattern, faster than classic demyelinating CMT1 yet slowed relative to pure axonal forms.",
-   "Consider the diagnosis specifically in a consanguineous family or one of Roma ancestry with recessive CMT.",
-   "Diagnosis depends on identifying biallelic HK1 regulatory-region variants; analysis limited to the standard coding exons may miss the founder change.",
-   "It shares a population background with CMT4D (NDRG1, HMSN-Lom), another Roma founder neuropathy."
+  "id": "charcot_marie_tooth_disease_type_4g",
+  "name": "Charcot-Marie-Tooth Disease Type 4G",
+  "aliases": [
+    "CMT4G",
+    "HMSN-Russe",
+    "HMSNR",
+    "HK1"
   ],
-  "pathophysiology": "CMT4G is caused by mutations in HK1, which encodes hexokinase 1, the enzyme catalysing the first committed step of glycolysis by phosphorylating glucose to glucose-6-phosphate. The disease-associated founder change lies not in the ubiquitously expressed coding region but within an alternatively spliced, nerve-specific untranslated first exon that governs a neural HK1 transcript. The mutation is thought to disrupt regulation and expression of this isoform in peripheral nerve, impairing local glucose metabolism and energy supply in Schwann cells and axons. The result is a slowly progressive neuropathy with intermediate electrophysiology, reflecting combined effects on myelination and axonal integrity rather than a purely demyelinating or purely axonal process.",
-  "additionalDifferentials": [
-   "Other autosomal recessive demyelinating CMT4 subtypes (CMT4A GDAP1, CMT4C SH3TC2)",
-   "CMT4D (NDRG1, HMSN-Lom), another Roma founder disorder",
-   "CMT4F (PRX) and CMT4B (MTMR2, SBF2)",
-   "Dominant intermediate CMT",
-   "Demyelinating CMT1 subtypes",
-   "Acquired chronic inflammatory demyelinating polyradiculoneuropathy as a treatable mimic"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies and electromyography, expecting intermediate to slowed values",
-   "Gene panel or exome sequencing including HK1 with explicit coverage of the nerve-specific untranslated exon",
-   "Assessment of ancestry and consanguinity, with targeted founder-variant testing where appropriate",
-   "Family segregation and parental carrier testing",
-   "Nerve imaging, or rarely nerve biopsy, if the diagnosis remains unclear",
-   "Clinical genetics referral and genetic counselling"
-  ],
-  "redFlags": [
-   "Rapid deterioration or a relapsing course suggesting superimposed inflammatory demyelinating neuropathy",
-   "Marked asymmetry or conduction block on nerve conduction studies, which is atypical for inherited disease",
-   "Early severe respiratory or bulbar involvement"
-  ],
-  "prognosis": "CMT4G is slowly but steadily progressive; distal weakness and sensory loss can cause substantial disability and loss of independent ambulation in some patients by mid-adulthood, although life expectancy is not typically shortened.",
-  "pitfalls": [
-   "Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon.",
-   "Overlooking the diagnosis outside the classically described population when consanguinity is present.",
-   "Mislabelling the intermediate conduction pattern as either pure CMT1 or pure CMT2.",
-   "Failing to consider treatable inflammatory demyelinating neuropathy in an atypical or rapidly progressive presentation."
-  ],
-  "references": [
-   "Peripheral neuropathy reference texts",
-   "Neurogenetics and inherited neuropathy reviews",
-   "Clinical neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-   "Physiotherapy, stretching and ankle-foot orthoses for distal lower-limb weakness and foot drop",
-   "Occupational and hand therapy with adaptive aids as the hands and severe distal wasting develop",
-   "Podiatry and orthopaedic care for foot deformity",
-   "Neuropathic pain management with gabapentinoids or tricyclic agents for prominent distal sensory loss",
-   "Avoidance of neurotoxic drugs such as vincristine",
-   "Autosomal recessive genetic counselling with founder-variant (HK1) testing and family screening, guided by Roma ancestry and consanguinity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4g-pathway",
-   "title": "Charcot-Marie-Tooth Disease Type 4G: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary motor and sensory neuropathy Russe type (HMSN-Russe or HMSNR).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid deterioration or a relapsing course suggesting superimposed inflammatory demyelinating neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies and electromyography, expecting intermediate to slowed values, Gene panel or exome sequencing including HK1 with explicit coverage of the nerve-specific untranslated exon, Assessment of ancestry"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4g."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4g-matrix",
-   "title": "Charcot-Marie-Tooth Disease Type 4G: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary motor and sensory neuropathy Russe type (HMSN-Russe or HMSNR).",
+      "A founder disorder classically identified in Roma populations, with the causative change lying in a nerve-specific alternative 5' untranslated region of HK1 rather than in the coding sequence.",
+      "Onset in childhood to early adolescence with distal lower-limb weakness and wasting that later spreads to the hands.",
+      "Prominent distal sensory loss develops, and severe distal muscle atrophy can cause substantial disability by adulthood.",
+      "Electrophysiology shows an intermediate to slowed conduction pattern, faster than classic demyelinating CMT1 yet slowed relative to pure axonal forms.",
+      "Consider the diagnosis specifically in a consanguineous family or one of Roma ancestry with recessive CMT.",
+      "Diagnosis depends on identifying biallelic HK1 regulatory-region variants; analysis limited to the standard coding exons may miss the founder change.",
+      "It shares a population background with CMT4D (NDRG1, HMSN-Lom), another Roma founder neuropathy."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies and electromyography, expecting intermediate to slowed values, Gene panel or exome sequencing including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CMT4G is caused by mutations in HK1, which encodes hexokinase 1, the enzyme catalysing the first committed step of glycolysis by phosphorylating glucose to glucose-6-phosphate. The disease-associated founder change lies not in the ubiquitously expressed coding region but within an alternatively spliced, nerve-specific untranslated first exon that governs a neural HK1 transcript. The mutation is thought to disrupt regulation and expression of this isoform in peripheral nerve, impairing local glucose metabolism and energy supply in Schwann cells and axons. The result is a slowly progressive neuropathy with intermediate electrophysiology, reflecting combined effects on myelination and axonal integrity rather than a purely demyelinating or purely axonal process.",
+    "additionalDifferentials": [
+      "Other autosomal recessive demyelinating CMT4 subtypes (CMT4A GDAP1, CMT4C SH3TC2)",
+      "CMT4D (NDRG1, HMSN-Lom), another Roma founder disorder",
+      "CMT4F (PRX) and CMT4B (MTMR2, SBF2)",
+      "Dominant intermediate CMT",
+      "Demyelinating CMT1 subtypes",
+      "Acquired chronic inflammatory demyelinating polyradiculoneuropathy as a treatable mimic"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal recessive demyelinating CMT4 subtypes (CMT4A GDAP1, CMT4C SH3TC2), CMT4D (NDRG1, HMSN-Lom), another Roma founder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies and electromyography, expecting intermediate to slowed values",
+      "Gene panel or exome sequencing including HK1 with explicit coverage of the nerve-specific untranslated exon",
+      "Assessment of ancestry and consanguinity, with targeted founder-variant testing where appropriate",
+      "Family segregation and parental carrier testing",
+      "Nerve imaging, or rarely nerve biopsy, if the diagnosis remains unclear",
+      "Clinical genetics referral and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid deterioration or a relapsing course suggesting superimposed inflammatory demyelinating neuropathy",
+      "Marked asymmetry or conduction block on nerve conduction studies, which is atypical for inherited disease",
+      "Early severe respiratory or bulbar involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon.",
-     "Prevent diagnostic or management error"
+    "prognosis": "CMT4G is slowly but steadily progressive; distal weakness and sensory loss can cause substantial disability and loss of independent ambulation in some patients by mid-adulthood, although life expectancy is not typically shortened.",
+    "pitfalls": [
+      "Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon.",
+      "Overlooking the diagnosis outside the classically described population when consanguinity is present.",
+      "Mislabelling the intermediate conduction pattern as either pure CMT1 or pure CMT2.",
+      "Failing to consider treatable inflammatory demyelinating neuropathy in an atypical or rapidly progressive presentation."
+    ],
+    "references": [
+      "Peripheral neuropathy reference texts",
+      "Neurogenetics and inherited neuropathy reviews",
+      "Clinical neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+      "Physiotherapy, stretching and ankle-foot orthoses for distal lower-limb weakness and foot drop",
+      "Occupational and hand therapy with adaptive aids as the hands and severe distal wasting develop",
+      "Podiatry and orthopaedic care for foot deformity",
+      "Neuropathic pain management with gabapentinoids or tricyclic agents for prominent distal sensory loss",
+      "Avoidance of neurotoxic drugs such as vincristine",
+      "Autosomal recessive genetic counselling with founder-variant (HK1) testing and family screening, guided by Roma ancestry and consanguinity"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4g."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-4g-real-image",
-   "title": "Charcot-Marie-Tooth Disease Type 4G: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_4g-pathway",
+      "title": "Charcot-Marie-Tooth Disease Type 4G: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary motor and sensory neuropathy Russe type (HMSN-Russe or HMSNR).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid deterioration or a relapsing course suggesting superimposed inflammatory demyelinating neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies and electromyography, expecting intermediate to slowed values, Gene panel or exome sequencing including HK1 with explicit coverage of the nerve-specific untranslated exon, Assessment of ancestry"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4g."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4g-matrix",
+      "title": "Charcot-Marie-Tooth Disease Type 4G: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive Charcot-Marie-Tooth disease caused by mutations in HK1 (hexokinase 1), historically described as hereditary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies and electromyography, expecting intermediate to slowed values, Gene panel or exome sequencing including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal recessive demyelinating CMT4 subtypes (CMT4A GDAP1, CMT4C SH3TC2), CMT4D (NDRG1, HMSN-Lom), another Roma founder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Screening only the HK1 coding exons and missing the founder variant in the untranslated regulatory exon.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4g."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4g-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Intermediate to slowed conduction pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HK1 gene panel or exome with coverage of the nerve-specific exon",
+          "cells": [
+            {
+              "text": "Confirms biallelic HK1 regulatory-region variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ancestry and consanguinity assessment",
+          "cells": [
+            {
+              "text": "Targeted founder-variant testing where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve imaging or, rarely, nerve biopsy",
+          "cells": [
+            {
+              "text": "If the diagnosis remains unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental carrier testing",
+          "cells": [
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_4g-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT4D (NDRG1)",
+          "cells": [
+            {
+              "text": "Another Roma founder disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dominant intermediate CMT",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_4g-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Neuromuscular multidisciplinary team; no disease-specific pharmacotherapy"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthoses",
+          "cells": [
+            {
+              "text": "Physiotherapy, stretching and ankle-foot orthoses for distal weakness and foot drop"
+            },
+            {
+              "text": "Foot drop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Occupational and hand therapy with adaptive aids"
+            },
+            {
+              "text": "Hands and severe distal wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Podiatry and orthopaedic care",
+          "cells": [
+            {
+              "text": "Foot deformity"
+            },
+            {
+              "text": "Foot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic agents"
+            },
+            {
+              "text": "Prominent distal sensory loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution",
+          "cells": [
+            {
+              "text": "Avoid neurotoxic drugs such as vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive counselling with HK1 founder-variant testing, guided by ancestry and consanguinity"
+            },
+            {
+              "text": "Roma ancestry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4g-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth Disease Type 4G",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 4G (HK1): recessive neuropathy with distal weakness, Roma ancestry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid decline, relapsing course, conduction block, respiratory signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for superimposed inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, HK1 panel covering the nerve-specific exon, ancestry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Intermediate to slowed conduction with biallelic HK1 regulatory variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive neuromuscular care; no disease-specific pharmacotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT4D, CMT4A, CMT4C and dominant intermediate CMT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching and ankle-foot orthoses for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy and adaptive aids as the hands and distal wasting develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Podiatry and orthopaedic care for foot deformity; gabapentinoids for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recessive counselling with HK1 founder-variant testing and family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

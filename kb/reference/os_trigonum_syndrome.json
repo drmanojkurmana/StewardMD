@@ -1,177 +1,494 @@
 {
- "id": "os_trigonum_syndrome",
- "name": "Os trigonum syndrome",
- "aliases": [
-  "posterior ankle impingement syndrome",
-  "os trigonum impingement",
-  "talar compression syndrome",
-  "dancer's heel"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion to cause posterior ankle impingement",
-   "It is a classic cause of posterior ankle pain in ballet dancers and in footballers and other athletes who repeatedly plantarflex the ankle",
-   "Pain is felt deep in the posterior ankle, reproduced by forced passive plantarflexion, and eased by dorsiflexion, which unloads the posterior structures",
-   "A prominent posterior talar (Stieda) process can produce the same impingement even without a separate ossicle",
-   "The flexor hallucis longus tendon runs immediately medial to the ossicle, so associated flexor hallucis longus tendinopathy and pain on great-toe movement are common",
-   "Lateral radiographs, ideally in plantarflexion, demonstrate the ossicle or a prominent process, and MRI shows bone oedema and associated flexor hallucis longus tendinopathy or soft-tissue impingement",
-   "Distinguish it from Achilles or retrocalcaneal pathology, posterior tibial or peroneal tendon disorders, and talar stress injury",
-   "Management is conservative with activity and technique modification, physiotherapy, and image-guided corticosteroid injection, with arthroscopic or open excision of the ossicle reserved for resistant cases"
+  "id": "os_trigonum_syndrome",
+  "name": "Os trigonum syndrome",
+  "aliases": [
+    "posterior ankle impingement syndrome",
+    "os trigonum impingement",
+    "talar compression syndrome",
+    "dancer's heel"
   ],
-  "pathophysiology": "The os trigonum forms from a separate ossification centre behind the talus that fails to fuse with the posterolateral talar process; when it does fuse it forms a prominent Stieda process. During extreme plantarflexion, as in ballet en pointe or a footballer striking a ball, the ossicle or prominent process is compressed between the posterior tibial margin and the calcaneus, pinching the intervening soft tissues and producing posterior impingement pain. Repetitive forced plantarflexion causes inflammation across the synchondrosis or a stress reaction, and can fracture or displace the ossicle. Because the flexor hallucis longus tendon passes through its fibro-osseous tunnel immediately medial to the ossicle, the same mechanism frequently irritates that tendon, producing coexistent flexor hallucis longus tendinopathy with pain on great-toe flexion and, sometimes, triggering. The result is a syndrome of activity-related deep posterior ankle pain in individuals who load the ankle in plantarflexion.",
-  "additionalDifferentials": [
-   "Flexor hallucis longus tendinopathy or stenosing tenosynovitis",
-   "Achilles or retrocalcaneal disorders including insertional tendinopathy and bursitis",
-   "Posterior tibial or peroneal tendon pathology",
-   "Talar or calcaneal stress fracture",
-   "Osteochondral lesion of the talus",
-   "Posterior ankle soft-tissue impingement without an ossicle",
-   "Tarsal tunnel syndrome"
-  ],
-  "additionalInvestigations": [
-   "Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process",
-   "Forced passive plantarflexion test to reproduce posterior impingement pain",
-   "MRI to assess bone oedema and associated flexor hallucis longus tendinopathy or soft-tissue impingement",
-   "Assessment of great-toe flexion and any triggering to detect flexor hallucis longus involvement",
-   "Diagnostic image-guided local anaesthetic injection to confirm the posterior ankle as the pain source",
-   "CT in selected cases to characterise the ossicle and exclude a fracture",
-   "Ultrasound to evaluate the flexor hallucis longus tendon dynamically"
-  ],
-  "redFlags": [
-   "Acute severe posterior ankle pain after an injury suggesting a fracture of the ossicle or posterior process",
-   "Neurological symptoms suggesting tarsal tunnel involvement of the tibial nerve",
-   "Rest or night pain or a destructive lesion suggesting infection or tumour",
-   "Progressive locking or triggering of the great toe indicating significant flexor hallucis longus pathology"
-  ],
-  "prognosis": "Many athletes improve with a period of activity and technique modification, physiotherapy, and sometimes an image-guided injection, allowing return to sport or dance. When conservative treatment fails, excision of the os trigonum, whether arthroscopic or open, with release of the flexor hallucis longus if involved, reliably relieves symptoms and generally permits return to full activity, with the arthroscopic approach offering quicker recovery.",
-  "pitfalls": [
-   "Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed",
-   "Attributing posterior ankle pain to the Achilles tendon and missing posterior impingement",
-   "Assuming an os trigonum seen on imaging is the cause of pain without confirming it clinically or with an injection",
-   "Missing a fracture of the ossicle or posterior talar process after an acute injury",
-   "Failing to modify the provocative activity or technique, leading to recurrence"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior ankle impingement",
-   "Physiotherapy and non-steroidal anti-inflammatory drugs to settle synovitis and address associated flexor hallucis longus tendinopathy",
-   "Image-guided local anaesthetic and corticosteroid injection into the posterior ankle, which both relieves pain and confirms the source",
-   "Posterior ankle decompression by arthroscopic or open excision of the os trigonum or prominent Stieda process, with release of the flexor hallucis longus tendon, when conservative measures fail",
-   "Structured rehabilitation and graded return to sport or dance after intervention",
-   "Referral to a foot and ankle surgeon for refractory or mechanically limiting symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "os_trigonum_syndrome-pathway",
-   "title": "Os trigonum syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion to cause posterior ankle impingement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe posterior ankle pain after an injury suggesting a fracture of the ossicle or posterior process",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process, Forced passive plantarflexion test to reproduce posterior impingement pain, MRI to assess bone oedema"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior ankle impingement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of os trigonum syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "os_trigonum_syndrome-matrix",
-   "title": "Os trigonum syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion to cause posterior ankle impingement",
+      "It is a classic cause of posterior ankle pain in ballet dancers and in footballers and other athletes who repeatedly plantarflex the ankle",
+      "Pain is felt deep in the posterior ankle, reproduced by forced passive plantarflexion, and eased by dorsiflexion, which unloads the posterior structures",
+      "A prominent posterior talar (Stieda) process can produce the same impingement even without a separate ossicle",
+      "The flexor hallucis longus tendon runs immediately medial to the ossicle, so associated flexor hallucis longus tendinopathy and pain on great-toe movement are common",
+      "Lateral radiographs, ideally in plantarflexion, demonstrate the ossicle or a prominent process, and MRI shows bone oedema and associated flexor hallucis longus tendinopathy or soft-tissue impingement",
+      "Distinguish it from Achilles or retrocalcaneal pathology, posterior tibial or peroneal tendon disorders, and talar stress injury",
+      "Management is conservative with activity and technique modification, physiotherapy, and image-guided corticosteroid injection, with arthroscopic or open excision of the ossicle reserved for resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process, Forced",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The os trigonum forms from a separate ossification centre behind the talus that fails to fuse with the posterolateral talar process; when it does fuse it forms a prominent Stieda process. During extreme plantarflexion, as in ballet en pointe or a footballer striking a ball, the ossicle or prominent process is compressed between the posterior tibial margin and the calcaneus, pinching the intervening soft tissues and producing posterior impingement pain. Repetitive forced plantarflexion causes inflammation across the synchondrosis or a stress reaction, and can fracture or displace the ossicle. Because the flexor hallucis longus tendon passes through its fibro-osseous tunnel immediately medial to the ossicle, the same mechanism frequently irritates that tendon, producing coexistent flexor hallucis longus tendinopathy with pain on great-toe flexion and, sometimes, triggering. The result is a syndrome of activity-related deep posterior ankle pain in individuals who load the ankle in plantarflexion.",
+    "additionalDifferentials": [
+      "Flexor hallucis longus tendinopathy or stenosing tenosynovitis",
+      "Achilles or retrocalcaneal disorders including insertional tendinopathy and bursitis",
+      "Posterior tibial or peroneal tendon pathology",
+      "Talar or calcaneal stress fracture",
+      "Osteochondral lesion of the talus",
+      "Posterior ankle soft-tissue impingement without an ossicle",
+      "Tarsal tunnel syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Flexor hallucis longus tendinopathy or stenosing tenosynovitis, Achilles or retrocalcaneal disorders including insertional",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process",
+      "Forced passive plantarflexion test to reproduce posterior impingement pain",
+      "MRI to assess bone oedema and associated flexor hallucis longus tendinopathy or soft-tissue impingement",
+      "Assessment of great-toe flexion and any triggering to detect flexor hallucis longus involvement",
+      "Diagnostic image-guided local anaesthetic injection to confirm the posterior ankle as the pain source",
+      "CT in selected cases to characterise the ossicle and exclude a fracture",
+      "Ultrasound to evaluate the flexor hallucis longus tendon dynamically"
     ],
-    [
-     "Management Strategy",
-     "Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe posterior ankle pain after an injury suggesting a fracture of the ossicle or posterior process",
+      "Neurological symptoms suggesting tarsal tunnel involvement of the tibial nerve",
+      "Rest or night pain or a destructive lesion suggesting infection or tumour",
+      "Progressive locking or triggering of the great toe indicating significant flexor hallucis longus pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many athletes improve with a period of activity and technique modification, physiotherapy, and sometimes an image-guided injection, allowing return to sport or dance. When conservative treatment fails, excision of the os trigonum, whether arthroscopic or open, with release of the flexor hallucis longus if involved, reliably relieves symptoms and generally permits return to full activity, with the arthroscopic approach offering quicker recovery.",
+    "pitfalls": [
+      "Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed",
+      "Attributing posterior ankle pain to the Achilles tendon and missing posterior impingement",
+      "Assuming an os trigonum seen on imaging is the cause of pain without confirming it clinically or with an injection",
+      "Missing a fracture of the ossicle or posterior talar process after an acute injury",
+      "Failing to modify the provocative activity or technique, leading to recurrence"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior ankle impingement",
+      "Physiotherapy and non-steroidal anti-inflammatory drugs to settle synovitis and address associated flexor hallucis longus tendinopathy",
+      "Image-guided local anaesthetic and corticosteroid injection into the posterior ankle, which both relieves pain and confirms the source",
+      "Posterior ankle decompression by arthroscopic or open excision of the os trigonum or prominent Stieda process, with release of the flexor hallucis longus tendon, when conservative measures fail",
+      "Structured rehabilitation and graded return to sport or dance after intervention",
+      "Referral to a foot and ankle surgeon for refractory or mechanically limiting symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for os trigonum syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "os-trigonum-syndrome-real-image",
-   "title": "Os trigonum syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "os_trigonum_syndrome-pathway",
+      "title": "Os trigonum syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion to cause posterior ankle impingement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe posterior ankle pain after an injury suggesting a fracture of the ossicle or posterior process",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process, Forced passive plantarflexion test to reproduce posterior impingement pain, MRI to assess bone oedema"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior ankle impingement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of os trigonum syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "os_trigonum_syndrome-matrix",
+      "title": "Os trigonum syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The os trigonum is an unfused accessory ossicle behind the talus that, when present, can be compressed in extreme plantarflexion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lateral ankle radiographs, including a plantarflexion view, to show the os trigonum or a prominent posterior process, Forced",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Flexor hallucis longus tendinopathy or stenosing tenosynovitis, Achilles or retrocalcaneal disorders including insertional",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Activity and technique modification with relative rest from forced plantarflexion as first-line treatment for this posterior",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking coexistent flexor hallucis longus tendinopathy that will continue to cause symptoms if not addressed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for os trigonum syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "os_trigonum_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral ankle radiograph with plantarflexion view",
+          "cells": [
+            {
+              "text": "Os trigonum or a prominent posterior process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forced passive plantarflexion test",
+          "cells": [
+            {
+              "text": "Reproduces posterior impingement pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Bone oedema, flexor hallucis longus tendinopathy or soft-tissue impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Great-toe flexion and triggering assessment",
+          "cells": [
+            {
+              "text": "Flexor hallucis longus involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided local anaesthetic injection",
+          "cells": [
+            {
+              "text": "Confirms the posterior ankle as the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT in selected cases",
+          "cells": [
+            {
+              "text": "Characterises the ossicle and excludes fracture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "os_trigonum_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexor hallucis longus tendinopathy",
+          "cells": [
+            {
+              "text": "Lies immediately medial to the ossicle; pain on great-toe movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achilles or retrocalcaneal disorders",
+          "cells": [
+            {
+              "text": "Posterior pain reproduced by forced plantarflexion favours impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarsal tunnel syndrome",
+          "cells": [
+            {
+              "text": "Neurological symptoms suggest tibial nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "os_trigonum_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity and technique modification",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Relative rest from forced plantarflexion; first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and NSAIDs",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Settle synovitis and associated flexor hallucis longus tendinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided injection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Local anaesthetic and corticosteroid into the posterior ankle; relieves pain and confirms the source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression when conservative care fails",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Arthroscopic or open excision of the os trigonum or Stieda process, with flexor hallucis longus release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Structured programme and graded return to sport or dance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Foot and ankle surgeon for refractory or mechanically limiting symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "os_trigonum_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Os trigonum syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deep posterior ankle pain on forced plantarflexion in a dancer or athlete",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute fracture, tibial nerve symptoms, rest pain or locking toe)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: fracture, infection or tumour review with urgent imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plantarflexion radiograph, impingement test, MRI, injection to confirm source",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does injection into the posterior ankle relieve the pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Achilles disorder, flexor hallucis longus tenosynovitis or stress injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity and technique modification; relative rest from forced plantarflexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and NSAIDs for synovitis and flexor hallucis longus tendinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided local anaesthetic and corticosteroid injection into the posterior ankle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision of os trigonum or Stieda process with flexor hallucis longus release if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Structured rehabilitation and graded return to sport or dance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve with modification and physiotherapy; surgery when conservative care fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,449 @@
 {
- "id": "progressive_myoclonic_epilepsy",
- "name": "Progressive myoclonic epilepsies (overview)",
- "aliases": [
-  "PME",
-  "progressive myoclonus epilepsy",
-  "Unverricht-Lundborg disease",
-  "Lafora disease",
-  "myoclonic epilepsy with ragged red fibres"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Epileptology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types and neurological decline",
-   "Core features are action and stimulus-sensitive myoclonus, generalised tonic-clonic seizures, progressive ataxia and cognitive decline",
-   "Important causes include Unverricht-Lundborg disease, Lafora disease, the neuronal ceroid lipofuscinoses, sialidoses and mitochondrial MERRF",
-   "Age at onset and the pace of decline help narrow the differential: Unverricht-Lundborg tends to be slowly progressive while Lafora disease progresses rapidly with prominent dementia",
-   "The EEG typically shows generalised epileptiform discharges with progressive background slowing and marked photosensitivity",
-   "Sodium-channel-blocking and some GABAergic agents can aggravate myoclonus, so drug choice must be considered carefully",
-   "Diagnosis increasingly relies on targeted genetic testing after clinical and electrophysiological characterisation"
+  "id": "progressive_myoclonic_epilepsy",
+  "name": "Progressive myoclonic epilepsies (overview)",
+  "aliases": [
+    "PME",
+    "progressive myoclonus epilepsy",
+    "Unverricht-Lundborg disease",
+    "Lafora disease",
+    "myoclonic epilepsy with ragged red fibres"
   ],
-  "pathophysiology": "The progressive myoclonic epilepsies are a heterogeneous group of genetic disorders in which distinct molecular defects converge on progressive neuronal dysfunction and loss. Mechanisms include abnormal intracellular storage material (polyglucosan bodies in Lafora disease, lipopigment in the neuronal ceroid lipofuscinoses), impaired lysosomal enzyme function (sialidoses), defective protein handling (Unverricht-Lundborg disease) and mitochondrial energy failure (MERRF). These processes damage cortical, cerebellar and other networks, producing the characteristic cortical myoclonus, seizures, ataxia and cognitive deterioration that worsen over time.",
-  "additionalDifferentials": [
-   "Juvenile myoclonic epilepsy and other genetic generalised epilepsies",
-   "Progressive ataxias without prominent myoclonus",
-   "Neurodegenerative and metabolic encephalopathies",
-   "Coeliac-related and other acquired myoclonus syndromes",
-   "Subacute encephalitides with myoclonus",
-   "Drug- or toxin-induced myoclonus"
-  ],
-  "additionalInvestigations": [
-   "Targeted genetic and gene-panel testing after phenotyping",
-   "EEG demonstrating generalised discharges, background slowing and photosensitivity",
-   "Brain MRI, which may show cerebellar or generalised atrophy",
-   "Enzyme assays and tissue biopsy (e.g. skin, for characteristic inclusions) in selected disorders",
-   "Metabolic and mitochondrial studies including lactate and, where indicated, muscle biopsy"
-  ],
-  "redFlags": [
-   "Worsening action myoclonus with declining cognition rather than a stable course",
-   "Loss of ambulation from progressive ataxia and myoclonus",
-   "Rapid dementia suggesting Lafora disease",
-   "Seizure or myoclonus aggravation after introduction of an inappropriate antiseizure medication"
-  ],
-  "prognosis": "Prognosis depends on the specific disorder, ranging from a relatively slowly progressive course in Unverricht-Lundborg disease to relentless deterioration and early death in Lafora disease and some ceroid lipofuscinoses. Most forms cause increasing disability over years, and treatment is largely symptomatic.",
-  "pitfalls": [
-   "Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course",
-   "Using sodium-channel blockers or certain GABAergic agents that worsen myoclonus",
-   "Attributing progressive decline to poor seizure control rather than the underlying disease",
-   "Stopping the workup after clinical assessment without pursuing specific genetic or enzymatic diagnosis"
-  ],
-  "references": [
-   "ILAE classification of the epilepsies",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam or zonisamide as adjuncts for myoclonus",
-   "Avoid antiseizure drugs that aggravate myoclonus, notably sodium-channel blockers such as carbamazepine, phenytoin and lamotrigine, and vigabatrin and tiagabine",
-   "Disease-specific measures where applicable, such as coenzyme-Q10 and vitamin cofactor support in MERRF mitochondrial disease and emerging substrate-directed therapy in Lafora disease",
-   "Supportive and rehabilitative care for progressive ataxia, cognitive decline and disability, including physiotherapy, occupational therapy and communication and mobility aids",
-   "Consider adjuncts for refractory myoclonus such as vagus nerve stimulation or ketogenic dietary therapy in selected disorders",
-   "Genetic counselling and family testing given the predominantly autosomal recessive inheritance, with precise molecular diagnosis to guide prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_myoclonic_epilepsy-pathway",
-   "title": "Progressive myoclonic epilepsies (overview): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types and neurological decline",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Worsening action myoclonus with declining cognition rather than a stable course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted genetic and gene-panel testing after phenotyping, EEG demonstrating generalised discharges, background slowing and photosensitivity, Brain MRI, which may show cerebellar or generalised atrophy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam or zonisamide as adjuncts for myoclonus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive myoclonic epilepsies (overview)."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_myoclonic_epilepsy-matrix",
-   "title": "Progressive myoclonic epilepsies (overview): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Epileptology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types and neurological decline",
+      "Core features are action and stimulus-sensitive myoclonus, generalised tonic-clonic seizures, progressive ataxia and cognitive decline",
+      "Important causes include Unverricht-Lundborg disease, Lafora disease, the neuronal ceroid lipofuscinoses, sialidoses and mitochondrial MERRF",
+      "Age at onset and the pace of decline help narrow the differential: Unverricht-Lundborg tends to be slowly progressive while Lafora disease progresses rapidly with prominent dementia",
+      "The EEG typically shows generalised epileptiform discharges with progressive background slowing and marked photosensitivity",
+      "Sodium-channel-blocking and some GABAergic agents can aggravate myoclonus, so drug choice must be considered carefully",
+      "Diagnosis increasingly relies on targeted genetic testing after clinical and electrophysiological characterisation"
     ],
-    [
-     "Key Investigations",
-     "Targeted genetic and gene-panel testing after phenotyping, EEG demonstrating generalised discharges, background slowing and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The progressive myoclonic epilepsies are a heterogeneous group of genetic disorders in which distinct molecular defects converge on progressive neuronal dysfunction and loss. Mechanisms include abnormal intracellular storage material (polyglucosan bodies in Lafora disease, lipopigment in the neuronal ceroid lipofuscinoses), impaired lysosomal enzyme function (sialidoses), defective protein handling (Unverricht-Lundborg disease) and mitochondrial energy failure (MERRF). These processes damage cortical, cerebellar and other networks, producing the characteristic cortical myoclonus, seizures, ataxia and cognitive deterioration that worsen over time.",
+    "additionalDifferentials": [
+      "Juvenile myoclonic epilepsy and other genetic generalised epilepsies",
+      "Progressive ataxias without prominent myoclonus",
+      "Neurodegenerative and metabolic encephalopathies",
+      "Coeliac-related and other acquired myoclonus syndromes",
+      "Subacute encephalitides with myoclonus",
+      "Drug- or toxin-induced myoclonus"
     ],
-    [
-     "Primary Differentials",
-     "Juvenile myoclonic epilepsy and other genetic generalised epilepsies, Progressive ataxias without prominent myoclonus,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted genetic and gene-panel testing after phenotyping",
+      "EEG demonstrating generalised discharges, background slowing and photosensitivity",
+      "Brain MRI, which may show cerebellar or generalised atrophy",
+      "Enzyme assays and tissue biopsy (e.g. skin, for characteristic inclusions) in selected disorders",
+      "Metabolic and mitochondrial studies including lactate and, where indicated, muscle biopsy"
     ],
-    [
-     "Management Strategy",
-     "Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam",
-     "Core treatment modality"
+    "redFlags": [
+      "Worsening action myoclonus with declining cognition rather than a stable course",
+      "Loss of ambulation from progressive ataxia and myoclonus",
+      "Rapid dementia suggesting Lafora disease",
+      "Seizure or myoclonus aggravation after introduction of an inappropriate antiseizure medication"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the specific disorder, ranging from a relatively slowly progressive course in Unverricht-Lundborg disease to relentless deterioration and early death in Lafora disease and some ceroid lipofuscinoses. Most forms cause increasing disability over years, and treatment is largely symptomatic.",
+    "pitfalls": [
+      "Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course",
+      "Using sodium-channel blockers or certain GABAergic agents that worsen myoclonus",
+      "Attributing progressive decline to poor seizure control rather than the underlying disease",
+      "Stopping the workup after clinical assessment without pursuing specific genetic or enzymatic diagnosis"
+    ],
+    "references": [
+      "ILAE classification of the epilepsies",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam or zonisamide as adjuncts for myoclonus",
+      "Avoid antiseizure drugs that aggravate myoclonus, notably sodium-channel blockers such as carbamazepine, phenytoin and lamotrigine, and vigabatrin and tiagabine",
+      "Disease-specific measures where applicable, such as coenzyme-Q10 and vitamin cofactor support in MERRF mitochondrial disease and emerging substrate-directed therapy in Lafora disease",
+      "Supportive and rehabilitative care for progressive ataxia, cognitive decline and disability, including physiotherapy, occupational therapy and communication and mobility aids",
+      "Consider adjuncts for refractory myoclonus such as vagus nerve stimulation or ketogenic dietary therapy in selected disorders",
+      "Genetic counselling and family testing given the predominantly autosomal recessive inheritance, with precise molecular diagnosis to guide prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive myoclonic epilepsies (overview)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-myoclonic-epilepsy-real-image",
-   "title": "Progressive myoclonic epilepsies (overview): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "progressive_myoclonic_epilepsy-pathway",
+      "title": "Progressive myoclonic epilepsies (overview): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types and neurological decline",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Worsening action myoclonus with declining cognition rather than a stable course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted genetic and gene-panel testing after phenotyping, EEG demonstrating generalised discharges, background slowing and photosensitivity, Brain MRI, which may show cerebellar or generalised atrophy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam or zonisamide as adjuncts for myoclonus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive myoclonic epilepsies (overview)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_myoclonic_epilepsy-matrix",
+      "title": "Progressive myoclonic epilepsies (overview): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of rare, mostly recessively inherited disorders defined by the combination of progressive myoclonus, other seizure types",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted genetic and gene-panel testing after phenotyping, EEG demonstrating generalised discharges, background slowing and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Juvenile myoclonic epilepsy and other genetic generalised epilepsies, Progressive ataxias without prominent myoclonus,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antimyoclonic and broad-spectrum antiseizure therapy with agents such as valproate, levetiracetam and clonazepam, with piracetam",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling early progressive myoclonic epilepsy as juvenile myoclonic epilepsy and missing the progressive course",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive myoclonic epilepsies (overview)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_myoclonic_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted genetic and gene-panel testing after phenotyping",
+          "cells": [
+            {
+              "text": "Molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised discharges, background slowing and photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar or generalised atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assays and tissue biopsy in selected disorders",
+          "cells": [
+            {
+              "text": "Characteristic inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and mitochondrial studies, including lactate",
+          "cells": [
+            {
+              "text": "Mitochondrial involvement; muscle biopsy where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_myoclonic_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile myoclonic epilepsy and other genetic generalised epilepsies",
+          "cells": [
+            {
+              "text": "Stable course rather than worsening myoclonus with declining cognition"
+            },
+            {
+              "text": "EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid dementia suggesting Lafora disease",
+          "cells": [
+            {
+              "text": "Rapid dementia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_myoclonic_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimyoclonic antiseizure therapy",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam or clonazepam; piracetam or zonisamide as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aggravating drugs",
+          "cells": [
+            {
+              "text": "Sodium-channel blockers such as carbamazepine, phenytoin and lamotrigine, and vigabatrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-specific measures",
+          "cells": [
+            {
+              "text": "Coenzyme-Q10 and vitamin cofactor support in MERRF mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and communication aids for ataxia and disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory myoclonus",
+          "cells": [
+            {
+              "text": "Vagus nerve stimulation or ketogenic dietary therapy in selected disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predominantly autosomal recessive; molecular diagnosis guides prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_myoclonic_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of Progressive myoclonic epilepsies (overview)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive myoclonic epilepsy: worsening action myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Declining cognition, lost walking, rapid dementia, or drug-aggravated myoclonus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist review; stop drugs that aggravate myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG; MRI; gene-panel testing; enzyme assays or biopsy; lactate and mitochondrial studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene-panel or enzyme testing give a molecular diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider JME, progressive ataxia or acquired myoclonus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valproate, levetiracetam or clonazepam for antimyoclonic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid sodium-channel blockers that aggravate myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Disease-specific cofactor support, such as coenzyme-Q10 in MERRF",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family testing; molecular diagnosis guides prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

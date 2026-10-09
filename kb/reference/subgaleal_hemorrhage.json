@@ -1,175 +1,462 @@
 {
- "id": "subgaleal_hemorrhage",
- "name": "Neonatal subgaleal haemorrhage",
- "aliases": [
-  "SGH",
-  "subaponeurotic haemorrhage",
-  "subgaleal haematoma",
-  "subgaleal haemorrhage"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cloherty and Stark Manual of Neonatal Care / Fanaroff and Martin's Neonatal-Perinatal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold a large proportion of the neonate's blood volume",
-   "It is most strongly associated with instrumental delivery, particularly vacuum extraction, and with coagulopathy",
-   "Unlike a cephalhaematoma, the swelling crosses suture lines and is a boggy, fluctuant, shifting collection that can extend from the orbits to the nape of the neck",
-   "Because the space is large, blood loss can be substantial and lead to hypovolaemic shock and anaemia, making it a potentially life-threatening emergency",
-   "Serial measurement of head circumference and close monitoring of vital signs and perfusion are essential for early detection of ongoing bleeding",
-   "Management is largely supportive: prompt recognition, volume and blood replacement, correction of coagulopathy, and monitoring for hyperbilirubinaemia as the collection resorbs",
-   "A high index of suspicion after difficult or assisted delivery allows timely intervention before decompensation"
+  "id": "subgaleal_hemorrhage",
+  "name": "Neonatal subgaleal haemorrhage",
+  "aliases": [
+    "SGH",
+    "subaponeurotic haemorrhage",
+    "subgaleal haematoma",
+    "subgaleal haemorrhage"
   ],
-  "pathophysiology": "Subgaleal haemorrhage results from rupture of the emissary veins that connect the scalp veins to the intracranial dural sinuses, or from shearing of these vessels during delivery. Blood collects in the subgaleal space, a large loosely bound plane beneath the epicranial aponeurosis that is not limited by cranial sutures, so bleeding can dissect widely across the scalp. Traction and shearing forces, especially from vacuum extraction, and impaired haemostasis from coagulopathy predispose to this injury. Because the space can accommodate a large volume, continued bleeding leads to progressive expansion of the swelling, significant blood loss, hypovolaemia, and anaemia, and later hyperbilirubinaemia as the extravasated blood is broken down.",
-  "additionalDifferentials": [
-   "Cephalhaematoma, which is confined by suture lines",
-   "Caput succedaneum, a superficial oedematous swelling that also crosses sutures but is not a large blood collection",
-   "Intracranial haemorrhage presenting with neurological signs",
-   "Scalp abscess or infected collection",
-   "Cranial or scalp swelling from birth trauma such as skull fracture",
-   "Other causes of neonatal hypovolaemia or anaemia such as feto-maternal haemorrhage"
-  ],
-  "additionalInvestigations": [
-   "Serial head circumference measurement to track expansion of the collection",
-   "Full blood count and serial haematocrit to detect and follow blood loss",
-   "Coagulation studies to identify a contributing bleeding disorder",
-   "Continuous monitoring of heart rate, blood pressure, and perfusion for hypovolaemia",
-   "Serum bilirubin monitoring as the haematoma resorbs",
-   "Cranial imaging when intracranial injury or skull fracture is suspected"
-  ],
-  "redFlags": [
-   "Rapidly enlarging, boggy scalp swelling crossing suture lines after assisted delivery",
-   "Tachycardia, pallor, hypotension, or poor perfusion indicating hypovolaemic shock",
-   "Falling haematocrit or laboratory evidence of significant blood loss",
-   "Associated coagulopathy or neurological signs suggesting intracranial injury"
-  ],
-  "prognosis": "With early recognition and prompt supportive care most infants recover fully. However, unrecognised or large subgaleal haemorrhage can cause severe hypovolaemic shock, disseminated intravascular coagulation, and death, so mortality is significant when diagnosis is delayed. Survivors of severe blood loss are at risk of associated hypoxic-ischaemic injury.",
-  "pitfalls": [
-   "Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss",
-   "Failing to monitor for progressive expansion and cardiovascular compromise after assisted delivery",
-   "Delaying volume resuscitation and blood transfusion in a decompensating infant",
-   "Overlooking an underlying coagulopathy that perpetuates bleeding",
-   "Not anticipating later hyperbilirubinaemia during resorption of the collection"
-  ],
-  "references": [
-   "Cloherty and Stark Manual of Neonatal Care",
-   "Fanaroff and Martin's Neonatal-Perinatal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and perfusion",
-   "Resuscitate with crystalloid volume replacement and transfuse packed red cells for substantial blood loss and anaemia",
-   "Correct any coagulopathy with fresh frozen plasma, platelets and vitamin K",
-   "Follow expansion of the collection with serial head circumference measurement and serial haematocrit",
-   "Monitor serum bilirubin and treat hyperbilirubinaemia with phototherapy as the haematoma resorbs",
-   "Escalate to intensive care for hypovolaemic shock or disseminated intravascular coagulation",
-   "Arrange cranial imaging if a skull fracture or intracranial injury is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subgaleal_hemorrhage-pathway",
-   "title": "Neonatal subgaleal haemorrhage: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold a large proportion of the neonate's blood volume",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging, boggy scalp swelling crossing suture lines after assisted delivery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial head circumference measurement to track expansion of the collection, Full blood count and serial haematocrit to detect and follow blood loss, Coagulation studies to identify a contributing bleeding disorder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and perfusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal subgaleal haemorrhage."
-  }
- ],
- "tables": [
-  {
-   "id": "subgaleal_hemorrhage-matrix",
-   "title": "Neonatal subgaleal haemorrhage: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cloherty and Stark Manual of Neonatal Care / Fanaroff and Martin's Neonatal-Perinatal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold a large proportion of the neonate's blood volume",
+      "It is most strongly associated with instrumental delivery, particularly vacuum extraction, and with coagulopathy",
+      "Unlike a cephalhaematoma, the swelling crosses suture lines and is a boggy, fluctuant, shifting collection that can extend from the orbits to the nape of the neck",
+      "Because the space is large, blood loss can be substantial and lead to hypovolaemic shock and anaemia, making it a potentially life-threatening emergency",
+      "Serial measurement of head circumference and close monitoring of vital signs and perfusion are essential for early detection of ongoing bleeding",
+      "Management is largely supportive: prompt recognition, volume and blood replacement, correction of coagulopathy, and monitoring for hyperbilirubinaemia as the collection resorbs",
+      "A high index of suspicion after difficult or assisted delivery allows timely intervention before decompensation"
     ],
-    [
-     "Key Investigations",
-     "Serial head circumference measurement to track expansion of the collection, Full blood count and serial haematocrit to detect and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subgaleal haemorrhage results from rupture of the emissary veins that connect the scalp veins to the intracranial dural sinuses, or from shearing of these vessels during delivery. Blood collects in the subgaleal space, a large loosely bound plane beneath the epicranial aponeurosis that is not limited by cranial sutures, so bleeding can dissect widely across the scalp. Traction and shearing forces, especially from vacuum extraction, and impaired haemostasis from coagulopathy predispose to this injury. Because the space can accommodate a large volume, continued bleeding leads to progressive expansion of the swelling, significant blood loss, hypovolaemia, and anaemia, and later hyperbilirubinaemia as the extravasated blood is broken down.",
+    "additionalDifferentials": [
+      "Cephalhaematoma, which is confined by suture lines",
+      "Caput succedaneum, a superficial oedematous swelling that also crosses sutures but is not a large blood collection",
+      "Intracranial haemorrhage presenting with neurological signs",
+      "Scalp abscess or infected collection",
+      "Cranial or scalp swelling from birth trauma such as skull fracture",
+      "Other causes of neonatal hypovolaemia or anaemia such as feto-maternal haemorrhage"
     ],
-    [
-     "Primary Differentials",
-     "Cephalhaematoma, which is confined by suture lines, Caput succedaneum, a superficial oedematous swelling that also crosses",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial head circumference measurement to track expansion of the collection",
+      "Full blood count and serial haematocrit to detect and follow blood loss",
+      "Coagulation studies to identify a contributing bleeding disorder",
+      "Continuous monitoring of heart rate, blood pressure, and perfusion for hypovolaemia",
+      "Serum bilirubin monitoring as the haematoma resorbs",
+      "Cranial imaging when intracranial injury or skull fracture is suspected"
     ],
-    [
-     "Management Strategy",
-     "Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging, boggy scalp swelling crossing suture lines after assisted delivery",
+      "Tachycardia, pallor, hypotension, or poor perfusion indicating hypovolaemic shock",
+      "Falling haematocrit or laboratory evidence of significant blood loss",
+      "Associated coagulopathy or neurological signs suggesting intracranial injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition and prompt supportive care most infants recover fully. However, unrecognised or large subgaleal haemorrhage can cause severe hypovolaemic shock, disseminated intravascular coagulation, and death, so mortality is significant when diagnosis is delayed. Survivors of severe blood loss are at risk of associated hypoxic-ischaemic injury.",
+    "pitfalls": [
+      "Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss",
+      "Failing to monitor for progressive expansion and cardiovascular compromise after assisted delivery",
+      "Delaying volume resuscitation and blood transfusion in a decompensating infant",
+      "Overlooking an underlying coagulopathy that perpetuates bleeding",
+      "Not anticipating later hyperbilirubinaemia during resorption of the collection"
+    ],
+    "references": [
+      "Cloherty and Stark Manual of Neonatal Care",
+      "Fanaroff and Martin's Neonatal-Perinatal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and perfusion",
+      "Resuscitate with crystalloid volume replacement and transfuse packed red cells for substantial blood loss and anaemia",
+      "Correct any coagulopathy with fresh frozen plasma, platelets and vitamin K",
+      "Follow expansion of the collection with serial head circumference measurement and serial haematocrit",
+      "Monitor serum bilirubin and treat hyperbilirubinaemia with phototherapy as the haematoma resorbs",
+      "Escalate to intensive care for hypovolaemic shock or disseminated intravascular coagulation",
+      "Arrange cranial imaging if a skull fracture or intracranial injury is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal subgaleal haemorrhage."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subgaleal-hemorrhage-real-image",
-   "title": "Neonatal subgaleal haemorrhage: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "subgaleal_hemorrhage-pathway",
+      "title": "Neonatal subgaleal haemorrhage: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold a large proportion of the neonate's blood volume",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging, boggy scalp swelling crossing suture lines after assisted delivery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial head circumference measurement to track expansion of the collection, Full blood count and serial haematocrit to detect and follow blood loss, Coagulation studies to identify a contributing bleeding disorder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and perfusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal subgaleal haemorrhage."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subgaleal_hemorrhage-matrix",
+      "title": "Neonatal subgaleal haemorrhage: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Subgaleal haemorrhage is bleeding into the loose potential space between the scalp aponeurosis and the periosteum, which can hold",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial head circumference measurement to track expansion of the collection, Full blood count and serial haematocrit to detect and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cephalhaematoma, which is confined by suture lines, Caput succedaneum, a superficial oedematous swelling that also crosses",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise promptly after assisted delivery and admit to neonatal intensive care with continuous monitoring of vital signs and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a subgaleal haemorrhage for a benign caput or cephalhaematoma and underestimating blood loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal subgaleal haemorrhage."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Fanaroff and Martin's Neonatal-Perinatal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subgaleal_hemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial head circumference",
+          "cells": [
+            {
+              "text": "Expansion of the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and serial haematocrit",
+          "cells": [
+            {
+              "text": "Blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Contributing bleeding disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous heart rate, blood pressure and perfusion monitoring",
+          "cells": [
+            {
+              "text": "Hypovolaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum bilirubin",
+          "cells": [
+            {
+              "text": "Resorption of the haematoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Skull fracture or intracranial injury, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subgaleal_hemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cephalhaematoma",
+          "cells": [
+            {
+              "text": "Confined by suture lines; subgaleal haemorrhage crosses them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caput succedaneum",
+          "cells": [
+            {
+              "text": "Superficial oedema that also crosses suture lines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subgaleal_hemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt recognition and neonatal intensive care",
+          "cells": [
+            {
+              "text": "After assisted delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystalloid and blood transfusion",
+          "cells": [
+            {
+              "text": "Hypovolaemia from blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of coagulopathy",
+          "cells": [
+            {
+              "text": "Fresh frozen plasma, platelets and vitamin K"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference",
+          "cells": [
+            {
+              "text": "Expansion of the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Hyperbilirubinaemia as the haematoma resorbs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "Hypovolaemic shock or disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Skull fracture or intracranial injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subgaleal_hemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal subgaleal haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Boggy scalp swelling crossing sutures after assisted birth: suspected subgaleal bleed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tachycardia, pallor, hypotension, falling haematocrit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation with volume and blood for hypovolaemic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial head circumference; FBC and haematocrit; coagulation; cranial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a swelling crossing suture lines confirmed after assisted delivery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cephalhaematoma, caput or intracranial haemorrhage; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Crystalloid and blood transfusion for blood loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coagulopathy with fresh frozen plasma and platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial head circumference to track expansion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phototherapy for hyperbilirubinaemia as the haematoma resorbs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Blood loss can be substantial and fatal if unrecognised; resorption raises bilirubin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

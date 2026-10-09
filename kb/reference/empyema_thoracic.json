@@ -1,172 +1,479 @@
 {
- "id": "empyema_thoracic",
- "name": "Thoracic empyema",
- "aliases": [
-  "empyema thoracis",
-  "pleural empyema",
-  "parapneumonic empyema"
- ],
- "class": "infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion progressing to empyema)",
-   "In children the typical picture is persistent fever, cough, tachypnoea, and pleuritic chest pain despite appropriate antibiotics for pneumonia",
-   "The process evolves through an exudative stage, a fibrinopurulent stage with loculations, and finally an organising stage with a thick fibrous peel restricting the lung",
-   "Clinical findings include reduced chest expansion, dullness to percussion, and diminished breath sounds over the effusion",
-   "Ultrasound is valuable for confirming and characterising the collection, detecting loculations, and guiding drainage",
-   "Management combines appropriate antibiotics with drainage; chest tube insertion, sometimes with intrapleural fibrinolytics, is used, and thoracoscopic (VATS) debridement may be needed for organised, loculated disease",
-   "Late organising empyema with a thick peel trapping the lung may require decortication to allow re-expansion",
-   "Common causative organisms in children include Streptococcus pneumoniae and Staphylococcus aureus"
+  "id": "empyema_thoracic",
+  "name": "Thoracic empyema",
+  "aliases": [
+    "empyema thoracis",
+    "pleural empyema",
+    "parapneumonic empyema"
   ],
-  "pathophysiology": "Thoracic empyema usually develops when a bacterial pneumonia extends to the pleura, producing an initially free-flowing exudate that becomes infected and purulent. Fibrin deposition then creates loculations that compartmentalise the pus (fibrinopurulent stage), and if untreated, fibroblast proliferation forms a thick inelastic peel over the visceral pleura (organising stage) that traps and restricts the underlying lung. Less commonly empyema follows chest trauma, surgery, or spread from mediastinal or subphrenic infection. The trapped infection sustains sepsis and impairs ventilation of the affected lung.",
-  "additionalDifferentials": [
-   "Uncomplicated parapneumonic effusion",
-   "Lung abscess",
-   "Necrotising pneumonia",
-   "Tuberculous pleural effusion",
-   "Haemothorax or chylothorax"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph to identify pleural fluid and its extent",
-   "Pleural ultrasound to confirm the collection, assess loculation, and guide drainage",
-   "Contrast CT of the chest in complex or non-resolving cases",
-   "Pleural fluid analysis with Gram stain, culture, cell count, pH, and biochemistry",
-   "Blood cultures and inflammatory markers, and testing for tuberculosis where relevant"
-  ],
-  "redFlags": [
-   "Sepsis or septic shock from ongoing pleural infection requiring urgent resuscitation and source control",
-   "Respiratory distress from a large effusion compressing the lung",
-   "Persistent high fever and clinical deterioration despite antibiotics, indicating inadequate drainage",
-   "Features suggesting a bronchopleural fistula or necrotising pneumonia"
-  ],
-  "prognosis": "With prompt antibiotics and adequate drainage most children recover fully with good long-term lung function. Delayed or inadequate drainage prolongs illness and may require more invasive surgery such as decortication, but even organised empyema in children generally has a favourable long-term outlook once treated.",
-  "pitfalls": [
-   "Relying on antibiotics alone and delaying drainage of an established empyema",
-   "Attempting simple aspiration or a single small drain for heavily loculated collections",
-   "Missing an underlying necrotising pneumonia, tuberculosis, or bronchopleural fistula",
-   "Failing to recognise a trapped lung requiring surgical decortication"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and local resistance",
-   "Pleural drainage by ultrasound-guided intercostal chest-tube insertion",
-   "Intrapleural fibrinolytics instilled through the chest drain to break down loculations in the fibrinopurulent stage",
-   "Thoracoscopic (VATS) debridement for organised, loculated disease not responding to drainage, with decortication where a thick fibrous peel restricts the lung",
-   "Supportive care with oxygen, analgesia, antipyretics, nutrition and fluids",
-   "Monitoring of fever, inflammatory markers and imaging for resolution, with testing for tuberculosis where relevant",
-   "Paediatric surgical and respiratory referral, with reassurance regarding good long-term lung function after adequate treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "empyema_thoracic-pathway",
-   "title": "Thoracic empyema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion progressing to empyema)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sepsis or septic shock from ongoing pleural infection requiring urgent resuscitation and source control",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph to identify pleural fluid and its extent, Pleural ultrasound to confirm the collection, assess loculation, and guide drainage, Contrast CT of the chest in complex or non-resolving cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and local resistance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on antibiotics alone and delaying drainage of an established empyema"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thoracic empyema."
-  }
- ],
- "tables": [
-  {
-   "id": "empyema_thoracic-matrix",
-   "title": "Thoracic empyema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion progressing to empyema)",
+      "In children the typical picture is persistent fever, cough, tachypnoea, and pleuritic chest pain despite appropriate antibiotics for pneumonia",
+      "The process evolves through an exudative stage, a fibrinopurulent stage with loculations, and finally an organising stage with a thick fibrous peel restricting the lung",
+      "Clinical findings include reduced chest expansion, dullness to percussion, and diminished breath sounds over the effusion",
+      "Ultrasound is valuable for confirming and characterising the collection, detecting loculations, and guiding drainage",
+      "Management combines appropriate antibiotics with drainage; chest tube insertion, sometimes with intrapleural fibrinolytics, is used, and thoracoscopic (VATS) debridement may be needed for organised, loculated disease",
+      "Late organising empyema with a thick peel trapping the lung may require decortication to allow re-expansion",
+      "Common causative organisms in children include Streptococcus pneumoniae and Staphylococcus aureus"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph to identify pleural fluid and its extent, Pleural ultrasound to confirm the collection, assess loculation, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thoracic empyema usually develops when a bacterial pneumonia extends to the pleura, producing an initially free-flowing exudate that becomes infected and purulent. Fibrin deposition then creates loculations that compartmentalise the pus (fibrinopurulent stage), and if untreated, fibroblast proliferation forms a thick inelastic peel over the visceral pleura (organising stage) that traps and restricts the underlying lung. Less commonly empyema follows chest trauma, surgery, or spread from mediastinal or subphrenic infection. The trapped infection sustains sepsis and impairs ventilation of the affected lung.",
+    "additionalDifferentials": [
+      "Uncomplicated parapneumonic effusion",
+      "Lung abscess",
+      "Necrotising pneumonia",
+      "Tuberculous pleural effusion",
+      "Haemothorax or chylothorax"
     ],
-    [
-     "Primary Differentials",
-     "Uncomplicated parapneumonic effusion, Lung abscess, Necrotising pneumonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph to identify pleural fluid and its extent",
+      "Pleural ultrasound to confirm the collection, assess loculation, and guide drainage",
+      "Contrast CT of the chest in complex or non-resolving cases",
+      "Pleural fluid analysis with Gram stain, culture, cell count, pH, and biochemistry",
+      "Blood cultures and inflammatory markers, and testing for tuberculosis where relevant"
     ],
-    [
-     "Management Strategy",
-     "Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and",
-     "Core treatment modality"
+    "redFlags": [
+      "Sepsis or septic shock from ongoing pleural infection requiring urgent resuscitation and source control",
+      "Respiratory distress from a large effusion compressing the lung",
+      "Persistent high fever and clinical deterioration despite antibiotics, indicating inadequate drainage",
+      "Features suggesting a bronchopleural fistula or necrotising pneumonia"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on antibiotics alone and delaying drainage of an established empyema",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt antibiotics and adequate drainage most children recover fully with good long-term lung function. Delayed or inadequate drainage prolongs illness and may require more invasive surgery such as decortication, but even organised empyema in children generally has a favourable long-term outlook once treated.",
+    "pitfalls": [
+      "Relying on antibiotics alone and delaying drainage of an established empyema",
+      "Attempting simple aspiration or a single small drain for heavily loculated collections",
+      "Missing an underlying necrotising pneumonia, tuberculosis, or bronchopleural fistula",
+      "Failing to recognise a trapped lung requiring surgical decortication"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and local resistance",
+      "Pleural drainage by ultrasound-guided intercostal chest-tube insertion",
+      "Intrapleural fibrinolytics instilled through the chest drain to break down loculations in the fibrinopurulent stage",
+      "Thoracoscopic (VATS) debridement for organised, loculated disease not responding to drainage, with decortication where a thick fibrous peel restricts the lung",
+      "Supportive care with oxygen, analgesia, antipyretics, nutrition and fluids",
+      "Monitoring of fever, inflammatory markers and imaging for resolution, with testing for tuberculosis where relevant",
+      "Paediatric surgical and respiratory referral, with reassurance regarding good long-term lung function after adequate treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for thoracic empyema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "empyema-thoracic-real-image",
-   "title": "Thoracic empyema: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "empyema_thoracic-pathway",
+      "title": "Thoracic empyema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion progressing to empyema)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sepsis or septic shock from ongoing pleural infection requiring urgent resuscitation and source control",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph to identify pleural fluid and its extent, Pleural ultrasound to confirm the collection, assess loculation, and guide drainage, Contrast CT of the chest in complex or non-resolving cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and local resistance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on antibiotics alone and delaying drainage of an established empyema"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thoracic empyema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "empyema_thoracic-matrix",
+      "title": "Thoracic empyema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A collection of pus in the pleural cavity, most commonly a complication of bacterial pneumonia (parapneumonic effusion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph to identify pleural fluid and its extent, Pleural ultrasound to confirm the collection, assess loculation, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Uncomplicated parapneumonic effusion, Lung abscess, Necrotising pneumonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt intravenous antibiotics targeting the causative organisms of parapneumonic infection, tailored to culture results and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on antibiotics alone and delaying drainage of an established empyema",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thoracic empyema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "empyema_thoracic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Extent of pleural fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural ultrasound",
+          "cells": [
+            {
+              "text": "Loculation and drainage guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT chest",
+          "cells": [
+            {
+              "text": "Complex or non-resolving disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid Gram stain, culture, pH and biochemistry",
+          "cells": [
+            {
+              "text": "Organism and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic sepsis and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis testing where relevant",
+          "cells": [
+            {
+              "text": "Alternative aetiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empyema_thoracic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uncomplicated parapneumonic effusion",
+          "cells": [
+            {
+              "text": "Free-flowing exudate without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung abscess",
+          "cells": [
+            {
+              "text": "Cavity within lung parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous pleural effusion",
+          "cells": [
+            {
+              "text": "Lymphocytic effusion with TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemothorax or chylothorax",
+          "cells": [
+            {
+              "text": "Blood or lymph in the pleural space"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empyema_thoracic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous antibiotics",
+          "cells": [
+            {
+              "text": "Tailored to culture results and local resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided chest drain",
+          "cells": [
+            {
+              "text": "Pleural drainage by intercostal tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrapleural fibrinolytics",
+          "cells": [
+            {
+              "text": "Break loculations in the fibrinopurulent stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracoscopic debridement",
+          "cells": [
+            {
+              "text": "Organised loculated disease; decortication for a fibrous peel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen, analgesia, nutrition and fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for resolution",
+          "cells": [
+            {
+              "text": "Fever, markers and imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "empyema_thoracic-dx-mgmt",
+      "title": "Diagnosis and management of Thoracic empyema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thoracic empyema: pleural infection with fever after pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic shock, respiratory distress, persistent fever)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics and chest drain for sepsis or large effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; pleural ultrasound; pleural fluid analysis; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is purulent or infected pleural fluid found on aspiration or drainage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider uncomplicated parapneumonic effusion, lung abscess or TB effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt intravenous antibiotics tailored to culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided intercostal chest drain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intrapleural fibrinolytics for loculated collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thoracoscopic debridement or decortication for organised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Supportive care with oxygen, analgesia, nutrition and fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most children recover fully with prompt antibiotics and adequate drainage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

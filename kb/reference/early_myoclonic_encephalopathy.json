@@ -1,172 +1,470 @@
 {
- "id": "early_myoclonic_encephalopathy",
- "name": "Early myoclonic encephalopathy",
- "aliases": [
-  "EME",
-  "early myoclonic epileptic encephalopathy",
-  "neonatal myoclonic encephalopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Epileptology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
-   "The EEG shows a burst-suppression pattern that is frequently more pronounced during sleep",
-   "Inborn errors of metabolism, especially non-ketotic hyperglycinaemia and other neurotransmitter or organic acid disorders, are characteristic underlying causes",
-   "Development is profoundly impaired from onset and seizures are typically refractory",
-   "It is distinguished from Ohtahara syndrome mainly by the predominant erratic myoclonus and the metabolic rather than structural aetiology",
-   "A systematic metabolic and genetic workup is essential to identify a potentially treatable cause",
-   "Vitamin-responsive epilepsies should be excluded early with therapeutic trials"
+  "id": "early_myoclonic_encephalopathy",
+  "name": "Early myoclonic encephalopathy",
+  "aliases": [
+    "EME",
+    "early myoclonic epileptic encephalopathy",
+    "neonatal myoclonic encephalopathy"
   ],
-  "pathophysiology": "Early myoclonic encephalopathy is a neonatal-onset developmental and epileptic encephalopathy strongly linked to inborn errors of metabolism, particularly non-ketotic hyperglycinaemia. Accumulation of neurotoxic metabolites and disturbance of excitatory and inhibitory neurotransmission in the immature brain produce marked cortical and subcortical hyperexcitability. This generates erratic fragmentary myoclonus and the burst-suppression pattern, while the underlying metabolic derangement causes the severe and early developmental impairment.",
-  "additionalDifferentials": [
-   "Ohtahara syndrome",
-   "Non-ketotic hyperglycinaemia and other inborn errors of metabolism",
-   "Pyridoxine-dependent and other vitamin-responsive epilepsies",
-   "Benign neonatal sleep myoclonus",
-   "Hypoxic-ischaemic encephalopathy with neonatal seizures",
-   "Malformations of cortical development"
-  ],
-  "additionalInvestigations": [
-   "EEG showing burst-suppression, often accentuated in sleep",
-   "Comprehensive metabolic screen including plasma and CSF amino acids and glycine",
-   "Trials of vitamin-responsive treatments such as pyridoxine",
-   "Epilepsy and metabolic gene panels or exome sequencing",
-   "Brain MRI to exclude structural pathology"
-  ],
-  "redFlags": [
-   "Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
-   "Elevated CSF glycine indicating non-ketotic hyperglycinaemia",
-   "Failure of vitamin-responsive trials",
-   "Rapid clinical deterioration pointing to a progressive metabolic disorder"
-  ],
-  "prognosis": "The prognosis is generally very poor with high early mortality and profound neurodevelopmental disability in survivors, largely determined by the underlying metabolic disorder. Seizures are usually refractory to antiseizure medication.",
-  "pitfalls": [
-   "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
-   "Not trialling vitamin-responsive therapies before concluding refractoriness",
-   "Confusing erratic myoclonus with benign neonatal sleep myoclonus",
-   "Attributing seizures to structural causes without a full metabolic workup"
-  ],
-  "references": [
-   "ILAE classification of the epilepsies",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause",
-   "Treat the underlying inborn error of metabolism where identified, for example measures for non-ketotic hyperglycinaemia such as sodium benzoate and dextromethorphan",
-   "Use antiseizure medication for seizure control while recognising that seizures are frequently refractory",
-   "Provide supportive neonatal and paediatric care including feeding support, respiratory monitoring and developmental input",
-   "Offer genetic counselling and family testing given the heritable metabolic aetiologies",
-   "Involve paediatric neurology and metabolic specialists early to guide diagnosis, treatment and prognosis",
-   "Introduce palliative care discussions given the generally poor prognosis and high early mortality"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "early_myoclonic_encephalopathy-pathway",
-   "title": "Early myoclonic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids and glycine, Trials of vitamin-responsive treatments such as pyridoxine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of early myoclonic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "early_myoclonic_encephalopathy-matrix",
-   "title": "Early myoclonic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Epileptology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
+      "The EEG shows a burst-suppression pattern that is frequently more pronounced during sleep",
+      "Inborn errors of metabolism, especially non-ketotic hyperglycinaemia and other neurotransmitter or organic acid disorders, are characteristic underlying causes",
+      "Development is profoundly impaired from onset and seizures are typically refractory",
+      "It is distinguished from Ohtahara syndrome mainly by the predominant erratic myoclonus and the metabolic rather than structural aetiology",
+      "A systematic metabolic and genetic workup is essential to identify a potentially treatable cause",
+      "Vitamin-responsive epilepsies should be excluded early with therapeutic trials"
     ],
-    [
-     "Key Investigations",
-     "EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Early myoclonic encephalopathy is a neonatal-onset developmental and epileptic encephalopathy strongly linked to inborn errors of metabolism, particularly non-ketotic hyperglycinaemia. Accumulation of neurotoxic metabolites and disturbance of excitatory and inhibitory neurotransmission in the immature brain produce marked cortical and subcortical hyperexcitability. This generates erratic fragmentary myoclonus and the burst-suppression pattern, while the underlying metabolic derangement causes the severe and early developmental impairment.",
+    "additionalDifferentials": [
+      "Ohtahara syndrome",
+      "Non-ketotic hyperglycinaemia and other inborn errors of metabolism",
+      "Pyridoxine-dependent and other vitamin-responsive epilepsies",
+      "Benign neonatal sleep myoclonus",
+      "Hypoxic-ischaemic encephalopathy with neonatal seizures",
+      "Malformations of cortical development"
     ],
-    [
-     "Primary Differentials",
-     "Ohtahara syndrome, Non-ketotic hyperglycinaemia and other inborn errors of metabolism, Pyridoxine-dependent and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "EEG showing burst-suppression, often accentuated in sleep",
+      "Comprehensive metabolic screen including plasma and CSF amino acids and glycine",
+      "Trials of vitamin-responsive treatments such as pyridoxine",
+      "Epilepsy and metabolic gene panels or exome sequencing",
+      "Brain MRI to exclude structural pathology"
     ],
-    [
-     "Management Strategy",
-     "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
+      "Elevated CSF glycine indicating non-ketotic hyperglycinaemia",
+      "Failure of vitamin-responsive trials",
+      "Rapid clinical deterioration pointing to a progressive metabolic disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally very poor with high early mortality and profound neurodevelopmental disability in survivors, largely determined by the underlying metabolic disorder. Seizures are usually refractory to antiseizure medication.",
+    "pitfalls": [
+      "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
+      "Not trialling vitamin-responsive therapies before concluding refractoriness",
+      "Confusing erratic myoclonus with benign neonatal sleep myoclonus",
+      "Attributing seizures to structural causes without a full metabolic workup"
+    ],
+    "references": [
+      "ILAE classification of the epilepsies",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause",
+      "Treat the underlying inborn error of metabolism where identified, for example measures for non-ketotic hyperglycinaemia such as sodium benzoate and dextromethorphan",
+      "Use antiseizure medication for seizure control while recognising that seizures are frequently refractory",
+      "Provide supportive neonatal and paediatric care including feeding support, respiratory monitoring and developmental input",
+      "Offer genetic counselling and family testing given the heritable metabolic aetiologies",
+      "Involve paediatric neurology and metabolic specialists early to guide diagnosis, treatment and prognosis",
+      "Introduce palliative care discussions given the generally poor prognosis and high early mortality"
     ]
-   ],
-   "caption": "Overview comparison matrix for early myoclonic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "early-myoclonic-encephalopathy-real-image",
-   "title": "Early myoclonic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "early_myoclonic_encephalopathy-pathway",
+      "title": "Early myoclonic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids and glycine, Trials of vitamin-responsive treatments such as pyridoxine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of early myoclonic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "early_myoclonic_encephalopathy-matrix",
+      "title": "Early myoclonic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ohtahara syndrome, Non-ketotic hyperglycinaemia and other inborn errors of metabolism, Pyridoxine-dependent and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for early myoclonic encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "early_myoclonic_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Burst-suppression, often accentuated in sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and CSF amino acids and glycine",
+          "cells": [
+            {
+              "text": "Elevated CSF glycine suggests non-ketotic hyperglycinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trials of pyridoxine",
+          "cells": [
+            {
+              "text": "Vitamin-responsive epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy and metabolic gene panels or exome",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural pathology excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_myoclonic_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ohtahara syndrome",
+          "cells": [
+            {
+              "text": "Early onset epileptic encephalopathy with burst-suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine-dependent epilepsy",
+          "cells": [
+            {
+              "text": "Vitamin-responsive, treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign neonatal sleep myoclonus",
+          "cells": [
+            {
+              "text": "Erratic myoclonus wrongly labelled as benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_myoclonic_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin trials",
+          "cells": [
+            {
+              "text": "Pyridoxine, pyridoxal phosphate and folinic acid to find a treatable cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific metabolic treatment",
+          "cells": [
+            {
+              "text": "Sodium benzoate and dextromethorphan for non-ketotic hyperglycinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures, which are frequently refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive neonatal care",
+          "cells": [
+            {
+              "text": "Feeding, respiratory monitoring and developmental input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Heritable metabolic aetiologies; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early specialist input",
+          "cells": [
+            {
+              "text": "Paediatric neurology and metabolic medicine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative discussion",
+          "cells": [
+            {
+              "text": "Given poor prognosis and high early mortality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "early_myoclonic_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Early myoclonic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected early myoclonic encephalopathy: refractory neonatal myoclonus, burst pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised CSF glycine, vitamin trial failure, rapid deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic work-up and vitamin trials in the neonatal period",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Burst-suppression EEG; plasma and CSF amino acids and glycine; gene panel; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CSF glycine raised, or a vitamin-responsive cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ohtahara syndrome, pyridoxine epilepsy or benign sleep myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium benzoate and dextromethorphan for non-ketotic hyperglycinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication, recognising that seizures are often refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Feeding, respiratory and developmental support in neonatal care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Early palliative discussion given poor prognosis and high mortality",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally very poor, with high early mortality and profound disability in survivors",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

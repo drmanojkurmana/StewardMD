@@ -1,176 +1,465 @@
 {
- "id": "polyarteritis_nodosa",
- "name": "Polyarteritis nodosa",
- "aliases": [
-  "PAN",
-  "periarteritis nodosa",
-  "medium-vessel vasculitis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with ANCA",
-   "Presents with systemic symptoms (fever, weight loss, malaise) plus organ-specific ischaemic damage",
-   "Peripheral nervous system involvement, especially mononeuritis multiplex, is common and an important clue",
-   "Skin manifestations include livedo reticularis, tender nodules, ulcers, and digital ischaemia",
-   "Renal involvement is typically renovascular ischaemia and hypertension rather than glomerulonephritis, and gut involvement can cause mesenteric ischaemia and abdominal pain",
-   "A recognised association with hepatitis B infection exists, so viral serology should be checked",
-   "Diagnosis rests on biopsy of affected tissue showing necrotising arteritis, or angiography demonstrating microaneurysms and stenoses in visceral vessels",
-   "Treatment uses corticosteroids with additional immunosuppression for severe disease, while hepatitis B-associated cases also require antiviral therapy"
+  "id": "polyarteritis_nodosa",
+  "name": "Polyarteritis nodosa",
+  "aliases": [
+    "PAN",
+    "periarteritis nodosa",
+    "medium-vessel vasculitis"
   ],
-  "pathophysiology": "Polyarteritis nodosa is a systemic necrotising vasculitis affecting medium and small muscular arteries. Transmural inflammation with fibrinoid necrosis weakens the vessel wall, producing the microaneurysms characteristic of visceral angiography, while intimal proliferation and thrombosis cause luminal narrowing and downstream tissue infarction. Lesions are segmental and favour branch points. Unlike small-vessel vasculitides it does not typically involve capillaries, glomeruli, or the pulmonary circulation and is ANCA-negative. Immune complex mechanisms are implicated, particularly in hepatitis B-associated disease.",
-  "additionalDifferentials": [
-   "ANCA-associated vasculitides (granulomatosis with polyangiitis, microscopic polyangiitis)",
-   "Cryoglobulinaemic vasculitis",
-   "Infective endocarditis with embolic phenomena",
-   "Fibromuscular dysplasia and segmental arterial mediolysis",
-   "Cholesterol embolisation syndrome",
-   "Other causes of mononeuritis multiplex"
-  ],
-  "additionalInvestigations": [
-   "Hepatitis B (and hepatitis C) serology",
-   "Visceral angiography (renal, mesenteric) for microaneurysms and stenoses",
-   "Biopsy of clinically involved tissue (e.g. nerve, muscle, skin) showing necrotising arteritis",
-   "Inflammatory markers, renal function, and urinalysis (typically without active urinary sediment)",
-   "Nerve conduction studies for mononeuritis multiplex and ANCA testing (expected negative)"
-  ],
-  "redFlags": [
-   "Acute abdomen from mesenteric ischaemia, bowel infarction, or perforation",
-   "Rapidly progressive renal impairment or malignant hypertension from renal artery involvement",
-   "Cardiac ischaemia or heart failure from coronary arteritis",
-   "New neurological deficit including stroke or severe mononeuritis multiplex",
-   "Ruptured visceral microaneurysm causing haemorrhage"
-  ],
-  "prognosis": "Untreated disease has a poor outlook, but immunosuppression markedly improves survival. Prognosis is worse with significant gastrointestinal, renal, cardiac, or central nervous system involvement; hepatitis B-associated disease can respond well when the virus is also treated.",
-  "pitfalls": [
-   "Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease",
-   "Failing to test for hepatitis B, which alters management",
-   "Missing mesenteric ischaemia in a patient with vague abdominal pain",
-   "Overlooking mononeuritis multiplex as a diagnostic clue",
-   "Delaying tissue or angiographic confirmation in a critically ill patient"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease",
-   "For hepatitis B-associated disease, combine antiviral therapy with a short course of corticosteroids and plasma exchange rather than prolonged immunosuppression",
-   "Maintenance immunosuppression such as azathioprine with corticosteroid tapering once remission is achieved in idiopathic disease",
-   "Corticosteroids alone may suffice for milder disease without critical organ involvement",
-   "Supportive care with analgesia, blood pressure control for renovascular hypertension, and neuropathic pain management for mononeuritis multiplex",
-   "Monitor disease activity, organ function and treatment toxicity, with vigilance for relapse and infection prophylaxis",
-   "Rheumatology-led multidisciplinary care with nephrology, neurology and gastroenterology input as involvement dictates",
-   "Escalate for mesenteric ischaemia, gastrointestinal, cardiac or central nervous system involvement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polyarteritis_nodosa-pathway",
-   "title": "Polyarteritis nodosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with ANCA",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute abdomen from mesenteric ischaemia, bowel infarction, or perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hepatitis B (and hepatitis C) serology, Visceral angiography (renal, mesenteric) for microaneurysms and stenoses, Biopsy of clinically involved tissue (e.g. nerve, muscle, skin) showing necrotising arteritis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polyarteritis nodosa."
-  }
- ],
- "tables": [
-  {
-   "id": "polyarteritis_nodosa-matrix",
-   "title": "Polyarteritis nodosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with ANCA",
+      "Presents with systemic symptoms (fever, weight loss, malaise) plus organ-specific ischaemic damage",
+      "Peripheral nervous system involvement, especially mononeuritis multiplex, is common and an important clue",
+      "Skin manifestations include livedo reticularis, tender nodules, ulcers, and digital ischaemia",
+      "Renal involvement is typically renovascular ischaemia and hypertension rather than glomerulonephritis, and gut involvement can cause mesenteric ischaemia and abdominal pain",
+      "A recognised association with hepatitis B infection exists, so viral serology should be checked",
+      "Diagnosis rests on biopsy of affected tissue showing necrotising arteritis, or angiography demonstrating microaneurysms and stenoses in visceral vessels",
+      "Treatment uses corticosteroids with additional immunosuppression for severe disease, while hepatitis B-associated cases also require antiviral therapy"
     ],
-    [
-     "Key Investigations",
-     "Hepatitis B (and hepatitis C) serology, Visceral angiography (renal, mesenteric) for microaneurysms and stenoses, Biopsy of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Polyarteritis nodosa is a systemic necrotising vasculitis affecting medium and small muscular arteries. Transmural inflammation with fibrinoid necrosis weakens the vessel wall, producing the microaneurysms characteristic of visceral angiography, while intimal proliferation and thrombosis cause luminal narrowing and downstream tissue infarction. Lesions are segmental and favour branch points. Unlike small-vessel vasculitides it does not typically involve capillaries, glomeruli, or the pulmonary circulation and is ANCA-negative. Immune complex mechanisms are implicated, particularly in hepatitis B-associated disease.",
+    "additionalDifferentials": [
+      "ANCA-associated vasculitides (granulomatosis with polyangiitis, microscopic polyangiitis)",
+      "Cryoglobulinaemic vasculitis",
+      "Infective endocarditis with embolic phenomena",
+      "Fibromuscular dysplasia and segmental arterial mediolysis",
+      "Cholesterol embolisation syndrome",
+      "Other causes of mononeuritis multiplex"
     ],
-    [
-     "Primary Differentials",
-     "ANCA-associated vasculitides (granulomatosis with polyangiitis, microscopic polyangiitis), Cryoglobulinaemic vasculitis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hepatitis B (and hepatitis C) serology",
+      "Visceral angiography (renal, mesenteric) for microaneurysms and stenoses",
+      "Biopsy of clinically involved tissue (e.g. nerve, muscle, skin) showing necrotising arteritis",
+      "Inflammatory markers, renal function, and urinalysis (typically without active urinary sediment)",
+      "Nerve conduction studies for mononeuritis multiplex and ANCA testing (expected negative)"
     ],
-    [
-     "Management Strategy",
-     "Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute abdomen from mesenteric ischaemia, bowel infarction, or perforation",
+      "Rapidly progressive renal impairment or malignant hypertension from renal artery involvement",
+      "Cardiac ischaemia or heart failure from coronary arteritis",
+      "New neurological deficit including stroke or severe mononeuritis multiplex",
+      "Ruptured visceral microaneurysm causing haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease has a poor outlook, but immunosuppression markedly improves survival. Prognosis is worse with significant gastrointestinal, renal, cardiac, or central nervous system involvement; hepatitis B-associated disease can respond well when the virus is also treated.",
+    "pitfalls": [
+      "Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease",
+      "Failing to test for hepatitis B, which alters management",
+      "Missing mesenteric ischaemia in a patient with vague abdominal pain",
+      "Overlooking mononeuritis multiplex as a diagnostic clue",
+      "Delaying tissue or angiographic confirmation in a critically ill patient"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease",
+      "For hepatitis B-associated disease, combine antiviral therapy with a short course of corticosteroids and plasma exchange rather than prolonged immunosuppression",
+      "Maintenance immunosuppression such as azathioprine with corticosteroid tapering once remission is achieved in idiopathic disease",
+      "Corticosteroids alone may suffice for milder disease without critical organ involvement",
+      "Supportive care with analgesia, blood pressure control for renovascular hypertension, and neuropathic pain management for mononeuritis multiplex",
+      "Monitor disease activity, organ function and treatment toxicity, with vigilance for relapse and infection prophylaxis",
+      "Rheumatology-led multidisciplinary care with nephrology, neurology and gastroenterology input as involvement dictates",
+      "Escalate for mesenteric ischaemia, gastrointestinal, cardiac or central nervous system involvement"
     ]
-   ],
-   "caption": "Overview comparison matrix for polyarteritis nodosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polyarteritis-nodosa-real-image",
-   "title": "Polyarteritis nodosa: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "polyarteritis_nodosa-pathway",
+      "title": "Polyarteritis nodosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with ANCA",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute abdomen from mesenteric ischaemia, bowel infarction, or perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hepatitis B (and hepatitis C) serology, Visceral angiography (renal, mesenteric) for microaneurysms and stenoses, Biopsy of clinically involved tissue (e.g. nerve, muscle, skin) showing necrotising arteritis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polyarteritis nodosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polyarteritis_nodosa-matrix",
+      "title": "Polyarteritis nodosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A necrotising vasculitis of medium-sized muscular arteries that characteristically spares the lungs and is not associated with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hepatitis B (and hepatitis C) serology, Visceral angiography (renal, mesenteric) for microaneurysms and stenoses, Biopsy of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ANCA-associated vasculitides (granulomatosis with polyangiitis, microscopic polyangiitis), Cryoglobulinaemic vasculitis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induction immunosuppression with high-dose corticosteroids plus cyclophosphamide for organ- or life-threatening disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with ANCA-associated vasculitis and expecting lung or glomerular disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polyarteritis nodosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polyarteritis_nodosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatitis B and C serology",
+          "cells": [
+            {
+              "text": "Viral association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral angiography (renal, mesenteric)",
+          "cells": [
+            {
+              "text": "Microaneurysms and stenoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of involved tissue",
+          "cells": [
+            {
+              "text": "Necrotising arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers, renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Systemic inflammation and kidney involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and ANCA testing",
+          "cells": [
+            {
+              "text": "Mononeuritis multiplex; ANCA expected negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis_nodosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA-associated vasculitis",
+          "cells": [
+            {
+              "text": "ANCA expected negative in polyarteritis nodosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Embolic phenomena"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis_nodosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids with cyclophosphamide for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis B-associated disease",
+          "cells": [
+            {
+              "text": "Antiviral therapy combined with a short corticosteroid course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Azathioprine with corticosteroid tapering once controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milder disease",
+          "cells": [
+            {
+              "text": "Corticosteroids alone may suffice without critical organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia and blood pressure control for renovascular hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Disease activity, organ function and treatment toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Rheumatology-led care with nephrology, neurology and gastroenterology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polyarteritis_nodosa-dx-mgmt",
+      "title": "Diagnosis and management of Polyarteritis nodosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multisystem vasculitis with mononeuritis multiplex or renal involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute abdomen, rapid renal decline, coronary arteritis, stroke, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical or intensive care review for mesenteric ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hepatitis B and C serology; visceral angiography; tissue biopsy; nerve conduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show necrotising arteritis with negative ANCA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ANCA vasculitis, cryoglobulinaemia, endocarditis or cholesterol embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids with cyclophosphamide for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiviral therapy for hepatitis B-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Azathioprine maintenance with corticosteroid tapering once controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids alone for milder disease without organ involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor disease activity, organ function and treatment toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated disease has a poor outlook; immunosuppression markedly improves survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,741 @@
 {
- "id": "episodic_ataxia_type_1",
- "name": "Episodic ataxia type 1 (KCNA1)",
- "aliases": [
-  "EA1",
-  "KCNA1-related episodic ataxia",
-  "episodic ataxia with myokymia",
-  "Kv1.1 potassium channel disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium channel, resulting in neuronal and peripheral-nerve hyperexcitability",
-   "Attacks are brief, usually lasting seconds to a few minutes, and consist of ataxia and dysarthria, sometimes occurring several times a day",
-   "Attacks are commonly provoked by sudden movement or startle (kinesigenic triggers), exercise, emotional stress or vestibular stimulation",
-   "The hallmark interictal sign is myokymia, a continuous fine rippling of muscles often seen around the eyes or in the hands, and demonstrable on electromyography",
-   "Some individuals additionally have epilepsy, and skeletal features such as muscle stiffness or contractures may occur",
-   "Acetazolamide can reduce attack frequency in many patients, and anticonvulsants such as carbamazepine may help the myokymia, alongside advice on avoiding triggers",
-   "Diagnosis is clinical, supported by electromyography demonstrating myokymia and by KCNA1 sequencing",
-   "It should be distinguished from episodic ataxia type 2, caused by CACNA1A, which produces longer attacks with prominent nystagmus and interictal gaze abnormalities"
+  "id": "episodic_ataxia_type_1",
+  "name": "Episodic ataxia type 1 (KCNA1)",
+  "aliases": [
+    "EA1",
+    "KCNA1-related episodic ataxia",
+    "episodic ataxia with myokymia",
+    "Kv1.1 potassium channel disorder"
   ],
-  "pathophysiology": "Episodic ataxia type 1 arises from dominant missense variants in KCNA1, encoding the Kv1.1 delayed-rectifier potassium channel expressed in cerebellar basket cells, peripheral nerve and elsewhere. The mutations reduce potassium current through loss-of-function or dominant-negative effects, impairing repolarisation and increasing excitability of neurons and peripheral nerves. Enhanced firing of cerebellar interneurons transiently disrupts Purkinje cell output, producing the brief episodes of ataxia and dysarthria, while sustained peripheral-nerve hyperexcitability generates the continuous myokymia that characterises the condition.",
-  "additionalDifferentials": [
-   "Episodic ataxia type 2 (CACNA1A)",
-   "Paroxysmal kinesigenic dyskinesia",
-   "Other paroxysmal dyskinesias",
-   "Vestibular migraine and migraine with brainstem aura",
-   "Functional or psychogenic paroxysmal attacks",
-   "Metabolic episodic ataxias"
-  ],
-  "additionalInvestigations": [
-   "KCNA1 sequencing within an ataxia or channelopathy gene panel",
-   "Electromyography to demonstrate myokymia or neuromyotonic discharges",
-   "A structured attack diary and trigger history to characterise the episodes",
-   "Brain MRI to exclude a structural cerebellar lesion",
-   "CACNA1A testing where features overlap with episodic ataxia type 2",
-   "Electroencephalography if associated seizures are suspected"
-  ],
-  "redFlags": [
-   "A progressive fixed cerebellar deficit rather than purely episodic symptoms, suggesting an alternative diagnosis",
-   "Frequent disabling attacks with falls and injury",
-   "New focal neurological signs indicating a structural lesion",
-   "Seizures requiring specific assessment and management"
-  ],
-  "prognosis": "The outlook is generally good; attacks often lessen with treatment and may improve in adulthood, and the disorder is usually non-progressive with normal life expectancy, although quality of life can be affected by recurrent attacks and persistent myokymia.",
-  "pitfalls": [
-   "Mistaking brief kinesigenic attacks for functional or psychogenic episodes",
-   "Overlooking myokymia, which is the key interictal clue to the diagnosis",
-   "Confusing the condition with episodic ataxia type 2 and giving inappropriate prognostic expectations",
-   "Not offering a therapeutic trial of acetazolamide when attacks are frequent",
-   "Failing to provide genetic counselling given autosomal dominant inheritance"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [
-   "spinocerebellar_ataxia_type_13",
-   "spinocerebellar_ataxia_type_27"
-  ],
-  "management": [
-   "Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria",
-   "Treat persistent myokymia and attacks with anticonvulsants such as carbamazepine or other sodium-channel-blocking agents",
-   "Advise avoidance of kinesigenic and other triggers including sudden movement, startle, exertion and emotional stress",
-   "Manage associated epilepsy with appropriate antiseizure medication where seizures coexist",
-   "Provide physiotherapy and occupational therapy for muscle stiffness or contractures",
-   "Offer genetic counselling for the autosomal dominant KCNA1 inheritance and arrange family testing, with neurology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "episodic_ataxia_type_1-pathway",
-   "title": "Episodic ataxia type 1 (KCNA1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium channel, resulting in neuronal and peripheral-nerve hyperexcitability",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A progressive fixed cerebellar deficit rather than purely episodic symptoms, suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: KCNA1 sequencing within an ataxia or channelopathy gene panel, Electromyography to demonstrate myokymia or neuromyotonic discharges, A structured attack diary and trigger history to characterise the episodes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking brief kinesigenic attacks for functional or psychogenic episodes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of episodic ataxia type 1 (kcna1)."
-  }
- ],
- "tables": [
-  {
-   "id": "episodic_ataxia_type_1-matrix",
-   "title": "Episodic ataxia type 1 (KCNA1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium channel, resulting in neuronal and peripheral-nerve hyperexcitability",
+      "Attacks are brief, usually lasting seconds to a few minutes, and consist of ataxia and dysarthria, sometimes occurring several times a day",
+      "Attacks are commonly provoked by sudden movement or startle (kinesigenic triggers), exercise, emotional stress or vestibular stimulation",
+      "The hallmark interictal sign is myokymia, a continuous fine rippling of muscles often seen around the eyes or in the hands, and demonstrable on electromyography",
+      "Some individuals additionally have epilepsy, and skeletal features such as muscle stiffness or contractures may occur",
+      "Acetazolamide can reduce attack frequency in many patients, and anticonvulsants such as carbamazepine may help the myokymia, alongside advice on avoiding triggers",
+      "Diagnosis is clinical, supported by electromyography demonstrating myokymia and by KCNA1 sequencing",
+      "It should be distinguished from episodic ataxia type 2, caused by CACNA1A, which produces longer attacks with prominent nystagmus and interictal gaze abnormalities"
     ],
-    [
-     "Key Investigations",
-     "KCNA1 sequencing within an ataxia or channelopathy gene panel, Electromyography to demonstrate myokymia or neuromyotonic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Episodic ataxia type 1 arises from dominant missense variants in KCNA1, encoding the Kv1.1 delayed-rectifier potassium channel expressed in cerebellar basket cells, peripheral nerve and elsewhere. The mutations reduce potassium current through loss-of-function or dominant-negative effects, impairing repolarisation and increasing excitability of neurons and peripheral nerves. Enhanced firing of cerebellar interneurons transiently disrupts Purkinje cell output, producing the brief episodes of ataxia and dysarthria, while sustained peripheral-nerve hyperexcitability generates the continuous myokymia that characterises the condition.",
+    "additionalDifferentials": [
+      "Episodic ataxia type 2 (CACNA1A)",
+      "Paroxysmal kinesigenic dyskinesia",
+      "Other paroxysmal dyskinesias",
+      "Vestibular migraine and migraine with brainstem aura",
+      "Functional or psychogenic paroxysmal attacks",
+      "Metabolic episodic ataxias"
     ],
-    [
-     "Primary Differentials",
-     "Episodic ataxia type 2 (CACNA1A), Paroxysmal kinesigenic dyskinesia, Other paroxysmal dyskinesias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "KCNA1 sequencing within an ataxia or channelopathy gene panel",
+      "Electromyography to demonstrate myokymia or neuromyotonic discharges",
+      "A structured attack diary and trigger history to characterise the episodes",
+      "Brain MRI to exclude a structural cerebellar lesion",
+      "CACNA1A testing where features overlap with episodic ataxia type 2",
+      "Electroencephalography if associated seizures are suspected"
     ],
-    [
-     "Management Strategy",
-     "Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria",
-     "Core treatment modality"
+    "redFlags": [
+      "A progressive fixed cerebellar deficit rather than purely episodic symptoms, suggesting an alternative diagnosis",
+      "Frequent disabling attacks with falls and injury",
+      "New focal neurological signs indicating a structural lesion",
+      "Seizures requiring specific assessment and management"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking brief kinesigenic attacks for functional or psychogenic episodes",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is generally good; attacks often lessen with treatment and may improve in adulthood, and the disorder is usually non-progressive with normal life expectancy, although quality of life can be affected by recurrent attacks and persistent myokymia.",
+    "pitfalls": [
+      "Mistaking brief kinesigenic attacks for functional or psychogenic episodes",
+      "Overlooking myokymia, which is the key interictal clue to the diagnosis",
+      "Confusing the condition with episodic ataxia type 2 and giving inappropriate prognostic expectations",
+      "Not offering a therapeutic trial of acetazolamide when attacks are frequent",
+      "Failing to provide genetic counselling given autosomal dominant inheritance"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [
+      "spinocerebellar_ataxia_type_13",
+      "spinocerebellar_ataxia_type_27"
+    ],
+    "management": [
+      "Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria",
+      "Treat persistent myokymia and attacks with anticonvulsants such as carbamazepine or other sodium-channel-blocking agents",
+      "Advise avoidance of kinesigenic and other triggers including sudden movement, startle, exertion and emotional stress",
+      "Manage associated epilepsy with appropriate antiseizure medication where seizures coexist",
+      "Provide physiotherapy and occupational therapy for muscle stiffness or contractures",
+      "Offer genetic counselling for the autosomal dominant KCNA1 inheritance and arrange family testing, with neurology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for episodic ataxia type 1 (kcna1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "episodic-ataxia-type-1-real-image",
-   "title": "Episodic ataxia type 1 (KCNA1): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "episodic_ataxia_type_1-pathway",
+      "title": "Episodic ataxia type 1 (KCNA1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium channel, resulting in neuronal and peripheral-nerve hyperexcitability",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A progressive fixed cerebellar deficit rather than purely episodic symptoms, suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: KCNA1 sequencing within an ataxia or channelopathy gene panel, Electromyography to demonstrate myokymia or neuromyotonic discharges, A structured attack diary and trigger history to characterise the episodes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking brief kinesigenic attacks for functional or psychogenic episodes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of episodic ataxia type 1 (kcna1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "episodic_ataxia_type_1-matrix",
+      "title": "Episodic ataxia type 1 (KCNA1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant channelopathy caused by missense variants in KCNA1, which encodes the Kv1.1 voltage-gated potassium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "KCNA1 sequencing within an ataxia or channelopathy gene panel, Electromyography to demonstrate myokymia or neuromyotonic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Episodic ataxia type 2 (CACNA1A), Paroxysmal kinesigenic dyskinesia, Other paroxysmal dyskinesias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use acetazolamide to reduce the frequency of attacks of ataxia and dysarthria",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking brief kinesigenic attacks for functional or psychogenic episodes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for episodic ataxia type 1 (kcna1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "episodic_ataxia_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "KCNA1 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant within a channelopathy gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myokymia or neuromyotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack diary and trigger history",
+          "cells": [
+            {
+              "text": "Characterises the episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural cerebellar lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CACNA1A testing",
+          "cells": [
+            {
+              "text": "Where features overlap with episodic ataxia type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "If associated seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia type 2 (CACNA1A)",
+          "cells": [
+            {
+              "text": "Longer attacks with prominent nystagmus; EA1 attacks last seconds to minutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional or psychogenic paroxysmal attacks",
+          "cells": [
+            {
+              "text": "Brief kinesigenic attacks are often mistaken for these; myokymia points to EA1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acetazolamide",
+          "cells": [
+            {
+              "text": "Reduces the frequency of attacks of ataxia and dysarthria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine or other sodium-channel-blocking agents",
+          "cells": [
+            {
+              "text": "Persistent myokymia and attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Sudden movement, startle, exertion and emotional stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Where seizures coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Muscle stiffness or contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KCNA1 inheritance; family testing; neurology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia_type_1-ddx-2",
+      "kind": "ddx",
+      "title": "Neurologic channelopathies: channel and gene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category",
+        "Channel type",
+        "Mutated gene"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia 1",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNA1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Episodic ataxia 2",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia 6",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 1",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 3",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benign neonatal familial convulsions",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ2, KCNQ3, SCN1B"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Generalized epilepsy with febrile convulsions plus",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "not separately listed (shares the cell above)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypokalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Cl"
+            },
+            {
+              "text": "CLCN1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome (deafness, prolonged QT, arrhythmia)",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ1, KCNE1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autosomal dominant progressive deafness",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Limbic encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acquired neuromyotonia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Chapter cross-references in the source are omitted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "episodic_ataxia_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Episodic ataxia type 1 (KCNA1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief episodes of ataxia and dysarthria with myokymia between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive fixed cerebellar deficit, falls and injury, focal signs, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for a structural lesion or seizures; specialist neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KCNA1 sequencing, EMG for myokymia, attack diary and MRI brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myokymia on EMG with a KCNA1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider episodic ataxia type 2, functional attacks or metabolic ataxia; test CACNA1A",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acetazolamide to reduce attack frequency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine for persistent myokymia and attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid sudden movement, startle, exertion and stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication where seizures coexist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for stiffness",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good; attacks often lessen and the disorder is usually non-progressive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

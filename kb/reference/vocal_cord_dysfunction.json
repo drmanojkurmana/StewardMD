@@ -1,170 +1,392 @@
 {
- "id": "vocal_cord_dysfunction",
- "name": "Vocal cord dysfunction",
- "aliases": [
-  "paradoxical vocal fold motion",
-  "inducible laryngeal obstruction"
- ],
- "class": "non_infective",
- "system": "Respiratory / Larynx",
- "specialty": "Otolaryngology / Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Otolaryngology and respiratory reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
-   "Symptoms characteristically feature difficulty getting air in, throat tightness and inspiratory noise localised to the neck",
-   "Attacks are often sudden in onset and offset and may be triggered by exercise, irritants, strong smells or stress",
-   "It is frequently misdiagnosed as refractory asthma, leading to escalating and ineffective inhaled therapy",
-   "Direct laryngoscopy during an episode, showing paradoxical adduction, is the diagnostic gold standard",
-   "Speech and language therapy with breathing retraining is the cornerstone of management"
+  "id": "vocal_cord_dysfunction",
+  "name": "Vocal cord dysfunction",
+  "aliases": [
+    "paradoxical vocal fold motion",
+    "inducible laryngeal obstruction"
   ],
-  "pathophysiology": "Vocal cord dysfunction, also termed inducible laryngeal obstruction, involves paradoxical closure of the vocal folds during inspiration, transiently narrowing the glottic airway. Laryngeal hyperresponsiveness to triggers such as reflux, postnasal drip, exercise, airborne irritants and psychological stress is thought to drive the abnormal reflex adduction. Because the obstruction is at the larynx rather than the lower airways, it produces predominantly inspiratory symptoms and does not respond to bronchodilators, distinguishing it from asthma even though the two can coexist.",
-  "additionalDifferentials": [
-   "Asthma",
-   "Exercise-induced bronchoconstriction",
-   "Fixed laryngeal or tracheal obstruction",
-   "Anaphylaxis with laryngeal oedema",
-   "Bilateral vocal cord palsy",
-   "Anxiety or panic attacks"
-  ],
-  "additionalInvestigations": [
-   "Flexible laryngoscopy, ideally during symptoms or after provocation",
-   "Spirometry with attention to truncation of the inspiratory flow-volume loop",
-   "Assessment for reflux, rhinosinusitis and asthma as triggers or comorbidities",
-   "Exercise or irritant challenge where episodes are provoked",
-   "Psychological assessment where relevant"
-  ],
-  "redFlags": [
-   "Stridor with hypoxia or signs of significant airway compromise",
-   "Suspected anaphylaxis",
-   "Features suggesting a fixed structural airway lesion",
-   "Progressive or persistent (non-episodic) obstruction"
-  ],
-  "prognosis": "The condition is not life-threatening in most cases and responds well to breathing retraining and treatment of triggers, though it can be recurrent and disabling if unrecognised.",
-  "pitfalls": [
-   "Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids",
-   "Failing to capture the larynx during an episode",
-   "Overlooking coexisting asthma, reflux or rhinosinusitis",
-   "Not involving speech and language therapy early"
-  ],
-  "references": [
-   "Otolaryngology reference texts (standard reference)",
-   "Respiratory medicine reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment",
-   "Identify and treat triggers and comorbidities including reflux, rhinosinusitis with postnasal drip, exercise and airborne irritants",
-   "Reassurance and education, teaching rescue breathing manoeuvres for acute episodes rather than relying on bronchodilators",
-   "Reassess and de-escalate ineffective escalating inhaled asthma therapy while managing any genuinely coexisting asthma",
-   "Psychological support and anxiety management where stress is a relevant trigger",
-   "Botulinum toxin injection to the laryngeal muscles in refractory cases",
-   "Multidisciplinary ENT, respiratory and speech therapy referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vocal_cord_dysfunction-pathway",
-   "title": "Vocal cord dysfunction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor with hypoxia or signs of significant airway compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible laryngoscopy, ideally during symptoms or after provocation, Spirometry with attention to truncation of the inspiratory flow-volume loop, Assessment for reflux, rhinosinusitis and asthma as triggers or comorbidities"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vocal cord dysfunction."
-  }
- ],
- "tables": [
-  {
-   "id": "vocal_cord_dysfunction-matrix",
-   "title": "Vocal cord dysfunction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Larynx",
+  "specialty": "Otolaryngology / Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Otolaryngology and respiratory reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
+      "Symptoms characteristically feature difficulty getting air in, throat tightness and inspiratory noise localised to the neck",
+      "Attacks are often sudden in onset and offset and may be triggered by exercise, irritants, strong smells or stress",
+      "It is frequently misdiagnosed as refractory asthma, leading to escalating and ineffective inhaled therapy",
+      "Direct laryngoscopy during an episode, showing paradoxical adduction, is the diagnostic gold standard",
+      "Speech and language therapy with breathing retraining is the cornerstone of management"
     ],
-    [
-     "Key Investigations",
-     "Flexible laryngoscopy, ideally during symptoms or after provocation, Spirometry with attention to truncation of the inspiratory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vocal cord dysfunction, also termed inducible laryngeal obstruction, involves paradoxical closure of the vocal folds during inspiration, transiently narrowing the glottic airway. Laryngeal hyperresponsiveness to triggers such as reflux, postnasal drip, exercise, airborne irritants and psychological stress is thought to drive the abnormal reflex adduction. Because the obstruction is at the larynx rather than the lower airways, it produces predominantly inspiratory symptoms and does not respond to bronchodilators, distinguishing it from asthma even though the two can coexist.",
+    "additionalDifferentials": [
+      "Asthma",
+      "Exercise-induced bronchoconstriction",
+      "Fixed laryngeal or tracheal obstruction",
+      "Anaphylaxis with laryngeal oedema",
+      "Bilateral vocal cord palsy",
+      "Anxiety or panic attacks"
     ],
-    [
-     "Primary Differentials",
-     "Asthma, Exercise-induced bronchoconstriction, Fixed laryngeal or tracheal obstruction",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible laryngoscopy, ideally during symptoms or after provocation",
+      "Spirometry with attention to truncation of the inspiratory flow-volume loop",
+      "Assessment for reflux, rhinosinusitis and asthma as triggers or comorbidities",
+      "Exercise or irritant challenge where episodes are provoked",
+      "Psychological assessment where relevant"
     ],
-    [
-     "Management Strategy",
-     "Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor with hypoxia or signs of significant airway compromise",
+      "Suspected anaphylaxis",
+      "Features suggesting a fixed structural airway lesion",
+      "Progressive or persistent (non-episodic) obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is not life-threatening in most cases and responds well to breathing retraining and treatment of triggers, though it can be recurrent and disabling if unrecognised.",
+    "pitfalls": [
+      "Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids",
+      "Failing to capture the larynx during an episode",
+      "Overlooking coexisting asthma, reflux or rhinosinusitis",
+      "Not involving speech and language therapy early"
+    ],
+    "references": [
+      "Otolaryngology reference texts (standard reference)",
+      "Respiratory medicine reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment",
+      "Identify and treat triggers and comorbidities including reflux, rhinosinusitis with postnasal drip, exercise and airborne irritants",
+      "Reassurance and education, teaching rescue breathing manoeuvres for acute episodes rather than relying on bronchodilators",
+      "Reassess and de-escalate ineffective escalating inhaled asthma therapy while managing any genuinely coexisting asthma",
+      "Psychological support and anxiety management where stress is a relevant trigger",
+      "Botulinum toxin injection to the laryngeal muscles in refractory cases",
+      "Multidisciplinary ENT, respiratory and speech therapy referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for vocal cord dysfunction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vocal-cord-dysfunction-real-image",
-   "title": "Vocal cord dysfunction: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "vocal_cord_dysfunction-pathway",
+      "title": "Vocal cord dysfunction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor with hypoxia or signs of significant airway compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible laryngoscopy, ideally during symptoms or after provocation, Spirometry with attention to truncation of the inspiratory flow-volume loop, Assessment for reflux, rhinosinusitis and asthma as triggers or comorbidities"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vocal cord dysfunction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vocal_cord_dysfunction-matrix",
+      "title": "Vocal cord dysfunction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inappropriate adduction of the vocal folds during inspiration causes episodic breathlessness and stridor that mimic asthma",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible laryngoscopy, ideally during symptoms or after provocation, Spirometry with attention to truncation of the inspiratory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Asthma, Exercise-induced bronchoconstriction, Fixed laryngeal or tracheal obstruction",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Speech and language therapy with breathing retraining and laryngeal control techniques as the cornerstone of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as refractory asthma and escalating inhaled or oral steroids",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vocal cord dysfunction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology and respiratory reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vocal_cord_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible laryngoscopy",
+          "cells": [
+            {
+              "text": "Vocal fold adduction during inspiration, ideally during symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry",
+          "cells": [
+            {
+              "text": "Truncated inspiratory flow-volume loop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for reflux and rhinosinusitis",
+          "cells": [
+            {
+              "text": "Comorbidities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma",
+          "cells": [
+            {
+              "text": "Mimics the episodic breathlessness and wheeze"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise-induced bronchoconstriction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis with laryngeal oedema",
+          "cells": [
+            {
+              "text": "Suspected anaphylaxis is a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety or panic attacks",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Breathing retraining and laryngeal control; the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger and comorbidity treatment",
+          "cells": [
+            {
+              "text": "Reflux, rhinosinusitis and other triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vocal_cord_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Vocal cord dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vocal cord dysfunction: episodic inspiratory stridor and breathlessness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypoxia, anaphylaxis or a fixed airway lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway management for hypoxia or suspected anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible laryngoscopy during symptoms, spirometry with inspiratory loop",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does laryngoscopy capture inappropriate inspiratory vocal fold closure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asthma or fixed airway lesion; avoid escalating steroids on assumption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Speech and language therapy with breathing and laryngeal control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat reflux, rhinosinusitis and other triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid escalating steroids for presumed refractory asthma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Often mistaken for refractory asthma; laryngoscopy during an episode confirms it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

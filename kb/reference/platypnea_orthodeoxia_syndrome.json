@@ -1,173 +1,462 @@
 {
- "id": "platypnea_orthodeoxia_syndrome",
- "name": "Platypnea-orthodeoxia syndrome",
- "aliases": [
-  "POS",
-  "platypnoea-orthodeoxia syndrome",
-  "positional hypoxaemia"
- ],
- "class": "non_infective",
- "system": "Respiratory / Pulmonary vascular",
- "specialty": "Pulmonary Hypertension",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing upright and improve on lying flat",
-   "Reflects a posture-dependent right-to-left shunt, most often intracardiac through a patent foramen ovale or atrial septal defect, but sometimes intrapulmonary",
-   "Intracardiac cases frequently require an anatomical or functional distortion, such as an enlarged or unfolded aorta, that redirects venous flow across the septum when upright",
-   "Intrapulmonary causes include hepatopulmonary syndrome and pulmonary arteriovenous malformations, especially with basal-predominant shunting",
-   "Contrast (bubble) echocardiography, ideally with postural manoeuvres, is central to localising the shunt as intracardiac or intrapulmonary",
-   "Oxygen supplementation often only partially corrects the hypoxaemia because of true shunt physiology",
-   "Percutaneous or surgical closure of an intracardiac defect can be curative, whereas intrapulmonary causes are managed according to their underlying disease"
+  "id": "platypnea_orthodeoxia_syndrome",
+  "name": "Platypnea-orthodeoxia syndrome",
+  "aliases": [
+    "POS",
+    "platypnoea-orthodeoxia syndrome",
+    "positional hypoxaemia"
   ],
-  "pathophysiology": "Platypnoea-orthodeoxia syndrome arises from a right-to-left shunt whose magnitude increases in the upright posture. In the intracardiac form there is an interatrial communication such as a patent foramen ovale, but the shunt only becomes haemodynamically significant when an additional anatomical or functional factor, for example an elongated or dilated aortic root, right pneumonectomy, or pericardial change, alters the geometry of the atria so that inferior vena caval flow is preferentially directed across the septum on standing. In the intrapulmonary form, dilated or abnormal vessels at the lung bases, as seen in hepatopulmonary syndrome or arteriovenous malformations, receive more perfusion when upright, increasing the fraction of venous blood bypassing gas exchange. In both mechanisms, standing augments the shunt and produces the characteristic positional hypoxaemia and breathlessness.",
-  "additionalDifferentials": [
-   "Hepatopulmonary syndrome",
-   "Pulmonary arteriovenous malformation (e.g. hereditary haemorrhagic telangiectasia)",
-   "Patent foramen ovale or atrial septal defect without other cause",
-   "Chronic parenchymal lung disease with basal shunting",
-   "Autonomic or orthostatic disorders mimicking positional symptoms",
-   "Post-pneumonectomy anatomical distortion"
-  ],
-  "additionalInvestigations": [
-   "Arterial blood gases measured both supine and upright to document orthodeoxia",
-   "Contrast (agitated saline) echocardiography with postural manoeuvres to localise the shunt",
-   "Transoesophageal echocardiography to define interatrial anatomy",
-   "CT or MR imaging to identify aortic, mediastinal, or pulmonary vascular abnormalities",
-   "Technetium macroaggregated albumin scan to quantify an intrapulmonary shunt",
-   "Assessment for liver disease when hepatopulmonary syndrome is suspected"
-  ],
-  "redFlags": [
-   "Severe positional hypoxaemia limiting the patient to a recumbent posture",
-   "Hypoxaemia poorly responsive to supplemental oxygen, indicating true shunt",
-   "Paradoxical embolic events such as stroke through an intracardiac shunt",
-   "Rapidly progressive desaturation suggesting worsening shunt fraction"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause; closure of a responsible intracardiac defect is frequently curative with immediate resolution of the positional hypoxaemia. Intrapulmonary causes carry the prognosis of the underlying pulmonary or hepatic disease.",
-  "pitfalls": [
-   "Measuring oxygenation only supine and thereby missing orthodeoxia",
-   "Assuming an incidental patent foramen ovale is sufficient without seeking the anatomical factor that makes it shunt",
-   "Failing to distinguish intracardiac from intrapulmonary shunting before intervention",
-   "Attributing positional breathlessness to deconditioning or anxiety",
-   "Overlooking hepatopulmonary syndrome as an intrapulmonary cause"
-  ],
-  "references": [
-   "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial septal defect, which frequently resolves the positional hypoxaemia in intracardiac disease",
-   "Treat intrapulmonary shunts by embolising pulmonary arteriovenous malformations and managing hepatopulmonary syndrome, with liver transplantation the definitive option where indicated",
-   "Give supplemental oxygen for symptomatic relief, recognising it only partially corrects true-shunt hypoxaemia",
-   "Use positional measures such as recumbency to relieve upright breathlessness and desaturation pending definitive treatment",
-   "Investigate and address the underlying anatomical or hepatic driver, such as aortic root distortion or chronic liver disease",
-   "Coordinate care across cardiology, interventional specialists and hepatology, and monitor supine and upright oxygenation to confirm response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "platypnea_orthodeoxia_syndrome-pathway",
-   "title": "Platypnea-orthodeoxia syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing upright and improve on lying flat",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe positional hypoxaemia limiting the patient to a recumbent posture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Arterial blood gases measured both supine and upright to document orthodeoxia, Contrast (agitated saline) echocardiography with postural manoeuvres to localise the shunt, Transoesophageal echocardiography to define"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial septal defect, which frequently resolves the positional hypoxaemia in intracardiac disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring oxygenation only supine and thereby missing orthodeoxia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of platypnea-orthodeoxia syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "platypnea_orthodeoxia_syndrome-matrix",
-   "title": "Platypnea-orthodeoxia syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Pulmonary vascular",
+  "specialty": "Pulmonary Hypertension",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing upright and improve on lying flat",
+      "Reflects a posture-dependent right-to-left shunt, most often intracardiac through a patent foramen ovale or atrial septal defect, but sometimes intrapulmonary",
+      "Intracardiac cases frequently require an anatomical or functional distortion, such as an enlarged or unfolded aorta, that redirects venous flow across the septum when upright",
+      "Intrapulmonary causes include hepatopulmonary syndrome and pulmonary arteriovenous malformations, especially with basal-predominant shunting",
+      "Contrast (bubble) echocardiography, ideally with postural manoeuvres, is central to localising the shunt as intracardiac or intrapulmonary",
+      "Oxygen supplementation often only partially corrects the hypoxaemia because of true shunt physiology",
+      "Percutaneous or surgical closure of an intracardiac defect can be curative, whereas intrapulmonary causes are managed according to their underlying disease"
     ],
-    [
-     "Key Investigations",
-     "Arterial blood gases measured both supine and upright to document orthodeoxia, Contrast (agitated saline) echocardiography with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Platypnoea-orthodeoxia syndrome arises from a right-to-left shunt whose magnitude increases in the upright posture. In the intracardiac form there is an interatrial communication such as a patent foramen ovale, but the shunt only becomes haemodynamically significant when an additional anatomical or functional factor, for example an elongated or dilated aortic root, right pneumonectomy, or pericardial change, alters the geometry of the atria so that inferior vena caval flow is preferentially directed across the septum on standing. In the intrapulmonary form, dilated or abnormal vessels at the lung bases, as seen in hepatopulmonary syndrome or arteriovenous malformations, receive more perfusion when upright, increasing the fraction of venous blood bypassing gas exchange. In both mechanisms, standing augments the shunt and produces the characteristic positional hypoxaemia and breathlessness.",
+    "additionalDifferentials": [
+      "Hepatopulmonary syndrome",
+      "Pulmonary arteriovenous malformation (e.g. hereditary haemorrhagic telangiectasia)",
+      "Patent foramen ovale or atrial septal defect without other cause",
+      "Chronic parenchymal lung disease with basal shunting",
+      "Autonomic or orthostatic disorders mimicking positional symptoms",
+      "Post-pneumonectomy anatomical distortion"
     ],
-    [
-     "Primary Differentials",
-     "Hepatopulmonary syndrome, Pulmonary arteriovenous malformation (e.g. hereditary haemorrhagic telangiectasia), Patent foramen",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Arterial blood gases measured both supine and upright to document orthodeoxia",
+      "Contrast (agitated saline) echocardiography with postural manoeuvres to localise the shunt",
+      "Transoesophageal echocardiography to define interatrial anatomy",
+      "CT or MR imaging to identify aortic, mediastinal, or pulmonary vascular abnormalities",
+      "Technetium macroaggregated albumin scan to quantify an intrapulmonary shunt",
+      "Assessment for liver disease when hepatopulmonary syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe positional hypoxaemia limiting the patient to a recumbent posture",
+      "Hypoxaemia poorly responsive to supplemental oxygen, indicating true shunt",
+      "Paradoxical embolic events such as stroke through an intracardiac shunt",
+      "Rapidly progressive desaturation suggesting worsening shunt fraction"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring oxygenation only supine and thereby missing orthodeoxia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause; closure of a responsible intracardiac defect is frequently curative with immediate resolution of the positional hypoxaemia. Intrapulmonary causes carry the prognosis of the underlying pulmonary or hepatic disease.",
+    "pitfalls": [
+      "Measuring oxygenation only supine and thereby missing orthodeoxia",
+      "Assuming an incidental patent foramen ovale is sufficient without seeking the anatomical factor that makes it shunt",
+      "Failing to distinguish intracardiac from intrapulmonary shunting before intervention",
+      "Attributing positional breathlessness to deconditioning or anxiety",
+      "Overlooking hepatopulmonary syndrome as an intrapulmonary cause"
+    ],
+    "references": [
+      "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial septal defect, which frequently resolves the positional hypoxaemia in intracardiac disease",
+      "Treat intrapulmonary shunts by embolising pulmonary arteriovenous malformations and managing hepatopulmonary syndrome, with liver transplantation the definitive option where indicated",
+      "Give supplemental oxygen for symptomatic relief, recognising it only partially corrects true-shunt hypoxaemia",
+      "Use positional measures such as recumbency to relieve upright breathlessness and desaturation pending definitive treatment",
+      "Investigate and address the underlying anatomical or hepatic driver, such as aortic root distortion or chronic liver disease",
+      "Coordinate care across cardiology, interventional specialists and hepatology, and monitor supine and upright oxygenation to confirm response"
     ]
-   ],
-   "caption": "Overview comparison matrix for platypnea-orthodeoxia syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "platypnea-orthodeoxia-syndrome-real-image",
-   "title": "Platypnea-orthodeoxia syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "platypnea_orthodeoxia_syndrome-pathway",
+      "title": "Platypnea-orthodeoxia syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing upright and improve on lying flat",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe positional hypoxaemia limiting the patient to a recumbent posture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Arterial blood gases measured both supine and upright to document orthodeoxia, Contrast (agitated saline) echocardiography with postural manoeuvres to localise the shunt, Transoesophageal echocardiography to define"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial septal defect, which frequently resolves the positional hypoxaemia in intracardiac disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring oxygenation only supine and thereby missing orthodeoxia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of platypnea-orthodeoxia syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "platypnea_orthodeoxia_syndrome-matrix",
+      "title": "Platypnea-orthodeoxia syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by breathlessness (platypnoea) and arterial desaturation (orthodeoxia) that appear or worsen on sitting or standing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gases measured both supine and upright to document orthodeoxia, Contrast (agitated saline) echocardiography with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hepatopulmonary syndrome, Pulmonary arteriovenous malformation (e.g. hereditary haemorrhagic telangiectasia), Patent foramen",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Close the responsible interatrial communication, most often by percutaneous device closure of a patent foramen ovale or atrial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring oxygenation only supine and thereby missing orthodeoxia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for platypnea-orthodeoxia syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "platypnea_orthodeoxia_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial blood gases, supine and upright",
+          "cells": [
+            {
+              "text": "Orthodeoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast (agitated saline) echocardiography with postural manoeuvres",
+          "cells": [
+            {
+              "text": "Shunt location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Interatrial anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR imaging",
+          "cells": [
+            {
+              "text": "Aortic, mediastinal or pulmonary vascular abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Technetium macroaggregated albumin scan",
+          "cells": [
+            {
+              "text": "Intrapulmonary shunt quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease assessment",
+          "cells": [
+            {
+              "text": "Hepatopulmonary syndrome, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "platypnea_orthodeoxia_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatopulmonary syndrome",
+          "cells": [
+            {
+              "text": "Liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Hereditary haemorrhagic telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "platypnea_orthodeoxia_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Closure of interatrial communication",
+          "cells": [
+            {
+              "text": "Usually percutaneous device closure of a patent foramen ovale or atrial septal defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrapulmonary shunt",
+          "cells": [
+            {
+              "text": "Embolisation of pulmonary arteriovenous malformations; management of hepatopulmonary syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen",
+          "cells": [
+            {
+              "text": "For symptom relief; only partially corrects true-shunt hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positional measures",
+          "cells": [
+            {
+              "text": "Recumbency to relieve upright breathlessness pending definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying driver",
+          "cells": [
+            {
+              "text": "Address aortic root distortion or chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordination",
+          "cells": [
+            {
+              "text": "Cardiology, interventional specialists and hepatology; monitor supine and upright oxygenation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "platypnea_orthodeoxia_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Platypnea-orthodeoxia syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness and desaturation when upright, improving when recumbent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe positional hypoxaemia, poor oxygen response, paradoxical embolism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for paradoxical embolic events or progressive desaturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Supine and upright blood gases; agitated saline echo; TOE; CT or MR; albumin scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does upright hypoxaemia with an interatrial shunt on contrast echo confirm the syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hepatopulmonary syndrome, pulmonary AVM or positional autonomic disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Close the responsible interatrial communication, usually by percutaneous device",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Embolise pulmonary arteriovenous malformations and manage hepatopulmonary syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen for symptoms; it only partly corrects shunt hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Recumbency to relieve upright breathlessness pending definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Address the underlying driver, such as aortic root distortion or chronic liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often curative when an intracardiac defect is closed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

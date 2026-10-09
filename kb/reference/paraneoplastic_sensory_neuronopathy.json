@@ -1,176 +1,449 @@
 {
- "id": "paraneoplastic_sensory_neuronopathy",
- "name": "paraneoplastic sensory neuronopathy",
- "aliases": [
-  "subacute sensory neuronopathy",
-  "Denny-Brown syndrome"
- ],
- "class": "non_infective",
- "system": "peripheral nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs as well as the distal extremities.",
-   "Prominent sensory ataxia and pseudoathetosis with preserved muscle strength reflect selective large-fibre dorsal root ganglion loss.",
-   "Early painful paraesthesiae and loss of all sensory modalities, with areflexia, are characteristic.",
-   "Anti-Hu (ANNA-1) with small-cell lung carcinoma is the commonest association; it may occur in isolation or as part of paraneoplastic encephalomyelitis.",
-   "Nerve conduction studies show reduced or absent sensory nerve action potentials with normal or near-normal motor conduction.",
-   "The neuronopathy frequently precedes the cancer diagnosis, so a thorough malignancy search is essential.",
-   "Response to immunotherapy is usually poor, and tumour treatment offers the best chance of stabilisation.",
-   "Key mimics to exclude are Sjogren-related ganglionopathy, platinum chemotherapy toxicity and pyridoxine excess."
+  "id": "paraneoplastic_sensory_neuronopathy",
+  "name": "paraneoplastic sensory neuronopathy",
+  "aliases": [
+    "subacute sensory neuronopathy",
+    "Denny-Brown syndrome"
   ],
-  "pathophysiology": "An immune response against intracellular onconeural antigens (most often HuD, expressed by small-cell lung carcinoma) targets the sensory neurons of the dorsal root ganglia. Cytotoxic T-cell mediated inflammation and neuronal destruction within the ganglia produce a ganglionopathy affecting both large and small fibres. Because the primary sensory cell body is destroyed, deficits are non-length-dependent and largely irreversible, and secondary degeneration of the central posterior columns and peripheral sensory axons follows.",
-  "additionalDifferentials": [
-   "Sjogren syndrome-associated sensory ganglionopathy",
-   "platinum (cisplatin/oxaliplatin) chemotherapy neurotoxicity",
-   "pyridoxine (vitamin B6) toxicity",
-   "vitamin B12 or vitamin E deficiency",
-   "chronic inflammatory demyelinating polyradiculoneuropathy (sensory variant)",
-   "hereditary sensory and autonomic neuropathy",
-   "tabes dorsalis"
-  ],
-  "additionalInvestigations": [
-   "serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel",
-   "nerve conduction studies and EMG demonstrating a sensory ganglionopathy pattern",
-   "anti-Ro/La antibodies and Schirmer test to assess for Sjogren syndrome",
-   "whole-body FDG-PET/CT and CT chest for occult malignancy",
-   "MRI spine looking for posterior column T2 hyperintensity",
-   "vitamin B12 and vitamin B6 levels",
-   "CSF analysis for pleocytosis and oligoclonal bands"
-  ],
-  "redFlags": [
-   "rapid progression to disabling sensory ataxia and loss of ambulation",
-   "associated autonomic failure or gastrointestinal dysmotility",
-   "constitutional features (weight loss, night sweats) suggesting malignancy",
-   "bulbar or respiratory signs indicating overlap with encephalomyelitis"
-  ],
-  "prognosis": "Recovery of sensory function is usually poor because the ganglion neurons are destroyed; the realistic therapeutic goal is stabilisation through treatment of the underlying tumour. Functional outcome is often limited by persistent sensory ataxia.",
-  "pitfalls": [
-   "Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern.",
-   "Failing to screen for Sjogren syndrome, the principal non-paraneoplastic cause.",
-   "Not pursuing small-cell lung carcinoma when anti-Hu antibodies are positive.",
-   "Overlooking a drug or vitamin cause such as platinum agents or pyridoxine excess."
-  ],
-  "references": [
-   "Camdessanche JP, et al. The pattern and diagnostic criteria of sensory neuronopathy. Brain.",
-   "Graus F, Delattre JY, et al. Recommended diagnostic criteria for paraneoplastic neurological syndromes.",
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition."
-  ],
-  "crossLinks": [],
-  "management": [
-   "Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since tumour control offers the only realistic chance of halting neuronal loss",
-   "Trial immunotherapy such as corticosteroids, intravenous immunoglobulin, plasma exchange or cytotoxic immunosuppression, recognising that response is frequently limited once dorsal root ganglion neurons are destroyed",
-   "Provide neuropathic pain relief with gabapentinoids, tricyclic antidepressants or duloxetine for the painful paraesthesiae",
-   "Refer for physiotherapy and occupational therapy targeting sensory ataxia and pseudoathetosis, with gait aids and fall-prevention strategies to preserve function",
-   "Repeat whole-body imaging surveillance if the initial malignancy search is negative, as the neuronopathy often precedes the cancer diagnosis",
-   "Coordinate care through a neurology and oncology multidisciplinary team with neurorehabilitation input",
-   "Monitor for evolution into wider paraneoplastic encephalomyelitis, prompting reassessment and escalation of therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paraneoplastic_sensory_neuronopathy-pathway",
-   "title": "paraneoplastic sensory neuronopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs as well as the distal extremities.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid progression to disabling sensory ataxia and loss of ambulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel, nerve conduction studies and EMG demonstrating a sensory ganglionopathy pattern, anti-Ro/La antibodies and Schirmer test to assess for Sjogren syndrome"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since tumour control offers the only realistic chance of halting neuronal loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paraneoplastic sensory neuronopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "paraneoplastic_sensory_neuronopathy-matrix",
-   "title": "paraneoplastic sensory neuronopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "peripheral nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs as well as the distal extremities.",
+      "Prominent sensory ataxia and pseudoathetosis with preserved muscle strength reflect selective large-fibre dorsal root ganglion loss.",
+      "Early painful paraesthesiae and loss of all sensory modalities, with areflexia, are characteristic.",
+      "Anti-Hu (ANNA-1) with small-cell lung carcinoma is the commonest association; it may occur in isolation or as part of paraneoplastic encephalomyelitis.",
+      "Nerve conduction studies show reduced or absent sensory nerve action potentials with normal or near-normal motor conduction.",
+      "The neuronopathy frequently precedes the cancer diagnosis, so a thorough malignancy search is essential.",
+      "Response to immunotherapy is usually poor, and tumour treatment offers the best chance of stabilisation.",
+      "Key mimics to exclude are Sjogren-related ganglionopathy, platinum chemotherapy toxicity and pyridoxine excess."
     ],
-    [
-     "Key Investigations",
-     "serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel, nerve conduction studies and EMG demonstrating a sensory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An immune response against intracellular onconeural antigens (most often HuD, expressed by small-cell lung carcinoma) targets the sensory neurons of the dorsal root ganglia. Cytotoxic T-cell mediated inflammation and neuronal destruction within the ganglia produce a ganglionopathy affecting both large and small fibres. Because the primary sensory cell body is destroyed, deficits are non-length-dependent and largely irreversible, and secondary degeneration of the central posterior columns and peripheral sensory axons follows.",
+    "additionalDifferentials": [
+      "Sjogren syndrome-associated sensory ganglionopathy",
+      "platinum (cisplatin/oxaliplatin) chemotherapy neurotoxicity",
+      "pyridoxine (vitamin B6) toxicity",
+      "vitamin B12 or vitamin E deficiency",
+      "chronic inflammatory demyelinating polyradiculoneuropathy (sensory variant)",
+      "hereditary sensory and autonomic neuropathy",
+      "tabes dorsalis"
     ],
-    [
-     "Primary Differentials",
-     "Sjogren syndrome-associated sensory ganglionopathy, platinum (cisplatin/oxaliplatin) chemotherapy neurotoxicity, pyridoxine",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel",
+      "nerve conduction studies and EMG demonstrating a sensory ganglionopathy pattern",
+      "anti-Ro/La antibodies and Schirmer test to assess for Sjogren syndrome",
+      "whole-body FDG-PET/CT and CT chest for occult malignancy",
+      "MRI spine looking for posterior column T2 hyperintensity",
+      "vitamin B12 and vitamin B6 levels",
+      "CSF analysis for pleocytosis and oligoclonal bands"
     ],
-    [
-     "Management Strategy",
-     "Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid progression to disabling sensory ataxia and loss of ambulation",
+      "associated autonomic failure or gastrointestinal dysmotility",
+      "constitutional features (weight loss, night sweats) suggesting malignancy",
+      "bulbar or respiratory signs indicating overlap with encephalomyelitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery of sensory function is usually poor because the ganglion neurons are destroyed; the realistic therapeutic goal is stabilisation through treatment of the underlying tumour. Functional outcome is often limited by persistent sensory ataxia.",
+    "pitfalls": [
+      "Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern.",
+      "Failing to screen for Sjogren syndrome, the principal non-paraneoplastic cause.",
+      "Not pursuing small-cell lung carcinoma when anti-Hu antibodies are positive.",
+      "Overlooking a drug or vitamin cause such as platinum agents or pyridoxine excess."
+    ],
+    "references": [
+      "Camdessanche JP, et al. The pattern and diagnostic criteria of sensory neuronopathy. Brain.",
+      "Graus F, Delattre JY, et al. Recommended diagnostic criteria for paraneoplastic neurological syndromes.",
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition."
+    ],
+    "crossLinks": [],
+    "management": [
+      "Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since tumour control offers the only realistic chance of halting neuronal loss",
+      "Trial immunotherapy such as corticosteroids, intravenous immunoglobulin, plasma exchange or cytotoxic immunosuppression, recognising that response is frequently limited once dorsal root ganglion neurons are destroyed",
+      "Provide neuropathic pain relief with gabapentinoids, tricyclic antidepressants or duloxetine for the painful paraesthesiae",
+      "Refer for physiotherapy and occupational therapy targeting sensory ataxia and pseudoathetosis, with gait aids and fall-prevention strategies to preserve function",
+      "Repeat whole-body imaging surveillance if the initial malignancy search is negative, as the neuronopathy often precedes the cancer diagnosis",
+      "Coordinate care through a neurology and oncology multidisciplinary team with neurorehabilitation input",
+      "Monitor for evolution into wider paraneoplastic encephalomyelitis, prompting reassessment and escalation of therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for paraneoplastic sensory neuronopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paraneoplastic-sensory-neuronopathy-real-image",
-   "title": "paraneoplastic sensory neuronopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "paraneoplastic_sensory_neuronopathy-pathway",
+      "title": "paraneoplastic sensory neuronopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs as well as the distal extremities.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid progression to disabling sensory ataxia and loss of ambulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel, nerve conduction studies and EMG demonstrating a sensory ganglionopathy pattern, anti-Ro/La antibodies and Schirmer test to assess for Sjogren syndrome"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since tumour control offers the only realistic chance of halting neuronal loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paraneoplastic sensory neuronopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-matrix",
+      "title": "paraneoplastic sensory neuronopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Subacute, often asymmetric and multifocal sensory loss that is non-length-dependent, affecting the face, trunk and proximal limbs",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "serum and CSF anti-Hu (ANNA-1) and paraneoplastic antibody panel, nerve conduction studies and EMG demonstrating a sensory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sjogren syndrome-associated sensory ganglionopathy, platinum (cisplatin/oxaliplatin) chemotherapy neurotoxicity, pyridoxine",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Search for and treat the underlying malignancy (most often small-cell lung carcinoma) as the definitive intervention, since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying the deficit as a length-dependent peripheral neuropathy and missing the non-length-dependent pattern.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paraneoplastic sensory neuronopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-Hu (ANNA-1) panel",
+          "cells": [
+            {
+              "text": "Onconeural antibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Sensory ganglionopathy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-Ro/La antibodies and Schirmer test",
+          "cells": [
+            {
+              "text": "Sjogren syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body FDG-PET/CT and CT chest",
+          "cells": [
+            {
+              "text": "Occult malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI spine",
+          "cells": [
+            {
+              "text": "Posterior column T2 hyperintensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and B6 levels",
+          "cells": [
+            {
+              "text": "Deficiency mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sjogren syndrome-associated ganglionopathy",
+          "cells": [
+            {
+              "text": "Principal non-paraneoplastic cause; antibodies and Schirmer test screen it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum chemotherapy or pyridoxine toxicity",
+          "cells": [
+            {
+              "text": "Drug or vitamin exposure is the clue; B6 level and history separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying malignancy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Most often small-cell lung carcinoma; the only realistic chance of halting loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotherapy trial",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Corticosteroids, IVIG, plasma exchange or cytotoxic agents; response often limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain relief",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Gabapentinoids, tricyclic antidepressants or duloxetine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Physiotherapy and occupational therapy for sensory ataxia, with gait aids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraneoplastic_sensory_neuronopathy-dx-mgmt",
+      "title": "Diagnosis and management of paraneoplastic sensory neuronopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute asymmetric sensory loss, non-length-dependent, with painful paraesthesiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid sensory ataxia, autonomic failure or constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology and neurology review for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Hu panel, NCS and EMG, Sjogren screen, PET/CT, MRI spine, B12 and B6",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is anti-Hu positive with small-cell carcinoma, and mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sjogren ganglionopathy, platinum toxicity, pyridoxine excess or CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Search for and treat the underlying malignancy as the definitive intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of corticosteroids, IVIG, plasma exchange or cytotoxic immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic pain relief with gabapentinoids, tricyclics or duloxetine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for sensory ataxia, with fall prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sensory recovery usually poor; aim is stabilisation through tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

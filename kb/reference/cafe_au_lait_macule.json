@@ -1,171 +1,215 @@
 {
- "id": "cafe_au_lait_macule",
- "name": "Cafe-au-lait macule",
- "aliases": [
-  "café-au-lait macule",
-  "CALM",
-  "café-au-lait spot"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
-   "One or a few lesions are common in the general population and usually of no significance",
-   "Six or more macules exceeding 5 mm before puberty, or 15 mm after puberty, is a diagnostic criterion for neurofibromatosis type 1",
-   "Smooth ('coast of California') borders are typical of neurofibromatosis type 1, whereas irregular ('coast of Maine') borders suggest McCune-Albright syndrome",
-   "Axillary or inguinal freckling (Crowe sign) alongside multiple macules further supports neurofibromatosis type 1",
-   "The pigment is epidermal and is accentuated on Wood-lamp examination",
-   "Assessment should include counting and measuring lesions and screening for other features of neurocutaneous syndromes"
+  "id": "cafe_au_lait_macule",
+  "name": "Cafe-au-lait macule",
+  "aliases": [
+    "café-au-lait macule",
+    "CALM",
+    "café-au-lait spot"
   ],
-  "pathophysiology": "Café-au-lait macules result from increased melanin within basal keratinocytes and melanocytes, often with giant melanosomes (macromelanosomes) on microscopy, while melanocyte numbers remain broadly normal. In neurofibromatosis type 1, loss of neurofibromin dysregulates the RAS signalling pathway and enhances melanocyte activity, accounting for the multiple macules. In McCune-Albright syndrome an activating GNAS mutation similarly increases melanogenesis, producing larger lesions with irregular borders.",
-  "additionalDifferentials": [
-   "Becker naevus",
-   "Congenital melanocytic naevus",
-   "Naevus spilus (speckled lentiginous naevus)",
-   "Segmental pigmentation disorder",
-   "Urticaria pigmentosa or solitary mastocytoma",
-   "Post-inflammatory hyperpigmentation"
-  ],
-  "additionalInvestigations": [
-   "Wood-lamp examination to confirm epidermal pigment",
-   "Full skin examination for freckling and neurofibromas",
-   "Counting and measuring the macules against diagnostic thresholds",
-   "Ophthalmology assessment for Lisch nodules and genetics referral where a syndrome is suspected",
-   "Family history and review for features of McCune-Albright syndrome"
-  ],
-  "redFlags": [
-   "Six or more macules with additional features of neurofibromatosis type 1",
-   "Irregular-bordered macules with precocious puberty or bony changes suggesting McCune-Albright syndrome",
-   "Associated developmental delay, seizures or other neurological concerns",
-   "A pigmented lesion showing atypical change that warrants exclusion of another diagnosis"
-  ],
-  "prognosis": "Individual macules are entirely benign and permanent; their clinical importance lies in the possibility of an underlying neurocutaneous or endocrine syndrome when they are multiple or atypical.",
-  "pitfalls": [
-   "Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1",
-   "Failing to measure and count lesions against the diagnostic criteria",
-   "Confusing a café-au-lait macule with a Becker naevus or naevus spilus",
-   "Overlooking the irregular borders and endocrine clues of McCune-Albright syndrome"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that isolated macules are benign and require no active treatment.",
-   "Assess against diagnostic thresholds and examine for additional features to identify neurofibromatosis type 1 or McCune-Albright syndrome.",
-   "Refer to clinical genetics and, where neurofibromatosis is suspected, to ophthalmology for Lisch nodule assessment.",
-   "Arrange surveillance for evolving neurocutaneous or endocrine syndrome features when lesions are multiple or atypical.",
-   "Offer cosmetic pigment laser therapy only where lesions cause distress, counselling on recurrence.",
-   "Provide genetic counselling and family assessment when an underlying heritable syndrome is confirmed."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cafe_au_lait_macule-pathway",
-   "title": "Cafe-au-lait macule: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Six or more macules with additional features of neurofibromatosis type 1",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Wood-lamp examination to confirm epidermal pigment, Full skin examination for freckling and neurofibromas, Counting and measuring the macules against diagnostic thresholds"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that isolated macules are benign and require no active treatment."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cafe-au-lait macule."
-  }
- ],
- "tables": [
-  {
-   "id": "cafe_au_lait_macule-matrix",
-   "title": "Cafe-au-lait macule: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
+      "One or a few lesions are common in the general population and usually of no significance",
+      "Six or more macules exceeding 5 mm before puberty, or 15 mm after puberty, is a diagnostic criterion for neurofibromatosis type 1",
+      "Smooth ('coast of California') borders are typical of neurofibromatosis type 1, whereas irregular ('coast of Maine') borders suggest McCune-Albright syndrome",
+      "Axillary or inguinal freckling (Crowe sign) alongside multiple macules further supports neurofibromatosis type 1",
+      "The pigment is epidermal and is accentuated on Wood-lamp examination",
+      "Assessment should include counting and measuring lesions and screening for other features of neurocutaneous syndromes"
     ],
-    [
-     "Key Investigations",
-     "Wood-lamp examination to confirm epidermal pigment, Full skin examination for freckling and neurofibromas, Counting and measuring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Café-au-lait macules result from increased melanin within basal keratinocytes and melanocytes, often with giant melanosomes (macromelanosomes) on microscopy, while melanocyte numbers remain broadly normal. In neurofibromatosis type 1, loss of neurofibromin dysregulates the RAS signalling pathway and enhances melanocyte activity, accounting for the multiple macules. In McCune-Albright syndrome an activating GNAS mutation similarly increases melanogenesis, producing larger lesions with irregular borders.",
+    "additionalDifferentials": [
+      "Becker naevus",
+      "Congenital melanocytic naevus",
+      "Naevus spilus (speckled lentiginous naevus)",
+      "Segmental pigmentation disorder",
+      "Urticaria pigmentosa or solitary mastocytoma",
+      "Post-inflammatory hyperpigmentation"
     ],
-    [
-     "Primary Differentials",
-     "Becker naevus, Congenital melanocytic naevus, Naevus spilus (speckled lentiginous naevus)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Wood-lamp examination to confirm epidermal pigment",
+      "Full skin examination for freckling and neurofibromas",
+      "Counting and measuring the macules against diagnostic thresholds",
+      "Ophthalmology assessment for Lisch nodules and genetics referral where a syndrome is suspected",
+      "Family history and review for features of McCune-Albright syndrome"
     ],
-    [
-     "Management Strategy",
-     "Reassure that isolated macules are benign and require no active treatment.",
-     "Core treatment modality"
+    "redFlags": [
+      "Six or more macules with additional features of neurofibromatosis type 1",
+      "Irregular-bordered macules with precocious puberty or bony changes suggesting McCune-Albright syndrome",
+      "Associated developmental delay, seizures or other neurological concerns",
+      "A pigmented lesion showing atypical change that warrants exclusion of another diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual macules are entirely benign and permanent; their clinical importance lies in the possibility of an underlying neurocutaneous or endocrine syndrome when they are multiple or atypical.",
+    "pitfalls": [
+      "Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1",
+      "Failing to measure and count lesions against the diagnostic criteria",
+      "Confusing a café-au-lait macule with a Becker naevus or naevus spilus",
+      "Overlooking the irregular borders and endocrine clues of McCune-Albright syndrome"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that isolated macules are benign and require no active treatment.",
+      "Assess against diagnostic thresholds and examine for additional features to identify neurofibromatosis type 1 or McCune-Albright syndrome.",
+      "Refer to clinical genetics and, where neurofibromatosis is suspected, to ophthalmology for Lisch nodule assessment.",
+      "Arrange surveillance for evolving neurocutaneous or endocrine syndrome features when lesions are multiple or atypical.",
+      "Offer cosmetic pigment laser therapy only where lesions cause distress, counselling on recurrence.",
+      "Provide genetic counselling and family assessment when an underlying heritable syndrome is confirmed."
     ]
-   ],
-   "caption": "Overview comparison matrix for cafe-au-lait macule."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cafe-au-lait-macule-real-image",
-   "title": "Cafe-au-lait macule: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cafe_au_lait_macule-pathway",
+      "title": "Cafe-au-lait macule: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Six or more macules with additional features of neurofibromatosis type 1",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Wood-lamp examination to confirm epidermal pigment, Full skin examination for freckling and neurofibromas, Counting and measuring the macules against diagnostic thresholds"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that isolated macules are benign and require no active treatment."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cafe-au-lait macule."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cafe_au_lait_macule-matrix",
+      "title": "Cafe-au-lait macule: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Well-demarcated, uniformly pigmented light- to dark-brown macule or patch, usually present from birth or early childhood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Wood-lamp examination to confirm epidermal pigment, Full skin examination for freckling and neurofibromas, Counting and measuring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Becker naevus, Congenital melanocytic naevus, Naevus spilus (speckled lentiginous naevus)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that isolated macules are benign and require no active treatment.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing multiple café-au-lait macules without assessing for neurofibromatosis type 1",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cafe-au-lait macule."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cafe_au_lait_macule-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements for café-au-lait macules",
+      "rowHeader": "Criterion",
+      "columns": ["Finding or threshold"],
+      "rows": [
+        {"parameter": "Number and size of macules before puberty", "cells": [{"text": "Six or more, each over 5 mm"}], "cite": "c1"},
+        {"parameter": "Number and size of macules after puberty", "cells": [{"text": "Six or more, each over 15 mm"}], "cite": "c1"},
+        {"parameter": "Border pattern", "cells": [{"text": "Smooth borders suggest neurofibromatosis type 1; irregular borders suggest McCune-Albright syndrome"}], "cite": "c1"},
+        {"parameter": "Axillary or inguinal freckling (Crowe sign)", "cells": [{"text": "Supports neurofibromatosis type 1"}], "cite": "c1"},
+        {"parameter": "Wood-lamp examination", "cells": [{"text": "Confirms epidermal pigment"}], "cite": "c1"},
+        {"parameter": "Ophthalmology assessment", "cells": [{"text": "Lisch nodules where neurofibromatosis is suspected"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cafe_au_lait_macule-treatment",
+      "kind": "treatment",
+      "title": "Management options for café-au-lait macules",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Isolated macules are benign and need no active treatment"}, {"text": "Common in the general population"}], "cite": "c1"},
+        {"parameter": "Diagnostic assessment", "cells": [{"text": "Count and measure lesions; examine for neurofibromatosis type 1 or McCune-Albright features"}, {"text": "Thresholds apply"}], "cite": "c1"},
+        {"parameter": "Specialist referral", "cells": [{"text": "Clinical genetics; ophthalmology for Lisch nodules when neurofibromatosis is suspected"}, {"text": "Heritable syndrome"}], "cite": "c1"},
+        {"parameter": "Surveillance", "cells": [{"text": "Evolving neurocutaneous or endocrine features in multiple or atypical lesions"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Cosmetic laser", "cells": [{"text": "Only where lesions cause distress; counsel on recurrence"}, {"text": "Optional"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "When an underlying heritable syndrome is confirmed; family assessment"}, {"text": "Family"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cafe_au_lait_macule-dx-mgmt",
+      "title": "Diagnosis and management of café-au-lait macules",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Well-demarcated uniformly pigmented brown macule present from early childhood", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: six or more macules over threshold size, or irregular borders with precocious puberty or bony change?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: clinical genetics referral; endocrine review if precocious puberty", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Count and measure macules; check axillary and inguinal freckling; Wood-lamp examination", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Neurofibromatosis type 1 or McCune-Albright features present?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Ophthalmology for Lisch nodules; genetic counselling; surveillance", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "Isolated macule: reassurance, no active treatment", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Macules are permanent and benign; significance lies in the underlying syndrome", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

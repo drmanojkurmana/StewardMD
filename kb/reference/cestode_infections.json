@@ -1,213 +1,700 @@
 {
- "id": "cestode_infections",
- "name": "Cestode (Tapeworm) Infections",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 242,
- "page": 1832,
- "aliases": [
-  "neurocysticercosis",
-  "Taenia",
-  "echinococcosis",
-  "hydatid disease"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1832",
-  "clinicalPearls": [
-   "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and somatic/larval-tissue infection (e.g., cysticercosis, hydatid disease) (Harrison 22e p.1832).",
-   "Neurocysticercosis is the most common parasitic disease of the CNS worldwide; humans acquire it by ingesting food contaminated with Taenia solium eggs, not by eating cysticerci-containing pork (which instead causes intestinal taeniasis) (Harrison 22e p.1833, p.1138).",
-   "Seizures are the most frequent manifestation of neurocysticercosis and are associated with inflammation of brain parenchyma around the cysticercus; new-onset partial seizures with or without secondary generalization are the classic presentation (Harrison 22e p.1833, p.1138).",
-   "On neuroimaging a cystic lesion with a mural nodule representing the scolex ('dot-in-hole') is diagnostic of neurocysticercosis; lesions evolve through vesicular, colloidal, granulonodular and nodular-calcified stages (Harrison 22e p.1833-1834, p.1138).",
-   "CT is more sensitive for calcified lesions, whereas MRI is more sensitive for small cystic lesions, scolices and enhancement; FIESTA/3D-CISS sequences best detect ventricular and subarachnoid cysts (Harrison 22e p.1834).",
-   "The enzyme-linked immunoelectrotransfer blot (EITB) using lentil-lectin-purified glycoproteins is >99% specific/sensitive in patients with multiple cysts, but patients with a single intracranial lesion or only calcifications may be seronegative; serum is more sensitive than CSF (Harrison 22e p.1834).",
-   "Crude-antigen ELISA antibody tests have high false-positive and false-negative rates and should be avoided for neurocysticercosis (Harrison 22e p.1834).",
-   "In endemic-area patients with a single enhancing 5-20 mm round CT lesion, seizures, a normal exam and no systemic disease (no fever, adenopathy or chest abnormality), the lesion is almost always neurocysticercosis (validated in India) (Harrison 22e p.1834).",
-   "Antiparasitic treatment of neurocysticercosis is never an emergency; initial management focuses on controlling seizures and hydrocephalus and on excluding intraocular disease before any cysticidal therapy (Harrison 22e p.1834).",
-   "High-dose glucocorticoids should always accompany antiparasitic therapy of neurocysticercosis, since dying parasites provoke an inflammatory response that can worsen seizures or hydrocephalus (Harrison 22e p.1834).",
-   "Bruns' syndrome is intermittent acute hydrocephalus triggered by positional change, caused by a ventricular cysticercus acting as a ball valve (Harrison 22e p.1833).",
-   "In Latin America and immigrants from Latin America, T. solium (neurocysticercosis) is the most common cause of brain abscess / focal CNS mass lesion (Harrison 22e p.1136).",
-   "Echinococcosis (hydatid disease) is larval Echinococcus infection: E. granulosus sensu lato causes unilocular cystic hydatid disease; E. multilocularis causes locally invasive, tumor-like alveolar disease (Harrison 22e p.1835-1836).",
-   "In cystic echinococcosis the liver is involved in about two-thirds and the lungs in about 20% of cases; alveolar echinococcosis involves the liver in nearly all cases (Harrison 22e p.1836).",
-   "Echinococcal cysts often remain asymptomatic for years and are frequently found incidentally on x-ray or ultrasound (Harrison 22e p.1836).",
-   "Identification of daughter cysts within a larger cyst, or eggshell/mural calcification on CT, is diagnostic of cystic echinococcosis; 'hydatid sand' is visible protoscolices/brood capsules within cyst fluid (Harrison 22e p.1837).",
-   "ELISA/immunoblot serology is positive in about 90% of hepatic hydatid disease but only about 50% of pulmonary cysts, and a negative test cannot exclude echinococcosis (Harrison 22e p.1837).",
-   "The fish tapeworm Dibothriocephalus latus (formerly Diphyllobothrium latum) is the longest human tapeworm (up to 25 m) and its avid vitamin B12 receptors can cause B12 deficiency with megaloblastic/pernicious-type anemia and neurologic sequelae (Harrison 22e p.1838-1839).",
-   "Rodentolepis nana (dwarf tapeworm, formerly Hymenolepis nana) is the most common human cestode infection and the only one not requiring an intermediate host, perpetuated by intestinal autoinfection (Harrison 22e p.1838)."
+  "id": "cestode_infections",
+  "name": "Cestode (Tapeworm) Infections",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 242,
+  "page": 1832,
+  "aliases": [
+    "neurocysticercosis",
+    "Taenia",
+    "echinococcosis",
+    "hydatid disease"
   ],
-  "pathophysiology": "Cestodes are segmented flatworms (Platyhelminthes, subphylum Cestoda) whose adult worms live in the gut of the definitive host while larval cystic forms inhabit tissues of the intermediate host. The adult tapeworm attaches to intestinal mucosa by suckers or hooks on a scolex; proglottids bud from the neck to form the ribbon-like strobila and shed eggs. In intestinal taeniasis humans are definitive hosts (T. saginata, T. asiatica, T. solium, D. latus, D. caninum). In somatic disease, ingested eggs release oncospheres that penetrate the gut wall, disseminate via blood, and encyst as a cysticercus (single scolex), coenurus (multiple scolices) or hydatid (cyst with daughter cysts and protoscolices). Cysticercosis follows ingestion of T. solium eggs (fecal-oral, including autoinfection in tapeworm carriers); lodged cysticerci initially provoke little inflammation, but as the cyst degenerates an inflammatory response develops, producing seizures, and accompanying arachnoiditis or ventricular obstruction can cause hydrocephalus. In echinococcosis ingested eggs of canine tapeworms release oncospheres that seed liver, lung and other organs; E. granulosus forms slowly enlarging unilocular hydatid cysts containing brood capsules and protoscolices, while E. multilocularis grows by invasive peripheral budding of the germinal layer like a malignancy. (Harrison 22e p.1832-1837)",
-  "additionalDifferentials": [
-   "Intestinal taeniasis presenting only with passage of proglottids or vague abdominal symptoms (T. saginata, T. asiatica, T. solium, D. latus, D. caninum)",
-   "Megaloblastic / pernicious-type anemia from vitamin B12 deficiency in D. latus fish tapeworm infection",
-   "Seizure disorder / epilepsy of other cause in regions where neurocysticercosis is endemic",
-   "Obstructive or communicating hydrocephalus from ventricular or subarachnoid cysticerci",
-   "Sparganosis presenting as a migrating subcutaneous, periorbital or CNS mass (Spirometra plerocercoid)",
-   "Coenurosis presenting as a CNS or subcutaneous space-occupying cystic lesion (T. multiceps, T. serialis)"
-  ],
-  "infectionMimics": [
-   "Tuberculoma / CNS tuberculosis (major cause of focal CNS mass lesions in India and East Asia)",
-   "Toxoplasma encephalitis (ring-enhancing CNS lesions, especially in immunocompromised/HIV)",
-   "Pyogenic brain abscess",
-   "Other tissue helminths producing CNS or hepatic cysts (e.g., schistosomiasis, sparganosis)"
-  ],
-  "nonInfectiousMimics": [
-   "Primary or metastatic brain tumor (parenchymal neurocysticercosis or spinal cysticercus can mimic intraspinal tumor)",
-   "CNS lymphoma",
-   "Hepatic neoplasm or simple/biliary hepatic cyst (alveolar echinococcosis mimics a slow-growing liver tumor; cystic hydatid mimics benign liver cyst)",
-   "Cholelithiasis (biliary leakage/compression by a hepatic hydatid cyst)"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species are morphologically indistinguishable)",
-   "Examination of mature proglottids or scolex, or molecular testing, to distinguish T. solium from T. saginata/T. asiatica",
-   "Neuroimaging (MRI and CT) for neurocysticercosis, including FIESTA/3D-CISS for ventricular/subarachnoid cysts and susceptibility-weighted imaging for calcifications",
-   "Enzyme-linked immunoelectrotransfer blot (EITB) on serum for cysticercosis antibody",
-   "CSF analysis (lymphocytic, neutrophilic or eosinophilic pleocytosis; protein may be raised; glucose usually normal but occasionally markedly reduced)",
-   "Funduscopic / dilated ophthalmologic exam in all patients with suspected neurocysticercosis",
-   "Ultrasound, CT or MRI with WHO ultrasound staging (CL, CE1-CE5) for hepatic cystic echinococcosis; chest x-ray/CT for pulmonary cysts",
-   "ELISA/immunoblot serology for echinococcosis (cannot exclude disease if negative)",
-   "PET to follow disease activity in alveolar echinococcosis"
-  ],
-  "redFlags": [
-   "New-onset seizures or focal neurologic deficit in a patient from a cysticercosis-endemic area (e.g., Latin America, sub-Saharan Africa, China, India, Southeast Asia)",
-   "Signs of raised intracranial pressure or obstructive hydrocephalus (headache, vomiting, papilledema, altered mental status) from intraventricular/subarachnoid cysticerci",
-   "Bruns' syndrome: intermittent acute hydrocephalus precipitated by head position change",
-   "Subarachnoid/basal cysticerci causing chronic meningitis, arachnoiditis, vasculitis, infarction or hemorrhage",
-   "Sudden pruritus, urticaria, eosinophilia or anaphylaxis from rupture/leakage of a hydatid cyst",
-   "Pulmonary hydatid rupture into the bronchial tree (sudden expectoration of cyst fluid/membranes) or pleura (hydatid empyema)"
-  ],
-  "prognosis": "Intestinal tapeworm infections (taeniasis, R. nana, diphyllobothriasis, dipylidiasis) are usually mild or asymptomatic and respond to a single course of treatment. In neurocysticercosis, single enhancing lesions often resolve and seizure medication can frequently be tapered after about 6 months; calcified lesions carry a higher risk of recurrent seizures, particularly with perilesional edema, and subarachnoid/ventricular (extraparenchymal) disease is more difficult to treat and requires prolonged therapy. Cystic echinococcosis is often curable with stage-appropriate medical therapy, PAIR or surgery, with relapse rates after skilled PAIR comparable to surgery; inactive CE4/CE5 cysts need only periodic surveillance. Alveolar echinococcosis behaves like a malignancy: most cases are diagnosed too late for complete resection and require indefinite antiparasitic therapy, since even after liver transplantation immunosuppression promotes parasite recurrence. (Harrison 22e p.1834-1838)",
-  "pitfalls": [
-   "Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke anaphylaxis; aspiration/PAIR should only be done by experienced operators with albendazole cover and through solid tissue.",
-   "Never start antiparasitic drugs in neurocysticercosis with elevated intracranial pressure, and avoid them in diffuse cerebral edema from multiple inflamed lesions (glucocorticoids are the mainstay there).",
-   "Always give high-dose glucocorticoid cover when treating neurocysticercosis, because dying cysticerci can worsen seizures and hydrocephalus.",
-   "Treating T. solium intestinal taeniasis with praziquantel may occasionally trigger a CNS inflammatory response if occult (cryptic) cysticercosis is present.",
-   "Avoid antiparasitic drugs before neurosurgical removal of ventricular cysticerci: they make the cyst friable and harder to extract.",
-   "Crude-antigen ELISA antibody tests for cysticercosis are unreliable (high false-positive/false-negative rates) and should not be used.",
-   "A negative echinococcosis serology cannot exclude the diagnosis, and sensitivity is especially low (~50%) for pulmonary cysts.",
-   "Eggs/proglottids are shed intermittently, so single stool examination may miss intestinal taeniasis; Taenia species eggs are morphologically indistinguishable.",
-   "For ocular and spinal cysticercosis, drug-induced inflammation may cause irreversible damage; intraocular disease should be managed surgically.",
-   "Infusion of scolicidal agents during surgery is no longer recommended because of hypernatremia, intoxication and sclerosing cholangitis."
-  ],
-  "severityClassification": "Cystic echinococcosis of the liver is staged by the WHO Informal Working Group ultrasound classification, reflecting cyst viability: active cysts (CL = cystic lesion with no visible wall, CE1 = visible wall with internal echoes/snowflake sign, CE2 = visible wall with internal septation), transitional cysts (CE3a = detached laminar membranes, CE3b = partially collapsed), and inactive cysts (CE4 = nonhomogeneous mass, CE5 = thick calcified wall). Neurocysticercosis is categorized by parasite location and viability and by lesion stage on imaging (vesicular, colloidal, granulonodular, nodular-calcified); diagnosis uses the Del Brutto revised criteria (absolute, neuroimaging [major/confirmative/minor], and clinical/exposure criteria). (Harrison 22e p.1834-1837)",
-  "references": [
-   "Harrison 22e p.1832",
-   "Harrison 22e p.1136-1138",
-   "Del Brutto OH et al: Revised diagnostic criteria for neurocysticercosis. J Neurol Sci 372:202, 2017",
-   "Brunetti E et al: Expert consensus for the diagnosis and treatment of cystic and alveolar echinococcosis in humans. Acta Trop 114:1, 2010",
-   "White AC Jr et al: Diagnosis and treatment of neurocysticercosis: 2017 clinical practice guidelines"
-  ],
-  "crossLinks": [
-   "seizure_epilepsy",
-   "BRAIN_ABSCESS",
-   "LIVER_ABSCESS"
-  ],
-  "management": [
-   "Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative",
-   "Manage parenchymal neurocysticercosis with antiparasitic therapy using albendazole, with or without praziquantel, given under corticosteroid cover to control the inflammatory response to dying cysts",
-   "Control seizures in neurocysticercosis with antiepileptic drugs, which can often be tapered once active lesions have resolved",
-   "Treat cystic echinococcosis (hydatid disease) with albendazole combined, where appropriate, with the PAIR technique (puncture-aspiration-injection-reaspiration) or surgical cyst removal",
-   "Withhold antiparasitic therapy in ocular or untreated intraventricular or subarachnoid cysticercosis until the lesion is managed, given the risk of vision-threatening or obstructive inflammation, and perform funduscopy first",
-   "Manage complications such as hydrocephalus in neurocysticercosis with neurosurgical cerebrospinal fluid diversion or endoscopic cyst removal",
-   "Prevent reinfection and transmission through improved sanitation, safe food handling, thorough cooking of meat and treatment of tapeworm carriers",
-   "Refer to infectious diseases, neurology and neurosurgery as dictated by the site and burden of disease"
-  ]
- },
- "algorithms": [
-  {
-   "id": "cestode_infections-pathway",
-   "title": "Cestode (Tapeworm) Infections: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and somatic/larval-tissue infection (e.g., cysticercosis, hydatid disease) (Harrison 22e p.1832).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset seizures or focal neurologic deficit in a patient from a cysticercosis-endemic area (e.g., Latin America, sub-Saharan Africa, China, India, Southeast Asia)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species are morphologically indistinguishable), Examination of mature proglottids or scolex, or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke anaphylaxis; aspiration/PAIR should only be done by experienced operators with albendazole cover"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cestode (tapeworm) infections."
-  }
- ],
- "tables": [
-  {
-   "id": "cestode_infections-matrix",
-   "title": "Cestode (Tapeworm) Infections: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1832",
+    "clinicalPearls": [
+      "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and somatic/larval-tissue infection (e.g., cysticercosis, hydatid disease) (Harrison 22e p.1832).",
+      "Neurocysticercosis is the most common parasitic disease of the CNS worldwide; humans acquire it by ingesting food contaminated with Taenia solium eggs, not by eating cysticerci-containing pork (which instead causes intestinal taeniasis) (Harrison 22e p.1833, p.1138).",
+      "Seizures are the most frequent manifestation of neurocysticercosis and are associated with inflammation of brain parenchyma around the cysticercus; new-onset partial seizures with or without secondary generalization are the classic presentation (Harrison 22e p.1833, p.1138).",
+      "On neuroimaging a cystic lesion with a mural nodule representing the scolex ('dot-in-hole') is diagnostic of neurocysticercosis; lesions evolve through vesicular, colloidal, granulonodular and nodular-calcified stages (Harrison 22e p.1833-1834, p.1138).",
+      "CT is more sensitive for calcified lesions, whereas MRI is more sensitive for small cystic lesions, scolices and enhancement; FIESTA/3D-CISS sequences best detect ventricular and subarachnoid cysts (Harrison 22e p.1834).",
+      "The enzyme-linked immunoelectrotransfer blot (EITB) using lentil-lectin-purified glycoproteins is >99% specific/sensitive in patients with multiple cysts, but patients with a single intracranial lesion or only calcifications may be seronegative; serum is more sensitive than CSF (Harrison 22e p.1834).",
+      "Crude-antigen ELISA antibody tests have high false-positive and false-negative rates and should be avoided for neurocysticercosis (Harrison 22e p.1834).",
+      "In endemic-area patients with a single enhancing 5-20 mm round CT lesion, seizures, a normal exam and no systemic disease (no fever, adenopathy or chest abnormality), the lesion is almost always neurocysticercosis (validated in India) (Harrison 22e p.1834).",
+      "Antiparasitic treatment of neurocysticercosis is never an emergency; initial management focuses on controlling seizures and hydrocephalus and on excluding intraocular disease before any cysticidal therapy (Harrison 22e p.1834).",
+      "High-dose glucocorticoids should always accompany antiparasitic therapy of neurocysticercosis, since dying parasites provoke an inflammatory response that can worsen seizures or hydrocephalus (Harrison 22e p.1834).",
+      "Bruns' syndrome is intermittent acute hydrocephalus triggered by positional change, caused by a ventricular cysticercus acting as a ball valve (Harrison 22e p.1833).",
+      "In Latin America and immigrants from Latin America, T. solium (neurocysticercosis) is the most common cause of brain abscess / focal CNS mass lesion (Harrison 22e p.1136).",
+      "Echinococcosis (hydatid disease) is larval Echinococcus infection: E. granulosus sensu lato causes unilocular cystic hydatid disease; E. multilocularis causes locally invasive, tumor-like alveolar disease (Harrison 22e p.1835-1836).",
+      "In cystic echinococcosis the liver is involved in about two-thirds and the lungs in about 20% of cases; alveolar echinococcosis involves the liver in nearly all cases (Harrison 22e p.1836).",
+      "Echinococcal cysts often remain asymptomatic for years and are frequently found incidentally on x-ray or ultrasound (Harrison 22e p.1836).",
+      "Identification of daughter cysts within a larger cyst, or eggshell/mural calcification on CT, is diagnostic of cystic echinococcosis; 'hydatid sand' is visible protoscolices/brood capsules within cyst fluid (Harrison 22e p.1837).",
+      "ELISA/immunoblot serology is positive in about 90% of hepatic hydatid disease but only about 50% of pulmonary cysts, and a negative test cannot exclude echinococcosis (Harrison 22e p.1837).",
+      "The fish tapeworm Dibothriocephalus latus (formerly Diphyllobothrium latum) is the longest human tapeworm (up to 25 m) and its avid vitamin B12 receptors can cause B12 deficiency with megaloblastic/pernicious-type anemia and neurologic sequelae (Harrison 22e p.1838-1839).",
+      "Rodentolepis nana (dwarf tapeworm, formerly Hymenolepis nana) is the most common human cestode infection and the only one not requiring an intermediate host, perpetuated by intestinal autoinfection (Harrison 22e p.1838)."
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cestodes are segmented flatworms (Platyhelminthes, subphylum Cestoda) whose adult worms live in the gut of the definitive host while larval cystic forms inhabit tissues of the intermediate host. The adult tapeworm attaches to intestinal mucosa by suckers or hooks on a scolex; proglottids bud from the neck to form the ribbon-like strobila and shed eggs. In intestinal taeniasis humans are definitive hosts (T. saginata, T. asiatica, T. solium, D. latus, D. caninum). In somatic disease, ingested eggs release oncospheres that penetrate the gut wall, disseminate via blood, and encyst as a cysticercus (single scolex), coenurus (multiple scolices) or hydatid (cyst with daughter cysts and protoscolices). Cysticercosis follows ingestion of T. solium eggs (fecal-oral, including autoinfection in tapeworm carriers); lodged cysticerci initially provoke little inflammation, but as the cyst degenerates an inflammatory response develops, producing seizures, and accompanying arachnoiditis or ventricular obstruction can cause hydrocephalus. In echinococcosis ingested eggs of canine tapeworms release oncospheres that seed liver, lung and other organs; E. granulosus forms slowly enlarging unilocular hydatid cysts containing brood capsules and protoscolices, while E. multilocularis grows by invasive peripheral budding of the germinal layer like a malignancy. (Harrison 22e p.1832-1837)",
+    "additionalDifferentials": [
+      "Intestinal taeniasis presenting only with passage of proglottids or vague abdominal symptoms (T. saginata, T. asiatica, T. solium, D. latus, D. caninum)",
+      "Megaloblastic / pernicious-type anemia from vitamin B12 deficiency in D. latus fish tapeworm infection",
+      "Seizure disorder / epilepsy of other cause in regions where neurocysticercosis is endemic",
+      "Obstructive or communicating hydrocephalus from ventricular or subarachnoid cysticerci",
+      "Sparganosis presenting as a migrating subcutaneous, periorbital or CNS mass (Spirometra plerocercoid)",
+      "Coenurosis presenting as a CNS or subcutaneous space-occupying cystic lesion (T. multiceps, T. serialis)"
     ],
-    [
-     "Primary Differentials",
-     "Intestinal taeniasis presenting only with passage of proglottids or vague abdominal symptoms (T. saginata, T. asiatica, T.",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Tuberculoma / CNS tuberculosis (major cause of focal CNS mass lesions in India and East Asia)",
+      "Toxoplasma encephalitis (ring-enhancing CNS lesions, especially in immunocompromised/HIV)",
+      "Pyogenic brain abscess",
+      "Other tissue helminths producing CNS or hepatic cysts (e.g., schistosomiasis, sparganosis)"
     ],
-    [
-     "Management Strategy",
-     "Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Primary or metastatic brain tumor (parenchymal neurocysticercosis or spinal cysticercus can mimic intraspinal tumor)",
+      "CNS lymphoma",
+      "Hepatic neoplasm or simple/biliary hepatic cyst (alveolar echinococcosis mimics a slow-growing liver tumor; cystic hydatid mimics benign liver cyst)",
+      "Cholelithiasis (biliary leakage/compression by a hepatic hydatid cyst)"
     ],
-    [
-     "Clinical Pitfall",
-     "Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species are morphologically indistinguishable)",
+      "Examination of mature proglottids or scolex, or molecular testing, to distinguish T. solium from T. saginata/T. asiatica",
+      "Neuroimaging (MRI and CT) for neurocysticercosis, including FIESTA/3D-CISS for ventricular/subarachnoid cysts and susceptibility-weighted imaging for calcifications",
+      "Enzyme-linked immunoelectrotransfer blot (EITB) on serum for cysticercosis antibody",
+      "CSF analysis (lymphocytic, neutrophilic or eosinophilic pleocytosis; protein may be raised; glucose usually normal but occasionally markedly reduced)",
+      "Funduscopic / dilated ophthalmologic exam in all patients with suspected neurocysticercosis",
+      "Ultrasound, CT or MRI with WHO ultrasound staging (CL, CE1-CE5) for hepatic cystic echinococcosis; chest x-ray/CT for pulmonary cysts",
+      "ELISA/immunoblot serology for echinococcosis (cannot exclude disease if negative)",
+      "PET to follow disease activity in alveolar echinococcosis"
+    ],
+    "redFlags": [
+      "New-onset seizures or focal neurologic deficit in a patient from a cysticercosis-endemic area (e.g., Latin America, sub-Saharan Africa, China, India, Southeast Asia)",
+      "Signs of raised intracranial pressure or obstructive hydrocephalus (headache, vomiting, papilledema, altered mental status) from intraventricular/subarachnoid cysticerci",
+      "Bruns' syndrome: intermittent acute hydrocephalus precipitated by head position change",
+      "Subarachnoid/basal cysticerci causing chronic meningitis, arachnoiditis, vasculitis, infarction or hemorrhage",
+      "Sudden pruritus, urticaria, eosinophilia or anaphylaxis from rupture/leakage of a hydatid cyst",
+      "Pulmonary hydatid rupture into the bronchial tree (sudden expectoration of cyst fluid/membranes) or pleura (hydatid empyema)"
+    ],
+    "prognosis": "Intestinal tapeworm infections (taeniasis, R. nana, diphyllobothriasis, dipylidiasis) are usually mild or asymptomatic and respond to a single course of treatment. In neurocysticercosis, single enhancing lesions often resolve and seizure medication can frequently be tapered after about 6 months; calcified lesions carry a higher risk of recurrent seizures, particularly with perilesional edema, and subarachnoid/ventricular (extraparenchymal) disease is more difficult to treat and requires prolonged therapy. Cystic echinococcosis is often curable with stage-appropriate medical therapy, PAIR or surgery, with relapse rates after skilled PAIR comparable to surgery; inactive CE4/CE5 cysts need only periodic surveillance. Alveolar echinococcosis behaves like a malignancy: most cases are diagnosed too late for complete resection and require indefinite antiparasitic therapy, since even after liver transplantation immunosuppression promotes parasite recurrence. (Harrison 22e p.1834-1838)",
+    "pitfalls": [
+      "Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke anaphylaxis; aspiration/PAIR should only be done by experienced operators with albendazole cover and through solid tissue.",
+      "Never start antiparasitic drugs in neurocysticercosis with elevated intracranial pressure, and avoid them in diffuse cerebral edema from multiple inflamed lesions (glucocorticoids are the mainstay there).",
+      "Always give high-dose glucocorticoid cover when treating neurocysticercosis, because dying cysticerci can worsen seizures and hydrocephalus.",
+      "Treating T. solium intestinal taeniasis with praziquantel may occasionally trigger a CNS inflammatory response if occult (cryptic) cysticercosis is present.",
+      "Avoid antiparasitic drugs before neurosurgical removal of ventricular cysticerci: they make the cyst friable and harder to extract.",
+      "Crude-antigen ELISA antibody tests for cysticercosis are unreliable (high false-positive/false-negative rates) and should not be used.",
+      "A negative echinococcosis serology cannot exclude the diagnosis, and sensitivity is especially low (~50%) for pulmonary cysts.",
+      "Eggs/proglottids are shed intermittently, so single stool examination may miss intestinal taeniasis; Taenia species eggs are morphologically indistinguishable.",
+      "For ocular and spinal cysticercosis, drug-induced inflammation may cause irreversible damage; intraocular disease should be managed surgically.",
+      "Infusion of scolicidal agents during surgery is no longer recommended because of hypernatremia, intoxication and sclerosing cholangitis."
+    ],
+    "severityClassification": "Cystic echinococcosis of the liver is staged by the WHO Informal Working Group ultrasound classification, reflecting cyst viability: active cysts (CL = cystic lesion with no visible wall, CE1 = visible wall with internal echoes/snowflake sign, CE2 = visible wall with internal septation), transitional cysts (CE3a = detached laminar membranes, CE3b = partially collapsed), and inactive cysts (CE4 = nonhomogeneous mass, CE5 = thick calcified wall). Neurocysticercosis is categorized by parasite location and viability and by lesion stage on imaging (vesicular, colloidal, granulonodular, nodular-calcified); diagnosis uses the Del Brutto revised criteria (absolute, neuroimaging [major/confirmative/minor], and clinical/exposure criteria). (Harrison 22e p.1834-1837)",
+    "references": [
+      "Harrison 22e p.1832",
+      "Harrison 22e p.1136-1138",
+      "Del Brutto OH et al: Revised diagnostic criteria for neurocysticercosis. J Neurol Sci 372:202, 2017",
+      "Brunetti E et al: Expert consensus for the diagnosis and treatment of cystic and alveolar echinococcosis in humans. Acta Trop 114:1, 2010",
+      "White AC Jr et al: Diagnosis and treatment of neurocysticercosis: 2017 clinical practice guidelines"
+    ],
+    "crossLinks": [
+      "seizure_epilepsy",
+      "BRAIN_ABSCESS",
+      "LIVER_ABSCESS"
+    ],
+    "management": [
+      "Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative",
+      "Manage parenchymal neurocysticercosis with antiparasitic therapy using albendazole, with or without praziquantel, given under corticosteroid cover to control the inflammatory response to dying cysts",
+      "Control seizures in neurocysticercosis with antiepileptic drugs, which can often be tapered once active lesions have resolved",
+      "Treat cystic echinococcosis (hydatid disease) with albendazole combined, where appropriate, with the PAIR technique (puncture-aspiration-injection-reaspiration) or surgical cyst removal",
+      "Withhold antiparasitic therapy in ocular or untreated intraventricular or subarachnoid cysticercosis until the lesion is managed, given the risk of vision-threatening or obstructive inflammation, and perform funduscopy first",
+      "Manage complications such as hydrocephalus in neurocysticercosis with neurosurgical cerebrospinal fluid diversion or endoscopic cyst removal",
+      "Prevent reinfection and transmission through improved sanitation, safe food handling, thorough cooking of meat and treatment of tapeworm carriers",
+      "Refer to infectious diseases, neurology and neurosurgery as dictated by the site and burden of disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for cestode (tapeworm) infections."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cestode-infections-real-image",
-   "title": "Cestode (Tapeworm) Infections: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "cestode_infections-pathway",
+      "title": "Cestode (Tapeworm) Infections: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and somatic/larval-tissue infection (e.g., cysticercosis, hydatid disease) (Harrison 22e p.1832).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset seizures or focal neurologic deficit in a patient from a cysticercosis-endemic area (e.g., Latin America, sub-Saharan Africa, China, India, Southeast Asia)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species are morphologically indistinguishable), Examination of mature proglottids or scolex, or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke anaphylaxis; aspiration/PAIR should only be done by experienced operators with albendazole cover"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cestode (tapeworm) infections."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cestode_infections-matrix",
+      "title": "Cestode (Tapeworm) Infections: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cestodes (tapeworms) cause two clinically distinct patterns: intestinal infection by adult worms (taeniasis) and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for eggs/proglottids; perianal cellophane-tape swab when taeniasis suspected (eggs of the three Taenia species",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intestinal taeniasis presenting only with passage of proglottids or vague abdominal symptoms (T. saginata, T. asiatica, T.",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat intestinal taeniasis with a single-agent anthelmintic such as praziquantel, or niclosamide as an alternative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not aspirate or rupture a hydatid cyst carelessly: spillage of protoscolices can disseminate infection and provoke",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cestode (tapeworm) infections."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Cysticercosis",
+      "url": "https://www.cdc.gov/cysticercosis/hcp/clinical-care/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 220-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cestode_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of cestode infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyst with scolex (dot-in-hole) on imaging",
+          "cells": [
+            {
+              "text": "{{hy:Diagnostic of neurocysticercosis}}"
+            },
+            {
+              "text": "MRI for cysts and scolex, CT for calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single enhancing lesion in endemic area",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Round, 5 to 20, with seizures and normal exam",
+              "range": [
+                5,
+                20
+              ]
+            },
+            {
+              "text": "Almost always neurocysticercosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum EITB (lentil-lectin)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">99% with multiple cysts",
+              "op": ">",
+              "value": 99
+            },
+            {
+              "text": "Single lesion or calcified only may be negative; avoid crude ELISA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundoscopy",
+          "cells": [
+            {
+              "text": "Exclude ocular cysticercosis"
+            },
+            {
+              "text": "Before any cysticidal drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool or perianal tape for eggs, proglottids",
+          "cells": [
+            {
+              "text": "Taeniasis"
+            },
+            {
+              "text": "Taenia eggs look alike; examine proglottid or use PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Daughter cysts or eggshell calcification",
+          "cells": [
+            {
+              "text": "Diagnostic of cystic echinococcosis"
+            },
+            {
+              "text": "WHO ultrasound stages CL, CE1 to CE5"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydatid serology, liver cysts",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 90% (lung about 50%)"
+            },
+            {
+              "text": "Negative test does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydatid site",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Liver about two-thirds, lung about 20%"
+            },
+            {
+              "text": "Alveolar form almost always liver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Megaloblastic anaemia with fish ingestion",
+          "cells": [
+            {
+              "text": "D. latus B12 deficiency"
+            },
+            {
+              "text": "Longest tapeworm, up to 25 m"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cestode_infections-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cestode tissue infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculoma",
+          "cells": [
+            {
+              "text": "{{hy:Main focal CNS mass mimic in India and East Asia}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxoplasma encephalitis",
+          "cells": [
+            {
+              "text": "Ring lesions in HIV or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic brain abscess",
+          "cells": [
+            {
+              "text": "Fever, rapid course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary or metastatic brain tumour, CNS lymphoma",
+          "cells": [
+            {
+              "text": "No scolex; progressive mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic tumour or simple liver cyst",
+          "cells": [
+            {
+              "text": "Alveolar hydatid mimics slow liver tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sparganosis or coenurosis",
+          "cells": [
+            {
+              "text": "Migrating or cystic CNS or subcutaneous mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cestode_infections-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cestode infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Control seizures and hydrocephalus first",
+          "cells": [
+            {
+              "text": "{{hy:All neurocysticercosis; cysticidal therapy is never urgent}}"
+            },
+            {
+              "text": "Antiseizure drugs, often weaned later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albendazole",
+          "cells": [
+            {
+              "text": "1 to 2 viable parenchymal cysts or single enhancing lesion"
+            },
+            {
+              "text": "15 mg/kg/day in 2 doses for 15 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Albendazole plus praziquantel",
+          "cells": [
+            {
+              "text": "More than 2 viable parenchymal cysts"
+            },
+            {
+              "text": "Praziquantel 50 mg/kg/day for 15 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged albendazole",
+          "cells": [
+            {
+              "text": "Extraparenchymal or extensive disease"
+            },
+            {
+              "text": "30 days, may repeat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids (dexamethasone)",
+          "cells": [
+            {
+              "text": "With every cysticidal course"
+            },
+            {
+              "text": "Suppress inflammation from dying cysts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic removal",
+          "cells": [
+            {
+              "text": "Intraventricular cysts"
+            },
+            {
+              "text": "Anthelminthics relatively contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No antiparasitic drug",
+          "cells": [
+            {
+              "text": "Calcified lesions only"
+            },
+            {
+              "text": "No benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Praziquantel or niclosamide",
+          "cells": [
+            {
+              "text": "Intestinal taeniasis"
+            },
+            {
+              "text": "Praziquantel may unmask cryptic cysticercosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albendazole with PAIR or surgery",
+          "cells": [
+            {
+              "text": "Cystic echinococcosis"
+            },
+            {
+              "text": "Experienced operator; spillage risks anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cestode_infections-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for human cysticercosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Items"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute criteria",
+          "cells": [
+            {
+              "text": "Cysticerci shown on histologic or microscopic examination of biopsy material; parasite seen in the eye on funduscopy; neuroradiologic demonstration of cystic lesions containing a characteristic scolex"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Major criteria",
+          "cells": [
+            {
+              "text": "Neuroradiologic lesions suggestive of neurocysticercosis; antibodies to cysticerci in serum by enzyme-linked immunoelectrotransfer blot; spontaneous resolution of intracranial cystic lesions, or resolution after albendazole or praziquantel alone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Minor criteria",
+          "cells": [
+            {
+              "text": "Lesions compatible with neurocysticercosis on neuroimaging; clinical manifestations suggestive of neurocysticercosis; antibodies to cysticerci or cysticercal antigen in cerebrospinal fluid by ELISA; cysticercosis outside the CNS (for example cigar-shaped soft-tissue calcifications)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Epidemiologic criteria",
+          "cells": [
+            {
+              "text": "Residence in a cysticercosis-endemic area; frequent travel to an endemic area; household contact with a person infected with Taenia solium"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote a of the source table is not shown on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cestode_infections-dx-mgmt",
+      "title": "Diagnosis and management of neurocysticercosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Seizure or focal CNS signs with endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "MRI and CT; serum EITB; fundoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Hydrocephalus or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neurosurgical CSF diversion or endoscopic cyst removal",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Only calcified lesions?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Antiseizure drugs only",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "More than 2 viable parenchymal cysts?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Albendazole plus praziquantel with steroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Albendazole with steroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Re-image; taper antiseizure drugs when lesions resolve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "After"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

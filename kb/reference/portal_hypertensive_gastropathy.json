@@ -1,170 +1,450 @@
 {
- "id": "portal_hypertensive_gastropathy",
- "name": "Portal hypertensive gastropathy",
- "aliases": [
-  "PHG",
-  "congestive gastropathy"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most prominent in the gastric body and fundus",
-   "Severe disease shows discrete red or brown spots superimposed on the mosaic pattern, reflecting more advanced congestion",
-   "Must be distinguished from gastric antral vascular ectasia, which produces linear red stripes (watermelon stomach) concentrated in the antrum and is not driven by portal pressure",
-   "Usually causes chronic, slow blood loss with iron-deficiency anaemia, though acute overt bleeding can occur",
-   "Severity often parallels the degree of portal hypertension and may worsen after obliteration of oesophageal varices",
-   "Management is directed at lowering portal pressure with non-selective beta-blockers, and refractory bleeding may respond to transjugular intrahepatic portosystemic shunting or measures to treat the underlying liver disease",
-   "Iron supplementation and, where needed, transfusion address the resulting anaemia"
+  "id": "portal_hypertensive_gastropathy",
+  "name": "Portal hypertensive gastropathy",
+  "aliases": [
+    "PHG",
+    "congestive gastropathy"
   ],
-  "pathophysiology": "Portal hypertensive gastropathy results from the passive congestion of the gastric mucosal and submucosal microvasculature that accompanies raised portal venous pressure, usually from cirrhosis. Dilatation of mucosal capillaries and venules, with ectasia and oedema but relatively little inflammation, produces the characteristic mosaic or snake-skin appearance, and the fragile congested mucosa bleeds easily. The severity tends to track with the degree of portal hypertension, and it may become more apparent after endoscopic eradication of oesophageal varices diverts flow into the gastric mucosal bed.",
-  "additionalDifferentials": [
-   "Gastric antral vascular ectasia (watermelon stomach)",
-   "Gastric varices",
-   "Erosive or reactive gastropathy from drugs or alcohol",
-   "Angiodysplasia of the stomach",
-   "Dieulafoy lesion as a source of obscure bleeding",
-   "Peptic ulcer disease"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular ectasia",
-   "Full blood count and iron studies to quantify chronic blood loss",
-   "Liver function tests and assessment of the underlying liver disease and its severity",
-   "Imaging of the portal system (Doppler ultrasound or cross-sectional imaging) to confirm portal hypertension",
-   "Measurement of the hepatic venous pressure gradient in selected cases",
-   "Faecal occult blood testing where occult loss is suspected"
-  ],
-  "redFlags": [
-   "Acute overt upper gastrointestinal bleeding with haemodynamic compromise",
-   "Rapidly falling haemoglobin or transfusion dependence",
-   "Signs of decompensated liver disease accompanying the bleeding"
-  ],
-  "prognosis": "Portal hypertensive gastropathy is usually a chronic source of low-grade blood loss that is manageable, but its course mirrors the underlying liver disease and portal hypertension; severe or refractory bleeding carries a worse outlook and depends on control of portal pressure.",
-  "pitfalls": [
-   "Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment",
-   "Expecting portal-pressure-lowering therapy to help antral vascular ectasia, which it does not",
-   "Overlooking the tendency for the gastropathy to worsen after variceal obliteration",
-   "Attributing anaemia solely to varices and missing ongoing mucosal loss"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and recurrent bleeding",
-   "Iron replacement, oral or intravenous, and blood transfusion as needed to correct iron-deficiency anaemia from chronic mucosal blood loss",
-   "Treatment of the underlying liver disease, whose severity drives the course",
-   "Acute overt bleeding managed with resuscitation and vasoactive splanchnic vasoconstrictors",
-   "Transjugular intrahepatic portosystemic shunt or a surgical shunt for refractory or transfusion-dependent bleeding",
-   "Endoscopic distinction from gastric antral vascular ectasia, which requires endoscopic ablation such as argon plasma coagulation rather than portal-pressure reduction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "portal_hypertensive_gastropathy-pathway",
-   "title": "Portal hypertensive gastropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most prominent in the gastric body and fundus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute overt upper gastrointestinal bleeding with haemodynamic compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular ectasia, Full blood count and iron studies to quantify chronic blood loss, Liver function tests"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and recurrent bleeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of portal hypertensive gastropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "portal_hypertensive_gastropathy-matrix",
-   "title": "Portal hypertensive gastropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most prominent in the gastric body and fundus",
+      "Severe disease shows discrete red or brown spots superimposed on the mosaic pattern, reflecting more advanced congestion",
+      "Must be distinguished from gastric antral vascular ectasia, which produces linear red stripes (watermelon stomach) concentrated in the antrum and is not driven by portal pressure",
+      "Usually causes chronic, slow blood loss with iron-deficiency anaemia, though acute overt bleeding can occur",
+      "Severity often parallels the degree of portal hypertension and may worsen after obliteration of oesophageal varices",
+      "Management is directed at lowering portal pressure with non-selective beta-blockers, and refractory bleeding may respond to transjugular intrahepatic portosystemic shunting or measures to treat the underlying liver disease",
+      "Iron supplementation and, where needed, transfusion address the resulting anaemia"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Portal hypertensive gastropathy results from the passive congestion of the gastric mucosal and submucosal microvasculature that accompanies raised portal venous pressure, usually from cirrhosis. Dilatation of mucosal capillaries and venules, with ectasia and oedema but relatively little inflammation, produces the characteristic mosaic or snake-skin appearance, and the fragile congested mucosa bleeds easily. The severity tends to track with the degree of portal hypertension, and it may become more apparent after endoscopic eradication of oesophageal varices diverts flow into the gastric mucosal bed.",
+    "additionalDifferentials": [
+      "Gastric antral vascular ectasia (watermelon stomach)",
+      "Gastric varices",
+      "Erosive or reactive gastropathy from drugs or alcohol",
+      "Angiodysplasia of the stomach",
+      "Dieulafoy lesion as a source of obscure bleeding",
+      "Peptic ulcer disease"
     ],
-    [
-     "Primary Differentials",
-     "Gastric antral vascular ectasia (watermelon stomach), Gastric varices, Erosive or reactive gastropathy from drugs or alcohol",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular ectasia",
+      "Full blood count and iron studies to quantify chronic blood loss",
+      "Liver function tests and assessment of the underlying liver disease and its severity",
+      "Imaging of the portal system (Doppler ultrasound or cross-sectional imaging) to confirm portal hypertension",
+      "Measurement of the hepatic venous pressure gradient in selected cases",
+      "Faecal occult blood testing where occult loss is suspected"
     ],
-    [
-     "Management Strategy",
-     "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute overt upper gastrointestinal bleeding with haemodynamic compromise",
+      "Rapidly falling haemoglobin or transfusion dependence",
+      "Signs of decompensated liver disease accompanying the bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Portal hypertensive gastropathy is usually a chronic source of low-grade blood loss that is manageable, but its course mirrors the underlying liver disease and portal hypertension; severe or refractory bleeding carries a worse outlook and depends on control of portal pressure.",
+    "pitfalls": [
+      "Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment",
+      "Expecting portal-pressure-lowering therapy to help antral vascular ectasia, which it does not",
+      "Overlooking the tendency for the gastropathy to worsen after variceal obliteration",
+      "Attributing anaemia solely to varices and missing ongoing mucosal loss"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and recurrent bleeding",
+      "Iron replacement, oral or intravenous, and blood transfusion as needed to correct iron-deficiency anaemia from chronic mucosal blood loss",
+      "Treatment of the underlying liver disease, whose severity drives the course",
+      "Acute overt bleeding managed with resuscitation and vasoactive splanchnic vasoconstrictors",
+      "Transjugular intrahepatic portosystemic shunt or a surgical shunt for refractory or transfusion-dependent bleeding",
+      "Endoscopic distinction from gastric antral vascular ectasia, which requires endoscopic ablation such as argon plasma coagulation rather than portal-pressure reduction"
     ]
-   ],
-   "caption": "Overview comparison matrix for portal hypertensive gastropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "portal-hypertensive-gastropathy-real-image",
-   "title": "Portal hypertensive gastropathy: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "portal_hypertensive_gastropathy-pathway",
+      "title": "Portal hypertensive gastropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most prominent in the gastric body and fundus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute overt upper gastrointestinal bleeding with haemodynamic compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular ectasia, Full blood count and iron studies to quantify chronic blood loss, Liver function tests"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and recurrent bleeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of portal hypertensive gastropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "portal_hypertensive_gastropathy-matrix",
+      "title": "Portal hypertensive gastropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs in the setting of portal hypertension and is recognised endoscopically by a snake-skin (mosaic) mucosal pattern, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy to identify the mosaic pattern and grade severity, and to distinguish it from antral vascular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gastric antral vascular ectasia (watermelon stomach), Gastric varices, Erosive or reactive gastropathy from drugs or alcohol",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure, the mainstay for reducing chronic and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying antral vascular ectasia as portal hypertensive gastropathy, since the two require different treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for portal hypertensive gastropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_hypertensive_gastropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Mosaic pattern and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and iron studies",
+          "cells": [
+            {
+              "text": "Chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LFTs and liver disease assessment",
+          "cells": [
+            {
+              "text": "Severity of underlying liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler or cross-sectional imaging of portal system",
+          "cells": [
+            {
+              "text": "Portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic venous pressure gradient",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal occult blood testing",
+          "cells": [
+            {
+              "text": "Suspected occult loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertensive_gastropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric antral vascular ectasia",
+          "cells": [
+            {
+              "text": "Endoscopic distinction required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric varices",
+          "cells": [
+            {
+              "text": "Varices rather than mosaic mucosa"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_hypertensive_gastropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Propranolol or carvedilol to lower portal pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and transfusion",
+          "cells": [
+            {
+              "text": "Oral or intravenous iron and transfusion as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease",
+          "cells": [
+            {
+              "text": "Treatment of the underlying liver disease, which drives the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute bleeding",
+          "cells": [
+            {
+              "text": "Resuscitation and vasoactive splanchnic vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "TIPS or surgical shunt for refractory or transfusion-dependent bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_hypertensive_gastropathy-dx-mgmt",
+      "title": "Diagnosis and management of Portal hypertensive gastropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic occult blood loss or iron deficiency with portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (overt bleeding, falling haemoglobin, decompensated liver disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation and endoscopy for overt upper GI bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy; FBC and iron studies; LFTs; portal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does endoscopy show a mosaic pattern of portal hypertensive gastropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gastric antral vascular ectasia, gastric varices, angiodysplasia or peptic ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Propranolol or carvedilol to lower portal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the underlying liver disease, whose severity drives the course",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resuscitation and vasoactive therapy for acute overt bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "TIPS or surgical shunt for refractory or transfusion-dependent bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually chronic, manageable blood loss; course mirrors the underlying liver disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

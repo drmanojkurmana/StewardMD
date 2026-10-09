@@ -1,178 +1,802 @@
 {
- "id": "hypokalemic_periodic_paralysis",
- "name": "Hypokalaemic periodic paralysis",
- "aliases": [
-  "CACNA1S",
-  "HypoPP",
-  "SCN4A",
-  "calcium channelopathy of muscle",
-  "familial hypokalaemic periodic paralysis",
-  "hypoPP",
-  "hypokalaemic periodic paralysis",
-  "primary periodic paralysis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
-   "Attacks are typically triggered by rest following vigorous exercise and by carbohydrate-rich meals, and often begin in the second or third decade",
-   "Serum potassium falls during an attack because of an intracellular potassium shift, not a true whole-body deficit, so aggressive supplementation risks rebound hyperkalaemia",
-   "Most cases are autosomal dominant with reduced penetrance, more clinically apparent in males, and are caused by mutations in the CACNA1S calcium channel gene or, less often, the SCN4A sodium channel gene",
-   "A thyrotoxic form clinically mimics the hereditary disease and should be excluded, particularly in patients of Asian ancestry",
-   "Long-term management centres on trigger avoidance, potassium-sparing strategies and carbonic anhydrase inhibitors used as prophylaxis",
-   "A fixed proximal vacuolar myopathy can develop over decades independent of attack frequency, sometimes as the dominant late feature"
+  "id": "hypokalemic_periodic_paralysis",
+  "name": "Hypokalaemic periodic paralysis",
+  "aliases": [
+    "CACNA1S",
+    "HypoPP",
+    "SCN4A",
+    "calcium channelopathy of muscle",
+    "familial hypokalaemic periodic paralysis",
+    "hypoPP",
+    "hypokalaemic periodic paralysis",
+    "primary periodic paralysis"
   ],
-  "pathophysiology": "Hypokalaemic periodic paralysis arises from mutations in genes encoding skeletal-muscle voltage-gated ion channels, most commonly the dihydropyridine receptor calcium channel (CACNA1S) and less often the sodium channel (SCN4A). Many disease-causing variants affect arginine residues in the voltage-sensing domains, creating an aberrant gating-pore current that leaks cations through the sensor. During provocation, an insulin- or catecholamine-driven shift of potassium into muscle cells combines with this abnormal leak to paradoxically depolarise and then inactivate the sarcolemma, rendering the fibre inexcitable and producing flaccid weakness. The transient low serum potassium reflects redistribution rather than depletion, and repeated depolarisation over years may contribute to the vacuolar myopathy seen in some patients.",
-  "additionalDifferentials": [
-   "Thyrotoxic periodic paralysis",
-   "Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular disorders, diuretics, vomiting)",
-   "Andersen-Tawil syndrome",
-   "Guillain-Barre syndrome and other acute flaccid weakness",
-   "Myasthenia gravis and other neuromuscular transmission disorders",
-   "Functional or psychogenic weakness"
-  ],
-  "additionalInvestigations": [
-   "Serum potassium measured during a spontaneous attack, ideally with paired baseline values",
-   "Thyroid function tests to exclude thyrotoxic periodic paralysis",
-   "Electrocardiogram to detect hypokalaemic changes and to screen for the QU features of Andersen-Tawil syndrome",
-   "Prolonged (long) exercise electromyography protocol showing a post-exercise decrement in compound muscle action potential amplitude",
-   "Targeted genetic testing of CACNA1S and SCN4A",
-   "Muscle biopsy where a fixed myopathy is suspected, looking for tubular aggregates or vacuolar change"
-  ],
-  "redFlags": [
-   "Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
-   "Cardiac arrhythmia or marked electrocardiographic disturbance during potassium shifts",
-   "Rebound hyperkalaemia following overzealous potassium replacement",
-   "Progressive fixed proximal weakness suggesting an established vacuolar myopathy"
-  ],
-  "prognosis": "Attack frequency often lessens with age and with effective prophylaxis, and most patients have a normal lifespan, but a proportion develop a slowly progressive fixed proximal myopathy that can cause lasting disability independent of the acute episodes.",
-  "pitfalls": [
-   "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
-   "Overlooking thyrotoxic periodic paralysis, a treatable acquired mimic",
-   "Relying on interictal potassium and creatine kinase, which are frequently normal between attacks",
-   "Missing the association with certain general anaesthetic and glucose-loading situations that can provoke attacks"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Hypokalemic Periodic Paralysis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia",
-   "Counsel strict avoidance of triggers, chiefly carbohydrate-rich meals and rest after vigorous exercise",
-   "Use carbonic anhydrase inhibitors such as acetazolamide or dichlorphenamide as the mainstay of prophylaxis",
-   "Consider potassium-sparing diuretics and a low-carbohydrate, low-sodium diet as adjunctive prevention",
-   "Exclude thyrotoxic periodic paralysis and treat any underlying thyrotoxicosis, especially in patients of Asian ancestry",
-   "Monitor for a slowly progressive fixed proximal myopathy and support with physiotherapy",
-   "Provide anaesthetic precautions and offer genetic counselling for this autosomal dominant CACNA1S or SCN4A channelopathy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypokalemic_periodic_paralysis-pathway",
-   "title": "Hypokalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude thyrotoxic periodic paralysis, Electrocardiogram to detect hypokalaemic changes and to screen for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypokalaemic periodic paralysis."
-  }
- ],
- "tables": [
-  {
-   "id": "hypokalemic_periodic_paralysis-matrix",
-   "title": "Hypokalaemic periodic paralysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
+      "Attacks are typically triggered by rest following vigorous exercise and by carbohydrate-rich meals, and often begin in the second or third decade",
+      "Serum potassium falls during an attack because of an intracellular potassium shift, not a true whole-body deficit, so aggressive supplementation risks rebound hyperkalaemia",
+      "Most cases are autosomal dominant with reduced penetrance, more clinically apparent in males, and are caused by mutations in the CACNA1S calcium channel gene or, less often, the SCN4A sodium channel gene",
+      "A thyrotoxic form clinically mimics the hereditary disease and should be excluded, particularly in patients of Asian ancestry",
+      "Long-term management centres on trigger avoidance, potassium-sparing strategies and carbonic anhydrase inhibitors used as prophylaxis",
+      "A fixed proximal vacuolar myopathy can develop over decades independent of attack frequency, sometimes as the dominant late feature"
     ],
-    [
-     "Key Investigations",
-     "Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypokalaemic periodic paralysis arises from mutations in genes encoding skeletal-muscle voltage-gated ion channels, most commonly the dihydropyridine receptor calcium channel (CACNA1S) and less often the sodium channel (SCN4A). Many disease-causing variants affect arginine residues in the voltage-sensing domains, creating an aberrant gating-pore current that leaks cations through the sensor. During provocation, an insulin- or catecholamine-driven shift of potassium into muscle cells combines with this abnormal leak to paradoxically depolarise and then inactivate the sarcolemma, rendering the fibre inexcitable and producing flaccid weakness. The transient low serum potassium reflects redistribution rather than depletion, and repeated depolarisation over years may contribute to the vacuolar myopathy seen in some patients.",
+    "additionalDifferentials": [
+      "Thyrotoxic periodic paralysis",
+      "Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular disorders, diuretics, vomiting)",
+      "Andersen-Tawil syndrome",
+      "Guillain-Barre syndrome and other acute flaccid weakness",
+      "Myasthenia gravis and other neuromuscular transmission disorders",
+      "Functional or psychogenic weakness"
     ],
-    [
-     "Primary Differentials",
-     "Thyrotoxic periodic paralysis, Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum potassium measured during a spontaneous attack, ideally with paired baseline values",
+      "Thyroid function tests to exclude thyrotoxic periodic paralysis",
+      "Electrocardiogram to detect hypokalaemic changes and to screen for the QU features of Andersen-Tawil syndrome",
+      "Prolonged (long) exercise electromyography protocol showing a post-exercise decrement in compound muscle action potential amplitude",
+      "Targeted genetic testing of CACNA1S and SCN4A",
+      "Muscle biopsy where a fixed myopathy is suspected, looking for tubular aggregates or vacuolar change"
     ],
-    [
-     "Management Strategy",
-     "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
+      "Cardiac arrhythmia or marked electrocardiographic disturbance during potassium shifts",
+      "Rebound hyperkalaemia following overzealous potassium replacement",
+      "Progressive fixed proximal weakness suggesting an established vacuolar myopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Attack frequency often lessens with age and with effective prophylaxis, and most patients have a normal lifespan, but a proportion develop a slowly progressive fixed proximal myopathy that can cause lasting disability independent of the acute episodes.",
+    "pitfalls": [
+      "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
+      "Overlooking thyrotoxic periodic paralysis, a treatable acquired mimic",
+      "Relying on interictal potassium and creatine kinase, which are frequently normal between attacks",
+      "Missing the association with certain general anaesthetic and glucose-loading situations that can provoke attacks"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Hypokalemic Periodic Paralysis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia",
+      "Counsel strict avoidance of triggers, chiefly carbohydrate-rich meals and rest after vigorous exercise",
+      "Use carbonic anhydrase inhibitors such as acetazolamide or dichlorphenamide as the mainstay of prophylaxis",
+      "Consider potassium-sparing diuretics and a low-carbohydrate, low-sodium diet as adjunctive prevention",
+      "Exclude thyrotoxic periodic paralysis and treat any underlying thyrotoxicosis, especially in patients of Asian ancestry",
+      "Monitor for a slowly progressive fixed proximal myopathy and support with physiotherapy",
+      "Provide anaesthetic precautions and offer genetic counselling for this autosomal dominant CACNA1S or SCN4A channelopathy"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypokalaemic periodic paralysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypokalemic-periodic-paralysis-real-image",
-   "title": "Hypokalaemic periodic paralysis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hypokalemic_periodic_paralysis-pathway",
+      "title": "Hypokalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude thyrotoxic periodic paralysis, Electrocardiogram to detect hypokalaemic changes and to screen for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypokalaemic periodic paralysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypokalemic_periodic_paralysis-matrix",
+      "title": "Hypokalaemic periodic paralysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thyrotoxic periodic paralysis, Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypokalaemic periodic paralysis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 22-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypokalemic_periodic_paralysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium during a spontaneous attack",
+          "cells": [
+            {
+              "text": "Low during attack; paired baseline values"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Excludes thyrotoxic periodic paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Hypokalaemic changes; QU features of Andersen-Tawil syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long exercise electromyography",
+          "cells": [
+            {
+              "text": "Post-exercise decrement in compound muscle action potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CACNA1S and SCN4A genetic testing",
+          "cells": [
+            {
+              "text": "Causal channel variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Tubular aggregates or vacuolar change if fixed myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypokalemic_periodic_paralysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyrotoxic periodic paralysis",
+          "cells": [
+            {
+              "text": "Treatable acquired mimic; thyrotoxicosis, especially in patients of Asian ancestry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary hypokalaemia",
+          "cells": [
+            {
+              "text": "Renal or gastrointestinal potassium loss, such as diuretics or vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andersen-Tawil syndrome",
+          "cells": [
+            {
+              "text": "QU features on the electrocardiogram"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypokalemic_periodic_paralysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute attack",
+          "cells": [
+            {
+              "text": "Oral potassium; careful intravenous potassium only for severe weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Carbohydrate-rich meals and rest after vigorous exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Acetazolamide or dichlorphenamide as the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive prevention",
+          "cells": [
+            {
+              "text": "Potassium-sparing diuretics and a low-carbohydrate, low-sodium diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Exclude and treat thyrotoxicosis when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fixed myopathy",
+          "cells": [
+            {
+              "text": "Monitor for slowly progressive proximal weakness; physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypokalemic_periodic_paralysis-ddx-2",
+      "kind": "ddx",
+      "title": "Causes of episodic generalized weakness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrolyte disturbances",
+          "cells": [
+            {
+              "text": "hypokalemia, hyperkalemia, hypercalcemia, hypernatremia, hyponatremia, hypophosphatemia, hypermagnesemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Muscle disorders",
+          "cells": [
+            {
+              "text": "channelopathies (periodic paralyses); metabolic defects of muscle (impaired carbohydrate or fatty acid use, abnormal mitochondrial function)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuromuscular junction disorders",
+          "cells": [
+            {
+              "text": "myasthenia gravis; Lambert-Eaton myasthenic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central nervous system disorders",
+          "cells": [
+            {
+              "text": "transient ischemic attacks of the brainstem; transient global cerebral ischemia; multiple sclerosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "hypokalemic_periodic_paralysis-ddx-3",
+      "kind": "ddx",
+      "title": "Neurologic channelopathies: channel and gene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category",
+        "Channel type",
+        "Mutated gene"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia 1",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNA1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Episodic ataxia 2",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia 6",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 1",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 3",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Benign neonatal familial convulsions",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ2, KCNQ3, SCN1B"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Generalized epilepsy with febrile convulsions plus",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "not separately listed (shares the cell above)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperkalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hypokalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Cl"
+            },
+            {
+              "text": "CLCN1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome (deafness, prolonged QT, arrhythmia)",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ1, KCNE1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autosomal dominant progressive deafness",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ4"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Limbic encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acquired neuromyotonia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Chapter cross-references in the source are omitted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypokalemic_periodic_paralysis-dx-mgmt",
+      "title": "Diagnosis and management of Hypokalaemic periodic paralysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent flaccid limb weakness with low potassium and preserved consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory or bulbar involvement, arrhythmia or rebound hyperkalaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ECG and cardiac monitoring; cautious potassium replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium during attack, thyroid tests, ECG, long exercise EMG, CACNA1S and SCN4A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thyrotoxicosis excluded and channelopathy pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat thyrotoxicosis or secondary potassium loss, then repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral potassium for mild attacks; careful intravenous potassium for severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid carbohydrate-rich meals and rest after vigorous exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide or dichlorphenamide for prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Potassium-sparing diuretics and low-carbohydrate diet as adjuncts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy for slowly progressive fixed myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Attacks reduced with prophylaxis; watch for fixed proximal weakness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

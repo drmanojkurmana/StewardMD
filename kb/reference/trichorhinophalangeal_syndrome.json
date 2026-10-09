@@ -1,175 +1,464 @@
 {
- "id": "trichorhinophalangeal_syndrome",
- "name": "Trichorhinophalangeal syndrome",
- "aliases": [
-  "TRPS",
-  "Langer-Giedion syndrome (TRPS type II)",
-  "trichorhinophalangeal syndrome types I-III",
-  "TRPS1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
-   "Characteristic features are sparse, slow-growing scalp hair, a bulbous pear-shaped nose, and a long flat philtrum",
-   "The hallmark radiographic finding is cone-shaped epiphyses of the phalanges, leading to shortened fingers and deviation of the digits",
-   "Type I is caused by TRPS1 variants; type III is a more severe TRPS1 phenotype with pronounced brachydactyly and short stature",
-   "Type II (Langer-Giedion syndrome) results from a contiguous deletion involving TRPS1 and the adjacent EXT1 gene, adding multiple cartilaginous exostoses and intellectual disability",
-   "Premature degenerative joint disease of the hands and hips can develop",
-   "Hip abnormalities resembling Perthes disease may occur",
-   "Diagnosis is clinical and radiographic, confirmed by TRPS1 testing or deletion analysis; management is supportive and orthopaedic"
+  "id": "trichorhinophalangeal_syndrome",
+  "name": "Trichorhinophalangeal syndrome",
+  "aliases": [
+    "TRPS",
+    "Langer-Giedion syndrome (TRPS type II)",
+    "trichorhinophalangeal syndrome types I-III",
+    "TRPS1"
   ],
-  "pathophysiology": "Trichorhinophalangeal syndrome is caused by loss of function of TRPS1, a zinc-finger transcription factor that regulates chondrocyte and perichondrial development and other aspects of skeletal and ectodermal patterning. Reduced TRPS1 activity disturbs growth-plate function, producing the characteristic cone-shaped epiphyses, brachydactyly, short stature, and hip abnormalities, and also affects hair follicle development, giving the sparse fine hair. Type I arises from intragenic TRPS1 variants, while type III reflects variants with a more severe skeletal effect. Type II (Langer-Giedion syndrome) is a contiguous gene deletion that removes both TRPS1 and the neighbouring EXT1 gene, so the exostoses and cognitive impairment reflect loss of EXT1 in addition to the TRPS1 phenotype.",
-  "additionalDifferentials": [
-   "Acrodysostosis and other acromelic dysplasias",
-   "Ectodermal dysplasias with sparse hair",
-   "Multiple hereditary exostoses (isolated EXT1/EXT2)",
-   "Brachydactyly syndromes",
-   "Cartilage-hair hypoplasia",
-   "Peripheral dysostosis of other causes"
-  ],
-  "additionalInvestigations": [
-   "Hand and skeletal radiographs demonstrating cone-shaped epiphyses",
-   "TRPS1 molecular genetic testing",
-   "Chromosomal microarray or deletion analysis for suspected Langer-Giedion syndrome",
-   "Hip imaging for degenerative or Perthes-like change",
-   "Developmental assessment where type II is suspected",
-   "Dermatological and hair assessment"
-  ],
-  "redFlags": [
-   "Nerve or spinal-cord compression from exostoses in Langer-Giedion syndrome",
-   "Malignant transformation of an exostosis (rare) with new pain or growth",
-   "Progressive disabling hip or hand arthropathy",
-   "Significant developmental delay prompting evaluation for type II"
-  ],
-  "prognosis": "Life expectancy is normal; morbidity arises from short stature, hand deformity, and early degenerative joint disease, with additional risks from exostoses and cognitive impairment in the Langer-Giedion form.",
-  "pitfalls": [
-   "Overlooking the diagnostic cone-shaped epiphyses on hand radiographs",
-   "Failing to distinguish type II (contiguous deletion with exostoses) from types I and III",
-   "Attributing the sparse hair to an isolated ectodermal disorder",
-   "Not arranging surveillance of exostoses in Langer-Giedion syndrome"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type II, exostosis manifestations",
-   "Manage hip disease and premature degenerative joint disease of the hands and hips with physiotherapy, analgesia and orthopaedic surgery including joint replacement where indicated",
-   "Monitor growth and short stature and assess through paediatric endocrinology, with hand therapy for brachydactyly and digital deformity",
-   "In Langer-Giedion (type II) disease, monitor and surgically excise symptomatic osteochondromas, remaining alert to malignant change, and provide developmental and educational support for intellectual disability",
-   "Offer dermatological and trichological advice for sparse, slow-growing hair, including camouflage or hairpieces",
-   "Coordinate care across clinical genetics, orthopaedics, endocrinology and dermatology",
-   "Provide genetic counselling and offer family screening with TRPS1 testing, or deletion and microarray analysis where the contiguous-gene form is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichorhinophalangeal_syndrome-pathway",
-   "title": "Trichorhinophalangeal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nerve or spinal-cord compression from exostoses in Langer-Giedion syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hand and skeletal radiographs demonstrating cone-shaped epiphyses, TRPS1 molecular genetic testing, Chromosomal microarray or deletion analysis for suspected Langer-Giedion syndrome"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type II, exostosis manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnostic cone-shaped epiphyses on hand radiographs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichorhinophalangeal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "trichorhinophalangeal_syndrome-matrix",
-   "title": "Trichorhinophalangeal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
+      "Characteristic features are sparse, slow-growing scalp hair, a bulbous pear-shaped nose, and a long flat philtrum",
+      "The hallmark radiographic finding is cone-shaped epiphyses of the phalanges, leading to shortened fingers and deviation of the digits",
+      "Type I is caused by TRPS1 variants; type III is a more severe TRPS1 phenotype with pronounced brachydactyly and short stature",
+      "Type II (Langer-Giedion syndrome) results from a contiguous deletion involving TRPS1 and the adjacent EXT1 gene, adding multiple cartilaginous exostoses and intellectual disability",
+      "Premature degenerative joint disease of the hands and hips can develop",
+      "Hip abnormalities resembling Perthes disease may occur",
+      "Diagnosis is clinical and radiographic, confirmed by TRPS1 testing or deletion analysis; management is supportive and orthopaedic"
     ],
-    [
-     "Key Investigations",
-     "Hand and skeletal radiographs demonstrating cone-shaped epiphyses, TRPS1 molecular genetic testing, Chromosomal microarray or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichorhinophalangeal syndrome is caused by loss of function of TRPS1, a zinc-finger transcription factor that regulates chondrocyte and perichondrial development and other aspects of skeletal and ectodermal patterning. Reduced TRPS1 activity disturbs growth-plate function, producing the characteristic cone-shaped epiphyses, brachydactyly, short stature, and hip abnormalities, and also affects hair follicle development, giving the sparse fine hair. Type I arises from intragenic TRPS1 variants, while type III reflects variants with a more severe skeletal effect. Type II (Langer-Giedion syndrome) is a contiguous gene deletion that removes both TRPS1 and the neighbouring EXT1 gene, so the exostoses and cognitive impairment reflect loss of EXT1 in addition to the TRPS1 phenotype.",
+    "additionalDifferentials": [
+      "Acrodysostosis and other acromelic dysplasias",
+      "Ectodermal dysplasias with sparse hair",
+      "Multiple hereditary exostoses (isolated EXT1/EXT2)",
+      "Brachydactyly syndromes",
+      "Cartilage-hair hypoplasia",
+      "Peripheral dysostosis of other causes"
     ],
-    [
-     "Primary Differentials",
-     "Acrodysostosis and other acromelic dysplasias, Ectodermal dysplasias with sparse hair, Multiple hereditary exostoses (isolated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hand and skeletal radiographs demonstrating cone-shaped epiphyses",
+      "TRPS1 molecular genetic testing",
+      "Chromosomal microarray or deletion analysis for suspected Langer-Giedion syndrome",
+      "Hip imaging for degenerative or Perthes-like change",
+      "Developmental assessment where type II is suspected",
+      "Dermatological and hair assessment"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type",
-     "Core treatment modality"
+    "redFlags": [
+      "Nerve or spinal-cord compression from exostoses in Langer-Giedion syndrome",
+      "Malignant transformation of an exostosis (rare) with new pain or growth",
+      "Progressive disabling hip or hand arthropathy",
+      "Significant developmental delay prompting evaluation for type II"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnostic cone-shaped epiphyses on hand radiographs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is normal; morbidity arises from short stature, hand deformity, and early degenerative joint disease, with additional risks from exostoses and cognitive impairment in the Langer-Giedion form.",
+    "pitfalls": [
+      "Overlooking the diagnostic cone-shaped epiphyses on hand radiographs",
+      "Failing to distinguish type II (contiguous deletion with exostoses) from types I and III",
+      "Attributing the sparse hair to an isolated ectodermal disorder",
+      "Not arranging surveillance of exostoses in Langer-Giedion syndrome"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type II, exostosis manifestations",
+      "Manage hip disease and premature degenerative joint disease of the hands and hips with physiotherapy, analgesia and orthopaedic surgery including joint replacement where indicated",
+      "Monitor growth and short stature and assess through paediatric endocrinology, with hand therapy for brachydactyly and digital deformity",
+      "In Langer-Giedion (type II) disease, monitor and surgically excise symptomatic osteochondromas, remaining alert to malignant change, and provide developmental and educational support for intellectual disability",
+      "Offer dermatological and trichological advice for sparse, slow-growing hair, including camouflage or hairpieces",
+      "Coordinate care across clinical genetics, orthopaedics, endocrinology and dermatology",
+      "Provide genetic counselling and offer family screening with TRPS1 testing, or deletion and microarray analysis where the contiguous-gene form is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichorhinophalangeal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichorhinophalangeal-syndrome-real-image",
-   "title": "Trichorhinophalangeal syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "trichorhinophalangeal_syndrome-pathway",
+      "title": "Trichorhinophalangeal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nerve or spinal-cord compression from exostoses in Langer-Giedion syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hand and skeletal radiographs demonstrating cone-shaped epiphyses, TRPS1 molecular genetic testing, Chromosomal microarray or deletion analysis for suspected Langer-Giedion syndrome"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type II, exostosis manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnostic cone-shaped epiphyses on hand radiographs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichorhinophalangeal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichorhinophalangeal_syndrome-matrix",
+      "title": "Trichorhinophalangeal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The name captures the triad of hair (tricho-), nose (rhino-), and digit (phalangeal) abnormalities",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hand and skeletal radiographs demonstrating cone-shaped epiphyses, TRPS1 molecular genetic testing, Chromosomal microarray or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acrodysostosis and other acromelic dysplasias, Ectodermal dysplasias with sparse hair, Multiple hereditary exostoses (isolated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-specific drug therapy, so care is supportive and directed at the skeletal, ectodermal and, in type",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnostic cone-shaped epiphyses on hand radiographs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichorhinophalangeal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichorhinophalangeal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Trichorhinophalangeal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichorhinophalangeal syndrome: sparse hair, bulbous nose and short digits",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: nerve or cord compression from exostoses, or painful progressive arthropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal or neurosurgical review for exostosis compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hand radiographs for cone-shaped epiphyses; TRPS1 testing; deletion analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TRPS1 testing or radiography show cone-shaped epiphyses?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acrodysostosis, multiple exostoses or ectodermal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, analgesia and orthopaedic surgery for hip and hand disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Paediatric endocrinology review for short stature",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision of symptomatic exostoses in Langer-Giedion syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family TRPS1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Normal life expectancy; morbidity from short stature, hand deformity and arthropathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichorhinophalangeal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Cone-shaped epiphyses of phalanges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPS1 molecular testing",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray or deletion analysis",
+          "cells": [
+            {
+              "text": "Langer-Giedion syndrome with EXT1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip imaging",
+          "cells": [
+            {
+              "text": "Degenerative or Perthes-like change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Suspected type II"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorhinophalangeal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acrodysostosis",
+          "cells": [
+            {
+              "text": "Acromelic dysplasia without the hair and nose triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Exostoses without the cone-shaped epiphyses and hair change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia with sparse hair",
+          "cells": [
+            {
+              "text": "Dental and skin features; no cone-shaped epiphyses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichorhinophalangeal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip and joint management",
+          "cells": [
+            {
+              "text": "Physiotherapy, analgesia, and surgery including joint replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and hand therapy",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology review; hand therapy for brachydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exostosis surgery in type II",
+          "cells": [
+            {
+              "text": "Symptomatic osteochondromas, with malignancy vigilance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair and cosmetic advice",
+          "cells": [
+            {
+              "text": "Camouflage or hairpieces for sparse hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "TRPS1 testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

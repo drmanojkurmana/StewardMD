@@ -1,175 +1,539 @@
 {
- "id": "melas_syndrome",
- "name": "MELAS syndrome",
- "aliases": [
-  "Mitochondrial encephalopathy, lactic acidosis and stroke-like episodes",
-  "m.3243A>G",
-  "MT-TL1",
-  "MELAS"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect classical vascular territories, often affecting the posterior (parieto-occipital) cortex",
-   "The great majority of cases carry the maternally inherited m.3243A>G point mutation in the MT-TL1 gene encoding the mitochondrial transfer RNA for leucine",
-   "Expression is governed by heteroplasmy and a tissue threshold effect, so the mutant load, clinical severity and age of onset vary widely within a maternal lineage",
-   "Elevated blood and cerebrospinal fluid lactate, worsening with exertion, is typical, and MR spectroscopy often shows a lactate doublet within affected cortex",
-   "Common systemic features include short stature, sensorineural hearing loss, migraine-like headaches, seizures, diabetes and cardiomyopathy",
-   "Muscle biopsy classically shows ragged-red fibres on modified Gomori trichrome staining and strong succinate dehydrogenase but cytochrome c oxidase deficiency in a subset of fibres",
-   "Management is supportive, favouring aerobic activity as tolerated, avoidance of mitochondrial toxins, and generic use of cofactor and antioxidant supplements while avoiding agents that impair respiratory-chain function"
+  "id": "melas_syndrome",
+  "name": "MELAS syndrome",
+  "aliases": [
+    "Mitochondrial encephalopathy, lactic acidosis and stroke-like episodes",
+    "m.3243A>G",
+    "MT-TL1",
+    "MELAS"
   ],
-  "pathophysiology": "MELAS results from a defect of oxidative phosphorylation, most often the m.3243A>G substitution in the mitochondrial transfer RNA(Leu) gene, which impairs mitochondrial protein synthesis and reduces the activity of respiratory-chain complexes. Because mitochondrial DNA is maternally transmitted and present in many copies per cell, a mixture of mutant and normal genomes (heteroplasmy) exists, and disease appears only once the mutant proportion exceeds a tissue-specific threshold. Energy-demanding tissues such as brain, muscle and the endocrine pancreas are preferentially affected. The stroke-like episodes are thought to reflect a combination of neuronal hyperexcitability, an angiopathy of small cerebral vessels with dysfunctional mitochondria in endothelium and smooth muscle, and a mismatch between metabolic demand and impaired energy supply rather than true thromboembolic occlusion.",
-  "additionalDifferentials": [
-   "Ischaemic arterial stroke or cerebral venous thrombosis",
-   "Other mitochondrial encephalomyopathies such as MERRF or Leigh syndrome",
-   "Viral or autoimmune encephalitis",
-   "Complex partial or focal status epilepticus with postictal deficit",
-   "Hemiplegic migraine",
-   "CADASIL and other hereditary small-vessel arteriopathies"
-  ],
-  "additionalInvestigations": [
-   "Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated",
-   "Brain MRI showing cortical stroke-like lesions crossing vascular boundaries, plus MR spectroscopy for a lactate peak",
-   "Targeted molecular testing for m.3243A>G with heteroplasmy quantification, ideally in urine sediment or muscle rather than blood",
-   "Skeletal muscle biopsy for histochemistry (ragged-red fibres) and respiratory-chain enzyme assays",
-   "Echocardiography and ECG to screen for cardiomyopathy and conduction disease",
-   "Audiometry and fasting glucose to detect associated hearing loss and diabetes"
-  ],
-  "redFlags": [
-   "Acute stroke-like episode with encephalopathy, seizures or status epilepticus requiring urgent neurological support",
-   "New or decompensating cardiomyopathy or cardiac conduction block",
-   "Rapidly rising lactic acidosis with metabolic decompensation",
-   "Exposure to mitochondrial toxins that may precipitate deterioration"
-  ],
-  "prognosis": "MELAS is a progressive multisystem disorder; recurrent stroke-like episodes tend to accumulate neurological disability, dementia and, in many patients, a shortened lifespan, though the course is highly variable and depends on mutant load and organ involvement.",
-  "pitfalls": [
-   "Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease",
-   "Testing only blood, where the m.3243A>G mutation may be undetectable or at low level; urine or muscle sampling improves yield",
-   "Using agents that impair mitochondrial function, which can trigger decompensation",
-   "Attributing hearing loss, diabetes or short stature to unrelated causes rather than recognising a unifying maternal disorder"
-  ],
-  "references": [
-   "GeneReviews: MELAS",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and reduce episode severity",
-   "Provide mitochondrial supportive supplements such as coenzyme Q10 and a cofactor cocktail including riboflavin and L-carnitine",
-   "Avoid mitochondrial toxins, notably sodium valproate, metformin, aminoglycosides and prolonged propofol",
-   "Control seizures with antiseizure medication, avoiding valproate where possible",
-   "Manage systemic involvement including diabetes, cardiomyopathy with cardiac surveillance, and sensorineural hearing loss with hearing aids or cochlear implants",
-   "Provide nutritional support and avoid prolonged fasting and other metabolic stressors",
-   "Offer maternal-lineage genetic counselling reflecting mitochondrial inheritance and heteroplasmy",
-   "Coordinate multidisciplinary metabolic, neurology, cardiology and audiology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "melas_syndrome-pathway",
-   "title": "MELAS syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect classical vascular territories, often affecting the posterior (parieto-occipital) cortex",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute stroke-like episode with encephalopathy, seizures or status epilepticus requiring urgent neurological support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated, Brain MRI showing cortical stroke-like lesions crossing vascular boundaries, plus MR spectroscopy for a lactate peak,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and reduce episode severity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of melas syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "melas_syndrome-matrix",
-   "title": "MELAS syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect classical vascular territories, often affecting the posterior (parieto-occipital) cortex",
+      "The great majority of cases carry the maternally inherited m.3243A>G point mutation in the MT-TL1 gene encoding the mitochondrial transfer RNA for leucine",
+      "Expression is governed by heteroplasmy and a tissue threshold effect, so the mutant load, clinical severity and age of onset vary widely within a maternal lineage",
+      "Elevated blood and cerebrospinal fluid lactate, worsening with exertion, is typical, and MR spectroscopy often shows a lactate doublet within affected cortex",
+      "Common systemic features include short stature, sensorineural hearing loss, migraine-like headaches, seizures, diabetes and cardiomyopathy",
+      "Muscle biopsy classically shows ragged-red fibres on modified Gomori trichrome staining and strong succinate dehydrogenase but cytochrome c oxidase deficiency in a subset of fibres",
+      "Management is supportive, favouring aerobic activity as tolerated, avoidance of mitochondrial toxins, and generic use of cofactor and antioxidant supplements while avoiding agents that impair respiratory-chain function"
     ],
-    [
-     "Key Investigations",
-     "Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated, Brain MRI showing cortical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MELAS results from a defect of oxidative phosphorylation, most often the m.3243A>G substitution in the mitochondrial transfer RNA(Leu) gene, which impairs mitochondrial protein synthesis and reduces the activity of respiratory-chain complexes. Because mitochondrial DNA is maternally transmitted and present in many copies per cell, a mixture of mutant and normal genomes (heteroplasmy) exists, and disease appears only once the mutant proportion exceeds a tissue-specific threshold. Energy-demanding tissues such as brain, muscle and the endocrine pancreas are preferentially affected. The stroke-like episodes are thought to reflect a combination of neuronal hyperexcitability, an angiopathy of small cerebral vessels with dysfunctional mitochondria in endothelium and smooth muscle, and a mismatch between metabolic demand and impaired energy supply rather than true thromboembolic occlusion.",
+    "additionalDifferentials": [
+      "Ischaemic arterial stroke or cerebral venous thrombosis",
+      "Other mitochondrial encephalomyopathies such as MERRF or Leigh syndrome",
+      "Viral or autoimmune encephalitis",
+      "Complex partial or focal status epilepticus with postictal deficit",
+      "Hemiplegic migraine",
+      "CADASIL and other hereditary small-vessel arteriopathies"
     ],
-    [
-     "Primary Differentials",
-     "Ischaemic arterial stroke or cerebral venous thrombosis, Other mitochondrial encephalomyopathies such as MERRF or Leigh syndrome,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated",
+      "Brain MRI showing cortical stroke-like lesions crossing vascular boundaries, plus MR spectroscopy for a lactate peak",
+      "Targeted molecular testing for m.3243A>G with heteroplasmy quantification, ideally in urine sediment or muscle rather than blood",
+      "Skeletal muscle biopsy for histochemistry (ragged-red fibres) and respiratory-chain enzyme assays",
+      "Echocardiography and ECG to screen for cardiomyopathy and conduction disease",
+      "Audiometry and fasting glucose to detect associated hearing loss and diabetes"
     ],
-    [
-     "Management Strategy",
-     "Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute stroke-like episode with encephalopathy, seizures or status epilepticus requiring urgent neurological support",
+      "New or decompensating cardiomyopathy or cardiac conduction block",
+      "Rapidly rising lactic acidosis with metabolic decompensation",
+      "Exposure to mitochondrial toxins that may precipitate deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "MELAS is a progressive multisystem disorder; recurrent stroke-like episodes tend to accumulate neurological disability, dementia and, in many patients, a shortened lifespan, though the course is highly variable and depends on mutant load and organ involvement.",
+    "pitfalls": [
+      "Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease",
+      "Testing only blood, where the m.3243A>G mutation may be undetectable or at low level; urine or muscle sampling improves yield",
+      "Using agents that impair mitochondrial function, which can trigger decompensation",
+      "Attributing hearing loss, diabetes or short stature to unrelated causes rather than recognising a unifying maternal disorder"
+    ],
+    "references": [
+      "GeneReviews: MELAS",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and reduce episode severity",
+      "Provide mitochondrial supportive supplements such as coenzyme Q10 and a cofactor cocktail including riboflavin and L-carnitine",
+      "Avoid mitochondrial toxins, notably sodium valproate, metformin, aminoglycosides and prolonged propofol",
+      "Control seizures with antiseizure medication, avoiding valproate where possible",
+      "Manage systemic involvement including diabetes, cardiomyopathy with cardiac surveillance, and sensorineural hearing loss with hearing aids or cochlear implants",
+      "Provide nutritional support and avoid prolonged fasting and other metabolic stressors",
+      "Offer maternal-lineage genetic counselling reflecting mitochondrial inheritance and heteroplasmy",
+      "Coordinate multidisciplinary metabolic, neurology, cardiology and audiology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for melas syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "melas-syndrome-real-image",
-   "title": "MELAS syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "melas_syndrome-pathway",
+      "title": "MELAS syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect classical vascular territories, often affecting the posterior (parieto-occipital) cortex",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute stroke-like episode with encephalopathy, seizures or status epilepticus requiring urgent neurological support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated, Brain MRI showing cortical stroke-like lesions crossing vascular boundaries, plus MR spectroscopy for a lactate peak,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and reduce episode severity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of melas syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "melas_syndrome-matrix",
+      "title": "MELAS syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark is recurrent stroke-like episodes producing focal neurological deficits that characteristically do not respect",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Resting and post-exercise blood lactate and pyruvate, with cerebrospinal fluid lactate when indicated, Brain MRI showing cortical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ischaemic arterial stroke or cerebral venous thrombosis, Other mitochondrial encephalomyopathies such as MERRF or Leigh syndrome,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give L-arginine, intravenously during acute stroke-like episodes and orally for prophylaxis, to improve endothelial function and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing stroke-like episodes as conventional ischaemic stroke and overlooking the underlying mitochondrial disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for melas syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "melas_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Resting and post-exercise blood lactate and pyruvate, with CSF lactate",
+          "cells": [
+            {
+              "text": "Lactate and pyruvate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and MR spectroscopy",
+          "cells": [
+            {
+              "text": "Cortical stroke-like lesions crossing vascular boundaries; lactate peak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted m.3243A>G testing with heteroplasmy quantification",
+          "cells": [
+            {
+              "text": "m.3243A>G variant and heteroplasmy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal muscle biopsy and respiratory-chain enzyme assays",
+          "cells": [
+            {
+              "text": "Ragged-red fibres and respiratory-chain enzymes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and fasting glucose",
+          "cells": [
+            {
+              "text": "Hearing loss and diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melas_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "L-arginine",
+          "cells": [
+            {
+              "text": "Intravenous in acute stroke-like episodes and oral prophylaxis, to improve endothelial function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial supportive supplements",
+          "cells": [
+            {
+              "text": "Coenzyme Q10 and a cofactor cocktail including riboflavin and L-carnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid mitochondrial toxins",
+          "cells": [
+            {
+              "text": "Sodium valproate, metformin, aminoglycosides and prolonged propofol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Antiseizure medication, avoiding valproate where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic involvement",
+          "cells": [
+            {
+              "text": "Diabetes, cardiac surveillance, and sensorineural hearing loss with hearing aids or implants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasting and other metabolic stressors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal-lineage genetic counselling",
+          "cells": [
+            {
+              "text": "Mitochondrial inheritance and heteroplasmy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic, neurology, cardiology and audiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melas_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected mitochondrial diseases",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features"
+      ],
+      "rows": [
+        {
+          "parameter": "MELAS syndrome",
+          "cells": [
+            {
+              "text": "Mitochondrial myopathy with encephalopathy, lactic acidosis, and stroke"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leber's optic atrophy",
+          "cells": [
+            {
+              "text": "Hereditary optic neuropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kearns-Sayre syndrome (KSS)",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, pigmentary degeneration of the retina, cardiomyopathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MERRF syndrome",
+          "cells": [
+            {
+              "text": "Myoclonic epilepsy and ragged-red fibers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NARP",
+          "cells": [
+            {
+              "text": "Neurogenic muscular weakness with ataxia and retinitis pigmentosa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia (CEOP)",
+          "cells": [
+            {
+              "text": "Chronic progressive external ophthalmoplegia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pearson's syndrome (PEAR)",
+          "cells": [
+            {
+              "text": "Bone marrow and pancreatic failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ADMIMY",
+          "cells": [
+            {
+              "text": "Autosomal dominant inherited mitochondrial myopathy with mitochondrial deletion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Somatic mutations in the cytochrome b gene",
+          "cells": [
+            {
+              "text": "Exercise intolerance, lactic acidosis, complex III deficiency, muscle pain, ragged-red fibers (text cut off at the page edge)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "melas_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MELAS syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stroke-like episodes with encephalopathy or seizures and raised lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiomyopathy or conduction block, rising lactic acidosis or toxin exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological support; L-arginine for the stroke-like episode; avoid toxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and CSF lactate, MRI with spectroscopy, m.3243A>G heteroplasmy, ECG, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the m.3243A>G variant confirmed with heteroplasmy testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ischaemic stroke, CADASIL or viral encephalitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "L-arginine intravenously in acute episodes and orally for prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Coenzyme Q10 and cofactors such as riboflavin and L-carnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid valproate, metformin, aminoglycosides and prolonged propofol",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication, avoiding valproate where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for cardiac, hearing and diabetes complications; maternal-line counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

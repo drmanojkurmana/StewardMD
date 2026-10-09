@@ -1,174 +1,443 @@
 {
- "id": "singleton_merten_syndrome",
- "name": "Singleton-Merten syndrome",
- "aliases": [
-  "IFIH1-associated interferonopathy",
-  "DDX58-associated interferonopathy",
-  "IFIH1",
-  "DDX58"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
-   "Hallmarks are abnormal dental development with early tooth loss, aortic and vascular calcification, and skeletal abnormalities",
-   "Cardiovascular calcification of the aorta and heart valves can occur unusually early and cause serious complications",
-   "Dental features include delayed or abnormal dentition, dysplastic teeth, and premature loss of teeth",
-   "Skeletal manifestations may include osteopenia, acro-osteolysis, and widened medullary cavities",
-   "A raised interferon signature supports the diagnosis alongside genetic confirmation",
-   "JAK inhibition targeting the interferon pathway is being used to address the underlying interferon-driven inflammation"
+  "id": "singleton_merten_syndrome",
+  "name": "Singleton-Merten syndrome",
+  "aliases": [
+    "IFIH1-associated interferonopathy",
+    "DDX58-associated interferonopathy",
+    "IFIH1",
+    "DDX58"
   ],
-  "pathophysiology": "Singleton-Merten syndrome is caused by gain-of-function mutations in IFIH1 (encoding MDA5) or DDX58 (encoding RIG-I), cytosolic sensors of viral nucleic acids. The mutant sensors are inappropriately activated, driving constitutive production of type I interferons even without genuine infection. Chronic interferon signalling promotes ectopic calcification of the aorta and cardiac structures, disturbs tooth and bone development, and causes systemic inflammatory features. The interferon-dominant mechanism links the dental, cardiovascular, and skeletal manifestations and provides the rationale for JAK inhibition to reduce interferon signalling.",
-  "additionalDifferentials": [
-   "Other type I interferonopathies (Aicardi-Goutieres syndrome, SAVI, CANDLE)",
-   "Generalised arterial calcification of infancy",
-   "Idiopathic basal ganglia calcification syndromes",
-   "Progeria and premature ageing syndromes",
-   "Ectodermal dysplasias affecting dentition",
-   "Metabolic bone disease of other cause"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations",
-   "Interferon signature in blood",
-   "Cardiovascular imaging for aortic and valvular calcification",
-   "Dental and orthopantomogram assessment of dentition",
-   "Skeletal radiographs for osteopenia and acro-osteolysis",
-   "Echocardiography to assess cardiac structure and function"
-  ],
-  "redFlags": [
-   "Progressive aortic or valvular calcification threatening cardiac function",
-   "Early cardiovascular compromise in a child or young adult",
-   "Significant skeletal fragility or deformity",
-   "Neurological involvement suggesting broader interferonopathy"
-  ],
-  "prognosis": "The prognosis is largely determined by cardiovascular calcification, which can cause serious morbidity; interferon-directed therapy may modify disease, but established calcification and dental loss are difficult to reverse.",
-  "pitfalls": [
-   "Overlooking early vascular calcification as an incidental or age-related finding",
-   "Attributing dental abnormalities to a primary ectodermal disorder alone",
-   "Not requesting an interferon signature when an interferonopathy is possible",
-   "Missing the genetic link between IFIH1/DDX58 variants and the multisystem phenotype"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease",
-   "Cardiovascular management of aortic and valvular calcification with antihypertensives, heart failure therapy and surgical or valve intervention when calcification is severe",
-   "Dental care for dysplastic dentition and early tooth loss, including prostheses and regular dental review",
-   "Bone health support with management of osteopenia and acro-osteolysis and physiotherapy",
-   "Surveillance with serial echocardiography and vascular imaging plus interferon-signature monitoring for progression",
-   "Coordinated care through immunology or rheumatology, cardiology, dentistry and orthopaedics",
-   "Genetic counselling and family testing for the IFIH1 or DDX58 gain-of-function variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "singleton_merten_syndrome-pathway",
-   "title": "Singleton-Merten syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive aortic or valvular calcification threatening cardiac function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations, Interferon signature in blood, Cardiovascular imaging for aortic and valvular calcification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking early vascular calcification as an incidental or age-related finding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of singleton-merten syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "singleton_merten_syndrome-matrix",
-   "title": "Singleton-Merten syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
+      "Hallmarks are abnormal dental development with early tooth loss, aortic and vascular calcification, and skeletal abnormalities",
+      "Cardiovascular calcification of the aorta and heart valves can occur unusually early and cause serious complications",
+      "Dental features include delayed or abnormal dentition, dysplastic teeth, and premature loss of teeth",
+      "Skeletal manifestations may include osteopenia, acro-osteolysis, and widened medullary cavities",
+      "A raised interferon signature supports the diagnosis alongside genetic confirmation",
+      "JAK inhibition targeting the interferon pathway is being used to address the underlying interferon-driven inflammation"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations, Interferon signature in blood, Cardiovascular imaging for aortic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Singleton-Merten syndrome is caused by gain-of-function mutations in IFIH1 (encoding MDA5) or DDX58 (encoding RIG-I), cytosolic sensors of viral nucleic acids. The mutant sensors are inappropriately activated, driving constitutive production of type I interferons even without genuine infection. Chronic interferon signalling promotes ectopic calcification of the aorta and cardiac structures, disturbs tooth and bone development, and causes systemic inflammatory features. The interferon-dominant mechanism links the dental, cardiovascular, and skeletal manifestations and provides the rationale for JAK inhibition to reduce interferon signalling.",
+    "additionalDifferentials": [
+      "Other type I interferonopathies (Aicardi-Goutieres syndrome, SAVI, CANDLE)",
+      "Generalised arterial calcification of infancy",
+      "Idiopathic basal ganglia calcification syndromes",
+      "Progeria and premature ageing syndromes",
+      "Ectodermal dysplasias affecting dentition",
+      "Metabolic bone disease of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Other type I interferonopathies (Aicardi-Goutieres syndrome, SAVI, CANDLE), Generalised arterial calcification of infancy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations",
+      "Interferon signature in blood",
+      "Cardiovascular imaging for aortic and valvular calcification",
+      "Dental and orthopantomogram assessment of dentition",
+      "Skeletal radiographs for osteopenia and acro-osteolysis",
+      "Echocardiography to assess cardiac structure and function"
     ],
-    [
-     "Management Strategy",
-     "JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive aortic or valvular calcification threatening cardiac function",
+      "Early cardiovascular compromise in a child or young adult",
+      "Significant skeletal fragility or deformity",
+      "Neurological involvement suggesting broader interferonopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking early vascular calcification as an incidental or age-related finding",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is largely determined by cardiovascular calcification, which can cause serious morbidity; interferon-directed therapy may modify disease, but established calcification and dental loss are difficult to reverse.",
+    "pitfalls": [
+      "Overlooking early vascular calcification as an incidental or age-related finding",
+      "Attributing dental abnormalities to a primary ectodermal disorder alone",
+      "Not requesting an interferon signature when an interferonopathy is possible",
+      "Missing the genetic link between IFIH1/DDX58 variants and the multisystem phenotype"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease",
+      "Cardiovascular management of aortic and valvular calcification with antihypertensives, heart failure therapy and surgical or valve intervention when calcification is severe",
+      "Dental care for dysplastic dentition and early tooth loss, including prostheses and regular dental review",
+      "Bone health support with management of osteopenia and acro-osteolysis and physiotherapy",
+      "Surveillance with serial echocardiography and vascular imaging plus interferon-signature monitoring for progression",
+      "Coordinated care through immunology or rheumatology, cardiology, dentistry and orthopaedics",
+      "Genetic counselling and family testing for the IFIH1 or DDX58 gain-of-function variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for singleton-merten syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "singleton-merten-syndrome-real-image",
-   "title": "Singleton-Merten syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "singleton_merten_syndrome-pathway",
+      "title": "Singleton-Merten syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive aortic or valvular calcification threatening cardiac function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations, Interferon signature in blood, Cardiovascular imaging for aortic and valvular calcification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking early vascular calcification as an incidental or age-related finding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of singleton-merten syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "singleton_merten_syndrome-matrix",
+      "title": "Singleton-Merten syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A type I interferonopathy caused by gain-of-function mutations in IFIH1 (MDA5) or DDX58 (RIG-I), cytosolic nucleic-acid sensors",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for IFIH1 (MDA5) and DDX58 (RIG-I) mutations, Interferon signature in blood, Cardiovascular imaging for aortic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other type I interferonopathies (Aicardi-Goutieres syndrome, SAVI, CANDLE), Generalised arterial calcification of infancy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "JAK inhibitor therapy (such as baricitinib or ruxolitinib) to dampen the type I interferon signalling that drives the disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking early vascular calcification as an incidental or age-related finding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for singleton-merten syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "singleton_merten_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for IFIH1 and DDX58",
+          "cells": [
+            {
+              "text": "Gain-of-function mutations in MDA5 or RIG-I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood interferon signature",
+          "cells": [
+            {
+              "text": "Raised type I interferon signature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular imaging",
+          "cells": [
+            {
+              "text": "Aortic and valvular calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and orthopantomogram assessment",
+          "cells": [
+            {
+              "text": "Delayed or dysplastic dentition and early tooth loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Osteopenia and acro-osteolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac structure and function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "singleton_merten_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "JAK inhibitor therapy",
+          "cells": [
+            {
+              "text": "Such as baricitinib or ruxolitinib, to dampen type I interferon signalling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular management",
+          "cells": [
+            {
+              "text": "Antihypertensives and heart failure therapy; surgery or valve intervention for severe calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental care",
+          "cells": [
+            {
+              "text": "Prostheses and regular dental review for dysplastic dentition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health support",
+          "cells": [
+            {
+              "text": "Management of osteopenia and acro-osteolysis, with physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, vascular imaging and interferon-signature monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Immunology or rheumatology, cardiology, dentistry and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for the IFIH1 or DDX58 gain-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "singleton_merten_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Singleton-Merten syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysplastic teeth, early tooth loss and aortic calcification: suspected Singleton-Merten",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive aortic or valvular calcification, cardiac compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for calcification threatening cardiac function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IFIH1 and DDX58 genetic testing, blood interferon signature, cardiovascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do genetic testing and the interferon signature support a gain-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other type I interferonopathies or calcification syndromes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "JAK inhibitor therapy to dampen interferon-driven inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cardiovascular management of aortic and valvular calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dental care for dysplastic dentition and early tooth loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and interferon-signature monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Family genetic counselling and testing for the gain-of-function variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Calcification drives prognosis; established calcification and dental loss persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

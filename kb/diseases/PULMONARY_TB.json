@@ -320,25 +320,1134 @@
       "caption": "Diagnostic and clinical overview matrix for pulmonary tuberculosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "pulmonary-tb-real-image",
-      "title": "Pulmonary Tuberculosis: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Treatment for TB Disease",
+      "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 168-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 165-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 165-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 120-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 189-11",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PULMONARY_TB-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing pulmonary tuberculosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Cough",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 90%; dry then purulent",
+              "op": "<=",
+              "value": 90
+            },
+            {
+              "text": "Commonest symptom"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Haemoptysis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20% to 30%",
+              "range": [
+                20,
+                30
+              ]
+            },
+            {
+              "text": "Massive bleeding is a red flag"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Constitutional symptoms",
+          "cells": [
+            {
+              "text": "Fever, night sweats, weight loss, anorexia"
+            },
+            {
+              "text": "Non-specific; absent fever does not exclude TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Apical-posterior upper lobe or superior lower lobe infiltrate, cavitation"
+            },
+            {
+              "text": "Sensitive but not specific; never treat on film alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum specimens",
+          "cells": [
+            {
+              "text": "At least 1 to 2 early-morning samples for smear and culture"
+            },
+            {
+              "text": "Induced sputum or bronchoscopy if none produced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xpert MTB/RIF sensitivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 85% overall; 98% smear-positive, 70% smear-negative",
+              "op": "=",
+              "value": 85
+            },
+            {
+              "text": "{{hy:WHO first-line test; also detects rifampin resistance in under 2 h}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xpert MTB/RIF specificity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "98%",
+              "op": "=",
+              "value": 98
+            },
+            {
+              "text": "A negative result does not exclude TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smear microscopy sensitivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "40% to 60%",
+              "range": [
+                40,
+                60
+              ]
+            },
+            {
+              "text": "Cannot separate TB from NTM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Liquid culture is reference; solid media take 4 to 8 weeks",
+              "range": [
+                4,
+                8
+              ]
+            },
+            {
+              "text": "Gold standard; do rifampin DST on all isolates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV with CD4 <200/uL",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "CD4 <200/uL",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Atypical film, little cavitation; urine LF-LAM helps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TST or IGRA",
+          "cells": [
+            {
+              "text": "Positive or negative"
+            },
+            {
+              "text": "Cannot separate latent from active TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk: HIV infection",
+          "cells": [
+            {
+              "text": "Relative risk 21 to >30",
+              "op": ">=",
+              "value": 21
+            },
+            {
+              "text": "Highest-risk comorbidity"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Risk: recent infection <1 year",
+          "cells": [
+            {
+              "text": "Relative risk 12.9",
+              "op": "=",
+              "value": 12.9
+            },
+            {
+              "text": "Higher progression risk"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Risk: silicosis, dialysis, diabetes",
+          "cells": [
+            {
+              "text": "Relative risk 30; 10 to 25; 2 to 4"
+            },
+            {
+              "text": "Raises pretest probability"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Risk-factor rows rephrase the owner's Tables PDF, Table 165-1."
+    },
+    {
+      "id": "PULMONARY_TB-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pulmonary tuberculosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchogenic carcinoma",
+          "cells": [
+            {
+              "text": "Upper-lobe mass or cavity, haemoptysis, weight loss"
+            },
+            {
+              "text": "Bronchoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nontuberculous mycobacteria",
+          "cells": [
+            {
+              "text": "AFB smear positive, chronic lung disease, no TB risk factors"
+            },
+            {
+              "text": "{{hy:NAAT and culture speciation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Fungal ball in an old TB cavity; mistaken for relapse"
+            },
+            {
+              "text": "Aspergillus IgG precipitins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung abscess or necrotising pneumonia",
+          "cells": [
+            {
+              "text": "Cavity with air-fluid level"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Non-caseating granulomas"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary pulmonary nodule of other cause",
+          "cells": [
+            {
+              "text": "Overlaps with neoplasm"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "PULMONARY_TB-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pulmonary tuberculosis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "2HRZE/4HR (6 months)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred for new drug-susceptible pulmonary TB}}"
+            },
+            {
+              "text": "8 weeks isoniazid, rifampin, pyrazinamide, ethambutol, then 18 weeks isoniazid and rifampin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "2HPZM/2HPM (4 months)",
+          "cells": [
+            {
+              "text": "Age >=12, weight >=40 kg, HIV with CD4 >=100/uL on compatible ART"
+            },
+            {
+              "text": "Isoniazid, rifapentine, pyrazinamide, moxifloxacin, 17 weeks total"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extend to 9 months",
+          "cells": [
+            {
+              "text": "Cavitary disease with positive 2-month culture, no pyrazinamide, or HIV without ART"
+            },
+            {
+              "text": "2HRZE/7HR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Culture-negative TB",
+          "cells": [
+            {
+              "text": "Culture negative"
+            },
+            {
+              "text": "HRZE 2 months then 2 months continuation; extend to 6 months with HIV"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Isoniazid-resistant",
+          "cells": [
+            {
+              "text": "Resistant to H"
+            },
+            {
+              "text": "RZE with or without a fluoroquinolone for 6 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rifampin-resistant",
+          "cells": [
+            {
+              "text": "Resistant to R"
+            },
+            {
+              "text": "HZE plus fluoroquinolone 2 months, then HE plus fluoroquinolone 10 to 16 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Resistant to H and R (MDR)",
+          "cells": [
+            {
+              "text": "MDR-TB"
+            },
+            {
+              "text": "Z, E, fluoroquinolone plus alternative agents for 18 to 24 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pyridoxine",
+          "cells": [
+            {
+              "text": "With isoniazid in those at risk of neuropathy"
+            },
+            {
+              "text": "25 to 50 mg/day; 100 mg/day for neuropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Directly observed therapy",
+          "cells": [
+            {
+              "text": "Standard of care"
+            },
+            {
+              "text": "In person or video DOT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "At least monthly review; sputum culture at 2 months"
+            },
+            {
+              "text": "Guides continuation-phase length"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug-resistant rows follow the owner's Tables PDF, Table 168-2, an older scheme that included injectables; current WHO all-oral MDR regimens (for example bedaquiline-based) were not reviewed here. CDC gives no milligram doses on the page opened."
+    },
+    {
+      "id": "PULMONARY_TB-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Tuberculin reaction size that defines a positive test, by risk group",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Tuberculin reaction size, mm"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV-infected persons or persons receiving immunosuppressive therapy",
+          "cells": [
+            {
+              "text": "5 or more"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Close contacts of tuberculosis patients (a)",
+          "cells": [
+            {
+              "text": "5 or more"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Persons with fibrotic lesions on chest radiography",
+          "cells": [
+            {
+              "text": "5 or more"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Recently infected persons (within 2 years)",
+          "cells": [
+            {
+              "text": "10 or more"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Persons with high-risk medical conditions (b)",
+          "cells": [
+            {
+              "text": "10 or more"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Low-risk persons (c)",
+          "cells": [
+            {
+              "text": "15 or more"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Footnote texts a, b, c are not shown on the printed page."
+    },
+    {
+      "id": "PULMONARY_TB-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Examples of microbial ligand-receptor interactions",
+      "rowHeader": "Microorganism",
+      "columns": [
+        "Microbial ligand",
+        "Host receptor"
+      ],
+      "rows": [
+        {
+          "parameter": "Influenza virus",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Sialic acid"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Measles virus, vaccine strain",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "CD46/moesin"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Measles virus, wild-type strains",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Signaling lymphocytic activation molecule (SLAM)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Human herpesvirus type 6",
+          "cells": [
+            {
+              "text": "Not stated (question mark in source)"
+            },
+            {
+              "text": "CD46"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Herpes simplex virus",
+          "cells": [
+            {
+              "text": "Glycoprotein C"
+            },
+            {
+              "text": "Heparan sulfate"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "HIV",
+          "cells": [
+            {
+              "text": "Surface glycoprotein"
+            },
+            {
+              "text": "CD4 and chemokine receptors (CCR5 and CXCR4)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Epstein-Barr virus",
+          "cells": [
+            {
+              "text": "Envelope protein"
+            },
+            {
+              "text": "CD21 (CR2)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Adenovirus",
+          "cells": [
+            {
+              "text": "Fiber protein"
+            },
+            {
+              "text": "Coxsackie-adenovirus receptor (CAR)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Coxsackievirus",
+          "cells": [
+            {
+              "text": "Viral coat proteins"
+            },
+            {
+              "text": "CAR and major histocompatibility class I antigens"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Neisseria spp.",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Membrane co-factor protein (CD46)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (pili and flagella)",
+          "cells": [
+            {
+              "text": "Pili and flagella"
+            },
+            {
+              "text": "Asialo-GM1"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (lipopolysaccharide)",
+          "cells": [
+            {
+              "text": "Lipopolysaccharide"
+            },
+            {
+              "text": "Cystic fibrosis transmembrane conductance regulator (CFTR)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Escherichia coli",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Ceramides/mannose and digalactosyl residues"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Streptococcus pyogenes",
+          "cells": [
+            {
+              "text": "Hyaluronic acid capsule"
+            },
+            {
+              "text": "CD44"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Yersinia spp.",
+          "cells": [
+            {
+              "text": "Invasin/accessory invasin locus"
+            },
+            {
+              "text": "Beta1 integrins"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Bordetella pertussis",
+          "cells": [
+            {
+              "text": "Filamentous hemagglutinin"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Legionella pneumophila",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Mycobacterium tuberculosis",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3; DC-SIGN (footnote a, text not on page)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Blastomyces dermatitidis",
+          "cells": [
+            {
+              "text": "WI-1"
+            },
+            {
+              "text": "Possibly matrix proteins and integrins"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Candida albicans",
+          "cells": [
+            {
+              "text": "Int1p"
+            },
+            {
+              "text": "Extracellular matrix proteins"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Plasmodium vivax",
+          "cells": [
+            {
+              "text": "Merozoite form"
+            },
+            {
+              "text": "Duffy Fy antigen"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Plasmodium falciparum",
+          "cells": [
+            {
+              "text": "Erythrocyte-binding protein 175 (EBA-175)"
+            },
+            {
+              "text": "Glycophorin A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Entamoeba histolytica",
+          "cells": [
+            {
+              "text": "Surface lectin"
+            },
+            {
+              "text": "N-Acetylglucosamine"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The source groups rows as viral, bacterial, fungal and protozoal pathogens."
+    },
+    {
+      "id": "PULMONARY_TB-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c7"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    },
+    {
+      "id": "PULMONARY_TB-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Characteristics of immune reconstitution inflammatory syndrome",
+      "rowHeader": "Characteristic",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Presentation",
+          "cells": [
+            {
+              "text": "Paradoxical worsening of the clinical condition after starting antiretroviral therapy"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Timing",
+          "cells": [
+            {
+              "text": "Weeks to months after antiretroviral therapy is started"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Typical patient",
+          "cells": [
+            {
+              "text": "Starts therapy with CD4+ T cell count under 50/uL and has a precipitous drop in viral load"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Common setting",
+          "cells": [
+            {
+              "text": "Frequently seen in the setting of tuberculosis"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Outcome",
+          "cells": [
+            {
+              "text": "Can be fatal"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PULMONARY_TB-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary tuberculosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough, fever, night sweats or weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest radiograph; 1 to 2 early-morning sputa for Xpert, smear, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Xpert detects M. tuberculosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Rifampin resistance detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Resistance testing and drug-resistant regimen",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start 2HRZE/4HR under DOT, or 4-month regimen if eligible",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Await culture; induced sputum, bronchoscopy or CT; LF-LAM in advanced HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Culture or other test confirms TB?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Look for cancer, NTM, aspergillosis or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Cavity and positive culture at 2 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Extend continuation phase to total 9 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete 6-month course",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Complete extended course",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Alternative diagnosis managed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "At 2 months"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

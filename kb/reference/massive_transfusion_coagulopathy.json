@@ -1,177 +1,482 @@
 {
- "id": "massive_transfusion_coagulopathy",
- "name": "Massive transfusion coagulopathy",
- "aliases": [
-  "Dilutional coagulopathy",
-  "Coagulopathy of massive transfusion"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion medicine",
- "specialty": "Haematology / Transfusion medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "British Society for Haematology guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and platelets, hypothermia, acidosis and hypocalcaemia.",
-   "The lethal triad of hypothermia, acidosis and coagulopathy is self-reinforcing and a leading cause of death in major haemorrhage.",
-   "Stored red cells contain little functional platelet or coagulation factor activity, so replacing large blood losses with red cells alone dilutes haemostasis.",
-   "Fibrinogen is often the first factor to fall to critical levels and requires early replacement with cryoprecipitate or fibrinogen concentrate.",
-   "Modern major haemorrhage protocols favour balanced ratios of red cells, plasma and platelets and early empirical treatment before laboratory results return.",
-   "Point-of-care viscoelastic testing can guide targeted component therapy and reduce unnecessary transfusion.",
-   "Correcting hypothermia and acidosis is essential because clotting enzymes function poorly when cold and acidotic.",
-   "In trauma, an early consumptive coagulopathy of trauma-induced coagulopathy coexists with and precedes purely dilutional effects."
+  "id": "massive_transfusion_coagulopathy",
+  "name": "Massive transfusion coagulopathy",
+  "aliases": [
+    "Dilutional coagulopathy",
+    "Coagulopathy of massive transfusion"
   ],
-  "pathophysiology": "Massive transfusion coagulopathy is a multifactorial failure of haemostasis during and after large-volume blood replacement. As shed blood is replaced with red cell concentrates and crystalloid, platelets and coagulation factors are progressively diluted while ongoing bleeding and clot formation consume them. Concurrent hypothermia slows the kinetics of coagulation enzymes and impairs platelet function, and metabolic acidosis from hypoperfusion further inhibits the coagulation cascade and accelerates fibrinogen breakdown. Citrate-induced hypocalcaemia reduces calcium-dependent clotting reactions and myocardial performance. In trauma an endogenous trauma-induced coagulopathy, driven by tissue injury, shock, endothelial activation and hyperfibrinolysis, is superimposed on these dilutional and metabolic derangements. Together these processes produce diffuse microvascular bleeding that compounds the original haemorrhage.",
-  "additionalDifferentials": [
-   "Disseminated intravascular coagulation",
-   "Trauma-induced coagulopathy",
-   "Pre-existing anticoagulant or antiplatelet therapy",
-   "Inherited bleeding disorder unmasked by haemorrhage",
-   "Acute haemolytic transfusion reaction with coagulopathy",
-   "Hyperfibrinolysis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with platelet count",
-   "Prothrombin time and activated partial thromboplastin time",
-   "Fibrinogen concentration",
-   "Viscoelastic testing such as thromboelastography or rotational thromboelastometry",
-   "Ionised calcium, temperature and arterial blood gas for the lethal triad",
-   "D-dimer and fibrin degradation products where disseminated intravascular coagulation is suspected"
-  ],
-  "redFlags": [
-   "Diffuse microvascular oozing from wounds, puncture sites and mucosa",
-   "Critically low fibrinogen during ongoing haemorrhage",
-   "Core hypothermia with worsening bleeding",
-   "Severe metabolic acidosis in a bleeding patient",
-   "Ionised hypocalcaemia during rapid transfusion"
-  ],
-  "prognosis": "Outcome depends on rapid haemorrhage control and correction of the lethal triad; established coagulopathy with hypothermia and acidosis carries high mortality. Structured major haemorrhage protocols with balanced component ratios and goal-directed therapy improve survival.",
-  "pitfalls": [
-   "Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen.",
-   "Waiting for laboratory results before treating in the face of active major haemorrhage.",
-   "Ignoring hypothermia and acidosis while transfusing components.",
-   "Overlooking hypocalcaemia from citrate during rapid transfusion.",
-   "Failing to consider trauma-induced coagulopathy and hyperfibrinolysis as distinct contributors."
-  ],
-  "references": [
-   "British Society for Haematology guidelines on the management of major haemorrhage",
-   "AABB Technical Manual, current edition",
-   "Mollison's Blood Transfusion in Clinical Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than red cells alone",
-   "Early empirical fibrinogen replacement with cryoprecipitate or fibrinogen concentrate, as fibrinogen falls first",
-   "Administer tranexamic acid to counter hyperfibrinolysis, especially in trauma-induced coagulopathy",
-   "Actively reverse the self-reinforcing lethal triad by warming and by restoring perfusion to correct acidosis",
-   "Monitor and replace ionised calcium to support calcium-dependent clotting",
-   "Use point-of-care viscoelastic testing (TEG/ROTEM) to target component therapy and avoid unnecessary transfusion",
-   "Achieve rapid haemorrhage source control",
-   "Involve haematology and transfusion specialists alongside critical care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "massive_transfusion_coagulopathy-pathway",
-   "title": "Massive transfusion coagulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and platelets, hypothermia, acidosis and hypocalcaemia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diffuse microvascular oozing from wounds, puncture sites and mucosa",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with platelet count, Prothrombin time and activated partial thromboplastin time, Fibrinogen concentration"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than red cells alone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of massive transfusion coagulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "massive_transfusion_coagulopathy-matrix",
-   "title": "Massive transfusion coagulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion medicine",
+  "specialty": "Haematology / Transfusion medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "British Society for Haematology guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and platelets, hypothermia, acidosis and hypocalcaemia.",
+      "The lethal triad of hypothermia, acidosis and coagulopathy is self-reinforcing and a leading cause of death in major haemorrhage.",
+      "Stored red cells contain little functional platelet or coagulation factor activity, so replacing large blood losses with red cells alone dilutes haemostasis.",
+      "Fibrinogen is often the first factor to fall to critical levels and requires early replacement with cryoprecipitate or fibrinogen concentrate.",
+      "Modern major haemorrhage protocols favour balanced ratios of red cells, plasma and platelets and early empirical treatment before laboratory results return.",
+      "Point-of-care viscoelastic testing can guide targeted component therapy and reduce unnecessary transfusion.",
+      "Correcting hypothermia and acidosis is essential because clotting enzymes function poorly when cold and acidotic.",
+      "In trauma, an early consumptive coagulopathy of trauma-induced coagulopathy coexists with and precedes purely dilutional effects."
     ],
-    [
-     "Key Investigations",
-     "Full blood count with platelet count, Prothrombin time and activated partial thromboplastin time, Fibrinogen concentration",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Massive transfusion coagulopathy is a multifactorial failure of haemostasis during and after large-volume blood replacement. As shed blood is replaced with red cell concentrates and crystalloid, platelets and coagulation factors are progressively diluted while ongoing bleeding and clot formation consume them. Concurrent hypothermia slows the kinetics of coagulation enzymes and impairs platelet function, and metabolic acidosis from hypoperfusion further inhibits the coagulation cascade and accelerates fibrinogen breakdown. Citrate-induced hypocalcaemia reduces calcium-dependent clotting reactions and myocardial performance. In trauma an endogenous trauma-induced coagulopathy, driven by tissue injury, shock, endothelial activation and hyperfibrinolysis, is superimposed on these dilutional and metabolic derangements. Together these processes produce diffuse microvascular bleeding that compounds the original haemorrhage.",
+    "additionalDifferentials": [
+      "Disseminated intravascular coagulation",
+      "Trauma-induced coagulopathy",
+      "Pre-existing anticoagulant or antiplatelet therapy",
+      "Inherited bleeding disorder unmasked by haemorrhage",
+      "Acute haemolytic transfusion reaction with coagulopathy",
+      "Hyperfibrinolysis"
     ],
-    [
-     "Primary Differentials",
-     "Disseminated intravascular coagulation, Trauma-induced coagulopathy, Pre-existing anticoagulant or antiplatelet therapy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with platelet count",
+      "Prothrombin time and activated partial thromboplastin time",
+      "Fibrinogen concentration",
+      "Viscoelastic testing such as thromboelastography or rotational thromboelastometry",
+      "Ionised calcium, temperature and arterial blood gas for the lethal triad",
+      "D-dimer and fibrin degradation products where disseminated intravascular coagulation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than",
-     "Core treatment modality"
+    "redFlags": [
+      "Diffuse microvascular oozing from wounds, puncture sites and mucosa",
+      "Critically low fibrinogen during ongoing haemorrhage",
+      "Core hypothermia with worsening bleeding",
+      "Severe metabolic acidosis in a bleeding patient",
+      "Ionised hypocalcaemia during rapid transfusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on rapid haemorrhage control and correction of the lethal triad; established coagulopathy with hypothermia and acidosis carries high mortality. Structured major haemorrhage protocols with balanced component ratios and goal-directed therapy improve survival.",
+    "pitfalls": [
+      "Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen.",
+      "Waiting for laboratory results before treating in the face of active major haemorrhage.",
+      "Ignoring hypothermia and acidosis while transfusing components.",
+      "Overlooking hypocalcaemia from citrate during rapid transfusion.",
+      "Failing to consider trauma-induced coagulopathy and hyperfibrinolysis as distinct contributors."
+    ],
+    "references": [
+      "British Society for Haematology guidelines on the management of major haemorrhage",
+      "AABB Technical Manual, current edition",
+      "Mollison's Blood Transfusion in Clinical Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than red cells alone",
+      "Early empirical fibrinogen replacement with cryoprecipitate or fibrinogen concentrate, as fibrinogen falls first",
+      "Administer tranexamic acid to counter hyperfibrinolysis, especially in trauma-induced coagulopathy",
+      "Actively reverse the self-reinforcing lethal triad by warming and by restoring perfusion to correct acidosis",
+      "Monitor and replace ionised calcium to support calcium-dependent clotting",
+      "Use point-of-care viscoelastic testing (TEG/ROTEM) to target component therapy and avoid unnecessary transfusion",
+      "Achieve rapid haemorrhage source control",
+      "Involve haematology and transfusion specialists alongside critical care"
     ]
-   ],
-   "caption": "Overview comparison matrix for massive transfusion coagulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "massive-transfusion-coagulopathy-real-image",
-   "title": "Massive transfusion coagulopathy: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "massive_transfusion_coagulopathy-pathway",
+      "title": "Massive transfusion coagulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and platelets, hypothermia, acidosis and hypocalcaemia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diffuse microvascular oozing from wounds, puncture sites and mucosa",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with platelet count, Prothrombin time and activated partial thromboplastin time, Fibrinogen concentration"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than red cells alone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of massive transfusion coagulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "massive_transfusion_coagulopathy-matrix",
+      "title": "Massive transfusion coagulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A bleeding tendency arising during large-volume resuscitation, driven by dilution and consumption of clotting factors and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with platelet count, Prothrombin time and activated partial thromboplastin time, Fibrinogen concentration",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Disseminated intravascular coagulation, Trauma-induced coagulopathy, Pre-existing anticoagulant or antiplatelet therapy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the coagulopathy within a major haemorrhage protocol using balanced ratios of red cells, plasma and platelets rather than",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Resuscitating with red cells and crystalloid alone and neglecting plasma, platelets and fibrinogen.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for massive transfusion coagulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Society for Haematology guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_transfusion_coagulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with platelet count",
+          "cells": [
+            {
+              "text": "Platelet count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin time and activated partial thromboplastin time",
+          "cells": [
+            {
+              "text": "Coagulation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen concentration",
+          "cells": [
+            {
+              "text": "Fibrinogen, which falls first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic testing (TEG or ROTEM)",
+          "cells": [
+            {
+              "text": "Targets component therapy and avoids unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium, temperature and arterial blood gas",
+          "cells": [
+            {
+              "text": "Components of the lethal triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-dimer and fibrin degradation products",
+          "cells": [
+            {
+              "text": "Where disseminated intravascular coagulation is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_coagulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Diffuse microvascular oozing from wounds, puncture sites and mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma-induced coagulopathy",
+          "cells": [
+            {
+              "text": "Trauma setting, where tranexamic acid is given for hyperfibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperfibrinolysis",
+          "cells": [
+            {
+              "text": "Counter with tranexamic acid, especially in trauma-induced coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion_coagulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Balanced component ratios",
+          "cells": [
+            {
+              "text": "Red cells, plasma and platelets within a major haemorrhage protocol, rather than red cells alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early fibrinogen replacement",
+          "cells": [
+            {
+              "text": "Cryoprecipitate or fibrinogen concentrate, as fibrinogen falls first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Counters hyperfibrinolysis, especially in trauma-induced coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse the lethal triad",
+          "cells": [
+            {
+              "text": "Warming and restoring perfusion to correct acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium",
+          "cells": [
+            {
+              "text": "Monitor and replace to support calcium-dependent clotting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic testing",
+          "cells": [
+            {
+              "text": "Point-of-care TEG or ROTEM to target component therapy and avoid unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage source control",
+          "cells": [
+            {
+              "text": "Rapid control of the bleeding source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Haematology and transfusion specialists alongside critical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_transfusion_coagulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Massive transfusion coagulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Major haemorrhage with diffuse oozing from wounds, puncture sites or mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Critically low fibrinogen, core hypothermia or severe acidosis during bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to critical care and haematology; source control and fibrinogen replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with platelets, PT and APTT, fibrinogen, viscoelastic testing, D-dimer if DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is coagulopathy confirmed on coagulation or viscoelastic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inherited disorder, anticoagulant effect or haemolytic reaction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Balanced red cells, plasma and platelets within a major haemorrhage protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early empirical fibrinogen replacement, as fibrinogen falls first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid to counter hyperfibrinolysis, especially in trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Warm, restore perfusion, replace ionised calcium; target therapy with TEG or ROTEM",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rapid haemorrhage source control with haematology and transfusion specialists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

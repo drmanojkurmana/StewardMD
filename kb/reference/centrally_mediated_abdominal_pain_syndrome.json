@@ -1,168 +1,465 @@
 {
- "id": "centrally_mediated_abdominal_pain_syndrome",
- "name": "Centrally mediated abdominal pain syndrome",
- "aliases": [
-  "CAPS",
-  "functional abdominal pain syndrome"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Nervous system",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
-   "The pain reflects central amplification of visceral signals rather than a gut-based trigger",
-   "It is often associated with loss of daily function and with psychological comorbidity",
-   "There may be behavioural clues such as the closed-eyes sign and a discrepancy between reported severity and examination",
-   "It is distinct from irritable bowel syndrome, in which pain is linked to bowel function",
-   "Management centres on a therapeutic relationship, central neuromodulators and psychological therapies rather than repeated investigation"
+  "id": "centrally_mediated_abdominal_pain_syndrome",
+  "name": "Centrally mediated abdominal pain syndrome",
+  "aliases": [
+    "CAPS",
+    "functional abdominal pain syndrome"
   ],
-  "pathophysiology": "Centrally mediated abdominal pain syndrome arises from dysregulation of central pain processing, in which descending pain-modulatory pathways fail to dampen, and instead amplify, visceral afferent input. This central sensitisation means pain is experienced largely independently of gut events. Psychological factors and prior experiences influence the pain through the gut-brain axis, and repeated negative investigations and escalating analgesia, particularly opioids, can perpetuate the syndrome.",
-  "additionalDifferentials": [
-   "Irritable bowel syndrome",
-   "Narcotic bowel syndrome",
-   "Chronic pancreatitis or other structural abdominal disease",
-   "Abdominal wall pain (for example nerve entrapment)",
-   "Somatic symptom disorder"
-  ],
-  "additionalInvestigations": [
-   "Focused history and examination, including the Carnett test for abdominal wall pain",
-   "Limited, targeted testing to exclude structural disease rather than repeated investigation",
-   "Assessment of psychological comorbidity and functional impact",
-   "Review of analgesic, especially opioid, use",
-   "Consideration of prior imaging to avoid duplication"
-  ],
-  "redFlags": [
-   "New alarm features such as weight loss, bleeding or a mass",
-   "Escalating opioid use with worsening pain",
-   "Features suggesting a specific structural disease",
-   "Significant psychiatric risk"
-  ],
-  "prognosis": "The condition is chronic, but a supportive clinician relationship with neuromodulator and psychological treatment can substantially reduce pain and improve function; repeated testing and opioids worsen outcomes.",
-  "pitfalls": [
-   "Repeated investigation and surgery in search of a structural cause",
-   "Escalating opioids and precipitating narcotic bowel syndrome",
-   "Missing abdominal wall pain, which the Carnett test can identify",
-   "Failing to address psychological and gut-brain contributors"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care",
-   "Prescribe central neuromodulators as the mainstay, such as tricyclic antidepressants or serotonin-noradrenaline reuptake inhibitors",
-   "Offer psychological therapies including cognitive behavioural therapy and gut-directed hypnotherapy",
-   "Wean and avoid opioids, which perpetuate the syndrome through narcotic bowel",
-   "Limit repeated investigations and set realistic goals focused on restoring daily function",
-   "Escalate to a specialist gastroenterology or multidisciplinary pain service for refractory pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "centrally_mediated_abdominal_pain_syndrome-pathway",
-   "title": "Centrally mediated abdominal pain syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New alarm features such as weight loss, bleeding or a mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Focused history and examination, including the Carnett test for abdominal wall pain, Limited, targeted testing to exclude structural disease rather than repeated investigation, Assessment of psychological comorbidity and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeated investigation and surgery in search of a structural cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of centrally mediated abdominal pain syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "centrally_mediated_abdominal_pain_syndrome-matrix",
-   "title": "Centrally mediated abdominal pain syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Nervous system",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
+      "The pain reflects central amplification of visceral signals rather than a gut-based trigger",
+      "It is often associated with loss of daily function and with psychological comorbidity",
+      "There may be behavioural clues such as the closed-eyes sign and a discrepancy between reported severity and examination",
+      "It is distinct from irritable bowel syndrome, in which pain is linked to bowel function",
+      "Management centres on a therapeutic relationship, central neuromodulators and psychological therapies rather than repeated investigation"
     ],
-    [
-     "Key Investigations",
-     "Focused history and examination, including the Carnett test for abdominal wall pain, Limited, targeted testing to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Centrally mediated abdominal pain syndrome arises from dysregulation of central pain processing, in which descending pain-modulatory pathways fail to dampen, and instead amplify, visceral afferent input. This central sensitisation means pain is experienced largely independently of gut events. Psychological factors and prior experiences influence the pain through the gut-brain axis, and repeated negative investigations and escalating analgesia, particularly opioids, can perpetuate the syndrome.",
+    "additionalDifferentials": [
+      "Irritable bowel syndrome",
+      "Narcotic bowel syndrome",
+      "Chronic pancreatitis or other structural abdominal disease",
+      "Abdominal wall pain (for example nerve entrapment)",
+      "Somatic symptom disorder"
     ],
-    [
-     "Primary Differentials",
-     "Irritable bowel syndrome, Narcotic bowel syndrome, Chronic pancreatitis or other structural abdominal disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Focused history and examination, including the Carnett test for abdominal wall pain",
+      "Limited, targeted testing to exclude structural disease rather than repeated investigation",
+      "Assessment of psychological comorbidity and functional impact",
+      "Review of analgesic, especially opioid, use",
+      "Consideration of prior imaging to avoid duplication"
     ],
-    [
-     "Management Strategy",
-     "Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care",
-     "Core treatment modality"
+    "redFlags": [
+      "New alarm features such as weight loss, bleeding or a mass",
+      "Escalating opioid use with worsening pain",
+      "Features suggesting a specific structural disease",
+      "Significant psychiatric risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeated investigation and surgery in search of a structural cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic, but a supportive clinician relationship with neuromodulator and psychological treatment can substantially reduce pain and improve function; repeated testing and opioids worsen outcomes.",
+    "pitfalls": [
+      "Repeated investigation and surgery in search of a structural cause",
+      "Escalating opioids and precipitating narcotic bowel syndrome",
+      "Missing abdominal wall pain, which the Carnett test can identify",
+      "Failing to address psychological and gut-brain contributors"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care",
+      "Prescribe central neuromodulators as the mainstay, such as tricyclic antidepressants or serotonin-noradrenaline reuptake inhibitors",
+      "Offer psychological therapies including cognitive behavioural therapy and gut-directed hypnotherapy",
+      "Wean and avoid opioids, which perpetuate the syndrome through narcotic bowel",
+      "Limit repeated investigations and set realistic goals focused on restoring daily function",
+      "Escalate to a specialist gastroenterology or multidisciplinary pain service for refractory pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for centrally mediated abdominal pain syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "centrally-mediated-abdominal-pain-syndrome-real-image",
-   "title": "Centrally mediated abdominal pain syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "centrally_mediated_abdominal_pain_syndrome-pathway",
+      "title": "Centrally mediated abdominal pain syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New alarm features such as weight loss, bleeding or a mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Focused history and examination, including the Carnett test for abdominal wall pain, Limited, targeted testing to exclude structural disease rather than repeated investigation, Assessment of psychological comorbidity and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeated investigation and surgery in search of a structural cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of centrally mediated abdominal pain syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "centrally_mediated_abdominal_pain_syndrome-matrix",
+      "title": "Centrally mediated abdominal pain syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Near-constant or frequent abdominal pain that is poorly related to eating, defecation or menstruation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Focused history and examination, including the Carnett test for abdominal wall pain, Limited, targeted testing to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Irritable bowel syndrome, Narcotic bowel syndrome, Chronic pancreatitis or other structural abdominal disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish a strong, continuous therapeutic clinician-patient relationship as the foundation of care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeated investigation and surgery in search of a structural cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for centrally mediated abdominal pain syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "centrally_mediated_abdominal_pain_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused history and examination, including the Carnett test",
+          "cells": [
+            {
+              "text": "Identifies abdominal wall pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted testing",
+          "cells": [
+            {
+              "text": "Excludes structural disease rather than repeated investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of psychological comorbidity and functional impact",
+          "cells": [
+            {
+              "text": "Psychological and functional impact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of analgesic, especially opioid, use",
+          "cells": [
+            {
+              "text": "Opioid use can perpetuate the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consideration of prior imaging",
+          "cells": [
+            {
+              "text": "Avoids duplication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "centrally_mediated_abdominal_pain_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Pain is linked to bowel function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narcotic bowel syndrome",
+          "cells": [
+            {
+              "text": "Escalating opioid use with worsening pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal wall pain",
+          "cells": [
+            {
+              "text": "Identified by the Carnett test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "centrally_mediated_abdominal_pain_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic relationship",
+          "cells": [
+            {
+              "text": "Strong, continuous clinician-patient relationship"
+            },
+            {
+              "text": "Foundation of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central neuromodulators",
+          "cells": [
+            {
+              "text": "Tricyclic antidepressants or serotonin-noradrenaline reuptake inhibitors"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapies",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy and gut-directed hypnotherapy"
+            },
+            {
+              "text": "Psychological and gut-brain contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid weaning",
+          "cells": [
+            {
+              "text": "Wean and avoid opioids"
+            },
+            {
+              "text": "Perpetuate narcotic bowel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limit investigations",
+          "cells": [
+            {
+              "text": "Limit repeated investigations; set goals on restoring daily function"
+            },
+            {
+              "text": "Avoid repeated testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist escalation",
+          "cells": [
+            {
+              "text": "Specialist gastroenterology or multidisciplinary pain service"
+            },
+            {
+              "text": "Refractory pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "centrally_mediated_abdominal_pain_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Centrally mediated abdominal pain syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected centrally mediated abdominal pain: constant pain unrelated to eating or bowels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, bleeding, mass, escalating opioid use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: investigate for structural disease before central diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Focused history, Carnett test and targeted testing for structural disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pain confirmed as central, not structural or abdominal wall, on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Build a strong, continuous clinician-patient relationship",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check irritable bowel syndrome, narcotic bowel and abdominal wall pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Central neuromodulators such as tricyclics or SNRIs as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural therapy and gut-directed hypnotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wean and avoid opioids; limit repeated investigations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic; neuromodulators and psychological therapy can substantially reduce pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

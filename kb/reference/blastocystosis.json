@@ -1,171 +1,228 @@
 {
- "id": "blastocystosis",
- "name": "Blastocystis infection",
- "aliases": [
-  "blastocystosis",
-  "Blastocystis hominis infection",
-  "Blastocystis sp. carriage"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide, particularly in tropical and resource-limited settings",
-   "Its clinical significance is debated, as it is frequently found in asymptomatic people and its detection does not reliably prove it is the cause of symptoms",
-   "When symptoms are attributed to it they are non-specific, including abdominal discomfort, bloating, flatulence, intermittent watery diarrhoea and nausea",
-   "It is transmitted by the faecal-oral route through contaminated food or water, with the cyst as the resistant transmissible form",
-   "The vacuolar form is the most recognisable on microscopy, appearing as a rounded body with a large central vacuole",
-   "Diagnosis rests on stool microscopy, though sensitivity is improved by culture or molecular methods, and there are numerous genetically distinct subtypes",
-   "Treatment is reserved for symptomatic patients in whom other pathogens have been excluded, with metronidazole or cotrimoxazole commonly used"
+  "id": "blastocystosis",
+  "name": "Blastocystis infection",
+  "aliases": [
+    "blastocystosis",
+    "Blastocystis hominis infection",
+    "Blastocystis sp. carriage"
   ],
-  "pathophysiology": "Blastocystis is a polymorphic anaerobic protist that colonises the large intestine, existing in vacuolar, granular, amoeboid and cyst forms, the cyst being responsible for faecal-oral transmission. Whether and how it causes disease remains uncertain: proposed mechanisms include degradation of the intestinal mucus barrier, protease activity, alteration of gut permeability and immune activation, and pathogenicity may vary between the many genetic subtypes. Because heavy colonisation is common in healthy people and symptoms overlap with functional bowel disorders, attribution of illness requires exclusion of other causes rather than mere detection of the organism.",
-  "additionalDifferentials": [
-   "Irritable bowel syndrome",
-   "Giardiasis",
-   "Dientamoeba fragilis infection",
-   "Small intestinal bacterial overgrowth",
-   "Other enteric protozoal infections",
-   "Coeliac disease and other malabsorptive disorders"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy with permanent staining for the vacuolar form",
-   "Stool culture or molecular PCR with subtyping where available",
-   "Concentration methods and repeated sampling",
-   "Testing to exclude other enteric protozoa and bacterial pathogens",
-   "Coeliac serology and other investigations for chronic diarrhoea when indicated",
-   "Full blood count and inflammatory markers"
-  ],
-  "redFlags": [
-   "Weight loss, rectal bleeding or nocturnal diarrhoea suggesting an alternative serious diagnosis",
-   "Persistent symptoms despite treatment, prompting a search for another cause",
-   "Symptomatic infection in an immunocompromised host",
-   "Systemic features that would be atypical for uncomplicated colonisation"
-  ],
-  "prognosis": "Generally benign; most carriage is asymptomatic and self-limiting, and where symptoms are genuinely attributable they usually respond to antimicrobial therapy, though persistence of symptoms often points to another underlying disorder.",
-  "pitfalls": [
-   "Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders",
-   "Treating asymptomatic carriage unnecessarily",
-   "Anchoring on a positive stool result and missing a coexisting diagnosis such as coeliac disease or inflammatory bowel disease",
-   "Repeated courses of antimicrobials when symptoms are in fact functional"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is common and often asymptomatic",
-   "Reserve antimicrobial therapy — metronidazole, with co-trimoxazole or nitazoxanide as alternatives — for genuinely symptomatic infection after other causes are excluded",
-   "Supportive care with oral rehydration for diarrhoeal symptoms",
-   "Reinvestigate for an alternative underlying disorder if symptoms persist despite eradication",
-   "Advise food and water hygiene to interrupt faecal-oral transmission of the cyst form"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blastocystosis-pathway",
-   "title": "Blastocystis infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide, particularly in tropical and resource-limited settings",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Weight loss, rectal bleeding or nocturnal diarrhoea suggesting an alternative serious diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy with permanent staining for the vacuolar form, Stool culture or molecular PCR with subtyping where available, Concentration methods and repeated sampling"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is common and often asymptomatic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blastocystis infection."
-  }
- ],
- "tables": [
-  {
-   "id": "blastocystosis-matrix",
-   "title": "Blastocystis infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide, particularly in tropical and resource-limited settings",
+      "Its clinical significance is debated, as it is frequently found in asymptomatic people and its detection does not reliably prove it is the cause of symptoms",
+      "When symptoms are attributed to it they are non-specific, including abdominal discomfort, bloating, flatulence, intermittent watery diarrhoea and nausea",
+      "It is transmitted by the faecal-oral route through contaminated food or water, with the cyst as the resistant transmissible form",
+      "The vacuolar form is the most recognisable on microscopy, appearing as a rounded body with a large central vacuole",
+      "Diagnosis rests on stool microscopy, though sensitivity is improved by culture or molecular methods, and there are numerous genetically distinct subtypes",
+      "Treatment is reserved for symptomatic patients in whom other pathogens have been excluded, with metronidazole or cotrimoxazole commonly used"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy with permanent staining for the vacuolar form, Stool culture or molecular PCR with subtyping where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blastocystis is a polymorphic anaerobic protist that colonises the large intestine, existing in vacuolar, granular, amoeboid and cyst forms, the cyst being responsible for faecal-oral transmission. Whether and how it causes disease remains uncertain: proposed mechanisms include degradation of the intestinal mucus barrier, protease activity, alteration of gut permeability and immune activation, and pathogenicity may vary between the many genetic subtypes. Because heavy colonisation is common in healthy people and symptoms overlap with functional bowel disorders, attribution of illness requires exclusion of other causes rather than mere detection of the organism.",
+    "additionalDifferentials": [
+      "Irritable bowel syndrome",
+      "Giardiasis",
+      "Dientamoeba fragilis infection",
+      "Small intestinal bacterial overgrowth",
+      "Other enteric protozoal infections",
+      "Coeliac disease and other malabsorptive disorders"
     ],
-    [
-     "Primary Differentials",
-     "Irritable bowel syndrome, Giardiasis, Dientamoeba fragilis infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy with permanent staining for the vacuolar form",
+      "Stool culture or molecular PCR with subtyping where available",
+      "Concentration methods and repeated sampling",
+      "Testing to exclude other enteric protozoa and bacterial pathogens",
+      "Coeliac serology and other investigations for chronic diarrhoea when indicated",
+      "Full blood count and inflammatory markers"
     ],
-    [
-     "Management Strategy",
-     "Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is",
-     "Core treatment modality"
+    "redFlags": [
+      "Weight loss, rectal bleeding or nocturnal diarrhoea suggesting an alternative serious diagnosis",
+      "Persistent symptoms despite treatment, prompting a search for another cause",
+      "Symptomatic infection in an immunocompromised host",
+      "Systemic features that would be atypical for uncomplicated colonisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally benign; most carriage is asymptomatic and self-limiting, and where symptoms are genuinely attributable they usually respond to antimicrobial therapy, though persistence of symptoms often points to another underlying disorder.",
+    "pitfalls": [
+      "Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders",
+      "Treating asymptomatic carriage unnecessarily",
+      "Anchoring on a positive stool result and missing a coexisting diagnosis such as coeliac disease or inflammatory bowel disease",
+      "Repeated courses of antimicrobials when symptoms are in fact functional"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is common and often asymptomatic",
+      "Reserve antimicrobial therapy — metronidazole, with co-trimoxazole or nitazoxanide as alternatives — for genuinely symptomatic infection after other causes are excluded",
+      "Supportive care with oral rehydration for diarrhoeal symptoms",
+      "Reinvestigate for an alternative underlying disorder if symptoms persist despite eradication",
+      "Advise food and water hygiene to interrupt faecal-oral transmission of the cyst form"
     ]
-   ],
-   "caption": "Overview comparison matrix for blastocystis infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blastocystosis-real-image",
-   "title": "Blastocystis infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "blastocystosis-pathway",
+      "title": "Blastocystis infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide, particularly in tropical and resource-limited settings",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Weight loss, rectal bleeding or nocturnal diarrhoea suggesting an alternative serious diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy with permanent staining for the vacuolar form, Stool culture or molecular PCR with subtyping where available, Concentration methods and repeated sampling"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is common and often asymptomatic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blastocystis infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blastocystosis-matrix",
+      "title": "Blastocystis infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Blastocystis is an anaerobic stramenopile protist and one of the most commonly detected organisms in human stool worldwide,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy with permanent staining for the vacuolar form, Stool culture or molecular PCR with subtyping where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Irritable bowel syndrome, Giardiasis, Dientamoeba fragilis infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude other enteric pathogens and functional bowel disorders before attributing symptoms to Blastocystis, since carriage is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming Blastocystis is the cause of symptoms without excluding other pathogens and functional disorders",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blastocystis infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases; Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blastocystosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in Blastocystis infection",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Stool microscopy with permanent staining", "cells": [{"text": "Vacuolar form, the most recognisable on microscopy"}], "cite": "c1"},
+        {"parameter": "Stool culture or molecular PCR", "cells": [{"text": "Improves sensitivity; allows subtyping"}], "cite": "c1"},
+        {"parameter": "Concentration methods and repeated sampling", "cells": [{"text": "Improves detection"}], "cite": "c1"},
+        {"parameter": "Testing for other enteric protozoa and bacteria", "cells": [{"text": "Excludes other pathogens"}], "cite": "c1"},
+        {"parameter": "Coeliac serology", "cells": [{"text": "Used in chronic diarrhoea, when indicated"}], "cite": "c1"},
+        {"parameter": "Full blood count and inflammatory markers", "cells": [{"text": "Supports the wider assessment"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blastocystosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of chronic gut symptoms",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Irritable bowel syndrome", "cells": [{"text": "Symptoms overlap; attribution requires excluding functional disorders"}], "cite": "c1"},
+        {"parameter": "Giardiasis and other enteric protozoa", "cells": [{"text": "Other enteric pathogens must be excluded before attributing symptoms"}], "cite": "c1"},
+        {"parameter": "Coeliac disease", "cells": [{"text": "Excluded with coeliac serology in chronic diarrhoea"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blastocystosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in Blastocystis infection",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Exclude other causes first", "cells": [{"text": "Exclude other enteric pathogens and functional bowel disorders"}, {"text": "Carriage is common and often asymptomatic"}], "cite": "c1"},
+        {"parameter": "Antimicrobial therapy", "cells": [{"text": "Metronidazole; co-trimoxazole or nitazoxanide as alternatives"}, {"text": "Only for genuinely symptomatic infection after other causes are excluded"}], "cite": "c1"},
+        {"parameter": "Supportive care", "cells": [{"text": "Oral rehydration for diarrhoeal symptoms"}, {"text": "Supportive"}], "cite": "c1"},
+        {"parameter": "Persistent symptoms", "cells": [{"text": "Reinvestigate for an alternative underlying disorder"}, {"text": "If symptoms persist despite eradication"}], "cite": "c1"},
+        {"parameter": "Food and water hygiene", "cells": [{"text": "Advise hygiene to interrupt faecal-oral transmission of the cyst"}, {"text": "Prevention"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blastocystosis-dx-mgmt",
+      "title": "Diagnosis and management of Blastocystis infection",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Abdominal discomfort, bloating or intermittent watery diarrhoea with Blastocystis on stool test", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: weight loss, rectal bleeding, nocturnal diarrhoea or immunocompromise?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude a serious alternative diagnosis and other pathogens", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Stool microscopy with permanent stain; culture or PCR; repeat sampling", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Exclude other enteric pathogens, coeliac serology and functional bowel disorders", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Symptomatic, with other causes excluded?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Metronidazole (or co-trimoxazole, nitazoxanide) with oral rehydration", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: treat the alternative cause; carriage alone needs no treatment", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Symptoms settle; reinvestigate if they persist despite treatment", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,168 +1,455 @@
 {
- "id": "pulmonary_regurgitation",
- "name": "Pulmonary regurgitation",
- "aliases": [
-  "pulmonary valve insufficiency"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Congenital heart disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Valvular and congenital heart disease references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
-   "Other causes include pulmonary hypertension, endocarditis and congenital valve abnormalities",
-   "Mild pulmonary regurgitation is common and usually of no consequence",
-   "Chronic severe regurgitation causes progressive right ventricular dilatation and eventual dysfunction",
-   "The murmur is an early diastolic decrescendo murmur at the left sternal edge (a Graham Steell murmur when due to pulmonary hypertension)",
-   "Timing of pulmonary valve replacement in post-tetralogy patients is guided by right ventricular size and function on cardiac MRI"
+  "id": "pulmonary_regurgitation",
+  "name": "Pulmonary regurgitation",
+  "aliases": [
+    "pulmonary valve insufficiency"
   ],
-  "pathophysiology": "Pulmonary regurgitation occurs when the pulmonary valve fails to prevent diastolic backflow from the pulmonary artery into the right ventricle. The commonest setting is after surgical relief of right ventricular outflow obstruction (as in tetralogy of Fallot), where the valve is rendered incompetent. The regurgitant volume chronically overloads the right ventricle, causing progressive dilatation; over years this leads to right ventricular dysfunction, exercise intolerance and an increased risk of arrhythmia. Pulmonary hypertension can also cause functional regurgitation through pulmonary artery and annular dilatation.",
-  "additionalDifferentials": [
-   "Aortic regurgitation (early diastolic murmur)",
-   "Pulmonary hypertension with functional regurgitation",
-   "Residual lesions after congenital heart surgery",
-   "Endocarditis of the pulmonary valve",
-   "Absent pulmonary valve syndrome"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography assessing the valve and right ventricle",
-   "Cardiac MRI to quantify regurgitant fraction and right ventricular volumes",
-   "Electrocardiogram and monitoring for arrhythmia",
-   "Assessment of pulmonary artery pressure",
-   "Serial follow-up in post-tetralogy patients"
-  ],
-  "redFlags": [
-   "Progressive right ventricular dilatation or dysfunction",
-   "Exercise intolerance or arrhythmia in post-tetralogy patients",
-   "Signs of right heart failure",
-   "Endocarditis"
-  ],
-  "prognosis": "Mild pulmonary regurgitation is benign, but chronic severe regurgitation after congenital repair can cause right ventricular decline; timely pulmonary valve replacement can preserve or improve right ventricular function.",
-  "pitfalls": [
-   "Dismissing chronic severe regurgitation because symptoms appear late",
-   "Relying on echocardiography alone without MRI for right ventricular assessment",
-   "Delaying valve replacement until right ventricular dysfunction is irreversible",
-   "Confusing the murmur with aortic regurgitation"
-  ],
-  "references": [
-   "Congenital heart disease references (standard reference)",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention",
-   "Undertake pulmonary valve replacement, surgical or percutaneous, in chronic severe regurgitation guided by right ventricular size and function, particularly after tetralogy of Fallot repair",
-   "Relieve right heart failure symptoms with diuretic therapy",
-   "Treat any underlying cause, including pulmonary hypertension driving functional regurgitation and infective endocarditis",
-   "Monitor for and manage atrial and ventricular arrhythmias with rhythm monitoring and antiarrhythmic or ablation therapy",
-   "Follow up with serial cardiac MRI to quantify the regurgitant fraction and right ventricular volumes and time intervention",
-   "Manage within a specialist adult congenital heart disease service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_regurgitation-pathway",
-   "title": "Pulmonary regurgitation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive right ventricular dilatation or dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography assessing the valve and right ventricle, Cardiac MRI to quantify regurgitant fraction and right ventricular volumes, Electrocardiogram and monitoring for arrhythmia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing chronic severe regurgitation because symptoms appear late"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary regurgitation."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_regurgitation-matrix",
-   "title": "Pulmonary regurgitation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Congenital heart disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Valvular and congenital heart disease references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
+      "Other causes include pulmonary hypertension, endocarditis and congenital valve abnormalities",
+      "Mild pulmonary regurgitation is common and usually of no consequence",
+      "Chronic severe regurgitation causes progressive right ventricular dilatation and eventual dysfunction",
+      "The murmur is an early diastolic decrescendo murmur at the left sternal edge (a Graham Steell murmur when due to pulmonary hypertension)",
+      "Timing of pulmonary valve replacement in post-tetralogy patients is guided by right ventricular size and function on cardiac MRI"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography assessing the valve and right ventricle, Cardiac MRI to quantify regurgitant fraction and right ventricular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary regurgitation occurs when the pulmonary valve fails to prevent diastolic backflow from the pulmonary artery into the right ventricle. The commonest setting is after surgical relief of right ventricular outflow obstruction (as in tetralogy of Fallot), where the valve is rendered incompetent. The regurgitant volume chronically overloads the right ventricle, causing progressive dilatation; over years this leads to right ventricular dysfunction, exercise intolerance and an increased risk of arrhythmia. Pulmonary hypertension can also cause functional regurgitation through pulmonary artery and annular dilatation.",
+    "additionalDifferentials": [
+      "Aortic regurgitation (early diastolic murmur)",
+      "Pulmonary hypertension with functional regurgitation",
+      "Residual lesions after congenital heart surgery",
+      "Endocarditis of the pulmonary valve",
+      "Absent pulmonary valve syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Aortic regurgitation (early diastolic murmur), Pulmonary hypertension with functional regurgitation, Residual lesions after",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography assessing the valve and right ventricle",
+      "Cardiac MRI to quantify regurgitant fraction and right ventricular volumes",
+      "Electrocardiogram and monitoring for arrhythmia",
+      "Assessment of pulmonary artery pressure",
+      "Serial follow-up in post-tetralogy patients"
     ],
-    [
-     "Management Strategy",
-     "Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive right ventricular dilatation or dysfunction",
+      "Exercise intolerance or arrhythmia in post-tetralogy patients",
+      "Signs of right heart failure",
+      "Endocarditis"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing chronic severe regurgitation because symptoms appear late",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild pulmonary regurgitation is benign, but chronic severe regurgitation after congenital repair can cause right ventricular decline; timely pulmonary valve replacement can preserve or improve right ventricular function.",
+    "pitfalls": [
+      "Dismissing chronic severe regurgitation because symptoms appear late",
+      "Relying on echocardiography alone without MRI for right ventricular assessment",
+      "Delaying valve replacement until right ventricular dysfunction is irreversible",
+      "Confusing the murmur with aortic regurgitation"
+    ],
+    "references": [
+      "Congenital heart disease references (standard reference)",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention",
+      "Undertake pulmonary valve replacement, surgical or percutaneous, in chronic severe regurgitation guided by right ventricular size and function, particularly after tetralogy of Fallot repair",
+      "Relieve right heart failure symptoms with diuretic therapy",
+      "Treat any underlying cause, including pulmonary hypertension driving functional regurgitation and infective endocarditis",
+      "Monitor for and manage atrial and ventricular arrhythmias with rhythm monitoring and antiarrhythmic or ablation therapy",
+      "Follow up with serial cardiac MRI to quantify the regurgitant fraction and right ventricular volumes and time intervention",
+      "Manage within a specialist adult congenital heart disease service"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary regurgitation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-regurgitation-real-image",
-   "title": "Pulmonary regurgitation: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "pulmonary_regurgitation-pathway",
+      "title": "Pulmonary regurgitation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive right ventricular dilatation or dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography assessing the valve and right ventricle, Cardiac MRI to quantify regurgitant fraction and right ventricular volumes, Electrocardiogram and monitoring for arrhythmia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing chronic severe regurgitation because symptoms appear late"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary regurgitation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_regurgitation-matrix",
+      "title": "Pulmonary regurgitation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Backflow across the pulmonary valve, very often iatrogenic after repair of tetralogy of Fallot or pulmonary valvotomy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography assessing the valve and right ventricle, Cardiac MRI to quantify regurgitant fraction and right ventricular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aortic regurgitation (early diastolic murmur), Pulmonary hypertension with functional regurgitation, Residual lesions after",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage mild regurgitation with reassurance and periodic surveillance, as it is usually benign and needs no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing chronic severe regurgitation because symptoms appear late",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary regurgitation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Valvular and congenital heart disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_regurgitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography of valve and RV",
+          "cells": [
+            {
+              "text": "Valve and right ventricle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Regurgitant fraction and RV volumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and rhythm monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary artery pressure assessment",
+          "cells": [
+            {
+              "text": "Pulmonary artery pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial follow-up after tetralogy repair",
+          "cells": [
+            {
+              "text": "Post-tetralogy surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_regurgitation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension with functional regurgitation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Residual lesions after congenital heart surgery",
+          "cells": [
+            {
+              "text": "Residual post-surgical lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis of the pulmonary valve",
+          "cells": [
+            {
+              "text": "Endocarditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_regurgitation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild regurgitation",
+          "cells": [
+            {
+              "text": "Reassurance and periodic surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary valve replacement",
+          "cells": [
+            {
+              "text": "Surgical or percutaneous, for chronic severe regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart failure",
+          "cells": [
+            {
+              "text": "Diuretic therapy for symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Treat, including pulmonary hypertension driving functional regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia",
+          "cells": [
+            {
+              "text": "Rhythm monitoring and management of atrial and ventricular arrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Cardiac MRI for regurgitant fraction and RV volumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Specialist adult congenital heart disease service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_regurgitation-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary regurgitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary regurgitation: right ventricular dilatation on echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive RV dilatation or dysfunction, arrhythmia, heart failure, or endocarditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for right heart failure or endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo of valve and RV; cardiac MRI regurgitant fraction; ECG; PA pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the regurgitant fraction significant on cardiac MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aortic regurgitation or residual lesions; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and surveillance for mild regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pulmonary valve replacement for chronic severe regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics for right heart failure symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rhythm monitoring and arrhythmia management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist adult congenital heart disease follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

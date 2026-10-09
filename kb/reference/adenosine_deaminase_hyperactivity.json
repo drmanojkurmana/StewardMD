@@ -1,174 +1,502 @@
 {
- "id": "adenosine_deaminase_hyperactivity",
- "name": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia)",
- "aliases": [
-  "ADA overactivity",
-  "adenosine deaminase overexpression",
-  "hereditary nonspherocytic haemolytic anaemia due to ADA excess",
-  "ADA gene"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative haemolytic anaemia",
-   "Overactivity of adenosine deaminase depletes the red cell of adenine nucleotides, distinguishing it from the deficiency states",
-   "Inheritance is autosomal dominant, so an affected parent and multiple affected generations are typically seen, unlike the recessive enzymopathies",
-   "The overexpression reflects a regulatory rather than structural gene abnormality, with enzyme activity markedly raised on assay",
-   "Red-cell ATP is characteristically low because the substrate for adenine nucleotide synthesis is diverted and degraded",
-   "Diagnosis rests on demonstrating greatly increased red-cell adenosine deaminase activity with reduced ATP, alongside the family history",
-   "Management is supportive with folate and transfusion where required; the anaemia is usually mild to moderate"
+  "id": "adenosine_deaminase_hyperactivity",
+  "name": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia)",
+  "aliases": [
+    "ADA overactivity",
+    "adenosine deaminase overexpression",
+    "hereditary nonspherocytic haemolytic anaemia due to ADA excess",
+    "ADA gene"
   ],
-  "pathophysiology": "Adenosine deaminase irreversibly deaminates adenosine to inosine, diverting it away from the salvage pathway that maintains the adenine nucleotide pool. In this disorder the enzyme is markedly overexpressed, so adenosine is degraded excessively and the red cell cannot sustain adequate ATP. The resulting energy deficit compromises the cell's ability to maintain ion gradients and membrane function, shortening survival and producing a chronic non-spherocytic haemolytic anaemia; unusually, the mechanism is enzyme excess rather than deficiency and the trait is dominantly inherited.",
-  "additionalDifferentials": [
-   "Pyruvate kinase deficiency",
-   "Glucose phosphate isomerase deficiency",
-   "Pyrimidine 5'-nucleotidase deficiency",
-   "Adenylate kinase deficiency",
-   "Autoimmune haemolytic anaemia",
-   "Hereditary spherocytosis and membrane disorders"
-  ],
-  "additionalInvestigations": [
-   "Red-cell adenosine deaminase activity assay demonstrating raised activity",
-   "Red-cell ATP measurement showing depletion",
-   "Full blood count, reticulocyte count and blood film",
-   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-   "Direct antiglobulin test to exclude immune haemolysis",
-   "Family studies given the dominant inheritance"
-  ],
-  "redFlags": [
-   "Severe neonatal jaundice requiring exchange transfusion",
-   "Aplastic crisis following parvovirus B19 infection",
-   "Symptomatic anaemia requiring transfusion",
-   "Transfusional iron overload with long-term support"
-  ],
-  "prognosis": "The anaemia is generally mild to moderate and lifelong, and most patients have a good prognosis, though severity can vary within affected families.",
-  "pitfalls": [
-   "Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity",
-   "Missing the dominant inheritance pattern and its implications for family screening",
-   "Assuming a membrane disorder when spherocytes are absent",
-   "Neglecting iron-overload monitoring in transfused patients"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Wintrobe's Clinical Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive",
-   "Supplement folic acid to meet the demands of chronic haemolysis",
-   "Provide red-cell transfusion support during symptomatic or severe anaemia",
-   "Monitor for and treat transfusional iron overload with chelation when required",
-   "Ensure routine vaccination and manage intercurrent illness that may worsen the anaemia",
-   "Monitor with full blood count, reticulocytes and haemolysis markers to track severity",
-   "Offer genetic counselling and family studies given the autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adenosine_deaminase_hyperactivity-pathway",
-   "title": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative haemolytic anaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal jaundice requiring exchange transfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Red-cell adenosine deaminase activity assay demonstrating raised activity, Red-cell ATP measurement showing depletion, Full blood count, reticulocyte count and blood film"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adenosine deaminase hyperactivity (hereditary haemolytic anaemia)."
-  }
- ],
- "tables": [
-  {
-   "id": "adenosine_deaminase_hyperactivity-matrix",
-   "title": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+      "Overactivity of adenosine deaminase depletes the red cell of adenine nucleotides, distinguishing it from the deficiency states",
+      "Inheritance is autosomal dominant, so an affected parent and multiple affected generations are typically seen, unlike the recessive enzymopathies",
+      "The overexpression reflects a regulatory rather than structural gene abnormality, with enzyme activity markedly raised on assay",
+      "Red-cell ATP is characteristically low because the substrate for adenine nucleotide synthesis is diverted and degraded",
+      "Diagnosis rests on demonstrating greatly increased red-cell adenosine deaminase activity with reduced ATP, alongside the family history",
+      "Management is supportive with folate and transfusion where required; the anaemia is usually mild to moderate"
     ],
-    [
-     "Key Investigations",
-     "Red-cell adenosine deaminase activity assay demonstrating raised activity, Red-cell ATP measurement showing depletion, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adenosine deaminase irreversibly deaminates adenosine to inosine, diverting it away from the salvage pathway that maintains the adenine nucleotide pool. In this disorder the enzyme is markedly overexpressed, so adenosine is degraded excessively and the red cell cannot sustain adequate ATP. The resulting energy deficit compromises the cell's ability to maintain ion gradients and membrane function, shortening survival and producing a chronic non-spherocytic haemolytic anaemia; unusually, the mechanism is enzyme excess rather than deficiency and the trait is dominantly inherited.",
+    "additionalDifferentials": [
+      "Pyruvate kinase deficiency",
+      "Glucose phosphate isomerase deficiency",
+      "Pyrimidine 5'-nucleotidase deficiency",
+      "Adenylate kinase deficiency",
+      "Autoimmune haemolytic anaemia",
+      "Hereditary spherocytosis and membrane disorders"
     ],
-    [
-     "Primary Differentials",
-     "Pyruvate kinase deficiency, Glucose phosphate isomerase deficiency, Pyrimidine 5'-nucleotidase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Red-cell adenosine deaminase activity assay demonstrating raised activity",
+      "Red-cell ATP measurement showing depletion",
+      "Full blood count, reticulocyte count and blood film",
+      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+      "Direct antiglobulin test to exclude immune haemolysis",
+      "Family studies given the dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal jaundice requiring exchange transfusion",
+      "Aplastic crisis following parvovirus B19 infection",
+      "Symptomatic anaemia requiring transfusion",
+      "Transfusional iron overload with long-term support"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity",
-     "Prevent diagnostic or management error"
+    "prognosis": "The anaemia is generally mild to moderate and lifelong, and most patients have a good prognosis, though severity can vary within affected families.",
+    "pitfalls": [
+      "Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity",
+      "Missing the dominant inheritance pattern and its implications for family screening",
+      "Assuming a membrane disorder when spherocytes are absent",
+      "Neglecting iron-overload monitoring in transfused patients"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Wintrobe's Clinical Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive",
+      "Supplement folic acid to meet the demands of chronic haemolysis",
+      "Provide red-cell transfusion support during symptomatic or severe anaemia",
+      "Monitor for and treat transfusional iron overload with chelation when required",
+      "Ensure routine vaccination and manage intercurrent illness that may worsen the anaemia",
+      "Monitor with full blood count, reticulocytes and haemolysis markers to track severity",
+      "Offer genetic counselling and family studies given the autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for adenosine deaminase hyperactivity (hereditary haemolytic anaemia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adenosine-deaminase-hyperactivity-real-image",
-   "title": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "adenosine_deaminase_hyperactivity-pathway",
+      "title": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative haemolytic anaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal jaundice requiring exchange transfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Red-cell adenosine deaminase activity assay demonstrating raised activity, Red-cell ATP measurement showing depletion, Full blood count, reticulocyte count and blood film"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adenosine deaminase hyperactivity (hereditary haemolytic anaemia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adenosine_deaminase_hyperactivity-matrix",
+      "title": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An unusual disorder in which increased rather than deficient enzyme activity causes chronic non-spherocytic, Coombs-negative",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Red-cell adenosine deaminase activity assay demonstrating raised activity, Red-cell ATP measurement showing depletion, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pyruvate kinase deficiency, Glucose phosphate isomerase deficiency, Pyrimidine 5'-nucleotidase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no therapy corrects the underlying enzyme overactivity, so management is supportive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis by testing only for enzyme deficiencies and not for overactivity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adenosine deaminase hyperactivity (hereditary haemolytic anaemia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenosine_deaminase_hyperactivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell adenosine deaminase activity assay",
+          "cells": [
+            {
+              "text": "Raised activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell ATP measurement",
+          "cells": [
+            {
+              "text": "Depletion of adenine nucleotides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Chronic haemolytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen with bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_hyperactivity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate kinase deficiency",
+          "cells": [
+            {
+              "text": "Enzyme deficiency rather than overactivity"
+            },
+            {
+              "text": "Red-cell adenosine deaminase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Coombs-positive"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis and membrane disorders",
+          "cells": [
+            {
+              "text": "Spherocytes on the film"
+            },
+            {
+              "text": "Blood film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_hyperactivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management (no therapy corrects enzyme overactivity)",
+          "cells": [
+            {
+              "text": "Underlying overactivity"
+            },
+            {
+              "text": "No corrective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid supplementation",
+          "cells": [
+            {
+              "text": "Demands of chronic haemolysis"
+            },
+            {
+              "text": "Supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic or severe anaemia"
+            },
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Transfusional iron overload"
+            },
+            {
+              "text": "When required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine vaccination and management of intercurrent illness",
+          "cells": [
+            {
+              "text": "Illness that may worsen anaemia"
+            },
+            {
+              "text": "Preventive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with FBC, reticulocytes and haemolysis markers",
+          "cells": [
+            {
+              "text": "Tracks severity"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family studies",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "Family studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenosine_deaminase_hyperactivity-dx-mgmt",
+      "title": "Diagnosis and management of Adenosine deaminase hyperactivity (hereditary haemolytic anaemia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic non-spherocytic, Coombs-negative haemolytic anaemia from early life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal jaundice or aplastic crisis after parvovirus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exchange or urgent transfusion; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Red-cell ADA activity, red-cell ATP, FBC, reticulocytes, blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised ADA activity with red-cell ATP depletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm dominant inheritance with family studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review pyruvate kinase deficiency, GPI, AIHA and membrane disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid supplementation for chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red-cell transfusion for symptomatic or severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chelation for transfusional iron overload when required",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate lifelong anaemia; good prognosis overall",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

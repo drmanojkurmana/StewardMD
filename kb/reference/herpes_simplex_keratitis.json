@@ -1,174 +1,452 @@
 {
- "id": "herpes_simplex_keratitis",
- "name": "Herpes simplex keratitis",
- "aliases": [
-  "HSV keratitis",
-  "herpetic keratitis",
-  "dendritic keratitis",
-  "HSK"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
-   "The classic sign is a branching dendritic epithelial ulcer with terminal end-bulbs that stains with fluorescein, with the ulcer bed highlighted by rose bengal or lissamine green",
-   "Reduced corneal sensation is a valuable clue to a herpetic cause",
-   "Disease may be epithelial (active viral replication), stromal (immune-mediated, with the risk of scarring and neovascularisation), or endothelial (disciform keratitis)",
-   "Topical corticosteroids are contraindicated in active epithelial (dendritic) disease as they promote unchecked viral replication and can enlarge the ulcer into a geographic form",
-   "Epithelial disease is treated with topical or oral antiviral therapy; stromal and endothelial immune disease requires cautious steroids under antiviral cover and specialist supervision",
-   "Recurrences are common because the virus remains latent in the trigeminal ganglion; repeated episodes cause cumulative scarring and neurotrophic changes",
-   "Long-term oral antiviral prophylaxis reduces recurrence in patients with frequent episodes"
+  "id": "herpes_simplex_keratitis",
+  "name": "Herpes simplex keratitis",
+  "aliases": [
+    "HSV keratitis",
+    "herpetic keratitis",
+    "dendritic keratitis",
+    "HSK"
   ],
-  "pathophysiology": "Herpes simplex keratitis is caused by herpes simplex virus, usually type 1, which after primary infection establishes latency in the trigeminal ganglion. Reactivation, precipitated by stress, illness, ultraviolet light, or immunosuppression, sends the virus along sensory nerves to the cornea. Active viral replication in the epithelium produces the dendritic ulcer. Persisting viral antigen and the host immune response drive stromal inflammation (immune stromal keratitis) and endothelial disease (disciform keratitis), which can cause oedema, scarring, neovascularisation, and thinning. Repeated episodes and antiviral toxicity contribute to reduced corneal sensation and a neurotrophic cornea.",
-  "additionalDifferentials": [
-   "Herpes zoster ophthalmicus with pseudodendrites",
-   "Acanthamoeba keratitis (especially in contact lens wearers)",
-   "Bacterial or fungal keratitis",
-   "Recurrent corneal erosion",
-   "Healing epithelial defect with a pseudodendrite",
-   "Thygeson superficial punctate keratitis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination with fluorescein and rose bengal or lissamine green staining",
-   "Testing of corneal sensation before instilling anaesthetic",
-   "Corneal scrape for viral PCR or culture in atypical or unclear cases",
-   "Assessment of stromal involvement, endothelial oedema, and intraocular pressure",
-   "Consideration of immune status in severe or bilateral disease"
-  ],
-  "redFlags": [
-   "A dendritic (or geographic) ulcer, which mandates avoidance of topical steroids in active epithelial disease",
-   "Worsening or enlarging ulcer after steroid exposure suggesting steroid-driven progression",
-   "Stromal necrosis, thinning, or a neurotrophic non-healing defect threatening perforation",
-   "Deep central scarring or dense keratitis causing significant visual loss",
-   "Signs of secondary microbial superinfection"
-  ],
-  "prognosis": "Isolated epithelial disease usually heals with antiviral treatment, but recurrent stromal disease can cause progressive scarring, neovascularisation, and neurotrophic complications with permanent visual loss; prophylaxis improves long-term outcomes.",
-  "pitfalls": [
-   "Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer",
-   "Mistaking a herpetic dendrite for a healing abrasion or zoster pseudodendrite",
-   "Overlooking reduced corneal sensation as a diagnostic clue",
-   "Failing to consider prophylaxis in patients with frequent recurrences"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral aciclovir or valaciclovir, with gentle epithelial debridement where appropriate",
-   "Manage immune stromal and disciform (endothelial) keratitis with topical corticosteroids under antiviral cover and close specialist supervision",
-   "Avoid topical corticosteroids in active epithelial disease, as they promote unchecked viral replication and can enlarge the ulcer into a geographic form",
-   "Offer long-term oral antiviral prophylaxis to reduce the frequency of recurrent stromal disease",
-   "Manage the neurotrophic cornea and persistent epithelial defects with copious lubrication, bandage contact lens or tarsorrhaphy, and consider corneal transplantation under antiviral cover for visually significant scarring",
-   "Refer to ophthalmology with monitoring of intraocular pressure and corneal sensation, escalating for stromal involvement or non-healing defects"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "herpes_simplex_keratitis-pathway",
-   "title": "Herpes simplex keratitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A dendritic (or geographic) ulcer, which mandates avoidance of topical steroids in active epithelial disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination with fluorescein and rose bengal or lissamine green staining, Testing of corneal sensation before instilling anaesthetic, Corneal scrape for viral PCR or culture in atypical or unclear cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral aciclovir or valaciclovir, with gentle epithelial debridement where appropriate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of herpes simplex keratitis."
-  }
- ],
- "tables": [
-  {
-   "id": "herpes_simplex_keratitis-matrix",
-   "title": "Herpes simplex keratitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
+      "The classic sign is a branching dendritic epithelial ulcer with terminal end-bulbs that stains with fluorescein, with the ulcer bed highlighted by rose bengal or lissamine green",
+      "Reduced corneal sensation is a valuable clue to a herpetic cause",
+      "Disease may be epithelial (active viral replication), stromal (immune-mediated, with the risk of scarring and neovascularisation), or endothelial (disciform keratitis)",
+      "Topical corticosteroids are contraindicated in active epithelial (dendritic) disease as they promote unchecked viral replication and can enlarge the ulcer into a geographic form",
+      "Epithelial disease is treated with topical or oral antiviral therapy; stromal and endothelial immune disease requires cautious steroids under antiviral cover and specialist supervision",
+      "Recurrences are common because the virus remains latent in the trigeminal ganglion; repeated episodes cause cumulative scarring and neurotrophic changes",
+      "Long-term oral antiviral prophylaxis reduces recurrence in patients with frequent episodes"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination with fluorescein and rose bengal or lissamine green staining, Testing of corneal sensation before",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Herpes simplex keratitis is caused by herpes simplex virus, usually type 1, which after primary infection establishes latency in the trigeminal ganglion. Reactivation, precipitated by stress, illness, ultraviolet light, or immunosuppression, sends the virus along sensory nerves to the cornea. Active viral replication in the epithelium produces the dendritic ulcer. Persisting viral antigen and the host immune response drive stromal inflammation (immune stromal keratitis) and endothelial disease (disciform keratitis), which can cause oedema, scarring, neovascularisation, and thinning. Repeated episodes and antiviral toxicity contribute to reduced corneal sensation and a neurotrophic cornea.",
+    "additionalDifferentials": [
+      "Herpes zoster ophthalmicus with pseudodendrites",
+      "Acanthamoeba keratitis (especially in contact lens wearers)",
+      "Bacterial or fungal keratitis",
+      "Recurrent corneal erosion",
+      "Healing epithelial defect with a pseudodendrite",
+      "Thygeson superficial punctate keratitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpes zoster ophthalmicus with pseudodendrites, Acanthamoeba keratitis (especially in contact lens wearers), Bacterial or fungal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination with fluorescein and rose bengal or lissamine green staining",
+      "Testing of corneal sensation before instilling anaesthetic",
+      "Corneal scrape for viral PCR or culture in atypical or unclear cases",
+      "Assessment of stromal involvement, endothelial oedema, and intraocular pressure",
+      "Consideration of immune status in severe or bilateral disease"
     ],
-    [
-     "Management Strategy",
-     "Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral",
-     "Core treatment modality"
+    "redFlags": [
+      "A dendritic (or geographic) ulcer, which mandates avoidance of topical steroids in active epithelial disease",
+      "Worsening or enlarging ulcer after steroid exposure suggesting steroid-driven progression",
+      "Stromal necrosis, thinning, or a neurotrophic non-healing defect threatening perforation",
+      "Deep central scarring or dense keratitis causing significant visual loss",
+      "Signs of secondary microbial superinfection"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated epithelial disease usually heals with antiviral treatment, but recurrent stromal disease can cause progressive scarring, neovascularisation, and neurotrophic complications with permanent visual loss; prophylaxis improves long-term outcomes.",
+    "pitfalls": [
+      "Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer",
+      "Mistaking a herpetic dendrite for a healing abrasion or zoster pseudodendrite",
+      "Overlooking reduced corneal sensation as a diagnostic clue",
+      "Failing to consider prophylaxis in patients with frequent recurrences"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral aciclovir or valaciclovir, with gentle epithelial debridement where appropriate",
+      "Manage immune stromal and disciform (endothelial) keratitis with topical corticosteroids under antiviral cover and close specialist supervision",
+      "Avoid topical corticosteroids in active epithelial disease, as they promote unchecked viral replication and can enlarge the ulcer into a geographic form",
+      "Offer long-term oral antiviral prophylaxis to reduce the frequency of recurrent stromal disease",
+      "Manage the neurotrophic cornea and persistent epithelial defects with copious lubrication, bandage contact lens or tarsorrhaphy, and consider corneal transplantation under antiviral cover for visually significant scarring",
+      "Refer to ophthalmology with monitoring of intraocular pressure and corneal sensation, escalating for stromal involvement or non-healing defects"
     ]
-   ],
-   "caption": "Overview comparison matrix for herpes simplex keratitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "herpes-simplex-keratitis-real-image",
-   "title": "Herpes simplex keratitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "herpes_simplex_keratitis-pathway",
+      "title": "Herpes simplex keratitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A dendritic (or geographic) ulcer, which mandates avoidance of topical steroids in active epithelial disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination with fluorescein and rose bengal or lissamine green staining, Testing of corneal sensation before instilling anaesthetic, Corneal scrape for viral PCR or culture in atypical or unclear cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral aciclovir or valaciclovir, with gentle epithelial debridement where appropriate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of herpes simplex keratitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "herpes_simplex_keratitis-matrix",
+      "title": "Herpes simplex keratitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with a red, painful, watery eye, photophobia, and blurred vision, often preceded by mild irritation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination with fluorescein and rose bengal or lissamine green staining, Testing of corneal sensation before",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes zoster ophthalmicus with pseudodendrites, Acanthamoeba keratitis (especially in contact lens wearers), Bacterial or fungal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat active epithelial (dendritic) disease with topical antiviral such as ganciclovir gel or aciclovir ointment, or oral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing topical steroids for an undiagnosed red eye and worsening a dendritic ulcer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for herpes simplex keratitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "herpes_simplex_keratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination with fluorescein and rose bengal",
+          "cells": [
+            {
+              "text": "Dendritic or geographic epithelial ulcer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal sensation testing before anaesthetic",
+          "cells": [
+            {
+              "text": "Reduced sensation, in neurotrophic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal scrape for viral PCR or culture",
+          "cells": [
+            {
+              "text": "Confirmation in atypical or uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of stromal involvement and endothelial oedema",
+          "cells": [
+            {
+              "text": "Stromal and endothelial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Severe or bilateral disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "herpes_simplex_keratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes zoster ophthalmicus with pseudodendrites",
+          "cells": [
+            {
+              "text": "Pseudodendrites; zoster PCR of lesion separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acanthamoeba keratitis",
+          "cells": [
+            {
+              "text": "Especially in contact lens wearers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial or fungal keratitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "herpes_simplex_keratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical antivirals",
+          "cells": [
+            {
+              "text": "Active epithelial (dendritic) disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stromal and endothelial keratitis",
+          "cells": [
+            {
+              "text": "Immune stromal and disciform keratitis, managed separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid topical corticosteroids",
+          "cells": [
+            {
+              "text": "In active epithelial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotrophic cornea",
+          "cells": [
+            {
+              "text": "Management of the non-healing epithelial defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology referral",
+          "cells": [
+            {
+              "text": "Monitoring of intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "herpes_simplex_keratitis-dx-mgmt",
+      "title": "Diagnosis and management of Herpes simplex keratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye with a dendritic or geographic corneal ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Enlarging ulcer after steroids, stromal necrosis, deep scarring, or superinfection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology for stromal necrosis or superinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp with fluorescein and rose bengal; corneal sensation; scrape for PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dendritic ulcer seen with reduced corneal sensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Acanthamoeba, bacterial or fungal keratitis, zoster or recurrent erosion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical antiviral therapy for active epithelial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid topical corticosteroids in active epithelial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antiviral prophylaxis to reduce recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of the neurotrophic cornea and epithelial defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Epithelium healed; recurrence reduced by prophylaxis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

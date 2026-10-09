@@ -1,173 +1,233 @@
 {
- "id": "beta_mannosidosis",
- "name": "Beta-mannosidosis",
- "aliases": [
-  "beta-mannosidase deficiency",
-  "lysosomal beta-D-mannosidase deficiency",
-  "MANBA deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final mannose residue",
-   "Rarer and clinically more heterogeneous than alpha-mannosidosis, with a less consistent phenotype",
-   "Reported features include intellectual disability, behavioural disturbance, hearing loss, peripheral neuropathy, and recurrent infections",
-   "Angiokeratomas have been described in some patients, overlapping with other oligosaccharidoses",
-   "Unlike alpha-mannosidosis, prominent skeletal dysostosis and organomegaly are often absent or mild",
-   "Only small disaccharide substrates accumulate, so urinary oligosaccharide screening may be subtle and easily missed",
-   "Diagnosis is confirmed by deficient beta-mannosidase activity and MANBA gene testing"
+  "id": "beta_mannosidosis",
+  "name": "Beta-mannosidosis",
+  "aliases": [
+    "beta-mannosidase deficiency",
+    "lysosomal beta-D-mannosidase deficiency",
+    "MANBA deficiency"
   ],
-  "pathophysiology": "Beta-mannosidosis is caused by biallelic pathogenic variants in MANBA, encoding lysosomal beta-D-mannosidase. This enzyme catalyses the final step in the degradation of N-linked glycoprotein oligosaccharides, cleaving the terminal beta-linked mannose. Its deficiency leads to accumulation and urinary excretion of small mannose-containing disaccharides and related oligosaccharides. Because the accumulated substrate is small and the metabolic block is at the very end of the degradation pathway, the biochemical and clinical picture is often milder and more variable than that of alpha-mannosidosis. The mechanisms underlying the neurological features, including peripheral neuropathy and behavioural problems, remain incompletely understood. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Alpha-mannosidosis and other oligosaccharidoses",
-   "Fucosidosis",
-   "Aspartylglucosaminuria",
-   "Non-syndromic intellectual disability with behavioural problems",
-   "Hereditary peripheral neuropathies",
-   "Other lysosomal storage disorders with hearing loss"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte or fibroblast beta-mannosidase enzyme assay",
-   "Urinary oligosaccharide analysis, interpreted carefully given the small accumulated substrate",
-   "MANBA gene sequencing",
-   "Audiological assessment for hearing loss",
-   "Nerve conduction studies where neuropathy is suspected",
-   "Brain MRI and developmental or neuropsychological assessment"
-  ],
-  "redFlags": [
-   "Progressive neurological or behavioural deterioration",
-   "Peripheral neuropathy causing functional impairment",
-   "Recurrent infections",
-   "Seizures in more severely affected individuals"
-  ],
-  "prognosis": "The prognosis is variable and generally less severe than alpha-mannosidosis, with many patients surviving into adulthood, though intellectual disability, hearing loss, and neuropathy cause chronic morbidity. No disease-modifying therapy is established, so care is supportive.",
-  "pitfalls": [
-   "Missing the diagnosis because urinary oligosaccharide screening can appear near-normal",
-   "Assuming a phenotype identical to alpha-mannosidosis",
-   "Overlooking peripheral neuropathy as part of the disorder",
-   "Attributing behavioural symptoms solely to a primary neurodevelopmental disorder"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder",
-   "Manage hearing loss with audiological review and hearing aids or other amplification",
-   "Support intellectual disability and behavioural disturbance with developmental, educational and behavioural interventions",
-   "Treat peripheral neuropathy symptomatically and provide physiotherapy and occupational therapy",
-   "Manage recurrent infections promptly with appropriate antimicrobials and preventive measures",
-   "Coordinate multidisciplinary care across metabolic medicine, neurology, audiology and developmental services",
-   "Offer genetic counselling and family testing for this autosomal recessive MANBA disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beta_mannosidosis-pathway",
-   "title": "Beta-mannosidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final mannose residue",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive neurological or behavioural deterioration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte or fibroblast beta-mannosidase enzyme assay, Urinary oligosaccharide analysis, interpreted carefully given the small accumulated substrate, MANBA gene sequencing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis because urinary oligosaccharide screening can appear near-normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beta-mannosidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "beta_mannosidosis-matrix",
-   "title": "Beta-mannosidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final mannose residue",
+      "Rarer and clinically more heterogeneous than alpha-mannosidosis, with a less consistent phenotype",
+      "Reported features include intellectual disability, behavioural disturbance, hearing loss, peripheral neuropathy, and recurrent infections",
+      "Angiokeratomas have been described in some patients, overlapping with other oligosaccharidoses",
+      "Unlike alpha-mannosidosis, prominent skeletal dysostosis and organomegaly are often absent or mild",
+      "Only small disaccharide substrates accumulate, so urinary oligosaccharide screening may be subtle and easily missed",
+      "Diagnosis is confirmed by deficient beta-mannosidase activity and MANBA gene testing"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte or fibroblast beta-mannosidase enzyme assay, Urinary oligosaccharide analysis, interpreted carefully given the small",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Beta-mannosidosis is caused by biallelic pathogenic variants in MANBA, encoding lysosomal beta-D-mannosidase. This enzyme catalyses the final step in the degradation of N-linked glycoprotein oligosaccharides, cleaving the terminal beta-linked mannose. Its deficiency leads to accumulation and urinary excretion of small mannose-containing disaccharides and related oligosaccharides. Because the accumulated substrate is small and the metabolic block is at the very end of the degradation pathway, the biochemical and clinical picture is often milder and more variable than that of alpha-mannosidosis. The mechanisms underlying the neurological features, including peripheral neuropathy and behavioural problems, remain incompletely understood. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Alpha-mannosidosis and other oligosaccharidoses",
+      "Fucosidosis",
+      "Aspartylglucosaminuria",
+      "Non-syndromic intellectual disability with behavioural problems",
+      "Hereditary peripheral neuropathies",
+      "Other lysosomal storage disorders with hearing loss"
     ],
-    [
-     "Primary Differentials",
-     "Alpha-mannosidosis and other oligosaccharidoses, Fucosidosis, Aspartylglucosaminuria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte or fibroblast beta-mannosidase enzyme assay",
+      "Urinary oligosaccharide analysis, interpreted carefully given the small accumulated substrate",
+      "MANBA gene sequencing",
+      "Audiological assessment for hearing loss",
+      "Nerve conduction studies where neuropathy is suspected",
+      "Brain MRI and developmental or neuropsychological assessment"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive neurological or behavioural deterioration",
+      "Peripheral neuropathy causing functional impairment",
+      "Recurrent infections",
+      "Seizures in more severely affected individuals"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis because urinary oligosaccharide screening can appear near-normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is variable and generally less severe than alpha-mannosidosis, with many patients surviving into adulthood, though intellectual disability, hearing loss, and neuropathy cause chronic morbidity. No disease-modifying therapy is established, so care is supportive.",
+    "pitfalls": [
+      "Missing the diagnosis because urinary oligosaccharide screening can appear near-normal",
+      "Assuming a phenotype identical to alpha-mannosidosis",
+      "Overlooking peripheral neuropathy as part of the disorder",
+      "Attributing behavioural symptoms solely to a primary neurodevelopmental disorder"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder",
+      "Manage hearing loss with audiological review and hearing aids or other amplification",
+      "Support intellectual disability and behavioural disturbance with developmental, educational and behavioural interventions",
+      "Treat peripheral neuropathy symptomatically and provide physiotherapy and occupational therapy",
+      "Manage recurrent infections promptly with appropriate antimicrobials and preventive measures",
+      "Coordinate multidisciplinary care across metabolic medicine, neurology, audiology and developmental services",
+      "Offer genetic counselling and family testing for this autosomal recessive MANBA disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for beta-mannosidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beta-mannosidosis-real-image",
-   "title": "Beta-mannosidosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "beta_mannosidosis-pathway",
+      "title": "Beta-mannosidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final mannose residue",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive neurological or behavioural deterioration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte or fibroblast beta-mannosidase enzyme assay, Urinary oligosaccharide analysis, interpreted carefully given the small accumulated substrate, MANBA gene sequencing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis because urinary oligosaccharide screening can appear near-normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beta-mannosidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beta_mannosidosis-matrix",
+      "title": "Beta-mannosidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of lysosomal beta-D-mannosidase, the enzyme that completes glycoprotein degradation by cleaving the final",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte or fibroblast beta-mannosidase enzyme assay, Urinary oligosaccharide analysis, interpreted carefully given the small",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alpha-mannosidosis and other oligosaccharidoses, Fucosidosis, Aspartylglucosaminuria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, symptom-directed care, as no disease-modifying therapy is established for this lysosomal storage disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis because urinary oligosaccharide screening can appear near-normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beta-mannosidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_mannosidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in beta-mannosidosis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Leucocyte or fibroblast beta-mannosidase assay", "cells": [{"text": "Deficient beta-mannosidase activity confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Urinary oligosaccharide analysis", "cells": [{"text": "Accumulated substrate is small, so the result can be subtle"}], "cite": "c1"},
+        {"parameter": "MANBA gene sequencing", "cells": [{"text": "Biallelic pathogenic MANBA variants"}], "cite": "c1"},
+        {"parameter": "Audiological assessment", "cells": [{"text": "Hearing loss"}], "cite": "c1"},
+        {"parameter": "Nerve conduction studies", "cells": [{"text": "Peripheral neuropathy, where suspected"}], "cite": "c1"},
+        {"parameter": "Brain MRI and developmental assessment", "cells": [{"text": "Neurodevelopmental and neuropsychological status"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_mannosidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beta-mannosidosis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Alpha-mannosidosis", "cells": [{"text": "Skeletal dysostosis and organomegaly are often absent or mild here"}], "cite": "c1"},
+        {"parameter": "Other lysosomal storage disorders with hearing loss", "cells": [{"text": "Confirmed by beta-mannosidase enzyme assay and MANBA sequencing"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_mannosidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-mannosidosis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Symptom-directed care"}, {"text": "No disease-modifying therapy is established"}], "cite": "c1"},
+        {"parameter": "Hearing loss", "cells": [{"text": "Audiological review with hearing aids or other amplification"}, {"text": "Hearing loss is a reported feature"}], "cite": "c1"},
+        {"parameter": "Intellectual disability and behaviour", "cells": [{"text": "Developmental, educational and behavioural interventions"}, {"text": "Reported features"}], "cite": "c1"},
+        {"parameter": "Peripheral neuropathy", "cells": [{"text": "Symptomatic treatment with physiotherapy and occupational therapy"}, {"text": "Supports function"}], "cite": "c1"},
+        {"parameter": "Recurrent infections", "cells": [{"text": "Prompt antimicrobials and preventive measures"}, {"text": "Managed promptly"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Metabolic medicine, neurology, audiology and developmental services"}, {"text": "Coordinated care"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling and family testing for the autosomal recessive MANBA disorder"}, {"text": "Offered to families"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_mannosidosis-dx-mgmt",
+      "title": "Diagnosis and management of beta-mannosidosis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Intellectual disability, behavioural change, hearing loss or neuropathy in a child", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive neurological or behavioural decline, seizures or recurrent infection?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: specialist metabolic review; treat infections promptly", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Audiology; nerve conduction studies if neuropathy; brain MRI", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Beta-mannosidase enzyme assay, urinary oligosaccharides, MANBA sequencing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Deficient beta-mannosidase activity with biallelic MANBA variants?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Supportive care: hearing aids, developmental and neuropathy management", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider alpha-mannosidosis, fucosidosis or other oligosaccharidoses", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Genetic counselling and family testing for the autosomal recessive MANBA disorder", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Variable and often milder than alpha-mannosidosis; no established disease-modifying therapy", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

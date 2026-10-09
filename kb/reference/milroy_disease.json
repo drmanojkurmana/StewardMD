@@ -1,176 +1,481 @@
 {
- "id": "milroy_disease",
- "name": "Milroy disease",
- "aliases": [
-  "Milroy's disease",
-  "congenital hereditary lymphoedema type I",
-  "FLT4/VEGFR3-related primary lymphoedema",
-  "Nonne-Milroy lymphoedema"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
-   "It presents as congenital, usually bilateral, lower-limb lymphoedema, characteristically confined below the knee and often affecting the dorsum of the feet",
-   "Suggestive signs include upturned toenails, deep skin creases at the toes, prominent leg veins and, in males, hydrocele",
-   "Onset at or shortly after birth distinguishes it from FOXC2-related lymphoedema-distichiasis, which typically begins around puberty",
-   "The underlying defect is hypoplasia and functional failure of the initial lymphatics due to impaired VEGFR3 signalling",
-   "Recurrent cellulitis is a common and important complication of the affected limbs",
-   "Diagnosis rests on the congenital clinical picture, family history and FLT4 genetic testing, with lymphoscintigraphy showing impaired uptake",
-   "Management is lifelong supportive lymphoedema care with compression, meticulous skin care and prompt treatment of infection"
+  "id": "milroy_disease",
+  "name": "Milroy disease",
+  "aliases": [
+    "Milroy's disease",
+    "congenital hereditary lymphoedema type I",
+    "FLT4/VEGFR3-related primary lymphoedema",
+    "Nonne-Milroy lymphoedema"
   ],
-  "pathophysiology": "Milroy disease is an autosomal dominant primary lymphoedema arising from loss-of-function variants in FLT4 (VEGFR3), the receptor for vascular endothelial growth factors C and D that drives development of the lymphatic vasculature. Defective VEGFR3 signalling causes hypoplasia and functional failure of the initial (peripheral) lymphatic vessels, so interstitial fluid cannot be adequately drained from the lower limbs, producing congenital, typically bilateral, below-knee lymphoedema. The chronic protein-rich oedema predisposes to skin changes and recurrent infection.",
-  "additionalDifferentials": [
-   "Lymphoedema-distichiasis syndrome (FOXC2, later onset, distichiasis)",
-   "Other primary lymphoedemas (Meige/late-onset type)",
-   "Secondary lymphoedema (infective, filarial, post-surgical)",
-   "Congenital venous malformation with limb swelling",
-   "Lipoedema",
-   "Systemic causes of neonatal oedema"
-  ],
-  "additionalInvestigations": [
-   "FLT4 (VEGFR3) molecular genetic testing",
-   "Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake",
-   "Clinical examination for toenail changes, toe creases and hydrocele",
-   "Duplex ultrasound to exclude a venous cause of swelling",
-   "Assessment for and monitoring of recurrent cellulitis",
-   "Family history review and cascade genetic screening"
-  ],
-  "redFlags": [
-   "Recurrent or severe cellulitis of the affected limb",
-   "Rapidly progressive or asymmetric swelling suggesting an additional secondary cause",
-   "Skin breakdown, ulceration or lymphorrhoea",
-   "Signs of chronic infection or systemic sepsis",
-   "New unilateral swelling in a previously stable patient warranting further evaluation"
-  ],
-  "prognosis": "Milroy disease is a chronic lifelong condition but is compatible with normal life expectancy; with consistent conservative lymphoedema management most patients maintain good limb function, though recurrent cellulitis and progressive skin changes are the main sources of morbidity.",
-  "pitfalls": [
-   "Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome",
-   "Overlooking supportive clues such as upturned toenails and hydrocele",
-   "Delaying treatment of cellulitis, which accelerates lymphatic damage",
-   "Failing to provide genetic counselling for an autosomal dominant disorder"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including manual lymphatic drainage and exercise",
-   "Maintain meticulous skin care and limb elevation to limit progression and protect the skin",
-   "Treat episodes of cellulitis promptly with antibiotics and offer prophylactic antibiotics for recurrent attacks",
-   "Consider microsurgical options such as lymphovenous anastomosis in carefully selected patients",
-   "Manage associated features such as hydrocele surgically where symptomatic",
-   "Provide genetic counselling for this autosomal dominant FLT4/VEGFR3 disorder and offer cascade family screening",
-   "Follow up long-term through a specialist lymphoedema service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "milroy_disease-pathway",
-   "title": "Milroy disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe cellulitis of the affected limb",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: FLT4 (VEGFR3) molecular genetic testing, Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake, Clinical examination for toenail changes, toe creases and hydrocele"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including manual lymphatic drainage and exercise"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of milroy disease."
-  }
- ],
- "tables": [
-  {
-   "id": "milroy_disease-matrix",
-   "title": "Milroy disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
+      "It presents as congenital, usually bilateral, lower-limb lymphoedema, characteristically confined below the knee and often affecting the dorsum of the feet",
+      "Suggestive signs include upturned toenails, deep skin creases at the toes, prominent leg veins and, in males, hydrocele",
+      "Onset at or shortly after birth distinguishes it from FOXC2-related lymphoedema-distichiasis, which typically begins around puberty",
+      "The underlying defect is hypoplasia and functional failure of the initial lymphatics due to impaired VEGFR3 signalling",
+      "Recurrent cellulitis is a common and important complication of the affected limbs",
+      "Diagnosis rests on the congenital clinical picture, family history and FLT4 genetic testing, with lymphoscintigraphy showing impaired uptake",
+      "Management is lifelong supportive lymphoedema care with compression, meticulous skin care and prompt treatment of infection"
     ],
-    [
-     "Key Investigations",
-     "FLT4 (VEGFR3) molecular genetic testing, Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake, Clinical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Milroy disease is an autosomal dominant primary lymphoedema arising from loss-of-function variants in FLT4 (VEGFR3), the receptor for vascular endothelial growth factors C and D that drives development of the lymphatic vasculature. Defective VEGFR3 signalling causes hypoplasia and functional failure of the initial (peripheral) lymphatic vessels, so interstitial fluid cannot be adequately drained from the lower limbs, producing congenital, typically bilateral, below-knee lymphoedema. The chronic protein-rich oedema predisposes to skin changes and recurrent infection.",
+    "additionalDifferentials": [
+      "Lymphoedema-distichiasis syndrome (FOXC2, later onset, distichiasis)",
+      "Other primary lymphoedemas (Meige/late-onset type)",
+      "Secondary lymphoedema (infective, filarial, post-surgical)",
+      "Congenital venous malformation with limb swelling",
+      "Lipoedema",
+      "Systemic causes of neonatal oedema"
     ],
-    [
-     "Primary Differentials",
-     "Lymphoedema-distichiasis syndrome (FOXC2, later onset, distichiasis), Other primary lymphoedemas (Meige/late-onset type),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "FLT4 (VEGFR3) molecular genetic testing",
+      "Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake",
+      "Clinical examination for toenail changes, toe creases and hydrocele",
+      "Duplex ultrasound to exclude a venous cause of swelling",
+      "Assessment for and monitoring of recurrent cellulitis",
+      "Family history review and cascade genetic screening"
     ],
-    [
-     "Management Strategy",
-     "Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe cellulitis of the affected limb",
+      "Rapidly progressive or asymmetric swelling suggesting an additional secondary cause",
+      "Skin breakdown, ulceration or lymphorrhoea",
+      "Signs of chronic infection or systemic sepsis",
+      "New unilateral swelling in a previously stable patient warranting further evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Milroy disease is a chronic lifelong condition but is compatible with normal life expectancy; with consistent conservative lymphoedema management most patients maintain good limb function, though recurrent cellulitis and progressive skin changes are the main sources of morbidity.",
+    "pitfalls": [
+      "Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome",
+      "Overlooking supportive clues such as upturned toenails and hydrocele",
+      "Delaying treatment of cellulitis, which accelerates lymphatic damage",
+      "Failing to provide genetic counselling for an autosomal dominant disorder"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including manual lymphatic drainage and exercise",
+      "Maintain meticulous skin care and limb elevation to limit progression and protect the skin",
+      "Treat episodes of cellulitis promptly with antibiotics and offer prophylactic antibiotics for recurrent attacks",
+      "Consider microsurgical options such as lymphovenous anastomosis in carefully selected patients",
+      "Manage associated features such as hydrocele surgically where symptomatic",
+      "Provide genetic counselling for this autosomal dominant FLT4/VEGFR3 disorder and offer cascade family screening",
+      "Follow up long-term through a specialist lymphoedema service"
     ]
-   ],
-   "caption": "Overview comparison matrix for milroy disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "milroy-disease-real-image",
-   "title": "Milroy disease: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "milroy_disease-pathway",
+      "title": "Milroy disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe cellulitis of the affected limb",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: FLT4 (VEGFR3) molecular genetic testing, Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake, Clinical examination for toenail changes, toe creases and hydrocele"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including manual lymphatic drainage and exercise"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of milroy disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "milroy_disease-matrix",
+      "title": "Milroy disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant primary lymphoedema caused by variants in FLT4, which encodes the lymphatic growth factor receptor VEGFR3",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "FLT4 (VEGFR3) molecular genetic testing, Lymphoscintigraphy demonstrating reduced or absent lymphatic uptake, Clinical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphoedema-distichiasis syndrome (FOXC2, later onset, distichiasis), Other primary lymphoedemas (Meige/late-onset type),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the lymphoedema conservatively with graduated compression garments, bandaging and complex decongestive therapy including",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with the later-onset FOXC2 lymphoedema-distichiasis syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for milroy disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "milroy_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FLT4 (VEGFR3) molecular genetic testing",
+          "cells": [
+            {
+              "text": "FLT4 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Reduced or absent lymphatic uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination for toenail changes, toe creases and hydrocele",
+          "cells": [
+            {
+              "text": "Toenail changes, toe creases and hydrocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Venous cause of swelling excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for and monitoring of recurrent cellulitis",
+          "cells": [
+            {
+              "text": "Recurrent cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history review and cascade genetic screening",
+          "cells": [
+            {
+              "text": "Family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milroy_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoedema-distichiasis syndrome (FOXC2)",
+          "cells": [
+            {
+              "text": "Later onset, with distichiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other primary lymphoedemas (late-onset type)",
+          "cells": [
+            {
+              "text": "Late-onset primary lymphoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary lymphoedema (infective, filarial or post-surgical)",
+          "cells": [
+            {
+              "text": "Infective, filarial or post-surgical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital venous malformation with limb swelling",
+          "cells": [
+            {
+              "text": "Venous cause excluded on duplex ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milroy_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Compression and complex decongestive therapy",
+          "cells": [
+            {
+              "text": "Graduated compression garments, bandaging, manual lymphatic drainage and exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and elevation",
+          "cells": [
+            {
+              "text": "Limits progression and protects the skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis treatment",
+          "cells": [
+            {
+              "text": "Prompt antibiotics; prophylaxis for recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgery",
+          "cells": [
+            {
+              "text": "Lymphovenous anastomosis in carefully selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated hydrocele",
+          "cells": [
+            {
+              "text": "Surgery where symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FLT4 (VEGFR3) disorder; cascade family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Long-term lymphoedema service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "milroy_disease-dx-mgmt",
+      "title": "Diagnosis and management of Milroy disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb lymphoedema with toenail changes, toe creases or hydrocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent severe cellulitis, rapidly asymmetric swelling, or skin breakdown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat cellulitis promptly; assess for a secondary cause of swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphoscintigraphy; FLT4 testing; duplex ultrasound; clinical examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an FLT4 variant confirmed with reduced lymphatic uptake?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FOXC2 lymphoedema-distichiasis, late-onset lymphoedema or a secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated compression, bandaging and complex decongestive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous skin care and limb elevation to protect the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt antibiotics for cellulitis; prophylaxis for recurrent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microsurgery such as lymphovenous anastomosis in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cascade genetic screening for autosomal dominant FLT4; long-term lymphoedema service",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

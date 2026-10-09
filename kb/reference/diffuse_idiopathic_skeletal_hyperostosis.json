@@ -1,173 +1,462 @@
 {
- "id": "diffuse_idiopathic_skeletal_hyperostosis",
- "name": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease)",
- "aliases": [
-  "DISH",
-  "Forestier disease",
-  "Forestier-Rotes-Querol disease",
-  "ankylosing hyperostosis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies, likened to 'flowing candle wax'",
-   "Diagnosis classically requires flowing ossification bridging at least four contiguous vertebrae with preservation of the intervertebral disc spaces",
-   "The sacroiliac joints and apophyseal (facet) joints are preserved, which helps distinguish it from ankylosing spondylitis",
-   "Most common in older men and strongly associated with metabolic syndrome, type 2 diabetes and obesity",
-   "Often asymptomatic and found incidentally, but can cause spinal stiffness, reduced range of movement and, when cervical, dysphagia from anterior osteophytes",
-   "Enthesopathy with new bone at extraspinal sites (heels, pelvis, elbows) is common",
-   "Management is largely symptomatic with analgesia and physiotherapy, and surgery is reserved for complications such as severe dysphagia or myelopathy"
+  "id": "diffuse_idiopathic_skeletal_hyperostosis",
+  "name": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease)",
+  "aliases": [
+    "DISH",
+    "Forestier disease",
+    "Forestier-Rotes-Querol disease",
+    "ankylosing hyperostosis"
   ],
-  "pathophysiology": "Diffuse idiopathic skeletal hyperostosis is a non-inflammatory ossifying diathesis in which new bone is laid down at entheses and along the spine, particularly the anterolateral vertebral margins, through progressive endochondral and membranous ossification. The disc spaces, sacroiliac joints and facet joints remain intact, distinguishing it from inflammatory spondyloarthropathy. Metabolic factors are strongly implicated: hyperinsulinaemia, insulin-like growth factor and other growth-promoting mediators associated with metabolic syndrome, diabetes and obesity are thought to stimulate osteoblast activity and enthesial new bone formation. The accumulating anterior bridging osteophytes stiffen the spine and, in the cervical region, can mechanically impinge on the oesophagus and airway.",
-  "additionalDifferentials": [
-   "Ankylosing spondylitis",
-   "Degenerative spondylosis with osteophytes",
-   "Spondylosis deformans",
-   "Ochronosis (alkaptonuria)",
-   "Fluorosis",
-   "Acromegalic spondylopathy"
-  ],
-  "additionalInvestigations": [
-   "Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs",
-   "CT of the spine to characterise the extent of ossification and cervical osteophytes",
-   "Barium swallow or endoscopy when cervical osteophytes cause dysphagia",
-   "Fasting glucose, HbA1c and lipid profile to assess associated metabolic syndrome",
-   "MRI if spinal canal stenosis, myelopathy or ossification of the posterior longitudinal ligament is suspected"
-  ],
-  "redFlags": [
-   "Progressive dysphagia or airway compromise from large cervical osteophytes",
-   "Neurological deficit suggesting myelopathy or associated spinal canal stenosis",
-   "Unstable spinal fracture through an ankylosed, brittle segment after minor trauma",
-   "New severe pain that could indicate fracture, infection or malignancy in a stiff spine"
-  ],
-  "prognosis": "DISH is generally benign and slowly progressive; many patients remain asymptomatic, but spinal ankylosis increases fracture risk after minor trauma and large osteophytes can occasionally cause dysphagia or neurological compromise.",
-  "pitfalls": [
-   "Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints",
-   "Underestimating fracture risk in the rigid, brittle ankylosed spine after minor trauma",
-   "Overlooking cervical osteophytes as a cause of unexplained dysphagia",
-   "Failing to assess and manage the associated metabolic syndrome"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Resnick's Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no disease-modifying drug therapy",
-   "Physiotherapy and structured exercise to preserve spinal mobility, posture and range of movement",
-   "Aggressive management of the associated metabolic syndrome, with weight reduction, glycaemic control of type 2 diabetes and lipid optimisation",
-   "Soft-diet modification and referral for surgical osteophytectomy when cervical anterior osteophytes cause dysphagia or airway compromise",
-   "Heightened vigilance for unstable fractures of the ankylosed rigid spine after even minor trauma, with a low threshold for CT and spinal immobilisation",
-   "Surgical decompression for spinal canal stenosis, myelopathy or ossification of the posterior longitudinal ligament",
-   "Multidisciplinary referral involving rheumatology, ENT or gastroenterology and spinal surgery as manifestations dictate"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "diffuse_idiopathic_skeletal_hyperostosis-pathway",
-   "title": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies, likened to 'flowing candle wax'",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysphagia or airway compromise from large cervical osteophytes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs, CT of the spine to characterise the extent of ossification and cervical osteophytes, Barium swallow or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no disease-modifying drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of diffuse idiopathic skeletal hyperostosis (dish, forestier disease)."
-  }
- ],
- "tables": [
-  {
-   "id": "diffuse_idiopathic_skeletal_hyperostosis-matrix",
-   "title": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies, likened to 'flowing candle wax'",
+      "Diagnosis classically requires flowing ossification bridging at least four contiguous vertebrae with preservation of the intervertebral disc spaces",
+      "The sacroiliac joints and apophyseal (facet) joints are preserved, which helps distinguish it from ankylosing spondylitis",
+      "Most common in older men and strongly associated with metabolic syndrome, type 2 diabetes and obesity",
+      "Often asymptomatic and found incidentally, but can cause spinal stiffness, reduced range of movement and, when cervical, dysphagia from anterior osteophytes",
+      "Enthesopathy with new bone at extraspinal sites (heels, pelvis, elbows) is common",
+      "Management is largely symptomatic with analgesia and physiotherapy, and surgery is reserved for complications such as severe dysphagia or myelopathy"
     ],
-    [
-     "Key Investigations",
-     "Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs, CT of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Diffuse idiopathic skeletal hyperostosis is a non-inflammatory ossifying diathesis in which new bone is laid down at entheses and along the spine, particularly the anterolateral vertebral margins, through progressive endochondral and membranous ossification. The disc spaces, sacroiliac joints and facet joints remain intact, distinguishing it from inflammatory spondyloarthropathy. Metabolic factors are strongly implicated: hyperinsulinaemia, insulin-like growth factor and other growth-promoting mediators associated with metabolic syndrome, diabetes and obesity are thought to stimulate osteoblast activity and enthesial new bone formation. The accumulating anterior bridging osteophytes stiffen the spine and, in the cervical region, can mechanically impinge on the oesophagus and airway.",
+    "additionalDifferentials": [
+      "Ankylosing spondylitis",
+      "Degenerative spondylosis with osteophytes",
+      "Spondylosis deformans",
+      "Ochronosis (alkaptonuria)",
+      "Fluorosis",
+      "Acromegalic spondylopathy"
     ],
-    [
-     "Primary Differentials",
-     "Ankylosing spondylitis, Degenerative spondylosis with osteophytes, Spondylosis deformans",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs",
+      "CT of the spine to characterise the extent of ossification and cervical osteophytes",
+      "Barium swallow or endoscopy when cervical osteophytes cause dysphagia",
+      "Fasting glucose, HbA1c and lipid profile to assess associated metabolic syndrome",
+      "MRI if spinal canal stenosis, myelopathy or ossification of the posterior longitudinal ligament is suspected"
     ],
-    [
-     "Management Strategy",
-     "Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysphagia or airway compromise from large cervical osteophytes",
+      "Neurological deficit suggesting myelopathy or associated spinal canal stenosis",
+      "Unstable spinal fracture through an ankylosed, brittle segment after minor trauma",
+      "New severe pain that could indicate fracture, infection or malignancy in a stiff spine"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints",
-     "Prevent diagnostic or management error"
+    "prognosis": "DISH is generally benign and slowly progressive; many patients remain asymptomatic, but spinal ankylosis increases fracture risk after minor trauma and large osteophytes can occasionally cause dysphagia or neurological compromise.",
+    "pitfalls": [
+      "Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints",
+      "Underestimating fracture risk in the rigid, brittle ankylosed spine after minor trauma",
+      "Overlooking cervical osteophytes as a cause of unexplained dysphagia",
+      "Failing to assess and manage the associated metabolic syndrome"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Resnick's Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no disease-modifying drug therapy",
+      "Physiotherapy and structured exercise to preserve spinal mobility, posture and range of movement",
+      "Aggressive management of the associated metabolic syndrome, with weight reduction, glycaemic control of type 2 diabetes and lipid optimisation",
+      "Soft-diet modification and referral for surgical osteophytectomy when cervical anterior osteophytes cause dysphagia or airway compromise",
+      "Heightened vigilance for unstable fractures of the ankylosed rigid spine after even minor trauma, with a low threshold for CT and spinal immobilisation",
+      "Surgical decompression for spinal canal stenosis, myelopathy or ossification of the posterior longitudinal ligament",
+      "Multidisciplinary referral involving rheumatology, ENT or gastroenterology and spinal surgery as manifestations dictate"
     ]
-   ],
-   "caption": "Overview comparison matrix for diffuse idiopathic skeletal hyperostosis (dish, forestier disease)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "diffuse-idiopathic-skeletal-hyperostosis-real-image",
-   "title": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-pathway",
+      "title": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies, likened to 'flowing candle wax'",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysphagia or airway compromise from large cervical osteophytes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs, CT of the spine to characterise the extent of ossification and cervical osteophytes, Barium swallow or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no disease-modifying drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of diffuse idiopathic skeletal hyperostosis (dish, forestier disease)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-matrix",
+      "title": "Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-inflammatory condition characterised by flowing ossification along the anterolateral aspect of the vertebral bodies,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spinal radiographs demonstrating flowing anterolateral ossification over four or more vertebrae with preserved discs, CT of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ankylosing spondylitis, Degenerative spondylosis with osteophytes, Spondylosis deformans",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Simple analgesia and non-steroidal anti-inflammatory drugs for spinal stiffness and enthesopathic pain, as there is no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing DISH with ankylosing spondylitis and missing the preserved discs and sacroiliac joints",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for diffuse idiopathic skeletal hyperostosis (dish, forestier disease)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Flowing anterolateral ossification over four or more vertebrae with preserved discs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the spine",
+          "cells": [
+            {
+              "text": "Extent of ossification and cervical osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium swallow or endoscopy",
+          "cells": [
+            {
+              "text": "Dysphagia caused by cervical osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Associated metabolic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Canal stenosis, myelopathy or posterior longitudinal ligament ossification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "Preserved discs and sacroiliac joints distinguish DISH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative spondylosis with osteophytes",
+          "cells": [
+            {
+              "text": "Discs are preserved in DISH; a common pitfall is missing this"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "For stiffness and enthesopathic pain; no disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and exercise",
+          "cells": [
+            {
+              "text": "Preserves spinal mobility, posture and range of movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic syndrome management",
+          "cells": [
+            {
+              "text": "Weight reduction, glycaemic control of type 2 diabetes, lipid optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia management",
+          "cells": [
+            {
+              "text": "Soft diet; osteophytectomy for dysphagia or airway compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture vigilance",
+          "cells": [
+            {
+              "text": "Low threshold for CT and spinal immobilisation after minor trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Canal stenosis, myelopathy or posterior longitudinal ligament ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Rheumatology, ENT or gastroenterology and spinal surgery as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diffuse_idiopathic_skeletal_hyperostosis-dx-mgmt",
+      "title": "Diagnosis and management of Diffuse idiopathic skeletal hyperostosis (DISH, Forestier disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DISH: stiff spine with flowing ossification along the vertebral margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive dysphagia, myelopathy, unstable fracture, new severe pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal imaging and immobilisation for suspected fracture after minor trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spinal radiographs; CT spine; swallow study; HbA1c and lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Flowing ossification over four or more vertebrae with preserved discs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ankylosing spondylitis, degenerative spondylosis or alkaptonuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia and NSAIDs; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and structured exercise to preserve mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the metabolic syndrome: weight, glycaemia and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Osteophytectomy for dysphagia or airway compromise from cervical osteophytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgical decompression for canal stenosis or myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally benign and slowly progressive; fracture risk rises after minor trauma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

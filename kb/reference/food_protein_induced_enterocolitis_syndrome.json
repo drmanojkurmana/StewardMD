@@ -1,178 +1,492 @@
 {
- "id": "food_protein_induced_enterocolitis_syndrome",
- "name": "Food protein-induced enterocolitis syndrome (FPIES)",
- "aliases": [
-  "FPIES",
-  "food protein-induced enterocolitis",
-  "non-IgE-mediated food allergy"
- ],
- "class": "non_infective",
- "system": "Paediatrics / Gastroenterology",
- "specialty": "Paediatric Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard paediatric gastroenterology and allergy reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
-   "The hallmark of an acute reaction is profuse, repetitive vomiting beginning typically one to four hours after ingestion, often with pallor, lethargy, and floppiness",
-   "Severe acute episodes can progress to dehydration, hypotension, and a shock-like picture that may be mistaken for sepsis",
-   "A chronic form from regular exposure, for example in formula, causes intermittent vomiting, diarrhoea, poor weight gain, and failure to thrive",
-   "Common triggers are cow's milk and soy, and among solids the grains such as rice and oats, although many foods can be responsible",
-   "Because it is non-IgE-mediated, skin-prick tests and specific IgE are typically negative and allergy testing does not confirm the diagnosis",
-   "Diagnosis is clinical, based on the characteristic history and resolution on removing the food, with a supervised oral food challenge as the reference standard when the diagnosis is unclear",
-   "Management is strict avoidance of the trigger with dietary elimination, prompt rehydration of acute reactions, and planned supervised reintroduction, and most children outgrow the condition"
+  "id": "food_protein_induced_enterocolitis_syndrome",
+  "name": "Food protein-induced enterocolitis syndrome (FPIES)",
+  "aliases": [
+    "FPIES",
+    "food protein-induced enterocolitis",
+    "non-IgE-mediated food allergy"
   ],
-  "pathophysiology": "The disorder is a non-IgE-mediated food allergy in which food proteins provoke an antigen-specific inflammatory response in the gut involving T cells and innate immune activation rather than IgE. The resulting mucosal inflammation increases intestinal permeability and drives fluid shifts, producing the profuse vomiting, diarrhoea, and, in severe cases, the hypovolaemic shock-like presentation. The precise mechanisms remain incompletely understood, but the reaction is reproducible on re-exposure and tends to resolve as tolerance develops with age.",
-  "additionalDifferentials": [
-   "Sepsis, which a severe acute episode can closely mimic",
-   "Acute gastroenteritis or other viral illness",
-   "IgE-mediated food allergy or anaphylaxis",
-   "Surgical abdomen such as intussusception, malrotation with volvulus, or obstruction",
-   "Inborn errors of metabolism presenting with vomiting and lethargy",
-   "Gastro-oesophageal reflux disease",
-   "Necrotising enterocolitis in the neonate"
-  ],
-  "additionalInvestigations": [
-   "Detailed dietary and symptom-timing history, which forms the basis of the diagnosis",
-   "Supervised oral food challenge under medical observation with intravenous access available",
-   "Trial of elimination of the suspected protein with documented resolution of symptoms",
-   "Blood tests during acute episodes, which may show neutrophilia or metabolic derangement and are supportive rather than diagnostic",
-   "Skin-prick or specific IgE testing mainly to identify any coexisting IgE sensitisation in atypical cases",
-   "Stool examination to exclude infection where relevant",
-   "Investigations to exclude surgical or metabolic causes when the presentation is atypical"
-  ],
-  "redFlags": [
-   "Shock-like presentation with hypotension, marked pallor, and lethargy",
-   "Severe dehydration with metabolic disturbance",
-   "Failure to thrive in the chronic form",
-   "Features suggesting a surgical abdomen",
-   "Diagnostic uncertainty requiring a challenge in a supervised setting"
-  ],
-  "prognosis": "The outlook is generally excellent, with most children developing tolerance and outgrowing the condition within the first few years of life, though the timing varies by trigger; acute reactions can be severe but are manageable with prompt rehydration.",
-  "pitfalls": [
-   "Misdiagnosing severe acute episodes as sepsis and missing the food trigger",
-   "Expecting positive allergy tests and dismissing the diagnosis when they are negative",
-   "Failing to identify a grain or other solid-food trigger introduced at weaning",
-   "Unsupervised food reintroduction that risks a severe reaction",
-   "Over-restricting the diet and compromising nutrition"
-  ],
-  "references": [
-   "International consensus guidance on food protein-induced enterocolitis syndrome",
-   "Standard paediatric gastroenterology and allergy reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse vomiting, reserving corticosteroids for severe episodes",
-   "Eliminate the trigger protein from the diet, and from the breastfeeding mother's diet where relevant",
-   "For cow's-milk or soy FPIES in infants, substitute an extensively hydrolysed formula, escalating to an amino-acid formula if symptoms persist",
-   "Introduce complementary solids cautiously, individualising the timing of higher-risk foods such as grains",
-   "Provide a written emergency plan explaining that this is non-IgE mediated, so rehydration is the key treatment rather than adrenaline or antihistamines",
-   "Reassess tolerance periodically with supervised oral food challenges under medical observation with intravenous access available",
-   "Involve a paediatric dietitian and allergy or gastroenterology team to safeguard growth and guide safe reintroduction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "food_protein_induced_enterocolitis_syndrome-pathway",
-   "title": "Food protein-induced enterocolitis syndrome (FPIES): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Shock-like presentation with hypotension, marked pallor, and lethargy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed dietary and symptom-timing history, which forms the basis of the diagnosis, Supervised oral food challenge under medical observation with intravenous access available, Trial of elimination of the suspected protein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse vomiting, reserving corticosteroids for severe episodes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing severe acute episodes as sepsis and missing the food trigger"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of food protein-induced enterocolitis syndrome (fpies)."
-  }
- ],
- "tables": [
-  {
-   "id": "food_protein_induced_enterocolitis_syndrome-matrix",
-   "title": "Food protein-induced enterocolitis syndrome (FPIES): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatrics / Gastroenterology",
+  "specialty": "Paediatric Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard paediatric gastroenterology and allergy reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
+      "The hallmark of an acute reaction is profuse, repetitive vomiting beginning typically one to four hours after ingestion, often with pallor, lethargy, and floppiness",
+      "Severe acute episodes can progress to dehydration, hypotension, and a shock-like picture that may be mistaken for sepsis",
+      "A chronic form from regular exposure, for example in formula, causes intermittent vomiting, diarrhoea, poor weight gain, and failure to thrive",
+      "Common triggers are cow's milk and soy, and among solids the grains such as rice and oats, although many foods can be responsible",
+      "Because it is non-IgE-mediated, skin-prick tests and specific IgE are typically negative and allergy testing does not confirm the diagnosis",
+      "Diagnosis is clinical, based on the characteristic history and resolution on removing the food, with a supervised oral food challenge as the reference standard when the diagnosis is unclear",
+      "Management is strict avoidance of the trigger with dietary elimination, prompt rehydration of acute reactions, and planned supervised reintroduction, and most children outgrow the condition"
     ],
-    [
-     "Key Investigations",
-     "Detailed dietary and symptom-timing history, which forms the basis of the diagnosis, Supervised oral food challenge under medical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder is a non-IgE-mediated food allergy in which food proteins provoke an antigen-specific inflammatory response in the gut involving T cells and innate immune activation rather than IgE. The resulting mucosal inflammation increases intestinal permeability and drives fluid shifts, producing the profuse vomiting, diarrhoea, and, in severe cases, the hypovolaemic shock-like presentation. The precise mechanisms remain incompletely understood, but the reaction is reproducible on re-exposure and tends to resolve as tolerance develops with age.",
+    "additionalDifferentials": [
+      "Sepsis, which a severe acute episode can closely mimic",
+      "Acute gastroenteritis or other viral illness",
+      "IgE-mediated food allergy or anaphylaxis",
+      "Surgical abdomen such as intussusception, malrotation with volvulus, or obstruction",
+      "Inborn errors of metabolism presenting with vomiting and lethargy",
+      "Gastro-oesophageal reflux disease",
+      "Necrotising enterocolitis in the neonate"
     ],
-    [
-     "Primary Differentials",
-     "Sepsis, which a severe acute episode can closely mimic, Acute gastroenteritis or other viral illness, IgE-mediated food allergy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed dietary and symptom-timing history, which forms the basis of the diagnosis",
+      "Supervised oral food challenge under medical observation with intravenous access available",
+      "Trial of elimination of the suspected protein with documented resolution of symptoms",
+      "Blood tests during acute episodes, which may show neutrophilia or metabolic derangement and are supportive rather than diagnostic",
+      "Skin-prick or specific IgE testing mainly to identify any coexisting IgE sensitisation in atypical cases",
+      "Stool examination to exclude infection where relevant",
+      "Investigations to exclude surgical or metabolic causes when the presentation is atypical"
     ],
-    [
-     "Management Strategy",
-     "Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse",
-     "Core treatment modality"
+    "redFlags": [
+      "Shock-like presentation with hypotension, marked pallor, and lethargy",
+      "Severe dehydration with metabolic disturbance",
+      "Failure to thrive in the chronic form",
+      "Features suggesting a surgical abdomen",
+      "Diagnostic uncertainty requiring a challenge in a supervised setting"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing severe acute episodes as sepsis and missing the food trigger",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is generally excellent, with most children developing tolerance and outgrowing the condition within the first few years of life, though the timing varies by trigger; acute reactions can be severe but are manageable with prompt rehydration.",
+    "pitfalls": [
+      "Misdiagnosing severe acute episodes as sepsis and missing the food trigger",
+      "Expecting positive allergy tests and dismissing the diagnosis when they are negative",
+      "Failing to identify a grain or other solid-food trigger introduced at weaning",
+      "Unsupervised food reintroduction that risks a severe reaction",
+      "Over-restricting the diet and compromising nutrition"
+    ],
+    "references": [
+      "International consensus guidance on food protein-induced enterocolitis syndrome",
+      "Standard paediatric gastroenterology and allergy reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse vomiting, reserving corticosteroids for severe episodes",
+      "Eliminate the trigger protein from the diet, and from the breastfeeding mother's diet where relevant",
+      "For cow's-milk or soy FPIES in infants, substitute an extensively hydrolysed formula, escalating to an amino-acid formula if symptoms persist",
+      "Introduce complementary solids cautiously, individualising the timing of higher-risk foods such as grains",
+      "Provide a written emergency plan explaining that this is non-IgE mediated, so rehydration is the key treatment rather than adrenaline or antihistamines",
+      "Reassess tolerance periodically with supervised oral food challenges under medical observation with intravenous access available",
+      "Involve a paediatric dietitian and allergy or gastroenterology team to safeguard growth and guide safe reintroduction"
     ]
-   ],
-   "caption": "Overview comparison matrix for food protein-induced enterocolitis syndrome (fpies)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "food-protein-induced-enterocolitis-syndrome-real-image",
-   "title": "Food protein-induced enterocolitis syndrome (FPIES): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "food_protein_induced_enterocolitis_syndrome-pathway",
+      "title": "Food protein-induced enterocolitis syndrome (FPIES): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Shock-like presentation with hypotension, marked pallor, and lethargy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed dietary and symptom-timing history, which forms the basis of the diagnosis, Supervised oral food challenge under medical observation with intravenous access available, Trial of elimination of the suspected protein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse vomiting, reserving corticosteroids for severe episodes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing severe acute episodes as sepsis and missing the food trigger"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of food protein-induced enterocolitis syndrome (fpies)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "food_protein_induced_enterocolitis_syndrome-matrix",
+      "title": "Food protein-induced enterocolitis syndrome (FPIES): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-IgE-mediated food allergy of infancy and early childhood that causes delayed, predominantly gastrointestinal reactions",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed dietary and symptom-timing history, which forms the basis of the diagnosis, Supervised oral food challenge under medical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sepsis, which a severe acute episode can closely mimic, Acute gastroenteritis or other viral illness, IgE-mediated food allergy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage acute reactions with prompt rehydration using intravenous isotonic fluid boluses and ondansetron to control the profuse",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing severe acute episodes as sepsis and missing the food trigger",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for food protein-induced enterocolitis syndrome (fpies)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard paediatric gastroenterology and allergy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "food_protein_induced_enterocolitis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary and symptom-timing history",
+          "cells": [
+            {
+              "text": "Forms the basis of the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised oral food challenge",
+          "cells": [
+            {
+              "text": "Performed under medical observation with intravenous access available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of elimination",
+          "cells": [
+            {
+              "text": "Documented resolution of symptoms after removing the suspected protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests during acute episodes",
+          "cells": [
+            {
+              "text": "May show neutrophilia or metabolic derangement; supportive, not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-prick or specific IgE testing",
+          "cells": [
+            {
+              "text": "Identifies coexisting IgE sensitisation in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool examination",
+          "cells": [
+            {
+              "text": "Excludes infection where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "food_protein_induced_enterocolitis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis",
+          "cells": [
+            {
+              "text": "A severe acute episode can closely mimic sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgE-mediated food allergy or anaphylaxis",
+          "cells": [
+            {
+              "text": "FPIES is non-IgE mediated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical abdomen (intussusception, malrotation with volvulus)",
+          "cells": [
+            {
+              "text": "Features suggesting a surgical abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Vomiting and lethargy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute gastroenteritis or viral illness",
+          "cells": [
+            {
+              "text": "Infection excluded by stool examination where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "food_protein_induced_enterocolitis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute rehydration",
+          "cells": [
+            {
+              "text": "IV isotonic fluid boluses and ondansetron for profuse vomiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger elimination",
+          "cells": [
+            {
+              "text": "Remove the protein from the diet, and from the breastfeeding mother's diet where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrolysed formula",
+          "cells": [
+            {
+              "text": "Extensively hydrolysed formula for cow's milk or soy; amino-acid formula if symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious complementary solids",
+          "cells": [
+            {
+              "text": "Individualise the timing of higher-risk foods such as grains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Written emergency plan",
+          "cells": [
+            {
+              "text": "Rehydration is the key treatment rather than adrenaline or antihistamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised re-challenge",
+          "cells": [
+            {
+              "text": "Periodic reassessment under medical observation with IV access available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric dietitian and specialist team",
+          "cells": [
+            {
+              "text": "Safeguards growth and guides safe reintroduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "food_protein_induced_enterocolitis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Food protein-induced enterocolitis syndrome (FPIES)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected FPIES: profuse vomiting and lethargy after a suspected food trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (shock-like picture, severe dehydration, surgical features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV rehydration and critical care for a shock-like presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dietary history, supervised oral food challenge and trial of elimination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do symptoms resolve on elimination and recur on supervised challenge?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider sepsis, surgical abdomen, metabolic causes or IgE-mediated allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV isotonic fluid boluses and ondansetron for profuse vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove the trigger protein from the diet, and the mother's diet if breastfeeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extensively hydrolysed formula for cow's milk or soy; amino-acid formula if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Written plan: rehydration rather than adrenaline or antihistamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally excellent; most children develop tolerance within the first few years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

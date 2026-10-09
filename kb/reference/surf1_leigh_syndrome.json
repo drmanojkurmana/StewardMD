@@ -1,173 +1,471 @@
 {
- "id": "surf1_leigh_syndrome",
- "name": "SURF1-related Leigh syndrome",
- "aliases": [
-  "SURF1 deficiency",
-  "cytochrome c oxidase (complex IV) deficiency",
-  "COX-deficient Leigh syndrome",
-  "subacute necrotising encephalomyelopathy (SURF1)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is deficient, giving isolated COX deficiency",
-   "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and brainstem signs, often triggered or worsened by intercurrent illness",
-   "Brain MRI classically shows symmetrical T2-hyperintense lesions of the basal ganglia and brainstem, the imaging hallmark of Leigh syndrome",
-   "Elevated lactate in blood and cerebrospinal fluid supports a mitochondrial energy-generation defect, and CSF lactate can be raised even when blood is near-normal",
-   "SURF1 disease tends to produce a relatively consistent phenotype with hypertrichosis reported in some patients and a notably poor tolerance of anaesthesia and metabolic stress",
-   "Diagnosis rests on the MRI pattern, isolated COX deficiency on muscle histochemistry/biochemistry, and SURF1 sequencing; management is supportive with avoidance of catabolic stress"
+  "id": "surf1_leigh_syndrome",
+  "name": "SURF1-related Leigh syndrome",
+  "aliases": [
+    "SURF1 deficiency",
+    "cytochrome c oxidase (complex IV) deficiency",
+    "COX-deficient Leigh syndrome",
+    "subacute necrotising encephalomyelopathy (SURF1)"
   ],
-  "pathophysiology": "SURF1 encodes an assembly factor required for correct biogenesis of complex IV (cytochrome c oxidase), the terminal enzyme of the mitochondrial respiratory chain. Biallelic loss-of-function mutations reduce assembled, functional complex IV, impairing oxidative phosphorylation and cellular ATP production. Highly energy-dependent neurons, particularly in the basal ganglia and brainstem, undergo the characteristic subacute symmetrical necrosis of Leigh syndrome, with reactive lactate accumulation. Metabolic crises are commonly precipitated by infection, fasting, or other catabolic stress that further strains oxidative metabolism.",
-  "additionalDifferentials": [
-   "Leigh syndrome from other nuclear or mitochondrial DNA mutations",
-   "Other complex IV assembly-factor defects (e.g. SCO2, COX10, COX15)",
-   "MELAS and other mitochondrial encephalopathies",
-   "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease (treatable mimics)",
-   "Wilson disease and other basal ganglia disorders in older children",
-   "Acute disseminated encephalomyelitis or infective encephalitis"
-  ],
-  "additionalInvestigations": [
-   "Blood and CSF lactate and pyruvate concentrations",
-   "Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions",
-   "Muscle biopsy with histochemistry showing cytochrome c oxidase deficiency and respiratory-chain enzymology",
-   "SURF1 gene sequencing and broader mitochondrial gene panels",
-   "Plasma amino acids and urine organic acids to exclude treatable metabolic mimics",
-   "Cardiac and ophthalmological assessment given multisystem mitochondrial involvement"
-  ],
-  "redFlags": [
-   "Acute neurological deterioration during intercurrent illness signalling a metabolic crisis",
-   "Brainstem dysfunction with respiratory irregularity or apnoea",
-   "Progressive bulbar involvement compromising airway and feeding safety",
-   "Anaesthetic exposure without mitochondrial precautions, risking decompensation"
-  ],
-  "prognosis": "SURF1-related Leigh syndrome is typically progressive with a poor prognosis, and many affected children die in early childhood, often during metabolic crises, although the rate of decline varies. Care is supportive, aiming to prevent and manage crises and optimise nutrition and neurological function.",
-  "pitfalls": [
-   "Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an untreatable defect",
-   "Missing raised CSF lactate when blood lactate is normal",
-   "Failing to take mitochondrial anaesthetic and fasting precautions, precipitating crises",
-   "Attributing acute deterioration solely to infection without recognising metabolic decompensation"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate glucose-containing fluids",
-   "Offer supportive vitamin and cofactor supplementation such as thiamine, riboflavin and coenzyme Q10, recognising its unproven efficacy",
-   "Avoid mitochondrial-toxic drugs, particularly sodium valproate, and use anaesthesia cautiously given poor tolerance",
-   "Control seizures with anticonvulsants while avoiding valproate, and manage dystonia and spasticity",
-   "Provide nutritional support with gastrostomy feeding for swallowing difficulty and manage lactic acidosis during crises by treating the precipitant",
-   "Coordinate multidisciplinary neurology, metabolic, cardiology, ophthalmology, respiratory and palliative care",
-   "Offer genetic counselling with carrier and prenatal testing for this autosomal recessive SURF1 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "surf1_leigh_syndrome-pathway",
-   "title": "SURF1-related Leigh syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is deficient, giving isolated COX deficiency",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute neurological deterioration during intercurrent illness signalling a metabolic crisis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and CSF lactate and pyruvate concentrations, Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions, Muscle biopsy with histochemistry showing cytochrome c oxidase deficiency and respiratory-chain"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate glucose-containing fluids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an untreatable defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of surf1-related leigh syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "surf1_leigh_syndrome-matrix",
-   "title": "SURF1-related Leigh syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is deficient, giving isolated COX deficiency",
+      "Typically presents in infancy or early childhood with psychomotor regression, hypotonia, feeding and swallowing difficulty, and brainstem signs, often triggered or worsened by intercurrent illness",
+      "Brain MRI classically shows symmetrical T2-hyperintense lesions of the basal ganglia and brainstem, the imaging hallmark of Leigh syndrome",
+      "Elevated lactate in blood and cerebrospinal fluid supports a mitochondrial energy-generation defect, and CSF lactate can be raised even when blood is near-normal",
+      "SURF1 disease tends to produce a relatively consistent phenotype with hypertrichosis reported in some patients and a notably poor tolerance of anaesthesia and metabolic stress",
+      "Diagnosis rests on the MRI pattern, isolated COX deficiency on muscle histochemistry/biochemistry, and SURF1 sequencing; management is supportive with avoidance of catabolic stress"
     ],
-    [
-     "Key Investigations",
-     "Blood and CSF lactate and pyruvate concentrations, Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SURF1 encodes an assembly factor required for correct biogenesis of complex IV (cytochrome c oxidase), the terminal enzyme of the mitochondrial respiratory chain. Biallelic loss-of-function mutations reduce assembled, functional complex IV, impairing oxidative phosphorylation and cellular ATP production. Highly energy-dependent neurons, particularly in the basal ganglia and brainstem, undergo the characteristic subacute symmetrical necrosis of Leigh syndrome, with reactive lactate accumulation. Metabolic crises are commonly precipitated by infection, fasting, or other catabolic stress that further strains oxidative metabolism.",
+    "additionalDifferentials": [
+      "Leigh syndrome from other nuclear or mitochondrial DNA mutations",
+      "Other complex IV assembly-factor defects (e.g. SCO2, COX10, COX15)",
+      "MELAS and other mitochondrial encephalopathies",
+      "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease (treatable mimics)",
+      "Wilson disease and other basal ganglia disorders in older children",
+      "Acute disseminated encephalomyelitis or infective encephalitis"
     ],
-    [
-     "Primary Differentials",
-     "Leigh syndrome from other nuclear or mitochondrial DNA mutations, Other complex IV assembly-factor defects (e.g. SCO2, COX10,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and CSF lactate and pyruvate concentrations",
+      "Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions",
+      "Muscle biopsy with histochemistry showing cytochrome c oxidase deficiency and respiratory-chain enzymology",
+      "SURF1 gene sequencing and broader mitochondrial gene panels",
+      "Plasma amino acids and urine organic acids to exclude treatable metabolic mimics",
+      "Cardiac and ophthalmological assessment given multisystem mitochondrial involvement"
     ],
-    [
-     "Management Strategy",
-     "Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute neurological deterioration during intercurrent illness signalling a metabolic crisis",
+      "Brainstem dysfunction with respiratory irregularity or apnoea",
+      "Progressive bulbar involvement compromising airway and feeding safety",
+      "Anaesthetic exposure without mitochondrial precautions, risking decompensation"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an",
-     "Prevent diagnostic or management error"
+    "prognosis": "SURF1-related Leigh syndrome is typically progressive with a poor prognosis, and many affected children die in early childhood, often during metabolic crises, although the rate of decline varies. Care is supportive, aiming to prevent and manage crises and optimise nutrition and neurological function.",
+    "pitfalls": [
+      "Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an untreatable defect",
+      "Missing raised CSF lactate when blood lactate is normal",
+      "Failing to take mitochondrial anaesthetic and fasting precautions, precipitating crises",
+      "Attributing acute deterioration solely to infection without recognising metabolic decompensation"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate glucose-containing fluids",
+      "Offer supportive vitamin and cofactor supplementation such as thiamine, riboflavin and coenzyme Q10, recognising its unproven efficacy",
+      "Avoid mitochondrial-toxic drugs, particularly sodium valproate, and use anaesthesia cautiously given poor tolerance",
+      "Control seizures with anticonvulsants while avoiding valproate, and manage dystonia and spasticity",
+      "Provide nutritional support with gastrostomy feeding for swallowing difficulty and manage lactic acidosis during crises by treating the precipitant",
+      "Coordinate multidisciplinary neurology, metabolic, cardiology, ophthalmology, respiratory and palliative care",
+      "Offer genetic counselling with carrier and prenatal testing for this autosomal recessive SURF1 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for surf1-related leigh syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "surf1-leigh-syndrome-real-image",
-   "title": "SURF1-related Leigh syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "surf1_leigh_syndrome-pathway",
+      "title": "SURF1-related Leigh syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is deficient, giving isolated COX deficiency",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute neurological deterioration during intercurrent illness signalling a metabolic crisis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and CSF lactate and pyruvate concentrations, Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions, Muscle biopsy with histochemistry showing cytochrome c oxidase deficiency and respiratory-chain"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate glucose-containing fluids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an untreatable defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of surf1-related leigh syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "surf1_leigh_syndrome-matrix",
+      "title": "SURF1-related Leigh syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive Leigh syndrome caused by SURF1 mutations, in which a complex IV (cytochrome c oxidase) assembly factor is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and CSF lactate and pyruvate concentrations, Brain MRI to demonstrate symmetrical basal ganglia and brainstem lesions,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Leigh syndrome from other nuclear or mitochondrial DNA mutations, Other complex IV assembly-factor defects (e.g. SCO2, COX10,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent metabolic crises by avoiding fasting and catabolic stress and treating intercurrent illness promptly with adequate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking treatable mimics of Leigh syndrome (such as biotin-thiamine-responsive basal ganglia disease) before concluding an",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for surf1-related leigh syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "surf1_leigh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of SURF1-related Leigh syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SURF1 Leigh syndrome: psychomotor regression, hypotonia, brainstem signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (crisis during illness, brainstem or respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent crisis care: treat the precipitant, avoid fasting, support breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and CSF lactate; brain MRI; muscle biopsy; SURF1 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI, COX deficiency and SURF1 sequencing together confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude treatable mimics such as biotin-thiamine-responsive disease; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent crises: avoid fasting and treat illness promptly with glucose fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cofactor supplementation with thiamine, riboflavin and coenzyme Q10",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid valproate and mitochondrial-toxic drugs; cautious anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gastrostomy feeding for swallowing difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary care and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Typically progressive; many children die in early childhood, often in crises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "surf1_leigh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate",
+          "cells": [
+            {
+              "text": "Raised lactate supports an energy-generation defect; CSF lactate can be raised when blood is near-normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetrical T2-hyperintense lesions of the basal ganglia and brainstem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry",
+          "cells": [
+            {
+              "text": "Isolated cytochrome c oxidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SURF1 gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic SURF1 variants; with the MRI pattern and COX deficiency, confirms diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Excludes treatable metabolic mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surf1_leigh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease",
+          "cells": [
+            {
+              "text": "Treatable; must be excluded before concluding an untreatable defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other complex IV assembly-factor defects (SCO2, COX10, COX15)",
+          "cells": [
+            {
+              "text": "Share a complex IV assembly defect; separated by SURF1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis or infective encephalitis",
+          "cells": [
+            {
+              "text": "Acute deterioration should not be attributed to infection alone without considering metabolic decompensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surf1_leigh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent metabolic crises",
+          "cells": [
+            {
+              "text": "Avoid fasting and catabolic stress; treat intercurrent illness promptly with glucose-containing fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin and cofactor supplementation",
+          "cells": [
+            {
+              "text": "Thiamine, riboflavin and coenzyme Q10; efficacy unproven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid mitochondrial-toxic drugs",
+          "cells": [
+            {
+              "text": "Sodium valproate in particular; use anaesthesia cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants and symptom control",
+          "cells": [
+            {
+              "text": "Seizures, dystonia and spasticity, avoiding valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding for swallowing difficulty; treat lactic acidosis by treating the precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, metabolic, cardiology, ophthalmology, respiratory and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

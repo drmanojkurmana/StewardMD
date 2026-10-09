@@ -1,174 +1,230 @@
 {
- "id": "baylisascariasis",
- "name": "Baylisascariasis (raccoon roundworm)",
- "aliases": [
-  "Baylisascaris procyonis infection",
-  "raccoon roundworm infection",
-  "neural larva migrans",
-  "Baylisascaris larva migrans"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated with raccoon faeces, especially by young children with pica",
-   "Human infection produces larva migrans, with a striking tendency for larvae to invade the central nervous system and eyes",
-   "Neural larva migrans causes a devastating eosinophilic meningoencephalitis with rapidly progressive encephalopathy, seizures and coma, particularly in toddlers",
-   "Ocular larva migrans causes visual loss, and a migrating larva may occasionally be seen in the retina",
-   "Marked peripheral and cerebrospinal fluid eosinophilia supports the diagnosis, with serology used for confirmation",
-   "Treatment is albendazole together with corticosteroids to limit the inflammatory response, but established neural disease often leaves severe deficits",
-   "Prevention centres on avoiding contact with raccoon latrines, cleaning contaminated sites and supervising young children in endemic areas"
+  "id": "baylisascariasis",
+  "name": "Baylisascariasis (raccoon roundworm)",
+  "aliases": [
+    "Baylisascaris procyonis infection",
+    "raccoon roundworm infection",
+    "neural larva migrans",
+    "Baylisascaris larva migrans"
   ],
-  "pathophysiology": "Baylisascaris procyonis is an ascarid roundworm whose adults live in the intestine of raccoons, which shed vast numbers of environmentally hardy eggs. Humans are accidental hosts who ingest embryonated eggs from contaminated soil, hands or objects. Larvae hatch in the intestine and, rather than maturing, migrate aggressively through the tissues (visceral, ocular and neural larva migrans). The larvae continue to grow as they migrate and show a marked neurotropism, penetrating the central nervous system where they cause mechanical destruction of neural tissue and provoke an intense eosinophilic inflammatory reaction, producing a fulminant eosinophilic meningoencephalitis. In the eye they damage the retina and incite inflammation. The severity reflects both the larvae's large size and continued growth and the vigorous host immune response along their migratory tracks.",
-  "additionalDifferentials": [
-   "Other causes of eosinophilic meningitis such as Angiostrongylus cantonensis",
-   "Neurocysticercosis and other cerebral helminthic infection",
-   "Toxocara canis neural or ocular larva migrans",
-   "Viral or bacterial meningoencephalitis",
-   "Ocular toxocariasis or retinoblastoma (for the eye lesion)",
-   "Acute disseminated encephalomyelitis or other inflammatory encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Full blood count showing marked eosinophilia",
-   "Cerebrospinal fluid examination for eosinophilic pleocytosis",
-   "MRI of the brain showing periventricular and deep white-matter changes",
-   "Serology on serum and cerebrospinal fluid for Baylisascaris",
-   "Dilated ophthalmological examination for a migrating retinal larva",
-   "Detailed environmental history of raccoon exposure and pica"
-  ],
-  "redFlags": [
-   "Rapidly progressive encephalopathy or coma in a young child with eosinophilia",
-   "New seizures with cerebrospinal fluid eosinophilia",
-   "Acute visual loss suggesting ocular larva migrans",
-   "Known exposure to a raccoon latrine in a child with neurological symptoms"
-  ],
-  "prognosis": "Prognosis is grave once neural larva migrans is established, with a high risk of death or severe permanent neurological disability; early treatment before extensive central nervous system invasion offers the best, though still limited, chance of a good outcome.",
-  "pitfalls": [
-   "Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child",
-   "Overlooking raccoon exposure and pica in the history",
-   "Attributing eosinophilic meningitis solely to more familiar causes",
-   "Failing to give corticosteroids alongside anthelmintic therapy to temper the inflammatory response"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous system invasion is established",
-   "Give corticosteroids alongside anthelmintic therapy to limit the eosinophilic inflammatory response in neural larva migrans",
-   "Provide neurointensive supportive care for seizures, raised intracranial pressure and encephalopathy, with anticonvulsants and ventilatory support as needed",
-   "Treat ocular larva migrans with laser photocoagulation of the migrating retinal larva together with corticosteroids",
-   "Arrange neurorehabilitation for the frequent residual neurological deficits",
-   "Advise environmental control and hygiene measures to remove raccoon latrines and prevent reinfection, particularly in young children with pica",
-   "Refer to paediatric infectious diseases, neurology and ophthalmology for multidisciplinary care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "baylisascariasis-pathway",
-   "title": "Baylisascariasis (raccoon roundworm): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated with raccoon faeces, especially by young children with pica",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or coma in a young child with eosinophilia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count showing marked eosinophilia, Cerebrospinal fluid examination for eosinophilic pleocytosis, MRI of the brain showing periventricular and deep white-matter changes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous system invasion is established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of baylisascariasis (raccoon roundworm)."
-  }
- ],
- "tables": [
-  {
-   "id": "baylisascariasis-matrix",
-   "title": "Baylisascariasis (raccoon roundworm): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated with raccoon faeces, especially by young children with pica",
+      "Human infection produces larva migrans, with a striking tendency for larvae to invade the central nervous system and eyes",
+      "Neural larva migrans causes a devastating eosinophilic meningoencephalitis with rapidly progressive encephalopathy, seizures and coma, particularly in toddlers",
+      "Ocular larva migrans causes visual loss, and a migrating larva may occasionally be seen in the retina",
+      "Marked peripheral and cerebrospinal fluid eosinophilia supports the diagnosis, with serology used for confirmation",
+      "Treatment is albendazole together with corticosteroids to limit the inflammatory response, but established neural disease often leaves severe deficits",
+      "Prevention centres on avoiding contact with raccoon latrines, cleaning contaminated sites and supervising young children in endemic areas"
     ],
-    [
-     "Key Investigations",
-     "Full blood count showing marked eosinophilia, Cerebrospinal fluid examination for eosinophilic pleocytosis, MRI of the brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Baylisascaris procyonis is an ascarid roundworm whose adults live in the intestine of raccoons, which shed vast numbers of environmentally hardy eggs. Humans are accidental hosts who ingest embryonated eggs from contaminated soil, hands or objects. Larvae hatch in the intestine and, rather than maturing, migrate aggressively through the tissues (visceral, ocular and neural larva migrans). The larvae continue to grow as they migrate and show a marked neurotropism, penetrating the central nervous system where they cause mechanical destruction of neural tissue and provoke an intense eosinophilic inflammatory reaction, producing a fulminant eosinophilic meningoencephalitis. In the eye they damage the retina and incite inflammation. The severity reflects both the larvae's large size and continued growth and the vigorous host immune response along their migratory tracks.",
+    "additionalDifferentials": [
+      "Other causes of eosinophilic meningitis such as Angiostrongylus cantonensis",
+      "Neurocysticercosis and other cerebral helminthic infection",
+      "Toxocara canis neural or ocular larva migrans",
+      "Viral or bacterial meningoencephalitis",
+      "Ocular toxocariasis or retinoblastoma (for the eye lesion)",
+      "Acute disseminated encephalomyelitis or other inflammatory encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of eosinophilic meningitis such as Angiostrongylus cantonensis, Neurocysticercosis and other cerebral helminthic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count showing marked eosinophilia",
+      "Cerebrospinal fluid examination for eosinophilic pleocytosis",
+      "MRI of the brain showing periventricular and deep white-matter changes",
+      "Serology on serum and cerebrospinal fluid for Baylisascaris",
+      "Dilated ophthalmological examination for a migrating retinal larva",
+      "Detailed environmental history of raccoon exposure and pica"
     ],
-    [
-     "Management Strategy",
-     "Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive encephalopathy or coma in a young child with eosinophilia",
+      "New seizures with cerebrospinal fluid eosinophilia",
+      "Acute visual loss suggesting ocular larva migrans",
+      "Known exposure to a raccoon latrine in a child with neurological symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is grave once neural larva migrans is established, with a high risk of death or severe permanent neurological disability; early treatment before extensive central nervous system invasion offers the best, though still limited, chance of a good outcome.",
+    "pitfalls": [
+      "Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child",
+      "Overlooking raccoon exposure and pica in the history",
+      "Attributing eosinophilic meningitis solely to more familiar causes",
+      "Failing to give corticosteroids alongside anthelmintic therapy to temper the inflammatory response"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous system invasion is established",
+      "Give corticosteroids alongside anthelmintic therapy to limit the eosinophilic inflammatory response in neural larva migrans",
+      "Provide neurointensive supportive care for seizures, raised intracranial pressure and encephalopathy, with anticonvulsants and ventilatory support as needed",
+      "Treat ocular larva migrans with laser photocoagulation of the migrating retinal larva together with corticosteroids",
+      "Arrange neurorehabilitation for the frequent residual neurological deficits",
+      "Advise environmental control and hygiene measures to remove raccoon latrines and prevent reinfection, particularly in young children with pica",
+      "Refer to paediatric infectious diseases, neurology and ophthalmology for multidisciplinary care"
     ]
-   ],
-   "caption": "Overview comparison matrix for baylisascariasis (raccoon roundworm)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "baylisascariasis-real-image",
-   "title": "Baylisascariasis (raccoon roundworm): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "baylisascariasis-pathway",
+      "title": "Baylisascariasis (raccoon roundworm): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated with raccoon faeces, especially by young children with pica",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or coma in a young child with eosinophilia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count showing marked eosinophilia, Cerebrospinal fluid examination for eosinophilic pleocytosis, MRI of the brain showing periventricular and deep white-matter changes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous system invasion is established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of baylisascariasis (raccoon roundworm)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "baylisascariasis-matrix",
+      "title": "Baylisascariasis (raccoon roundworm): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by larvae of the raccoon roundworm Baylisascaris procyonis, acquired by ingesting eggs from soil or objects contaminated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count showing marked eosinophilia, Cerebrospinal fluid examination for eosinophilic pleocytosis, MRI of the brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of eosinophilic meningitis such as Angiostrongylus cantonensis, Neurocysticercosis and other cerebral helminthic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start albendazole promptly, ideally pre-emptively after suspected raccoon-roundworm egg ingestion and before central nervous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying empirical treatment while awaiting confirmatory serology in a rapidly deteriorating child",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for baylisascariasis (raccoon roundworm)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "baylisascariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in baylisascariasis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Full blood count", "cells": [{"text": "Marked eosinophilia"}], "cite": "c1"},
+        {"parameter": "CSF examination", "cells": [{"text": "Eosinophilic pleocytosis"}], "cite": "c1"},
+        {"parameter": "MRI of the brain", "cells": [{"text": "Periventricular and deep white-matter changes"}], "cite": "c1"},
+        {"parameter": "Serology (serum and CSF)", "cells": [{"text": "Used for confirmation of the diagnosis"}], "cite": "c1"},
+        {"parameter": "Dilated ophthalmological examination", "cells": [{"text": "A migrating larva may occasionally be seen in the retina"}], "cite": "c1"},
+        {"parameter": "Environmental history", "cells": [{"text": "Raccoon exposure and pica"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "baylisascariasis-treatment",
+      "kind": "treatment",
+      "title": "Management options in baylisascariasis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Early albendazole", "cells": [{"text": "Start promptly, ideally pre-emptively after suspected egg ingestion"}, {"text": "Give before central nervous system invasion is established"}], "cite": "c1"},
+        {"parameter": "Corticosteroids", "cells": [{"text": "Give alongside anthelmintic therapy"}, {"text": "Limits the eosinophilic inflammatory response"}], "cite": "c1"},
+        {"parameter": "Neurointensive support", "cells": [{"text": "Manage seizures, raised intracranial pressure and encephalopathy"}, {"text": "Anticonvulsants and ventilatory support as needed"}], "cite": "c1"},
+        {"parameter": "Ocular larva migrans", "cells": [{"text": "Laser photocoagulation of the migrating retinal larva, with corticosteroids"}, {"text": "Applies when the eye is involved"}], "cite": "c1"},
+        {"parameter": "Neurorehabilitation", "cells": [{"text": "Address the frequent residual neurological deficits"}, {"text": "Deficits are common after neural disease"}], "cite": "c1"},
+        {"parameter": "Environmental control", "cells": [{"text": "Remove raccoon latrines and apply hygiene measures"}, {"text": "Prevents reinfection, particularly in young children with pica"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary referral", "cells": [{"text": "Paediatric infectious diseases, neurology and ophthalmology"}, {"text": "Multidisciplinary care"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "baylisascariasis-dx-mgmt",
+      "title": "Diagnosis and management of baylisascariasis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Encephalopathy, seizures or visual loss after raccoon or soil exposure, or pica", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapidly progressive encephalopathy, new seizures or acute visual loss?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate now: start albendazole and corticosteroids without waiting for serology", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Take history for raccoon latrine contact and pica", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Check full blood count, CSF cell count and brain MRI for white-matter change", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Marked blood and CSF eosinophilia supporting the diagnosis?", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: consider other eosinophilic meningitis causes such as Angiostrongylus", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Send serology on serum and CSF; dilated eye exam for a migrating retinal larva", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Neurointensive care: seizure control, raised intracranial pressure, ventilation as needed", "cite": "c1"},
+        {"id": "n10", "type": "decision", "text": "Migrating larva seen in the retina?", "cite": "c1"},
+        {"id": "n11", "type": "action", "text": "Laser photocoagulation of the retinal larva, with corticosteroids", "cite": "c1"},
+        {"id": "n12", "type": "action", "text": "Neurorehabilitation and removal of raccoon latrines to prevent reinfection", "cite": "c1"},
+        {"id": "n13", "type": "outcome", "text": "Grave once neural larva migrans is established; early treatment gives the best chance", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n8", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n8", "label": "Yes"},
+        {"from": "n6", "to": "n7", "label": "No"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"},
+        {"from": "n10", "to": "n11", "label": "Yes"},
+        {"from": "n10", "to": "n12", "label": "No"},
+        {"from": "n11", "to": "n12", "label": "Next"},
+        {"from": "n12", "to": "n13", "label": "Next"}
+      ]
+    }
+  ]
 }

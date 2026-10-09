@@ -1,173 +1,478 @@
 {
- "id": "tyrosine_hydroxylase_deficiency",
- "name": "Tyrosine hydroxylase deficiency",
- "aliases": [
-  "TH deficiency",
-  "autosomal recessive dopa-responsive dystonia",
-  "Segawa-like syndrome (recessive)",
-  "dopamine biosynthesis defect (TH)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert tyrosine to L-dopa, reducing dopamine and downstream noradrenaline/adrenaline",
-   "It is an important treatable cause of a levodopa-responsive movement disorder, and a therapeutic trial of levodopa is central to both diagnosis and management",
-   "Presentations range from a milder infantile-onset dopa-responsive dystonia/parkinsonism to a severe early-onset encephalopathy with hypokinesia, oculogyric crises, ptosis, and autonomic features",
-   "The biochemical signature in cerebrospinal fluid is low homovanillic acid (a dopamine metabolite) with a normal 5-hydroxyindoleacetic acid (serotonin metabolite) and normal pterins, distinguishing it from biopterin defects",
-   "Because pterin metabolism is intact, blood phenylalanine and pterin profiles are normal, contrasting with tetrahydrobiopterin (BH4) disorders",
-   "Some patients, particularly the severe phenotype, respond only partially to levodopa and require careful, gradual dose titration to avoid dyskinesia and irritability"
+  "id": "tyrosine_hydroxylase_deficiency",
+  "name": "Tyrosine hydroxylase deficiency",
+  "aliases": [
+    "TH deficiency",
+    "autosomal recessive dopa-responsive dystonia",
+    "Segawa-like syndrome (recessive)",
+    "dopamine biosynthesis defect (TH)"
   ],
-  "pathophysiology": "Tyrosine hydroxylase catalyses the rate-limiting, tetrahydrobiopterin-dependent conversion of tyrosine to L-dopa, the precursor of dopamine and, in turn, noradrenaline and adrenaline. Biallelic TH mutations reduce enzyme activity, causing a central deficiency of catecholaminergic neurotransmission. Dopaminergic hypofunction produces the extrapyramidal features (dystonia, parkinsonism, hypokinesia, oculogyric crises), while reduced noradrenergic and adrenergic signalling contributes to ptosis, autonomic instability, and, in severe cases, encephalopathy. Because the pterin cofactor pathway is unaffected, phenylalanine handling and pterin concentrations remain normal, and the CSF shows selectively low dopamine metabolites.",
-  "additionalDifferentials": [
-   "GTP cyclohydrolase I deficiency (autosomal dominant dopa-responsive/Segawa dystonia)",
-   "Aromatic L-amino acid decarboxylase (AADC) deficiency",
-   "Tetrahydrobiopterin (BH4) synthesis/recycling defects (PTPS, DHPR, sepiapterin reductase)",
-   "Cerebral palsy of dystonic type",
-   "Early-onset idiopathic dystonia or juvenile parkinsonism",
-   "Neurotransmitter-related epileptic encephalopathies"
-  ],
-  "additionalInvestigations": [
-   "Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid",
-   "CSF pterins (biopterin and neopterin) to confirm a normal pterin profile",
-   "TH gene sequencing to confirm the molecular diagnosis",
-   "Plasma phenylalanine (normal) to distinguish from BH4 disorders detected on newborn screening",
-   "Documented clinical and biochemical response to a levodopa trial",
-   "Brain MRI, usually unremarkable, to exclude structural causes of the movement disorder"
-  ],
-  "redFlags": [
-   "Severe neonatal or infantile hypokinetic-rigid encephalopathy with autonomic instability",
-   "Recurrent oculogyric crises causing distress and feeding difficulty",
-   "Failure to consider a treatable dopa-responsive disorder in a child labelled as cerebral palsy",
-   "Marked levodopa-induced dyskinesia or behavioural disturbance during titration"
-  ],
-  "prognosis": "The milder dopa-responsive phenotype often improves markedly and durably with levodopa and BH4-independent dopaminergic therapy, whereas the severe encephalopathic form responds less completely and may leave residual disability. Early recognition and treatment improve motor and developmental outcomes.",
-  "pitfalls": [
-   "Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder",
-   "Starting levodopa at too high a dose and provoking dyskinesia, irritability, or dystonic storms",
-   "Confusing the disorder with BH4 defects, which additionally require cofactor and sometimes serotonin-precursor therapy",
-   "Overlooking autonomic and ptosis features that reflect noradrenergic deficiency"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine hydroxylase can no longer synthesise",
-   "Cautious, gradual dose titration, particularly in the severe phenotype, to achieve motor benefit while avoiding dyskinesia and irritability",
-   "Adjunctive dopaminergic agents such as dopamine agonists, and anticholinergics where dystonia persists despite levodopa",
-   "Supportive management of oculogyric crises, autonomic instability and feeding difficulty in the encephalopathic form",
-   "Physiotherapy, occupational therapy and developmental support to optimise motor function and milestones",
-   "Multidisciplinary follow-up through paediatric neurology and metabolic medicine",
-   "Genetic counselling for this autosomal recessive disorder with family assessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tyrosine_hydroxylase_deficiency-pathway",
-   "title": "Tyrosine hydroxylase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert tyrosine to L-dopa, reducing dopamine and downstream noradrenaline/adrenaline",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal or infantile hypokinetic-rigid encephalopathy with autonomic instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid, CSF pterins (biopterin and neopterin) to confirm a normal pterin profile, TH gene sequencing to confirm"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine hydroxylase can no longer synthesise"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tyrosine hydroxylase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "tyrosine_hydroxylase_deficiency-matrix",
-   "title": "Tyrosine hydroxylase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert tyrosine to L-dopa, reducing dopamine and downstream noradrenaline/adrenaline",
+      "It is an important treatable cause of a levodopa-responsive movement disorder, and a therapeutic trial of levodopa is central to both diagnosis and management",
+      "Presentations range from a milder infantile-onset dopa-responsive dystonia/parkinsonism to a severe early-onset encephalopathy with hypokinesia, oculogyric crises, ptosis, and autonomic features",
+      "The biochemical signature in cerebrospinal fluid is low homovanillic acid (a dopamine metabolite) with a normal 5-hydroxyindoleacetic acid (serotonin metabolite) and normal pterins, distinguishing it from biopterin defects",
+      "Because pterin metabolism is intact, blood phenylalanine and pterin profiles are normal, contrasting with tetrahydrobiopterin (BH4) disorders",
+      "Some patients, particularly the severe phenotype, respond only partially to levodopa and require careful, gradual dose titration to avoid dyskinesia and irritability"
     ],
-    [
-     "Key Investigations",
-     "Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid, CSF",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tyrosine hydroxylase catalyses the rate-limiting, tetrahydrobiopterin-dependent conversion of tyrosine to L-dopa, the precursor of dopamine and, in turn, noradrenaline and adrenaline. Biallelic TH mutations reduce enzyme activity, causing a central deficiency of catecholaminergic neurotransmission. Dopaminergic hypofunction produces the extrapyramidal features (dystonia, parkinsonism, hypokinesia, oculogyric crises), while reduced noradrenergic and adrenergic signalling contributes to ptosis, autonomic instability, and, in severe cases, encephalopathy. Because the pterin cofactor pathway is unaffected, phenylalanine handling and pterin concentrations remain normal, and the CSF shows selectively low dopamine metabolites.",
+    "additionalDifferentials": [
+      "GTP cyclohydrolase I deficiency (autosomal dominant dopa-responsive/Segawa dystonia)",
+      "Aromatic L-amino acid decarboxylase (AADC) deficiency",
+      "Tetrahydrobiopterin (BH4) synthesis/recycling defects (PTPS, DHPR, sepiapterin reductase)",
+      "Cerebral palsy of dystonic type",
+      "Early-onset idiopathic dystonia or juvenile parkinsonism",
+      "Neurotransmitter-related epileptic encephalopathies"
     ],
-    [
-     "Primary Differentials",
-     "GTP cyclohydrolase I deficiency (autosomal dominant dopa-responsive/Segawa dystonia), Aromatic L-amino acid decarboxylase (AADC)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid",
+      "CSF pterins (biopterin and neopterin) to confirm a normal pterin profile",
+      "TH gene sequencing to confirm the molecular diagnosis",
+      "Plasma phenylalanine (normal) to distinguish from BH4 disorders detected on newborn screening",
+      "Documented clinical and biochemical response to a levodopa trial",
+      "Brain MRI, usually unremarkable, to exclude structural causes of the movement disorder"
     ],
-    [
-     "Management Strategy",
-     "Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal or infantile hypokinetic-rigid encephalopathy with autonomic instability",
+      "Recurrent oculogyric crises causing distress and feeding difficulty",
+      "Failure to consider a treatable dopa-responsive disorder in a child labelled as cerebral palsy",
+      "Marked levodopa-induced dyskinesia or behavioural disturbance during titration"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The milder dopa-responsive phenotype often improves markedly and durably with levodopa and BH4-independent dopaminergic therapy, whereas the severe encephalopathic form responds less completely and may leave residual disability. Early recognition and treatment improve motor and developmental outcomes.",
+    "pitfalls": [
+      "Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder",
+      "Starting levodopa at too high a dose and provoking dyskinesia, irritability, or dystonic storms",
+      "Confusing the disorder with BH4 defects, which additionally require cofactor and sometimes serotonin-precursor therapy",
+      "Overlooking autonomic and ptosis features that reflect noradrenergic deficiency"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine hydroxylase can no longer synthesise",
+      "Cautious, gradual dose titration, particularly in the severe phenotype, to achieve motor benefit while avoiding dyskinesia and irritability",
+      "Adjunctive dopaminergic agents such as dopamine agonists, and anticholinergics where dystonia persists despite levodopa",
+      "Supportive management of oculogyric crises, autonomic instability and feeding difficulty in the encephalopathic form",
+      "Physiotherapy, occupational therapy and developmental support to optimise motor function and milestones",
+      "Multidisciplinary follow-up through paediatric neurology and metabolic medicine",
+      "Genetic counselling for this autosomal recessive disorder with family assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for tyrosine hydroxylase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tyrosine-hydroxylase-deficiency-real-image",
-   "title": "Tyrosine hydroxylase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tyrosine_hydroxylase_deficiency-pathway",
+      "title": "Tyrosine hydroxylase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert tyrosine to L-dopa, reducing dopamine and downstream noradrenaline/adrenaline",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal or infantile hypokinetic-rigid encephalopathy with autonomic instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid, CSF pterins (biopterin and neopterin) to confirm a normal pterin profile, TH gene sequencing to confirm"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine hydroxylase can no longer synthesise"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tyrosine hydroxylase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tyrosine_hydroxylase_deficiency-matrix",
+      "title": "Tyrosine hydroxylase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of dopamine synthesis caused by TH mutations, in which tyrosine hydroxylase fails to convert",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cerebrospinal fluid neurotransmitter metabolites showing low homovanillic acid with normal 5-hydroxyindoleacetic acid, CSF",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "GTP cyclohydrolase I deficiency (autosomal dominant dopa-responsive/Segawa dystonia), Aromatic L-amino acid decarboxylase (AADC)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Levodopa combined with a peripheral dopa decarboxylase inhibitor as the mainstay, replacing the deficient dopamine that tyrosine",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis by not offering a levodopa trial in an unexplained childhood movement disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tyrosine hydroxylase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tyrosine_hydroxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF homovanillic acid and 5-hydroxyindoleacetic acid",
+          "cells": [
+            {
+              "text": "Low homovanillic acid with normal 5-hydroxyindoleacetic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF pterins",
+          "cells": [
+            {
+              "text": "Normal pterin profile, separating it from BH4 disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma phenylalanine",
+          "cells": [
+            {
+              "text": "Normal, separating it from BH4 disorders found on newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TH gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "Documented clinical and biochemical response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually unremarkable; excludes structural causes of the movement disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosine_hydroxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "GTP cyclohydrolase I deficiency",
+          "cells": [
+            {
+              "text": "Autosomal dominant dopa-responsive (Segawa) dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetrahydrobiopterin (BH4) synthesis or recycling defects",
+          "cells": [
+            {
+              "text": "Need cofactor and sometimes serotonin-precursor therapy; pterin profile is normal in TH deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy of dystonic type",
+          "cells": [
+            {
+              "text": "A treatable dopa-responsive disorder should be considered before accepting a CP label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AADC deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosine_hydroxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levodopa with peripheral dopa decarboxylase inhibitor",
+          "cells": [
+            {
+              "text": "Mainstay; replaces the dopamine that tyrosine hydroxylase cannot synthesise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gradual dose titration",
+          "cells": [
+            {
+              "text": "Especially in the severe phenotype, to avoid dyskinesia, irritability and dystonic storms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive dopaminergic agents",
+          "cells": [
+            {
+              "text": "Dopamine agonists; anticholinergics where dystonia persists despite levodopa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Oculogyric crises, autonomic instability and feeding difficulty in the encephalopathic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and developmental support",
+          "cells": [
+            {
+              "text": "Motor function and developmental milestones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric neurology and metabolic medicine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tyrosine_hydroxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Tyrosine hydroxylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TH deficiency: unexplained childhood dystonia, parkinsonism or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (encephalopathy with autonomic instability or oculogyric crises)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of severe encephalopathy with autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF neurotransmitter metabolites and pterins, plasma phenylalanine, TH gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CSF homovanillic acid low with normal 5-HIAA and pterins?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GTP cyclohydrolase I, AADC or BH4 defects; repeat the CSF studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levodopa with a peripheral dopa decarboxylase inhibitor as mainstay therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gradual titration to avoid dyskinesia, irritability and dystonic storms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjunctive dopamine agonists or anticholinergics where dystonia persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and developmental support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder dopa-responsive form often improves durably; severe form may leave disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,180 +1,438 @@
 {
- "id": "retinal_artery_occlusion",
- "name": "Retinal Artery Occlusion",
- "aliases": [
-  "CRAO",
-  "Central retinal artery occlusion",
-  "BRAO",
-  "Eye stroke"
- ],
- "class": "non_infective",
- "system": "Ophthalmology / Cardiovascular",
- "specialty": "Ophthalmology / Neurology / Vascular",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic stroke and warrants emergency stroke-pathway referral.",
-   "Fundoscopy classically shows a pale, oedematous inner retina with a cherry-red spot at the fovea; the arteriolar blood column may appear segmented (box-carring).",
-   "A relative afferent pupillary defect is usually present in central retinal artery occlusion.",
-   "In older patients, giant cell arteritis must be actively excluded as an arteritic cause that threatens the fellow eye.",
-   "Most emboli arise from carotid atherosclerosis or a cardiac source; a bright Hollenhorst (cholesterol) plaque may be visible at a bifurcation in branch occlusion.",
-   "Amaurosis fugax (transient monocular visual loss) is a warning of impending occlusion and a transient-ischaemic-attack equivalent.",
-   "A cilioretinal artery, when present, may perfuse and spare central macular vision despite central retinal artery occlusion.",
-   "Time is critical, as inner retinal neurons tolerate ischaemia only briefly before irreversible infarction."
+  "id": "retinal_artery_occlusion",
+  "name": "Retinal Artery Occlusion",
+  "aliases": [
+    "CRAO",
+    "Central retinal artery occlusion",
+    "BRAO",
+    "Eye stroke"
   ],
-  "pathophysiology": "The inner retina and retinal ganglion cells are supplied by the central retinal artery, a branch of the ophthalmic artery arising from the internal carotid artery, while the outer retina is nourished by the choroidal circulation. Acute occlusion, most often embolic (cholesterol, calcific or platelet-fibrin emboli), less commonly thrombotic, arteritic (giant cell arteritis) or vasospastic, produces abrupt ischaemia of the inner retinal layers. The ischaemic inner retina becomes oedematous and opacified, obscuring the underlying retinal pigment epithelium and choroid everywhere except the fovea, where the retina is thinnest and the intact choroidal blush shows through as the characteristic cherry-red spot. Because the choroid-dependent outer retina is relatively spared, some perception may persist. Branch occlusion produces a sectoral infarct and corresponding visual field defect. Prolonged ischaemia leads to irreversible neuronal death, later chronic inner retinal thinning, and occasionally neovascular sequelae.",
-  "additionalDifferentials": [
-   "Central retinal vein occlusion",
-   "Arteritic and non-arteritic anterior ischaemic optic neuropathy",
-   "Retinal detachment",
-   "Vitreous haemorrhage",
-   "Acute angle-closure glaucoma",
-   "Ophthalmic or retinal migraine",
-   "Functional (non-organic) visual loss"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundoscopy and fundus photography",
-   "Optical coherence tomography (early inner retinal oedema, later inner retinal thinning)",
-   "Fluorescein angiography demonstrating delayed or absent retinal arterial filling",
-   "Urgent inflammatory markers and, where indicated, temporal artery biopsy to exclude giant cell arteritis",
-   "Carotid Doppler ultrasound and CT or MR angiography of the neck vessels",
-   "Transthoracic or transoesophageal echocardiography and ECG to seek an embolic cardiac source",
-   "Diffusion-weighted brain MRI, as concurrent clinically silent cerebral infarction is common"
-  ],
-  "redFlags": [
-   "Any accompanying neurological deficit suggesting concurrent cerebral stroke",
-   "Symptoms or signs of giant cell arteritis (jaw claudication, scalp tenderness, new headache, a tender or pulseless temporal artery)",
-   "Preceding amaurosis fugax indicating an impending stroke",
-   "Bilateral or simultaneous involvement, suggesting giant cell arteritis or an embolic shower",
-   "Ocular neovascularisation or features of the ocular ischaemic syndrome"
-  ],
-  "prognosis": "Spontaneous visual recovery in central retinal artery occlusion is generally poor, whereas branch occlusion carries a better outlook depending on macular involvement. It is an important marker of systemic vascular disease, conferring a substantially raised risk of subsequent stroke and other cardiovascular events.",
-  "pitfalls": [
-   "Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye.",
-   "Managing it as an isolated eye problem rather than a stroke equivalent, and failing to refer urgently for vascular assessment.",
-   "Attributing sudden visual loss to migraine in an older patient.",
-   "Overlooking a carotid or cardiac embolic source on workup.",
-   "Misinterpreting foveal sparing by a cilioretinal artery and doubting the diagnosis."
-  ],
-  "references": [
-   "Ophthalmology references",
-   "Neuro-ophthalmology references",
-   "Stroke management guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway, considering thrombolysis in hyperacute presentations at specialist centres",
-   "In the first hours attempt measures to dislodge the embolus and lower intraocular pressure, such as ocular massage, anterior chamber paracentesis and pressure-lowering agents, recognising limited evidence of benefit",
-   "Urgently exclude giant cell arteritis in older patients and, if suspected, start high-dose corticosteroids immediately to protect the fellow eye",
-   "Institute secondary prevention as for stroke with antiplatelet or anticoagulant therapy, a statin, and control of blood pressure, diabetes and smoking",
-   "Investigate and treat the embolic source, including carotid endarterectomy for significant stenosis and management of any cardiac source",
-   "Monitor for ocular neovascularisation and treat with laser or anti-VEGF therapy if it develops",
-   "Coordinate care across stroke, ophthalmology and vascular services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retinal_artery_occlusion-pathway",
-   "title": "Retinal Artery Occlusion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic stroke and warrants emergency stroke-pathway referral.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any accompanying neurological deficit suggesting concurrent cerebral stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundoscopy and fundus photography, Optical coherence tomography (early inner retinal oedema, later inner retinal thinning), Fluorescein angiography demonstrating delayed or absent retinal arterial filling"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway, considering thrombolysis in hyperacute presentations at specialist centres"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of retinal artery occlusion."
-  }
- ],
- "tables": [
-  {
-   "id": "retinal_artery_occlusion-matrix",
-   "title": "Retinal Artery Occlusion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmology / Cardiovascular",
+  "specialty": "Ophthalmology / Neurology / Vascular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic stroke and warrants emergency stroke-pathway referral.",
+      "Fundoscopy classically shows a pale, oedematous inner retina with a cherry-red spot at the fovea; the arteriolar blood column may appear segmented (box-carring).",
+      "A relative afferent pupillary defect is usually present in central retinal artery occlusion.",
+      "In older patients, giant cell arteritis must be actively excluded as an arteritic cause that threatens the fellow eye.",
+      "Most emboli arise from carotid atherosclerosis or a cardiac source; a bright Hollenhorst (cholesterol) plaque may be visible at a bifurcation in branch occlusion.",
+      "Amaurosis fugax (transient monocular visual loss) is a warning of impending occlusion and a transient-ischaemic-attack equivalent.",
+      "A cilioretinal artery, when present, may perfuse and spare central macular vision despite central retinal artery occlusion.",
+      "Time is critical, as inner retinal neurons tolerate ischaemia only briefly before irreversible infarction."
     ],
-    [
-     "Key Investigations",
-     "Dilated fundoscopy and fundus photography, Optical coherence tomography (early inner retinal oedema, later inner retinal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The inner retina and retinal ganglion cells are supplied by the central retinal artery, a branch of the ophthalmic artery arising from the internal carotid artery, while the outer retina is nourished by the choroidal circulation. Acute occlusion, most often embolic (cholesterol, calcific or platelet-fibrin emboli), less commonly thrombotic, arteritic (giant cell arteritis) or vasospastic, produces abrupt ischaemia of the inner retinal layers. The ischaemic inner retina becomes oedematous and opacified, obscuring the underlying retinal pigment epithelium and choroid everywhere except the fovea, where the retina is thinnest and the intact choroidal blush shows through as the characteristic cherry-red spot. Because the choroid-dependent outer retina is relatively spared, some perception may persist. Branch occlusion produces a sectoral infarct and corresponding visual field defect. Prolonged ischaemia leads to irreversible neuronal death, later chronic inner retinal thinning, and occasionally neovascular sequelae.",
+    "additionalDifferentials": [
+      "Central retinal vein occlusion",
+      "Arteritic and non-arteritic anterior ischaemic optic neuropathy",
+      "Retinal detachment",
+      "Vitreous haemorrhage",
+      "Acute angle-closure glaucoma",
+      "Ophthalmic or retinal migraine",
+      "Functional (non-organic) visual loss"
     ],
-    [
-     "Primary Differentials",
-     "Central retinal vein occlusion, Arteritic and non-arteritic anterior ischaemic optic neuropathy, Retinal detachment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundoscopy and fundus photography",
+      "Optical coherence tomography (early inner retinal oedema, later inner retinal thinning)",
+      "Fluorescein angiography demonstrating delayed or absent retinal arterial filling",
+      "Urgent inflammatory markers and, where indicated, temporal artery biopsy to exclude giant cell arteritis",
+      "Carotid Doppler ultrasound and CT or MR angiography of the neck vessels",
+      "Transthoracic or transoesophageal echocardiography and ECG to seek an embolic cardiac source",
+      "Diffusion-weighted brain MRI, as concurrent clinically silent cerebral infarction is common"
     ],
-    [
-     "Management Strategy",
-     "Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway,",
-     "Core treatment modality"
+    "redFlags": [
+      "Any accompanying neurological deficit suggesting concurrent cerebral stroke",
+      "Symptoms or signs of giant cell arteritis (jaw claudication, scalp tenderness, new headache, a tender or pulseless temporal artery)",
+      "Preceding amaurosis fugax indicating an impending stroke",
+      "Bilateral or simultaneous involvement, suggesting giant cell arteritis or an embolic shower",
+      "Ocular neovascularisation or features of the ocular ischaemic syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Spontaneous visual recovery in central retinal artery occlusion is generally poor, whereas branch occlusion carries a better outlook depending on macular involvement. It is an important marker of systemic vascular disease, conferring a substantially raised risk of subsequent stroke and other cardiovascular events.",
+    "pitfalls": [
+      "Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye.",
+      "Managing it as an isolated eye problem rather than a stroke equivalent, and failing to refer urgently for vascular assessment.",
+      "Attributing sudden visual loss to migraine in an older patient.",
+      "Overlooking a carotid or cardiac embolic source on workup.",
+      "Misinterpreting foveal sparing by a cilioretinal artery and doubting the diagnosis."
+    ],
+    "references": [
+      "Ophthalmology references",
+      "Neuro-ophthalmology references",
+      "Stroke management guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway, considering thrombolysis in hyperacute presentations at specialist centres",
+      "In the first hours attempt measures to dislodge the embolus and lower intraocular pressure, such as ocular massage, anterior chamber paracentesis and pressure-lowering agents, recognising limited evidence of benefit",
+      "Urgently exclude giant cell arteritis in older patients and, if suspected, start high-dose corticosteroids immediately to protect the fellow eye",
+      "Institute secondary prevention as for stroke with antiplatelet or anticoagulant therapy, a statin, and control of blood pressure, diabetes and smoking",
+      "Investigate and treat the embolic source, including carotid endarterectomy for significant stenosis and management of any cardiac source",
+      "Monitor for ocular neovascularisation and treat with laser or anti-VEGF therapy if it develops",
+      "Coordinate care across stroke, ophthalmology and vascular services"
     ]
-   ],
-   "caption": "Overview comparison matrix for retinal artery occlusion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retinal-artery-occlusion-real-image",
-   "title": "Retinal Artery Occlusion: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "retinal_artery_occlusion-pathway",
+      "title": "Retinal Artery Occlusion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic stroke and warrants emergency stroke-pathway referral.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any accompanying neurological deficit suggesting concurrent cerebral stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundoscopy and fundus photography, Optical coherence tomography (early inner retinal oedema, later inner retinal thinning), Fluorescein angiography demonstrating delayed or absent retinal arterial filling"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway, considering thrombolysis in hyperacute presentations at specialist centres"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of retinal artery occlusion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retinal_artery_occlusion-matrix",
+      "title": "Retinal Artery Occlusion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as sudden, painless, monocular visual loss; central retinal artery occlusion is an ocular equivalent of acute ischaemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundoscopy and fundus photography, Optical coherence tomography (early inner retinal oedema, later inner retinal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Central retinal vein occlusion, Arteritic and non-arteritic anterior ischaemic optic neuropathy, Retinal detachment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat central retinal artery occlusion as an ocular stroke emergency with immediate referral to the acute stroke pathway,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing giant cell arteritis and delaying corticosteroids while awaiting biopsy, thereby risking the fellow eye.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for retinal artery occlusion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinal_artery_occlusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundoscopy and fundus photography",
+          "cells": [
+            {
+              "text": "Pale, oedematous inner retina with a cherry-red spot at the fovea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Early inner retinal oedema; later inner retinal thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Delayed or absent retinal arterial filling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and temporal artery biopsy",
+          "cells": [
+            {
+              "text": "Giant cell arteritis as an arteritic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid Doppler and CT or MR angiography",
+          "cells": [
+            {
+              "text": "Carotid stenosis or other embolic source in the neck vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiac embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusion-weighted brain MRI",
+          "cells": [
+            {
+              "text": "Clinically silent cerebral infarction, which is common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinal_artery_occlusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke pathway",
+          "cells": [
+            {
+              "text": "Treat as an ocular stroke emergency; consider thrombolysis in hyperacute presentations at specialist centres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early measures to dislodge embolus",
+          "cells": [
+            {
+              "text": "Ocular massage, anterior chamber paracentesis and pressure-lowering agents; limited evidence of benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude giant cell arteritis",
+          "cells": [
+            {
+              "text": "In older patients; if suspected, start high-dose corticosteroids immediately to protect the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary stroke prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant therapy, a statin, and control of blood pressure, diabetes and smoking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolic source",
+          "cells": [
+            {
+              "text": "Carotid endarterectomy for significant stenosis; management of any cardiac source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Watch for ocular neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinal_artery_occlusion-dx-mgmt",
+      "title": "Diagnosis and management of Retinal Artery Occlusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden painless monocular visual loss with pale retina and cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit, jaw claudication, amaurosis fugax, bilateral)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency stroke pathway; consider thrombolysis at specialist centres",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundoscopy, OCT, fluorescein angiography, inflammatory markers, carotid and heart imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an embolic or arteritic cause identified on imaging or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for other causes of sudden visual loss; repeat the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent stroke pathway; consider thrombolysis at specialist centres",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude giant cell arteritis; start high-dose corticosteroids if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secondary stroke prevention: antiplatelet or anticoagulant, statin, BP control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the embolic source: carotid endarterectomy or cardiac management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual recovery generally poor; marks systemic vascular disease with raised stroke risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

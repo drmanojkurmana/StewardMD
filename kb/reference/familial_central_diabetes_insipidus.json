@@ -1,175 +1,473 @@
 {
- "id": "familial_central_diabetes_insipidus",
- "name": "Familial central diabetes insipidus",
- "aliases": [
-  "familial neurohypophyseal diabetes insipidus",
-  "AVP gene mutation",
-  "autosomal dominant central diabetes insipidus",
-  "vasopressin deficiency (hereditary)",
-  "arginine vasopressin deficiency (familial)"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard endocrinology texts and diabetes insipidus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
-   "Most familial cases are autosomal dominant, caused by mutations in the AVP gene, with symptoms often appearing in early childhood rather than at birth",
-   "Symptoms may be progressive over years as vasopressin-producing neurones are gradually lost",
-   "A family history spanning generations distinguishes it from acquired causes such as tumour, trauma, or infiltration",
-   "The condition is now often termed arginine vasopressin deficiency to reduce confusion with diabetes mellitus",
-   "Diagnosis uses a water deprivation test with response to desmopressin, increasingly supported by copeptin measurement",
-   "Treatment is with desmopressin replacement, with attention to avoiding water intoxication from overtreatment"
+  "id": "familial_central_diabetes_insipidus",
+  "name": "Familial central diabetes insipidus",
+  "aliases": [
+    "familial neurohypophyseal diabetes insipidus",
+    "AVP gene mutation",
+    "autosomal dominant central diabetes insipidus",
+    "vasopressin deficiency (hereditary)",
+    "arginine vasopressin deficiency (familial)"
   ],
-  "pathophysiology": "Familial central diabetes insipidus arises from mutations in the AVP gene, which encodes the precursor of arginine vasopressin. Most mutations produce a misfolded precursor that accumulates and is thought to be cytotoxic to the magnocellular neurones of the hypothalamus that synthesise the hormone. Progressive loss of these neurones reduces vasopressin secretion from the posterior pituitary, so the kidney cannot concentrate urine; large volumes of dilute urine are produced and compensatory thirst drives high fluid intake. The gradual neuronal loss explains the typical delayed and progressive onset.",
-  "additionalDifferentials": [
-   "Nephrogenic diabetes insipidus",
-   "Primary (psychogenic) polydipsia",
-   "Acquired central diabetes insipidus from tumour, surgery, or trauma",
-   "Infiltrative disease such as Langerhans cell histiocytosis or sarcoidosis",
-   "Diabetes mellitus with osmotic diuresis",
-   "Wolfram syndrome as part of a wider genetic disorder"
-  ],
-  "additionalInvestigations": [
-   "Paired serum and urine osmolality measurements",
-   "Water deprivation test with desmopressin challenge",
-   "Copeptin measurement, including stimulated testing where available",
-   "AVP gene testing and family screening",
-   "Pituitary magnetic resonance imaging to exclude structural or infiltrative causes",
-   "Serum sodium, glucose, and renal function"
-  ],
-  "redFlags": [
-   "Hypernatraemia and dehydration when access to water is limited",
-   "Severe symptoms in infancy with poor feeding and failure to thrive",
-   "Features suggesting a structural pituitary lesion rather than familial disease",
-   "Hyponatraemia from excessive desmopressin or overhydration"
-  ],
-  "prognosis": "With reliable desmopressin replacement and free access to water, prognosis is excellent and normal life is expected; the main risks come from dehydration when fluid intake is restricted and from hyponatraemia due to overtreatment.",
-  "pitfalls": [
-   "Confusing the condition with diabetes mellitus because of the shared name",
-   "Missing the gradual, progressive childhood onset and attributing symptoms to behaviour",
-   "Overtreating with desmopressin and precipitating hyponatraemia",
-   "Failing to distinguish central from nephrogenic or psychogenic causes before treatment"
-  ],
-  "references": [
-   "Endocrine society and specialist guidance on diabetes insipidus / arginine vasopressin deficiency",
-   "Standard endocrinology texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Desmopressin replacement as the mainstay to restore urinary concentrating ability",
-   "Ensure free access to water with thirst-guided fluid intake to prevent dehydration",
-   "Titrate desmopressin against serum sodium to avoid dilutional hyponatraemia from overtreatment",
-   "Patient and family education on sick-day management, recognising dehydration and avoiding water intoxication",
-   "Careful fluid and electrolyte management during intercurrent illness, surgery or whenever thirst or access to water is impaired",
-   "Genetic counselling with AVP gene testing and family screening given autosomal dominant inheritance",
-   "Endocrinology follow-up with periodic review of the desmopressin regimen"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_central_diabetes_insipidus-pathway",
-   "title": "Familial central diabetes insipidus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypernatraemia and dehydration when access to water is limited",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Paired serum and urine osmolality measurements, Water deprivation test with desmopressin challenge, Copeptin measurement, including stimulated testing where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Desmopressin replacement as the mainstay to restore urinary concentrating ability"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the condition with diabetes mellitus because of the shared name"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial central diabetes insipidus."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_central_diabetes_insipidus-matrix",
-   "title": "Familial central diabetes insipidus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard endocrinology texts and diabetes insipidus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
+      "Most familial cases are autosomal dominant, caused by mutations in the AVP gene, with symptoms often appearing in early childhood rather than at birth",
+      "Symptoms may be progressive over years as vasopressin-producing neurones are gradually lost",
+      "A family history spanning generations distinguishes it from acquired causes such as tumour, trauma, or infiltration",
+      "The condition is now often termed arginine vasopressin deficiency to reduce confusion with diabetes mellitus",
+      "Diagnosis uses a water deprivation test with response to desmopressin, increasingly supported by copeptin measurement",
+      "Treatment is with desmopressin replacement, with attention to avoiding water intoxication from overtreatment"
     ],
-    [
-     "Key Investigations",
-     "Paired serum and urine osmolality measurements, Water deprivation test with desmopressin challenge, Copeptin measurement,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial central diabetes insipidus arises from mutations in the AVP gene, which encodes the precursor of arginine vasopressin. Most mutations produce a misfolded precursor that accumulates and is thought to be cytotoxic to the magnocellular neurones of the hypothalamus that synthesise the hormone. Progressive loss of these neurones reduces vasopressin secretion from the posterior pituitary, so the kidney cannot concentrate urine; large volumes of dilute urine are produced and compensatory thirst drives high fluid intake. The gradual neuronal loss explains the typical delayed and progressive onset.",
+    "additionalDifferentials": [
+      "Nephrogenic diabetes insipidus",
+      "Primary (psychogenic) polydipsia",
+      "Acquired central diabetes insipidus from tumour, surgery, or trauma",
+      "Infiltrative disease such as Langerhans cell histiocytosis or sarcoidosis",
+      "Diabetes mellitus with osmotic diuresis",
+      "Wolfram syndrome as part of a wider genetic disorder"
     ],
-    [
-     "Primary Differentials",
-     "Nephrogenic diabetes insipidus, Primary (psychogenic) polydipsia, Acquired central diabetes insipidus from tumour, surgery, or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Paired serum and urine osmolality measurements",
+      "Water deprivation test with desmopressin challenge",
+      "Copeptin measurement, including stimulated testing where available",
+      "AVP gene testing and family screening",
+      "Pituitary magnetic resonance imaging to exclude structural or infiltrative causes",
+      "Serum sodium, glucose, and renal function"
     ],
-    [
-     "Management Strategy",
-     "Desmopressin replacement as the mainstay to restore urinary concentrating ability",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypernatraemia and dehydration when access to water is limited",
+      "Severe symptoms in infancy with poor feeding and failure to thrive",
+      "Features suggesting a structural pituitary lesion rather than familial disease",
+      "Hyponatraemia from excessive desmopressin or overhydration"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the condition with diabetes mellitus because of the shared name",
-     "Prevent diagnostic or management error"
+    "prognosis": "With reliable desmopressin replacement and free access to water, prognosis is excellent and normal life is expected; the main risks come from dehydration when fluid intake is restricted and from hyponatraemia due to overtreatment.",
+    "pitfalls": [
+      "Confusing the condition with diabetes mellitus because of the shared name",
+      "Missing the gradual, progressive childhood onset and attributing symptoms to behaviour",
+      "Overtreating with desmopressin and precipitating hyponatraemia",
+      "Failing to distinguish central from nephrogenic or psychogenic causes before treatment"
+    ],
+    "references": [
+      "Endocrine society and specialist guidance on diabetes insipidus / arginine vasopressin deficiency",
+      "Standard endocrinology texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Desmopressin replacement as the mainstay to restore urinary concentrating ability",
+      "Ensure free access to water with thirst-guided fluid intake to prevent dehydration",
+      "Titrate desmopressin against serum sodium to avoid dilutional hyponatraemia from overtreatment",
+      "Patient and family education on sick-day management, recognising dehydration and avoiding water intoxication",
+      "Careful fluid and electrolyte management during intercurrent illness, surgery or whenever thirst or access to water is impaired",
+      "Genetic counselling with AVP gene testing and family screening given autosomal dominant inheritance",
+      "Endocrinology follow-up with periodic review of the desmopressin regimen"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial central diabetes insipidus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-central-diabetes-insipidus-real-image",
-   "title": "Familial central diabetes insipidus: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "familial_central_diabetes_insipidus-pathway",
+      "title": "Familial central diabetes insipidus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypernatraemia and dehydration when access to water is limited",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Paired serum and urine osmolality measurements, Water deprivation test with desmopressin challenge, Copeptin measurement, including stimulated testing where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Desmopressin replacement as the mainstay to restore urinary concentrating ability"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the condition with diabetes mellitus because of the shared name"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial central diabetes insipidus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_central_diabetes_insipidus-matrix",
+      "title": "Familial central diabetes insipidus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with polyuria and polydipsia due to deficient secretion of arginine vasopressin (antidiuretic hormone)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Paired serum and urine osmolality measurements, Water deprivation test with desmopressin challenge, Copeptin measurement,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nephrogenic diabetes insipidus, Primary (psychogenic) polydipsia, Acquired central diabetes insipidus from tumour, surgery, or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Desmopressin replacement as the mainstay to restore urinary concentrating ability",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the condition with diabetes mellitus because of the shared name",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial central diabetes insipidus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology texts and diabetes insipidus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_central_diabetes_insipidus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired serum and urine osmolality",
+          "cells": [
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water deprivation test with desmopressin challenge",
+          "cells": [
+            {
+              "text": "Response to desmopressin supports central cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copeptin measurement, including stimulated testing",
+          "cells": [
+            {
+              "text": "Supports the diagnosis where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVP gene testing and family screening",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Structural or infiltrative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium, glucose and renal function",
+          "cells": [
+            {
+              "text": "Electrolytes and baseline function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_central_diabetes_insipidus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nephrogenic diabetes insipidus or primary polydipsia",
+          "cells": [
+            {
+              "text": "Central from nephrogenic or psychogenic causes must be distinguished before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired central diabetes insipidus",
+          "cells": [
+            {
+              "text": "A family history spanning generations distinguishes familial from acquired causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_central_diabetes_insipidus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Desmopressin replacement",
+          "cells": [
+            {
+              "text": "Mainstay; restores urinary concentrating ability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Free access to water",
+          "cells": [
+            {
+              "text": "Thirst-guided fluid intake to prevent dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Titration against serum sodium",
+          "cells": [
+            {
+              "text": "Avoids dilutional hyponatraemia from overtreatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day education",
+          "cells": [
+            {
+              "text": "Recognising dehydration and avoiding water intoxication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful fluid management in illness or surgery",
+          "cells": [
+            {
+              "text": "Whenever thirst or access to water is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "AVP gene testing and family screening; autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Periodic review of the desmopressin regimen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_central_diabetes_insipidus-dx-mgmt",
+      "title": "Diagnosis and management of Familial central diabetes insipidus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive polyuria and polydipsia from early childhood, with family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hypernatraemia with limited water, infant failure to thrive, structural signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Correct dehydration or hyponatraemia; pituitary imaging for a structural cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired osmolality; water deprivation with desmopressin challenge; copeptin; pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Concentrating defect corrected by desmopressin, with normal pituitary MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nephrogenic or psychogenic polydipsia or an acquired central cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Desmopressin replacement as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Free access to water with thirst-guided intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Titrate desmopressin against serum sodium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day education on dehydration and water intoxication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with AVP testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With desmopressin and free water access, prognosis is excellent and life is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

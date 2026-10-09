@@ -1,175 +1,462 @@
 {
- "id": "methylmalonic_acidemia",
- "name": "Methylmalonic acidemia",
- "aliases": [
-  "MMA",
-  "methylmalonic aciduria",
-  "methylmalonyl-CoA mutase deficiency",
-  "cobalamin-related methylmalonic acidemia"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12) cofactor synthesis",
-   "Typical neonatal presentation is metabolic decompensation with poor feeding, vomiting, lethargy, hypotonia and a severe high-anion-gap metabolic acidosis",
-   "Characteristic laboratory findings include ketosis, hyperammonaemia, hypoglycaemia, and cytopenias such as neutropenia and thrombocytopenia",
-   "Elevated methylmalonic acid in blood and urine with raised propionylcarnitine (C3) on acylcarnitine profile establishes the diagnosis",
-   "Long-term complications include chronic kidney disease (tubulointerstitial nephropathy), a movement disorder from basal ganglia injury, growth failure and pancreatitis",
-   "Some cobalamin-responsive forms improve with vitamin B12 (hydroxocobalamin), so a cofactor trial is standard",
-   "Chronic management principles are a protein-restricted diet limiting propiogenic amino acids, carnitine supplementation and avoidance of catabolism, with metronidazole sometimes used to reduce gut propionate production",
-   "Detectable through newborn screening by elevated C3 acylcarnitine, prompting confirmatory testing"
+  "id": "methylmalonic_acidemia",
+  "name": "Methylmalonic acidemia",
+  "aliases": [
+    "MMA",
+    "methylmalonic aciduria",
+    "methylmalonyl-CoA mutase deficiency",
+    "cobalamin-related methylmalonic acidemia"
   ],
-  "pathophysiology": "Methylmalonic acidemia results from a block in the conversion of methylmalonyl-CoA to succinyl-CoA, a step catalysed by methylmalonyl-CoA mutase using adenosylcobalamin. This reaction lies on the final common pathway for catabolism of the branched-chain amino acids isoleucine and valine, methionine, threonine, odd-chain fatty acids and cholesterol side chains. Enzyme deficiency or impaired cofactor synthesis causes methylmalonic acid and related organic acids to accumulate, producing severe metabolic acidosis. These metabolites inhibit ureagenesis (causing secondary hyperammonaemia) and mitochondrial energy metabolism, are toxic to bone marrow and renal tubules, and injure the basal ganglia during decompensation.",
-  "additionalDifferentials": [
-   "Propionic acidemia and other organic acidaemias",
-   "Isovaleric acidemia",
-   "Urea cycle disorders (hyperammonaemia without high anion gap acidosis)",
-   "Maple syrup urine disease",
-   "Neonatal sepsis and diabetic ketoacidosis",
-   "Acquired vitamin B12 deficiency (in later-onset or maternal cases)"
-  ],
-  "additionalInvestigations": [
-   "Blood gas and anion gap, blood glucose, lactate and ammonia",
-   "Plasma and urine organic acids showing elevated methylmalonic acid",
-   "Plasma acylcarnitine profile (elevated propionylcarnitine, C3)",
-   "Newborn screening acylcarnitine analysis",
-   "Vitamin B12 responsiveness testing and complementation/molecular studies to subtype",
-   "Renal function monitoring and neuroimaging after metabolic crises"
-  ],
-  "redFlags": [
-   "Acute metabolic decompensation with severe high-anion-gap acidosis is a life-threatening emergency",
-   "Hyperammonaemia with encephalopathy accompanying an acidotic crisis",
-   "Rapid deterioration during intercurrent illness, fasting or increased protein catabolism",
-   "Progressive renal impairment or acute basal ganglia injury with a new movement disorder"
-  ],
-  "prognosis": "Prognosis varies by subtype; cobalamin-responsive forms generally do better, whereas mutase-deficient disease carries significant risk of recurrent metabolic crises, chronic kidney disease and neurological injury, and severe cases may require kidney or combined liver-kidney transplantation. Early screening detection and meticulous metabolic control improve outcomes.",
-  "pitfalls": [
-   "Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation",
-   "Failing to trial and document vitamin B12 responsiveness",
-   "Overlooking evolving chronic kidney disease during long-term follow-up",
-   "Under-treating catabolism during intercurrent illness, allowing preventable decompensation"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine, supplemented with a specialised metabolic formula",
-   "Trial parenteral hydroxocobalamin and continue it long-term in cobalamin-responsive forms",
-   "Supplement with L-carnitine and consider intermittent gut-flora suppression with metronidazole to reduce propionate production",
-   "Manage acute decompensation by stopping protein, giving intravenous glucose with insulin to reverse catabolism, correcting acidosis, and using ammonia scavengers with haemofiltration or dialysis for severe hyperammonaemia",
-   "Provide an emergency sick-day regimen and strict fasting avoidance",
-   "Undertake surveillance for chronic kidney disease, basal ganglia injury and movement disorder, growth failure, and pancreatitis",
-   "Consider liver or combined liver-kidney transplantation in severe or recurrently decompensating disease, with genetic counselling and metabolic multidisciplinary care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "methylmalonic_acidemia-pathway",
-   "title": "Methylmalonic acidemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12) cofactor synthesis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute metabolic decompensation with severe high-anion-gap acidosis is a life-threatening emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood gas and anion gap, blood glucose, lactate and ammonia, Plasma and urine organic acids showing elevated methylmalonic acid, Plasma acylcarnitine profile (elevated propionylcarnitine, C3)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine, supplemented with a specialised metabolic formula"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of methylmalonic acidemia."
-  }
- ],
- "tables": [
-  {
-   "id": "methylmalonic_acidemia-matrix",
-   "title": "Methylmalonic acidemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12) cofactor synthesis",
+      "Typical neonatal presentation is metabolic decompensation with poor feeding, vomiting, lethargy, hypotonia and a severe high-anion-gap metabolic acidosis",
+      "Characteristic laboratory findings include ketosis, hyperammonaemia, hypoglycaemia, and cytopenias such as neutropenia and thrombocytopenia",
+      "Elevated methylmalonic acid in blood and urine with raised propionylcarnitine (C3) on acylcarnitine profile establishes the diagnosis",
+      "Long-term complications include chronic kidney disease (tubulointerstitial nephropathy), a movement disorder from basal ganglia injury, growth failure and pancreatitis",
+      "Some cobalamin-responsive forms improve with vitamin B12 (hydroxocobalamin), so a cofactor trial is standard",
+      "Chronic management principles are a protein-restricted diet limiting propiogenic amino acids, carnitine supplementation and avoidance of catabolism, with metronidazole sometimes used to reduce gut propionate production",
+      "Detectable through newborn screening by elevated C3 acylcarnitine, prompting confirmatory testing"
     ],
-    [
-     "Key Investigations",
-     "Blood gas and anion gap, blood glucose, lactate and ammonia, Plasma and urine organic acids showing elevated methylmalonic acid,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Methylmalonic acidemia results from a block in the conversion of methylmalonyl-CoA to succinyl-CoA, a step catalysed by methylmalonyl-CoA mutase using adenosylcobalamin. This reaction lies on the final common pathway for catabolism of the branched-chain amino acids isoleucine and valine, methionine, threonine, odd-chain fatty acids and cholesterol side chains. Enzyme deficiency or impaired cofactor synthesis causes methylmalonic acid and related organic acids to accumulate, producing severe metabolic acidosis. These metabolites inhibit ureagenesis (causing secondary hyperammonaemia) and mitochondrial energy metabolism, are toxic to bone marrow and renal tubules, and injure the basal ganglia during decompensation.",
+    "additionalDifferentials": [
+      "Propionic acidemia and other organic acidaemias",
+      "Isovaleric acidemia",
+      "Urea cycle disorders (hyperammonaemia without high anion gap acidosis)",
+      "Maple syrup urine disease",
+      "Neonatal sepsis and diabetic ketoacidosis",
+      "Acquired vitamin B12 deficiency (in later-onset or maternal cases)"
     ],
-    [
-     "Primary Differentials",
-     "Propionic acidemia and other organic acidaemias, Isovaleric acidemia, Urea cycle disorders (hyperammonaemia without high anion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood gas and anion gap, blood glucose, lactate and ammonia",
+      "Plasma and urine organic acids showing elevated methylmalonic acid",
+      "Plasma acylcarnitine profile (elevated propionylcarnitine, C3)",
+      "Newborn screening acylcarnitine analysis",
+      "Vitamin B12 responsiveness testing and complementation/molecular studies to subtype",
+      "Renal function monitoring and neuroimaging after metabolic crises"
     ],
-    [
-     "Management Strategy",
-     "Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute metabolic decompensation with severe high-anion-gap acidosis is a life-threatening emergency",
+      "Hyperammonaemia with encephalopathy accompanying an acidotic crisis",
+      "Rapid deterioration during intercurrent illness, fasting or increased protein catabolism",
+      "Progressive renal impairment or acute basal ganglia injury with a new movement disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies by subtype; cobalamin-responsive forms generally do better, whereas mutase-deficient disease carries significant risk of recurrent metabolic crises, chronic kidney disease and neurological injury, and severe cases may require kidney or combined liver-kidney transplantation. Early screening detection and meticulous metabolic control improve outcomes.",
+    "pitfalls": [
+      "Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation",
+      "Failing to trial and document vitamin B12 responsiveness",
+      "Overlooking evolving chronic kidney disease during long-term follow-up",
+      "Under-treating catabolism during intercurrent illness, allowing preventable decompensation"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine, supplemented with a specialised metabolic formula",
+      "Trial parenteral hydroxocobalamin and continue it long-term in cobalamin-responsive forms",
+      "Supplement with L-carnitine and consider intermittent gut-flora suppression with metronidazole to reduce propionate production",
+      "Manage acute decompensation by stopping protein, giving intravenous glucose with insulin to reverse catabolism, correcting acidosis, and using ammonia scavengers with haemofiltration or dialysis for severe hyperammonaemia",
+      "Provide an emergency sick-day regimen and strict fasting avoidance",
+      "Undertake surveillance for chronic kidney disease, basal ganglia injury and movement disorder, growth failure, and pancreatitis",
+      "Consider liver or combined liver-kidney transplantation in severe or recurrently decompensating disease, with genetic counselling and metabolic multidisciplinary care"
     ]
-   ],
-   "caption": "Overview comparison matrix for methylmalonic acidemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "methylmalonic-acidemia-real-image",
-   "title": "Methylmalonic acidemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "methylmalonic_acidemia-pathway",
+      "title": "Methylmalonic acidemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12) cofactor synthesis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute metabolic decompensation with severe high-anion-gap acidosis is a life-threatening emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood gas and anion gap, blood glucose, lactate and ammonia, Plasma and urine organic acids showing elevated methylmalonic acid, Plasma acylcarnitine profile (elevated propionylcarnitine, C3)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine, supplemented with a specialised metabolic formula"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of methylmalonic acidemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "methylmalonic_acidemia-matrix",
+      "title": "Methylmalonic acidemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An organic acidaemia caused by deficient methylmalonyl-CoA mutase activity or by defects in its adenosylcobalamin (vitamin B12)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood gas and anion gap, blood glucose, lactate and ammonia, Plasma and urine organic acids showing elevated methylmalonic acid,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Propionic acidemia and other organic acidaemias, Isovaleric acidemia, Urea cycle disorders (hyperammonaemia without high anion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a protein-restricted diet limiting the propiogenic precursors isoleucine, valine, methionine, and threonine,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing an acidotic, unwell neonate to sepsis and delaying metabolic investigation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for methylmalonic acidemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "methylmalonic_acidemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood gas and anion gap, blood glucose, lactate and ammonia",
+          "cells": [
+            {
+              "text": "Acidosis and hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and urine organic acids",
+          "cells": [
+            {
+              "text": "Elevated methylmalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Elevated propionylcarnitine (C3)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening acylcarnitine analysis",
+          "cells": [
+            {
+              "text": "Acylcarnitine analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 responsiveness testing and complementation studies",
+          "cells": [
+            {
+              "text": "Cobalamin responsiveness and subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function monitoring and neuroimaging after crises",
+          "cells": [
+            {
+              "text": "Renal and neurological sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "methylmalonic_acidemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urea cycle disorders",
+          "cells": [
+            {
+              "text": "Hyperammonaemia without a high anion-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Later-onset or maternal cases; B12 responsiveness testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "methylmalonic_acidemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "Limits propiogenic precursors isoleucine, valine, methionine and threonine; specialised metabolic formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Parenteral trial; continued long-term in cobalamin-responsive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine and metronidazole",
+          "cells": [
+            {
+              "text": "Carnitine supplementation; intermittent gut-flora suppression to reduce propionate production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Stop protein; IV glucose with insulin; correct acidosis; ammonia scavengers with haemofiltration or dialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day regimen",
+          "cells": [
+            {
+              "text": "Emergency plan and strict avoidance of fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Chronic kidney disease, basal ganglia injury, movement disorder, growth failure and pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Liver or combined liver-kidney in severe or recurrently decompensating disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "methylmalonic_acidemia-dx-mgmt",
+      "title": "Diagnosis and management of Methylmalonic acidemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate or infant with high anion-gap acidosis and hyperammonaemia during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Life-threatening acidosis, encephalopathy, or progressive kidney or basal ganglia injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: stop protein, IV glucose and insulin, correct acidosis, remove ammonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gas and anion gap; ammonia; organic acids; acylcarnitine C3; B12 responsiveness",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is methylmalonic acid raised with elevated propionylcarnitine (C3)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider propionic acidaemia, urea cycle disorder or B12 deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protein-restricted diet with a specialised metabolic formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of parenteral hydroxocobalamin; long-term in cobalamin-responsive forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "L-carnitine; consider metronidazole to reduce propionate production",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day regimen and strict avoidance of fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for kidney, basal ganglia and growth complications; consider transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

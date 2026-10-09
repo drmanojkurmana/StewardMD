@@ -1,173 +1,479 @@
 {
- "id": "primary_obstructive_megaureter",
- "name": "Primary obstructive megaureter",
- "aliases": [
-  "primary obstructed megaureter",
-  "POM",
-  "congenital obstructive megaureter"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the bladder, with the obstruction being functional rather than a fixed anatomical stenosis in most cases",
-   "Classified within the megaureter spectrum as obstructed, refluxing, both, or neither; the primary obstructive type has obstruction without reflux",
-   "Commonly detected on antenatal ultrasound as ureteric dilatation with variable pelvicalyceal dilatation, the ureter being widest just above the bladder",
-   "May present later with urinary tract infection, loin pain, or haematuria",
-   "The distal aperistaltic segment itself is typically of normal calibre; it is the segment above that is dilated",
-   "Many cases, especially with preserved function and modest dilatation, improve spontaneously and are managed expectantly with surveillance and often prophylactic antibiotics",
-   "Persistent or progressive obstruction with deteriorating function, breakthrough infection, or symptoms is treated by ureteric reimplantation with tapering or, in selected cases, temporising endoscopic or drainage procedures"
+  "id": "primary_obstructive_megaureter",
+  "name": "Primary obstructive megaureter",
+  "aliases": [
+    "primary obstructed megaureter",
+    "POM",
+    "congenital obstructive megaureter"
   ],
-  "pathophysiology": "In primary obstructive megaureter the terminal ureteric segment adjacent to the bladder is structurally abnormal, with disorganised smooth muscle and excess collagen that render it aperistaltic and non-compliant. Although this segment is usually of normal or near-normal calibre and not stenotic in the classic sense, it fails to transmit peristaltic waves and effectively obstructs the passage of urine into the bladder. Urine therefore accumulates proximally, producing progressive dilatation of the ureter above the junction and, in more severe cases, pelvicalyceal dilatation and impairment of renal function. There is no reflux, distinguishing it from refluxing megaureter.",
-  "additionalDifferentials": [
-   "Refluxing megaureter (primary vesicoureteric reflux)",
-   "Ureteropelvic junction obstruction",
-   "Ureterocele causing ureteric dilatation",
-   "Ectopic ureter",
-   "Posterior urethral valves with secondary upper-tract dilatation",
-   "Non-obstructive non-refluxing megaureter"
-  ],
-  "additionalInvestigations": [
-   "Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation",
-   "MAG3 diuretic renogram to assess drainage and differential function",
-   "Micturating cystourethrogram (MCUG) to exclude reflux and bladder outlet pathology",
-   "Serial ultrasound for surveillance of antenatally detected dilatation",
-   "Urinalysis and culture when infection is suspected",
-   "MR urography in selected cases to define anatomy"
-  ],
-  "redFlags": [
-   "Declining differential renal function on serial renography",
-   "Increasing ureteric or pelvicalyceal dilatation",
-   "Febrile urinary tract infection or urosepsis in a dilated obstructed system",
-   "Obstruction in a solitary functioning kidney"
-  ],
-  "prognosis": "The majority of antenatally detected cases with reasonable function stabilise or resolve spontaneously over the first years of life, and reimplantation for persistent obstruction has good results; long-standing severe obstruction can leave permanent functional loss.",
-  "pitfalls": [
-   "Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible",
-   "Operating early on stable dilatation likely to resolve, rather than observing",
-   "Misinterpreting a diuretic renogram in an immature kidney or with a full bladder",
-   "Failing to exclude reflux and bladder outlet obstruction before attributing dilatation to the distal ureter"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Gearhart, Rink & Mouriquand: Pediatric Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest dilatation, most of which improve spontaneously",
-   "Continuous antibiotic prophylaxis, particularly in infancy, to reduce urinary tract infection risk",
-   "Serial renal tract ultrasound and diuretic MAG3 renography to monitor dilatation and split renal function",
-   "Prompt treatment of febrile urinary tract infection with appropriate antibiotics",
-   "Ureteric reimplantation with excision or tapering of the aperistaltic distal segment for persistent obstruction, deteriorating function, breakthrough infection or symptoms",
-   "Temporising measures in infants too small for reimplantation, such as JJ stenting, endoscopic balloon dilatation or a cutaneous ureterostomy",
-   "Long-term paediatric urology and nephrology follow-up with monitoring of renal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_obstructive_megaureter-pathway",
-   "title": "Primary obstructive megaureter: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the bladder, with the obstruction being functional rather than a fixed anatomical stenosis in most cases",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Declining differential renal function on serial renography",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation, MAG3 diuretic renogram to assess drainage and differential function, Micturating cystourethrogram (MCUG) to exclude reflux and bladder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest dilatation, most of which improve spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary obstructive megaureter."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_obstructive_megaureter-matrix",
-   "title": "Primary obstructive megaureter: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the bladder, with the obstruction being functional rather than a fixed anatomical stenosis in most cases",
+      "Classified within the megaureter spectrum as obstructed, refluxing, both, or neither; the primary obstructive type has obstruction without reflux",
+      "Commonly detected on antenatal ultrasound as ureteric dilatation with variable pelvicalyceal dilatation, the ureter being widest just above the bladder",
+      "May present later with urinary tract infection, loin pain, or haematuria",
+      "The distal aperistaltic segment itself is typically of normal calibre; it is the segment above that is dilated",
+      "Many cases, especially with preserved function and modest dilatation, improve spontaneously and are managed expectantly with surveillance and often prophylactic antibiotics",
+      "Persistent or progressive obstruction with deteriorating function, breakthrough infection, or symptoms is treated by ureteric reimplantation with tapering or, in selected cases, temporising endoscopic or drainage procedures"
     ],
-    [
-     "Key Investigations",
-     "Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation, MAG3 diuretic renogram to assess drainage and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In primary obstructive megaureter the terminal ureteric segment adjacent to the bladder is structurally abnormal, with disorganised smooth muscle and excess collagen that render it aperistaltic and non-compliant. Although this segment is usually of normal or near-normal calibre and not stenotic in the classic sense, it fails to transmit peristaltic waves and effectively obstructs the passage of urine into the bladder. Urine therefore accumulates proximally, producing progressive dilatation of the ureter above the junction and, in more severe cases, pelvicalyceal dilatation and impairment of renal function. There is no reflux, distinguishing it from refluxing megaureter.",
+    "additionalDifferentials": [
+      "Refluxing megaureter (primary vesicoureteric reflux)",
+      "Ureteropelvic junction obstruction",
+      "Ureterocele causing ureteric dilatation",
+      "Ectopic ureter",
+      "Posterior urethral valves with secondary upper-tract dilatation",
+      "Non-obstructive non-refluxing megaureter"
     ],
-    [
-     "Primary Differentials",
-     "Refluxing megaureter (primary vesicoureteric reflux), Ureteropelvic junction obstruction, Ureterocele causing ureteric dilatation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation",
+      "MAG3 diuretic renogram to assess drainage and differential function",
+      "Micturating cystourethrogram (MCUG) to exclude reflux and bladder outlet pathology",
+      "Serial ultrasound for surveillance of antenatally detected dilatation",
+      "Urinalysis and culture when infection is suspected",
+      "MR urography in selected cases to define anatomy"
     ],
-    [
-     "Management Strategy",
-     "Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest",
-     "Core treatment modality"
+    "redFlags": [
+      "Declining differential renal function on serial renography",
+      "Increasing ureteric or pelvicalyceal dilatation",
+      "Febrile urinary tract infection or urosepsis in a dilated obstructed system",
+      "Obstruction in a solitary functioning kidney"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of antenatally detected cases with reasonable function stabilise or resolve spontaneously over the first years of life, and reimplantation for persistent obstruction has good results; long-standing severe obstruction can leave permanent functional loss.",
+    "pitfalls": [
+      "Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible",
+      "Operating early on stable dilatation likely to resolve, rather than observing",
+      "Misinterpreting a diuretic renogram in an immature kidney or with a full bladder",
+      "Failing to exclude reflux and bladder outlet obstruction before attributing dilatation to the distal ureter"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Gearhart, Rink & Mouriquand: Pediatric Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest dilatation, most of which improve spontaneously",
+      "Continuous antibiotic prophylaxis, particularly in infancy, to reduce urinary tract infection risk",
+      "Serial renal tract ultrasound and diuretic MAG3 renography to monitor dilatation and split renal function",
+      "Prompt treatment of febrile urinary tract infection with appropriate antibiotics",
+      "Ureteric reimplantation with excision or tapering of the aperistaltic distal segment for persistent obstruction, deteriorating function, breakthrough infection or symptoms",
+      "Temporising measures in infants too small for reimplantation, such as JJ stenting, endoscopic balloon dilatation or a cutaneous ureterostomy",
+      "Long-term paediatric urology and nephrology follow-up with monitoring of renal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary obstructive megaureter."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-obstructive-megaureter-real-image",
-   "title": "Primary obstructive megaureter: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "primary_obstructive_megaureter-pathway",
+      "title": "Primary obstructive megaureter: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the bladder, with the obstruction being functional rather than a fixed anatomical stenosis in most cases",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Declining differential renal function on serial renography",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation, MAG3 diuretic renogram to assess drainage and differential function, Micturating cystourethrogram (MCUG) to exclude reflux and bladder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest dilatation, most of which improve spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary obstructive megaureter."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_obstructive_megaureter-matrix",
+      "title": "Primary obstructive megaureter: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenitally dilated ureter caused by a narrowed, aperistaltic juxtavesical (distal) segment that impedes urine flow into the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal and bladder ultrasound to characterise ureteric and pelvicalyceal dilatation, MAG3 diuretic renogram to assess drainage and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Refluxing megaureter (primary vesicoureteric reflux), Ureteropelvic junction obstruction, Ureterocele causing ureteric dilatation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Expectant management with active surveillance for antenatally detected cases with preserved differential function and modest",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all megaureters are obstructive when reflux or a non-obstructive non-refluxing pattern may be responsible",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary obstructive megaureter."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_obstructive_megaureter-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Ureteric and pelvicalyceal dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAG3 diuretic renogram",
+          "cells": [
+            {
+              "text": "Drainage and differential function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram (MCUG)",
+          "cells": [
+            {
+              "text": "Reflux and bladder outlet pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ultrasound",
+          "cells": [
+            {
+              "text": "Antenatally detected dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Infection, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR urography in selected cases",
+          "cells": [
+            {
+              "text": "Anatomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_obstructive_megaureter-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Refluxing megaureter (primary vesicoureteric reflux)",
+          "cells": [
+            {
+              "text": "Vesicoureteric reflux"
+            },
+            {
+              "text": "Micturating cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior urethral valves with upper-tract dilatation",
+          "cells": [
+            {
+              "text": "Bladder outlet pathology"
+            },
+            {
+              "text": "Micturating cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-obstructive non-refluxing megaureter",
+          "cells": [
+            {
+              "text": "Non-obstructive, non-refluxing dilatation"
+            },
+            {
+              "text": "MAG3 diuretic renogram"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_obstructive_megaureter-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Active surveillance for antenatally detected cases with preserved function and modest dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Continuous, particularly in infancy, to reduce UTI risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Renal tract ultrasound and diuretic MAG3 renography for dilatation and split function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile UTI",
+          "cells": [
+            {
+              "text": "Prompt antibiotic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteric reimplantation",
+          "cells": [
+            {
+              "text": "Excision or tapering of the aperistaltic distal segment for persistent obstruction or deteriorating function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporising in infants",
+          "cells": [
+            {
+              "text": "JJ stenting, endoscopic balloon dilatation or cutaneous ureterostomy when too small for reimplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Paediatric urology and nephrology with renal function monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_obstructive_megaureter-dx-mgmt",
+      "title": "Diagnosis and management of Primary obstructive megaureter",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary obstructive megaureter: dilated ureter, often on antenatal scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Declining differential renal function, febrile UTI, or obstruction in a solitary kidney?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric urology review for urosepsis or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal and bladder ultrasound; MAG3 diuretic renogram; MCUG to exclude reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is obstruction confirmed with reflux excluded on MCUG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider refluxing megaureter, UPJ obstruction or valves; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management for preserved function and modest dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous antibiotic prophylaxis, particularly in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial ultrasound and diuretic MAG3 renography",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ureteric reimplantation for persistent obstruction or deteriorating function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term paediatric urology and nephrology follow-up with renal function monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

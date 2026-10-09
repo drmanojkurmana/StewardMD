@@ -1,171 +1,460 @@
 {
- "id": "essential_fatty_acid_deficiency",
- "name": "Essential fatty acid deficiency",
- "aliases": [
-  "EFAD"
- ],
- "class": "non_infective",
- "system": "Nutrition",
- "specialty": "Clinical nutrition / Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical nutrition references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral nutrition or severe fat malabsorption.",
-   "Both parent essential fatty acids cannot be synthesised de novo in humans and must be supplied by the diet.",
-   "The earliest and most characteristic sign is a dry, scaly dermatitis, often with alopecia, poor wound healing and increased susceptibility to infection.",
-   "The biochemical hallmark is a raised triene-to-tetraene ratio (the Holman index), reflecting accumulation of Mead acid as arachidonic acid falls.",
-   "Infants are especially vulnerable because of small fat reserves and the high demands of growth, and can become deficient within weeks of fat-free feeding.",
-   "Adults with generous adipose stores develop deficiency more slowly, over months of inadequate intake or malabsorption.",
-   "Predisposing conditions include cystic fibrosis, short bowel syndrome, cholestatic liver disease and very-low-fat diets.",
-   "The deficiency is readily corrected by enteral or intravenous lipid, and in some settings by topical linoleic-acid-rich oils."
+  "id": "essential_fatty_acid_deficiency",
+  "name": "Essential fatty acid deficiency",
+  "aliases": [
+    "EFAD"
   ],
-  "pathophysiology": "Linoleic acid (an omega-6 fatty acid) and alpha-linolenic acid (an omega-3 fatty acid) are the obligatory precursors of the longer-chain polyunsaturated fatty acids arachidonic, eicosapentaenoic and docosahexaenoic acid, and hence of the eicosanoids — prostaglandins, thromboxanes and leukotrienes — that regulate inflammation, vascular tone and platelet function. Linoleic acid is also incorporated into the acylceramides that maintain the epidermal permeability barrier, so its absence yields a defective stratum corneum with increased transepidermal water loss and the characteristic dermatitis. When essential fatty acids are scarce, the desaturation and elongation machinery instead diverts oleic acid towards eicosatrienoic (Mead) acid, so the ratio of this triene to the tetraene arachidonic acid rises, forming the basis of the diagnostic Holman index. The functional consequences extend beyond skin to impaired growth, immune competence and, in the developing infant, neurodevelopment.",
-  "additionalDifferentials": [
-   "Zinc deficiency and acrodermatitis enteropathica",
-   "Biotin deficiency",
-   "Protein-energy malnutrition and kwashiorkor",
-   "Niacin deficiency (pellagra)",
-   "Atopic dermatitis",
-   "Psoriasis"
-  ],
-  "additionalInvestigations": [
-   "Plasma fatty acid profile with the triene-to-tetraene ratio",
-   "Review of nutritional intake and the lipid content of any parenteral nutrition",
-   "Serum zinc and other trace elements",
-   "Serum albumin and prealbumin",
-   "Assessment for underlying malabsorption, including faecal fat and a coeliac screen",
-   "Skin biopsy where the diagnosis remains uncertain"
-  ],
-  "redFlags": [
-   "Worsening dermatitis and hair loss in a patient on long-term fat-free parenteral nutrition",
-   "Faltering growth in an infant receiving lipid-free feeds",
-   "Non-healing wounds in the setting of severe fat malabsorption"
-  ],
-  "prognosis": "The deficiency is typically reversed rapidly once essential fatty acids are restored, with resolution of the dermatitis over weeks; the outlook is excellent when the condition is recognised and the underlying nutritional problem addressed.",
-  "pitfalls": [
-   "Omitting lipid from long-term parenteral nutrition regimens.",
-   "Mistaking the rash for zinc deficiency or eczema and treating only the skin.",
-   "Not requesting a triene-to-tetraene ratio, which is what quantifies the deficiency.",
-   "Assuming topical oils alone will correct a systemic deficiency."
-  ],
-  "references": [
-   "Clinical nutrition references",
-   "Dermatology references",
-   "Paediatric nutrition references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources of linoleic and alpha-linolenic acid",
-   "Topical application of linoleic-acid-rich vegetable oils where intravenous lipid cannot be given",
-   "Identify and treat the underlying cause, such as fat malabsorption or prolonged fat-free feeding",
-   "Emollients and skin and wound care for the scaly dermatitis and impaired healing",
-   "Monitor the plasma triene-to-tetraene (Holman) ratio and clinical response to repletion",
-   "Address coexisting nutritional deficiencies including zinc and other trace elements, with dietetic input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "essential_fatty_acid_deficiency-pathway",
-   "title": "Essential fatty acid deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral nutrition or severe fat malabsorption.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Worsening dermatitis and hair loss in a patient on long-term fat-free parenteral nutrition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma fatty acid profile with the triene-to-tetraene ratio, Review of nutritional intake and the lipid content of any parenteral nutrition, Serum zinc and other trace elements"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources of linoleic and alpha-linolenic acid"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Omitting lipid from long-term parenteral nutrition regimens."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of essential fatty acid deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "essential_fatty_acid_deficiency-matrix",
-   "title": "Essential fatty acid deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition",
+  "specialty": "Clinical nutrition / Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical nutrition references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral nutrition or severe fat malabsorption.",
+      "Both parent essential fatty acids cannot be synthesised de novo in humans and must be supplied by the diet.",
+      "The earliest and most characteristic sign is a dry, scaly dermatitis, often with alopecia, poor wound healing and increased susceptibility to infection.",
+      "The biochemical hallmark is a raised triene-to-tetraene ratio (the Holman index), reflecting accumulation of Mead acid as arachidonic acid falls.",
+      "Infants are especially vulnerable because of small fat reserves and the high demands of growth, and can become deficient within weeks of fat-free feeding.",
+      "Adults with generous adipose stores develop deficiency more slowly, over months of inadequate intake or malabsorption.",
+      "Predisposing conditions include cystic fibrosis, short bowel syndrome, cholestatic liver disease and very-low-fat diets.",
+      "The deficiency is readily corrected by enteral or intravenous lipid, and in some settings by topical linoleic-acid-rich oils."
     ],
-    [
-     "Key Investigations",
-     "Plasma fatty acid profile with the triene-to-tetraene ratio, Review of nutritional intake and the lipid content of any parenteral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Linoleic acid (an omega-6 fatty acid) and alpha-linolenic acid (an omega-3 fatty acid) are the obligatory precursors of the longer-chain polyunsaturated fatty acids arachidonic, eicosapentaenoic and docosahexaenoic acid, and hence of the eicosanoids — prostaglandins, thromboxanes and leukotrienes — that regulate inflammation, vascular tone and platelet function. Linoleic acid is also incorporated into the acylceramides that maintain the epidermal permeability barrier, so its absence yields a defective stratum corneum with increased transepidermal water loss and the characteristic dermatitis. When essential fatty acids are scarce, the desaturation and elongation machinery instead diverts oleic acid towards eicosatrienoic (Mead) acid, so the ratio of this triene to the tetraene arachidonic acid rises, forming the basis of the diagnostic Holman index. The functional consequences extend beyond skin to impaired growth, immune competence and, in the developing infant, neurodevelopment.",
+    "additionalDifferentials": [
+      "Zinc deficiency and acrodermatitis enteropathica",
+      "Biotin deficiency",
+      "Protein-energy malnutrition and kwashiorkor",
+      "Niacin deficiency (pellagra)",
+      "Atopic dermatitis",
+      "Psoriasis"
     ],
-    [
-     "Primary Differentials",
-     "Zinc deficiency and acrodermatitis enteropathica, Biotin deficiency, Protein-energy malnutrition and kwashiorkor",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma fatty acid profile with the triene-to-tetraene ratio",
+      "Review of nutritional intake and the lipid content of any parenteral nutrition",
+      "Serum zinc and other trace elements",
+      "Serum albumin and prealbumin",
+      "Assessment for underlying malabsorption, including faecal fat and a coeliac screen",
+      "Skin biopsy where the diagnosis remains uncertain"
     ],
-    [
-     "Management Strategy",
-     "Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources",
-     "Core treatment modality"
+    "redFlags": [
+      "Worsening dermatitis and hair loss in a patient on long-term fat-free parenteral nutrition",
+      "Faltering growth in an infant receiving lipid-free feeds",
+      "Non-healing wounds in the setting of severe fat malabsorption"
     ],
-    [
-     "Clinical Pitfall",
-     "Omitting lipid from long-term parenteral nutrition regimens.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The deficiency is typically reversed rapidly once essential fatty acids are restored, with resolution of the dermatitis over weeks; the outlook is excellent when the condition is recognised and the underlying nutritional problem addressed.",
+    "pitfalls": [
+      "Omitting lipid from long-term parenteral nutrition regimens.",
+      "Mistaking the rash for zinc deficiency or eczema and treating only the skin.",
+      "Not requesting a triene-to-tetraene ratio, which is what quantifies the deficiency.",
+      "Assuming topical oils alone will correct a systemic deficiency."
+    ],
+    "references": [
+      "Clinical nutrition references",
+      "Dermatology references",
+      "Paediatric nutrition references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources of linoleic and alpha-linolenic acid",
+      "Topical application of linoleic-acid-rich vegetable oils where intravenous lipid cannot be given",
+      "Identify and treat the underlying cause, such as fat malabsorption or prolonged fat-free feeding",
+      "Emollients and skin and wound care for the scaly dermatitis and impaired healing",
+      "Monitor the plasma triene-to-tetraene (Holman) ratio and clinical response to repletion",
+      "Address coexisting nutritional deficiencies including zinc and other trace elements, with dietetic input"
     ]
-   ],
-   "caption": "Overview comparison matrix for essential fatty acid deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "essential-fatty-acid-deficiency-real-image",
-   "title": "Essential fatty acid deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "essential_fatty_acid_deficiency-pathway",
+      "title": "Essential fatty acid deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral nutrition or severe fat malabsorption.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Worsening dermatitis and hair loss in a patient on long-term fat-free parenteral nutrition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma fatty acid profile with the triene-to-tetraene ratio, Review of nutritional intake and the lipid content of any parenteral nutrition, Serum zinc and other trace elements"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources of linoleic and alpha-linolenic acid"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Omitting lipid from long-term parenteral nutrition regimens."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of essential fatty acid deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "essential_fatty_acid_deficiency-matrix",
+      "title": "Essential fatty acid deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Develops when intake of linoleic acid and alpha-linolenic acid is inadequate, classically during prolonged fat-free parenteral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma fatty acid profile with the triene-to-tetraene ratio, Review of nutritional intake and the lipid content of any parenteral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Zinc deficiency and acrodermatitis enteropathica, Biotin deficiency, Protein-energy malnutrition and kwashiorkor",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore essential fatty acids by adding intravenous lipid emulsion to parenteral nutrition or providing enteral and oral sources",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Omitting lipid from long-term parenteral nutrition regimens.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for essential fatty acid deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical nutrition references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "essential_fatty_acid_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma fatty acid profile with triene-to-tetraene ratio",
+          "cells": [
+            {
+              "text": "Raised ratio quantifies the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of parenteral nutrition lipid content",
+          "cells": [
+            {
+              "text": "Fat-free or lipid-poor feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum zinc and trace elements",
+          "cells": [
+            {
+              "text": "Coexisting trace element deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and prealbumin",
+          "cells": [
+            {
+              "text": "Nutritional status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malabsorption assessment (faecal fat, coeliac screen)",
+          "cells": [
+            {
+              "text": "Underlying malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis remains uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "essential_fatty_acid_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Zinc deficiency and acrodermatitis enteropathica",
+          "cells": [
+            {
+              "text": "A raised triene-to-tetraene ratio is the biochemical hallmark of this deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atopic dermatitis",
+          "cells": [
+            {
+              "text": "Dry, scaly dermatitis with alopecia and poor wound healing is the early sign here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "essential_fatty_acid_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous lipid emulsion",
+          "cells": [
+            {
+              "text": "Added to parenteral nutrition, or enteral and oral linoleic and alpha-linolenic sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical linoleic-acid-rich oils",
+          "cells": [
+            {
+              "text": "Where intravenous lipid cannot be given"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Fat malabsorption or prolonged fat-free feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and wound care",
+          "cells": [
+            {
+              "text": "Scaly dermatitis and impaired healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Triene-to-tetraene ratio and clinical response to repletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trace element and dietetic review",
+          "cells": [
+            {
+              "text": "Zinc and other trace elements"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "essential_fatty_acid_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Essential fatty acid deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dry scaly dermatitis, alopecia or poor healing on fat-free nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (worsening dermatitis on fat-free feeds, faltering growth, non-healing wounds)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Correct the feeding regimen and review with the nutrition team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma fatty acid profile with triene-to-tetraene ratio; intake and lipid review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised triene-to-tetraene ratio on the fatty acid profile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider zinc deficiency, biotin deficiency, atopic dermatitis or malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Add intravenous lipid emulsion to parenteral nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enteral or oral linoleic and alpha-linolenic sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat fat malabsorption or fat-free feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and wound care for dermatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor the ratio and clinical response",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Reverses rapidly once fatty acids are restored; dermatitis resolves over weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

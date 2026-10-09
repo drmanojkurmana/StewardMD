@@ -1,170 +1,410 @@
 {
- "id": "fox_fordyce_disease",
- "name": "Fox-Fordyce disease",
- "aliases": [
-  "apocrine miliaria",
-  "Fox-Fordyce disease"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular papules",
-   "Characteristically involves apocrine-bearing sites, most commonly the axillae and also the areolae, groin, and pubic area",
-   "Predominantly affects women of reproductive age, with pruritus often worse during emotional or thermal sweating",
-   "The affected skin may show reduced sweating and sometimes loss or breakage of hair within the involved area",
-   "Regarded as an apocrine form of miliaria caused by keratin obstruction of the apocrine duct, leading to duct rupture and inflammation",
-   "Symptoms may fluctuate with the menstrual cycle and often improve in pregnancy and after the menopause, implicating hormonal influences",
-   "Diagnosis is usually clinical, though biopsy can show the characteristic infundibular and apocrine-duct changes with perifollicular foam cells",
-   "Treatment is difficult and includes topical corticosteroids or calcineurin inhibitors, topical retinoids, and measures to reduce sweating, with hormonal and procedural options for resistant disease"
+  "id": "fox_fordyce_disease",
+  "name": "Fox-Fordyce disease",
+  "aliases": [
+    "apocrine miliaria",
+    "Fox-Fordyce disease"
   ],
-  "pathophysiology": "Fox-Fordyce disease is thought to begin with keratotic plugging and obstruction of the apocrine sweat-gland duct at its follicular opening. Retained secretion causes the duct to dilate and eventually rupture, releasing its contents into the surrounding dermis and provoking an intensely itchy inflammatory reaction with characteristic perifollicular foamy (lipid-laden) cells. A hormonal influence is suggested by its predominance in women, its variation with the menstrual cycle, and its tendency to improve during pregnancy and after the menopause, though the precise trigger for the initial ductal plugging remains uncertain.",
-  "additionalDifferentials": [
-   "Eccrine miliaria",
-   "Folliculitis",
-   "Syringoma",
-   "Keratosis pilaris",
-   "Lichen nitidus",
-   "Grover disease",
-   "Pseudofolliculitis"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on itchy papules confined to apocrine-bearing sites",
-   "Dermoscopy of the follicular papules",
-   "Skin biopsy in uncertain cases showing infundibular keratin plugging, apocrine-duct change, and perifollicular foam cells",
-   "Review of the hormonal and menstrual pattern of symptoms",
-   "Assessment of hair changes within the affected areas"
-  ],
-  "redFlags": [
-   "Secondary infection of excoriated, intensely pruritic lesions",
-   "Significant psychosocial impact from chronic itch in exposed and intimate areas",
-   "Diagnostic uncertainty requiring biopsy to exclude other follicular disorders"
-  ],
-  "prognosis": "Chronic and often persistent, though it tends to improve after the menopause and frequently during pregnancy; treatment controls symptoms with variable success rather than curing the condition.",
-  "pitfalls": [
-   "Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately",
-   "Underestimating the impact of chronic itch and cosmetic concern in intimate sites",
-   "Expecting a rapid or complete cure from topical therapy"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with topical anti-inflammatory therapy — short courses of topical corticosteroids, topical calcineurin inhibitors, and topical retinoids or clindamycin to relieve the itch and papules",
-   "Consider hormonal therapy with combined oral contraception, reflecting the disease's hormonal responsiveness",
-   "Use oral antihistamines to control pruritus",
-   "For refractory disease, offer procedural options such as botulinum toxin, laser, electrocautery, or surgical removal of affected apocrine tissue",
-   "Advise measures to reduce triggers of emotional and thermal sweating and to avoid skin irritation",
-   "Counsel that the condition is chronic but tends to improve during pregnancy and after the menopause, and refer to dermatology for specialist management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fox_fordyce_disease-pathway",
-   "title": "Fox-Fordyce disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular papules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Secondary infection of excoriated, intensely pruritic lesions",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on itchy papules confined to apocrine-bearing sites, Dermoscopy of the follicular papules, Skin biopsy in uncertain cases showing infundibular keratin plugging, apocrine-duct change, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with topical anti-inflammatory therapy - short courses of topical corticosteroids, topical calcineurin inhibitors, and topical retinoids or clindamycin to relieve the itch and papules"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fox-fordyce disease."
-  }
- ],
- "tables": [
-  {
-   "id": "fox_fordyce_disease-matrix",
-   "title": "Fox-Fordyce disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular papules",
+      "Characteristically involves apocrine-bearing sites, most commonly the axillae and also the areolae, groin, and pubic area",
+      "Predominantly affects women of reproductive age, with pruritus often worse during emotional or thermal sweating",
+      "The affected skin may show reduced sweating and sometimes loss or breakage of hair within the involved area",
+      "Regarded as an apocrine form of miliaria caused by keratin obstruction of the apocrine duct, leading to duct rupture and inflammation",
+      "Symptoms may fluctuate with the menstrual cycle and often improve in pregnancy and after the menopause, implicating hormonal influences",
+      "Diagnosis is usually clinical, though biopsy can show the characteristic infundibular and apocrine-duct changes with perifollicular foam cells",
+      "Treatment is difficult and includes topical corticosteroids or calcineurin inhibitors, topical retinoids, and measures to reduce sweating, with hormonal and procedural options for resistant disease"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on itchy papules confined to apocrine-bearing sites, Dermoscopy of the follicular papules, Skin biopsy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fox-Fordyce disease is thought to begin with keratotic plugging and obstruction of the apocrine sweat-gland duct at its follicular opening. Retained secretion causes the duct to dilate and eventually rupture, releasing its contents into the surrounding dermis and provoking an intensely itchy inflammatory reaction with characteristic perifollicular foamy (lipid-laden) cells. A hormonal influence is suggested by its predominance in women, its variation with the menstrual cycle, and its tendency to improve during pregnancy and after the menopause, though the precise trigger for the initial ductal plugging remains uncertain.",
+    "additionalDifferentials": [
+      "Eccrine miliaria",
+      "Folliculitis",
+      "Syringoma",
+      "Keratosis pilaris",
+      "Lichen nitidus",
+      "Grover disease",
+      "Pseudofolliculitis"
     ],
-    [
-     "Primary Differentials",
-     "Eccrine miliaria, Folliculitis, Syringoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on itchy papules confined to apocrine-bearing sites",
+      "Dermoscopy of the follicular papules",
+      "Skin biopsy in uncertain cases showing infundibular keratin plugging, apocrine-duct change, and perifollicular foam cells",
+      "Review of the hormonal and menstrual pattern of symptoms",
+      "Assessment of hair changes within the affected areas"
     ],
-    [
-     "Management Strategy",
-     "Begin with topical anti-inflammatory therapy - short courses of topical corticosteroids, topical calcineurin inhibitors, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Secondary infection of excoriated, intensely pruritic lesions",
+      "Significant psychosocial impact from chronic itch in exposed and intimate areas",
+      "Diagnostic uncertainty requiring biopsy to exclude other follicular disorders"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately",
-     "Prevent diagnostic or management error"
+    "prognosis": "Chronic and often persistent, though it tends to improve after the menopause and frequently during pregnancy; treatment controls symptoms with variable success rather than curing the condition.",
+    "pitfalls": [
+      "Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately",
+      "Underestimating the impact of chronic itch and cosmetic concern in intimate sites",
+      "Expecting a rapid or complete cure from topical therapy"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with topical anti-inflammatory therapy — short courses of topical corticosteroids, topical calcineurin inhibitors, and topical retinoids or clindamycin to relieve the itch and papules",
+      "Consider hormonal therapy with combined oral contraception, reflecting the disease's hormonal responsiveness",
+      "Use oral antihistamines to control pruritus",
+      "For refractory disease, offer procedural options such as botulinum toxin, laser, electrocautery, or surgical removal of affected apocrine tissue",
+      "Advise measures to reduce triggers of emotional and thermal sweating and to avoid skin irritation",
+      "Counsel that the condition is chronic but tends to improve during pregnancy and after the menopause, and refer to dermatology for specialist management"
     ]
-   ],
-   "caption": "Overview comparison matrix for fox-fordyce disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fox-fordyce-disease-real-image",
-   "title": "Fox-Fordyce disease: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "fox_fordyce_disease-pathway",
+      "title": "Fox-Fordyce disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular papules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Secondary infection of excoriated, intensely pruritic lesions",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on itchy papules confined to apocrine-bearing sites, Dermoscopy of the follicular papules, Skin biopsy in uncertain cases showing infundibular keratin plugging, apocrine-duct change, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with topical anti-inflammatory therapy - short courses of topical corticosteroids, topical calcineurin inhibitors, and topical retinoids or clindamycin to relieve the itch and papules"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fox-fordyce disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fox_fordyce_disease-matrix",
+      "title": "Fox-Fordyce disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic disorder of the apocrine sweat glands producing intensely itchy, dome-shaped, skin-coloured to yellowish follicular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on itchy papules confined to apocrine-bearing sites, Dermoscopy of the follicular papules, Skin biopsy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Eccrine miliaria, Folliculitis, Syringoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with topical anti-inflammatory therapy - short courses of topical corticosteroids, topical calcineurin inhibitors, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for simple folliculitis or eccrine miliaria and treating inappropriately",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fox-fordyce disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fox_fordyce_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Itchy papules confined to apocrine-bearing sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy of follicular papules",
+          "cells": [
+            {
+              "text": "Assesses the follicular papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in uncertain cases",
+          "cells": [
+            {
+              "text": "Infundibular keratin plugging, apocrine-duct change and perifollicular foam cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of hormonal and menstrual pattern",
+          "cells": [
+            {
+              "text": "Relates symptoms to the hormonal cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of hair changes",
+          "cells": [
+            {
+              "text": "Changes within the affected areas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fox_fordyce_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Short courses of topical corticosteroids, calcineurin inhibitors, and topical retinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal therapy",
+          "cells": [
+            {
+              "text": "Combined oral contraception, reflecting hormonal responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Control pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procedural options for refractory disease",
+          "cells": [
+            {
+              "text": "Botulinum toxin, laser, electrocautery or surgical removal of apocrine tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger reduction",
+          "cells": [
+            {
+              "text": "Reduce emotional and thermal sweating; avoid skin irritation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling and dermatology referral",
+          "cells": [
+            {
+              "text": "Chronic, but tends to improve during pregnancy and after the menopause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fox_fordyce_disease-dx-mgmt",
+      "title": "Diagnosis and management of Fox-Fordyce disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fox-Fordyce disease: itchy papules in apocrine-bearing sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (secondary infection, marked psychosocial impact, diagnostic doubt)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat secondary infection; biopsy to exclude other follicular disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment, dermoscopy and biopsy if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the clinical features and biopsy findings confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider folliculitis, eccrine miliaria, syringoma or Grover disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Short courses of topical corticosteroids, calcineurin inhibitors or retinoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combined oral contraception, given hormonal responsiveness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antihistamines to control pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Botulinum toxin, laser or surgical removal of apocrine tissue if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and often persistent; tends to improve in pregnancy and after the menopause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

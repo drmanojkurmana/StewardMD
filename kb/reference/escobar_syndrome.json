@@ -1,173 +1,460 @@
 {
- "id": "escobar_syndrome",
- "name": "Escobar syndrome",
- "aliases": [
-  "non-lethal multiple pterygium syndrome",
-  "multiple pterygium syndrome, Escobar variant",
-  "Escobar variant multiple pterygium syndrome",
-  "CHRNG"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
-   "Joint contractures, particularly flexion contractures crossed by the pterygia, limit movement, alongside talipes and camptodactyly",
-   "Progressive scoliosis and vertebral anomalies are common and require orthopaedic surveillance",
-   "Caused by autosomal recessive variants in CHRNG, encoding the gamma subunit of the foetal acetylcholine receptor at the neuromuscular junction",
-   "Because the foetal (gamma) receptor is replaced by the adult receptor after birth, the neuromuscular defect is largely limited to the prenatal period, so the condition is non-progressive postnatally",
-   "Facial features may include ptosis, downslanting palpebral fissures, a small mouth and micrognathia",
-   "Management is supportive with physiotherapy, splinting and surgical release, noting that pterygia often contain neurovascular structures that complicate surgery"
+  "id": "escobar_syndrome",
+  "name": "Escobar syndrome",
+  "aliases": [
+    "non-lethal multiple pterygium syndrome",
+    "multiple pterygium syndrome, Escobar variant",
+    "Escobar variant multiple pterygium syndrome",
+    "CHRNG"
   ],
-  "pathophysiology": "Escobar syndrome is caused by loss-of-function variants in CHRNG, the gene for the gamma subunit of the acetylcholine receptor. This subunit is part of the foetal-type receptor that mediates neuromuscular transmission before birth, when it is normally replaced by the adult epsilon subunit. Deficient foetal neuromuscular transmission reduces foetal movement during development, producing joint contractures and the skin webs (pterygia) that bridge the flexed joints. Because the adult receptor takes over after birth, there is no ongoing myasthenic weakness, and the phenotype is essentially static, distinguishing the Escobar variant from the lethal form.",
-  "additionalDifferentials": [
-   "Lethal multiple pterygium syndrome",
-   "Distal arthrogryposis syndromes",
-   "Amyoplasia",
-   "Congenital myasthenic syndromes",
-   "Klippel-Feil syndrome when neck webbing and vertebral fusion predominate",
-   "Noonan or Turner syndrome when neck webbing is isolated"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination mapping the distribution of pterygia and contractures",
-   "Molecular genetic testing for CHRNG and a multiple pterygium/neuromuscular junction panel",
-   "Spinal radiographs and monitoring for scoliosis and vertebral anomalies",
-   "Radiographs of affected limbs to plan surgery",
-   "Prenatal ultrasound in at-risk pregnancies for contractures and webbing",
-   "Respiratory and feeding assessment where facial or thoracic involvement is present"
-  ],
-  "redFlags": [
-   "Rapidly progressive scoliosis compromising respiratory function",
-   "Neurovascular injury risk during pterygium release surgery",
-   "Restrictive lung disease from thoracic and spinal deformity",
-   "Feeding or airway difficulty in infants with facial involvement"
-  ],
-  "prognosis": "Lifespan is usually normal and intellect is typically preserved; however affected individuals face significant orthopaedic morbidity from contractures and progressive scoliosis, and surgical correction of pterygia is challenging because of contained neurovascular bundles.",
-  "pitfalls": [
-   "Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome",
-   "Operating on pterygia without recognising that they may contain nerves and vessels",
-   "Under-monitoring for progressive scoliosis",
-   "Missing the autosomal recessive inheritance and its recurrence implications"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Gorlin's Syndromes of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia",
-   "Orthopaedic surgical release of contractures and staged correction of pterygia, mindful of the contained neurovascular bundles within the webs",
-   "Spinal surveillance with bracing or corrective surgery for progressive scoliosis and vertebral anomalies",
-   "Respiratory and feeding or nutritional support where facial, oropharyngeal or thoracic involvement is present",
-   "Coordinate multidisciplinary care across clinical genetics, orthopaedics, physiotherapy and plastic surgery",
-   "Autosomal recessive genetic counselling, with prenatal ultrasound in at-risk pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "escobar_syndrome-pathway",
-   "title": "Escobar syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive scoliosis compromising respiratory function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination mapping the distribution of pterygia and contractures, Molecular genetic testing for CHRNG and a multiple pterygium/neuromuscular junction panel, Spinal radiographs and monitoring for scoliosis and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of escobar syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "escobar_syndrome-matrix",
-   "title": "Escobar syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
+      "Joint contractures, particularly flexion contractures crossed by the pterygia, limit movement, alongside talipes and camptodactyly",
+      "Progressive scoliosis and vertebral anomalies are common and require orthopaedic surveillance",
+      "Caused by autosomal recessive variants in CHRNG, encoding the gamma subunit of the foetal acetylcholine receptor at the neuromuscular junction",
+      "Because the foetal (gamma) receptor is replaced by the adult receptor after birth, the neuromuscular defect is largely limited to the prenatal period, so the condition is non-progressive postnatally",
+      "Facial features may include ptosis, downslanting palpebral fissures, a small mouth and micrognathia",
+      "Management is supportive with physiotherapy, splinting and surgical release, noting that pterygia often contain neurovascular structures that complicate surgery"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination mapping the distribution of pterygia and contractures, Molecular genetic testing for CHRNG and a multiple",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Escobar syndrome is caused by loss-of-function variants in CHRNG, the gene for the gamma subunit of the acetylcholine receptor. This subunit is part of the foetal-type receptor that mediates neuromuscular transmission before birth, when it is normally replaced by the adult epsilon subunit. Deficient foetal neuromuscular transmission reduces foetal movement during development, producing joint contractures and the skin webs (pterygia) that bridge the flexed joints. Because the adult receptor takes over after birth, there is no ongoing myasthenic weakness, and the phenotype is essentially static, distinguishing the Escobar variant from the lethal form.",
+    "additionalDifferentials": [
+      "Lethal multiple pterygium syndrome",
+      "Distal arthrogryposis syndromes",
+      "Amyoplasia",
+      "Congenital myasthenic syndromes",
+      "Klippel-Feil syndrome when neck webbing and vertebral fusion predominate",
+      "Noonan or Turner syndrome when neck webbing is isolated"
     ],
-    [
-     "Primary Differentials",
-     "Lethal multiple pterygium syndrome, Distal arthrogryposis syndromes, Amyoplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination mapping the distribution of pterygia and contractures",
+      "Molecular genetic testing for CHRNG and a multiple pterygium/neuromuscular junction panel",
+      "Spinal radiographs and monitoring for scoliosis and vertebral anomalies",
+      "Radiographs of affected limbs to plan surgery",
+      "Prenatal ultrasound in at-risk pregnancies for contractures and webbing",
+      "Respiratory and feeding assessment where facial or thoracic involvement is present"
     ],
-    [
-     "Management Strategy",
-     "Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive scoliosis compromising respiratory function",
+      "Neurovascular injury risk during pterygium release surgery",
+      "Restrictive lung disease from thoracic and spinal deformity",
+      "Feeding or airway difficulty in infants with facial involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifespan is usually normal and intellect is typically preserved; however affected individuals face significant orthopaedic morbidity from contractures and progressive scoliosis, and surgical correction of pterygia is challenging because of contained neurovascular bundles.",
+    "pitfalls": [
+      "Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome",
+      "Operating on pterygia without recognising that they may contain nerves and vessels",
+      "Under-monitoring for progressive scoliosis",
+      "Missing the autosomal recessive inheritance and its recurrence implications"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Gorlin's Syndromes of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia",
+      "Orthopaedic surgical release of contractures and staged correction of pterygia, mindful of the contained neurovascular bundles within the webs",
+      "Spinal surveillance with bracing or corrective surgery for progressive scoliosis and vertebral anomalies",
+      "Respiratory and feeding or nutritional support where facial, oropharyngeal or thoracic involvement is present",
+      "Coordinate multidisciplinary care across clinical genetics, orthopaedics, physiotherapy and plastic surgery",
+      "Autosomal recessive genetic counselling, with prenatal ultrasound in at-risk pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for escobar syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "escobar-syndrome-real-image",
-   "title": "Escobar syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "escobar_syndrome-pathway",
+      "title": "Escobar syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive scoliosis compromising respiratory function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination mapping the distribution of pterygia and contractures, Molecular genetic testing for CHRNG and a multiple pterygium/neuromuscular junction panel, Spinal radiographs and monitoring for scoliosis and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of escobar syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "escobar_syndrome-matrix",
+      "title": "Escobar syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-lethal multiple pterygium syndrome characterised by webbing (pterygia) across the neck, axillae, elbows, knees and fingers",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination mapping the distribution of pterygia and contractures, Molecular genetic testing for CHRNG and a multiple",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lethal multiple pterygium syndrome, Distal arthrogryposis syndromes, Amyoplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Physiotherapy, serial stretching and splinting or orthoses to preserve joint range against the contractures and pterygia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the non-lethal Escobar variant with the lethal multiple pterygium syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for escobar syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "escobar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination mapping pterygia and contractures",
+          "cells": [
+            {
+              "text": "Distribution of pterygia and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHRNG and multiple pterygium panel testing",
+          "cells": [
+            {
+              "text": "Causative variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Scoliosis and vertebral anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of affected limbs",
+          "cells": [
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal ultrasound in at-risk pregnancies",
+          "cells": [
+            {
+              "text": "Contractures and webbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and feeding assessment",
+          "cells": [
+            {
+              "text": "Facial or thoracic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "escobar_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lethal multiple pterygium syndrome",
+          "cells": [
+            {
+              "text": "The non-lethal Escobar variant must not be confused with it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Feil syndrome",
+          "cells": [
+            {
+              "text": "Neck webbing and vertebral fusion predominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan or Turner syndrome",
+          "cells": [
+            {
+              "text": "Neck webbing is isolated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "escobar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy, serial stretching and splinting",
+          "cells": [
+            {
+              "text": "Preserves joint range against contractures and pterygia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic release",
+          "cells": [
+            {
+              "text": "Contractures, and staged correction of pterygia mindful of neurovascular bundles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surveillance",
+          "cells": [
+            {
+              "text": "Bracing or corrective surgery for progressive scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and feeding support",
+          "cells": [
+            {
+              "text": "Facial, oropharyngeal or thoracic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Clinical genetics, orthopaedics, physiotherapy and plastic surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; prenatal ultrasound in at-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "escobar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Escobar syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neck, axillary or elbow webbing with joint contractures from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid scoliosis, respiratory, feeding or airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Respiratory and feeding support; spinal and airway review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Map pterygia; CHRNG testing; spinal and limb radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CHRNG variant or typical pterygium pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lethal multiple pterygium syndrome or distal arthrogryposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, stretching and splinting for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staged orthopaedic release, protecting neurovascular structures in the webs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal surveillance; bracing or surgery for progressive scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and prenatal ultrasound in at-risk pregnancies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifespan usually normal; significant orthopaedic morbidity from contractures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

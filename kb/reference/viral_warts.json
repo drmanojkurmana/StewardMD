@@ -1,175 +1,415 @@
 {
- "id": "viral_warts",
- "name": "Viral Warts",
- "aliases": [
-  "verruca",
-  "verruca vulgaris",
-  "common wart",
-  "plantar wart",
-  "verruca plantaris",
-  "HPV wart"
- ],
- "class": "infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed capillaries",
-   "Paring the surface of a plantar wart reveals these capillary dots and interrupts the skin lines, helping to distinguish it from a corn or callus",
-   "Morphological variants include flat (plane) warts, filiform warts around the face, and mosaic plantar warts",
-   "Transmission is by direct contact and via contaminated moist surfaces such as swimming-pool floors, with autoinoculation and the Koebner phenomenon spreading lesions",
-   "Most warts in healthy people resolve spontaneously as immunity develops, so a period of watchful waiting is reasonable",
-   "First-line treatments such as topical keratolytics and cryotherapy work by physical destruction and stimulating an immune response, and typically require repeated, persistent application",
-   "Widespread, recalcitrant, or unusual warts should prompt consideration of immunosuppression",
-   "Genital warts require assessment for sexually transmitted infection, and their prevention links to HPV vaccination"
+  "id": "viral_warts",
+  "name": "Viral Warts",
+  "aliases": [
+    "verruca",
+    "verruca vulgaris",
+    "common wart",
+    "plantar wart",
+    "verruca plantaris",
+    "HPV wart"
   ],
-  "pathophysiology": "Viral warts result from infection of keratinocytes by human papillomavirus, which enters through microabrasions and drives epidermal proliferation and hyperkeratosis. Different HPV genotypes show tropism for particular sites and clinical morphologies. The virus establishes infection in the basal layer and completes its life cycle as keratinocytes differentiate towards the surface, producing the koilocytic changes seen histologically. Clearance depends on an effective cell-mediated immune response, which explains both spontaneous resolution over time and the persistence or proliferation of warts in immunocompromised patients. Certain high-risk genital genotypes carry oncogenic potential.",
-  "additionalDifferentials": [
-   "Corn or callus (skin lines preserved, no capillary dots)",
-   "Molluscum contagiosum",
-   "Seborrhoeic keratosis",
-   "Actinic keratosis or squamous cell carcinoma in a persistent lesion on sun-damaged skin",
-   "Acral or amelanotic melanoma masquerading as a plantar wart",
-   "Knuckle pads or other keratotic papules"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy",
-   "Skin biopsy for atypical, persistent, or rapidly changing lesions to exclude malignancy",
-   "Assessment for immunosuppression when warts are extensive or recalcitrant",
-   "Sexual health screening for anogenital warts"
-  ],
-  "redFlags": [
-   "A verrucous or ulcerated lesion that is enlarging, bleeding, or failing to respond, raising concern for squamous cell carcinoma",
-   "A pigmented or irregular acral lesion that could be melanoma rather than a wart",
-   "Numerous or atypical warts suggesting underlying immunosuppression, including epidermodysplasia verruciformis",
-   "Anogenital warts in a child prompting safeguarding consideration"
-  ],
-  "prognosis": "The outlook is generally excellent, with most warts in immunocompetent people clearing spontaneously within one to two years; some are stubborn and require repeated treatment, and clearance is slower and relapse more likely where immunity is impaired.",
-  "pitfalls": [
-   "Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy",
-   "Confusing a plantar wart with a simple corn or callus",
-   "Persisting with destructive treatments that cause more scarring and pain than the wart itself, particularly in children",
-   "Failing to consider immunosuppression in widespread or treatment-resistant disease"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time",
-   "First-line topical keratolytics such as salicylic acid and cryotherapy, applied persistently and repeatedly, which act by physical destruction and immune stimulation",
-   "Second-line options for resistant lesions including topical imiquimod, 5-fluorouracil, intralesional bleomycin, podophyllotoxin for anogenital warts, or laser ablation",
-   "Regular paring of hyperkeratotic and plantar lesions to reduce bulk and aid treatment",
-   "Assess for and manage immunosuppression when warts are extensive or recalcitrant",
-   "Skin biopsy for atypical, persistent or rapidly changing lesions to exclude malignancy",
-   "Sexual health screening for anogenital warts and promotion of HPV vaccination for prevention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "viral_warts-pathway",
-   "title": "Viral Warts: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed capillaries",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A verrucous or ulcerated lesion that is enlarging, bleeding, or failing to respond, raising concern for squamous cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy, Skin biopsy for atypical, persistent, or rapidly changing lesions to exclude malignancy, Assessment for immunosuppression when warts are"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of viral warts."
-  }
- ],
- "tables": [
-  {
-   "id": "viral_warts-matrix",
-   "title": "Viral Warts: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed capillaries",
+      "Paring the surface of a plantar wart reveals these capillary dots and interrupts the skin lines, helping to distinguish it from a corn or callus",
+      "Morphological variants include flat (plane) warts, filiform warts around the face, and mosaic plantar warts",
+      "Transmission is by direct contact and via contaminated moist surfaces such as swimming-pool floors, with autoinoculation and the Koebner phenomenon spreading lesions",
+      "Most warts in healthy people resolve spontaneously as immunity develops, so a period of watchful waiting is reasonable",
+      "First-line treatments such as topical keratolytics and cryotherapy work by physical destruction and stimulating an immune response, and typically require repeated, persistent application",
+      "Widespread, recalcitrant, or unusual warts should prompt consideration of immunosuppression",
+      "Genital warts require assessment for sexually transmitted infection, and their prevention links to HPV vaccination"
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy, Skin biopsy for atypical, persistent, or rapidly",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Viral warts result from infection of keratinocytes by human papillomavirus, which enters through microabrasions and drives epidermal proliferation and hyperkeratosis. Different HPV genotypes show tropism for particular sites and clinical morphologies. The virus establishes infection in the basal layer and completes its life cycle as keratinocytes differentiate towards the surface, producing the koilocytic changes seen histologically. Clearance depends on an effective cell-mediated immune response, which explains both spontaneous resolution over time and the persistence or proliferation of warts in immunocompromised patients. Certain high-risk genital genotypes carry oncogenic potential.",
+    "additionalDifferentials": [
+      "Corn or callus (skin lines preserved, no capillary dots)",
+      "Molluscum contagiosum",
+      "Seborrhoeic keratosis",
+      "Actinic keratosis or squamous cell carcinoma in a persistent lesion on sun-damaged skin",
+      "Acral or amelanotic melanoma masquerading as a plantar wart",
+      "Knuckle pads or other keratotic papules"
     ],
-    [
-     "Primary Differentials",
-     "Corn or callus (skin lines preserved, no capillary dots), Molluscum contagiosum, Seborrhoeic keratosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy",
+      "Skin biopsy for atypical, persistent, or rapidly changing lesions to exclude malignancy",
+      "Assessment for immunosuppression when warts are extensive or recalcitrant",
+      "Sexual health screening for anogenital warts"
     ],
-    [
-     "Management Strategy",
-     "Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time",
-     "Core treatment modality"
+    "redFlags": [
+      "A verrucous or ulcerated lesion that is enlarging, bleeding, or failing to respond, raising concern for squamous cell carcinoma",
+      "A pigmented or irregular acral lesion that could be melanoma rather than a wart",
+      "Numerous or atypical warts suggesting underlying immunosuppression, including epidermodysplasia verruciformis",
+      "Anogenital warts in a child prompting safeguarding consideration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is generally excellent, with most warts in immunocompetent people clearing spontaneously within one to two years; some are stubborn and require repeated treatment, and clearance is slower and relapse more likely where immunity is impaired.",
+    "pitfalls": [
+      "Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy",
+      "Confusing a plantar wart with a simple corn or callus",
+      "Persisting with destructive treatments that cause more scarring and pain than the wart itself, particularly in children",
+      "Failing to consider immunosuppression in widespread or treatment-resistant disease"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time",
+      "First-line topical keratolytics such as salicylic acid and cryotherapy, applied persistently and repeatedly, which act by physical destruction and immune stimulation",
+      "Second-line options for resistant lesions including topical imiquimod, 5-fluorouracil, intralesional bleomycin, podophyllotoxin for anogenital warts, or laser ablation",
+      "Regular paring of hyperkeratotic and plantar lesions to reduce bulk and aid treatment",
+      "Assess for and manage immunosuppression when warts are extensive or recalcitrant",
+      "Skin biopsy for atypical, persistent or rapidly changing lesions to exclude malignancy",
+      "Sexual health screening for anogenital warts and promotion of HPV vaccination for prevention"
     ]
-   ],
-   "caption": "Overview comparison matrix for viral warts."
-  }
- ],
- "diagrams": [
-  {
-   "id": "viral-warts-real-image",
-   "title": "Viral Warts: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "viral_warts-pathway",
+      "title": "Viral Warts: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed capillaries",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A verrucous or ulcerated lesion that is enlarging, bleeding, or failing to respond, raising concern for squamous cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy, Skin biopsy for atypical, persistent, or rapidly changing lesions to exclude malignancy, Assessment for immunosuppression when warts are"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of viral warts."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "viral_warts-matrix",
+      "title": "Viral Warts: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Common warts are firm, hyperkeratotic papules with a rough surface, often studded with tiny black dots representing thrombosed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is usually clinical, aided by paring the lesion and by dermoscopy, Skin biopsy for atypical, persistent, or rapidly",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Corn or callus (skin lines preserved, no capillary dots), Molluscum contagiosum, Seborrhoeic keratosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Watchful waiting is reasonable for most warts in healthy people, since immunity clears them spontaneously over time",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing an amelanotic melanoma or squamous cell carcinoma as a resistant wart and delaying biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for viral warts."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "viral_warts-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paring of the lesion",
+          "cells": [
+            {
+              "text": "Thrombosed capillary dots within the wart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Diagnostic aid for the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical, persistent or rapidly changing lesions to exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for immunosuppression",
+          "cells": [
+            {
+              "text": "Extensive or recurrent warts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_warts-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Corn or callus",
+          "cells": [
+            {
+              "text": "Skin lines preserved and no capillary dots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic keratosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acral or amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Pigmented or irregular acral lesion; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_warts-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Reasonable for most warts in healthy people; immunity clears them over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics",
+          "cells": [
+            {
+              "text": "Salicylic acid applied persistently and repeatedly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryotherapy",
+          "cells": [
+            {
+              "text": "Repeated application for resistant warts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "viral_warts-dx-mgmt",
+      "title": "Diagnosis and management of Viral Warts",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected viral wart: firm hyperkeratotic papule with black dots on paring",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (enlarging, bleeding or ulcerated lesion, or pigmented acral lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude squamous cell carcinoma or melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis, paring, dermoscopy, biopsy if atypical or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does paring show capillary dots in a firm papule?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider corn, callus, molluscum or seborrhoeic keratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Watchful waiting for most warts in healthy people",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical salicylic acid applied persistently and repeatedly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cryotherapy for resistant warts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most warts clear spontaneously; persistent lesions need biopsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

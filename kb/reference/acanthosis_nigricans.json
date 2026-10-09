@@ -1,174 +1,454 @@
 {
- "id": "acanthosis_nigricans",
- "name": "Acanthosis nigricans",
- "aliases": [
-  "AN",
-  "acanthosis nigricans"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck, axillae, groin, and inframammary folds",
-   "Most commonly a marker of insulin resistance, associated with obesity, type 2 diabetes, polycystic ovary syndrome, and the metabolic syndrome",
-   "Skin tags (acrochordons) frequently accompany the flexural changes",
-   "Can be drug-induced (for example by systemic corticosteroids, nicotinic acid, or oestrogens) and forms part of several genetic and endocrine syndromes",
-   "Malignant acanthosis nigricans is a paraneoplastic form that is abrupt in onset, extensive, and often involves mucous membranes, the lips, and the palms (tripe palms)",
-   "The commonest tumour associated with malignant acanthosis nigricans is gastric, and other gastrointestinal, adenocarcinoma",
-   "Circulating insulin acting on keratinocyte and fibroblast growth-factor receptors drives the epidermal proliferation",
-   "Management targets the underlying cause: weight reduction and improving insulin sensitivity, stopping a causative drug, or treating an underlying malignancy, with topical retinoids and keratolytics as cosmetic adjuncts"
+  "id": "acanthosis_nigricans",
+  "name": "Acanthosis nigricans",
+  "aliases": [
+    "AN",
+    "acanthosis nigricans"
   ],
-  "pathophysiology": "In most cases circulating insulin, present at high concentrations because of insulin resistance, activates insulin-like growth-factor receptors on keratinocytes and dermal fibroblasts, promoting their proliferation and producing the epidermal hyperplasia (papillomatosis and hyperkeratosis) that gives the velvety thickening. In paraneoplastic disease, tumour-derived growth factors such as transforming growth factor-alpha are thought to stimulate the same pathways, which accounts for the abrupt and extensive changes and the mucosal and palmar involvement. Drug-induced and syndromic forms reflect analogous receptor activation through pharmacological or genetic mechanisms.",
-  "additionalDifferentials": [
-   "Confluent and reticulated papillomatosis",
-   "Pityriasis versicolor",
-   "Retention hyperkeratosis / terra firma-forme dermatosis",
-   "Dowling-Degos disease",
-   "Post-inflammatory hyperpigmentation",
-   "Flexural ichthyosis"
-  ],
-  "additionalInvestigations": [
-   "Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance",
-   "Lipid profile and assessment for the metabolic syndrome",
-   "Investigation for polycystic ovary syndrome (androgen levels, pelvic ultrasound) in appropriate women",
-   "Age-appropriate malignancy screening with gastrointestinal evaluation and endoscopy when malignant acanthosis nigricans is suspected",
-   "Review of the drug history for causative agents",
-   "Skin biopsy in atypical cases showing hyperkeratosis and papillomatosis"
-  ],
-  "redFlags": [
-   "Abrupt onset with rapid, extensive spread, especially in a non-obese or older patient, suggesting malignancy",
-   "Mucosal, lip, or palmar (tripe palms) involvement pointing to paraneoplastic disease",
-   "Associated weight loss, gastrointestinal symptoms, or other constitutional features",
-   "Unexplained acanthosis nigricans in a lean patient warranting a search for an endocrinopathy or tumour"
-  ],
-  "prognosis": "Benign acanthosis nigricans tends to improve with treatment of insulin resistance or withdrawal of a causative drug; malignant acanthosis nigricans carries the poor prognosis of the associated, often advanced, internal cancer.",
-  "pitfalls": [
-   "Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome",
-   "Failing to consider malignancy when the eruption is sudden, extensive, or in an atypical patient",
-   "Missing tripe palms and mucosal signs of paraneoplastic disease",
-   "Confusing it with confluent and reticulated papillomatosis or pityriasis versicolor"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [
-   "confluent_reticulated_papillomatosis"
-  ],
-  "management": [
-   "Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control with metformin in associated type 2 diabetes or polycystic ovary syndrome",
-   "Withdraw any causative drug such as systemic corticosteroids, nicotinic acid or oestrogens where a drug-induced form is identified",
-   "Topical measures to improve the plaques cosmetically, including topical retinoids, keratolytics such as urea or ammonium lactate, and topical vitamin D analogues",
-   "For suspected malignant acanthosis nigricans, urgently investigate for an underlying adenocarcinoma (particularly gastric) and direct treatment at that tumour",
-   "Address associated features of the metabolic syndrome, including dyslipidaemia and hypertension, and manage polycystic ovary syndrome with combined hormonal contraception or an anti-androgen where appropriate",
-   "Dermatology and endocrinology referral with monitoring of glycaemic and metabolic status over time"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acanthosis_nigricans-pathway",
-   "title": "Acanthosis nigricans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck, axillae, groin, and inframammary folds",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abrupt onset with rapid, extensive spread, especially in a non-obese or older patient, suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance, Lipid profile and assessment for the metabolic syndrome, Investigation for polycystic ovary syndrome (androgen levels, pelvic ultrasound) in"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control with metformin in associated type 2 diabetes or polycystic ovary syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acanthosis nigricans."
-  }
- ],
- "tables": [
-  {
-   "id": "acanthosis_nigricans-matrix",
-   "title": "Acanthosis nigricans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck, axillae, groin, and inframammary folds",
+      "Most commonly a marker of insulin resistance, associated with obesity, type 2 diabetes, polycystic ovary syndrome, and the metabolic syndrome",
+      "Skin tags (acrochordons) frequently accompany the flexural changes",
+      "Can be drug-induced (for example by systemic corticosteroids, nicotinic acid, or oestrogens) and forms part of several genetic and endocrine syndromes",
+      "Malignant acanthosis nigricans is a paraneoplastic form that is abrupt in onset, extensive, and often involves mucous membranes, the lips, and the palms (tripe palms)",
+      "The commonest tumour associated with malignant acanthosis nigricans is gastric, and other gastrointestinal, adenocarcinoma",
+      "Circulating insulin acting on keratinocyte and fibroblast growth-factor receptors drives the epidermal proliferation",
+      "Management targets the underlying cause: weight reduction and improving insulin sensitivity, stopping a causative drug, or treating an underlying malignancy, with topical retinoids and keratolytics as cosmetic adjuncts"
     ],
-    [
-     "Key Investigations",
-     "Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance, Lipid profile and assessment for the metabolic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In most cases circulating insulin, present at high concentrations because of insulin resistance, activates insulin-like growth-factor receptors on keratinocytes and dermal fibroblasts, promoting their proliferation and producing the epidermal hyperplasia (papillomatosis and hyperkeratosis) that gives the velvety thickening. In paraneoplastic disease, tumour-derived growth factors such as transforming growth factor-alpha are thought to stimulate the same pathways, which accounts for the abrupt and extensive changes and the mucosal and palmar involvement. Drug-induced and syndromic forms reflect analogous receptor activation through pharmacological or genetic mechanisms.",
+    "additionalDifferentials": [
+      "Confluent and reticulated papillomatosis",
+      "Pityriasis versicolor",
+      "Retention hyperkeratosis / terra firma-forme dermatosis",
+      "Dowling-Degos disease",
+      "Post-inflammatory hyperpigmentation",
+      "Flexural ichthyosis"
     ],
-    [
-     "Primary Differentials",
-     "Confluent and reticulated papillomatosis, Pityriasis versicolor, Retention hyperkeratosis / terra firma-forme dermatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance",
+      "Lipid profile and assessment for the metabolic syndrome",
+      "Investigation for polycystic ovary syndrome (androgen levels, pelvic ultrasound) in appropriate women",
+      "Age-appropriate malignancy screening with gastrointestinal evaluation and endoscopy when malignant acanthosis nigricans is suspected",
+      "Review of the drug history for causative agents",
+      "Skin biopsy in atypical cases showing hyperkeratosis and papillomatosis"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control",
-     "Core treatment modality"
+    "redFlags": [
+      "Abrupt onset with rapid, extensive spread, especially in a non-obese or older patient, suggesting malignancy",
+      "Mucosal, lip, or palmar (tripe palms) involvement pointing to paraneoplastic disease",
+      "Associated weight loss, gastrointestinal symptoms, or other constitutional features",
+      "Unexplained acanthosis nigricans in a lean patient warranting a search for an endocrinopathy or tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign acanthosis nigricans tends to improve with treatment of insulin resistance or withdrawal of a causative drug; malignant acanthosis nigricans carries the poor prognosis of the associated, often advanced, internal cancer.",
+    "pitfalls": [
+      "Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome",
+      "Failing to consider malignancy when the eruption is sudden, extensive, or in an atypical patient",
+      "Missing tripe palms and mucosal signs of paraneoplastic disease",
+      "Confusing it with confluent and reticulated papillomatosis or pityriasis versicolor"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [
+      "confluent_reticulated_papillomatosis"
+    ],
+    "management": [
+      "Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control with metformin in associated type 2 diabetes or polycystic ovary syndrome",
+      "Withdraw any causative drug such as systemic corticosteroids, nicotinic acid or oestrogens where a drug-induced form is identified",
+      "Topical measures to improve the plaques cosmetically, including topical retinoids, keratolytics such as urea or ammonium lactate, and topical vitamin D analogues",
+      "For suspected malignant acanthosis nigricans, urgently investigate for an underlying adenocarcinoma (particularly gastric) and direct treatment at that tumour",
+      "Address associated features of the metabolic syndrome, including dyslipidaemia and hypertension, and manage polycystic ovary syndrome with combined hormonal contraception or an anti-androgen where appropriate",
+      "Dermatology and endocrinology referral with monitoring of glycaemic and metabolic status over time"
     ]
-   ],
-   "caption": "Overview comparison matrix for acanthosis nigricans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acanthosis-nigricans-real-image",
-   "title": "Acanthosis nigricans: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "acanthosis_nigricans-pathway",
+      "title": "Acanthosis nigricans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck, axillae, groin, and inframammary folds",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abrupt onset with rapid, extensive spread, especially in a non-obese or older patient, suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance, Lipid profile and assessment for the metabolic syndrome, Investigation for polycystic ovary syndrome (androgen levels, pelvic ultrasound) in"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control with metformin in associated type 2 diabetes or polycystic ovary syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acanthosis nigricans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acanthosis_nigricans-matrix",
+      "title": "Acanthosis nigricans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as symmetrical, velvety, hyperpigmented thickening of the skin, most often at flexural sites such as the posterior neck,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting glucose, HbA1c, and fasting insulin to assess insulin resistance, Lipid profile and assessment for the metabolic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Confluent and reticulated papillomatosis, Pityriasis versicolor, Retention hyperkeratosis / terra firma-forme dermatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying insulin resistance with weight reduction, dietary modification and exercise, and optimise glycaemic control",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the skin cosmetically while overlooking undiagnosed diabetes or the metabolic syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acanthosis nigricans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acanthosis_nigricans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose, HbA1c and fasting insulin",
+          "cells": [
+            {
+              "text": "Insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile and metabolic syndrome assessment",
+          "cells": [
+            {
+              "text": "Metabolic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome work-up (androgens, pelvic ultrasound)",
+          "cells": [
+            {
+              "text": "PCOS in appropriate women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening with GI evaluation and endoscopy",
+          "cells": [
+            {
+              "text": "Malignant acanthosis nigricans when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history review",
+          "cells": [
+            {
+              "text": "Causative agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis and papillomatosis in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acanthosis_nigricans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight reduction, dietary change and exercise",
+          "cells": [
+            {
+              "text": "Treats the underlying insulin resistance"
+            },
+            {
+              "text": "Optimise glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Glycaemic control in type 2 diabetes or PCOS"
+            },
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw any causative drug",
+          "cells": [
+            {
+              "text": "Drug-induced form"
+            },
+            {
+              "text": "Corticosteroids, nicotinic acid or oestrogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical retinoids, keratolytics and vitamin D analogues",
+          "cells": [
+            {
+              "text": "Cosmetic improvement of plaques"
+            },
+            {
+              "text": "Keratolytics such as urea or ammonium lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent search for an underlying adenocarcinoma",
+          "cells": [
+            {
+              "text": "Suspected malignant acanthosis nigricans"
+            },
+            {
+              "text": "Particularly gastric; treat the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage dyslipidaemia, hypertension and PCOS",
+          "cells": [
+            {
+              "text": "Metabolic syndrome features"
+            },
+            {
+              "text": "Combined hormonal contraception or anti-androgen for PCOS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and endocrinology referral",
+          "cells": [
+            {
+              "text": "Monitor glycaemic and metabolic status"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acanthosis_nigricans-dx-mgmt",
+      "title": "Diagnosis and management of Acanthosis nigricans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Velvety hyperpigmented thickening in flexures, often with obesity or PCOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abrupt onset with rapid spread, or mucosal or palmar involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent search for an underlying adenocarcinoma, particularly gastric",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucose, HbA1c, fasting insulin and lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insulin resistance or metabolic syndrome found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Weight reduction, diet and exercise; metformin where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review drug history and PCOS; skin biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw causative drugs such as corticosteroids or oestrogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical retinoids, keratolytics or vitamin D analogues for cosmetic benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat dyslipidaemia and hypertension; manage PCOS hormonally",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign form improves with treatment; malignant form carries a poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

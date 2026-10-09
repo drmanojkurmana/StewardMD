@@ -1,173 +1,461 @@
 {
- "id": "atrial_septal_defect",
- "name": "Atrial Septal Defect",
- "aliases": [
-  "ASD",
-  "atrial septal defects"
- ],
- "class": "non_infective",
- "system": "Paediatric cardiology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is the most common form.",
-   "Most children are asymptomatic and are detected through an incidental murmur or, later, right heart enlargement; heart failure in infancy is uncommon.",
-   "The characteristic auscultatory finding is a widely and fixedly split second heart sound, accompanied by a soft systolic ejection murmur at the left upper sternal border from increased pulmonary flow.",
-   "A larger shunt may produce a mid-diastolic rumble at the lower left sternal border from increased flow across the tricuspid valve.",
-   "The murmur reflects increased flow through the pulmonary valve rather than turbulent flow across the defect itself, which is low-velocity and inaudible.",
-   "Echocardiography defines the defect type and size, direction of shunt, and degree of right atrial and right ventricular volume overload.",
-   "Small secundum defects frequently close spontaneously in early childhood; a defect must be distinguished from a normal patent foramen ovale.",
-   "Significant defects are closed, often by transcatheter device for suitable secundum defects, to prevent later right heart enlargement, arrhythmias, and pulmonary vascular disease.",
-   "Untreated large defects may lead in adulthood to atrial arrhythmias, pulmonary hypertension, and, rarely, paradoxical embolism."
+  "id": "atrial_septal_defect",
+  "name": "Atrial Septal Defect",
+  "aliases": [
+    "ASD",
+    "atrial septal defects"
   ],
-  "pathophysiology": "An opening in the atrial septum allows blood to shunt from the higher-compliance left atrium toward the right atrium, the direction favoured because the right ventricle is more compliant than the left. This left-to-right shunt volume-loads the right atrium, right ventricle, and pulmonary circulation while the left-sided output is maintained by the shunt returning through the lungs. Chronic volume overload dilates the right heart; over many years a minority develop elevated pulmonary vascular resistance and pulmonary hypertension, and the resulting right atrial stretch predisposes to atrial arrhythmias.",
-  "additionalDifferentials": [
-   "Ventricular septal defect",
-   "Partial anomalous pulmonary venous return",
-   "Atrioventricular septal defect (primum type)",
-   "Innocent pulmonary flow murmur",
-   "Pulmonary valve stenosis",
-   "Patent foramen ovale (a normal variant, not a true defect)"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to define defect type, size, and right heart volume overload",
-   "Chest radiograph for cardiomegaly and increased pulmonary vascular markings in significant shunts",
-   "Electrocardiogram, often showing right axis deviation and right ventricular volume overload (rsR' pattern)",
-   "Transoesophageal echocardiography or advanced imaging when transthoracic views are inadequate",
-   "Cardiac catheterisation if pulmonary hypertension needs assessment"
-  ],
-  "redFlags": [
-   "Signs of significant right heart volume overload or pulmonary hypertension",
-   "Development of atrial arrhythmias",
-   "Failure to thrive or heart failure in an infant, suggesting an additional or larger lesion",
-   "New cyanosis suggesting shunt reversal in longstanding, untreated disease",
-   "Paradoxical embolic events"
-  ],
-  "prognosis": "Isolated secundum defects, whether closed spontaneously, by device, or surgically, have an excellent outlook when addressed before irreversible pulmonary vascular disease. Late, unrepaired large defects carry increasing risk of arrhythmia and pulmonary hypertension in adulthood.",
-  "pitfalls": [
-   "Mistaking a normal patent foramen ovale for a true atrial septal defect",
-   "Dismissing the subtle findings and missing a significant defect until right heart enlargement is advanced",
-   "Attributing fixed splitting of the second heart sound to a benign murmur",
-   "Assuming all defects require closure when many small secundum defects close spontaneously",
-   "Overlooking associated anomalous pulmonary venous drainage"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a suitable secundum defect and surgical repair for other morphologies",
-   "Observe small defects and those in infancy, allowing for possible spontaneous closure, and time intervention before irreversible pulmonary vascular disease develops",
-   "Relieve symptoms of heart failure with diuretics where present",
-   "Assess pulmonary vascular resistance when pulmonary hypertension is suspected and avoid closure once Eisenmenger physiology has developed",
-   "Monitor for atrial arrhythmias and progressive pulmonary hypertension over long-term follow-up",
-   "Provide ongoing paediatric and, later, adult congenital cardiology surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "atrial_septal_defect-pathway",
-   "title": "Atrial Septal Defect: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is the most common form.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of significant right heart volume overload or pulmonary hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to define defect type, size, and right heart volume overload, Chest radiograph for cardiomegaly and increased pulmonary vascular markings in significant shunts, Electrocardiogram, often showing right axis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a suitable secundum defect and surgical repair for other morphologies"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a normal patent foramen ovale for a true atrial septal defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of atrial septal defect."
-  }
- ],
- "tables": [
-  {
-   "id": "atrial_septal_defect-matrix",
-   "title": "Atrial Septal Defect: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric cardiology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is the most common form.",
+      "Most children are asymptomatic and are detected through an incidental murmur or, later, right heart enlargement; heart failure in infancy is uncommon.",
+      "The characteristic auscultatory finding is a widely and fixedly split second heart sound, accompanied by a soft systolic ejection murmur at the left upper sternal border from increased pulmonary flow.",
+      "A larger shunt may produce a mid-diastolic rumble at the lower left sternal border from increased flow across the tricuspid valve.",
+      "The murmur reflects increased flow through the pulmonary valve rather than turbulent flow across the defect itself, which is low-velocity and inaudible.",
+      "Echocardiography defines the defect type and size, direction of shunt, and degree of right atrial and right ventricular volume overload.",
+      "Small secundum defects frequently close spontaneously in early childhood; a defect must be distinguished from a normal patent foramen ovale.",
+      "Significant defects are closed, often by transcatheter device for suitable secundum defects, to prevent later right heart enlargement, arrhythmias, and pulmonary vascular disease.",
+      "Untreated large defects may lead in adulthood to atrial arrhythmias, pulmonary hypertension, and, rarely, paradoxical embolism."
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to define defect type, size, and right heart volume overload, Chest radiograph for cardiomegaly and increased",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An opening in the atrial septum allows blood to shunt from the higher-compliance left atrium toward the right atrium, the direction favoured because the right ventricle is more compliant than the left. This left-to-right shunt volume-loads the right atrium, right ventricle, and pulmonary circulation while the left-sided output is maintained by the shunt returning through the lungs. Chronic volume overload dilates the right heart; over many years a minority develop elevated pulmonary vascular resistance and pulmonary hypertension, and the resulting right atrial stretch predisposes to atrial arrhythmias.",
+    "additionalDifferentials": [
+      "Ventricular septal defect",
+      "Partial anomalous pulmonary venous return",
+      "Atrioventricular septal defect (primum type)",
+      "Innocent pulmonary flow murmur",
+      "Pulmonary valve stenosis",
+      "Patent foramen ovale (a normal variant, not a true defect)"
     ],
-    [
-     "Primary Differentials",
-     "Ventricular septal defect, Partial anomalous pulmonary venous return, Atrioventricular septal defect (primum type)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to define defect type, size, and right heart volume overload",
+      "Chest radiograph for cardiomegaly and increased pulmonary vascular markings in significant shunts",
+      "Electrocardiogram, often showing right axis deviation and right ventricular volume overload (rsR' pattern)",
+      "Transoesophageal echocardiography or advanced imaging when transthoracic views are inadequate",
+      "Cardiac catheterisation if pulmonary hypertension needs assessment"
     ],
-    [
-     "Management Strategy",
-     "Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of significant right heart volume overload or pulmonary hypertension",
+      "Development of atrial arrhythmias",
+      "Failure to thrive or heart failure in an infant, suggesting an additional or larger lesion",
+      "New cyanosis suggesting shunt reversal in longstanding, untreated disease",
+      "Paradoxical embolic events"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a normal patent foramen ovale for a true atrial septal defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated secundum defects, whether closed spontaneously, by device, or surgically, have an excellent outlook when addressed before irreversible pulmonary vascular disease. Late, unrepaired large defects carry increasing risk of arrhythmia and pulmonary hypertension in adulthood.",
+    "pitfalls": [
+      "Mistaking a normal patent foramen ovale for a true atrial septal defect",
+      "Dismissing the subtle findings and missing a significant defect until right heart enlargement is advanced",
+      "Attributing fixed splitting of the second heart sound to a benign murmur",
+      "Assuming all defects require closure when many small secundum defects close spontaneously",
+      "Overlooking associated anomalous pulmonary venous drainage"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a suitable secundum defect and surgical repair for other morphologies",
+      "Observe small defects and those in infancy, allowing for possible spontaneous closure, and time intervention before irreversible pulmonary vascular disease develops",
+      "Relieve symptoms of heart failure with diuretics where present",
+      "Assess pulmonary vascular resistance when pulmonary hypertension is suspected and avoid closure once Eisenmenger physiology has developed",
+      "Monitor for atrial arrhythmias and progressive pulmonary hypertension over long-term follow-up",
+      "Provide ongoing paediatric and, later, adult congenital cardiology surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for atrial septal defect."
-  }
- ],
- "diagrams": [
-  {
-   "id": "atrial-septal-defect-real-image",
-   "title": "Atrial Septal Defect: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "atrial_septal_defect-pathway",
+      "title": "Atrial Septal Defect: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is the most common form.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of significant right heart volume overload or pulmonary hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to define defect type, size, and right heart volume overload, Chest radiograph for cardiomegaly and increased pulmonary vascular markings in significant shunts, Electrocardiogram, often showing right axis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a suitable secundum defect and surgical repair for other morphologies"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a normal patent foramen ovale for a true atrial septal defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of atrial septal defect."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "atrial_septal_defect-matrix",
+      "title": "Atrial Septal Defect: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A communication in the atrial septum permitting left-to-right shunting; the secundum type in the region of the fossa ovalis is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to define defect type, size, and right heart volume overload, Chest radiograph for cardiomegaly and increased",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ventricular septal defect, Partial anomalous pulmonary venous return, Atrioventricular septal defect (primum type)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Close a haemodynamically significant defect causing right heart volume overload, using transcatheter device occlusion for a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a normal patent foramen ovale for a true atrial septal defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for atrial septal defect."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrial_septal_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Defect type, size and right heart volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and increased pulmonary vascular markings in significant shunts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right axis deviation and rsR' pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography or advanced imaging",
+          "cells": [
+            {
+              "text": "When transthoracic views are inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrial_septal_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrioventricular septal defect (primum type)",
+          "cells": [
+            {
+              "text": "Defect and atrioventricular valve defined on echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patent foramen ovale",
+          "cells": [
+            {
+              "text": "A normal foramen ovale is mistaken for a true defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrial_septal_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Device closure",
+          "cells": [
+            {
+              "text": "Transcatheter occlusion of a suitable secundum defect"
+            },
+            {
+              "text": "Haemodynamically significant volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small defects and those in infancy, allowing possible spontaneous closure"
+            },
+            {
+              "text": "Timed before irreversible pulmonary vascular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure symptom relief",
+          "cells": [
+            {
+              "text": "Diuretics where present"
+            },
+            {
+              "text": "Heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary vascular assessment",
+          "cells": [
+            {
+              "text": "Assess resistance when pulmonary hypertension is suspected"
+            },
+            {
+              "text": "Avoid closure once Eisenmenger physiology has developed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Atrial arrhythmias and progressive pulmonary hypertension"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiology follow-up",
+          "cells": [
+            {
+              "text": "Paediatric and later adult congenital cardiology"
+            },
+            {
+              "text": "Lifelong surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrial_septal_defect-dx-mgmt",
+      "title": "Diagnosis and management of Atrial Septal Defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Right heart volume overload from an atrial septal defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pulmonary hypertension, atrial arrhythmia or heart failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Diuretics for heart failure while planning closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo, chest radiograph, ECG rsR' pattern, TOE, catheterisation if PH suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Significant shunt with right heart volume overload on echo?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Transcatheter device closure of a suitable secundum defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe small defects and infant defects for spontaneous closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess pulmonary vascular resistance; avoid closure after Eisenmenger physiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor atrial arrhythmias and pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong paediatric and adult congenital cardiology surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

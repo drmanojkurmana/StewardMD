@@ -1,178 +1,467 @@
 {
- "id": "pleva",
- "name": "PLEVA (pityriasis lichenoides et varioliformis acuta)",
- "aliases": [
-  "pityriasis lichenoides et varioliformis acuta",
-  "acute pityriasis lichenoides",
-  "Mucha-Habermann disease",
-  "PLEVA"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become haemorrhagic or necrotic, and crust over",
-   "Individual lesions may heal with varioliform (smallpox-like) pitted scars, unlike the chronic PLC form",
-   "Successive crops mean lesions at different stages of evolution are present at the same time",
-   "Predominantly affects children and young adults, favouring the trunk and proximal limbs",
-   "Usually benign and self-limiting but tends to run a more inflammatory and relapsing course than PLC",
-   "The rare febrile ulceronecrotic Mucha-Habermann variant presents with high fever, large coalescing necrotic ulcers, and systemic symptoms and can be life-threatening",
-   "Biopsy shows a dense, often wedge-shaped lymphocytic infiltrate with interface change, keratinocyte necrosis, and extravasated red cells",
-   "Managed with topical corticosteroids, oral antibiotics with anti-inflammatory action (such as tetracyclines or macrolides), and phototherapy, with systemic immunosuppression reserved for the ulceronecrotic variant"
+  "id": "pleva",
+  "name": "PLEVA (pityriasis lichenoides et varioliformis acuta)",
+  "aliases": [
+    "pityriasis lichenoides et varioliformis acuta",
+    "acute pityriasis lichenoides",
+    "Mucha-Habermann disease",
+    "PLEVA"
   ],
-  "pathophysiology": "PLEVA is regarded as a reactive, predominantly CD8-positive cytotoxic T-cell response that produces a lymphocytic vasculitis and epidermal injury. As with the chronic form, triggers are thought to include infectious antigens and, in some cases, drugs, which provoke an inflammatory cascade damaging both keratinocytes and dermal vessels. The intense cytotoxic reaction accounts for the vesiculation, haemorrhage, and necrosis of individual lesions and for the varioliform scarring that can follow. In the severe febrile ulceronecrotic variant an exaggerated response, sometimes with a large clonal T-cell population and cytokine release, drives widespread ulceration and systemic illness.",
-  "additionalDifferentials": [
-   "Varicella (chickenpox)",
-   "Lymphomatoid papulosis",
-   "Disseminated herpes simplex",
-   "Papular urticaria / arthropod bite reactions",
-   "Small-vessel vasculitis",
-   "Erythema multiforme",
-   "Secondary syphilis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis",
-   "T-cell receptor gene rearrangement studies and immunophenotyping to exclude lymphomatoid papulosis",
-   "Viral swabs or PCR for varicella-zoster or herpes simplex where a vesicular infection is suspected",
-   "Full blood count, inflammatory markers, and close observation for systemic upset in suspected febrile ulceronecrotic disease",
-   "Serology for potential triggers (Epstein-Barr virus, Toxoplasma, HIV) when indicated",
-   "Blood cultures if the patient is febrile and systemically unwell"
-  ],
-  "redFlags": [
-   "High fever with rapidly enlarging, coalescing necrotic ulcers indicating febrile ulceronecrotic Mucha-Habermann disease",
-   "Systemic features such as arthralgia, abdominal pain, or mucosal involvement",
-   "Extensive necrosis raising the risk of secondary infection and sepsis",
-   "Atypical or clonal lymphoid infiltrate suggesting lymphomatoid papulosis or lymphoma"
-  ],
-  "prognosis": "Most cases resolve over weeks to months, though relapses are common and varioliform scarring may persist; the febrile ulceronecrotic variant carries appreciable morbidity and, rarely, mortality and warrants urgent aggressive treatment.",
-  "pitfalls": [
-   "Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern",
-   "Failing to recognise and treat the febrile ulceronecrotic variant promptly",
-   "Overlooking the clinical and histological overlap with lymphomatoid papulosis",
-   "Attributing residual varioliform scars to another cause"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [
-   "pityriasis_lichenoides"
-  ],
-  "management": [
-   "Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions",
-   "Offer an oral antibiotic with anti-inflammatory action, such as a tetracycline or erythromycin, as the initial systemic treatment",
-   "Use phototherapy, particularly narrowband UVB, for widespread or persistent disease",
-   "Reserve methotrexate or other systemic immunosuppression for refractory or severe disease",
-   "Treat the febrile ulceronecrotic Mucha-Habermann variant urgently with systemic corticosteroids and methotrexate or ciclosporin, adding intravenous immunoglobulin, meticulous wound care and supportive management of the systemic illness",
-   "Identify and treat any infective trigger where one is implicated",
-   "Monitor for relapse and for rare progression to a lymphoproliferative disorder, and refer to dermatology, escalating promptly for ulceronecrotic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pleva-pathway",
-   "title": "PLEVA (pityriasis lichenoides et varioliformis acuta): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become haemorrhagic or necrotic, and crust over",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High fever with rapidly enlarging, coalescing necrotic ulcers indicating febrile ulceronecrotic Mucha-Habermann disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis, T-cell receptor gene rearrangement studies and immunophenotyping to exclude lymphomatoid papulosis, Viral swabs or PCR for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pleva (pityriasis lichenoides et varioliformis acuta)."
-  }
- ],
- "tables": [
-  {
-   "id": "pleva-matrix",
-   "title": "PLEVA (pityriasis lichenoides et varioliformis acuta): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become haemorrhagic or necrotic, and crust over",
+      "Individual lesions may heal with varioliform (smallpox-like) pitted scars, unlike the chronic PLC form",
+      "Successive crops mean lesions at different stages of evolution are present at the same time",
+      "Predominantly affects children and young adults, favouring the trunk and proximal limbs",
+      "Usually benign and self-limiting but tends to run a more inflammatory and relapsing course than PLC",
+      "The rare febrile ulceronecrotic Mucha-Habermann variant presents with high fever, large coalescing necrotic ulcers, and systemic symptoms and can be life-threatening",
+      "Biopsy shows a dense, often wedge-shaped lymphocytic infiltrate with interface change, keratinocyte necrosis, and extravasated red cells",
+      "Managed with topical corticosteroids, oral antibiotics with anti-inflammatory action (such as tetracyclines or macrolides), and phototherapy, with systemic immunosuppression reserved for the ulceronecrotic variant"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis, T-cell receptor gene rearrangement",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PLEVA is regarded as a reactive, predominantly CD8-positive cytotoxic T-cell response that produces a lymphocytic vasculitis and epidermal injury. As with the chronic form, triggers are thought to include infectious antigens and, in some cases, drugs, which provoke an inflammatory cascade damaging both keratinocytes and dermal vessels. The intense cytotoxic reaction accounts for the vesiculation, haemorrhage, and necrosis of individual lesions and for the varioliform scarring that can follow. In the severe febrile ulceronecrotic variant an exaggerated response, sometimes with a large clonal T-cell population and cytokine release, drives widespread ulceration and systemic illness.",
+    "additionalDifferentials": [
+      "Varicella (chickenpox)",
+      "Lymphomatoid papulosis",
+      "Disseminated herpes simplex",
+      "Papular urticaria / arthropod bite reactions",
+      "Small-vessel vasculitis",
+      "Erythema multiforme",
+      "Secondary syphilis"
     ],
-    [
-     "Primary Differentials",
-     "Varicella (chickenpox), Lymphomatoid papulosis, Disseminated herpes simplex",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis",
+      "T-cell receptor gene rearrangement studies and immunophenotyping to exclude lymphomatoid papulosis",
+      "Viral swabs or PCR for varicella-zoster or herpes simplex where a vesicular infection is suspected",
+      "Full blood count, inflammatory markers, and close observation for systemic upset in suspected febrile ulceronecrotic disease",
+      "Serology for potential triggers (Epstein-Barr virus, Toxoplasma, HIV) when indicated",
+      "Blood cultures if the patient is febrile and systemically unwell"
     ],
-    [
-     "Management Strategy",
-     "Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "High fever with rapidly enlarging, coalescing necrotic ulcers indicating febrile ulceronecrotic Mucha-Habermann disease",
+      "Systemic features such as arthralgia, abdominal pain, or mucosal involvement",
+      "Extensive necrosis raising the risk of secondary infection and sepsis",
+      "Atypical or clonal lymphoid infiltrate suggesting lymphomatoid papulosis or lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve over weeks to months, though relapses are common and varioliform scarring may persist; the febrile ulceronecrotic variant carries appreciable morbidity and, rarely, mortality and warrants urgent aggressive treatment.",
+    "pitfalls": [
+      "Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern",
+      "Failing to recognise and treat the febrile ulceronecrotic variant promptly",
+      "Overlooking the clinical and histological overlap with lymphomatoid papulosis",
+      "Attributing residual varioliform scars to another cause"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [
+      "pityriasis_lichenoides"
+    ],
+    "management": [
+      "Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions",
+      "Offer an oral antibiotic with anti-inflammatory action, such as a tetracycline or erythromycin, as the initial systemic treatment",
+      "Use phototherapy, particularly narrowband UVB, for widespread or persistent disease",
+      "Reserve methotrexate or other systemic immunosuppression for refractory or severe disease",
+      "Treat the febrile ulceronecrotic Mucha-Habermann variant urgently with systemic corticosteroids and methotrexate or ciclosporin, adding intravenous immunoglobulin, meticulous wound care and supportive management of the systemic illness",
+      "Identify and treat any infective trigger where one is implicated",
+      "Monitor for relapse and for rare progression to a lymphoproliferative disorder, and refer to dermatology, escalating promptly for ulceronecrotic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for pleva (pityriasis lichenoides et varioliformis acuta)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pleva-real-image",
-   "title": "PLEVA (pityriasis lichenoides et varioliformis acuta): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pleva-pathway",
+      "title": "PLEVA (pityriasis lichenoides et varioliformis acuta): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become haemorrhagic or necrotic, and crust over",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High fever with rapidly enlarging, coalescing necrotic ulcers indicating febrile ulceronecrotic Mucha-Habermann disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis, T-cell receptor gene rearrangement studies and immunophenotyping to exclude lymphomatoid papulosis, Viral swabs or PCR for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pleva (pityriasis lichenoides et varioliformis acuta)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pleva-matrix",
+      "title": "PLEVA (pityriasis lichenoides et varioliformis acuta): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The acute pole of the pityriasis lichenoides spectrum, marked by abrupt crops of erythematous papules that vesiculate, become",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy for histopathology to demonstrate the cytotoxic interface reaction with necrosis, T-cell receptor gene rearrangement",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Varicella (chickenpox), Lymphomatoid papulosis, Disseminated herpes simplex",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use topical corticosteroids with emollients as first-line therapy to control inflammation and symptoms of individual lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing early vesicular lesions as chickenpox and missing the relapsing crop pattern",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pleva (pityriasis lichenoides et varioliformis acuta)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleva-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Cytotoxic interface reaction with necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TCR gene rearrangement and immunophenotyping",
+          "cells": [
+            {
+              "text": "Lymphomatoid papulosis or lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral swabs or PCR",
+          "cells": [
+            {
+              "text": "Varicella-zoster or herpes simplex when vesicular infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for triggers",
+          "cells": [
+            {
+              "text": "EBV, Toxoplasma or HIV, when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleva-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Varicella",
+          "cells": [
+            {
+              "text": "Vesicular infection; viral PCR or swabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphomatoid papulosis",
+          "cells": [
+            {
+              "text": "Atypical or clonal lymphoid infiltrate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleva-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids with emollients",
+          "cells": [
+            {
+              "text": "First-line for inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetracycline or erythromycin",
+          "cells": [
+            {
+              "text": "Oral antibiotic with anti-inflammatory action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB for widespread or persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Refractory or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile variant",
+          "cells": [
+            {
+              "text": "Treated urgently with systemic corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective trigger",
+          "cells": [
+            {
+              "text": "Identified and treated where implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Relapse and rare lymphoproliferative progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleva-dx-mgmt",
+      "title": "Diagnosis and management of PLEVA (pityriasis lichenoides et varioliformis acuta)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Successive papules and vesicles with necrotic ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (high fever with necrotic ulcers, systemic upset, clonal infiltrate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic corticosteroids for the febrile ulceronecrotic variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; TCR and immunophenotyping; viral PCR; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a cytotoxic interface reaction with necrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider varicella, lymphomatoid papulosis, disseminated herpes or erythema multiforme",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical corticosteroids with emollients as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral tetracycline or erythromycin with anti-inflammatory action",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Narrowband UVB for widespread or persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Methotrexate for refractory or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for relapse and rare lymphoproliferative progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve over weeks to months; relapses are common and scarring may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

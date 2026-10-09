@@ -221,25 +221,494 @@
       "caption": "Diagnostic and clinical overview matrix for chikungunya."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "chikungunya-real-image",
-      "title": "Chikungunya: Diagnostic Microbiological / Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Signs and Symptoms of Chikungunya, 2025",
+      "url": "https://www.cdc.gov/chikungunya/hcp/clinical-signs/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Chikungunya Clinical Testing and Diagnosis, 2025",
+      "url": "https://www.cdc.gov/chikungunya/hcp/diagnosis-testing/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Chikungunya Treatment and Prevention, 2025",
+      "url": "https://www.cdc.gov/chikungunya/hcp/treatment-prevention/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CHIKUNGUNYA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical and laboratory diagnosis of chikungunya",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Pathogen Detection",
-          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+          "parameter": "Incubation period",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Typically 3 to 7, range 1 to 12",
+              "range": [
+                1,
+                12
+              ]
+            },
+            {
+              "text": "Harrison gives 2 to 10 days"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Inflammatory Response",
-          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+          "parameter": "Fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Sudden onset, usually >39",
+              "op": ">",
+              "value": 39
+            },
+            {
+              "text": "Sometimes saddleback pattern"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Diagnostic Confirmation",
-          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+          "parameter": "Polyarthralgia",
+          "cells": [
+            {
+              "text": "Bilateral, symmetric, often severe and disabling"
+            },
+            {
+              "text": "{{hy:Hallmark feature}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other features",
+          "cells": [
+            {
+              "text": "Headache, myalgia, arthritis, conjunctivitis, nausea or vomiting, maculopapular rash"
+            },
+            {
+              "text": "Supportive of diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood counts and chemistry",
+          "cells": [
+            {
+              "text": "Lymphopenia, thrombocytopenia, raised creatinine; transaminases may rise"
+            },
+            {
+              "text": "Nonspecific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RT-PCR on serum",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "First 8 days of illness",
+              "op": "<=",
+              "value": 8
+            },
+            {
+              "text": "{{hy:Test of choice in the first week}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IgM and neutralising antibodies",
+          "cells": [
+            {
+              "text": "Appear toward the end of the first week"
+            },
+            {
+              "text": "Confirm positive IgM with neutralising antibody; false positives occur"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Negative acute sample",
+          "cells": [
+            {
+              "text": "Collect convalescent sample"
+            },
+            {
+              "text": "Needed to rule out definitively"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Severe disease risk groups",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Neonates exposed around birth, adults over 65, hypertension, diabetes, cardiovascular disease",
+              "op": ">",
+              "value": 65
+            },
+            {
+              "text": "Closer monitoring"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Incubation differs by source: CDC 3 to 7 days (range 1 to 12), Harrison 2 to 10 days."
+    },
+    {
+      "id": "CHIKUNGUNYA-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic chikungunya",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "More neutropenia, thrombocytopenia, haemorrhage and shock; chikungunya has more arthralgia, arthritis, rash, lymphopenia"
+            },
+            {
+              "text": "{{hy:Dengue testing; manage as dengue until excluded}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zika",
+          "cells": [
+            {
+              "text": "Usually milder; congenital infection risk"
+            },
+            {
+              "text": "Arbovirus testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Co-infection with dengue or Zika",
+          "cells": [
+            {
+              "text": "Same Aedes vectors; can coexist"
+            },
+            {
+              "text": "Test for all three where endemic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leptospirosis, malaria, rickettsial infection",
+          "cells": [
+            {
+              "text": "Febrile illnesses in the same regions"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rubella, measles, parvovirus, enterovirus, adenovirus",
+          "cells": [
+            {
+              "text": "Fever with rash and arthralgia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-infectious or rheumatologic arthritis",
+          "cells": [
+            {
+              "text": "Persistent joint disease beyond the acute phase"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "CHIKUNGUNYA-treatment",
+      "kind": "treatment",
+      "title": "Management of chikungunya",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest, fluids, analgesics, antipyretics",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "No specific antiviral exists"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acetaminophen (paracetamol)",
+          "cells": [
+            {
+              "text": "{{hy:First line until dengue is ruled out}}"
+            },
+            {
+              "text": "Preferred in dengue-endemic areas and for travellers"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Acute fever and pain once dengue excluded"
+            },
+            {
+              "text": "Aspirin and NSAIDs raise bleeding risk in dengue"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NSAIDs, corticosteroids (including topical), physiotherapy",
+          "cells": [
+            {
+              "text": "Persistent joint pain"
+            },
+            {
+              "text": "Joint symptoms can last months to years"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mosquito avoidance",
+          "cells": [
+            {
+              "text": "First week of illness"
+            },
+            {
+              "text": "Prevents local transmission"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Selected travellers at higher risk and laboratory workers"
+            },
+            {
+              "text": "Vaccine licensed in the United States"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Doses are not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CHIKUNGUNYA-dx-mgmt",
+      "title": "Diagnosis and management of chikungunya",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt high fever with severe symmetric polyarthralgia",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Treat as possible dengue: paracetamol only, no aspirin or NSAIDs",
+          "cite": "c4"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Illness day 8 or less?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum RT-PCR for chikungunya; test for dengue",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "IgM serology, confirm with neutralising antibody",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Dengue excluded?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Manage per dengue pathway",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Neonate, age over 65 or comorbidity, or organ complication?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Admit and monitor for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care at home; NSAIDs allowed; avoid mosquito bites week 1",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Joint pain persists after the acute phase?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "NSAIDs, corticosteroids or physiotherapy for chronic arthralgia",
+          "cite": "c4"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Recovery, usually within 7 to 10 days",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

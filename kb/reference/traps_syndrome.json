@@ -1,175 +1,464 @@
 {
- "id": "traps_syndrome",
- "name": "traps syndrome",
- "aliases": [
-  "TNF receptor-associated periodic syndrome",
-  "familial Hibernian fever",
-  "TNFRSF1A-associated periodic syndrome"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally described in families of northern European (Irish and Scottish) ancestry as familial Hibernian fever.",
-   "Attacks are notably prolonged compared with other periodic fevers, frequently lasting a week or more and sometimes several weeks, which can lead to repeated investigation for infection or malignancy.",
-   "Migratory myalgia with a warm, tender overlying erythematous patch that moves centrifugally down a limb is highly characteristic and reflects a monocytic fasciitis rather than true myositis.",
-   "Periorbital oedema, often with conjunctivitis and periorbital pain, is a distinctive sign that is uncommon in the other hereditary periodic fevers.",
-   "Serositis with abdominal pain, pleuritic chest pain and arthralgia is common, and reactive AA amyloidosis is an important long-term complication, particularly with cysteine-residue variants.",
-   "Interleukin-1 blockade is the most reliably effective treatment; corticosteroids attenuate attacks but with escalating requirements, and anti-TNF responses are inconsistent with some agents paradoxically worsening disease.",
-   "Low-penetrance variants such as R92Q and P46L are common in the general population and may produce milder, atypical or incompletely penetrant phenotypes.",
-   "Reduced shedding of soluble TNF receptor 1 between attacks can support the diagnosis but is neither fully sensitive nor specific."
+  "id": "traps_syndrome",
+  "name": "traps syndrome",
+  "aliases": [
+    "TNF receptor-associated periodic syndrome",
+    "familial Hibernian fever",
+    "TNFRSF1A-associated periodic syndrome"
   ],
-  "pathophysiology": "Variants in TNFRSF1A, especially those affecting conserved cysteine residues in the extracellular domain, cause misfolding of the mutant receptor with intracellular retention and aggregation in the endoplasmic reticulum rather than defective receptor shedding alone. The retained receptor provokes endoplasmic reticulum stress, augmented mitochondrial reactive oxygen species and ligand-independent pro-inflammatory signalling that enhances responsiveness to inflammatory stimuli. The net effect is exaggerated innate immune activation with prominent interleukin-1 beta-driven inflammation, accounting for both the prolonged inflammatory attacks and the responsiveness to interleukin-1 blockade, while sustained serum amyloid A elevation underlies the risk of AA amyloidosis.",
-  "additionalDifferentials": [
-   "Familial Mediterranean fever",
-   "Mevalonate kinase deficiency (hyper-IgD syndrome)",
-   "Cryopyrin-associated periodic syndrome spectrum",
-   "Systemic juvenile idiopathic arthritis and adult-onset Still's disease",
-   "PFAPA syndrome",
-   "Cyclic neutropenia",
-   "Occult infection or lymphoma causing prolonged fever"
-  ],
-  "additionalInvestigations": [
-   "TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution",
-   "Serial acute-phase reactants (C-reactive protein, serum amyloid A) during and between episodes",
-   "Serum soluble TNF receptor 1 concentration between attacks",
-   "Magnetic resonance imaging of affected muscle groups to demonstrate fasciitis rather than myositis",
-   "Urinalysis for proteinuria and, if positive, tissue biopsy with Congo red staining for amyloid",
-   "Ophthalmological assessment when periorbital oedema and conjunctivitis are prominent"
-  ],
-  "redFlags": [
-   "Emergence of proteinuria indicating renal AA amyloidosis",
-   "Escalating corticosteroid dependence to control increasingly frequent or prolonged attacks",
-   "A prolonged febrile episode where serious infection or malignancy has not been adequately excluded",
-   "Clinical deterioration after starting certain anti-TNF agents"
-  ],
-  "prognosis": "Interleukin-1 blockade controls attacks and inflammation in most patients, allowing corticosteroid sparing and reducing the risk of amyloidosis. Untreated disease, especially with high-penetrance cysteine variants, carries a meaningful risk of AA amyloidosis and progressive renal impairment.",
-  "pitfalls": [
-   "Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses",
-   "Reporting a low-penetrance variant such as R92Q as definitively diagnostic without correlating with phenotype",
-   "Mistaking periorbital oedema for allergy or angio-oedema",
-   "Interpreting migratory limb erythema and myalgia as cellulitis or thrombophlebitis"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology (current edition)",
-   "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
-   "Eurofever and PRINTO consensus classification criteria for hereditary recurrent fevers"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling attacks and inflammation",
-   "Corticosteroids to attenuate acute attacks, while limiting reliance given escalating requirements",
-   "Consider the TNF-inhibitor etanercept where interleukin-1 blockade is unsuitable, but avoid infliximab, which can paradoxically worsen disease",
-   "Monitor C-reactive protein and serum amyloid A during and between episodes, and screen the urine for proteinuria to detect reactive AA amyloidosis",
-   "Confirm the diagnosis by TNFRSF1A sequencing and provide genetic counselling for this autosomal dominant disorder",
-   "Involve nephrology and consider tissue biopsy with Congo red staining if amyloidosis or renal impairment develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "traps_syndrome-pathway",
-   "title": "traps syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally described in families of northern European (Irish and Scottish) ancestry as familial Hibernian fever.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of proteinuria indicating renal AA amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution, Serial acute-phase reactants (C-reactive protein, serum amyloid A) during and between episodes, Serum soluble TNF receptor 1 concentration"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling attacks and inflammation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of traps syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "traps_syndrome-matrix",
-   "title": "traps syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally described in families of northern European (Irish and Scottish) ancestry as familial Hibernian fever.",
+      "Attacks are notably prolonged compared with other periodic fevers, frequently lasting a week or more and sometimes several weeks, which can lead to repeated investigation for infection or malignancy.",
+      "Migratory myalgia with a warm, tender overlying erythematous patch that moves centrifugally down a limb is highly characteristic and reflects a monocytic fasciitis rather than true myositis.",
+      "Periorbital oedema, often with conjunctivitis and periorbital pain, is a distinctive sign that is uncommon in the other hereditary periodic fevers.",
+      "Serositis with abdominal pain, pleuritic chest pain and arthralgia is common, and reactive AA amyloidosis is an important long-term complication, particularly with cysteine-residue variants.",
+      "Interleukin-1 blockade is the most reliably effective treatment; corticosteroids attenuate attacks but with escalating requirements, and anti-TNF responses are inconsistent with some agents paradoxically worsening disease.",
+      "Low-penetrance variants such as R92Q and P46L are common in the general population and may produce milder, atypical or incompletely penetrant phenotypes.",
+      "Reduced shedding of soluble TNF receptor 1 between attacks can support the diagnosis but is neither fully sensitive nor specific."
     ],
-    [
-     "Key Investigations",
-     "TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution, Serial acute-phase reactants (C-reactive protein,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Variants in TNFRSF1A, especially those affecting conserved cysteine residues in the extracellular domain, cause misfolding of the mutant receptor with intracellular retention and aggregation in the endoplasmic reticulum rather than defective receptor shedding alone. The retained receptor provokes endoplasmic reticulum stress, augmented mitochondrial reactive oxygen species and ligand-independent pro-inflammatory signalling that enhances responsiveness to inflammatory stimuli. The net effect is exaggerated innate immune activation with prominent interleukin-1 beta-driven inflammation, accounting for both the prolonged inflammatory attacks and the responsiveness to interleukin-1 blockade, while sustained serum amyloid A elevation underlies the risk of AA amyloidosis.",
+    "additionalDifferentials": [
+      "Familial Mediterranean fever",
+      "Mevalonate kinase deficiency (hyper-IgD syndrome)",
+      "Cryopyrin-associated periodic syndrome spectrum",
+      "Systemic juvenile idiopathic arthritis and adult-onset Still's disease",
+      "PFAPA syndrome",
+      "Cyclic neutropenia",
+      "Occult infection or lymphoma causing prolonged fever"
     ],
-    [
-     "Primary Differentials",
-     "Familial Mediterranean fever, Mevalonate kinase deficiency (hyper-IgD syndrome), Cryopyrin-associated periodic syndrome spectrum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution",
+      "Serial acute-phase reactants (C-reactive protein, serum amyloid A) during and between episodes",
+      "Serum soluble TNF receptor 1 concentration between attacks",
+      "Magnetic resonance imaging of affected muscle groups to demonstrate fasciitis rather than myositis",
+      "Urinalysis for proteinuria and, if positive, tissue biopsy with Congo red staining for amyloid",
+      "Ophthalmological assessment when periorbital oedema and conjunctivitis are prominent"
     ],
-    [
-     "Management Strategy",
-     "Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of proteinuria indicating renal AA amyloidosis",
+      "Escalating corticosteroid dependence to control increasingly frequent or prolonged attacks",
+      "A prolonged febrile episode where serious infection or malignancy has not been adequately excluded",
+      "Clinical deterioration after starting certain anti-TNF agents"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses",
-     "Prevent diagnostic or management error"
+    "prognosis": "Interleukin-1 blockade controls attacks and inflammation in most patients, allowing corticosteroid sparing and reducing the risk of amyloidosis. Untreated disease, especially with high-penetrance cysteine variants, carries a meaningful risk of AA amyloidosis and progressive renal impairment.",
+    "pitfalls": [
+      "Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses",
+      "Reporting a low-penetrance variant such as R92Q as definitively diagnostic without correlating with phenotype",
+      "Mistaking periorbital oedema for allergy or angio-oedema",
+      "Interpreting migratory limb erythema and myalgia as cellulitis or thrombophlebitis"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology (current edition)",
+      "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
+      "Eurofever and PRINTO consensus classification criteria for hereditary recurrent fevers"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling attacks and inflammation",
+      "Corticosteroids to attenuate acute attacks, while limiting reliance given escalating requirements",
+      "Consider the TNF-inhibitor etanercept where interleukin-1 blockade is unsuitable, but avoid infliximab, which can paradoxically worsen disease",
+      "Monitor C-reactive protein and serum amyloid A during and between episodes, and screen the urine for proteinuria to detect reactive AA amyloidosis",
+      "Confirm the diagnosis by TNFRSF1A sequencing and provide genetic counselling for this autosomal dominant disorder",
+      "Involve nephrology and consider tissue biopsy with Congo red staining if amyloidosis or renal impairment develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for traps syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "traps-syndrome-real-image",
-   "title": "traps syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "traps_syndrome-pathway",
+      "title": "traps syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally described in families of northern European (Irish and Scottish) ancestry as familial Hibernian fever.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of proteinuria indicating renal AA amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution, Serial acute-phase reactants (C-reactive protein, serum amyloid A) during and between episodes, Serum soluble TNF receptor 1 concentration"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling attacks and inflammation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of traps syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "traps_syndrome-matrix",
+      "title": "traps syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant disorder caused by variants in TNFRSF1A encoding the p55 tumour necrosis factor receptor 1; originally",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "TNFRSF1A gene sequencing, interpreting low-penetrance variants with caution, Serial acute-phase reactants (C-reactive protein,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial Mediterranean fever, Mevalonate kinase deficiency (hyper-IgD syndrome), Cryopyrin-associated periodic syndrome spectrum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Interleukin-1 blockade (anakinra or canakinumab) as the mainstay, being the most reliably effective therapy for controlling",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing prolonged febrile attacks to recurrent infection and administering repeated antibiotic courses",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for traps syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "traps_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of traps syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TRAPS: prolonged febrile attacks with migratory limb erythema and myalgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new proteinuria, rising steroid dependence, or unexcluded infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review for suspected AA amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TNFRSF1A sequencing; CRP and serum amyloid A; urinalysis; MRI of muscles",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TNFRSF1A sequencing show a pathogenic variant with compatible attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial Mediterranean fever, mevalonate kinase deficiency or Still disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra or canakinumab as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids to attenuate attacks, with limited reliance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Etanercept if IL-1 blockade is unsuitable; avoid infliximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor CRP, serum amyloid A and urine protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for the autosomal dominant disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "IL-1 blockade controls most disease; cysteine variants risk AA amyloidosis if untreated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "traps_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TNFRSF1A gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic variant; low-penetrance variants interpreted with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and serum amyloid A",
+          "cells": [
+            {
+              "text": "Acute-phase response during and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum soluble TNF receptor 1 between attacks",
+          "cells": [
+            {
+              "text": "Reduced shedding supports, but does not confirm, diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected muscle groups",
+          "cells": [
+            {
+              "text": "Fasciitis rather than myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and Congo red biopsy",
+          "cells": [
+            {
+              "text": "Proteinuria and AA amyloid, when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traps_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Shorter attacks in most; genetic testing of both genes separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate kinase deficiency",
+          "cells": [
+            {
+              "text": "Raised serum IgD and urinary mevalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic JIA and adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Overlapping fever and rash; TNFRSF1A testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traps_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab; the most reliably effective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Attenuate attacks; reliance limited by escalating requirements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Etanercept",
+          "cells": [
+            {
+              "text": "Where IL-1 blockade is unsuitable; infliximab avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase and urine monitoring",
+          "cells": [
+            {
+              "text": "CRP, serum amyloid A and proteinuria for AA amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation and counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology involvement",
+          "cells": [
+            {
+              "text": "Amyloid or renal impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

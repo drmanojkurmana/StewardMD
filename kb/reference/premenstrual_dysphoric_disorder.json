@@ -1,172 +1,448 @@
 {
- "id": "premenstrual_dysphoric_disorder",
- "name": "Premenstrual dysphoric disorder",
- "aliases": [
-  "PMDD",
-  "severe premenstrual syndrome",
-  "premenstrual dysphoria"
- ],
- "class": "non_infective",
- "system": "Reproductive medicine",
- "specialty": "Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair function and relationships",
-   "The defining feature is the timing: symptoms appear in the luteal phase, remit shortly after menstruation begins, and are absent in the follicular phase",
-   "Core symptoms include marked irritability, mood lability, depressed mood, anxiety, and a sense of being overwhelmed, alongside physical complaints such as bloating and breast tenderness",
-   "Diagnosis should be confirmed by prospective daily symptom charting across at least two cycles rather than by retrospective recall alone",
-   "It must be distinguished from premenstrual exacerbation of an underlying mood or anxiety disorder, which persists throughout the cycle",
-   "Serotonergic antidepressants are a first-line treatment and can be given continuously or restricted to the luteal phase according to principle",
-   "Suppressing ovulation, for example with combined hormonal contraception, can relieve symptoms by abolishing the cyclical hormonal trigger",
-   "Lifestyle measures, cognitive behavioural therapy, and attention to suicide risk during the luteal phase are important adjuncts"
+  "id": "premenstrual_dysphoric_disorder",
+  "name": "Premenstrual dysphoric disorder",
+  "aliases": [
+    "PMDD",
+    "severe premenstrual syndrome",
+    "premenstrual dysphoria"
   ],
-  "pathophysiology": "Premenstrual dysphoric disorder is thought to arise from an abnormal central nervous system sensitivity to the normal cyclical fluctuations of ovarian steroids rather than from any abnormal hormone level. Progesterone metabolites such as allopregnanolone, which modulate GABA-A receptor function, and interactions with serotonergic neurotransmission appear central, so susceptible women experience marked mood and behavioural symptoms during the luteal phase when these hormones fluctuate. Because the trigger is ovulatory cycling, symptoms resolve when the cycle ends and can be abolished by suppressing ovulation. The rapid response to serotonergic agents, often faster than in major depression, supports a serotonergic mechanism.",
-  "additionalDifferentials": [
-   "Premenstrual exacerbation of major depressive or anxiety disorder",
-   "Bipolar affective disorder",
-   "Thyroid dysfunction",
-   "Perimenopausal mood symptoms",
-   "Generalised anxiety disorder",
-   "Premenstrual syndrome without severe dysphoria"
-  ],
-  "additionalInvestigations": [
-   "Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing",
-   "Mental health assessment to exclude an underlying mood or anxiety disorder",
-   "Thyroid function testing where clinically indicated",
-   "Screening for depression severity and suicide risk",
-   "Review of contraceptive and other medication effects on mood"
-  ],
-  "redFlags": [
-   "Suicidal ideation, which may intensify during the luteal phase",
-   "Symptoms persisting throughout the cycle, suggesting a primary psychiatric disorder rather than PMDD",
-   "Severe functional impairment or inability to maintain work and relationships",
-   "Features suggesting bipolar disorder that would alter treatment choice"
-  ],
-  "prognosis": "With accurate diagnosis and treatment, most women achieve substantial symptom control; symptoms recur if treatment stops while ovulatory cycles continue and typically resolve after the menopause or with sustained ovulation suppression.",
-  "pitfalls": [
-   "Diagnosing on retrospective history without prospective symptom charting",
-   "Missing an underlying mood disorder that is merely worsened premenstrually",
-   "Underestimating luteal-phase suicide risk",
-   "Attributing all cyclical physical symptoms to PMDD without considering other causes"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase",
-   "Ovulation suppression with a combined oral contraceptive, such as a drospirenone-containing pill, to abolish the cyclical hormonal trigger",
-   "GnRH-agonist therapy with add-back hormone replacement for severe, treatment-refractory disease",
-   "Cognitive behavioural therapy and lifestyle measures such as exercise, sleep hygiene and dietary adjustment as adjuncts",
-   "Confirm and monitor with prospective daily symptom charting across at least two menstrual cycles",
-   "Identify and treat any coexisting mood or anxiety disorder, with suicide-risk assessment",
-   "Consider bilateral oophorectomy with hormone replacement as a last resort in severe, refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "premenstrual_dysphoric_disorder-pathway",
-   "title": "Premenstrual dysphoric disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair function and relationships",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suicidal ideation, which may intensify during the luteal phase",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing, Mental health assessment to exclude an underlying mood or anxiety disorder, Thyroid function testing where clinically indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing on retrospective history without prospective symptom charting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of premenstrual dysphoric disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "premenstrual_dysphoric_disorder-matrix",
-   "title": "Premenstrual dysphoric disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive medicine",
+  "specialty": "Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair function and relationships",
+      "The defining feature is the timing: symptoms appear in the luteal phase, remit shortly after menstruation begins, and are absent in the follicular phase",
+      "Core symptoms include marked irritability, mood lability, depressed mood, anxiety, and a sense of being overwhelmed, alongside physical complaints such as bloating and breast tenderness",
+      "Diagnosis should be confirmed by prospective daily symptom charting across at least two cycles rather than by retrospective recall alone",
+      "It must be distinguished from premenstrual exacerbation of an underlying mood or anxiety disorder, which persists throughout the cycle",
+      "Serotonergic antidepressants are a first-line treatment and can be given continuously or restricted to the luteal phase according to principle",
+      "Suppressing ovulation, for example with combined hormonal contraception, can relieve symptoms by abolishing the cyclical hormonal trigger",
+      "Lifestyle measures, cognitive behavioural therapy, and attention to suicide risk during the luteal phase are important adjuncts"
     ],
-    [
-     "Key Investigations",
-     "Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing, Mental health assessment to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Premenstrual dysphoric disorder is thought to arise from an abnormal central nervous system sensitivity to the normal cyclical fluctuations of ovarian steroids rather than from any abnormal hormone level. Progesterone metabolites such as allopregnanolone, which modulate GABA-A receptor function, and interactions with serotonergic neurotransmission appear central, so susceptible women experience marked mood and behavioural symptoms during the luteal phase when these hormones fluctuate. Because the trigger is ovulatory cycling, symptoms resolve when the cycle ends and can be abolished by suppressing ovulation. The rapid response to serotonergic agents, often faster than in major depression, supports a serotonergic mechanism.",
+    "additionalDifferentials": [
+      "Premenstrual exacerbation of major depressive or anxiety disorder",
+      "Bipolar affective disorder",
+      "Thyroid dysfunction",
+      "Perimenopausal mood symptoms",
+      "Generalised anxiety disorder",
+      "Premenstrual syndrome without severe dysphoria"
     ],
-    [
-     "Primary Differentials",
-     "Premenstrual exacerbation of major depressive or anxiety disorder, Bipolar affective disorder, Thyroid dysfunction",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing",
+      "Mental health assessment to exclude an underlying mood or anxiety disorder",
+      "Thyroid function testing where clinically indicated",
+      "Screening for depression severity and suicide risk",
+      "Review of contraceptive and other medication effects on mood"
     ],
-    [
-     "Management Strategy",
-     "Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase",
-     "Core treatment modality"
+    "redFlags": [
+      "Suicidal ideation, which may intensify during the luteal phase",
+      "Symptoms persisting throughout the cycle, suggesting a primary psychiatric disorder rather than PMDD",
+      "Severe functional impairment or inability to maintain work and relationships",
+      "Features suggesting bipolar disorder that would alter treatment choice"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing on retrospective history without prospective symptom charting",
-     "Prevent diagnostic or management error"
+    "prognosis": "With accurate diagnosis and treatment, most women achieve substantial symptom control; symptoms recur if treatment stops while ovulatory cycles continue and typically resolve after the menopause or with sustained ovulation suppression.",
+    "pitfalls": [
+      "Diagnosing on retrospective history without prospective symptom charting",
+      "Missing an underlying mood disorder that is merely worsened premenstrually",
+      "Underestimating luteal-phase suicide risk",
+      "Attributing all cyclical physical symptoms to PMDD without considering other causes"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase",
+      "Ovulation suppression with a combined oral contraceptive, such as a drospirenone-containing pill, to abolish the cyclical hormonal trigger",
+      "GnRH-agonist therapy with add-back hormone replacement for severe, treatment-refractory disease",
+      "Cognitive behavioural therapy and lifestyle measures such as exercise, sleep hygiene and dietary adjustment as adjuncts",
+      "Confirm and monitor with prospective daily symptom charting across at least two menstrual cycles",
+      "Identify and treat any coexisting mood or anxiety disorder, with suicide-risk assessment",
+      "Consider bilateral oophorectomy with hormone replacement as a last resort in severe, refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for premenstrual dysphoric disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "premenstrual-dysphoric-disorder-real-image",
-   "title": "Premenstrual dysphoric disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "premenstrual_dysphoric_disorder-pathway",
+      "title": "Premenstrual dysphoric disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair function and relationships",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suicidal ideation, which may intensify during the luteal phase",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing, Mental health assessment to exclude an underlying mood or anxiety disorder, Thyroid function testing where clinically indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing on retrospective history without prospective symptom charting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of premenstrual dysphoric disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "premenstrual_dysphoric_disorder-matrix",
+      "title": "Premenstrual dysphoric disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Premenstrual dysphoric disorder is a severe form of premenstrual syndrome dominated by mood symptoms that markedly impair",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Prospective daily symptom diary over at least two menstrual cycles to confirm cyclical timing, Mental health assessment to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Premenstrual exacerbation of major depressive or anxiety disorder, Bipolar affective disorder, Thyroid dysfunction",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Serotonergic antidepressants (SSRIs) as first-line therapy, given either continuously or restricted to the luteal phase",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing on retrospective history without prospective symptom charting",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for premenstrual dysphoric disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "premenstrual_dysphoric_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Prospective daily symptom diary over two menstrual cycles",
+          "cells": [
+            {
+              "text": "Cyclical timing of symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mental health assessment",
+          "cells": [
+            {
+              "text": "Underlying mood or anxiety disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression severity and suicide risk screening",
+          "cells": [
+            {
+              "text": "Depression severity and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of contraceptive and other medications",
+          "cells": [
+            {
+              "text": "Medication effects on mood"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premenstrual_dysphoric_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Premenstrual exacerbation of depression or anxiety",
+          "cells": [
+            {
+              "text": "Symptoms persisting throughout the cycle"
+            },
+            {
+              "text": "Daily symptom diary over two cycles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bipolar affective disorder",
+          "cells": [
+            {
+              "text": "Features suggesting bipolar disorder that would change treatment"
+            },
+            {
+              "text": "Mental health assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premenstrual_dysphoric_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "SSRI antidepressants",
+          "cells": [
+            {
+              "text": "First-line; continuous or restricted to the luteal phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined oral contraceptive",
+          "cells": [
+            {
+              "text": "Suppresses ovulation, such as a drospirenone-containing pill"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CBT and lifestyle measures",
+          "cells": [
+            {
+              "text": "Exercise, sleep hygiene and dietary adjustment as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting disorders",
+          "cells": [
+            {
+              "text": "Mood or anxiety disorder, with suicide-risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH agonist with add-back",
+          "cells": [
+            {
+              "text": "Severe, treatment-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral oophorectomy",
+          "cells": [
+            {
+              "text": "Last resort in severe refractory cases, with hormone replacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "premenstrual_dysphoric_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Premenstrual dysphoric disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PMDD: severe cyclical dysphoric symptoms in the luteal phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Suicidal ideation, symptoms all cycle, or features of bipolar disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: suicide-risk assessment and psychiatric review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Daily symptom diary over two cycles; mood, thyroid and medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does charting confirm cyclical symptoms without a primary psychiatric disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as a primary mood or anxiety disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "SSRI antidepressants as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combined oral contraceptive to suppress ovulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CBT and lifestyle measures as adjuncts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "GnRH agonist with add-back for severe refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Last resort in severe refractory cases: bilateral oophorectomy with hormone replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

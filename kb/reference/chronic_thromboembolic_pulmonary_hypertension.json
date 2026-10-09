@@ -1,176 +1,461 @@
 {
- "id": "chronic_thromboembolic_pulmonary_hypertension",
- "name": "Chronic thromboembolic pulmonary hypertension",
- "aliases": [
-  "CTEPH",
-  "group 4 pulmonary hypertension",
-  "chronic thromboembolic disease"
- ],
- "class": "non_infective",
- "system": "Respiratory / Pulmonary vascular",
- "specialty": "Pulmonary Hypertension",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its identification essential in every patient",
-   "Results from incomplete resolution of pulmonary emboli that organise into fibrotic material obstructing the pulmonary arteries, though many patients have no documented prior acute event",
-   "Presents with progressive exertional breathlessness and fatigue, sometimes with signs of right heart failure, developing months to years after a thromboembolic insult",
-   "The ventilation-perfusion scan is the key screening test, showing multiple segmental mismatched perfusion defects, and is more sensitive than CT pulmonary angiography for excluding the disease",
-   "Diagnosis requires persistent pulmonary hypertension despite at least several months of therapeutic anticoagulation, confirmed at right heart catheterisation",
-   "Lifelong anticoagulation is standard, and patients should be assessed at an experienced centre to determine operability",
-   "Pulmonary endarterectomy is the treatment of choice for surgically accessible disease and can be curative; balloon pulmonary angioplasty and targeted medical therapy help inoperable or residual disease"
+  "id": "chronic_thromboembolic_pulmonary_hypertension",
+  "name": "Chronic thromboembolic pulmonary hypertension",
+  "aliases": [
+    "CTEPH",
+    "group 4 pulmonary hypertension",
+    "chronic thromboembolic disease"
   ],
-  "pathophysiology": "Chronic thromboembolic pulmonary hypertension develops when acute pulmonary thromboembolism fails to resolve and instead organises into fibrous, endothelialised material that becomes incorporated into the pulmonary arterial wall, producing webs, bands, and stenoses that mechanically obstruct flow. Over time a secondary small-vessel arteriopathy develops in non-obstructed territories, resembling the remodelling of arterial pulmonary hypertension and contributing to the rise in pulmonary vascular resistance. The chronically obstructed and remodelled circulation imposes a progressive afterload on the right ventricle, leading to hypertrophy, dilatation, and eventual failure. Because the proximal obstructing material is fibrotic rather than fresh clot, it is amenable to surgical removal, which distinguishes the disorder from other forms of pulmonary hypertension.",
-  "additionalDifferentials": [
-   "Idiopathic or heritable pulmonary arterial hypertension",
-   "Acute pulmonary embolism",
-   "Pulmonary hypertension due to left heart disease (group 2)",
-   "Pulmonary hypertension due to lung disease or hypoxia (group 3)",
-   "In situ pulmonary artery sarcoma or tumour embolism",
-   "Large-vessel pulmonary arteritis (e.g. Takayasu)",
-   "Fibrosing mediastinitis compressing pulmonary vessels"
-  ],
-  "additionalInvestigations": [
-   "Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects",
-   "Right heart catheterisation to confirm pre-capillary haemodynamics and quantify severity",
-   "Pulmonary angiography (conventional or CT/MR) to define the anatomy and surgical accessibility of obstruction",
-   "Transthoracic echocardiography to assess right ventricular function and estimate pressures",
-   "Thrombophilia and antiphospholipid antibody screening given the thromboembolic basis",
-   "Cardiopulmonary exercise testing and six-minute walk distance for functional and prognostic assessment"
-  ],
-  "redFlags": [
-   "Syncope or presyncope on exertion suggesting critically limited pulmonary flow",
-   "Signs of decompensated right heart failure with hypotension or hepatic congestion",
-   "Haemoptysis, which may reflect enlarged bronchial collaterals",
-   "Persisting or worsening pulmonary hypertension despite adequate anticoagulation, mandating operability assessment"
-  ],
-  "prognosis": "Untreated, chronic thromboembolic pulmonary hypertension carries a poor prognosis that worsens with rising pulmonary vascular resistance, but pulmonary endarterectomy can normalise haemodynamics and offer a functional cure in operable disease. Inoperable or residual disease is managed with balloon pulmonary angioplasty and targeted therapy at expert centres, with outcomes that continue to improve.",
-  "pitfalls": [
-   "Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect",
-   "Attributing symptoms to residual acute embolism and not screening breathless patients months after an event",
-   "Labelling disease inoperable without assessment at an experienced surgical centre",
-   "Starting targeted pulmonary vasodilator therapy in an operable patient and thereby delaying curative surgery",
-   "Failing to establish lifelong anticoagulation and investigate an underlying thrombophilia"
-  ],
-  "references": [
-   "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
-   "Nunn's Applied Respiratory Physiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong therapeutic anticoagulation as the baseline treatment for all patients",
-   "Pulmonary endarterectomy as the treatment of choice and potential cure for operable proximal fibrotic obstruction",
-   "Balloon pulmonary angioplasty for inoperable, distal or residual disease",
-   "Targeted medical therapy with the soluble guanylate cyclase stimulator riociguat for inoperable or persistent pulmonary hypertension",
-   "Mandatory assessment at an experienced centre to determine operability",
-   "Management of right heart failure with diuretics and supplemental oxygen for hypoxaemia",
-   "Thrombophilia and antiphospholipid antibody evaluation given the thromboembolic basis",
-   "Functional surveillance with right heart catheterisation, echocardiography and exercise testing, supported by pulmonary rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_thromboembolic_pulmonary_hypertension-pathway",
-   "title": "Chronic thromboembolic pulmonary hypertension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its identification essential in every patient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or presyncope on exertion suggesting critically limited pulmonary flow",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects, Right heart catheterisation to confirm pre-capillary haemodynamics and quantify severity, Pulmonary angiography (conventional or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong therapeutic anticoagulation as the baseline treatment for all patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic thromboembolic pulmonary hypertension."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_thromboembolic_pulmonary_hypertension-matrix",
-   "title": "Chronic thromboembolic pulmonary hypertension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Pulmonary vascular",
+  "specialty": "Pulmonary Hypertension",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its identification essential in every patient",
+      "Results from incomplete resolution of pulmonary emboli that organise into fibrotic material obstructing the pulmonary arteries, though many patients have no documented prior acute event",
+      "Presents with progressive exertional breathlessness and fatigue, sometimes with signs of right heart failure, developing months to years after a thromboembolic insult",
+      "The ventilation-perfusion scan is the key screening test, showing multiple segmental mismatched perfusion defects, and is more sensitive than CT pulmonary angiography for excluding the disease",
+      "Diagnosis requires persistent pulmonary hypertension despite at least several months of therapeutic anticoagulation, confirmed at right heart catheterisation",
+      "Lifelong anticoagulation is standard, and patients should be assessed at an experienced centre to determine operability",
+      "Pulmonary endarterectomy is the treatment of choice for surgically accessible disease and can be curative; balloon pulmonary angioplasty and targeted medical therapy help inoperable or residual disease"
     ],
-    [
-     "Key Investigations",
-     "Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects, Right heart catheterisation to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic thromboembolic pulmonary hypertension develops when acute pulmonary thromboembolism fails to resolve and instead organises into fibrous, endothelialised material that becomes incorporated into the pulmonary arterial wall, producing webs, bands, and stenoses that mechanically obstruct flow. Over time a secondary small-vessel arteriopathy develops in non-obstructed territories, resembling the remodelling of arterial pulmonary hypertension and contributing to the rise in pulmonary vascular resistance. The chronically obstructed and remodelled circulation imposes a progressive afterload on the right ventricle, leading to hypertrophy, dilatation, and eventual failure. Because the proximal obstructing material is fibrotic rather than fresh clot, it is amenable to surgical removal, which distinguishes the disorder from other forms of pulmonary hypertension.",
+    "additionalDifferentials": [
+      "Idiopathic or heritable pulmonary arterial hypertension",
+      "Acute pulmonary embolism",
+      "Pulmonary hypertension due to left heart disease (group 2)",
+      "Pulmonary hypertension due to lung disease or hypoxia (group 3)",
+      "In situ pulmonary artery sarcoma or tumour embolism",
+      "Large-vessel pulmonary arteritis (e.g. Takayasu)",
+      "Fibrosing mediastinitis compressing pulmonary vessels"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic or heritable pulmonary arterial hypertension, Acute pulmonary embolism, Pulmonary hypertension due to left heart",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects",
+      "Right heart catheterisation to confirm pre-capillary haemodynamics and quantify severity",
+      "Pulmonary angiography (conventional or CT/MR) to define the anatomy and surgical accessibility of obstruction",
+      "Transthoracic echocardiography to assess right ventricular function and estimate pressures",
+      "Thrombophilia and antiphospholipid antibody screening given the thromboembolic basis",
+      "Cardiopulmonary exercise testing and six-minute walk distance for functional and prognostic assessment"
     ],
-    [
-     "Management Strategy",
-     "Lifelong therapeutic anticoagulation as the baseline treatment for all patients",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or presyncope on exertion suggesting critically limited pulmonary flow",
+      "Signs of decompensated right heart failure with hypotension or hepatic congestion",
+      "Haemoptysis, which may reflect enlarged bronchial collaterals",
+      "Persisting or worsening pulmonary hypertension despite adequate anticoagulation, mandating operability assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated, chronic thromboembolic pulmonary hypertension carries a poor prognosis that worsens with rising pulmonary vascular resistance, but pulmonary endarterectomy can normalise haemodynamics and offer a functional cure in operable disease. Inoperable or residual disease is managed with balloon pulmonary angioplasty and targeted therapy at expert centres, with outcomes that continue to improve.",
+    "pitfalls": [
+      "Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect",
+      "Attributing symptoms to residual acute embolism and not screening breathless patients months after an event",
+      "Labelling disease inoperable without assessment at an experienced surgical centre",
+      "Starting targeted pulmonary vasodilator therapy in an operable patient and thereby delaying curative surgery",
+      "Failing to establish lifelong anticoagulation and investigate an underlying thrombophilia"
+    ],
+    "references": [
+      "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "Nunn's Applied Respiratory Physiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong therapeutic anticoagulation as the baseline treatment for all patients",
+      "Pulmonary endarterectomy as the treatment of choice and potential cure for operable proximal fibrotic obstruction",
+      "Balloon pulmonary angioplasty for inoperable, distal or residual disease",
+      "Targeted medical therapy with the soluble guanylate cyclase stimulator riociguat for inoperable or persistent pulmonary hypertension",
+      "Mandatory assessment at an experienced centre to determine operability",
+      "Management of right heart failure with diuretics and supplemental oxygen for hypoxaemia",
+      "Thrombophilia and antiphospholipid antibody evaluation given the thromboembolic basis",
+      "Functional surveillance with right heart catheterisation, echocardiography and exercise testing, supported by pulmonary rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic thromboembolic pulmonary hypertension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-thromboembolic-pulmonary-hypertension-real-image",
-   "title": "Chronic thromboembolic pulmonary hypertension: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "chronic_thromboembolic_pulmonary_hypertension-pathway",
+      "title": "Chronic thromboembolic pulmonary hypertension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its identification essential in every patient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or presyncope on exertion suggesting critically limited pulmonary flow",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects, Right heart catheterisation to confirm pre-capillary haemodynamics and quantify severity, Pulmonary angiography (conventional or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong therapeutic anticoagulation as the baseline treatment for all patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic thromboembolic pulmonary hypertension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-matrix",
+      "title": "Chronic thromboembolic pulmonary hypertension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Constitutes group 4 pulmonary hypertension and is the pre-capillary form that is potentially curable by surgery, making its",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ventilation-perfusion scintigraphy as the primary screen for mismatched perfusion defects, Right heart catheterisation to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic or heritable pulmonary arterial hypertension, Acute pulmonary embolism, Pulmonary hypertension due to left heart",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong therapeutic anticoagulation as the baseline treatment for all patients",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on CT pulmonary angiography alone, which can miss disease that a ventilation-perfusion scan would detect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic thromboembolic pulmonary hypertension."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventilation-perfusion scintigraphy",
+          "cells": [
+            {
+              "text": "Multiple segmental mismatched perfusion defects; key screening test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Confirms pre-capillary haemodynamics and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary angiography (conventional, CT or MR)",
+          "cells": [
+            {
+              "text": "Defines anatomy and surgical accessibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Right ventricular function and pressure estimate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia and antiphospholipid antibody screen",
+          "cells": [
+            {
+              "text": "Thromboembolic basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension due to left heart disease (group 2)",
+          "cells": [
+            {
+              "text": "Left heart disease present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension due to lung disease or hypoxia (group 3)",
+          "cells": [
+            {
+              "text": "Lung disease or hypoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrosing mediastinitis",
+          "cells": [
+            {
+              "text": "Compression of pulmonary vessels from outside"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong therapeutic anticoagulation",
+          "cells": [
+            {
+              "text": "Baseline treatment for all patients"
+            },
+            {
+              "text": "Standard for all patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary endarterectomy",
+          "cells": [
+            {
+              "text": "Treatment of choice for operable proximal fibrotic obstruction"
+            },
+            {
+              "text": "Can be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon pulmonary angioplasty",
+          "cells": [
+            {
+              "text": "Inoperable, distal or residual disease"
+            },
+            {
+              "text": "Inoperable or residual disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riociguat",
+          "cells": [
+            {
+              "text": "Soluble guanylate cyclase stimulator for inoperable or persistent disease"
+            },
+            {
+              "text": "Targeted medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and supplemental oxygen",
+          "cells": [
+            {
+              "text": "Right heart failure and hypoxaemia"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Chronic thromboembolic pulmonary hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CTEPH: progressive breathlessness months to years after thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope on exertion, right heart failure, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiorespiratory review for critically limited pulmonary flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "V/Q scan, then right heart catheterisation and pulmonary angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Persistent pulmonary hypertension despite months of anticoagulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong therapeutic anticoagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check idiopathic PAH, left heart disease and lung disease causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refer to an experienced centre to determine operability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pulmonary endarterectomy for operable proximal fibrotic obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Balloon pulmonary angioplasty or riociguat for inoperable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Right heart failure care, rehabilitation and functional surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

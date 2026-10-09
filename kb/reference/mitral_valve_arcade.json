@@ -1,173 +1,460 @@
 {
- "id": "mitral_valve_arcade",
- "name": "mitral valve arcade",
- "aliases": [
-  "anomalous mitral arcade",
-  "hammock mitral valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Paediatric Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the leaflet free edge through a bridging band of fibrous tissue, obliterating the normal chordae.",
-   "It causes mixed mitral dysfunction, with regurgitation from restricted coaptation and stenosis from limited leaflet opening.",
-   "It often forms part of the congenital mitral dysplasia spectrum and may coexist with parachute valve, supravalvar mitral ring and subaortic stenosis within Shone complex.",
-   "Echocardiography shows papillary muscles displaced towards the annulus with a hammock-like subvalvar apparatus and thickened, immobile leaflet edges.",
-   "It is distinguished from parachute mitral valve, in which chordae converge on a single papillary muscle, whereas the arcade shows direct muscular or fibrous attachment to the leaflet margin.",
-   "Because chordal shortening tethers the leaflet tips while the body may still billow, the appearance should not be mistaken for prolapse.",
-   "Surgical repair is difficult owing to the deficient subvalvar apparatus, and valve replacement is sometimes required."
+  "id": "mitral_valve_arcade",
+  "name": "mitral valve arcade",
+  "aliases": [
+    "anomalous mitral arcade",
+    "hammock mitral valve"
   ],
-  "pathophysiology": "The lesion results from abnormal development of the mitral tension apparatus in which the interchordal spaces fail to form. The papillary muscles insert directly onto the free margin of the anterior leaflet, or a continuous fibrous arcade bridges the papillary muscle tips along the leaflet edge, so that discrete chordae are effectively absent. The resulting tethering restricts leaflet excursion, producing regurgitation through failure of coaptation and stenosis through limited diastolic opening. The abnormality lies within the wider spectrum of congenital mitral valve dysplasia and commonly accompanies other left-heart obstructive lesions.",
-  "additionalDifferentials": [
-   "Parachute mitral valve",
-   "Congenital mitral stenosis with supravalvar mitral ring",
-   "Rheumatic mitral valve disease",
-   "Mitral valve prolapse",
-   "Cleft mitral valve or atrioventricular septal defect",
-   "Ischaemic or dysplastic papillary muscle dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with focused subvalvar apparatus imaging",
-   "Transoesophageal and 3D echocardiography",
-   "Cardiac MRI",
-   "Cardiac catheterisation with transvalvar pressure measurement",
-   "Electrocardiography",
-   "Screening for associated Shone-complex left-heart obstructive lesions"
-  ],
-  "redFlags": [
-   "Heart failure or pulmonary oedema from severe mitral dysfunction",
-   "Pulmonary hypertension",
-   "Failure to thrive in infants",
-   "Atrial arrhythmia with haemodynamic compromise"
-  ],
-  "prognosis": "Outcome depends on severity and associated lesions; mild disease may remain stable for years, but significant mixed mitral disease often needs repair or replacement, and the deficient subvalvar apparatus makes durable repair difficult.",
-  "pitfalls": [
-   "Confusing arcade with parachute valve or rheumatic disease",
-   "Missing associated Shone-complex lesions",
-   "Mistaking tethered leaflet tips with a billowing body for prolapse",
-   "Underestimating the stenosis component when regurgitation dominates the clinical picture"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "Feigenbaum's Echocardiography"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement when the deficient chordal support precludes durable repair",
-   "Medical control of pulmonary congestion and heart failure with diuretics and afterload reduction ahead of surgery",
-   "Precise echocardiographic delineation of papillary muscles, chordae and leaflets to define the mixed stenosis and regurgitation mechanism and distinguish it from parachute valve and prolapse",
-   "Screen for and manage associated Shone-complex lesions including parachute valve, supravalvar mitral ring and subaortic or aortic obstruction",
-   "Monitor for and treat pulmonary hypertension and right heart strain",
-   "Nutritional support for infants with failure to thrive and feeding difficulty",
-   "Paediatric cardiology and congenital cardiac surgical follow-up for residual or recurrent valve dysfunction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mitral_valve_arcade-pathway",
-   "title": "mitral valve arcade: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the leaflet free edge through a bridging band of fibrous tissue, obliterating the normal chordae.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heart failure or pulmonary oedema from severe mitral dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with focused subvalvar apparatus imaging, Transoesophageal and 3D echocardiography, Cardiac MRI"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement when the deficient chordal support precludes durable repair"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing arcade with parachute valve or rheumatic disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mitral valve arcade."
-  }
- ],
- "tables": [
-  {
-   "id": "mitral_valve_arcade-matrix",
-   "title": "mitral valve arcade: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Paediatric Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the leaflet free edge through a bridging band of fibrous tissue, obliterating the normal chordae.",
+      "It causes mixed mitral dysfunction, with regurgitation from restricted coaptation and stenosis from limited leaflet opening.",
+      "It often forms part of the congenital mitral dysplasia spectrum and may coexist with parachute valve, supravalvar mitral ring and subaortic stenosis within Shone complex.",
+      "Echocardiography shows papillary muscles displaced towards the annulus with a hammock-like subvalvar apparatus and thickened, immobile leaflet edges.",
+      "It is distinguished from parachute mitral valve, in which chordae converge on a single papillary muscle, whereas the arcade shows direct muscular or fibrous attachment to the leaflet margin.",
+      "Because chordal shortening tethers the leaflet tips while the body may still billow, the appearance should not be mistaken for prolapse.",
+      "Surgical repair is difficult owing to the deficient subvalvar apparatus, and valve replacement is sometimes required."
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with focused subvalvar apparatus imaging, Transoesophageal and 3D echocardiography, Cardiac MRI",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The lesion results from abnormal development of the mitral tension apparatus in which the interchordal spaces fail to form. The papillary muscles insert directly onto the free margin of the anterior leaflet, or a continuous fibrous arcade bridges the papillary muscle tips along the leaflet edge, so that discrete chordae are effectively absent. The resulting tethering restricts leaflet excursion, producing regurgitation through failure of coaptation and stenosis through limited diastolic opening. The abnormality lies within the wider spectrum of congenital mitral valve dysplasia and commonly accompanies other left-heart obstructive lesions.",
+    "additionalDifferentials": [
+      "Parachute mitral valve",
+      "Congenital mitral stenosis with supravalvar mitral ring",
+      "Rheumatic mitral valve disease",
+      "Mitral valve prolapse",
+      "Cleft mitral valve or atrioventricular septal defect",
+      "Ischaemic or dysplastic papillary muscle dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Parachute mitral valve, Congenital mitral stenosis with supravalvar mitral ring, Rheumatic mitral valve disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with focused subvalvar apparatus imaging",
+      "Transoesophageal and 3D echocardiography",
+      "Cardiac MRI",
+      "Cardiac catheterisation with transvalvar pressure measurement",
+      "Electrocardiography",
+      "Screening for associated Shone-complex left-heart obstructive lesions"
     ],
-    [
-     "Management Strategy",
-     "Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement",
-     "Core treatment modality"
+    "redFlags": [
+      "Heart failure or pulmonary oedema from severe mitral dysfunction",
+      "Pulmonary hypertension",
+      "Failure to thrive in infants",
+      "Atrial arrhythmia with haemodynamic compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing arcade with parachute valve or rheumatic disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on severity and associated lesions; mild disease may remain stable for years, but significant mixed mitral disease often needs repair or replacement, and the deficient subvalvar apparatus makes durable repair difficult.",
+    "pitfalls": [
+      "Confusing arcade with parachute valve or rheumatic disease",
+      "Missing associated Shone-complex lesions",
+      "Mistaking tethered leaflet tips with a billowing body for prolapse",
+      "Underestimating the stenosis component when regurgitation dominates the clinical picture"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "Feigenbaum's Echocardiography"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement when the deficient chordal support precludes durable repair",
+      "Medical control of pulmonary congestion and heart failure with diuretics and afterload reduction ahead of surgery",
+      "Precise echocardiographic delineation of papillary muscles, chordae and leaflets to define the mixed stenosis and regurgitation mechanism and distinguish it from parachute valve and prolapse",
+      "Screen for and manage associated Shone-complex lesions including parachute valve, supravalvar mitral ring and subaortic or aortic obstruction",
+      "Monitor for and treat pulmonary hypertension and right heart strain",
+      "Nutritional support for infants with failure to thrive and feeding difficulty",
+      "Paediatric cardiology and congenital cardiac surgical follow-up for residual or recurrent valve dysfunction"
     ]
-   ],
-   "caption": "Overview comparison matrix for mitral valve arcade."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mitral-valve-arcade-real-image",
-   "title": "mitral valve arcade: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "mitral_valve_arcade-pathway",
+      "title": "mitral valve arcade: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the leaflet free edge through a bridging band of fibrous tissue, obliterating the normal chordae.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heart failure or pulmonary oedema from severe mitral dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with focused subvalvar apparatus imaging, Transoesophageal and 3D echocardiography, Cardiac MRI"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement when the deficient chordal support precludes durable repair"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing arcade with parachute valve or rheumatic disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mitral valve arcade."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mitral_valve_arcade-matrix",
+      "title": "mitral valve arcade: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Anomalous mitral arcade, or hammock valve, is a rare congenital dysplasia in which the papillary muscles attach directly to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with focused subvalvar apparatus imaging, Transoesophageal and 3D echocardiography, Cardiac MRI",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parachute mitral valve, Congenital mitral stenosis with supravalvar mitral ring, Rheumatic mitral valve disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive management is surgical: repair of the dysplastic subvalvar apparatus where anatomy allows, or mitral valve replacement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing arcade with parachute valve or rheumatic disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mitral valve arcade."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_valve_arcade-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with focused subvalvar apparatus imaging",
+          "cells": [
+            {
+              "text": "Subvalvar apparatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal and 3D echocardiography",
+          "cells": [
+            {
+              "text": "Papillary muscles, chordae and leaflets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Anatomy, when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation with transvalvar pressure measurement",
+          "cells": [
+            {
+              "text": "Transvalvar pressure gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated Shone-complex lesions",
+          "cells": [
+            {
+              "text": "Shone-complex lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_valve_arcade-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parachute mitral valve",
+          "cells": [
+            {
+              "text": "Distinguished by detailed echo of papillary muscles, chordae and leaflets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supravalvar mitral ring",
+          "cells": [
+            {
+              "text": "Distinguished by detailed echo of the mitral apparatus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_valve_arcade-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Repair of the dysplastic subvalvar apparatus where anatomy allows; replacement when chordal support is deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical control",
+          "cells": [
+            {
+              "text": "Diuretics and afterload reduction ahead of surgery for congestion and heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic delineation",
+          "cells": [
+            {
+              "text": "Papillary muscles, chordae and leaflets, to define mixed stenosis and regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shone-complex lesions",
+          "cells": [
+            {
+              "text": "Screen for and manage parachute valve, supravalvar ring and subaortic or aortic obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Monitor and treat, including right heart strain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Failure to thrive and feeding difficulty in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Paediatric cardiology and congenital surgical follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_valve_arcade-dx-mgmt",
+      "title": "Diagnosis and management of mitral valve arcade",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with heart failure, pulmonary oedema or failure to thrive from mitral dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulmonary hypertension, atrial arrhythmia with compromise, or Shone-complex obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Diuretics and afterload reduction; urgent paediatric cardiac surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with focused subvalvar imaging; TOE and 3D echo; catheter pressures; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dysplastic subvalvar apparatus confirmed with mixed stenosis and regurgitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider parachute valve, supravalvar ring or prolapse; reassess the mechanism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical repair of the dysplastic subvalvar apparatus where anatomy allows",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replacement when deficient chordal support precludes durable repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Medical control of congestion and heart failure before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for Shone-complex lesions and manage pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Paediatric cardiology and surgical follow-up for residual or recurrent dysfunction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

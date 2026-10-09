@@ -276,25 +276,642 @@
       "caption": "Diagnostic and clinical overview matrix for systemic vasculitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "vasculitis-real-image",
-      "title": "Systemic vasculitis: 12-Lead Diagnostic Electrocardiogram",
-      "type": "ecg",
-      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Granulomatosis With Polyangiitis",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/vasculitis/granulomatosis-with-polyangiitis-gpa",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Systemic vasculitis: clues, serology and confirmatory tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Conduction & Axis",
-          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+          "parameter": "Clinical clues",
+          "cells": [
+            {
+              "text": "Palpable purpura, lung infiltrates with haematuria, chronic sinusitis, mononeuritis multiplex, unexplained ischaemia"
+            },
+            {
+              "text": "Suspect vasculitis in unexplained multisystem illness"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Repolarization",
-          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+          "parameter": "PR3-ANCA (cANCA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 90% of active GPA",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Supports GPA"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Rhythm & Intervals",
-          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+          "parameter": "MPO-ANCA (pANCA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 75% of MPA; about 48% of EGPA"
+            },
+            {
+              "text": "Only anti-MPO pANCA is linked to vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA positive predictive value",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% with active glomerulonephritis; 30 to 60% in sinus or lung disease alone"
+            },
+            {
+              "text": "Biopsy needed when kidneys are spared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA titre",
+          "cells": [
+            {
+              "text": "Correlates poorly with activity"
+            },
+            {
+              "text": "{{hy:A rising titre alone is not a relapse}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy",
+          "cells": [
+            {
+              "text": "From a clinically involved organ"
+            },
+            {
+              "text": "Pauci-immune necrotising GN strongly supports AAV; blind biopsy has low yield"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Nodules and cavities missed on x-ray"
+            },
+            {
+              "text": "Do in suspected GPA; exclude TB and fungi if cavitary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eosinophil count",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Over 1000 in over 80% of EGPA",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "With asthma suggests EGPA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "Microaneurysms of renal, hepatic, visceral arteries"
+            },
+            {
+              "text": "Diagnostic of PAN when no tissue is accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis B and C serology",
+          "cells": [
+            {
+              "text": "All suspected PAN and cryoglobulinaemia"
+            },
+            {
+              "text": "Identifies virus-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vessel size (Chapel Hill)",
+          "cells": [
+            {
+              "text": "Large: GCA, Takayasu. Medium: PAN, Kawasaki. Small: ANCA (GPA, MPA, EGPA) and immune complex (IgA, cryoglobulinaemic)"
+            },
+            {
+              "text": "Frames the differential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck quotes an overall ANCA positive predictive value of about 50%; Harrison gives about 90% with active GN and 30 to 60% without renal disease."
+    },
+    {
+      "id": "vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Separating the main vasculitides and mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Upper and lower airway granulomas, saddle nose, subglottic stenosis, GN"
+            },
+            {
+              "text": "PR3-ANCA; lung biopsy has highest yield"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopic polyangiitis",
+          "cells": [
+            {
+              "text": "GN and capillaritis without granulomas or upper airway disease"
+            },
+            {
+              "text": "MPO-ANCA; renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Asthma, eosinophilia, neuropathy; heart is main cause of death"
+            },
+            {
+              "text": "Eosinophil count; echocardiogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polyarteritis nodosa",
+          "cells": [
+            {
+              "text": "Spares lungs and glomeruli; hepatitis B link"
+            },
+            {
+              "text": "{{hy:Catheter angiography for microaneurysms}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell arteritis",
+          "cells": [
+            {
+              "text": "Age over 50, jaw claudication, scalp tenderness, vision loss"
+            },
+            {
+              "text": "Temporal artery biopsy or ultrasound halo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu arteritis",
+          "cells": [
+            {
+              "text": "Young woman with absent pulses, arm BP difference, bruits"
+            },
+            {
+              "text": "MR or CT angiography of aorta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA vasculitis",
+          "cells": [
+            {
+              "text": "Palpable purpura, arthralgia, gut symptoms, GN"
+            },
+            {
+              "text": "Skin biopsy with IgA and C3 deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM disease",
+          "cells": [
+            {
+              "text": "Pulmonary-renal syndrome without ANCA vasculitis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection (endocarditis, TB, fungi)",
+          "cells": [
+            {
+              "text": "Can give false-positive ANCA"
+            },
+            {
+              "text": "Cultures and biopsy before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cocaine-levamisole injury",
+          "cells": [
+            {
+              "text": "Midline destruction, neutropenia, anti-elastase ANCA"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK/T-cell lymphoma or lymphomatoid granulomatosis",
+          "cells": [
+            {
+              "text": "Mimics GPA airway or lung disease"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of ANCA-associated vasculitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude infection first",
+          "cells": [
+            {
+              "text": "Before empirical immunosuppression"
+            },
+            {
+              "text": "Especially in a deteriorating patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose glucocorticoid plus rituximab",
+          "cells": [
+            {
+              "text": "{{hy:Severe disease: alveolar haemorrhage, RPGN, motor mononeuritis}}"
+            },
+            {
+              "text": "Rituximab preferred over cyclophosphamide for safety"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoid plus cyclophosphamide",
+          "cells": [
+            {
+              "text": "Severe disease, alternative to rituximab"
+            },
+            {
+              "text": "Switch to methotrexate or azathioprine after 3 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoid plus methotrexate",
+          "cells": [
+            {
+              "text": "Less severe disease"
+            },
+            {
+              "text": "Rituximab may replace methotrexate; taper steroid to lowest dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avacopan",
+          "cells": [
+            {
+              "text": "Adjunct to standard induction"
+            },
+            {
+              "text": "C5a receptor blocker; lowers steroid exposure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Selected severe cases"
+            },
+            {
+              "text": "No proven reduction in death or end-stage kidney disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance rituximab",
+          "cells": [
+            {
+              "text": "After remission"
+            },
+            {
+              "text": "Fewer relapses than azathioprine; add methotrexate, azathioprine or MMF for frequent relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Throughout"
+            },
+            {
+              "text": "B-cell depletion blunts vaccines and may cause hypogammaglobulinaemia; watch for VTE in GPA"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sources opened gave no doses. Never irradiate presumed GPA airway lesions; consider NK/T-cell lymphoma."
+    },
+    {
+      "id": "vasculitis-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to vasculitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Vasculitis",
+          "cells": [
+            {
+              "text": "allopurinol, amphetamines, cocaine, thiazides, penicillamine, propylthiouracil, montelukast, TNF inhibitors, hepatitis B vaccine, trimethoprim/sulfamethoxazole"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "vasculitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of systemic vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained multisystem illness with purpura, GN, neuropathy or lung infiltrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Exclude mimics: cultures, endocarditis, TB, drugs, cocaine",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "ANCA (PR3, MPO), urinalysis, creatinine, chest CT, hepatitis serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Dominant vessel size?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Large vessel: GCA or Takayasu pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Medium vessel: angiography for PAN; treat hepatitis B if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Small vessel: biopsy an involved organ",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Organ- or life-threatening disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose steroid plus rituximab or cyclophosphamide",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Steroid plus methotrexate or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Remission: maintenance rituximab; taper steroid",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Large"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Medium"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "Small"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

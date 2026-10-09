@@ -1,175 +1,737 @@
 {
- "id": "dermatomyositis",
- "name": "Dermatomyositis",
- "aliases": [
-  "DM",
-  "idiopathic inflammatory myopathy",
-  "amyopathic dermatomyositis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur without myositis",
-   "Characteristic rashes include the heliotrope discolouration of the eyelids, Gottron papules over the knuckles, the shawl and V-signs, and periungual telangiectasia",
-   "An amyopathic (clinically hypomyopathic) form has typical skin changes with little or no measurable muscle weakness",
-   "Elevated creatine kinase, myopathic EMG, and muscle MRI support the diagnosis; biopsy shows perifascicular atrophy and perivascular inflammation",
-   "There is a well-recognised association with occult malignancy, so age-appropriate cancer screening is essential, particularly around diagnosis",
-   "Interstitial lung disease is common and may be rapidly progressive, especially with anti-MDA5 antibodies, which also carry a characteristic cutaneous ulcerating phenotype",
-   "Myositis-specific antibodies (e.g. anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase) predict distinct patterns of skin, lung, and malignancy risk",
-   "Treatment uses corticosteroids with steroid-sparing immunosuppressants, photoprotection and topical therapy for skin, and prompt management of lung involvement"
+  "id": "dermatomyositis",
+  "name": "Dermatomyositis",
+  "aliases": [
+    "DM",
+    "idiopathic inflammatory myopathy",
+    "amyopathic dermatomyositis"
   ],
-  "pathophysiology": "Dermatomyositis is an idiopathic inflammatory myopathy characterised by humorally mediated, complement-dependent microangiopathy. Immune complex deposition and complement activation (membrane attack complex) on endomysial capillaries cause capillary loss, ischaemia, and the perifascicular atrophy typical of muscle biopsy. A strong type I interferon signature is present in muscle and skin. The same immune-mediated vasculopathy affects skin and other organs, and paraneoplastic mechanisms link it to underlying malignancy in a substantial proportion of adults.",
-  "additionalDifferentials": [
-   "Polymyositis and immune-mediated necrotising myopathy",
-   "Systemic lupus erythematosus and other connective tissue diseases with rash",
-   "Cutaneous drug eruptions and photosensitive dermatoses",
-   "Psoriasis or contact dermatitis (for Gottron/knuckle lesions)",
-   "Inclusion body myositis",
-   "Thyroid and other metabolic myopathies"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase)",
-   "Electromyography and muscle MRI to localise and characterise inflammation",
-   "Muscle and/or skin biopsy demonstrating characteristic histology",
-   "High-resolution CT chest and pulmonary function tests for interstitial lung disease",
-   "Age- and risk-appropriate malignancy screening at diagnosis and during follow-up"
-  ],
-  "redFlags": [
-   "Rapidly progressive interstitial lung disease, particularly with anti-MDA5 antibodies, which can be life-threatening",
-   "Clinical features pointing to an underlying malignancy (weight loss, new mass, cytopenias)",
-   "Dysphagia and respiratory muscle weakness with aspiration or ventilatory risk",
-   "Cutaneous ulceration and severe vasculopathy associated with anti-MDA5 disease",
-   "Cardiac involvement with arrhythmia or heart failure"
-  ],
-  "prognosis": "Prognosis depends heavily on associated interstitial lung disease, malignancy, and cardiac involvement rather than the myositis itself. Skin and muscle disease often respond to immunosuppression, but rapidly progressive lung disease and paraneoplastic cases carry significant mortality.",
-  "pitfalls": [
-   "Failing to perform malignancy screening in newly diagnosed adults",
-   "Overlooking amyopathic disease when weakness is absent despite classic skin findings",
-   "Missing or underestimating rapidly progressive lung disease, especially with anti-MDA5 antibodies",
-   "Undertreating skin disease and neglecting photoprotection",
-   "Assuming normal creatine kinase excludes active or amyopathic disease"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy",
-   "Add steroid-sparing immunosuppression or immunomodulation such as methotrexate, azathioprine, mycophenolate or intravenous immunoglobulin, escalating to rituximab in refractory disease",
-   "Manage cutaneous disease with strict photoprotection, topical corticosteroids or calcineurin inhibitors, and hydroxychloroquine",
-   "Screen for interstitial lung disease with high-resolution CT and pulmonary function tests, treating rapidly progressive disease (especially anti-MDA5 positive) aggressively with calcineurin inhibitors and cyclophosphamide",
-   "Perform age- and risk-appropriate malignancy screening at diagnosis and during follow-up given the paraneoplastic association",
-   "Provide physiotherapy and rehabilitation and monitor creatine kinase, muscle strength, swallowing and cardiac status",
-   "Coordinate rheumatology, dermatology, respiratory and oncology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatomyositis-pathway",
-   "title": "Dermatomyositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur without myositis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive interstitial lung disease, particularly with anti-MDA5 antibodies, which can be life-threatening",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase), Electromyography and muscle MRI to localise and characterise inflammation, Muscle and/or skin biopsy demonstrating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to perform malignancy screening in newly diagnosed adults"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatomyositis."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatomyositis-matrix",
-   "title": "Dermatomyositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur without myositis",
+      "Characteristic rashes include the heliotrope discolouration of the eyelids, Gottron papules over the knuckles, the shawl and V-signs, and periungual telangiectasia",
+      "An amyopathic (clinically hypomyopathic) form has typical skin changes with little or no measurable muscle weakness",
+      "Elevated creatine kinase, myopathic EMG, and muscle MRI support the diagnosis; biopsy shows perifascicular atrophy and perivascular inflammation",
+      "There is a well-recognised association with occult malignancy, so age-appropriate cancer screening is essential, particularly around diagnosis",
+      "Interstitial lung disease is common and may be rapidly progressive, especially with anti-MDA5 antibodies, which also carry a characteristic cutaneous ulcerating phenotype",
+      "Myositis-specific antibodies (e.g. anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase) predict distinct patterns of skin, lung, and malignancy risk",
+      "Treatment uses corticosteroids with steroid-sparing immunosuppressants, photoprotection and topical therapy for skin, and prompt management of lung involvement"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase), Electromyography and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatomyositis is an idiopathic inflammatory myopathy characterised by humorally mediated, complement-dependent microangiopathy. Immune complex deposition and complement activation (membrane attack complex) on endomysial capillaries cause capillary loss, ischaemia, and the perifascicular atrophy typical of muscle biopsy. A strong type I interferon signature is present in muscle and skin. The same immune-mediated vasculopathy affects skin and other organs, and paraneoplastic mechanisms link it to underlying malignancy in a substantial proportion of adults.",
+    "additionalDifferentials": [
+      "Polymyositis and immune-mediated necrotising myopathy",
+      "Systemic lupus erythematosus and other connective tissue diseases with rash",
+      "Cutaneous drug eruptions and photosensitive dermatoses",
+      "Psoriasis or contact dermatitis (for Gottron/knuckle lesions)",
+      "Inclusion body myositis",
+      "Thyroid and other metabolic myopathies"
     ],
-    [
-     "Primary Differentials",
-     "Polymyositis and immune-mediated necrotising myopathy, Systemic lupus erythematosus and other connective tissue diseases with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase)",
+      "Electromyography and muscle MRI to localise and characterise inflammation",
+      "Muscle and/or skin biopsy demonstrating characteristic histology",
+      "High-resolution CT chest and pulmonary function tests for interstitial lung disease",
+      "Age- and risk-appropriate malignancy screening at diagnosis and during follow-up"
     ],
-    [
-     "Management Strategy",
-     "Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive interstitial lung disease, particularly with anti-MDA5 antibodies, which can be life-threatening",
+      "Clinical features pointing to an underlying malignancy (weight loss, new mass, cytopenias)",
+      "Dysphagia and respiratory muscle weakness with aspiration or ventilatory risk",
+      "Cutaneous ulceration and severe vasculopathy associated with anti-MDA5 disease",
+      "Cardiac involvement with arrhythmia or heart failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to perform malignancy screening in newly diagnosed adults",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on associated interstitial lung disease, malignancy, and cardiac involvement rather than the myositis itself. Skin and muscle disease often respond to immunosuppression, but rapidly progressive lung disease and paraneoplastic cases carry significant mortality.",
+    "pitfalls": [
+      "Failing to perform malignancy screening in newly diagnosed adults",
+      "Overlooking amyopathic disease when weakness is absent despite classic skin findings",
+      "Missing or underestimating rapidly progressive lung disease, especially with anti-MDA5 antibodies",
+      "Undertreating skin disease and neglecting photoprotection",
+      "Assuming normal creatine kinase excludes active or amyopathic disease"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy",
+      "Add steroid-sparing immunosuppression or immunomodulation such as methotrexate, azathioprine, mycophenolate or intravenous immunoglobulin, escalating to rituximab in refractory disease",
+      "Manage cutaneous disease with strict photoprotection, topical corticosteroids or calcineurin inhibitors, and hydroxychloroquine",
+      "Screen for interstitial lung disease with high-resolution CT and pulmonary function tests, treating rapidly progressive disease (especially anti-MDA5 positive) aggressively with calcineurin inhibitors and cyclophosphamide",
+      "Perform age- and risk-appropriate malignancy screening at diagnosis and during follow-up given the paraneoplastic association",
+      "Provide physiotherapy and rehabilitation and monitor creatine kinase, muscle strength, swallowing and cardiac status",
+      "Coordinate rheumatology, dermatology, respiratory and oncology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatomyositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatomyositis-real-image",
-   "title": "Dermatomyositis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dermatomyositis-pathway",
+      "title": "Dermatomyositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur without myositis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive interstitial lung disease, particularly with anti-MDA5 antibodies, which can be life-threatening",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase), Electromyography and muscle MRI to localise and characterise inflammation, Muscle and/or skin biopsy demonstrating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to perform malignancy screening in newly diagnosed adults"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatomyositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatomyositis-matrix",
+      "title": "Dermatomyositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Combines symmetric proximal muscle weakness with distinctive skin findings, though skin disease can precede, follow, or occur",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase and myositis antibody panel (anti-Mi-2, anti-TIF1-gamma, anti-MDA5, antisynthetase), Electromyography and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polymyositis and immune-mediated necrotising myopathy, Systemic lupus erythematosus and other connective tissue diseases with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce control of muscle and skin inflammation with systemic corticosteroids as first-line therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to perform malignancy screening in newly diagnosed adults",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatomyositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 388-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatomyositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and myositis antibody panel",
+          "cells": [
+            {
+              "text": "Anti-Mi-2, anti-TIF1-gamma, anti-MDA5 and antisynthetase antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMG and muscle MRI",
+          "cells": [
+            {
+              "text": "Localises and characterises inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle or skin biopsy",
+          "cells": [
+            {
+              "text": "Characteristic histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT chest and pulmonary function tests",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Weight loss, new mass or cytopenias raise concern for an underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psoriasis or contact dermatitis",
+          "cells": [
+            {
+              "text": "Gottron or knuckle lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyopathic dermatomyositis",
+          "cells": [
+            {
+              "text": "Classic skin findings without weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for muscle and skin inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, azathioprine, mycophenolate or IVIG; rituximab in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin disease",
+          "cells": [
+            {
+              "text": "Strict photoprotection, topical corticosteroids or calcineurin inhibitors, and hydroxychloroquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapidly progressive lung disease",
+          "cells": [
+            {
+              "text": "Calcineurin inhibitors and cyclophosphamide, especially with anti-MDA5 antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Age- and risk-appropriate, at diagnosis and during follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and monitoring",
+          "cells": [
+            {
+              "text": "Physiotherapy; creatine kinase, strength, swallowing and cardiac status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Rheumatology, dermatology, respiratory and oncology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "dermatomyositis-ddx-2",
+      "kind": "ddx",
+      "title": "Polymyositis, dermatomyositis and inclusion body myositis compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age at onset",
+        "Familial association",
+        "Extramuscular manifestations",
+        "Connective tissue diseases",
+        "Systemic autoimmune diseases",
+        "Malignancy",
+        "Viruses",
+        "Drugs",
+        "Parasites and bacteria"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyositis",
+          "cells": [
+            {
+              "text": "Over 18 years"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes (footnote a)"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "Yes (footnote d)"
+            },
+            {
+              "text": "Yes (footnote e)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dermatomyositis",
+          "cells": [
+            {
+              "text": "Adulthood and childhood"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Scleroderma and mixed connective tissue disease (overlap syndromes)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "Yes, in up to 15% of cases"
+            },
+            {
+              "text": "Unproven"
+            },
+            {
+              "text": "Yes, rarely (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Over 50 years"
+            },
+            {
+              "text": "Yes, in some cases"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes, in up to 20% of cases (footnote a)"
+            },
+            {
+              "text": "Infrequent"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (footnote c)"
+            },
+            {
+              "text": "No (footnote d)"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote letters a to e (including b for systemic autoimmune diseases) appear in the source but their text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatomyositis-dx-mgmt",
+      "title": "Diagnosis and management of Dermatomyositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatomyositis: proximal myopathy with characteristic skin changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly progressive lung disease, malignancy signs, dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment; aggressive treatment for rapidly progressive ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, myositis antibodies, EMG and MRI; HRCT and PFTs; muscle or skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do antibodies or biopsy show characteristic dermatomyositis changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polymyositis, inclusion body myositis, lupus or psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as first-line for muscle and skin inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, azathioprine, mycophenolate or IVIG; rituximab if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strict photoprotection, topical therapy and hydroxychloroquine for skin disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Malignancy screening at diagnosis and during follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Calcineurin inhibitors and cyclophosphamide for rapidly progressive lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis depends on lung disease, malignancy and cardiac involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

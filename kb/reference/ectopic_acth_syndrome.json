@@ -1,176 +1,483 @@
 {
- "id": "ectopic_acth_syndrome",
- "name": "Ectopic ACTH syndrome",
- "aliases": [
-  "ectopic adrenocorticotrophic hormone syndrome",
-  "ectopic ACTH-dependent Cushing syndrome",
-  "paraneoplastic ACTH secretion"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
-   "Common sources include small-cell lung carcinoma and bronchial or other neuroendocrine tumours",
-   "Aggressive tumours often produce rapid-onset hypercortisolism with weight loss, profound weakness, hyperpigmentation and marked hypokalaemic alkalosis rather than classic cushingoid features",
-   "Very high adrenocorticotrophic hormone and cortisol levels are typical, and severe hypokalaemia is a useful clue",
-   "High-dose dexamethasone usually fails to suppress cortisol in ectopic sources, unlike pituitary disease, though overlap occurs",
-   "Corticotrophin-releasing hormone testing and inferior petrosal sinus sampling help distinguish an ectopic from a pituitary source",
-   "Somatostatin-receptor imaging with gallium DOTATATE alongside cross-sectional imaging is used to localise occult tumours",
-   "Management combines treatment of the underlying tumour with control of cortisol excess, and bilateral adrenalectomy is a last resort for refractory hypercortisolism"
+  "id": "ectopic_acth_syndrome",
+  "name": "Ectopic ACTH syndrome",
+  "aliases": [
+    "ectopic adrenocorticotrophic hormone syndrome",
+    "ectopic ACTH-dependent Cushing syndrome",
+    "paraneoplastic ACTH secretion"
   ],
-  "pathophysiology": "Ectopic adrenocorticotrophic hormone syndrome results from autonomous secretion of the hormone, or occasionally corticotrophin-releasing hormone, by a tumour outside the pituitary. The excess hormone drives bilateral adrenal hyperplasia and sustained cortisol overproduction that is not subject to normal negative feedback. Because many causative tumours are aggressive and secrete large amounts rapidly, patients often present with severe metabolic derangement, including hypokalaemic alkalosis (aggravated by cortisol's mineralocorticoid effect at high concentrations) and hyperpigmentation from the melanocyte-stimulating activity of the precursor peptide, sometimes before the classic physical stigmata of Cushing syndrome develop.",
-  "additionalDifferentials": [
-   "Pituitary-dependent Cushing disease",
-   "Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome",
-   "Ectopic corticotrophin-releasing hormone secretion",
-   "Pseudo-Cushing states such as severe depression or alcohol excess",
-   "Exogenous glucocorticoid exposure",
-   "Other causes of severe hypokalaemic alkalosis"
-  ],
-  "additionalInvestigations": [
-   "Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing",
-   "Plasma adrenocorticotrophic hormone to establish ACTH dependence",
-   "High-dose dexamethasone suppression and corticotrophin-releasing hormone stimulation testing",
-   "Inferior petrosal sinus sampling to differentiate pituitary from ectopic sources",
-   "Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography",
-   "Cross-sectional imaging of chest, abdomen and pelvis to localise the tumour"
-  ],
-  "redFlags": [
-   "Severe hypokalaemia with metabolic alkalosis and arrhythmia risk",
-   "Rapidly progressive hypercortisolism with profound myopathy",
-   "Opportunistic infection or sepsis from immunosuppression",
-   "Venous thromboembolism from a hypercoagulable state",
-   "Psychosis or severe metabolic decompensation"
-  ],
-  "prognosis": "Outlook is dominated by the nature of the underlying tumour; occult indolent neuroendocrine tumours that can be localised and resected may be curable, whereas ectopic secretion from aggressive malignancy such as small-cell lung cancer carries a poor prognosis despite cortisol-lowering measures.",
-  "pitfalls": [
-   "Assuming a pituitary source and missing an occult ectopic tumour",
-   "Relying on dexamethasone suppression alone given the overlap with pituitary disease",
-   "Overlooking severe hypokalaemia and its cardiac risk",
-   "Delaying control of hypercortisolism while searching for the primary tumour",
-   "Underestimating infection and thrombosis risk in profound hypercortisolism"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable neuroendocrine tumour",
-   "Rapidly lower cortisol with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat, using parenteral etomidate for critical hypercortisolism when surgery is not immediately possible",
-   "Consider bilateral adrenalectomy for refractory or occult tumours with severe hypercortisolism, followed by lifelong glucocorticoid and mineralocorticoid replacement",
-   "Correct hypokalaemic alkalosis with potassium replacement and a mineralocorticoid-receptor antagonist such as spironolactone, and manage hyperglycaemia, hypertension and thromboprophylaxis",
-   "Prevent and treat opportunistic infection, including Pneumocystis prophylaxis, given the profound immunosuppression of severe hypercortisolism",
-   "Treat the underlying malignancy, such as chemotherapy for small-cell lung carcinoma, alongside cortisol-lowering measures",
-   "Monitor cortisol response, electrolytes and glucose during therapy, managing jointly with endocrinology, surgery and oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ectopic_acth_syndrome-pathway",
-   "title": "Ectopic ACTH syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypokalaemia with metabolic alkalosis and arrhythmia risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing, Plasma adrenocorticotrophic hormone to establish ACTH dependence, High-dose dexamethasone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable neuroendocrine tumour"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a pituitary source and missing an occult ectopic tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ectopic acth syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "ectopic_acth_syndrome-matrix",
-   "title": "Ectopic ACTH syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
+      "Common sources include small-cell lung carcinoma and bronchial or other neuroendocrine tumours",
+      "Aggressive tumours often produce rapid-onset hypercortisolism with weight loss, profound weakness, hyperpigmentation and marked hypokalaemic alkalosis rather than classic cushingoid features",
+      "Very high adrenocorticotrophic hormone and cortisol levels are typical, and severe hypokalaemia is a useful clue",
+      "High-dose dexamethasone usually fails to suppress cortisol in ectopic sources, unlike pituitary disease, though overlap occurs",
+      "Corticotrophin-releasing hormone testing and inferior petrosal sinus sampling help distinguish an ectopic from a pituitary source",
+      "Somatostatin-receptor imaging with gallium DOTATATE alongside cross-sectional imaging is used to localise occult tumours",
+      "Management combines treatment of the underlying tumour with control of cortisol excess, and bilateral adrenalectomy is a last resort for refractory hypercortisolism"
     ],
-    [
-     "Key Investigations",
-     "Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ectopic adrenocorticotrophic hormone syndrome results from autonomous secretion of the hormone, or occasionally corticotrophin-releasing hormone, by a tumour outside the pituitary. The excess hormone drives bilateral adrenal hyperplasia and sustained cortisol overproduction that is not subject to normal negative feedback. Because many causative tumours are aggressive and secrete large amounts rapidly, patients often present with severe metabolic derangement, including hypokalaemic alkalosis (aggravated by cortisol's mineralocorticoid effect at high concentrations) and hyperpigmentation from the melanocyte-stimulating activity of the precursor peptide, sometimes before the classic physical stigmata of Cushing syndrome develop.",
+    "additionalDifferentials": [
+      "Pituitary-dependent Cushing disease",
+      "Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome",
+      "Ectopic corticotrophin-releasing hormone secretion",
+      "Pseudo-Cushing states such as severe depression or alcohol excess",
+      "Exogenous glucocorticoid exposure",
+      "Other causes of severe hypokalaemic alkalosis"
     ],
-    [
-     "Primary Differentials",
-     "Pituitary-dependent Cushing disease, Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome, Ectopic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing",
+      "Plasma adrenocorticotrophic hormone to establish ACTH dependence",
+      "High-dose dexamethasone suppression and corticotrophin-releasing hormone stimulation testing",
+      "Inferior petrosal sinus sampling to differentiate pituitary from ectopic sources",
+      "Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography",
+      "Cross-sectional imaging of chest, abdomen and pelvis to localise the tumour"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypokalaemia with metabolic alkalosis and arrhythmia risk",
+      "Rapidly progressive hypercortisolism with profound myopathy",
+      "Opportunistic infection or sepsis from immunosuppression",
+      "Venous thromboembolism from a hypercoagulable state",
+      "Psychosis or severe metabolic decompensation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a pituitary source and missing an occult ectopic tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is dominated by the nature of the underlying tumour; occult indolent neuroendocrine tumours that can be localised and resected may be curable, whereas ectopic secretion from aggressive malignancy such as small-cell lung cancer carries a poor prognosis despite cortisol-lowering measures.",
+    "pitfalls": [
+      "Assuming a pituitary source and missing an occult ectopic tumour",
+      "Relying on dexamethasone suppression alone given the overlap with pituitary disease",
+      "Overlooking severe hypokalaemia and its cardiac risk",
+      "Delaying control of hypercortisolism while searching for the primary tumour",
+      "Underestimating infection and thrombosis risk in profound hypercortisolism"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable neuroendocrine tumour",
+      "Rapidly lower cortisol with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat, using parenteral etomidate for critical hypercortisolism when surgery is not immediately possible",
+      "Consider bilateral adrenalectomy for refractory or occult tumours with severe hypercortisolism, followed by lifelong glucocorticoid and mineralocorticoid replacement",
+      "Correct hypokalaemic alkalosis with potassium replacement and a mineralocorticoid-receptor antagonist such as spironolactone, and manage hyperglycaemia, hypertension and thromboprophylaxis",
+      "Prevent and treat opportunistic infection, including Pneumocystis prophylaxis, given the profound immunosuppression of severe hypercortisolism",
+      "Treat the underlying malignancy, such as chemotherapy for small-cell lung carcinoma, alongside cortisol-lowering measures",
+      "Monitor cortisol response, electrolytes and glucose during therapy, managing jointly with endocrinology, surgery and oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for ectopic acth syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ectopic-acth-syndrome-real-image",
-   "title": "Ectopic ACTH syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "ectopic_acth_syndrome-pathway",
+      "title": "Ectopic ACTH syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypokalaemia with metabolic alkalosis and arrhythmia risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing, Plasma adrenocorticotrophic hormone to establish ACTH dependence, High-dose dexamethasone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable neuroendocrine tumour"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a pituitary source and missing an occult ectopic tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ectopic acth syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ectopic_acth_syndrome-matrix",
+      "title": "Ectopic ACTH syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of adrenocorticotrophic-hormone-dependent Cushing syndrome in which the hormone is secreted by a non-pituitary tumour",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Confirmation of hypercortisolism with late-night salivary cortisol, urinary free cortisol or overnight dexamethasone testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pituitary-dependent Cushing disease, Adrenal adenoma or carcinoma causing ACTH-independent Cushing syndrome, Ectopic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is localisation and surgical resection of the ACTH-secreting tumour where feasible, such as a resectable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a pituitary source and missing an occult ectopic tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ectopic acth syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ectopic_acth_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-night salivary cortisol, urinary free cortisol or overnight dexamethasone",
+          "cells": [
+            {
+              "text": "Confirms hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH",
+          "cells": [
+            {
+              "text": "ACTH-dependent versus independent Cushing syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose dexamethasone suppression and CRH testing",
+          "cells": [
+            {
+              "text": "Pituitary versus ectopic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling",
+          "cells": [
+            {
+              "text": "Pituitary source differentiated from ectopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallium DOTATATE PET",
+          "cells": [
+            {
+              "text": "Somatostatin-receptor-positive tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest, abdomen and pelvis cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Tumour localisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_acth_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary-dependent Cushing disease",
+          "cells": [
+            {
+              "text": "Responds to high-dose dexamethasone suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal adenoma or carcinoma",
+          "cells": [
+            {
+              "text": "ACTH-independent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-Cushing state",
+          "cells": [
+            {
+              "text": "Depression or alcohol excess with raised cortisol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous glucocorticoid exposure",
+          "cells": [
+            {
+              "text": "Iatrogenic steroid history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_acth_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Definitive treatment for a localised, resectable ACTH-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Metyrapone, ketoconazole or osilodrostat to lower cortisol rapidly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Etomidate",
+          "cells": [
+            {
+              "text": "Parenteral option for critical hypercortisolism when surgery is not immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Refractory or occult tumours; lifelong steroid replacement follows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and metabolic control",
+          "cells": [
+            {
+              "text": "Potassium, spironolactone, glucose, blood pressure and thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis prophylaxis given profound immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ectopic_acth_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ectopic ACTH syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ectopic ACTH syndrome: Cushing features with hypokalaemia and raised ACTH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypokalaemia, sepsis, venous thrombosis, psychosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium correction and cortisol-lowering therapy for critical disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cortisol testing; plasma ACTH; high-dose dexamethasone and CRH; petrosal sinus sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ACTH-dependent hypercortisolism without pituitary source on sampling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pituitary Cushing disease, adrenal tumour or pseudo-Cushing state",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the ACTH-secreting tumour where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metyrapone, ketoconazole or osilodrostat to rapidly lower cortisol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium replacement and spironolactone for alkalosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pneumocystis prophylaxis and infection surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying malignancy alongside cortisol-lowering therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the tumour; localised indolent tumours may be cured, aggressive ones are not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

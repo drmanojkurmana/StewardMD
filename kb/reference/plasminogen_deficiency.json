@@ -1,174 +1,472 @@
 {
- "id": "plasminogen_deficiency",
- "name": "Plasminogen deficiency (ligneous conjunctivitis)",
- "aliases": [
-  "PLG deficiency",
-  "type I plasminogen deficiency",
-  "hypoplasminogenaemia",
-  "ligneous conjunctivitis"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most classically the conjunctiva",
-   "Pseudomembranes can also affect the gingiva, respiratory tract, middle ear, female genital tract, and rarely the ventricular system, causing occlusive hydrocephalus",
-   "Minor mucosal trauma or infection typically triggers membrane formation, which recurs after simple excision",
-   "Type I deficiency reduces both plasminogen activity and antigen, whereas type II (dysplasminogenaemia) lowers activity with preserved antigen and is usually asymptomatic",
-   "The disorder is one of defective extravascular fibrinolysis rather than a classic bleeding or thrombotic diathesis",
-   "Systemic venous thrombosis is not a consistent feature, distinguishing it from the coagulation-cascade thrombophilias",
-   "Directed therapy centres on plasma-derived plasminogen replacement together with control of local triggers, with topical measures for ocular disease"
+  "id": "plasminogen_deficiency",
+  "name": "Plasminogen deficiency (ligneous conjunctivitis)",
+  "aliases": [
+    "PLG deficiency",
+    "type I plasminogen deficiency",
+    "hypoplasminogenaemia",
+    "ligneous conjunctivitis"
   ],
-  "pathophysiology": "Plasminogen is the zymogen of plasmin, the principal enzyme of fibrinolysis. In severe deficiency, insufficient plasmin activity means fibrin deposited at sites of minor mucosal injury or inflammation cannot be cleared, so it accumulates as firm, woody pseudomembranes rich in fibrin. The defect is one of extravascular fibrin clearance on wet epithelial surfaces, which explains why the eyes, gums, airway and other mucous membranes are affected while systemic thrombosis is uncommon. Biallelic PLG variants underlie the type I phenotype.",
-  "additionalDifferentials": [
-   "Infective (bacterial or viral) membranous conjunctivitis",
-   "Cicatricial pemphigoid and other autoimmune conjunctival scarring disorders",
-   "Chemical or thermal ocular injury with membrane formation",
-   "Diphtheritic pseudomembrane in the airway",
-   "Congenital hydrocephalus of other cause when ventricular involvement occurs",
-   "Chronic gingival hyperplasia from other systemic disease"
-  ],
-  "additionalInvestigations": [
-   "Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency",
-   "Histology of pseudomembranes showing fibrin-rich amorphous material",
-   "PLG gene analysis to confirm the diagnosis and support family counselling",
-   "Ophthalmic slit-lamp assessment to characterise conjunctival involvement",
-   "Imaging of the airway or central nervous system when respiratory or ventricular disease is suspected",
-   "Screening for associated infection or inflammation that may trigger membranes"
-  ],
-  "redFlags": [
-   "Airway pseudomembranes threatening respiratory obstruction",
-   "Ventricular or intracranial involvement causing occlusive hydrocephalus",
-   "Rapidly recurring membranes after surgical removal",
-   "Progressive corneal or visual compromise from severe ocular disease"
-  ],
-  "prognosis": "The condition is chronic and relapsing, and untreated mucosal disease can threaten vision or, rarely, the airway and central nervous system. Plasminogen replacement can markedly improve mucosal lesions, so prognosis has improved where such therapy is available.",
-  "pitfalls": [
-   "Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence",
-   "Confusing asymptomatic type II dysplasminogenaemia with clinically significant type I deficiency",
-   "Missing extraocular sites such as the airway or genital tract",
-   "Attributing recurrent membranes solely to infection and overlooking the inherited cause"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for mucosal pseudomembranes",
-   "Treat conjunctival disease with topical plasminogen or fresh frozen plasma eye drops, supplemented by topical heparin, ciclosporin or corticosteroid to limit fibrin deposition",
-   "Minimise mucosal trauma and avoid unnecessary surgical excision of membranes, which reliably provokes recurrence",
-   "Promptly treat intercurrent infection or inflammation that triggers new membrane formation",
-   "Provide multidisciplinary surveillance with ophthalmology for the eyes and monitoring of the airway, ears and genital tract for occlusive disease",
-   "Offer genetic counselling and family screening given the autosomal recessive, biallelic PLG inheritance",
-   "Escalate urgently for airway obstruction, occlusive hydrocephalus or other sight- or life-threatening involvement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "plasminogen_deficiency-pathway",
-   "title": "Plasminogen deficiency (ligneous conjunctivitis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most classically the conjunctiva",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Airway pseudomembranes threatening respiratory obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency, Histology of pseudomembranes showing fibrin-rich amorphous material, PLG gene analysis to confirm the diagnosis and support"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for mucosal pseudomembranes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of plasminogen deficiency (ligneous conjunctivitis)."
-  }
- ],
- "tables": [
-  {
-   "id": "plasminogen_deficiency-matrix",
-   "title": "Plasminogen deficiency (ligneous conjunctivitis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most classically the conjunctiva",
+      "Pseudomembranes can also affect the gingiva, respiratory tract, middle ear, female genital tract, and rarely the ventricular system, causing occlusive hydrocephalus",
+      "Minor mucosal trauma or infection typically triggers membrane formation, which recurs after simple excision",
+      "Type I deficiency reduces both plasminogen activity and antigen, whereas type II (dysplasminogenaemia) lowers activity with preserved antigen and is usually asymptomatic",
+      "The disorder is one of defective extravascular fibrinolysis rather than a classic bleeding or thrombotic diathesis",
+      "Systemic venous thrombosis is not a consistent feature, distinguishing it from the coagulation-cascade thrombophilias",
+      "Directed therapy centres on plasma-derived plasminogen replacement together with control of local triggers, with topical measures for ocular disease"
     ],
-    [
-     "Key Investigations",
-     "Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency, Histology of pseudomembranes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Plasminogen is the zymogen of plasmin, the principal enzyme of fibrinolysis. In severe deficiency, insufficient plasmin activity means fibrin deposited at sites of minor mucosal injury or inflammation cannot be cleared, so it accumulates as firm, woody pseudomembranes rich in fibrin. The defect is one of extravascular fibrin clearance on wet epithelial surfaces, which explains why the eyes, gums, airway and other mucous membranes are affected while systemic thrombosis is uncommon. Biallelic PLG variants underlie the type I phenotype.",
+    "additionalDifferentials": [
+      "Infective (bacterial or viral) membranous conjunctivitis",
+      "Cicatricial pemphigoid and other autoimmune conjunctival scarring disorders",
+      "Chemical or thermal ocular injury with membrane formation",
+      "Diphtheritic pseudomembrane in the airway",
+      "Congenital hydrocephalus of other cause when ventricular involvement occurs",
+      "Chronic gingival hyperplasia from other systemic disease"
     ],
-    [
-     "Primary Differentials",
-     "Infective (bacterial or viral) membranous conjunctivitis, Cicatricial pemphigoid and other autoimmune conjunctival scarring",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency",
+      "Histology of pseudomembranes showing fibrin-rich amorphous material",
+      "PLG gene analysis to confirm the diagnosis and support family counselling",
+      "Ophthalmic slit-lamp assessment to characterise conjunctival involvement",
+      "Imaging of the airway or central nervous system when respiratory or ventricular disease is suspected",
+      "Screening for associated infection or inflammation that may trigger membranes"
     ],
-    [
-     "Management Strategy",
-     "Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for",
-     "Core treatment modality"
+    "redFlags": [
+      "Airway pseudomembranes threatening respiratory obstruction",
+      "Ventricular or intracranial involvement causing occlusive hydrocephalus",
+      "Rapidly recurring membranes after surgical removal",
+      "Progressive corneal or visual compromise from severe ocular disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and relapsing, and untreated mucosal disease can threaten vision or, rarely, the airway and central nervous system. Plasminogen replacement can markedly improve mucosal lesions, so prognosis has improved where such therapy is available.",
+    "pitfalls": [
+      "Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence",
+      "Confusing asymptomatic type II dysplasminogenaemia with clinically significant type I deficiency",
+      "Missing extraocular sites such as the airway or genital tract",
+      "Attributing recurrent membranes solely to infection and overlooking the inherited cause"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for mucosal pseudomembranes",
+      "Treat conjunctival disease with topical plasminogen or fresh frozen plasma eye drops, supplemented by topical heparin, ciclosporin or corticosteroid to limit fibrin deposition",
+      "Minimise mucosal trauma and avoid unnecessary surgical excision of membranes, which reliably provokes recurrence",
+      "Promptly treat intercurrent infection or inflammation that triggers new membrane formation",
+      "Provide multidisciplinary surveillance with ophthalmology for the eyes and monitoring of the airway, ears and genital tract for occlusive disease",
+      "Offer genetic counselling and family screening given the autosomal recessive, biallelic PLG inheritance",
+      "Escalate urgently for airway obstruction, occlusive hydrocephalus or other sight- or life-threatening involvement"
     ]
-   ],
-   "caption": "Overview comparison matrix for plasminogen deficiency (ligneous conjunctivitis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "plasminogen-deficiency-real-image",
-   "title": "Plasminogen deficiency (ligneous conjunctivitis): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "plasminogen_deficiency-pathway",
+      "title": "Plasminogen deficiency (ligneous conjunctivitis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most classically the conjunctiva",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Airway pseudomembranes threatening respiratory obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency, Histology of pseudomembranes showing fibrin-rich amorphous material, PLG gene analysis to confirm the diagnosis and support"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for mucosal pseudomembranes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of plasminogen deficiency (ligneous conjunctivitis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "plasminogen_deficiency-matrix",
+      "title": "Plasminogen deficiency (ligneous conjunctivitis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Severe type I (hypoplasminogenaemic) deficiency causes ligneous, woody, fibrin-rich pseudomembranes on mucous surfaces, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasminogen activity assay and plasminogen antigen to distinguish type I from type II deficiency, Histology of pseudomembranes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective (bacterial or viral) membranous conjunctivitis, Cicatricial pemphigoid and other autoimmune conjunctival scarring",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide plasminogen replacement with human plasma-derived plasminogen concentrate as the definitive disease-specific therapy for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly excising conjunctival membranes without addressing the underlying fibrinolytic defect, leading to recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for plasminogen deficiency (ligneous conjunctivitis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plasminogen_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen activity assay and antigen",
+          "cells": [
+            {
+              "text": "Type I versus type II deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of pseudomembranes",
+          "cells": [
+            {
+              "text": "Fibrin-rich amorphous material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PLG gene analysis",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; supports family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp assessment",
+          "cells": [
+            {
+              "text": "Conjunctival involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway or CNS imaging",
+          "cells": [
+            {
+              "text": "Respiratory or ventricular disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infection or inflammation",
+          "cells": [
+            {
+              "text": "Triggers of membrane formation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasminogen_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Autoimmune conjunctival scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective membranous conjunctivitis",
+          "cells": [
+            {
+              "text": "Bacterial or viral; screened for infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasminogen_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen replacement",
+          "cells": [
+            {
+              "text": "Human plasma-derived plasminogen concentrate as definitive disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical plasminogen or fresh frozen plasma eye drops for conjunctival disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid surgery",
+          "cells": [
+            {
+              "text": "Minimise mucosal trauma; excision of membranes reliably provokes recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Promptly treat intercurrent infection or inflammation that triggers membranes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmology for the eyes; monitoring of the airway, ears and genital tract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive, biallelic PLG inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Urgent care for airway obstruction, occlusive hydrocephalus or sight-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plasminogen_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Plasminogen deficiency (ligneous conjunctivitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent membranous conjunctivitis with fibrinous pseudomembranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway pseudomembranes, hydrocephalus, rapid recurrence, visual compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway or neurosurgical care for obstruction or occlusive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasminogen activity and antigen; PLG gene analysis; slit-lamp; airway or CNS imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does plasminogen activity assay confirm plasminogen deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infective membranous conjunctivitis, cicatricial pemphigoid or chemical injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Plasminogen replacement with plasma-derived plasminogen concentrate as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical plasminogen or fresh frozen plasma eye drops for conjunctival disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid excision of membranes, which reliably provokes recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Promptly treat intercurrent infection or inflammation that triggers membranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive PLG disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing; plasminogen replacement markedly improves mucosal lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

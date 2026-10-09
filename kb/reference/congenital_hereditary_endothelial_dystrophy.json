@@ -1,168 +1,437 @@
 {
- "id": "congenital_hereditary_endothelial_dystrophy",
- "name": "Congenital hereditary endothelial dystrophy",
- "aliases": [
-  "CHED"
- ],
- "class": "non_infective",
- "system": "Eye / Cornea",
- "specialty": "Ophthalmology / Cornea / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
-   "The autosomal recessive form, linked to SLC4A11 mutations, is the recognised entity in current classification",
-   "Corneas show diffuse ground-glass oedema with marked thickening but usually without the tearing and photophobia of congenital glaucoma",
-   "Nystagmus may develop from early visual deprivation",
-   "A key differential is primary congenital glaucoma, which is distinguished by raised intraocular pressure and a large cornea",
-   "Management of significant cases is corneal transplantation, with attention to amblyopia"
+  "id": "congenital_hereditary_endothelial_dystrophy",
+  "name": "Congenital hereditary endothelial dystrophy",
+  "aliases": [
+    "CHED"
   ],
-  "pathophysiology": "Congenital hereditary endothelial dystrophy results from a primary defect of the corneal endothelium, in the recessive form due to mutations in SLC4A11 affecting a membrane transport protein important for endothelial fluid regulation. The dysfunctional endothelium cannot maintain corneal deturgescence, so fluid accumulates in the stroma from birth or infancy, producing diffuse oedema and clouding with a thickened cornea. The resulting visual deprivation early in life can cause nystagmus and amblyopia.",
-  "additionalDifferentials": [
-   "Primary congenital glaucoma",
-   "Birth trauma with Descemet tears",
-   "Congenital hereditary stromal dystrophy",
-   "Mucopolysaccharidoses and metabolic corneal clouding",
-   "Sclerocornea or anterior segment dysgenesis",
-   "Intrauterine infection affecting the cornea"
-  ],
-  "additionalInvestigations": [
-   "Examination of corneal clarity, thickness and diameter",
-   "Intraocular pressure measurement to exclude congenital glaucoma",
-   "Genetic testing (for example SLC4A11)",
-   "Assessment for nystagmus and visual development",
-   "Exclusion of metabolic and infective causes of corneal clouding"
-  ],
-  "redFlags": [
-   "Raised intraocular pressure or enlarged cornea suggesting congenital glaucoma",
-   "Amblyopia from visual deprivation",
-   "Systemic features suggesting a metabolic disorder",
-   "Progressive clouding threatening visual development"
-  ],
-  "prognosis": "Vision depends on corneal clarity and timely management of amblyopia; corneal transplantation can restore clarity, though paediatric grafts carry higher risks and demand vigilant amblyopia treatment.",
-  "pitfalls": [
-   "Mistaking it for primary congenital glaucoma and vice versa",
-   "Neglecting amblyopia management",
-   "Overlooking a metabolic cause of corneal clouding",
-   "Delaying intervention during the critical period of visual development"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "IC3D classification of corneal dystrophies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or DMEK) increasingly preferred over penetrating keratoplasty",
-   "Use topical hypertonic saline to reduce stromal oedema and temporarily improve corneal clarity in milder cases",
-   "Aggressively treat amblyopia and correct refractive error, since early visual deprivation risks amblyopia and nystagmus",
-   "Exclude and monitor for primary congenital glaucoma, which is distinguished by raised intraocular pressure and corneal enlargement",
-   "Offer genetic counselling for autosomal recessive SLC4A11 inheritance and test at-risk relatives",
-   "Refer to a paediatric corneal specialist for graft surgery and vigilant post-transplant follow-up given the higher risks of paediatric grafts"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_hereditary_endothelial_dystrophy-pathway",
-   "title": "Congenital hereditary endothelial dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intraocular pressure or enlarged cornea suggesting congenital glaucoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination of corneal clarity, thickness and diameter, Intraocular pressure measurement to exclude congenital glaucoma, Genetic testing (for example SLC4A11)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or DMEK) increasingly preferred over penetrating keratoplasty"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for primary congenital glaucoma and vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital hereditary endothelial dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_hereditary_endothelial_dystrophy-matrix",
-   "title": "Congenital hereditary endothelial dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Cornea",
+  "specialty": "Ophthalmology / Cornea / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
+      "The autosomal recessive form, linked to SLC4A11 mutations, is the recognised entity in current classification",
+      "Corneas show diffuse ground-glass oedema with marked thickening but usually without the tearing and photophobia of congenital glaucoma",
+      "Nystagmus may develop from early visual deprivation",
+      "A key differential is primary congenital glaucoma, which is distinguished by raised intraocular pressure and a large cornea",
+      "Management of significant cases is corneal transplantation, with attention to amblyopia"
     ],
-    [
-     "Key Investigations",
-     "Examination of corneal clarity, thickness and diameter, Intraocular pressure measurement to exclude congenital glaucoma, Genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital hereditary endothelial dystrophy results from a primary defect of the corneal endothelium, in the recessive form due to mutations in SLC4A11 affecting a membrane transport protein important for endothelial fluid regulation. The dysfunctional endothelium cannot maintain corneal deturgescence, so fluid accumulates in the stroma from birth or infancy, producing diffuse oedema and clouding with a thickened cornea. The resulting visual deprivation early in life can cause nystagmus and amblyopia.",
+    "additionalDifferentials": [
+      "Primary congenital glaucoma",
+      "Birth trauma with Descemet tears",
+      "Congenital hereditary stromal dystrophy",
+      "Mucopolysaccharidoses and metabolic corneal clouding",
+      "Sclerocornea or anterior segment dysgenesis",
+      "Intrauterine infection affecting the cornea"
     ],
-    [
-     "Primary Differentials",
-     "Primary congenital glaucoma, Birth trauma with Descemet tears, Congenital hereditary stromal dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination of corneal clarity, thickness and diameter",
+      "Intraocular pressure measurement to exclude congenital glaucoma",
+      "Genetic testing (for example SLC4A11)",
+      "Assessment for nystagmus and visual development",
+      "Exclusion of metabolic and infective causes of corneal clouding"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or",
-     "Core treatment modality"
+    "redFlags": [
+      "Raised intraocular pressure or enlarged cornea suggesting congenital glaucoma",
+      "Amblyopia from visual deprivation",
+      "Systemic features suggesting a metabolic disorder",
+      "Progressive clouding threatening visual development"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for primary congenital glaucoma and vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision depends on corneal clarity and timely management of amblyopia; corneal transplantation can restore clarity, though paediatric grafts carry higher risks and demand vigilant amblyopia treatment.",
+    "pitfalls": [
+      "Mistaking it for primary congenital glaucoma and vice versa",
+      "Neglecting amblyopia management",
+      "Overlooking a metabolic cause of corneal clouding",
+      "Delaying intervention during the critical period of visual development"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "IC3D classification of corneal dystrophies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or DMEK) increasingly preferred over penetrating keratoplasty",
+      "Use topical hypertonic saline to reduce stromal oedema and temporarily improve corneal clarity in milder cases",
+      "Aggressively treat amblyopia and correct refractive error, since early visual deprivation risks amblyopia and nystagmus",
+      "Exclude and monitor for primary congenital glaucoma, which is distinguished by raised intraocular pressure and corneal enlargement",
+      "Offer genetic counselling for autosomal recessive SLC4A11 inheritance and test at-risk relatives",
+      "Refer to a paediatric corneal specialist for graft surgery and vigilant post-transplant follow-up given the higher risks of paediatric grafts"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital hereditary endothelial dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-hereditary-endothelial-dystrophy-real-image",
-   "title": "Congenital hereditary endothelial dystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_hereditary_endothelial_dystrophy-pathway",
+      "title": "Congenital hereditary endothelial dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intraocular pressure or enlarged cornea suggesting congenital glaucoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination of corneal clarity, thickness and diameter, Intraocular pressure measurement to exclude congenital glaucoma, Genetic testing (for example SLC4A11)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or DMEK) increasingly preferred over penetrating keratoplasty"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for primary congenital glaucoma and vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital hereditary endothelial dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-matrix",
+      "title": "Congenital hereditary endothelial dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inherited endothelial dystrophy causing bilateral corneal oedema and clouding from birth or early infancy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination of corneal clarity, thickness and diameter, Intraocular pressure measurement to exclude congenital glaucoma, Genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary congenital glaucoma, Birth trauma with Descemet tears, Congenital hereditary stromal dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment for visually significant corneal oedema is corneal transplantation, with endothelial keratoplasty (DSAEK or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for primary congenital glaucoma and vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital hereditary endothelial dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination of corneal clarity, thickness and diameter",
+          "cells": [
+            {
+              "text": "Corneal oedema and clouding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Congenital glaucoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (SLC4A11)",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for nystagmus and visual development",
+          "cells": [
+            {
+              "text": "Visual development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary congenital glaucoma",
+          "cells": [
+            {
+              "text": "Raised intraocular pressure and corneal enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses and metabolic corneal clouding",
+          "cells": [
+            {
+              "text": "Systemic features suggest metabolic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerocornea or anterior segment dysgenesis",
+          "cells": [
+            {
+              "text": "Named corneal look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal transplantation",
+          "cells": [
+            {
+              "text": "For visually significant corneal oedema; endothelial keratoplasty (DSAEK or DMEK)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical hypertonic saline",
+          "cells": [
+            {
+              "text": "Reduces stromal oedema in milder cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Aggressive treatment and refractive correction; early deprivation risks amblyopia and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma exclusion",
+          "cells": [
+            {
+              "text": "Monitor for primary congenital glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC4A11; relatives tested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric corneal referral",
+          "cells": [
+            {
+              "text": "Graft surgery and post-transplant follow-up; higher paediatric graft risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hereditary endothelial dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital endothelial dystrophy: bilateral corneal clouding at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised pressure, systemic metabolic features, progressive clouding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude congenital glaucoma urgently; check for systemic metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal clarity, thickness and diameter; intraocular pressure; SLC4A11 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC4A11 testing confirm the endothelial dystrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital glaucoma, birth trauma or metabolic clouding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corneal transplantation (DSAEK or DMEK) for visually significant oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical hypertonic saline in milder cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive amblyopia treatment and refractive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling; referral to a paediatric corneal specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision depends on corneal clarity and amblyopia management; paediatric grafts carry risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

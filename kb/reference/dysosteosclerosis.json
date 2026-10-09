@@ -1,177 +1,475 @@
 {
- "id": "dysosteosclerosis",
- "name": "Dysosteosclerosis",
- "aliases": [
-  "DOS",
-  "SLC29A3-related dysosteosclerosis",
-  "TNFRSF11A-related dysosteosclerosis",
-  "osteosclerosis with platyspondyly"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and, characteristically, sclerosis that spares or under-modifies the metaphyses",
-   "Presents in childhood with short stature, fractures despite dense bone, and sometimes developmental delay",
-   "Recognised causes include recessive variants in SLC29A3 and in TNFRSF11A, reflecting genetic heterogeneity within the phenotype",
-   "The paradox of dense yet fragile bone reflects disordered bone modelling and impaired resorption rather than simply increased mass",
-   "Radiographs typically show a dense skull base, platyspondyly and abnormal metaphyseal modelling of the long bones",
-   "Some individuals develop cranial-nerve compromise, including visual or hearing impairment, from skull-base sclerosis, and dental anomalies may occur",
-   "Management is supportive and orthopaedic, with fracture care, monitoring for cranial-nerve compression and decompression of affected foramina where indicated"
+  "id": "dysosteosclerosis",
+  "name": "Dysosteosclerosis",
+  "aliases": [
+    "DOS",
+    "SLC29A3-related dysosteosclerosis",
+    "TNFRSF11A-related dysosteosclerosis",
+    "osteosclerosis with platyspondyly"
   ],
-  "pathophysiology": "Dysosteosclerosis is a heterogeneous recessive disorder of bone modelling in which osteoclast-mediated resorption and the normal shaping of bone are disturbed, producing generalised osteosclerosis together with distinctive platyspondyly. Variants in SLC29A3, a nucleoside transporter, and in TNFRSF11A (RANK), central to osteoclast differentiation, have both been implicated, indicating that different molecular lesions converge on impaired bone remodelling. The accumulated bone is abnormally dense yet mechanically defective, explaining the coexistence of sclerosis and fracture susceptibility. Sclerosis of the skull base can narrow neural foramina and compromise cranial nerves, while the vertebral flattening and abnormal metaphyseal modelling reflect the same failure of orderly bone turnover.",
-  "additionalDifferentials": [
-   "Osteopetrosis",
-   "Pycnodysostosis",
-   "Craniometaphyseal dysplasia",
-   "Craniodiaphyseal dysplasia",
-   "Pyknodysostosis-osteopetrosis spectrum disorders",
-   "Osteopathia striata with cranial sclerosis"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling",
-   "Skull imaging to assess skull-base sclerosis and foraminal narrowing",
-   "Cranial-nerve assessment including audiometry and visual evaluation",
-   "Bone biochemistry and, where relevant, markers of bone turnover to characterise the disorder",
-   "Molecular genetic testing including SLC29A3 and TNFRSF11A",
-   "Dental review for associated dental anomalies"
-  ],
-  "redFlags": [
-   "Progressive visual or hearing loss suggesting cranial-nerve foraminal compression",
-   "Recurrent fractures despite dense bone indicating significant bone fragility",
-   "Neurological signs of brainstem or spinal cord compromise",
-   "Features of marrow failure suggesting an osteopetrosis-like process"
-  ],
-  "prognosis": "The prognosis varies with severity and genetic subtype, ranging from relatively mild disease with orthopaedic morbidity to more severe presentations complicated by cranial-nerve deficits and recurrent fractures.",
-  "pitfalls": [
-   "Assuming dense bone is strong bone and underestimating the fracture risk",
-   "Confusing the disorder with osteopetrosis and missing the characteristic platyspondyly",
-   "Neglecting surveillance for cranial-nerve compression from skull-base sclerosis",
-   "Not pursuing molecular testing given the genetic heterogeneity and implications for counselling"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: sclerosing bone dysplasias"
-  ],
-  "crossLinks": [
-   "craniodiaphyseal_dysplasia"
-  ],
-  "management": [
-   "Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to failure",
-   "Undertake regular cranial-nerve surveillance with audiometry and visual assessment to detect skull-base foraminal compression early",
-   "Offer surgical decompression of narrowed neural foramina to relieve or prevent cranial-nerve compromise",
-   "Provide physiotherapy, mobility support and fall-prevention measures to reduce fracture risk",
-   "Arrange dental review and management of associated dental anomalies",
-   "Offer genetic counselling and family testing given recessive SLC29A3 and TNFRSF11A inheritance",
-   "Coordinate multidisciplinary care across metabolic bone, orthopaedics, otolaryngology, ophthalmology and clinical genetics",
-   "Escalate promptly for new visual or hearing loss suggesting progressive foraminal narrowing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dysosteosclerosis-pathway",
-   "title": "Dysosteosclerosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and, characteristically, sclerosis that spares or under-modifies the metaphyses",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual or hearing loss suggesting cranial-nerve foraminal compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling, Skull imaging to assess skull-base sclerosis and foraminal narrowing, Cranial-nerve assessment including audiometry and visual"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming dense bone is strong bone and underestimating the fracture risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dysosteosclerosis."
-  }
- ],
- "tables": [
-  {
-   "id": "dysosteosclerosis-matrix",
-   "title": "Dysosteosclerosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and, characteristically, sclerosis that spares or under-modifies the metaphyses",
+      "Presents in childhood with short stature, fractures despite dense bone, and sometimes developmental delay",
+      "Recognised causes include recessive variants in SLC29A3 and in TNFRSF11A, reflecting genetic heterogeneity within the phenotype",
+      "The paradox of dense yet fragile bone reflects disordered bone modelling and impaired resorption rather than simply increased mass",
+      "Radiographs typically show a dense skull base, platyspondyly and abnormal metaphyseal modelling of the long bones",
+      "Some individuals develop cranial-nerve compromise, including visual or hearing impairment, from skull-base sclerosis, and dental anomalies may occur",
+      "Management is supportive and orthopaedic, with fracture care, monitoring for cranial-nerve compression and decompression of affected foramina where indicated"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling, Skull imaging to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dysosteosclerosis is a heterogeneous recessive disorder of bone modelling in which osteoclast-mediated resorption and the normal shaping of bone are disturbed, producing generalised osteosclerosis together with distinctive platyspondyly. Variants in SLC29A3, a nucleoside transporter, and in TNFRSF11A (RANK), central to osteoclast differentiation, have both been implicated, indicating that different molecular lesions converge on impaired bone remodelling. The accumulated bone is abnormally dense yet mechanically defective, explaining the coexistence of sclerosis and fracture susceptibility. Sclerosis of the skull base can narrow neural foramina and compromise cranial nerves, while the vertebral flattening and abnormal metaphyseal modelling reflect the same failure of orderly bone turnover.",
+    "additionalDifferentials": [
+      "Osteopetrosis",
+      "Pycnodysostosis",
+      "Craniometaphyseal dysplasia",
+      "Craniodiaphyseal dysplasia",
+      "Pyknodysostosis-osteopetrosis spectrum disorders",
+      "Osteopathia striata with cranial sclerosis"
     ],
-    [
-     "Primary Differentials",
-     "Osteopetrosis, Pycnodysostosis, Craniometaphyseal dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling",
+      "Skull imaging to assess skull-base sclerosis and foraminal narrowing",
+      "Cranial-nerve assessment including audiometry and visual evaluation",
+      "Bone biochemistry and, where relevant, markers of bone turnover to characterise the disorder",
+      "Molecular genetic testing including SLC29A3 and TNFRSF11A",
+      "Dental review for associated dental anomalies"
     ],
-    [
-     "Management Strategy",
-     "Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual or hearing loss suggesting cranial-nerve foraminal compression",
+      "Recurrent fractures despite dense bone indicating significant bone fragility",
+      "Neurological signs of brainstem or spinal cord compromise",
+      "Features of marrow failure suggesting an osteopetrosis-like process"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming dense bone is strong bone and underestimating the fracture risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis varies with severity and genetic subtype, ranging from relatively mild disease with orthopaedic morbidity to more severe presentations complicated by cranial-nerve deficits and recurrent fractures.",
+    "pitfalls": [
+      "Assuming dense bone is strong bone and underestimating the fracture risk",
+      "Confusing the disorder with osteopetrosis and missing the characteristic platyspondyly",
+      "Neglecting surveillance for cranial-nerve compression from skull-base sclerosis",
+      "Not pursuing molecular testing given the genetic heterogeneity and implications for counselling"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: sclerosing bone dysplasias"
+    ],
+    "crossLinks": [
+      "craniodiaphyseal_dysplasia"
+    ],
+    "management": [
+      "Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to failure",
+      "Undertake regular cranial-nerve surveillance with audiometry and visual assessment to detect skull-base foraminal compression early",
+      "Offer surgical decompression of narrowed neural foramina to relieve or prevent cranial-nerve compromise",
+      "Provide physiotherapy, mobility support and fall-prevention measures to reduce fracture risk",
+      "Arrange dental review and management of associated dental anomalies",
+      "Offer genetic counselling and family testing given recessive SLC29A3 and TNFRSF11A inheritance",
+      "Coordinate multidisciplinary care across metabolic bone, orthopaedics, otolaryngology, ophthalmology and clinical genetics",
+      "Escalate promptly for new visual or hearing loss suggesting progressive foraminal narrowing"
     ]
-   ],
-   "caption": "Overview comparison matrix for dysosteosclerosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dysosteosclerosis-real-image",
-   "title": "Dysosteosclerosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "dysosteosclerosis-pathway",
+      "title": "Dysosteosclerosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and, characteristically, sclerosis that spares or under-modifies the metaphyses",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual or hearing loss suggesting cranial-nerve foraminal compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling, Skull imaging to assess skull-base sclerosis and foraminal narrowing, Cranial-nerve assessment including audiometry and visual"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming dense bone is strong bone and underestimating the fracture risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dysosteosclerosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dysosteosclerosis-matrix",
+      "title": "Dysosteosclerosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare sclerosing bone dysplasia combining generalised osteosclerosis with flattened vertebral bodies (platyspondyly) and,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating osteosclerosis, platyspondyly and abnormal metaphyseal modelling, Skull imaging to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteopetrosis, Pycnodysostosis, Craniometaphyseal dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage fractures orthopaedically with careful fixation, recognising that the dense bone is mechanically defective and prone to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming dense bone is strong bone and underestimating the fracture risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dysosteosclerosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysosteosclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Osteosclerosis, platyspondyly and abnormal metaphyseal modelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Skull-base sclerosis and foraminal narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial-nerve assessment with audiometry and vision",
+          "cells": [
+            {
+              "text": "Cranial-nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing for SLC29A3 and TNFRSF11A",
+          "cells": [
+            {
+              "text": "SLC29A3 or TNFRSF11A variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review",
+          "cells": [
+            {
+              "text": "Associated dental anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysosteosclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteopetrosis",
+          "cells": [
+            {
+              "text": "Mistaken for it without the characteristic platyspondyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pycnodysostosis",
+          "cells": [
+            {
+              "text": "Sclerotic bone disorder with distinct features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniometaphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Sclerosis of the skull and metaphyses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysosteosclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthopaedic fracture care",
+          "cells": [
+            {
+              "text": "Careful fixation; dense bone is mechanically defective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial-nerve surveillance",
+          "cells": [
+            {
+              "text": "Audiometry and visual assessment for skull-base foraminal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Narrowed neural foramina causing or threatening cranial-nerve compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and falls prevention",
+          "cells": [
+            {
+              "text": "Mobility support and fall measures to reduce fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review",
+          "cells": [
+            {
+              "text": "Management of associated dental anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Recessive SLC29A3 and TNFRSF11A inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic bone, orthopaedics, ENT, ophthalmology and genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysosteosclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Dysosteosclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysosteosclerosis: dense bone with platyspondyly and fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (visual or hearing loss, recurrent fracture, brainstem signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for new visual or hearing loss from foraminal narrowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; skull-base imaging; cranial-nerve tests; SLC29A3 and TNFRSF11A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SLC29A3 or TNFRSF11A variant found with the typical skeletal survey?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteopetrosis, pycnodysostosis or craniometaphyseal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Careful orthopaedic fixation of fractures given defective dense bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular audiometry and visual checks for cranial-nerve compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical decompression of narrowed neural foramina when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, mobility support and falls prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for recessive inheritance with family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies by subtype; mild cases have orthopaedic morbidity, severe ones cranial deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,168 +1,599 @@
 {
- "id": "hematopoietic_stem_cells",
- "name": "Hematopoietic Stem Cells",
- "system": "Hematologic / Bone Marrow",
- "class": "non_infective",
- "chapter": 101,
- "page": 758,
- "aliases": [
-  "HSC",
-  "blood stem cells",
-  "hematopoiesis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.758",
-  "clinicalPearls": [
-   "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells (HSCs); catastrophic loss of HSC function leaves a person able to survive only about 2-4 weeks without extraordinary support.",
-   "The HSC pool is estimated at only about 20,000-200,000 cells, yet it generates hundreds of billions of mature blood cells daily and sustains this output over decades.",
-   "Stem cells are defined by two cardinal properties: self-renewal (dividing while staying undifferentiated) and differentiation into mature effector cells; loss of either leads to pool exhaustion or to organ failure/neoplasia.",
-   "A dividing HSC can yield two stem cells, two differentiating cells (symmetric division), or one of each (asymmetric division); this asymmetry lets a small pool produce roughly seven orders of magnitude more mature cells daily.",
-   "Mature blood cell lifespans vary widely, from hours for neutrophils to a few months for red cells to years for memory lymphocytes, but the durable source is the persistent stem cell pool.",
-   "HSCs circulate in blood throughout life, but free-circulating time is brief (minutes in the mouse); circulating HSCs remain functional and usable for transplantation.",
-   "The bone marrow niche (notably perivascular regions near trabecular bone) is both nurturing and constraining: mesenchymal and endothelial cells supply kit ligand and CXCL12, and the niche limits how many stem cells are produced.",
-   "CXCR4/CXCL12 (SDF1) signaling retains HSCs in marrow; disrupting it (via CXCR4 blockade, CXCL12 cleavage, or receptor downregulation) mobilizes stem cells into blood, enabling collection by leukapheresis rather than operative marrow harvest.",
-   "Differentiation proceeds along a branching hierarchy (stem cell to multipotent progenitor to lineage-committed precursor to mature cell), with progressive loss of plasticity and, in most lineages, loss of proliferative capacity.",
-   "Maturation of progenitors into mature cells takes roughly 10-14 days in humans, clinically reflected in the lag between cytotoxic chemotherapy and blood count recovery.",
-   "HSCs are heterogeneous: individual stem cells can be biased toward particular lineages and differ in proliferation and death responses, so the population behaves as an aggregate.",
-   "Clonal hematopoiesis: HSCs accumulate roughly 17 somatic mutations per year of life; variant alleles contributing to over 1% of blood cells become nearly universal by age 70, with an inactivating TET2 mutation able to worsen outcomes of some chronic inflammatory conditions.",
-   "Genetically modifying long-lived HSCs underlies curative cell therapies for cerebral adrenoleukodystrophy and the hemoglobinopathies, including a CRISPR gene-edited approach that suppresses BCL11A to reactivate fetal hemoglobin in beta thalassemia and sickle cell anemia."
+  "id": "hematopoietic_stem_cells",
+  "name": "Hematopoietic Stem Cells",
+  "system": "Hematologic / Bone Marrow",
+  "class": "non_infective",
+  "chapter": 101,
+  "page": 758,
+  "aliases": [
+    "HSC",
+    "blood stem cells",
+    "hematopoiesis"
   ],
-  "pathophysiology": "Hematopoiesis originates from a small self-renewing HSC pool. During development, blood production shifts sequentially from the yolk sac (embryonic-hemoglobin red cells and tissue-resident macrophages) to the placenta and intraembryonic sites near the aorta-gonad-mesonephros region, then to fetal liver, and in the second trimester to bone marrow and spleen; HSCs reach marrow via bloodborne transit from fetal liver after long-bone calcification, and proliferation falls sharply soon after birth. HSCs reside in a specialized perivascular/endosteal marrow niche where mesenchymal, endothelial, neural, and other cells provide regulatory signals (kit ligand, CXCL12) governing survival, expansion, and constraint. Trafficking depends on selectins binding CD162/CD44, integrin-mediated firm adhesion (VCAM-1/VLA-4), and CXCL12-CXCR4 plus calcium-sensing receptor signaling. Most HSCs are deeply quiescent and cytokine-resistant, dividing on the order of months to years; quiescence is enforced by high cyclin-dependent kinase inhibitors (e.g., p57/CDKN1c blocking the G1-S transition) and niche signals such as angiogenin, IL-18, and angiopoietin 1. Self-renewal preserves any acquired mutation in the durable stem pool, whereas progenitor mutations are largely lost through terminal differentiation; epigenetic regulators (DNMT3a, TET2, ASXL1) are critical for pool homeostasis and for restraining outgrowth of potentially pathogenic clones.",
-  "additionalDifferentials": [],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele fractions)",
-   "Surface immunophenotyping of stem/progenitor markers (CD34, CD90/Thy-1, CD117/c-Kit, CD133, CD164, CD110/c-Mpl) as described in murine-based studies"
-  ],
-  "redFlags": [
-   "Complete failure of HSC function (e.g., after a nuclear/radiation accident) predicts survival of only about 2-4 weeks without extraordinary support",
-   "Expansion of clones carrying 'driver' mutations seen in myelodysplasia and myeloid leukemias, with low-frequency progression to overt neoplastic disease",
-   "Acquired self-renewal via oncogenic mutation in stem or more mature populations, providing a substrate for leukemia"
-  ],
-  "prognosis": "In the absence of disease the HSC pool is essentially inexhaustible: serial murine transplants can reconstitute several animals in succession and allogeneic transplant recipients never run out of blood cells over decades, indicating even limiting stem cell numbers suffice. With aging, clonal diversity declines as a small number of expanded clones (estimated 10-20 clones supplying 30-60% of blood cells by age 70) dominate; most such clones are benign, but some carry driver mutations with a low risk of progression to myeloid malignancy.",
-  "pitfalls": [
-   "Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do not directly cycle stem cells (G-CSF instead mobilizes HSCs by altering CXCL12 tethering).",
-   "Deep HSC quiescence and resistance to cytokines make robust in vitro expansion of human HSCs difficult.",
-   "Assuming leukemia must arise only from normal stem cells is an oversimplification, since less self-renewing mature populations can also be transformed and self-renewal can be acquired by mutation.",
-   "The classic differentiation hierarchy diagram is a simplification; lineage-biased and intermediate cell states are increasingly recognized.",
-   "Progenitor (transient amplifying) cells are short-lived and largely lack durable self-renewal, so gene-modifying progenitors rather than true stem cells fails to give lasting benefit."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.758",
-   "Harrison 22e p.759",
-   "Harrison 22e p.760",
-   "Harrison 22e p.761",
-   "Harrison 22e p.762"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist plerixafor in poor mobilisers to release cells from the marrow niche",
-   "Confirm graft adequacy by CD34+ cell quantification and colony-forming-unit assays before infusion",
-   "Where clonal haematopoiesis is detected on sequencing (for example DNMT3a, TET2 or ASXL1 variants), monitor with periodic blood counts and manage associated cardiovascular risk rather than giving cytotoxic therapy",
-   "Surveil for progression of clonal haematopoiesis to myeloid malignancy with serial haematological review and repeat mutational testing",
-   "Support catastrophic loss of stem-cell function or marrow failure with transfusion, infection prophylaxis and consideration of allogeneic transplantation to restore the pool",
-   "Refer to haematology for interpretation of clonal and immunophenotypic findings and for transplant-candidacy assessment"
-  ]
- },
- "algorithms": [
-  {
-   "id": "hematopoietic_stem_cells-pathway",
-   "title": "Hematopoietic Stem Cells: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells (HSCs); catastrophic loss of HSC function leaves a person able to survive only about 2-4 weeks without",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complete failure of HSC function (e.g., after a nuclear/radiation accident) predicts survival of only about 2-4 weeks without extraordinary support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele fractions), Surface immunophenotyping of stem/progenitor markers (CD34, CD90/Thy-1,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist plerixafor in poor mobilisers to release cells from the marrow niche"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do not directly cycle stem cells (G-CSF instead mobilizes HSCs by altering CXCL12"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hematopoietic stem cells."
-  }
- ],
- "tables": [
-  {
-   "id": "hematopoietic_stem_cells-matrix",
-   "title": "Hematopoietic Stem Cells: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.758",
+    "clinicalPearls": [
+      "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells (HSCs); catastrophic loss of HSC function leaves a person able to survive only about 2-4 weeks without extraordinary support.",
+      "The HSC pool is estimated at only about 20,000-200,000 cells, yet it generates hundreds of billions of mature blood cells daily and sustains this output over decades.",
+      "Stem cells are defined by two cardinal properties: self-renewal (dividing while staying undifferentiated) and differentiation into mature effector cells; loss of either leads to pool exhaustion or to organ failure/neoplasia.",
+      "A dividing HSC can yield two stem cells, two differentiating cells (symmetric division), or one of each (asymmetric division); this asymmetry lets a small pool produce roughly seven orders of magnitude more mature cells daily.",
+      "Mature blood cell lifespans vary widely, from hours for neutrophils to a few months for red cells to years for memory lymphocytes, but the durable source is the persistent stem cell pool.",
+      "HSCs circulate in blood throughout life, but free-circulating time is brief (minutes in the mouse); circulating HSCs remain functional and usable for transplantation.",
+      "The bone marrow niche (notably perivascular regions near trabecular bone) is both nurturing and constraining: mesenchymal and endothelial cells supply kit ligand and CXCL12, and the niche limits how many stem cells are produced.",
+      "CXCR4/CXCL12 (SDF1) signaling retains HSCs in marrow; disrupting it (via CXCR4 blockade, CXCL12 cleavage, or receptor downregulation) mobilizes stem cells into blood, enabling collection by leukapheresis rather than operative marrow harvest.",
+      "Differentiation proceeds along a branching hierarchy (stem cell to multipotent progenitor to lineage-committed precursor to mature cell), with progressive loss of plasticity and, in most lineages, loss of proliferative capacity.",
+      "Maturation of progenitors into mature cells takes roughly 10-14 days in humans, clinically reflected in the lag between cytotoxic chemotherapy and blood count recovery.",
+      "HSCs are heterogeneous: individual stem cells can be biased toward particular lineages and differ in proliferation and death responses, so the population behaves as an aggregate.",
+      "Clonal hematopoiesis: HSCs accumulate roughly 17 somatic mutations per year of life; variant alleles contributing to over 1% of blood cells become nearly universal by age 70, with an inactivating TET2 mutation able to worsen outcomes of some chronic inflammatory conditions.",
+      "Genetically modifying long-lived HSCs underlies curative cell therapies for cerebral adrenoleukodystrophy and the hemoglobinopathies, including a CRISPR gene-edited approach that suppresses BCL11A to reactivate fetal hemoglobin in beta thalassemia and sickle cell anemia."
     ],
-    [
-     "Key Investigations",
-     "Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hematopoiesis originates from a small self-renewing HSC pool. During development, blood production shifts sequentially from the yolk sac (embryonic-hemoglobin red cells and tissue-resident macrophages) to the placenta and intraembryonic sites near the aorta-gonad-mesonephros region, then to fetal liver, and in the second trimester to bone marrow and spleen; HSCs reach marrow via bloodborne transit from fetal liver after long-bone calcification, and proliferation falls sharply soon after birth. HSCs reside in a specialized perivascular/endosteal marrow niche where mesenchymal, endothelial, neural, and other cells provide regulatory signals (kit ligand, CXCL12) governing survival, expansion, and constraint. Trafficking depends on selectins binding CD162/CD44, integrin-mediated firm adhesion (VCAM-1/VLA-4), and CXCL12-CXCR4 plus calcium-sensing receptor signaling. Most HSCs are deeply quiescent and cytokine-resistant, dividing on the order of months to years; quiescence is enforced by high cyclin-dependent kinase inhibitors (e.g., p57/CDKN1c blocking the G1-S transition) and niche signals such as angiogenin, IL-18, and angiopoietin 1. Self-renewal preserves any acquired mutation in the durable stem pool, whereas progenitor mutations are largely lost through terminal differentiation; epigenetic regulators (DNMT3a, TET2, ASXL1) are critical for pool homeostasis and for restraining outgrowth of potentially pathogenic clones.",
+    "additionalDifferentials": [],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele fractions)",
+      "Surface immunophenotyping of stem/progenitor markers (CD34, CD90/Thy-1, CD117/c-Kit, CD133, CD164, CD110/c-Mpl) as described in murine-based studies"
     ],
-    [
-     "Primary Differentials",
-     "Alternative etiologies and clinical mimics",
-     "Rule out key mimics"
+    "redFlags": [
+      "Complete failure of HSC function (e.g., after a nuclear/radiation accident) predicts survival of only about 2-4 weeks without extraordinary support",
+      "Expansion of clones carrying 'driver' mutations seen in myelodysplasia and myeloid leukemias, with low-frequency progression to overt neoplastic disease",
+      "Acquired self-renewal via oncogenic mutation in stem or more mature populations, providing a substrate for leukemia"
     ],
-    [
-     "Management Strategy",
-     "Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist",
-     "Core treatment modality"
+    "prognosis": "In the absence of disease the HSC pool is essentially inexhaustible: serial murine transplants can reconstitute several animals in succession and allogeneic transplant recipients never run out of blood cells over decades, indicating even limiting stem cell numbers suffice. With aging, clonal diversity declines as a small number of expanded clones (estimated 10-20 clones supplying 30-60% of blood cells by age 70) dominate; most such clones are benign, but some carry driver mutations with a low risk of progression to myeloid malignancy.",
+    "pitfalls": [
+      "Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do not directly cycle stem cells (G-CSF instead mobilizes HSCs by altering CXCL12 tethering).",
+      "Deep HSC quiescence and resistance to cytokines make robust in vitro expansion of human HSCs difficult.",
+      "Assuming leukemia must arise only from normal stem cells is an oversimplification, since less self-renewing mature populations can also be transformed and self-renewal can be acquired by mutation.",
+      "The classic differentiation hierarchy diagram is a simplification; lineage-biased and intermediate cell states are increasingly recognized.",
+      "Progenitor (transient amplifying) cells are short-lived and largely lack durable self-renewal, so gene-modifying progenitors rather than true stem cells fails to give lasting benefit."
     ],
-    [
-     "Clinical Pitfall",
-     "Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do",
-     "Prevent diagnostic or management error"
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.758",
+      "Harrison 22e p.759",
+      "Harrison 22e p.760",
+      "Harrison 22e p.761",
+      "Harrison 22e p.762"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist plerixafor in poor mobilisers to release cells from the marrow niche",
+      "Confirm graft adequacy by CD34+ cell quantification and colony-forming-unit assays before infusion",
+      "Where clonal haematopoiesis is detected on sequencing (for example DNMT3a, TET2 or ASXL1 variants), monitor with periodic blood counts and manage associated cardiovascular risk rather than giving cytotoxic therapy",
+      "Surveil for progression of clonal haematopoiesis to myeloid malignancy with serial haematological review and repeat mutational testing",
+      "Support catastrophic loss of stem-cell function or marrow failure with transfusion, infection prophylaxis and consideration of allogeneic transplantation to restore the pool",
+      "Refer to haematology for interpretation of clonal and immunophenotypic findings and for transplant-candidacy assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for hematopoietic stem cells."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hematopoietic-stem-cells-real-image",
-   "title": "Hematopoietic Stem Cells: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hematopoietic_stem_cells-pathway",
+      "title": "Hematopoietic Stem Cells: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells (HSCs); catastrophic loss of HSC function leaves a person able to survive only about 2-4 weeks without",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complete failure of HSC function (e.g., after a nuclear/radiation accident) predicts survival of only about 2-4 weeks without extraordinary support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele fractions), Surface immunophenotyping of stem/progenitor markers (CD34, CD90/Thy-1,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist plerixafor in poor mobilisers to release cells from the marrow niche"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do not directly cycle stem cells (G-CSF instead mobilizes HSCs by altering CXCL12"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hematopoietic stem cells."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hematopoietic_stem_cells-matrix",
+      "title": "Hematopoietic Stem Cells: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alternative etiologies and clinical mimics",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mobilise and harvest stem cells for therapeutic transplantation using growth factor (G-CSF), adding the CXCR4 antagonist",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hematopoietic stem cells."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "MLL Munich Leukemia Laboratory, CHIP in Hematology (WHO 2022 criteria)",
+      "kind": "web",
+      "url": "https://www.mll.com/en/clonal-hematopoiesis-chip-and-ccus/clonal-hematopoiesis-of-indeterminate-potential-chip-in-hematology"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hematopoietic_stem_cells-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key stem cell values and clonal haematopoiesis criteria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "HSC pool size",
+          "unit": "cells",
+          "cells": [
+            {
+              "text": "About 20,000 to 200,000 cells",
+              "range": [
+                20000,
+                200000
+              ]
+            },
+            {
+              "text": "Supplies hundreds of billions of blood cells daily for decades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Survival after total HSC loss",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "About 2 to 4 weeks",
+              "range": [
+                2,
+                4
+              ]
+            },
+            {
+              "text": "Without extraordinary support, for example after radiation accident"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progenitor maturation time",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "{{hy:About 10 to 14 days}}",
+              "range": [
+                10,
+                14
+              ]
+            },
+            {
+              "text": "Explains the lag in count recovery after chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic mutation rate in HSCs",
+          "unit": "per year",
+          "cells": [
+            {
+              "text": "About 17 per year of life",
+              "op": "=",
+              "value": 17
+            },
+            {
+              "text": "Clones over 1% of blood cells nearly universal by age 70"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHIP definition (WHO 2022)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Myeloid gene mutation at VAF 2% or more (4% for X-linked genes in males)",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "No unexplained cytopenia and no myeloid neoplasm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CHIP prevalence",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10 to 40% of older people",
+              "range": [
+                10,
+                40
+              ]
+            },
+            {
+              "text": "Rare under 40, rises after 65; depends on sequencing sensitivity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CHIP progression",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "About 0.17 to 0.22% per year",
+              "range": [
+                0.17,
+                0.22
+              ]
+            },
+            {
+              "text": "Higher with large clones, several mutations, TP53, splicing or IDH genes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stem cell markers",
+          "cells": [
+            {
+              "text": "CD34, CD90, CD117, CD133, CD110"
+            },
+            {
+              "text": "CD34+ count gauges graft dose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematopoietic_stem_cells-ddx",
+      "kind": "ddx",
+      "title": "Separating clonal haematopoiesis from myeloid neoplasms",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "CHIP",
+          "cells": [
+            {
+              "text": "Clonal, no cytopenia, no dysplasia, marrow blasts under 5%"
+            },
+            {
+              "text": "Blood count plus myeloid gene sequencing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CCUS",
+          "cells": [
+            {
+              "text": "Clonal with unexplained cytopenia, no dysplasia"
+            },
+            {
+              "text": "Marrow aspirate and morphology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-risk MDS",
+          "cells": [
+            {
+              "text": "Clonal, cytopenia and dysplasia, blasts under 5%"
+            },
+            {
+              "text": "{{hy:Dysplasia on marrow morphology; sequencing alone cannot separate}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk MDS",
+          "cells": [
+            {
+              "text": "Blasts 5 to 20%",
+              "range": [
+                5,
+                20
+              ]
+            },
+            {
+              "text": "Marrow blast count"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benign age-related clonal expansion",
+          "cells": [
+            {
+              "text": "10 to 20 clones supply 30 to 60% of blood by age 70, most benign"
+            },
+            {
+              "text": "No driver mutation; stable counts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematopoietic_stem_cells-treatment",
+      "kind": "treatment",
+      "title": "Clinical uses and management linked to stem cell biology",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "G-CSF mobilisation and leukapheresis",
+          "cells": [
+            {
+              "text": "Collecting stem cells for transplant"
+            },
+            {
+              "text": "G-CSF loosens CXCL12 tethering; avoids operative marrow harvest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plerixafor",
+          "cells": [
+            {
+              "text": "Poor mobilisers"
+            },
+            {
+              "text": "CXCR4 antagonist releasing HSCs from the niche"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHIP follow-up",
+          "cells": [
+            {
+              "text": "Normal blood count"
+            },
+            {
+              "text": "CBC with differential at 3 months, then every 12 months; manage cardiovascular risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CCUS follow-up",
+          "cells": [
+            {
+              "text": "Unexplained cytopenia"
+            },
+            {
+              "text": "Marrow aspirate; counts at 1, 2 and 3 months, then every 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "Catastrophic stem cell failure or marrow failure"
+            },
+            {
+              "text": "Restores the HSC pool; support with transfusion and infection prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene-modified HSC therapy",
+          "cells": [
+            {
+              "text": "Cerebral adrenoleukodystrophy, sickle cell disease, beta thalassaemia"
+            },
+            {
+              "text": "CRISPR suppression of BCL11A reactivates fetal haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening",
+          "cells": [
+            {
+              "text": "People with normal counts"
+            },
+            {
+              "text": "Routine CHIP screening not recommended"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hematopoietic_stem_cells-dx-mgmt",
+      "title": "Diagnosis and management of clonal haematopoiesis and stem cell disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Somatic myeloid mutation found on sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Variant allele fraction 2% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Below CHIP threshold: no action",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Unexplained cytopenia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "CHIP: CBC at 3 months then yearly, address CV risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Bone marrow aspirate and morphology",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Dysplasia present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "CCUS: counts monthly for 3 months, then every 3 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Marrow blasts 5% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Low-risk MDS: haematology care",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High-risk MDS: consider transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,507 @@
 {
- "id": "alcohol_withdrawal",
- "name": "Alcohol withdrawal syndrome",
- "aliases": [
-  "alcohol withdrawal",
-  "delirium tremens",
-  "DTs",
-  "alcohol withdrawal delirium"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
-   "Early features include tremor, anxiety, agitation, sweating, nausea, tachycardia, and hypertension; insomnia and irritability are common",
-   "Withdrawal seizures (typically generalised tonic-clonic) tend to occur early, usually within the first day or two",
-   "Alcoholic hallucinosis produces hallucinations, often visual, with an otherwise clear sensorium, distinguishing it from delirium tremens",
-   "Delirium tremens is a later, life-threatening complication with clouded consciousness, disorientation, severe autonomic hyperactivity, and hallucinations, usually appearing after a couple of days",
-   "Management principles rest on benzodiazepine-based regimens, often symptom-triggered using a standardised withdrawal scale, in a supportive monitored setting",
-   "Give thiamine before or with glucose to prevent precipitating Wernicke encephalopathy, and correct fluid and electrolyte disturbances",
-   "Assess withdrawal severity and complication risk with a validated instrument and identify high-risk patients for closer monitoring"
+  "id": "alcohol_withdrawal",
+  "name": "Alcohol withdrawal syndrome",
+  "aliases": [
+    "alcohol withdrawal",
+    "delirium tremens",
+    "DTs",
+    "alcohol withdrawal delirium"
   ],
-  "pathophysiology": "Chronic alcohol exposure enhances inhibitory gamma-aminobutyric acid signalling and suppresses excitatory glutamatergic (NMDA receptor) activity; the brain adapts by downregulating GABA and upregulating glutamate systems. When alcohol is withdrawn, this adaptation leaves a state of central nervous system hyperexcitability and autonomic overactivity, producing the tremor, seizures, and delirium of the withdrawal syndrome.",
-  "additionalDifferentials": [
-   "Delirium from other causes (infection, metabolic derangement)",
-   "Sedative-hypnotic or benzodiazepine withdrawal",
-   "Stimulant intoxication",
-   "Thyroid storm",
-   "Sepsis or central nervous system infection",
-   "Wernicke encephalopathy",
-   "Hepatic encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Validated withdrawal severity scale to guide symptom-triggered treatment",
-   "Electrolytes including magnesium and phosphate, glucose, and renal function",
-   "Liver function tests and full blood count",
-   "Assessment for infection and other precipitants of delirium",
-   "Thiamine status and evaluation for Wernicke encephalopathy"
-  ],
-  "redFlags": [
-   "Delirium tremens with severe autonomic instability, a medical emergency with appreciable mortality if untreated",
-   "Withdrawal seizures or status epilepticus",
-   "Signs of Wernicke encephalopathy (confusion, ophthalmoplegia, ataxia)",
-   "Hyperthermia, marked tachycardia, and haemodynamic instability"
-  ],
-  "prognosis": "Uncomplicated withdrawal usually resolves within several days with appropriate treatment. Delirium tremens carries significant mortality if unrecognised but is greatly reduced with timely benzodiazepine therapy and supportive care. Long-term prognosis depends on engagement with relapse prevention and treatment of alcohol use disorder.",
-  "pitfalls": [
-   "Giving glucose before thiamine and precipitating Wernicke encephalopathy",
-   "Underestimating severity and under-dosing benzodiazepines in early withdrawal",
-   "Attributing agitation solely to withdrawal while missing infection, bleeding, or metabolic causes",
-   "Failing to identify patients at high risk of seizures or delirium tremens",
-   "Not addressing underlying alcohol use disorder after acute treatment"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated withdrawal scale",
-   "Parenteral thiamine given before glucose to prevent and treat Wernicke encephalopathy",
-   "Correct fluid and electrolyte deficits including magnesium, phosphate and potassium",
-   "Supportive care in a calm, monitored environment with attention to hydration and orientation",
-   "Treat delirium tremens promptly with escalating benzodiazepines, adjunctive antipsychotics for agitation and hallucinations, and critical care support",
-   "Identify and treat precipitants and comorbidities such as infection, injury or gastrointestinal haemorrhage",
-   "Link to relapse-prevention and specialist addiction services once acute withdrawal resolves"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alcohol_withdrawal-pathway",
-   "title": "Alcohol withdrawal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Delirium tremens with severe autonomic instability, a medical emergency with appreciable mortality if untreated",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Validated withdrawal severity scale to guide symptom-triggered treatment, Electrolytes including magnesium and phosphate, glucose, and renal function, Liver function tests and full blood count"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated withdrawal scale"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving glucose before thiamine and precipitating Wernicke encephalopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alcohol withdrawal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "alcohol_withdrawal-matrix",
-   "title": "Alcohol withdrawal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
+      "Early features include tremor, anxiety, agitation, sweating, nausea, tachycardia, and hypertension; insomnia and irritability are common",
+      "Withdrawal seizures (typically generalised tonic-clonic) tend to occur early, usually within the first day or two",
+      "Alcoholic hallucinosis produces hallucinations, often visual, with an otherwise clear sensorium, distinguishing it from delirium tremens",
+      "Delirium tremens is a later, life-threatening complication with clouded consciousness, disorientation, severe autonomic hyperactivity, and hallucinations, usually appearing after a couple of days",
+      "Management principles rest on benzodiazepine-based regimens, often symptom-triggered using a standardised withdrawal scale, in a supportive monitored setting",
+      "Give thiamine before or with glucose to prevent precipitating Wernicke encephalopathy, and correct fluid and electrolyte disturbances",
+      "Assess withdrawal severity and complication risk with a validated instrument and identify high-risk patients for closer monitoring"
     ],
-    [
-     "Key Investigations",
-     "Validated withdrawal severity scale to guide symptom-triggered treatment, Electrolytes including magnesium and phosphate,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic alcohol exposure enhances inhibitory gamma-aminobutyric acid signalling and suppresses excitatory glutamatergic (NMDA receptor) activity; the brain adapts by downregulating GABA and upregulating glutamate systems. When alcohol is withdrawn, this adaptation leaves a state of central nervous system hyperexcitability and autonomic overactivity, producing the tremor, seizures, and delirium of the withdrawal syndrome.",
+    "additionalDifferentials": [
+      "Delirium from other causes (infection, metabolic derangement)",
+      "Sedative-hypnotic or benzodiazepine withdrawal",
+      "Stimulant intoxication",
+      "Thyroid storm",
+      "Sepsis or central nervous system infection",
+      "Wernicke encephalopathy",
+      "Hepatic encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Delirium from other causes (infection, metabolic derangement), Sedative-hypnotic or benzodiazepine withdrawal, Stimulant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Validated withdrawal severity scale to guide symptom-triggered treatment",
+      "Electrolytes including magnesium and phosphate, glucose, and renal function",
+      "Liver function tests and full blood count",
+      "Assessment for infection and other precipitants of delirium",
+      "Thiamine status and evaluation for Wernicke encephalopathy"
     ],
-    [
-     "Management Strategy",
-     "Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated",
-     "Core treatment modality"
+    "redFlags": [
+      "Delirium tremens with severe autonomic instability, a medical emergency with appreciable mortality if untreated",
+      "Withdrawal seizures or status epilepticus",
+      "Signs of Wernicke encephalopathy (confusion, ophthalmoplegia, ataxia)",
+      "Hyperthermia, marked tachycardia, and haemodynamic instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving glucose before thiamine and precipitating Wernicke encephalopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated withdrawal usually resolves within several days with appropriate treatment. Delirium tremens carries significant mortality if unrecognised but is greatly reduced with timely benzodiazepine therapy and supportive care. Long-term prognosis depends on engagement with relapse prevention and treatment of alcohol use disorder.",
+    "pitfalls": [
+      "Giving glucose before thiamine and precipitating Wernicke encephalopathy",
+      "Underestimating severity and under-dosing benzodiazepines in early withdrawal",
+      "Attributing agitation solely to withdrawal while missing infection, bleeding, or metabolic causes",
+      "Failing to identify patients at high risk of seizures or delirium tremens",
+      "Not addressing underlying alcohol use disorder after acute treatment"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated withdrawal scale",
+      "Parenteral thiamine given before glucose to prevent and treat Wernicke encephalopathy",
+      "Correct fluid and electrolyte deficits including magnesium, phosphate and potassium",
+      "Supportive care in a calm, monitored environment with attention to hydration and orientation",
+      "Treat delirium tremens promptly with escalating benzodiazepines, adjunctive antipsychotics for agitation and hallucinations, and critical care support",
+      "Identify and treat precipitants and comorbidities such as infection, injury or gastrointestinal haemorrhage",
+      "Link to relapse-prevention and specialist addiction services once acute withdrawal resolves"
     ]
-   ],
-   "caption": "Overview comparison matrix for alcohol withdrawal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alcohol-withdrawal-real-image",
-   "title": "Alcohol withdrawal syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alcohol_withdrawal-pathway",
+      "title": "Alcohol withdrawal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Delirium tremens with severe autonomic instability, a medical emergency with appreciable mortality if untreated",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Validated withdrawal severity scale to guide symptom-triggered treatment, Electrolytes including magnesium and phosphate, glucose, and renal function, Liver function tests and full blood count"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated withdrawal scale"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving glucose before thiamine and precipitating Wernicke encephalopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alcohol withdrawal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alcohol_withdrawal-matrix",
+      "title": "Alcohol withdrawal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs on reduction or cessation of heavy, sustained alcohol use, with symptoms typically emerging within hours to a few days",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Validated withdrawal severity scale to guide symptom-triggered treatment, Electrolytes including magnesium and phosphate,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Delirium from other causes (infection, metabolic derangement), Sedative-hypnotic or benzodiazepine withdrawal, Stimulant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Benzodiazepine-based therapy such as chlordiazepoxide, diazepam or lorazepam, often symptom-triggered using a validated",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving glucose before thiamine and precipitating Wernicke encephalopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alcohol withdrawal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alcohol_withdrawal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Validated withdrawal severity scale",
+          "cells": [
+            {
+              "text": "Guides symptom-triggered treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes including magnesium and phosphate, glucose and renal function",
+          "cells": [
+            {
+              "text": "Metabolic derangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and full blood count",
+          "cells": [
+            {
+              "text": "Hepatic and haematological status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for infection and other delirium precipitants",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine status and evaluation for Wernicke encephalopathy",
+          "cells": [
+            {
+              "text": "Wernicke encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alcohol_withdrawal-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Delirium from infection or metabolic derangement",
+          "cells": [
+            {
+              "text": "Infection or metabolic derangement"
+            },
+            {
+              "text": "Infection assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wernicke encephalopathy",
+          "cells": [
+            {
+              "text": "Confusion, ophthalmoplegia and ataxia"
+            },
+            {
+              "text": "Thiamine status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic encephalopathy",
+          "cells": [
+            {
+              "text": "Liver failure"
+            },
+            {
+              "text": "Liver function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepine or sedative-hypnotic withdrawal",
+          "cells": [
+            {
+              "text": "Sedative-hypnotic withdrawal"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alcohol_withdrawal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom-triggered benzodiazepines (chlordiazepoxide, diazepam or lorazepam)",
+          "cells": [
+            {
+              "text": "Withdrawal symptoms"
+            },
+            {
+              "text": "Guided by a validated scale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral thiamine given before glucose",
+          "cells": [
+            {
+              "text": "Prevents and treats Wernicke encephalopathy"
+            },
+            {
+              "text": "Thiamine first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of fluid, magnesium, phosphate and potassium deficits",
+          "cells": [
+            {
+              "text": "Electrolyte deficits"
+            },
+            {
+              "text": "Correct before complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care in a calm, monitored environment",
+          "cells": [
+            {
+              "text": "Hydration and orientation"
+            },
+            {
+              "text": "Monitored setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalating benzodiazepines, antipsychotics and critical care for delirium tremens",
+          "cells": [
+            {
+              "text": "Delirium tremens"
+            },
+            {
+              "text": "Adjunctive antipsychotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of precipitants: infection, injury, gastrointestinal haemorrhage",
+          "cells": [
+            {
+              "text": "Comorbidities"
+            },
+            {
+              "text": "Identify and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention and addiction services",
+          "cells": [
+            {
+              "text": "After acute withdrawal"
+            },
+            {
+              "text": "Specialist referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alcohol_withdrawal-dx-mgmt",
+      "title": "Diagnosis and management of Alcohol withdrawal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tremor, sweating and agitation within hours to days of stopping heavy drinking",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Delirium, withdrawal seizures or Wernicke signs present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medical review; escalate to critical care if delirium tremens",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Withdrawal severity scale; electrolytes incl Mg and PO4; glucose; LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection or another delirium cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Symptom-triggered benzodiazepines, with thiamine given first",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the precipitant; review infection, metabolic and hepatic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Parenteral thiamine before any glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct fluid, magnesium, phosphate and potassium deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalating benzodiazepines and antipsychotics if delirium tremens",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Uncomplicated withdrawal resolves in days; timely treatment cuts tremens risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,454 @@
 {
- "id": "polymorphous_adenocarcinoma",
- "name": "Polymorphous adenocarcinoma",
- "aliases": [
-  "Polymorphous low-grade adenocarcinoma",
-  "Terminal duct carcinoma"
- ],
- "class": "non_infective",
- "system": "Head and neck / Salivary glands",
- "specialty": "Head and neck surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
-   "It is one of the commonest intraoral minor salivary gland malignancies and typically presents as a painless, slow-growing submucosal swelling.",
-   "The defining paradox is cytological uniformity combined with architectural diversity: tubular, cribriform, solid, single-file streaming and concentric targetoid patterns coexist.",
-   "Perineural invasion, often with a targetoid whorling pattern, is common yet usually consistent with indolent behaviour.",
-   "The classic type harbours a recurrent PRKD1 hotspot mutation, whereas the cribriform-predominant variant more often shows PRKD1, PRKD2 or PRKD3 rearrangements.",
-   "Tumour cells are typically S100 positive with a low proliferation index, and the main task is to separate it from adenoid cystic carcinoma.",
-   "The cribriform variant, favouring the tongue base, more frequently involves regional lymph nodes yet still generally behaves indolently.",
-   "Wide local excision is the mainstay, and distinguishing it from adenoid cystic carcinoma has major implications for treatment intensity."
+  "id": "polymorphous_adenocarcinoma",
+  "name": "Polymorphous adenocarcinoma",
+  "aliases": [
+    "Polymorphous low-grade adenocarcinoma",
+    "Terminal duct carcinoma"
   ],
-  "pathophysiology": "Polymorphous adenocarcinoma is a malignant neoplasm derived from the terminal duct or intercalated duct cells of minor salivary glands, in which a single, cytologically bland cell population expresses a remarkably wide range of growth patterns. In most conventional tumours an activating hotspot mutation in the PRKD1 gene deregulates protein kinase D signalling, driving proliferation, while the cribriform-predominant variant is instead characterised by rearrangements of PRKD1, PRKD2 or PRKD3. The neoplastic cells infiltrate the surrounding tissue in tubules, cribriform islands, solid nests and single-file cords, and characteristically ensheath nerves in concentric layers, so that perineural invasion is a defining rather than an alarming feature. Despite this infiltrative and neurotropic growth, proliferative activity remains low, which underlies the tumour's generally indolent clinical course.",
-  "additionalDifferentials": [
-   "Adenoid cystic carcinoma",
-   "Pleomorphic adenoma",
-   "Canalicular adenoma",
-   "Basal cell adenoma",
-   "Secretory carcinoma",
-   "Adenocarcinoma not otherwise specified"
-  ],
-  "additionalInvestigations": [
-   "Incisional biopsy of the mucosal or submucosal lesion",
-   "Immunohistochemistry including S100 and Ki-67 proliferation index",
-   "MRI to assess soft-tissue extent and perineural spread",
-   "Molecular testing for PRKD1 alterations where available",
-   "CT to evaluate bony involvement of the palate or maxilla",
-   "Ultrasound or cross-sectional imaging of the neck for nodal assessment"
-  ],
-  "redFlags": [
-   "Rapid growth or mucosal ulceration",
-   "Bone invasion of the palate or maxilla",
-   "Extensive or symptomatic perineural spread",
-   "Regional nodal metastasis, particularly with the cribriform variant",
-   "Solid, high-grade-appearing areas within the tumour"
-  ],
-  "prognosis": "Prognosis is generally favourable and the tumour is low-grade, with complete excision usually curative. The cribriform variant carries a higher rate of nodal metastasis but still tends to behave indolently, whereas misdiagnosis as adenoid cystic carcinoma risks unnecessary overtreatment.",
-  "pitfalls": [
-   "Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity",
-   "Achieving inadequate margins because of the infiltrative growth pattern",
-   "Failing to recognise the characteristic perineural invasion",
-   "Mistaking it for a benign pleomorphic adenoma on a small biopsy"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours",
-   "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
-   "Cummings Otolaryngology: Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy",
-   "Neck dissection where nodal metastasis is present, particularly in the cribriform-predominant variant",
-   "Adjuvant radiotherapy reserved for positive or close margins, extensive perineural invasion or recurrent disease",
-   "Accurate histopathological distinction from adenoid cystic carcinoma, aided by S100 positivity and a low Ki-67 index, to avoid unnecessary overtreatment",
-   "Long-term clinical and imaging surveillance for local recurrence and late nodal or distant metastasis",
-   "Head and neck multidisciplinary team management of surgery, pathology, reconstruction and rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polymorphous_adenocarcinoma-pathway",
-   "title": "Polymorphous adenocarcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth or mucosal ulceration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Incisional biopsy of the mucosal or submucosal lesion, Immunohistochemistry including S100 and Ki-67 proliferation index, MRI to assess soft-tissue extent and perineural spread"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polymorphous adenocarcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "polymorphous_adenocarcinoma-matrix",
-   "title": "Polymorphous adenocarcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Head and neck / Salivary glands",
+  "specialty": "Head and neck surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
+      "It is one of the commonest intraoral minor salivary gland malignancies and typically presents as a painless, slow-growing submucosal swelling.",
+      "The defining paradox is cytological uniformity combined with architectural diversity: tubular, cribriform, solid, single-file streaming and concentric targetoid patterns coexist.",
+      "Perineural invasion, often with a targetoid whorling pattern, is common yet usually consistent with indolent behaviour.",
+      "The classic type harbours a recurrent PRKD1 hotspot mutation, whereas the cribriform-predominant variant more often shows PRKD1, PRKD2 or PRKD3 rearrangements.",
+      "Tumour cells are typically S100 positive with a low proliferation index, and the main task is to separate it from adenoid cystic carcinoma.",
+      "The cribriform variant, favouring the tongue base, more frequently involves regional lymph nodes yet still generally behaves indolently.",
+      "Wide local excision is the mainstay, and distinguishing it from adenoid cystic carcinoma has major implications for treatment intensity."
     ],
-    [
-     "Key Investigations",
-     "Incisional biopsy of the mucosal or submucosal lesion, Immunohistochemistry including S100 and Ki-67 proliferation index, MRI to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Polymorphous adenocarcinoma is a malignant neoplasm derived from the terminal duct or intercalated duct cells of minor salivary glands, in which a single, cytologically bland cell population expresses a remarkably wide range of growth patterns. In most conventional tumours an activating hotspot mutation in the PRKD1 gene deregulates protein kinase D signalling, driving proliferation, while the cribriform-predominant variant is instead characterised by rearrangements of PRKD1, PRKD2 or PRKD3. The neoplastic cells infiltrate the surrounding tissue in tubules, cribriform islands, solid nests and single-file cords, and characteristically ensheath nerves in concentric layers, so that perineural invasion is a defining rather than an alarming feature. Despite this infiltrative and neurotropic growth, proliferative activity remains low, which underlies the tumour's generally indolent clinical course.",
+    "additionalDifferentials": [
+      "Adenoid cystic carcinoma",
+      "Pleomorphic adenoma",
+      "Canalicular adenoma",
+      "Basal cell adenoma",
+      "Secretory carcinoma",
+      "Adenocarcinoma not otherwise specified"
     ],
-    [
-     "Primary Differentials",
-     "Adenoid cystic carcinoma, Pleomorphic adenoma, Canalicular adenoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Incisional biopsy of the mucosal or submucosal lesion",
+      "Immunohistochemistry including S100 and Ki-67 proliferation index",
+      "MRI to assess soft-tissue extent and perineural spread",
+      "Molecular testing for PRKD1 alterations where available",
+      "CT to evaluate bony involvement of the palate or maxilla",
+      "Ultrasound or cross-sectional imaging of the neck for nodal assessment"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth or mucosal ulceration",
+      "Bone invasion of the palate or maxilla",
+      "Extensive or symptomatic perineural spread",
+      "Regional nodal metastasis, particularly with the cribriform variant",
+      "Solid, high-grade-appearing areas within the tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable and the tumour is low-grade, with complete excision usually curative. The cribriform variant carries a higher rate of nodal metastasis but still tends to behave indolently, whereas misdiagnosis as adenoid cystic carcinoma risks unnecessary overtreatment.",
+    "pitfalls": [
+      "Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity",
+      "Achieving inadequate margins because of the infiltrative growth pattern",
+      "Failing to recognise the characteristic perineural invasion",
+      "Mistaking it for a benign pleomorphic adenoma on a small biopsy"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours",
+      "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
+      "Cummings Otolaryngology: Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy",
+      "Neck dissection where nodal metastasis is present, particularly in the cribriform-predominant variant",
+      "Adjuvant radiotherapy reserved for positive or close margins, extensive perineural invasion or recurrent disease",
+      "Accurate histopathological distinction from adenoid cystic carcinoma, aided by S100 positivity and a low Ki-67 index, to avoid unnecessary overtreatment",
+      "Long-term clinical and imaging surveillance for local recurrence and late nodal or distant metastasis",
+      "Head and neck multidisciplinary team management of surgery, pathology, reconstruction and rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for polymorphous adenocarcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polymorphous-adenocarcinoma-real-image",
-   "title": "Polymorphous adenocarcinoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "polymorphous_adenocarcinoma-pathway",
+      "title": "Polymorphous adenocarcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth or mucosal ulceration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Incisional biopsy of the mucosal or submucosal lesion, Immunohistochemistry including S100 and Ki-67 proliferation index, MRI to assess soft-tissue extent and perineural spread"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polymorphous adenocarcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polymorphous_adenocarcinoma-matrix",
+      "title": "Polymorphous adenocarcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malignancy that arises almost exclusively in the minor salivary glands, with the palate being the classic site of origin.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Incisional biopsy of the mucosal or submucosal lesion, Immunohistochemistry including S100 and Ki-67 proliferation index, MRI to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adenoid cystic carcinoma, Pleomorphic adenoma, Canalicular adenoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision with clear margins as the curative mainstay for this low-grade minor salivary gland malignancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as adenoid cystic carcinoma, leading to inappropriate treatment intensity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polymorphous adenocarcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polymorphous_adenocarcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Incisional biopsy",
+          "cells": [
+            {
+              "text": "Mucosal or submucosal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry with S100 and Ki-67",
+          "cells": [
+            {
+              "text": "Diagnosis and proliferation index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue extent and perineural spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PRKD1 molecular testing",
+          "cells": [
+            {
+              "text": "Alterations, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the palate or maxilla",
+          "cells": [
+            {
+              "text": "Bony involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Nodal assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymorphous_adenocarcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adenoid cystic carcinoma",
+          "cells": [
+            {
+              "text": "Distinguished histologically, aided by S100 positivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polymorphous_adenocarcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Clear margins as the curative mainstay of this low-grade tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck dissection",
+          "cells": [
+            {
+              "text": "Where nodal metastasis is present, particularly the cribriform variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Positive or close margins, or extensive perineural spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Distinction from adenoid cystic carcinoma, aided by S100"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clinical and imaging surveillance for local recurrence and late nodal or distant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Head and neck multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polymorphous_adenocarcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Polymorphous adenocarcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palatal or minor salivary mucosal lesion with perineural symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, bone invasion, extensive perineural spread, nodal disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent head and neck surgical review for bone invasion or nodal metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Incisional biopsy with S100 and Ki-67; MRI for perineural spread; CT for bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology with S100 favour polymorphous adenocarcinoma over adenoid cystic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adenoid cystic carcinoma, pleomorphic adenoma or secretory carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision with clear margins as the curative mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neck dissection where nodal metastasis is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for positive or close margins or extensive perineural spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Careful histological distinction from adenoid cystic carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term clinical and imaging surveillance for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable; low-grade, with complete excision usually curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

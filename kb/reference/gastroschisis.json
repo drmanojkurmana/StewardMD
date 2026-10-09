@@ -1,171 +1,449 @@
 {
- "id": "gastroschisis",
- "name": "Gastroschisis",
- "aliases": [
-  "abdominal wall defect",
-  "paraumbilical wall defect"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without any covering membrane",
-   "Because the exposed bowel has no protective sac, it is vulnerable to fluid and heat loss and to inflammatory damage from amniotic fluid, so immediate protection is essential",
-   "Associated anomalies are uncommon apart from intestinal problems such as atresia, in contrast to omphalocele where extraintestinal anomalies are frequent",
-   "Immediate care centres on wrapping the exposed viscera in clear protective covering, maintaining warmth, aggressive fluid replacement, and gastric decompression",
-   "The infant should be nursed to avoid kinking of the mesentery, since the narrow defect can compromise blood flow to the herniated bowel",
-   "Closure may be achieved primarily if the defect and bowel volume allow, or staged using a silo to gradually reduce the bowel before fascial closure",
-   "Prolonged ileus and delayed feeding tolerance are expected postoperatively because of the intrauterine inflammatory thickening (peel) on the bowel",
-   "Most cases are detected antenatally on ultrasound and by a raised maternal serum alpha-fetoprotein, allowing planned delivery at a surgical centre"
+  "id": "gastroschisis",
+  "name": "Gastroschisis",
+  "aliases": [
+    "abdominal wall defect",
+    "paraumbilical wall defect"
   ],
-  "pathophysiology": "Gastroschisis is a defect in the anterior abdominal wall adjacent to the umbilicus, thought to result from a vascular or developmental disruption of the wall, allowing loops of bowel and occasionally other viscera to herniate freely into the amniotic cavity. Unlike omphalocele there is no covering sac, so the exposed intestine is bathed in amniotic fluid, becoming oedematous, foreshortened, and matted with an inflammatory peel. The small mesenteric opening also predisposes the herniated segment to ischaemia and to associated intestinal atresia.",
-  "additionalDifferentials": [
-   "Omphalocele (exomphalos) with intact sac",
-   "Ruptured omphalocele",
-   "Umbilical cord hernia",
-   "Body stalk anomaly / limb-body wall complex",
-   "Bladder or cloacal exstrophy"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance",
-   "Maternal serum alpha-fetoprotein, typically elevated",
-   "Postnatal assessment of bowel viability and search for associated atresia",
-   "Serial electrolytes and fluid balance monitoring given large insensible losses",
-   "Echocardiography if any additional anomaly is suspected"
-  ],
-  "redFlags": [
-   "Exposed uncovered bowel requiring immediate protection to prevent catastrophic heat, fluid, and evaporative losses",
-   "Dusky, ischaemic, or constricted bowel at the defect indicating threatened viability and need for urgent intervention",
-   "Signs of hypovolaemia or hypothermia from inadequate resuscitation",
-   "Evidence of associated intestinal atresia or perforation requiring surgical planning"
-  ],
-  "prognosis": "Survival is generally high with modern neonatal and surgical care. Recovery is often prolonged by intestinal dysmotility and delayed feeding, and outcome is worse when there is complex disease with atresia, perforation, or extensive bowel loss leading to short bowel syndrome.",
-  "pitfalls": [
-   "Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss",
-   "Positioning the infant so the mesentery kinks and the bowel becomes ischaemic",
-   "Forcing primary closure under excessive tension and causing abdominal compartment syndrome",
-   "Underestimating the duration of postoperative ileus and stopping nutritional support too early"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and allow inspection",
-   "Aggressive intravenous fluid resuscitation to replace large insensible losses, with nasogastric decompression to reduce bowel distension",
-   "Position and support the herniated viscera to prevent kinking of the narrow mesenteric pedicle and consequent ischaemia",
-   "Surgical closure by primary reduction and fascial repair where bowel volume allows, or staged reduction using a preformed silo before delayed closure",
-   "Parenteral nutrition to sustain the infant until intestinal dysmotility resolves and enteral feeding is established",
-   "Monitor for associated intestinal atresia, perforation, necrotising enterocolitis and short bowel syndrome",
-   "Manage within a neonatal intensive care and paediatric surgical multidisciplinary team, with antenatal counselling and planned delivery at a surgical centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastroschisis-pathway",
-   "title": "Gastroschisis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without any covering membrane",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exposed uncovered bowel requiring immediate protection to prevent catastrophic heat, fluid, and evaporative losses",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance, Maternal serum alpha-fetoprotein, typically elevated, Postnatal assessment of bowel viability and search for associated atresia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and allow inspection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastroschisis."
-  }
- ],
- "tables": [
-  {
-   "id": "gastroschisis-matrix",
-   "title": "Gastroschisis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without any covering membrane",
+      "Because the exposed bowel has no protective sac, it is vulnerable to fluid and heat loss and to inflammatory damage from amniotic fluid, so immediate protection is essential",
+      "Associated anomalies are uncommon apart from intestinal problems such as atresia, in contrast to omphalocele where extraintestinal anomalies are frequent",
+      "Immediate care centres on wrapping the exposed viscera in clear protective covering, maintaining warmth, aggressive fluid replacement, and gastric decompression",
+      "The infant should be nursed to avoid kinking of the mesentery, since the narrow defect can compromise blood flow to the herniated bowel",
+      "Closure may be achieved primarily if the defect and bowel volume allow, or staged using a silo to gradually reduce the bowel before fascial closure",
+      "Prolonged ileus and delayed feeding tolerance are expected postoperatively because of the intrauterine inflammatory thickening (peel) on the bowel",
+      "Most cases are detected antenatally on ultrasound and by a raised maternal serum alpha-fetoprotein, allowing planned delivery at a surgical centre"
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance, Maternal serum alpha-fetoprotein, typically elevated,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastroschisis is a defect in the anterior abdominal wall adjacent to the umbilicus, thought to result from a vascular or developmental disruption of the wall, allowing loops of bowel and occasionally other viscera to herniate freely into the amniotic cavity. Unlike omphalocele there is no covering sac, so the exposed intestine is bathed in amniotic fluid, becoming oedematous, foreshortened, and matted with an inflammatory peel. The small mesenteric opening also predisposes the herniated segment to ischaemia and to associated intestinal atresia.",
+    "additionalDifferentials": [
+      "Omphalocele (exomphalos) with intact sac",
+      "Ruptured omphalocele",
+      "Umbilical cord hernia",
+      "Body stalk anomaly / limb-body wall complex",
+      "Bladder or cloacal exstrophy"
     ],
-    [
-     "Primary Differentials",
-     "Omphalocele (exomphalos) with intact sac, Ruptured omphalocele, Umbilical cord hernia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance",
+      "Maternal serum alpha-fetoprotein, typically elevated",
+      "Postnatal assessment of bowel viability and search for associated atresia",
+      "Serial electrolytes and fluid balance monitoring given large insensible losses",
+      "Echocardiography if any additional anomaly is suspected"
     ],
-    [
-     "Management Strategy",
-     "Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and",
-     "Core treatment modality"
+    "redFlags": [
+      "Exposed uncovered bowel requiring immediate protection to prevent catastrophic heat, fluid, and evaporative losses",
+      "Dusky, ischaemic, or constricted bowel at the defect indicating threatened viability and need for urgent intervention",
+      "Signs of hypovolaemia or hypothermia from inadequate resuscitation",
+      "Evidence of associated intestinal atresia or perforation requiring surgical planning"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survival is generally high with modern neonatal and surgical care. Recovery is often prolonged by intestinal dysmotility and delayed feeding, and outcome is worse when there is complex disease with atresia, perforation, or extensive bowel loss leading to short bowel syndrome.",
+    "pitfalls": [
+      "Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss",
+      "Positioning the infant so the mesentery kinks and the bowel becomes ischaemic",
+      "Forcing primary closure under excessive tension and causing abdominal compartment syndrome",
+      "Underestimating the duration of postoperative ileus and stopping nutritional support too early"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and allow inspection",
+      "Aggressive intravenous fluid resuscitation to replace large insensible losses, with nasogastric decompression to reduce bowel distension",
+      "Position and support the herniated viscera to prevent kinking of the narrow mesenteric pedicle and consequent ischaemia",
+      "Surgical closure by primary reduction and fascial repair where bowel volume allows, or staged reduction using a preformed silo before delayed closure",
+      "Parenteral nutrition to sustain the infant until intestinal dysmotility resolves and enteral feeding is established",
+      "Monitor for associated intestinal atresia, perforation, necrotising enterocolitis and short bowel syndrome",
+      "Manage within a neonatal intensive care and paediatric surgical multidisciplinary team, with antenatal counselling and planned delivery at a surgical centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastroschisis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastroschisis-real-image",
-   "title": "Gastroschisis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastroschisis-pathway",
+      "title": "Gastroschisis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without any covering membrane",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exposed uncovered bowel requiring immediate protection to prevent catastrophic heat, fluid, and evaporative losses",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance, Maternal serum alpha-fetoprotein, typically elevated, Postnatal assessment of bowel viability and search for associated atresia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and allow inspection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastroschisis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastroschisis-matrix",
+      "title": "Gastroschisis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A full-thickness abdominal wall defect, almost always to the right of the umbilical cord, through which bowel eviscerates without",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound to confirm the diagnosis and monitor bowel appearance, Maternal serum alpha-fetoprotein, typically elevated,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Omphalocele (exomphalos) with intact sac, Ruptured omphalocele, Umbilical cord hernia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate protection of the eviscerated bowel in a clear covering or bowel bag to limit heat, fluid and evaporative losses and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying protection of the exposed bowel, leading to hypothermia and severe fluid loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastroschisis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastroschisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and monitors bowel appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Typically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postnatal assessment of bowel viability",
+          "cells": [
+            {
+              "text": "Search for associated atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial electrolytes and fluid balance",
+          "cells": [
+            {
+              "text": "Large insensible losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "If an additional anomaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroschisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Omphalocele (exomphalos) with intact sac",
+          "cells": [
+            {
+              "text": "Intact sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured omphalocele",
+          "cells": [
+            {
+              "text": "Ruptured sac"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastroschisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protection of eviscerated bowel",
+          "cells": [
+            {
+              "text": "Clear covering or bowel bag to limit heat, fluid and evaporative losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive IV fluid resuscitation",
+          "cells": [
+            {
+              "text": "Replaces large insensible losses; nasogastric decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positioning of viscera",
+          "cells": [
+            {
+              "text": "Prevents kinking of the narrow mesenteric pedicle and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical closure",
+          "cells": [
+            {
+              "text": "Primary reduction and fascial repair where volume allows, or staged reduction using a preformed silo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Sustains the infant until dysmotility resolves and enteral feeding is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Atresia, perforation, necrotising enterocolitis and short bowel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neonatal and paediatric surgical care",
+          "cells": [
+            {
+              "text": "With antenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastroschisis-dx-mgmt",
+      "title": "Diagnosis and management of Gastroschisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastroschisis: antenatal ultrasound showing bowel outside the abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dusky bowel, hypovolaemia, atresia or perforation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate protection of exposed bowel; urgent review if dusky or ischaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal ultrasound, alpha-fetoprotein, bowel viability and atresia assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does postnatal assessment confirm viable bowel without associated atresia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider omphalocele, ruptured omphalocele or umbilical cord hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Protect eviscerated bowel in a covering or bowel bag to limit losses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive IV fluid resuscitation and nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Position viscera to prevent mesenteric kinking and ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical closure by reduction and repair, or staged reduction using a silo",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival generally high; recovery prolonged by intestinal dysmotility and delayed feeding",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

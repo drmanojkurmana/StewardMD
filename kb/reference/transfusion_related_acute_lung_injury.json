@@ -1,176 +1,474 @@
 {
- "id": "transfusion_related_acute_lung_injury",
- "name": "Transfusion-related acute lung injury (TRALI)",
- "aliases": [
-  "TRALI",
-  "Transfusion-related acute lung injury",
-  "antibody-mediated transfusion lung injury",
-  "trali",
-  "transfusion-related acute lung injury",
-  "transfusion-related lung injury"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
-   "It is a form of non-cardiogenic pulmonary oedema, so filling pressures are normal and there is no evidence of volume overload",
-   "Often accompanied by fever, hypotension and, in severe cases, transient reduction in the circulating white-cell count",
-   "Classically attributed to donor antibodies against recipient leucocyte antigens, with a two-hit model in which patient predisposition primes the pulmonary endothelium",
-   "Plasma-rich components carry the greatest risk, and preferential use of male donor plasma has reduced incidence",
-   "Management is supportive with oxygen and respiratory support, escalating to non-invasive or invasive ventilation as required",
-   "Distinguishing it from circulatory overload is essential because diuresis is the treatment for overload but not for this injury",
-   "Report suspected cases to the blood service so implicated donors can be investigated and deferred"
+  "id": "transfusion_related_acute_lung_injury",
+  "name": "Transfusion-related acute lung injury (TRALI)",
+  "aliases": [
+    "TRALI",
+    "Transfusion-related acute lung injury",
+    "antibody-mediated transfusion lung injury",
+    "trali",
+    "transfusion-related acute lung injury",
+    "transfusion-related lung injury"
   ],
-  "pathophysiology": "Transfusion-related acute lung injury is an acute inflammatory injury of the pulmonary capillary endothelium. In the antibody-mediated form, donor anti-leucocyte antibodies bind recipient neutrophil or human leucocyte antigens, activating neutrophils that are already sequestered in the pulmonary microvasculature. A widely used two-hit model holds that an initial insult such as sepsis or surgery primes and sequesters neutrophils, after which the transfused antibody or accumulated biological response modifiers provides the second hit. The resulting neutrophil activation damages the endothelium, increasing permeability so that protein-rich fluid floods the alveoli. Because the mechanism is inflammatory rather than hydrostatic, cardiac filling pressures remain normal.",
-  "additionalDifferentials": [
-   "Transfusion-associated circulatory overload",
-   "Acute respiratory distress syndrome from another cause",
-   "Anaphylactic transfusion reaction with bronchospasm",
-   "Cardiogenic pulmonary oedema",
-   "Bacterial contamination with septic reaction and shock",
-   "Aspiration pneumonitis"
-  ],
-  "additionalInvestigations": [
-   "Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion",
-   "Arterial blood gas or pulse oximetry to quantify hypoxaemia",
-   "Natriuretic peptide levels, typically not markedly raised, to help distinguish from circulatory overload",
-   "Echocardiography or assessment of filling pressures to confirm normal cardiac function",
-   "Full blood count, which may show transient neutropenia",
-   "Testing of donor and recipient for leucocyte antibodies in conjunction with the blood service"
-  ],
-  "redFlags": [
-   "Rapidly worsening hypoxaemia within hours of transfusion requiring ventilatory support",
-   "Bilateral pulmonary infiltrates with hypotension rather than hypertension",
-   "Failure to improve with diuresis, arguing against circulatory overload",
-   "Progressive respiratory failure despite high-flow oxygen"
-  ],
-  "prognosis": "Most patients improve within a few days with supportive respiratory care and the pulmonary infiltrates resolve, but severe cases requiring mechanical ventilation carry appreciable mortality and it remains a leading cause of transfusion-related death.",
-  "pitfalls": [
-   "Mislabelling the picture as circulatory overload and treating with diuretics that do not help",
-   "Attributing the hypoxaemia solely to the underlying illness and missing the transfusion trigger",
-   "Failing to report the reaction, so implicated donors are not investigated",
-   "Assuming a normal natriuretic peptide excludes any transfusion reaction"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours of a component",
-   "Provide supportive respiratory care with supplemental oxygen escalating to non-invasive or lung-protective invasive ventilation as hypoxaemia dictates",
-   "Support hypotension with fluids and vasopressors, recognising the picture is inflammatory capillary leak with normal filling pressures",
-   "Avoid diuretic-driven fluid removal, which does not address the permeability oedema",
-   "Investigate implicated donors with the blood service for anti-leucocyte antibodies and defer them from future donation",
-   "Reduce risk through preferential use of male-donor plasma and restrictive transfusion practice"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "transfusion_related_acute_lung_injury-pathway",
-   "title": "Transfusion-related acute lung injury (TRALI): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly worsening hypoxaemia within hours of transfusion requiring ventilatory support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion, Arterial blood gas or pulse oximetry to quantify hypoxaemia, Natriuretic peptide levels, typically not markedly raised, to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours of a component"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the picture as circulatory overload and treating with diuretics that do not help"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transfusion-related acute lung injury (trali)."
-  }
- ],
- "tables": [
-  {
-   "id": "transfusion_related_acute_lung_injury-matrix",
-   "title": "Transfusion-related acute lung injury (TRALI): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
+      "It is a form of non-cardiogenic pulmonary oedema, so filling pressures are normal and there is no evidence of volume overload",
+      "Often accompanied by fever, hypotension and, in severe cases, transient reduction in the circulating white-cell count",
+      "Classically attributed to donor antibodies against recipient leucocyte antigens, with a two-hit model in which patient predisposition primes the pulmonary endothelium",
+      "Plasma-rich components carry the greatest risk, and preferential use of male donor plasma has reduced incidence",
+      "Management is supportive with oxygen and respiratory support, escalating to non-invasive or invasive ventilation as required",
+      "Distinguishing it from circulatory overload is essential because diuresis is the treatment for overload but not for this injury",
+      "Report suspected cases to the blood service so implicated donors can be investigated and deferred"
     ],
-    [
-     "Key Investigations",
-     "Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion, Arterial blood gas or pulse",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Transfusion-related acute lung injury is an acute inflammatory injury of the pulmonary capillary endothelium. In the antibody-mediated form, donor anti-leucocyte antibodies bind recipient neutrophil or human leucocyte antigens, activating neutrophils that are already sequestered in the pulmonary microvasculature. A widely used two-hit model holds that an initial insult such as sepsis or surgery primes and sequesters neutrophils, after which the transfused antibody or accumulated biological response modifiers provides the second hit. The resulting neutrophil activation damages the endothelium, increasing permeability so that protein-rich fluid floods the alveoli. Because the mechanism is inflammatory rather than hydrostatic, cardiac filling pressures remain normal.",
+    "additionalDifferentials": [
+      "Transfusion-associated circulatory overload",
+      "Acute respiratory distress syndrome from another cause",
+      "Anaphylactic transfusion reaction with bronchospasm",
+      "Cardiogenic pulmonary oedema",
+      "Bacterial contamination with septic reaction and shock",
+      "Aspiration pneumonitis"
     ],
-    [
-     "Primary Differentials",
-     "Transfusion-associated circulatory overload, Acute respiratory distress syndrome from another cause, Anaphylactic transfusion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion",
+      "Arterial blood gas or pulse oximetry to quantify hypoxaemia",
+      "Natriuretic peptide levels, typically not markedly raised, to help distinguish from circulatory overload",
+      "Echocardiography or assessment of filling pressures to confirm normal cardiac function",
+      "Full blood count, which may show transient neutropenia",
+      "Testing of donor and recipient for leucocyte antibodies in conjunction with the blood service"
     ],
-    [
-     "Management Strategy",
-     "Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly worsening hypoxaemia within hours of transfusion requiring ventilatory support",
+      "Bilateral pulmonary infiltrates with hypotension rather than hypertension",
+      "Failure to improve with diuresis, arguing against circulatory overload",
+      "Progressive respiratory failure despite high-flow oxygen"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the picture as circulatory overload and treating with diuretics that do not help",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients improve within a few days with supportive respiratory care and the pulmonary infiltrates resolve, but severe cases requiring mechanical ventilation carry appreciable mortality and it remains a leading cause of transfusion-related death.",
+    "pitfalls": [
+      "Mislabelling the picture as circulatory overload and treating with diuretics that do not help",
+      "Attributing the hypoxaemia solely to the underlying illness and missing the transfusion trigger",
+      "Failing to report the reaction, so implicated donors are not investigated",
+      "Assuming a normal natriuretic peptide excludes any transfusion reaction"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours of a component",
+      "Provide supportive respiratory care with supplemental oxygen escalating to non-invasive or lung-protective invasive ventilation as hypoxaemia dictates",
+      "Support hypotension with fluids and vasopressors, recognising the picture is inflammatory capillary leak with normal filling pressures",
+      "Avoid diuretic-driven fluid removal, which does not address the permeability oedema",
+      "Investigate implicated donors with the blood service for anti-leucocyte antibodies and defer them from future donation",
+      "Reduce risk through preferential use of male-donor plasma and restrictive transfusion practice"
     ]
-   ],
-   "caption": "Overview comparison matrix for transfusion-related acute lung injury (trali)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transfusion-related-acute-lung-injury-real-image",
-   "title": "Transfusion-related acute lung injury (TRALI): Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "transfusion_related_acute_lung_injury-pathway",
+      "title": "Transfusion-related acute lung injury (TRALI): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly worsening hypoxaemia within hours of transfusion requiring ventilatory support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion, Arterial blood gas or pulse oximetry to quantify hypoxaemia, Natriuretic peptide levels, typically not markedly raised, to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours of a component"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the picture as circulatory overload and treating with diuretics that do not help"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transfusion-related acute lung injury (trali)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transfusion_related_acute_lung_injury-matrix",
+      "title": "Transfusion-related acute lung injury (TRALI): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as acute hypoxaemia and bilateral pulmonary infiltrates developing within about six hours of transfusion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest imaging demonstrating bilateral infiltrates without cardiomegaly or upper-lobe diversion, Arterial blood gas or pulse",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transfusion-associated circulatory overload, Acute respiratory distress syndrome from another cause, Anaphylactic transfusion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stop the transfusion immediately and alert the transfusion service when hypoxaemia and bilateral infiltrates arise within hours",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the picture as circulatory overload and treating with diuretics that do not help",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transfusion-related acute lung injury (trali)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusion_related_acute_lung_injury-dx-mgmt",
+      "title": "Diagnosis and management of Transfusion-related acute lung injury (TRALI)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TRALI: hypoxaemia and bilateral infiltrates within hours of transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid hypoxaemia needing ventilation, or hypotension with infiltrates?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop the transfusion, alert the blood service and give respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest imaging; blood gas; natriuretic peptide; leucocyte antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are bilateral infiltrates present with normal filling pressures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider circulatory overload, anaphylaxis or sepsis from a contaminated unit",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop the transfusion and alert the transfusion service",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and lung-protective ventilation as hypoxaemia requires",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fluids and vasopressors for hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid diuretics, which do not treat permeability oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate and defer implicated donors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve within days with supportive care; severe cases carry appreciable mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusion_related_acute_lung_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Bilateral infiltrates without cardiomegaly or upper-lobe diversion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas or oximetry",
+          "cells": [
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Natriuretic peptide",
+          "cells": [
+            {
+              "text": "Typically not markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography or filling pressures",
+          "cells": [
+            {
+              "text": "Normal cardiac function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC",
+          "cells": [
+            {
+              "text": "Transient neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor and recipient leucocyte antibody testing",
+          "cells": [
+            {
+              "text": "With the blood service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_related_acute_lung_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfusion-associated circulatory overload",
+          "cells": [
+            {
+              "text": "Raised natriuretic peptide and diuretic response; TRALI has normal filling pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylactic transfusion reaction with bronchospasm",
+          "cells": [
+            {
+              "text": "Bronchospasm and allergic features rather than bilateral infiltrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial contamination with septic reaction",
+          "cells": [
+            {
+              "text": "Fever, rigors and shock with a contaminated unit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_related_acute_lung_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the transfusion and alert the transfusion service",
+          "cells": [
+            {
+              "text": "When hypoxaemia and infiltrates arise within hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Oxygen, escalating to non-invasive or lung-protective ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodynamic support",
+          "cells": [
+            {
+              "text": "Fluids and vasopressors for hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid diuretic-driven fluid removal",
+          "cells": [
+            {
+              "text": "Does not address permeability oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor investigation",
+          "cells": [
+            {
+              "text": "Anti-leucocyte antibodies; defer implicated donors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Male-donor plasma and restrictive transfusion practice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,541 @@
 {
- "id": "dystonic_tremor",
- "name": "Dystonic tremor",
- "aliases": [
-  "dystonic tremor",
-  "tremor in dystonia",
-  "dystonia-associated tremor"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A tremor occurring in a body part that is itself affected by dystonia",
-   "Characteristically irregular, jerky and position- or task-dependent, contrasting with the regular rhythm of essential tremor",
-   "A null point may exist, being a limb or head position at which the tremor markedly attenuates or disappears",
-   "A sensory trick (geste antagoniste) may reduce the tremor, as it does the underlying dystonia",
-   "Head and hand tremor are common presentations and are frequently asymmetric",
-   "It is distinguished from tremor associated with dystonia, in which the tremulous body part is not itself dystonic",
-   "The presence of dystonic posturing is the key feature separating it from essential tremor"
+  "id": "dystonic_tremor",
+  "name": "Dystonic tremor",
+  "aliases": [
+    "dystonic tremor",
+    "tremor in dystonia",
+    "dystonia-associated tremor"
   ],
-  "pathophysiology": "Dystonic tremor is considered a manifestation of the same disordered basal ganglia and cerebello-thalamo-cortical network dysfunction that underlies dystonia, with deficient inhibition and abnormal sensorimotor integration producing both the sustained abnormal postures and the superimposed oscillation. Its position dependence and its responsiveness to sensory tricks reflect the strong influence of afferent input on this dysfunctional motor control, and help to distinguish it physiologically from essential tremor.",
-  "additionalDifferentials": [
-   "Essential tremor",
-   "Parkinsonian rest tremor",
-   "Enhanced physiological tremor",
-   "Functional (psychogenic) tremor",
-   "Cerebellar (intention) tremor",
-   "Holmes (rubral) tremor"
-  ],
-  "additionalInvestigations": [
-   "Detailed clinical examination for dystonic posturing, a null point and sensory tricks",
-   "Surface electromyography to characterise the tremor pattern where the diagnosis is unclear",
-   "DAT imaging to help distinguish from Parkinson's disease when parkinsonism is suspected",
-   "MRI brain where a structural or secondary cause is suspected",
-   "Copper studies in younger patients to exclude Wilson's disease",
-   "Genetic testing where an inherited dystonia syndrome is likely"
-  ],
-  "redFlags": [
-   "Rapidly progressive or generalising dystonia in a young person suggesting a secondary cause",
-   "Abnormal eye movements, hepatic or psychiatric features suggesting Wilson's disease",
-   "Distractibility, variability and incongruent features suggesting a functional disorder",
-   "Associated parkinsonism or focal deficits pointing to an alternative diagnosis"
-  ],
-  "prognosis": "Dystonic tremor tends to be chronic and can be difficult to treat, but it is not life-threatening. Focal presentations, particularly head and hand tremor, may respond to botulinum toxin injection into the overactive muscles, and some patients benefit from oral medication; refractory, disabling cases may be considered for deep brain stimulation. Overall function is usually preserved with appropriate symptom management.",
-  "pitfalls": [
-   "Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia",
-   "Overlooking a null point or sensory trick that would clarify the diagnosis",
-   "Failing to consider Wilson's disease in a younger patient",
-   "Expecting a uniform response to standard essential-tremor treatments"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Consensus statement on the classification of tremors (Movement Disorders)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor",
-   "Offer oral agents such as anticholinergics and medications used for the underlying dystonia where injection is insufficient",
-   "Trial levodopa where a dopa-responsive component or diagnostic uncertainty exists",
-   "Teach use of sensory tricks and null-point positioning for symptomatic relief",
-   "Consider deep brain stimulation for refractory, disabling tremor",
-   "Exclude and treat secondary causes such as Wilson disease in younger patients",
-   "Offer genetic counselling where an inherited dystonia syndrome is identified and refer to neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dystonic_tremor-pathway",
-   "title": "Dystonic tremor: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A tremor occurring in a body part that is itself affected by dystonia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or generalising dystonia in a young person suggesting a secondary cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed clinical examination for dystonic posturing, a null point and sensory tricks, Surface electromyography to characterise the tremor pattern where the diagnosis is unclear, DAT imaging to help distinguish from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dystonic tremor."
-  }
- ],
- "tables": [
-  {
-   "id": "dystonic_tremor-matrix",
-   "title": "Dystonic tremor: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A tremor occurring in a body part that is itself affected by dystonia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A tremor occurring in a body part that is itself affected by dystonia",
+      "Characteristically irregular, jerky and position- or task-dependent, contrasting with the regular rhythm of essential tremor",
+      "A null point may exist, being a limb or head position at which the tremor markedly attenuates or disappears",
+      "A sensory trick (geste antagoniste) may reduce the tremor, as it does the underlying dystonia",
+      "Head and hand tremor are common presentations and are frequently asymmetric",
+      "It is distinguished from tremor associated with dystonia, in which the tremulous body part is not itself dystonic",
+      "The presence of dystonic posturing is the key feature separating it from essential tremor"
     ],
-    [
-     "Key Investigations",
-     "Detailed clinical examination for dystonic posturing, a null point and sensory tricks, Surface electromyography to characterise",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dystonic tremor is considered a manifestation of the same disordered basal ganglia and cerebello-thalamo-cortical network dysfunction that underlies dystonia, with deficient inhibition and abnormal sensorimotor integration producing both the sustained abnormal postures and the superimposed oscillation. Its position dependence and its responsiveness to sensory tricks reflect the strong influence of afferent input on this dysfunctional motor control, and help to distinguish it physiologically from essential tremor.",
+    "additionalDifferentials": [
+      "Essential tremor",
+      "Parkinsonian rest tremor",
+      "Enhanced physiological tremor",
+      "Functional (psychogenic) tremor",
+      "Cerebellar (intention) tremor",
+      "Holmes (rubral) tremor"
     ],
-    [
-     "Primary Differentials",
-     "Essential tremor, Parkinsonian rest tremor, Enhanced physiological tremor",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed clinical examination for dystonic posturing, a null point and sensory tricks",
+      "Surface electromyography to characterise the tremor pattern where the diagnosis is unclear",
+      "DAT imaging to help distinguish from Parkinson's disease when parkinsonism is suspected",
+      "MRI brain where a structural or secondary cause is suspected",
+      "Copper studies in younger patients to exclude Wilson's disease",
+      "Genetic testing where an inherited dystonia syndrome is likely"
     ],
-    [
-     "Management Strategy",
-     "Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or generalising dystonia in a young person suggesting a secondary cause",
+      "Abnormal eye movements, hepatic or psychiatric features suggesting Wilson's disease",
+      "Distractibility, variability and incongruent features suggesting a functional disorder",
+      "Associated parkinsonism or focal deficits pointing to an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dystonic tremor tends to be chronic and can be difficult to treat, but it is not life-threatening. Focal presentations, particularly head and hand tremor, may respond to botulinum toxin injection into the overactive muscles, and some patients benefit from oral medication; refractory, disabling cases may be considered for deep brain stimulation. Overall function is usually preserved with appropriate symptom management.",
+    "pitfalls": [
+      "Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia",
+      "Overlooking a null point or sensory trick that would clarify the diagnosis",
+      "Failing to consider Wilson's disease in a younger patient",
+      "Expecting a uniform response to standard essential-tremor treatments"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Consensus statement on the classification of tremors (Movement Disorders)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor",
+      "Offer oral agents such as anticholinergics and medications used for the underlying dystonia where injection is insufficient",
+      "Trial levodopa where a dopa-responsive component or diagnostic uncertainty exists",
+      "Teach use of sensory tricks and null-point positioning for symptomatic relief",
+      "Consider deep brain stimulation for refractory, disabling tremor",
+      "Exclude and treat secondary causes such as Wilson disease in younger patients",
+      "Offer genetic counselling where an inherited dystonia syndrome is identified and refer to neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for dystonic tremor."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dystonic-tremor-real-image",
-   "title": "Dystonic tremor: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "dystonic_tremor-pathway",
+      "title": "Dystonic tremor: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A tremor occurring in a body part that is itself affected by dystonia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or generalising dystonia in a young person suggesting a secondary cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed clinical examination for dystonic posturing, a null point and sensory tricks, Surface electromyography to characterise the tremor pattern where the diagnosis is unclear, DAT imaging to help distinguish from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dystonic tremor."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dystonic_tremor-matrix",
+      "title": "Dystonic tremor: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A tremor occurring in a body part that is itself affected by dystonia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed clinical examination for dystonic posturing, a null point and sensory tricks, Surface electromyography to characterise",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential tremor, Parkinsonian rest tremor, Enhanced physiological tremor",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Inject botulinum toxin into the overactive muscles for focal head and hand dystonic tremor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing dystonic tremor as essential tremor and missing the underlying dystonia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dystonic tremor."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dystonic_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed examination for dystonic posturing, null point and sensory tricks",
+          "cells": [
+            {
+              "text": "Null point and sensory tricks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface electromyography",
+          "cells": [
+            {
+              "text": "Tremor pattern when diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DAT imaging",
+          "cells": [
+            {
+              "text": "Parkinson disease when parkinsonism is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural or secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper studies in younger patients",
+          "cells": [
+            {
+              "text": "Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystonic_tremor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Essential tremor",
+          "cells": [
+            {
+              "text": "Mistaken for dystonic tremor, missing the dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonian rest tremor",
+          "cells": [
+            {
+              "text": "Associated parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional tremor",
+          "cells": [
+            {
+              "text": "Distractibility and incongruent features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystonic_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Injection into overactive muscles for focal head and hand dystonic tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral agents",
+          "cells": [
+            {
+              "text": "Anticholinergics and dystonia medications where injection is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "Dopa-responsive component or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory tricks and null point",
+          "cells": [
+            {
+              "text": "Symptomatic relief through positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Refractory, disabling tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Exclude and treat in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where an inherited dystonia syndrome is identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystonic_tremor-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dystonic_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Dystonic tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dystonic tremor: tremor with abnormal posturing of the head or hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (generalising dystonia in youth, eye or liver signs, parkinsonism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Wilson disease or a secondary cause in a young patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination for null point and sensory tricks; EMG; DAT imaging; copper studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination show dystonic posturing with a null point or sensory trick?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential tremor, parkinsonian rest tremor or functional tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin injection into overactive head or hand muscles",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticholinergics and dystonia agents where injection is insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Levodopa trial where a dopa-responsive component is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sensory tricks and null-point positioning for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Deep brain stimulation for refractory, disabling tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and hard to treat but not life-threatening; focal tremor often responds to toxin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

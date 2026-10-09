@@ -207,25 +207,475 @@
       "caption": "Diagnostic and clinical overview matrix for wernicke encephalopathy."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "wernicke-real-image",
-      "title": "Wernicke encephalopathy: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Wernicke Encephalopathy",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/delirium-and-dementia/wernicke-encephalopathy",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Flynn et al, Wernicke's Encephalopathy (EFNS summary), Prim Care Companion CNS Disord 2015",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4578911",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wernicke-diagnostic",
+      "kind": "diagnostic",
+      "title": "Wernicke encephalopathy: Caine criteria and supporting tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Caine criteria",
+          "cells": [
+            {
+              "text": "Any 2 of 4: dietary deficiency, eye signs, cerebellar signs, altered mental state or mild memory loss",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Diagnose clinically; do not wait for the full triad}}"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Classic triad",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, ataxia, global confusion"
+            },
+            {
+              "text": "All three in only about one-third"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Eye signs",
+          "cells": [
+            {
+              "text": "Horizontal nystagmus, lateral rectus palsy, conjugate gaze palsy"
+            },
+            {
+              "text": "Pupils usually spared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mental state",
+          "cells": [
+            {
+              "text": "Apathetic, inattentive, disoriented"
+            },
+            {
+              "text": "Agitation usually means coexisting withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk groups",
+          "cells": [
+            {
+              "text": "Alcohol use, hyperemesis, starvation, dialysis, cancer, HIV, bariatric surgery, diuretics"
+            },
+            {
+              "text": "Not confined to alcohol use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 53, specificity 93"
+            },
+            {
+              "text": "Supports but cannot exclude; mammillary body and periventricular lesions"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Erythrocyte transketolase stimulation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 25 (activity coefficient 1.25 or more)",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Abnormal, confirms thiamine deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum thiamine",
+          "cells": [
+            {
+              "text": "Not routinely measured"
+            },
+            {
+              "text": "A normal level does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum magnesium",
+          "cells": [
+            {
+              "text": "Check in all"
+            },
+            {
+              "text": "Cofactor needed for thiamine action"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Untreated mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "About 80% of survivors develop Korsakoff syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "wernicke-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Wernicke encephalopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "Agitation and tremor rather than quiet apathy; may coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Hepatic, hypercapnic, sodium or glucose disorder; check with labs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis-associated encephalopathy",
+          "cells": [
+            {
+              "text": "Infection source with systemic signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic demyelination syndrome",
+          "cells": [
+            {
+              "text": "Follows rapid sodium correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marchiafava-Bignami disease",
+          "cells": [
+            {
+              "text": "Corpus callosum degeneration in chronic alcohol use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic cerebellar degeneration",
+          "cells": [
+            {
+              "text": "Gait ataxia without eye signs or confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or sedation",
+          "cells": [
+            {
+              "text": "Quiet inattentive state wrongly attributed; eye signs point to Wernicke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "A best-separating test column was dropped: sources gave no specific test for most rows."
+    },
+    {
+      "id": "wernicke-treatment",
+      "kind": "treatment",
+      "title": "Treatment and prevention of Wernicke encephalopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV thiamine (EFNS)",
+          "cells": [
+            {
+              "text": "{{hy:On clinical suspicion, before any glucose}}"
+            },
+            {
+              "text": "200 mg IV three times daily until improvement stops; oral is not adequate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV or IM thiamine (Merck)",
+          "cells": [
+            {
+              "text": "Established disease"
+            },
+            {
+              "text": "100 mg immediately, then daily for at least 3 to 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Hypomagnesaemia"
+            },
+            {
+              "text": "1 to 2 g IM or IV every 6 to 8 hours, or magnesium oxide 400 to 800 mg orally daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thiamine before carbohydrate",
+          "cells": [
+            {
+              "text": "Any at-risk patient needing IV dextrose"
+            },
+            {
+              "text": "Glucose first can precipitate or worsen Wernicke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prophylaxis in undernourished patients",
+          "cells": [
+            {
+              "text": "At risk, no signs"
+            },
+            {
+              "text": "Merck: 100 mg IM then 50 mg orally daily, plus B12 and folate 1 mg daily; EFNS: parenteral thiamine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Fluids, electrolytes, nutrition, multivitamins; stop alcohol"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Thiamine dose differs by source: EFNS (via Flynn 2015) advises 200 mg IV three times daily, Merck advises 100 mg IV or IM daily for at least 3 to 5 days. No universally accepted dose exists."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wernicke-dx-mgmt",
+      "title": "Diagnosis and management of Wernicke encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Confusion, eye signs or ataxia in a patient at nutritional risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "2 or more Caine criteria present?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "At risk of thiamine deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prophylactic thiamine, especially before IV dextrose",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Seek other cause of encephalopathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Give IV thiamine now, before any glucose",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Check and replace magnesium; labs to exclude mimics",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MRI if diagnosis uncertain; normal MRI does not exclude",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improving on thiamine?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue thiamine until improvement plateaus",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review diagnosis and dose; keep treating",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Screen for Korsakoff amnesia; stop alcohol; oral thiamine",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

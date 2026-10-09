@@ -1,174 +1,452 @@
 {
- "id": "nephrogenic_diabetes_insipidus_hereditary",
- "name": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2)",
- "aliases": [
-  "congenital nephrogenic diabetes insipidus",
-  "AVPR2",
-  "AQP2",
-  "vasopressin-resistant diabetes insipidus",
-  "arginine vasopressin resistance"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate urine despite adequate or high antidiuretic hormone",
-   "The majority of inherited cases are X-linked from AVPR2 mutations affecting the V2 receptor, so affected infants are typically boys",
-   "A minority are autosomal (recessive or dominant) from AQP2 water-channel mutations and affect both sexes",
-   "Infants present with polyuria, poor feeding, unexplained fevers, irritability, vomiting and hypernatraemic dehydration",
-   "The biochemical picture is dilute urine with a rising serum sodium and osmolality when free water is not replaced",
-   "A water-deprivation test with a vasopressin analogue distinguishes the nephrogenic form (no urinary concentration after the analogue) from central diabetes insipidus",
-   "Management centres on unrestricted access to water, a low-solute diet, and measures such as thiazide diuretics with dietary sodium restriction to reduce urine volume rather than vasopressin replacement"
+  "id": "nephrogenic_diabetes_insipidus_hereditary",
+  "name": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2)",
+  "aliases": [
+    "congenital nephrogenic diabetes insipidus",
+    "AVPR2",
+    "AQP2",
+    "vasopressin-resistant diabetes insipidus",
+    "arginine vasopressin resistance"
   ],
-  "pathophysiology": "In nephrogenic diabetes insipidus the principal cells of the collecting duct fail to respond to vasopressin. X-linked disease results from loss-of-function mutations in AVPR2, the gene for the V2 vasopressin receptor, so hormone binding cannot trigger the intracellular signalling that normally inserts water channels into the apical membrane. Autosomal forms result from mutations in AQP2, the aquaporin-2 water channel itself, impairing its trafficking or function. Either defect prevents water reabsorption, producing large volumes of inappropriately dilute urine, a tendency to hypernatraemia and dehydration, and compensatory polydipsia.",
-  "additionalDifferentials": [
-   "Central (neurogenic) diabetes insipidus",
-   "Primary polydipsia",
-   "Acquired nephrogenic diabetes insipidus from lithium or hypercalcaemia",
-   "Osmotic diuresis from uncontrolled diabetes mellitus",
-   "Chronic hypokalaemia impairing urinary concentration",
-   "Post-obstructive or tubulointerstitial disease causing a concentrating defect"
-  ],
-  "additionalInvestigations": [
-   "Paired serum and urine osmolality with serum sodium",
-   "Water-deprivation test followed by a vasopressin analogue to localise the defect",
-   "Copeptin or vasopressin measurement where available to support classification",
-   "Exclusion of hypercalcaemia, hypokalaemia and drug (lithium) causes",
-   "Renal ultrasound for hydronephrosis or a distended bladder from chronic high urine output",
-   "Genetic testing of AVPR2 and AQP2 with carrier assessment in relatives"
-  ],
-  "redFlags": [
-   "Hypernatraemic dehydration in an infant with lethargy or seizures",
-   "Recurrent unexplained fevers and failure to thrive in a young child",
-   "Obstructive uropathy or hydronephrosis from chronic high-volume output",
-   "Rapid correction of chronic hypernatraemia risking cerebral oedema"
-  ],
-  "prognosis": "With early diagnosis, reliable access to water and volume-reducing measures, growth and development are usually preserved, but repeated episodes of severe hypernatraemic dehydration in infancy can cause lasting neurological injury.",
-  "pitfalls": [
-   "Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement",
-   "Restricting fluids in an infant who depends on free access to water",
-   "Correcting chronic hypernatraemia too quickly and precipitating cerebral oedema",
-   "Overlooking a treatable acquired cause such as lithium or hypercalcaemia before labelling disease hereditary"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic dehydration",
-   "Reduce urine volume with a low-solute (low-sodium, low-protein) diet and a thiazide diuretic",
-   "Add amiloride or an NSAID such as indometacin to augment the reduction in polyuria",
-   "Monitor serum sodium and osmolality and follow growth and neurodevelopment closely through childhood",
-   "Treat hypernatraemic episodes with cautious rehydration to avoid rapid osmotic shifts",
-   "Confirm the diagnosis with AVPR2 and AQP2 genetic testing and provide counselling and carrier assessment for relatives given the X-linked and rarer autosomal inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nephrogenic_diabetes_insipidus_hereditary-pathway",
-   "title": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate urine despite adequate or high antidiuretic hormone",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypernatraemic dehydration in an infant with lethargy or seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Paired serum and urine osmolality with serum sodium, Water-deprivation test followed by a vasopressin analogue to localise the defect, Copeptin or vasopressin measurement where available to support classification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic dehydration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary nephrogenic diabetes insipidus (avpr2/aqp2)."
-  }
- ],
- "tables": [
-  {
-   "id": "nephrogenic_diabetes_insipidus_hereditary-matrix",
-   "title": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate urine despite adequate or high antidiuretic hormone",
+      "The majority of inherited cases are X-linked from AVPR2 mutations affecting the V2 receptor, so affected infants are typically boys",
+      "A minority are autosomal (recessive or dominant) from AQP2 water-channel mutations and affect both sexes",
+      "Infants present with polyuria, poor feeding, unexplained fevers, irritability, vomiting and hypernatraemic dehydration",
+      "The biochemical picture is dilute urine with a rising serum sodium and osmolality when free water is not replaced",
+      "A water-deprivation test with a vasopressin analogue distinguishes the nephrogenic form (no urinary concentration after the analogue) from central diabetes insipidus",
+      "Management centres on unrestricted access to water, a low-solute diet, and measures such as thiazide diuretics with dietary sodium restriction to reduce urine volume rather than vasopressin replacement"
     ],
-    [
-     "Key Investigations",
-     "Paired serum and urine osmolality with serum sodium, Water-deprivation test followed by a vasopressin analogue to localise the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In nephrogenic diabetes insipidus the principal cells of the collecting duct fail to respond to vasopressin. X-linked disease results from loss-of-function mutations in AVPR2, the gene for the V2 vasopressin receptor, so hormone binding cannot trigger the intracellular signalling that normally inserts water channels into the apical membrane. Autosomal forms result from mutations in AQP2, the aquaporin-2 water channel itself, impairing its trafficking or function. Either defect prevents water reabsorption, producing large volumes of inappropriately dilute urine, a tendency to hypernatraemia and dehydration, and compensatory polydipsia.",
+    "additionalDifferentials": [
+      "Central (neurogenic) diabetes insipidus",
+      "Primary polydipsia",
+      "Acquired nephrogenic diabetes insipidus from lithium or hypercalcaemia",
+      "Osmotic diuresis from uncontrolled diabetes mellitus",
+      "Chronic hypokalaemia impairing urinary concentration",
+      "Post-obstructive or tubulointerstitial disease causing a concentrating defect"
     ],
-    [
-     "Primary Differentials",
-     "Central (neurogenic) diabetes insipidus, Primary polydipsia, Acquired nephrogenic diabetes insipidus from lithium or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Paired serum and urine osmolality with serum sodium",
+      "Water-deprivation test followed by a vasopressin analogue to localise the defect",
+      "Copeptin or vasopressin measurement where available to support classification",
+      "Exclusion of hypercalcaemia, hypokalaemia and drug (lithium) causes",
+      "Renal ultrasound for hydronephrosis or a distended bladder from chronic high urine output",
+      "Genetic testing of AVPR2 and AQP2 with carrier assessment in relatives"
     ],
-    [
-     "Management Strategy",
-     "Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypernatraemic dehydration in an infant with lethargy or seizures",
+      "Recurrent unexplained fevers and failure to thrive in a young child",
+      "Obstructive uropathy or hydronephrosis from chronic high-volume output",
+      "Rapid correction of chronic hypernatraemia risking cerebral oedema"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis, reliable access to water and volume-reducing measures, growth and development are usually preserved, but repeated episodes of severe hypernatraemic dehydration in infancy can cause lasting neurological injury.",
+    "pitfalls": [
+      "Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement",
+      "Restricting fluids in an infant who depends on free access to water",
+      "Correcting chronic hypernatraemia too quickly and precipitating cerebral oedema",
+      "Overlooking a treatable acquired cause such as lithium or hypercalcaemia before labelling disease hereditary"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic dehydration",
+      "Reduce urine volume with a low-solute (low-sodium, low-protein) diet and a thiazide diuretic",
+      "Add amiloride or an NSAID such as indometacin to augment the reduction in polyuria",
+      "Monitor serum sodium and osmolality and follow growth and neurodevelopment closely through childhood",
+      "Treat hypernatraemic episodes with cautious rehydration to avoid rapid osmotic shifts",
+      "Confirm the diagnosis with AVPR2 and AQP2 genetic testing and provide counselling and carrier assessment for relatives given the X-linked and rarer autosomal inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary nephrogenic diabetes insipidus (avpr2/aqp2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nephrogenic-diabetes-insipidus-hereditary-real-image",
-   "title": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "nephrogenic_diabetes_insipidus_hereditary-pathway",
+      "title": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate urine despite adequate or high antidiuretic hormone",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypernatraemic dehydration in an infant with lethargy or seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Paired serum and urine osmolality with serum sodium, Water-deprivation test followed by a vasopressin analogue to localise the defect, Copeptin or vasopressin measurement where available to support classification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic dehydration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary nephrogenic diabetes insipidus (avpr2/aqp2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-matrix",
+      "title": "Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hereditary nephrogenic diabetes insipidus reflects collecting-duct resistance to vasopressin, so the kidney cannot concentrate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Paired serum and urine osmolality with serum sodium, Water-deprivation test followed by a vasopressin analogue to localise the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Central (neurogenic) diabetes insipidus, Primary polydipsia, Acquired nephrogenic diabetes insipidus from lithium or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Guarantee unrestricted access to water, feeding infants frequently, as they cannot signal thirst and are prone to hypernatraemic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the disorder for central diabetes insipidus and expecting a response to vasopressin replacement",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary nephrogenic diabetes insipidus (avpr2/aqp2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired serum and urine osmolality with serum sodium",
+          "cells": [
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water-deprivation test with vasopressin analogue",
+          "cells": [
+            {
+              "text": "Localises the defect to the collecting duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copeptin or vasopressin measurement",
+          "cells": [
+            {
+              "text": "Supports classification where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of hypercalcaemia, hypokalaemia and lithium",
+          "cells": [
+            {
+              "text": "Acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Hydronephrosis or distended bladder from high urine output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVPR2 or AQP2 genetic testing",
+          "cells": [
+            {
+              "text": "X-linked or autosomal forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central (neurogenic) diabetes insipidus",
+          "cells": [
+            {
+              "text": "Vasopressin replacement works here, not in the nephrogenic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polydipsia",
+          "cells": [
+            {
+              "text": "Osmolality and water deprivation testing separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired nephrogenic diabetes insipidus",
+          "cells": [
+            {
+              "text": "From lithium or hypercalcaemia; reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-obstructive or tubulointerstitial disease",
+          "cells": [
+            {
+              "text": "Concentrating defect from structural renal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Unrestricted water access",
+          "cells": [
+            {
+              "text": "Frequent feeds in infants who cannot signal thirst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-solute diet with a thiazide diuretic",
+          "cells": [
+            {
+              "text": "Reduces urine volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amiloride or indometacin",
+          "cells": [
+            {
+              "text": "Augments the reduction in polyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and neurodevelopment monitoring",
+          "cells": [
+            {
+              "text": "Serum sodium and osmolality followed closely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant or child with polyuria and failure to thrive despite high vasopressin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, lethargy or seizures, obstructive uropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration; correct chronic hypernatraemia slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Osmolality, sodium, water deprivation with vasopressin analogue, renal ultrasound, AVPR2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Concentrating defect with an AVPR2 or AQP2 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude acquired causes first; consider central diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Guarantee unrestricted access to water with frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-solute diet with a thiazide diuretic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amiloride or indometacin to augment polyuria reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor sodium, osmolality, growth and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early diagnosis preserves growth; repeated severe hypernatraemia can injure the brain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

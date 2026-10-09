@@ -1,171 +1,440 @@
 {
- "id": "flail_chest",
- "name": "Flail chest",
- "aliases": [
-  "flail segment"
- ],
- "class": "non_infective",
- "system": "Emergency / Trauma / Critical care",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
-   "The hallmark is paradoxical movement, where the flail segment moves inward on inspiration and outward on expiration, opposite to the rest of the chest",
-   "The main threat to oxygenation is the underlying lung contusion rather than the chest wall movement itself",
-   "It is identified during the breathing step of the primary survey and demands close monitoring for respiratory deterioration",
-   "Adequate analgesia is central to management, allowing the patient to breathe deeply, cough, and clear secretions",
-   "Deterioration in gas exchange may require escalating respiratory support, including positive-pressure ventilation",
-   "Watch for associated injuries such as pneumothorax, haemothorax, and injury to underlying structures"
+  "id": "flail_chest",
+  "name": "Flail chest",
+  "aliases": [
+    "flail segment"
   ],
-  "pathophysiology": "When several adjacent ribs are each fractured in two or more places, an isolated segment of chest wall loses its bony connection to the rest of the thoracic cage. This segment then moves according to intrapleural pressure rather than muscular effort, producing paradoxical motion that reduces the efficiency of ventilation. More importantly, the force required to cause the injury bruises the lung beneath, and this pulmonary contusion impairs gas exchange, worsening over the first day or two. Pain from the fractures limits chest expansion and coughing, promoting atelectasis and retained secretions, all of which combine to cause hypoxaemia and, in severe cases, respiratory failure.",
-  "additionalDifferentials": [
-   "Multiple rib fractures without a true flail segment",
-   "Isolated pulmonary contusion",
-   "Pneumothorax or haemothorax",
-   "Sternal fracture with associated cardiac contusion",
-   "Diaphragmatic injury"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph and CT to define rib fractures and pulmonary contusion",
-   "Arterial blood gas to monitor oxygenation and ventilation",
-   "Continuous pulse oximetry and respiratory monitoring",
-   "Assessment for associated pneumothorax or haemothorax",
-   "Serial evaluation as pulmonary contusion typically worsens over the first days"
-  ],
-  "redFlags": [
-   "Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
-   "Increasing respiratory distress and fatigue signalling impending failure",
-   "Associated tension pneumothorax or large haemothorax",
-   "Inadequately controlled pain preventing effective breathing and coughing",
-   "Signs of underlying great-vessel or cardiac injury"
-  ],
-  "prognosis": "Outcome is largely determined by the severity of the underlying lung contusion and associated injuries. With good analgesia, chest physiotherapy, and respiratory support many patients recover, but extensive contusion and respiratory failure increase morbidity and mortality.",
-  "pitfalls": [
-   "Focusing on the chest wall movement while underestimating the underlying lung contusion",
-   "Providing inadequate analgesia, leading to poor ventilation and secretion retention",
-   "Missing an associated pneumothorax or haemothorax",
-   "Assuming a stable early gas exchange will remain stable as contusion evolves",
-   "Excessive fluid administration worsening the pulmonary contusion"
-  ],
-  "references": [
-   "ATLS (Advanced Trauma Life Support)",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance",
-   "Supplemental oxygen and escalating respiratory support, from non-invasive ventilation to intubation and positive-pressure ventilation for respiratory failure",
-   "Chest physiotherapy and pulmonary hygiene to prevent atelectasis and retained secretions",
-   "Surgical rib fixation of the flail segment in selected patients with severe deformity or ventilator dependence",
-   "Drainage of associated pneumothorax or haemothorax with an intercostal chest drain",
-   "Serial monitoring of gas exchange and clinical status, anticipating that the underlying pulmonary contusion worsens over the first days",
-   "Trauma and critical-care involvement with close observation for respiratory deterioration"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "flail_chest-pathway",
-   "title": "Flail chest: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and ventilation, Continuous pulse oximetry and respiratory monitoring"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on the chest wall movement while underestimating the underlying lung contusion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of flail chest."
-  }
- ],
- "tables": [
-  {
-   "id": "flail_chest-matrix",
-   "title": "Flail chest: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Emergency / Trauma / Critical care",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
+      "The hallmark is paradoxical movement, where the flail segment moves inward on inspiration and outward on expiration, opposite to the rest of the chest",
+      "The main threat to oxygenation is the underlying lung contusion rather than the chest wall movement itself",
+      "It is identified during the breathing step of the primary survey and demands close monitoring for respiratory deterioration",
+      "Adequate analgesia is central to management, allowing the patient to breathe deeply, cough, and clear secretions",
+      "Deterioration in gas exchange may require escalating respiratory support, including positive-pressure ventilation",
+      "Watch for associated injuries such as pneumothorax, haemothorax, and injury to underlying structures"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "When several adjacent ribs are each fractured in two or more places, an isolated segment of chest wall loses its bony connection to the rest of the thoracic cage. This segment then moves according to intrapleural pressure rather than muscular effort, producing paradoxical motion that reduces the efficiency of ventilation. More importantly, the force required to cause the injury bruises the lung beneath, and this pulmonary contusion impairs gas exchange, worsening over the first day or two. Pain from the fractures limits chest expansion and coughing, promoting atelectasis and retained secretions, all of which combine to cause hypoxaemia and, in severe cases, respiratory failure.",
+    "additionalDifferentials": [
+      "Multiple rib fractures without a true flail segment",
+      "Isolated pulmonary contusion",
+      "Pneumothorax or haemothorax",
+      "Sternal fracture with associated cardiac contusion",
+      "Diaphragmatic injury"
     ],
-    [
-     "Primary Differentials",
-     "Multiple rib fractures without a true flail segment, Isolated pulmonary contusion, Pneumothorax or haemothorax",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph and CT to define rib fractures and pulmonary contusion",
+      "Arterial blood gas to monitor oxygenation and ventilation",
+      "Continuous pulse oximetry and respiratory monitoring",
+      "Assessment for associated pneumothorax or haemothorax",
+      "Serial evaluation as pulmonary contusion typically worsens over the first days"
     ],
-    [
-     "Management Strategy",
-     "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
+      "Increasing respiratory distress and fatigue signalling impending failure",
+      "Associated tension pneumothorax or large haemothorax",
+      "Inadequately controlled pain preventing effective breathing and coughing",
+      "Signs of underlying great-vessel or cardiac injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on the chest wall movement while underestimating the underlying lung contusion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by the severity of the underlying lung contusion and associated injuries. With good analgesia, chest physiotherapy, and respiratory support many patients recover, but extensive contusion and respiratory failure increase morbidity and mortality.",
+    "pitfalls": [
+      "Focusing on the chest wall movement while underestimating the underlying lung contusion",
+      "Providing inadequate analgesia, leading to poor ventilation and secretion retention",
+      "Missing an associated pneumothorax or haemothorax",
+      "Assuming a stable early gas exchange will remain stable as contusion evolves",
+      "Excessive fluid administration worsening the pulmonary contusion"
+    ],
+    "references": [
+      "ATLS (Advanced Trauma Life Support)",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance",
+      "Supplemental oxygen and escalating respiratory support, from non-invasive ventilation to intubation and positive-pressure ventilation for respiratory failure",
+      "Chest physiotherapy and pulmonary hygiene to prevent atelectasis and retained secretions",
+      "Surgical rib fixation of the flail segment in selected patients with severe deformity or ventilator dependence",
+      "Drainage of associated pneumothorax or haemothorax with an intercostal chest drain",
+      "Serial monitoring of gas exchange and clinical status, anticipating that the underlying pulmonary contusion worsens over the first days",
+      "Trauma and critical-care involvement with close observation for respiratory deterioration"
     ]
-   ],
-   "caption": "Overview comparison matrix for flail chest."
-  }
- ],
- "diagrams": [
-  {
-   "id": "flail-chest-real-image",
-   "title": "Flail chest: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "flail_chest-pathway",
+      "title": "Flail chest: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and ventilation, Continuous pulse oximetry and respiratory monitoring"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on the chest wall movement while underestimating the underlying lung contusion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of flail chest."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "flail_chest-matrix",
+      "title": "Flail chest: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple rib fractures without a true flail segment, Isolated pulmonary contusion, Pneumothorax or haemothorax",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on the chest wall movement while underestimating the underlying lung contusion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for flail chest."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "flail_chest-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Rib fractures and pulmonary contusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Oxygenation and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemothorax assessment",
+          "cells": [
+            {
+              "text": "Associated injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial evaluation",
+          "cells": [
+            {
+              "text": "Contusion typically worsens over days"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flail_chest-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple rib fractures without a flail segment",
+          "cells": [
+            {
+              "text": "No true flail; no paradoxical movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated pulmonary contusion",
+          "cells": [
+            {
+              "text": "Lung injury without chest wall instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemothorax",
+          "cells": [
+            {
+              "text": "Associated thoracic injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "flail_chest-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multimodal analgesia with regional blockade",
+          "cells": [
+            {
+              "text": "Thoracic epidural or paravertebral block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and escalating respiratory support",
+          "cells": [
+            {
+              "text": "From non-invasive ventilation to intubation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest physiotherapy and pulmonary hygiene",
+          "cells": [
+            {
+              "text": "Prevent atelectasis and retained secretions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical rib fixation in selected patients",
+          "cells": [
+            {
+              "text": "Severe deformity or ventilator dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intercostal chest drain",
+          "cells": [
+            {
+              "text": "Associated pneumothorax or haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial gas exchange monitoring",
+          "cells": [
+            {
+              "text": "Anticipate worsening contusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "flail_chest-dx-mgmt",
+      "title": "Diagnosis and management of Flail chest",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Segment of chest wall with paradoxical movement after multiple rib fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive hypoxaemia, fatigue, tension pneumothorax, great-vessel injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate respiratory support for progressive hypoxaemia or fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph and CT; arterial blood gas; pneumothorax assessment; serial review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Paradoxical movement with a flail segment on examination and imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rib fractures without a flail or isolated contusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multimodal analgesia, including regional blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and escalating ventilatory support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chest physiotherapy and pulmonary hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical rib fixation for severe deformity or ventilator dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Largely set by the severity of the underlying lung contusion and associated injuries",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

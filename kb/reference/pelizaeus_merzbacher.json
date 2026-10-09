@@ -1,171 +1,414 @@
 {
- "id": "pelizaeus_merzbacher",
- "name": "Pelizaeus-Merzbacher disease",
- "aliases": [
-  "PMD",
-  "PLP1-related disorder",
-  "hypomyelinating leukodystrophy"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point mutation",
-   "Affected boys typically present in infancy with nystagmus and hypotonia, later developing spasticity, ataxia, and cognitive impairment",
-   "Pendular nystagmus in early infancy is a characteristic early clue and may precede other signs",
-   "The severity spans a spectrum, from severe connatal disease to the milder allelic disorder spastic paraplegia type 2",
-   "This is a hypomyelinating disorder, so MRI shows a deficiency of myelin formation rather than active demyelination",
-   "PLP1 duplications generally produce the classic phenotype, while null mutations and some point mutations cause distinct and sometimes milder or peripheral-nerve-involving pictures",
-   "Diagnosis rests on the clinical picture, MRI evidence of hypomyelination, and PLP1 dosage and sequence analysis",
-   "Female carriers are usually asymptomatic but can occasionally show mild signs, and genetic counselling is important for at-risk families"
+  "id": "pelizaeus_merzbacher",
+  "name": "Pelizaeus-Merzbacher disease",
+  "aliases": [
+    "PMD",
+    "PLP1-related disorder",
+    "hypomyelinating leukodystrophy"
   ],
-  "pathophysiology": "Pelizaeus-Merzbacher disease results from abnormalities of PLP1, which encodes proteolipid protein, a major myelin protein of the central nervous system produced by oligodendrocytes. Duplication, point mutation, or deletion of PLP1 disrupts oligodendrocyte function and myelin assembly, leading to failure of normal myelination (hypomyelination) rather than breakdown of previously formed myelin. Overexpression from duplication is toxic to oligodendrocytes, accounting for the common severe phenotype, while different mutation types produce distinct clinical severities.",
-  "additionalDifferentials": [
-   "Other hypomyelinating leukodystrophies",
-   "Pelizaeus-Merzbacher-like disease from GJC2 mutations",
-   "Cerebral palsy (for early hypotonia and later spasticity)",
-   "Mitochondrial and other early-onset white matter disorders",
-   "Congenital nystagmus of ocular origin"
-  ],
-  "additionalInvestigations": [
-   "PLP1 dosage analysis to detect duplication and sequencing for point mutations",
-   "Brain MRI demonstrating a hypomyelinating pattern",
-   "Assessment of nystagmus and visual pathways",
-   "Developmental and neurological evaluation over time",
-   "Genetic counselling and carrier testing for female relatives"
-  ],
-  "redFlags": [
-   "Severe connatal presentation with respiratory and feeding difficulty",
-   "Rapidly progressive spasticity limiting mobility and causing contractures",
-   "Seizures or airway compromise",
-   "Failure to establish any developmental milestones"
-  ],
-  "prognosis": "Outcome varies widely with phenotype; the connatal form carries a poor prognosis, the classic form progresses more slowly with survival into adulthood in some, and the allelic spastic paraplegia type 2 is milder. Care is supportive and directed at spasticity, feeding, and complications.",
-  "pitfalls": [
-   "Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing",
-   "Relying on sequencing alone and missing a PLP1 duplication that requires dosage analysis",
-   "Confusing hypomyelination with active demyelination on imaging",
-   "Not distinguishing it from the clinically similar GJC2-related disorder"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures",
-   "Support feeding and nutrition, using gastrostomy where swallowing is unsafe, to counter failure to thrive",
-   "Provide respiratory care and treat recurrent aspiration and chest infections",
-   "Treat associated seizures and optimise posture, seating and mobility with occupational therapy",
-   "Coordinate multidisciplinary developmental, neurology and rehabilitation follow-up, as this hypomyelinating disorder has no disease-specific drug therapy",
-   "Offer genetic counselling for X-linked inheritance, with PLP1 carrier testing for female relatives and prenatal options"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pelizaeus_merzbacher-pathway",
-   "title": "Pelizaeus-Merzbacher disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point mutation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe connatal presentation with respiratory and feeding difficulty",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: PLP1 dosage analysis to detect duplication and sequencing for point mutations, Brain MRI demonstrating a hypomyelinating pattern, Assessment of nystagmus and visual pathways"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pelizaeus-merzbacher disease."
-  }
- ],
- "tables": [
-  {
-   "id": "pelizaeus_merzbacher-matrix",
-   "title": "Pelizaeus-Merzbacher disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point mutation",
+      "Affected boys typically present in infancy with nystagmus and hypotonia, later developing spasticity, ataxia, and cognitive impairment",
+      "Pendular nystagmus in early infancy is a characteristic early clue and may precede other signs",
+      "The severity spans a spectrum, from severe connatal disease to the milder allelic disorder spastic paraplegia type 2",
+      "This is a hypomyelinating disorder, so MRI shows a deficiency of myelin formation rather than active demyelination",
+      "PLP1 duplications generally produce the classic phenotype, while null mutations and some point mutations cause distinct and sometimes milder or peripheral-nerve-involving pictures",
+      "Diagnosis rests on the clinical picture, MRI evidence of hypomyelination, and PLP1 dosage and sequence analysis",
+      "Female carriers are usually asymptomatic but can occasionally show mild signs, and genetic counselling is important for at-risk families"
     ],
-    [
-     "Key Investigations",
-     "PLP1 dosage analysis to detect duplication and sequencing for point mutations, Brain MRI demonstrating a hypomyelinating pattern,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pelizaeus-Merzbacher disease results from abnormalities of PLP1, which encodes proteolipid protein, a major myelin protein of the central nervous system produced by oligodendrocytes. Duplication, point mutation, or deletion of PLP1 disrupts oligodendrocyte function and myelin assembly, leading to failure of normal myelination (hypomyelination) rather than breakdown of previously formed myelin. Overexpression from duplication is toxic to oligodendrocytes, accounting for the common severe phenotype, while different mutation types produce distinct clinical severities.",
+    "additionalDifferentials": [
+      "Other hypomyelinating leukodystrophies",
+      "Pelizaeus-Merzbacher-like disease from GJC2 mutations",
+      "Cerebral palsy (for early hypotonia and later spasticity)",
+      "Mitochondrial and other early-onset white matter disorders",
+      "Congenital nystagmus of ocular origin"
     ],
-    [
-     "Primary Differentials",
-     "Other hypomyelinating leukodystrophies, Pelizaeus-Merzbacher-like disease from GJC2 mutations, Cerebral palsy (for early",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "PLP1 dosage analysis to detect duplication and sequencing for point mutations",
+      "Brain MRI demonstrating a hypomyelinating pattern",
+      "Assessment of nystagmus and visual pathways",
+      "Developmental and neurological evaluation over time",
+      "Genetic counselling and carrier testing for female relatives"
     ],
-    [
-     "Management Strategy",
-     "Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe connatal presentation with respiratory and feeding difficulty",
+      "Rapidly progressive spasticity limiting mobility and causing contractures",
+      "Seizures or airway compromise",
+      "Failure to establish any developmental milestones"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely with phenotype; the connatal form carries a poor prognosis, the classic form progresses more slowly with survival into adulthood in some, and the allelic spastic paraplegia type 2 is milder. Care is supportive and directed at spasticity, feeding, and complications.",
+    "pitfalls": [
+      "Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing",
+      "Relying on sequencing alone and missing a PLP1 duplication that requires dosage analysis",
+      "Confusing hypomyelination with active demyelination on imaging",
+      "Not distinguishing it from the clinically similar GJC2-related disorder"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures",
+      "Support feeding and nutrition, using gastrostomy where swallowing is unsafe, to counter failure to thrive",
+      "Provide respiratory care and treat recurrent aspiration and chest infections",
+      "Treat associated seizures and optimise posture, seating and mobility with occupational therapy",
+      "Coordinate multidisciplinary developmental, neurology and rehabilitation follow-up, as this hypomyelinating disorder has no disease-specific drug therapy",
+      "Offer genetic counselling for X-linked inheritance, with PLP1 carrier testing for female relatives and prenatal options"
     ]
-   ],
-   "caption": "Overview comparison matrix for pelizaeus-merzbacher disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pelizaeus-merzbacher-real-image",
-   "title": "Pelizaeus-Merzbacher disease: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "pelizaeus_merzbacher-pathway",
+      "title": "Pelizaeus-Merzbacher disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point mutation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe connatal presentation with respiratory and feeding difficulty",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: PLP1 dosage analysis to detect duplication and sequencing for point mutations, Brain MRI demonstrating a hypomyelinating pattern, Assessment of nystagmus and visual pathways"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pelizaeus-merzbacher disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pelizaeus_merzbacher-matrix",
+      "title": "Pelizaeus-Merzbacher disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked hypomyelinating leukodystrophy caused by abnormalities of the PLP1 gene, most often a duplication rather than a point",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "PLP1 dosage analysis to detect duplication and sequencing for point mutations, Brain MRI demonstrating a hypomyelinating pattern,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other hypomyelinating leukodystrophies, Pelizaeus-Merzbacher-like disease from GJC2 mutations, Cerebral palsy (for early",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage spasticity with physiotherapy, antispasticity agents such as baclofen, botulinum toxin and orthoses to prevent contractures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing early disease as cerebral palsy and not pursuing genetic testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pelizaeus-merzbacher disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pelizaeus_merzbacher-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PLP1 dosage analysis and sequencing",
+          "cells": [
+            {
+              "text": "Duplication or point mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypomyelinating pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nystagmus and visual pathway assessment",
+          "cells": [
+            {
+              "text": "Visual involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological evaluation over time",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other hypomyelinating leukodystrophies",
+          "cells": [
+            {
+              "text": "Imaging pattern; PLP1 testing narrows the field"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelizaeus-Merzbacher-like disease (GJC2)",
+          "cells": [
+            {
+              "text": "Autosomal recessive; PLP1-negative cases warrant GJC2 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelizaeus_merzbacher-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity management",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Physiotherapy, baclofen, botulinum toxin and orthoses to prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Gastrostomy where swallowing is unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Directed at symptoms and comfort"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pelizaeus_merzbacher-dx-mgmt",
+      "title": "Diagnosis and management of Pelizaeus-Merzbacher disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant boy with nystagmus, hypotonia, later spasticity and developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (connatal presentation, airway compromise, seizures or regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and respiratory review for connatal or airway risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PLP1 dosage analysis and sequencing, brain MRI, visual assessment, development",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PLP1 duplication or point variant found with a hypomyelinating MRI pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other hypomyelinating leukodystrophy, GJC2 disease or cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, baclofen, botulinum toxin and orthoses to limit spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy where swallowing is unsafe, to counter failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care directed at symptoms and comfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dosage analysis as well as sequencing, since duplications are missed otherwise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies widely: connatal form poor, classic slower, allelic SPG2 form milder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

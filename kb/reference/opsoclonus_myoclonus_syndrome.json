@@ -1,175 +1,495 @@
 {
- "id": "opsoclonus_myoclonus_syndrome",
- "name": "Opsoclonus-myoclonus-ataxia syndrome",
- "aliases": [
-  "opsoclonus-myoclonus syndrome",
-  "OMS",
-  "dancing eyes-dancing feet syndrome",
-  "Kinsbourne syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
-   "Behavioural disturbance, irritability, and sleep disruption are common, especially in children",
-   "In children it is strongly associated with neuroblastoma, so cross-sectional and metabolic tumour imaging is mandatory",
-   "In adults it may be parainfectious or paraneoplastic, notably with small-cell lung and breast carcinoma",
-   "Opsoclonus persists during eye closure and sleep, helping distinguish it from other abnormal eye movements",
-   "First-line immunotherapy uses corticosteroids or corticotropin with intravenous immunoglobulin, escalating to rituximab or other agents in refractory disease",
-   "In paraneoplastic cases, removal or treatment of the underlying tumour is central to management"
+  "id": "opsoclonus_myoclonus_syndrome",
+  "name": "Opsoclonus-myoclonus-ataxia syndrome",
+  "aliases": [
+    "opsoclonus-myoclonus syndrome",
+    "OMS",
+    "dancing eyes-dancing feet syndrome",
+    "Kinsbourne syndrome"
   ],
-  "pathophysiology": "Opsoclonus-myoclonus-ataxia syndrome is an immune-mediated disorder affecting brainstem and cerebellar circuits that control eye movements and coordination. Loss of inhibitory control over the saccadic burst neurons, thought to involve dysfunction of omnipause and fastigial-cerebellar pathways, produces the chaotic saccades of opsoclonus, while cerebellar involvement generates myoclonus and ataxia. The immune response is frequently triggered by an occult tumour, classically neuroblastoma in children through cross-reacting antineural immunity, or by preceding infection; a defined single antibody is often not identified.",
-  "additionalDifferentials": [
-   "Cerebellar ataxia of infective, toxic, or metabolic cause",
-   "Other paraneoplastic cerebellar or brainstem syndromes",
-   "Drug or toxin-induced ocular flutter and myoclonus",
-   "Brainstem encephalitis",
-   "Functional (psychogenic) movement disorder",
-   "Acute disseminated encephalomyelitis"
-  ],
-  "additionalInvestigations": [
-   "Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour",
-   "Metabolic tumour imaging and urinary catecholamine metabolites in children",
-   "Paraneoplastic antibody panel in serum and cerebrospinal fluid",
-   "MRI of the brain to exclude structural and inflammatory lesions",
-   "Cerebrospinal fluid analysis for inflammation",
-   "Whole-body tumour screening in adults, including for small-cell lung and breast carcinoma"
-  ],
-  "redFlags": [
-   "Failure to identify an occult neuroblastoma or other tumour on initial screening",
-   "Severe ataxia or myoclonus impairing safety and function",
-   "Progressive encephalopathy or developmental regression in children",
-   "Relapse after apparent recovery suggesting undertreated disease or occult tumour"
-  ],
-  "prognosis": "Many patients, especially children, improve with immunotherapy and tumour treatment, but relapses and residual cognitive, behavioural, or motor deficits are common, and outcome in paraneoplastic adult cases depends on the underlying malignancy.",
-  "pitfalls": [
-   "Failing to search repeatedly for an occult tumour when initial imaging is negative",
-   "Mistaking opsoclonus for nystagmus or a functional disorder",
-   "Under-treating, as inadequate immunotherapy is linked to relapse and long-term sequelae",
-   "Overlooking behavioural and developmental effects that require broader support"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Autoimmune Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or breast carcinoma in adults, as this drives the immune process",
-   "Start first-line immunotherapy with corticosteroids or corticotropin combined with intravenous immunoglobulin",
-   "Escalate to rituximab or additional immunosuppression such as cyclophosphamide in refractory disease",
-   "Provide symptomatic control of myoclonus and of the behavioural, irritability and sleep disturbance, especially in children",
-   "Offer rehabilitation for ataxia and neurodevelopmental support for affected children",
-   "Maintain surveillance for relapse and for occult or recurrent tumour",
-   "Manage within a neuro-oncology and neuroimmunology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "opsoclonus_myoclonus_syndrome-pathway",
-   "title": "Opsoclonus-myoclonus-ataxia syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to identify an occult neuroblastoma or other tumour on initial screening",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour, Metabolic tumour imaging and urinary catecholamine metabolites in children, Paraneoplastic antibody panel in serum and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or breast carcinoma in adults, as this drives the immune process"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to search repeatedly for an occult tumour when initial imaging is negative"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of opsoclonus-myoclonus-ataxia syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "opsoclonus_myoclonus_syndrome-matrix",
-   "title": "Opsoclonus-myoclonus-ataxia syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
+      "Behavioural disturbance, irritability, and sleep disruption are common, especially in children",
+      "In children it is strongly associated with neuroblastoma, so cross-sectional and metabolic tumour imaging is mandatory",
+      "In adults it may be parainfectious or paraneoplastic, notably with small-cell lung and breast carcinoma",
+      "Opsoclonus persists during eye closure and sleep, helping distinguish it from other abnormal eye movements",
+      "First-line immunotherapy uses corticosteroids or corticotropin with intravenous immunoglobulin, escalating to rituximab or other agents in refractory disease",
+      "In paraneoplastic cases, removal or treatment of the underlying tumour is central to management"
     ],
-    [
-     "Key Investigations",
-     "Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour, Metabolic tumour imaging and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Opsoclonus-myoclonus-ataxia syndrome is an immune-mediated disorder affecting brainstem and cerebellar circuits that control eye movements and coordination. Loss of inhibitory control over the saccadic burst neurons, thought to involve dysfunction of omnipause and fastigial-cerebellar pathways, produces the chaotic saccades of opsoclonus, while cerebellar involvement generates myoclonus and ataxia. The immune response is frequently triggered by an occult tumour, classically neuroblastoma in children through cross-reacting antineural immunity, or by preceding infection; a defined single antibody is often not identified.",
+    "additionalDifferentials": [
+      "Cerebellar ataxia of infective, toxic, or metabolic cause",
+      "Other paraneoplastic cerebellar or brainstem syndromes",
+      "Drug or toxin-induced ocular flutter and myoclonus",
+      "Brainstem encephalitis",
+      "Functional (psychogenic) movement disorder",
+      "Acute disseminated encephalomyelitis"
     ],
-    [
-     "Primary Differentials",
-     "Cerebellar ataxia of infective, toxic, or metabolic cause, Other paraneoplastic cerebellar or brainstem syndromes, Drug or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour",
+      "Metabolic tumour imaging and urinary catecholamine metabolites in children",
+      "Paraneoplastic antibody panel in serum and cerebrospinal fluid",
+      "MRI of the brain to exclude structural and inflammatory lesions",
+      "Cerebrospinal fluid analysis for inflammation",
+      "Whole-body tumour screening in adults, including for small-cell lung and breast carcinoma"
     ],
-    [
-     "Management Strategy",
-     "Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to identify an occult neuroblastoma or other tumour on initial screening",
+      "Severe ataxia or myoclonus impairing safety and function",
+      "Progressive encephalopathy or developmental regression in children",
+      "Relapse after apparent recovery suggesting undertreated disease or occult tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to search repeatedly for an occult tumour when initial imaging is negative",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients, especially children, improve with immunotherapy and tumour treatment, but relapses and residual cognitive, behavioural, or motor deficits are common, and outcome in paraneoplastic adult cases depends on the underlying malignancy.",
+    "pitfalls": [
+      "Failing to search repeatedly for an occult tumour when initial imaging is negative",
+      "Mistaking opsoclonus for nystagmus or a functional disorder",
+      "Under-treating, as inadequate immunotherapy is linked to relapse and long-term sequelae",
+      "Overlooking behavioural and developmental effects that require broader support"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Autoimmune Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or breast carcinoma in adults, as this drives the immune process",
+      "Start first-line immunotherapy with corticosteroids or corticotropin combined with intravenous immunoglobulin",
+      "Escalate to rituximab or additional immunosuppression such as cyclophosphamide in refractory disease",
+      "Provide symptomatic control of myoclonus and of the behavioural, irritability and sleep disturbance, especially in children",
+      "Offer rehabilitation for ataxia and neurodevelopmental support for affected children",
+      "Maintain surveillance for relapse and for occult or recurrent tumour",
+      "Manage within a neuro-oncology and neuroimmunology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for opsoclonus-myoclonus-ataxia syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "opsoclonus-myoclonus-syndrome-real-image",
-   "title": "Opsoclonus-myoclonus-ataxia syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "opsoclonus_myoclonus_syndrome-pathway",
+      "title": "Opsoclonus-myoclonus-ataxia syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to identify an occult neuroblastoma or other tumour on initial screening",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour, Metabolic tumour imaging and urinary catecholamine metabolites in children, Paraneoplastic antibody panel in serum and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or breast carcinoma in adults, as this drives the immune process"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to search repeatedly for an occult tumour when initial imaging is negative"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of opsoclonus-myoclonus-ataxia syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "opsoclonus_myoclonus_syndrome-matrix",
+      "title": "Opsoclonus-myoclonus-ataxia syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by opsoclonus (chaotic, involuntary, multidirectional saccades), myoclonus, and cerebellar ataxia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cross-sectional imaging of chest, abdomen, and pelvis to search for neuroblastoma or other tumour, Metabolic tumour imaging and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cerebellar ataxia of infective, toxic, or metabolic cause, Other paraneoplastic cerebellar or brainstem syndromes, Drug or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Search for and treat the underlying tumour, with resection of neuroblastoma in children and treatment of small-cell lung or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to search repeatedly for an occult tumour when initial imaging is negative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for opsoclonus-myoclonus-ataxia syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opsoclonus_myoclonus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest, abdomen and pelvis imaging",
+          "cells": [
+            {
+              "text": "Neuroblastoma or other tumour, searched for in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic tumour imaging",
+          "cells": [
+            {
+              "text": "Neuroblastoma, which is strongly associated in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic antibody panel in serum and CSF",
+          "cells": [
+            {
+              "text": "Paraneoplastic antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural and inflammatory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body tumour screening in adults",
+          "cells": [
+            {
+              "text": "Small-cell lung and breast carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsoclonus_myoclonus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nystagmus",
+          "cells": [
+            {
+              "text": "Opsoclonus is chaotic, involuntary, multidirectional saccades, not nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) movement disorder",
+          "cells": [
+            {
+              "text": "Opsoclonus persists during eye closure and sleep, which helps distinguish it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsoclonus_myoclonus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying tumour",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Resection of neuroblastoma in children; treatment of small-cell lung or breast carcinoma in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Corticosteroids or corticotropin with intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Rituximab or additional immunosuppression such as cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Myoclonus, irritability, behavioural and sleep disturbance, especially in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Ataxia rehabilitation and neurodevelopmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse surveillance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Ongoing check for relapse or occult tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Neuro-oncology and neuroimmunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opsoclonus_myoclonus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Opsoclonus-myoclonus-ataxia syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chaotic eye movements, myoclonus and ataxia, often with irritability in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (no tumour found yet, severe ataxia, regression or relapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neuro-oncology review for an occult tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Body imaging, metabolic tumour scan, paraneoplastic antibodies and brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a tumour found, such as neuroblastoma, or a paraneoplastic antibody positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search again for an occult tumour; consider infective, toxic or functional causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the tumour: neuroblastoma resection, or cancer treatment in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "First-line corticosteroids or corticotropin with intravenous immunoglobulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Escalate to rituximab or cyclophosphamide for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Symptomatic control of myoclonus, irritability and sleep disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for relapse and occult tumour; ataxia rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve with immunotherapy and tumour treatment; relapse and deficits are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

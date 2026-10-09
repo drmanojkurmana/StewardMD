@@ -1,174 +1,231 @@
 {
- "id": "cancer_cachexia",
- "name": "Cancer cachexia",
- "aliases": [
-  "cachexia",
-  "cancer anorexia-cachexia syndrome",
-  "tumour cachexia",
-  "wasting syndrome"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully reversed by conventional nutritional support",
-   "It is driven by both reduced intake (anorexia) and metabolic derangement, so simply increasing calories does not restore muscle mass",
-   "A consensus framework stages it as pre-cachexia, cachexia, and refractory cachexia, which guides how aggressively to intervene",
-   "Diagnostic pointers include weight loss over roughly five percent in six months, or lesser weight loss in the setting of low body-mass index or sarcopenia",
-   "Systemic inflammation, reflected in raised C-reactive protein and other markers, is central and correlates with worse outcomes",
-   "Management is multimodal: nutritional support, resistance exercise where feasible, symptom control of nausea and early satiety, and treatment of the underlying cancer when possible",
-   "In refractory cachexia near the end of life the emphasis shifts from reversing weight loss to comfort, and aggressive artificial feeding usually offers little benefit",
-   "Family distress about reduced eating is common and benefits from explanation that appetite loss is part of the illness, not a failure of care"
+  "id": "cancer_cachexia",
+  "name": "Cancer cachexia",
+  "aliases": [
+    "cachexia",
+    "cancer anorexia-cachexia syndrome",
+    "tumour cachexia",
+    "wasting syndrome"
   ],
-  "pathophysiology": "Cancer cachexia results from tumour- and host-derived pro-inflammatory cytokines (such as TNF-alpha, IL-6, and IL-1) and tumour-specific catabolic factors that drive a hypermetabolic, catabolic state. These mediators increase resting energy expenditure, promote skeletal muscle proteolysis and lipolysis, induce insulin resistance, and act centrally to suppress appetite. The net effect is a negative energy and protein balance dominated by muscle wasting that persists despite feeding, distinguishing cachexia from simple starvation in which muscle is relatively spared.",
-  "additionalDifferentials": [
-   "Simple starvation or undernutrition from inadequate intake",
-   "Sarcopenia of ageing without underlying malignancy",
-   "Malabsorption or gastrointestinal obstruction",
-   "Depression causing anorexia and weight loss",
-   "Hyperthyroidism or other hypermetabolic states",
-   "Adrenal insufficiency"
-  ],
-  "additionalInvestigations": [
-   "Documentation of weight trajectory and body-mass index over time",
-   "Assessment of muscle mass and function where available",
-   "Inflammatory markers such as C-reactive protein and albumin as prognostic indicators",
-   "Nutritional assessment including intake and symptoms limiting eating",
-   "Screening for reversible contributors such as nausea, constipation, oral problems, and depression"
-  ],
-  "redFlags": [
-   "Rapid, accelerating weight and muscle loss suggesting progressive or refractory disease",
-   "Profound weakness with inability to maintain basic function",
-   "Evidence of impending gastrointestinal obstruction limiting intake",
-   "Severe deconditioning increasing risk of falls, pressure injury, and infection"
-  ],
-  "prognosis": "Cachexia is a marker of advanced disease and independently predicts reduced tolerance of anticancer treatment, poorer quality of life, and shorter survival. Refractory cachexia, typically in the setting of advanced, treatment-unresponsive cancer with a short prognosis, is not reversible, and care goals appropriately shift toward comfort.",
-  "pitfalls": [
-   "Assuming increased calorie provision alone will reverse muscle loss",
-   "Pursuing burdensome artificial nutrition in refractory, end-stage disease with no meaningful benefit",
-   "Overlooking treatable symptoms that limit intake, such as nausea, constipation, and oral candidiasis",
-   "Failing to address family anxiety about the patient not eating",
-   "Missing depression as a contributor to anorexia and weight loss"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive",
-   "Deliver multimodal nutritional support led by a dietitian, using oral protein-energy supplementation and enteral feeding when appropriate rather than calories alone",
-   "Encourage resistance exercise where the patient is able, to preserve muscle mass and function",
-   "Stimulate appetite with a progestational agent or a corticosteroid when anorexia dominates",
-   "Control symptoms that limit intake, including nausea, early satiety and constipation, with antiemetics and prokinetics",
-   "Stage the syndrome as pre-cachexia, cachexia or refractory cachexia to match the intensity of intervention",
-   "Involve palliative care, shifting away from aggressive nutritional intervention once cachexia is refractory in advanced disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cancer_cachexia-pathway",
-   "title": "Cancer cachexia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully reversed by conventional nutritional support",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid, accelerating weight and muscle loss suggesting progressive or refractory disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Documentation of weight trajectory and body-mass index over time, Assessment of muscle mass and function where available, Inflammatory markers such as C-reactive protein and albumin as prognostic indicators"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming increased calorie provision alone will reverse muscle loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cancer cachexia."
-  }
- ],
- "tables": [
-  {
-   "id": "cancer_cachexia-matrix",
-   "title": "Cancer cachexia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully reversed by conventional nutritional support",
+      "It is driven by both reduced intake (anorexia) and metabolic derangement, so simply increasing calories does not restore muscle mass",
+      "A consensus framework stages it as pre-cachexia, cachexia, and refractory cachexia, which guides how aggressively to intervene",
+      "Diagnostic pointers include weight loss over roughly five percent in six months, or lesser weight loss in the setting of low body-mass index or sarcopenia",
+      "Systemic inflammation, reflected in raised C-reactive protein and other markers, is central and correlates with worse outcomes",
+      "Management is multimodal: nutritional support, resistance exercise where feasible, symptom control of nausea and early satiety, and treatment of the underlying cancer when possible",
+      "In refractory cachexia near the end of life the emphasis shifts from reversing weight loss to comfort, and aggressive artificial feeding usually offers little benefit",
+      "Family distress about reduced eating is common and benefits from explanation that appetite loss is part of the illness, not a failure of care"
     ],
-    [
-     "Key Investigations",
-     "Documentation of weight trajectory and body-mass index over time, Assessment of muscle mass and function where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cancer cachexia results from tumour- and host-derived pro-inflammatory cytokines (such as TNF-alpha, IL-6, and IL-1) and tumour-specific catabolic factors that drive a hypermetabolic, catabolic state. These mediators increase resting energy expenditure, promote skeletal muscle proteolysis and lipolysis, induce insulin resistance, and act centrally to suppress appetite. The net effect is a negative energy and protein balance dominated by muscle wasting that persists despite feeding, distinguishing cachexia from simple starvation in which muscle is relatively spared.",
+    "additionalDifferentials": [
+      "Simple starvation or undernutrition from inadequate intake",
+      "Sarcopenia of ageing without underlying malignancy",
+      "Malabsorption or gastrointestinal obstruction",
+      "Depression causing anorexia and weight loss",
+      "Hyperthyroidism or other hypermetabolic states",
+      "Adrenal insufficiency"
     ],
-    [
-     "Primary Differentials",
-     "Simple starvation or undernutrition from inadequate intake, Sarcopenia of ageing without underlying malignancy, Malabsorption or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Documentation of weight trajectory and body-mass index over time",
+      "Assessment of muscle mass and function where available",
+      "Inflammatory markers such as C-reactive protein and albumin as prognostic indicators",
+      "Nutritional assessment including intake and symptoms limiting eating",
+      "Screening for reversible contributors such as nausea, constipation, oral problems, and depression"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid, accelerating weight and muscle loss suggesting progressive or refractory disease",
+      "Profound weakness with inability to maintain basic function",
+      "Evidence of impending gastrointestinal obstruction limiting intake",
+      "Severe deconditioning increasing risk of falls, pressure injury, and infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming increased calorie provision alone will reverse muscle loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cachexia is a marker of advanced disease and independently predicts reduced tolerance of anticancer treatment, poorer quality of life, and shorter survival. Refractory cachexia, typically in the setting of advanced, treatment-unresponsive cancer with a short prognosis, is not reversible, and care goals appropriately shift toward comfort.",
+    "pitfalls": [
+      "Assuming increased calorie provision alone will reverse muscle loss",
+      "Pursuing burdensome artificial nutrition in refractory, end-stage disease with no meaningful benefit",
+      "Overlooking treatable symptoms that limit intake, such as nausea, constipation, and oral candidiasis",
+      "Failing to address family anxiety about the patient not eating",
+      "Missing depression as a contributor to anorexia and weight loss"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive",
+      "Deliver multimodal nutritional support led by a dietitian, using oral protein-energy supplementation and enteral feeding when appropriate rather than calories alone",
+      "Encourage resistance exercise where the patient is able, to preserve muscle mass and function",
+      "Stimulate appetite with a progestational agent or a corticosteroid when anorexia dominates",
+      "Control symptoms that limit intake, including nausea, early satiety and constipation, with antiemetics and prokinetics",
+      "Stage the syndrome as pre-cachexia, cachexia or refractory cachexia to match the intensity of intervention",
+      "Involve palliative care, shifting away from aggressive nutritional intervention once cachexia is refractory in advanced disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for cancer cachexia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cancer-cachexia-real-image",
-   "title": "Cancer cachexia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cancer_cachexia-pathway",
+      "title": "Cancer cachexia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully reversed by conventional nutritional support",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid, accelerating weight and muscle loss suggesting progressive or refractory disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Documentation of weight trajectory and body-mass index over time, Assessment of muscle mass and function where available, Inflammatory markers such as C-reactive protein and albumin as prognostic indicators"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming increased calorie provision alone will reverse muscle loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cancer cachexia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cancer_cachexia-matrix",
+      "title": "Cancer cachexia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cancer cachexia is a multifactorial syndrome of ongoing loss of skeletal muscle, with or without fat loss, that cannot be fully",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Documentation of weight trajectory and body-mass index over time, Assessment of muscle mass and function where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Simple starvation or undernutrition from inadequate intake, Sarcopenia of ageing without underlying malignancy, Malabsorption or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cancer wherever feasible, as this is the only way to reverse the catabolic drive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming increased calorie provision alone will reverse muscle loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cancer cachexia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cancer_cachexia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements in cancer cachexia",
+      "rowHeader": "Criterion",
+      "columns": ["Finding or threshold"],
+      "rows": [
+        {"parameter": "Weight loss", "cells": [{"text": "Over about 5 per cent in 6 months; lesser loss with low BMI or sarcopenia"}], "cite": "c1"},
+        {"parameter": "Body-mass index and weight trajectory", "cells": [{"text": "Trend over time"}], "cite": "c1"},
+        {"parameter": "Muscle mass and function", "cells": [{"text": "Assessment where available"}], "cite": "c1"},
+        {"parameter": "C-reactive protein and albumin", "cells": [{"text": "Systemic inflammation; prognostic indicators"}], "cite": "c1"},
+        {"parameter": "Nutritional and symptom assessment", "cells": [{"text": "Intake and symptoms limiting eating"}], "cite": "c1"},
+        {"parameter": "Screen for reversible contributors", "cells": [{"text": "Nausea, constipation, oral problems and depression"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cancer_cachexia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of weight and muscle loss",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Simple starvation", "cells": [{"text": "Muscle relatively spared in starvation; cachexia shows ongoing muscle loss that persists despite feeding"}], "cite": "c1"},
+        {"parameter": "Depression causing anorexia", "cells": [{"text": "Depression is a recognised contributor to anorexia and weight loss; screened for"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cancer_cachexia-treatment",
+      "kind": "treatment",
+      "title": "Management options in cancer cachexia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Treat the underlying cancer", "cells": [{"text": "Wherever feasible"}, {"text": "Only route to reverse the catabolic drive"}], "cite": "c1"},
+        {"parameter": "Multimodal nutritional support", "cells": [{"text": "Dietitian-led oral protein-energy supplements; enteral feeding when appropriate"}, {"text": "Calories alone do not restore muscle"}], "cite": "c1"},
+        {"parameter": "Resistance exercise", "cells": [{"text": "Where the patient is able, to preserve muscle mass and function"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Appetite stimulation", "cells": [{"text": "Progestational agent or corticosteroid when anorexia dominates"}, {"text": "Symptomatic"}], "cite": "c1"},
+        {"parameter": "Symptom control", "cells": [{"text": "Antiemetics and prokinetics for nausea, early satiety and constipation"}, {"text": "Limit intake"}], "cite": "c1"},
+        {"parameter": "Staging", "cells": [{"text": "Pre-cachexia, cachexia or refractory cachexia to match intervention intensity"}, {"text": "Consensus framework"}], "cite": "c1"},
+        {"parameter": "Palliative care", "cells": [{"text": "Shift away from aggressive nutritional intervention in refractory cachexia"}, {"text": "Advanced disease"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cancer_cachexia-dx-mgmt",
+      "title": "Assessment and management of cancer cachexia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Ongoing weight and muscle loss in a patient with cancer", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapid accelerating loss, impending bowel obstruction, or severe deconditioning?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent oncology and palliative review; manage obstruction", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Track weight, BMI and muscle; CRP and albumin; screen for nausea, constipation, oral problems and depression", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Cancer treatable and cachexia responsive to intervention?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Treat cancer; dietitian-led nutrition; resistance exercise; appetite and symptom treatment", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Comfort-focused palliative care; avoid aggressive artificial feeding", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Cachexia marks advanced disease; predicts reduced treatment tolerance and survival", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

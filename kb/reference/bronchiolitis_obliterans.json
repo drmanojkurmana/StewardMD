@@ -1,170 +1,226 @@
 {
- "id": "bronchiolitis_obliterans",
- "name": "Bronchiolitis obliterans",
- "aliases": [
-  "constrictive bronchiolitis",
-  "obliterative bronchiolitis",
-  "popcorn lung"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
-   "Presents with progressive breathlessness and dry cough, often with relatively preserved chest radiograph findings",
-   "It is distinct from cryptogenic organising pneumonia (the older term bronchiolitis obliterans organising pneumonia causes confusion)",
-   "Recognised causes include lung and haematopoietic stem cell transplant rejection, connective tissue disease, inhalational injury and certain infections",
-   "Spirometry shows fixed airflow obstruction, and expiratory CT demonstrates mosaic attenuation and air trapping",
-   "Treatment aims to halt progression and address the underlying cause, as established fibrosis does not reverse"
+  "id": "bronchiolitis_obliterans",
+  "name": "Bronchiolitis obliterans",
+  "aliases": [
+    "constrictive bronchiolitis",
+    "obliterative bronchiolitis",
+    "popcorn lung"
   ],
-  "pathophysiology": "Bronchiolitis obliterans is characterised by concentric fibrosis of the submucosa of terminal and respiratory bronchioles, progressively narrowing and obliterating their lumen (constrictive bronchiolitis). An initiating injury, whether immune (as in chronic transplant rejection or connective tissue disease), toxic (inhaled fumes such as diacetyl), or post-infective, triggers airway epithelial damage and a fibroproliferative repair response. The resulting fixed small-airway obstruction increases air trapping and reduces expiratory flow, and because the process is fibrotic it is largely irreversible.",
-  "additionalDifferentials": [
-   "Asthma",
-   "Chronic obstructive pulmonary disease",
-   "Cryptogenic organising pneumonia",
-   "Hypersensitivity pneumonitis",
-   "Bronchiectasis",
-   "Other small airways disease"
-  ],
-  "additionalInvestigations": [
-   "Spirometry demonstrating fixed airflow obstruction",
-   "Expiratory high-resolution CT showing mosaic attenuation and air trapping",
-   "Assessment for transplant rejection or connective tissue disease",
-   "Occupational and inhalational exposure history",
-   "Lung biopsy in selected diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Rapidly declining lung function, especially after transplantation",
-   "Progressive hypoxaemic respiratory failure",
-   "Features of an underlying connective tissue disease",
-   "Significant occupational inhalational exposure"
-  ],
-  "prognosis": "Established disease is generally irreversible and can progress to respiratory failure, though early recognition and treatment of the cause may stabilise lung function; prognosis is worse in post-transplant disease.",
-  "pitfalls": [
-   "Confusing it with organising pneumonia, which is steroid-responsive",
-   "Misdiagnosing it as asthma or COPD",
-   "Missing an occupational inhalational cause",
-   "Overlooking chronic rejection in a transplant recipient"
-  ],
-  "references": [
-   "Respiratory medicine reference texts (standard reference)",
-   "Transplant and occupational lung disease guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl",
-   "Treat the driving process: escalate immunosuppression for chronic lung allograft rejection and use corticosteroids or immunosuppressants for connective-tissue-disease-related disease",
-   "Trial azithromycin, which can stabilise lung function in chronic lung allograft dysfunction",
-   "Provide supportive care with bronchodilators, supplemental oxygen, pulmonary rehabilitation, and vaccination",
-   "Monitor disease with serial spirometry to detect progression of fixed airflow obstruction",
-   "Refer to a specialist respiratory or transplant centre and consider lung transplantation for progressive, refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bronchiolitis_obliterans-pathway",
-   "title": "Bronchiolitis obliterans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining lung function, especially after transplantation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spirometry demonstrating fixed airflow obstruction, Expiratory high-resolution CT showing mosaic attenuation and air trapping, Assessment for transplant rejection or connective tissue disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with organising pneumonia, which is steroid-responsive"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bronchiolitis obliterans."
-  }
- ],
- "tables": [
-  {
-   "id": "bronchiolitis_obliterans-matrix",
-   "title": "Bronchiolitis obliterans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
+      "Presents with progressive breathlessness and dry cough, often with relatively preserved chest radiograph findings",
+      "It is distinct from cryptogenic organising pneumonia (the older term bronchiolitis obliterans organising pneumonia causes confusion)",
+      "Recognised causes include lung and haematopoietic stem cell transplant rejection, connective tissue disease, inhalational injury and certain infections",
+      "Spirometry shows fixed airflow obstruction, and expiratory CT demonstrates mosaic attenuation and air trapping",
+      "Treatment aims to halt progression and address the underlying cause, as established fibrosis does not reverse"
     ],
-    [
-     "Key Investigations",
-     "Spirometry demonstrating fixed airflow obstruction, Expiratory high-resolution CT showing mosaic attenuation and air trapping,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bronchiolitis obliterans is characterised by concentric fibrosis of the submucosa of terminal and respiratory bronchioles, progressively narrowing and obliterating their lumen (constrictive bronchiolitis). An initiating injury, whether immune (as in chronic transplant rejection or connective tissue disease), toxic (inhaled fumes such as diacetyl), or post-infective, triggers airway epithelial damage and a fibroproliferative repair response. The resulting fixed small-airway obstruction increases air trapping and reduces expiratory flow, and because the process is fibrotic it is largely irreversible.",
+    "additionalDifferentials": [
+      "Asthma",
+      "Chronic obstructive pulmonary disease",
+      "Cryptogenic organising pneumonia",
+      "Hypersensitivity pneumonitis",
+      "Bronchiectasis",
+      "Other small airways disease"
     ],
-    [
-     "Primary Differentials",
-     "Asthma, Chronic obstructive pulmonary disease, Cryptogenic organising pneumonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spirometry demonstrating fixed airflow obstruction",
+      "Expiratory high-resolution CT showing mosaic attenuation and air trapping",
+      "Assessment for transplant rejection or connective tissue disease",
+      "Occupational and inhalational exposure history",
+      "Lung biopsy in selected diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining lung function, especially after transplantation",
+      "Progressive hypoxaemic respiratory failure",
+      "Features of an underlying connective tissue disease",
+      "Significant occupational inhalational exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with organising pneumonia, which is steroid-responsive",
-     "Prevent diagnostic or management error"
+    "prognosis": "Established disease is generally irreversible and can progress to respiratory failure, though early recognition and treatment of the cause may stabilise lung function; prognosis is worse in post-transplant disease.",
+    "pitfalls": [
+      "Confusing it with organising pneumonia, which is steroid-responsive",
+      "Misdiagnosing it as asthma or COPD",
+      "Missing an occupational inhalational cause",
+      "Overlooking chronic rejection in a transplant recipient"
+    ],
+    "references": [
+      "Respiratory medicine reference texts (standard reference)",
+      "Transplant and occupational lung disease guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl",
+      "Treat the driving process: escalate immunosuppression for chronic lung allograft rejection and use corticosteroids or immunosuppressants for connective-tissue-disease-related disease",
+      "Trial azithromycin, which can stabilise lung function in chronic lung allograft dysfunction",
+      "Provide supportive care with bronchodilators, supplemental oxygen, pulmonary rehabilitation, and vaccination",
+      "Monitor disease with serial spirometry to detect progression of fixed airflow obstruction",
+      "Refer to a specialist respiratory or transplant centre and consider lung transplantation for progressive, refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bronchiolitis obliterans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bronchiolitis-obliterans-real-image",
-   "title": "Bronchiolitis obliterans: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "bronchiolitis_obliterans-pathway",
+      "title": "Bronchiolitis obliterans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining lung function, especially after transplantation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spirometry demonstrating fixed airflow obstruction, Expiratory high-resolution CT showing mosaic attenuation and air trapping, Assessment for transplant rejection or connective tissue disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with organising pneumonia, which is steroid-responsive"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bronchiolitis obliterans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bronchiolitis_obliterans-matrix",
+      "title": "Bronchiolitis obliterans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An irreversible obstructive lung disease from fibrosis and narrowing of the small airways (bronchioles)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spirometry demonstrating fixed airflow obstruction, Expiratory high-resolution CT showing mosaic attenuation and air trapping,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Asthma, Chronic obstructive pulmonary disease, Cryptogenic organising pneumonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and remove the underlying cause, including cessation of exposure to inhaled toxins such as diacetyl",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with organising pneumonia, which is steroid-responsive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bronchiolitis obliterans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bronchiolitis_obliterans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bronchiolitis obliterans",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Spirometry", "cells": [{"text": "Fixed airflow obstruction"}], "cite": "c1"},
+        {"parameter": "Expiratory high-resolution CT", "cells": [{"text": "Mosaic attenuation and air trapping"}], "cite": "c1"},
+        {"parameter": "Assessment for transplant rejection or connective tissue disease", "cells": [{"text": "Identifies the initiating cause"}], "cite": "c1"},
+        {"parameter": "Occupational and inhalational exposure history", "cells": [{"text": "Inhaled toxins such as diacetyl"}], "cite": "c1"},
+        {"parameter": "Lung biopsy", "cells": [{"text": "Selected diagnostically uncertain cases"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchiolitis_obliterans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike small airway and lung disease",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Cryptogenic organising pneumonia", "cells": [{"text": "Steroid-responsive, unlike the irreversible fixed obstruction of bronchiolitis obliterans"}], "cite": "c1"},
+        {"parameter": "Asthma or chronic obstructive pulmonary disease", "cells": [{"text": "Fixed obstruction with mosaic attenuation and air trapping on expiratory CT"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchiolitis_obliterans-treatment",
+      "kind": "treatment",
+      "title": "Management options in bronchiolitis obliterans",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Remove the cause", "cells": [{"text": "Cessation of exposure to inhaled toxins such as diacetyl"}, {"text": "Halts progression"}], "cite": "c1"},
+        {"parameter": "Treat the driving process", "cells": [{"text": "Escalate immunosuppression for chronic lung allograft rejection; corticosteroids or immunosuppressants for connective tissue disease"}, {"text": "Disease-specific"}], "cite": "c1"},
+        {"parameter": "Azithromycin trial", "cells": [{"text": "May stabilise lung function in chronic lung allograft dysfunction"}, {"text": "Post-transplant"}], "cite": "c1"},
+        {"parameter": "Supportive care", "cells": [{"text": "Bronchodilators, supplemental oxygen, pulmonary rehabilitation and vaccination"}, {"text": "Symptomatic"}], "cite": "c1"},
+        {"parameter": "Serial spirometry", "cells": [{"text": "Detects progression of fixed airflow obstruction"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Specialist and transplant referral", "cells": [{"text": "Lung transplantation for progressive, refractory disease"}, {"text": "Advanced disease"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bronchiolitis_obliterans-dx-mgmt",
+      "title": "Diagnosis and management of bronchiolitis obliterans",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Progressive breathlessness and dry cough with a relatively preserved chest radiograph", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapid decline in lung function, especially after transplantation, or progressive hypoxaemia?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent specialist respiratory or transplant review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Spirometry and expiratory high-resolution CT; exposure and transplant or connective tissue history", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Fixed airflow obstruction with mosaic attenuation and air trapping?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Remove exposure; treat the driving process (immunosuppression, azithromycin trial)", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Supportive care, pulmonary rehabilitation, oxygen and serial spirometry", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider organising pneumonia, asthma, COPD or hypersensitivity pneumonitis", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Fibrosis is irreversible; progression to failure possible; transplantation for refractory disease", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n8", "label": "No"},
+        {"from": "n6", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

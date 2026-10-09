@@ -1,178 +1,521 @@
 {
- "id": "kawasaki_disease_incomplete",
- "name": "kawasaki disease incomplete",
- "aliases": [
-  "Incomplete Kawasaki disease",
-  "Atypical Kawasaki disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "American Heart Association Scientific Statement on Kawasaki Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number of principal clinical criteria, particularly in infants.",
-   "Infants under about six months of age are at highest risk of both incomplete presentation and coronary artery aneurysms, so the threshold for evaluation and treatment should be low.",
-   "The principal features may appear sequentially rather than together: bilateral non-exudative conjunctival injection, oral mucosal changes with cracked red lips or strawberry tongue, polymorphous rash, extremity changes with erythema and oedema followed by periungual peeling, and cervical lymphadenopathy.",
-   "Supportive laboratory findings — markedly raised inflammatory markers, anaemia, a rising platelet count in the second week, sterile pyuria, transaminitis, hypoalbuminaemia and hyponatraemia — strengthen the diagnosis when clinical criteria are incomplete.",
-   "Echocardiography is central: coronary artery dilatation or aneurysm supports the diagnosis and mandates treatment even when full clinical criteria are absent.",
-   "Timely immunoglobulin therapy, ideally within the first ten days of illness, substantially reduces the risk of coronary artery aneurysms.",
-   "Perineal desquamation and erythema or reactivation at a previous BCG scar site are useful supportive clues.",
-   "Incomplete Kawasaki disease belongs in the differential of fever of unknown origin and of a prolonged, viral-seeming illness that fails to settle."
+  "id": "kawasaki_disease_incomplete",
+  "name": "kawasaki disease incomplete",
+  "aliases": [
+    "Incomplete Kawasaki disease",
+    "Atypical Kawasaki disease"
   ],
-  "pathophysiology": "Kawasaki disease is a self-limiting, medium-vessel systemic vasculitis of childhood with a striking predilection for the coronary arteries; the incomplete form shares identical pathology but presents with insufficient clinical criteria to meet the classic case definition. An infectious or environmental trigger is thought to provoke an aberrant, dysregulated immune response in a genetically susceptible child, driving neutrophilic and then mononuclear infiltration of the arterial wall. Inflammation destroys the media and internal elastic lamina, weakening the vessel and predisposing to dilatation and aneurysm formation, most importantly in the coronary tree, where subsequent thrombosis, stenosis or rupture accounts for the principal morbidity and mortality.",
-  "additionalDifferentials": [
-   "Viral exanthems such as measles, adenovirus, enterovirus and Epstein-Barr virus",
-   "Streptococcal and staphylococcal toxin-mediated disease, including scarlet fever, toxic shock and scalded skin syndrome",
-   "Multisystem inflammatory syndrome in children (paediatric inflammatory multisystem syndrome)",
-   "Stevens-Johnson syndrome and drug hypersensitivity reactions including DRESS",
-   "Systemic juvenile idiopathic arthritis",
-   "Other systemic infections such as leptospirosis",
-   "Mercury exposure (acrodynia)"
-  ],
-  "additionalInvestigations": [
-   "Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores",
-   "Full blood count showing anaemia and later thrombocytosis, with ESR and CRP",
-   "Serum albumin, sodium and liver enzymes",
-   "Urinalysis for sterile pyuria",
-   "Electrocardiogram for arrhythmia, ischaemia and a baseline recording",
-   "Cultures, serology and viral studies to exclude infective mimics",
-   "N-terminal pro-B-type natriuretic peptide as an adjunctive supportive marker"
-  ],
-  "redFlags": [
-   "Coronary artery dilatation or aneurysm on echocardiography",
-   "Myocarditis, heart failure or circulatory shock (Kawasaki disease shock syndrome)",
-   "Persistent or recrudescent fever despite immunoglobulin, indicating treatment resistance",
-   "Young infants with prolonged fever and marked irritability",
-   "Features suggesting macrophage activation syndrome"
-  ],
-  "prognosis": "With prompt immunoglobulin therapy the great majority of children recover fully, whereas untreated or delayed disease carries a substantial risk of coronary artery aneurysms. Such aneurysms are the leading cause of long-term morbidity and may lead to thrombosis, myocardial ischaemia or sudden death.",
-  "pitfalls": [
-   "Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window",
-   "Attributing prolonged fever to a self-limiting viral illness and missing incomplete disease, especially in infants",
-   "Being falsely reassured by a normal initial echocardiogram, as coronary changes may evolve later",
-   "Overlooking supportive laboratory criteria that would justify treatment",
-   "Failing to recognise immunoglobulin resistance requiring escalation of therapy"
-  ],
-  "references": [
-   "American Heart Association Scientific Statement on Diagnosis, Treatment and Long-term Management of Kawasaki Disease",
-   "Nelson Textbook of Pediatrics",
-   "Cassidy's Textbook of Pediatric Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms",
-   "Add aspirin as adjunctive anti-inflammatory and subsequently antiplatelet therapy",
-   "For high-risk or immunoglobulin-resistant disease, add corticosteroids, a further dose of immunoglobulin, or a TNF inhibitor such as infliximab",
-   "Perform serial echocardiography using body-surface-area-adjusted z-scores to detect and monitor coronary artery aneurysms",
-   "Tailor antithrombotic therapy to coronary findings, adding anticoagulation for large aneurysms",
-   "Maintain long-term cardiology follow-up with multidisciplinary paediatric rheumatology and cardiology care",
-   "Keep a low threshold to treat infants with prolonged fever and incomplete criteria given their high aneurysm risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kawasaki_disease_incomplete-pathway",
-   "title": "kawasaki disease incomplete: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number of principal clinical criteria, particularly in infants.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coronary artery dilatation or aneurysm on echocardiography",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores, Full blood count showing anaemia and later thrombocytosis, with ESR and CRP, Serum albumin, sodium and liver enzymes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kawasaki disease incomplete."
-  }
- ],
- "tables": [
-  {
-   "id": "kawasaki_disease_incomplete-matrix",
-   "title": "kawasaki disease incomplete: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "American Heart Association Scientific Statement on Kawasaki Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number of principal clinical criteria, particularly in infants.",
+      "Infants under about six months of age are at highest risk of both incomplete presentation and coronary artery aneurysms, so the threshold for evaluation and treatment should be low.",
+      "The principal features may appear sequentially rather than together: bilateral non-exudative conjunctival injection, oral mucosal changes with cracked red lips or strawberry tongue, polymorphous rash, extremity changes with erythema and oedema followed by periungual peeling, and cervical lymphadenopathy.",
+      "Supportive laboratory findings — markedly raised inflammatory markers, anaemia, a rising platelet count in the second week, sterile pyuria, transaminitis, hypoalbuminaemia and hyponatraemia — strengthen the diagnosis when clinical criteria are incomplete.",
+      "Echocardiography is central: coronary artery dilatation or aneurysm supports the diagnosis and mandates treatment even when full clinical criteria are absent.",
+      "Timely immunoglobulin therapy, ideally within the first ten days of illness, substantially reduces the risk of coronary artery aneurysms.",
+      "Perineal desquamation and erythema or reactivation at a previous BCG scar site are useful supportive clues.",
+      "Incomplete Kawasaki disease belongs in the differential of fever of unknown origin and of a prolonged, viral-seeming illness that fails to settle."
     ],
-    [
-     "Key Investigations",
-     "Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores, Full blood count showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kawasaki disease is a self-limiting, medium-vessel systemic vasculitis of childhood with a striking predilection for the coronary arteries; the incomplete form shares identical pathology but presents with insufficient clinical criteria to meet the classic case definition. An infectious or environmental trigger is thought to provoke an aberrant, dysregulated immune response in a genetically susceptible child, driving neutrophilic and then mononuclear infiltration of the arterial wall. Inflammation destroys the media and internal elastic lamina, weakening the vessel and predisposing to dilatation and aneurysm formation, most importantly in the coronary tree, where subsequent thrombosis, stenosis or rupture accounts for the principal morbidity and mortality.",
+    "additionalDifferentials": [
+      "Viral exanthems such as measles, adenovirus, enterovirus and Epstein-Barr virus",
+      "Streptococcal and staphylococcal toxin-mediated disease, including scarlet fever, toxic shock and scalded skin syndrome",
+      "Multisystem inflammatory syndrome in children (paediatric inflammatory multisystem syndrome)",
+      "Stevens-Johnson syndrome and drug hypersensitivity reactions including DRESS",
+      "Systemic juvenile idiopathic arthritis",
+      "Other systemic infections such as leptospirosis",
+      "Mercury exposure (acrodynia)"
     ],
-    [
-     "Primary Differentials",
-     "Viral exanthems such as measles, adenovirus, enterovirus and Epstein-Barr virus, Streptococcal and staphylococcal toxin-mediated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores",
+      "Full blood count showing anaemia and later thrombocytosis, with ESR and CRP",
+      "Serum albumin, sodium and liver enzymes",
+      "Urinalysis for sterile pyuria",
+      "Electrocardiogram for arrhythmia, ischaemia and a baseline recording",
+      "Cultures, serology and viral studies to exclude infective mimics",
+      "N-terminal pro-B-type natriuretic peptide as an adjunctive supportive marker"
     ],
-    [
-     "Management Strategy",
-     "Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms",
-     "Core treatment modality"
+    "redFlags": [
+      "Coronary artery dilatation or aneurysm on echocardiography",
+      "Myocarditis, heart failure or circulatory shock (Kawasaki disease shock syndrome)",
+      "Persistent or recrudescent fever despite immunoglobulin, indicating treatment resistance",
+      "Young infants with prolonged fever and marked irritability",
+      "Features suggesting macrophage activation syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt immunoglobulin therapy the great majority of children recover fully, whereas untreated or delayed disease carries a substantial risk of coronary artery aneurysms. Such aneurysms are the leading cause of long-term morbidity and may lead to thrombosis, myocardial ischaemia or sudden death.",
+    "pitfalls": [
+      "Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window",
+      "Attributing prolonged fever to a self-limiting viral illness and missing incomplete disease, especially in infants",
+      "Being falsely reassured by a normal initial echocardiogram, as coronary changes may evolve later",
+      "Overlooking supportive laboratory criteria that would justify treatment",
+      "Failing to recognise immunoglobulin resistance requiring escalation of therapy"
+    ],
+    "references": [
+      "American Heart Association Scientific Statement on Diagnosis, Treatment and Long-term Management of Kawasaki Disease",
+      "Nelson Textbook of Pediatrics",
+      "Cassidy's Textbook of Pediatric Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms",
+      "Add aspirin as adjunctive anti-inflammatory and subsequently antiplatelet therapy",
+      "For high-risk or immunoglobulin-resistant disease, add corticosteroids, a further dose of immunoglobulin, or a TNF inhibitor such as infliximab",
+      "Perform serial echocardiography using body-surface-area-adjusted z-scores to detect and monitor coronary artery aneurysms",
+      "Tailor antithrombotic therapy to coronary findings, adding anticoagulation for large aneurysms",
+      "Maintain long-term cardiology follow-up with multidisciplinary paediatric rheumatology and cardiology care",
+      "Keep a low threshold to treat infants with prolonged fever and incomplete criteria given their high aneurysm risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for kawasaki disease incomplete."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kawasaki-disease-incomplete-real-image",
-   "title": "kawasaki disease incomplete: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "kawasaki_disease_incomplete-pathway",
+      "title": "kawasaki disease incomplete: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number of principal clinical criteria, particularly in infants.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coronary artery dilatation or aneurysm on echocardiography",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores, Full blood count showing anaemia and later thrombocytosis, with ESR and CRP, Serum albumin, sodium and liver enzymes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kawasaki disease incomplete."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kawasaki_disease_incomplete-matrix",
+      "title": "kawasaki disease incomplete: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Incomplete Kawasaki disease should be considered in any child with prolonged unexplained fever and fewer than the required number",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial echocardiography to assess coronary artery dimensions using body-surface-area-adjusted z-scores, Full blood count showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral exanthems such as measles, adenovirus, enterovirus and Epstein-Barr virus, Streptococcal and staphylococcal toxin-mediated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give intravenous immunoglobulin as early as possible in the acute illness to reduce the risk of coronary artery aneurysms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for all classic criteria before treating and thereby delaying immunoglobulin beyond the optimal window",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kawasaki disease incomplete."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Heart Association Scientific Statement on Kawasaki Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kawasaki_disease_incomplete-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial echocardiography with body-surface-area z-scores",
+          "cells": [
+            {
+              "text": "Coronary artery dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, ESR and CRP",
+          "cells": [
+            {
+              "text": "Anaemia, later thrombocytosis, inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin, sodium and liver enzymes",
+          "cells": [
+            {
+              "text": "Supportive laboratory criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Sterile pyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Arrhythmia or ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures, serology and viral studies",
+          "cells": [
+            {
+              "text": "Exclusion of infective mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NT-proBNP",
+          "cells": [
+            {
+              "text": "Adjunctive supportive marker"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kawasaki_disease_incomplete-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral exanthems (measles, adenovirus, enterovirus, EBV)",
+          "cells": [
+            {
+              "text": "Viral prodrome, exudative conjunctivitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxin-mediated strep or staph disease",
+          "cells": [
+            {
+              "text": "Scarlet fever, toxic shock, scalded skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem inflammatory syndrome in children",
+          "cells": [
+            {
+              "text": "Recent SARS-CoV-2 exposure, shock, gut symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stevens-Johnson syndrome or DRESS",
+          "cells": [
+            {
+              "text": "Drug exposure, mucosal erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Quotidian fever, arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis or mercury exposure (acrodynia)",
+          "cells": [
+            {
+              "text": "Exposure history, distinct systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kawasaki_disease_incomplete-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin",
+          "cells": [
+            {
+              "text": "Intravenous immunoglobulin as early as possible in the acute illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Anti-inflammatory dosing, then antiplatelet dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resistance",
+          "cells": [
+            {
+              "text": "Corticosteroids, repeat immunoglobulin or infliximab for high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography using body-surface-area z-scores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic",
+          "cells": [
+            {
+              "text": "Tailored to coronary findings; anticoagulation for large aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Long-term cardiology with paediatric rheumatology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Threshold",
+          "cells": [
+            {
+              "text": "Low threshold to treat infants with prolonged fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kawasaki_disease_incomplete-dx-mgmt",
+      "title": "Diagnosis and management of kawasaki disease incomplete",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged unexplained fever with fewer than the required principal criteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coronary dilatation, myocarditis, shock, or fever persisting after immunoglobulin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and paediatric rheumatology review; treat without delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial echocardiography, FBC, ESR, CRP, albumin, urinalysis, ECG, cultures, serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever with supportive laboratory findings and coronary assessment done?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral, toxin-mediated, MIS-C or drug mimics; repeat echo and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous immunoglobulin as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirin, anti-inflammatory then antiplatelet dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids or infliximab for immunoglobulin-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography with body-surface-area z-scores",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antithrombotic therapy tailored to coronary findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Coronary outcome depends on early immunoglobulin; long-term cardiology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

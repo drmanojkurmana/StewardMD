@@ -1,178 +1,578 @@
 {
- "id": "c7_deficiency",
- "name": "Complement Component 7 Deficiency",
- "aliases": [
-  "C7 deficiency",
-  "C7D",
-  "C7"
- ],
- "class": "non_infective",
- "system": "Immunology / Complement",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or severe neisserial infection much like other terminal-pathway defects.",
-   "Recurrent meningococcal disease, frequently due to non-epidemic serogroups, is the classic presentation and is clinically indistinguishable from C6 deficiency without specific component testing.",
-   "Total haemolytic complement (CH50/CH100) is undetectable or markedly reduced, and the alternative-pathway assay (AH50) is likewise abnormal because C7 is shared by both pathways' terminal steps.",
-   "Disseminated gonococcal infection and, in some series, an association with certain vasculitic or connective-tissue features have been reported, though neisserial infection dominates.",
-   "Combined subtotal C6/C7 deficiency exists because the C6 and C7 genes lie close together on the same chromosome.",
-   "Onset of invasive infection is typically in later childhood or adolescence, and recurrences can continue into adulthood.",
-   "Meningococcal, pneumococcal and Haemophilus vaccination plus prompt treatment of febrile illness form the mainstay of management.",
-   "Inheritance is autosomal recessive, so at-risk relatives should be screened with a haemolytic complement assay."
+  "id": "c7_deficiency",
+  "name": "Complement Component 7 Deficiency",
+  "aliases": [
+    "C7 deficiency",
+    "C7D",
+    "C7"
   ],
-  "pathophysiology": "Complement Component 7 deficiency results from biallelic loss-of-function variants in the C7 gene, which encodes a terminal complement protein. C7 binds the C5b-6 complex to form C5b-7, a critical hydrophobic intermediate that inserts into the target membrane and provides the platform for subsequent binding of C8 and polymerising C9, completing the membrane attack complex (MAC, C5b-9). Absence of functional C7 halts MAC assembly at the C5b-6 stage, abolishing complement-dependent direct bacteriolysis while leaving opsonisation and anaphylatoxin production from the upstream cascade intact. Because Neisseria meningitidis and Neisseria gonorrhoeae are killed principally by MAC-mediated serum bactericidal activity, patients are disproportionately susceptible to invasive meningococcal disease and disseminated gonococcal infection. The C7 gene is physically linked to C6, and shared regulatory or structural variants can produce combined or subtotal deficiencies. The remainder of innate and adaptive immunity is preserved, which explains why susceptibility is largely restricted to neisserial organisms.",
-  "additionalDifferentials": [
-   "C6 deficiency, which is clinically identical and distinguished only by component assay",
-   "C8 deficiency (alpha-gamma or beta subunit) with comparable neisserial risk",
-   "C5 deficiency, which additionally impairs C5a-driven chemotaxis",
-   "C9 deficiency, generally a milder terminal defect",
-   "Properdin deficiency presenting with fulminant meningococcaemia",
-   "Functional or anatomical asplenia predisposing to encapsulated organisms",
-   "Antibody deficiency syndromes causing recurrent bacterial infection"
-  ],
-  "additionalInvestigations": [
-   "CH50/CH100 classical-pathway haemolytic screen as the first-line test",
-   "AH50 alternative-pathway assay to confirm a shared terminal-component block",
-   "Specific C7 antigenic and functional measurement to identify the deficient protein",
-   "C7 gene sequencing to define the variant and detect combined C6/C7 defects",
-   "Blood and cerebrospinal fluid culture with meningococcal serogrouping during acute infection",
-   "Assay of the other terminal components (C5, C6, C8, C9) to exclude combined deficiency",
-   "Haemolytic complement screening of first-degree relatives"
-  ],
-  "redFlags": [
-   "Second or subsequent episode of invasive meningococcal disease",
-   "Neisserial infection with an unusual or non-epidemic serogroup",
-   "Family history of recurrent or fatal meningococcal infection",
-   "Fever with meningism or a purpuric rash in a patient known to be C7 deficient",
-   "Persistently undetectable CH50/CH100 when not acutely consuming complement"
-  ],
-  "prognosis": "Prognosis is generally favourable when infections are recognised and treated promptly and when vaccination is kept up to date; as with other terminal defects, invasive neisserial disease tends to be less fulminant than in the general population. The dominant long-term concern is recurrent infection, making sustained prophylaxis and rapid access to care important.",
-  "pitfalls": [
-   "Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence.",
-   "Measuring only C6 or only C7 and missing a combined C6/C7 deficiency owing to the genes' proximity.",
-   "Interpreting a low CH50 from a degraded or mishandled specimen as a true deficiency.",
-   "Assuming vaccination confers absolute protection and lowering vigilance for breakthrough infection.",
-   "Neglecting to counsel and screen relatives once the proband is identified."
-  ],
-  "references": [
-   "Standard clinical immunology textbook, current edition",
-   "National immunisation guidance for complement-deficient and asplenic patients",
-   "Peer-reviewed reviews of terminal complement deficiency and neisserial infection"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset absent membrane-attack-complex activity.",
-   "Maintain pneumococcal and Haemophilus influenzae type b vaccination.",
-   "Treat any fever urgently with empirical antibiotics active against Neisseria and obtain cultures with serogrouping.",
-   "Consider long-term prophylactic penicillin where infections recur.",
-   "Educate patient and family to seek immediate care for possible meningococcal disease.",
-   "Provide genetic counselling for autosomal recessive inheritance and screen relatives, testing for combined C6/C7 deficiency given the adjacent gene loci."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "c7_deficiency-pathway",
-   "title": "Complement Component 7 Deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or severe neisserial infection much like other terminal-pathway defects.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Second or subsequent episode of invasive meningococcal disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CH50/CH100 classical-pathway haemolytic screen as the first-line test, AH50 alternative-pathway assay to confirm a shared terminal-component block, Specific C7 antigenic and functional measurement to identify the deficient"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset absent membrane-attack-complex activity."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of complement component 7 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "c7_deficiency-matrix",
-   "title": "Complement Component 7 Deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Complement",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or severe neisserial infection much like other terminal-pathway defects.",
+      "Recurrent meningococcal disease, frequently due to non-epidemic serogroups, is the classic presentation and is clinically indistinguishable from C6 deficiency without specific component testing.",
+      "Total haemolytic complement (CH50/CH100) is undetectable or markedly reduced, and the alternative-pathway assay (AH50) is likewise abnormal because C7 is shared by both pathways' terminal steps.",
+      "Disseminated gonococcal infection and, in some series, an association with certain vasculitic or connective-tissue features have been reported, though neisserial infection dominates.",
+      "Combined subtotal C6/C7 deficiency exists because the C6 and C7 genes lie close together on the same chromosome.",
+      "Onset of invasive infection is typically in later childhood or adolescence, and recurrences can continue into adulthood.",
+      "Meningococcal, pneumococcal and Haemophilus vaccination plus prompt treatment of febrile illness form the mainstay of management.",
+      "Inheritance is autosomal recessive, so at-risk relatives should be screened with a haemolytic complement assay."
     ],
-    [
-     "Key Investigations",
-     "CH50/CH100 classical-pathway haemolytic screen as the first-line test, AH50 alternative-pathway assay to confirm a shared",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Complement Component 7 deficiency results from biallelic loss-of-function variants in the C7 gene, which encodes a terminal complement protein. C7 binds the C5b-6 complex to form C5b-7, a critical hydrophobic intermediate that inserts into the target membrane and provides the platform for subsequent binding of C8 and polymerising C9, completing the membrane attack complex (MAC, C5b-9). Absence of functional C7 halts MAC assembly at the C5b-6 stage, abolishing complement-dependent direct bacteriolysis while leaving opsonisation and anaphylatoxin production from the upstream cascade intact. Because Neisseria meningitidis and Neisseria gonorrhoeae are killed principally by MAC-mediated serum bactericidal activity, patients are disproportionately susceptible to invasive meningococcal disease and disseminated gonococcal infection. The C7 gene is physically linked to C6, and shared regulatory or structural variants can produce combined or subtotal deficiencies. The remainder of innate and adaptive immunity is preserved, which explains why susceptibility is largely restricted to neisserial organisms.",
+    "additionalDifferentials": [
+      "C6 deficiency, which is clinically identical and distinguished only by component assay",
+      "C8 deficiency (alpha-gamma or beta subunit) with comparable neisserial risk",
+      "C5 deficiency, which additionally impairs C5a-driven chemotaxis",
+      "C9 deficiency, generally a milder terminal defect",
+      "Properdin deficiency presenting with fulminant meningococcaemia",
+      "Functional or anatomical asplenia predisposing to encapsulated organisms",
+      "Antibody deficiency syndromes causing recurrent bacterial infection"
     ],
-    [
-     "Primary Differentials",
-     "C6 deficiency, which is clinically identical and distinguished only by component assay, C8 deficiency (alpha-gamma or beta",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CH50/CH100 classical-pathway haemolytic screen as the first-line test",
+      "AH50 alternative-pathway assay to confirm a shared terminal-component block",
+      "Specific C7 antigenic and functional measurement to identify the deficient protein",
+      "C7 gene sequencing to define the variant and detect combined C6/C7 defects",
+      "Blood and cerebrospinal fluid culture with meningococcal serogrouping during acute infection",
+      "Assay of the other terminal components (C5, C6, C8, C9) to exclude combined deficiency",
+      "Haemolytic complement screening of first-degree relatives"
     ],
-    [
-     "Management Strategy",
-     "Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset",
-     "Core treatment modality"
+    "redFlags": [
+      "Second or subsequent episode of invasive meningococcal disease",
+      "Neisserial infection with an unusual or non-epidemic serogroup",
+      "Family history of recurrent or fatal meningococcal infection",
+      "Fever with meningism or a purpuric rash in a patient known to be C7 deficient",
+      "Persistently undetectable CH50/CH100 when not acutely consuming complement"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable when infections are recognised and treated promptly and when vaccination is kept up to date; as with other terminal defects, invasive neisserial disease tends to be less fulminant than in the general population. The dominant long-term concern is recurrent infection, making sustained prophylaxis and rapid access to care important.",
+    "pitfalls": [
+      "Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence.",
+      "Measuring only C6 or only C7 and missing a combined C6/C7 deficiency owing to the genes' proximity.",
+      "Interpreting a low CH50 from a degraded or mishandled specimen as a true deficiency.",
+      "Assuming vaccination confers absolute protection and lowering vigilance for breakthrough infection.",
+      "Neglecting to counsel and screen relatives once the proband is identified."
+    ],
+    "references": [
+      "Standard clinical immunology textbook, current edition",
+      "National immunisation guidance for complement-deficient and asplenic patients",
+      "Peer-reviewed reviews of terminal complement deficiency and neisserial infection"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset absent membrane-attack-complex activity.",
+      "Maintain pneumococcal and Haemophilus influenzae type b vaccination.",
+      "Treat any fever urgently with empirical antibiotics active against Neisseria and obtain cultures with serogrouping.",
+      "Consider long-term prophylactic penicillin where infections recur.",
+      "Educate patient and family to seek immediate care for possible meningococcal disease.",
+      "Provide genetic counselling for autosomal recessive inheritance and screen relatives, testing for combined C6/C7 deficiency given the adjacent gene loci."
     ]
-   ],
-   "caption": "Overview comparison matrix for complement component 7 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "c7-deficiency-real-image",
-   "title": "Complement Component 7 Deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "c7_deficiency-pathway",
+      "title": "Complement Component 7 Deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or severe neisserial infection much like other terminal-pathway defects.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Second or subsequent episode of invasive meningococcal disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CH50/CH100 classical-pathway haemolytic screen as the first-line test, AH50 alternative-pathway assay to confirm a shared terminal-component block, Specific C7 antigenic and functional measurement to identify the deficient"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset absent membrane-attack-complex activity."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of complement component 7 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "c7_deficiency-matrix",
+      "title": "Complement Component 7 Deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "C7 is a terminal complement component required for membrane attack complex assembly, so its deficiency produces recurrent or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CH50/CH100 classical-pathway haemolytic screen as the first-line test, AH50 alternative-pathway assay to confirm a shared",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "C6 deficiency, which is clinically identical and distinguished only by component assay, C8 deficiency (alpha-gamma or beta",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunise against meningococcus with quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters to offset",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to investigate the complement system after invasive neisserial infection, particularly with rare serogroups or recurrence.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for complement component 7 deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "c7_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in complement component 7 deficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50/CH100 haemolytic screen",
+          "cells": [
+            {
+              "text": "Undetectable or markedly reduced; first-line test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AH50 alternative-pathway assay",
+          "cells": [
+            {
+              "text": "Abnormal; confirms a shared terminal-component block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific C7 antigenic and functional measurement",
+          "cells": [
+            {
+              "text": "Identifies the deficient protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C7 gene sequencing",
+          "cells": [
+            {
+              "text": "Variant definition; detects combined C6/C7 defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and cerebrospinal fluid culture with serogrouping",
+          "cells": [
+            {
+              "text": "During acute infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assay of C5, C6, C8 and C9",
+          "cells": [
+            {
+              "text": "Excludes combined deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic complement screening of relatives",
+          "cells": [
+            {
+              "text": "First-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c7_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike terminal complement defects",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "C6 deficiency",
+          "cells": [
+            {
+              "text": "Clinically identical; distinguished only by specific component assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C5 deficiency",
+          "cells": [
+            {
+              "text": "Additionally impairs C5a-driven chemotaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Properdin deficiency",
+          "cells": [
+            {
+              "text": "Presents with fulminant meningococcaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c7_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in complement component 7 deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcal vaccination",
+          "cells": [
+            {
+              "text": "Quadrivalent conjugate (ACWY) and serogroup B vaccines with scheduled boosters"
+            },
+            {
+              "text": "Offsets absent membrane attack complex activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other vaccines",
+          "cells": [
+            {
+              "text": "Pneumococcal and Haemophilus influenzae type b vaccination maintained"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile illness",
+          "cells": [
+            {
+              "text": "Urgent empirical antibiotics active against Neisseria; cultures with serogrouping"
+            },
+            {
+              "text": "Acute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Long-term prophylactic penicillin where infections recur"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education",
+          "cells": [
+            {
+              "text": "Seek immediate care for possible meningococcal disease"
+            },
+            {
+              "text": "Patient and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and relative screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive; test for combined C6/C7 deficiency given adjacent gene loci"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "c7_deficiency-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "c7_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of complement component 7 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent or invasive meningococcal disease, often with a non-epidemic serogroup",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: meningism, purpuric rash or fever in a known C7-deficient patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent empirical antibiotics active against Neisseria; admission",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50/CH100 and AH50; serogrouping from blood or CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Undetectable CH50 with abnormal AH50, confirmed on repeat testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Specific C7 level and gene sequencing; assay C5, C6, C8 and C9 for combined deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vaccinate (ACWY and serogroup B); prophylaxis after recurrence; screen relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: repeat testing; consider acute consumption or other defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Generally favourable with prevention; recurrence is the main concern",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

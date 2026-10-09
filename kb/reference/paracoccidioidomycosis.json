@@ -1,176 +1,449 @@
 {
- "id": "paracoccidioidomycosis",
- "name": "Paracoccidioidomycosis",
- "aliases": [
-  "Paracoccidioides brasiliensis",
-  "Paracoccidioides lutzii",
-  "South American blastomycosis",
-  "Lutz-Splendore-Almeida disease",
-  "PCM"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically affects male agricultural workers exposed to soil",
-   "Caused by the thermally dimorphic fungi Paracoccidioides brasiliensis and P. lutzii, acquired by inhalation of conidia; the acute/subacute (juvenile) form and the chronic (adult) form behave very differently",
-   "The chronic adult form is dominated by pulmonary disease with mucocutaneous lesions of the mouth, gums and oropharynx, often with a characteristic mulberry-like haemorrhagic stippling",
-   "The acute juvenile form presents with prominent reticuloendothelial involvement: generalised lymphadenopathy, hepatosplenomegaly and marrow involvement, and is more aggressive",
-   "Microscopy of pus, sputum or tissue classically shows the multiple-budding 'pilot's wheel' or 'Mickey Mouse' yeast form, which is diagnostic",
-   "Serology (immunodiffusion, complement fixation) supports diagnosis and helps monitor treatment response and relapse",
-   "Prolonged therapy with azole antifungals is standard for most cases, with amphotericin-based therapy reserved for severe or disseminated disease and long consolidation required to prevent relapse"
+  "id": "paracoccidioidomycosis",
+  "name": "Paracoccidioidomycosis",
+  "aliases": [
+    "Paracoccidioides brasiliensis",
+    "Paracoccidioides lutzii",
+    "South American blastomycosis",
+    "Lutz-Splendore-Almeida disease",
+    "PCM"
   ],
-  "pathophysiology": "Paracoccidioidomycosis follows inhalation of airborne conidia of Paracoccidioides species from contaminated soil in endemic zones. At body temperature the fungus converts to its pathogenic multiply-budding yeast form and establishes a primary pulmonary focus, which may remain latent for years or decades before reactivating, often when cell-mediated immunity wanes. A vigorous granulomatous response tends to contain infection in the chronic adult form, whereas an inadequate Th1 response permits lymphohaematogenous dissemination in the acute juvenile form. Chronic pulmonary involvement produces progressive fibrosis, and mucosal seeding gives rise to the destructive oral and laryngeal lesions.",
-  "additionalDifferentials": [
-   "Pulmonary tuberculosis (frequently co-exists and mimics the chronic form)",
-   "Histoplasmosis and other endemic dimorphic mycoses",
-   "Oral or laryngeal squamous cell carcinoma",
-   "Leishmaniasis (mucocutaneous)",
-   "Lymphoma or other causes of generalised lymphadenopathy in the juvenile form",
-   "Sarcoidosis"
-  ],
-  "additionalInvestigations": [
-   "Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts",
-   "Fungal culture on appropriate media (slow-growing) with demonstration of dimorphism",
-   "Histopathology of biopsy material with special fungal stains showing the pilot's-wheel yeast",
-   "Serology by immunodiffusion or complement fixation for diagnosis and follow-up",
-   "Chest imaging to characterise the pulmonary infiltrates and fibrosis",
-   "Screening for co-existing tuberculosis and for HIV in atypical or severe presentations"
-  ],
-  "redFlags": [
-   "Progressive dyspnoea and respiratory compromise from advanced pulmonary fibrosis",
-   "Laryngeal or tracheal involvement threatening the airway",
-   "Disseminated juvenile-type disease with marrow failure or extensive lymphadenopathy",
-   "Central nervous system or adrenal involvement",
-   "Relapse or deterioration on treatment suggesting inadequate duration or immunosuppression"
-  ],
-  "prognosis": "With prolonged antifungal therapy most patients improve, but chronic pulmonary fibrosis and mucosal scarring can leave permanent disability; the acute juvenile and disseminated forms carry higher mortality, and relapse is common if treatment is stopped early.",
-  "pitfalls": [
-   "Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy",
-   "Stopping treatment when symptoms resolve rather than continuing prolonged consolidation, leading to relapse",
-   "Overlooking co-existing tuberculosis, which can worsen if only one condition is treated",
-   "Failing to recognise adrenal insufficiency arising from adrenal involvement",
-   "Not screening for underlying immunosuppression in unusually severe disease"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay",
-   "Intravenous amphotericin B for severe or disseminated disease, with step-down to an oral azole or a sulfonamide such as co-trimoxazole for the long maintenance phase",
-   "Serological monitoring by immunodiffusion or complement fixation to assess treatment response and detect relapse, continuing therapy until cure criteria are met",
-   "Nutritional and supportive care, particularly in the wasting acute juvenile form, with management of mucosal, laryngeal and respiratory involvement",
-   "Surveillance for and management of residual pulmonary fibrosis and mucosal scarring",
-   "Screening for co-existing tuberculosis and for HIV in severe or atypical presentations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paracoccidioidomycosis-pathway",
-   "title": "Paracoccidioidomycosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically affects male agricultural workers exposed to soil",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dyspnoea and respiratory compromise from advanced pulmonary fibrosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts, Fungal culture on appropriate media (slow-growing) with demonstration of dimorphism,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paracoccidioidomycosis."
-  }
- ],
- "tables": [
-  {
-   "id": "paracoccidioidomycosis-matrix",
-   "title": "Paracoccidioidomycosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically affects male agricultural workers exposed to soil",
+      "Caused by the thermally dimorphic fungi Paracoccidioides brasiliensis and P. lutzii, acquired by inhalation of conidia; the acute/subacute (juvenile) form and the chronic (adult) form behave very differently",
+      "The chronic adult form is dominated by pulmonary disease with mucocutaneous lesions of the mouth, gums and oropharynx, often with a characteristic mulberry-like haemorrhagic stippling",
+      "The acute juvenile form presents with prominent reticuloendothelial involvement: generalised lymphadenopathy, hepatosplenomegaly and marrow involvement, and is more aggressive",
+      "Microscopy of pus, sputum or tissue classically shows the multiple-budding 'pilot's wheel' or 'Mickey Mouse' yeast form, which is diagnostic",
+      "Serology (immunodiffusion, complement fixation) supports diagnosis and helps monitor treatment response and relapse",
+      "Prolonged therapy with azole antifungals is standard for most cases, with amphotericin-based therapy reserved for severe or disseminated disease and long consolidation required to prevent relapse"
     ],
-    [
-     "Key Investigations",
-     "Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paracoccidioidomycosis follows inhalation of airborne conidia of Paracoccidioides species from contaminated soil in endemic zones. At body temperature the fungus converts to its pathogenic multiply-budding yeast form and establishes a primary pulmonary focus, which may remain latent for years or decades before reactivating, often when cell-mediated immunity wanes. A vigorous granulomatous response tends to contain infection in the chronic adult form, whereas an inadequate Th1 response permits lymphohaematogenous dissemination in the acute juvenile form. Chronic pulmonary involvement produces progressive fibrosis, and mucosal seeding gives rise to the destructive oral and laryngeal lesions.",
+    "additionalDifferentials": [
+      "Pulmonary tuberculosis (frequently co-exists and mimics the chronic form)",
+      "Histoplasmosis and other endemic dimorphic mycoses",
+      "Oral or laryngeal squamous cell carcinoma",
+      "Leishmaniasis (mucocutaneous)",
+      "Lymphoma or other causes of generalised lymphadenopathy in the juvenile form",
+      "Sarcoidosis"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary tuberculosis (frequently co-exists and mimics the chronic form), Histoplasmosis and other endemic dimorphic mycoses,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts",
+      "Fungal culture on appropriate media (slow-growing) with demonstration of dimorphism",
+      "Histopathology of biopsy material with special fungal stains showing the pilot's-wheel yeast",
+      "Serology by immunodiffusion or complement fixation for diagnosis and follow-up",
+      "Chest imaging to characterise the pulmonary infiltrates and fibrosis",
+      "Screening for co-existing tuberculosis and for HIV in atypical or severe presentations"
     ],
-    [
-     "Management Strategy",
-     "Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dyspnoea and respiratory compromise from advanced pulmonary fibrosis",
+      "Laryngeal or tracheal involvement threatening the airway",
+      "Disseminated juvenile-type disease with marrow failure or extensive lymphadenopathy",
+      "Central nervous system or adrenal involvement",
+      "Relapse or deterioration on treatment suggesting inadequate duration or immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prolonged antifungal therapy most patients improve, but chronic pulmonary fibrosis and mucosal scarring can leave permanent disability; the acute juvenile and disseminated forms carry higher mortality, and relapse is common if treatment is stopped early.",
+    "pitfalls": [
+      "Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy",
+      "Stopping treatment when symptoms resolve rather than continuing prolonged consolidation, leading to relapse",
+      "Overlooking co-existing tuberculosis, which can worsen if only one condition is treated",
+      "Failing to recognise adrenal insufficiency arising from adrenal involvement",
+      "Not screening for underlying immunosuppression in unusually severe disease"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay",
+      "Intravenous amphotericin B for severe or disseminated disease, with step-down to an oral azole or a sulfonamide such as co-trimoxazole for the long maintenance phase",
+      "Serological monitoring by immunodiffusion or complement fixation to assess treatment response and detect relapse, continuing therapy until cure criteria are met",
+      "Nutritional and supportive care, particularly in the wasting acute juvenile form, with management of mucosal, laryngeal and respiratory involvement",
+      "Surveillance for and management of residual pulmonary fibrosis and mucosal scarring",
+      "Screening for co-existing tuberculosis and for HIV in severe or atypical presentations"
     ]
-   ],
-   "caption": "Overview comparison matrix for paracoccidioidomycosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paracoccidioidomycosis-real-image",
-   "title": "Paracoccidioidomycosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "paracoccidioidomycosis-pathway",
+      "title": "Paracoccidioidomycosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically affects male agricultural workers exposed to soil",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dyspnoea and respiratory compromise from advanced pulmonary fibrosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts, Fungal culture on appropriate media (slow-growing) with demonstration of dimorphism,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paracoccidioidomycosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paracoccidioidomycosis-matrix",
+      "title": "Paracoccidioidomycosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Endemic to humid rural areas of Central and South America, especially Brazil, Colombia, Venezuela and Argentina, and typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Direct microscopy of sputum, mucosal scrapings or aspirated pus with potassium hydroxide preparation for multiple-budding yeasts,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary tuberculosis (frequently co-exists and mimics the chronic form), Histoplasmosis and other endemic dimorphic mycoses,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prolonged antifungal therapy with an azole such as itraconazole for mild-to-moderate disease as the mainstay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the chronic form as tuberculosis or cancer and delaying antifungal therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paracoccidioidomycosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paracoccidioidomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "KOH microscopy of sputum or pus",
+          "cells": [
+            {
+              "text": "Multiple-budding yeasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "cells": [
+            {
+              "text": "Slow-growing dimorphic fungus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with fungal stains",
+          "cells": [
+            {
+              "text": "Pilot's-wheel yeast"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunodiffusion or complement fixation serology",
+          "cells": [
+            {
+              "text": "Treatment response and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis and HIV screening",
+          "cells": [
+            {
+              "text": "Co-existing disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paracoccidioidomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Frequently co-exists and mimics the chronic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral or laryngeal squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Mucosal lesions mimic; biopsy distinguishes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paracoccidioidomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Prolonged azole therapy for mild to moderate disease; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amphotericin B",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Intravenous for severe or disseminated disease, then step-down to an azole or co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological monitoring",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Continue therapy until cure criteria are met"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Nutrition and support, especially in the acute juvenile form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paracoccidioidomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Paracoccidioidomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough and oral or gum ulcers in a rural worker from an endemic region",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (respiratory compromise, airway involvement, marrow failure or CNS disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway review and IV amphotericin B for severe or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KOH of sputum or pus, fungal culture, histopathology, serology, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are multiple-budding yeasts seen, confirming paracoccidioidomycosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculosis, histoplasmosis, squamous carcinoma or leishmaniasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged itraconazole for mild to moderate disease as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV amphotericin B for severe disease, then step-down to azole or co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serological monitoring and continued therapy until cure criteria are met",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional and supportive care, especially in the acute juvenile form",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most improve with prolonged therapy; fibrosis can cause permanent disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

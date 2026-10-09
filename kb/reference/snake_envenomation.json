@@ -1,180 +1,438 @@
 {
- "id": "snake_envenomation",
- "name": "Snakebite envenomation",
- "aliases": [
-  "crotalid envenomation",
-  "elapid envenomation",
-  "ophidism",
-  "snake envenoming",
-  "snakebite envenomation",
-  "venomous snakebite",
-  "viper envenomation"
- ],
- "class": "non_infective",
- "system": "Toxicology / Envenomation",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while vipers cause local cytotoxicity, coagulopathy and haemorrhage",
-   "A dry bite (no envenomation) is common; observe for a meaningful period before excluding envenomation, as neurotoxic and coagulation effects may be delayed",
-   "Ptosis, ophthalmoplegia, bulbar weakness and progressive respiratory muscle failure are the hallmarks of neurotoxic envenomation and mandate close airway monitoring",
-   "Venom-induced consumption coagulopathy (VICC) can render blood incoagulable; a bedside 20-minute whole-blood clotting test is a useful field indicator of systemic viper envenomation",
-   "Progressive local swelling, blistering, bruising and tissue necrosis characterise cytotoxic bites and can cause compartment syndrome",
-   "Species-appropriate antivenom is the definitive treatment for systemic envenomation; timing, dose to effect and monitoring for anaphylactoid reactions are key principles",
-   "Pressure immobilisation is appropriate for neurotoxic elapid and sea-snake bites to delay systemic spread, but is NOT recommended for cytotoxic viper bites where it may worsen local tissue injury",
-   "Reassess repeatedly, as neurotoxicity and coagulopathy can evolve or recur and may require repeat antivenom dosing"
+  "id": "snake_envenomation",
+  "name": "Snakebite envenomation",
+  "aliases": [
+    "crotalid envenomation",
+    "elapid envenomation",
+    "ophidism",
+    "snake envenoming",
+    "snakebite envenomation",
+    "venomous snakebite",
+    "viper envenomation"
   ],
-  "pathophysiology": "Snake venoms are complex mixtures of enzymes and peptides that produce syndrome-specific injury. Pre-synaptic and post-synaptic neurotoxins block neuromuscular transmission to cause a descending flaccid paralysis affecting cranial, bulbar and respiratory muscles. Procoagulant and fibrinolytic components activate the clotting cascade and consume fibrinogen, producing venom-induced consumption coagulopathy with a risk of spontaneous haemorrhage, while haemorrhagins damage vascular endothelium. Cytotoxins, phospholipases and metalloproteinases cause local tissue oedema, blistering and necrosis, and some venoms produce myotoxicity with rhabdomyolysis or systemic capillary leak and shock.",
-  "additionalDifferentials": [
-   "Non-venomous or dry bite with anxiety and local trauma",
-   "Other envenomation (scorpion, spider) or arthropod bite",
-   "Anaphylaxis to an unrelated allergen",
-   "Cellulitis or necrotising soft-tissue infection",
-   "Primary neuromuscular disorder (myasthenic crisis, Guillain-Barre syndrome)",
-   "Sepsis or another cause of consumptive coagulopathy"
-  ],
-  "additionalInvestigations": [
-   "20-minute whole-blood clotting test at the bedside as a screen for coagulopathy",
-   "Full coagulation studies including prothrombin time, fibrinogen and D-dimer",
-   "Full blood count for thrombocytopenia and evolving anaemia",
-   "Creatine kinase, renal function and urinalysis for rhabdomyolysis and myoglobinuria",
-   "Serial spirometry or forced vital capacity to track neurotoxic respiratory decline",
-   "Electrocardiography and continuous monitoring in systemic envenomation"
-  ],
-  "redFlags": [
-   "Progressive bulbar or respiratory muscle weakness threatening the airway",
-   "Spontaneous systemic bleeding or an incoagulable 20-minute clotting test",
-   "Rapidly advancing limb swelling with features suggesting compartment syndrome",
-   "Shock, oliguria or acute kidney injury",
-   "Anaphylactoid reaction to antivenom during infusion"
-  ],
-  "prognosis": "With timely species-appropriate antivenom and supportive care including ventilation for neurotoxic paralysis, most patients recover fully. Delayed treatment increases the risk of death from respiratory failure or haemorrhage, and severe cytotoxic bites may leave permanent tissue loss or amputation.",
-  "pitfalls": [
-   "Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit",
-   "Delaying antivenom in evolving systemic envenomation while awaiting definitive species identification",
-   "Discharging early after an apparent dry bite before delayed neurotoxicity or coagulopathy has been excluded",
-   "Using pressure immobilisation for cytotoxic viper bites where it aggravates local necrosis",
-   "Failing to monitor for and treat recurrent coagulopathy or neurotoxicity after initial improvement"
-  ],
-  "references": [
-   "WHO Guidelines for the management of snakebite envenoming",
-   "Goldfrank's Toxicologic Emergencies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid reactions.",
-   "Airway protection and mechanical ventilation for neurotoxic descending paralysis and respiratory muscle failure.",
-   "Correct venom-induced consumption coagulopathy with antivenom and blood products such as fresh frozen plasma and cryoprecipitate for active haemorrhage.",
-   "Supportive wound care, tetanus prophylaxis and analgesia, while avoiding harmful measures such as tourniquets and incision.",
-   "Consider a trial of anticholinesterase, with neostigmine and an antimuscarinic agent, where post-synaptic neurotoxic envenomation is suspected.",
-   "Serial monitoring with whole-blood clotting test and coagulation studies, vital capacity, creatine kinase and renal function, with renal replacement therapy for acute kidney injury and fasciotomy for true compartment syndrome.",
-   "Escalate to critical care for ventilatory support and management of systemic complications."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "snake_envenomation-pathway",
-   "title": "Snakebite envenomation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while vipers cause local cytotoxicity, coagulopathy and haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive bulbar or respiratory muscle weakness threatening the airway",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 20-minute whole-blood clotting test at the bedside as a screen for coagulopathy, Full coagulation studies including prothrombin time, fibrinogen and D-dimer, Full blood count for thrombocytopenia and evolving anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid reactions."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of snakebite envenomation."
-  }
- ],
- "tables": [
-  {
-   "id": "snake_envenomation-matrix",
-   "title": "Snakebite envenomation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Envenomation",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while vipers cause local cytotoxicity, coagulopathy and haemorrhage",
+      "A dry bite (no envenomation) is common; observe for a meaningful period before excluding envenomation, as neurotoxic and coagulation effects may be delayed",
+      "Ptosis, ophthalmoplegia, bulbar weakness and progressive respiratory muscle failure are the hallmarks of neurotoxic envenomation and mandate close airway monitoring",
+      "Venom-induced consumption coagulopathy (VICC) can render blood incoagulable; a bedside 20-minute whole-blood clotting test is a useful field indicator of systemic viper envenomation",
+      "Progressive local swelling, blistering, bruising and tissue necrosis characterise cytotoxic bites and can cause compartment syndrome",
+      "Species-appropriate antivenom is the definitive treatment for systemic envenomation; timing, dose to effect and monitoring for anaphylactoid reactions are key principles",
+      "Pressure immobilisation is appropriate for neurotoxic elapid and sea-snake bites to delay systemic spread, but is NOT recommended for cytotoxic viper bites where it may worsen local tissue injury",
+      "Reassess repeatedly, as neurotoxicity and coagulopathy can evolve or recur and may require repeat antivenom dosing"
     ],
-    [
-     "Key Investigations",
-     "20-minute whole-blood clotting test at the bedside as a screen for coagulopathy, Full coagulation studies including prothrombin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Snake venoms are complex mixtures of enzymes and peptides that produce syndrome-specific injury. Pre-synaptic and post-synaptic neurotoxins block neuromuscular transmission to cause a descending flaccid paralysis affecting cranial, bulbar and respiratory muscles. Procoagulant and fibrinolytic components activate the clotting cascade and consume fibrinogen, producing venom-induced consumption coagulopathy with a risk of spontaneous haemorrhage, while haemorrhagins damage vascular endothelium. Cytotoxins, phospholipases and metalloproteinases cause local tissue oedema, blistering and necrosis, and some venoms produce myotoxicity with rhabdomyolysis or systemic capillary leak and shock.",
+    "additionalDifferentials": [
+      "Non-venomous or dry bite with anxiety and local trauma",
+      "Other envenomation (scorpion, spider) or arthropod bite",
+      "Anaphylaxis to an unrelated allergen",
+      "Cellulitis or necrotising soft-tissue infection",
+      "Primary neuromuscular disorder (myasthenic crisis, Guillain-Barre syndrome)",
+      "Sepsis or another cause of consumptive coagulopathy"
     ],
-    [
-     "Primary Differentials",
-     "Non-venomous or dry bite with anxiety and local trauma, Other envenomation (scorpion, spider) or arthropod bite, Anaphylaxis to",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "20-minute whole-blood clotting test at the bedside as a screen for coagulopathy",
+      "Full coagulation studies including prothrombin time, fibrinogen and D-dimer",
+      "Full blood count for thrombocytopenia and evolving anaemia",
+      "Creatine kinase, renal function and urinalysis for rhabdomyolysis and myoglobinuria",
+      "Serial spirometry or forced vital capacity to track neurotoxic respiratory decline",
+      "Electrocardiography and continuous monitoring in systemic envenomation"
     ],
-    [
-     "Management Strategy",
-     "Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive bulbar or respiratory muscle weakness threatening the airway",
+      "Spontaneous systemic bleeding or an incoagulable 20-minute clotting test",
+      "Rapidly advancing limb swelling with features suggesting compartment syndrome",
+      "Shock, oliguria or acute kidney injury",
+      "Anaphylactoid reaction to antivenom during infusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely species-appropriate antivenom and supportive care including ventilation for neurotoxic paralysis, most patients recover fully. Delayed treatment increases the risk of death from respiratory failure or haemorrhage, and severe cytotoxic bites may leave permanent tissue loss or amputation.",
+    "pitfalls": [
+      "Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit",
+      "Delaying antivenom in evolving systemic envenomation while awaiting definitive species identification",
+      "Discharging early after an apparent dry bite before delayed neurotoxicity or coagulopathy has been excluded",
+      "Using pressure immobilisation for cytotoxic viper bites where it aggravates local necrosis",
+      "Failing to monitor for and treat recurrent coagulopathy or neurotoxicity after initial improvement"
+    ],
+    "references": [
+      "WHO Guidelines for the management of snakebite envenoming",
+      "Goldfrank's Toxicologic Emergencies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid reactions.",
+      "Airway protection and mechanical ventilation for neurotoxic descending paralysis and respiratory muscle failure.",
+      "Correct venom-induced consumption coagulopathy with antivenom and blood products such as fresh frozen plasma and cryoprecipitate for active haemorrhage.",
+      "Supportive wound care, tetanus prophylaxis and analgesia, while avoiding harmful measures such as tourniquets and incision.",
+      "Consider a trial of anticholinesterase, with neostigmine and an antimuscarinic agent, where post-synaptic neurotoxic envenomation is suspected.",
+      "Serial monitoring with whole-blood clotting test and coagulation studies, vital capacity, creatine kinase and renal function, with renal replacement therapy for acute kidney injury and fasciotomy for true compartment syndrome.",
+      "Escalate to critical care for ventilatory support and management of systemic complications."
     ]
-   ],
-   "caption": "Overview comparison matrix for snakebite envenomation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "snake-envenomation-real-image",
-   "title": "Snakebite envenomation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "snake_envenomation-pathway",
+      "title": "Snakebite envenomation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while vipers cause local cytotoxicity, coagulopathy and haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive bulbar or respiratory muscle weakness threatening the airway",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 20-minute whole-blood clotting test at the bedside as a screen for coagulopathy, Full coagulation studies including prothrombin time, fibrinogen and D-dimer, Full blood count for thrombocytopenia and evolving anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid reactions."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of snakebite envenomation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "snake_envenomation-matrix",
+      "title": "Snakebite envenomation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Broad syndromes vary by family: elapids (cobras, kraits, mambas, taipans) tend to produce neurotoxic descending paralysis, while",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "20-minute whole-blood clotting test at the bedside as a screen for coagulopathy, Full coagulation studies including prothrombin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-venomous or dry bite with anxiety and local trauma, Other envenomation (scorpion, spider) or arthropod bite, Anaphylaxis to",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Administer species-appropriate antivenom titrated to clinical and laboratory effect, with readiness to manage anaphylactoid",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying arterial tourniquets or incising/sucking the wound, which increase local tissue damage without benefit",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for snakebite envenomation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "snake_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "20-minute whole-blood clotting test",
+          "cells": [
+            {
+              "text": "Incoagulable blood points to venom-induced coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies (PT, fibrinogen, D-dimer)",
+          "cells": [
+            {
+              "text": "Consumption coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Thrombocytopenia and evolving anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase, renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis and myoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial spirometry or forced vital capacity",
+          "cells": [
+            {
+              "text": "Neurotoxic respiratory decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and continuous monitoring",
+          "cells": [
+            {
+              "text": "Cardiac effects in systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "snake_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Species-appropriate antivenom",
+          "cells": [
+            {
+              "text": "Titrated to clinical and laboratory effect; manage anaphylactoid reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway protection and ventilation",
+          "cells": [
+            {
+              "text": "Neurotoxic descending paralysis and respiratory muscle failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of coagulopathy",
+          "cells": [
+            {
+              "text": "Antivenom and blood products such as fresh frozen plasma and cryoprecipitate for haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive wound care",
+          "cells": [
+            {
+              "text": "Tetanus prophylaxis and analgesia; avoid tourniquets and incision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinesterase trial",
+          "cells": [
+            {
+              "text": "Neostigmine with an antimuscarinic where post-synaptic neurotoxicity is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Clotting tests, vital capacity, creatine kinase and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "For acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "snake_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Snakebite envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Snake bite with systemic or local envenoming signs: suspected envenomation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulbar or respiratory weakness, bleeding, shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway protection and species-appropriate antivenom",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "20-minute clotting test; coagulation studies; FBC; CK and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the blood incoagulable or coagulopathic on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe for delayed effects; a dry bite is not discharged early",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Species-appropriate antivenom, titrated to effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway protection and ventilation for neurotoxic paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulopathy with antivenom and blood products",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive wound care; avoid tourniquets and incision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrent coagulopathy or neurotoxicity may need repeat antivenom",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

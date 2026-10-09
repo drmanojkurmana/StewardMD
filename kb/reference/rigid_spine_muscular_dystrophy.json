@@ -1,180 +1,431 @@
 {
- "id": "rigid_spine_muscular_dystrophy",
- "name": "Rigid spine muscular dystrophy type 1 (SELENON-related)",
- "aliases": [
-  "RSMD1",
-  "SEPN1-related myopathy",
-  "SELENON-related myopathy",
-  "Rigid spine syndrome"
- ],
- "class": "non_infective",
- "system": "Neuromuscular",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular and paediatric neurology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes multiminicore disease, congenital fibre-type disproportion and Mallory-body (desmin-related) myopathy.",
-   "The hallmark is early spinal rigidity — limitation of flexion of the cervical and thoraco-lumbar spine — together with early, progressive scoliosis.",
-   "Weakness is predominantly axial and affects the neck flexors, with relatively preserved limb strength, so independent ambulation is usually retained.",
-   "Respiratory insufficiency is characteristically severe and out of proportion to limb weakness, driven by diaphragmatic weakness and nocturnal hypoventilation, and is the leading cause of morbidity.",
-   "Serum creatine kinase is normal or only mildly raised.",
-   "Muscle biopsy shows multiminicores, type-1 fibre predominance and atrophy, or fibre-type disproportion depending on the phenotype.",
-   "Reduced muscle bulk with a slender build is common, insulin resistance has been reported, and mild facial weakness may occur.",
-   "Cognition and cardiac function are typically preserved."
+  "id": "rigid_spine_muscular_dystrophy",
+  "name": "Rigid spine muscular dystrophy type 1 (SELENON-related)",
+  "aliases": [
+    "RSMD1",
+    "SEPN1-related myopathy",
+    "SELENON-related myopathy",
+    "Rigid spine syndrome"
   ],
-  "pathophysiology": "SELENON encodes selenoprotein N, an endoplasmic-reticulum glycoprotein expressed most strongly in fetal and developing muscle. It contributes to redox regulation and calcium handling, interacting with the ryanodine receptor and the sarcoplasmic-reticulum calcium pump and protecting cells against oxidative stress. Loss of function disturbs calcium homeostasis and antioxidant defence within the sarcoplasmic reticulum, generating structural core lesions — regions depleted of oxidative enzyme activity and mitochondria — and impairing contractile performance. The result is a static or only slowly progressive myopathy with a striking predilection for the axial and respiratory muscles, which explains the disproportionate spinal rigidity, scoliosis and ventilatory failure.",
-  "additionalDifferentials": [
-   "RYR1-related congenital myopathy (multiminicore and central core disease)",
-   "Collagen VI-related myopathy (Ullrich and Bethlem), which also causes spinal rigidity and contractures",
-   "LAMA2-related and other congenital muscular dystrophies",
-   "Emery-Dreifuss muscular dystrophy (contractures and spinal rigidity)",
-   "Other congenital myopathies with prominent respiratory involvement",
-   "FHL1-related myopathies"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and overnight oximetry with capnography",
-   "SELENON sequencing or a congenital myopathy gene panel",
-   "Muscle biopsy with oxidative enzyme histochemistry (to show minicores) and fibre typing",
-   "Muscle MRI, where the characteristic selective involvement (for example sartorius and adductors) can guide testing",
-   "Spinal imaging and orthopaedic assessment for scoliosis",
-   "Echocardiography and electrocardiography, usually normal, to document cardiac sparing"
-  ],
-  "redFlags": [
-   "Nocturnal hypoventilation despite preserved walking — morning headache, daytime somnolence, disturbed sleep and recurrent chest infections",
-   "A falling forced vital capacity, particularly when measured supine, indicating diaphragmatic weakness",
-   "Rapidly progressive scoliosis compromising respiration",
-   "Weight loss or failure to thrive",
-   "Recurrent lower respiratory tract infections"
-  ],
-  "prognosis": "Muscle weakness is usually static or only slowly progressive and ambulation is typically preserved, but respiratory failure frequently develops and often requires non-invasive ventilatory support; the outlook depends chiefly on early recognition and management of hypoventilation and scoliosis.",
-  "pitfalls": [
-   "The cardinal error is failing to monitor respiration because limb strength and walking are preserved — hypoventilation is insidious and can be life-threatening.",
-   "Relying on the erect vital capacity alone and missing the diaphragmatic weakness revealed by the supine measurement.",
-   "Expecting a high creatine kinase — it is frequently normal, which does not exclude the diagnosis.",
-   "Confusing it with collagen VI myopathy or Emery-Dreifuss dystrophy, which also cause spinal rigidity and contractures.",
-   "Attributing poor weight gain solely to feeding difficulty rather than to the myopathy itself."
-  ],
-  "references": [
-   "Standard neuromuscular medicine references",
-   "Congenital myopathy consensus guidelines",
-   "Paediatric neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority",
-   "Respiratory surveillance using erect and supine vital capacity and overnight oximetry, with non-invasive nocturnal ventilation for hypoventilation",
-   "Proactive treatment of chest infections with airway-clearance techniques and mechanical cough assistance",
-   "Orthopaedic management of the progressive scoliosis, including spinal orthoses and spinal fusion surgery",
-   "Physiotherapy and stretching to maintain mobility, limit contractures and preserve ambulation",
-   "Nutritional support to avoid under- or over-nutrition that would compromise respiratory function",
-   "Careful anaesthetic planning given the disproportionate respiratory risk",
-   "Genetic counselling and family testing for this autosomal recessive SELENON disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rigid_spine_muscular_dystrophy-pathway",
-   "title": "Rigid spine muscular dystrophy type 1 (SELENON-related): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes multiminicore disease, congenital fibre-type disproportion and Mallory-body (desmin-related) myopathy.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nocturnal hypoventilation despite preserved walking - morning headache, daytime somnolence, disturbed sleep and recurrent chest infections",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and overnight oximetry with capnography, SELENON sequencing or a congenital myopathy gene panel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: The cardinal error is failing to monitor respiration because limb strength and walking are preserved - hypoventilation is insidious and can be life-threatening."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rigid spine muscular dystrophy type 1 (selenon-related)."
-  }
- ],
- "tables": [
-  {
-   "id": "rigid_spine_muscular_dystrophy-matrix",
-   "title": "Rigid spine muscular dystrophy type 1 (SELENON-related): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular and paediatric neurology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes multiminicore disease, congenital fibre-type disproportion and Mallory-body (desmin-related) myopathy.",
+      "The hallmark is early spinal rigidity — limitation of flexion of the cervical and thoraco-lumbar spine — together with early, progressive scoliosis.",
+      "Weakness is predominantly axial and affects the neck flexors, with relatively preserved limb strength, so independent ambulation is usually retained.",
+      "Respiratory insufficiency is characteristically severe and out of proportion to limb weakness, driven by diaphragmatic weakness and nocturnal hypoventilation, and is the leading cause of morbidity.",
+      "Serum creatine kinase is normal or only mildly raised.",
+      "Muscle biopsy shows multiminicores, type-1 fibre predominance and atrophy, or fibre-type disproportion depending on the phenotype.",
+      "Reduced muscle bulk with a slender build is common, insulin resistance has been reported, and mild facial weakness may occur.",
+      "Cognition and cardiac function are typically preserved."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SELENON encodes selenoprotein N, an endoplasmic-reticulum glycoprotein expressed most strongly in fetal and developing muscle. It contributes to redox regulation and calcium handling, interacting with the ryanodine receptor and the sarcoplasmic-reticulum calcium pump and protecting cells against oxidative stress. Loss of function disturbs calcium homeostasis and antioxidant defence within the sarcoplasmic reticulum, generating structural core lesions — regions depleted of oxidative enzyme activity and mitochondria — and impairing contractile performance. The result is a static or only slowly progressive myopathy with a striking predilection for the axial and respiratory muscles, which explains the disproportionate spinal rigidity, scoliosis and ventilatory failure.",
+    "additionalDifferentials": [
+      "RYR1-related congenital myopathy (multiminicore and central core disease)",
+      "Collagen VI-related myopathy (Ullrich and Bethlem), which also causes spinal rigidity and contractures",
+      "LAMA2-related and other congenital muscular dystrophies",
+      "Emery-Dreifuss muscular dystrophy (contractures and spinal rigidity)",
+      "Other congenital myopathies with prominent respiratory involvement",
+      "FHL1-related myopathies"
     ],
-    [
-     "Primary Differentials",
-     "RYR1-related congenital myopathy (multiminicore and central core disease), Collagen VI-related myopathy (Ullrich and Bethlem),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and overnight oximetry with capnography",
+      "SELENON sequencing or a congenital myopathy gene panel",
+      "Muscle biopsy with oxidative enzyme histochemistry (to show minicores) and fibre typing",
+      "Muscle MRI, where the characteristic selective involvement (for example sartorius and adductors) can guide testing",
+      "Spinal imaging and orthopaedic assessment for scoliosis",
+      "Echocardiography and electrocardiography, usually normal, to document cardiac sparing"
     ],
-    [
-     "Management Strategy",
-     "Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority",
-     "Core treatment modality"
+    "redFlags": [
+      "Nocturnal hypoventilation despite preserved walking — morning headache, daytime somnolence, disturbed sleep and recurrent chest infections",
+      "A falling forced vital capacity, particularly when measured supine, indicating diaphragmatic weakness",
+      "Rapidly progressive scoliosis compromising respiration",
+      "Weight loss or failure to thrive",
+      "Recurrent lower respiratory tract infections"
     ],
-    [
-     "Clinical Pitfall",
-     "The cardinal error is failing to monitor respiration because limb strength and walking are preserved - hypoventilation is",
-     "Prevent diagnostic or management error"
+    "prognosis": "Muscle weakness is usually static or only slowly progressive and ambulation is typically preserved, but respiratory failure frequently develops and often requires non-invasive ventilatory support; the outlook depends chiefly on early recognition and management of hypoventilation and scoliosis.",
+    "pitfalls": [
+      "The cardinal error is failing to monitor respiration because limb strength and walking are preserved — hypoventilation is insidious and can be life-threatening.",
+      "Relying on the erect vital capacity alone and missing the diaphragmatic weakness revealed by the supine measurement.",
+      "Expecting a high creatine kinase — it is frequently normal, which does not exclude the diagnosis.",
+      "Confusing it with collagen VI myopathy or Emery-Dreifuss dystrophy, which also cause spinal rigidity and contractures.",
+      "Attributing poor weight gain solely to feeding difficulty rather than to the myopathy itself."
+    ],
+    "references": [
+      "Standard neuromuscular medicine references",
+      "Congenital myopathy consensus guidelines",
+      "Paediatric neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority",
+      "Respiratory surveillance using erect and supine vital capacity and overnight oximetry, with non-invasive nocturnal ventilation for hypoventilation",
+      "Proactive treatment of chest infections with airway-clearance techniques and mechanical cough assistance",
+      "Orthopaedic management of the progressive scoliosis, including spinal orthoses and spinal fusion surgery",
+      "Physiotherapy and stretching to maintain mobility, limit contractures and preserve ambulation",
+      "Nutritional support to avoid under- or over-nutrition that would compromise respiratory function",
+      "Careful anaesthetic planning given the disproportionate respiratory risk",
+      "Genetic counselling and family testing for this autosomal recessive SELENON disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for rigid spine muscular dystrophy type 1 (selenon-related)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rigid-spine-muscular-dystrophy-real-image",
-   "title": "Rigid spine muscular dystrophy type 1 (SELENON-related): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "rigid_spine_muscular_dystrophy-pathway",
+      "title": "Rigid spine muscular dystrophy type 1 (SELENON-related): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes multiminicore disease, congenital fibre-type disproportion and Mallory-body (desmin-related) myopathy.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nocturnal hypoventilation despite preserved walking - morning headache, daytime somnolence, disturbed sleep and recurrent chest infections",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and overnight oximetry with capnography, SELENON sequencing or a congenital myopathy gene panel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: The cardinal error is failing to monitor respiration because limb strength and walking are preserved - hypoventilation is insidious and can be life-threatening."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rigid spine muscular dystrophy type 1 (selenon-related)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rigid_spine_muscular_dystrophy-matrix",
+      "title": "Rigid spine muscular dystrophy type 1 (SELENON-related): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic SELENON variants (formerly SEPN1); it lies within the SELENON-related myopathy spectrum that also includes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Respiratory assessment with erect and supine forced vital capacity to detect diaphragmatic weakness, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "RYR1-related congenital myopathy (multiminicore and central core disease), Collagen VI-related myopathy (Ullrich and Bethlem),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multidisciplinary supportive care as no therapy corrects the SELENON defect, with respiratory management as the central priority",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "The cardinal error is failing to monitor respiration because limb strength and walking are preserved - hypoventilation is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rigid spine muscular dystrophy type 1 (selenon-related)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular and paediatric neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rigid_spine_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle damage marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect and supine forced vital capacity; overnight oximetry",
+          "cells": [
+            {
+              "text": "Diaphragmatic weakness and nocturnal hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SELENON sequencing or congenital myopathy panel",
+          "cells": [
+            {
+              "text": "Causative SELENON variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with oxidative enzyme histochemistry",
+          "cells": [
+            {
+              "text": "Minicores and fibre typing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rigid_spine_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "RYR1-related congenital myopathy",
+          "cells": [
+            {
+              "text": "Multiminicore and central core disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagen VI-related myopathy",
+          "cells": [
+            {
+              "text": "Also causes spinal rigidity and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emery-Dreifuss muscular dystrophy",
+          "cells": [
+            {
+              "text": "Contractures and spinal rigidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rigid_spine_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "No therapy corrects the SELENON defect; respiratory management is the central priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Erect and supine vital capacity, overnight oximetry; non-invasive nocturnal ventilation for hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest infections",
+          "cells": [
+            {
+              "text": "Airway-clearance techniques and mechanical cough assistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scoliosis",
+          "cells": [
+            {
+              "text": "Spinal orthoses and spinal fusion surgery for progressive scoliosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rigid_spine_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Rigid spine muscular dystrophy type 1 (SELENON-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with spinal rigidity, contractures and weakness; nocturnal hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling supine FVC, rapid scoliosis, weight loss, chest infections)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for hypoventilation or falling vital capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum CK, erect and supine FVC, overnight oximetry, SELENON or myopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are SELENON variants confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider RYR1, collagen VI or Emery-Dreifuss disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary care with respiratory management as the central priority",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial vital capacity and oximetry; non-invasive nocturnal ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway-clearance techniques and mechanical cough assistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spinal orthoses or fusion for progressive scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No therapy corrects the SELENON defect; care is supportive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

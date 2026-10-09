@@ -1,175 +1,471 @@
 {
- "id": "hirschsprung_disease",
- "name": "Hirschsprung Disease",
- "aliases": [
-  "congenital aganglionic megacolon",
-  "aganglionosis",
-  "Hirschsprung's disease"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and functional obstruction.",
-   "Most neonates present with delayed passage of meconium beyond 48 hours, abdominal distension, and bilious vomiting.",
-   "The aganglionic segment extends proximally from the anus for a variable distance; short-segment disease confined to the rectosigmoid is most common and it is more frequent in boys.",
-   "Associated with Down syndrome and other congenital conditions, and there can be a positive family history.",
-   "Contrast enema may show a transition zone between the narrow distal aganglionic bowel and dilated proximal colon, but a normal study does not exclude the diagnosis.",
-   "Anorectal manometry shows failure of the internal anal sphincter to relax with rectal distension.",
-   "Rectal suction biopsy demonstrating absent ganglion cells with hypertrophied nerve trunks is the diagnostic gold standard.",
-   "Definitive treatment is surgical resection of the aganglionic segment with a pull-through procedure connecting normally innervated bowel to the anus.",
-   "Hirschsprung-associated enterocolitis is the most serious complication and can present with fever, distension, foul explosive diarrhoea, and sepsis."
+  "id": "hirschsprung_disease",
+  "name": "Hirschsprung Disease",
+  "aliases": [
+    "congenital aganglionic megacolon",
+    "aganglionosis",
+    "Hirschsprung's disease"
   ],
-  "pathophysiology": "Failure of the craniocaudal migration of neural crest-derived enteric ganglion cells leaves the distal bowel without submucosal (Meissner) and myenteric (Auerbach) plexuses. The aganglionic segment cannot relax and remains tonically contracted, while abnormal cholinergic and other innervation adds to the dysmotility. This creates a functional obstruction with proximal dilatation (megacolon) and predisposes to stasis, bacterial overgrowth, and enterocolitis.",
-  "additionalDifferentials": [
-   "Meconium ileus (often cystic fibrosis)",
-   "Meconium plug syndrome / small left colon syndrome",
-   "Anorectal malformation",
-   "Intestinal atresia or stenosis",
-   "Functional constipation (in older children)",
-   "Hypothyroidism-related constipation"
-  ],
-  "additionalInvestigations": [
-   "Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin)",
-   "Contrast (unprepped) enema to identify a transition zone",
-   "Anorectal manometry in older children",
-   "Abdominal radiograph showing distal obstruction with dilated proximal bowel",
-   "Genetic and syndrome evaluation where relevant"
-  ],
-  "redFlags": [
-   "Failure to pass meconium within the first 48 hours of life",
-   "Bilious vomiting with abdominal distension",
-   "Fever, explosive foul diarrhoea, and distension suggesting enterocolitis",
-   "Signs of sepsis, dehydration, or shock",
-   "Toxic megacolon"
-  ],
-  "prognosis": "After definitive pull-through surgery most children do well, though some have ongoing issues such as constipation, soiling, or recurrent enterocolitis; outcome is worse with long-segment or total colonic aganglionosis and with severe enterocolitis.",
-  "pitfalls": [
-   "Attributing neonatal obstruction solely to functional constipation and missing aganglionosis",
-   "Relying on a normal contrast enema to exclude the diagnosis",
-   "Overlooking Hirschsprung-associated enterocolitis, which can be rapidly fatal",
-   "Taking a biopsy too close to the anal verge where ganglion cells are normally sparse",
-   "Missing associated syndromes such as trisomy 21"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)",
-   "Preoperative decompression with rectal irrigations and washouts, occasionally a levelling colostomy, to relieve the functional obstruction",
-   "Prompt recognition and treatment of Hirschsprung-associated enterocolitis with washouts and antibiotics",
-   "Postoperative bowel management for persistent constipation or soiling using laxatives, enemas and routine washouts",
-   "Internal-sphincter botulinum toxin for postoperative obstructive symptoms from a non-relaxing sphincter",
-   "Genetic evaluation and counselling given RET associations and the link with Down syndrome",
-   "Multidisciplinary paediatric surgical, continence and nutritional follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hirschsprung_disease-pathway",
-   "title": "Hirschsprung Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and functional obstruction.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to pass meconium within the first 48 hours of life",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin), Contrast (unprepped) enema to identify a transition zone, Anorectal manometry in older children"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing neonatal obstruction solely to functional constipation and missing aganglionosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hirschsprung disease."
-  }
- ],
- "tables": [
-  {
-   "id": "hirschsprung_disease-matrix",
-   "title": "Hirschsprung Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and functional obstruction.",
+      "Most neonates present with delayed passage of meconium beyond 48 hours, abdominal distension, and bilious vomiting.",
+      "The aganglionic segment extends proximally from the anus for a variable distance; short-segment disease confined to the rectosigmoid is most common and it is more frequent in boys.",
+      "Associated with Down syndrome and other congenital conditions, and there can be a positive family history.",
+      "Contrast enema may show a transition zone between the narrow distal aganglionic bowel and dilated proximal colon, but a normal study does not exclude the diagnosis.",
+      "Anorectal manometry shows failure of the internal anal sphincter to relax with rectal distension.",
+      "Rectal suction biopsy demonstrating absent ganglion cells with hypertrophied nerve trunks is the diagnostic gold standard.",
+      "Definitive treatment is surgical resection of the aganglionic segment with a pull-through procedure connecting normally innervated bowel to the anus.",
+      "Hirschsprung-associated enterocolitis is the most serious complication and can present with fever, distension, foul explosive diarrhoea, and sepsis."
     ],
-    [
-     "Key Investigations",
-     "Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin), Contrast (unprepped)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Failure of the craniocaudal migration of neural crest-derived enteric ganglion cells leaves the distal bowel without submucosal (Meissner) and myenteric (Auerbach) plexuses. The aganglionic segment cannot relax and remains tonically contracted, while abnormal cholinergic and other innervation adds to the dysmotility. This creates a functional obstruction with proximal dilatation (megacolon) and predisposes to stasis, bacterial overgrowth, and enterocolitis.",
+    "additionalDifferentials": [
+      "Meconium ileus (often cystic fibrosis)",
+      "Meconium plug syndrome / small left colon syndrome",
+      "Anorectal malformation",
+      "Intestinal atresia or stenosis",
+      "Functional constipation (in older children)",
+      "Hypothyroidism-related constipation"
     ],
-    [
-     "Primary Differentials",
-     "Meconium ileus (often cystic fibrosis), Meconium plug syndrome / small left colon syndrome, Anorectal malformation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin)",
+      "Contrast (unprepped) enema to identify a transition zone",
+      "Anorectal manometry in older children",
+      "Abdominal radiograph showing distal obstruction with dilated proximal bowel",
+      "Genetic and syndrome evaluation where relevant"
     ],
-    [
-     "Management Strategy",
-     "Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to pass meconium within the first 48 hours of life",
+      "Bilious vomiting with abdominal distension",
+      "Fever, explosive foul diarrhoea, and distension suggesting enterocolitis",
+      "Signs of sepsis, dehydration, or shock",
+      "Toxic megacolon"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing neonatal obstruction solely to functional constipation and missing aganglionosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "After definitive pull-through surgery most children do well, though some have ongoing issues such as constipation, soiling, or recurrent enterocolitis; outcome is worse with long-segment or total colonic aganglionosis and with severe enterocolitis.",
+    "pitfalls": [
+      "Attributing neonatal obstruction solely to functional constipation and missing aganglionosis",
+      "Relying on a normal contrast enema to exclude the diagnosis",
+      "Overlooking Hirschsprung-associated enterocolitis, which can be rapidly fatal",
+      "Taking a biopsy too close to the anal verge where ganglion cells are normally sparse",
+      "Missing associated syndromes such as trisomy 21"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)",
+      "Preoperative decompression with rectal irrigations and washouts, occasionally a levelling colostomy, to relieve the functional obstruction",
+      "Prompt recognition and treatment of Hirschsprung-associated enterocolitis with washouts and antibiotics",
+      "Postoperative bowel management for persistent constipation or soiling using laxatives, enemas and routine washouts",
+      "Internal-sphincter botulinum toxin for postoperative obstructive symptoms from a non-relaxing sphincter",
+      "Genetic evaluation and counselling given RET associations and the link with Down syndrome",
+      "Multidisciplinary paediatric surgical, continence and nutritional follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for hirschsprung disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hirschsprung-disease-real-image",
-   "title": "Hirschsprung Disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hirschsprung_disease-pathway",
+      "title": "Hirschsprung Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and functional obstruction.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to pass meconium within the first 48 hours of life",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin), Contrast (unprepped) enema to identify a transition zone, Anorectal manometry in older children"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing neonatal obstruction solely to functional constipation and missing aganglionosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hirschsprung disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hirschsprung_disease-matrix",
+      "title": "Hirschsprung Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by absence of ganglion cells in the distal bowel, producing a tonically contracted, non-relaxing aganglionic segment and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Rectal suction biopsy for absence of ganglion cells (with acetylcholinesterase staining or calretinin), Contrast (unprepped)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meconium ileus (often cystic fibrosis), Meconium plug syndrome / small left colon syndrome, Anorectal malformation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive surgical pull-through resecting the aganglionic segment (Swenson, Soave or Duhamel procedure)",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing neonatal obstruction solely to functional constipation and missing aganglionosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hirschsprung disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hirschsprung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal suction biopsy",
+          "cells": [
+            {
+              "text": "Absent ganglion cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast enema, unprepped",
+          "cells": [
+            {
+              "text": "Transition zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry in older children",
+          "cells": [
+            {
+              "text": "Rectoanal reflex pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Distal obstruction with dilated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and syndrome evaluation",
+          "cells": [
+            {
+              "text": "Associated syndromes where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hirschsprung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meconium ileus",
+          "cells": [
+            {
+              "text": "Often associated with cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meconium plug or small left colon syndrome",
+          "cells": [
+            {
+              "text": "Meconium plug without aganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional constipation",
+          "cells": [
+            {
+              "text": "Older children, without aganglionosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal malformation",
+          "cells": [
+            {
+              "text": "Anatomical anorectal defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hirschsprung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive pull-through",
+          "cells": [
+            {
+              "text": "Resects the aganglionic segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative decompression",
+          "cells": [
+            {
+              "text": "Rectal irrigations and washouts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterocolitis",
+          "cells": [
+            {
+              "text": "Prompt recognition and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative bowel management",
+          "cells": [
+            {
+              "text": "Persistent constipation or incontinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Internal sphincter injection for postoperative obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RET association and family risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgery, continence and nutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hirschsprung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hirschsprung Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with no meconium within 48 hours, or distension and bilious vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, explosive diarrhoea, sepsis, shock or toxic megacolon?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and decompression for enterocolitis or toxic megacolon",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph; contrast enema; rectal suction biopsy; genetic evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are ganglion cells absent on rectal suction biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meconium ileus, meconium plug, anorectal malformation or functional constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Definitive pull-through resecting the aganglionic bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative decompression with rectal irrigations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vigilant prevention and treatment of enterocolitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Botulinum toxin to the internal sphincter for postoperative obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bowel function restored after pull-through; continence and nutrition follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

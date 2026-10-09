@@ -295,25 +295,491 @@
       "caption": "Diagnostic and clinical overview matrix for spontaneous bacterial peritonitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "sbp-real-image",
-      "title": "Spontaneous Bacterial Peritonitis: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Spontaneous Bacterial Peritonitis, 2025",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/spontaneous-bacterial-peritonitis-sbp",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "EMCrit IBCC, Spontaneous Bacterial Peritonitis",
+      "url": "https://emcrit.org/ibcc/sbp/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "SBP-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing spontaneous bacterial peritonitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "Ascitic neutrophil (PMN) count",
+          "unit": "cells/microL",
+          "cells": [
+            {
+              "text": ">=250",
+              "op": ">=",
+              "value": 250
+            },
+            {
+              "text": "{{hy:Diagnostic of SBP whether or not culture grows an organism}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "Ascitic fluid culture",
+          "cells": [
+            {
+              "text": "Inoculate blood culture bottles at the bedside"
+            },
+            {
+              "text": "Raises yield; cultures are often negative because organism load is low"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "Organisms on culture",
+          "cells": [
+            {
+              "text": "Usually a single organism"
+            },
+            {
+              "text": "Mixed flora suggests perforated viscus or a contaminated sample"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacterascites",
+          "unit": "cells/microL",
+          "cells": [
+            {
+              "text": "One organism grows with PMN <250",
+              "op": "<",
+              "value": 250
+            },
+            {
+              "text": "Antibiotics not advised; repeat paracentesis to look for progression"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Send with ascitic sample"
+            },
+            {
+              "text": "Indicated in every suspected case"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical features",
+          "cells": [
+            {
+              "text": "Fever, abdominal discomfort, encephalopathy, worsening liver function, unexplained deterioration"
+            },
+            {
+              "text": "Peritoneal signs may be blunted by ascites; tap every cirrhotic with ascites who deteriorates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ascitic total protein (secondary peritonitis)",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">1",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "One of three Runyon criteria; 2 of 3 suggest secondary peritonitis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ascitic glucose (secondary peritonitis)",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<50",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "One of three Runyon criteria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ascitic LDH (secondary peritonitis)",
+          "cells": [
+            {
+              "text": "Above serum upper limit of normal"
+            },
+            {
+              "text": "One of three Runyon criteria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PMN fall on repeat tap at 48 hours",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Less than 25%",
+              "op": "<",
+              "value": 25
+            },
+            {
+              "text": "Likely treatment failure; image for secondary peritonitis and broaden cover"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison phrases the threshold as at least 250/microL; Merck says more than 250 cells/microL. Runyon criteria come from the EMCrit summary."
+    },
+    {
+      "id": "SBP-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic spontaneous bacterial peritonitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary bacterial peritonitis (perforation or abscess)",
+          "cells": [
+            {
+              "text": "Localised pain or frank peritonism, multiple organisms, loculated fluid, failure to respond"
+            },
+            {
+              "text": "{{hy:CT abdomen and pelvis}}; Runyon criteria on ascitic fluid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute cholecystitis",
+          "cells": [
+            {
+              "text": "Intra-abdominal organ inflammation causing secondary peritonitis"
+            },
+            {
+              "text": "Right upper quadrant ultrasound"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Monomicrobial bacterascites",
+          "cells": [
+            {
+              "text": "Positive culture with PMN under 250 cells/microL"
+            },
+            {
+              "text": "Repeat paracentesis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Contaminated ascitic sample",
+          "cells": [
+            {
+              "text": "Mixed flora without neutrocytic fluid"
+            },
+            {
+              "text": "Repeat paracentesis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatic encephalopathy from another trigger",
+          "cells": [
+            {
+              "text": "Altered mental status in cirrhosis; SBP is one of the triggers"
+            },
+            {
+              "text": "Diagnostic paracentesis with PMN count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The main alternative to exclude is secondary peritonitis, because it needs surgery or drainage rather than antibiotics alone."
+    },
+    {
+      "id": "SBP-treatment",
+      "kind": "treatment",
+      "title": "Treatment of spontaneous bacterial peritonitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Third-generation cephalosporin",
+          "cells": [
+            {
+              "text": "{{hy:Community-acquired SBP, low risk of resistant organisms}}"
+            },
+            {
+              "text": "Ceftriaxone 2 g IV daily, or cefotaxime; narrow to culture results"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "All treated cases"
+            },
+            {
+              "text": "5 to 7 days, and until ascitic PMN falls below 250 cells/microL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Broader cover",
+          "cells": [
+            {
+              "text": "Nosocomial SBP or septic shock"
+            },
+            {
+              "text": "Piperacillin-tazobactam or a carbapenem by local antibiogram; Merck adds daptomycin or meropenem with piperacillin-tazobactam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV albumin",
+          "cells": [
+            {
+              "text": "All patients with SBP to cut hepatorenal syndrome risk"
+            },
+            {
+              "text": "1.5 g/kg on day 1, then 1 g/kg on day 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hold nonselective beta blockers",
+          "cells": [
+            {
+              "text": "Mean arterial pressure under 65 mm Hg"
+            },
+            {
+              "text": "Restart after SBP clears"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop nephrotoxins and ACE inhibitors or ARBs",
+          "cells": [
+            {
+              "text": "During treatment"
+            },
+            {
+              "text": "Protect renal function"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "After an episode; recurrence up to 70% within a year"
+            },
+            {
+              "text": "Quinolone such as norfloxacin or ciprofloxacin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Second albumin dose timing differs: Merck says day 3, EMCrit says at 48 hours. Antibiotic duration: Merck says at least 5 days, EMCrit 5 to 7 days."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "SBP-dx-mgmt",
+      "title": "Diagnosis and management of spontaneous bacterial peritonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cirrhosis with ascites and fever, pain, encephalopathy or decline",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Diagnostic paracentesis: PMN count, culture in blood bottles, blood cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Ascitic PMN 250 cells/microL or more?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Culture positive?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Bacterascites: no antibiotics; repeat paracentesis",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "SBP unlikely; look for other causes",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Features of secondary peritonitis (Runyon 2 of 3, mixed flora, local signs)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "CT abdomen and pelvis; surgical review",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV ceftriaxone or cefotaxime, broader if nosocomial or shock",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IV albumin 1.5 g/kg day 1 and 1 g/kg day 3",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "PMN fall at least 25% on repeat tap at 48 hours?",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete 5 to 7 days; start secondary prophylaxis",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Treatment failure: image for secondary peritonitis, escalate antibiotics",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

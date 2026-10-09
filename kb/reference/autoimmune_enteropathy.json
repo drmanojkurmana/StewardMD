@@ -1,171 +1,459 @@
 {
- "id": "autoimmune_enteropathy",
- "name": "Autoimmune enteropathy",
- "aliases": [
-  "AIE",
-  "autoimmune enteropathy with anti-enterocyte antibodies"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a gluten-free diet",
-   "Classically described in infants but increasingly recognised in adults, often with other autoimmune conditions",
-   "Anti-enterocyte and anti-goblet-cell antibodies support the diagnosis, although they are not universally present",
-   "Small-bowel biopsy shows villous atrophy with a relative paucity of intraepithelial lymphocytes, helping distinguish it from coeliac disease",
-   "May occur as part of monogenic syndromes such as IPEX in children or as a sporadic autoimmune disorder in adults",
-   "Treatment relies on immunosuppression with corticosteroids and corticosteroid-sparing immunosuppressants alongside nutritional support",
-   "Coeliac serology is negative and there is no response to gluten withdrawal, which is a key differentiating point"
+  "id": "autoimmune_enteropathy",
+  "name": "Autoimmune enteropathy",
+  "aliases": [
+    "AIE",
+    "autoimmune enteropathy with anti-enterocyte antibodies"
   ],
-  "pathophysiology": "Autoimmune enteropathy is a disorder of immune tolerance in which the intestinal epithelium is targeted by an aberrant immune response, producing severe villous atrophy and malabsorption. Circulating anti-enterocyte and anti-goblet-cell antibodies may be detectable, and in some patients, particularly children with the IPEX syndrome, there is a defined genetic defect in regulatory T-cell function due to FOXP3 mutation. The resulting immune-mediated destruction of absorptive epithelium leads to intractable diarrhoea; because the injury is antibody and cell-mediated rather than driven by luminal antigens, it does not respond to dietary elimination.",
-  "additionalDifferentials": [
-   "Coeliac disease and refractory coeliac disease",
-   "Common variable immunodeficiency enteropathy",
-   "Inflammatory bowel disease",
-   "Chronic infection including giardiasis and cytomegalovirus enteritis",
-   "Drug-induced enteropathy",
-   "Microvillous inclusion disease and other congenital enteropathies in infants"
-  ],
-  "additionalInvestigations": [
-   "Anti-enterocyte and anti-goblet-cell antibody testing",
-   "Small-bowel biopsy assessing villous architecture and intraepithelial lymphocyte density",
-   "Coeliac serology and assessment of response to gluten withdrawal",
-   "Immunoglobulin levels and immune workup for associated immunodeficiency",
-   "Genetic testing for IPEX and related syndromes in appropriate patients"
-  ],
-  "redFlags": [
-   "Intractable high-volume diarrhoea causing dehydration and electrolyte collapse",
-   "Severe malnutrition requiring parenteral nutritional support",
-   "Multi-organ autoimmune features suggesting a systemic syndrome such as IPEX",
-   "Failure to respond to gluten withdrawal in a patient assumed to have coeliac disease"
-  ],
-  "prognosis": "The condition is often severe and difficult to control, particularly in infants, and may require prolonged immunosuppression and nutritional support; prognosis depends on the underlying cause and response to immunosuppressive therapy.",
-  "pitfalls": [
-   "Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet",
-   "Relying on antibody tests alone, since they can be negative",
-   "Failing to investigate for an associated immunodeficiency or genetic syndrome",
-   "Underestimating nutritional needs and delaying parenteral support"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin inhibitors (tacrolimus), azathioprine or sirolimus",
-   "Nutritional support including parenteral nutrition for severe malabsorption, with correction of fluid and electrolyte losses",
-   "In IPEX and related monogenic disease, consider haematopoietic stem cell transplantation as definitive treatment",
-   "Escalate immunosuppression or add a biologic for disease refractory to first-line therapy",
-   "Monitoring of growth and nutrition, and vigilance for infection and adverse effects of long-term immunosuppression",
-   "Genetic testing for FOXP3/IPEX and related syndromes with genetic counselling in affected children",
-   "Multidisciplinary gastroenterology, clinical immunology and dietetic care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autoimmune_enteropathy-pathway",
-   "title": "Autoimmune enteropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a gluten-free diet",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intractable high-volume diarrhoea causing dehydration and electrolyte collapse",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anti-enterocyte and anti-goblet-cell antibody testing, Small-bowel biopsy assessing villous architecture and intraepithelial lymphocyte density, Coeliac serology and assessment of response to gluten withdrawal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin inhibitors (tacrolimus), azathioprine or sirolimus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autoimmune enteropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "autoimmune_enteropathy-matrix",
-   "title": "Autoimmune enteropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a gluten-free diet",
+      "Classically described in infants but increasingly recognised in adults, often with other autoimmune conditions",
+      "Anti-enterocyte and anti-goblet-cell antibodies support the diagnosis, although they are not universally present",
+      "Small-bowel biopsy shows villous atrophy with a relative paucity of intraepithelial lymphocytes, helping distinguish it from coeliac disease",
+      "May occur as part of monogenic syndromes such as IPEX in children or as a sporadic autoimmune disorder in adults",
+      "Treatment relies on immunosuppression with corticosteroids and corticosteroid-sparing immunosuppressants alongside nutritional support",
+      "Coeliac serology is negative and there is no response to gluten withdrawal, which is a key differentiating point"
     ],
-    [
-     "Key Investigations",
-     "Anti-enterocyte and anti-goblet-cell antibody testing, Small-bowel biopsy assessing villous architecture and intraepithelial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Autoimmune enteropathy is a disorder of immune tolerance in which the intestinal epithelium is targeted by an aberrant immune response, producing severe villous atrophy and malabsorption. Circulating anti-enterocyte and anti-goblet-cell antibodies may be detectable, and in some patients, particularly children with the IPEX syndrome, there is a defined genetic defect in regulatory T-cell function due to FOXP3 mutation. The resulting immune-mediated destruction of absorptive epithelium leads to intractable diarrhoea; because the injury is antibody and cell-mediated rather than driven by luminal antigens, it does not respond to dietary elimination.",
+    "additionalDifferentials": [
+      "Coeliac disease and refractory coeliac disease",
+      "Common variable immunodeficiency enteropathy",
+      "Inflammatory bowel disease",
+      "Chronic infection including giardiasis and cytomegalovirus enteritis",
+      "Drug-induced enteropathy",
+      "Microvillous inclusion disease and other congenital enteropathies in infants"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease and refractory coeliac disease, Common variable immunodeficiency enteropathy, Inflammatory bowel disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anti-enterocyte and anti-goblet-cell antibody testing",
+      "Small-bowel biopsy assessing villous architecture and intraepithelial lymphocyte density",
+      "Coeliac serology and assessment of response to gluten withdrawal",
+      "Immunoglobulin levels and immune workup for associated immunodeficiency",
+      "Genetic testing for IPEX and related syndromes in appropriate patients"
     ],
-    [
-     "Management Strategy",
-     "Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin",
-     "Core treatment modality"
+    "redFlags": [
+      "Intractable high-volume diarrhoea causing dehydration and electrolyte collapse",
+      "Severe malnutrition requiring parenteral nutritional support",
+      "Multi-organ autoimmune features suggesting a systemic syndrome such as IPEX",
+      "Failure to respond to gluten withdrawal in a patient assumed to have coeliac disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is often severe and difficult to control, particularly in infants, and may require prolonged immunosuppression and nutritional support; prognosis depends on the underlying cause and response to immunosuppressive therapy.",
+    "pitfalls": [
+      "Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet",
+      "Relying on antibody tests alone, since they can be negative",
+      "Failing to investigate for an associated immunodeficiency or genetic syndrome",
+      "Underestimating nutritional needs and delaying parenteral support"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin inhibitors (tacrolimus), azathioprine or sirolimus",
+      "Nutritional support including parenteral nutrition for severe malabsorption, with correction of fluid and electrolyte losses",
+      "In IPEX and related monogenic disease, consider haematopoietic stem cell transplantation as definitive treatment",
+      "Escalate immunosuppression or add a biologic for disease refractory to first-line therapy",
+      "Monitoring of growth and nutrition, and vigilance for infection and adverse effects of long-term immunosuppression",
+      "Genetic testing for FOXP3/IPEX and related syndromes with genetic counselling in affected children",
+      "Multidisciplinary gastroenterology, clinical immunology and dietetic care"
     ]
-   ],
-   "caption": "Overview comparison matrix for autoimmune enteropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autoimmune-enteropathy-real-image",
-   "title": "Autoimmune enteropathy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "autoimmune_enteropathy-pathway",
+      "title": "Autoimmune enteropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a gluten-free diet",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intractable high-volume diarrhoea causing dehydration and electrolyte collapse",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anti-enterocyte and anti-goblet-cell antibody testing, Small-bowel biopsy assessing villous architecture and intraepithelial lymphocyte density, Coeliac serology and assessment of response to gluten withdrawal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin inhibitors (tacrolimus), azathioprine or sirolimus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autoimmune enteropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autoimmune_enteropathy-matrix",
+      "title": "Autoimmune enteropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Causes severe, protracted watery diarrhoea and malabsorption that does not respond to dietary exclusion, notably not to a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anti-enterocyte and anti-goblet-cell antibody testing, Small-bowel biopsy assessing villous architecture and intraepithelial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease and refractory coeliac disease, Common variable immunodeficiency enteropathy, Inflammatory bowel disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunosuppression as the mainstay, with corticosteroids first-line escalating to steroid-sparing agents such as calcineurin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling it as refractory coeliac disease and persisting with a gluten-free diet",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autoimmune enteropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoimmune_enteropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-enterocyte and anti-goblet-cell antibody testing",
+          "cells": [
+            {
+              "text": "Autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Villous architecture and intraepithelial lymphocyte density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and response to gluten withdrawal",
+          "cells": [
+            {
+              "text": "Excludes coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and immune workup",
+          "cells": [
+            {
+              "text": "Associated immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for IPEX and related syndromes",
+          "cells": [
+            {
+              "text": "In appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_enteropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease and refractory coeliac disease",
+          "cells": [
+            {
+              "text": "Mislabelled as refractory coeliac disease when a gluten-free diet fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency enteropathy",
+          "cells": [
+            {
+              "text": "Assessed by immunoglobulin levels and immune workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_enteropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids, then steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Calcineurin inhibitors such as tacrolimus as escalation"
+            },
+            {
+              "text": "First-line escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Severe malabsorption; correction of fluid and electrolyte losses"
+            },
+            {
+              "text": "Severe malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Consider in IPEX and related monogenic disease"
+            },
+            {
+              "text": "Definitive treatment in IPEX"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory disease",
+          "cells": [
+            {
+              "text": "Biologic therapy or further immunosuppression"
+            },
+            {
+              "text": "Disease refractory to first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, infection and immunosuppression monitoring",
+          "cells": [
+            {
+              "text": "Growth and nutrition; vigilance for infection and adverse effects"
+            },
+            {
+              "text": "Long-term immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "FOXP3 and IPEX testing with counselling of affected families"
+            },
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoimmune_enteropathy-dx-mgmt",
+      "title": "Diagnosis and management of Autoimmune enteropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intractable high-volume diarrhoea with malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Dehydration, electrolyte collapse or severe malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Fluids, electrolyte correction and parenteral nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-enterocyte antibodies, small-bowel biopsy, coeliac serology, immunoglobulins, IPEX testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Villous change with raised intraepithelial lymphocytes and coeliac excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids first-line, escalating to steroid-sparing agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcineurin inhibitor such as tacrolimus for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biologic therapy for disease refractory to first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider stem cell transplant in IPEX",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Growth monitoring and vigilance for infection on immunosuppression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

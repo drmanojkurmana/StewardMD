@@ -1,175 +1,464 @@
 {
- "id": "lysosomal_acid_lipase_deficiency",
- "name": "Lysosomal acid lipase deficiency",
- "aliases": [
-  "LAL deficiency",
-  "LAL-D",
-  "LIPA deficiency",
-  "Wolman disease (infantile form)",
-  "acid lipase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset cholesteryl ester storage disease",
-   "Infantile Wolman disease presents in the first weeks of life with vomiting, diarrhoea, malabsorption, failure to thrive, marked hepatosplenomegaly and rapid deterioration",
-   "Adrenal enlargement with punctate calcification on imaging is a highly suggestive feature of the infantile form",
-   "Later-onset disease presents with hepatomegaly, transaminitis, hepatic steatosis and an atherogenic dyslipidaemia (high LDL, low HDL)",
-   "Diagnosis rests on low lysosomal acid lipase enzyme activity (readily measured on dried blood spot) confirmed by LIPA genetic testing",
-   "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and is transformative in the infantile form",
-   "Supportive care includes nutritional support, lipid-lowering therapy and monitoring for hepatic fibrosis in the later-onset spectrum"
+  "id": "lysosomal_acid_lipase_deficiency",
+  "name": "Lysosomal acid lipase deficiency",
+  "aliases": [
+    "LAL deficiency",
+    "LAL-D",
+    "LIPA deficiency",
+    "Wolman disease (infantile form)",
+    "acid lipase deficiency"
   ],
-  "pathophysiology": "Lysosomal acid lipase hydrolyses cholesteryl esters and triglycerides taken up by cells through lipoprotein endocytosis, releasing free cholesterol and fatty acids for cellular use. Complete or near-complete deficiency causes massive lysosomal accumulation of cholesteryl esters and triglycerides in liver, spleen, intestine, adrenal glands and macrophages, producing the fulminant multi-organ infantile Wolman phenotype; partial deficiency causes the slower cholesteryl ester storage disease phenotype. Impaired liberation of free cholesterol disrupts cholesterol homeostasis, driving compensatory synthesis and the characteristic dyslipidaemia, while progressive tissue storage leads to hepatic failure or, in milder disease, fibrosis and premature atherosclerosis.",
-  "additionalDifferentials": [
-   "Other causes of infantile hepatosplenomegaly with failure to thrive (e.g. Niemann-Pick, Gaucher)",
-   "Neonatal haemophagocytic or infiltrative disorders",
-   "Non-alcoholic fatty liver disease in the later-onset form",
-   "Familial hypercholesterolaemia and mixed dyslipidaemias",
-   "Cystic fibrosis or other causes of malabsorption in infancy",
-   "Glycogen storage disorders with hepatomegaly"
-  ],
-  "additionalInvestigations": [
-   "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes)",
-   "LIPA molecular genetic testing to confirm the diagnosis",
-   "Abdominal imaging for hepatosplenomegaly and adrenal calcification",
-   "Fasting lipid profile and liver function tests",
-   "Liver biopsy showing microvesicular steatosis and lipid-laden macrophages where needed",
-   "Growth, nutritional and cardiovascular risk assessment across the spectrum"
-  ],
-  "redFlags": [
-   "Rapidly progressive failure to thrive with hepatosplenomegaly in early infancy",
-   "Adrenal calcification with signs of adrenal insufficiency",
-   "Progression to hepatic fibrosis, cirrhosis or portal hypertension",
-   "Premature cardiovascular disease from severe dyslipidaemia"
-  ],
-  "prognosis": "Untreated infantile Wolman disease is almost uniformly fatal within the first months of life, whereas the later-onset form is more indolent; enzyme replacement therapy substantially improves survival and hepatic and metabolic outcomes across the spectrum.",
-  "pitfalls": [
-   "Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive",
-   "Mislabelling later-onset disease as non-alcoholic fatty liver disease or familial hypercholesterolaemia",
-   "Overlooking adrenal insufficiency in the infantile form",
-   "Delaying enzyme replacement therapy in rapidly progressive infantile disease"
-  ],
-  "references": [
-   "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay, transformative in the infantile Wolman form",
-   "In infantile disease, specialised low-fat/modified formula with aggressive nutritional support including parenteral nutrition for malabsorption and failure to thrive",
-   "Corticosteroid and mineralocorticoid replacement where adrenal involvement produces adrenal insufficiency",
-   "Lipid-lowering therapy with a statin and ezetimibe for the atherogenic dyslipidaemia of later-onset cholesteryl ester storage disease",
-   "Surveillance of liver function, hepatic fibrosis progression on elastography or imaging, lipid profile, growth and cardiovascular risk",
-   "Consider liver transplantation for progressive hepatic failure, alongside continued enzyme replacement",
-   "Multidisciplinary metabolic, hepatology and dietetic care with genetic counselling and sibling screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lysosomal_acid_lipase_deficiency-pathway",
-   "title": "Lysosomal acid lipase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset cholesteryl ester storage disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive failure to thrive with hepatosplenomegaly in early infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the diagnosis, Abdominal imaging for hepatosplenomegaly and adrenal calcification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay, transformative in the infantile Wolman form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lysosomal acid lipase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "lysosomal_acid_lipase_deficiency-matrix",
-   "title": "Lysosomal acid lipase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset cholesteryl ester storage disease",
+      "Infantile Wolman disease presents in the first weeks of life with vomiting, diarrhoea, malabsorption, failure to thrive, marked hepatosplenomegaly and rapid deterioration",
+      "Adrenal enlargement with punctate calcification on imaging is a highly suggestive feature of the infantile form",
+      "Later-onset disease presents with hepatomegaly, transaminitis, hepatic steatosis and an atherogenic dyslipidaemia (high LDL, low HDL)",
+      "Diagnosis rests on low lysosomal acid lipase enzyme activity (readily measured on dried blood spot) confirmed by LIPA genetic testing",
+      "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and is transformative in the infantile form",
+      "Supportive care includes nutritional support, lipid-lowering therapy and monitoring for hepatic fibrosis in the later-onset spectrum"
     ],
-    [
-     "Key Investigations",
-     "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lysosomal acid lipase hydrolyses cholesteryl esters and triglycerides taken up by cells through lipoprotein endocytosis, releasing free cholesterol and fatty acids for cellular use. Complete or near-complete deficiency causes massive lysosomal accumulation of cholesteryl esters and triglycerides in liver, spleen, intestine, adrenal glands and macrophages, producing the fulminant multi-organ infantile Wolman phenotype; partial deficiency causes the slower cholesteryl ester storage disease phenotype. Impaired liberation of free cholesterol disrupts cholesterol homeostasis, driving compensatory synthesis and the characteristic dyslipidaemia, while progressive tissue storage leads to hepatic failure or, in milder disease, fibrosis and premature atherosclerosis.",
+    "additionalDifferentials": [
+      "Other causes of infantile hepatosplenomegaly with failure to thrive (e.g. Niemann-Pick, Gaucher)",
+      "Neonatal haemophagocytic or infiltrative disorders",
+      "Non-alcoholic fatty liver disease in the later-onset form",
+      "Familial hypercholesterolaemia and mixed dyslipidaemias",
+      "Cystic fibrosis or other causes of malabsorption in infancy",
+      "Glycogen storage disorders with hepatomegaly"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of infantile hepatosplenomegaly with failure to thrive (e.g. Niemann-Pick, Gaucher), Neonatal haemophagocytic or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes)",
+      "LIPA molecular genetic testing to confirm the diagnosis",
+      "Abdominal imaging for hepatosplenomegaly and adrenal calcification",
+      "Fasting lipid profile and liver function tests",
+      "Liver biopsy showing microvesicular steatosis and lipid-laden macrophages where needed",
+      "Growth, nutritional and cardiovascular risk assessment across the spectrum"
     ],
-    [
-     "Management Strategy",
-     "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay,",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive failure to thrive with hepatosplenomegaly in early infancy",
+      "Adrenal calcification with signs of adrenal insufficiency",
+      "Progression to hepatic fibrosis, cirrhosis or portal hypertension",
+      "Premature cardiovascular disease from severe dyslipidaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated infantile Wolman disease is almost uniformly fatal within the first months of life, whereas the later-onset form is more indolent; enzyme replacement therapy substantially improves survival and hepatic and metabolic outcomes across the spectrum.",
+    "pitfalls": [
+      "Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive",
+      "Mislabelling later-onset disease as non-alcoholic fatty liver disease or familial hypercholesterolaemia",
+      "Overlooking adrenal insufficiency in the infantile form",
+      "Delaying enzyme replacement therapy in rapidly progressive infantile disease"
+    ],
+    "references": [
+      "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay, transformative in the infantile Wolman form",
+      "In infantile disease, specialised low-fat/modified formula with aggressive nutritional support including parenteral nutrition for malabsorption and failure to thrive",
+      "Corticosteroid and mineralocorticoid replacement where adrenal involvement produces adrenal insufficiency",
+      "Lipid-lowering therapy with a statin and ezetimibe for the atherogenic dyslipidaemia of later-onset cholesteryl ester storage disease",
+      "Surveillance of liver function, hepatic fibrosis progression on elastography or imaging, lipid profile, growth and cardiovascular risk",
+      "Consider liver transplantation for progressive hepatic failure, alongside continued enzyme replacement",
+      "Multidisciplinary metabolic, hepatology and dietetic care with genetic counselling and sibling screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for lysosomal acid lipase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lysosomal-acid-lipase-deficiency-real-image",
-   "title": "Lysosomal acid lipase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lysosomal_acid_lipase_deficiency-pathway",
+      "title": "Lysosomal acid lipase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset cholesteryl ester storage disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive failure to thrive with hepatosplenomegaly in early infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the diagnosis, Abdominal imaging for hepatosplenomegaly and adrenal calcification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay, transformative in the infantile Wolman form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lysosomal acid lipase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lysosomal_acid_lipase_deficiency-matrix",
+      "title": "Lysosomal acid lipase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive LIPA deficiency spanning a continuous spectrum from severe infantile Wolman disease to milder late-onset",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of infantile hepatosplenomegaly with failure to thrive (e.g. Niemann-Pick, Gaucher), Neonatal haemophagocytic or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) as the disease-specific mainstay,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis in infants by not measuring enzyme activity in unexplained hepatosplenomegaly and failure to thrive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lysosomal acid lipase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lysosomal_acid_lipase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lysosomal acid lipase enzyme activity",
+          "cells": [
+            {
+              "text": "Low activity on dried blood spot or leucocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIPA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly and adrenal calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile and liver tests",
+          "cells": [
+            {
+              "text": "Atherogenic dyslipidaemia; hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Microvesicular steatosis where needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysosomal_acid_lipase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Niemann-Pick or Gaucher disease",
+          "cells": [
+            {
+              "text": "Infantile hepatosplenomegaly with a different enzyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-alcoholic fatty liver disease",
+          "cells": [
+            {
+              "text": "Later-onset form can be mislabelled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "Lipid pattern; enzyme assay separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen storage disorders",
+          "cells": [
+            {
+              "text": "Hepatomegaly with different metabolic profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysosomal_acid_lipase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement",
+          "cells": [
+            {
+              "text": "Sebelipase alfa as the disease-specific mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile nutrition",
+          "cells": [
+            {
+              "text": "Modified formula and parenteral nutrition for malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal involvement",
+          "cells": [
+            {
+              "text": "Corticosteroid and mineralocorticoid replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyslipidaemia",
+          "cells": [
+            {
+              "text": "Statin and ezetimibe in later-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive hepatic failure",
+          "cells": [
+            {
+              "text": "Consider liver transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lysosomal_acid_lipase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Lysosomal acid lipase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hepatosplenomegaly with failure to thrive in infancy, or later fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (adrenal calcification, cirrhosis or rapid infant decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic review for infantile disease and adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lysosomal acid lipase activity, LIPA sequencing, abdominal imaging, lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is lysosomal acid lipase activity low with LIPA variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Niemann-Pick, Gaucher, NAFLD or familial hypercholesterolaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sebelipase alfa enzyme replacement therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive nutritional support in infantile disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Steroid replacement where adrenal insufficiency occurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Statin and ezetimibe for atherogenic dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Liver transplantation for progressive hepatic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated infantile form is nearly always fatal; enzyme replacement improves survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

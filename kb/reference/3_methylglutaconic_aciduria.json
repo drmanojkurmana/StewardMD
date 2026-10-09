@@ -1,177 +1,493 @@
 {
- "id": "3_methylglutaconic_aciduria",
- "name": "3-methylglutaconic aciduria",
- "aliases": [
-  "3-methylglutaconic aciduria",
-  "3-MGA",
-  "3-methylglutaconyl-CoA hydratase deficiency (type I, AUH)",
-  "Barth syndrome (type II, TAZ)",
-  "Costeff syndrome (type III, OPA3)",
-  "DNAJC19-related (type V)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with several genetically and clinically distinct entities",
-   "Type I reflects a true defect of leucine catabolism (3-methylglutaconyl-CoA hydratase, AUH gene); the other types are secondary and largely relate to disturbed mitochondrial membrane/phospholipid biology rather than the leucine pathway",
-   "Type II is Barth syndrome (X-linked, TAZ gene) with cardiomyopathy, skeletal myopathy, neutropenia, and growth delay",
-   "Type III is Costeff optic atrophy syndrome (OPA3) with early optic atrophy and later movement disorder, described notably in individuals of Iraqi-Jewish descent",
-   "So-called type IV is a heterogeneous group of mitochondrial disorders sharing the biochemical marker, and DNAJC19-related dilated cardiomyopathy with ataxia is another form",
-   "The 3-methylglutaconate elevation in the secondary forms is usually modest and is a clue to a mitochondrial membrane problem rather than the primary defect itself",
-   "Management is form-specific and supportive, including cardiac care in Barth syndrome and ophthalmological care in Costeff syndrome",
-   "British spelling applies (cardiomyopathy, paediatric)"
+  "id": "3_methylglutaconic_aciduria",
+  "name": "3-methylglutaconic aciduria",
+  "aliases": [
+    "3-methylglutaconic aciduria",
+    "3-MGA",
+    "3-methylglutaconyl-CoA hydratase deficiency (type I, AUH)",
+    "Barth syndrome (type II, TAZ)",
+    "Costeff syndrome (type III, OPA3)",
+    "DNAJC19-related (type V)"
   ],
-  "pathophysiology": "3-methylglutaconyl-CoA is an intermediate of leucine degradation, normally hydrated by 3-methylglutaconyl-CoA hydratase before onward metabolism. In type I 3-methylglutaconic aciduria this enzyme is deficient, so 3-methylglutaconate and 3-methylglutarate accumulate. In the other, more common types the enzyme is intact and the raised 3-methylglutaconate arises secondarily from disturbed mitochondrial inner-membrane function and phospholipid (cardiolipin) metabolism, as in Barth syndrome where tafazzin deficiency impairs cardiolipin remodelling. Thus the shared biochemical marker points either to a discrete leucine-pathway block or, more often, to a broader mitochondrial membrane disorder with the specific clinical consequences of the underlying gene.",
-  "additionalDifferentials": [
-   "Other organic acidurias of leucine metabolism (e.g. 3-methylglutaconyl versus 3-methylcrotonyl defects)",
-   "Primary mitochondrial cytopathies",
-   "Other causes of infantile or childhood cardiomyopathy",
-   "Other hereditary optic atrophies",
-   "Congenital neutropenia syndromes",
-   "Secondary 3-methylglutaconic aciduria from acquired mitochondrial stress"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids",
-   "Echocardiography and cardiac assessment (especially for Barth syndrome)",
-   "Full blood count for neutropenia",
-   "Ophthalmological assessment for optic atrophy",
-   "Targeted molecular testing (AUH, TAZ, OPA3, DNAJC19 and mitochondrial genes)",
-   "Cardiolipin/monolysocardiolipin analysis where Barth syndrome is suspected"
-  ],
-  "redFlags": [
-   "Cardiomyopathy or heart failure, particularly in a male infant (Barth syndrome)",
-   "Severe or cyclical neutropenia with infection risk",
-   "Progressive visual loss from optic atrophy",
-   "Neurological regression suggesting a mitochondrial disorder"
-  ],
-  "prognosis": "Prognosis depends entirely on the specific type: Barth syndrome outcome hinges on cardiac and infective complications, Costeff syndrome causes progressive visual and motor impairment, and type I ranges from mild to more significant neurological involvement. Care is directed at the underlying entity.",
-  "pitfalls": [
-   "Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause",
-   "Missing Barth syndrome in a boy with cardiomyopathy and neutropenia",
-   "Assuming a primary leucine-pathway defect when most cases are secondary mitochondrial disorders",
-   "Overlooking optic atrophy in the Costeff phenotype"
-  ],
-  "references": [
-   "Scriver's OMMBID: 3-methylglutaconic acidurias",
-   "Nyhan, Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single disease-specific therapy.",
-   "For Barth syndrome, standard heart-failure treatment for the cardiomyopathy, granulocyte colony-stimulating factor for neutropenia, and vigilant treatment of infection.",
-   "For Costeff (type III) syndrome, low-vision support for the optic atrophy and symptomatic management of the movement disorder.",
-   "Cardiac surveillance with echocardiography, full blood count monitoring for neutropenia, and ophthalmological review for optic atrophy.",
-   "Multidisciplinary input from cardiology, haematology, ophthalmology and metabolic medicine according to the subtype.",
-   "Genetic counselling tailored to the mode of inheritance, X-linked for Barth syndrome and autosomal recessive for the other forms, with family screening.",
-   "Early escalation for cardiac decompensation or for sepsis in neutropenic Barth syndrome."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "3_methylglutaconic_aciduria-pathway",
-   "title": "3-methylglutaconic aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with several genetically and clinically distinct entities",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiomyopathy or heart failure, particularly in a male infant (Barth syndrome)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids, Echocardiography and cardiac assessment (especially for Barth syndrome), Full blood count for neutropenia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single disease-specific therapy."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of 3-methylglutaconic aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "3_methylglutaconic_aciduria-matrix",
-   "title": "3-methylglutaconic aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with several genetically and clinically distinct entities",
+      "Type I reflects a true defect of leucine catabolism (3-methylglutaconyl-CoA hydratase, AUH gene); the other types are secondary and largely relate to disturbed mitochondrial membrane/phospholipid biology rather than the leucine pathway",
+      "Type II is Barth syndrome (X-linked, TAZ gene) with cardiomyopathy, skeletal myopathy, neutropenia, and growth delay",
+      "Type III is Costeff optic atrophy syndrome (OPA3) with early optic atrophy and later movement disorder, described notably in individuals of Iraqi-Jewish descent",
+      "So-called type IV is a heterogeneous group of mitochondrial disorders sharing the biochemical marker, and DNAJC19-related dilated cardiomyopathy with ataxia is another form",
+      "The 3-methylglutaconate elevation in the secondary forms is usually modest and is a clue to a mitochondrial membrane problem rather than the primary defect itself",
+      "Management is form-specific and supportive, including cardiac care in Barth syndrome and ophthalmological care in Costeff syndrome",
+      "British spelling applies (cardiomyopathy, paediatric)"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids, Echocardiography and cardiac assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "3-methylglutaconyl-CoA is an intermediate of leucine degradation, normally hydrated by 3-methylglutaconyl-CoA hydratase before onward metabolism. In type I 3-methylglutaconic aciduria this enzyme is deficient, so 3-methylglutaconate and 3-methylglutarate accumulate. In the other, more common types the enzyme is intact and the raised 3-methylglutaconate arises secondarily from disturbed mitochondrial inner-membrane function and phospholipid (cardiolipin) metabolism, as in Barth syndrome where tafazzin deficiency impairs cardiolipin remodelling. Thus the shared biochemical marker points either to a discrete leucine-pathway block or, more often, to a broader mitochondrial membrane disorder with the specific clinical consequences of the underlying gene.",
+    "additionalDifferentials": [
+      "Other organic acidurias of leucine metabolism (e.g. 3-methylglutaconyl versus 3-methylcrotonyl defects)",
+      "Primary mitochondrial cytopathies",
+      "Other causes of infantile or childhood cardiomyopathy",
+      "Other hereditary optic atrophies",
+      "Congenital neutropenia syndromes",
+      "Secondary 3-methylglutaconic aciduria from acquired mitochondrial stress"
     ],
-    [
-     "Primary Differentials",
-     "Other organic acidurias of leucine metabolism (e.g. 3-methylglutaconyl versus 3-methylcrotonyl defects), Primary mitochondrial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids",
+      "Echocardiography and cardiac assessment (especially for Barth syndrome)",
+      "Full blood count for neutropenia",
+      "Ophthalmological assessment for optic atrophy",
+      "Targeted molecular testing (AUH, TAZ, OPA3, DNAJC19 and mitochondrial genes)",
+      "Cardiolipin/monolysocardiolipin analysis where Barth syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiomyopathy or heart failure, particularly in a male infant (Barth syndrome)",
+      "Severe or cyclical neutropenia with infection risk",
+      "Progressive visual loss from optic atrophy",
+      "Neurological regression suggesting a mitochondrial disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends entirely on the specific type: Barth syndrome outcome hinges on cardiac and infective complications, Costeff syndrome causes progressive visual and motor impairment, and type I ranges from mild to more significant neurological involvement. Care is directed at the underlying entity.",
+    "pitfalls": [
+      "Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause",
+      "Missing Barth syndrome in a boy with cardiomyopathy and neutropenia",
+      "Assuming a primary leucine-pathway defect when most cases are secondary mitochondrial disorders",
+      "Overlooking optic atrophy in the Costeff phenotype"
+    ],
+    "references": [
+      "Scriver's OMMBID: 3-methylglutaconic acidurias",
+      "Nyhan, Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single disease-specific therapy.",
+      "For Barth syndrome, standard heart-failure treatment for the cardiomyopathy, granulocyte colony-stimulating factor for neutropenia, and vigilant treatment of infection.",
+      "For Costeff (type III) syndrome, low-vision support for the optic atrophy and symptomatic management of the movement disorder.",
+      "Cardiac surveillance with echocardiography, full blood count monitoring for neutropenia, and ophthalmological review for optic atrophy.",
+      "Multidisciplinary input from cardiology, haematology, ophthalmology and metabolic medicine according to the subtype.",
+      "Genetic counselling tailored to the mode of inheritance, X-linked for Barth syndrome and autosomal recessive for the other forms, with family screening.",
+      "Early escalation for cardiac decompensation or for sepsis in neutropenic Barth syndrome."
     ]
-   ],
-   "caption": "Overview comparison matrix for 3-methylglutaconic aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "3-methylglutaconic-aciduria-real-image",
-   "title": "3-methylglutaconic aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "3_methylglutaconic_aciduria-pathway",
+      "title": "3-methylglutaconic aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with several genetically and clinically distinct entities",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiomyopathy or heart failure, particularly in a male infant (Barth syndrome)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids, Echocardiography and cardiac assessment (especially for Barth syndrome), Full blood count for neutropenia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single disease-specific therapy."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of 3-methylglutaconic aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "3_methylglutaconic_aciduria-matrix",
+      "title": "3-methylglutaconic aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A biochemically defined group unified by raised urinary 3-methylglutaconic acid (and often 3-methylglutaric acid), but with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids quantifying 3-methylglutaconic and 3-methylglutaric acids, Echocardiography and cardiac assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other organic acidurias of leucine metabolism (e.g. 3-methylglutaconyl versus 3-methylcrotonyl defects), Primary mitochondrial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management directed at the specific underlying entity identified rather than the shared biochemical marker, as there is no single",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the biochemical finding as a single disease rather than pursuing the specific underlying genetic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for 3-methylglutaconic aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "3_methylglutaconic_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Raised 3-methylglutaconic and 3-methylglutaric acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac assessment",
+          "cells": [
+            {
+              "text": "Cardiomyopathy, especially in Barth syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing (AUH, TAZ, OPA3, DNAJC19)",
+          "cells": [
+            {
+              "text": "Confirms the genetic subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiolipin or monolysocardiolipin analysis",
+          "cells": [
+            {
+              "text": "Used where Barth syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "3_methylglutaconic_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Barth syndrome (type II)",
+          "cells": [
+            {
+              "text": "X-linked; cardiomyopathy, skeletal myopathy, neutropenia, growth delay"
+            },
+            {
+              "text": "TAZ testing and cardiolipin analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Costeff optic atrophy syndrome (type III)",
+          "cells": [
+            {
+              "text": "Early optic atrophy, later movement disorder; Iraqi-Jewish descent"
+            },
+            {
+              "text": "OPA3 molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type I (3-methylglutaconyl-CoA hydratase defect)",
+          "cells": [
+            {
+              "text": "A true defect of leucine catabolism"
+            },
+            {
+              "text": "AUH molecular testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "3_methylglutaconic_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Entity-directed management",
+          "cells": [
+            {
+              "text": "No single disease-specific therapy"
+            },
+            {
+              "text": "Based on the subtype identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard heart-failure treatment",
+          "cells": [
+            {
+              "text": "Barth cardiomyopathy"
+            },
+            {
+              "text": "Escalate for cardiac decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulocyte colony-stimulating factor",
+          "cells": [
+            {
+              "text": "Neutropenia in Barth syndrome"
+            },
+            {
+              "text": "Treat infection vigilantly; escalate for sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support and symptomatic movement disorder care",
+          "cells": [
+            {
+              "text": "Costeff (type III) syndrome"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance, full blood count and ophthalmology review",
+          "cells": [
+            {
+              "text": "Monitoring by subtype"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked for Barth; autosomal recessive for other forms"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "3_methylglutaconic_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of 3-methylglutaconic aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised urinary 3-methylglutaconic and 3-methylglutaric acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiomyopathy, heart failure or neutropenia (Barth syndrome)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate for cardiac decompensation or sepsis in neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids, echocardiography and full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Subtype identified by molecular testing (AUH, TAZ, OPA3, DNAJC19)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Subtype-directed care with cardiology, haematology or ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review other causes; cardiolipin analysis if Barth is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Heart-failure treatment for Barth cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "G-CSF for neutropenia and vigilant infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology review and low-vision support for optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Barth outcome hinges on cardiac and infection risk; Costeff causes visual loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

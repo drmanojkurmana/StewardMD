@@ -1,175 +1,628 @@
 {
- "id": "behavioral_variant_ftd",
- "name": "Behavioural variant frontotemporal dementia",
- "aliases": [
-  "bvFTD",
-  "behavioural variant FTD",
-  "frontal variant frontotemporal dementia",
-  "Pick's disease (historical)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with memory loss",
-   "Core features are early behavioural disinhibition, apathy or inertia, loss of empathy, and stereotyped or compulsive behaviours",
-   "Executive dysfunction dominates the cognitive profile, whereas episodic memory and visuospatial skills are relatively preserved early on",
-   "Altered eating behaviour, particularly carbohydrate craving and overeating, is a common and useful pointer",
-   "Insight is characteristically lost, so collateral history from family or carers is essential for diagnosis",
-   "A substantial minority carry pathogenic variants (notably C9orf72, MAPT or GRN) with a family history of dementia or motor neurone disease",
-   "Overlap with amyotrophic lateral sclerosis occurs and should be actively sought on examination"
+  "id": "behavioral_variant_ftd",
+  "name": "Behavioural variant frontotemporal dementia",
+  "aliases": [
+    "bvFTD",
+    "behavioural variant FTD",
+    "frontal variant frontotemporal dementia",
+    "Pick's disease (historical)"
   ],
-  "pathophysiology": "Behavioural variant frontotemporal dementia results from progressive degeneration of the frontal and anterior temporal lobes, with the underlying frontotemporal lobar degeneration most often characterised by abnormal accumulation of either tau or TDP-43 protein, and less commonly FUS. Preferential involvement of frontal-subcortical and salience networks, together with early loss of specialised neurones such as von Economo cells, underlies the disinhibition, apathy and executive impairment. A significant proportion is genetically determined, with hexanucleotide expansion in C9orf72 and mutations in MAPT and GRN being the commonest inherited causes.",
-  "additionalDifferentials": [
-   "Alzheimer's disease, particularly frontal or dysexecutive presentations",
-   "Primary psychiatric illness such as late-onset depression, bipolar disorder or psychosis",
-   "Other frontotemporal syndromes (semantic and non-fluent primary progressive aphasia)",
-   "Progressive supranuclear palsy and corticobasal syndrome",
-   "Vascular cognitive impairment affecting frontal circuits",
-   "Structural, toxic or infective frontal lobe pathology"
-  ],
-  "additionalInvestigations": [
-   "Detailed neuropsychological assessment emphasising executive function and social cognition",
-   "MRI brain looking for frontal and anterior temporal atrophy, which is often asymmetric",
-   "FDG-PET demonstrating frontotemporal hypometabolism when MRI is equivocal",
-   "CSF or amyloid PET biomarkers to help exclude underlying Alzheimer pathology",
-   "Genetic testing for C9orf72, MAPT and GRN where the family history is suggestive",
-   "Neurophysiology to screen for motor neurone disease when clinically indicated"
-  ],
-  "redFlags": [
-   "Rapid progression or early prominent memory or visuospatial failure suggesting an alternative diagnosis",
-   "Bulbar symptoms, fasciculations or limb weakness indicating motor neurone disease overlap",
-   "New behavioural change with focal neurological signs pointing to a structural lesion",
-   "Safeguarding concerns arising from impulsive, disinhibited or financially reckless behaviour"
-  ],
-  "prognosis": "Behavioural variant frontotemporal dementia is progressive and currently incurable, with gradual decline in behaviour, cognition and eventually motor function. Survival is generally shorter than in Alzheimer's disease and is particularly reduced when there is coexisting motor neurone disease. Management is supportive and multidisciplinary, focusing on behavioural strategies, carer support, safety and advance care planning.",
-  "pitfalls": [
-   "Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis",
-   "Relying on standard bedside cognitive tests, which may be normal early because memory is preserved",
-   "Overlooking a family history of dementia or motor neurone disease that would prompt genetic testing",
-   "Failing to appreciate loss of insight, so that patient self-report understates the problem"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Rascovsky et al., international consensus criteria for behavioural variant frontotemporal dementia (Brain)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management",
-   "Use SSRIs to target behavioural symptoms such as disinhibition, compulsions and altered eating, reserving atypical antipsychotics for severe agitation and using them cautiously",
-   "Employ non-pharmacological strategies first, including structured routine, environmental modification and behavioural approaches for problem behaviours",
-   "Support carers with education about the characteristic loss of insight, and address safety including driving, finances and safeguarding",
-   "Involve speech-and-language therapy and dietetics for altered eating behaviour and later swallowing difficulty",
-   "Offer genetic counselling and testing for C9orf72, MAPT and GRN where the family history is suggestive",
-   "Screen for and manage coexisting motor neurone disease, which worsens prognosis",
-   "Undertake advance care planning early while capacity allows, with palliative care as the disease progresses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "behavioral_variant_ftd-pathway",
-   "title": "Behavioural variant frontotemporal dementia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with memory loss",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or early prominent memory or visuospatial failure suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed neuropsychological assessment emphasising executive function and social cognition, MRI brain looking for frontal and anterior temporal atrophy, which is often asymmetric, FDG-PET demonstrating frontotemporal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of behavioural variant frontotemporal dementia."
-  }
- ],
- "tables": [
-  {
-   "id": "behavioral_variant_ftd-matrix",
-   "title": "Behavioural variant frontotemporal dementia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with memory loss",
+      "Core features are early behavioural disinhibition, apathy or inertia, loss of empathy, and stereotyped or compulsive behaviours",
+      "Executive dysfunction dominates the cognitive profile, whereas episodic memory and visuospatial skills are relatively preserved early on",
+      "Altered eating behaviour, particularly carbohydrate craving and overeating, is a common and useful pointer",
+      "Insight is characteristically lost, so collateral history from family or carers is essential for diagnosis",
+      "A substantial minority carry pathogenic variants (notably C9orf72, MAPT or GRN) with a family history of dementia or motor neurone disease",
+      "Overlap with amyotrophic lateral sclerosis occurs and should be actively sought on examination"
     ],
-    [
-     "Key Investigations",
-     "Detailed neuropsychological assessment emphasising executive function and social cognition, MRI brain looking for frontal and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Behavioural variant frontotemporal dementia results from progressive degeneration of the frontal and anterior temporal lobes, with the underlying frontotemporal lobar degeneration most often characterised by abnormal accumulation of either tau or TDP-43 protein, and less commonly FUS. Preferential involvement of frontal-subcortical and salience networks, together with early loss of specialised neurones such as von Economo cells, underlies the disinhibition, apathy and executive impairment. A significant proportion is genetically determined, with hexanucleotide expansion in C9orf72 and mutations in MAPT and GRN being the commonest inherited causes.",
+    "additionalDifferentials": [
+      "Alzheimer's disease, particularly frontal or dysexecutive presentations",
+      "Primary psychiatric illness such as late-onset depression, bipolar disorder or psychosis",
+      "Other frontotemporal syndromes (semantic and non-fluent primary progressive aphasia)",
+      "Progressive supranuclear palsy and corticobasal syndrome",
+      "Vascular cognitive impairment affecting frontal circuits",
+      "Structural, toxic or infective frontal lobe pathology"
     ],
-    [
-     "Primary Differentials",
-     "Alzheimer's disease, particularly frontal or dysexecutive presentations, Primary psychiatric illness such as late-onset",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed neuropsychological assessment emphasising executive function and social cognition",
+      "MRI brain looking for frontal and anterior temporal atrophy, which is often asymmetric",
+      "FDG-PET demonstrating frontotemporal hypometabolism when MRI is equivocal",
+      "CSF or amyloid PET biomarkers to help exclude underlying Alzheimer pathology",
+      "Genetic testing for C9orf72, MAPT and GRN where the family history is suggestive",
+      "Neurophysiology to screen for motor neurone disease when clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or early prominent memory or visuospatial failure suggesting an alternative diagnosis",
+      "Bulbar symptoms, fasciculations or limb weakness indicating motor neurone disease overlap",
+      "New behavioural change with focal neurological signs pointing to a structural lesion",
+      "Safeguarding concerns arising from impulsive, disinhibited or financially reckless behaviour"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Behavioural variant frontotemporal dementia is progressive and currently incurable, with gradual decline in behaviour, cognition and eventually motor function. Survival is generally shorter than in Alzheimer's disease and is particularly reduced when there is coexisting motor neurone disease. Management is supportive and multidisciplinary, focusing on behavioural strategies, carer support, safety and advance care planning.",
+    "pitfalls": [
+      "Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis",
+      "Relying on standard bedside cognitive tests, which may be normal early because memory is preserved",
+      "Overlooking a family history of dementia or motor neurone disease that would prompt genetic testing",
+      "Failing to appreciate loss of insight, so that patient self-report understates the problem"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Rascovsky et al., international consensus criteria for behavioural variant frontotemporal dementia (Brain)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management",
+      "Use SSRIs to target behavioural symptoms such as disinhibition, compulsions and altered eating, reserving atypical antipsychotics for severe agitation and using them cautiously",
+      "Employ non-pharmacological strategies first, including structured routine, environmental modification and behavioural approaches for problem behaviours",
+      "Support carers with education about the characteristic loss of insight, and address safety including driving, finances and safeguarding",
+      "Involve speech-and-language therapy and dietetics for altered eating behaviour and later swallowing difficulty",
+      "Offer genetic counselling and testing for C9orf72, MAPT and GRN where the family history is suggestive",
+      "Screen for and manage coexisting motor neurone disease, which worsens prognosis",
+      "Undertake advance care planning early while capacity allows, with palliative care as the disease progresses"
     ]
-   ],
-   "caption": "Overview comparison matrix for behavioural variant frontotemporal dementia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "behavioral-variant-ftd-real-image",
-   "title": "Behavioural variant frontotemporal dementia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "behavioral_variant_ftd-pathway",
+      "title": "Behavioural variant frontotemporal dementia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with memory loss",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or early prominent memory or visuospatial failure suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed neuropsychological assessment emphasising executive function and social cognition, MRI brain looking for frontal and anterior temporal atrophy, which is often asymmetric, FDG-PET demonstrating frontotemporal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of behavioural variant frontotemporal dementia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "behavioral_variant_ftd-matrix",
+      "title": "Behavioural variant frontotemporal dementia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents in the sixth or seventh decade with an insidious change in personality and social conduct rather than with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed neuropsychological assessment emphasising executive function and social cognition, MRI brain looking for frontal and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alzheimer's disease, particularly frontal or dysexecutive presentations, Primary psychiatric illness such as late-onset",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying therapy and base care on symptomatic and supportive management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing early behavioural change to a primary psychiatric illness and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for behavioural variant frontotemporal dementia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 371-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "behavioral_variant_ftd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in behavioural variant frontotemporal dementia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Executive and social cognition impairment; episodic memory relatively preserved early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Frontal and anterior temporal atrophy, often asymmetric"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Frontotemporal hypometabolism when MRI is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF or amyloid PET biomarkers",
+          "cells": [
+            {
+              "text": "Helps exclude underlying Alzheimer pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for C9orf72, MAPT and GRN",
+          "cells": [
+            {
+              "text": "Pathogenic variants where family history is suggestive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurophysiology",
+          "cells": [
+            {
+              "text": "Screens for motor neurone disease when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "behavioral_variant_ftd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for behavioural variant frontotemporal dementia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer's disease",
+          "cells": [
+            {
+              "text": "Memory and visuospatial skills are relatively preserved early here; executive dysfunction dominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary psychiatric illness",
+          "cells": [
+            {
+              "text": "Insight is lost and the course is progressive; collateral history from carers is essential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "behavioral_variant_ftd-treatment",
+      "kind": "treatment",
+      "title": "Management options in behavioural variant frontotemporal dementia",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disease-modifying therapy",
+          "cells": [
+            {
+              "text": "None available; care is symptomatic and supportive"
+            },
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-pharmacological strategies",
+          "cells": [
+            {
+              "text": "Structured routine, environmental modification and behavioural approaches"
+            },
+            {
+              "text": "Tried first for problem behaviours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRIs",
+          "cells": [
+            {
+              "text": "Target disinhibition, compulsions and altered eating"
+            },
+            {
+              "text": "Behavioural symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical antipsychotics",
+          "cells": [
+            {
+              "text": "Reserve for severe agitation"
+            },
+            {
+              "text": "Use cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carer support and safety",
+          "cells": [
+            {
+              "text": "Carer education on loss of insight; safety for driving, finances and safeguarding"
+            },
+            {
+              "text": "Addresses safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech-and-language therapy and dietetics",
+          "cells": [
+            {
+              "text": "For altered eating behaviour and later swallowing difficulty"
+            },
+            {
+              "text": "Later swallowing difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and testing",
+          "cells": [
+            {
+              "text": "Counselling and testing for C9orf72, MAPT and GRN where family history is suggestive"
+            },
+            {
+              "text": "Family history of dementia or motor neurone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease screening",
+          "cells": [
+            {
+              "text": "Screen for and manage coexisting motor neurone disease"
+            },
+            {
+              "text": "Worsens prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "Plan early while capacity allows, with palliative care as the disease progresses"
+            },
+            {
+              "text": "Timing set by capacity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "behavioral_variant_ftd-ddx-2",
+      "kind": "ddx",
+      "title": "Major dementias compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "First symptom",
+        "Mental status",
+        "Neuropsychiatry",
+        "Neurology",
+        "Imaging"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Memory loss"
+            },
+            {
+              "text": "Episodic memory loss"
+            },
+            {
+              "text": "Initially normal"
+            },
+            {
+              "text": "Initially normal"
+            },
+            {
+              "text": "Entorhinal cortex and hippocampal atrophy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Frontotemporal dementia",
+          "cells": [
+            {
+              "text": "Apathy; poor judgment or insight; speech or language problems; hyperorality"
+            },
+            {
+              "text": "Frontal and executive deficits, language; spares drawing"
+            },
+            {
+              "text": "Apathy, disinhibition, hyperorality, euphoria, depression"
+            },
+            {
+              "text": "May have vertical gaze palsy, axial rigidity, dystonia, alien hand or motor neuron disease"
+            },
+            {
+              "text": "Frontal, insular and/or temporal atrophy; spares posterior parietal lobe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Visual hallucinations, REM sleep disorder, delirium, Capgras syndrome, parkinsonism"
+            },
+            {
+              "text": "Drawing and frontal/executive deficits; spares memory; delirium prone"
+            },
+            {
+              "text": "Visual hallucinations, depression, sleep disorder, delusions"
+            },
+            {
+              "text": "Parkinsonism"
+            },
+            {
+              "text": "Posterior parietal atrophy; hippocampi larger than in Alzheimer disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Dementia, mood, anxiety, movement disorders"
+            },
+            {
+              "text": "Variable: frontal/executive, focal cortical, memory"
+            },
+            {
+              "text": "Depression, anxiety"
+            },
+            {
+              "text": "Myoclonus, rigidity, parkinsonism"
+            },
+            {
+              "text": "Cortical ribboning and basal ganglia or thalamus hyperintensity on diffusion/FLAIR MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vascular dementia",
+          "cells": [
+            {
+              "text": "Often but not always sudden; variable; apathy, falls, focal weakness"
+            },
+            {
+              "text": "Frontal/executive deficits, cognitive slowing; can spare memory"
+            },
+            {
+              "text": "Apathy, delusions, anxiety"
+            },
+            {
+              "text": "Usually motor slowing, spasticity; can be normal"
+            },
+            {
+              "text": "Cortical and/or subcortical infarctions, confluent white matter disease"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source abbreviations: CBD, cortical basal degeneration; MND, motor neuron disease; PSP, progressive supranuclear palsy."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "behavioral_variant_ftd-dx-mgmt",
+      "title": "Diagnosis and management of behavioural variant frontotemporal dementia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insidious change in conduct from the sixth or seventh decade: disinhibition, apathy, lost empathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid course, prominent memory loss, bulbar or limb signs, or focal deficits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: exclude Alzheimer's and check for motor neurone disease overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Collateral history from family or carers; note carbohydrate craving and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Neuropsychological testing and MRI for frontal and anterior temporal atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Frontotemporal atrophy or hypometabolism consistent on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic testing for C9orf72, MAPT or GRN where family history suggests it",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "FDG-PET or CSF and amyloid PET to clarify and exclude Alzheimer pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SSRIs for disinhibition and eating; antipsychotics only for severe agitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Progressive and incurable; supportive care and early advance care planning",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

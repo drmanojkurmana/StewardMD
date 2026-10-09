@@ -1,177 +1,527 @@
 {
- "id": "oculopharyngodistal_myopathy",
- "name": "Oculopharyngodistal Myopathy",
- "aliases": [
-  "OPDM"
- ],
- "class": "non_infective",
- "system": "Neuromuscular",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and dysarthria, and distal limb weakness.",
-   "Distal weakness (finger and wrist extensors, tibialis anterior with foot drop) is the key feature separating it from oculopharyngeal muscular dystrophy, which is proximal or limb-girdle in pattern.",
-   "Facial weakness is common and adds to the difficulty with speech and eye closure.",
-   "Onset is usually in early-to-mid adulthood with slow progression.",
-   "Disease linked to NOTCH2NLC overlaps with neuronal intranuclear inclusion disease, so look for tremor, cognitive change, peripheral neuropathy or leukoencephalopathy.",
-   "Creatine kinase is normal or only mildly elevated.",
-   "Muscle biopsy characteristically shows rimmed vacuoles and intranuclear inclusions that stain for p62 and ubiquitin.",
-   "Inheritance is usually autosomal dominant, though apparently sporadic cases occur."
+  "id": "oculopharyngodistal_myopathy",
+  "name": "Oculopharyngodistal Myopathy",
+  "aliases": [
+    "OPDM"
   ],
-  "pathophysiology": "Oculopharyngodistal myopathy is a rare, genetically heterogeneous disorder caused by non-coding CGG trinucleotide repeat expansions in the 5' untranslated regions of several genes: LRP12 (OPDM1), GIPC1 (OPDM2), NOTCH2NLC (OPDM3, which overlaps mechanistically with neuronal intranuclear inclusion disease) and RILPL1 (OPDM4). Disease is thought to result from a toxic RNA gain-of-function together with repeat-associated non-AUG (RAN) translation of the expanded repeats, generating aggregation-prone polyglycine-containing proteins that form intranuclear inclusions. The resulting myopathy shows rimmed vacuoles and p62- and ubiquitin-positive intranuclear inclusions on biopsy. Although it resembles oculopharyngeal muscular dystrophy (caused by a short GCN triplet expansion in PABPN1), it is distinguished clinically by prominent distal limb involvement and genetically by its distinct non-coding repeat mechanism.",
-  "additionalDifferentials": [
-   "Oculopharyngeal muscular dystrophy (PABPN1)",
-   "Mitochondrial disease with chronic progressive external ophthalmoplegia",
-   "Myasthenia gravis with fatigable ptosis and ophthalmoplegia",
-   "Inclusion body myositis (rimmed vacuoles with distal and quadriceps weakness)",
-   "Myotonic dystrophy",
-   "Distal myopathies such as GNE myopathy and Welander distal myopathy",
-   "Neuronal intranuclear inclusion disease"
-  ],
-  "additionalInvestigations": [
-   "Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing or repeat-primed PCR.",
-   "Muscle biopsy for rimmed vacuoles and intranuclear inclusions.",
-   "Creatine kinase.",
-   "Electromyography and nerve conduction studies to confirm a myopathic process and detect any associated neuropathy.",
-   "Brain MRI, looking for leukoencephalopathy and corticomedullary diffusion-weighted hyperintensity that suggest the neuronal intranuclear inclusion disease overlap.",
-   "Repetitive nerve stimulation and acetylcholine receptor antibodies to exclude myasthenia gravis.",
-   "Videofluoroscopic swallowing assessment."
-  ],
-  "redFlags": [
-   "Aspiration pneumonia or significant dysphagia with weight loss.",
-   "Respiratory muscle involvement or symptoms of nocturnal hypoventilation.",
-   "Central nervous system features suggesting neuronal intranuclear inclusion disease, such as encephalopathic episodes or cognitive decline.",
-   "Rapidly progressive weakness, which should prompt reconsideration of an alternative diagnosis such as inclusion body myositis."
-  ],
-  "prognosis": "Progression is slow, typically over decades, and life expectancy may be near normal, but dysphagia-related aspiration and respiratory complications are the main threats. NOTCH2NLC-related disease carries additional neurological morbidity from its overlap with neuronal intranuclear inclusion disease.",
-  "pitfalls": [
-   "Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia.",
-   "Standard exome or panel sequencing misses the non-coding CGG repeat expansions, so dedicated repeat testing (often long-read) is required.",
-   "Rimmed vacuoles overlap with inclusion body myositis and can lead to misdiagnosis.",
-   "The NOTCH2NLC overlap with neuronal intranuclear inclusion disease and its central nervous system implications are easily overlooked.",
-   "Assuming a proximal pattern of weakness misses the distal involvement that is the key discriminator."
-  ],
-  "references": [
-   "Peer-reviewed reviews of oculopharyngodistal myopathy",
-   "Standard neuromuscular disorders textbook",
-   "Neurogenetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal weakness",
-   "Ptosis addressed with ptosis props, blepharoplasty or frontalis-sling suspension for functional visual impairment",
-   "Dysphagia and dysarthria managed with speech and language therapy-led swallowing rehabilitation, diet modification and gastrostomy where aspiration risk is high",
-   "Distal weakness and foot drop managed with ankle-foot orthoses, physiotherapy and occupational therapy, with wrist and finger-extensor splinting and adaptive aids",
-   "Respiratory surveillance with spirometry, prompt treatment of aspiration and chest infection, and non-invasive ventilation for respiratory decline",
-   "In NOTCH2NLC-related disease, monitor for the neuronal intranuclear inclusion disease overlap (tremor, cognitive change, neuropathy, leukoencephalopathy) and manage its manifestations",
-   "Multidisciplinary neuromuscular follow-up across neurology, ENT, speech and language therapy and rehabilitation",
-   "Genetic counselling and family screening for this CGG repeat-expansion disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oculopharyngodistal_myopathy-pathway",
-   "title": "Oculopharyngodistal Myopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and dysarthria, and distal limb weakness.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aspiration pneumonia or significant dysphagia with weight loss.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing or repeat-primed PCR., Muscle biopsy for rimmed vacuoles and intranuclear inclusions.,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal weakness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oculopharyngodistal myopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "oculopharyngodistal_myopathy-matrix",
-   "title": "Oculopharyngodistal Myopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and dysarthria, and distal limb weakness.",
+      "Distal weakness (finger and wrist extensors, tibialis anterior with foot drop) is the key feature separating it from oculopharyngeal muscular dystrophy, which is proximal or limb-girdle in pattern.",
+      "Facial weakness is common and adds to the difficulty with speech and eye closure.",
+      "Onset is usually in early-to-mid adulthood with slow progression.",
+      "Disease linked to NOTCH2NLC overlaps with neuronal intranuclear inclusion disease, so look for tremor, cognitive change, peripheral neuropathy or leukoencephalopathy.",
+      "Creatine kinase is normal or only mildly elevated.",
+      "Muscle biopsy characteristically shows rimmed vacuoles and intranuclear inclusions that stain for p62 and ubiquitin.",
+      "Inheritance is usually autosomal dominant, though apparently sporadic cases occur."
     ],
-    [
-     "Key Investigations",
-     "Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oculopharyngodistal myopathy is a rare, genetically heterogeneous disorder caused by non-coding CGG trinucleotide repeat expansions in the 5' untranslated regions of several genes: LRP12 (OPDM1), GIPC1 (OPDM2), NOTCH2NLC (OPDM3, which overlaps mechanistically with neuronal intranuclear inclusion disease) and RILPL1 (OPDM4). Disease is thought to result from a toxic RNA gain-of-function together with repeat-associated non-AUG (RAN) translation of the expanded repeats, generating aggregation-prone polyglycine-containing proteins that form intranuclear inclusions. The resulting myopathy shows rimmed vacuoles and p62- and ubiquitin-positive intranuclear inclusions on biopsy. Although it resembles oculopharyngeal muscular dystrophy (caused by a short GCN triplet expansion in PABPN1), it is distinguished clinically by prominent distal limb involvement and genetically by its distinct non-coding repeat mechanism.",
+    "additionalDifferentials": [
+      "Oculopharyngeal muscular dystrophy (PABPN1)",
+      "Mitochondrial disease with chronic progressive external ophthalmoplegia",
+      "Myasthenia gravis with fatigable ptosis and ophthalmoplegia",
+      "Inclusion body myositis (rimmed vacuoles with distal and quadriceps weakness)",
+      "Myotonic dystrophy",
+      "Distal myopathies such as GNE myopathy and Welander distal myopathy",
+      "Neuronal intranuclear inclusion disease"
     ],
-    [
-     "Primary Differentials",
-     "Oculopharyngeal muscular dystrophy (PABPN1), Mitochondrial disease with chronic progressive external ophthalmoplegia, Myasthenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing or repeat-primed PCR.",
+      "Muscle biopsy for rimmed vacuoles and intranuclear inclusions.",
+      "Creatine kinase.",
+      "Electromyography and nerve conduction studies to confirm a myopathic process and detect any associated neuropathy.",
+      "Brain MRI, looking for leukoencephalopathy and corticomedullary diffusion-weighted hyperintensity that suggest the neuronal intranuclear inclusion disease overlap.",
+      "Repetitive nerve stimulation and acetylcholine receptor antibodies to exclude myasthenia gravis.",
+      "Videofluoroscopic swallowing assessment."
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal",
-     "Core treatment modality"
+    "redFlags": [
+      "Aspiration pneumonia or significant dysphagia with weight loss.",
+      "Respiratory muscle involvement or symptoms of nocturnal hypoventilation.",
+      "Central nervous system features suggesting neuronal intranuclear inclusion disease, such as encephalopathic episodes or cognitive decline.",
+      "Rapidly progressive weakness, which should prompt reconsideration of an alternative diagnosis such as inclusion body myositis."
     ],
-    [
-     "Clinical Pitfall",
-     "Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is slow, typically over decades, and life expectancy may be near normal, but dysphagia-related aspiration and respiratory complications are the main threats. NOTCH2NLC-related disease carries additional neurological morbidity from its overlap with neuronal intranuclear inclusion disease.",
+    "pitfalls": [
+      "Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia.",
+      "Standard exome or panel sequencing misses the non-coding CGG repeat expansions, so dedicated repeat testing (often long-read) is required.",
+      "Rimmed vacuoles overlap with inclusion body myositis and can lead to misdiagnosis.",
+      "The NOTCH2NLC overlap with neuronal intranuclear inclusion disease and its central nervous system implications are easily overlooked.",
+      "Assuming a proximal pattern of weakness misses the distal involvement that is the key discriminator."
+    ],
+    "references": [
+      "Peer-reviewed reviews of oculopharyngodistal myopathy",
+      "Standard neuromuscular disorders textbook",
+      "Neurogenetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal weakness",
+      "Ptosis addressed with ptosis props, blepharoplasty or frontalis-sling suspension for functional visual impairment",
+      "Dysphagia and dysarthria managed with speech and language therapy-led swallowing rehabilitation, diet modification and gastrostomy where aspiration risk is high",
+      "Distal weakness and foot drop managed with ankle-foot orthoses, physiotherapy and occupational therapy, with wrist and finger-extensor splinting and adaptive aids",
+      "Respiratory surveillance with spirometry, prompt treatment of aspiration and chest infection, and non-invasive ventilation for respiratory decline",
+      "In NOTCH2NLC-related disease, monitor for the neuronal intranuclear inclusion disease overlap (tremor, cognitive change, neuropathy, leukoencephalopathy) and manage its manifestations",
+      "Multidisciplinary neuromuscular follow-up across neurology, ENT, speech and language therapy and rehabilitation",
+      "Genetic counselling and family screening for this CGG repeat-expansion disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for oculopharyngodistal myopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oculopharyngodistal-myopathy-real-image",
-   "title": "Oculopharyngodistal Myopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "oculopharyngodistal_myopathy-pathway",
+      "title": "Oculopharyngodistal Myopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and dysarthria, and distal limb weakness.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aspiration pneumonia or significant dysphagia with weight loss.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing or repeat-primed PCR., Muscle biopsy for rimmed vacuoles and intranuclear inclusions.,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal weakness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oculopharyngodistal myopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oculopharyngodistal_myopathy-matrix",
+      "title": "Oculopharyngodistal Myopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by a cardinal combination of progressive external ophthalmoplegia with ptosis, pharyngeal weakness causing dysphagia and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeat-expansion genetic testing for CGG expansions in LRP12, GIPC1, NOTCH2NLC and RILPL1, often requiring long-read sequencing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oculopharyngeal muscular dystrophy (PABPN1), Mitochondrial disease with chronic progressive external ophthalmoplegia, Myasthenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy is available; care is supportive, targeting the ophthalmoplegia and ptosis, dysphagia and distal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Easily misdiagnosed as oculopharyngeal muscular dystrophy, myasthenia gravis or mitochondrial ophthalmoplegia.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oculopharyngodistal myopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculopharyngodistal_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CGG repeat-expansion testing of LRP12, GIPC1, NOTCH2NLC, RILPL1",
+          "cells": [
+            {
+              "text": "CGG expansion in one of these genes; may need long-read sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Rimmed vacuoles and intranuclear inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Normal or only mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Myopathic process, and any associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leukoencephalopathy and corticomedullary diffusion signal suggest NIID overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation and acetylcholine receptor antibodies",
+          "cells": [
+            {
+              "text": "Excludes myasthenia gravis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videofluoroscopic swallowing assessment",
+          "cells": [
+            {
+              "text": "Swallowing dysfunction and aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopharyngodistal_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oculopharyngeal muscular dystrophy (PABPN1)",
+          "cells": [
+            {
+              "text": "Proximal or limb-girdle pattern; distal weakness is the discriminator here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable ptosis and ophthalmoplegia rather than progressive distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Rimmed vacuoles with distal and quadriceps weakness; rapid progression should prompt reconsideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopharyngodistal_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No disease-modifying therapy; targets ophthalmoplegia, ptosis, dysphagia and distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ptosis management",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Ptosis props, blepharoplasty or frontalis-sling suspension for functional visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing rehabilitation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Speech and language therapy-led rehabilitation and diet change; gastrostomy where aspiration risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal weakness and foot drop",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Ankle-foot orthoses, physiotherapy, occupational therapy, splints and adaptive aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Spirometry, prompt treatment of aspiration and chest infection; non-invasive ventilation for decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NOTCH2NLC overlap",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Monitor for tremor, cognitive change, neuropathy or leukoencephalopathy and manage them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Neurology, ENT, speech and language therapy and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "CGG repeat-expansion disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculopharyngodistal_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Oculopharyngodistal Myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ptosis, dysphagia and distal weakness with external ophthalmoplegia; OPDM suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aspiration, respiratory decline or cognitive change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory assessment and urgent treatment of aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CGG repeat testing of LRP12, GIPC1, NOTCH2NLC, RILPL1; biopsy, EMG and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does repeat-expansion testing confirm a CGG expansion in one of these genes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider OPMD, mitochondrial myopathy, myasthenia or inclusion body myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ptosis props or blepharoplasty for functional visual impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Swallowing rehabilitation and diet change; gastrostomy if aspiration risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ankle-foot orthoses, splints and physiotherapy for distal weakness and foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spirometry surveillance; treat aspiration and chest infection promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for the CGG repeat disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow progression over decades; aspiration and respiratory complications are the threats",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

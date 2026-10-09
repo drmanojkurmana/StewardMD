@@ -1,180 +1,226 @@
 {
- "id": "cardiofaciocutaneous_syndrome",
- "name": "Cardiofaciocutaneous syndrome",
- "aliases": [
-  "CFC syndrome",
-  "CFCS",
-  "BRAF",
-  "MAP2K1",
-  "MAP2K2",
-  "MEK1",
-  "MEK2",
-  "KRAS",
-  "RASopathy"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and neurodevelopmental involvement",
-   "The face is relatively coarse with a high forehead, bitemporal narrowing, down-slanting palpebral fissures, ptosis and low-set posteriorly rotated ears",
-   "Ectodermal features are prominent: sparse curly hair, absent or sparse eyebrows and eyelashes, keratosis pilaris, ichthyosis and multiple naevi",
-   "Congenital heart disease, especially pulmonary valve stenosis, atrial septal defect and hypertrophic cardiomyopathy, is common",
-   "Caused by activating variants in the RAS-MAPK pathway, most often BRAF, then MAP2K1/MAP2K2 and less commonly KRAS",
-   "Feeding difficulty with failure to thrive and gastro-oesophageal reflux is frequent and often severe in infancy",
-   "Intellectual disability is usually moderate to severe, more so than in classic Noonan syndrome, and seizures are common"
+  "id": "cardiofaciocutaneous_syndrome",
+  "name": "Cardiofaciocutaneous syndrome",
+  "aliases": [
+    "CFC syndrome",
+    "CFCS",
+    "BRAF",
+    "MAP2K1",
+    "MAP2K2",
+    "MEK1",
+    "MEK2",
+    "KRAS",
+    "RASopathy"
   ],
-  "pathophysiology": "Cardiofaciocutaneous syndrome is a RASopathy caused by germline activating variants in components of the RAS-MAPK (mitogen-activated protein kinase) signalling cascade, principally BRAF and the downstream kinases MEK1 and MEK2, with a minority in KRAS. This pathway transduces growth-factor signals to control cell proliferation, differentiation and survival. Constitutive over-activation dysregulates these processes during development, producing the characteristic craniofacial, cardiac, ectodermal and neurodevelopmental abnormalities shared, with variation, across the RASopathy spectrum.",
-  "additionalDifferentials": [
-   "Noonan syndrome",
-   "Costello syndrome",
-   "Legius syndrome",
-   "Neurofibromatosis type 1",
-   "Noonan syndrome with multiple lentigines (LEOPARD syndrome)",
-   "Ectodermal dysplasia syndromes"
-  ],
-  "additionalInvestigations": [
-   "Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS",
-   "Echocardiography for pulmonary stenosis, septal defects and hypertrophic cardiomyopathy",
-   "Electroencephalography and brain MRI for seizures and structural anomalies",
-   "Growth and nutritional assessment, with feeding evaluation for reflux",
-   "Ophthalmology review for ptosis, strabismus and refractive error",
-   "Dermatological assessment of the ectodermal findings"
-  ],
-  "redFlags": [
-   "Signs of hypertrophic cardiomyopathy or arrhythmia causing cardiac compromise",
-   "Failure to thrive and dehydration from severe feeding difficulty",
-   "Prolonged or refractory seizures",
-   "Rapidly changing or atypical skin lesions warranting review"
-  ],
-  "prognosis": "Prognosis depends heavily on the cardiac phenotype, particularly hypertrophic cardiomyopathy, and on the severity of feeding and neurological problems; many individuals have moderate to severe intellectual disability. With multidisciplinary care most survive into adulthood, though medical needs remain substantial.",
-  "pitfalls": [
-   "Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis",
-   "Underestimating early feeding failure and delaying nutritional support",
-   "Overlooking hypertrophic cardiomyopathy that can progress silently",
-   "Assuming skin and hair findings are an unrelated ectodermal disorder"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "GeneReviews: Cardiofaciocutaneous syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK dysregulation",
-   "Manage congenital heart disease with balloon valvuloplasty for pulmonary valve stenosis and surveillance and treatment of hypertrophic cardiomyopathy",
-   "Address feeding difficulty and failure to thrive with nutritional support, nasogastric or gastrostomy feeding and treatment of gastro-oesophageal reflux",
-   "Control seizures with anticonvulsant therapy and monitor neurodevelopment",
-   "Provide developmental support with physiotherapy, occupational therapy, speech therapy and educational input",
-   "Treat the ectodermal features and offer ophthalmology review for ptosis, strabismus and refractive error",
-   "Coordinate multidisciplinary care and offer genetic counselling, noting most variants arise de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cardiofaciocutaneous_syndrome-pathway",
-   "title": "Cardiofaciocutaneous syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and neurodevelopmental involvement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of hypertrophic cardiomyopathy or arrhythmia causing cardiac compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS, Echocardiography for pulmonary stenosis, septal defects and hypertrophic cardiomyopathy, Electroencephalography and brain MRI"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK dysregulation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cardiofaciocutaneous syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cardiofaciocutaneous_syndrome-matrix",
-   "title": "Cardiofaciocutaneous syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and neurodevelopmental involvement",
+      "The face is relatively coarse with a high forehead, bitemporal narrowing, down-slanting palpebral fissures, ptosis and low-set posteriorly rotated ears",
+      "Ectodermal features are prominent: sparse curly hair, absent or sparse eyebrows and eyelashes, keratosis pilaris, ichthyosis and multiple naevi",
+      "Congenital heart disease, especially pulmonary valve stenosis, atrial septal defect and hypertrophic cardiomyopathy, is common",
+      "Caused by activating variants in the RAS-MAPK pathway, most often BRAF, then MAP2K1/MAP2K2 and less commonly KRAS",
+      "Feeding difficulty with failure to thrive and gastro-oesophageal reflux is frequent and often severe in infancy",
+      "Intellectual disability is usually moderate to severe, more so than in classic Noonan syndrome, and seizures are common"
     ],
-    [
-     "Key Investigations",
-     "Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS, Echocardiography for pulmonary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cardiofaciocutaneous syndrome is a RASopathy caused by germline activating variants in components of the RAS-MAPK (mitogen-activated protein kinase) signalling cascade, principally BRAF and the downstream kinases MEK1 and MEK2, with a minority in KRAS. This pathway transduces growth-factor signals to control cell proliferation, differentiation and survival. Constitutive over-activation dysregulates these processes during development, producing the characteristic craniofacial, cardiac, ectodermal and neurodevelopmental abnormalities shared, with variation, across the RASopathy spectrum.",
+    "additionalDifferentials": [
+      "Noonan syndrome",
+      "Costello syndrome",
+      "Legius syndrome",
+      "Neurofibromatosis type 1",
+      "Noonan syndrome with multiple lentigines (LEOPARD syndrome)",
+      "Ectodermal dysplasia syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Noonan syndrome, Costello syndrome, Legius syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS",
+      "Echocardiography for pulmonary stenosis, septal defects and hypertrophic cardiomyopathy",
+      "Electroencephalography and brain MRI for seizures and structural anomalies",
+      "Growth and nutritional assessment, with feeding evaluation for reflux",
+      "Ophthalmology review for ptosis, strabismus and refractive error",
+      "Dermatological assessment of the ectodermal findings"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of hypertrophic cardiomyopathy or arrhythmia causing cardiac compromise",
+      "Failure to thrive and dehydration from severe feeding difficulty",
+      "Prolonged or refractory seizures",
+      "Rapidly changing or atypical skin lesions warranting review"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on the cardiac phenotype, particularly hypertrophic cardiomyopathy, and on the severity of feeding and neurological problems; many individuals have moderate to severe intellectual disability. With multidisciplinary care most survive into adulthood, though medical needs remain substantial.",
+    "pitfalls": [
+      "Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis",
+      "Underestimating early feeding failure and delaying nutritional support",
+      "Overlooking hypertrophic cardiomyopathy that can progress silently",
+      "Assuming skin and hair findings are an unrelated ectodermal disorder"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "GeneReviews: Cardiofaciocutaneous syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK dysregulation",
+      "Manage congenital heart disease with balloon valvuloplasty for pulmonary valve stenosis and surveillance and treatment of hypertrophic cardiomyopathy",
+      "Address feeding difficulty and failure to thrive with nutritional support, nasogastric or gastrostomy feeding and treatment of gastro-oesophageal reflux",
+      "Control seizures with anticonvulsant therapy and monitor neurodevelopment",
+      "Provide developmental support with physiotherapy, occupational therapy, speech therapy and educational input",
+      "Treat the ectodermal features and offer ophthalmology review for ptosis, strabismus and refractive error",
+      "Coordinate multidisciplinary care and offer genetic counselling, noting most variants arise de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for cardiofaciocutaneous syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cardiofaciocutaneous-syndrome-real-image",
-   "title": "Cardiofaciocutaneous syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cardiofaciocutaneous_syndrome-pathway",
+      "title": "Cardiofaciocutaneous syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and neurodevelopmental involvement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of hypertrophic cardiomyopathy or arrhythmia causing cardiac compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS, Echocardiography for pulmonary stenosis, septal defects and hypertrophic cardiomyopathy, Electroencephalography and brain MRI"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK dysregulation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cardiofaciocutaneous syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cardiofaciocutaneous_syndrome-matrix",
+      "title": "Cardiofaciocutaneous syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the RASopathies, overlapping clinically with Noonan and Costello syndromes but generally with more marked ectodermal and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gene-panel or exome sequencing of the RAS-MAPK pathway, including BRAF, MAP2K1, MAP2K2 and KRAS, Echocardiography for pulmonary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Noonan syndrome, Costello syndrome, Legius syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, manifestation-directed care, as there is no disease-modifying therapy for the underlying RAS-MAPK",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Noonan or Costello syndrome, which alters cancer surveillance and prognosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cardiofaciocutaneous syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiofaciocutaneous_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in cardiofaciocutaneous syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "RAS-MAPK gene panel or exome sequencing", "cells": [{"text": "BRAF, MAP2K1, MAP2K2 and KRAS variants"}], "cite": "c1"},
+        {"parameter": "Echocardiography", "cells": [{"text": "Pulmonary stenosis, septal defects and hypertrophic cardiomyopathy"}], "cite": "c1"},
+        {"parameter": "EEG and brain MRI", "cells": [{"text": "Seizures and structural anomalies"}], "cite": "c1"},
+        {"parameter": "Growth and feeding assessment", "cells": [{"text": "Failure to thrive and reflux"}], "cite": "c1"},
+        {"parameter": "Ophthalmology review", "cells": [{"text": "Ptosis, strabismus and refractive error"}], "cite": "c1"},
+        {"parameter": "Dermatological assessment", "cells": [{"text": "Ectodermal findings"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "cardiofaciocutaneous_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in cardiofaciocutaneous syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Manifestation-directed; no disease-modifying therapy for RAS-MAPK dysregulation"}, {"text": "Mainstay"}], "cite": "c1"},
+        {"parameter": "Pulmonary valve stenosis", "cells": [{"text": "Balloon valvuloplasty"}, {"text": "Congenital heart disease"}], "cite": "c1"},
+        {"parameter": "Hypertrophic cardiomyopathy", "cells": [{"text": "Surveillance and treatment"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Feeding and reflux", "cells": [{"text": "Nutritional support; nasogastric or gastrostomy feeding; treatment of reflux"}, {"text": "Severe in infancy"}], "cite": "c1"},
+        {"parameter": "Seizures", "cells": [{"text": "Anticonvulsant therapy and neurodevelopmental monitoring"}, {"text": "Common"}], "cite": "c1"},
+        {"parameter": "Developmental support", "cells": [{"text": "Physiotherapy, occupational and speech therapy; educational input"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Ectodermal and eye care", "cells": [{"text": "Treatment of ectodermal features; ophthalmology for ptosis, strabismus and refractive error"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Most variants de novo"}, {"text": "Family"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiofaciocutaneous_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of cardiofaciocutaneous syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Infant with coarse face, sparse curly hair, ectodermal change and congenital heart disease", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: cardiac compromise, failure to thrive with dehydration, or prolonged seizures?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent cardiology and nutrition review; anticonvulsant treatment", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Echocardiography; EEG and brain MRI; growth and feeding assessment; RAS-MAPK gene panel", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Pathogenic RAS-MAPK variant identified (BRAF, MAP2K1, MAP2K2 or KRAS)?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Manifestation-directed multidisciplinary care; genetic counselling", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider Noonan, Costello, Legius or neurofibromatosis type 1", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Moderate to severe intellectual disability is usual; cardiac and feeding problems need lifelong care", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,174 +1,723 @@
 {
- "id": "mansonelliasis",
- "name": "Mansonelliasis (Mansonella filariasis)",
- "aliases": [
-  "Mansonella perstans",
-  "Mansonella ozzardi",
-  "Mansonella streptocerca",
-  "Mansonella filariasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by biting midges and blackflies",
-   "It is endemic across parts of sub-Saharan Africa, and the Caribbean and Latin America, often coexisting with other filariases",
-   "Most infections are asymptomatic or cause mild, non-specific complaints, so the parasite is frequently an incidental finding",
-   "When symptomatic, features may include itching, transient swellings, arthralgia, serous-cavity involvement and, with M. streptocerca, skin changes",
-   "Peripheral eosinophilia is common and may be the clue that prompts investigation",
-   "Diagnosis rests on detecting microfilariae in blood or skin, depending on species; M. perstans and M. ozzardi produce blood microfilariae while M. streptocerca is found in skin",
-   "Treatment differs by species and often involves agents such as diethylcarbamazine or ivermectin, with doxycycline used against Wolbachia-harbouring species"
+  "id": "mansonelliasis",
+  "name": "Mansonelliasis (Mansonella filariasis)",
+  "aliases": [
+    "Mansonella perstans",
+    "Mansonella ozzardi",
+    "Mansonella streptocerca",
+    "Mansonella filariasis"
   ],
-  "pathophysiology": "Mansonella infection begins when infective larvae are inoculated by biting midges (Culicoides) or blackflies during a blood meal. The larvae mature into adult worms that reside in serous cavities, mesentery or subcutaneous tissue depending on the species, and release microfilariae into the blood or skin. Many species harbour Wolbachia endosymbiotic bacteria that contribute to inflammatory responses. Because the parasite provokes relatively little tissue reaction in most hosts, infection is often clinically silent; symptomatic disease reflects localised inflammatory and hypersensitivity responses to the worms and microfilariae, frequently accompanied by eosinophilia.",
-  "additionalDifferentials": [
-   "Lymphatic filariasis (Wuchereria bancrofti, Brugia species)",
-   "Onchocerciasis",
-   "Loiasis",
-   "Other causes of eosinophilia such as strongyloidiasis and toxocariasis",
-   "Allergic and hypersensitivity disorders",
-   "Reactive or inflammatory arthropathy"
-  ],
-  "additionalInvestigations": [
-   "Peripheral blood films (including concentration techniques) for microfilariae",
-   "Skin snip examination for M. streptocerca microfilariae",
-   "Full blood count to detect eosinophilia",
-   "Species identification of microfilariae by morphology or molecular methods",
-   "Screening for co-infection with other filariae, particularly Loa loa before treatment",
-   "Serological or antigen tests where available to support diagnosis"
-  ],
-  "redFlags": [
-   "Marked eosinophilia with systemic symptoms warranting exclusion of other pathology",
-   "Co-infection with Loa loa raising the risk of treatment-related reactions",
-   "Serositis or effusions attributable to the parasite",
-   "Persistent symptoms despite therapy suggesting alternative or additional diagnoses"
-  ],
-  "prognosis": "The prognosis is generally very good, as most infections are benign and asymptomatic; symptomatic disease usually responds to appropriate species-directed therapy, though clearance of adult worms can be slow.",
-  "pitfalls": [
-   "Attributing all symptoms to Mansonella when co-infection with other filariae is common",
-   "Treating without first excluding heavy Loa loa co-infection",
-   "Missing the diagnosis because microfilariae require the correct sampling method and timing",
-   "Over-treating an incidental, asymptomatic infection"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate",
-   "Use doxycycline to target Wolbachia endosymbionts for M. perstans, which responds poorly to diethylcarbamazine",
-   "Consider ivermectin for its activity against M. ozzardi microfilariae",
-   "Screen for and exclude Loa loa co-infection before microfilaricidal treatment to avoid severe reactions",
-   "Provide symptomatic relief with antihistamines and analgesia for pruritus, transient swellings and arthralgia",
-   "Reassure and observe asymptomatic individuals in whom microfilariae are an incidental finding",
-   "Refer to infectious diseases or tropical medicine for species confirmation and treatment planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mansonelliasis-pathway",
-   "title": "Mansonelliasis (Mansonella filariasis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by biting midges and blackflies",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked eosinophilia with systemic symptoms warranting exclusion of other pathology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Peripheral blood films (including concentration techniques) for microfilariae, Skin snip examination for M. streptocerca microfilariae, Full blood count to detect eosinophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all symptoms to Mansonella when co-infection with other filariae is common"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mansonelliasis (mansonella filariasis)."
-  }
- ],
- "tables": [
-  {
-   "id": "mansonelliasis-matrix",
-   "title": "Mansonelliasis (Mansonella filariasis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by biting midges and blackflies",
+      "It is endemic across parts of sub-Saharan Africa, and the Caribbean and Latin America, often coexisting with other filariases",
+      "Most infections are asymptomatic or cause mild, non-specific complaints, so the parasite is frequently an incidental finding",
+      "When symptomatic, features may include itching, transient swellings, arthralgia, serous-cavity involvement and, with M. streptocerca, skin changes",
+      "Peripheral eosinophilia is common and may be the clue that prompts investigation",
+      "Diagnosis rests on detecting microfilariae in blood or skin, depending on species; M. perstans and M. ozzardi produce blood microfilariae while M. streptocerca is found in skin",
+      "Treatment differs by species and often involves agents such as diethylcarbamazine or ivermectin, with doxycycline used against Wolbachia-harbouring species"
     ],
-    [
-     "Key Investigations",
-     "Peripheral blood films (including concentration techniques) for microfilariae, Skin snip examination for M. streptocerca",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mansonella infection begins when infective larvae are inoculated by biting midges (Culicoides) or blackflies during a blood meal. The larvae mature into adult worms that reside in serous cavities, mesentery or subcutaneous tissue depending on the species, and release microfilariae into the blood or skin. Many species harbour Wolbachia endosymbiotic bacteria that contribute to inflammatory responses. Because the parasite provokes relatively little tissue reaction in most hosts, infection is often clinically silent; symptomatic disease reflects localised inflammatory and hypersensitivity responses to the worms and microfilariae, frequently accompanied by eosinophilia.",
+    "additionalDifferentials": [
+      "Lymphatic filariasis (Wuchereria bancrofti, Brugia species)",
+      "Onchocerciasis",
+      "Loiasis",
+      "Other causes of eosinophilia such as strongyloidiasis and toxocariasis",
+      "Allergic and hypersensitivity disorders",
+      "Reactive or inflammatory arthropathy"
     ],
-    [
-     "Primary Differentials",
-     "Lymphatic filariasis (Wuchereria bancrofti, Brugia species), Onchocerciasis, Loiasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Peripheral blood films (including concentration techniques) for microfilariae",
+      "Skin snip examination for M. streptocerca microfilariae",
+      "Full blood count to detect eosinophilia",
+      "Species identification of microfilariae by morphology or molecular methods",
+      "Screening for co-infection with other filariae, particularly Loa loa before treatment",
+      "Serological or antigen tests where available to support diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked eosinophilia with systemic symptoms warranting exclusion of other pathology",
+      "Co-infection with Loa loa raising the risk of treatment-related reactions",
+      "Serositis or effusions attributable to the parasite",
+      "Persistent symptoms despite therapy suggesting alternative or additional diagnoses"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all symptoms to Mansonella when co-infection with other filariae is common",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally very good, as most infections are benign and asymptomatic; symptomatic disease usually responds to appropriate species-directed therapy, though clearance of adult worms can be slow.",
+    "pitfalls": [
+      "Attributing all symptoms to Mansonella when co-infection with other filariae is common",
+      "Treating without first excluding heavy Loa loa co-infection",
+      "Missing the diagnosis because microfilariae require the correct sampling method and timing",
+      "Over-treating an incidental, asymptomatic infection"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate",
+      "Use doxycycline to target Wolbachia endosymbionts for M. perstans, which responds poorly to diethylcarbamazine",
+      "Consider ivermectin for its activity against M. ozzardi microfilariae",
+      "Screen for and exclude Loa loa co-infection before microfilaricidal treatment to avoid severe reactions",
+      "Provide symptomatic relief with antihistamines and analgesia for pruritus, transient swellings and arthralgia",
+      "Reassure and observe asymptomatic individuals in whom microfilariae are an incidental finding",
+      "Refer to infectious diseases or tropical medicine for species confirmation and treatment planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for mansonelliasis (mansonella filariasis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mansonelliasis-real-image",
-   "title": "Mansonelliasis (Mansonella filariasis): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mansonelliasis-pathway",
+      "title": "Mansonelliasis (Mansonella filariasis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by biting midges and blackflies",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked eosinophilia with systemic symptoms warranting exclusion of other pathology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Peripheral blood films (including concentration techniques) for microfilariae, Skin snip examination for M. streptocerca microfilariae, Full blood count to detect eosinophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all symptoms to Mansonella when co-infection with other filariae is common"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mansonelliasis (mansonella filariasis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mansonelliasis-matrix",
+      "title": "Mansonelliasis (Mansonella filariasis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mansonelliasis is a filarial infection caused by Mansonella species (M. perstans, M. ozzardi, M. streptocerca) transmitted by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood films (including concentration techniques) for microfilariae, Skin snip examination for M. streptocerca",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphatic filariasis (Wuchereria bancrofti, Brugia species), Onchocerciasis, Loiasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct antiparasitic therapy by species, using diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all symptoms to Mansonella when co-infection with other filariae is common",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mansonelliasis (mansonella filariasis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 218-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mansonelliasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood films with concentration techniques",
+          "cells": [
+            {
+              "text": "Microfilariae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin snip examination",
+          "cells": [
+            {
+              "text": "M. streptocerca microfilariae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification by morphology or molecular methods",
+          "cells": [
+            {
+              "text": "Microfilarial species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for Loa loa co-infection before treatment",
+          "cells": [
+            {
+              "text": "Loa loa co-infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological or antigen tests, where available",
+          "cells": [
+            {
+              "text": "Supports diagnosis where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mansonelliasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Loiasis",
+          "cells": [
+            {
+              "text": "Loa loa co-infection, which raises the risk of treatment-related reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of eosinophilia such as strongyloidiasis and toxocariasis",
+          "cells": [
+            {
+              "text": "Marked eosinophilia with systemic symptoms, which warrants exclusion of other pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mansonelliasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Species-directed antiparasitic therapy",
+          "cells": [
+            {
+              "text": "Diethylcarbamazine for M. streptocerca and M. ozzardi where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doxycycline for M. perstans",
+          "cells": [
+            {
+              "text": "Targets Wolbachia endosymbionts; M. perstans responds poorly to diethylcarbamazine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ivermectin",
+          "cells": [
+            {
+              "text": "Activity against M. ozzardi microfilariae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loa loa screening before microfilaricidal treatment",
+          "cells": [
+            {
+              "text": "Avoids severe reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Antihistamines and analgesia for pruritus, transient swellings and arthralgia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of asymptomatic individuals",
+          "cells": [
+            {
+              "text": "Microfilariae found as an incidental finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or tropical medicine for species confirmation and treatment planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mansonelliasis-ddx-2",
+      "kind": "ddx",
+      "title": "Characteristics of the filariae",
+      "rowHeader": "Organism",
+      "columns": [
+        "Periodicity",
+        "Distribution",
+        "Vector",
+        "Location of adult",
+        "Microfilarial location",
+        "Sheath"
+      ],
+      "rows": [
+        {
+          "parameter": "Wuchereria bancrofti (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Cosmopolitan areas worldwide, including South America, Africa, southern Asia, Papua New Guinea, China, Indonesia"
+            },
+            {
+              "text": "Culex, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "W. bancrofti (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Eastern Pacific"
+            },
+            {
+              "text": "Aedes (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brugia malayi (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Southeast Asia, Indonesia, India"
+            },
+            {
+              "text": "Mansonia, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. malayi (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Indonesia, Southeast Asia"
+            },
+            {
+              "text": "Coquillettidia, Mansonia (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. timori",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Indonesia"
+            },
+            {
+              "text": "Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loa loa",
+          "cells": [
+            {
+              "text": "Diurnal"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Chrysops (deerflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Onchocerca volvulus",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Simulium (blackflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin, eye"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mansonella ozzardi",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America (Culicoides, midges); Caribbean (Simulium, blackflies)"
+            },
+            {
+              "text": "Not stated separately in the source row"
+            },
+            {
+              "text": "Undetermined site"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. perstans",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Body cavities, mesentery, perirenal tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. streptocerca",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "For M. ozzardi the vector names appear inside the distribution cell in the source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mansonelliasis-dx-mgmt",
+      "title": "Diagnosis and management of Mansonelliasis (Mansonella filariasis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microfilariae or eosinophilia in a patient from an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Marked eosinophilia with systemic symptoms, serositis or Loa loa co-infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to infectious diseases; exclude Loa loa before microfilaricidal treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film with concentration, skin snip, full blood count and species identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are microfilariae confirmed and the species identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other eosinophilic causes such as strongyloidiasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for and exclude Loa loa co-infection before microfilaricidal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Species-directed therapy: diethylcarbamazine, or doxycycline for M. perstans",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic relief with antihistamines and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure and observe asymptomatic individuals with incidental microfilariae",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent symptoms despite therapy suggest an alternative or additional diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

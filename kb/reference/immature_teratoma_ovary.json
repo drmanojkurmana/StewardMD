@@ -1,178 +1,465 @@
 {
- "id": "immature_teratoma_ovary",
- "name": "Immature teratoma of the ovary",
- "aliases": [
-  "malignant teratoma",
-  "immature ovarian teratoma"
- ],
- "class": "non_infective",
- "system": "Gynaecology / Oncology",
- "specialty": "Gynaecological Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Female Genital Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type tissue",
-   "Occurs chiefly in children and young women and often presents as a rapidly enlarging, predominantly solid pelvic mass",
-   "The grade is determined by the amount of immature neuroepithelium present, and grade strongly influences behaviour and treatment",
-   "Alpha-fetoprotein may be mildly elevated, and a significant rise should prompt a search for a coexisting yolk sac component",
-   "Peritoneal implants of mature glial tissue (gliomatosis peritonei) can accompany the tumour and, when purely mature, do not themselves indicate malignancy",
-   "Typically unilateral, allowing fertility-sparing surgery in many young patients",
-   "Chemosensitive, so platinum-based germ-cell chemotherapy is used for higher-grade or advanced disease"
+  "id": "immature_teratoma_ovary",
+  "name": "Immature teratoma of the ovary",
+  "aliases": [
+    "malignant teratoma",
+    "immature ovarian teratoma"
   ],
-  "pathophysiology": "Immature teratomas are germ-cell tumours containing tissues from all three embryonic layers, but unlike mature teratomas they include immature, embryonal-appearing elements, most importantly primitive neuroepithelium forming rosettes and tubules. The quantity of this immature neuroepithelium underlies the histological grading system, with higher grades reflecting greater immaturity and more aggressive potential. Because the tumour arises from a germ cell, it may coexist with other germ-cell elements, and any yolk sac component can raise serum alpha-fetoprotein. Mature glial implants on the peritoneum (gliomatosis peritonei) represent differentiation of tumour tissue and, when entirely mature, carry a benign course, whereas immature implants indicate genuine dissemination.",
-  "additionalDifferentials": [
-   "Mature cystic teratoma",
-   "Other malignant germ-cell tumours (yolk sac tumour, dysgerminoma, embryonal carcinoma)",
-   "Mixed germ-cell tumour",
-   "Ovarian carcinosarcoma",
-   "Sex cord-stromal tumour",
-   "Metastatic tumour"
-  ],
-  "additionalInvestigations": [
-   "Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components",
-   "Transabdominal and transvaginal ultrasound of a solid or mixed ovarian mass",
-   "Cross-sectional imaging (CT or MRI) for staging and detection of peritoneal implants",
-   "Histology with grading of immature neuroepithelium",
-   "Assessment of any peritoneal deposits to distinguish mature from immature implants",
-   "Baseline organ function before chemotherapy"
-  ],
-  "redFlags": [
-   "A rapidly enlarging, predominantly solid ovarian mass in a child or young woman",
-   "Rising alpha-fetoprotein indicating a possible yolk sac component",
-   "High-grade immature neuroepithelium on histology",
-   "Immature peritoneal implants signifying true metastatic spread"
-  ],
-  "prognosis": "Depends heavily on grade and stage; low-grade, early-stage tumours have an excellent outlook, and higher-grade or advanced disease responds well to chemotherapy so that cure remains common, often with fertility preserved.",
-  "pitfalls": [
-   "Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma",
-   "Not grading the neuroepithelial component, which guides adjuvant treatment",
-   "Misinterpreting mature gliomatosis peritonei as malignant dissemination",
-   "Overlooking a yolk sac component signalled by a rising AFP"
-  ],
-  "references": [
-   "WHO Classification of Female Genital Tumours",
-   "Blaustein's Pathology of the Female Genital Tract"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for any suspected malignant ovarian germ cell tumour.",
-   "Prefer fertility-sparing unilateral salpingo-oophorectomy plus staging over bilateral resection or hysterectomy, since these tumours are almost always unilateral and highly chemosensitive; this can be considered even when metastases are present.",
-   "For FIGO stage IA, grade 1 or 2 immature teratoma, surgery alone (fertility-sparing resection plus staging) is a reasonable approach without adjuvant chemotherapy.",
-   "For higher grade or higher stage disease, give adjuvant combination chemotherapy built on a platinum agent with etoposide and bleomycin, following the treatment experience extrapolated from testicular germ cell cancer.",
-   "There is no established role for radiotherapy in immature teratoma of the ovary, unlike the radiosensitive dysgerminoma.",
-   "When assessing extra-ovarian disease, distinguish purely mature peritoneal implants (gliomatosis peritonei) from immature implants, and reserve additional treatment for immature deposits.",
-   "For relapsed or refractory disease, consider salvage chemotherapy using principles extrapolated from testicular germ cell cancer, along with surgical resection of residual masses.",
-   "Follow alpha-fetoprotein and human chorionic gonadotropin serially to help detect a mixed germ cell component and to track disease activity, though no specific surveillance interval is defined.",
-   "Monitor for return of menstrual function and fertility outcomes, since return of normal menses is the rule and successful pregnancies are well documented in survivors of this tumour group.",
-   "Arrange longer-term surveillance imaging with a defined follow-up schedule as part of routine post-treatment care.",
-   "Manage patients within a gynaecological oncology multidisciplinary team with fertility-preservation counselling before any treatment decision, given the rarity of this tumour, the extrapolated evidence base, and the typically young patient population.",
-   "Refer back to gynaecological oncology for reassessment and consideration of further surgery if tumour markers rise after treatment or if growing teratoma syndrome is suspected.",
-   "Overall prognosis for this class of ovarian germ cell malignancy is excellent."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "immature_teratoma_ovary-pathway",
-   "title": "Immature teratoma of the ovary: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type tissue",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rapidly enlarging, predominantly solid ovarian mass in a child or young woman",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components, Transabdominal and transvaginal ultrasound of a solid or mixed ovarian mass, Cross-sectional imaging (CT or MRI) for staging and detection of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for any suspected malignant ovarian germ cell tumour."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of immature teratoma of the ovary."
-  }
- ],
- "tables": [
-  {
-   "id": "immature_teratoma_ovary-matrix",
-   "title": "Immature teratoma of the ovary: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology / Oncology",
+  "specialty": "Gynaecological Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Female Genital Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type tissue",
+      "Occurs chiefly in children and young women and often presents as a rapidly enlarging, predominantly solid pelvic mass",
+      "The grade is determined by the amount of immature neuroepithelium present, and grade strongly influences behaviour and treatment",
+      "Alpha-fetoprotein may be mildly elevated, and a significant rise should prompt a search for a coexisting yolk sac component",
+      "Peritoneal implants of mature glial tissue (gliomatosis peritonei) can accompany the tumour and, when purely mature, do not themselves indicate malignancy",
+      "Typically unilateral, allowing fertility-sparing surgery in many young patients",
+      "Chemosensitive, so platinum-based germ-cell chemotherapy is used for higher-grade or advanced disease"
     ],
-    [
-     "Key Investigations",
-     "Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components, Transabdominal and transvaginal ultrasound of a solid or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Immature teratomas are germ-cell tumours containing tissues from all three embryonic layers, but unlike mature teratomas they include immature, embryonal-appearing elements, most importantly primitive neuroepithelium forming rosettes and tubules. The quantity of this immature neuroepithelium underlies the histological grading system, with higher grades reflecting greater immaturity and more aggressive potential. Because the tumour arises from a germ cell, it may coexist with other germ-cell elements, and any yolk sac component can raise serum alpha-fetoprotein. Mature glial implants on the peritoneum (gliomatosis peritonei) represent differentiation of tumour tissue and, when entirely mature, carry a benign course, whereas immature implants indicate genuine dissemination.",
+    "additionalDifferentials": [
+      "Mature cystic teratoma",
+      "Other malignant germ-cell tumours (yolk sac tumour, dysgerminoma, embryonal carcinoma)",
+      "Mixed germ-cell tumour",
+      "Ovarian carcinosarcoma",
+      "Sex cord-stromal tumour",
+      "Metastatic tumour"
     ],
-    [
-     "Primary Differentials",
-     "Mature cystic teratoma, Other malignant germ-cell tumours (yolk sac tumour, dysgerminoma, embryonal carcinoma), Mixed germ-cell",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components",
+      "Transabdominal and transvaginal ultrasound of a solid or mixed ovarian mass",
+      "Cross-sectional imaging (CT or MRI) for staging and detection of peritoneal implants",
+      "Histology with grading of immature neuroepithelium",
+      "Assessment of any peritoneal deposits to distinguish mature from immature implants",
+      "Baseline organ function before chemotherapy"
     ],
-    [
-     "Management Strategy",
-     "Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for",
-     "Core treatment modality"
+    "redFlags": [
+      "A rapidly enlarging, predominantly solid ovarian mass in a child or young woman",
+      "Rising alpha-fetoprotein indicating a possible yolk sac component",
+      "High-grade immature neuroepithelium on histology",
+      "Immature peritoneal implants signifying true metastatic spread"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Depends heavily on grade and stage; low-grade, early-stage tumours have an excellent outlook, and higher-grade or advanced disease responds well to chemotherapy so that cure remains common, often with fertility preserved.",
+    "pitfalls": [
+      "Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma",
+      "Not grading the neuroepithelial component, which guides adjuvant treatment",
+      "Misinterpreting mature gliomatosis peritonei as malignant dissemination",
+      "Overlooking a yolk sac component signalled by a rising AFP"
+    ],
+    "references": [
+      "WHO Classification of Female Genital Tumours",
+      "Blaustein's Pathology of the Female Genital Tract"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for any suspected malignant ovarian germ cell tumour.",
+      "Prefer fertility-sparing unilateral salpingo-oophorectomy plus staging over bilateral resection or hysterectomy, since these tumours are almost always unilateral and highly chemosensitive; this can be considered even when metastases are present.",
+      "For FIGO stage IA, grade 1 or 2 immature teratoma, surgery alone (fertility-sparing resection plus staging) is a reasonable approach without adjuvant chemotherapy.",
+      "For higher grade or higher stage disease, give adjuvant combination chemotherapy built on a platinum agent with etoposide and bleomycin, following the treatment experience extrapolated from testicular germ cell cancer.",
+      "There is no established role for radiotherapy in immature teratoma of the ovary, unlike the radiosensitive dysgerminoma.",
+      "When assessing extra-ovarian disease, distinguish purely mature peritoneal implants (gliomatosis peritonei) from immature implants, and reserve additional treatment for immature deposits.",
+      "For relapsed or refractory disease, consider salvage chemotherapy using principles extrapolated from testicular germ cell cancer, along with surgical resection of residual masses.",
+      "Follow alpha-fetoprotein and human chorionic gonadotropin serially to help detect a mixed germ cell component and to track disease activity, though no specific surveillance interval is defined.",
+      "Monitor for return of menstrual function and fertility outcomes, since return of normal menses is the rule and successful pregnancies are well documented in survivors of this tumour group.",
+      "Arrange longer-term surveillance imaging with a defined follow-up schedule as part of routine post-treatment care.",
+      "Manage patients within a gynaecological oncology multidisciplinary team with fertility-preservation counselling before any treatment decision, given the rarity of this tumour, the extrapolated evidence base, and the typically young patient population.",
+      "Refer back to gynaecological oncology for reassessment and consideration of further surgery if tumour markers rise after treatment or if growing teratoma syndrome is suspected.",
+      "Overall prognosis for this class of ovarian germ cell malignancy is excellent."
     ]
-   ],
-   "caption": "Overview comparison matrix for immature teratoma of the ovary."
-  }
- ],
- "diagrams": [
-  {
-   "id": "immature-teratoma-ovary-real-image",
-   "title": "Immature teratoma of the ovary: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "immature_teratoma_ovary-pathway",
+      "title": "Immature teratoma of the ovary: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type tissue",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rapidly enlarging, predominantly solid ovarian mass in a child or young woman",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components, Transabdominal and transvaginal ultrasound of a solid or mixed ovarian mass, Cross-sectional imaging (CT or MRI) for staging and detection of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for any suspected malignant ovarian germ cell tumour."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of immature teratoma of the ovary."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "immature_teratoma_ovary-matrix",
+      "title": "Immature teratoma of the ovary: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malignant germ-cell tumour, distinguished from the common mature cystic teratoma by the presence of immature, embryonal-type",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum AFP, beta-hCG, and LDH to assess for mixed germ-cell components, Transabdominal and transvaginal ultrasound of a solid or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mature cystic teratoma, Other malignant germ-cell tumours (yolk sac tumour, dysgerminoma, embryonal carcinoma), Mixed germ-cell",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start with surgical staging (peritoneal washing, inspection and biopsy of peritoneal surfaces, omental and nodal assessment) for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish an immature (malignant) teratoma from a benign mature cystic teratoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for immature teratoma of the ovary."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "immature_teratoma_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum AFP, beta-hCG and LDH",
+          "cells": [
+            {
+              "text": "Mixed germ-cell component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transabdominal and transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Solid or mixed ovarian mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Staging and peritoneal implants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with grading",
+          "cells": [
+            {
+              "text": "Immature neuroepithelium grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of peritoneal deposits",
+          "cells": [
+            {
+              "text": "Mature or immature implants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline organ function",
+          "cells": [
+            {
+              "text": "Before chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immature_teratoma_ovary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mature cystic teratoma",
+          "cells": [
+            {
+              "text": "Benign; mature rather than immature tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yolk sac tumour or other malignant germ-cell tumour",
+          "cells": [
+            {
+              "text": "Rising alpha-fetoprotein suggests a yolk sac component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mature gliomatosis peritonei",
+          "cells": [
+            {
+              "text": "Mature implants, not malignant dissemination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "immature_teratoma_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical staging",
+          "cells": [
+            {
+              "text": "Peritoneal washings, biopsy of peritoneal surfaces, omentum and nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-sparing surgery",
+          "cells": [
+            {
+              "text": "Unilateral salpingo-oophorectomy plus staging rather than bilateral resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage IA grade 1 or 2",
+          "cells": [
+            {
+              "text": "Surgery alone is a reasonable approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Higher grade or stage",
+          "cells": [
+            {
+              "text": "Platinum-based combination with etoposide and bleomycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "No established role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-treatment",
+          "cells": [
+            {
+              "text": "Baseline organ function before chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "immature_teratoma_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Immature teratoma of the ovary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging, predominantly solid ovarian mass in a child or young woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising AFP, high-grade immature neuroepithelium or immature peritoneal implants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent staging; plan platinum-based adjuvant chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AFP, beta-hCG, LDH, ultrasound, CT or MRI, histological grading",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stage IA grade 1 or 2 disease on complete staging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat staging and grade; arrange adjuvant chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical staging: washings, peritoneal biopsy, omentum, nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fertility-sparing unilateral salpingo-oophorectomy plus staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery alone for stage IA grade 1 or 2",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Higher grade or stage: platinum, etoposide and bleomycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome driven by grade and stage; fertility preserved where possible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

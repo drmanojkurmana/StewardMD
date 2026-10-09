@@ -1,177 +1,446 @@
 {
- "id": "uveitic_glaucoma",
- "name": "Uveitic glaucoma",
- "aliases": [
-  "inflammatory glaucoma",
-  "glaucoma secondary to uveitis",
-  "uveitic ocular hypertension",
-  "inflammatory ocular hypertension"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting mechanisms rather than a single cause",
-   "Open-angle mechanisms include trabecular obstruction by inflammatory cells and debris, trabeculitis, and a steroid-induced pressure response from treatment",
-   "Angle-closure mechanisms include pupillary block from extensive posterior synechiae with iris bombe, and peripheral anterior synechiae from chronic angle inflammation",
-   "Pressure may paradoxically be low during active inflammation from ciliary hyposecretion, then surge as inflammation settles or steroids are used",
-   "Careful gonioscopy is essential to distinguish open-angle from synechial or pupillary-block mechanisms because treatment differs",
-   "Management balances vigorous control of inflammation with pressure-lowering therapy, while recognising that corticosteroids can both reduce inflammatory outflow obstruction and independently raise pressure",
-   "Fuchs heterochromic uveitis and herpetic anterior uveitis are characteristically associated with raised pressure",
-   "Prostaglandin analogues are used with caution as they may theoretically aggravate inflammation and cystoid macular oedema"
+  "id": "uveitic_glaucoma",
+  "name": "Uveitic glaucoma",
+  "aliases": [
+    "inflammatory glaucoma",
+    "glaucoma secondary to uveitis",
+    "uveitic ocular hypertension",
+    "inflammatory ocular hypertension"
   ],
-  "pathophysiology": "In uveitic glaucoma intraocular inflammation raises pressure through multiple overlapping pathways. Inflammatory cells, fibrin, and protein clog the trabecular meshwork, and direct inflammation of the meshwork (trabeculitis) reduces outflow facility; scarring can permanently damage the drainage tissue. Chronic inflammation promotes peripheral anterior synechiae that close the angle, while dense posterior synechiae binding the pupil margin to the lens can produce pupillary block with forward bowing of the iris (iris bombe) and secondary angle closure. Corticosteroids used to treat the uveitis may themselves reduce outflow and cause a steroid-induced pressure rise. Active inflammation can transiently lower pressure by suppressing aqueous production, masking a tendency to later elevation.",
-  "additionalDifferentials": [
-   "Primary open-angle glaucoma with coincidental uveitis",
-   "Steroid-induced (corticosteroid-responder) glaucoma",
-   "Posner-Schlossman syndrome (glaucomatocyclitic crisis)",
-   "Neovascular glaucoma",
-   "Primary or secondary angle-closure glaucoma from other causes",
-   "Herpetic or Fuchs heterochromic uveitis with raised pressure"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae",
-   "Gonioscopy to identify open-angle, synechial, or pupillary-block mechanisms",
-   "Applanation tonometry with monitoring during and after inflammatory episodes and steroid treatment",
-   "OCT of the optic nerve and macula to assess glaucomatous damage and cystoid oedema",
-   "Automated perimetry to monitor field loss",
-   "Targeted workup for the underlying uveitis, including infective and systemic causes when indicated"
-  ],
-  "redFlags": [
-   "Iris bombe from a completely bound-down pupil producing acute pupillary-block angle closure",
-   "A marked steroid-induced pressure rise during treatment of the inflammation",
-   "Very high pressure with corneal oedema during an inflammatory crisis",
-   "Progressive optic-nerve damage masked by intermittently low pressure during active uveitis"
-  ],
-  "prognosis": "Prognosis depends on controlling the underlying inflammation and the mechanism of pressure rise; open-angle inflammatory hypertension often resolves as the uveitis settles, whereas extensive synechial closure and repeated crises lead to chronic glaucoma that may need drainage surgery and carries a guarded outlook.",
-  "pitfalls": [
-   "Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa",
-   "Missing pupillary block and iris bombe requiring urgent iridotomy rather than only medical therapy",
-   "Being reassured by low pressure during active inflammation and overlooking later surges",
-   "Using prostaglandin analogues uncritically where they may worsen inflammation or macular oedema",
-   "Failing to investigate and treat the underlying cause of the uveitis"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Shields' Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus steroid-sparing immunosuppression where indicated",
-   "Specific treatment of any identified infective or systemic cause of the uveitis",
-   "Cycloplegic and mydriatic agents to prevent and break posterior synechiae",
-   "Intraocular pressure lowering with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists, generally avoiding prostaglandin analogues and miotics that may aggravate inflammation",
-   "Recognition and management of a steroid-induced pressure rise by adjusting the steroid agent, route or potency",
-   "Laser peripheral iridotomy or surgical iridectomy for pupillary-block angle closure from iris bombe",
-   "Glaucoma drainage surgery such as trabeculectomy with antimetabolite or a drainage device for uncontrolled pressure",
-   "Regular monitoring with gonioscopy, tonometry, optic nerve optical coherence tomography and automated perimetry"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "uveitic_glaucoma-pathway",
-   "title": "Uveitic glaucoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting mechanisms rather than a single cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Iris bombe from a completely bound-down pupil producing acute pupillary-block angle closure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae, Gonioscopy to identify open-angle, synechial, or pupillary-block mechanisms, Applanation tonometry with monitoring during and after"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus steroid-sparing immunosuppression where indicated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of uveitic glaucoma."
-  }
- ],
- "tables": [
-  {
-   "id": "uveitic_glaucoma-matrix",
-   "title": "Uveitic glaucoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting mechanisms rather than a single cause",
+      "Open-angle mechanisms include trabecular obstruction by inflammatory cells and debris, trabeculitis, and a steroid-induced pressure response from treatment",
+      "Angle-closure mechanisms include pupillary block from extensive posterior synechiae with iris bombe, and peripheral anterior synechiae from chronic angle inflammation",
+      "Pressure may paradoxically be low during active inflammation from ciliary hyposecretion, then surge as inflammation settles or steroids are used",
+      "Careful gonioscopy is essential to distinguish open-angle from synechial or pupillary-block mechanisms because treatment differs",
+      "Management balances vigorous control of inflammation with pressure-lowering therapy, while recognising that corticosteroids can both reduce inflammatory outflow obstruction and independently raise pressure",
+      "Fuchs heterochromic uveitis and herpetic anterior uveitis are characteristically associated with raised pressure",
+      "Prostaglandin analogues are used with caution as they may theoretically aggravate inflammation and cystoid macular oedema"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae, Gonioscopy to identify open-angle, synechial,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In uveitic glaucoma intraocular inflammation raises pressure through multiple overlapping pathways. Inflammatory cells, fibrin, and protein clog the trabecular meshwork, and direct inflammation of the meshwork (trabeculitis) reduces outflow facility; scarring can permanently damage the drainage tissue. Chronic inflammation promotes peripheral anterior synechiae that close the angle, while dense posterior synechiae binding the pupil margin to the lens can produce pupillary block with forward bowing of the iris (iris bombe) and secondary angle closure. Corticosteroids used to treat the uveitis may themselves reduce outflow and cause a steroid-induced pressure rise. Active inflammation can transiently lower pressure by suppressing aqueous production, masking a tendency to later elevation.",
+    "additionalDifferentials": [
+      "Primary open-angle glaucoma with coincidental uveitis",
+      "Steroid-induced (corticosteroid-responder) glaucoma",
+      "Posner-Schlossman syndrome (glaucomatocyclitic crisis)",
+      "Neovascular glaucoma",
+      "Primary or secondary angle-closure glaucoma from other causes",
+      "Herpetic or Fuchs heterochromic uveitis with raised pressure"
     ],
-    [
-     "Primary Differentials",
-     "Primary open-angle glaucoma with coincidental uveitis, Steroid-induced (corticosteroid-responder) glaucoma, Posner-Schlossman",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae",
+      "Gonioscopy to identify open-angle, synechial, or pupillary-block mechanisms",
+      "Applanation tonometry with monitoring during and after inflammatory episodes and steroid treatment",
+      "OCT of the optic nerve and macula to assess glaucomatous damage and cystoid oedema",
+      "Automated perimetry to monitor field loss",
+      "Targeted workup for the underlying uveitis, including infective and systemic causes when indicated"
     ],
-    [
-     "Management Strategy",
-     "Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus",
-     "Core treatment modality"
+    "redFlags": [
+      "Iris bombe from a completely bound-down pupil producing acute pupillary-block angle closure",
+      "A marked steroid-induced pressure rise during treatment of the inflammation",
+      "Very high pressure with corneal oedema during an inflammatory crisis",
+      "Progressive optic-nerve damage masked by intermittently low pressure during active uveitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on controlling the underlying inflammation and the mechanism of pressure rise; open-angle inflammatory hypertension often resolves as the uveitis settles, whereas extensive synechial closure and repeated crises lead to chronic glaucoma that may need drainage surgery and carries a guarded outlook.",
+    "pitfalls": [
+      "Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa",
+      "Missing pupillary block and iris bombe requiring urgent iridotomy rather than only medical therapy",
+      "Being reassured by low pressure during active inflammation and overlooking later surges",
+      "Using prostaglandin analogues uncritically where they may worsen inflammation or macular oedema",
+      "Failing to investigate and treat the underlying cause of the uveitis"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Shields' Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus steroid-sparing immunosuppression where indicated",
+      "Specific treatment of any identified infective or systemic cause of the uveitis",
+      "Cycloplegic and mydriatic agents to prevent and break posterior synechiae",
+      "Intraocular pressure lowering with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists, generally avoiding prostaglandin analogues and miotics that may aggravate inflammation",
+      "Recognition and management of a steroid-induced pressure rise by adjusting the steroid agent, route or potency",
+      "Laser peripheral iridotomy or surgical iridectomy for pupillary-block angle closure from iris bombe",
+      "Glaucoma drainage surgery such as trabeculectomy with antimetabolite or a drainage device for uncontrolled pressure",
+      "Regular monitoring with gonioscopy, tonometry, optic nerve optical coherence tomography and automated perimetry"
     ]
-   ],
-   "caption": "Overview comparison matrix for uveitic glaucoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "uveitic-glaucoma-real-image",
-   "title": "Uveitic glaucoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "uveitic_glaucoma-pathway",
+      "title": "Uveitic glaucoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting mechanisms rather than a single cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Iris bombe from a completely bound-down pupil producing acute pupillary-block angle closure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae, Gonioscopy to identify open-angle, synechial, or pupillary-block mechanisms, Applanation tonometry with monitoring during and after"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus steroid-sparing immunosuppression where indicated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of uveitic glaucoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "uveitic_glaucoma-matrix",
+      "title": "Uveitic glaucoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A secondary glaucoma arising in eyes with intraocular inflammation, with pressure elevation resulting from several coexisting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination to grade inflammation, keratic precipitates, and synechiae, Gonioscopy to identify open-angle, synechial,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary open-angle glaucoma with coincidental uveitis, Steroid-induced (corticosteroid-responder) glaucoma, Posner-Schlossman",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Vigorous control of the underlying intraocular inflammation with topical, periocular or systemic corticosteroids, plus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all pressure elevation to steroid response and undertreating the inflammation, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for uveitic glaucoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uveitic_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Grades inflammation, keratic precipitates and synechiae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Open-angle, synechial or pupillary-block mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Pressure during and after inflammatory episodes and steroid treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of optic nerve and macula",
+          "cells": [
+            {
+              "text": "Glaucomatous damage and cystoid oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uveitic_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma with coincidental uveitis",
+          "cells": [
+            {
+              "text": "Distinguished by gonioscopy and the course of the inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-induced glaucoma",
+          "cells": [
+            {
+              "text": "Pressure rise in steroid responders during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posner-Schlossman syndrome",
+          "cells": [
+            {
+              "text": "Glaucomatocyclitic crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neovascular glaucoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uveitic_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids for inflammation",
+          "cells": [
+            {
+              "text": "Topical, periocular or systemic, with steroid-sparing agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any infective or systemic cause",
+          "cells": [
+            {
+              "text": "Specific therapy for the identified cause of uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic and mydriatic agents",
+          "cells": [
+            {
+              "text": "Prevent and break posterior synechiae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aqueous suppressants",
+          "cells": [
+            {
+              "text": "Topical beta-blockers and carbonic anhydrase inhibitors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uveitic_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Uveitic glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected uveitic glaucoma: raised pressure with intraocular inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (iris bombe, marked steroid pressure rise or corneal oedema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent iridotomy for iris bombe; urgent pressure lowering for very high pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, gonioscopy, applanation tonometry, OCT, perimetry and infection workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonioscopy show a synechial, pupillary-block or trabecular mechanism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle glaucoma or steroid-induced rise; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vigorous control of intraocular inflammation with corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specific treatment of any infective or systemic cause of the uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic and mydriatic agents to prevent posterior synechiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aqueous suppressants such as topical beta-blockers and carbonic anhydrase inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pressure and inflammation both need control; pupillary block may need iridotomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

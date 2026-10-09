@@ -1,178 +1,427 @@
 {
- "id": "reversible_infantile_respiratory_chain_deficiency",
- "name": "Reversible infantile respiratory chain deficiency",
- "aliases": [
-  "Reversible infantile mitochondrial myopathy",
-  "Benign infantile mitochondrial myopathy",
-  "Reversible infantile cytochrome c oxidase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Mitochondrial",
- "specialty": "Metabolic medicine / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Mitochondrial medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the mitochondrial transfer-RNA-glutamate gene (MT-TE).",
-   "It presents in the first weeks to months with profound hypotonia, weakness, feeding difficulty and often respiratory failure requiring ventilatory support, accompanied by lactic acidosis.",
-   "Despite a severe, sometimes ventilator-dependent early course, affected infants improve spontaneously, typically from the middle of the first year, and many reach normal or near-normal motor function.",
-   "Early muscle biopsy shows severe cytochrome c oxidase (complex IV) deficiency with ragged-red and COX-negative fibres and mitochondrial proliferation, all of which resolve on later biopsy.",
-   "Correctly identifying the genotype is crucial because it predicts recovery and should prevent premature withdrawal of intensive or ventilatory support.",
-   "A related nuclear-gene disorder, TRMU deficiency, causes a reversible infantile hepatopathy and liver failure; both conditions involve modification or function of mitochondrial transfer-RNA-glutamate.",
-   "It must be distinguished from fatal infantile COX-deficiency myopathy (for example SCO2-related disease), which is clinically similar early but non-reversible.",
-   "The reversibility is attributed to a developmental increase in expression and aminoacylation of mitochondrial transfer-RNA-glutamate that compensates for the variant over time."
+  "id": "reversible_infantile_respiratory_chain_deficiency",
+  "name": "Reversible infantile respiratory chain deficiency",
+  "aliases": [
+    "Reversible infantile mitochondrial myopathy",
+    "Benign infantile mitochondrial myopathy",
+    "Reversible infantile cytochrome c oxidase deficiency"
   ],
-  "pathophysiology": "The disorder is usually due to a homoplasmic point mutation in MT-TE, the gene encoding mitochondrial transfer-RNA-glutamate. Impaired transfer-RNA function limits mitochondrial protein synthesis, so respiratory-chain complexes containing mtDNA-encoded subunits, most conspicuously cytochrome c oxidase, are severely deficient in skeletal muscle during infancy, producing weakness, hypotonia and lactic acidosis. Uniquely, the biochemical defect is transient: a proposed developmental up-regulation of transfer-RNA-glutamate expression, together with improved aminoacylation as the infant matures, progressively restores mitochondrial translation and complex IV activity, mirroring the clinical recovery. In the related TRMU disorder, deficient 2-thiouridylation of mitochondrial transfer RNAs, with cysteine availability acting as a limiting factor, impairs translation chiefly in the liver, again with the capacity for recovery.",
-  "additionalDifferentials": [
-   "Fatal infantile mitochondrial myopathy with COX deficiency (for example SCO2-related, non-reversible)",
-   "Spinal muscular atrophy type 1",
-   "Congenital myopathies and congenital muscular dystrophies",
-   "Congenital myasthenic syndromes and transient neonatal myasthenia",
-   "Other mitochondrial DNA or transfer-RNA disorders and depletion syndromes",
-   "Pompe disease and other metabolic myopathies",
-   "Neonatal sepsis or hypoxic-ischaemic encephalopathy causing hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Serial blood lactate and CSF lactate monitoring over time",
-   "Muscle biopsy with COX and succinate dehydrogenase histochemistry and respiratory-chain enzymology",
-   "Targeted mtDNA testing for the MT-TE transfer-RNA-glutamate variant",
-   "Nuclear gene testing including TRMU where hepatopathy predominates",
-   "Serial neurophysiology and respiratory function testing as strength recovers",
-   "Liver function tests for the TRMU-related hepatic phenotype",
-   "Echocardiography and a general mitochondrial disease screen to exclude mimics"
-  ],
-  "redFlags": [
-   "Neonatal respiratory failure with severe hypotonia and lactic acidosis",
-   "Feeding failure with aspiration risk",
-   "Deterioration or failure to improve beyond the expected recovery window, prompting review of the diagnosis",
-   "Coexisting acute liver failure suggesting the TRMU phenotype"
-  ],
-  "prognosis": "With supportive intensive care through the early critical phase the muscle disorder typically resolves and most children achieve normal or near-normal function; recognising the genotype avoids inappropriate withdrawal of life support.",
-  "pitfalls": [
-   "Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy.",
-   "Failing to test for the MT-TE variant when an infant has a severe but potentially reversible COX-deficient myopathy.",
-   "Assuming a single early biopsy reflects the permanent state, when the defect normalises over time.",
-   "Confusing the myopathic (MT-TE) and hepatic (TRMU) reversible phenotypes.",
-   "Overlooking the role of cysteine as a limiting factor in the TRMU-related hepatopathy."
-  ],
-  "references": [
-   "Mitochondrial medicine reference texts",
-   "Neuromuscular disorder reference texts",
-   "Inborn errors of metabolism reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder is self-limiting",
-   "Confirm the MT-TE genotype so recovery can be predicted and premature withdrawal of ventilatory support avoided",
-   "Correct and monitor lactic acidosis with supportive measures and serial blood and CSF lactate",
-   "Support nutrition and feeding during the period of profound weakness",
-   "Provide physiotherapy and rehabilitation as strength recovers, with serial neurophysiology and respiratory function testing",
-   "In the related TRMU disorder, manage the hepatopathy supportively, with cysteine supplementation as proposed",
-   "Offer genetic counselling covering the maternally inherited mitochondrial variant or the autosomal recessive TRMU form"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reversible_infantile_respiratory_chain_deficiency-pathway",
-   "title": "Reversible infantile respiratory chain deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the mitochondrial transfer-RNA-glutamate gene (MT-TE).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal respiratory failure with severe hypotonia and lactic acidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial blood lactate and CSF lactate monitoring over time, Muscle biopsy with COX and succinate dehydrogenase histochemistry and respiratory-chain enzymology, Targeted mtDNA testing for the MT-TE transfer-RNA-glutamate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder is self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reversible infantile respiratory chain deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "reversible_infantile_respiratory_chain_deficiency-matrix",
-   "title": "Reversible infantile respiratory chain deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Mitochondrial",
+  "specialty": "Metabolic medicine / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mitochondrial medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the mitochondrial transfer-RNA-glutamate gene (MT-TE).",
+      "It presents in the first weeks to months with profound hypotonia, weakness, feeding difficulty and often respiratory failure requiring ventilatory support, accompanied by lactic acidosis.",
+      "Despite a severe, sometimes ventilator-dependent early course, affected infants improve spontaneously, typically from the middle of the first year, and many reach normal or near-normal motor function.",
+      "Early muscle biopsy shows severe cytochrome c oxidase (complex IV) deficiency with ragged-red and COX-negative fibres and mitochondrial proliferation, all of which resolve on later biopsy.",
+      "Correctly identifying the genotype is crucial because it predicts recovery and should prevent premature withdrawal of intensive or ventilatory support.",
+      "A related nuclear-gene disorder, TRMU deficiency, causes a reversible infantile hepatopathy and liver failure; both conditions involve modification or function of mitochondrial transfer-RNA-glutamate.",
+      "It must be distinguished from fatal infantile COX-deficiency myopathy (for example SCO2-related disease), which is clinically similar early but non-reversible.",
+      "The reversibility is attributed to a developmental increase in expression and aminoacylation of mitochondrial transfer-RNA-glutamate that compensates for the variant over time."
     ],
-    [
-     "Key Investigations",
-     "Serial blood lactate and CSF lactate monitoring over time, Muscle biopsy with COX and succinate dehydrogenase histochemistry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder is usually due to a homoplasmic point mutation in MT-TE, the gene encoding mitochondrial transfer-RNA-glutamate. Impaired transfer-RNA function limits mitochondrial protein synthesis, so respiratory-chain complexes containing mtDNA-encoded subunits, most conspicuously cytochrome c oxidase, are severely deficient in skeletal muscle during infancy, producing weakness, hypotonia and lactic acidosis. Uniquely, the biochemical defect is transient: a proposed developmental up-regulation of transfer-RNA-glutamate expression, together with improved aminoacylation as the infant matures, progressively restores mitochondrial translation and complex IV activity, mirroring the clinical recovery. In the related TRMU disorder, deficient 2-thiouridylation of mitochondrial transfer RNAs, with cysteine availability acting as a limiting factor, impairs translation chiefly in the liver, again with the capacity for recovery.",
+    "additionalDifferentials": [
+      "Fatal infantile mitochondrial myopathy with COX deficiency (for example SCO2-related, non-reversible)",
+      "Spinal muscular atrophy type 1",
+      "Congenital myopathies and congenital muscular dystrophies",
+      "Congenital myasthenic syndromes and transient neonatal myasthenia",
+      "Other mitochondrial DNA or transfer-RNA disorders and depletion syndromes",
+      "Pompe disease and other metabolic myopathies",
+      "Neonatal sepsis or hypoxic-ischaemic encephalopathy causing hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Fatal infantile mitochondrial myopathy with COX deficiency (for example SCO2-related, non-reversible), Spinal muscular atrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial blood lactate and CSF lactate monitoring over time",
+      "Muscle biopsy with COX and succinate dehydrogenase histochemistry and respiratory-chain enzymology",
+      "Targeted mtDNA testing for the MT-TE transfer-RNA-glutamate variant",
+      "Nuclear gene testing including TRMU where hepatopathy predominates",
+      "Serial neurophysiology and respiratory function testing as strength recovers",
+      "Liver function tests for the TRMU-related hepatic phenotype",
+      "Echocardiography and a general mitochondrial disease screen to exclude mimics"
     ],
-    [
-     "Management Strategy",
-     "Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal respiratory failure with severe hypotonia and lactic acidosis",
+      "Feeding failure with aspiration risk",
+      "Deterioration or failure to improve beyond the expected recovery window, prompting review of the diagnosis",
+      "Coexisting acute liver failure suggesting the TRMU phenotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With supportive intensive care through the early critical phase the muscle disorder typically resolves and most children achieve normal or near-normal function; recognising the genotype avoids inappropriate withdrawal of life support.",
+    "pitfalls": [
+      "Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy.",
+      "Failing to test for the MT-TE variant when an infant has a severe but potentially reversible COX-deficient myopathy.",
+      "Assuming a single early biopsy reflects the permanent state, when the defect normalises over time.",
+      "Confusing the myopathic (MT-TE) and hepatic (TRMU) reversible phenotypes.",
+      "Overlooking the role of cysteine as a limiting factor in the TRMU-related hepatopathy."
+    ],
+    "references": [
+      "Mitochondrial medicine reference texts",
+      "Neuromuscular disorder reference texts",
+      "Inborn errors of metabolism reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder is self-limiting",
+      "Confirm the MT-TE genotype so recovery can be predicted and premature withdrawal of ventilatory support avoided",
+      "Correct and monitor lactic acidosis with supportive measures and serial blood and CSF lactate",
+      "Support nutrition and feeding during the period of profound weakness",
+      "Provide physiotherapy and rehabilitation as strength recovers, with serial neurophysiology and respiratory function testing",
+      "In the related TRMU disorder, manage the hepatopathy supportively, with cysteine supplementation as proposed",
+      "Offer genetic counselling covering the maternally inherited mitochondrial variant or the autosomal recessive TRMU form"
     ]
-   ],
-   "caption": "Overview comparison matrix for reversible infantile respiratory chain deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reversible-infantile-respiratory-chain-deficiency-real-image",
-   "title": "Reversible infantile respiratory chain deficiency: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "reversible_infantile_respiratory_chain_deficiency-pathway",
+      "title": "Reversible infantile respiratory chain deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the mitochondrial transfer-RNA-glutamate gene (MT-TE).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal respiratory failure with severe hypotonia and lactic acidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial blood lactate and CSF lactate monitoring over time, Muscle biopsy with COX and succinate dehydrogenase histochemistry and respiratory-chain enzymology, Targeted mtDNA testing for the MT-TE transfer-RNA-glutamate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder is self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reversible infantile respiratory chain deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-matrix",
+      "title": "Reversible infantile respiratory chain deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinctive, spontaneously reversible infantile mitochondrial myopathy most often caused by a homoplasmic point variant in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial blood lactate and CSF lactate monitoring over time, Muscle biopsy with COX and succinate dehydrogenase histochemistry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fatal infantile mitochondrial myopathy with COX deficiency (for example SCO2-related, non-reversible), Spinal muscular atrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide intensive supportive care, including mechanical ventilation, through the early critical phase, recognising the disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withdrawing ventilatory support prematurely by mistaking it for a fatal mitochondrial myopathy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reversible infantile respiratory chain deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood and CSF lactate",
+          "cells": [
+            {
+              "text": "Lactic acidosis over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with COX and SDH histochemistry",
+          "cells": [
+            {
+              "text": "Respiratory-chain deficiency; the defect normalises over time (pitfall of a single early biopsy)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted mtDNA testing for MT-TE",
+          "cells": [
+            {
+              "text": "MT-TE variant, which allows recovery to be predicted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nuclear gene testing including TRMU",
+          "cells": [
+            {
+              "text": "Predominant hepatopathy phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurophysiology and respiratory function",
+          "cells": [
+            {
+              "text": "Muscle and respiratory function during recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Mechanical ventilation through the early critical phase; the disorder is self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the genotype",
+          "cells": [
+            {
+              "text": "MT-TE genotype predicts recovery and prevents premature withdrawal of ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactic acidosis",
+          "cells": [
+            {
+              "text": "Correct and monitor with serial blood and CSF lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Support nutrition and feeding during profound weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy as strength recovers; serial neurophysiology and respiratory function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRMU-related hepatopathy",
+          "cells": [
+            {
+              "text": "Supportive management; cysteine supplementation as proposed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternally inherited mitochondrial variant, or the autosomal recessive TRMU form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Reversible infantile respiratory chain deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with respiratory failure, severe hypotonia and lactic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (feeding failure, acute liver failure, no expected recovery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive care with ventilation; avoid premature withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial lactate, muscle biopsy with COX and SDH, targeted MT-TE and TRMU testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the MT-TE variant confirmed, predicting recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fatal COX-deficient myopathy or congenital myopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care and ventilation through the critical phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct lactic acidosis with serial blood and CSF lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Support feeding; physiotherapy as strength recovers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on mitochondrial and TRMU inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Muscle disorder typically resolves; most children reach normal or near-normal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

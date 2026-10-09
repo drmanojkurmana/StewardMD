@@ -1,172 +1,450 @@
 {
- "id": "hydrocele",
- "name": "Hydrocele",
- "aliases": [
-  "hydrocoele",
-  "scrotal hydrocele",
-  "processus vaginalis fluid collection"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling that transilluminates brightly",
-   "A key examination finding is the ability to get above the swelling, distinguishing it from an inguinoscrotal hernia, and the testis is often impalpable within a large tension hydrocele",
-   "In infants, communicating hydroceles arise from a patent processus vaginalis and commonly resolve spontaneously within the first year or two of life",
-   "Adult hydroceles are usually idiopathic (primary) but may be secondary to underlying pathology such as tumour, infection, trauma, or torsion, so the testis must be assessed",
-   "Ultrasound is indicated when the testis cannot be palpated or when a secondary cause is suspected, to exclude an underlying testicular tumour",
-   "A rapidly developing or blood-stained hydrocele after trauma or in a young man should prompt evaluation for testicular malignancy or haematocele",
-   "Treatment principles include observation for asymptomatic cases, with surgical repair (hydrocelectomy) preferred for large or symptomatic adult hydroceles and aspiration reserved for those unfit for surgery due to high recurrence",
-   "In children, persistent or symptomatic hydroceles beyond infancy are managed by ligation of the patent processus via an inguinal approach"
+  "id": "hydrocele",
+  "name": "Hydrocele",
+  "aliases": [
+    "hydrocoele",
+    "scrotal hydrocele",
+    "processus vaginalis fluid collection"
   ],
-  "pathophysiology": "A hydrocele results from an imbalance between secretion and absorption of fluid within the tunica vaginalis surrounding the testis. Congenital (communicating) hydroceles occur when the processus vaginalis fails to obliterate, allowing peritoneal fluid to track into the scrotum. Non-communicating hydroceles arise from excess fluid production or impaired reabsorption by the tunica. Secondary hydroceles develop as a reactive effusion in response to underlying testicular or epididymal disease such as tumour, infection, torsion, or trauma. Chronic large hydroceles may occasionally impair testicular perfusion or spermatogenesis.",
-  "additionalDifferentials": [
-   "Inguinoscrotal hernia",
-   "Testicular tumour with reactive hydrocele",
-   "Epididymal cyst or spermatocele",
-   "Varicocele",
-   "Haematocele (post-traumatic)",
-   "Epididymo-orchitis with reactive effusion"
-  ],
-  "additionalInvestigations": [
-   "Transillumination of the scrotal swelling",
-   "Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected",
-   "Assessment for underlying infection, trauma, or torsion as clinically indicated",
-   "Tumour markers if testicular malignancy is a concern on imaging"
-  ],
-  "redFlags": [
-   "An impalpable testis within the hydrocele, mandating ultrasound to exclude tumour",
-   "Rapidly enlarging, tense, or blood-stained (haematocele) swelling following trauma",
-   "A reactive hydrocele masking an underlying testicular malignancy",
-   "Signs of associated infection or torsion requiring urgent evaluation"
-  ],
-  "prognosis": "Infantile communicating hydroceles usually resolve spontaneously; primary adult hydroceles are benign and surgery is generally curative, whereas the outlook of secondary hydroceles depends on the underlying cause.",
-  "pitfalls": [
-   "Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis",
-   "Aspirating an adult hydrocele as definitive treatment, given the high recurrence and risk of missing tumour",
-   "Failing to recognise a reactive hydrocele overlying a testicular tumour",
-   "Confusing a hydrocele with an inguinoscrotal hernia when unable to get above the swelling",
-   "Operating on infantile hydroceles prematurely before allowing spontaneous resolution"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two of life",
-   "Surgical ligation of the patent processus vaginalis for communicating hydroceles that persist beyond early childhood",
-   "Reassurance and observation of small, asymptomatic primary adult hydroceles",
-   "Surgical repair such as the Jaboulay or Lord procedure for symptomatic or large primary hydroceles, with aspiration and sclerotherapy reserved for those unfit for surgery",
-   "Identification and treatment of any underlying cause in secondary hydroceles, such as infection, trauma, or torsion",
-   "Scrotal ultrasound and, where indicated, tumour markers to exclude an underlying testicular malignancy before treating a suspected secondary hydrocele"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hydrocele-pathway",
-   "title": "Hydrocele: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling that transilluminates brightly",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An impalpable testis within the hydrocele, mandating ultrasound to exclude tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transillumination of the scrotal swelling, Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected, Assessment for underlying infection, trauma, or torsion as clinically indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two of life"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hydrocele."
-  }
- ],
- "tables": [
-  {
-   "id": "hydrocele-matrix",
-   "title": "Hydrocele: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling that transilluminates brightly",
+      "A key examination finding is the ability to get above the swelling, distinguishing it from an inguinoscrotal hernia, and the testis is often impalpable within a large tension hydrocele",
+      "In infants, communicating hydroceles arise from a patent processus vaginalis and commonly resolve spontaneously within the first year or two of life",
+      "Adult hydroceles are usually idiopathic (primary) but may be secondary to underlying pathology such as tumour, infection, trauma, or torsion, so the testis must be assessed",
+      "Ultrasound is indicated when the testis cannot be palpated or when a secondary cause is suspected, to exclude an underlying testicular tumour",
+      "A rapidly developing or blood-stained hydrocele after trauma or in a young man should prompt evaluation for testicular malignancy or haematocele",
+      "Treatment principles include observation for asymptomatic cases, with surgical repair (hydrocelectomy) preferred for large or symptomatic adult hydroceles and aspiration reserved for those unfit for surgery due to high recurrence",
+      "In children, persistent or symptomatic hydroceles beyond infancy are managed by ligation of the patent processus via an inguinal approach"
     ],
-    [
-     "Key Investigations",
-     "Transillumination of the scrotal swelling, Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A hydrocele results from an imbalance between secretion and absorption of fluid within the tunica vaginalis surrounding the testis. Congenital (communicating) hydroceles occur when the processus vaginalis fails to obliterate, allowing peritoneal fluid to track into the scrotum. Non-communicating hydroceles arise from excess fluid production or impaired reabsorption by the tunica. Secondary hydroceles develop as a reactive effusion in response to underlying testicular or epididymal disease such as tumour, infection, torsion, or trauma. Chronic large hydroceles may occasionally impair testicular perfusion or spermatogenesis.",
+    "additionalDifferentials": [
+      "Inguinoscrotal hernia",
+      "Testicular tumour with reactive hydrocele",
+      "Epididymal cyst or spermatocele",
+      "Varicocele",
+      "Haematocele (post-traumatic)",
+      "Epididymo-orchitis with reactive effusion"
     ],
-    [
-     "Primary Differentials",
-     "Inguinoscrotal hernia, Testicular tumour with reactive hydrocele, Epididymal cyst or spermatocele",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transillumination of the scrotal swelling",
+      "Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected",
+      "Assessment for underlying infection, trauma, or torsion as clinically indicated",
+      "Tumour markers if testicular malignancy is a concern on imaging"
     ],
-    [
-     "Management Strategy",
-     "Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two",
-     "Core treatment modality"
+    "redFlags": [
+      "An impalpable testis within the hydrocele, mandating ultrasound to exclude tumour",
+      "Rapidly enlarging, tense, or blood-stained (haematocele) swelling following trauma",
+      "A reactive hydrocele masking an underlying testicular malignancy",
+      "Signs of associated infection or torsion requiring urgent evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Infantile communicating hydroceles usually resolve spontaneously; primary adult hydroceles are benign and surgery is generally curative, whereas the outlook of secondary hydroceles depends on the underlying cause.",
+    "pitfalls": [
+      "Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis",
+      "Aspirating an adult hydrocele as definitive treatment, given the high recurrence and risk of missing tumour",
+      "Failing to recognise a reactive hydrocele overlying a testicular tumour",
+      "Confusing a hydrocele with an inguinoscrotal hernia when unable to get above the swelling",
+      "Operating on infantile hydroceles prematurely before allowing spontaneous resolution"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two of life",
+      "Surgical ligation of the patent processus vaginalis for communicating hydroceles that persist beyond early childhood",
+      "Reassurance and observation of small, asymptomatic primary adult hydroceles",
+      "Surgical repair such as the Jaboulay or Lord procedure for symptomatic or large primary hydroceles, with aspiration and sclerotherapy reserved for those unfit for surgery",
+      "Identification and treatment of any underlying cause in secondary hydroceles, such as infection, trauma, or torsion",
+      "Scrotal ultrasound and, where indicated, tumour markers to exclude an underlying testicular malignancy before treating a suspected secondary hydrocele"
     ]
-   ],
-   "caption": "Overview comparison matrix for hydrocele."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hydrocele-real-image",
-   "title": "Hydrocele: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "hydrocele-pathway",
+      "title": "Hydrocele: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling that transilluminates brightly",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An impalpable testis within the hydrocele, mandating ultrasound to exclude tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transillumination of the scrotal swelling, Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected, Assessment for underlying infection, trauma, or torsion as clinically indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two of life"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hydrocele."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hydrocele-matrix",
+      "title": "Hydrocele: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A hydrocele is a collection of serous fluid within the tunica vaginalis, presenting as a painless, fluctuant scrotal swelling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transillumination of the scrotal swelling, Scrotal ultrasound when the testis is impalpable or a secondary cause is suspected,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inguinoscrotal hernia, Testicular tumour with reactive hydrocele, Epididymal cyst or spermatocele",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative observation for infantile communicating hydroceles, most of which resolve spontaneously within the first year or two",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a scrotal swelling is a simple hydrocele without confirming a normal underlying testis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hydrocele."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydrocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transillumination of the scrotal swelling",
+          "cells": [
+            {
+              "text": "Transilluminates in hydrocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Impalpable testis or uncertain diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for infection, trauma or torsion",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "When testicular malignancy is a concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular tumour with reactive hydrocele",
+          "cells": [
+            {
+              "text": "Tumour markers when malignancy is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis with reactive effusion",
+          "cells": [
+            {
+              "text": "Infection assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inguinoscrotal hernia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "Infantile communicating hydrocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Small, asymptomatic hydroceles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical ligation of the patent processus vaginalis",
+          "cells": [
+            {
+              "text": "Persistent or symptomatic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jaboulay or Lord repair",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying cause",
+          "cells": [
+            {
+              "text": "Infection, trauma or tumour, where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound and tumour markers",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydrocele-dx-mgmt",
+      "title": "Diagnosis and management of Hydrocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless scrotal swelling that transilluminates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Impalpable testis, rapid tense enlargement, blood-stained fluid, or torsion signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for torsion or a tense or blood-stained swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination; scrotal ultrasound; infection, trauma or torsion assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the swelling transilluminate with a palpable testis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hernia, testicular tumour, epididymo-orchitis or haematocele; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation for infantile communicating hydrocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance for small asymptomatic hydroceles",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical ligation of the patent processus vaginalis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Jaboulay or Lord repair for selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infantile hydroceles resolve; surgery when persistent or symptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

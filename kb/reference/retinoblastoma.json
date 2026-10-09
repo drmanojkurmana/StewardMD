@@ -1,172 +1,421 @@
 {
- "id": "retinoblastoma",
- "name": "Retinoblastoma",
- "aliases": [
-  "RB",
-  "retinal blastoma"
- ],
- "class": "non_infective",
- "system": "Ophthalmology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
-   "Leukocoria (a white pupillary reflex, sometimes first noticed in photographs) is the most common presenting sign and warrants urgent ophthalmology referral.",
-   "Strabismus is the second most common presentation and should never be dismissed without excluding an intraocular cause.",
-   "Disease may be unilateral or bilateral; bilateral and multifocal tumours are almost always heritable.",
-   "Heritable retinoblastoma arises from germline mutation of the RB1 tumour suppressor gene and carries a lifelong risk of second malignancies, especially osteosarcoma.",
-   "Diagnosis is made clinically by an experienced ophthalmologist under examination, supported by imaging; biopsy is avoided because of the risk of tumour seeding.",
-   "Treatment aims to save life first, then preserve the eye and vision, using approaches such as chemotherapy, focal therapies, and enucleation for advanced disease.",
-   "Children with heritable disease and affected families need genetic counselling and long-term surveillance for new tumours and secondary cancers."
+  "id": "retinoblastoma",
+  "name": "Retinoblastoma",
+  "aliases": [
+    "RB",
+    "retinal blastoma"
   ],
-  "pathophysiology": "Retinoblastoma results from biallelic inactivation of the RB1 tumour suppressor gene in developing retinal cells. In heritable disease one mutated allele is inherited or arises in the germline, and a second somatic hit inactivates the remaining allele, producing early, often bilateral, multifocal tumours (consistent with the two-hit hypothesis). Loss of functional RB protein removes control of the cell cycle at the G1-S checkpoint, driving unregulated proliferation of retinal precursor cells and tumour formation.",
-  "additionalDifferentials": [
-   "Coats disease",
-   "Persistent fetal vasculature (persistent hyperplastic primary vitreous)",
-   "Toxocariasis (ocular larva migrans)",
-   "Retinopathy of prematurity",
-   "Congenital cataract",
-   "Endophthalmitis or other causes of leukocoria"
-  ],
-  "additionalInvestigations": [
-   "Detailed dilated fundus examination under anaesthesia by an ocular oncology team",
-   "Ocular ultrasound and MRI of the orbits and brain",
-   "RB1 genetic testing and genetic counselling",
-   "Examination of the fellow eye and screening of at-risk relatives",
-   "Evaluation for metastatic or trilateral (pineal) disease when clinically indicated"
-  ],
-  "redFlags": [
-   "Leukocoria in any child requires urgent same-pathway ophthalmology referral to exclude retinoblastoma",
-   "New-onset strabismus without an obvious benign cause",
-   "Rapidly progressive proptosis or an inflamed, painful eye suggesting advanced or extraocular spread",
-   "Bilateral disease or a family history indicating heritable retinoblastoma",
-   "Signs of intracranial (trilateral) disease such as neurological deterioration"
-  ],
-  "prognosis": "With early diagnosis and modern therapy, survival in high-resource settings exceeds 95 percent for intraocular disease; extraocular or metastatic spread markedly worsens outcome. Children with heritable disease remain at elevated lifelong risk of second malignancies.",
-  "pitfalls": [
-   "Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact",
-   "Attributing strabismus solely to a benign squint without a dilated fundus examination",
-   "Delaying urgent referral, which can be the difference between saving and losing an eye or life",
-   "Overlooking the need for genetic testing and family screening in apparently unilateral disease"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque brachytherapy for small tumours",
-   "Use chemoreduction with systemic or intra-arterial ophthalmic-artery chemotherapy, adding intravitreal chemotherapy for vitreous seeding, to preserve the eye where possible",
-   "Perform enucleation for advanced unilateral disease not amenable to eye-preserving therapy, and avoid biopsy because of the risk of tumour seeding",
-   "Reserve external beam radiotherapy for selected cases given the heightened second-malignancy risk in heritable disease",
-   "Give adjuvant chemotherapy for high-risk histology or extraocular and metastatic spread",
-   "Undertake RB1 genetic testing with counselling and screening of at-risk relatives and the fellow eye",
-   "Manage through a specialist ocular oncology multidisciplinary team and maintain lifelong surveillance for second malignancies such as osteosarcoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retinoblastoma-pathway",
-   "title": "Retinoblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Leukocoria in any child requires urgent same-pathway ophthalmology referral to exclude retinoblastoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed dilated fundus examination under anaesthesia by an ocular oncology team, Ocular ultrasound and MRI of the orbits and brain, RB1 genetic testing and genetic counselling"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque brachytherapy for small tumours"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of retinoblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "retinoblastoma-matrix",
-   "title": "Retinoblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
+      "Leukocoria (a white pupillary reflex, sometimes first noticed in photographs) is the most common presenting sign and warrants urgent ophthalmology referral.",
+      "Strabismus is the second most common presentation and should never be dismissed without excluding an intraocular cause.",
+      "Disease may be unilateral or bilateral; bilateral and multifocal tumours are almost always heritable.",
+      "Heritable retinoblastoma arises from germline mutation of the RB1 tumour suppressor gene and carries a lifelong risk of second malignancies, especially osteosarcoma.",
+      "Diagnosis is made clinically by an experienced ophthalmologist under examination, supported by imaging; biopsy is avoided because of the risk of tumour seeding.",
+      "Treatment aims to save life first, then preserve the eye and vision, using approaches such as chemotherapy, focal therapies, and enucleation for advanced disease.",
+      "Children with heritable disease and affected families need genetic counselling and long-term surveillance for new tumours and secondary cancers."
     ],
-    [
-     "Key Investigations",
-     "Detailed dilated fundus examination under anaesthesia by an ocular oncology team, Ocular ultrasound and MRI of the orbits and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Retinoblastoma results from biallelic inactivation of the RB1 tumour suppressor gene in developing retinal cells. In heritable disease one mutated allele is inherited or arises in the germline, and a second somatic hit inactivates the remaining allele, producing early, often bilateral, multifocal tumours (consistent with the two-hit hypothesis). Loss of functional RB protein removes control of the cell cycle at the G1-S checkpoint, driving unregulated proliferation of retinal precursor cells and tumour formation.",
+    "additionalDifferentials": [
+      "Coats disease",
+      "Persistent fetal vasculature (persistent hyperplastic primary vitreous)",
+      "Toxocariasis (ocular larva migrans)",
+      "Retinopathy of prematurity",
+      "Congenital cataract",
+      "Endophthalmitis or other causes of leukocoria"
     ],
-    [
-     "Primary Differentials",
-     "Coats disease, Persistent fetal vasculature (persistent hyperplastic primary vitreous), Toxocariasis (ocular larva migrans)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed dilated fundus examination under anaesthesia by an ocular oncology team",
+      "Ocular ultrasound and MRI of the orbits and brain",
+      "RB1 genetic testing and genetic counselling",
+      "Examination of the fellow eye and screening of at-risk relatives",
+      "Evaluation for metastatic or trilateral (pineal) disease when clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque",
-     "Core treatment modality"
+    "redFlags": [
+      "Leukocoria in any child requires urgent same-pathway ophthalmology referral to exclude retinoblastoma",
+      "New-onset strabismus without an obvious benign cause",
+      "Rapidly progressive proptosis or an inflamed, painful eye suggesting advanced or extraocular spread",
+      "Bilateral disease or a family history indicating heritable retinoblastoma",
+      "Signs of intracranial (trilateral) disease such as neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and modern therapy, survival in high-resource settings exceeds 95 percent for intraocular disease; extraocular or metastatic spread markedly worsens outcome. Children with heritable disease remain at elevated lifelong risk of second malignancies.",
+    "pitfalls": [
+      "Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact",
+      "Attributing strabismus solely to a benign squint without a dilated fundus examination",
+      "Delaying urgent referral, which can be the difference between saving and losing an eye or life",
+      "Overlooking the need for genetic testing and family screening in apparently unilateral disease"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque brachytherapy for small tumours",
+      "Use chemoreduction with systemic or intra-arterial ophthalmic-artery chemotherapy, adding intravitreal chemotherapy for vitreous seeding, to preserve the eye where possible",
+      "Perform enucleation for advanced unilateral disease not amenable to eye-preserving therapy, and avoid biopsy because of the risk of tumour seeding",
+      "Reserve external beam radiotherapy for selected cases given the heightened second-malignancy risk in heritable disease",
+      "Give adjuvant chemotherapy for high-risk histology or extraocular and metastatic spread",
+      "Undertake RB1 genetic testing with counselling and screening of at-risk relatives and the fellow eye",
+      "Manage through a specialist ocular oncology multidisciplinary team and maintain lifelong surveillance for second malignancies such as osteosarcoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for retinoblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retinoblastoma-real-image",
-   "title": "Retinoblastoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "retinoblastoma-pathway",
+      "title": "Retinoblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Leukocoria in any child requires urgent same-pathway ophthalmology referral to exclude retinoblastoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed dilated fundus examination under anaesthesia by an ocular oncology team, Ocular ultrasound and MRI of the orbits and brain, RB1 genetic testing and genetic counselling"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque brachytherapy for small tumours"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of retinoblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retinoblastoma-matrix",
+      "title": "Retinoblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common primary intraocular malignancy of childhood, usually diagnosed before 5 years of age.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed dilated fundus examination under anaesthesia by an ocular oncology team, Ocular ultrasound and MRI of the orbits and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coats disease, Persistent fetal vasculature (persistent hyperplastic primary vitreous), Toxocariasis (ocular larva migrans)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Tailor treatment to laterality and stage, using focal therapy with laser or transpupillary thermotherapy, cryotherapy or plaque",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing leukocoria or a subtle white reflex noticed in photographs as artefact",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for retinoblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Intraocular tumour extent, examined by an ocular oncology team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular ultrasound and orbit and brain MRI",
+          "cells": [
+            {
+              "text": "Intraocular mass and extent into the orbit and brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RB1 genetic testing",
+          "cells": [
+            {
+              "text": "Heritable RB1 disease, with counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow eye examination and relative screening",
+          "cells": [
+            {
+              "text": "Disease in the fellow eye and in at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for metastatic or trilateral disease",
+          "cells": [
+            {
+              "text": "Spread beyond the eye, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Focal therapy",
+          "cells": [
+            {
+              "text": "Laser or transpupillary thermotherapy, cryotherapy or plaque brachytherapy for small tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemoreduction",
+          "cells": [
+            {
+              "text": "Systemic or intra-arterial ophthalmic-artery chemotherapy; intravitreal for vitreous seeding; to preserve the eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "For advanced unilateral disease not amenable to eye-preserving therapy; avoid biopsy because of seeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "External beam radiotherapy",
+          "cells": [
+            {
+              "text": "Reserved for selected cases given second-malignancy risk in heritable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "For high-risk histology or extraocular and metastatic spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and screening",
+          "cells": [
+            {
+              "text": "RB1 testing with counselling; screening of at-risk relatives and the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Specialist ocular oncology team; lifelong surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Retinoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with leukocoria or new strabismus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bilateral disease, painful or proptotic eye, neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ocular oncology referral for advanced or extraocular spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, ocular ultrasound, orbit and brain MRI, RB1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do examination and imaging confirm intraocular retinoblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coats disease, persistent fetal vasculature or toxocariasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eye-preserving focal therapy or chemoreduction for small or multifocal tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enucleation for advanced unilateral disease; avoid diagnostic biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant chemotherapy for high-risk histology or metastatic spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "RB1 genetic testing, counselling and screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival exceeds 95 percent for intraocular disease; extraocular spread worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

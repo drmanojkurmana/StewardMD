@@ -1,171 +1,216 @@
 {
- "id": "bronchogenic_cyst",
- "name": "Bronchogenic cyst",
- "aliases": [
-  "bronchial cyst",
-  "foregut duplication cyst",
-  "mediastinal bronchogenic cyst"
- ],
- "class": "non_infective",
- "system": "Respiratory / Thoracic",
- "specialty": "Respiratory / Thoracic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Shields' General Thoracic Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina or within the lung",
-   "Many are asymptomatic and found incidentally on chest imaging",
-   "Symptoms, when present, arise from mass effect on the airway or oesophagus, causing cough, wheeze, stridor, or dysphagia, and from secondary infection",
-   "Classically appears as a well-defined, thin-walled, homogeneous mass of fluid density that does not enhance",
-   "High protein or mucoid content can raise the apparent density on CT and mimic a solid lesion, where MRI helps confirm fluid nature",
-   "Complications include infection, haemorrhage into the cyst, and rarely fistulation or airway compression",
-   "Complete surgical excision is generally recommended to confirm the diagnosis, relieve symptoms, and prevent complications"
+  "id": "bronchogenic_cyst",
+  "name": "Bronchogenic cyst",
+  "aliases": [
+    "bronchial cyst",
+    "foregut duplication cyst",
+    "mediastinal bronchogenic cyst"
   ],
-  "pathophysiology": "Bronchogenic cysts result from abnormal budding of the ventral foregut, the primitive tracheobronchial tree, during early embryonic development. A group of cells becomes separated from the developing airway and forms a closed cyst lined by ciliated respiratory epithelium, often with cartilage, smooth muscle, and mucous glands in its wall. The cyst fills with clear or mucoid secretion and enlarges slowly. Because it does not communicate with the airway it usually remains sterile, but a connection or bacterial seeding can lead to infection, and expansion may compress the trachea, bronchi, or oesophagus.",
-  "additionalDifferentials": [
-   "Oesophageal duplication cyst",
-   "Pericardial cyst",
-   "Thymic cyst",
-   "Mature cystic teratoma",
-   "Neurogenic tumour in the posterior mediastinum",
-   "Necrotic lymph node or abscess when infected"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the thorax to define location, wall, and fluid density",
-   "MRI to confirm the cystic nature of high-density lesions",
-   "Bronchoscopy or endoscopic ultrasound where airway or oesophageal involvement is suspected",
-   "Barium swallow if oesophageal compression causes dysphagia",
-   "Surgical excision with histology for definitive diagnosis"
-  ],
-  "redFlags": [
-   "Acute airway compromise or stridor from tracheobronchial compression",
-   "Signs of infection or abscess formation within the cyst",
-   "Rapid enlargement or haemorrhage into the cyst",
-   "Dysphagia from oesophageal compression"
-  ],
-  "prognosis": "Bronchogenic cysts are benign, and complete excision is curative with an excellent long-term outlook; untreated cysts may enlarge or become infected, and malignant change is very rare.",
-  "pitfalls": [
-   "Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis",
-   "Attributing symptoms to another cause when a cyst is compressing the airway or oesophagus",
-   "Assuming an incidental cyst is always safe to leave when complications or diagnostic uncertainty exist",
-   "Incomplete excision leaving epithelial remnants that predispose to recurrence"
-  ],
-  "references": [
-   "Shields' General Thoracic Surgery",
-   "Murray & Nadel's Textbook of Respiratory Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression",
-   "Treat secondary infection with antibiotics, and drain where needed, before definitive resection",
-   "Consider excision even in asymptomatic cysts given the risk of enlargement and complications, or interval imaging surveillance if surgery is deferred",
-   "Confirm the cystic nature with MRI for high-density lesions and obtain histology to exclude rare malignancy",
-   "Relieve significant airway or oesophageal compression, with endoscopic or image-guided aspiration in selected unfit patients",
-   "Refer to a thoracic surgical team for definitive management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bronchogenic_cyst-pathway",
-   "title": "Bronchogenic cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina or within the lung",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute airway compromise or stridor from tracheobronchial compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the thorax to define location, wall, and fluid density, MRI to confirm the cystic nature of high-density lesions, Bronchoscopy or endoscopic ultrasound where airway or oesophageal involvement is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bronchogenic cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "bronchogenic_cyst-matrix",
-   "title": "Bronchogenic cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Thoracic",
+  "specialty": "Respiratory / Thoracic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Shields' General Thoracic Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina or within the lung",
+      "Many are asymptomatic and found incidentally on chest imaging",
+      "Symptoms, when present, arise from mass effect on the airway or oesophagus, causing cough, wheeze, stridor, or dysphagia, and from secondary infection",
+      "Classically appears as a well-defined, thin-walled, homogeneous mass of fluid density that does not enhance",
+      "High protein or mucoid content can raise the apparent density on CT and mimic a solid lesion, where MRI helps confirm fluid nature",
+      "Complications include infection, haemorrhage into the cyst, and rarely fistulation or airway compression",
+      "Complete surgical excision is generally recommended to confirm the diagnosis, relieve symptoms, and prevent complications"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the thorax to define location, wall, and fluid density, MRI to confirm the cystic nature of high-density",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bronchogenic cysts result from abnormal budding of the ventral foregut, the primitive tracheobronchial tree, during early embryonic development. A group of cells becomes separated from the developing airway and forms a closed cyst lined by ciliated respiratory epithelium, often with cartilage, smooth muscle, and mucous glands in its wall. The cyst fills with clear or mucoid secretion and enlarges slowly. Because it does not communicate with the airway it usually remains sterile, but a connection or bacterial seeding can lead to infection, and expansion may compress the trachea, bronchi, or oesophagus.",
+    "additionalDifferentials": [
+      "Oesophageal duplication cyst",
+      "Pericardial cyst",
+      "Thymic cyst",
+      "Mature cystic teratoma",
+      "Neurogenic tumour in the posterior mediastinum",
+      "Necrotic lymph node or abscess when infected"
     ],
-    [
-     "Primary Differentials",
-     "Oesophageal duplication cyst, Pericardial cyst, Thymic cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the thorax to define location, wall, and fluid density",
+      "MRI to confirm the cystic nature of high-density lesions",
+      "Bronchoscopy or endoscopic ultrasound where airway or oesophageal involvement is suspected",
+      "Barium swallow if oesophageal compression causes dysphagia",
+      "Surgical excision with histology for definitive diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute airway compromise or stridor from tracheobronchial compression",
+      "Signs of infection or abscess formation within the cyst",
+      "Rapid enlargement or haemorrhage into the cyst",
+      "Dysphagia from oesophageal compression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bronchogenic cysts are benign, and complete excision is curative with an excellent long-term outlook; untreated cysts may enlarge or become infected, and malignant change is very rare.",
+    "pitfalls": [
+      "Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis",
+      "Attributing symptoms to another cause when a cyst is compressing the airway or oesophagus",
+      "Assuming an incidental cyst is always safe to leave when complications or diagnostic uncertainty exist",
+      "Incomplete excision leaving epithelial remnants that predispose to recurrence"
+    ],
+    "references": [
+      "Shields' General Thoracic Surgery",
+      "Murray & Nadel's Textbook of Respiratory Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression",
+      "Treat secondary infection with antibiotics, and drain where needed, before definitive resection",
+      "Consider excision even in asymptomatic cysts given the risk of enlargement and complications, or interval imaging surveillance if surgery is deferred",
+      "Confirm the cystic nature with MRI for high-density lesions and obtain histology to exclude rare malignancy",
+      "Relieve significant airway or oesophageal compression, with endoscopic or image-guided aspiration in selected unfit patients",
+      "Refer to a thoracic surgical team for definitive management"
     ]
-   ],
-   "caption": "Overview comparison matrix for bronchogenic cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bronchogenic-cyst-real-image",
-   "title": "Bronchogenic cyst: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "bronchogenic_cyst-pathway",
+      "title": "Bronchogenic cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina or within the lung",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute airway compromise or stridor from tracheobronchial compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the thorax to define location, wall, and fluid density, MRI to confirm the cystic nature of high-density lesions, Bronchoscopy or endoscopic ultrasound where airway or oesophageal involvement is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bronchogenic cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bronchogenic_cyst-matrix",
+      "title": "Bronchogenic cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign congenital foregut duplication cyst lined by respiratory epithelium, usually located in the mediastinum near the carina",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the thorax to define location, wall, and fluid density, MRI to confirm the cystic nature of high-density",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oesophageal duplication cyst, Pericardial cyst, Thymic cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer complete surgical excision, thoracoscopic or open, which is curative and prevents infection, haemorrhage, and compression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a high-density mucoid cyst on CT for a solid tumour and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bronchogenic cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Shields' General Thoracic Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bronchogenic_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bronchogenic cyst",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Contrast-enhanced CT of the thorax", "cells": [{"text": "Location, thin wall and fluid density that does not enhance"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Confirms the fluid nature of high-density lesions"}], "cite": "c1"},
+        {"parameter": "Bronchoscopy or endoscopic ultrasound", "cells": [{"text": "Airway or oesophageal involvement"}], "cite": "c1"},
+        {"parameter": "Barium swallow", "cells": [{"text": "Oesophageal compression causing dysphagia"}], "cite": "c1"},
+        {"parameter": "Surgical excision with histology", "cells": [{"text": "Definitive diagnosis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchogenic_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options in bronchogenic cyst",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Complete surgical excision", "cells": [{"text": "Thoracoscopic or open excision; curative and prevents infection, haemorrhage and compression"}, {"text": "Definitive"}], "cite": "c1"},
+        {"parameter": "Treat secondary infection", "cells": [{"text": "Antibiotics and drainage where needed before definitive resection"}, {"text": "Before resection"}], "cite": "c1"},
+        {"parameter": "Asymptomatic cysts", "cells": [{"text": "Consider excision given the risk of enlargement and complications, or interval imaging if surgery is deferred"}, {"text": "Individualised"}], "cite": "c1"},
+        {"parameter": "Confirm cystic nature and exclude malignancy", "cells": [{"text": "MRI for high-density lesions; histology to exclude rare malignancy"}, {"text": "Diagnostic"}], "cite": "c1"},
+        {"parameter": "Relief of compression", "cells": [{"text": "Endoscopic or image-guided aspiration in selected unfit patients"}, {"text": "Significant compression"}], "cite": "c1"},
+        {"parameter": "Thoracic surgical referral", "cells": [{"text": "Definitive management by a thoracic surgical team"}, {"text": "Specialist"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bronchogenic_cyst-dx-mgmt",
+      "title": "Diagnosis and management of bronchogenic cyst",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Mediastinal or intrapulmonary fluid-density mass, often incidental on chest imaging", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: stridor or airway compromise, infection, rapid enlargement or haemorrhage, or dysphagia?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent airway assessment; antibiotics and drainage for infection; thoracic surgery review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Contrast-enhanced CT; MRI if density is high; bronchoscopy or endoscopic ultrasound if airway or oesophagus involved", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Cystic lesion confirmed and symptomatic or complicated?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Complete surgical excision with histology", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Interval imaging surveillance; consider excision given enlargement and complication risk", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Excision is curative with an excellent long-term outlook", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Surveillance; reconsider if symptoms develop", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

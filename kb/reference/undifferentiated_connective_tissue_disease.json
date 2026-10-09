@@ -1,173 +1,469 @@
 {
- "id": "undifferentiated_connective_tissue_disease",
- "name": "Undifferentiated connective tissue disease",
- "aliases": [
-  "UCTD",
-  "undifferentiated CTD",
-  "early undifferentiated connective tissue disease",
-  "latent autoimmune connective tissue disease"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
-   "Common manifestations include Raynaud phenomenon, arthralgia or arthritis, sicca symptoms, and a positive antinuclear antibody",
-   "Serology is often limited, with antinuclear antibody positivity but absence of highly specific antibodies",
-   "Most patients follow a mild, stable course, though a minority progress to a defined disease such as lupus or systemic sclerosis",
-   "Evolving or newly positive specific autoantibodies during follow-up can herald differentiation into a definite disorder",
-   "Major internal organ involvement is uncommon and its presence should prompt reconsideration of the label",
-   "Periodic clinical and serological review helps detect progression early"
+  "id": "undifferentiated_connective_tissue_disease",
+  "name": "Undifferentiated connective tissue disease",
+  "aliases": [
+    "UCTD",
+    "undifferentiated CTD",
+    "early undifferentiated connective tissue disease",
+    "latent autoimmune connective tissue disease"
   ],
-  "pathophysiology": "Undifferentiated connective tissue disease represents an early or restricted state of systemic autoimmunity in which immune tolerance is broken but the process has not organised into a recognised disease phenotype. Antinuclear antibody production and low-grade immune activation produce non-specific inflammatory features without the characteristic autoantibody specificities or organ patterns of established disorders. In some individuals the autoimmune response matures over time, with the appearance of disease-specific antibodies and organ involvement marking differentiation into a defined connective tissue disease.",
-  "additionalDifferentials": [
-   "Systemic lupus erythematosus",
-   "Sjogren syndrome",
-   "Systemic sclerosis (including early or sine scleroderma forms)",
-   "Mixed connective tissue disease",
-   "Rheumatoid arthritis",
-   "Fibromyalgia with incidental antinuclear antibody positivity"
-  ],
-  "additionalInvestigations": [
-   "Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel",
-   "Complement levels and inflammatory markers",
-   "Full blood count and renal function to screen for organ involvement",
-   "Nailfold capillaroscopy in the presence of Raynaud",
-   "Targeted imaging or organ testing only when symptoms suggest specific involvement",
-   "Serial reassessment of serology and clinical features over time"
-  ],
-  "redFlags": [
-   "Emergence of significant renal, pulmonary, or neurological involvement",
-   "New disease-specific autoantibodies suggesting differentiation",
-   "Rapidly progressive multisystem features",
-   "Falling complement with clinical deterioration"
-  ],
-  "prognosis": "The majority of patients remain undifferentiated with a mild, stable course over many years, and some achieve remission. A minority evolve into a defined connective tissue disease, so prognosis is largely determined by whether and how the illness differentiates.",
-  "pitfalls": [
-   "Prematurely labelling patients with a definite disease before criteria are met",
-   "Discharging patients without follow-up and missing later differentiation",
-   "Attributing significant organ disease to undifferentiated disease rather than reclassifying",
-   "Over-treating mild, stable disease with aggressive immunosuppression"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "International cohort studies of undifferentiated connective tissue disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for symptomatic relief",
-   "Short courses of low-dose corticosteroids for symptom flares, escalating immunosuppression only if organ involvement or differentiation emerges",
-   "Management of Raynaud phenomenon with cold avoidance and a calcium channel blocker such as nifedipine",
-   "Symptomatic care of sicca features with ocular lubricants and saliva substitutes",
-   "Serial reassessment of clinical features and autoantibody serology to detect evolution into a defined connective tissue disease",
-   "Reconsideration of the diagnosis and specialist rheumatology escalation if major internal organ involvement develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "undifferentiated_connective_tissue_disease-pathway",
-   "title": "Undifferentiated connective tissue disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of significant renal, pulmonary, or neurological involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel, Complement levels and inflammatory markers, Full blood count and renal function to screen for organ involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for symptomatic relief"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prematurely labelling patients with a definite disease before criteria are met"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of undifferentiated connective tissue disease."
-  }
- ],
- "tables": [
-  {
-   "id": "undifferentiated_connective_tissue_disease-matrix",
-   "title": "Undifferentiated connective tissue disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
+      "Common manifestations include Raynaud phenomenon, arthralgia or arthritis, sicca symptoms, and a positive antinuclear antibody",
+      "Serology is often limited, with antinuclear antibody positivity but absence of highly specific antibodies",
+      "Most patients follow a mild, stable course, though a minority progress to a defined disease such as lupus or systemic sclerosis",
+      "Evolving or newly positive specific autoantibodies during follow-up can herald differentiation into a definite disorder",
+      "Major internal organ involvement is uncommon and its presence should prompt reconsideration of the label",
+      "Periodic clinical and serological review helps detect progression early"
     ],
-    [
-     "Key Investigations",
-     "Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel, Complement levels and inflammatory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Undifferentiated connective tissue disease represents an early or restricted state of systemic autoimmunity in which immune tolerance is broken but the process has not organised into a recognised disease phenotype. Antinuclear antibody production and low-grade immune activation produce non-specific inflammatory features without the characteristic autoantibody specificities or organ patterns of established disorders. In some individuals the autoimmune response matures over time, with the appearance of disease-specific antibodies and organ involvement marking differentiation into a defined connective tissue disease.",
+    "additionalDifferentials": [
+      "Systemic lupus erythematosus",
+      "Sjogren syndrome",
+      "Systemic sclerosis (including early or sine scleroderma forms)",
+      "Mixed connective tissue disease",
+      "Rheumatoid arthritis",
+      "Fibromyalgia with incidental antinuclear antibody positivity"
     ],
-    [
-     "Primary Differentials",
-     "Systemic lupus erythematosus, Sjogren syndrome, Systemic sclerosis (including early or sine scleroderma forms)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel",
+      "Complement levels and inflammatory markers",
+      "Full blood count and renal function to screen for organ involvement",
+      "Nailfold capillaroscopy in the presence of Raynaud",
+      "Targeted imaging or organ testing only when symptoms suggest specific involvement",
+      "Serial reassessment of serology and clinical features over time"
     ],
-    [
-     "Management Strategy",
-     "Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of significant renal, pulmonary, or neurological involvement",
+      "New disease-specific autoantibodies suggesting differentiation",
+      "Rapidly progressive multisystem features",
+      "Falling complement with clinical deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Prematurely labelling patients with a definite disease before criteria are met",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of patients remain undifferentiated with a mild, stable course over many years, and some achieve remission. A minority evolve into a defined connective tissue disease, so prognosis is largely determined by whether and how the illness differentiates.",
+    "pitfalls": [
+      "Prematurely labelling patients with a definite disease before criteria are met",
+      "Discharging patients without follow-up and missing later differentiation",
+      "Attributing significant organ disease to undifferentiated disease rather than reclassifying",
+      "Over-treating mild, stable disease with aggressive immunosuppression"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "International cohort studies of undifferentiated connective tissue disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for symptomatic relief",
+      "Short courses of low-dose corticosteroids for symptom flares, escalating immunosuppression only if organ involvement or differentiation emerges",
+      "Management of Raynaud phenomenon with cold avoidance and a calcium channel blocker such as nifedipine",
+      "Symptomatic care of sicca features with ocular lubricants and saliva substitutes",
+      "Serial reassessment of clinical features and autoantibody serology to detect evolution into a defined connective tissue disease",
+      "Reconsideration of the diagnosis and specialist rheumatology escalation if major internal organ involvement develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for undifferentiated connective tissue disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "undifferentiated-connective-tissue-disease-real-image",
-   "title": "Undifferentiated connective tissue disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "undifferentiated_connective_tissue_disease-pathway",
+      "title": "Undifferentiated connective tissue disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of significant renal, pulmonary, or neurological involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel, Complement levels and inflammatory markers, Full blood count and renal function to screen for organ involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for symptomatic relief"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prematurely labelling patients with a definite disease before criteria are met"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of undifferentiated connective tissue disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "undifferentiated_connective_tissue_disease-matrix",
+      "title": "Undifferentiated connective tissue disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Features of systemic autoimmunity are present but do not fulfil criteria for any single defined connective tissue disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antinuclear antibody with extractable nuclear antigen and specific autoantibody panel, Complement levels and inflammatory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic lupus erythematosus, Sjogren syndrome, Systemic sclerosis (including early or sine scleroderma forms)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Hydroxychloroquine as a disease-modifying anchor for arthralgia, arthritis and constitutional features, with NSAIDs for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prematurely labelling patients with a definite disease before criteria are met",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for undifferentiated connective tissue disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "undifferentiated_connective_tissue_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with extractable nuclear antigen and specific autoantibody panel",
+          "cells": [
+            {
+              "text": "Antinuclear antibody positivity without highly specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement and inflammatory markers",
+          "cells": [
+            {
+              "text": "Falling complement with clinical deterioration signals progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and renal function",
+          "cells": [
+            {
+              "text": "Screens for organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Assessment in the presence of Raynaud phenomenon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial serology and clinical review",
+          "cells": [
+            {
+              "text": "New or evolving specific autoantibodies may herald a defined disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "undifferentiated_connective_tissue_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Specific autoantibodies that appear during follow-up can herald lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Raynaud phenomenon is common and can precede a defined sclerosing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Sicca symptoms are common manifestations of undifferentiated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "undifferentiated_connective_tissue_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Disease-modifying anchor for arthralgia, arthritis and constitutional features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Short courses for symptom flares; escalate immunosuppression only for organ involvement or differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Cold avoidance and a calcium channel blocker such as nifedipine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sicca features",
+          "cells": [
+            {
+              "text": "Ocular lubricants and saliva substitutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial reassessment",
+          "cells": [
+            {
+              "text": "Clinical features and autoantibody serology to detect evolution into a defined disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist escalation",
+          "cells": [
+            {
+              "text": "Reconsider the diagnosis and refer to rheumatology if major organ involvement develops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "undifferentiated_connective_tissue_disease-dx-mgmt",
+      "title": "Diagnosis and management of Undifferentiated connective tissue disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected UCTD: systemic autoimmune features that meet no single defined disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (significant renal, pulmonary or neurological involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rheumatology review for organ involvement or rapid multisystem deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA with ENA panel, complement, full blood count, renal function, capillaroscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Has the illness evolved, with new specific autoantibodies or falling complement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue periodic clinical and serological review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydroxychloroquine as anchor for arthralgia, arthritis and constitutional features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs for symptoms; short low-dose corticosteroid courses for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cold avoidance and a calcium channel blocker such as nifedipine for Raynaud",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial review of features and serology to detect evolution into a defined disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most remain stable for years; a minority evolve into lupus or systemic sclerosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

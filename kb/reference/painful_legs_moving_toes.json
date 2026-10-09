@@ -1,168 +1,455 @@
 {
- "id": "painful_legs_moving_toes",
- "name": "Painful legs and moving toes syndrome",
- "aliases": [
-  "painful legs moving toes",
-  "PLMT"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension movements of the toes or foot",
-   "The pain usually dominates the clinical picture and the movements may be only partially suppressible",
-   "It often follows injury to peripheral nerves, roots or the cauda equina, though many cases are idiopathic",
-   "An analogous painful arms and moving fingers variant is recognised in the upper limb",
-   "The movements persist during rest and may reduce but not always disappear in sleep",
-   "It is frequently refractory, and management focuses on neuropathic pain control with variable success"
+  "id": "painful_legs_moving_toes",
+  "name": "Painful legs and moving toes syndrome",
+  "aliases": [
+    "painful legs moving toes",
+    "PLMT"
   ],
-  "pathophysiology": "Painful legs and moving toes syndrome is thought to result from aberrant reorganisation of sensory input after peripheral nerve, root or plexus injury, generating abnormal central processing that produces both neuropathic pain and disordered motor output to the toes. The exact generator is uncertain and may involve spinal and supraspinal reorganisation, which is why the movements can be difficult to localise or suppress. In idiopathic cases no antecedent lesion is identified despite a similar clinical picture.",
-  "additionalDifferentials": [
-   "Restless legs syndrome",
-   "Peripheral neuropathy with neuropathic pain",
-   "Complex regional pain syndrome",
-   "Dystonia or myoclonus of the foot",
-   "Functional movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the combination of leg pain and continuous toe movements",
-   "Nerve conduction studies and electromyography to identify peripheral nerve or root injury",
-   "Imaging of the lumbosacral spine or plexus where a lesion is suspected",
-   "Assessment of neuropathic pain features",
-   "Exclusion of restless legs syndrome by history"
-  ],
-  "redFlags": [
-   "Progressive weakness or sensory loss suggesting an evolving lesion",
-   "New cauda equina or radicular signs",
-   "Severe intractable pain",
-   "Rapidly progressive or asymmetric neurological features"
-  ],
-  "prognosis": "The syndrome tends to be chronic and often treatment-resistant, with the pain being the most disabling component; some patients gain partial relief from neuropathic pain treatments.",
-  "pitfalls": [
-   "Confusing it with restless legs syndrome, which has an urge to move relieved by movement",
-   "Overlooking a treatable peripheral nerve or root lesion",
-   "Focusing on the movements rather than the dominant pain",
-   "Expecting complete resolution and under-supporting the patient"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Movement Disorders textbook (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as amitriptyline or duloxetine",
-   "Identify and treat any underlying peripheral nerve, root or cauda equina lesion",
-   "Botulinum toxin injection to the affected muscles to reduce the involuntary toe movements, with trials of baclofen or a benzodiazepine for the movement component",
-   "Adjunctive sodium-channel blockers such as carbamazepine and consideration of transcutaneous electrical nerve stimulation or sympathetic and peripheral nerve blocks for refractory pain",
-   "Spinal cord stimulation in selected patients with intractable pain",
-   "Physiotherapy and multidisciplinary pain-clinic input, addressing comorbid sleep disturbance and low mood, with realistic expectations given the treatment-resistant course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "painful_legs_moving_toes-pathway",
-   "title": "Painful legs and moving toes syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension movements of the toes or foot",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive weakness or sensory loss suggesting an evolving lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the combination of leg pain and continuous toe movements, Nerve conduction studies and electromyography to identify peripheral nerve or root injury, Imaging of the lumbosacral spine or plexus where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as amitriptyline or duloxetine"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with restless legs syndrome, which has an urge to move relieved by movement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of painful legs and moving toes syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "painful_legs_moving_toes-matrix",
-   "title": "Painful legs and moving toes syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension movements of the toes or foot",
+      "The pain usually dominates the clinical picture and the movements may be only partially suppressible",
+      "It often follows injury to peripheral nerves, roots or the cauda equina, though many cases are idiopathic",
+      "An analogous painful arms and moving fingers variant is recognised in the upper limb",
+      "The movements persist during rest and may reduce but not always disappear in sleep",
+      "It is frequently refractory, and management focuses on neuropathic pain control with variable success"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the combination of leg pain and continuous toe movements, Nerve conduction studies and electromyography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Painful legs and moving toes syndrome is thought to result from aberrant reorganisation of sensory input after peripheral nerve, root or plexus injury, generating abnormal central processing that produces both neuropathic pain and disordered motor output to the toes. The exact generator is uncertain and may involve spinal and supraspinal reorganisation, which is why the movements can be difficult to localise or suppress. In idiopathic cases no antecedent lesion is identified despite a similar clinical picture.",
+    "additionalDifferentials": [
+      "Restless legs syndrome",
+      "Peripheral neuropathy with neuropathic pain",
+      "Complex regional pain syndrome",
+      "Dystonia or myoclonus of the foot",
+      "Functional movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Restless legs syndrome, Peripheral neuropathy with neuropathic pain, Complex regional pain syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the combination of leg pain and continuous toe movements",
+      "Nerve conduction studies and electromyography to identify peripheral nerve or root injury",
+      "Imaging of the lumbosacral spine or plexus where a lesion is suspected",
+      "Assessment of neuropathic pain features",
+      "Exclusion of restless legs syndrome by history"
     ],
-    [
-     "Management Strategy",
-     "Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive weakness or sensory loss suggesting an evolving lesion",
+      "New cauda equina or radicular signs",
+      "Severe intractable pain",
+      "Rapidly progressive or asymmetric neurological features"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with restless legs syndrome, which has an urge to move relieved by movement",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome tends to be chronic and often treatment-resistant, with the pain being the most disabling component; some patients gain partial relief from neuropathic pain treatments.",
+    "pitfalls": [
+      "Confusing it with restless legs syndrome, which has an urge to move relieved by movement",
+      "Overlooking a treatable peripheral nerve or root lesion",
+      "Focusing on the movements rather than the dominant pain",
+      "Expecting complete resolution and under-supporting the patient"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Movement Disorders textbook (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as amitriptyline or duloxetine",
+      "Identify and treat any underlying peripheral nerve, root or cauda equina lesion",
+      "Botulinum toxin injection to the affected muscles to reduce the involuntary toe movements, with trials of baclofen or a benzodiazepine for the movement component",
+      "Adjunctive sodium-channel blockers such as carbamazepine and consideration of transcutaneous electrical nerve stimulation or sympathetic and peripheral nerve blocks for refractory pain",
+      "Spinal cord stimulation in selected patients with intractable pain",
+      "Physiotherapy and multidisciplinary pain-clinic input, addressing comorbid sleep disturbance and low mood, with realistic expectations given the treatment-resistant course"
     ]
-   ],
-   "caption": "Overview comparison matrix for painful legs and moving toes syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "painful-legs-moving-toes-real-image",
-   "title": "Painful legs and moving toes syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "painful_legs_moving_toes-pathway",
+      "title": "Painful legs and moving toes syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension movements of the toes or foot",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive weakness or sensory loss suggesting an evolving lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the combination of leg pain and continuous toe movements, Nerve conduction studies and electromyography to identify peripheral nerve or root injury, Imaging of the lumbosacral spine or plexus where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as amitriptyline or duloxetine"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with restless legs syndrome, which has an urge to move relieved by movement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of painful legs and moving toes syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "painful_legs_moving_toes-matrix",
+      "title": "Painful legs and moving toes syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A syndrome of deep, poorly localised pain in the leg accompanied by continuous involuntary writhing or flexion-extension",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the combination of leg pain and continuous toe movements, Nerve conduction studies and electromyography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Restless legs syndrome, Peripheral neuropathy with neuropathic pain, Complex regional pain syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neuropathic pain control with a gabapentinoid such as gabapentin or pregabalin and a tricyclic or SNRI antidepressant such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with restless legs syndrome, which has an urge to move relieved by movement",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for painful legs and moving toes syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "painful_legs_moving_toes-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Leg pain with continuous toe movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Peripheral nerve or root injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbosacral spine or plexus imaging",
+          "cells": [
+            {
+              "text": "Where a lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of neuropathic pain features",
+          "cells": [
+            {
+              "text": "Neuropathic character of the pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History to exclude restless legs",
+          "cells": [
+            {
+              "text": "Urge to move relieved by movement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "painful_legs_moving_toes-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Restless legs syndrome",
+          "cells": [
+            {
+              "text": "An urge to move relieved by movement; the toe movements here are continuous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy with neuropathic pain",
+          "cells": [
+            {
+              "text": "Abnormal nerve conduction; any treatable lesion must be found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "painful_legs_moving_toes-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuropathic pain drugs",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Gabapentinoid such as gabapentin or pregabalin, with amitriptyline or duloxetine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any lesion",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Underlying peripheral nerve, root or cauda equina lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement control",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Botulinum toxin to affected muscles; baclofen or benzodiazepine trials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory pain",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Carbamazepine, nerve stimulation or nerve blocks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interventional and rehabilitation care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Spinal cord stimulation if intractable; physiotherapy and pain clinic input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "painful_legs_moving_toes-dx-mgmt",
+      "title": "Diagnosis and management of Painful legs and moving toes syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deep leg pain with continuous involuntary toe or foot movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive weakness, cauda equina signs or intractable pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal review for cauda equina or evolving nerve lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies and EMG, lumbosacral imaging if suspected, RLS history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do nerve studies show a peripheral nerve or root injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider restless legs, complex regional pain syndrome or functional movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gabapentinoid such as gabapentin or pregabalin, with amitriptyline or duloxetine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any underlying peripheral nerve, root or cauda equina lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Botulinum toxin to affected muscles; baclofen or benzodiazepine trials for movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carbamazepine, nerve stimulation or nerve blocks for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and pain clinic input; spinal cord stimulation if intractable",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and often treatment-resistant; pain is the most disabling component",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

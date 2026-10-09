@@ -1,177 +1,489 @@
 {
- "id": "x_linked_sideroblastic_anaemia",
- "name": "X-linked sideroblastic anaemia",
- "aliases": [
-  "XLSA",
-  "ALAS2-related sideroblastic anaemia",
-  "hereditary X-linked sideroblastic anaemia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Postgraduate Haematology (Hoffbrand)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate synthase catalysing the first, pyridoxine-dependent step of haem synthesis",
-   "X-linked, so it classically affects males; carrier females are usually mild or unaffected but can be symptomatic through skewed lyonisation, sometimes presenting only in later life",
-   "Produces a microcytic, hypochromic anaemia with a characteristic dimorphic blood film and ring sideroblasts (iron-laden mitochondria encircling the erythroblast nucleus) on marrow iron staining",
-   "Many cases are pyridoxine (vitamin B6) responsive because the enzyme uses pyridoxal phosphate as a cofactor, so a therapeutic trial is warranted",
-   "Systemic iron overload is characteristic and occurs independently of transfusion, driven by ineffective erythropoiesis and hepcidin suppression, and may be the dominant clinical problem",
-   "In contrast with iron deficiency, the anaemia is microcytic but iron stores are high, so iron supplementation is harmful",
-   "Co-inheritance of an HFE haemochromatosis variant can accentuate iron loading, and the X-linked pattern with a supportive family history aids diagnosis"
+  "id": "x_linked_sideroblastic_anaemia",
+  "name": "X-linked sideroblastic anaemia",
+  "aliases": [
+    "XLSA",
+    "ALAS2-related sideroblastic anaemia",
+    "hereditary X-linked sideroblastic anaemia"
   ],
-  "pathophysiology": "X-linked sideroblastic anaemia results from loss-of-function or hypomorphic mutations in ALAS2 on the X chromosome, encoding the erythroid isoform of delta-aminolaevulinate synthase, which condenses glycine and succinyl-CoA using pyridoxal 5'-phosphate as cofactor in the first and rate-limiting step of haem biosynthesis. Deficient enzyme activity leaves iron that has entered the erythroblast mitochondrion unincorporated into protoporphyrin, so iron accumulates within perinuclear mitochondria to form ring sideroblasts. The impaired haemoglobinisation produces a microcytic hypochromic anaemia with ineffective erythropoiesis, while suppressed hepcidin drives increased dietary iron absorption and progressive systemic iron overload.",
-  "additionalDifferentials": [
-   "Other congenital sideroblastic anaemias (SLC25A38 and mitochondrial or syndromic forms)",
-   "Acquired sideroblastic anaemia or myelodysplasia with ring sideroblasts",
-   "Iron-deficiency anaemia, microcytic but iron-deplete",
-   "Thalassaemia trait and other microcytic anaemias",
-   "Anaemia of chronic disease",
-   "Lead poisoning and copper deficiency or zinc excess",
-   "Alcohol- or drug-induced sideroblastic change"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film, showing a dimorphic hypochromic microcytic population",
-   "Bone marrow aspirate with Perls (Prussian blue) stain for ring sideroblasts",
-   "Iron studies with ferritin and transferrin saturation (raised), to distinguish from iron deficiency",
-   "ALAS2 gene sequencing, with a broader sideroblastic anaemia panel if negative",
-   "A trial of pyridoxine to assess responsiveness",
-   "Hepatic and cardiac iron quantification by MRI (T2*)",
-   "HFE genotyping where iron overload is prominent"
-  ],
-  "redFlags": [
-   "Iron overload with cardiac, hepatic or endocrine dysfunction",
-   "Inappropriate iron therapy worsening iron loading",
-   "Severe or transfusion-dependent anaemia",
-   "Family history of unexplained iron overload or anaemia in males"
-  ],
-  "prognosis": "Pyridoxine-responsive disease often has a good outlook with correction or improvement of the anaemia, but iron overload remains the principal threat and requires lifelong monitoring. Non-responsive or transfusion-dependent cases carry greater morbidity, much of it preventable with chelation and, where appropriate, venesection.",
-  "pitfalls": [
-   "Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload",
-   "Not offering a pyridoxine trial",
-   "Overlooking symptomatic female carriers because the condition is labelled X-linked",
-   "Missing iron overload because the patient has never been transfused",
-   "Attributing ring sideroblasts to myelodysplasia without considering a congenital cause in a younger patient"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Postgraduate Haematology (Hoffbrand)",
-   "Williams Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence",
-   "Strict avoidance of iron supplementation, which is harmful because iron stores are already high",
-   "Iron chelation therapy for established systemic iron overload",
-   "Red cell transfusion support for pyridoxine-unresponsive or severe anaemia",
-   "Monitoring of iron burden with ferritin, transferrin saturation and hepatic and cardiac MRI",
-   "Haematology follow-up including assessment of carrier females, who may become symptomatic in later life",
-   "Genetic counselling with ALAS2 testing for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_sideroblastic_anaemia-pathway",
-   "title": "X-linked sideroblastic anaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate synthase catalysing the first, pyridoxine-dependent step of haem synthesis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Iron overload with cardiac, hepatic or endocrine dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film, showing a dimorphic hypochromic microcytic population, Bone marrow aspirate with Perls (Prussian blue) stain for ring sideroblasts, Iron studies with ferritin and transferrin saturation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked sideroblastic anaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_sideroblastic_anaemia-matrix",
-   "title": "X-linked sideroblastic anaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Postgraduate Haematology (Hoffbrand)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate synthase catalysing the first, pyridoxine-dependent step of haem synthesis",
+      "X-linked, so it classically affects males; carrier females are usually mild or unaffected but can be symptomatic through skewed lyonisation, sometimes presenting only in later life",
+      "Produces a microcytic, hypochromic anaemia with a characteristic dimorphic blood film and ring sideroblasts (iron-laden mitochondria encircling the erythroblast nucleus) on marrow iron staining",
+      "Many cases are pyridoxine (vitamin B6) responsive because the enzyme uses pyridoxal phosphate as a cofactor, so a therapeutic trial is warranted",
+      "Systemic iron overload is characteristic and occurs independently of transfusion, driven by ineffective erythropoiesis and hepcidin suppression, and may be the dominant clinical problem",
+      "In contrast with iron deficiency, the anaemia is microcytic but iron stores are high, so iron supplementation is harmful",
+      "Co-inheritance of an HFE haemochromatosis variant can accentuate iron loading, and the X-linked pattern with a supportive family history aids diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film, showing a dimorphic hypochromic microcytic population, Bone marrow aspirate with Perls (Prussian",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "X-linked sideroblastic anaemia results from loss-of-function or hypomorphic mutations in ALAS2 on the X chromosome, encoding the erythroid isoform of delta-aminolaevulinate synthase, which condenses glycine and succinyl-CoA using pyridoxal 5'-phosphate as cofactor in the first and rate-limiting step of haem biosynthesis. Deficient enzyme activity leaves iron that has entered the erythroblast mitochondrion unincorporated into protoporphyrin, so iron accumulates within perinuclear mitochondria to form ring sideroblasts. The impaired haemoglobinisation produces a microcytic hypochromic anaemia with ineffective erythropoiesis, while suppressed hepcidin drives increased dietary iron absorption and progressive systemic iron overload.",
+    "additionalDifferentials": [
+      "Other congenital sideroblastic anaemias (SLC25A38 and mitochondrial or syndromic forms)",
+      "Acquired sideroblastic anaemia or myelodysplasia with ring sideroblasts",
+      "Iron-deficiency anaemia, microcytic but iron-deplete",
+      "Thalassaemia trait and other microcytic anaemias",
+      "Anaemia of chronic disease",
+      "Lead poisoning and copper deficiency or zinc excess",
+      "Alcohol- or drug-induced sideroblastic change"
     ],
-    [
-     "Primary Differentials",
-     "Other congenital sideroblastic anaemias (SLC25A38 and mitochondrial or syndromic forms), Acquired sideroblastic anaemia or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film, showing a dimorphic hypochromic microcytic population",
+      "Bone marrow aspirate with Perls (Prussian blue) stain for ring sideroblasts",
+      "Iron studies with ferritin and transferrin saturation (raised), to distinguish from iron deficiency",
+      "ALAS2 gene sequencing, with a broader sideroblastic anaemia panel if negative",
+      "A trial of pyridoxine to assess responsiveness",
+      "Hepatic and cardiac iron quantification by MRI (T2*)",
+      "HFE genotyping where iron overload is prominent"
     ],
-    [
-     "Management Strategy",
-     "A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence",
-     "Core treatment modality"
+    "redFlags": [
+      "Iron overload with cardiac, hepatic or endocrine dysfunction",
+      "Inappropriate iron therapy worsening iron loading",
+      "Severe or transfusion-dependent anaemia",
+      "Family history of unexplained iron overload or anaemia in males"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pyridoxine-responsive disease often has a good outlook with correction or improvement of the anaemia, but iron overload remains the principal threat and requires lifelong monitoring. Non-responsive or transfusion-dependent cases carry greater morbidity, much of it preventable with chelation and, where appropriate, venesection.",
+    "pitfalls": [
+      "Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload",
+      "Not offering a pyridoxine trial",
+      "Overlooking symptomatic female carriers because the condition is labelled X-linked",
+      "Missing iron overload because the patient has never been transfused",
+      "Attributing ring sideroblasts to myelodysplasia without considering a congenital cause in a younger patient"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Postgraduate Haematology (Hoffbrand)",
+      "Williams Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence",
+      "Strict avoidance of iron supplementation, which is harmful because iron stores are already high",
+      "Iron chelation therapy for established systemic iron overload",
+      "Red cell transfusion support for pyridoxine-unresponsive or severe anaemia",
+      "Monitoring of iron burden with ferritin, transferrin saturation and hepatic and cardiac MRI",
+      "Haematology follow-up including assessment of carrier females, who may become symptomatic in later life",
+      "Genetic counselling with ALAS2 testing for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked sideroblastic anaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-sideroblastic-anaemia-real-image",
-   "title": "X-linked sideroblastic anaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "x_linked_sideroblastic_anaemia-pathway",
+      "title": "X-linked sideroblastic anaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate synthase catalysing the first, pyridoxine-dependent step of haem synthesis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Iron overload with cardiac, hepatic or endocrine dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film, showing a dimorphic hypochromic microcytic population, Bone marrow aspirate with Perls (Prussian blue) stain for ring sideroblasts, Iron studies with ferritin and transferrin saturation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked sideroblastic anaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_sideroblastic_anaemia-matrix",
+      "title": "X-linked sideroblastic anaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest congenital sideroblastic anaemia, caused by mutations in ALAS2, the erythroid-specific delta-aminolaevulinate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film, showing a dimorphic hypochromic microcytic population, Bone marrow aspirate with Perls (Prussian",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other congenital sideroblastic anaemias (SLC25A38 and mitochondrial or syndromic forms), Acquired sideroblastic anaemia or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "A therapeutic trial of pyridoxine, to which many cases respond given the enzyme's pyridoxal-phosphate cofactor dependence",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the microcytic anaemia as iron deficiency and giving iron, which aggravates overload",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked sideroblastic anaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Postgraduate Haematology (Hoffbrand)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_sideroblastic_anaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Dimorphic hypochromic microcytic population"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate with iron stain",
+          "cells": [
+            {
+              "text": "Ring sideroblasts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SLC25A38 and mitochondrial sideroblastic anaemias",
+          "cells": [
+            {
+              "text": "Other congenital sideroblastic anaemias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired sideroblastic anaemia or myelodysplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyridoxine trial",
+          "cells": [
+            {
+              "text": "Many cases respond; pyridoxal-phosphate cofactor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid iron",
+          "cells": [
+            {
+              "text": "Iron therapy worsens overload"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_sideroblastic_anaemia-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_sideroblastic_anaemia-dx-mgmt",
+      "title": "Diagnosis and management of X-linked sideroblastic anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked sideroblastic anaemia: microcytic anaemia with iron loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (iron overload with cardiac, liver or endocrine dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent iron overload management with cardiac or hepatic dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, marrow iron stain, ALAS2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ALAS2 testing confirm a variant with ring sideroblasts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other congenital or acquired sideroblastic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic trial of pyridoxine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid iron therapy for presumed iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor and manage iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Many respond to pyridoxine; iron loading is the main preventable harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

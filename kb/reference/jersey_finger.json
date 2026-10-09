@@ -1,167 +1,427 @@
 {
- "id": "jersey_finger",
- "name": "Jersey finger",
- "aliases": [
-  "flexor digitorum profundus avulsion"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Hand surgery / Orthopaedics / Sports medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hand surgery and sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the fingertip",
-   "It classically occurs when a gripping finger is forcibly extended, as in grabbing an opponent's jersey",
-   "The ring finger is the most commonly affected digit",
-   "The patient cannot actively flex the distal interphalangeal joint of the involved finger when it is isolated",
-   "The retracted tendon end may be palpable more proximally, and the level of retraction guides urgency of repair",
-   "It is a surgical injury, and early diagnosis improves the outcome, as greater retraction compromises repair"
+  "id": "jersey_finger",
+  "name": "Jersey finger",
+  "aliases": [
+    "flexor digitorum profundus avulsion"
   ],
-  "pathophysiology": "Jersey finger results from sudden forced extension of a finger during active flexion, generating tension that avulses the flexor digitorum profundus tendon from the distal phalanx, sometimes with a bony fragment. Once detached, the tendon retracts proximally to a degree determined by whether its vincular blood supply and the fibro-osseous pulleys remain attached; greater retraction jeopardises the tendon's nutrition and complicates repair. Loss of the profundus insertion abolishes active flexion at the distal interphalangeal joint.",
-  "additionalDifferentials": [
-   "Mallet finger (extensor injury)",
-   "Distal phalanx fracture",
-   "Flexor tendon laceration",
-   "Trigger finger with locking",
-   "Distal interphalangeal joint dislocation"
-  ],
-  "additionalInvestigations": [
-   "Clinical testing of isolated distal interphalangeal joint flexion",
-   "Radiographs to detect a bony avulsion fragment and its position",
-   "Ultrasound or MRI to locate the retracted tendon end",
-   "Assessment of the level of tendon retraction",
-   "Prompt hand surgery referral"
-  ],
-  "redFlags": [
-   "Marked proximal retraction of the tendon threatening viability",
-   "Delayed presentation limiting repair options",
-   "Associated fracture or joint injury",
-   "Signs of neurovascular compromise"
-  ],
-  "prognosis": "Early surgical repair or reattachment generally restores good function, but delayed diagnosis, significant retraction or chronic injury can necessitate more complex reconstruction with poorer outcomes.",
-  "pitfalls": [
-   "Missing the injury by not testing isolated distal interphalangeal flexion",
-   "Confusing it with mallet finger",
-   "Delaying referral so that the tendon retracts further",
-   "Overlooking an associated avulsion fracture"
-  ],
-  "references": [
-   "Hand surgery reference texts (standard reference)",
-   "Sports medicine references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment",
-   "Early referral to hand surgery, as greater tendon retraction compromises repair and dictates urgency",
-   "Protective splinting and immobilisation of the finger while awaiting surgery to limit further retraction",
-   "Tendon reconstruction or grafting, or distal interphalangeal joint arthrodesis, for chronic or irreparable injuries",
-   "Radiographic assessment for a bony avulsion fragment to guide the repair technique",
-   "Structured post-operative hand therapy with a graded tendon-protection and mobilisation protocol"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "jersey_finger-pathway",
-   "title": "Jersey finger: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the fingertip",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked proximal retraction of the tendon threatening viability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical testing of isolated distal interphalangeal joint flexion, Radiographs to detect a bony avulsion fragment and its position, Ultrasound or MRI to locate the retracted tendon end"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the injury by not testing isolated distal interphalangeal flexion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of jersey finger."
-  }
- ],
- "tables": [
-  {
-   "id": "jersey_finger-matrix",
-   "title": "Jersey finger: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Hand surgery / Orthopaedics / Sports medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hand surgery and sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the fingertip",
+      "It classically occurs when a gripping finger is forcibly extended, as in grabbing an opponent's jersey",
+      "The ring finger is the most commonly affected digit",
+      "The patient cannot actively flex the distal interphalangeal joint of the involved finger when it is isolated",
+      "The retracted tendon end may be palpable more proximally, and the level of retraction guides urgency of repair",
+      "It is a surgical injury, and early diagnosis improves the outcome, as greater retraction compromises repair"
     ],
-    [
-     "Key Investigations",
-     "Clinical testing of isolated distal interphalangeal joint flexion, Radiographs to detect a bony avulsion fragment and its",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Jersey finger results from sudden forced extension of a finger during active flexion, generating tension that avulses the flexor digitorum profundus tendon from the distal phalanx, sometimes with a bony fragment. Once detached, the tendon retracts proximally to a degree determined by whether its vincular blood supply and the fibro-osseous pulleys remain attached; greater retraction jeopardises the tendon's nutrition and complicates repair. Loss of the profundus insertion abolishes active flexion at the distal interphalangeal joint.",
+    "additionalDifferentials": [
+      "Mallet finger (extensor injury)",
+      "Distal phalanx fracture",
+      "Flexor tendon laceration",
+      "Trigger finger with locking",
+      "Distal interphalangeal joint dislocation"
     ],
-    [
-     "Primary Differentials",
-     "Mallet finger (extensor injury), Distal phalanx fracture, Flexor tendon laceration",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical testing of isolated distal interphalangeal joint flexion",
+      "Radiographs to detect a bony avulsion fragment and its position",
+      "Ultrasound or MRI to locate the retracted tendon end",
+      "Assessment of the level of tendon retraction",
+      "Prompt hand surgery referral"
     ],
-    [
-     "Management Strategy",
-     "Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked proximal retraction of the tendon threatening viability",
+      "Delayed presentation limiting repair options",
+      "Associated fracture or joint injury",
+      "Signs of neurovascular compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the injury by not testing isolated distal interphalangeal flexion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early surgical repair or reattachment generally restores good function, but delayed diagnosis, significant retraction or chronic injury can necessitate more complex reconstruction with poorer outcomes.",
+    "pitfalls": [
+      "Missing the injury by not testing isolated distal interphalangeal flexion",
+      "Confusing it with mallet finger",
+      "Delaying referral so that the tendon retracts further",
+      "Overlooking an associated avulsion fracture"
+    ],
+    "references": [
+      "Hand surgery reference texts (standard reference)",
+      "Sports medicine references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment",
+      "Early referral to hand surgery, as greater tendon retraction compromises repair and dictates urgency",
+      "Protective splinting and immobilisation of the finger while awaiting surgery to limit further retraction",
+      "Tendon reconstruction or grafting, or distal interphalangeal joint arthrodesis, for chronic or irreparable injuries",
+      "Radiographic assessment for a bony avulsion fragment to guide the repair technique",
+      "Structured post-operative hand therapy with a graded tendon-protection and mobilisation protocol"
     ]
-   ],
-   "caption": "Overview comparison matrix for jersey finger."
-  }
- ],
- "diagrams": [
-  {
-   "id": "jersey-finger-real-image",
-   "title": "Jersey finger: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "jersey_finger-pathway",
+      "title": "Jersey finger: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the fingertip",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked proximal retraction of the tendon threatening viability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical testing of isolated distal interphalangeal joint flexion, Radiographs to detect a bony avulsion fragment and its position, Ultrasound or MRI to locate the retracted tendon end"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the injury by not testing isolated distal interphalangeal flexion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of jersey finger."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "jersey_finger-matrix",
+      "title": "Jersey finger: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Avulsion of the flexor digitorum profundus tendon from its insertion on the distal phalanx, causing loss of active flexion of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical testing of isolated distal interphalangeal joint flexion, Radiographs to detect a bony avulsion fragment and its",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mallet finger (extensor injury), Distal phalanx fracture, Flexor tendon laceration",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt surgical reattachment or repair of the avulsed flexor digitorum profundus tendon, the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the injury by not testing isolated distal interphalangeal flexion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for jersey finger."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hand surgery and sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jersey_finger-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated distal interphalangeal flexion testing",
+          "cells": [
+            {
+              "text": "Loss of active fingertip flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Bony avulsion fragment and its position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Location of the retracted tendon end"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Level of tendon retraction",
+          "cells": [
+            {
+              "text": "Urgency and repair options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jersey_finger-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mallet finger (extensor injury)",
+          "cells": [
+            {
+              "text": "Loss of active extension at the distal interphalangeal joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tendon laceration",
+          "cells": [
+            {
+              "text": "Sharp laceration rather than avulsion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jersey_finger-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical reattachment",
+          "cells": [
+            {
+              "text": "Avulsed flexor digitorum profundus tendon repaired; definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early referral",
+          "cells": [
+            {
+              "text": "Hand surgery; greater retraction compromises repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interim splinting",
+          "cells": [
+            {
+              "text": "Immobilise the finger while awaiting surgery to limit retraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic or irreparable injury",
+          "cells": [
+            {
+              "text": "Tendon reconstruction or graft, or distal interphalangeal joint arthrodesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragment",
+          "cells": [
+            {
+              "text": "Radiographs guide the repair technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Structured hand therapy with a graded tendon-protection protocol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jersey_finger-dx-mgmt",
+      "title": "Diagnosis and management of Jersey finger",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loss of active fingertip flexion after forced extension of a gripping finger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Marked retraction, delayed presentation, associated fracture or neurovascular compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hand surgery referral; neurovascular check",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Isolated DIP flexion test, radiographs for avulsion fragment, ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated flexor digitorum profundus avulsion with limited retraction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for mallet finger, fracture or laceration; hand review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical reattachment of the flexor digitorum profundus tendon",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Splint and immobilise while awaiting surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reconstruction or graft, or DIP fusion, for chronic injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy with graded protocol after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Function depends on repair timing and retraction; chronic cases need reconstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

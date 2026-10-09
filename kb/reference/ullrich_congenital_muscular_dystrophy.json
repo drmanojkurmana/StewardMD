@@ -1,176 +1,472 @@
 {
- "id": "ullrich_congenital_muscular_dystrophy",
- "name": "Ullrich congenital muscular dystrophy",
- "aliases": [
-  "UCMD",
-  "COL6A1",
-  "COL6A2",
-  "COL6A3",
-  "collagen VI-related muscular dystrophy, severe",
-  "Ullrich scleroatonic muscular dystrophy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at birth or in early infancy",
-   "Neonates show marked hypotonia and weakness together with the striking combination of proximal joint contractures (hips, knees, elbows) and hyperlaxity of the distal joints (wrists, fingers, ankles)",
-   "Congenital features may include torticollis, kyphoscoliosis, hip dislocation and prominent calcanei",
-   "Motor milestones are delayed and many children achieve, but may later lose, independent walking",
-   "Caused by mutations in the collagen VI genes COL6A1, COL6A2 and COL6A3, with both recessive and dominant (often de novo) inheritance recognised",
-   "Progressive respiratory failure from diaphragmatic and chest-wall weakness is a leading concern and often necessitates non-invasive nocturnal ventilatory support",
-   "Soft, velvety palms and follicular hyperkeratosis with abnormal scarring reflect the underlying connective-tissue defect"
+  "id": "ullrich_congenital_muscular_dystrophy",
+  "name": "Ullrich congenital muscular dystrophy",
+  "aliases": [
+    "UCMD",
+    "COL6A1",
+    "COL6A2",
+    "COL6A3",
+    "collagen VI-related muscular dystrophy, severe",
+    "Ullrich scleroatonic muscular dystrophy"
   ],
-  "pathophysiology": "Ullrich congenital muscular dystrophy is caused by mutations in the collagen VI genes COL6A1, COL6A2 and COL6A3, which more severely disrupt the assembly or function of the collagen VI microfibrillar network than the milder variants causing Bethlem myopathy. Collagen VI links the muscle-fibre basement membrane to the surrounding interstitial matrix, and its severe deficiency impairs the structural and signalling relationship between fibres and their environment, with dysregulated mitochondrial function and increased apoptosis contributing to early and profound muscle degeneration. Because collagen VI is widespread in connective tissue, the disorder also produces the characteristic joint contractures and hyperlaxity, skeletal deformity and skin abnormalities, and the early respiratory failure that dominates its natural history.",
-  "additionalDifferentials": [
-   "Bethlem myopathy",
-   "Other congenital muscular dystrophies including merosin-deficient forms",
-   "Congenital myopathies such as core and nemaline myopathies",
-   "Spinal muscular atrophy",
-   "Congenital myasthenic syndromes",
-   "Distal arthrogryposis and syndromic contracture disorders"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase, usually normal or only mildly elevated",
-   "Muscle biopsy with collagen VI immunohistochemistry, often supplemented by fibroblast culture studies",
-   "Targeted genetic testing of COL6A1, COL6A2 and COL6A3",
-   "Muscle magnetic resonance imaging showing the characteristic pattern of muscle involvement",
-   "Respiratory function tests and overnight monitoring for hypoventilation from early in the disease",
-   "Spinal and hip imaging to assess scoliosis and dislocation"
-  ],
-  "redFlags": [
-   "Progressive respiratory failure or nocturnal hypoventilation, which may occur even before loss of walking",
-   "Rapidly progressive scoliosis compromising respiratory function",
-   "Feeding difficulty and failure to thrive in infancy",
-   "Loss of ambulation requiring orthopaedic and rehabilitation planning"
-  ],
-  "prognosis": "Ullrich congenital muscular dystrophy is more severe than Bethlem myopathy, with many affected children losing ambulation in the first or second decade and developing progressive respiratory insufficiency that determines survival, although proactive respiratory and orthopaedic care can substantially prolong and improve life.",
-  "pitfalls": [
-   "Delaying respiratory surveillance because motor function seems relatively preserved",
-   "Overlooking the diagnostic combination of proximal contractures with distal hyperlaxity in a hypotonic infant",
-   "Assuming normal collagen VI immunostaining excludes the diagnosis, as staining can be only partially reduced",
-   "Not recognising that dominant de novo mutations can cause the disorder in a child with no family history"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Collagen VI-Related Dystrophies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around respiratory, orthopaedic and functional needs",
-   "Proactive respiratory management with non-invasive nocturnal ventilation for hypoventilation and airway-clearance techniques, given progressive diaphragmatic and chest-wall weakness",
-   "Physiotherapy with stretching, serial casting and orthoses to manage proximal contractures while preserving distal hyperlaxity",
-   "Orthopaedic surveillance and intervention for kyphoscoliosis and hip dislocation",
-   "Regular monitoring of respiratory function and overnight oximetry from early in the disease, with nutritional and feeding support",
-   "Multidisciplinary care through neuromuscular, respiratory, orthopaedic, physiotherapy and occupational therapy teams to maintain ambulation as long as possible",
-   "Genetic counselling given COL6A1, COL6A2 and COL6A3 mutations with both dominant and recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ullrich_congenital_muscular_dystrophy-pathway",
-   "title": "Ullrich congenital muscular dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at birth or in early infancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive respiratory failure or nocturnal hypoventilation, which may occur even before loss of walking",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, usually normal or only mildly elevated, Muscle biopsy with collagen VI immunohistochemistry, often supplemented by fibroblast culture studies, Targeted genetic testing of COL6A1, COL6A2 and COL6A3"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around respiratory, orthopaedic and functional needs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying respiratory surveillance because motor function seems relatively preserved"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ullrich congenital muscular dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "ullrich_congenital_muscular_dystrophy-matrix",
-   "title": "Ullrich congenital muscular dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at birth or in early infancy",
+      "Neonates show marked hypotonia and weakness together with the striking combination of proximal joint contractures (hips, knees, elbows) and hyperlaxity of the distal joints (wrists, fingers, ankles)",
+      "Congenital features may include torticollis, kyphoscoliosis, hip dislocation and prominent calcanei",
+      "Motor milestones are delayed and many children achieve, but may later lose, independent walking",
+      "Caused by mutations in the collagen VI genes COL6A1, COL6A2 and COL6A3, with both recessive and dominant (often de novo) inheritance recognised",
+      "Progressive respiratory failure from diaphragmatic and chest-wall weakness is a leading concern and often necessitates non-invasive nocturnal ventilatory support",
+      "Soft, velvety palms and follicular hyperkeratosis with abnormal scarring reflect the underlying connective-tissue defect"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, usually normal or only mildly elevated, Muscle biopsy with collagen VI immunohistochemistry, often",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ullrich congenital muscular dystrophy is caused by mutations in the collagen VI genes COL6A1, COL6A2 and COL6A3, which more severely disrupt the assembly or function of the collagen VI microfibrillar network than the milder variants causing Bethlem myopathy. Collagen VI links the muscle-fibre basement membrane to the surrounding interstitial matrix, and its severe deficiency impairs the structural and signalling relationship between fibres and their environment, with dysregulated mitochondrial function and increased apoptosis contributing to early and profound muscle degeneration. Because collagen VI is widespread in connective tissue, the disorder also produces the characteristic joint contractures and hyperlaxity, skeletal deformity and skin abnormalities, and the early respiratory failure that dominates its natural history.",
+    "additionalDifferentials": [
+      "Bethlem myopathy",
+      "Other congenital muscular dystrophies including merosin-deficient forms",
+      "Congenital myopathies such as core and nemaline myopathies",
+      "Spinal muscular atrophy",
+      "Congenital myasthenic syndromes",
+      "Distal arthrogryposis and syndromic contracture disorders"
     ],
-    [
-     "Primary Differentials",
-     "Bethlem myopathy, Other congenital muscular dystrophies including merosin-deficient forms, Congenital myopathies such as core and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase, usually normal or only mildly elevated",
+      "Muscle biopsy with collagen VI immunohistochemistry, often supplemented by fibroblast culture studies",
+      "Targeted genetic testing of COL6A1, COL6A2 and COL6A3",
+      "Muscle magnetic resonance imaging showing the characteristic pattern of muscle involvement",
+      "Respiratory function tests and overnight monitoring for hypoventilation from early in the disease",
+      "Spinal and hip imaging to assess scoliosis and dislocation"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive respiratory failure or nocturnal hypoventilation, which may occur even before loss of walking",
+      "Rapidly progressive scoliosis compromising respiratory function",
+      "Feeding difficulty and failure to thrive in infancy",
+      "Loss of ambulation requiring orthopaedic and rehabilitation planning"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying respiratory surveillance because motor function seems relatively preserved",
-     "Prevent diagnostic or management error"
+    "prognosis": "Ullrich congenital muscular dystrophy is more severe than Bethlem myopathy, with many affected children losing ambulation in the first or second decade and developing progressive respiratory insufficiency that determines survival, although proactive respiratory and orthopaedic care can substantially prolong and improve life.",
+    "pitfalls": [
+      "Delaying respiratory surveillance because motor function seems relatively preserved",
+      "Overlooking the diagnostic combination of proximal contractures with distal hyperlaxity in a hypotonic infant",
+      "Assuming normal collagen VI immunostaining excludes the diagnosis, as staining can be only partially reduced",
+      "Not recognising that dominant de novo mutations can cause the disorder in a child with no family history"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Collagen VI-Related Dystrophies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around respiratory, orthopaedic and functional needs",
+      "Proactive respiratory management with non-invasive nocturnal ventilation for hypoventilation and airway-clearance techniques, given progressive diaphragmatic and chest-wall weakness",
+      "Physiotherapy with stretching, serial casting and orthoses to manage proximal contractures while preserving distal hyperlaxity",
+      "Orthopaedic surveillance and intervention for kyphoscoliosis and hip dislocation",
+      "Regular monitoring of respiratory function and overnight oximetry from early in the disease, with nutritional and feeding support",
+      "Multidisciplinary care through neuromuscular, respiratory, orthopaedic, physiotherapy and occupational therapy teams to maintain ambulation as long as possible",
+      "Genetic counselling given COL6A1, COL6A2 and COL6A3 mutations with both dominant and recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for ullrich congenital muscular dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ullrich-congenital-muscular-dystrophy-real-image",
-   "title": "Ullrich congenital muscular dystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "ullrich_congenital_muscular_dystrophy-pathway",
+      "title": "Ullrich congenital muscular dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at birth or in early infancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive respiratory failure or nocturnal hypoventilation, which may occur even before loss of walking",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, usually normal or only mildly elevated, Muscle biopsy with collagen VI immunohistochemistry, often supplemented by fibroblast culture studies, Targeted genetic testing of COL6A1, COL6A2 and COL6A3"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around respiratory, orthopaedic and functional needs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying respiratory surveillance because motor function seems relatively preserved"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ullrich congenital muscular dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ullrich_congenital_muscular_dystrophy-matrix",
+      "title": "Ullrich congenital muscular dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The severe end of the collagen VI-related spectrum, of which Bethlem myopathy is the milder counterpart, usually presenting at",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, usually normal or only mildly elevated, Muscle biopsy with collagen VI immunohistochemistry, often",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bethlem myopathy, Other congenital muscular dystrophies including merosin-deficient forms, Congenital myopathies such as core and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy exists for this collagen VI deficiency, so care is anticipatory and supportive around",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying respiratory surveillance because motor function seems relatively preserved",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ullrich congenital muscular dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ullrich_congenital_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Usually normal or only mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with collagen VI immunohistochemistry",
+          "cells": [
+            {
+              "text": "Collagen VI staining, which can be only partially reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL6A1, COL6A2 and COL6A3 testing",
+          "cells": [
+            {
+              "text": "Targeted confirmation of the molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Characteristic pattern of muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function tests and overnight monitoring",
+          "cells": [
+            {
+              "text": "Hypoventilation, which can begin early in the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and hip imaging",
+          "cells": [
+            {
+              "text": "Scoliosis and hip dislocation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ullrich_congenital_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bethlem myopathy",
+          "cells": [
+            {
+              "text": "Milder collagen VI counterpart of the same spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myopathies such as core and nemaline",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal arthrogryposis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ullrich_congenital_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-specific drug",
+          "cells": [
+            {
+              "text": "Care is anticipatory and supportive around respiratory, orthopaedic and functional needs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive nocturnal ventilation",
+          "cells": [
+            {
+              "text": "For hypoventilation and airway clearance, given diaphragmatic and chest-wall weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stretching, serial casting and orthoses",
+          "cells": [
+            {
+              "text": "Proximal joint contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surveillance",
+          "cells": [
+            {
+              "text": "Kyphoscoliosis and hip dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring and feeding support",
+          "cells": [
+            {
+              "text": "Regular respiratory function and overnight oximetry from early disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular, respiratory, orthopaedic, physiotherapy and occupational therapy teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "COL6A1, COL6A2 and COL6A3, with dominant and recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ullrich_congenital_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Ullrich congenital muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ullrich CMD: neonatal hypotonia, proximal contractures and distal hyperlaxity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, rapid scoliosis or feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and feeding assessment for progressive respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase, collagen VI biopsy staining, COL6A1-3 testing, muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a COL6A1, COL6A2 or COL6A3 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bethlem myopathy, congenital myopathies or distal arthrogryposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No disease-specific drug; supportive and anticipatory care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Non-invasive nocturnal ventilation and airway clearance for hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stretching, serial casting and orthoses for proximal contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic surveillance for kyphoscoliosis and hip dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "More severe than Bethlem; respiratory failure drives survival, but proactive care helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

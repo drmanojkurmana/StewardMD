@@ -1,177 +1,235 @@
 {
- "id": "blepharophimosis_syndrome",
- "name": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2)",
- "aliases": [
-  "BPES",
-  "blepharophimosis syndrome",
-  "BPES type I",
-  "BPES type II"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Strabismus & Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and telecanthus",
-   "Inherited in an autosomal dominant pattern and caused by mutations in the FOXL2 gene",
-   "Type I is associated with premature ovarian insufficiency in affected females, whereas type II involves the eyelids alone",
-   "Levator palpebrae function is typically poor, so children often adopt a chin-up head posture to see beneath the ptotic lids",
-   "Frontalis (brow) suspension is usually needed for the ptosis because levator function is inadequate",
-   "Staged oculoplastic correction commonly addresses the telecanthus and epicanthus first, followed later by ptosis surgery",
-   "Amblyopia may result from the ptosis, refractive error, or strabismus and must be screened for and treated",
-   "Genetic counselling and, in females, endocrine assessment of ovarian function are important parts of care"
+  "id": "blepharophimosis_syndrome",
+  "name": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2)",
+  "aliases": [
+    "BPES",
+    "blepharophimosis syndrome",
+    "BPES type I",
+    "BPES type II"
   ],
-  "pathophysiology": "The syndrome arises from mutations in FOXL2, a transcription factor essential for eyelid and ovarian development. Disrupted FOXL2 signalling impairs formation of the periocular structures, producing shortened palpebral fissures, dystrophic eyelid tissue with poor levator development, and abnormal medial canthal anatomy seen as telecanthus and epicanthus inversus. Because FOXL2 also governs maintenance of ovarian follicles, mutation types that abolish its ovarian function additionally cause premature ovarian insufficiency, defining type I disease, whereas mutations that spare ovarian function give the eyelid-only type II phenotype.",
-  "additionalDifferentials": [
-   "Simple congenital ptosis",
-   "Congenital Horner syndrome",
-   "Marcus Gunn jaw-winking ptosis",
-   "Waardenburg syndrome with dystopia canthorum",
-   "Fetal alcohol spectrum disorder with short palpebral fissures",
-   "Kabuki syndrome",
-   "Isolated telecanthus or epicanthus"
-  ],
-  "additionalInvestigations": [
-   "Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function",
-   "Assessment for amblyopia, refractive error, and strabismus",
-   "FOXL2 molecular genetic testing to confirm the diagnosis and classify the BPES type",
-   "Endocrine evaluation of ovarian reserve in affected females, with pelvic imaging as indicated",
-   "Family pedigree analysis and genetic counselling",
-   "Photographic documentation for surgical planning and monitoring"
-  ],
-  "redFlags": [
-   "Visual axis occlusion by severe ptosis risking deprivation amblyopia in infancy",
-   "Signs of premature ovarian insufficiency in an affected female, such as menstrual disturbance or infertility",
-   "Corneal exposure and drying following ptosis surgery",
-   "Rapidly worsening compensatory head posture or torticollis"
-  ],
-  "prognosis": "Eyelid appearance and function can be substantially improved with staged surgery, though results depend on the degree of levator dysfunction; visual prognosis is good if amblyopia is managed early, but affected females with type I face reduced fertility from ovarian insufficiency.",
-  "pitfalls": [
-   "Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis",
-   "Not testing for premature ovarian insufficiency in affected females with type I disease",
-   "Overlooking amblyopia while focusing on the cosmetic deformity",
-   "Attempting standard levator surgery when poor function mandates frontalis suspension",
-   "Neglecting genetic counselling for the wider family"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "GeneReviews: Blepharophimosis, Ptosis, and Epicanthus Inversus Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal wiring or canthal tendon plication) before addressing the ptosis",
-   "Frontalis (brow) suspension for the ptosis, since poor levator function makes levator resection inadequate",
-   "Refractive correction and occlusion (patching) therapy to prevent or treat amblyopia, with strabismus surgery where needed",
-   "Corneal protection with lubricants to guard against exposure keratopathy, particularly after ptosis surgery",
-   "Endocrine assessment of ovarian reserve with oestrogen/hormone replacement and fertility and assisted-reproduction counselling for type I females with premature ovarian insufficiency",
-   "FOXL2 genetic counselling and family screening given the autosomal dominant inheritance",
-   "Coordinated follow-up across paediatric ophthalmology, oculoplastics and endocrinology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blepharophimosis_syndrome-pathway",
-   "title": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and telecanthus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visual axis occlusion by severe ptosis risking deprivation amblyopia in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function, Assessment for amblyopia, refractive error, and strabismus, FOXL2 molecular genetic testing to confirm the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal wiring or canthal tendon plication) before addressing the ptosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blepharophimosis-ptosis-epicanthus inversus syndrome (foxl2)."
-  }
- ],
- "tables": [
-  {
-   "id": "blepharophimosis_syndrome-matrix",
-   "title": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Strabismus & Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and telecanthus",
+      "Inherited in an autosomal dominant pattern and caused by mutations in the FOXL2 gene",
+      "Type I is associated with premature ovarian insufficiency in affected females, whereas type II involves the eyelids alone",
+      "Levator palpebrae function is typically poor, so children often adopt a chin-up head posture to see beneath the ptotic lids",
+      "Frontalis (brow) suspension is usually needed for the ptosis because levator function is inadequate",
+      "Staged oculoplastic correction commonly addresses the telecanthus and epicanthus first, followed later by ptosis surgery",
+      "Amblyopia may result from the ptosis, refractive error, or strabismus and must be screened for and treated",
+      "Genetic counselling and, in females, endocrine assessment of ovarian function are important parts of care"
     ],
-    [
-     "Key Investigations",
-     "Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function, Assessment for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome arises from mutations in FOXL2, a transcription factor essential for eyelid and ovarian development. Disrupted FOXL2 signalling impairs formation of the periocular structures, producing shortened palpebral fissures, dystrophic eyelid tissue with poor levator development, and abnormal medial canthal anatomy seen as telecanthus and epicanthus inversus. Because FOXL2 also governs maintenance of ovarian follicles, mutation types that abolish its ovarian function additionally cause premature ovarian insufficiency, defining type I disease, whereas mutations that spare ovarian function give the eyelid-only type II phenotype.",
+    "additionalDifferentials": [
+      "Simple congenital ptosis",
+      "Congenital Horner syndrome",
+      "Marcus Gunn jaw-winking ptosis",
+      "Waardenburg syndrome with dystopia canthorum",
+      "Fetal alcohol spectrum disorder with short palpebral fissures",
+      "Kabuki syndrome",
+      "Isolated telecanthus or epicanthus"
     ],
-    [
-     "Primary Differentials",
-     "Simple congenital ptosis, Congenital Horner syndrome, Marcus Gunn jaw-winking ptosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function",
+      "Assessment for amblyopia, refractive error, and strabismus",
+      "FOXL2 molecular genetic testing to confirm the diagnosis and classify the BPES type",
+      "Endocrine evaluation of ovarian reserve in affected females, with pelvic imaging as indicated",
+      "Family pedigree analysis and genetic counselling",
+      "Photographic documentation for surgical planning and monitoring"
     ],
-    [
-     "Management Strategy",
-     "Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal",
-     "Core treatment modality"
+    "redFlags": [
+      "Visual axis occlusion by severe ptosis risking deprivation amblyopia in infancy",
+      "Signs of premature ovarian insufficiency in an affected female, such as menstrual disturbance or infertility",
+      "Corneal exposure and drying following ptosis surgery",
+      "Rapidly worsening compensatory head posture or torticollis"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Eyelid appearance and function can be substantially improved with staged surgery, though results depend on the degree of levator dysfunction; visual prognosis is good if amblyopia is managed early, but affected females with type I face reduced fertility from ovarian insufficiency.",
+    "pitfalls": [
+      "Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis",
+      "Not testing for premature ovarian insufficiency in affected females with type I disease",
+      "Overlooking amblyopia while focusing on the cosmetic deformity",
+      "Attempting standard levator surgery when poor function mandates frontalis suspension",
+      "Neglecting genetic counselling for the wider family"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "GeneReviews: Blepharophimosis, Ptosis, and Epicanthus Inversus Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal wiring or canthal tendon plication) before addressing the ptosis",
+      "Frontalis (brow) suspension for the ptosis, since poor levator function makes levator resection inadequate",
+      "Refractive correction and occlusion (patching) therapy to prevent or treat amblyopia, with strabismus surgery where needed",
+      "Corneal protection with lubricants to guard against exposure keratopathy, particularly after ptosis surgery",
+      "Endocrine assessment of ovarian reserve with oestrogen/hormone replacement and fertility and assisted-reproduction counselling for type I females with premature ovarian insufficiency",
+      "FOXL2 genetic counselling and family screening given the autosomal dominant inheritance",
+      "Coordinated follow-up across paediatric ophthalmology, oculoplastics and endocrinology"
     ]
-   ],
-   "caption": "Overview comparison matrix for blepharophimosis-ptosis-epicanthus inversus syndrome (foxl2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blepharophimosis-syndrome-real-image",
-   "title": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "blepharophimosis_syndrome-pathway",
+      "title": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and telecanthus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visual axis occlusion by severe ptosis risking deprivation amblyopia in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function, Assessment for amblyopia, refractive error, and strabismus, FOXL2 molecular genetic testing to confirm the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal wiring or canthal tendon plication) before addressing the ptosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blepharophimosis-ptosis-epicanthus inversus syndrome (foxl2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blepharophimosis_syndrome-matrix",
+      "title": "Blepharophimosis-ptosis-epicanthus inversus syndrome (FOXL2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a tetrad of blepharophimosis (horizontally short palpebral fissures), severe ptosis, epicanthus inversus, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical measurement of palpebral fissure length, intercanthal and interpupillary distances, and levator function, Assessment for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Simple congenital ptosis, Congenital Horner syndrome, Marcus Gunn jaw-winking ptosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Staged oculoplastic reconstruction, correcting the telecanthus and epicanthus inversus first (medial canthoplasty with transnasal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish BPES from simple congenital ptosis and missing the genetic diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blepharophimosis-ptosis-epicanthus inversus syndrome (foxl2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blepharophimosis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in blepharophimosis-ptosis-epicanthus inversus syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Palpebral fissure length, intercanthal distance and levator function", "cells": [{"text": "Short horizontal fissures, telecanthus and poor levator function"}], "cite": "c1"},
+        {"parameter": "Assessment for amblyopia, refractive error and strabismus", "cells": [{"text": "Amblyopia must be screened for and treated"}], "cite": "c1"},
+        {"parameter": "FOXL2 molecular genetic testing", "cells": [{"text": "Confirms the diagnosis and classifies the type"}], "cite": "c1"},
+        {"parameter": "Endocrine evaluation of ovarian reserve", "cells": [{"text": "Premature ovarian insufficiency in affected females with type I disease"}], "cite": "c1"},
+        {"parameter": "Pedigree analysis and genetic counselling", "cells": [{"text": "Autosomal dominant inheritance"}], "cite": "c1"},
+        {"parameter": "Photographic documentation", "cells": [{"text": "Surgical planning and monitoring"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharophimosis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike eyelid and canthal conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Simple congenital ptosis", "cells": [{"text": "Telecanthus and epicanthus inversus with poor levator function point to this syndrome; FOXL2 testing confirms"}], "cite": "c1"},
+        {"parameter": "Isolated telecanthus or epicanthus", "cells": [{"text": "This syndrome has the full tetrad of blepharophimosis, ptosis, epicanthus inversus and telecanthus"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharophimosis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in blepharophimosis-ptosis-epicanthus inversus syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Canthal correction first", "cells": [{"text": "Medial canthoplasty with transnasal wiring or canthal tendon plication"}, {"text": "Telecanthus and epicanthus corrected before the ptosis"}], "cite": "c1"},
+        {"parameter": "Ptosis surgery", "cells": [{"text": "Frontalis (brow) suspension"}, {"text": "Levator resection is inadequate with poor levator function"}], "cite": "c1"},
+        {"parameter": "Amblyopia and refraction", "cells": [{"text": "Refractive correction and occlusion therapy; strabismus surgery where needed"}, {"text": "Prevents or treats amblyopia"}], "cite": "c1"},
+        {"parameter": "Corneal protection", "cells": [{"text": "Lubricants against exposure keratopathy"}, {"text": "Especially after ptosis surgery"}], "cite": "c1"},
+        {"parameter": "Endocrine care", "cells": [{"text": "Assess ovarian reserve; hormone replacement and fertility counselling for type I females"}, {"text": "Premature ovarian insufficiency"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "FOXL2 counselling and family screening"}, {"text": "Autosomal dominant inheritance"}], "cite": "c1"},
+        {"parameter": "Coordinated follow-up", "cells": [{"text": "Paediatric ophthalmology, oculoplastics and endocrinology"}, {"text": "Multidisciplinary"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blepharophimosis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of blepharophimosis-ptosis-epicanthus inversus syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Blepharophimosis, severe ptosis, epicanthus inversus and telecanthus; chin-up posture", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: visual axis occlusion, premature ovarian insufficiency or corneal exposure?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent amblyopia treatment; endocrine review; corneal protection", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Measure fissures and levator function; check amblyopia and refraction; FOXL2 testing", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Pedigree and genetic counselling; endocrine assessment of ovarian reserve in females", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "FOXL2 variant confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Staged surgery: canthoplasty first, then frontalis suspension for the ptosis", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider simple congenital ptosis or isolated telecanthus", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Eyelid function substantially improved; visual outlook good if amblyopia is treated early", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,173 +1,460 @@
 {
- "id": "congenital_myasthenic_syndrome_dok7",
- "name": "DOK7 congenital myasthenic syndrome",
- "aliases": [
-  "DOK7-CMS",
-  "Limb-girdle CMS",
-  "CMS type Ic"
- ],
- "class": "non_infective",
- "system": "Neuromuscular junction",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture rather than receptor kinetics.",
-   "Characteristically produces a limb-girdle pattern of weakness with prominent proximal and axial involvement, often mimicking a muscular dystrophy or myopathy.",
-   "Ptosis is common but pupil-sparing ophthalmoplegia is frequently mild or absent, distinguishing it from many other congenital myasthenic syndromes.",
-   "A waddling gait, difficulty rising from the floor and fatigable proximal weakness are typical, with onset often in later infancy or childhood rather than the neonatal period.",
-   "Salbutamol or ephedrine is the treatment of choice; cholinesterase inhibitors are typically ineffective and may actually worsen the condition.",
-   "The course tends to be slowly progressive with a stepwise pattern, and some patients deteriorate over years despite treatment.",
-   "DOK7 encodes a cytoplasmic protein that activates the MuSK signalling pathway essential for neuromuscular junction formation and maintenance."
+  "id": "congenital_myasthenic_syndrome_dok7",
+  "name": "DOK7 congenital myasthenic syndrome",
+  "aliases": [
+    "DOK7-CMS",
+    "Limb-girdle CMS",
+    "CMS type Ic"
   ],
-  "pathophysiology": "DOK7 encodes downstream-of-kinase 7, a cytoplasmic adaptor protein expressed at the postsynaptic membrane that binds and activates muscle-specific kinase (MuSK), the central organiser of the neuromuscular junction. Through the agrin-LRP4-MuSK-DOK7 signalling axis, DOK7 promotes clustering and anchoring of acetylcholine receptors and the structural maturation of the endplate. Biallelic pathogenic variants, most often a frameshift in the carboxy-terminal region, impair this signalling so that endplates form abnormally and, critically, cannot be maintained over time. The result is small, simplified endplates with reduced receptor density and progressive degeneration of the junctional folds, while the acetylcholine receptor itself is structurally and kinetically normal. Because the defect is one of endplate development and upkeep rather than transmitter release or receptor gating, cholinesterase inhibitors give little benefit and can accelerate endplate damage, whereas beta-adrenergic agonists such as salbutamol and ephedrine improve strength, probably by supporting endplate structure and trophic maintenance.",
-  "additionalDifferentials": [
-   "Limb-girdle muscular dystrophies and congenital myopathies",
-   "Other limb-girdle congenital myasthenic syndromes, particularly GFPT1 and other glycosylation-related forms",
-   "Seronegative autoimmune myasthenia gravis with limb-girdle presentation",
-   "MuSK-related and rapsyn-related congenital myasthenic syndromes",
-   "Inflammatory myopathies presenting with proximal fatigable weakness",
-   "Metabolic myopathies with exercise-related fatigue"
-  ],
-  "additionalInvestigations": [
-   "Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles",
-   "Single-fibre electromyography showing increased jitter and blocking",
-   "Targeted DOK7 sequencing or a comprehensive congenital myasthenic syndrome gene panel",
-   "Serum creatine kinase, which may be mildly raised and mislead towards a primary myopathy",
-   "Muscle biopsy if a dystrophy is suspected, potentially showing endplate abnormalities rather than dystrophic change",
-   "Documented therapeutic response to a beta-adrenergic agonist rather than to a cholinesterase inhibitor"
-  ],
-  "redFlags": [
-   "Progressive respiratory muscle weakness with nocturnal hypoventilation or recurrent chest infections",
-   "Clinical worsening after introduction of a cholinesterase inhibitor",
-   "Rapid loss of ambulation or bulbar decline over months",
-   "Acute deterioration during intercurrent illness with reduced ventilatory reserve"
-  ],
-  "prognosis": "The disorder is typically slowly progressive and may cause significant disability, but many patients gain worthwhile and sustained improvement in strength and function with beta-adrenergic agonist therapy. Long-term monitoring of respiratory function is important as decline can occur despite treatment.",
-  "pitfalls": [
-   "Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder",
-   "Prescribing cholinesterase inhibitors, which are usually unhelpful and may worsen weakness",
-   "Underestimating respiratory involvement because limb weakness dominates the picture",
-   "Expecting the dramatic response seen in receptor-deficiency syndromes; improvement with salbutamol or ephedrine is often gradual over weeks to months"
-  ],
-  "references": [
-   "Standard neuromuscular and paediatric neurology textbooks",
-   "Peer-reviewed reviews of congenital myasthenic syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice",
-   "Avoid acetylcholinesterase inhibitors, which are typically ineffective and may worsen the condition",
-   "Physiotherapy and rehabilitation to preserve proximal and axial strength and mobility",
-   "Long-term respiratory function monitoring, as decline can occur despite treatment",
-   "Regular reassessment of strength and function given the slowly progressive, stepwise course",
-   "Multidisciplinary neuromuscular follow-up",
-   "Genetic counselling for autosomal recessive DOK7 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_myasthenic_syndrome_dok7-pathway",
-   "title": "DOK7 congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture rather than receptor kinetics.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive respiratory muscle weakness with nocturnal hypoventilation or recurrent chest infections",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles, Single-fibre electromyography showing increased jitter and blocking, Targeted DOK7 sequencing or a comprehensive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dok7 congenital myasthenic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_myasthenic_syndrome_dok7-matrix",
-   "title": "DOK7 congenital myasthenic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular junction",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture rather than receptor kinetics.",
+      "Characteristically produces a limb-girdle pattern of weakness with prominent proximal and axial involvement, often mimicking a muscular dystrophy or myopathy.",
+      "Ptosis is common but pupil-sparing ophthalmoplegia is frequently mild or absent, distinguishing it from many other congenital myasthenic syndromes.",
+      "A waddling gait, difficulty rising from the floor and fatigable proximal weakness are typical, with onset often in later infancy or childhood rather than the neonatal period.",
+      "Salbutamol or ephedrine is the treatment of choice; cholinesterase inhibitors are typically ineffective and may actually worsen the condition.",
+      "The course tends to be slowly progressive with a stepwise pattern, and some patients deteriorate over years despite treatment.",
+      "DOK7 encodes a cytoplasmic protein that activates the MuSK signalling pathway essential for neuromuscular junction formation and maintenance."
     ],
-    [
-     "Key Investigations",
-     "Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles, Single-fibre",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DOK7 encodes downstream-of-kinase 7, a cytoplasmic adaptor protein expressed at the postsynaptic membrane that binds and activates muscle-specific kinase (MuSK), the central organiser of the neuromuscular junction. Through the agrin-LRP4-MuSK-DOK7 signalling axis, DOK7 promotes clustering and anchoring of acetylcholine receptors and the structural maturation of the endplate. Biallelic pathogenic variants, most often a frameshift in the carboxy-terminal region, impair this signalling so that endplates form abnormally and, critically, cannot be maintained over time. The result is small, simplified endplates with reduced receptor density and progressive degeneration of the junctional folds, while the acetylcholine receptor itself is structurally and kinetically normal. Because the defect is one of endplate development and upkeep rather than transmitter release or receptor gating, cholinesterase inhibitors give little benefit and can accelerate endplate damage, whereas beta-adrenergic agonists such as salbutamol and ephedrine improve strength, probably by supporting endplate structure and trophic maintenance.",
+    "additionalDifferentials": [
+      "Limb-girdle muscular dystrophies and congenital myopathies",
+      "Other limb-girdle congenital myasthenic syndromes, particularly GFPT1 and other glycosylation-related forms",
+      "Seronegative autoimmune myasthenia gravis with limb-girdle presentation",
+      "MuSK-related and rapsyn-related congenital myasthenic syndromes",
+      "Inflammatory myopathies presenting with proximal fatigable weakness",
+      "Metabolic myopathies with exercise-related fatigue"
     ],
-    [
-     "Primary Differentials",
-     "Limb-girdle muscular dystrophies and congenital myopathies, Other limb-girdle congenital myasthenic syndromes, particularly GFPT1",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles",
+      "Single-fibre electromyography showing increased jitter and blocking",
+      "Targeted DOK7 sequencing or a comprehensive congenital myasthenic syndrome gene panel",
+      "Serum creatine kinase, which may be mildly raised and mislead towards a primary myopathy",
+      "Muscle biopsy if a dystrophy is suspected, potentially showing endplate abnormalities rather than dystrophic change",
+      "Documented therapeutic response to a beta-adrenergic agonist rather than to a cholinesterase inhibitor"
     ],
-    [
-     "Management Strategy",
-     "Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive respiratory muscle weakness with nocturnal hypoventilation or recurrent chest infections",
+      "Clinical worsening after introduction of a cholinesterase inhibitor",
+      "Rapid loss of ambulation or bulbar decline over months",
+      "Acute deterioration during intercurrent illness with reduced ventilatory reserve"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is typically slowly progressive and may cause significant disability, but many patients gain worthwhile and sustained improvement in strength and function with beta-adrenergic agonist therapy. Long-term monitoring of respiratory function is important as decline can occur despite treatment.",
+    "pitfalls": [
+      "Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder",
+      "Prescribing cholinesterase inhibitors, which are usually unhelpful and may worsen weakness",
+      "Underestimating respiratory involvement because limb weakness dominates the picture",
+      "Expecting the dramatic response seen in receptor-deficiency syndromes; improvement with salbutamol or ephedrine is often gradual over weeks to months"
+    ],
+    "references": [
+      "Standard neuromuscular and paediatric neurology textbooks",
+      "Peer-reviewed reviews of congenital myasthenic syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice",
+      "Avoid acetylcholinesterase inhibitors, which are typically ineffective and may worsen the condition",
+      "Physiotherapy and rehabilitation to preserve proximal and axial strength and mobility",
+      "Long-term respiratory function monitoring, as decline can occur despite treatment",
+      "Regular reassessment of strength and function given the slowly progressive, stepwise course",
+      "Multidisciplinary neuromuscular follow-up",
+      "Genetic counselling for autosomal recessive DOK7 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dok7 congenital myasthenic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-myasthenic-syndrome-dok7-real-image",
-   "title": "DOK7 congenital myasthenic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "congenital_myasthenic_syndrome_dok7-pathway",
+      "title": "DOK7 congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture rather than receptor kinetics.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive respiratory muscle weakness with nocturnal hypoventilation or recurrent chest infections",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles, Single-fibre electromyography showing increased jitter and blocking, Targeted DOK7 sequencing or a comprehensive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dok7 congenital myasthenic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_myasthenic_syndrome_dok7-matrix",
+      "title": "DOK7 congenital myasthenic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Postsynaptic congenital myasthenic syndrome caused by biallelic DOK7 variants that impair maintenance of endplate architecture",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repetitive nerve stimulation demonstrating a decremental response, sometimes better seen in proximal muscles, Single-fibre",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Limb-girdle muscular dystrophies and congenital myopathies, Other limb-girdle congenital myasthenic syndromes, particularly GFPT1",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Beta-adrenergic agonists, salbutamol or ephedrine, are the treatment of choice",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as a limb-girdle muscular dystrophy or congenital myopathy and missing a treatable disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dok7 congenital myasthenic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_myasthenic_syndrome_dok7-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Decremental response, often better seen in proximal muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-fibre EMG",
+          "cells": [
+            {
+              "text": "Increased jitter and blocking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted DOK7 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "May be mildly raised and can mislead towards myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to a beta-adrenergic agonist",
+          "cells": [
+            {
+              "text": "Documented therapeutic response rather than to a cholinesterase inhibitor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_myasthenic_syndrome_dok7-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Limb-girdle muscular dystrophies and congenital myopathies",
+          "cells": [
+            {
+              "text": "Pitfall: DOK7 misdiagnosed as dystrophy or myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seronegative autoimmune myasthenia gravis with limb-girdle presentation",
+          "cells": [
+            {
+              "text": "Seronegative; DOK7 sequencing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GFPT1 and other limb-girdle congenital myasthenic syndromes",
+          "cells": [
+            {
+              "text": "Other limb-girdle subtypes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_myasthenic_syndrome_dok7-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-adrenergic agonists",
+          "cells": [
+            {
+              "text": "Salbutamol or ephedrine, the treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid cholinesterase inhibitors",
+          "cells": [
+            {
+              "text": "Typically ineffective and may worsen the condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and rehabilitation",
+          "cells": [
+            {
+              "text": "Preserve proximal and axial strength and mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Long-term function; decline can occur despite treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Strength and function given slowly progressive, stepwise course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neuromuscular team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DOK7 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_myasthenic_syndrome_dok7-dx-mgmt",
+      "title": "Diagnosis and management of DOK7 congenital myasthenic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DOK7 congenital myasthenic syndrome: proximal fatigable weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory weakness, worse on cholinesterase drug, bulbar decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop cholinesterase inhibitors; assess respiratory function urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repetitive stimulation; single-fibre EMG; DOK7 sequencing; CK; beta-agonist response",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does DOK7 testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider limb-girdle dystrophy, other CMS subtypes or autoimmune myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Salbutamol or ephedrine as treatment of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid cholinesterase inhibitors, which are typically ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy to preserve proximal and axial strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term respiratory monitoring and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; many gain worthwhile and sustained improvement in strength",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

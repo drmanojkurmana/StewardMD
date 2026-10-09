@@ -1,175 +1,471 @@
 {
- "id": "mngie_syndrome",
- "name": "MNGIE",
- "aliases": [
-  "Mitochondrial neurogastrointestinal encephalomyopathy",
-  "Thymidine phosphorylase deficiency",
-  "TYMP",
-  "MNGIE"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews MNGIE / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external ophthalmoplegia, and a peripheral neuropathy",
-   "It is an autosomal recessive nuclear disorder caused by mutations in TYMP, which encodes thymidine phosphorylase, leading indirectly to mitochondrial DNA instability",
-   "Loss of thymidine phosphorylase activity causes systemic accumulation of thymidine and deoxyuridine, which unbalances the mitochondrial nucleotide pool and produces depletion, deletions and point mutations of mitochondrial DNA",
-   "Brain MRI characteristically shows a diffuse, often asymptomatic leukoencephalopathy",
-   "Gastrointestinal features (early satiety, dysphagia, gastroparesis, pseudo-obstruction, diarrhoea and diverticulosis) dominate and drive the profound weight loss",
-   "Diagnosis is supported by grossly elevated plasma thymidine and deoxyuridine and by low or absent thymidine phosphorylase activity in leucocytes, confirmed by TYMP genetics",
-   "Management is largely supportive with nutritional support; disease-modifying strategies that lower toxic nucleosides are handled in specialist centres"
+  "id": "mngie_syndrome",
+  "name": "MNGIE",
+  "aliases": [
+    "Mitochondrial neurogastrointestinal encephalomyopathy",
+    "Thymidine phosphorylase deficiency",
+    "TYMP",
+    "MNGIE"
   ],
-  "pathophysiology": "MNGIE is caused by recessive loss-of-function mutations in TYMP, the gene encoding cytosolic thymidine phosphorylase. Without this enzyme, the pyrimidine nucleosides thymidine and deoxyuridine accumulate in blood and tissues. The resulting imbalance of the mitochondrial deoxyribonucleotide pool disturbs mitochondrial DNA replication, causing depletion, multiple deletions and point mutations and thereby a secondary failure of oxidative phosphorylation. The smooth muscle of the gut, peripheral nerves, extraocular muscles and cerebral white matter are particularly affected, producing the visceral myopathy and dysmotility, neuropathy, ophthalmoplegia and leukoencephalopathy that define the disorder.",
-  "additionalDifferentials": [
-   "Chronic intestinal pseudo-obstruction from other causes",
-   "Anorexia nervosa or other causes of severe cachexia",
-   "Coeliac disease and other malabsorptive states",
-   "Chronic progressive external ophthalmoplegia from other mitochondrial causes",
-   "Chronic inflammatory demyelinating polyneuropathy",
-   "Systemic sclerosis with gastrointestinal involvement"
-  ],
-  "additionalInvestigations": [
-   "Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated",
-   "Leucocyte thymidine phosphorylase enzyme activity assay",
-   "TYMP molecular genetic testing for confirmation",
-   "Brain MRI demonstrating diffuse leukoencephalopathy",
-   "Nerve conduction studies characterising a demyelinating or mixed neuropathy",
-   "Gastrointestinal motility studies and nutritional assessment"
-  ],
-  "redFlags": [
-   "Intestinal pseudo-obstruction or perforation from diverticular disease",
-   "Severe malnutrition and cachexia requiring nutritional rescue",
-   "Aspiration from dysphagia and gastroparesis",
-   "Rapidly progressive neuropathy causing loss of ambulation"
-  ],
-  "prognosis": "MNGIE is a progressive, life-limiting disorder; the relentless gastrointestinal dysmotility and cachexia are major contributors to morbidity and premature death, typically in early to mid adulthood without disease-modifying therapy.",
-  "pitfalls": [
-   "Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder",
-   "Overlooking the diagnosis because the leukoencephalopathy is often clinically silent",
-   "Attributing ophthalmoplegia to an isolated ocular myopathy rather than the systemic disease",
-   "Not measuring plasma nucleosides, the most accessible and specific biochemical clue"
-  ],
-  "references": [
-   "GeneReviews: Mitochondrial Neurogastrointestinal Encephalopathy Disease",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell transplantation as the principal disease-modifying option in selected patients",
-   "Consider orthotopic liver transplantation as an alternative enzyme source, or erythrocyte-encapsulated thymidine phosphorylase enzyme replacement where available in trials",
-   "Provide aggressive nutritional support, frequently parenteral nutrition, to counter cachexia and intestinal failure",
-   "Manage gastrointestinal dysmotility, gastroparesis and pseudo-obstruction with prokinetics, bowel rest and treatment of small-bowel bacterial overgrowth",
-   "Give symptomatic care of the peripheral neuropathy, ptosis and ophthalmoplegia",
-   "Monitor for and correct nutritional deficiencies and the metabolic consequences of dysmotility",
-   "Offer genetic counselling for autosomal recessive TYMP inheritance with family testing",
-   "Coordinate care through a specialist mitochondrial and metabolic medicine centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mngie_syndrome-pathway",
-   "title": "MNGIE: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external ophthalmoplegia, and a peripheral neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intestinal pseudo-obstruction or perforation from diverticular disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated, Leucocyte thymidine phosphorylase enzyme activity assay, TYMP molecular genetic testing for confirmation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell transplantation as the principal disease-modifying option in selected patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mngie."
-  }
- ],
- "tables": [
-  {
-   "id": "mngie_syndrome-matrix",
-   "title": "MNGIE: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews MNGIE / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external ophthalmoplegia, and a peripheral neuropathy",
+      "It is an autosomal recessive nuclear disorder caused by mutations in TYMP, which encodes thymidine phosphorylase, leading indirectly to mitochondrial DNA instability",
+      "Loss of thymidine phosphorylase activity causes systemic accumulation of thymidine and deoxyuridine, which unbalances the mitochondrial nucleotide pool and produces depletion, deletions and point mutations of mitochondrial DNA",
+      "Brain MRI characteristically shows a diffuse, often asymptomatic leukoencephalopathy",
+      "Gastrointestinal features (early satiety, dysphagia, gastroparesis, pseudo-obstruction, diarrhoea and diverticulosis) dominate and drive the profound weight loss",
+      "Diagnosis is supported by grossly elevated plasma thymidine and deoxyuridine and by low or absent thymidine phosphorylase activity in leucocytes, confirmed by TYMP genetics",
+      "Management is largely supportive with nutritional support; disease-modifying strategies that lower toxic nucleosides are handled in specialist centres"
     ],
-    [
-     "Key Investigations",
-     "Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated, Leucocyte thymidine phosphorylase enzyme activity",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MNGIE is caused by recessive loss-of-function mutations in TYMP, the gene encoding cytosolic thymidine phosphorylase. Without this enzyme, the pyrimidine nucleosides thymidine and deoxyuridine accumulate in blood and tissues. The resulting imbalance of the mitochondrial deoxyribonucleotide pool disturbs mitochondrial DNA replication, causing depletion, multiple deletions and point mutations and thereby a secondary failure of oxidative phosphorylation. The smooth muscle of the gut, peripheral nerves, extraocular muscles and cerebral white matter are particularly affected, producing the visceral myopathy and dysmotility, neuropathy, ophthalmoplegia and leukoencephalopathy that define the disorder.",
+    "additionalDifferentials": [
+      "Chronic intestinal pseudo-obstruction from other causes",
+      "Anorexia nervosa or other causes of severe cachexia",
+      "Coeliac disease and other malabsorptive states",
+      "Chronic progressive external ophthalmoplegia from other mitochondrial causes",
+      "Chronic inflammatory demyelinating polyneuropathy",
+      "Systemic sclerosis with gastrointestinal involvement"
     ],
-    [
-     "Primary Differentials",
-     "Chronic intestinal pseudo-obstruction from other causes, Anorexia nervosa or other causes of severe cachexia, Coeliac disease and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated",
+      "Leucocyte thymidine phosphorylase enzyme activity assay",
+      "TYMP molecular genetic testing for confirmation",
+      "Brain MRI demonstrating diffuse leukoencephalopathy",
+      "Nerve conduction studies characterising a demyelinating or mixed neuropathy",
+      "Gastrointestinal motility studies and nutritional assessment"
     ],
-    [
-     "Management Strategy",
-     "Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell",
-     "Core treatment modality"
+    "redFlags": [
+      "Intestinal pseudo-obstruction or perforation from diverticular disease",
+      "Severe malnutrition and cachexia requiring nutritional rescue",
+      "Aspiration from dysphagia and gastroparesis",
+      "Rapidly progressive neuropathy causing loss of ambulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "MNGIE is a progressive, life-limiting disorder; the relentless gastrointestinal dysmotility and cachexia are major contributors to morbidity and premature death, typically in early to mid adulthood without disease-modifying therapy.",
+    "pitfalls": [
+      "Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder",
+      "Overlooking the diagnosis because the leukoencephalopathy is often clinically silent",
+      "Attributing ophthalmoplegia to an isolated ocular myopathy rather than the systemic disease",
+      "Not measuring plasma nucleosides, the most accessible and specific biochemical clue"
+    ],
+    "references": [
+      "GeneReviews: Mitochondrial Neurogastrointestinal Encephalopathy Disease",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell transplantation as the principal disease-modifying option in selected patients",
+      "Consider orthotopic liver transplantation as an alternative enzyme source, or erythrocyte-encapsulated thymidine phosphorylase enzyme replacement where available in trials",
+      "Provide aggressive nutritional support, frequently parenteral nutrition, to counter cachexia and intestinal failure",
+      "Manage gastrointestinal dysmotility, gastroparesis and pseudo-obstruction with prokinetics, bowel rest and treatment of small-bowel bacterial overgrowth",
+      "Give symptomatic care of the peripheral neuropathy, ptosis and ophthalmoplegia",
+      "Monitor for and correct nutritional deficiencies and the metabolic consequences of dysmotility",
+      "Offer genetic counselling for autosomal recessive TYMP inheritance with family testing",
+      "Coordinate care through a specialist mitochondrial and metabolic medicine centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for mngie."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mngie-syndrome-real-image",
-   "title": "MNGIE: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mngie_syndrome-pathway",
+      "title": "MNGIE: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external ophthalmoplegia, and a peripheral neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intestinal pseudo-obstruction or perforation from diverticular disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated, Leucocyte thymidine phosphorylase enzyme activity assay, TYMP molecular genetic testing for confirmation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell transplantation as the principal disease-modifying option in selected patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mngie."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mngie_syndrome-matrix",
+      "title": "MNGIE: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect MNGIE in a young adult with severe gastrointestinal dysmotility, marked cachexia, ptosis and progressive external",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma or urine thymidine and deoxyuridine levels, which are markedly elevated, Leucocyte thymidine phosphorylase enzyme activity",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic intestinal pseudo-obstruction from other causes, Anorexia nervosa or other causes of severe cachexia, Coeliac disease and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore thymidine phosphorylase activity to lower toxic thymidine and deoxyuridine, using allogeneic haematopoietic stem cell",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the cachexia and gastrointestinal symptoms as an eating disorder or functional gut disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mngie."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews MNGIE / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mngie_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or urine thymidine and deoxyuridine",
+          "cells": [
+            {
+              "text": "Markedly elevated thymidine and deoxyuridine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucocyte thymidine phosphorylase activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TYMP molecular genetic testing",
+          "cells": [
+            {
+              "text": "TYMP variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Diffuse leukoencephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Demyelinating or mixed neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal motility studies and nutritional assessment",
+          "cells": [
+            {
+              "text": "Dysmotility and nutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mngie_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia from other mitochondrial causes",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia and ptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mngie_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Restores thymidine phosphorylase activity; principal disease-modifying option in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplant or enzyme replacement",
+          "cells": [
+            {
+              "text": "Liver transplant as an alternative enzyme source; erythrocyte-encapsulated enzyme in trials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Aggressive, often parenteral, against cachexia and intestinal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysmotility",
+          "cells": [
+            {
+              "text": "Prokinetics, bowel rest and treatment of small-bowel bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy, ptosis and ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional deficiencies",
+          "cells": [
+            {
+              "text": "Monitor and correct, with the metabolic effects of dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TYMP inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Mitochondrial and metabolic medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mngie_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MNGIE",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gastrointestinal dysmotility with cachexia and neuropathy; suspected MNGIE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pseudo-obstruction or perforation, severe malnutrition, aspiration, or rapid neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nutritional rescue; treat pseudo-obstruction or perforation urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma thymidine and deoxyuridine; TP activity; TYMP testing; MRI; NCS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are markedly raised thymidine and deoxyuridine confirmed with TYMP testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CIPO, anorexia, coeliac disease or CIDP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allogeneic haematopoietic stem cell transplant in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive nutritional support, often parenteral, for cachexia and intestinal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prokinetics, bowel rest and treatment of small-bowel overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct nutritional deficiencies and the metabolic effects of dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist mitochondrial and metabolic centre; genetic counselling and family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

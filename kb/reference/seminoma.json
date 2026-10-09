@@ -1,174 +1,488 @@
 {
- "id": "seminoma",
- "name": "Seminoma",
- "aliases": [
-  "testicular seminoma",
-  "classic seminoma",
-  "pure seminoma"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually as a painless testicular mass",
-   "By definition AFP is normal in pure seminoma; a raised AFP means a non-seminomatous element is present and the tumour is managed as NSGCT even if histology looks purely seminomatous",
-   "Beta-hCG may be modestly elevated (from syncytiotrophoblastic cells) and LDH reflects tumour bulk, but neither excludes the diagnosis of seminoma",
-   "Radical inguinal orchidectomy establishes the diagnosis and provides local control; trans-scrotal approaches are avoided",
-   "Seminoma is highly radiosensitive and chemosensitive, so stage I disease may be managed by surveillance, adjuvant carboplatin, or adjuvant radiotherapy after individualised discussion",
-   "Cisplatin-based combination chemotherapy is the mainstay for higher-stage or metastatic disease, with radiotherapy or chemotherapy chosen by stage and risk",
-   "Sperm banking should be offered before treatment given the risks to fertility"
+  "id": "seminoma",
+  "name": "Seminoma",
+  "aliases": [
+    "testicular seminoma",
+    "classic seminoma",
+    "pure seminoma"
   ],
-  "pathophysiology": "Seminoma arises from germ cell neoplasia in situ and is composed of relatively uniform cells that resemble undifferentiated primordial germ cells, often with a lymphocytic infiltrate and granulomatous reaction within the tumour. A minority contain syncytiotrophoblastic giant cells that secrete beta-hCG, accounting for mild marker elevation, but seminoma cells do not produce AFP. Like other germ cell tumours it carries isochromosome 12p and spreads predominantly by lymphatics to the retroperitoneal nodes before later haematogenous dissemination.",
-  "additionalDifferentials": [
-   "Non-seminomatous germ cell tumour or mixed germ cell tumour",
-   "Testicular lymphoma in older men",
-   "Epididymo-orchitis with a mass",
-   "Sex cord-stromal tumour",
-   "Spermatocytic tumour (a distinct, generally indolent entity)",
-   "Granulomatous orchitis mimicking neoplasm"
-  ],
-  "additionalInvestigations": [
-   "Scrotal ultrasound demonstrating a solid intratesticular lesion",
-   "Serum AFP (expected normal), beta-hCG, and LDH before and after orchidectomy",
-   "Radical inguinal orchidectomy for histology",
-   "CT of the chest, abdomen, and pelvis for staging",
-   "Semen analysis and sperm banking before treatment",
-   "Repeat marker measurement to confirm normalisation after treatment"
-  ],
-  "redFlags": [
-   "Bulky retroperitoneal nodal disease or visceral metastases",
-   "A raised AFP indicating an occult non-seminomatous component requiring NSGCT management",
-   "Markers failing to normalise after orchidectomy",
-   "Rapidly enlarging mass with systemic symptoms"
-  ],
-  "prognosis": "Pure seminoma has an excellent prognosis, with cure rates approaching those of other stages of testicular cancer; localised disease is almost universally curable and even metastatic seminoma has high cure rates with cisplatin-based chemotherapy.",
-  "pitfalls": [
-   "Assuming any germ cell tumour with a raised AFP can be treated as seminoma",
-   "Interpreting a mildly raised beta-hCG as excluding seminoma",
-   "Using a trans-scrotal biopsy and risking seeding",
-   "Omitting sperm banking before radiotherapy or chemotherapy",
-   "Failing to monitor for a metachronous contralateral tumour on follow-up"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "EAU Guidelines on Testicular Cancer"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach",
-   "Manage stage I disease by individualised surveillance, adjuvant carboplatin, or adjuvant radiotherapy after shared decision-making",
-   "Treat higher-stage or metastatic disease with cisplatin-based combination chemotherapy, using radiotherapy selectively by stage and risk",
-   "Offer sperm banking and semen analysis before treatment because therapy may impair fertility",
-   "Undertake follow-up surveillance with beta-hCG and LDH markers and staging CT imaging to confirm normalisation and detect relapse",
-   "Provide testosterone replacement for post-treatment hypogonadism and refer to a uro-oncology multidisciplinary team",
-   "Escalate promptly to salvage chemotherapy and specialist input at relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "seminoma-pathway",
-   "title": "Seminoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually as a painless testicular mass",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bulky retroperitoneal nodal disease or visceral metastases",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal ultrasound demonstrating a solid intratesticular lesion, Serum AFP (expected normal), beta-hCG, and LDH before and after orchidectomy, Radical inguinal orchidectomy for histology"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any germ cell tumour with a raised AFP can be treated as seminoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of seminoma."
-  }
- ],
- "tables": [
-  {
-   "id": "seminoma-matrix",
-   "title": "Seminoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually as a painless testicular mass",
+      "By definition AFP is normal in pure seminoma; a raised AFP means a non-seminomatous element is present and the tumour is managed as NSGCT even if histology looks purely seminomatous",
+      "Beta-hCG may be modestly elevated (from syncytiotrophoblastic cells) and LDH reflects tumour bulk, but neither excludes the diagnosis of seminoma",
+      "Radical inguinal orchidectomy establishes the diagnosis and provides local control; trans-scrotal approaches are avoided",
+      "Seminoma is highly radiosensitive and chemosensitive, so stage I disease may be managed by surveillance, adjuvant carboplatin, or adjuvant radiotherapy after individualised discussion",
+      "Cisplatin-based combination chemotherapy is the mainstay for higher-stage or metastatic disease, with radiotherapy or chemotherapy chosen by stage and risk",
+      "Sperm banking should be offered before treatment given the risks to fertility"
     ],
-    [
-     "Key Investigations",
-     "Scrotal ultrasound demonstrating a solid intratesticular lesion, Serum AFP (expected normal), beta-hCG, and LDH before and after",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Seminoma arises from germ cell neoplasia in situ and is composed of relatively uniform cells that resemble undifferentiated primordial germ cells, often with a lymphocytic infiltrate and granulomatous reaction within the tumour. A minority contain syncytiotrophoblastic giant cells that secrete beta-hCG, accounting for mild marker elevation, but seminoma cells do not produce AFP. Like other germ cell tumours it carries isochromosome 12p and spreads predominantly by lymphatics to the retroperitoneal nodes before later haematogenous dissemination.",
+    "additionalDifferentials": [
+      "Non-seminomatous germ cell tumour or mixed germ cell tumour",
+      "Testicular lymphoma in older men",
+      "Epididymo-orchitis with a mass",
+      "Sex cord-stromal tumour",
+      "Spermatocytic tumour (a distinct, generally indolent entity)",
+      "Granulomatous orchitis mimicking neoplasm"
     ],
-    [
-     "Primary Differentials",
-     "Non-seminomatous germ cell tumour or mixed germ cell tumour, Testicular lymphoma in older men, Epididymo-orchitis with a mass",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal ultrasound demonstrating a solid intratesticular lesion",
+      "Serum AFP (expected normal), beta-hCG, and LDH before and after orchidectomy",
+      "Radical inguinal orchidectomy for histology",
+      "CT of the chest, abdomen, and pelvis for staging",
+      "Semen analysis and sperm banking before treatment",
+      "Repeat marker measurement to confirm normalisation after treatment"
     ],
-    [
-     "Management Strategy",
-     "Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach",
-     "Core treatment modality"
+    "redFlags": [
+      "Bulky retroperitoneal nodal disease or visceral metastases",
+      "A raised AFP indicating an occult non-seminomatous component requiring NSGCT management",
+      "Markers failing to normalise after orchidectomy",
+      "Rapidly enlarging mass with systemic symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any germ cell tumour with a raised AFP can be treated as seminoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pure seminoma has an excellent prognosis, with cure rates approaching those of other stages of testicular cancer; localised disease is almost universally curable and even metastatic seminoma has high cure rates with cisplatin-based chemotherapy.",
+    "pitfalls": [
+      "Assuming any germ cell tumour with a raised AFP can be treated as seminoma",
+      "Interpreting a mildly raised beta-hCG as excluding seminoma",
+      "Using a trans-scrotal biopsy and risking seeding",
+      "Omitting sperm banking before radiotherapy or chemotherapy",
+      "Failing to monitor for a metachronous contralateral tumour on follow-up"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "EAU Guidelines on Testicular Cancer"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach",
+      "Manage stage I disease by individualised surveillance, adjuvant carboplatin, or adjuvant radiotherapy after shared decision-making",
+      "Treat higher-stage or metastatic disease with cisplatin-based combination chemotherapy, using radiotherapy selectively by stage and risk",
+      "Offer sperm banking and semen analysis before treatment because therapy may impair fertility",
+      "Undertake follow-up surveillance with beta-hCG and LDH markers and staging CT imaging to confirm normalisation and detect relapse",
+      "Provide testosterone replacement for post-treatment hypogonadism and refer to a uro-oncology multidisciplinary team",
+      "Escalate promptly to salvage chemotherapy and specialist input at relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for seminoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "seminoma-real-image",
-   "title": "Seminoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "seminoma-pathway",
+      "title": "Seminoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually as a painless testicular mass",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bulky retroperitoneal nodal disease or visceral metastases",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal ultrasound demonstrating a solid intratesticular lesion, Serum AFP (expected normal), beta-hCG, and LDH before and after orchidectomy, Radical inguinal orchidectomy for histology"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any germ cell tumour with a raised AFP can be treated as seminoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of seminoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "seminoma-matrix",
+      "title": "Seminoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Seminoma is the commonest single germ cell tumour type and tends to present slightly later than non-seminomatous tumours, usually",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal ultrasound demonstrating a solid intratesticular lesion, Serum AFP (expected normal), beta-hCG, and LDH before and after",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-seminomatous germ cell tumour or mixed germ cell tumour, Testicular lymphoma in older men, Epididymo-orchitis with a mass",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform radical inguinal orchidectomy for diagnosis and local control, avoiding a trans-scrotal approach",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any germ cell tumour with a raised AFP can be treated as seminoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for seminoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "seminoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Solid intratesticular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum AFP",
+          "cells": [
+            {
+              "text": "Expected normal; a raised value means a non-seminomatous element"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum beta-hCG",
+          "cells": [
+            {
+              "text": "May be modestly elevated; does not exclude seminoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum LDH",
+          "cells": [
+            {
+              "text": "Reflects tumour bulk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis and sperm banking",
+          "cells": [
+            {
+              "text": "Before treatment, given fertility risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat markers after treatment",
+          "cells": [
+            {
+              "text": "Confirm normalisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seminoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-seminomatous or mixed germ cell tumour",
+          "cells": [
+            {
+              "text": "Raised AFP indicates a non-seminomatous element; manage as NSGCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular lymphoma",
+          "cells": [
+            {
+              "text": "Occurs in older men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spermatocytic tumour",
+          "cells": [
+            {
+              "text": "A distinct, generally indolent entity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seminoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Diagnosis and local control; avoid a trans-scrotal approach"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage I disease",
+          "cells": [
+            {
+              "text": "Individualised surveillance, adjuvant carboplatin or adjuvant radiotherapy after shared decision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Higher-stage or metastatic disease",
+          "cells": [
+            {
+              "text": "Cisplatin-based combination chemotherapy; radiotherapy selectively by stage and risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility preservation",
+          "cells": [
+            {
+              "text": "Sperm banking and semen analysis before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up surveillance",
+          "cells": [
+            {
+              "text": "Beta-hCG, LDH and staging CT to confirm normalisation and detect relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment care",
+          "cells": [
+            {
+              "text": "Testosterone replacement for hypogonadism; uro-oncology team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse",
+          "cells": [
+            {
+              "text": "Prompt salvage chemotherapy and specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "seminoma-dx-mgmt",
+      "title": "Diagnosis and management of Seminoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless testicular mass; ultrasound shows solid intratesticular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulky retroperitoneal or visceral disease, or raised AFP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Raised AFP: treat as NSGCT; bulky disease: urgent oncology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum AFP, beta-hCG, LDH; chest, abdomen and pelvis CT; sperm banking",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does orchidectomy histology show pure seminoma with normal AFP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as non-seminomatous or mixed germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical inguinal orchidectomy; avoid trans-scrotal approach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stage I: surveillance, adjuvant carboplatin or radiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Higher stage: cisplatin-based chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up hCG, LDH and CT; testosterone replacement if hypogonadal",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; localised disease almost universally curable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

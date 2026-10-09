@@ -1,167 +1,436 @@
 {
- "id": "entropion",
- "name": "Entropion",
- "aliases": [
-  "inturned eyelid",
-  "inverted eyelid"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation, tearing, and redness",
-   "The involutional (age-related) type is the commonest and usually affects the lower lid, driven by tissue laxity",
-   "Cicatricial entropion follows conjunctival scarring from conditions such as trachoma, chemical burns, Stevens-Johnson syndrome, and ocular cicatricial pemphigoid",
-   "Chronic lash-cornea contact risks epithelial breakdown, secondary microbial keratitis, and corneal scarring",
-   "Temporary measures include lubrication, taping the lid outward, and botulinum toxin, while lid-everting sutures give short-term relief",
-   "Definitive management is surgical correction tailored to the underlying mechanism",
-   "Distinguish from trichiasis, where lashes are misdirected but the lid margin itself is correctly positioned"
+  "id": "entropion",
+  "name": "Entropion",
+  "aliases": [
+    "inturned eyelid",
+    "inverted eyelid"
   ],
-  "pathophysiology": "Entropion is inward rotation of the eyelid margin. Involutional entropion arises from age-related horizontal lid laxity, attenuation or disinsertion of the lower lid retractors, and overriding of the preseptal orbicularis, which together destabilise the lid and allow it to rotate inward. Cicatricial entropion results from contracture of scarred tarsoconjunctiva pulling the margin toward the globe. Spastic entropion is triggered by orbicularis spasm from ocular irritation, and congenital entropion reflects a structural lid defect. In all forms the inturned lashes abrade the ocular surface, causing chronic irritation and potential corneal damage.",
-  "additionalDifferentials": [
-   "Trichiasis (misdirected lashes with normal lid position)",
-   "Epiblepharon (extra lower lid skin fold, often in children)",
-   "Distichiasis (aberrant accessory lash row)",
-   "Spastic entropion from ocular irritation",
-   "Blepharospasm"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination to assess lash-cornea contact and corneal integrity",
-   "Fluorescein staining to detect epithelial damage",
-   "Assessment of horizontal lid laxity (snap-back and distraction tests)",
-   "Evaluation of the conjunctival fornices for scarring in suspected cicatricial disease"
-  ],
-  "redFlags": [
-   "Corneal epithelial defect or infiltrate indicating secondary keratitis and threatened vision",
-   "Progressive conjunctival scarring suggesting cicatrising disease such as pemphigoid requiring systemic workup",
-   "Persistent lash-cornea contact despite temporising measures"
-  ],
-  "prognosis": "Surgical correction is generally effective with good long-term results, though cicatricial cases may recur and require repeated intervention; untreated chronic disease can cause corneal scarring and visual loss.",
-  "pitfalls": [
-   "Treating symptoms with lubricants alone while ongoing lash contact damages the cornea",
-   "Failing to identify a cicatricial cause requiring different surgical planning and systemic evaluation",
-   "Confusing entropion with trichiasis and choosing the wrong intervention",
-   "Overlooking recurrence after involutional repair due to unaddressed lid laxity"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for involutional entropion and tarsal or mucous-membrane grafting for cicatricial disease",
-   "Ocular surface lubrication with artificial tears and ointment to protect the cornea while awaiting surgery",
-   "Temporising measures including taping the lid outward, everting sutures, or botulinum toxin for spastic entropion",
-   "Treat the underlying cause of cicatricial disease, such as trachoma or ocular cicatricial pemphigoid, to limit recurrence",
-   "Slit-lamp surveillance with fluorescein staining for corneal abrasion and prompt topical antibiotics for secondary microbial keratitis",
-   "Ophthalmology referral, anticipating recurrence and the need for repeat surgery in cicatricial cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "entropion-pathway",
-   "title": "Entropion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation, tearing, and redness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Corneal epithelial defect or infiltrate indicating secondary keratitis and threatened vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination to assess lash-cornea contact and corneal integrity, Fluorescein staining to detect epithelial damage, Assessment of horizontal lid laxity (snap-back and distraction tests)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for involutional entropion and tarsal or mucous-membrane grafting for cicatricial disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating symptoms with lubricants alone while ongoing lash contact damages the cornea"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of entropion."
-  }
- ],
- "tables": [
-  {
-   "id": "entropion-matrix",
-   "title": "Entropion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation, tearing, and redness",
+      "The involutional (age-related) type is the commonest and usually affects the lower lid, driven by tissue laxity",
+      "Cicatricial entropion follows conjunctival scarring from conditions such as trachoma, chemical burns, Stevens-Johnson syndrome, and ocular cicatricial pemphigoid",
+      "Chronic lash-cornea contact risks epithelial breakdown, secondary microbial keratitis, and corneal scarring",
+      "Temporary measures include lubrication, taping the lid outward, and botulinum toxin, while lid-everting sutures give short-term relief",
+      "Definitive management is surgical correction tailored to the underlying mechanism",
+      "Distinguish from trichiasis, where lashes are misdirected but the lid margin itself is correctly positioned"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination to assess lash-cornea contact and corneal integrity, Fluorescein staining to detect epithelial damage,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Entropion is inward rotation of the eyelid margin. Involutional entropion arises from age-related horizontal lid laxity, attenuation or disinsertion of the lower lid retractors, and overriding of the preseptal orbicularis, which together destabilise the lid and allow it to rotate inward. Cicatricial entropion results from contracture of scarred tarsoconjunctiva pulling the margin toward the globe. Spastic entropion is triggered by orbicularis spasm from ocular irritation, and congenital entropion reflects a structural lid defect. In all forms the inturned lashes abrade the ocular surface, causing chronic irritation and potential corneal damage.",
+    "additionalDifferentials": [
+      "Trichiasis (misdirected lashes with normal lid position)",
+      "Epiblepharon (extra lower lid skin fold, often in children)",
+      "Distichiasis (aberrant accessory lash row)",
+      "Spastic entropion from ocular irritation",
+      "Blepharospasm"
     ],
-    [
-     "Primary Differentials",
-     "Trichiasis (misdirected lashes with normal lid position), Epiblepharon (extra lower lid skin fold, often in children),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination to assess lash-cornea contact and corneal integrity",
+      "Fluorescein staining to detect epithelial damage",
+      "Assessment of horizontal lid laxity (snap-back and distraction tests)",
+      "Evaluation of the conjunctival fornices for scarring in suspected cicatricial disease"
     ],
-    [
-     "Management Strategy",
-     "Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for",
-     "Core treatment modality"
+    "redFlags": [
+      "Corneal epithelial defect or infiltrate indicating secondary keratitis and threatened vision",
+      "Progressive conjunctival scarring suggesting cicatrising disease such as pemphigoid requiring systemic workup",
+      "Persistent lash-cornea contact despite temporising measures"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating symptoms with lubricants alone while ongoing lash contact damages the cornea",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical correction is generally effective with good long-term results, though cicatricial cases may recur and require repeated intervention; untreated chronic disease can cause corneal scarring and visual loss.",
+    "pitfalls": [
+      "Treating symptoms with lubricants alone while ongoing lash contact damages the cornea",
+      "Failing to identify a cicatricial cause requiring different surgical planning and systemic evaluation",
+      "Confusing entropion with trichiasis and choosing the wrong intervention",
+      "Overlooking recurrence after involutional repair due to unaddressed lid laxity"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for involutional entropion and tarsal or mucous-membrane grafting for cicatricial disease",
+      "Ocular surface lubrication with artificial tears and ointment to protect the cornea while awaiting surgery",
+      "Temporising measures including taping the lid outward, everting sutures, or botulinum toxin for spastic entropion",
+      "Treat the underlying cause of cicatricial disease, such as trachoma or ocular cicatricial pemphigoid, to limit recurrence",
+      "Slit-lamp surveillance with fluorescein staining for corneal abrasion and prompt topical antibiotics for secondary microbial keratitis",
+      "Ophthalmology referral, anticipating recurrence and the need for repeat surgery in cicatricial cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for entropion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "entropion-real-image",
-   "title": "Entropion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "entropion-pathway",
+      "title": "Entropion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation, tearing, and redness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Corneal epithelial defect or infiltrate indicating secondary keratitis and threatened vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination to assess lash-cornea contact and corneal integrity, Fluorescein staining to detect epithelial damage, Assessment of horizontal lid laxity (snap-back and distraction tests)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for involutional entropion and tarsal or mucous-membrane grafting for cicatricial disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating symptoms with lubricants alone while ongoing lash contact damages the cornea"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of entropion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "entropion-matrix",
+      "title": "Entropion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The eyelid margin turns inward so that lashes rub against the cornea and conjunctiva, causing irritation, foreign body sensation,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination to assess lash-cornea contact and corneal integrity, Fluorescein staining to detect epithelial damage,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Trichiasis (misdirected lashes with normal lid position), Epiblepharon (extra lower lid skin fold, often in children),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive surgical correction tailored to the mechanism, with horizontal lid tightening and retractor reattachment for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating symptoms with lubricants alone while ongoing lash contact damages the cornea",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for entropion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "entropion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Lash-cornea contact and corneal integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining",
+          "cells": [
+            {
+              "text": "Epithelial damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Horizontal lid laxity tests (snap-back and distraction)",
+          "cells": [
+            {
+              "text": "Horizontal lid laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival fornix assessment",
+          "cells": [
+            {
+              "text": "Scarring in suspected cicatricial disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entropion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Trichiasis",
+          "cells": [
+            {
+              "text": "Lashes are misdirected but the lid margin is correctly positioned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epiblepharon",
+          "cells": [
+            {
+              "text": "Extra lower lid skin fold, often in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distichiasis",
+          "cells": [
+            {
+              "text": "Aberrant accessory row of lashes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entropion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive surgery tailored to mechanism",
+          "cells": [
+            {
+              "text": "Horizontal lid tightening and retractor reattachment for involutional entropion; tarsal or mucous-membrane grafting for cicatricial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface lubrication",
+          "cells": [
+            {
+              "text": "Artificial tears and ointment to protect the cornea while awaiting surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporising measures",
+          "cells": [
+            {
+              "text": "Taping the lid outward, everting sutures, or botulinum toxin for spastic entropion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the cicatricial cause",
+          "cells": [
+            {
+              "text": "Trachoma or ocular cicatricial pemphigoid, to limit recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp surveillance",
+          "cells": [
+            {
+              "text": "Fluorescein staining; prompt topical antibiotics for secondary microbial keratitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology referral",
+          "cells": [
+            {
+              "text": "Anticipate recurrence and repeat surgery in cicatricial cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "entropion-dx-mgmt",
+      "title": "Diagnosis and management of Entropion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inturned lid margin with lash contact, irritation and foreign body sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (corneal defect or infiltrate, progressive scarring, persistent lash contact)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Ophthalmology review and prompt topical antibiotics for secondary keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination, fluorescein staining, lid laxity and fornix assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lid laxity or conjunctival scarring present on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trichiasis, distichiasis, epiblepharon or spastic entropion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lubricants to protect the cornea while awaiting surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the cicatricial cause, such as trachoma or ocular cicatricial pemphigoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery tailored to mechanism: lid tightening or grafting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Slit-lamp surveillance with fluorescein staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally effective; cicatricial cases may recur and need repeat surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

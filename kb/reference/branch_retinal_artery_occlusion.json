@@ -1,174 +1,232 @@
 {
- "id": "branch_retinal_artery_occlusion",
- "name": "Branch retinal artery occlusion",
- "aliases": [
-  "BRAO",
-  "branch artery occlusion",
-  "retinal branch artery occlusion"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
-   "The fundus shows cloudy white inner retinal oedema confined to the affected sector, with narrowed arterioles and segmented (boxcar) blood flow",
-   "A visible embolus may be seen lodged at an arteriolar bifurcation, most often a refractile cholesterol (Hollenhorst) plaque, or a calcific or platelet-fibrin embolus",
-   "Carotid atheroma is the commonest embolic source, followed by cardiac sources such as valvular disease and atrial fibrillation",
-   "In older patients giant cell arteritis must be excluded urgently, as it can cause arteritic occlusion and threaten the fellow eye",
-   "A retinal arterial occlusion is regarded as a stroke equivalent and mandates prompt systemic vascular assessment",
-   "There is no proven sight-restoring ocular therapy, so management focuses on identifying and treating the embolic source and reducing future vascular risk"
+  "id": "branch_retinal_artery_occlusion",
+  "name": "Branch retinal artery occlusion",
+  "aliases": [
+    "BRAO",
+    "branch artery occlusion",
+    "retinal branch artery occlusion"
   ],
-  "pathophysiology": "An embolus becomes impacted at a retinal arteriolar bifurcation, acutely interrupting perfusion of the downstream retina. The inner retinal layers, supplied by the retinal circulation, undergo ischaemic infarction that appears as cloudy white opacification of the affected sector. Emboli are typically cholesterol fragments from carotid atheroma, calcific material from cardiac valves, or platelet-fibrin aggregates. In arteritic cases, giant cell arteritis causes inflammatory occlusion of the arterial supply rather than embolism.",
-  "additionalDifferentials": [
-   "Branch retinal vein occlusion",
-   "Central retinal artery occlusion",
-   "Anterior ischaemic optic neuropathy",
-   "Ocular ischaemic syndrome",
-   "Cotton-wool spot from another retinal vascular disorder",
-   "Myelinated retinal nerve fibres"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination to define the ischaemic sector and search for an embolus",
-   "Erythrocyte sedimentation rate and C-reactive protein to screen for giant cell arteritis",
-   "Carotid Doppler ultrasound to identify a stenosing or ulcerated plaque",
-   "Cardiac evaluation including electrocardiography and echocardiography for an embolic source",
-   "Fluorescein angiography showing delayed arteriolar filling in the affected territory",
-   "Blood pressure, glucose and lipid assessment for vascular risk factors"
-  ],
-  "redFlags": [
-   "Symptoms of giant cell arteritis such as headache, jaw claudication or scalp tenderness, requiring urgent corticosteroids",
-   "Concurrent neurological symptoms suggesting cerebral infarction",
-   "Multiple or bilateral emboli suggesting a major cardiac or aortic source",
-   "Occlusion in a young patient, prompting a search for a cardiac or thrombophilic cause"
-  ],
-  "prognosis": "The corresponding visual field defect is usually permanent, although central acuity is often preserved when the fovea is spared; the greater concern is the elevated risk of subsequent stroke or other systemic vascular events.",
-  "pitfalls": [
-   "Failing to exclude giant cell arteritis in an older patient",
-   "Not referring urgently for stroke and cardiovascular workup",
-   "Mistaking sectoral arterial whitening for a branch vein occlusion",
-   "Reassuring the patient without pursuing the embolic source"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised inflammatory markers",
-   "Emergency management as a stroke equivalent with prompt referral into a stroke or transient ischaemic attack pathway",
-   "Identification and treatment of the embolic source, including carotid endarterectomy for significant symptomatic carotid stenosis",
-   "Anticoagulation for a cardiac embolic source such as atrial fibrillation",
-   "Secondary prevention with antiplatelet therapy and control of blood pressure, lipids with a statin, and glucose",
-   "Monitoring of the fellow eye and ongoing systemic vascular surveillance",
-   "Combined ophthalmology, stroke and vascular multidisciplinary input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "branch_retinal_artery_occlusion-pathway",
-   "title": "Branch retinal artery occlusion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms of giant cell arteritis such as headache, jaw claudication or scalp tenderness, requiring urgent corticosteroids",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination to define the ischaemic sector and search for an embolus, Erythrocyte sedimentation rate and C-reactive protein to screen for giant cell arteritis, Carotid Doppler ultrasound to identify a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised inflammatory markers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude giant cell arteritis in an older patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of branch retinal artery occlusion."
-  }
- ],
- "tables": [
-  {
-   "id": "branch_retinal_artery_occlusion-matrix",
-   "title": "Branch retinal artery occlusion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
+      "The fundus shows cloudy white inner retinal oedema confined to the affected sector, with narrowed arterioles and segmented (boxcar) blood flow",
+      "A visible embolus may be seen lodged at an arteriolar bifurcation, most often a refractile cholesterol (Hollenhorst) plaque, or a calcific or platelet-fibrin embolus",
+      "Carotid atheroma is the commonest embolic source, followed by cardiac sources such as valvular disease and atrial fibrillation",
+      "In older patients giant cell arteritis must be excluded urgently, as it can cause arteritic occlusion and threaten the fellow eye",
+      "A retinal arterial occlusion is regarded as a stroke equivalent and mandates prompt systemic vascular assessment",
+      "There is no proven sight-restoring ocular therapy, so management focuses on identifying and treating the embolic source and reducing future vascular risk"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination to define the ischaemic sector and search for an embolus, Erythrocyte sedimentation rate and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An embolus becomes impacted at a retinal arteriolar bifurcation, acutely interrupting perfusion of the downstream retina. The inner retinal layers, supplied by the retinal circulation, undergo ischaemic infarction that appears as cloudy white opacification of the affected sector. Emboli are typically cholesterol fragments from carotid atheroma, calcific material from cardiac valves, or platelet-fibrin aggregates. In arteritic cases, giant cell arteritis causes inflammatory occlusion of the arterial supply rather than embolism.",
+    "additionalDifferentials": [
+      "Branch retinal vein occlusion",
+      "Central retinal artery occlusion",
+      "Anterior ischaemic optic neuropathy",
+      "Ocular ischaemic syndrome",
+      "Cotton-wool spot from another retinal vascular disorder",
+      "Myelinated retinal nerve fibres"
     ],
-    [
-     "Primary Differentials",
-     "Branch retinal vein occlusion, Central retinal artery occlusion, Anterior ischaemic optic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination to define the ischaemic sector and search for an embolus",
+      "Erythrocyte sedimentation rate and C-reactive protein to screen for giant cell arteritis",
+      "Carotid Doppler ultrasound to identify a stenosing or ulcerated plaque",
+      "Cardiac evaluation including electrocardiography and echocardiography for an embolic source",
+      "Fluorescein angiography showing delayed arteriolar filling in the affected territory",
+      "Blood pressure, glucose and lipid assessment for vascular risk factors"
     ],
-    [
-     "Management Strategy",
-     "Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms of giant cell arteritis such as headache, jaw claudication or scalp tenderness, requiring urgent corticosteroids",
+      "Concurrent neurological symptoms suggesting cerebral infarction",
+      "Multiple or bilateral emboli suggesting a major cardiac or aortic source",
+      "Occlusion in a young patient, prompting a search for a cardiac or thrombophilic cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude giant cell arteritis in an older patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "The corresponding visual field defect is usually permanent, although central acuity is often preserved when the fovea is spared; the greater concern is the elevated risk of subsequent stroke or other systemic vascular events.",
+    "pitfalls": [
+      "Failing to exclude giant cell arteritis in an older patient",
+      "Not referring urgently for stroke and cardiovascular workup",
+      "Mistaking sectoral arterial whitening for a branch vein occlusion",
+      "Reassuring the patient without pursuing the embolic source"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised inflammatory markers",
+      "Emergency management as a stroke equivalent with prompt referral into a stroke or transient ischaemic attack pathway",
+      "Identification and treatment of the embolic source, including carotid endarterectomy for significant symptomatic carotid stenosis",
+      "Anticoagulation for a cardiac embolic source such as atrial fibrillation",
+      "Secondary prevention with antiplatelet therapy and control of blood pressure, lipids with a statin, and glucose",
+      "Monitoring of the fellow eye and ongoing systemic vascular surveillance",
+      "Combined ophthalmology, stroke and vascular multidisciplinary input"
     ]
-   ],
-   "caption": "Overview comparison matrix for branch retinal artery occlusion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "branch-retinal-artery-occlusion-real-image",
-   "title": "Branch retinal artery occlusion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "branch_retinal_artery_occlusion-pathway",
+      "title": "Branch retinal artery occlusion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms of giant cell arteritis such as headache, jaw claudication or scalp tenderness, requiring urgent corticosteroids",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination to define the ischaemic sector and search for an embolus, Erythrocyte sedimentation rate and C-reactive protein to screen for giant cell arteritis, Carotid Doppler ultrasound to identify a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised inflammatory markers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude giant cell arteritis in an older patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of branch retinal artery occlusion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "branch_retinal_artery_occlusion-matrix",
+      "title": "Branch retinal artery occlusion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with sudden, painless loss of a sector of the visual field corresponding to the territory of the occluded arteriole",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination to define the ischaemic sector and search for an embolus, Erythrocyte sedimentation rate and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Branch retinal vein occlusion, Central retinal artery occlusion, Anterior ischaemic optic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urgent exclusion and empirical treatment of giant cell arteritis with systemic corticosteroids in older patients with raised",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude giant cell arteritis in an older patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for branch retinal artery occlusion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "branch_retinal_artery_occlusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in branch retinal artery occlusion",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Dilated fundus examination", "cells": [{"text": "Ischaemic sector; embolus at an arteriolar bifurcation"}], "cite": "c1"},
+        {"parameter": "ESR and CRP", "cells": [{"text": "Screen for giant cell arteritis"}], "cite": "c1"},
+        {"parameter": "Carotid Doppler ultrasound", "cells": [{"text": "Stenosing or ulcerated plaque"}], "cite": "c1"},
+        {"parameter": "Electrocardiography and echocardiography", "cells": [{"text": "Cardiac embolic source"}], "cite": "c1"},
+        {"parameter": "Fluorescein angiography", "cells": [{"text": "Delayed arteriolar filling in the affected territory"}], "cite": "c1"},
+        {"parameter": "Blood pressure, glucose and lipid assessment", "cells": [{"text": "Vascular risk factors"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "branch_retinal_artery_occlusion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of sectoral visual loss",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Branch retinal vein occlusion", "cells": [{"text": "Arterial sectoral whitening with narrowed arterioles and segmented flow points to an arterial occlusion"}], "cite": "c1"},
+        {"parameter": "Giant cell arteritis (arteritic occlusion)", "cells": [{"text": "Headache, jaw claudication or scalp tenderness with raised inflammatory markers"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "branch_retinal_artery_occlusion-treatment",
+      "kind": "treatment",
+      "title": "Management options in branch retinal artery occlusion",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Giant cell arteritis", "cells": [{"text": "Urgent exclusion and corticosteroids in older patients with raised inflammatory markers"}, {"text": "Threatens the fellow eye"}], "cite": "c1"},
+        {"parameter": "Stroke-equivalent pathway", "cells": [{"text": "Emergency referral into a stroke or transient ischaemic attack pathway"}, {"text": "Regarded as a stroke equivalent"}], "cite": "c1"},
+        {"parameter": "Embolic source", "cells": [{"text": "Treat the source, including carotid endarterectomy for significant symptomatic stenosis"}, {"text": "Carotid atheroma is the commonest source"}], "cite": "c1"},
+        {"parameter": "Cardiac source", "cells": [{"text": "Anticoagulation for atrial fibrillation or another cardiac source"}, {"text": "Cardiac embolism"}], "cite": "c1"},
+        {"parameter": "Secondary prevention", "cells": [{"text": "Antiplatelet therapy, statin, blood pressure and glucose control"}, {"text": "Reduces future vascular events"}], "cite": "c1"},
+        {"parameter": "Surveillance", "cells": [{"text": "Monitor the fellow eye and systemic vascular status"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary input", "cells": [{"text": "Ophthalmology, stroke and vascular services"}, {"text": "Coordinated care"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "branch_retinal_artery_occlusion-dx-mgmt",
+      "title": "Diagnosis and management of branch retinal artery occlusion",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Sudden painless loss of a visual field sector with cloudy inner retinal oedema", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: headache, jaw claudication, scalp tenderness or neurological symptoms?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent corticosteroids for giant cell arteritis; stroke pathway", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "ESR and CRP; fundus for embolus; carotid Doppler; ECG and echocardiography", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Giant cell arteritis excluded by normal inflammatory markers and history?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Treat the embolic source; antiplatelet, statin, and blood pressure control", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: treat as arteritic occlusion with systemic corticosteroids", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Anticoagulation for a cardiac source; carotid surgery for significant stenosis", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Field defect usually permanent; the main concern is future stroke", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

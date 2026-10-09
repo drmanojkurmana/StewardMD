@@ -1,178 +1,465 @@
 {
- "id": "functional_ovarian_cyst",
- "name": "Functional ovarian cyst",
- "aliases": [
-  "Follicular cyst",
-  "Corpus luteum cyst",
-  "Physiological ovarian cyst"
- ],
- "class": "non_infective",
- "system": "Reproductive / Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Berek & Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant follicle to rupture, and corpus luteum cysts, from failure of the corpus luteum to regress.",
-   "They are the commonest ovarian cysts in reproductive-age women and the great majority resolve spontaneously over two to three menstrual cycles.",
-   "Most are asymptomatic but may cause unilateral pelvic pain, menstrual disturbance, or acute pain if rupture or intracystic haemorrhage occurs.",
-   "A simple, unilocular, anechoic, thin-walled cyst below the usual size threshold in a premenopausal woman is almost always benign and managed expectantly.",
-   "A corpus luteum cyst may bleed, causing acute pain and occasionally haemoperitoneum, a risk that is heightened in women taking anticoagulants.",
-   "Ovarian torsion is the key emergency and its likelihood rises with larger cysts.",
-   "Theca lutein cysts are functional cysts driven by high beta-hCG, seen in molar pregnancy, multiple gestation and ovulation induction.",
-   "Combined hormonal contraception does not hasten resolution of an existing cyst but reduces the formation of new functional cysts."
+  "id": "functional_ovarian_cyst",
+  "name": "Functional ovarian cyst",
+  "aliases": [
+    "Follicular cyst",
+    "Corpus luteum cyst",
+    "Physiological ovarian cyst"
   ],
-  "pathophysiology": "During each cycle a dominant follicle matures under follicle-stimulating and luteinising hormone drive; when such a follicle fails to rupture and continues to accumulate fluid, a follicular cyst forms. After ovulation the corpus luteum normally involutes, and if it instead persists or fills with fluid or blood, a corpus luteum cyst results. These lesions are physiological and hormonally responsive rather than neoplastic, and most involute once the hormonal stimulus wanes. Theca lutein cysts represent bilateral functional enlargement from excessive human chorionic gonadotrophin stimulation.",
-  "additionalDifferentials": [
-   "Endometrioma",
-   "Benign ovarian neoplasm such as serous cystadenoma or mature cystic teratoma",
-   "Ovarian malignancy",
-   "Tubo-ovarian abscess",
-   "Ectopic pregnancy",
-   "Hydrosalpinx or paratubal cyst",
-   "Polycystic ovarian morphology"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal ultrasound to assess morphology, size and Doppler flow",
-   "Serum beta-hCG to exclude pregnancy or ectopic and to explain theca lutein cysts",
-   "Full blood count where haemorrhage is suspected",
-   "CA-125 interpreted with caution in premenopausal women, ideally within a risk-of-malignancy index or IOTA rules",
-   "Interval ultrasound to confirm spontaneous resolution",
-   "Germ-cell and sex-cord tumour markers in young women with complex lesions"
-  ],
-  "redFlags": [
-   "Acute severe unilateral pain with features of torsion, constituting a surgical emergency",
-   "Haemodynamic instability or signs of haemoperitoneum from a ruptured haemorrhagic cyst",
-   "Complex, solid or multilocular morphology or persistence, raising suspicion of neoplasm",
-   "Any ovarian cyst in a postmenopausal woman, in whom functional cysts should not occur",
-   "Rapid enlargement or associated ascites"
-  ],
-  "prognosis": "The prognosis is excellent, with the large majority of functional cysts resolving spontaneously and requiring no intervention. Complications such as torsion or haemorrhage are uncommon and readily treatable.",
-  "pitfalls": [
-   "Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging.",
-   "Assuming a cyst in a postmenopausal woman is functional rather than investigating it.",
-   "Over-reliance on CA-125 in premenopausal women, in whom it is raised by endometriosis, fibroids and pelvic infection.",
-   "Missing an ectopic pregnancy by not checking beta-hCG in a woman with pain and an adnexal mass.",
-   "Delaying surgery in suspected torsion while awaiting further imaging."
-  ],
-  "references": [
-   "Berek & Novak's Gynecology",
-   "RCOG/BSGE Green-top Guideline: Management of suspected ovarian masses in premenopausal women",
-   "IOTA (International Ovarian Tumour Analysis) simple rules"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles",
-   "Simple analgesia for associated pelvic pain",
-   "Interval transvaginal ultrasound to confirm resolution of a simple cyst",
-   "Combined hormonal contraception to reduce the formation of new functional cysts in recurrent cases",
-   "Exclude pregnancy and ectopic with beta-hCG and apply malignancy risk assessment for complex lesions",
-   "Recognise and urgently manage ovarian torsion and significant intracystic haemorrhage or haemoperitoneum, with detorsion or ovarian-sparing cystectomy",
-   "Refer for gynaecological or surgical assessment when a cyst is persistent, enlarging, complex or symptomatic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_ovarian_cyst-pathway",
-   "title": "Functional ovarian cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant follicle to rupture, and corpus luteum cysts, from failure of the corpus luteum to regress.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe unilateral pain with features of torsion, constituting a surgical emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal ultrasound to assess morphology, size and Doppler flow, Serum beta-hCG to exclude pregnancy or ectopic and to explain theca lutein cysts, Full blood count where haemorrhage is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional ovarian cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_ovarian_cyst-matrix",
-   "title": "Functional ovarian cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive / Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Berek & Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant follicle to rupture, and corpus luteum cysts, from failure of the corpus luteum to regress.",
+      "They are the commonest ovarian cysts in reproductive-age women and the great majority resolve spontaneously over two to three menstrual cycles.",
+      "Most are asymptomatic but may cause unilateral pelvic pain, menstrual disturbance, or acute pain if rupture or intracystic haemorrhage occurs.",
+      "A simple, unilocular, anechoic, thin-walled cyst below the usual size threshold in a premenopausal woman is almost always benign and managed expectantly.",
+      "A corpus luteum cyst may bleed, causing acute pain and occasionally haemoperitoneum, a risk that is heightened in women taking anticoagulants.",
+      "Ovarian torsion is the key emergency and its likelihood rises with larger cysts.",
+      "Theca lutein cysts are functional cysts driven by high beta-hCG, seen in molar pregnancy, multiple gestation and ovulation induction.",
+      "Combined hormonal contraception does not hasten resolution of an existing cyst but reduces the formation of new functional cysts."
     ],
-    [
-     "Key Investigations",
-     "Transvaginal ultrasound to assess morphology, size and Doppler flow, Serum beta-hCG to exclude pregnancy or ectopic and to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During each cycle a dominant follicle matures under follicle-stimulating and luteinising hormone drive; when such a follicle fails to rupture and continues to accumulate fluid, a follicular cyst forms. After ovulation the corpus luteum normally involutes, and if it instead persists or fills with fluid or blood, a corpus luteum cyst results. These lesions are physiological and hormonally responsive rather than neoplastic, and most involute once the hormonal stimulus wanes. Theca lutein cysts represent bilateral functional enlargement from excessive human chorionic gonadotrophin stimulation.",
+    "additionalDifferentials": [
+      "Endometrioma",
+      "Benign ovarian neoplasm such as serous cystadenoma or mature cystic teratoma",
+      "Ovarian malignancy",
+      "Tubo-ovarian abscess",
+      "Ectopic pregnancy",
+      "Hydrosalpinx or paratubal cyst",
+      "Polycystic ovarian morphology"
     ],
-    [
-     "Primary Differentials",
-     "Endometrioma, Benign ovarian neoplasm such as serous cystadenoma or mature cystic teratoma, Ovarian malignancy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal ultrasound to assess morphology, size and Doppler flow",
+      "Serum beta-hCG to exclude pregnancy or ectopic and to explain theca lutein cysts",
+      "Full blood count where haemorrhage is suspected",
+      "CA-125 interpreted with caution in premenopausal women, ideally within a risk-of-malignancy index or IOTA rules",
+      "Interval ultrasound to confirm spontaneous resolution",
+      "Germ-cell and sex-cord tumour markers in young women with complex lesions"
     ],
-    [
-     "Management Strategy",
-     "Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe unilateral pain with features of torsion, constituting a surgical emergency",
+      "Haemodynamic instability or signs of haemoperitoneum from a ruptured haemorrhagic cyst",
+      "Complex, solid or multilocular morphology or persistence, raising suspicion of neoplasm",
+      "Any ovarian cyst in a postmenopausal woman, in whom functional cysts should not occur",
+      "Rapid enlargement or associated ascites"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, with the large majority of functional cysts resolving spontaneously and requiring no intervention. Complications such as torsion or haemorrhage are uncommon and readily treatable.",
+    "pitfalls": [
+      "Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging.",
+      "Assuming a cyst in a postmenopausal woman is functional rather than investigating it.",
+      "Over-reliance on CA-125 in premenopausal women, in whom it is raised by endometriosis, fibroids and pelvic infection.",
+      "Missing an ectopic pregnancy by not checking beta-hCG in a woman with pain and an adnexal mass.",
+      "Delaying surgery in suspected torsion while awaiting further imaging."
+    ],
+    "references": [
+      "Berek & Novak's Gynecology",
+      "RCOG/BSGE Green-top Guideline: Management of suspected ovarian masses in premenopausal women",
+      "IOTA (International Ovarian Tumour Analysis) simple rules"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles",
+      "Simple analgesia for associated pelvic pain",
+      "Interval transvaginal ultrasound to confirm resolution of a simple cyst",
+      "Combined hormonal contraception to reduce the formation of new functional cysts in recurrent cases",
+      "Exclude pregnancy and ectopic with beta-hCG and apply malignancy risk assessment for complex lesions",
+      "Recognise and urgently manage ovarian torsion and significant intracystic haemorrhage or haemoperitoneum, with detorsion or ovarian-sparing cystectomy",
+      "Refer for gynaecological or surgical assessment when a cyst is persistent, enlarging, complex or symptomatic"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional ovarian cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-ovarian-cyst-real-image",
-   "title": "Functional ovarian cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "functional_ovarian_cyst-pathway",
+      "title": "Functional ovarian cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant follicle to rupture, and corpus luteum cysts, from failure of the corpus luteum to regress.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe unilateral pain with features of torsion, constituting a surgical emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal ultrasound to assess morphology, size and Doppler flow, Serum beta-hCG to exclude pregnancy or ectopic and to explain theca lutein cysts, Full blood count where haemorrhage is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional ovarian cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_ovarian_cyst-matrix",
+      "title": "Functional ovarian cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Functional cysts arise from normal ovulatory physiology; the two principal types are follicular cysts, from failure of a dominant",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal ultrasound to assess morphology, size and Doppler flow, Serum beta-hCG to exclude pregnancy or ectopic and to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Endometrioma, Benign ovarian neoplasm such as serous cystadenoma or mature cystic teratoma, Ovarian malignancy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Expectant management with reassurance, as most functional cysts resolve spontaneously over a few menstrual cycles",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a persistent or complex cyst as functional without confirmatory follow-up imaging.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional ovarian cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Berek & Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_ovarian_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Morphology, size and Doppler flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum beta-hCG",
+          "cells": [
+            {
+              "text": "Excludes pregnancy or ectopic; explains theca lutein cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Where haemorrhage is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CA-125",
+          "cells": [
+            {
+              "text": "Interpreted with caution in premenopausal women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval ultrasound",
+          "cells": [
+            {
+              "text": "Confirms spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ-cell and sex-cord tumour markers",
+          "cells": [
+            {
+              "text": "In young women with complex lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_ovarian_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "Excluded by beta-hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian malignancy",
+          "cells": [
+            {
+              "text": "Complex, solid or multilocular morphology, or persistence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_ovarian_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Most functional cysts resolve over a few menstrual cycles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia",
+          "cells": [
+            {
+              "text": "For associated pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Confirms resolution of a simple cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined hormonal contraception",
+          "cells": [
+            {
+              "text": "Reduces new functional cysts in recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG and malignancy risk assessment",
+          "cells": [
+            {
+              "text": "Excludes pregnancy and ectopic; assesses complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent management of torsion or haemorrhage",
+          "cells": [
+            {
+              "text": "Detorsion or surgery for torsion and significant intracystic haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological referral",
+          "cells": [
+            {
+              "text": "Persistent, enlarging, complex or symptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_ovarian_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Functional ovarian cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional ovarian cyst: adnexal cyst on transvaginal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (torsion, haemoperitoneum, complex or solid morphology)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical review for torsion or haemorrhage from a ruptured cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, beta-hCG and full blood count if bleeding suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the cyst resolve on interval ultrasound, with pregnancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Malignancy risk assessment for complex lesions; tumour markers in young women",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management with reassurance; most resolve over a few cycles",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia for pelvic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combined hormonal contraception to reduce recurrent functional cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent treatment of torsion or significant haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; the large majority resolve spontaneously without intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

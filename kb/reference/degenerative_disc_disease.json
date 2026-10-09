@@ -1,176 +1,465 @@
 {
- "id": "degenerative_disc_disease",
- "name": "Degenerative disc disease",
- "aliases": [
-  "DDD",
-  "discogenic back pain",
-  "disc degeneration",
-  "internal disc disruption"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Spine",
- "specialty": "Spinal Surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rothman-Simeone and Herkowitz's The Spine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
-   "Pain is typically worse with sitting, bending, lifting, and axial loading, and is eased by lying down",
-   "Reflects age-related disc dehydration and degeneration rather than a discrete disease, and imaging changes are extremely common in asymptomatic people",
-   "MRI shows loss of disc signal (a dark disc), reduced disc height, and vertebral endplate (Modic) changes",
-   "Endplate Modic changes, particularly type 1, may correlate with a painful disc",
-   "The diagnosis is clinical, and the correlation between imaging degeneration and pain is weak, so imaging must be interpreted cautiously",
-   "Management is predominantly conservative, including education, exercise and physiotherapy, analgesia, and weight management",
-   "Fusion or disc replacement is controversial and reserved for carefully selected patients with disabling, single-level discogenic pain unresponsive to prolonged conservative care"
+  "id": "degenerative_disc_disease",
+  "name": "Degenerative disc disease",
+  "aliases": [
+    "DDD",
+    "discogenic back pain",
+    "disc degeneration",
+    "internal disc disruption"
   ],
-  "pathophysiology": "Degenerative disc disease describes the symptomatic consequences of intervertebral disc ageing. Progressive loss of proteoglycan and water content reduces the disc's ability to distribute load, leading to disc-height loss, annular fissuring, and altered biomechanics. Pain is thought to arise from stimulation of nociceptors in the outer annulus and vertebral endplates, sometimes accompanied by ingrowth of nerves and blood vessels into the degenerate disc and by inflammatory endplate (Modic) changes. Because degeneration is almost universal with age, structural changes correlate poorly with symptoms.",
-  "additionalDifferentials": [
-   "Facet joint syndrome",
-   "Lumbar disc herniation with radiculopathy",
-   "Osteoporotic vertebral compression fracture",
-   "Sacroiliac joint dysfunction",
-   "Inflammatory spondyloarthropathy in younger patients with inflammatory features",
-   "Metastatic or infective spinal disease when red flags are present"
-  ],
-  "additionalInvestigations": [
-   "MRI to assess disc hydration, height, and endplate (Modic) changes",
-   "Plain radiographs including standing views for disc-space narrowing and alignment",
-   "Bone density assessment if an osteoporotic fracture is a consideration",
-   "Inflammatory markers and HLA-B27 if spondyloarthropathy is suspected",
-   "Provocative discography only in highly selected surgical candidates, and even then controversially"
-  ],
-  "redFlags": [
-   "New or progressive neurological deficit",
-   "Constitutional symptoms, night pain, or a history of malignancy suggesting tumour",
-   "Fever or features suggesting discitis or osteomyelitis"
-  ],
-  "prognosis": "The condition tends to fluctuate but is usually self-limiting or manageable over the long term with conservative measures; most people do not require surgery, and surgical outcomes for axial discogenic pain are less predictable than for radicular symptoms.",
-  "pitfalls": [
-   "Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source",
-   "Recommending fusion for poorly localised, multilevel degeneration",
-   "Neglecting psychosocial contributors to chronic back pain"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "NICE guideline: Low back pain and sciatica in over 16s"
-  ],
-  "crossLinks": [
-   "lumbar_disc_herniation",
-   "facet_joint_syndrome",
-   "lumbar_spinal_stenosis"
-  ],
-  "management": [
-   "First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since most axial discogenic pain is self-limiting",
-   "Structured physiotherapy with core stabilisation and graded exercise to improve function and reduce mechanical pain",
-   "Analgesia using simple analgesics and short courses of non-steroidal anti-inflammatory drugs, with neuropathic agents or muscle relaxants as adjuncts where appropriate",
-   "Lifestyle measures including weight management, smoking cessation (smoking accelerates disc degeneration) and ergonomic and postural advice",
-   "Multidisciplinary chronic-pain management with psychological approaches such as cognitive behavioural therapy for persistent disabling pain",
-   "Cautious interpretation of imaging and avoidance of over-investigation given the weak correlation between degenerative changes and symptoms",
-   "Reserve interventional injections and spinal fusion or disc arthroplasty for carefully selected patients with refractory, well-localised discogenic pain, with specialist spinal referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "degenerative_disc_disease-pathway",
-   "title": "Degenerative disc disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI to assess disc hydration, height, and endplate (Modic) changes, Plain radiographs including standing views for disc-space narrowing and alignment, Bone density assessment if an osteoporotic fracture is a consideration"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since most axial discogenic pain is self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of degenerative disc disease."
-  }
- ],
- "tables": [
-  {
-   "id": "degenerative_disc_disease-matrix",
-   "title": "Degenerative disc disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Spine",
+  "specialty": "Spinal Surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rothman-Simeone and Herkowitz's The Spine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
+      "Pain is typically worse with sitting, bending, lifting, and axial loading, and is eased by lying down",
+      "Reflects age-related disc dehydration and degeneration rather than a discrete disease, and imaging changes are extremely common in asymptomatic people",
+      "MRI shows loss of disc signal (a dark disc), reduced disc height, and vertebral endplate (Modic) changes",
+      "Endplate Modic changes, particularly type 1, may correlate with a painful disc",
+      "The diagnosis is clinical, and the correlation between imaging degeneration and pain is weak, so imaging must be interpreted cautiously",
+      "Management is predominantly conservative, including education, exercise and physiotherapy, analgesia, and weight management",
+      "Fusion or disc replacement is controversial and reserved for carefully selected patients with disabling, single-level discogenic pain unresponsive to prolonged conservative care"
     ],
-    [
-     "Key Investigations",
-     "MRI to assess disc hydration, height, and endplate (Modic) changes, Plain radiographs including standing views for disc-space",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Degenerative disc disease describes the symptomatic consequences of intervertebral disc ageing. Progressive loss of proteoglycan and water content reduces the disc's ability to distribute load, leading to disc-height loss, annular fissuring, and altered biomechanics. Pain is thought to arise from stimulation of nociceptors in the outer annulus and vertebral endplates, sometimes accompanied by ingrowth of nerves and blood vessels into the degenerate disc and by inflammatory endplate (Modic) changes. Because degeneration is almost universal with age, structural changes correlate poorly with symptoms.",
+    "additionalDifferentials": [
+      "Facet joint syndrome",
+      "Lumbar disc herniation with radiculopathy",
+      "Osteoporotic vertebral compression fracture",
+      "Sacroiliac joint dysfunction",
+      "Inflammatory spondyloarthropathy in younger patients with inflammatory features",
+      "Metastatic or infective spinal disease when red flags are present"
     ],
-    [
-     "Primary Differentials",
-     "Facet joint syndrome, Lumbar disc herniation with radiculopathy, Osteoporotic vertebral compression fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI to assess disc hydration, height, and endplate (Modic) changes",
+      "Plain radiographs including standing views for disc-space narrowing and alignment",
+      "Bone density assessment if an osteoporotic fracture is a consideration",
+      "Inflammatory markers and HLA-B27 if spondyloarthropathy is suspected",
+      "Provocative discography only in highly selected surgical candidates, and even then controversially"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since",
-     "Core treatment modality"
+    "redFlags": [
+      "New or progressive neurological deficit",
+      "Constitutional symptoms, night pain, or a history of malignancy suggesting tumour",
+      "Fever or features suggesting discitis or osteomyelitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition tends to fluctuate but is usually self-limiting or manageable over the long term with conservative measures; most people do not require surgery, and surgical outcomes for axial discogenic pain are less predictable than for radicular symptoms.",
+    "pitfalls": [
+      "Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source",
+      "Recommending fusion for poorly localised, multilevel degeneration",
+      "Neglecting psychosocial contributors to chronic back pain"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "NICE guideline: Low back pain and sciatica in over 16s"
+    ],
+    "crossLinks": [
+      "lumbar_disc_herniation",
+      "facet_joint_syndrome",
+      "lumbar_spinal_stenosis"
+    ],
+    "management": [
+      "First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since most axial discogenic pain is self-limiting",
+      "Structured physiotherapy with core stabilisation and graded exercise to improve function and reduce mechanical pain",
+      "Analgesia using simple analgesics and short courses of non-steroidal anti-inflammatory drugs, with neuropathic agents or muscle relaxants as adjuncts where appropriate",
+      "Lifestyle measures including weight management, smoking cessation (smoking accelerates disc degeneration) and ergonomic and postural advice",
+      "Multidisciplinary chronic-pain management with psychological approaches such as cognitive behavioural therapy for persistent disabling pain",
+      "Cautious interpretation of imaging and avoidance of over-investigation given the weak correlation between degenerative changes and symptoms",
+      "Reserve interventional injections and spinal fusion or disc arthroplasty for carefully selected patients with refractory, well-localised discogenic pain, with specialist spinal referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for degenerative disc disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "degenerative-disc-disease-real-image",
-   "title": "Degenerative disc disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "degenerative_disc_disease-pathway",
+      "title": "Degenerative disc disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI to assess disc hydration, height, and endplate (Modic) changes, Plain radiographs including standing views for disc-space narrowing and alignment, Bone density assessment if an osteoporotic fracture is a consideration"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since most axial discogenic pain is self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of degenerative disc disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "degenerative_disc_disease-matrix",
+      "title": "Degenerative disc disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common cause of chronic axial (midline) mechanical low back or neck pain without radiculopathy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI to assess disc hydration, height, and endplate (Modic) changes, Plain radiographs including standing views for disc-space",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Facet joint syndrome, Lumbar disc herniation with radiculopathy, Osteoporotic vertebral compression fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative management with reassurance, education, activity modification and avoidance of prolonged bed rest, since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-interpreting ubiquitous age-related disc changes on MRI as the definite pain source",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for degenerative disc disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "degenerative_disc_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Disc hydration, disc height and endplate (Modic) changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs, including standing views",
+          "cells": [
+            {
+              "text": "Disc-space narrowing and alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and HLA-B27",
+          "cells": [
+            {
+              "text": "Used only if spondyloarthropathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative discography",
+          "cells": [
+            {
+              "text": "Only in highly selected surgical candidates; controversial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "degenerative_disc_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic or infective spinal disease",
+          "cells": [
+            {
+              "text": "Constitutional symptoms, night pain, malignancy history or fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory spondyloarthropathy",
+          "cells": [
+            {
+              "text": "Younger patients with inflammatory features; HLA-B27 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporotic vertebral compression fracture",
+          "cells": [
+            {
+              "text": "Bone density assessment where a fracture is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "degenerative_disc_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative first-line care",
+          "cells": [
+            {
+              "text": "Reassurance, education and activity modification; avoid prolonged bed rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Core stabilisation and graded exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesics and short NSAID courses; neuropathic agents or muscle relaxants as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "Weight management, smoking cessation (accelerates degeneration) and posture advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pain management",
+          "cells": [
+            {
+              "text": "Multidisciplinary care; cognitive behavioural therapy for persistent disabling pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging restraint",
+          "cells": [
+            {
+              "text": "Avoid over-investigation; degeneration correlates weakly with symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist interventions",
+          "cells": [
+            {
+              "text": "Injections, fusion or disc arthroplasty for refractory, well-localised pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "degenerative_disc_disease-dx-mgmt",
+      "title": "Diagnosis and management of Degenerative disc disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected degenerative disc disease: axial discogenic back pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive neurological deficit, malignancy, fever or night pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal review for tumour, discitis or osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for disc hydration, height and Modic changes; standing radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI disc changes match the localised pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider facet syndrome, disc herniation, SI joint dysfunction or spondyloarthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance, education and activity modification; avoid prolonged bed rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy with core stabilisation and graded exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Simple analgesics and short NSAID courses, with adjuncts as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Weight, smoking cessation and posture advice; CBT for persistent pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Specialist referral for refractory, well-localised discogenic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting or manageable long term; most people do not need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

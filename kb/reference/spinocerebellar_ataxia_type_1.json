@@ -1,173 +1,460 @@
 {
- "id": "spinocerebellar_ataxia_type_1",
- "name": "Spinocerebellar ataxia type 1 (SCA1)",
- "aliases": [
-  "SCA1",
-  "ATXN1-related ataxia",
-  "olivopontocerebellar atrophy type 1",
-  "ataxin-1 CAG repeat expansion"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded polyglutamine tract in ataxin-1",
-   "Typically presents in early to mid adulthood with progressive gait and limb ataxia, dysarthria, and abnormal eye movements",
-   "Prominent pyramidal signs (hyperreflexia, spasticity) and relatively brisk reflexes early in the course help distinguish it from some other spinocerebellar ataxias",
-   "Later features include peripheral neuropathy, bulbar dysfunction with dysphagia, and saccadic slowing or ophthalmoparesis",
-   "Shows anticipation, with earlier onset and more severe disease across generations as the repeat expands, particularly with paternal transmission",
-   "Larger repeat expansions correlate with earlier onset and faster progression",
-   "Diagnosis is confirmed by targeted genetic testing for the ATXN1 CAG repeat length; management is supportive and multidisciplinary"
+  "id": "spinocerebellar_ataxia_type_1",
+  "name": "Spinocerebellar ataxia type 1 (SCA1)",
+  "aliases": [
+    "SCA1",
+    "ATXN1-related ataxia",
+    "olivopontocerebellar atrophy type 1",
+    "ataxin-1 CAG repeat expansion"
   ],
-  "pathophysiology": "SCA1 is a polyglutamine (polyQ) neurodegenerative disorder caused by an expanded CAG repeat in the ATXN1 gene. The elongated polyglutamine tract confers a toxic gain of function on the ataxin-1 protein, promoting its abnormal accumulation and formation of nuclear inclusions, disrupting transcriptional regulation and protein homeostasis. This leads to progressive degeneration predominantly of cerebellar Purkinje cells, brainstem (pontine and olivary) nuclei, and spinocerebellar tracts, producing the olivopontocerebellar pattern of atrophy. Neuronal dysfunction and loss accumulate over years, and the repeat length inversely correlates with age of onset, explaining the phenomenon of genetic anticipation.",
-  "additionalDifferentials": [
-   "Other autosomal dominant spinocerebellar ataxias (SCA2, SCA3, SCA6, SCA7)",
-   "Friedreich ataxia",
-   "Multiple system atrophy (cerebellar type)",
-   "Acquired cerebellar degeneration (alcohol, paraneoplastic, immune-mediated)",
-   "Fragile X-associated tremor/ataxia syndrome",
-   "Episodic ataxias"
-  ],
-  "additionalInvestigations": [
-   "Targeted molecular genetic testing for ATXN1 CAG repeat expansion",
-   "MRI of the brain showing cerebellar and brainstem (olivopontocerebellar) atrophy",
-   "Nerve conduction studies to assess associated peripheral neuropathy",
-   "Detailed oculomotor assessment for saccadic slowing and nystagmus",
-   "Swallowing and speech evaluation as bulbar involvement develops",
-   "Exclusion of acquired causes with relevant blood tests where indicated"
-  ],
-  "redFlags": [
-   "Progressive dysphagia and aspiration risk from bulbar involvement",
-   "Rapid functional decline or falls compromising safety",
-   "Respiratory compromise in advanced disease"
-  ],
-  "prognosis": "SCA1 is progressive over one to a few decades, with SCA1 tending to progress somewhat faster than several other dominant ataxias; disability accumulates steadily and premature death commonly results from bulbar and respiratory complications.",
-  "pitfalls": [
-   "Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing",
-   "Overlooking prominent pyramidal signs that are a useful clue to SCA1",
-   "Failing to counsel about anticipation and reproductive implications",
-   "Neglecting proactive management of dysphagia and aspiration risk"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion",
-   "Maintain mobility, balance and independence with physiotherapy, occupational therapy and gait aids to reduce falls",
-   "Treat the prominent pyramidal spasticity with stretching and antispasmodic agents, and manage neuropathic pain",
-   "Address bulbar involvement with speech and language therapy, regular swallow assessment and gastrostomy feeding when aspiration risk is high",
-   "Anticipate and manage respiratory complications, as bulbar and respiratory failure are the usual causes of death",
-   "Monitor progression with standardised ataxia scales, noting that SCA1 tends to progress faster than several other dominant ataxias",
-   "Offer genetic counselling on autosomal dominant inheritance, anticipation especially with paternal transmission, and predictive testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_1-pathway",
-   "title": "Spinocerebellar ataxia type 1 (SCA1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded polyglutamine tract in ataxin-1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysphagia and aspiration risk from bulbar involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted molecular genetic testing for ATXN1 CAG repeat expansion, MRI of the brain showing cerebellar and brainstem (olivopontocerebellar) atrophy, Nerve conduction studies to assess associated peripheral neuropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 1 (sca1)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_1-matrix",
-   "title": "Spinocerebellar ataxia type 1 (SCA1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded polyglutamine tract in ataxin-1",
+      "Typically presents in early to mid adulthood with progressive gait and limb ataxia, dysarthria, and abnormal eye movements",
+      "Prominent pyramidal signs (hyperreflexia, spasticity) and relatively brisk reflexes early in the course help distinguish it from some other spinocerebellar ataxias",
+      "Later features include peripheral neuropathy, bulbar dysfunction with dysphagia, and saccadic slowing or ophthalmoparesis",
+      "Shows anticipation, with earlier onset and more severe disease across generations as the repeat expands, particularly with paternal transmission",
+      "Larger repeat expansions correlate with earlier onset and faster progression",
+      "Diagnosis is confirmed by targeted genetic testing for the ATXN1 CAG repeat length; management is supportive and multidisciplinary"
     ],
-    [
-     "Key Investigations",
-     "Targeted molecular genetic testing for ATXN1 CAG repeat expansion, MRI of the brain showing cerebellar and brainstem",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA1 is a polyglutamine (polyQ) neurodegenerative disorder caused by an expanded CAG repeat in the ATXN1 gene. The elongated polyglutamine tract confers a toxic gain of function on the ataxin-1 protein, promoting its abnormal accumulation and formation of nuclear inclusions, disrupting transcriptional regulation and protein homeostasis. This leads to progressive degeneration predominantly of cerebellar Purkinje cells, brainstem (pontine and olivary) nuclei, and spinocerebellar tracts, producing the olivopontocerebellar pattern of atrophy. Neuronal dysfunction and loss accumulate over years, and the repeat length inversely correlates with age of onset, explaining the phenomenon of genetic anticipation.",
+    "additionalDifferentials": [
+      "Other autosomal dominant spinocerebellar ataxias (SCA2, SCA3, SCA6, SCA7)",
+      "Friedreich ataxia",
+      "Multiple system atrophy (cerebellar type)",
+      "Acquired cerebellar degeneration (alcohol, paraneoplastic, immune-mediated)",
+      "Fragile X-associated tremor/ataxia syndrome",
+      "Episodic ataxias"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal dominant spinocerebellar ataxias (SCA2, SCA3, SCA6, SCA7), Friedreich ataxia, Multiple system atrophy (cerebellar",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted molecular genetic testing for ATXN1 CAG repeat expansion",
+      "MRI of the brain showing cerebellar and brainstem (olivopontocerebellar) atrophy",
+      "Nerve conduction studies to assess associated peripheral neuropathy",
+      "Detailed oculomotor assessment for saccadic slowing and nystagmus",
+      "Swallowing and speech evaluation as bulbar involvement develops",
+      "Exclusion of acquired causes with relevant blood tests where indicated"
     ],
-    [
-     "Management Strategy",
-     "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysphagia and aspiration risk from bulbar involvement",
+      "Rapid functional decline or falls compromising safety",
+      "Respiratory compromise in advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA1 is progressive over one to a few decades, with SCA1 tending to progress somewhat faster than several other dominant ataxias; disability accumulates steadily and premature death commonly results from bulbar and respiratory complications.",
+    "pitfalls": [
+      "Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing",
+      "Overlooking prominent pyramidal signs that are a useful clue to SCA1",
+      "Failing to counsel about anticipation and reproductive implications",
+      "Neglecting proactive management of dysphagia and aspiration risk"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion",
+      "Maintain mobility, balance and independence with physiotherapy, occupational therapy and gait aids to reduce falls",
+      "Treat the prominent pyramidal spasticity with stretching and antispasmodic agents, and manage neuropathic pain",
+      "Address bulbar involvement with speech and language therapy, regular swallow assessment and gastrostomy feeding when aspiration risk is high",
+      "Anticipate and manage respiratory complications, as bulbar and respiratory failure are the usual causes of death",
+      "Monitor progression with standardised ataxia scales, noting that SCA1 tends to progress faster than several other dominant ataxias",
+      "Offer genetic counselling on autosomal dominant inheritance, anticipation especially with paternal transmission, and predictive testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 1 (sca1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-1-real-image",
-   "title": "Spinocerebellar ataxia type 1 (SCA1): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_1-pathway",
+      "title": "Spinocerebellar ataxia type 1 (SCA1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded polyglutamine tract in ataxin-1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysphagia and aspiration risk from bulbar involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted molecular genetic testing for ATXN1 CAG repeat expansion, MRI of the brain showing cerebellar and brainstem (olivopontocerebellar) atrophy, Nerve conduction studies to assess associated peripheral neuropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 1 (sca1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_1-matrix",
+      "title": "Spinocerebellar ataxia type 1 (SCA1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant cerebellar ataxia caused by a CAG trinucleotide repeat expansion in the ATXN1 gene encoding an expanded",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted molecular genetic testing for ATXN1 CAG repeat expansion, MRI of the brain showing cerebellar and brainstem",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal dominant spinocerebellar ataxias (SCA2, SCA3, SCA6, SCA7), Friedreich ataxia, Multiple system atrophy (cerebellar",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the ATXN1 repeat expansion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a specific subtype from clinical features alone rather than confirming with gene-specific testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 1 (sca1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted ATXN1 CAG repeat testing",
+          "cells": [
+            {
+              "text": "Expanded repeat length confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and olivopontocerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor assessment",
+          "cells": [
+            {
+              "text": "Saccadic slowing and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing and speech evaluation",
+          "cells": [
+            {
+              "text": "Bulbar involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests for acquired causes",
+          "cells": [
+            {
+              "text": "Exclusion where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other autosomal dominant SCAs (SCA2, SCA3, SCA6, SCA7)",
+          "cells": [
+            {
+              "text": "Confirmed only by gene-specific testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Friedreich ataxia",
+          "cells": [
+            {
+              "text": "A recessive ataxia; the dominant family pattern separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary symptomatic care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy for the repeat expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and gait aids",
+          "cells": [
+            {
+              "text": "Mobility, balance and independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stretching and antispasmodics",
+          "cells": [
+            {
+              "text": "Prominent pyramidal spasticity; neuropathic pain treated separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech therapy and swallow assessment",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Anticipate respiratory complications in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Standardised ataxia scales"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; anticipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 1 (SCA1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ataxia with brisk reflexes and dysarthria in adulthood: suspected SCA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysphagia, rapid decline, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallowing and respiratory assessment for aspiration or failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN1 CAG repeat length; brain MRI; oculomotor and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN1 CAG repeat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCAs or Friedreich ataxia; repeat gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary symptomatic care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stretching and antispasmodics for pyramidal spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech therapy, swallow assessment and gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Larger repeats give earlier onset; bulbar and respiratory complications drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

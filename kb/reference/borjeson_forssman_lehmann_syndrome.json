@@ -1,171 +1,229 @@
 {
- "id": "borjeson_forssman_lehmann_syndrome",
- "name": "Borjeson-Forssman-Lehmann syndrome (PHF6)",
- "aliases": [
-  "PHF6",
-  "BFLS",
-  "Borjeson-Forssman-Lehmann"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and hypogonadism",
-   "Facial features include a coarse face with a prominent supraorbital ridge, deep-set eyes, large ears and narrow palpebral fissures",
-   "Truncal obesity, gynaecomastia, small genitalia and delayed or absent puberty reflect the hypogonadism",
-   "The fingers are typically tapered and the toes short, and there may be shortened metacarpals or metatarsals",
-   "Carrier females may show milder, variable features influenced by X-inactivation",
-   "Caused by variants in PHF6, encoding a chromatin-associated protein of the PHD-finger family involved in transcriptional regulation",
-   "The phenotype overlaps other obesity-hypogonadism syndromes, so it is easily misclassified"
+  "id": "borjeson_forssman_lehmann_syndrome",
+  "name": "Borjeson-Forssman-Lehmann syndrome (PHF6)",
+  "aliases": [
+    "PHF6",
+    "BFLS",
+    "Borjeson-Forssman-Lehmann"
   ],
-  "pathophysiology": "PHF6 encodes a plant homeodomain (PHD) finger protein that localises to the nucleus and nucleolus and participates in chromatin-associated transcriptional regulation, including interactions with chromatin-remodelling and ribosome-biogenesis machinery. Loss-of-function variants impair this transcriptional control during development of the brain and endocrine tissues, producing intellectual disability together with the hypothalamic-pituitary dysfunction that underlies the obesity and hypogonadism. As an X-linked gene, PHF6 variants affect males more consistently, while carrier females show variable expression. The combined effect on neuronal and endocrine gene expression accounts for the characteristic syndromic picture.",
-  "additionalDifferentials": [
-   "Prader-Willi syndrome",
-   "Bardet-Biedl syndrome",
-   "Coffin-Lowry syndrome",
-   "Cohen syndrome",
-   "Other X-linked intellectual disability syndromes",
-   "Congenital leptin or melanocortin pathway obesity disorders"
-  ],
-  "additionalInvestigations": [
-   "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status",
-   "Assessment of obesity and its metabolic complications",
-   "Skeletal imaging of hands and feet for shortened digits and tapering",
-   "Brain MRI and developmental assessment",
-   "Targeted PHF6 sequencing or an X-linked intellectual-disability gene panel or exome sequencing"
-  ],
-  "redFlags": [
-   "Complications of severe obesity such as obstructive sleep apnoea",
-   "Absent or arrested puberty requiring endocrine management",
-   "Seizures or significant neurological change",
-   "Metabolic complications of obesity"
-  ],
-  "prognosis": "Affected males have lifelong intellectual disability with obesity and hypogonadism that require ongoing endocrine and metabolic management; carrier females are usually more mildly affected. Care is supportive and multidisciplinary.",
-  "pitfalls": [
-   "Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation",
-   "Overlooking milder features in carrier females",
-   "Neglecting endocrine evaluation of delayed puberty",
-   "Attributing obesity to lifestyle alone and missing the syndromic diagnosis"
-  ],
-  "references": [
-   "GeneReviews: Borjeson-Forssman-Lehmann Syndrome",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy; management is supportive and multidisciplinary",
-   "Endocrine management of the hypogonadism, including testosterone or hormone replacement and induction of puberty in affected males",
-   "Weight management and treatment of obesity-related metabolic complications",
-   "Developmental and educational support for the intellectual disability",
-   "Ongoing endocrine, metabolic and skeletal monitoring",
-   "X-linked genetic counselling with carrier assessment of female relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "borjeson_forssman_lehmann_syndrome-pathway",
-   "title": "Borjeson-Forssman-Lehmann syndrome (PHF6): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and hypogonadism",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complications of severe obesity such as obstructive sleep apnoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status, Assessment of obesity and its metabolic complications, Skeletal imaging of hands and feet for shortened digits and tapering"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy; management is supportive and multidisciplinary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of borjeson-forssman-lehmann syndrome (phf6)."
-  }
- ],
- "tables": [
-  {
-   "id": "borjeson_forssman_lehmann_syndrome-matrix",
-   "title": "Borjeson-Forssman-Lehmann syndrome (PHF6): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and hypogonadism",
+      "Facial features include a coarse face with a prominent supraorbital ridge, deep-set eyes, large ears and narrow palpebral fissures",
+      "Truncal obesity, gynaecomastia, small genitalia and delayed or absent puberty reflect the hypogonadism",
+      "The fingers are typically tapered and the toes short, and there may be shortened metacarpals or metatarsals",
+      "Carrier females may show milder, variable features influenced by X-inactivation",
+      "Caused by variants in PHF6, encoding a chromatin-associated protein of the PHD-finger family involved in transcriptional regulation",
+      "The phenotype overlaps other obesity-hypogonadism syndromes, so it is easily misclassified"
     ],
-    [
-     "Key Investigations",
-     "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status, Assessment of obesity and its metabolic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PHF6 encodes a plant homeodomain (PHD) finger protein that localises to the nucleus and nucleolus and participates in chromatin-associated transcriptional regulation, including interactions with chromatin-remodelling and ribosome-biogenesis machinery. Loss-of-function variants impair this transcriptional control during development of the brain and endocrine tissues, producing intellectual disability together with the hypothalamic-pituitary dysfunction that underlies the obesity and hypogonadism. As an X-linked gene, PHF6 variants affect males more consistently, while carrier females show variable expression. The combined effect on neuronal and endocrine gene expression accounts for the characteristic syndromic picture.",
+    "additionalDifferentials": [
+      "Prader-Willi syndrome",
+      "Bardet-Biedl syndrome",
+      "Coffin-Lowry syndrome",
+      "Cohen syndrome",
+      "Other X-linked intellectual disability syndromes",
+      "Congenital leptin or melanocortin pathway obesity disorders"
     ],
-    [
-     "Primary Differentials",
-     "Prader-Willi syndrome, Bardet-Biedl syndrome, Coffin-Lowry syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status",
+      "Assessment of obesity and its metabolic complications",
+      "Skeletal imaging of hands and feet for shortened digits and tapering",
+      "Brain MRI and developmental assessment",
+      "Targeted PHF6 sequencing or an X-linked intellectual-disability gene panel or exome sequencing"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy; management is supportive and multidisciplinary",
-     "Core treatment modality"
+    "redFlags": [
+      "Complications of severe obesity such as obstructive sleep apnoea",
+      "Absent or arrested puberty requiring endocrine management",
+      "Seizures or significant neurological change",
+      "Metabolic complications of obesity"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Affected males have lifelong intellectual disability with obesity and hypogonadism that require ongoing endocrine and metabolic management; carrier females are usually more mildly affected. Care is supportive and multidisciplinary.",
+    "pitfalls": [
+      "Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation",
+      "Overlooking milder features in carrier females",
+      "Neglecting endocrine evaluation of delayed puberty",
+      "Attributing obesity to lifestyle alone and missing the syndromic diagnosis"
+    ],
+    "references": [
+      "GeneReviews: Borjeson-Forssman-Lehmann Syndrome",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy; management is supportive and multidisciplinary",
+      "Endocrine management of the hypogonadism, including testosterone or hormone replacement and induction of puberty in affected males",
+      "Weight management and treatment of obesity-related metabolic complications",
+      "Developmental and educational support for the intellectual disability",
+      "Ongoing endocrine, metabolic and skeletal monitoring",
+      "X-linked genetic counselling with carrier assessment of female relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for borjeson-forssman-lehmann syndrome (phf6)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "borjeson-forssman-lehmann-syndrome-real-image",
-   "title": "Borjeson-Forssman-Lehmann syndrome (PHF6): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "borjeson_forssman_lehmann_syndrome-pathway",
+      "title": "Borjeson-Forssman-Lehmann syndrome (PHF6): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and hypogonadism",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complications of severe obesity such as obstructive sleep apnoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status, Assessment of obesity and its metabolic complications, Skeletal imaging of hands and feet for shortened digits and tapering"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy; management is supportive and multidisciplinary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of borjeson-forssman-lehmann syndrome (phf6)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "borjeson_forssman_lehmann_syndrome-matrix",
+      "title": "Borjeson-Forssman-Lehmann syndrome (PHF6): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked disorder in which affected males have intellectual disability with a distinctive combination of obesity and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis and pubertal status, Assessment of obesity and its metabolic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prader-Willi syndrome, Bardet-Biedl syndrome, Coffin-Lowry syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy; management is supportive and multidisciplinary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing as Prader-Willi or another obesity syndrome without genetic confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for borjeson-forssman-lehmann syndrome (phf6)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "borjeson_forssman_lehmann_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Borjeson-Forssman-Lehmann syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Endocrine evaluation of the hypothalamic-pituitary-gonadal axis", "cells": [{"text": "Hypogonadism and pubertal status"}], "cite": "c1"},
+        {"parameter": "Assessment of obesity and metabolic complications", "cells": [{"text": "Obesity and its complications"}], "cite": "c1"},
+        {"parameter": "Hand and foot radiographs", "cells": [{"text": "Shortened or tapered digits and metacarpals or metatarsals"}], "cite": "c1"},
+        {"parameter": "Brain MRI and developmental assessment", "cells": [{"text": "Intellectual disability and any structural change"}], "cite": "c1"},
+        {"parameter": "PHF6 sequencing, X-linked gene panel or exome sequencing", "cells": [{"text": "Confirms a PHF6 variant"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "borjeson_forssman_lehmann_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike obesity and intellectual disability syndromes",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Prader-Willi syndrome", "cells": [{"text": "Separated by genetic confirmation of a PHF6 variant"}], "cite": "c1"},
+        {"parameter": "Other X-linked intellectual disability syndromes", "cells": [{"text": "PHF6 testing identifies the specific cause"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "borjeson_forssman_lehmann_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Borjeson-Forssman-Lehmann syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Supportive multidisciplinary care"}, {"text": "No disease-specific therapy"}], "cite": "c1"},
+        {"parameter": "Endocrine management", "cells": [{"text": "Testosterone or hormone replacement and induction of puberty in affected males"}, {"text": "For hypogonadism"}], "cite": "c1"},
+        {"parameter": "Weight and metabolic care", "cells": [{"text": "Weight management and treatment of obesity-related metabolic complications"}, {"text": "Obesity"}], "cite": "c1"},
+        {"parameter": "Developmental support", "cells": [{"text": "Developmental and educational support"}, {"text": "For intellectual disability"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Endocrine, metabolic and skeletal monitoring"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "X-linked counselling with carrier assessment of female relatives"}, {"text": "X-linked inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "borjeson_forssman_lehmann_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Borjeson-Forssman-Lehmann syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Intellectual disability in a male with truncal obesity, hypogonadism and tapered fingers", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: obstructive sleep apnoea, absent or arrested puberty, or seizures?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: sleep and endocrine management; neurology review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Endocrine evaluation of puberty; hand and foot radiographs; brain MRI", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "PHF6 sequencing, X-linked gene panel or exome sequencing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "PHF6 variant confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Testosterone or puberty induction; weight and metabolic management; developmental support", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Prader-Willi, Bardet-Biedl or another X-linked intellectual disability syndrome", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "X-linked genetic counselling; carrier assessment of female relatives", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Lifelong intellectual disability; carrier females are usually more mildly affected", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

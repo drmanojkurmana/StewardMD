@@ -1,175 +1,464 @@
 {
- "id": "trench_fever",
- "name": "Trench fever",
- "aliases": [
-  "Bartonella quintana infection",
-  "quintan fever",
-  "five-day fever",
-  "urban trench fever"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through scratched skin",
-   "Historically a major cause of illness among soldiers in the trenches of the First World War, it persists today among homeless people, heavy drinkers and others exposed to body lice, hence the term urban trench fever",
-   "After an incubation of around 1-2 weeks patients develop fever, severe headache, bone pain (classically shin pain), dizziness and malaise",
-   "The fever may be a single episode or recur at roughly five-day intervals, giving rise to the names five-day and quintan fever",
-   "Infection ranges from mild self-limiting illness to prolonged or relapsing bacteraemia, and Bartonella quintana is an important cause of culture-negative endocarditis",
-   "The same organism causes bacillary angiomatosis in immunocompromised hosts, so the clinical spectrum depends heavily on host immunity",
-   "Diagnosis relies on serology, PCR and prolonged-incubation blood cultures, and treatment uses prolonged antimicrobial courses, with delousing essential to prevent reinfection and spread"
+  "id": "trench_fever",
+  "name": "Trench fever",
+  "aliases": [
+    "Bartonella quintana infection",
+    "quintan fever",
+    "five-day fever",
+    "urban trench fever"
   ],
-  "pathophysiology": "Bartonella quintana is a fastidious Gram-negative bacterium maintained in humans and transmitted by the body louse. Following inoculation through louse-faeces contamination of broken skin, the organism enters the bloodstream and characteristically infects erythrocytes and vascular endothelial cells, establishing a persistent or relapsing intraerythrocytic bacteraemia that accounts for the recurrent febrile episodes. In immunocompetent hosts this produces the self-limiting or relapsing febrile illness of trench fever, whereas the ability to adhere to cardiac valves underlies its role in chronic culture-negative endocarditis.",
-  "additionalDifferentials": [
-   "Epidemic or murine typhus",
-   "Relapsing fever due to Borrelia",
-   "Malaria in returning travellers",
-   "Infective endocarditis of other cause",
-   "Brucellosis",
-   "Undifferentiated viral febrile illness"
-  ],
-  "additionalInvestigations": [
-   "Serology for Bartonella quintana",
-   "PCR of blood or tissue",
-   "Prolonged-incubation blood cultures using enriched media",
-   "Full blood count and inflammatory markers",
-   "Echocardiography where endocarditis is suspected",
-   "Examination for body lice to support the epidemiological diagnosis"
-  ],
-  "redFlags": [
-   "New murmur, heart failure or embolic events suggesting endocarditis",
-   "Prolonged or relapsing bacteraemia despite treatment",
-   "Profound immunosuppression predisposing to bacillary angiomatosis",
-   "Occurrence in a homeless or crowded population signalling wider transmission risk",
-   "Severe or persistent constitutional symptoms with weight loss"
-  ],
-  "prognosis": "Acute trench fever is generally self-limiting with a good outcome, but Bartonella quintana bacteraemia and endocarditis are serious, may require valve surgery, and mandate prolonged antibiotic therapy; reinfection is likely if louse infestation is not addressed.",
-  "pitfalls": [
-   "Not considering the diagnosis in homeless or louse-infested patients with fever",
-   "Relying on routine short-incubation blood cultures, which are typically negative",
-   "Failing to investigate for endocarditis in persistent bacteraemia",
-   "Overlooking delousing and social measures, leading to reinfection",
-   "Confining the differential to typhus and missing this treatable Bartonella infection"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed bacteraemia, to clear the intraerythrocytic Bartonella quintana infection",
-   "Prolonged combination antibiotic therapy for Bartonella quintana endocarditis, with valve surgery where there is significant valvular damage or heart failure",
-   "Eradicate the body louse infestation through delousing, laundering or disposal of clothing and improved hygiene to prevent relapse and reinfection",
-   "Address underlying social determinants such as homelessness and alcohol dependence that predispose to louse exposure",
-   "Perform echocardiography and monitor when endocarditis is suspected, given the risk of culture-negative valvular infection",
-   "Provide supportive care and analgesia for the self-limiting febrile illness in the immunocompetent host"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trench_fever-pathway",
-   "title": "Trench fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through scratched skin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New murmur, heart failure or embolic events suggesting endocarditis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serology for Bartonella quintana, PCR of blood or tissue, Prolonged-incubation blood cultures using enriched media"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed bacteraemia, to clear the intraerythrocytic Bartonella quintana infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not considering the diagnosis in homeless or louse-infested patients with fever"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trench fever."
-  }
- ],
- "tables": [
-  {
-   "id": "trench_fever-matrix",
-   "title": "Trench fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through scratched skin",
+      "Historically a major cause of illness among soldiers in the trenches of the First World War, it persists today among homeless people, heavy drinkers and others exposed to body lice, hence the term urban trench fever",
+      "After an incubation of around 1-2 weeks patients develop fever, severe headache, bone pain (classically shin pain), dizziness and malaise",
+      "The fever may be a single episode or recur at roughly five-day intervals, giving rise to the names five-day and quintan fever",
+      "Infection ranges from mild self-limiting illness to prolonged or relapsing bacteraemia, and Bartonella quintana is an important cause of culture-negative endocarditis",
+      "The same organism causes bacillary angiomatosis in immunocompromised hosts, so the clinical spectrum depends heavily on host immunity",
+      "Diagnosis relies on serology, PCR and prolonged-incubation blood cultures, and treatment uses prolonged antimicrobial courses, with delousing essential to prevent reinfection and spread"
     ],
-    [
-     "Key Investigations",
-     "Serology for Bartonella quintana, PCR of blood or tissue, Prolonged-incubation blood cultures using enriched media",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bartonella quintana is a fastidious Gram-negative bacterium maintained in humans and transmitted by the body louse. Following inoculation through louse-faeces contamination of broken skin, the organism enters the bloodstream and characteristically infects erythrocytes and vascular endothelial cells, establishing a persistent or relapsing intraerythrocytic bacteraemia that accounts for the recurrent febrile episodes. In immunocompetent hosts this produces the self-limiting or relapsing febrile illness of trench fever, whereas the ability to adhere to cardiac valves underlies its role in chronic culture-negative endocarditis.",
+    "additionalDifferentials": [
+      "Epidemic or murine typhus",
+      "Relapsing fever due to Borrelia",
+      "Malaria in returning travellers",
+      "Infective endocarditis of other cause",
+      "Brucellosis",
+      "Undifferentiated viral febrile illness"
     ],
-    [
-     "Primary Differentials",
-     "Epidemic or murine typhus, Relapsing fever due to Borrelia, Malaria in returning travellers",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serology for Bartonella quintana",
+      "PCR of blood or tissue",
+      "Prolonged-incubation blood cultures using enriched media",
+      "Full blood count and inflammatory markers",
+      "Echocardiography where endocarditis is suspected",
+      "Examination for body lice to support the epidemiological diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed",
-     "Core treatment modality"
+    "redFlags": [
+      "New murmur, heart failure or embolic events suggesting endocarditis",
+      "Prolonged or relapsing bacteraemia despite treatment",
+      "Profound immunosuppression predisposing to bacillary angiomatosis",
+      "Occurrence in a homeless or crowded population signalling wider transmission risk",
+      "Severe or persistent constitutional symptoms with weight loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Not considering the diagnosis in homeless or louse-infested patients with fever",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute trench fever is generally self-limiting with a good outcome, but Bartonella quintana bacteraemia and endocarditis are serious, may require valve surgery, and mandate prolonged antibiotic therapy; reinfection is likely if louse infestation is not addressed.",
+    "pitfalls": [
+      "Not considering the diagnosis in homeless or louse-infested patients with fever",
+      "Relying on routine short-incubation blood cultures, which are typically negative",
+      "Failing to investigate for endocarditis in persistent bacteraemia",
+      "Overlooking delousing and social measures, leading to reinfection",
+      "Confining the differential to typhus and missing this treatable Bartonella infection"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed bacteraemia, to clear the intraerythrocytic Bartonella quintana infection",
+      "Prolonged combination antibiotic therapy for Bartonella quintana endocarditis, with valve surgery where there is significant valvular damage or heart failure",
+      "Eradicate the body louse infestation through delousing, laundering or disposal of clothing and improved hygiene to prevent relapse and reinfection",
+      "Address underlying social determinants such as homelessness and alcohol dependence that predispose to louse exposure",
+      "Perform echocardiography and monitor when endocarditis is suspected, given the risk of culture-negative valvular infection",
+      "Provide supportive care and analgesia for the self-limiting febrile illness in the immunocompetent host"
     ]
-   ],
-   "caption": "Overview comparison matrix for trench fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trench-fever-real-image",
-   "title": "Trench fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "trench_fever-pathway",
+      "title": "Trench fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through scratched skin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New murmur, heart failure or embolic events suggesting endocarditis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serology for Bartonella quintana, PCR of blood or tissue, Prolonged-incubation blood cultures using enriched media"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed bacteraemia, to clear the intraerythrocytic Bartonella quintana infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not considering the diagnosis in homeless or louse-infested patients with fever"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trench fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trench_fever-matrix",
+      "title": "Trench fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Bartonella quintana and transmitted by the human body louse, with organisms shed in louse faeces and inoculated through",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serology for Bartonella quintana, PCR of blood or tissue, Prolonged-incubation blood cultures using enriched media",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epidemic or murine typhus, Relapsing fever due to Borrelia, Malaria in returning travellers",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antimicrobial therapy with a tetracycline such as doxycycline, combined with an aminoglycoside (gentamicin) for confirmed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not considering the diagnosis in homeless or louse-infested patients with fever",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trench fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trench_fever-dx-mgmt",
+      "title": "Diagnosis and management of Trench fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trench fever: fever, headache and shin pain in a louse-exposed patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new murmur, heart failure, or relapsing bacteraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent echocardiography and cardiology review for suspected endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bartonella serology and PCR; prolonged-incubation blood cultures; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does serology or PCR confirm Bartonella quintana infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider typhus, Borrelia relapsing fever, brucellosis or malaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Doxycycline, with gentamicin for confirmed bacteraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged combination therapy and surgery for endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Delousing of clothing and hygiene measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address homelessness and alcohol dependence that drive exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Echocardiography when endocarditis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute illness self-limits; endocarditis is serious; reinfection likely without delousing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trench_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartonella quintana serology",
+          "cells": [
+            {
+              "text": "Antibody evidence of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of blood or tissue",
+          "cells": [
+            {
+              "text": "Organism DNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged-incubation blood cultures",
+          "cells": [
+            {
+              "text": "Culture-negative short incubation missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Endocarditis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Body louse examination",
+          "cells": [
+            {
+              "text": "Epidemiological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trench_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidemic or murine typhus",
+          "cells": [
+            {
+              "text": "Louse or flea transmission; Bartonella serology and PCR separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsing fever due to Borrelia",
+          "cells": [
+            {
+              "text": "Spirochaetes on blood film during fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brucellosis",
+          "cells": [
+            {
+              "text": "Undulant fever with a different serological profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trench_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Tetracycline to clear intraerythrocytic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentamicin combination",
+          "cells": [
+            {
+              "text": "Confirmed bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged therapy for endocarditis",
+          "cells": [
+            {
+              "text": "Valve surgery for significant valve damage or heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delousing",
+          "cells": [
+            {
+              "text": "Clothing laundering or disposal; prevents relapse and reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Social determinants",
+          "cells": [
+            {
+              "text": "Homelessness and alcohol dependence that increase louse exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia for self-limiting illness in immunocompetent hosts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

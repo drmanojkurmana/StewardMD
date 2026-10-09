@@ -1,173 +1,451 @@
 {
- "id": "myocardial_bridging",
- "name": "Myocardial bridging",
- "aliases": [
-  "myocardial bridge",
-  "coronary muscle bridge",
-  "intramural coronary artery",
-  "tunnelled coronary artery"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed during systole",
-   "Angiography shows systolic narrowing that relaxes in diastole, the milking effect, since most coronary perfusion occurs in diastole",
-   "The overwhelming majority are benign incidental findings with a favourable natural history",
-   "Symptomatic cases may report exertional chest pain, and rarely arrhythmia or ischaemic events are attributed to deep or long bridges",
-   "Diastolic flow disturbance and a persistent early-diastolic delay in relaxation can occasionally impair perfusion",
-   "Tachycardia shortens diastole and can unmask or worsen symptoms by reducing perfusion time",
-   "Most patients need reassurance only; medical therapy that reduces contractility and heart rate is first-line, with intervention reserved for refractory, well-documented ischaemia"
+  "id": "myocardial_bridging",
+  "name": "Myocardial bridging",
+  "aliases": [
+    "myocardial bridge",
+    "coronary muscle bridge",
+    "intramural coronary artery",
+    "tunnelled coronary artery"
   ],
-  "pathophysiology": "Myocardial bridging occurs when a portion of an epicardial coronary artery, most often the mid left anterior descending, takes an intramuscular course so that overlying myocardium compresses it during systole. Because coronary perfusion is predominantly diastolic, the systolic compression is usually of little consequence, which explains why most bridges are benign. In deeper or longer bridges the compression can persist into early diastole and a phase lag in vessel re-expansion may transiently reduce flow, and tachycardia further curtails diastolic filling time. Local wall stress at the bridge entrance may also predispose the proximal segment to atherosclerosis. The net functional effect ranges from none in the great majority to occasional demand ischaemia in a minority.",
-  "additionalDifferentials": [
-   "Obstructive coronary atherosclerosis",
-   "Coronary vasospasm",
-   "Anomalous coronary artery origin or course",
-   "Microvascular angina",
-   "Hypertrophic cardiomyopathy with demand ischaemia",
-   "Non-cardiac chest pain"
-  ],
-  "additionalInvestigations": [
-   "Coronary angiography demonstrating systolic compression with diastolic relaxation",
-   "Coronary CT angiography showing the intramyocardial segment",
-   "Intravascular imaging or physiological indices to assess functional significance in selected cases",
-   "Stress testing or perfusion imaging to document inducible ischaemia",
-   "Echocardiography to exclude hypertrophic cardiomyopathy",
-   "Electrocardiogram during symptoms"
-  ],
-  "redFlags": [
-   "Documented exertional ischaemia attributable to a deep or long bridge",
-   "Ventricular arrhythmia associated with the bridged segment",
-   "Persistent symptoms despite optimal rate and contractility control",
-   "Ischaemic event in a young patient without atherosclerotic risk factors"
-  ],
-  "prognosis": "The natural history is generally benign with normal life expectancy in the majority; adverse events are rare and largely confined to deep, long bridges or those with proven ischaemia.",
-  "pitfalls": [
-   "Overtreating an incidental bridge and attributing unrelated chest pain to it",
-   "Using nitrates, which can worsen systolic compression and symptoms",
-   "Failing to control heart rate, allowing tachycardia to shorten diastolic perfusion time",
-   "Ignoring coexisting fixed atherosclerotic disease proximal to the bridge"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe the majority, who have a benign incidental bridge requiring no treatment",
-   "Use negative chronotropic and inotropic agents, beta-blockers or non-dihydropyridine calcium-channel blockers, as first-line therapy for symptomatic ischaemia to prolong diastolic perfusion time",
-   "Avoid nitrates and pure vasodilators, which can accentuate systolic compression and worsen symptoms",
-   "Address atherosclerotic risk factors, as the segment proximal to the bridge is prone to plaque formation",
-   "Reserve surgical myotomy (unroofing) or coronary bypass for refractory symptoms with documented ischaemia",
-   "Investigate persistent symptoms with stress or perfusion imaging and intracoronary physiological indices to confirm functional significance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myocardial_bridging-pathway",
-   "title": "Myocardial bridging: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed during systole",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Documented exertional ischaemia attributable to a deep or long bridge",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Coronary angiography demonstrating systolic compression with diastolic relaxation, Coronary CT angiography showing the intramyocardial segment, Intravascular imaging or physiological indices to assess functional"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe the majority, who have a benign incidental bridge requiring no treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overtreating an incidental bridge and attributing unrelated chest pain to it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myocardial bridging."
-  }
- ],
- "tables": [
-  {
-   "id": "myocardial_bridging-matrix",
-   "title": "Myocardial bridging: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed during systole",
+      "Angiography shows systolic narrowing that relaxes in diastole, the milking effect, since most coronary perfusion occurs in diastole",
+      "The overwhelming majority are benign incidental findings with a favourable natural history",
+      "Symptomatic cases may report exertional chest pain, and rarely arrhythmia or ischaemic events are attributed to deep or long bridges",
+      "Diastolic flow disturbance and a persistent early-diastolic delay in relaxation can occasionally impair perfusion",
+      "Tachycardia shortens diastole and can unmask or worsen symptoms by reducing perfusion time",
+      "Most patients need reassurance only; medical therapy that reduces contractility and heart rate is first-line, with intervention reserved for refractory, well-documented ischaemia"
     ],
-    [
-     "Key Investigations",
-     "Coronary angiography demonstrating systolic compression with diastolic relaxation, Coronary CT angiography showing the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myocardial bridging occurs when a portion of an epicardial coronary artery, most often the mid left anterior descending, takes an intramuscular course so that overlying myocardium compresses it during systole. Because coronary perfusion is predominantly diastolic, the systolic compression is usually of little consequence, which explains why most bridges are benign. In deeper or longer bridges the compression can persist into early diastole and a phase lag in vessel re-expansion may transiently reduce flow, and tachycardia further curtails diastolic filling time. Local wall stress at the bridge entrance may also predispose the proximal segment to atherosclerosis. The net functional effect ranges from none in the great majority to occasional demand ischaemia in a minority.",
+    "additionalDifferentials": [
+      "Obstructive coronary atherosclerosis",
+      "Coronary vasospasm",
+      "Anomalous coronary artery origin or course",
+      "Microvascular angina",
+      "Hypertrophic cardiomyopathy with demand ischaemia",
+      "Non-cardiac chest pain"
     ],
-    [
-     "Primary Differentials",
-     "Obstructive coronary atherosclerosis, Coronary vasospasm, Anomalous coronary artery origin or course",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Coronary angiography demonstrating systolic compression with diastolic relaxation",
+      "Coronary CT angiography showing the intramyocardial segment",
+      "Intravascular imaging or physiological indices to assess functional significance in selected cases",
+      "Stress testing or perfusion imaging to document inducible ischaemia",
+      "Echocardiography to exclude hypertrophic cardiomyopathy",
+      "Electrocardiogram during symptoms"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe the majority, who have a benign incidental bridge requiring no treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Documented exertional ischaemia attributable to a deep or long bridge",
+      "Ventricular arrhythmia associated with the bridged segment",
+      "Persistent symptoms despite optimal rate and contractility control",
+      "Ischaemic event in a young patient without atherosclerotic risk factors"
     ],
-    [
-     "Clinical Pitfall",
-     "Overtreating an incidental bridge and attributing unrelated chest pain to it",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is generally benign with normal life expectancy in the majority; adverse events are rare and largely confined to deep, long bridges or those with proven ischaemia.",
+    "pitfalls": [
+      "Overtreating an incidental bridge and attributing unrelated chest pain to it",
+      "Using nitrates, which can worsen systolic compression and symptoms",
+      "Failing to control heart rate, allowing tachycardia to shorten diastolic perfusion time",
+      "Ignoring coexisting fixed atherosclerotic disease proximal to the bridge"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe the majority, who have a benign incidental bridge requiring no treatment",
+      "Use negative chronotropic and inotropic agents, beta-blockers or non-dihydropyridine calcium-channel blockers, as first-line therapy for symptomatic ischaemia to prolong diastolic perfusion time",
+      "Avoid nitrates and pure vasodilators, which can accentuate systolic compression and worsen symptoms",
+      "Address atherosclerotic risk factors, as the segment proximal to the bridge is prone to plaque formation",
+      "Reserve surgical myotomy (unroofing) or coronary bypass for refractory symptoms with documented ischaemia",
+      "Investigate persistent symptoms with stress or perfusion imaging and intracoronary physiological indices to confirm functional significance"
     ]
-   ],
-   "caption": "Overview comparison matrix for myocardial bridging."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myocardial-bridging-real-image",
-   "title": "Myocardial bridging: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "myocardial_bridging-pathway",
+      "title": "Myocardial bridging: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed during systole",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Documented exertional ischaemia attributable to a deep or long bridge",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Coronary angiography demonstrating systolic compression with diastolic relaxation, Coronary CT angiography showing the intramyocardial segment, Intravascular imaging or physiological indices to assess functional"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe the majority, who have a benign incidental bridge requiring no treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overtreating an incidental bridge and attributing unrelated chest pain to it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myocardial bridging."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myocardial_bridging-matrix",
+      "title": "Myocardial bridging: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A segment of an epicardial coronary artery, usually the mid left anterior descending, dips into the myocardium and is compressed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Coronary angiography demonstrating systolic compression with diastolic relaxation, Coronary CT angiography showing the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Obstructive coronary atherosclerosis, Coronary vasospasm, Anomalous coronary artery origin or course",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe the majority, who have a benign incidental bridge requiring no treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overtreating an incidental bridge and attributing unrelated chest pain to it",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myocardial bridging."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myocardial_bridging-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Coronary angiography",
+          "cells": [
+            {
+              "text": "Systolic compression with diastolic relaxation, the milking effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary CT angiography",
+          "cells": [
+            {
+              "text": "The intramyocardial segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravascular imaging or physiological indices",
+          "cells": [
+            {
+              "text": "Functional significance in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress testing or perfusion imaging",
+          "cells": [
+            {
+              "text": "Documents inducible ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Excludes hypertrophic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myocardial_bridging-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive coronary atherosclerosis",
+          "cells": [
+            {
+              "text": "Fixed atherosclerosis proximal to the bridge can coexist and needs addressing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy with demand ischaemia",
+          "cells": [
+            {
+              "text": "Excluded by echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-cardiac chest pain",
+          "cells": [
+            {
+              "text": "Chest pain unrelated to the bridge should not be attributed to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myocardial_bridging-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "The majority have a benign incidental bridge needing no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Negative chronotropic and inotropic agents",
+          "cells": [
+            {
+              "text": "Beta-blockers or non-dihydropyridine calcium-channel blockers first line for symptomatic ischaemia, prolonging diastole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid nitrates and pure vasodilators",
+          "cells": [
+            {
+              "text": "Can accentuate systolic compression and worsen symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor control",
+          "cells": [
+            {
+              "text": "The segment proximal to the bridge is prone to plaque formation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical unroofing or bypass",
+          "cells": [
+            {
+              "text": "Reserved for refractory symptoms with documented ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional investigation",
+          "cells": [
+            {
+              "text": "Stress or perfusion imaging and intracoronary indices for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myocardial_bridging-dx-mgmt",
+      "title": "Diagnosis and management of Myocardial bridging",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional chest pain; angiography shows systolic narrowing that relaxes in diastole",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (exertional ischaemia from a deep bridge, ventricular arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review; treat ischaemia and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Coronary CT angiography, stress or perfusion imaging, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inducible ischaemia documented and attributable to the bridged segment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-examine for atherosclerosis, vasospasm or non-cardiac chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe the majority with a benign incidental bridge",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockers or non-dihydropyridine calcium-channel blockers for symptomatic ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid nitrates and pure vasodilators, which accentuate compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical unroofing or bypass for refractory symptoms with documented ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally benign with normal life expectancy; adverse events confined to deep bridges",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

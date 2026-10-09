@@ -1,178 +1,485 @@
 {
- "id": "lactational_mastitis",
- "name": "Lactational Mastitis",
- "aliases": [
-  "lactational mastitis",
-  "puerperal mastitis",
-  "breastfeeding mastitis",
-  "postpartum mastitis"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a tender, hot, erythematous, wedge-shaped area often accompanied by fever and flu-like malaise",
-   "It typically begins with milk stasis from ineffective or infrequent drainage, which then becomes secondarily infected, most often by Staphylococcus aureus entering through a cracked or damaged nipple",
-   "Continued effective milk removal is the cornerstone of treatment; breastfeeding from the affected side should continue and is safe for the infant",
-   "Supportive measures include frequent feeding or expression, correcting attachment and positioning, warmth before feeds and cold after for comfort, adequate hydration, rest, and simple analgesia",
-   "Antibiotics active against Staphylococcus aureus are indicated when symptoms are severe, systemic, or fail to improve within a short period of conservative management, or when a nipple fissure is infected",
-   "A localised fluctuant, non-resolving mass suggests a breast abscess, which requires drainage by needle aspiration or incision alongside antibiotics",
-   "Failure to improve with appropriate treatment should prompt consideration of an abscess or, in a non-lactating or persistent case, inflammatory breast cancer",
-   "Prevention centres on good breastfeeding technique, ensuring full drainage, avoiding abrupt weaning, and prompt attention to nipple trauma",
-   "Recurrent mastitis warrants review of feeding technique and evaluation for a persistent focus or underlying breast pathology"
+  "id": "lactational_mastitis",
+  "name": "Lactational Mastitis",
+  "aliases": [
+    "lactational mastitis",
+    "puerperal mastitis",
+    "breastfeeding mastitis",
+    "postpartum mastitis"
   ],
-  "pathophysiology": "Inadequate or infrequent milk drainage leads to milk stasis and rising intraductal pressure, causing milk to leak into the surrounding stroma and provoke a local inflammatory response. Nipple trauma, commonly from poor latch, provides a portal of entry for skin flora, predominantly Staphylococcus aureus, so the stagnant milk becomes a culture medium and infection is established. If untreated, the localised infection can organise into a walled-off collection of pus, forming a breast abscess. The wedge-shaped distribution reflects involvement of a segment of the ductal-lobular system.",
-  "additionalDifferentials": [
-   "Breast abscess",
-   "Blocked (plugged) duct without infection",
-   "Engorgement",
-   "Inflammatory breast carcinoma (especially if non-lactating or non-resolving)",
-   "Candidal nipple or ductal infection causing pain",
-   "Galactocele"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases",
-   "Breast milk culture and sensitivity where infection is severe, recurrent, hospital-associated, or unresponsive to first-line antibiotics",
-   "Breast ultrasound to identify or exclude an abscess when a fluctuant or non-resolving mass is present",
-   "Needle aspiration of a suspected abscess for both diagnosis and drainage with culture of the aspirate",
-   "Consideration of biopsy and specialist referral if inflammatory changes fail to resolve, to exclude malignancy"
-  ],
-  "redFlags": [
-   "A fluctuant or non-resolving mass indicating breast abscess requiring drainage",
-   "Systemic sepsis with high fever, rigors, tachycardia, or hypotension",
-   "Failure to respond to appropriate antibiotics and milk drainage within a few days",
-   "Persistent inflammatory changes, skin thickening, or peau d'orange raising concern for inflammatory breast cancer",
-   "Overlying skin breakdown or rapidly spreading erythema"
-  ],
-  "prognosis": "Most cases resolve quickly with effective milk removal and, when needed, appropriate antibiotics, and breastfeeding can continue throughout. Delayed or inadequate treatment increases the risk of abscess formation, which then requires drainage. Recurrence is uncommon when feeding technique is optimised, and the majority of women recover fully without lasting effect on lactation.",
-  "pitfalls": [
-   "Advising cessation of breastfeeding, which worsens stasis and prolongs the illness",
-   "Failing to recognise and drain a breast abscess, treating with antibiotics alone",
-   "Overlooking inflammatory breast cancer in non-lactating or persistent presentations",
-   "Not addressing the underlying poor attachment or drainage, leading to recurrence",
-   "Delaying antibiotics when systemic or severe features are present"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct attachment and positioning",
-   "Add supportive measures: warmth before feeds, cold compresses afterwards, simple analgesia such as paracetamol or ibuprofen, rest and adequate hydration",
-   "Prescribe antibiotics active against Staphylococcus aureus, such as flucloxacillin or a macrolide or clindamycin if penicillin-allergic, when symptoms are severe, systemic, associated with an infected fissure or failing to improve with conservative care",
-   "Investigate a fluctuant or non-resolving mass with ultrasound and drain a confirmed abscess by needle aspiration or incision, sending pus for culture",
-   "Send breast-milk culture in severe, recurrent, hospital-associated or unresponsive infection to guide antibiotic choice",
-   "Provide lactation-consultant support and refer for biopsy to exclude inflammatory carcinoma if inflammation does not resolve",
-   "Safety-net with clear advice to return if symptoms worsen or a collection develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lactational_mastitis-pathway",
-   "title": "Lactational Mastitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a tender, hot, erythematous, wedge-shaped area often accompanied by fever and flu-like malaise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A fluctuant or non-resolving mass indicating breast abscess requiring drainage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases, Breast milk culture and sensitivity where infection is severe, recurrent, hospital-associated, or unresponsive to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct attachment and positioning"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Advising cessation of breastfeeding, which worsens stasis and prolongs the illness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lactational mastitis."
-  }
- ],
- "tables": [
-  {
-   "id": "lactational_mastitis-matrix",
-   "title": "Lactational Mastitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a tender, hot, erythematous, wedge-shaped area often accompanied by fever and flu-like malaise",
+      "It typically begins with milk stasis from ineffective or infrequent drainage, which then becomes secondarily infected, most often by Staphylococcus aureus entering through a cracked or damaged nipple",
+      "Continued effective milk removal is the cornerstone of treatment; breastfeeding from the affected side should continue and is safe for the infant",
+      "Supportive measures include frequent feeding or expression, correcting attachment and positioning, warmth before feeds and cold after for comfort, adequate hydration, rest, and simple analgesia",
+      "Antibiotics active against Staphylococcus aureus are indicated when symptoms are severe, systemic, or fail to improve within a short period of conservative management, or when a nipple fissure is infected",
+      "A localised fluctuant, non-resolving mass suggests a breast abscess, which requires drainage by needle aspiration or incision alongside antibiotics",
+      "Failure to improve with appropriate treatment should prompt consideration of an abscess or, in a non-lactating or persistent case, inflammatory breast cancer",
+      "Prevention centres on good breastfeeding technique, ensuring full drainage, avoiding abrupt weaning, and prompt attention to nipple trauma",
+      "Recurrent mastitis warrants review of feeding technique and evaluation for a persistent focus or underlying breast pathology"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases, Breast milk culture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inadequate or infrequent milk drainage leads to milk stasis and rising intraductal pressure, causing milk to leak into the surrounding stroma and provoke a local inflammatory response. Nipple trauma, commonly from poor latch, provides a portal of entry for skin flora, predominantly Staphylococcus aureus, so the stagnant milk becomes a culture medium and infection is established. If untreated, the localised infection can organise into a walled-off collection of pus, forming a breast abscess. The wedge-shaped distribution reflects involvement of a segment of the ductal-lobular system.",
+    "additionalDifferentials": [
+      "Breast abscess",
+      "Blocked (plugged) duct without infection",
+      "Engorgement",
+      "Inflammatory breast carcinoma (especially if non-lactating or non-resolving)",
+      "Candidal nipple or ductal infection causing pain",
+      "Galactocele"
     ],
-    [
-     "Primary Differentials",
-     "Breast abscess, Blocked (plugged) duct without infection, Engorgement",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases",
+      "Breast milk culture and sensitivity where infection is severe, recurrent, hospital-associated, or unresponsive to first-line antibiotics",
+      "Breast ultrasound to identify or exclude an abscess when a fluctuant or non-resolving mass is present",
+      "Needle aspiration of a suspected abscess for both diagnosis and drainage with culture of the aspirate",
+      "Consideration of biopsy and specialist referral if inflammatory changes fail to resolve, to exclude malignancy"
     ],
-    [
-     "Management Strategy",
-     "Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct",
-     "Core treatment modality"
+    "redFlags": [
+      "A fluctuant or non-resolving mass indicating breast abscess requiring drainage",
+      "Systemic sepsis with high fever, rigors, tachycardia, or hypotension",
+      "Failure to respond to appropriate antibiotics and milk drainage within a few days",
+      "Persistent inflammatory changes, skin thickening, or peau d'orange raising concern for inflammatory breast cancer",
+      "Overlying skin breakdown or rapidly spreading erythema"
     ],
-    [
-     "Clinical Pitfall",
-     "Advising cessation of breastfeeding, which worsens stasis and prolongs the illness",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve quickly with effective milk removal and, when needed, appropriate antibiotics, and breastfeeding can continue throughout. Delayed or inadequate treatment increases the risk of abscess formation, which then requires drainage. Recurrence is uncommon when feeding technique is optimised, and the majority of women recover fully without lasting effect on lactation.",
+    "pitfalls": [
+      "Advising cessation of breastfeeding, which worsens stasis and prolongs the illness",
+      "Failing to recognise and drain a breast abscess, treating with antibiotics alone",
+      "Overlooking inflammatory breast cancer in non-lactating or persistent presentations",
+      "Not addressing the underlying poor attachment or drainage, leading to recurrence",
+      "Delaying antibiotics when systemic or severe features are present"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct attachment and positioning",
+      "Add supportive measures: warmth before feeds, cold compresses afterwards, simple analgesia such as paracetamol or ibuprofen, rest and adequate hydration",
+      "Prescribe antibiotics active against Staphylococcus aureus, such as flucloxacillin or a macrolide or clindamycin if penicillin-allergic, when symptoms are severe, systemic, associated with an infected fissure or failing to improve with conservative care",
+      "Investigate a fluctuant or non-resolving mass with ultrasound and drain a confirmed abscess by needle aspiration or incision, sending pus for culture",
+      "Send breast-milk culture in severe, recurrent, hospital-associated or unresponsive infection to guide antibiotic choice",
+      "Provide lactation-consultant support and refer for biopsy to exclude inflammatory carcinoma if inflammation does not resolve",
+      "Safety-net with clear advice to return if symptoms worsen or a collection develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for lactational mastitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lactational-mastitis-real-image",
-   "title": "Lactational Mastitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lactational_mastitis-pathway",
+      "title": "Lactational Mastitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a tender, hot, erythematous, wedge-shaped area often accompanied by fever and flu-like malaise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A fluctuant or non-resolving mass indicating breast abscess requiring drainage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases, Breast milk culture and sensitivity where infection is severe, recurrent, hospital-associated, or unresponsive to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct attachment and positioning"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Advising cessation of breastfeeding, which worsens stasis and prolongs the illness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lactational mastitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lactational_mastitis-matrix",
+      "title": "Lactational Mastitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lactational mastitis is an inflammatory, usually infective, condition of the breast in a breastfeeding woman, presenting with a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis is usually sufficient; investigations are reserved for atypical or non-resolving cases, Breast milk culture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Breast abscess, Blocked (plugged) duct without infection, Engorgement",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise effective milk removal - continue breastfeeding from the affected breast, feed or express frequently, and correct",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Advising cessation of breastfeeding, which worsens stasis and prolongs the illness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lactational mastitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lactational_mastitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Usually sufficient; investigations are for atypical or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast milk culture and sensitivity",
+          "cells": [
+            {
+              "text": "Severe, recurrent, hospital-associated or unresponsive infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast ultrasound",
+          "cells": [
+            {
+              "text": "Abscess, when a fluctuant or non-resolving mass is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration with culture",
+          "cells": [
+            {
+              "text": "Diagnosis and drainage of a suspected abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and specialist referral",
+          "cells": [
+            {
+              "text": "Excludes malignancy if inflammatory changes do not resolve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lactational_mastitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast abscess",
+          "cells": [
+            {
+              "text": "Fluctuant or non-resolving mass; needs drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blocked duct without infection",
+          "cells": [
+            {
+              "text": "Milk stasis; effective milk removal is the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory breast carcinoma",
+          "cells": [
+            {
+              "text": "Persistent inflammation, skin thickening or peau d'orange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactocele",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lactational_mastitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Effective milk removal",
+          "cells": [
+            {
+              "text": "Continue breastfeeding from the affected breast; feed or express frequently; correct attachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive measures",
+          "cells": [
+            {
+              "text": "Warmth before feeds, cold compresses after, simple analgesia, rest and hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics active against Staphylococcus aureus",
+          "cells": [
+            {
+              "text": "Flucloxacillin; a macrolide or clindamycin if penicillin-allergic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess management",
+          "cells": [
+            {
+              "text": "Ultrasound; needle aspiration or incision, with pus sent for culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast milk culture",
+          "cells": [
+            {
+              "text": "Severe, recurrent or unresponsive infection, to guide antibiotic choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactation support and biopsy",
+          "cells": [
+            {
+              "text": "Lactation consultant; biopsy if inflammation does not resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety-net advice",
+          "cells": [
+            {
+              "text": "Return if symptoms worsen or a collection develops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lactational_mastitis-dx-mgmt",
+      "title": "Diagnosis and management of Lactational Mastitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender, hot, red, wedge-shaped breast area in a breastfeeding woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fluctuant mass, sepsis, no response in days, skin changes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage of abscess and treatment of systemic sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; ultrasound for a mass; culture of milk or aspirate if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the inflammation settling with milk removal and antibiotics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider abscess, duct blockage or inflammatory breast carcinoma; biopsy if not resolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Continue breastfeeding from the affected breast; feed or express frequently",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warmth before feeds, cold after, analgesia and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics active against S aureus when symptoms are severe or not improving",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain a confirmed abscess by needle aspiration or incision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lactation support and safety-net advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve quickly with milk removal and antibiotics; breastfeeding continues",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

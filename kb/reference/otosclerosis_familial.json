@@ -1,173 +1,478 @@
 {
- "id": "otosclerosis_familial",
- "name": "Familial otosclerosis",
- "aliases": [
-  "hereditary otosclerosis",
-  "otospongiosis",
-  "familial stapes fixation",
-  "cochlear otosclerosis"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and reduced penetrance",
-   "Progressive conductive loss results from abnormal bone remodelling fixing the stapes footplate at the oval window",
-   "Typical audiometric features include a low-frequency conductive loss and the Carhart notch, an apparent dip in bone conduction around 2 kHz that resolves after successful surgery",
-   "Cochlear (retrofenestral) otosclerosis can add a sensorineural component producing a mixed loss",
-   "Tympanometry usually shows a normal or shallow trace with absent acoustic reflexes rather than the effusion pattern of middle-ear disease",
-   "Options include hearing aids or stapes surgery (stapedotomy), with cochlear implantation reserved for advanced cochlear otosclerosis",
-   "Onset or progression is often noted during pregnancy, and there is a female predominance"
+  "id": "otosclerosis_familial",
+  "name": "Familial otosclerosis",
+  "aliases": [
+    "hereditary otosclerosis",
+    "otospongiosis",
+    "familial stapes fixation",
+    "cochlear otosclerosis"
   ],
-  "pathophysiology": "Otosclerosis is a disorder of the otic capsule bone in which normal lamellar bone is replaced by disorganised, initially vascular spongy bone (otospongiosis) that later scleroses. When this remodelling involves the region of the oval window it progressively fixes the stapes footplate, impairing ossicular movement and producing conductive hearing loss; the Carhart notch reflects the mechanical effect of fixation on bone-conduction measurement rather than a true cochlear deficit. When the process extends into the cochlear endosteum (cochlear otosclerosis) it can damage the inner ear and add a sensorineural component. A familial predisposition with autosomal dominant inheritance and incomplete penetrance is well recognised, and hormonal factors are thought to influence progression.",
-  "additionalDifferentials": [
-   "Enlarged vestibular aqueduct and other third-window lesions causing a pseudoconductive gap",
-   "Superior semicircular canal dehiscence",
-   "Ossicular chain fixation or discontinuity",
-   "Chronic otitis media and middle-ear effusion",
-   "X-linked deafness with stapes gusher (POU3F4)",
-   "Paget disease and other otic capsule dysplasias"
-  ],
-  "additionalInvestigations": [
-   "Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch",
-   "Tympanometry and acoustic reflex testing to distinguish fixation from effusion",
-   "Speech audiometry to guide surgical versus amplification decisions",
-   "High-resolution temporal bone imaging to confirm otospongiotic foci and exclude third-window lesions",
-   "Family history and pedigree assessment",
-   "Cochlear function assessment where a mixed or sensorineural component is present"
-  ],
-  "redFlags": [
-   "A conductive gap with a normal tympanic membrane and normal tympanogram, which should prompt exclusion of a third-window lesion before surgery",
-   "Rapidly progressive sensorineural loss suggesting cochlear otosclerosis",
-   "Vertigo or a large air-bone gap pattern atypical for stapes fixation",
-   "Sudden hearing change after surgery indicating a complication"
-  ],
-  "prognosis": "Progression is gradual, and stapes surgery closes the air-bone gap in the majority with durable benefit, while advanced cochlear otosclerosis may still be rehabilitated with cochlear implantation.",
-  "pitfalls": [
-   "Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence",
-   "Overlooking a coexisting sensorineural component from cochlear otosclerosis",
-   "Misreading absent reflexes and a shallow tympanogram as middle-ear effusion",
-   "Failing to counsel about the small risk of profound sensorineural loss after stapes surgery"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "Scott-Brown's Otorhinolaryngology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in the majority",
-   "Hearing aids as an effective alternative for patients declining or unsuitable for surgery",
-   "Cochlear implantation reserved for advanced cochlear (retrofenestral) otosclerosis with a severe sensorineural component",
-   "Pure-tone and speech audiometry to guide the choice between surgery and amplification",
-   "Family history and pedigree assessment given the autosomal dominant inheritance with reduced penetrance",
-   "Monitor progression, including any developing sensorineural component, and counsel on the influence of hormonal factors such as pregnancy on disease activity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "otosclerosis_familial-pathway",
-   "title": "Familial otosclerosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and reduced penetrance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A conductive gap with a normal tympanic membrane and normal tympanogram, which should prompt exclusion of a third-window lesion before surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch, Tympanometry and acoustic reflex testing to distinguish fixation from effusion, Speech audiometry to guide surgical versus amplification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in the majority"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial otosclerosis."
-  }
- ],
- "tables": [
-  {
-   "id": "otosclerosis_familial-matrix",
-   "title": "Familial otosclerosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and reduced penetrance",
+      "Progressive conductive loss results from abnormal bone remodelling fixing the stapes footplate at the oval window",
+      "Typical audiometric features include a low-frequency conductive loss and the Carhart notch, an apparent dip in bone conduction around 2 kHz that resolves after successful surgery",
+      "Cochlear (retrofenestral) otosclerosis can add a sensorineural component producing a mixed loss",
+      "Tympanometry usually shows a normal or shallow trace with absent acoustic reflexes rather than the effusion pattern of middle-ear disease",
+      "Options include hearing aids or stapes surgery (stapedotomy), with cochlear implantation reserved for advanced cochlear otosclerosis",
+      "Onset or progression is often noted during pregnancy, and there is a female predominance"
     ],
-    [
-     "Key Investigations",
-     "Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch, Tympanometry and acoustic reflex testing to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Otosclerosis is a disorder of the otic capsule bone in which normal lamellar bone is replaced by disorganised, initially vascular spongy bone (otospongiosis) that later scleroses. When this remodelling involves the region of the oval window it progressively fixes the stapes footplate, impairing ossicular movement and producing conductive hearing loss; the Carhart notch reflects the mechanical effect of fixation on bone-conduction measurement rather than a true cochlear deficit. When the process extends into the cochlear endosteum (cochlear otosclerosis) it can damage the inner ear and add a sensorineural component. A familial predisposition with autosomal dominant inheritance and incomplete penetrance is well recognised, and hormonal factors are thought to influence progression.",
+    "additionalDifferentials": [
+      "Enlarged vestibular aqueduct and other third-window lesions causing a pseudoconductive gap",
+      "Superior semicircular canal dehiscence",
+      "Ossicular chain fixation or discontinuity",
+      "Chronic otitis media and middle-ear effusion",
+      "X-linked deafness with stapes gusher (POU3F4)",
+      "Paget disease and other otic capsule dysplasias"
     ],
-    [
-     "Primary Differentials",
-     "Enlarged vestibular aqueduct and other third-window lesions causing a pseudoconductive gap, Superior semicircular canal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch",
+      "Tympanometry and acoustic reflex testing to distinguish fixation from effusion",
+      "Speech audiometry to guide surgical versus amplification decisions",
+      "High-resolution temporal bone imaging to confirm otospongiotic foci and exclude third-window lesions",
+      "Family history and pedigree assessment",
+      "Cochlear function assessment where a mixed or sensorineural component is present"
     ],
-    [
-     "Management Strategy",
-     "Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in",
-     "Core treatment modality"
+    "redFlags": [
+      "A conductive gap with a normal tympanic membrane and normal tympanogram, which should prompt exclusion of a third-window lesion before surgery",
+      "Rapidly progressive sensorineural loss suggesting cochlear otosclerosis",
+      "Vertigo or a large air-bone gap pattern atypical for stapes fixation",
+      "Sudden hearing change after surgery indicating a complication"
     ],
-    [
-     "Clinical Pitfall",
-     "Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is gradual, and stapes surgery closes the air-bone gap in the majority with durable benefit, while advanced cochlear otosclerosis may still be rehabilitated with cochlear implantation.",
+    "pitfalls": [
+      "Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence",
+      "Overlooking a coexisting sensorineural component from cochlear otosclerosis",
+      "Misreading absent reflexes and a shallow tympanogram as middle-ear effusion",
+      "Failing to counsel about the small risk of profound sensorineural loss after stapes surgery"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "Scott-Brown's Otorhinolaryngology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in the majority",
+      "Hearing aids as an effective alternative for patients declining or unsuitable for surgery",
+      "Cochlear implantation reserved for advanced cochlear (retrofenestral) otosclerosis with a severe sensorineural component",
+      "Pure-tone and speech audiometry to guide the choice between surgery and amplification",
+      "Family history and pedigree assessment given the autosomal dominant inheritance with reduced penetrance",
+      "Monitor progression, including any developing sensorineural component, and counsel on the influence of hormonal factors such as pregnancy on disease activity"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial otosclerosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "otosclerosis-familial-real-image",
-   "title": "Familial otosclerosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "otosclerosis_familial-pathway",
+      "title": "Familial otosclerosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and reduced penetrance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A conductive gap with a normal tympanic membrane and normal tympanogram, which should prompt exclusion of a third-window lesion before surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch, Tympanometry and acoustic reflex testing to distinguish fixation from effusion, Speech audiometry to guide surgical versus amplification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in the majority"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial otosclerosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "otosclerosis_familial-matrix",
+      "title": "Familial otosclerosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common cause of acquired conductive hearing loss in adults, often clustering in families with an autosomal dominant pattern and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure-tone audiometry demonstrating conductive or mixed loss with a Carhart notch, Tympanometry and acoustic reflex testing to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Enlarged vestibular aqueduct and other third-window lesions causing a pseudoconductive gap, Superior semicircular canal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stapedotomy to close the air-bone gap by restoring sound transmission past the fixed stapes footplate, with durable benefit in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Operating on a presumed stapes fixation when the gap is actually from a third-window lesion such as canal dehiscence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial otosclerosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otosclerosis_familial-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive or mixed loss with a Carhart notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and acoustic reflexes",
+          "cells": [
+            {
+              "text": "Fixation versus effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech audiometry",
+          "cells": [
+            {
+              "text": "Guides surgery versus amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution temporal bone imaging",
+          "cells": [
+            {
+              "text": "Otospongiotic foci; third-window lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern with reduced penetrance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear function assessment",
+          "cells": [
+            {
+              "text": "A mixed or sensorineural component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis_familial-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enlarged vestibular aqueduct",
+          "cells": [
+            {
+              "text": "Pseudoconductive gap from a third-window lesion; excluded before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior semicircular canal dehiscence",
+          "cells": [
+            {
+              "text": "A third-window lesion that must be excluded before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic otitis media or effusion",
+          "cells": [
+            {
+              "text": "Effusion gives a different pattern from the shallow trace with absent reflexes here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis_familial-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stapedotomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Closes the air-bone gap by restoring transmission past the fixed footplate; durable in most"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "An effective alternative for patients declining or unsuitable for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reserved for advanced cochlear otosclerosis with a severe sensorineural component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedigree review",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Autosomal dominant inheritance with reduced penetrance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Progression, including any sensorineural component; hormonal influence such as pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otosclerosis_familial-dx-mgmt",
+      "title": "Diagnosis and management of Familial otosclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Familial conductive hearing loss with normal drum in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (gap with normal drum needing third-window check, rapid loss or vertigo)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude third-window lesion before any stapes surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry with Carhart notch, tympanometry and reflexes, temporal bone imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the gap from otospongiosis, with third-window lesions excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enlarged vestibular aqueduct, canal dehiscence or ossicular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stapedotomy to close the air-bone gap, with durable benefit in most",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids as an effective alternative for those declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cochlear implantation for advanced cochlear otosclerosis with severe sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Family pedigree review, given autosomal dominant inheritance with reduced penetrance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor progression and counsel on pregnancy-related changes in disease activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Gradual progression; stapes surgery usually restores hearing; cochlear loss needs implant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

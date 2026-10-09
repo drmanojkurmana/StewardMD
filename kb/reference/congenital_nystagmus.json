@@ -1,176 +1,454 @@
 {
- "id": "congenital_nystagmus",
- "name": "Infantile (congenital) nystagmus",
- "aliases": [
-  "infantile nystagmus syndrome",
-  "INS",
-  "congenital nystagmus",
-  "congenital motor nystagmus"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Strabismus & Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Von Noorden's Binocular Vision and Ocular Motility",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on up- or down-gaze (uniplanar)",
-   "A null zone exists where the oscillation dampens and vision is best, prompting a compensatory anomalous head posture",
-   "The nystagmus characteristically dampens with convergence and increases with fixation effort or anxiety",
-   "Oscillopsia is usually absent, in contrast to acquired nystagmus",
-   "Eye-movement recordings show characteristic waveforms with an accelerating (increasing-velocity) slow phase",
-   "It may be idiopathic (motor) or sensory, the latter associated with albinism, achromatopsia, Leber congenital amaurosis, optic nerve hypoplasia, or aniridia",
-   "A careful search for an afferent visual defect is essential, as sensory causes carry different prognoses",
-   "Management includes correcting refractive error and amblyopia, prisms to shift the null zone toward primary position, and null-zone-repositioning surgery (Kestenbaum-Anderson) for a significant head posture"
+  "id": "congenital_nystagmus",
+  "name": "Infantile (congenital) nystagmus",
+  "aliases": [
+    "infantile nystagmus syndrome",
+    "INS",
+    "congenital nystagmus",
+    "congenital motor nystagmus"
   ],
-  "pathophysiology": "Infantile nystagmus reflects instability of the ocular motor fixation-maintenance system, producing involuntary rhythmic to-and-fro eye movements from early life. In sensory forms an afferent visual deficit such as albinism, a retinal dystrophy, or optic nerve hypoplasia degrades the fixation signal that normally stabilises gaze; in idiopathic (motor) forms the afferent pathway is intact and the defect lies in ocular motor control itself. A null zone develops where slow-phase drift is minimised, and the brain adopts a head turn to keep the eyes in that position, optimising visual acuity.",
-  "additionalDifferentials": [
-   "Acquired nystagmus, which is neurological and associated with oscillopsia",
-   "Latent (fusion maldevelopment) nystagmus",
-   "Spasmus nutans with nystagmus, head nodding, and torticollis",
-   "Opsoclonus, as in neuroblastoma-associated syndrome",
-   "Nystagmus of oculocutaneous or ocular albinism",
-   "Sensory nystagmus from congenital cataract or other media opacity",
-   "Downbeat or gaze-evoked nystagmus of posterior fossa disease"
-  ],
-  "additionalInvestigations": [
-   "Detailed ocular and orthoptic examination including head-posture and null-zone assessment",
-   "Cycloplegic refraction and best-corrected visual acuity",
-   "Slit-lamp and dilated fundus examination for iris transillumination, foveal hypoplasia, and optic nerve anomalies",
-   "Electrodiagnostic testing (electroretinogram and visual evoked potentials) for suspected sensory causes",
-   "Eye-movement recording to characterise the waveform where available",
-   "Neuroimaging if features suggest an acquired or neurological cause"
-  ],
-  "redFlags": [
-   "Oscillopsia, vertical or dissociated nystagmus, or other neurological signs suggesting acquired disease",
-   "Asymmetric or unilateral nystagmus with head nodding requiring exclusion of intracranial pathology",
-   "Poor vision suggesting a significant underlying retinal or optic nerve disorder",
-   "Rapid change in the nystagmus pattern or new onset in an older child"
-  ],
-  "prognosis": "Idiopathic infantile nystagmus is compatible with useful, often good, vision that tends to stabilise with age; visual outcome in sensory forms is determined by the underlying afferent disorder, and head-posture surgery can meaningfully improve an abnormal head position.",
-  "pitfalls": [
-   "Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause",
-   "Failing to correct refractive error and treat amblyopia",
-   "Overlooking a subtle anomalous head posture that indicates a shiftable null zone",
-   "Misinterpreting a compensatory head turn as a primary musculoskeletal (torticollis) problem"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Von Noorden's Binocular Vision and Ocular Motility"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal",
-   "Manage amblyopia and treat any underlying sensory cause such as albinism or a retinal dystrophy identified on electrodiagnostics",
-   "Kestenbaum-Anderson eye-muscle surgery to shift the null zone and correct a compensatory anomalous head posture",
-   "Prisms to move the image toward the null zone or promote convergence damping",
-   "Low-vision aids and support where acuity is limited by a sensory cause",
-   "Ophthalmology and orthoptic follow-up through visual development",
-   "Genetic counselling where an inherited sensory or idiopathic cause is confirmed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_nystagmus-pathway",
-   "title": "Infantile (congenital) nystagmus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on up- or down-gaze (uniplanar)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Oscillopsia, vertical or dissociated nystagmus, or other neurological signs suggesting acquired disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed ocular and orthoptic examination including head-posture and null-zone assessment, Cycloplegic refraction and best-corrected visual acuity, Slit-lamp and dilated fundus examination for iris transillumination,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile (congenital) nystagmus."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_nystagmus-matrix",
-   "title": "Infantile (congenital) nystagmus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Strabismus & Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Von Noorden's Binocular Vision and Ocular Motility",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on up- or down-gaze (uniplanar)",
+      "A null zone exists where the oscillation dampens and vision is best, prompting a compensatory anomalous head posture",
+      "The nystagmus characteristically dampens with convergence and increases with fixation effort or anxiety",
+      "Oscillopsia is usually absent, in contrast to acquired nystagmus",
+      "Eye-movement recordings show characteristic waveforms with an accelerating (increasing-velocity) slow phase",
+      "It may be idiopathic (motor) or sensory, the latter associated with albinism, achromatopsia, Leber congenital amaurosis, optic nerve hypoplasia, or aniridia",
+      "A careful search for an afferent visual defect is essential, as sensory causes carry different prognoses",
+      "Management includes correcting refractive error and amblyopia, prisms to shift the null zone toward primary position, and null-zone-repositioning surgery (Kestenbaum-Anderson) for a significant head posture"
     ],
-    [
-     "Key Investigations",
-     "Detailed ocular and orthoptic examination including head-posture and null-zone assessment, Cycloplegic refraction and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile nystagmus reflects instability of the ocular motor fixation-maintenance system, producing involuntary rhythmic to-and-fro eye movements from early life. In sensory forms an afferent visual deficit such as albinism, a retinal dystrophy, or optic nerve hypoplasia degrades the fixation signal that normally stabilises gaze; in idiopathic (motor) forms the afferent pathway is intact and the defect lies in ocular motor control itself. A null zone develops where slow-phase drift is minimised, and the brain adopts a head turn to keep the eyes in that position, optimising visual acuity.",
+    "additionalDifferentials": [
+      "Acquired nystagmus, which is neurological and associated with oscillopsia",
+      "Latent (fusion maldevelopment) nystagmus",
+      "Spasmus nutans with nystagmus, head nodding, and torticollis",
+      "Opsoclonus, as in neuroblastoma-associated syndrome",
+      "Nystagmus of oculocutaneous or ocular albinism",
+      "Sensory nystagmus from congenital cataract or other media opacity",
+      "Downbeat or gaze-evoked nystagmus of posterior fossa disease"
     ],
-    [
-     "Primary Differentials",
-     "Acquired nystagmus, which is neurological and associated with oscillopsia, Latent (fusion maldevelopment) nystagmus, Spasmus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed ocular and orthoptic examination including head-posture and null-zone assessment",
+      "Cycloplegic refraction and best-corrected visual acuity",
+      "Slit-lamp and dilated fundus examination for iris transillumination, foveal hypoplasia, and optic nerve anomalies",
+      "Electrodiagnostic testing (electroretinogram and visual evoked potentials) for suspected sensory causes",
+      "Eye-movement recording to characterise the waveform where available",
+      "Neuroimaging if features suggest an acquired or neurological cause"
     ],
-    [
-     "Management Strategy",
-     "Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal",
-     "Core treatment modality"
+    "redFlags": [
+      "Oscillopsia, vertical or dissociated nystagmus, or other neurological signs suggesting acquired disease",
+      "Asymmetric or unilateral nystagmus with head nodding requiring exclusion of intracranial pathology",
+      "Poor vision suggesting a significant underlying retinal or optic nerve disorder",
+      "Rapid change in the nystagmus pattern or new onset in an older child"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Idiopathic infantile nystagmus is compatible with useful, often good, vision that tends to stabilise with age; visual outcome in sensory forms is determined by the underlying afferent disorder, and head-posture surgery can meaningfully improve an abnormal head position.",
+    "pitfalls": [
+      "Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause",
+      "Failing to correct refractive error and treat amblyopia",
+      "Overlooking a subtle anomalous head posture that indicates a shiftable null zone",
+      "Misinterpreting a compensatory head turn as a primary musculoskeletal (torticollis) problem"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Von Noorden's Binocular Vision and Ocular Motility"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal",
+      "Manage amblyopia and treat any underlying sensory cause such as albinism or a retinal dystrophy identified on electrodiagnostics",
+      "Kestenbaum-Anderson eye-muscle surgery to shift the null zone and correct a compensatory anomalous head posture",
+      "Prisms to move the image toward the null zone or promote convergence damping",
+      "Low-vision aids and support where acuity is limited by a sensory cause",
+      "Ophthalmology and orthoptic follow-up through visual development",
+      "Genetic counselling where an inherited sensory or idiopathic cause is confirmed"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile (congenital) nystagmus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-nystagmus-real-image",
-   "title": "Infantile (congenital) nystagmus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_nystagmus-pathway",
+      "title": "Infantile (congenital) nystagmus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on up- or down-gaze (uniplanar)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Oscillopsia, vertical or dissociated nystagmus, or other neurological signs suggesting acquired disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed ocular and orthoptic examination including head-posture and null-zone assessment, Cycloplegic refraction and best-corrected visual acuity, Slit-lamp and dilated fundus examination for iris transillumination,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile (congenital) nystagmus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_nystagmus-matrix",
+      "title": "Infantile (congenital) nystagmus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Onset is within the first months of life, and the nystagmus is typically conjugate, horizontal, and remains horizontal even on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed ocular and orthoptic examination including head-posture and null-zone assessment, Cycloplegic refraction and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired nystagmus, which is neurological and associated with oscillopsia, Latent (fusion maldevelopment) nystagmus, Spasmus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Full cycloplegic spectacle correction of refractive error to optimise the degraded fixation signal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all infantile nystagmus is benign and missing an underlying sensory or neurological cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile (congenital) nystagmus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Von Noorden's Binocular Vision and Ocular Motility",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_nystagmus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoptic examination with head-posture and null-zone assessment",
+          "cells": [
+            {
+              "text": "Null zone and compensatory head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp and dilated fundus examination",
+          "cells": [
+            {
+              "text": "Iris transillumination, foveal hypoplasia and optic nerve anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinogram and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Sensory causes assessed when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye-movement recording",
+          "cells": [
+            {
+              "text": "Waveform characterised where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_nystagmus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired nystagmus",
+          "cells": [
+            {
+              "text": "Neurological, with oscillopsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasmus nutans",
+          "cells": [
+            {
+              "text": "Nystagmus with head nodding and torticollis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory nystagmus from congenital cataract or media opacity",
+          "cells": [
+            {
+              "text": "Media opacity or retinal disease; electrodiagnostics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_nystagmus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Full cycloplegic spectacle correction",
+          "cells": [
+            {
+              "text": "Optimises the degraded fixation signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and sensory cause treatment",
+          "cells": [
+            {
+              "text": "Albinism or retinal dystrophy identified on electrodiagnostics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kestenbaum-Anderson eye-muscle surgery",
+          "cells": [
+            {
+              "text": "Shifts the null zone and corrects compensatory anomalous head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prisms",
+          "cells": [
+            {
+              "text": "Move the image toward the null zone or promote convergence damping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids",
+          "cells": [
+            {
+              "text": "Where acuity is limited by a sensory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Through visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where an inherited sensory or idiopathic cause is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_nystagmus-dx-mgmt",
+      "title": "Diagnosis and management of Infantile (congenital) nystagmus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected infantile nystagmus: involuntary eye oscillation from early infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (oscillopsia, asymmetric nystagmus, poor vision, new onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging for acquired or neurological causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Orthoptic and null-zone assessment; cycloplegic refraction; fundus; ERG and VEP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the nystagmus infantile with a sensory cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired nystagmus, spasmus nutans or posterior fossa disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full cycloplegic spectacle correction of refractive error",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat amblyopia and any underlying sensory cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Kestenbaum-Anderson surgery or prisms for compensatory head posture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-vision aids and orthoptic follow-up through visual development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Idiopathic form often has good vision that stabilises with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

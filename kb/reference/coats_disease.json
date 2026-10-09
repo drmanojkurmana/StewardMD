@@ -1,176 +1,461 @@
 {
- "id": "coats_disease",
- "name": "Coats disease (retinal telangiectasia)",
- "aliases": [
-  "Coats' disease",
-  "retinal telangiectasia",
-  "exudative retinopathy",
-  "Leber miliary aneurysms"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision detected incidentally or by a parent",
-   "Hallmark findings are retinal telangiectasia and aneurysmal (light-bulb) vessel dilatation with massive intraretinal and subretinal lipid (yellow exudate)",
-   "Exudation can progress to an exudative (non-rhegmatogenous) retinal detachment, which in advanced cases fills much of the vitreous cavity",
-   "A key differential is retinoblastoma, and distinguishing the two is critical because management and prognosis differ radically",
-   "Fluorescein angiography highlights the telangiectatic and aneurysmal vessels, areas of capillary non-perfusion and leakage",
-   "Management principles centre on ablating abnormal vessels with laser photocoagulation or cryotherapy, with anti-VEGF or steroid adjuncts and surgery for advanced detachment",
-   "The condition is typically sporadic and non-hereditary, though somatic mutations affecting retinal vascular development are implicated",
-   "Early detection and treatment give the best chance of preserving vision and avoiding enucleation for a blind painful eye"
+  "id": "coats_disease",
+  "name": "Coats disease (retinal telangiectasia)",
+  "aliases": [
+    "Coats' disease",
+    "retinal telangiectasia",
+    "exudative retinopathy",
+    "Leber miliary aneurysms"
   ],
-  "pathophysiology": "Coats disease is an idiopathic disorder of retinal vascular development in which the retinal capillaries, arterioles and venules become telangiectatic and form saccular aneurysms. Breakdown of the inner blood-retinal barrier in these abnormal vessels allows lipid-rich plasma to leak into and beneath the retina, producing the characteristic yellowish exudate. Progressive exudation and fluid accumulation lead to an exudative retinal detachment, and long-standing disease can cause neovascular glaucoma, cataract and a blind, painful eye. The process is usually unilateral and sporadic, reflecting a localised abnormality of retinal endothelial integrity rather than a systemic vascular disease.",
-  "additionalDifferentials": [
-   "Retinoblastoma",
-   "Familial exudative vitreoretinopathy",
-   "Retinopathy of prematurity",
-   "Persistent fetal vasculature",
-   "Ocular toxocariasis",
-   "Von Hippel-Lindau retinal capillary haemangioblastoma",
-   "Incontinentia pigmenti-associated retinopathy"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment",
-   "Fluorescein angiography to demonstrate aneurysmal vessels, non-perfusion and leakage",
-   "B-scan ultrasonography to assess detachment and exclude the calcification typical of retinoblastoma",
-   "Optical coherence tomography to evaluate macular exudate and subretinal fluid where media permit",
-   "Cross-sectional imaging (CT or MRI) when retinoblastoma cannot be excluded clinically",
-   "Wide-field retinal imaging to document extent and monitor treatment response"
-  ],
-  "redFlags": [
-   "Leukocoria in a child, which mandates urgent exclusion of retinoblastoma",
-   "Total exudative retinal detachment threatening irreversible visual loss",
-   "Neovascular glaucoma producing a painful blind eye",
-   "Rapid progression of exudation despite treatment"
-  ],
-  "prognosis": "Outcome depends on the stage at diagnosis: eyes treated before macular involvement or extensive detachment can retain useful vision, whereas advanced disease with total detachment or neovascular glaucoma often results in poor vision and may require removal of a painful blind eye.",
-  "pitfalls": [
-   "Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management",
-   "Underestimating the extent of peripheral telangiectasia and undertreating abnormal vessels",
-   "Delaying examination under anaesthesia in an uncooperative child, allowing progression",
-   "Failing to monitor for recurrence of exudation after apparently successful ablation"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of treatment.",
-   "Intravitreal anti-VEGF or corticosteroid injections as adjuncts to reduce exudation and subretinal fluid.",
-   "Vitreoretinal surgery, such as scleral buckling, subretinal fluid drainage or vitrectomy, for advanced exudative retinal detachment.",
-   "Careful exclusion of retinoblastoma before treatment, since management and prognosis differ radically.",
-   "Enucleation for a blind, painful eye with neovascular glaucoma.",
-   "Amblyopia management and visual rehabilitation in affected children.",
-   "Regular monitoring with examination under anaesthesia and wide-field retinal imaging to document extent and treatment response."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coats_disease-pathway",
-   "title": "Coats disease (retinal telangiectasia): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision detected incidentally or by a parent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Leukocoria in a child, which mandates urgent exclusion of retinoblastoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment, Fluorescein angiography to demonstrate aneurysmal vessels, non-perfusion and leakage, B-scan ultrasonography"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of treatment."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coats disease (retinal telangiectasia)."
-  }
- ],
- "tables": [
-  {
-   "id": "coats_disease-matrix",
-   "title": "Coats disease (retinal telangiectasia): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision detected incidentally or by a parent",
+      "Hallmark findings are retinal telangiectasia and aneurysmal (light-bulb) vessel dilatation with massive intraretinal and subretinal lipid (yellow exudate)",
+      "Exudation can progress to an exudative (non-rhegmatogenous) retinal detachment, which in advanced cases fills much of the vitreous cavity",
+      "A key differential is retinoblastoma, and distinguishing the two is critical because management and prognosis differ radically",
+      "Fluorescein angiography highlights the telangiectatic and aneurysmal vessels, areas of capillary non-perfusion and leakage",
+      "Management principles centre on ablating abnormal vessels with laser photocoagulation or cryotherapy, with anti-VEGF or steroid adjuncts and surgery for advanced detachment",
+      "The condition is typically sporadic and non-hereditary, though somatic mutations affecting retinal vascular development are implicated",
+      "Early detection and treatment give the best chance of preserving vision and avoiding enucleation for a blind painful eye"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment, Fluorescein",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coats disease is an idiopathic disorder of retinal vascular development in which the retinal capillaries, arterioles and venules become telangiectatic and form saccular aneurysms. Breakdown of the inner blood-retinal barrier in these abnormal vessels allows lipid-rich plasma to leak into and beneath the retina, producing the characteristic yellowish exudate. Progressive exudation and fluid accumulation lead to an exudative retinal detachment, and long-standing disease can cause neovascular glaucoma, cataract and a blind, painful eye. The process is usually unilateral and sporadic, reflecting a localised abnormality of retinal endothelial integrity rather than a systemic vascular disease.",
+    "additionalDifferentials": [
+      "Retinoblastoma",
+      "Familial exudative vitreoretinopathy",
+      "Retinopathy of prematurity",
+      "Persistent fetal vasculature",
+      "Ocular toxocariasis",
+      "Von Hippel-Lindau retinal capillary haemangioblastoma",
+      "Incontinentia pigmenti-associated retinopathy"
     ],
-    [
-     "Primary Differentials",
-     "Retinoblastoma, Familial exudative vitreoretinopathy, Retinopathy of prematurity",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment",
+      "Fluorescein angiography to demonstrate aneurysmal vessels, non-perfusion and leakage",
+      "B-scan ultrasonography to assess detachment and exclude the calcification typical of retinoblastoma",
+      "Optical coherence tomography to evaluate macular exudate and subretinal fluid where media permit",
+      "Cross-sectional imaging (CT or MRI) when retinoblastoma cannot be excluded clinically",
+      "Wide-field retinal imaging to document extent and monitor treatment response"
     ],
-    [
-     "Management Strategy",
-     "Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of",
-     "Core treatment modality"
+    "redFlags": [
+      "Leukocoria in a child, which mandates urgent exclusion of retinoblastoma",
+      "Total exudative retinal detachment threatening irreversible visual loss",
+      "Neovascular glaucoma producing a painful blind eye",
+      "Rapid progression of exudation despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the stage at diagnosis: eyes treated before macular involvement or extensive detachment can retain useful vision, whereas advanced disease with total detachment or neovascular glaucoma often results in poor vision and may require removal of a painful blind eye.",
+    "pitfalls": [
+      "Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management",
+      "Underestimating the extent of peripheral telangiectasia and undertreating abnormal vessels",
+      "Delaying examination under anaesthesia in an uncooperative child, allowing progression",
+      "Failing to monitor for recurrence of exudation after apparently successful ablation"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of treatment.",
+      "Intravitreal anti-VEGF or corticosteroid injections as adjuncts to reduce exudation and subretinal fluid.",
+      "Vitreoretinal surgery, such as scleral buckling, subretinal fluid drainage or vitrectomy, for advanced exudative retinal detachment.",
+      "Careful exclusion of retinoblastoma before treatment, since management and prognosis differ radically.",
+      "Enucleation for a blind, painful eye with neovascular glaucoma.",
+      "Amblyopia management and visual rehabilitation in affected children.",
+      "Regular monitoring with examination under anaesthesia and wide-field retinal imaging to document extent and treatment response."
     ]
-   ],
-   "caption": "Overview comparison matrix for coats disease (retinal telangiectasia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coats-disease-real-image",
-   "title": "Coats disease (retinal telangiectasia): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "coats_disease-pathway",
+      "title": "Coats disease (retinal telangiectasia): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision detected incidentally or by a parent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Leukocoria in a child, which mandates urgent exclusion of retinoblastoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment, Fluorescein angiography to demonstrate aneurysmal vessels, non-perfusion and leakage, B-scan ultrasonography"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of treatment."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coats disease (retinal telangiectasia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coats_disease-matrix",
+      "title": "Coats disease (retinal telangiectasia): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Predominantly affects young boys and is usually unilateral, often presenting with leukocoria, strabismus or reduced vision",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination, often under anaesthesia in children, to map telangiectasia, exudate and detachment, Fluorescein",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retinoblastoma, Familial exudative vitreoretinopathy, Retinopathy of prematurity",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ablation of the telangiectatic and aneurysmal retinal vessels with laser photocoagulation or cryotherapy is the mainstay of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking Coats disease for retinoblastoma or vice versa, with catastrophic consequences for management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coats disease (retinal telangiectasia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coats_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Telangiectasia, exudate and detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Aneurysmal vessels, non-perfusion and leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Detachment; excludes retinoblastoma calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular exudate and subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "When retinoblastoma cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria; management and prognosis differ radically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial exudative vitreoretinopathy",
+          "cells": [
+            {
+              "text": "Other exudative retinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopathy of prematurity",
+          "cells": [
+            {
+              "text": "Retinal vascular disease of prematurity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser photocoagulation or cryotherapy",
+          "cells": [
+            {
+              "text": "Ablation of telangiectatic and aneurysmal vessels"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF or corticosteroid injection",
+          "cells": [
+            {
+              "text": "Reduces exudation and subretinal fluid"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "Scleral buckling, subretinal fluid drainage or vitrectomy"
+            },
+            {
+              "text": "Advanced exudative detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of retinoblastoma before treatment",
+          "cells": [
+            {
+              "text": "Management and prognosis differ radically"
+            },
+            {
+              "text": "Essential first step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "Blind, painful eye with neovascular glaucoma"
+            },
+            {
+              "text": "Last resort"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coats_disease-dx-mgmt",
+      "title": "Diagnosis and management of Coats disease (retinal telangiectasia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Coats disease: unilateral leukocoria or reduced vision in a young boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leukocoria, total detachment, neovascular glaucoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent exclusion of retinoblastoma and vitreoretinal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, fluorescein angiography and B-scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Telangiectasia with exudate and no retinoblastoma on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Laser photocoagulation or cryotherapy to ablate abnormal vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check retinoblastoma, familial exudative vitreoretinopathy and ROP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF or corticosteroid to reduce exudation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scleral buckling, subretinal drainage or vitrectomy for detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Enucleation for a blind, painful eye with neovascular glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Amblyopia management and wide-field retinal monitoring under anaesthesia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

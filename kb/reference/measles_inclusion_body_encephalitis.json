@@ -1,174 +1,432 @@
 {
- "id": "measles_inclusion_body_encephalitis",
- "name": "Measles inclusion body encephalitis",
- "aliases": [
-  "MIBE",
-  "measles inclusion-body encephalitis",
-  "subacute measles encephalitis",
-  "immunosuppressive measles encephalitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
-   "It is seen in children and adults with impaired cell-mediated immunity, such as leukaemia and lymphoma, chemotherapy, HIV, or transplantation",
-   "Unlike SSPE, the latent interval is short, typically weeks to a few months after measles exposure or infection, and the illness may lack a preceding rash",
-   "Presentation is with altered mental status, focal neurological deficits, and, very characteristically, refractory focal seizures including epilepsia partialis continua",
-   "Because antibody responses are blunted by immunosuppression, cerebrospinal fluid measles antibody may be low or absent, unlike the high titres of SSPE",
-   "Diagnosis rests on detecting measles virus RNA or antigen and viral inclusions in brain tissue, supported by imaging, since serology is unreliable in these hosts",
-   "The prognosis is poor; there is no established effective therapy, and prevention through avoiding measles exposure and ensuring immunity in contacts is essential"
+  "id": "measles_inclusion_body_encephalitis",
+  "name": "Measles inclusion body encephalitis",
+  "aliases": [
+    "MIBE",
+    "measles inclusion-body encephalitis",
+    "subacute measles encephalitis",
+    "immunosuppressive measles encephalitis"
   ],
-  "pathophysiology": "Measles inclusion body encephalitis develops when the measles virus persists and replicates within the central nervous system of a host whose cell-mediated immunity is too impaired to clear it. In contrast to subacute sclerosing panencephalitis, where a defective virus smoulders for years and provokes intense antibody production, here the immunosuppressed brain permits relatively active viral replication over a much shorter period with only a weak immune response. Neurones and glia contain intranuclear and intracytoplasmic inclusion bodies packed with viral nucleocapsids, and there is neuronal loss with comparatively little inflammatory infiltrate because the immune response is suppressed. The rapidly progressive cortical involvement produces the characteristic intractable focal seizures and focal deficits, and the blunted humoral response explains why CSF measles antibody is often unhelpful for diagnosis.",
-  "additionalDifferentials": [
-   "Herpes simplex and other viral encephalitides in the immunocompromised",
-   "Progressive multifocal leukoencephalopathy",
-   "Subacute sclerosing panencephalitis",
-   "Cerebral toxoplasmosis or CNS lymphoma",
-   "Metabolic or drug-related encephalopathy",
-   "Autoimmune or paraneoplastic encephalitis"
-  ],
-  "additionalInvestigations": [
-   "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue",
-   "Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen",
-   "MRI of the brain to identify cortical and subcortical signal change",
-   "Electroencephalography, often showing focal epileptiform activity rather than the periodic complexes of SSPE",
-   "Assessment of immune status including HIV testing, CD4 count, and chemotherapy or transplant history",
-   "Measles exposure and immunisation history of the patient and close contacts"
-  ],
-  "redFlags": [
-   "Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
-   "Progressive decline in conscious level or new focal deficits",
-   "Recent measles exposure or infection in a severely immunosuppressed host",
-   "Status epilepticus or rapid neurological deterioration"
-  ],
-  "prognosis": "The outlook is poor, with most patients deteriorating over weeks to months and high mortality; survival and any recovery depend heavily on restoring immune function, and no antiviral regimen is reliably effective.",
-  "pitfalls": [
-   "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
-   "Confusing MIBE with SSPE despite their different time course, immune context, and EEG findings",
-   "Failing to obtain brain tissue or molecular testing when serology is unrevealing",
-   "Overlooking measles exposure in an immunocompromised patient with new refractory seizures"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Measles-associated neurological disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution",
-   "Attempt antiviral therapy with ribavirin (systemic and/or intraventricular), with or without interferon, recognising the limited anecdotal evidence",
-   "Aggressive control of refractory focal seizures and epilepsia partialis continua with combination antiepileptic drugs",
-   "Neurocritical supportive care addressing airway protection, nutrition and raised intracranial pressure",
-   "Multidisciplinary input from neurology, infectious diseases and the primary immunosuppressing service",
-   "Early discussion of the grave prognosis with palliative and family support where deterioration is relentless",
-   "Prevention through measles immunisation of susceptible contacts and immunoglobulin prophylaxis after exposure in immunocompromised patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "measles_inclusion_body_encephalitis-pathway",
-   "title": "Measles inclusion body encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen, MRI of the brain to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of measles inclusion body encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "measles_inclusion_body_encephalitis-matrix",
-   "title": "Measles inclusion body encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
+      "It is seen in children and adults with impaired cell-mediated immunity, such as leukaemia and lymphoma, chemotherapy, HIV, or transplantation",
+      "Unlike SSPE, the latent interval is short, typically weeks to a few months after measles exposure or infection, and the illness may lack a preceding rash",
+      "Presentation is with altered mental status, focal neurological deficits, and, very characteristically, refractory focal seizures including epilepsia partialis continua",
+      "Because antibody responses are blunted by immunosuppression, cerebrospinal fluid measles antibody may be low or absent, unlike the high titres of SSPE",
+      "Diagnosis rests on detecting measles virus RNA or antigen and viral inclusions in brain tissue, supported by imaging, since serology is unreliable in these hosts",
+      "The prognosis is poor; there is no established effective therapy, and prevention through avoiding measles exposure and ensuring immunity in contacts is essential"
     ],
-    [
-     "Key Investigations",
-     "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Measles inclusion body encephalitis develops when the measles virus persists and replicates within the central nervous system of a host whose cell-mediated immunity is too impaired to clear it. In contrast to subacute sclerosing panencephalitis, where a defective virus smoulders for years and provokes intense antibody production, here the immunosuppressed brain permits relatively active viral replication over a much shorter period with only a weak immune response. Neurones and glia contain intranuclear and intracytoplasmic inclusion bodies packed with viral nucleocapsids, and there is neuronal loss with comparatively little inflammatory infiltrate because the immune response is suppressed. The rapidly progressive cortical involvement produces the characteristic intractable focal seizures and focal deficits, and the blunted humoral response explains why CSF measles antibody is often unhelpful for diagnosis.",
+    "additionalDifferentials": [
+      "Herpes simplex and other viral encephalitides in the immunocompromised",
+      "Progressive multifocal leukoencephalopathy",
+      "Subacute sclerosing panencephalitis",
+      "Cerebral toxoplasmosis or CNS lymphoma",
+      "Metabolic or drug-related encephalopathy",
+      "Autoimmune or paraneoplastic encephalitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex and other viral encephalitides in the immunocompromised, Progressive multifocal leukoencephalopathy, Subacute",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue",
+      "Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen",
+      "MRI of the brain to identify cortical and subcortical signal change",
+      "Electroencephalography, often showing focal epileptiform activity rather than the periodic complexes of SSPE",
+      "Assessment of immune status including HIV testing, CD4 count, and chemotherapy or transplant history",
+      "Measles exposure and immunisation history of the patient and close contacts"
     ],
-    [
-     "Management Strategy",
-     "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
+      "Progressive decline in conscious level or new focal deficits",
+      "Recent measles exposure or infection in a severely immunosuppressed host",
+      "Status epilepticus or rapid neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is poor, with most patients deteriorating over weeks to months and high mortality; survival and any recovery depend heavily on restoring immune function, and no antiviral regimen is reliably effective.",
+    "pitfalls": [
+      "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
+      "Confusing MIBE with SSPE despite their different time course, immune context, and EEG findings",
+      "Failing to obtain brain tissue or molecular testing when serology is unrevealing",
+      "Overlooking measles exposure in an immunocompromised patient with new refractory seizures"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Measles-associated neurological disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution",
+      "Attempt antiviral therapy with ribavirin (systemic and/or intraventricular), with or without interferon, recognising the limited anecdotal evidence",
+      "Aggressive control of refractory focal seizures and epilepsia partialis continua with combination antiepileptic drugs",
+      "Neurocritical supportive care addressing airway protection, nutrition and raised intracranial pressure",
+      "Multidisciplinary input from neurology, infectious diseases and the primary immunosuppressing service",
+      "Early discussion of the grave prognosis with palliative and family support where deterioration is relentless",
+      "Prevention through measles immunisation of susceptible contacts and immunoglobulin prophylaxis after exposure in immunocompromised patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for measles inclusion body encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "measles-inclusion-body-encephalitis-real-image",
-   "title": "Measles inclusion body encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "measles_inclusion_body_encephalitis-pathway",
+      "title": "Measles inclusion body encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen, MRI of the brain to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of measles inclusion body encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "measles_inclusion_body_encephalitis-matrix",
+      "title": "Measles inclusion body encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex and other viral encephalitides in the immunocompromised, Progressive multifocal leukoencephalopathy, Subacute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for measles inclusion body encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "measles_inclusion_body_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Measles virus RNA by PCR or antigen in CSF or brain tissue",
+          "cells": [
+            {
+              "text": "Measles virus in CSF or brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy with immunostaining",
+          "cells": [
+            {
+              "text": "Intranuclear and intracytoplasmic inclusion bodies with measles antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cortical and subcortical signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Focal epileptiform activity rather than the periodic complexes of SSPE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status: HIV testing, CD4 count, chemotherapy or transplant history",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles exposure and immunisation history",
+          "cells": [
+            {
+              "text": "Exposure and immunisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "measles_inclusion_body_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restore cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Reduce immunosuppression, treat HIV with antiretroviral therapy, or achieve immune reconstitution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Systemic and/or intraventricular, with or without interferon; limited anecdotal evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory seizures",
+          "cells": [
+            {
+              "text": "Combination antiepileptic drugs for refractory focal seizures and epilepsia partialis continua"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical support",
+          "cells": [
+            {
+              "text": "Airway protection, nutrition and raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Neurology, infectious diseases and the immunosuppressing service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognosis discussion",
+          "cells": [
+            {
+              "text": "Grave prognosis; palliative and family support where deterioration is relentless"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Measles immunisation of susceptible contacts; immunoglobulin prophylaxis after exposure in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "measles_inclusion_body_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Measles inclusion body encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised patient with progressive encephalitis; suspected measles encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory focal seizures, falling consciousness or recent measles exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurocritical care, seizure control and infectious diseases input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF or brain PCR for measles RNA; MRI; EEG; immune status and HIV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is measles virus RNA or antigen detected in CSF or brain tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PML, HSV encephalitis, toxoplasmosis or SSPE; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduce immunosuppression, restore cell-mediated immunity and treat HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ribavirin, systemic or intraventricular, with or without interferon",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination antiepileptics for refractory seizures and epilepsia partialis continua",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurocritical support for airway, nutrition and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Grave prognosis; early palliative and family support where deterioration is relentless",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

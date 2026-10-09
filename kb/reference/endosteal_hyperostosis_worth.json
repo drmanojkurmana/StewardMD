@@ -1,175 +1,435 @@
 {
- "id": "endosteal_hyperostosis_worth",
- "name": "Worth endosteal hyperostosis (LRP5)",
- "aliases": [
-  "Worth disease",
-  "autosomal dominant endosteal hyperostosis",
-  "LRP5 high bone mass",
-  "van Buchem-like autosomal dominant hyperostosis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the skull, often an incidental finding",
-   "Caused by gain-of-function variants in LRP5, a WNT co-receptor, which enhance WNT/beta-catenin signalling and drive increased bone formation",
-   "Inherited in an autosomal dominant manner and typically associated with a torus palatinus, a broad or prominent jaw and increased bone density on imaging",
-   "Individuals are usually asymptomatic and notably resistant to fractures despite the markedly raised bone density",
-   "Bone density measurement shows strikingly elevated values, and the condition is a recognised cause of dense bones without fragility",
-   "Cranial-nerve compression is uncommon in the Worth type, distinguishing it from more aggressive sclerosing dysplasias, though skull thickening should still be monitored",
-   "Management is generally observation, with attention to any rare cranial-nerve symptoms and reassurance about the excellent bone strength"
+  "id": "endosteal_hyperostosis_worth",
+  "name": "Worth endosteal hyperostosis (LRP5)",
+  "aliases": [
+    "Worth disease",
+    "autosomal dominant endosteal hyperostosis",
+    "LRP5 high bone mass",
+    "van Buchem-like autosomal dominant hyperostosis"
   ],
-  "pathophysiology": "Worth endosteal hyperostosis is caused by activating (gain-of-function) variants in LRP5, a co-receptor in the canonical WNT/beta-catenin pathway that is central to osteoblast activity and bone accrual. The variants impair the ability of natural inhibitors such as sclerostin to switch off signalling, so WNT-driven bone formation is persistently enhanced. The result is dense, thickened cortices from endosteal apposition and a sclerotic skull, but with structurally sound bone that resists fracture. Because the excess bone deposition is comparatively orderly and rarely encroaches severely on cranial foramina in this type, most affected individuals remain asymptomatic apart from the characteristic jaw prominence and torus palatinus.",
-  "additionalDifferentials": [
-   "Van Buchem disease and sclerosteosis (SOST-related high bone mass)",
-   "Osteopetrosis",
-   "Craniodiaphyseal and craniometaphyseal dysplasia",
-   "Camurati-Engelmann disease (progressive diaphyseal dysplasia)",
-   "Pycnodysostosis",
-   "Fluorosis or other causes of diffusely dense bone"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs showing endosteal cortical thickening and cranial sclerosis",
-   "Bone densitometry documenting the markedly increased bone mineral density",
-   "Skull imaging to assess vault thickening and screen for foraminal narrowing",
-   "Biochemical bone profile to exclude other causes of sclerosis",
-   "LRP5 molecular genetic testing to confirm the gain-of-function variant",
-   "Family assessment given the autosomal dominant inheritance"
-  ],
-  "redFlags": [
-   "Progressive hearing loss, visual disturbance or facial weakness suggesting cranial-nerve compression from skull thickening",
-   "Atypical fractures or bone pain prompting reconsideration of the diagnosis",
-   "Rapidly progressive craniofacial overgrowth pointing to a more aggressive sclerosing dysplasia"
-  ],
-  "prognosis": "The prognosis is excellent with a normal life expectancy and bones that are resistant rather than prone to fracture; serious complications from cranial-nerve compression are uncommon in the Worth type.",
-  "pitfalls": [
-   "Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating",
-   "Assuming dense bones imply fragility when LRP5 high bone mass is characteristically fracture-resistant",
-   "Neglecting periodic cranial-nerve and hearing assessment despite the generally benign course",
-   "Failing to recognise the autosomal dominant pattern and counsel relatives"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: LRP5-related high bone mass"
-  ],
-  "crossLinks": [
-   "craniodiaphyseal_dysplasia"
-  ],
-  "management": [
-   "Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy",
-   "Avoid antiresorptive and bone-forming agents, which are unnecessary and inappropriate given the already elevated bone density",
-   "Monitor skull and cranial vault thickening clinically and radiologically for the uncommon possibility of cranial-nerve compression",
-   "Refer for surgical decompression only if foraminal narrowing produces cranial-nerve deficits",
-   "Provide dental and maxillofacial assessment for symptomatic torus palatinus or jaw prominence",
-   "Confirm the diagnosis with LRP5 molecular genetic testing and offer genetic counselling given autosomal dominant inheritance",
-   "Screen at-risk family members and distinguish the disorder from more aggressive sclerosing dysplasias"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "endosteal_hyperostosis_worth-pathway",
-   "title": "Worth endosteal hyperostosis (LRP5): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the skull, often an incidental finding",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hearing loss, visual disturbance or facial weakness suggesting cranial-nerve compression from skull thickening",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs showing endosteal cortical thickening and cranial sclerosis, Bone densitometry documenting the markedly increased bone mineral density, Skull imaging to assess vault thickening and screen for foraminal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of worth endosteal hyperostosis (lrp5)."
-  }
- ],
- "tables": [
-  {
-   "id": "endosteal_hyperostosis_worth-matrix",
-   "title": "Worth endosteal hyperostosis (LRP5): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the skull, often an incidental finding",
+      "Caused by gain-of-function variants in LRP5, a WNT co-receptor, which enhance WNT/beta-catenin signalling and drive increased bone formation",
+      "Inherited in an autosomal dominant manner and typically associated with a torus palatinus, a broad or prominent jaw and increased bone density on imaging",
+      "Individuals are usually asymptomatic and notably resistant to fractures despite the markedly raised bone density",
+      "Bone density measurement shows strikingly elevated values, and the condition is a recognised cause of dense bones without fragility",
+      "Cranial-nerve compression is uncommon in the Worth type, distinguishing it from more aggressive sclerosing dysplasias, though skull thickening should still be monitored",
+      "Management is generally observation, with attention to any rare cranial-nerve symptoms and reassurance about the excellent bone strength"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs showing endosteal cortical thickening and cranial sclerosis, Bone densitometry documenting the markedly",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Worth endosteal hyperostosis is caused by activating (gain-of-function) variants in LRP5, a co-receptor in the canonical WNT/beta-catenin pathway that is central to osteoblast activity and bone accrual. The variants impair the ability of natural inhibitors such as sclerostin to switch off signalling, so WNT-driven bone formation is persistently enhanced. The result is dense, thickened cortices from endosteal apposition and a sclerotic skull, but with structurally sound bone that resists fracture. Because the excess bone deposition is comparatively orderly and rarely encroaches severely on cranial foramina in this type, most affected individuals remain asymptomatic apart from the characteristic jaw prominence and torus palatinus.",
+    "additionalDifferentials": [
+      "Van Buchem disease and sclerosteosis (SOST-related high bone mass)",
+      "Osteopetrosis",
+      "Craniodiaphyseal and craniometaphyseal dysplasia",
+      "Camurati-Engelmann disease (progressive diaphyseal dysplasia)",
+      "Pycnodysostosis",
+      "Fluorosis or other causes of diffusely dense bone"
     ],
-    [
-     "Primary Differentials",
-     "Van Buchem disease and sclerosteosis (SOST-related high bone mass), Osteopetrosis, Craniodiaphyseal and craniometaphyseal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs showing endosteal cortical thickening and cranial sclerosis",
+      "Bone densitometry documenting the markedly increased bone mineral density",
+      "Skull imaging to assess vault thickening and screen for foraminal narrowing",
+      "Biochemical bone profile to exclude other causes of sclerosis",
+      "LRP5 molecular genetic testing to confirm the gain-of-function variant",
+      "Family assessment given the autosomal dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hearing loss, visual disturbance or facial weakness suggesting cranial-nerve compression from skull thickening",
+      "Atypical fractures or bone pain prompting reconsideration of the diagnosis",
+      "Rapidly progressive craniofacial overgrowth pointing to a more aggressive sclerosing dysplasia"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent with a normal life expectancy and bones that are resistant rather than prone to fracture; serious complications from cranial-nerve compression are uncommon in the Worth type.",
+    "pitfalls": [
+      "Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating",
+      "Assuming dense bones imply fragility when LRP5 high bone mass is characteristically fracture-resistant",
+      "Neglecting periodic cranial-nerve and hearing assessment despite the generally benign course",
+      "Failing to recognise the autosomal dominant pattern and counsel relatives"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: LRP5-related high bone mass"
+    ],
+    "crossLinks": [
+      "craniodiaphyseal_dysplasia"
+    ],
+    "management": [
+      "Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy",
+      "Avoid antiresorptive and bone-forming agents, which are unnecessary and inappropriate given the already elevated bone density",
+      "Monitor skull and cranial vault thickening clinically and radiologically for the uncommon possibility of cranial-nerve compression",
+      "Refer for surgical decompression only if foraminal narrowing produces cranial-nerve deficits",
+      "Provide dental and maxillofacial assessment for symptomatic torus palatinus or jaw prominence",
+      "Confirm the diagnosis with LRP5 molecular genetic testing and offer genetic counselling given autosomal dominant inheritance",
+      "Screen at-risk family members and distinguish the disorder from more aggressive sclerosing dysplasias"
     ]
-   ],
-   "caption": "Overview comparison matrix for worth endosteal hyperostosis (lrp5)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "endosteal-hyperostosis-worth-real-image",
-   "title": "Worth endosteal hyperostosis (LRP5): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "endosteal_hyperostosis_worth-pathway",
+      "title": "Worth endosteal hyperostosis (LRP5): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the skull, often an incidental finding",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hearing loss, visual disturbance or facial weakness suggesting cranial-nerve compression from skull thickening",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs showing endosteal cortical thickening and cranial sclerosis, Bone densitometry documenting the markedly increased bone mineral density, Skull imaging to assess vault thickening and screen for foraminal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of worth endosteal hyperostosis (lrp5)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "endosteal_hyperostosis_worth-matrix",
+      "title": "Worth endosteal hyperostosis (LRP5): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign high-bone-mass disorder characterised by endosteal thickening of the long-bone cortices and dense sclerosis of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs showing endosteal cortical thickening and cranial sclerosis, Bone densitometry documenting the markedly",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Van Buchem disease and sclerosteosis (SOST-related high bone mass), Osteopetrosis, Craniodiaphyseal and craniometaphyseal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that this is a benign high-bone-mass disorder with fracture-resistant bone requiring no bone-directed drug therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the benign high bone mass with osteopetrosis or a symptomatic sclerosing dysplasia and over-investigating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for worth endosteal hyperostosis (lrp5)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endosteal_hyperostosis_worth-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Endosteal cortical thickening and cranial sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone densitometry",
+          "cells": [
+            {
+              "text": "Markedly increased bone mineral density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Vault thickening; screen for foraminal narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical bone profile",
+          "cells": [
+            {
+              "text": "Excludes other causes of sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LRP5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the gain-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endosteal_hyperostosis_worth-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, no bone-directed drugs",
+          "cells": [
+            {
+              "text": "Benign high-bone-mass disorder with fracture-resistant bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiresorptive and bone-forming agents",
+          "cells": [
+            {
+              "text": "Unnecessary given the already elevated bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and radiological monitoring",
+          "cells": [
+            {
+              "text": "Skull and vault thickening; uncommon cranial-nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Only if foraminal narrowing produces cranial-nerve deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and maxillofacial assessment",
+          "cells": [
+            {
+              "text": "Symptomatic torus palatinus or jaw prominence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LRP5 testing and genetic counselling",
+          "cells": [
+            {
+              "text": "Confirmation; autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "At-risk relatives; distinguish from aggressive sclerosing dysplasias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endosteal_hyperostosis_worth-dx-mgmt",
+      "title": "Diagnosis and management of Worth endosteal hyperostosis (LRP5)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dense bones on imaging with endosteal sclerosis of long bones and skull",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cranial-nerve symptoms, atypical fractures, rapid craniofacial overgrowth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider the diagnosis; evaluate for an aggressive sclerosing dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, bone densitometry, skull imaging and biochemical bone profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "LRP5 gain-of-function variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Van Buchem disease, sclerosteosis or other high bone mass disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that the bone is fracture-resistant; no bone-directed drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid antiresorptive and bone-forming agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor skull thickening for uncommon cranial-nerve compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression only for deficits from foraminal narrowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and screening of relatives (autosomal dominant)",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis with normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

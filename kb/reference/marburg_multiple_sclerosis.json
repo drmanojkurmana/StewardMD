@@ -1,175 +1,471 @@
 {
- "id": "marburg_multiple_sclerosis",
- "name": "Marburg variant multiple sclerosis",
- "aliases": [
-  "Marburg variant MS",
-  "acute malignant multiple sclerosis",
-  "fulminant multiple sclerosis",
-  "Marburg disease"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
-   "Widespread confluent lesions can produce hemiparesis, brainstem dysfunction, encephalopathy, and reduced consciousness",
-   "Tumefactive, mass-like lesions with oedema may raise concern for neoplasm on imaging",
-   "Considered the most aggressive end of the multiple sclerosis spectrum, with severe, destructive demyelination and axonal loss",
-   "Aggressive treatment with high-dose corticosteroids and plasma exchange is used, with escalation to potent immunotherapy in refractory disease",
-   "Antibody testing (aquaporin-4, MOG) helps distinguish it from other severe demyelinating disorders",
-   "Distinction from acute disseminated encephalomyelitis can be difficult, particularly early in the illness"
+  "id": "marburg_multiple_sclerosis",
+  "name": "Marburg variant multiple sclerosis",
+  "aliases": [
+    "Marburg variant MS",
+    "acute malignant multiple sclerosis",
+    "fulminant multiple sclerosis",
+    "Marburg disease"
   ],
-  "pathophysiology": "The Marburg variant represents an especially severe form of inflammatory demyelination in which intense macrophage-rich inflammation causes extensive, confluent myelin destruction accompanied by prominent acute axonal injury and necrosis. The severity and rapidity of tissue damage exceed that of typical multiple sclerosis, and lesions are often large and swollen with surrounding oedema. The process is usually monophasic and can involve the hemispheres and brainstem, with brainstem involvement contributing to the potential for a fatal outcome.",
-  "additionalDifferentials": [
-   "Acute disseminated encephalomyelitis",
-   "Tumefactive demyelination",
-   "High-grade glioma or central nervous system lymphoma",
-   "Cerebral abscess or other infection",
-   "Aquaporin-4 or MOG antibody disease",
-   "Progressive multifocal leukoencephalopathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and spinal cord with contrast to define the extent and activity of lesions",
-   "Cerebrospinal fluid analysis including cell count and oligoclonal bands",
-   "Aquaporin-4 and MOG antibody testing",
-   "Brain biopsy when imaging cannot exclude tumour",
-   "Advanced MRI (spectroscopy, perfusion) to help separate demyelination from neoplasm",
-   "Screening for infective causes before intensive immunosuppression"
-  ],
-  "redFlags": [
-   "Rapidly declining consciousness or brainstem dysfunction",
-   "Large lesions with mass effect and raised intracranial pressure",
-   "Respiratory compromise from brainstem involvement",
-   "Failure to respond to corticosteroids requiring urgent escalation"
-  ],
-  "prognosis": "The variant carries a guarded prognosis, historically often fatal within months, though aggressive modern immunotherapy has allowed survival and partial recovery in some patients.",
-  "pitfalls": [
-   "Delaying treatment while pursuing an assumed tumour diagnosis",
-   "Confusing it with monophasic acute disseminated encephalomyelitis and under-treating",
-   "Omitting antibody testing that would reclassify the disorder",
-   "Underestimating the risk of brainstem involvement and respiratory failure"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Multiple Sclerosis and Related Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy",
-   "Add plasma exchange for steroid-refractory fulminant disease",
-   "Escalate to potent immunosuppression such as cyclophosphamide in refractory cases",
-   "Provide neurocritical supportive care with airway and ventilatory support for brainstem involvement and management of raised intracranial pressure and oedema",
-   "Exclude infection and neoplasm before and during intensive immunosuppression, using brain biopsy where imaging cannot distinguish tumour",
-   "Deliver multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
-   "Involve neurology and neuroimmunology, testing aquaporin-4 and MOG antibodies to distinguish alternative demyelinating disorders and guide therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "marburg_multiple_sclerosis-pathway",
-   "title": "Marburg variant multiple sclerosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining consciousness or brainstem dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and spinal cord with contrast to define the extent and activity of lesions, Cerebrospinal fluid analysis including cell count and oligoclonal bands, Aquaporin-4 and MOG antibody testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying treatment while pursuing an assumed tumour diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of marburg variant multiple sclerosis."
-  }
- ],
- "tables": [
-  {
-   "id": "marburg_multiple_sclerosis-matrix",
-   "title": "Marburg variant multiple sclerosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
+      "Widespread confluent lesions can produce hemiparesis, brainstem dysfunction, encephalopathy, and reduced consciousness",
+      "Tumefactive, mass-like lesions with oedema may raise concern for neoplasm on imaging",
+      "Considered the most aggressive end of the multiple sclerosis spectrum, with severe, destructive demyelination and axonal loss",
+      "Aggressive treatment with high-dose corticosteroids and plasma exchange is used, with escalation to potent immunotherapy in refractory disease",
+      "Antibody testing (aquaporin-4, MOG) helps distinguish it from other severe demyelinating disorders",
+      "Distinction from acute disseminated encephalomyelitis can be difficult, particularly early in the illness"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and spinal cord with contrast to define the extent and activity of lesions, Cerebrospinal fluid analysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The Marburg variant represents an especially severe form of inflammatory demyelination in which intense macrophage-rich inflammation causes extensive, confluent myelin destruction accompanied by prominent acute axonal injury and necrosis. The severity and rapidity of tissue damage exceed that of typical multiple sclerosis, and lesions are often large and swollen with surrounding oedema. The process is usually monophasic and can involve the hemispheres and brainstem, with brainstem involvement contributing to the potential for a fatal outcome.",
+    "additionalDifferentials": [
+      "Acute disseminated encephalomyelitis",
+      "Tumefactive demyelination",
+      "High-grade glioma or central nervous system lymphoma",
+      "Cerebral abscess or other infection",
+      "Aquaporin-4 or MOG antibody disease",
+      "Progressive multifocal leukoencephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Acute disseminated encephalomyelitis, Tumefactive demyelination, High-grade glioma or central nervous system lymphoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and spinal cord with contrast to define the extent and activity of lesions",
+      "Cerebrospinal fluid analysis including cell count and oligoclonal bands",
+      "Aquaporin-4 and MOG antibody testing",
+      "Brain biopsy when imaging cannot exclude tumour",
+      "Advanced MRI (spectroscopy, perfusion) to help separate demyelination from neoplasm",
+      "Screening for infective causes before intensive immunosuppression"
     ],
-    [
-     "Management Strategy",
-     "Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining consciousness or brainstem dysfunction",
+      "Large lesions with mass effect and raised intracranial pressure",
+      "Respiratory compromise from brainstem involvement",
+      "Failure to respond to corticosteroids requiring urgent escalation"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying treatment while pursuing an assumed tumour diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The variant carries a guarded prognosis, historically often fatal within months, though aggressive modern immunotherapy has allowed survival and partial recovery in some patients.",
+    "pitfalls": [
+      "Delaying treatment while pursuing an assumed tumour diagnosis",
+      "Confusing it with monophasic acute disseminated encephalomyelitis and under-treating",
+      "Omitting antibody testing that would reclassify the disorder",
+      "Underestimating the risk of brainstem involvement and respiratory failure"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Multiple Sclerosis and Related Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy",
+      "Add plasma exchange for steroid-refractory fulminant disease",
+      "Escalate to potent immunosuppression such as cyclophosphamide in refractory cases",
+      "Provide neurocritical supportive care with airway and ventilatory support for brainstem involvement and management of raised intracranial pressure and oedema",
+      "Exclude infection and neoplasm before and during intensive immunosuppression, using brain biopsy where imaging cannot distinguish tumour",
+      "Deliver multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
+      "Involve neurology and neuroimmunology, testing aquaporin-4 and MOG antibodies to distinguish alternative demyelinating disorders and guide therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for marburg variant multiple sclerosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "marburg-multiple-sclerosis-real-image",
-   "title": "Marburg variant multiple sclerosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "marburg_multiple_sclerosis-pathway",
+      "title": "Marburg variant multiple sclerosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining consciousness or brainstem dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and spinal cord with contrast to define the extent and activity of lesions, Cerebrospinal fluid analysis including cell count and oligoclonal bands, Aquaporin-4 and MOG antibody testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying treatment while pursuing an assumed tumour diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of marburg variant multiple sclerosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "marburg_multiple_sclerosis-matrix",
+      "title": "Marburg variant multiple sclerosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare fulminant demyelinating disorder causing rapidly progressive, often monophasic neurological decline over days to weeks",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and spinal cord with contrast to define the extent and activity of lesions, Cerebrospinal fluid analysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute disseminated encephalomyelitis, Tumefactive demyelination, High-grade glioma or central nervous system lymphoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acutely with high-dose intravenous corticosteroids such as methylprednisolone as first-line immunotherapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying treatment while pursuing an assumed tumour diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for marburg variant multiple sclerosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "marburg_multiple_sclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain and spinal cord with contrast",
+          "cells": [
+            {
+              "text": "Extent and activity of lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Cell count and oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 and MOG antibody testing",
+          "cells": [
+            {
+              "text": "Separates alternative demyelinating disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Used when imaging cannot exclude tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced MRI (spectroscopy, perfusion)",
+          "cells": [
+            {
+              "text": "Separates demyelination from neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for infective causes",
+          "cells": [
+            {
+              "text": "Infection excluded before intensive immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marburg_multiple_sclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-grade glioma or CNS lymphoma",
+          "cells": [
+            {
+              "text": "Imaging cannot exclude tumour; advanced MRI and brain biopsy help separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral abscess or other infection",
+          "cells": [
+            {
+              "text": "Screened for before intensive immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 or MOG antibody disease",
+          "cells": [
+            {
+              "text": "Tested with AQP4 and MOG antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "marburg_multiple_sclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose IV corticosteroids",
+          "cells": [
+            {
+              "text": "Methylprednisolone as first-line immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Steroid-refractory fulminant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent immunosuppression",
+          "cells": [
+            {
+              "text": "Cyclophosphamide in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical supportive care",
+          "cells": [
+            {
+              "text": "Airway and ventilatory support for brainstem involvement; raised intracranial pressure and oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection and neoplasm",
+          "cells": [
+            {
+              "text": "Before and during intensive immunosuppression; brain biopsy where imaging cannot distinguish tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neuroimmunology",
+          "cells": [
+            {
+              "text": "AQP4 and MOG antibody testing to distinguish disorders and guide therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "marburg_multiple_sclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Marburg variant multiple sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large demyelinating lesions with rapidly declining consciousness or brainstem signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem dysfunction, respiratory compromise or failure to respond to steroids?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurocritical care, airway support and urgent immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spinal cord with contrast, CSF analysis, AQP4 and MOG antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are tumour and infection excluded on imaging, CSF or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Brain biopsy for suspected tumour; screen for infection before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose IV corticosteroids such as methylprednisolone as first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange for steroid-refractory fulminant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurocritical support: airway, ventilation and intracranial pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

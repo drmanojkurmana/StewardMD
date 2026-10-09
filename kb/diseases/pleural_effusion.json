@@ -242,5 +242,586 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pleural Effusion, 2024",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pleural-effusion",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleural_effusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Pleural fluid analysis and imaging thresholds",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Light: fluid to serum protein ratio",
+          "cells": [
+            {
+              "text": ">=0.5",
+              "op": ">=",
+              "value": 0.5
+            },
+            {
+              "text": "Exudate (any one Light criterion suffices)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Light: fluid to serum LDH ratio",
+          "cells": [
+            {
+              "text": ">=0.6",
+              "op": ">=",
+              "value": 0.6
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Light: fluid LDH vs upper limit of serum LDH",
+          "cells": [
+            {
+              "text": ">=2/3 of upper limit of normal"
+            },
+            {
+              "text": "Exudate; Light criteria are 98% sensitive, 77% specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum minus fluid protein",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<=3.1",
+              "op": "<=",
+              "value": 3.1
+            },
+            {
+              "text": "{{hy:Confirms exudate on diuretics; Light misclassifies about 20% of transudates}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid cholesterol",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=43 (sens 92%) or >=60",
+              "op": ">=",
+              "value": 43
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid pH",
+          "cells": [
+            {
+              "text": "<7.20",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Complicated parapneumonic effusion; drain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<60",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Complicated parapneumonic; also TB and rheumatoid effusions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenosine deaminase",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "TB pleuritis, 95% sensitive and specific; can rise in cancer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid to blood haematocrit",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">50",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Haemothorax"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Upright chest x-ray",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "About 75 blunts posterior angle; about 175 blunts lateral angle",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Over 4 L can opacify a hemithorax"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thickness for diagnostic tap",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">=10",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "New or unexplained effusion on CT, ultrasound or decubitus film"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laterality",
+          "cells": [
+            {
+              "text": "Bilateral suggests heart failure"
+            },
+            {
+              "text": "Unilateral raises suspicion of malignancy or PE"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_effusion-ddx",
+      "kind": "ddx",
+      "title": "Main causes of pleural effusion",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Fluid type"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Bilateral, symmetric; diurese first, tap if persisting 3 or more days"
+            },
+            {
+              "text": "Transudate (commonest overall)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cirrhosis (hepatic hydrothorax)",
+          "cells": [
+            {
+              "text": "Often right-sided, can occur without clinical ascites"
+            },
+            {
+              "text": "Transudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome or hypoalbuminaemia",
+          "cells": [
+            {
+              "text": "Low oncotic pressure"
+            },
+            {
+              "text": "Transudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parapneumonic effusion or empyema",
+          "cells": [
+            {
+              "text": "With pneumonia; pH under 7.20, glucose under 60, pus or positive Gram stain"
+            },
+            {
+              "text": "Exudate (commonest exudate)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tuberculous pleurisy",
+          "cells": [
+            {
+              "text": "Lymphocyte-rich, ADA over 40 U/L; culture positive in about 45%"
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant effusion",
+          "cells": [
+            {
+              "text": "Unilateral; repeat cytology if first tap negative"
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Unilateral effusion should raise suspicion"
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatitis, oesophageal rupture",
+          "cells": [
+            {
+              "text": "Check fluid amylase in the right setting"
+            },
+            {
+              "text": "Exudate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumothorax (mimic of a quiet hemithorax)",
+          "cells": [
+            {
+              "text": "Hyper-resonant rather than dull to percussion"
+            },
+            {
+              "text": "No fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_effusion-treatment",
+      "kind": "treatment",
+      "title": "Management of pleural effusion",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "All effusions"
+            },
+            {
+              "text": "Many resorb after pneumonia, PE or heart failure is treated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small (under 10 mm), asymptomatic effusion"
+            },
+            {
+              "text": "Usually no treatment needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Therapeutic thoracentesis",
+          "cells": [
+            {
+              "text": "Symptomatic effusion"
+            },
+            {
+              "text": "About 1 to 1.5 L per session; stop for chest tightness, pain or cough"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest tube drainage",
+          "cells": [
+            {
+              "text": "{{hy:Parapneumonic with pH under 7.20, glucose under 60, positive Gram stain or culture, loculation, or pus}}"
+            },
+            {
+              "text": "Empyema needs drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intrapleural alteplase plus dornase alfa",
+          "cells": [
+            {
+              "text": "Incomplete drainage of infected effusion"
+            },
+            {
+              "text": "No dose stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VATS or thoracotomy",
+          "cells": [
+            {
+              "text": "Failure of intrapleural therapy"
+            },
+            {
+              "text": "VATS tried first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pleurodesis (talc, doxycycline, bleomycin)",
+          "cells": [
+            {
+              "text": "Recurrent malignant effusion with expandable lung"
+            },
+            {
+              "text": "Contraindicated in trapped lung"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Indwelling pleural catheter",
+          "cells": [
+            {
+              "text": "Malignant effusion, required for trapped lung"
+            },
+            {
+              "text": "Equal efficacy to pleurodesis; more long-term cellulitis risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Pleuritic pain"
+            },
+            {
+              "text": "NSAIDs or other oral analgesics, short opioid course if needed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleural_effusion-dx-mgmt",
+      "title": "Diagnosis and management of pleural effusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dull, quiet hemithorax or effusion on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilateral effusions in known heart failure, no fever or pain?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Diurese; tap only if persisting 3 or more days",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Effusion 10 mm or thicker?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Observe; treat underlying cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Diagnostic thoracentesis with serum protein and LDH",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Any Light criterion met (exudate)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Transudate: treat heart failure, cirrhosis or nephrosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucose, pH, Gram stain, culture, cytology, ADA",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "pH under 7.20, glucose under 60, pus or positive stain?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chest tube; fibrinolytic plus DNase, VATS if this fails",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat cause; pleurodesis or indwelling catheter if malignant",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Persists"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

@@ -1,173 +1,480 @@
 {
- "id": "linear_porokeratosis",
- "name": "Linear porokeratosis",
- "aliases": [
-  "porokeratosis linearis",
-  "linear porokeratosis of Mibelli",
-  "segmental porokeratosis"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic border (cornoid lamella)",
-   "It represents a mosaic manifestation, often reflecting a post-zygotic second hit in the mevalonate-pathway genes that also cause the generalised inherited porokeratoses",
-   "Dermoscopy and histology show the cornoid lamella, a column of parakeratosis marking the advancing edge",
-   "Lesions typically begin in infancy or childhood and follow the lines of Blaschko along a limb",
-   "It carries the highest malignant potential of the porokeratosis variants, with squamous cell carcinoma and Bowen disease arising within long-standing plaques",
-   "Extensive or facial linear porokeratosis may rarely coexist with skeletal or developmental anomalies, warranting broader assessment",
-   "Management is generic: sun protection, topical keratolytics or field therapies, and long-term surveillance with biopsy of any suspicious change"
+  "id": "linear_porokeratosis",
+  "name": "Linear porokeratosis",
+  "aliases": [
+    "porokeratosis linearis",
+    "linear porokeratosis of Mibelli",
+    "segmental porokeratosis"
   ],
-  "pathophysiology": "Linear porokeratosis is regarded as a mosaic disorder in which a post-zygotic second hit occurs in a cell already carrying a germline variant in the mevalonate biosynthetic pathway, most often affecting genes such as MVK, PMVK, MVD or FDPS. Loss of function in this pathway within the affected clone disturbs epidermal keratinocyte proliferation and differentiation, producing the cornoid lamella, a column of abnormal parakeratotic cells that defines the advancing border of each lesion. Because the second hit occurs during development, the lesions are distributed along the lines of Blaschko. The clonal, genetically unstable epidermis explains the heightened risk of malignant transformation within these plaques.",
-  "additionalDifferentials": [
-   "Other porokeratosis variants (porokeratosis of Mibelli, disseminated superficial actinic porokeratosis)",
-   "Linear epidermal naevus",
-   "Lichen striatus",
-   "Incontinentia pigmenti (verrucous stage)",
-   "Linear lichen planus",
-   "Inflammatory linear verrucous epidermal naevus"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy to demonstrate the cornoid lamella and exclude malignancy",
-   "Dermoscopy to identify the characteristic peripheral keratotic ridge",
-   "Serial photography to monitor for change",
-   "Biopsy of any nodular, ulcerated or rapidly changing area",
-   "Skeletal or developmental assessment where lesions are extensive or facial",
-   "Molecular testing for mevalonate-pathway variants where available"
-  ],
-  "redFlags": [
-   "Nodule, ulceration or bleeding within a plaque suggesting squamous cell carcinoma",
-   "Rapid enlargement of a previously stable lesion",
-   "Extensive disease with associated skeletal or developmental anomalies",
-   "Non-healing erosion within a long-standing lesion"
-  ],
-  "prognosis": "The condition is chronic and persistent; while many lesions remain stable, linear porokeratosis has the greatest malignant potential among the porokeratoses, so lifelong surveillance is warranted and prognosis worsens if squamous cell carcinoma develops.",
-  "pitfalls": [
-   "Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella",
-   "Failing to biopsy a changing lesion because porokeratosis was assumed benign",
-   "Underestimating the malignant potential of the linear variant",
-   "Neglecting sun protection, which accelerates malignant change"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Happle R. Mosaicism in Human Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries the highest malignant potential of the porokeratoses",
-   "Topical therapies for symptomatic lesions include topical retinoids, topical 5-fluorouracil and vitamin D analogues, with topical cholesterol-statin combinations directed at the underlying mevalonate-pathway defect",
-   "Advise strict photoprotection to limit keratinocyte damage and reduce the risk of malignant transformation",
-   "Undertake regular skin surveillance with serial photography and biopsy any nodular, ulcerated or rapidly changing area to detect squamous cell carcinoma or Bowen disease early",
-   "Use cryotherapy, laser or surgical excision for localised, symptomatic or suspicious lesions",
-   "Arrange skeletal and developmental assessment where lesions are extensive or facial",
-   "Escalate to surgical excision and oncological management if squamous cell carcinoma develops within a plaque"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "linear_porokeratosis-pathway",
-   "title": "Linear porokeratosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic border (cornoid lamella)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nodule, ulceration or bleeding within a plaque suggesting squamous cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy to demonstrate the cornoid lamella and exclude malignancy, Dermoscopy to identify the characteristic peripheral keratotic ridge, Serial photography to monitor for change"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries the highest malignant potential of the porokeratoses"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of linear porokeratosis."
-  }
- ],
- "tables": [
-  {
-   "id": "linear_porokeratosis-matrix",
-   "title": "Linear porokeratosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic border (cornoid lamella)",
+      "It represents a mosaic manifestation, often reflecting a post-zygotic second hit in the mevalonate-pathway genes that also cause the generalised inherited porokeratoses",
+      "Dermoscopy and histology show the cornoid lamella, a column of parakeratosis marking the advancing edge",
+      "Lesions typically begin in infancy or childhood and follow the lines of Blaschko along a limb",
+      "It carries the highest malignant potential of the porokeratosis variants, with squamous cell carcinoma and Bowen disease arising within long-standing plaques",
+      "Extensive or facial linear porokeratosis may rarely coexist with skeletal or developmental anomalies, warranting broader assessment",
+      "Management is generic: sun protection, topical keratolytics or field therapies, and long-term surveillance with biopsy of any suspicious change"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy to demonstrate the cornoid lamella and exclude malignancy, Dermoscopy to identify the characteristic peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Linear porokeratosis is regarded as a mosaic disorder in which a post-zygotic second hit occurs in a cell already carrying a germline variant in the mevalonate biosynthetic pathway, most often affecting genes such as MVK, PMVK, MVD or FDPS. Loss of function in this pathway within the affected clone disturbs epidermal keratinocyte proliferation and differentiation, producing the cornoid lamella, a column of abnormal parakeratotic cells that defines the advancing border of each lesion. Because the second hit occurs during development, the lesions are distributed along the lines of Blaschko. The clonal, genetically unstable epidermis explains the heightened risk of malignant transformation within these plaques.",
+    "additionalDifferentials": [
+      "Other porokeratosis variants (porokeratosis of Mibelli, disseminated superficial actinic porokeratosis)",
+      "Linear epidermal naevus",
+      "Lichen striatus",
+      "Incontinentia pigmenti (verrucous stage)",
+      "Linear lichen planus",
+      "Inflammatory linear verrucous epidermal naevus"
     ],
-    [
-     "Primary Differentials",
-     "Other porokeratosis variants (porokeratosis of Mibelli, disseminated superficial actinic porokeratosis), Linear epidermal naevus,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy to demonstrate the cornoid lamella and exclude malignancy",
+      "Dermoscopy to identify the characteristic peripheral keratotic ridge",
+      "Serial photography to monitor for change",
+      "Biopsy of any nodular, ulcerated or rapidly changing area",
+      "Skeletal or developmental assessment where lesions are extensive or facial",
+      "Molecular testing for mevalonate-pathway variants where available"
     ],
-    [
-     "Management Strategy",
-     "No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries",
-     "Core treatment modality"
+    "redFlags": [
+      "Nodule, ulceration or bleeding within a plaque suggesting squamous cell carcinoma",
+      "Rapid enlargement of a previously stable lesion",
+      "Extensive disease with associated skeletal or developmental anomalies",
+      "Non-healing erosion within a long-standing lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and persistent; while many lesions remain stable, linear porokeratosis has the greatest malignant potential among the porokeratoses, so lifelong surveillance is warranted and prognosis worsens if squamous cell carcinoma develops.",
+    "pitfalls": [
+      "Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella",
+      "Failing to biopsy a changing lesion because porokeratosis was assumed benign",
+      "Underestimating the malignant potential of the linear variant",
+      "Neglecting sun protection, which accelerates malignant change"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Happle R. Mosaicism in Human Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries the highest malignant potential of the porokeratoses",
+      "Topical therapies for symptomatic lesions include topical retinoids, topical 5-fluorouracil and vitamin D analogues, with topical cholesterol-statin combinations directed at the underlying mevalonate-pathway defect",
+      "Advise strict photoprotection to limit keratinocyte damage and reduce the risk of malignant transformation",
+      "Undertake regular skin surveillance with serial photography and biopsy any nodular, ulcerated or rapidly changing area to detect squamous cell carcinoma or Bowen disease early",
+      "Use cryotherapy, laser or surgical excision for localised, symptomatic or suspicious lesions",
+      "Arrange skeletal and developmental assessment where lesions are extensive or facial",
+      "Escalate to surgical excision and oncological management if squamous cell carcinoma develops within a plaque"
     ]
-   ],
-   "caption": "Overview comparison matrix for linear porokeratosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "linear-porokeratosis-real-image",
-   "title": "Linear porokeratosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "linear_porokeratosis-pathway",
+      "title": "Linear porokeratosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic border (cornoid lamella)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nodule, ulceration or bleeding within a plaque suggesting squamous cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy to demonstrate the cornoid lamella and exclude malignancy, Dermoscopy to identify the characteristic peripheral keratotic ridge, Serial photography to monitor for change"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries the highest malignant potential of the porokeratoses"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of linear porokeratosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "linear_porokeratosis-matrix",
+      "title": "Linear porokeratosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A segmental form of porokeratosis presenting as linear, Blaschko-distributed plaques with the characteristic raised keratotic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy to demonstrate the cornoid lamella and exclude malignancy, Dermoscopy to identify the characteristic peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other porokeratosis variants (porokeratosis of Mibelli, disseminated superficial actinic porokeratosis), Linear epidermal naevus,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No definitive cure exists; management centres on lesion control and vigilant malignancy surveillance because this variant carries",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing linear keratotic plaques as an epidermal naevus and missing the cornoid lamella",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for linear porokeratosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "linear_porokeratosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Cornoid lamella; excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Characteristic peripheral keratotic ridge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Monitors change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of nodular, ulcerated or changing areas",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma or Bowen disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal or developmental assessment",
+          "cells": [
+            {
+              "text": "Extensive or facial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate-pathway molecular testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_porokeratosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Linear epidermal naevus",
+          "cells": [
+            {
+              "text": "Linear keratotic plaque; the cornoid lamella separates it on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen striatus",
+          "cells": [
+            {
+              "text": "Blaschko-linear and usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory linear verrucous epidermal naevus",
+          "cells": [
+            {
+              "text": "Linear verrucous plaque; histology separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear lichen planus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_porokeratosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical therapies",
+          "cells": [
+            {
+              "text": "Topical retinoids, 5-fluorouracil or vitamin D analogues for symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Strict sun protection to limit malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial photography; biopsy of nodular, ulcerated or changing areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Destructive or excisional treatment",
+          "cells": [
+            {
+              "text": "Cryotherapy, laser or excision for localised, symptomatic or suspicious lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and developmental assessment",
+          "cells": [
+            {
+              "text": "Extensive or facial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology escalation",
+          "cells": [
+            {
+              "text": "Excision and oncological care if squamous cell carcinoma develops within a plaque"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "linear_porokeratosis-dx-mgmt",
+      "title": "Diagnosis and management of Linear porokeratosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear Blaschko-distributed keratotic plaques with a raised border, from childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nodule, ulceration, bleeding, rapid enlargement, non-healing erosion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy and excision for suspected squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for cornoid lamella, dermoscopy, serial photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a cornoid lamella seen on biopsy of the lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider linear epidermal naevus, lichen striatus or linear lichen planus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical retinoids, 5-fluorouracil or vitamin D analogues for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict photoprotection to limit malignant change",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial photography and biopsy of changing areas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cryotherapy, laser or excision for localised or suspicious lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Skeletal and developmental assessment for extensive or facial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic; highest malignant potential of porokeratoses; lifelong surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

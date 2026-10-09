@@ -1,177 +1,484 @@
 {
- "id": "limb_girdle_muscular_dystrophy",
- "name": "Limb-girdle muscular dystrophy",
- "aliases": [
-  "LGMD",
-  "sarcoglycanopathy",
-  "calpainopathy",
-  "dysferlinopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic girdles, with both autosomal dominant and autosomal recessive forms",
-   "Autosomal recessive subtypes are generally more common and include calpainopathy, dysferlinopathy, and the sarcoglycanopathies",
-   "Onset ranges from childhood to adulthood, typically with difficulty rising from a chair, climbing stairs, and lifting the arms",
-   "Serum creatine kinase is usually elevated, sometimes markedly, especially in the recessive subtypes",
-   "Some subtypes carry a significant risk of cardiomyopathy or respiratory muscle involvement, which guides surveillance",
-   "Dysferlinopathy characteristically presents with distal calf involvement and very high creatine kinase in young adults",
-   "Diagnosis increasingly relies on next-generation sequencing panels, complemented by muscle biopsy with protein immunostaining and imaging",
-   "Management is supportive and multidisciplinary, with physiotherapy, aids to mobility, and cardiac and respiratory monitoring targeted to the subtype"
+  "id": "limb_girdle_muscular_dystrophy",
+  "name": "Limb-girdle muscular dystrophy",
+  "aliases": [
+    "LGMD",
+    "sarcoglycanopathy",
+    "calpainopathy",
+    "dysferlinopathy"
   ],
-  "pathophysiology": "The limb-girdle muscular dystrophies result from variants in a wide range of genes encoding proteins essential to muscle-fibre structure and function, including components of the dystrophin-glycoprotein complex (such as the sarcoglycans), membrane-repair proteins (dysferlin), enzymes (calpain-3), and nuclear and glycosylation-related proteins. Loss of these proteins impairs sarcolemmal stability, membrane repair, or muscle-fibre maintenance, leading to repeated fibre injury, necrosis, and progressive replacement of muscle by fat and connective tissue. The predominant involvement of proximal girdle muscles produces the characteristic pattern of weakness, while the specific protein defect determines any associated cardiac or respiratory involvement.",
-  "additionalDifferentials": [
-   "Becker and Duchenne muscular dystrophies",
-   "Inflammatory myopathies",
-   "Metabolic and mitochondrial myopathies",
-   "Spinal muscular atrophy",
-   "Facioscapulohumeral muscular dystrophy",
-   "Congenital and myofibrillar myopathies"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase measurement",
-   "Next-generation sequencing gene panel for limb-girdle muscular dystrophy",
-   "Muscle biopsy with immunohistochemistry for specific structural proteins",
-   "Muscle MRI to characterise the pattern of muscle involvement",
-   "Electrocardiography and echocardiography for cardiomyopathy",
-   "Pulmonary function testing for respiratory muscle weakness"
-  ],
-  "redFlags": [
-   "Symptoms of cardiomyopathy or conduction disturbance in cardiac-associated subtypes",
-   "Declining respiratory function or nocturnal hypoventilation",
-   "Rapidly progressive weakness suggesting an inflammatory or alternative cause",
-   "Dysphagia or aspiration risk",
-   "Acute rhabdomyolysis with very high creatine kinase and dark urine"
-  ],
-  "prognosis": "Prognosis varies widely by subtype, from slowly progressive forms compatible with a near-normal lifespan to more severe childhood-onset disease with early loss of ambulation. Cardiac and respiratory involvement in certain subtypes are the principal determinants of survival, underscoring the value of precise genetic diagnosis.",
-  "pitfalls": [
-   "Grouping all cases together and missing subtype-specific cardiac or respiratory risks",
-   "Overlooking a treatable inflammatory myopathy that can mimic the phenotype",
-   "Failing to pursue genetic confirmation, which is essential for prognosis and counselling",
-   "Attributing a very high creatine kinase solely to exercise in dysferlinopathy",
-   "Neglecting cardiac surveillance in subtypes with known cardiomyopathy risk"
-  ],
-  "references": [
-   "GeneReviews: Limb-girdle muscular dystrophy overview",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent contractures and provide orthoses and mobility aids",
-   "Establish precise genetic subtyping to direct organ surveillance and prognosis",
-   "Undertake cardiac surveillance with ECG and echocardiography, treating cardiomyopathy with ACE inhibitors and beta-blockers and device therapy in at-risk subtypes",
-   "Monitor respiratory function with pulmonary function testing and introduce non-invasive ventilation for respiratory-muscle weakness",
-   "Manage contractures and scoliosis with orthopaedic input",
-   "Deliver multidisciplinary neuromuscular care and rehabilitation",
-   "Provide genetic counselling and family screening, clarifying dominant or recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "limb_girdle_muscular_dystrophy-pathway",
-   "title": "Limb-girdle muscular dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic girdles, with both autosomal dominant and autosomal recessive forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms of cardiomyopathy or conduction disturbance in cardiac-associated subtypes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase measurement, Next-generation sequencing gene panel for limb-girdle muscular dystrophy, Muscle biopsy with immunohistochemistry for specific structural proteins"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent contractures and provide orthoses and mobility aids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Grouping all cases together and missing subtype-specific cardiac or respiratory risks"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "limb_girdle_muscular_dystrophy-matrix",
-   "title": "Limb-girdle muscular dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic girdles, with both autosomal dominant and autosomal recessive forms",
+      "Autosomal recessive subtypes are generally more common and include calpainopathy, dysferlinopathy, and the sarcoglycanopathies",
+      "Onset ranges from childhood to adulthood, typically with difficulty rising from a chair, climbing stairs, and lifting the arms",
+      "Serum creatine kinase is usually elevated, sometimes markedly, especially in the recessive subtypes",
+      "Some subtypes carry a significant risk of cardiomyopathy or respiratory muscle involvement, which guides surveillance",
+      "Dysferlinopathy characteristically presents with distal calf involvement and very high creatine kinase in young adults",
+      "Diagnosis increasingly relies on next-generation sequencing panels, complemented by muscle biopsy with protein immunostaining and imaging",
+      "Management is supportive and multidisciplinary, with physiotherapy, aids to mobility, and cardiac and respiratory monitoring targeted to the subtype"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase measurement, Next-generation sequencing gene panel for limb-girdle muscular dystrophy, Muscle biopsy with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The limb-girdle muscular dystrophies result from variants in a wide range of genes encoding proteins essential to muscle-fibre structure and function, including components of the dystrophin-glycoprotein complex (such as the sarcoglycans), membrane-repair proteins (dysferlin), enzymes (calpain-3), and nuclear and glycosylation-related proteins. Loss of these proteins impairs sarcolemmal stability, membrane repair, or muscle-fibre maintenance, leading to repeated fibre injury, necrosis, and progressive replacement of muscle by fat and connective tissue. The predominant involvement of proximal girdle muscles produces the characteristic pattern of weakness, while the specific protein defect determines any associated cardiac or respiratory involvement.",
+    "additionalDifferentials": [
+      "Becker and Duchenne muscular dystrophies",
+      "Inflammatory myopathies",
+      "Metabolic and mitochondrial myopathies",
+      "Spinal muscular atrophy",
+      "Facioscapulohumeral muscular dystrophy",
+      "Congenital and myofibrillar myopathies"
     ],
-    [
-     "Primary Differentials",
-     "Becker and Duchenne muscular dystrophies, Inflammatory myopathies, Metabolic and mitochondrial myopathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase measurement",
+      "Next-generation sequencing gene panel for limb-girdle muscular dystrophy",
+      "Muscle biopsy with immunohistochemistry for specific structural proteins",
+      "Muscle MRI to characterise the pattern of muscle involvement",
+      "Electrocardiography and echocardiography for cardiomyopathy",
+      "Pulmonary function testing for respiratory muscle weakness"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms of cardiomyopathy or conduction disturbance in cardiac-associated subtypes",
+      "Declining respiratory function or nocturnal hypoventilation",
+      "Rapidly progressive weakness suggesting an inflammatory or alternative cause",
+      "Dysphagia or aspiration risk",
+      "Acute rhabdomyolysis with very high creatine kinase and dark urine"
     ],
-    [
-     "Clinical Pitfall",
-     "Grouping all cases together and missing subtype-specific cardiac or respiratory risks",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies widely by subtype, from slowly progressive forms compatible with a near-normal lifespan to more severe childhood-onset disease with early loss of ambulation. Cardiac and respiratory involvement in certain subtypes are the principal determinants of survival, underscoring the value of precise genetic diagnosis.",
+    "pitfalls": [
+      "Grouping all cases together and missing subtype-specific cardiac or respiratory risks",
+      "Overlooking a treatable inflammatory myopathy that can mimic the phenotype",
+      "Failing to pursue genetic confirmation, which is essential for prognosis and counselling",
+      "Attributing a very high creatine kinase solely to exercise in dysferlinopathy",
+      "Neglecting cardiac surveillance in subtypes with known cardiomyopathy risk"
+    ],
+    "references": [
+      "GeneReviews: Limb-girdle muscular dystrophy overview",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent contractures and provide orthoses and mobility aids",
+      "Establish precise genetic subtyping to direct organ surveillance and prognosis",
+      "Undertake cardiac surveillance with ECG and echocardiography, treating cardiomyopathy with ACE inhibitors and beta-blockers and device therapy in at-risk subtypes",
+      "Monitor respiratory function with pulmonary function testing and introduce non-invasive ventilation for respiratory-muscle weakness",
+      "Manage contractures and scoliosis with orthopaedic input",
+      "Deliver multidisciplinary neuromuscular care and rehabilitation",
+      "Provide genetic counselling and family screening, clarifying dominant or recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for limb-girdle muscular dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "limb-girdle-muscular-dystrophy-real-image",
-   "title": "Limb-girdle muscular dystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "limb_girdle_muscular_dystrophy-pathway",
+      "title": "Limb-girdle muscular dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic girdles, with both autosomal dominant and autosomal recessive forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms of cardiomyopathy or conduction disturbance in cardiac-associated subtypes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase measurement, Next-generation sequencing gene panel for limb-girdle muscular dystrophy, Muscle biopsy with immunohistochemistry for specific structural proteins"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent contractures and provide orthoses and mobility aids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Grouping all cases together and missing subtype-specific cardiac or respiratory risks"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy-matrix",
+      "title": "Limb-girdle muscular dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A genetically diverse group of muscular dystrophies unified by predominantly proximal weakness of the shoulder and pelvic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase measurement, Next-generation sequencing gene panel for limb-girdle muscular dystrophy, Muscle biopsy with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Becker and Duchenne muscular dystrophies, Inflammatory myopathies, Metabolic and mitochondrial myopathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain mobility, prevent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Grouping all cases together and missing subtype-specific cardiac or respiratory risks",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limb-girdle muscular dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Usually elevated, sometimes markedly, especially in recessive subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Next-generation sequencing gene panel",
+          "cells": [
+            {
+              "text": "Genetic subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Specific structural proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Pattern of muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy in cardiac-associated subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Becker and Duchenne muscular dystrophies",
+          "cells": [
+            {
+              "text": "Dystrophin-related dystrophies; a different gene group"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathies",
+          "cells": [
+            {
+              "text": "Treatable mimic of the phenotype; biopsy and serology help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facioscapulohumeral muscular dystrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain mobility and prevent contractures; orthoses and aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic subtyping",
+          "cells": [
+            {
+              "text": "Directs organ surveillance and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG and echocardiography; ACE inhibitors, beta-blockers and device therapy in at-risk subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Pulmonary function testing; non-invasive ventilation for respiratory-muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Contractures and scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular rehabilitation",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Clarify dominant or recessive inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proximal shoulder and pelvic girdle weakness with raised creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiomyopathy, respiratory decline, dysphagia, rhabdomyolysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac and respiratory review for active organ involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, NGS gene panel, muscle biopsy with immunohistochemistry, muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic LGMD gene variant identified on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inflammatory myopathy, FSHD, Becker or a metabolic myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Genetic subtyping to direct organ surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ECG and echocardiography; cardiomyopathy treatment in at-risk subtypes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pulmonary function testing and non-invasive ventilation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling clarifying dominant or recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies by subtype, from near-normal lifespan to severe childhood-onset disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

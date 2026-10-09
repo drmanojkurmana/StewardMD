@@ -1,174 +1,544 @@
 {
- "id": "kaposi_sarcoma",
- "name": "Kaposi Sarcoma",
- "aliases": [
-  "KS",
-  "Kaposi's sarcoma",
-  "HHV-8-associated sarcoma"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause is infective; it presents as violaceous to red-brown macules, plaques, or nodules",
-   "Four clinical-epidemiological forms are recognised: classic (older men of Mediterranean or Eastern European origin), endemic (African), iatrogenic (immunosuppressed transplant recipients), and epidemic (AIDS-associated)",
-   "AIDS-associated Kaposi sarcoma is an AIDS-defining illness, so a new diagnosis should prompt HIV testing and assessment of immune status",
-   "Lesions often follow skin lines, may be multifocal, and can involve the oral mucosa, gastrointestinal tract, and lungs, sometimes with few or no skin findings",
-   "Lymphoedema, particularly of the lower limbs and face, can be prominent and disproportionate to the visible cutaneous disease",
-   "Restoring immune function is central to management: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant-related disease often lead to regression",
-   "Localised skin disease may be treated with local measures, while widespread, visceral, or aggressive disease requires systemic chemotherapy under specialist care",
-   "Diagnosis is confirmed on biopsy showing proliferating spindle cells, slit-like vascular channels, and extravasated red cells, with HHV-8 (LANA) staining"
+  "id": "kaposi_sarcoma",
+  "name": "Kaposi Sarcoma",
+  "aliases": [
+    "KS",
+    "Kaposi's sarcoma",
+    "HHV-8-associated sarcoma"
   ],
-  "pathophysiology": "Kaposi sarcoma arises from HHV-8 (Kaposi sarcoma-associated herpesvirus) infection of endothelial and progenitor cells, which reprogrammes them towards a spindle-cell, angiogenic phenotype. Viral genes drive cell proliferation, inhibit apoptosis, and stimulate production of angiogenic and inflammatory cytokines, producing the characteristic proliferation of abnormal slit-like vascular channels, spindle cells, and extravasated erythrocytes with haemosiderin deposition. Immune dysfunction, whether from HIV infection or iatrogenic immunosuppression, permits viral reactivation and tumour development, which is why the disease is strongly linked to immunocompromise and often regresses when immunity is restored.",
-  "additionalDifferentials": [
-   "Bacillary angiomatosis (important infective mimic in immunocompromised patients)",
-   "Pyogenic granuloma and other vascular proliferations",
-   "Angiosarcoma",
-   "Haemangioma and vascular malformations",
-   "Melanoma and pigmented lesions (for dark violaceous nodules)",
-   "Dermatofibroma and stasis dermatitis changes on the lower legs"
-  ],
-  "additionalInvestigations": [
-   "Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis",
-   "HIV testing and assessment of CD4 count and viral load in newly diagnosed disease",
-   "Review of immunosuppressive medication in transplant recipients",
-   "Investigation for visceral involvement (for example endoscopy or imaging) when gastrointestinal or pulmonary disease is suspected",
-   "Staging assessment to guide whether local or systemic therapy is appropriate"
-  ],
-  "redFlags": [
-   "New diagnosis prompting HIV testing, as epidemic Kaposi sarcoma is an AIDS-defining condition",
-   "Pulmonary involvement causing breathlessness, cough, or haemoptysis, which can be life-threatening",
-   "Gastrointestinal disease with bleeding or obstruction",
-   "Rapidly progressive or widely disseminated disease requiring urgent oncological input",
-   "Extensive lymphoedema causing functional impairment or skin breakdown with secondary infection"
-  ],
-  "prognosis": "Prognosis depends on the clinical form and immune status: classic Kaposi sarcoma is usually indolent, and iatrogenic and epidemic disease often regress when immune function is restored, whereas disseminated or visceral disease, particularly pulmonary involvement, carries significant morbidity and can be fatal without effective treatment.",
-  "pitfalls": [
-   "Failing to test for HIV when Kaposi sarcoma is diagnosed",
-   "Confusing lesions with bacillary angiomatosis in an immunocompromised patient and missing a treatable infection",
-   "Overlooking visceral (gastrointestinal or pulmonary) involvement in patients with limited skin disease",
-   "Not reviewing and adjusting immunosuppression in transplant-associated disease",
-   "Treating aggressively without first optimising immune reconstitution, which alone may induce regression"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant recipients, which often induces regression",
-   "Treat limited cutaneous disease with local measures such as intralesional chemotherapy, radiotherapy, cryotherapy or topical agents",
-   "Use systemic chemotherapy such as liposomal anthracyclines or taxanes for extensive, visceral or rapidly progressive disease",
-   "Test for HIV with CD4 count and viral load and stage for visceral involvement to guide therapy",
-   "Manage disproportionate lymphoedema and provide symptomatic supportive care",
-   "Coordinate multidisciplinary oncology, HIV and transplant medicine input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kaposi_sarcoma-pathway",
-   "title": "Kaposi Sarcoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause is infective; it presents as violaceous to red-brown macules, plaques, or nodules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New diagnosis prompting HIV testing, as epidemic Kaposi sarcoma is an AIDS-defining condition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis, HIV testing and assessment of CD4 count and viral load in newly diagnosed disease, Review of immunosuppressive medication in transplant"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant recipients, which often induces regression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test for HIV when Kaposi sarcoma is diagnosed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kaposi sarcoma."
-  }
- ],
- "tables": [
-  {
-   "id": "kaposi_sarcoma-matrix",
-   "title": "Kaposi Sarcoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause is infective; it presents as violaceous to red-brown macules, plaques, or nodules",
+      "Four clinical-epidemiological forms are recognised: classic (older men of Mediterranean or Eastern European origin), endemic (African), iatrogenic (immunosuppressed transplant recipients), and epidemic (AIDS-associated)",
+      "AIDS-associated Kaposi sarcoma is an AIDS-defining illness, so a new diagnosis should prompt HIV testing and assessment of immune status",
+      "Lesions often follow skin lines, may be multifocal, and can involve the oral mucosa, gastrointestinal tract, and lungs, sometimes with few or no skin findings",
+      "Lymphoedema, particularly of the lower limbs and face, can be prominent and disproportionate to the visible cutaneous disease",
+      "Restoring immune function is central to management: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant-related disease often lead to regression",
+      "Localised skin disease may be treated with local measures, while widespread, visceral, or aggressive disease requires systemic chemotherapy under specialist care",
+      "Diagnosis is confirmed on biopsy showing proliferating spindle cells, slit-like vascular channels, and extravasated red cells, with HHV-8 (LANA) staining"
     ],
-    [
-     "Key Investigations",
-     "Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis, HIV testing and assessment of CD4 count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kaposi sarcoma arises from HHV-8 (Kaposi sarcoma-associated herpesvirus) infection of endothelial and progenitor cells, which reprogrammes them towards a spindle-cell, angiogenic phenotype. Viral genes drive cell proliferation, inhibit apoptosis, and stimulate production of angiogenic and inflammatory cytokines, producing the characteristic proliferation of abnormal slit-like vascular channels, spindle cells, and extravasated erythrocytes with haemosiderin deposition. Immune dysfunction, whether from HIV infection or iatrogenic immunosuppression, permits viral reactivation and tumour development, which is why the disease is strongly linked to immunocompromise and often regresses when immunity is restored.",
+    "additionalDifferentials": [
+      "Bacillary angiomatosis (important infective mimic in immunocompromised patients)",
+      "Pyogenic granuloma and other vascular proliferations",
+      "Angiosarcoma",
+      "Haemangioma and vascular malformations",
+      "Melanoma and pigmented lesions (for dark violaceous nodules)",
+      "Dermatofibroma and stasis dermatitis changes on the lower legs"
     ],
-    [
-     "Primary Differentials",
-     "Bacillary angiomatosis (important infective mimic in immunocompromised patients), Pyogenic granuloma and other vascular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis",
+      "HIV testing and assessment of CD4 count and viral load in newly diagnosed disease",
+      "Review of immunosuppressive medication in transplant recipients",
+      "Investigation for visceral involvement (for example endoscopy or imaging) when gastrointestinal or pulmonary disease is suspected",
+      "Staging assessment to guide whether local or systemic therapy is appropriate"
     ],
-    [
-     "Management Strategy",
-     "Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression",
-     "Core treatment modality"
+    "redFlags": [
+      "New diagnosis prompting HIV testing, as epidemic Kaposi sarcoma is an AIDS-defining condition",
+      "Pulmonary involvement causing breathlessness, cough, or haemoptysis, which can be life-threatening",
+      "Gastrointestinal disease with bleeding or obstruction",
+      "Rapidly progressive or widely disseminated disease requiring urgent oncological input",
+      "Extensive lymphoedema causing functional impairment or skin breakdown with secondary infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test for HIV when Kaposi sarcoma is diagnosed",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the clinical form and immune status: classic Kaposi sarcoma is usually indolent, and iatrogenic and epidemic disease often regress when immune function is restored, whereas disseminated or visceral disease, particularly pulmonary involvement, carries significant morbidity and can be fatal without effective treatment.",
+    "pitfalls": [
+      "Failing to test for HIV when Kaposi sarcoma is diagnosed",
+      "Confusing lesions with bacillary angiomatosis in an immunocompromised patient and missing a treatable infection",
+      "Overlooking visceral (gastrointestinal or pulmonary) involvement in patients with limited skin disease",
+      "Not reviewing and adjusting immunosuppression in transplant-associated disease",
+      "Treating aggressively without first optimising immune reconstitution, which alone may induce regression"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant recipients, which often induces regression",
+      "Treat limited cutaneous disease with local measures such as intralesional chemotherapy, radiotherapy, cryotherapy or topical agents",
+      "Use systemic chemotherapy such as liposomal anthracyclines or taxanes for extensive, visceral or rapidly progressive disease",
+      "Test for HIV with CD4 count and viral load and stage for visceral involvement to guide therapy",
+      "Manage disproportionate lymphoedema and provide symptomatic supportive care",
+      "Coordinate multidisciplinary oncology, HIV and transplant medicine input"
     ]
-   ],
-   "caption": "Overview comparison matrix for kaposi sarcoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kaposi-sarcoma-real-image",
-   "title": "Kaposi Sarcoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "kaposi_sarcoma-pathway",
+      "title": "Kaposi Sarcoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause is infective; it presents as violaceous to red-brown macules, plaques, or nodules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New diagnosis prompting HIV testing, as epidemic Kaposi sarcoma is an AIDS-defining condition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis, HIV testing and assessment of CD4 count and viral load in newly diagnosed disease, Review of immunosuppressive medication in transplant"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression in transplant recipients, which often induces regression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test for HIV when Kaposi sarcoma is diagnosed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kaposi sarcoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kaposi_sarcoma-matrix",
+      "title": "Kaposi Sarcoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Kaposi sarcoma is a vascular tumour driven by human herpesvirus 8 (HHV-8) infection, classified as a neoplasm although its cause",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin or mucosal biopsy with HHV-8 (LANA) immunostaining to confirm the diagnosis, HIV testing and assessment of CD4 count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacillary angiomatosis (important infective mimic in immunocompromised patients), Pyogenic granuloma and other vascular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore immune function as the cornerstone: antiretroviral therapy in HIV-associated disease and reduction of immunosuppression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test for HIV when Kaposi sarcoma is diagnosed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kaposi sarcoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, DNA Viruses (p60)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kaposi_sarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or mucosal biopsy with HHV-8 (LANA) immunostaining",
+          "cells": [
+            {
+              "text": "HHV-8 positive lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing with CD4 count and viral load",
+          "cells": [
+            {
+              "text": "HIV status and immune function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of immunosuppressive medication",
+          "cells": [
+            {
+              "text": "Transplant recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy or imaging for visceral disease",
+          "cells": [
+            {
+              "text": "Gastrointestinal or pulmonary involvement when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging assessment",
+          "cells": [
+            {
+              "text": "Local or systemic therapy decision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kaposi_sarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacillary angiomatosis",
+          "cells": [
+            {
+              "text": "Infective mimic in immunocompromised patients; biopsy distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatofibroma or lower-leg stasis change",
+          "cells": [
+            {
+              "text": "Lower-leg stasis change; HHV-8 staining negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kaposi_sarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune restoration",
+          "cells": [
+            {
+              "text": "Antiretroviral therapy in HIV disease; reduced immunosuppression in transplant recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited skin disease",
+          "cells": [
+            {
+              "text": "Intralesional chemotherapy, radiotherapy, cryotherapy or topical agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensive or visceral disease",
+          "cells": [
+            {
+              "text": "Liposomal anthracyclines or taxanes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging and HIV",
+          "cells": [
+            {
+              "text": "CD4 count, viral load and visceral staging to guide therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoedema",
+          "cells": [
+            {
+              "text": "Management of disproportionate lymphoedema and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordination",
+          "cells": [
+            {
+              "text": "Oncology, HIV and transplant medicine input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kaposi_sarcoma-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "DNA viruses by family",
+      "rowHeader": "Family",
+      "columns": [
+        "Viruses",
+        "Genome"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepadnaviridae",
+          "cells": [
+            {
+              "text": "Hepatitis B virus"
+            },
+            {
+              "text": "Double-stranded DNA with single-stranded portions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parvoviridae",
+          "cells": [
+            {
+              "text": "Parvovirus B19"
+            },
+            {
+              "text": "Single-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Papovaviridae",
+          "cells": [
+            {
+              "text": "Human papillomaviruses; JC virus; BK virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenoviridae",
+          "cells": [
+            {
+              "text": "Human adenoviruses"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpesviridae",
+          "cells": [
+            {
+              "text": "Herpes simplex virus types 1 and 2; varicella-zoster virus; Epstein-Barr virus; cytomegalovirus; human herpesvirus 6; human herpesvirus 7; Kaposi's sarcoma-associated herpesvirus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Poxviridae",
+          "cells": [
+            {
+              "text": "Variola (smallpox) virus; Orf virus; Molluscum contagiosum virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source marks some viruses with superscript letters whose footnote text is not on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kaposi_sarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Kaposi Sarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Violaceous macules, plaques or nodules in an HIV-positive or transplant patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulmonary or GI involvement, bleeding, obstruction, rapid spread or severe lymphoedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review; assess visceral disease; treat bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with HHV-8 LANA, HIV with CD4 and viral load, medication review, visceral staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HHV-8 positive lesion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacillary angiomatosis or another vascular tumour; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiretroviral therapy in HIV-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce immunosuppression in transplant recipients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local treatment for limited disease: intralesional chemo, radiotherapy or cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liposomal anthracyclines or taxanes for extensive or visceral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lymphoedema care and symptom support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Regression often follows immune restoration; chemotherapy for extensive disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

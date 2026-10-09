@@ -1,172 +1,497 @@
 {
- "id": "post_transfusion_purpura",
- "name": "Post-transfusion purpura",
- "aliases": [
-  "PTP",
-  "post-transfusion thrombocytopenic purpura",
-  "HPA-1a alloimmune purpura"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a platelet-containing component",
-   "Most often affects multiparous women or previously transfused patients who have been alloimmunised to a platelet antigen",
-   "The great majority of cases involve antibodies to human platelet antigen 1a in an HPA-1a-negative recipient",
-   "Paradoxically the patient's own antigen-negative platelets are destroyed alongside the transfused antigen-positive platelets",
-   "Presents with purpura, mucosal bleeding and a profound drop in platelet count, with a risk of serious haemorrhage",
-   "First-line treatment is intravenous immunoglobulin, with corticosteroids and plasma exchange used in some cases",
-   "Further transfusion should ideally use antigen-negative components, and the condition is usually self-limiting over one to several weeks"
+  "id": "post_transfusion_purpura",
+  "name": "Post-transfusion purpura",
+  "aliases": [
+    "PTP",
+    "post-transfusion thrombocytopenic purpura",
+    "HPA-1a alloimmune purpura"
   ],
-  "pathophysiology": "Post-transfusion purpura is an alloimmune disorder occurring in a patient lacking a common platelet antigen, most often human platelet antigen 1a, who has been sensitised by earlier transfusion or pregnancy. Exposure to the antigen in a transfused component triggers an anamnestic rise in platelet alloantibody. These antibodies destroy the transfused antigen-positive platelets, but characteristically the recipient's own antigen-negative platelets are also consumed, producing profound thrombocytopenia. The destruction of autologous antigen-negative platelets is incompletely understood but may involve adsorption of soluble antigen or immune-complex mechanisms. The self-limiting course reflects eventual clearance of the antigenic stimulus and waning of the antibody response.",
-  "additionalDifferentials": [
-   "Heparin-induced thrombocytopenia",
-   "Immune thrombocytopenia from other causes",
-   "Drug-induced immune thrombocytopenia",
-   "Disseminated intravascular coagulation",
-   "Thrombotic thrombocytopenic purpura",
-   "Passive alloimmune thrombocytopenia from transfused antibody"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film confirming isolated severe thrombocytopenia",
-   "Platelet antibody testing, characteristically identifying anti-HPA-1a",
-   "Human platelet antigen typing of the recipient, typically HPA-1a negative",
-   "Coagulation screen to exclude disseminated intravascular coagulation",
-   "Review of transfusion history and timing relative to the platelet fall",
-   "Assessment for heparin exposure to exclude heparin-induced thrombocytopenia"
-  ],
-  "redFlags": [
-   "Profound thrombocytopenia with mucosal or gastrointestinal bleeding",
-   "Any suspicion of intracranial haemorrhage in a severely thrombocytopenic patient",
-   "Rapidly falling platelet count after recent transfusion in a multiparous woman",
-   "Bleeding failing to respond to standard platelet transfusion"
-  ],
-  "prognosis": "The condition is typically self-limiting, with platelet counts recovering over one to several weeks, and intravenous immunoglobulin shortens the course, though the acute thrombocytopenic phase carries a genuine risk of severe and occasionally fatal haemorrhage.",
-  "pitfalls": [
-   "Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture",
-   "Misdiagnosing it as simple immune thrombocytopenia and missing the transfusion link",
-   "Overlooking the diagnosis in a multiparous woman with recent transfusion",
-   "Failing to arrange antigen-negative components for any essential future transfusion"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count",
-   "Corticosteroids and plasma exchange for refractory or severe cases",
-   "Avoidance of random-donor platelet transfusion, which supplies further antigen-positive platelets and can worsen the reaction, reserving antigen-negative platelets for life-threatening haemorrhage",
-   "Supportive management of bleeding, including local haemostatic measures during the thrombocytopenic phase",
-   "Provision of antigen-negative, typically HPA-1a-negative, and washed cellular components for any future transfusion",
-   "Referral to haematology and transfusion medicine, with documentation of the alloantibody and notification through haemovigilance channels"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "post_transfusion_purpura-pathway",
-   "title": "Post-transfusion purpura: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a platelet-containing component",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound thrombocytopenia with mucosal or gastrointestinal bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film confirming isolated severe thrombocytopenia, Platelet antibody testing, characteristically identifying anti-HPA-1a, Human platelet antigen typing of the recipient, typically HPA-1a negative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of post-transfusion purpura."
-  }
- ],
- "tables": [
-  {
-   "id": "post_transfusion_purpura-matrix",
-   "title": "Post-transfusion purpura: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a platelet-containing component",
+      "Most often affects multiparous women or previously transfused patients who have been alloimmunised to a platelet antigen",
+      "The great majority of cases involve antibodies to human platelet antigen 1a in an HPA-1a-negative recipient",
+      "Paradoxically the patient's own antigen-negative platelets are destroyed alongside the transfused antigen-positive platelets",
+      "Presents with purpura, mucosal bleeding and a profound drop in platelet count, with a risk of serious haemorrhage",
+      "First-line treatment is intravenous immunoglobulin, with corticosteroids and plasma exchange used in some cases",
+      "Further transfusion should ideally use antigen-negative components, and the condition is usually self-limiting over one to several weeks"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film confirming isolated severe thrombocytopenia, Platelet antibody testing, characteristically",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Post-transfusion purpura is an alloimmune disorder occurring in a patient lacking a common platelet antigen, most often human platelet antigen 1a, who has been sensitised by earlier transfusion or pregnancy. Exposure to the antigen in a transfused component triggers an anamnestic rise in platelet alloantibody. These antibodies destroy the transfused antigen-positive platelets, but characteristically the recipient's own antigen-negative platelets are also consumed, producing profound thrombocytopenia. The destruction of autologous antigen-negative platelets is incompletely understood but may involve adsorption of soluble antigen or immune-complex mechanisms. The self-limiting course reflects eventual clearance of the antigenic stimulus and waning of the antibody response.",
+    "additionalDifferentials": [
+      "Heparin-induced thrombocytopenia",
+      "Immune thrombocytopenia from other causes",
+      "Drug-induced immune thrombocytopenia",
+      "Disseminated intravascular coagulation",
+      "Thrombotic thrombocytopenic purpura",
+      "Passive alloimmune thrombocytopenia from transfused antibody"
     ],
-    [
-     "Primary Differentials",
-     "Heparin-induced thrombocytopenia, Immune thrombocytopenia from other causes, Drug-induced immune thrombocytopenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film confirming isolated severe thrombocytopenia",
+      "Platelet antibody testing, characteristically identifying anti-HPA-1a",
+      "Human platelet antigen typing of the recipient, typically HPA-1a negative",
+      "Coagulation screen to exclude disseminated intravascular coagulation",
+      "Review of transfusion history and timing relative to the platelet fall",
+      "Assessment for heparin exposure to exclude heparin-induced thrombocytopenia"
     ],
-    [
-     "Management Strategy",
-     "Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound thrombocytopenia with mucosal or gastrointestinal bleeding",
+      "Any suspicion of intracranial haemorrhage in a severely thrombocytopenic patient",
+      "Rapidly falling platelet count after recent transfusion in a multiparous woman",
+      "Bleeding failing to respond to standard platelet transfusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is typically self-limiting, with platelet counts recovering over one to several weeks, and intravenous immunoglobulin shortens the course, though the acute thrombocytopenic phase carries a genuine risk of severe and occasionally fatal haemorrhage.",
+    "pitfalls": [
+      "Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture",
+      "Misdiagnosing it as simple immune thrombocytopenia and missing the transfusion link",
+      "Overlooking the diagnosis in a multiparous woman with recent transfusion",
+      "Failing to arrange antigen-negative components for any essential future transfusion"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count",
+      "Corticosteroids and plasma exchange for refractory or severe cases",
+      "Avoidance of random-donor platelet transfusion, which supplies further antigen-positive platelets and can worsen the reaction, reserving antigen-negative platelets for life-threatening haemorrhage",
+      "Supportive management of bleeding, including local haemostatic measures during the thrombocytopenic phase",
+      "Provision of antigen-negative, typically HPA-1a-negative, and washed cellular components for any future transfusion",
+      "Referral to haematology and transfusion medicine, with documentation of the alloantibody and notification through haemovigilance channels"
     ]
-   ],
-   "caption": "Overview comparison matrix for post-transfusion purpura."
-  }
- ],
- "diagrams": [
-  {
-   "id": "post-transfusion-purpura-real-image",
-   "title": "Post-transfusion purpura: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "post_transfusion_purpura-pathway",
+      "title": "Post-transfusion purpura: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a platelet-containing component",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound thrombocytopenia with mucosal or gastrointestinal bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film confirming isolated severe thrombocytopenia, Platelet antibody testing, characteristically identifying anti-HPA-1a, Human platelet antigen typing of the recipient, typically HPA-1a negative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of post-transfusion purpura."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "post_transfusion_purpura-matrix",
+      "title": "Post-transfusion purpura: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by abrupt, severe thrombocytopenia developing roughly five to twelve days after transfusion of a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film confirming isolated severe thrombocytopenia, Platelet antibody testing, characteristically",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Heparin-induced thrombocytopenia, Immune thrombocytopenia from other causes, Drug-induced immune thrombocytopenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intravenous immunoglobulin as first-line treatment to accelerate recovery of the platelet count",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving standard platelet transfusions, which are rapidly destroyed and may worsen the picture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for post-transfusion purpura."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "post_transfusion_purpura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Isolated severe thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet antibody testing",
+          "cells": [
+            {
+              "text": "Anti-HPA-1a characteristically identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Human platelet antigen typing of recipient",
+          "cells": [
+            {
+              "text": "Typically HPA-1a negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion history and timing",
+          "cells": [
+            {
+              "text": "Platelet fall after transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heparin exposure assessment",
+          "cells": [
+            {
+              "text": "Heparin-induced thrombocytopenia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transfusion_purpura-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Recent heparin exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Other causes of immune destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Temporal link to a drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Coagulation abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Microangiopathic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Passive alloimmune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Transfused antibody"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "post_transfusion_purpura-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "First-line treatment to accelerate platelet recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and plasma exchange",
+          "cells": [
+            {
+              "text": "Refractory or severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid random-donor platelets",
+          "cells": [
+            {
+              "text": "They supply further antigen-positive platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive bleeding care",
+          "cells": [
+            {
+              "text": "Local haemostatic measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-negative components",
+          "cells": [
+            {
+              "text": "HPA-1a-negative and washed cellular products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Documentation of the alloantibody"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "post_transfusion_purpura-dx-mgmt",
+      "title": "Diagnosis and management of Post-transfusion purpura",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe isolated thrombocytopenia about one week after a transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (mucosal or GI bleeding, suspected intracranial bleed, poor platelet response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment for intracranial or major bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; platelet antibodies; HPA typing; coagulation screen; heparin history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do platelet antibodies and HPA typing support post-transfusion purpura?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heparin-induced thrombocytopenia, ITP, DIC or TTP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous immunoglobulin as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids and plasma exchange for refractory or severe cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid random-donor platelet transfusion, which supplies more antigen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive bleeding care with local haemostatic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Provide antigen-negative components and refer to haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting, with platelet recovery over one to several weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

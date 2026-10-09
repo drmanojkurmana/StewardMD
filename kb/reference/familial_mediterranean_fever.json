@@ -1,176 +1,483 @@
 {
- "id": "familial_mediterranean_fever",
- "name": "familial mediterranean fever",
- "aliases": [
-  "FMF",
-  "recurrent hereditary polyserositis",
-  "MEFV-associated periodic fever"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern Mediterranean (Sephardic and Mizrahi Jews, Armenians, Turks, Arabs); M694V homozygosity carries the most severe phenotype and highest amyloidosis risk.",
-   "Attacks are short-lived, usually resolving within a few days, and feature fever with self-limiting serositis: sterile peritonitis mimicking an acute abdomen, pleuritis, and less often pericarditis.",
-   "Acute monoarthritis of a large lower-limb joint and an erysipelas-like erythema over the ankle, foot or shin are characteristic mucocutaneous and articular manifestations.",
-   "Colchicine taken continuously is the cornerstone of therapy, preventing attacks in most patients and, crucially, preventing systemic AA amyloidosis; adherence rather than dose escalation usually explains apparent failure.",
-   "Interleukin-1 blockade is reserved for genuinely colchicine-resistant or colchicine-intolerant disease and for established amyloidosis.",
-   "Subclinical inflammation with persistently raised serum amyloid A can occur between clinically silent intervals and drives amyloid deposition even when attacks seem controlled.",
-   "Protracted febrile myalgia and exercise-induced lower-limb myalgia are recognised variants that can be mistaken for vasculitis or myositis.",
-   "A trial of colchicine with a clear symptomatic and biochemical response supports the diagnosis when genetic testing is equivocal."
+  "id": "familial_mediterranean_fever",
+  "name": "familial mediterranean fever",
+  "aliases": [
+    "FMF",
+    "recurrent hereditary polyserositis",
+    "MEFV-associated periodic fever"
   ],
-  "pathophysiology": "Pyrin, the product of the MEFV gene expressed predominantly in innate immune cells, normally acts as a sensor that becomes activated when RhoA-mediated pyrin phosphorylation is lost, as occurs with certain bacterial toxins. Gain-of-function variants lower the threshold for assembly of the pyrin inflammasome, leading to caspase-1 activation, unregulated maturation and release of interleukin-1 beta and interleukin-18, and neutrophil-rich serosal inflammation. The episodic nature reflects intermittent triggering superimposed on a lowered inflammatory set point, while chronic overproduction of serum amyloid A during and between attacks underlies reactive AA amyloidosis, the principal determinant of long-term morbidity.",
-  "additionalDifferentials": [
-   "TNF receptor-associated periodic syndrome",
-   "Mevalonate kinase deficiency (hyper-IgD syndrome)",
-   "Cryopyrin-associated periodic syndrome spectrum",
-   "PFAPA (periodic fever, aphthous stomatitis, pharyngitis, adenitis) syndrome",
-   "Acute surgical abdomen such as appendicitis or perforated viscus",
-   "Systemic juvenile idiopathic arthritis and adult-onset Still's disease",
-   "Acute intermittent porphyria"
-  ],
-  "additionalInvestigations": [
-   "Targeted MEFV gene sequencing for pathogenic variants",
-   "Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen) measured during and between attacks",
-   "Serial urinalysis for proteinuria as amyloidosis surveillance",
-   "Renal biopsy with Congo red staining when nephrotic-range proteinuria develops",
-   "SAA1 genotype where available to refine amyloidosis risk stratification",
-   "Cross-sectional imaging during an attack to document serositis and exclude a surgical cause"
-  ],
-  "redFlags": [
-   "New or increasing proteinuria signalling incipient renal AA amyloidosis",
-   "An attack that fails to remit within the usual short window, raising concern for true surgical peritonitis or protracted febrile myalgia",
-   "Breathlessness or haemodynamic compromise suggesting pericardial involvement",
-   "Persistently elevated inflammatory markers between attacks despite apparent clinical control"
-  ],
-  "prognosis": "With adherent colchicine prophylaxis most patients achieve good control of attacks and normal life expectancy, and the risk of amyloidosis falls substantially. Untreated or poorly controlled disease, particularly with high-risk MEFV and SAA1 genotypes, progresses to renal failure from AA amyloidosis.",
-  "pitfalls": [
-   "Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered",
-   "Assuming a negative or heterozygous MEFV result excludes the disease, as phenotype does not always follow a simple recessive pattern and not all pathogenic variants are covered by every panel",
-   "Attributing apparent colchicine failure to true resistance rather than to non-adherence or gastrointestinal intolerance",
-   "Overlooking silent amyloidosis because attacks are clinically well controlled"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology (current edition)",
-   "EULAR recommendations for the management of familial Mediterranean fever",
-   "Nelson Textbook of Pediatrics (current edition)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising adherence rather than dose escalation",
-   "Reserve interleukin-1 blockade (anakinra or canakinumab) for genuinely colchicine-resistant or colchicine-intolerant disease and for established amyloidosis",
-   "Relieve acute serosal attacks with anti-inflammatory analgesia while avoiding unnecessary laparotomy for sterile peritonitis",
-   "Surveil for AA amyloidosis with serial urinalysis for proteinuria and monitoring of serum amyloid A and C-reactive protein, even between attacks",
-   "Manage nephrotic-range proteinuria and renal amyloidosis with nephrology input, progressing to renal replacement or transplantation if kidney failure develops",
-   "Offer genetic counselling with MEFV testing and SAA1 genotype for amyloidosis risk stratification where available",
-   "Provide rheumatology-led long-term follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_mediterranean_fever-pathway",
-   "title": "familial mediterranean fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern Mediterranean (Sephardic and Mizrahi Jews, Armenians, Turks, Arabs); M694V homozygosity carries the most",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or increasing proteinuria signalling incipient renal AA amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted MEFV gene sequencing for pathogenic variants, Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen) measured during and between attacks, Serial urinalysis for proteinuria as amyloidosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising adherence rather than dose escalation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial mediterranean fever."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_mediterranean_fever-matrix",
-   "title": "familial mediterranean fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern Mediterranean (Sephardic and Mizrahi Jews, Armenians, Turks, Arabs); M694V homozygosity carries the most severe phenotype and highest amyloidosis risk.",
+      "Attacks are short-lived, usually resolving within a few days, and feature fever with self-limiting serositis: sterile peritonitis mimicking an acute abdomen, pleuritis, and less often pericarditis.",
+      "Acute monoarthritis of a large lower-limb joint and an erysipelas-like erythema over the ankle, foot or shin are characteristic mucocutaneous and articular manifestations.",
+      "Colchicine taken continuously is the cornerstone of therapy, preventing attacks in most patients and, crucially, preventing systemic AA amyloidosis; adherence rather than dose escalation usually explains apparent failure.",
+      "Interleukin-1 blockade is reserved for genuinely colchicine-resistant or colchicine-intolerant disease and for established amyloidosis.",
+      "Subclinical inflammation with persistently raised serum amyloid A can occur between clinically silent intervals and drives amyloid deposition even when attacks seem controlled.",
+      "Protracted febrile myalgia and exercise-induced lower-limb myalgia are recognised variants that can be mistaken for vasculitis or myositis.",
+      "A trial of colchicine with a clear symptomatic and biochemical response supports the diagnosis when genetic testing is equivocal."
     ],
-    [
-     "Key Investigations",
-     "Targeted MEFV gene sequencing for pathogenic variants, Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyrin, the product of the MEFV gene expressed predominantly in innate immune cells, normally acts as a sensor that becomes activated when RhoA-mediated pyrin phosphorylation is lost, as occurs with certain bacterial toxins. Gain-of-function variants lower the threshold for assembly of the pyrin inflammasome, leading to caspase-1 activation, unregulated maturation and release of interleukin-1 beta and interleukin-18, and neutrophil-rich serosal inflammation. The episodic nature reflects intermittent triggering superimposed on a lowered inflammatory set point, while chronic overproduction of serum amyloid A during and between attacks underlies reactive AA amyloidosis, the principal determinant of long-term morbidity.",
+    "additionalDifferentials": [
+      "TNF receptor-associated periodic syndrome",
+      "Mevalonate kinase deficiency (hyper-IgD syndrome)",
+      "Cryopyrin-associated periodic syndrome spectrum",
+      "PFAPA (periodic fever, aphthous stomatitis, pharyngitis, adenitis) syndrome",
+      "Acute surgical abdomen such as appendicitis or perforated viscus",
+      "Systemic juvenile idiopathic arthritis and adult-onset Still's disease",
+      "Acute intermittent porphyria"
     ],
-    [
-     "Primary Differentials",
-     "TNF receptor-associated periodic syndrome, Mevalonate kinase deficiency (hyper-IgD syndrome), Cryopyrin-associated periodic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted MEFV gene sequencing for pathogenic variants",
+      "Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen) measured during and between attacks",
+      "Serial urinalysis for proteinuria as amyloidosis surveillance",
+      "Renal biopsy with Congo red staining when nephrotic-range proteinuria develops",
+      "SAA1 genotype where available to refine amyloidosis risk stratification",
+      "Cross-sectional imaging during an attack to document serositis and exclude a surgical cause"
     ],
-    [
-     "Management Strategy",
-     "Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising",
-     "Core treatment modality"
+    "redFlags": [
+      "New or increasing proteinuria signalling incipient renal AA amyloidosis",
+      "An attack that fails to remit within the usual short window, raising concern for true surgical peritonitis or protracted febrile myalgia",
+      "Breathlessness or haemodynamic compromise suggesting pericardial involvement",
+      "Persistently elevated inflammatory markers between attacks despite apparent clinical control"
     ],
-    [
-     "Clinical Pitfall",
-     "Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered",
-     "Prevent diagnostic or management error"
+    "prognosis": "With adherent colchicine prophylaxis most patients achieve good control of attacks and normal life expectancy, and the risk of amyloidosis falls substantially. Untreated or poorly controlled disease, particularly with high-risk MEFV and SAA1 genotypes, progresses to renal failure from AA amyloidosis.",
+    "pitfalls": [
+      "Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered",
+      "Assuming a negative or heterozygous MEFV result excludes the disease, as phenotype does not always follow a simple recessive pattern and not all pathogenic variants are covered by every panel",
+      "Attributing apparent colchicine failure to true resistance rather than to non-adherence or gastrointestinal intolerance",
+      "Overlooking silent amyloidosis because attacks are clinically well controlled"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology (current edition)",
+      "EULAR recommendations for the management of familial Mediterranean fever",
+      "Nelson Textbook of Pediatrics (current edition)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising adherence rather than dose escalation",
+      "Reserve interleukin-1 blockade (anakinra or canakinumab) for genuinely colchicine-resistant or colchicine-intolerant disease and for established amyloidosis",
+      "Relieve acute serosal attacks with anti-inflammatory analgesia while avoiding unnecessary laparotomy for sterile peritonitis",
+      "Surveil for AA amyloidosis with serial urinalysis for proteinuria and monitoring of serum amyloid A and C-reactive protein, even between attacks",
+      "Manage nephrotic-range proteinuria and renal amyloidosis with nephrology input, progressing to renal replacement or transplantation if kidney failure develops",
+      "Offer genetic counselling with MEFV testing and SAA1 genotype for amyloidosis risk stratification where available",
+      "Provide rheumatology-led long-term follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial mediterranean fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-mediterranean-fever-real-image",
-   "title": "familial mediterranean fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "familial_mediterranean_fever-pathway",
+      "title": "familial mediterranean fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern Mediterranean (Sephardic and Mizrahi Jews, Armenians, Turks, Arabs); M694V homozygosity carries the most",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or increasing proteinuria signalling incipient renal AA amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted MEFV gene sequencing for pathogenic variants, Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen) measured during and between attacks, Serial urinalysis for proteinuria as amyloidosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising adherence rather than dose escalation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial mediterranean fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_mediterranean_fever-matrix",
+      "title": "familial mediterranean fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by pathogenic variants in MEFV encoding pyrin, classically autosomal recessive with founder populations across the eastern",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted MEFV gene sequencing for pathogenic variants, Acute-phase reactants (C-reactive protein, serum amyloid A, fibrinogen)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "TNF receptor-associated periodic syndrome, Mevalonate kinase deficiency (hyper-IgD syndrome), Cryopyrin-associated periodic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give lifelong continuous colchicine as the cornerstone to prevent attacks and, crucially, to prevent AA amyloidosis, emphasising",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Recurrent sterile peritonitis leading to unnecessary appendicectomy or laparotomy before the diagnosis is considered",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial mediterranean fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_mediterranean_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted MEFV gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants (CRP, serum amyloid A, fibrinogen)",
+          "cells": [
+            {
+              "text": "Inflammation during and between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Amyloidosis surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAA1 genotype, where available",
+          "cells": [
+            {
+              "text": "Amyloidosis risk stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging during an attack",
+          "cells": [
+            {
+              "text": "Serositis; exclude a surgical cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_mediterranean_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Appendicitis or perforated viscus",
+          "cells": [
+            {
+              "text": "Sterile peritonitis from attacks mimics a surgical abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF receptor-associated or mevalonate kinase periodic fever",
+          "cells": [
+            {
+              "text": "Other periodic fever syndromes considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis or adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Listed in the differential of recurrent fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_mediterranean_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong continuous colchicine",
+          "cells": [
+            {
+              "text": "Cornerstone; prevents attacks and AA amyloidosis, with emphasis on adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab for colchicine-resistant or intolerant disease, or established amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory analgesia for serosal attacks",
+          "cells": [
+            {
+              "text": "Avoids unnecessary laparotomy for sterile peritonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "Serial urinalysis, serum amyloid A and CRP, even between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology input for renal amyloidosis",
+          "cells": [
+            {
+              "text": "Progression to renal replacement or transplantation if kidney failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEFV testing and SAA1 genotype counselling",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatology-led long-term follow-up",
+          "cells": [
+            {
+              "text": "Ongoing care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_mediterranean_fever-dx-mgmt",
+      "title": "Diagnosis and management of familial mediterranean fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent short febrile attacks with sterile peritonitis or erysipelas-like rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new proteinuria, pericardial signs, attack not settling, raised markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical review if peritonitis fails to settle; nephrology for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MEFV sequencing; CRP and SAA; urinalysis; imaging during attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Recurrent attacks with pathogenic MEFV variants or colchicine response?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other periodic fever syndromes, PFAPA or systemic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong continuous colchicine to prevent attacks and amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-1 blockade for colchicine-resistant or intolerant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-inflammatory analgesia for serosal attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial urinalysis and inflammatory markers for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrology input for renal amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With adherent colchicine, most have good control and normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

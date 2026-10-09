@@ -1,177 +1,455 @@
 {
- "id": "sporotrichosis",
- "name": "Sporotrichosis",
- "aliases": [
-  "rose gardener's disease",
-  "Sporothrix schenckii infection",
-  "lymphocutaneous sporotrichosis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil, thorns, sphagnum moss or plant material into the skin",
-   "The classic lymphocutaneous form begins as a papule or nodule at the inoculation site that ulcerates, followed by a chain of nodules tracking along lymphatic channels (sporotrichoid spread)",
-   "A fixed cutaneous form remains localised at the inoculation site without lymphatic progression",
-   "Occupational and recreational exposure among gardeners, farmers and forestry workers is a key historical clue",
-   "Extracutaneous disease, including osteoarticular, pulmonary and disseminated forms, occurs mainly in immunocompromised or alcoholic patients",
-   "Diagnosis is confirmed by fungal culture of pus, tissue or aspirate, with histopathology sometimes showing yeast forms and asteroid bodies",
-   "Itraconazole is the preferred agent for cutaneous and lymphocutaneous disease, with amphotericin-based therapy reserved for severe, disseminated or meningeal infection; saturated potassium iodide remains a low-cost option in some settings"
+  "id": "sporotrichosis",
+  "name": "Sporotrichosis",
+  "aliases": [
+    "rose gardener's disease",
+    "Sporothrix schenckii infection",
+    "lymphocutaneous sporotrichosis"
   ],
-  "pathophysiology": "Sporothrix species exist as mould in the environment and convert to a yeast form at body temperature after traumatic inoculation into skin or subcutaneous tissue. A localised suppurative and granulomatous (mixed pyogranulomatous) inflammatory response develops. The organism spreads proximally along lymphatic vessels, producing successive nodules. In immunocompromised hosts or after inhalation, haematogenous or pulmonary dissemination can occur, involving bones, joints, lungs and rarely the meninges. Cell-mediated immunity is central to containment, explaining severe disease in those with impaired T-cell function.",
-  "additionalDifferentials": [
-   "Cutaneous nocardiosis (sporotrichoid pattern)",
-   "Atypical mycobacterial infection (e.g. Mycobacterium marinum)",
-   "Cutaneous leishmaniasis",
-   "Tularaemia",
-   "Bacterial lymphangitis or cutaneous tuberculosis"
-  ],
-  "infectionMimics": [
-   "Mycobacterium marinum fish-tank granuloma",
-   "Nocardia brasiliensis lymphocutaneous infection",
-   "Cutaneous leishmaniasis",
-   "Cutaneous tuberculosis (scrofuloderma or lupus vulgaris)"
-  ],
-  "additionalInvestigations": [
-   "Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard",
-   "Histopathology of biopsy for granulomatous inflammation and yeast forms with asteroid bodies",
-   "Imaging of bone and joints when osteoarticular disease is suspected",
-   "Chest imaging in suspected pulmonary involvement",
-   "Assessment of immune status including HIV testing in disseminated disease"
-  ],
-  "redFlags": [
-   "Disseminated or multifocal disease suggesting significant immunosuppression",
-   "Pulmonary involvement with cavitation or systemic symptoms",
-   "Osteoarticular disease with joint destruction",
-   "Meningeal involvement, which is rare but serious and difficult to treat"
-  ],
-  "prognosis": "Lymphocutaneous and fixed cutaneous disease respond well to prolonged azole therapy with an excellent outcome, whereas disseminated, pulmonary and meningeal forms carry a much poorer prognosis and require aggressive treatment, particularly in immunocompromised hosts.",
-  "pitfalls": [
-   "Stopping antifungal therapy too early before lesions have fully resolved, risking relapse",
-   "Overlooking the inoculation history and misdiagnosing bacterial infection",
-   "Failing to investigate for immunosuppression in disseminated cases",
-   "Not distinguishing sporotrichoid spread from other causes of nodular lymphangitis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution",
-   "Amphotericin B for severe disseminated, pulmonary or meningeal disease, particularly in immunocompromised hosts, with step-down to itraconazole once stabilised",
-   "Saturated potassium iodide solution as an alternative for cutaneous disease where azoles are unsuitable or unavailable",
-   "Local hyperthermia as an option for cutaneous disease in pregnancy, where systemic antifungals are contraindicated",
-   "Surgical debridement or drainage as an adjunct in osteoarticular or cavitary pulmonary disease",
-   "Assess and optimise immune status, including HIV testing and management, given the risk of dissemination",
-   "Advise protective gloves and clothing during gardening, forestry and handling of soil or sphagnum moss to prevent re-inoculation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sporotrichosis-pathway",
-   "title": "Sporotrichosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil, thorns, sphagnum moss or plant material into the skin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated or multifocal disease suggesting significant immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard, Histopathology of biopsy for granulomatous inflammation and yeast forms with asteroid bodies, Imaging of bone and joints when osteoarticular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Stopping antifungal therapy too early before lesions have fully resolved, risking relapse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sporotrichosis."
-  }
- ],
- "tables": [
-  {
-   "id": "sporotrichosis-matrix",
-   "title": "Sporotrichosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil, thorns, sphagnum moss or plant material into the skin",
+      "The classic lymphocutaneous form begins as a papule or nodule at the inoculation site that ulcerates, followed by a chain of nodules tracking along lymphatic channels (sporotrichoid spread)",
+      "A fixed cutaneous form remains localised at the inoculation site without lymphatic progression",
+      "Occupational and recreational exposure among gardeners, farmers and forestry workers is a key historical clue",
+      "Extracutaneous disease, including osteoarticular, pulmonary and disseminated forms, occurs mainly in immunocompromised or alcoholic patients",
+      "Diagnosis is confirmed by fungal culture of pus, tissue or aspirate, with histopathology sometimes showing yeast forms and asteroid bodies",
+      "Itraconazole is the preferred agent for cutaneous and lymphocutaneous disease, with amphotericin-based therapy reserved for severe, disseminated or meningeal infection; saturated potassium iodide remains a low-cost option in some settings"
     ],
-    [
-     "Key Investigations",
-     "Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard, Histopathology of biopsy for granulomatous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sporothrix species exist as mould in the environment and convert to a yeast form at body temperature after traumatic inoculation into skin or subcutaneous tissue. A localised suppurative and granulomatous (mixed pyogranulomatous) inflammatory response develops. The organism spreads proximally along lymphatic vessels, producing successive nodules. In immunocompromised hosts or after inhalation, haematogenous or pulmonary dissemination can occur, involving bones, joints, lungs and rarely the meninges. Cell-mediated immunity is central to containment, explaining severe disease in those with impaired T-cell function.",
+    "additionalDifferentials": [
+      "Cutaneous nocardiosis (sporotrichoid pattern)",
+      "Atypical mycobacterial infection (e.g. Mycobacterium marinum)",
+      "Cutaneous leishmaniasis",
+      "Tularaemia",
+      "Bacterial lymphangitis or cutaneous tuberculosis"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous nocardiosis (sporotrichoid pattern), Atypical mycobacterial infection (e.g. Mycobacterium marinum), Cutaneous",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Mycobacterium marinum fish-tank granuloma",
+      "Nocardia brasiliensis lymphocutaneous infection",
+      "Cutaneous leishmaniasis",
+      "Cutaneous tuberculosis (scrofuloderma or lupus vulgaris)"
     ],
-    [
-     "Management Strategy",
-     "Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard",
+      "Histopathology of biopsy for granulomatous inflammation and yeast forms with asteroid bodies",
+      "Imaging of bone and joints when osteoarticular disease is suspected",
+      "Chest imaging in suspected pulmonary involvement",
+      "Assessment of immune status including HIV testing in disseminated disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Stopping antifungal therapy too early before lesions have fully resolved, risking relapse",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Disseminated or multifocal disease suggesting significant immunosuppression",
+      "Pulmonary involvement with cavitation or systemic symptoms",
+      "Osteoarticular disease with joint destruction",
+      "Meningeal involvement, which is rare but serious and difficult to treat"
+    ],
+    "prognosis": "Lymphocutaneous and fixed cutaneous disease respond well to prolonged azole therapy with an excellent outcome, whereas disseminated, pulmonary and meningeal forms carry a much poorer prognosis and require aggressive treatment, particularly in immunocompromised hosts.",
+    "pitfalls": [
+      "Stopping antifungal therapy too early before lesions have fully resolved, risking relapse",
+      "Overlooking the inoculation history and misdiagnosing bacterial infection",
+      "Failing to investigate for immunosuppression in disseminated cases",
+      "Not distinguishing sporotrichoid spread from other causes of nodular lymphangitis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution",
+      "Amphotericin B for severe disseminated, pulmonary or meningeal disease, particularly in immunocompromised hosts, with step-down to itraconazole once stabilised",
+      "Saturated potassium iodide solution as an alternative for cutaneous disease where azoles are unsuitable or unavailable",
+      "Local hyperthermia as an option for cutaneous disease in pregnancy, where systemic antifungals are contraindicated",
+      "Surgical debridement or drainage as an adjunct in osteoarticular or cavitary pulmonary disease",
+      "Assess and optimise immune status, including HIV testing and management, given the risk of dissemination",
+      "Advise protective gloves and clothing during gardening, forestry and handling of soil or sphagnum moss to prevent re-inoculation"
     ]
-   ],
-   "caption": "Overview comparison matrix for sporotrichosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sporotrichosis-real-image",
-   "title": "Sporotrichosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "sporotrichosis-pathway",
+      "title": "Sporotrichosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil, thorns, sphagnum moss or plant material into the skin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated or multifocal disease suggesting significant immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard, Histopathology of biopsy for granulomatous inflammation and yeast forms with asteroid bodies, Imaging of bone and joints when osteoarticular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Stopping antifungal therapy too early before lesions have fully resolved, risking relapse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sporotrichosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sporotrichosis-matrix",
+      "title": "Sporotrichosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subacute-to-chronic infection caused by the dimorphic fungus Sporothrix, acquired through traumatic inoculation of soil,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fungal culture of aspirate, exudate or tissue as the diagnostic gold standard, Histopathology of biopsy for granulomatous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous nocardiosis (sporotrichoid pattern), Atypical mycobacterial infection (e.g. Mycobacterium marinum), Cutaneous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Itraconazole as first-line therapy for lymphocutaneous and fixed cutaneous disease, continued for weeks beyond clinical resolution",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Stopping antifungal therapy too early before lesions have fully resolved, risking relapse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sporotrichosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sporotrichosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fungal culture of pus or tissue",
+          "cells": [
+            {
+              "text": "Gold standard for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Granulomatous inflammation with yeast forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and joint imaging",
+          "cells": [
+            {
+              "text": "Osteoarticular disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary involvement, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status and HIV testing",
+          "cells": [
+            {
+              "text": "Disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sporotrichosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous nocardiosis",
+          "cells": [
+            {
+              "text": "Sporotrichoid spread; culture separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterium marinum infection",
+          "cells": [
+            {
+              "text": "Atypical mycobacterial granuloma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sporotrichosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "First-line for lymphocutaneous and fixed cutaneous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amphotericin B",
+          "cells": [
+            {
+              "text": "Severe disseminated, pulmonary or meningeal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saturated potassium iodide",
+          "cells": [
+            {
+              "text": "Alternative for cutaneous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local hyperthermia",
+          "cells": [
+            {
+              "text": "Cutaneous disease in pregnancy, where systemic therapy is avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement or drainage",
+          "cells": [
+            {
+              "text": "Adjunct for osteoarticular or cavitary pulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune optimisation",
+          "cells": [
+            {
+              "text": "HIV testing and management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective measures",
+          "cells": [
+            {
+              "text": "Gloves and clothing during gardening, forestry and handling of soil"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sporotrichosis-dx-mgmt",
+      "title": "Diagnosis and management of Sporotrichosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nodules along lymphatics after soil or plant contact: suspected sporotrichosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated disease, cavitation, joint destruction, meningitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent amphotericin B for severe disseminated, pulmonary or meningeal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fungal culture of pus or tissue; histopathology; HIV test; imaging if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Sporothrix grown on culture or seen on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nocardiosis, atypical mycobacteria or leishmaniasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Itraconazole first-line for lymphocutaneous and fixed disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amphotericin B for severe disseminated, pulmonary or meningeal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continue therapy until lesions have fully resolved",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective gloves and clothing for gardeners and forestry workers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually curable; stopping antifungals early risks relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

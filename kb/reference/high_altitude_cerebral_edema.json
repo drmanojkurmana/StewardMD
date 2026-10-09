@@ -1,174 +1,470 @@
 {
- "id": "high_altitude_cerebral_edema",
- "name": "High-altitude cerebral oedema",
- "aliases": [
-  "HACE",
-  "high-altitude cerebral edema",
-  "altitude cerebral oedema"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
-   "The hallmark early sign is truncal ataxia, often with worsening headache, nausea and vomiting, and progressive changes in mental status",
-   "It usually develops after one or more days at high altitude and is frequently preceded by acute mountain sickness or accompanies high-altitude pulmonary oedema",
-   "Progression can be rapid, moving from confusion and drowsiness to stupor, coma, and death if untreated",
-   "Immediate descent is the definitive treatment and should not be delayed; supplemental oxygen and a corticosteroid such as dexamethasone are important adjuncts",
-   "A portable hyperbaric chamber can temporise when descent is impossible, but it does not replace descent",
-   "Any traveller with ataxia or altered mental status at altitude should be treated as having cerebral oedema until proven otherwise"
+  "id": "high_altitude_cerebral_edema",
+  "name": "High-altitude cerebral oedema",
+  "aliases": [
+    "HACE",
+    "high-altitude cerebral edema",
+    "altitude cerebral oedema"
   ],
-  "pathophysiology": "High-altitude cerebral oedema develops from the effects of hypobaric hypoxia on the brain. Hypoxia triggers cerebral vasodilatation and increased cerebral blood flow, and disturbs the blood-brain barrier, allowing a vasogenic leak of fluid into the brain interstitium. Impaired autoregulation, raised capillary pressure, and inflammatory and free-radical mediated injury contribute to swelling. As oedema accumulates within the rigid skull, intracranial pressure rises, producing the characteristic ataxia, headache, and declining consciousness. The process is closely related to acute mountain sickness and shares mechanisms with high-altitude pulmonary oedema, with which it often coexists, and untreated it can progress to brain herniation.",
-  "additionalDifferentials": [
-   "Severe acute mountain sickness without frank encephalopathy",
-   "Ischaemic or haemorrhagic stroke",
-   "Central nervous system infection such as meningitis or encephalitis",
-   "Hypoglycaemia or other metabolic encephalopathy",
-   "Intoxication, hyponatraemia, or dehydration",
-   "Transient ischaemic attack or migraine with aura"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change",
-   "Pulse oximetry to document hypoxaemia",
-   "Blood glucose to exclude hypoglycaemia as a cause of altered consciousness",
-   "Assessment for concurrent high-altitude pulmonary oedema",
-   "Neuroimaging when available and once evacuated, to exclude alternative intracranial pathology",
-   "Focused neurological examination for focal deficits suggesting stroke rather than altitude illness"
-  ],
-  "redFlags": [
-   "Ataxia, confusion, or drowsiness in anyone at altitude",
-   "Rapidly declining level of consciousness or coma",
-   "Focal neurological deficits suggesting stroke or a structural lesion",
-   "Coexisting severe pulmonary oedema and hypoxaemia"
-  ],
-  "prognosis": "With immediate descent, oxygen, and corticosteroid treatment most patients recover fully, sometimes with residual ataxia that resolves over days. Delay in recognition or treatment can lead to coma and death, and severe cases may leave lasting neurological deficits. Prevention through gradual ascent and prompt response to early acute mountain sickness is key.",
-  "pitfalls": [
-   "Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema",
-   "Delaying descent to arrange investigations or await improvement",
-   "Treating with medication or a hyperbaric chamber and then resuming ascent instead of descending",
-   "Overlooking hypoglycaemia or infection as alternative causes of encephalopathy",
-   "Failing to look for and manage coexisting pulmonary oedema"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Wilderness Medical Society Practice Guidelines for Acute Altitude Illness"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate descent to lower altitude as the definitive treatment, without delay",
-   "High-flow supplemental oxygen to correct hypoxaemia",
-   "Corticosteroid (dexamethasone) to reduce cerebral vasogenic oedema",
-   "Portable hyperbaric (Gamow) bag to temporise when descent is impossible",
-   "Assessment for and treatment of coexisting high-altitude pulmonary oedema",
-   "Preventive staged gradual ascent and acetazolamide prophylaxis for susceptible climbers",
-   "Evacuation and neuroimaging to exclude alternative intracranial pathology if recovery is incomplete"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "high_altitude_cerebral_edema-pathway",
-   "title": "High-altitude cerebral oedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ataxia, confusion, or drowsiness in anyone at altitude",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change, Pulse oximetry to document hypoxaemia, Blood glucose to exclude hypoglycaemia as a cause of altered consciousness"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate descent to lower altitude as the definitive treatment, without delay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of high-altitude cerebral oedema."
-  }
- ],
- "tables": [
-  {
-   "id": "high_altitude_cerebral_edema-matrix",
-   "title": "High-altitude cerebral oedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
+      "The hallmark early sign is truncal ataxia, often with worsening headache, nausea and vomiting, and progressive changes in mental status",
+      "It usually develops after one or more days at high altitude and is frequently preceded by acute mountain sickness or accompanies high-altitude pulmonary oedema",
+      "Progression can be rapid, moving from confusion and drowsiness to stupor, coma, and death if untreated",
+      "Immediate descent is the definitive treatment and should not be delayed; supplemental oxygen and a corticosteroid such as dexamethasone are important adjuncts",
+      "A portable hyperbaric chamber can temporise when descent is impossible, but it does not replace descent",
+      "Any traveller with ataxia or altered mental status at altitude should be treated as having cerebral oedema until proven otherwise"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change, Pulse oximetry to document hypoxaemia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "High-altitude cerebral oedema develops from the effects of hypobaric hypoxia on the brain. Hypoxia triggers cerebral vasodilatation and increased cerebral blood flow, and disturbs the blood-brain barrier, allowing a vasogenic leak of fluid into the brain interstitium. Impaired autoregulation, raised capillary pressure, and inflammatory and free-radical mediated injury contribute to swelling. As oedema accumulates within the rigid skull, intracranial pressure rises, producing the characteristic ataxia, headache, and declining consciousness. The process is closely related to acute mountain sickness and shares mechanisms with high-altitude pulmonary oedema, with which it often coexists, and untreated it can progress to brain herniation.",
+    "additionalDifferentials": [
+      "Severe acute mountain sickness without frank encephalopathy",
+      "Ischaemic or haemorrhagic stroke",
+      "Central nervous system infection such as meningitis or encephalitis",
+      "Hypoglycaemia or other metabolic encephalopathy",
+      "Intoxication, hyponatraemia, or dehydration",
+      "Transient ischaemic attack or migraine with aura"
     ],
-    [
-     "Primary Differentials",
-     "Severe acute mountain sickness without frank encephalopathy, Ischaemic or haemorrhagic stroke, Central nervous system infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change",
+      "Pulse oximetry to document hypoxaemia",
+      "Blood glucose to exclude hypoglycaemia as a cause of altered consciousness",
+      "Assessment for concurrent high-altitude pulmonary oedema",
+      "Neuroimaging when available and once evacuated, to exclude alternative intracranial pathology",
+      "Focused neurological examination for focal deficits suggesting stroke rather than altitude illness"
     ],
-    [
-     "Management Strategy",
-     "Immediate descent to lower altitude as the definitive treatment, without delay",
-     "Core treatment modality"
+    "redFlags": [
+      "Ataxia, confusion, or drowsiness in anyone at altitude",
+      "Rapidly declining level of consciousness or coma",
+      "Focal neurological deficits suggesting stroke or a structural lesion",
+      "Coexisting severe pulmonary oedema and hypoxaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema",
-     "Prevent diagnostic or management error"
+    "prognosis": "With immediate descent, oxygen, and corticosteroid treatment most patients recover fully, sometimes with residual ataxia that resolves over days. Delay in recognition or treatment can lead to coma and death, and severe cases may leave lasting neurological deficits. Prevention through gradual ascent and prompt response to early acute mountain sickness is key.",
+    "pitfalls": [
+      "Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema",
+      "Delaying descent to arrange investigations or await improvement",
+      "Treating with medication or a hyperbaric chamber and then resuming ascent instead of descending",
+      "Overlooking hypoglycaemia or infection as alternative causes of encephalopathy",
+      "Failing to look for and manage coexisting pulmonary oedema"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Wilderness Medical Society Practice Guidelines for Acute Altitude Illness"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate descent to lower altitude as the definitive treatment, without delay",
+      "High-flow supplemental oxygen to correct hypoxaemia",
+      "Corticosteroid (dexamethasone) to reduce cerebral vasogenic oedema",
+      "Portable hyperbaric (Gamow) bag to temporise when descent is impossible",
+      "Assessment for and treatment of coexisting high-altitude pulmonary oedema",
+      "Preventive staged gradual ascent and acetazolamide prophylaxis for susceptible climbers",
+      "Evacuation and neuroimaging to exclude alternative intracranial pathology if recovery is incomplete"
     ]
-   ],
-   "caption": "Overview comparison matrix for high-altitude cerebral oedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "high-altitude-cerebral-edema-real-image",
-   "title": "High-altitude cerebral oedema: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "high_altitude_cerebral_edema-pathway",
+      "title": "High-altitude cerebral oedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ataxia, confusion, or drowsiness in anyone at altitude",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change, Pulse oximetry to document hypoxaemia, Blood glucose to exclude hypoglycaemia as a cause of altered consciousness"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate descent to lower altitude as the definitive treatment, without delay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of high-altitude cerebral oedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "high_altitude_cerebral_edema-matrix",
+      "title": "High-altitude cerebral oedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "High-altitude cerebral oedema is considered the severe, end-stage form of acute mountain sickness and is a neurological emergency",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment for truncal ataxia (heel-to-toe walking) and mental status change, Pulse oximetry to document hypoxaemia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe acute mountain sickness without frank encephalopathy, Ischaemic or haemorrhagic stroke, Central nervous system infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate descent to lower altitude as the definitive treatment, without delay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing ataxia or behavioural change as fatigue or intoxication rather than cerebral oedema",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for high-altitude cerebral oedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Wilderness Medical Society Practice Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "high_altitude_cerebral_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Heel-to-toe walk and truncal ataxia assessment",
+          "cells": [
+            {
+              "text": "Truncal ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry",
+          "cells": [
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Excludes hypoglycaemia as a cause of altered mentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for high-altitude pulmonary oedema",
+          "cells": [
+            {
+              "text": "Concurrent pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging after evacuation",
+          "cells": [
+            {
+              "text": "Excludes alternative intracranial causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focused neurological examination",
+          "cells": [
+            {
+              "text": "Focal deficits suggesting stroke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_cerebral_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe acute mountain sickness without encephalopathy",
+          "cells": [
+            {
+              "text": "No ataxia or confusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or haemorrhagic stroke",
+          "cells": [
+            {
+              "text": "Focal neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Excluded by blood glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_cerebral_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate descent",
+          "cells": [
+            {
+              "text": "The definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-flow supplemental oxygen",
+          "cells": [
+            {
+              "text": "Corrects hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "Reduces cerebral vasogenic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portable hyperbaric (Gamow) bag",
+          "cells": [
+            {
+              "text": "Temporises when descent is delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting high-altitude pulmonary oedema",
+          "cells": [
+            {
+              "text": "Assessed and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Staged gradual ascent and acetazolamide prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evacuation and neuroimaging",
+          "cells": [
+            {
+              "text": "Exclude alternative intracranial causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "high_altitude_cerebral_edema-dx-mgmt",
+      "title": "Diagnosis and management of High-altitude cerebral oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ataxia, confusion or drowsiness at altitude",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling consciousness, coma, focal deficit, or pulmonary oedema with hypoxaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate descent and evacuation; treat hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Truncal ataxia test; pulse oximetry; glucose; pulmonary oedema check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ataxia or confusion present at altitude, with hypoglycaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe mountain sickness, stroke, CNS infection or metabolic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate descent as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-flow oxygen to correct hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dexamethasone to reduce cerebral vasogenic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Portable hyperbaric bag to temporise when descent is delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery after descent; prevention with staged ascent and acetazolamide",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,170 +1,410 @@
 {
- "id": "functional_movement_disorder",
- "name": "Functional movement disorder",
- "aliases": [
-  "psychogenic movement disorder",
-  "FMD",
-  "functional neurological disorder with movement symptoms"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology / Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / functional neurological disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and incongruent with recognised neurological disease",
-   "It is a rule-in diagnosis based on positive clinical signs, not merely the absence of another disorder",
-   "Functional tremor characteristically changes frequency and entrains to the rhythm of a voluntary movement in the other limb",
-   "Distractibility, variability, suggestibility and a sudden onset are supportive features",
-   "It sits within the broader category of functional neurological disorder and may coexist with genuine organic disease",
-   "Clear explanation of the diagnosis and multidisciplinary rehabilitation, including physiotherapy and psychological therapy, are central to management"
+  "id": "functional_movement_disorder",
+  "name": "Functional movement disorder",
+  "aliases": [
+    "psychogenic movement disorder",
+    "FMD",
+    "functional neurological disorder with movement symptoms"
   ],
-  "pathophysiology": "Functional movement disorder is understood as a disorder of abnormal motor control and self-agency rather than structural damage, in which movements are generated through mechanisms overlapping with voluntary movement yet experienced as involuntary. Current models emphasise aberrant attention directed to the affected body part, abnormal predictive processing and altered sense of agency, often in the context of predisposing, precipitating and perpetuating psychological and physical factors. The internal inconsistency of the movements reflects their dependence on attention and expectation.",
-  "additionalDifferentials": [
-   "Organic tremor syndromes (essential, parkinsonian, cerebellar)",
-   "Organic dystonia",
-   "Tics and tic disorders",
-   "Paroxysmal dyskinesias",
-   "Myoclonus of structural or metabolic cause"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability)",
-   "Targeted investigation only to exclude specific mimics suggested by the history",
-   "Neurophysiology (for example tremor recording with entrainment testing) in selected cases",
-   "Assessment of comorbid mood, anxiety and other functional symptoms",
-   "Avoidance of excessive or repeated testing that can reinforce illness beliefs"
-  ],
-  "redFlags": [
-   "Features that are in fact typical of an organic disorder on review",
-   "Progressive fixed deficits or abnormal imaging",
-   "Coexisting organic disease requiring its own treatment",
-   "Significant psychiatric comorbidity or risk requiring urgent attention"
-  ],
-  "prognosis": "Outcomes are variable but early diagnosis, a clear positive explanation and engagement with multidisciplinary therapy are associated with better recovery; long-standing untreated symptoms can be more refractory.",
-  "pitfalls": [
-   "Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs",
-   "Over-investigating and inadvertently reinforcing the disorder",
-   "Missing coexisting organic disease",
-   "Communicating the diagnosis poorly, which undermines engagement and recovery"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Movement Disorders textbook (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility",
-   "Specialist functional-movement physiotherapy to retrain movement and normalise motor control",
-   "Psychological therapy such as cognitive behavioural therapy for precipitating and perpetuating factors",
-   "Multidisciplinary rehabilitation with occupational therapy and speech therapy where needed",
-   "Treat comorbid mood, anxiety and pain",
-   "Avoid unnecessary investigations and ineffective medications that risk iatrogenic harm",
-   "Escalate to a specialist functional-disorder service for refractory or complex presentations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_movement_disorder-pathway",
-   "title": "Functional movement disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and incongruent with recognised neurological disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features that are in fact typical of an organic disorder on review",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability), Targeted investigation only to exclude specific mimics suggested by the history, Neurophysiology (for example"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional movement disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_movement_disorder-matrix",
-   "title": "Functional movement disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology / Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / functional neurological disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and incongruent with recognised neurological disease",
+      "It is a rule-in diagnosis based on positive clinical signs, not merely the absence of another disorder",
+      "Functional tremor characteristically changes frequency and entrains to the rhythm of a voluntary movement in the other limb",
+      "Distractibility, variability, suggestibility and a sudden onset are supportive features",
+      "It sits within the broader category of functional neurological disorder and may coexist with genuine organic disease",
+      "Clear explanation of the diagnosis and multidisciplinary rehabilitation, including physiotherapy and psychological therapy, are central to management"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability), Targeted",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional movement disorder is understood as a disorder of abnormal motor control and self-agency rather than structural damage, in which movements are generated through mechanisms overlapping with voluntary movement yet experienced as involuntary. Current models emphasise aberrant attention directed to the affected body part, abnormal predictive processing and altered sense of agency, often in the context of predisposing, precipitating and perpetuating psychological and physical factors. The internal inconsistency of the movements reflects their dependence on attention and expectation.",
+    "additionalDifferentials": [
+      "Organic tremor syndromes (essential, parkinsonian, cerebellar)",
+      "Organic dystonia",
+      "Tics and tic disorders",
+      "Paroxysmal dyskinesias",
+      "Myoclonus of structural or metabolic cause"
     ],
-    [
-     "Primary Differentials",
-     "Organic tremor syndromes (essential, parkinsonian, cerebellar), Organic dystonia, Tics and tic disorders",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability)",
+      "Targeted investigation only to exclude specific mimics suggested by the history",
+      "Neurophysiology (for example tremor recording with entrainment testing) in selected cases",
+      "Assessment of comorbid mood, anxiety and other functional symptoms",
+      "Avoidance of excessive or repeated testing that can reinforce illness beliefs"
     ],
-    [
-     "Management Strategy",
-     "Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility",
-     "Core treatment modality"
+    "redFlags": [
+      "Features that are in fact typical of an organic disorder on review",
+      "Progressive fixed deficits or abnormal imaging",
+      "Coexisting organic disease requiring its own treatment",
+      "Significant psychiatric comorbidity or risk requiring urgent attention"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes are variable but early diagnosis, a clear positive explanation and engagement with multidisciplinary therapy are associated with better recovery; long-standing untreated symptoms can be more refractory.",
+    "pitfalls": [
+      "Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs",
+      "Over-investigating and inadvertently reinforcing the disorder",
+      "Missing coexisting organic disease",
+      "Communicating the diagnosis poorly, which undermines engagement and recovery"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Movement Disorders textbook (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility",
+      "Specialist functional-movement physiotherapy to retrain movement and normalise motor control",
+      "Psychological therapy such as cognitive behavioural therapy for precipitating and perpetuating factors",
+      "Multidisciplinary rehabilitation with occupational therapy and speech therapy where needed",
+      "Treat comorbid mood, anxiety and pain",
+      "Avoid unnecessary investigations and ineffective medications that risk iatrogenic harm",
+      "Escalate to a specialist functional-disorder service for refractory or complex presentations"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional movement disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-movement-disorder-real-image",
-   "title": "Functional movement disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "functional_movement_disorder-pathway",
+      "title": "Functional movement disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and incongruent with recognised neurological disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features that are in fact typical of an organic disorder on review",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability), Targeted investigation only to exclude specific mimics suggested by the history, Neurophysiology (for example"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional movement disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_movement_disorder-matrix",
+      "title": "Functional movement disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Abnormal movements such as tremor, dystonia, myoclonus, gait disturbance or parkinsonism that are internally inconsistent and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical examination eliciting positive functional signs (entrainment, distractibility, variability), Targeted",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Organic tremor syndromes (essential, parkinsonian, cerebellar), Organic dystonia, Tics and tic disorders",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give a clear, positive rule-in explanation of the diagnosis using the demonstrated signs such as entrainment and distractibility",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it purely as a diagnosis of exclusion rather than demonstrating positive signs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional movement disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / functional neurological disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_movement_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for positive functional signs",
+          "cells": [
+            {
+              "text": "Entrainment, distractibility and variability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted investigation",
+          "cells": [
+            {
+              "text": "Only to exclude specific mimics suggested by the history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurophysiology such as tremor recording with entrainment testing",
+          "cells": [
+            {
+              "text": "In selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of comorbid mood, anxiety and functional symptoms",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_movement_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positive rule-in explanation",
+          "cells": [
+            {
+              "text": "Uses demonstrated signs such as entrainment and distractibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional-movement physiotherapy",
+          "cells": [
+            {
+              "text": "Retrains movement and normalises motor control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Precipitating and perpetuating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Occupational and speech therapy where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid symptoms",
+          "cells": [
+            {
+              "text": "Mood, anxiety and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigations and medicines",
+          "cells": [
+            {
+              "text": "Risk of iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Refractory or complex presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_movement_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Functional movement disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional movement disorder: involuntary movement with positive signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive fixed deficit, abnormal imaging, organic comorbidity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for significant psychiatric risk or coexisting organic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination for entrainment and distractibility; targeted tests only",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are positive functional signs such as entrainment present on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider organic tremor, dystonia, tics, paroxysmal dyskinesia or myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rule-in explanation using demonstrated signs such as entrainment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Functional-movement physiotherapy to retrain movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural therapy for precipitating and perpetuating factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid unnecessary investigations and ineffective medicines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; early diagnosis, clear explanation and therapy improve recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

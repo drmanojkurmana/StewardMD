@@ -1,174 +1,463 @@
 {
- "id": "transposition_of_great_arteries",
- "name": "Transposition of the Great Arteries",
- "aliases": [
-  "TGA",
-  "d-TGA",
-  "transposition of great vessels"
- ],
- "class": "non_infective",
- "system": "Paediatric cardiology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic and pulmonary circulations run in parallel rather than in series.",
-   "It is a leading cause of cyanosis presenting in the newborn period, often in an otherwise well-grown, term infant.",
-   "Survival depends on mixing between the two parallel circuits through a patent foramen ovale, atrial or ventricular septal defect, or the ductus arteriosus.",
-   "Cyanosis is typically profound and, unlike many respiratory causes, does not improve substantially with supplemental oxygen.",
-   "A prostaglandin infusion is started to maintain ductal patency and improve intercirculatory mixing while the infant is stabilised.",
-   "Balloon atrial septostomy may be performed to enlarge the atrial communication and improve mixing when cyanosis is severe.",
-   "Chest radiograph may show an egg-on-a-string cardiac silhouette with a narrow mediastinum, though this is not always present.",
-   "Echocardiography confirms the discordant great-artery connections, defines associated defects, and maps the coronary arteries before surgery.",
-   "The arterial switch operation, restoring normal ventriculoarterial connections, is the definitive repair and is performed in the neonatal period."
+  "id": "transposition_of_great_arteries",
+  "name": "Transposition of the Great Arteries",
+  "aliases": [
+    "TGA",
+    "d-TGA",
+    "transposition of great vessels"
   ],
-  "pathophysiology": "Abnormal division of the truncus arteriosus results in the aorta connecting to the right ventricle and the pulmonary artery to the left ventricle. As a consequence, deoxygenated systemic venous blood is pumped back to the body and oxygenated pulmonary venous blood is returned to the lungs, forming two separate parallel circuits. Life is only possible if oxygenated and deoxygenated blood mix through a communication at the atrial, ventricular, or ductal level. Inadequate mixing produces severe systemic hypoxaemia and progressive metabolic acidosis, which worsens as the ductus arteriosus and foramen ovale close after birth.",
-  "additionalDifferentials": [
-   "Tetralogy of Fallot",
-   "Total anomalous pulmonary venous return",
-   "Tricuspid atresia",
-   "Truncus arteriosus",
-   "Persistent pulmonary hypertension of the newborn",
-   "Severe respiratory disease causing cyanosis"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy",
-   "Hyperoxia test showing little rise in oxygenation with supplemental oxygen (suggesting a cardiac cause)",
-   "Chest radiograph looking for an egg-on-a-string silhouette",
-   "Blood gas to assess hypoxaemia and acidosis",
-   "Pulse oximetry, including pre- and post-ductal comparison"
-  ],
-  "redFlags": [
-   "Severe cyanosis in a newborn that fails to improve with supplemental oxygen",
-   "Rapid deterioration and acidosis as the ductus arteriosus and foramen ovale close, restricting mixing",
-   "Duct-dependent collapse before prostaglandin is established",
-   "Worsening metabolic acidosis indicating inadequate systemic oxygen delivery",
-   "Inadequate intercirculatory mixing requiring urgent septostomy"
-  ],
-  "prognosis": "With prompt stabilisation and an arterial switch operation in the neonatal period, most children do well with good long-term function, though follow-up is required for coronary, valve, and great-artery complications. Without intervention the condition is rapidly fatal.",
-  "pitfalls": [
-   "Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help",
-   "Failing to start prostaglandin promptly, allowing the ductus to close and mixing to fail",
-   "Overlooking the need to enhance mixing (septostomy) in a critically hypoxaemic infant",
-   "Assuming a normal chest radiograph excludes the diagnosis",
-   "Not mapping coronary anatomy before surgical planning"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during stabilisation",
-   "Perform balloon atrial septostomy to enlarge the atrial communication and improve mixing when cyanosis remains severe",
-   "Correct metabolic acidosis and hypoxaemia with supportive measures, including mechanical ventilation and inotropic support as required",
-   "Undertake the arterial switch operation in the neonatal period as the definitive corrective repair, with careful coronary artery transfer",
-   "Manage within a specialist paediatric cardiology and cardiac surgery multidisciplinary team",
-   "Provide lifelong cardiology follow-up for coronary, neo-aortic valve and great-artery complications after repair"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "transposition_of_great_arteries-pathway",
-   "title": "Transposition of the Great Arteries: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic and pulmonary circulations run in parallel rather than in series.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe cyanosis in a newborn that fails to improve with supplemental oxygen",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy, Hyperoxia test showing little rise in oxygenation with supplemental oxygen (suggesting a cardiac cause), Chest radiograph"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during stabilisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transposition of the great arteries."
-  }
- ],
- "tables": [
-  {
-   "id": "transposition_of_great_arteries-matrix",
-   "title": "Transposition of the Great Arteries: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric cardiology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic and pulmonary circulations run in parallel rather than in series.",
+      "It is a leading cause of cyanosis presenting in the newborn period, often in an otherwise well-grown, term infant.",
+      "Survival depends on mixing between the two parallel circuits through a patent foramen ovale, atrial or ventricular septal defect, or the ductus arteriosus.",
+      "Cyanosis is typically profound and, unlike many respiratory causes, does not improve substantially with supplemental oxygen.",
+      "A prostaglandin infusion is started to maintain ductal patency and improve intercirculatory mixing while the infant is stabilised.",
+      "Balloon atrial septostomy may be performed to enlarge the atrial communication and improve mixing when cyanosis is severe.",
+      "Chest radiograph may show an egg-on-a-string cardiac silhouette with a narrow mediastinum, though this is not always present.",
+      "Echocardiography confirms the discordant great-artery connections, defines associated defects, and maps the coronary arteries before surgery.",
+      "The arterial switch operation, restoring normal ventriculoarterial connections, is the definitive repair and is performed in the neonatal period."
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy, Hyperoxia test showing little",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Abnormal division of the truncus arteriosus results in the aorta connecting to the right ventricle and the pulmonary artery to the left ventricle. As a consequence, deoxygenated systemic venous blood is pumped back to the body and oxygenated pulmonary venous blood is returned to the lungs, forming two separate parallel circuits. Life is only possible if oxygenated and deoxygenated blood mix through a communication at the atrial, ventricular, or ductal level. Inadequate mixing produces severe systemic hypoxaemia and progressive metabolic acidosis, which worsens as the ductus arteriosus and foramen ovale close after birth.",
+    "additionalDifferentials": [
+      "Tetralogy of Fallot",
+      "Total anomalous pulmonary venous return",
+      "Tricuspid atresia",
+      "Truncus arteriosus",
+      "Persistent pulmonary hypertension of the newborn",
+      "Severe respiratory disease causing cyanosis"
     ],
-    [
-     "Primary Differentials",
-     "Tetralogy of Fallot, Total anomalous pulmonary venous return, Tricuspid atresia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy",
+      "Hyperoxia test showing little rise in oxygenation with supplemental oxygen (suggesting a cardiac cause)",
+      "Chest radiograph looking for an egg-on-a-string silhouette",
+      "Blood gas to assess hypoxaemia and acidosis",
+      "Pulse oximetry, including pre- and post-ductal comparison"
     ],
-    [
-     "Management Strategy",
-     "Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe cyanosis in a newborn that fails to improve with supplemental oxygen",
+      "Rapid deterioration and acidosis as the ductus arteriosus and foramen ovale close, restricting mixing",
+      "Duct-dependent collapse before prostaglandin is established",
+      "Worsening metabolic acidosis indicating inadequate systemic oxygen delivery",
+      "Inadequate intercirculatory mixing requiring urgent septostomy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt stabilisation and an arterial switch operation in the neonatal period, most children do well with good long-term function, though follow-up is required for coronary, valve, and great-artery complications. Without intervention the condition is rapidly fatal.",
+    "pitfalls": [
+      "Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help",
+      "Failing to start prostaglandin promptly, allowing the ductus to close and mixing to fail",
+      "Overlooking the need to enhance mixing (septostomy) in a critically hypoxaemic infant",
+      "Assuming a normal chest radiograph excludes the diagnosis",
+      "Not mapping coronary anatomy before surgical planning"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during stabilisation",
+      "Perform balloon atrial septostomy to enlarge the atrial communication and improve mixing when cyanosis remains severe",
+      "Correct metabolic acidosis and hypoxaemia with supportive measures, including mechanical ventilation and inotropic support as required",
+      "Undertake the arterial switch operation in the neonatal period as the definitive corrective repair, with careful coronary artery transfer",
+      "Manage within a specialist paediatric cardiology and cardiac surgery multidisciplinary team",
+      "Provide lifelong cardiology follow-up for coronary, neo-aortic valve and great-artery complications after repair"
     ]
-   ],
-   "caption": "Overview comparison matrix for transposition of the great arteries."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transposition-of-great-arteries-real-image",
-   "title": "Transposition of the Great Arteries: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "transposition_of_great_arteries-pathway",
+      "title": "Transposition of the Great Arteries: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic and pulmonary circulations run in parallel rather than in series.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe cyanosis in a newborn that fails to improve with supplemental oxygen",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy, Hyperoxia test showing little rise in oxygenation with supplemental oxygen (suggesting a cardiac cause), Chest radiograph"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during stabilisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transposition of the great arteries."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transposition_of_great_arteries-matrix",
+      "title": "Transposition of the Great Arteries: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "In d-transposition the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, so the systemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to confirm ventriculoarterial discordance, mixing sites, and coronary anatomy, Hyperoxia test showing little",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tetralogy of Fallot, Total anomalous pulmonary venous return, Tricuspid atresia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence a prostaglandin infusion at presentation to maintain ductal patency and improve intercirculatory mixing during",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe neonatal cyanosis to lung disease and delaying cardiac evaluation because oxygen does not help",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transposition of the great arteries."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transposition_of_great_arteries-dx-mgmt",
+      "title": "Diagnosis and management of Transposition of the Great Arteries",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected d-transposition of the great arteries: profound neonatal cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: cyanosis not improving with oxygen, or falling as ductus closes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent prostaglandin infusion and septostomy if mixing is poor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for discordance and coronaries; hyperoxia test; blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show discordant ventriculoarterial connections?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tetralogy, tricuspid atresia or lung disease causing cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prostaglandin infusion at presentation to keep the duct open",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Balloon atrial septostomy if cyanosis remains severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilation and inotropes to correct acidosis and hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neonatal arterial switch operation as definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong cardiology follow-up after repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most do well after neonatal arterial switch; untreated disease is rapidly fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transposition_of_great_arteries-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Discordant connections, mixing sites and coronary anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperoxia test",
+          "cells": [
+            {
+              "text": "Little rise in oxygenation, suggesting a cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Egg-on-a-string silhouette, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Hypoxaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre- and post-ductal oximetry",
+          "cells": [
+            {
+              "text": "Mixing and ductal dependence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transposition_of_great_arteries-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetralogy of Fallot",
+          "cells": [
+            {
+              "text": "Hypoxaemia with a different anatomy; echocardiography separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total anomalous pulmonary venous return",
+          "cells": [
+            {
+              "text": "Pulmonary venous return to systemic veins; echocardiography defines the anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension with ductal shunting; echocardiography excludes d-TGA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transposition_of_great_arteries-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Maintains ductal patency and intercirculatory mixing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon atrial septostomy",
+          "cells": [
+            {
+              "text": "Severe cyanosis, to enlarge the atrial communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stabilisation",
+          "cells": [
+            {
+              "text": "Ventilation and inotropes; acidosis and hypoxaemia corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial switch operation",
+          "cells": [
+            {
+              "text": "Definitive neonatal repair with coronary transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary cardiac care",
+          "cells": [
+            {
+              "text": "Paediatric cardiology and cardiac surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up",
+          "cells": [
+            {
+              "text": "Coronary, neo-aortic valve and great-artery complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

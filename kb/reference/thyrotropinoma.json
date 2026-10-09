@@ -1,174 +1,472 @@
 {
- "id": "thyrotropinoma",
- "name": "Thyrotropinoma (TSH-secreting pituitary adenoma)",
- "aliases": [
-  "TSH-secreting pituitary adenoma",
-  "TSHoma",
-  "thyrotroph adenoma",
-  "central hyperthyroidism"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard endocrinology reference texts and pituitary tumour consensus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce hormone",
-   "The biochemical hallmark is a raised or inappropriately normal (non-suppressed) TSH in the presence of elevated free thyroxine and free triiodothyronine",
-   "This inappropriate TSH pattern must be distinguished from resistance to thyroid hormone, which shows a similar biochemical picture without a pituitary tumour",
-   "An elevated alpha-subunit and a raised alpha-subunit to TSH molar ratio support a thyrotropinoma over other causes of inappropriate TSH secretion",
-   "Many are macroadenomas at diagnosis and may cause headache, visual field defects and features of other hormone co-secretion (such as growth hormone or prolactin)",
-   "Failure of TSH to respond normally to dynamic testing and pituitary MRI showing an adenoma help confirm the diagnosis",
-   "Transsphenoidal surgery is the primary treatment, with somatostatin analogue therapy to control hormone secretion and radiotherapy reserved for residual disease"
+  "id": "thyrotropinoma",
+  "name": "Thyrotropinoma (TSH-secreting pituitary adenoma)",
+  "aliases": [
+    "TSH-secreting pituitary adenoma",
+    "TSHoma",
+    "thyrotroph adenoma",
+    "central hyperthyroidism"
   ],
-  "pathophysiology": "A thyrotropinoma is a benign monoclonal tumour of pituitary thyrotroph cells that secretes biologically active TSH in an unregulated manner, escaping the normal negative feedback of thyroid hormones. The persistent TSH drive stimulates the thyroid gland to enlarge and to overproduce thyroxine and triiodothyronine, producing central (secondary) hyperthyroidism with a goitre. Because the tumour often retains the capacity to release the glycoprotein hormone alpha-subunit disproportionately, the alpha-subunit to TSH ratio is typically increased. Larger tumours also exert local mass effect and may co-secrete other anterior pituitary hormones.",
-  "additionalDifferentials": [
-   "Resistance to thyroid hormone (thyroid hormone receptor beta mutation)",
-   "Assay interference or heterophile antibody artefact",
-   "Graves disease and other causes of primary hyperthyroidism",
-   "Familial dysalbuminaemic hyperthyroxinaemia",
-   "Non-thyroidal illness with abnormal thyroid function",
-   "Recent alteration of thyroid hormone replacement"
-  ],
-  "additionalInvestigations": [
-   "Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern",
-   "Serum glycoprotein hormone alpha-subunit and calculation of the alpha-subunit to TSH molar ratio",
-   "Dynamic pituitary testing (e.g. TRH stimulation and thyroid hormone suppression) where available",
-   "Pituitary MRI to identify and characterise the adenoma",
-   "Genetic testing for thyroid hormone resistance when the biochemistry is ambiguous",
-   "Assessment of other anterior pituitary axes for co-secretion or hypopituitarism"
-  ],
-  "redFlags": [
-   "Visual field loss or other mass effect from a pituitary macroadenoma",
-   "Severe thyrotoxicosis with cardiac arrhythmia or thyroid storm",
-   "Pituitary apoplexy causing sudden headache and visual or ocular motor deficits",
-   "Inadvertent thyroid ablation for misdiagnosed primary hyperthyroidism worsening the pituitary tumour drive"
-  ],
-  "prognosis": "With complete surgical removal many patients achieve biochemical cure and resolution of hyperthyroidism, but large or invasive tumours may leave residual disease requiring medical therapy or radiotherapy, and lifelong follow-up is needed to detect recurrence.",
-  "pitfalls": [
-   "Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it",
-   "Treating the thyroid (with ablation or thyroidectomy) instead of addressing the pituitary source",
-   "Confusing a thyrotropinoma with resistance to thyroid hormone and missing the tumour",
-   "Overlooking co-secretion of growth hormone or prolactin from the same adenoma"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "European Thyroid Association guideline on TSH-secreting pituitary tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer transsphenoidal surgical resection as the first-line, potentially curative treatment",
-   "Use somatostatin analogues (such as octreotide or lanreotide) to lower TSH secretion, control hyperthyroidism and shrink residual or unresectable tumour",
-   "Control thyrotoxic symptoms preoperatively with beta-blockade and measures to restore euthyroidism before surgery",
-   "Consider pituitary radiotherapy for residual or invasive disease not controlled by surgery and medical therapy",
-   "Assess and replace any coexisting anterior pituitary hormone deficiencies",
-   "Monitor thyroid function, alpha-subunit, pituitary imaging and visual fields long term to detect recurrence",
-   "Manage through a specialist pituitary multidisciplinary team with neurosurgery and endocrinology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thyrotropinoma-pathway",
-   "title": "Thyrotropinoma (TSH-secreting pituitary adenoma): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce hormone",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visual field loss or other mass effect from a pituitary macroadenoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern, Serum glycoprotein hormone alpha-subunit and calculation of the alpha-subunit to TSH molar ratio, Dynamic pituitary testing (e.g."
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer transsphenoidal surgical resection as the first-line, potentially curative treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thyrotropinoma (tsh-secreting pituitary adenoma)."
-  }
- ],
- "tables": [
-  {
-   "id": "thyrotropinoma-matrix",
-   "title": "Thyrotropinoma (TSH-secreting pituitary adenoma): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard endocrinology reference texts and pituitary tumour consensus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce hormone",
+      "The biochemical hallmark is a raised or inappropriately normal (non-suppressed) TSH in the presence of elevated free thyroxine and free triiodothyronine",
+      "This inappropriate TSH pattern must be distinguished from resistance to thyroid hormone, which shows a similar biochemical picture without a pituitary tumour",
+      "An elevated alpha-subunit and a raised alpha-subunit to TSH molar ratio support a thyrotropinoma over other causes of inappropriate TSH secretion",
+      "Many are macroadenomas at diagnosis and may cause headache, visual field defects and features of other hormone co-secretion (such as growth hormone or prolactin)",
+      "Failure of TSH to respond normally to dynamic testing and pituitary MRI showing an adenoma help confirm the diagnosis",
+      "Transsphenoidal surgery is the primary treatment, with somatostatin analogue therapy to control hormone secretion and radiotherapy reserved for residual disease"
     ],
-    [
-     "Key Investigations",
-     "Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern, Serum glycoprotein hormone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A thyrotropinoma is a benign monoclonal tumour of pituitary thyrotroph cells that secretes biologically active TSH in an unregulated manner, escaping the normal negative feedback of thyroid hormones. The persistent TSH drive stimulates the thyroid gland to enlarge and to overproduce thyroxine and triiodothyronine, producing central (secondary) hyperthyroidism with a goitre. Because the tumour often retains the capacity to release the glycoprotein hormone alpha-subunit disproportionately, the alpha-subunit to TSH ratio is typically increased. Larger tumours also exert local mass effect and may co-secrete other anterior pituitary hormones.",
+    "additionalDifferentials": [
+      "Resistance to thyroid hormone (thyroid hormone receptor beta mutation)",
+      "Assay interference or heterophile antibody artefact",
+      "Graves disease and other causes of primary hyperthyroidism",
+      "Familial dysalbuminaemic hyperthyroxinaemia",
+      "Non-thyroidal illness with abnormal thyroid function",
+      "Recent alteration of thyroid hormone replacement"
     ],
-    [
-     "Primary Differentials",
-     "Resistance to thyroid hormone (thyroid hormone receptor beta mutation), Assay interference or heterophile antibody artefact,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern",
+      "Serum glycoprotein hormone alpha-subunit and calculation of the alpha-subunit to TSH molar ratio",
+      "Dynamic pituitary testing (e.g. TRH stimulation and thyroid hormone suppression) where available",
+      "Pituitary MRI to identify and characterise the adenoma",
+      "Genetic testing for thyroid hormone resistance when the biochemistry is ambiguous",
+      "Assessment of other anterior pituitary axes for co-secretion or hypopituitarism"
     ],
-    [
-     "Management Strategy",
-     "Offer transsphenoidal surgical resection as the first-line, potentially curative treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Visual field loss or other mass effect from a pituitary macroadenoma",
+      "Severe thyrotoxicosis with cardiac arrhythmia or thyroid storm",
+      "Pituitary apoplexy causing sudden headache and visual or ocular motor deficits",
+      "Inadvertent thyroid ablation for misdiagnosed primary hyperthyroidism worsening the pituitary tumour drive"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it",
-     "Prevent diagnostic or management error"
+    "prognosis": "With complete surgical removal many patients achieve biochemical cure and resolution of hyperthyroidism, but large or invasive tumours may leave residual disease requiring medical therapy or radiotherapy, and lifelong follow-up is needed to detect recurrence.",
+    "pitfalls": [
+      "Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it",
+      "Treating the thyroid (with ablation or thyroidectomy) instead of addressing the pituitary source",
+      "Confusing a thyrotropinoma with resistance to thyroid hormone and missing the tumour",
+      "Overlooking co-secretion of growth hormone or prolactin from the same adenoma"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "European Thyroid Association guideline on TSH-secreting pituitary tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer transsphenoidal surgical resection as the first-line, potentially curative treatment",
+      "Use somatostatin analogues (such as octreotide or lanreotide) to lower TSH secretion, control hyperthyroidism and shrink residual or unresectable tumour",
+      "Control thyrotoxic symptoms preoperatively with beta-blockade and measures to restore euthyroidism before surgery",
+      "Consider pituitary radiotherapy for residual or invasive disease not controlled by surgery and medical therapy",
+      "Assess and replace any coexisting anterior pituitary hormone deficiencies",
+      "Monitor thyroid function, alpha-subunit, pituitary imaging and visual fields long term to detect recurrence",
+      "Manage through a specialist pituitary multidisciplinary team with neurosurgery and endocrinology"
     ]
-   ],
-   "caption": "Overview comparison matrix for thyrotropinoma (tsh-secreting pituitary adenoma)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thyrotropinoma-real-image",
-   "title": "Thyrotropinoma (TSH-secreting pituitary adenoma): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "thyrotropinoma-pathway",
+      "title": "Thyrotropinoma (TSH-secreting pituitary adenoma): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce hormone",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visual field loss or other mass effect from a pituitary macroadenoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern, Serum glycoprotein hormone alpha-subunit and calculation of the alpha-subunit to TSH molar ratio, Dynamic pituitary testing (e.g."
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer transsphenoidal surgical resection as the first-line, potentially curative treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thyrotropinoma (tsh-secreting pituitary adenoma)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thyrotropinoma-matrix",
+      "title": "Thyrotropinoma (TSH-secreting pituitary adenoma): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare cause of hyperthyroidism in which a pituitary adenoma inappropriately secretes TSH, driving the thyroid to overproduce",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Free thyroxine, free triiodothyronine and TSH demonstrating the inappropriate TSH pattern, Serum glycoprotein hormone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Resistance to thyroid hormone (thyroid hormone receptor beta mutation), Assay interference or heterophile antibody artefact,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer transsphenoidal surgical resection as the first-line, potentially curative treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting a raised free thyroxine with non-suppressed TSH as an assay error and ignoring it",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thyrotropinoma (tsh-secreting pituitary adenoma)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology reference texts and pituitary tumour consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyrotropinoma-dx-mgmt",
+      "title": "Diagnosis and management of Thyrotropinoma (TSH-secreting pituitary adenoma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyrotropinoma: hyperthyroidism with non-suppressed TSH and goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: visual field loss, thyroid storm, or pituitary apoplexy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine and neurosurgical care for apoplexy or thyroid storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Free T4, free T3 and TSH; alpha-subunit ratio; pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is TSH non-suppressed with raised alpha-subunit and an adenoma on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thyroid hormone resistance, Graves disease or assay interference",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal surgical resection as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Somatostatin analogue such as octreotide or lanreotide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preoperative beta-blockade and restoration of euthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pituitary radiotherapy for residual or invasive tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term thyroid, alpha-subunit and visual field surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many achieve biochemical cure after complete removal; lifelong follow-up for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyrotropinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Free T4, free T3 and TSH",
+          "cells": [
+            {
+              "text": "Raised or non-suppressed TSH with elevated free T4 and free T3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-subunit and alpha-subunit to TSH molar ratio",
+          "cells": [
+            {
+              "text": "Raised alpha-subunit supports a thyrotropinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pituitary testing (TRH stimulation, thyroid hormone suppression)",
+          "cells": [
+            {
+              "text": "Failure of TSH to respond normally"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Adenoma identification and characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid hormone receptor genetic testing",
+          "cells": [
+            {
+              "text": "Resistance to thyroid hormone when biochemistry is ambiguous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other anterior pituitary axes",
+          "cells": [
+            {
+              "text": "Co-secretion or hypopituitarism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyrotropinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Resistance to thyroid hormone (THR-beta)",
+          "cells": [
+            {
+              "text": "Similar biochemistry without a pituitary tumour; alpha-subunit and MRI separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graves disease and other primary hyperthyroidism",
+          "cells": [
+            {
+              "text": "Suppressed TSH in primary disease; raised TSH in thyrotropinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assay interference or heterophile antibody artefact",
+          "cells": [
+            {
+              "text": "Repeat measurement by an alternative assay excludes an artefact"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thyrotropinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal surgery",
+          "cells": [
+            {
+              "text": "First-line, potentially curative resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide or lanreotide to lower TSH secretion and shrink residual tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative control",
+          "cells": [
+            {
+              "text": "Beta-blockade and restoration of euthyroidism before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary radiotherapy",
+          "cells": [
+            {
+              "text": "Residual or invasive disease not controlled by surgery and medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Coexisting anterior pituitary deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Thyroid function, alpha-subunit, pituitary imaging and visual fields"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

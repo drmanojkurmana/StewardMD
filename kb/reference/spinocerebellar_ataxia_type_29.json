@@ -1,172 +1,459 @@
 {
- "id": "spinocerebellar_ataxia_type_29",
- "name": "Spinocerebellar ataxia type 29",
- "aliases": [
-  "SCA29",
-  "ITPR1-related congenital ataxia",
-  "Congenital non-progressive cerebellar ataxia"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology / Neurogenetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by heterozygous ITPR1 variants.",
-   "Presents in infancy with hypotonia and delayed motor milestones, later evolving into gait ataxia, dysarthria and titubation.",
-   "Nystagmus and other oculomotor abnormalities and intention tremor are frequent; learning difficulties or cognitive impairment occur in a subset.",
-   "Many cases arise de novo, so a negative family history does not exclude the diagnosis.",
-   "ITPR1 is allelic with SCA15 (usually adult-onset progressive ataxia from deletions/loss of function) and with Gillespie syndrome (ataxia with aniridia).",
-   "MRI commonly shows cerebellar atrophy or hypoplasia, particularly of the vermis, but may be normal in early infancy.",
-   "A static course distinguishes it from progressive degenerative ataxias and should prompt genetic testing rather than a label of cerebral palsy."
+  "id": "spinocerebellar_ataxia_type_29",
+  "name": "Spinocerebellar ataxia type 29",
+  "aliases": [
+    "SCA29",
+    "ITPR1-related congenital ataxia",
+    "Congenital non-progressive cerebellar ataxia"
   ],
-  "pathophysiology": "SCA29 is caused by pathogenic variants in ITPR1, which encodes the inositol 1,4,5-trisphosphate receptor type 1 (IP3R1), a large tetrameric intracellular calcium-release channel located on the endoplasmic reticulum membrane and expressed at very high levels in cerebellar Purkinje cells. IP3R1 releases calcium from endoplasmic reticulum stores in response to IP3 generated downstream of metabotropic glutamate receptor signalling, and this calcium flux is central to Purkinje cell dendritic function, synaptic plasticity (long-term depression) and cell survival. Missense variants, which often cluster in the IP3-binding or channel-forming domains, act through dominant-negative or loss-of-function mechanisms that disrupt calcium homeostasis and Purkinje cell signalling, producing the congenital non-progressive phenotype. By contrast, larger heterozygous deletions and haploinsufficiency of ITPR1 tend to cause the later-onset progressive SCA15 phenotype, while particular variant combinations with additional ocular features underlie Gillespie syndrome.",
-  "additionalDifferentials": [
-   "SCA15 (ITPR1 loss of function) — allelic and later-onset",
-   "Gillespie syndrome (ITPR1, ataxia with aniridia)",
-   "Other early-onset genetic ataxias (CACNA1A, CACNA1G, KCNC3, EBF3)",
-   "Joubert syndrome and related cerebellar malformations (molar tooth sign)",
-   "Cerebellar hypoplasia from perinatal injury or extreme prematurity",
-   "Congenital disorders of glycosylation with cerebellar involvement"
-  ],
-  "additionalInvestigations": [
-   "ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray)",
-   "Brain MRI to assess the cerebellar vermis and exclude the molar tooth sign of Joubert syndrome",
-   "Developmental and neuropsychological assessment",
-   "Ophthalmology review for nystagmus and to exclude the aniridia of Gillespie syndrome",
-   "Metabolic screen including transferrin isoform (glycosylation) studies to exclude mimics",
-   "Parental testing to determine de novo status and define recurrence risk"
-  ],
-  "redFlags": [
-   "Clear clinical or radiological progression, which should prompt reconsideration or a search for a second diagnosis",
-   "Aniridia or iris hypoplasia suggesting Gillespie syndrome",
-   "Molar tooth sign or episodic abnormal breathing suggesting Joubert syndrome"
-  ],
-  "prognosis": "Usually static or very slowly progressive; most children eventually achieve independent walking, albeit delayed, and have a normal life expectancy. Ataxia and dysarthria persist and cognition is variably affected.",
-  "pitfalls": [
-   "Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing",
-   "Assuming autosomal dominant inheritance requires an affected parent when many cases are de novo",
-   "Missing the ITPR1 diagnosis by using expansion-only spinocerebellar ataxia panels",
-   "Overlooking aniridia that would reclassify the case as Gillespie syndrome"
-  ],
-  "references": [
-   "Paediatric neurogenetics references",
-   "Hereditary and congenital ataxia reviews",
-   "Neurogenetics textbooks"
-  ],
-  "crossLinks": [],
-  "management": [
-   "With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia and motor delay, occupational therapy, and speech and language therapy",
-   "Arrange educational support and neuropsychological input for the learning difficulties and cognitive impairment seen in a subset",
-   "Obtain ophthalmology review for nystagmus and to exclude the aniridia of the allelic Gillespie syndrome",
-   "Institute falls prevention and provide mobility aids as the child achieves delayed independent walking",
-   "Coordinate paediatric multidisciplinary follow-up",
-   "Offer genetic counselling with parental testing to determine de novo status and define recurrence risk, remembering many cases are de novo so a negative family history does not exclude the diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_29-pathway",
-   "title": "Spinocerebellar ataxia type 29: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by heterozygous ITPR1 variants.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Clear clinical or radiological progression, which should prompt reconsideration or a search for a second diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray), Brain MRI to assess the cerebellar vermis and exclude the molar tooth sign of Joubert syndrome,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia and motor delay, occupational therapy, and speech and language therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 29."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_29-matrix",
-   "title": "Spinocerebellar ataxia type 29: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology / Neurogenetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by heterozygous ITPR1 variants.",
+      "Presents in infancy with hypotonia and delayed motor milestones, later evolving into gait ataxia, dysarthria and titubation.",
+      "Nystagmus and other oculomotor abnormalities and intention tremor are frequent; learning difficulties or cognitive impairment occur in a subset.",
+      "Many cases arise de novo, so a negative family history does not exclude the diagnosis.",
+      "ITPR1 is allelic with SCA15 (usually adult-onset progressive ataxia from deletions/loss of function) and with Gillespie syndrome (ataxia with aniridia).",
+      "MRI commonly shows cerebellar atrophy or hypoplasia, particularly of the vermis, but may be normal in early infancy.",
+      "A static course distinguishes it from progressive degenerative ataxias and should prompt genetic testing rather than a label of cerebral palsy."
     ],
-    [
-     "Key Investigations",
-     "ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray), Brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA29 is caused by pathogenic variants in ITPR1, which encodes the inositol 1,4,5-trisphosphate receptor type 1 (IP3R1), a large tetrameric intracellular calcium-release channel located on the endoplasmic reticulum membrane and expressed at very high levels in cerebellar Purkinje cells. IP3R1 releases calcium from endoplasmic reticulum stores in response to IP3 generated downstream of metabotropic glutamate receptor signalling, and this calcium flux is central to Purkinje cell dendritic function, synaptic plasticity (long-term depression) and cell survival. Missense variants, which often cluster in the IP3-binding or channel-forming domains, act through dominant-negative or loss-of-function mechanisms that disrupt calcium homeostasis and Purkinje cell signalling, producing the congenital non-progressive phenotype. By contrast, larger heterozygous deletions and haploinsufficiency of ITPR1 tend to cause the later-onset progressive SCA15 phenotype, while particular variant combinations with additional ocular features underlie Gillespie syndrome.",
+    "additionalDifferentials": [
+      "SCA15 (ITPR1 loss of function) — allelic and later-onset",
+      "Gillespie syndrome (ITPR1, ataxia with aniridia)",
+      "Other early-onset genetic ataxias (CACNA1A, CACNA1G, KCNC3, EBF3)",
+      "Joubert syndrome and related cerebellar malformations (molar tooth sign)",
+      "Cerebellar hypoplasia from perinatal injury or extreme prematurity",
+      "Congenital disorders of glycosylation with cerebellar involvement"
     ],
-    [
-     "Primary Differentials",
-     "SCA15 (ITPR1 loss of function) - allelic and later-onset, Gillespie syndrome (ITPR1, ataxia with aniridia), Other early-onset",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray)",
+      "Brain MRI to assess the cerebellar vermis and exclude the molar tooth sign of Joubert syndrome",
+      "Developmental and neuropsychological assessment",
+      "Ophthalmology review for nystagmus and to exclude the aniridia of Gillespie syndrome",
+      "Metabolic screen including transferrin isoform (glycosylation) studies to exclude mimics",
+      "Parental testing to determine de novo status and define recurrence risk"
     ],
-    [
-     "Management Strategy",
-     "With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia",
-     "Core treatment modality"
+    "redFlags": [
+      "Clear clinical or radiological progression, which should prompt reconsideration or a search for a second diagnosis",
+      "Aniridia or iris hypoplasia suggesting Gillespie syndrome",
+      "Molar tooth sign or episodic abnormal breathing suggesting Joubert syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Usually static or very slowly progressive; most children eventually achieve independent walking, albeit delayed, and have a normal life expectancy. Ataxia and dysarthria persist and cognition is variably affected.",
+    "pitfalls": [
+      "Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing",
+      "Assuming autosomal dominant inheritance requires an affected parent when many cases are de novo",
+      "Missing the ITPR1 diagnosis by using expansion-only spinocerebellar ataxia panels",
+      "Overlooking aniridia that would reclassify the case as Gillespie syndrome"
+    ],
+    "references": [
+      "Paediatric neurogenetics references",
+      "Hereditary and congenital ataxia reviews",
+      "Neurogenetics textbooks"
+    ],
+    "crossLinks": [],
+    "management": [
+      "With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia and motor delay, occupational therapy, and speech and language therapy",
+      "Arrange educational support and neuropsychological input for the learning difficulties and cognitive impairment seen in a subset",
+      "Obtain ophthalmology review for nystagmus and to exclude the aniridia of the allelic Gillespie syndrome",
+      "Institute falls prevention and provide mobility aids as the child achieves delayed independent walking",
+      "Coordinate paediatric multidisciplinary follow-up",
+      "Offer genetic counselling with parental testing to determine de novo status and define recurrence risk, remembering many cases are de novo so a negative family history does not exclude the diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 29."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-29-real-image",
-   "title": "Spinocerebellar ataxia type 29: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "spinocerebellar_ataxia_type_29-pathway",
+      "title": "Spinocerebellar ataxia type 29: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by heterozygous ITPR1 variants.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Clear clinical or radiological progression, which should prompt reconsideration or a search for a second diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray), Brain MRI to assess the cerebellar vermis and exclude the molar tooth sign of Joubert syndrome,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia and motor delay, occupational therapy, and speech and language therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 29."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_29-matrix",
+      "title": "Spinocerebellar ataxia type 29: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant, typically congenital and non-progressive (or very slowly progressive) cerebellar ataxia caused by",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ITPR1 sequencing within an early-onset ataxia panel, with deletion/duplication analysis (MLPA or chromosomal microarray), Brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCA15 (ITPR1 loss of function) - allelic and later-onset, Gillespie syndrome (ITPR1, ataxia with aniridia), Other early-onset",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "With no disease-modifying therapy, provide early developmental intervention and neurorehabilitation: physiotherapy for hypotonia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a static congenital ataxia as cerebral palsy and not pursuing genetic testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 29."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_29-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ITPR1 sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Loss-of-function variant or deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Vermian atrophy or hypoplasia; may be normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Nystagmus; aniridia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin glycoform studies",
+          "cells": [
+            {
+              "text": "Glycosylation mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental testing",
+          "cells": [
+            {
+              "text": "Whether the variant is de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_29-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 15 (ITPR1)",
+          "cells": [
+            {
+              "text": "Allelic, but a later-onset progressive form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gillespie syndrome (ITPR1)",
+          "cells": [
+            {
+              "text": "Ataxia with aniridia; ophthalmology distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joubert syndrome",
+          "cells": [
+            {
+              "text": "Molar tooth sign on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_29-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Neurorehabilitation from infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and neuropsychological support",
+          "cells": [
+            {
+              "text": "Learning difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Nystagmus and exclusion of aniridia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and mobility aids",
+          "cells": [
+            {
+              "text": "As independent walking is delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling with parental testing",
+          "cells": [
+            {
+              "text": "De novo status and recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_29-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 29",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant hypotonia, ataxia and nystagmus with a static course: suspected SCA29",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aniridia, molar tooth sign, clear progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for aniridia or Joubert features; reconsider the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ITPR1 sequencing with deletion analysis; brain MRI; ophthalmology; glycosylation screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ITPR1 loss-of-function variant or deletion found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gillespie, Joubert or other early-onset ataxias; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental intervention and neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Educational and neuropsychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Falls prevention and mobility aids as walking is delayed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Parental testing and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually static; a non-progressive course favours this over degenerative ataxia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,170 +1,439 @@
 {
- "id": "endosalpingiosis",
- "name": "Endosalpingiosis",
- "aliases": [
-  "ectopic tubal-type epithelium",
-  "benign glandular inclusions",
-  "Müllerian inclusions"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology reference textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
-   "Commonly found on the pelvic peritoneum, omentum, and within pelvic lymph nodes, and is usually an incidental histological finding",
-   "It is generally asymptomatic and discovered during surgery or histopathology performed for another indication",
-   "Psammoma bodies are frequently associated, which can cause confusion with serous neoplasia on cytology or histology",
-   "Unlike endometriosis, endosalpingiosis lacks endometrial stroma and haemosiderin, and is not associated with cyclical bleeding",
-   "Its main clinical importance lies in not being mistaken for a low-grade serous tumour or metastatic disease",
-   "No specific treatment is required once a confident benign diagnosis has been established"
+  "id": "endosalpingiosis",
+  "name": "Endosalpingiosis",
+  "aliases": [
+    "ectopic tubal-type epithelium",
+    "benign glandular inclusions",
+    "Müllerian inclusions"
   ],
-  "pathophysiology": "Endosalpingiosis consists of benign glands lined by the ciliated and secretory epithelium characteristic of the fallopian tube, situated in ectopic locations. It is thought to arise from the so-called secondary Müllerian system, whereby the pelvic mesothelium, which shares an embryological origin with the Müllerian ducts, undergoes metaplasia into tubal-type epithelium. Because the process produces glandular structures without endometrial stroma, it does not bleed cyclically as endometriosis does.",
-  "additionalDifferentials": [
-   "Endometriosis",
-   "Low-grade serous carcinoma or borderline serous tumour",
-   "Peritoneal or nodal metastatic disease",
-   "Mesothelial hyperplasia",
-   "Endocervicosis"
-  ],
-  "additionalInvestigations": [
-   "Histopathological examination, which is the basis of diagnosis",
-   "Careful review to distinguish benign glands from serous borderline or malignant lesions",
-   "Imaging, which is generally non-specific and used mainly to exclude other pathology",
-   "Serum CA-125, which may be mildly elevated and should be interpreted with caution",
-   "Correlation with the clinical and operative context"
-  ],
-  "redFlags": [
-   "Atypical or proliferative epithelial features raising the possibility of a serous borderline or malignant tumour",
-   "Coexisting serous neoplasia elsewhere in the pelvis",
-   "Unexpected nodal glandular tissue that could be misread as metastasis",
-   "Discordance between benign histology and clinical suspicion of malignancy"
-  ],
-  "prognosis": "Endosalpingiosis is entirely benign with an excellent prognosis and generally requires no treatment; its significance is largely as a potential mimic of malignancy on histology.",
-  "pitfalls": [
-   "Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma",
-   "Confusing it with endometriosis despite the absence of stroma and haemosiderin",
-   "Misinterpreting associated psammoma bodies as evidence of malignancy",
-   "Instituting unnecessary treatment for an incidental benign finding"
-  ],
-  "references": [
-   "Standard gynaecology reference textbook",
-   "Gynaecological pathology reference text"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically",
-   "Secure an accurate histopathological diagnosis, distinguishing it from serous borderline tumour or metastatic serous carcinoma, aided by awareness of associated psammoma bodies",
-   "Correlate with the clinical and operative context and interpret a mildly raised CA-125 with caution",
-   "Avoid unnecessary intervention or overtreatment driven by a mistaken diagnosis of malignancy",
-   "Reassure the patient of the benign nature and excellent prognosis",
-   "Arrange gynaecology and pathology review where diagnostic uncertainty or coexisting pathology exists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "endosalpingiosis-pathway",
-   "title": "Endosalpingiosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical or proliferative epithelial features raising the possibility of a serous borderline or malignant tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Histopathological examination, which is the basis of diagnosis, Careful review to distinguish benign glands from serous borderline or malignant lesions, Imaging, which is generally non-specific and used mainly to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of endosalpingiosis."
-  }
- ],
- "tables": [
-  {
-   "id": "endosalpingiosis-matrix",
-   "title": "Endosalpingiosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology reference textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
+      "Commonly found on the pelvic peritoneum, omentum, and within pelvic lymph nodes, and is usually an incidental histological finding",
+      "It is generally asymptomatic and discovered during surgery or histopathology performed for another indication",
+      "Psammoma bodies are frequently associated, which can cause confusion with serous neoplasia on cytology or histology",
+      "Unlike endometriosis, endosalpingiosis lacks endometrial stroma and haemosiderin, and is not associated with cyclical bleeding",
+      "Its main clinical importance lies in not being mistaken for a low-grade serous tumour or metastatic disease",
+      "No specific treatment is required once a confident benign diagnosis has been established"
     ],
-    [
-     "Key Investigations",
-     "Histopathological examination, which is the basis of diagnosis, Careful review to distinguish benign glands from serous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Endosalpingiosis consists of benign glands lined by the ciliated and secretory epithelium characteristic of the fallopian tube, situated in ectopic locations. It is thought to arise from the so-called secondary Müllerian system, whereby the pelvic mesothelium, which shares an embryological origin with the Müllerian ducts, undergoes metaplasia into tubal-type epithelium. Because the process produces glandular structures without endometrial stroma, it does not bleed cyclically as endometriosis does.",
+    "additionalDifferentials": [
+      "Endometriosis",
+      "Low-grade serous carcinoma or borderline serous tumour",
+      "Peritoneal or nodal metastatic disease",
+      "Mesothelial hyperplasia",
+      "Endocervicosis"
     ],
-    [
-     "Primary Differentials",
-     "Endometriosis, Low-grade serous carcinoma or borderline serous tumour, Peritoneal or nodal metastatic disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Histopathological examination, which is the basis of diagnosis",
+      "Careful review to distinguish benign glands from serous borderline or malignant lesions",
+      "Imaging, which is generally non-specific and used mainly to exclude other pathology",
+      "Serum CA-125, which may be mildly elevated and should be interpreted with caution",
+      "Correlation with the clinical and operative context"
     ],
-    [
-     "Management Strategy",
-     "Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical or proliferative epithelial features raising the possibility of a serous borderline or malignant tumour",
+      "Coexisting serous neoplasia elsewhere in the pelvis",
+      "Unexpected nodal glandular tissue that could be misread as metastasis",
+      "Discordance between benign histology and clinical suspicion of malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Endosalpingiosis is entirely benign with an excellent prognosis and generally requires no treatment; its significance is largely as a potential mimic of malignancy on histology.",
+    "pitfalls": [
+      "Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma",
+      "Confusing it with endometriosis despite the absence of stroma and haemosiderin",
+      "Misinterpreting associated psammoma bodies as evidence of malignancy",
+      "Instituting unnecessary treatment for an incidental benign finding"
+    ],
+    "references": [
+      "Standard gynaecology reference textbook",
+      "Gynaecological pathology reference text"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically",
+      "Secure an accurate histopathological diagnosis, distinguishing it from serous borderline tumour or metastatic serous carcinoma, aided by awareness of associated psammoma bodies",
+      "Correlate with the clinical and operative context and interpret a mildly raised CA-125 with caution",
+      "Avoid unnecessary intervention or overtreatment driven by a mistaken diagnosis of malignancy",
+      "Reassure the patient of the benign nature and excellent prognosis",
+      "Arrange gynaecology and pathology review where diagnostic uncertainty or coexisting pathology exists"
     ]
-   ],
-   "caption": "Overview comparison matrix for endosalpingiosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "endosalpingiosis-real-image",
-   "title": "Endosalpingiosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "endosalpingiosis-pathway",
+      "title": "Endosalpingiosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical or proliferative epithelial features raising the possibility of a serous borderline or malignant tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Histopathological examination, which is the basis of diagnosis, Careful review to distinguish benign glands from serous borderline or malignant lesions, Imaging, which is generally non-specific and used mainly to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of endosalpingiosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "endosalpingiosis-matrix",
+      "title": "Endosalpingiosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign condition defined by the presence of ectopic glands lined by tubal-type ciliated epithelium outside the fallopian tube",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Histopathological examination, which is the basis of diagnosis, Careful review to distinguish benign glands from serous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Endometriosis, Low-grade serous carcinoma or borderline serous tumour, Peritoneal or nodal metastatic disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise as a benign incidental finding requiring no specific treatment once confirmed histologically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosing endosalpingiosis in lymph nodes as metastatic carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for endosalpingiosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endosalpingiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Histopathological examination",
+          "cells": [
+            {
+              "text": "Basis of diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful histological review",
+          "cells": [
+            {
+              "text": "Separates benign glands from serous borderline or malignant lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Generally non-specific; used mainly to exclude other pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA-125",
+          "cells": [
+            {
+              "text": "May be mildly elevated; interpret with caution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endosalpingiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Lacks endometrial stroma and haemosiderin; not associated with cyclical bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade serous carcinoma or borderline serous tumour",
+          "cells": [
+            {
+              "text": "Atypical or proliferative epithelial features point towards this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal or nodal metastatic disease",
+          "cells": [
+            {
+              "text": "Nodal glands can be misread as metastasis; benign glands are the key finding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endosalpingiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign incidental finding",
+          "cells": [
+            {
+              "text": "No specific treatment once confirmed histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accurate histopathological diagnosis",
+          "cells": [
+            {
+              "text": "Distinguish from serous borderline tumour or metastatic serous carcinoma; psammoma bodies are common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and operative correlation",
+          "cells": [
+            {
+              "text": "Interpret a mildly raised CA-125 with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid overtreatment",
+          "cells": [
+            {
+              "text": "No unnecessary intervention driven by a mistaken diagnosis of malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign nature and excellent prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist review",
+          "cells": [
+            {
+              "text": "Gynaecology and pathology review where uncertainty or coexisting pathology exists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endosalpingiosis-dx-mgmt",
+      "title": "Diagnosis and management of Endosalpingiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ectopic tubal-type glands found incidentally on peritoneum, omentum or pelvic nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (atypical features, coexisting serous neoplasia, discordant suspicion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Gynaecology and pathology review for diagnostic uncertainty",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Histopathology with careful review against serous borderline or malignant lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Confident benign diagnosis established on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-review; consider serous borderline tumour or metastatic serous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that the glands are benign and need no specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary intervention or overtreatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Interpret a mildly raised CA-125 with caution",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correlate with the clinical and operative context",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; significance lies in not mistaking it for malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

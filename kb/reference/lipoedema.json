@@ -1,177 +1,493 @@
 {
- "id": "lipoedema",
- "name": "lipoedema",
- "aliases": [
-  "lipohyperplasia dolorosa",
-  "painful fat syndrome"
- ],
- "class": "non_infective",
- "system": "subcutaneous adipose and lymphatic",
- "specialty": "vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes the arms, occurring almost exclusively in women.",
-   "Onset or worsening clusters around periods of hormonal change, notably puberty, pregnancy and the menopause, pointing to an oestrogen-related influence.",
-   "The feet are characteristically spared, producing an abrupt cuff or bracelet at the ankle, in contrast to lymphoedema which typically involves the foot.",
-   "The affected tissue is tender and painful, and patients bruise easily owing to increased capillary fragility.",
-   "The Stemmer sign is negative in early disease and the swelling is non-pitting, helping to separate it from lymphoedema.",
-   "The disproportion is resistant to dietary energy restriction and generalised weight loss, which reduce visceral and upper-body fat while sparing the affected depots.",
-   "Longstanding lipoedema may cause secondary lymphatic overload, producing lipo-lymphoedema with foot involvement and a positive Stemmer sign.",
-   "It is frequently misdiagnosed as simple obesity, causing considerable psychological distress and inappropriate blame for perceived dietary failure."
+  "id": "lipoedema",
+  "name": "lipoedema",
+  "aliases": [
+    "lipohyperplasia dolorosa",
+    "painful fat syndrome"
   ],
-  "pathophysiology": "Lipoedema is characterised by hyperplasia and hypertrophy of subcutaneous adipose tissue in a symmetrical, gynoid distribution that spares the trunk, hands and feet. The precise mechanism is incompletely understood, but proposed contributors include a hormonally modulated adipose disorder, microangiopathy with increased capillary permeability and fragility (accounting for pain and bruising), altered adipocyte and extracellular matrix behaviour, and a hereditary predisposition given frequent familial clustering. In early disease lymphatic transport is preserved, but progressive adipose expansion mechanically overloads the lymphatics and may culminate in secondary lymphatic insufficiency (lipo-lymphoedema). Chronic inflammation within the expanded fat and low-grade tissue oedema are thought to sustain symptoms.",
-  "additionalDifferentials": [
-   "primary or secondary lymphoedema",
-   "generalised obesity with bilateral lipohypertrophy",
-   "chronic venous insufficiency",
-   "Dercum disease (adiposis dolorosa)",
-   "hypothyroid myxoedema",
-   "systemic oedema from cardiac, renal or hepatic disease",
-   "familial multiple symmetrical lipomatosis"
-  ],
-  "additionalInvestigations": [
-   "clinical assessment of distribution, tenderness, bruising and Stemmer sign",
-   "lymphoscintigraphy where lymphoedema or lipo-lymphoedema is suspected",
-   "venous duplex ultrasonography to exclude venous disease",
-   "dual-energy X-ray absorptiometry or bioimpedance for body composition",
-   "thyroid, renal, hepatic and cardiac evaluation to exclude systemic causes",
-   "high-resolution ultrasound of subcutaneous tissue to gauge fat thickness"
-  ],
-  "redFlags": [
-   "new pitting oedema and a positive Stemmer sign indicating secondary lymphatic failure",
-   "skin breakdown, recurrent cellulitis or lymphorrhoea",
-   "disabling pain or mobility loss",
-   "features of a coexisting eating disorder or severe psychological distress",
-   "rapidly progressive or asymmetrical swelling prompting reassessment of the diagnosis"
-  ],
-  "prognosis": "Lipoedema is a chronic, often slowly progressive condition that is not corrected by diet alone; conservative measures such as compression, exercise and complex decongestive therapy control symptoms, and liposuction can achieve durable reduction of affected fat in selected patients. Progression to lipo-lymphoedema worsens the outlook if untreated.",
-  "pitfalls": [
-   "labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence",
-   "confusing it with lymphoedema and applying the wrong management emphasis",
-   "overlooking evolution into lipo-lymphoedema when the foot becomes involved",
-   "neglecting the pain, bruising and psychological burden that define the patient experience",
-   "expecting bariatric or dietary weight loss alone to resolve the disproportion"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Wold, Hines and Allen description and subsequent lipoedema consensus guidance",
-   "International Society of Lymphology Consensus Document on peripheral oedema"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining graduated compression garments with manual lymphatic drainage",
-   "Encourage regular low-impact exercise, particularly aquatic exercise, to support mobility and lymphatic flow",
-   "Offer weight management for coexisting obesity while explaining that the affected gynoid depots resist dietary energy restriction",
-   "Consider liposuction using tumescent or water-jet-assisted techniques for durable reduction of the affected fat in selected patients",
-   "Provide pain management and psychological support, addressing the tenderness, easy bruising and body-image impact",
-   "Monitor for progression to lipo-lymphoedema and treat secondary lymphatic insufficiency with intensified decongestive therapy",
-   "Advise attentive skin care to prevent complications in oedematous limbs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lipoedema-pathway",
-   "title": "lipoedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes the arms, occurring almost exclusively in women.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: new pitting oedema and a positive Stemmer sign indicating secondary lymphatic failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: clinical assessment of distribution, tenderness, bruising and Stemmer sign, lymphoscintigraphy where lymphoedema or lipo-lymphoedema is suspected, venous duplex ultrasonography to exclude venous disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining graduated compression garments with manual lymphatic drainage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lipoedema."
-  }
- ],
- "tables": [
-  {
-   "id": "lipoedema-matrix",
-   "title": "lipoedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "subcutaneous adipose and lymphatic",
+  "specialty": "vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes the arms, occurring almost exclusively in women.",
+      "Onset or worsening clusters around periods of hormonal change, notably puberty, pregnancy and the menopause, pointing to an oestrogen-related influence.",
+      "The feet are characteristically spared, producing an abrupt cuff or bracelet at the ankle, in contrast to lymphoedema which typically involves the foot.",
+      "The affected tissue is tender and painful, and patients bruise easily owing to increased capillary fragility.",
+      "The Stemmer sign is negative in early disease and the swelling is non-pitting, helping to separate it from lymphoedema.",
+      "The disproportion is resistant to dietary energy restriction and generalised weight loss, which reduce visceral and upper-body fat while sparing the affected depots.",
+      "Longstanding lipoedema may cause secondary lymphatic overload, producing lipo-lymphoedema with foot involvement and a positive Stemmer sign.",
+      "It is frequently misdiagnosed as simple obesity, causing considerable psychological distress and inappropriate blame for perceived dietary failure."
     ],
-    [
-     "Key Investigations",
-     "clinical assessment of distribution, tenderness, bruising and Stemmer sign, lymphoscintigraphy where lymphoedema or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lipoedema is characterised by hyperplasia and hypertrophy of subcutaneous adipose tissue in a symmetrical, gynoid distribution that spares the trunk, hands and feet. The precise mechanism is incompletely understood, but proposed contributors include a hormonally modulated adipose disorder, microangiopathy with increased capillary permeability and fragility (accounting for pain and bruising), altered adipocyte and extracellular matrix behaviour, and a hereditary predisposition given frequent familial clustering. In early disease lymphatic transport is preserved, but progressive adipose expansion mechanically overloads the lymphatics and may culminate in secondary lymphatic insufficiency (lipo-lymphoedema). Chronic inflammation within the expanded fat and low-grade tissue oedema are thought to sustain symptoms.",
+    "additionalDifferentials": [
+      "primary or secondary lymphoedema",
+      "generalised obesity with bilateral lipohypertrophy",
+      "chronic venous insufficiency",
+      "Dercum disease (adiposis dolorosa)",
+      "hypothyroid myxoedema",
+      "systemic oedema from cardiac, renal or hepatic disease",
+      "familial multiple symmetrical lipomatosis"
     ],
-    [
-     "Primary Differentials",
-     "primary or secondary lymphoedema, generalised obesity with bilateral lipohypertrophy, chronic venous insufficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "clinical assessment of distribution, tenderness, bruising and Stemmer sign",
+      "lymphoscintigraphy where lymphoedema or lipo-lymphoedema is suspected",
+      "venous duplex ultrasonography to exclude venous disease",
+      "dual-energy X-ray absorptiometry or bioimpedance for body composition",
+      "thyroid, renal, hepatic and cardiac evaluation to exclude systemic causes",
+      "high-resolution ultrasound of subcutaneous tissue to gauge fat thickness"
     ],
-    [
-     "Management Strategy",
-     "No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining",
-     "Core treatment modality"
+    "redFlags": [
+      "new pitting oedema and a positive Stemmer sign indicating secondary lymphatic failure",
+      "skin breakdown, recurrent cellulitis or lymphorrhoea",
+      "disabling pain or mobility loss",
+      "features of a coexisting eating disorder or severe psychological distress",
+      "rapidly progressive or asymmetrical swelling prompting reassessment of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lipoedema is a chronic, often slowly progressive condition that is not corrected by diet alone; conservative measures such as compression, exercise and complex decongestive therapy control symptoms, and liposuction can achieve durable reduction of affected fat in selected patients. Progression to lipo-lymphoedema worsens the outlook if untreated.",
+    "pitfalls": [
+      "labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence",
+      "confusing it with lymphoedema and applying the wrong management emphasis",
+      "overlooking evolution into lipo-lymphoedema when the foot becomes involved",
+      "neglecting the pain, bruising and psychological burden that define the patient experience",
+      "expecting bariatric or dietary weight loss alone to resolve the disproportion"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Wold, Hines and Allen description and subsequent lipoedema consensus guidance",
+      "International Society of Lymphology Consensus Document on peripheral oedema"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining graduated compression garments with manual lymphatic drainage",
+      "Encourage regular low-impact exercise, particularly aquatic exercise, to support mobility and lymphatic flow",
+      "Offer weight management for coexisting obesity while explaining that the affected gynoid depots resist dietary energy restriction",
+      "Consider liposuction using tumescent or water-jet-assisted techniques for durable reduction of the affected fat in selected patients",
+      "Provide pain management and psychological support, addressing the tenderness, easy bruising and body-image impact",
+      "Monitor for progression to lipo-lymphoedema and treat secondary lymphatic insufficiency with intensified decongestive therapy",
+      "Advise attentive skin care to prevent complications in oedematous limbs"
     ]
-   ],
-   "caption": "Overview comparison matrix for lipoedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lipoedema-real-image",
-   "title": "lipoedema: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "lipoedema-pathway",
+      "title": "lipoedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes the arms, occurring almost exclusively in women.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: new pitting oedema and a positive Stemmer sign indicating secondary lymphatic failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: clinical assessment of distribution, tenderness, bruising and Stemmer sign, lymphoscintigraphy where lymphoedema or lipo-lymphoedema is suspected, venous duplex ultrasonography to exclude venous disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining graduated compression garments with manual lymphatic drainage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lipoedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lipoedema-matrix",
+      "title": "lipoedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of symmetrical, disproportionate subcutaneous adipose accumulation affecting the buttocks, hips and legs and sometimes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "clinical assessment of distribution, tenderness, bruising and Stemmer sign, lymphoscintigraphy where lymphoedema or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "primary or secondary lymphoedema, generalised obesity with bilateral lipohypertrophy, chronic venous insufficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No pharmacotherapy corrects the abnormal adipose tissue; conservative complex decongestive therapy is the mainstay, combining",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "labelling the condition as simple obesity and attributing failure to lose the affected fat to poor adherence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lipoedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of distribution, tenderness, bruising and Stemmer sign",
+          "cells": [
+            {
+              "text": "Stemmer sign negative in early disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Where lymphoedema or lipo-lymphoedema is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex ultrasonography",
+          "cells": [
+            {
+              "text": "Excludes venous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dual-energy X-ray absorptiometry or bioimpedance",
+          "cells": [
+            {
+              "text": "Body composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid, renal, hepatic and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Systemic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound of subcutaneous tissue",
+          "cells": [
+            {
+              "text": "Subcutaneous fat thickness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or secondary lymphoedema",
+          "cells": [
+            {
+              "text": "Foot typically involved in lymphoedema; spared in this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised obesity with bilateral lipohypertrophy",
+          "cells": [
+            {
+              "text": "Dietary weight loss reduces it; the affected depots resist dietary restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency",
+          "cells": [
+            {
+              "text": "Venous signs on duplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroid myxoedema",
+          "cells": [
+            {
+              "text": "Systemic cause excluded by thyroid evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complex decongestive therapy",
+          "cells": [
+            {
+              "text": "Mainstay: graduated compression garments with decongestive measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise",
+          "cells": [
+            {
+              "text": "Regular low-impact exercise, particularly aquatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight management",
+          "cells": [
+            {
+              "text": "For coexisting obesity; affected depots resist dietary energy restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liposuction",
+          "cells": [
+            {
+              "text": "Tumescent or water-jet-assisted, in selected patients, for durable reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and psychological support",
+          "cells": [
+            {
+              "text": "Tenderness, easy bruising and body-image impact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression to lipo-lymphoedema",
+          "cells": [
+            {
+              "text": "Intensified decongestive therapy for secondary lymphatic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Attentive care of oedematous limbs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipoedema-dx-mgmt",
+      "title": "Diagnosis and management of lipoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetrical painful leg and hip fat enlargement with feet spared and easy bruising",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new pitting oedema, skin breakdown, cellulitis, disabling pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: lymphatic review and treatment of cellulitis or breakdown",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stemmer sign, lymphoscintigraphy if lymphoedema, duplex, thyroid, renal and cardiac tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is symmetrical gynoid fat with feet spared and Stemmer sign negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoedema, generalised obesity, chronic venous disease or myxoedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complex decongestive therapy with graduated compression garments",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-impact aquatic exercise to support mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight management for coexisting obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liposuction for durable reduction in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pain management and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and slowly progressive; diet alone does not correct it; compression helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

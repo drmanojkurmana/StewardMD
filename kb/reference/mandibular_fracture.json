@@ -1,176 +1,434 @@
 {
- "id": "mandibular_fracture",
- "name": "Mandibular fracture",
- "aliases": [
-  "fractured mandible",
-  "broken jaw",
-  "lower jaw fracture",
-  "condylar fracture"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a search for a second, often contralateral, fracture such as the condyle",
-   "Malocclusion, a change in the patient's usual bite, is a sensitive sign of mandibular fracture and must be specifically asked about and examined",
-   "Other clinical signs include pain on jaw movement, trismus, a step in the dental arch, sublingual haematoma, and numbness of the lower lip from inferior alveolar nerve injury",
-   "Panoramic radiography and CT are used to define fracture site, displacement, and the relationship to tooth roots and the inferior alveolar nerve",
-   "Fractures involving tooth-bearing bone communicate with the mouth and are effectively open, requiring antibiotics and timely management to reduce infection risk",
-   "Restoring the pre-injury occlusion is the central goal, achieved with maxillomandibular fixation and/or open reduction with internal fixation depending on the pattern",
-   "Many condylar fractures, particularly in children and minimally displaced cases, can be managed conservatively with a short period of fixation and early mobilisation to avoid ankylosis",
-   "Bilateral anterior (parasymphyseal) fractures can allow the tongue and anterior segment to fall backward and threaten the airway"
+  "id": "mandibular_fracture",
+  "name": "Mandibular fracture",
+  "aliases": [
+    "fractured mandible",
+    "broken jaw",
+    "lower jaw fracture",
+    "condylar fracture"
   ],
-  "pathophysiology": "The mandible is a mobile, U-shaped bone whose weaker regions - the condylar neck, angle (often at an unerupted third molar), and parasymphysis - are prone to fracture. Because it forms a ring-like structure articulating at both temporomandibular joints, force at one point is frequently transmitted to produce a second fracture elsewhere. Displacement is influenced by the pull of the muscles of mastication, which can distract or override fracture segments depending on their orientation (favourable versus unfavourable patterns). Fractures through tooth-bearing segments breach the oral mucosa, creating a contaminated, effectively open injury, and disruption of the inferior alveolar nerve within the canal causes lower lip and chin numbness.",
-  "additionalDifferentials": [
-   "Temporomandibular joint dislocation without fracture",
-   "Dentoalveolar fracture or isolated dental trauma",
-   "Zygomatic or midface fracture causing trismus",
-   "Mandibular contusion or muscle injury",
-   "Pathological fracture through a cyst or tumour",
-   "Temporomandibular joint dysfunction unrelated to trauma"
-  ],
-  "additionalInvestigations": [
-   "Panoramic radiograph (orthopantomogram) as an initial survey of the mandible",
-   "CT for detailed assessment of condyle, displacement, and comminution",
-   "Careful occlusal and dental examination to detect malocclusion and tooth injury",
-   "Inferior alveolar nerve sensory testing of the lower lip and chin",
-   "Assessment for a second fracture given the ring anatomy of the mandible"
-  ],
-  "redFlags": [
-   "Airway compromise from bilateral parasymphyseal fractures with posterior displacement of the tongue (emergency)",
-   "Displaced open fracture through tooth-bearing bone with infection risk",
-   "Signs of associated cervical spine or head injury in high-energy trauma",
-   "Progressive infection or abscess from an untreated open mandibular fracture"
-  ],
-  "prognosis": "Most mandibular fractures heal well with restored occlusion and function when reduction and fixation are appropriate, and many condylar fractures do well with conservative management. Poorer outcomes - malunion, malocclusion, nonunion, infection, temporomandibular joint stiffness or ankylosis, and persistent nerve numbness - are associated with delayed treatment, inadequate reduction, open contaminated fractures, or prolonged immobilisation.",
-  "pitfalls": [
-   "Missing a second (often condylar) fracture after identifying the first",
-   "Failing to recognise malocclusion as a key diagnostic sign",
-   "Underestimating infection risk in fractures communicating with the oral cavity",
-   "Overlooking airway risk in bilateral anterior fractures",
-   "Prolonged rigid immobilisation of condylar fractures leading to stiffness or ankylosis",
-   "Neglecting to document inferior alveolar nerve deficit before intervention"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation according to the fracture pattern",
-   "Manage minimally displaced fractures and many condylar fractures conservatively with a soft diet, analgesia and close review",
-   "Give antibiotics for fractures through tooth-bearing bone, which communicate with the mouth and are effectively open, together with tetanus prophylaxis",
-   "Provide analgesia and oral hygiene measures with antiseptic mouthwash",
-   "Search for and treat a second fracture, often contralateral condylar, given the ring anatomy of the mandible",
-   "Document and follow inferior alveolar nerve function through lower-lip and chin sensation testing",
-   "Protect the airway in bilateral or comminuted fractures where loss of tongue support threatens obstruction",
-   "Refer to maxillofacial or plastic surgery with dental input for associated tooth injuries"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mandibular_fracture-pathway",
-   "title": "Mandibular fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a search for a second, often contralateral, fracture such as the condyle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Airway compromise from bilateral parasymphyseal fractures with posterior displacement of the tongue (emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Panoramic radiograph (orthopantomogram) as an initial survey of the mandible, CT for detailed assessment of condyle, displacement, and comminution, Careful occlusal and dental examination to detect malocclusion and tooth"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation according to the fracture pattern"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a second (often condylar) fracture after identifying the first"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mandibular fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "mandibular_fracture-matrix",
-   "title": "Mandibular fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a search for a second, often contralateral, fracture such as the condyle",
+      "Malocclusion, a change in the patient's usual bite, is a sensitive sign of mandibular fracture and must be specifically asked about and examined",
+      "Other clinical signs include pain on jaw movement, trismus, a step in the dental arch, sublingual haematoma, and numbness of the lower lip from inferior alveolar nerve injury",
+      "Panoramic radiography and CT are used to define fracture site, displacement, and the relationship to tooth roots and the inferior alveolar nerve",
+      "Fractures involving tooth-bearing bone communicate with the mouth and are effectively open, requiring antibiotics and timely management to reduce infection risk",
+      "Restoring the pre-injury occlusion is the central goal, achieved with maxillomandibular fixation and/or open reduction with internal fixation depending on the pattern",
+      "Many condylar fractures, particularly in children and minimally displaced cases, can be managed conservatively with a short period of fixation and early mobilisation to avoid ankylosis",
+      "Bilateral anterior (parasymphyseal) fractures can allow the tongue and anterior segment to fall backward and threaten the airway"
     ],
-    [
-     "Key Investigations",
-     "Panoramic radiograph (orthopantomogram) as an initial survey of the mandible, CT for detailed assessment of condyle,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mandible is a mobile, U-shaped bone whose weaker regions - the condylar neck, angle (often at an unerupted third molar), and parasymphysis - are prone to fracture. Because it forms a ring-like structure articulating at both temporomandibular joints, force at one point is frequently transmitted to produce a second fracture elsewhere. Displacement is influenced by the pull of the muscles of mastication, which can distract or override fracture segments depending on their orientation (favourable versus unfavourable patterns). Fractures through tooth-bearing segments breach the oral mucosa, creating a contaminated, effectively open injury, and disruption of the inferior alveolar nerve within the canal causes lower lip and chin numbness.",
+    "additionalDifferentials": [
+      "Temporomandibular joint dislocation without fracture",
+      "Dentoalveolar fracture or isolated dental trauma",
+      "Zygomatic or midface fracture causing trismus",
+      "Mandibular contusion or muscle injury",
+      "Pathological fracture through a cyst or tumour",
+      "Temporomandibular joint dysfunction unrelated to trauma"
     ],
-    [
-     "Primary Differentials",
-     "Temporomandibular joint dislocation without fracture, Dentoalveolar fracture or isolated dental trauma, Zygomatic or midface",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Panoramic radiograph (orthopantomogram) as an initial survey of the mandible",
+      "CT for detailed assessment of condyle, displacement, and comminution",
+      "Careful occlusal and dental examination to detect malocclusion and tooth injury",
+      "Inferior alveolar nerve sensory testing of the lower lip and chin",
+      "Assessment for a second fracture given the ring anatomy of the mandible"
     ],
-    [
-     "Management Strategy",
-     "Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation",
-     "Core treatment modality"
+    "redFlags": [
+      "Airway compromise from bilateral parasymphyseal fractures with posterior displacement of the tongue (emergency)",
+      "Displaced open fracture through tooth-bearing bone with infection risk",
+      "Signs of associated cervical spine or head injury in high-energy trauma",
+      "Progressive infection or abscess from an untreated open mandibular fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a second (often condylar) fracture after identifying the first",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most mandibular fractures heal well with restored occlusion and function when reduction and fixation are appropriate, and many condylar fractures do well with conservative management. Poorer outcomes - malunion, malocclusion, nonunion, infection, temporomandibular joint stiffness or ankylosis, and persistent nerve numbness - are associated with delayed treatment, inadequate reduction, open contaminated fractures, or prolonged immobilisation.",
+    "pitfalls": [
+      "Missing a second (often condylar) fracture after identifying the first",
+      "Failing to recognise malocclusion as a key diagnostic sign",
+      "Underestimating infection risk in fractures communicating with the oral cavity",
+      "Overlooking airway risk in bilateral anterior fractures",
+      "Prolonged rigid immobilisation of condylar fractures leading to stiffness or ankylosis",
+      "Neglecting to document inferior alveolar nerve deficit before intervention"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation according to the fracture pattern",
+      "Manage minimally displaced fractures and many condylar fractures conservatively with a soft diet, analgesia and close review",
+      "Give antibiotics for fractures through tooth-bearing bone, which communicate with the mouth and are effectively open, together with tetanus prophylaxis",
+      "Provide analgesia and oral hygiene measures with antiseptic mouthwash",
+      "Search for and treat a second fracture, often contralateral condylar, given the ring anatomy of the mandible",
+      "Document and follow inferior alveolar nerve function through lower-lip and chin sensation testing",
+      "Protect the airway in bilateral or comminuted fractures where loss of tongue support threatens obstruction",
+      "Refer to maxillofacial or plastic surgery with dental input for associated tooth injuries"
     ]
-   ],
-   "caption": "Overview comparison matrix for mandibular fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mandibular-fracture-real-image",
-   "title": "Mandibular fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "mandibular_fracture-pathway",
+      "title": "Mandibular fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a search for a second, often contralateral, fracture such as the condyle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Airway compromise from bilateral parasymphyseal fractures with posterior displacement of the tongue (emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Panoramic radiograph (orthopantomogram) as an initial survey of the mandible, CT for detailed assessment of condyle, displacement, and comminution, Careful occlusal and dental examination to detect malocclusion and tooth"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation according to the fracture pattern"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a second (often condylar) fracture after identifying the first"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mandibular fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mandibular_fracture-matrix",
+      "title": "Mandibular fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The mandible commonly fractures at more than one site because of its arch shape, so a fracture at one point should prompt a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Panoramic radiograph (orthopantomogram) as an initial survey of the mandible, CT for detailed assessment of condyle,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Temporomandibular joint dislocation without fracture, Dentoalveolar fracture or isolated dental trauma, Zygomatic or midface",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore pre-injury occlusion as the central goal using maxillomandibular fixation and/or open reduction with internal fixation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a second (often condylar) fracture after identifying the first",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mandibular fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mandibular_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Panoramic radiograph (orthopantomogram)",
+          "cells": [
+            {
+              "text": "Initial survey of the mandible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Condyle, displacement and comminution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusal and dental examination",
+          "cells": [
+            {
+              "text": "Malocclusion and tooth injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior alveolar nerve sensory testing",
+          "cells": [
+            {
+              "text": "Lower lip and chin sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for a second fracture",
+          "cells": [
+            {
+              "text": "A second fracture, given the ring anatomy of the mandible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mandibular_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restore pre-injury occlusion",
+          "cells": [
+            {
+              "text": "Central goal, using maxillomandibular fixation and/or open reduction with internal fixation per fracture pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Minimally displaced and many condylar fractures: soft diet, analgesia and close review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and tetanus prophylaxis",
+          "cells": [
+            {
+              "text": "Fractures through tooth-bearing bone, which communicate with the mouth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and oral hygiene",
+          "cells": [
+            {
+              "text": "Antiseptic mouthwash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for a second fracture",
+          "cells": [
+            {
+              "text": "Often contralateral condylar, given the ring anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve function follow-up",
+          "cells": [
+            {
+              "text": "Inferior alveolar nerve function through lower-lip and chin sensation testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Bilateral or comminuted fractures where loss of tongue support threatens obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Maxillofacial or plastic surgery, with dental input for tooth injuries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mandibular_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Mandibular fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial trauma with suspected mandibular fracture; airway assessed first",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway compromise, bilateral parasymphyseal fracture or open fracture present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway protection; bilateral or comminuted fractures risk obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Panoramic radiograph, CT for condyle and displacement, occlusal examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the fracture displaced or comminuted, with occlusion disturbed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Minimally displaced: conservative care with soft diet and close review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restore pre-injury occlusion with MMF and/or open reduction and internal fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics and tetanus prophylaxis for fractures through tooth-bearing bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Search for and treat a second fracture, often contralateral condylar",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Document inferior alveolar nerve function with lower-lip and chin sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer to maxillofacial or plastic surgery, with dental input for tooth injuries",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

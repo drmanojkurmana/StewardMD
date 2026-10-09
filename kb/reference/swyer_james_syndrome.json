@@ -1,176 +1,492 @@
 {
- "id": "swyer_james_syndrome",
- "name": "swyer james syndrome",
- "aliases": [
-  "Swyer-James-MacLeod syndrome",
-  "unilateral hyperlucent lung"
- ],
- "class": "non_infective",
- "system": "respiratory",
- "specialty": "respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Fishman's Pulmonary Diseases and Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent, hypoperfused lung or lobe that is usually smaller than normal.",
-   "It follows a severe lower respiratory infection in early childhood — often viral (adenovirus, measles) or Mycoplasma — that injures the developing distal airways and alveoli.",
-   "The classic chest radiograph shows unilateral hyperlucency with a small or normal-sized lung and reduced vascular markings, distinguishing it from compensatory overinflation.",
-   "Air trapping is the functional hallmark: expiratory imaging shows the affected side remaining lucent and failing to empty, sometimes with mediastinal shift on expiration.",
-   "CT typically reveals mosaic attenuation, bronchiectasis, reduced vessel calibre and areas of low attenuation reflecting the obliterated small airways.",
-   "Many patients are asymptomatic and diagnosed incidentally; others have recurrent infection, chronic cough, exertional dyspnoea or bronchiectasis.",
-   "Perfusion imaging demonstrates markedly reduced perfusion to the affected lung, matching the ventilation abnormality.",
-   "It must be distinguished from other causes of a unilateral hyperlucent lung, including endobronchial obstruction, congenital lobar emphysema, absent pulmonary artery and prior pneumonectomy or lobar disease."
+  "id": "swyer_james_syndrome",
+  "name": "swyer james syndrome",
+  "aliases": [
+    "Swyer-James-MacLeod syndrome",
+    "unilateral hyperlucent lung"
   ],
-  "pathophysiology": "Swyer-James-MacLeod syndrome arises when a severe lower respiratory infection during the period of ongoing lung growth in early childhood injures the terminal and respiratory bronchioles. Healing produces constrictive (obliterative) bronchiolitis, with fibrous narrowing and obliteration of small airways that impairs both ventilation and normal alveolar multiplication in the affected region. The damaged lung is chronically underventilated, and reflex and structural reduction of the pulmonary vascular bed leads to diminished perfusion and attenuated vessels, accounting for the radiographic hyperlucency. Collateral air drift allows air to enter distal units but the obliterated broncholes impede its egress, so air trapping develops and the affected lung fails to deflate normally on expiration. Because the insult occurs during development, the affected lung or lobe often remains smaller than normal, and coexisting bronchiectasis reflects proximal airway damage from the original infection and subsequent recurrent infection.",
-  "additionalDifferentials": [
-   "endobronchial obstruction by tumour or foreign body causing air trapping",
-   "congenital lobar emphysema",
-   "congenital absence or hypoplasia of a pulmonary artery",
-   "compensatory overinflation after contralateral lobar collapse or resection",
-   "bullous or panlobular emphysema (including alpha-1 antitrypsin deficiency)",
-   "pulmonary embolism with regional oligaemia",
-   "technical or rotational causes of asymmetric radiographic lucency"
-  ],
-  "additionalInvestigations": [
-   "inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation",
-   "ventilation-perfusion scintigraphy showing matched reduction on the affected side",
-   "chest radiograph in inspiration and expiration",
-   "pulmonary function testing including assessment of airflow obstruction and gas trapping",
-   "bronchoscopy where endobronchial obstruction needs exclusion",
-   "CT pulmonary angiography if absent or hypoplastic pulmonary artery is considered",
-   "assessment for bronchiectasis-related infection with sputum culture"
-  ],
-  "redFlags": [
-   "recurrent or severe lower respiratory infections with declining lung function",
-   "haemoptysis prompting exclusion of another cause of hyperlucency",
-   "progressive dyspnoea suggesting extension of disease or a superimposed process",
-   "new focal obstruction raising concern for an endobronchial lesion"
-  ],
-  "prognosis": "Many patients remain stable and minimally symptomatic for life, but those with extensive bronchiectasis or recurrent infection may have progressive symptoms; management is largely supportive, with treatment of infection and, rarely, resection for a destroyed lobe causing intractable problems.",
-  "pitfalls": [
-   "Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact.",
-   "Omitting expiratory imaging, without which the diagnostic air trapping may be missed.",
-   "Overlooking an endobronchial obstruction that can mimic the appearance.",
-   "Failing to recognise and treat associated bronchiectasis and recurrent infection.",
-   "Assuming the small hyperlucent lung is congenitally absent tissue rather than post-infectious small-airway obliteration."
-  ],
-  "references": [
-   "Fishman's Pulmonary Diseases and Disorders, current edition",
-   "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
-   "Standard thoracic radiology reference texts on the unilateral hyperlucent lung"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management is largely supportive, as the obliterative bronchiolitis cannot be reversed",
-   "Treat respiratory infections promptly with antimicrobials and ensure influenza and pneumococcal immunisation to prevent further airway damage",
-   "Provide airway clearance physiotherapy and manage any associated bronchiectasis",
-   "Use inhaled bronchodilators where there is demonstrable airflow obstruction, and advise avoidance of smoking",
-   "Monitor with serial pulmonary function testing and review for recurrent infection or progressive symptoms",
-   "Reserve surgical resection such as lobectomy for a destroyed lobe causing intractable infection or haemoptysis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "swyer_james_syndrome-pathway",
-   "title": "swyer james syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent, hypoperfused lung or lobe that is usually smaller than normal.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: recurrent or severe lower respiratory infections with declining lung function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation, ventilation-perfusion scintigraphy showing matched reduction on the affected side, chest radiograph in inspiration and expiration"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management is largely supportive, as the obliterative bronchiolitis cannot be reversed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of swyer james syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "swyer_james_syndrome-matrix",
-   "title": "swyer james syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "respiratory",
+  "specialty": "respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fishman's Pulmonary Diseases and Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent, hypoperfused lung or lobe that is usually smaller than normal.",
+      "It follows a severe lower respiratory infection in early childhood — often viral (adenovirus, measles) or Mycoplasma — that injures the developing distal airways and alveoli.",
+      "The classic chest radiograph shows unilateral hyperlucency with a small or normal-sized lung and reduced vascular markings, distinguishing it from compensatory overinflation.",
+      "Air trapping is the functional hallmark: expiratory imaging shows the affected side remaining lucent and failing to empty, sometimes with mediastinal shift on expiration.",
+      "CT typically reveals mosaic attenuation, bronchiectasis, reduced vessel calibre and areas of low attenuation reflecting the obliterated small airways.",
+      "Many patients are asymptomatic and diagnosed incidentally; others have recurrent infection, chronic cough, exertional dyspnoea or bronchiectasis.",
+      "Perfusion imaging demonstrates markedly reduced perfusion to the affected lung, matching the ventilation abnormality.",
+      "It must be distinguished from other causes of a unilateral hyperlucent lung, including endobronchial obstruction, congenital lobar emphysema, absent pulmonary artery and prior pneumonectomy or lobar disease."
     ],
-    [
-     "Key Investigations",
-     "inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation, ventilation-perfusion scintigraphy showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Swyer-James-MacLeod syndrome arises when a severe lower respiratory infection during the period of ongoing lung growth in early childhood injures the terminal and respiratory bronchioles. Healing produces constrictive (obliterative) bronchiolitis, with fibrous narrowing and obliteration of small airways that impairs both ventilation and normal alveolar multiplication in the affected region. The damaged lung is chronically underventilated, and reflex and structural reduction of the pulmonary vascular bed leads to diminished perfusion and attenuated vessels, accounting for the radiographic hyperlucency. Collateral air drift allows air to enter distal units but the obliterated broncholes impede its egress, so air trapping develops and the affected lung fails to deflate normally on expiration. Because the insult occurs during development, the affected lung or lobe often remains smaller than normal, and coexisting bronchiectasis reflects proximal airway damage from the original infection and subsequent recurrent infection.",
+    "additionalDifferentials": [
+      "endobronchial obstruction by tumour or foreign body causing air trapping",
+      "congenital lobar emphysema",
+      "congenital absence or hypoplasia of a pulmonary artery",
+      "compensatory overinflation after contralateral lobar collapse or resection",
+      "bullous or panlobular emphysema (including alpha-1 antitrypsin deficiency)",
+      "pulmonary embolism with regional oligaemia",
+      "technical or rotational causes of asymmetric radiographic lucency"
     ],
-    [
-     "Primary Differentials",
-     "endobronchial obstruction by tumour or foreign body causing air trapping, congenital lobar emphysema, congenital absence or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation",
+      "ventilation-perfusion scintigraphy showing matched reduction on the affected side",
+      "chest radiograph in inspiration and expiration",
+      "pulmonary function testing including assessment of airflow obstruction and gas trapping",
+      "bronchoscopy where endobronchial obstruction needs exclusion",
+      "CT pulmonary angiography if absent or hypoplastic pulmonary artery is considered",
+      "assessment for bronchiectasis-related infection with sputum culture"
     ],
-    [
-     "Management Strategy",
-     "Management is largely supportive, as the obliterative bronchiolitis cannot be reversed",
-     "Core treatment modality"
+    "redFlags": [
+      "recurrent or severe lower respiratory infections with declining lung function",
+      "haemoptysis prompting exclusion of another cause of hyperlucency",
+      "progressive dyspnoea suggesting extension of disease or a superimposed process",
+      "new focal obstruction raising concern for an endobronchial lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients remain stable and minimally symptomatic for life, but those with extensive bronchiectasis or recurrent infection may have progressive symptoms; management is largely supportive, with treatment of infection and, rarely, resection for a destroyed lobe causing intractable problems.",
+    "pitfalls": [
+      "Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact.",
+      "Omitting expiratory imaging, without which the diagnostic air trapping may be missed.",
+      "Overlooking an endobronchial obstruction that can mimic the appearance.",
+      "Failing to recognise and treat associated bronchiectasis and recurrent infection.",
+      "Assuming the small hyperlucent lung is congenitally absent tissue rather than post-infectious small-airway obliteration."
+    ],
+    "references": [
+      "Fishman's Pulmonary Diseases and Disorders, current edition",
+      "Murray and Nadel's Textbook of Respiratory Medicine, current edition",
+      "Standard thoracic radiology reference texts on the unilateral hyperlucent lung"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management is largely supportive, as the obliterative bronchiolitis cannot be reversed",
+      "Treat respiratory infections promptly with antimicrobials and ensure influenza and pneumococcal immunisation to prevent further airway damage",
+      "Provide airway clearance physiotherapy and manage any associated bronchiectasis",
+      "Use inhaled bronchodilators where there is demonstrable airflow obstruction, and advise avoidance of smoking",
+      "Monitor with serial pulmonary function testing and review for recurrent infection or progressive symptoms",
+      "Reserve surgical resection such as lobectomy for a destroyed lobe causing intractable infection or haemoptysis"
     ]
-   ],
-   "caption": "Overview comparison matrix for swyer james syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "swyer-james-syndrome-real-image",
-   "title": "swyer james syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "swyer_james_syndrome-pathway",
+      "title": "swyer james syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent, hypoperfused lung or lobe that is usually smaller than normal.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: recurrent or severe lower respiratory infections with declining lung function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation, ventilation-perfusion scintigraphy showing matched reduction on the affected side, chest radiograph in inspiration and expiration"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management is largely supportive, as the obliterative bronchiolitis cannot be reversed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of swyer james syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "swyer_james_syndrome-matrix",
+      "title": "swyer james syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Swyer-James-MacLeod syndrome is a form of post-infectious constrictive (obliterative) bronchiolitis producing a hyperlucent,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "inspiratory and expiratory CT to demonstrate air trapping and mosaic attenuation, ventilation-perfusion scintigraphy showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "endobronchial obstruction by tumour or foreign body causing air trapping, congenital lobar emphysema, congenital absence or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management is largely supportive, as the obliterative bronchiolitis cannot be reversed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the hyperlucency as emphysema, compensatory overinflation or a technical artefact.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for swyer james syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fishman's Pulmonary Diseases and Disorders",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "swyer_james_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of swyer james syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Swyer-James-MacLeod syndrome: unilateral hyperlucent lung after infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent infection, haemoptysis, or new focal obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bronchoscopy to exclude an endobronchial lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspiratory and expiratory CT; ventilation-perfusion scintigraphy; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do expiratory images show air trapping with matched perfusion loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compensatory overinflation, hypoplastic pulmonary artery or emphysema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt antimicrobial treatment; influenza and pneumococcal vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway clearance physiotherapy and care of bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled bronchodilators where airflow obstruction is shown",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial pulmonary function testing for progressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lobectomy for a destroyed lobe causing intractable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many stay stable for life; extensive bronchiectasis can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "swyer_james_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspiratory and expiratory CT",
+          "cells": [
+            {
+              "text": "Air trapping and mosaic attenuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scintigraphy",
+          "cells": [
+            {
+              "text": "Matched reduction in perfusion on the affected side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Unilateral hyperlucency, small lung and reduced vascular markings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Airflow obstruction and gas trapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Endobronchial obstruction, when it needs excluding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic pulmonary artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum culture",
+          "cells": [
+            {
+              "text": "Infection related to bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_james_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endobronchial obstruction by tumour or foreign body",
+          "cells": [
+            {
+              "text": "Causes air trapping and can mimic the appearance; bronchoscopy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensatory overinflation after contralateral collapse or resection",
+          "cells": [
+            {
+              "text": "Swyer-James lung is small and hypoperfused, not overinflated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absent or hypoplastic pulmonary artery",
+          "cells": [
+            {
+              "text": "Identified by CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emphysema, including alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Hyperlucency is not emphysema; expiratory imaging shows the air trapping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_james_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Obliterative bronchiolitis cannot be reversed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antimicrobial treatment",
+          "cells": [
+            {
+              "text": "Respiratory infections; influenza and pneumococcal immunisation to prevent further damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance physiotherapy",
+          "cells": [
+            {
+              "text": "Manage associated bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators",
+          "cells": [
+            {
+              "text": "Where airflow obstruction is demonstrated; avoid smoking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial pulmonary function testing",
+          "cells": [
+            {
+              "text": "Review for recurrent infection or progressive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lobectomy",
+          "cells": [
+            {
+              "text": "Destroyed lobe causing intractable infection or haemoptysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

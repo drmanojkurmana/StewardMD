@@ -1,172 +1,470 @@
 {
- "id": "familial_isolated_pituitary_adenoma",
- "name": "Familial isolated pituitary adenoma (AIP)",
- "aliases": [
-  "FIPA",
-  "AIP-related pituitary adenoma",
-  "familial pituitary adenoma",
-  "aryl hydrocarbon receptor-interacting protein mutation"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
-   "A substantial minority of cases carry germline mutations in the AIP gene, inherited in an autosomal dominant pattern with incomplete penetrance",
-   "AIP-related adenomas frequently secrete growth hormone or prolactin and often present as gigantism or acromegaly",
-   "Onset is characteristically young, sometimes in childhood or adolescence, and tumours tend to be large and invasive",
-   "AIP-related somatotroph tumours may respond less well to somatostatin analogue therapy than typical sporadic tumours",
-   "Screening of at-risk relatives allows earlier detection while adenomas are smaller and more treatable",
-   "The absence of parathyroid or pancreatic involvement helps distinguish it from MEN1"
+  "id": "familial_isolated_pituitary_adenoma",
+  "name": "Familial isolated pituitary adenoma (AIP)",
+  "aliases": [
+    "FIPA",
+    "AIP-related pituitary adenoma",
+    "familial pituitary adenoma",
+    "aryl hydrocarbon receptor-interacting protein mutation"
   ],
-  "pathophysiology": "AIP encodes the aryl hydrocarbon receptor-interacting protein, which functions as a tumour suppressor within pituitary cells. Germline loss-of-function mutations predispose to adenoma formation, typically after loss of the second allele in a pituitary cell consistent with a tumour-suppressor mechanism. The resulting tumours arise most often from growth hormone- or prolactin-secreting lineages, producing hormone excess and mass effects. Incomplete penetrance means not all carriers develop tumours, but those who do tend to present young with larger, more aggressive adenomas than sporadic cases.",
-  "additionalDifferentials": [
-   "Sporadic pituitary adenoma",
-   "Multiple endocrine neoplasia type 1",
-   "Carney complex",
-   "X-linked acrogigantism",
-   "Multiple endocrine neoplasia type 4"
-  ],
-  "additionalInvestigations": [
-   "Pituitary hormone profile including growth hormone, IGF-1 and prolactin",
-   "Dynamic testing such as oral glucose suppression when acromegaly is suspected",
-   "Dedicated pituitary MRI to characterise tumour size and invasion",
-   "Visual field assessment where the tumour approaches the optic chiasm",
-   "Molecular genetic testing of AIP in the index case and at-risk relatives"
-  ],
-  "redFlags": [
-   "Visual field loss or cranial nerve involvement from a large invasive adenoma",
-   "Pituitary apoplexy presenting with sudden headache and visual disturbance",
-   "Rapid tumour growth or hormone excess in a young patient",
-   "Features of hypopituitarism from compression of normal pituitary tissue"
-  ],
-  "prognosis": "Prognosis depends on tumour size, invasiveness and treatment response; AIP-related tumours are often larger and less responsive to medical therapy, so early detection through family screening improves the likelihood of successful control.",
-  "pitfalls": [
-   "Assuming a young patient with acromegaly or gigantism has purely sporadic disease",
-   "Overlooking a family history of pituitary tumours that points to an inherited predisposition",
-   "Failing to offer genetic testing and surveillance to relatives of AIP mutation carriers",
-   "Expecting a standard response to somatostatin analogues in AIP-related somatotroph tumours"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas, particularly the large invasive tumours typical of AIP disease",
-   "Treat prolactin-secreting adenomas medically with a dopamine agonist (cabergoline)",
-   "For acromegaly or gigantism use somatostatin analogues with the growth hormone-receptor antagonist pegvisomant, recognising AIP somatotroph tumours often respond less well to somatostatin analogues",
-   "Apply radiotherapy for residual or aggressive tumour not controlled by surgery and medical therapy",
-   "Replace resulting pituitary hormone deficiencies after treatment and manage pituitary apoplexy as an acute emergency",
-   "Monitor visual fields and pituitary MRI for tumour growth and chiasmal compression",
-   "Undertake AIP genetic testing with screening of at-risk relatives to detect adenomas earlier, coordinating endocrinology, neurosurgery and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_isolated_pituitary_adenoma-pathway",
-   "title": "Familial isolated pituitary adenoma (AIP): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visual field loss or cranial nerve involvement from a large invasive adenoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pituitary hormone profile including growth hormone, IGF-1 and prolactin, Dynamic testing such as oral glucose suppression when acromegaly is suspected, Dedicated pituitary MRI to characterise tumour size and invasion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas, particularly the large invasive tumours typical of AIP disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a young patient with acromegaly or gigantism has purely sporadic disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial isolated pituitary adenoma (aip)."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_isolated_pituitary_adenoma-matrix",
-   "title": "Familial isolated pituitary adenoma (AIP): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
+      "A substantial minority of cases carry germline mutations in the AIP gene, inherited in an autosomal dominant pattern with incomplete penetrance",
+      "AIP-related adenomas frequently secrete growth hormone or prolactin and often present as gigantism or acromegaly",
+      "Onset is characteristically young, sometimes in childhood or adolescence, and tumours tend to be large and invasive",
+      "AIP-related somatotroph tumours may respond less well to somatostatin analogue therapy than typical sporadic tumours",
+      "Screening of at-risk relatives allows earlier detection while adenomas are smaller and more treatable",
+      "The absence of parathyroid or pancreatic involvement helps distinguish it from MEN1"
     ],
-    [
-     "Key Investigations",
-     "Pituitary hormone profile including growth hormone, IGF-1 and prolactin, Dynamic testing such as oral glucose suppression when",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "AIP encodes the aryl hydrocarbon receptor-interacting protein, which functions as a tumour suppressor within pituitary cells. Germline loss-of-function mutations predispose to adenoma formation, typically after loss of the second allele in a pituitary cell consistent with a tumour-suppressor mechanism. The resulting tumours arise most often from growth hormone- or prolactin-secreting lineages, producing hormone excess and mass effects. Incomplete penetrance means not all carriers develop tumours, but those who do tend to present young with larger, more aggressive adenomas than sporadic cases.",
+    "additionalDifferentials": [
+      "Sporadic pituitary adenoma",
+      "Multiple endocrine neoplasia type 1",
+      "Carney complex",
+      "X-linked acrogigantism",
+      "Multiple endocrine neoplasia type 4"
     ],
-    [
-     "Primary Differentials",
-     "Sporadic pituitary adenoma, Multiple endocrine neoplasia type 1, Carney complex",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pituitary hormone profile including growth hormone, IGF-1 and prolactin",
+      "Dynamic testing such as oral glucose suppression when acromegaly is suspected",
+      "Dedicated pituitary MRI to characterise tumour size and invasion",
+      "Visual field assessment where the tumour approaches the optic chiasm",
+      "Molecular genetic testing of AIP in the index case and at-risk relatives"
     ],
-    [
-     "Management Strategy",
-     "Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas,",
-     "Core treatment modality"
+    "redFlags": [
+      "Visual field loss or cranial nerve involvement from a large invasive adenoma",
+      "Pituitary apoplexy presenting with sudden headache and visual disturbance",
+      "Rapid tumour growth or hormone excess in a young patient",
+      "Features of hypopituitarism from compression of normal pituitary tissue"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a young patient with acromegaly or gigantism has purely sporadic disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on tumour size, invasiveness and treatment response; AIP-related tumours are often larger and less responsive to medical therapy, so early detection through family screening improves the likelihood of successful control.",
+    "pitfalls": [
+      "Assuming a young patient with acromegaly or gigantism has purely sporadic disease",
+      "Overlooking a family history of pituitary tumours that points to an inherited predisposition",
+      "Failing to offer genetic testing and surveillance to relatives of AIP mutation carriers",
+      "Expecting a standard response to somatostatin analogues in AIP-related somatotroph tumours"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas, particularly the large invasive tumours typical of AIP disease",
+      "Treat prolactin-secreting adenomas medically with a dopamine agonist (cabergoline)",
+      "For acromegaly or gigantism use somatostatin analogues with the growth hormone-receptor antagonist pegvisomant, recognising AIP somatotroph tumours often respond less well to somatostatin analogues",
+      "Apply radiotherapy for residual or aggressive tumour not controlled by surgery and medical therapy",
+      "Replace resulting pituitary hormone deficiencies after treatment and manage pituitary apoplexy as an acute emergency",
+      "Monitor visual fields and pituitary MRI for tumour growth and chiasmal compression",
+      "Undertake AIP genetic testing with screening of at-risk relatives to detect adenomas earlier, coordinating endocrinology, neurosurgery and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial isolated pituitary adenoma (aip)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-isolated-pituitary-adenoma-real-image",
-   "title": "Familial isolated pituitary adenoma (AIP): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "familial_isolated_pituitary_adenoma-pathway",
+      "title": "Familial isolated pituitary adenoma (AIP): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visual field loss or cranial nerve involvement from a large invasive adenoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pituitary hormone profile including growth hormone, IGF-1 and prolactin, Dynamic testing such as oral glucose suppression when acromegaly is suspected, Dedicated pituitary MRI to characterise tumour size and invasion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas, particularly the large invasive tumours typical of AIP disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a young patient with acromegaly or gigantism has purely sporadic disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial isolated pituitary adenoma (aip)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_isolated_pituitary_adenoma-matrix",
+      "title": "Familial isolated pituitary adenoma (AIP): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Describes pituitary adenomas occurring in two or more members of a family in the absence of MEN1 or Carney complex",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pituitary hormone profile including growth hormone, IGF-1 and prolactin, Dynamic testing such as oral glucose suppression when",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sporadic pituitary adenoma, Multiple endocrine neoplasia type 1, Carney complex",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer transsphenoidal surgical resection as primary therapy for growth hormone-secreting and other non-prolactinoma adenomas,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a young patient with acromegaly or gigantism has purely sporadic disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial isolated pituitary adenoma (aip)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_isolated_pituitary_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary hormone profile with GH, IGF-1 and prolactin",
+          "cells": [
+            {
+              "text": "Hormone excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose suppression testing",
+          "cells": [
+            {
+              "text": "Where acromegaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dedicated pituitary MRI",
+          "cells": [
+            {
+              "text": "Tumour size and invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field assessment",
+          "cells": [
+            {
+              "text": "Tumour approaching the optic chiasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AIP molecular genetic testing",
+          "cells": [
+            {
+              "text": "Index case and at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_isolated_pituitary_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic pituitary adenoma",
+          "cells": [
+            {
+              "text": "Occurs without a family history; AIP testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple endocrine neoplasia type 1",
+          "cells": [
+            {
+              "text": "Excluded by the absence of parathyroid or pancreatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex",
+          "cells": [
+            {
+              "text": "Considered in the differential of familial pituitary adenoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_isolated_pituitary_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal resection",
+          "cells": [
+            {
+              "text": "Primary therapy for GH-secreting and other non-prolactinoma adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cabergoline",
+          "cells": [
+            {
+              "text": "Medical treatment for prolactin-secreting adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues with pegvisomant",
+          "cells": [
+            {
+              "text": "For acromegaly or gigantism; AIP somatotroph tumours may respond less well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Residual or aggressive tumour not controlled by surgery and medicines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and apoplexy care",
+          "cells": [
+            {
+              "text": "Replacement of deficiencies; pituitary apoplexy is an emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field and MRI monitoring",
+          "cells": [
+            {
+              "text": "Tumour growth and chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AIP testing and screening of relatives",
+          "cells": [
+            {
+              "text": "Earlier detection while adenomas are smaller"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_isolated_pituitary_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Familial isolated pituitary adenoma (AIP)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acromegaly or gigantism in a young patient, or pituitary adenomas in several relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual field loss, apoplexy, rapid growth, hypopituitarism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of pituitary apoplexy; neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hormone profile; glucose suppression; pituitary MRI; visual fields; AIP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Familial adenomas with a pathogenic AIP variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic adenoma, MEN1, Carney complex or X-linked acrogigantism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection as primary therapy for GH-secreting adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cabergoline for prolactinomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Somatostatin analogues and pegvisomant for acromegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy for residual or aggressive tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "AIP testing and screening of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on size and response; AIP tumours are often larger and less responsive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

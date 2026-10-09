@@ -1,176 +1,468 @@
 {
- "id": "microscopic_polyangiitis",
- "name": "Microscopic polyangiitis",
- "aliases": [
-  "MPA",
-  "microscopic polyarteritis",
-  "ANCA-associated vasculitis, MPO type"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vasculitis",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / ACR-EULAR classification criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed against myeloperoxidase",
-   "The classic presentation is a pulmonary-renal syndrome with rapidly progressive glomerulonephritis and, in severe cases, diffuse alveolar haemorrhage",
-   "Unlike granulomatosis with polyangiitis, it lacks destructive upper-airway granulomas, and unlike EGPA it lacks asthma and eosinophilia",
-   "Palpable purpura, mononeuritis multiplex, and constitutional symptoms such as weight loss and fever are common accompaniments",
-   "Renal biopsy typically shows focal necrotising crescentic glomerulonephritis with scant immune deposits (pauci-immune)",
-   "Remission induction uses glucocorticoids combined with rituximab or cyclophosphamide, with plasma exchange reserved for selected severe presentations",
-   "Relapse risk is lower than in PR3-associated disease but chronic kidney injury frequently persists"
+  "id": "microscopic_polyangiitis",
+  "name": "Microscopic polyangiitis",
+  "aliases": [
+    "MPA",
+    "microscopic polyarteritis",
+    "ANCA-associated vasculitis, MPO type"
   ],
-  "pathophysiology": "Microscopic polyangiitis is a systemic pauci-immune small-vessel vasculitis within the ANCA-associated spectrum. Circulating anti-myeloperoxidase antibodies prime and activate neutrophils, which adhere to and degranulate against endothelium, releasing reactive oxygen species and proteolytic enzymes that produce necrotising inflammation of capillaries, venules, and arterioles. In the kidney this yields a focal segmental necrotising and crescentic glomerulonephritis with minimal immunoglobulin deposition, and in the lung it can cause alveolar capillaritis with haemorrhage. Unlike granulomatosis with polyangiitis, granuloma formation is characteristically absent.",
-  "additionalDifferentials": [
-   "Granulomatosis with polyangiitis",
-   "Eosinophilic granulomatosis with polyangiitis",
-   "Anti-glomerular basement membrane disease",
-   "IgA vasculitis",
-   "Cryoglobulinaemic vasculitis",
-   "Polyarteritis nodosa",
-   "Lupus nephritis with systemic features"
-  ],
-  "additionalInvestigations": [
-   "ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities",
-   "Urinalysis and microscopy for dysmorphic haematuria and red cell casts",
-   "Renal function and urine protein quantification",
-   "Chest imaging and, where indicated, bronchoscopy for alveolar haemorrhage",
-   "Renal or other tissue biopsy demonstrating pauci-immune necrotising vasculitis",
-   "Anti-GBM antibody testing to exclude overlapping disease"
-  ],
-  "redFlags": [
-   "Rapidly rising creatinine with active urinary sediment indicating crescentic glomerulonephritis",
-   "Haemoptysis and hypoxaemia suggesting diffuse alveolar haemorrhage",
-   "Progressive sensorimotor deficits from mononeuritis multiplex",
-   "Oliguria or dialysis-requiring acute kidney injury",
-   "Widespread purpura with systemic deterioration"
-  ],
-  "prognosis": "Prompt immunosuppression induces remission in most patients, but many are left with chronic kidney disease and some progress to end-stage renal failure. Diffuse alveolar haemorrhage and advanced renal impairment at presentation predict worse outcomes.",
-  "pitfalls": [
-   "Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient",
-   "Failing to distinguish MPA from anti-GBM disease, which alters urgency and use of plasma exchange",
-   "Overlooking alveolar haemorrhage when haemoptysis is minimal but haemoglobin falls",
-   "Attributing pauci-immune crescentic nephritis to another cause without checking ANCA"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "ACR-EULAR classification criteria for microscopic polyangiitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide",
-   "Add the C5a-receptor antagonist avacopan to reduce cumulative glucocorticoid exposure",
-   "Reserve plasma exchange for severe presentations such as diffuse alveolar haemorrhage or severe, advancing renal failure",
-   "Maintain remission with rituximab or azathioprine to prevent relapse",
-   "Support failing organs with renal replacement therapy for severe kidney injury and respiratory support for alveolar haemorrhage",
-   "Give prophylaxis against Pneumocystis, bone protection and vaccination while immunosuppressed",
-   "Monitor renal function, urinalysis, ANCA titre and drug toxicity to detect relapse and complications",
-   "Manage jointly with rheumatology, nephrology and respiratory teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "microscopic_polyangiitis-pathway",
-   "title": "Microscopic polyangiitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed against myeloperoxidase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising creatinine with active urinary sediment indicating crescentic glomerulonephritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities, Urinalysis and microscopy for dysmorphic haematuria and red cell casts, Renal function and urine protein quantification"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of microscopic polyangiitis."
-  }
- ],
- "tables": [
-  {
-   "id": "microscopic_polyangiitis-matrix",
-   "title": "Microscopic polyangiitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vasculitis",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / ACR-EULAR classification criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed against myeloperoxidase",
+      "The classic presentation is a pulmonary-renal syndrome with rapidly progressive glomerulonephritis and, in severe cases, diffuse alveolar haemorrhage",
+      "Unlike granulomatosis with polyangiitis, it lacks destructive upper-airway granulomas, and unlike EGPA it lacks asthma and eosinophilia",
+      "Palpable purpura, mononeuritis multiplex, and constitutional symptoms such as weight loss and fever are common accompaniments",
+      "Renal biopsy typically shows focal necrotising crescentic glomerulonephritis with scant immune deposits (pauci-immune)",
+      "Remission induction uses glucocorticoids combined with rituximab or cyclophosphamide, with plasma exchange reserved for selected severe presentations",
+      "Relapse risk is lower than in PR3-associated disease but chronic kidney injury frequently persists"
     ],
-    [
-     "Key Investigations",
-     "ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities, Urinalysis and microscopy for dysmorphic haematuria",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Microscopic polyangiitis is a systemic pauci-immune small-vessel vasculitis within the ANCA-associated spectrum. Circulating anti-myeloperoxidase antibodies prime and activate neutrophils, which adhere to and degranulate against endothelium, releasing reactive oxygen species and proteolytic enzymes that produce necrotising inflammation of capillaries, venules, and arterioles. In the kidney this yields a focal segmental necrotising and crescentic glomerulonephritis with minimal immunoglobulin deposition, and in the lung it can cause alveolar capillaritis with haemorrhage. Unlike granulomatosis with polyangiitis, granuloma formation is characteristically absent.",
+    "additionalDifferentials": [
+      "Granulomatosis with polyangiitis",
+      "Eosinophilic granulomatosis with polyangiitis",
+      "Anti-glomerular basement membrane disease",
+      "IgA vasculitis",
+      "Cryoglobulinaemic vasculitis",
+      "Polyarteritis nodosa",
+      "Lupus nephritis with systemic features"
     ],
-    [
-     "Primary Differentials",
-     "Granulomatosis with polyangiitis, Eosinophilic granulomatosis with polyangiitis, Anti-glomerular basement membrane disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities",
+      "Urinalysis and microscopy for dysmorphic haematuria and red cell casts",
+      "Renal function and urine protein quantification",
+      "Chest imaging and, where indicated, bronchoscopy for alveolar haemorrhage",
+      "Renal or other tissue biopsy demonstrating pauci-immune necrotising vasculitis",
+      "Anti-GBM antibody testing to exclude overlapping disease"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly rising creatinine with active urinary sediment indicating crescentic glomerulonephritis",
+      "Haemoptysis and hypoxaemia suggesting diffuse alveolar haemorrhage",
+      "Progressive sensorimotor deficits from mononeuritis multiplex",
+      "Oliguria or dialysis-requiring acute kidney injury",
+      "Widespread purpura with systemic deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt immunosuppression induces remission in most patients, but many are left with chronic kidney disease and some progress to end-stage renal failure. Diffuse alveolar haemorrhage and advanced renal impairment at presentation predict worse outcomes.",
+    "pitfalls": [
+      "Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient",
+      "Failing to distinguish MPA from anti-GBM disease, which alters urgency and use of plasma exchange",
+      "Overlooking alveolar haemorrhage when haemoptysis is minimal but haemoglobin falls",
+      "Attributing pauci-immune crescentic nephritis to another cause without checking ANCA"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "ACR-EULAR classification criteria for microscopic polyangiitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide",
+      "Add the C5a-receptor antagonist avacopan to reduce cumulative glucocorticoid exposure",
+      "Reserve plasma exchange for severe presentations such as diffuse alveolar haemorrhage or severe, advancing renal failure",
+      "Maintain remission with rituximab or azathioprine to prevent relapse",
+      "Support failing organs with renal replacement therapy for severe kidney injury and respiratory support for alveolar haemorrhage",
+      "Give prophylaxis against Pneumocystis, bone protection and vaccination while immunosuppressed",
+      "Monitor renal function, urinalysis, ANCA titre and drug toxicity to detect relapse and complications",
+      "Manage jointly with rheumatology, nephrology and respiratory teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for microscopic polyangiitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "microscopic-polyangiitis-real-image",
-   "title": "Microscopic polyangiitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "microscopic_polyangiitis-pathway",
+      "title": "Microscopic polyangiitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed against myeloperoxidase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising creatinine with active urinary sediment indicating crescentic glomerulonephritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities, Urinalysis and microscopy for dysmorphic haematuria and red cell casts, Renal function and urine protein quantification"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of microscopic polyangiitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "microscopic_polyangiitis-matrix",
+      "title": "Microscopic polyangiitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A pauci-immune, non-granulomatous necrotising small-vessel vasculitis, most strongly associated with perinuclear ANCA directed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ANCA testing with anti-myeloperoxidase and anti-proteinase-3 specificities, Urinalysis and microscopy for dysmorphic haematuria",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Granulomatosis with polyangiitis, Eosinophilic granulomatosis with polyangiitis, Anti-glomerular basement membrane disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with high-dose glucocorticoids combined with rituximab or cyclophosphamide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying biopsy and treatment while awaiting ANCA serology in a deteriorating patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for microscopic polyangiitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / ACR-EULAR classification criteria",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microscopic_polyangiitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA testing with anti-MPO and anti-PR3 specificities",
+          "cells": [
+            {
+              "text": "Anti-myeloperoxidase and anti-proteinase-3 specificities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and microscopy",
+          "cells": [
+            {
+              "text": "Dysmorphic haematuria and red cell casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urine protein quantification",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and, where indicated, bronchoscopy",
+          "cells": [
+            {
+              "text": "Alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal or other tissue biopsy",
+          "cells": [
+            {
+              "text": "Pauci-immune necrotising vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM antibody testing",
+          "cells": [
+            {
+              "text": "Overlapping disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microscopic_polyangiitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remission induction",
+          "cells": [
+            {
+              "text": "High-dose glucocorticoids with rituximab or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avacopan",
+          "cells": [
+            {
+              "text": "C5a-receptor antagonist to reduce cumulative glucocorticoid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Severe presentations: diffuse alveolar haemorrhage or severe, advancing renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Rituximab or azathioprine to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Renal replacement therapy for severe kidney injury; respiratory support for alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis and bone protection",
+          "cells": [
+            {
+              "text": "Pneumocystis prophylaxis, bone protection and vaccination while immunosuppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinalysis, ANCA titre and drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Rheumatology, nephrology and respiratory teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microscopic_polyangiitis-ddx",
+      "kind": "ddx",
+      "title": "Drugs linked to vasculitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Vasculitis",
+          "cells": [
+            {
+              "text": "allopurinol, amphetamines, cocaine, thiazides, penicillamine, propylthiouracil, montelukast, TNF inhibitors, hepatitis B vaccine, trimethoprim/sulfamethoxazole"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microscopic_polyangiitis-dx-mgmt",
+      "title": "Diagnosis and management of Microscopic polyangiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly rising creatinine with active urinary sediment and ANCA positivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoptysis with hypoxaemia, mononeuritis multiplex, oliguria or dialysis-requiring AKI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent plasma exchange for alveolar haemorrhage or severe renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANCA (MPO and PR3); urinalysis and microscopy; chest imaging; renal biopsy; anti-GBM",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pauci-immune necrotising vasculitis confirmed on biopsy, with anti-GBM excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anti-GBM disease, GPA, EGPA or cryoglobulinaemic vasculitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induce remission with high-dose glucocorticoids plus rituximab or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add avacopan to reduce cumulative glucocorticoid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintain remission with rituximab or azathioprine to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy and respiratory support for failing organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Joint rheumatology, nephrology and respiratory care; monitor ANCA titre for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

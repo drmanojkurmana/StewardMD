@@ -1,172 +1,232 @@
 {
- "id": "blepharospasm",
- "name": "Blepharospasm",
- "aliases": [
-  "benign essential blepharospasm",
-  "BEB",
-  "eyelid dystonia"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing forced eye closure",
-   "It typically begins in adults, more often women, with increased blinking and eye irritation before progressing to sustained spasms of closure",
-   "Symptoms are frequently aggravated by bright light, stress, reading, or driving and may be temporarily relieved by sensory tricks (geste antagoniste) such as touching the face",
-   "Severe cases cause functional blindness because the eyes cannot be kept open, despite intact vision",
-   "It may occur in isolation or as part of a segmental dystonia such as Meige syndrome, which combines blepharospasm with oromandibular dystonia",
-   "Secondary causes, including drug-induced dystonia and ocular surface disease that provokes reflex closure, should be considered before diagnosing the primary form",
-   "It is distinguished from hemifacial spasm, which is unilateral and involves the whole hemiface, and from ptosis and eyelid apraxia",
-   "Botulinum toxin injection into the periocular muscles is the mainstay of treatment, with oral medication and surgery in selected refractory cases"
+  "id": "blepharospasm",
+  "name": "Blepharospasm",
+  "aliases": [
+    "benign essential blepharospasm",
+    "BEB",
+    "eyelid dystonia"
   ],
-  "pathophysiology": "Blepharospasm is a focal cranial dystonia in which abnormal function of basal ganglia and brainstem circuits controlling blink and eyelid movement leads to excessive, involuntary orbicularis oculi contraction. Reduced inhibition within the blink reflex pathway and abnormal sensorimotor integration are implicated, and dopaminergic and other neurotransmitter systems are thought to be involved. Ocular surface irritation can trigger or worsen symptoms through the reflex arc, and the disorder can extend to adjacent facial and jaw muscles in segmental forms.",
-  "additionalDifferentials": [
-   "Hemifacial spasm",
-   "Eyelid apraxia and ptosis",
-   "Ocular surface disease causing reflex blinking (dry eye, blepharitis)",
-   "Drug-induced or tardive dystonia",
-   "Functional eyelid movement disorder",
-   "Facial tics"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease",
-   "Ophthalmological examination for dry eye and other irritative causes",
-   "Medication review to identify drug-induced dystonia",
-   "Neurological evaluation for associated dystonia (Meige syndrome) or other signs",
-   "Brain imaging when secondary or atypical features are present"
-  ],
-  "redFlags": [
-   "Additional neurological signs suggesting a broader neurodegenerative or structural disorder",
-   "Recent exposure to dopamine-blocking or other causative drugs",
-   "Rapidly progressive or strictly unilateral involvement prompting reconsideration",
-   "Functional visual impairment from inability to open the eyes"
-  ],
-  "prognosis": "Blepharospasm is usually chronic and can fluctuate but is not life-threatening; most patients gain substantial and repeatable relief from botulinum toxin, though the condition generally requires ongoing treatment.",
-  "pitfalls": [
-   "Overlooking treatable ocular surface disease driving reflex eye closure",
-   "Misdiagnosing unilateral hemifacial spasm as blepharospasm",
-   "Failing to identify drug-induced dystonia from a reversible cause",
-   "Missing associated oromandibular dystonia in Meige syndrome"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals",
-   "Treat coexisting ocular surface irritation with lubricants for dry eye, and reduce photophobia with tinted (FL-41) lenses",
-   "Review and withdraw dopamine-blocking or other offending drugs where the dystonia is drug-induced",
-   "Adjunctive oral agents such as anticholinergics, benzodiazepines or baclofen for inadequate response to injections",
-   "Orbicularis myectomy for botulinum-resistant cases, with deep brain stimulation considered in severe segmental or generalised dystonia (Meige syndrome)",
-   "Ongoing neurology and movement-disorder follow-up with reassessment of dose and treatment response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blepharospasm-pathway",
-   "title": "Blepharospasm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing forced eye closure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Additional neurological signs suggesting a broader neurodegenerative or structural disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease, Ophthalmological examination for dry eye and other irritative causes, Medication review to identify drug-induced dystonia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking treatable ocular surface disease driving reflex eye closure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blepharospasm."
-  }
- ],
- "tables": [
-  {
-   "id": "blepharospasm-matrix",
-   "title": "Blepharospasm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing forced eye closure",
+      "It typically begins in adults, more often women, with increased blinking and eye irritation before progressing to sustained spasms of closure",
+      "Symptoms are frequently aggravated by bright light, stress, reading, or driving and may be temporarily relieved by sensory tricks (geste antagoniste) such as touching the face",
+      "Severe cases cause functional blindness because the eyes cannot be kept open, despite intact vision",
+      "It may occur in isolation or as part of a segmental dystonia such as Meige syndrome, which combines blepharospasm with oromandibular dystonia",
+      "Secondary causes, including drug-induced dystonia and ocular surface disease that provokes reflex closure, should be considered before diagnosing the primary form",
+      "It is distinguished from hemifacial spasm, which is unilateral and involves the whole hemiface, and from ptosis and eyelid apraxia",
+      "Botulinum toxin injection into the periocular muscles is the mainstay of treatment, with oral medication and surgery in selected refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease, Ophthalmological examination for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blepharospasm is a focal cranial dystonia in which abnormal function of basal ganglia and brainstem circuits controlling blink and eyelid movement leads to excessive, involuntary orbicularis oculi contraction. Reduced inhibition within the blink reflex pathway and abnormal sensorimotor integration are implicated, and dopaminergic and other neurotransmitter systems are thought to be involved. Ocular surface irritation can trigger or worsen symptoms through the reflex arc, and the disorder can extend to adjacent facial and jaw muscles in segmental forms.",
+    "additionalDifferentials": [
+      "Hemifacial spasm",
+      "Eyelid apraxia and ptosis",
+      "Ocular surface disease causing reflex blinking (dry eye, blepharitis)",
+      "Drug-induced or tardive dystonia",
+      "Functional eyelid movement disorder",
+      "Facial tics"
     ],
-    [
-     "Primary Differentials",
-     "Hemifacial spasm, Eyelid apraxia and ptosis, Ocular surface disease causing reflex blinking (dry eye, blepharitis)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease",
+      "Ophthalmological examination for dry eye and other irritative causes",
+      "Medication review to identify drug-induced dystonia",
+      "Neurological evaluation for associated dystonia (Meige syndrome) or other signs",
+      "Brain imaging when secondary or atypical features are present"
     ],
-    [
-     "Management Strategy",
-     "Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals",
-     "Core treatment modality"
+    "redFlags": [
+      "Additional neurological signs suggesting a broader neurodegenerative or structural disorder",
+      "Recent exposure to dopamine-blocking or other causative drugs",
+      "Rapidly progressive or strictly unilateral involvement prompting reconsideration",
+      "Functional visual impairment from inability to open the eyes"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking treatable ocular surface disease driving reflex eye closure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Blepharospasm is usually chronic and can fluctuate but is not life-threatening; most patients gain substantial and repeatable relief from botulinum toxin, though the condition generally requires ongoing treatment.",
+    "pitfalls": [
+      "Overlooking treatable ocular surface disease driving reflex eye closure",
+      "Misdiagnosing unilateral hemifacial spasm as blepharospasm",
+      "Failing to identify drug-induced dystonia from a reversible cause",
+      "Missing associated oromandibular dystonia in Meige syndrome"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals",
+      "Treat coexisting ocular surface irritation with lubricants for dry eye, and reduce photophobia with tinted (FL-41) lenses",
+      "Review and withdraw dopamine-blocking or other offending drugs where the dystonia is drug-induced",
+      "Adjunctive oral agents such as anticholinergics, benzodiazepines or baclofen for inadequate response to injections",
+      "Orbicularis myectomy for botulinum-resistant cases, with deep brain stimulation considered in severe segmental or generalised dystonia (Meige syndrome)",
+      "Ongoing neurology and movement-disorder follow-up with reassessment of dose and treatment response"
     ]
-   ],
-   "caption": "Overview comparison matrix for blepharospasm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blepharospasm-real-image",
-   "title": "Blepharospasm: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "blepharospasm-pathway",
+      "title": "Blepharospasm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing forced eye closure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Additional neurological signs suggesting a broader neurodegenerative or structural disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease, Ophthalmological examination for dry eye and other irritative causes, Medication review to identify drug-induced dystonia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking treatable ocular surface disease driving reflex eye closure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blepharospasm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blepharospasm-matrix",
+      "title": "Blepharospasm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A focal dystonia causing involuntary, bilateral, and usually symmetric contraction of the orbicularis oculi muscles, producing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment to distinguish from hemifacial spasm, apraxia, and ocular surface disease, Ophthalmological examination for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hemifacial spasm, Eyelid apraxia and ptosis, Ocular surface disease causing reflex blinking (dry eye, blepharitis)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Botulinum toxin injection into the orbicularis oculi as first-line treatment, repeated at regular intervals",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking treatable ocular surface disease driving reflex eye closure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blepharospasm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blepharospasm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic assessment in blepharospasm",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical assessment", "cells": [{"text": "Bilateral, usually symmetric orbicularis oculi contraction; separates it from hemifacial spasm, apraxia and ocular surface disease"}], "cite": "c1"},
+        {"parameter": "Ophthalmological examination", "cells": [{"text": "Dry eye and other irritative causes"}], "cite": "c1"},
+        {"parameter": "Medication review", "cells": [{"text": "Drug-induced dystonia"}], "cite": "c1"},
+        {"parameter": "Neurological evaluation", "cells": [{"text": "Associated dystonia, such as Meige syndrome"}], "cite": "c1"},
+        {"parameter": "Brain imaging", "cells": [{"text": "Only when secondary or atypical features are present"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharospasm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike eyelid movement disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Hemifacial spasm", "cells": [{"text": "Unilateral and involves the whole hemiface"}], "cite": "c1"},
+        {"parameter": "Ocular surface disease (dry eye, blepharitis)", "cells": [{"text": "Irritation triggers reflex closure; treating the surface relieves it"}], "cite": "c1"},
+        {"parameter": "Drug-induced or tardive dystonia", "cells": [{"text": "Dopamine-blocking drugs cause it; withdrawal of the drug can reverse it"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blepharospasm-treatment",
+      "kind": "treatment",
+      "title": "Management options in blepharospasm",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Botulinum toxin", "cells": [{"text": "Injection into the orbicularis oculi, repeated at regular intervals"}, {"text": "First-line mainstay"}], "cite": "c1"},
+        {"parameter": "Ocular surface and photophobia", "cells": [{"text": "Lubricants for dry eye; tinted FL-41 lenses for photophobia"}, {"text": "Coexisting irritation"}], "cite": "c1"},
+        {"parameter": "Drug review", "cells": [{"text": "Withdraw dopamine-blocking or other offending drugs"}, {"text": "For drug-induced dystonia"}], "cite": "c1"},
+        {"parameter": "Oral adjuncts", "cells": [{"text": "Anticholinergics, benzodiazepines or baclofen"}, {"text": "For inadequate response to injections"}], "cite": "c1"},
+        {"parameter": "Surgery and deep brain stimulation", "cells": [{"text": "Orbicularis myectomy for botulinum-resistant cases; deep brain stimulation in severe segmental or generalised dystonia"}, {"text": "Refractory disease"}], "cite": "c1"},
+        {"parameter": "Neurology follow-up", "cells": [{"text": "Review of dose and treatment response"}, {"text": "Ongoing care"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blepharospasm-dx-mgmt",
+      "title": "Diagnosis and management of blepharospasm",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Increased blinking and eye irritation, progressing to sustained forced eye closure", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: other neurological signs, recent dopamine-blocker use or strictly unilateral spasm?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: neurology review; withdraw offending drug; consider hemifacial spasm", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Examine for dry eye and blepharitis; review medications; check for oromandibular dystonia", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Bilateral symmetric orbicularis spasm with no secondary cause?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Botulinum toxin injections into the orbicularis oculi, repeated regularly", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: treat the secondary cause; consider hemifacial spasm or eyelid apraxia", "cite": "c1"},
+        {"id": "n8", "type": "decision", "text": "Inadequate response to injections?", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Add an oral agent or orbicularis myectomy; deep brain stimulation for severe segmental disease", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Chronic but not life-threatening; relief with repeated injections", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Yes"},
+        {"from": "n8", "to": "n10", "label": "No"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

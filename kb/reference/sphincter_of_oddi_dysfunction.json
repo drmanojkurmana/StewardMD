@@ -1,173 +1,460 @@
 {
- "id": "sphincter_of_oddi_dysfunction",
- "name": "Sphincter of Oddi dysfunction",
- "aliases": [
-  "SOD",
-  "biliary dyskinesia (sphincter type)",
-  "papillary stenosis",
-  "sphincter of Oddi dyskinesia"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable structural cause",
-   "Results from disordered motility or stenosis of the sphincter of Oddi, impairing biliary and pancreatic outflow",
-   "The modern classification distinguishes patients with objective abnormalities (raised liver or pancreatic enzymes, duct dilatation) from those with pain alone",
-   "Sphincter of Oddi manometry can demonstrate elevated basal sphincter pressure but is invasive and carries a significant risk of post-procedure pancreatitis",
-   "Randomised evidence has tempered enthusiasm for endoscopic sphincterotomy in pain-only presentations, where benefit is uncertain",
-   "Careful patient selection is essential because intervention carries real procedural risk with limited benefit in some subgroups",
-   "It should remain a diagnosis of exclusion after structural, biliary, and pancreatic pathology have been ruled out"
+  "id": "sphincter_of_oddi_dysfunction",
+  "name": "Sphincter of Oddi dysfunction",
+  "aliases": [
+    "SOD",
+    "biliary dyskinesia (sphincter type)",
+    "papillary stenosis",
+    "sphincter of Oddi dyskinesia"
   ],
-  "pathophysiology": "Sphincter of Oddi dysfunction encompasses abnormal contractility or fixed narrowing of the muscular sphincter that governs flow of bile and pancreatic juice into the duodenum. Elevated sphincter tone, paradoxical contractions, or true papillary stenosis raise ductal pressure, producing biliary or pancreatic-type pain and, in some patients, transient enzyme elevation, duct dilatation, or recurrent pancreatitis. The disorder overlaps with functional gut-brain disorders and visceral hypersensitivity, which contributes to the ongoing controversy over how reliably manometry identifies patients who benefit from sphincter ablation.",
-  "additionalDifferentials": [
-   "Retained or recurrent bile duct stones",
-   "Chronic pancreatitis",
-   "Functional biliary or pancreatic pain without sphincter pathology",
-   "Peptic ulcer disease",
-   "Ampullary or pancreaticobiliary tumour",
-   "Post-cholecystectomy pain of other cause"
-  ],
-  "additionalInvestigations": [
-   "Liver function tests and pancreatic enzymes captured during or shortly after pain episodes",
-   "Magnetic resonance cholangiopancreatography to exclude stones and structural disease",
-   "Endoscopic ultrasound to assess the distal duct and ampulla",
-   "Sphincter of Oddi manometry in carefully selected patients despite its risk",
-   "Cross-sectional imaging to evaluate the pancreas and biliary tree"
-  ],
-  "redFlags": [
-   "Jaundice, cholangitis, or markedly abnormal liver tests suggesting obstruction or stones",
-   "Recurrent acute pancreatitis requiring structural evaluation",
-   "Weight loss or a mass raising concern for ampullary or pancreatic malignancy",
-   "Development of post-procedure pancreatitis after intervention"
-  ],
-  "prognosis": "Prognosis depends on the subtype: patients with objective obstructive findings may benefit from sphincterotomy, whereas those with pain alone often gain little and remain at risk of procedural complications, so expectations must be set carefully.",
-  "pitfalls": [
-   "Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit",
-   "Underestimating the substantial risk of post-ERCP pancreatitis from manometry and intervention",
-   "Failing to exclude retained stones and structural disease first",
-   "Overlooking a functional gut-brain disorder or visceral hypersensitivity as the true driver of pain"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Rome Foundation criteria for functional gallbladder and sphincter of Oddi disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any intervention",
-   "Endoscopic biliary sphincterotomy for patients with objective enzyme or duct abnormalities most likely to benefit",
-   "Avoid sphincterotomy in pain-only presentations, where randomised evidence shows little benefit against real procedural risk",
-   "Trial of medical therapy such as antispasmodics (calcium channel blockers, nitrates) and neuromodulators such as tricyclic antidepressants for pain",
-   "Sphincter of Oddi manometry only in carefully selected patients, accepting the risk of post-procedure pancreatitis",
-   "Post-ERCP pancreatitis prophylaxis with rectal NSAIDs and pancreatic duct stenting when intervention is undertaken",
-   "Manage as a functional gut-brain disorder with realistic expectation-setting and multidisciplinary support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sphincter_of_oddi_dysfunction-pathway",
-   "title": "Sphincter of Oddi dysfunction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable structural cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Jaundice, cholangitis, or markedly abnormal liver tests suggesting obstruction or stones",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver function tests and pancreatic enzymes captured during or shortly after pain episodes, Magnetic resonance cholangiopancreatography to exclude stones and structural disease, Endoscopic ultrasound to assess the distal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sphincter of oddi dysfunction."
-  }
- ],
- "tables": [
-  {
-   "id": "sphincter_of_oddi_dysfunction-matrix",
-   "title": "Sphincter of Oddi dysfunction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable structural cause",
+      "Results from disordered motility or stenosis of the sphincter of Oddi, impairing biliary and pancreatic outflow",
+      "The modern classification distinguishes patients with objective abnormalities (raised liver or pancreatic enzymes, duct dilatation) from those with pain alone",
+      "Sphincter of Oddi manometry can demonstrate elevated basal sphincter pressure but is invasive and carries a significant risk of post-procedure pancreatitis",
+      "Randomised evidence has tempered enthusiasm for endoscopic sphincterotomy in pain-only presentations, where benefit is uncertain",
+      "Careful patient selection is essential because intervention carries real procedural risk with limited benefit in some subgroups",
+      "It should remain a diagnosis of exclusion after structural, biliary, and pancreatic pathology have been ruled out"
     ],
-    [
-     "Key Investigations",
-     "Liver function tests and pancreatic enzymes captured during or shortly after pain episodes, Magnetic resonance",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sphincter of Oddi dysfunction encompasses abnormal contractility or fixed narrowing of the muscular sphincter that governs flow of bile and pancreatic juice into the duodenum. Elevated sphincter tone, paradoxical contractions, or true papillary stenosis raise ductal pressure, producing biliary or pancreatic-type pain and, in some patients, transient enzyme elevation, duct dilatation, or recurrent pancreatitis. The disorder overlaps with functional gut-brain disorders and visceral hypersensitivity, which contributes to the ongoing controversy over how reliably manometry identifies patients who benefit from sphincter ablation.",
+    "additionalDifferentials": [
+      "Retained or recurrent bile duct stones",
+      "Chronic pancreatitis",
+      "Functional biliary or pancreatic pain without sphincter pathology",
+      "Peptic ulcer disease",
+      "Ampullary or pancreaticobiliary tumour",
+      "Post-cholecystectomy pain of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Retained or recurrent bile duct stones, Chronic pancreatitis, Functional biliary or pancreatic pain without sphincter pathology",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver function tests and pancreatic enzymes captured during or shortly after pain episodes",
+      "Magnetic resonance cholangiopancreatography to exclude stones and structural disease",
+      "Endoscopic ultrasound to assess the distal duct and ampulla",
+      "Sphincter of Oddi manometry in carefully selected patients despite its risk",
+      "Cross-sectional imaging to evaluate the pancreas and biliary tree"
     ],
-    [
-     "Management Strategy",
-     "Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any",
-     "Core treatment modality"
+    "redFlags": [
+      "Jaundice, cholangitis, or markedly abnormal liver tests suggesting obstruction or stones",
+      "Recurrent acute pancreatitis requiring structural evaluation",
+      "Weight loss or a mass raising concern for ampullary or pancreatic malignancy",
+      "Development of post-procedure pancreatitis after intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the subtype: patients with objective obstructive findings may benefit from sphincterotomy, whereas those with pain alone often gain little and remain at risk of procedural complications, so expectations must be set carefully.",
+    "pitfalls": [
+      "Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit",
+      "Underestimating the substantial risk of post-ERCP pancreatitis from manometry and intervention",
+      "Failing to exclude retained stones and structural disease first",
+      "Overlooking a functional gut-brain disorder or visceral hypersensitivity as the true driver of pain"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Rome Foundation criteria for functional gallbladder and sphincter of Oddi disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any intervention",
+      "Endoscopic biliary sphincterotomy for patients with objective enzyme or duct abnormalities most likely to benefit",
+      "Avoid sphincterotomy in pain-only presentations, where randomised evidence shows little benefit against real procedural risk",
+      "Trial of medical therapy such as antispasmodics (calcium channel blockers, nitrates) and neuromodulators such as tricyclic antidepressants for pain",
+      "Sphincter of Oddi manometry only in carefully selected patients, accepting the risk of post-procedure pancreatitis",
+      "Post-ERCP pancreatitis prophylaxis with rectal NSAIDs and pancreatic duct stenting when intervention is undertaken",
+      "Manage as a functional gut-brain disorder with realistic expectation-setting and multidisciplinary support"
     ]
-   ],
-   "caption": "Overview comparison matrix for sphincter of oddi dysfunction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sphincter-of-oddi-dysfunction-real-image",
-   "title": "Sphincter of Oddi dysfunction: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "sphincter_of_oddi_dysfunction-pathway",
+      "title": "Sphincter of Oddi dysfunction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable structural cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Jaundice, cholangitis, or markedly abnormal liver tests suggesting obstruction or stones",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver function tests and pancreatic enzymes captured during or shortly after pain episodes, Magnetic resonance cholangiopancreatography to exclude stones and structural disease, Endoscopic ultrasound to assess the distal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sphincter of oddi dysfunction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sphincter_of_oddi_dysfunction-matrix",
+      "title": "Sphincter of Oddi dysfunction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspected in patients with recurrent biliary-type or pancreatic-type pain, often after cholecystectomy, without an identifiable",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver function tests and pancreatic enzymes captured during or shortly after pain episodes, Magnetic resonance",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retained or recurrent bile duct stones, Chronic pancreatitis, Functional biliary or pancreatic pain without sphincter pathology",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Careful subtype classification, distinguishing patients with objective obstructive findings from those with pain alone before any",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to sphincterotomy in pain-only patients despite weak evidence of benefit",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sphincter of oddi dysfunction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sphincter_of_oddi_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver enzymes and pancreatic enzymes during pain",
+          "cells": [
+            {
+              "text": "Raised values show objective obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Stones and structural disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Distal duct and ampulla"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter of Oddi manometry",
+          "cells": [
+            {
+              "text": "Elevated basal sphincter pressure, in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Pancreas and biliary tree"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sphincter_of_oddi_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retained or recurrent bile duct stones",
+          "cells": [
+            {
+              "text": "Excluded by MRCP before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Structural pancreatic disease must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ampullary or pancreaticobiliary tumour",
+          "cells": [
+            {
+              "text": "Weight loss or a mass suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sphincter_of_oddi_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Subtype classification",
+          "cells": [
+            {
+              "text": "Objective obstruction versus pain alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary sphincterotomy",
+          "cells": [
+            {
+              "text": "Objective enzyme or duct abnormalities only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sphincterotomy in pain-only cases",
+          "cells": [
+            {
+              "text": "Little benefit against real procedural risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Antispasmodics such as calcium channel blockers or nitrates; neuromodulators such as tricyclics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective manometry",
+          "cells": [
+            {
+              "text": "Accepting the risk of post-procedure pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ERCP prophylaxis",
+          "cells": [
+            {
+              "text": "Rectal NSAIDs and pancreatic duct stenting when intervention is undertaken"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional gut-brain management",
+          "cells": [
+            {
+              "text": "Realistic expectations and multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sphincter_of_oddi_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Sphincter of Oddi dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent biliary-type pain, often after cholecystectomy: suspected SOD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (jaundice, cholangitis, weight loss or mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for cholangitis, obstruction or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzymes during pain; MRCP to exclude stones; EUS of the ampulla",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are objective abnormalities present, with stones and structural disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as a functional gut-brain disorder with medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Classify into objective obstruction versus pain alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sphincterotomy only for objective enzyme or duct abnormalities",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antispasmodics or neuromodulators for pain-only cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rectal NSAIDs and duct stenting if intervention is undertaken",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain-only cases gain little from sphincterotomy; procedural pancreatitis is a real risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

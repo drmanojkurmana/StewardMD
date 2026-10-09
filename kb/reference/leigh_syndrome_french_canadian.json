@@ -1,178 +1,494 @@
 {
- "id": "leigh_syndrome_french_canadian",
- "name": "Leigh syndrome, French-Canadian type",
- "aliases": [
-  "LSFC",
-  "Saguenay-Lac-Saint-Jean cytochrome c oxidase deficiency",
-  "LRPPRC-related Leigh syndrome"
- ],
- "class": "non_infective",
- "system": "Metabolic / Mitochondrial",
- "specialty": "Metabolic medicine / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Mitochondrial medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the Saguenay-Lac-Saint-Jean region of Quebec.",
-   "LRPPRC stabilises and polyadenylates mitochondrial messenger RNAs, so its loss causes a tissue-specific cytochrome c oxidase (complex IV) deficiency that is most marked in brain and liver.",
-   "The chronic phenotype includes developmental delay, hypotonia, characteristic facial features and persistently elevated blood lactate.",
-   "The defining and life-threatening feature is recurrent acute metabolic crises with severe lactic acidosis and hepatic dysfunction, typically triggered by infection, fasting or other catabolic stress.",
-   "Crises carry high mortality and can progress rapidly to coma and death; most deaths occur during such episodes in early childhood.",
-   "Neuroimaging shows the classic Leigh pattern of bilateral symmetrical basal ganglia and brainstem signal change.",
-   "Children may be relatively stable between crises, which can lead carers to underestimate the risk of decompensation.",
-   "Management is preventive and supportive, centred on avoidance of catabolism, prompt aggressive treatment of intercurrent illness, and crisis-anticipating sick-day planning."
+  "id": "leigh_syndrome_french_canadian",
+  "name": "Leigh syndrome, French-Canadian type",
+  "aliases": [
+    "LSFC",
+    "Saguenay-Lac-Saint-Jean cytochrome c oxidase deficiency",
+    "LRPPRC-related Leigh syndrome"
   ],
-  "pathophysiology": "LRPPRC encodes a leucine-rich pentatricopeptide-repeat protein that, together with SLIRP, binds mitochondrial messenger RNAs to maintain their stability, polyadenylation and coordinated translation. The founder variant destabilises the protein, lowering steady-state levels of several mtDNA-encoded transcripts and disproportionately impairing assembly of cytochrome c oxidase in brain and liver. The resulting failure of oxidative phosphorylation produces chronic lactic acidaemia and the subacute necrotising encephalopathy lesions characteristic of Leigh syndrome, while a low threshold for energy failure under catabolic stress precipitates the fulminant acidotic and hepatic crises. The abruptness and tissue selectivity of these crises reflect the tissue-specific dependence on LRPPRC-supported mitochondrial gene expression.",
-  "additionalDifferentials": [
-   "Other genetic causes of Leigh syndrome (mtDNA MT-ATP6, SURF1, nuclear complex I or IV assembly defects)",
-   "MELAS and other mitochondrial encephalopathies",
-   "Pyruvate dehydrogenase complex deficiency",
-   "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease",
-   "Organic acidaemias and urea-cycle disorders presenting with encephalopathic crises",
-   "Fatty-acid oxidation defects with hepatic decompensation",
-   "Other mitochondrial hepatopathies (DGUOK, MPV17, POLG)"
-  ],
-  "additionalInvestigations": [
-   "Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio",
-   "LRPPRC sequencing and targeted founder-variant testing",
-   "Respiratory-chain enzyme assays showing isolated complex IV deficiency in muscle, liver or fibroblasts",
-   "Brain MRI and magnetic resonance spectroscopy (basal ganglia, brainstem, lactate peak)",
-   "Liver function tests and coagulation studies during crises",
-   "Plasma amino acids, urine organic acids and acylcarnitines to exclude mimics",
-   "Ammonia and glucose monitoring during acute illness"
-  ],
-  "redFlags": [
-   "Intercurrent infection or fasting heralding an acute crisis",
-   "Rapidly rising lactate with encephalopathy",
-   "Acute hepatic dysfunction with coagulopathy",
-   "Cardiorespiratory instability or reduced consciousness"
-  ],
-  "prognosis": "Outcome is poor: recurrent acidotic crises are frequently fatal in infancy or early childhood, and survivors typically have significant neurodevelopmental disability.",
-  "pitfalls": [
-   "Underestimating crisis risk during apparently minor infections.",
-   "Delaying anti-catabolic (glucose-containing) support and correction of acidosis while awaiting confirmatory results.",
-   "Attributing chronic lactate elevation to a sampling artefact and missing the diagnosis.",
-   "Assuming that stability between crises indicates low risk.",
-   "Failing to provide families with a written emergency and sick-day plan."
-  ],
-  "references": [
-   "Mitochondrial medicine reference texts",
-   "Leigh syndrome and mitochondrial disease clinical reference texts",
-   "Inborn errors of metabolism reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care plan for intercurrent illness",
-   "Treat acute decompensation aggressively with intravenous glucose, correction of severe lactic acidosis and support of hepatic dysfunction and coagulopathy",
-   "Offer mitochondrial supportive supplements and avoid drugs that impair mitochondrial function",
-   "Provide nutritional support, developmental therapies and management of hypotonia",
-   "Monitor blood lactate, liver function and coagulation, with heightened vigilance during illness",
-   "Coordinate multidisciplinary and palliative care given the high crisis-related mortality in early childhood",
-   "Offer genetic counselling and carrier testing for the autosomal recessive LRPPRC founder variant, particularly in the Saguenay-Lac-Saint-Jean population"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "leigh_syndrome_french_canadian-pathway",
-   "title": "Leigh syndrome, French-Canadian type: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the Saguenay-Lac-Saint-Jean region of Quebec.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intercurrent infection or fasting heralding an acute crisis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio, LRPPRC sequencing and targeted founder-variant testing, Respiratory-chain enzyme assays showing isolated complex IV deficiency in muscle, liver or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care plan for intercurrent illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating crisis risk during apparently minor infections."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of leigh syndrome, french-canadian type."
-  }
- ],
- "tables": [
-  {
-   "id": "leigh_syndrome_french_canadian-matrix",
-   "title": "Leigh syndrome, French-Canadian type: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Mitochondrial",
+  "specialty": "Metabolic medicine / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mitochondrial medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the Saguenay-Lac-Saint-Jean region of Quebec.",
+      "LRPPRC stabilises and polyadenylates mitochondrial messenger RNAs, so its loss causes a tissue-specific cytochrome c oxidase (complex IV) deficiency that is most marked in brain and liver.",
+      "The chronic phenotype includes developmental delay, hypotonia, characteristic facial features and persistently elevated blood lactate.",
+      "The defining and life-threatening feature is recurrent acute metabolic crises with severe lactic acidosis and hepatic dysfunction, typically triggered by infection, fasting or other catabolic stress.",
+      "Crises carry high mortality and can progress rapidly to coma and death; most deaths occur during such episodes in early childhood.",
+      "Neuroimaging shows the classic Leigh pattern of bilateral symmetrical basal ganglia and brainstem signal change.",
+      "Children may be relatively stable between crises, which can lead carers to underestimate the risk of decompensation.",
+      "Management is preventive and supportive, centred on avoidance of catabolism, prompt aggressive treatment of intercurrent illness, and crisis-anticipating sick-day planning."
     ],
-    [
-     "Key Investigations",
-     "Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio, LRPPRC sequencing and targeted founder-variant testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "LRPPRC encodes a leucine-rich pentatricopeptide-repeat protein that, together with SLIRP, binds mitochondrial messenger RNAs to maintain their stability, polyadenylation and coordinated translation. The founder variant destabilises the protein, lowering steady-state levels of several mtDNA-encoded transcripts and disproportionately impairing assembly of cytochrome c oxidase in brain and liver. The resulting failure of oxidative phosphorylation produces chronic lactic acidaemia and the subacute necrotising encephalopathy lesions characteristic of Leigh syndrome, while a low threshold for energy failure under catabolic stress precipitates the fulminant acidotic and hepatic crises. The abruptness and tissue selectivity of these crises reflect the tissue-specific dependence on LRPPRC-supported mitochondrial gene expression.",
+    "additionalDifferentials": [
+      "Other genetic causes of Leigh syndrome (mtDNA MT-ATP6, SURF1, nuclear complex I or IV assembly defects)",
+      "MELAS and other mitochondrial encephalopathies",
+      "Pyruvate dehydrogenase complex deficiency",
+      "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease",
+      "Organic acidaemias and urea-cycle disorders presenting with encephalopathic crises",
+      "Fatty-acid oxidation defects with hepatic decompensation",
+      "Other mitochondrial hepatopathies (DGUOK, MPV17, POLG)"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic causes of Leigh syndrome (mtDNA MT-ATP6, SURF1, nuclear complex I or IV assembly defects), MELAS and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio",
+      "LRPPRC sequencing and targeted founder-variant testing",
+      "Respiratory-chain enzyme assays showing isolated complex IV deficiency in muscle, liver or fibroblasts",
+      "Brain MRI and magnetic resonance spectroscopy (basal ganglia, brainstem, lactate peak)",
+      "Liver function tests and coagulation studies during crises",
+      "Plasma amino acids, urine organic acids and acylcarnitines to exclude mimics",
+      "Ammonia and glucose monitoring during acute illness"
     ],
-    [
-     "Management Strategy",
-     "Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care",
-     "Core treatment modality"
+    "redFlags": [
+      "Intercurrent infection or fasting heralding an acute crisis",
+      "Rapidly rising lactate with encephalopathy",
+      "Acute hepatic dysfunction with coagulopathy",
+      "Cardiorespiratory instability or reduced consciousness"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating crisis risk during apparently minor infections.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is poor: recurrent acidotic crises are frequently fatal in infancy or early childhood, and survivors typically have significant neurodevelopmental disability.",
+    "pitfalls": [
+      "Underestimating crisis risk during apparently minor infections.",
+      "Delaying anti-catabolic (glucose-containing) support and correction of acidosis while awaiting confirmatory results.",
+      "Attributing chronic lactate elevation to a sampling artefact and missing the diagnosis.",
+      "Assuming that stability between crises indicates low risk.",
+      "Failing to provide families with a written emergency and sick-day plan."
+    ],
+    "references": [
+      "Mitochondrial medicine reference texts",
+      "Leigh syndrome and mitochondrial disease clinical reference texts",
+      "Inborn errors of metabolism reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care plan for intercurrent illness",
+      "Treat acute decompensation aggressively with intravenous glucose, correction of severe lactic acidosis and support of hepatic dysfunction and coagulopathy",
+      "Offer mitochondrial supportive supplements and avoid drugs that impair mitochondrial function",
+      "Provide nutritional support, developmental therapies and management of hypotonia",
+      "Monitor blood lactate, liver function and coagulation, with heightened vigilance during illness",
+      "Coordinate multidisciplinary and palliative care given the high crisis-related mortality in early childhood",
+      "Offer genetic counselling and carrier testing for the autosomal recessive LRPPRC founder variant, particularly in the Saguenay-Lac-Saint-Jean population"
     ]
-   ],
-   "caption": "Overview comparison matrix for leigh syndrome, french-canadian type."
-  }
- ],
- "diagrams": [
-  {
-   "id": "leigh-syndrome-french-canadian-real-image",
-   "title": "Leigh syndrome, French-Canadian type: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "leigh_syndrome_french_canadian-pathway",
+      "title": "Leigh syndrome, French-Canadian type: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the Saguenay-Lac-Saint-Jean region of Quebec.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intercurrent infection or fasting heralding an acute crisis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio, LRPPRC sequencing and targeted founder-variant testing, Respiratory-chain enzyme assays showing isolated complex IV deficiency in muscle, liver or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care plan for intercurrent illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating crisis risk during apparently minor infections."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of leigh syndrome, french-canadian type."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "leigh_syndrome_french_canadian-matrix",
+      "title": "Leigh syndrome, French-Canadian type: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive Leigh syndrome variant caused by LRPPRC mutations; a founder missense variant predominates in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood and CSF lactate and pyruvate with the lactate-to-pyruvate ratio, LRPPRC sequencing and targeted founder-variant testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic causes of Leigh syndrome (mtDNA MT-ATP6, SURF1, nuclear complex I or IV assembly defects), MELAS and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise prevention of metabolic crises by avoiding fasting, ensuring prompt sick-day intake and providing an emergency care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating crisis risk during apparently minor infections.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for leigh syndrome, french-canadian type."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leigh_syndrome_french_canadian-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate, pyruvate and their ratio",
+          "cells": [
+            {
+              "text": "Persistently elevated lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LRPPRC sequencing and founder-variant testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory-chain enzyme assays",
+          "cells": [
+            {
+              "text": "Isolated complex IV deficiency in muscle, liver or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and spectroscopy",
+          "cells": [
+            {
+              "text": "Basal ganglia and brainstem lesions with a lactate peak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and coagulation during crises",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amino acids, organic acids and acylcarnitines",
+          "cells": [
+            {
+              "text": "Excludes mimicking disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome_french_canadian-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other Leigh genes (MT-ATP6, SURF1)",
+          "cells": [
+            {
+              "text": "Other genetic causes; LRPPRC testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biotinidase deficiency and biotin-thiamine-responsive disease",
+          "cells": [
+            {
+              "text": "Treatable mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty-acid oxidation defects with hepatic decompensation",
+          "cells": [
+            {
+              "text": "Hepatic decompensation mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other mitochondrial hepatopathies (DGUOK, MPV17, POLG)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leigh_syndrome_french_canadian-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Crisis prevention",
+          "cells": [
+            {
+              "text": "Avoid fasting; prompt sick-day intake; emergency care plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Intravenous glucose, correction of severe lactic acidosis, support of liver and coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplements",
+          "cells": [
+            {
+              "text": "Mitochondrial supportive supplements; avoid drugs that impair mitochondrial function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and development",
+          "cells": [
+            {
+              "text": "Nutritional support, developmental therapies, management of hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood lactate, liver function and coagulation; heightened vigilance during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Multidisciplinary and palliative care given high crisis-related mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive LRPPRC founder variant, particularly in the Saguenay-Lac-Saint-Jean population"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leigh_syndrome_french_canadian-dx-mgmt",
+      "title": "Diagnosis and management of Leigh syndrome, French-Canadian type",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with developmental delay, lactic acidosis and crises triggered by infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hepatic failure, reduced consciousness, cardiorespiratory instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive care for crisis with lactic acidosis and liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate, LRPPRC sequencing, complex IV assay, MRI, liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an LRPPRC variant found, with isolated complex IV deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other Leigh genes, PDH deficiency or a fatty-acid oxidation defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent crises: avoid fasting, prompt sick-day intake and an emergency plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat decompensation with IV glucose and correction of acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mitochondrial supplements; avoid drugs that impair mitochondria",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor lactate, liver function and coagulation during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing for the founder variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome poor; recurrent acidotic crises are often fatal in early childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

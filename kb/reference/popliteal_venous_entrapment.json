@@ -1,177 +1,466 @@
 {
- "id": "popliteal_venous_entrapment",
- "name": "popliteal venous entrapment",
- "aliases": [
-  "popliteal vein entrapment syndrome",
-  "functional venous entrapment",
-  "popliteal venous compression syndrome"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an anomalous or hypertrophied medial head of gastrocnemius or by a fibrous band, and it frequently coexists with popliteal artery entrapment",
-   "It characteristically affects young, athletic adults and presents with exertional or positional calf swelling, heaviness, aching and sometimes venous claudication, typically provoked by active plantarflexion or dorsiflexion",
-   "It should be considered in unexplained deep vein thrombosis or leg swelling in a young patient who lacks conventional thrombotic risk factors",
-   "Provocative duplex ultrasound with the ankle in active plantar- and dorsiflexion is the key first-line test, showing reduced or abolished popliteal venous flow on the manoeuvre",
-   "Cross-sectional imaging by MRI or MR venography, or by CT, defines the musculotendinous anatomy and distinguishes an anatomical anomaly from purely functional (positional) entrapment",
-   "Care is needed to separate true entrapment from the physiological compression that can occur in normal limbs during extreme plantarflexion, so as to avoid overdiagnosis",
-   "Symptomatic anatomical entrapment is treated surgically by decompression, releasing the offending muscle slip or fibrous band, whereas functional entrapment without a structural anomaly is generally managed more conservatively"
+  "id": "popliteal_venous_entrapment",
+  "name": "popliteal venous entrapment",
+  "aliases": [
+    "popliteal vein entrapment syndrome",
+    "functional venous entrapment",
+    "popliteal venous compression syndrome"
   ],
-  "pathophysiology": "The popliteal vein normally traverses the popliteal fossa alongside the artery, passing between the heads of gastrocnemius. In entrapment, an anomalous origin or accessory slip of the medial head of gastrocnemius, a fibrous band, or muscular hypertrophy compresses the vein, particularly during muscle contraction in plantarflexion or with certain knee positions. Repetitive compression produces intermittent venous outflow obstruction, venous hypertension and stasis, which give rise to exertional swelling and predispose to intimal injury and secondary thrombosis. In functional entrapment, hypertrophied but normally positioned muscles compress otherwise normal vessels, so imaging at rest may be unremarkable while provocative manoeuvres reveal the obstruction.",
-  "additionalDifferentials": [
-   "Deep vein thrombosis of another cause",
-   "Chronic venous insufficiency with venous reflux",
-   "Popliteal artery entrapment syndrome",
-   "Popliteal (Baker) cyst or popliteal venous aneurysm",
-   "Chronic exertional compartment syndrome",
-   "Lymphoedema",
-   "Musculoskeletal calf pathology such as gastrocnemius strain"
-  ],
-  "additionalInvestigations": [
-   "Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres",
-   "MRI or MR venography of the popliteal fossa to display the musculotendinous anatomy",
-   "CT venography as an alternative for anatomical assessment",
-   "Positional contrast venography in selected cases",
-   "Assessment of the popliteal artery for coexisting arterial entrapment using ankle-brachial index and arterial duplex",
-   "Thrombophilia screen when the patient presents with deep vein thrombosis",
-   "Cross-sectional imaging to exclude an alternative popliteal mass such as a cyst or aneurysm"
-  ],
-  "redFlags": [
-   "Deep vein thrombosis in a young patient without conventional risk factors",
-   "Coexisting arterial entrapment with claudication or limb ischaemia",
-   "Recurrent thrombosis or post-thrombotic changes despite anticoagulation",
-   "Progressive symptoms that increasingly limit activity",
-   "Features suggesting pulmonary embolism"
-  ],
-  "prognosis": "With timely surgical decompression of an anatomical entrapment, symptomatic and functional outcomes are generally good. Delayed diagnosis may lead to established deep vein thrombosis, post-thrombotic syndrome and chronic venous insufficiency.",
-  "pitfalls": [
-   "Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion",
-   "Missing the diagnosis in young patients with unexplained deep vein thrombosis or exertional leg swelling",
-   "Failing to assess for a coexisting popliteal artery entrapment",
-   "Relying on resting, non-provocative imaging, which may appear normal",
-   "Treating recurrent deep vein thrombosis with anticoagulation alone without addressing the underlying compression"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Haimovici's Vascular Surgery",
-   "European Society for Vascular Surgery clinical practice guidance on popliteal entrapment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band relieving the popliteal vein, the definitive treatment for anatomical entrapment",
-   "Venous repair or reconstruction where the vein wall is already damaged or thrombosed",
-   "Anticoagulation when entrapment has precipitated a secondary deep vein thrombosis",
-   "Graduated compression and activity modification for symptom relief and in mild or purely functional cases where surgery is not warranted",
-   "Assessment for and treatment of coexisting popliteal artery entrapment",
-   "Referral to vascular surgery, with care to distinguish true entrapment from physiological compression so as to avoid unnecessary operation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "popliteal_venous_entrapment-pathway",
-   "title": "popliteal venous entrapment: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an anomalous or hypertrophied medial head of gastrocnemius or by a fibrous band, and it frequently coexists with",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Deep vein thrombosis in a young patient without conventional risk factors",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres, MRI or MR venography of the popliteal fossa to display the musculotendinous anatomy, CT venography as an alternative for anatomical assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band relieving the popliteal vein, the definitive treatment for anatomical entrapment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of popliteal venous entrapment."
-  }
- ],
- "tables": [
-  {
-   "id": "popliteal_venous_entrapment-matrix",
-   "title": "popliteal venous entrapment: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an anomalous or hypertrophied medial head of gastrocnemius or by a fibrous band, and it frequently coexists with popliteal artery entrapment",
+      "It characteristically affects young, athletic adults and presents with exertional or positional calf swelling, heaviness, aching and sometimes venous claudication, typically provoked by active plantarflexion or dorsiflexion",
+      "It should be considered in unexplained deep vein thrombosis or leg swelling in a young patient who lacks conventional thrombotic risk factors",
+      "Provocative duplex ultrasound with the ankle in active plantar- and dorsiflexion is the key first-line test, showing reduced or abolished popliteal venous flow on the manoeuvre",
+      "Cross-sectional imaging by MRI or MR venography, or by CT, defines the musculotendinous anatomy and distinguishes an anatomical anomaly from purely functional (positional) entrapment",
+      "Care is needed to separate true entrapment from the physiological compression that can occur in normal limbs during extreme plantarflexion, so as to avoid overdiagnosis",
+      "Symptomatic anatomical entrapment is treated surgically by decompression, releasing the offending muscle slip or fibrous band, whereas functional entrapment without a structural anomaly is generally managed more conservatively"
     ],
-    [
-     "Key Investigations",
-     "Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres, MRI or MR venography of the popliteal fossa to display",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The popliteal vein normally traverses the popliteal fossa alongside the artery, passing between the heads of gastrocnemius. In entrapment, an anomalous origin or accessory slip of the medial head of gastrocnemius, a fibrous band, or muscular hypertrophy compresses the vein, particularly during muscle contraction in plantarflexion or with certain knee positions. Repetitive compression produces intermittent venous outflow obstruction, venous hypertension and stasis, which give rise to exertional swelling and predispose to intimal injury and secondary thrombosis. In functional entrapment, hypertrophied but normally positioned muscles compress otherwise normal vessels, so imaging at rest may be unremarkable while provocative manoeuvres reveal the obstruction.",
+    "additionalDifferentials": [
+      "Deep vein thrombosis of another cause",
+      "Chronic venous insufficiency with venous reflux",
+      "Popliteal artery entrapment syndrome",
+      "Popliteal (Baker) cyst or popliteal venous aneurysm",
+      "Chronic exertional compartment syndrome",
+      "Lymphoedema",
+      "Musculoskeletal calf pathology such as gastrocnemius strain"
     ],
-    [
-     "Primary Differentials",
-     "Deep vein thrombosis of another cause, Chronic venous insufficiency with venous reflux, Popliteal artery entrapment syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres",
+      "MRI or MR venography of the popliteal fossa to display the musculotendinous anatomy",
+      "CT venography as an alternative for anatomical assessment",
+      "Positional contrast venography in selected cases",
+      "Assessment of the popliteal artery for coexisting arterial entrapment using ankle-brachial index and arterial duplex",
+      "Thrombophilia screen when the patient presents with deep vein thrombosis",
+      "Cross-sectional imaging to exclude an alternative popliteal mass such as a cyst or aneurysm"
     ],
-    [
-     "Management Strategy",
-     "Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band",
-     "Core treatment modality"
+    "redFlags": [
+      "Deep vein thrombosis in a young patient without conventional risk factors",
+      "Coexisting arterial entrapment with claudication or limb ischaemia",
+      "Recurrent thrombosis or post-thrombotic changes despite anticoagulation",
+      "Progressive symptoms that increasingly limit activity",
+      "Features suggesting pulmonary embolism"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely surgical decompression of an anatomical entrapment, symptomatic and functional outcomes are generally good. Delayed diagnosis may lead to established deep vein thrombosis, post-thrombotic syndrome and chronic venous insufficiency.",
+    "pitfalls": [
+      "Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion",
+      "Missing the diagnosis in young patients with unexplained deep vein thrombosis or exertional leg swelling",
+      "Failing to assess for a coexisting popliteal artery entrapment",
+      "Relying on resting, non-provocative imaging, which may appear normal",
+      "Treating recurrent deep vein thrombosis with anticoagulation alone without addressing the underlying compression"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Haimovici's Vascular Surgery",
+      "European Society for Vascular Surgery clinical practice guidance on popliteal entrapment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band relieving the popliteal vein, the definitive treatment for anatomical entrapment",
+      "Venous repair or reconstruction where the vein wall is already damaged or thrombosed",
+      "Anticoagulation when entrapment has precipitated a secondary deep vein thrombosis",
+      "Graduated compression and activity modification for symptom relief and in mild or purely functional cases where surgery is not warranted",
+      "Assessment for and treatment of coexisting popliteal artery entrapment",
+      "Referral to vascular surgery, with care to distinguish true entrapment from physiological compression so as to avoid unnecessary operation"
     ]
-   ],
-   "caption": "Overview comparison matrix for popliteal venous entrapment."
-  }
- ],
- "diagrams": [
-  {
-   "id": "popliteal-venous-entrapment-real-image",
-   "title": "popliteal venous entrapment: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "popliteal_venous_entrapment-pathway",
+      "title": "popliteal venous entrapment: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an anomalous or hypertrophied medial head of gastrocnemius or by a fibrous band, and it frequently coexists with",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Deep vein thrombosis in a young patient without conventional risk factors",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres, MRI or MR venography of the popliteal fossa to display the musculotendinous anatomy, CT venography as an alternative for anatomical assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band relieving the popliteal vein, the definitive treatment for anatomical entrapment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of popliteal venous entrapment."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "popliteal_venous_entrapment-matrix",
+      "title": "popliteal venous entrapment: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Popliteal venous entrapment is dynamic or fixed compression of the popliteal vein within the popliteal fossa, usually by an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Duplex ultrasound with provocative plantar- and dorsiflexion manoeuvres, MRI or MR venography of the popliteal fossa to display",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Deep vein thrombosis of another cause, Chronic venous insufficiency with venous reflux, Popliteal artery entrapment syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical decompression by dividing the anomalous or hypertrophied medial head of gastrocnemius or the constricting fibrous band",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosing entrapment from the physiological venous compression seen in normal limbs on extreme plantarflexion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for popliteal venous entrapment."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "popliteal_venous_entrapment-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex with plantar- and dorsiflexion manoeuvres",
+          "cells": [
+            {
+              "text": "Provoked venous compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MR venography of the popliteal fossa",
+          "cells": [
+            {
+              "text": "Musculotendinous anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT venography",
+          "cells": [
+            {
+              "text": "Anatomical assessment, as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positional contrast venography",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABPI for coexisting arterial entrapment",
+          "cells": [
+            {
+              "text": "Arterial compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Deep vein thrombosis presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "popliteal_venous_entrapment-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Popliteal artery entrapment",
+          "cells": [
+            {
+              "text": "Coexisting arterial entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency",
+          "cells": [
+            {
+              "text": "Venous reflux"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "popliteal_venous_entrapment-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Division of the anomalous or hypertrophied medial gastrocnemius head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous reconstruction",
+          "cells": [
+            {
+              "text": "Where the vein wall is already damaged or thrombosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "When entrapment has precipitated a deep vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom relief",
+          "cells": [
+            {
+              "text": "Graduated compression and activity modification in mild cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting arterial entrapment",
+          "cells": [
+            {
+              "text": "Assessment and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Vascular surgery to distinguish true entrapment from physiological variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "popliteal_venous_entrapment-dx-mgmt",
+      "title": "Diagnosis and management of popliteal venous entrapment",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent calf deep vein thrombosis with exertional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (DVT without risk factors, arterial involvement, recurrence on anticoagulation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular review for limb ischaemia or pulmonary embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex with provocation; MRI or MR venography of popliteal fossa; thrombophilia screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dynamic imaging show venous compression by the gastrocnemius?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DVT of other cause, venous insufficiency, Baker cyst or compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical decompression by dividing the medial gastrocnemius head",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Venous repair where the vein wall is damaged or thrombosed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation when entrapment has precipitated a DVT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graduated compression and activity modification for mild cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assessment and treatment of coexisting arterial entrapment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With timely decompression, symptomatic and functional outcomes are generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

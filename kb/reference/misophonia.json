@@ -1,175 +1,444 @@
 {
- "id": "misophonia",
- "name": "Misophonia",
- "aliases": [
-  "Selective sound sensitivity syndrome",
-  "Sound-rage"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan and Sadock's Synopsis of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific trigger sounds that are often human-generated.",
-   "Common triggers include chewing, lip-smacking, slurping, breathing, sniffing, pen-clicking, and keyboard tapping.",
-   "The reaction includes autonomic arousal, an urge to escape, irritability or rage, and sometimes aggression, frequently followed by guilt.",
-   "Onset is often in childhood or adolescence, and early triggers frequently involve family members.",
-   "It is not currently a formal DSM-5-TR or ICD-11 disorder but is increasingly recognised, and should be distinguished from hyperacusis (loudness intolerance) and phonophobia (fear of sound).",
-   "Causes significant functional and relational impairment, with avoidance of shared meals and social situations.",
-   "High comorbidity is seen with anxiety, obsessive-compulsive traits, and sometimes attention-deficit or autistic traits.",
-   "Management is largely psychological, particularly cognitive-behavioural therapy with coping and sound-based strategies, and no established pharmacotherapy exists."
+  "id": "misophonia",
+  "name": "Misophonia",
+  "aliases": [
+    "Selective sound sensitivity syndrome",
+    "Sound-rage"
   ],
-  "pathophysiology": "Misophonia is proposed to reflect abnormal salience and connectivity between the auditory system and limbic, autonomic, and interoceptive networks, such that specific learned trigger sounds evoke exaggerated activation of the anterior insula and associated emotional-processing regions, with heightened autonomic responses. Enhanced functional connectivity between auditory cortex and salience and limbic structures, together with conditioned associations formed early in life, is thought to underlie the automatic aversive response. It is distinct from peripheral auditory pathology, since audiometric function is typically normal, and it is best regarded as a disorder of emotional and attentional processing of sound rather than of hearing itself.",
-  "additionalDifferentials": [
-   "Hyperacusis with reduced tolerance to sound loudness",
-   "Phonophobia with fear or anxiety about specific sounds",
-   "Tinnitus-related distress",
-   "Obsessive-compulsive disorder",
-   "Anxiety disorders",
-   "Autism spectrum sensory sensitivities",
-   "Post-traumatic reactions to specific sounds"
-  ],
-  "additionalInvestigations": [
-   "Detailed clinical history of triggers, reactions, and impairment",
-   "Validated questionnaires such as the Misophonia Questionnaire or the Amsterdam Misophonia Scale",
-   "Audiological assessment including audiometry and loudness discomfort levels to exclude hyperacusis",
-   "Screening for anxiety, obsessive-compulsive disorder, and autistic traits",
-   "Assessment of functional and relational impact",
-   "ENT or audiology referral where auditory pathology is suspected",
-   "Mood and risk assessment where aggression or guilt is prominent"
-  ],
-  "redFlags": [
-   "Aggression or violence toward others during trigger exposure",
-   "Severe avoidance causing social or occupational collapse or nutritional impact",
-   "Comorbid depression with suicidal ideation",
-   "Self-harm related to the distress"
-  ],
-  "prognosis": "Misophonia tends to be chronic, but cognitive-behavioural approaches and coping and sound strategies can meaningfully reduce distress and functional impact, although complete resolution is uncommon.",
-  "pitfalls": [
-   "Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly",
-   "Dismissing it as mere irritability or fussiness",
-   "Overlooking comorbid anxiety, obsessive-compulsive disorder, or autistic traits",
-   "Recommending indefinite avoidance, which can reinforce the response"
-  ],
-  "references": [
-   "Kaplan and Sadock's Synopsis of Psychiatry",
-   "New Oxford Textbook of Psychiatry",
-   "Consensus definition of misophonia (Delphi consensus study)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger sounds and reducing avoidance",
-   "Sound-based coping strategies such as background noise, masking or music through earphones, alongside tinnitus-retraining-style counselling to lower the salience of triggers",
-   "Psychoeducation for the patient and family, with environmental adjustments at home, school or work to limit exposure to distressing sounds",
-   "Identify and treat comorbid anxiety, obsessive-compulsive disorder or autistic traits, which may need their own targeted psychological or pharmacological therapy",
-   "Audiological assessment to distinguish and exclude hyperacusis and phonophobia, avoiding habitual ear protection that can worsen sound tolerance",
-   "Multidisciplinary care across psychiatry, psychology and audiology, with referral when functional or relational impairment is severe"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "misophonia-pathway",
-   "title": "Misophonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific trigger sounds that are often human-generated.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aggression or violence toward others during trigger exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed clinical history of triggers, reactions, and impairment, Validated questionnaires such as the Misophonia Questionnaire or the Amsterdam Misophonia Scale, Audiological assessment including audiometry and loudness"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger sounds and reducing avoidance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of misophonia."
-  }
- ],
- "tables": [
-  {
-   "id": "misophonia-matrix",
-   "title": "Misophonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan and Sadock's Synopsis of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific trigger sounds that are often human-generated.",
+      "Common triggers include chewing, lip-smacking, slurping, breathing, sniffing, pen-clicking, and keyboard tapping.",
+      "The reaction includes autonomic arousal, an urge to escape, irritability or rage, and sometimes aggression, frequently followed by guilt.",
+      "Onset is often in childhood or adolescence, and early triggers frequently involve family members.",
+      "It is not currently a formal DSM-5-TR or ICD-11 disorder but is increasingly recognised, and should be distinguished from hyperacusis (loudness intolerance) and phonophobia (fear of sound).",
+      "Causes significant functional and relational impairment, with avoidance of shared meals and social situations.",
+      "High comorbidity is seen with anxiety, obsessive-compulsive traits, and sometimes attention-deficit or autistic traits.",
+      "Management is largely psychological, particularly cognitive-behavioural therapy with coping and sound-based strategies, and no established pharmacotherapy exists."
     ],
-    [
-     "Key Investigations",
-     "Detailed clinical history of triggers, reactions, and impairment, Validated questionnaires such as the Misophonia Questionnaire",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Misophonia is proposed to reflect abnormal salience and connectivity between the auditory system and limbic, autonomic, and interoceptive networks, such that specific learned trigger sounds evoke exaggerated activation of the anterior insula and associated emotional-processing regions, with heightened autonomic responses. Enhanced functional connectivity between auditory cortex and salience and limbic structures, together with conditioned associations formed early in life, is thought to underlie the automatic aversive response. It is distinct from peripheral auditory pathology, since audiometric function is typically normal, and it is best regarded as a disorder of emotional and attentional processing of sound rather than of hearing itself.",
+    "additionalDifferentials": [
+      "Hyperacusis with reduced tolerance to sound loudness",
+      "Phonophobia with fear or anxiety about specific sounds",
+      "Tinnitus-related distress",
+      "Obsessive-compulsive disorder",
+      "Anxiety disorders",
+      "Autism spectrum sensory sensitivities",
+      "Post-traumatic reactions to specific sounds"
     ],
-    [
-     "Primary Differentials",
-     "Hyperacusis with reduced tolerance to sound loudness, Phonophobia with fear or anxiety about specific sounds, Tinnitus-related",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed clinical history of triggers, reactions, and impairment",
+      "Validated questionnaires such as the Misophonia Questionnaire or the Amsterdam Misophonia Scale",
+      "Audiological assessment including audiometry and loudness discomfort levels to exclude hyperacusis",
+      "Screening for anxiety, obsessive-compulsive disorder, and autistic traits",
+      "Assessment of functional and relational impact",
+      "ENT or audiology referral where auditory pathology is suspected",
+      "Mood and risk assessment where aggression or guilt is prominent"
     ],
-    [
-     "Management Strategy",
-     "Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger",
-     "Core treatment modality"
+    "redFlags": [
+      "Aggression or violence toward others during trigger exposure",
+      "Severe avoidance causing social or occupational collapse or nutritional impact",
+      "Comorbid depression with suicidal ideation",
+      "Self-harm related to the distress"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Misophonia tends to be chronic, but cognitive-behavioural approaches and coping and sound strategies can meaningfully reduce distress and functional impact, although complete resolution is uncommon.",
+    "pitfalls": [
+      "Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly",
+      "Dismissing it as mere irritability or fussiness",
+      "Overlooking comorbid anxiety, obsessive-compulsive disorder, or autistic traits",
+      "Recommending indefinite avoidance, which can reinforce the response"
+    ],
+    "references": [
+      "Kaplan and Sadock's Synopsis of Psychiatry",
+      "New Oxford Textbook of Psychiatry",
+      "Consensus definition of misophonia (Delphi consensus study)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger sounds and reducing avoidance",
+      "Sound-based coping strategies such as background noise, masking or music through earphones, alongside tinnitus-retraining-style counselling to lower the salience of triggers",
+      "Psychoeducation for the patient and family, with environmental adjustments at home, school or work to limit exposure to distressing sounds",
+      "Identify and treat comorbid anxiety, obsessive-compulsive disorder or autistic traits, which may need their own targeted psychological or pharmacological therapy",
+      "Audiological assessment to distinguish and exclude hyperacusis and phonophobia, avoiding habitual ear protection that can worsen sound tolerance",
+      "Multidisciplinary care across psychiatry, psychology and audiology, with referral when functional or relational impairment is severe"
     ]
-   ],
-   "caption": "Overview comparison matrix for misophonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "misophonia-real-image",
-   "title": "Misophonia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "misophonia-pathway",
+      "title": "Misophonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific trigger sounds that are often human-generated.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aggression or violence toward others during trigger exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed clinical history of triggers, reactions, and impairment, Validated questionnaires such as the Misophonia Questionnaire or the Amsterdam Misophonia Scale, Audiological assessment including audiometry and loudness"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger sounds and reducing avoidance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of misophonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "misophonia-matrix",
+      "title": "Misophonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A strong, disproportionate aversive emotional and physiological reaction, typically anger, disgust, or anxiety, to specific",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed clinical history of triggers, reactions, and impairment, Validated questionnaires such as the Misophonia Questionnaire",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hyperacusis with reduced tolerance to sound loudness, Phonophobia with fear or anxiety about specific sounds, Tinnitus-related",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cognitive-behavioural therapy tailored to misophonia is the mainstay, restructuring the conditioned aversive response to trigger",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing misophonia with hyperacusis or phonophobia and mismanaging accordingly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for misophonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan and Sadock's Synopsis of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "misophonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed clinical history of triggers and reactions",
+          "cells": [
+            {
+              "text": "Triggers, reactions and impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Validated questionnaires (Misophonia Questionnaire or Amsterdam Misophonia Scale)",
+          "cells": [
+            {
+              "text": "Misophonia symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and loudness discomfort levels",
+          "cells": [
+            {
+              "text": "Hyperacusis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for anxiety, obsessive-compulsive disorder and autistic traits",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of functional and relational impact",
+          "cells": [
+            {
+              "text": "Functional and relational impact"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "misophonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperacusis",
+          "cells": [
+            {
+              "text": "Reduced tolerance to sound loudness; audiometry and loudness discomfort levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phonophobia",
+          "cells": [
+            {
+              "text": "Fear or anxiety about specific sounds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "misophonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive-behavioural therapy tailored to misophonia",
+          "cells": [
+            {
+              "text": "Mainstay; restructures the conditioned aversive response and reduces avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sound-based coping",
+          "cells": [
+            {
+              "text": "Background noise, masking or music; tinnitus-retraining-style counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychoeducation and environment",
+          "cells": [
+            {
+              "text": "For patient and family; adjustments at home, school or work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid conditions",
+          "cells": [
+            {
+              "text": "Anxiety, obsessive-compulsive disorder or autistic traits treated in their own right"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology",
+          "cells": [
+            {
+              "text": "Distinguish and exclude hyperacusis and phonophobia; avoid habitual ear protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Psychiatry, psychology and audiology; referral when impairment is severe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "misophonia-dx-mgmt",
+      "title": "Diagnosis and management of Misophonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Strong aversive reactions to specific repetitive sounds, with avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aggression on trigger exposure, social collapse, suicidal thoughts or self-harm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mental health assessment for suicidal ideation or self-harm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trigger history; questionnaire; audiometry and loudness discomfort; mood screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hyperacusis excluded on audiometry and loudness tolerance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperacusis, phonophobia, OCD or anxiety; treat the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CBT tailored to misophonia to reduce the conditioned aversive response and avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Masking, background noise or music as sound-based coping strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychoeducation for patient and family; environmental adjustments",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid anxiety, OCD or autistic traits in their own right",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary psychiatry, psychology and audiology care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

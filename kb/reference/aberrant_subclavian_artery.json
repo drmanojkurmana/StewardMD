@@ -1,176 +1,489 @@
 {
- "id": "aberrant_subclavian_artery",
- "name": "aberrant subclavian artery",
- "aliases": [
-  "arteria lusoria",
-  "aberrant right subclavian artery"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Vascular surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch of a left-sided arch and coursing behind the oesophagus.",
-   "It is usually asymptomatic and found incidentally, but its retro-oesophageal course can produce dysphagia lusoria, typically in adults as the vessel stiffens or becomes aneurysmal.",
-   "Compression of the trachea may cause stridor or dyspnoea, more often in infants than in adults.",
-   "The origin is frequently dilated as a Kommerell diverticulum, which carries a risk of aneurysm formation, dissection and rupture.",
-   "An aberrant right subclavian is associated with an absent (non-recurrent) right laryngeal nerve, a crucial consideration during thyroid and neck surgery to avoid nerve injury.",
-   "A barium swallow shows a characteristic oblique posterior indentation on the oesophagus, and CT or MR angiography confirms the vessel and any diverticulum.",
-   "In isolation it does not form a complete ring, whereas an aberrant left subclavian with a right arch and left ligamentum does.",
-   "Asymptomatic cases are observed, while symptomatic dysphagia or an enlarging diverticulum warrants surgical reimplantation or bypass with division of the aberrant vessel."
+  "id": "aberrant_subclavian_artery",
+  "name": "aberrant subclavian artery",
+  "aliases": [
+    "arteria lusoria",
+    "aberrant right subclavian artery"
   ],
-  "pathophysiology": "The anomaly results from abnormal regression of the embryonic aortic arch system. For an aberrant right subclavian artery, the right fourth arch and proximal right dorsal aorta regress abnormally while a distal segment of the right dorsal aorta persists, so the right subclavian arises as the most distal branch of the left arch and must cross the midline behind the oesophagus to reach the right arm. This retro-oesophageal course places the vessel against the posterior oesophageal wall; in childhood the pliable artery rarely causes symptoms, but with ageing, atherosclerosis and dilatation of the Kommerell diverticulum the vessel becomes rigid and may indent the oesophagus sufficiently to impair swallowing.",
-  "additionalDifferentials": [
-   "Achalasia and other oesophageal motility disorders",
-   "Oesophageal stricture or web",
-   "Oesophageal or mediastinal neoplasm causing extrinsic compression",
-   "Double aortic arch or other complete vascular ring",
-   "Right aortic arch with aberrant left subclavian artery",
-   "Eosinophilic oesophagitis",
-   "Globus sensation"
-  ],
-  "additionalInvestigations": [
-   "Barium swallow or contrast oesophagogram",
-   "CT angiography of the aortic arch",
-   "MR angiography",
-   "Upper gastrointestinal endoscopy to exclude mucosal disease",
-   "Oesophageal manometry if a motility disorder is suspected",
-   "Transthoracic echocardiography for associated cardiac anomalies",
-   "Genetic evaluation given associations with trisomy 21 and 22q11.2 deletion"
-  ],
-  "redFlags": [
-   "Rapidly progressive dysphagia or weight loss, prompting exclusion of malignancy",
-   "An aneurysmal Kommerell diverticulum or signs of dissection",
-   "Haematemesis suggesting an aorto-oesophageal fistula",
-   "Stridor or respiratory distress in an infant"
-  ],
-  "prognosis": "The great majority of patients remain asymptomatic with a normal life expectancy; symptomatic disease and an aneurysmal diverticulum have good outcomes after appropriate surgical repair.",
-  "pitfalls": [
-   "Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy.",
-   "Inadvertent injury to a non-recurrent right laryngeal nerve during thyroid surgery when the anomaly is unrecognised.",
-   "Overlooking an aneurysmal Kommerell diverticulum that requires treatment.",
-   "Confusing an isolated aberrant subclavian (no ring) with a complete vascular ring.",
-   "Assuming that symptoms in an infant simply represent benign gastro-oesophageal reflux."
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "Gray's Anatomy",
-   "Rutherford's Vascular Surgery and Endovascular Therapy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage asymptomatic incidental cases conservatively with reassurance and no intervention",
-   "Offer dietary modification with softer textures and careful chewing for mild dysphagia lusoria before considering intervention",
-   "Refer symptomatic dysphagia or tracheal compression for surgical repair, with division of the aberrant artery and reimplantation or transposition and repair of any associated Kommerell diverticulum",
-   "Repair a Kommerell diverticulum that is aneurysmal or enlarging because of the risk of dissection and rupture",
-   "Surveil a known diverticulum with periodic CT or MR angiography for growth",
-   "Alert the surgical team to the associated non-recurrent laryngeal nerve during thyroid or neck surgery to avoid nerve injury"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aberrant_subclavian_artery-pathway",
-   "title": "aberrant subclavian artery: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch of a left-sided arch and coursing behind the oesophagus.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive dysphagia or weight loss, prompting exclusion of malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Barium swallow or contrast oesophagogram, CT angiography of the aortic arch, MR angiography"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage asymptomatic incidental cases conservatively with reassurance and no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aberrant subclavian artery."
-  }
- ],
- "tables": [
-  {
-   "id": "aberrant_subclavian_artery-matrix",
-   "title": "aberrant subclavian artery: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Vascular surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch of a left-sided arch and coursing behind the oesophagus.",
+      "It is usually asymptomatic and found incidentally, but its retro-oesophageal course can produce dysphagia lusoria, typically in adults as the vessel stiffens or becomes aneurysmal.",
+      "Compression of the trachea may cause stridor or dyspnoea, more often in infants than in adults.",
+      "The origin is frequently dilated as a Kommerell diverticulum, which carries a risk of aneurysm formation, dissection and rupture.",
+      "An aberrant right subclavian is associated with an absent (non-recurrent) right laryngeal nerve, a crucial consideration during thyroid and neck surgery to avoid nerve injury.",
+      "A barium swallow shows a characteristic oblique posterior indentation on the oesophagus, and CT or MR angiography confirms the vessel and any diverticulum.",
+      "In isolation it does not form a complete ring, whereas an aberrant left subclavian with a right arch and left ligamentum does.",
+      "Asymptomatic cases are observed, while symptomatic dysphagia or an enlarging diverticulum warrants surgical reimplantation or bypass with division of the aberrant vessel."
     ],
-    [
-     "Key Investigations",
-     "Barium swallow or contrast oesophagogram, CT angiography of the aortic arch, MR angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The anomaly results from abnormal regression of the embryonic aortic arch system. For an aberrant right subclavian artery, the right fourth arch and proximal right dorsal aorta regress abnormally while a distal segment of the right dorsal aorta persists, so the right subclavian arises as the most distal branch of the left arch and must cross the midline behind the oesophagus to reach the right arm. This retro-oesophageal course places the vessel against the posterior oesophageal wall; in childhood the pliable artery rarely causes symptoms, but with ageing, atherosclerosis and dilatation of the Kommerell diverticulum the vessel becomes rigid and may indent the oesophagus sufficiently to impair swallowing.",
+    "additionalDifferentials": [
+      "Achalasia and other oesophageal motility disorders",
+      "Oesophageal stricture or web",
+      "Oesophageal or mediastinal neoplasm causing extrinsic compression",
+      "Double aortic arch or other complete vascular ring",
+      "Right aortic arch with aberrant left subclavian artery",
+      "Eosinophilic oesophagitis",
+      "Globus sensation"
     ],
-    [
-     "Primary Differentials",
-     "Achalasia and other oesophageal motility disorders, Oesophageal stricture or web, Oesophageal or mediastinal neoplasm causing",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Barium swallow or contrast oesophagogram",
+      "CT angiography of the aortic arch",
+      "MR angiography",
+      "Upper gastrointestinal endoscopy to exclude mucosal disease",
+      "Oesophageal manometry if a motility disorder is suspected",
+      "Transthoracic echocardiography for associated cardiac anomalies",
+      "Genetic evaluation given associations with trisomy 21 and 22q11.2 deletion"
     ],
-    [
-     "Management Strategy",
-     "Manage asymptomatic incidental cases conservatively with reassurance and no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive dysphagia or weight loss, prompting exclusion of malignancy",
+      "An aneurysmal Kommerell diverticulum or signs of dissection",
+      "Haematemesis suggesting an aorto-oesophageal fistula",
+      "Stridor or respiratory distress in an infant"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority of patients remain asymptomatic with a normal life expectancy; symptomatic disease and an aneurysmal diverticulum have good outcomes after appropriate surgical repair.",
+    "pitfalls": [
+      "Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy.",
+      "Inadvertent injury to a non-recurrent right laryngeal nerve during thyroid surgery when the anomaly is unrecognised.",
+      "Overlooking an aneurysmal Kommerell diverticulum that requires treatment.",
+      "Confusing an isolated aberrant subclavian (no ring) with a complete vascular ring.",
+      "Assuming that symptoms in an infant simply represent benign gastro-oesophageal reflux."
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "Gray's Anatomy",
+      "Rutherford's Vascular Surgery and Endovascular Therapy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage asymptomatic incidental cases conservatively with reassurance and no intervention",
+      "Offer dietary modification with softer textures and careful chewing for mild dysphagia lusoria before considering intervention",
+      "Refer symptomatic dysphagia or tracheal compression for surgical repair, with division of the aberrant artery and reimplantation or transposition and repair of any associated Kommerell diverticulum",
+      "Repair a Kommerell diverticulum that is aneurysmal or enlarging because of the risk of dissection and rupture",
+      "Surveil a known diverticulum with periodic CT or MR angiography for growth",
+      "Alert the surgical team to the associated non-recurrent laryngeal nerve during thyroid or neck surgery to avoid nerve injury"
     ]
-   ],
-   "caption": "Overview comparison matrix for aberrant subclavian artery."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aberrant-subclavian-artery-real-image",
-   "title": "aberrant subclavian artery: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "aberrant_subclavian_artery-pathway",
+      "title": "aberrant subclavian artery: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch of a left-sided arch and coursing behind the oesophagus.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive dysphagia or weight loss, prompting exclusion of malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Barium swallow or contrast oesophagogram, CT angiography of the aortic arch, MR angiography"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage asymptomatic incidental cases conservatively with reassurance and no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aberrant subclavian artery."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aberrant_subclavian_artery-matrix",
+      "title": "aberrant subclavian artery: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An aberrant right subclavian artery (arteria lusoria) is the commonest congenital aortic arch anomaly, arising as the last branch",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Barium swallow or contrast oesophagogram, CT angiography of the aortic arch, MR angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Achalasia and other oesophageal motility disorders, Oesophageal stricture or web, Oesophageal or mediastinal neoplasm causing",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage asymptomatic incidental cases conservatively with reassurance and no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing dysphagia to the anomaly without excluding a coexisting oesophageal malignancy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aberrant subclavian artery."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aberrant_subclavian_artery-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium swallow or contrast oesophagogram",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography of the aortic arch",
+          "cells": [
+            {
+              "text": "Aortic arch anatomy and any dilated Kommerell diverticulum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Alternative imaging of the arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Excludes mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal manometry",
+          "cells": [
+            {
+              "text": "Motility disorder when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Associated cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Associations with trisomy 21 and 22q11.2 deletion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aberrant_subclavian_artery-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Double aortic arch or other complete vascular ring",
+          "cells": [
+            {
+              "text": "Complete vascular ring"
+            },
+            {
+              "text": "CT angiography of the aortic arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal or mediastinal neoplasm",
+          "cells": [
+            {
+              "text": "Extrinsic compression of the oesophagus"
+            },
+            {
+              "text": "Endoscopy to exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aberrant_subclavian_artery-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance only",
+          "cells": [
+            {
+              "text": "Asymptomatic incidental cases"
+            },
+            {
+              "text": "No intervention needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Softer textures and careful chewing",
+          "cells": [
+            {
+              "text": "Mild dysphagia lusoria"
+            },
+            {
+              "text": "Tried before considering intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Symptomatic dysphagia or tracheal compression"
+            },
+            {
+              "text": "Division of the aberrant artery, reimplantation or transposition, and repair of any Kommerell diverticulum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of Kommerell diverticulum",
+          "cells": [
+            {
+              "text": "Aneurysmal or enlarging diverticulum"
+            },
+            {
+              "text": "Dissection and rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic CT or MR angiography",
+          "cells": [
+            {
+              "text": "Surveillance of a known diverticulum"
+            },
+            {
+              "text": "Checks for growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alert surgeons to the recurrent laryngeal nerve",
+          "cells": [
+            {
+              "text": "Thyroid or neck surgery"
+            },
+            {
+              "text": "Associated non-recurrent laryngeal nerve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aberrant_subclavian_artery-dx-mgmt",
+      "title": "Diagnosis and management of aberrant subclavian artery",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysphagia lusoria, stridor or dyspnoea from a retro-oesophageal right subclavian",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid dysphagia, weight loss or haematemesis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude malignancy urgently; consider aorto-oesophageal fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast oesophagogram and CT angiography of the aortic arch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Aberrant artery confirmed with endoscopy and manometry clear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure if asymptomatic; softer diet for mild dysphagia lusoria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review malignancy, motility disorders and vascular rings",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refer symptomatic dysphagia or tracheal compression for surgical repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair an aneurysmal or enlarging Kommerell diverticulum",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic CT or MR angiography to watch a known diverticulum",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most stay asymptomatic with a normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,472 @@
 {
- "id": "mccune_albright_syndrome",
- "name": "McCune-Albright syndrome",
- "aliases": [
-  "GNAS",
-  "MAS",
-  "McCune-Albright-Sternberg syndrome",
-  "fibrous dysplasia/McCune-Albright syndrome",
-  "mccune albright",
-  "polyostotic fibrous dysplasia with endocrinopathy"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not inherited and severity depends on the distribution of affected tissues",
-   "Classic triad comprises fibrous dysplasia of bone, cafe-au-lait skin macules and one or more hyperfunctioning endocrinopathies",
-   "Cafe-au-lait patches characteristically have irregular jagged (coast-of-Maine) borders and often respect the midline",
-   "Gonadotropin-independent precocious puberty is a common early presentation, frequently as the first sign in girls",
-   "Other endocrine features include hyperthyroidism, growth hormone excess, Cushing syndrome and phosphaturic renal phosphate wasting",
-   "Fibrous dysplasia can be monostotic or polyostotic, causing bone pain, deformity, fracture and, in the skull base, nerve compression",
-   "The GNAS variant constitutively activates the alpha subunit of the stimulatory G protein, driving cyclic-AMP overproduction and autonomous hormone secretion and cell proliferation"
+  "id": "mccune_albright_syndrome",
+  "name": "McCune-Albright syndrome",
+  "aliases": [
+    "GNAS",
+    "MAS",
+    "McCune-Albright-Sternberg syndrome",
+    "fibrous dysplasia/McCune-Albright syndrome",
+    "mccune albright",
+    "polyostotic fibrous dysplasia with endocrinopathy"
   ],
-  "pathophysiology": "McCune-Albright syndrome results from an activating variant in GNAS occurring after fertilisation, producing a mosaic distribution of affected cells; a germline variant would be lethal, which explains why the condition arises only as somatic mosaicism. The variant renders the alpha subunit of the stimulatory G protein constitutively active, leading to unregulated adenylate cyclase activity and elevated intracellular cyclic AMP. In hormone-responsive endocrine tissues this drives autonomous hormone secretion independent of normal control, while in bone-forming cells it produces the fibrous dysplasia lesions. The pattern and severity of disease reflect which tissues carry the variant and in what proportion.",
-  "additionalDifferentials": [
-   "Neurofibromatosis type 1 with cafe-au-lait macules (smooth coast-of-California borders)",
-   "Central (gonadotropin-dependent) precocious puberty from other causes",
-   "Isolated fibrous dysplasia without endocrine features",
-   "Other causes of hyperthyroidism, Cushing syndrome or acromegaly",
-   "Hereditary hypophosphataemic rickets",
-   "Other mosaic overgrowth or RASopathy syndromes"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism",
-   "Skeletal survey or radionuclide bone scan to map fibrous dysplasia",
-   "Endocrine biochemistry for precocious puberty, thyroid function, growth hormone/IGF-1 and cortisol",
-   "Serum phosphate and markers of renal phosphate wasting (including FGF23-related studies)",
-   "Cross-sectional imaging of skull base for optic or auditory canal involvement",
-   "Bone-specific imaging and biopsy where malignant transformation is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive skull-base fibrous dysplasia threatening the optic nerve or hearing",
-   "Pathological fracture or severe progressive bone deformity",
-   "Rapid onset of precocious puberty or signs of severe endocrine excess",
-   "New pain, swelling or radiographic change suggesting rare malignant transformation of fibrous dysplasia"
-  ],
-  "prognosis": "Prognosis is highly variable and depends on the extent and location of affected tissues, ranging from mild monostotic disease to severe polyostotic bone disease with multiple endocrinopathies. Malignant transformation of fibrous dysplasia is rare, and most morbidity relates to skeletal complications and hormonal excess, which are managed rather than cured.",
-  "pitfalls": [
-   "Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue",
-   "Confusing the coast-of-Maine cafe-au-lait borders with the smoother lesions of neurofibromatosis type 1",
-   "Overlooking phosphate wasting as a treatable contributor to bone disease",
-   "Assuming precocious puberty is centrally driven and giving inappropriate GnRH-analogue therapy"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Fibrous Dysplasia/McCune-Albright Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are ineffective in the peripheral form",
-   "Manage autonomous hyperthyroidism with thionamides, progressing to thyroidectomy, and treat growth hormone excess with somatostatin analogues or pegvisomant",
-   "Bisphosphonates for fibrous dysplasia bone pain, with orthopaedic fixation and deformity correction",
-   "Replace phosphate and give active vitamin D for FGF23-mediated renal phosphate wasting",
-   "Surveillance for skull-base fibrous dysplasia causing optic or auditory canal compression, and rare malignant transformation",
-   "Explain that the postzygotic GNAS mosaicism is sporadic with negligible recurrence and transmission risk, so routine family screening is not required",
-   "Coordinated multidisciplinary follow-up across endocrinology, orthopaedics and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mccune_albright_syndrome-pathway",
-   "title": "McCune-Albright syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not inherited and severity depends on the distribution of affected tissues",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive skull-base fibrous dysplasia threatening the optic nerve or hearing",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism, Skeletal survey or radionuclide bone scan to map fibrous dysplasia, Endocrine biochemistry for precocious puberty, thyroid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are ineffective in the peripheral form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mccune-albright syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mccune_albright_syndrome-matrix",
-   "title": "McCune-Albright syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not inherited and severity depends on the distribution of affected tissues",
+      "Classic triad comprises fibrous dysplasia of bone, cafe-au-lait skin macules and one or more hyperfunctioning endocrinopathies",
+      "Cafe-au-lait patches characteristically have irregular jagged (coast-of-Maine) borders and often respect the midline",
+      "Gonadotropin-independent precocious puberty is a common early presentation, frequently as the first sign in girls",
+      "Other endocrine features include hyperthyroidism, growth hormone excess, Cushing syndrome and phosphaturic renal phosphate wasting",
+      "Fibrous dysplasia can be monostotic or polyostotic, causing bone pain, deformity, fracture and, in the skull base, nerve compression",
+      "The GNAS variant constitutively activates the alpha subunit of the stimulatory G protein, driving cyclic-AMP overproduction and autonomous hormone secretion and cell proliferation"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism, Skeletal survey or radionuclide",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "McCune-Albright syndrome results from an activating variant in GNAS occurring after fertilisation, producing a mosaic distribution of affected cells; a germline variant would be lethal, which explains why the condition arises only as somatic mosaicism. The variant renders the alpha subunit of the stimulatory G protein constitutively active, leading to unregulated adenylate cyclase activity and elevated intracellular cyclic AMP. In hormone-responsive endocrine tissues this drives autonomous hormone secretion independent of normal control, while in bone-forming cells it produces the fibrous dysplasia lesions. The pattern and severity of disease reflect which tissues carry the variant and in what proportion.",
+    "additionalDifferentials": [
+      "Neurofibromatosis type 1 with cafe-au-lait macules (smooth coast-of-California borders)",
+      "Central (gonadotropin-dependent) precocious puberty from other causes",
+      "Isolated fibrous dysplasia without endocrine features",
+      "Other causes of hyperthyroidism, Cushing syndrome or acromegaly",
+      "Hereditary hypophosphataemic rickets",
+      "Other mosaic overgrowth or RASopathy syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Neurofibromatosis type 1 with cafe-au-lait macules (smooth coast-of-California borders), Central (gonadotropin-dependent)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism",
+      "Skeletal survey or radionuclide bone scan to map fibrous dysplasia",
+      "Endocrine biochemistry for precocious puberty, thyroid function, growth hormone/IGF-1 and cortisol",
+      "Serum phosphate and markers of renal phosphate wasting (including FGF23-related studies)",
+      "Cross-sectional imaging of skull base for optic or auditory canal involvement",
+      "Bone-specific imaging and biopsy where malignant transformation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive skull-base fibrous dysplasia threatening the optic nerve or hearing",
+      "Pathological fracture or severe progressive bone deformity",
+      "Rapid onset of precocious puberty or signs of severe endocrine excess",
+      "New pain, swelling or radiographic change suggesting rare malignant transformation of fibrous dysplasia"
     ],
-    [
-     "Clinical Pitfall",
-     "Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is highly variable and depends on the extent and location of affected tissues, ranging from mild monostotic disease to severe polyostotic bone disease with multiple endocrinopathies. Malignant transformation of fibrous dysplasia is rare, and most morbidity relates to skeletal complications and hormonal excess, which are managed rather than cured.",
+    "pitfalls": [
+      "Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue",
+      "Confusing the coast-of-Maine cafe-au-lait borders with the smoother lesions of neurofibromatosis type 1",
+      "Overlooking phosphate wasting as a treatable contributor to bone disease",
+      "Assuming precocious puberty is centrally driven and giving inappropriate GnRH-analogue therapy"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Fibrous Dysplasia/McCune-Albright Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are ineffective in the peripheral form",
+      "Manage autonomous hyperthyroidism with thionamides, progressing to thyroidectomy, and treat growth hormone excess with somatostatin analogues or pegvisomant",
+      "Bisphosphonates for fibrous dysplasia bone pain, with orthopaedic fixation and deformity correction",
+      "Replace phosphate and give active vitamin D for FGF23-mediated renal phosphate wasting",
+      "Surveillance for skull-base fibrous dysplasia causing optic or auditory canal compression, and rare malignant transformation",
+      "Explain that the postzygotic GNAS mosaicism is sporadic with negligible recurrence and transmission risk, so routine family screening is not required",
+      "Coordinated multidisciplinary follow-up across endocrinology, orthopaedics and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for mccune-albright syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mccune-albright-syndrome-real-image",
-   "title": "McCune-Albright syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mccune_albright_syndrome-pathway",
+      "title": "McCune-Albright syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not inherited and severity depends on the distribution of affected tissues",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive skull-base fibrous dysplasia threatening the optic nerve or hearing",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism, Skeletal survey or radionuclide bone scan to map fibrous dysplasia, Endocrine biochemistry for precocious puberty, thyroid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are ineffective in the peripheral form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mccune-albright syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mccune_albright_syndrome-matrix",
+      "title": "McCune-Albright syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by a postzygotic activating (gain-of-function) variant in GNAS, producing somatic mosaicism, so the condition is not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing for the GNAS activating variant, ideally on affected tissue given mosaicism, Skeletal survey or radionuclide",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neurofibromatosis type 1 with cafe-au-lait macules (smooth coast-of-California borders), Central (gonadotropin-dependent)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat gonadotropin-independent precocious puberty with aromatase inhibitors (letrozole) or tamoxifen, as GnRH analogues are",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Testing blood alone and missing a low-level mosaic GNAS variant that is detectable in affected tissue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mccune-albright syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mccune_albright_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing for the GNAS activating variant, ideally on affected tissue",
+          "cells": [
+            {
+              "text": "GNAS activating variant, given mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey or radionuclide bone scan",
+          "cells": [
+            {
+              "text": "Maps fibrous dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine biochemistry",
+          "cells": [
+            {
+              "text": "Precocious puberty, thyroid function, growth hormone or IGF-1, and cortisol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate and markers of renal phosphate wasting",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting, including FGF23-related studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the skull base",
+          "cells": [
+            {
+              "text": "Optic or auditory canal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone imaging and biopsy, where malignant transformation is suspected",
+          "cells": [
+            {
+              "text": "Malignant transformation, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mccune_albright_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurofibromatosis type 1 with cafe-au-lait macules",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules with smooth coast-of-California borders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated fibrous dysplasia",
+          "cells": [
+            {
+              "text": "Without endocrine features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mccune_albright_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aromatase inhibitor or tamoxifen",
+          "cells": [
+            {
+              "text": "Gonadotropin-independent precocious puberty; letrozole named; GnRH analogues ineffective in the peripheral form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thionamides, progressing to thyroidectomy",
+          "cells": [
+            {
+              "text": "Autonomous hyperthyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues or pegvisomant",
+          "cells": [
+            {
+              "text": "Growth hormone excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates and orthopaedic fixation",
+          "cells": [
+            {
+              "text": "Fibrous dysplasia bone pain; deformity correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate and active vitamin D",
+          "cells": [
+            {
+              "text": "FGF23-mediated renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull-base surveillance",
+          "cells": [
+            {
+              "text": "Optic or auditory canal compression, and rare malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Postzygotic GNAS mosaicism is sporadic with negligible recurrence; routine family screening not required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Endocrinology, orthopaedics and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mccune_albright_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of McCune-Albright syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bone lesions with cafe-au-lait skin or precocious puberty; suspected McCune-Albright",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Skull-base lesion threatening vision or hearing, or rapid precocious puberty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of skull-base involvement and endocrine excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GNAS testing on affected tissue, bone survey, endocrine panel, phosphate, skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GNAS activating variant confirmed on affected tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider NF1 with cafe-au-lait macules or isolated fibrous dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Letrozole or tamoxifen for gonadotropin-independent precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thionamides, progressing to thyroidectomy, for autonomous hyperthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bisphosphonates for fibrous dysplasia pain; orthopaedic fixation for deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phosphate and active vitamin D for FGF23-mediated renal phosphate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Skull-base surveillance; sporadic GNAS mosaicism with negligible recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

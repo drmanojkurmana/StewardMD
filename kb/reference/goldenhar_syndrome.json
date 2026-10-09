@@ -1,175 +1,462 @@
 {
- "id": "goldenhar_syndrome",
- "name": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum)",
- "aliases": [
-  "oculo-auriculo-vertebral spectrum",
-  "OAVS",
-  "facio-auriculo-vertebral sequence",
-  "Goldenhar-Gorlin syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Craniofacial",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features are typically lopsided rather than symmetrical",
-   "The classic triad comprises epibulbar dermoids or lipodermoids, ear malformations (microtia, preauricular tags or pits), and vertebral anomalies",
-   "Mandibular hypoplasia is usually more pronounced on the affected side, producing chin deviation and an asymmetric bite",
-   "Hearing loss is common and may be conductive from middle-ear and ossicular maldevelopment or sensorineural, so early audiological assessment is essential",
-   "Most cases are sporadic and unilateral, though bilateral involvement with one side dominant is well recognised",
-   "Associated anomalies extend beyond the face and can involve the heart, kidneys, and central nervous system, so systemic screening is warranted",
-   "Intellect is usually normal, and cognitive concerns often reflect hearing loss or coexisting brain malformation rather than the spectrum itself"
+  "id": "goldenhar_syndrome",
+  "name": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum)",
+  "aliases": [
+    "oculo-auriculo-vertebral spectrum",
+    "OAVS",
+    "facio-auriculo-vertebral sequence",
+    "Goldenhar-Gorlin syndrome"
   ],
-  "pathophysiology": "The spectrum is thought to arise from disrupted development of the first and second branchial (pharyngeal) arches and the tissues they give rise to, together with contributions from cranial neural crest cells. A leading hypothesis implicates vascular disruption or haemorrhage in the developing stapedial artery territory early in gestation, leading to variable local tissue loss and hence the striking asymmetry. Because the affected arches contribute to the mandible, external and middle ear, and adjacent facial structures, defects cluster in these regions, while accompanying disturbance of paraxial mesoderm and neural crest migration explains the vertebral, ocular, cardiac, and renal associations. Most cases are sporadic with multifactorial causation.",
-  "additionalDifferentials": [
-   "Treacher Collins syndrome (typically symmetrical mandibulofacial dysostosis)",
-   "Townes-Brocks syndrome (ear anomalies with thumb and anorectal defects)",
-   "Branchio-oto-renal syndrome",
-   "CHARGE syndrome",
-   "Isolated microtia with hemifacial microsomia (overlapping entity)",
-   "Maternal diabetic embryopathy with facial asymmetry"
-  ],
-  "additionalInvestigations": [
-   "Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss",
-   "Ophthalmological examination to identify epibulbar dermoids, lipodermoids, and eyelid colobomata",
-   "Spinal and cervical imaging to detect vertebral segmentation and fusion anomalies",
-   "Echocardiography to screen for congenital cardiac defects",
-   "Renal ultrasound to exclude urinary tract malformation",
-   "Cranial imaging where central nervous system involvement or developmental concern is suspected"
-  ],
-  "redFlags": [
-   "Neonatal upper airway obstruction from severe mandibular hypoplasia or glossoptosis",
-   "Feeding difficulty and failure to thrive requiring nutritional support",
-   "Undetected hearing loss threatening speech and language development",
-   "Unstable cervical vertebral anomalies posing a risk during anaesthesia or manipulation",
-   "Significant undiagnosed cardiac or renal malformation"
-  ],
-  "prognosis": "Prognosis depends on the severity and extent of anomalies; many children with milder involvement do well with staged reconstruction and hearing rehabilitation and achieve normal cognition, whereas extensive craniofacial, cardiac, or central nervous system involvement carries greater morbidity.",
-  "pitfalls": [
-   "Attributing developmental delay to the syndrome itself rather than to correctable hearing loss",
-   "Overlooking the contralateral, less affected side, which frequently has subtle anomalies",
-   "Failing to screen for cardiac, renal, and vertebral anomalies because attention focuses on the face",
-   "Assuming a genetic recurrence pattern when most cases are sporadic",
-   "Neglecting airway assessment before sedation or surgery in infants with mandibular hypoplasia"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Gorlin's Syndromes of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices for conductive or sensorineural loss",
-   "Plan staged craniofacial and mandibular reconstruction, including mandibular distraction osteogenesis, microtia repair and orthognathic correction of facial asymmetry",
-   "Manage epibulbar dermoids and eyelid colobomata surgically with ocular surface protection under ophthalmology",
-   "Provide feeding, airway and speech support for mandibular hypoplasia, addressing any obstructive airway compromise",
-   "Screen for and manage associated cardiac, renal, vertebral and central nervous system anomalies",
-   "Coordinate a multidisciplinary craniofacial team with speech and language therapy and psychological support, and offer genetic counselling given mostly sporadic occurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "goldenhar_syndrome-pathway",
-   "title": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features are typically lopsided rather than symmetrical",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal upper airway obstruction from severe mandibular hypoplasia or glossoptosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss, Ophthalmological examination to identify epibulbar dermoids, lipodermoids, and eyelid colobomata, Spinal and cervical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices for conductive or sensorineural loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing developmental delay to the syndrome itself rather than to correctable hearing loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of goldenhar syndrome (oculo-auriculo-vertebral spectrum)."
-  }
- ],
- "tables": [
-  {
-   "id": "goldenhar_syndrome-matrix",
-   "title": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Craniofacial",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features are typically lopsided rather than symmetrical",
+      "The classic triad comprises epibulbar dermoids or lipodermoids, ear malformations (microtia, preauricular tags or pits), and vertebral anomalies",
+      "Mandibular hypoplasia is usually more pronounced on the affected side, producing chin deviation and an asymmetric bite",
+      "Hearing loss is common and may be conductive from middle-ear and ossicular maldevelopment or sensorineural, so early audiological assessment is essential",
+      "Most cases are sporadic and unilateral, though bilateral involvement with one side dominant is well recognised",
+      "Associated anomalies extend beyond the face and can involve the heart, kidneys, and central nervous system, so systemic screening is warranted",
+      "Intellect is usually normal, and cognitive concerns often reflect hearing loss or coexisting brain malformation rather than the spectrum itself"
     ],
-    [
-     "Key Investigations",
-     "Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss, Ophthalmological",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The spectrum is thought to arise from disrupted development of the first and second branchial (pharyngeal) arches and the tissues they give rise to, together with contributions from cranial neural crest cells. A leading hypothesis implicates vascular disruption or haemorrhage in the developing stapedial artery territory early in gestation, leading to variable local tissue loss and hence the striking asymmetry. Because the affected arches contribute to the mandible, external and middle ear, and adjacent facial structures, defects cluster in these regions, while accompanying disturbance of paraxial mesoderm and neural crest migration explains the vertebral, ocular, cardiac, and renal associations. Most cases are sporadic with multifactorial causation.",
+    "additionalDifferentials": [
+      "Treacher Collins syndrome (typically symmetrical mandibulofacial dysostosis)",
+      "Townes-Brocks syndrome (ear anomalies with thumb and anorectal defects)",
+      "Branchio-oto-renal syndrome",
+      "CHARGE syndrome",
+      "Isolated microtia with hemifacial microsomia (overlapping entity)",
+      "Maternal diabetic embryopathy with facial asymmetry"
     ],
-    [
-     "Primary Differentials",
-     "Treacher Collins syndrome (typically symmetrical mandibulofacial dysostosis), Townes-Brocks syndrome (ear anomalies with thumb",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss",
+      "Ophthalmological examination to identify epibulbar dermoids, lipodermoids, and eyelid colobomata",
+      "Spinal and cervical imaging to detect vertebral segmentation and fusion anomalies",
+      "Echocardiography to screen for congenital cardiac defects",
+      "Renal ultrasound to exclude urinary tract malformation",
+      "Cranial imaging where central nervous system involvement or developmental concern is suspected"
     ],
-    [
-     "Management Strategy",
-     "Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal upper airway obstruction from severe mandibular hypoplasia or glossoptosis",
+      "Feeding difficulty and failure to thrive requiring nutritional support",
+      "Undetected hearing loss threatening speech and language development",
+      "Unstable cervical vertebral anomalies posing a risk during anaesthesia or manipulation",
+      "Significant undiagnosed cardiac or renal malformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing developmental delay to the syndrome itself rather than to correctable hearing loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the severity and extent of anomalies; many children with milder involvement do well with staged reconstruction and hearing rehabilitation and achieve normal cognition, whereas extensive craniofacial, cardiac, or central nervous system involvement carries greater morbidity.",
+    "pitfalls": [
+      "Attributing developmental delay to the syndrome itself rather than to correctable hearing loss",
+      "Overlooking the contralateral, less affected side, which frequently has subtle anomalies",
+      "Failing to screen for cardiac, renal, and vertebral anomalies because attention focuses on the face",
+      "Assuming a genetic recurrence pattern when most cases are sporadic",
+      "Neglecting airway assessment before sedation or surgery in infants with mandibular hypoplasia"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Gorlin's Syndromes of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices for conductive or sensorineural loss",
+      "Plan staged craniofacial and mandibular reconstruction, including mandibular distraction osteogenesis, microtia repair and orthognathic correction of facial asymmetry",
+      "Manage epibulbar dermoids and eyelid colobomata surgically with ocular surface protection under ophthalmology",
+      "Provide feeding, airway and speech support for mandibular hypoplasia, addressing any obstructive airway compromise",
+      "Screen for and manage associated cardiac, renal, vertebral and central nervous system anomalies",
+      "Coordinate a multidisciplinary craniofacial team with speech and language therapy and psychological support, and offer genetic counselling given mostly sporadic occurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for goldenhar syndrome (oculo-auriculo-vertebral spectrum)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "goldenhar-syndrome-real-image",
-   "title": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "goldenhar_syndrome-pathway",
+      "title": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features are typically lopsided rather than symmetrical",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal upper airway obstruction from severe mandibular hypoplasia or glossoptosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss, Ophthalmological examination to identify epibulbar dermoids, lipodermoids, and eyelid colobomata, Spinal and cervical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices for conductive or sensorineural loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing developmental delay to the syndrome itself rather than to correctable hearing loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of goldenhar syndrome (oculo-auriculo-vertebral spectrum)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "goldenhar_syndrome-matrix",
+      "title": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by asymmetric underdevelopment of structures derived from the first and second branchial arches, so facial features",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Audiological assessment including brainstem-evoked responses to characterise and quantify hearing loss, Ophthalmological",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Treacher Collins syndrome (typically symmetrical mandibulofacial dysostosis), Townes-Brocks syndrome (ear anomalies with thumb",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake early audiological assessment and hearing rehabilitation with hearing aids or bone-conduction and implantable devices",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing developmental delay to the syndrome itself rather than to correctable hearing loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for goldenhar syndrome (oculo-auriculo-vertebral spectrum)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "goldenhar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiological assessment with brainstem-evoked responses",
+          "cells": [
+            {
+              "text": "Characterises and quantifies hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Epibulbar dermoids, lipodermoids and eyelid colobomata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and cervical imaging",
+          "cells": [
+            {
+              "text": "Vertebral segmentation and fusion anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital cardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Urinary tract malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Where central nervous system involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "goldenhar_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Treacher Collins syndrome",
+          "cells": [
+            {
+              "text": "Typically symmetrical mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Townes-Brocks syndrome",
+          "cells": [
+            {
+              "text": "Ear anomalies with thumb and anorectal defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Overlapping ear and facial anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "goldenhar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids, bone-conduction or implantable devices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged craniofacial reconstruction",
+          "cells": [
+            {
+              "text": "Mandibular distraction osteogenesis, microtia repair and orbital procedures as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular management",
+          "cells": [
+            {
+              "text": "Surgery for epibulbar dermoids and eyelid colobomata with ocular surface protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding, airway and speech support",
+          "cells": [
+            {
+              "text": "For mandibular hypoplasia, with treatment of any airway obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Screening and management of cardiac, renal, vertebral and central nervous system anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Craniofacial team with speech and language therapy and psychological support; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "goldenhar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Goldenhar syndrome (oculo-auriculo-vertebral spectrum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Goldenhar syndrome: facial asymmetry with microtia and epibulbar dermoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal airway obstruction, feeding failure, unstable cervical spine)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for neonatal obstruction from mandibular hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiology with ABR, eye review, spinal imaging, echocardiography and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do audiology and spinal imaging show the characteristic pattern of anomalies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Treacher Collins, Townes-Brocks, CHARGE or branchio-oto-renal syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early hearing rehabilitation with aids or implantable devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staged craniofacial and mandibular reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for epibulbar dermoids and eyelid colobomata",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screening and management of cardiac, renal, vertebral and CNS anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on severity; milder cases often do well with staged reconstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

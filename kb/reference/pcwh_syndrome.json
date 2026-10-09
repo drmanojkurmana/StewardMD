@@ -1,175 +1,418 @@
 {
- "id": "pcwh_syndrome",
- "name": "PCWH syndrome (SOX10)",
- "aliases": [
-  "PCWH",
-  "peripheral demyelinating neuropathy-central dysmyelination-Waardenburg-Hirschsprung",
-  "SOX10-related PCWH",
-  "Waardenburg syndrome type 4 with neurological involvement"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development; the acronym denotes Peripheral demyelinating neuropathy, Central dysmyelination, Waardenburg syndrome and Hirschsprung disease",
-   "It sits at the severe end of the SOX10-related Waardenburg-Shah (type 4) spectrum, uniting features that would otherwise be considered separate disorders",
-   "Waardenburg features include sensorineural hearing loss and pigmentary anomalies such as a white forelock, heterochromia iridis and patchy skin or hair depigmentation",
-   "Hirschsprung disease (aganglionic megacolon) causes neonatal intestinal obstruction and chronic constipation and reflects failure of enteric neural crest migration",
-   "The neurological picture combines a central hypomyelinating or dysmyelinating leukodystrophy with a peripheral demyelinating neuropathy, producing motor delay, spasticity, ataxia and neuropathic weakness",
-   "Diagnosis is clinical pattern recognition of this striking combination, supported by MRI showing central dysmyelination and by nerve conduction studies, and confirmed by SOX10 testing",
-   "Management is supportive and multidisciplinary, including surgical treatment of Hirschsprung disease, hearing rehabilitation, and physiotherapy and developmental support"
+  "id": "pcwh_syndrome",
+  "name": "PCWH syndrome (SOX10)",
+  "aliases": [
+    "PCWH",
+    "peripheral demyelinating neuropathy-central dysmyelination-Waardenburg-Hirschsprung",
+    "SOX10-related PCWH",
+    "Waardenburg syndrome type 4 with neurological involvement"
   ],
-  "pathophysiology": "PCWH is caused by heterozygous variants in SOX10, a transcription factor that governs the development, migration and differentiation of neural crest cells and their derivatives, including melanocytes, enteric ganglia, and both Schwann cells and oligodendrocytes. Disruption of SOX10 function impairs multiple neural crest lineages simultaneously: defective melanocyte and inner-ear development produces the Waardenburg pigmentary and auditory features, failed enteric ganglion formation causes Hirschsprung disease, and impaired Schwann cell and oligodendrocyte function produces combined peripheral demyelinating neuropathy and central dysmyelination. Certain variants that escape nonsense-mediated decay are thought to exert dominant-negative effects, contributing to the severe combined phenotype.",
-  "additionalDifferentials": [
-   "Waardenburg syndrome types 1 to 4 without the full neurological involvement",
-   "Isolated Hirschsprung disease (RET and other genes)",
-   "Charcot-Marie-Tooth and other hereditary demyelinating neuropathies",
-   "Congenital hypomyelinating and dysmyelinating leukodystrophies",
-   "Other neurocristopathies with pigmentary and enteric features",
-   "Congenital sensorineural hearing loss of other genetic causes"
-  ],
-  "additionalInvestigations": [
-   "SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis",
-   "Brain MRI to demonstrate central dysmyelination or hypomyelination",
-   "Nerve conduction studies to characterise the peripheral demyelinating neuropathy",
-   "Audiological assessment for sensorineural hearing loss",
-   "Contrast enema and rectal biopsy where Hirschsprung disease is suspected",
-   "Ophthalmology and dermatology review for pigmentary features"
-  ],
-  "redFlags": [
-   "Neonatal intestinal obstruction or enterocolitis from Hirschsprung disease requiring urgent surgical management",
-   "Respiratory compromise from combined central and peripheral neuromuscular involvement",
-   "Feeding difficulty and aspiration risk",
-   "Progressive weakness or loss of motor milestones"
-  ],
-  "prognosis": "PCWH is a severe, multisystem disorder and prognosis depends on the combined burden of neurological, enteric and sensory involvement; the central and peripheral myelin disease contributes to significant motor and developmental disability. Early surgical management of Hirschsprung disease and coordinated supportive care influence outcome, but the overall course is serious.",
-  "pitfalls": [
-   "Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder",
-   "Overlooking the peripheral neuropathy when central dysmyelination is evident, or vice versa",
-   "Missing Hirschsprung disease as a cause of neonatal obstruction or refractory constipation",
-   "Attributing hearing loss and pigmentary changes to isolated Waardenburg syndrome without pursuing the broader phenotype",
-   "Failing to provide genetic counselling, including for de novo dominant variants"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal obstruction and enterocolitis",
-   "Rehabilitate the sensorineural hearing loss with hearing aids or cochlear implantation and early auditory-verbal support",
-   "Treat the spasticity of the combined central dysmyelination and peripheral neuropathy with physiotherapy, antispasticity agents such as baclofen, and orthoses",
-   "Support motor development and neuropathic weakness through coordinated physiotherapy, occupational therapy and mobility aids",
-   "Provide nutritional support and manage bowel dysfunction and feeding difficulties",
-   "Offer ophthalmology and dermatology review for the pigmentary anomalies and monitor for related complications",
-   "Arrange genetic counselling, noting most SOX10 variants arise de novo, and coordinate care through a multidisciplinary neurogenetic team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pcwh_syndrome-pathway",
-   "title": "PCWH syndrome (SOX10): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development; the acronym denotes Peripheral demyelinating neuropathy, Central dysmyelination, Waardenburg syndrome and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal intestinal obstruction or enterocolitis from Hirschsprung disease requiring urgent surgical management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis, Brain MRI to demonstrate central dysmyelination or hypomyelination, Nerve conduction studies to characterise the peripheral demyelinating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal obstruction and enterocolitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pcwh syndrome (sox10)."
-  }
- ],
- "tables": [
-  {
-   "id": "pcwh_syndrome-matrix",
-   "title": "PCWH syndrome (SOX10): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development;",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development; the acronym denotes Peripheral demyelinating neuropathy, Central dysmyelination, Waardenburg syndrome and Hirschsprung disease",
+      "It sits at the severe end of the SOX10-related Waardenburg-Shah (type 4) spectrum, uniting features that would otherwise be considered separate disorders",
+      "Waardenburg features include sensorineural hearing loss and pigmentary anomalies such as a white forelock, heterochromia iridis and patchy skin or hair depigmentation",
+      "Hirschsprung disease (aganglionic megacolon) causes neonatal intestinal obstruction and chronic constipation and reflects failure of enteric neural crest migration",
+      "The neurological picture combines a central hypomyelinating or dysmyelinating leukodystrophy with a peripheral demyelinating neuropathy, producing motor delay, spasticity, ataxia and neuropathic weakness",
+      "Diagnosis is clinical pattern recognition of this striking combination, supported by MRI showing central dysmyelination and by nerve conduction studies, and confirmed by SOX10 testing",
+      "Management is supportive and multidisciplinary, including surgical treatment of Hirschsprung disease, hearing rehabilitation, and physiotherapy and developmental support"
     ],
-    [
-     "Key Investigations",
-     "SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis, Brain MRI to demonstrate central dysmyelination or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PCWH is caused by heterozygous variants in SOX10, a transcription factor that governs the development, migration and differentiation of neural crest cells and their derivatives, including melanocytes, enteric ganglia, and both Schwann cells and oligodendrocytes. Disruption of SOX10 function impairs multiple neural crest lineages simultaneously: defective melanocyte and inner-ear development produces the Waardenburg pigmentary and auditory features, failed enteric ganglion formation causes Hirschsprung disease, and impaired Schwann cell and oligodendrocyte function produces combined peripheral demyelinating neuropathy and central dysmyelination. Certain variants that escape nonsense-mediated decay are thought to exert dominant-negative effects, contributing to the severe combined phenotype.",
+    "additionalDifferentials": [
+      "Waardenburg syndrome types 1 to 4 without the full neurological involvement",
+      "Isolated Hirschsprung disease (RET and other genes)",
+      "Charcot-Marie-Tooth and other hereditary demyelinating neuropathies",
+      "Congenital hypomyelinating and dysmyelinating leukodystrophies",
+      "Other neurocristopathies with pigmentary and enteric features",
+      "Congenital sensorineural hearing loss of other genetic causes"
     ],
-    [
-     "Primary Differentials",
-     "Waardenburg syndrome types 1 to 4 without the full neurological involvement, Isolated Hirschsprung disease (RET and other genes),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis",
+      "Brain MRI to demonstrate central dysmyelination or hypomyelination",
+      "Nerve conduction studies to characterise the peripheral demyelinating neuropathy",
+      "Audiological assessment for sensorineural hearing loss",
+      "Contrast enema and rectal biopsy where Hirschsprung disease is suspected",
+      "Ophthalmology and dermatology review for pigmentary features"
     ],
-    [
-     "Management Strategy",
-     "Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal intestinal obstruction or enterocolitis from Hirschsprung disease requiring urgent surgical management",
+      "Respiratory compromise from combined central and peripheral neuromuscular involvement",
+      "Feeding difficulty and aspiration risk",
+      "Progressive weakness or loss of motor milestones"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "PCWH is a severe, multisystem disorder and prognosis depends on the combined burden of neurological, enteric and sensory involvement; the central and peripheral myelin disease contributes to significant motor and developmental disability. Early surgical management of Hirschsprung disease and coordinated supportive care influence outcome, but the overall course is serious.",
+    "pitfalls": [
+      "Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder",
+      "Overlooking the peripheral neuropathy when central dysmyelination is evident, or vice versa",
+      "Missing Hirschsprung disease as a cause of neonatal obstruction or refractory constipation",
+      "Attributing hearing loss and pigmentary changes to isolated Waardenburg syndrome without pursuing the broader phenotype",
+      "Failing to provide genetic counselling, including for de novo dominant variants"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal obstruction and enterocolitis",
+      "Rehabilitate the sensorineural hearing loss with hearing aids or cochlear implantation and early auditory-verbal support",
+      "Treat the spasticity of the combined central dysmyelination and peripheral neuropathy with physiotherapy, antispasticity agents such as baclofen, and orthoses",
+      "Support motor development and neuropathic weakness through coordinated physiotherapy, occupational therapy and mobility aids",
+      "Provide nutritional support and manage bowel dysfunction and feeding difficulties",
+      "Offer ophthalmology and dermatology review for the pigmentary anomalies and monitor for related complications",
+      "Arrange genetic counselling, noting most SOX10 variants arise de novo, and coordinate care through a multidisciplinary neurogenetic team"
     ]
-   ],
-   "caption": "Overview comparison matrix for pcwh syndrome (sox10)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pcwh-syndrome-real-image",
-   "title": "PCWH syndrome (SOX10): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "pcwh_syndrome-pathway",
+      "title": "PCWH syndrome (SOX10): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development; the acronym denotes Peripheral demyelinating neuropathy, Central dysmyelination, Waardenburg syndrome and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal intestinal obstruction or enterocolitis from Hirschsprung disease requiring urgent surgical management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis, Brain MRI to demonstrate central dysmyelination or hypomyelination, Nerve conduction studies to characterise the peripheral demyelinating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal obstruction and enterocolitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pcwh syndrome (sox10)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pcwh_syndrome-matrix",
+      "title": "PCWH syndrome (SOX10): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe neurocristopathy caused by variants in SOX10, a transcription factor essential for neural crest and glial development;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SOX10 sequencing and deletion/duplication analysis to confirm the diagnosis, Brain MRI to demonstrate central dysmyelination or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Waardenburg syndrome types 1 to 4 without the full neurological involvement, Isolated Hirschsprung disease (RET and other genes),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage Hirschsprung disease surgically with resection of the aganglionic segment and a pull-through procedure, and treat neonatal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the Waardenburg, Hirschsprung and neurological features as unrelated rather than recognising a single SOX10 disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pcwh syndrome (sox10)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pcwh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SOX10 sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Central dysmyelination or hypomyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral demyelinating neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pcwh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Waardenburg syndrome types 1 to 4",
+          "cells": [
+            {
+              "text": "Pigmentary and hearing features without full neurological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated Hirschsprung disease",
+          "cells": [
+            {
+              "text": "RET and other genes; no central or peripheral myelin disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pcwh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hirschsprung surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Resection of the aganglionic segment with pull-through; treat obstruction or enterocolitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Hearing aids or cochlear implantation with early auditory-verbal support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular and respiratory support",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For combined central and peripheral involvement and feeding risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pcwh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of PCWH syndrome (SOX10)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal bowel obstruction, deafness and neuromuscular weakness with Waardenburg features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intestinal obstruction, respiratory compromise or feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric surgery for Hirschsprung obstruction or enterocolitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SOX10 sequencing and deletion analysis, brain MRI, nerve conduction, audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a SOX10 variant found with central and peripheral myelin disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Waardenburg without neurology, isolated Hirschsprung or CMT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection and pull-through for Hirschsprung disease, with obstruction care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation with early auditory-verbal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory and feeding support for combined neuromuscular involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor motor milestones and progression of demyelination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe multisystem disorder; outcome tracks neurological, enteric and sensory burden",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

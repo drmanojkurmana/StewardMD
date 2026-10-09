@@ -1,175 +1,379 @@
 {
- "id": "xeroderma_pigmentosum",
- "name": "Xeroderma pigmentosum",
- "aliases": [
-  "XP",
-  "nucleotide excision repair defect",
-  "XPA",
-  "XPC",
-  "POLH"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups XPA-XPG) or in POLH (XP variant)",
-   "Defective repair of ultraviolet-induced DNA damage causes extreme photosensitivity and a very high risk of skin cancers at a young age",
-   "Early signs include severe sunburn from minimal exposure and, later, freckling and poikilodermatous change on sun-exposed skin in early childhood",
-   "Cutaneous squamous and basal cell carcinomas and melanoma arise decades earlier than in the general population",
-   "Ocular involvement is prominent: photophobia, conjunctivitis, keratitis, and periocular tumours",
-   "Some complementation groups develop progressive neurological degeneration (the neurological form)",
-   "Rigorous, lifelong photoprotection and surveillance are the cornerstone of management"
+  "id": "xeroderma_pigmentosum",
+  "name": "Xeroderma pigmentosum",
+  "aliases": [
+    "XP",
+    "nucleotide excision repair defect",
+    "XPA",
+    "XPC",
+    "POLH"
   ],
-  "pathophysiology": "Xeroderma pigmentosum is caused by inherited defects in the nucleotide excision repair pathway, which normally recognises and removes bulky DNA lesions such as the cyclobutane pyrimidine dimers produced by ultraviolet radiation; the XP variant form instead reflects loss of DNA polymerase eta, needed for accurate translesion synthesis. Because damaged DNA cannot be repaired efficiently, ultraviolet-induced mutations accumulate in keratinocytes, melanocytes, and ocular surface cells. This drives premature photoageing, pigmentary change, and early malignant transformation. In certain genotypes, accumulated unrepaired damage in neurons produces progressive neurodegeneration independent of sun exposure.",
-  "additionalDifferentials": [
-   "Polymorphic light eruption and other photodermatoses",
-   "Cockayne syndrome and trichothiodystrophy (related repair disorders)",
-   "Erythropoietic protoporphyria",
-   "Rothmund-Thomson syndrome and Bloom syndrome (photosensitive genodermatoses)",
-   "Carney complex or familial multiple naevi in early skin cancer presentations"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of XP complementation group genes and POLH",
-   "Cellular assays of DNA repair capacity (unscheduled DNA synthesis) where available",
-   "Skin biopsy of suspicious lesions for early tumour detection",
-   "Regular full-skin and ophthalmological surveillance examinations",
-   "Neurological assessment (including audiometry) in genotypes prone to degeneration",
-   "Ultraviolet exposure and minimal erythema history to gauge photosensitivity"
-  ],
-  "redFlags": [
-   "New, changing, or non-healing skin lesion requiring urgent biopsy for malignancy",
-   "Ocular surface deterioration, corneal scarring, or periocular tumour",
-   "Progressive neurological decline (hearing loss, ataxia, cognitive regression)",
-   "Evidence of inadequate photoprotection with escalating actinic damage"
-  ],
-  "prognosis": "Life expectancy is reduced, largely from early and recurrent skin and ocular malignancies and, in neurological subtypes, from progressive neurodegeneration; with meticulous photoprotection and close cancer surveillance, tumour burden and its consequences can be substantially reduced.",
-  "pitfalls": [
-   "Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis",
-   "Under-recognising the lifelong intensity of photoprotection required, including indoor ultraviolet sources",
-   "Neglecting ophthalmic and neurological surveillance in favour of skin monitoring alone",
-   "Delaying biopsy of new lesions given the accelerated pace of malignant change"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering eyewear and window films, broad-spectrum sunscreen and indoor UV shielding",
-   "Undertake frequent full-skin and ophthalmological surveillance to detect and excise cutaneous squamous and basal cell carcinomas, melanoma and ocular surface tumours early",
-   "Treat established skin malignancies with surgical excision, and consider oral retinoids as chemoprophylaxis in patients with a heavy tumour burden",
-   "Manage ocular surface disease with lubricants and protection against photokeratitis, referring for corneal or lid surgery when required",
-   "Supplement vitamin D, since strict sun avoidance predisposes to deficiency",
-   "Monitor genotypes prone to neurodegeneration with neurological review and audiometry, providing supportive and rehabilitative care",
-   "Offer genetic counselling and testing for the autosomal recessive nucleotide-excision-repair (XPA-XPG) or POLH variants, with carrier testing and reproductive options",
-   "Coordinate multidisciplinary care across dermatology, ophthalmology, clinical genetics, neurology and oncology, and avoid tobacco smoke and other DNA-damaging exposures"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "xeroderma_pigmentosum-pathway",
-   "title": "Xeroderma pigmentosum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups XPA-XPG) or in POLH (XP variant)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New, changing, or non-healing skin lesion requiring urgent biopsy for malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of XP complementation group genes and POLH, Cellular assays of DNA repair capacity (unscheduled DNA synthesis) where available, Skin biopsy of suspicious lesions for early tumour detection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering eyewear and window films, broad-spectrum sunscreen and indoor UV shielding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of xeroderma pigmentosum."
-  }
- ],
- "tables": [
-  {
-   "id": "xeroderma_pigmentosum-matrix",
-   "title": "Xeroderma pigmentosum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups XPA-XPG) or in POLH (XP variant)",
+      "Defective repair of ultraviolet-induced DNA damage causes extreme photosensitivity and a very high risk of skin cancers at a young age",
+      "Early signs include severe sunburn from minimal exposure and, later, freckling and poikilodermatous change on sun-exposed skin in early childhood",
+      "Cutaneous squamous and basal cell carcinomas and melanoma arise decades earlier than in the general population",
+      "Ocular involvement is prominent: photophobia, conjunctivitis, keratitis, and periocular tumours",
+      "Some complementation groups develop progressive neurological degeneration (the neurological form)",
+      "Rigorous, lifelong photoprotection and surveillance are the cornerstone of management"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of XP complementation group genes and POLH, Cellular assays of DNA repair capacity (unscheduled DNA",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Xeroderma pigmentosum is caused by inherited defects in the nucleotide excision repair pathway, which normally recognises and removes bulky DNA lesions such as the cyclobutane pyrimidine dimers produced by ultraviolet radiation; the XP variant form instead reflects loss of DNA polymerase eta, needed for accurate translesion synthesis. Because damaged DNA cannot be repaired efficiently, ultraviolet-induced mutations accumulate in keratinocytes, melanocytes, and ocular surface cells. This drives premature photoageing, pigmentary change, and early malignant transformation. In certain genotypes, accumulated unrepaired damage in neurons produces progressive neurodegeneration independent of sun exposure.",
+    "additionalDifferentials": [
+      "Polymorphic light eruption and other photodermatoses",
+      "Cockayne syndrome and trichothiodystrophy (related repair disorders)",
+      "Erythropoietic protoporphyria",
+      "Rothmund-Thomson syndrome and Bloom syndrome (photosensitive genodermatoses)",
+      "Carney complex or familial multiple naevi in early skin cancer presentations"
     ],
-    [
-     "Primary Differentials",
-     "Polymorphic light eruption and other photodermatoses, Cockayne syndrome and trichothiodystrophy (related repair disorders),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of XP complementation group genes and POLH",
+      "Cellular assays of DNA repair capacity (unscheduled DNA synthesis) where available",
+      "Skin biopsy of suspicious lesions for early tumour detection",
+      "Regular full-skin and ophthalmological surveillance examinations",
+      "Neurological assessment (including audiometry) in genotypes prone to degeneration",
+      "Ultraviolet exposure and minimal erythema history to gauge photosensitivity"
     ],
-    [
-     "Management Strategy",
-     "Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering",
-     "Core treatment modality"
+    "redFlags": [
+      "New, changing, or non-healing skin lesion requiring urgent biopsy for malignancy",
+      "Ocular surface deterioration, corneal scarring, or periocular tumour",
+      "Progressive neurological decline (hearing loss, ataxia, cognitive regression)",
+      "Evidence of inadequate photoprotection with escalating actinic damage"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is reduced, largely from early and recurrent skin and ocular malignancies and, in neurological subtypes, from progressive neurodegeneration; with meticulous photoprotection and close cancer surveillance, tumour burden and its consequences can be substantially reduced.",
+    "pitfalls": [
+      "Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis",
+      "Under-recognising the lifelong intensity of photoprotection required, including indoor ultraviolet sources",
+      "Neglecting ophthalmic and neurological surveillance in favour of skin monitoring alone",
+      "Delaying biopsy of new lesions given the accelerated pace of malignant change"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering eyewear and window films, broad-spectrum sunscreen and indoor UV shielding",
+      "Undertake frequent full-skin and ophthalmological surveillance to detect and excise cutaneous squamous and basal cell carcinomas, melanoma and ocular surface tumours early",
+      "Treat established skin malignancies with surgical excision, and consider oral retinoids as chemoprophylaxis in patients with a heavy tumour burden",
+      "Manage ocular surface disease with lubricants and protection against photokeratitis, referring for corneal or lid surgery when required",
+      "Supplement vitamin D, since strict sun avoidance predisposes to deficiency",
+      "Monitor genotypes prone to neurodegeneration with neurological review and audiometry, providing supportive and rehabilitative care",
+      "Offer genetic counselling and testing for the autosomal recessive nucleotide-excision-repair (XPA-XPG) or POLH variants, with carrier testing and reproductive options",
+      "Coordinate multidisciplinary care across dermatology, ophthalmology, clinical genetics, neurology and oncology, and avoid tobacco smoke and other DNA-damaging exposures"
     ]
-   ],
-   "caption": "Overview comparison matrix for xeroderma pigmentosum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "xeroderma-pigmentosum-real-image",
-   "title": "Xeroderma pigmentosum: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "xeroderma_pigmentosum-pathway",
+      "title": "Xeroderma pigmentosum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups XPA-XPG) or in POLH (XP variant)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New, changing, or non-healing skin lesion requiring urgent biopsy for malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of XP complementation group genes and POLH, Cellular assays of DNA repair capacity (unscheduled DNA synthesis) where available, Skin biopsy of suspicious lesions for early tumour detection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering eyewear and window films, broad-spectrum sunscreen and indoor UV shielding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of xeroderma pigmentosum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "xeroderma_pigmentosum-matrix",
+      "title": "Xeroderma pigmentosum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of DNA repair, caused by variants in nucleotide excision repair genes (complementation groups",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of XP complementation group genes and POLH, Cellular assays of DNA repair capacity (unscheduled DNA",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polymorphic light eruption and other photodermatoses, Cockayne syndrome and trichothiodystrophy (related repair disorders),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute rigorous lifelong ultraviolet protection as the cornerstone of care: sun avoidance, protective clothing, UV-filtering",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing childhood 'freckling' and severe sunburns to ordinary sun sensitivity and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for xeroderma pigmentosum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "xeroderma_pigmentosum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of XP complementation group genes and POLH",
+          "cells": [
+            {
+              "text": "Confirms the repair defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellular assays of DNA repair capacity",
+          "cells": [
+            {
+              "text": "Reduced repair after ultraviolet exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "xeroderma_pigmentosum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymorphic light eruption and other photodermatoses",
+          "cells": [
+            {
+              "text": "Sun sensitivity without a repair defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cockayne syndrome and trichothiodystrophy",
+          "cells": [
+            {
+              "text": "Related DNA repair disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "xeroderma_pigmentosum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong ultraviolet protection",
+          "cells": [
+            {
+              "text": "Sun avoidance, protective clothing and sunscreen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent biopsy of new or changing lesions",
+          "cells": [
+            {
+              "text": "Skin malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surveillance",
+          "cells": [
+            {
+              "text": "Ocular surface deterioration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "xeroderma_pigmentosum-dx-mgmt",
+      "title": "Diagnosis and management of Xeroderma pigmentosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected xeroderma pigmentosum: severe sunburn and freckling in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new, changing or non-healing lesion or ocular deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy for suspected skin malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repair gene testing, DNA repair assays, skin and eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm a repair gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polymorphic light eruption or Cockayne syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong ultraviolet protection as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent biopsy of any new or changing skin lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmic surveillance for ocular surface disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "High skin malignancy risk; strict photoprotection reduces it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

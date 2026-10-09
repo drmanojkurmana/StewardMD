@@ -1,175 +1,462 @@
 {
- "id": "freeman_sheldon_syndrome",
- "name": "Freeman-Sheldon syndrome",
- "aliases": [
-  "distal arthrogryposis type 2A",
-  "DA2A",
-  "whistling face syndrome",
-  "craniocarpotarsal dystrophy",
-  "MYH3"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered mouth (microstomia) and an H-shaped or Y-shaped dimple on the chin",
-   "Facial features include a mask-like appearance, deep-set eyes, a long philtrum, blepharophimosis and a prominent nasolabial fold",
-   "Hand deformity comprises ulnar deviation of the fingers and camptodactyly, with talipes equinovarus in the feet",
-   "Most commonly caused by autosomal dominant variants in the embryonic myosin heavy chain gene MYH3",
-   "Microstomia and micrognathia predispose to feeding difficulty, failure to thrive and a potentially difficult airway",
-   "There is an important association with malignant-hyperthermia-like anaesthetic reactions and difficult intubation, so anaesthetic planning is critical",
-   "Management is multidisciplinary: physiotherapy and splinting, staged orthopaedic and oral/maxillofacial surgery, and careful perioperative airway care"
+  "id": "freeman_sheldon_syndrome",
+  "name": "Freeman-Sheldon syndrome",
+  "aliases": [
+    "distal arthrogryposis type 2A",
+    "DA2A",
+    "whistling face syndrome",
+    "craniocarpotarsal dystrophy",
+    "MYH3"
   ],
-  "pathophysiology": "Freeman-Sheldon syndrome is most often due to dominant variants in MYH3, which encodes embryonic myosin heavy chain expressed in developing skeletal muscle. Disturbed myosin function alters foetal muscle contractility and tone during a key phase of morphogenesis. The resulting reduced and unbalanced foetal movement leads to periarticular fibrosis and fixed contractures, while abnormal tension in the muscles of facial expression and mastication produces the distinctive microstomia, whistling-face appearance and chin dimple. As with other distal arthrogryposes the deformities are largely static rather than progressive.",
-  "additionalDifferentials": [
-   "Sheldon-Hall syndrome (DA2B), a milder overlapping phenotype",
-   "Other distal arthrogryposis subtypes",
-   "Marden-Walker syndrome",
-   "Schwartz-Jampel syndrome",
-   "Congenital myotonic dystrophy",
-   "Moebius sequence when facial immobility predominates"
-  ],
-  "additionalInvestigations": [
-   "Dysmorphology assessment with documentation of facial and limb features",
-   "Molecular genetic testing for MYH3 and a distal arthrogryposis gene panel",
-   "Airway and anaesthetic evaluation before any procedure, given intubation and malignant-hyperthermia risk",
-   "Feeding and growth assessment with speech and language input",
-   "Radiographs of hands, feet and spine to plan orthopaedic management",
-   "Ophthalmology review for blepharophimosis and strabismus"
-  ],
-  "redFlags": [
-   "Neonatal feeding failure and failure to thrive from microstomia and micrognathia",
-   "Anticipated difficult airway and risk of a malignant-hyperthermia-type reaction during anaesthesia",
-   "Respiratory compromise or obstructive symptoms",
-   "Progressive scoliosis during growth"
-  ],
-  "prognosis": "Intellect is usually normal and lifespan is not typically shortened, but affected individuals face repeated surgery for facial and limb deformity, feeding and speech challenges, and meaningful anaesthetic risk; functional outcomes vary with severity of contractures.",
-  "pitfalls": [
-   "Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk",
-   "Confusing the condition with milder Sheldon-Hall syndrome and underestimating surgical needs",
-   "Underestimating feeding and growth problems caused by the small mouth",
-   "Neglecting genetic counselling given autosomal dominant inheritance with new mutations common"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Gorlin's Syndromes of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar deviation and camptodactyly",
-   "Surgical and orthodontic management of microstomia and micrognathia, with feeding and speech-language therapy for feeding difficulty and failure to thrive",
-   "Anaesthetic planning treating patients as at risk of a malignant-hyperthermia-like reaction and difficult intubation, using trigger-free anaesthesia and difficult-airway preparation",
-   "Nutritional support and growth monitoring in infancy",
-   "Ophthalmology review and management of blepharophimosis and strabismus",
-   "Multidisciplinary follow-up across orthopaedics, plastic surgery, anaesthesia, physiotherapy and clinical genetics",
-   "Genetic counselling for the autosomal dominant MYH3-related disorder, noting that de novo variants are common"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "freeman_sheldon_syndrome-pathway",
-   "title": "Freeman-Sheldon syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered mouth (microstomia) and an H-shaped or Y-shaped dimple on the chin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal feeding failure and failure to thrive from microstomia and micrognathia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dysmorphology assessment with documentation of facial and limb features, Molecular genetic testing for MYH3 and a distal arthrogryposis gene panel, Airway and anaesthetic evaluation before any procedure, given intubation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar deviation and camptodactyly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of freeman-sheldon syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "freeman_sheldon_syndrome-matrix",
-   "title": "Freeman-Sheldon syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered mouth (microstomia) and an H-shaped or Y-shaped dimple on the chin",
+      "Facial features include a mask-like appearance, deep-set eyes, a long philtrum, blepharophimosis and a prominent nasolabial fold",
+      "Hand deformity comprises ulnar deviation of the fingers and camptodactyly, with talipes equinovarus in the feet",
+      "Most commonly caused by autosomal dominant variants in the embryonic myosin heavy chain gene MYH3",
+      "Microstomia and micrognathia predispose to feeding difficulty, failure to thrive and a potentially difficult airway",
+      "There is an important association with malignant-hyperthermia-like anaesthetic reactions and difficult intubation, so anaesthetic planning is critical",
+      "Management is multidisciplinary: physiotherapy and splinting, staged orthopaedic and oral/maxillofacial surgery, and careful perioperative airway care"
     ],
-    [
-     "Key Investigations",
-     "Dysmorphology assessment with documentation of facial and limb features, Molecular genetic testing for MYH3 and a distal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Freeman-Sheldon syndrome is most often due to dominant variants in MYH3, which encodes embryonic myosin heavy chain expressed in developing skeletal muscle. Disturbed myosin function alters foetal muscle contractility and tone during a key phase of morphogenesis. The resulting reduced and unbalanced foetal movement leads to periarticular fibrosis and fixed contractures, while abnormal tension in the muscles of facial expression and mastication produces the distinctive microstomia, whistling-face appearance and chin dimple. As with other distal arthrogryposes the deformities are largely static rather than progressive.",
+    "additionalDifferentials": [
+      "Sheldon-Hall syndrome (DA2B), a milder overlapping phenotype",
+      "Other distal arthrogryposis subtypes",
+      "Marden-Walker syndrome",
+      "Schwartz-Jampel syndrome",
+      "Congenital myotonic dystrophy",
+      "Moebius sequence when facial immobility predominates"
     ],
-    [
-     "Primary Differentials",
-     "Sheldon-Hall syndrome (DA2B), a milder overlapping phenotype, Other distal arthrogryposis subtypes, Marden-Walker syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dysmorphology assessment with documentation of facial and limb features",
+      "Molecular genetic testing for MYH3 and a distal arthrogryposis gene panel",
+      "Airway and anaesthetic evaluation before any procedure, given intubation and malignant-hyperthermia risk",
+      "Feeding and growth assessment with speech and language input",
+      "Radiographs of hands, feet and spine to plan orthopaedic management",
+      "Ophthalmology review for blepharophimosis and strabismus"
     ],
-    [
-     "Management Strategy",
-     "Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal feeding failure and failure to thrive from microstomia and micrognathia",
+      "Anticipated difficult airway and risk of a malignant-hyperthermia-type reaction during anaesthesia",
+      "Respiratory compromise or obstructive symptoms",
+      "Progressive scoliosis during growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intellect is usually normal and lifespan is not typically shortened, but affected individuals face repeated surgery for facial and limb deformity, feeding and speech challenges, and meaningful anaesthetic risk; functional outcomes vary with severity of contractures.",
+    "pitfalls": [
+      "Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk",
+      "Confusing the condition with milder Sheldon-Hall syndrome and underestimating surgical needs",
+      "Underestimating feeding and growth problems caused by the small mouth",
+      "Neglecting genetic counselling given autosomal dominant inheritance with new mutations common"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Gorlin's Syndromes of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar deviation and camptodactyly",
+      "Surgical and orthodontic management of microstomia and micrognathia, with feeding and speech-language therapy for feeding difficulty and failure to thrive",
+      "Anaesthetic planning treating patients as at risk of a malignant-hyperthermia-like reaction and difficult intubation, using trigger-free anaesthesia and difficult-airway preparation",
+      "Nutritional support and growth monitoring in infancy",
+      "Ophthalmology review and management of blepharophimosis and strabismus",
+      "Multidisciplinary follow-up across orthopaedics, plastic surgery, anaesthesia, physiotherapy and clinical genetics",
+      "Genetic counselling for the autosomal dominant MYH3-related disorder, noting that de novo variants are common"
     ]
-   ],
-   "caption": "Overview comparison matrix for freeman-sheldon syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "freeman-sheldon-syndrome-real-image",
-   "title": "Freeman-Sheldon syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "freeman_sheldon_syndrome-pathway",
+      "title": "Freeman-Sheldon syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered mouth (microstomia) and an H-shaped or Y-shaped dimple on the chin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal feeding failure and failure to thrive from microstomia and micrognathia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dysmorphology assessment with documentation of facial and limb features, Molecular genetic testing for MYH3 and a distal arthrogryposis gene panel, Airway and anaesthetic evaluation before any procedure, given intubation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar deviation and camptodactyly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of freeman-sheldon syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "freeman_sheldon_syndrome-matrix",
+      "title": "Freeman-Sheldon syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most severe of the sarcomeric distal arthrogryposes, distinguished by a characteristic 'whistling face' with a small puckered",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dysmorphology assessment with documentation of facial and limb features, Molecular genetic testing for MYH3 and a distal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sheldon-Hall syndrome (DA2B), a milder overlapping phenotype, Other distal arthrogryposis subtypes, Marden-Walker syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Physiotherapy, stretching, splinting and serial casting for contractures, with orthopaedic surgery for talipes equinovarus, ulnar",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to anaesthesia without recognising the difficult airway and malignant-hyperthermia risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for freeman-sheldon syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "freeman_sheldon_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysmorphology assessment",
+          "cells": [
+            {
+              "text": "Documents facial and limb features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for MYH3 and distal arthrogryposis panel",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and anaesthetic evaluation",
+          "cells": [
+            {
+              "text": "Before any procedure, given intubation and malignant-hyperthermia risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth assessment",
+          "cells": [
+            {
+              "text": "With speech and language input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand, foot and spine radiographs",
+          "cells": [
+            {
+              "text": "Plans orthopaedic management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Blepharophimosis and strabismus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "freeman_sheldon_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sheldon-Hall syndrome (DA2B)",
+          "cells": [
+            {
+              "text": "Milder overlapping phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moebius sequence",
+          "cells": [
+            {
+              "text": "Facial immobility predominates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "freeman_sheldon_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy, stretching, splinting and serial casting",
+          "cells": [
+            {
+              "text": "For contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "For talipes equinovarus, ulnar deviation and other contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical and orthodontic management",
+          "cells": [
+            {
+              "text": "Microstomia and micrognathia, with feeding and speech-language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthetic planning",
+          "cells": [
+            {
+              "text": "Treat as at risk of difficult intubation and malignant-hyperthermia-like reaction; trigger-free anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support and growth monitoring",
+          "cells": [
+            {
+              "text": "In infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Blepharophimosis and strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant MYH3 disorder; de novo variants are common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "freeman_sheldon_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Freeman-Sheldon syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Freeman-Sheldon syndrome: microstomia with distal contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (feeding failure, difficult airway, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Plan anaesthesia for a difficult airway and malignant-hyperthermia risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dysmorphology review, MYH3 testing, airway assessment and hand radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MYH3 or distal arthrogryposis panel testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sheldon-Hall, Marden-Walker, Moebius or myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, splinting and serial casting for contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical and orthodontic management of microstomia and micrognathia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trigger-free anaesthetic planning for difficult airway and malignant hyperthermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for the MYH3-related disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intellect usually normal; repeated surgery for facial and limb deformity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

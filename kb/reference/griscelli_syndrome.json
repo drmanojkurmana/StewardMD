@@ -1,176 +1,472 @@
 {
- "id": "griscelli_syndrome",
- "name": "Griscelli syndrome",
- "aliases": [
-  "GS",
-  "MYO5A",
-  "RAB27A",
-  "MLPH",
-  "partial albinism with immunodeficiency"
- ],
- "class": "non_infective",
- "system": "Genetics / Immunology",
- "specialty": "Clinical Genetics / Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the hair, eyelashes and eyebrows",
-   "Three types reflect the causative gene: type 1 (MYO5A) with primary neurological disease, type 2 (RAB27A) with immunodeficiency, and type 3 (MLPH) with isolated pigmentary change",
-   "Light microscopy of the hair shaft shows large, irregular clumps of pigment, distinguishing it from Chediak-Higashi syndrome",
-   "Type 2 is complicated by uncontrolled T-lymphocyte and macrophage activation causing haemophagocytic lymphohistiocytosis",
-   "Type 1 features severe developmental delay, hypotonia and neurological impairment without immune dysfunction",
-   "Unlike Chediak-Higashi syndrome, leucocytes do not contain giant granules",
-   "The accelerated phase of type 2 is life-threatening and requires prompt immunochemotherapy",
-   "Haematopoietic stem cell transplantation is curative for the immunological disease of type 2"
+  "id": "griscelli_syndrome",
+  "name": "Griscelli syndrome",
+  "aliases": [
+    "GS",
+    "MYO5A",
+    "RAB27A",
+    "MLPH",
+    "partial albinism with immunodeficiency"
   ],
-  "pathophysiology": "Griscelli syndrome is caused by biallelic variants in genes governing the docking and transfer of melanosomes and cytotoxic granules. MYO5A (type 1) encodes a motor protein required in melanocytes and neurons; RAB27A (type 2) is essential for both melanosome transfer and the exocytosis of cytotoxic granules by lymphocytes and natural killer cells; MLPH (type 3) links the two in melanocytes only. Consequently, all types share defective pigment distribution, while RAB27A loss additionally impairs cytotoxic granule release, predisposing to haemophagocytic lymphohistiocytosis.",
-  "additionalDifferentials": [
-   "Chediak-Higashi syndrome",
-   "Hermansky-Pudlak syndrome",
-   "Elejalde (neuroectodermal melanolysosomal) disease",
-   "Familial haemophagocytic lymphohistiocytosis",
-   "Other forms of oculocutaneous albinism",
-   "Primary neurological disorders with hypopigmentation"
-  ],
-  "additionalInvestigations": [
-   "Light microscopy of the hair shaft for large pigment clumps",
-   "Molecular genetic testing of MYO5A, RAB27A and MLPH",
-   "Natural killer and cytotoxic lymphocyte degranulation assays",
-   "Full blood count, ferritin, triglycerides and fibrinogen to detect haemophagocytosis",
-   "Neuroimaging in suspected type 1 disease",
-   "Bone marrow examination when haemophagocytic lymphohistiocytosis is suspected"
-  ],
-  "redFlags": [
-   "Fever with cytopenias, organomegaly and hyperferritinaemia indicating the accelerated (haemophagocytic) phase in type 2",
-   "Rapidly progressive neurological deterioration in type 1",
-   "Overwhelming infection during immune activation",
-   "Signs of central nervous system infiltration during the accelerated phase"
-  ],
-  "prognosis": "Type 2 is fatal without treatment of the accelerated phase and definitive haematopoietic stem cell transplantation, which can be curative for the immune disease. Type 1 carries a poor neurological prognosis, whereas type 3 has a benign course limited to pigmentary change.",
-  "pitfalls": [
-   "Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules",
-   "Failing to distinguish the neurological (type 1) from the immunological (type 2) form, which changes management",
-   "Delaying treatment of the accelerated phase in type 2",
-   "Overlooking the diagnostic hair microscopy findings"
-  ],
-  "references": [
-   "GeneReviews (NCBI): Griscelli syndrome",
-   "OMIM: Griscelli syndrome types 1-3"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using corticosteroids, etoposide and ciclosporin with intrathecal therapy where there is central nervous system involvement",
-   "Proceed to allogeneic haematopoietic stem cell transplantation, the only curative treatment for the immunodeficiency of type 2",
-   "Provide supportive care with infection prophylaxis, transfusion support and prompt treatment of intercurrent infection",
-   "For type 1, deliver supportive neurodisability care with physiotherapy, antiseizure medication and feeding and developmental support, as there is no immune involvement",
-   "Recognise that type 3 is limited to pigmentary change and requires only reassurance",
-   "Monitor type 2 for reactivation of haemophagocytic lymphohistiocytosis and for neurological involvement",
-   "Offer genetic counselling for autosomal recessive inheritance and targeted family testing of MYO5A, RAB27A or MLPH"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "griscelli_syndrome-pathway",
-   "title": "Griscelli syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the hair, eyelashes and eyebrows",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever with cytopenias, organomegaly and hyperferritinaemia indicating the accelerated (haemophagocytic) phase in type 2",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Light microscopy of the hair shaft for large pigment clumps, Molecular genetic testing of MYO5A, RAB27A and MLPH, Natural killer and cytotoxic lymphocyte degranulation assays"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using corticosteroids, etoposide and ciclosporin with intrathecal therapy where there is central"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of griscelli syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "griscelli_syndrome-matrix",
-   "title": "Griscelli syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Immunology",
+  "specialty": "Clinical Genetics / Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the hair, eyelashes and eyebrows",
+      "Three types reflect the causative gene: type 1 (MYO5A) with primary neurological disease, type 2 (RAB27A) with immunodeficiency, and type 3 (MLPH) with isolated pigmentary change",
+      "Light microscopy of the hair shaft shows large, irregular clumps of pigment, distinguishing it from Chediak-Higashi syndrome",
+      "Type 2 is complicated by uncontrolled T-lymphocyte and macrophage activation causing haemophagocytic lymphohistiocytosis",
+      "Type 1 features severe developmental delay, hypotonia and neurological impairment without immune dysfunction",
+      "Unlike Chediak-Higashi syndrome, leucocytes do not contain giant granules",
+      "The accelerated phase of type 2 is life-threatening and requires prompt immunochemotherapy",
+      "Haematopoietic stem cell transplantation is curative for the immunological disease of type 2"
     ],
-    [
-     "Key Investigations",
-     "Light microscopy of the hair shaft for large pigment clumps, Molecular genetic testing of MYO5A, RAB27A and MLPH, Natural killer",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Griscelli syndrome is caused by biallelic variants in genes governing the docking and transfer of melanosomes and cytotoxic granules. MYO5A (type 1) encodes a motor protein required in melanocytes and neurons; RAB27A (type 2) is essential for both melanosome transfer and the exocytosis of cytotoxic granules by lymphocytes and natural killer cells; MLPH (type 3) links the two in melanocytes only. Consequently, all types share defective pigment distribution, while RAB27A loss additionally impairs cytotoxic granule release, predisposing to haemophagocytic lymphohistiocytosis.",
+    "additionalDifferentials": [
+      "Chediak-Higashi syndrome",
+      "Hermansky-Pudlak syndrome",
+      "Elejalde (neuroectodermal melanolysosomal) disease",
+      "Familial haemophagocytic lymphohistiocytosis",
+      "Other forms of oculocutaneous albinism",
+      "Primary neurological disorders with hypopigmentation"
     ],
-    [
-     "Primary Differentials",
-     "Chediak-Higashi syndrome, Hermansky-Pudlak syndrome, Elejalde (neuroectodermal melanolysosomal) disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Light microscopy of the hair shaft for large pigment clumps",
+      "Molecular genetic testing of MYO5A, RAB27A and MLPH",
+      "Natural killer and cytotoxic lymphocyte degranulation assays",
+      "Full blood count, ferritin, triglycerides and fibrinogen to detect haemophagocytosis",
+      "Neuroimaging in suspected type 1 disease",
+      "Bone marrow examination when haemophagocytic lymphohistiocytosis is suspected"
     ],
-    [
-     "Management Strategy",
-     "In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever with cytopenias, organomegaly and hyperferritinaemia indicating the accelerated (haemophagocytic) phase in type 2",
+      "Rapidly progressive neurological deterioration in type 1",
+      "Overwhelming infection during immune activation",
+      "Signs of central nervous system infiltration during the accelerated phase"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 2 is fatal without treatment of the accelerated phase and definitive haematopoietic stem cell transplantation, which can be curative for the immune disease. Type 1 carries a poor neurological prognosis, whereas type 3 has a benign course limited to pigmentary change.",
+    "pitfalls": [
+      "Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules",
+      "Failing to distinguish the neurological (type 1) from the immunological (type 2) form, which changes management",
+      "Delaying treatment of the accelerated phase in type 2",
+      "Overlooking the diagnostic hair microscopy findings"
+    ],
+    "references": [
+      "GeneReviews (NCBI): Griscelli syndrome",
+      "OMIM: Griscelli syndrome types 1-3"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using corticosteroids, etoposide and ciclosporin with intrathecal therapy where there is central nervous system involvement",
+      "Proceed to allogeneic haematopoietic stem cell transplantation, the only curative treatment for the immunodeficiency of type 2",
+      "Provide supportive care with infection prophylaxis, transfusion support and prompt treatment of intercurrent infection",
+      "For type 1, deliver supportive neurodisability care with physiotherapy, antiseizure medication and feeding and developmental support, as there is no immune involvement",
+      "Recognise that type 3 is limited to pigmentary change and requires only reassurance",
+      "Monitor type 2 for reactivation of haemophagocytic lymphohistiocytosis and for neurological involvement",
+      "Offer genetic counselling for autosomal recessive inheritance and targeted family testing of MYO5A, RAB27A or MLPH"
     ]
-   ],
-   "caption": "Overview comparison matrix for griscelli syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "griscelli-syndrome-real-image",
-   "title": "Griscelli syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "griscelli_syndrome-pathway",
+      "title": "Griscelli syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the hair, eyelashes and eyebrows",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever with cytopenias, organomegaly and hyperferritinaemia indicating the accelerated (haemophagocytic) phase in type 2",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Light microscopy of the hair shaft for large pigment clumps, Molecular genetic testing of MYO5A, RAB27A and MLPH, Natural killer and cytotoxic lymphocyte degranulation assays"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using corticosteroids, etoposide and ciclosporin with intrathecal therapy where there is central"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of griscelli syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "griscelli_syndrome-matrix",
+      "title": "Griscelli syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of melanosome transport producing partial albinism with a characteristic silvery-grey sheen to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Light microscopy of the hair shaft for large pigment clumps, Molecular genetic testing of MYO5A, RAB27A and MLPH, Natural killer",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chediak-Higashi syndrome, Hermansky-Pudlak syndrome, Elejalde (neuroectodermal melanolysosomal) disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In type 2, treat the haemophagocytic lymphohistiocytosis accelerated phase with immunochemotherapy per an HLH protocol, using",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Chediak-Higashi syndrome despite the absence of giant leucocyte granules",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for griscelli syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "griscelli_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of the hair shaft",
+          "cells": [
+            {
+              "text": "Large pigment clumps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYO5A, RAB27A and MLPH genetic testing",
+          "cells": [
+            {
+              "text": "Molecular subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK cell and cytotoxic lymphocyte degranulation assays",
+          "cells": [
+            {
+              "text": "Cytotoxic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, ferritin, triglycerides and fibrinogen",
+          "cells": [
+            {
+              "text": "Haemophagocytosis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging in suspected type 1",
+          "cells": [
+            {
+              "text": "Neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Where HLH is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "griscelli_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chediak-Higashi syndrome",
+          "cells": [
+            {
+              "text": "Giant granules are absent in Griscelli syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hermansky-Pudlak syndrome",
+          "cells": [
+            {
+              "text": "Oculocutaneous albinism with bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Immune activation without pigmentary change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "griscelli_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HLH accelerated phase in type 2",
+          "cells": [
+            {
+              "text": "Immunochemotherapy under an HLH protocol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Only curative treatment for the immunodeficiency of type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Infection prophylaxis, transfusion and prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 neurodisability care",
+          "cells": [
+            {
+              "text": "Physiotherapy, antiseizure medication, feeding and developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 3 management",
+          "cells": [
+            {
+              "text": "Pigmentary change only; reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Type 2 reactivation of HLH and neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing of MYO5A, RAB27A or MLPH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "griscelli_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Griscelli syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Griscelli syndrome: silvery hair with pigment clumps and immune features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever with cytopenias, neurological decline, overwhelming infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent HLH protocol treatment for fever with cytopenias and hyperferritinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair microscopy, gene panel, degranulation assays, ferritin and marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do gene testing and degranulation assays confirm the subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Chediak-Higashi, Hermansky-Pudlak or familial HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HLH protocol immunochemotherapy for the accelerated phase in type 2",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation for type 2 immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Infection prophylaxis, transfusion and prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurodisability care for type 1 with physiotherapy and antiseizure medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 2 is fatal untreated; transplantation can cure the immunodeficiency",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

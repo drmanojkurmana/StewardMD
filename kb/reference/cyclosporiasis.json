@@ -1,172 +1,560 @@
 {
- "id": "cyclosporiasis",
- "name": "Cyclosporiasis (Cyclospora cayetanensis)",
- "aliases": [
-  "Cyclospora infection",
-  "Cyclospora cayetanensis",
-  "cyclosporosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically linked to imported berries, salad leaves and herbs",
-   "Freshly passed oocysts are not immediately infectious because they require days to sporulate in the environment, so person-to-person spread is negligible",
-   "Presents with prolonged, relapsing watery diarrhoea, profound fatigue, anorexia and weight loss, often with a cyclical or remitting-relapsing pattern",
-   "Frequently a cause of prolonged traveller's diarrhoea returning from endemic tropical regions",
-   "Oocysts are larger than Cryptosporidium and stain variably with modified acid-fast methods, appearing as pink to unstained spheres, and autofluoresce blue-green under ultraviolet light",
-   "Cotrimoxazole is the treatment of choice and shortens the otherwise protracted illness",
-   "Molecular PCR assays, increasingly part of multiplex gastrointestinal panels, offer sensitive detection when microscopy is negative"
+  "id": "cyclosporiasis",
+  "name": "Cyclosporiasis (Cyclospora cayetanensis)",
+  "aliases": [
+    "Cyclospora infection",
+    "Cyclospora cayetanensis",
+    "cyclosporosis"
   ],
-  "pathophysiology": "Cyclospora cayetanensis is a coccidian parasite that infects the epithelium of the small intestine. Ingested sporulated oocysts release sporozoites that invade enterocytes, where asexual and sexual cycles generate oocysts excreted unsporulated in the faeces; environmental maturation over days renders them infectious, explaining the food- and water-borne pattern. Mucosal invasion causes villous atrophy, crypt hyperplasia and inflammation with malabsorption and a secretory diarrhoea. Illness is typically self-limiting in immunocompetent people but can be prolonged and relapsing, and is more severe and persistent when cell-mediated immunity is impaired.",
-  "additionalDifferentials": [
-   "Cryptosporidiosis",
-   "Cystoisosporiasis",
-   "Giardiasis",
-   "Microsporidiosis",
-   "Traveller's diarrhoea from bacterial pathogens",
-   "Post-infective irritable bowel syndrome"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy with modified acid-fast staining for variably staining oocysts",
-   "Ultraviolet autofluorescence microscopy of faecal smears",
-   "Molecular PCR or multiplex gastrointestinal panel testing",
-   "Repeated stool sampling given intermittent oocyst excretion",
-   "Full blood count and assessment of hydration and nutritional status",
-   "HIV testing when the illness is prolonged or severe"
-  ],
-  "redFlags": [
-   "Dehydration and electrolyte disturbance from prolonged diarrhoea",
-   "Marked weight loss and malabsorption from protracted infection",
-   "Severe or unremitting disease suggesting underlying immunosuppression",
-   "Cluster of cases pointing to a contaminated food source requiring public health action"
-  ],
-  "prognosis": "Self-limiting over weeks in most immunocompetent people but often protracted and relapsing without treatment; antimicrobial therapy produces rapid improvement, while immunocompromised hosts may need extended or suppressive courses.",
-  "pitfalls": [
-   "Failing to request specific stool staining, so oocysts are overlooked on routine microscopy",
-   "Attributing persistent traveller's diarrhoea to a purely functional cause without parasitological testing",
-   "Assuming person-to-person transmission and missing the food or water source",
-   "Under-treating immunocompromised patients who require longer courses"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness",
-   "Use ciprofloxacin as the alternative for patients with sulphonamide intolerance",
-   "Provide supportive rehydration, electrolyte correction and attention to nutrition during prolonged diarrhoea and weight loss",
-   "In immunocompromised hosts give extended or suppressive courses and optimise antiretroviral therapy where HIV coexists, as relapse is common",
-   "Advise food and water hygiene including thorough washing of imported fresh produce to prevent reinfection",
-   "Notify public health and support source tracing given the food- and water-borne outbreak pattern"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cyclosporiasis-pathway",
-   "title": "Cyclosporiasis (Cyclospora cayetanensis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically linked to imported berries, salad leaves and herbs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dehydration and electrolyte disturbance from prolonged diarrhoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy with modified acid-fast staining for variably staining oocysts, Ultraviolet autofluorescence microscopy of faecal smears, Molecular PCR or multiplex gastrointestinal panel testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to request specific stool staining, so oocysts are overlooked on routine microscopy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cyclosporiasis (cyclospora cayetanensis)."
-  }
- ],
- "tables": [
-  {
-   "id": "cyclosporiasis-matrix",
-   "title": "Cyclosporiasis (Cyclospora cayetanensis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically linked to imported berries, salad leaves and herbs",
+      "Freshly passed oocysts are not immediately infectious because they require days to sporulate in the environment, so person-to-person spread is negligible",
+      "Presents with prolonged, relapsing watery diarrhoea, profound fatigue, anorexia and weight loss, often with a cyclical or remitting-relapsing pattern",
+      "Frequently a cause of prolonged traveller's diarrhoea returning from endemic tropical regions",
+      "Oocysts are larger than Cryptosporidium and stain variably with modified acid-fast methods, appearing as pink to unstained spheres, and autofluoresce blue-green under ultraviolet light",
+      "Cotrimoxazole is the treatment of choice and shortens the otherwise protracted illness",
+      "Molecular PCR assays, increasingly part of multiplex gastrointestinal panels, offer sensitive detection when microscopy is negative"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy with modified acid-fast staining for variably staining oocysts, Ultraviolet autofluorescence microscopy of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cyclospora cayetanensis is a coccidian parasite that infects the epithelium of the small intestine. Ingested sporulated oocysts release sporozoites that invade enterocytes, where asexual and sexual cycles generate oocysts excreted unsporulated in the faeces; environmental maturation over days renders them infectious, explaining the food- and water-borne pattern. Mucosal invasion causes villous atrophy, crypt hyperplasia and inflammation with malabsorption and a secretory diarrhoea. Illness is typically self-limiting in immunocompetent people but can be prolonged and relapsing, and is more severe and persistent when cell-mediated immunity is impaired.",
+    "additionalDifferentials": [
+      "Cryptosporidiosis",
+      "Cystoisosporiasis",
+      "Giardiasis",
+      "Microsporidiosis",
+      "Traveller's diarrhoea from bacterial pathogens",
+      "Post-infective irritable bowel syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Cryptosporidiosis, Cystoisosporiasis, Giardiasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy with modified acid-fast staining for variably staining oocysts",
+      "Ultraviolet autofluorescence microscopy of faecal smears",
+      "Molecular PCR or multiplex gastrointestinal panel testing",
+      "Repeated stool sampling given intermittent oocyst excretion",
+      "Full blood count and assessment of hydration and nutritional status",
+      "HIV testing when the illness is prolonged or severe"
     ],
-    [
-     "Management Strategy",
-     "Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness",
-     "Core treatment modality"
+    "redFlags": [
+      "Dehydration and electrolyte disturbance from prolonged diarrhoea",
+      "Marked weight loss and malabsorption from protracted infection",
+      "Severe or unremitting disease suggesting underlying immunosuppression",
+      "Cluster of cases pointing to a contaminated food source requiring public health action"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to request specific stool staining, so oocysts are overlooked on routine microscopy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Self-limiting over weeks in most immunocompetent people but often protracted and relapsing without treatment; antimicrobial therapy produces rapid improvement, while immunocompromised hosts may need extended or suppressive courses.",
+    "pitfalls": [
+      "Failing to request specific stool staining, so oocysts are overlooked on routine microscopy",
+      "Attributing persistent traveller's diarrhoea to a purely functional cause without parasitological testing",
+      "Assuming person-to-person transmission and missing the food or water source",
+      "Under-treating immunocompromised patients who require longer courses"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness",
+      "Use ciprofloxacin as the alternative for patients with sulphonamide intolerance",
+      "Provide supportive rehydration, electrolyte correction and attention to nutrition during prolonged diarrhoea and weight loss",
+      "In immunocompromised hosts give extended or suppressive courses and optimise antiretroviral therapy where HIV coexists, as relapse is common",
+      "Advise food and water hygiene including thorough washing of imported fresh produce to prevent reinfection",
+      "Notify public health and support source tracing given the food- and water-borne outbreak pattern"
     ]
-   ],
-   "caption": "Overview comparison matrix for cyclosporiasis (cyclospora cayetanensis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cyclosporiasis-real-image",
-   "title": "Cyclosporiasis (Cyclospora cayetanensis): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "cyclosporiasis-pathway",
+      "title": "Cyclosporiasis (Cyclospora cayetanensis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically linked to imported berries, salad leaves and herbs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dehydration and electrolyte disturbance from prolonged diarrhoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy with modified acid-fast staining for variably staining oocysts, Ultraviolet autofluorescence microscopy of faecal smears, Molecular PCR or multiplex gastrointestinal panel testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to request specific stool staining, so oocysts are overlooked on routine microscopy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cyclosporiasis (cyclospora cayetanensis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cyclosporiasis-matrix",
+      "title": "Cyclosporiasis (Cyclospora cayetanensis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Coccidian protozoan transmitted by ingesting sporulated oocysts on faecally contaminated fresh produce or water, classically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy with modified acid-fast staining for variably staining oocysts, Ultraviolet autofluorescence microscopy of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cryptosporidiosis, Cystoisosporiasis, Giardiasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with cotrimoxazole as the antimicrobial of choice, which shortens the otherwise protracted, relapsing illness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to request specific stool staining, so oocysts are overlooked on routine microscopy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cyclosporiasis (cyclospora cayetanensis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 215-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cyclosporiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with modified acid-fast staining",
+          "cells": [
+            {
+              "text": "Variably staining oocysts seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UV autofluorescence microscopy",
+          "cells": [
+            {
+              "text": "Oocysts seen on faecal smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular PCR or multiplex GI panel",
+          "cells": [
+            {
+              "text": "Cyclospora detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool sampling",
+          "cells": [
+            {
+              "text": "Intermittent oocyst excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Prolonged or severe illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclosporiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryptosporidiosis",
+          "cells": [
+            {
+              "text": "Named protozoal look-alike; staining separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoisosporiasis",
+          "cells": [
+            {
+              "text": "Named protozoal look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis",
+          "cells": [
+            {
+              "text": "Named protozoal look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclosporiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cotrimoxazole",
+          "cells": [
+            {
+              "text": "Antimicrobial of choice; shortens protracted, relapsing illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Alternative for sulphonamide intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and nutrition",
+          "cells": [
+            {
+              "text": "Electrolyte correction during prolonged diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunocompromised hosts",
+          "cells": [
+            {
+              "text": "Extended or suppressive courses; optimise antiretroviral therapy in HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Food and water hygiene",
+          "cells": [
+            {
+              "text": "Thorough washing of imported fresh produce"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notification and source tracing for outbreaks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclosporiasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnosis of intestinal protozoal infections",
+      "rowHeader": "Parasite",
+      "columns": [
+        "Stool O+P",
+        "Fecal acid-fast stain",
+        "Stool antigen immunoassays",
+        "Other"
+      ],
+      "rows": [
+        {
+          "parameter": "Giardia",
+          "cells": [
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryptosporidium",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isospora",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyclospora",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "+"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microsporidia",
+          "cells": [
+            {
+              "text": "-"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Special fecal stains, tissue biopsies"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on stool O+P (ova and parasites) is not shown. A blank source cell is shown here as Not listed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cyclosporiasis-dx-mgmt",
+      "title": "Diagnosis and management of Cyclosporiasis (Cyclospora cayetanensis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cyclosporiasis: prolonged watery diarrhoea after travel or produce exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (dehydration, marked weight loss, immunosuppression, cluster of cases)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration; public health notification for a cluster",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Modified acid-fast or UV microscopy; PCR or GI panel; repeated stool samples",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Cyclospora oocysts identified by stain, UV or PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cryptosporidiosis, cystoisosporiasis or giardiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cotrimoxazole as the antimicrobial of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ciprofloxacin for sulphonamide intolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rehydration, electrolyte correction and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extended courses in immunocompromise; food and water hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting over weeks in most, but often protracted and relapsing without treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

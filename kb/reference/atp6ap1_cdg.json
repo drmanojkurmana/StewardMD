@@ -1,174 +1,480 @@
 {
- "id": "atp6ap1_cdg",
- "name": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type)",
- "aliases": [
-  "ATP6AP1-CDG",
-  "ATP6AP1",
-  "V-ATPase accessory protein 1 deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Glycosylation",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Congenital disorders of glycosylation references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function variants in ATP6AP1, an accessory subunit of the vacuolar-type H+-ATPase (V-ATPase).",
-   "The combination of immunodeficiency, hepatopathy and cutis laxa, often with cognitive impairment, is characteristic and should prompt consideration of a Golgi-homeostasis CDG.",
-   "Humoral immunodeficiency with hypogammaglobulinaemia and recurrent bacterial infections means some boys present first to immunology rather than to metabolic services.",
-   "Liver involvement spans raised transaminases and cholestasis through to progressive fibrosis and cirrhosis, with a tendency to decompensate during intercurrent illness.",
-   "Serum copper and caeruloplasmin may be low, reflecting disturbed Golgi metal handling, and can mimic a primary copper-metabolism disorder.",
-   "Serum transferrin isoelectric focusing typically shows a type II (glycan-processing) pattern, distinguishing it from the commoner type I disorders.",
-   "Connective-tissue laxity and cutis laxa link it to the wider V-ATPase and Golgi-homeostasis group of glycosylation defects."
+  "id": "atp6ap1_cdg",
+  "name": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type)",
+  "aliases": [
+    "ATP6AP1-CDG",
+    "ATP6AP1",
+    "V-ATPase accessory protein 1 deficiency"
   ],
-  "pathophysiology": "The ATP6AP1 gene on Xq28 encodes an accessory subunit (Ac45) of the multi-subunit vacuolar H+-ATPase, the proton pump that acidifies the lumen of the Golgi apparatus, endosomes and lysosomes. Loss-of-function variants impair assembly and activity of the V-ATPase, so Golgi luminal pH is no longer correctly maintained; because the terminal, pH-sensitive glycosyltransferases and the trafficking of metal ions such as manganese and copper depend on proper Golgi acidification, protein N- and O-glycosylation is disturbed in a type II processing pattern. The resulting hypoglycosylation of secreted and membrane glycoproteins, including immunoglobulins and hepatic proteins, underlies the humoral immunodeficiency, the hepatopathy, the abnormal copper and caeruloplasmin handling and the connective-tissue (cutis laxa) features.",
-  "additionalDifferentials": [
-   "ATP6AP2-CDG (related V-ATPase accessory-protein defect with hepatopathy and immune features)",
-   "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA)",
-   "ATP6V1A-CDG and ATP6V1E1-CDG (V-ATPase core-subunit cutis laxa disorders)",
-   "CCDC115-CDG and TMEM199-CDG (Golgi-homeostasis CDGs with hepatopathy and low caeruloplasmin)",
-   "Wilson disease and Menkes disease (copper-metabolism mimics)",
-   "Common variable immunodeficiency and other primary humoral immunodeficiencies"
-  ],
-  "additionalInvestigations": [
-   "Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern)",
-   "Quantitative immunoglobulins and lymphocyte subset analysis",
-   "Liver function tests, coagulation profile and hepatic ultrasound or elastography",
-   "Serum copper and caeruloplasmin",
-   "Molecular testing of ATP6AP1 with an X-linked/CDG gene panel or exome sequencing",
-   "Mass spectrometry glycomics of N- and O-linked glycans",
-   "Liver biopsy where hepatic disease is progressive or unexplained"
-  ],
-  "redFlags": [
-   "Rapid hepatic decompensation or coagulopathy during intercurrent infection",
-   "Severe or recurrent bacterial sepsis attributable to hypogammaglobulinaemia",
-   "Signs of portal hypertension or advancing cirrhosis",
-   "Bleeding tendency from combined hepatic and glycosylation-related coagulation-factor deficiency"
-  ],
-  "prognosis": "Outlook is variable and is driven largely by the severity of the liver disease and of infections; some individuals stabilise with immunoglobulin replacement and supportive hepatic care, whereas progressive cirrhosis or overwhelming infection can be life-threatening.",
-  "pitfalls": [
-   "Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect.",
-   "Misinterpreting low copper and caeruloplasmin as Wilson or Menkes disease.",
-   "Being falsely reassured by a normal first-line type I transferrin screen, since a type II pattern requires specific glycoform analysis.",
-   "Overlooking carrier mothers and milder female phenotypes because the disorder is X-linked."
-  ],
-  "references": [
-   "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
-   "Inborn Metabolic Diseases: Diagnosis and Treatment",
-   "Congenital disorders of glycosylation: clinical and diagnostic reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly with appropriate antibiotics, supported by vaccination",
-   "Provide hepatic supportive care with surveillance of liver function and coagulation, management of cholestasis, fat-soluble vitamin and nutritional support, and monitoring for progression to fibrosis or cirrhosis",
-   "Anticipate and manage hepatic decompensation during intercurrent illness with early intervention and specialist hepatology input",
-   "Monitor and address the disturbed copper and caeruloplasmin handling, distinguishing it from a primary copper-metabolism disorder",
-   "Coordinate care through a multidisciplinary team spanning metabolic medicine, immunology, hepatology and developmental services",
-   "Offer genetic counselling for this X-linked disorder, with carrier testing of female relatives and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "atp6ap1_cdg-pathway",
-   "title": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function variants in ATP6AP1, an accessory subunit of the vacuolar-type H+-ATPase (V-ATPase).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid hepatic decompensation or coagulopathy during intercurrent infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern), Quantitative immunoglobulins and lymphocyte subset analysis, Liver function tests, coagulation profile and hepatic ultrasound or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly with appropriate antibiotics, supported by vaccination"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of atp6ap1-cdg (congenital disorder of glycosylation, atp6ap1 type)."
-  }
- ],
- "tables": [
-  {
-   "id": "atp6ap1_cdg-matrix",
-   "title": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Glycosylation",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Congenital disorders of glycosylation references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function variants in ATP6AP1, an accessory subunit of the vacuolar-type H+-ATPase (V-ATPase).",
+      "The combination of immunodeficiency, hepatopathy and cutis laxa, often with cognitive impairment, is characteristic and should prompt consideration of a Golgi-homeostasis CDG.",
+      "Humoral immunodeficiency with hypogammaglobulinaemia and recurrent bacterial infections means some boys present first to immunology rather than to metabolic services.",
+      "Liver involvement spans raised transaminases and cholestasis through to progressive fibrosis and cirrhosis, with a tendency to decompensate during intercurrent illness.",
+      "Serum copper and caeruloplasmin may be low, reflecting disturbed Golgi metal handling, and can mimic a primary copper-metabolism disorder.",
+      "Serum transferrin isoelectric focusing typically shows a type II (glycan-processing) pattern, distinguishing it from the commoner type I disorders.",
+      "Connective-tissue laxity and cutis laxa link it to the wider V-ATPase and Golgi-homeostasis group of glycosylation defects."
     ],
-    [
-     "Key Investigations",
-     "Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern), Quantitative immunoglobulins and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The ATP6AP1 gene on Xq28 encodes an accessory subunit (Ac45) of the multi-subunit vacuolar H+-ATPase, the proton pump that acidifies the lumen of the Golgi apparatus, endosomes and lysosomes. Loss-of-function variants impair assembly and activity of the V-ATPase, so Golgi luminal pH is no longer correctly maintained; because the terminal, pH-sensitive glycosyltransferases and the trafficking of metal ions such as manganese and copper depend on proper Golgi acidification, protein N- and O-glycosylation is disturbed in a type II processing pattern. The resulting hypoglycosylation of secreted and membrane glycoproteins, including immunoglobulins and hepatic proteins, underlies the humoral immunodeficiency, the hepatopathy, the abnormal copper and caeruloplasmin handling and the connective-tissue (cutis laxa) features.",
+    "additionalDifferentials": [
+      "ATP6AP2-CDG (related V-ATPase accessory-protein defect with hepatopathy and immune features)",
+      "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA)",
+      "ATP6V1A-CDG and ATP6V1E1-CDG (V-ATPase core-subunit cutis laxa disorders)",
+      "CCDC115-CDG and TMEM199-CDG (Golgi-homeostasis CDGs with hepatopathy and low caeruloplasmin)",
+      "Wilson disease and Menkes disease (copper-metabolism mimics)",
+      "Common variable immunodeficiency and other primary humoral immunodeficiencies"
     ],
-    [
-     "Primary Differentials",
-     "ATP6AP2-CDG (related V-ATPase accessory-protein defect with hepatopathy and immune features), ATP6V0A2-CDG (autosomal recessive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern)",
+      "Quantitative immunoglobulins and lymphocyte subset analysis",
+      "Liver function tests, coagulation profile and hepatic ultrasound or elastography",
+      "Serum copper and caeruloplasmin",
+      "Molecular testing of ATP6AP1 with an X-linked/CDG gene panel or exome sequencing",
+      "Mass spectrometry glycomics of N- and O-linked glycans",
+      "Liver biopsy where hepatic disease is progressive or unexplained"
     ],
-    [
-     "Management Strategy",
-     "Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid hepatic decompensation or coagulopathy during intercurrent infection",
+      "Severe or recurrent bacterial sepsis attributable to hypogammaglobulinaemia",
+      "Signs of portal hypertension or advancing cirrhosis",
+      "Bleeding tendency from combined hepatic and glycosylation-related coagulation-factor deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is variable and is driven largely by the severity of the liver disease and of infections; some individuals stabilise with immunoglobulin replacement and supportive hepatic care, whereas progressive cirrhosis or overwhelming infection can be life-threatening.",
+    "pitfalls": [
+      "Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect.",
+      "Misinterpreting low copper and caeruloplasmin as Wilson or Menkes disease.",
+      "Being falsely reassured by a normal first-line type I transferrin screen, since a type II pattern requires specific glycoform analysis.",
+      "Overlooking carrier mothers and milder female phenotypes because the disorder is X-linked."
+    ],
+    "references": [
+      "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
+      "Inborn Metabolic Diseases: Diagnosis and Treatment",
+      "Congenital disorders of glycosylation: clinical and diagnostic reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly with appropriate antibiotics, supported by vaccination",
+      "Provide hepatic supportive care with surveillance of liver function and coagulation, management of cholestasis, fat-soluble vitamin and nutritional support, and monitoring for progression to fibrosis or cirrhosis",
+      "Anticipate and manage hepatic decompensation during intercurrent illness with early intervention and specialist hepatology input",
+      "Monitor and address the disturbed copper and caeruloplasmin handling, distinguishing it from a primary copper-metabolism disorder",
+      "Coordinate care through a multidisciplinary team spanning metabolic medicine, immunology, hepatology and developmental services",
+      "Offer genetic counselling for this X-linked disorder, with carrier testing of female relatives and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for atp6ap1-cdg (congenital disorder of glycosylation, atp6ap1 type)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "atp6ap1-cdg-real-image",
-   "title": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "atp6ap1_cdg-pathway",
+      "title": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function variants in ATP6AP1, an accessory subunit of the vacuolar-type H+-ATPase (V-ATPase).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid hepatic decompensation or coagulopathy during intercurrent infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern), Quantitative immunoglobulins and lymphocyte subset analysis, Liver function tests, coagulation profile and hepatic ultrasound or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly with appropriate antibiotics, supported by vaccination"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of atp6ap1-cdg (congenital disorder of glycosylation, atp6ap1 type)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "atp6ap1_cdg-matrix",
+      "title": "ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive type II congenital disorder of glycosylation affecting predominantly males, caused by loss-of-function",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum transferrin isoelectric focusing / glycoform analysis (expect a type II pattern), Quantitative immunoglobulins and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ATP6AP2-CDG (related V-ATPase accessory-protein defect with hepatopathy and immune features), ATP6V0A2-CDG (autosomal recessive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the humoral immunodeficiency with immunoglobulin replacement therapy and treat intercurrent bacterial infections promptly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the picture as isolated hypogammaglobulinaemia in an immunology clinic and missing the underlying glycosylation defect.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for atp6ap1-cdg (congenital disorder of glycosylation, atp6ap1 type)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Congenital disorders of glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atp6ap1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing and glycoform analysis",
+          "cells": [
+            {
+              "text": "Type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Humoral immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests, coagulation and hepatic ultrasound or elastography",
+          "cells": [
+            {
+              "text": "Hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Disturbed copper and caeruloplasmin handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of ATP6AP1 or exome sequencing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mass spectrometry glycomics",
+          "cells": [
+            {
+              "text": "N- and O-linked glycans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Where hepatic disease is progressive or unexplained"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6ap1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ATP6AP2-CDG",
+          "cells": [
+            {
+              "text": "Related V-ATPase accessory-protein defect with hepatopathy and immune features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP6V0A2-CDG",
+          "cells": [
+            {
+              "text": "Autosomal recessive cutis laxa type IIA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6ap1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For humoral immunodeficiency"
+            },
+            {
+              "text": "Prompt treatment of intercurrent bacterial infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic supportive care",
+          "cells": [
+            {
+              "text": "Liver function and coagulation surveillance; cholestasis; fat-soluble vitamins and nutrition"
+            },
+            {
+              "text": "Hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation planning",
+          "cells": [
+            {
+              "text": "Early intervention and specialist hepatology input"
+            },
+            {
+              "text": "Intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper and caeruloplasmin monitoring",
+          "cells": [
+            {
+              "text": "Distinguish from a primary copper-metabolism disorder"
+            },
+            {
+              "text": "Disturbed handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, immunology, hepatology and developmental services"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing of female relatives and family screening"
+            },
+            {
+              "text": "X-linked disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atp6ap1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypogammaglobulinaemia with hepatic disease and abnormal glycosylation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid hepatic decompensation or severe recurrent sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Early hepatology input and treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF (type II), immunoglobulins, liver tests, copper, ATP6AP1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type II transferrin pattern with ATP6AP1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Immunoglobulin replacement and hepatic supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat glycosylation tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat intercurrent bacterial infections promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage cholestasis; fat-soluble vitamins and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticipate hepatic decompensation during intercurrent illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care and carrier testing of female relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,462 @@
 {
- "id": "irukandji_syndrome",
- "name": "Irukandji syndrome",
- "aliases": [
-  "Carukia barnesi sting",
-  "Irukandji jellyfish envenomation",
-  "irukandji",
-  "cubozoan catecholamine syndrome"
- ],
- "class": "non_infective",
- "system": "Toxicology / Envenomation",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
-   "After a delay of roughly 20-40 minutes, patients develop severe generalised pain, especially in the back, chest and abdomen, with muscle cramps",
-   "A striking catecholamine surge produces sweating, agitation, hypertension, tachycardia, nausea, vomiting and a sense of impending doom",
-   "Serious complications include hypertensive emergency, myocardial dysfunction (stress cardiomyopathy) and potentially fatal pulmonary oedema",
-   "Vinegar is applied to the sting site to inactivate undischarged nematocysts, but the syndrome is driven by systemic venom effects rather than local injury",
-   "Management principles are aggressive analgesia, antiemetics, and control of hypertension and cardiac dysfunction with monitoring in a high-dependency setting",
-   "There is no specific antivenom; treatment is supportive and directed at the hyperadrenergic state and its cardiac consequences"
+  "id": "irukandji_syndrome",
+  "name": "Irukandji syndrome",
+  "aliases": [
+    "Carukia barnesi sting",
+    "Irukandji jellyfish envenomation",
+    "irukandji",
+    "cubozoan catecholamine syndrome"
   ],
-  "pathophysiology": "The venom of Irukandji-type jellyfish triggers a massive endogenous release of catecholamines, producing a delayed systemic syndrome disproportionate to the minor local sting. Sympathetic overactivity causes severe pain, hypertension, tachycardia and diaphoresis, while catecholamine excess can injure the myocardium, producing a stress (takotsubo-type) cardiomyopathy with left ventricular dysfunction. Cardiac failure and capillary changes can lead to acute pulmonary oedema, and the profound autonomic activation accounts for the anxiety and feeling of doom that characterise the syndrome.",
-  "additionalDifferentials": [
-   "Acute coronary syndrome",
-   "Phaeochromocytoma crisis or sympathomimetic toxidrome",
-   "Box jellyfish (Chironex) envenomation",
-   "Acute abdomen or renal colic",
-   "Decompression illness in a diver",
-   "Subarachnoid haemorrhage given severe pain and hypertension"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiography for ischaemia and arrhythmia",
-   "Serial cardiac troponin and echocardiography for stress cardiomyopathy",
-   "Blood pressure monitoring for hypertensive emergency",
-   "Chest imaging for pulmonary oedema",
-   "Electrolytes, renal function and glucose"
-  ],
-  "redFlags": [
-   "Severe or refractory hypertension with end-organ features",
-   "Evidence of myocardial injury or pulmonary oedema",
-   "Progressive dyspnoea or hypoxia",
-   "Altered consciousness or neurological deficit",
-   "Haemodynamic instability"
-  ],
-  "prognosis": "Most cases resolve over hours to a couple of days with supportive care, but a minority develop life-threatening cardiac failure or pulmonary oedema, and deaths have occurred, so cardiac monitoring is essential.",
-  "pitfalls": [
-   "Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded",
-   "Failing to anticipate and monitor for venom-induced cardiomyopathy and pulmonary oedema",
-   "Providing inadequate analgesia for what is often extreme pain",
-   "Overlooking hypertensive emergency requiring controlled blood pressure reduction"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Australian marine envenomation management guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply vinegar to the sting site to inactivate any undischarged nematocysts",
-   "Provide aggressive parenteral analgesia, typically with opioids, together with antiemetics",
-   "Control the catecholamine-driven hypertension with vasodilators or short-acting antihypertensive agents, and consider magnesium sulphate",
-   "Monitor in a high-dependency setting with continuous cardiac rhythm and blood pressure monitoring",
-   "Detect and manage stress (takotsubo-type) cardiomyopathy using serial troponin, electrocardiography and echocardiography with supportive cardiac care",
-   "Support respiration and treat acute pulmonary oedema promptly if it develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "irukandji_syndrome-pathway",
-   "title": "Irukandji syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or refractory hypertension with end-organ features",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiography for ischaemia and arrhythmia, Serial cardiac troponin and echocardiography for stress cardiomyopathy, Blood pressure monitoring for hypertensive emergency"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply vinegar to the sting site to inactivate any undischarged nematocysts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of irukandji syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "irukandji_syndrome-matrix",
-   "title": "Irukandji syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Envenomation",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
+      "After a delay of roughly 20-40 minutes, patients develop severe generalised pain, especially in the back, chest and abdomen, with muscle cramps",
+      "A striking catecholamine surge produces sweating, agitation, hypertension, tachycardia, nausea, vomiting and a sense of impending doom",
+      "Serious complications include hypertensive emergency, myocardial dysfunction (stress cardiomyopathy) and potentially fatal pulmonary oedema",
+      "Vinegar is applied to the sting site to inactivate undischarged nematocysts, but the syndrome is driven by systemic venom effects rather than local injury",
+      "Management principles are aggressive analgesia, antiemetics, and control of hypertension and cardiac dysfunction with monitoring in a high-dependency setting",
+      "There is no specific antivenom; treatment is supportive and directed at the hyperadrenergic state and its cardiac consequences"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiography for ischaemia and arrhythmia, Serial cardiac troponin and echocardiography for stress cardiomyopathy, Blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The venom of Irukandji-type jellyfish triggers a massive endogenous release of catecholamines, producing a delayed systemic syndrome disproportionate to the minor local sting. Sympathetic overactivity causes severe pain, hypertension, tachycardia and diaphoresis, while catecholamine excess can injure the myocardium, producing a stress (takotsubo-type) cardiomyopathy with left ventricular dysfunction. Cardiac failure and capillary changes can lead to acute pulmonary oedema, and the profound autonomic activation accounts for the anxiety and feeling of doom that characterise the syndrome.",
+    "additionalDifferentials": [
+      "Acute coronary syndrome",
+      "Phaeochromocytoma crisis or sympathomimetic toxidrome",
+      "Box jellyfish (Chironex) envenomation",
+      "Acute abdomen or renal colic",
+      "Decompression illness in a diver",
+      "Subarachnoid haemorrhage given severe pain and hypertension"
     ],
-    [
-     "Primary Differentials",
-     "Acute coronary syndrome, Phaeochromocytoma crisis or sympathomimetic toxidrome, Box jellyfish (Chironex) envenomation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiography for ischaemia and arrhythmia",
+      "Serial cardiac troponin and echocardiography for stress cardiomyopathy",
+      "Blood pressure monitoring for hypertensive emergency",
+      "Chest imaging for pulmonary oedema",
+      "Electrolytes, renal function and glucose"
     ],
-    [
-     "Management Strategy",
-     "Apply vinegar to the sting site to inactivate any undischarged nematocysts",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or refractory hypertension with end-organ features",
+      "Evidence of myocardial injury or pulmonary oedema",
+      "Progressive dyspnoea or hypoxia",
+      "Altered consciousness or neurological deficit",
+      "Haemodynamic instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve over hours to a couple of days with supportive care, but a minority develop life-threatening cardiac failure or pulmonary oedema, and deaths have occurred, so cardiac monitoring is essential.",
+    "pitfalls": [
+      "Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded",
+      "Failing to anticipate and monitor for venom-induced cardiomyopathy and pulmonary oedema",
+      "Providing inadequate analgesia for what is often extreme pain",
+      "Overlooking hypertensive emergency requiring controlled blood pressure reduction"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Australian marine envenomation management guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply vinegar to the sting site to inactivate any undischarged nematocysts",
+      "Provide aggressive parenteral analgesia, typically with opioids, together with antiemetics",
+      "Control the catecholamine-driven hypertension with vasodilators or short-acting antihypertensive agents, and consider magnesium sulphate",
+      "Monitor in a high-dependency setting with continuous cardiac rhythm and blood pressure monitoring",
+      "Detect and manage stress (takotsubo-type) cardiomyopathy using serial troponin, electrocardiography and echocardiography with supportive cardiac care",
+      "Support respiration and treat acute pulmonary oedema promptly if it develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for irukandji syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "irukandji-syndrome-real-image",
-   "title": "Irukandji syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "irukandji_syndrome-pathway",
+      "title": "Irukandji syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or refractory hypertension with end-organ features",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiography for ischaemia and arrhythmia, Serial cardiac troponin and echocardiography for stress cardiomyopathy, Blood pressure monitoring for hypertensive emergency"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply vinegar to the sting site to inactivate any undischarged nematocysts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of irukandji syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "irukandji_syndrome-matrix",
+      "title": "Irukandji syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by small cubozoans (classically Carukia barnesi); the initial sting is often trivial or barely noticed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiography for ischaemia and arrhythmia, Serial cardiac troponin and echocardiography for stress cardiomyopathy, Blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute coronary syndrome, Phaeochromocytoma crisis or sympathomimetic toxidrome, Box jellyfish (Chironex) envenomation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply vinegar to the sting site to inactivate any undischarged nematocysts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Discharging early after a trivial-looking sting before the delayed systemic syndrome has been excluded",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for irukandji syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "irukandji_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Ischaemia and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial cardiac troponin and echocardiography",
+          "cells": [
+            {
+              "text": "Stress cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Hypertensive emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, renal function and glucose",
+          "cells": [
+            {
+              "text": "Systemic effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "irukandji_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Ischaemic chest pain with ECG changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma or sympathomimetic toxidrome",
+          "cells": [
+            {
+              "text": "Catecholamine-type hypertension and tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Severe pain with hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "irukandji_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sting site",
+          "cells": [
+            {
+              "text": "Vinegar to inactivate undischarged nematocysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Parenteral opioids and antiemetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Vasodilators or short-acting antihypertensives; consider magnesium sulphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "High-dependency care with continuous rhythm and blood pressure monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac complications",
+          "cells": [
+            {
+              "text": "Serial troponin, ECG and echocardiography for stress cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Prompt treatment of acute pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "irukandji_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Irukandji syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Trivial sting followed 20-40 minutes later by severe back and chest pain with sweating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypertension, myocardial injury, pulmonary oedema or altered consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "High-dependency care; control blood pressure; treat pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, serial troponin, echocardiography, blood pressure monitoring, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Delayed systemic syndrome after a cubozoan sting confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute coronary syndrome, phaeochromocytoma or subarachnoid haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vinegar to the sting site to inactivate nematocysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Opioid analgesia and antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vasodilators or short-acting antihypertensives; consider magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous cardiac and blood pressure monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial troponin and echo for stress cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Recovery depends on cardiac and respiratory support; monitored until resolved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

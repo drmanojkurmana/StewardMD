@@ -1,177 +1,239 @@
 {
- "id": "breast_cyst",
- "name": "Breast cyst",
- "aliases": [
-  "Simple breast cyst",
-  "Gross cyst"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast surgery / Radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "ABC of Breast Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women aged roughly 35 to 50.",
-   "Often present suddenly as a smooth, mobile, sometimes tender lump; multiple and bilateral cysts are frequent.",
-   "Regarded as an aberration of normal breast involution within the ANDI framework rather than a disease.",
-   "Ultrasound classification into simple, complicated and complex cysts guides management and determines the need for intervention.",
-   "A simple anechoic cyst with imperceptible walls and posterior enhancement is benign and needs no aspiration unless symptomatic.",
-   "Aspiration is indicated for painful or tense cysts; clear or green-brown fluid can be discarded without cytology.",
-   "Blood-stained aspirate, a residual mass after aspiration, or rapid refilling should prompt imaging and biopsy to exclude an intracystic carcinoma or papilloma.",
-   "Complex cysts with thick septa, mural nodules or solid components require image-guided core biopsy."
+  "id": "breast_cyst",
+  "name": "Breast cyst",
+  "aliases": [
+    "Simple breast cyst",
+    "Gross cyst"
   ],
-  "pathophysiology": "Breast cysts arise from the terminal duct lobular unit during the involutional phase of breast development, when lobular stroma regresses faster than its epithelium, leaving distended acini that coalesce into macroscopic fluid-filled spaces. The lining may be flattened atrophic epithelium or show apocrine metaplasia, the latter associated with cysts that secrete potassium-rich fluid and tend to recur. Hormonal fluctuation influences cyst formation, explaining their peak incidence in the perimenopausal years and regression after the menopause unless hormone replacement therapy is used.",
-  "additionalDifferentials": [
-   "Fibroadenoma",
-   "Galactocoele in a lactating woman",
-   "Intracystic papilloma",
-   "Intracystic (encysted) papillary carcinoma",
-   "Fibrocystic change with prominent cysts",
-   "Abscess or inflammatory collection",
-   "Well-circumscribed invasive carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Breast ultrasound with cyst characterisation",
-   "Mammography in the appropriate age group as part of triple assessment",
-   "Diagnostic or therapeutic needle aspiration of tense or symptomatic cysts",
-   "Cytology of aspirate only when blood-stained",
-   "Image-guided core biopsy of any solid or complex component",
-   "Post-aspiration ultrasound to confirm resolution",
-   "Pneumocystography in selected recurrent cysts (historical)"
-  ],
-  "redFlags": [
-   "Blood-stained cyst aspirate",
-   "Persistent palpable or sonographic mass after complete aspiration",
-   "Rapid symptomatic refilling of an aspirated cyst",
-   "Mural nodule or thick irregular septa on ultrasound",
-   "Associated skin tethering, nipple change or suspicious microcalcification"
-  ],
-  "prognosis": "Simple cysts are benign with an excellent prognosis and only a marginal, if any, increase in future breast cancer risk. Recurrence after aspiration is common, but reassurance and symptom-directed management are usually sufficient.",
-  "pitfalls": [
-   "Sending clear cyst fluid for cytology, which is low-yield and unnecessary",
-   "Failing to re-examine and image after aspiration to exclude a residual mass",
-   "Dismissing a complex cyst as simple and missing an intracystic carcinoma",
-   "Attributing a blood-stained aspirate to a traumatic tap and delaying biopsy",
-   "Overlooking that hormone replacement therapy can drive cyst formation after the menopause"
-  ],
-  "references": [
-   "ABC of Breast Diseases (current edition)",
-   "Standard textbook of breast imaging and ultrasound classification",
-   "National breast triple-assessment guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic",
-   "Perform therapeutic needle aspiration for tense or painful cysts, discarding clear or green-brown fluid without cytology",
-   "Send aspirate for cytology only when blood-stained, and take an image-guided core biopsy of any solid or complex component",
-   "Confirm the diagnosis by triple assessment with ultrasound characterisation, adding mammography in the appropriate age group",
-   "Perform post-aspiration ultrasound to confirm resolution, with re-aspiration or biopsy for rapidly recurrent or residual masses",
-   "Refer complex cysts or intracystic solid lesions to a breast specialist to exclude malignancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "breast_cyst-pathway",
-   "title": "Breast cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women aged roughly 35 to 50.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Blood-stained cyst aspirate",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Breast ultrasound with cyst characterisation, Mammography in the appropriate age group as part of triple assessment, Diagnostic or therapeutic needle aspiration of tense or symptomatic cysts"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Sending clear cyst fluid for cytology, which is low-yield and unnecessary"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of breast cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "breast_cyst-matrix",
-   "title": "Breast cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast surgery / Radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ABC of Breast Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women aged roughly 35 to 50.",
+      "Often present suddenly as a smooth, mobile, sometimes tender lump; multiple and bilateral cysts are frequent.",
+      "Regarded as an aberration of normal breast involution within the ANDI framework rather than a disease.",
+      "Ultrasound classification into simple, complicated and complex cysts guides management and determines the need for intervention.",
+      "A simple anechoic cyst with imperceptible walls and posterior enhancement is benign and needs no aspiration unless symptomatic.",
+      "Aspiration is indicated for painful or tense cysts; clear or green-brown fluid can be discarded without cytology.",
+      "Blood-stained aspirate, a residual mass after aspiration, or rapid refilling should prompt imaging and biopsy to exclude an intracystic carcinoma or papilloma.",
+      "Complex cysts with thick septa, mural nodules or solid components require image-guided core biopsy."
     ],
-    [
-     "Key Investigations",
-     "Breast ultrasound with cyst characterisation, Mammography in the appropriate age group as part of triple assessment, Diagnostic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Breast cysts arise from the terminal duct lobular unit during the involutional phase of breast development, when lobular stroma regresses faster than its epithelium, leaving distended acini that coalesce into macroscopic fluid-filled spaces. The lining may be flattened atrophic epithelium or show apocrine metaplasia, the latter associated with cysts that secrete potassium-rich fluid and tend to recur. Hormonal fluctuation influences cyst formation, explaining their peak incidence in the perimenopausal years and regression after the menopause unless hormone replacement therapy is used.",
+    "additionalDifferentials": [
+      "Fibroadenoma",
+      "Galactocoele in a lactating woman",
+      "Intracystic papilloma",
+      "Intracystic (encysted) papillary carcinoma",
+      "Fibrocystic change with prominent cysts",
+      "Abscess or inflammatory collection",
+      "Well-circumscribed invasive carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Fibroadenoma, Galactocoele in a lactating woman, Intracystic papilloma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Breast ultrasound with cyst characterisation",
+      "Mammography in the appropriate age group as part of triple assessment",
+      "Diagnostic or therapeutic needle aspiration of tense or symptomatic cysts",
+      "Cytology of aspirate only when blood-stained",
+      "Image-guided core biopsy of any solid or complex component",
+      "Post-aspiration ultrasound to confirm resolution",
+      "Pneumocystography in selected recurrent cysts (historical)"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "Blood-stained cyst aspirate",
+      "Persistent palpable or sonographic mass after complete aspiration",
+      "Rapid symptomatic refilling of an aspirated cyst",
+      "Mural nodule or thick irregular septa on ultrasound",
+      "Associated skin tethering, nipple change or suspicious microcalcification"
     ],
-    [
-     "Clinical Pitfall",
-     "Sending clear cyst fluid for cytology, which is low-yield and unnecessary",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple cysts are benign with an excellent prognosis and only a marginal, if any, increase in future breast cancer risk. Recurrence after aspiration is common, but reassurance and symptom-directed management are usually sufficient.",
+    "pitfalls": [
+      "Sending clear cyst fluid for cytology, which is low-yield and unnecessary",
+      "Failing to re-examine and image after aspiration to exclude a residual mass",
+      "Dismissing a complex cyst as simple and missing an intracystic carcinoma",
+      "Attributing a blood-stained aspirate to a traumatic tap and delaying biopsy",
+      "Overlooking that hormone replacement therapy can drive cyst formation after the menopause"
+    ],
+    "references": [
+      "ABC of Breast Diseases (current edition)",
+      "Standard textbook of breast imaging and ultrasound classification",
+      "National breast triple-assessment guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic",
+      "Perform therapeutic needle aspiration for tense or painful cysts, discarding clear or green-brown fluid without cytology",
+      "Send aspirate for cytology only when blood-stained, and take an image-guided core biopsy of any solid or complex component",
+      "Confirm the diagnosis by triple assessment with ultrasound characterisation, adding mammography in the appropriate age group",
+      "Perform post-aspiration ultrasound to confirm resolution, with re-aspiration or biopsy for rapidly recurrent or residual masses",
+      "Refer complex cysts or intracystic solid lesions to a breast specialist to exclude malignancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for breast cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "breast-cyst-real-image",
-   "title": "Breast cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "breast_cyst-pathway",
+      "title": "Breast cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women aged roughly 35 to 50.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Blood-stained cyst aspirate",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Breast ultrasound with cyst characterisation, Mammography in the appropriate age group as part of triple assessment, Diagnostic or therapeutic needle aspiration of tense or symptomatic cysts"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Sending clear cyst fluid for cytology, which is low-yield and unnecessary"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of breast cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "breast_cyst-matrix",
+      "title": "Breast cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fluid-filled, epithelial-lined cavities that are among the commonest causes of a discrete breast lump in perimenopausal women",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Breast ultrasound with cyst characterisation, Mammography in the appropriate age group as part of triple assessment, Diagnostic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibroadenoma, Galactocoele in a lactating woman, Intracystic papilloma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe simple anechoic cysts, which need no intervention unless symptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Sending clear cyst fluid for cytology, which is low-yield and unnecessary",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for breast cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ABC of Breast Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "breast_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in breast cyst",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Breast ultrasound", "cells": [{"text": "Simple, complicated or complex classification; guides management"}], "cite": "c1"},
+        {"parameter": "Mammography", "cells": [{"text": "Triple assessment in the appropriate age group"}], "cite": "c1"},
+        {"parameter": "Needle aspiration", "cells": [{"text": "Diagnostic and therapeutic for tense or symptomatic cysts"}], "cite": "c1"},
+        {"parameter": "Cytology of aspirate", "cells": [{"text": "Only when blood-stained"}], "cite": "c1"},
+        {"parameter": "Image-guided core biopsy", "cells": [{"text": "Any solid or complex component"}], "cite": "c1"},
+        {"parameter": "Post-aspiration ultrasound", "cells": [{"text": "Confirms resolution"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike breast lumps",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Galactocoele", "cells": [{"text": "Occurs in a lactating woman"}], "cite": "c1"},
+        {"parameter": "Intracystic papilloma", "cells": [{"text": "Blood-stained aspirate or a residual mass after aspiration"}], "cite": "c1"},
+        {"parameter": "Intracystic carcinoma", "cells": [{"text": "Mural nodule, thick irregular septa or solid component on ultrasound"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options in breast cyst",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance and observation", "cells": [{"text": "Simple anechoic cysts need no intervention unless symptomatic"}, {"text": "Benign"}], "cite": "c1"},
+        {"parameter": "Therapeutic needle aspiration", "cells": [{"text": "Tense or painful cysts; discard clear or green-brown fluid without cytology"}, {"text": "Symptomatic"}], "cite": "c1"},
+        {"parameter": "Cytology", "cells": [{"text": "Send aspirate only when blood-stained"}, {"text": "Selective"}], "cite": "c1"},
+        {"parameter": "Core biopsy", "cells": [{"text": "Image-guided biopsy of any solid or complex component"}, {"text": "Excludes malignancy"}], "cite": "c1"},
+        {"parameter": "Triple assessment", "cells": [{"text": "Ultrasound characterisation with mammography in the appropriate age group"}, {"text": "Standard"}], "cite": "c1"},
+        {"parameter": "Post-aspiration review", "cells": [{"text": "Ultrasound to confirm resolution; re-aspiration or biopsy for rapid refill or residual mass"}, {"text": "Recurrence common"}], "cite": "c1"},
+        {"parameter": "Specialist referral", "cells": [{"text": "Complex cysts or intracystic solid lesions"}, {"text": "Exclude malignancy"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "breast_cyst-dx-mgmt",
+      "title": "Diagnosis and management of breast cyst",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Discrete smooth, mobile breast lump, often in perimenopausal women", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: blood-stained aspirate, mural nodule, thick septa, or skin tethering or nipple change?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: image-guided core biopsy; breast specialist referral", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Breast ultrasound to classify the cyst as simple, complicated or complex; mammography in the appropriate age group", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Simple anechoic cyst?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Reassure and observe unless symptomatic", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Therapeutic needle aspiration of tense or painful cyst", "cite": "c1"},
+        {"id": "n8", "type": "decision", "text": "Residual mass or rapid refilling after aspiration?", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Resolved: reassurance; excellent prognosis", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Persisting or complex lesion: imaging and biopsy to exclude intracystic carcinoma or papilloma", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n10", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n9", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n10", "label": "Yes"},
+        {"from": "n8", "to": "n9", "label": "No"}
+      ]
+    }
+  ]
 }

@@ -1,179 +1,477 @@
 {
- "id": "erectile_dysfunction_organic",
- "name": "Organic erectile dysfunction",
- "aliases": [
-  "organic ED",
-  "vasculogenic erectile dysfunction",
-  "impotence of organic cause"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of spontaneous nocturnal and early-morning erections",
-   "By contrast, a psychogenic pattern is often abrupt, situational, and retains nocturnal erections, though many men have a mixed picture",
-   "The commonest organic mechanism is vascular, and dysfunction frequently precedes overt coronary or peripheral arterial disease, serving as an early marker of endothelial disease",
-   "Every man presenting with erectile dysfunction should undergo cardiovascular risk assessment, as the small penile arteries may signal disease in larger vessels before symptoms elsewhere",
-   "Diabetes, hypertension, dyslipidaemia, smoking, obesity, and hypogonadism are important and often modifiable contributors",
-   "A directed history, examination, and measurement of morning testosterone and metabolic parameters identify most causes without invasive testing",
-   "First-line treatment is with phosphodiesterase-5 inhibitors alongside risk-factor modification, with intracavernosal or intraurethral agents, vacuum devices, and penile prosthesis reserved for non-responders",
-   "Coexisting hypogonadism should be corrected as it can both cause dysfunction and reduce the response to oral therapy"
+  "id": "erectile_dysfunction_organic",
+  "name": "Organic erectile dysfunction",
+  "aliases": [
+    "organic ED",
+    "vasculogenic erectile dysfunction",
+    "impotence of organic cause"
   ],
-  "pathophysiology": "Penile erection is a neurovascular event in which parasympathetic and nitric-oxide-mediated signalling relaxes cavernosal smooth muscle, allowing arterial inflow to engorge the sinusoids and compress the subtunical venules to trap blood. Organic erectile dysfunction arises when any component of this pathway is impaired. Vasculogenic disease, driven by atherosclerosis and endothelial dysfunction, reduces arterial inflow and impairs the veno-occlusive mechanism. Neurogenic causes interrupt the autonomic and somatic innervation, as after pelvic surgery, in diabetes, or with neurological disease. Endocrine causes, chiefly testosterone deficiency and hyperprolactinaemia, blunt libido and the erectile response. Because the cavernosal arteries are of small calibre, endothelial compromise manifests here early, which is why organic erectile dysfunction commonly heralds systemic cardiovascular disease.",
-  "additionalDifferentials": [
-   "Psychogenic erectile dysfunction",
-   "Hypogonadism or hyperprolactinaemia",
-   "Peyronie disease and other penile structural disorders",
-   "Medication-induced dysfunction, including antihypertensives and antidepressants",
-   "Chronic systemic disease such as renal or hepatic failure",
-   "Neurological disease or the aftermath of pelvic surgery",
-   "Substance-related causes including alcohol and recreational drugs"
-  ],
-  "additionalInvestigations": [
-   "Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire",
-   "Early-morning serum testosterone, repeated if low, with luteinising hormone and prolactin where indicated",
-   "Fasting glucose or HbA1c and a lipid profile to assess cardiometabolic risk",
-   "Blood pressure measurement and cardiovascular risk stratification",
-   "Penile duplex Doppler ultrasound in selected men where a primary vascular cause needs confirmation",
-   "Review of current medications for erectile side effects",
-   "Thyroid and renal function where systemic disease is suspected"
-  ],
-  "redFlags": [
-   "Erectile dysfunction as a sentinel symptom of undiagnosed cardiovascular disease requiring cardiac assessment",
-   "Associated symptoms of hypogonadism or a pituitary lesion such as visual disturbance",
-   "New neurological signs pointing to spinal or central disease",
-   "Penile deformity, pain, or plaque suggesting Peyronie disease",
-   "Priapism or a history of prolonged erections as a treatment complication"
-  ],
-  "prognosis": "Most men respond well to phosphodiesterase-5 inhibitors and risk-factor modification, and identifying and treating the underlying cardiometabolic disease benefits overall health; where oral therapy fails, injectable agents, devices, and prosthetic surgery offer highly effective alternatives.",
-  "pitfalls": [
-   "Treating erectile dysfunction symptomatically without assessing cardiovascular risk",
-   "Overlooking coexisting hypogonadism that reduces the response to oral therapy",
-   "Missing a culprit medication that could be changed",
-   "Attributing an organic problem to psychological causes and delaying appropriate investigation",
-   "Failing to counsel on priapism and nitrate interactions before prescribing phosphodiesterase-5 inhibitors"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on sexual and reproductive health",
-   "International guidance on erectile dysfunction and cardiovascular risk"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with lifestyle modification and smoking cessation",
-   "Review and substitution of medications with erectile side effects",
-   "First-line phosphodiesterase type 5 inhibitor therapy",
-   "Testosterone replacement for confirmed hypogonadism, and a dopamine agonist where hyperprolactinaemia is the cause",
-   "Second-line intracavernosal or intraurethral alprostadil, or a vacuum erection device, when oral therapy is ineffective",
-   "Penile prosthesis surgery as a highly effective option for men refractory to pharmacological and device treatment",
-   "Cardiovascular risk stratification and referral, since small-vessel penile disease may herald coronary or peripheral arterial disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erectile_dysfunction_organic-pathway",
-   "title": "Organic erectile dysfunction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of spontaneous nocturnal and early-morning erections",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Erectile dysfunction as a sentinel symptom of undiagnosed cardiovascular disease requiring cardiac assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire, Early-morning serum testosterone, repeated if low, with luteinising hormone and prolactin where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with lifestyle modification and smoking cessation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating erectile dysfunction symptomatically without assessing cardiovascular risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of organic erectile dysfunction."
-  }
- ],
- "tables": [
-  {
-   "id": "erectile_dysfunction_organic-matrix",
-   "title": "Organic erectile dysfunction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of spontaneous nocturnal and early-morning erections",
+      "By contrast, a psychogenic pattern is often abrupt, situational, and retains nocturnal erections, though many men have a mixed picture",
+      "The commonest organic mechanism is vascular, and dysfunction frequently precedes overt coronary or peripheral arterial disease, serving as an early marker of endothelial disease",
+      "Every man presenting with erectile dysfunction should undergo cardiovascular risk assessment, as the small penile arteries may signal disease in larger vessels before symptoms elsewhere",
+      "Diabetes, hypertension, dyslipidaemia, smoking, obesity, and hypogonadism are important and often modifiable contributors",
+      "A directed history, examination, and measurement of morning testosterone and metabolic parameters identify most causes without invasive testing",
+      "First-line treatment is with phosphodiesterase-5 inhibitors alongside risk-factor modification, with intracavernosal or intraurethral agents, vacuum devices, and penile prosthesis reserved for non-responders",
+      "Coexisting hypogonadism should be corrected as it can both cause dysfunction and reduce the response to oral therapy"
     ],
-    [
-     "Key Investigations",
-     "Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Penile erection is a neurovascular event in which parasympathetic and nitric-oxide-mediated signalling relaxes cavernosal smooth muscle, allowing arterial inflow to engorge the sinusoids and compress the subtunical venules to trap blood. Organic erectile dysfunction arises when any component of this pathway is impaired. Vasculogenic disease, driven by atherosclerosis and endothelial dysfunction, reduces arterial inflow and impairs the veno-occlusive mechanism. Neurogenic causes interrupt the autonomic and somatic innervation, as after pelvic surgery, in diabetes, or with neurological disease. Endocrine causes, chiefly testosterone deficiency and hyperprolactinaemia, blunt libido and the erectile response. Because the cavernosal arteries are of small calibre, endothelial compromise manifests here early, which is why organic erectile dysfunction commonly heralds systemic cardiovascular disease.",
+    "additionalDifferentials": [
+      "Psychogenic erectile dysfunction",
+      "Hypogonadism or hyperprolactinaemia",
+      "Peyronie disease and other penile structural disorders",
+      "Medication-induced dysfunction, including antihypertensives and antidepressants",
+      "Chronic systemic disease such as renal or hepatic failure",
+      "Neurological disease or the aftermath of pelvic surgery",
+      "Substance-related causes including alcohol and recreational drugs"
     ],
-    [
-     "Primary Differentials",
-     "Psychogenic erectile dysfunction, Hypogonadism or hyperprolactinaemia, Peyronie disease and other penile structural disorders",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire",
+      "Early-morning serum testosterone, repeated if low, with luteinising hormone and prolactin where indicated",
+      "Fasting glucose or HbA1c and a lipid profile to assess cardiometabolic risk",
+      "Blood pressure measurement and cardiovascular risk stratification",
+      "Penile duplex Doppler ultrasound in selected men where a primary vascular cause needs confirmation",
+      "Review of current medications for erectile side effects",
+      "Thyroid and renal function where systemic disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Erectile dysfunction as a sentinel symptom of undiagnosed cardiovascular disease requiring cardiac assessment",
+      "Associated symptoms of hypogonadism or a pituitary lesion such as visual disturbance",
+      "New neurological signs pointing to spinal or central disease",
+      "Penile deformity, pain, or plaque suggesting Peyronie disease",
+      "Priapism or a history of prolonged erections as a treatment complication"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating erectile dysfunction symptomatically without assessing cardiovascular risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most men respond well to phosphodiesterase-5 inhibitors and risk-factor modification, and identifying and treating the underlying cardiometabolic disease benefits overall health; where oral therapy fails, injectable agents, devices, and prosthetic surgery offer highly effective alternatives.",
+    "pitfalls": [
+      "Treating erectile dysfunction symptomatically without assessing cardiovascular risk",
+      "Overlooking coexisting hypogonadism that reduces the response to oral therapy",
+      "Missing a culprit medication that could be changed",
+      "Attributing an organic problem to psychological causes and delaying appropriate investigation",
+      "Failing to counsel on priapism and nitrate interactions before prescribing phosphodiesterase-5 inhibitors"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on sexual and reproductive health",
+      "International guidance on erectile dysfunction and cardiovascular risk"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with lifestyle modification and smoking cessation",
+      "Review and substitution of medications with erectile side effects",
+      "First-line phosphodiesterase type 5 inhibitor therapy",
+      "Testosterone replacement for confirmed hypogonadism, and a dopamine agonist where hyperprolactinaemia is the cause",
+      "Second-line intracavernosal or intraurethral alprostadil, or a vacuum erection device, when oral therapy is ineffective",
+      "Penile prosthesis surgery as a highly effective option for men refractory to pharmacological and device treatment",
+      "Cardiovascular risk stratification and referral, since small-vessel penile disease may herald coronary or peripheral arterial disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for organic erectile dysfunction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erectile-dysfunction-organic-real-image",
-   "title": "Organic erectile dysfunction: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "erectile_dysfunction_organic-pathway",
+      "title": "Organic erectile dysfunction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of spontaneous nocturnal and early-morning erections",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Erectile dysfunction as a sentinel symptom of undiagnosed cardiovascular disease requiring cardiac assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire, Early-morning serum testosterone, repeated if low, with luteinising hormone and prolactin where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with lifestyle modification and smoking cessation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating erectile dysfunction symptomatically without assessing cardiovascular risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of organic erectile dysfunction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erectile_dysfunction_organic-matrix",
+      "title": "Organic erectile dysfunction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Organic erectile dysfunction typically develops gradually, is present in most sexual situations, and is accompanied by loss of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Focused history including onset, situational variation, and nocturnal erections, with a validated symptom questionnaire,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Psychogenic erectile dysfunction, Hypogonadism or hyperprolactinaemia, Peyronie disease and other penile structural disorders",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identification and treatment of the underlying cardiometabolic disease, including diabetes, hypertension and dyslipidaemia, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating erectile dysfunction symptomatically without assessing cardiovascular risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for organic erectile dysfunction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erectile_dysfunction_organic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused history and validated symptom questionnaire",
+          "cells": [
+            {
+              "text": "Onset, situational variation and nocturnal erections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early-morning serum testosterone, with luteinising hormone and prolactin",
+          "cells": [
+            {
+              "text": "Hypogonadism; repeated if low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Cardiometabolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and cardiovascular risk stratification",
+          "cells": [
+            {
+              "text": "Vascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile duplex Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Primary vascular cause, in selected men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid and renal function",
+          "cells": [
+            {
+              "text": "Systemic disease, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction_organic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychogenic erectile dysfunction",
+          "cells": [
+            {
+              "text": "Abrupt, situational pattern that retains nocturnal erections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadism or hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Reduces the response to oral therapy and can be reversible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction_organic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat cardiometabolic disease",
+          "cells": [
+            {
+              "text": "Diabetes, hypertension and dyslipidaemia, with lifestyle change and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Substitute drugs with erectile side effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PDE5 inhibitor",
+          "cells": [
+            {
+              "text": "First-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone or dopamine agonist",
+          "cells": [
+            {
+              "text": "Testosterone for confirmed hypogonadism; dopamine agonist where hyperprolactinaemia is the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alprostadil or vacuum erection device",
+          "cells": [
+            {
+              "text": "Second-line when oral therapy is ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile prosthesis",
+          "cells": [
+            {
+              "text": "Highly effective for men refractory to drugs and devices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk referral",
+          "cells": [
+            {
+              "text": "Small-vessel penile disease may herald coronary or peripheral arterial disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erectile_dysfunction_organic-dx-mgmt",
+      "title": "Diagnosis and management of Organic erectile dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gradual erectile failure in most situations, with reduced spontaneous erections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiovascular signs, pituitary features, new neurological signs, priapism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiac assessment; endocrine or neurological referral as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Morning testosterone, LH, prolactin, glucose or HbA1c, lipids, blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organic mechanism confirmed (vascular, hormonal or drug cause)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Psychosexual assessment; consider a psychogenic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat cardiometabolic disease with lifestyle change and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substitute medications that cause erectile dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PDE5 inhibitor as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Testosterone or dopamine agonist for hormonal causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Alprostadil, vacuum device or prosthesis when oral therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most men respond well to PDE5 inhibitors and risk-factor modification",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

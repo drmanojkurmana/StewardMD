@@ -1,176 +1,499 @@
 {
- "id": "hashimoto_encephalopathy",
- "name": "Hashimoto encephalopathy (SREAT)",
- "aliases": [
-  "SREAT",
-  "steroid-responsive encephalopathy associated with autoimmune thyroiditis",
-  "Hashimoto's encephalopathy",
-  "encephalopathy associated with autoimmune thyroid disease"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / neuro-endocrine reference literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly anti-thyroid-peroxidase (anti-TPO)",
-   "Presents with fluctuating encephalopathy, cognitive decline, seizures, myoclonus, psychiatric symptoms and stroke-like or tremulous episodes",
-   "Thyroid function is often normal or only mildly deranged, so the encephalopathy is not simply due to hypothyroidism",
-   "It is a diagnosis of exclusion, requiring careful ruling out of infective, metabolic, toxic, vascular and other autoimmune encephalitides",
-   "The presence of thyroid antibodies is a marker of autoimmunity rather than proof of a direct pathogenic role",
-   "Cerebrospinal fluid frequently shows a raised protein without infection, and the EEG commonly demonstrates non-specific slowing",
-   "The characteristic and often dramatic response to glucocorticoids for Hashimoto encephalopathy supports the diagnosis and guides treatment"
+  "id": "hashimoto_encephalopathy",
+  "name": "Hashimoto encephalopathy (SREAT)",
+  "aliases": [
+    "SREAT",
+    "steroid-responsive encephalopathy associated with autoimmune thyroiditis",
+    "Hashimoto's encephalopathy",
+    "encephalopathy associated with autoimmune thyroid disease"
   ],
-  "pathophysiology": "The mechanism is incompletely understood but is thought to be an immune-mediated process affecting the brain in patients with autoimmune thyroid disease. Proposed mechanisms include autoimmune cerebral vasculitis or an antibody-mediated attack on shared neural and thyroid antigens, causing a non-vasculitic inflammatory encephalopathy. The anti-thyroid antibodies are considered a serological marker of the underlying autoimmune tendency rather than directly neurotoxic, and the frequently normal thyroid hormone levels indicate that the encephalopathy is distinct from the metabolic effects of hypothyroidism. The condition's steroid responsiveness is consistent with an inflammatory, immune-driven process.",
-  "additionalDifferentials": [
-   "Autoimmune (antibody-mediated) encephalitis such as anti-NMDA-receptor encephalitis",
-   "Viral or other infective encephalitis",
-   "Creutzfeldt-Jakob disease",
-   "Metabolic or toxic encephalopathy",
-   "Cerebral vasculitis or CNS lymphoma",
-   "Paraneoplastic encephalitis",
-   "Severe hypothyroid encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests",
-   "Cerebrospinal fluid analysis including protein, cell count and infective studies",
-   "Autoimmune and paraneoplastic encephalitis antibody panel to exclude alternatives",
-   "MRI of the brain to exclude structural, vascular and inflammatory lesions",
-   "EEG to characterise encephalopathic changes",
-   "Metabolic, toxic and infective screen"
-  ],
-  "redFlags": [
-   "Status epilepticus or rapidly progressive coma",
-   "Features suggesting an alternative treatable encephalitis or CNS infection",
-   "Rapidly progressive dementia raising concern for prion disease",
-   "An underlying occult malignancy suggesting a paraneoplastic process"
-  ],
-  "prognosis": "Most patients improve substantially with corticosteroid therapy, and the outlook is generally favourable, though relapses occur and some patients have residual cognitive deficits.",
-  "pitfalls": [
-   "Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides",
-   "Attributing the encephalopathy to hypothyroidism and correcting thyroid hormone alone",
-   "Missing an alternative antibody-mediated or infective encephalitis",
-   "Withholding a corticosteroid trial once mimics have been reasonably excluded",
-   "Failing to monitor for relapse after treatment"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Neurology reference literature on steroid-responsive encephalopathy associated with autoimmune thyroiditis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly",
-   "Escalate steroid-refractory or relapsing disease to intravenous immunoglobulin, plasma exchange, or steroid-sparing immunosuppressants such as azathioprine or rituximab",
-   "Correct coexisting thyroid dysfunction with levothyroxine where the patient is hypothyroid",
-   "Control seizures and myoclonus with antiseizure medication as needed",
-   "Exclude infective, metabolic, toxic, vascular, and other autoimmune encephalitides before and alongside treatment, as this is a diagnosis of exclusion",
-   "Monitor cognitive and clinical recovery, surveilling for relapse as corticosteroids are tapered",
-   "Manage jointly through neurology and endocrinology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hashimoto_encephalopathy-pathway",
-   "title": "Hashimoto encephalopathy (SREAT): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly anti-thyroid-peroxidase (anti-TPO)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Status epilepticus or rapidly progressive coma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests, Cerebrospinal fluid analysis including protein, cell count and infective studies, Autoimmune and paraneoplastic encephalitis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hashimoto encephalopathy (sreat)."
-  }
- ],
- "tables": [
-  {
-   "id": "hashimoto_encephalopathy-matrix",
-   "title": "Hashimoto encephalopathy (SREAT): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / neuro-endocrine reference literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly anti-thyroid-peroxidase (anti-TPO)",
+      "Presents with fluctuating encephalopathy, cognitive decline, seizures, myoclonus, psychiatric symptoms and stroke-like or tremulous episodes",
+      "Thyroid function is often normal or only mildly deranged, so the encephalopathy is not simply due to hypothyroidism",
+      "It is a diagnosis of exclusion, requiring careful ruling out of infective, metabolic, toxic, vascular and other autoimmune encephalitides",
+      "The presence of thyroid antibodies is a marker of autoimmunity rather than proof of a direct pathogenic role",
+      "Cerebrospinal fluid frequently shows a raised protein without infection, and the EEG commonly demonstrates non-specific slowing",
+      "The characteristic and often dramatic response to glucocorticoids for Hashimoto encephalopathy supports the diagnosis and guides treatment"
     ],
-    [
-     "Key Investigations",
-     "Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests, Cerebrospinal fluid analysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mechanism is incompletely understood but is thought to be an immune-mediated process affecting the brain in patients with autoimmune thyroid disease. Proposed mechanisms include autoimmune cerebral vasculitis or an antibody-mediated attack on shared neural and thyroid antigens, causing a non-vasculitic inflammatory encephalopathy. The anti-thyroid antibodies are considered a serological marker of the underlying autoimmune tendency rather than directly neurotoxic, and the frequently normal thyroid hormone levels indicate that the encephalopathy is distinct from the metabolic effects of hypothyroidism. The condition's steroid responsiveness is consistent with an inflammatory, immune-driven process.",
+    "additionalDifferentials": [
+      "Autoimmune (antibody-mediated) encephalitis such as anti-NMDA-receptor encephalitis",
+      "Viral or other infective encephalitis",
+      "Creutzfeldt-Jakob disease",
+      "Metabolic or toxic encephalopathy",
+      "Cerebral vasculitis or CNS lymphoma",
+      "Paraneoplastic encephalitis",
+      "Severe hypothyroid encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune (antibody-mediated) encephalitis such as anti-NMDA-receptor encephalitis, Viral or other infective encephalitis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests",
+      "Cerebrospinal fluid analysis including protein, cell count and infective studies",
+      "Autoimmune and paraneoplastic encephalitis antibody panel to exclude alternatives",
+      "MRI of the brain to exclude structural, vascular and inflammatory lesions",
+      "EEG to characterise encephalopathic changes",
+      "Metabolic, toxic and infective screen"
     ],
-    [
-     "Management Strategy",
-     "Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly",
-     "Core treatment modality"
+    "redFlags": [
+      "Status epilepticus or rapidly progressive coma",
+      "Features suggesting an alternative treatable encephalitis or CNS infection",
+      "Rapidly progressive dementia raising concern for prion disease",
+      "An underlying occult malignancy suggesting a paraneoplastic process"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients improve substantially with corticosteroid therapy, and the outlook is generally favourable, though relapses occur and some patients have residual cognitive deficits.",
+    "pitfalls": [
+      "Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides",
+      "Attributing the encephalopathy to hypothyroidism and correcting thyroid hormone alone",
+      "Missing an alternative antibody-mediated or infective encephalitis",
+      "Withholding a corticosteroid trial once mimics have been reasonably excluded",
+      "Failing to monitor for relapse after treatment"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Neurology reference literature on steroid-responsive encephalopathy associated with autoimmune thyroiditis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly",
+      "Escalate steroid-refractory or relapsing disease to intravenous immunoglobulin, plasma exchange, or steroid-sparing immunosuppressants such as azathioprine or rituximab",
+      "Correct coexisting thyroid dysfunction with levothyroxine where the patient is hypothyroid",
+      "Control seizures and myoclonus with antiseizure medication as needed",
+      "Exclude infective, metabolic, toxic, vascular, and other autoimmune encephalitides before and alongside treatment, as this is a diagnosis of exclusion",
+      "Monitor cognitive and clinical recovery, surveilling for relapse as corticosteroids are tapered",
+      "Manage jointly through neurology and endocrinology"
     ]
-   ],
-   "caption": "Overview comparison matrix for hashimoto encephalopathy (sreat)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hashimoto-encephalopathy-real-image",
-   "title": "Hashimoto encephalopathy (SREAT): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hashimoto_encephalopathy-pathway",
+      "title": "Hashimoto encephalopathy (SREAT): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly anti-thyroid-peroxidase (anti-TPO)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Status epilepticus or rapidly progressive coma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests, Cerebrospinal fluid analysis including protein, cell count and infective studies, Autoimmune and paraneoplastic encephalitis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hashimoto encephalopathy (sreat)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hashimoto_encephalopathy-matrix",
+      "title": "Hashimoto encephalopathy (SREAT): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare steroid-responsive encephalopathy associated with high titres of thyroid autoantibodies, particularly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anti-thyroid-peroxidase and anti-thyroglobulin antibody titres with thyroid function tests, Cerebrospinal fluid analysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune (antibody-mediated) encephalitis such as anti-NMDA-receptor encephalitis, Viral or other infective encephalitis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with high-dose corticosteroids as first-line therapy, to which the encephalopathy characteristically responds rapidly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming thyroid antibodies confirm the diagnosis without excluding other encephalitides",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hashimoto encephalopathy (sreat)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / neuro-endocrine reference literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hashimoto_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-TPO and anti-thyroglobulin antibody titres with thyroid function",
+          "cells": [
+            {
+              "text": "High titres; thyroid function often normal or only mildly deranged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Raised protein without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and paraneoplastic antibody panel",
+          "cells": [
+            {
+              "text": "Excludes alternative encephalitides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Excludes structural, vascular and inflammatory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Characterises encephalopathic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic, toxic and infective screen",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hashimoto_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Rapidly progressive dementia raises concern for prion disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic or toxic encephalopathy",
+          "cells": [
+            {
+              "text": "Excluded by the metabolic and toxic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe hypothyroid encephalopathy",
+          "cells": [
+            {
+              "text": "Thyroid function is often normal, so the encephalopathy is not simply hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic encephalitis",
+          "cells": [
+            {
+              "text": "An occult malignancy suggests a paraneoplastic process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-NMDA-receptor encephalitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral or other infective encephalitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hashimoto_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line; the encephalopathy characteristically responds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin or plasma exchange",
+          "cells": [
+            {
+              "text": "For steroid-refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "Where the patient is hypothyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude other encephalitides",
+          "cells": [
+            {
+              "text": "Infective, metabolic, toxic, vascular and autoimmune causes, before and alongside treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Cognitive and clinical recovery; relapse as corticosteroids are tapered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Neurology and endocrinology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hashimoto_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hashimoto encephalopathy (SREAT)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fluctuating encephalopathy with seizures, myoclonus or psychiatric symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, rapid coma, rapid dementia, malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat status epilepticus; exclude prion disease and paraneoplastic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-TPO and thyroglobulin antibodies, CSF, autoimmune panel, MRI, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are alternative encephalitides and metabolic or infective causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue the workup for infective, paraneoplastic or other autoimmune encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous immunoglobulin or plasma exchange for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Levothyroxine if hypothyroid; antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor recovery and relapse as steroids are tapered",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Steroid-responsive course with monitoring for relapse; a diagnosis of exclusion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

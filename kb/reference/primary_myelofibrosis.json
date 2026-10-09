@@ -1,176 +1,678 @@
 {
- "id": "primary_myelofibrosis",
- "name": "Primary myelofibrosis",
- "aliases": [
-  "PMF",
-  "myelofibrosis",
-  "chronic idiopathic myelofibrosis",
-  "agnogenic myeloid metaplasia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis, classically producing marked splenomegaly",
-   "Typical features include fatigue and anaemia, constitutional symptoms (weight loss, night sweats, fever), and abdominal discomfort or early satiety from splenic enlargement",
-   "The blood film shows a leucoerythroblastic picture with teardrop-shaped red cells (dacrocytes), nucleated red cells, and immature myeloid forms",
-   "Attempts to aspirate marrow often yield a dry tap because of fibrosis, so a trephine biopsy demonstrating reticulin or collagen fibrosis is essential",
-   "Driver mutations in JAK2, CALR, or MPL are present in most cases and support the diagnosis; additional high-risk mutations refine prognosis",
-   "Prognostic scoring incorporates age, symptoms, cytopenias, blast count, and cytogenetic/molecular features to guide management decisions",
-   "JAK inhibitors reduce spleen size and constitutional symptoms and can improve quality of life, though they are not curative",
-   "Allogeneic stem cell transplant is the only curative therapy and is considered for suitable higher-risk patients; transformation to acute leukaemia is a feared complication"
+  "id": "primary_myelofibrosis",
+  "name": "Primary myelofibrosis",
+  "aliases": [
+    "PMF",
+    "myelofibrosis",
+    "chronic idiopathic myelofibrosis",
+    "agnogenic myeloid metaplasia"
   ],
-  "pathophysiology": "Primary myelofibrosis originates from a clonal haematopoietic stem cell with dysregulated JAK-STAT signalling, most often driven by JAK2, CALR, or MPL mutations. The abnormal clone, particularly its megakaryocytes, secretes fibrogenic cytokines and growth factors (such as transforming growth factor-beta and platelet-derived growth factor) that stimulate marrow fibroblasts to deposit reticulin and collagen. As the marrow becomes progressively fibrotic, haematopoiesis relocates to the spleen and liver (extramedullary haematopoiesis), causing organomegaly and release of immature cells into the circulation. A chronic inflammatory cytokine state produces constitutional symptoms, and clonal evolution can culminate in acute leukaemia.",
-  "additionalDifferentials": [
-   "Secondary (reactive) myelofibrosis from metastatic cancer or infection",
-   "Post-polycythaemia vera or post-essential thrombocythaemia myelofibrosis",
-   "Chronic myeloid leukaemia",
-   "Myelodysplastic syndrome with fibrosis",
-   "Hairy cell leukaemia and other marrow-infiltrating disorders",
-   "Autoimmune myelofibrosis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film for leucoerythroblastic changes and teardrop cells",
-   "Bone marrow trephine biopsy with reticulin/collagen staining to grade fibrosis",
-   "Molecular testing for JAK2, CALR, and MPL, plus high-molecular-risk mutation panels",
-   "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
-   "Cytogenetic analysis for prognostic stratification",
-   "Abdominal imaging to document splenomegaly and extramedullary disease"
-  ],
-  "redFlags": [
-   "Rapidly rising blast count or new cytogenetic changes indicating leukaemic transformation",
-   "Severe anaemia or thrombocytopenia with bleeding requiring urgent support",
-   "Massive symptomatic splenomegaly with risk of splenic infarction or rupture",
-   "Portal hypertension or splanchnic vein thrombosis from extramedullary haematopoiesis and hypercoagulability"
-  ],
-  "prognosis": "Survival in primary myelofibrosis is highly variable, ranging from many years in low-risk disease to under two years in high-risk categories; adverse cytogenetics, high-risk mutations, transfusion dependence, and excess blasts predict poorer outcomes, and only allogeneic transplant offers cure.",
-  "pitfalls": [
-   "Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection",
-   "Relying on a marrow aspirate alone when fibrosis produces a dry tap and a biopsy is needed",
-   "Failing to exclude chronic myeloid leukaemia with BCR-ABL1 testing",
-   "Overlooking prognostic mutations that would prompt earlier transplant referral",
-   "Not recognising that a JAK inhibitor controls symptoms and spleen size but does not prevent progression"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Risk stratification using prognostic scores such as DIPSS to direct treatment intensity",
-   "Allogeneic haematopoietic stem cell transplantation as the only curative option, offered to eligible higher-risk patients",
-   "JAK inhibition with ruxolitinib to reduce symptomatic splenomegaly and constitutional symptoms",
-   "Anaemia management with erythropoiesis-stimulating agents, an androgen such as danazol, luspatercept or red cell transfusion",
-   "Splenic irradiation or splenectomy for massive symptomatic splenomegaly refractory to drug therapy",
-   "Supportive care including transfusion, iron chelation for transfusional iron overload, and treatment of symptomatic extramedullary haematopoiesis",
-   "Monitoring of blood counts, spleen size and blast proportion for disease progression and leukaemic transformation",
-   "Haematology-led multidisciplinary care with early symptom-focused and palliative support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_myelofibrosis-pathway",
-   "title": "Primary myelofibrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis, classically producing marked splenomegaly",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising blast count or new cytogenetic changes indicating leukaemic transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine biopsy with reticulin/collagen staining to grade fibrosis, Molecular testing for JAK2, CALR, and MPL, plus"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Risk stratification using prognostic scores such as DIPSS to direct treatment intensity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary myelofibrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_myelofibrosis-matrix",
-   "title": "Primary myelofibrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis, classically producing marked splenomegaly",
+      "Typical features include fatigue and anaemia, constitutional symptoms (weight loss, night sweats, fever), and abdominal discomfort or early satiety from splenic enlargement",
+      "The blood film shows a leucoerythroblastic picture with teardrop-shaped red cells (dacrocytes), nucleated red cells, and immature myeloid forms",
+      "Attempts to aspirate marrow often yield a dry tap because of fibrosis, so a trephine biopsy demonstrating reticulin or collagen fibrosis is essential",
+      "Driver mutations in JAK2, CALR, or MPL are present in most cases and support the diagnosis; additional high-risk mutations refine prognosis",
+      "Prognostic scoring incorporates age, symptoms, cytopenias, blast count, and cytogenetic/molecular features to guide management decisions",
+      "JAK inhibitors reduce spleen size and constitutional symptoms and can improve quality of life, though they are not curative",
+      "Allogeneic stem cell transplant is the only curative therapy and is considered for suitable higher-risk patients; transformation to acute leukaemia is a feared complication"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine biopsy with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary myelofibrosis originates from a clonal haematopoietic stem cell with dysregulated JAK-STAT signalling, most often driven by JAK2, CALR, or MPL mutations. The abnormal clone, particularly its megakaryocytes, secretes fibrogenic cytokines and growth factors (such as transforming growth factor-beta and platelet-derived growth factor) that stimulate marrow fibroblasts to deposit reticulin and collagen. As the marrow becomes progressively fibrotic, haematopoiesis relocates to the spleen and liver (extramedullary haematopoiesis), causing organomegaly and release of immature cells into the circulation. A chronic inflammatory cytokine state produces constitutional symptoms, and clonal evolution can culminate in acute leukaemia.",
+    "additionalDifferentials": [
+      "Secondary (reactive) myelofibrosis from metastatic cancer or infection",
+      "Post-polycythaemia vera or post-essential thrombocythaemia myelofibrosis",
+      "Chronic myeloid leukaemia",
+      "Myelodysplastic syndrome with fibrosis",
+      "Hairy cell leukaemia and other marrow-infiltrating disorders",
+      "Autoimmune myelofibrosis"
     ],
-    [
-     "Primary Differentials",
-     "Secondary (reactive) myelofibrosis from metastatic cancer or infection, Post-polycythaemia vera or post-essential",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film for leucoerythroblastic changes and teardrop cells",
+      "Bone marrow trephine biopsy with reticulin/collagen staining to grade fibrosis",
+      "Molecular testing for JAK2, CALR, and MPL, plus high-molecular-risk mutation panels",
+      "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
+      "Cytogenetic analysis for prognostic stratification",
+      "Abdominal imaging to document splenomegaly and extramedullary disease"
     ],
-    [
-     "Management Strategy",
-     "Risk stratification using prognostic scores such as DIPSS to direct treatment intensity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly rising blast count or new cytogenetic changes indicating leukaemic transformation",
+      "Severe anaemia or thrombocytopenia with bleeding requiring urgent support",
+      "Massive symptomatic splenomegaly with risk of splenic infarction or rupture",
+      "Portal hypertension or splanchnic vein thrombosis from extramedullary haematopoiesis and hypercoagulability"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survival in primary myelofibrosis is highly variable, ranging from many years in low-risk disease to under two years in high-risk categories; adverse cytogenetics, high-risk mutations, transfusion dependence, and excess blasts predict poorer outcomes, and only allogeneic transplant offers cure.",
+    "pitfalls": [
+      "Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection",
+      "Relying on a marrow aspirate alone when fibrosis produces a dry tap and a biopsy is needed",
+      "Failing to exclude chronic myeloid leukaemia with BCR-ABL1 testing",
+      "Overlooking prognostic mutations that would prompt earlier transplant referral",
+      "Not recognising that a JAK inhibitor controls symptoms and spleen size but does not prevent progression"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Risk stratification using prognostic scores such as DIPSS to direct treatment intensity",
+      "Allogeneic haematopoietic stem cell transplantation as the only curative option, offered to eligible higher-risk patients",
+      "JAK inhibition with ruxolitinib to reduce symptomatic splenomegaly and constitutional symptoms",
+      "Anaemia management with erythropoiesis-stimulating agents, an androgen such as danazol, luspatercept or red cell transfusion",
+      "Splenic irradiation or splenectomy for massive symptomatic splenomegaly refractory to drug therapy",
+      "Supportive care including transfusion, iron chelation for transfusional iron overload, and treatment of symptomatic extramedullary haematopoiesis",
+      "Monitoring of blood counts, spleen size and blast proportion for disease progression and leukaemic transformation",
+      "Haematology-led multidisciplinary care with early symptom-focused and palliative support"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary myelofibrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-myelofibrosis-real-image",
-   "title": "Primary myelofibrosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "primary_myelofibrosis-pathway",
+      "title": "Primary myelofibrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis, classically producing marked splenomegaly",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising blast count or new cytogenetic changes indicating leukaemic transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine biopsy with reticulin/collagen staining to grade fibrosis, Molecular testing for JAK2, CALR, and MPL, plus"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Risk stratification using prognostic scores such as DIPSS to direct treatment intensity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary myelofibrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_myelofibrosis-matrix",
+      "title": "Primary myelofibrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A myeloproliferative neoplasm defined by clonal proliferation with progressive marrow fibrosis and extramedullary haematopoiesis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine biopsy with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary (reactive) myelofibrosis from metastatic cancer or infection, Post-polycythaemia vera or post-essential",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Risk stratification using prognostic scores such as DIPSS to direct treatment intensity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a leucoerythroblastic film always indicates PMF without excluding marrow infiltration by malignancy or infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary myelofibrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table e21-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 59-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_myelofibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Leucoerythroblastic changes and teardrop cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow trephine biopsy with reticulin and collagen staining",
+          "cells": [
+            {
+              "text": "Grade of fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for JAK2, CALR and MPL",
+          "cells": [
+            {
+              "text": "Driver mutations and high-molecular-risk panels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCR-ABL1 testing",
+          "cells": [
+            {
+              "text": "Exclusion of chronic myeloid leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Prognostic stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Splenomegaly and extramedullary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukaemia",
+          "cells": [
+            {
+              "text": "BCR-ABL1 positive"
+            },
+            {
+              "text": "BCR-ABL1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary (reactive) myelofibrosis",
+          "cells": [
+            {
+              "text": "Metastatic cancer or infection"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-polycythaemia vera or post-essential thrombocythaemia myelofibrosis",
+          "cells": [
+            {
+              "text": "Preceding polycythaemia vera or essential thrombocythaemia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Prognostic scores such as DIPSS to direct treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "Only curative option; offered to eligible higher-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruxolitinib",
+          "cells": [
+            {
+              "text": "JAK inhibition to reduce symptomatic splenomegaly and constitutional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Erythropoiesis-stimulating agents, danazol, luspatercept or red cell transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen",
+          "cells": [
+            {
+              "text": "Splenic irradiation or splenectomy for massive symptomatic splenomegaly refractory to drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Transfusion; iron chelation for transfusional iron overload; treatment of extramedullary haematopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood counts, spleen size and blast proportion for progression and transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Haematology-led care with early symptom-focused and palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Conditions associated with a dry tap",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Share of dry taps"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic carcinoma infiltration",
+          "cells": [
+            {
+              "text": "17%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "15%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myelofibrosis",
+          "cells": [
+            {
+              "text": "14%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hairy cell leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphomas, Hodgkin's disease",
+          "cells": [
+            {
+              "text": "9%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal marrow",
+          "cells": [
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Dry taps occur in about 4% of aspiration attempts."
+    },
+    {
+      "id": "primary_myelofibrosis-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Diseases associated with massive splenomegaly",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Association"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphomas",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hairy cell leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelofibrosis with myeloid metaplasia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Polycythemia vera",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gaucher's disease",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic lymphocytic leukemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autoimmune hemolytic anemia",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diffuse splenic hemangiomatosis",
+          "cells": [
+            {
+              "text": "Listed cause of massive splenomegaly"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Massive splenomegaly means the spleen extends more than 8 cm below the left costal margin and/or weighs more than 1000 g."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_myelofibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Primary myelofibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary myelofibrosis: marrow fibrosis with leucoerythroblastic film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising blasts, severe anaemia with bleeding, massive spleen or portal hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for transformation or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; trephine biopsy with reticulin; JAK2, CALR, MPL; BCR-ABL1; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do marrow biopsy and molecular tests confirm primary myelofibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CML, reactive or post-PV or post-ET myelofibrosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prognostic scoring such as DIPSS to direct treatment intensity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic transplant as the only curative option",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ruxolitinib to reduce splenomegaly and constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anaemia management, transfusion, and splenic irradiation if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haematology-led care with early symptom-focused and palliative support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

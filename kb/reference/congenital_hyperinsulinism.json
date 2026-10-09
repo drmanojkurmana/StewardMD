@@ -1,173 +1,460 @@
 {
- "id": "congenital_hyperinsulinism",
- "name": "Congenital hyperinsulinism",
- "aliases": [
-  "CHI",
-  "persistent hyperinsulinaemic hypoglycaemia of infancy",
-  "PHHI",
-  "nesidioblastosis",
-  "ABCC8/KCNJ11 hyperinsulinism"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
-   "Most severe forms result from inactivating mutations in the KATP channel genes ABCC8 and KCNJ11, with several other genes implicated",
-   "Biochemically defined by detectable or inappropriately elevated insulin with suppressed ketones and free fatty acids during hypoglycaemia",
-   "A brisk glycaemic response to glucagon at the time of hypoglycaemia supports the diagnosis",
-   "Histology distinguishes diffuse disease affecting the whole pancreas from focal lesions confined to one region",
-   "Focal disease can be localised with specialised pancreatic imaging and potentially cured by limited surgical resection",
-   "Diazoxide is the first-line medical therapy, but KATP channel forms are frequently unresponsive and may need additional agents or surgery"
+  "id": "congenital_hyperinsulinism",
+  "name": "Congenital hyperinsulinism",
+  "aliases": [
+    "CHI",
+    "persistent hyperinsulinaemic hypoglycaemia of infancy",
+    "PHHI",
+    "nesidioblastosis",
+    "ABCC8/KCNJ11 hyperinsulinism"
   ],
-  "pathophysiology": "Insulin secretion is normally gated by the beta-cell KATP channel, which closes as ATP rises to trigger release. In congenital hyperinsulinism, inactivating mutations in the channel genes ABCC8 or KCNJ11, or defects in other regulators of insulin secretion, cause the channel to remain closed, so insulin is released regardless of the prevailing glucose. Unregulated insulin drives profound hypoglycaemia and simultaneously suppresses lipolysis and ketogenesis, depriving the brain of alternative fuels and creating a high risk of neurological injury. Focal disease reflects a localised somatic event superimposed on a paternally inherited mutation.",
-  "additionalDifferentials": [
-   "Transient hyperinsulinism of the infant of a diabetic or growth-restricted mother",
-   "Beckwith-Wiedemann syndrome and other overgrowth syndromes",
-   "Fatty acid oxidation and ketogenesis disorders",
-   "Glycogen storage disease and other metabolic causes of hypoglycaemia",
-   "Panhypopituitarism or isolated cortisol deficiency"
-  ],
-  "additionalInvestigations": [
-   "Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids",
-   "Glucagon stimulation test at the time of hypoglycaemia to assess glycaemic response",
-   "Assessment of glucose infusion requirement to demonstrate the degree of hyperinsulinism",
-   "Molecular genetic testing of ABCC8, KCNJ11 and other hyperinsulinism genes",
-   "Specialised functional pancreatic imaging to distinguish focal from diffuse disease"
-  ],
-  "redFlags": [
-   "Recurrent or severe hypoglycaemia with seizures or reduced consciousness threatening brain injury",
-   "Very high glucose infusion requirements that cannot maintain normoglycaemia",
-   "Failure to respond to diazoxide, indicating likely KATP channel disease needing escalation",
-   "Signs of an underlying overgrowth or metabolic syndrome requiring broader evaluation"
-  ],
-  "prognosis": "Outcome depends on prompt prevention of hypoglycaemia to protect the brain; focal disease can be cured by targeted resection, whereas diffuse KATP channel disease is often medically resistant and may require near-total pancreatectomy with later risk of diabetes.",
-  "pitfalls": [
-   "Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry",
-   "Tolerating borderline glucose levels and underestimating the risk of permanent neurological damage",
-   "Assuming diazoxide will work in KATP channel disease and delaying escalation or surgery",
-   "Proceeding to extensive surgery without imaging to distinguish focal from diffuse disease"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and frequent or continuous enteral feeding to protect the developing brain",
-   "First-line medical therapy is diazoxide, which opens the beta-cell KATP channel, given alongside a thiazide diuretic to counter fluid retention",
-   "Add or substitute somatostatin analogues such as octreotide or long-acting lanreotide, and consider a glucagon infusion, in diazoxide-unresponsive disease",
-   "Distinguish focal from diffuse disease with specialised fluorine-18-DOPA PET pancreatic imaging, since focal lesions can be cured by limited pancreatectomy",
-   "For diffuse, medically resistant disease consider near-total pancreatectomy, accepting the later risk of diabetes and exocrine insufficiency",
-   "Monitor neurodevelopment and screen for later diabetes and exocrine pancreatic failure after surgery",
-   "Offer genetic counselling and testing of ABCC8 and KCNJ11, including parental origin to predict focal disease, and refer to a specialist congenital hyperinsulinism centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_hyperinsulinism-pathway",
-   "title": "Congenital hyperinsulinism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe hypoglycaemia with seizures or reduced consciousness threatening brain injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids, Glucagon stimulation test at the time of hypoglycaemia to assess glycaemic response, Assessment of glucose infusion requirement to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and frequent or continuous enteral feeding to protect the developing brain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital hyperinsulinism."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_hyperinsulinism-matrix",
-   "title": "Congenital hyperinsulinism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
+      "Most severe forms result from inactivating mutations in the KATP channel genes ABCC8 and KCNJ11, with several other genes implicated",
+      "Biochemically defined by detectable or inappropriately elevated insulin with suppressed ketones and free fatty acids during hypoglycaemia",
+      "A brisk glycaemic response to glucagon at the time of hypoglycaemia supports the diagnosis",
+      "Histology distinguishes diffuse disease affecting the whole pancreas from focal lesions confined to one region",
+      "Focal disease can be localised with specialised pancreatic imaging and potentially cured by limited surgical resection",
+      "Diazoxide is the first-line medical therapy, but KATP channel forms are frequently unresponsive and may need additional agents or surgery"
     ],
-    [
-     "Key Investigations",
-     "Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids, Glucagon stimulation test at the time",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Insulin secretion is normally gated by the beta-cell KATP channel, which closes as ATP rises to trigger release. In congenital hyperinsulinism, inactivating mutations in the channel genes ABCC8 or KCNJ11, or defects in other regulators of insulin secretion, cause the channel to remain closed, so insulin is released regardless of the prevailing glucose. Unregulated insulin drives profound hypoglycaemia and simultaneously suppresses lipolysis and ketogenesis, depriving the brain of alternative fuels and creating a high risk of neurological injury. Focal disease reflects a localised somatic event superimposed on a paternally inherited mutation.",
+    "additionalDifferentials": [
+      "Transient hyperinsulinism of the infant of a diabetic or growth-restricted mother",
+      "Beckwith-Wiedemann syndrome and other overgrowth syndromes",
+      "Fatty acid oxidation and ketogenesis disorders",
+      "Glycogen storage disease and other metabolic causes of hypoglycaemia",
+      "Panhypopituitarism or isolated cortisol deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Transient hyperinsulinism of the infant of a diabetic or growth-restricted mother, Beckwith-Wiedemann syndrome and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids",
+      "Glucagon stimulation test at the time of hypoglycaemia to assess glycaemic response",
+      "Assessment of glucose infusion requirement to demonstrate the degree of hyperinsulinism",
+      "Molecular genetic testing of ABCC8, KCNJ11 and other hyperinsulinism genes",
+      "Specialised functional pancreatic imaging to distinguish focal from diffuse disease"
     ],
-    [
-     "Management Strategy",
-     "Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe hypoglycaemia with seizures or reduced consciousness threatening brain injury",
+      "Very high glucose infusion requirements that cannot maintain normoglycaemia",
+      "Failure to respond to diazoxide, indicating likely KATP channel disease needing escalation",
+      "Signs of an underlying overgrowth or metabolic syndrome requiring broader evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on prompt prevention of hypoglycaemia to protect the brain; focal disease can be cured by targeted resection, whereas diffuse KATP channel disease is often medically resistant and may require near-total pancreatectomy with later risk of diabetes.",
+    "pitfalls": [
+      "Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry",
+      "Tolerating borderline glucose levels and underestimating the risk of permanent neurological damage",
+      "Assuming diazoxide will work in KATP channel disease and delaying escalation or surgery",
+      "Proceeding to extensive surgery without imaging to distinguish focal from diffuse disease"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and frequent or continuous enteral feeding to protect the developing brain",
+      "First-line medical therapy is diazoxide, which opens the beta-cell KATP channel, given alongside a thiazide diuretic to counter fluid retention",
+      "Add or substitute somatostatin analogues such as octreotide or long-acting lanreotide, and consider a glucagon infusion, in diazoxide-unresponsive disease",
+      "Distinguish focal from diffuse disease with specialised fluorine-18-DOPA PET pancreatic imaging, since focal lesions can be cured by limited pancreatectomy",
+      "For diffuse, medically resistant disease consider near-total pancreatectomy, accepting the later risk of diabetes and exocrine insufficiency",
+      "Monitor neurodevelopment and screen for later diabetes and exocrine pancreatic failure after surgery",
+      "Offer genetic counselling and testing of ABCC8 and KCNJ11, including parental origin to predict focal disease, and refer to a specialist congenital hyperinsulinism centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital hyperinsulinism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-hyperinsulinism-real-image",
-   "title": "Congenital hyperinsulinism: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "congenital_hyperinsulinism-pathway",
+      "title": "Congenital hyperinsulinism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe hypoglycaemia with seizures or reduced consciousness threatening brain injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids, Glucagon stimulation test at the time of hypoglycaemia to assess glycaemic response, Assessment of glucose infusion requirement to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and frequent or continuous enteral feeding to protect the developing brain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital hyperinsulinism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_hyperinsulinism-matrix",
+      "title": "Congenital hyperinsulinism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of persistent hypoglycaemia in neonates and infants, driven by dysregulated insulin secretion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Critical (hypoglycaemia-timed) sample for insulin, C-peptide, ketones and free fatty acids, Glucagon stimulation test at the time",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transient hyperinsulinism of the infant of a diabetic or growth-restricted mother, Beckwith-Wiedemann syndrome and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide immediate correction and prevention of hypoglycaemia with high-concentration intravenous glucose via central access and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to obtain a critical blood sample during hypoglycaemia, losing the key diagnostic biochemistry",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital hyperinsulinism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hyperinsulinism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Critical hypoglycaemia-timed sample for insulin, C-peptide, ketones and FFA",
+          "cells": [
+            {
+              "text": "Hyperinsulinism confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucagon stimulation test during hypoglycaemia",
+          "cells": [
+            {
+              "text": "Glycaemic response assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose infusion requirement",
+          "cells": [
+            {
+              "text": "Degree of hyperinsulinism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of ABCC8, KCNJ11 and other genes",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional pancreatic imaging (fluorine-18-DOPA PET)",
+          "cells": [
+            {
+              "text": "Focal versus diffuse disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hyperinsulinism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transient hyperinsulinism of infants of diabetic or growth-restricted mothers",
+          "cells": [
+            {
+              "text": "Maternal diabetes or growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann syndrome and other overgrowth syndromes",
+          "cells": [
+            {
+              "text": "Overgrowth on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty acid oxidation and ketogenesis disorders",
+          "cells": [
+            {
+              "text": "Named metabolic cause of hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hyperinsulinism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous glucose",
+          "cells": [
+            {
+              "text": "High-concentration glucose via central access; frequent or continuous feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diazoxide with thiazide",
+          "cells": [
+            {
+              "text": "First-line; opens beta-cell KATP channel; thiazide counters fluid retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Octreotide or lanreotide",
+          "cells": [
+            {
+              "text": "Diazoxide-unresponsive disease; glucagon infusion considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal disease resection",
+          "cells": [
+            {
+              "text": "Focal lesions can be cured by limited pancreatectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Near-total pancreatectomy",
+          "cells": [
+            {
+              "text": "Diffuse, medically resistant disease; later diabetes and exocrine insufficiency risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental monitoring",
+          "cells": [
+            {
+              "text": "After surgery, screen for diabetes and exocrine failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "ABCC8 and KCNJ11 testing, including parental origin to predict focal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hyperinsulinism-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hyperinsulinism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital hyperinsulinism: recurrent hypoglycaemia in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, high glucose infusion need, diazoxide failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV glucose; prevent hypoglycaemia to protect the brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Critical sample for insulin and C-peptide; glucagon test; ABCC8/KCNJ11; PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do critical samples and genetics confirm hyperinsulinism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient neonatal hyperinsulinism or metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-concentration intravenous glucose to prevent hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diazoxide with a thiazide diuretic as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Octreotide or lanreotide if diazoxide-unresponsive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resection for focal disease; near-total pancreatectomy for diffuse disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Focal disease can be cured by resection; diffuse KATP disease needs ongoing care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

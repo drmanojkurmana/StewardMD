@@ -1,172 +1,459 @@
 {
- "id": "mitral_arcade",
- "name": "Mitral arcade (hammock valve)",
- "aliases": [
-  "hammock mitral valve",
-  "anomalous mitral arcade",
-  "arcade of the mitral valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short thickened chordae, to a bridge of fibrous tissue along the leaflet edge",
-   "The resulting 'hammock' arrangement restricts leaflet motion and disrupts normal coaptation, causing mitral stenosis, regurgitation, or a mixed lesion",
-   "Part of the spectrum of congenital mitral inflow anomalies and often associated with other left heart obstructive lesions",
-   "Typically presents in infancy or childhood with breathlessness, poor feeding or failure to thrive, and features of pulmonary venous congestion, though milder forms may present later",
-   "Careful echocardiographic assessment of the whole mitral apparatus, including papillary muscles and chordae, is essential to define the mechanism",
-   "Distinguishing arcade from other congenital mitral lesions such as parachute valve and supravalvar ring guides surgical planning",
-   "Management is surgical when the lesion is significant, favouring valve repair where feasible, with replacement reserved for valves not amenable to repair"
+  "id": "mitral_arcade",
+  "name": "Mitral arcade (hammock valve)",
+  "aliases": [
+    "hammock mitral valve",
+    "anomalous mitral arcade",
+    "arcade of the mitral valve"
   ],
-  "pathophysiology": "In a mitral arcade the normal delicate chordal support of the mitral leaflets is replaced by direct or near-direct insertion of the papillary muscles into a thickened fibrous ridge running along the free edge of the leaflets. This tethering fixes the leaflets in a curtain-like or hammock configuration that limits their excursion and prevents proper coaptation, so blood flow across the valve is obstructed and, or, the valve leaks. The consequent rise in left atrial pressure is transmitted to the pulmonary circulation, producing pulmonary venous congestion and, if long-standing, pulmonary hypertension and right heart strain.",
-  "additionalDifferentials": [
-   "Parachute mitral valve",
-   "Supravalvar mitral ring",
-   "Congenital mitral stenosis from other causes",
-   "Cor triatriatum sinistrum",
-   "Rheumatic mitral valve disease",
-   "Shone complex with multilevel left heart obstruction"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles",
-   "Transoesophageal echocardiography for finer definition of the subvalvar apparatus",
-   "Three-dimensional echocardiography to display the arcade morphology for surgical planning",
-   "Cardiac MRI or CT to clarify anatomy and associated left heart lesions when needed",
-   "Assessment of pulmonary artery pressure by echocardiography or right heart catheterisation"
-  ],
-  "redFlags": [
-   "Heart failure or failure to thrive in an infant with a congenital mitral lesion",
-   "Severe mitral stenosis or regurgitation with pulmonary venous congestion",
-   "Established pulmonary hypertension from chronic obstruction",
-   "Multilevel left heart obstruction indicating a Shone-type complex"
-  ],
-  "prognosis": "The outlook depends on the severity of valve dysfunction and associated lesions; timely repair can give good results, but the abnormal apparatus makes durable repair challenging and some patients ultimately require valve replacement.",
-  "pitfalls": [
-   "Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible",
-   "Confusing an arcade with a parachute valve or supravalvar ring, which alters surgical strategy",
-   "Failing to look for associated left heart obstructive lesions",
-   "Underestimating the difficulty of achieving a durable repair of the malformed apparatus"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the management of adult congenital heart disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve replacement when durable repair is not possible",
-   "Medical therapy of pulmonary venous congestion and heart failure with diuretics and afterload reduction to stabilise symptoms before surgery",
-   "Nutritional support for failure to thrive in infants with feeding difficulty",
-   "Detailed echocardiographic assessment of the whole mitral apparatus to define the mechanism and distinguish arcade from parachute valve and supravalvar ring, guiding surgical planning",
-   "Monitor for and manage pulmonary hypertension and right heart strain",
-   "Screen for associated left-heart obstructive lesions and attend to oral health and endocarditis prevention",
-   "Paediatric cardiology and congenital cardiac surgical referral with long-term follow-up for recurrent or residual valve dysfunction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mitral_arcade-pathway",
-   "title": "Mitral arcade (hammock valve): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short thickened chordae, to a bridge of fibrous tissue along the leaflet edge",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heart failure or failure to thrive in an infant with a congenital mitral lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles, Transoesophageal echocardiography for finer definition of the subvalvar apparatus, Three-dimensional echocardiography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve replacement when durable repair is not possible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mitral arcade (hammock valve)."
-  }
- ],
- "tables": [
-  {
-   "id": "mitral_arcade-matrix",
-   "title": "Mitral arcade (hammock valve): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short thickened chordae, to a bridge of fibrous tissue along the leaflet edge",
+      "The resulting 'hammock' arrangement restricts leaflet motion and disrupts normal coaptation, causing mitral stenosis, regurgitation, or a mixed lesion",
+      "Part of the spectrum of congenital mitral inflow anomalies and often associated with other left heart obstructive lesions",
+      "Typically presents in infancy or childhood with breathlessness, poor feeding or failure to thrive, and features of pulmonary venous congestion, though milder forms may present later",
+      "Careful echocardiographic assessment of the whole mitral apparatus, including papillary muscles and chordae, is essential to define the mechanism",
+      "Distinguishing arcade from other congenital mitral lesions such as parachute valve and supravalvar ring guides surgical planning",
+      "Management is surgical when the lesion is significant, favouring valve repair where feasible, with replacement reserved for valves not amenable to repair"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles, Transoesophageal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In a mitral arcade the normal delicate chordal support of the mitral leaflets is replaced by direct or near-direct insertion of the papillary muscles into a thickened fibrous ridge running along the free edge of the leaflets. This tethering fixes the leaflets in a curtain-like or hammock configuration that limits their excursion and prevents proper coaptation, so blood flow across the valve is obstructed and, or, the valve leaks. The consequent rise in left atrial pressure is transmitted to the pulmonary circulation, producing pulmonary venous congestion and, if long-standing, pulmonary hypertension and right heart strain.",
+    "additionalDifferentials": [
+      "Parachute mitral valve",
+      "Supravalvar mitral ring",
+      "Congenital mitral stenosis from other causes",
+      "Cor triatriatum sinistrum",
+      "Rheumatic mitral valve disease",
+      "Shone complex with multilevel left heart obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Parachute mitral valve, Supravalvar mitral ring, Congenital mitral stenosis from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles",
+      "Transoesophageal echocardiography for finer definition of the subvalvar apparatus",
+      "Three-dimensional echocardiography to display the arcade morphology for surgical planning",
+      "Cardiac MRI or CT to clarify anatomy and associated left heart lesions when needed",
+      "Assessment of pulmonary artery pressure by echocardiography or right heart catheterisation"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve",
-     "Core treatment modality"
+    "redFlags": [
+      "Heart failure or failure to thrive in an infant with a congenital mitral lesion",
+      "Severe mitral stenosis or regurgitation with pulmonary venous congestion",
+      "Established pulmonary hypertension from chronic obstruction",
+      "Multilevel left heart obstruction indicating a Shone-type complex"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook depends on the severity of valve dysfunction and associated lesions; timely repair can give good results, but the abnormal apparatus makes durable repair challenging and some patients ultimately require valve replacement.",
+    "pitfalls": [
+      "Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible",
+      "Confusing an arcade with a parachute valve or supravalvar ring, which alters surgical strategy",
+      "Failing to look for associated left heart obstructive lesions",
+      "Underestimating the difficulty of achieving a durable repair of the malformed apparatus"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the management of adult congenital heart disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve replacement when durable repair is not possible",
+      "Medical therapy of pulmonary venous congestion and heart failure with diuretics and afterload reduction to stabilise symptoms before surgery",
+      "Nutritional support for failure to thrive in infants with feeding difficulty",
+      "Detailed echocardiographic assessment of the whole mitral apparatus to define the mechanism and distinguish arcade from parachute valve and supravalvar ring, guiding surgical planning",
+      "Monitor for and manage pulmonary hypertension and right heart strain",
+      "Screen for associated left-heart obstructive lesions and attend to oral health and endocarditis prevention",
+      "Paediatric cardiology and congenital cardiac surgical referral with long-term follow-up for recurrent or residual valve dysfunction"
     ]
-   ],
-   "caption": "Overview comparison matrix for mitral arcade (hammock valve)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mitral-arcade-real-image",
-   "title": "Mitral arcade (hammock valve): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "mitral_arcade-pathway",
+      "title": "Mitral arcade (hammock valve): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short thickened chordae, to a bridge of fibrous tissue along the leaflet edge",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heart failure or failure to thrive in an infant with a congenital mitral lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles, Transoesophageal echocardiography for finer definition of the subvalvar apparatus, Three-dimensional echocardiography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve replacement when durable repair is not possible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mitral arcade (hammock valve)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mitral_arcade-matrix",
+      "title": "Mitral arcade (hammock valve): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare congenital malformation of the mitral subvalvar apparatus in which papillary muscles connect directly, or through short",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with detailed assessment of leaflets, chordae, and papillary muscles, Transoesophageal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parachute mitral valve, Supravalvar mitral ring, Congenital mitral stenosis from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical, with mitral valve repair of the abnormal subvalvar apparatus where feasible or valve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing mitral stenosis without recognising the abnormal subvalvar arcade responsible",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mitral arcade (hammock valve)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_arcade-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography of leaflets, chordae and papillary muscles",
+          "cells": [
+            {
+              "text": "Leaflet, chordal and papillary muscle anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Subvalvar apparatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-dimensional echocardiography",
+          "cells": [
+            {
+              "text": "Arcade morphology for surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI or CT, when needed",
+          "cells": [
+            {
+              "text": "Anatomy and associated left heart lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of pulmonary artery pressure",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_arcade-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parachute mitral valve",
+          "cells": [
+            {
+              "text": "Distinguished by detailed echo of the mitral apparatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supravalvar mitral ring",
+          "cells": [
+            {
+              "text": "Distinguished by detailed echo of the mitral apparatus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shone complex with multilevel left heart obstruction",
+          "cells": [
+            {
+              "text": "Multilevel left heart obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_arcade-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Mitral repair of the abnormal subvalvar apparatus where feasible; replacement when durable repair is not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy before surgery",
+          "cells": [
+            {
+              "text": "Diuretics and afterload reduction for pulmonary venous congestion and heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "For failure to thrive with feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic mapping",
+          "cells": [
+            {
+              "text": "Defines the mechanism and distinguishes arcade from parachute valve and supravalvar ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Monitoring and management, including right heart strain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated lesions and prophylaxis",
+          "cells": [
+            {
+              "text": "Screen for left-heart obstructive lesions; oral health and endocarditis prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric cardiology follow-up",
+          "cells": [
+            {
+              "text": "Long-term surveillance for recurrent or residual valve dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_arcade-dx-mgmt",
+      "title": "Diagnosis and management of Mitral arcade (hammock valve)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with a congenital mitral lesion, heart failure or failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Mitral dysfunction with congestion, pulmonary hypertension or multilevel obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Diuretics and afterload reduction for congestion; urgent cardiac surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE with leaflets, chordae and papillary muscles; TOE; 3D echo; MRI or CT if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an arcade-type subvalvar apparatus confirmed on 3D echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider parachute valve, supravalvar ring or cor triatriatum; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical mitral repair of the subvalvar apparatus where feasible, otherwise replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics and afterload reduction to stabilise congestion before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support for failure to thrive in infants with feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for and manage pulmonary hypertension and right heart strain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Paediatric cardiology and surgical follow-up for residual or recurrent dysfunction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

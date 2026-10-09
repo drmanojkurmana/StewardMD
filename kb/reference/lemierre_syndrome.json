@@ -1,178 +1,476 @@
 {
- "id": "lemierre_syndrome",
- "name": "Lemierre syndrome",
- "aliases": [
-  "Postanginal sepsis",
-  "Necrobacillosis",
-  "Fusobacterium necrophorum sepsis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Infectious diseases references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and metastatic septic emboli.",
-   "Fusobacterium necrophorum, an obligate anaerobic gram-negative bacillus of the oropharyngeal flora, is the usual pathogen.",
-   "It characteristically strikes previously healthy adolescents and young adults.",
-   "Suspect it when a sore throat is followed by unilateral neck pain or swelling, rigors and pleuritic chest pain rather than by recovery.",
-   "Septic pulmonary emboli typically produce multiple peripheral, often cavitating, lung nodules; other seeding sites include joints, bone and liver.",
-   "Contrast-enhanced neck imaging or Doppler ultrasound demonstrates the internal jugular vein thrombus that defines the syndrome.",
-   "Blood cultures grow the organism, but anaerobes are slow, so prolonged incubation and a high index of suspicion are essential.",
-   "Prolonged anaerobic-active antibiotic therapy is the mainstay; the role of adjunctive anticoagulation remains debated."
+  "id": "lemierre_syndrome",
+  "name": "Lemierre syndrome",
+  "aliases": [
+    "Postanginal sepsis",
+    "Necrobacillosis",
+    "Fusobacterium necrophorum sepsis"
   ],
-  "pathophysiology": "Lemierre syndrome usually begins with an acute oropharyngeal infection, most often pharyngotonsillitis and occasionally otitis, mastoiditis or dental sepsis. Fusobacterium necrophorum, a fastidious obligate anaerobic gram-negative bacillus that lives as a commensal of the mouth and throat, invades the deep pharyngeal tissues and the peritonsillar and parapharyngeal spaces, gaining access to the tonsillar veins and thence the internal jugular vein. Virulence factors, notably a leucocyte-destroying toxin and lipopolysaccharide together with the organism's capacity to promote platelet aggregation, provoke local septic thrombophlebitis. The infected thrombus then becomes a source of septic emboli that disseminate through the bloodstream, most frequently to the lungs, producing septic pulmonary emboli and cavitating nodules, but also to joints, bone, soft tissue and liver. The combination of an anaerobic bacteraemia and a persistent endovascular focus drives a severe systemic inflammatory response.",
-  "additionalDifferentials": [
-   "Peritonsillar or parapharyngeal abscess without venous involvement",
-   "Deep neck space infection or Ludwig angina",
-   "Infective endocarditis with septic emboli",
-   "Community-acquired pneumonia or septic pulmonary emboli from another source",
-   "Bacterial meningitis",
-   "Epstein-Barr virus infectious mononucleosis, which may precede or predispose",
-   "Cervical lymphadenitis"
-  ],
-  "additionalInvestigations": [
-   "Aerobic and anaerobic blood cultures held for prolonged incubation",
-   "Contrast-enhanced CT of the neck and chest to show internal jugular vein thrombosis and emboli",
-   "Doppler ultrasound of the neck veins",
-   "Chest imaging for septic pulmonary emboli and cavitation",
-   "Full blood count and inflammatory markers",
-   "Echocardiography if endocarditis is suspected",
-   "Throat aspirate with species-specific or broad-range molecular testing"
-  ],
-  "redFlags": [
-   "Unilateral neck pain, swelling or trismus following a sore throat",
-   "Rigors and spiking fever with pleuritic chest pain, suggesting septic pulmonary emboli",
-   "New respiratory distress or hypoxaemia",
-   "Features of metastatic infection such as septic arthritis or hepatic abscess",
-   "Rapid clinical deterioration or septic shock"
-  ],
-  "prognosis": "Once frequently fatal, Lemierre syndrome now has a favourable outcome in most patients when it is recognised promptly and treated with prolonged appropriate antibiotics. Delayed diagnosis, extensive metastatic complications and septic shock still carry appreciable morbidity and mortality.",
-  "pitfalls": [
-   "Dismissing a sore throat that has worsened and thereby missing the diagnosis.",
-   "Attributing the pulmonary nodules to ordinary pneumonia and overlooking the neck as the primary focus.",
-   "Stopping antibiotics too early given the endovascular nature of the infection.",
-   "Failing to incubate anaerobic cultures for long enough to recover the organism.",
-   "Using anticoagulation uncritically without weighing bleeding risk, since the evidence for it is uncertain."
-  ],
-  "references": [
-   "Infectious diseases reference texts",
-   "Anaerobic infection clinical reviews",
-   "Head and neck infection guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like piperacillin-tazobactam, a carbapenem, or metronidazole-containing combinations, targeting Fusobacterium necrophorum",
-   "Achieve source control with drainage of peritonsillar, parapharyngeal or metastatic abscesses and empyema",
-   "Provide sepsis management with fluid resuscitation and organ support",
-   "Consider anticoagulation on a case-by-case basis, particularly with thrombus propagation or lack of clinical improvement",
-   "Monitor for and manage septic pulmonary emboli and other metastatic foci in joints, bone and liver",
-   "Escalate to intensive care for septic shock or respiratory failure, and involve ENT and infectious-diseases specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lemierre_syndrome-pathway",
-   "title": "Lemierre syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and metastatic septic emboli.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral neck pain, swelling or trismus following a sore throat",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Aerobic and anaerobic blood cultures held for prolonged incubation, Contrast-enhanced CT of the neck and chest to show internal jugular vein thrombosis and emboli, Doppler ultrasound of the neck veins"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like piperacillin-tazobactam, a carbapenem, or metronidazole-containing combinations, targeting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a sore throat that has worsened and thereby missing the diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lemierre syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lemierre_syndrome-matrix",
-   "title": "Lemierre syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Infectious diseases references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and metastatic septic emboli.",
+      "Fusobacterium necrophorum, an obligate anaerobic gram-negative bacillus of the oropharyngeal flora, is the usual pathogen.",
+      "It characteristically strikes previously healthy adolescents and young adults.",
+      "Suspect it when a sore throat is followed by unilateral neck pain or swelling, rigors and pleuritic chest pain rather than by recovery.",
+      "Septic pulmonary emboli typically produce multiple peripheral, often cavitating, lung nodules; other seeding sites include joints, bone and liver.",
+      "Contrast-enhanced neck imaging or Doppler ultrasound demonstrates the internal jugular vein thrombus that defines the syndrome.",
+      "Blood cultures grow the organism, but anaerobes are slow, so prolonged incubation and a high index of suspicion are essential.",
+      "Prolonged anaerobic-active antibiotic therapy is the mainstay; the role of adjunctive anticoagulation remains debated."
     ],
-    [
-     "Key Investigations",
-     "Aerobic and anaerobic blood cultures held for prolonged incubation, Contrast-enhanced CT of the neck and chest to show internal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lemierre syndrome usually begins with an acute oropharyngeal infection, most often pharyngotonsillitis and occasionally otitis, mastoiditis or dental sepsis. Fusobacterium necrophorum, a fastidious obligate anaerobic gram-negative bacillus that lives as a commensal of the mouth and throat, invades the deep pharyngeal tissues and the peritonsillar and parapharyngeal spaces, gaining access to the tonsillar veins and thence the internal jugular vein. Virulence factors, notably a leucocyte-destroying toxin and lipopolysaccharide together with the organism's capacity to promote platelet aggregation, provoke local septic thrombophlebitis. The infected thrombus then becomes a source of septic emboli that disseminate through the bloodstream, most frequently to the lungs, producing septic pulmonary emboli and cavitating nodules, but also to joints, bone, soft tissue and liver. The combination of an anaerobic bacteraemia and a persistent endovascular focus drives a severe systemic inflammatory response.",
+    "additionalDifferentials": [
+      "Peritonsillar or parapharyngeal abscess without venous involvement",
+      "Deep neck space infection or Ludwig angina",
+      "Infective endocarditis with septic emboli",
+      "Community-acquired pneumonia or septic pulmonary emboli from another source",
+      "Bacterial meningitis",
+      "Epstein-Barr virus infectious mononucleosis, which may precede or predispose",
+      "Cervical lymphadenitis"
     ],
-    [
-     "Primary Differentials",
-     "Peritonsillar or parapharyngeal abscess without venous involvement, Deep neck space infection or Ludwig angina, Infective",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Aerobic and anaerobic blood cultures held for prolonged incubation",
+      "Contrast-enhanced CT of the neck and chest to show internal jugular vein thrombosis and emboli",
+      "Doppler ultrasound of the neck veins",
+      "Chest imaging for septic pulmonary emboli and cavitation",
+      "Full blood count and inflammatory markers",
+      "Echocardiography if endocarditis is suspected",
+      "Throat aspirate with species-specific or broad-range molecular testing"
     ],
-    [
-     "Management Strategy",
-     "Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral neck pain, swelling or trismus following a sore throat",
+      "Rigors and spiking fever with pleuritic chest pain, suggesting septic pulmonary emboli",
+      "New respiratory distress or hypoxaemia",
+      "Features of metastatic infection such as septic arthritis or hepatic abscess",
+      "Rapid clinical deterioration or septic shock"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a sore throat that has worsened and thereby missing the diagnosis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Once frequently fatal, Lemierre syndrome now has a favourable outcome in most patients when it is recognised promptly and treated with prolonged appropriate antibiotics. Delayed diagnosis, extensive metastatic complications and septic shock still carry appreciable morbidity and mortality.",
+    "pitfalls": [
+      "Dismissing a sore throat that has worsened and thereby missing the diagnosis.",
+      "Attributing the pulmonary nodules to ordinary pneumonia and overlooking the neck as the primary focus.",
+      "Stopping antibiotics too early given the endovascular nature of the infection.",
+      "Failing to incubate anaerobic cultures for long enough to recover the organism.",
+      "Using anticoagulation uncritically without weighing bleeding risk, since the evidence for it is uncertain."
+    ],
+    "references": [
+      "Infectious diseases reference texts",
+      "Anaerobic infection clinical reviews",
+      "Head and neck infection guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like piperacillin-tazobactam, a carbapenem, or metronidazole-containing combinations, targeting Fusobacterium necrophorum",
+      "Achieve source control with drainage of peritonsillar, parapharyngeal or metastatic abscesses and empyema",
+      "Provide sepsis management with fluid resuscitation and organ support",
+      "Consider anticoagulation on a case-by-case basis, particularly with thrombus propagation or lack of clinical improvement",
+      "Monitor for and manage septic pulmonary emboli and other metastatic foci in joints, bone and liver",
+      "Escalate to intensive care for septic shock or respiratory failure, and involve ENT and infectious-diseases specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for lemierre syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lemierre-syndrome-real-image",
-   "title": "Lemierre syndrome: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "lemierre_syndrome-pathway",
+      "title": "Lemierre syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and metastatic septic emboli.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral neck pain, swelling or trismus following a sore throat",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Aerobic and anaerobic blood cultures held for prolonged incubation, Contrast-enhanced CT of the neck and chest to show internal jugular vein thrombosis and emboli, Doppler ultrasound of the neck veins"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like piperacillin-tazobactam, a carbapenem, or metronidazole-containing combinations, targeting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a sore throat that has worsened and thereby missing the diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lemierre syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lemierre_syndrome-matrix",
+      "title": "Lemierre syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic sequence is a recent oropharyngeal infection followed by septic thrombophlebitis of the internal jugular vein and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Aerobic and anaerobic blood cultures held for prolonged incubation, Contrast-enhanced CT of the neck and chest to show internal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peritonsillar or parapharyngeal abscess without venous involvement, Deep neck space infection or Ludwig angina, Infective",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give prolonged intravenous antibiotics with reliable anaerobic cover, such as a beta-lactam/beta-lactamase inhibitor like",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a sore throat that has worsened and thereby missing the diagnosis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lemierre syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Infectious diseases references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lemierre_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Aerobic and anaerobic blood cultures with prolonged incubation",
+          "cells": [
+            {
+              "text": "Organism recovery; anaerobes grow slowly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the neck and chest",
+          "cells": [
+            {
+              "text": "Internal jugular vein thrombosis and emboli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of the neck veins",
+          "cells": [
+            {
+              "text": "Internal jugular vein thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Septic pulmonary emboli and cavitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat aspirate with molecular testing",
+          "cells": [
+            {
+              "text": "Identifies the organism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemierre_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peritonsillar or parapharyngeal abscess without venous involvement",
+          "cells": [
+            {
+              "text": "No internal jugular vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Community-acquired pneumonia or septic emboli from another source",
+          "cells": [
+            {
+              "text": "Lemierre's primary focus is the neck, not the lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis with septic emboli",
+          "cells": [
+            {
+              "text": "Echocardiography if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epstein-Barr virus infectious mononucleosis",
+          "cells": [
+            {
+              "text": "May precede or predispose to the syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lemierre_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged IV antibiotics with anaerobic cover",
+          "cells": [
+            {
+              "text": "Beta-lactam/beta-lactamase inhibitor such as piperacillin-tazobactam, or a carbapenem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Drainage of peritonsillar, parapharyngeal or metastatic abscesses and empyema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis management",
+          "cells": [
+            {
+              "text": "Fluid resuscitation and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Case by case, particularly with thrombus propagation or poor response; bleeding risk weighed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic foci",
+          "cells": [
+            {
+              "text": "Septic pulmonary emboli and infection of joints, bone or liver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Intensive care for septic shock or respiratory failure; ENT and infectious diseases input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lemierre_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lemierre syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sore throat followed by unilateral neck pain, rigors and pleuritic chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neck swelling, septic emboli, respiratory distress, shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive care support for septic shock or respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prolonged-incubation anaerobic blood cultures, neck CT or Doppler, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is internal jugular vein thrombosis confirmed on neck imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peritonsillar abscess, septic emboli from another source or endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged IV antibiotics with anaerobic cover, such as piperacillin-tazobactam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drain peritonsillar, parapharyngeal or metastatic abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fluid resuscitation and organ support for sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider anticoagulation case by case, weighing bleeding risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for septic emboli and metastatic joint, bone or liver foci",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable with prompt recognition and prolonged antibiotics; delay worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

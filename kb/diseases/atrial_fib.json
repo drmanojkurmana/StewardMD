@@ -201,25 +201,740 @@
       "caption": "Diagnostic and clinical overview matrix for atrial fibrillation / arrhythmia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "atrial-fib-real-image",
-      "title": "Atrial fibrillation / arrhythmia: 12-Lead Diagnostic Electrocardiogram",
-      "type": "ecg",
-      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Atrial Fibrillation",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/atrial-fibrillation",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 118-9",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 233-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrial_fib-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing atrial fibrillation and scoring stroke risk",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Conduction & Axis",
-          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "No P waves, f waves >300/min best in V1, irregularly irregular R-R"
+            },
+            {
+              "text": "{{hy:Diagnostic of AF}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Repolarization",
-          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+          "parameter": "Ventricular rate",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Usually 110 to 160",
+              "range": [
+                110,
+                160
+              ]
+            },
+            {
+              "text": "Can exceed 200 or be slow with AV node disease"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Rhythm & Intervals",
-          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+          "parameter": "Wide irregular QRS",
+          "cells": [
+            {
+              "text": "Bizarre, beat-to-beat variable"
+            },
+            {
+              "text": "Suggests pre-excited AF (WPW)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paroxysmal AF",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Stops within 7 days",
+              "op": "<=",
+              "value": 7
+            },
+            {
+              "text": "Same stroke approach as persistent AF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent AF",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Continuous >7 days, under 1 year",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Long-standing persistent if >1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHA2DS2-VASc points",
+          "cells": [
+            {
+              "text": "CHF, hypertension, age 65 to 74, diabetes, vascular disease, female sex 1 each; age >=75 and stroke/TIA 2 each"
+            },
+            {
+              "text": "Stroke risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CHA2DS2-VASc men >=2, women >=3",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Thromboembolism risk >=2% per year",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Oral anticoagulation recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CHA2DS2-VASc men 1, women 2",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Risk 1% to 2% per year",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "Anticoagulation reasonable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CHA2DS2-VASc men 0, women 1",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Risk <1% per year",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Anticoagulation not recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HAS-BLED",
+          "cells": [
+            {
+              "text": "1 point each: uncontrolled BP, renal, liver, stroke, bleeding, labile INR, age >65, drugs, alcohol"
+            },
+            {
+              "text": "Find modifiable bleeding risks; not a reason to withhold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "ECG, echocardiogram, thyroid function"
+            },
+            {
+              "text": "Look for cause and structural disease"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "atrial_fib-ddx",
+      "kind": "ddx",
+      "title": "Rhythms that mimic atrial fibrillation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrial flutter",
+          "cells": [
+            {
+              "text": "Discrete flutter waves, often regular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multifocal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Three or more P-wave shapes with isoelectric baseline; lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent atrial ectopics",
+          "cells": [
+            {
+              "text": "Discrete P waves before early beats"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pre-excited AF (WPW)",
+          "cells": [
+            {
+              "text": "{{hy:Irregular wide-complex tachycardia; AV nodal blockers dangerous}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other SVT",
+          "cells": [
+            {
+              "text": "Regular rhythm; response to AV nodal blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AF with Ashman beats",
+          "cells": [
+            {
+              "text": "Aberrant beats can mimic ventricular ectopy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "atrial_fib-treatment",
+      "kind": "treatment",
+      "title": "Treatment of atrial fibrillation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency synchronized cardioversion",
+          "cells": [
+            {
+              "text": "{{hy:Haemodynamic compromise, pulmonary oedema or ischaemia}}"
+            },
+            {
+              "text": "200 J biphasic, then 300 J and 360 J"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blocker (metoprolol, esmolol)",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Rate control, target <100 at rest",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Preferred with thyrotoxicosis or exercise-triggered AF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diltiazem or verapamil",
+          "cells": [
+            {
+              "text": "Rate control"
+            },
+            {
+              "text": "Avoid in pre-excited AF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Digoxin",
+          "cells": [
+            {
+              "text": "Heart failure"
+            },
+            {
+              "text": "Least effective rate-control drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Other rate-control drugs fail"
+            },
+            {
+              "text": "May convert to sinus rhythm; anticoagulate first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DOAC (apixaban, dabigatran, edoxaban, rivaroxaban)",
+          "cells": [
+            {
+              "text": "Nonvalvular AF meeting score threshold"
+            },
+            {
+              "text": "Preferred over warfarin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "Mechanical valve or rheumatic mitral stenosis"
+            },
+            {
+              "text": "INR 2.0 to 3.0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DOAC renal clearance",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Renal excretion: dabigatran 80%, rivaroxaban 65%, apixaban 25%"
+            },
+            {
+              "text": "Half-life: dabigatran 12 to 17 h, apixaban 9 to 14 h, rivaroxaban 9 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Elective cardioversion, AF >48 h",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Anticoagulate >3 weeks before or TEE first",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Continue >=4 weeks after"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pill in the pocket",
+          "cells": [
+            {
+              "text": "Paroxysmal AF without structural or conduction disease"
+            },
+            {
+              "text": "Flecainide 300 mg (>=70 kg) or 200 mg; propafenone 600 mg or 450 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pulmonary vein isolation success 60% to 80%",
+              "range": [
+                60,
+                80
+              ]
+            },
+            {
+              "text": "After drug failure, HFrEF, or early in selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Left atrial appendage closure",
+          "cells": [
+            {
+              "text": "CHA2DS2-VASc >=2 with anticoagulation contraindicated"
+            },
+            {
+              "text": "Alternative to long-term anticoagulation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin alone",
+          "cells": [
+            {
+              "text": "Not for stroke prevention"
+            },
+            {
+              "text": "Not recommended"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Rate-control drug doses are not given in the source opened. The Tables PDF lists no antidote for these agents; that table predates current specific reversal agents."
+    },
+    {
+      "id": "atrial_fib-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common non-arrhythmic toxicity of antiarrhythmic drugs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Common nonarrhythmic toxicity"
+      ],
+      "rows": [
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Tremor, peripheral neuropathy, pulmonary inflammation, hypothyroidism and hyperthyroidism, photosensitivity"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Adenosine",
+          "cells": [
+            {
+              "text": "Cough, flushing"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Digoxin",
+          "cells": [
+            {
+              "text": "Anorexia, nausea, vomiting, visual changes"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Disopyramide",
+          "cells": [
+            {
+              "text": "Anticholinergic effects, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dofetilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dronedarone",
+          "cells": [
+            {
+              "text": "Gastrointestinal intolerance, exacerbation of heart failure"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Flecainide",
+          "cells": [
+            {
+              "text": "Dizziness, nausea, headache, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Ibutilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lidocaine",
+          "cells": [
+            {
+              "text": "Dizziness, confusion, delirium, seizures, coma"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mexiletine",
+          "cells": [
+            {
+              "text": "Ataxia, tremor, gait disturbances, rash, nausea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Moricizine",
+          "cells": [
+            {
+              "text": "Mood changes, tremor, loss of mental clarity, nausea"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Procainamide",
+          "cells": [
+            {
+              "text": "Lupus erythematosus-like syndrome (more common in slow acetylators), anorexia, nausea, neutropenia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Propafenone",
+          "cells": [
+            {
+              "text": "Taste disturbance, dyspepsia, nausea, vomiting"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Quinidine",
+          "cells": [
+            {
+              "text": "Diarrhea, nausea, vomiting, cinchonism, thrombocytopenia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Sotalol",
+          "cells": [
+            {
+              "text": "Hypotension, bronchospasm"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrial_fib-dx-mgmt",
+      "title": "Diagnosis and management of atrial fibrillation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Irregularly irregular pulse or palpitations",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "12-lead ECG, echo, thyroid function, electrolytes",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Emergency synchronized cardioversion",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Wide irregular QRS (pre-excited)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Avoid AV nodal blockers; specialist rhythm treatment",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rate control to <100/min",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Score CHA2DS2-VASc and HAS-BLED",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Men >=2 or women >=3?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Start DOAC (warfarin if valve disease)",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Rhythm control wanted?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cardioversion after 3 weeks anticoagulation or TEE; consider ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Long-term rate control and review",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
         }
       ]
     }

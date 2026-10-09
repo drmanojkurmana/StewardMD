@@ -1,172 +1,450 @@
 {
- "id": "steatocystoma_multiplex",
- "name": "Steatocystoma multiplex",
- "aliases": [
-  "sebocystomatosis",
-  "epidermal polycystic disease",
-  "KRT17"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
-   "The cysts arise from the sebaceous duct and characteristically discharge an oily or creamy fluid when incised",
-   "Familial cases are autosomal dominant and caused by variants in KRT17 (keratin 17), which is also implicated in pachyonychia congenita type 2",
-   "It may overlap with pachyonychia congenita type 2, so nail changes and natal teeth should be sought in KRT17-related disease",
-   "Steatocystoma multiplex suppurativa describes a variant in which cysts become inflamed, rupture and scar, resembling acne conglobata or hidradenitis",
-   "Diagnosis is clinical, confirmed if needed by biopsy showing a cyst wall with an eosinophilic corrugated cuticle and sebaceous gland lobules within or adjacent to the wall",
-   "Management is largely cosmetic and includes expression or excision of individual cysts and treatment of inflamed lesions"
+  "id": "steatocystoma_multiplex",
+  "name": "Steatocystoma multiplex",
+  "aliases": [
+    "sebocystomatosis",
+    "epidermal polycystic disease",
+    "KRT17"
   ],
-  "pathophysiology": "Steatocystoma multiplex is a naevoid malformation of the pilosebaceous unit centred on the sebaceous duct. In familial disease, dominant variants in KRT17 disturb the keratin cytoskeleton of the sebaceous duct and associated epithelium, producing multiple cysts lined by stratified squamous epithelium with a characteristic crenulated eosinophilic cuticle and containing sebaceous lobules. The cysts accumulate sebaceous secretions, and when they rupture the released contents provoke inflammation, which in the suppurativa variant leads to abscess-like lesions and scarring.",
-  "additionalDifferentials": [
-   "Eruptive vellus hair cysts",
-   "Epidermoid and milia cysts",
-   "Acne vulgaris or acne conglobata",
-   "Hidradenitis suppurativa",
-   "Lipomatosis",
-   "Syringomas or other adnexal tumours"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules",
-   "Molecular genetic testing of KRT17 in familial cases",
-   "Assessment for pachyonychia congenita features (nails, natal teeth, oral leucokeratosis)",
-   "Bacterial swab of inflamed or suppurative lesions",
-   "Family history and pedigree analysis",
-   "Dermoscopy to characterise cystic lesions"
-  ],
-  "redFlags": [
-   "Extensive suppurative disease with abscess formation and disfiguring scarring",
-   "Rapid change in a longstanding lesion suggesting an alternative diagnosis",
-   "Recurrent secondary infection requiring repeated intervention",
-   "Significant psychological distress from cosmetic burden"
-  ],
-  "prognosis": "The condition is benign with no malignant potential; cysts persist and slowly accumulate over time, and the main impact is cosmetic, though the suppurativa variant can cause scarring.",
-  "pitfalls": [
-   "Overlooking the association with KRT17 and pachyonychia congenita type 2",
-   "Attempting complete surgical clearance of numerous cysts with resulting scarring",
-   "Mistaking inflamed cysts for acne or hidradenitis and missing the underlying diagnosis",
-   "Failing to counsel on the chronic, recurring nature of the disorder"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Andrews' Diseases of the Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential",
-   "Surgical excision, incision and drainage, or mini-incision extraction for troublesome or cosmetically significant cysts",
-   "Ablative laser or cryotherapy and electrosurgery for numerous small lesions",
-   "For the suppurativa variant, anti-inflammatory tetracycline antibiotics and, in severe scarring disease, oral isotretinoin, treating as for inflammatory acne or hidradenitis",
-   "Assess for associated pachyonychia congenita type 2 features such as nail changes and natal teeth in KRT17-related disease",
-   "Genetic counselling in familial autosomal dominant cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "steatocystoma_multiplex-pathway",
-   "title": "Steatocystoma multiplex: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive suppurative disease with abscess formation and disfiguring scarring",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules, Molecular genetic testing of KRT17 in familial cases, Assessment for pachyonychia congenita features (nails, natal teeth, oral"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the association with KRT17 and pachyonychia congenita type 2"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of steatocystoma multiplex."
-  }
- ],
- "tables": [
-  {
-   "id": "steatocystoma_multiplex-matrix",
-   "title": "Steatocystoma multiplex: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
+      "The cysts arise from the sebaceous duct and characteristically discharge an oily or creamy fluid when incised",
+      "Familial cases are autosomal dominant and caused by variants in KRT17 (keratin 17), which is also implicated in pachyonychia congenita type 2",
+      "It may overlap with pachyonychia congenita type 2, so nail changes and natal teeth should be sought in KRT17-related disease",
+      "Steatocystoma multiplex suppurativa describes a variant in which cysts become inflamed, rupture and scar, resembling acne conglobata or hidradenitis",
+      "Diagnosis is clinical, confirmed if needed by biopsy showing a cyst wall with an eosinophilic corrugated cuticle and sebaceous gland lobules within or adjacent to the wall",
+      "Management is largely cosmetic and includes expression or excision of individual cysts and treatment of inflamed lesions"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules, Molecular genetic testing of KRT17 in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Steatocystoma multiplex is a naevoid malformation of the pilosebaceous unit centred on the sebaceous duct. In familial disease, dominant variants in KRT17 disturb the keratin cytoskeleton of the sebaceous duct and associated epithelium, producing multiple cysts lined by stratified squamous epithelium with a characteristic crenulated eosinophilic cuticle and containing sebaceous lobules. The cysts accumulate sebaceous secretions, and when they rupture the released contents provoke inflammation, which in the suppurativa variant leads to abscess-like lesions and scarring.",
+    "additionalDifferentials": [
+      "Eruptive vellus hair cysts",
+      "Epidermoid and milia cysts",
+      "Acne vulgaris or acne conglobata",
+      "Hidradenitis suppurativa",
+      "Lipomatosis",
+      "Syringomas or other adnexal tumours"
     ],
-    [
-     "Primary Differentials",
-     "Eruptive vellus hair cysts, Epidermoid and milia cysts, Acne vulgaris or acne conglobata",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules",
+      "Molecular genetic testing of KRT17 in familial cases",
+      "Assessment for pachyonychia congenita features (nails, natal teeth, oral leucokeratosis)",
+      "Bacterial swab of inflamed or suppurative lesions",
+      "Family history and pedigree analysis",
+      "Dermoscopy to characterise cystic lesions"
     ],
-    [
-     "Management Strategy",
-     "Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive suppurative disease with abscess formation and disfiguring scarring",
+      "Rapid change in a longstanding lesion suggesting an alternative diagnosis",
+      "Recurrent secondary infection requiring repeated intervention",
+      "Significant psychological distress from cosmetic burden"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the association with KRT17 and pachyonychia congenita type 2",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign with no malignant potential; cysts persist and slowly accumulate over time, and the main impact is cosmetic, though the suppurativa variant can cause scarring.",
+    "pitfalls": [
+      "Overlooking the association with KRT17 and pachyonychia congenita type 2",
+      "Attempting complete surgical clearance of numerous cysts with resulting scarring",
+      "Mistaking inflamed cysts for acne or hidradenitis and missing the underlying diagnosis",
+      "Failing to counsel on the chronic, recurring nature of the disorder"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Andrews' Diseases of the Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential",
+      "Surgical excision, incision and drainage, or mini-incision extraction for troublesome or cosmetically significant cysts",
+      "Ablative laser or cryotherapy and electrosurgery for numerous small lesions",
+      "For the suppurativa variant, anti-inflammatory tetracycline antibiotics and, in severe scarring disease, oral isotretinoin, treating as for inflammatory acne or hidradenitis",
+      "Assess for associated pachyonychia congenita type 2 features such as nail changes and natal teeth in KRT17-related disease",
+      "Genetic counselling in familial autosomal dominant cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for steatocystoma multiplex."
-  }
- ],
- "diagrams": [
-  {
-   "id": "steatocystoma-multiplex-real-image",
-   "title": "Steatocystoma multiplex: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "steatocystoma_multiplex-pathway",
+      "title": "Steatocystoma multiplex: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive suppurative disease with abscess formation and disfiguring scarring",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules, Molecular genetic testing of KRT17 in familial cases, Assessment for pachyonychia congenita features (nails, natal teeth, oral"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the association with KRT17 and pachyonychia congenita type 2"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of steatocystoma multiplex."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "steatocystoma_multiplex-matrix",
+      "title": "Steatocystoma multiplex: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as multiple small, smooth, skin-coloured to yellowish dermal cysts, often on the chest, axillae, trunk and proximal limbs",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy of a cyst showing the corrugated eosinophilic cuticle and sebaceous lobules, Molecular genetic testing of KRT17 in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Eruptive vellus hair cysts, Epidermoid and milia cysts, Acne vulgaris or acne conglobata",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Benign condition needing no treatment for asymptomatic cysts, with reassurance regarding the absence of malignant potential",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the association with KRT17 and pachyonychia congenita type 2",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for steatocystoma multiplex."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "steatocystoma_multiplex-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of a cyst",
+          "cells": [
+            {
+              "text": "Cyst wall with corrugated eosinophilic cuticle and sebaceous lobules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KRT17 genetic testing",
+          "cells": [
+            {
+              "text": "Familial cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for pachyonychia congenita features",
+          "cells": [
+            {
+              "text": "Nail changes, natal teeth and oral leukokeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial swab",
+          "cells": [
+            {
+              "text": "Inflamed or suppurative lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Characterises cystic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steatocystoma_multiplex-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermoid and milia cysts",
+          "cells": [
+            {
+              "text": "Keratin-filled cysts without the oily discharge of steatocystoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acne conglobata",
+          "cells": [
+            {
+              "text": "Inflamed cysts can be mistaken for acne"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "steatocystoma_multiplex-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic cysts; benign condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision, incision and drainage, or mini-incision extraction",
+          "cells": [
+            {
+              "text": "Troublesome individual cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser, cryotherapy or electrosurgery",
+          "cells": [
+            {
+              "text": "Numerous small lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetracycline antibiotics",
+          "cells": [
+            {
+              "text": "Anti-inflammatory treatment of the suppurative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for pachyonychia congenita type 2",
+          "cells": [
+            {
+              "text": "Nail changes and natal teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial autosomal dominant cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "steatocystoma_multiplex-dx-mgmt",
+      "title": "Diagnosis and management of Steatocystoma multiplex",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple smooth dermal cysts with oily discharge: suspected steatocystoma multiplex",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suppurative abscess, disfiguring scarring, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for rapid change in a lesion or extensive abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; KRT17 testing in familial cases; examine nails and teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a cyst wall with corrugated cuticle and sebaceous lobules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epidermoid cysts, acne conglobata or hidradenitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance for asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision or mini-incision extraction for troublesome cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser, cryotherapy or electrosurgery for numerous small lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tetracycline antibiotics for the suppurative variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and recurrent; treatment is largely cosmetic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

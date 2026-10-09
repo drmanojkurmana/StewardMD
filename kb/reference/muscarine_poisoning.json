@@ -1,177 +1,484 @@
 {
- "id": "muscarine_poisoning",
- "name": "Muscarine poisoning",
- "aliases": [
-  "Muscarinic mushroom poisoning",
-  "SLUDGE syndrome from mushrooms"
- ],
- "class": "non_infective",
- "system": "Autonomic nervous system / Gastrointestinal",
- "specialty": "Toxicology / Emergency medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic) toxidrome.",
-   "Onset is rapid, typically within a short time of ingestion, distinguishing it from the dangerous delayed-onset amatoxin and gyromitrin poisonings.",
-   "Features follow the SLUDGE pattern: salivation, lacrimation, urination, defaecation, gastrointestinal cramping and emesis, together with sweating, bronchorrhoea, bronchospasm, miosis, blurred vision and bradycardia.",
-   "Muscarine directly stimulates peripheral muscarinic acetylcholine receptors and, unlike acetylcholine, is not degraded by acetylcholinesterase, so effects are sustained.",
-   "Because muscarine is a quaternary amine it does not cross the blood-brain barrier, so central nervous system effects are absent, in contrast to the delirium of Amanita muscaria (which paradoxically contains little muscarine).",
-   "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size.",
-   "Profuse secretions and bronchorrhoea, not bronchospasm alone, are the main threat to the airway and gas exchange in severe cases.",
-   "Illness is usually self-limiting over hours, and full recovery is the rule with prompt supportive care and antimuscarinic therapy where needed."
+  "id": "muscarine_poisoning",
+  "name": "Muscarine poisoning",
+  "aliases": [
+    "Muscarinic mushroom poisoning",
+    "SLUDGE syndrome from mushrooms"
   ],
-  "pathophysiology": "Muscarine poisoning follows ingestion of mushrooms rich in muscarine, a quaternary ammonium alkaloid found in high concentration in many Inocybe and Clitocybe species. Muscarine is a direct agonist at muscarinic acetylcholine receptors on the effector organs of the parasympathetic nervous system and on sweat glands. Because it is structurally resistant to hydrolysis by acetylcholinesterase, its receptor stimulation is prolonged compared with endogenous acetylcholine. Activation of these receptors increases exocrine secretion (salivary, lacrimal, sweat and bronchial glands), stimulates smooth muscle of the gut and bronchi, contracts the detrusor and pupillary sphincter, and slows the heart through vagal effects on the sinoatrial and atrioventricular nodes. The resulting clinical picture is the classic muscarinic toxidrome. Crucially, the fixed positive charge of the quaternary amine prevents muscarine from crossing the blood-brain barrier, so central effects such as agitation and hallucination are absent; this pharmacology also explains why the antidote atropine, a tertiary amine that does cross into the central nervous system, effectively blocks the peripheral receptors.",
-  "additionalDifferentials": [
-   "Organophosphate or carbamate insecticide poisoning",
-   "Amanita muscaria/pantherina (ibotenic acid and muscimol) poisoning with central features",
-   "Nerve agent exposure",
-   "Cholinergic effects of medicinal cholinesterase inhibitors",
-   "Other early-onset gastrointestinal mushroom poisonings",
-   "Acute asthma or other cause of bronchospasm",
-   "Vasovagal episode causing bradycardia and sweating"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils",
-   "Electrocardiogram and continuous cardiac monitoring for bradyarrhythmias",
-   "Pulse oximetry and respiratory assessment for bronchorrhoea and bronchospasm",
-   "Serum electrolytes and renal function given fluid losses from secretions and diarrhoea",
-   "Red cell and plasma cholinesterase activity to help exclude organophosphate poisoning",
-   "Blood glucose and basic metabolic screen to exclude mimics",
-   "Mycological identification of the ingested mushrooms"
-  ],
-  "redFlags": [
-   "Copious bronchial secretions or bronchorrhoea threatening the airway",
-   "Symptomatic or profound bradycardia",
-   "Respiratory distress or hypoxia",
-   "Marked volume depletion from combined secretory losses",
-   "Uncertainty distinguishing it from organophosphate poisoning"
-  ],
-  "prognosis": "The prognosis is excellent; symptoms are usually self-limiting over several hours and recovery is complete, with deaths being very rare when supportive care and atropine are available. Severe cases are typically those with delayed treatment of profuse secretions and bradycardia.",
-  "pitfalls": [
-   "Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources",
-   "Titrating atropine to pupil size rather than to drying of secretions and heart rate",
-   "Missing coexisting organophosphate poisoning that produces an identical peripheral picture",
-   "Underestimating fluid loss from combined salivation, sweating, vomiting and diarrhoea",
-   "Expecting central nervous system features, whose absence is characteristic of pure muscarine poisoning"
-  ],
-  "references": [
-   "Standard clinical toxicology textbooks",
-   "Mushroom poisoning and poisons-centre reference materials",
-   "Emergency medicine reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to control the cholinergic crisis",
-   "Airway protection and respiratory support for bronchorrhoea and bronchospasm, with suctioning and supplemental oxygen",
-   "Intravenous fluid resuscitation to replace losses from salivation, sweating, vomiting and diarrhoea",
-   "Continuous cardiac monitoring with treatment of symptomatic bradyarrhythmias",
-   "Supportive care with electrolyte correction, the illness otherwise being self-limiting over hours",
-   "Identify the mushroom species and exclude co-ingestion of delayed-onset amatoxin or gyromitrin poisoning, involving toxicology and poisons services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "muscarine_poisoning-pathway",
-   "title": "Muscarine poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic) toxidrome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Copious bronchial secretions or bronchorrhoea threatening the airway",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils, Electrocardiogram and continuous cardiac monitoring for bradyarrhythmias, Pulse oximetry and respiratory assessment for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to control the cholinergic crisis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of muscarine poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "muscarine_poisoning-matrix",
-   "title": "Muscarine poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Autonomic nervous system / Gastrointestinal",
+  "specialty": "Toxicology / Emergency medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic) toxidrome.",
+      "Onset is rapid, typically within a short time of ingestion, distinguishing it from the dangerous delayed-onset amatoxin and gyromitrin poisonings.",
+      "Features follow the SLUDGE pattern: salivation, lacrimation, urination, defaecation, gastrointestinal cramping and emesis, together with sweating, bronchorrhoea, bronchospasm, miosis, blurred vision and bradycardia.",
+      "Muscarine directly stimulates peripheral muscarinic acetylcholine receptors and, unlike acetylcholine, is not degraded by acetylcholinesterase, so effects are sustained.",
+      "Because muscarine is a quaternary amine it does not cross the blood-brain barrier, so central nervous system effects are absent, in contrast to the delirium of Amanita muscaria (which paradoxically contains little muscarine).",
+      "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size.",
+      "Profuse secretions and bronchorrhoea, not bronchospasm alone, are the main threat to the airway and gas exchange in severe cases.",
+      "Illness is usually self-limiting over hours, and full recovery is the rule with prompt supportive care and antimuscarinic therapy where needed."
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils, Electrocardiogram and continuous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Muscarine poisoning follows ingestion of mushrooms rich in muscarine, a quaternary ammonium alkaloid found in high concentration in many Inocybe and Clitocybe species. Muscarine is a direct agonist at muscarinic acetylcholine receptors on the effector organs of the parasympathetic nervous system and on sweat glands. Because it is structurally resistant to hydrolysis by acetylcholinesterase, its receptor stimulation is prolonged compared with endogenous acetylcholine. Activation of these receptors increases exocrine secretion (salivary, lacrimal, sweat and bronchial glands), stimulates smooth muscle of the gut and bronchi, contracts the detrusor and pupillary sphincter, and slows the heart through vagal effects on the sinoatrial and atrioventricular nodes. The resulting clinical picture is the classic muscarinic toxidrome. Crucially, the fixed positive charge of the quaternary amine prevents muscarine from crossing the blood-brain barrier, so central effects such as agitation and hallucination are absent; this pharmacology also explains why the antidote atropine, a tertiary amine that does cross into the central nervous system, effectively blocks the peripheral receptors.",
+    "additionalDifferentials": [
+      "Organophosphate or carbamate insecticide poisoning",
+      "Amanita muscaria/pantherina (ibotenic acid and muscimol) poisoning with central features",
+      "Nerve agent exposure",
+      "Cholinergic effects of medicinal cholinesterase inhibitors",
+      "Other early-onset gastrointestinal mushroom poisonings",
+      "Acute asthma or other cause of bronchospasm",
+      "Vasovagal episode causing bradycardia and sweating"
     ],
-    [
-     "Primary Differentials",
-     "Organophosphate or carbamate insecticide poisoning, Amanita muscaria/pantherina (ibotenic acid and muscimol) poisoning with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils",
+      "Electrocardiogram and continuous cardiac monitoring for bradyarrhythmias",
+      "Pulse oximetry and respiratory assessment for bronchorrhoea and bronchospasm",
+      "Serum electrolytes and renal function given fluid losses from secretions and diarrhoea",
+      "Red cell and plasma cholinesterase activity to help exclude organophosphate poisoning",
+      "Blood glucose and basic metabolic screen to exclude mimics",
+      "Mycological identification of the ingested mushrooms"
     ],
-    [
-     "Management Strategy",
-     "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to",
-     "Core treatment modality"
+    "redFlags": [
+      "Copious bronchial secretions or bronchorrhoea threatening the airway",
+      "Symptomatic or profound bradycardia",
+      "Respiratory distress or hypoxia",
+      "Marked volume depletion from combined secretory losses",
+      "Uncertainty distinguishing it from organophosphate poisoning"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; symptoms are usually self-limiting over several hours and recovery is complete, with deaths being very rare when supportive care and atropine are available. Severe cases are typically those with delayed treatment of profuse secretions and bradycardia.",
+    "pitfalls": [
+      "Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources",
+      "Titrating atropine to pupil size rather than to drying of secretions and heart rate",
+      "Missing coexisting organophosphate poisoning that produces an identical peripheral picture",
+      "Underestimating fluid loss from combined salivation, sweating, vomiting and diarrhoea",
+      "Expecting central nervous system features, whose absence is characteristic of pure muscarine poisoning"
+    ],
+    "references": [
+      "Standard clinical toxicology textbooks",
+      "Mushroom poisoning and poisons-centre reference materials",
+      "Emergency medicine reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to control the cholinergic crisis",
+      "Airway protection and respiratory support for bronchorrhoea and bronchospasm, with suctioning and supplemental oxygen",
+      "Intravenous fluid resuscitation to replace losses from salivation, sweating, vomiting and diarrhoea",
+      "Continuous cardiac monitoring with treatment of symptomatic bradyarrhythmias",
+      "Supportive care with electrolyte correction, the illness otherwise being self-limiting over hours",
+      "Identify the mushroom species and exclude co-ingestion of delayed-onset amatoxin or gyromitrin poisoning, involving toxicology and poisons services"
     ]
-   ],
-   "caption": "Overview comparison matrix for muscarine poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "muscarine-poisoning-real-image",
-   "title": "Muscarine poisoning: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "muscarine_poisoning-pathway",
+      "title": "Muscarine poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic) toxidrome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Copious bronchial secretions or bronchorrhoea threatening the airway",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils, Electrocardiogram and continuous cardiac monitoring for bradyarrhythmias, Pulse oximetry and respiratory assessment for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to control the cholinergic crisis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of muscarine poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "muscarine_poisoning-matrix",
+      "title": "Muscarine poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by muscarine-containing mushrooms, chiefly Inocybe and Clitocybe species, and produces a pure cholinergic (muscarinic)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of the cholinergic toxidrome including heart rate, secretions and pupils, Electrocardiogram and continuous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Organophosphate or carbamate insecticide poisoning, Amanita muscaria/pantherina (ibotenic acid and muscimol) poisoning with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Atropine is the specific antidote, titrated against secretions and bradycardia rather than pupil size and repeated as needed to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming Amanita muscaria is the culprit for muscarinic symptoms, when Inocybe and Clitocybe are the usual high-muscarine sources",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for muscarine poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "muscarine_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of the cholinergic toxidrome",
+          "cells": [
+            {
+              "text": "Heart rate, secretions and pupils; SLUDGE pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Bradyarrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and respiratory assessment",
+          "cells": [
+            {
+              "text": "Bronchorrhoea and bronchospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes and renal function",
+          "cells": [
+            {
+              "text": "Fluid losses from secretions and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell and plasma cholinesterase activity",
+          "cells": [
+            {
+              "text": "Helps exclude organophosphate poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and basic metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycological identification of mushrooms",
+          "cells": [
+            {
+              "text": "Identifies the ingested species"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muscarine_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Organophosphate or carbamate insecticide poisoning",
+          "cells": [
+            {
+              "text": "Can give an identical peripheral picture; cholinesterase activity helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amanita muscaria or pantherina poisoning",
+          "cells": [
+            {
+              "text": "Causes central features such as delirium, which muscarine poisoning lacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amatoxin or gyromitrin poisoning",
+          "cells": [
+            {
+              "text": "Delayed onset, unlike the rapid onset of muscarine poisoning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "muscarine_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Atropine",
+          "cells": [
+            {
+              "text": "Specific antidote, titrated against secretions and bradycardia rather than pupil size; repeated as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway protection and respiratory support",
+          "cells": [
+            {
+              "text": "Suctioning and supplemental oxygen for bronchorrhoea and bronchospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous fluid resuscitation",
+          "cells": [
+            {
+              "text": "Replaces losses from salivation, sweating, vomiting and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Treatment of symptomatic bradyarrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Electrolyte correction; the illness is otherwise self-limiting over hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identify the mushroom",
+          "cells": [
+            {
+              "text": "Involve toxicology and poisons services; exclude amatoxin or gyromitrin co-ingestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "muscarine_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Muscarine poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid-onset SLUDGE features after mushroom ingestion, with bradycardia or bronchorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (copious bronchial secretions, bradycardia, hypoxia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Protect the airway and give atropine now; titrate to secretions and heart rate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cholinergic assessment, ECG, pulse oximetry, electrolytes, cholinesterase activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organophosphate poisoning excluded by cholinesterase testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as possible co-poisoning; involve toxicology and poisons services",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Atropine titrated to secretions and bradycardia, not pupil size",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway protection, suction and supplemental oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous fluids to replace secretory and gastrointestinal losses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous cardiac monitoring; treat symptomatic bradyarrhythmias",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Identify the mushroom; exclude amatoxin or gyromitrin co-ingestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually recovers completely over hours; deaths are very rare with prompt care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

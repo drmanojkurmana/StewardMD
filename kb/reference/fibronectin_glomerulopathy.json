@@ -1,178 +1,456 @@
 {
- "id": "fibronectin_glomerulopathy",
- "name": "Fibronectin glomerulopathy",
- "aliases": [
-  "Glomerulopathy with fibronectin deposits",
-  "GFND",
-  "Fibronectin deposits glomerulopathy"
- ],
- "class": "non_infective",
- "system": "Renal / Glomerular",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial space.",
-   "A substantial proportion of affected families carry heterozygous mutations in FN1, the gene encoding fibronectin, though many pedigrees remain genetically unexplained.",
-   "Usually presents in the second to fourth decades with proteinuria (which may reach nephrotic range), microscopic haematuria and hypertension.",
-   "Light microscopy shows enlarged, lobulated glomeruli with hyaline, strongly PAS-positive deposits and a membranoproliferative-like architecture.",
-   "Congo red staining is negative, a key feature distinguishing it from amyloidosis; the deposits stain positively for fibronectin.",
-   "Immunofluorescence for immunoglobulins and complement is typically negative or scant, underscoring the non-immune-complex nature of the disease.",
-   "Electron microscopy reveals granular to fibrillary electron-dense material expanding the mesangial and subendothelial regions.",
-   "Distal (type IV) renal tubular acidosis and disease recurrence in the transplanted kidney have both been reported."
+  "id": "fibronectin_glomerulopathy",
+  "name": "Fibronectin glomerulopathy",
+  "aliases": [
+    "Glomerulopathy with fibronectin deposits",
+    "GFND",
+    "Fibronectin deposits glomerulopathy"
   ],
-  "pathophysiology": "Fibronectin glomerulopathy is a hereditary deposition disease characterised by the pathological accumulation of fibronectin, a large dimeric extracellular-matrix glycoprotein, within glomeruli. Inheritance is autosomal dominant, and heterozygous mutations in FN1 have been identified in a sizeable share of families, clustering in domains that mediate fibronectin self-assembly and heparin binding. Whether the deposited protein is chiefly plasma-derived (soluble circulating fibronectin) or locally synthesised has been debated, with much evidence favouring incorporation of plasma fibronectin into the glomerular matrix. The accumulating protein progressively expands the mesangium and subendothelial space, distorting glomerular architecture, narrowing capillary lumina and disrupting the filtration barrier to produce proteinuria and haematuria. Because the process is not driven by immune-complex deposition, immunofluorescence for immunoglobulins and complement is generally unremarkable, and the deposits are non-amyloid, remaining Congo red negative while staining strongly for fibronectin. Relentless matrix expansion leads to glomerular obliteration and slowly progressive loss of kidney function.",
-  "additionalDifferentials": [
-   "Renal amyloidosis (Congo red positive)",
-   "Fibrillary glomerulonephritis (DNAJB9 positive, distinct fibril calibre)",
-   "Immunotactoid glomerulopathy",
-   "Membranoproliferative glomerulonephritis and C3 glomerulopathy",
-   "Monoclonal immunoglobulin deposition disease",
-   "Collagenofibrotic (collagen III) glomerulopathy",
-   "Diabetic nodular glomerulosclerosis"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy",
-   "FN1 genetic testing and pedigree/segregation analysis",
-   "DNAJB9 immunostaining to exclude fibrillary glomerulonephritis",
-   "Serum and urine protein electrophoresis with free light chains to exclude monoclonal disease",
-   "Quantification of proteinuria and serial kidney-function monitoring",
-   "Assessment for distal renal tubular acidosis where clinically suspected",
-   "Screening of at-risk relatives given dominant inheritance"
-  ],
-  "redFlags": [
-   "Progressive decline in kidney function towards kidney failure",
-   "Uncontrolled or accelerated hypertension",
-   "Heavy nephrotic-range proteinuria",
-   "Family members with unexplained kidney failure",
-   "Recurrence of proteinuria and deposits in a renal allograft"
-  ],
-  "prognosis": "The disease is slowly progressive, with many affected individuals reaching kidney failure over years to decades; recurrence in the transplanted kidney has been described, so post-transplant surveillance is warranted.",
-  "pitfalls": [
-   "Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining",
-   "Omitting a dedicated fibronectin immunostain on biopsy",
-   "Overlooking the autosomal dominant family history and failing to counsel relatives",
-   "Mistaking the membranoproliferative-like pattern for an immune-complex glomerulonephritis",
-   "Attributing nodular glomerular changes to diabetes without confirmatory staining"
-  ],
-  "references": [
-   "Comprehensive nephrology and renal pathology textbook",
-   "Reference review on fibrillary and deposition glomerulopathies",
-   "Clinical genetics resource on hereditary glomerular disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control hypertension",
-   "General chronic kidney disease measures: dietary sodium restriction, blood-pressure optimisation, diuretics for nephrotic oedema and statins for dyslipidaemia",
-   "Serial surveillance of proteinuria and glomerular filtration rate to track the slow progression toward kidney failure",
-   "Timely preparation for renal replacement therapy, with kidney transplantation an option but graft surveillance for described disease recurrence",
-   "Genetic counselling and FN1 testing with pedigree and segregation analysis given autosomal dominant inheritance, and screening of at-risk relatives",
-   "Specialist nephrology follow-up, with biopsy-based confirmation distinguishing it from amyloidosis and immune-complex disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibronectin_glomerulopathy-pathway",
-   "title": "Fibronectin glomerulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial space.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive decline in kidney function towards kidney failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy, FN1 genetic testing and pedigree/segregation analysis, DNAJB9 immunostaining to exclude fibrillary glomerulonephritis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control hypertension"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibronectin glomerulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "fibronectin_glomerulopathy-matrix",
-   "title": "Fibronectin glomerulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Glomerular",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial space.",
+      "A substantial proportion of affected families carry heterozygous mutations in FN1, the gene encoding fibronectin, though many pedigrees remain genetically unexplained.",
+      "Usually presents in the second to fourth decades with proteinuria (which may reach nephrotic range), microscopic haematuria and hypertension.",
+      "Light microscopy shows enlarged, lobulated glomeruli with hyaline, strongly PAS-positive deposits and a membranoproliferative-like architecture.",
+      "Congo red staining is negative, a key feature distinguishing it from amyloidosis; the deposits stain positively for fibronectin.",
+      "Immunofluorescence for immunoglobulins and complement is typically negative or scant, underscoring the non-immune-complex nature of the disease.",
+      "Electron microscopy reveals granular to fibrillary electron-dense material expanding the mesangial and subendothelial regions.",
+      "Distal (type IV) renal tubular acidosis and disease recurrence in the transplanted kidney have both been reported."
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy, FN1 genetic testing and pedigree/segregation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibronectin glomerulopathy is a hereditary deposition disease characterised by the pathological accumulation of fibronectin, a large dimeric extracellular-matrix glycoprotein, within glomeruli. Inheritance is autosomal dominant, and heterozygous mutations in FN1 have been identified in a sizeable share of families, clustering in domains that mediate fibronectin self-assembly and heparin binding. Whether the deposited protein is chiefly plasma-derived (soluble circulating fibronectin) or locally synthesised has been debated, with much evidence favouring incorporation of plasma fibronectin into the glomerular matrix. The accumulating protein progressively expands the mesangium and subendothelial space, distorting glomerular architecture, narrowing capillary lumina and disrupting the filtration barrier to produce proteinuria and haematuria. Because the process is not driven by immune-complex deposition, immunofluorescence for immunoglobulins and complement is generally unremarkable, and the deposits are non-amyloid, remaining Congo red negative while staining strongly for fibronectin. Relentless matrix expansion leads to glomerular obliteration and slowly progressive loss of kidney function.",
+    "additionalDifferentials": [
+      "Renal amyloidosis (Congo red positive)",
+      "Fibrillary glomerulonephritis (DNAJB9 positive, distinct fibril calibre)",
+      "Immunotactoid glomerulopathy",
+      "Membranoproliferative glomerulonephritis and C3 glomerulopathy",
+      "Monoclonal immunoglobulin deposition disease",
+      "Collagenofibrotic (collagen III) glomerulopathy",
+      "Diabetic nodular glomerulosclerosis"
     ],
-    [
-     "Primary Differentials",
-     "Renal amyloidosis (Congo red positive), Fibrillary glomerulonephritis (DNAJB9 positive, distinct fibril calibre), Immunotactoid",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy",
+      "FN1 genetic testing and pedigree/segregation analysis",
+      "DNAJB9 immunostaining to exclude fibrillary glomerulonephritis",
+      "Serum and urine protein electrophoresis with free light chains to exclude monoclonal disease",
+      "Quantification of proteinuria and serial kidney-function monitoring",
+      "Assessment for distal renal tubular acidosis where clinically suspected",
+      "Screening of at-risk relatives given dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive decline in kidney function towards kidney failure",
+      "Uncontrolled or accelerated hypertension",
+      "Heavy nephrotic-range proteinuria",
+      "Family members with unexplained kidney failure",
+      "Recurrence of proteinuria and deposits in a renal allograft"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is slowly progressive, with many affected individuals reaching kidney failure over years to decades; recurrence in the transplanted kidney has been described, so post-transplant surveillance is warranted.",
+    "pitfalls": [
+      "Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining",
+      "Omitting a dedicated fibronectin immunostain on biopsy",
+      "Overlooking the autosomal dominant family history and failing to counsel relatives",
+      "Mistaking the membranoproliferative-like pattern for an immune-complex glomerulonephritis",
+      "Attributing nodular glomerular changes to diabetes without confirmatory staining"
+    ],
+    "references": [
+      "Comprehensive nephrology and renal pathology textbook",
+      "Reference review on fibrillary and deposition glomerulopathies",
+      "Clinical genetics resource on hereditary glomerular disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control hypertension",
+      "General chronic kidney disease measures: dietary sodium restriction, blood-pressure optimisation, diuretics for nephrotic oedema and statins for dyslipidaemia",
+      "Serial surveillance of proteinuria and glomerular filtration rate to track the slow progression toward kidney failure",
+      "Timely preparation for renal replacement therapy, with kidney transplantation an option but graft surveillance for described disease recurrence",
+      "Genetic counselling and FN1 testing with pedigree and segregation analysis given autosomal dominant inheritance, and screening of at-risk relatives",
+      "Specialist nephrology follow-up, with biopsy-based confirmation distinguishing it from amyloidosis and immune-complex disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibronectin glomerulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibronectin-glomerulopathy-real-image",
-   "title": "Fibronectin glomerulopathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "fibronectin_glomerulopathy-pathway",
+      "title": "Fibronectin glomerulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial space.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive decline in kidney function towards kidney failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy, FN1 genetic testing and pedigree/segregation analysis, DNAJB9 immunostaining to exclude fibrillary glomerulonephritis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control hypertension"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibronectin glomerulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibronectin_glomerulopathy-matrix",
+      "title": "Fibronectin glomerulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal dominant glomerulopathy defined by massive accumulation of fibronectin within the mesangium and subendothelial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy with fibronectin immunostaining, Congo red and electron microscopy, FN1 genetic testing and pedigree/segregation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Renal amyloidosis (Congo red positive), Fibrillary glomerulonephritis (DNAJB9 positive, distinct fibril calibre), Immunotactoid",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Renin-angiotensin-aldosterone blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying the deposits as amyloid or as fibrillary glomerulonephritis without fibronectin and DNAJB9 staining",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibronectin glomerulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibronectin_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with fibronectin immunostaining and Congo red",
+          "cells": [
+            {
+              "text": "Fibronectin deposits; Congo red negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FN1 genetic testing with pedigree analysis",
+          "cells": [
+            {
+              "text": "Autosomal dominant mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNAJB9 immunostaining",
+          "cells": [
+            {
+              "text": "Fibrillary glomerulonephritis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine electrophoresis with free light chains",
+          "cells": [
+            {
+              "text": "Monoclonal disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proteinuria and serial kidney function",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibronectin_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal amyloidosis",
+          "cells": [
+            {
+              "text": "Congo red positive; excluded by negative Congo red"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrillary glomerulonephritis",
+          "cells": [
+            {
+              "text": "DNAJB9 positive with a different fibril calibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotactoid glomerulopathy",
+          "cells": [
+            {
+              "text": "Microtubular deposits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibronectin_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or angiotensin-receptor blocker",
+          "cells": [
+            {
+              "text": "Reduces proteinuria and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sodium restriction and blood pressure control",
+          "cells": [
+            {
+              "text": "Diuretics for nephrotic oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial proteinuria and glomerular filtration rate",
+          "cells": [
+            {
+              "text": "Slow progression towards kidney failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation; surveillance for recurrence in graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and FN1 testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; screen relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology follow-up with biopsy confirmation",
+          "cells": [
+            {
+              "text": "Distinguish from amyloidosis and immune-complex disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibronectin_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Fibronectin glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proteinuria, microscopic haematuria and hypertension in the 2nd to 4th decade",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid decline, accelerated hypertension, heavy nephrotic proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review for accelerated hypertension or rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with fibronectin, Congo red and EM; FN1 testing; DNAJB9; paraprotein screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fibronectin-positive, Congo-negative mesangial deposits on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amyloidosis, fibrillary or immunotactoid glomerulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or angiotensin-receptor blocker",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium restriction, blood pressure control and diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial monitoring of proteinuria and eGFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "FN1 genetic counselling and screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; many reach kidney failure over years to decades",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

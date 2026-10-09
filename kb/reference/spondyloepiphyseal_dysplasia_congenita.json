@@ -1,177 +1,464 @@
 {
- "id": "spondyloepiphyseal_dysplasia_congenita",
- "name": "Spondyloepiphyseal Dysplasia Congenita",
- "aliases": [
-  "SEDC",
-  "SED congenita",
-  "Spondyloepiphyseal dysplasia congenital type"
- ],
- "class": "non_infective",
- "system": "Skeletal",
- "specialty": "Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Skeletal dysplasia references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
-   "Presents at birth with disproportionate short-trunk short stature, a barrel-shaped chest and a short neck.",
-   "Radiographs show platyspondyly with delayed, irregular ossification of the vertebral bodies, femoral heads, pubis and knee epiphyses.",
-   "Odontoid hypoplasia and ligamentous laxity predispose to atlantoaxial instability and cervical myelopathy; assess the cervical spine before any anaesthetic or surgery.",
-   "High myopia carries a lifelong risk of retinal detachment and warrants regular ophthalmology review.",
-   "Cleft palate, sensorineural hearing loss and muscular hypotonia may accompany the skeletal features.",
-   "Coxa vara, a waddling gait, exaggerated lumbar lordosis and progressive kyphoscoliosis are characteristic.",
-   "Intelligence and facial appearance are typically normal, although the midface may look flat."
+  "id": "spondyloepiphyseal_dysplasia_congenita",
+  "name": "Spondyloepiphyseal Dysplasia Congenita",
+  "aliases": [
+    "SEDC",
+    "SED congenita",
+    "Spondyloepiphyseal dysplasia congenital type"
   ],
-  "pathophysiology": "Spondyloepiphyseal dysplasia congenita results from heterozygous mutations in COL2A1, which encodes the alpha-1 chain of type II collagen, the predominant collagen of hyaline cartilage, the vitreous of the eye and the nucleus pulposus. Most mutations act through a dominant-negative mechanism, so structurally abnormal collagen trimers disrupt the cartilage extracellular matrix and disorganise the growth plate. Impaired endochondral ossification produces the delayed and irregular epiphyseal and vertebral ossification that defines the disorder, while the same defective collagen in ocular, auditory and other connective tissues explains the myopia, vitreoretinal degeneration and hearing loss. The condition lies on a phenotypic spectrum of type II collagenopathies extending from lethal achondrogenesis type II and hypochondrogenesis, through Kniest dysplasia, to the milder Stickler syndrome.",
-  "additionalDifferentials": [
-   "Kniest dysplasia and other type II collagenopathies",
-   "Morquio syndrome (mucopolysaccharidosis type IV)",
-   "Spondylometaphyseal and spondyloepimetaphyseal dysplasias",
-   "Pseudoachondroplasia and multiple epiphyseal dysplasia",
-   "Achondroplasia and hypochondroplasia",
-   "Metatropic dysplasia",
-   "Stickler syndrome"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey with attention to the spine, pelvis and long-bone epiphyses",
-   "COL2A1 molecular genetic testing",
-   "Flexion-extension cervical spine radiographs and MRI to assess atlantoaxial stability and cord compression",
-   "Formal ophthalmological assessment including retinal examination for myopia and detachment risk",
-   "Audiometry for sensorineural hearing loss",
-   "Assessment of the palate for clefting and, where relevant, evaluation for sleep-disordered breathing"
-  ],
-  "redFlags": [
-   "New limb weakness, spasticity, gait deterioration or sphincter disturbance suggesting cervical cord compression",
-   "Sudden visual loss, floaters or flashing lights indicating retinal detachment",
-   "Respiratory compromise in infancy from a small thorax or cervical instability",
-   "Rapidly progressive scoliosis with cardiorespiratory impact"
-  ],
-  "prognosis": "Intelligence and life expectancy are usually normal, but morbidity arises from cervical instability, early osteoarthritis of the hips and spine, progressive scoliosis, and visual and hearing complications; many affected individuals require joint replacement or spinal surgery in adult life.",
-  "pitfalls": [
-   "Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury",
-   "Misdiagnosing the condition as a mucopolysaccharidosis such as Morquio syndrome",
-   "Overlooking progressive myopia and retinal detachment, leading to preventable visual loss",
-   "Attributing the hypotonia to a primary neuromuscular disorder rather than to the dysplasia"
-  ],
-  "references": [
-   "Nelson Textbook of Paediatrics (standard reference)",
-   "GeneReviews (standard reference)",
-   "International skeletal dysplasia classification references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance",
-   "Cervical spine assessment with flexion-extension imaging and MRI for odontoid hypoplasia and atlantoaxial instability, with fusion or stabilisation and precautions before any anaesthetic or surgery",
-   "Orthopaedic management of scoliosis and early hip and spinal osteoarthritis, often requiring joint replacement or spinal surgery in adult life",
-   "Ophthalmology surveillance for high myopia and retinal detachment",
-   "Audiometry and management of sensorineural hearing loss, with assessment and repair of cleft palate",
-   "Evaluate for sleep-disordered breathing and support muscular hypotonia with physiotherapy",
-   "Multidisciplinary clinical genetics, orthopaedic, ophthalmology and ENT care",
-   "Genetic counselling given autosomal dominant COL2A1 inheritance, noting that many cases arise de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spondyloepiphyseal_dysplasia_congenita-pathway",
-   "title": "Spondyloepiphyseal Dysplasia Congenita: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New limb weakness, spasticity, gait deterioration or sphincter disturbance suggesting cervical cord compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey with attention to the spine, pelvis and long-bone epiphyses, COL2A1 molecular genetic testing, Flexion-extension cervical spine radiographs and MRI to assess atlantoaxial stability and cord compression"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spondyloepiphyseal dysplasia congenita."
-  }
- ],
- "tables": [
-  {
-   "id": "spondyloepiphyseal_dysplasia_congenita-matrix",
-   "title": "Spondyloepiphyseal Dysplasia Congenita: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skeletal",
+  "specialty": "Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Skeletal dysplasia references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
+      "Presents at birth with disproportionate short-trunk short stature, a barrel-shaped chest and a short neck.",
+      "Radiographs show platyspondyly with delayed, irregular ossification of the vertebral bodies, femoral heads, pubis and knee epiphyses.",
+      "Odontoid hypoplasia and ligamentous laxity predispose to atlantoaxial instability and cervical myelopathy; assess the cervical spine before any anaesthetic or surgery.",
+      "High myopia carries a lifelong risk of retinal detachment and warrants regular ophthalmology review.",
+      "Cleft palate, sensorineural hearing loss and muscular hypotonia may accompany the skeletal features.",
+      "Coxa vara, a waddling gait, exaggerated lumbar lordosis and progressive kyphoscoliosis are characteristic.",
+      "Intelligence and facial appearance are typically normal, although the midface may look flat."
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey with attention to the spine, pelvis and long-bone epiphyses, COL2A1 molecular genetic testing, Flexion-extension",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spondyloepiphyseal dysplasia congenita results from heterozygous mutations in COL2A1, which encodes the alpha-1 chain of type II collagen, the predominant collagen of hyaline cartilage, the vitreous of the eye and the nucleus pulposus. Most mutations act through a dominant-negative mechanism, so structurally abnormal collagen trimers disrupt the cartilage extracellular matrix and disorganise the growth plate. Impaired endochondral ossification produces the delayed and irregular epiphyseal and vertebral ossification that defines the disorder, while the same defective collagen in ocular, auditory and other connective tissues explains the myopia, vitreoretinal degeneration and hearing loss. The condition lies on a phenotypic spectrum of type II collagenopathies extending from lethal achondrogenesis type II and hypochondrogenesis, through Kniest dysplasia, to the milder Stickler syndrome.",
+    "additionalDifferentials": [
+      "Kniest dysplasia and other type II collagenopathies",
+      "Morquio syndrome (mucopolysaccharidosis type IV)",
+      "Spondylometaphyseal and spondyloepimetaphyseal dysplasias",
+      "Pseudoachondroplasia and multiple epiphyseal dysplasia",
+      "Achondroplasia and hypochondroplasia",
+      "Metatropic dysplasia",
+      "Stickler syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Kniest dysplasia and other type II collagenopathies, Morquio syndrome (mucopolysaccharidosis type IV), Spondylometaphyseal and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey with attention to the spine, pelvis and long-bone epiphyses",
+      "COL2A1 molecular genetic testing",
+      "Flexion-extension cervical spine radiographs and MRI to assess atlantoaxial stability and cord compression",
+      "Formal ophthalmological assessment including retinal examination for myopia and detachment risk",
+      "Audiometry for sensorineural hearing loss",
+      "Assessment of the palate for clefting and, where relevant, evaluation for sleep-disordered breathing"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance",
-     "Core treatment modality"
+    "redFlags": [
+      "New limb weakness, spasticity, gait deterioration or sphincter disturbance suggesting cervical cord compression",
+      "Sudden visual loss, floaters or flashing lights indicating retinal detachment",
+      "Respiratory compromise in infancy from a small thorax or cervical instability",
+      "Rapidly progressive scoliosis with cardiorespiratory impact"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intelligence and life expectancy are usually normal, but morbidity arises from cervical instability, early osteoarthritis of the hips and spine, progressive scoliosis, and visual and hearing complications; many affected individuals require joint replacement or spinal surgery in adult life.",
+    "pitfalls": [
+      "Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury",
+      "Misdiagnosing the condition as a mucopolysaccharidosis such as Morquio syndrome",
+      "Overlooking progressive myopia and retinal detachment, leading to preventable visual loss",
+      "Attributing the hypotonia to a primary neuromuscular disorder rather than to the dysplasia"
+    ],
+    "references": [
+      "Nelson Textbook of Paediatrics (standard reference)",
+      "GeneReviews (standard reference)",
+      "International skeletal dysplasia classification references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance",
+      "Cervical spine assessment with flexion-extension imaging and MRI for odontoid hypoplasia and atlantoaxial instability, with fusion or stabilisation and precautions before any anaesthetic or surgery",
+      "Orthopaedic management of scoliosis and early hip and spinal osteoarthritis, often requiring joint replacement or spinal surgery in adult life",
+      "Ophthalmology surveillance for high myopia and retinal detachment",
+      "Audiometry and management of sensorineural hearing loss, with assessment and repair of cleft palate",
+      "Evaluate for sleep-disordered breathing and support muscular hypotonia with physiotherapy",
+      "Multidisciplinary clinical genetics, orthopaedic, ophthalmology and ENT care",
+      "Genetic counselling given autosomal dominant COL2A1 inheritance, noting that many cases arise de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for spondyloepiphyseal dysplasia congenita."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spondyloepiphyseal-dysplasia-congenita-real-image",
-   "title": "Spondyloepiphyseal Dysplasia Congenita: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "spondyloepiphyseal_dysplasia_congenita-pathway",
+      "title": "Spondyloepiphyseal Dysplasia Congenita: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New limb weakness, spasticity, gait deterioration or sphincter disturbance suggesting cervical cord compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey with attention to the spine, pelvis and long-bone epiphyses, COL2A1 molecular genetic testing, Flexion-extension cervical spine radiographs and MRI to assess atlantoaxial stability and cord compression"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spondyloepiphyseal dysplasia congenita."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spondyloepiphyseal_dysplasia_congenita-matrix",
+      "title": "Spondyloepiphyseal Dysplasia Congenita: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A type II collagenopathy caused by COL2A1 mutations, usually autosomal dominant, with many cases arising de novo.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey with attention to the spine, pelvis and long-bone epiphyses, COL2A1 molecular genetic testing, Flexion-extension",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Kniest dysplasia and other type II collagenopathies, Morquio syndrome (mucopolysaccharidosis type IV), Spondylometaphyseal and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy; management is supportive and orthopaedic with structured surveillance",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to screen for atlantoaxial instability before general anaesthesia or surgery, risking catastrophic cord injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spondyloepiphyseal dysplasia congenita."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondyloepiphyseal_dysplasia_congenita-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey of spine, pelvis and epiphyses",
+          "cells": [
+            {
+              "text": "Platyspondyly and epiphyseal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL2A1 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension cervical radiographs and MRI",
+          "cells": [
+            {
+              "text": "Atlantoaxial stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Myopia and retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palate assessment",
+          "cells": [
+            {
+              "text": "Clefting and sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondyloepiphyseal_dysplasia_congenita-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kniest dysplasia and other type II collagenopathies",
+          "cells": [
+            {
+              "text": "COL2A1-related; the same gene family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morquio syndrome (mucopolysaccharidosis type IV)",
+          "cells": [
+            {
+              "text": "Metabolic disorder; enzyme testing separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondyloepiphyseal_dysplasia_congenita-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-specific drug therapy",
+          "cells": [
+            {
+              "text": "Supportive and orthopaedic, with structured surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine assessment",
+          "cells": [
+            {
+              "text": "Flexion-extension imaging and MRI for odontoid hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Scoliosis, hip and spinal osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology surveillance",
+          "cells": [
+            {
+              "text": "High myopia and retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and hearing management",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep and physiotherapy support",
+          "cells": [
+            {
+              "text": "Sleep-disordered breathing and muscular hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant COL2A1 inheritance; many cases are de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondyloepiphyseal_dysplasia_congenita-dx-mgmt",
+      "title": "Diagnosis and management of Spondyloepiphyseal Dysplasia Congenita",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short-trunk stature at birth with platyspondyly: suspected SEDC",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new weakness, sudden visual loss, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal and ophthalmology review for cord or retinal emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; COL2A1 testing; flexion-extension imaging; eye and hearing review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a COL2A1 variant confirmed with the typical radiographic pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kniest, Morquio or Stickler syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cervical stability assessment before surgery or anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic care for scoliosis, hip and spinal osteoarthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology surveillance for myopia and retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Audiometry and sleep-disordered breathing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-specific drug therapy; visual and cervical risks need lifelong follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

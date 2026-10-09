@@ -1,176 +1,551 @@
 {
- "id": "oculopharyngeal_muscular_dystrophy",
- "name": "Oculopharyngeal muscular dystrophy",
- "aliases": [
-  "OPMD",
-  "PABPN1-related dystrophy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1 encoding poly(A)-binding protein nuclear 1",
-   "Typically presents in mid-to-late adulthood with progressive ptosis and dysphagia as the cardinal features",
-   "Ptosis is usually bilateral and slowly progressive, and patients often adopt a head-tilt-back posture to see beneath the drooping lids",
-   "Dysphagia progresses over time and predisposes to aspiration, weight loss, and malnutrition, which are the main sources of morbidity",
-   "Proximal limb-girdle weakness, particularly of the pelvic girdle, develops later in the disease course",
-   "External ophthalmoplegia may occur but is usually mild and rarely causes troublesome diplopia",
-   "Diagnosis is confirmed by targeted repeat-expansion testing of PABPN1, supported by the characteristic clinical picture",
-   "Management is supportive, with swallowing assessment and dietary modification, aspiration precautions, and surgical options such as ptosis correction and cricopharyngeal intervention for selected patients"
+  "id": "oculopharyngeal_muscular_dystrophy",
+  "name": "Oculopharyngeal muscular dystrophy",
+  "aliases": [
+    "OPMD",
+    "PABPN1-related dystrophy"
   ],
-  "pathophysiology": "Oculopharyngeal muscular dystrophy is caused by a modest expansion of a GCN repeat in PABPN1, which lengthens the polyalanine tract of the poly(A)-binding protein nuclear 1. The mutant protein misfolds and aggregates into intranuclear inclusions within muscle-fibre nuclei, disturbing RNA processing and polyadenylation. The selective vulnerability of the levator palpebrae, pharyngeal, and later proximal limb muscles produces the characteristic combination of progressive ptosis, dysphagia, and eventual limb-girdle weakness. Aggregate accumulation over decades accounts for the late onset and slow progression.",
-  "additionalDifferentials": [
-   "Myasthenia gravis",
-   "Mitochondrial disease with chronic progressive external ophthalmoplegia",
-   "Myotonic dystrophy",
-   "Oculopharyngodistal myopathy",
-   "Thyroid eye disease causing ptosis or ophthalmoplegia",
-   "Motor neurone disease with bulbar involvement"
-  ],
-  "additionalInvestigations": [
-   "Targeted repeat-expansion genetic testing of PABPN1",
-   "Videofluoroscopic or instrumental swallowing assessment",
-   "Electromyography showing a myopathic pattern",
-   "Serum creatine kinase, which is normal or mildly elevated",
-   "Muscle biopsy with characteristic intranuclear inclusions in selected cases",
-   "Nutritional assessment and monitoring of weight"
-  ],
-  "redFlags": [
-   "Recurrent aspiration or aspiration pneumonia from progressive dysphagia",
-   "Significant weight loss or malnutrition",
-   "Choking episodes indicating unsafe swallowing",
-   "Ptosis obscuring vision and impairing safe mobility",
-   "Rapidly progressive weakness suggesting an alternative diagnosis"
-  ],
-  "prognosis": "Progression is slow and life expectancy is often near normal, but dysphagia-related complications such as aspiration and malnutrition are the principal threats to health. Proactive swallowing management and timely surgical intervention improve quality of life and reduce aspiration risk.",
-  "pitfalls": [
-   "Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment",
-   "Underestimating the aspiration risk from progressive dysphagia",
-   "Overlooking the family history given the autosomal dominant late-onset pattern",
-   "Neglecting nutritional assessment as swallowing deteriorates",
-   "Failing to consider the diagnosis in older adults presenting with isolated ptosis"
-  ],
-  "references": [
-   "GeneReviews: Oculopharyngeal muscular dystrophy",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia",
-   "Ptosis corrected surgically with blepharoplasty or frontalis-sling suspension to restore the visual field and relieve the compensatory head-tilt-back posture",
-   "Dysphagia managed with swallowing rehabilitation, texture-modified diet and cricopharyngeal myotomy or dilatation in selected patients",
-   "Nutritional support with dietetic input, escalating to gastrostomy feeding when aspiration or malnutrition becomes severe",
-   "Aspiration prevention through instrumental swallowing assessment, upright feeding, chest physiotherapy and prompt treatment of respiratory infection",
-   "Physiotherapy, occupational therapy and mobility aids for the later proximal limb-girdle weakness, with periodic weight and swallowing surveillance",
-   "Multidisciplinary neuromuscular care coordinating neurology, ENT/OMFS, speech and language therapy, dietetics and ophthalmology",
-   "Genetic counselling for this autosomal dominant PABPN1 disorder, with predictive testing and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oculopharyngeal_muscular_dystrophy-pathway",
-   "title": "Oculopharyngeal muscular dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1 encoding poly(A)-binding protein nuclear 1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent aspiration or aspiration pneumonia from progressive dysphagia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted repeat-expansion genetic testing of PABPN1, Videofluoroscopic or instrumental swallowing assessment, Electromyography showing a myopathic pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oculopharyngeal muscular dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "oculopharyngeal_muscular_dystrophy-matrix",
-   "title": "Oculopharyngeal muscular dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1 encoding poly(A)-binding protein nuclear 1",
+      "Typically presents in mid-to-late adulthood with progressive ptosis and dysphagia as the cardinal features",
+      "Ptosis is usually bilateral and slowly progressive, and patients often adopt a head-tilt-back posture to see beneath the drooping lids",
+      "Dysphagia progresses over time and predisposes to aspiration, weight loss, and malnutrition, which are the main sources of morbidity",
+      "Proximal limb-girdle weakness, particularly of the pelvic girdle, develops later in the disease course",
+      "External ophthalmoplegia may occur but is usually mild and rarely causes troublesome diplopia",
+      "Diagnosis is confirmed by targeted repeat-expansion testing of PABPN1, supported by the characteristic clinical picture",
+      "Management is supportive, with swallowing assessment and dietary modification, aspiration precautions, and surgical options such as ptosis correction and cricopharyngeal intervention for selected patients"
     ],
-    [
-     "Key Investigations",
-     "Targeted repeat-expansion genetic testing of PABPN1, Videofluoroscopic or instrumental swallowing assessment, Electromyography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oculopharyngeal muscular dystrophy is caused by a modest expansion of a GCN repeat in PABPN1, which lengthens the polyalanine tract of the poly(A)-binding protein nuclear 1. The mutant protein misfolds and aggregates into intranuclear inclusions within muscle-fibre nuclei, disturbing RNA processing and polyadenylation. The selective vulnerability of the levator palpebrae, pharyngeal, and later proximal limb muscles produces the characteristic combination of progressive ptosis, dysphagia, and eventual limb-girdle weakness. Aggregate accumulation over decades accounts for the late onset and slow progression.",
+    "additionalDifferentials": [
+      "Myasthenia gravis",
+      "Mitochondrial disease with chronic progressive external ophthalmoplegia",
+      "Myotonic dystrophy",
+      "Oculopharyngodistal myopathy",
+      "Thyroid eye disease causing ptosis or ophthalmoplegia",
+      "Motor neurone disease with bulbar involvement"
     ],
-    [
-     "Primary Differentials",
-     "Myasthenia gravis, Mitochondrial disease with chronic progressive external ophthalmoplegia, Myotonic dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted repeat-expansion genetic testing of PABPN1",
+      "Videofluoroscopic or instrumental swallowing assessment",
+      "Electromyography showing a myopathic pattern",
+      "Serum creatine kinase, which is normal or mildly elevated",
+      "Muscle biopsy with characteristic intranuclear inclusions in selected cases",
+      "Nutritional assessment and monitoring of weight"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent aspiration or aspiration pneumonia from progressive dysphagia",
+      "Significant weight loss or malnutrition",
+      "Choking episodes indicating unsafe swallowing",
+      "Ptosis obscuring vision and impairing safe mobility",
+      "Rapidly progressive weakness suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is slow and life expectancy is often near normal, but dysphagia-related complications such as aspiration and malnutrition are the principal threats to health. Proactive swallowing management and timely surgical intervention improve quality of life and reduce aspiration risk.",
+    "pitfalls": [
+      "Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment",
+      "Underestimating the aspiration risk from progressive dysphagia",
+      "Overlooking the family history given the autosomal dominant late-onset pattern",
+      "Neglecting nutritional assessment as swallowing deteriorates",
+      "Failing to consider the diagnosis in older adults presenting with isolated ptosis"
+    ],
+    "references": [
+      "GeneReviews: Oculopharyngeal muscular dystrophy",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia",
+      "Ptosis corrected surgically with blepharoplasty or frontalis-sling suspension to restore the visual field and relieve the compensatory head-tilt-back posture",
+      "Dysphagia managed with swallowing rehabilitation, texture-modified diet and cricopharyngeal myotomy or dilatation in selected patients",
+      "Nutritional support with dietetic input, escalating to gastrostomy feeding when aspiration or malnutrition becomes severe",
+      "Aspiration prevention through instrumental swallowing assessment, upright feeding, chest physiotherapy and prompt treatment of respiratory infection",
+      "Physiotherapy, occupational therapy and mobility aids for the later proximal limb-girdle weakness, with periodic weight and swallowing surveillance",
+      "Multidisciplinary neuromuscular care coordinating neurology, ENT/OMFS, speech and language therapy, dietetics and ophthalmology",
+      "Genetic counselling for this autosomal dominant PABPN1 disorder, with predictive testing and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for oculopharyngeal muscular dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oculopharyngeal-muscular-dystrophy-real-image",
-   "title": "Oculopharyngeal muscular dystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "oculopharyngeal_muscular_dystrophy-pathway",
+      "title": "Oculopharyngeal muscular dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1 encoding poly(A)-binding protein nuclear 1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent aspiration or aspiration pneumonia from progressive dysphagia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted repeat-expansion genetic testing of PABPN1, Videofluoroscopic or instrumental swallowing assessment, Electromyography showing a myopathic pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oculopharyngeal muscular dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-matrix",
+      "title": "Oculopharyngeal muscular dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Late-onset muscular dystrophy, usually autosomal dominant, caused by a short GCN trinucleotide repeat expansion in PABPN1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted repeat-expansion genetic testing of PABPN1, Videofluoroscopic or instrumental swallowing assessment, Electromyography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Myasthenia gravis, Mitochondrial disease with chronic progressive external ophthalmoplegia, Myotonic dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying drug exists; management is supportive and directed principally at the ptosis and dysphagia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the ptosis and ophthalmoplegia for myasthenia gravis and giving inappropriate treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oculopharyngeal muscular dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted repeat-expansion testing of PABPN1",
+          "cells": [
+            {
+              "text": "Expanded GCN repeat in PABPN1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videofluoroscopic or instrumental swallowing assessment",
+          "cells": [
+            {
+              "text": "Dysphagia and aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Normal or mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Characteristic intranuclear inclusions, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and weight monitoring",
+          "cells": [
+            {
+              "text": "Weight loss and malnutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness; the ptosis here is bilateral and slowly progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disease with chronic progressive external ophthalmoplegia",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia here is usually mild and rarely causes troublesome diplopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No disease-modifying drug; care focused on ptosis and dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ptosis surgery",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Blepharoplasty or frontalis-sling suspension to restore the visual field and relieve head-tilt-back posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia management",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Swallowing rehabilitation, texture-modified diet, cricopharyngeal myotomy or dilatation in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Dietetic input; gastrostomy feeding when aspiration or malnutrition is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration prevention",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Instrumental assessment, upright feeding, chest physiotherapy and prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and mobility aids",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "For later proximal limb-girdle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neuromuscular care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Neurology, ENT, speech and language therapy, dietetics and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "Autosomal dominant PABPN1 disorder; predictive testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-ddx-2",
+      "kind": "ddx",
+      "title": "Neuromuscular causes of ptosis or ophthalmoplegia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Guillain-Barre syndrome; Miller-Fisher syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuromuscular junction",
+          "cells": [
+            {
+              "text": "botulism; Lambert-Eaton syndrome; myasthenia gravis; congenital myasthenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "mitochondrial myopathies (Kearns-Sayre syndrome, progressive external ophthalmoplegia); oculopharyngeal and oculopharyngodistal muscular dystrophy; myotonic dystrophy (ptosis only); congenital myopathy (myotubular; nemaline, ptosis only); hyperthyroidism or Graves disease (ophthalmoplegia without ptosis); hereditary inclusion body myopathy type 3"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oculopharyngeal_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Oculopharyngeal muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive ptosis and dysphagia in mid-to-late adulthood; OPMD suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aspiration, significant weight loss, choking or rapid weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent swallow assessment and nutritional support for aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PABPN1 repeat-expansion testing, videofluoroscopy, EMG and creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PABPN1 expansion testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myasthenia, mitochondrial disease, myotonic dystrophy or motor neurone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Blepharoplasty or frontalis sling to correct ptosis and restore the visual field",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Swallowing rehabilitation and texture-modified diet; cricopharyngeal myotomy if selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietetic support; gastrostomy feeding when aspiration or malnutrition is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspiration precautions, chest physiotherapy and prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for the autosomal dominant PABPN1 disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow progression; aspiration and malnutrition are the main threats",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

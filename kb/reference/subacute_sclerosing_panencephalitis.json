@@ -1,174 +1,452 @@
 {
- "id": "subacute_sclerosing_panencephalitis",
- "name": "Subacute sclerosing panencephalitis (measles)",
- "aliases": [
-  "SSPE",
-  "Dawson encephalitis",
-  "measles inclusion encephalitis (chronic)",
-  "subacute sclerosing leukoencephalitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing years after the initial measles infection",
-   "The risk is greatest when natural measles is acquired in infancy, and the latent interval before SSPE is often 6 to 10 years or more",
-   "It evolves through recognisable stages, beginning with subtle cognitive and behavioural change and declining school performance",
-   "The hallmark second stage is periodic myoclonic jerks, followed by progressive dementia, spasticity, rigidity, and eventually a vegetative state",
-   "The electroencephalogram characteristically shows periodic complexes that coincide with the myoclonic jerks",
-   "Cerebrospinal fluid reveals markedly raised measles-specific antibody with oligoclonal bands and evidence of intrathecal antibody synthesis, with normal or mildly raised protein",
-   "There is no curative therapy; agents such as interferon and isoprinosine have been tried with limited benefit, and prevention through measles immunisation is paramount"
+  "id": "subacute_sclerosing_panencephalitis",
+  "name": "Subacute sclerosing panencephalitis (measles)",
+  "aliases": [
+    "SSPE",
+    "Dawson encephalitis",
+    "measles inclusion encephalitis (chronic)",
+    "subacute sclerosing leukoencephalitis"
   ],
-  "pathophysiology": "Subacute sclerosing panencephalitis results from persistence of the measles virus in neurones and glia after apparently complete recovery from acute measles. Over the ensuing years the virus accumulates mutations, particularly affecting the matrix and other envelope genes, so that it can no longer produce complete infectious particles but continues to spread cell to cell within the brain. This defective, persistent infection provokes a chronic inflammatory and immune response, with intense intrathecal production of anti-measles antibody, alongside slowly progressive destruction of both grey and white matter, hence the term panencephalitis. Neurones and oligodendrocytes contain viral inclusions, and there is perivascular inflammation, gliosis, and demyelination. The relentless accumulation of neuronal loss underlies the stepwise clinical deterioration from cognitive decline through myoclonus to a vegetative state and death.",
-  "additionalDifferentials": [
-   "Progressive rubella panencephalitis",
-   "Other viral or autoimmune encephalitides",
-   "Neurodegenerative disorders and leukodystrophies of childhood and adolescence",
-   "Inborn errors of metabolism presenting with regression",
-   "Creutzfeldt-Jakob disease and other prion disorders",
-   "Epileptic encephalopathies with myoclonus"
-  ],
-  "additionalInvestigations": [
-   "Electroencephalography demonstrating periodic complexes synchronous with myoclonus",
-   "Cerebrospinal fluid measles antibody titre with paired serum for antibody index and oligoclonal bands",
-   "MRI of the brain showing white-matter change and later cerebral atrophy",
-   "Detailed history of prior measles infection, especially in infancy, and immunisation status",
-   "Molecular detection of measles virus RNA in brain tissue in atypical cases",
-   "Exclusion of metabolic, prion, and autoimmune causes of progressive encephalopathy"
-  ],
-  "redFlags": [
-   "Progressive cognitive decline with new periodic myoclonic jerks in a child or adolescent",
-   "Rapid neurological deterioration into rigidity or a vegetative state",
-   "Loss of safe swallowing and airway protection",
-   "Intractable seizures or autonomic instability in advanced disease"
-  ],
-  "prognosis": "SSPE is usually relentlessly progressive and fatal, most patients dying within a few years of onset; occasional cases follow a more prolonged or fluctuating course, but spontaneous long-term remission is rare and no treatment reliably arrests it.",
-  "pitfalls": [
-   "Dismissing early behavioural and academic decline as a psychological or educational problem",
-   "Not recognising the diagnostic value of periodic EEG complexes coinciding with myoclonus",
-   "Relying on serum measles antibody alone rather than demonstrating intrathecal antibody synthesis",
-   "Underestimating the importance of measles vaccination in prevention, especially where infants are infected"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Subacute sclerosing panencephalitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative",
-   "Disease-slowing regimens attempted in some cases, combining intrathecal or oral interferon-alpha with oral inosine pranobex (isoprinosine), which may slow progression in a minority",
-   "Symptomatic control of myoclonus and seizures with antiseizure medications such as clonazepam and valproate",
-   "Manage spasticity with antispasticity agents and physiotherapy, with careful positioning and contracture prevention",
-   "Nutritional support and aspiration prevention, progressing to enteral feeding as swallowing fails",
-   "Comprehensive palliative and end-of-life care with psychological support for the family given the progressive fatal course",
-   "Emphasise prevention through measles immunisation, as the disease follows measles infection acquired in infancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subacute_sclerosing_panencephalitis-pathway",
-   "title": "Subacute sclerosing panencephalitis (measles): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing years after the initial measles infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive cognitive decline with new periodic myoclonic jerks in a child or adolescent",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electroencephalography demonstrating periodic complexes synchronous with myoclonus, Cerebrospinal fluid measles antibody titre with paired serum for antibody index and oligoclonal bands, MRI of the brain showing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early behavioural and academic decline as a psychological or educational problem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subacute sclerosing panencephalitis (measles)."
-  }
- ],
- "tables": [
-  {
-   "id": "subacute_sclerosing_panencephalitis-matrix",
-   "title": "Subacute sclerosing panencephalitis (measles): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing years after the initial measles infection",
+      "The risk is greatest when natural measles is acquired in infancy, and the latent interval before SSPE is often 6 to 10 years or more",
+      "It evolves through recognisable stages, beginning with subtle cognitive and behavioural change and declining school performance",
+      "The hallmark second stage is periodic myoclonic jerks, followed by progressive dementia, spasticity, rigidity, and eventually a vegetative state",
+      "The electroencephalogram characteristically shows periodic complexes that coincide with the myoclonic jerks",
+      "Cerebrospinal fluid reveals markedly raised measles-specific antibody with oligoclonal bands and evidence of intrathecal antibody synthesis, with normal or mildly raised protein",
+      "There is no curative therapy; agents such as interferon and isoprinosine have been tried with limited benefit, and prevention through measles immunisation is paramount"
     ],
-    [
-     "Key Investigations",
-     "Electroencephalography demonstrating periodic complexes synchronous with myoclonus, Cerebrospinal fluid measles antibody titre",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subacute sclerosing panencephalitis results from persistence of the measles virus in neurones and glia after apparently complete recovery from acute measles. Over the ensuing years the virus accumulates mutations, particularly affecting the matrix and other envelope genes, so that it can no longer produce complete infectious particles but continues to spread cell to cell within the brain. This defective, persistent infection provokes a chronic inflammatory and immune response, with intense intrathecal production of anti-measles antibody, alongside slowly progressive destruction of both grey and white matter, hence the term panencephalitis. Neurones and oligodendrocytes contain viral inclusions, and there is perivascular inflammation, gliosis, and demyelination. The relentless accumulation of neuronal loss underlies the stepwise clinical deterioration from cognitive decline through myoclonus to a vegetative state and death.",
+    "additionalDifferentials": [
+      "Progressive rubella panencephalitis",
+      "Other viral or autoimmune encephalitides",
+      "Neurodegenerative disorders and leukodystrophies of childhood and adolescence",
+      "Inborn errors of metabolism presenting with regression",
+      "Creutzfeldt-Jakob disease and other prion disorders",
+      "Epileptic encephalopathies with myoclonus"
     ],
-    [
-     "Primary Differentials",
-     "Progressive rubella panencephalitis, Other viral or autoimmune encephalitides, Neurodegenerative disorders and leukodystrophies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electroencephalography demonstrating periodic complexes synchronous with myoclonus",
+      "Cerebrospinal fluid measles antibody titre with paired serum for antibody index and oligoclonal bands",
+      "MRI of the brain showing white-matter change and later cerebral atrophy",
+      "Detailed history of prior measles infection, especially in infancy, and immunisation status",
+      "Molecular detection of measles virus RNA in brain tissue in atypical cases",
+      "Exclusion of metabolic, prion, and autoimmune causes of progressive encephalopathy"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive cognitive decline with new periodic myoclonic jerks in a child or adolescent",
+      "Rapid neurological deterioration into rigidity or a vegetative state",
+      "Loss of safe swallowing and airway protection",
+      "Intractable seizures or autonomic instability in advanced disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early behavioural and academic decline as a psychological or educational problem",
-     "Prevent diagnostic or management error"
+    "prognosis": "SSPE is usually relentlessly progressive and fatal, most patients dying within a few years of onset; occasional cases follow a more prolonged or fluctuating course, but spontaneous long-term remission is rare and no treatment reliably arrests it.",
+    "pitfalls": [
+      "Dismissing early behavioural and academic decline as a psychological or educational problem",
+      "Not recognising the diagnostic value of periodic EEG complexes coinciding with myoclonus",
+      "Relying on serum measles antibody alone rather than demonstrating intrathecal antibody synthesis",
+      "Underestimating the importance of measles vaccination in prevention, especially where infants are infected"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Subacute sclerosing panencephalitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative",
+      "Disease-slowing regimens attempted in some cases, combining intrathecal or oral interferon-alpha with oral inosine pranobex (isoprinosine), which may slow progression in a minority",
+      "Symptomatic control of myoclonus and seizures with antiseizure medications such as clonazepam and valproate",
+      "Manage spasticity with antispasticity agents and physiotherapy, with careful positioning and contracture prevention",
+      "Nutritional support and aspiration prevention, progressing to enteral feeding as swallowing fails",
+      "Comprehensive palliative and end-of-life care with psychological support for the family given the progressive fatal course",
+      "Emphasise prevention through measles immunisation, as the disease follows measles infection acquired in infancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for subacute sclerosing panencephalitis (measles)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subacute-sclerosing-panencephalitis-real-image",
-   "title": "Subacute sclerosing panencephalitis (measles): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "subacute_sclerosing_panencephalitis-pathway",
+      "title": "Subacute sclerosing panencephalitis (measles): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing years after the initial measles infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive cognitive decline with new periodic myoclonic jerks in a child or adolescent",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electroencephalography demonstrating periodic complexes synchronous with myoclonus, Cerebrospinal fluid measles antibody titre with paired serum for antibody index and oligoclonal bands, MRI of the brain showing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early behavioural and academic decline as a psychological or educational problem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subacute sclerosing panencephalitis (measles)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subacute_sclerosing_panencephalitis-matrix",
+      "title": "Subacute sclerosing panencephalitis (measles): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, progressive, and fatal encephalitis caused by persistence of a defective measles virus in the brain, typically developing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electroencephalography demonstrating periodic complexes synchronous with myoclonus, Cerebrospinal fluid measles antibody titre",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progressive rubella panencephalitis, Other viral or autoimmune encephalitides, Neurodegenerative disorders and leukodystrophies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no treatment reliably arrests the disease, so management is largely supportive and palliative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early behavioural and academic decline as a psychological or educational problem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subacute sclerosing panencephalitis (measles)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacute_sclerosing_panencephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Periodic complexes synchronous with myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF measles antibody titre with paired serum",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White-matter change, later atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of measles infection",
+          "cells": [
+            {
+              "text": "Especially in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles RNA detection in brain tissue",
+          "cells": [
+            {
+              "text": "Atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of metabolic, prion and autoimmune causes",
+          "cells": [
+            {
+              "text": "Differential diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_sclerosing_panencephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Creutzfeldt-Jakob disease and other prion disorders",
+          "cells": [
+            {
+              "text": "Rapid myoclonic course; prion testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism presenting with regression",
+          "cells": [
+            {
+              "text": "Metabolic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_sclerosing_panencephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No reliably curative therapy",
+          "cells": [
+            {
+              "text": "Disease-slowing regimens in some cases, with limited evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control of myoclonus and seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity management",
+          "cells": [
+            {
+              "text": "Antispasticity agents and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and aspiration prevention",
+          "cells": [
+            {
+              "text": "Enteral feeding as swallowing fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative and psychological care",
+          "cells": [
+            {
+              "text": "End-of-life planning and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles immunisation",
+          "cells": [
+            {
+              "text": "The key preventive measure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacute_sclerosing_panencephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Subacute sclerosing panencephalitis (measles)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cognitive decline with periodic myoclonus after childhood measles: suspected SSPE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (loss of swallowing, rapid deterioration, intractable seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent palliative and aspiration support for loss of swallow",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG for periodic complexes; CSF measles antibody; MRI; measles history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are periodic EEG complexes and raised CSF measles antibody found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CJD, progressive rubella or metabolic disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic control of myoclonus and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spasticity management with antispasticity agents and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional support and aspiration prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Palliative care and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive and fatal; measles immunisation is the key preventive measure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

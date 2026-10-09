@@ -1,175 +1,482 @@
 {
- "id": "dhat_syndrome",
- "name": "Dhat Syndrome",
- "aliases": [
-  "Dhat",
-  "Semen-loss anxiety"
- ],
- "class": "non_infective",
- "system": "Nervous system / Psychiatry",
- "specialty": "Psychiatry / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan and Sadock's Synopsis of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine, through nocturnal emission, or through masturbation, causing weakness.",
-   "Presents with fatigue, weakness, poor concentration, anxiety, low mood, and multiple somatic complaints attributed to dhat, a whitish urinary discharge.",
-   "Rooted in traditional Ayurvedic concepts that semen (dhatu) is a precious vital essence whose loss depletes the body.",
-   "Predominantly affects young men, often recently married or experiencing sexual guilt and anxiety.",
-   "Frequently overlaps with depression, anxiety disorders, and sexual dysfunction such as premature ejaculation or erectile difficulty.",
-   "Management centres on culturally sensitive psychoeducation, correcting misconceptions, and treating comorbid depression or anxiety.",
-   "Often presents first to general practitioners, traditional healers, or genito-urinary and andrology clinics rather than to psychiatry."
+  "id": "dhat_syndrome",
+  "name": "Dhat Syndrome",
+  "aliases": [
+    "Dhat",
+    "Semen-loss anxiety"
   ],
-  "pathophysiology": "Dhat syndrome arises from culturally embedded beliefs, drawn from traditional Ayurvedic medicine, that semen is a finite vital essence whose loss depletes bodily and mental vigour. Sexual guilt, misinformation, and anxiety focus attention on normal physiological phenomena such as nocturnal emission and phosphaturia causing cloudy urine, which are reinterpreted as pathological semen loss. This cognitive misattribution generates a self-perpetuating cycle of somatic symptom amplification and health anxiety. It commonly coexists with, and may serve as a cultural idiom of distress for, underlying depressive and anxiety disorders.",
-  "additionalDifferentials": [
-   "Depressive disorder",
-   "Generalised anxiety or somatic symptom disorder",
-   "Sexual dysfunction (premature ejaculation, erectile dysfunction)",
-   "Genito-urinary infection or urethral discharge",
-   "Prostatitis",
-   "Illness anxiety disorder",
-   "Diabetes mellitus presenting with fatigue and sexual dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Detailed history including sexual and cultural beliefs",
-   "Mental state examination for depression and anxiety",
-   "Urinalysis and microscopy to exclude infection and to demonstrate absence of semen",
-   "Screening for genito-urinary infection where indicated",
-   "Fasting glucose or HbA1c where fatigue and sexual dysfunction are prominent",
-   "Assessment of sexual function",
-   "Assessment of psychoeducational needs and collateral history"
-  ],
-  "redFlags": [
-   "Significant comorbid depression with suicidal ideation",
-   "Severe functional impairment or social withdrawal",
-   "Self-treatment with harmful traditional remedies",
-   "Genuine genito-urinary pathology being overlooked"
-  ],
-  "prognosis": "With culturally sensitive reassurance, education, and treatment of comorbid depression or anxiety the outlook is generally good, though symptoms may become chronic if misconceptions and comorbidity are not addressed.",
-  "pitfalls": [
-   "Ordering repeated unnecessary investigations that reinforce illness beliefs",
-   "Missing treatable comorbid depression or anxiety",
-   "Dismissive or culturally insensitive reassurance that alienates the patient",
-   "Failing to address the underlying sexual dysfunction"
-  ],
-  "references": [
-   "Kaplan and Sadock's Synopsis of Psychiatry",
-   "New Oxford Textbook of Psychiatry",
-   "DSM-5-TR (Cultural concepts of distress)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy urine",
-   "Cognitive behavioural therapy and structured reassurance to break the somatic symptom-amplification cycle",
-   "Identify and treat comorbid depression and anxiety with antidepressants such as selective serotonin reuptake inhibitors and psychotherapy",
-   "Address associated sexual dysfunction such as premature ejaculation or erectile difficulty",
-   "Exclude organic contributors with urinalysis and screening for genito-urinary infection and diabetes",
-   "Avoid reinforcing illness beliefs through unnecessary investigations or restorative tonics",
-   "Refer to psychiatry or psychosexual services for refractory or severe presentations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dhat_syndrome-pathway",
-   "title": "Dhat Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine, through nocturnal emission, or through masturbation, causing weakness.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant comorbid depression with suicidal ideation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed history including sexual and cultural beliefs, Mental state examination for depression and anxiety, Urinalysis and microscopy to exclude infection and to demonstrate absence of semen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy urine"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Ordering repeated unnecessary investigations that reinforce illness beliefs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dhat syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dhat_syndrome-matrix",
-   "title": "Dhat Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Psychiatry",
+  "specialty": "Psychiatry / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan and Sadock's Synopsis of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine, through nocturnal emission, or through masturbation, causing weakness.",
+      "Presents with fatigue, weakness, poor concentration, anxiety, low mood, and multiple somatic complaints attributed to dhat, a whitish urinary discharge.",
+      "Rooted in traditional Ayurvedic concepts that semen (dhatu) is a precious vital essence whose loss depletes the body.",
+      "Predominantly affects young men, often recently married or experiencing sexual guilt and anxiety.",
+      "Frequently overlaps with depression, anxiety disorders, and sexual dysfunction such as premature ejaculation or erectile difficulty.",
+      "Management centres on culturally sensitive psychoeducation, correcting misconceptions, and treating comorbid depression or anxiety.",
+      "Often presents first to general practitioners, traditional healers, or genito-urinary and andrology clinics rather than to psychiatry."
     ],
-    [
-     "Key Investigations",
-     "Detailed history including sexual and cultural beliefs, Mental state examination for depression and anxiety, Urinalysis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dhat syndrome arises from culturally embedded beliefs, drawn from traditional Ayurvedic medicine, that semen is a finite vital essence whose loss depletes bodily and mental vigour. Sexual guilt, misinformation, and anxiety focus attention on normal physiological phenomena such as nocturnal emission and phosphaturia causing cloudy urine, which are reinterpreted as pathological semen loss. This cognitive misattribution generates a self-perpetuating cycle of somatic symptom amplification and health anxiety. It commonly coexists with, and may serve as a cultural idiom of distress for, underlying depressive and anxiety disorders.",
+    "additionalDifferentials": [
+      "Depressive disorder",
+      "Generalised anxiety or somatic symptom disorder",
+      "Sexual dysfunction (premature ejaculation, erectile dysfunction)",
+      "Genito-urinary infection or urethral discharge",
+      "Prostatitis",
+      "Illness anxiety disorder",
+      "Diabetes mellitus presenting with fatigue and sexual dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Depressive disorder, Generalised anxiety or somatic symptom disorder, Sexual dysfunction (premature ejaculation, erectile",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed history including sexual and cultural beliefs",
+      "Mental state examination for depression and anxiety",
+      "Urinalysis and microscopy to exclude infection and to demonstrate absence of semen",
+      "Screening for genito-urinary infection where indicated",
+      "Fasting glucose or HbA1c where fatigue and sexual dysfunction are prominent",
+      "Assessment of sexual function",
+      "Assessment of psychoeducational needs and collateral history"
     ],
-    [
-     "Management Strategy",
-     "Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant comorbid depression with suicidal ideation",
+      "Severe functional impairment or social withdrawal",
+      "Self-treatment with harmful traditional remedies",
+      "Genuine genito-urinary pathology being overlooked"
     ],
-    [
-     "Clinical Pitfall",
-     "Ordering repeated unnecessary investigations that reinforce illness beliefs",
-     "Prevent diagnostic or management error"
+    "prognosis": "With culturally sensitive reassurance, education, and treatment of comorbid depression or anxiety the outlook is generally good, though symptoms may become chronic if misconceptions and comorbidity are not addressed.",
+    "pitfalls": [
+      "Ordering repeated unnecessary investigations that reinforce illness beliefs",
+      "Missing treatable comorbid depression or anxiety",
+      "Dismissive or culturally insensitive reassurance that alienates the patient",
+      "Failing to address the underlying sexual dysfunction"
+    ],
+    "references": [
+      "Kaplan and Sadock's Synopsis of Psychiatry",
+      "New Oxford Textbook of Psychiatry",
+      "DSM-5-TR (Cultural concepts of distress)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy urine",
+      "Cognitive behavioural therapy and structured reassurance to break the somatic symptom-amplification cycle",
+      "Identify and treat comorbid depression and anxiety with antidepressants such as selective serotonin reuptake inhibitors and psychotherapy",
+      "Address associated sexual dysfunction such as premature ejaculation or erectile difficulty",
+      "Exclude organic contributors with urinalysis and screening for genito-urinary infection and diabetes",
+      "Avoid reinforcing illness beliefs through unnecessary investigations or restorative tonics",
+      "Refer to psychiatry or psychosexual services for refractory or severe presentations"
     ]
-   ],
-   "caption": "Overview comparison matrix for dhat syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dhat-syndrome-real-image",
-   "title": "Dhat Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dhat_syndrome-pathway",
+      "title": "Dhat Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine, through nocturnal emission, or through masturbation, causing weakness.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant comorbid depression with suicidal ideation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed history including sexual and cultural beliefs, Mental state examination for depression and anxiety, Urinalysis and microscopy to exclude infection and to demonstrate absence of semen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy urine"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Ordering repeated unnecessary investigations that reinforce illness beliefs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dhat syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dhat_syndrome-matrix",
+      "title": "Dhat Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Culture-bound syndrome of the Indian subcontinent involving distressing conviction that vital semen is being lost in urine,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed history including sexual and cultural beliefs, Mental state examination for depression and anxiety, Urinalysis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Depressive disorder, Generalised anxiety or somatic symptom disorder, Sexual dysfunction (premature ejaculation, erectile",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Culturally sensitive psychoeducation correcting misconceptions about semen loss and normalising nocturnal emission and cloudy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Ordering repeated unnecessary investigations that reinforce illness beliefs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dhat syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan and Sadock's Synopsis of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dhat_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed history including sexual and cultural beliefs",
+          "cells": [
+            {
+              "text": "Culturally embedded beliefs about semen loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mental state examination",
+          "cells": [
+            {
+              "text": "Depression and anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and microscopy",
+          "cells": [
+            {
+              "text": "Infection excluded; absence of semen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes, where fatigue and sexual dysfunction are prominent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of sexual function",
+          "cells": [
+            {
+              "text": "Premature ejaculation or erectile difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dhat_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Depressive disorder",
+          "cells": [
+            {
+              "text": "Comorbid depression with suicidal ideation is a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatitis or genito-urinary infection",
+          "cells": [
+            {
+              "text": "Excluded by urinalysis and infection screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes mellitus",
+          "cells": [
+            {
+              "text": "Presents with fatigue and sexual dysfunction; excluded by glucose testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexual dysfunction",
+          "cells": [
+            {
+              "text": "Premature ejaculation or erectile dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dhat_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Culturally sensitive psychoeducation",
+          "cells": [
+            {
+              "text": "Corrects misconceptions about semen loss; normalises nocturnal emission and cloudy urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CBT and structured reassurance",
+          "cells": [
+            {
+              "text": "Breaks the somatic symptom-amplification cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid depression and anxiety",
+          "cells": [
+            {
+              "text": "SSRIs and psychotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexual dysfunction",
+          "cells": [
+            {
+              "text": "Address premature ejaculation or erectile difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude organic contributors",
+          "cells": [
+            {
+              "text": "Urinalysis, genito-urinary infection and diabetes screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigations and tonics",
+          "cells": [
+            {
+              "text": "Repeated tests and tonics reinforce illness beliefs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Psychiatry or psychosexual services for refractory or severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dhat_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dhat Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dhat syndrome: fear of semen loss with fatigue and sexual anxiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suicidal depression, severe impairment, harmful self-treatment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric review for suicidal depression; stop harmful remedies",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and microscopy; mental state examination; glucose or HbA1c; sexual function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an organic cause excluded by urinalysis and glucose testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the organic cause: infection, prostatitis or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Culturally sensitive psychoeducation about semen loss and normal emission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CBT and structured reassurance to break the symptom cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SSRIs and psychotherapy for comorbid depression and anxiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address premature ejaculation or erectile difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid unnecessary tests and restorative tonics that reinforce beliefs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with culturally sensitive reassurance and treatment of comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

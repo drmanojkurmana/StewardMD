@@ -1,179 +1,491 @@
 {
- "id": "arrhythmogenic_right_ventricular_cardiomyopathy",
- "name": "Arrhythmogenic right ventricular cardiomyopathy",
- "aliases": [
-  "ARVC",
-  "ARVD",
-  "PKP2-related cardiomyopathy",
-  "arrhythmogenic cardiomyopathy",
-  "arrhythmogenic right ventricular dysplasia",
-  "arrhythmogenic rv cardiomyopathy"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "Task Force Criteria for ARVC; ESC/AHA cardiomyopathy guidelines; Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to ventricular arrhythmia and sudden death",
-   "Typically presents in young adults with palpitations, syncope, or exertional ventricular arrhythmia, and is an important cause of sudden death in athletes",
-   "Most cases are autosomal dominant and caused by variants in desmosomal proteins, particularly plakophilin-2 (PKP2), desmoplakin, desmoglein-2 and desmocollin-2",
-   "The resting ECG may show T-wave inversion in the right precordial leads and an epsilon wave (a low-amplitude terminal QRS deflection)",
-   "Diagnosis uses the Task Force Criteria, combining imaging, ECG, arrhythmic, tissue and family/genetic categories into major and minor criteria",
-   "Cardiac MRI demonstrates right ventricular dilatation, regional wall-motion abnormalities and fibrofatty infiltration; left ventricular involvement is increasingly recognised",
-   "Management centres on arrhythmia risk reduction with exercise restriction, beta-blockers, antiarrhythmic drugs, catheter ablation and an implantable cardioverter defibrillator in high-risk patients",
-   "Intense endurance exercise accelerates disease progression, so activity counselling is a key part of care"
+  "id": "arrhythmogenic_right_ventricular_cardiomyopathy",
+  "name": "Arrhythmogenic right ventricular cardiomyopathy",
+  "aliases": [
+    "ARVC",
+    "ARVD",
+    "PKP2-related cardiomyopathy",
+    "arrhythmogenic cardiomyopathy",
+    "arrhythmogenic right ventricular dysplasia",
+    "arrhythmogenic rv cardiomyopathy"
   ],
-  "pathophysiology": "ARVC is caused predominantly by variants in genes encoding desmosomal proteins that maintain mechanical junctions between cardiomyocytes. Impaired cell-cell adhesion, aggravated by mechanical stress such as vigorous exercise, leads to myocyte detachment and death, with progressive replacement of myocardium by fibrous and fatty tissue. This begins in the right ventricle but can extend to the left. The scarred, electrically heterogeneous myocardium forms re-entry circuits that generate ventricular arrhythmias, while progressive myocardial loss can cause right and eventually biventricular dysfunction.",
-  "additionalDifferentials": [
-   "Idiopathic right ventricular outflow tract tachycardia",
-   "Cardiac sarcoidosis",
-   "Brugada syndrome",
-   "Dilated cardiomyopathy with predominant right ventricular involvement",
-   "Athlete's heart with physiological right ventricular remodelling",
-   "Myocarditis"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation",
-   "Signal-averaged ECG to detect late potentials",
-   "Cardiac MRI to assess right ventricular size, wall motion and fibrofatty infiltration",
-   "Echocardiography for right ventricular dilatation and regional dysfunction",
-   "Ambulatory monitoring and exercise testing to quantify ventricular arrhythmia",
-   "Genetic testing for desmosomal gene variants and cascade family screening"
-  ],
-  "redFlags": [
-   "Syncope or aborted sudden cardiac death, particularly during exertion",
-   "Sustained ventricular tachycardia of left bundle branch block morphology",
-   "Progressive right or biventricular failure",
-   "Family history of premature sudden death or confirmed ARVC"
-  ],
-  "prognosis": "The clinical course is variable; with risk stratification, exercise restriction and appropriate defibrillator therapy many patients do well, but the condition is progressive and carries an ongoing risk of life-threatening arrhythmia and, in advanced cases, heart failure.",
-  "pitfalls": [
-   "Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy",
-   "Confusing physiological athlete's heart remodelling with early ARVC",
-   "Permitting competitive or endurance exercise, which hastens disease progression",
-   "Relying on right ventricular imaging alone and overlooking left-dominant or biventricular variants",
-   "Underestimating arrhythmic risk in gene-positive relatives with subtle findings"
-  ],
-  "references": [
-   "Revised Task Force Criteria for the diagnosis of arrhythmogenic right ventricular cardiomyopathy",
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression",
-   "Beta-blockers as first-line antiarrhythmic therapy, with sotalol or amiodarone added for ventricular arrhythmia",
-   "Implantable cardioverter-defibrillator for secondary prevention and for primary prevention in patients with high arrhythmic risk",
-   "Catheter ablation, frequently requiring an epicardial approach, for recurrent ventricular tachycardia",
-   "Guideline-directed heart failure therapy for progressive right or biventricular dysfunction",
-   "Surveillance with ECG, ambulatory monitoring, echocardiography and cardiac MRI to quantify arrhythmia and structural change",
-   "Offer genetic testing of desmosomal genes such as PKP2, desmoplakin, desmoglein-2 and desmocollin-2, with counselling and cascade screening of first-degree relatives",
-   "Refer for advanced heart failure evaluation and transplantation in end-stage disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arrhythmogenic_right_ventricular_cardiomyopathy-pathway",
-   "title": "Arrhythmogenic right ventricular cardiomyopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to ventricular arrhythmia and sudden death",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or aborted sudden cardiac death, particularly during exertion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation, Signal-averaged ECG to detect late potentials, Cardiac MRI to assess right ventricular size, wall motion and fibrofatty"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arrhythmogenic right ventricular cardiomyopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "arrhythmogenic_right_ventricular_cardiomyopathy-matrix",
-   "title": "Arrhythmogenic right ventricular cardiomyopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Task Force Criteria for ARVC; ESC/AHA cardiomyopathy guidelines; Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to ventricular arrhythmia and sudden death",
+      "Typically presents in young adults with palpitations, syncope, or exertional ventricular arrhythmia, and is an important cause of sudden death in athletes",
+      "Most cases are autosomal dominant and caused by variants in desmosomal proteins, particularly plakophilin-2 (PKP2), desmoplakin, desmoglein-2 and desmocollin-2",
+      "The resting ECG may show T-wave inversion in the right precordial leads and an epsilon wave (a low-amplitude terminal QRS deflection)",
+      "Diagnosis uses the Task Force Criteria, combining imaging, ECG, arrhythmic, tissue and family/genetic categories into major and minor criteria",
+      "Cardiac MRI demonstrates right ventricular dilatation, regional wall-motion abnormalities and fibrofatty infiltration; left ventricular involvement is increasingly recognised",
+      "Management centres on arrhythmia risk reduction with exercise restriction, beta-blockers, antiarrhythmic drugs, catheter ablation and an implantable cardioverter defibrillator in high-risk patients",
+      "Intense endurance exercise accelerates disease progression, so activity counselling is a key part of care"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation, Signal-averaged ECG to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ARVC is caused predominantly by variants in genes encoding desmosomal proteins that maintain mechanical junctions between cardiomyocytes. Impaired cell-cell adhesion, aggravated by mechanical stress such as vigorous exercise, leads to myocyte detachment and death, with progressive replacement of myocardium by fibrous and fatty tissue. This begins in the right ventricle but can extend to the left. The scarred, electrically heterogeneous myocardium forms re-entry circuits that generate ventricular arrhythmias, while progressive myocardial loss can cause right and eventually biventricular dysfunction.",
+    "additionalDifferentials": [
+      "Idiopathic right ventricular outflow tract tachycardia",
+      "Cardiac sarcoidosis",
+      "Brugada syndrome",
+      "Dilated cardiomyopathy with predominant right ventricular involvement",
+      "Athlete's heart with physiological right ventricular remodelling",
+      "Myocarditis"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic right ventricular outflow tract tachycardia, Cardiac sarcoidosis, Brugada syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation",
+      "Signal-averaged ECG to detect late potentials",
+      "Cardiac MRI to assess right ventricular size, wall motion and fibrofatty infiltration",
+      "Echocardiography for right ventricular dilatation and regional dysfunction",
+      "Ambulatory monitoring and exercise testing to quantify ventricular arrhythmia",
+      "Genetic testing for desmosomal gene variants and cascade family screening"
     ],
-    [
-     "Management Strategy",
-     "Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or aborted sudden cardiac death, particularly during exertion",
+      "Sustained ventricular tachycardia of left bundle branch block morphology",
+      "Progressive right or biventricular failure",
+      "Family history of premature sudden death or confirmed ARVC"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The clinical course is variable; with risk stratification, exercise restriction and appropriate defibrillator therapy many patients do well, but the condition is progressive and carries an ongoing risk of life-threatening arrhythmia and, in advanced cases, heart failure.",
+    "pitfalls": [
+      "Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy",
+      "Confusing physiological athlete's heart remodelling with early ARVC",
+      "Permitting competitive or endurance exercise, which hastens disease progression",
+      "Relying on right ventricular imaging alone and overlooking left-dominant or biventricular variants",
+      "Underestimating arrhythmic risk in gene-positive relatives with subtle findings"
+    ],
+    "references": [
+      "Revised Task Force Criteria for the diagnosis of arrhythmogenic right ventricular cardiomyopathy",
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression",
+      "Beta-blockers as first-line antiarrhythmic therapy, with sotalol or amiodarone added for ventricular arrhythmia",
+      "Implantable cardioverter-defibrillator for secondary prevention and for primary prevention in patients with high arrhythmic risk",
+      "Catheter ablation, frequently requiring an epicardial approach, for recurrent ventricular tachycardia",
+      "Guideline-directed heart failure therapy for progressive right or biventricular dysfunction",
+      "Surveillance with ECG, ambulatory monitoring, echocardiography and cardiac MRI to quantify arrhythmia and structural change",
+      "Offer genetic testing of desmosomal genes such as PKP2, desmoplakin, desmoglein-2 and desmocollin-2, with counselling and cascade screening of first-degree relatives",
+      "Refer for advanced heart failure evaluation and transplantation in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for arrhythmogenic right ventricular cardiomyopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arrhythmogenic-right-ventricular-cardiomyopathy-real-image",
-   "title": "Arrhythmogenic right ventricular cardiomyopathy: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-pathway",
+      "title": "Arrhythmogenic right ventricular cardiomyopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to ventricular arrhythmia and sudden death",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or aborted sudden cardiac death, particularly during exertion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation, Signal-averaged ECG to detect late potentials, Cardiac MRI to assess right ventricular size, wall motion and fibrofatty"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arrhythmogenic right ventricular cardiomyopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-matrix",
+      "title": "Arrhythmogenic right ventricular cardiomyopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A genetic cardiomyopathy in which fibrofatty tissue progressively replaces right ventricular myocardium, predisposing to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG for right precordial T-wave inversion, epsilon waves and prolonged terminal activation, Signal-averaged ECG to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic right ventricular outflow tract tachycardia, Cardiac sarcoidosis, Brugada syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restrict competitive and endurance exercise, which aggravates desmosomal injury and accelerates disease progression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the arrhythmia as benign idiopathic outflow tract tachycardia and missing the underlying cardiomyopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arrhythmogenic right ventricular cardiomyopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Task Force Criteria for ARVC; ESC/AHA cardiomyopathy guidelines; Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Right precordial T-wave inversion, epsilon waves and prolonged terminal activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Signal-averaged ECG",
+          "cells": [
+            {
+              "text": "Late potentials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Right ventricular size, wall motion and fibrofatty infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Right ventricular dilatation and regional dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring and exercise testing",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for desmosomal gene variants",
+          "cells": [
+            {
+              "text": "Cascade family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic right ventricular outflow tract tachycardia",
+          "cells": [
+            {
+              "text": "Labelling the arrhythmia as benign misses the cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise restriction",
+          "cells": [
+            {
+              "text": "Competitive and endurance exercise"
+            },
+            {
+              "text": "Aggravates desmosomal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockers first-line",
+          "cells": [
+            {
+              "text": "Sotalol or amiodarone added for ventricular arrhythmia"
+            },
+            {
+              "text": "Antiarrhythmic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Secondary prevention, and primary prevention in high arrhythmic risk"
+            },
+            {
+              "text": "High-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Recurrent ventricular tachycardia; often an epicardial approach"
+            },
+            {
+              "text": "Recurrent VT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Progressive right or biventricular dysfunction"
+            },
+            {
+              "text": "Guideline-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "ECG, ambulatory monitoring, echocardiography and cardiac MRI"
+            },
+            {
+              "text": "Arrhythmia and structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade screening",
+          "cells": [
+            {
+              "text": "PKP2, desmoplakin, desmoglein-2 and desmocollin-2"
+            },
+            {
+              "text": "First-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced heart failure referral",
+          "cells": [
+            {
+              "text": "Transplantation evaluation in end-stage disease"
+            },
+            {
+              "text": "End-stage disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arrhythmogenic_right_ventricular_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Arrhythmogenic right ventricular cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ventricular arrhythmia with right-sided ECG changes in a young person",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Syncope, aborted sudden death or exertional VT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ICD assessment after syncope or aborted sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG for epsilon waves, signal-averaged ECG, cardiac MRI, echo, desmosomal genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Right ventricular fibrofatty change on MRI with a desmosomal variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Beta-blockers as first-line antiarrhythmic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat MRI and monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Restrict competitive and endurance exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ICD for secondary or high-risk primary prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Catheter ablation, often epicardial, for recurrent VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cascade screening of relatives; advanced heart failure referral if end-stage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

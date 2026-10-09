@@ -1,175 +1,471 @@
 {
- "id": "micropenis",
- "name": "Micropenis",
- "aliases": [
-  "microphallus",
-  "micropenis (stretched length below normal)",
-  "congenital micropenis"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed penis with a correctly positioned urethral meatus",
-   "The normal structure but small size implies that androgen action was adequate during early urethral formation but deficient in the later gestational phase of penile growth",
-   "It is a sign rather than a diagnosis, most often reflecting hypogonadotropic hypogonadism, primary (hypergonadotropic) testicular failure, or partial defects in androgen synthesis or action",
-   "Measurement technique matters: the penis must be gently stretched with the suprapubic fat pad depressed, as a buried or concealed penis can mimic true micropenis",
-   "Associated hypoglycaemia or midline defects should raise concern for congenital hypopituitarism with multiple hormone deficiencies",
-   "A short trial of androgen therapy in infancy can both promote penile growth and provide diagnostic information about androgen responsiveness",
-   "Marked ambiguity of the genitalia points away from isolated micropenis and towards a disorder of sex development requiring karyotype and specialist assessment"
+  "id": "micropenis",
+  "name": "Micropenis",
+  "aliases": [
+    "microphallus",
+    "micropenis (stretched length below normal)",
+    "congenital micropenis"
   ],
-  "pathophysiology": "Penile growth in the second half of gestation depends on testosterone secretion driven by fetal and placental gonadotropins and its conversion to dihydrotestosterone acting on androgen receptors. Because the urethra and overall penile architecture form earlier under androgen influence, a normally shaped but undersized penis indicates that androgen exposure was sufficient for structural development but inadequate during the later growth phase. The underlying defect may lie anywhere along the axis: deficient hypothalamic-pituitary gonadotropin drive (hypogonadotropic hypogonadism), primary testicular failure with impaired testosterone production (hypergonadotropic hypogonadism), or partial defects of testosterone biosynthesis or androgen-receptor signalling. In some cases no cause is identified and the finding is idiopathic.",
-  "additionalDifferentials": [
-   "Buried or concealed penis (normal size obscured by suprapubic fat or skin)",
-   "Webbed or trapped penis",
-   "Hypogonadotropic hypogonadism, including congenital GnRH deficiency and hypopituitarism",
-   "Primary testicular failure (hypergonadotropic hypogonadism)",
-   "Partial androgen insensitivity syndrome",
-   "Defects of testosterone biosynthesis or 5-alpha-reductase deficiency",
-   "A more complex disorder of sex development"
-  ],
-  "additionalInvestigations": [
-   "Accurate stretched penile length measurement compared with age-based normative data",
-   "LH, FSH, and testosterone, ideally sampled during the neonatal minipuberty window",
-   "Assessment of the wider anterior pituitary axis (including cortisol, thyroid, and growth hormone) where hypopituitarism is suspected",
-   "hCG stimulation test to assess testicular testosterone production capacity",
-   "Karyotype and disorder-of-sex-development workup if there is any genital ambiguity",
-   "Pelvic and adrenal imaging where indicated by the hormonal findings"
-  ],
-  "redFlags": [
-   "Neonatal hypoglycaemia, prolonged jaundice, or midline facial defects suggesting congenital hypopituitarism",
-   "Bilateral non-palpable gonads or genital ambiguity indicating a possible disorder of sex development",
-   "Failure of any response to an appropriate androgen trial",
-   "Features suggesting adrenal insufficiency in a hypopituitary infant"
-  ],
-  "prognosis": "Many infants respond to early androgen therapy with satisfactory penile growth and can expect adequate adult size and function; the overall outlook is dictated by the underlying cause, with fertility potential depending on whether the defect is central, gonadal, or in androgen action.",
-  "pitfalls": [
-   "Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one",
-   "Failing to evaluate the whole pituitary axis and missing life-threatening cortisol deficiency in hypopituitarism",
-   "Missing the neonatal minipuberty window, when hormonal evaluation is most informative",
-   "Overlooking an underlying disorder of sex development in the presence of subtle ambiguity",
-   "Attributing the finding to idiopathic causes before completing the endocrine assessment"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness",
-   "Treat the underlying cause: gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism, and testosterone induction of puberty for testicular failure",
-   "Where congenital hypopituitarism is present, replace deficient anterior pituitary hormones (glucocorticoid, thyroxine, growth hormone) and treat associated hypoglycaemia promptly",
-   "Monitor penile growth, overall growth pattern and pubertal progression over time",
-   "Provide psychological support to the family and, in due course, to the patient",
-   "Manage within a multidisciplinary paediatric and reproductive endocrinology and urology team, with disorder-of-sex-development input where there is genital ambiguity",
-   "Offer genetic counselling and karyotype or DSD assessment, and discuss fertility potential according to whether the defect is central, gonadal or in androgen action"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "micropenis-pathway",
-   "title": "Micropenis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed penis with a correctly positioned urethral meatus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal hypoglycaemia, prolonged jaundice, or midline facial defects suggesting congenital hypopituitarism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Accurate stretched penile length measurement compared with age-based normative data, LH, FSH, and testosterone, ideally sampled during the neonatal minipuberty window, Assessment of the wider anterior pituitary axis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of micropenis."
-  }
- ],
- "tables": [
-  {
-   "id": "micropenis-matrix",
-   "title": "Micropenis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed penis with a correctly positioned urethral meatus",
+      "The normal structure but small size implies that androgen action was adequate during early urethral formation but deficient in the later gestational phase of penile growth",
+      "It is a sign rather than a diagnosis, most often reflecting hypogonadotropic hypogonadism, primary (hypergonadotropic) testicular failure, or partial defects in androgen synthesis or action",
+      "Measurement technique matters: the penis must be gently stretched with the suprapubic fat pad depressed, as a buried or concealed penis can mimic true micropenis",
+      "Associated hypoglycaemia or midline defects should raise concern for congenital hypopituitarism with multiple hormone deficiencies",
+      "A short trial of androgen therapy in infancy can both promote penile growth and provide diagnostic information about androgen responsiveness",
+      "Marked ambiguity of the genitalia points away from isolated micropenis and towards a disorder of sex development requiring karyotype and specialist assessment"
     ],
-    [
-     "Key Investigations",
-     "Accurate stretched penile length measurement compared with age-based normative data, LH, FSH, and testosterone, ideally sampled",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Penile growth in the second half of gestation depends on testosterone secretion driven by fetal and placental gonadotropins and its conversion to dihydrotestosterone acting on androgen receptors. Because the urethra and overall penile architecture form earlier under androgen influence, a normally shaped but undersized penis indicates that androgen exposure was sufficient for structural development but inadequate during the later growth phase. The underlying defect may lie anywhere along the axis: deficient hypothalamic-pituitary gonadotropin drive (hypogonadotropic hypogonadism), primary testicular failure with impaired testosterone production (hypergonadotropic hypogonadism), or partial defects of testosterone biosynthesis or androgen-receptor signalling. In some cases no cause is identified and the finding is idiopathic.",
+    "additionalDifferentials": [
+      "Buried or concealed penis (normal size obscured by suprapubic fat or skin)",
+      "Webbed or trapped penis",
+      "Hypogonadotropic hypogonadism, including congenital GnRH deficiency and hypopituitarism",
+      "Primary testicular failure (hypergonadotropic hypogonadism)",
+      "Partial androgen insensitivity syndrome",
+      "Defects of testosterone biosynthesis or 5-alpha-reductase deficiency",
+      "A more complex disorder of sex development"
     ],
-    [
-     "Primary Differentials",
-     "Buried or concealed penis (normal size obscured by suprapubic fat or skin), Webbed or trapped penis, Hypogonadotropic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Accurate stretched penile length measurement compared with age-based normative data",
+      "LH, FSH, and testosterone, ideally sampled during the neonatal minipuberty window",
+      "Assessment of the wider anterior pituitary axis (including cortisol, thyroid, and growth hormone) where hypopituitarism is suspected",
+      "hCG stimulation test to assess testicular testosterone production capacity",
+      "Karyotype and disorder-of-sex-development workup if there is any genital ambiguity",
+      "Pelvic and adrenal imaging where indicated by the hormonal findings"
     ],
-    [
-     "Management Strategy",
-     "Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal hypoglycaemia, prolonged jaundice, or midline facial defects suggesting congenital hypopituitarism",
+      "Bilateral non-palpable gonads or genital ambiguity indicating a possible disorder of sex development",
+      "Failure of any response to an appropriate androgen trial",
+      "Features suggesting adrenal insufficiency in a hypopituitary infant"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many infants respond to early androgen therapy with satisfactory penile growth and can expect adequate adult size and function; the overall outlook is dictated by the underlying cause, with fertility potential depending on whether the defect is central, gonadal, or in androgen action.",
+    "pitfalls": [
+      "Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one",
+      "Failing to evaluate the whole pituitary axis and missing life-threatening cortisol deficiency in hypopituitarism",
+      "Missing the neonatal minipuberty window, when hormonal evaluation is most informative",
+      "Overlooking an underlying disorder of sex development in the presence of subtle ambiguity",
+      "Attributing the finding to idiopathic causes before completing the endocrine assessment"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness",
+      "Treat the underlying cause: gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism, and testosterone induction of puberty for testicular failure",
+      "Where congenital hypopituitarism is present, replace deficient anterior pituitary hormones (glucocorticoid, thyroxine, growth hormone) and treat associated hypoglycaemia promptly",
+      "Monitor penile growth, overall growth pattern and pubertal progression over time",
+      "Provide psychological support to the family and, in due course, to the patient",
+      "Manage within a multidisciplinary paediatric and reproductive endocrinology and urology team, with disorder-of-sex-development input where there is genital ambiguity",
+      "Offer genetic counselling and karyotype or DSD assessment, and discuss fertility potential according to whether the defect is central, gonadal or in androgen action"
     ]
-   ],
-   "caption": "Overview comparison matrix for micropenis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "micropenis-real-image",
-   "title": "Micropenis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "micropenis-pathway",
+      "title": "Micropenis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed penis with a correctly positioned urethral meatus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal hypoglycaemia, prolonged jaundice, or midline facial defects suggesting congenital hypopituitarism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Accurate stretched penile length measurement compared with age-based normative data, LH, FSH, and testosterone, ideally sampled during the neonatal minipuberty window, Assessment of the wider anterior pituitary axis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of micropenis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "micropenis-matrix",
+      "title": "Micropenis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as a stretched penile length more than 2.5 standard deviations below the mean for age in an otherwise normally formed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Accurate stretched penile length measurement compared with age-based normative data, LH, FSH, and testosterone, ideally sampled",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Buried or concealed penis (normal size obscured by suprapubic fat or skin), Webbed or trapped penis, Hypogonadotropic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give a trial of androgen therapy (testosterone) in infancy to promote penile growth and gauge androgen responsiveness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing micropenis without a properly performed stretched measurement, mistaking a buried penis for a small one",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for micropenis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "micropenis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stretched penile length against age-based normative data",
+          "cells": [
+            {
+              "text": "Penile length against age norms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH, FSH and testosterone, ideally in the neonatal minipuberty window",
+          "cells": [
+            {
+              "text": "Gonadotrophin and testosterone status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior pituitary axis: cortisol, thyroid and growth hormone",
+          "cells": [
+            {
+              "text": "Hypopituitarism, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG stimulation test",
+          "cells": [
+            {
+              "text": "Testicular testosterone production capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and disorder-of-sex-development workup",
+          "cells": [
+            {
+              "text": "Genital ambiguity, if present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "micropenis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypogonadotropic hypogonadism, including congenital GnRH deficiency",
+          "cells": [
+            {
+              "text": "Hypopituitarism with neonatal hypoglycaemia or prolonged jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary testicular failure",
+          "cells": [
+            {
+              "text": "Hypergonadotropic hypogonadism; LH and FSH measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partial androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "Failure of any response to an androgen trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "A more complex disorder of sex development",
+          "cells": [
+            {
+              "text": "Bilateral non-palpable gonads or genital ambiguity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "micropenis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgen trial in infancy",
+          "cells": [
+            {
+              "text": "Testosterone to promote penile growth and gauge androgen responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism; testosterone induction of puberty for testicular failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopituitarism replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid, thyroxine and growth hormone; prompt treatment of hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Penile growth, overall growth and pubertal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "For the family and, in due course, the patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric and reproductive endocrinology, urology, and DSD input where ambiguous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype or DSD assessment; fertility potential depends on the site of the defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "micropenis-dx-mgmt",
+      "title": "Diagnosis and management of Micropenis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stretched penile length below age norms in a neonate or infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia, prolonged jaundice, midline facial defects or non-palpable gonads?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for hypopituitarism and adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stretched penile length; LH, FSH, testosterone; pituitary panel; hCG test; karyotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hypogonadal cause confirmed on hormone testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider partial androgen insensitivity or a complex DSD; repeat androgen trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Androgen trial in infancy to promote penile growth and test responsiveness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotrophin or GnRH therapy for hypogonadotropic hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replacement of deficient pituitary hormones: glucocorticoid, thyroxine, growth hormone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor penile growth, overall growth and pubertal progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; fertility potential depends on the site of the defect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

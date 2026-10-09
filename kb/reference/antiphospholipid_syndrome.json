@@ -1,199 +1,550 @@
 {
- "id": "antiphospholipid_syndrome",
- "name": "Antiphospholipid Syndrome",
- "system": "Rheumatology",
- "class": "non_infective",
- "chapter": 369,
- "page": 2837,
- "aliases": [
-  "APS",
-  "Hughes syndrome"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "reference": {
-  "pages": "Harrison 22e p.2837",
-  "clinicalPearls": [
-   "APS is an autoantibody-mediated acquired thrombophilia defined by recurrent arterial or venous thrombosis, microvascular manifestations, and/or pregnancy morbidity; it affects primarily young females (Harrison 22e p.2837).",
-   "APS may occur alone (primary) or in association with other autoimmune diseases, mainly SLE; about one-third of SLE patients carry aPL antibodies and 10-15% of those develop APS (Harrison 22e p.2837).",
-   "Diagnosis should be seriously considered with thrombosis, cerebrovascular accidents in individuals younger than 55 years, or pregnancy morbidity, particularly in the presence of livedo reticularis or thrombocytopenia (Harrison 22e p.2838).",
-   "The three classical laboratory antibodies are lupus anticoagulant (LA), anticardiolipin (aCL), and anti-beta2-glycoprotein I (anti-beta2GPI); higher-risk profiles include triple positivity, IgG isotype, moderate-to-high titers, and persistent positivity (Harrison 22e p.2838-2839).",
-   "Laboratory criteria require persistence: moderate (40-79 units) or high (>=80 units) aCL/anti-beta2GPI titers confirmed on two occasions 12 weeks apart (Harrison 22e p.2838-2839).",
-   "In patients receiving anticoagulation, LA test positivity should be interpreted with caution; when features are highly reminiscent of APS but classical aPL are absent, antiphosphatidylserine/prothrombin antibody testing may have a diagnostic role (Harrison 22e p.2837).",
-   "Deep venous thrombosis occurs primarily in the lower extremities and often causes pulmonary emboli; cerebral venous thrombosis may present with intracranial hypertension and focal deficits (Harrison 22e p.2837).",
-   "Arterial thrombosis most commonly affects cerebral arteries, manifesting as transient ischemic attack, stroke, migraine, or cognitive dysfunction (Harrison 22e p.2837).",
-   "Libman-Sacks endocarditis (small, usually <1 cm, organized platelet-fibrin valve vegetations) and valve thickening are characteristic cardiac manifestations (Harrison 22e p.2837).",
-   "Thrombocytopenia and autoimmune hemolytic anemia are the main hematologic manifestations of APS (Harrison 22e p.2837).",
-   "DOACs have recently been shown to increase the risk of arterial events, especially in patients with triple positivity or previous arterial thrombosis, and a meta-analysis found prior thrombosis type did not change this increased arterial risk versus VKAs (Harrison 22e p.2839)."
+  "id": "antiphospholipid_syndrome",
+  "name": "Antiphospholipid Syndrome",
+  "system": "Rheumatology",
+  "class": "non_infective",
+  "chapter": 369,
+  "page": 2837,
+  "aliases": [
+    "APS",
+    "Hughes syndrome"
   ],
-  "pathophysiology": "APS is an autoantibody-mediated acquired thrombophilia. The major autoantibodies target phospholipid-binding plasma proteins, chiefly beta2-glycoprotein I (beta2GPI, a 43-kDa apolipoprotein of 326 amino acids in five domains) and prothrombin; anti-domain I IgG is associated with increased thrombotic risk, while the antithrombotic function of beta2GPI depends on its fifth domain. Lupus anticoagulant is a separate group of antibodies against phospholipid-binding proteins that prolongs in vitro clotting time which is not corrected by adding normal plasma. Antibody induction is thought to begin with endothelial injury (from infections, oxidative stress, or major physical stress such as surgery or trauma) in a permissive genetic background (HLA associations), driving increased endothelial apoptosis, autoantigen presentation, and an autoimmune response. Binding of aPL to disrupted endothelium produces a proinflammatory, prothrombotic state with monocyte and platelet activation, adhesion molecules and proinflammatory cytokines, complement and neutrophil activation, neutrophil extracellular trap (NET) formation, and thrombus formation. Type I interferon pathway activation and an imbalance between type I and III interferons have recently been proposed as mechanisms of thrombosis and obstetric complications (Harrison 22e p.2837).",
-  "additionalDifferentials": [
-   "Inherited or acquired thrombophilias including factor V Leiden and other causes",
-   "Coombs-positive hemolytic anemia",
-   "Thrombocytopenia of other cause",
-   "Atherosclerosis",
-   "Polyarteritis nodosa",
-   "SLE",
-   "Cryoglobulinemia",
-   "Lymphomas",
-   "Myeloproliferative disorders",
-   "Hypercholesterolemia",
-   "For catastrophic APS: thrombotic thrombocytopenic purpura, hemolytic-uremic syndrome, disseminated intravascular coagulation, and heparin-induced thrombocytopenia"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Other inherited or acquired thrombophilias (e.g., factor V Leiden)",
-   "Thrombotic thrombocytopenic purpura",
-   "Hemolytic-uremic syndrome",
-   "Disseminated intravascular coagulation",
-   "Heparin-induced thrombocytopenia",
-   "Livedo reticularis from vascular-wall disease (atherosclerosis, polyarteritis nodosa, SLE, cryoglobulinemia, lymphomas) or vascular-lumen disease (myeloproliferative disorders, hypercholesterolemia)"
-  ],
-  "additionalInvestigations": [
-   "Lupus anticoagulant testing as a three-step procedure: screening with activated partial thromboplastin time (aPTT) and dilute Russell viper venom test (DRVVT), mixing study, and confirmation",
-   "Anticardiolipin and anti-beta2GPI IgG/IgM antibodies by standardized ELISA",
-   "Antiphosphatidylserine/prothrombin antibodies when APS features are present without classical aPL",
-   "Repeat aPL testing 12 weeks apart to confirm persistence",
-   "Assessment per 2023 ACR/EULAR classification criteria (>=3 points from clinical domains and >=3 points from laboratory domains)",
-   "Renal biopsy for suspected aPL-nephropathy (thrombotic microangiopathy in acute phase; fibrous intima hyperplasia, fibrous/fibrocellular arteriolar occlusions, focal cortical atrophy in chronic phase)",
-   "Cardiac MRI or histology for suspected myocardial disease; imaging for adrenal hemorrhage; BAL or pathology for pulmonary hemorrhage"
-  ],
-  "redFlags": [
-   "Catastrophic APS (CAPS): a rare, life-threatening, rapidly progressive thromboembolic disease simultaneously involving three or more organs, typically with microvascular thrombosis developing in less than a week",
-   "Thrombotic microangiopathy (microangiopathic hemolytic anemia with severe thrombocytopenia) as a typical CAPS finding",
-   "Cerebrovascular accident in an individual younger than 55 years",
-   "Acute limb ischemia or digital gangrene from peripheral arterial thrombosis",
-   "Budd-Chiari syndrome from hepatic vein thrombosis",
-   "Pulmonary embolism or pulmonary hypertension from pulmonary arterial thrombosis"
-  ],
-  "prognosis": "Thrombotic and obstetric event risk is closely tied to the underlying aPL profile, depending on antibody type (IgG high risk vs IgM low risk), number of antibodies (two or three classical autoantibodies confer higher risk than a single antibody), titer (moderate-high vs low), and persistence on repeated measurements. Catastrophic APS is life-threatening and rapidly progressive. APS antibodies increase with age, though it is questionable whether they induce thrombotic events in elderly individuals (Harrison 22e p.2837-2839).",
-  "pitfalls": [
-   "Paradoxical pitfall: lupus anticoagulant prolongs in vitro clotting tests (e.g., aPTT) yet is associated with thrombosis in vivo, not bleeding; the prolongation is NOT corrected by mixing with normal plasma, distinguishing it from a factor deficiency.",
-   "aPTT has variable sensitivity to lupus anticoagulant depending on the reagent used; aPTT prolongation is not specific because factor deficiencies or other inhibitors also prolong it, so confirmation requires lack of correction on mixing and correction with added phospholipids (Harrison 22e p.~700).",
-   "In patients receiving anticoagulation, lupus anticoagulant positivity should be interpreted with caution.",
-   "Classification requires that clinical manifestations with other equally or more likely explanations than APS not be counted toward the criteria.",
-   "aPL antibodies are frequently transiently positive, so persistence must be confirmed (titers on two occasions 12 weeks apart) before attributing disease."
-  ],
-  "severityClassification": "2023 ACR/EULAR classification criteria require at least 3 points from clinical domains AND at least 3 points from laboratory domains. Clinical domains: (1) venous thromboembolism, (2) arterial thrombosis, (3) microvascular events, (4) obstetric complications, (5) cardiac valve disease, (6) hematologic manifestations. Laboratory domains: (1) lupus anticoagulant, (2) anticardiolipin, and/or (3) anti-beta2GPI antibodies at moderate (40-79 units) or high (>=80 units) titers on two occasions 12 weeks apart. Definite CAPS requires all four: thrombosis in >=3 organs/systems; development in less than a week; histologic small-vessel thrombosis in at least one organ; and aPL presence (probable CAPS when a combination is present) (Harrison 22e p.2838-2839).",
-  "references": [
-   "Harrison 22e p.2837",
-   "Harrison 22e p.2838",
-   "Harrison 22e p.2839"
-  ],
-  "crossLinks": [
-   "sle_flare",
-   "dvt",
-   "pe",
-   "ischemic_stroke"
-  ],
-  "management": [
-   "Anticoagulate thrombotic disease long-term with a vitamin K antagonist such as warfarin, generally avoiding direct oral anticoagulants in arterial or triple-positive disease",
-   "For arterial events use a vitamin K antagonist, with or without an added antiplatelet agent",
-   "Manage obstetric antiphospholipid syndrome with combined low-dose aspirin and prophylactic low-molecular-weight heparin through pregnancy and the puerperium",
-   "Consider low-dose aspirin, with hydroxychloroquine in those with coexisting lupus, for primary thromboprophylaxis in high-risk antibody carriers",
-   "Treat catastrophic antiphospholipid syndrome urgently with combined therapeutic anticoagulation, high-dose corticosteroids and plasma exchange or intravenous immunoglobulin, while treating the precipitating trigger",
-   "Reduce modifiable risk by avoiding oestrogen-containing contraception, controlling cardiovascular risk factors, and giving thromboprophylaxis around surgery and immobilisation",
-   "Monitor anticoagulation intensity and platelet count, managing within a multidisciplinary team of rheumatology, haematology and obstetrics"
-  ]
- },
- "specialty": "Rheumatology",
- "algorithms": [
-  {
-   "id": "aps-diagnostic-algo",
-   "title": "ACR/EULAR Antiphospholipid Syndrome Diagnostic and Risk Pathway",
-   "steps": [
-    {
-     "step": "Clinical Event Presentation",
-     "action": "Vascular thrombosis (arterial, venous, or microvascular) OR pregnancy morbidity (unexplained fetal loss >= 10 weeks, severe preeclampsia/placental insufficiency < 34 weeks, or >= 3 consecutive early losses < 10 weeks).",
-     "critical": true
-    },
-    {
-     "step": "Laboratory Antiphospholipid Antibody Testing",
-     "action": "Test Lupus Anticoagulant (dRVVT and SCT screen/confirm), Anticardiolipin IgG/IgM (medium-high titer > 40 GPL/MPL), and Anti-beta2-glycoprotein I IgG/IgM."
-    },
-    {
-     "step": "Mandatory Persistence Confirmation",
-     "branch": "Positive initial titer",
-     "action": "Repeat antibody testing at >= 12 weeks. Transient positivity during acute thrombosis or infection does not satisfy diagnostic criteria.",
-     "critical": true
-    },
-    {
-     "step": "High-Risk Profile Identification",
-     "branch": "Triple Positivity",
-     "action": "Presence of Lupus Anticoagulant + aCL + anti-beta2GPI carries highest thrombotic and obstetric risk. Long-term therapeutic anticoagulation required."
-    },
-    {
-     "step": "Catastrophic APS (CAPS) Alert",
-     "branch": "Multiorgan failure in days",
-     "action": "Immediate triple therapy: High-dose IV methylprednisolone + therapeutic IV heparin + plasma exchange or IVIg. Emergency ICU escalation.",
-     "critical": true
-    }
-   ],
-   "caption": "Aligned with 2023 ACR/EULAR antiphospholipid syndrome classification criteria."
-  }
- ],
- "tables": [
-  {
-   "id": "aps-antibody-profile-matrix",
-   "title": "Antiphospholipid Antibody Profiles and Clinical Risk Stratification",
-   "headers": [
-    "Antibody Marker",
-    "Testing Methodology",
-    "Diagnostic Specificity",
-    "Clinical Thrombotic Risk Level"
-   ],
-   "rows": [
-    [
-     "Lupus Anticoagulant (LA)",
-     "Coagulation-based functional assay: dRVVT screen and confirm; mixing studies",
-     "Highest specificity for clinical thrombosis and pregnancy morbidity",
-     "Very High Risk: strongest predictor of both venous and arterial thromboembolism"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "reference": {
+    "pages": "Harrison 22e p.2837",
+    "clinicalPearls": [
+      "APS is an autoantibody-mediated acquired thrombophilia defined by recurrent arterial or venous thrombosis, microvascular manifestations, and/or pregnancy morbidity; it affects primarily young females (Harrison 22e p.2837).",
+      "APS may occur alone (primary) or in association with other autoimmune diseases, mainly SLE; about one-third of SLE patients carry aPL antibodies and 10-15% of those develop APS (Harrison 22e p.2837).",
+      "Diagnosis should be seriously considered with thrombosis, cerebrovascular accidents in individuals younger than 55 years, or pregnancy morbidity, particularly in the presence of livedo reticularis or thrombocytopenia (Harrison 22e p.2838).",
+      "The three classical laboratory antibodies are lupus anticoagulant (LA), anticardiolipin (aCL), and anti-beta2-glycoprotein I (anti-beta2GPI); higher-risk profiles include triple positivity, IgG isotype, moderate-to-high titers, and persistent positivity (Harrison 22e p.2838-2839).",
+      "Laboratory criteria require persistence: moderate (40-79 units) or high (>=80 units) aCL/anti-beta2GPI titers confirmed on two occasions 12 weeks apart (Harrison 22e p.2838-2839).",
+      "In patients receiving anticoagulation, LA test positivity should be interpreted with caution; when features are highly reminiscent of APS but classical aPL are absent, antiphosphatidylserine/prothrombin antibody testing may have a diagnostic role (Harrison 22e p.2837).",
+      "Deep venous thrombosis occurs primarily in the lower extremities and often causes pulmonary emboli; cerebral venous thrombosis may present with intracranial hypertension and focal deficits (Harrison 22e p.2837).",
+      "Arterial thrombosis most commonly affects cerebral arteries, manifesting as transient ischemic attack, stroke, migraine, or cognitive dysfunction (Harrison 22e p.2837).",
+      "Libman-Sacks endocarditis (small, usually <1 cm, organized platelet-fibrin valve vegetations) and valve thickening are characteristic cardiac manifestations (Harrison 22e p.2837).",
+      "Thrombocytopenia and autoimmune hemolytic anemia are the main hematologic manifestations of APS (Harrison 22e p.2837).",
+      "DOACs have recently been shown to increase the risk of arterial events, especially in patients with triple positivity or previous arterial thrombosis, and a meta-analysis found prior thrombosis type did not change this increased arterial risk versus VKAs (Harrison 22e p.2839)."
     ],
-    [
-     "Anticardiolipin (aCL) IgG",
-     "Standardized ELISA or chemiluminescence (> 40 GPL units or > 99th percentile)",
-     "Moderate-High specificity at high titers; low titers often post-infectious",
-     "High Risk when IgG isotype is persistently high; lower risk with isolated IgM"
+    "pathophysiology": "APS is an autoantibody-mediated acquired thrombophilia. The major autoantibodies target phospholipid-binding plasma proteins, chiefly beta2-glycoprotein I (beta2GPI, a 43-kDa apolipoprotein of 326 amino acids in five domains) and prothrombin; anti-domain I IgG is associated with increased thrombotic risk, while the antithrombotic function of beta2GPI depends on its fifth domain. Lupus anticoagulant is a separate group of antibodies against phospholipid-binding proteins that prolongs in vitro clotting time which is not corrected by adding normal plasma. Antibody induction is thought to begin with endothelial injury (from infections, oxidative stress, or major physical stress such as surgery or trauma) in a permissive genetic background (HLA associations), driving increased endothelial apoptosis, autoantigen presentation, and an autoimmune response. Binding of aPL to disrupted endothelium produces a proinflammatory, prothrombotic state with monocyte and platelet activation, adhesion molecules and proinflammatory cytokines, complement and neutrophil activation, neutrophil extracellular trap (NET) formation, and thrombus formation. Type I interferon pathway activation and an imbalance between type I and III interferons have recently been proposed as mechanisms of thrombosis and obstetric complications (Harrison 22e p.2837).",
+    "additionalDifferentials": [
+      "Inherited or acquired thrombophilias including factor V Leiden and other causes",
+      "Coombs-positive hemolytic anemia",
+      "Thrombocytopenia of other cause",
+      "Atherosclerosis",
+      "Polyarteritis nodosa",
+      "SLE",
+      "Cryoglobulinemia",
+      "Lymphomas",
+      "Myeloproliferative disorders",
+      "Hypercholesterolemia",
+      "For catastrophic APS: thrombotic thrombocytopenic purpura, hemolytic-uremic syndrome, disseminated intravascular coagulation, and heparin-induced thrombocytopenia"
     ],
-    [
-     "Anti-beta2-glycoprotein I (aBeta2GPI) IgG",
-     "Immunoassay targeting Domain 1 of beta2-glycoprotein I",
-     "High specificity; directly correlates with pathogenic autoantibodies",
-     "High Risk; strong independent association with vascular thrombosis and fetal loss"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Other inherited or acquired thrombophilias (e.g., factor V Leiden)",
+      "Thrombotic thrombocytopenic purpura",
+      "Hemolytic-uremic syndrome",
+      "Disseminated intravascular coagulation",
+      "Heparin-induced thrombocytopenia",
+      "Livedo reticularis from vascular-wall disease (atherosclerosis, polyarteritis nodosa, SLE, cryoglobulinemia, lymphomas) or vascular-lumen disease (myeloproliferative disorders, hypercholesterolemia)"
     ],
-    [
-     "Triple Positivity (LA + aCL + aBeta2GPI)",
-     "All three tests persistently positive at 12 weeks",
-     "Near 100% specificity for clinical APS phenotype",
-     "Maximum Risk: requires indefinite therapeutic oral anticoagulation with Vitamin K Antagonists (warfarin)"
+    "additionalInvestigations": [
+      "Lupus anticoagulant testing as a three-step procedure: screening with activated partial thromboplastin time (aPTT) and dilute Russell viper venom test (DRVVT), mixing study, and confirmation",
+      "Anticardiolipin and anti-beta2GPI IgG/IgM antibodies by standardized ELISA",
+      "Antiphosphatidylserine/prothrombin antibodies when APS features are present without classical aPL",
+      "Repeat aPL testing 12 weeks apart to confirm persistence",
+      "Assessment per 2023 ACR/EULAR classification criteria (>=3 points from clinical domains and >=3 points from laboratory domains)",
+      "Renal biopsy for suspected aPL-nephropathy (thrombotic microangiopathy in acute phase; fibrous intima hyperplasia, fibrous/fibrocellular arteriolar occlusions, focal cortical atrophy in chronic phase)",
+      "Cardiac MRI or histology for suspected myocardial disease; imaging for adrenal hemorrhage; BAL or pathology for pulmonary hemorrhage"
+    ],
+    "redFlags": [
+      "Catastrophic APS (CAPS): a rare, life-threatening, rapidly progressive thromboembolic disease simultaneously involving three or more organs, typically with microvascular thrombosis developing in less than a week",
+      "Thrombotic microangiopathy (microangiopathic hemolytic anemia with severe thrombocytopenia) as a typical CAPS finding",
+      "Cerebrovascular accident in an individual younger than 55 years",
+      "Acute limb ischemia or digital gangrene from peripheral arterial thrombosis",
+      "Budd-Chiari syndrome from hepatic vein thrombosis",
+      "Pulmonary embolism or pulmonary hypertension from pulmonary arterial thrombosis"
+    ],
+    "prognosis": "Thrombotic and obstetric event risk is closely tied to the underlying aPL profile, depending on antibody type (IgG high risk vs IgM low risk), number of antibodies (two or three classical autoantibodies confer higher risk than a single antibody), titer (moderate-high vs low), and persistence on repeated measurements. Catastrophic APS is life-threatening and rapidly progressive. APS antibodies increase with age, though it is questionable whether they induce thrombotic events in elderly individuals (Harrison 22e p.2837-2839).",
+    "pitfalls": [
+      "Paradoxical pitfall: lupus anticoagulant prolongs in vitro clotting tests (e.g., aPTT) yet is associated with thrombosis in vivo, not bleeding; the prolongation is NOT corrected by mixing with normal plasma, distinguishing it from a factor deficiency.",
+      "aPTT has variable sensitivity to lupus anticoagulant depending on the reagent used; aPTT prolongation is not specific because factor deficiencies or other inhibitors also prolong it, so confirmation requires lack of correction on mixing and correction with added phospholipids (Harrison 22e p.~700).",
+      "In patients receiving anticoagulation, lupus anticoagulant positivity should be interpreted with caution.",
+      "Classification requires that clinical manifestations with other equally or more likely explanations than APS not be counted toward the criteria.",
+      "aPL antibodies are frequently transiently positive, so persistence must be confirmed (titers on two occasions 12 weeks apart) before attributing disease."
+    ],
+    "severityClassification": "2023 ACR/EULAR classification criteria require at least 3 points from clinical domains AND at least 3 points from laboratory domains. Clinical domains: (1) venous thromboembolism, (2) arterial thrombosis, (3) microvascular events, (4) obstetric complications, (5) cardiac valve disease, (6) hematologic manifestations. Laboratory domains: (1) lupus anticoagulant, (2) anticardiolipin, and/or (3) anti-beta2GPI antibodies at moderate (40-79 units) or high (>=80 units) titers on two occasions 12 weeks apart. Definite CAPS requires all four: thrombosis in >=3 organs/systems; development in less than a week; histologic small-vessel thrombosis in at least one organ; and aPL presence (probable CAPS when a combination is present) (Harrison 22e p.2838-2839).",
+    "references": [
+      "Harrison 22e p.2837",
+      "Harrison 22e p.2838",
+      "Harrison 22e p.2839"
+    ],
+    "crossLinks": [
+      "sle_flare",
+      "dvt",
+      "pe",
+      "ischemic_stroke"
+    ],
+    "management": [
+      "Anticoagulate thrombotic disease long-term with a vitamin K antagonist such as warfarin, generally avoiding direct oral anticoagulants in arterial or triple-positive disease",
+      "For arterial events use a vitamin K antagonist, with or without an added antiplatelet agent",
+      "Manage obstetric antiphospholipid syndrome with combined low-dose aspirin and prophylactic low-molecular-weight heparin through pregnancy and the puerperium",
+      "Consider low-dose aspirin, with hydroxychloroquine in those with coexisting lupus, for primary thromboprophylaxis in high-risk antibody carriers",
+      "Treat catastrophic antiphospholipid syndrome urgently with combined therapeutic anticoagulation, high-dose corticosteroids and plasma exchange or intravenous immunoglobulin, while treating the precipitating trigger",
+      "Reduce modifiable risk by avoiding oestrogen-containing contraception, controlling cardiovascular risk factors, and giving thromboprophylaxis around surgery and immobilisation",
+      "Monitor anticoagulation intensity and platelet count, managing within a multidisciplinary team of rheumatology, haematology and obstetrics"
     ]
-   ],
-   "caption": "Direct oral anticoagulants (DOACs) are contraindicated in high-risk triple-positive APS due to increased arterial stroke risk."
-  }
- ],
- "diagrams": [
-  {
-   "id": "antiphospholipid-syndrome-real-image",
-   "title": "Antiphospholipid Syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "specialty": "Rheumatology",
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "aps-diagnostic-algo",
+      "title": "ACR/EULAR Antiphospholipid Syndrome Diagnostic and Risk Pathway",
+      "steps": [
+        {
+          "step": "Clinical Event Presentation",
+          "action": "Vascular thrombosis (arterial, venous, or microvascular) OR pregnancy morbidity (unexplained fetal loss >= 10 weeks, severe preeclampsia/placental insufficiency < 34 weeks, or >= 3 consecutive early losses < 10 weeks).",
+          "critical": true
+        },
+        {
+          "step": "Laboratory Antiphospholipid Antibody Testing",
+          "action": "Test Lupus Anticoagulant (dRVVT and SCT screen/confirm), Anticardiolipin IgG/IgM (medium-high titer > 40 GPL/MPL), and Anti-beta2-glycoprotein I IgG/IgM."
+        },
+        {
+          "step": "Mandatory Persistence Confirmation",
+          "branch": "Positive initial titer",
+          "action": "Repeat antibody testing at >= 12 weeks. Transient positivity during acute thrombosis or infection does not satisfy diagnostic criteria.",
+          "critical": true
+        },
+        {
+          "step": "High-Risk Profile Identification",
+          "branch": "Triple Positivity",
+          "action": "Presence of Lupus Anticoagulant + aCL + anti-beta2GPI carries highest thrombotic and obstetric risk. Long-term therapeutic anticoagulation required."
+        },
+        {
+          "step": "Catastrophic APS (CAPS) Alert",
+          "branch": "Multiorgan failure in days",
+          "action": "Immediate triple therapy: High-dose IV methylprednisolone + therapeutic IV heparin + plasma exchange or IVIg. Emergency ICU escalation.",
+          "critical": true
+        }
+      ],
+      "caption": "Aligned with 2023 ACR/EULAR antiphospholipid syndrome classification criteria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aps-antibody-profile-matrix",
+      "title": "Antiphospholipid Antibody Profiles and Clinical Risk Stratification",
+      "headers": [
+        "Antibody Marker",
+        "Testing Methodology",
+        "Diagnostic Specificity",
+        "Clinical Thrombotic Risk Level"
+      ],
+      "rows": [
+        [
+          "Lupus Anticoagulant (LA)",
+          "Coagulation-based functional assay: dRVVT screen and confirm; mixing studies",
+          "Highest specificity for clinical thrombosis and pregnancy morbidity",
+          "Very High Risk: strongest predictor of both venous and arterial thromboembolism"
+        ],
+        [
+          "Anticardiolipin (aCL) IgG",
+          "Standardized ELISA or chemiluminescence (> 40 GPL units or > 99th percentile)",
+          "Moderate-High specificity at high titers; low titers often post-infectious",
+          "High Risk when IgG isotype is persistently high; lower risk with isolated IgM"
+        ],
+        [
+          "Anti-beta2-glycoprotein I (aBeta2GPI) IgG",
+          "Immunoassay targeting Domain 1 of beta2-glycoprotein I",
+          "High specificity; directly correlates with pathogenic autoantibodies",
+          "High Risk; strong independent association with vascular thrombosis and fetal loss"
+        ],
+        [
+          "Triple Positivity (LA + aCL + aBeta2GPI)",
+          "All three tests persistently positive at 12 weeks",
+          "Near 100% specificity for clinical APS phenotype",
+          "Maximum Risk: requires indefinite therapeutic oral anticoagulation with Vitamin K Antagonists (warfarin)"
+        ]
+      ],
+      "caption": "Direct oral anticoagulants (DOACs) are contraindicated in high-risk triple-positive APS due to increased arterial stroke risk."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison 22e p.2837",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 58-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "antiphospholipid_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus anticoagulant testing as a three-step procedure",
+          "cells": [
+            {
+              "text": "Screens with aPTT and dilute Russell viper venom time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticardiolipin and anti-beta2GPI IgG and IgM",
+          "cells": [
+            {
+              "text": "Standardised ELISA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphosphatidylserine or prothrombin antibodies",
+          "cells": [
+            {
+              "text": "When APS features are present without classical antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat antiphospholipid antibody testing",
+          "cells": [
+            {
+              "text": "Confirms persistence, 12 weeks apart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "2023 ACR/EULAR classification criteria",
+          "cells": [
+            {
+              "text": "At least 3 points from clinical domains and at least 3 points from laboratory domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Suspected aPL-nephropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "antiphospholipid_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Long-term anticoagulation for thrombotic disease",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist such as warfarin"
+            },
+            {
+              "text": "Generally avoid direct oral anticoagulants in arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial events",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist, with or without an antiplatelet agent"
+            },
+            {
+              "text": "Arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstetric APS",
+          "cells": [
+            {
+              "text": "Low-dose aspirin with prophylactic low-molecular-weight heparin"
+            },
+            {
+              "text": "Through pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Low-dose aspirin"
+            },
+            {
+              "text": "Hydroxychloroquine if coexisting lupus; high-risk antibody carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catastrophic APS",
+          "cells": [
+            {
+              "text": "Combined therapeutic anticoagulation, high-dose corticosteroids and plasma exchange"
+            },
+            {
+              "text": "Treated urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable risk",
+          "cells": [
+            {
+              "text": "Avoid oestrogen-containing contraception; control cardiovascular risk"
+            },
+            {
+              "text": "Thromboprophylaxis around high-risk periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Anticoagulation intensity and platelet count"
+            },
+            {
+              "text": "Multidisciplinary rheumatology, haematology and obstetrics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "antiphospholipid_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Risk factors for thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Risk factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous: inherited",
+          "cells": [
+            {
+              "text": "Factor V Leiden; prothrombin G20210A; antithrombin deficiency; protein C deficiency; protein S deficiency; elevated FVIII"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venous: acquired",
+          "cells": [
+            {
+              "text": "Age; previous thrombosis; immobilization; major surgery; pregnancy and puerperium; hospitalization; obesity; infection; APC resistance (nongenetic); smoking"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venous: unknown (*)",
+          "cells": [
+            {
+              "text": "Elevated factor II, IX, XI; elevated TAFI levels; low levels of TFPI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venous and arterial: inherited",
+          "cells": [
+            {
+              "text": "Homocystinuria; dysfibrinogenemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venous and arterial: mixed (inherited and acquired)",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venous and arterial: acquired",
+          "cells": [
+            {
+              "text": "Malignancy; antiphospholipid antibody syndrome; hormonal therapy; polycythemia vera; essential thrombocythemia; paroxysmal nocturnal hemoglobinuria; thrombotic thrombocytopenic purpura; heparin-induced thrombocytopenia; disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The footnote text for the asterisk is cut off at the bottom of the printed page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "antiphospholipid_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Antiphospholipid Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thrombosis or obstetric events with persistent antiphospholipid antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid thrombosis involving three or more organs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent combined anticoagulation, steroids and plasma exchange for CAPS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three-step lupus anticoagulant testing, aCL, anti-beta2GPI, repeat at 12 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Antibodies persist on repeat testing, with 2023 criteria met?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Vitamin K antagonist anticoagulation for thrombotic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat aPL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-dose aspirin with LMWH in obstetric APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid oestrogen-containing contraception; control cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor anticoagulation intensity and platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care with rheumatology, haematology and obstetrics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

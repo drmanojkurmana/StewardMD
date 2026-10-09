@@ -1,175 +1,469 @@
 {
- "id": "morphea",
- "name": "Morphea",
- "aliases": [
-  "localised scleroderma",
-  "circumscribed scleroderma",
-  "morphoea"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not accompanied by Raynaud phenomenon or sclerodactyly",
-   "Early plaques are erythematous or violaceous and indurated, evolving into firm, waxy, ivory-coloured centres often surrounded by a lilac inflammatory ring that signals active disease",
-   "Subtypes include circumscribed (plaque) morphea, generalised, linear, and deep forms, each with different distribution and complication profiles",
-   "Linear morphea in children can cross joints and, when it affects the limbs or face, may impair growth, cause contractures, or produce the en coup de sabre pattern on the forehead",
-   "Facial and periorbital linear disease warrants assessment for underlying neurological and ophthalmological involvement",
-   "Treatment aims to halt inflammation during the active phase, since established sclerosis and atrophy are difficult to reverse; options range from topical and phototherapy approaches to systemic immunomodulation in extensive or deep disease",
-   "Physiotherapy and monitoring for joint contractures are important in linear and deep subtypes",
-   "Distinguish morphea from systemic sclerosis clinically and, if needed, serologically, to avoid unnecessary alarm and inappropriate investigation"
+  "id": "morphea",
+  "name": "Morphea",
+  "aliases": [
+    "localised scleroderma",
+    "circumscribed scleroderma",
+    "morphoea"
   ],
-  "pathophysiology": "Morphea is an immune-mediated fibrosing process in which an initial inflammatory phase, characterised by a perivascular lymphocytic infiltrate and endothelial activation, is followed by excessive deposition of collagen in the dermis and, in deeper subtypes, the subcutis and fascia. Dysregulated production of pro-fibrotic cytokines and growth factors drives fibroblasts to lay down dense, thickened collagen bundles, with loss of adnexal structures and normal fat. Vascular changes and, in some cases, autoimmune associations contribute. The result is progressive induration and, later, atrophy; when fibrosis extends across joints or affects growing tissues in children, functional and cosmetic sequelae follow.",
-  "additionalDifferentials": [
-   "Systemic sclerosis (must be distinguished as it involves internal organs)",
-   "Lichen sclerosus (can coexist and overlap clinically)",
-   "Eosinophilic fasciitis",
-   "Scleredema and scleromyxoedema",
-   "Chronic graft-versus-host disease with sclerodermatous features",
-   "Lipodermatosclerosis and post-radiation fibrosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype",
-   "Clinical assessment for systemic sclerosis features, with autoantibody testing where indicated",
-   "Imaging (including MRI) in linear or deep disease to define extent and detect muscle, bone, or CNS involvement",
-   "Ophthalmology and neurology review for craniofacial linear disease",
-   "Serial mapping or scoring of lesions to monitor activity and progression"
-  ],
-  "redFlags": [
-   "Craniofacial linear morphea (en coup de sabre / Parry-Romberg) with neurological symptoms, seizures, or eye involvement",
-   "Rapidly extending or deep lesions crossing joints and threatening contractures",
-   "Growth disturbance or limb length discrepancy in affected children",
-   "Extensive generalised disease causing functional impairment",
-   "Diagnostic uncertainty where systemic sclerosis cannot be confidently excluded"
-  ],
-  "prognosis": "Many plaque-type lesions eventually become inactive over several years, leaving pigmentary change and atrophy, whereas linear and deep subtypes, particularly in children, carry a higher risk of lasting functional and cosmetic sequelae; early treatment of the inflammatory phase improves outcomes.",
-  "pitfalls": [
-   "Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation",
-   "Missing the active inflammatory (lilac ring) phase when treatment is most effective",
-   "Underappreciating growth and contracture risk in paediatric linear disease",
-   "Failing to screen for neurological and ocular involvement in craniofacial disease",
-   "Assuming established sclerosis will respond to anti-inflammatory therapy"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical corticosteroids, topical calcineurin inhibitors or calcipotriol for limited disease and phototherapy such as UVA1 or narrowband UVB for widespread superficial disease",
-   "Systemic immunomodulation for extensive, linear, deep or functionally threatening disease, typically methotrexate with a corticosteroid bridge, or mycophenolate as an alternative",
-   "Physiotherapy and occupational therapy to prevent and manage contractures, particularly in linear disease crossing joints in children",
-   "Ophthalmology and neurology assessment for craniofacial and en coup de sabre disease",
-   "Emollients, management of atrophy and scarring, and cosmetic or reconstructive input for established sequelae",
-   "Serial lesion mapping and scoring to monitor activity and detect relapse",
-   "Multidisciplinary dermatology, rheumatology and paediatric care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "morphea-pathway",
-   "title": "Morphea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not accompanied by Raynaud phenomenon or sclerodactyly",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Craniofacial linear morphea (en coup de sabre / Parry-Romberg) with neurological symptoms, seizures, or eye involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype, Clinical assessment for systemic sclerosis features, with autoantibody testing where indicated, Imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical corticosteroids, topical calcineurin inhibitors or calcipotriol for limited disease and phototherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of morphea."
-  }
- ],
- "tables": [
-  {
-   "id": "morphea-matrix",
-   "title": "Morphea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not accompanied by Raynaud phenomenon or sclerodactyly",
+      "Early plaques are erythematous or violaceous and indurated, evolving into firm, waxy, ivory-coloured centres often surrounded by a lilac inflammatory ring that signals active disease",
+      "Subtypes include circumscribed (plaque) morphea, generalised, linear, and deep forms, each with different distribution and complication profiles",
+      "Linear morphea in children can cross joints and, when it affects the limbs or face, may impair growth, cause contractures, or produce the en coup de sabre pattern on the forehead",
+      "Facial and periorbital linear disease warrants assessment for underlying neurological and ophthalmological involvement",
+      "Treatment aims to halt inflammation during the active phase, since established sclerosis and atrophy are difficult to reverse; options range from topical and phototherapy approaches to systemic immunomodulation in extensive or deep disease",
+      "Physiotherapy and monitoring for joint contractures are important in linear and deep subtypes",
+      "Distinguish morphea from systemic sclerosis clinically and, if needed, serologically, to avoid unnecessary alarm and inappropriate investigation"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype, Clinical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Morphea is an immune-mediated fibrosing process in which an initial inflammatory phase, characterised by a perivascular lymphocytic infiltrate and endothelial activation, is followed by excessive deposition of collagen in the dermis and, in deeper subtypes, the subcutis and fascia. Dysregulated production of pro-fibrotic cytokines and growth factors drives fibroblasts to lay down dense, thickened collagen bundles, with loss of adnexal structures and normal fat. Vascular changes and, in some cases, autoimmune associations contribute. The result is progressive induration and, later, atrophy; when fibrosis extends across joints or affects growing tissues in children, functional and cosmetic sequelae follow.",
+    "additionalDifferentials": [
+      "Systemic sclerosis (must be distinguished as it involves internal organs)",
+      "Lichen sclerosus (can coexist and overlap clinically)",
+      "Eosinophilic fasciitis",
+      "Scleredema and scleromyxoedema",
+      "Chronic graft-versus-host disease with sclerodermatous features",
+      "Lipodermatosclerosis and post-radiation fibrosis"
     ],
-    [
-     "Primary Differentials",
-     "Systemic sclerosis (must be distinguished as it involves internal organs), Lichen sclerosus (can coexist and overlap clinically),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype",
+      "Clinical assessment for systemic sclerosis features, with autoantibody testing where indicated",
+      "Imaging (including MRI) in linear or deep disease to define extent and detect muscle, bone, or CNS involvement",
+      "Ophthalmology and neurology review for craniofacial linear disease",
+      "Serial mapping or scoring of lesions to monitor activity and progression"
     ],
-    [
-     "Management Strategy",
-     "Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical",
-     "Core treatment modality"
+    "redFlags": [
+      "Craniofacial linear morphea (en coup de sabre / Parry-Romberg) with neurological symptoms, seizures, or eye involvement",
+      "Rapidly extending or deep lesions crossing joints and threatening contractures",
+      "Growth disturbance or limb length discrepancy in affected children",
+      "Extensive generalised disease causing functional impairment",
+      "Diagnostic uncertainty where systemic sclerosis cannot be confidently excluded"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many plaque-type lesions eventually become inactive over several years, leaving pigmentary change and atrophy, whereas linear and deep subtypes, particularly in children, carry a higher risk of lasting functional and cosmetic sequelae; early treatment of the inflammatory phase improves outcomes.",
+    "pitfalls": [
+      "Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation",
+      "Missing the active inflammatory (lilac ring) phase when treatment is most effective",
+      "Underappreciating growth and contracture risk in paediatric linear disease",
+      "Failing to screen for neurological and ocular involvement in craniofacial disease",
+      "Assuming established sclerosis will respond to anti-inflammatory therapy"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical corticosteroids, topical calcineurin inhibitors or calcipotriol for limited disease and phototherapy such as UVA1 or narrowband UVB for widespread superficial disease",
+      "Systemic immunomodulation for extensive, linear, deep or functionally threatening disease, typically methotrexate with a corticosteroid bridge, or mycophenolate as an alternative",
+      "Physiotherapy and occupational therapy to prevent and manage contractures, particularly in linear disease crossing joints in children",
+      "Ophthalmology and neurology assessment for craniofacial and en coup de sabre disease",
+      "Emollients, management of atrophy and scarring, and cosmetic or reconstructive input for established sequelae",
+      "Serial lesion mapping and scoring to monitor activity and detect relapse",
+      "Multidisciplinary dermatology, rheumatology and paediatric care"
     ]
-   ],
-   "caption": "Overview comparison matrix for morphea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "morphea-real-image",
-   "title": "Morphea: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "morphea-pathway",
+      "title": "Morphea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not accompanied by Raynaud phenomenon or sclerodactyly",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Craniofacial linear morphea (en coup de sabre / Parry-Romberg) with neurological symptoms, seizures, or eye involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype, Clinical assessment for systemic sclerosis features, with autoantibody testing where indicated, Imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical corticosteroids, topical calcineurin inhibitors or calcipotriol for limited disease and phototherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of morphea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "morphea-matrix",
+      "title": "Morphea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Morphea is a localised sclerosing disorder of the skin that, unlike systemic sclerosis, spares the internal organs and is not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy, ideally deep enough to assess dermis, subcutis, and fascia, to confirm the diagnosis and subtype, Clinical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic sclerosis (must be distinguished as it involves internal organs), Lichen sclerosus (can coexist and overlap clinically),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Halt inflammation during the active phase, since established sclerosis and atrophy are hard to reverse, using topical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing morphea with systemic sclerosis and triggering unnecessary anxiety or investigation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for morphea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "morphea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep skin biopsy",
+          "cells": [
+            {
+              "text": "Assess dermis, subcutis and fascia; confirms diagnosis and subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody testing",
+          "cells": [
+            {
+              "text": "Where systemic sclerosis features are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI in linear or deep disease",
+          "cells": [
+            {
+              "text": "Extent and muscle, bone or CNS involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and neurology review",
+          "cells": [
+            {
+              "text": "For craniofacial linear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial lesion mapping or scoring",
+          "cells": [
+            {
+              "text": "Monitors activity and progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morphea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Involves internal organs, unlike morphea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen sclerosus",
+          "cells": [
+            {
+              "text": "Can coexist and overlap clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic fasciitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morphea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids or calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Halt inflammation during the active phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic immunomodulation",
+          "cells": [
+            {
+              "text": "Methotrexate with corticosteroid bridge for extensive, linear, deep or function-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Prevent contractures, especially in children with linear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and neurology assessment",
+          "cells": [
+            {
+              "text": "Craniofacial and en coup de sabre disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and reconstructive input",
+          "cells": [
+            {
+              "text": "Atrophy and scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "morphea-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to scleroderma-like illness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Scleroderma",
+          "cells": [
+            {
+              "text": "vinyl chloride, bleomycin, pentazocine, organic solvents, carbidopa, tryptophan, rapeseed oil"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "morphea-dx-mgmt",
+      "title": "Diagnosis and management of Morphea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Indurated, ringed skin plaque with lilac border",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "En coup de sabre with neuro or eye signs, joint-crossing lesions or growth disturbance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic treatment with neurology, ophthalmology and MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep skin biopsy, autoantibodies, MRI for linear or deep disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy confirms morphea with no systemic sclerosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for systemic sclerosis, eosinophilic fasciitis, lichen sclerosus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical steroids or calcineurin inhibitors for limited active disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate with steroid bridge for extensive, linear or deep disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy to prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial lesion mapping to monitor activity and relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Plaque lesions usually become inactive; linear and deep forms leave more sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

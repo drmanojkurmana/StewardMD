@@ -1,173 +1,451 @@
 {
- "id": "glomus_tumour",
- "name": "Glomus tumour",
- "aliases": [
-  "Glomangioma",
-  "Solid glomus tumour"
- ],
- "class": "non_infective",
- "system": "Skin / Soft tissue",
- "specialty": "Hand surgery / Dermatopathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
-   "The classic triad is paroxysmal pain, marked cold sensitivity, and exquisite pinpoint tenderness, most often at a subungual site of the fingertip",
-   "A small bluish or reddish subungual discolouration with associated nail ridging is a helpful clinical sign",
-   "Love's pin test localises the point of maximal tenderness and Hildreth's sign is relief of pain when a tourniquet is inflated",
-   "MRI shows a small lesion with high signal on T2 and avid enhancement, useful for occult or recurrent tumours",
-   "Multiple lesions (glomangiomas) tend to be less painful, may be familial, and are associated with germline glomulin mutations",
-   "Histology shows sheets of uniform glomus cells around vascular channels, positive for smooth muscle actin and negative for S100",
-   "Complete surgical excision relieves the pain and is curative, with recurrence usually indicating incomplete removal"
+  "id": "glomus_tumour",
+  "name": "Glomus tumour",
+  "aliases": [
+    "Glomangioma",
+    "Solid glomus tumour"
   ],
-  "pathophysiology": "The glomus body is a specialised arteriovenous anastomosis in the dermis, particularly concentrated in the digits, that shunts blood to regulate temperature; it is composed of afferent and efferent vessels surrounded by rounded glomus cells, which are modified vascular smooth muscle cells. A glomus tumour is a benign neoplastic proliferation of these glomus cells arranged around vascular spaces. The dense innervation and contractile nature of the constituent cells are thought to underlie the characteristic paroxysmal pain and temperature sensitivity, provoked by contraction in response to cold or pressure. Solitary tumours are typically well circumscribed and predominantly cellular, whereas the multiple glomangioma variant is more vascular and is linked to loss-of-function variants in the glomulin gene. Malignant glomus tumours are exceptionally rare and are recognised by deep location, large size, atypical mitoses, and marked nuclear atypia.",
-  "additionalDifferentials": [
-   "Other painful subcutaneous tumours such as angioleiomyoma, angiolipoma, and neuroma",
-   "Subungual melanoma or melanotic whitlow",
-   "Subungual exostosis or osteochondroma",
-   "Haemangioma or vascular malformation",
-   "Foreign body granuloma or chronic paronychia",
-   "Neuroma or causalgia of the digit"
-  ],
-  "additionalInvestigations": [
-   "Focused clinical tests including Love's pin test and Hildreth's sign",
-   "MRI to localise small or recurrent subungual lesions",
-   "High-resolution ultrasound as an accessible alternative for localisation",
-   "Plain radiography to detect any bony scalloping of the distal phalanx",
-   "Histology and immunohistochemistry for smooth muscle actin with absent S100",
-   "Genetic assessment for glomulin variants when lesions are multiple or familial"
-  ],
-  "redFlags": [
-   "A deep-seated or large glomus tumour, or one with atypical or necrotic features suggesting malignancy",
-   "Rapid growth or the development of numerous new lesions",
-   "Persistent or recurrent pain after excision indicating residual tumour",
-   "Pigmented subungual lesion where melanoma must be excluded"
-  ],
-  "prognosis": "Solitary glomus tumours are benign and complete excision reliably abolishes the pain; recurrence almost always reflects incomplete resection rather than aggressive biology. Malignant glomus tumours are extremely rare but can metastasise and carry a guarded outlook.",
-  "pitfalls": [
-   "Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause",
-   "Incomplete excision leaving residual tumour and persistent symptoms",
-   "Overlooking a subungual melanoma masquerading as a pigmented digital lesion",
-   "Confusing the soft tissue glomus tumour with paraganglioma of the head and neck, an unrelated entity sometimes loosely called a glomus tumour"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Green's Operative Hand Surgery",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions",
-   "Preoperative MRI or high-resolution ultrasound to localise small, occult or recurrent lesions before surgery",
-   "Meticulous complete resection, since recurrence almost always reflects residual tumour rather than aggressive biology",
-   "Interim analgesia with avoidance of cold and pressure that provoke the paroxysmal pain",
-   "Histological confirmation with immunohistochemistry, and wider excision with oncological follow-up for the rare malignant variant",
-   "For multiple glomangiomas consider sclerotherapy or laser as alternatives, and offer genetic assessment and counselling for glomulin variants given familial inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glomus_tumour-pathway",
-   "title": "Glomus tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A deep-seated or large glomus tumour, or one with atypical or necrotic features suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Focused clinical tests including Love's pin test and Hildreth's sign, MRI to localise small or recurrent subungual lesions, High-resolution ultrasound as an accessible alternative for localisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glomus tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "glomus_tumour-matrix",
-   "title": "Glomus tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Soft tissue",
+  "specialty": "Hand surgery / Dermatopathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
+      "The classic triad is paroxysmal pain, marked cold sensitivity, and exquisite pinpoint tenderness, most often at a subungual site of the fingertip",
+      "A small bluish or reddish subungual discolouration with associated nail ridging is a helpful clinical sign",
+      "Love's pin test localises the point of maximal tenderness and Hildreth's sign is relief of pain when a tourniquet is inflated",
+      "MRI shows a small lesion with high signal on T2 and avid enhancement, useful for occult or recurrent tumours",
+      "Multiple lesions (glomangiomas) tend to be less painful, may be familial, and are associated with germline glomulin mutations",
+      "Histology shows sheets of uniform glomus cells around vascular channels, positive for smooth muscle actin and negative for S100",
+      "Complete surgical excision relieves the pain and is curative, with recurrence usually indicating incomplete removal"
     ],
-    [
-     "Key Investigations",
-     "Focused clinical tests including Love's pin test and Hildreth's sign, MRI to localise small or recurrent subungual lesions,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The glomus body is a specialised arteriovenous anastomosis in the dermis, particularly concentrated in the digits, that shunts blood to regulate temperature; it is composed of afferent and efferent vessels surrounded by rounded glomus cells, which are modified vascular smooth muscle cells. A glomus tumour is a benign neoplastic proliferation of these glomus cells arranged around vascular spaces. The dense innervation and contractile nature of the constituent cells are thought to underlie the characteristic paroxysmal pain and temperature sensitivity, provoked by contraction in response to cold or pressure. Solitary tumours are typically well circumscribed and predominantly cellular, whereas the multiple glomangioma variant is more vascular and is linked to loss-of-function variants in the glomulin gene. Malignant glomus tumours are exceptionally rare and are recognised by deep location, large size, atypical mitoses, and marked nuclear atypia.",
+    "additionalDifferentials": [
+      "Other painful subcutaneous tumours such as angioleiomyoma, angiolipoma, and neuroma",
+      "Subungual melanoma or melanotic whitlow",
+      "Subungual exostosis or osteochondroma",
+      "Haemangioma or vascular malformation",
+      "Foreign body granuloma or chronic paronychia",
+      "Neuroma or causalgia of the digit"
     ],
-    [
-     "Primary Differentials",
-     "Other painful subcutaneous tumours such as angioleiomyoma, angiolipoma, and neuroma, Subungual melanoma or melanotic whitlow,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Focused clinical tests including Love's pin test and Hildreth's sign",
+      "MRI to localise small or recurrent subungual lesions",
+      "High-resolution ultrasound as an accessible alternative for localisation",
+      "Plain radiography to detect any bony scalloping of the distal phalanx",
+      "Histology and immunohistochemistry for smooth muscle actin with absent S100",
+      "Genetic assessment for glomulin variants when lesions are multiple or familial"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "A deep-seated or large glomus tumour, or one with atypical or necrotic features suggesting malignancy",
+      "Rapid growth or the development of numerous new lesions",
+      "Persistent or recurrent pain after excision indicating residual tumour",
+      "Pigmented subungual lesion where melanoma must be excluded"
     ],
-    [
-     "Clinical Pitfall",
-     "Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Solitary glomus tumours are benign and complete excision reliably abolishes the pain; recurrence almost always reflects incomplete resection rather than aggressive biology. Malignant glomus tumours are extremely rare but can metastasise and carry a guarded outlook.",
+    "pitfalls": [
+      "Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause",
+      "Incomplete excision leaving residual tumour and persistent symptoms",
+      "Overlooking a subungual melanoma masquerading as a pigmented digital lesion",
+      "Confusing the soft tissue glomus tumour with paraganglioma of the head and neck, an unrelated entity sometimes loosely called a glomus tumour"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Green's Operative Hand Surgery",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions",
+      "Preoperative MRI or high-resolution ultrasound to localise small, occult or recurrent lesions before surgery",
+      "Meticulous complete resection, since recurrence almost always reflects residual tumour rather than aggressive biology",
+      "Interim analgesia with avoidance of cold and pressure that provoke the paroxysmal pain",
+      "Histological confirmation with immunohistochemistry, and wider excision with oncological follow-up for the rare malignant variant",
+      "For multiple glomangiomas consider sclerotherapy or laser as alternatives, and offer genetic assessment and counselling for glomulin variants given familial inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for glomus tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glomus-tumour-real-image",
-   "title": "Glomus tumour: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "glomus_tumour-pathway",
+      "title": "Glomus tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A deep-seated or large glomus tumour, or one with atypical or necrotic features suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Focused clinical tests including Love's pin test and Hildreth's sign, MRI to localise small or recurrent subungual lesions, High-resolution ultrasound as an accessible alternative for localisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glomus tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glomus_tumour-matrix",
+      "title": "Glomus tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign tumour arising from the modified smooth muscle cells of the glomus body, a thermoregulatory arteriovenous shunt",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Focused clinical tests including Love's pin test and Hildreth's sign, MRI to localise small or recurrent subungual lesions,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other painful subcutaneous tumours such as angioleiomyoma, angiolipoma, and neuroma, Subungual melanoma or melanotic whitlow,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision is the definitive treatment and reliably abolishes the pain for solitary lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prolonged diagnostic delay, with fingertip pain misattributed to trauma or a psychological cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glomus tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomus_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Love's pin test and Hildreth's sign",
+          "cells": [
+            {
+              "text": "Focused clinical tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Small or recurrent subungual lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound",
+          "cells": [
+            {
+              "text": "Accessible alternative for localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiography",
+          "cells": [
+            {
+              "text": "Bony scalloping of the distal phalanx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology and immunohistochemistry",
+          "cells": [
+            {
+              "text": "Smooth muscle actin positive with absent S100"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment",
+          "cells": [
+            {
+              "text": "Glomulin variants when lesions are multiple or familial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subungual melanoma or melanotic whitlow",
+          "cells": [
+            {
+              "text": "Pigmented subungual lesion that must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angioleiomyoma or angiolipoma",
+          "cells": [
+            {
+              "text": "Other painful subcutaneous tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomus_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive; reliably abolishes pain for solitary lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound localisation",
+          "cells": [
+            {
+              "text": "Small, occult or recurrent lesions before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meticulous complete resection",
+          "cells": [
+            {
+              "text": "Recurrence almost always reflects residual tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interim analgesia",
+          "cells": [
+            {
+              "text": "Avoidance of cold and pressure that provoke paroxysmal pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; wider excision and oncological follow-up for malignant variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple glomangiomas",
+          "cells": [
+            {
+              "text": "Sclerotherapy or laser as alternatives; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomus_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Glomus tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glomus tumour: fingertip pain provoked by cold or pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deep or necrotic lesion, rapid growth, recurrent pain, pigmentation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of atypical, necrotic or rapidly growing lesion; exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Focused tests, MRI or ultrasound localisation, radiograph for bony scalloping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show smooth muscle actin-positive cells with absent S100?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subungual melanoma, exostosis, haemangioma or neuroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision, the definitive treatment for solitary lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preoperative MRI or ultrasound to localise small or recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meticulous complete resection, since recurrence usually reflects residual tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interim analgesia and avoidance of cold and pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Solitary tumours are benign; complete excision reliably abolishes pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

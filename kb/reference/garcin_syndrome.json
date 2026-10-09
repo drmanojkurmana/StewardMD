@@ -1,173 +1,460 @@
 {
- "id": "garcin_syndrome",
- "name": "Garcin syndrome",
- "aliases": [
-  "hemibasal syndrome",
-  "Garcin-Guillain syndrome",
-  "unilateral multiple cranial neuropathy syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / Adams and Victor's Principles of Neurology (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised intracranial pressure",
-   "The absence of motor and sensory long-tract signs and of papilloedema distinguishes it from an intra-axial brainstem lesion",
-   "It reflects a process at or around the skull base picking off cranial nerves sequentially as they exit their foramina",
-   "The commonest cause is an infiltrative skull-base malignancy such as nasopharyngeal carcinoma or other locally invasive tumour",
-   "Other causes include skull-base metastases, lymphoma, chordoma, meningioma and, less often, granulomatous or infective basal disease",
-   "Careful documentation of which cranial nerves are involved helps localise the lesion within the skull base",
-   "Management is generic and directed at the underlying cause, guided by skull-base imaging and biopsy or nasopharyngeal assessment"
+  "id": "garcin_syndrome",
+  "name": "Garcin syndrome",
+  "aliases": [
+    "hemibasal syndrome",
+    "Garcin-Guillain syndrome",
+    "unilateral multiple cranial neuropathy syndrome"
   ],
-  "pathophysiology": "Garcin syndrome arises when a pathological process at the base of the skull progressively involves the cranial nerves as they traverse or exit their bony foramina on one side. Most often this is an infiltrative or compressive skull-base malignancy, classically nasopharyngeal carcinoma extending through the skull base, which sequentially compresses or infiltrates multiple cranial nerves. Because the lesion lies extra-axially at the skull base rather than within the brainstem, the corticospinal and sensory tracts are spared, so there are no long-tract signs, and because it does not obstruct cerebrospinal fluid pathways there is characteristically no raised intracranial pressure or papilloedema. The result is a strikingly unilateral, progressive multiple cranial neuropathy.",
-  "additionalDifferentials": [
-   "Intra-axial brainstem lesion (glioma, infarct, demyelination)",
-   "Cavernous sinus syndrome",
-   "Cerebellopontine angle mass",
-   "Basal (carcinomatous or infective) meningitis",
-   "Skull-base osteomyelitis",
-   "Granulomatous disease such as sarcoidosis or granulomatosis with polyangiitis"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and skull base with contrast to identify an infiltrative lesion",
-   "CT of the skull base to assess bony erosion of the foramina",
-   "Nasopharyngeal examination and biopsy where nasopharyngeal carcinoma is suspected",
-   "Cerebrospinal fluid analysis including cytology for malignant or infective meningitis",
-   "Biopsy of any accessible skull-base lesion for histological diagnosis",
-   "Systemic imaging to identify a primary tumour or metastatic disease"
-  ],
-  "redFlags": [
-   "Rapidly progressive unilateral multiple cranial nerve palsies indicating an aggressive skull-base process",
-   "Associated systemic features suggesting malignancy",
-   "Development of long-tract signs implying intra-axial extension",
-   "Bulbar involvement compromising swallowing and airway protection"
-  ],
-  "prognosis": "Prognosis is largely that of the underlying cause; when due to an infiltrative skull-base malignancy such as nasopharyngeal carcinoma the outlook is generally guarded, though early identification and directed treatment of the responsible lesion offer the best chance of stabilising the deficits.",
-  "pitfalls": [
-   "Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging",
-   "Failing to examine the nasopharynx in a patient with progressive unilateral cranial neuropathies",
-   "Attributing progressive palsies to idiopathic causes without excluding malignancy",
-   "Overlooking cerebrospinal fluid cytology when carcinomatous meningitis is possible"
-  ],
-  "references": [
-   "Bradley's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an alternative regimen for lymphoma, metastasis or chordoma",
-   "Obtain a tissue diagnosis by nasopharyngeal or skull-base biopsy to guide oncological therapy",
-   "Give corticosteroids to reduce peritumoural oedema and compressive cranial neuropathy",
-   "Provide supportive rehabilitation for cranial-nerve deficits, including swallowing and speech therapy and corneal or eye protection for facial or trigeminal palsy",
-   "Manage neuropathic and cancer-related pain with appropriate analgesia",
-   "Coordinate care through a skull-base multidisciplinary team spanning ENT, neurology, and radiation and medical oncology",
-   "Involve palliative care where the underlying malignancy is advanced"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "garcin_syndrome-pathway",
-   "title": "Garcin syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive unilateral multiple cranial nerve palsies indicating an aggressive skull-base process",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and skull base with contrast to identify an infiltrative lesion, CT of the skull base to assess bony erosion of the foramina, Nasopharyngeal examination and biopsy where nasopharyngeal carcinoma is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an alternative regimen for lymphoma, metastasis or chordoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of garcin syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "garcin_syndrome-matrix",
-   "title": "Garcin syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / Adams and Victor's Principles of Neurology (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised intracranial pressure",
+      "The absence of motor and sensory long-tract signs and of papilloedema distinguishes it from an intra-axial brainstem lesion",
+      "It reflects a process at or around the skull base picking off cranial nerves sequentially as they exit their foramina",
+      "The commonest cause is an infiltrative skull-base malignancy such as nasopharyngeal carcinoma or other locally invasive tumour",
+      "Other causes include skull-base metastases, lymphoma, chordoma, meningioma and, less often, granulomatous or infective basal disease",
+      "Careful documentation of which cranial nerves are involved helps localise the lesion within the skull base",
+      "Management is generic and directed at the underlying cause, guided by skull-base imaging and biopsy or nasopharyngeal assessment"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and skull base with contrast to identify an infiltrative lesion, CT of the skull base to assess bony erosion of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Garcin syndrome arises when a pathological process at the base of the skull progressively involves the cranial nerves as they traverse or exit their bony foramina on one side. Most often this is an infiltrative or compressive skull-base malignancy, classically nasopharyngeal carcinoma extending through the skull base, which sequentially compresses or infiltrates multiple cranial nerves. Because the lesion lies extra-axially at the skull base rather than within the brainstem, the corticospinal and sensory tracts are spared, so there are no long-tract signs, and because it does not obstruct cerebrospinal fluid pathways there is characteristically no raised intracranial pressure or papilloedema. The result is a strikingly unilateral, progressive multiple cranial neuropathy.",
+    "additionalDifferentials": [
+      "Intra-axial brainstem lesion (glioma, infarct, demyelination)",
+      "Cavernous sinus syndrome",
+      "Cerebellopontine angle mass",
+      "Basal (carcinomatous or infective) meningitis",
+      "Skull-base osteomyelitis",
+      "Granulomatous disease such as sarcoidosis or granulomatosis with polyangiitis"
     ],
-    [
-     "Primary Differentials",
-     "Intra-axial brainstem lesion (glioma, infarct, demyelination), Cavernous sinus syndrome, Cerebellopontine angle mass",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and skull base with contrast to identify an infiltrative lesion",
+      "CT of the skull base to assess bony erosion of the foramina",
+      "Nasopharyngeal examination and biopsy where nasopharyngeal carcinoma is suspected",
+      "Cerebrospinal fluid analysis including cytology for malignant or infective meningitis",
+      "Biopsy of any accessible skull-base lesion for histological diagnosis",
+      "Systemic imaging to identify a primary tumour or metastatic disease"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive unilateral multiple cranial nerve palsies indicating an aggressive skull-base process",
+      "Associated systemic features suggesting malignancy",
+      "Development of long-tract signs implying intra-axial extension",
+      "Bulbar involvement compromising swallowing and airway protection"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely that of the underlying cause; when due to an infiltrative skull-base malignancy such as nasopharyngeal carcinoma the outlook is generally guarded, though early identification and directed treatment of the responsible lesion offer the best chance of stabilising the deficits.",
+    "pitfalls": [
+      "Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging",
+      "Failing to examine the nasopharynx in a patient with progressive unilateral cranial neuropathies",
+      "Attributing progressive palsies to idiopathic causes without excluding malignancy",
+      "Overlooking cerebrospinal fluid cytology when carcinomatous meningitis is possible"
+    ],
+    "references": [
+      "Bradley's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an alternative regimen for lymphoma, metastasis or chordoma",
+      "Obtain a tissue diagnosis by nasopharyngeal or skull-base biopsy to guide oncological therapy",
+      "Give corticosteroids to reduce peritumoural oedema and compressive cranial neuropathy",
+      "Provide supportive rehabilitation for cranial-nerve deficits, including swallowing and speech therapy and corneal or eye protection for facial or trigeminal palsy",
+      "Manage neuropathic and cancer-related pain with appropriate analgesia",
+      "Coordinate care through a skull-base multidisciplinary team spanning ENT, neurology, and radiation and medical oncology",
+      "Involve palliative care where the underlying malignancy is advanced"
     ]
-   ],
-   "caption": "Overview comparison matrix for garcin syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "garcin-syndrome-real-image",
-   "title": "Garcin syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "garcin_syndrome-pathway",
+      "title": "Garcin syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive unilateral multiple cranial nerve palsies indicating an aggressive skull-base process",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and skull base with contrast to identify an infiltrative lesion, CT of the skull base to assess bony erosion of the foramina, Nasopharyngeal examination and biopsy where nasopharyngeal carcinoma is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an alternative regimen for lymphoma, metastasis or chordoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of garcin syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "garcin_syndrome-matrix",
+      "title": "Garcin syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by progressive, unilateral palsy of several or all cranial nerves on one side without long-tract signs or raised",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and skull base with contrast to identify an infiltrative lesion, CT of the skull base to assess bony erosion of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intra-axial brainstem lesion (glioma, infarct, demyelination), Cavernous sinus syndrome, Cerebellopontine angle mass",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying skull-base pathology, most often chemoradiotherapy for nasopharyngeal carcinoma or an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the deficits as an intra-axial brainstem lesion and delaying skull-base imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for garcin syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Adams and Victor's Principles of Neurology (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "garcin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and skull base with contrast",
+          "cells": [
+            {
+              "text": "Infiltrative lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the skull base",
+          "cells": [
+            {
+              "text": "Bony erosion of the foramina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasopharyngeal examination and biopsy",
+          "cells": [
+            {
+              "text": "Where nasopharyngeal carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis including cytology",
+          "cells": [
+            {
+              "text": "Malignant or infective meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of accessible skull-base lesion",
+          "cells": [
+            {
+              "text": "Histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic imaging",
+          "cells": [
+            {
+              "text": "Primary tumour or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "garcin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intra-axial brainstem lesion (glioma, infarct, demyelination)",
+          "cells": [
+            {
+              "text": "Long-tract signs imply intra-axial extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal meningitis (carcinomatous or infective)",
+          "cells": [
+            {
+              "text": "Detected on CSF cytology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "garcin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying skull-base pathology",
+          "cells": [
+            {
+              "text": "Most often chemoradiotherapy for nasopharyngeal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis",
+          "cells": [
+            {
+              "text": "Nasopharyngeal or skull-base biopsy to guide oncological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Reduce peritumoural oedema and compressive cranial neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation for cranial-nerve deficits",
+          "cells": [
+            {
+              "text": "Swallowing and speech therapy; eye protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain management",
+          "cells": [
+            {
+              "text": "Neuropathic and cancer-related pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull-base multidisciplinary team",
+          "cells": [
+            {
+              "text": "ENT, neurology, radiation and medical oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Where the underlying malignancy is advanced"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "garcin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Garcin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Garcin syndrome: progressive unilateral multiple cranial nerve palsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aggressive skull-base process, long-tract signs, bulbar failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skull-base imaging and nasopharyngeal biopsy for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skull-base MRI with contrast, CT, nasopharyngeal examination and CSF cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does tissue biopsy confirm a malignant or infective skull-base process?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider brainstem lesion, cavernous sinus syndrome or granulomatous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying skull-base pathology, most often chemoradiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Biopsy for tissue diagnosis to guide oncological therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids to reduce peritumoural oedema and cranial neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skull-base multidisciplinary team with rehabilitation and pain control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Largely that of the underlying cause, such as a skull-base malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,481 @@
 {
- "id": "symmetrical_drug_related_intertriginous_exanthema",
- "name": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE)",
- "aliases": [
-  "SDRIFE",
-  "Symmetrical drug-related intertriginous and flexural exanthema",
-  "baboon syndrome",
-  "symmetrical drug related intertriginous flexural exanthema",
-  "symmetrical drug-related intertriginous and flexural exanthema",
-  "systemic contact-type baboon syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term baboon syndrome",
-   "There is additional symmetrical involvement of at least one other flexural or intertriginous site such as the groins, axillae or antecubital fossae",
-   "By definition it follows exposure to a systemic drug, without a preceding external contact allergen at the affected sites",
-   "Commonly implicated agents include beta-lactam antibiotics and other antimicrobials, and the reaction often occurs after the first systemic exposure",
-   "Characteristically there is an absence of systemic symptoms and no significant fever or organ involvement, distinguishing it from more serious drug reactions",
-   "The palms, soles and face are usually spared, and mucosal surfaces are not involved",
-   "Histology is non-specific, showing a mild superficial perivascular dermatitis, so diagnosis rests on the clinical pattern and drug history",
-   "Management is withdrawal of the responsible drug, after which the eruption settles, with topical corticosteroids to relieve symptoms"
+  "id": "symmetrical_drug_related_intertriginous_exanthema",
+  "name": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE)",
+  "aliases": [
+    "SDRIFE",
+    "Symmetrical drug-related intertriginous and flexural exanthema",
+    "baboon syndrome",
+    "symmetrical drug related intertriginous flexural exanthema",
+    "symmetrical drug-related intertriginous and flexural exanthema",
+    "systemic contact-type baboon syndrome"
   ],
-  "pathophysiology": "Symmetrical drug-related intertriginous and flexural exanthema is regarded as a systemically induced delayed-type (type IV) hypersensitivity reaction to a drug, without the need for prior sensitisation through skin contact. A systemically administered drug or its metabolite is thought to reach the flexural skin and provoke a T-cell-mediated inflammatory response, with the characteristic predilection for the buttocks and major body folds possibly reflecting local factors such as occlusion, sweat, and a higher density of eccrine structures or drug delivery to these sites. The reaction is confined to the skin, and the lack of systemic features and organ involvement distinguishes it mechanistically from severe cutaneous adverse reactions.",
-  "additionalDifferentials": [
-   "Allergic or irritant intertrigo",
-   "Inverse (flexural) psoriasis",
-   "Candidal or dermatophyte intertrigo",
-   "Allergic contact dermatitis to a topical agent",
-   "Acute generalised exanthematous pustulosis in flexural sites",
-   "Erythrasma"
-  ],
-  "additionalInvestigations": [
-   "Detailed systemic drug history correlating exposure with onset",
-   "Clinical mapping of the symmetrical flexural and gluteal distribution",
-   "Skin swabs or scrapings to exclude candidal, dermatophyte or bacterial intertrigo",
-   "Skin biopsy in atypical cases to exclude other flexural dermatoses",
-   "Patch and, where appropriate, systemic provocation testing after recovery to confirm the culprit",
-   "Assessment for systemic features to exclude a more serious drug reaction"
-  ],
-  "redFlags": [
-   "Development of pustulation, systemic upset or fever suggesting an alternative severe drug reaction",
-   "Mucosal involvement or skin detachment inconsistent with the diagnosis",
-   "Failure to settle after drug withdrawal",
-   "Signs of secondary infection in the affected folds"
-  ],
-  "prognosis": "The prognosis is excellent, with resolution over one to two weeks once the responsible drug is stopped and no long-term sequelae, although the reaction will recur on re-exposure.",
-  "pitfalls": [
-   "Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause",
-   "Failing to recognise that no external contact allergen is required for the flexural eruption",
-   "Overlooking that recurrence follows re-exposure to the culprit drug",
-   "Confusing it with acute generalised exanthematous pustulosis when pustules develop"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on cutaneous drug reactions"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step",
-   "Relieve symptoms with topical corticosteroids and emollients, and antihistamines for pruritus",
-   "Document the drug allergy and advise avoidance of the culprit and cross-reactive agents to prevent recurrence",
-   "Confirm the culprit where needed with patch testing or supervised provocation after recovery",
-   "Reassure the patient given the benign, self-limiting course that settles within a couple of weeks of withdrawal",
-   "Assess for systemic features to exclude a more serious cutaneous adverse drug reaction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "symmetrical_drug_related_intertriginous_exanthema-pathway",
-   "title": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term baboon syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Development of pustulation, systemic upset or fever suggesting an alternative severe drug reaction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed systemic drug history correlating exposure with onset, Clinical mapping of the symmetrical flexural and gluteal distribution, Skin swabs or scrapings to exclude candidal, dermatophyte or bacterial intertrigo"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of symmetrical drug-related intertriginous and flexural exanthema (sdrife)."
-  }
- ],
- "tables": [
-  {
-   "id": "symmetrical_drug_related_intertriginous_exanthema-matrix",
-   "title": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term baboon syndrome",
+      "There is additional symmetrical involvement of at least one other flexural or intertriginous site such as the groins, axillae or antecubital fossae",
+      "By definition it follows exposure to a systemic drug, without a preceding external contact allergen at the affected sites",
+      "Commonly implicated agents include beta-lactam antibiotics and other antimicrobials, and the reaction often occurs after the first systemic exposure",
+      "Characteristically there is an absence of systemic symptoms and no significant fever or organ involvement, distinguishing it from more serious drug reactions",
+      "The palms, soles and face are usually spared, and mucosal surfaces are not involved",
+      "Histology is non-specific, showing a mild superficial perivascular dermatitis, so diagnosis rests on the clinical pattern and drug history",
+      "Management is withdrawal of the responsible drug, after which the eruption settles, with topical corticosteroids to relieve symptoms"
     ],
-    [
-     "Key Investigations",
-     "Detailed systemic drug history correlating exposure with onset, Clinical mapping of the symmetrical flexural and gluteal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Symmetrical drug-related intertriginous and flexural exanthema is regarded as a systemically induced delayed-type (type IV) hypersensitivity reaction to a drug, without the need for prior sensitisation through skin contact. A systemically administered drug or its metabolite is thought to reach the flexural skin and provoke a T-cell-mediated inflammatory response, with the characteristic predilection for the buttocks and major body folds possibly reflecting local factors such as occlusion, sweat, and a higher density of eccrine structures or drug delivery to these sites. The reaction is confined to the skin, and the lack of systemic features and organ involvement distinguishes it mechanistically from severe cutaneous adverse reactions.",
+    "additionalDifferentials": [
+      "Allergic or irritant intertrigo",
+      "Inverse (flexural) psoriasis",
+      "Candidal or dermatophyte intertrigo",
+      "Allergic contact dermatitis to a topical agent",
+      "Acute generalised exanthematous pustulosis in flexural sites",
+      "Erythrasma"
     ],
-    [
-     "Primary Differentials",
-     "Allergic or irritant intertrigo, Inverse (flexural) psoriasis, Candidal or dermatophyte intertrigo",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed systemic drug history correlating exposure with onset",
+      "Clinical mapping of the symmetrical flexural and gluteal distribution",
+      "Skin swabs or scrapings to exclude candidal, dermatophyte or bacterial intertrigo",
+      "Skin biopsy in atypical cases to exclude other flexural dermatoses",
+      "Patch and, where appropriate, systemic provocation testing after recovery to confirm the culprit",
+      "Assessment for systemic features to exclude a more serious drug reaction"
     ],
-    [
-     "Management Strategy",
-     "Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step",
-     "Core treatment modality"
+    "redFlags": [
+      "Development of pustulation, systemic upset or fever suggesting an alternative severe drug reaction",
+      "Mucosal involvement or skin detachment inconsistent with the diagnosis",
+      "Failure to settle after drug withdrawal",
+      "Signs of secondary infection in the affected folds"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, with resolution over one to two weeks once the responsible drug is stopped and no long-term sequelae, although the reaction will recur on re-exposure.",
+    "pitfalls": [
+      "Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause",
+      "Failing to recognise that no external contact allergen is required for the flexural eruption",
+      "Overlooking that recurrence follows re-exposure to the culprit drug",
+      "Confusing it with acute generalised exanthematous pustulosis when pustules develop"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on cutaneous drug reactions"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step",
+      "Relieve symptoms with topical corticosteroids and emollients, and antihistamines for pruritus",
+      "Document the drug allergy and advise avoidance of the culprit and cross-reactive agents to prevent recurrence",
+      "Confirm the culprit where needed with patch testing or supervised provocation after recovery",
+      "Reassure the patient given the benign, self-limiting course that settles within a couple of weeks of withdrawal",
+      "Assess for systemic features to exclude a more serious cutaneous adverse drug reaction"
     ]
-   ],
-   "caption": "Overview comparison matrix for symmetrical drug-related intertriginous and flexural exanthema (sdrife)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "symmetrical-drug-related-intertriginous-exanthema-real-image",
-   "title": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "symmetrical_drug_related_intertriginous_exanthema-pathway",
+      "title": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term baboon syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Development of pustulation, systemic upset or fever suggesting an alternative severe drug reaction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed systemic drug history correlating exposure with onset, Clinical mapping of the symmetrical flexural and gluteal distribution, Skin swabs or scrapings to exclude candidal, dermatophyte or bacterial intertrigo"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of symmetrical drug-related intertriginous and flexural exanthema (sdrife)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-matrix",
+      "title": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as symmetrical, sharply demarcated erythema of the buttocks and perianal or genital area, evoking the historical term",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed systemic drug history correlating exposure with onset, Clinical mapping of the symmetrical flexural and gluteal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Allergic or irritant intertrigo, Inverse (flexural) psoriasis, Candidal or dermatophyte intertrigo",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and withdraw the responsible systemic drug, often a beta-lactam antibiotic, which is the definitive step",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for an infective or inverse-psoriasis intertrigo and missing the drug cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for symmetrical drug-related intertriginous and flexural exanthema (sdrife)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-dx-mgmt",
+      "title": "Diagnosis and management of Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SDRIFE: symmetrical buttock and flexural erythema after a systemic drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pustulation, fever, mucosal involvement, or no settling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude a more serious cutaneous drug reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Systemic drug history; map flexural distribution; swabs or biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the eruption symmetrical, with no contact allergen and no systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intertrigo, inverse psoriasis or acute generalised exanthematous pustulosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the responsible systemic drug, often a beta-lactam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids and emollients, with antihistamines for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Document the drug allergy and avoid the culprit and cross-reactive agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm the culprit by patch testing or supervised provocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Settles within one to two weeks of drug withdrawal; recurs on re-exposure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed systemic drug history",
+          "cells": [
+            {
+              "text": "Exposure correlated with onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical mapping of flexural and gluteal distribution",
+          "cells": [
+            {
+              "text": "Symmetrical involvement of buttocks and major folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs or scrapings",
+          "cells": [
+            {
+              "text": "Candidal, dermatophyte or bacterial intertrigo excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Other flexural dermatoses excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch or provocation testing after recovery",
+          "cells": [
+            {
+              "text": "Confirms the culprit drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic features",
+          "cells": [
+            {
+              "text": "A more serious drug reaction excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Candidal or dermatophyte intertrigo",
+          "cells": [
+            {
+              "text": "Excluded by skin swabs or scrapings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inverse (flexural) psoriasis",
+          "cells": [
+            {
+              "text": "Mistaken for it; the drug history identifies the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute generalised exanthematous pustulosis",
+          "cells": [
+            {
+              "text": "Pustules developing in flexural sites point to this rather than SDRIFE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic contact dermatitis to a topical agent",
+          "cells": [
+            {
+              "text": "No external contact allergen is required at the affected sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the responsible systemic drug",
+          "cells": [
+            {
+              "text": "Often a beta-lactam antibiotic; the definitive step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients",
+          "cells": [
+            {
+              "text": "Symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document the drug allergy",
+          "cells": [
+            {
+              "text": "Avoid the culprit and cross-reactive agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the culprit",
+          "cells": [
+            {
+              "text": "Patch testing or supervised provocation after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting course that settles within a couple of weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude a more serious reaction",
+          "cells": [
+            {
+              "text": "Assess for systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

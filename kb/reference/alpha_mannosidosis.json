@@ -1,174 +1,514 @@
 {
- "id": "alpha_mannosidosis",
- "name": "Alpha-mannosidosis",
- "aliases": [
-  "alpha-mannosidase deficiency",
-  "lysosomal alpha-D-mannosidase deficiency",
-  "MAN2B1 deficiency",
-  "mannosidosis type I/II"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
-   "Core triad comprises intellectual disability, sensorineural hearing loss, and skeletal abnormalities (dysostosis multiplex)",
-   "Coarse facies, hepatosplenomegaly, and recurrent infections due to immune dysfunction are common",
-   "Presentation ranges from a severe rapidly progressive infantile form to a milder form with survival into adulthood",
-   "Psychiatric symptoms and episodes of confusion can emerge in adolescents and adults",
-   "Urinary oligosaccharide screening shows a mannose-rich pattern rather than glycosaminoglycans",
-   "Diagnosis is confirmed by deficient alpha-mannosidase activity and MAN2B1 gene testing; enzyme replacement therapy is available"
+  "id": "alpha_mannosidosis",
+  "name": "Alpha-mannosidosis",
+  "aliases": [
+    "alpha-mannosidase deficiency",
+    "lysosomal alpha-D-mannosidase deficiency",
+    "MAN2B1 deficiency",
+    "mannosidosis type I/II"
   ],
-  "pathophysiology": "Alpha-mannosidosis is caused by biallelic pathogenic variants in MAN2B1, encoding the lysosomal enzyme alpha-D-mannosidase. This enzyme cleaves terminal mannose residues during the ordered degradation of N-linked glycoproteins. Its deficiency causes accumulation of mannose-rich oligosaccharides within lysosomes throughout the body and their excretion in the urine. Storage affects the central nervous system, producing cognitive impairment; the inner ear, causing sensorineural deafness; the skeleton, causing dysostosis multiplex; and the immune system, contributing to recurrent infections. The severity spectrum reflects residual enzyme activity. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Other oligosaccharidoses such as beta-mannosidosis and fucosidosis",
-   "Mucopolysaccharidoses with coarse facies and dysostosis multiplex",
-   "Aspartylglucosaminuria",
-   "GM1 gangliosidosis",
-   "Sialidosis and galactosialidosis",
-   "Other causes of intellectual disability with hearing loss and skeletal dysplasia"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte or fibroblast alpha-mannosidase enzyme assay",
-   "Urinary oligosaccharide analysis showing mannose-rich compounds",
-   "MAN2B1 gene sequencing",
-   "Audiological assessment for sensorineural hearing loss",
-   "Skeletal survey for dysostosis multiplex",
-   "Brain MRI and developmental assessment"
-  ],
-  "redFlags": [
-   "Recurrent severe infections indicating immune dysfunction",
-   "Progressive neurological or psychiatric deterioration",
-   "Cervical spine instability with cord compression",
-   "Acute confusional episodes in adolescents or adults"
-  ],
-  "prognosis": "The course is variable; severe infantile disease progresses rapidly, whereas milder forms allow survival into adulthood with progressive cognitive, sensory, and skeletal disability. Enzyme replacement therapy is available and may improve some manifestations, and haematopoietic stem cell transplantation has been used in selected patients.",
-  "pitfalls": [
-   "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
-   "Attributing recurrent infections to unrelated causes rather than the underlying disorder",
-   "Overlooking hearing loss as a key diagnostic clue",
-   "Failing to consider the diagnosis in adults presenting with new psychiatric symptoms"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations",
-   "Consider haematopoietic stem cell transplantation, particularly in early disease, to modify progression",
-   "Provide audiological management with hearing aids or cochlear implants for sensorineural hearing loss",
-   "Treat recurrent infections promptly and maintain immunisation given the immune dysfunction",
-   "Support development, mobility and skeletal complications of dysostosis multiplex with physiotherapy, orthopaedic input and educational support",
-   "Monitor for and manage psychiatric symptoms and episodes of confusion emerging in adolescence and adulthood",
-   "Coordinate multidisciplinary metabolic care and offer genetic counselling and family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alpha_mannosidosis-pathway",
-   "title": "Alpha-mannosidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent severe infections indicating immune dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte or fibroblast alpha-mannosidase enzyme assay, Urinary oligosaccharide analysis showing mannose-rich compounds, MAN2B1 gene sequencing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Screening only for glycosaminoglycans and missing the oligosaccharide pattern"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alpha-mannosidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "alpha_mannosidosis-matrix",
-   "title": "Alpha-mannosidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
+      "Core triad comprises intellectual disability, sensorineural hearing loss, and skeletal abnormalities (dysostosis multiplex)",
+      "Coarse facies, hepatosplenomegaly, and recurrent infections due to immune dysfunction are common",
+      "Presentation ranges from a severe rapidly progressive infantile form to a milder form with survival into adulthood",
+      "Psychiatric symptoms and episodes of confusion can emerge in adolescents and adults",
+      "Urinary oligosaccharide screening shows a mannose-rich pattern rather than glycosaminoglycans",
+      "Diagnosis is confirmed by deficient alpha-mannosidase activity and MAN2B1 gene testing; enzyme replacement therapy is available"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte or fibroblast alpha-mannosidase enzyme assay, Urinary oligosaccharide analysis showing mannose-rich compounds, MAN2B1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alpha-mannosidosis is caused by biallelic pathogenic variants in MAN2B1, encoding the lysosomal enzyme alpha-D-mannosidase. This enzyme cleaves terminal mannose residues during the ordered degradation of N-linked glycoproteins. Its deficiency causes accumulation of mannose-rich oligosaccharides within lysosomes throughout the body and their excretion in the urine. Storage affects the central nervous system, producing cognitive impairment; the inner ear, causing sensorineural deafness; the skeleton, causing dysostosis multiplex; and the immune system, contributing to recurrent infections. The severity spectrum reflects residual enzyme activity. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Other oligosaccharidoses such as beta-mannosidosis and fucosidosis",
+      "Mucopolysaccharidoses with coarse facies and dysostosis multiplex",
+      "Aspartylglucosaminuria",
+      "GM1 gangliosidosis",
+      "Sialidosis and galactosialidosis",
+      "Other causes of intellectual disability with hearing loss and skeletal dysplasia"
     ],
-    [
-     "Primary Differentials",
-     "Other oligosaccharidoses such as beta-mannosidosis and fucosidosis, Mucopolysaccharidoses with coarse facies and dysostosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte or fibroblast alpha-mannosidase enzyme assay",
+      "Urinary oligosaccharide analysis showing mannose-rich compounds",
+      "MAN2B1 gene sequencing",
+      "Audiological assessment for sensorineural hearing loss",
+      "Skeletal survey for dysostosis multiplex",
+      "Brain MRI and developmental assessment"
     ],
-    [
-     "Management Strategy",
-     "Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent severe infections indicating immune dysfunction",
+      "Progressive neurological or psychiatric deterioration",
+      "Cervical spine instability with cord compression",
+      "Acute confusional episodes in adolescents or adults"
     ],
-    [
-     "Clinical Pitfall",
-     "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable; severe infantile disease progresses rapidly, whereas milder forms allow survival into adulthood with progressive cognitive, sensory, and skeletal disability. Enzyme replacement therapy is available and may improve some manifestations, and haematopoietic stem cell transplantation has been used in selected patients.",
+    "pitfalls": [
+      "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
+      "Attributing recurrent infections to unrelated causes rather than the underlying disorder",
+      "Overlooking hearing loss as a key diagnostic clue",
+      "Failing to consider the diagnosis in adults presenting with new psychiatric symptoms"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations",
+      "Consider haematopoietic stem cell transplantation, particularly in early disease, to modify progression",
+      "Provide audiological management with hearing aids or cochlear implants for sensorineural hearing loss",
+      "Treat recurrent infections promptly and maintain immunisation given the immune dysfunction",
+      "Support development, mobility and skeletal complications of dysostosis multiplex with physiotherapy, orthopaedic input and educational support",
+      "Monitor for and manage psychiatric symptoms and episodes of confusion emerging in adolescence and adulthood",
+      "Coordinate multidisciplinary metabolic care and offer genetic counselling and family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for alpha-mannosidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alpha-mannosidosis-real-image",
-   "title": "Alpha-mannosidosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alpha_mannosidosis-pathway",
+      "title": "Alpha-mannosidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent severe infections indicating immune dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte or fibroblast alpha-mannosidase enzyme assay, Urinary oligosaccharide analysis showing mannose-rich compounds, MAN2B1 gene sequencing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Screening only for glycosaminoglycans and missing the oligosaccharide pattern"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alpha-mannosidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alpha_mannosidosis-matrix",
+      "title": "Alpha-mannosidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of lysosomal alpha-D-mannosidase, leading to accumulation of mannose-rich oligosaccharides",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte or fibroblast alpha-mannosidase enzyme assay, Urinary oligosaccharide analysis showing mannose-rich compounds, MAN2B1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other oligosaccharidoses such as beta-mannosidosis and fucosidosis, Mucopolysaccharidoses with coarse facies and dysostosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enzyme replacement therapy with velmanase alfa is the specific disease-directed treatment for non-neurological manifestations",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alpha-mannosidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alpha_mannosidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte or fibroblast alpha-mannosidase enzyme assay",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary oligosaccharide analysis",
+          "cells": [
+            {
+              "text": "Mannose-rich compounds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAN2B1 gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic MAN2B1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and developmental assessment",
+          "cells": [
+            {
+              "text": "Neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha_mannosidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-mannosidosis or fucosidosis",
+          "cells": [
+            {
+              "text": "Other oligosaccharidosis"
+            },
+            {
+              "text": "Enzyme assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses",
+          "cells": [
+            {
+              "text": "Coarse facies and dysostosis multiplex"
+            },
+            {
+              "text": "Urinary glycosaminoglycans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspartylglucosaminuria or GM1 gangliosidosis",
+          "cells": [
+            {
+              "text": "Other storage disorder"
+            },
+            {
+              "text": "Enzyme assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialidosis and galactosialidosis",
+          "cells": [
+            {
+              "text": "Cherry-red spot and skeletal change"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha_mannosidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Velmanase alfa enzyme replacement",
+          "cells": [
+            {
+              "text": "Non-neurological manifestations"
+            },
+            {
+              "text": "Specific disease-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Early disease"
+            },
+            {
+              "text": "Considered to modify progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids or cochlear implants",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            },
+            {
+              "text": "Audiological management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of infections and maintained immunisation",
+          "cells": [
+            {
+              "text": "Immune dysfunction"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, orthopaedic input and educational support",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex and development"
+            },
+            {
+              "text": "Skeletal and developmental care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric and confusion monitoring",
+          "cells": [
+            {
+              "text": "Adolescent and adult episodes"
+            },
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alpha_mannosidosis-dx-mgmt",
+      "title": "Diagnosis and management of Alpha-mannosidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intellectual disability, hearing loss and skeletal change with coarse facies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe recurrent infection, neurological decline or cord compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and spinal assessment; treat infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzyme assay; urinary oligosaccharides; MAN2B1; audiology; skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low alpha-mannosidase with biallelic MAN2B1 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Velmanase alfa for non-neurological disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review MPS, beta-mannosidosis, fucosidosis and aspartylglucosaminuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider stem cell transplant in early disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids or cochlear implants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and orthopaedic input for skeletal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe infantile form is rapid; milder forms survive into adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

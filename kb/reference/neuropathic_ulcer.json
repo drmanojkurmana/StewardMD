@@ -1,177 +1,446 @@
 {
- "id": "neuropathic_ulcer",
- "name": "Neuropathic ulcer",
- "aliases": [
-  "neurotrophic ulcer",
-  "mal perforans",
-  "trophic ulcer"
- ],
- "class": "non_infective",
- "system": "Nervous system / Skin (foot)",
- "specialty": "Podiatry / Neurology / Diabetology",
- "referenceOnly": true,
- "reference": {
-  "source": "IWGDF / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral neuropathy, where loss of protective sensation allows repetitive unnoticed trauma",
-   "They are classically painless, punched-out ulcers rimmed by callus, located over weight-bearing sites such as the metatarsal heads, plantar surface and heel, the plantar lesion being termed mal perforans",
-   "Diabetes mellitus is the commonest cause worldwide, but leprosy, alcohol-related and nutritional neuropathies including B12 deficiency, hereditary sensory neuropathies and tabes dorsalis are also recognised",
-   "Motor neuropathy causes intrinsic muscle wasting and foot deformity such as clawing and prominent metatarsal heads, which increase focal pressure, while autonomic neuropathy produces dry, fissured skin prone to breakdown",
-   "Peripheral pulses are usually present and the foot is often warm and well perfused, distinguishing a purely neuropathic from an ischaemic ulcer",
-   "Assessment includes testing protective sensation with a monofilament and vibration, inspecting for deformity and callus, and evaluating perfusion to detect any coexisting arterial disease",
-   "Management centres on offloading pressure with total-contact casting, therapeutic footwear or orthoses, regular debridement of callus and wound, infection control and treatment of the underlying cause",
-   "Charcot neuroarthropathy should be considered in a warm, swollen, deformed neuropathic foot, as it can coexist with or mimic infection"
+  "id": "neuropathic_ulcer",
+  "name": "Neuropathic ulcer",
+  "aliases": [
+    "neurotrophic ulcer",
+    "mal perforans",
+    "trophic ulcer"
   ],
-  "pathophysiology": "Sensory neuropathy removes the pain that normally prompts a person to offload an injured area, so repetitive mechanical stress at pressure points goes unrecognised and produces callus, subkeratotic haemorrhage and eventual tissue breakdown. Motor neuropathy weakens the intrinsic foot muscles and alters the architecture of the foot, redistributing load onto the metatarsal heads and other prominences and raising focal plantar pressures. Autonomic neuropathy reduces sweating, leaving dry, fissured skin and altering local blood flow through arteriovenous shunting. Together these deficits generate a chronic ulcer over a pressure point that will not heal, and will recur, unless the mechanical load is redistributed.",
-  "additionalDifferentials": [
-   "Arterial (ischaemic) ulcer",
-   "Diabetic foot ulcer with a neuroischaemic component",
-   "Venous leg ulcer",
-   "Infected ulcer with underlying osteomyelitis",
-   "Charcot neuroarthropathy with ulceration",
-   "Malignant ulcer such as a Marjolin ulcer",
-   "Plantar callus or verruca without true ulceration"
-  ],
-  "additionalInvestigations": [
-   "Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds",
-   "Ankle-brachial index, toe pressures and duplex to assess perfusion",
-   "Plain radiograph and MRI to detect osteomyelitis or Charcot changes",
-   "Wound or deep tissue culture and inflammatory markers if infection is suspected",
-   "Blood glucose and glycated haemoglobin, vitamin B12 and other tests to identify the cause of neuropathy",
-   "Nerve conduction studies where the underlying cause is unclear"
-  ],
-  "redFlags": [
-   "Signs of deep infection or osteomyelitis such as the ability to probe to bone, purulent discharge or systemic features",
-   "A warm, swollen, deformed foot suggesting Charcot neuroarthropathy",
-   "Spreading cellulitis or systemic sepsis",
-   "New ischaemic changes indicating superimposed arterial disease"
-  ],
-  "prognosis": "With effective offloading and management of the underlying cause, neuropathic ulcers often heal, but recurrence is high because the neuropathy is usually irreversible, and deep infection can threaten the limb.",
-  "pitfalls": [
-   "Overlooking coexisting arterial disease in an apparently neuropathic ulcer",
-   "Providing inadequate offloading so the ulcer persists",
-   "Missing underlying osteomyelitis",
-   "Confusing Charcot neuroarthropathy with infection or vice versa",
-   "Failing to investigate non-diabetic causes of neuropathy, or assuming that painlessness excludes serious infection"
-  ],
-  "references": [
-   "International Working Group on the Diabetic Foot (IWGDF) guidelines",
-   "NICE guidance on diabetic foot problems",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses, the cornerstone of healing",
-   "Debride callus and non-viable tissue and provide regular wound care with appropriate dressings and moisture balance",
-   "Treat the underlying cause of the neuropathy, optimising glycaemic control in diabetes, replacing vitamin B12 and addressing alcohol or nutritional deficiency",
-   "Assess perfusion and refer for revascularisation where coexisting arterial disease is found",
-   "Treat infection with antibiotics guided by cultures and investigate for osteomyelitis and Charcot changes when suspected",
-   "Educate on daily foot inspection, skin care and emollients for dry fissured skin, and provide correct footwear to prevent recurrence",
-   "Refer to a multidisciplinary foot-care team spanning podiatry, diabetology, vascular surgery and orthotics for ongoing surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neuropathic_ulcer-pathway",
-   "title": "Neuropathic ulcer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral neuropathy, where loss of protective sensation allows repetitive unnoticed trauma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of deep infection or osteomyelitis such as the ability to probe to bone, purulent discharge or systemic features",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds, Ankle-brachial index, toe pressures and duplex to assess perfusion, Plain radiograph and MRI to detect osteomyelitis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses, the cornerstone of healing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking coexisting arterial disease in an apparently neuropathic ulcer"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neuropathic ulcer."
-  }
- ],
- "tables": [
-  {
-   "id": "neuropathic_ulcer-matrix",
-   "title": "Neuropathic ulcer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Skin (foot)",
+  "specialty": "Podiatry / Neurology / Diabetology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "IWGDF / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral neuropathy, where loss of protective sensation allows repetitive unnoticed trauma",
+      "They are classically painless, punched-out ulcers rimmed by callus, located over weight-bearing sites such as the metatarsal heads, plantar surface and heel, the plantar lesion being termed mal perforans",
+      "Diabetes mellitus is the commonest cause worldwide, but leprosy, alcohol-related and nutritional neuropathies including B12 deficiency, hereditary sensory neuropathies and tabes dorsalis are also recognised",
+      "Motor neuropathy causes intrinsic muscle wasting and foot deformity such as clawing and prominent metatarsal heads, which increase focal pressure, while autonomic neuropathy produces dry, fissured skin prone to breakdown",
+      "Peripheral pulses are usually present and the foot is often warm and well perfused, distinguishing a purely neuropathic from an ischaemic ulcer",
+      "Assessment includes testing protective sensation with a monofilament and vibration, inspecting for deformity and callus, and evaluating perfusion to detect any coexisting arterial disease",
+      "Management centres on offloading pressure with total-contact casting, therapeutic footwear or orthoses, regular debridement of callus and wound, infection control and treatment of the underlying cause",
+      "Charcot neuroarthropathy should be considered in a warm, swollen, deformed neuropathic foot, as it can coexist with or mimic infection"
     ],
-    [
-     "Key Investigations",
-     "Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds, Ankle-brachial index,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sensory neuropathy removes the pain that normally prompts a person to offload an injured area, so repetitive mechanical stress at pressure points goes unrecognised and produces callus, subkeratotic haemorrhage and eventual tissue breakdown. Motor neuropathy weakens the intrinsic foot muscles and alters the architecture of the foot, redistributing load onto the metatarsal heads and other prominences and raising focal plantar pressures. Autonomic neuropathy reduces sweating, leaving dry, fissured skin and altering local blood flow through arteriovenous shunting. Together these deficits generate a chronic ulcer over a pressure point that will not heal, and will recur, unless the mechanical load is redistributed.",
+    "additionalDifferentials": [
+      "Arterial (ischaemic) ulcer",
+      "Diabetic foot ulcer with a neuroischaemic component",
+      "Venous leg ulcer",
+      "Infected ulcer with underlying osteomyelitis",
+      "Charcot neuroarthropathy with ulceration",
+      "Malignant ulcer such as a Marjolin ulcer",
+      "Plantar callus or verruca without true ulceration"
     ],
-    [
-     "Primary Differentials",
-     "Arterial (ischaemic) ulcer, Diabetic foot ulcer with a neuroischaemic component, Venous leg ulcer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds",
+      "Ankle-brachial index, toe pressures and duplex to assess perfusion",
+      "Plain radiograph and MRI to detect osteomyelitis or Charcot changes",
+      "Wound or deep tissue culture and inflammatory markers if infection is suspected",
+      "Blood glucose and glycated haemoglobin, vitamin B12 and other tests to identify the cause of neuropathy",
+      "Nerve conduction studies where the underlying cause is unclear"
     ],
-    [
-     "Management Strategy",
-     "Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses,",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of deep infection or osteomyelitis such as the ability to probe to bone, purulent discharge or systemic features",
+      "A warm, swollen, deformed foot suggesting Charcot neuroarthropathy",
+      "Spreading cellulitis or systemic sepsis",
+      "New ischaemic changes indicating superimposed arterial disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking coexisting arterial disease in an apparently neuropathic ulcer",
-     "Prevent diagnostic or management error"
+    "prognosis": "With effective offloading and management of the underlying cause, neuropathic ulcers often heal, but recurrence is high because the neuropathy is usually irreversible, and deep infection can threaten the limb.",
+    "pitfalls": [
+      "Overlooking coexisting arterial disease in an apparently neuropathic ulcer",
+      "Providing inadequate offloading so the ulcer persists",
+      "Missing underlying osteomyelitis",
+      "Confusing Charcot neuroarthropathy with infection or vice versa",
+      "Failing to investigate non-diabetic causes of neuropathy, or assuming that painlessness excludes serious infection"
+    ],
+    "references": [
+      "International Working Group on the Diabetic Foot (IWGDF) guidelines",
+      "NICE guidance on diabetic foot problems",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses, the cornerstone of healing",
+      "Debride callus and non-viable tissue and provide regular wound care with appropriate dressings and moisture balance",
+      "Treat the underlying cause of the neuropathy, optimising glycaemic control in diabetes, replacing vitamin B12 and addressing alcohol or nutritional deficiency",
+      "Assess perfusion and refer for revascularisation where coexisting arterial disease is found",
+      "Treat infection with antibiotics guided by cultures and investigate for osteomyelitis and Charcot changes when suspected",
+      "Educate on daily foot inspection, skin care and emollients for dry fissured skin, and provide correct footwear to prevent recurrence",
+      "Refer to a multidisciplinary foot-care team spanning podiatry, diabetology, vascular surgery and orthotics for ongoing surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for neuropathic ulcer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neuropathic-ulcer-real-image",
-   "title": "Neuropathic ulcer: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neuropathic_ulcer-pathway",
+      "title": "Neuropathic ulcer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral neuropathy, where loss of protective sensation allows repetitive unnoticed trauma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of deep infection or osteomyelitis such as the ability to probe to bone, purulent discharge or systemic features",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds, Ankle-brachial index, toe pressures and duplex to assess perfusion, Plain radiograph and MRI to detect osteomyelitis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses, the cornerstone of healing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking coexisting arterial disease in an apparently neuropathic ulcer"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neuropathic ulcer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neuropathic_ulcer-matrix",
+      "title": "Neuropathic ulcer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neuropathic ulcers develop over pressure-bearing areas in patients with sensory, and often autonomic and motor, peripheral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Testing of protective sensation with a monofilament and of vibration or quantitative sensory thresholds, Ankle-brachial index,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arterial (ischaemic) ulcer, Diabetic foot ulcer with a neuroischaemic component, Venous leg ulcer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Redistribute mechanical load by offloading with total-contact casting, removable walker boots or bespoke footwear and orthoses,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking coexisting arterial disease in an apparently neuropathic ulcer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neuropathic ulcer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "IWGDF / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuropathic_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Monofilament and vibration or quantitative sensory testing",
+          "cells": [
+            {
+              "text": "Loss of protective sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index, toe pressures and duplex",
+          "cells": [
+            {
+              "text": "Coexisting arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiograph and MRI",
+          "cells": [
+            {
+              "text": "Osteomyelitis or Charcot change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound assessment and culture",
+          "cells": [
+            {
+              "text": "Infection severity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuropathic_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial (ischaemic) ulcer",
+          "cells": [
+            {
+              "text": "Pain and poor perfusion; must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroischaemic diabetic foot ulcer",
+          "cells": [
+            {
+              "text": "Mixed neuropathic and vascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot neuroarthropathy with ulceration",
+          "cells": [
+            {
+              "text": "Warm, swollen, deformed foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infected ulcer with osteomyelitis",
+          "cells": [
+            {
+              "text": "Probe-to-bone and imaging decide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant ulcer such as Marjolin ulcer",
+          "cells": [
+            {
+              "text": "Ulcer that fails to heal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuropathic_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Offloading",
+          "cells": [
+            {
+              "text": "Total-contact casting, removable walker boots or bespoke footwear; cornerstone of healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Debridement and wound care",
+          "cells": [
+            {
+              "text": "Remove callus and non-viable tissue; appropriate dressings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat infection or osteomyelitis",
+          "cells": [
+            {
+              "text": "Antibiotics and surgical review when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address perfusion",
+          "cells": [
+            {
+              "text": "Treat arterial disease alongside offloading"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuropathic_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Neuropathic ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless punched-out ulcer over a pressure point in a patient with peripheral neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (probe-to-bone, purulent discharge, cellulitis or sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics and surgical review for deep infection or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Protective sensation testing, ankle-brachial index, radiograph or MRI, wound culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neuropathy with a pressure ulcer and no significant arterial disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arterial, Charcot or malignant ulcer; reassess perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offload with total-contact casting or a removable walker boot",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Debride callus and provide regular wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat infection or osteomyelitis as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address coexisting arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often heals with offloading, but recurrence is high and deep infection threatens the limb",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,471 @@
 {
- "id": "inflammatory_aortic_aneurysm",
- "name": "Inflammatory abdominal aortic aneurysm",
- "aliases": [
-  "inflammatory AAA",
-  "IAAA",
-  "inflammatory abdominal aortic aneurysm",
-  "chronic periaortitis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / vascular surgery guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
-   "Classically presents with the triad of chronic abdominal or back pain, weight loss, and a raised erythrocyte sedimentation rate",
-   "CT shows a thickened aneurysm wall with a periaortic soft-tissue cuff that typically spares the posterior wall",
-   "Adjacent structures such as the ureters and duodenum may be encased, causing obstruction",
-   "It overlaps with chronic periaortitis and IgG4-related disease in some patients",
-   "Inflammatory markers are frequently elevated, unlike in ordinary atherosclerotic aneurysm",
-   "Surgical or endovascular repair follows standard aneurysm size and symptom thresholds, with attention to the inflammatory tissue"
+  "id": "inflammatory_aortic_aneurysm",
+  "name": "Inflammatory abdominal aortic aneurysm",
+  "aliases": [
+    "inflammatory AAA",
+    "IAAA",
+    "inflammatory abdominal aortic aneurysm",
+    "chronic periaortitis"
   ],
-  "pathophysiology": "Inflammatory abdominal aortic aneurysm is characterised by a dense chronic inflammatory and fibrotic reaction in the aneurysm wall and surrounding retroperitoneum, superimposed on aneurysmal degeneration. Transmural lymphoplasmacytic infiltration, medial destruction, and adventitial fibrosis thicken the wall and generate a periaortic inflammatory mass that can entrap the ureters and bowel. The process shares features with chronic periaortitis and, in some cases, IgG4-related disease, and the inflammation contributes to pain, systemic symptoms, and adhesion of adjacent structures.",
-  "additionalDifferentials": [
-   "Atherosclerotic (degenerative) abdominal aortic aneurysm",
-   "IgG4-related periaortitis",
-   "Idiopathic retroperitoneal fibrosis",
-   "Infective (mycotic) aneurysm",
-   "Large-vessel vasculitis involving the aorta",
-   "Retroperitoneal malignancy"
-  ],
-  "additionalInvestigations": [
-   "CT or MR angiography demonstrating wall thickening and a periaortic cuff",
-   "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
-   "Serum IgG4 to assess for an IgG4-related component",
-   "Renal function and urinary tract imaging for ureteric obstruction",
-   "PET imaging in selected cases to gauge inflammatory activity",
-   "Blood cultures when infective aneurysm must be excluded"
-  ],
-  "redFlags": [
-   "Sudden severe pain or haemodynamic instability suggesting rupture",
-   "Rapid aneurysm expansion on imaging",
-   "Obstructive uropathy with deteriorating renal function",
-   "Features suggesting infective aetiology such as fever and positive cultures"
-  ],
-  "prognosis": "Repair of the aneurysm carries the usual operative considerations, and the periaortic inflammation often regresses afterwards; where an underlying inflammatory or IgG4-related process persists, immunosuppression and surveillance are added. Overall prognosis after treatment is generally good, though ureteric involvement may need separate management.",
-  "pitfalls": [
-   "Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation",
-   "Overlooking ureteric entrapment and obstructive uropathy",
-   "Failing to consider IgG4-related disease as an underlying cause",
-   "Not excluding an infective (mycotic) aneurysm before assuming inflammation is sterile"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "Society for Vascular Surgery aortic aneurysm guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk",
-   "Suppress the periaortic inflammation with corticosteroids, adding steroid-sparing immunosuppression or rituximab where an IgG4-related or chronic periaortitis component persists",
-   "Relieve ureteric obstruction with ureteric stenting or ureterolysis to protect renal function",
-   "Control cardiovascular risk factors with antihypertensives, statin therapy and smoking cessation",
-   "Monitor with serial cross-sectional imaging, inflammatory markers and renal function to track regression of the inflammatory cuff and detect complications",
-   "Manage jointly with vascular surgery and rheumatology, escalating to urgent repair for symptoms suggesting expansion or rupture"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "inflammatory_aortic_aneurysm-pathway",
-   "title": "Inflammatory abdominal aortic aneurysm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe pain or haemodynamic instability suggesting rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT or MR angiography demonstrating wall thickening and a periaortic cuff, Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein), Serum IgG4 to assess for an IgG4-related component"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of inflammatory abdominal aortic aneurysm."
-  }
- ],
- "tables": [
-  {
-   "id": "inflammatory_aortic_aneurysm-matrix",
-   "title": "Inflammatory abdominal aortic aneurysm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / vascular surgery guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
+      "Classically presents with the triad of chronic abdominal or back pain, weight loss, and a raised erythrocyte sedimentation rate",
+      "CT shows a thickened aneurysm wall with a periaortic soft-tissue cuff that typically spares the posterior wall",
+      "Adjacent structures such as the ureters and duodenum may be encased, causing obstruction",
+      "It overlaps with chronic periaortitis and IgG4-related disease in some patients",
+      "Inflammatory markers are frequently elevated, unlike in ordinary atherosclerotic aneurysm",
+      "Surgical or endovascular repair follows standard aneurysm size and symptom thresholds, with attention to the inflammatory tissue"
     ],
-    [
-     "Key Investigations",
-     "CT or MR angiography demonstrating wall thickening and a periaortic cuff, Inflammatory markers (erythrocyte sedimentation rate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inflammatory abdominal aortic aneurysm is characterised by a dense chronic inflammatory and fibrotic reaction in the aneurysm wall and surrounding retroperitoneum, superimposed on aneurysmal degeneration. Transmural lymphoplasmacytic infiltration, medial destruction, and adventitial fibrosis thicken the wall and generate a periaortic inflammatory mass that can entrap the ureters and bowel. The process shares features with chronic periaortitis and, in some cases, IgG4-related disease, and the inflammation contributes to pain, systemic symptoms, and adhesion of adjacent structures.",
+    "additionalDifferentials": [
+      "Atherosclerotic (degenerative) abdominal aortic aneurysm",
+      "IgG4-related periaortitis",
+      "Idiopathic retroperitoneal fibrosis",
+      "Infective (mycotic) aneurysm",
+      "Large-vessel vasculitis involving the aorta",
+      "Retroperitoneal malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Atherosclerotic (degenerative) abdominal aortic aneurysm, IgG4-related periaortitis, Idiopathic retroperitoneal fibrosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT or MR angiography demonstrating wall thickening and a periaortic cuff",
+      "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
+      "Serum IgG4 to assess for an IgG4-related component",
+      "Renal function and urinary tract imaging for ureteric obstruction",
+      "PET imaging in selected cases to gauge inflammatory activity",
+      "Blood cultures when infective aneurysm must be excluded"
     ],
-    [
-     "Management Strategy",
-     "Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe pain or haemodynamic instability suggesting rupture",
+      "Rapid aneurysm expansion on imaging",
+      "Obstructive uropathy with deteriorating renal function",
+      "Features suggesting infective aetiology such as fever and positive cultures"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Repair of the aneurysm carries the usual operative considerations, and the periaortic inflammation often regresses afterwards; where an underlying inflammatory or IgG4-related process persists, immunosuppression and surveillance are added. Overall prognosis after treatment is generally good, though ureteric involvement may need separate management.",
+    "pitfalls": [
+      "Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation",
+      "Overlooking ureteric entrapment and obstructive uropathy",
+      "Failing to consider IgG4-related disease as an underlying cause",
+      "Not excluding an infective (mycotic) aneurysm before assuming inflammation is sterile"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "Society for Vascular Surgery aortic aneurysm guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk",
+      "Suppress the periaortic inflammation with corticosteroids, adding steroid-sparing immunosuppression or rituximab where an IgG4-related or chronic periaortitis component persists",
+      "Relieve ureteric obstruction with ureteric stenting or ureterolysis to protect renal function",
+      "Control cardiovascular risk factors with antihypertensives, statin therapy and smoking cessation",
+      "Monitor with serial cross-sectional imaging, inflammatory markers and renal function to track regression of the inflammatory cuff and detect complications",
+      "Manage jointly with vascular surgery and rheumatology, escalating to urgent repair for symptoms suggesting expansion or rupture"
     ]
-   ],
-   "caption": "Overview comparison matrix for inflammatory abdominal aortic aneurysm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "inflammatory-aortic-aneurysm-real-image",
-   "title": "Inflammatory abdominal aortic aneurysm: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "inflammatory_aortic_aneurysm-pathway",
+      "title": "Inflammatory abdominal aortic aneurysm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe pain or haemodynamic instability suggesting rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT or MR angiography demonstrating wall thickening and a periaortic cuff, Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein), Serum IgG4 to assess for an IgG4-related component"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of inflammatory abdominal aortic aneurysm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "inflammatory_aortic_aneurysm-matrix",
+      "title": "Inflammatory abdominal aortic aneurysm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subset of abdominal aortic aneurysms with a markedly thickened, inflamed wall and surrounding fibrosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT or MR angiography demonstrating wall thickening and a periaortic cuff, Inflammatory markers (erythrocyte sedimentation rate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atherosclerotic (degenerative) abdominal aortic aneurysm, IgG4-related periaortitis, Idiopathic retroperitoneal fibrosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Repair the aneurysm by open surgery or endovascular aneurysm repair according to size, morphology and rupture risk",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a simple degenerative aneurysm and missing the periaortic inflammation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for inflammatory abdominal aortic aneurysm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / vascular surgery guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inflammatory_aortic_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Wall thickening and periaortic cuff"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and C-reactive protein",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4",
+          "cells": [
+            {
+              "text": "IgG4-related component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinary tract imaging",
+          "cells": [
+            {
+              "text": "Ureteric obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET imaging",
+          "cells": [
+            {
+              "text": "Inflammatory activity in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Infective aneurysm excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_aortic_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atherosclerotic abdominal aortic aneurysm",
+          "cells": [
+            {
+              "text": "No thickened wall or periaortic cuff on CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related periaortitis",
+          "cells": [
+            {
+              "text": "Raised serum IgG4 with an IgG4-related component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective (mycotic) aneurysm",
+          "cells": [
+            {
+              "text": "Fever and positive blood cultures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_aortic_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aneurysm repair",
+          "cells": [
+            {
+              "text": "Open surgery or endovascular repair by size, morphology and rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periaortic inflammation",
+          "cells": [
+            {
+              "text": "Corticosteroids; steroid-sparing agent or rituximab if IgG4-related or chronic periaortitis persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteric obstruction",
+          "cells": [
+            {
+              "text": "Ureteric stenting or ureterolysis to protect renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk",
+          "cells": [
+            {
+              "text": "Antihypertensives, statin therapy and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial cross-sectional imaging, inflammatory markers and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent repair",
+          "cells": [
+            {
+              "text": "For symptoms suggesting expansion or rupture; joint vascular and rheumatology care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inflammatory_aortic_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Inflammatory abdominal aortic aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aneurysm with chronic abdominal or back pain, weight loss and raised ESR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden severe pain, rapid expansion, obstructive uropathy or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular surgery for rupture or expansion; relieve obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography, ESR, CRP, IgG4, renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thickened wall with periaortic cuff and infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerotic, IgG4-related or infective aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Open or endovascular repair by size and rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids; steroid-sparing agent or rituximab if IgG4 component",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ureteric stenting or ureterolysis for obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control cardiovascular risk: antihypertensives, statin, stop smoking",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial imaging, markers and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Repair as indicated; inflammatory cuff monitored for regression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,171 +1,447 @@
 {
- "id": "angioleiomyoma",
- "name": "Angioleiomyoma",
- "aliases": [
-  "Vascular leiomyoma",
-  "Angiomyoma"
- ],
- "class": "non_infective",
- "system": "Skin / Soft tissue",
- "specialty": "Soft tissue pathology / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
-   "It classically presents as a small, solitary, often painful subcutaneous nodule on the lower limb, particularly around the ankle and calf",
-   "There is a female predominance and a peak in middle adulthood, and pain may be provoked by cold, pressure, or pregnancy",
-   "Three histological subtypes are recognised: solid, venous, and cavernous, according to the calibre and character of the vessels",
-   "Microscopically, well-differentiated smooth muscle bundles are arranged around and between vascular channels, staining for smooth muscle actin and desmin",
-   "It is one of the classic painful subcutaneous tumours to consider alongside glomus tumour, angiolipoma, and neuroma",
-   "The lesion is well circumscribed and does not infiltrate surrounding tissue",
-   "Simple excision is curative and recurrence is not expected"
+  "id": "angioleiomyoma",
+  "name": "Angioleiomyoma",
+  "aliases": [
+    "Vascular leiomyoma",
+    "Angiomyoma"
   ],
-  "pathophysiology": "Angioleiomyoma is a benign neoplasm of smooth muscle that originates from the tunica media of veins within the dermis and subcutis. The tumour is composed of mature, cytologically bland smooth muscle cells that sweep around numerous vascular lumina, with the relative proportion of muscle to vessels and the vessel calibre defining the solid, venous, and cavernous subtypes. The intimate admixture of contractile smooth muscle and vessels is thought to account for the characteristic pain, which may arise from contraction of the muscular component or from local ischaemia and is often precipitated by cold or pressure. The lesion is encapsulated or well demarcated, grows slowly by expansion, and has no capacity for local infiltration or metastasis, in keeping with its benign nature.",
-  "additionalDifferentials": [
-   "Glomus tumour and other painful subcutaneous tumours",
-   "Angiolipoma",
-   "Schwannoma or traumatic neuroma",
-   "Dermatofibroma",
-   "Haemangioma or vascular malformation",
-   "Leiomyoma of pilar or genital type at other sites"
-  ],
-  "additionalInvestigations": [
-   "Ultrasound to characterise the subcutaneous nodule and its vascularity",
-   "MRI when a deeper or larger lesion requires characterisation",
-   "Excisional biopsy for definitive diagnosis",
-   "Histology demonstrating smooth muscle bundles around vessels",
-   "Immunohistochemistry for smooth muscle actin and desmin",
-   "Clinical correlation with the pattern of pain and provoking factors"
-  ],
-  "redFlags": [
-   "Rapid growth, large size, or a deep location atypical for a benign lesion",
-   "Cytological atypia or mitotic activity suggesting a leiomyosarcoma",
-   "Recurrence after excision",
-   "Multiplicity prompting consideration of a syndromic smooth muscle disorder"
-  ],
-  "prognosis": "Angioleiomyoma is benign, and simple complete excision is curative with recurrence being very uncommon. Malignant transformation does not occur, and the main benefit of excision is relief of the often troublesome pain.",
-  "pitfalls": [
-   "Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule",
-   "Confusing the vascular architecture with a haemangioma or vascular malformation",
-   "Overlooking atypical features that would suggest a smooth muscle malignancy",
-   "Attributing chronic limb pain to another cause and delaying diagnosis"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision, which is curative and relieves the characteristic pain",
-   "Histological confirmation with smooth muscle actin and desmin staining to establish the diagnosis",
-   "Simple analgesia and avoidance of provoking factors such as cold and pressure while awaiting excision",
-   "Ultrasound or MRI characterisation of the nodule when the diagnosis or extent is uncertain before surgery",
-   "Reassurance regarding the benign nature, with malignant transformation not occurring and recurrence very uncommon after complete removal"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angioleiomyoma-pathway",
-   "title": "Angioleiomyoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, large size, or a deep location atypical for a benign lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI when a deeper or larger lesion requires characterisation, Excisional biopsy for definitive diagnosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision, which is curative and relieves the characteristic pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angioleiomyoma."
-  }
- ],
- "tables": [
-  {
-   "id": "angioleiomyoma-matrix",
-   "title": "Angioleiomyoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Soft tissue",
+  "specialty": "Soft tissue pathology / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
+      "It classically presents as a small, solitary, often painful subcutaneous nodule on the lower limb, particularly around the ankle and calf",
+      "There is a female predominance and a peak in middle adulthood, and pain may be provoked by cold, pressure, or pregnancy",
+      "Three histological subtypes are recognised: solid, venous, and cavernous, according to the calibre and character of the vessels",
+      "Microscopically, well-differentiated smooth muscle bundles are arranged around and between vascular channels, staining for smooth muscle actin and desmin",
+      "It is one of the classic painful subcutaneous tumours to consider alongside glomus tumour, angiolipoma, and neuroma",
+      "The lesion is well circumscribed and does not infiltrate surrounding tissue",
+      "Simple excision is curative and recurrence is not expected"
     ],
-    [
-     "Key Investigations",
-     "Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI when a deeper or larger lesion requires",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angioleiomyoma is a benign neoplasm of smooth muscle that originates from the tunica media of veins within the dermis and subcutis. The tumour is composed of mature, cytologically bland smooth muscle cells that sweep around numerous vascular lumina, with the relative proportion of muscle to vessels and the vessel calibre defining the solid, venous, and cavernous subtypes. The intimate admixture of contractile smooth muscle and vessels is thought to account for the characteristic pain, which may arise from contraction of the muscular component or from local ischaemia and is often precipitated by cold or pressure. The lesion is encapsulated or well demarcated, grows slowly by expansion, and has no capacity for local infiltration or metastasis, in keeping with its benign nature.",
+    "additionalDifferentials": [
+      "Glomus tumour and other painful subcutaneous tumours",
+      "Angiolipoma",
+      "Schwannoma or traumatic neuroma",
+      "Dermatofibroma",
+      "Haemangioma or vascular malformation",
+      "Leiomyoma of pilar or genital type at other sites"
     ],
-    [
-     "Primary Differentials",
-     "Glomus tumour and other painful subcutaneous tumours, Angiolipoma, Schwannoma or traumatic neuroma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ultrasound to characterise the subcutaneous nodule and its vascularity",
+      "MRI when a deeper or larger lesion requires characterisation",
+      "Excisional biopsy for definitive diagnosis",
+      "Histology demonstrating smooth muscle bundles around vessels",
+      "Immunohistochemistry for smooth muscle actin and desmin",
+      "Clinical correlation with the pattern of pain and provoking factors"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision, which is curative and relieves the characteristic pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, large size, or a deep location atypical for a benign lesion",
+      "Cytological atypia or mitotic activity suggesting a leiomyosarcoma",
+      "Recurrence after excision",
+      "Multiplicity prompting consideration of a syndromic smooth muscle disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule",
-     "Prevent diagnostic or management error"
+    "prognosis": "Angioleiomyoma is benign, and simple complete excision is curative with recurrence being very uncommon. Malignant transformation does not occur, and the main benefit of excision is relief of the often troublesome pain.",
+    "pitfalls": [
+      "Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule",
+      "Confusing the vascular architecture with a haemangioma or vascular malformation",
+      "Overlooking atypical features that would suggest a smooth muscle malignancy",
+      "Attributing chronic limb pain to another cause and delaying diagnosis"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision, which is curative and relieves the characteristic pain",
+      "Histological confirmation with smooth muscle actin and desmin staining to establish the diagnosis",
+      "Simple analgesia and avoidance of provoking factors such as cold and pressure while awaiting excision",
+      "Ultrasound or MRI characterisation of the nodule when the diagnosis or extent is uncertain before surgery",
+      "Reassurance regarding the benign nature, with malignant transformation not occurring and recurrence very uncommon after complete removal"
     ]
-   ],
-   "caption": "Overview comparison matrix for angioleiomyoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angioleiomyoma-real-image",
-   "title": "Angioleiomyoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "angioleiomyoma-pathway",
+      "title": "Angioleiomyoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, large size, or a deep location atypical for a benign lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI when a deeper or larger lesion requires characterisation, Excisional biopsy for definitive diagnosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision, which is curative and relieves the characteristic pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angioleiomyoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angioleiomyoma-matrix",
+      "title": "Angioleiomyoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign smooth muscle tumour arising from the muscular wall of veins, hence its vascular architecture",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ultrasound to characterise the subcutaneous nodule and its vascularity, MRI when a deeper or larger lesion requires",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glomus tumour and other painful subcutaneous tumours, Angiolipoma, Schwannoma or traumatic neuroma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision, which is curative and relieves the characteristic pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to include angioleiomyoma in the differential of a painful subcutaneous nodule",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angioleiomyoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angioleiomyoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the subcutaneous nodule and its vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises a deeper or larger lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Smooth muscle bundles around vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Smooth muscle actin and desmin staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angioleiomyoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemangioma or vascular malformation",
+          "cells": [
+            {
+              "text": "Vascular architecture can be mistaken for these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leiomyosarcoma",
+          "cells": [
+            {
+              "text": "Cytological atypia or mitotic activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angioleiomyoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Curative and relieves the characteristic pain"
+            },
+            {
+              "text": "Recurrence very uncommon after complete removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Smooth muscle actin and desmin staining"
+            },
+            {
+              "text": "Establishes the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia",
+          "cells": [
+            {
+              "text": "Avoid provoking factors such as cold and pressure"
+            },
+            {
+              "text": "While awaiting excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Characterise the nodule when diagnosis or extent is uncertain"
+            },
+            {
+              "text": "Before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, with no malignant transformation"
+            },
+            {
+              "text": "Explains the benign course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angioleiomyoma-dx-mgmt",
+      "title": "Diagnosis and management of Angioleiomyoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful subcutaneous nodule from venous smooth muscle, with vascular pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid growth, large size or atypical deep site?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent excision and histology to exclude leiomyosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, MRI if deeper, excisional biopsy with smooth muscle markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology shows smooth muscle bundles around vessels?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete surgical excision, curative and relieves pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging or biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia; avoid cold and pressure while awaiting excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ultrasound or MRI to characterise extent before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: benign, with no malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence very uncommon after complete excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

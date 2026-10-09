@@ -213,25 +213,1067 @@
       "caption": "Diagnostic and clinical overview matrix for deep vein thrombosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "dvt-real-image",
-      "title": "Deep vein thrombosis: Diagnostic Peripheral Blood Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-      "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Deep Venous Thrombosis",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/deep-venous-thrombosis-dvt",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 347-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 118-9",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 58-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 118-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 118-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 118-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dvt-diagnostic",
+      "kind": "diagnostic",
+      "title": "Wells score and tests for suspected DVT",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Points or threshold",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Erythrocyte Indices",
-          "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+          "parameter": "Wells items",
+          "cells": [
+            {
+              "text": "1 each: vein tenderness, whole-leg swelling, calf >3 cm larger, pitting oedema, collateral veins, active cancer, immobilisation, surgery in 4 weeks, prior DVT"
+            },
+            {
+              "text": "Minus 2 if another diagnosis is as likely"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Leukocyte Differential",
-          "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+          "parameter": "Wells high",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=3",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "High probability; ultrasound"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Platelet Count",
-          "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+          "parameter": "Wells moderate",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 to 2",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "D-dimer or ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells low",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "<=0",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "text": "{{hy:Negative D-dimer excludes DVT}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D-dimer accuracy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 96%, specificity about 37%"
+            },
+            {
+              "text": "Positive result needs imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Compression ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 90%, specificity about 98%"
+            },
+            {
+              "text": "Non-compressible vein is diagnostic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Ultrasound negative or indeterminate with high suspicion"
+            },
+            {
+              "text": "Pelvic veins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "D-dimer in inpatients",
+          "cells": [
+            {
+              "text": "Often raised by illness, surgery, pregnancy, cancer"
+            },
+            {
+              "text": "Rarely helpful"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source conflict: Merck allows an age-adjusted D-dimer (age x 10 ng/mL over 50 years); Harrison says this cut-off is endorsed for PE but not for suspected DVT."
+    },
+    {
+      "id": "dvt-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic DVT",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "{{hy:Fever and chills favour cellulitis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured Baker cyst",
+          "cells": [
+            {
+              "text": "Sudden severe calf pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle strain or injury",
+          "cells": [
+            {
+              "text": "Clear trauma or exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency or post-thrombotic syndrome",
+          "cells": [
+            {
+              "text": "Long-standing swelling, skin change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superficial thrombophlebitis",
+          "cells": [
+            {
+              "text": "Tender palpable cord; can extend to deep veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "May-Thurner syndrome",
+          "cells": [
+            {
+              "text": "Recurrent left leg swelling in a young woman"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dvt-treatment",
+      "kind": "treatment",
+      "title": "Treatment of DVT",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Apixaban or rivaroxaban",
+          "cells": [
+            {
+              "text": "{{hy:Most patients; start without heparin lead-in}}"
+            },
+            {
+              "text": "Doses not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edoxaban or dabigatran",
+          "cells": [
+            {
+              "text": "After 5 days of parenteral heparin"
+            },
+            {
+              "text": "Parenteral lead-in required"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH or UFH then warfarin",
+          "cells": [
+            {
+              "text": "Antiphospholipid syndrome; other selected cases"
+            },
+            {
+              "text": "Warfarin within 24 h; overlap heparin 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH alone",
+          "cells": [
+            {
+              "text": "Extensive iliofemoral DVT or cancer"
+            },
+            {
+              "text": "Fondaparinux an alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration 3 to 6 months",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Provoked by a transient factor",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "Then stop"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extended anticoagulation",
+          "cells": [
+            {
+              "text": "Unprovoked, recurrent, cancer or thrombophilia"
+            },
+            {
+              "text": "Reassess periodically; reduced-dose DOAC possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serial ultrasound",
+          "cells": [
+            {
+              "text": "Isolated distal DVT without severe symptoms"
+            },
+            {
+              "text": "Anticoagulate if it extends"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVC filter",
+          "cells": [
+            {
+              "text": "Anticoagulation contraindicated"
+            },
+            {
+              "text": "Cuts acute PE, not mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter-directed thrombolysis",
+          "cells": [
+            {
+              "text": "Under 60, extensive iliofemoral DVT with limb threat (phlegmasia), low bleeding risk"
+            },
+            {
+              "text": "Higher bleeding risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "DOAC and LMWH doses are not stated in the source opened."
+    },
+    {
+      "id": "dvt-treatment-2",
+      "kind": "treatment",
+      "title": "Oral contraceptives: contraindications and disease risk",
+      "rowHeader": "Option",
+      "columns": [
+        "Details"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute contraindications",
+          "cells": [
+            {
+              "text": "Previous thromboembolic event or stroke; history of estrogen-dependent tumor; active liver disease; pregnancy; undiagnosed abnormal uterine bleeding; hypertriglyceridemia; women over 35 who smoke heavily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Relative contraindications",
+          "cells": [
+            {
+              "text": "Hypertension; women on anticonvulsant therapy; women after bariatric (malabsorptive) surgery"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: coronary heart disease",
+          "cells": [
+            {
+              "text": "Increased in smokers over 35; no relation to progestin type"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: hypertension",
+          "cells": [
+            {
+              "text": "Relative risk 1.8 in current users and 1.2 in previous users"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: venous thrombosis",
+          "cells": [
+            {
+              "text": "Relative risk about 4; may be higher with third-generation progestin, drospirenone, and the patch; compounded by obesity (tenfold risk compared with nonobese non-users); markedly increased with factor V Leiden or prothrombin-gene mutations"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: stroke",
+          "cells": [
+            {
+              "text": "Slight increase; relation to migraine headache unclear"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: cerebral vein thrombosis",
+          "cells": [
+            {
+              "text": "Relative risk about 13 to 15; synergistic with prothrombin-gene mutation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: cervical cancer",
+          "cells": [
+            {
+              "text": "Relative risk 2 to 4"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased risk: breast cancer",
+          "cells": [
+            {
+              "text": "May increase risk in carriers of BRCA1 and possibly BRCA2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decreased risk: ovarian cancer",
+          "cells": [
+            {
+              "text": "50% reduction in risk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decreased risk: endometrial cancer",
+          "cells": [
+            {
+              "text": "40% reduction in risk"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Cervical and breast cancer are printed run together on one line."
+    },
+    {
+      "id": "dvt-treatment-3",
+      "kind": "treatment",
+      "title": "Features of new oral anticoagulants",
+      "rowHeader": "Option",
+      "columns": [
+        "Rivaroxaban",
+        "Apixaban",
+        "Dabigatran etexilate"
+      ],
+      "rows": [
+        {
+          "parameter": "Target",
+          "cells": [
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "IIa"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Molecular weight",
+          "cells": [
+            {
+              "text": "436"
+            },
+            {
+              "text": "460"
+            },
+            {
+              "text": "628"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Prodrug",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bioavailability (%)",
+          "cells": [
+            {
+              "text": "80"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "6"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Time to peak (h)",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "3"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Half-life (h)",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "9-14"
+            },
+            {
+              "text": "12-17"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Renal excretion (%)",
+          "cells": [
+            {
+              "text": "65"
+            },
+            {
+              "text": "25"
+            },
+            {
+              "text": "80"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Antidote",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The printed table is cut off at the right page edge; any further columns are unreadable."
+    },
+    {
+      "id": "dvt-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Risk factors for thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Risk factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous: inherited",
+          "cells": [
+            {
+              "text": "Factor V Leiden; prothrombin G20210A; antithrombin deficiency; protein C deficiency; protein S deficiency; elevated FVIII"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Venous: acquired",
+          "cells": [
+            {
+              "text": "Age; previous thrombosis; immobilization; major surgery; pregnancy and puerperium; hospitalization; obesity; infection; APC resistance (nongenetic); smoking"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Venous: unknown (*)",
+          "cells": [
+            {
+              "text": "Elevated factor II, IX, XI; elevated TAFI levels; low levels of TFPI"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Venous and arterial: inherited",
+          "cells": [
+            {
+              "text": "Homocystinuria; dysfibrinogenemia"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Venous and arterial: mixed (inherited and acquired)",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinemia"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Venous and arterial: acquired",
+          "cells": [
+            {
+              "text": "Malignancy; antiphospholipid antibody syndrome; hormonal therapy; polycythemia vera; essential thrombocythemia; paroxysmal nocturnal hemoglobinuria; thrombotic thrombocytopenic purpura; heparin-induced thrombocytopenia; disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The footnote text for the asterisk is cut off at the bottom of the printed page."
+    },
+    {
+      "id": "dvt-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Advantages of low-molecular-weight heparin over heparin",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Consequence"
+      ],
+      "rows": [
+        {
+          "parameter": "Better bioavailability and longer half-life after subcutaneous injection",
+          "cells": [
+            {
+              "text": "Can be given subcutaneously once or twice daily for both prophylaxis and treatment"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Dose-independent clearance",
+          "cells": [
+            {
+              "text": "Simplified dosing"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Predictable anticoagulant response",
+          "cells": [
+            {
+              "text": "Coagulation monitoring is unnecessary in most patients"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Lower risk of heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Safer than heparin for short- or long-term administration"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Lower risk of osteoporosis",
+          "cells": [
+            {
+              "text": "Safer than heparin for extended administration"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "dvt-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Properties of lepirudin, bivalirudin and argatroban",
+      "rowHeader": "Property",
+      "columns": [
+        "Lepirudin",
+        "Bivalirudin",
+        "Argatroban"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular mass",
+          "cells": [
+            {
+              "text": "7000"
+            },
+            {
+              "text": "1980"
+            },
+            {
+              "text": "527"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Site(s) of interaction with thrombin",
+          "cells": [
+            {
+              "text": "Active site and exosite 1"
+            },
+            {
+              "text": "Active site and exosite 1"
+            },
+            {
+              "text": "Active site"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Renal clearance",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hepatic metabolism",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Plasma half-life (min)",
+          "cells": [
+            {
+              "text": "60"
+            },
+            {
+              "text": "25"
+            },
+            {
+              "text": "45"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "dvt-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Comparison of LMWH and fondaparinux",
+      "rowHeader": "Feature",
+      "columns": [
+        "LMWH",
+        "Fondaparinux"
+      ],
+      "rows": [
+        {
+          "parameter": "Number of saccharide units",
+          "cells": [
+            {
+              "text": "15-17"
+            },
+            {
+              "text": "5"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of factor Xa inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of thrombin inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Bioavailability after subcutaneous administration (%)",
+          "cells": [
+            {
+              "text": "90"
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Plasma half-life (h)",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "17"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Renal excretion",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Induces release of tissue factor pathway inhibitor",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Neutralized by protamine sulfate",
+          "cells": [
+            {
+              "text": "Partially"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dvt-dx-mgmt",
+      "title": "Diagnosis and management of suspected DVT",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful swollen leg",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Wells score",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Wells <=0 (low)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "D-dimer",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "D-dimer negative?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "DVT excluded; look for cellulitis, Baker cyst",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Compression ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Proximal DVT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Anticoagulate 3 to 6 months or longer if unprovoked",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Isolated distal DVT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial ultrasound; treat if it extends",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Repeat imaging or venography if suspicion high",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
         }
       ]
     }

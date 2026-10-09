@@ -1,173 +1,462 @@
 {
- "id": "macular_amyloidosis",
- "name": "Macular amyloidosis",
- "aliases": [
-  "macular cutaneous amyloidosis",
-  "macular amyloidosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules, often with a characteristic rippled or reticulate pattern",
-   "The classic site is the upper back, especially the interscapular region, and the extensor arms, and it may be extensive",
-   "The rippled interscapular pigmentation, sometimes related to friction from towels or brushes, is highly suggestive",
-   "As with lichen amyloidosis, the amyloid is keratin-derived and the disease is confined to the skin without systemic involvement",
-   "Chronic friction and scratching (for example from nylon towels or back-scratchers) are important contributory factors, giving overlap with friction amyloidosis and notalgia paraesthetica",
-   "More prevalent in people with darker skin from South-East Asia, the Middle East, and Latin America, and the lichen and macular forms can coexist as biphasic amyloidosis",
-   "Diagnosis rests on biopsy showing small deposits of amyloid in the papillary dermis with pigment incontinence, confirmed by Congo red staining and apple-green birefringence",
-   "Management focuses on reducing friction and itch by stopping vigorous rubbing and using topical corticosteroids, keratolytics, and phototherapy, generally with modest results"
+  "id": "macular_amyloidosis",
+  "name": "Macular amyloidosis",
+  "aliases": [
+    "macular cutaneous amyloidosis",
+    "macular amyloidosis"
   ],
-  "pathophysiology": "Macular amyloidosis, like the lichen form, involves deposition of keratin-derived amyloid in the papillary dermis. Repeated friction and scratching are believed to injure basal keratinocytes, which degenerate and release cytokeratin that is transformed into amyloid. Associated release of melanin into the dermis (pigment incontinence) accounts for the grey-brown discolouration and the rippled appearance. Because the amyloid originates from epidermal keratin rather than immunoglobulin, the process stays localised to the skin and carries no systemic risk, while ongoing friction sustains and extends the deposits.",
-  "additionalDifferentials": [
-   "Post-inflammatory hyperpigmentation",
-   "Notalgia paraesthetica",
-   "Ashy dermatosis / erythema dyschromicum perstans",
-   "Lichen amyloidosis (overlapping or biphasic disease)",
-   "Confluent and reticulated papillomatosis",
-   "Poikiloderma",
-   "Melasma (at other sites)"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence",
-   "Immunohistochemistry for cytokeratin to establish the keratinous origin",
-   "History of friction from towels or brushes and any associated notalgia paraesthetica",
-   "Wood's lamp examination or dermoscopy to characterise the pigmentary pattern",
-   "Exclusion of other causes of reticulate or rippled truncal pigmentation"
-  ],
-  "redFlags": [
-   "Atypical distribution prompting reconsideration and exclusion of systemic amyloidosis",
-   "Persistent neuropathic itch suggesting associated notalgia paraesthetica needing separate management",
-   "Diagnostic uncertainty with other pigmentary disorders requiring biopsy"
-  ],
-  "prognosis": "Benign and chronic; there is no systemic risk, but the pigmentation is persistent and often only partly responsive to treatment, tending to recur while friction continues.",
-  "pitfalls": [
-   "Treating it as simple post-inflammatory pigmentation and missing the amyloid",
-   "Failing to identify and stop the causative friction",
-   "Not recognising the overlap with notalgia paraesthetica",
-   "Assuming a link to systemic amyloidosis, which does not apply"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [
-   "lichen_amyloidosis"
-  ],
-  "management": [
-   "Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining cause",
-   "Break the itch-scratch cycle with emollients, topical corticosteroids and antipruritic agents such as menthol or a topical calcineurin inhibitor, with oral antihistamines for itch",
-   "Pigmentation-directed treatment with topical retinoids or keratolytics, and consideration of dermabrasion or Q-switched laser for persistent hyperpigmentation",
-   "Adjuncts for refractory pruritus including phototherapy and agents used in notalgia paraesthetica such as topical capsaicin, given the overlap",
-   "Reassurance and counselling that the condition is confined to the skin with no systemic amyloid risk",
-   "Set expectations of a chronic course with partial response and tendency to recur while friction continues, with dermatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "macular_amyloidosis-pathway",
-   "title": "Macular amyloidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules, often with a characteristic rippled or reticulate pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical distribution prompting reconsideration and exclusion of systemic amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence, Immunohistochemistry for cytokeratin to establish the keratinous origin, History of friction from towels or brushes and any"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining cause"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it as simple post-inflammatory pigmentation and missing the amyloid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of macular amyloidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "macular_amyloidosis-matrix",
-   "title": "Macular amyloidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules, often with a characteristic rippled or reticulate pattern",
+      "The classic site is the upper back, especially the interscapular region, and the extensor arms, and it may be extensive",
+      "The rippled interscapular pigmentation, sometimes related to friction from towels or brushes, is highly suggestive",
+      "As with lichen amyloidosis, the amyloid is keratin-derived and the disease is confined to the skin without systemic involvement",
+      "Chronic friction and scratching (for example from nylon towels or back-scratchers) are important contributory factors, giving overlap with friction amyloidosis and notalgia paraesthetica",
+      "More prevalent in people with darker skin from South-East Asia, the Middle East, and Latin America, and the lichen and macular forms can coexist as biphasic amyloidosis",
+      "Diagnosis rests on biopsy showing small deposits of amyloid in the papillary dermis with pigment incontinence, confirmed by Congo red staining and apple-green birefringence",
+      "Management focuses on reducing friction and itch by stopping vigorous rubbing and using topical corticosteroids, keratolytics, and phototherapy, generally with modest results"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence, Immunohistochemistry for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Macular amyloidosis, like the lichen form, involves deposition of keratin-derived amyloid in the papillary dermis. Repeated friction and scratching are believed to injure basal keratinocytes, which degenerate and release cytokeratin that is transformed into amyloid. Associated release of melanin into the dermis (pigment incontinence) accounts for the grey-brown discolouration and the rippled appearance. Because the amyloid originates from epidermal keratin rather than immunoglobulin, the process stays localised to the skin and carries no systemic risk, while ongoing friction sustains and extends the deposits.",
+    "additionalDifferentials": [
+      "Post-inflammatory hyperpigmentation",
+      "Notalgia paraesthetica",
+      "Ashy dermatosis / erythema dyschromicum perstans",
+      "Lichen amyloidosis (overlapping or biphasic disease)",
+      "Confluent and reticulated papillomatosis",
+      "Poikiloderma",
+      "Melasma (at other sites)"
     ],
-    [
-     "Primary Differentials",
-     "Post-inflammatory hyperpigmentation, Notalgia paraesthetica, Ashy dermatosis / erythema dyschromicum perstans",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence",
+      "Immunohistochemistry for cytokeratin to establish the keratinous origin",
+      "History of friction from towels or brushes and any associated notalgia paraesthetica",
+      "Wood's lamp examination or dermoscopy to characterise the pigmentary pattern",
+      "Exclusion of other causes of reticulate or rippled truncal pigmentation"
     ],
-    [
-     "Management Strategy",
-     "Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical distribution prompting reconsideration and exclusion of systemic amyloidosis",
+      "Persistent neuropathic itch suggesting associated notalgia paraesthetica needing separate management",
+      "Diagnostic uncertainty with other pigmentary disorders requiring biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it as simple post-inflammatory pigmentation and missing the amyloid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign and chronic; there is no systemic risk, but the pigmentation is persistent and often only partly responsive to treatment, tending to recur while friction continues.",
+    "pitfalls": [
+      "Treating it as simple post-inflammatory pigmentation and missing the amyloid",
+      "Failing to identify and stop the causative friction",
+      "Not recognising the overlap with notalgia paraesthetica",
+      "Assuming a link to systemic amyloidosis, which does not apply"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [
+      "lichen_amyloidosis"
+    ],
+    "management": [
+      "Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining cause",
+      "Break the itch-scratch cycle with emollients, topical corticosteroids and antipruritic agents such as menthol or a topical calcineurin inhibitor, with oral antihistamines for itch",
+      "Pigmentation-directed treatment with topical retinoids or keratolytics, and consideration of dermabrasion or Q-switched laser for persistent hyperpigmentation",
+      "Adjuncts for refractory pruritus including phototherapy and agents used in notalgia paraesthetica such as topical capsaicin, given the overlap",
+      "Reassurance and counselling that the condition is confined to the skin with no systemic amyloid risk",
+      "Set expectations of a chronic course with partial response and tendency to recur while friction continues, with dermatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for macular amyloidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "macular-amyloidosis-real-image",
-   "title": "Macular amyloidosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "macular_amyloidosis-pathway",
+      "title": "Macular amyloidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules, often with a characteristic rippled or reticulate pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical distribution prompting reconsideration and exclusion of systemic amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence, Immunohistochemistry for cytokeratin to establish the keratinous origin, History of friction from towels or brushes and any"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining cause"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it as simple post-inflammatory pigmentation and missing the amyloid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of macular amyloidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "macular_amyloidosis-matrix",
+      "title": "Macular amyloidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of primary localised cutaneous amyloidosis presenting as itchy, poorly defined, greyish-brown hyperpigmented macules,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with Congo red staining confirming papillary dermal amyloid and pigment incontinence, Immunohistochemistry for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Post-inflammatory hyperpigmentation, Notalgia paraesthetica, Ashy dermatosis / erythema dyschromicum perstans",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce chronic friction and scratching by avoiding nylon towels, back-scratchers and abrasive garments, addressing the sustaining",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it as simple post-inflammatory pigmentation and missing the amyloid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for macular amyloidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "macular_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with Congo red",
+          "cells": [
+            {
+              "text": "Papillary dermal amyloid and pigment incontinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytokeratin immunohistochemistry",
+          "cells": [
+            {
+              "text": "Keratinous origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Friction history from towels or brushes",
+          "cells": [
+            {
+              "text": "Sustaining cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp or dermoscopy",
+          "cells": [
+            {
+              "text": "Pigmentary pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of other rippled truncal pigmentation",
+          "cells": [
+            {
+              "text": "Differential confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macular_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-inflammatory hyperpigmentation",
+          "cells": [
+            {
+              "text": "Biopsy shows amyloid when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Notalgia paraesthetica",
+          "cells": [
+            {
+              "text": "Neuropathic itch overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen amyloidosis",
+          "cells": [
+            {
+              "text": "Papular form; can coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema dyschromicum perstans",
+          "cells": [
+            {
+              "text": "Ashy pigmentation pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macular_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop friction",
+          "cells": [
+            {
+              "text": "Avoid nylon towels, back-scratchers and abrasive garments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itch control",
+          "cells": [
+            {
+              "text": "Emollients, topical corticosteroids, menthol or topical calcineurin inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigmentation",
+          "cells": [
+            {
+              "text": "Topical retinoids or keratolytics; dermabrasion or Q-switched laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory itch",
+          "cells": [
+            {
+              "text": "Phototherapy or topical capsaicin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Skin-confined with no systemic amyloid risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "macular_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of Macular amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy greyish-brown rippled macules on the upper back and extensor arms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical distribution or persistent neuropathic itch)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: dermatology review for atypical distribution or diagnostic doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with Congo red, cytokeratin staining, friction history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show papillary dermal amyloid with pigment incontinence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider post-inflammatory change, notalgia paraesthetica or ashy dermatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop friction from towels, brushes and garments",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and topical corticosteroids for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical retinoids or keratolytics for pigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phototherapy or capsaicin for refractory pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure: skin-confined, with a chronic recurrent course",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and chronic; pigmentation partly responds and tends to recur with friction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

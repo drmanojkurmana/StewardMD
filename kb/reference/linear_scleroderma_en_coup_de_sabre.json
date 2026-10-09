@@ -1,179 +1,513 @@
 {
- "id": "linear_scleroderma_en_coup_de_sabre",
- "name": "Linear scleroderma en coup de sabre",
- "aliases": [
-  "En coup de sabre",
-  "Linear morphoea of the face",
-  "Frontoparietal linear scleroderma"
- ],
- "class": "non_infective",
- "system": "Integumentary system",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened to the stroke of a sabre.",
-   "Predominantly affects children and young adults and follows the lines of Blaschko, suggesting cutaneous mosaicism.",
-   "Overlaps with Parry-Romberg progressive hemifacial atrophy, which may represent a severe end of the same spectrum.",
-   "May extend beyond skin into subcutaneous tissue, muscle and underlying bone, producing facial asymmetry.",
-   "Neurological complications include seizures and headache, with ipsilateral white-matter change, calcification and atrophy seen on MRI.",
-   "Ocular and dental or orofacial abnormalities may occur on the affected side.",
-   "It is a localised, not systemic, sclerosing disorder, so Raynaud phenomenon and internal organ sclerosis are absent.",
-   "Active disease is treated with immunosuppression such as methotrexate with or without systemic corticosteroids, while established deformity may need later reconstructive surgery."
+  "id": "linear_scleroderma_en_coup_de_sabre",
+  "name": "Linear scleroderma en coup de sabre",
+  "aliases": [
+    "En coup de sabre",
+    "Linear morphoea of the face",
+    "Frontoparietal linear scleroderma"
   ],
-  "pathophysiology": "En coup de sabre is a form of localised scleroderma in which immune activation drives fibroblast stimulation, excessive collagen deposition and progressive sclerosis and atrophy of skin and deeper tissues in a linear, Blaschko-distributed segment of the face and scalp. Postulated mechanisms include autoimmune-mediated microvascular injury and inflammation, with possible roles for cutaneous mosaicism and, in some, antecedent trauma or infection as triggers; contiguous involvement of underlying structures accounts for the bony atrophy and neurological findings.",
-  "additionalDifferentials": [
-   "Parry-Romberg syndrome (progressive hemifacial atrophy)",
-   "Other morphoea subtypes (plaque, generalised)",
-   "Systemic sclerosis",
-   "Focal facial lipodystrophy or atrophy",
-   "Lupus panniculitis and discoid lupus erythematosus",
-   "Post-traumatic or post-surgical scarring",
-   "Scleroderma-like conditions such as porphyria or graft-versus-host disease"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy demonstrating dermal sclerosis",
-   "Autoantibody profile including antinuclear antibodies to characterise autoimmunity",
-   "MRI brain for intracranial involvement when neurological symptoms are present",
-   "MRI of the affected soft tissue and face to assess depth of involvement",
-   "Inflammatory markers to gauge disease activity",
-   "Ophthalmological and dental or maxillofacial assessment",
-   "Serial clinical photography with a validated skin activity score"
-  ],
-  "redFlags": [
-   "New seizures or focal neurological signs",
-   "Progressive extension across the midline or rapid deepening of the lesion",
-   "Ocular inflammation or visual symptoms",
-   "Involvement threatening growth of the facial skeleton in a child"
-  ],
-  "prognosis": "The disease often becomes inactive over years but leaves permanent atrophy and asymmetry; early immunosuppression can limit progression, while neurological and ocular involvement determine additional morbidity.",
-  "pitfalls": [
-   "Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation.",
-   "Underestimating deep and intracranial extension.",
-   "Delaying immunosuppression during the active inflammatory phase and allowing avoidable deformity.",
-   "Overlooking the overlap with Parry-Romberg syndrome.",
-   "Attempting reconstructive surgery before the disease is quiescent."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Consensus guidance on juvenile localised scleroderma (morphoea)",
-   "Standard textbook of paediatric rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids, to halt progression of sclerosis and atrophy",
-   "Use mycophenolate mofetil or other immunosuppressants for refractory or progressive disease",
-   "Provide physiotherapy and topical measures to maintain soft-tissue mobility and skin condition",
-   "Monitor disease activity clinically and with inflammatory markers and imaging to guide duration of immunosuppression",
-   "Undertake neurological surveillance with brain MRI where seizures or headache occur, treating seizures with antiseizure medication",
-   "Arrange ophthalmology and dental or maxillofacial assessment for the ocular and orofacial complications on the affected side",
-   "Offer reconstructive intervention such as autologous fat grafting or corrective surgery for established atrophy and asymmetry once disease is inactive",
-   "Coordinate care across dermatology, rheumatology and neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "linear_scleroderma_en_coup_de_sabre-pathway",
-   "title": "Linear scleroderma en coup de sabre: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened to the stroke of a sabre.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New seizures or focal neurological signs",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy demonstrating dermal sclerosis, Autoantibody profile including antinuclear antibodies to characterise autoimmunity, MRI brain for intracranial involvement when neurological symptoms are present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids, to halt progression of sclerosis and atrophy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of linear scleroderma en coup de sabre."
-  }
- ],
- "tables": [
-  {
-   "id": "linear_scleroderma_en_coup_de_sabre-matrix",
-   "title": "Linear scleroderma en coup de sabre: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary system",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened to the stroke of a sabre.",
+      "Predominantly affects children and young adults and follows the lines of Blaschko, suggesting cutaneous mosaicism.",
+      "Overlaps with Parry-Romberg progressive hemifacial atrophy, which may represent a severe end of the same spectrum.",
+      "May extend beyond skin into subcutaneous tissue, muscle and underlying bone, producing facial asymmetry.",
+      "Neurological complications include seizures and headache, with ipsilateral white-matter change, calcification and atrophy seen on MRI.",
+      "Ocular and dental or orofacial abnormalities may occur on the affected side.",
+      "It is a localised, not systemic, sclerosing disorder, so Raynaud phenomenon and internal organ sclerosis are absent.",
+      "Active disease is treated with immunosuppression such as methotrexate with or without systemic corticosteroids, while established deformity may need later reconstructive surgery."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy demonstrating dermal sclerosis, Autoantibody profile including antinuclear antibodies to characterise autoimmunity,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "En coup de sabre is a form of localised scleroderma in which immune activation drives fibroblast stimulation, excessive collagen deposition and progressive sclerosis and atrophy of skin and deeper tissues in a linear, Blaschko-distributed segment of the face and scalp. Postulated mechanisms include autoimmune-mediated microvascular injury and inflammation, with possible roles for cutaneous mosaicism and, in some, antecedent trauma or infection as triggers; contiguous involvement of underlying structures accounts for the bony atrophy and neurological findings.",
+    "additionalDifferentials": [
+      "Parry-Romberg syndrome (progressive hemifacial atrophy)",
+      "Other morphoea subtypes (plaque, generalised)",
+      "Systemic sclerosis",
+      "Focal facial lipodystrophy or atrophy",
+      "Lupus panniculitis and discoid lupus erythematosus",
+      "Post-traumatic or post-surgical scarring",
+      "Scleroderma-like conditions such as porphyria or graft-versus-host disease"
     ],
-    [
-     "Primary Differentials",
-     "Parry-Romberg syndrome (progressive hemifacial atrophy), Other morphoea subtypes (plaque, generalised), Systemic sclerosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy demonstrating dermal sclerosis",
+      "Autoantibody profile including antinuclear antibodies to characterise autoimmunity",
+      "MRI brain for intracranial involvement when neurological symptoms are present",
+      "MRI of the affected soft tissue and face to assess depth of involvement",
+      "Inflammatory markers to gauge disease activity",
+      "Ophthalmological and dental or maxillofacial assessment",
+      "Serial clinical photography with a validated skin activity score"
     ],
-    [
-     "Management Strategy",
-     "Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids,",
-     "Core treatment modality"
+    "redFlags": [
+      "New seizures or focal neurological signs",
+      "Progressive extension across the midline or rapid deepening of the lesion",
+      "Ocular inflammation or visual symptoms",
+      "Involvement threatening growth of the facial skeleton in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease often becomes inactive over years but leaves permanent atrophy and asymmetry; early immunosuppression can limit progression, while neurological and ocular involvement determine additional morbidity.",
+    "pitfalls": [
+      "Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation.",
+      "Underestimating deep and intracranial extension.",
+      "Delaying immunosuppression during the active inflammatory phase and allowing avoidable deformity.",
+      "Overlooking the overlap with Parry-Romberg syndrome.",
+      "Attempting reconstructive surgery before the disease is quiescent."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Consensus guidance on juvenile localised scleroderma (morphoea)",
+      "Standard textbook of paediatric rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids, to halt progression of sclerosis and atrophy",
+      "Use mycophenolate mofetil or other immunosuppressants for refractory or progressive disease",
+      "Provide physiotherapy and topical measures to maintain soft-tissue mobility and skin condition",
+      "Monitor disease activity clinically and with inflammatory markers and imaging to guide duration of immunosuppression",
+      "Undertake neurological surveillance with brain MRI where seizures or headache occur, treating seizures with antiseizure medication",
+      "Arrange ophthalmology and dental or maxillofacial assessment for the ocular and orofacial complications on the affected side",
+      "Offer reconstructive intervention such as autologous fat grafting or corrective surgery for established atrophy and asymmetry once disease is inactive",
+      "Coordinate care across dermatology, rheumatology and neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for linear scleroderma en coup de sabre."
-  }
- ],
- "diagrams": [
-  {
-   "id": "linear-scleroderma-en-coup-de-sabre-real-image",
-   "title": "Linear scleroderma en coup de sabre: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "linear_scleroderma_en_coup_de_sabre-pathway",
+      "title": "Linear scleroderma en coup de sabre: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened to the stroke of a sabre.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New seizures or focal neurological signs",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy demonstrating dermal sclerosis, Autoantibody profile including antinuclear antibodies to characterise autoimmunity, MRI brain for intracranial involvement when neurological symptoms are present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids, to halt progression of sclerosis and atrophy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of linear scleroderma en coup de sabre."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-matrix",
+      "title": "Linear scleroderma en coup de sabre: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subtype of linear morphoea presenting as a linear, atrophic, sclerotic band on the frontoparietal scalp and forehead, likened",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy demonstrating dermal sclerosis, Autoantibody profile including antinuclear antibodies to characterise autoimmunity,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parry-Romberg syndrome (progressive hemifacial atrophy), Other morphoea subtypes (plaque, generalised), Systemic sclerosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute systemic immunosuppression during active disease, with methotrexate, frequently combined with systemic corticosteroids,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for systemic sclerosis and pursuing unnecessary internal-organ investigation.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for linear scleroderma en coup de sabre."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibodies and autoantibody profile",
+          "cells": [
+            {
+              "text": "Characterises autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Intracranial involvement when neurological symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the face and soft tissue",
+          "cells": [
+            {
+              "text": "Depth of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Disease activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and dental or maxillofacial assessment",
+          "cells": [
+            {
+              "text": "Ocular and orofacial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography with skin activity score",
+          "cells": [
+            {
+              "text": "Activity over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parry-Romberg syndrome",
+          "cells": [
+            {
+              "text": "Progressive hemifacial atrophy; possibly the severe end of the same spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Localised, not systemic; no Raynaud phenomenon or internal organ sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other morphoea subtypes (plaque, generalised)",
+          "cells": [
+            {
+              "text": "Different pattern; the linear sabre-stroke band defines this subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal facial lipodystrophy or atrophy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, often with systemic corticosteroids, during active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Mycophenolate mofetil or other immunosuppressants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and topical measures",
+          "cells": [
+            {
+              "text": "Soft-tissue mobility and skin condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical assessment, inflammatory markers and imaging to guide duration of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological surveillance",
+          "cells": [
+            {
+              "text": "Brain MRI where seizures or headache occur; antiseizure medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular and orofacial care",
+          "cells": [
+            {
+              "text": "Ophthalmology and dental or maxillofacial assessment on the affected side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstruction",
+          "cells": [
+            {
+              "text": "Autologous fat grafting or corrective surgery once disease is inactive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Dermatology, rheumatology and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "linear_scleroderma_en_coup_de_sabre-dx-mgmt",
+      "title": "Diagnosis and management of Linear scleroderma en coup de sabre",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Linear sclerotic, atrophic band on the frontoparietal scalp and forehead in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, midline extension, eye inflammation, facial growth threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and ophthalmology review; MRI brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, ANA, MRI brain and face, inflammatory markers, eye and dental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a linear sclerotic band confirmed with dermal sclerosis on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Parry-Romberg syndrome, systemic sclerosis or other morphoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Methotrexate with or without systemic corticosteroids during active disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mycophenolate or other immunosuppressants for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and topical measures for soft-tissue mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological and ocular surveillance; antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconstructive fat grafting once disease is inactive",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Activity settles over years, leaving atrophy; early treatment limits progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

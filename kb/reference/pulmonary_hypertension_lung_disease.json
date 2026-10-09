@@ -1,175 +1,512 @@
 {
- "id": "pulmonary_hypertension_lung_disease",
- "name": "Pulmonary hypertension due to lung disease/hypoxia (group 3)",
- "aliases": [
-  "group 3 pulmonary hypertension",
-  "hypoxic pulmonary hypertension",
-  "cor pulmonale",
-  "PH-lung disease"
- ],
- "class": "non_infective",
- "system": "Respiratory / Pulmonary vascular",
- "specialty": "Pulmonary Hypertension",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and emphysema, and sleep-disordered breathing",
-   "Alveolar hypoxia is the central driver, causing hypoxic pulmonary vasoconstriction and, over time, vascular remodelling and destruction of the capillary bed",
-   "The pulmonary hypertension is usually mild to moderate and proportionate to the severity of the lung disease, so severe pressures out of proportion should prompt a search for another cause",
-   "Presents as worsening breathlessness, hypoxaemia, and eventually right heart failure (cor pulmonale) superimposed on the underlying respiratory condition",
-   "Long-term oxygen therapy for chronic hypoxaemia is the cornerstone of management, alongside optimal treatment of the underlying lung disease",
-   "Group 1 targeted pulmonary vasodilators are generally not recommended, as they can worsen ventilation-perfusion matching and gas exchange",
-   "A severe pulmonary vascular phenotype with only modest airflow or parenchymal impairment warrants referral to a specialist centre"
+  "id": "pulmonary_hypertension_lung_disease",
+  "name": "Pulmonary hypertension due to lung disease/hypoxia (group 3)",
+  "aliases": [
+    "group 3 pulmonary hypertension",
+    "hypoxic pulmonary hypertension",
+    "cor pulmonale",
+    "PH-lung disease"
   ],
-  "pathophysiology": "Pulmonary hypertension due to lung disease and hypoxia is driven principally by alveolar hypoxia, which provokes hypoxic pulmonary vasoconstriction as an adaptive mechanism to divert blood away from poorly ventilated lung. When hypoxia is chronic and widespread, this vasoconstriction becomes sustained and is accompanied by structural remodelling of the pulmonary arteries with medial hypertrophy and intimal thickening. In parenchymal diseases such as emphysema and fibrosis, destruction and distortion of the alveolar-capillary bed reduces the cross-sectional area of the pulmonary vasculature, further raising resistance. Acidosis and hypercapnia potentiate the vasoconstriction, and the chronically elevated afterload leads to right ventricular hypertrophy and eventual failure. The pulmonary hypertension is typically proportionate to the underlying disease, and a disproportionately severe pattern suggests an additional or alternative process.",
-  "additionalDifferentials": [
-   "Pulmonary hypertension due to left heart disease (group 2)",
-   "Chronic thromboembolic pulmonary hypertension",
-   "Idiopathic or heritable pulmonary arterial hypertension coexisting with lung disease",
-   "Sleep-disordered breathing and obesity hypoventilation",
-   "Connective tissue disease with combined lung and vascular involvement",
-   "Pulmonary veno-occlusive disease"
-  ],
-  "additionalInvestigations": [
-   "Pulmonary function tests including diffusing capacity to characterise the lung disease",
-   "High-resolution CT of the chest to define parenchymal and airway disease",
-   "Arterial blood gases and overnight oximetry or sleep study for hypoxaemia and hypoventilation",
-   "Transthoracic echocardiography to estimate pressures and assess right ventricular function",
-   "Right heart catheterisation when a severe or disproportionate pulmonary vascular phenotype is suspected",
-   "Ventilation-perfusion scan to exclude chronic thromboembolic disease"
-  ],
-  "redFlags": [
-   "Pulmonary hypertension severe out of proportion to the degree of lung disease",
-   "Rapidly progressive right heart failure or worsening hypoxaemia",
-   "Syncope or presyncope on exertion",
-   "Deterioration in gas exchange after inappropriate use of pulmonary vasodilators"
-  ],
-  "prognosis": "The presence of pulmonary hypertension marks more advanced lung disease and predicts reduced exercise capacity and survival, with a severe pulmonary vascular phenotype carrying the worst outlook. Correcting chronic hypoxaemia with oxygen and optimising the underlying respiratory disease can slow progression, but the pulmonary hypertension is rarely fully reversible.",
-  "pitfalls": [
-   "Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange",
-   "Failing to investigate a disproportionately severe pattern for thromboembolic or arterial disease",
-   "Overlooking correctable nocturnal hypoxaemia or sleep-disordered breathing",
-   "Attributing all breathlessness to the airways or parenchyma and missing evolving cor pulmonale",
-   "Not referring a severe pulmonary vascular phenotype to a specialist pulmonary hypertension centre"
-  ],
-  "references": [
-   "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
-   "Nunn's Applied Respiratory Physiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD, antifibrotic agents for interstitial lung disease, and continuous positive airway pressure for sleep-disordered breathing",
-   "Correct chronic hypoxaemia with long-term oxygen therapy, the cornerstone of management",
-   "Support with smoking cessation, pulmonary rehabilitation and immunisation against respiratory pathogens",
-   "Avoid group 1 targeted pulmonary vasodilators as a rule, since they can worsen ventilation-perfusion matching and gas exchange",
-   "Treat cor pulmonale and fluid overload with diuretic-based decongestion",
-   "Monitor with echocardiography, arterial blood gases and overnight oximetry to gauge severity and oxygenation",
-   "Refer a severe or disproportionate pulmonary vascular phenotype to a specialist pulmonary hypertension centre and consider lung transplantation assessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_hypertension_lung_disease-pathway",
-   "title": "Pulmonary hypertension due to lung disease/hypoxia (group 3): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and emphysema, and sleep-disordered breathing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pulmonary hypertension severe out of proportion to the degree of lung disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulmonary function tests including diffusing capacity to characterise the lung disease, High-resolution CT of the chest to define parenchymal and airway disease, Arterial blood gases and overnight oximetry or sleep study"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD, antifibrotic agents for interstitial lung disease, and continuous positive airway pressure for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary hypertension due to lung disease/hypoxia (group 3)."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_hypertension_lung_disease-matrix",
-   "title": "Pulmonary hypertension due to lung disease/hypoxia (group 3): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Pulmonary vascular",
+  "specialty": "Pulmonary Hypertension",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and emphysema, and sleep-disordered breathing",
+      "Alveolar hypoxia is the central driver, causing hypoxic pulmonary vasoconstriction and, over time, vascular remodelling and destruction of the capillary bed",
+      "The pulmonary hypertension is usually mild to moderate and proportionate to the severity of the lung disease, so severe pressures out of proportion should prompt a search for another cause",
+      "Presents as worsening breathlessness, hypoxaemia, and eventually right heart failure (cor pulmonale) superimposed on the underlying respiratory condition",
+      "Long-term oxygen therapy for chronic hypoxaemia is the cornerstone of management, alongside optimal treatment of the underlying lung disease",
+      "Group 1 targeted pulmonary vasodilators are generally not recommended, as they can worsen ventilation-perfusion matching and gas exchange",
+      "A severe pulmonary vascular phenotype with only modest airflow or parenchymal impairment warrants referral to a specialist centre"
     ],
-    [
-     "Key Investigations",
-     "Pulmonary function tests including diffusing capacity to characterise the lung disease, High-resolution CT of the chest to define",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary hypertension due to lung disease and hypoxia is driven principally by alveolar hypoxia, which provokes hypoxic pulmonary vasoconstriction as an adaptive mechanism to divert blood away from poorly ventilated lung. When hypoxia is chronic and widespread, this vasoconstriction becomes sustained and is accompanied by structural remodelling of the pulmonary arteries with medial hypertrophy and intimal thickening. In parenchymal diseases such as emphysema and fibrosis, destruction and distortion of the alveolar-capillary bed reduces the cross-sectional area of the pulmonary vasculature, further raising resistance. Acidosis and hypercapnia potentiate the vasoconstriction, and the chronically elevated afterload leads to right ventricular hypertrophy and eventual failure. The pulmonary hypertension is typically proportionate to the underlying disease, and a disproportionately severe pattern suggests an additional or alternative process.",
+    "additionalDifferentials": [
+      "Pulmonary hypertension due to left heart disease (group 2)",
+      "Chronic thromboembolic pulmonary hypertension",
+      "Idiopathic or heritable pulmonary arterial hypertension coexisting with lung disease",
+      "Sleep-disordered breathing and obesity hypoventilation",
+      "Connective tissue disease with combined lung and vascular involvement",
+      "Pulmonary veno-occlusive disease"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary hypertension due to left heart disease (group 2), Chronic thromboembolic pulmonary hypertension, Idiopathic or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulmonary function tests including diffusing capacity to characterise the lung disease",
+      "High-resolution CT of the chest to define parenchymal and airway disease",
+      "Arterial blood gases and overnight oximetry or sleep study for hypoxaemia and hypoventilation",
+      "Transthoracic echocardiography to estimate pressures and assess right ventricular function",
+      "Right heart catheterisation when a severe or disproportionate pulmonary vascular phenotype is suspected",
+      "Ventilation-perfusion scan to exclude chronic thromboembolic disease"
     ],
-    [
-     "Management Strategy",
-     "Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD,",
-     "Core treatment modality"
+    "redFlags": [
+      "Pulmonary hypertension severe out of proportion to the degree of lung disease",
+      "Rapidly progressive right heart failure or worsening hypoxaemia",
+      "Syncope or presyncope on exertion",
+      "Deterioration in gas exchange after inappropriate use of pulmonary vasodilators"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange",
-     "Prevent diagnostic or management error"
+    "prognosis": "The presence of pulmonary hypertension marks more advanced lung disease and predicts reduced exercise capacity and survival, with a severe pulmonary vascular phenotype carrying the worst outlook. Correcting chronic hypoxaemia with oxygen and optimising the underlying respiratory disease can slow progression, but the pulmonary hypertension is rarely fully reversible.",
+    "pitfalls": [
+      "Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange",
+      "Failing to investigate a disproportionately severe pattern for thromboembolic or arterial disease",
+      "Overlooking correctable nocturnal hypoxaemia or sleep-disordered breathing",
+      "Attributing all breathlessness to the airways or parenchyma and missing evolving cor pulmonale",
+      "Not referring a severe pulmonary vascular phenotype to a specialist pulmonary hypertension centre"
+    ],
+    "references": [
+      "ESC/ERS Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "Nunn's Applied Respiratory Physiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD, antifibrotic agents for interstitial lung disease, and continuous positive airway pressure for sleep-disordered breathing",
+      "Correct chronic hypoxaemia with long-term oxygen therapy, the cornerstone of management",
+      "Support with smoking cessation, pulmonary rehabilitation and immunisation against respiratory pathogens",
+      "Avoid group 1 targeted pulmonary vasodilators as a rule, since they can worsen ventilation-perfusion matching and gas exchange",
+      "Treat cor pulmonale and fluid overload with diuretic-based decongestion",
+      "Monitor with echocardiography, arterial blood gases and overnight oximetry to gauge severity and oxygenation",
+      "Refer a severe or disproportionate pulmonary vascular phenotype to a specialist pulmonary hypertension centre and consider lung transplantation assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary hypertension due to lung disease/hypoxia (group 3)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-hypertension-lung-disease-real-image",
-   "title": "Pulmonary hypertension due to lung disease/hypoxia (group 3): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "pulmonary_hypertension_lung_disease-pathway",
+      "title": "Pulmonary hypertension due to lung disease/hypoxia (group 3): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and emphysema, and sleep-disordered breathing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pulmonary hypertension severe out of proportion to the degree of lung disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulmonary function tests including diffusing capacity to characterise the lung disease, High-resolution CT of the chest to define parenchymal and airway disease, Arterial blood gases and overnight oximetry or sleep study"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD, antifibrotic agents for interstitial lung disease, and continuous positive airway pressure for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary hypertension due to lung disease/hypoxia (group 3)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_hypertension_lung_disease-matrix",
+      "title": "Pulmonary hypertension due to lung disease/hypoxia (group 3): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Arises in chronic lung disease and hypoxaemic states, notably COPD, interstitial lung disease, combined pulmonary fibrosis and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulmonary function tests including diffusing capacity to characterise the lung disease, High-resolution CT of the chest to define",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary hypertension due to left heart disease (group 2), Chronic thromboembolic pulmonary hypertension, Idiopathic or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise the underlying respiratory disease with appropriate inhaled bronchodilator and anti-inflammatory therapy for COPD,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating mild proportionate pulmonary hypertension with group 1 targeted therapy and worsening gas exchange",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary hypertension due to lung disease/hypoxia (group 3)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 234-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_hypertension_lung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PFTs with diffusing capacity",
+          "cells": [
+            {
+              "text": "Lung disease characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Parenchymal and airway disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gases and overnight oximetry",
+          "cells": [
+            {
+              "text": "Hypoxaemia and hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Pressures and RV function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation, if disproportionate",
+          "cells": [
+            {
+              "text": "Severe or disproportionate phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scan",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension_lung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension due to left heart disease",
+          "cells": [
+            {
+              "text": "Left heart disease"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease"
+            },
+            {
+              "text": "Ventilation-perfusion scan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension_lung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying respiratory disease",
+          "cells": [
+            {
+              "text": "Optimise inhaled bronchodilators and treatment of the lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term oxygen",
+          "cells": [
+            {
+              "text": "Corrects chronic hypoxaemia; the cornerstone of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive measures",
+          "cells": [
+            {
+              "text": "Smoking cessation, pulmonary rehabilitation and immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Group 1 vasodilators",
+          "cells": [
+            {
+              "text": "Avoid as a rule; they can worsen gas exchange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cor pulmonale",
+          "cells": [
+            {
+              "text": "Diuretic-based decongestion for fluid overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, arterial blood gases and overnight oximetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Specialist pulmonary hypertension review for a severe or disproportionate phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension_lung_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Etiology of chronic cor pulmonale",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diseases leading to hypoxemic vasoconstriction",
+          "cells": [
+            {
+              "text": "Chronic bronchitis; chronic obstructive pulmonary disease; cystic fibrosis; chronic hypoventilation (obesity, neuromuscular disease, chest wall dysfunction); living at high altitude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diseases occluding the pulmonary vascular bed",
+          "cells": [
+            {
+              "text": "Thromboembolic disease, acute or chronic; pulmonary arterial hypertension; pulmonary veno-occlusive disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diseases leading to parenchymal disease",
+          "cells": [
+            {
+              "text": "Chronic bronchitis; chronic obstructive pulmonary disease; bronchiectasis; cystic fibrosis; pneumoconiosis; sarcoidosis; interstitial lung disease"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_hypertension_lung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary hypertension due to lung disease/hypoxia (group 3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary hypertension due to lung disease in chronic lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "PH out of proportion to lung disease, rapid right heart failure, exertional syncope?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for rapid right heart failure or worsening hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PFTs with DLCO; HRCT; ABG and oximetry; echo; V/Q scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pulmonary hypertension in keeping with the lung disease severity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "If disproportionate, refer for right heart catheterisation and specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise the underlying respiratory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term oxygen therapy for chronic hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid group 1 targeted vasodilators as a rule",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretic-based decongestion for cor pulmonale",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist referral for severe or disproportionate phenotype",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

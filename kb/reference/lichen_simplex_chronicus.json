@@ -1,176 +1,483 @@
 {
- "id": "lichen_simplex_chronicus",
- "name": "Lichen simplex chronicus (vulval)",
- "aliases": [
-  "lichen simplex chronicus",
-  "vulval lichen simplex",
-  "neurodermatitis",
-  "squamous cell hyperplasia of the vulva"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology and vulval dermatology textbook guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary disease in its own right",
-   "The dominant symptom is relentless itch, often worse at night and during stress, which drives rubbing and scratching that in turn thickens the skin and perpetuates the itch",
-   "Chronic scratching produces lichenification, seen as thickened, leathery skin with accentuated skin markings, often with excoriations and variable pigment change",
-   "It commonly arises on a background of an underlying trigger such as atopic or contact dermatitis, a pre-existing dermatosis, or environmental irritants, which should be sought and treated",
-   "Diagnosis is usually clinical, but biopsy is indicated when the appearance is atypical, unilateral, or fails to respond, to exclude a specific dermatosis or neoplasia",
-   "Management aims to break the itch-scratch cycle with generic measures: avoiding irritants, restoring the skin barrier with emollients, potent topical anti-inflammatory treatment for flares, and addressing nocturnal scratching",
-   "Identifying and treating any underlying dermatosis or allergen is essential to prevent relapse",
-   "Persistent, non-resolving, or ulcerated areas require re-biopsy because chronic vulval skin disease can rarely harbour intraepithelial neoplasia"
+  "id": "lichen_simplex_chronicus",
+  "name": "Lichen simplex chronicus (vulval)",
+  "aliases": [
+    "lichen simplex chronicus",
+    "vulval lichen simplex",
+    "neurodermatitis",
+    "squamous cell hyperplasia of the vulva"
   ],
-  "pathophysiology": "Lichen simplex chronicus is the end result of repeated mechanical trauma to the skin from chronic rubbing and scratching. An initial pruritic stimulus, whether an underlying dermatosis, irritant contact, dryness, or psychological stress, provokes scratching that damages the epidermis and stimulates further itch through nerve and inflammatory mediators, establishing a self-sustaining itch-scratch cycle. Persistent trauma leads to epidermal thickening (acanthosis and hyperkeratosis) and dermal changes that clinically appear as lichenification. The condition is therefore secondary and reactive, and lasting improvement depends on interrupting the cycle and removing the provoking cause.",
-  "additionalDifferentials": [
-   "Lichen sclerosus",
-   "Lichen planus",
-   "Psoriasis of the vulva",
-   "Contact or irritant dermatitis",
-   "Candidal or dermatophyte infection",
-   "Vulvar intraepithelial neoplasia",
-   "Extramammary Paget disease"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination for lichenification, excoriation, and features of an underlying dermatosis",
-   "Vulval biopsy for atypical, unilateral, or treatment-resistant lesions",
-   "Skin swabs or scrapings to exclude candidal or dermatophyte infection",
-   "Patch testing where allergic contact dermatitis is suspected",
-   "Assessment for atopy and systemic causes of pruritus"
-  ],
-  "redFlags": [
-   "A persistent unilateral plaque, ulcer, or nodule requiring biopsy to exclude neoplasia",
-   "Failure to respond to appropriate anti-inflammatory treatment",
-   "Progressive architectural change suggesting lichen sclerosus rather than simple lichenification",
-   "New pigmented or bleeding lesion"
-  ],
-  "prognosis": "The condition usually improves well once the itch-scratch cycle is broken and any underlying trigger is treated, but it is prone to relapse if irritants recur or scratching resumes, so ongoing skin care is often needed.",
-  "pitfalls": [
-   "Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse",
-   "Missing an underlying lichen sclerosus or intraepithelial neoplasia by not biopsying atypical or resistant areas",
-   "Under-treating with weak topical preparations so the itch-scratch cycle continues",
-   "Ignoring nocturnal scratching, which sustains the process",
-   "Overlooking contact allergens or irritants from hygiene products"
-  ],
-  "references": [
-   "Standard vulval dermatology reference text",
-   "Gynaecology guidance on vulval skin disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant",
-   "Restore the skin barrier with emollients and soap substitutes and eliminate identified irritants",
-   "Apply potent topical corticosteroids to settle flares of lichenification and inflammation",
-   "Break the itch-scratch cycle with sedating antihistamines and measures to reduce nocturnal scratching",
-   "Consider topical calcineurin inhibitors as a steroid-sparing maintenance option",
-   "Address psychological stress that aggravates scratching",
-   "Biopsy atypical, unilateral or treatment-resistant lesions to exclude a specific dermatosis or neoplasia, and patch test where contact allergy is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lichen_simplex_chronicus-pathway",
-   "title": "Lichen simplex chronicus (vulval): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary disease in its own right",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A persistent unilateral plaque, ulcer, or nodule requiring biopsy to exclude neoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination for lichenification, excoriation, and features of an underlying dermatosis, Vulval biopsy for atypical, unilateral, or treatment-resistant lesions, Skin swabs or scrapings to exclude candidal or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lichen simplex chronicus (vulval)."
-  }
- ],
- "tables": [
-  {
-   "id": "lichen_simplex_chronicus-matrix",
-   "title": "Lichen simplex chronicus (vulval): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology and vulval dermatology textbook guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary disease in its own right",
+      "The dominant symptom is relentless itch, often worse at night and during stress, which drives rubbing and scratching that in turn thickens the skin and perpetuates the itch",
+      "Chronic scratching produces lichenification, seen as thickened, leathery skin with accentuated skin markings, often with excoriations and variable pigment change",
+      "It commonly arises on a background of an underlying trigger such as atopic or contact dermatitis, a pre-existing dermatosis, or environmental irritants, which should be sought and treated",
+      "Diagnosis is usually clinical, but biopsy is indicated when the appearance is atypical, unilateral, or fails to respond, to exclude a specific dermatosis or neoplasia",
+      "Management aims to break the itch-scratch cycle with generic measures: avoiding irritants, restoring the skin barrier with emollients, potent topical anti-inflammatory treatment for flares, and addressing nocturnal scratching",
+      "Identifying and treating any underlying dermatosis or allergen is essential to prevent relapse",
+      "Persistent, non-resolving, or ulcerated areas require re-biopsy because chronic vulval skin disease can rarely harbour intraepithelial neoplasia"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination for lichenification, excoriation, and features of an underlying dermatosis, Vulval biopsy for atypical,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lichen simplex chronicus is the end result of repeated mechanical trauma to the skin from chronic rubbing and scratching. An initial pruritic stimulus, whether an underlying dermatosis, irritant contact, dryness, or psychological stress, provokes scratching that damages the epidermis and stimulates further itch through nerve and inflammatory mediators, establishing a self-sustaining itch-scratch cycle. Persistent trauma leads to epidermal thickening (acanthosis and hyperkeratosis) and dermal changes that clinically appear as lichenification. The condition is therefore secondary and reactive, and lasting improvement depends on interrupting the cycle and removing the provoking cause.",
+    "additionalDifferentials": [
+      "Lichen sclerosus",
+      "Lichen planus",
+      "Psoriasis of the vulva",
+      "Contact or irritant dermatitis",
+      "Candidal or dermatophyte infection",
+      "Vulvar intraepithelial neoplasia",
+      "Extramammary Paget disease"
     ],
-    [
-     "Primary Differentials",
-     "Lichen sclerosus, Lichen planus, Psoriasis of the vulva",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination for lichenification, excoriation, and features of an underlying dermatosis",
+      "Vulval biopsy for atypical, unilateral, or treatment-resistant lesions",
+      "Skin swabs or scrapings to exclude candidal or dermatophyte infection",
+      "Patch testing where allergic contact dermatitis is suspected",
+      "Assessment for atopy and systemic causes of pruritus"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant",
-     "Core treatment modality"
+    "redFlags": [
+      "A persistent unilateral plaque, ulcer, or nodule requiring biopsy to exclude neoplasia",
+      "Failure to respond to appropriate anti-inflammatory treatment",
+      "Progressive architectural change suggesting lichen sclerosus rather than simple lichenification",
+      "New pigmented or bleeding lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition usually improves well once the itch-scratch cycle is broken and any underlying trigger is treated, but it is prone to relapse if irritants recur or scratching resumes, so ongoing skin care is often needed.",
+    "pitfalls": [
+      "Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse",
+      "Missing an underlying lichen sclerosus or intraepithelial neoplasia by not biopsying atypical or resistant areas",
+      "Under-treating with weak topical preparations so the itch-scratch cycle continues",
+      "Ignoring nocturnal scratching, which sustains the process",
+      "Overlooking contact allergens or irritants from hygiene products"
+    ],
+    "references": [
+      "Standard vulval dermatology reference text",
+      "Gynaecology guidance on vulval skin disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant",
+      "Restore the skin barrier with emollients and soap substitutes and eliminate identified irritants",
+      "Apply potent topical corticosteroids to settle flares of lichenification and inflammation",
+      "Break the itch-scratch cycle with sedating antihistamines and measures to reduce nocturnal scratching",
+      "Consider topical calcineurin inhibitors as a steroid-sparing maintenance option",
+      "Address psychological stress that aggravates scratching",
+      "Biopsy atypical, unilateral or treatment-resistant lesions to exclude a specific dermatosis or neoplasia, and patch test where contact allergy is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for lichen simplex chronicus (vulval)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lichen-simplex-chronicus-real-image",
-   "title": "Lichen simplex chronicus (vulval): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lichen_simplex_chronicus-pathway",
+      "title": "Lichen simplex chronicus (vulval): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary disease in its own right",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A persistent unilateral plaque, ulcer, or nodule requiring biopsy to exclude neoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination for lichenification, excoriation, and features of an underlying dermatosis, Vulval biopsy for atypical, unilateral, or treatment-resistant lesions, Skin swabs or scrapings to exclude candidal or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lichen simplex chronicus (vulval)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lichen_simplex_chronicus-matrix",
+      "title": "Lichen simplex chronicus (vulval): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Vulval lichen simplex chronicus is a reactive skin change produced by a persistent itch-scratch cycle rather than a primary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination for lichenification, excoriation, and features of an underlying dermatosis, Vulval biopsy for atypical,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichen sclerosus, Lichen planus, Psoriasis of the vulva",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying trigger, such as atopic or contact dermatitis, another dermatosis, infection or an irritant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the lichenification without identifying and correcting the underlying itch trigger, leading to relapse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lichen simplex chronicus (vulval)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology and vulval dermatology textbook guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lichen_simplex_chronicus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Lichenification, excoriation and an underlying dermatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulval biopsy",
+          "cells": [
+            {
+              "text": "Atypical, unilateral or treatment-resistant lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs or scrapings",
+          "cells": [
+            {
+              "text": "Candidal or dermatophyte infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Where allergic contact dermatitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for atopy",
+          "cells": [
+            {
+              "text": "Systemic causes of pruritus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_simplex_chronicus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lichen sclerosus",
+          "cells": [
+            {
+              "text": "Progressive architectural change points to it rather than lichenification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vulval intraepithelial neoplasia",
+          "cells": [
+            {
+              "text": "Persistent or unilateral lesions need biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extramammary Paget disease",
+          "cells": [
+            {
+              "text": "Unilateral, persistent lesion; biopsy required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candidal or dermatophyte infection",
+          "cells": [
+            {
+              "text": "Excluded by swabs or scrapings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_simplex_chronicus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying trigger",
+          "cells": [
+            {
+              "text": "Atopic or contact dermatitis, other dermatosis, infection or irritant treated first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin barrier",
+          "cells": [
+            {
+              "text": "Emollients and soap substitutes; eliminate identified irritants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "Settle flares of lichenification and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itch-scratch cycle",
+          "cells": [
+            {
+              "text": "Sedating antihistamines and measures against nocturnal scratching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Steroid-sparing maintenance option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological stress",
+          "cells": [
+            {
+              "text": "Address stress that aggravates scratching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and patch testing",
+          "cells": [
+            {
+              "text": "Atypical, unilateral or resistant lesions; patch test where contact allergy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lichen_simplex_chronicus-dx-mgmt",
+      "title": "Diagnosis and management of Lichen simplex chronicus (vulval)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thickened, leathery, itchy vulval skin with excoriations, worse at night",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unilateral plaque, ulcer or nodule, new pigment or bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy to exclude neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical exam, vulval biopsy if atypical, swabs, patch testing if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are neoplasia and lichen sclerosus excluded on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichen sclerosus, VIN, extramammary Paget disease or candidal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying trigger, such as atopic or contact dermatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and irritant avoidance to restore the barrier",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potent topical corticosteroids for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sedating antihistamines and measures against nocturnal scratching",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy atypical or resistant lesions; patch test if contact allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually improves once the itch-scratch cycle is broken; prone to relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

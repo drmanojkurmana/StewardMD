@@ -1,178 +1,467 @@
 {
- "id": "mohr_tranebjaerg_syndrome",
- "name": "Mohr-Tranebjaerg syndrome",
- "aliases": [
-  "Deafness-dystonia-optic neuronopathy syndrome",
-  "DDON syndrome",
-  "TIMM8A",
-  "DFN-1"
- ],
- "class": "non_infective",
- "system": "Multisystem genetics",
- "specialty": "Clinical genetics / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss followed by dystonia, visual failure from optic atrophy and later cognitive decline.",
-   "Hearing loss is usually the first manifestation, frequently the only sign in infancy, and is of an auditory-neuropathy type in which otoacoustic emissions may be preserved while auditory brainstem responses are abnormal.",
-   "The movement disorder (dystonia, ataxia or parkinsonism) typically emerges in later childhood or adolescence and is slowly progressive.",
-   "Progressive visual loss from optic atrophy generally begins in the teenage years or early adulthood.",
-   "Neuropsychiatric change and dementia often appear in adulthood, sometimes with behavioural disturbance and paranoia.",
-   "Female carriers are usually asymptomatic but may show mild focal dystonia or subtle hearing changes owing to skewed X-inactivation.",
-   "Caused by loss-of-function variants in TIMM8A; a contiguous deletion involving TIMM8A and the neighbouring BTK gene produces a combined phenotype with agammaglobulinaemia.",
-   "Cochlear implantation can aid auditory rehabilitation given the neural pattern of the deafness."
+  "id": "mohr_tranebjaerg_syndrome",
+  "name": "Mohr-Tranebjaerg syndrome",
+  "aliases": [
+    "Deafness-dystonia-optic neuronopathy syndrome",
+    "DDON syndrome",
+    "TIMM8A",
+    "DFN-1"
   ],
-  "pathophysiology": "TIMM8A on Xq22 encodes deafness-dystonia protein 1 (DDP1, also called TIM8a), a small mitochondrial intermembrane-space protein that partners with TIM13 to form the TIM8-TIM13 chaperone complex. This complex escorts hydrophobic inner-membrane carrier precursors across the intermembrane space to the TIM22 insertion machinery. Loss-of-function variants impair mitochondrial protein import, producing a progressive neurodegenerative disorder that affects the auditory nerve, basal ganglia, optic pathways and cortex; it is therefore regarded as a disease of mitochondrial protein import rather than a primary defect of oxidative phosphorylation. Because TIMM8A lies immediately adjacent to BTK, larger contiguous deletions additionally cause X-linked agammaglobulinaemia.",
-  "additionalDifferentials": [
-   "Mitochondrial optic neuropathies (Leber hereditary optic neuropathy; dominant optic atrophy from OPA1)",
-   "Wolfram syndrome (optic atrophy with diabetes mellitus and deafness)",
-   "Friedreich ataxia and other hereditary ataxias with sensory involvement",
-   "X-linked dystonia-parkinsonism (Lubag)",
-   "Auditory neuropathy spectrum disorder from OTOF or other causes",
-   "Mitochondrial encephalomyopathies (e.g., MELAS, Leigh syndrome)",
-   "Contiguous gene deletion syndrome with agammaglobulinaemia (BTK involvement)"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK deletion",
-   "Audiological assessment with otoacoustic emissions and auditory brainstem responses to confirm the auditory-neuropathy pattern",
-   "Ophthalmological evaluation with optical coherence tomography and visual evoked potentials",
-   "Brain MRI, principally to exclude alternative structural or metabolic causes",
-   "Immunoglobulin quantification if a contiguous deletion is suspected",
-   "Serial neuropsychological assessment to track cognition",
-   "Family segregation studies and carrier testing of at-risk female relatives"
-  ],
-  "redFlags": [
-   "Progressive visual loss superimposed on established childhood deafness, indicating neurodegeneration rather than isolated hearing impairment",
-   "Recurrent serious infections in a deaf boy, suggesting a contiguous BTK deletion with agammaglobulinaemia",
-   "Emerging swallowing difficulty or airway compromise from advancing dystonia",
-   "Rapid behavioural or cognitive deterioration"
-  ],
-  "prognosis": "The disorder is progressive and disabling: hearing loss appears in childhood and dystonia, visual failure and dementia accumulate over subsequent decades, with reduced life expectancy in advanced disease. Supportive care and auditory rehabilitation improve function but do not halt neurodegeneration.",
-  "pitfalls": [
-   "Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory",
-   "Overlooking the auditory-neuropathy pattern, leading to unrealistic expectations of hearing-aid benefit",
-   "Failing to test for a contiguous BTK deletion in a boy with deafness and recurrent infections",
-   "Assuming female carriers are always unaffected"
-  ],
-  "references": [
-   "Neurogenetics reference texts",
-   "Mitochondrial disease reference texts",
-   "Clinical genetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing loss, with early communication support and cochlear implantation where appropriate rather than conventional aids alone",
-   "Symptomatic control of dystonia with anticholinergics, benzodiazepines or botulinum toxin for focal dystonia, and consideration of deep brain stimulation in selected disabling cases",
-   "Low-vision rehabilitation and visual aids for progressive optic atrophy",
-   "Neuropsychiatric and behavioural support with dementia care as cognitive decline emerges in adulthood",
-   "Screen for a contiguous BTK deletion, and if X-linked agammaglobulinaemia coexists provide immunoglobulin replacement and infection prophylaxis",
-   "Coordinated multidisciplinary input from neurology, audiovestibular medicine, ophthalmology, psychiatry, physiotherapy, occupational therapy and speech and language therapy",
-   "Genetic counselling for X-linked recessive inheritance, with carrier testing of female relatives and reproductive and prenatal options"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mohr_tranebjaerg_syndrome-pathway",
-   "title": "Mohr-Tranebjaerg syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss followed by dystonia, visual failure from optic atrophy and later cognitive decline.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual loss superimposed on established childhood deafness, indicating neurodegeneration rather than isolated hearing impairment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK deletion, Audiological assessment with otoacoustic emissions and auditory brainstem responses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing loss, with early communication support and cochlear implantation where appropriate rather"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mohr-tranebjaerg syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mohr_tranebjaerg_syndrome-matrix",
-   "title": "Mohr-Tranebjaerg syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem genetics",
+  "specialty": "Clinical genetics / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss followed by dystonia, visual failure from optic atrophy and later cognitive decline.",
+      "Hearing loss is usually the first manifestation, frequently the only sign in infancy, and is of an auditory-neuropathy type in which otoacoustic emissions may be preserved while auditory brainstem responses are abnormal.",
+      "The movement disorder (dystonia, ataxia or parkinsonism) typically emerges in later childhood or adolescence and is slowly progressive.",
+      "Progressive visual loss from optic atrophy generally begins in the teenage years or early adulthood.",
+      "Neuropsychiatric change and dementia often appear in adulthood, sometimes with behavioural disturbance and paranoia.",
+      "Female carriers are usually asymptomatic but may show mild focal dystonia or subtle hearing changes owing to skewed X-inactivation.",
+      "Caused by loss-of-function variants in TIMM8A; a contiguous deletion involving TIMM8A and the neighbouring BTK gene produces a combined phenotype with agammaglobulinaemia.",
+      "Cochlear implantation can aid auditory rehabilitation given the neural pattern of the deafness."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "TIMM8A on Xq22 encodes deafness-dystonia protein 1 (DDP1, also called TIM8a), a small mitochondrial intermembrane-space protein that partners with TIM13 to form the TIM8-TIM13 chaperone complex. This complex escorts hydrophobic inner-membrane carrier precursors across the intermembrane space to the TIM22 insertion machinery. Loss-of-function variants impair mitochondrial protein import, producing a progressive neurodegenerative disorder that affects the auditory nerve, basal ganglia, optic pathways and cortex; it is therefore regarded as a disease of mitochondrial protein import rather than a primary defect of oxidative phosphorylation. Because TIMM8A lies immediately adjacent to BTK, larger contiguous deletions additionally cause X-linked agammaglobulinaemia.",
+    "additionalDifferentials": [
+      "Mitochondrial optic neuropathies (Leber hereditary optic neuropathy; dominant optic atrophy from OPA1)",
+      "Wolfram syndrome (optic atrophy with diabetes mellitus and deafness)",
+      "Friedreich ataxia and other hereditary ataxias with sensory involvement",
+      "X-linked dystonia-parkinsonism (Lubag)",
+      "Auditory neuropathy spectrum disorder from OTOF or other causes",
+      "Mitochondrial encephalomyopathies (e.g., MELAS, Leigh syndrome)",
+      "Contiguous gene deletion syndrome with agammaglobulinaemia (BTK involvement)"
     ],
-    [
-     "Primary Differentials",
-     "Mitochondrial optic neuropathies (Leber hereditary optic neuropathy; dominant optic atrophy from OPA1), Wolfram syndrome (optic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK deletion",
+      "Audiological assessment with otoacoustic emissions and auditory brainstem responses to confirm the auditory-neuropathy pattern",
+      "Ophthalmological evaluation with optical coherence tomography and visual evoked potentials",
+      "Brain MRI, principally to exclude alternative structural or metabolic causes",
+      "Immunoglobulin quantification if a contiguous deletion is suspected",
+      "Serial neuropsychological assessment to track cognition",
+      "Family segregation studies and carrier testing of at-risk female relatives"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual loss superimposed on established childhood deafness, indicating neurodegeneration rather than isolated hearing impairment",
+      "Recurrent serious infections in a deaf boy, suggesting a contiguous BTK deletion with agammaglobulinaemia",
+      "Emerging swallowing difficulty or airway compromise from advancing dystonia",
+      "Rapid behavioural or cognitive deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive and disabling: hearing loss appears in childhood and dystonia, visual failure and dementia accumulate over subsequent decades, with reduced life expectancy in advanced disease. Supportive care and auditory rehabilitation improve function but do not halt neurodegeneration.",
+    "pitfalls": [
+      "Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory",
+      "Overlooking the auditory-neuropathy pattern, leading to unrealistic expectations of hearing-aid benefit",
+      "Failing to test for a contiguous BTK deletion in a boy with deafness and recurrent infections",
+      "Assuming female carriers are always unaffected"
+    ],
+    "references": [
+      "Neurogenetics reference texts",
+      "Mitochondrial disease reference texts",
+      "Clinical genetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing loss, with early communication support and cochlear implantation where appropriate rather than conventional aids alone",
+      "Symptomatic control of dystonia with anticholinergics, benzodiazepines or botulinum toxin for focal dystonia, and consideration of deep brain stimulation in selected disabling cases",
+      "Low-vision rehabilitation and visual aids for progressive optic atrophy",
+      "Neuropsychiatric and behavioural support with dementia care as cognitive decline emerges in adulthood",
+      "Screen for a contiguous BTK deletion, and if X-linked agammaglobulinaemia coexists provide immunoglobulin replacement and infection prophylaxis",
+      "Coordinated multidisciplinary input from neurology, audiovestibular medicine, ophthalmology, psychiatry, physiotherapy, occupational therapy and speech and language therapy",
+      "Genetic counselling for X-linked recessive inheritance, with carrier testing of female relatives and reproductive and prenatal options"
     ]
-   ],
-   "caption": "Overview comparison matrix for mohr-tranebjaerg syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mohr-tranebjaerg-syndrome-real-image",
-   "title": "Mohr-Tranebjaerg syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mohr_tranebjaerg_syndrome-pathway",
+      "title": "Mohr-Tranebjaerg syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss followed by dystonia, visual failure from optic atrophy and later cognitive decline.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual loss superimposed on established childhood deafness, indicating neurodegeneration rather than isolated hearing impairment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK deletion, Audiological assessment with otoacoustic emissions and auditory brainstem responses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing loss, with early communication support and cochlear implantation where appropriate rather"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mohr-tranebjaerg syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mohr_tranebjaerg_syndrome-matrix",
+      "title": "Mohr-Tranebjaerg syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive neurodegenerative syndrome in which affected males develop early progressive sensorineural hearing loss",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of TIMM8A including sequencing and deletion/duplication analysis, with assessment for a contiguous BTK",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mitochondrial optic neuropathies (Leber hereditary optic neuropathy; dominant optic atrophy from OPA1), Wolfram syndrome (optic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists, so care centres on auditory rehabilitation for the progressive auditory-neuropathy hearing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the deafness as ordinary sensorineural loss and missing the later neurological trajectory",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mohr-tranebjaerg syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mohr_tranebjaerg_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TIMM8A sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; assess for a contiguous BTK deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and auditory brainstem responses",
+          "cells": [
+            {
+              "text": "Auditory-neuropathy pattern of hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Mainly to exclude alternative structural or metabolic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin quantification",
+          "cells": [
+            {
+              "text": "If a contiguous deletion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mohr_tranebjaerg_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wolfram syndrome",
+          "cells": [
+            {
+              "text": "Optic atrophy with diabetes mellitus and deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contiguous gene deletion with agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "BTK involvement with recurrent serious infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mohr_tranebjaerg_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Early communication support for progressive auditory-neuropathy hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia control",
+          "cells": [
+            {
+              "text": "Anticholinergics, benzodiazepines or botulinum toxin; consider deep brain stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Visual aids for progressive optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychiatric support",
+          "cells": [
+            {
+              "text": "Dementia care as cognition declines in adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BTK deletion management",
+          "cells": [
+            {
+              "text": "Immunoglobulin replacement and infection prophylaxis if agammaglobulinaemia coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked recessive; carrier testing of female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mohr_tranebjaerg_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mohr-Tranebjaerg syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deaf boy with later visual loss, dystonia or cognitive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent serious infections, swallowing or airway compromise, rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check immunoglobulins for BTK deletion; urgent airway and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TIMM8A testing with deletion analysis, ABR/OAE, OCT and VEP, immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic TIMM8A variant or deletion found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wolfram syndrome, mitochondrial disease, hereditary ataxias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Auditory rehabilitation with early communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat dystonia: anticholinergics, benzodiazepines, botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision rehabilitation and neuropsychiatric support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunoglobulin replacement if BTK deletion with agammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of female relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive, disabling course: hearing loss, then dystonia, visual failure, dementia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

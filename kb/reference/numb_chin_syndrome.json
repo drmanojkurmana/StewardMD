@@ -1,177 +1,437 @@
 {
- "id": "numb_chin_syndrome",
- "name": "Numb chin syndrome",
- "aliases": [
-  "mental neuropathy",
-  "mental nerve neuropathy"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology / Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology and oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
-   "It is an important red-flag sign because it is frequently caused by underlying malignancy",
-   "Recognised causes include metastatic breast and prostate cancer, lymphoma and leukaemic infiltration, and it may herald relapse",
-   "Benign causes exist (dental or local trauma, mandibular osteomyelitis, sickle cell disease), but malignancy must be excluded",
-   "The lesion may be at the mandible (mental nerve) or more proximally at the skull base or leptomeninges",
-   "Investigation targets the whole nerve pathway and a search for systemic malignancy"
+  "id": "numb_chin_syndrome",
+  "name": "Numb chin syndrome",
+  "aliases": [
+    "mental neuropathy",
+    "mental nerve neuropathy"
   ],
-  "pathophysiology": "Numb chin syndrome arises from injury to the mental nerve or its parent inferior alveolar/mandibular division of the trigeminal nerve, anywhere from the leptomeninges and skull base to the mandibular canal and mental foramen. Malignant causes act by perineural spread, mandibular or leptomeningeal metastasis, or direct compression, which is why the sign so often reflects cancer. Benign local processes injure the nerve within the mandible. The chin and lip sensory loss reflects the terminal cutaneous territory of the affected nerve.",
-  "additionalDifferentials": [
-   "Metastatic malignancy (breast, prostate) or lymphoma/leukaemia",
-   "Leptomeningeal or skull-base disease",
-   "Dental or mandibular local pathology / trauma",
-   "Mandibular osteomyelitis",
-   "Sickle cell disease (vaso-occlusion)",
-   "Multiple sclerosis or other trigeminal pathology"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway",
-   "Orthopantomogram and dental assessment",
-   "Investigation for systemic malignancy (imaging, tumour markers) where a cause is not evident",
-   "Cerebrospinal fluid analysis if leptomeningeal disease is suspected",
-   "Full blood count and film if leukaemia is considered"
-  ],
-  "redFlags": [
-   "Known or suspected malignancy (new numb chin may signal metastasis or relapse)",
-   "Associated other cranial neuropathies",
-   "Systemic symptoms of malignancy",
-   "Progressive or bilateral involvement"
-  ],
-  "prognosis": "Prognosis is driven by the underlying cause; when due to malignancy it often signifies advanced or recurrent disease and a poor outlook, whereas benign causes may resolve.",
-  "pitfalls": [
-   "Dismissing chin numbness as dental without excluding malignancy",
-   "Failing to image the entire nerve pathway including the skull base",
-   "Overlooking it as a marker of cancer relapse",
-   "Not considering leptomeningeal disease"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Oncology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness",
-   "Work up with imaging of the nerve pathway from skull base to mandible, MRI preferred, to look for perineural or leptomeningeal disease",
-   "Obtain a dental and mandibular assessment including an orthopantomogram to exclude benign local disease before attributing the sign to cancer",
-   "Send cerebrospinal fluid cytology when leptomeningeal involvement is suspected on imaging or clinical grounds",
-   "Pursue systemic staging with imaging, tumor markers, and blood counts when no primary is known, since breast cancer, prostate cancer, and lymphoid or leukemic infiltration are the most common causes",
-   "A new numb chin in a patient with known systemic malignancy usually signals relapse or progression and should prompt restaging and reconsideration of systemic therapy along the same lines used for that cancer's progression",
-   "For leptomeningeal or skull-base involvement, combine site-directed radiotherapy for symptomatic or bulky disease with intrathecal or systemic therapy chosen for activity against the specific tumor type, with joint oncology and neurology input",
-   "For a solid mandibular or nerve-pathway metastasis without leptomeningeal spread, local radiotherapy can be used for symptom and local control alongside systemic therapy matched to the primary tumor",
-   "Exclude and separately treat benign local causes such as dental infection, mandibular osteomyelitis, local trauma, or sickle cell vaso-occlusion, which have no role for oncologic therapy",
-   "Surgery has a mainly diagnostic role, such as biopsy of an accessible mass, rather than a definitive treatment role for the sign itself",
-   "Systemic therapy, including hormonal therapy, chemotherapy, targeted or antibody-based agents, chosen by the primary tumor's known sensitivities, is the backbone of treatment when the cause is systemic or hematologic malignancy",
-   "Neuropathic analgesia with a gabapentinoid or similar agent class can be added for symptomatic relief without altering the oncologic treatment plan",
-   "There is no dedicated line-of-therapy sequence for this sign; it follows the line-of-therapy framework of whatever malignancy is identified as the cause",
-   "Monitor with serial neurologic exam for new cranial nerve findings, repeat imaging and CSF analysis as relevant, and refer promptly to oncology, and to neurology or maxillofacial and radiation oncology as indicated, especially when initial workup does not identify a cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "numb_chin_syndrome-pathway",
-   "title": "Numb chin syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Known or suspected malignancy (new numb chin may signal metastasis or relapse)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway, Orthopantomogram and dental assessment, Investigation for systemic malignancy (imaging, tumour markers) where a cause is not"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing chin numbness as dental without excluding malignancy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of numb chin syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "numb_chin_syndrome-matrix",
-   "title": "Numb chin syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology / Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology and oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
+      "It is an important red-flag sign because it is frequently caused by underlying malignancy",
+      "Recognised causes include metastatic breast and prostate cancer, lymphoma and leukaemic infiltration, and it may herald relapse",
+      "Benign causes exist (dental or local trauma, mandibular osteomyelitis, sickle cell disease), but malignancy must be excluded",
+      "The lesion may be at the mandible (mental nerve) or more proximally at the skull base or leptomeninges",
+      "Investigation targets the whole nerve pathway and a search for systemic malignancy"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway, Orthopantomogram and dental",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Numb chin syndrome arises from injury to the mental nerve or its parent inferior alveolar/mandibular division of the trigeminal nerve, anywhere from the leptomeninges and skull base to the mandibular canal and mental foramen. Malignant causes act by perineural spread, mandibular or leptomeningeal metastasis, or direct compression, which is why the sign so often reflects cancer. Benign local processes injure the nerve within the mandible. The chin and lip sensory loss reflects the terminal cutaneous territory of the affected nerve.",
+    "additionalDifferentials": [
+      "Metastatic malignancy (breast, prostate) or lymphoma/leukaemia",
+      "Leptomeningeal or skull-base disease",
+      "Dental or mandibular local pathology / trauma",
+      "Mandibular osteomyelitis",
+      "Sickle cell disease (vaso-occlusion)",
+      "Multiple sclerosis or other trigeminal pathology"
     ],
-    [
-     "Primary Differentials",
-     "Metastatic malignancy (breast, prostate) or lymphoma/leukaemia, Leptomeningeal or skull-base disease, Dental or mandibular local",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway",
+      "Orthopantomogram and dental assessment",
+      "Investigation for systemic malignancy (imaging, tumour markers) where a cause is not evident",
+      "Cerebrospinal fluid analysis if leptomeningeal disease is suspected",
+      "Full blood count and film if leukaemia is considered"
     ],
-    [
-     "Management Strategy",
-     "Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness",
-     "Core treatment modality"
+    "redFlags": [
+      "Known or suspected malignancy (new numb chin may signal metastasis or relapse)",
+      "Associated other cranial neuropathies",
+      "Systemic symptoms of malignancy",
+      "Progressive or bilateral involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing chin numbness as dental without excluding malignancy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is driven by the underlying cause; when due to malignancy it often signifies advanced or recurrent disease and a poor outlook, whereas benign causes may resolve.",
+    "pitfalls": [
+      "Dismissing chin numbness as dental without excluding malignancy",
+      "Failing to image the entire nerve pathway including the skull base",
+      "Overlooking it as a marker of cancer relapse",
+      "Not considering leptomeningeal disease"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Oncology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness",
+      "Work up with imaging of the nerve pathway from skull base to mandible, MRI preferred, to look for perineural or leptomeningeal disease",
+      "Obtain a dental and mandibular assessment including an orthopantomogram to exclude benign local disease before attributing the sign to cancer",
+      "Send cerebrospinal fluid cytology when leptomeningeal involvement is suspected on imaging or clinical grounds",
+      "Pursue systemic staging with imaging, tumor markers, and blood counts when no primary is known, since breast cancer, prostate cancer, and lymphoid or leukemic infiltration are the most common causes",
+      "A new numb chin in a patient with known systemic malignancy usually signals relapse or progression and should prompt restaging and reconsideration of systemic therapy along the same lines used for that cancer's progression",
+      "For leptomeningeal or skull-base involvement, combine site-directed radiotherapy for symptomatic or bulky disease with intrathecal or systemic therapy chosen for activity against the specific tumor type, with joint oncology and neurology input",
+      "For a solid mandibular or nerve-pathway metastasis without leptomeningeal spread, local radiotherapy can be used for symptom and local control alongside systemic therapy matched to the primary tumor",
+      "Exclude and separately treat benign local causes such as dental infection, mandibular osteomyelitis, local trauma, or sickle cell vaso-occlusion, which have no role for oncologic therapy",
+      "Surgery has a mainly diagnostic role, such as biopsy of an accessible mass, rather than a definitive treatment role for the sign itself",
+      "Systemic therapy, including hormonal therapy, chemotherapy, targeted or antibody-based agents, chosen by the primary tumor's known sensitivities, is the backbone of treatment when the cause is systemic or hematologic malignancy",
+      "Neuropathic analgesia with a gabapentinoid or similar agent class can be added for symptomatic relief without altering the oncologic treatment plan",
+      "There is no dedicated line-of-therapy sequence for this sign; it follows the line-of-therapy framework of whatever malignancy is identified as the cause",
+      "Monitor with serial neurologic exam for new cranial nerve findings, repeat imaging and CSF analysis as relevant, and refer promptly to oncology, and to neurology or maxillofacial and radiation oncology as indicated, especially when initial workup does not identify a cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for numb chin syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "numb-chin-syndrome-real-image",
-   "title": "Numb chin syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "numb_chin_syndrome-pathway",
+      "title": "Numb chin syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Known or suspected malignancy (new numb chin may signal metastasis or relapse)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway, Orthopantomogram and dental assessment, Investigation for systemic malignancy (imaging, tumour markers) where a cause is not"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing chin numbness as dental without excluding malignancy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of numb chin syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "numb_chin_syndrome-matrix",
+      "title": "Numb chin syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Numbness of the chin and lower lip in the distribution of the mental (or inferior alveolar) nerve",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain, skull base and mandible with attention to the trigeminal/mental nerve pathway, Orthopantomogram and dental",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Metastatic malignancy (breast, prostate) or lymphoma/leukaemia, Leptomeningeal or skull-base disease, Dental or mandibular local",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Numb chin syndrome is a red-flag sign, not a disease in itself; management targets the underlying cause rather than the numbness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing chin numbness as dental without excluding malignancy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for numb chin syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology and oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "numb_chin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain, skull base and mandible",
+          "cells": [
+            {
+              "text": "Trigeminal and mental nerve pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopantomogram and dental assessment",
+          "cells": [
+            {
+              "text": "Local dental or mandibular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the whole nerve pathway",
+          "cells": [
+            {
+              "text": "Includes the skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screen",
+          "cells": [
+            {
+              "text": "Known or suspected cancer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "numb_chin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic breast or prostate cancer",
+          "cells": [
+            {
+              "text": "Malignant nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or leukaemia",
+          "cells": [
+            {
+              "text": "Haematological infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptomeningeal or skull-base disease",
+          "cells": [
+            {
+              "text": "Infiltration along the nerve pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental or mandibular pathology",
+          "cells": [
+            {
+              "text": "Local cause after dental procedure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "numb_chin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "The numbness is a sign, not a disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology review when malignancy is found",
+          "cells": [
+            {
+              "text": "Management of metastatic or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review for local causes",
+          "cells": [
+            {
+              "text": "Treatment of dental or mandibular problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full pathway imaging",
+          "cells": [
+            {
+              "text": "Directs the work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "numb_chin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Numb chin syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Numbness of the chin and lower lip in the mental nerve distribution",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (known cancer, other cranial neuropathy, systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review and imaging of the skull base for malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of brain, skull base and mandible, orthopantomogram, dental review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mental nerve injury confirmed on imaging with a cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dental or local cause; complete the imaging work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause rather than the numbness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oncology review for metastatic or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dental review for local causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Image the whole nerve pathway including skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Driven by cause; malignant causes often signal advanced disease and a poor outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

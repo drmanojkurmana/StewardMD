@@ -1,177 +1,464 @@
 {
- "id": "pulmonary_sequestration",
- "name": "pulmonary sequestration",
- "aliases": [
-  "bronchopulmonary sequestration",
-  "accessory lung"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Paediatric surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous systemic arterial supply, most often from the descending thoracic or abdominal aorta.",
-   "Two subtypes exist: intralobar (shares the visceral pleura of normal lung and typically presents later in childhood or adulthood with recurrent infection) and extralobar (has its own pleural investment, presents earlier and is frequently associated with other anomalies).",
-   "Intralobar sequestration predominates and characteristically involves the posterobasal segment of the left lower lobe.",
-   "Venous drainage differs by subtype: intralobar lesions usually drain to the pulmonary veins, whereas extralobar lesions typically drain to systemic veins such as the azygos or hemiazygos system.",
-   "CT angiography is the investigation of choice because it demonstrates the anomalous systemic feeding vessel that clinches the diagnosis.",
-   "Extralobar lesions are commonly detected antenatally and may coexist with congenital diaphragmatic hernia, congenital pulmonary airway malformation (hybrid lesions) and cardiac defects.",
-   "Definitive management is surgical resection (lobectomy for intralobar disease, simple excision for extralobar), while catheter embolisation of the feeding artery is an option in selected cases.",
-   "Meticulous identification and secure control of the systemic feeding artery is essential, as an unrecognised retracted vessel can cause catastrophic haemorrhage."
+  "id": "pulmonary_sequestration",
+  "name": "pulmonary sequestration",
+  "aliases": [
+    "bronchopulmonary sequestration",
+    "accessory lung"
   ],
-  "pathophysiology": "During foetal development an accessory lung bud arises from the primitive foregut caudal to the normal lung bud, and because it develops separately it fails to establish communication with the tracheobronchial tree and retains its embryonic systemic arterial supply from the aorta rather than acquiring a pulmonary arterial connection. Whether the ectopic tissue is incorporated within the developing lung before or after pleural formation determines the intralobar phenotype (no separate pleura) versus the extralobar phenotype (separate pleural investment). The sequestered tissue is non-aerated or ventilated only through collateral channels, predisposing to mucus stasis and recurrent infection, while its systemic arterial supply creates a shunt that can rarely produce high-output cardiac strain or life-threatening haemoptysis.",
-  "additionalDifferentials": [
-   "Congenital pulmonary airway malformation",
-   "Congenital diaphragmatic hernia or eventration",
-   "Bronchogenic cyst",
-   "Posterior mediastinal mass such as neuroblastoma",
-   "Congenital lobar emphysema",
-   "Pulmonary abscess or necrotising pneumonia",
-   "Bronchial atresia with mucocoele"
-  ],
-  "additionalInvestigations": [
-   "CT pulmonary and aortic angiography to define the feeding artery and venous drainage",
-   "Contrast-enhanced MRI or MR angiography (avoids ionising radiation, useful in children)",
-   "Antenatal and postnatal Doppler ultrasound",
-   "Echocardiography to assess shunt burden and exclude associated cardiac anomalies",
-   "Digital subtraction angiography if embolisation is planned",
-   "Histopathological examination of the resected specimen",
-   "Renal and spinal imaging where associated anomalies are suspected in extralobar disease"
-  ],
-  "redFlags": [
-   "Massive or recurrent haemoptysis from the systemic arterial supply",
-   "Signs of high-output cardiac failure in a neonate or infant from a large shunt",
-   "Rapidly enlarging antenatal lesion with hydrops or mediastinal shift",
-   "Recurrent lower-lobe pneumonia refractory to treatment"
-  ],
-  "prognosis": "Prognosis is excellent after complete resection, with low recurrence and preserved long-term pulmonary function. Outcome in antenatally detected disease depends on lesion size, associated anomalies and the presence of hydrops.",
-  "pitfalls": [
-   "Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative haemorrhage.",
-   "Mislabelling a hybrid lesion as pure sequestration or pure congenital pulmonary airway malformation.",
-   "Overlooking an infradiaphragmatic feeding vessel arising from the abdominal aorta.",
-   "Attributing recurrent left basal pneumonia to ordinary infection rather than an underlying sequestration.",
-   "Assuming all lesions drain to pulmonary veins and misjudging the venous anatomy at surgery."
-  ],
-  "references": [
-   "Nelson Textbook of Paediatrics",
-   "Fraser and Paré's Diagnosis of Diseases of the Chest",
-   "Grainger & Allison's Diagnostic Radiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding artery, as the definitive treatment for symptomatic lesions",
-   "Consider transcatheter embolisation of the feeding vessel as an alternative or adjunct in selected patients",
-   "Treat recurrent or active pulmonary infection with appropriate antibiotics and control sepsis before elective resection",
-   "Monitor antenatally detected lesions with serial ultrasound for growth, hydrops and cardiac compromise, considering foetal intervention when hydrops develops",
-   "Assess and manage any high-output cardiac strain arising from the systemic arterial shunt",
-   "Send the resected specimen for histopathology to confirm the diagnosis and exclude hybrid or malignant change",
-   "Manage within a paediatric or thoracic surgical multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_sequestration-pathway",
-   "title": "pulmonary sequestration: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous systemic arterial supply, most often from the descending thoracic or abdominal aorta.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Massive or recurrent haemoptysis from the systemic arterial supply",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT pulmonary and aortic angiography to define the feeding artery and venous drainage, Contrast-enhanced MRI or MR angiography (avoids ionising radiation, useful in children), Antenatal and postnatal Doppler ultrasound"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding artery, as the definitive treatment for symptomatic lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative haemorrhage."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary sequestration."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_sequestration-matrix",
-   "title": "pulmonary sequestration: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Paediatric surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous systemic arterial supply, most often from the descending thoracic or abdominal aorta.",
+      "Two subtypes exist: intralobar (shares the visceral pleura of normal lung and typically presents later in childhood or adulthood with recurrent infection) and extralobar (has its own pleural investment, presents earlier and is frequently associated with other anomalies).",
+      "Intralobar sequestration predominates and characteristically involves the posterobasal segment of the left lower lobe.",
+      "Venous drainage differs by subtype: intralobar lesions usually drain to the pulmonary veins, whereas extralobar lesions typically drain to systemic veins such as the azygos or hemiazygos system.",
+      "CT angiography is the investigation of choice because it demonstrates the anomalous systemic feeding vessel that clinches the diagnosis.",
+      "Extralobar lesions are commonly detected antenatally and may coexist with congenital diaphragmatic hernia, congenital pulmonary airway malformation (hybrid lesions) and cardiac defects.",
+      "Definitive management is surgical resection (lobectomy for intralobar disease, simple excision for extralobar), while catheter embolisation of the feeding artery is an option in selected cases.",
+      "Meticulous identification and secure control of the systemic feeding artery is essential, as an unrecognised retracted vessel can cause catastrophic haemorrhage."
     ],
-    [
-     "Key Investigations",
-     "CT pulmonary and aortic angiography to define the feeding artery and venous drainage, Contrast-enhanced MRI or MR angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During foetal development an accessory lung bud arises from the primitive foregut caudal to the normal lung bud, and because it develops separately it fails to establish communication with the tracheobronchial tree and retains its embryonic systemic arterial supply from the aorta rather than acquiring a pulmonary arterial connection. Whether the ectopic tissue is incorporated within the developing lung before or after pleural formation determines the intralobar phenotype (no separate pleura) versus the extralobar phenotype (separate pleural investment). The sequestered tissue is non-aerated or ventilated only through collateral channels, predisposing to mucus stasis and recurrent infection, while its systemic arterial supply creates a shunt that can rarely produce high-output cardiac strain or life-threatening haemoptysis.",
+    "additionalDifferentials": [
+      "Congenital pulmonary airway malformation",
+      "Congenital diaphragmatic hernia or eventration",
+      "Bronchogenic cyst",
+      "Posterior mediastinal mass such as neuroblastoma",
+      "Congenital lobar emphysema",
+      "Pulmonary abscess or necrotising pneumonia",
+      "Bronchial atresia with mucocoele"
     ],
-    [
-     "Primary Differentials",
-     "Congenital pulmonary airway malformation, Congenital diaphragmatic hernia or eventration, Bronchogenic cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT pulmonary and aortic angiography to define the feeding artery and venous drainage",
+      "Contrast-enhanced MRI or MR angiography (avoids ionising radiation, useful in children)",
+      "Antenatal and postnatal Doppler ultrasound",
+      "Echocardiography to assess shunt burden and exclude associated cardiac anomalies",
+      "Digital subtraction angiography if embolisation is planned",
+      "Histopathological examination of the resected specimen",
+      "Renal and spinal imaging where associated anomalies are suspected in extralobar disease"
     ],
-    [
-     "Management Strategy",
-     "Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding",
-     "Core treatment modality"
+    "redFlags": [
+      "Massive or recurrent haemoptysis from the systemic arterial supply",
+      "Signs of high-output cardiac failure in a neonate or infant from a large shunt",
+      "Rapidly enlarging antenatal lesion with hydrops or mediastinal shift",
+      "Recurrent lower-lobe pneumonia refractory to treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent after complete resection, with low recurrence and preserved long-term pulmonary function. Outcome in antenatally detected disease depends on lesion size, associated anomalies and the presence of hydrops.",
+    "pitfalls": [
+      "Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative haemorrhage.",
+      "Mislabelling a hybrid lesion as pure sequestration or pure congenital pulmonary airway malformation.",
+      "Overlooking an infradiaphragmatic feeding vessel arising from the abdominal aorta.",
+      "Attributing recurrent left basal pneumonia to ordinary infection rather than an underlying sequestration.",
+      "Assuming all lesions drain to pulmonary veins and misjudging the venous anatomy at surgery."
+    ],
+    "references": [
+      "Nelson Textbook of Paediatrics",
+      "Fraser and Paré's Diagnosis of Diseases of the Chest",
+      "Grainger & Allison's Diagnostic Radiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding artery, as the definitive treatment for symptomatic lesions",
+      "Consider transcatheter embolisation of the feeding vessel as an alternative or adjunct in selected patients",
+      "Treat recurrent or active pulmonary infection with appropriate antibiotics and control sepsis before elective resection",
+      "Monitor antenatally detected lesions with serial ultrasound for growth, hydrops and cardiac compromise, considering foetal intervention when hydrops develops",
+      "Assess and manage any high-output cardiac strain arising from the systemic arterial shunt",
+      "Send the resected specimen for histopathology to confirm the diagnosis and exclude hybrid or malignant change",
+      "Manage within a paediatric or thoracic surgical multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary sequestration."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-sequestration-real-image",
-   "title": "pulmonary sequestration: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_sequestration-pathway",
+      "title": "pulmonary sequestration: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous systemic arterial supply, most often from the descending thoracic or abdominal aorta.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Massive or recurrent haemoptysis from the systemic arterial supply",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT pulmonary and aortic angiography to define the feeding artery and venous drainage, Contrast-enhanced MRI or MR angiography (avoids ionising radiation, useful in children), Antenatal and postnatal Doppler ultrasound"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding artery, as the definitive treatment for symptomatic lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative haemorrhage."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary sequestration."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_sequestration-matrix",
+      "title": "pulmonary sequestration: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as non-functioning lung tissue that lacks normal communication with the tracheobronchial tree and receives an anomalous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT pulmonary and aortic angiography to define the feeding artery and venous drainage, Contrast-enhanced MRI or MR angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital pulmonary airway malformation, Congenital diaphragmatic hernia or eventration, Bronchogenic cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Resect the sequestered tissue surgically, by lobectomy or segmentectomy with secure ligation of the anomalous systemic feeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to obtain dedicated angiographic imaging and thereby missing the anomalous systemic artery, risking intraoperative",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary sequestration."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_sequestration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT pulmonary and aortic angiography",
+          "cells": [
+            {
+              "text": "Feeding artery and venous drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast MRI or MR angiography",
+          "cells": [
+            {
+              "text": "Anatomy without ionising radiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal and postnatal Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Systemic arterial supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Shunt burden and associated cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital subtraction angiography, if embolisation planned",
+          "cells": [
+            {
+              "text": "Embolisation planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected specimen",
+          "cells": [
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_sequestration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital diaphragmatic hernia or eventration",
+          "cells": [
+            {
+              "text": "Diaphragmatic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary abscess or necrotising pneumonia",
+          "cells": [
+            {
+              "text": "Recurrent lower-lobe pneumonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_sequestration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resection",
+          "cells": [
+            {
+              "text": "Lobectomy or segmentectomy of the sequestered tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolisation",
+          "cells": [
+            {
+              "text": "Transcatheter embolisation of the feeding vessel as an alternative or adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Antibiotics for recurrent or active infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal monitoring",
+          "cells": [
+            {
+              "text": "Serial ultrasound for growth, hydrops and compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-output strain",
+          "cells": [
+            {
+              "text": "Manage cardiac strain from the systemic arterial supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Send the resected specimen to confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Paediatric or thoracic surgical multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_sequestration-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary sequestration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary sequestration: lung tissue with systemic arterial supply",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Massive haemoptysis, high-output failure, hydrops, or recurrent lower-lobe pneumonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for haemoptysis or high-output failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTA or MRA for feeding artery and drainage; Doppler; echo; DSA if embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a systemic arterial supply to non-functioning lung confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPAM, bronchogenic cyst or abscess; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection by lobectomy or segmentectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transcatheter embolisation as alternative or adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for recurrent or active infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial antenatal ultrasound for growth and hydrops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Histopathology of resected specimen; paediatric or thoracic surgical follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

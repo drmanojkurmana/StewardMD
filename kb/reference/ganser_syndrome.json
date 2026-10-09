@@ -1,173 +1,460 @@
 {
- "id": "ganser_syndrome",
- "name": "Ganser syndrome",
- "aliases": [
-  "Ganser's syndrome",
-  "syndrome of approximate answers",
-  "nonsense syndrome",
-  "prison psychosis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan and Sadock's Comprehensive Textbook of Psychiatry / Adams and Victor's Principles of Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question was understood (e.g. stating a cow has five legs)",
-   "Classically described with a tetrad of approximate answers, clouding of consciousness, somatic conversion features, and hallucinations",
-   "Historically reported in prisoners, hence the term prison psychosis, and often follows acute stress",
-   "Usually classified among the dissociative disorders, though its precise nosological status remains debated",
-   "Organic brain disease, genuine cognitive impairment, and malingering must be carefully excluded before the diagnosis is made",
-   "Episodes are typically transient, resolving over days to weeks, sometimes with amnesia for the period",
-   "Management is supportive, addressing the precipitating stressor and any comorbid psychiatric or organic condition"
+  "id": "ganser_syndrome",
+  "name": "Ganser syndrome",
+  "aliases": [
+    "Ganser's syndrome",
+    "syndrome of approximate answers",
+    "nonsense syndrome",
+    "prison psychosis"
   ],
-  "pathophysiology": "Ganser syndrome is generally regarded as a dissociative reaction, in which acute psychological stress produces an alteration of consciousness and behaviour rather than a defined structural lesion. The approximate answers are thought to reflect an unconscious mechanism whereby the correct information is accessible (evidenced by answers being in the right domain) but is not delivered accurately. Distinguishing it from deliberate feigning is difficult, and some authorities view it as lying on a spectrum with factitious and malingered presentations. Occasional cases are associated with organic brain dysfunction, so a coexisting or underlying neurological or metabolic disturbance should be considered.",
-  "additionalDifferentials": [
-   "Malingering or factitious disorder",
-   "Delirium or other organic confusional state",
-   "Dementia and genuine cognitive impairment",
-   "Dissociative amnesia or fugue",
-   "Psychotic disorder",
-   "Post-ictal confusional state"
-  ],
-  "additionalInvestigations": [
-   "Detailed mental state examination documenting approximate answers and clouding",
-   "Cognitive testing to compare with pattern expected in genuine impairment",
-   "Bloods and metabolic screen to exclude organic causes",
-   "Neuroimaging (MRI or CT brain) where an organic process is suspected",
-   "Electroencephalography to exclude post-ictal or encephalopathic states",
-   "Collateral history and assessment of psychosocial stressors"
-  ],
-  "redFlags": [
-   "Features suggesting an untreated organic or metabolic cause of confusion",
-   "Evidence of self-harm or suicidality related to the precipitating stress",
-   "Findings that raise concern for malingering with secondary gain requiring careful handling",
-   "Fluctuating consciousness pointing to delirium"
-  ],
-  "prognosis": "Episodes are usually self-limiting and resolve over days to weeks once the stressor is addressed, often with amnesia for the episode, though recurrence can occur and prognosis is influenced by any underlying disorder.",
-  "pitfalls": [
-   "Diagnosing Ganser syndrome without excluding organic disease or delirium",
-   "Confusing approximate answers with random or genuinely impaired responses",
-   "Prematurely labelling the patient as malingering",
-   "Overlooking comorbid depression, psychosis, or self-harm risk"
-  ],
-  "references": [
-   "Kaplan and Sadock's Comprehensive Textbook of Psychiatry",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves",
-   "Exclude and treat any organic brain or metabolic disturbance identified on screening before settling on the diagnosis",
-   "Address the precipitating psychosocial stressor with supportive psychotherapy and reassurance",
-   "Treat comorbid psychiatric illness such as depression or psychosis with appropriate pharmacotherapy where present",
-   "Avoid confronting the patient about the approximate answers, which can entrench the presentation",
-   "Refer to psychiatry or neuropsychiatry for assessment and follow-up, monitoring for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ganser_syndrome-pathway",
-   "title": "Ganser syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question was understood (e.g. stating a cow has five legs)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting an untreated organic or metabolic cause of confusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed mental state examination documenting approximate answers and clouding, Cognitive testing to compare with pattern expected in genuine impairment, Bloods and metabolic screen to exclude organic causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing Ganser syndrome without excluding organic disease or delirium"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ganser syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "ganser_syndrome-matrix",
-   "title": "Ganser syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan and Sadock's Comprehensive Textbook of Psychiatry / Adams and Victor's Principles of Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question was understood (e.g. stating a cow has five legs)",
+      "Classically described with a tetrad of approximate answers, clouding of consciousness, somatic conversion features, and hallucinations",
+      "Historically reported in prisoners, hence the term prison psychosis, and often follows acute stress",
+      "Usually classified among the dissociative disorders, though its precise nosological status remains debated",
+      "Organic brain disease, genuine cognitive impairment, and malingering must be carefully excluded before the diagnosis is made",
+      "Episodes are typically transient, resolving over days to weeks, sometimes with amnesia for the period",
+      "Management is supportive, addressing the precipitating stressor and any comorbid psychiatric or organic condition"
     ],
-    [
-     "Key Investigations",
-     "Detailed mental state examination documenting approximate answers and clouding, Cognitive testing to compare with pattern",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ganser syndrome is generally regarded as a dissociative reaction, in which acute psychological stress produces an alteration of consciousness and behaviour rather than a defined structural lesion. The approximate answers are thought to reflect an unconscious mechanism whereby the correct information is accessible (evidenced by answers being in the right domain) but is not delivered accurately. Distinguishing it from deliberate feigning is difficult, and some authorities view it as lying on a spectrum with factitious and malingered presentations. Occasional cases are associated with organic brain dysfunction, so a coexisting or underlying neurological or metabolic disturbance should be considered.",
+    "additionalDifferentials": [
+      "Malingering or factitious disorder",
+      "Delirium or other organic confusional state",
+      "Dementia and genuine cognitive impairment",
+      "Dissociative amnesia or fugue",
+      "Psychotic disorder",
+      "Post-ictal confusional state"
     ],
-    [
-     "Primary Differentials",
-     "Malingering or factitious disorder, Delirium or other organic confusional state, Dementia and genuine cognitive impairment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed mental state examination documenting approximate answers and clouding",
+      "Cognitive testing to compare with pattern expected in genuine impairment",
+      "Bloods and metabolic screen to exclude organic causes",
+      "Neuroimaging (MRI or CT brain) where an organic process is suspected",
+      "Electroencephalography to exclude post-ictal or encephalopathic states",
+      "Collateral history and assessment of psychosocial stressors"
     ],
-    [
-     "Management Strategy",
-     "Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting an untreated organic or metabolic cause of confusion",
+      "Evidence of self-harm or suicidality related to the precipitating stress",
+      "Findings that raise concern for malingering with secondary gain requiring careful handling",
+      "Fluctuating consciousness pointing to delirium"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing Ganser syndrome without excluding organic disease or delirium",
-     "Prevent diagnostic or management error"
+    "prognosis": "Episodes are usually self-limiting and resolve over days to weeks once the stressor is addressed, often with amnesia for the episode, though recurrence can occur and prognosis is influenced by any underlying disorder.",
+    "pitfalls": [
+      "Diagnosing Ganser syndrome without excluding organic disease or delirium",
+      "Confusing approximate answers with random or genuinely impaired responses",
+      "Prematurely labelling the patient as malingering",
+      "Overlooking comorbid depression, psychosis, or self-harm risk"
+    ],
+    "references": [
+      "Kaplan and Sadock's Comprehensive Textbook of Psychiatry",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves",
+      "Exclude and treat any organic brain or metabolic disturbance identified on screening before settling on the diagnosis",
+      "Address the precipitating psychosocial stressor with supportive psychotherapy and reassurance",
+      "Treat comorbid psychiatric illness such as depression or psychosis with appropriate pharmacotherapy where present",
+      "Avoid confronting the patient about the approximate answers, which can entrench the presentation",
+      "Refer to psychiatry or neuropsychiatry for assessment and follow-up, monitoring for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for ganser syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ganser-syndrome-real-image",
-   "title": "Ganser syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "ganser_syndrome-pathway",
+      "title": "Ganser syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question was understood (e.g. stating a cow has five legs)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting an untreated organic or metabolic cause of confusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed mental state examination documenting approximate answers and clouding, Cognitive testing to compare with pattern expected in genuine impairment, Bloods and metabolic screen to exclude organic causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing Ganser syndrome without excluding organic disease or delirium"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ganser syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ganser_syndrome-matrix",
+      "title": "Ganser syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark is approximate answers (Vorbeigehen), in which the patient gives replies that are near-misses yet show the question",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed mental state examination documenting approximate answers and clouding, Cognitive testing to compare with pattern",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malingering or factitious disorder, Delirium or other organic confusional state, Dementia and genuine cognitive impairment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide a safe, low-stimulation, supportive environment while the typically self-limiting episode resolves",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing Ganser syndrome without excluding organic disease or delirium",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ganser syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan and Sadock's Comprehensive Textbook of Psychiatry / Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mental state examination",
+          "cells": [
+            {
+              "text": "Approximate answers and clouding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive testing",
+          "cells": [
+            {
+              "text": "Compared with the pattern expected in genuine impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes organic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of the brain",
+          "cells": [
+            {
+              "text": "Where an organic process is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Excludes post-ictal or encephalopathic states"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history and psychosocial stressors",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganser_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Delirium or organic confusional state",
+          "cells": [
+            {
+              "text": "Fluctuating consciousness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia or genuine cognitive impairment",
+          "cells": [
+            {
+              "text": "Cognitive testing pattern differs from genuine impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malingering or factitious disorder",
+          "cells": [
+            {
+              "text": "Concern for secondary gain, requiring careful handling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Safe supportive environment",
+          "cells": [
+            {
+              "text": "Low stimulation while the typically self-limiting episode resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude organic disease",
+          "cells": [
+            {
+              "text": "Treat any organic brain or metabolic disturbance before settling on the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial stressor support",
+          "cells": [
+            {
+              "text": "Supportive psychotherapy and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid psychiatric illness",
+          "cells": [
+            {
+              "text": "Depression or psychosis, with pharmacotherapy where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid confronting the patient",
+          "cells": [
+            {
+              "text": "About approximate answers, which can entrench the presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatry referral",
+          "cells": [
+            {
+              "text": "Assessment, follow-up and monitoring for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ganser syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ganser syndrome: approximate answers and clouding of consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (organic cause, self-harm risk, fluctuating consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for self-harm or delirium with fluctuating consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mental state examination, cognitive testing, bloods, imaging and EEG as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are organic causes and delirium excluded on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malingering, factitious disorder, dementia or post-ictal state",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Safe, low-stimulation, supportive environment while the episode resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude and treat any organic brain or metabolic disturbance first",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive psychotherapy and reassurance for the psychosocial stressor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid confronting the patient about approximate answers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting; resolves over days to weeks once the stressor is addressed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,502 @@
 {
- "id": "cor_pulmonale_chronic",
- "name": "Chronic cor pulmonale",
- "aliases": [
-  "cor pulmonale",
-  "chronic pulmonary heart disease",
-  "right heart disease from lung disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their vasculature, or the control of breathing, excluding causes originating in the left heart",
-   "Chronic obstructive pulmonary disease is the commonest underlying cause, followed by interstitial lung disease, chronic thromboembolic disease, and disorders of ventilation such as obesity hypoventilation and sleep-disordered breathing",
-   "Presents insidiously with exertional breathlessness and fatigue, then signs of right heart failure including raised jugular venous pressure, hepatic congestion, ascites, and peripheral oedema",
-   "Examination may reveal a left parasternal heave, a loud pulmonary component of the second heart sound, and a tricuspid regurgitant murmur",
-   "Echocardiography is central for estimating pulmonary pressures and assessing right ventricular size and function, while the primary diagnosis rests on lung assessment",
-   "The cornerstone of treatment is optimal management of the underlying lung disorder, with long-term oxygen therapy for chronic hypoxaemia being of particular prognostic value",
-   "Diuretics relieve congestion but require care to avoid reducing right ventricular filling, and pulmonary vasodilators are generally not indicated for cor pulmonale due to lung disease"
+  "id": "cor_pulmonale_chronic",
+  "name": "Chronic cor pulmonale",
+  "aliases": [
+    "cor pulmonale",
+    "chronic pulmonary heart disease",
+    "right heart disease from lung disease"
   ],
-  "pathophysiology": "Chronic cor pulmonale develops when a respiratory disorder raises pulmonary vascular resistance and pressure. Alveolar hypoxia causes pulmonary arteriolar vasoconstriction and, over time, vascular remodelling; loss or destruction of the pulmonary vascular bed in emphysema or fibrosis and obliteration by chronic thromboembolism add a fixed component. The right ventricle responds to this sustained afterload with hypertrophy and then dilatation, and as it fails, right atrial pressure rises and systemic venous congestion produces the characteristic oedema, hepatic congestion, and ascites. Correcting hypoxaemia can relieve the reversible vasoconstrictive element of the pulmonary hypertension.",
-  "additionalDifferentials": [
-   "Left heart failure causing pulmonary venous hypertension",
-   "Pulmonary arterial hypertension (Group 1)",
-   "Constrictive pericarditis",
-   "Restrictive cardiomyopathy",
-   "Right ventricular myocardial disease or infarction",
-   "Congenital heart disease with pulmonary hypertension"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function",
-   "Pulmonary function tests and arterial blood gas analysis to define the lung disorder and hypoxaemia",
-   "Chest imaging with radiography and CT to characterise the underlying lung and vascular disease",
-   "Ventilation-perfusion scanning or CT pulmonary angiography to detect chronic thromboembolic disease",
-   "Right heart catheterisation to confirm pulmonary hypertension and its type when management depends on it"
-  ],
-  "redFlags": [
-   "Progressive right heart failure with refractory oedema and hepatic congestion",
-   "Severe or worsening hypoxaemia requiring oxygen assessment",
-   "Syncope or presyncope suggesting markedly raised pulmonary pressures",
-   "Features pointing to chronic thromboembolic disease that may be surgically treatable"
-  ],
-  "prognosis": "The outlook is largely governed by the underlying lung disease; the onset of overt right heart failure signals advanced disease and a poorer prognosis, though long-term oxygen therapy improves survival in chronically hypoxaemic patients.",
-  "pitfalls": [
-   "Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism",
-   "Over-diuresis that lowers right ventricular preload and reduces cardiac output",
-   "Using pulmonary vasodilators intended for pulmonary arterial hypertension in cor pulmonale from lung disease, worsening gas exchange",
-   "Failing to identify and treat correctable hypoxaemia and sleep-disordered breathing"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or interstitial lung disease",
-   "Provide long-term oxygen therapy for chronic hypoxaemia, which improves survival and reduces reversible pulmonary vasoconstriction",
-   "Relieve systemic congestion, ascites and peripheral oedema with diuretics while avoiding excessive preload reduction",
-   "Treat chronic thromboembolic disease with anticoagulation and refer for pulmonary endarterectomy or targeted therapy where appropriate",
-   "Manage hypoventilation from obesity or sleep-disordered breathing with non-invasive ventilation and treatment of sleep apnoea",
-   "Reinforce smoking cessation, pulmonary rehabilitation and vaccination, and monitor with echocardiography, arterial blood gases and right ventricular assessment",
-   "Refer to a pulmonary hypertension specialist for phenotyping and escalate care as overt right heart failure signals advanced disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cor_pulmonale_chronic-pathway",
-   "title": "Chronic cor pulmonale: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their vasculature, or the control of breathing, excluding causes originating in the left heart",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive right heart failure with refractory oedema and hepatic congestion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function, Pulmonary function tests and arterial blood gas analysis to define the lung disorder and hypoxaemia, Chest imaging with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or interstitial lung disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic cor pulmonale."
-  }
- ],
- "tables": [
-  {
-   "id": "cor_pulmonale_chronic-matrix",
-   "title": "Chronic cor pulmonale: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their vasculature, or the control of breathing, excluding causes originating in the left heart",
+      "Chronic obstructive pulmonary disease is the commonest underlying cause, followed by interstitial lung disease, chronic thromboembolic disease, and disorders of ventilation such as obesity hypoventilation and sleep-disordered breathing",
+      "Presents insidiously with exertional breathlessness and fatigue, then signs of right heart failure including raised jugular venous pressure, hepatic congestion, ascites, and peripheral oedema",
+      "Examination may reveal a left parasternal heave, a loud pulmonary component of the second heart sound, and a tricuspid regurgitant murmur",
+      "Echocardiography is central for estimating pulmonary pressures and assessing right ventricular size and function, while the primary diagnosis rests on lung assessment",
+      "The cornerstone of treatment is optimal management of the underlying lung disorder, with long-term oxygen therapy for chronic hypoxaemia being of particular prognostic value",
+      "Diuretics relieve congestion but require care to avoid reducing right ventricular filling, and pulmonary vasodilators are generally not indicated for cor pulmonale due to lung disease"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function, Pulmonary function tests",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic cor pulmonale develops when a respiratory disorder raises pulmonary vascular resistance and pressure. Alveolar hypoxia causes pulmonary arteriolar vasoconstriction and, over time, vascular remodelling; loss or destruction of the pulmonary vascular bed in emphysema or fibrosis and obliteration by chronic thromboembolism add a fixed component. The right ventricle responds to this sustained afterload with hypertrophy and then dilatation, and as it fails, right atrial pressure rises and systemic venous congestion produces the characteristic oedema, hepatic congestion, and ascites. Correcting hypoxaemia can relieve the reversible vasoconstrictive element of the pulmonary hypertension.",
+    "additionalDifferentials": [
+      "Left heart failure causing pulmonary venous hypertension",
+      "Pulmonary arterial hypertension (Group 1)",
+      "Constrictive pericarditis",
+      "Restrictive cardiomyopathy",
+      "Right ventricular myocardial disease or infarction",
+      "Congenital heart disease with pulmonary hypertension"
     ],
-    [
-     "Primary Differentials",
-     "Left heart failure causing pulmonary venous hypertension, Pulmonary arterial hypertension (Group 1), Constrictive pericarditis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function",
+      "Pulmonary function tests and arterial blood gas analysis to define the lung disorder and hypoxaemia",
+      "Chest imaging with radiography and CT to characterise the underlying lung and vascular disease",
+      "Ventilation-perfusion scanning or CT pulmonary angiography to detect chronic thromboembolic disease",
+      "Right heart catheterisation to confirm pulmonary hypertension and its type when management depends on it"
     ],
-    [
-     "Management Strategy",
-     "Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive right heart failure with refractory oedema and hepatic congestion",
+      "Severe or worsening hypoxaemia requiring oxygen assessment",
+      "Syncope or presyncope suggesting markedly raised pulmonary pressures",
+      "Features pointing to chronic thromboembolic disease that may be surgically treatable"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is largely governed by the underlying lung disease; the onset of overt right heart failure signals advanced disease and a poorer prognosis, though long-term oxygen therapy improves survival in chronically hypoxaemic patients.",
+    "pitfalls": [
+      "Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism",
+      "Over-diuresis that lowers right ventricular preload and reduces cardiac output",
+      "Using pulmonary vasodilators intended for pulmonary arterial hypertension in cor pulmonale from lung disease, worsening gas exchange",
+      "Failing to identify and treat correctable hypoxaemia and sleep-disordered breathing"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or interstitial lung disease",
+      "Provide long-term oxygen therapy for chronic hypoxaemia, which improves survival and reduces reversible pulmonary vasoconstriction",
+      "Relieve systemic congestion, ascites and peripheral oedema with diuretics while avoiding excessive preload reduction",
+      "Treat chronic thromboembolic disease with anticoagulation and refer for pulmonary endarterectomy or targeted therapy where appropriate",
+      "Manage hypoventilation from obesity or sleep-disordered breathing with non-invasive ventilation and treatment of sleep apnoea",
+      "Reinforce smoking cessation, pulmonary rehabilitation and vaccination, and monitor with echocardiography, arterial blood gases and right ventricular assessment",
+      "Refer to a pulmonary hypertension specialist for phenotyping and escalate care as overt right heart failure signals advanced disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic cor pulmonale."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cor-pulmonale-chronic-real-image",
-   "title": "Chronic cor pulmonale: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cor_pulmonale_chronic-pathway",
+      "title": "Chronic cor pulmonale: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their vasculature, or the control of breathing, excluding causes originating in the left heart",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive right heart failure with refractory oedema and hepatic congestion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function, Pulmonary function tests and arterial blood gas analysis to define the lung disorder and hypoxaemia, Chest imaging with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or interstitial lung disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic cor pulmonale."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cor_pulmonale_chronic-matrix",
+      "title": "Chronic cor pulmonale: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Right ventricular enlargement and eventual failure caused by pulmonary hypertension arising from disease of the lungs, their",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to estimate pulmonary artery pressure and assess right ventricular size and function, Pulmonary function tests",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Left heart failure causing pulmonary venous hypertension, Pulmonary arterial hypertension (Group 1), Constrictive pericarditis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimal management of the underlying lung disorder is the cornerstone, tailored to the cause such as chronic obstructive or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing right heart failure to lung disease without excluding left heart disease or chronic thromboembolism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic cor pulmonale."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 234-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cor_pulmonale_chronic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary artery pressure and right ventricular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests and arterial blood gases",
+          "cells": [
+            {
+              "text": "Lung disorder and hypoxaemia defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiography and CT",
+          "cells": [
+            {
+              "text": "Underlying lung and vascular disease characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "V/Q scanning or CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and its type confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cor_pulmonale_chronic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Left heart failure causing pulmonary venous hypertension",
+          "cells": [
+            {
+              "text": "Pitfall: right failure attributed to lung disease without excluding left heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary arterial hypertension (Group 1)",
+          "cells": [
+            {
+              "text": "Named pulmonary hypertension look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Named right heart look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cor_pulmonale_chronic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying lung disorder",
+          "cells": [
+            {
+              "text": "Tailored to the cause, such as chronic obstructive or interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term oxygen",
+          "cells": [
+            {
+              "text": "Improves survival and reduces reversible pulmonary vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "For ascites and oedema, avoiding excessive preload reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic disease",
+          "cells": [
+            {
+              "text": "Anticoagulation; pulmonary endarterectomy or targeted therapy where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoventilation",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation and sleep apnoea treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and rehabilitation",
+          "cells": [
+            {
+              "text": "Smoking cessation, pulmonary rehabilitation and vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist phenotyping",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension specialist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cor_pulmonale_chronic-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Etiology of chronic cor pulmonale",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diseases leading to hypoxemic vasoconstriction",
+          "cells": [
+            {
+              "text": "Chronic bronchitis; chronic obstructive pulmonary disease; cystic fibrosis; chronic hypoventilation (obesity, neuromuscular disease, chest wall dysfunction); living at high altitude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diseases occluding the pulmonary vascular bed",
+          "cells": [
+            {
+              "text": "Thromboembolic disease, acute or chronic; pulmonary arterial hypertension; pulmonary veno-occlusive disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diseases leading to parenchymal disease",
+          "cells": [
+            {
+              "text": "Chronic bronchitis; chronic obstructive pulmonary disease; bronchiectasis; cystic fibrosis; pneumoconiosis; sarcoidosis; interstitial lung disease"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cor_pulmonale_chronic-dx-mgmt",
+      "title": "Diagnosis and management of Chronic cor pulmonale",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic cor pulmonale: right heart failure with chronic lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory oedema, worsening hypoxaemia, syncope, thromboembolism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oxygen assessment; check for surgically treatable thromboembolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo; PFTs and blood gases; CT; V/Q or CT angiography; right heart catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show chronic thromboembolic disease or pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider left heart disease, PAH or restrictive cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise the underlying lung disorder as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term oxygen for chronic hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation and endarterectomy for chronic thromboembolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-invasive ventilation and smoking cessation; avoid over-diuresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Governed by the lung disease; overt right heart failure signals advanced disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

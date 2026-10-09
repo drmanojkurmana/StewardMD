@@ -1,162 +1,695 @@
 {
- "id": "helicobacter_pylori_infection",
- "name": "Helicobacter pylori Infection",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 168,
- "page": 1298,
- "aliases": [
-  "H. pylori"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "1298; also 302, 416, 646, 649-650, 1009",
-  "clinicalPearls": [
-   "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of gastroduodenal ulcers (p.302).",
-   "In dyspeptic patients under 60 with no alarm features, test-and-treat is the recommended initial strategy: assess H. pylori status by fecal (stool) antigen or urea breath testing, and treat those who are positive (p.303).",
-   "Eradication of H. pylori in patients with bleeding ulcers lowers rebleeding rates to under 5% (p.272).",
-   "H. pylori is a known driver of gastric cancer; the intestinal subtype of gastric adenocarcinoma is associated with H. pylori infection and atrophic/atopic gastritis (p.646, p.647).",
-   "Although H. pylori is extremely common (present in roughly half of all humans), gastric cancer develops in only a small subset of those infected, so infection alone is not sufficient (p.646).",
-   "Treating H. pylori reduces future gastric cancer risk: eradication lowered gastric cancer incidence in people with a first-degree relative who had gastric cancer, and reduced second cancers in patients with prior early-stage gastric cancer (p.646).",
-   "All patients with gastric lymphoma should have H. pylori status evaluated; if histopathology is negative, confirm with a stool antigen test or urea breath test (p.649).",
-   "For gastric MALT lymphoma, antibiotic eradication of H. pylori alone is highly effective and is the initial therapy when H. pylori is positive and the t(11;18) translocation assay is negative, producing high response and complete-remission rates (p.649-650)."
+  "id": "helicobacter_pylori_infection",
+  "name": "Helicobacter pylori Infection",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 168,
+  "page": 1298,
+  "aliases": [
+    "H. pylori"
   ],
-  "pathophysiology": "H. pylori is a flagellated gastric bacterium whose colonization triggers chronic mucosal inflammation. The flagellum lets the organism access the gastric epithelium and is essential for virulence; H. pylori evades innate immunity by producing a flagellin epitope that does not bind TLR5 and tetra-acylated LPS that does not activate TLR4 (p.1009-1010). Adhesion and gastric tropism are mediated by bacterial outer-membrane proteins BabA and SabA interacting with epithelial GM1 ganglioside (p.1009). Chronic H. pylori inflammation, partly via generation of carcinogenic nitrites from dietary nitrates, drives the gastritis-to-cancer sequence and is a recognized cause of peptic ulcer disease, gastric adenocarcinoma (intestinal subtype), and gastric MALT lymphoma; certain higher-virulence strains carry greater cancer risk (p.646).",
-  "additionalDifferentials": [],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "Urea breath test (noninvasive) for active infection and for confirming eradication.",
-   "Stool (fecal) antigen test (noninvasive) for active infection and eradication confirmation.",
-   "Endoscopic biopsy with histopathology, including for gastric lymphoma staging.",
-   "PCR or FISH for the t(11;18) translocation in gastric MALT lymphoma to predict responsiveness to eradication therapy (p.649)."
-  ],
-  "redFlags": [
-   "Dyspepsia with alarm features (dysphagia, weight loss, bleeding/anemia, jaundice, palpable mass or adenopathy, family history of gastroesophageal malignancy) or age over 60 warrants upper endoscopy to exclude malignancy rather than test-and-treat alone (p.302-303).",
-   "Failure to respond to eradication, or recurrent/refractory symptoms, should prompt further evaluation."
-  ],
-  "prognosis": "Eradication markedly improves ulcer outcomes (rebleeding falls below 5%). In gastric MALT lymphoma, H. pylori eradication yields high response rates with complete remission in the majority, though time to remission can be prolonged (averaging ~15-16 months in some studies), requiring patient monitoring before declaring non-response (p.272, p.650). Benefit in functional dyspepsia is limited but statistically significant (about a 9% risk reduction vs placebo) (p.302).",
-  "pitfalls": [
-   "PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression must be stopped before testing for active H. pylori infection.",
-   "Confirmation of eradication should be performed 4-6 weeks after completing therapy, not immediately (p.303).",
-   "Do not rely on a single negative histopathology result in gastric lymphoma; confirm with noninvasive stool antigen or urea breath testing (p.649).",
-   "NEGATION: Even H. pylori-negative MALT tumors may respond to anti-H. pylori therapy, so a negative test does not preclude a trial of eradication; the t(11;18) translocation identifies a subgroup less likely to respond (p.649-650).",
-   "NEGATION: H. pylori eradication does NOT worsen GERD symptoms, despite H. pylori infection being associated with a reduced prevalence of GERD (p.302)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e, Chapter 168 (Helicobacter pylori Infections), p.1298.",
-   "Choi IJ et al: Helicobacter pylori and prevention of gastric cancer. N Engl J Med.",
-   "Choi IJ et al: Family history of gastric cancer and Helicobacter pylori treatment."
-  ],
-  "crossLinks": [
-   "peptic_ulcer"
-  ],
-  "management": [
-   "First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or metronidazole), reserving bismuth-based quadruple therapy for areas of high clarithromycin resistance or after failure",
-   "Guide antibiotic selection by local resistance patterns and susceptibility testing, using salvage regimens such as levofloxacin-containing therapy for persistent infection",
-   "Continue acid suppression with a proton pump inhibitor to promote healing of any associated peptic ulcer",
-   "Use eradication as first-line treatment for gastric MALT lymphoma, referring to haematology-oncology for radiotherapy or systemic therapy if t(11;18)-positive or non-responsive",
-   "Confirm cure after therapy with a urea breath test or stool antigen test, having stopped the proton pump inhibitor, rather than relying on serology",
-   "Manage bleeding ulcers endoscopically and eradicate the organism to reduce rebleeding, and offer endoscopic surveillance of premalignant atrophic gastritis"
-  ]
- },
- "algorithms": [
-  {
-   "id": "helicobacter_pylori_infection-pathway",
-   "title": "Helicobacter pylori Infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of gastroduodenal ulcers (p.302).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dyspepsia with alarm features (dysphagia, weight loss, bleeding/anemia, jaundice, palpable mass or adenopathy, family history of gastroesophageal malignancy) or age over 60 warrants upper endoscopy to exclude",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urea breath test (noninvasive) for active infection and for confirming eradication., Stool (fecal) antigen test (noninvasive) for active infection and eradication confirmation., Endoscopic biopsy with histopathology,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or metronidazole), reserving bismuth-based quadruple therapy for areas of high"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression must be stopped before testing for active H. pylori infection."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of helicobacter pylori infection."
-  }
- ],
- "tables": [
-  {
-   "id": "helicobacter_pylori_infection-matrix",
-   "title": "Helicobacter pylori Infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "1298; also 302, 416, 646, 649-650, 1009",
+    "clinicalPearls": [
+      "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of gastroduodenal ulcers (p.302).",
+      "In dyspeptic patients under 60 with no alarm features, test-and-treat is the recommended initial strategy: assess H. pylori status by fecal (stool) antigen or urea breath testing, and treat those who are positive (p.303).",
+      "Eradication of H. pylori in patients with bleeding ulcers lowers rebleeding rates to under 5% (p.272).",
+      "H. pylori is a known driver of gastric cancer; the intestinal subtype of gastric adenocarcinoma is associated with H. pylori infection and atrophic/atopic gastritis (p.646, p.647).",
+      "Although H. pylori is extremely common (present in roughly half of all humans), gastric cancer develops in only a small subset of those infected, so infection alone is not sufficient (p.646).",
+      "Treating H. pylori reduces future gastric cancer risk: eradication lowered gastric cancer incidence in people with a first-degree relative who had gastric cancer, and reduced second cancers in patients with prior early-stage gastric cancer (p.646).",
+      "All patients with gastric lymphoma should have H. pylori status evaluated; if histopathology is negative, confirm with a stool antigen test or urea breath test (p.649).",
+      "For gastric MALT lymphoma, antibiotic eradication of H. pylori alone is highly effective and is the initial therapy when H. pylori is positive and the t(11;18) translocation assay is negative, producing high response and complete-remission rates (p.649-650)."
     ],
-    [
-     "Key Investigations",
-     "Urea breath test (noninvasive) for active infection and for confirming eradication., Stool (fecal) antigen test (noninvasive) for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "H. pylori is a flagellated gastric bacterium whose colonization triggers chronic mucosal inflammation. The flagellum lets the organism access the gastric epithelium and is essential for virulence; H. pylori evades innate immunity by producing a flagellin epitope that does not bind TLR5 and tetra-acylated LPS that does not activate TLR4 (p.1009-1010). Adhesion and gastric tropism are mediated by bacterial outer-membrane proteins BabA and SabA interacting with epithelial GM1 ganglioside (p.1009). Chronic H. pylori inflammation, partly via generation of carcinogenic nitrites from dietary nitrates, drives the gastritis-to-cancer sequence and is a recognized cause of peptic ulcer disease, gastric adenocarcinoma (intestinal subtype), and gastric MALT lymphoma; certain higher-virulence strains carry greater cancer risk (p.646).",
+    "additionalDifferentials": [],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Urea breath test (noninvasive) for active infection and for confirming eradication.",
+      "Stool (fecal) antigen test (noninvasive) for active infection and eradication confirmation.",
+      "Endoscopic biopsy with histopathology, including for gastric lymphoma staging.",
+      "PCR or FISH for the t(11;18) translocation in gastric MALT lymphoma to predict responsiveness to eradication therapy (p.649)."
     ],
-    [
-     "Primary Differentials",
-     "Alternative etiologies and clinical mimics",
-     "Rule out key mimics"
+    "redFlags": [
+      "Dyspepsia with alarm features (dysphagia, weight loss, bleeding/anemia, jaundice, palpable mass or adenopathy, family history of gastroesophageal malignancy) or age over 60 warrants upper endoscopy to exclude malignancy rather than test-and-treat alone (p.302-303).",
+      "Failure to respond to eradication, or recurrent/refractory symptoms, should prompt further evaluation."
     ],
-    [
-     "Management Strategy",
-     "First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or",
-     "Core treatment modality"
+    "prognosis": "Eradication markedly improves ulcer outcomes (rebleeding falls below 5%). In gastric MALT lymphoma, H. pylori eradication yields high response rates with complete remission in the majority, though time to remission can be prolonged (averaging ~15-16 months in some studies), requiring patient monitoring before declaring non-response (p.272, p.650). Benefit in functional dyspepsia is limited but statistically significant (about a 9% risk reduction vs placebo) (p.302).",
+    "pitfalls": [
+      "PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression must be stopped before testing for active H. pylori infection.",
+      "Confirmation of eradication should be performed 4-6 weeks after completing therapy, not immediately (p.303).",
+      "Do not rely on a single negative histopathology result in gastric lymphoma; confirm with noninvasive stool antigen or urea breath testing (p.649).",
+      "NEGATION: Even H. pylori-negative MALT tumors may respond to anti-H. pylori therapy, so a negative test does not preclude a trial of eradication; the t(11;18) translocation identifies a subgroup less likely to respond (p.649-650).",
+      "NEGATION: H. pylori eradication does NOT worsen GERD symptoms, despite H. pylori infection being associated with a reduced prevalence of GERD (p.302)."
     ],
-    [
-     "Clinical Pitfall",
-     "PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression",
-     "Prevent diagnostic or management error"
+    "severityClassification": "",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e, Chapter 168 (Helicobacter pylori Infections), p.1298.",
+      "Choi IJ et al: Helicobacter pylori and prevention of gastric cancer. N Engl J Med.",
+      "Choi IJ et al: Family history of gastric cancer and Helicobacter pylori treatment."
+    ],
+    "crossLinks": [
+      "peptic_ulcer"
+    ],
+    "management": [
+      "First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or metronidazole), reserving bismuth-based quadruple therapy for areas of high clarithromycin resistance or after failure",
+      "Guide antibiotic selection by local resistance patterns and susceptibility testing, using salvage regimens such as levofloxacin-containing therapy for persistent infection",
+      "Continue acid suppression with a proton pump inhibitor to promote healing of any associated peptic ulcer",
+      "Use eradication as first-line treatment for gastric MALT lymphoma, referring to haematology-oncology for radiotherapy or systemic therapy if t(11;18)-positive or non-responsive",
+      "Confirm cure after therapy with a urea breath test or stool antigen test, having stopped the proton pump inhibitor, rather than relying on serology",
+      "Manage bleeding ulcers endoscopically and eradicate the organism to reduce rebleeding, and offer endoscopic surveillance of premalignant atrophic gastritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for helicobacter pylori infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "helicobacter-pylori-infection-real-image",
-   "title": "Helicobacter pylori Infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "helicobacter_pylori_infection-pathway",
+      "title": "Helicobacter pylori Infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of gastroduodenal ulcers (p.302).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dyspepsia with alarm features (dysphagia, weight loss, bleeding/anemia, jaundice, palpable mass or adenopathy, family history of gastroesophageal malignancy) or age over 60 warrants upper endoscopy to exclude",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urea breath test (noninvasive) for active infection and for confirming eradication., Stool (fecal) antigen test (noninvasive) for active infection and eradication confirmation., Endoscopic biopsy with histopathology,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or metronidazole), reserving bismuth-based quadruple therapy for areas of high"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression must be stopped before testing for active H. pylori infection."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of helicobacter pylori infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "helicobacter_pylori_infection-matrix",
+      "title": "Helicobacter pylori Infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "H. pylori has a proven etiologic role in peptic ulcer disease; together with NSAID use it is one of the two most common causes of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urea breath test (noninvasive) for active infection and for confirming eradication., Stool (fecal) antigen test (noninvasive) for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alternative etiologies and clinical mimics",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line eradication with a proton pump inhibitor plus two antibiotics (clarithromycin-based triple therapy with amoxicillin or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "PITFALL: PPIs and other acid-suppressing drugs can cause false-negative urea breath and stool antigen tests; acid suppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for helicobacter pylori infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ACG Clinical Guideline: Treatment of H. pylori Infection 2024 (Evidence-Based GI summary)",
+      "kind": "web",
+      "url": "https://gi.org/journals-publications/ebgi/schoenfeld_sep2024/"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 151-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 293-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "helicobacter_pylori_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Testing for H. pylori",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Test-and-treat strategy",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Dyspepsia, age under 60, no alarm features",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Stool antigen or urea breath test, treat if positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy first",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age over 60 or alarm features",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Dysphagia, weight loss, bleeding or anaemia, mass, family history of upper GI cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urea breath test",
+          "cells": [
+            {
+              "text": "Active infection and test of cure"
+            },
+            {
+              "text": "False negative on PPI or other acid suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool antigen test",
+          "cells": [
+            {
+              "text": "Active infection and test of cure"
+            },
+            {
+              "text": "False negative on PPI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy histology",
+          "cells": [
+            {
+              "text": "At endoscopy, including gastric lymphoma work-up"
+            },
+            {
+              "text": "If negative in lymphoma, confirm with stool antigen or breath test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test of cure timing",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "{{hy:At least 4 weeks after antibiotics end}}",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Hold PPI or P-CAB at least 2 weeks before; H2 blockers or antacids can bridge"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Who else to test",
+          "cells": [
+            {
+              "text": "Raised gastric cancer risk, atrophic gastritis, intestinal metaplasia, household members of infected adults"
+            },
+            {
+              "text": "Expanded ACG 2024 indications"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "t(11;18) assay",
+          "cells": [
+            {
+              "text": "Gastric MALT lymphoma"
+            },
+            {
+              "text": "Positive result predicts poor response to eradication alone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "helicobacter_pylori_infection-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from H. pylori disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAID-induced ulcer",
+          "cells": [
+            {
+              "text": "Ulcer with NSAID use; the other main cause of peptic ulcer"
+            },
+            {
+              "text": "Drug history plus negative H. pylori test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric adenocarcinoma",
+          "cells": [
+            {
+              "text": "Alarm features or age over 60"
+            },
+            {
+              "text": "Endoscopy with biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric MALT lymphoma",
+          "cells": [
+            {
+              "text": "Lymphoma linked to H. pylori"
+            },
+            {
+              "text": "Biopsy, H. pylori status and t(11;18)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional dyspepsia",
+          "cells": [
+            {
+              "text": "No ulcer; eradication gives only small benefit"
+            },
+            {
+              "text": "Negative endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Heartburn predominant; eradication does not worsen GERD"
+            },
+            {
+              "text": "Clinical response to PPI, endoscopy if alarm features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "helicobacter_pylori_infection-treatment",
+      "kind": "treatment",
+      "title": "Eradicating H. pylori",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimized bismuth quadruple therapy",
+          "cells": [
+            {
+              "text": "{{hy:Preferred first line when susceptibility unknown (ACG 2024)}}"
+            },
+            {
+              "text": "PPI twice daily, tetracycline 500 mg four times daily, metronidazole 500 mg three or four times daily, bismuth four times daily, for 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifabutin triple or vonoprazan-amoxicillin dual",
+          "cells": [
+            {
+              "text": "Alternative first line, no penicillin allergy"
+            },
+            {
+              "text": "Conditional recommendation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clarithromycin triple therapy (OCA or OCM)",
+          "cells": [
+            {
+              "text": "Only when clarithromycin susceptibility confirmed"
+            },
+            {
+              "text": "Omeprazole 20 mg bid, clarithromycin 500 mg bid, plus amoxicillin 1 g bid or metronidazole 500 mg bid, 7 to 14 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sequential therapy",
+          "cells": [
+            {
+              "text": "Older printed option"
+            },
+            {
+              "text": "Omeprazole plus amoxicillin 1 g bid for 5 days, then omeprazole, clarithromycin 500 mg bid and tinidazole 500 mg bid for 5 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Levofloxacin regimen (OAL)",
+          "cells": [
+            {
+              "text": "Salvage, only with confirmed susceptibility"
+            },
+            {
+              "text": "Omeprazole 20 mg bid, amoxicillin 1 g bid, levofloxacin, 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastric MALT lymphoma",
+          "cells": [
+            {
+              "text": "H. pylori positive and t(11;18) negative"
+            },
+            {
+              "text": "Eradication alone first; refer if t(11;18) positive or no response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding ulcer",
+          "cells": [
+            {
+              "text": "After endoscopic haemostasis"
+            },
+            {
+              "text": "Eradication lowers rebleeding to under 5%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The Tables PDF (Harrison Table 151-2) lists clarithromycin triple therapy first; ACG 2024 advises against empiric clarithromycin regimens because resistance cuts eradication to about 30%, and prefers bismuth quadruple therapy. Both kept. The Tables PDF prints levofloxacin 500 mg qid, which is likely a print error, so the dose is omitted. Do not substitute doxycycline for tetracycline."
+    },
+    {
+      "id": "helicobacter_pylori_infection-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Tests for detecting H. pylori",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Sensitivity / specificity (%)",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive (endoscopy and biopsy needed): rapid urease",
+          "cells": [
+            {
+              "text": "80-95 / 95-100"
+            },
+            {
+              "text": "Simple; false negative with recent PPI, antibiotic or bismuth use"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Invasive: histology",
+          "cells": [
+            {
+              "text": "80-90 / >95"
+            },
+            {
+              "text": "Needs pathology processing and staining; gives histologic information"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Invasive: culture",
+          "cells": [
+            {
+              "text": "Not given / not given"
+            },
+            {
+              "text": "Slow, expensive, experience dependent; allows antibiotic susceptibility testing"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Noninvasive: serology",
+          "cells": [
+            {
+              "text": ">80 / >90"
+            },
+            {
+              "text": "Inexpensive, convenient; not useful for early follow-up"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Noninvasive: urea breath test",
+          "cells": [
+            {
+              "text": ">90 / >90"
+            },
+            {
+              "text": "Simple, rapid; useful for early follow-up; false negatives after recent therapy (as for rapid urease); low-dose radiation exposure with the 14C test"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Noninvasive: stool antigen",
+          "cells": [
+            {
+              "text": ">90 / >90"
+            },
+            {
+              "text": "Inexpensive, convenient; not established for confirming eradication but promising"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "PPI, proton pump inhibitor."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "helicobacter_pylori_infection-dx-mgmt",
+      "title": "Diagnosis and management of H. pylori infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspepsia, peptic ulcer, MALT lymphoma or high gastric cancer risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Age over 60 or alarm features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Endoscopy with biopsy, including H. pylori histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop PPI, then stool antigen or urea breath test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "H. pylori positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Manage other cause (NSAID, functional dyspepsia, GERD)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Clarithromycin susceptibility confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clarithromycin triple therapy",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimized bismuth quadruple therapy for 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Test of cure at least 4 weeks later, PPI held 2 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Eradicated?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Done; endoscopic surveillance if atrophic gastritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Salvage: rifabutin triple or susceptibility-guided regimen",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No or unknown"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

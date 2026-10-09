@@ -1,177 +1,466 @@
 {
- "id": "junctional_ectopic_tachycardia",
- "name": "junctional ectopic tachycardia",
- "aliases": [
-  "JET",
-  "His bundle tachycardia"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "paediatric cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle, characteristically with atrioventricular dissociation and a ventricular rate exceeding the atrial rate.",
-   "The postoperative form is a feared complication of paediatric cardiac surgery, especially repairs near the atrioventricular node such as ventricular septal defect and tetralogy of Fallot correction.",
-   "A rarer congenital form presents in infancy, is often incessant and can lead to tachycardia-mediated cardiomyopathy and carries a familial tendency.",
-   "The QRS is usually narrow and identical to sinus conduction unless rate-related aberrancy or pre-existing bundle branch block is present.",
-   "Retrograde ventriculoatrial conduction may occasionally produce 1 to 1 association, mimicking other supraventricular tachycardias and obscuring the diagnosis.",
-   "Cornerstones of postoperative management include avoiding hyperthermia, minimising catecholamines, correcting electrolytes and inducing mild hypothermia.",
-   "Because the mechanism is abnormal automaticity, direct-current cardioversion is ineffective, though atrial pacing faster than the junctional rate can restore atrioventricular synchrony.",
-   "Loss of the atrial contribution to ventricular filling makes JET poorly tolerated in the vulnerable early postoperative period."
+  "id": "junctional_ectopic_tachycardia",
+  "name": "junctional ectopic tachycardia",
+  "aliases": [
+    "JET",
+    "His bundle tachycardia"
   ],
-  "pathophysiology": "JET is caused by abnormal enhanced automaticity of tissue in the atrioventricular junction or proximal His bundle, which discharges more rapidly than the sinus node and drives the ventricles independently, producing atrioventricular dissociation with a faster ventricular than atrial rate. In the postoperative setting, mechanical trauma, oedema, suture lines and stretch near the conduction system combine with high circulating catecholamines, hyperthermia and electrolyte shifts to provoke this automatic focus. The congenital form reflects an intrinsic abnormality of junctional automaticity presenting in early life. Because activation originates at or below the node, ventricular depolarisation follows the normal His-Purkinje route and the QRS remains narrow unless conduction is otherwise disturbed.",
-  "additionalDifferentials": [
-   "atrioventricular nodal reentrant tachycardia",
-   "atrioventricular reentrant tachycardia",
-   "focal atrial tachycardia",
-   "ectopic atrial tachycardia in infancy",
-   "accelerated junctional rhythm",
-   "ventricular tachycardia with narrow QRS"
-  ],
-  "additionalInvestigations": [
-   "twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate",
-   "atrial electrogram recording via temporary epicardial wires in the postoperative patient",
-   "continuous telemetry to monitor rate, dissociation and haemodynamic effect",
-   "serum electrolytes including potassium, magnesium and calcium",
-   "core temperature monitoring in the postoperative period",
-   "echocardiography to assess ventricular function and structural substrate"
-  ],
-  "redFlags": [
-   "haemodynamic deterioration in the early postoperative period from loss of atrioventricular synchrony",
-   "incessant tachycardia leading to tachycardia-mediated cardiomyopathy in infants",
-   "very high junctional rates unresponsive to first-line measures",
-   "escalating inotrope and catecholamine requirement aggravating the arrhythmia",
-   "signs of low cardiac output syndrome after congenital heart surgery"
-  ],
-  "prognosis": "Postoperative JET is usually transient and resolves within a few days with supportive measures, though it increases perioperative morbidity. The congenital form is more difficult to control and, if incessant, may cause cardiomyopathy, but responsiveness to modern rhythm control and ablation has improved outcomes.",
-  "pitfalls": [
-   "Attempting direct-current cardioversion for an automatic rhythm that will not respond.",
-   "Failing to recognise atrioventricular dissociation and misclassifying JET as another supraventricular tachycardia.",
-   "Aggravating the arrhythmia with escalating catecholamines and permissive hyperthermia in the postoperative child.",
-   "Overlooking retrograde 1 to 1 conduction that masks the diagnosis.",
-   "Neglecting electrolyte correction and temperature control as primary therapeutic levers."
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "PACES/HRS Expert Consensus on paediatric and congenital arrhythmias",
-   "Zipes Cardiac Electrophysiology: From Cell to Bedside"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia",
-   "Avoid and actively treat hyperthermia, and induce mild systemic hypothermia to slow the automatic junctional focus",
-   "Aggressively correct electrolytes, replacing magnesium and potassium",
-   "Use amiodarone as the principal antiarrhythmic to suppress the ectopic focus",
-   "Restore atrioventricular synchrony with atrial or sequential pacing once the junctional rate is controlled",
-   "Treat the incessant congenital form with amiodarone and consider catheter ablation of the focus",
-   "Manage tachycardia-mediated cardiomyopathy with heart-failure therapy and rhythm control",
-   "Escalate to mechanical circulatory support such as extracorporeal membrane oxygenation for refractory haemodynamic collapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "junctional_ectopic_tachycardia-pathway",
-   "title": "junctional ectopic tachycardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle, characteristically with atrioventricular dissociation and a ventricular rate exceeding the atrial rate.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: haemodynamic deterioration in the early postoperative period from loss of atrioventricular synchrony",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate, atrial electrogram recording via temporary epicardial wires in the postoperative patient, continuous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting direct-current cardioversion for an automatic rhythm that will not respond."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of junctional ectopic tachycardia."
-  }
- ],
- "tables": [
-  {
-   "id": "junctional_ectopic_tachycardia-matrix",
-   "title": "junctional ectopic tachycardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "paediatric cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle, characteristically with atrioventricular dissociation and a ventricular rate exceeding the atrial rate.",
+      "The postoperative form is a feared complication of paediatric cardiac surgery, especially repairs near the atrioventricular node such as ventricular septal defect and tetralogy of Fallot correction.",
+      "A rarer congenital form presents in infancy, is often incessant and can lead to tachycardia-mediated cardiomyopathy and carries a familial tendency.",
+      "The QRS is usually narrow and identical to sinus conduction unless rate-related aberrancy or pre-existing bundle branch block is present.",
+      "Retrograde ventriculoatrial conduction may occasionally produce 1 to 1 association, mimicking other supraventricular tachycardias and obscuring the diagnosis.",
+      "Cornerstones of postoperative management include avoiding hyperthermia, minimising catecholamines, correcting electrolytes and inducing mild hypothermia.",
+      "Because the mechanism is abnormal automaticity, direct-current cardioversion is ineffective, though atrial pacing faster than the junctional rate can restore atrioventricular synchrony.",
+      "Loss of the atrial contribution to ventricular filling makes JET poorly tolerated in the vulnerable early postoperative period."
     ],
-    [
-     "Key Investigations",
-     "twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate, atrial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "JET is caused by abnormal enhanced automaticity of tissue in the atrioventricular junction or proximal His bundle, which discharges more rapidly than the sinus node and drives the ventricles independently, producing atrioventricular dissociation with a faster ventricular than atrial rate. In the postoperative setting, mechanical trauma, oedema, suture lines and stretch near the conduction system combine with high circulating catecholamines, hyperthermia and electrolyte shifts to provoke this automatic focus. The congenital form reflects an intrinsic abnormality of junctional automaticity presenting in early life. Because activation originates at or below the node, ventricular depolarisation follows the normal His-Purkinje route and the QRS remains narrow unless conduction is otherwise disturbed.",
+    "additionalDifferentials": [
+      "atrioventricular nodal reentrant tachycardia",
+      "atrioventricular reentrant tachycardia",
+      "focal atrial tachycardia",
+      "ectopic atrial tachycardia in infancy",
+      "accelerated junctional rhythm",
+      "ventricular tachycardia with narrow QRS"
     ],
-    [
-     "Primary Differentials",
-     "atrioventricular nodal reentrant tachycardia, atrioventricular reentrant tachycardia, focal atrial tachycardia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate",
+      "atrial electrogram recording via temporary epicardial wires in the postoperative patient",
+      "continuous telemetry to monitor rate, dissociation and haemodynamic effect",
+      "serum electrolytes including potassium, magnesium and calcium",
+      "core temperature monitoring in the postoperative period",
+      "echocardiography to assess ventricular function and structural substrate"
     ],
-    [
-     "Management Strategy",
-     "Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia",
-     "Core treatment modality"
+    "redFlags": [
+      "haemodynamic deterioration in the early postoperative period from loss of atrioventricular synchrony",
+      "incessant tachycardia leading to tachycardia-mediated cardiomyopathy in infants",
+      "very high junctional rates unresponsive to first-line measures",
+      "escalating inotrope and catecholamine requirement aggravating the arrhythmia",
+      "signs of low cardiac output syndrome after congenital heart surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting direct-current cardioversion for an automatic rhythm that will not respond.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Postoperative JET is usually transient and resolves within a few days with supportive measures, though it increases perioperative morbidity. The congenital form is more difficult to control and, if incessant, may cause cardiomyopathy, but responsiveness to modern rhythm control and ablation has improved outcomes.",
+    "pitfalls": [
+      "Attempting direct-current cardioversion for an automatic rhythm that will not respond.",
+      "Failing to recognise atrioventricular dissociation and misclassifying JET as another supraventricular tachycardia.",
+      "Aggravating the arrhythmia with escalating catecholamines and permissive hyperthermia in the postoperative child.",
+      "Overlooking retrograde 1 to 1 conduction that masks the diagnosis.",
+      "Neglecting electrolyte correction and temperature control as primary therapeutic levers."
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "PACES/HRS Expert Consensus on paediatric and congenital arrhythmias",
+      "Zipes Cardiac Electrophysiology: From Cell to Bedside"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia",
+      "Avoid and actively treat hyperthermia, and induce mild systemic hypothermia to slow the automatic junctional focus",
+      "Aggressively correct electrolytes, replacing magnesium and potassium",
+      "Use amiodarone as the principal antiarrhythmic to suppress the ectopic focus",
+      "Restore atrioventricular synchrony with atrial or sequential pacing once the junctional rate is controlled",
+      "Treat the incessant congenital form with amiodarone and consider catheter ablation of the focus",
+      "Manage tachycardia-mediated cardiomyopathy with heart-failure therapy and rhythm control",
+      "Escalate to mechanical circulatory support such as extracorporeal membrane oxygenation for refractory haemodynamic collapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for junctional ectopic tachycardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "junctional-ectopic-tachycardia-real-image",
-   "title": "junctional ectopic tachycardia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "junctional_ectopic_tachycardia-pathway",
+      "title": "junctional ectopic tachycardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle, characteristically with atrioventricular dissociation and a ventricular rate exceeding the atrial rate.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: haemodynamic deterioration in the early postoperative period from loss of atrioventricular synchrony",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate, atrial electrogram recording via temporary epicardial wires in the postoperative patient, continuous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting direct-current cardioversion for an automatic rhythm that will not respond."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of junctional ectopic tachycardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "junctional_ectopic_tachycardia-matrix",
+      "title": "junctional ectopic tachycardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "JET is a narrow-complex tachycardia arising from enhanced automaticity of the atrioventricular junction or proximal His bundle,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "twelve-lead ECG and rhythm strip seeking atrioventricular dissociation with ventricular rate exceeding atrial rate, atrial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "atrioventricular nodal reentrant tachycardia, atrioventricular reentrant tachycardia, focal atrial tachycardia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce adrenergic drive in the postoperative form by weaning catecholamine inotropes and deepening sedation and analgesia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting direct-current cardioversion for an automatic rhythm that will not respond.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for junctional ectopic tachycardia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "junctional_ectopic_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Twelve-lead ECG and rhythm strip",
+          "cells": [
+            {
+              "text": "Atrioventricular dissociation with ventricular rate above atrial rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial electrogram via temporary epicardial wires",
+          "cells": [
+            {
+              "text": "Atrial activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous telemetry",
+          "cells": [
+            {
+              "text": "Rate, dissociation and haemodynamic effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium, magnesium and calcium",
+          "cells": [
+            {
+              "text": "Electrolyte status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Postoperative temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and substrate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_ectopic_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AV nodal re-entrant tachycardia",
+          "cells": [
+            {
+              "text": "Retrograde 1:1 conduction can mask the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Atrial electrogram distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "junctional_ectopic_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adrenergic drive",
+          "cells": [
+            {
+              "text": "Wean catecholamine inotropes; deepen sedation and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temperature",
+          "cells": [
+            {
+              "text": "Avoid hyperthermia; mild systemic hypothermia to slow the junctional focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Aggressive replacement of magnesium and potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic",
+          "cells": [
+            {
+              "text": "Amiodarone as the principal agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pacing",
+          "cells": [
+            {
+              "text": "Atrial or sequential pacing once junctional rate is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital and refractory",
+          "cells": [
+            {
+              "text": "Amiodarone with catheter ablation; extracorporeal membrane oxygenation for collapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "junctional_ectopic_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of junctional ectopic tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Narrow complex tachycardia after congenital heart surgery with AV dissociation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamic collapse, rising catecholamine need, incessant rhythm or low output?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent amiodarone, electrolyte correction and temperature control; consider ECMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG strip for AV dissociation, atrial electrogram, telemetry, electrolytes, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AV dissociation with ventricular rate above atrial rate confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider AV nodal re-entry or focal atrial tachycardia; repeat recording",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wean catecholamine inotropes; deepen sedation and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid hyperthermia; mild systemic hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace magnesium and potassium aggressively",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Amiodarone as the principal antiarrhythmic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Atrial or sequential pacing once rate is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Postoperative form often settles; congenital incessant form may need ablation or ECMO",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

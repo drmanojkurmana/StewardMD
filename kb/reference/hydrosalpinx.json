@@ -1,171 +1,449 @@
 {
- "id": "hydrosalpinx",
- "name": "Hydrosalpinx",
- "aliases": [
-  "hydrosalpinges",
-  "tubal hydrops",
-  "fluid-filled fallopian tube"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology reference textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal inflammation",
-   "Frequently follows pelvic inflammatory disease, endometriosis, or prior pelvic or tubal surgery, and may be asymptomatic",
-   "When symptomatic it can cause chronic pelvic pain, an intermittent watery vaginal discharge, or subfertility",
-   "Ultrasound typically shows a tubular fluid-filled structure with incomplete septa, and cross-sectional beak or cogwheel appearances",
-   "The fluid within a hydrosalpinx is thought to be embryotoxic and can reflux into the uterine cavity, impairing implantation",
-   "Its presence markedly reduces the success of in vitro fertilisation, and treating it beforehand improves pregnancy rates",
-   "Salpingectomy or proximal tubal occlusion of the affected tube is recommended prior to assisted conception to remove the detrimental effect"
+  "id": "hydrosalpinx",
+  "name": "Hydrosalpinx",
+  "aliases": [
+    "hydrosalpinges",
+    "tubal hydrops",
+    "fluid-filled fallopian tube"
   ],
-  "pathophysiology": "Inflammatory damage to the fimbrial end of the fallopian tube leads to distal occlusion. The tubal epithelium continues to secrete fluid, which, unable to escape, accumulates and progressively dilates the tube. The retained fluid is believed to be embryotoxic and can flow retrogradely into the endometrial cavity, both mechanically disturbing and biochemically impairing embryo implantation, which explains the adverse effect of hydrosalpinx on natural and assisted conception.",
-  "additionalDifferentials": [
-   "Paratubal or paraovarian cyst",
-   "Ovarian cyst",
-   "Tubo-ovarian abscess",
-   "Pyosalpinx",
-   "Cystadenoma",
-   "Peritoneal inclusion cyst"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal ultrasound showing a tubular fluid collection with incomplete septa",
-   "Hysterosalpingography to assess tubal patency and demonstrate distal blockage",
-   "Magnetic resonance imaging to characterise a complex or large adnexal fluid collection",
-   "Laparoscopy with chromopertubation, which allows both diagnosis and treatment",
-   "Assessment for coexisting tubal or pelvic disease before planning fertility treatment"
-  ],
-  "redFlags": [
-   "Features of superimposed infection, such as a pyosalpinx or tubo-ovarian abscess with pain and fever",
-   "Acute severe pain suggesting torsion of the distended tube",
-   "Rapidly enlarging or complex adnexal mass raising other concerns",
-   "Systemic upset indicating active pelvic infection"
-  ],
-  "prognosis": "Hydrosalpinx itself is benign but is an important cause of subfertility; addressing the affected tube before in vitro fertilisation restores implantation and pregnancy rates towards those of women without tubal disease.",
-  "pitfalls": [
-   "Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success",
-   "Mistaking a hydrosalpinx for an ovarian cyst on imaging",
-   "Overlooking the possibility of superimposed infection",
-   "Failing to counsel on the fertility implications and treatment options"
-  ],
-  "references": [
-   "Standard gynaecology reference textbook",
-   "Reproductive medicine reference text"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic fluid and restore implantation rates",
-   "Tubal reconstructive surgery such as neosalpingostomy in selected women wishing to attempt natural conception",
-   "Ultrasound-guided aspiration of hydrosalpinx fluid at oocyte retrieval when surgery is declined or not feasible",
-   "Identification and treatment of coexisting pelvic pathology such as endometriosis or adhesions",
-   "Symptomatic management of chronic pelvic pain or watery vaginal discharge",
-   "Referral to fertility services for assisted conception after definitive tubal treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hydrosalpinx-pathway",
-   "title": "Hydrosalpinx: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal inflammation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of superimposed infection, such as a pyosalpinx or tubo-ovarian abscess with pain and fever",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal ultrasound showing a tubular fluid collection with incomplete septa, Hysterosalpingography to assess tubal patency and demonstrate distal blockage, Magnetic resonance imaging to characterise a complex or large"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic fluid and restore implantation rates"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hydrosalpinx."
-  }
- ],
- "tables": [
-  {
-   "id": "hydrosalpinx-matrix",
-   "title": "Hydrosalpinx: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology reference textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal inflammation",
+      "Frequently follows pelvic inflammatory disease, endometriosis, or prior pelvic or tubal surgery, and may be asymptomatic",
+      "When symptomatic it can cause chronic pelvic pain, an intermittent watery vaginal discharge, or subfertility",
+      "Ultrasound typically shows a tubular fluid-filled structure with incomplete septa, and cross-sectional beak or cogwheel appearances",
+      "The fluid within a hydrosalpinx is thought to be embryotoxic and can reflux into the uterine cavity, impairing implantation",
+      "Its presence markedly reduces the success of in vitro fertilisation, and treating it beforehand improves pregnancy rates",
+      "Salpingectomy or proximal tubal occlusion of the affected tube is recommended prior to assisted conception to remove the detrimental effect"
     ],
-    [
-     "Key Investigations",
-     "Transvaginal ultrasound showing a tubular fluid collection with incomplete septa, Hysterosalpingography to assess tubal patency",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inflammatory damage to the fimbrial end of the fallopian tube leads to distal occlusion. The tubal epithelium continues to secrete fluid, which, unable to escape, accumulates and progressively dilates the tube. The retained fluid is believed to be embryotoxic and can flow retrogradely into the endometrial cavity, both mechanically disturbing and biochemically impairing embryo implantation, which explains the adverse effect of hydrosalpinx on natural and assisted conception.",
+    "additionalDifferentials": [
+      "Paratubal or paraovarian cyst",
+      "Ovarian cyst",
+      "Tubo-ovarian abscess",
+      "Pyosalpinx",
+      "Cystadenoma",
+      "Peritoneal inclusion cyst"
     ],
-    [
-     "Primary Differentials",
-     "Paratubal or paraovarian cyst, Ovarian cyst, Tubo-ovarian abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal ultrasound showing a tubular fluid collection with incomplete septa",
+      "Hysterosalpingography to assess tubal patency and demonstrate distal blockage",
+      "Magnetic resonance imaging to characterise a complex or large adnexal fluid collection",
+      "Laparoscopy with chromopertubation, which allows both diagnosis and treatment",
+      "Assessment for coexisting tubal or pelvic disease before planning fertility treatment"
     ],
-    [
-     "Management Strategy",
-     "Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of superimposed infection, such as a pyosalpinx or tubo-ovarian abscess with pain and fever",
+      "Acute severe pain suggesting torsion of the distended tube",
+      "Rapidly enlarging or complex adnexal mass raising other concerns",
+      "Systemic upset indicating active pelvic infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hydrosalpinx itself is benign but is an important cause of subfertility; addressing the affected tube before in vitro fertilisation restores implantation and pregnancy rates towards those of women without tubal disease.",
+    "pitfalls": [
+      "Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success",
+      "Mistaking a hydrosalpinx for an ovarian cyst on imaging",
+      "Overlooking the possibility of superimposed infection",
+      "Failing to counsel on the fertility implications and treatment options"
+    ],
+    "references": [
+      "Standard gynaecology reference textbook",
+      "Reproductive medicine reference text"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic fluid and restore implantation rates",
+      "Tubal reconstructive surgery such as neosalpingostomy in selected women wishing to attempt natural conception",
+      "Ultrasound-guided aspiration of hydrosalpinx fluid at oocyte retrieval when surgery is declined or not feasible",
+      "Identification and treatment of coexisting pelvic pathology such as endometriosis or adhesions",
+      "Symptomatic management of chronic pelvic pain or watery vaginal discharge",
+      "Referral to fertility services for assisted conception after definitive tubal treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for hydrosalpinx."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hydrosalpinx-real-image",
-   "title": "Hydrosalpinx: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hydrosalpinx-pathway",
+      "title": "Hydrosalpinx: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal inflammation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of superimposed infection, such as a pyosalpinx or tubo-ovarian abscess with pain and fever",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal ultrasound showing a tubular fluid collection with incomplete septa, Hysterosalpingography to assess tubal patency and demonstrate distal blockage, Magnetic resonance imaging to characterise a complex or large"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic fluid and restore implantation rates"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hydrosalpinx."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hydrosalpinx-matrix",
+      "title": "Hydrosalpinx: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distally obstructed fallopian tube that becomes distended with serous fluid, most often as a late sequela of previous tubal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal ultrasound showing a tubular fluid collection with incomplete septa, Hysterosalpingography to assess tubal patency",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Paratubal or paraovarian cyst, Ovarian cyst, Tubo-ovarian abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Laparoscopic salpingectomy or proximal tubal occlusion of the affected tube before in vitro fertilisation to remove embryotoxic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to in vitro fertilisation without treating a hydrosalpinx and thereby reducing success",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hydrosalpinx."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydrosalpinx-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Tubular fluid collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterosalpingography",
+          "cells": [
+            {
+              "text": "Tubal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy with chromopertubation",
+          "cells": [
+            {
+              "text": "Tubal patency and direct inspection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting pelvic disease",
+          "cells": [
+            {
+              "text": "Tubal or pelvic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrosalpinx-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyosalpinx",
+          "cells": [
+            {
+              "text": "Infected, pus-filled tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubo-ovarian abscess",
+          "cells": [
+            {
+              "text": "Infection with systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paratubal or paraovarian cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrosalpinx-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laparoscopic salpingectomy or proximal tubal occlusion",
+          "cells": [
+            {
+              "text": "Definitive surgical options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive neosalpingostomy",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided aspiration",
+          "cells": [
+            {
+              "text": "Where suitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting pelvic disease",
+          "cells": [
+            {
+              "text": "Identified and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pelvic pain",
+          "cells": [
+            {
+              "text": "Symptomatic management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility services",
+          "cells": [
+            {
+              "text": "Assisted conception referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydrosalpinx-dx-mgmt",
+      "title": "Diagnosis and management of Hydrosalpinx",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fluid-filled dilated fallopian tube on ultrasound, with pelvic pain or infertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infection with fever, severe torsion-type pain, rapidly enlarging complex mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent gynaecology review for infection or torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound; HSG for patency; MRI if complex; laparoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dilated fluid-filled tube confirmed with tubal patency assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paratubal cyst, ovarian cyst, tubo-ovarian abscess or pyosalpinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laparoscopic salpingectomy or proximal tubal occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstructive neosalpingostomy in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ultrasound-guided aspiration of fluid where suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Referral to fertility services for assisted conception",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tube removed or occluded; fertility options addressed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

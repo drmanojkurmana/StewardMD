@@ -1,167 +1,436 @@
 {
- "id": "megalocornea",
- "name": "Megalocornea",
- "aliases": [
-  "anterior megalophthalmos"
- ],
- "class": "non_infective",
- "system": "Eye / Anterior segment",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
-   "The corneal diameter is enlarged beyond the normal range while the cornea remains clear",
-   "It is most often X-linked recessive, so it predominantly affects males",
-   "The crucial differential is primary congenital glaucoma (buphthalmos), which is distinguished by raised pressure, corneal oedema and progression",
-   "Associated features can include high myopia, lens subluxation, cataract and pigment dispersion",
-   "Management is largely refractive and monitoring, with attention to lens-related complications later in life"
+  "id": "megalocornea",
+  "name": "Megalocornea",
+  "aliases": [
+    "anterior megalophthalmos"
   ],
-  "pathophysiology": "Megalocornea is a developmental enlargement of the cornea, thought to result from either an oversized optic cup or failure of the developing anterior segment to close normally, producing a large but structurally clear cornea with a deep anterior chamber. In the common X-linked form it is caused by mutations affecting anterior segment development. Unlike buphthalmos, the enlargement is not driven by raised intraocular pressure, so the cornea stays clear; however, the enlarged anterior segment can be associated with zonular weakness leading to lens subluxation and cataract.",
-  "additionalDifferentials": [
-   "Primary congenital glaucoma (buphthalmos)",
-   "Keratoglobus",
-   "High axial myopia",
-   "Marfan and other connective tissue disorders (for lens subluxation)",
-   "Anterior megalophthalmos as part of a syndrome"
-  ],
-  "additionalInvestigations": [
-   "Measurement of corneal diameter and intraocular pressure",
-   "Assessment for corneal clarity and Descemet tears (to exclude glaucoma)",
-   "Lens and zonule assessment",
-   "Refraction",
-   "Family history and, where appropriate, genetic evaluation"
-  ],
-  "redFlags": [
-   "Raised intraocular pressure or corneal oedema indicating glaucoma",
-   "Progressive corneal enlargement",
-   "Lens subluxation or cataract",
-   "Features of an underlying connective tissue disorder"
-  ],
-  "prognosis": "Megalocornea itself is benign and non-progressive with generally good vision when refractive error is corrected; later lens complications may need intervention.",
-  "pitfalls": [
-   "Mistaking it for primary congenital glaucoma and vice versa",
-   "Overlooking later lens subluxation or cataract",
-   "Attributing reduced vision solely to refractive error",
-   "Missing an associated systemic disorder"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care",
-   "Measure intraocular pressure and monitor serially to distinguish the benign condition from primary congenital glaucoma",
-   "Survey the lens and zonules for later subluxation and cataract",
-   "Undertake cataract and lens surgery when visually significant complications develop, anticipating zonular weakness",
-   "Reassure that the corneal enlargement is non-progressive with a generally good visual prognosis",
-   "Offer genetic counselling for the X-linked inheritance pattern that predominantly affects males"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "megalocornea-pathway",
-   "title": "Megalocornea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intraocular pressure or corneal oedema indicating glaucoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Measurement of corneal diameter and intraocular pressure, Assessment for corneal clarity and Descemet tears (to exclude glaucoma), Lens and zonule assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for primary congenital glaucoma and vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of megalocornea."
-  }
- ],
- "tables": [
-  {
-   "id": "megalocornea-matrix",
-   "title": "Megalocornea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Anterior segment",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
+      "The corneal diameter is enlarged beyond the normal range while the cornea remains clear",
+      "It is most often X-linked recessive, so it predominantly affects males",
+      "The crucial differential is primary congenital glaucoma (buphthalmos), which is distinguished by raised pressure, corneal oedema and progression",
+      "Associated features can include high myopia, lens subluxation, cataract and pigment dispersion",
+      "Management is largely refractive and monitoring, with attention to lens-related complications later in life"
     ],
-    [
-     "Key Investigations",
-     "Measurement of corneal diameter and intraocular pressure, Assessment for corneal clarity and Descemet tears (to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Megalocornea is a developmental enlargement of the cornea, thought to result from either an oversized optic cup or failure of the developing anterior segment to close normally, producing a large but structurally clear cornea with a deep anterior chamber. In the common X-linked form it is caused by mutations affecting anterior segment development. Unlike buphthalmos, the enlargement is not driven by raised intraocular pressure, so the cornea stays clear; however, the enlarged anterior segment can be associated with zonular weakness leading to lens subluxation and cataract.",
+    "additionalDifferentials": [
+      "Primary congenital glaucoma (buphthalmos)",
+      "Keratoglobus",
+      "High axial myopia",
+      "Marfan and other connective tissue disorders (for lens subluxation)",
+      "Anterior megalophthalmos as part of a syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Primary congenital glaucoma (buphthalmos), Keratoglobus, High axial myopia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Measurement of corneal diameter and intraocular pressure",
+      "Assessment for corneal clarity and Descemet tears (to exclude glaucoma)",
+      "Lens and zonule assessment",
+      "Refraction",
+      "Family history and, where appropriate, genetic evaluation"
     ],
-    [
-     "Management Strategy",
-     "Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care",
-     "Core treatment modality"
+    "redFlags": [
+      "Raised intraocular pressure or corneal oedema indicating glaucoma",
+      "Progressive corneal enlargement",
+      "Lens subluxation or cataract",
+      "Features of an underlying connective tissue disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for primary congenital glaucoma and vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Megalocornea itself is benign and non-progressive with generally good vision when refractive error is corrected; later lens complications may need intervention.",
+    "pitfalls": [
+      "Mistaking it for primary congenital glaucoma and vice versa",
+      "Overlooking later lens subluxation or cataract",
+      "Attributing reduced vision solely to refractive error",
+      "Missing an associated systemic disorder"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care",
+      "Measure intraocular pressure and monitor serially to distinguish the benign condition from primary congenital glaucoma",
+      "Survey the lens and zonules for later subluxation and cataract",
+      "Undertake cataract and lens surgery when visually significant complications develop, anticipating zonular weakness",
+      "Reassure that the corneal enlargement is non-progressive with a generally good visual prognosis",
+      "Offer genetic counselling for the X-linked inheritance pattern that predominantly affects males"
     ]
-   ],
-   "caption": "Overview comparison matrix for megalocornea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "megalocornea-real-image",
-   "title": "Megalocornea: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "megalocornea-pathway",
+      "title": "Megalocornea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intraocular pressure or corneal oedema indicating glaucoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Measurement of corneal diameter and intraocular pressure, Assessment for corneal clarity and Descemet tears (to exclude glaucoma), Lens and zonule assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for primary congenital glaucoma and vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of megalocornea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "megalocornea-matrix",
+      "title": "Megalocornea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-progressive, bilaterally symmetrical enlargement of the cornea with a normal intraocular pressure",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Measurement of corneal diameter and intraocular pressure, Assessment for corneal clarity and Descemet tears (to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary congenital glaucoma (buphthalmos), Keratoglobus, High axial myopia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the associated myopia and astigmatism with spectacles or contact lenses as the mainstay of care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for primary congenital glaucoma and vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for megalocornea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "megalocornea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Measurement of corneal diameter and intraocular pressure",
+          "cells": [
+            {
+              "text": "Corneal diameter and intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for corneal clarity and Descemet tears",
+          "cells": [
+            {
+              "text": "Corneal clarity; glaucoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lens and zonule assessment",
+          "cells": [
+            {
+              "text": "Lens and zonules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Associated myopia and astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and genetic evaluation",
+          "cells": [
+            {
+              "text": "X-linked inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megalocornea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary congenital glaucoma (buphthalmos)",
+          "cells": [
+            {
+              "text": "Raised intraocular pressure or corneal oedema indicating glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan and other connective tissue disorders",
+          "cells": [
+            {
+              "text": "Lens subluxation from a connective tissue disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megalocornea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct myopia and astigmatism",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses as the mainstay of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Distinguishes the benign condition from primary congenital glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lens and zonule surveillance",
+          "cells": [
+            {
+              "text": "Later subluxation and cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract or lens surgery",
+          "cells": [
+            {
+              "text": "When visually significant complications develop, anticipating zonular weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Non-progressive corneal enlargement; generally good visual prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance pattern that predominantly affects males"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "megalocornea-dx-mgmt",
+      "title": "Diagnosis and management of Megalocornea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enlarged corneal diameter found on examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised intraocular pressure, corneal oedema, lens subluxation or cataract?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glaucoma assessment for raised pressure or corneal oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal diameter, intraocular pressure, corneal clarity, Descemet tears, refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is glaucoma excluded on intraocular pressure and corneal assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary congenital glaucoma or a connective tissue disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spectacles or contact lenses to correct myopia and astigmatism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial intraocular pressure measurement to separate from congenital glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Survey the lens and zonules for later subluxation and cataract",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cataract or lens surgery when visually significant, anticipating zonular weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-progressive enlargement with generally good visual prognosis; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

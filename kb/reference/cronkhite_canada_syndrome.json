@@ -1,171 +1,449 @@
 {
- "id": "cronkhite_canada_syndrome",
- "name": "Cronkhite-Canada syndrome",
- "aliases": [
-  "CCS",
-  "Cronkhite Canada syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic ectodermal changes",
-   "The ectodermal features are alopecia, nail dystrophy or onycholysis, and skin hyperpigmentation",
-   "Gastrointestinal symptoms include watery diarrhoea, weight loss, abdominal pain and dysgeusia, often with a protein-losing enteropathy",
-   "Numerous hamartomatous-type polyps stud the stomach, small bowel and colon while the oesophagus is typically spared",
-   "Malabsorption produces hypoproteinaemia, electrolyte disturbance and deficiencies of vitamins and trace elements",
-   "It is thought to be immune-mediated and treatment centres on nutritional support with corticosteroids and other immunosuppression",
-   "There is an associated increased risk of gastrointestinal malignancy warranting surveillance"
+  "id": "cronkhite_canada_syndrome",
+  "name": "Cronkhite-Canada syndrome",
+  "aliases": [
+    "CCS",
+    "Cronkhite Canada syndrome"
   ],
-  "pathophysiology": "Cronkhite-Canada syndrome is a rare acquired condition characterised by diffuse gastrointestinal polyposis together with ectodermal abnormalities. The polyps are inflammatory and hamartomatous in type, with oedematous, inflamed lamina propria and cystic gland dilatation, and they diffusely involve the stomach, small intestine and colon. The cause is uncertain but growing evidence points to an autoimmune or chronic inflammatory mechanism, supported by the presence of IgG4-positive plasma cells in some cases and response to immunosuppression. Widespread mucosal disease leads to malabsorption and a protein-losing enteropathy, producing the hypoalbuminaemia, electrolyte loss and nutritional deficiencies that dominate the clinical picture.",
-  "additionalDifferentials": [
-   "Familial adenomatous polyposis",
-   "Peutz-Jeghers syndrome",
-   "Juvenile polyposis syndrome",
-   "PTEN hamartoma tumour syndrome (Cowden syndrome)",
-   "Hyperplastic and inflammatory polyposis from other causes",
-   "Other causes of protein-losing enteropathy"
-  ],
-  "additionalInvestigations": [
-   "Upper and lower endoscopy with biopsy to characterise the diffuse polyposis",
-   "Serum albumin, immunoglobulins and micronutrient levels",
-   "Faecal alpha-1-antitrypsin clearance to confirm protein-losing enteropathy",
-   "Assessment of electrolytes and trace elements including zinc and copper",
-   "Surveillance imaging and endoscopy for associated malignancy"
-  ],
-  "redFlags": [
-   "Severe hypoalbuminaemia with oedema and effusions",
-   "Profound weight loss and malnutrition",
-   "Gastrointestinal bleeding or an obstructing or suspicious polyp raising concern for malignancy",
-   "Severe electrolyte disturbance from high-volume diarrhoea"
-  ],
-  "prognosis": "The syndrome can be serious with significant mortality from malnutrition and complications, but many patients improve with nutritional support and immunosuppression; the associated cancer risk means long-term surveillance is required.",
-  "pitfalls": [
-   "Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues",
-   "Overlooking and undertreating the protein-losing enteropathy and micronutrient deficiencies",
-   "Failing to institute cancer surveillance",
-   "Attributing the diarrhoea to a functional disorder despite systemic features"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing immunosuppressants such as azathioprine where response is inadequate or relapse occurs",
-   "Provide aggressive nutritional support with high-protein feeding and correction of electrolytes, vitamins and trace elements including zinc and copper, escalating to enteral or parenteral nutrition when needed",
-   "Manage the protein-losing enteropathy and hypoalbuminaemia, and offer acid suppression and Helicobacter pylori eradication where present, as symptomatic adjuncts",
-   "Undertake endoscopic and imaging surveillance for the associated gastrointestinal malignancy risk",
-   "Monitor serum albumin, electrolytes and micronutrient levels to guide replacement",
-   "Reserve surgery for complications such as bleeding, obstruction or malignancy",
-   "Coordinate care through a gastroenterology-led multidisciplinary team with dietetic input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cronkhite_canada_syndrome-pathway",
-   "title": "Cronkhite-Canada syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic ectodermal changes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypoalbuminaemia with oedema and effusions",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper and lower endoscopy with biopsy to characterise the diffuse polyposis, Serum albumin, immunoglobulins and micronutrient levels, Faecal alpha-1-antitrypsin clearance to confirm protein-losing enteropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing immunosuppressants such as azathioprine where response is inadequate or relapse occurs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cronkhite-canada syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cronkhite_canada_syndrome-matrix",
-   "title": "Cronkhite-Canada syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic ectodermal changes",
+      "The ectodermal features are alopecia, nail dystrophy or onycholysis, and skin hyperpigmentation",
+      "Gastrointestinal symptoms include watery diarrhoea, weight loss, abdominal pain and dysgeusia, often with a protein-losing enteropathy",
+      "Numerous hamartomatous-type polyps stud the stomach, small bowel and colon while the oesophagus is typically spared",
+      "Malabsorption produces hypoproteinaemia, electrolyte disturbance and deficiencies of vitamins and trace elements",
+      "It is thought to be immune-mediated and treatment centres on nutritional support with corticosteroids and other immunosuppression",
+      "There is an associated increased risk of gastrointestinal malignancy warranting surveillance"
     ],
-    [
-     "Key Investigations",
-     "Upper and lower endoscopy with biopsy to characterise the diffuse polyposis, Serum albumin, immunoglobulins and micronutrient",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cronkhite-Canada syndrome is a rare acquired condition characterised by diffuse gastrointestinal polyposis together with ectodermal abnormalities. The polyps are inflammatory and hamartomatous in type, with oedematous, inflamed lamina propria and cystic gland dilatation, and they diffusely involve the stomach, small intestine and colon. The cause is uncertain but growing evidence points to an autoimmune or chronic inflammatory mechanism, supported by the presence of IgG4-positive plasma cells in some cases and response to immunosuppression. Widespread mucosal disease leads to malabsorption and a protein-losing enteropathy, producing the hypoalbuminaemia, electrolyte loss and nutritional deficiencies that dominate the clinical picture.",
+    "additionalDifferentials": [
+      "Familial adenomatous polyposis",
+      "Peutz-Jeghers syndrome",
+      "Juvenile polyposis syndrome",
+      "PTEN hamartoma tumour syndrome (Cowden syndrome)",
+      "Hyperplastic and inflammatory polyposis from other causes",
+      "Other causes of protein-losing enteropathy"
     ],
-    [
-     "Primary Differentials",
-     "Familial adenomatous polyposis, Peutz-Jeghers syndrome, Juvenile polyposis syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper and lower endoscopy with biopsy to characterise the diffuse polyposis",
+      "Serum albumin, immunoglobulins and micronutrient levels",
+      "Faecal alpha-1-antitrypsin clearance to confirm protein-losing enteropathy",
+      "Assessment of electrolytes and trace elements including zinc and copper",
+      "Surveillance imaging and endoscopy for associated malignancy"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypoalbuminaemia with oedema and effusions",
+      "Profound weight loss and malnutrition",
+      "Gastrointestinal bleeding or an obstructing or suspicious polyp raising concern for malignancy",
+      "Severe electrolyte disturbance from high-volume diarrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome can be serious with significant mortality from malnutrition and complications, but many patients improve with nutritional support and immunosuppression; the associated cancer risk means long-term surveillance is required.",
+    "pitfalls": [
+      "Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues",
+      "Overlooking and undertreating the protein-losing enteropathy and micronutrient deficiencies",
+      "Failing to institute cancer surveillance",
+      "Attributing the diarrhoea to a functional disorder despite systemic features"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing immunosuppressants such as azathioprine where response is inadequate or relapse occurs",
+      "Provide aggressive nutritional support with high-protein feeding and correction of electrolytes, vitamins and trace elements including zinc and copper, escalating to enteral or parenteral nutrition when needed",
+      "Manage the protein-losing enteropathy and hypoalbuminaemia, and offer acid suppression and Helicobacter pylori eradication where present, as symptomatic adjuncts",
+      "Undertake endoscopic and imaging surveillance for the associated gastrointestinal malignancy risk",
+      "Monitor serum albumin, electrolytes and micronutrient levels to guide replacement",
+      "Reserve surgery for complications such as bleeding, obstruction or malignancy",
+      "Coordinate care through a gastroenterology-led multidisciplinary team with dietetic input"
     ]
-   ],
-   "caption": "Overview comparison matrix for cronkhite-canada syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cronkhite-canada-syndrome-real-image",
-   "title": "Cronkhite-Canada syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "cronkhite_canada_syndrome-pathway",
+      "title": "Cronkhite-Canada syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic ectodermal changes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypoalbuminaemia with oedema and effusions",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper and lower endoscopy with biopsy to characterise the diffuse polyposis, Serum albumin, immunoglobulins and micronutrient levels, Faecal alpha-1-antitrypsin clearance to confirm protein-losing enteropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing immunosuppressants such as azathioprine where response is inadequate or relapse occurs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cronkhite-canada syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cronkhite_canada_syndrome-matrix",
+      "title": "Cronkhite-Canada syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, non-inherited disorder of middle-aged and older adults combining diffuse gastrointestinal polyposis with characteristic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper and lower endoscopy with biopsy to characterise the diffuse polyposis, Serum albumin, immunoglobulins and micronutrient",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial adenomatous polyposis, Peutz-Jeghers syndrome, Juvenile polyposis syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying immune-mediated inflammation with corticosteroids as first-line therapy, adding steroid-sparing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for an inherited polyposis syndrome and missing the ectodermal clues",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cronkhite-canada syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cronkhite_canada_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper and lower endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Diffuse polyposis characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin, immunoglobulins and micronutrients",
+          "cells": [
+            {
+              "text": "Hypoalbuminaemia and deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal alpha-1-antitrypsin clearance",
+          "cells": [
+            {
+              "text": "Protein-losing enteropathy confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and trace elements including zinc and copper",
+          "cells": [
+            {
+              "text": "Deficiencies assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cronkhite_canada_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial adenomatous polyposis",
+          "cells": [
+            {
+              "text": "Inherited polyposis; ectodermal clues absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peutz-Jeghers syndrome",
+          "cells": [
+            {
+              "text": "Named inherited polyposis look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile polyposis syndrome",
+          "cells": [
+            {
+              "text": "Named inherited polyposis look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cronkhite_canada_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for immune-mediated inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine and related agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "High-protein feeding; correct electrolytes, vitamins, zinc and copper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-losing enteropathy",
+          "cells": [
+            {
+              "text": "Managed; acid suppression and H pylori eradication where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Endoscopic and imaging surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Reserved for bleeding, obstruction or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum albumin, electrolytes and micronutrients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cronkhite_canada_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cronkhite-Canada syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cronkhite-Canada syndrome: diffuse GI polyposis with ectodermal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (severe hypoalbuminaemia, malnutrition, bleeding or suspicious polyp)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional and albumin support; polyp biopsy if suspicious",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsy; albumin and micronutrients; faecal alpha-1-antitrypsin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm diffuse polyposis with protein-losing enteropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FAP, Peutz-Jeghers or juvenile polyposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids first-line, with steroid-sparing immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-protein nutrition and micronutrient correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage protein-losing enteropathy and H pylori where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic surveillance for malignancy; surgery for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Can be serious; many improve with nutritional support and immunosuppression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

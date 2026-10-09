@@ -1,184 +1,776 @@
 {
- "id": "coagulation_disorders",
- "name": "Coagulation Disorders",
- "system": "Haematology",
- "class": "non_infective",
- "chapter": 121,
- "page": 928,
- "aliases": [
-  "hemophilia",
-  "von Willebrand disease",
-  "bleeding disorders"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.928-932",
-  "clinicalPearls": [
-   "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII (hemophilia A, ~80% of cases) or factor IX (hemophilia B); hemophilia A and B are clinically indistinguishable (Harrison 22e p.928, 930).",
-   "Disease phenotype correlates with factor activity level: severe (<1%), moderate (1-5%), mild (6-30%). Severe and moderate disease cause bleeding into joints (hemarthrosis), soft tissues, and muscles after minor trauma or spontaneously; mild disease bleeds infrequently and usually only after trauma (Harrison 22e p.930).",
-   "Recurrent hemarthroses (knees, elbows, ankles, shoulders, hips) damage a joint to create a chronically affected 'target joint' with synovitis and progressive deformity; deep-muscle hematomas can cause compartment syndrome by compressing arteries, veins, or nerves (Harrison 22e p.930).",
-   "Von Willebrand disease (VWD) is the most common inherited bleeding disorder (symptomatic prevalence ~1 in 1000 to 1 in 10,000); VWF tethers platelets to subendothelium and is the carrier protein that prolongs the FVIII half-life (Harrison 22e p.927).",
-   "Most VWD symptoms are 'platelet-like' (mucocutaneous: bruising, epistaxis, heavy menstrual bleeding); type 1 (parallel reduction in VWF protein, function, and FVIII) is most common (>=80% of cases) (Harrison 22e p.926-927).",
-   "Type 2N VWD ('autosomal hemophilia') is caused by VWF variants that impair FVIII binding, markedly shortening the FVIII half-life and lowering FVIII levels (Harrison 22e p.927).",
-   "Screening hemostasis tests: an isolated prolonged PT suggests FVII deficiency; a prolonged aPTT indicates an intrinsic-pathway deficiency, most commonly FVIII, FIX, or FXI; prolongation of both PT and aPTT suggests deficiency of FV, FX, FII, or a fibrinogen abnormality (Harrison 22e p.928).",
-   "Mixing study principle: adding normal pooled plasma corrects a prolonged PT/aPTT due to a factor deficiency but fails to correct when an inhibitor (antibody) is present; if it corrects, individual factor activity assays identify the deficient factor (Harrison 22e p.928).",
-   "Inhibitor (alloantibody) formation is the major complication of hemophilia treatment, with prevalence ~30% in severe hemophilia A, ~10% in nonsevere hemophilia A, and only 3-5% in hemophilia B; inhibitors increase morbidity and mortality (Harrison 22e p.930-931).",
-   "Acquired coagulation factor deficiencies are more frequent than congenital disorders; the most common are the hemorrhagic diathesis of liver disease, DIC, and vitamin K deficiency, each typically involving more than one clotting factor (Harrison 22e p.928)."
+  "id": "coagulation_disorders",
+  "name": "Coagulation Disorders",
+  "system": "Haematology",
+  "class": "non_infective",
+  "chapter": 121,
+  "page": 928,
+  "aliases": [
+    "hemophilia",
+    "von Willebrand disease",
+    "bleeding disorders"
   ],
-  "pathophysiology": "Plasma coagulation factor deficiencies impair secondary hemostasis (the coagulation cascade). Inherited hemophilia A and B are X-linked recessive disorders from mutations in F8 and F9 respectively; affected males bleed while carrier women are generally asymptomatic, although a wide range of factor activity from random X-inactivation (lyonization) can produce bleeding in some carriers. FVIII has a very short intrinsic circulating half-life (~25-30 min) that is extended to roughly 12 h when complexed with von Willebrand factor (VWF). VWD reflects quantitative or qualitative defects of VWF, which serves both as the adhesion molecule tethering platelets to exposed subendothelium (function dependent on large VWF multimers) and as the FVIII carrier; loss of high-molecular-weight multimers (e.g., via excessive ADAMTS13 cleavage in type 2A/2B, or shear-induced unfolding) impairs platelet adhesion. Acquired deficiencies (liver disease, DIC, vitamin K deficiency) usually involve multiple factors and perturb both primary (platelet/vessel wall) and secondary (coagulation) hemostasis. (Harrison 22e p.926-930)",
-  "additionalDifferentials": [
-   "Hemophilia A versus hemophilia B (clinically indistinguishable; require factor assays to differentiate) (Harrison 22e p.930)",
-   "Von Willebrand disease with low FVIII versus hemophilia A (VWD must be excluded in a patient with prolonged aPTT and low FVIII and no known hemophilia history) (Harrison 22e p.930)",
-   "Factor XI deficiency (hemophilia C) and other rare inherited factor deficiencies (FII, FV, FVII, FX, FXIII, fibrinogen) (Harrison 22e p.928, 931-932)",
-   "Qualitative platelet function disorders (e.g., Glanzmann thrombasthenia, Bernard-Soulier syndrome, storage pool disorder) as a cause of mucocutaneous bleeding with normal coagulation factor levels (Harrison 22e p.926)"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Acquired von Willebrand syndrome from lymphoproliferative disorders / MGUS / multiple myeloma / Waldenstrom macroglobulinemia (suspect with new-onset severe mucosal bleeding, especially in the elderly) (Harrison 22e p.927)",
-   "Acquired VWD due to high shear: cardiac valvular disease and Heyde syndrome (aortic stenosis with GI bleeding from angiodysplasia; shear unfolds VWF causing loss of large multimers, reversed by valve replacement) (Harrison 22e p.927)",
-   "Acquired VWD in myeloproliferative disorders with markedly elevated platelet counts (>1.5 million) due to platelet-VWF binding and clearance (Harrison 22e p.926)",
-   "Acquired inhibitors (autoantibodies) to clotting factors in patients without genetic deficiency: postpartum, autoimmune or neoplastic disease, idiopathic, or rarely after topical bovine thrombin exposure in complex surgery (Harrison 22e p.928)",
-   "Liver disease, DIC, and vitamin K deficiency as acquired multifactor coagulopathies (Harrison 22e p.928)"
-  ],
-  "additionalInvestigations": [
-   "PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928)",
-   "Mixing study (correction with normal plasma indicates factor deficiency; failure to correct indicates an inhibitor or anticoagulant) (Harrison 22e p.928)",
-   "Individual factor activity assays to identify the specific deficient factor (Harrison 22e p.928)",
-   "Bethesda assay to define inhibitor specificity and titer (expressed in Bethesda units; classifies low- vs high-responder patients) with annual aPTT/mixing-study screening at hemophilia centers (Harrison 22e p.930-931)",
-   "VWD laboratory panel: aPTT, VWF antigen, VWF activity, FVIII activity, and multimer analysis to classify type 1, 2A, 2B, 2M, 2N, and 3 (Harrison 22e p.926-927)",
-   "Chromogenic FVIII activity assay using bovine substrates when emicizumab is present (routine aPTT and FVIII activity are inaccurate) (Harrison 22e p.931)",
-   "Molecular/genetic testing for F8 or F9 mutations to enable precise carrier diagnosis in affected families (Harrison 22e p.930)"
-  ],
-  "redFlags": [
-   "Bleeding into the oropharyngeal spaces, central nervous system, or retroperitoneum is life-threatening and requires immediate therapy (Harrison 22e p.930)",
-   "Retroperitoneal hemorrhage may form a calcified inflammatory mass (pseudotumor syndrome) and damage the femoral nerve; pseudotumors can also form in long bones (Harrison 22e p.930)",
-   "Deep-muscle hematomas of the distal limbs can cause compartment syndrome from external compression of arteries, veins, or nerves (Harrison 22e p.930)",
-   "Failure to respond to factor replacement at therapeutic doses suggests an inhibitor; early detection is critical (Harrison 22e p.930)",
-   "In carriers/women, postpartum hemorrhage risk rises after delivery as the pregnancy-induced rise in clotting factor levels falls rapidly (Harrison 22e p.931)"
-  ],
-  "prognosis": "Without treatment severe hemophilia may limit life expectancy; with modern recombinant factor concentrates, prophylaxis, and viral-inactivated products, life expectancy of severe hemophilia is now only ~10 years shorter than the general male population and near normal in mild/moderate disease. Since 1998 no new viral hepatitis or HIV infections have been reported in hemophilia patients, though aging patients carry burdens of arthropathy, chronic pain, and prior HCV/HIV infection (hepatocellular carcinoma is the most common cause of death in HIV-negative patients). TTP-related microangiopathy and inhibitors worsen prognosis when present. (Harrison 22e p.930-932)",
-  "pitfalls": [
-   "FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause bleeding (no bleeding phenotype; treatment is not indicated) — do not treat the lab abnormality (Harrison 22e p.928).",
-   "Not all patients with low VWF levels bleed; mildly decreased VWF should be diagnosed as VWD only with bleeding symptoms and/or a family history, and type O blood physiologically lowers VWF (overlapping the diagnostic range) (Harrison 22e p.926-927).",
-   "Bleeding phenotype does not always correlate with factor activity in FXI deficiency, and a negative bleeding history with prior procedures does NOT exclude increased hemorrhage risk (Harrison 22e p.931-932).",
-   "Family history of hemophilia is absent in ~30% of cases (de novo mutations), so its absence does not exclude the diagnosis (Harrison 22e p.930).",
-   "Antifibrinolytic drugs are NOT indicated for hematuria because of the risk of an occlusive clot obstructing the genitourinary tract (Harrison 22e p.931)."
-  ],
-  "severityClassification": "Hemophilia A/B by factor VIII or IX activity: severe (<1%), moderate (1-5%), mild (6-30%); patients with baseline activity >25% may be detected only after major trauma or as an isolated prolonged aPTT. VWD classified into types 1, 2 (subtypes 2A, 2B, 2M, 2N), and 3 (severe, with virtually absent VWF and FVIII usually <10%) using VWF antigen, VWF activity, FVIII activity, and multimer pattern. Inhibitor patients classified as low responders (<5 Bethesda units) or high responders (>5 BU or anamnestic rise). (Harrison 22e p.926-931)",
-  "references": [
-   "Harrison 22e p.928-932",
-   "Harrison 22e Ch.120 p.926-927 (von Willebrand disease)"
-  ],
-  "crossLinks": [
-   "dic"
-  ],
-  "management": [
-   "Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in severe disease and on demand for bleeds.",
-   "Subcutaneous emicizumab prophylaxis for haemophilia A, particularly in patients with factor VIII inhibitors.",
-   "In von Willebrand disease, desmopressin to release endogenous von Willebrand factor in responsive type 1 disease, with von Willebrand factor-containing concentrate for severe or unresponsive types.",
-   "Antifibrinolytic agents such as tranexamic acid as an adjunct for mucosal and menstrual bleeding.",
-   "Inhibitor management with bypassing agents and immune tolerance induction, monitored by the Bethesda assay.",
-   "Avoidance of antiplatelet drugs, NSAIDs and intramuscular injections, with planned haemostatic cover for surgery and dental procedures.",
-   "Joint protection through physiotherapy and specialist orthopaedic care for target joints and haemophilic arthropathy.",
-   "Care through a comprehensive haemophilia centre, with genetic counselling and carrier testing for these X-linked disorders."
-  ]
- },
- "algorithms": [
-  {
-   "id": "coagulation_disorders-pathway",
-   "title": "Coagulation Disorders: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII (hemophilia A, ~80% of cases) or factor IX (hemophilia B); hemophilia A and B are clinically indistinguishable",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bleeding into the oropharyngeal spaces, central nervous system, or retroperitoneum is life-threatening and requires immediate therapy (Harrison 22e p.930)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928), Mixing study (correction with normal plasma indicates factor deficiency; failure to correct indicates an inhibitor or anticoagulant)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in severe disease and on demand for bleeds."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause bleeding (no bleeding phenotype; treatment is not indicated) - do not treat the lab"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coagulation disorders."
-  }
- ],
- "tables": [
-  {
-   "id": "coagulation_disorders-matrix",
-   "title": "Coagulation Disorders: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.928-932",
+    "clinicalPearls": [
+      "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII (hemophilia A, ~80% of cases) or factor IX (hemophilia B); hemophilia A and B are clinically indistinguishable (Harrison 22e p.928, 930).",
+      "Disease phenotype correlates with factor activity level: severe (<1%), moderate (1-5%), mild (6-30%). Severe and moderate disease cause bleeding into joints (hemarthrosis), soft tissues, and muscles after minor trauma or spontaneously; mild disease bleeds infrequently and usually only after trauma (Harrison 22e p.930).",
+      "Recurrent hemarthroses (knees, elbows, ankles, shoulders, hips) damage a joint to create a chronically affected 'target joint' with synovitis and progressive deformity; deep-muscle hematomas can cause compartment syndrome by compressing arteries, veins, or nerves (Harrison 22e p.930).",
+      "Von Willebrand disease (VWD) is the most common inherited bleeding disorder (symptomatic prevalence ~1 in 1000 to 1 in 10,000); VWF tethers platelets to subendothelium and is the carrier protein that prolongs the FVIII half-life (Harrison 22e p.927).",
+      "Most VWD symptoms are 'platelet-like' (mucocutaneous: bruising, epistaxis, heavy menstrual bleeding); type 1 (parallel reduction in VWF protein, function, and FVIII) is most common (>=80% of cases) (Harrison 22e p.926-927).",
+      "Type 2N VWD ('autosomal hemophilia') is caused by VWF variants that impair FVIII binding, markedly shortening the FVIII half-life and lowering FVIII levels (Harrison 22e p.927).",
+      "Screening hemostasis tests: an isolated prolonged PT suggests FVII deficiency; a prolonged aPTT indicates an intrinsic-pathway deficiency, most commonly FVIII, FIX, or FXI; prolongation of both PT and aPTT suggests deficiency of FV, FX, FII, or a fibrinogen abnormality (Harrison 22e p.928).",
+      "Mixing study principle: adding normal pooled plasma corrects a prolonged PT/aPTT due to a factor deficiency but fails to correct when an inhibitor (antibody) is present; if it corrects, individual factor activity assays identify the deficient factor (Harrison 22e p.928).",
+      "Inhibitor (alloantibody) formation is the major complication of hemophilia treatment, with prevalence ~30% in severe hemophilia A, ~10% in nonsevere hemophilia A, and only 3-5% in hemophilia B; inhibitors increase morbidity and mortality (Harrison 22e p.930-931).",
+      "Acquired coagulation factor deficiencies are more frequent than congenital disorders; the most common are the hemorrhagic diathesis of liver disease, DIC, and vitamin K deficiency, each typically involving more than one clotting factor (Harrison 22e p.928)."
     ],
-    [
-     "Key Investigations",
-     "PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928), Mixing study (correction with normal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Plasma coagulation factor deficiencies impair secondary hemostasis (the coagulation cascade). Inherited hemophilia A and B are X-linked recessive disorders from mutations in F8 and F9 respectively; affected males bleed while carrier women are generally asymptomatic, although a wide range of factor activity from random X-inactivation (lyonization) can produce bleeding in some carriers. FVIII has a very short intrinsic circulating half-life (~25-30 min) that is extended to roughly 12 h when complexed with von Willebrand factor (VWF). VWD reflects quantitative or qualitative defects of VWF, which serves both as the adhesion molecule tethering platelets to exposed subendothelium (function dependent on large VWF multimers) and as the FVIII carrier; loss of high-molecular-weight multimers (e.g., via excessive ADAMTS13 cleavage in type 2A/2B, or shear-induced unfolding) impairs platelet adhesion. Acquired deficiencies (liver disease, DIC, vitamin K deficiency) usually involve multiple factors and perturb both primary (platelet/vessel wall) and secondary (coagulation) hemostasis. (Harrison 22e p.926-930)",
+    "additionalDifferentials": [
+      "Hemophilia A versus hemophilia B (clinically indistinguishable; require factor assays to differentiate) (Harrison 22e p.930)",
+      "Von Willebrand disease with low FVIII versus hemophilia A (VWD must be excluded in a patient with prolonged aPTT and low FVIII and no known hemophilia history) (Harrison 22e p.930)",
+      "Factor XI deficiency (hemophilia C) and other rare inherited factor deficiencies (FII, FV, FVII, FX, FXIII, fibrinogen) (Harrison 22e p.928, 931-932)",
+      "Qualitative platelet function disorders (e.g., Glanzmann thrombasthenia, Bernard-Soulier syndrome, storage pool disorder) as a cause of mucocutaneous bleeding with normal coagulation factor levels (Harrison 22e p.926)"
     ],
-    [
-     "Primary Differentials",
-     "Hemophilia A versus hemophilia B (clinically indistinguishable; require factor assays to differentiate) (Harrison 22e p.930), Von",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Acquired von Willebrand syndrome from lymphoproliferative disorders / MGUS / multiple myeloma / Waldenstrom macroglobulinemia (suspect with new-onset severe mucosal bleeding, especially in the elderly) (Harrison 22e p.927)",
+      "Acquired VWD due to high shear: cardiac valvular disease and Heyde syndrome (aortic stenosis with GI bleeding from angiodysplasia; shear unfolds VWF causing loss of large multimers, reversed by valve replacement) (Harrison 22e p.927)",
+      "Acquired VWD in myeloproliferative disorders with markedly elevated platelet counts (>1.5 million) due to platelet-VWF binding and clearance (Harrison 22e p.926)",
+      "Acquired inhibitors (autoantibodies) to clotting factors in patients without genetic deficiency: postpartum, autoimmune or neoplastic disease, idiopathic, or rarely after topical bovine thrombin exposure in complex surgery (Harrison 22e p.928)",
+      "Liver disease, DIC, and vitamin K deficiency as acquired multifactor coagulopathies (Harrison 22e p.928)"
     ],
-    [
-     "Management Strategy",
-     "Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928)",
+      "Mixing study (correction with normal plasma indicates factor deficiency; failure to correct indicates an inhibitor or anticoagulant) (Harrison 22e p.928)",
+      "Individual factor activity assays to identify the specific deficient factor (Harrison 22e p.928)",
+      "Bethesda assay to define inhibitor specificity and titer (expressed in Bethesda units; classifies low- vs high-responder patients) with annual aPTT/mixing-study screening at hemophilia centers (Harrison 22e p.930-931)",
+      "VWD laboratory panel: aPTT, VWF antigen, VWF activity, FVIII activity, and multimer analysis to classify type 1, 2A, 2B, 2M, 2N, and 3 (Harrison 22e p.926-927)",
+      "Chromogenic FVIII activity assay using bovine substrates when emicizumab is present (routine aPTT and FVIII activity are inaccurate) (Harrison 22e p.931)",
+      "Molecular/genetic testing for F8 or F9 mutations to enable precise carrier diagnosis in affected families (Harrison 22e p.930)"
     ],
-    [
-     "Clinical Pitfall",
-     "FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Bleeding into the oropharyngeal spaces, central nervous system, or retroperitoneum is life-threatening and requires immediate therapy (Harrison 22e p.930)",
+      "Retroperitoneal hemorrhage may form a calcified inflammatory mass (pseudotumor syndrome) and damage the femoral nerve; pseudotumors can also form in long bones (Harrison 22e p.930)",
+      "Deep-muscle hematomas of the distal limbs can cause compartment syndrome from external compression of arteries, veins, or nerves (Harrison 22e p.930)",
+      "Failure to respond to factor replacement at therapeutic doses suggests an inhibitor; early detection is critical (Harrison 22e p.930)",
+      "In carriers/women, postpartum hemorrhage risk rises after delivery as the pregnancy-induced rise in clotting factor levels falls rapidly (Harrison 22e p.931)"
+    ],
+    "prognosis": "Without treatment severe hemophilia may limit life expectancy; with modern recombinant factor concentrates, prophylaxis, and viral-inactivated products, life expectancy of severe hemophilia is now only ~10 years shorter than the general male population and near normal in mild/moderate disease. Since 1998 no new viral hepatitis or HIV infections have been reported in hemophilia patients, though aging patients carry burdens of arthropathy, chronic pain, and prior HCV/HIV infection (hepatocellular carcinoma is the most common cause of death in HIV-negative patients). TTP-related microangiopathy and inhibitors worsen prognosis when present. (Harrison 22e p.930-932)",
+    "pitfalls": [
+      "FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause bleeding (no bleeding phenotype; treatment is not indicated) — do not treat the lab abnormality (Harrison 22e p.928).",
+      "Not all patients with low VWF levels bleed; mildly decreased VWF should be diagnosed as VWD only with bleeding symptoms and/or a family history, and type O blood physiologically lowers VWF (overlapping the diagnostic range) (Harrison 22e p.926-927).",
+      "Bleeding phenotype does not always correlate with factor activity in FXI deficiency, and a negative bleeding history with prior procedures does NOT exclude increased hemorrhage risk (Harrison 22e p.931-932).",
+      "Family history of hemophilia is absent in ~30% of cases (de novo mutations), so its absence does not exclude the diagnosis (Harrison 22e p.930).",
+      "Antifibrinolytic drugs are NOT indicated for hematuria because of the risk of an occlusive clot obstructing the genitourinary tract (Harrison 22e p.931)."
+    ],
+    "severityClassification": "Hemophilia A/B by factor VIII or IX activity: severe (<1%), moderate (1-5%), mild (6-30%); patients with baseline activity >25% may be detected only after major trauma or as an isolated prolonged aPTT. VWD classified into types 1, 2 (subtypes 2A, 2B, 2M, 2N), and 3 (severe, with virtually absent VWF and FVIII usually <10%) using VWF antigen, VWF activity, FVIII activity, and multimer pattern. Inhibitor patients classified as low responders (<5 Bethesda units) or high responders (>5 BU or anamnestic rise). (Harrison 22e p.926-931)",
+    "references": [
+      "Harrison 22e p.928-932",
+      "Harrison 22e Ch.120 p.926-927 (von Willebrand disease)"
+    ],
+    "crossLinks": [
+      "dic"
+    ],
+    "management": [
+      "Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in severe disease and on demand for bleeds.",
+      "Subcutaneous emicizumab prophylaxis for haemophilia A, particularly in patients with factor VIII inhibitors.",
+      "In von Willebrand disease, desmopressin to release endogenous von Willebrand factor in responsive type 1 disease, with von Willebrand factor-containing concentrate for severe or unresponsive types.",
+      "Antifibrinolytic agents such as tranexamic acid as an adjunct for mucosal and menstrual bleeding.",
+      "Inhibitor management with bypassing agents and immune tolerance induction, monitored by the Bethesda assay.",
+      "Avoidance of antiplatelet drugs, NSAIDs and intramuscular injections, with planned haemostatic cover for surgery and dental procedures.",
+      "Joint protection through physiotherapy and specialist orthopaedic care for target joints and haemophilic arthropathy.",
+      "Care through a comprehensive haemophilia centre, with genetic counselling and carrier testing for these X-linked disorders."
     ]
-   ],
-   "caption": "Overview comparison matrix for coagulation disorders."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coagulation-disorders-real-image",
-   "title": "Coagulation Disorders: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "coagulation_disorders-pathway",
+      "title": "Coagulation Disorders: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII (hemophilia A, ~80% of cases) or factor IX (hemophilia B); hemophilia A and B are clinically indistinguishable",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bleeding into the oropharyngeal spaces, central nervous system, or retroperitoneum is life-threatening and requires immediate therapy (Harrison 22e p.930)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928), Mixing study (correction with normal plasma indicates factor deficiency; failure to correct indicates an inhibitor or anticoagulant)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in severe disease and on demand for bleeds."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause bleeding (no bleeding phenotype; treatment is not indicated) - do not treat the lab"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coagulation disorders."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coagulation_disorders-matrix",
+      "title": "Coagulation Disorders: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common inherited factor deficiencies are the hemophilias, X-linked recessive diseases due to deficiency of factor VIII",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "PT and aPTT as first-line screens for clotting factor deficiency (Harrison 22e p.928), Mixing study (correction with normal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hemophilia A versus hemophilia B (clinically indistinguishable; require factor assays to differentiate) (Harrison 22e p.930), Von",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Factor replacement with recombinant or plasma-derived factor VIII or factor IX concentrate, given as regular prophylaxis in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "FXII (Hageman factor), high-molecular-weight kininogen, and prekallikrein deficiencies markedly prolong the aPTT but do NOT cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coagulation disorders."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hemophilia",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/coagulation-disorders/hemophilia",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 115-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coagulation_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory diagnosis of inherited coagulation disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated prolonged PT",
+          "cells": [
+            {
+              "text": "Factor VII deficiency"
+            },
+            {
+              "text": "First-line screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated prolonged aPTT",
+          "cells": [
+            {
+              "text": "FVIII, FIX or FXI deficiency"
+            },
+            {
+              "text": "{{hy:FXII, HMWK, prekallikrein deficiency prolong aPTT without bleeding}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Both PT and aPTT prolonged",
+          "cells": [
+            {
+              "text": "FV, FX, FII or fibrinogen abnormality"
+            },
+            {
+              "text": "Or liver disease, DIC, vitamin K deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Corrects: factor deficiency; does not correct: inhibitor"
+            },
+            {
+              "text": "Then specific factor assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "<1",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Spontaneous joint and muscle bleeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "1 to 5",
+              "range": [
+                1,
+                5
+              ]
+            },
+            {
+              "text": "Bleeds after minor trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild haemophilia",
+          "unit": "% factor activity",
+          "cells": [
+            {
+              "text": "6 to 30",
+              "range": [
+                6,
+                30
+              ]
+            },
+            {
+              "text": "Bleeds with surgery or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethesda assay",
+          "cells": [
+            {
+              "text": "Inhibitor titre"
+            },
+            {
+              "text": "Inhibitors in about 30% of severe haemophilia A, 3 to 5% of B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VWD panel",
+          "cells": [
+            {
+              "text": "aPTT, VWF antigen, VWF activity, FVIII activity, multimers"
+            },
+            {
+              "text": "Classifies types 1, 2A, 2B, 2M, 2N, 3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chromogenic FVIII assay",
+          "cells": [
+            {
+              "text": "Patients on emicizumab"
+            },
+            {
+              "text": "Routine aPTT unreliable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Type O blood lowers VWF physiologically; diagnose VWD only with bleeding history or family history."
+    },
+    {
+      "id": "coagulation_disorders-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of a bleeding disorder",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemophilia A versus B",
+          "cells": [
+            {
+              "text": "Clinically identical; factor VIII or IX assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "{{hy:Mucocutaneous bleeding}}; type 2N mimics haemophilia A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XI deficiency",
+          "cells": [
+            {
+              "text": "Bleeding poorly predicted by level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet adhesion disorders",
+          "cells": [
+            {
+              "text": "Von Willebrand disease, Bernard-Soulier"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet aggregation disorders",
+          "cells": [
+            {
+              "text": "Glanzmann thrombasthenia, afibrinogenaemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet secretion disorders",
+          "cells": [
+            {
+              "text": "Aspirin, NSAIDs, thienopyridines, storage pool, uraemia, paraprotein, penicillin"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Scott syndrome",
+          "cells": [
+            {
+              "text": "Defective platelet coagulant activity"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acquired factor inhibitor",
+          "cells": [
+            {
+              "text": "Postpartum, autoimmune, cancer; mixing study fails to correct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired VWD",
+          "cells": [
+            {
+              "text": "Aortic stenosis (Heyde), MGUS, myeloma, platelets >1.5 million"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver disease, DIC, vitamin K deficiency",
+          "cells": [
+            {
+              "text": "Multiple factors low"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coagulation_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of haemophilia and coagulation disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or target"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor VIII, minor bleed",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Dental extraction, early joint bleed"
+            },
+            {
+              "text": "Raise to 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII, severe joint or muscle bleed",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Haemarthrosis, muscle haematoma"
+            },
+            {
+              "text": "50 to 80%",
+              "range": [
+                50,
+                80
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII, life-threatening bleed or major surgery",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:CNS, airway, retroperitoneal bleeds}}"
+            },
+            {
+              "text": "100%; troughs 50 to 80% for 7 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor VIII dosing rule",
+          "cells": [
+            {
+              "text": "Haemophilia A"
+            },
+            {
+              "text": "1 unit/kg raises level about 2%; 25 units/kg gives about 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Factor IX",
+          "cells": [
+            {
+              "text": "Haemophilia B"
+            },
+            {
+              "text": "1 unit/kg raises about 1%; every 12 to 24 h; first dose about 25% higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emicizumab",
+          "cells": [
+            {
+              "text": "Haemophilia A prophylaxis"
+            },
+            {
+              "text": "Subcutaneous every 1, 2 or 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Mild haemophilia A with FVIII >=5% and proven response"
+            },
+            {
+              "text": "Dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tranexamic or aminocaproic acid",
+          "cells": [
+            {
+              "text": "Dental or oral bleeding"
+            },
+            {
+              "text": "Not for haematuria (clot obstruction)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concizumab",
+          "cells": [
+            {
+              "text": "Patients with inhibitors"
+            },
+            {
+              "text": "Prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "coagulation_disorders-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coagulation_disorders-dx-mgmt",
+      "title": "Evaluation of a suspected coagulation disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abnormal bleeding history or prolonged clotting test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "PT, aPTT, platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Which test is prolonged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mixing study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Corrects with normal plasma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Inhibitor: Bethesda assay, specialist care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Factor assays (VIII, IX, XI, VII, others)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Haemophilia: factor replacement or emicizumab by severity",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "VWF antigen, activity, FVIII, multimers; platelet function",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "VWD or platelet disorder management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "PT or aPTT"
+        },
+        {
+          "from": "n3",
+          "to": "n9",
+          "label": "Both normal, mucosal bleeding"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "VIII or IX low"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "VIII low, check VWF"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,460 @@
 {
- "id": "splenic_artery_aneurysm",
- "name": "Splenic artery aneurysm",
- "aliases": [
-  "splenic artery aneurysm",
-  "SAA",
-  "lienal artery aneurysm"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard vascular surgery reference texts and visceral aneurysm consensus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the splenic hilum",
-   "There is a marked female predominance, and multiparity and pregnancy are important associations",
-   "Portal hypertension and cirrhosis substantially increase both prevalence and size of these aneurysms",
-   "Most are asymptomatic, but larger or symptomatic lesions may cause left upper quadrant or epigastric pain",
-   "Rupture is the feared complication and can present as a two-stage bleed, initially contained within the lesser sac before free intraperitoneal haemorrhage",
-   "Rupture risk is especially high in pregnancy, where it carries grave maternal and fetal mortality, and this drives aggressive treatment in women of childbearing potential",
-   "Repair, by endovascular embolisation or open or laparoscopic surgery, is generally advised for large, symptomatic, or pregnancy-associated aneurysms"
+  "id": "splenic_artery_aneurysm",
+  "name": "Splenic artery aneurysm",
+  "aliases": [
+    "splenic artery aneurysm",
+    "SAA",
+    "lienal artery aneurysm"
   ],
-  "pathophysiology": "A splenic artery aneurysm is a focal dilatation of the splenic artery caused by weakening of the arterial wall, with degeneration of elastic and muscular layers and medial fibrodysplasia. Hormonal and haemodynamic changes of pregnancy, portal hypertension with increased splenic blood flow, atherosclerosis and fibromuscular dysplasia all contribute to wall stress and progressive enlargement. As the aneurysm grows, wall tension rises and the risk of rupture increases; rupture may initially be tamponaded within the lesser sac, producing transient stability before catastrophic free intraperitoneal haemorrhage and haemodynamic collapse.",
-  "additionalDifferentials": [
-   "Splenic artery pseudoaneurysm (often post-pancreatitis or trauma)",
-   "Other visceral artery aneurysms (hepatic, coeliac, gastroduodenal)",
-   "Pancreatic pseudocyst or peripancreatic collection",
-   "Abdominal aortic aneurysm",
-   "Splenic infarct or abscess",
-   "Left-sided renal or adrenal mass"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum",
-   "Doppler ultrasound for detection and surveillance, particularly in pregnancy where radiation is avoided",
-   "MR angiography as a radiation-sparing alternative for characterisation and follow-up",
-   "Catheter angiography when endovascular treatment is planned",
-   "Assessment for portal hypertension and liver disease as underlying drivers",
-   "Serial imaging surveillance of small asymptomatic aneurysms to monitor growth"
-  ],
-  "redFlags": [
-   "Sudden severe abdominal pain with hypotension suggesting rupture",
-   "A two-stage presentation with transient stabilisation before collapse",
-   "Rapidly enlarging or large aneurysm on serial imaging",
-   "Any splenic artery aneurysm identified in a pregnant patient given the high rupture-related mortality"
-  ],
-  "prognosis": "Unruptured aneurysms treated electively have an excellent outcome, whereas rupture carries high mortality, particularly in pregnancy; elective repair of high-risk lesions therefore markedly improves prognosis, and small low-risk aneurysms can be safely surveyed.",
-  "pitfalls": [
-   "Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups",
-   "Underestimating the danger of even modest-sized aneurysms during pregnancy",
-   "Confusing a true aneurysm with a post-inflammatory pseudoaneurysm, which has different management urgency",
-   "Failing to identify and address underlying portal hypertension"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Society for Vascular Surgery guidance on visceral artery aneurysms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather than watchful waiting, given rupture risk",
-   "Endovascular treatment with coil embolisation or a covered stent as preferred first-line intervention, with open ligation, aneurysmectomy or splenectomy where anatomy is unfavourable",
-   "Surveillance imaging with Doppler ultrasound or CT or MR angiography for small asymptomatic aneurysms to monitor growth",
-   "Aggressive treatment in pregnancy, and pre-conception counselling, given the grave maternal and foetal mortality of rupture",
-   "Address underlying drivers, particularly portal hypertension and chronic liver disease",
-   "Emergency resuscitation with urgent operative or endovascular control for rupture presenting with intraperitoneal haemorrhage",
-   "Cardiovascular risk factor modification where atherosclerotic disease coexists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "splenic_artery_aneurysm-pathway",
-   "title": "Splenic artery aneurysm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the splenic hilum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe abdominal pain with hypotension suggesting rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum, Doppler ultrasound for detection and surveillance, particularly in pregnancy where radiation is avoided, MR"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather than watchful waiting, given rupture risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of splenic artery aneurysm."
-  }
- ],
- "tables": [
-  {
-   "id": "splenic_artery_aneurysm-matrix",
-   "title": "Splenic artery aneurysm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard vascular surgery reference texts and visceral aneurysm consensus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the splenic hilum",
+      "There is a marked female predominance, and multiparity and pregnancy are important associations",
+      "Portal hypertension and cirrhosis substantially increase both prevalence and size of these aneurysms",
+      "Most are asymptomatic, but larger or symptomatic lesions may cause left upper quadrant or epigastric pain",
+      "Rupture is the feared complication and can present as a two-stage bleed, initially contained within the lesser sac before free intraperitoneal haemorrhage",
+      "Rupture risk is especially high in pregnancy, where it carries grave maternal and fetal mortality, and this drives aggressive treatment in women of childbearing potential",
+      "Repair, by endovascular embolisation or open or laparoscopic surgery, is generally advised for large, symptomatic, or pregnancy-associated aneurysms"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum, Doppler",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A splenic artery aneurysm is a focal dilatation of the splenic artery caused by weakening of the arterial wall, with degeneration of elastic and muscular layers and medial fibrodysplasia. Hormonal and haemodynamic changes of pregnancy, portal hypertension with increased splenic blood flow, atherosclerosis and fibromuscular dysplasia all contribute to wall stress and progressive enlargement. As the aneurysm grows, wall tension rises and the risk of rupture increases; rupture may initially be tamponaded within the lesser sac, producing transient stability before catastrophic free intraperitoneal haemorrhage and haemodynamic collapse.",
+    "additionalDifferentials": [
+      "Splenic artery pseudoaneurysm (often post-pancreatitis or trauma)",
+      "Other visceral artery aneurysms (hepatic, coeliac, gastroduodenal)",
+      "Pancreatic pseudocyst or peripancreatic collection",
+      "Abdominal aortic aneurysm",
+      "Splenic infarct or abscess",
+      "Left-sided renal or adrenal mass"
     ],
-    [
-     "Primary Differentials",
-     "Splenic artery pseudoaneurysm (often post-pancreatitis or trauma), Other visceral artery aneurysms (hepatic, coeliac,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum",
+      "Doppler ultrasound for detection and surveillance, particularly in pregnancy where radiation is avoided",
+      "MR angiography as a radiation-sparing alternative for characterisation and follow-up",
+      "Catheter angiography when endovascular treatment is planned",
+      "Assessment for portal hypertension and liver disease as underlying drivers",
+      "Serial imaging surveillance of small asymptomatic aneurysms to monitor growth"
     ],
-    [
-     "Management Strategy",
-     "Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe abdominal pain with hypotension suggesting rupture",
+      "A two-stage presentation with transient stabilisation before collapse",
+      "Rapidly enlarging or large aneurysm on serial imaging",
+      "Any splenic artery aneurysm identified in a pregnant patient given the high rupture-related mortality"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups",
-     "Prevent diagnostic or management error"
+    "prognosis": "Unruptured aneurysms treated electively have an excellent outcome, whereas rupture carries high mortality, particularly in pregnancy; elective repair of high-risk lesions therefore markedly improves prognosis, and small low-risk aneurysms can be safely surveyed.",
+    "pitfalls": [
+      "Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups",
+      "Underestimating the danger of even modest-sized aneurysms during pregnancy",
+      "Confusing a true aneurysm with a post-inflammatory pseudoaneurysm, which has different management urgency",
+      "Failing to identify and address underlying portal hypertension"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Society for Vascular Surgery guidance on visceral artery aneurysms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather than watchful waiting, given rupture risk",
+      "Endovascular treatment with coil embolisation or a covered stent as preferred first-line intervention, with open ligation, aneurysmectomy or splenectomy where anatomy is unfavourable",
+      "Surveillance imaging with Doppler ultrasound or CT or MR angiography for small asymptomatic aneurysms to monitor growth",
+      "Aggressive treatment in pregnancy, and pre-conception counselling, given the grave maternal and foetal mortality of rupture",
+      "Address underlying drivers, particularly portal hypertension and chronic liver disease",
+      "Emergency resuscitation with urgent operative or endovascular control for rupture presenting with intraperitoneal haemorrhage",
+      "Cardiovascular risk factor modification where atherosclerotic disease coexists"
     ]
-   ],
-   "caption": "Overview comparison matrix for splenic artery aneurysm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "splenic-artery-aneurysm-real-image",
-   "title": "Splenic artery aneurysm: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "splenic_artery_aneurysm-pathway",
+      "title": "Splenic artery aneurysm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the splenic hilum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe abdominal pain with hypotension suggesting rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum, Doppler ultrasound for detection and surveillance, particularly in pregnancy where radiation is avoided, MR"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather than watchful waiting, given rupture risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of splenic artery aneurysm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "splenic_artery_aneurysm-matrix",
+      "title": "Splenic artery aneurysm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common visceral artery aneurysm, frequently found incidentally on cross-sectional imaging as a calcified lesion near the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT angiography to confirm and size the aneurysm and assess its relation to the splenic hilum, Doppler",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Splenic artery pseudoaneurysm (often post-pancreatitis or trauma), Other visceral artery aneurysms (hepatic, coeliac,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Elective repair of aneurysms meeting treatment criteria (symptomatic, enlarging, or in women of childbearing potential) rather",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing an incidental calcified splenic lesion without appreciating rupture risk in higher-risk groups",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for splenic artery aneurysm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard vascular surgery reference texts and visceral aneurysm consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenic_artery_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT angiography",
+          "cells": [
+            {
+              "text": "Confirms and sizes the aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Detection and surveillance, including in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Radiation-sparing characterisation and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "When endovascular treatment is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for portal hypertension",
+          "cells": [
+            {
+              "text": "Underlying driver of prevalence and size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Growth of small asymptomatic aneurysms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_artery_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Splenic artery pseudoaneurysm",
+          "cells": [
+            {
+              "text": "Post-inflammatory or traumatic; different from a true aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic infarct or abscess",
+          "cells": [
+            {
+              "text": "Splenic lesions without an arterial aneurysm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_artery_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endovascular treatment",
+          "cells": [
+            {
+              "text": "Coil embolisation or a covered stent as preferred first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective repair",
+          "cells": [
+            {
+              "text": "Symptomatic, enlarging or aneurysms meeting treatment criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Doppler, CT or MR angiography for small asymptomatic aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment in pregnancy",
+          "cells": [
+            {
+              "text": "Aggressive treatment and preconception counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying drivers",
+          "cells": [
+            {
+              "text": "Portal hypertension and chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency control for rupture",
+          "cells": [
+            {
+              "text": "Resuscitation with urgent operative or endovascular control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk management",
+          "cells": [
+            {
+              "text": "Where atherosclerotic disease coexists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenic_artery_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Splenic artery aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Splenic artery aneurysm found on imaging, or left upper quadrant pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden pain with hypotension, two-stage bleed, pregnancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency resuscitation and urgent endovascular or operative control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT angiography to size; Doppler or MRA for follow-up; portal hypertension check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a true aneurysm that meets treatment criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudoaneurysm or another visceral lesion; surveillance imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Coil embolisation or covered stent as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elective repair for symptomatic or enlarging aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive treatment and preconception counselling in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat portal hypertension and liver disease as drivers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rupture carries grave maternal and fetal risk in pregnancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

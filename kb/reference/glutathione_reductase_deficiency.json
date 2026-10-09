@@ -1,173 +1,451 @@
 {
- "id": "glutathione_reductase_deficiency",
- "name": "Glutathione reductase deficiency",
- "aliases": [
-  "GR deficiency",
-  "GSR deficiency",
-  "glutathione-disulfide reductase deficiency",
-  "GSR gene"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced haemolysis",
-   "The enzyme requires flavin adenine dinucleotide (FAD) as a cofactor, so acquired deficiency from dietary riboflavin lack can mimic or unmask the inherited defect",
-   "Haemolysis is typically episodic and oxidant-provoked rather than continuously present, with intervals of near-normal red-cell survival",
-   "Favism-like reactions and drug-induced haemolytic episodes have been described, overlapping clinically with glucose-6-phosphate dehydrogenase deficiency",
-   "Because the acquired riboflavin-responsive form exists, riboflavin status should be assessed and corrected before diagnosing a true genetic defect",
-   "Diagnosis rests on reduced enzyme activity that fails to normalise after FAD saturation in the genetic form, with GSR mutation testing",
-   "Management is supportive, centring on avoidance of oxidant drugs, correction of riboflavin deficiency and transfusion during severe crises"
+  "id": "glutathione_reductase_deficiency",
+  "name": "Glutathione reductase deficiency",
+  "aliases": [
+    "GR deficiency",
+    "GSR deficiency",
+    "glutathione-disulfide reductase deficiency",
+    "GSR gene"
   ],
-  "pathophysiology": "Glutathione reductase regenerates reduced glutathione from its oxidised form using NADPH supplied by the pentose phosphate pathway, sustaining the red cell's antioxidant defences. When enzyme activity is inadequate, reduced glutathione cannot be replenished quickly enough during oxidant stress, allowing oxidative damage to haemoglobin and the membrane and precipitating episodic haemolysis. The enzyme depends on FAD derived from dietary riboflavin, so nutritional riboflavin deficiency lowers activity and can produce an acquired form that resembles the rare inherited defect.",
-  "additionalDifferentials": [
-   "Glucose-6-phosphate dehydrogenase deficiency",
-   "Riboflavin (dietary) deficiency causing reduced enzyme activity",
-   "Gamma-glutamylcysteine synthetase deficiency",
-   "Glutathione synthetase deficiency",
-   "Autoimmune haemolytic anaemia",
-   "Unstable haemoglobin variants"
-  ],
-  "additionalInvestigations": [
-   "Red-cell glutathione reductase activity assay, with and without FAD stimulation",
-   "Assessment of riboflavin nutritional status",
-   "Full blood count, reticulocyte count and blood film during episodes",
-   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-   "Direct antiglobulin test to exclude immune haemolysis",
-   "Molecular testing of the GSR gene where a genuine genetic defect is suspected"
-  ],
-  "redFlags": [
-   "Acute severe haemolysis following oxidant drug or food exposure",
-   "Failure to distinguish a correctable riboflavin deficiency from a genetic defect",
-   "Symptomatic anaemia during a crisis requiring transfusion",
-   "Aplastic crisis after parvovirus B19 infection"
-  ],
-  "prognosis": "Between oxidant exposures many patients are asymptomatic with normal red-cell survival, and the acquired riboflavin-responsive form corrects with supplementation, giving an overall favourable prognosis when triggers are managed.",
-  "pitfalls": [
-   "Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency",
-   "Failing to stimulate the assay with FAD, missing the distinction between acquired and genetic forms",
-   "Not counselling avoidance of oxidant drugs and foods",
-   "Confusing episodic oxidant haemolysis with a chronic continuous process"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Wintrobe's Clinical Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented by adequate riboflavin",
-   "Advise avoidance of oxidant triggers such as fava beans and oxidant drugs that precipitate haemolytic episodes",
-   "Assess and correct nutritional riboflavin deficiency before concluding that a true inherited GSR defect is present",
-   "Manage acute oxidant-provoked haemolysis with supportive care, hydration and red-cell transfusion when severe",
-   "Monitor the full blood count, reticulocytes and haemolytic markers around exposures, with near-normal red-cell survival expected between episodes",
-   "Offer genetic counselling and GSR testing where a genuine hereditary defect is confirmed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glutathione_reductase_deficiency-pathway",
-   "title": "Glutathione reductase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced haemolysis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe haemolysis following oxidant drug or food exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Red-cell glutathione reductase activity assay, with and without FAD stimulation, Assessment of riboflavin nutritional status, Full blood count, reticulocyte count and blood film during episodes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented by adequate riboflavin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glutathione reductase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "glutathione_reductase_deficiency-matrix",
-   "title": "Glutathione reductase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced haemolysis",
+      "The enzyme requires flavin adenine dinucleotide (FAD) as a cofactor, so acquired deficiency from dietary riboflavin lack can mimic or unmask the inherited defect",
+      "Haemolysis is typically episodic and oxidant-provoked rather than continuously present, with intervals of near-normal red-cell survival",
+      "Favism-like reactions and drug-induced haemolytic episodes have been described, overlapping clinically with glucose-6-phosphate dehydrogenase deficiency",
+      "Because the acquired riboflavin-responsive form exists, riboflavin status should be assessed and corrected before diagnosing a true genetic defect",
+      "Diagnosis rests on reduced enzyme activity that fails to normalise after FAD saturation in the genetic form, with GSR mutation testing",
+      "Management is supportive, centring on avoidance of oxidant drugs, correction of riboflavin deficiency and transfusion during severe crises"
     ],
-    [
-     "Key Investigations",
-     "Red-cell glutathione reductase activity assay, with and without FAD stimulation, Assessment of riboflavin nutritional status,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glutathione reductase regenerates reduced glutathione from its oxidised form using NADPH supplied by the pentose phosphate pathway, sustaining the red cell's antioxidant defences. When enzyme activity is inadequate, reduced glutathione cannot be replenished quickly enough during oxidant stress, allowing oxidative damage to haemoglobin and the membrane and precipitating episodic haemolysis. The enzyme depends on FAD derived from dietary riboflavin, so nutritional riboflavin deficiency lowers activity and can produce an acquired form that resembles the rare inherited defect.",
+    "additionalDifferentials": [
+      "Glucose-6-phosphate dehydrogenase deficiency",
+      "Riboflavin (dietary) deficiency causing reduced enzyme activity",
+      "Gamma-glutamylcysteine synthetase deficiency",
+      "Glutathione synthetase deficiency",
+      "Autoimmune haemolytic anaemia",
+      "Unstable haemoglobin variants"
     ],
-    [
-     "Primary Differentials",
-     "Glucose-6-phosphate dehydrogenase deficiency, Riboflavin (dietary) deficiency causing reduced enzyme activity,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Red-cell glutathione reductase activity assay, with and without FAD stimulation",
+      "Assessment of riboflavin nutritional status",
+      "Full blood count, reticulocyte count and blood film during episodes",
+      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+      "Direct antiglobulin test to exclude immune haemolysis",
+      "Molecular testing of the GSR gene where a genuine genetic defect is suspected"
     ],
-    [
-     "Management Strategy",
-     "Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe haemolysis following oxidant drug or food exposure",
+      "Failure to distinguish a correctable riboflavin deficiency from a genetic defect",
+      "Symptomatic anaemia during a crisis requiring transfusion",
+      "Aplastic crisis after parvovirus B19 infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Between oxidant exposures many patients are asymptomatic with normal red-cell survival, and the acquired riboflavin-responsive form corrects with supplementation, giving an overall favourable prognosis when triggers are managed.",
+    "pitfalls": [
+      "Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency",
+      "Failing to stimulate the assay with FAD, missing the distinction between acquired and genetic forms",
+      "Not counselling avoidance of oxidant drugs and foods",
+      "Confusing episodic oxidant haemolysis with a chronic continuous process"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Wintrobe's Clinical Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented by adequate riboflavin",
+      "Advise avoidance of oxidant triggers such as fava beans and oxidant drugs that precipitate haemolytic episodes",
+      "Assess and correct nutritional riboflavin deficiency before concluding that a true inherited GSR defect is present",
+      "Manage acute oxidant-provoked haemolysis with supportive care, hydration and red-cell transfusion when severe",
+      "Monitor the full blood count, reticulocytes and haemolytic markers around exposures, with near-normal red-cell survival expected between episodes",
+      "Offer genetic counselling and GSR testing where a genuine hereditary defect is confirmed"
     ]
-   ],
-   "caption": "Overview comparison matrix for glutathione reductase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glutathione-reductase-deficiency-real-image",
-   "title": "Glutathione reductase deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "glutathione_reductase_deficiency-pathway",
+      "title": "Glutathione reductase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced haemolysis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe haemolysis following oxidant drug or food exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Red-cell glutathione reductase activity assay, with and without FAD stimulation, Assessment of riboflavin nutritional status, Full blood count, reticulocyte count and blood film during episodes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented by adequate riboflavin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glutathione reductase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glutathione_reductase_deficiency-matrix",
+      "title": "Glutathione reductase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A pentose-phosphate-linked enzyme defect that impairs regeneration of reduced glutathione and predisposes to oxidant-induced",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Red-cell glutathione reductase activity assay, with and without FAD stimulation, Assessment of riboflavin nutritional status,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glucose-6-phosphate dehydrogenase deficiency, Riboflavin (dietary) deficiency causing reduced enzyme activity,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct riboflavin status with riboflavin supplementation, since the FAD-dependent acquired form responds to and may be prevented",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing an inherited defect without first excluding and correcting riboflavin deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glutathione reductase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glutathione_reductase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell glutathione reductase activity, with and without FAD",
+          "cells": [
+            {
+              "text": "Enzyme activity with FAD stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin nutritional status",
+          "cells": [
+            {
+              "text": "Riboflavin status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, reticulocyte count and blood film during episodes",
+          "cells": [
+            {
+              "text": "Haemolytic indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen with bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GSR gene testing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutathione_reductase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase deficiency",
+          "cells": [
+            {
+              "text": "Oxidant-triggered haemolysis with a similar picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riboflavin deficiency",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity that corrects with riboflavin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glutathione_reductase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Riboflavin supplementation",
+          "cells": [
+            {
+              "text": "The FAD-dependent acquired form responds and may be preventable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid oxidant triggers",
+          "cells": [
+            {
+              "text": "Fava beans and oxidant drugs that precipitate haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct riboflavin deficiency first",
+          "cells": [
+            {
+              "text": "Before concluding that a genetic GSR defect is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolysis",
+          "cells": [
+            {
+              "text": "Supportive care, hydration and red-cell transfusion when severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring around exposures",
+          "cells": [
+            {
+              "text": "Blood count, reticulocytes and haemolytic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "GSR testing where a genuine hereditary defect is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glutathione_reductase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Glutathione reductase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glutathione reductase deficiency: haemolysis after oxidant exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe haemolysis, transfusion-needing anaemia, aplastic crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent supportive care and transfusion for severe oxidant-provoked haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzyme activity with and without FAD, riboflavin status and DAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme activity stay low after riboflavin correction, with DAT negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider G6PD deficiency or riboflavin deficiency, correcting the latter first",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Riboflavin supplementation for the acquired, FAD-responsive form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid oxidant triggers such as fava beans and oxidant drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct riboflavin deficiency before assuming a genetic defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care and red-cell transfusion for severe haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many are asymptomatic between exposures; the acquired riboflavin-responsive form corrects",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,181 +1,586 @@
 {
- "id": "disseminated_gonococcal_infection",
- "name": "Disseminated gonococcal infection",
- "aliases": [
-  "DGI",
-  "gonococcaemia",
-  "arthritis-dermatitis syndrome",
-  "Neisseria gonorrhoeae",
-  "disseminated gonorrhoea"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Genitourinary Medicine / Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell / BASHH-CDC STI guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal focus in the genital tract, rectum, or pharynx",
-   "It classically presents in one of two overlapping forms: an arthritis-dermatitis (bacteraemic) syndrome and a localised purulent (septic) arthritis",
-   "The arthritis-dermatitis form features migratory or additive polyarthralgia, tenosynovitis (often of the wrists, hands, and ankles), and scattered painful pustular or haemorrhagic skin lesions, usually with negative synovial cultures",
-   "The purulent-arthritis form produces a frankly septic mono- or oligoarthritis with an inflammatory effusion from which the organism is more often recovered",
-   "Because the responsible mucosal infection is frequently silent, a high index of suspicion and a full sexual history are needed, and it is comparatively more common in women",
-   "Blood, synovial fluid, skin lesions, and all relevant mucosal sites should be sampled, using culture and nucleic acid amplification testing, with antimicrobial susceptibility testing given rising resistance",
-   "Treatment is with a parenteral third-generation cephalosporin such as ceftriaxone, with joint drainage for purulent arthritis and coverage for co-existing chlamydia as guided by local policy",
-   "Deficiency of terminal complement components (and functional or anatomical asplenia) predisposes to recurrent or disseminated neisserial infection and should prompt complement screening in recurrent cases"
+  "id": "disseminated_gonococcal_infection",
+  "name": "Disseminated gonococcal infection",
+  "aliases": [
+    "DGI",
+    "gonococcaemia",
+    "arthritis-dermatitis syndrome",
+    "Neisseria gonorrhoeae",
+    "disseminated gonorrhoea"
   ],
-  "pathophysiology": "Disseminated gonococcal infection occurs when Neisseria gonorrhoeae invades from a mucosal surface into the bloodstream, a step favoured by particular gonococcal strains that resist normal serum bactericidal activity and by host factors. Circulating organisms and the immune response to them seed the skin, tenosynovium, and joints, producing an immune-complex-influenced arthritis-dermatitis picture in the early bacteraemic phase and, later or in other patients, direct bacterial seeding of a joint with suppurative arthritis. The organism's marked antigenic variation helps it evade immunity, while an intact terminal complement (membrane attack complex) pathway is critical for killing Neisseria, so individuals deficient in these complement components are strikingly susceptible to disseminated and recurrent neisserial disease.",
-  "additionalDifferentials": [
-   "Non-gonococcal septic arthritis (for example Staphylococcus aureus)",
-   "Reactive arthritis following genitourinary or enteric infection",
-   "Crystal arthropathy such as gout or pseudogout",
-   "Acute rheumatological disease such as systemic lupus erythematosus or rheumatoid flare",
-   "Infective endocarditis with embolic phenomena",
-   "Meningococcaemia or other bacteraemia with skin lesions",
-   "Viral arthritis (for example parvovirus or hepatitis B)"
-  ],
-  "additionalInvestigations": [
-   "Blood cultures during the bacteraemic phase",
-   "Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid amplification testing",
-   "Nucleic acid amplification testing and culture from genital, rectal, and pharyngeal mucosal sites",
-   "Gram stain and culture of skin lesion aspirate or swab",
-   "Antimicrobial susceptibility testing of gonococcal isolates given rising resistance",
-   "Screening for coexisting sexually transmitted infections including chlamydia, HIV, and syphilis",
-   "Terminal complement (for example CH50) screening in recurrent disseminated neisserial infection"
-  ],
-  "redFlags": [
-   "Features suggesting gonococcal endocarditis or meningitis",
-   "A hot, swollen, immobile joint indicating septic arthritis requiring urgent drainage",
-   "Sepsis with haemodynamic compromise",
-   "Recurrent disseminated neisserial infection pointing to terminal complement deficiency",
-   "Rapidly evolving haemorrhagic or necrotic skin lesions"
-  ],
-  "prognosis": "With prompt parenteral antibiotics and, where needed, joint drainage the outlook is generally very good and most patients recover fully, though delayed treatment of purulent arthritis can cause lasting joint damage, and rare complications such as endocarditis or meningitis carry higher risk.",
-  "pitfalls": [
-   "Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular skin lesions",
-   "Excluding the diagnosis because genital symptoms or mucosal cultures are absent, when the source is often silent",
-   "Omitting sampling of all relevant mucosal sites and skin lesions, reducing diagnostic yield",
-   "Failing to screen for terminal complement deficiency in recurrent cases",
-   "Overlooking concurrent chlamydia or other sexually transmitted infection"
-  ],
-  "references": [
-   "BASHH UK national guideline for the management of gonorrhoea in adults",
-   "CDC Sexually Transmitted Infections Treatment Guidelines",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising resistance",
-   "Add empirical treatment for chlamydia co-infection",
-   "Drain a purulent septic joint by aspiration or arthroscopic washout",
-   "Step down to oral therapy once clinically improving to complete an adequate course",
-   "Screen and treat for concurrent sexually transmitted infections including HIV, syphilis, and chlamydia, and treat sexual partners",
-   "Investigate for terminal complement deficiency in recurrent disseminated Neisseria infection",
-   "Provide supportive analgesia with joint rest and physiotherapy for arthritis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "disseminated_gonococcal_infection-pathway",
-   "title": "Disseminated gonococcal infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal focus in the genital tract, rectum, or pharynx",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting gonococcal endocarditis or meningitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood cultures during the bacteraemic phase, Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid amplification testing, Nucleic acid amplification testing and culture from genital, rectal, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising resistance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular skin lesions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of disseminated gonococcal infection."
-  }
- ],
- "tables": [
-  {
-   "id": "disseminated_gonococcal_infection-matrix",
-   "title": "Disseminated gonococcal infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Genitourinary Medicine / Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell / BASHH-CDC STI guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal focus in the genital tract, rectum, or pharynx",
+      "It classically presents in one of two overlapping forms: an arthritis-dermatitis (bacteraemic) syndrome and a localised purulent (septic) arthritis",
+      "The arthritis-dermatitis form features migratory or additive polyarthralgia, tenosynovitis (often of the wrists, hands, and ankles), and scattered painful pustular or haemorrhagic skin lesions, usually with negative synovial cultures",
+      "The purulent-arthritis form produces a frankly septic mono- or oligoarthritis with an inflammatory effusion from which the organism is more often recovered",
+      "Because the responsible mucosal infection is frequently silent, a high index of suspicion and a full sexual history are needed, and it is comparatively more common in women",
+      "Blood, synovial fluid, skin lesions, and all relevant mucosal sites should be sampled, using culture and nucleic acid amplification testing, with antimicrobial susceptibility testing given rising resistance",
+      "Treatment is with a parenteral third-generation cephalosporin such as ceftriaxone, with joint drainage for purulent arthritis and coverage for co-existing chlamydia as guided by local policy",
+      "Deficiency of terminal complement components (and functional or anatomical asplenia) predisposes to recurrent or disseminated neisserial infection and should prompt complement screening in recurrent cases"
     ],
-    [
-     "Key Investigations",
-     "Blood cultures during the bacteraemic phase, Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Disseminated gonococcal infection occurs when Neisseria gonorrhoeae invades from a mucosal surface into the bloodstream, a step favoured by particular gonococcal strains that resist normal serum bactericidal activity and by host factors. Circulating organisms and the immune response to them seed the skin, tenosynovium, and joints, producing an immune-complex-influenced arthritis-dermatitis picture in the early bacteraemic phase and, later or in other patients, direct bacterial seeding of a joint with suppurative arthritis. The organism's marked antigenic variation helps it evade immunity, while an intact terminal complement (membrane attack complex) pathway is critical for killing Neisseria, so individuals deficient in these complement components are strikingly susceptible to disseminated and recurrent neisserial disease.",
+    "additionalDifferentials": [
+      "Non-gonococcal septic arthritis (for example Staphylococcus aureus)",
+      "Reactive arthritis following genitourinary or enteric infection",
+      "Crystal arthropathy such as gout or pseudogout",
+      "Acute rheumatological disease such as systemic lupus erythematosus or rheumatoid flare",
+      "Infective endocarditis with embolic phenomena",
+      "Meningococcaemia or other bacteraemia with skin lesions",
+      "Viral arthritis (for example parvovirus or hepatitis B)"
     ],
-    [
-     "Primary Differentials",
-     "Non-gonococcal septic arthritis (for example Staphylococcus aureus), Reactive arthritis following genitourinary or enteric",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood cultures during the bacteraemic phase",
+      "Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid amplification testing",
+      "Nucleic acid amplification testing and culture from genital, rectal, and pharyngeal mucosal sites",
+      "Gram stain and culture of skin lesion aspirate or swab",
+      "Antimicrobial susceptibility testing of gonococcal isolates given rising resistance",
+      "Screening for coexisting sexually transmitted infections including chlamydia, HIV, and syphilis",
+      "Terminal complement (for example CH50) screening in recurrent disseminated neisserial infection"
     ],
-    [
-     "Management Strategy",
-     "Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting gonococcal endocarditis or meningitis",
+      "A hot, swollen, immobile joint indicating septic arthritis requiring urgent drainage",
+      "Sepsis with haemodynamic compromise",
+      "Recurrent disseminated neisserial infection pointing to terminal complement deficiency",
+      "Rapidly evolving haemorrhagic or necrotic skin lesions"
     ],
-    [
-     "Clinical Pitfall",
-     "Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt parenteral antibiotics and, where needed, joint drainage the outlook is generally very good and most patients recover fully, though delayed treatment of purulent arthritis can cause lasting joint damage, and rare complications such as endocarditis or meningitis carry higher risk.",
+    "pitfalls": [
+      "Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular skin lesions",
+      "Excluding the diagnosis because genital symptoms or mucosal cultures are absent, when the source is often silent",
+      "Omitting sampling of all relevant mucosal sites and skin lesions, reducing diagnostic yield",
+      "Failing to screen for terminal complement deficiency in recurrent cases",
+      "Overlooking concurrent chlamydia or other sexually transmitted infection"
+    ],
+    "references": [
+      "BASHH UK national guideline for the management of gonorrhoea in adults",
+      "CDC Sexually Transmitted Infections Treatment Guidelines",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising resistance",
+      "Add empirical treatment for chlamydia co-infection",
+      "Drain a purulent septic joint by aspiration or arthroscopic washout",
+      "Step down to oral therapy once clinically improving to complete an adequate course",
+      "Screen and treat for concurrent sexually transmitted infections including HIV, syphilis, and chlamydia, and treat sexual partners",
+      "Investigate for terminal complement deficiency in recurrent disseminated Neisseria infection",
+      "Provide supportive analgesia with joint rest and physiotherapy for arthritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for disseminated gonococcal infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "disseminated-gonococcal-infection-real-image",
-   "title": "Disseminated gonococcal infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "disseminated_gonococcal_infection-pathway",
+      "title": "Disseminated gonococcal infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal focus in the genital tract, rectum, or pharynx",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting gonococcal endocarditis or meningitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood cultures during the bacteraemic phase, Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid amplification testing, Nucleic acid amplification testing and culture from genital, rectal, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising resistance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular skin lesions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of disseminated gonococcal infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "disseminated_gonococcal_infection-matrix",
+      "title": "Disseminated gonococcal infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Disseminated gonococcal infection results from bloodstream spread of Neisseria gonorrhoeae, often from an asymptomatic mucosal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood cultures during the bacteraemic phase, Synovial fluid aspiration for cell count, Gram stain, culture, and nucleic acid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-gonococcal septic arthritis (for example Staphylococcus aureus), Reactive arthritis following genitourinary or enteric",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt parenteral third-generation cephalosporin (ceftriaxone) is the mainstay, guided by susceptibility testing given rising",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not considering disseminated gonococcal infection in a sexually active patient with polyarthralgia, tenosynovitis, and pustular",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for disseminated gonococcal infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disseminated_gonococcal_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures during the bacteraemic phase",
+          "cells": [
+            {
+              "text": "Bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid aspiration with culture and NAAT",
+          "cells": [
+            {
+              "text": "Septic joint: cell count, Gram stain, culture and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT and culture from genital, rectal and pharyngeal sites",
+          "cells": [
+            {
+              "text": "Mucosal source, which is often silent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and culture of skin lesion aspirate",
+          "cells": [
+            {
+              "text": "Organisms in pustular or haemorrhagic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Terminal complement screening (CH50)",
+          "cells": [
+            {
+              "text": "Recurrent disseminated infection suggests complement deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_gonococcal_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-gonococcal septic arthritis (for example Staphylococcus aureus)",
+          "cells": [
+            {
+              "text": "Different organism on synovial culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive arthritis",
+          "cells": [
+            {
+              "text": "Follows genitourinary or enteric infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcaemia or other bacteraemia with skin lesions",
+          "cells": [
+            {
+              "text": "Skin lesions with bacteraemia; separated by culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_gonococcal_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral ceftriaxone",
+          "cells": [
+            {
+              "text": "Mainstay, guided by susceptibility testing given rising resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical chlamydia treatment",
+          "cells": [
+            {
+              "text": "Co-infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint drainage",
+          "cells": [
+            {
+              "text": "Aspiration or arthroscopic washout of a purulent septic joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral step-down",
+          "cells": [
+            {
+              "text": "Once improving, to complete an adequate course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexual health screening",
+          "cells": [
+            {
+              "text": "HIV, syphilis and chlamydia; treat sexual partners"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement investigation",
+          "cells": [
+            {
+              "text": "Recurrent disseminated neisserial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, joint rest and physiotherapy for arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disseminated_gonococcal_infection-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disseminated_gonococcal_infection-dx-mgmt",
+      "title": "Diagnosis and management of Disseminated gonococcal infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected disseminated gonococcal infection: polyarthralgia, tenosynovitis and pustules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (endocarditis, meningitis, sepsis, hot swollen immobile joint)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent joint drainage and parenteral ceftriaxone",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood cultures; synovial fluid analysis and NAAT; mucosal NAAT and culture; skin swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Neisseria gonorrhoeae found on synovial, skin or mucosal samples?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider S. aureus septic arthritis, reactive arthritis, gout or viral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parenteral ceftriaxone, guided by susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical chlamydia treatment because of co-infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirate or wash out a purulent septic joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral step-down once improving; treat sexual partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Check for terminal complement deficiency in recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt antibiotics give a very good outlook; delayed purulent arthritis causes damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

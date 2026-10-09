@@ -1,177 +1,493 @@
 {
- "id": "pernio_lupus",
- "name": "pernio lupus",
- "aliases": [
-  "chilblain lupus erythematosus",
-  "lupus pernio of Hutchinson (chilblain lupus)"
- ],
- "class": "non_infective",
- "system": "Skin and subcutaneous tissue",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques develop on acral sites such as fingers, toes, ears, nose and heels.",
-   "It should not be confused with sarcoidosis-related lupus pernio, a quite different entity affecting the central face; chilblain lupus is a lupus-specific dermatosis provoked by cold and damp.",
-   "Lesions resemble idiopathic chilblains but are more persistent, may ulcerate or become hyperkeratotic and fissured, and do not resolve promptly with warming alone.",
-   "A proportion of patients meet criteria for or later develop systemic lupus erythematosus, so systemic assessment and long-term monitoring are important.",
-   "A rare familial form of chilblain lupus is caused by mutations in TREX1 or SAMHD1 and belongs to the type I interferonopathy spectrum, overlapping with Aicardi-Goutieres syndrome.",
-   "Histology shows an interface dermatitis with a superficial and deep perivascular lymphocytic infiltrate, and direct immunofluorescence often demonstrates lupus-band deposition at the dermoepidermal junction.",
-   "Management centres on cold avoidance, warm clothing and smoking cessation, with topical or systemic corticosteroids, antimalarials and calcium-channel blockers used for persistent disease.",
-   "Distinguishing chilblain lupus from ordinary perniosis rests on chronicity, acral photodistribution, histopathology, immunofluorescence and lupus serology."
+  "id": "pernio_lupus",
+  "name": "pernio lupus",
+  "aliases": [
+    "chilblain lupus erythematosus",
+    "lupus pernio of Hutchinson (chilblain lupus)"
   ],
-  "pathophysiology": "Chilblain lupus is a cold-triggered variant of chronic cutaneous lupus erythematosus in which low temperature and microvascular vasoconstriction combine with a lupus-specific inflammatory response. Cold-induced hypoperfusion of acral skin, together with an interface dermatitis driven by autoreactive T lymphocytes and a type I interferon signature, produces the characteristic tender violaceous lesions. Immune complex deposition and complement activation at the dermoepidermal junction contribute to tissue injury, and impaired clearance of nucleic acids underlies the familial monogenic forms associated with TREX1 and SAMHD1 mutations, which drive chronic interferon overproduction. The acral, cold-exposed distribution reflects the additive effect of vasospastic hypoxia and photo- and cold-provoked immunological activity on skin already predisposed by the lupus diathesis.",
-  "additionalDifferentials": [
-   "Idiopathic perniosis (chilblains)",
-   "Systemic lupus erythematosus with acral involvement",
-   "Sarcoidosis (true lupus pernio of the face)",
-   "Raynaud phenomenon and other vasospastic disorders",
-   "Cryoglobulinaemia and cold agglutinin disease",
-   "Acral vasculitis",
-   "Chilblain-like lesions of the interferonopathies"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate",
-   "Direct immunofluorescence for a lupus band at the dermoepidermal junction",
-   "Antinuclear antibody and extractable nuclear antigen panel",
-   "Complement levels and anti-dsDNA antibodies to assess systemic activity",
-   "Cryoglobulins and cold agglutinins to exclude cold-precipitable proteins",
-   "Antiphospholipid antibody screen",
-   "Genetic testing for TREX1/SAMHD1 in familial or early-onset cases"
-  ],
-  "redFlags": [
-   "Features suggesting evolution to systemic lupus such as arthritis, nephritis or cytopenias",
-   "Ulceration or necrosis of acral lesions",
-   "Family history or early childhood onset suggesting a monogenic interferonopathy",
-   "Systemic symptoms including fever, weight loss or serositis",
-   "Laboratory evidence of active systemic disease (low complement, high anti-dsDNA)"
-  ],
-  "prognosis": "Chilblain lupus tends to run a chronic, relapsing course closely linked to cold exposure and may persist for years; a minority progress to systemic lupus erythematosus, so periodic reassessment is warranted.",
-  "pitfalls": [
-   "Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition",
-   "Dismissing persistent acral lesions as ordinary chilblains and missing the lupus diagnosis",
-   "Failing to screen for systemic lupus at diagnosis and during follow-up",
-   "Overlooking a familial interferonopathy in early-onset or familial cases",
-   "Attributing lesions solely to cold and neglecting biopsy and serology"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Dubois' Lupus Erythematosus and Related Syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure",
-   "Topical corticosteroids or calcineurin inhibitors for individual acral lesions",
-   "Antimalarials such as hydroxychloroquine are the mainstay systemic therapy, with a calcium-channel blocker such as nifedipine added for the vasospastic component",
-   "Escalate refractory disease to systemic immunomodulation, with JAK inhibitors particularly relevant in TREX1/SAMHD1-related interferonopathy forms",
-   "Monitor for evolution into systemic lupus erythematosus with periodic review and complement, anti-dsDNA and autoantibody testing",
-   "Offer genetic counselling and consider TREX1/SAMHD1 testing in familial chilblain lupus within the type I interferonopathy spectrum",
-   "Coordinate dermatology and rheumatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pernio_lupus-pathway",
-   "title": "pernio lupus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques develop on acral sites such as fingers, toes, ears, nose and heels.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting evolution to systemic lupus such as arthritis, nephritis or cytopenias",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate, Direct immunofluorescence for a lupus band at the dermoepidermal junction, Antinuclear antibody and extractable nuclear antigen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pernio lupus."
-  }
- ],
- "tables": [
-  {
-   "id": "pernio_lupus-matrix",
-   "title": "pernio lupus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin and subcutaneous tissue",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques develop on acral sites such as fingers, toes, ears, nose and heels.",
+      "It should not be confused with sarcoidosis-related lupus pernio, a quite different entity affecting the central face; chilblain lupus is a lupus-specific dermatosis provoked by cold and damp.",
+      "Lesions resemble idiopathic chilblains but are more persistent, may ulcerate or become hyperkeratotic and fissured, and do not resolve promptly with warming alone.",
+      "A proportion of patients meet criteria for or later develop systemic lupus erythematosus, so systemic assessment and long-term monitoring are important.",
+      "A rare familial form of chilblain lupus is caused by mutations in TREX1 or SAMHD1 and belongs to the type I interferonopathy spectrum, overlapping with Aicardi-Goutieres syndrome.",
+      "Histology shows an interface dermatitis with a superficial and deep perivascular lymphocytic infiltrate, and direct immunofluorescence often demonstrates lupus-band deposition at the dermoepidermal junction.",
+      "Management centres on cold avoidance, warm clothing and smoking cessation, with topical or systemic corticosteroids, antimalarials and calcium-channel blockers used for persistent disease.",
+      "Distinguishing chilblain lupus from ordinary perniosis rests on chronicity, acral photodistribution, histopathology, immunofluorescence and lupus serology."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate, Direct immunofluorescence for a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chilblain lupus is a cold-triggered variant of chronic cutaneous lupus erythematosus in which low temperature and microvascular vasoconstriction combine with a lupus-specific inflammatory response. Cold-induced hypoperfusion of acral skin, together with an interface dermatitis driven by autoreactive T lymphocytes and a type I interferon signature, produces the characteristic tender violaceous lesions. Immune complex deposition and complement activation at the dermoepidermal junction contribute to tissue injury, and impaired clearance of nucleic acids underlies the familial monogenic forms associated with TREX1 and SAMHD1 mutations, which drive chronic interferon overproduction. The acral, cold-exposed distribution reflects the additive effect of vasospastic hypoxia and photo- and cold-provoked immunological activity on skin already predisposed by the lupus diathesis.",
+    "additionalDifferentials": [
+      "Idiopathic perniosis (chilblains)",
+      "Systemic lupus erythematosus with acral involvement",
+      "Sarcoidosis (true lupus pernio of the face)",
+      "Raynaud phenomenon and other vasospastic disorders",
+      "Cryoglobulinaemia and cold agglutinin disease",
+      "Acral vasculitis",
+      "Chilblain-like lesions of the interferonopathies"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic perniosis (chilblains), Systemic lupus erythematosus with acral involvement, Sarcoidosis (true lupus pernio of the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate",
+      "Direct immunofluorescence for a lupus band at the dermoepidermal junction",
+      "Antinuclear antibody and extractable nuclear antigen panel",
+      "Complement levels and anti-dsDNA antibodies to assess systemic activity",
+      "Cryoglobulins and cold agglutinins to exclude cold-precipitable proteins",
+      "Antiphospholipid antibody screen",
+      "Genetic testing for TREX1/SAMHD1 in familial or early-onset cases"
     ],
-    [
-     "Management Strategy",
-     "Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting evolution to systemic lupus such as arthritis, nephritis or cytopenias",
+      "Ulceration or necrosis of acral lesions",
+      "Family history or early childhood onset suggesting a monogenic interferonopathy",
+      "Systemic symptoms including fever, weight loss or serositis",
+      "Laboratory evidence of active systemic disease (low complement, high anti-dsDNA)"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition",
-     "Prevent diagnostic or management error"
+    "prognosis": "Chilblain lupus tends to run a chronic, relapsing course closely linked to cold exposure and may persist for years; a minority progress to systemic lupus erythematosus, so periodic reassessment is warranted.",
+    "pitfalls": [
+      "Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition",
+      "Dismissing persistent acral lesions as ordinary chilblains and missing the lupus diagnosis",
+      "Failing to screen for systemic lupus at diagnosis and during follow-up",
+      "Overlooking a familial interferonopathy in early-onset or familial cases",
+      "Attributing lesions solely to cold and neglecting biopsy and serology"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Dubois' Lupus Erythematosus and Related Syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure",
+      "Topical corticosteroids or calcineurin inhibitors for individual acral lesions",
+      "Antimalarials such as hydroxychloroquine are the mainstay systemic therapy, with a calcium-channel blocker such as nifedipine added for the vasospastic component",
+      "Escalate refractory disease to systemic immunomodulation, with JAK inhibitors particularly relevant in TREX1/SAMHD1-related interferonopathy forms",
+      "Monitor for evolution into systemic lupus erythematosus with periodic review and complement, anti-dsDNA and autoantibody testing",
+      "Offer genetic counselling and consider TREX1/SAMHD1 testing in familial chilblain lupus within the type I interferonopathy spectrum",
+      "Coordinate dermatology and rheumatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for pernio lupus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pernio-lupus-real-image",
-   "title": "pernio lupus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pernio_lupus-pathway",
+      "title": "pernio lupus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques develop on acral sites such as fingers, toes, ears, nose and heels.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting evolution to systemic lupus such as arthritis, nephritis or cytopenias",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate, Direct immunofluorescence for a lupus band at the dermoepidermal junction, Antinuclear antibody and extractable nuclear antigen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pernio lupus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pernio_lupus-matrix",
+      "title": "pernio lupus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chilblain lupus erythematosus is a chronic form of cutaneous lupus in which cold-induced, tender violaceous papules and plaques",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy for histopathology showing interface dermatitis with deep perivascular infiltrate, Direct immunofluorescence for a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic perniosis (chilblains), Systemic lupus erythematosus with acral involvement, Sarcoidosis (true lupus pernio of the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cold and damp avoidance with insulation of the extremities and smoking cessation form the essential first-line measure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing chilblain lupus with the facial sarcoidal lupus pernio, an unrelated condition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pernio lupus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pernio_lupus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Interface dermatitis with deep perivascular infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Lupus band at the dermoepidermal junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody and extractable nuclear antigen panel",
+          "cells": [
+            {
+              "text": "Autoantibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement and anti-dsDNA antibodies",
+          "cells": [
+            {
+              "text": "Systemic lupus activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulins and cold agglutinins",
+          "cells": [
+            {
+              "text": "Cold-precipitable proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody screen",
+          "cells": [
+            {
+              "text": "Antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TREX1 and SAMHD1 genetic testing",
+          "cells": [
+            {
+              "text": "Familial or early-onset cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pernio_lupus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic lupus erythematosus with acral involvement",
+          "cells": [
+            {
+              "text": "Arthritis, nephritis or cytopenias suggest evolution to SLE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis (true lupus pernio of the face)",
+          "cells": [
+            {
+              "text": "Facial lupus pernio is an unrelated condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemia and cold agglutinin disease",
+          "cells": [
+            {
+              "text": "Cold-precipitable proteins on laboratory testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pernio_lupus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold and damp avoidance",
+          "cells": [
+            {
+              "text": "Insulation of extremities and smoking cessation, as essential first-line measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical corticosteroids or calcineurin inhibitors for individual acral lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimalarials",
+          "cells": [
+            {
+              "text": "Hydroxychloroquine is the mainstay systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Escalate to systemic immunomodulation; JAK inhibitors relevant in TREX1/SAMHD1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Periodic review with complement, anti-dsDNA and autoantibody testing for evolution to SLE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Consider TREX1/SAMHD1 testing in familial chilblain lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated follow-up",
+          "cells": [
+            {
+              "text": "Dermatology and rheumatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pernio_lupus-dx-mgmt",
+      "title": "Diagnosis and management of pernio lupus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cold-induced acral chilblain-like lesions suspected to be chilblain lupus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (arthritis, nephritis, cytopenias, acral ulceration, familial early onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rheumatology review for evolution to systemic lupus or systemic activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy and direct immunofluorescence; ANA and ENA panel; complement and anti-dsDNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show interface dermatitis with a lupus band?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic perniosis, cryoglobulinaemia, Raynaud or interferonopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cold and damp avoidance, insulation and smoking cessation as first-line measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors for individual acral lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydroxychloroquine as the mainstay systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate refractory disease; JAK inhibitors are relevant in TREX1/SAMHD1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for evolution to systemic lupus with complement and anti-dsDNA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing with cold exposure; a minority progress to systemic lupus",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

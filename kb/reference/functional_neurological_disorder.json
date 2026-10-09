@@ -1,174 +1,461 @@
 {
- "id": "functional_neurological_disorder",
- "name": "Functional neurological disorder",
- "aliases": [
-  "FND",
-  "conversion disorder",
-  "functional neurological symptom disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered nervous-system functioning rather than structural disease",
-   "Diagnosis rests on positive rule-in signs of internal inconsistency, not merely on the absence of structural findings",
-   "Hoover sign, where weakness of voluntary hip extension normalises with contralateral hip flexion against resistance, is a key positive sign of functional leg weakness",
-   "Symptoms show variability, distractibility, and incongruence with recognised anatomical patterns",
-   "Often coexists with fatigue, pain, functional (dissociative) seizures, and psychological comorbidity, though a psychological trigger is not required for diagnosis",
-   "A clear, non-judgemental explanation of the positive diagnosis improves engagement and outcome",
-   "Management is multidisciplinary rehabilitation, including physiotherapy, occupational therapy, and psychological therapy such as CBT",
-   "Prognosis improves with early diagnosis, patient understanding, and access to specialist rehabilitation"
+  "id": "functional_neurological_disorder",
+  "name": "Functional neurological disorder",
+  "aliases": [
+    "FND",
+    "conversion disorder",
+    "functional neurological symptom disorder"
   ],
-  "pathophysiology": "Functional neurological disorder is understood as a disorder of nervous-system functioning rather than structural damage, in which the brain networks for generating and monitoring movement, sensation, and agency operate abnormally. The symptoms are genuine and involuntary; abnormal attentional focus on the affected body part, altered predictive processing (aberrant internal 'priors'), and an impaired sense of agency are thought to generate and sustain them. Predisposing, precipitating (including physical injury, illness, or psychological stress), and perpetuating factors interact within a biopsychosocial framework. Crucially the symptoms are internally inconsistent, being modifiable by distraction or specific manoeuvres, which reflects intact underlying pathways that are not being accessed normally.",
-  "additionalDifferentials": [
-   "Structural neurological disease such as stroke, multiple sclerosis, or tumour",
-   "Neuromuscular or movement disorders",
-   "Epilepsy where seizures are the presentation",
-   "Metabolic or toxic encephalopathy",
-   "Factitious disorder or malingering, in which symptoms are consciously produced",
-   "Vestibular or orthopaedic causes of gait disturbance"
-  ],
-  "additionalInvestigations": [
-   "Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness",
-   "Targeted MRI to exclude structural mimics when clinically indicated",
-   "Video-EEG when functional (dissociative) seizures are suspected",
-   "Nerve conduction studies and EMG where a neuromuscular cause is considered",
-   "Assessment for psychological comorbidity and precipitating factors",
-   "Avoidance of over-investigation that can reinforce illness beliefs"
-  ],
-  "redFlags": [
-   "Objective structural signs (fixed reflex asymmetry, an extensor plantar response, true visual field loss) inconsistent with a functional cause",
-   "Acute presentations that could represent stroke or another emergency",
-   "Progressive deterioration or new hard neurological signs",
-   "Persistent diagnostic uncertainty warranting specialist neurological review"
-  ],
-  "prognosis": "Outcome is variable; early, confident diagnosis with a clear explanation and access to multidisciplinary rehabilitation improves recovery, whereas long symptom duration, poor understanding of the diagnosis, and untreated comorbidity predict persistence and disability.",
-  "pitfalls": [
-   "Diagnosing by exclusion alone rather than identifying positive rule-in signs",
-   "Equating the disorder with feigning or malingering, which damages the therapeutic relationship",
-   "Over-investigating and inadvertently reinforcing illness beliefs",
-   "Missing a coexisting structural disorder, or conversely mislabelling structural disease as functional"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign",
-   "Multidisciplinary rehabilitation tailored to the dominant symptom, with physiotherapy for functional weakness and gait disturbance",
-   "Psychological therapy such as cognitive behavioural therapy for comorbidity and perpetuating factors",
-   "Occupational therapy and speech-and-language therapy where relevant",
-   "Treat coexisting pain, fatigue, mood and anxiety disorders",
-   "Avoid over-investigation and iatrogenic harm that reinforce illness beliefs",
-   "Escalate to specialist functional-disorder services for persistent or complex cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_neurological_disorder-pathway",
-   "title": "Functional neurological disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered nervous-system functioning rather than structural disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Objective structural signs (fixed reflex asymmetry, an extensor plantar response, true visual field loss) inconsistent with a functional cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness, Targeted MRI to exclude structural mimics when clinically indicated, Video-EEG when functional (dissociative)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing by exclusion alone rather than identifying positive rule-in signs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional neurological disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_neurological_disorder-matrix",
-   "title": "Functional neurological disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered nervous-system functioning rather than structural disease",
+      "Diagnosis rests on positive rule-in signs of internal inconsistency, not merely on the absence of structural findings",
+      "Hoover sign, where weakness of voluntary hip extension normalises with contralateral hip flexion against resistance, is a key positive sign of functional leg weakness",
+      "Symptoms show variability, distractibility, and incongruence with recognised anatomical patterns",
+      "Often coexists with fatigue, pain, functional (dissociative) seizures, and psychological comorbidity, though a psychological trigger is not required for diagnosis",
+      "A clear, non-judgemental explanation of the positive diagnosis improves engagement and outcome",
+      "Management is multidisciplinary rehabilitation, including physiotherapy, occupational therapy, and psychological therapy such as CBT",
+      "Prognosis improves with early diagnosis, patient understanding, and access to specialist rehabilitation"
     ],
-    [
-     "Key Investigations",
-     "Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness, Targeted MRI to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional neurological disorder is understood as a disorder of nervous-system functioning rather than structural damage, in which the brain networks for generating and monitoring movement, sensation, and agency operate abnormally. The symptoms are genuine and involuntary; abnormal attentional focus on the affected body part, altered predictive processing (aberrant internal 'priors'), and an impaired sense of agency are thought to generate and sustain them. Predisposing, precipitating (including physical injury, illness, or psychological stress), and perpetuating factors interact within a biopsychosocial framework. Crucially the symptoms are internally inconsistent, being modifiable by distraction or specific manoeuvres, which reflects intact underlying pathways that are not being accessed normally.",
+    "additionalDifferentials": [
+      "Structural neurological disease such as stroke, multiple sclerosis, or tumour",
+      "Neuromuscular or movement disorders",
+      "Epilepsy where seizures are the presentation",
+      "Metabolic or toxic encephalopathy",
+      "Factitious disorder or malingering, in which symptoms are consciously produced",
+      "Vestibular or orthopaedic causes of gait disturbance"
     ],
-    [
-     "Primary Differentials",
-     "Structural neurological disease such as stroke, multiple sclerosis, or tumour, Neuromuscular or movement disorders, Epilepsy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness",
+      "Targeted MRI to exclude structural mimics when clinically indicated",
+      "Video-EEG when functional (dissociative) seizures are suspected",
+      "Nerve conduction studies and EMG where a neuromuscular cause is considered",
+      "Assessment for psychological comorbidity and precipitating factors",
+      "Avoidance of over-investigation that can reinforce illness beliefs"
     ],
-    [
-     "Management Strategy",
-     "Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign",
-     "Core treatment modality"
+    "redFlags": [
+      "Objective structural signs (fixed reflex asymmetry, an extensor plantar response, true visual field loss) inconsistent with a functional cause",
+      "Acute presentations that could represent stroke or another emergency",
+      "Progressive deterioration or new hard neurological signs",
+      "Persistent diagnostic uncertainty warranting specialist neurological review"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing by exclusion alone rather than identifying positive rule-in signs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable; early, confident diagnosis with a clear explanation and access to multidisciplinary rehabilitation improves recovery, whereas long symptom duration, poor understanding of the diagnosis, and untreated comorbidity predict persistence and disability.",
+    "pitfalls": [
+      "Diagnosing by exclusion alone rather than identifying positive rule-in signs",
+      "Equating the disorder with feigning or malingering, which damages the therapeutic relationship",
+      "Over-investigating and inadvertently reinforcing illness beliefs",
+      "Missing a coexisting structural disorder, or conversely mislabelling structural disease as functional"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign",
+      "Multidisciplinary rehabilitation tailored to the dominant symptom, with physiotherapy for functional weakness and gait disturbance",
+      "Psychological therapy such as cognitive behavioural therapy for comorbidity and perpetuating factors",
+      "Occupational therapy and speech-and-language therapy where relevant",
+      "Treat coexisting pain, fatigue, mood and anxiety disorders",
+      "Avoid over-investigation and iatrogenic harm that reinforce illness beliefs",
+      "Escalate to specialist functional-disorder services for persistent or complex cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional neurological disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-neurological-disorder-real-image",
-   "title": "Functional neurological disorder: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "functional_neurological_disorder-pathway",
+      "title": "Functional neurological disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered nervous-system functioning rather than structural disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Objective structural signs (fixed reflex asymmetry, an extensor plantar response, true visual field loss) inconsistent with a functional cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness, Targeted MRI to exclude structural mimics when clinically indicated, Video-EEG when functional (dissociative)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing by exclusion alone rather than identifying positive rule-in signs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional neurological disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_neurological_disorder-matrix",
+      "title": "Functional neurological disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Genuine, involuntary neurological symptoms (weakness, movement disorder, sensory or gait disturbance) arising from altered",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful neurological examination for positive functional signs such as Hoover sign and give-way weakness, Targeted MRI to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Structural neurological disease such as stroke, multiple sclerosis, or tumour, Neuromuscular or movement disorders, Epilepsy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Communicate a clear, non-judgemental, positive diagnosis based on rule-in signs such as Hoover sign",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing by exclusion alone rather than identifying positive rule-in signs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional neurological disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_neurological_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurological examination for positive functional signs",
+          "cells": [
+            {
+              "text": "Hoover sign and give-way weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted MRI",
+          "cells": [
+            {
+              "text": "Excludes structural mimics when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG",
+          "cells": [
+            {
+              "text": "When functional (dissociative) seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Where a neuromuscular cause is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for psychological comorbidity",
+          "cells": [
+            {
+              "text": "Precipitating factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_neurological_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural neurological disease such as stroke, multiple sclerosis or tumour",
+          "cells": [
+            {
+              "text": "Objective signs such as fixed reflex asymmetry or extensor plantar response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy where seizures are the presentation",
+          "cells": [
+            {
+              "text": "Video-EEG when seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious disorder or malingering",
+          "cells": [
+            {
+              "text": "Symptoms consciously produced"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_neurological_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clear positive diagnosis",
+          "cells": [
+            {
+              "text": "Non-judgemental, based on rule-in signs such as Hoover sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Tailored to the dominant symptom; physiotherapy for functional weakness and gait disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Comorbidity and perpetuating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and speech-and-language therapy",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting symptoms",
+          "cells": [
+            {
+              "text": "Pain, fatigue, mood and anxiety disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid over-investigation",
+          "cells": [
+            {
+              "text": "Reinforces illness beliefs and iatrogenic harm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Persistent or complex cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_neurological_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Functional neurological disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional neurological disorder: positive signs such as Hoover sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (structural signs, progressive deficits, new hard signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acute presentation that could be stroke or another emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination for Hoover sign and give-way weakness; targeted MRI if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are positive rule-in signs present, with structural mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider stroke, multiple sclerosis, tumour, epilepsy or factitious disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clear, non-judgemental positive diagnosis based on rule-in signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation with physiotherapy for functional weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural therapy for comorbidity and perpetuating factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting pain, fatigue, mood and anxiety; avoid over-investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; early confident diagnosis and rehabilitation improve recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

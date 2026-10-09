@@ -1,175 +1,530 @@
 {
- "id": "aluminium_phosphide_poisoning",
- "name": "Aluminium phosphide poisoning",
- "aliases": [
-  "aluminum phosphide poisoning",
-  "celphos poisoning",
-  "rice tablet poisoning",
-  "phosphine poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison, and is a common agent of fatal deliberate self-harm in some regions",
-   "There is no specific antidote, so management is entirely supportive and directed at aggressive haemodynamic and metabolic resuscitation",
-   "Profound, often refractory circulatory shock from direct myocardial toxicity and vasodilatation is the dominant and most lethal feature",
-   "Severe high anion-gap metabolic acidosis, myocarditis, arrhythmias, and multi-organ failure develop early",
-   "A garlicky or decaying-fish odour on the breath or vomitus is a clinical clue to phosphine exposure",
-   "Rescuers must be protected, as phosphine off-gassed from vomitus and gastric contents can poison staff; ventilate the area and avoid mouth-to-mouth",
-   "Reported adjuncts include gastric decontamination with agents intended to reduce phosphine liberation, magnesium, high-dose steroids, intravenous lipid emulsion, and vasopressors, though evidence is limited",
-   "Early intensive-care support with vasopressors, correction of acidosis, and consideration of extracorporeal circulatory support offers the best chance in a highly lethal poisoning"
+  "id": "aluminium_phosphide_poisoning",
+  "name": "Aluminium phosphide poisoning",
+  "aliases": [
+    "aluminum phosphide poisoning",
+    "celphos poisoning",
+    "rice tablet poisoning",
+    "phosphine poisoning"
   ],
-  "pathophysiology": "On contact with water or gastric acid, aluminium phosphide releases phosphine gas, which inhibits mitochondrial cytochrome c oxidase and generates reactive oxygen species, arresting oxidative phosphorylation across tissues. The heart is especially vulnerable, developing myocardial depression, myocarditis, and arrhythmias, while widespread vasodilatation and cellular energy failure produce profound refractory shock. Lipid peroxidation and oxidative injury drive a severe metabolic (lactic) acidosis and multi-organ dysfunction affecting the liver, kidneys, and adrenal glands.",
-  "additionalDifferentials": [
-   "Other cellular asphyxiants (cyanide, hydrogen sulfide)",
-   "Cardiogenic shock from other causes",
-   "Septic shock",
-   "Other lethal pesticide ingestions",
-   "Fulminant myocarditis"
-  ],
-  "additionalInvestigations": [
-   "Continuous ECG and cardiac monitoring for arrhythmia and myocarditis",
-   "Echocardiography to assess ventricular function",
-   "Arterial blood gas with anion gap and lactate",
-   "Serum electrolytes including magnesium, renal and liver function",
-   "Silver nitrate paper test on breath or gastric aspirate to detect phosphine where available"
-  ],
-  "redFlags": [
-   "Refractory hypotension and shock unresponsive to fluids and vasopressors",
-   "Severe metabolic acidosis with rising lactate",
-   "Arrhythmias or echocardiographic evidence of myocardial dysfunction",
-   "Large ingestion of a fresh (unexposed) tablet, associated with very high mortality",
-   "Risk of secondary poisoning of healthcare staff from off-gassing"
-  ],
-  "prognosis": "Poisoning carries very high mortality, particularly with fresh tablets and established shock or severe acidosis; death commonly occurs within the first day or two from cardiovascular collapse, and survival is largely determined by ingested dose and speed of intensive supportive care.",
-  "pitfalls": [
-   "Expecting a specific antidote to exist and delaying aggressive supportive resuscitation",
-   "Underestimating lethality because the patient initially looks stable before rapid deterioration",
-   "Neglecting staff protection against phosphine off-gassing from the patient",
-   "Inadequate correction of acidosis and under-resuscitation of shock"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway, oxygenation and haemodynamic support",
-   "Support refractory shock with intravenous fluids and vasopressors or inotropes, and consider veno-arterial extracorporeal membrane oxygenation in selected cases",
-   "Correct the severe metabolic acidosis with sodium bicarbonate and manage electrolyte disturbance including magnesium",
-   "Undertake cautious gastrointestinal decontamination, considering potassium permanganate or coconut-oil lavage, while protecting staff from off-gassed phosphine",
-   "Monitor continuously with ECG and echocardiography for arrhythmia, myocarditis and ventricular dysfunction and treat arrhythmias as they arise",
-   "Support failing organs with renal replacement therapy and management of hepatic and adrenal dysfunction",
-   "Protect rescuers by ventilating the area, using protective equipment and avoiding mouth-to-mouth resuscitation",
-   "Involve toxicology and critical care early and arrange psychiatric assessment after recovery given the frequent context of deliberate self-harm"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aluminium_phosphide_poisoning-pathway",
-   "title": "Aluminium phosphide poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison, and is a common agent of fatal deliberate self-harm in some regions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory hypotension and shock unresponsive to fluids and vasopressors",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous ECG and cardiac monitoring for arrhythmia and myocarditis, Echocardiography to assess ventricular function, Arterial blood gas with anion gap and lactate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway, oxygenation and haemodynamic support"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting a specific antidote to exist and delaying aggressive supportive resuscitation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aluminium phosphide poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "aluminium_phosphide_poisoning-matrix",
-   "title": "Aluminium phosphide poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison, and is a common agent of fatal deliberate self-harm in some regions",
+      "There is no specific antidote, so management is entirely supportive and directed at aggressive haemodynamic and metabolic resuscitation",
+      "Profound, often refractory circulatory shock from direct myocardial toxicity and vasodilatation is the dominant and most lethal feature",
+      "Severe high anion-gap metabolic acidosis, myocarditis, arrhythmias, and multi-organ failure develop early",
+      "A garlicky or decaying-fish odour on the breath or vomitus is a clinical clue to phosphine exposure",
+      "Rescuers must be protected, as phosphine off-gassed from vomitus and gastric contents can poison staff; ventilate the area and avoid mouth-to-mouth",
+      "Reported adjuncts include gastric decontamination with agents intended to reduce phosphine liberation, magnesium, high-dose steroids, intravenous lipid emulsion, and vasopressors, though evidence is limited",
+      "Early intensive-care support with vasopressors, correction of acidosis, and consideration of extracorporeal circulatory support offers the best chance in a highly lethal poisoning"
     ],
-    [
-     "Key Investigations",
-     "Continuous ECG and cardiac monitoring for arrhythmia and myocarditis, Echocardiography to assess ventricular function, Arterial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "On contact with water or gastric acid, aluminium phosphide releases phosphine gas, which inhibits mitochondrial cytochrome c oxidase and generates reactive oxygen species, arresting oxidative phosphorylation across tissues. The heart is especially vulnerable, developing myocardial depression, myocarditis, and arrhythmias, while widespread vasodilatation and cellular energy failure produce profound refractory shock. Lipid peroxidation and oxidative injury drive a severe metabolic (lactic) acidosis and multi-organ dysfunction affecting the liver, kidneys, and adrenal glands.",
+    "additionalDifferentials": [
+      "Other cellular asphyxiants (cyanide, hydrogen sulfide)",
+      "Cardiogenic shock from other causes",
+      "Septic shock",
+      "Other lethal pesticide ingestions",
+      "Fulminant myocarditis"
     ],
-    [
-     "Primary Differentials",
-     "Other cellular asphyxiants (cyanide, hydrogen sulfide), Cardiogenic shock from other causes, Septic shock",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous ECG and cardiac monitoring for arrhythmia and myocarditis",
+      "Echocardiography to assess ventricular function",
+      "Arterial blood gas with anion gap and lactate",
+      "Serum electrolytes including magnesium, renal and liver function",
+      "Silver nitrate paper test on breath or gastric aspirate to detect phosphine where available"
     ],
-    [
-     "Management Strategy",
-     "Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway,",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory hypotension and shock unresponsive to fluids and vasopressors",
+      "Severe metabolic acidosis with rising lactate",
+      "Arrhythmias or echocardiographic evidence of myocardial dysfunction",
+      "Large ingestion of a fresh (unexposed) tablet, associated with very high mortality",
+      "Risk of secondary poisoning of healthcare staff from off-gassing"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting a specific antidote to exist and delaying aggressive supportive resuscitation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Poisoning carries very high mortality, particularly with fresh tablets and established shock or severe acidosis; death commonly occurs within the first day or two from cardiovascular collapse, and survival is largely determined by ingested dose and speed of intensive supportive care.",
+    "pitfalls": [
+      "Expecting a specific antidote to exist and delaying aggressive supportive resuscitation",
+      "Underestimating lethality because the patient initially looks stable before rapid deterioration",
+      "Neglecting staff protection against phosphine off-gassing from the patient",
+      "Inadequate correction of acidosis and under-resuscitation of shock"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway, oxygenation and haemodynamic support",
+      "Support refractory shock with intravenous fluids and vasopressors or inotropes, and consider veno-arterial extracorporeal membrane oxygenation in selected cases",
+      "Correct the severe metabolic acidosis with sodium bicarbonate and manage electrolyte disturbance including magnesium",
+      "Undertake cautious gastrointestinal decontamination, considering potassium permanganate or coconut-oil lavage, while protecting staff from off-gassed phosphine",
+      "Monitor continuously with ECG and echocardiography for arrhythmia, myocarditis and ventricular dysfunction and treat arrhythmias as they arise",
+      "Support failing organs with renal replacement therapy and management of hepatic and adrenal dysfunction",
+      "Protect rescuers by ventilating the area, using protective equipment and avoiding mouth-to-mouth resuscitation",
+      "Involve toxicology and critical care early and arrange psychiatric assessment after recovery given the frequent context of deliberate self-harm"
     ]
-   ],
-   "caption": "Overview comparison matrix for aluminium phosphide poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aluminium-phosphide-poisoning-real-image",
-   "title": "Aluminium phosphide poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "aluminium_phosphide_poisoning-pathway",
+      "title": "Aluminium phosphide poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison, and is a common agent of fatal deliberate self-harm in some regions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory hypotension and shock unresponsive to fluids and vasopressors",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous ECG and cardiac monitoring for arrhythmia and myocarditis, Echocardiography to assess ventricular function, Arterial blood gas with anion gap and lactate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway, oxygenation and haemodynamic support"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting a specific antidote to exist and delaying aggressive supportive resuscitation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aluminium phosphide poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aluminium_phosphide_poisoning-matrix",
+      "title": "Aluminium phosphide poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A widely used grain fumigant that reacts with moisture and gastric acid to liberate phosphine gas, a potent mitochondrial poison,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous ECG and cardiac monitoring for arrhythmia and myocarditis, Echocardiography to assess ventricular function, Arterial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other cellular asphyxiants (cyanide, hydrogen sulfide), Cardiogenic shock from other causes, Septic shock",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide aggressive supportive resuscitation in a critical care setting, as no specific antidote exists, prioritising airway,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting a specific antidote to exist and delaying aggressive supportive resuscitation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aluminium phosphide poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aluminium_phosphide_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and myocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas with anion gap and lactate",
+          "cells": [
+            {
+              "text": "High anion-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes including magnesium, renal and liver function",
+          "cells": [
+            {
+              "text": "Multi-organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silver nitrate paper test on breath or gastric aspirate where available",
+          "cells": [
+            {
+              "text": "Phosphine detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aluminium_phosphide_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyanide or hydrogen sulfide poisoning",
+          "cells": [
+            {
+              "text": "Other cellular asphyxiants"
+            },
+            {
+              "text": "Toxicology history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiogenic shock from other causes",
+          "cells": [
+            {
+              "text": "Shock with cardiac dysfunction"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic shock",
+          "cells": [
+            {
+              "text": "Shock with infection source"
+            },
+            {
+              "text": "Cultures and clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other lethal pesticide ingestion",
+          "cells": [
+            {
+              "text": "Pesticide exposure"
+            },
+            {
+              "text": "Toxicology history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fulminant myocarditis",
+          "cells": [
+            {
+              "text": "Myocardial inflammation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aluminium_phosphide_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive supportive resuscitation in critical care",
+          "cells": [
+            {
+              "text": "No specific antidote"
+            },
+            {
+              "text": "Airway, oxygenation and haemodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids, vasopressors or inotropes; VA-ECMO in selected cases",
+          "cells": [
+            {
+              "text": "Refractory shock"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium bicarbonate and electrolyte correction including magnesium",
+          "cells": [
+            {
+              "text": "Severe metabolic acidosis"
+            },
+            {
+              "text": "Correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious gastrointestinal decontamination",
+          "cells": [
+            {
+              "text": "Ingested tablet"
+            },
+            {
+              "text": "Staff protected from phosphine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous ECG and echocardiography with arrhythmia treatment",
+          "cells": [
+            {
+              "text": "Arrhythmia and ventricular dysfunction"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy and organ support",
+          "cells": [
+            {
+              "text": "Failing organs"
+            },
+            {
+              "text": "As required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection of rescuers and early toxicology involvement",
+          "cells": [
+            {
+              "text": "Off-gassing risk"
+            },
+            {
+              "text": "Safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment after recovery",
+          "cells": [
+            {
+              "text": "Deliberate self-harm context"
+            },
+            {
+              "text": "After recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aluminium_phosphide_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Aluminium phosphide poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ingestion or exposure to aluminium phosphide with breath or gastric odour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory hypotension, shock or severe acidosis with rising lactate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care and toxicology; ventilate area if exposed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG; echocardiography; blood gas with anion gap and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Shock and high anion gap with phosphine exposure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive resuscitation; no specific antidote",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review cyanide, cardiogenic and septic shock, and other pesticides",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vasopressors or inotropes; consider VA-ECMO in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate and magnesium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protect staff from off-gassing; psychiatric review after recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very high mortality, especially with fresh tablets and established shock",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

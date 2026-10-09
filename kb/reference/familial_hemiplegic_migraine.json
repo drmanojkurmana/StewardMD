@@ -1,176 +1,757 @@
 {
- "id": "familial_hemiplegic_migraine",
- "name": "Familial hemiplegic migraine",
- "aliases": [
-  "FHM",
-  "hemiplegic migraine",
-  "CACNA1A-related migraine (FHM1)",
-  "ATP1A2-related migraine (FHM2)",
-  "SCN1A-related migraine (FHM3)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
-   "Three principal genes are recognised: CACNA1A (a P/Q-type calcium-channel subunit, FHM1), ATP1A2 (a sodium-potassium ATPase subunit, FHM2) and SCN1A (a neuronal sodium channel, FHM3)",
-   "The aura typically evolves over minutes and includes motor weakness alongside visual, sensory and dysphasic symptoms, followed by headache",
-   "Attacks can be severe, with prolonged hemiparesis, confusion, fever, seizures and even coma in some CACNA1A-related cases",
-   "FHM1 (CACNA1A) may be associated with progressive cerebellar ataxia and nystagmus between attacks",
-   "The underlying mechanism is thought to be a lowered threshold for cortical spreading depression driven by disturbed ion transport and glutamate handling",
-   "Diagnosis is clinical, supported by family history and genetic testing, after excluding stroke and structural or vascular causes"
+  "id": "familial_hemiplegic_migraine",
+  "name": "Familial hemiplegic migraine",
+  "aliases": [
+    "FHM",
+    "hemiplegic migraine",
+    "CACNA1A-related migraine (FHM1)",
+    "ATP1A2-related migraine (FHM2)",
+    "SCN1A-related migraine (FHM3)"
   ],
-  "pathophysiology": "Familial hemiplegic migraine is caused by autosomal dominant variants in genes controlling neuronal ion homeostasis: CACNA1A (P/Q-type voltage-gated calcium channel), ATP1A2 (the astrocytic sodium-potassium ATPase) and SCN1A (a neuronal sodium channel). These variants increase synaptic glutamate availability and neuronal excitability, or impair clearance of potassium and glutamate, lowering the threshold for cortical spreading depression, the slow wave of neuronal and glial depolarisation that underlies migraine aura. The motor weakness reflects spread of this depolarising wave across motor cortex, and the shared final pathway explains why distinct channel and pump defects produce a similar clinical syndrome.",
-  "additionalDifferentials": [
-   "Ischaemic stroke or transient ischaemic attack",
-   "Sporadic hemiplegic migraine",
-   "Focal seizure with postictal (Todd) paresis",
-   "MELAS and other mitochondrial disorders",
-   "CADASIL and other hereditary small-vessel diseases",
-   "Functional (psychogenic) hemiparesis",
-   "Cerebral vasculitis"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI with vascular imaging to exclude stroke and structural lesions",
-   "Genetic testing of CACNA1A, ATP1A2 and SCN1A",
-   "Electroencephalography during or after prolonged attacks to exclude seizures",
-   "Detailed family history and pedigree analysis",
-   "Cerebrospinal fluid examination in atypical or first severe attacks to exclude alternative causes",
-   "Metabolic and mitochondrial workup where the phenotype is atypical"
-  ],
-  "redFlags": [
-   "First-ever episode of hemiparesis, where acute stroke must be excluded urgently",
-   "Prolonged coma, fever or seizures during an attack",
-   "Progressive interictal cerebellar signs suggesting a wider CACNA1A phenotype",
-   "Persistent focal deficit after the expected recovery period"
-  ],
-  "prognosis": "Between attacks most patients are neurologically well, and individual episodes, although alarming, are usually fully reversible. Attack frequency and severity vary widely; some CACNA1A-associated cases carry a risk of severe prolonged attacks or progressive cerebellar ataxia, so the outlook depends on the specific genotype and phenotype.",
-  "pitfalls": [
-   "Failing to exclude acute stroke at the first presentation of hemiparesis",
-   "Prescribing vasoconstrictive acute migraine therapies that are generally avoided in hemiplegic migraine",
-   "Attributing prolonged confusion or coma solely to encephalitis or stroke and missing a severe FHM attack",
-   "Overlooking interictal cerebellar signs that point to a CACNA1A cause"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "International Classification of Headache Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding vasoconstrictor triptans and ergots given the prominent aura",
-   "Preventive therapy for frequent or disabling attacks with agents such as verapamil, acetazolamide, lamotrigine or topiramate",
-   "Identification and avoidance of triggers, including minor head trauma and cerebral angiography, which can provoke severe attacks",
-   "Supportive management of prolonged severe attacks with confusion, fever or seizures, including monitoring and seizure control where needed",
-   "Brain imaging to exclude stroke in the acute setting given the focal neurological deficit",
-   "Genetic counselling with CACNA1A, ATP1A2 and SCN1A testing and family evaluation",
-   "Neurology referral, with surveillance for progressive cerebellar ataxia in CACNA1A-related disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_hemiplegic_migraine-pathway",
-   "title": "Familial hemiplegic migraine: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: First-ever episode of hemiparesis, where acute stroke must be excluded urgently",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI with vascular imaging to exclude stroke and structural lesions, Genetic testing of CACNA1A, ATP1A2 and SCN1A, Electroencephalography during or after prolonged attacks to exclude seizures"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding vasoconstrictor triptans and ergots given the prominent aura"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude acute stroke at the first presentation of hemiparesis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial hemiplegic migraine."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_hemiplegic_migraine-matrix",
-   "title": "Familial hemiplegic migraine: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
+      "Three principal genes are recognised: CACNA1A (a P/Q-type calcium-channel subunit, FHM1), ATP1A2 (a sodium-potassium ATPase subunit, FHM2) and SCN1A (a neuronal sodium channel, FHM3)",
+      "The aura typically evolves over minutes and includes motor weakness alongside visual, sensory and dysphasic symptoms, followed by headache",
+      "Attacks can be severe, with prolonged hemiparesis, confusion, fever, seizures and even coma in some CACNA1A-related cases",
+      "FHM1 (CACNA1A) may be associated with progressive cerebellar ataxia and nystagmus between attacks",
+      "The underlying mechanism is thought to be a lowered threshold for cortical spreading depression driven by disturbed ion transport and glutamate handling",
+      "Diagnosis is clinical, supported by family history and genetic testing, after excluding stroke and structural or vascular causes"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI with vascular imaging to exclude stroke and structural lesions, Genetic testing of CACNA1A, ATP1A2 and SCN1A,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial hemiplegic migraine is caused by autosomal dominant variants in genes controlling neuronal ion homeostasis: CACNA1A (P/Q-type voltage-gated calcium channel), ATP1A2 (the astrocytic sodium-potassium ATPase) and SCN1A (a neuronal sodium channel). These variants increase synaptic glutamate availability and neuronal excitability, or impair clearance of potassium and glutamate, lowering the threshold for cortical spreading depression, the slow wave of neuronal and glial depolarisation that underlies migraine aura. The motor weakness reflects spread of this depolarising wave across motor cortex, and the shared final pathway explains why distinct channel and pump defects produce a similar clinical syndrome.",
+    "additionalDifferentials": [
+      "Ischaemic stroke or transient ischaemic attack",
+      "Sporadic hemiplegic migraine",
+      "Focal seizure with postictal (Todd) paresis",
+      "MELAS and other mitochondrial disorders",
+      "CADASIL and other hereditary small-vessel diseases",
+      "Functional (psychogenic) hemiparesis",
+      "Cerebral vasculitis"
     ],
-    [
-     "Primary Differentials",
-     "Ischaemic stroke or transient ischaemic attack, Sporadic hemiplegic migraine, Focal seizure with postictal (Todd) paresis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI with vascular imaging to exclude stroke and structural lesions",
+      "Genetic testing of CACNA1A, ATP1A2 and SCN1A",
+      "Electroencephalography during or after prolonged attacks to exclude seizures",
+      "Detailed family history and pedigree analysis",
+      "Cerebrospinal fluid examination in atypical or first severe attacks to exclude alternative causes",
+      "Metabolic and mitochondrial workup where the phenotype is atypical"
     ],
-    [
-     "Management Strategy",
-     "Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding",
-     "Core treatment modality"
+    "redFlags": [
+      "First-ever episode of hemiparesis, where acute stroke must be excluded urgently",
+      "Prolonged coma, fever or seizures during an attack",
+      "Progressive interictal cerebellar signs suggesting a wider CACNA1A phenotype",
+      "Persistent focal deficit after the expected recovery period"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude acute stroke at the first presentation of hemiparesis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Between attacks most patients are neurologically well, and individual episodes, although alarming, are usually fully reversible. Attack frequency and severity vary widely; some CACNA1A-associated cases carry a risk of severe prolonged attacks or progressive cerebellar ataxia, so the outlook depends on the specific genotype and phenotype.",
+    "pitfalls": [
+      "Failing to exclude acute stroke at the first presentation of hemiparesis",
+      "Prescribing vasoconstrictive acute migraine therapies that are generally avoided in hemiplegic migraine",
+      "Attributing prolonged confusion or coma solely to encephalitis or stroke and missing a severe FHM attack",
+      "Overlooking interictal cerebellar signs that point to a CACNA1A cause"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "International Classification of Headache Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding vasoconstrictor triptans and ergots given the prominent aura",
+      "Preventive therapy for frequent or disabling attacks with agents such as verapamil, acetazolamide, lamotrigine or topiramate",
+      "Identification and avoidance of triggers, including minor head trauma and cerebral angiography, which can provoke severe attacks",
+      "Supportive management of prolonged severe attacks with confusion, fever or seizures, including monitoring and seizure control where needed",
+      "Brain imaging to exclude stroke in the acute setting given the focal neurological deficit",
+      "Genetic counselling with CACNA1A, ATP1A2 and SCN1A testing and family evaluation",
+      "Neurology referral, with surveillance for progressive cerebellar ataxia in CACNA1A-related disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial hemiplegic migraine."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-hemiplegic-migraine-real-image",
-   "title": "Familial hemiplegic migraine: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "familial_hemiplegic_migraine-pathway",
+      "title": "Familial hemiplegic migraine: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: First-ever episode of hemiparesis, where acute stroke must be excluded urgently",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI with vascular imaging to exclude stroke and structural lesions, Genetic testing of CACNA1A, ATP1A2 and SCN1A, Electroencephalography during or after prolonged attacks to exclude seizures"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding vasoconstrictor triptans and ergots given the prominent aura"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude acute stroke at the first presentation of hemiparesis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial hemiplegic migraine."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_hemiplegic_migraine-matrix",
+      "title": "Familial hemiplegic migraine: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant migraine with aura defined by fully reversible motor weakness (hemiparesis) during the aura phase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI with vascular imaging to exclude stroke and structural lesions, Genetic testing of CACNA1A, ATP1A2 and SCN1A,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ischaemic stroke or transient ischaemic attack, Sporadic hemiplegic migraine, Focal seizure with postictal (Todd) paresis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Acute attack treatment with simple analgesics such as NSAIDs or paracetamol and antiemetics, traditionally avoiding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude acute stroke at the first presentation of hemiparesis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial hemiplegic migraine."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hemiplegic_migraine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with vascular imaging",
+          "cells": [
+            {
+              "text": "Stroke and structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of CACNA1A, ATP1A2 and SCN1A",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography during or after prolonged attacks",
+          "cells": [
+            {
+              "text": "Seizures excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family history and pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid examination",
+          "cells": [
+            {
+              "text": "Atypical or first severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and mitochondrial work-up",
+          "cells": [
+            {
+              "text": "Where the phenotype is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hemiplegic_migraine-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ischaemic stroke or transient ischaemic attack",
+          "cells": [
+            {
+              "text": "A first episode of hemiparesis must be excluded as stroke urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal seizure with postictal (Todd) paresis",
+          "cells": [
+            {
+              "text": "Seizures during or after the attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS and other mitochondrial disorders",
+          "cells": [
+            {
+              "text": "Atypical phenotype needs metabolic and mitochondrial work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hemiplegic_migraine-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple analgesics and antiemetics for acute attacks",
+          "cells": [
+            {
+              "text": "NSAIDs or paracetamol; vasoconstrictor triptans and ergots are traditionally avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive therapy",
+          "cells": [
+            {
+              "text": "Verapamil, acetazolamide, lamotrigine or topiramate for frequent or disabling attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Minor head trauma and cerebral angiography can provoke severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive management of prolonged attacks",
+          "cells": [
+            {
+              "text": "Confusion, fever or seizures; monitoring and seizure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging to exclude stroke",
+          "cells": [
+            {
+              "text": "In the acute setting given the focal deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "CACNA1A, ATP1A2 and SCN1A testing and family evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology follow-up",
+          "cells": [
+            {
+              "text": "Surveillance for progressive cerebellar ataxia in CACNA1A disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hemiplegic_migraine-ddx-2",
+      "kind": "ddx",
+      "title": "Neurologic channelopathies: channel and gene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category",
+        "Channel type",
+        "Mutated gene"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia 1",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNA1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Episodic ataxia 2",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia 6",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 1",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 3",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN1A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benign neonatal familial convulsions",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ2, KCNQ3, SCN1B"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Generalized epilepsy with febrile convulsions plus",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "not separately listed (shares the cell above)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypokalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Cl"
+            },
+            {
+              "text": "CLCN1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome (deafness, prolonged QT, arrhythmia)",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ1, KCNE1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autosomal dominant progressive deafness",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Limbic encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acquired neuromyotonia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Chapter cross-references in the source are omitted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hemiplegic_migraine-dx-mgmt",
+      "title": "Diagnosis and management of Familial hemiplegic migraine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Migraine with fully reversible hemiparesis during aura, often with family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (first hemiparesis, prolonged coma, fever or seizures, persistent deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent brain imaging to exclude stroke; seizure control if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI with vascular imaging; CACNA1A, ATP1A2 and SCN1A testing; EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stroke excluded and a pathogenic FHM gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider stroke, seizure, mitochondrial or functional hemiparesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs or paracetamol and antiemetics for acute attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Verapamil, acetazolamide, lamotrigine or topiramate for prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid triggers including minor head trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurology follow-up for cerebellar signs in CACNA1A disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Well between attacks; episodes are alarming but usually fully reversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

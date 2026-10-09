@@ -1,173 +1,481 @@
 {
- "id": "optic_nerve_coloboma",
- "name": "optic nerve coloboma",
- "aliases": [
-  "optic disc coloboma",
-  "coloboma of the optic nerve head"
- ],
- "class": "non_infective",
- "system": "ophthalmic",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white excavation that characteristically involves the inferonasal disc.",
-   "The excavation is decentred inferiorly, in contrast to the morning glory anomaly in which the abnormality is central and the disc is surrounded by a raised annulus.",
-   "May occur in isolation or extend inferonasally as a chorioretinal coloboma, and can be unilateral or bilateral.",
-   "Autosomal dominant inheritance with variable expressivity is described, including mutations affecting the PAX6 and other developmental genes.",
-   "Associated with systemic syndromes, notably CHARGE syndrome, renal coloboma (papillorenal) syndrome and morning glory-related conditions.",
-   "Retinal detachment is an important complication, often related to a break within colobomatous retina or the fragile intercalary membrane.",
-   "Visual acuity is variable and difficult to predict from disc appearance alone, ranging from near normal to severely reduced.",
-   "A relative afferent pupillary defect and corresponding field loss may accompany larger colobomas."
+  "id": "optic_nerve_coloboma",
+  "name": "optic nerve coloboma",
+  "aliases": [
+    "optic disc coloboma",
+    "coloboma of the optic nerve head"
   ],
-  "pathophysiology": "Optic nerve coloboma is a congenital dysplasia resulting from incomplete or abnormal closure of the embryonic fetal fissure, which normally seals during the fifth to seventh week of gestation along the inferonasal aspect of the developing optic cup and stalk. Failure of fusion leaves a defect through which mesodermal and neuroectodermal tissue is deficient, creating an excavated, glial-lined depression at the disc that may extend contiguously into the choroid and retina. The thin intercalary membrane overlying the coloboma is prone to breaks, predisposing to serous or rhegmatogenous retinal detachment. Because closure defects reflect broader disturbances in ocular and systemic morphogenesis, colobomas frequently accompany multisystem developmental syndromes.",
-  "additionalDifferentials": [
-   "Morning glory disc anomaly",
-   "Optic disc pit",
-   "Peripapillary staphyloma",
-   "Optic disc hypoplasia",
-   "Megalopapilla",
-   "Glaucomatous optic disc cupping",
-   "Tilted disc syndrome"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination and fundus photography to map the coloboma",
-   "Optical coherence tomography of the disc, peripapillary retina and macula",
-   "B-scan ultrasonography or MRI where a colobomatous cyst is suspected",
-   "Systemic evaluation including renal ultrasound and cardiac/ENT assessment for syndromic associations",
-   "Genetic testing (e.g. PAX6, and panels for CHARGE/papillorenal syndrome)",
-   "Visual field testing and electrophysiology to quantify functional deficit"
-  ],
-  "redFlags": [
-   "Sudden reduction in vision or new floaters suggesting retinal detachment",
-   "Bilateral colobomas or associated microphthalmos indicating a syndromic disorder",
-   "Signs of CHARGE association (choanal atresia, cardiac or ear anomalies)",
-   "Proteinuria or renal impairment raising suspicion of papillorenal syndrome"
-  ],
-  "prognosis": "Visual outcome is highly variable and depends on the extent of the coloboma and macular involvement; some patients retain good acuity while others have marked impairment. The lifelong risk of retinal detachment warrants ongoing surveillance.",
-  "pitfalls": [
-   "Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations.",
-   "Overlooking systemic disease, particularly renal and cardiac anomalies, by not screening for associated syndromes.",
-   "Attributing the excavation to glaucoma and treating intraocular pressure unnecessarily.",
-   "Missing an evolving retinal detachment because the colobomatous anatomy obscures the break."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no treatment for the coloboma itself",
-   "Maintain lifelong surveillance for retinal detachment arising from the fragile intercalary membrane, with prompt vitreoretinal surgical repair when it occurs",
-   "Evaluate for syndromic associations including CHARGE and papillorenal (renal coloboma) syndrome, with renal ultrasound and cardiac and ENT assessment",
-   "Offer genetic testing including PAX6 and relevant panels with genetic counselling, given autosomal dominant inheritance with variable expressivity",
-   "Provide low-vision aids and rehabilitation where acuity is impaired",
-   "Arrange multidisciplinary paediatric and ophthalmology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "optic_nerve_coloboma-pathway",
-   "title": "optic nerve coloboma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white excavation that characteristically involves the inferonasal disc.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden reduction in vision or new floaters suggesting retinal detachment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination and fundus photography to map the coloboma, Optical coherence tomography of the disc, peripapillary retina and macula, B-scan ultrasonography or MRI where a colobomatous cyst is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no treatment for the coloboma itself"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of optic nerve coloboma."
-  }
- ],
- "tables": [
-  {
-   "id": "optic_nerve_coloboma-matrix",
-   "title": "optic nerve coloboma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmic",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white excavation that characteristically involves the inferonasal disc.",
+      "The excavation is decentred inferiorly, in contrast to the morning glory anomaly in which the abnormality is central and the disc is surrounded by a raised annulus.",
+      "May occur in isolation or extend inferonasally as a chorioretinal coloboma, and can be unilateral or bilateral.",
+      "Autosomal dominant inheritance with variable expressivity is described, including mutations affecting the PAX6 and other developmental genes.",
+      "Associated with systemic syndromes, notably CHARGE syndrome, renal coloboma (papillorenal) syndrome and morning glory-related conditions.",
+      "Retinal detachment is an important complication, often related to a break within colobomatous retina or the fragile intercalary membrane.",
+      "Visual acuity is variable and difficult to predict from disc appearance alone, ranging from near normal to severely reduced.",
+      "A relative afferent pupillary defect and corresponding field loss may accompany larger colobomas."
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination and fundus photography to map the coloboma, Optical coherence tomography of the disc, peripapillary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Optic nerve coloboma is a congenital dysplasia resulting from incomplete or abnormal closure of the embryonic fetal fissure, which normally seals during the fifth to seventh week of gestation along the inferonasal aspect of the developing optic cup and stalk. Failure of fusion leaves a defect through which mesodermal and neuroectodermal tissue is deficient, creating an excavated, glial-lined depression at the disc that may extend contiguously into the choroid and retina. The thin intercalary membrane overlying the coloboma is prone to breaks, predisposing to serous or rhegmatogenous retinal detachment. Because closure defects reflect broader disturbances in ocular and systemic morphogenesis, colobomas frequently accompany multisystem developmental syndromes.",
+    "additionalDifferentials": [
+      "Morning glory disc anomaly",
+      "Optic disc pit",
+      "Peripapillary staphyloma",
+      "Optic disc hypoplasia",
+      "Megalopapilla",
+      "Glaucomatous optic disc cupping",
+      "Tilted disc syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Morning glory disc anomaly, Optic disc pit, Peripapillary staphyloma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination and fundus photography to map the coloboma",
+      "Optical coherence tomography of the disc, peripapillary retina and macula",
+      "B-scan ultrasonography or MRI where a colobomatous cyst is suspected",
+      "Systemic evaluation including renal ultrasound and cardiac/ENT assessment for syndromic associations",
+      "Genetic testing (e.g. PAX6, and panels for CHARGE/papillorenal syndrome)",
+      "Visual field testing and electrophysiology to quantify functional deficit"
     ],
-    [
-     "Management Strategy",
-     "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden reduction in vision or new floaters suggesting retinal detachment",
+      "Bilateral colobomas or associated microphthalmos indicating a syndromic disorder",
+      "Signs of CHARGE association (choanal atresia, cardiac or ear anomalies)",
+      "Proteinuria or renal impairment raising suspicion of papillorenal syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual outcome is highly variable and depends on the extent of the coloboma and macular involvement; some patients retain good acuity while others have marked impairment. The lifelong risk of retinal detachment warrants ongoing surveillance.",
+    "pitfalls": [
+      "Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations.",
+      "Overlooking systemic disease, particularly renal and cardiac anomalies, by not screening for associated syndromes.",
+      "Attributing the excavation to glaucoma and treating intraocular pressure unnecessarily.",
+      "Missing an evolving retinal detachment because the colobomatous anatomy obscures the break."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no treatment for the coloboma itself",
+      "Maintain lifelong surveillance for retinal detachment arising from the fragile intercalary membrane, with prompt vitreoretinal surgical repair when it occurs",
+      "Evaluate for syndromic associations including CHARGE and papillorenal (renal coloboma) syndrome, with renal ultrasound and cardiac and ENT assessment",
+      "Offer genetic testing including PAX6 and relevant panels with genetic counselling, given autosomal dominant inheritance with variable expressivity",
+      "Provide low-vision aids and rehabilitation where acuity is impaired",
+      "Arrange multidisciplinary paediatric and ophthalmology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for optic nerve coloboma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "optic-nerve-coloboma-real-image",
-   "title": "optic nerve coloboma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "optic_nerve_coloboma-pathway",
+      "title": "optic nerve coloboma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white excavation that characteristically involves the inferonasal disc.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden reduction in vision or new floaters suggesting retinal detachment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination and fundus photography to map the coloboma, Optical coherence tomography of the disc, peripapillary retina and macula, B-scan ultrasonography or MRI where a colobomatous cyst is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no treatment for the coloboma itself"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of optic nerve coloboma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "optic_nerve_coloboma-matrix",
+      "title": "optic nerve coloboma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from defective closure of the embryonic fetal (choroidal) fissure, producing a sharply demarcated, bowl-shaped white",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination and fundus photography to map the coloboma, Optical coherence tomography of the disc, peripapillary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Morning glory disc anomaly, Optic disc pit, Peripapillary staphyloma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia therapy in children, as there is no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a coloboma with the morning glory anomaly, which alters both prognosis and syndromic associations.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for optic nerve coloboma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "optic_nerve_coloboma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and fundus photography",
+          "cells": [
+            {
+              "text": "Maps the bowl-shaped, inferonasal excavation of the coloboma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the disc, peripapillary retina and macula",
+          "cells": [
+            {
+              "text": "Disc, peripapillary and macular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography or MRI",
+          "cells": [
+            {
+              "text": "A colobomatous cyst, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound, cardiac and ENT assessment",
+          "cells": [
+            {
+              "text": "Syndromic associations such as CHARGE or papillorenal syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PAX6 and CHARGE or papillorenal panels",
+          "cells": [
+            {
+              "text": "Genetic cause; autosomal dominant with variable expressivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing and electrophysiology",
+          "cells": [
+            {
+              "text": "Quantifies the functional deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_nerve_coloboma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Morning glory disc anomaly",
+          "cells": [
+            {
+              "text": "Central abnormality with a raised annulus; the coloboma is decentred inferiorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucomatous optic disc cupping",
+          "cells": [
+            {
+              "text": "The excavation is a coloboma; intraocular pressure need not be treated for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "optic_nerve_coloboma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimise vision",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Cycloplegic refraction, refractive correction and amblyopia therapy in children; no treatment for the coloboma itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for retinal detachment",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Lifelong, from the fragile intercalary membrane, with prompt vitreoretinal repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic screening",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "CHARGE and papillorenal syndrome, with renal ultrasound and cardiac and ENT assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "PAX6 and relevant panels; autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Aids and rehabilitation where acuity is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Paediatric and ophthalmology review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "optic_nerve_coloboma-dx-mgmt",
+      "title": "Diagnosis and management of optic nerve coloboma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bowl-shaped, inferonasal white optic disc excavation, unilateral or bilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden visual loss, bilateral disease, microphthalmos or proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal review for suspected retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus photography, OCT, renal and cardiac or ENT screen, PAX6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture fit a syndrome such as CHARGE or papillorenal syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Isolated coloboma: refract, treat amblyopia and screen the retina regularly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cycloplegic refraction, correction and amblyopia therapy; no treatment for the coloboma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong surveillance for retinal detachment, with prompt vitreoretinal repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Renal ultrasound and cardiac and ENT assessment for CHARGE or papillorenal syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PAX6 and relevant panel testing with genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-vision aids and rehabilitation where acuity is impaired",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual outcome varies widely; lifelong risk of retinal detachment needs surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

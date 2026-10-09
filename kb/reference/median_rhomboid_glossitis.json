@@ -1,167 +1,515 @@
 {
- "id": "median_rhomboid_glossitis",
- "name": "Median rhomboid glossitis",
- "aliases": [
-  "central papillary atrophy of the tongue"
- ],
- "class": "non_infective",
- "system": "Oral cavity",
- "specialty": "Oral medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Oral medicine reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the circumvallate papillae",
-   "It is usually asymptomatic and found incidentally, appearing smooth, red and depapillated",
-   "There is a strong association with Candida colonisation, and it is often regarded as a form of chronic mucosal candidosis",
-   "Smoking, denture use, inhaled corticosteroids and immunosuppression are recognised associations",
-   "A matching (kissing) lesion on the opposing palate suggests more extensive candidal involvement",
-   "Management includes antifungal therapy where Candida is implicated and addressing predisposing factors"
+  "id": "median_rhomboid_glossitis",
+  "name": "Median rhomboid glossitis",
+  "aliases": [
+    "central papillary atrophy of the tongue"
   ],
-  "pathophysiology": "Median rhomboid glossitis is a localised area of atrophy of the filiform papillae in the midline dorsal tongue. Although historically attributed to a developmental defect, it is now strongly linked to chronic Candida colonisation of the site, with the yeast contributing to the persistent papillary atrophy. Local factors that favour candidal overgrowth, such as smoking, corticosteroid inhalers and immunosuppression, promote the lesion, and the condition is considered a chronic candidal-associated process rather than a primary invasive infection.",
-  "additionalDifferentials": [
-   "Geographic tongue",
-   "Erythematous candidosis elsewhere on the tongue",
-   "Squamous cell carcinoma or other tongue neoplasm (if indurated)",
-   "Vitamin deficiency glossitis",
-   "Lingual thyroid or other midline swelling"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the characteristic midline site and appearance",
-   "Mycological assessment for Candida where indicated",
-   "Review of predisposing factors (smoking, inhaled steroids, immune status)",
-   "Biopsy if there is induration, ulceration or diagnostic doubt"
-  ],
-  "redFlags": [
-   "Induration, ulceration or a mass suggesting malignancy",
-   "Failure to respond to antifungal treatment",
-   "Associated widespread candidosis suggesting immunosuppression",
-   "Rapid change in the lesion"
-  ],
-  "prognosis": "The condition is benign; it often improves with antifungal treatment and control of predisposing factors, though the depapillated area may persist.",
-  "pitfalls": [
-   "Mistaking an indurated lesion for the benign condition and missing carcinoma",
-   "Overlooking the candidal association and predisposing factors",
-   "Confusing it with geographic tongue",
-   "Failing to examine the opposing palate for a kissing lesion"
-  ],
-  "references": [
-   "Oral medicine reference texts (standard reference)",
-   "Dermatology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated",
-   "Systemic azole antifungal such as fluconazole for extensive, symptomatic or refractory candidal involvement, including a kissing palatal lesion",
-   "Smoking cessation as a key modifiable predisposing factor",
-   "Optimise inhaler technique with mouth-rinsing after inhaled corticosteroids and attend to denture hygiene",
-   "Address underlying immunosuppression and glycaemic control where relevant",
-   "Reassure that the lesion is benign, though the depapillated area may persist",
-   "Biopsy if there is induration, ulceration or diagnostic uncertainty to exclude other pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "median_rhomboid_glossitis-pathway",
-   "title": "Median rhomboid glossitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the circumvallate papillae",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Induration, ulceration or a mass suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the characteristic midline site and appearance, Mycological assessment for Candida where indicated, Review of predisposing factors (smoking, inhaled steroids, immune status)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an indurated lesion for the benign condition and missing carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of median rhomboid glossitis."
-  }
- ],
- "tables": [
-  {
-   "id": "median_rhomboid_glossitis-matrix",
-   "title": "Median rhomboid glossitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral cavity",
+  "specialty": "Oral medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oral medicine reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the circumvallate papillae",
+      "It is usually asymptomatic and found incidentally, appearing smooth, red and depapillated",
+      "There is a strong association with Candida colonisation, and it is often regarded as a form of chronic mucosal candidosis",
+      "Smoking, denture use, inhaled corticosteroids and immunosuppression are recognised associations",
+      "A matching (kissing) lesion on the opposing palate suggests more extensive candidal involvement",
+      "Management includes antifungal therapy where Candida is implicated and addressing predisposing factors"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the characteristic midline site and appearance, Mycological assessment for Candida where indicated,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Median rhomboid glossitis is a localised area of atrophy of the filiform papillae in the midline dorsal tongue. Although historically attributed to a developmental defect, it is now strongly linked to chronic Candida colonisation of the site, with the yeast contributing to the persistent papillary atrophy. Local factors that favour candidal overgrowth, such as smoking, corticosteroid inhalers and immunosuppression, promote the lesion, and the condition is considered a chronic candidal-associated process rather than a primary invasive infection.",
+    "additionalDifferentials": [
+      "Geographic tongue",
+      "Erythematous candidosis elsewhere on the tongue",
+      "Squamous cell carcinoma or other tongue neoplasm (if indurated)",
+      "Vitamin deficiency glossitis",
+      "Lingual thyroid or other midline swelling"
     ],
-    [
-     "Primary Differentials",
-     "Geographic tongue, Erythematous candidosis elsewhere on the tongue, Squamous cell carcinoma or other tongue neoplasm (if",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the characteristic midline site and appearance",
+      "Mycological assessment for Candida where indicated",
+      "Review of predisposing factors (smoking, inhaled steroids, immune status)",
+      "Biopsy if there is induration, ulceration or diagnostic doubt"
     ],
-    [
-     "Management Strategy",
-     "Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated",
-     "Core treatment modality"
+    "redFlags": [
+      "Induration, ulceration or a mass suggesting malignancy",
+      "Failure to respond to antifungal treatment",
+      "Associated widespread candidosis suggesting immunosuppression",
+      "Rapid change in the lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an indurated lesion for the benign condition and missing carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign; it often improves with antifungal treatment and control of predisposing factors, though the depapillated area may persist.",
+    "pitfalls": [
+      "Mistaking an indurated lesion for the benign condition and missing carcinoma",
+      "Overlooking the candidal association and predisposing factors",
+      "Confusing it with geographic tongue",
+      "Failing to examine the opposing palate for a kissing lesion"
+    ],
+    "references": [
+      "Oral medicine reference texts (standard reference)",
+      "Dermatology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated",
+      "Systemic azole antifungal such as fluconazole for extensive, symptomatic or refractory candidal involvement, including a kissing palatal lesion",
+      "Smoking cessation as a key modifiable predisposing factor",
+      "Optimise inhaler technique with mouth-rinsing after inhaled corticosteroids and attend to denture hygiene",
+      "Address underlying immunosuppression and glycaemic control where relevant",
+      "Reassure that the lesion is benign, though the depapillated area may persist",
+      "Biopsy if there is induration, ulceration or diagnostic uncertainty to exclude other pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for median rhomboid glossitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "median-rhomboid-glossitis-real-image",
-   "title": "Median rhomboid glossitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "median_rhomboid_glossitis-pathway",
+      "title": "Median rhomboid glossitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the circumvallate papillae",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Induration, ulceration or a mass suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the characteristic midline site and appearance, Mycological assessment for Candida where indicated, Review of predisposing factors (smoking, inhaled steroids, immune status)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an indurated lesion for the benign condition and missing carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of median rhomboid glossitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "median_rhomboid_glossitis-matrix",
+      "title": "Median rhomboid glossitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A well-demarcated rhomboid or oval area of papillary atrophy in the midline of the tongue dorsum, just anterior to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the characteristic midline site and appearance, Mycological assessment for Candida where indicated,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Geographic tongue, Erythematous candidosis elsewhere on the tongue, Squamous cell carcinoma or other tongue neoplasm (if",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical antifungal therapy with an azole such as miconazole gel or with nystatin where Candida is implicated",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an indurated lesion for the benign condition and missing carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for median rhomboid glossitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oral medicine reference texts",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 32-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "median_rhomboid_glossitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from the characteristic midline site and appearance",
+          "cells": [
+            {
+              "text": "Characteristic midline site and appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycological assessment for Candida",
+          "cells": [
+            {
+              "text": "Candida, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of predisposing factors (smoking, inhaled steroids, immune status)",
+          "cells": [
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Induration, ulceration or diagnostic doubt"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_rhomboid_glossitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Squamous cell carcinoma or other tongue neoplasm",
+          "cells": [
+            {
+              "text": "Induration, ulceration or a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythematous candidosis elsewhere on the tongue",
+          "cells": [
+            {
+              "text": "Mycological assessment identifies Candida"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_rhomboid_glossitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical azole",
+          "cells": [
+            {
+              "text": "Miconazole gel, or nystatin where Candida is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic azole",
+          "cells": [
+            {
+              "text": "Fluconazole for extensive, symptomatic or refractory candidal involvement, including a kissing palatal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Key modifiable predisposing factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaler technique and denture hygiene",
+          "cells": [
+            {
+              "text": "Mouth-rinsing after inhaled corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status and glycaemic control",
+          "cells": [
+            {
+              "text": "Addressed where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, though the depapillated area may persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Induration, ulceration or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_rhomboid_glossitis-ddx-2",
+      "kind": "ddx",
+      "title": "Alterations of the tongue",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical features"
+      ],
+      "rows": [
+        {
+          "parameter": "Macroglossia (size or morphology change)",
+          "cells": [
+            {
+              "text": "Enlarged tongue; may be part of a syndrome in developmental conditions such as Down syndrome, Simpson-Golabi-Behmel syndrome, or Beckwith-Wiedemann syndrome; may be due to tumor (hemangioma or lymphangioma), metabolic disease (such as primary amyloidosis), or endocrine disturbance (such as acromegaly or cretinism)."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fissured (scrotal) tongue (size or morphology change)",
+          "cells": [
+            {
+              "text": "Dorsal surface and sides covered by painless shallow or deep fissures that may collect debris and become irritated."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Median rhomboid glossitis (size or morphology change)",
+          "cells": [
+            {
+              "text": "Congenital abnormality with an ovoid, denuded area in the median posterior tongue; may be associated with candidiasis and may respond to antifungals."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Geographic tongue, benign migratory glossitis (color change)",
+          "cells": [
+            {
+              "text": "Asymptomatic inflammatory condition with rapid loss and regrowth of filiform papillae, giving denuded red patches that wander across the tongue surface."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hairy tongue (color change)",
+          "cells": [
+            {
+              "text": "Elongated filiform papillae of the medial dorsal surface because the keratin layer fails to desquamate normally; brownish-black color may come from staining by tobacco, food, or chromogenic organisms."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strawberry and raspberry tongue (color change)",
+          "cells": [
+            {
+              "text": "Appearance in scarlet fever from hypertrophy of fungiform papillae plus changes in filiform papillae."
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bald tongue (color change)",
+          "cells": [
+            {
+              "text": "Atrophy that may be associated with xerostomia, pernicious anemia, iron-deficiency anemia, pellagra, or syphilis; may cause painful burning; may reflect erythematous candidiasis and respond to antifungals."
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "median_rhomboid_glossitis-dx-mgmt",
+      "title": "Diagnosis and management of Median rhomboid glossitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Midline tongue lesion with a characteristic depapillated appearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Induration, ulceration, mass or failure to respond to antifungal treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy to exclude malignancy; review immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis, mycology for Candida, review of smoking and inhaled steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Candida implicated on mycological assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider geographic tongue or vitamin deficiency glossitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical azole such as miconazole gel, or nystatin where Candida is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic fluconazole for extensive, symptomatic or refractory candidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Smoking cessation and mouth-rinsing after inhaled steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure that the lesion is benign; biopsy if induration or ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lesion usually benign; the depapillated area may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

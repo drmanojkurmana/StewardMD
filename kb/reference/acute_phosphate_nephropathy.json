@@ -1,174 +1,569 @@
 {
- "id": "acute_phosphate_nephropathy",
- "name": "Acute phosphate nephropathy",
- "aliases": [
-  "phosphate nephropathy",
-  "oral sodium phosphate nephropathy",
-  "bowel-preparation nephropathy",
-  "acute nephrocalcinosis from phosphate"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large phosphate load",
-   "Classically follows oral sodium phosphate solutions used as bowel preparation for colonoscopy",
-   "Risk factors include older age, female sex, pre-existing chronic kidney disease, volume depletion, hypertension and drugs that affect renal haemodynamics such as ACE inhibitors, ARBs, diuretics and NSAIDs",
-   "Often presents as an unexplained subacute rise in creatinine weeks after the procedure, frequently without prominent symptoms",
-   "Transient hyperphosphataemia and hypocalcaemia may be seen around the time of exposure",
-   "Renal biopsy, if performed, shows tubular and interstitial calcium phosphate deposition with tubular injury",
-   "Prevention is paramount: avoid oral sodium phosphate purgatives in at-risk patients and maintain good hydration",
-   "Management is supportive, namely stopping the offending preparation, correcting volume depletion and avoiding any further phosphate load"
+  "id": "acute_phosphate_nephropathy",
+  "name": "Acute phosphate nephropathy",
+  "aliases": [
+    "phosphate nephropathy",
+    "oral sodium phosphate nephropathy",
+    "bowel-preparation nephropathy",
+    "acute nephrocalcinosis from phosphate"
   ],
-  "pathophysiology": "A large oral sodium phosphate load produces a transient surge in serum phosphate and delivers a high phosphate concentration to the renal tubules. When this coincides with volume depletion, which concentrates the tubular fluid and slows flow, and an alkaline distal tubular environment, calcium phosphate becomes supersaturated and precipitates within the tubular lumen and interstitium. The resulting intratubular obstruction and injury cause acute kidney injury, and persistent calcium phosphate deposition (nephrocalcinosis) can leave a lasting reduction in renal function. Patients with reduced baseline function or taking drugs that impair renal autoregulation are the most susceptible.",
-  "additionalDifferentials": [
-   "Prerenal acute kidney injury from purgative-induced volume depletion",
-   "Acute tubular necrosis from other causes",
-   "Acute interstitial nephritis",
-   "Contrast-associated acute kidney injury",
-   "Other crystalline nephropathies such as oxalate or urate deposition"
-  ],
-  "additionalInvestigations": [
-   "Serum creatinine trend before and after the bowel preparation",
-   "Serum calcium and phosphate around the time of exposure",
-   "Urinalysis, which is often bland",
-   "Renal ultrasound to exclude obstruction",
-   "Renal biopsy in unexplained cases, showing calcium phosphate deposition",
-   "Review of medications that impair renal perfusion"
-  ],
-  "redFlags": [
-   "Progressive or non-recovering acute kidney injury after bowel preparation",
-   "Severe electrolyte disturbance with marked hyperphosphataemia and hypocalcaemia",
-   "Emergence of established chronic kidney disease after the episode",
-   "Oliguria or features of significant volume depletion"
-  ],
-  "prognosis": "Some patients recover partially, but many are left with permanent chronic kidney disease, so prevention by avoiding oral sodium phosphate in at-risk individuals is far more effective than any treatment.",
-  "pitfalls": [
-   "Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics",
-   "Failing to connect a delayed creatinine rise to an earlier bowel preparation",
-   "Allowing volume depletion during the preparation",
-   "Repeating a phosphate-based preparation in a previously affected patient"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (Feehally et al.)",
-   "Campbell-Walsh-Wein Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead",
-   "Intravenous volume repletion to correct dehydration and enhance phosphate clearance",
-   "Withhold drugs that impair renal haemodynamics including ACE inhibitors, angiotensin-receptor blockers, diuretics, and NSAIDs",
-   "Correct associated hyperphosphataemia and hypocalcaemia",
-   "Monitor serial creatinine and long-term renal function for persistent chronic kidney disease",
-   "Nephrology referral, with renal replacement therapy for severe acute kidney injury",
-   "Prevent recurrence by avoiding sodium phosphate preparations in older patients and those with chronic kidney disease or on interacting drugs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_phosphate_nephropathy-pathway",
-   "title": "Acute phosphate nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large phosphate load",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or non-recovering acute kidney injury after bowel preparation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatinine trend before and after the bowel preparation, Serum calcium and phosphate around the time of exposure, Urinalysis, which is often bland"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute phosphate nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_phosphate_nephropathy-matrix",
-   "title": "Acute phosphate nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large phosphate load",
+      "Classically follows oral sodium phosphate solutions used as bowel preparation for colonoscopy",
+      "Risk factors include older age, female sex, pre-existing chronic kidney disease, volume depletion, hypertension and drugs that affect renal haemodynamics such as ACE inhibitors, ARBs, diuretics and NSAIDs",
+      "Often presents as an unexplained subacute rise in creatinine weeks after the procedure, frequently without prominent symptoms",
+      "Transient hyperphosphataemia and hypocalcaemia may be seen around the time of exposure",
+      "Renal biopsy, if performed, shows tubular and interstitial calcium phosphate deposition with tubular injury",
+      "Prevention is paramount: avoid oral sodium phosphate purgatives in at-risk patients and maintain good hydration",
+      "Management is supportive, namely stopping the offending preparation, correcting volume depletion and avoiding any further phosphate load"
     ],
-    [
-     "Key Investigations",
-     "Serum creatinine trend before and after the bowel preparation, Serum calcium and phosphate around the time of exposure,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A large oral sodium phosphate load produces a transient surge in serum phosphate and delivers a high phosphate concentration to the renal tubules. When this coincides with volume depletion, which concentrates the tubular fluid and slows flow, and an alkaline distal tubular environment, calcium phosphate becomes supersaturated and precipitates within the tubular lumen and interstitium. The resulting intratubular obstruction and injury cause acute kidney injury, and persistent calcium phosphate deposition (nephrocalcinosis) can leave a lasting reduction in renal function. Patients with reduced baseline function or taking drugs that impair renal autoregulation are the most susceptible.",
+    "additionalDifferentials": [
+      "Prerenal acute kidney injury from purgative-induced volume depletion",
+      "Acute tubular necrosis from other causes",
+      "Acute interstitial nephritis",
+      "Contrast-associated acute kidney injury",
+      "Other crystalline nephropathies such as oxalate or urate deposition"
     ],
-    [
-     "Primary Differentials",
-     "Prerenal acute kidney injury from purgative-induced volume depletion, Acute tubular necrosis from other causes, Acute",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatinine trend before and after the bowel preparation",
+      "Serum calcium and phosphate around the time of exposure",
+      "Urinalysis, which is often bland",
+      "Renal ultrasound to exclude obstruction",
+      "Renal biopsy in unexplained cases, showing calcium phosphate deposition",
+      "Review of medications that impair renal perfusion"
     ],
-    [
-     "Management Strategy",
-     "Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or non-recovering acute kidney injury after bowel preparation",
+      "Severe electrolyte disturbance with marked hyperphosphataemia and hypocalcaemia",
+      "Emergence of established chronic kidney disease after the episode",
+      "Oliguria or features of significant volume depletion"
     ],
-    [
-     "Clinical Pitfall",
-     "Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics",
-     "Prevent diagnostic or management error"
+    "prognosis": "Some patients recover partially, but many are left with permanent chronic kidney disease, so prevention by avoiding oral sodium phosphate in at-risk individuals is far more effective than any treatment.",
+    "pitfalls": [
+      "Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics",
+      "Failing to connect a delayed creatinine rise to an earlier bowel preparation",
+      "Allowing volume depletion during the preparation",
+      "Repeating a phosphate-based preparation in a previously affected patient"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (Feehally et al.)",
+      "Campbell-Walsh-Wein Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead",
+      "Intravenous volume repletion to correct dehydration and enhance phosphate clearance",
+      "Withhold drugs that impair renal haemodynamics including ACE inhibitors, angiotensin-receptor blockers, diuretics, and NSAIDs",
+      "Correct associated hyperphosphataemia and hypocalcaemia",
+      "Monitor serial creatinine and long-term renal function for persistent chronic kidney disease",
+      "Nephrology referral, with renal replacement therapy for severe acute kidney injury",
+      "Prevent recurrence by avoiding sodium phosphate preparations in older patients and those with chronic kidney disease or on interacting drugs"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute phosphate nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-phosphate-nephropathy-real-image",
-   "title": "Acute phosphate nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "acute_phosphate_nephropathy-pathway",
+      "title": "Acute phosphate nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large phosphate load",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or non-recovering acute kidney injury after bowel preparation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatinine trend before and after the bowel preparation, Serum calcium and phosphate around the time of exposure, Urinalysis, which is often bland"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute phosphate nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_phosphate_nephropathy-matrix",
+      "title": "Acute phosphate nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acute, and sometimes chronic, kidney injury caused by deposition of calcium phosphate in the renal tubules after a large",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatinine trend before and after the bowel preparation, Serum calcium and phosphate around the time of exposure,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prerenal acute kidney injury from purgative-induced volume depletion, Acute tubular necrosis from other causes, Acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Discontinue and avoid oral sodium phosphate bowel preparations, using polyethylene glycol-based alternatives instead",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using oral sodium phosphate purgatives in elderly patients, those with CKD, or those on ACE inhibitors, ARBs or diuretics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute phosphate nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 352-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_phosphate_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial creatinine before and after bowel preparation",
+          "cells": [
+            {
+              "text": "Subacute rise in creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and phosphate around the time of exposure",
+          "cells": [
+            {
+              "text": "Hyperphosphataemia and hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Often bland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Excludes obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy in unexplained cases",
+          "cells": [
+            {
+              "text": "Calcium phosphate deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications that impair renal perfusion",
+          "cells": [
+            {
+              "text": "ACE inhibitors, ARBs, diuretics and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_phosphate_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prerenal acute kidney injury from purgative-induced volume depletion",
+          "cells": [
+            {
+              "text": "Volume depletion from the purgative"
+            },
+            {
+              "text": "Serial creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other crystalline nephropathies (oxalate or urate deposition)",
+          "cells": [
+            {
+              "text": "Other crystal deposition"
+            },
+            {
+              "text": "Renal biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_phosphate_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop oral sodium phosphate; use polyethylene glycol preparations",
+          "cells": [
+            {
+              "text": "Avoids the precipitant"
+            },
+            {
+              "text": "Polyethylene glycol alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous volume repletion",
+          "cells": [
+            {
+              "text": "Corrects dehydration and aids phosphate clearance"
+            },
+            {
+              "text": "Enhances phosphate clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withhold ACE inhibitors, ARBs, diuretics and NSAIDs",
+          "cells": [
+            {
+              "text": "Drugs that impair renal haemodynamics"
+            },
+            {
+              "text": "Temporary withholding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hyperphosphataemia and hypocalcaemia",
+          "cells": [
+            {
+              "text": "Electrolyte disturbance"
+            },
+            {
+              "text": "Monitor levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial creatinine and long-term renal function",
+          "cells": [
+            {
+              "text": "Persistent chronic kidney disease"
+            },
+            {
+              "text": "Long-term follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral; renal replacement for severe acute kidney injury",
+          "cells": [
+            {
+              "text": "Severe injury"
+            },
+            {
+              "text": "Renal replacement therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention by avoiding sodium phosphate in at-risk people",
+          "cells": [
+            {
+              "text": "Older patients, CKD or interacting drugs"
+            },
+            {
+              "text": "Most effective strategy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_phosphate_nephropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of hyperphosphatemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Impaired renal phosphate excretion: renal insufficiency",
+          "cells": [
+            {
+              "text": "Renal insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I. Hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Developmental; autoimmune; after neck surgery or radiation; activating mutations of the calcium-sensing receptor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I. Parathyroid suppression",
+          "cells": [
+            {
+              "text": "Parathyroid-independent hypercalcemia (vitamin D or vitamin A intoxication; sarcoidosis and other granulomatous diseases; immobilization, osteolytic metastases; milk-alkali syndrome); severe hypermagnesemia or hypomagnesemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "I. Other impaired excretion",
+          "cells": [
+            {
+              "text": "Pseudohypoparathyroidism; acromegaly; tumoral calcinosis; heparin therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II. Massive extracellular fluid phosphate load: exogenous",
+          "cells": [
+            {
+              "text": "Rapid administration of exogenous phosphate (intravenous, oral, rectal)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II. Extensive cellular injury or necrosis",
+          "cells": [
+            {
+              "text": "Crush injuries; rhabdomyolysis; hyperthermia; fulminant hepatitis; cytotoxic therapy; severe hemolytic anemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "II. Transcellular phosphate shifts",
+          "cells": [
+            {
+              "text": "Metabolic acidosis; respiratory acidosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_phosphate_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Acute phosphate nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained subacute creatinine rise weeks after a bowel preparation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Oliguria, severe hyperphosphataemia or non-recovering AKI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; renal replacement if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial creatinine; calcium and phosphate around exposure; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Oral sodium phosphate preparation used before the decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop sodium phosphate; IV volume repletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review prerenal injury, ATN, interstitial nephritis and crystal causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withhold ACE inhibitors, ARBs, diuretics and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct hyperphosphataemia and hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor creatinine and long-term renal function for chronic kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many are left with permanent CKD; prevention is the main strategy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

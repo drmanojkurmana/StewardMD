@@ -1,174 +1,479 @@
 {
- "id": "hcn1_encephalopathy",
- "name": "HCN1 developmental and epileptic encephalopathy",
- "aliases": [
-  "HCN1",
-  "HCN1-related epilepsy",
-  "Ih channel encephalopathy",
-  "hyperpolarisation-activated cyclic nucleotide-gated channel 1 epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current that regulates neuronal resting potential, dendritic integration, and rhythmic firing",
-   "The phenotype ranges from a Dravet-like developmental and epileptic encephalopathy to milder generalised or febrile seizure syndromes",
-   "Seizures often begin in infancy, frequently with fever sensitivity and prolonged or febrile-triggered episodes, mimicking SCN1A-related Dravet syndrome",
-   "Multiple seizure types can occur, including focal, generalised tonic-clonic, absence, and myoclonic seizures",
-   "Developmental impairment, autistic features, and movement abnormalities may accompany the more severe presentations",
-   "Both gain- and loss-of-function variants are described, so the direction of the channel defect can influence excitability and treatment response",
-   "Because of the clinical overlap with Dravet syndrome, HCN1 should be considered when SCN1A testing is negative"
+  "id": "hcn1_encephalopathy",
+  "name": "HCN1 developmental and epileptic encephalopathy",
+  "aliases": [
+    "HCN1",
+    "HCN1-related epilepsy",
+    "Ih channel encephalopathy",
+    "hyperpolarisation-activated cyclic nucleotide-gated channel 1 epilepsy"
   ],
-  "pathophysiology": "HCN1 encodes a subunit of the hyperpolarisation-activated cyclic nucleotide-gated channel family responsible for the Ih (or funny) current, which activates on membrane hyperpolarisation and stabilises resting membrane potential while shaping dendritic signal integration and rhythmic oscillations. Pathogenic variants alter channel gating, and both gain- and loss-of-function effects have been reported; either can disturb the fine control of neuronal excitability and dendritic integration. The consequent instability of firing lowers the seizure threshold and, in more severe variants, disrupts developmental circuit maturation, producing the encephalopathic phenotype. Understanding whether a variant increases or decreases Ih helps rationalise antiseizure choices.",
-  "additionalDifferentials": [
-   "SCN1A-related Dravet syndrome",
-   "PCDH19 clustering epilepsy",
-   "SCN1B and GABRG2 related febrile seizure syndromes",
-   "STXBP1 and CDKL5 encephalopathies",
-   "Genetic generalised epilepsies",
-   "Other channelopathy-related infantile epilepsies"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative",
-   "Electroencephalography to characterise generalised and focal features",
-   "Brain magnetic resonance imaging to exclude structural causes",
-   "Developmental and autism-spectrum assessment",
-   "Where feasible, functional characterisation to determine gain versus loss of function",
-   "Detailed seizure and fever-trigger history"
-  ],
-  "redFlags": [
-   "Prolonged febrile-triggered seizures or status epilepticus",
-   "Developmental regression accompanying seizure onset",
-   "Drug-resistant mixed seizure types",
-   "Emerging movement disorder or severe behavioural deterioration"
-  ],
-  "prognosis": "Outcome depends on the phenotype, with milder febrile and generalised presentations often having favourable cognition, while the Dravet-like encephalopathy carries drug-resistant seizures and intellectual disability.",
-  "pitfalls": [
-   "Anchoring on SCN1A and stopping the workup for a Dravet-like presentation",
-   "Assuming a single functional mechanism when both gain and loss of function occur",
-   "Underestimating fever sensitivity and the risk of prolonged seizures",
-   "Overlooking associated autistic and developmental features"
-  ],
-  "references": [
-   "GeneReviews and OMIM resources on HCN1-related epilepsy",
-   "ILAE resources on channelopathy developmental and epileptic encephalopathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum agents such as sodium valproate and clobazam",
-   "Let the direction of the channel defect guide drug choice, since both gain- and loss-of-function variants occur and influence excitability",
-   "Provide rescue treatment for prolonged and febrile-triggered seizures and manage status epilepticus, with attention to fever control",
-   "Offer developmental support with early intervention and therapies for developmental delay, autistic features, and movement abnormalities",
-   "Monitor with electroencephalography, a seizure diary, and developmental surveillance",
-   "Coordinate care through paediatric neurology and epileptology with developmental services",
-   "Provide genetic counselling regarding the HCN1 variant and its inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hcn1_encephalopathy-pathway",
-   "title": "HCN1 developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current that regulates neuronal resting potential, dendritic integration, and rhythmic firing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prolonged febrile-triggered seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative, Electroencephalography to characterise generalised and focal features, Brain magnetic resonance imaging to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum agents such as sodium valproate and clobazam"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on SCN1A and stopping the workup for a Dravet-like presentation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hcn1 developmental and epileptic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "hcn1_encephalopathy-matrix",
-   "title": "HCN1 developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current that regulates neuronal resting potential, dendritic integration, and rhythmic firing",
+      "The phenotype ranges from a Dravet-like developmental and epileptic encephalopathy to milder generalised or febrile seizure syndromes",
+      "Seizures often begin in infancy, frequently with fever sensitivity and prolonged or febrile-triggered episodes, mimicking SCN1A-related Dravet syndrome",
+      "Multiple seizure types can occur, including focal, generalised tonic-clonic, absence, and myoclonic seizures",
+      "Developmental impairment, autistic features, and movement abnormalities may accompany the more severe presentations",
+      "Both gain- and loss-of-function variants are described, so the direction of the channel defect can influence excitability and treatment response",
+      "Because of the clinical overlap with Dravet syndrome, HCN1 should be considered when SCN1A testing is negative"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HCN1 encodes a subunit of the hyperpolarisation-activated cyclic nucleotide-gated channel family responsible for the Ih (or funny) current, which activates on membrane hyperpolarisation and stabilises resting membrane potential while shaping dendritic signal integration and rhythmic oscillations. Pathogenic variants alter channel gating, and both gain- and loss-of-function effects have been reported; either can disturb the fine control of neuronal excitability and dendritic integration. The consequent instability of firing lowers the seizure threshold and, in more severe variants, disrupts developmental circuit maturation, producing the encephalopathic phenotype. Understanding whether a variant increases or decreases Ih helps rationalise antiseizure choices.",
+    "additionalDifferentials": [
+      "SCN1A-related Dravet syndrome",
+      "PCDH19 clustering epilepsy",
+      "SCN1B and GABRG2 related febrile seizure syndromes",
+      "STXBP1 and CDKL5 encephalopathies",
+      "Genetic generalised epilepsies",
+      "Other channelopathy-related infantile epilepsies"
     ],
-    [
-     "Primary Differentials",
-     "SCN1A-related Dravet syndrome, PCDH19 clustering epilepsy, SCN1B and GABRG2 related febrile seizure syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative",
+      "Electroencephalography to characterise generalised and focal features",
+      "Brain magnetic resonance imaging to exclude structural causes",
+      "Developmental and autism-spectrum assessment",
+      "Where feasible, functional characterisation to determine gain versus loss of function",
+      "Detailed seizure and fever-trigger history"
     ],
-    [
-     "Management Strategy",
-     "Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum",
-     "Core treatment modality"
+    "redFlags": [
+      "Prolonged febrile-triggered seizures or status epilepticus",
+      "Developmental regression accompanying seizure onset",
+      "Drug-resistant mixed seizure types",
+      "Emerging movement disorder or severe behavioural deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on SCN1A and stopping the workup for a Dravet-like presentation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the phenotype, with milder febrile and generalised presentations often having favourable cognition, while the Dravet-like encephalopathy carries drug-resistant seizures and intellectual disability.",
+    "pitfalls": [
+      "Anchoring on SCN1A and stopping the workup for a Dravet-like presentation",
+      "Assuming a single functional mechanism when both gain and loss of function occur",
+      "Underestimating fever sensitivity and the risk of prolonged seizures",
+      "Overlooking associated autistic and developmental features"
+    ],
+    "references": [
+      "GeneReviews and OMIM resources on HCN1-related epilepsy",
+      "ILAE resources on channelopathy developmental and epileptic encephalopathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum agents such as sodium valproate and clobazam",
+      "Let the direction of the channel defect guide drug choice, since both gain- and loss-of-function variants occur and influence excitability",
+      "Provide rescue treatment for prolonged and febrile-triggered seizures and manage status epilepticus, with attention to fever control",
+      "Offer developmental support with early intervention and therapies for developmental delay, autistic features, and movement abnormalities",
+      "Monitor with electroencephalography, a seizure diary, and developmental surveillance",
+      "Coordinate care through paediatric neurology and epileptology with developmental services",
+      "Provide genetic counselling regarding the HCN1 variant and its inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hcn1 developmental and epileptic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hcn1-encephalopathy-real-image",
-   "title": "HCN1 developmental and epileptic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hcn1_encephalopathy-pathway",
+      "title": "HCN1 developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current that regulates neuronal resting potential, dendritic integration, and rhythmic firing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prolonged febrile-triggered seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative, Electroencephalography to characterise generalised and focal features, Brain magnetic resonance imaging to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum agents such as sodium valproate and clobazam"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on SCN1A and stopping the workup for a Dravet-like presentation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hcn1 developmental and epileptic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hcn1_encephalopathy-matrix",
+      "title": "HCN1 developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in HCN1, which encodes a hyperpolarisation-activated cyclic nucleotide-gated channel carrying the Ih current",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing to identify the HCN1 variant, especially when SCN1A is negative,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCN1A-related Dravet syndrome, PCDH19 clustering epilepsy, SCN1B and GABRG2 related febrile seizure syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control seizures with antiseizure medication tailored to the phenotype, managing Dravet-like presentations with broad-spectrum",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on SCN1A and stopping the workup for a Dravet-like presentation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hcn1 developmental and epileptic encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hcn1_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Identifies the HCN1 variant, especially when SCN1A is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised and focal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-spectrum assessment",
+          "cells": [
+            {
+              "text": "Developmental impairment and autistic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional characterisation, where feasible",
+          "cells": [
+            {
+              "text": "Gain versus loss of function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed seizure and fever-trigger history",
+          "cells": [
+            {
+              "text": "Fever sensitivity and prolonged or febrile-triggered seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hcn1_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SCN1A-related Dravet syndrome",
+          "cells": [
+            {
+              "text": "Dravet-like phenotype; SCN1A is negative in HCN1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCDH19 clustering epilepsy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN1B and GABRG2 febrile seizure syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STXBP1 and CDKL5 encephalopathies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hcn1_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to the phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Channel direction guides drug choice",
+          "cells": [
+            {
+              "text": "Both gain- and loss-of-function variants are described"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue treatment",
+          "cells": [
+            {
+              "text": "Prolonged and febrile-triggered seizures, and status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention and therapies for delay, autistic features and movement problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "EEG, seizure diary and developmental surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology, epileptology and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "The HCN1 variant and its inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hcn1_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of HCN1 developmental and epileptic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with fever-sensitive, prolonged seizures and developmental concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prolonged febrile seizures, status, regression, drug resistance)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rescue treatment and management of status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Epilepsy gene panel or exome for HCN1 (especially if SCN1A negative); EEG; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic HCN1 variant found, with SCN1A and structural causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dravet syndrome, PCDH19 epilepsy or another genetic epilepsy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication tailored to the phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Let the channel defect (gain or loss of function) guide drug choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rescue treatment for prolonged or febrile-triggered seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental support and multidisciplinary neurology care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Seizure control and developmental support; genetic counselling for the family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

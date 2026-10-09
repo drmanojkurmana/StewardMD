@@ -1,175 +1,435 @@
 {
- "id": "multifocal_atrial_tachycardia",
- "name": "multifocal atrial tachycardia",
- "aliases": [
-  "MAT",
-  "chaotic atrial tachycardia"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR intervals at a rate above 100 per minute.",
-   "It is strongly associated with decompensated chronic obstructive pulmonary disease and other causes of hypoxaemia and pulmonary hypertension.",
-   "An isoelectric baseline between clearly discernible P waves distinguishes MAT from atrial fibrillation, which lacks organised atrial activity.",
-   "Other precipitants include theophylline toxicity, hypokalaemia, hypomagnesaemia, sepsis and the postoperative state.",
-   "Treatment centres on correcting the underlying pulmonary and metabolic disturbance rather than on antiarrhythmic drugs.",
-   "Magnesium and potassium repletion can reduce ectopy even when baseline levels appear within the reference range.",
-   "Beta-blockers are effective for rate control but are frequently limited by bronchospastic disease, so a non-dihydropyridine calcium-channel blocker is often preferred.",
-   "Direct-current cardioversion is ineffective because the mechanism is enhanced automaticity from multiple foci rather than reentry."
+  "id": "multifocal_atrial_tachycardia",
+  "name": "multifocal atrial tachycardia",
+  "aliases": [
+    "MAT",
+    "chaotic atrial tachycardia"
   ],
-  "pathophysiology": "MAT results from abnormal automaticity or triggered activity arising from multiple ectopic atrial foci, producing P waves of differing morphology and timing. It typically occurs in the setting of atrial stretch, hypoxaemia, catecholamine excess and metabolic derangement, conditions epitomised by decompensated chronic obstructive pulmonary disease with right atrial enlargement and elevated pulmonary pressures. Fluctuating autonomic tone, hypokalaemia, hypomagnesaemia and drugs such as theophylline and beta-agonists further destabilise atrial membrane potentials and promote ectopic firing. Because the arrhythmia is driven by automatic foci rather than a fixed reentrant circuit, it does not respond to cardioversion and resolves chiefly with correction of the underlying disturbance.",
-  "additionalDifferentials": [
-   "atrial fibrillation",
-   "atrial flutter with variable conduction",
-   "frequent atrial premature complexes with wandering atrial pacemaker",
-   "focal atrial tachycardia",
-   "sinus tachycardia with premature atrial beats",
-   "atrioventricular nodal reentrant tachycardia"
-  ],
-  "additionalInvestigations": [
-   "twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline",
-   "arterial blood gas analysis to assess hypoxaemia and acid-base status",
-   "serum potassium and magnesium concentrations",
-   "theophylline level where the drug is in use",
-   "chest imaging to evaluate underlying pulmonary disease",
-   "echocardiography to assess right heart size, pulmonary pressures and left ventricular function"
-  ],
-  "redFlags": [
-   "severe hypoxaemia or respiratory failure driving the arrhythmia",
-   "haemodynamic instability from a rapid ventricular response",
-   "theophylline toxicity requiring urgent management",
-   "profound electrolyte depletion",
-   "features of decompensated cor pulmonale or right heart failure"
-  ],
-  "prognosis": "MAT itself is rarely dangerous, but it signals serious underlying illness and its prognosis reflects the severity of the associated pulmonary or systemic disease. The arrhythmia usually resolves once the precipitating condition is treated.",
-  "pitfalls": [
-   "Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism.",
-   "Attempting electrical cardioversion, which does not work for an automatic multifocal rhythm.",
-   "Prescribing non-selective beta-blockers in bronchospastic disease and worsening respiratory status.",
-   "Overlooking magnesium deficiency because the serum level appears normal.",
-   "Focusing on antiarrhythmic therapy while neglecting the underlying hypoxaemia and metabolic derangement."
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the management of patients with supraventricular tachycardia",
-   "Chou's Electrocardiography in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of infection",
-   "Correct metabolic derangement with magnesium and potassium repletion, which reduces atrial ectopy",
-   "Review and reduce arrhythmogenic drugs, particularly theophylline and beta-agonists",
-   "Rate control with a non-dihydropyridine calcium-channel blocker such as verapamil or diltiazem, reserving beta-blockers for those without significant bronchospasm",
-   "Avoid direct-current cardioversion, which is ineffective against an automatically driven, non-reentrant rhythm",
-   "Monitor with continuous ECG and repeat electrolytes, escalating care according to the severity of the underlying pulmonary or systemic illness"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "multifocal_atrial_tachycardia-pathway",
-   "title": "multifocal atrial tachycardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR intervals at a rate above 100 per minute.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: severe hypoxaemia or respiratory failure driving the arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline, arterial blood gas analysis to assess hypoxaemia and acid-base status, serum potassium and magnesium concentrations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multifocal atrial tachycardia."
-  }
- ],
- "tables": [
-  {
-   "id": "multifocal_atrial_tachycardia-matrix",
-   "title": "multifocal atrial tachycardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR intervals at a rate above 100 per minute.",
+      "It is strongly associated with decompensated chronic obstructive pulmonary disease and other causes of hypoxaemia and pulmonary hypertension.",
+      "An isoelectric baseline between clearly discernible P waves distinguishes MAT from atrial fibrillation, which lacks organised atrial activity.",
+      "Other precipitants include theophylline toxicity, hypokalaemia, hypomagnesaemia, sepsis and the postoperative state.",
+      "Treatment centres on correcting the underlying pulmonary and metabolic disturbance rather than on antiarrhythmic drugs.",
+      "Magnesium and potassium repletion can reduce ectopy even when baseline levels appear within the reference range.",
+      "Beta-blockers are effective for rate control but are frequently limited by bronchospastic disease, so a non-dihydropyridine calcium-channel blocker is often preferred.",
+      "Direct-current cardioversion is ineffective because the mechanism is enhanced automaticity from multiple foci rather than reentry."
     ],
-    [
-     "Key Investigations",
-     "twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline, arterial blood gas analysis to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MAT results from abnormal automaticity or triggered activity arising from multiple ectopic atrial foci, producing P waves of differing morphology and timing. It typically occurs in the setting of atrial stretch, hypoxaemia, catecholamine excess and metabolic derangement, conditions epitomised by decompensated chronic obstructive pulmonary disease with right atrial enlargement and elevated pulmonary pressures. Fluctuating autonomic tone, hypokalaemia, hypomagnesaemia and drugs such as theophylline and beta-agonists further destabilise atrial membrane potentials and promote ectopic firing. Because the arrhythmia is driven by automatic foci rather than a fixed reentrant circuit, it does not respond to cardioversion and resolves chiefly with correction of the underlying disturbance.",
+    "additionalDifferentials": [
+      "atrial fibrillation",
+      "atrial flutter with variable conduction",
+      "frequent atrial premature complexes with wandering atrial pacemaker",
+      "focal atrial tachycardia",
+      "sinus tachycardia with premature atrial beats",
+      "atrioventricular nodal reentrant tachycardia"
     ],
-    [
-     "Primary Differentials",
-     "atrial fibrillation, atrial flutter with variable conduction, frequent atrial premature complexes with wandering atrial pacemaker",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline",
+      "arterial blood gas analysis to assess hypoxaemia and acid-base status",
+      "serum potassium and magnesium concentrations",
+      "theophylline level where the drug is in use",
+      "chest imaging to evaluate underlying pulmonary disease",
+      "echocardiography to assess right heart size, pulmonary pressures and left ventricular function"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of",
-     "Core treatment modality"
+    "redFlags": [
+      "severe hypoxaemia or respiratory failure driving the arrhythmia",
+      "haemodynamic instability from a rapid ventricular response",
+      "theophylline toxicity requiring urgent management",
+      "profound electrolyte depletion",
+      "features of decompensated cor pulmonale or right heart failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism.",
-     "Prevent diagnostic or management error"
+    "prognosis": "MAT itself is rarely dangerous, but it signals serious underlying illness and its prognosis reflects the severity of the associated pulmonary or systemic disease. The arrhythmia usually resolves once the precipitating condition is treated.",
+    "pitfalls": [
+      "Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism.",
+      "Attempting electrical cardioversion, which does not work for an automatic multifocal rhythm.",
+      "Prescribing non-selective beta-blockers in bronchospastic disease and worsening respiratory status.",
+      "Overlooking magnesium deficiency because the serum level appears normal.",
+      "Focusing on antiarrhythmic therapy while neglecting the underlying hypoxaemia and metabolic derangement."
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the management of patients with supraventricular tachycardia",
+      "Chou's Electrocardiography in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of infection",
+      "Correct metabolic derangement with magnesium and potassium repletion, which reduces atrial ectopy",
+      "Review and reduce arrhythmogenic drugs, particularly theophylline and beta-agonists",
+      "Rate control with a non-dihydropyridine calcium-channel blocker such as verapamil or diltiazem, reserving beta-blockers for those without significant bronchospasm",
+      "Avoid direct-current cardioversion, which is ineffective against an automatically driven, non-reentrant rhythm",
+      "Monitor with continuous ECG and repeat electrolytes, escalating care according to the severity of the underlying pulmonary or systemic illness"
     ]
-   ],
-   "caption": "Overview comparison matrix for multifocal atrial tachycardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multifocal-atrial-tachycardia-real-image",
-   "title": "multifocal atrial tachycardia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "multifocal_atrial_tachycardia-pathway",
+      "title": "multifocal atrial tachycardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR intervals at a rate above 100 per minute.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: severe hypoxaemia or respiratory failure driving the arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline, arterial blood gas analysis to assess hypoxaemia and acid-base status, serum potassium and magnesium concentrations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multifocal atrial tachycardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multifocal_atrial_tachycardia-matrix",
+      "title": "multifocal atrial tachycardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "MAT is defined by an irregular atrial tachycardia with at least three distinct P-wave morphologies and varying PP, PR and RR",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "twelve-lead ECG demonstrating three or more P-wave morphologies with an isoelectric baseline, arterial blood gas analysis to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "atrial fibrillation, atrial flutter with variable conduction, frequent atrial premature complexes with wandering atrial pacemaker",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying precipitant by correcting hypoxaemia and optimising decompensated COPD with bronchodilators and treatment of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing MAT as atrial fibrillation and pursuing rate or rhythm strategies aimed at the wrong mechanism.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multifocal atrial tachycardia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "multifocal_atrial_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Twelve-lead ECG",
+          "cells": [
+            {
+              "text": "Three or more P-wave morphologies with an isoelectric baseline; irregular atrial tachycardia above 100 per minute"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas analysis",
+          "cells": [
+            {
+              "text": "Hypoxaemia and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and magnesium",
+          "cells": [
+            {
+              "text": "Hypokalaemia and hypomagnesaemia are precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Theophylline level",
+          "cells": [
+            {
+              "text": "Where the drug is in use; toxicity is a precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Underlying pulmonary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Right heart size, pulmonary pressures and left ventricular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "multifocal_atrial_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct the precipitant",
+          "cells": [
+            {
+              "text": "Correct hypoxaemia; optimise decompensated COPD with bronchodilators and treat any infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte repletion",
+          "cells": [
+            {
+              "text": "Magnesium and potassium repletion reduces atrial ectopy, even when levels look normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review arrhythmogenic drugs",
+          "cells": [
+            {
+              "text": "Reduce theophylline and beta-agonists where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rate control",
+          "cells": [
+            {
+              "text": "Non-dihydropyridine calcium-channel blocker such as verapamil or diltiazem; beta-blockers only without significant bronchospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid cardioversion",
+          "cells": [
+            {
+              "text": "Ineffective against an automatically driven, non-reentrant rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Continuous ECG and repeat electrolytes; escalate with severity of the underlying illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "multifocal_atrial_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of multifocal atrial tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Irregular atrial tachycardia above 100 per minute, often in decompensated COPD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoxaemia, instability, theophylline toxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of hypoxaemia, respiratory failure or theophylline toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG, arterial blood gas, potassium and magnesium, theophylline level",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Three or more P-wave morphologies with an isoelectric baseline on ECG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atrial fibrillation, which lacks organised atrial activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct hypoxaemia and treat decompensated COPD and any infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Magnesium and potassium repletion, even if levels look normal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review and reduce theophylline and beta-agonists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rate control with verapamil or diltiazem; avoid beta-blockers if bronchospastic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid cardioversion: the rhythm is automatic, not reentrant",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually resolves once the precipitant is treated; outlook follows the lung disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

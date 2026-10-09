@@ -1,178 +1,476 @@
 {
- "id": "intrahepatic_cholestasis_of_pregnancy",
- "name": "Intrahepatic cholestasis of pregnancy",
- "aliases": [
-  "ICP",
-  "obstetric cholestasis",
-  "cholestasis of pregnancy",
-  "pruritus gravidarum",
-  "ABCB4-related cholestasis of pregnancy"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / RCOG Green-top Guideline",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary skin rash",
-   "The diagnostic hallmark is raised fasting serum bile acids; transaminases may also be mildly elevated",
-   "Jaundice is uncommon; itch typically precedes biochemical change and resolves within days to weeks after delivery",
-   "The principal concern is fetal risk: spontaneous preterm birth, meconium-stained liquor, and, with high bile acid levels, an increased risk of stillbirth",
-   "Susceptibility is influenced by heterozygous variants in biliary transporter genes, notably ABCB4 (MDR3), and by oestrogen and progesterone metabolites",
-   "It tends to recur in subsequent pregnancies and with combined oestrogen-containing contraception",
-   "Management centres on ursodeoxycholic acid for maternal symptoms, fetal monitoring, and planned delivery timed according to bile acid levels and gestation, with vitamin K if there is prolonged cholestasis or coagulopathy"
+  "id": "intrahepatic_cholestasis_of_pregnancy",
+  "name": "Intrahepatic cholestasis of pregnancy",
+  "aliases": [
+    "ICP",
+    "obstetric cholestasis",
+    "cholestasis of pregnancy",
+    "pruritus gravidarum",
+    "ABCB4-related cholestasis of pregnancy"
   ],
-  "pathophysiology": "Intrahepatic cholestasis of pregnancy is a reversible, hormonally influenced cholestasis of late pregnancy. Rising oestrogen and progesterone metabolites impair hepatocellular bile acid transport in genetically susceptible women, many of whom carry heterozygous variants in canalicular transporter genes such as ABCB4 (MDR3), ABCB11 (BSEP), or ATP8B1. Reduced canalicular excretion raises circulating bile acids, causing maternal pruritus; transplacental passage of elevated bile acids is implicated in fetal complications including arrhythmia, preterm birth, and sudden intrauterine death, with risk rising steeply at very high maternal bile acid concentrations. The condition characteristically resolves after delivery.",
-  "additionalDifferentials": [
-   "Pruritic urticarial papules and plaques of pregnancy (PUPPP)",
-   "Pemphigoid gestationis and atopic eruption of pregnancy",
-   "Pre-eclampsia and HELLP syndrome",
-   "Acute fatty liver of pregnancy",
-   "Viral hepatitis or drug-induced liver injury",
-   "Gallstone disease with biliary obstruction",
-   "Primary biliary cholangitis presenting in pregnancy"
-  ],
-  "additionalInvestigations": [
-   "Fasting serum bile acid concentration (key test, guiding severity and delivery timing)",
-   "Liver function tests including transaminases and bilirubin",
-   "Coagulation profile and vitamin K status if cholestasis is prolonged",
-   "Viral hepatitis serology and liver autoantibodies to exclude other causes",
-   "Liver and biliary ultrasound to exclude obstruction",
-   "Fetal surveillance including cardiotocography and growth assessment"
-  ],
-  "redFlags": [
-   "Very high maternal serum bile acids indicating heightened stillbirth risk",
-   "Reduced fetal movements or abnormal cardiotocography",
-   "Jaundice, right upper quadrant pain, or features suggesting acute fatty liver or pre-eclampsia",
-   "Coagulopathy from vitamin K deficiency in prolonged cholestasis",
-   "Persistent abnormal liver tests beyond the postpartum period suggesting underlying liver disease"
-  ],
-  "prognosis": "Maternal prognosis is excellent with resolution of pruritus and biochemistry after delivery, though recurrence in future pregnancies is common; the main determinant of outcome is fetal, with planned delivery and bile-acid-guided monitoring aimed at reducing the risk of stillbirth.",
-  "pitfalls": [
-   "Reassuring on the basis of mild itch without measuring serum bile acids",
-   "Overlooking the rising stillbirth risk at very high bile acid concentrations when planning delivery",
-   "Failing to exclude pre-eclampsia, HELLP, or acute fatty liver of pregnancy",
-   "Not arranging postpartum follow-up to confirm resolution and detect underlying liver disease",
-   "Neglecting vitamin K when cholestasis is prolonged, risking maternal or neonatal bleeding"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "RCOG Green-top Guideline on intrahepatic cholestasis of pregnancy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids",
-   "Provide symptomatic relief of itch with emollients and a sedating antihistamine at night",
-   "Supplement vitamin K where cholestasis is prolonged or coagulation is deranged",
-   "Monitor fasting serum bile acids and liver function serially to gauge severity and guide delivery timing",
-   "Undertake foetal surveillance and plan early delivery timed to bile-acid concentration to reduce stillbirth risk",
-   "Avoid oestrogen-containing contraception postpartum given recurrence risk, and confirm biochemical resolution after delivery",
-   "Coordinate obstetric and hepatology care, with genetic counselling where a biliary transporter variant such as ABCB4 (MDR3) is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "intrahepatic_cholestasis_of_pregnancy-pathway",
-   "title": "Intrahepatic cholestasis of pregnancy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary skin rash",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very high maternal serum bile acids indicating heightened stillbirth risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting serum bile acid concentration (key test, guiding severity and delivery timing), Liver function tests including transaminases and bilirubin, Coagulation profile and vitamin K status if cholestasis is prolonged"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reassuring on the basis of mild itch without measuring serum bile acids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of intrahepatic cholestasis of pregnancy."
-  }
- ],
- "tables": [
-  {
-   "id": "intrahepatic_cholestasis_of_pregnancy-matrix",
-   "title": "Intrahepatic cholestasis of pregnancy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / RCOG Green-top Guideline",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary skin rash",
+      "The diagnostic hallmark is raised fasting serum bile acids; transaminases may also be mildly elevated",
+      "Jaundice is uncommon; itch typically precedes biochemical change and resolves within days to weeks after delivery",
+      "The principal concern is fetal risk: spontaneous preterm birth, meconium-stained liquor, and, with high bile acid levels, an increased risk of stillbirth",
+      "Susceptibility is influenced by heterozygous variants in biliary transporter genes, notably ABCB4 (MDR3), and by oestrogen and progesterone metabolites",
+      "It tends to recur in subsequent pregnancies and with combined oestrogen-containing contraception",
+      "Management centres on ursodeoxycholic acid for maternal symptoms, fetal monitoring, and planned delivery timed according to bile acid levels and gestation, with vitamin K if there is prolonged cholestasis or coagulopathy"
     ],
-    [
-     "Key Investigations",
-     "Fasting serum bile acid concentration (key test, guiding severity and delivery timing), Liver function tests including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Intrahepatic cholestasis of pregnancy is a reversible, hormonally influenced cholestasis of late pregnancy. Rising oestrogen and progesterone metabolites impair hepatocellular bile acid transport in genetically susceptible women, many of whom carry heterozygous variants in canalicular transporter genes such as ABCB4 (MDR3), ABCB11 (BSEP), or ATP8B1. Reduced canalicular excretion raises circulating bile acids, causing maternal pruritus; transplacental passage of elevated bile acids is implicated in fetal complications including arrhythmia, preterm birth, and sudden intrauterine death, with risk rising steeply at very high maternal bile acid concentrations. The condition characteristically resolves after delivery.",
+    "additionalDifferentials": [
+      "Pruritic urticarial papules and plaques of pregnancy (PUPPP)",
+      "Pemphigoid gestationis and atopic eruption of pregnancy",
+      "Pre-eclampsia and HELLP syndrome",
+      "Acute fatty liver of pregnancy",
+      "Viral hepatitis or drug-induced liver injury",
+      "Gallstone disease with biliary obstruction",
+      "Primary biliary cholangitis presenting in pregnancy"
     ],
-    [
-     "Primary Differentials",
-     "Pruritic urticarial papules and plaques of pregnancy (PUPPP), Pemphigoid gestationis and atopic eruption of pregnancy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting serum bile acid concentration (key test, guiding severity and delivery timing)",
+      "Liver function tests including transaminases and bilirubin",
+      "Coagulation profile and vitamin K status if cholestasis is prolonged",
+      "Viral hepatitis serology and liver autoantibodies to exclude other causes",
+      "Liver and biliary ultrasound to exclude obstruction",
+      "Fetal surveillance including cardiotocography and growth assessment"
     ],
-    [
-     "Management Strategy",
-     "Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids",
-     "Core treatment modality"
+    "redFlags": [
+      "Very high maternal serum bile acids indicating heightened stillbirth risk",
+      "Reduced fetal movements or abnormal cardiotocography",
+      "Jaundice, right upper quadrant pain, or features suggesting acute fatty liver or pre-eclampsia",
+      "Coagulopathy from vitamin K deficiency in prolonged cholestasis",
+      "Persistent abnormal liver tests beyond the postpartum period suggesting underlying liver disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Reassuring on the basis of mild itch without measuring serum bile acids",
-     "Prevent diagnostic or management error"
+    "prognosis": "Maternal prognosis is excellent with resolution of pruritus and biochemistry after delivery, though recurrence in future pregnancies is common; the main determinant of outcome is fetal, with planned delivery and bile-acid-guided monitoring aimed at reducing the risk of stillbirth.",
+    "pitfalls": [
+      "Reassuring on the basis of mild itch without measuring serum bile acids",
+      "Overlooking the rising stillbirth risk at very high bile acid concentrations when planning delivery",
+      "Failing to exclude pre-eclampsia, HELLP, or acute fatty liver of pregnancy",
+      "Not arranging postpartum follow-up to confirm resolution and detect underlying liver disease",
+      "Neglecting vitamin K when cholestasis is prolonged, risking maternal or neonatal bleeding"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "RCOG Green-top Guideline on intrahepatic cholestasis of pregnancy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids",
+      "Provide symptomatic relief of itch with emollients and a sedating antihistamine at night",
+      "Supplement vitamin K where cholestasis is prolonged or coagulation is deranged",
+      "Monitor fasting serum bile acids and liver function serially to gauge severity and guide delivery timing",
+      "Undertake foetal surveillance and plan early delivery timed to bile-acid concentration to reduce stillbirth risk",
+      "Avoid oestrogen-containing contraception postpartum given recurrence risk, and confirm biochemical resolution after delivery",
+      "Coordinate obstetric and hepatology care, with genetic counselling where a biliary transporter variant such as ABCB4 (MDR3) is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for intrahepatic cholestasis of pregnancy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "intrahepatic-cholestasis-of-pregnancy-real-image",
-   "title": "Intrahepatic cholestasis of pregnancy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "intrahepatic_cholestasis_of_pregnancy-pathway",
+      "title": "Intrahepatic cholestasis of pregnancy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary skin rash",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very high maternal serum bile acids indicating heightened stillbirth risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting serum bile acid concentration (key test, guiding severity and delivery timing), Liver function tests including transaminases and bilirubin, Coagulation profile and vitamin K status if cholestasis is prolonged"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reassuring on the basis of mild itch without measuring serum bile acids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of intrahepatic cholestasis of pregnancy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "intrahepatic_cholestasis_of_pregnancy-matrix",
+      "title": "Intrahepatic cholestasis of pregnancy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in the second or third trimester with intense pruritus, classically of the palms and soles, in the absence of a primary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting serum bile acid concentration (key test, guiding severity and delivery timing), Liver function tests including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pruritic urticarial papules and plaques of pregnancy (PUPPP), Pemphigoid gestationis and atopic eruption of pregnancy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give ursodeoxycholic acid to relieve maternal pruritus and lower serum bile acids",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reassuring on the basis of mild itch without measuring serum bile acids",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for intrahepatic cholestasis of pregnancy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / RCOG Green-top Guideline",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intrahepatic_cholestasis_of_pregnancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum bile acid concentration",
+          "cells": [
+            {
+              "text": "Key test; guides severity and delivery timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Transaminases and bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and vitamin K status",
+          "cells": [
+            {
+              "text": "Prolonged cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis serology and liver autoantibodies",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and biliary ultrasound",
+          "cells": [
+            {
+              "text": "Obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal surveillance with cardiotocography and growth",
+          "cells": [
+            {
+              "text": "Fetal wellbeing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intrahepatic_cholestasis_of_pregnancy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pruritic urticarial papules and plaques of pregnancy",
+          "cells": [
+            {
+              "text": "Skin rash present; this disease has no primary skin rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia or HELLP syndrome",
+          "cells": [
+            {
+              "text": "Hypertension and other pre-eclampsia features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute fatty liver of pregnancy",
+          "cells": [
+            {
+              "text": "Jaundice and right upper quadrant pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intrahepatic_cholestasis_of_pregnancy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Relieves maternal pruritus and lowers serum bile acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic itch relief",
+          "cells": [
+            {
+              "text": "Emollients and a sedating antihistamine at night"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K",
+          "cells": [
+            {
+              "text": "Where cholestasis is prolonged or coagulation is deranged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Fasting bile acids and liver function to gauge severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal surveillance and delivery",
+          "cells": [
+            {
+              "text": "Early delivery timed to bile-acid concentration to reduce stillbirth risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum care",
+          "cells": [
+            {
+              "text": "Avoid oestrogen-containing contraception; confirm biochemical resolution; ABCB4 counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intrahepatic_cholestasis_of_pregnancy-dx-mgmt",
+      "title": "Diagnosis and management of Intrahepatic cholestasis of pregnancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intense itch on palms and soles in the second or third trimester",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Very high bile acids, reduced fetal movements, jaundice or coagulopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review; fetal assessment and delivery planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting bile acids, liver tests, coagulation, viral serology, liver ultrasound, CTG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised fasting bile acids with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the alternative cause such as HELLP or acute fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ursodeoxycholic acid to relieve itch and lower bile acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and a sedating antihistamine at night",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K where cholestasis is prolonged",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial bile acids and liver tests to guide delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Fetal surveillance with early delivery timed to bile-acid level",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Itch resolves within days to weeks after delivery; postpartum check needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

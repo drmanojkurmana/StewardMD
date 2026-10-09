@@ -1,174 +1,416 @@
 {
- "id": "robinow_syndrome",
- "name": "Robinow syndrome",
- "aliases": [
-  "fetal face syndrome",
-  "ROR2-related recessive Robinow syndrome",
-  "WNT5A/DVL-related dominant Robinow syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a broad forehead",
-   "The autosomal recessive form is caused by ROR2 mutations and is generally more severe; dominant forms arise from WNT5A, DVL1, DVL3 and related genes in the non-canonical WNT pathway",
-   "Mesomelic limb shortening (short forearms and lower legs) is typical, with brachydactyly and short stature",
-   "Genital hypoplasia is characteristic, with a micropenis in males and clitoral/labial hypoplasia in females, and may cause diagnostic confusion",
-   "The recessive ROR2 form frequently includes vertebral segmentation defects with scoliosis and rib anomalies",
-   "Dental crowding, gum hypertrophy and a broad mouth are common oral features",
-   "Some dominant forms (notably certain DVL and WNT5A variants) are associated with osteosclerosis",
-   "Diagnosis is clinical and radiographic, confirmed by molecular testing to distinguish the dominant and recessive forms for counselling"
+  "id": "robinow_syndrome",
+  "name": "Robinow syndrome",
+  "aliases": [
+    "fetal face syndrome",
+    "ROR2-related recessive Robinow syndrome",
+    "WNT5A/DVL-related dominant Robinow syndrome"
   ],
-  "pathophysiology": "Robinow syndrome is a disorder of the non-canonical WNT/planar cell polarity signalling pathway, which governs skeletal patterning, limb outgrowth and craniofacial and genital development. The recessive form is caused by loss of function of ROR2, a receptor tyrosine kinase that acts as a co-receptor for WNT5A; the dominant forms result from variants in WNT5A itself or in downstream DVL genes. Disruption of this pathway impairs the coordinated growth and orientation of skeletal elements, producing the mesomelic limb shortening, vertebral anomalies, characteristic facial appearance and genital hypoplasia.",
-  "additionalDifferentials": [
-   "Aarskog-Scott syndrome (FGD1, facial and genital features)",
-   "Omodysplasia (mesomelic limb shortening)",
-   "Other mesomelic dysplasias (e.g. Langer, Leri-Weill dyschondrosteosis, SHOX-related)",
-   "Craniofrontonasal syndrome (EFNB1, hypertelorism)",
-   "Fetal alcohol spectrum (facial overlap)",
-   "Disorders of sex development for the genital hypoplasia"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form",
-   "Skeletal survey to document mesomelic shortening, brachydactyly and vertebral/rib anomalies",
-   "Spinal radiographs and follow-up for segmentation defects and scoliosis in the recessive form",
-   "Renal and cardiac assessment where associated anomalies are suspected",
-   "Endocrine and genital assessment to characterise hypoplasia and guide management",
-   "Dental and orthodontic evaluation for crowding and gum overgrowth"
-  ],
-  "redFlags": [
-   "Progressive scoliosis from vertebral segmentation defects in recessive disease",
-   "Congenital cardiac or renal anomalies causing functional compromise",
-   "Marked genital hypoplasia requiring endocrine evaluation and psychosocial support",
-   "Airway or feeding difficulty in severely affected neonates"
-  ],
-  "prognosis": "Intelligence is usually normal and life expectancy is generally good, particularly in the dominant forms; the recessive ROR2 form is more severe, with skeletal and vertebral complications, but with orthopaedic, endocrine and multidisciplinary care most individuals do well.",
-  "pitfalls": [
-   "Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis",
-   "Not distinguishing dominant from recessive forms, leading to incorrect recurrence-risk counselling",
-   "Overlooking vertebral segmentation anomalies and progressive scoliosis on follow-up",
-   "Confusing the facial features with a fetal alcohol phenotype"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Robinow syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as needed",
-   "Spinal surveillance and orthopaedic treatment of vertebral segmentation defects, rib anomalies and scoliosis, particularly in the recessive ROR2 form",
-   "Endocrine assessment and hormonal treatment of genital hypoplasia, including androgen therapy for micropenis where indicated",
-   "Dental and orthodontic management of crowding and gingival overgrowth",
-   "Screening for and management of associated renal and cardiac anomalies",
-   "Coordinated care through a multidisciplinary skeletal dysplasia team",
-   "Genetic counselling distinguishing recessive ROR2 disease from dominant WNT5A/DVL forms, with molecular testing and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "robinow_syndrome-pathway",
-   "title": "Robinow syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a broad forehead",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive scoliosis from vertebral segmentation defects in recessive disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form, Skeletal survey to document mesomelic shortening, brachydactyly and vertebral/rib anomalies, Spinal radiographs and follow-up for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of robinow syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "robinow_syndrome-matrix",
-   "title": "Robinow syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a broad forehead",
+      "The autosomal recessive form is caused by ROR2 mutations and is generally more severe; dominant forms arise from WNT5A, DVL1, DVL3 and related genes in the non-canonical WNT pathway",
+      "Mesomelic limb shortening (short forearms and lower legs) is typical, with brachydactyly and short stature",
+      "Genital hypoplasia is characteristic, with a micropenis in males and clitoral/labial hypoplasia in females, and may cause diagnostic confusion",
+      "The recessive ROR2 form frequently includes vertebral segmentation defects with scoliosis and rib anomalies",
+      "Dental crowding, gum hypertrophy and a broad mouth are common oral features",
+      "Some dominant forms (notably certain DVL and WNT5A variants) are associated with osteosclerosis",
+      "Diagnosis is clinical and radiographic, confirmed by molecular testing to distinguish the dominant and recessive forms for counselling"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form, Skeletal survey to document mesomelic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Robinow syndrome is a disorder of the non-canonical WNT/planar cell polarity signalling pathway, which governs skeletal patterning, limb outgrowth and craniofacial and genital development. The recessive form is caused by loss of function of ROR2, a receptor tyrosine kinase that acts as a co-receptor for WNT5A; the dominant forms result from variants in WNT5A itself or in downstream DVL genes. Disruption of this pathway impairs the coordinated growth and orientation of skeletal elements, producing the mesomelic limb shortening, vertebral anomalies, characteristic facial appearance and genital hypoplasia.",
+    "additionalDifferentials": [
+      "Aarskog-Scott syndrome (FGD1, facial and genital features)",
+      "Omodysplasia (mesomelic limb shortening)",
+      "Other mesomelic dysplasias (e.g. Langer, Leri-Weill dyschondrosteosis, SHOX-related)",
+      "Craniofrontonasal syndrome (EFNB1, hypertelorism)",
+      "Fetal alcohol spectrum (facial overlap)",
+      "Disorders of sex development for the genital hypoplasia"
     ],
-    [
-     "Primary Differentials",
-     "Aarskog-Scott syndrome (FGD1, facial and genital features), Omodysplasia (mesomelic limb shortening), Other mesomelic dysplasias",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form",
+      "Skeletal survey to document mesomelic shortening, brachydactyly and vertebral/rib anomalies",
+      "Spinal radiographs and follow-up for segmentation defects and scoliosis in the recessive form",
+      "Renal and cardiac assessment where associated anomalies are suspected",
+      "Endocrine and genital assessment to characterise hypoplasia and guide management",
+      "Dental and orthodontic evaluation for crowding and gum overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive scoliosis from vertebral segmentation defects in recessive disease",
+      "Congenital cardiac or renal anomalies causing functional compromise",
+      "Marked genital hypoplasia requiring endocrine evaluation and psychosocial support",
+      "Airway or feeding difficulty in severely affected neonates"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intelligence is usually normal and life expectancy is generally good, particularly in the dominant forms; the recessive ROR2 form is more severe, with skeletal and vertebral complications, but with orthopaedic, endocrine and multidisciplinary care most individuals do well.",
+    "pitfalls": [
+      "Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis",
+      "Not distinguishing dominant from recessive forms, leading to incorrect recurrence-risk counselling",
+      "Overlooking vertebral segmentation anomalies and progressive scoliosis on follow-up",
+      "Confusing the facial features with a fetal alcohol phenotype"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Robinow syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as needed",
+      "Spinal surveillance and orthopaedic treatment of vertebral segmentation defects, rib anomalies and scoliosis, particularly in the recessive ROR2 form",
+      "Endocrine assessment and hormonal treatment of genital hypoplasia, including androgen therapy for micropenis where indicated",
+      "Dental and orthodontic management of crowding and gingival overgrowth",
+      "Screening for and management of associated renal and cardiac anomalies",
+      "Coordinated care through a multidisciplinary skeletal dysplasia team",
+      "Genetic counselling distinguishing recessive ROR2 disease from dominant WNT5A/DVL forms, with molecular testing and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for robinow syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "robinow-syndrome-real-image",
-   "title": "Robinow syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "robinow_syndrome-pathway",
+      "title": "Robinow syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a broad forehead",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive scoliosis from vertebral segmentation defects in recessive disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form, Skeletal survey to document mesomelic shortening, brachydactyly and vertebral/rib anomalies, Spinal radiographs and follow-up for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of robinow syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "robinow_syndrome-matrix",
+      "title": "Robinow syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A skeletal dysplasia characterised by a distinctive 'fetal face' with frontal bossing, hypertelorism, a short upturned nose and a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of ROR2 and of dominant genes (WNT5A, DVL1, DVL3) to define the form, Skeletal survey to document mesomelic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aarskog-Scott syndrome (FGD1, facial and genital features), Omodysplasia (mesomelic limb shortening), Other mesomelic dysplasias",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Orthopaedic management of mesomelic limb shortening, brachydactyly and limb deformity with bracing and corrective surgery as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing genital hypoplasia to a primary disorder of sex development and missing the syndromic diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for robinow syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "robinow_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of ROR2 and dominant genes (WNT5A, DVL1, DVL3)",
+          "cells": [
+            {
+              "text": "Form of disease: recessive ROR2 or dominant variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Mesomelic shortening, brachydactyly, vertebral and rib anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Segmentation defects and scoliosis in the recessive form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "robinow_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aarskog-Scott syndrome",
+          "cells": [
+            {
+              "text": "Facial and genital features overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omodysplasia",
+          "cells": [
+            {
+              "text": "Mesomelic limb shortening overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofrontonasal syndrome",
+          "cells": [
+            {
+              "text": "Hypertelorism; associated with EFNB1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "robinow_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Bracing and corrective surgery for mesomelic shortening, brachydactyly and limb deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surveillance",
+          "cells": [
+            {
+              "text": "Treatment of segmentation defects, rib anomalies and scoliosis, especially in the recessive ROR2 form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Hormonal treatment of genital hypoplasia, including androgen therapy for micropenis where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac review",
+          "cells": [
+            {
+              "text": "Where associated anomalies are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "robinow_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Robinow syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with mesomelic limb shortening and facial and genital hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (scoliosis, cardiac or renal anomaly, airway or feeding problems)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway, feeding or cardiac review in severely affected neonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ROR2 and dominant gene testing, skeletal survey, spine films, renal and cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a ROR2 variant found on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Aarskog-Scott, omodysplasia or other mesomelic dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Orthopaedic bracing and corrective surgery for limb deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spinal surveillance and treatment of scoliosis, especially in the recessive form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endocrine assessment; androgen therapy for micropenis where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and cardiac assessment for associated anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severely affected neonates can have airway or feeding difficulty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

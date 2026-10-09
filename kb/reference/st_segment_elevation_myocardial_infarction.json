@@ -1,191 +1,653 @@
 {
- "id": "st_segment_elevation_myocardial_infarction",
- "name": "ST-Segment Elevation Myocardial Infarction",
- "system": "Cardiovascular",
- "class": "non_infective",
- "chapter": 286,
- "page": 2113,
- "aliases": [
-  "STEMI",
-  "Acute ST-elevation MI",
-  "Q-wave myocardial infarction",
-  "Transmural myocardial infarction"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2113",
-  "clinicalPearls": [
-   "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or ruptured; slowly progressive high-grade stenoses less often cause STEMI because collaterals develop over time (Harrison 22e p.2113).",
-   "Plaques prone to disruption tend to have a large lipid core and a thin fibrous cap, yet fewer than 5% of such thin-capped fibroatheromas actually become the nidus for an acute MI during long-term follow-up (Harrison 22e p.2113).",
-   "Deep, visceral chest pain described as heavy, squeezing, or crushing, usually central and/or epigastric and lasting longer than angina, is the most common presentation; it may radiate to the arms, back, lower jaw, or neck but not below the umbilicus (Harrison 22e p.2114).",
-   "Pain is not universal: painless STEMI is more frequent in patients with diabetes mellitus and increases with age, and the event may instead present as sudden breathlessness, syncope, confusion, profound weakness, arrhythmia, peripheral embolism, or an unexplained fall in blood pressure (Harrison 22e p.2114).",
-   "Anterior infarction may produce sympathetic overactivity (tachycardia/hypertension), whereas inferior infarction may produce parasympathetic overactivity (bradycardia/hypotension) (Harrison 22e p.2114).",
-   "Substernal chest pain lasting more than 30 minutes combined with diaphoresis strongly suggests STEMI (Harrison 22e p.2114).",
-   "The 12-lead ECG is the pivotal triage tool: total epicardial coronary occlusion produces ST-segment elevation, and most patients presenting with ST elevation ultimately evolve Q waves (Harrison 22e p.2115).",
-   "Cardiac troponin T and I are the preferred biomarkers when measured with high-sensitivity assays and may rise to roughly 20-50 times the upper reference limit in classic MI, remaining elevated for at least 7-10 days after STEMI (Harrison 22e pp.2115-2116).",
-   "Because urgent reperfusion decisions rest on clinical and ECG findings, high-sensitivity troponin is of less immediate value in confirmed STEMI than in the broader chest-pain workup (Harrison 22e p.2116).",
-   "Wall-motion abnormalities on two-dimensional echocardiography are almost universal in STEMI and aid triage, but acute infarction cannot be distinguished from old scar or severe acute ischemia by echo alone (Harrison 22e p.2116).",
-   "The two major classes of complications determining prognosis in the primary-PCI era are electrical (arrhythmias) and mechanical (pump failure); most out-of-hospital STEMI deaths result from sudden ventricular fibrillation (Harrison 22e p.2117).",
-   "Temperature can rise up to 38 degrees C during the first week, and a nonspecific leukocytosis (often 12,000-15,000/microL) appears within hours and persists 3-7 days, with the ESR rising more slowly and peaking in the first week (Harrison 22e pp.2114, 2116)."
+  "id": "st_segment_elevation_myocardial_infarction",
+  "name": "ST-Segment Elevation Myocardial Infarction",
+  "system": "Cardiovascular",
+  "class": "non_infective",
+  "chapter": 286,
+  "page": 2113,
+  "aliases": [
+    "STEMI",
+    "Acute ST-elevation MI",
+    "Q-wave myocardial infarction",
+    "Transmural myocardial infarction"
   ],
-  "pathophysiology": "STEMI usually results from abrupt thrombotic occlusion of a coronary artery already affected by atherosclerosis. Vascular injury promoted by smoking, hypertension, lipid accumulation, and inflammation leads to disruption of an atherosclerotic plaque by erosion or rupture, exposing its contents to blood under conditions favoring thrombogenesis. A platelet monolayer forms first; agonists such as collagen, ADP, epinephrine, and serotonin activate platelets, releasing thromboxane A2 (a local vasoconstrictor) and converting the glycoprotein IIb/IIIa receptor to a high-affinity state that binds fibrinogen and cross-links platelets. Exposure of tissue factor activates the coagulation cascade (factors VII and X), generating thrombin, which converts fibrinogen to fibrin; an autoamplifying thrombin reaction culminates in an occlusive thrombus of platelet aggregates and fibrin. The extent of necrosis depends on the territory supplied, completeness and duration of occlusion, collateral supply, myocardial oxygen demand, endogenous thrombolysis, and adequacy of reperfusion. Microvascular dysfunction can produce no-reflow. Healing proceeds through acute (first hours-7 days), healing (7-28 days), and healed (29+ days) stages, with polymorphonuclear leukocytes then proinflammatory and reparative monocytes driving clearance, angiogenesis, extracellular matrix production, scar formation, and ventricular remodeling (Harrison 22e pp.2113-2116).",
-  "additionalDifferentials": [
-   "Acute pericarditis (radiation of discomfort to the trapezius favors pericarditis and is not seen in STEMI)",
-   "Pulmonary embolism",
-   "Acute aortic dissection",
-   "Costochondritis",
-   "Gastrointestinal disorders (the xiphoid/epigastric location can mimic indigestion)"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Acute pericarditis",
-   "Pulmonary embolism",
-   "Acute aortic dissection",
-   "Costochondritis",
-   "Esophageal and other gastrointestinal causes of chest pain",
-   "Type 2 MI from oxygen supply-demand imbalance unrelated to acute atherothrombosis"
-  ],
-  "additionalInvestigations": [
-   "Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves",
-   "Cardiac troponin T or I (high-sensitivity assays preferred); a rise and/or fall with at least one value above the 99th percentile upper reference limit defines myocardial injury/infarction",
-   "CK and CK-MB historically used; a CK-MB mass to CK activity relative index of 2.5 or greater suggests but is not diagnostic of myocardial origin, and CK-MB's rapid decline can help detect early reinfarction",
-   "Two-dimensional echocardiography for regional wall-motion abnormalities, LV function, RV infarction, ventricular aneurysm, pericardial effusion, LV thrombus, and Doppler detection of VSD and mitral regurgitation",
-   "Radionuclide myocardial perfusion imaging (e.g., 99mTc-sestamibi) shows a 'cold spot' but cannot distinguish acute infarct from chronic scar"
-  ],
-  "redFlags": [
-   "Sudden development of ventricular fibrillation, the leading cause of out-of-hospital STEMI death, with most such deaths occurring within the first 24 hours and over half within the first hour",
-   "Hypotension or unexplained drop in arterial pressure",
-   "Sudden loss of consciousness, confusional state, or profound weakness as an atypical STEMI presentation",
-   "New apical systolic murmur suggesting mitral valve apparatus dysfunction, a serious mechanical complication",
-   "Inferior infarction with elevated jugular venous pressure, clear lungs, and hypotension suggesting right ventricular infarction",
-   "Pericardial friction rub in transmural STEMI",
-   "Signs of pump failure / cardiogenic shock and mechanical complications such as ventricular septal defect"
-  ],
-  "prognosis": "About half of AMI-related deaths occur before the patient reaches the hospital. In-hospital mortality after admission for AMI has fallen from roughly 10% to about 5%, and the 1-year mortality after AMI is approximately 15%. Mortality is roughly fourfold higher in patients older than 75 years than in younger patients. Up to one-third of STEMI patients achieve spontaneous reperfusion of the infarct-related artery within 24 hours with improved healing. Outcome hinges largely on electrical (arrhythmic) and mechanical (pump failure) complications (Harrison 22e pp.2113, 2117).",
-  "pitfalls": [
-   "Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present only as dyspnea, syncope, or hypotension (Harrison 22e p.2114).",
-   "Misattributing xiphoid/epigastric pain to indigestion, compounded by the patient's own denial of a heart attack (Harrison 22e p.2114).",
-   "Older terms Q-wave/non-Q-wave and transmural/nontransmural MI correlate poorly with pathology and have been replaced by STEMI and NSTEMI; Q-wave development depends more on infarct volume than on transmurality (Harrison 22e p.2115).",
-   "Peak biomarker concentration correlates only weakly with infarct size, and early reperfusion causes earlier biomarker peaking from rapid washout, so peak levels should not be used to gauge infarct size (Harrison 22e p.2116).",
-   "Echocardiographic wall-motion abnormalities cannot distinguish acute STEMI from old scar or severe acute ischemia (Harrison 22e p.2116).",
-   "Radionuclide perfusion 'cold spots' cannot distinguish acute infarct from chronic scar, so they are not specific for acute MI (Harrison 22e p.2117)."
-  ],
-  "severityClassification": "Patients with prolonged ischemic discomfort are first classified as an acute coronary syndrome and triaged by the 12-lead ECG into ST-segment elevation versus no ST-segment elevation; biomarkers then separate unstable angina from NSTEMI. The Fourth Universal Definition of Myocardial Infarction classifies MI into five types: type 1 (atherothrombotic), type 2 (oxygen supply-demand imbalance unrelated to acute atherothrombosis), type 3 (cardiac death with presumed new ischemic ECG changes before troponin became available), type 4 (PCI-related, including 4a, 4b stent thrombosis, 4c restenosis), and type 5 (CABG-related). Procedure-related MI within 48 h is defined by troponin elevation greater than 5-fold (type 4a) or greater than 10-fold (type 5) the 99th percentile URL with additional ischemic criteria (Harrison 22e pp.2114, 2117-2118).",
-  "references": [
-   "Harrison 22e p.2113",
-   "Harrison 22e p.2114",
-   "Harrison 22e p.2115",
-   "Harrison 22e p.2116",
-   "Harrison 22e p.2117",
-   "Harrison 22e p.2118"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI is unavailable",
-   "Dual antiplatelet therapy (aspirin plus a P2Y12 inhibitor) with anticoagulation in the acute phase",
-   "Adjunctive medical therapy with beta-blockers, high-intensity statin and renin-angiotensin blockade, plus analgesia and supplemental oxygen only if hypoxaemic",
-   "Continuous cardiac monitoring with prompt treatment of arrhythmias and defibrillation for ventricular fibrillation",
-   "Recognise and manage complications including cardiogenic shock, heart failure and mechanical complications (ventricular septal defect, acute mitral regurgitation, free-wall rupture) with echocardiographic assessment",
-   "Secondary prevention with smoking cessation, risk-factor modification and cardiac rehabilitation",
-   "Long-term guideline-directed therapy with antiplatelet, statin, beta-blocker and renin-angiotensin blockade, and follow-up of left ventricular function"
-  ]
- },
- "algorithms": [
-  {
-   "id": "st_segment_elevation_myocardial_infarction-pathway",
-   "title": "ST-Segment Elevation Myocardial Infarction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or ruptured; slowly progressive high-grade stenoses less often cause STEMI because collaterals develop over time",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden development of ventricular fibrillation, the leading cause of out-of-hospital STEMI death, with most such deaths occurring within the first 24 hours and over half within the first hour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves, Cardiac troponin T or I (high-sensitivity assays preferred); a rise and/or fall with at least one value above the 99th percentile upper reference"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI is unavailable"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present only as dyspnea, syncope, or hypotension (Harrison 22e p.2114)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of st-segment elevation myocardial infarction."
-  }
- ],
- "tables": [
-  {
-   "id": "st_segment_elevation_myocardial_infarction-matrix",
-   "title": "ST-Segment Elevation Myocardial Infarction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2113",
+    "clinicalPearls": [
+      "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or ruptured; slowly progressive high-grade stenoses less often cause STEMI because collaterals develop over time (Harrison 22e p.2113).",
+      "Plaques prone to disruption tend to have a large lipid core and a thin fibrous cap, yet fewer than 5% of such thin-capped fibroatheromas actually become the nidus for an acute MI during long-term follow-up (Harrison 22e p.2113).",
+      "Deep, visceral chest pain described as heavy, squeezing, or crushing, usually central and/or epigastric and lasting longer than angina, is the most common presentation; it may radiate to the arms, back, lower jaw, or neck but not below the umbilicus (Harrison 22e p.2114).",
+      "Pain is not universal: painless STEMI is more frequent in patients with diabetes mellitus and increases with age, and the event may instead present as sudden breathlessness, syncope, confusion, profound weakness, arrhythmia, peripheral embolism, or an unexplained fall in blood pressure (Harrison 22e p.2114).",
+      "Anterior infarction may produce sympathetic overactivity (tachycardia/hypertension), whereas inferior infarction may produce parasympathetic overactivity (bradycardia/hypotension) (Harrison 22e p.2114).",
+      "Substernal chest pain lasting more than 30 minutes combined with diaphoresis strongly suggests STEMI (Harrison 22e p.2114).",
+      "The 12-lead ECG is the pivotal triage tool: total epicardial coronary occlusion produces ST-segment elevation, and most patients presenting with ST elevation ultimately evolve Q waves (Harrison 22e p.2115).",
+      "Cardiac troponin T and I are the preferred biomarkers when measured with high-sensitivity assays and may rise to roughly 20-50 times the upper reference limit in classic MI, remaining elevated for at least 7-10 days after STEMI (Harrison 22e pp.2115-2116).",
+      "Because urgent reperfusion decisions rest on clinical and ECG findings, high-sensitivity troponin is of less immediate value in confirmed STEMI than in the broader chest-pain workup (Harrison 22e p.2116).",
+      "Wall-motion abnormalities on two-dimensional echocardiography are almost universal in STEMI and aid triage, but acute infarction cannot be distinguished from old scar or severe acute ischemia by echo alone (Harrison 22e p.2116).",
+      "The two major classes of complications determining prognosis in the primary-PCI era are electrical (arrhythmias) and mechanical (pump failure); most out-of-hospital STEMI deaths result from sudden ventricular fibrillation (Harrison 22e p.2117).",
+      "Temperature can rise up to 38 degrees C during the first week, and a nonspecific leukocytosis (often 12,000-15,000/microL) appears within hours and persists 3-7 days, with the ESR rising more slowly and peaking in the first week (Harrison 22e pp.2114, 2116)."
     ],
-    [
-     "Key Investigations",
-     "Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves, Cardiac troponin T or I (high-sensitivity assays",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "STEMI usually results from abrupt thrombotic occlusion of a coronary artery already affected by atherosclerosis. Vascular injury promoted by smoking, hypertension, lipid accumulation, and inflammation leads to disruption of an atherosclerotic plaque by erosion or rupture, exposing its contents to blood under conditions favoring thrombogenesis. A platelet monolayer forms first; agonists such as collagen, ADP, epinephrine, and serotonin activate platelets, releasing thromboxane A2 (a local vasoconstrictor) and converting the glycoprotein IIb/IIIa receptor to a high-affinity state that binds fibrinogen and cross-links platelets. Exposure of tissue factor activates the coagulation cascade (factors VII and X), generating thrombin, which converts fibrinogen to fibrin; an autoamplifying thrombin reaction culminates in an occlusive thrombus of platelet aggregates and fibrin. The extent of necrosis depends on the territory supplied, completeness and duration of occlusion, collateral supply, myocardial oxygen demand, endogenous thrombolysis, and adequacy of reperfusion. Microvascular dysfunction can produce no-reflow. Healing proceeds through acute (first hours-7 days), healing (7-28 days), and healed (29+ days) stages, with polymorphonuclear leukocytes then proinflammatory and reparative monocytes driving clearance, angiogenesis, extracellular matrix production, scar formation, and ventricular remodeling (Harrison 22e pp.2113-2116).",
+    "additionalDifferentials": [
+      "Acute pericarditis (radiation of discomfort to the trapezius favors pericarditis and is not seen in STEMI)",
+      "Pulmonary embolism",
+      "Acute aortic dissection",
+      "Costochondritis",
+      "Gastrointestinal disorders (the xiphoid/epigastric location can mimic indigestion)"
     ],
-    [
-     "Primary Differentials",
-     "Acute pericarditis (radiation of discomfort to the trapezius favors pericarditis and is not seen in STEMI), Pulmonary embolism,",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Acute pericarditis",
+      "Pulmonary embolism",
+      "Acute aortic dissection",
+      "Costochondritis",
+      "Esophageal and other gastrointestinal causes of chest pain",
+      "Type 2 MI from oxygen supply-demand imbalance unrelated to acute atherothrombosis"
     ],
-    [
-     "Management Strategy",
-     "Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves",
+      "Cardiac troponin T or I (high-sensitivity assays preferred); a rise and/or fall with at least one value above the 99th percentile upper reference limit defines myocardial injury/infarction",
+      "CK and CK-MB historically used; a CK-MB mass to CK activity relative index of 2.5 or greater suggests but is not diagnostic of myocardial origin, and CK-MB's rapid decline can help detect early reinfarction",
+      "Two-dimensional echocardiography for regional wall-motion abnormalities, LV function, RV infarction, ventricular aneurysm, pericardial effusion, LV thrombus, and Doppler detection of VSD and mitral regurgitation",
+      "Radionuclide myocardial perfusion imaging (e.g., 99mTc-sestamibi) shows a 'cold spot' but cannot distinguish acute infarct from chronic scar"
     ],
-    [
-     "Clinical Pitfall",
-     "Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Sudden development of ventricular fibrillation, the leading cause of out-of-hospital STEMI death, with most such deaths occurring within the first 24 hours and over half within the first hour",
+      "Hypotension or unexplained drop in arterial pressure",
+      "Sudden loss of consciousness, confusional state, or profound weakness as an atypical STEMI presentation",
+      "New apical systolic murmur suggesting mitral valve apparatus dysfunction, a serious mechanical complication",
+      "Inferior infarction with elevated jugular venous pressure, clear lungs, and hypotension suggesting right ventricular infarction",
+      "Pericardial friction rub in transmural STEMI",
+      "Signs of pump failure / cardiogenic shock and mechanical complications such as ventricular septal defect"
+    ],
+    "prognosis": "About half of AMI-related deaths occur before the patient reaches the hospital. In-hospital mortality after admission for AMI has fallen from roughly 10% to about 5%, and the 1-year mortality after AMI is approximately 15%. Mortality is roughly fourfold higher in patients older than 75 years than in younger patients. Up to one-third of STEMI patients achieve spontaneous reperfusion of the infarct-related artery within 24 hours with improved healing. Outcome hinges largely on electrical (arrhythmic) and mechanical (pump failure) complications (Harrison 22e pp.2113, 2117).",
+    "pitfalls": [
+      "Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present only as dyspnea, syncope, or hypotension (Harrison 22e p.2114).",
+      "Misattributing xiphoid/epigastric pain to indigestion, compounded by the patient's own denial of a heart attack (Harrison 22e p.2114).",
+      "Older terms Q-wave/non-Q-wave and transmural/nontransmural MI correlate poorly with pathology and have been replaced by STEMI and NSTEMI; Q-wave development depends more on infarct volume than on transmurality (Harrison 22e p.2115).",
+      "Peak biomarker concentration correlates only weakly with infarct size, and early reperfusion causes earlier biomarker peaking from rapid washout, so peak levels should not be used to gauge infarct size (Harrison 22e p.2116).",
+      "Echocardiographic wall-motion abnormalities cannot distinguish acute STEMI from old scar or severe acute ischemia (Harrison 22e p.2116).",
+      "Radionuclide perfusion 'cold spots' cannot distinguish acute infarct from chronic scar, so they are not specific for acute MI (Harrison 22e p.2117)."
+    ],
+    "severityClassification": "Patients with prolonged ischemic discomfort are first classified as an acute coronary syndrome and triaged by the 12-lead ECG into ST-segment elevation versus no ST-segment elevation; biomarkers then separate unstable angina from NSTEMI. The Fourth Universal Definition of Myocardial Infarction classifies MI into five types: type 1 (atherothrombotic), type 2 (oxygen supply-demand imbalance unrelated to acute atherothrombosis), type 3 (cardiac death with presumed new ischemic ECG changes before troponin became available), type 4 (PCI-related, including 4a, 4b stent thrombosis, 4c restenosis), and type 5 (CABG-related). Procedure-related MI within 48 h is defined by troponin elevation greater than 5-fold (type 4a) or greater than 10-fold (type 5) the 99th percentile URL with additional ischemic criteria (Harrison 22e pp.2114, 2117-2118).",
+    "references": [
+      "Harrison 22e p.2113",
+      "Harrison 22e p.2114",
+      "Harrison 22e p.2115",
+      "Harrison 22e p.2116",
+      "Harrison 22e p.2117",
+      "Harrison 22e p.2118"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI is unavailable",
+      "Dual antiplatelet therapy (aspirin plus a P2Y12 inhibitor) with anticoagulation in the acute phase",
+      "Adjunctive medical therapy with beta-blockers, high-intensity statin and renin-angiotensin blockade, plus analgesia and supplemental oxygen only if hypoxaemic",
+      "Continuous cardiac monitoring with prompt treatment of arrhythmias and defibrillation for ventricular fibrillation",
+      "Recognise and manage complications including cardiogenic shock, heart failure and mechanical complications (ventricular septal defect, acute mitral regurgitation, free-wall rupture) with echocardiographic assessment",
+      "Secondary prevention with smoking cessation, risk-factor modification and cardiac rehabilitation",
+      "Long-term guideline-directed therapy with antiplatelet, statin, beta-blocker and renin-angiotensin blockade, and follow-up of left ventricular function"
     ]
-   ],
-   "caption": "Overview comparison matrix for st-segment elevation myocardial infarction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "st-segment-elevation-myocardial-infarction-real-image",
-   "title": "ST-Segment Elevation Myocardial Infarction: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "st_segment_elevation_myocardial_infarction-pathway",
+      "title": "ST-Segment Elevation Myocardial Infarction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or ruptured; slowly progressive high-grade stenoses less often cause STEMI because collaterals develop over time",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden development of ventricular fibrillation, the leading cause of out-of-hospital STEMI death, with most such deaths occurring within the first 24 hours and over half within the first hour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves, Cardiac troponin T or I (high-sensitivity assays preferred); a rise and/or fall with at least one value above the 99th percentile upper reference"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI is unavailable"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present only as dyspnea, syncope, or hypotension (Harrison 22e p.2114)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of st-segment elevation myocardial infarction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "st_segment_elevation_myocardial_infarction-matrix",
+      "title": "ST-Segment Elevation Myocardial Infarction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "STEMI typically arises when coronary flow drops abruptly after a thrombus forms over an atherosclerotic plaque that has eroded or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial 12-lead ECG to detect ST-segment elevation and evolution of Q waves, Cardiac troponin T or I (high-sensitivity assays",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute pericarditis (radiation of discomfort to the trapezius favors pericarditis and is not seen in STEMI), Pulmonary embolism,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate reperfusion by primary percutaneous coronary intervention as the preferred strategy, or fibrinolysis where timely PCI",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Equating absence of pain with absence of STEMI: painless infarction is common in diabetics and older patients and may present",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for st-segment elevation myocardial infarction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Myocardial Infarction, 2026",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "st_segment_elevation_myocardial_infarction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing STEMI",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ST elevation, most leads",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "1 mm or more in 2 contiguous leads",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Reciprocal depression supports"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, men 40 or older",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "2 mm or more",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Sex- and age-specific cut-off"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, men under 40",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "2.5 mm or more",
+              "op": ">=",
+              "value": 2.5
+            },
+            {
+              "text": "Sex- and age-specific cut-off"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "V2 to V3, women",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "1.5 mm or more",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Any age"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Posterior MI",
+          "cells": [
+            {
+              "text": "ST depression V1 to V3 not meeting criteria"
+            },
+            {
+              "text": "Record V7 to V9 for circumflex occlusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LBBB",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Concordant ST elevation, or over 5 mm discordant in 2 precordial leads",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "New LBBB alone is not a STEMI equivalent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-sensitivity troponin",
+          "cells": [
+            {
+              "text": "Above 99th percentile URL; repeat at 1 to 2 h"
+            },
+            {
+              "text": "{{hy:Never delay reperfusion waiting for troponin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Universal definition",
+          "cells": [
+            {
+              "text": "Rise or fall of troponin with one value above 99th percentile plus ischaemia"
+            },
+            {
+              "text": "Types 1 to 5"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st_segment_elevation_myocardial_infarction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic STEMI",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pericarditis",
+          "cells": [
+            {
+              "text": "Pain radiating to trapezius, positional; diffuse ST elevation"
+            },
+            {
+              "text": "ECG pattern, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Tearing pain to back, pulse or BP differential"
+            },
+            {
+              "text": "CT angiography before antithrombotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Pleuritic pain, hypoxia, right heart strain"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 MI",
+          "cells": [
+            {
+              "text": "Supply-demand imbalance without plaque rupture"
+            },
+            {
+              "text": "Clinical context, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal or gastric pain, costochondritis",
+          "cells": [
+            {
+              "text": "Epigastric or reproducible chest wall pain"
+            },
+            {
+              "text": "Normal serial ECG and troponin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "st_segment_elevation_myocardial_infarction-treatment",
+      "kind": "treatment",
+      "title": "Treating STEMI",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary PCI",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Preferred reperfusion"
+            },
+            {
+              "text": "Door-to-balloon under 90 min, under 120 min with transfer",
+              "op": "<",
+              "value": 90
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibrinolysis",
+          "cells": [
+            {
+              "text": "PCI not available within 90 to 120 min"
+            },
+            {
+              "text": "Door-to-needle 30 to 60 min; best within 3 h, benefit up to 12 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Angiography after fibrinolysis",
+          "cells": [
+            {
+              "text": "All lysed patients"
+            },
+            {
+              "text": "Within 2 to 24 h, or immediately if lysis fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "All, at once"
+            },
+            {
+              "text": "160 to 325 mg, non-enteric-coated, chewed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "P2Y12 inhibitor load",
+          "cells": [
+            {
+              "text": "With PCI"
+            },
+            {
+              "text": "Prasugrel 60 mg, ticagrelor 180 mg or clopidogrel 300 to 600 mg; DAPT up to 1 year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulant",
+          "cells": [
+            {
+              "text": "During PCI or after lysis"
+            },
+            {
+              "text": "LMWH, UFH or bivalirudin (bivalirudin if HIT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrate and morphine",
+          "cells": [
+            {
+              "text": "Ongoing pain"
+            },
+            {
+              "text": "Morphine 2 to 4 mg IV every 15 min as needed; may blunt P2Y12 effect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "Unless bradycardia, block, hypotension, asthma"
+            },
+            {
+              "text": "Most benefit in high-risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-intensity statin",
+          "cells": [
+            {
+              "text": "All, indefinitely"
+            },
+            {
+              "text": "Regardless of lipid levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACE inhibitor or ARB, MRA, SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "HF, LV dysfunction, diabetes, hypertension, CKD"
+            },
+            {
+              "text": "Secondary prevention"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Fibrinolytic contraindications were not listed in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "st_segment_elevation_myocardial_infarction-dx-mgmt",
+      "title": "Diagnosis and management of STEMI",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ischaemic chest pain or equivalent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "12-lead ECG within minutes; aspirin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "ST elevation meeting criteria or STEMI equivalent?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Manage as NSTE-ACS; serial troponin and ECG",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PCI achievable within 90 to 120 min?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Primary PCI with P2Y12 load and anticoagulant",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibrinolysis, door-to-needle 30 to 60 min",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Reperfusion achieved after lysis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rescue PCI immediately",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Angiography within 2 to 24 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "DAPT, beta-blocker, statin, ACE inhibitor; watch for shock",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

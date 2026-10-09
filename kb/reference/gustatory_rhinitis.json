@@ -1,167 +1,445 @@
 {
- "id": "gustatory_rhinitis",
- "name": "Gustatory rhinitis",
- "aliases": [
-  "food-induced rhinorrhoea"
- ],
- "class": "non_infective",
- "system": "Respiratory / Nose",
- "specialty": "Otolaryngology / Allergy",
- "referenceOnly": true,
- "reference": {
-  "source": "Rhinology and allergy reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
-   "It is a form of non-allergic rhinitis mediated by cholinergic reflexes rather than by allergy",
-   "Symptoms are predominantly clear nasal discharge without significant itch, sneezing or nasal blockage",
-   "It is more common in older adults and can be socially troublesome",
-   "There is no association with specific food allergy, and allergy testing is typically unnecessary",
-   "Pre-meal use of a topical anticholinergic nasal spray is effective for many patients"
+  "id": "gustatory_rhinitis",
+  "name": "Gustatory rhinitis",
+  "aliases": [
+    "food-induced rhinorrhoea"
   ],
-  "pathophysiology": "Gustatory rhinitis results from a vagally mediated cholinergic reflex in which the act of eating, particularly spicy or hot food, stimulates nasal glandular secretion. Afferent signals from the upper aerodigestive tract provoke parasympathetic efferent activity to the nasal mucosa, driving watery hypersecretion without an allergic or inflammatory basis. Because the mechanism is cholinergic, topical antimuscarinic therapy blocks the glandular response and controls the rhinorrhoea.",
-  "additionalDifferentials": [
-   "Allergic rhinitis",
-   "Other non-allergic rhinitis (vasomotor)",
-   "Cerebrospinal fluid rhinorrhoea",
-   "Sinonasal disease with postnasal drip",
-   "Medication-related rhinitis"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the clear temporal link to eating",
-   "Distinguishing it from allergic rhinitis by history and, if needed, allergy testing",
-   "Exclusion of cerebrospinal fluid rhinorrhoea when discharge is persistent or unilateral",
-   "Nasal examination to exclude structural or inflammatory disease",
-   "Review of medications contributing to rhinitis"
-  ],
-  "redFlags": [
-   "Unilateral clear discharge raising concern for cerebrospinal fluid leak",
-   "Associated bleeding, crusting or a mass",
-   "Systemic or neurological features",
-   "Failure to respond to appropriate anticholinergic therapy"
-  ],
-  "prognosis": "The condition is benign and readily controlled with pre-meal anticholinergic nasal spray and dietary awareness, though it tends to persist without treatment.",
-  "pitfalls": [
-   "Misdiagnosing it as food allergy and ordering unnecessary tests",
-   "Overlooking a cerebrospinal fluid leak when discharge is unilateral",
-   "Failing to offer effective topical anticholinergic treatment",
-   "Confusing it with other non-allergic rhinitis subtypes"
-  ],
-  "references": [
-   "Rhinology reference texts (standard reference)",
-   "Allergy reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex",
-   "Advise avoidance or limitation of trigger foods, particularly hot and spicy meals",
-   "Reassure the patient that the condition is benign and non-allergic, so allergy testing is generally unnecessary",
-   "Review and rationalise medications that may be contributing to rhinitis",
-   "Exclude cerebrospinal fluid rhinorrhoea when the discharge is persistent or unilateral",
-   "Refer to otolaryngology or allergy services if symptoms are refractory or the diagnosis is uncertain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gustatory_rhinitis-pathway",
-   "title": "Gustatory rhinitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral clear discharge raising concern for cerebrospinal fluid leak",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the clear temporal link to eating, Distinguishing it from allergic rhinitis by history and, if needed, allergy testing, Exclusion of cerebrospinal fluid rhinorrhoea when discharge is persistent or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as food allergy and ordering unnecessary tests"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gustatory rhinitis."
-  }
- ],
- "tables": [
-  {
-   "id": "gustatory_rhinitis-matrix",
-   "title": "Gustatory rhinitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Nose",
+  "specialty": "Otolaryngology / Allergy",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rhinology and allergy reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
+      "It is a form of non-allergic rhinitis mediated by cholinergic reflexes rather than by allergy",
+      "Symptoms are predominantly clear nasal discharge without significant itch, sneezing or nasal blockage",
+      "It is more common in older adults and can be socially troublesome",
+      "There is no association with specific food allergy, and allergy testing is typically unnecessary",
+      "Pre-meal use of a topical anticholinergic nasal spray is effective for many patients"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the clear temporal link to eating, Distinguishing it from allergic rhinitis by history and, if needed,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gustatory rhinitis results from a vagally mediated cholinergic reflex in which the act of eating, particularly spicy or hot food, stimulates nasal glandular secretion. Afferent signals from the upper aerodigestive tract provoke parasympathetic efferent activity to the nasal mucosa, driving watery hypersecretion without an allergic or inflammatory basis. Because the mechanism is cholinergic, topical antimuscarinic therapy blocks the glandular response and controls the rhinorrhoea.",
+    "additionalDifferentials": [
+      "Allergic rhinitis",
+      "Other non-allergic rhinitis (vasomotor)",
+      "Cerebrospinal fluid rhinorrhoea",
+      "Sinonasal disease with postnasal drip",
+      "Medication-related rhinitis"
     ],
-    [
-     "Primary Differentials",
-     "Allergic rhinitis, Other non-allergic rhinitis (vasomotor), Cerebrospinal fluid rhinorrhoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the clear temporal link to eating",
+      "Distinguishing it from allergic rhinitis by history and, if needed, allergy testing",
+      "Exclusion of cerebrospinal fluid rhinorrhoea when discharge is persistent or unilateral",
+      "Nasal examination to exclude structural or inflammatory disease",
+      "Review of medications contributing to rhinitis"
     ],
-    [
-     "Management Strategy",
-     "Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral clear discharge raising concern for cerebrospinal fluid leak",
+      "Associated bleeding, crusting or a mass",
+      "Systemic or neurological features",
+      "Failure to respond to appropriate anticholinergic therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as food allergy and ordering unnecessary tests",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and readily controlled with pre-meal anticholinergic nasal spray and dietary awareness, though it tends to persist without treatment.",
+    "pitfalls": [
+      "Misdiagnosing it as food allergy and ordering unnecessary tests",
+      "Overlooking a cerebrospinal fluid leak when discharge is unilateral",
+      "Failing to offer effective topical anticholinergic treatment",
+      "Confusing it with other non-allergic rhinitis subtypes"
+    ],
+    "references": [
+      "Rhinology reference texts (standard reference)",
+      "Allergy reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex",
+      "Advise avoidance or limitation of trigger foods, particularly hot and spicy meals",
+      "Reassure the patient that the condition is benign and non-allergic, so allergy testing is generally unnecessary",
+      "Review and rationalise medications that may be contributing to rhinitis",
+      "Exclude cerebrospinal fluid rhinorrhoea when the discharge is persistent or unilateral",
+      "Refer to otolaryngology or allergy services if symptoms are refractory or the diagnosis is uncertain"
     ]
-   ],
-   "caption": "Overview comparison matrix for gustatory rhinitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gustatory-rhinitis-real-image",
-   "title": "Gustatory rhinitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "gustatory_rhinitis-pathway",
+      "title": "Gustatory rhinitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral clear discharge raising concern for cerebrospinal fluid leak",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the clear temporal link to eating, Distinguishing it from allergic rhinitis by history and, if needed, allergy testing, Exclusion of cerebrospinal fluid rhinorrhoea when discharge is persistent or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as food allergy and ordering unnecessary tests"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gustatory rhinitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gustatory_rhinitis-matrix",
+      "title": "Gustatory rhinitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Profuse watery rhinorrhoea triggered soon after eating, especially hot and spicy foods",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the clear temporal link to eating, Distinguishing it from allergic rhinitis by history and, if needed,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Allergic rhinitis, Other non-allergic rhinitis (vasomotor), Cerebrospinal fluid rhinorrhoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use a pre-meal topical intranasal anticholinergic spray such as ipratropium bromide to block the cholinergic glandular reflex",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as food allergy and ordering unnecessary tests",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gustatory rhinitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rhinology and allergy reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gustatory_rhinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of temporal link to eating",
+          "cells": [
+            {
+              "text": "Clear link to eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy testing when needed",
+          "cells": [
+            {
+              "text": "Distinguishes from allergic rhinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for CSF rhinorrhoea",
+          "cells": [
+            {
+              "text": "Persistent or unilateral discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal examination",
+          "cells": [
+            {
+              "text": "Structural or inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Contributing drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gustatory_rhinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Allergy-driven; separated by history and testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid rhinorrhoea",
+          "cells": [
+            {
+              "text": "Unilateral clear discharge needs exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication-related rhinitis",
+          "cells": [
+            {
+              "text": "Drug-induced nasal discharge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gustatory_rhinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre-meal intranasal anticholinergic spray",
+          "cells": [
+            {
+              "text": "Ipratropium bromide to block the cholinergic glandular reflex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger food avoidance",
+          "cells": [
+            {
+              "text": "Hot and spicy meals in particular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and non-allergic; allergy testing generally unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication rationalisation",
+          "cells": [
+            {
+              "text": "Drugs contributing to rhinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude CSF leak",
+          "cells": [
+            {
+              "text": "When discharge is persistent or unilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Otolaryngology or allergy if refractory or uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gustatory_rhinitis-dx-mgmt",
+      "title": "Diagnosis and management of Gustatory rhinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gustatory rhinitis: clear nasal discharge triggered by eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unilateral clear discharge, bleeding, mass, neurological features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for unilateral clear discharge raising CSF leak concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical history, nasal examination and CSF leak assessment if discharge is unilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the discharge occur only with eating, with CSF leak excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic rhinitis, vasomotor rhinitis or CSF rhinorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pre-meal intranasal ipratropium to block the glandular reflex",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoidance of hot and spicy trigger foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassurance that the condition is benign and non-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and rationalise medications contributing to rhinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and readily controlled with pre-meal anticholinergic spray and dietary awareness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

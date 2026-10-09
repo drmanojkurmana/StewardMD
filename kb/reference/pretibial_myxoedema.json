@@ -1,178 +1,493 @@
 {
- "id": "pretibial_myxoedema",
- "name": "Pretibial myxoedema",
- "aliases": [
-  "Thyroid dermopathy",
-  "Localised myxoedema",
-  "Infiltrative dermopathy"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting infiltration of the skin, classically over the pretibial regions and dorsa of the feet.",
-   "Almost always occurs with markedly elevated TSH-receptor antibodies and is typically accompanied by Graves ophthalmopathy; it usually appears after the eye disease.",
-   "Despite the name, it is a localised mucinosis and is unrelated to the generalised myxoedema of hypothyroidism; most patients are or have been thyrotoxic.",
-   "Presents as waxy, skin-coloured to yellow-brown or violaceous plaques and nodules with a peau d'orange texture and prominent hair follicles; a diffuse non-pitting oedematous form also occurs.",
-   "Part of the triad with Graves ophthalmopathy and thyroid acropachy (clubbing and periosteal reaction); acropachy signals more severe extrathyroidal disease.",
-   "The Koebner phenomenon is relevant, with lesions favouring areas of trauma or dependency; the elephantiasic variant can be disfiguring and disabling.",
-   "Diagnosis is usually clinical in a patient with known Graves disease; biopsy shows abundant dermal mucin (glycosaminoglycans) separating collagen bundles.",
-   "Management centres on potent topical corticosteroids under occlusion and compression; smoking cessation and control of thyroid disease are important, though the dermopathy runs an independent course."
+  "id": "pretibial_myxoedema",
+  "name": "Pretibial myxoedema",
+  "aliases": [
+    "Thyroid dermopathy",
+    "Localised myxoedema",
+    "Infiltrative dermopathy"
   ],
-  "pathophysiology": "Pretibial myxoedema is an extrathyroidal manifestation of autoimmune thyroid disease driven by TSH-receptor autoantibodies. Fibroblasts in the dermis, particularly in the pretibial skin, express the TSH receptor, and stimulation by these autoantibodies, together with insulin-like growth factor-1 receptor signalling and cytokines released by infiltrating activated T lymphocytes, drives fibroblast proliferation and greatly increased synthesis of glycosaminoglycans, chiefly hyaluronic acid. These hydrophilic mucins accumulate in the reticular dermis, drawing in water, separating and fragmenting collagen bundles and producing the firm, non-pitting induration and characteristic plaques. Mechanical factors amplify the process: the dependent position of the lower legs, elevated hydrostatic pressure and local trauma (a Koebner effect) favour mucin deposition and lymphatic compromise in the pretibial region, explaining the anatomical predilection and the severe elephantiasic form. The shared autoimmune target accounts for its close association with Graves ophthalmopathy, where analogous fibroblast activation occurs in orbital tissue.",
-  "additionalDifferentials": [
-   "Chronic venous stasis dermatitis and stasis-related lipodermatosclerosis",
-   "Chronic lymphoedema and elephantiasis nostras",
-   "Hypertrophic lichen planus and lichen simplex chronicus",
-   "Necrobiosis lipoidica",
-   "Cutaneous mucinoses such as lichen myxoedematosus and scleromyxoedema",
-   "Erythema nodosum and other panniculitides",
-   "Pretibial cellulitis or chronic bacterial infection"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests with TSH-receptor antibody measurement",
-   "Skin biopsy demonstrating dermal mucin deposition with special stains for glycosaminoglycans",
-   "Assessment and imaging for associated Graves ophthalmopathy",
-   "Radiography of the hands to detect thyroid acropachy where suspected",
-   "Doppler studies to exclude venous insufficiency or lymphatic obstruction as alternative causes of lower-limb swelling",
-   "Antithyroid peroxidase and antithyroglobulin antibodies to support autoimmune thyroid disease"
-  ],
-  "redFlags": [
-   "Rapidly progressive elephantiasic swelling causing functional impairment or entrapment neuropathy",
-   "Ulceration or signs of secondary infection in indurated pretibial skin",
-   "Severe coexisting ophthalmopathy threatening vision requiring urgent specialist care",
-   "Diagnostic uncertainty where malignancy or an alternative infiltrative process cannot be excluded without biopsy"
-  ],
-  "prognosis": "Most cases are mild and either remain stable or improve gradually, sometimes remitting spontaneously over years, and respond partially to topical corticosteroids and compression. The elephantiasic and acropachy-associated forms are more refractory and can be persistently disfiguring and disabling.",
-  "pitfalls": [
-   "Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease",
-   "Expecting restoration of a euthyroid state to resolve the skin disease, which follows an independent course",
-   "Misdiagnosing indurated plaques as cellulitis and prescribing repeated antibiotics",
-   "Failing to counsel on smoking cessation, which worsens associated thyroid eye disease",
-   "Neglecting compression and Koebner-avoidance advice that influence lower-limb outcomes"
-  ],
-  "references": [
-   "Standard dermatology textbooks",
-   "Endocrinology and thyroid disease clinical guidelines",
-   "Peer-reviewed dermatology and endocrinology literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques",
-   "Use compression therapy and bandaging to counter dependent oedema and mechanical aggravation of the lower legs",
-   "Treat the underlying Graves disease and restore euthyroid status with antithyroid drugs, radioiodine, or thyroidectomy",
-   "Advise avoidance of local trauma given the Koebner phenomenon that provokes new lesions",
-   "For refractory or elephantiasic disease, consider intralesional corticosteroids or systemic immunomodulation such as rituximab or intravenous immunoglobulin",
-   "Co-manage associated Graves ophthalmopathy with ophthalmology",
-   "Monitor TSH-receptor antibody titres and clinical progression of the dermopathy",
-   "Refer to a combined endocrinology and dermatology service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pretibial_myxoedema-pathway",
-   "title": "Pretibial myxoedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting infiltration of the skin, classically over the pretibial regions and dorsa of the feet.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive elephantiasic swelling causing functional impairment or entrapment neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests with TSH-receptor antibody measurement, Skin biopsy demonstrating dermal mucin deposition with special stains for glycosaminoglycans, Assessment and imaging for associated Graves ophthalmopathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pretibial myxoedema."
-  }
- ],
- "tables": [
-  {
-   "id": "pretibial_myxoedema-matrix",
-   "title": "Pretibial myxoedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting infiltration of the skin, classically over the pretibial regions and dorsa of the feet.",
+      "Almost always occurs with markedly elevated TSH-receptor antibodies and is typically accompanied by Graves ophthalmopathy; it usually appears after the eye disease.",
+      "Despite the name, it is a localised mucinosis and is unrelated to the generalised myxoedema of hypothyroidism; most patients are or have been thyrotoxic.",
+      "Presents as waxy, skin-coloured to yellow-brown or violaceous plaques and nodules with a peau d'orange texture and prominent hair follicles; a diffuse non-pitting oedematous form also occurs.",
+      "Part of the triad with Graves ophthalmopathy and thyroid acropachy (clubbing and periosteal reaction); acropachy signals more severe extrathyroidal disease.",
+      "The Koebner phenomenon is relevant, with lesions favouring areas of trauma or dependency; the elephantiasic variant can be disfiguring and disabling.",
+      "Diagnosis is usually clinical in a patient with known Graves disease; biopsy shows abundant dermal mucin (glycosaminoglycans) separating collagen bundles.",
+      "Management centres on potent topical corticosteroids under occlusion and compression; smoking cessation and control of thyroid disease are important, though the dermopathy runs an independent course."
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests with TSH-receptor antibody measurement, Skin biopsy demonstrating dermal mucin deposition with special",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pretibial myxoedema is an extrathyroidal manifestation of autoimmune thyroid disease driven by TSH-receptor autoantibodies. Fibroblasts in the dermis, particularly in the pretibial skin, express the TSH receptor, and stimulation by these autoantibodies, together with insulin-like growth factor-1 receptor signalling and cytokines released by infiltrating activated T lymphocytes, drives fibroblast proliferation and greatly increased synthesis of glycosaminoglycans, chiefly hyaluronic acid. These hydrophilic mucins accumulate in the reticular dermis, drawing in water, separating and fragmenting collagen bundles and producing the firm, non-pitting induration and characteristic plaques. Mechanical factors amplify the process: the dependent position of the lower legs, elevated hydrostatic pressure and local trauma (a Koebner effect) favour mucin deposition and lymphatic compromise in the pretibial region, explaining the anatomical predilection and the severe elephantiasic form. The shared autoimmune target accounts for its close association with Graves ophthalmopathy, where analogous fibroblast activation occurs in orbital tissue.",
+    "additionalDifferentials": [
+      "Chronic venous stasis dermatitis and stasis-related lipodermatosclerosis",
+      "Chronic lymphoedema and elephantiasis nostras",
+      "Hypertrophic lichen planus and lichen simplex chronicus",
+      "Necrobiosis lipoidica",
+      "Cutaneous mucinoses such as lichen myxoedematosus and scleromyxoedema",
+      "Erythema nodosum and other panniculitides",
+      "Pretibial cellulitis or chronic bacterial infection"
     ],
-    [
-     "Primary Differentials",
-     "Chronic venous stasis dermatitis and stasis-related lipodermatosclerosis, Chronic lymphoedema and elephantiasis nostras,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests with TSH-receptor antibody measurement",
+      "Skin biopsy demonstrating dermal mucin deposition with special stains for glycosaminoglycans",
+      "Assessment and imaging for associated Graves ophthalmopathy",
+      "Radiography of the hands to detect thyroid acropachy where suspected",
+      "Doppler studies to exclude venous insufficiency or lymphatic obstruction as alternative causes of lower-limb swelling",
+      "Antithyroid peroxidase and antithyroglobulin antibodies to support autoimmune thyroid disease"
     ],
-    [
-     "Management Strategy",
-     "Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive elephantiasic swelling causing functional impairment or entrapment neuropathy",
+      "Ulceration or signs of secondary infection in indurated pretibial skin",
+      "Severe coexisting ophthalmopathy threatening vision requiring urgent specialist care",
+      "Diagnostic uncertainty where malignancy or an alternative infiltrative process cannot be excluded without biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases are mild and either remain stable or improve gradually, sometimes remitting spontaneously over years, and respond partially to topical corticosteroids and compression. The elephantiasic and acropachy-associated forms are more refractory and can be persistently disfiguring and disabling.",
+    "pitfalls": [
+      "Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease",
+      "Expecting restoration of a euthyroid state to resolve the skin disease, which follows an independent course",
+      "Misdiagnosing indurated plaques as cellulitis and prescribing repeated antibiotics",
+      "Failing to counsel on smoking cessation, which worsens associated thyroid eye disease",
+      "Neglecting compression and Koebner-avoidance advice that influence lower-limb outcomes"
+    ],
+    "references": [
+      "Standard dermatology textbooks",
+      "Endocrinology and thyroid disease clinical guidelines",
+      "Peer-reviewed dermatology and endocrinology literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques",
+      "Use compression therapy and bandaging to counter dependent oedema and mechanical aggravation of the lower legs",
+      "Treat the underlying Graves disease and restore euthyroid status with antithyroid drugs, radioiodine, or thyroidectomy",
+      "Advise avoidance of local trauma given the Koebner phenomenon that provokes new lesions",
+      "For refractory or elephantiasic disease, consider intralesional corticosteroids or systemic immunomodulation such as rituximab or intravenous immunoglobulin",
+      "Co-manage associated Graves ophthalmopathy with ophthalmology",
+      "Monitor TSH-receptor antibody titres and clinical progression of the dermopathy",
+      "Refer to a combined endocrinology and dermatology service"
     ]
-   ],
-   "caption": "Overview comparison matrix for pretibial myxoedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pretibial-myxoedema-real-image",
-   "title": "Pretibial myxoedema: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pretibial_myxoedema-pathway",
+      "title": "Pretibial myxoedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting infiltration of the skin, classically over the pretibial regions and dorsa of the feet.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive elephantiasic swelling causing functional impairment or entrapment neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests with TSH-receptor antibody measurement, Skin biopsy demonstrating dermal mucin deposition with special stains for glycosaminoglycans, Assessment and imaging for associated Graves ophthalmopathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pretibial myxoedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pretibial_myxoedema-matrix",
+      "title": "Pretibial myxoedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune deposition dermopathy, most often a manifestation of Graves disease, characterised by firm, non-pitting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests with TSH-receptor antibody measurement, Skin biopsy demonstrating dermal mucin deposition with special",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic venous stasis dermatitis and stasis-related lipodermatosclerosis, Chronic lymphoedema and elephantiasis nostras,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply potent topical corticosteroids, often under occlusion, as first-line therapy for infiltrated plaques",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the name with generalised hypothyroid myxoedema and overlooking the underlying Graves disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pretibial myxoedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pretibial_myxoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests with TSH-receptor antibody",
+          "cells": [
+            {
+              "text": "Thyroid status and TSH-receptor antibody level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with special stains",
+          "cells": [
+            {
+              "text": "Dermal mucin deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment and imaging for Graves ophthalmopathy",
+          "cells": [
+            {
+              "text": "Associated ophthalmopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiography of the hands",
+          "cells": [
+            {
+              "text": "Thyroid acropachy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler studies",
+          "cells": [
+            {
+              "text": "Venous insufficiency or lymphatic obstruction as alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithyroid peroxidase and antithyroglobulin antibodies",
+          "cells": [
+            {
+              "text": "Support for autoimmune thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pretibial_myxoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic lymphoedema and elephantiasis nostras",
+          "cells": [
+            {
+              "text": "Lymphatic obstruction"
+            },
+            {
+              "text": "Doppler studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous stasis dermatitis",
+          "cells": [
+            {
+              "text": "Venous insufficiency"
+            },
+            {
+              "text": "Doppler studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pretibial cellulitis or chronic bacterial infection",
+          "cells": [
+            {
+              "text": "Ulceration or signs of secondary infection"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pretibial_myxoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for infiltrated plaques, often under occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression and bandaging",
+          "cells": [
+            {
+              "text": "Dependent oedema and mechanical aggravation of the lower legs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat Graves disease",
+          "cells": [
+            {
+              "text": "Antithyroid drugs, radioiodine or thyroidectomy to restore euthyroid status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid local trauma",
+          "cells": [
+            {
+              "text": "Koebner phenomenon provokes new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or elephantiasic disease",
+          "cells": [
+            {
+              "text": "Intralesional corticosteroids, or systemic immunomodulation such as rituximab or intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmopathy",
+          "cells": [
+            {
+              "text": "Co-management with ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "TSH-receptor antibody titres and clinical progression of the dermopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Combined endocrinology and dermatology service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pretibial_myxoedema-dx-mgmt",
+      "title": "Diagnosis and management of Pretibial myxoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pretibial myxoedema: indurated shin plaques in Graves disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Elephantiasic swelling, ulceration, severe ophthalmopathy or uncertain diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for ophthalmopathy threatening vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid function and TSH-receptor antibody; skin biopsy; Doppler; hand X-ray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show dermal mucin in autoimmune thyroid disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude venous, lymphatic or infective causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical corticosteroids, often under occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Compression therapy and bandaging for dependent oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat Graves disease to restore euthyroid status",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Co-manage Graves ophthalmopathy with ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Combined endocrinology and dermatology care; monitor TSH-receptor antibody titres",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

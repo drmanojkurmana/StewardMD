@@ -1,173 +1,451 @@
 {
- "id": "superior_orbital_fissure_syndrome",
- "name": "Superior orbital fissure syndrome",
- "aliases": [
-  "Rochon-Duvigneaud syndrome",
-  "SOF syndrome",
-  "sphenoidal fissure syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the ophthalmic division of the trigeminal nerve",
-   "A fixed dilated pupil and ptosis may be present from third nerve involvement, and sympathetic fibres passing through can also be affected",
-   "Vision is characteristically spared because the optic nerve exits through the separate optic canal, not the fissure",
-   "Progression to include the optic nerve signals extension to the orbital apex (orbital apex syndrome)",
-   "The syndrome may follow trauma with fractures involving the fissure, or result from tumour or inflammation",
-   "Periorbital pain, proptosis, and reduced corneal sensation are common accompanying features",
-   "Careful assessment of vision distinguishes this from orbital apex syndrome and guides urgency"
+  "id": "superior_orbital_fissure_syndrome",
+  "name": "Superior orbital fissure syndrome",
+  "aliases": [
+    "Rochon-Duvigneaud syndrome",
+    "SOF syndrome",
+    "sphenoidal fissure syndrome"
   ],
-  "pathophysiology": "The superior orbital fissure is the cleft between the greater and lesser wings of the sphenoid that transmits the oculomotor, trochlear, and abducens nerves, the ophthalmic division of the trigeminal nerve, sympathetic fibres, and the superior ophthalmic vein. A lesion here compresses or infiltrates these structures to produce ophthalmoplegia, ptosis, a dilated pupil, and forehead sensory loss, while the optic nerve is spared because it passes through the adjacent optic canal. Causes include trauma, tumour, granulomatous inflammation, infection, and vascular lesions in the region.",
-  "additionalDifferentials": [
-   "Orbital apex syndrome with added optic neuropathy",
-   "Cavernous sinus syndrome",
-   "Tolosa-Hunt granulomatous inflammation",
-   "Orbital cellulitis",
-   "Thyroid eye disease with restrictive ophthalmoplegia",
-   "Idiopathic orbital inflammatory disease",
-   "Multiple ocular motor nerve palsies from other skull base pathology"
-  ],
-  "additionalInvestigations": [
-   "CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures",
-   "MRI of the orbit and cavernous sinus with contrast",
-   "Assessment of visual acuity and the afferent pupillary pathway to exclude apex involvement",
-   "Inflammatory markers and infection screen",
-   "Screening for tumour or metastatic disease where relevant",
-   "Trigeminal sensory testing to map the deficit"
-  ],
-  "redFlags": [
-   "Any decline in vision indicating extension to the orbital apex",
-   "Signs of orbital infection needing urgent treatment",
-   "A history of significant trauma with orbital fracture",
-   "Rapidly progressive cranial neuropathies suggesting tumour or aggressive inflammation"
-  ],
-  "prognosis": "Prognosis depends on the cause; traumatic and inflammatory cases may recover partially or fully with appropriate management, whereas neoplastic causes are more guarded, and some ophthalmoplegia and sensory loss can persist.",
-  "pitfalls": [
-   "Failing to check vision and thereby missing progression to orbital apex syndrome",
-   "Confusing it with cavernous sinus syndrome, which more often involves the maxillary trigeminal division and can cause a Horner syndrome",
-   "Overlooking a treatable inflammatory or infective cause",
-   "Attributing all findings to trauma without imaging the fissure"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for infection and oncological therapy for tumour",
-   "Undertake urgent surgical decompression when trauma with a fracture or haematoma compresses the fissure and produces a progressive deficit",
-   "Protect the cornea with lubricants and lid taping where corneal sensation is reduced, to prevent exposure keratopathy",
-   "Provide analgesia for periorbital pain",
-   "Monitor visual acuity and the afferent pupillary response to detect extension to the orbital apex",
-   "Refer for combined neurosurgery, ophthalmology, oncology and maxillofacial input according to the aetiology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "superior_orbital_fissure_syndrome-pathway",
-   "title": "Superior orbital fissure syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the ophthalmic division of the trigeminal nerve",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any decline in vision indicating extension to the orbital apex",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures, MRI of the orbit and cavernous sinus with contrast, Assessment of visual acuity and the afferent pupillary pathway to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for infection and oncological therapy for tumour"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to check vision and thereby missing progression to orbital apex syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of superior orbital fissure syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "superior_orbital_fissure_syndrome-matrix",
-   "title": "Superior orbital fissure syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the ophthalmic division of the trigeminal nerve",
+      "A fixed dilated pupil and ptosis may be present from third nerve involvement, and sympathetic fibres passing through can also be affected",
+      "Vision is characteristically spared because the optic nerve exits through the separate optic canal, not the fissure",
+      "Progression to include the optic nerve signals extension to the orbital apex (orbital apex syndrome)",
+      "The syndrome may follow trauma with fractures involving the fissure, or result from tumour or inflammation",
+      "Periorbital pain, proptosis, and reduced corneal sensation are common accompanying features",
+      "Careful assessment of vision distinguishes this from orbital apex syndrome and guides urgency"
     ],
-    [
-     "Key Investigations",
-     "CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures, MRI of the orbit and cavernous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The superior orbital fissure is the cleft between the greater and lesser wings of the sphenoid that transmits the oculomotor, trochlear, and abducens nerves, the ophthalmic division of the trigeminal nerve, sympathetic fibres, and the superior ophthalmic vein. A lesion here compresses or infiltrates these structures to produce ophthalmoplegia, ptosis, a dilated pupil, and forehead sensory loss, while the optic nerve is spared because it passes through the adjacent optic canal. Causes include trauma, tumour, granulomatous inflammation, infection, and vascular lesions in the region.",
+    "additionalDifferentials": [
+      "Orbital apex syndrome with added optic neuropathy",
+      "Cavernous sinus syndrome",
+      "Tolosa-Hunt granulomatous inflammation",
+      "Orbital cellulitis",
+      "Thyroid eye disease with restrictive ophthalmoplegia",
+      "Idiopathic orbital inflammatory disease",
+      "Multiple ocular motor nerve palsies from other skull base pathology"
     ],
-    [
-     "Primary Differentials",
-     "Orbital apex syndrome with added optic neuropathy, Cavernous sinus syndrome, Tolosa-Hunt granulomatous inflammation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures",
+      "MRI of the orbit and cavernous sinus with contrast",
+      "Assessment of visual acuity and the afferent pupillary pathway to exclude apex involvement",
+      "Inflammatory markers and infection screen",
+      "Screening for tumour or metastatic disease where relevant",
+      "Trigeminal sensory testing to map the deficit"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for",
-     "Core treatment modality"
+    "redFlags": [
+      "Any decline in vision indicating extension to the orbital apex",
+      "Signs of orbital infection needing urgent treatment",
+      "A history of significant trauma with orbital fracture",
+      "Rapidly progressive cranial neuropathies suggesting tumour or aggressive inflammation"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to check vision and thereby missing progression to orbital apex syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the cause; traumatic and inflammatory cases may recover partially or fully with appropriate management, whereas neoplastic causes are more guarded, and some ophthalmoplegia and sensory loss can persist.",
+    "pitfalls": [
+      "Failing to check vision and thereby missing progression to orbital apex syndrome",
+      "Confusing it with cavernous sinus syndrome, which more often involves the maxillary trigeminal division and can cause a Horner syndrome",
+      "Overlooking a treatable inflammatory or infective cause",
+      "Attributing all findings to trauma without imaging the fissure"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for infection and oncological therapy for tumour",
+      "Undertake urgent surgical decompression when trauma with a fracture or haematoma compresses the fissure and produces a progressive deficit",
+      "Protect the cornea with lubricants and lid taping where corneal sensation is reduced, to prevent exposure keratopathy",
+      "Provide analgesia for periorbital pain",
+      "Monitor visual acuity and the afferent pupillary response to detect extension to the orbital apex",
+      "Refer for combined neurosurgery, ophthalmology, oncology and maxillofacial input according to the aetiology"
     ]
-   ],
-   "caption": "Overview comparison matrix for superior orbital fissure syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "superior-orbital-fissure-syndrome-real-image",
-   "title": "Superior orbital fissure syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "superior_orbital_fissure_syndrome-pathway",
+      "title": "Superior orbital fissure syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the ophthalmic division of the trigeminal nerve",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any decline in vision indicating extension to the orbital apex",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures, MRI of the orbit and cavernous sinus with contrast, Assessment of visual acuity and the afferent pupillary pathway to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for infection and oncological therapy for tumour"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to check vision and thereby missing progression to orbital apex syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of superior orbital fissure syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "superior_orbital_fissure_syndrome-matrix",
+      "title": "Superior orbital fissure syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves with sensory loss in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the orbit and skull base, particularly after trauma, to assess the fissure and fractures, MRI of the orbit and cavernous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orbital apex syndrome with added optic neuropathy, Cavernous sinus syndrome, Tolosa-Hunt granulomatous inflammation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, using corticosteroids for granulomatous or inflammatory disease, antimicrobials for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to check vision and thereby missing progression to orbital apex syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for superior orbital fissure syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superior_orbital_fissure_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of orbit and skull base",
+          "cells": [
+            {
+              "text": "Fissure and fractures, especially after trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of orbit and cavernous sinus with contrast",
+          "cells": [
+            {
+              "text": "Tumour or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and afferent pupillary pathway",
+          "cells": [
+            {
+              "text": "Apex involvement excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and infection screen",
+          "cells": [
+            {
+              "text": "Infective or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigeminal sensory testing",
+          "cells": [
+            {
+              "text": "Maps the deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_orbital_fissure_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital apex syndrome",
+          "cells": [
+            {
+              "text": "Optic nerve involvement added to the picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavernous sinus syndrome",
+          "cells": [
+            {
+              "text": "Maxillary division and Horner syndrome favour it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tolosa-Hunt granulomatous inflammation",
+          "cells": [
+            {
+              "text": "Inflammatory cause of ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superior_orbital_fissure_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aetiology-directed treatment",
+          "cells": [
+            {
+              "text": "Corticosteroids for inflammation, antimicrobials, oncological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical decompression",
+          "cells": [
+            {
+              "text": "Trauma with fracture or haematoma and progressive deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal protection",
+          "cells": [
+            {
+              "text": "Lubricants and lid taping where corneal sensation is reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Periorbital pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual monitoring",
+          "cells": [
+            {
+              "text": "Detects extension to the orbital apex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Neurosurgery, ophthalmology, oncology and maxillofacial input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superior_orbital_fissure_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Superior orbital fissure syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ophthalmoplegia with trigeminal sensory loss: suspected superior orbital fissure syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (any visual decline, orbital infection, trauma with fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for visual decline, suggesting orbital apex extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT of orbit and skull base; MRI with contrast; visual acuity; inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ophthalmoplegia with sparing of vision confirmed on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orbital apex or cavernous sinus syndrome; check vision and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cause: steroids, antimicrobials or oncological therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent decompression for trauma with progressive deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corneal protection with lubricants and lid taping",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial visual acuity and pupil checks for apex extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision is usually spared; any visual decline needs urgent escalation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

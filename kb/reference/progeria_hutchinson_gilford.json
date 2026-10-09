@@ -1,175 +1,462 @@
 {
- "id": "progeria_hutchinson_gilford",
- "name": "Hutchinson-Gilford progeria syndrome",
- "aliases": [
-  "HGPS",
-  "progeria",
-  "LMNA",
-  "progerin"
- ],
- "class": "non_infective",
- "system": "Genetics / Immunology",
- "specialty": "Clinical Genetics / Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
-   "Infants appear normal at birth but develop failure to thrive and characteristic features within the first one to two years",
-   "Distinctive appearance includes alopecia, prominent scalp veins, micrognathia, a beaked nose, prominent eyes and loss of subcutaneous fat",
-   "Skeletal changes include delayed dentition, coxa valga, a horse-riding stance and progressive joint contractures with distal resorption (acro-osteolysis)",
-   "Intelligence is preserved, distinguishing it from many other progeroid conditions",
-   "Progressive severe atherosclerosis leads to myocardial infarction and stroke, the principal causes of death",
-   "Skin becomes sclerodermatous and mottled with pigmentary change over the trunk",
-   "Diagnosis is clinical and confirmed by molecular testing for the characteristic LMNA variant"
+  "id": "progeria_hutchinson_gilford",
+  "name": "Hutchinson-Gilford progeria syndrome",
+  "aliases": [
+    "HGPS",
+    "progeria",
+    "LMNA",
+    "progerin"
   ],
-  "pathophysiology": "Hutchinson-Gilford progeria syndrome is usually caused by a de novo point variant in LMNA that activates a cryptic splice site, producing progerin, a truncated lamin A that cannot be properly processed and remains farnesylated. Accumulation of progerin distorts the nuclear envelope, destabilises the nuclear lamina and disrupts chromatin organisation, DNA repair and mechanotransduction. This drives premature cellular senescence and, in vascular smooth muscle, accelerated atherosclerosis that dominates the clinical course.",
-  "additionalDifferentials": [
-   "Werner syndrome (adult progeria)",
-   "Mandibuloacral dysplasia",
-   "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
-   "Restrictive dermopathy and other laminopathies",
-   "Cockayne syndrome",
-   "Severe generalised lipodystrophy"
-  ],
-  "additionalInvestigations": [
-   "Targeted molecular testing for the recurrent LMNA variant",
-   "Echocardiography and vascular imaging for atherosclerotic and cardiac disease",
-   "Lipid profile and cardiovascular risk assessment",
-   "Skeletal survey for acro-osteolysis, coxa valga and joint contractures",
-   "Dental review for delayed and crowded dentition",
-   "Growth and nutritional monitoring"
-  ],
-  "redFlags": [
-   "Chest pain, syncope or other features of myocardial ischaemia",
-   "Focal neurological signs suggesting transient ischaemic attack or stroke",
-   "Rapidly worsening failure to thrive",
-   "Severe joint contractures compromising mobility and function"
-  ],
-  "prognosis": "The condition is progressive and life-limiting, with death typically in the second decade, most often from myocardial infarction or stroke secondary to accelerated atherosclerosis. Multidisciplinary supportive care and cardiovascular risk management are central, and disease-modifying therapy targeting protein farnesylation has been developed.",
-  "pitfalls": [
-   "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
-   "Underestimating cardiovascular risk in a young child and delaying cardiology involvement",
-   "Attributing early features to a non-syndromic failure to thrive",
-   "Overlooking the sclerodermatous skin as a diagnostic clue"
-  ],
-  "references": [
-   "GeneReviews (NCBI): Hutchinson-Gilford progeria syndrome",
-   "OMIM: Hutchinson-Gilford progeria syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
-   "Cardiovascular risk reduction with antiplatelet therapy and a statin, and active management of ischaemic heart disease and cerebrovascular events driven by accelerated atherosclerosis",
-   "Nutritional support for failure to thrive with frequent high-energy feeds and dietetic input",
-   "Physiotherapy and occupational therapy for joint contractures, with orthopaedic and podiatry care for coxa valga and other skeletal problems",
-   "Regular cardiology and vascular surveillance with echocardiography and vascular imaging, plus dental review for delayed and crowded dentition",
-   "Skin care, hydration and avoidance of trauma as part of general multidisciplinary supportive care",
-   "Genetic counselling for the family, noting most cases are sporadic de novo LMNA variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progeria_hutchinson_gilford-pathway",
-   "title": "Hutchinson-Gilford progeria syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Chest pain, syncope or other features of myocardial ischaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac disease, Lipid profile and cardiovascular risk assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hutchinson-gilford progeria syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "progeria_hutchinson_gilford-matrix",
-   "title": "Hutchinson-Gilford progeria syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Immunology",
+  "specialty": "Clinical Genetics / Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
+      "Infants appear normal at birth but develop failure to thrive and characteristic features within the first one to two years",
+      "Distinctive appearance includes alopecia, prominent scalp veins, micrognathia, a beaked nose, prominent eyes and loss of subcutaneous fat",
+      "Skeletal changes include delayed dentition, coxa valga, a horse-riding stance and progressive joint contractures with distal resorption (acro-osteolysis)",
+      "Intelligence is preserved, distinguishing it from many other progeroid conditions",
+      "Progressive severe atherosclerosis leads to myocardial infarction and stroke, the principal causes of death",
+      "Skin becomes sclerodermatous and mottled with pigmentary change over the trunk",
+      "Diagnosis is clinical and confirmed by molecular testing for the characteristic LMNA variant"
     ],
-    [
-     "Key Investigations",
-     "Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hutchinson-Gilford progeria syndrome is usually caused by a de novo point variant in LMNA that activates a cryptic splice site, producing progerin, a truncated lamin A that cannot be properly processed and remains farnesylated. Accumulation of progerin distorts the nuclear envelope, destabilises the nuclear lamina and disrupts chromatin organisation, DNA repair and mechanotransduction. This drives premature cellular senescence and, in vascular smooth muscle, accelerated atherosclerosis that dominates the clinical course.",
+    "additionalDifferentials": [
+      "Werner syndrome (adult progeria)",
+      "Mandibuloacral dysplasia",
+      "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+      "Restrictive dermopathy and other laminopathies",
+      "Cockayne syndrome",
+      "Severe generalised lipodystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Werner syndrome (adult progeria), Mandibuloacral dysplasia, Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted molecular testing for the recurrent LMNA variant",
+      "Echocardiography and vascular imaging for atherosclerotic and cardiac disease",
+      "Lipid profile and cardiovascular risk assessment",
+      "Skeletal survey for acro-osteolysis, coxa valga and joint contractures",
+      "Dental review for delayed and crowded dentition",
+      "Growth and nutritional monitoring"
     ],
-    [
-     "Management Strategy",
-     "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
-     "Core treatment modality"
+    "redFlags": [
+      "Chest pain, syncope or other features of myocardial ischaemia",
+      "Focal neurological signs suggesting transient ischaemic attack or stroke",
+      "Rapidly worsening failure to thrive",
+      "Severe joint contractures compromising mobility and function"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is progressive and life-limiting, with death typically in the second decade, most often from myocardial infarction or stroke secondary to accelerated atherosclerosis. Multidisciplinary supportive care and cardiovascular risk management are central, and disease-modifying therapy targeting protein farnesylation has been developed.",
+    "pitfalls": [
+      "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
+      "Underestimating cardiovascular risk in a young child and delaying cardiology involvement",
+      "Attributing early features to a non-syndromic failure to thrive",
+      "Overlooking the sclerodermatous skin as a diagnostic clue"
+    ],
+    "references": [
+      "GeneReviews (NCBI): Hutchinson-Gilford progeria syndrome",
+      "OMIM: Hutchinson-Gilford progeria syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
+      "Cardiovascular risk reduction with antiplatelet therapy and a statin, and active management of ischaemic heart disease and cerebrovascular events driven by accelerated atherosclerosis",
+      "Nutritional support for failure to thrive with frequent high-energy feeds and dietetic input",
+      "Physiotherapy and occupational therapy for joint contractures, with orthopaedic and podiatry care for coxa valga and other skeletal problems",
+      "Regular cardiology and vascular surveillance with echocardiography and vascular imaging, plus dental review for delayed and crowded dentition",
+      "Skin care, hydration and avoidance of trauma as part of general multidisciplinary supportive care",
+      "Genetic counselling for the family, noting most cases are sporadic de novo LMNA variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for hutchinson-gilford progeria syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progeria-hutchinson-gilford-real-image",
-   "title": "Hutchinson-Gilford progeria syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "progeria_hutchinson_gilford-pathway",
+      "title": "Hutchinson-Gilford progeria syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Chest pain, syncope or other features of myocardial ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac disease, Lipid profile and cardiovascular risk assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hutchinson-gilford progeria syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progeria_hutchinson_gilford-matrix",
+      "title": "Hutchinson-Gilford progeria syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Werner syndrome (adult progeria), Mandibuloacral dysplasia, Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hutchinson-gilford progeria syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progeria_hutchinson_gilford-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted molecular testing for the recurrent LMNA variant",
+          "cells": [
+            {
+              "text": "Recurrent LMNA variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and vascular imaging",
+          "cells": [
+            {
+              "text": "Atherosclerotic and cardiac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile and cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Acro-osteolysis, coxa valga and joint contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review",
+          "cells": [
+            {
+              "text": "Delayed and crowded dentition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional monitoring",
+          "cells": [
+            {
+              "text": "Growth and nutritional status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progeria_hutchinson_gilford-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Werner syndrome (adult progeria)",
+          "cells": [
+            {
+              "text": "Adult-onset progeroid syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+          "cells": [
+            {
+              "text": "Neonatal progeroid presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progeria_hutchinson_gilford-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lonafarnib",
+          "cells": [
+            {
+              "text": "Farnesyltransferase inhibitor that reduces progerin toxicity and improves survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk reduction",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy and a statin; active management of ischaemic heart and cerebrovascular events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Frequent high-energy feeds and dietetic input for failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joints and skeleton",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy; orthopaedic and podiatry care for coxa valga"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and vascular imaging; dental review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Skin care, hydration and avoidance of trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most cases are sporadic de novo LMNA variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progeria_hutchinson_gilford-dx-mgmt",
+      "title": "Diagnosis and management of Hutchinson-Gilford progeria syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Hutchinson-Gilford progeria: progeroid features and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Myocardial ischaemia, focal neurology, rapid growth failure or severe contractures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology or stroke review for ischaemic or cerebrovascular events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted LMNA testing; echo and vascular imaging; lipids; skeletal survey; growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does LMNA testing confirm the recurrent variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Werner syndrome, mandibuloacral dysplasia or other laminopathies; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lonafarnib, a farnesyltransferase inhibitor, to reduce progerin toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy and a statin for cardiovascular risk reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Frequent high-energy feeds and dietetic input for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and orthopaedic care for joint contractures and coxa valga",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Regular cardiology and vascular surveillance with dental and multidisciplinary review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,464 @@
 {
- "id": "eagle_syndrome",
- "name": "Eagle syndrome (elongated styloid)",
- "aliases": [
-  "stylohyoid syndrome",
-  "elongated styloid process syndrome",
-  "styloid-carotid artery syndrome"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Neurology",
- "specialty": "Otolaryngology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
-   "The classic (pharyngeal) form often follows tonsillectomy and produces pain aggravated by swallowing or turning the head",
-   "The vascular (styloid-carotid) form arises when the elongated process impinges on the carotid vessels, causing pain radiating along the artery and, rarely, transient neurological symptoms",
-   "A firm styloid tip may sometimes be palpated in the tonsillar fossa, reproducing the patient's pain",
-   "Diagnosis rests on demonstrating an elongated (over about 2.5-3 cm) or ossified styloid process/stylohyoid ligament, best shown on CT with three-dimensional reconstruction",
-   "Conservative options include analgesia, neuropathic agents, and local anaesthetic/steroid infiltration; surgical styloidectomy (transoral or transcervical) is definitive for refractory cases",
-   "Symptoms result from mechanical irritation of adjacent neurovascular structures rather than the mere presence of an elongated styloid, which is often incidental"
+  "id": "eagle_syndrome",
+  "name": "Eagle syndrome (elongated styloid)",
+  "aliases": [
+    "stylohyoid syndrome",
+    "elongated styloid process syndrome",
+    "styloid-carotid artery syndrome"
   ],
-  "pathophysiology": "Eagle syndrome results from an abnormally elongated styloid process or ossification/calcification of the stylohyoid ligament. The elongated bony spur, or the rigid ossified ligament, mechanically irritates adjacent structures during movement and swallowing. In the classic form it impinges on the pharyngeal mucosa and nearby cranial nerves (glossopharyngeal, trigeminal, facial), producing throat pain, dysphagia, and referred otalgia. In the vascular variant the process compresses or irritates the internal or external carotid artery and its periarterial sympathetic plexus, producing pain along the vessel and occasionally transient cerebral ischaemic symptoms. Elongation is common in the general population, so it is symptomatic only when it contacts and irritates these structures.",
-  "additionalDifferentials": [
-   "Glossopharyngeal neuralgia",
-   "Trigeminal neuralgia",
-   "Temporomandibular joint dysfunction",
-   "Chronic tonsillitis or peritonsillar pathology",
-   "Cervical spine or carotid artery disease",
-   "Pharyngeal or tongue-base malignancy",
-   "Migraine or cluster-type facial pain"
-  ],
-  "additionalInvestigations": [
-   "CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process",
-   "Panoramic dental radiography (orthopantomogram) as an initial screen for styloid elongation",
-   "Palpation of the tonsillar fossa to reproduce symptoms",
-   "Diagnostic local anaesthetic infiltration of the tonsillar fossa to confirm the pain source",
-   "CT or MR angiography of the carotid vessels when a vascular variant is suspected",
-   "Flexible laryngoscopy to exclude mucosal or neoplastic causes of throat pain"
-  ],
-  "redFlags": [
-   "Transient ischaemic or stroke-like symptoms suggesting carotid impingement (vascular Eagle syndrome)",
-   "Unilateral throat pain with a mucosal lesion or mass raising suspicion of malignancy",
-   "Progressive dysphagia or weight loss",
-   "Syncope associated with head turning"
-  ],
-  "prognosis": "The condition is benign but can be chronically disabling. Conservative measures relieve milder cases, while surgical shortening of the styloid process gives good long-term relief in appropriately selected patients; the rare vascular variant carries the additional risk of cerebrovascular events.",
-  "pitfalls": [
-   "Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient",
-   "Overlooking the vascular variant and its cerebrovascular risk",
-   "Attributing symptoms to Eagle syndrome without excluding pharyngeal malignancy",
-   "Confusing the pain with glossopharyngeal or trigeminal neuralgia and missing the mechanical cause",
-   "Relying on plain radiographs alone, which under-characterise the styloid"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain",
-   "Offer local anaesthetic and corticosteroid infiltration of the tonsillar fossa for both diagnostic confirmation and symptom relief",
-   "Perform surgical styloidectomy by a transoral or transcervical approach to shorten the elongated styloid process in refractory cases",
-   "Reassure and manage conservatively where symptoms from elongation are mild",
-   "In the vascular styloid-carotid variant, obtain carotid vascular imaging and consider prompt surgical decompression given the risk of cerebrovascular events",
-   "Refer within an otolaryngology and neurology multidisciplinary framework and exclude mucosal or neoplastic causes of throat pain",
-   "Escalate urgently if transient neurological symptoms suggest carotid impingement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eagle_syndrome-pathway",
-   "title": "Eagle syndrome (elongated styloid): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Transient ischaemic or stroke-like symptoms suggesting carotid impingement (vascular Eagle syndrome)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process, Panoramic dental radiography (orthopantomogram) as an initial screen for styloid elongation, Palpation of the tonsillar"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eagle syndrome (elongated styloid)."
-  }
- ],
- "tables": [
-  {
-   "id": "eagle_syndrome-matrix",
-   "title": "Eagle syndrome (elongated styloid): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Neurology",
+  "specialty": "Otolaryngology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
+      "The classic (pharyngeal) form often follows tonsillectomy and produces pain aggravated by swallowing or turning the head",
+      "The vascular (styloid-carotid) form arises when the elongated process impinges on the carotid vessels, causing pain radiating along the artery and, rarely, transient neurological symptoms",
+      "A firm styloid tip may sometimes be palpated in the tonsillar fossa, reproducing the patient's pain",
+      "Diagnosis rests on demonstrating an elongated (over about 2.5-3 cm) or ossified styloid process/stylohyoid ligament, best shown on CT with three-dimensional reconstruction",
+      "Conservative options include analgesia, neuropathic agents, and local anaesthetic/steroid infiltration; surgical styloidectomy (transoral or transcervical) is definitive for refractory cases",
+      "Symptoms result from mechanical irritation of adjacent neurovascular structures rather than the mere presence of an elongated styloid, which is often incidental"
     ],
-    [
-     "Key Investigations",
-     "CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process, Panoramic dental",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eagle syndrome results from an abnormally elongated styloid process or ossification/calcification of the stylohyoid ligament. The elongated bony spur, or the rigid ossified ligament, mechanically irritates adjacent structures during movement and swallowing. In the classic form it impinges on the pharyngeal mucosa and nearby cranial nerves (glossopharyngeal, trigeminal, facial), producing throat pain, dysphagia, and referred otalgia. In the vascular variant the process compresses or irritates the internal or external carotid artery and its periarterial sympathetic plexus, producing pain along the vessel and occasionally transient cerebral ischaemic symptoms. Elongation is common in the general population, so it is symptomatic only when it contacts and irritates these structures.",
+    "additionalDifferentials": [
+      "Glossopharyngeal neuralgia",
+      "Trigeminal neuralgia",
+      "Temporomandibular joint dysfunction",
+      "Chronic tonsillitis or peritonsillar pathology",
+      "Cervical spine or carotid artery disease",
+      "Pharyngeal or tongue-base malignancy",
+      "Migraine or cluster-type facial pain"
     ],
-    [
-     "Primary Differentials",
-     "Glossopharyngeal neuralgia, Trigeminal neuralgia, Temporomandibular joint dysfunction",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process",
+      "Panoramic dental radiography (orthopantomogram) as an initial screen for styloid elongation",
+      "Palpation of the tonsillar fossa to reproduce symptoms",
+      "Diagnostic local anaesthetic infiltration of the tonsillar fossa to confirm the pain source",
+      "CT or MR angiography of the carotid vessels when a vascular variant is suspected",
+      "Flexible laryngoscopy to exclude mucosal or neoplastic causes of throat pain"
     ],
-    [
-     "Management Strategy",
-     "Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Transient ischaemic or stroke-like symptoms suggesting carotid impingement (vascular Eagle syndrome)",
+      "Unilateral throat pain with a mucosal lesion or mass raising suspicion of malignancy",
+      "Progressive dysphagia or weight loss",
+      "Syncope associated with head turning"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but can be chronically disabling. Conservative measures relieve milder cases, while surgical shortening of the styloid process gives good long-term relief in appropriately selected patients; the rare vascular variant carries the additional risk of cerebrovascular events.",
+    "pitfalls": [
+      "Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient",
+      "Overlooking the vascular variant and its cerebrovascular risk",
+      "Attributing symptoms to Eagle syndrome without excluding pharyngeal malignancy",
+      "Confusing the pain with glossopharyngeal or trigeminal neuralgia and missing the mechanical cause",
+      "Relying on plain radiographs alone, which under-characterise the styloid"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain",
+      "Offer local anaesthetic and corticosteroid infiltration of the tonsillar fossa for both diagnostic confirmation and symptom relief",
+      "Perform surgical styloidectomy by a transoral or transcervical approach to shorten the elongated styloid process in refractory cases",
+      "Reassure and manage conservatively where symptoms from elongation are mild",
+      "In the vascular styloid-carotid variant, obtain carotid vascular imaging and consider prompt surgical decompression given the risk of cerebrovascular events",
+      "Refer within an otolaryngology and neurology multidisciplinary framework and exclude mucosal or neoplastic causes of throat pain",
+      "Escalate urgently if transient neurological symptoms suggest carotid impingement"
     ]
-   ],
-   "caption": "Overview comparison matrix for eagle syndrome (elongated styloid)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eagle-syndrome-real-image",
-   "title": "Eagle syndrome (elongated styloid): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "eagle_syndrome-pathway",
+      "title": "Eagle syndrome (elongated styloid): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Transient ischaemic or stroke-like symptoms suggesting carotid impingement (vascular Eagle syndrome)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process, Panoramic dental radiography (orthopantomogram) as an initial screen for styloid elongation, Palpation of the tonsillar"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eagle syndrome (elongated styloid)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eagle_syndrome-matrix",
+      "title": "Eagle syndrome (elongated styloid): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent throat and neck pain, a foreign-body or globus sensation, pain on swallowing, and referred otalgia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the neck with three-dimensional reconstruction to measure and characterise the styloid process, Panoramic dental",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glossopharyngeal neuralgia, Trigeminal neuralgia, Temporomandibular joint dysfunction",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with conservative therapy using simple analgesia and neuropathic agents for the throat and neck pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an incidentally elongated styloid seen on imaging in an asymptomatic patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eagle syndrome (elongated styloid)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eagle_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the neck with three-dimensional reconstruction",
+          "cells": [
+            {
+              "text": "Length and shape of the styloid process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Panoramic dental radiograph",
+          "cells": [
+            {
+              "text": "Initial screen for styloid elongation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpation of the tonsillar fossa",
+          "cells": [
+            {
+              "text": "Reproduces the symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic local anaesthetic infiltration of the tonsillar fossa",
+          "cells": [
+            {
+              "text": "Confirms the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography of the carotid vessels",
+          "cells": [
+            {
+              "text": "Vascular styloid-carotid variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eagle_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Glossopharyngeal or trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Neuralgic pain without a mechanical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharyngeal or tongue-base malignancy",
+          "cells": [
+            {
+              "text": "Unilateral throat pain with mucosal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporomandibular joint dysfunction",
+          "cells": [
+            {
+              "text": "Jaw and facial pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eagle_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative therapy",
+          "cells": [
+            {
+              "text": "Simple analgesia and neuropathic agents for throat and neck pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillar fossa infiltration",
+          "cells": [
+            {
+              "text": "Local anaesthetic and corticosteroid for diagnosis and relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Styloidectomy",
+          "cells": [
+            {
+              "text": "Transoral or transcervical shortening in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild symptoms",
+          "cells": [
+            {
+              "text": "Reassurance and conservative management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular variant",
+          "cells": [
+            {
+              "text": "Carotid imaging and prompt surgical decompression given cerebrovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Otolaryngology and neurology; exclude mucosal or neoplastic causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eagle_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Eagle syndrome (elongated styloid)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Eagle syndrome: throat pain on swallowing or turning the head",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transient ischaemic symptoms, mucosal mass, progressive dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and carotid review for transient ischaemic or stroke-like symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT neck with 3D reconstruction; panoramic film; tonsillar fossa anaesthetic test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does tonsillar fossa anaesthetic infiltration relieve the pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neuralgias, temporomandibular dysfunction or pharyngeal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia and neuropathic agents for throat and neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tonsillar fossa local anaesthetic and corticosteroid infiltration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transoral or transcervical styloidectomy for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carotid imaging and prompt decompression for the vascular variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude mucosal or neoplastic causes of throat pain by laryngoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but can be disabling; surgical shortening gives good relief in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

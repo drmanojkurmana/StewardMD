@@ -226,25 +226,608 @@
       "caption": "Diagnostic and clinical overview matrix for acute leukaemia."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "acute-leukemia-real-image",
-      "title": "Acute leukaemia: Diagnostic Imaging Evaluation",
-      "type": "xray",
-      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Myeloid Leukemia",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/leukemias/acute-myeloid-leukemia-aml",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e21-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_leukemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute leukaemia and its emergencies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cardiothoracic Ratio",
-          "description": "Heart size, mediastinal width, and great vessel contours."
+          "parameter": "Blood smear",
+          "cells": [
+            {
+              "text": "Manual review for blasts and Auer rods"
+            },
+            {
+              "text": "{{hy:Auer rods confirm myeloid lineage}}; automated counts can miss blasts"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Visceral Fields",
-          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+          "parameter": "Blasts in marrow or blood",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">=20% blasts",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "AML"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Bony Thorax & Soft Tissues",
-          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+          "parameter": "Blasts in marrow or blood",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10% to 19% blasts",
+              "range": [
+                10,
+                19
+              ]
+            },
+            {
+              "text": "MDS/AML"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defining genetic lesions",
+          "cells": [
+            {
+              "text": "t(15;17), t(8;21), inv(16), NPM1 mutation"
+            },
+            {
+              "text": "AML diagnosed regardless of blast percent (WHO 2022)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and biopsy",
+          "cells": [
+            {
+              "text": "Morphology, flow cytometry, cytogenetics, molecular panel"
+            },
+            {
+              "text": "Separates AML from ALL and sets prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presenting WBC in AML",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Median about 15,000; 20% above 100,000"
+            },
+            {
+              "text": "Under 5% have no circulating blasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperleukocytosis",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Blasts >100,000/uL",
+              "op": ">",
+              "value": 100000
+            },
+            {
+              "text": "Leukostasis risk in brain and lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation: PT, aPTT, fibrinogen, D-dimer",
+          "cells": [
+            {
+              "text": "DIC pattern"
+            },
+            {
+              "text": "Suspect APL (PML-RARA)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uric acid, K, phosphate, calcium, creatinine, LDH",
+          "cells": [
+            {
+              "text": "Rising values"
+            },
+            {
+              "text": "Tumour lysis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF in ALL",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": ">=5 cells/uL or blasts seen",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "CNS leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture safety",
+          "unit": "x10^9/L",
+          "cells": [
+            {
+              "text": "Defer if platelets <20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Or if actively bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete remission",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Marrow blasts <5%",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "With ANC >1000/uL, platelets >100,000/uL, no transfusions"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_leukemia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute leukaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aplastic anaemia",
+          "cells": [
+            {
+              "text": "Pancytopenia with hypocellular marrow and no blasts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Viral infection, such as infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Atypical lymphocytes, not blasts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamin B12 or folate deficiency",
+          "cells": [
+            {
+              "text": "Megaloblastic marrow, low vitamin levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leukemoid reaction",
+          "cells": [
+            {
+              "text": "WBC >50,000/uL from a normal marrow; never high blast counts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome or MPN",
+          "cells": [
+            {
+              "text": "Antecedent marrow disorder; blasts below AML threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AML versus ALL",
+          "cells": [
+            {
+              "text": "{{hy:Auer rods, cytochemistry and flow immunophenotype}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_leukemia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute myeloid leukaemia and supportive care",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "7+3 induction",
+          "cells": [
+            {
+              "text": "Fit patients with non-APL AML"
+            },
+            {
+              "text": "Cytarabine infusion for 7 days plus daunorubicin or idarubicin for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tretinoin plus arsenic trioxide",
+          "cells": [
+            {
+              "text": "{{hy:Low- and intermediate-risk APL}}"
+            },
+            {
+              "text": "No cytotoxic chemotherapy; tretinoin corrects DIC in 2 to 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose cytarabine consolidation",
+          "cells": [
+            {
+              "text": "Favourable-risk AML in first remission"
+            },
+            {
+              "text": "Especially under 60 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Intermediate or adverse risk in first remission"
+            },
+            {
+              "text": "Needs adequate performance status and organ function"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venetoclax plus azacitidine",
+          "cells": [
+            {
+              "text": "Age >=75 or unfit for intensive induction"
+            },
+            {
+              "text": "Higher remission and survival than azacitidine alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Prophylactic below 10,000/uL",
+              "op": "<",
+              "value": 10000
+            },
+            {
+              "text": "Any bleeding justifies transfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Hb <7 to 8 g/dL",
+              "op": "<",
+              "value": 8
+            },
+            {
+              "text": "Avoid in hyperleukocytosis where possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Broad-spectrum antibiotics",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Fever with neutrophils <500/uL",
+              "op": "<",
+              "value": 500
+            },
+            {
+              "text": "Ceftazidime, piperacillin-tazobactam or meropenem"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydration with allopurinol or rasburicase",
+          "cells": [
+            {
+              "text": "Tumour lysis prophylaxis"
+            },
+            {
+              "text": "Urinary alkalinisation no longer recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acyclovir or valacyclovir, posaconazole",
+          "cells": [
+            {
+              "text": "Antiviral prophylaxis for all; posaconazole if high fungal risk"
+            },
+            {
+              "text": "Prophylaxis during neutropenia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug doses are not stated in the source opened. ALL-specific regimens are not covered (needs-source)."
+    },
+    {
+      "id": "acute_leukemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Conditions associated with a dry tap",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Share of dry taps"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic carcinoma infiltration",
+          "cells": [
+            {
+              "text": "17%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "15%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelofibrosis",
+          "cells": [
+            {
+              "text": "14%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hairy cell leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphomas, Hodgkin's disease",
+          "cells": [
+            {
+              "text": "9%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Normal marrow",
+          "cells": [
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Dry taps occur in about 4% of aspiration attempts."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_leukemia-dx-mgmt",
+      "title": "Diagnosis and initial management of acute leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cytopenias, fever, bleeding or blasts on count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Manual smear, coagulation screen, tumour lysis bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "DIC or features of APL?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start tretinoin at once; correct coagulopathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Blasts >100,000/uL or leukostasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Emergency cytoreduction; avoid red cells and dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Marrow: morphology, flow, cytogenetics, molecular",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Fit for intensive therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "7+3 induction, then consolidation or transplant by risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Venetoclax plus azacitidine",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

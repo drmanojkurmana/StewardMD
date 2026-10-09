@@ -1,173 +1,453 @@
 {
- "id": "ear_barotrauma",
- "name": "Ear barotrauma",
- "aliases": [
-  "middle ear barotrauma",
-  "barotitis media",
-  "aerotitis",
-  "ear squeeze"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding environment, classically during descent",
-   "On descent, failure to equalise creates a relative negative middle-ear pressure (an ear squeeze) that draws the tympanic membrane inward, causing pain, fullness, and sometimes bleeding or rupture",
-   "Presents with ear pain, a blocked sensation, conductive hearing loss, and occasionally vertigo or tinnitus",
-   "Otoscopy is central to diagnosis and may show retraction, congestion, haemorrhage behind the drum, or perforation, graded by severity",
-   "Inner ear barotrauma is a more serious variant causing sensorineural hearing loss, tinnitus, and vertigo, and warrants urgent specialist assessment",
-   "Prevention relies on gentle, early, and frequent equalisation manoeuvres and not diving with upper respiratory congestion",
-   "Divers should never force descent against an ear that will not equalise"
+  "id": "ear_barotrauma",
+  "name": "Ear barotrauma",
+  "aliases": [
+    "middle ear barotrauma",
+    "barotitis media",
+    "aerotitis",
+    "ear squeeze"
   ],
-  "pathophysiology": "The middle ear is a rigid, air-filled space that depends on the Eustachian tube to equalise its pressure with the environment. During descent the ambient pressure rises rapidly and, if the Eustachian tube does not open to admit air, the middle-ear pressure becomes relatively negative. This pressure gradient retracts and congests the tympanic membrane and middle-ear mucosa, causing oedema, haemorrhage, and, if severe, rupture of the drum. Round or oval window disruption can extend the injury to the inner ear, producing sensorineural hearing loss and vertigo.",
-  "additionalDifferentials": [
-   "Sinus barotrauma",
-   "Inner ear barotrauma or perilymph fistula",
-   "Inner ear decompression sickness",
-   "Alternobaric vertigo",
-   "Acute otitis media or externa",
-   "Temporomandibular joint dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma",
-   "Assessment of hearing, distinguishing conductive from sensorineural loss",
-   "Tuning fork tests and formal audiometry where hearing loss is present",
-   "Review of the dive profile and equalisation history",
-   "Urgent specialist (ENT) referral and vestibular assessment if inner ear injury is suspected"
-  ],
-  "redFlags": [
-   "Sensorineural hearing loss, persistent vertigo, or tinnitus suggesting inner ear barotrauma",
-   "Tympanic membrane rupture, especially with cold water causing caloric vertigo",
-   "Symptoms suggesting inner ear decompression sickness rather than barotrauma",
-   "Signs of secondary infection of the middle ear"
-  ],
-  "prognosis": "Most middle-ear barotrauma resolves over days to a couple of weeks with conservative care, and small perforations often heal spontaneously; inner ear barotrauma has a more guarded outlook, with hearing recovery dependent on prompt recognition and management.",
-  "pitfalls": [
-   "Forcing descent or aggressive equalisation, worsening the injury",
-   "Missing inner ear barotrauma by attributing vertigo and hearing loss to the middle ear",
-   "Confusing inner ear barotrauma with inner ear decompression sickness, which differ in management",
-   "Allowing diving to continue with upper respiratory congestion"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed",
-   "Relieve nasal and Eustachian congestion with decongestants, intranasal corticosteroids and treatment of allergic rhinitis to aid equalisation",
-   "Allow small tympanic membrane perforations to heal spontaneously, keeping the ear dry and avoiding water entry",
-   "Reserve antibiotics for secondary infection or a contaminated perforation rather than routine use",
-   "Refer urgently to otolaryngology for suspected inner-ear barotrauma with sensorineural hearing loss or vertigo, avoiding further pressure changes and considering exploratory surgery for a perilymph fistula",
-   "Counsel on prevention with gentle, early and frequent equalisation manoeuvres and not diving with upper respiratory congestion",
-   "Arrange audiometry and vestibular assessment where hearing loss or vertigo is present"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ear_barotrauma-pathway",
-   "title": "Ear barotrauma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding environment, classically during descent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sensorineural hearing loss, persistent vertigo, or tinnitus suggesting inner ear barotrauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma, Assessment of hearing, distinguishing conductive from sensorineural loss, Tuning fork tests and formal audiometry where hearing loss is present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Forcing descent or aggressive equalisation, worsening the injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ear barotrauma."
-  }
- ],
- "tables": [
-  {
-   "id": "ear_barotrauma-matrix",
-   "title": "Ear barotrauma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding environment, classically during descent",
+      "On descent, failure to equalise creates a relative negative middle-ear pressure (an ear squeeze) that draws the tympanic membrane inward, causing pain, fullness, and sometimes bleeding or rupture",
+      "Presents with ear pain, a blocked sensation, conductive hearing loss, and occasionally vertigo or tinnitus",
+      "Otoscopy is central to diagnosis and may show retraction, congestion, haemorrhage behind the drum, or perforation, graded by severity",
+      "Inner ear barotrauma is a more serious variant causing sensorineural hearing loss, tinnitus, and vertigo, and warrants urgent specialist assessment",
+      "Prevention relies on gentle, early, and frequent equalisation manoeuvres and not diving with upper respiratory congestion",
+      "Divers should never force descent against an ear that will not equalise"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma, Assessment of hearing, distinguishing conductive from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The middle ear is a rigid, air-filled space that depends on the Eustachian tube to equalise its pressure with the environment. During descent the ambient pressure rises rapidly and, if the Eustachian tube does not open to admit air, the middle-ear pressure becomes relatively negative. This pressure gradient retracts and congests the tympanic membrane and middle-ear mucosa, causing oedema, haemorrhage, and, if severe, rupture of the drum. Round or oval window disruption can extend the injury to the inner ear, producing sensorineural hearing loss and vertigo.",
+    "additionalDifferentials": [
+      "Sinus barotrauma",
+      "Inner ear barotrauma or perilymph fistula",
+      "Inner ear decompression sickness",
+      "Alternobaric vertigo",
+      "Acute otitis media or externa",
+      "Temporomandibular joint dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Sinus barotrauma, Inner ear barotrauma or perilymph fistula, Inner ear decompression sickness",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma",
+      "Assessment of hearing, distinguishing conductive from sensorineural loss",
+      "Tuning fork tests and formal audiometry where hearing loss is present",
+      "Review of the dive profile and equalisation history",
+      "Urgent specialist (ENT) referral and vestibular assessment if inner ear injury is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed",
-     "Core treatment modality"
+    "redFlags": [
+      "Sensorineural hearing loss, persistent vertigo, or tinnitus suggesting inner ear barotrauma",
+      "Tympanic membrane rupture, especially with cold water causing caloric vertigo",
+      "Symptoms suggesting inner ear decompression sickness rather than barotrauma",
+      "Signs of secondary infection of the middle ear"
     ],
-    [
-     "Clinical Pitfall",
-     "Forcing descent or aggressive equalisation, worsening the injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most middle-ear barotrauma resolves over days to a couple of weeks with conservative care, and small perforations often heal spontaneously; inner ear barotrauma has a more guarded outlook, with hearing recovery dependent on prompt recognition and management.",
+    "pitfalls": [
+      "Forcing descent or aggressive equalisation, worsening the injury",
+      "Missing inner ear barotrauma by attributing vertigo and hearing loss to the middle ear",
+      "Confusing inner ear barotrauma with inner ear decompression sickness, which differ in management",
+      "Allowing diving to continue with upper respiratory congestion"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed",
+      "Relieve nasal and Eustachian congestion with decongestants, intranasal corticosteroids and treatment of allergic rhinitis to aid equalisation",
+      "Allow small tympanic membrane perforations to heal spontaneously, keeping the ear dry and avoiding water entry",
+      "Reserve antibiotics for secondary infection or a contaminated perforation rather than routine use",
+      "Refer urgently to otolaryngology for suspected inner-ear barotrauma with sensorineural hearing loss or vertigo, avoiding further pressure changes and considering exploratory surgery for a perilymph fistula",
+      "Counsel on prevention with gentle, early and frequent equalisation manoeuvres and not diving with upper respiratory congestion",
+      "Arrange audiometry and vestibular assessment where hearing loss or vertigo is present"
     ]
-   ],
-   "caption": "Overview comparison matrix for ear barotrauma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ear-barotrauma-real-image",
-   "title": "Ear barotrauma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ear_barotrauma-pathway",
+      "title": "Ear barotrauma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding environment, classically during descent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sensorineural hearing loss, persistent vertigo, or tinnitus suggesting inner ear barotrauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma, Assessment of hearing, distinguishing conductive from sensorineural loss, Tuning fork tests and formal audiometry where hearing loss is present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Forcing descent or aggressive equalisation, worsening the injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ear barotrauma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ear_barotrauma-matrix",
+      "title": "Ear barotrauma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common injury in diving, occurring when the pressure in the middle ear cannot be equalised with the surrounding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy to assess the tympanic membrane and grade middle-ear barotrauma, Assessment of hearing, distinguishing conductive from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sinus barotrauma, Inner ear barotrauma or perilymph fistula, Inner ear decompression sickness",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage middle-ear barotrauma conservatively with analgesia and avoidance of further pressure changes and diving until healed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Forcing descent or aggressive equalisation, worsening the injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ear barotrauma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ear_barotrauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy to grade middle-ear barotrauma",
+          "cells": [
+            {
+              "text": "Tympanic membrane changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing assessment with tuning fork and audiometry",
+          "cells": [
+            {
+              "text": "Conductive versus sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the dive profile and equalisation history",
+          "cells": [
+            {
+              "text": "Pressure exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular assessment",
+          "cells": [
+            {
+              "text": "Inner ear injury when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ear_barotrauma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inner ear decompression sickness",
+          "cells": [
+            {
+              "text": "Inner ear symptoms from bubbles, not barotrauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus barotrauma",
+          "cells": [
+            {
+              "text": "Sinus pain without middle-ear involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternobaric vertigo",
+          "cells": [
+            {
+              "text": "Vertigo from pressure changes in the Eustachian tube"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ear_barotrauma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and avoidance of diving",
+          "cells": [
+            {
+              "text": "Until the middle-ear injury has healed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decongestants and intranasal steroids",
+          "cells": [
+            {
+              "text": "Relieve Eustachian congestion to aid equalisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small perforations",
+          "cells": [
+            {
+              "text": "Allowed to heal spontaneously with the ear kept dry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Only for secondary infection or a contaminated perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ENT referral",
+          "cells": [
+            {
+              "text": "Suspected inner ear barotrauma; consider exploration for perilymph fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Gentle early equalisation; no diving with upper respiratory congestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ear_barotrauma-dx-mgmt",
+      "title": "Diagnosis and management of Ear barotrauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ear barotrauma: ear pain or fullness after a dive or pressure change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sensorineural loss, persistent vertigo, membrane rupture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT referral for suspected inner ear barotrauma; avoid pressure changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy; tuning fork and audiometry; dive profile review; vestibular assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a middle-ear injury found without inner ear involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inner ear barotrauma, decompression sickness or sinus barotrauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia and no diving or pressure change until healed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Decongestants and intranasal steroids to aid equalisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allow small perforations to heal with the ear kept dry",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reserve antibiotics for secondary infection or contaminated perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Urgent ENT referral for sensorineural loss or vertigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Middle-ear injury resolves over days to weeks; inner ear injury has a guarded outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

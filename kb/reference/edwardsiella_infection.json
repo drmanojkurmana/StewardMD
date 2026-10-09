@@ -1,172 +1,488 @@
 {
- "id": "edwardsiella_infection",
- "name": "Edwardsiella tarda infection",
- "aliases": [
-  "Edwardsiella tarda",
-  "Edwardsiella",
-  "edwardsiellosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile inhabitants",
-   "Human infection is usually acquired through contact with fish, reptiles or contaminated water, or ingestion of undercooked freshwater fish",
-   "Gastroenteritis is the commonest manifestation, ranging from mild watery diarrhoea to a dysenteric illness",
-   "Extraintestinal disease includes wound infection, abscesses, hepatobiliary infection and, uncommonly, bacteraemia",
-   "Serious systemic infection is more likely in hosts with liver disease, iron overload or immunosuppression",
-   "The organism produces hydrogen sulphide and is generally susceptible to agents such as fluoroquinolones, third-generation cephalosporins and aminoglycosides",
-   "Abscesses and necrotising soft-tissue infection require drainage or debridement alongside antibiotics"
+  "id": "edwardsiella_infection",
+  "name": "Edwardsiella tarda infection",
+  "aliases": [
+    "Edwardsiella tarda",
+    "Edwardsiella",
+    "edwardsiellosis"
   ],
-  "pathophysiology": "Edwardsiella tarda enters humans through the gastrointestinal tract after ingestion of contaminated water or freshwater fish, or through wounds exposed to aquatic environments and animals such as fish and reptiles. It can invade intestinal epithelial cells and survive within phagocytes, producing enterotoxins and haemolysins that contribute to diarrhoeal disease and to tissue invasion. In susceptible hosts, particularly those with hepatic disease or iron overload, it may disseminate to cause abscesses, hepatobiliary infection and bloodstream invasion, mirroring the pattern of other opportunistic enteric Gram-negative pathogens.",
-  "additionalDifferentials": [
-   "Salmonella gastroenteritis and enteric fever",
-   "Aeromonas gastroenteritis or wound infection",
-   "Vibrio infections from marine or freshwater exposure",
-   "Other Enterobacteriaceae causing abscess or bacteraemia",
-   "Shigella or Campylobacter dysentery",
-   "Yersinia enterocolitica infection"
-  ],
-  "additionalInvestigations": [
-   "Stool culture in diarrhoeal illness",
-   "Culture of blood, abscess pus or wound tissue in invasive disease",
-   "Gram stain and biochemical identification, noting hydrogen sulphide production",
-   "Imaging to localise hepatobiliary or soft-tissue abscesses",
-   "Liver function and iron studies to identify predisposing conditions",
-   "Antimicrobial susceptibility testing to guide directed therapy"
-  ],
-  "redFlags": [
-   "Systemic sepsis in a patient with liver disease or iron overload after aquatic exposure",
-   "Deep abscess or hepatobiliary infection on imaging",
-   "Rapidly progressive wound infection following fish or reptile contact",
-   "Severe dehydration from dysenteric diarrhoea"
-  ],
-  "prognosis": "Gastroenteritis is usually self-limiting, but invasive infection in compromised hosts, especially with hepatic disease, can be severe; timely antibiotics and drainage of collections generally lead to recovery.",
-  "pitfalls": [
-   "Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection",
-   "Assuming all enteric Gram-negative isolates are commensal contaminants",
-   "Not draining abscesses when treating invasive disease",
-   "Underestimating risk in patients with liver disease or iron overload"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an aminoglycoside, guided by susceptibility testing",
-   "Manage gastroenteritis, which is usually self-limiting, with oral rehydration and fluid and electrolyte replacement, reserving antibiotics for severe or dysenteric disease",
-   "Drain hepatobiliary or soft-tissue abscesses and infected collections surgically or radiologically alongside antimicrobials",
-   "Resuscitate and provide organ support for bacteraemia and sepsis in compromised hosts",
-   "Identify and address predisposing conditions such as hepatic disease and iron overload with liver function and iron studies",
-   "Advise prevention through safe handling and thorough cooking of freshwater fish, wound care after aquatic exposure, and caution for immunocompromised and iron-overloaded patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "edwardsiella_infection-pathway",
-   "title": "Edwardsiella tarda infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile inhabitants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic sepsis in a patient with liver disease or iron overload after aquatic exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool culture in diarrhoeal illness, Culture of blood, abscess pus or wound tissue in invasive disease, Gram stain and biochemical identification, noting hydrogen sulphide production"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an aminoglycoside, guided by susceptibility testing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of edwardsiella tarda infection."
-  }
- ],
- "tables": [
-  {
-   "id": "edwardsiella_infection-matrix",
-   "title": "Edwardsiella tarda infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile inhabitants",
+      "Human infection is usually acquired through contact with fish, reptiles or contaminated water, or ingestion of undercooked freshwater fish",
+      "Gastroenteritis is the commonest manifestation, ranging from mild watery diarrhoea to a dysenteric illness",
+      "Extraintestinal disease includes wound infection, abscesses, hepatobiliary infection and, uncommonly, bacteraemia",
+      "Serious systemic infection is more likely in hosts with liver disease, iron overload or immunosuppression",
+      "The organism produces hydrogen sulphide and is generally susceptible to agents such as fluoroquinolones, third-generation cephalosporins and aminoglycosides",
+      "Abscesses and necrotising soft-tissue infection require drainage or debridement alongside antibiotics"
     ],
-    [
-     "Key Investigations",
-     "Stool culture in diarrhoeal illness, Culture of blood, abscess pus or wound tissue in invasive disease, Gram stain and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Edwardsiella tarda enters humans through the gastrointestinal tract after ingestion of contaminated water or freshwater fish, or through wounds exposed to aquatic environments and animals such as fish and reptiles. It can invade intestinal epithelial cells and survive within phagocytes, producing enterotoxins and haemolysins that contribute to diarrhoeal disease and to tissue invasion. In susceptible hosts, particularly those with hepatic disease or iron overload, it may disseminate to cause abscesses, hepatobiliary infection and bloodstream invasion, mirroring the pattern of other opportunistic enteric Gram-negative pathogens.",
+    "additionalDifferentials": [
+      "Salmonella gastroenteritis and enteric fever",
+      "Aeromonas gastroenteritis or wound infection",
+      "Vibrio infections from marine or freshwater exposure",
+      "Other Enterobacteriaceae causing abscess or bacteraemia",
+      "Shigella or Campylobacter dysentery",
+      "Yersinia enterocolitica infection"
     ],
-    [
-     "Primary Differentials",
-     "Salmonella gastroenteritis and enteric fever, Aeromonas gastroenteritis or wound infection, Vibrio infections from marine or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool culture in diarrhoeal illness",
+      "Culture of blood, abscess pus or wound tissue in invasive disease",
+      "Gram stain and biochemical identification, noting hydrogen sulphide production",
+      "Imaging to localise hepatobiliary or soft-tissue abscesses",
+      "Liver function and iron studies to identify predisposing conditions",
+      "Antimicrobial susceptibility testing to guide directed therapy"
     ],
-    [
-     "Management Strategy",
-     "Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic sepsis in a patient with liver disease or iron overload after aquatic exposure",
+      "Deep abscess or hepatobiliary infection on imaging",
+      "Rapidly progressive wound infection following fish or reptile contact",
+      "Severe dehydration from dysenteric diarrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Gastroenteritis is usually self-limiting, but invasive infection in compromised hosts, especially with hepatic disease, can be severe; timely antibiotics and drainage of collections generally lead to recovery.",
+    "pitfalls": [
+      "Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection",
+      "Assuming all enteric Gram-negative isolates are commensal contaminants",
+      "Not draining abscesses when treating invasive disease",
+      "Underestimating risk in patients with liver disease or iron overload"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an aminoglycoside, guided by susceptibility testing",
+      "Manage gastroenteritis, which is usually self-limiting, with oral rehydration and fluid and electrolyte replacement, reserving antibiotics for severe or dysenteric disease",
+      "Drain hepatobiliary or soft-tissue abscesses and infected collections surgically or radiologically alongside antimicrobials",
+      "Resuscitate and provide organ support for bacteraemia and sepsis in compromised hosts",
+      "Identify and address predisposing conditions such as hepatic disease and iron overload with liver function and iron studies",
+      "Advise prevention through safe handling and thorough cooking of freshwater fish, wound care after aquatic exposure, and caution for immunocompromised and iron-overloaded patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for edwardsiella tarda infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "edwardsiella-infection-real-image",
-   "title": "Edwardsiella tarda infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "edwardsiella_infection-pathway",
+      "title": "Edwardsiella tarda infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile inhabitants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic sepsis in a patient with liver disease or iron overload after aquatic exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool culture in diarrhoeal illness, Culture of blood, abscess pus or wound tissue in invasive disease, Gram stain and biochemical identification, noting hydrogen sulphide production"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an aminoglycoside, guided by susceptibility testing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of edwardsiella tarda infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "edwardsiella_infection-matrix",
+      "title": "Edwardsiella tarda infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Edwardsiella tarda is a Gram-negative bacillus of the Enterobacteriaceae found in freshwater and its fish, amphibian and reptile",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool culture in diarrhoeal illness, Culture of blood, abscess pus or wound tissue in invasive disease, Gram stain and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Salmonella gastroenteritis and enteric fever, Aeromonas gastroenteritis or wound infection, Vibrio infections from marine or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat invasive infection with targeted antibiotics such as a fluoroquinolone, a third-generation cephalosporin or an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to ask about fish, reptile or freshwater exposure in a patient with diarrhoea or wound infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for edwardsiella tarda infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "edwardsiella_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Diarrhoeal illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood, abscess pus or wound culture",
+          "cells": [
+            {
+              "text": "Invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and biochemical identification",
+          "cells": [
+            {
+              "text": "Hydrogen sulphide production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of abscesses",
+          "cells": [
+            {
+              "text": "Hepatobiliary or soft-tissue collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and iron studies",
+          "cells": [
+            {
+              "text": "Predisposing hepatic disease or iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial susceptibility testing",
+          "cells": [
+            {
+              "text": "Directed therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwardsiella_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Salmonella gastroenteritis or enteric fever",
+          "cells": [
+            {
+              "text": "Enteric pathogen with similar diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aeromonas infection",
+          "cells": [
+            {
+              "text": "Gastroenteritis or wound infection after water exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio infection",
+          "cells": [
+            {
+              "text": "Marine or freshwater exposure with wound or diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shigella or Campylobacter dysentery",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yersinia enterocolitica infection",
+          "cells": [
+            {
+              "text": "Mesenteric adenitis or terminal ileitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "edwardsiella_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "Fluoroquinolone, third-generation cephalosporin or aminoglycoside by susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral rehydration",
+          "cells": [
+            {
+              "text": "Self-limiting gastroenteritis; antibiotics for severe or dysenteric disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Surgical or radiological drainage alongside antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis care",
+          "cells": [
+            {
+              "text": "Resuscitation and organ support for bacteraemia in compromised hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing conditions",
+          "cells": [
+            {
+              "text": "Hepatic disease and iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Safe handling and thorough cooking of freshwater fish; wound care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "edwardsiella_infection-dx-mgmt",
+      "title": "Diagnosis and management of Edwardsiella tarda infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Edwardsiella tarda infection: diarrhoea or wound after freshwater exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sepsis with liver disease, deep abscess, severe dehydration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent blood cultures, antibiotics and resuscitation for sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool or blood culture; biochemical identification; imaging; liver and iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Edwardsiella tarda isolated from stool, blood, pus or wound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Salmonella, Aeromonas, Vibrio, Shigella or Yersinia infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Targeted antibiotics chosen by susceptibility testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral rehydration for self-limiting gastroenteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drain hepatobiliary and soft-tissue abscesses with antimicrobials",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resuscitate and support organs in bacteraemia and sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review liver disease and iron overload as predisposing factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Gastroenteritis self-limiting; invasive disease in compromised hosts can be severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

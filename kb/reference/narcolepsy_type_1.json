@@ -1,170 +1,457 @@
 {
- "id": "narcolepsy_type_1",
- "name": "Narcolepsy type 1",
- "aliases": [
-  "narcolepsy with cataplexy",
-  "hypocretin-deficient narcolepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology / Sleep medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "American Academy of Sleep Medicine ICSD-3",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
-   "Cataplexy is a sudden transient loss of muscle tone triggered by strong emotion, classically laughter, with preserved consciousness",
-   "Other features include sleep paralysis, hypnagogic hallucinations and disrupted nocturnal sleep",
-   "It is strongly associated with the HLA-DQB1*06:02 allele, supporting an autoimmune basis for hypocretin-neuron loss",
-   "The multiple sleep latency test typically shows a short sleep latency and two or more sleep-onset REM periods",
-   "Management combines scheduled naps and sleep hygiene with wake-promoting agents and specific anticataplectic treatment"
+  "id": "narcolepsy_type_1",
+  "name": "Narcolepsy type 1",
+  "aliases": [
+    "narcolepsy with cataplexy",
+    "hypocretin-deficient narcolepsy"
   ],
-  "pathophysiology": "Narcolepsy type 1 is caused by selective loss of the hypocretin (orexin)-producing neurons of the lateral hypothalamus, which normally stabilise wakefulness and suppress inappropriate REM sleep. The deficiency is believed to be autoimmune, occurring in genetically susceptible individuals carrying HLA-DQB1*06:02, sometimes after immune triggers. Loss of hypocretin signalling destabilises the boundaries between wake and REM sleep, producing sleepiness and intrusion of REM phenomena such as cataplexy, sleep paralysis and dream-like hallucinations into wakefulness.",
-  "additionalDifferentials": [
-   "Narcolepsy type 2",
-   "Idiopathic hypersomnia",
-   "Obstructive sleep apnoea",
-   "Insufficient sleep syndrome",
-   "Kleine-Levin syndrome",
-   "Syncope or seizures (for cataplexy-like episodes)"
-  ],
-  "additionalInvestigations": [
-   "Overnight polysomnography followed by a multiple sleep latency test",
-   "Cerebrospinal fluid hypocretin measurement where available",
-   "HLA typing as a supportive test",
-   "Assessment to exclude other causes of hypersomnolence",
-   "Sleep diary and actigraphy to confirm adequate prior sleep"
-  ],
-  "redFlags": [
-   "Cataplexy causing falls and injury",
-   "Sleepiness severe enough to impair driving or safety-critical tasks",
-   "Rapid weight gain or precocious features in children",
-   "Atypical features suggesting a secondary hypothalamic lesion"
-  ],
-  "prognosis": "Narcolepsy type 1 is a lifelong condition, but most patients achieve meaningful control of sleepiness and cataplexy with combined behavioural and pharmacological treatment.",
-  "pitfalls": [
-   "Missing the diagnosis by not recognising emotionally triggered cataplexy",
-   "Performing the multiple sleep latency test without ensuring adequate prior sleep",
-   "Overlooking coexisting obstructive sleep apnoea",
-   "Attributing cataplexy to syncope or seizures"
-  ],
-  "references": [
-   "American Academy of Sleep Medicine ICSD-3",
-   "Principles and Practice of Sleep Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene",
-   "Treat excessive daytime sleepiness with wake-promoting agents such as modafinil, armodafinil, pitolisant or solriamfetol, or with stimulants such as methylphenidate or amfetamines",
-   "Treat cataplexy specifically with sodium oxybate, pitolisant or anticataplectic antidepressants such as SNRIs, SSRIs or tricyclics, with sodium oxybate also improving disrupted nocturnal sleep",
-   "Counsel on driving safety and the occupational implications of sleep attacks and cataplexy",
-   "Screen for and manage comorbid depression, obesity and disturbed nocturnal sleep",
-   "Confirm the diagnosis with polysomnography, multiple sleep latency testing and, where needed, cerebrospinal fluid hypocretin measurement, under sleep-medicine specialist care",
-   "Provide lifelong follow-up with pharmacological titration and support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "narcolepsy_type_1-pathway",
-   "title": "Narcolepsy type 1: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cataplexy causing falls and injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Overnight polysomnography followed by a multiple sleep latency test, Cerebrospinal fluid hypocretin measurement where available, HLA typing as a supportive test"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis by not recognising emotionally triggered cataplexy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of narcolepsy type 1."
-  }
- ],
- "tables": [
-  {
-   "id": "narcolepsy_type_1-matrix",
-   "title": "Narcolepsy type 1: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology / Sleep medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "American Academy of Sleep Medicine ICSD-3",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
+      "Cataplexy is a sudden transient loss of muscle tone triggered by strong emotion, classically laughter, with preserved consciousness",
+      "Other features include sleep paralysis, hypnagogic hallucinations and disrupted nocturnal sleep",
+      "It is strongly associated with the HLA-DQB1*06:02 allele, supporting an autoimmune basis for hypocretin-neuron loss",
+      "The multiple sleep latency test typically shows a short sleep latency and two or more sleep-onset REM periods",
+      "Management combines scheduled naps and sleep hygiene with wake-promoting agents and specific anticataplectic treatment"
     ],
-    [
-     "Key Investigations",
-     "Overnight polysomnography followed by a multiple sleep latency test, Cerebrospinal fluid hypocretin measurement where available,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Narcolepsy type 1 is caused by selective loss of the hypocretin (orexin)-producing neurons of the lateral hypothalamus, which normally stabilise wakefulness and suppress inappropriate REM sleep. The deficiency is believed to be autoimmune, occurring in genetically susceptible individuals carrying HLA-DQB1*06:02, sometimes after immune triggers. Loss of hypocretin signalling destabilises the boundaries between wake and REM sleep, producing sleepiness and intrusion of REM phenomena such as cataplexy, sleep paralysis and dream-like hallucinations into wakefulness.",
+    "additionalDifferentials": [
+      "Narcolepsy type 2",
+      "Idiopathic hypersomnia",
+      "Obstructive sleep apnoea",
+      "Insufficient sleep syndrome",
+      "Kleine-Levin syndrome",
+      "Syncope or seizures (for cataplexy-like episodes)"
     ],
-    [
-     "Primary Differentials",
-     "Narcolepsy type 2, Idiopathic hypersomnia, Obstructive sleep apnoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Overnight polysomnography followed by a multiple sleep latency test",
+      "Cerebrospinal fluid hypocretin measurement where available",
+      "HLA typing as a supportive test",
+      "Assessment to exclude other causes of hypersomnolence",
+      "Sleep diary and actigraphy to confirm adequate prior sleep"
     ],
-    [
-     "Management Strategy",
-     "Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene",
-     "Core treatment modality"
+    "redFlags": [
+      "Cataplexy causing falls and injury",
+      "Sleepiness severe enough to impair driving or safety-critical tasks",
+      "Rapid weight gain or precocious features in children",
+      "Atypical features suggesting a secondary hypothalamic lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis by not recognising emotionally triggered cataplexy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Narcolepsy type 1 is a lifelong condition, but most patients achieve meaningful control of sleepiness and cataplexy with combined behavioural and pharmacological treatment.",
+    "pitfalls": [
+      "Missing the diagnosis by not recognising emotionally triggered cataplexy",
+      "Performing the multiple sleep latency test without ensuring adequate prior sleep",
+      "Overlooking coexisting obstructive sleep apnoea",
+      "Attributing cataplexy to syncope or seizures"
+    ],
+    "references": [
+      "American Academy of Sleep Medicine ICSD-3",
+      "Principles and Practice of Sleep Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene",
+      "Treat excessive daytime sleepiness with wake-promoting agents such as modafinil, armodafinil, pitolisant or solriamfetol, or with stimulants such as methylphenidate or amfetamines",
+      "Treat cataplexy specifically with sodium oxybate, pitolisant or anticataplectic antidepressants such as SNRIs, SSRIs or tricyclics, with sodium oxybate also improving disrupted nocturnal sleep",
+      "Counsel on driving safety and the occupational implications of sleep attacks and cataplexy",
+      "Screen for and manage comorbid depression, obesity and disturbed nocturnal sleep",
+      "Confirm the diagnosis with polysomnography, multiple sleep latency testing and, where needed, cerebrospinal fluid hypocretin measurement, under sleep-medicine specialist care",
+      "Provide lifelong follow-up with pharmacological titration and support"
     ]
-   ],
-   "caption": "Overview comparison matrix for narcolepsy type 1."
-  }
- ],
- "diagrams": [
-  {
-   "id": "narcolepsy-type-1-real-image",
-   "title": "Narcolepsy type 1: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "narcolepsy_type_1-pathway",
+      "title": "Narcolepsy type 1: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cataplexy causing falls and injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Overnight polysomnography followed by a multiple sleep latency test, Cerebrospinal fluid hypocretin measurement where available, HLA typing as a supportive test"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis by not recognising emotionally triggered cataplexy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of narcolepsy type 1."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "narcolepsy_type_1-matrix",
+      "title": "Narcolepsy type 1: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by chronic excessive daytime sleepiness with cataplexy and/or a low cerebrospinal fluid hypocretin (orexin) level",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Overnight polysomnography followed by a multiple sleep latency test, Cerebrospinal fluid hypocretin measurement where available,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Narcolepsy type 2, Idiopathic hypersomnia, Obstructive sleep apnoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish behavioural foundations with scheduled naps, consistent sleep-wake timing and good sleep hygiene",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis by not recognising emotionally triggered cataplexy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for narcolepsy type 1."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Sleep Medicine ICSD-3",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcolepsy_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebrospinal fluid hypocretin measurement",
+          "cells": [
+            {
+              "text": "Low or undetectable, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short sleep latency and two or more sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing for DQB1*06:02",
+          "cells": [
+            {
+              "text": "Supportive test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight polysomnography",
+          "cells": [
+            {
+              "text": "Performed before the multiple sleep latency test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diary and actigraphy",
+          "cells": [
+            {
+              "text": "Confirms adequate prior sleep"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Narcolepsy type 2",
+          "cells": [
+            {
+              "text": "Type 1 is defined by cataplexy and or low hypocretin; type 2 lacks these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Can coexist; overlooking it is a recognised pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syncope or seizures for cataplexy-like episodes",
+          "cells": [
+            {
+              "text": "Attributing cataplexy to syncope or seizures is a recognised error"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural foundations",
+          "cells": [
+            {
+              "text": "Scheduled naps, consistent sleep-wake timing and sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil, armodafinil, pitolisant or solriamfetol; or methylphenidate or amfetamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticataplectic treatment",
+          "cells": [
+            {
+              "text": "Sodium oxybate or pitolisant; SNRIs, SSRIs or tricyclics; oxybate also improves nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving and occupational counselling",
+          "cells": [
+            {
+              "text": "Sleep attacks and cataplexy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity screening",
+          "cells": [
+            {
+              "text": "Depression, obesity and disturbed nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic confirmation",
+          "cells": [
+            {
+              "text": "Polysomnography, MSLT and CSF hypocretin where needed, under sleep-medicine care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up",
+          "cells": [
+            {
+              "text": "Pharmacological titration and support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcolepsy_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Narcolepsy type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Emotionally triggered cataplexy with excessive daytime sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cataplexy with falls, unsafe sleepiness, atypical features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Counsel on safety; consider a hypothalamic lesion if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography, MSLT, CSF hypocretin where available, HLA DQB1*06:02",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cataplexy with low CSF hypocretin, or short MSLT latency with multiple REM onsets?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider narcolepsy type 2, sleep apnoea or other hypersomnia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Scheduled naps, consistent sleep-wake timing and good sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wake-promoting agents such as modafinil, armodafinil, pitolisant or solriamfetol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium oxybate or pitolisant for cataplexy; antidepressants with anticataplectic effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Driving safety and occupational counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong; most achieve meaningful control of sleepiness and cataplexy with treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

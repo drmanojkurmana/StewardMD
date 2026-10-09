@@ -1,174 +1,463 @@
 {
- "id": "pinguecula",
- "name": "Pinguecula",
- "aliases": [
-  "pingueculum",
-  "conjunctival pinguecula"
- ],
- "class": "non_infective",
- "system": "Ophthalmic / ocular surface",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal (and later temporal) limbus within the interpalpebral fissure but, unlike a pterygium, it does NOT encroach onto the cornea.",
-   "It represents actinic (ultraviolet) elastotic degeneration of the subepithelial conjunctival stroma; chronic sun, wind and dust exposure are the principal drivers, so it is commoner in outdoor workers and low-latitude populations.",
-   "The great majority are asymptomatic and require only reassurance; lubricants suffice for mild irritation or foreign-body sensation.",
-   "Pingueculitis denotes episodic inflammation with localised hyperaemia and swelling, often after intense ultraviolet exposure or ocular-surface dryness, and is managed with lubricants and a short course of a mild topical anti-inflammatory.",
-   "Photoprotection with wrap-around sunglasses and a broad-brimmed hat is the key preventive and progression-limiting measure.",
-   "Excision is reserved for cosmetic concern, recurrent pingueculitis, interference with contact-lens wear, or diagnostic uncertainty; surgery carries a risk of scarring and recurrence.",
-   "A lesion that grows atypically, becomes nodular, develops feeder vessels, pigmentation or leukoplakia, or does not respect the limbus should raise suspicion of ocular surface squamous neoplasia rather than a benign pinguecula.",
-   "Pinguecula and pterygium share the same actinic aetiology and frequently coexist; a pinguecula may be a precursor stage but the two are distinguished by corneal involvement."
+  "id": "pinguecula",
+  "name": "Pinguecula",
+  "aliases": [
+    "pingueculum",
+    "conjunctival pinguecula"
   ],
-  "pathophysiology": "Chronic ultraviolet and environmental (wind, dust, dryness) exposure induces actinic damage to the bulbar conjunctival stroma within the interpalpebral zone, where light is focused nasally by the anterior segment. The result is elastotic degeneration: fragmentation and abnormal accumulation of elastin-like fibrillar material in the substantia propria, with hyalinisation of collagen, secondary calcification in some lesions, and a thinned or occasionally thickened overlying epithelium. Because the process is confined to the subepithelial conjunctiva and does not cross the limbal barrier, the cornea is spared, distinguishing it from pterygium.",
-  "additionalDifferentials": [
-   "Pterygium (fibrovascular growth crossing the limbus onto cornea)",
-   "Conjunctival intraepithelial neoplasia / ocular surface squamous neoplasia",
-   "Conjunctival dermoid or dermolipoma",
-   "Amyloid deposition of the conjunctiva",
-   "Bitot spot of vitamin A deficiency",
-   "Conjunctival concretions",
-   "Limbal nodule of phlyctenular or nodular scleritis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared",
-   "Documentation with anterior-segment photography for serial comparison",
-   "Assessment of tear film and ocular surface (tear break-up time, staining) for associated dryness",
-   "Anterior-segment optical coherence tomography where depth or atypia needs clarification",
-   "Excisional or incisional biopsy with histopathology if neoplasia is suspected",
-   "Corneal topography if a coexisting pterygium is inducing astigmatism"
-  ],
-  "redFlags": [
-   "Progressive growth, nodularity, feeder vessels, pigmentation or leukoplakia suggesting ocular surface squamous neoplasia or melanoma",
-   "Encroachment onto the cornea indicating pterygium rather than pinguecula",
-   "Persistent or recurrent inflammation unresponsive to lubricants and photoprotection",
-   "Rapid change in size, colour or vascularity of a previously stable lesion"
-  ],
-  "prognosis": "An entirely benign degenerative lesion with an excellent prognosis; most remain stable and asymptomatic for life. Even after excision for cosmesis or recurrent pingueculitis the outlook is good, though scarring and recurrence are recognised.",
-  "pitfalls": [
-   "Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy",
-   "Confusing a pinguecula with an early pterygium; the defining feature is whether the lesion crosses the limbus onto the cornea",
-   "Over-treating an asymptomatic lesion with prolonged topical steroids, risking raised intraocular pressure and cataract",
-   "Attributing all interpalpebral irritation to the pinguecula while overlooking coexisting dry eye disease",
-   "Assuming excision is curative without warning the patient about recurrence and conjunctival scarring"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course — External Disease and Cornea"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment",
-   "Advise photoprotection with wrap-around sunglasses and a broad-brimmed hat as the key measure to limit progression",
-   "Relieve mild irritation and foreign-body sensation with ocular lubricants and management of any coexisting dry eye",
-   "Treat episodes of pingueculitis with lubricants and a short course of a mild topical anti-inflammatory such as a weak corticosteroid or topical NSAID",
-   "Reserve surgical excision for cosmetic concern, recurrent pingueculitis, contact-lens intolerance or diagnostic uncertainty, counselling on scarring and recurrence risk",
-   "Document with anterior-segment photography for serial comparison and biopsy any lesion where neoplasia is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pinguecula-pathway",
-   "title": "Pinguecula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal (and later temporal) limbus within the interpalpebral fissure but, unlike a pterygium, it does NOT encroach",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive growth, nodularity, feeder vessels, pigmentation or leukoplakia suggesting ocular surface squamous neoplasia or melanoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared, Documentation with anterior-segment photography for serial comparison, Assessment of tear film and ocular surface (tear break-up time,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pinguecula."
-  }
- ],
- "tables": [
-  {
-   "id": "pinguecula-matrix",
-   "title": "Pinguecula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic / ocular surface",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal (and later temporal) limbus within the interpalpebral fissure but, unlike a pterygium, it does NOT encroach onto the cornea.",
+      "It represents actinic (ultraviolet) elastotic degeneration of the subepithelial conjunctival stroma; chronic sun, wind and dust exposure are the principal drivers, so it is commoner in outdoor workers and low-latitude populations.",
+      "The great majority are asymptomatic and require only reassurance; lubricants suffice for mild irritation or foreign-body sensation.",
+      "Pingueculitis denotes episodic inflammation with localised hyperaemia and swelling, often after intense ultraviolet exposure or ocular-surface dryness, and is managed with lubricants and a short course of a mild topical anti-inflammatory.",
+      "Photoprotection with wrap-around sunglasses and a broad-brimmed hat is the key preventive and progression-limiting measure.",
+      "Excision is reserved for cosmetic concern, recurrent pingueculitis, interference with contact-lens wear, or diagnostic uncertainty; surgery carries a risk of scarring and recurrence.",
+      "A lesion that grows atypically, becomes nodular, develops feeder vessels, pigmentation or leukoplakia, or does not respect the limbus should raise suspicion of ocular surface squamous neoplasia rather than a benign pinguecula.",
+      "Pinguecula and pterygium share the same actinic aetiology and frequently coexist; a pinguecula may be a precursor stage but the two are distinguished by corneal involvement."
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared, Documentation with anterior-segment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic ultraviolet and environmental (wind, dust, dryness) exposure induces actinic damage to the bulbar conjunctival stroma within the interpalpebral zone, where light is focused nasally by the anterior segment. The result is elastotic degeneration: fragmentation and abnormal accumulation of elastin-like fibrillar material in the substantia propria, with hyalinisation of collagen, secondary calcification in some lesions, and a thinned or occasionally thickened overlying epithelium. Because the process is confined to the subepithelial conjunctiva and does not cross the limbal barrier, the cornea is spared, distinguishing it from pterygium.",
+    "additionalDifferentials": [
+      "Pterygium (fibrovascular growth crossing the limbus onto cornea)",
+      "Conjunctival intraepithelial neoplasia / ocular surface squamous neoplasia",
+      "Conjunctival dermoid or dermolipoma",
+      "Amyloid deposition of the conjunctiva",
+      "Bitot spot of vitamin A deficiency",
+      "Conjunctival concretions",
+      "Limbal nodule of phlyctenular or nodular scleritis"
     ],
-    [
-     "Primary Differentials",
-     "Pterygium (fibrovascular growth crossing the limbus onto cornea), Conjunctival intraepithelial neoplasia / ocular surface",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared",
+      "Documentation with anterior-segment photography for serial comparison",
+      "Assessment of tear film and ocular surface (tear break-up time, staining) for associated dryness",
+      "Anterior-segment optical coherence tomography where depth or atypia needs clarification",
+      "Excisional or incisional biopsy with histopathology if neoplasia is suspected",
+      "Corneal topography if a coexisting pterygium is inducing astigmatism"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive growth, nodularity, feeder vessels, pigmentation or leukoplakia suggesting ocular surface squamous neoplasia or melanoma",
+      "Encroachment onto the cornea indicating pterygium rather than pinguecula",
+      "Persistent or recurrent inflammation unresponsive to lubricants and photoprotection",
+      "Rapid change in size, colour or vascularity of a previously stable lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "An entirely benign degenerative lesion with an excellent prognosis; most remain stable and asymptomatic for life. Even after excision for cosmesis or recurrent pingueculitis the outlook is good, though scarring and recurrence are recognised.",
+    "pitfalls": [
+      "Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy",
+      "Confusing a pinguecula with an early pterygium; the defining feature is whether the lesion crosses the limbus onto the cornea",
+      "Over-treating an asymptomatic lesion with prolonged topical steroids, risking raised intraocular pressure and cataract",
+      "Attributing all interpalpebral irritation to the pinguecula while overlooking coexisting dry eye disease",
+      "Assuming excision is curative without warning the patient about recurrence and conjunctival scarring"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course — External Disease and Cornea"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment",
+      "Advise photoprotection with wrap-around sunglasses and a broad-brimmed hat as the key measure to limit progression",
+      "Relieve mild irritation and foreign-body sensation with ocular lubricants and management of any coexisting dry eye",
+      "Treat episodes of pingueculitis with lubricants and a short course of a mild topical anti-inflammatory such as a weak corticosteroid or topical NSAID",
+      "Reserve surgical excision for cosmetic concern, recurrent pingueculitis, contact-lens intolerance or diagnostic uncertainty, counselling on scarring and recurrence risk",
+      "Document with anterior-segment photography for serial comparison and biopsy any lesion where neoplasia is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for pinguecula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pinguecula-real-image",
-   "title": "Pinguecula: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pinguecula-pathway",
+      "title": "Pinguecula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal (and later temporal) limbus within the interpalpebral fissure but, unlike a pterygium, it does NOT encroach",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive growth, nodularity, feeder vessels, pigmentation or leukoplakia suggesting ocular surface squamous neoplasia or melanoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared, Documentation with anterior-segment photography for serial comparison, Assessment of tear film and ocular surface (tear break-up time,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pinguecula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pinguecula-matrix",
+      "title": "Pinguecula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A pinguecula is a yellowish-white, slightly raised amorphous deposit on the bulbar conjunctiva, characteristically at the nasal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp biomicroscopy to characterise the lesion and confirm the cornea is spared, Documentation with anterior-segment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pterygium (fibrovascular growth crossing the limbus onto cornea), Conjunctival intraepithelial neoplasia / ocular surface",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe, as most lesions are asymptomatic benign actinic degeneration requiring no active treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an atypical conjunctival neoplasm for a benign pinguecula and delaying biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pinguecula."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pinguecula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Lesion characterised; cornea spared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior-segment photography",
+          "cells": [
+            {
+              "text": "Serial comparison"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tear film and ocular surface assessment",
+          "cells": [
+            {
+              "text": "Tear break-up time and staining, for dryness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior-segment OCT",
+          "cells": [
+            {
+              "text": "Depth or atypia, when clarification is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional or incisional biopsy",
+          "cells": [
+            {
+              "text": "Neoplasia, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Astigmatism from a coexisting pterygium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pinguecula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pterygium",
+          "cells": [
+            {
+              "text": "Encroachment onto the cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival intraepithelial neoplasia",
+          "cells": [
+            {
+              "text": "Progressive growth, nodularity, feeder vessels, pigmentation or leukoplakia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pinguecula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Most lesions are asymptomatic benign actinic degeneration needing no active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Wrap-around sunglasses and a broad-brimmed hat to limit progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lubrication",
+          "cells": [
+            {
+              "text": "Ocular lubricants for irritation and management of any coexisting dry eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pingueculitis",
+          "cells": [
+            {
+              "text": "Lubricants and a short course of a mild topical anti-inflammatory such as a weak corticosteroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "For cosmetic concern, recurrent pingueculitis, contact-lens intolerance or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation and biopsy",
+          "cells": [
+            {
+              "text": "Anterior-segment photography for comparison; biopsy any lesion where neoplasia is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pinguecula-dx-mgmt",
+      "title": "Diagnosis and management of Pinguecula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Yellowish raised conjunctival lesion at the limbus, with the cornea spared",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (growth, nodularity, feeder vessels, pigmentation, corneal encroachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy and ocular surface review for suspected neoplasia or pterygium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp biomicroscopy; photography; tear film assessment; biopsy if neoplasia suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion stable and benign-looking, with the cornea spared?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pterygium, conjunctival neoplasia, dermoid or amyloid deposition; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; most lesions are benign actinic change needing no treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wrap-around sunglasses and a broad-brimmed hat to limit progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ocular lubricants for irritation and management of coexisting dry eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lubricants and a short mild topical anti-inflammatory course for pingueculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surgery for cosmetic concern, recurrent pingueculitis or contact-lens intolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign degenerative lesion; most remain stable and asymptomatic for life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

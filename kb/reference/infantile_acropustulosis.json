@@ -1,177 +1,484 @@
 {
- "id": "infantile_acropustulosis",
- "name": "infantile acropustulosis",
- "aliases": [
-  "acropustulosis of infancy",
-  "infantile acropustulosis of Kahn"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "paediatric dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harper's Textbook of Paediatric Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and feet in infants and toddlers.",
-   "Lesions appear in episodic waves lasting one to two weeks, then clear, with symptom-free intervals of several weeks before the next crop.",
-   "The intense itch is disproportionate to the modest number of lesions and often causes marked irritability and disturbed sleep.",
-   "A strong association exists with preceding scabies, and the condition is thought in many cases to be a persistent hypersensitivity reaction after treated infestation.",
-   "Cytology of a pustule shows a predominance of neutrophils, sometimes with eosinophils, and no organisms, helping to distinguish it from infection.",
-   "The disorder is self-limiting and tends to resolve by two to three years of age with progressively less frequent and milder episodes.",
-   "Potent topical corticosteroids and oral antihistamines reduce itch and inflammation during flares; dapsone is reserved for severe refractory disease.",
-   "Persistent acral pustules should always prompt reassessment for active scabies in the child and close contacts before attributing them to acropustulosis."
+  "id": "infantile_acropustulosis",
+  "name": "infantile acropustulosis",
+  "aliases": [
+    "acropustulosis of infancy",
+    "infantile acropustulosis of Kahn"
   ],
-  "pathophysiology": "Infantile acropustulosis is a benign, recurrent, sterile pustular dermatosis of unknown precise cause. It is characterised histologically by intraepidermal or subcorneal pustules filled with neutrophils, often admixed with eosinophils, without evidence of infection. A widely accepted view is that in a substantial proportion of cases the disorder represents a prolonged id-type or hypersensitivity response of the infant skin following scabies infestation, even after the mites have been successfully eradicated, with the acral skin showing an exaggerated inflammatory reactivity. The episodic, self-limiting nature and eventual spontaneous resolution suggest maturation of immune regulation with age. There is no systemic involvement and the pustules are consistently sterile on culture.",
-  "additionalDifferentials": [
-   "scabies with active infestation",
-   "dyshidrotic (pompholyx) eczema",
-   "transient neonatal pustular melanosis",
-   "erythema toxicum neonatorum",
-   "bullous impetigo or staphylococcal pustulosis",
-   "palmoplantar pustulosis",
-   "hand, foot and mouth disease"
-  ],
-  "additionalInvestigations": [
-   "skin scrapings and dermoscopy to exclude active scabies",
-   "pustule smear cytology (Tzanck-type preparation) showing neutrophils with or without eosinophils",
-   "Gram stain and bacterial culture of pustule contents to exclude infection",
-   "potassium hydroxide microscopy to exclude dermatophyte or candidal pustules",
-   "full blood count with differential where peripheral eosinophilia is queried",
-   "skin biopsy in atypical or persistent cases",
-   "examination and treatment history review of household contacts for scabies"
-  ],
-  "redFlags": [
-   "burrows, family itch or persistent lesions indicating untreated active scabies",
-   "fever, spreading erythema or crusting suggesting secondary bacterial infection",
-   "failure to enter remission between crops, prompting reconsideration of the diagnosis",
-   "widespread or systemic pustulation raising concern for other pustular disorders",
-   "significant sleep disruption and distress requiring escalation of symptom control"
-  ],
-  "prognosis": "The prognosis is excellent; the condition is entirely benign and self-limiting, with flares becoming less frequent and less severe over time and complete resolution usually by around two to three years of age.",
-  "pitfalls": [
-   "failing to look for and treat active scabies in the child and contacts",
-   "misinterpreting sterile pustules as bacterial infection and giving repeated unnecessary antibiotics",
-   "under-treating the severe pruritus, leading to excoriation and secondary infection",
-   "confusing recurrent crops with an evolving neonatal pustular condition rather than a distinct entity",
-   "reaching for dapsone before optimising topical corticosteroids and antihistamines"
-  ],
-  "references": [
-   "Harper's Textbook of Paediatric Dermatology",
-   "Rook's Textbook of Dermatology",
-   "Neonatal and Infant Dermatology (Eichenfield, Frieden)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch",
-   "Oral antihistamines to relieve the intense pruritus and improve sleep",
-   "Exclusion and treatment of active scabies with a topical scabicide such as permethrin, as infestation frequently precedes the condition",
-   "Avoidance of repeated unnecessary antiscabetic treatment once active infestation has been excluded",
-   "Consideration of dapsone for severe or refractory disease",
-   "Reassurance that the disorder is benign and self-limiting, with resolution usually by early childhood, and clinical follow-up of recurrent crops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infantile_acropustulosis-pathway",
-   "title": "infantile acropustulosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and feet in infants and toddlers.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: burrows, family itch or persistent lesions indicating untreated active scabies",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: skin scrapings and dermoscopy to exclude active scabies, pustule smear cytology (Tzanck-type preparation) showing neutrophils with or without eosinophils, Gram stain and bacterial culture of pustule contents to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: failing to look for and treat active scabies in the child and contacts"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile acropustulosis."
-  }
- ],
- "tables": [
-  {
-   "id": "infantile_acropustulosis-matrix",
-   "title": "infantile acropustulosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "paediatric dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harper's Textbook of Paediatric Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and feet in infants and toddlers.",
+      "Lesions appear in episodic waves lasting one to two weeks, then clear, with symptom-free intervals of several weeks before the next crop.",
+      "The intense itch is disproportionate to the modest number of lesions and often causes marked irritability and disturbed sleep.",
+      "A strong association exists with preceding scabies, and the condition is thought in many cases to be a persistent hypersensitivity reaction after treated infestation.",
+      "Cytology of a pustule shows a predominance of neutrophils, sometimes with eosinophils, and no organisms, helping to distinguish it from infection.",
+      "The disorder is self-limiting and tends to resolve by two to three years of age with progressively less frequent and milder episodes.",
+      "Potent topical corticosteroids and oral antihistamines reduce itch and inflammation during flares; dapsone is reserved for severe refractory disease.",
+      "Persistent acral pustules should always prompt reassessment for active scabies in the child and close contacts before attributing them to acropustulosis."
     ],
-    [
-     "Key Investigations",
-     "skin scrapings and dermoscopy to exclude active scabies, pustule smear cytology (Tzanck-type preparation) showing neutrophils",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile acropustulosis is a benign, recurrent, sterile pustular dermatosis of unknown precise cause. It is characterised histologically by intraepidermal or subcorneal pustules filled with neutrophils, often admixed with eosinophils, without evidence of infection. A widely accepted view is that in a substantial proportion of cases the disorder represents a prolonged id-type or hypersensitivity response of the infant skin following scabies infestation, even after the mites have been successfully eradicated, with the acral skin showing an exaggerated inflammatory reactivity. The episodic, self-limiting nature and eventual spontaneous resolution suggest maturation of immune regulation with age. There is no systemic involvement and the pustules are consistently sterile on culture.",
+    "additionalDifferentials": [
+      "scabies with active infestation",
+      "dyshidrotic (pompholyx) eczema",
+      "transient neonatal pustular melanosis",
+      "erythema toxicum neonatorum",
+      "bullous impetigo or staphylococcal pustulosis",
+      "palmoplantar pustulosis",
+      "hand, foot and mouth disease"
     ],
-    [
-     "Primary Differentials",
-     "scabies with active infestation, dyshidrotic (pompholyx) eczema, transient neonatal pustular melanosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "skin scrapings and dermoscopy to exclude active scabies",
+      "pustule smear cytology (Tzanck-type preparation) showing neutrophils with or without eosinophils",
+      "Gram stain and bacterial culture of pustule contents to exclude infection",
+      "potassium hydroxide microscopy to exclude dermatophyte or candidal pustules",
+      "full blood count with differential where peripheral eosinophilia is queried",
+      "skin biopsy in atypical or persistent cases",
+      "examination and treatment history review of household contacts for scabies"
     ],
-    [
-     "Management Strategy",
-     "Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch",
-     "Core treatment modality"
+    "redFlags": [
+      "burrows, family itch or persistent lesions indicating untreated active scabies",
+      "fever, spreading erythema or crusting suggesting secondary bacterial infection",
+      "failure to enter remission between crops, prompting reconsideration of the diagnosis",
+      "widespread or systemic pustulation raising concern for other pustular disorders",
+      "significant sleep disruption and distress requiring escalation of symptom control"
     ],
-    [
-     "Clinical Pitfall",
-     "failing to look for and treat active scabies in the child and contacts",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; the condition is entirely benign and self-limiting, with flares becoming less frequent and less severe over time and complete resolution usually by around two to three years of age.",
+    "pitfalls": [
+      "failing to look for and treat active scabies in the child and contacts",
+      "misinterpreting sterile pustules as bacterial infection and giving repeated unnecessary antibiotics",
+      "under-treating the severe pruritus, leading to excoriation and secondary infection",
+      "confusing recurrent crops with an evolving neonatal pustular condition rather than a distinct entity",
+      "reaching for dapsone before optimising topical corticosteroids and antihistamines"
+    ],
+    "references": [
+      "Harper's Textbook of Paediatric Dermatology",
+      "Rook's Textbook of Dermatology",
+      "Neonatal and Infant Dermatology (Eichenfield, Frieden)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch",
+      "Oral antihistamines to relieve the intense pruritus and improve sleep",
+      "Exclusion and treatment of active scabies with a topical scabicide such as permethrin, as infestation frequently precedes the condition",
+      "Avoidance of repeated unnecessary antiscabetic treatment once active infestation has been excluded",
+      "Consideration of dapsone for severe or refractory disease",
+      "Reassurance that the disorder is benign and self-limiting, with resolution usually by early childhood, and clinical follow-up of recurrent crops"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile acropustulosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infantile-acropustulosis-real-image",
-   "title": "infantile acropustulosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "infantile_acropustulosis-pathway",
+      "title": "infantile acropustulosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and feet in infants and toddlers.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: burrows, family itch or persistent lesions indicating untreated active scabies",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: skin scrapings and dermoscopy to exclude active scabies, pustule smear cytology (Tzanck-type preparation) showing neutrophils with or without eosinophils, Gram stain and bacterial culture of pustule contents to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: failing to look for and treat active scabies in the child and contacts"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile acropustulosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infantile_acropustulosis-matrix",
+      "title": "infantile acropustulosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by recurrent crops of intensely pruritic vesiculopustules on the palms, soles and lateral aspects of the hands and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "skin scrapings and dermoscopy to exclude active scabies, pustule smear cytology (Tzanck-type preparation) showing neutrophils",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "scabies with active infestation, dyshidrotic (pompholyx) eczema, transient neonatal pustular melanosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Symptomatic control of flares with potent topical corticosteroids to reduce inflammation and itch",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "failing to look for and treat active scabies in the child and contacts",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile acropustulosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harper's Textbook of Paediatric Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_acropustulosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin scrapings and dermoscopy",
+          "cells": [
+            {
+              "text": "Active scabies excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pustule smear cytology",
+          "cells": [
+            {
+              "text": "Neutrophils, with or without eosinophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and bacterial culture of pustule contents",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium hydroxide microscopy",
+          "cells": [
+            {
+              "text": "Dermatophyte or candidal pustules excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia when queried"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of household contacts for scabies",
+          "cells": [
+            {
+              "text": "Contacts treated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_acropustulosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scabies",
+          "cells": [
+            {
+              "text": "Burrows and family itch; treated with permethrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient neonatal pustular melanosis",
+          "cells": [
+            {
+              "text": "Neonatal pustular condition rather than recurrent crops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous impetigo or staphylococcal pustulosis",
+          "cells": [
+            {
+              "text": "Culture-positive; infection rather than sterile pustules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_acropustulosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "Control of flares, inflammation and itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Relieve intense pruritus and improve sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scabicide for active scabies",
+          "cells": [
+            {
+              "text": "Permethrin for the child and contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid repeated antiscabetic treatment",
+          "cells": [
+            {
+              "text": "Once active infestation has been excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dapsone",
+          "cells": [
+            {
+              "text": "Severe or refractory disease, after optimising topicals and antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; usually resolves by early childhood"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_acropustulosis-dx-mgmt",
+      "title": "Diagnosis and management of infantile acropustulosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent intensely itchy vesiculopustules on palms and soles in infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Burrows, spreading erythema or fever, or failure to clear between crops?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat secondary infection and check household contacts for scabies",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrapings and dermoscopy, pustule smear, Gram stain and culture, KOH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active scabies and infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat scabies or infection as the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Potent topical corticosteroids for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral antihistamines for itch and sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Permethrin for active scabies in child and contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dapsone only for severe or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure: benign, usually resolves by early childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually resolves by early childhood; recurrences followed clinically",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

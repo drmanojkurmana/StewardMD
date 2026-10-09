@@ -1,176 +1,380 @@
 {
- "id": "x_linked_hypopituitarism",
- "name": "X-linked hypopituitarism",
- "aliases": [
-  "SOX3-related hypopituitarism",
-  "X-linked panhypopituitarism",
-  "Xq27 duplication hypopituitarism"
- ],
- "class": "non_infective",
- "system": "Endocrine / Pituitary",
- "specialty": "Paediatric endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric endocrinology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or expansion/contraction of its polyalanine tract.",
-   "SOX3 is dosage-sensitive, so both over-expression and loss of function disrupt hypothalamo-pituitary development.",
-   "Inheritance is X-linked, so affected individuals are typically male with transmission through carrier females.",
-   "The endocrine picture is variable combined pituitary hormone deficiency, most often including growth hormone deficiency.",
-   "Intellectual disability or learning difficulty accompanies the endocrine phenotype in many patients.",
-   "Pituitary MRI commonly shows anterior pituitary hypoplasia, an ectopic or undescended posterior pituitary, and an absent or thin infundibulum.",
-   "It should be considered in familial hypopituitarism with an X-linked pattern, particularly when learning difficulties coexist."
+  "id": "x_linked_hypopituitarism",
+  "name": "X-linked hypopituitarism",
+  "aliases": [
+    "SOX3-related hypopituitarism",
+    "X-linked panhypopituitarism",
+    "Xq27 duplication hypopituitarism"
   ],
-  "pathophysiology": "X-linked hypopituitarism arises from disturbance of SOX3, an X-linked SRY-box transcription factor expressed in the developing hypothalamus and infundibulum that helps orchestrate formation of the pituitary gland. Normal development depends on a precise SOX3 dosage: submicroscopic duplications of the Xq27 region increase gene dosage, while expansions or contractions of an in-frame polyalanine tract and loss-of-function changes reduce effective activity, and both directions of imbalance perturb the inductive signalling between the developing infundibulum and Rathke's pouch. The consequence is maldevelopment of the hypothalamo-pituitary axis, producing structural anomalies such as anterior pituitary hypoplasia, an ectopic posterior pituitary and an interrupted stalk, together with deficient secretion of one or more anterior pituitary hormones. Because the same signalling centre contributes to forebrain and midline development, affected individuals may also show intellectual disability and midline central nervous system anomalies. The specific combination and timing of hormone deficiencies vary between patients and can evolve over childhood, so an initially isolated deficiency may progress to broader combined pituitary hormone deficiency.",
-  "additionalDifferentials": [
-   "Other genetic combined pituitary hormone deficiency (PROP1, POU1F1, LHX3, LHX4)",
-   "Septo-optic dysplasia and HESX1-related midline disorders",
-   "Isolated growth hormone deficiency of other genetic cause",
-   "Acquired hypopituitarism from tumour, surgery, irradiation or infiltration",
-   "Perinatal or traumatic hypothalamo-pituitary injury",
-   "Other syndromic causes of congenital hypopituitarism"
-  ],
-  "additionalInvestigations": [
-   "Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement",
-   "Assessment of the corticotroph axis given the danger of unrecognised cortisol deficiency",
-   "Thyroid-stimulating hormone with free thyroxine, gonadotrophins and prolactin",
-   "Dedicated pituitary MRI to define gland, stalk and posterior pituitary anatomy",
-   "Array-based testing for Xq27 duplication and targeted SOX3 sequencing",
-   "Bone age radiography and structured re-assessment for evolving deficiencies"
-  ],
-  "redFlags": [
-   "Adrenocorticotrophic hormone deficiency with risk of adrenal crisis during illness or stress",
-   "Neonatal hypoglycaemia from combined growth hormone and cortisol deficiency",
-   "Untreated central hypothyroidism impairing growth and development",
-   "New or worsening deficiencies emerging on follow-up in a previously stable child"
-  ],
-  "prognosis": "With timely recognition and lifelong replacement of the deficient hormones, growth and general health outcomes are good and life-threatening crises are preventable. Associated intellectual disability, where present, tends to persist, and the endocrine phenotype may broaden over time so continued surveillance is needed.",
-  "pitfalls": [
-   "Failing to identify and treat cortisol deficiency, the most immediately life-threatening component.",
-   "Not performing pituitary MRI, thereby missing the characteristic structural triad.",
-   "Overlooking an X-linked family history and associated learning difficulties.",
-   "Assuming an isolated hormone deficiency is static when combined deficiency may evolve.",
-   "Attributing the picture to acquired disease without considering a dosage-sensitive genetic cause."
-  ],
-  "references": [
-   "Paediatric endocrinology reference texts",
-   "Clinical genetics reference resources on pituitary development disorders",
-   "Consensus guidance on combined pituitary hormone deficiency"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency",
-   "Glucocorticoid replacement for corticotroph deficiency with mandatory stress dosing and sick-day rules to prevent adrenal crisis",
-   "Thyroxine replacement for central hypothyroidism, started only after cortisol status is secured",
-   "Sex steroid replacement at the appropriate developmental stage for gonadotrophin deficiency",
-   "Structured periodic re-assessment of the pituitary axes, as the endocrine phenotype may broaden over time",
-   "Developmental and educational support where intellectual disability or learning difficulty is present",
-   "Multidisciplinary paediatric endocrine follow-up with structured transition to adult services",
-   "Genetic counselling with SOX3 and Xq27 dosage testing and assessment of carrier females"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_hypopituitarism-pathway",
-   "title": "X-linked hypopituitarism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or expansion/contraction of its polyalanine tract.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adrenocorticotrophic hormone deficiency with risk of adrenal crisis during illness or stress",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement, Assessment of the corticotroph axis given the danger of unrecognised cortisol deficiency, Thyroid-stimulating hormone with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify and treat cortisol deficiency, the most immediately life-threatening component."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked hypopituitarism."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_hypopituitarism-matrix",
-   "title": "X-linked hypopituitarism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Pituitary",
+  "specialty": "Paediatric endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric endocrinology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or expansion/contraction of its polyalanine tract.",
+      "SOX3 is dosage-sensitive, so both over-expression and loss of function disrupt hypothalamo-pituitary development.",
+      "Inheritance is X-linked, so affected individuals are typically male with transmission through carrier females.",
+      "The endocrine picture is variable combined pituitary hormone deficiency, most often including growth hormone deficiency.",
+      "Intellectual disability or learning difficulty accompanies the endocrine phenotype in many patients.",
+      "Pituitary MRI commonly shows anterior pituitary hypoplasia, an ectopic or undescended posterior pituitary, and an absent or thin infundibulum.",
+      "It should be considered in familial hypopituitarism with an X-linked pattern, particularly when learning difficulties coexist."
     ],
-    [
-     "Key Investigations",
-     "Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement, Assessment of the corticotroph",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "X-linked hypopituitarism arises from disturbance of SOX3, an X-linked SRY-box transcription factor expressed in the developing hypothalamus and infundibulum that helps orchestrate formation of the pituitary gland. Normal development depends on a precise SOX3 dosage: submicroscopic duplications of the Xq27 region increase gene dosage, while expansions or contractions of an in-frame polyalanine tract and loss-of-function changes reduce effective activity, and both directions of imbalance perturb the inductive signalling between the developing infundibulum and Rathke's pouch. The consequence is maldevelopment of the hypothalamo-pituitary axis, producing structural anomalies such as anterior pituitary hypoplasia, an ectopic posterior pituitary and an interrupted stalk, together with deficient secretion of one or more anterior pituitary hormones. Because the same signalling centre contributes to forebrain and midline development, affected individuals may also show intellectual disability and midline central nervous system anomalies. The specific combination and timing of hormone deficiencies vary between patients and can evolve over childhood, so an initially isolated deficiency may progress to broader combined pituitary hormone deficiency.",
+    "additionalDifferentials": [
+      "Other genetic combined pituitary hormone deficiency (PROP1, POU1F1, LHX3, LHX4)",
+      "Septo-optic dysplasia and HESX1-related midline disorders",
+      "Isolated growth hormone deficiency of other genetic cause",
+      "Acquired hypopituitarism from tumour, surgery, irradiation or infiltration",
+      "Perinatal or traumatic hypothalamo-pituitary injury",
+      "Other syndromic causes of congenital hypopituitarism"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic combined pituitary hormone deficiency (PROP1, POU1F1, LHX3, LHX4), Septo-optic dysplasia and HESX1-related midline",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement",
+      "Assessment of the corticotroph axis given the danger of unrecognised cortisol deficiency",
+      "Thyroid-stimulating hormone with free thyroxine, gonadotrophins and prolactin",
+      "Dedicated pituitary MRI to define gland, stalk and posterior pituitary anatomy",
+      "Array-based testing for Xq27 duplication and targeted SOX3 sequencing",
+      "Bone age radiography and structured re-assessment for evolving deficiencies"
     ],
-    [
-     "Management Strategy",
-     "Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency",
-     "Core treatment modality"
+    "redFlags": [
+      "Adrenocorticotrophic hormone deficiency with risk of adrenal crisis during illness or stress",
+      "Neonatal hypoglycaemia from combined growth hormone and cortisol deficiency",
+      "Untreated central hypothyroidism impairing growth and development",
+      "New or worsening deficiencies emerging on follow-up in a previously stable child"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify and treat cortisol deficiency, the most immediately life-threatening component.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely recognition and lifelong replacement of the deficient hormones, growth and general health outcomes are good and life-threatening crises are preventable. Associated intellectual disability, where present, tends to persist, and the endocrine phenotype may broaden over time so continued surveillance is needed.",
+    "pitfalls": [
+      "Failing to identify and treat cortisol deficiency, the most immediately life-threatening component.",
+      "Not performing pituitary MRI, thereby missing the characteristic structural triad.",
+      "Overlooking an X-linked family history and associated learning difficulties.",
+      "Assuming an isolated hormone deficiency is static when combined deficiency may evolve.",
+      "Attributing the picture to acquired disease without considering a dosage-sensitive genetic cause."
+    ],
+    "references": [
+      "Paediatric endocrinology reference texts",
+      "Clinical genetics reference resources on pituitary development disorders",
+      "Consensus guidance on combined pituitary hormone deficiency"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency",
+      "Glucocorticoid replacement for corticotroph deficiency with mandatory stress dosing and sick-day rules to prevent adrenal crisis",
+      "Thyroxine replacement for central hypothyroidism, started only after cortisol status is secured",
+      "Sex steroid replacement at the appropriate developmental stage for gonadotrophin deficiency",
+      "Structured periodic re-assessment of the pituitary axes, as the endocrine phenotype may broaden over time",
+      "Developmental and educational support where intellectual disability or learning difficulty is present",
+      "Multidisciplinary paediatric endocrine follow-up with structured transition to adult services",
+      "Genetic counselling with SOX3 and Xq27 dosage testing and assessment of carrier females"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked hypopituitarism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-hypopituitarism-real-image",
-   "title": "X-linked hypopituitarism: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "x_linked_hypopituitarism-pathway",
+      "title": "X-linked hypopituitarism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or expansion/contraction of its polyalanine tract.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adrenocorticotrophic hormone deficiency with risk of adrenal crisis during illness or stress",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement, Assessment of the corticotroph axis given the danger of unrecognised cortisol deficiency, Thyroid-stimulating hormone with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify and treat cortisol deficiency, the most immediately life-threatening component."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked hypopituitarism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_hypopituitarism-matrix",
+      "title": "X-linked hypopituitarism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic cause is abnormal dosage of the transcription factor SOX3 on Xq27, through either duplication of the region or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dynamic testing of the growth hormone axis with baseline insulin-like growth factor measurement, Assessment of the corticotroph",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic combined pituitary hormone deficiency (PROP1, POU1F1, LHX3, LHX4), Septo-optic dysplasia and HESX1-related midline",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Individualised replacement of deficient anterior pituitary hormones, including growth hormone for growth hormone deficiency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify and treat cortisol deficiency, the most immediately life-threatening component.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked hypopituitarism."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric endocrinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "x_linked_hypopituitarism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dynamic growth hormone testing with baseline IGF-1",
+          "cells": [
+            {
+              "text": "Growth hormone axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortisol and ACTH assessment",
+          "cells": [
+            {
+              "text": "ACTH deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_hypopituitarism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other combined pituitary hormone deficiency (PROP1, POU1F1, LHX3)",
+          "cells": [
+            {
+              "text": "Genetic combined deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septo-optic dysplasia",
+          "cells": [
+            {
+              "text": "HESX1-related; optic and midline anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "x_linked_hypopituitarism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Cortisol deficiency, the most immediately life-threatening component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone",
+          "cells": [
+            {
+              "text": "Growth hormone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised anterior pituitary replacement",
+          "cells": [
+            {
+              "text": "Other deficient hormones"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "x_linked_hypopituitarism-dx-mgmt",
+      "title": "Diagnosis and management of X-linked hypopituitarism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected X-linked hypopituitarism: growth failure and hormone deficiency in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (adrenal crisis risk or neonatal hypoglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cortisol replacement for adrenal crisis or hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth hormone testing with IGF-1, cortisol and ACTH, SOX3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are multiple pituitary hormone deficiencies confirmed with SOX3 abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PROP1, POU1F1 or septo-optic dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and treat cortisol deficiency first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Individualised replacement of deficient anterior pituitary hormones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Growth hormone for growth hormone deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Cortisol deficiency is the most dangerous component; replacement is lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

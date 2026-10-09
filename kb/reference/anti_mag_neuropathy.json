@@ -1,178 +1,823 @@
 {
- "id": "anti_mag_neuropathy",
- "name": "Anti-MAG Neuropathy",
- "aliases": [
-  "Anti-myelin-associated glycoprotein neuropathy",
-  "IgM paraproteinaemic demyelinating neuropathy",
-  "DADS neuropathy"
- ],
- "class": "non_infective",
- "system": "Neurology / Neuro-immunology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against myelin-associated glycoprotein.",
-   "Presents in older adults with sensory ataxia, distal paraesthesiae and a characteristic prominent postural or action tremor of the hands.",
-   "Almost always associated with an IgM monoclonal gammopathy, so serum immunofixation and protein electrophoresis are mandatory.",
-   "The phenotype is classically distal, acquired and demyelinating, sometimes labelled distal acquired demyelinating symmetric neuropathy, and progresses far more slowly than chronic inflammatory demyelinating polyradiculoneuropathy.",
-   "Nerve conduction studies show disproportionately prolonged distal motor latencies, reflected in a raised terminal latency index, a signature of distal-predominant demyelination.",
-   "Unlike chronic inflammatory demyelinating polyradiculoneuropathy, it usually responds poorly to corticosteroids, intravenous immunoglobulin and plasma exchange.",
-   "Anti-MAG antibodies react with the HNK-1 carbohydrate epitope, detectable by ELISA, and titres support but do not alone confirm the diagnosis.",
-   "Investigate for an underlying B-cell lymphoproliferative disorder such as Waldenstrom macroglobulinaemia; B-cell depletion is the mainstay when treatment is warranted."
+  "id": "anti_mag_neuropathy",
+  "name": "Anti-MAG Neuropathy",
+  "aliases": [
+    "Anti-myelin-associated glycoprotein neuropathy",
+    "IgM paraproteinaemic demyelinating neuropathy",
+    "DADS neuropathy"
   ],
-  "pathophysiology": "Anti-MAG neuropathy is a humorally mediated demyelinating disorder in which a monoclonal IgM paraprotein, typically of kappa light-chain type, is directed against myelin-associated glycoprotein, a minor adhesion molecule concentrated in periaxonal and paranodal Schwann-cell membranes that shares the HNK-1 carbohydrate epitope with other peripheral nerve glycoconjugates. The antibody penetrates the endoneurium and deposits on the outermost myelin lamellae, fixing complement and causing a distinctive widening of the myelin lamellae seen on electron microscopy. This disrupts the axon-Schwann-cell interaction essential for stable myelin, producing segmental demyelination that is most pronounced in the longest, most distal nerve fibres and preferentially affecting large sensory fibres, which accounts for the prominent sensory ataxia and relative sparing of strength early in the disease. Progressive secondary axonal loss develops over years and correlates with fixed disability. Because the causative clone is a low-grade B-cell population, the disorder sits within the spectrum of IgM-related lymphoproliferative disease, and the slow, indolent tempo distinguishes it mechanistically from the more inflammatory, T-cell-influenced chronic inflammatory demyelinating polyradiculoneuropathy.",
-  "additionalDifferentials": [
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "POEMS syndrome",
-   "Amyloid neuropathy from light-chain deposition",
-   "Diabetic sensory polyneuropathy",
-   "Hereditary demyelinating neuropathy (Charcot-Marie-Tooth type 1)",
-   "Sensory neuronopathy or ganglionopathy",
-   "Vitamin B12 deficiency with sensory ataxia"
-  ],
-  "additionalInvestigations": [
-   "Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein",
-   "Anti-MAG antibody titre by ELISA",
-   "Nerve conduction studies with calculation of the terminal latency index",
-   "Serum immunoglobulins, free light chains and cryoglobulins",
-   "Bone marrow examination when a lymphoproliferative disorder is suspected",
-   "MYD88 mutation testing where Waldenstrom macroglobulinaemia is considered",
-   "Sural nerve biopsy in selected atypical cases showing widened myelin lamellae"
-  ],
-  "redFlags": [
-   "Rapidly progressive weakness rather than the expected indolent sensory course, suggesting an alternative diagnosis",
-   "Systemic features such as weight loss, organomegaly or lymphadenopathy pointing to lymphoproliferative disease",
-   "Hyperviscosity symptoms including visual disturbance and mucosal bleeding with high IgM levels",
-   "Marked autonomic dysfunction or prominent pain suggesting amyloidosis",
-   "New bone pain or oedema raising the possibility of POEMS syndrome"
-  ],
-  "prognosis": "The neuropathy is usually indolent, and although many patients remain ambulant for years, gradual axonal loss produces slowly accumulating sensory ataxia and disability; treatment responses are often modest and incomplete. The outlook is also shaped by any underlying lymphoproliferative disorder.",
-  "pitfalls": [
-   "Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to immunoglobulin or steroids",
-   "Failing to perform immunofixation and missing the associated IgM paraprotein",
-   "Attributing the hand tremor to a primary movement disorder rather than the neuropathy",
-   "Overtreating stable, minimally symptomatic disease with aggressive immunosuppression",
-   "Not screening for Waldenstrom macroglobulinaemia and other B-cell malignancies"
-  ],
-  "references": [
-   "Peripheral Neuropathy (Dyck and Thomas)",
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Peripheral nerve society guideline on paraproteinaemic demyelinating neuropathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the best-evidenced option",
-   "Investigate and treat the underlying IgM monoclonal gammopathy or lymphoproliferative disorder such as Waldenstrom macroglobulinaemia, with haematology involvement",
-   "Avoid reliance on corticosteroids, intravenous immunoglobulin and plasma exchange, which are usually ineffective in this neuropathy",
-   "Physiotherapy and occupational therapy for sensory ataxia, gait and the disabling action tremor, with assistive devices",
-   "Manage neuropathic symptoms and institute falls-prevention measures",
-   "Long-term monitoring of the paraprotein and clinical progression with joint neurology-haematology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anti_mag_neuropathy-pathway",
-   "title": "Anti-MAG Neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against myelin-associated glycoprotein.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive weakness rather than the expected indolent sensory course, suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein, Anti-MAG antibody titre by ELISA, Nerve conduction studies with calculation of the terminal latency index"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the best-evidenced option"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to immunoglobulin or steroids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anti-mag neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "anti_mag_neuropathy-matrix",
-   "title": "Anti-MAG Neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Neuro-immunology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against myelin-associated glycoprotein.",
+      "Presents in older adults with sensory ataxia, distal paraesthesiae and a characteristic prominent postural or action tremor of the hands.",
+      "Almost always associated with an IgM monoclonal gammopathy, so serum immunofixation and protein electrophoresis are mandatory.",
+      "The phenotype is classically distal, acquired and demyelinating, sometimes labelled distal acquired demyelinating symmetric neuropathy, and progresses far more slowly than chronic inflammatory demyelinating polyradiculoneuropathy.",
+      "Nerve conduction studies show disproportionately prolonged distal motor latencies, reflected in a raised terminal latency index, a signature of distal-predominant demyelination.",
+      "Unlike chronic inflammatory demyelinating polyradiculoneuropathy, it usually responds poorly to corticosteroids, intravenous immunoglobulin and plasma exchange.",
+      "Anti-MAG antibodies react with the HNK-1 carbohydrate epitope, detectable by ELISA, and titres support but do not alone confirm the diagnosis.",
+      "Investigate for an underlying B-cell lymphoproliferative disorder such as Waldenstrom macroglobulinaemia; B-cell depletion is the mainstay when treatment is warranted."
     ],
-    [
-     "Key Investigations",
-     "Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein, Anti-MAG antibody titre by ELISA, Nerve",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anti-MAG neuropathy is a humorally mediated demyelinating disorder in which a monoclonal IgM paraprotein, typically of kappa light-chain type, is directed against myelin-associated glycoprotein, a minor adhesion molecule concentrated in periaxonal and paranodal Schwann-cell membranes that shares the HNK-1 carbohydrate epitope with other peripheral nerve glycoconjugates. The antibody penetrates the endoneurium and deposits on the outermost myelin lamellae, fixing complement and causing a distinctive widening of the myelin lamellae seen on electron microscopy. This disrupts the axon-Schwann-cell interaction essential for stable myelin, producing segmental demyelination that is most pronounced in the longest, most distal nerve fibres and preferentially affecting large sensory fibres, which accounts for the prominent sensory ataxia and relative sparing of strength early in the disease. Progressive secondary axonal loss develops over years and correlates with fixed disability. Because the causative clone is a low-grade B-cell population, the disorder sits within the spectrum of IgM-related lymphoproliferative disease, and the slow, indolent tempo distinguishes it mechanistically from the more inflammatory, T-cell-influenced chronic inflammatory demyelinating polyradiculoneuropathy.",
+    "additionalDifferentials": [
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "POEMS syndrome",
+      "Amyloid neuropathy from light-chain deposition",
+      "Diabetic sensory polyneuropathy",
+      "Hereditary demyelinating neuropathy (Charcot-Marie-Tooth type 1)",
+      "Sensory neuronopathy or ganglionopathy",
+      "Vitamin B12 deficiency with sensory ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Chronic inflammatory demyelinating polyradiculoneuropathy, POEMS syndrome, Amyloid neuropathy from light-chain deposition",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein",
+      "Anti-MAG antibody titre by ELISA",
+      "Nerve conduction studies with calculation of the terminal latency index",
+      "Serum immunoglobulins, free light chains and cryoglobulins",
+      "Bone marrow examination when a lymphoproliferative disorder is suspected",
+      "MYD88 mutation testing where Waldenstrom macroglobulinaemia is considered",
+      "Sural nerve biopsy in selected atypical cases showing widened myelin lamellae"
     ],
-    [
-     "Management Strategy",
-     "Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive weakness rather than the expected indolent sensory course, suggesting an alternative diagnosis",
+      "Systemic features such as weight loss, organomegaly or lymphadenopathy pointing to lymphoproliferative disease",
+      "Hyperviscosity symptoms including visual disturbance and mucosal bleeding with high IgM levels",
+      "Marked autonomic dysfunction or prominent pain suggesting amyloidosis",
+      "New bone pain or oedema raising the possibility of POEMS syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to",
-     "Prevent diagnostic or management error"
+    "prognosis": "The neuropathy is usually indolent, and although many patients remain ambulant for years, gradual axonal loss produces slowly accumulating sensory ataxia and disability; treatment responses are often modest and incomplete. The outlook is also shaped by any underlying lymphoproliferative disorder.",
+    "pitfalls": [
+      "Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to immunoglobulin or steroids",
+      "Failing to perform immunofixation and missing the associated IgM paraprotein",
+      "Attributing the hand tremor to a primary movement disorder rather than the neuropathy",
+      "Overtreating stable, minimally symptomatic disease with aggressive immunosuppression",
+      "Not screening for Waldenstrom macroglobulinaemia and other B-cell malignancies"
+    ],
+    "references": [
+      "Peripheral Neuropathy (Dyck and Thomas)",
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Peripheral nerve society guideline on paraproteinaemic demyelinating neuropathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the best-evidenced option",
+      "Investigate and treat the underlying IgM monoclonal gammopathy or lymphoproliferative disorder such as Waldenstrom macroglobulinaemia, with haematology involvement",
+      "Avoid reliance on corticosteroids, intravenous immunoglobulin and plasma exchange, which are usually ineffective in this neuropathy",
+      "Physiotherapy and occupational therapy for sensory ataxia, gait and the disabling action tremor, with assistive devices",
+      "Manage neuropathic symptoms and institute falls-prevention measures",
+      "Long-term monitoring of the paraprotein and clinical progression with joint neurology-haematology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for anti-mag neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anti-mag-neuropathy-real-image",
-   "title": "Anti-MAG Neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "anti_mag_neuropathy-pathway",
+      "title": "Anti-MAG Neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against myelin-associated glycoprotein.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive weakness rather than the expected indolent sensory course, suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein, Anti-MAG antibody titre by ELISA, Nerve conduction studies with calculation of the terminal latency index"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the best-evidenced option"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to immunoglobulin or steroids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anti-mag neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anti_mag_neuropathy-matrix",
+      "title": "Anti-MAG Neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic, slowly progressive, distal and predominantly sensory demyelinating neuropathy caused by IgM antibodies against",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum protein electrophoresis with immunofixation to detect and type the IgM paraprotein, Anti-MAG antibody titre by ELISA, Nerve",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic inflammatory demyelinating polyradiculoneuropathy, POEMS syndrome, Amyloid neuropathy from light-chain deposition",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reserve treatment for progressive disability, using rituximab directed against the IgM-producing B-cell clone as the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the disorder for chronic inflammatory demyelinating polyradiculoneuropathy and expecting a good response to",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anti-mag neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 24-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_mag_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum protein electrophoresis with immunofixation",
+          "cells": [
+            {
+              "text": "Detects and types the IgM paraprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-MAG antibody titre by ELISA",
+          "cells": [
+            {
+              "text": "Antibody level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies with terminal latency index",
+          "cells": [
+            {
+              "text": "Characterises the neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins, free light chains and cryoglobulins",
+          "cells": [
+            {
+              "text": "Underlying IgM monoclonal gammopathy or lymphoproliferative disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "When a lymphoproliferative disorder is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYD88 mutation testing",
+          "cells": [
+            {
+              "text": "Where Waldenstrom macroglobulinaemia is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sural nerve biopsy",
+          "cells": [
+            {
+              "text": "Selected atypical cases with widened myelin lamellae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_mag_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Usually poorly responsive to immunoglobulin or steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid neuropathy from light-chain deposition",
+          "cells": [
+            {
+              "text": "Systemic features such as weight loss suggest an alternative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_mag_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Directed against the IgM-producing B-cell clone"
+            },
+            {
+              "text": "Best-evidenced option; reserved for progressive disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the paraprotein",
+          "cells": [
+            {
+              "text": "Underlying IgM gammopathy or Waldenstrom macroglobulinaemia"
+            },
+            {
+              "text": "Haematology involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids, IVIG and plasma exchange",
+          "cells": [
+            {
+              "text": "Usually ineffective in this neuropathy"
+            },
+            {
+              "text": "Do not expect a response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Sensory ataxia, gait and disabling action tremor"
+            },
+            {
+              "text": "With assistive devices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic symptoms and falls prevention",
+          "cells": [
+            {
+              "text": "Manage neuropathic symptoms; falls-prevention measures"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Paraprotein and clinical progression"
+            },
+            {
+              "text": "Joint neurology-haematology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_mag_neuropathy-ddx-2",
+      "kind": "ddx",
+      "title": "Cerebellar ataxia versus sensory ataxia versus frontal gait",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Cerebellar ataxia",
+        "Sensory ataxia",
+        "Frontal gait"
+      ],
+      "rows": [
+        {
+          "parameter": "Base of support",
+          "cells": [
+            {
+              "text": "Wide-based"
+            },
+            {
+              "text": "Narrow base, looks down"
+            },
+            {
+              "text": "Wide-based"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Velocity",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Slow"
+            },
+            {
+              "text": "Very slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stride",
+          "cells": [
+            {
+              "text": "Irregular, lurching"
+            },
+            {
+              "text": "Regular with path deviation"
+            },
+            {
+              "text": "Short, shuffling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Romberg",
+          "cells": [
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Unsteady, falls"
+            },
+            {
+              "text": "+/-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heel to shin",
+          "cells": [
+            {
+              "text": "Abnormal"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initiation",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Hesitant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Turns",
+          "cells": [
+            {
+              "text": "Unsteady"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Hesitant, multistep"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postural instability",
+          "cells": [
+            {
+              "text": "+"
+            },
+            {
+              "text": "+++"
+            },
+            {
+              "text": "++++; poor postural synergies when rising from a chair"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Falls",
+          "cells": [
+            {
+              "text": "Late event"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Frequent"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "anti_mag_neuropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Axonal versus demyelinating electrophysiology",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Axonal degeneration",
+        "Segmental demyelination"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor: CMAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal (except with conduction block)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: conduction block",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: temporal dispersion",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: F wave",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor: H reflex",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sensory: SNAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sensory: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sensory: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Needle EMG: fibrillations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Needle EMG: fasciculations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor unit potentials: recruitment",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Motor unit potentials: morphology",
+          "cells": [
+            {
+              "text": "Long duration or polyphasic"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "CB in the source means conduction block."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_mag_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of Anti-MAG Neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive sensory neuropathy with ataxia and action tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid weakness or weight loss suggesting another diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review for an alternative diagnosis such as POEMS or amyloid neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SPEP with immunofixation, anti-MAG titre, nerve conduction, marrow if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "IgM paraprotein with anti-MAG antibody confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Rituximab for progressive disability, directed at the IgM clone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat paraprotein testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat underlying IgM gammopathy or Waldenstrom macroglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy with assistive devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and neuropathic symptom management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term paraprotein and neurology-haematology monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

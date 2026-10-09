@@ -1,177 +1,475 @@
 {
- "id": "indeterminate_cell_histiocytosis",
- "name": "Indeterminate cell histiocytosis",
- "aliases": [
-  "indeterminate dendritic cell tumour",
-  "ICH"
- ],
- "class": "non_infective",
- "system": "Skin / Haematology",
- "specialty": "Dermatology / Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Histiocytoses",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack langerin (CD207) and Birbeck granules, placing them at an indeterminate position between Langerhans cells and dermal dendrocytes.",
-   "It usually presents in adults as solitary or multiple asymptomatic red-brown to yellowish papules, plaques or nodules on the trunk, limbs, face or neck.",
-   "The disease is most often confined to the skin, but mucosal, nodal and rare visceral involvement have been described.",
-   "Lesions may appear in crops and can persist, progress or occasionally regress spontaneously, so the course is variable.",
-   "Histology shows a dermal infiltrate of histiocytes that are CD1a and S100 positive but langerin negative, and electron microscopy characteristically lacks Birbeck granules.",
-   "An association with haematological malignancies, particularly myeloid and lymphoid neoplasms including chronic myelomonocytic leukaemia and low-grade B-cell lymphomas, has been reported and warrants haematological review.",
-   "Some cases harbour clonal kinase-pathway alterations, including translocations involving the ETV3-NCOA2 fusion and BRAF or other MAP kinase pathway mutations, supporting a neoplastic basis in a subset.",
-   "It should be distinguished from Langerhans cell histiocytosis, which is langerin positive with Birbeck granules, and from the CD1a-negative non-Langerhans cell histiocytoses."
+  "id": "indeterminate_cell_histiocytosis",
+  "name": "Indeterminate cell histiocytosis",
+  "aliases": [
+    "indeterminate dendritic cell tumour",
+    "ICH"
   ],
-  "pathophysiology": "Indeterminate cell histiocytosis is a proliferation of so-called indeterminate dendritic cells, which display a hybrid immunophenotype expressing the Langerhans cell markers CD1a and S100 but, crucially, lacking langerin (CD207) and the ultrastructural Birbeck granules that define mature Langerhans cells. These cells are thought to correspond to a precursor or transitional dendritic cell that has not fully differentiated along the Langerhans cell pathway, or to a dermal dendritic cell that has acquired CD1a expression. While historically regarded as reactive, the identification of clonal molecular alterations in a proportion of cases, including the ETV3-NCOA2 gene fusion and activating mutations of the MAP kinase pathway such as BRAF, indicates that at least some cases are genuinely neoplastic. The reported co-occurrence with myeloid and lymphoid malignancies further supports a clonal, potentially shared-progenitor relationship in a subset of patients.",
-  "additionalDifferentials": [
-   "Langerhans cell histiocytosis",
-   "Juvenile / adult xanthogranuloma",
-   "Generalised eruptive histiocytosis",
-   "Rosai-Dorfman disease",
-   "Reticulohistiocytosis",
-   "Cutaneous involvement by leukaemia or lymphoma",
-   "Mastocytosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68)",
-   "Electron microscopy to confirm absence of Birbeck granules where diagnosis is uncertain",
-   "Molecular testing for ETV3-NCOA2 fusion and BRAF / MAP kinase pathway mutations where available",
-   "Full blood count and blood film to screen for associated haematological malignancy",
-   "Bone marrow examination if a myeloid or lymphoid neoplasm is suspected",
-   "Serum protein electrophoresis and lactate dehydrogenase",
-   "Imaging to assess for nodal or visceral involvement in extensive disease"
-  ],
-  "redFlags": [
-   "Cytopenias, monocytosis or abnormal blood film suggesting an associated myeloid neoplasm",
-   "Lymphadenopathy, organomegaly or systemic symptoms suggesting nodal or visceral disease",
-   "Rapidly progressive or ulcerating lesions",
-   "Coexisting or subsequent diagnosis of leukaemia or lymphoma",
-   "Constitutional symptoms such as fever, weight loss or night sweats"
-  ],
-  "prognosis": "The prognosis is variable and depends on the extent of disease and any associated haematological malignancy; purely cutaneous disease may remain stable, progress or occasionally regress, whereas cases linked to leukaemia or lymphoma follow the course of the underlying neoplasm.",
-  "pitfalls": [
-   "Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck granules.",
-   "Failing to screen for an associated haematological malignancy at diagnosis and during follow-up.",
-   "Assuming a uniformly benign course given the variable and sometimes neoplastic behaviour.",
-   "Overlooking molecular testing that may guide targeted therapy in progressive disease.",
-   "Confusing it with the CD1a-negative non-Langerhans cell histiocytoses and thereby misdirecting management."
-  ],
-  "references": [
-   "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
-   "Rook's Textbook of Dermatology (current edition)",
-   "Standard haematopathology reference texts (current editions)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously",
-   "Local treatment of symptomatic skin lesions with surgical excision, phototherapy such as PUVA, topical or intralesional corticosteroids, or localised radiotherapy",
-   "Systemic or targeted therapy for extensive or refractory disease, including BRAF or MEK inhibitors where a MAP kinase pathway mutation is identified",
-   "Screening for and treatment of an associated myeloid or lymphoid malignancy, which then directs management",
-   "Surveillance with periodic blood counts and clinical review given the variable course and haematological associations",
-   "Joint dermatology and haematology multidisciplinary management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "indeterminate_cell_histiocytosis-pathway",
-   "title": "Indeterminate cell histiocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack langerin (CD207) and Birbeck granules, placing them at an indeterminate position between Langerhans cells and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cytopenias, monocytosis or abnormal blood film suggesting an associated myeloid neoplasm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68), Electron microscopy to confirm absence of Birbeck granules where diagnosis is uncertain, Molecular testing for ETV3-NCOA2 fusion and BRAF / MAP"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck granules."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of indeterminate cell histiocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "indeterminate_cell_histiocytosis-matrix",
-   "title": "Indeterminate cell histiocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Haematology",
+  "specialty": "Dermatology / Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Histiocytoses",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack langerin (CD207) and Birbeck granules, placing them at an indeterminate position between Langerhans cells and dermal dendrocytes.",
+      "It usually presents in adults as solitary or multiple asymptomatic red-brown to yellowish papules, plaques or nodules on the trunk, limbs, face or neck.",
+      "The disease is most often confined to the skin, but mucosal, nodal and rare visceral involvement have been described.",
+      "Lesions may appear in crops and can persist, progress or occasionally regress spontaneously, so the course is variable.",
+      "Histology shows a dermal infiltrate of histiocytes that are CD1a and S100 positive but langerin negative, and electron microscopy characteristically lacks Birbeck granules.",
+      "An association with haematological malignancies, particularly myeloid and lymphoid neoplasms including chronic myelomonocytic leukaemia and low-grade B-cell lymphomas, has been reported and warrants haematological review.",
+      "Some cases harbour clonal kinase-pathway alterations, including translocations involving the ETV3-NCOA2 fusion and BRAF or other MAP kinase pathway mutations, supporting a neoplastic basis in a subset.",
+      "It should be distinguished from Langerhans cell histiocytosis, which is langerin positive with Birbeck granules, and from the CD1a-negative non-Langerhans cell histiocytoses."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68), Electron microscopy to confirm absence of Birbeck",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Indeterminate cell histiocytosis is a proliferation of so-called indeterminate dendritic cells, which display a hybrid immunophenotype expressing the Langerhans cell markers CD1a and S100 but, crucially, lacking langerin (CD207) and the ultrastructural Birbeck granules that define mature Langerhans cells. These cells are thought to correspond to a precursor or transitional dendritic cell that has not fully differentiated along the Langerhans cell pathway, or to a dermal dendritic cell that has acquired CD1a expression. While historically regarded as reactive, the identification of clonal molecular alterations in a proportion of cases, including the ETV3-NCOA2 gene fusion and activating mutations of the MAP kinase pathway such as BRAF, indicates that at least some cases are genuinely neoplastic. The reported co-occurrence with myeloid and lymphoid malignancies further supports a clonal, potentially shared-progenitor relationship in a subset of patients.",
+    "additionalDifferentials": [
+      "Langerhans cell histiocytosis",
+      "Juvenile / adult xanthogranuloma",
+      "Generalised eruptive histiocytosis",
+      "Rosai-Dorfman disease",
+      "Reticulohistiocytosis",
+      "Cutaneous involvement by leukaemia or lymphoma",
+      "Mastocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Langerhans cell histiocytosis, Juvenile / adult xanthogranuloma, Generalised eruptive histiocytosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68)",
+      "Electron microscopy to confirm absence of Birbeck granules where diagnosis is uncertain",
+      "Molecular testing for ETV3-NCOA2 fusion and BRAF / MAP kinase pathway mutations where available",
+      "Full blood count and blood film to screen for associated haematological malignancy",
+      "Bone marrow examination if a myeloid or lymphoid neoplasm is suspected",
+      "Serum protein electrophoresis and lactate dehydrogenase",
+      "Imaging to assess for nodal or visceral involvement in extensive disease"
     ],
-    [
-     "Management Strategy",
-     "Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously",
-     "Core treatment modality"
+    "redFlags": [
+      "Cytopenias, monocytosis or abnormal blood film suggesting an associated myeloid neoplasm",
+      "Lymphadenopathy, organomegaly or systemic symptoms suggesting nodal or visceral disease",
+      "Rapidly progressive or ulcerating lesions",
+      "Coexisting or subsequent diagnosis of leukaemia or lymphoma",
+      "Constitutional symptoms such as fever, weight loss or night sweats"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is variable and depends on the extent of disease and any associated haematological malignancy; purely cutaneous disease may remain stable, progress or occasionally regress, whereas cases linked to leukaemia or lymphoma follow the course of the underlying neoplasm.",
+    "pitfalls": [
+      "Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck granules.",
+      "Failing to screen for an associated haematological malignancy at diagnosis and during follow-up.",
+      "Assuming a uniformly benign course given the variable and sometimes neoplastic behaviour.",
+      "Overlooking molecular testing that may guide targeted therapy in progressive disease.",
+      "Confusing it with the CD1a-negative non-Langerhans cell histiocytoses and thereby misdirecting management."
+    ],
+    "references": [
+      "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
+      "Rook's Textbook of Dermatology (current edition)",
+      "Standard haematopathology reference texts (current editions)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously",
+      "Local treatment of symptomatic skin lesions with surgical excision, phototherapy such as PUVA, topical or intralesional corticosteroids, or localised radiotherapy",
+      "Systemic or targeted therapy for extensive or refractory disease, including BRAF or MEK inhibitors where a MAP kinase pathway mutation is identified",
+      "Screening for and treatment of an associated myeloid or lymphoid malignancy, which then directs management",
+      "Surveillance with periodic blood counts and clinical review given the variable course and haematological associations",
+      "Joint dermatology and haematology multidisciplinary management"
     ]
-   ],
-   "caption": "Overview comparison matrix for indeterminate cell histiocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "indeterminate-cell-histiocytosis-real-image",
-   "title": "Indeterminate cell histiocytosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "indeterminate_cell_histiocytosis-pathway",
+      "title": "Indeterminate cell histiocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack langerin (CD207) and Birbeck granules, placing them at an indeterminate position between Langerhans cells and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cytopenias, monocytosis or abnormal blood film suggesting an associated myeloid neoplasm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68), Electron microscopy to confirm absence of Birbeck granules where diagnosis is uncertain, Molecular testing for ETV3-NCOA2 fusion and BRAF / MAP"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck granules."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of indeterminate cell histiocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "indeterminate_cell_histiocytosis-matrix",
+      "title": "Indeterminate cell histiocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare histiocytic proliferation whose lesional cells share the immunophenotype of Langerhans cells (CD1a positive) yet lack",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with immunohistochemistry (CD1a, S100, langerin/CD207, CD68), Electron microscopy to confirm absence of Birbeck",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Langerhans cell histiocytosis, Juvenile / adult xanthogranuloma, Generalised eruptive histiocytosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation for asymptomatic cutaneous disease, since lesions may remain stable or regress spontaneously",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying it as Langerhans cell histiocytosis on the basis of CD1a positivity without testing for langerin or Birbeck",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for indeterminate cell histiocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Histiocytoses",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "indeterminate_cell_histiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with CD1a, S100, langerin (CD207) and CD68",
+          "cells": [
+            {
+              "text": "CD1a and S100 positive; langerin negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Absence of Birbeck granules when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ETV3-NCOA2 and BRAF / MAP kinase testing",
+          "cells": [
+            {
+              "text": "Mutation status where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Associated haematological malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "When a myeloid or lymphoid neoplasm is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum protein electrophoresis and lactate dehydrogenase",
+          "cells": [
+            {
+              "text": "Systemic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Nodal or visceral involvement in extensive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "indeterminate_cell_histiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "CD1a positive, but lacks langerin and Birbeck granules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous involvement by leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Cytopenias, monocytosis or abnormal blood film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "indeterminate_cell_histiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic cutaneous disease; lesions may stay stable or regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local treatment",
+          "cells": [
+            {
+              "text": "Surgical excision, PUVA, topical or intralesional corticosteroids, or localised radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic or targeted therapy",
+          "cells": [
+            {
+              "text": "Extensive or refractory disease; BRAF or MEK inhibitors where a MAP kinase mutation is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated malignancy",
+          "cells": [
+            {
+              "text": "Screen for and treat myeloid or lymphoid malignancy, which then directs management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Periodic blood counts and clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Joint dermatology and haematology management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "indeterminate_cell_histiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Indeterminate cell histiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Solitary or multiple red-brown papules or nodules, usually in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cytopenias, lymphadenopathy, organomegaly or rapidly ulcerating lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology review; bone marrow and systemic staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with CD1a, S100, langerin, CD68; blood count; ETV3-NCOA2 and BRAF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Langerin-negative, CD1a-positive lesion without Birbeck granules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider Langerhans cell histiocytosis, xanthogranuloma or leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic skin disease, which may regress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision, PUVA or steroid injection for symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "BRAF or MEK inhibitors for extensive disease with MAPK mutation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat associated haematological malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Blood count surveillance with joint dermatology and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable course; surveillance and malignancy screening continue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

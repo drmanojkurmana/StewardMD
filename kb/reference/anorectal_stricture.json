@@ -1,178 +1,496 @@
 {
- "id": "anorectal_stricture",
- "name": "Anorectal stricture",
- "aliases": [
-  "rectal stricture",
-  "anorectal narrowing",
-  "rectal stenosis"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex than isolated anal stenosis at the verge",
-   "Common causes include anastomotic strictures after low anterior resection or stapled anorectal surgery, radiation injury, Crohn disease, ischaemia, chronic inflammation, and neoplasia",
-   "Presentation includes obstructed defecation, tenesmus, narrow-calibre stool, straining, incomplete evacuation, and, when severe, features of large-bowel obstruction",
-   "A stricture with no clear benign explanation must be regarded as malignant until proven otherwise, and biopsy is mandatory",
-   "Anastomotic strictures after colorectal surgery are frequent, particularly after low stapled anastomoses, diverting stomas, or anastomotic leak, and many are short and web-like",
-   "Endoscopic assessment defines the level, length, and calibre, while cross-sectional imaging and examination under anaesthesia clarify complex or high strictures",
-   "Short benign strictures often respond to endoscopic or digital dilatation, whereas long, dense, radiation-related, or recurrent strictures may need stricturoplasty, resection, or diversion",
-   "Treatment must address the underlying disease, as strictures from Crohn disease or radiation behave differently from simple anastomotic scars"
+  "id": "anorectal_stricture",
+  "name": "Anorectal stricture",
+  "aliases": [
+    "rectal stricture",
+    "anorectal narrowing",
+    "rectal stenosis"
   ],
-  "pathophysiology": "An anorectal stricture forms when the wall of the distal rectum or anal canal is narrowed by fibrosis, inflammation, ischaemia, or neoplastic infiltration, with loss of the normal distensibility of the lumen. After surgical anastomosis, ischaemia, subclinical leak, or scarring of the staple or suture line contracts the lumen into a fibrous ring. Radiation injury produces progressive obliterative endarteritis and submucosal fibrosis. Crohn disease drives transmural inflammation and fibrosis, and chronic infections or inflammatory dermatoses provoke cicatrisation. Malignant strictures narrow the lumen by mural infiltration. The rigid, non-compliant segment obstructs the passage of stool, causing straining, tenesmus, and proximal loading, and in tight strictures may progress to overt obstruction.",
-  "additionalDifferentials": [
-   "Rectal or anal carcinoma causing malignant stricture",
-   "Anastomotic stricture following colorectal resection",
-   "Crohn disease with anorectal stricturing",
-   "Radiation proctitis with stricture",
-   "Ischaemic stricture of the rectum",
-   "Lymphogranuloma venereum or other infective stricture",
-   "Diverticular or extrinsic compressive narrowing of the distal bowel"
-  ],
-  "additionalInvestigations": [
-   "Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies",
-   "Biopsy of the stricture to exclude malignancy and identify inflammatory causes",
-   "Examination under anaesthesia for complex, painful, or high strictures",
-   "Pelvic MRI or CT to assess mural and extramural extent",
-   "Contrast enema or defecography to characterise length and function",
-   "Assessment of anastomotic history, prior radiation, and inflammatory bowel disease status"
-  ],
-  "redFlags": [
-   "An irregular, ulcerated, or hard stricture suggesting malignancy",
-   "A stricture without a clear benign cause",
-   "Progressive obstruction with abdominal distension and vomiting",
-   "Rectal bleeding, weight loss, or a rising tumour marker",
-   "Associated fistula, abscess, or perianal Crohn disease"
-  ],
-  "prognosis": "Short benign anorectal strictures often do well with dilatation, but long, dense, radiation-related, or recurrent strictures are more difficult and may require major surgery or permanent diversion; the outlook is dominated by the underlying cause, and malignant strictures carry the prognosis of the tumour.",
-  "pitfalls": [
-   "Assuming a stricture is benign and omitting biopsy, thereby missing malignancy",
-   "Aggressive dilatation of dense or radiation strictures causing perforation",
-   "Failing to treat the underlying Crohn disease or radiation injury",
-   "Overlooking a subclinical anastomotic leak as the cause of a postoperative stricture",
-   "Repeated dilatation of a recurrent stricture without reassessing for underlying disease"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Association of Coloproctology of Great Britain and Ireland guidance on benign and malignant anorectal disease",
-   "Standard coloproctology reference texts on anastomotic and radiation strictures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the underlying cause",
-   "Treat short benign strictures with endoscopic, digital, or bougie dilatation, repeated as required",
-   "Maintain luminal patency and ease passage with stool softeners and bulking agents",
-   "Manage refractory or complex benign strictures with stricturoplasty, advancement flap, or resection",
-   "Optimise medical therapy with immunosuppression or biologics in Crohn-related strictures, and dilate radiation strictures cautiously",
-   "Treat malignant strictures according to oncological staging and tumour type",
-   "Divert with a stoma for severe obstruction and refer to colorectal surgery for complex or high disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anorectal_stricture-pathway",
-   "title": "Anorectal stricture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex than isolated anal stenosis at the verge",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An irregular, ulcerated, or hard stricture suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies, Biopsy of the stricture to exclude malignancy and identify inflammatory causes, Examination under anaesthesia for complex, painful,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the underlying cause"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a stricture is benign and omitting biopsy, thereby missing malignancy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anorectal stricture."
-  }
- ],
- "tables": [
-  {
-   "id": "anorectal_stricture-matrix",
-   "title": "Anorectal stricture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex than isolated anal stenosis at the verge",
+      "Common causes include anastomotic strictures after low anterior resection or stapled anorectal surgery, radiation injury, Crohn disease, ischaemia, chronic inflammation, and neoplasia",
+      "Presentation includes obstructed defecation, tenesmus, narrow-calibre stool, straining, incomplete evacuation, and, when severe, features of large-bowel obstruction",
+      "A stricture with no clear benign explanation must be regarded as malignant until proven otherwise, and biopsy is mandatory",
+      "Anastomotic strictures after colorectal surgery are frequent, particularly after low stapled anastomoses, diverting stomas, or anastomotic leak, and many are short and web-like",
+      "Endoscopic assessment defines the level, length, and calibre, while cross-sectional imaging and examination under anaesthesia clarify complex or high strictures",
+      "Short benign strictures often respond to endoscopic or digital dilatation, whereas long, dense, radiation-related, or recurrent strictures may need stricturoplasty, resection, or diversion",
+      "Treatment must address the underlying disease, as strictures from Crohn disease or radiation behave differently from simple anastomotic scars"
     ],
-    [
-     "Key Investigations",
-     "Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies, Biopsy of the stricture to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An anorectal stricture forms when the wall of the distal rectum or anal canal is narrowed by fibrosis, inflammation, ischaemia, or neoplastic infiltration, with loss of the normal distensibility of the lumen. After surgical anastomosis, ischaemia, subclinical leak, or scarring of the staple or suture line contracts the lumen into a fibrous ring. Radiation injury produces progressive obliterative endarteritis and submucosal fibrosis. Crohn disease drives transmural inflammation and fibrosis, and chronic infections or inflammatory dermatoses provoke cicatrisation. Malignant strictures narrow the lumen by mural infiltration. The rigid, non-compliant segment obstructs the passage of stool, causing straining, tenesmus, and proximal loading, and in tight strictures may progress to overt obstruction.",
+    "additionalDifferentials": [
+      "Rectal or anal carcinoma causing malignant stricture",
+      "Anastomotic stricture following colorectal resection",
+      "Crohn disease with anorectal stricturing",
+      "Radiation proctitis with stricture",
+      "Ischaemic stricture of the rectum",
+      "Lymphogranuloma venereum or other infective stricture",
+      "Diverticular or extrinsic compressive narrowing of the distal bowel"
     ],
-    [
-     "Primary Differentials",
-     "Rectal or anal carcinoma causing malignant stricture, Anastomotic stricture following colorectal resection, Crohn disease with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies",
+      "Biopsy of the stricture to exclude malignancy and identify inflammatory causes",
+      "Examination under anaesthesia for complex, painful, or high strictures",
+      "Pelvic MRI or CT to assess mural and extramural extent",
+      "Contrast enema or defecography to characterise length and function",
+      "Assessment of anastomotic history, prior radiation, and inflammatory bowel disease status"
     ],
-    [
-     "Management Strategy",
-     "Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the",
-     "Core treatment modality"
+    "redFlags": [
+      "An irregular, ulcerated, or hard stricture suggesting malignancy",
+      "A stricture without a clear benign cause",
+      "Progressive obstruction with abdominal distension and vomiting",
+      "Rectal bleeding, weight loss, or a rising tumour marker",
+      "Associated fistula, abscess, or perianal Crohn disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a stricture is benign and omitting biopsy, thereby missing malignancy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Short benign anorectal strictures often do well with dilatation, but long, dense, radiation-related, or recurrent strictures are more difficult and may require major surgery or permanent diversion; the outlook is dominated by the underlying cause, and malignant strictures carry the prognosis of the tumour.",
+    "pitfalls": [
+      "Assuming a stricture is benign and omitting biopsy, thereby missing malignancy",
+      "Aggressive dilatation of dense or radiation strictures causing perforation",
+      "Failing to treat the underlying Crohn disease or radiation injury",
+      "Overlooking a subclinical anastomotic leak as the cause of a postoperative stricture",
+      "Repeated dilatation of a recurrent stricture without reassessing for underlying disease"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Association of Coloproctology of Great Britain and Ireland guidance on benign and malignant anorectal disease",
+      "Standard coloproctology reference texts on anastomotic and radiation strictures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the underlying cause",
+      "Treat short benign strictures with endoscopic, digital, or bougie dilatation, repeated as required",
+      "Maintain luminal patency and ease passage with stool softeners and bulking agents",
+      "Manage refractory or complex benign strictures with stricturoplasty, advancement flap, or resection",
+      "Optimise medical therapy with immunosuppression or biologics in Crohn-related strictures, and dilate radiation strictures cautiously",
+      "Treat malignant strictures according to oncological staging and tumour type",
+      "Divert with a stoma for severe obstruction and refer to colorectal surgery for complex or high disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for anorectal stricture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anorectal-stricture-real-image",
-   "title": "Anorectal stricture: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "anorectal_stricture-pathway",
+      "title": "Anorectal stricture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex than isolated anal stenosis at the verge",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An irregular, ulcerated, or hard stricture suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies, Biopsy of the stricture to exclude malignancy and identify inflammatory causes, Examination under anaesthesia for complex, painful,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the underlying cause"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a stricture is benign and omitting biopsy, thereby missing malignancy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anorectal stricture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anorectal_stricture-matrix",
+      "title": "Anorectal stricture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An anorectal stricture is a fixed narrowing spanning the distal rectum and/or anal canal, more proximal and often more complex",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Endoscopy (rigid or flexible) to define level, length, and calibre and to obtain biopsies, Biopsy of the stricture to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rectal or anal carcinoma causing malignant stricture, Anastomotic stricture following colorectal resection, Crohn disease with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Biopsy every stricture without a clear benign explanation to exclude malignancy before treatment, and direct therapy at the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a stricture is benign and omitting biopsy, thereby missing malignancy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anorectal stricture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anorectal_stricture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopy, rigid or flexible",
+          "cells": [
+            {
+              "text": "Level, length and calibre, with biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the stricture",
+          "cells": [
+            {
+              "text": "Excludes malignancy and identifies inflammatory causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Complex, painful or high strictures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI or CT",
+          "cells": [
+            {
+              "text": "Mural and extramural extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast enema or defecography",
+          "cells": [
+            {
+              "text": "Length and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anastomotic, radiation and bowel disease history",
+          "cells": [
+            {
+              "text": "Possible causes of the stricture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorectal_stricture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal or anal carcinoma causing malignant stricture",
+          "cells": [
+            {
+              "text": "Irregular, ulcerated or hard stricture suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn disease with anorectal stricturing",
+          "cells": [
+            {
+              "text": "Crohn-related strictures are treated with immunosuppression or biologics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiation proctitis with stricture",
+          "cells": [
+            {
+              "text": "Aggressive dilatation of dense radiation strictures risks perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorectal_stricture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy and treat the cause",
+          "cells": [
+            {
+              "text": "Biopsy every stricture without a clear benign explanation"
+            },
+            {
+              "text": "Excludes malignancy before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilatation",
+          "cells": [
+            {
+              "text": "Endoscopic, digital or bougie dilatation"
+            },
+            {
+              "text": "Short benign strictures, repeated as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool softeners and bulking agents",
+          "cells": [
+            {
+              "text": "Maintain luminal patency and ease passage"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or complex benign strictures",
+          "cells": [
+            {
+              "text": "Stricturoplasty, advancement flap or resection"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Immunosuppression or biologics for Crohn-related strictures"
+            },
+            {
+              "text": "Dilate radiation strictures cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant strictures",
+          "cells": [
+            {
+              "text": "Treated according to oncological staging and tumour type"
+            },
+            {
+              "text": "Oncology pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stoma diversion",
+          "cells": [
+            {
+              "text": "For severe obstruction"
+            },
+            {
+              "text": "Refer complex or high disease to colorectal surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anorectal_stricture-dx-mgmt",
+      "title": "Diagnosis and management of Anorectal stricture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anorectal narrowing with obstructive symptoms or rectal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Irregular, hard or ulcerated stricture suggesting malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude malignancy; divert if obstruction is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsy, MRI or CT, contrast enema or defecography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy shows a benign cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Dilatation for short benign strictures, repeated as required",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stool softeners and bulking agents to maintain patency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stricturoplasty, advancement flap or resection for refractory strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunosuppression or biologics for Crohn-related strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Malignant strictures are treated by oncological staging and tumour type",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "limb_girdle_muscular_dystrophy_d3",
- "name": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related)",
- "aliases": [
-  "LGMD1G",
-  "HNRNPDL-related LGMD",
-  "HNRNPDL"
- ],
- "class": "non_infective",
- "system": "Neuromuscular / Limb-girdle muscular dystrophy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif) impair the function of an RNA-binding protein with a prion-like low-complexity domain.",
-   "Presents as adult-onset proximal limb-girdle weakness.",
-   "A distinctive tendency to limitation of finger and toe flexion was described in the original families.",
-   "Cataracts have been reported in a proportion of affected individuals.",
-   "Creatine kinase is mildly to moderately elevated.",
-   "Muscle biopsy shows dystrophic change with rimmed vacuoles.",
-   "First delineated in Brazilian and Uruguayan kindreds.",
-   "Formerly designated LGMD1G."
+  "id": "limb_girdle_muscular_dystrophy_d3",
+  "name": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related)",
+  "aliases": [
+    "LGMD1G",
+    "HNRNPDL-related LGMD",
+    "HNRNPDL"
   ],
-  "pathophysiology": "Limb-girdle muscular dystrophy D3 is an autosomal dominant subtype caused by heterozygous variants in HNRNPDL on chromosome 4q21, which encodes heterogeneous nuclear ribonucleoprotein D-like, an RNA-binding protein that shuttles between nucleus and cytoplasm and regulates transcription, alternative splicing and messenger-RNA metabolism. Nearly all reported families carry variants affecting a conserved residue within the second RNA-recognition motif, and because the protein contains a prion-like low-complexity domain, the mechanism is thought to involve disturbed RNA processing together with aberrant protein aggregation, akin to other RNA-binding-protein myopathies. First delineated in Brazilian and Uruguayan kindreds, the phenotype is an adult-onset proximal limb-girdle weakness with a distinctive tendency to limitation of finger and toe flexion, and cataracts have been reported in some affected individuals. Muscle biopsy shows dystrophic change with rimmed vacuoles.",
-  "additionalDifferentials": [
-   "LGMD D1 (DNAJB6-related)",
-   "LGMD D2 (TNPO3-related)",
-   "LGMD D4 (autosomal dominant calpainopathy, CAPN3)",
-   "Myotonic dystrophy (cataracts and distal features)",
-   "Myofibrillar myopathies",
-   "Sporadic inclusion body myositis (rimmed vacuoles)",
-   "Other RNA-binding-protein myopathies (for example hnRNPA1 and hnRNPA2B1)"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL",
-   "Muscle biopsy (dystrophic change with rimmed vacuoles)",
-   "Slit-lamp examination for cataracts",
-   "Muscle MRI to map involvement",
-   "Electromyography",
-   "Baseline ECG and echocardiography"
-  ],
-  "redFlags": [
-   "Progressive dysphagia",
-   "New respiratory symptoms",
-   "Rapid deterioration prompting diagnostic reassessment",
-   "Visual symptoms attributable to cataract"
-  ],
-  "prognosis": "Progression is slow and many patients retain ambulation for years. Cataracts, when present, may require ophthalmic management.",
-  "pitfalls": [
-   "The combination of cataracts and weakness may be misattributed to myotonic dystrophy.",
-   "Rimmed vacuoles may falsely suggest sporadic inclusion body myositis.",
-   "Rarity and ancestry-specific reporting can delay recognition.",
-   "Variable expressivity within families may obscure the dominant inheritance pattern."
-  ],
-  "references": [
-   "Standard neuromuscular medicine textbooks",
-   "Consensus classification of the limb-girdle muscular dystrophies",
-   "Clinical neurogenetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength and address limitation of finger and toe flexion",
-   "Arrange ophthalmological review and cataract surgery where cataracts develop",
-   "Provide respiratory monitoring with ventilatory support as required",
-   "Deliver multidisciplinary neuromuscular rehabilitation, with ambulation often retained for years",
-   "Provide genetic counselling for autosomal dominant inheritance and family screening",
-   "Arrange specialist neuromuscular follow-up for diagnosis and surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_d3-pathway",
-   "title": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif) impair the function of an RNA-binding protein with a prion-like low-complexity domain.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysphagia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL, Muscle biopsy (dystrophic change with rimmed vacuoles)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength and address limitation of finger and toe flexion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: The combination of cataracts and weakness may be misattributed to myotonic dystrophy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy d3 (hnrnpdl-related)."
-  }
- ],
- "tables": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_d3-matrix",
-   "title": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif) impair the function of an RNA-binding protein with a prion-like low-complexity domain.",
+      "Presents as adult-onset proximal limb-girdle weakness.",
+      "A distinctive tendency to limitation of finger and toe flexion was described in the original families.",
+      "Cataracts have been reported in a proportion of affected individuals.",
+      "Creatine kinase is mildly to moderately elevated.",
+      "Muscle biopsy shows dystrophic change with rimmed vacuoles.",
+      "First delineated in Brazilian and Uruguayan kindreds.",
+      "Formerly designated LGMD1G."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL, Muscle biopsy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Limb-girdle muscular dystrophy D3 is an autosomal dominant subtype caused by heterozygous variants in HNRNPDL on chromosome 4q21, which encodes heterogeneous nuclear ribonucleoprotein D-like, an RNA-binding protein that shuttles between nucleus and cytoplasm and regulates transcription, alternative splicing and messenger-RNA metabolism. Nearly all reported families carry variants affecting a conserved residue within the second RNA-recognition motif, and because the protein contains a prion-like low-complexity domain, the mechanism is thought to involve disturbed RNA processing together with aberrant protein aggregation, akin to other RNA-binding-protein myopathies. First delineated in Brazilian and Uruguayan kindreds, the phenotype is an adult-onset proximal limb-girdle weakness with a distinctive tendency to limitation of finger and toe flexion, and cataracts have been reported in some affected individuals. Muscle biopsy shows dystrophic change with rimmed vacuoles.",
+    "additionalDifferentials": [
+      "LGMD D1 (DNAJB6-related)",
+      "LGMD D2 (TNPO3-related)",
+      "LGMD D4 (autosomal dominant calpainopathy, CAPN3)",
+      "Myotonic dystrophy (cataracts and distal features)",
+      "Myofibrillar myopathies",
+      "Sporadic inclusion body myositis (rimmed vacuoles)",
+      "Other RNA-binding-protein myopathies (for example hnRNPA1 and hnRNPA2B1)"
     ],
-    [
-     "Primary Differentials",
-     "LGMD D1 (DNAJB6-related), LGMD D2 (TNPO3-related), LGMD D4 (autosomal dominant calpainopathy, CAPN3)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL",
+      "Muscle biopsy (dystrophic change with rimmed vacuoles)",
+      "Slit-lamp examination for cataracts",
+      "Muscle MRI to map involvement",
+      "Electromyography",
+      "Baseline ECG and echocardiography"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysphagia",
+      "New respiratory symptoms",
+      "Rapid deterioration prompting diagnostic reassessment",
+      "Visual symptoms attributable to cataract"
     ],
-    [
-     "Clinical Pitfall",
-     "The combination of cataracts and weakness may be misattributed to myotonic dystrophy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is slow and many patients retain ambulation for years. Cataracts, when present, may require ophthalmic management.",
+    "pitfalls": [
+      "The combination of cataracts and weakness may be misattributed to myotonic dystrophy.",
+      "Rimmed vacuoles may falsely suggest sporadic inclusion body myositis.",
+      "Rarity and ancestry-specific reporting can delay recognition.",
+      "Variable expressivity within families may obscure the dominant inheritance pattern."
+    ],
+    "references": [
+      "Standard neuromuscular medicine textbooks",
+      "Consensus classification of the limb-girdle muscular dystrophies",
+      "Clinical neurogenetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength and address limitation of finger and toe flexion",
+      "Arrange ophthalmological review and cataract surgery where cataracts develop",
+      "Provide respiratory monitoring with ventilatory support as required",
+      "Deliver multidisciplinary neuromuscular rehabilitation, with ambulation often retained for years",
+      "Provide genetic counselling for autosomal dominant inheritance and family screening",
+      "Arrange specialist neuromuscular follow-up for diagnosis and surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for limb-girdle muscular dystrophy d3 (hnrnpdl-related)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "limb-girdle-muscular-dystrophy-d3-real-image",
-   "title": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "limb_girdle_muscular_dystrophy_d3-pathway",
+      "title": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif) impair the function of an RNA-binding protein with a prion-like low-complexity domain.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysphagia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL, Muscle biopsy (dystrophic change with rimmed vacuoles)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength and address limitation of finger and toe flexion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: The combination of cataracts and weakness may be misattributed to myotonic dystrophy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy d3 (hnrnpdl-related)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_d3-matrix",
+      "title": "Limb-girdle muscular dystrophy D3 (HNRNPDL-related): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant; heterozygous HNRNPDL variants (classically affecting a conserved residue in the second RNA-recognition motif)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Next-generation sequencing gene panel or whole-exome sequencing including HNRNPDL, Muscle biopsy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "LGMD D1 (DNAJB6-related), LGMD D2 (TNPO3-related), LGMD D4 (autosomal dominant calpainopathy, CAPN3)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-specific drug therapy and use physiotherapy and occupational therapy to preserve proximal strength",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "The combination of cataracts and weakness may be misattributed to myotonic dystrophy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limb-girdle muscular dystrophy d3 (hnrnpdl-related)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_d3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Mildly to moderately elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NGS panel or exome sequencing including HNRNPDL",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Dystrophic change with rimmed vacuoles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Cataracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Maps involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Baseline assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_d3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myotonic dystrophy",
+          "cells": [
+            {
+              "text": "Cataracts and distal features can point towards it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LGMD D1 (DNAJB6) and LGMD D2 (TNPO3)",
+          "cells": [
+            {
+              "text": "Other dominant subtypes; gene testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic inclusion body myositis",
+          "cells": [
+            {
+              "text": "Rimmed vacuoles can mislead toward it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other RNA-binding-protein myopathies (hnRNPA1, hnRNPA2B1)",
+          "cells": [
+            {
+              "text": "Related disorders; sequencing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_d3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve proximal strength; address limited finger and toe flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Cataract surgery where cataracts develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Ventilatory support as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular rehabilitation",
+          "cells": [
+            {
+              "text": "Ambulation often retained for years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Diagnosis and surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_d3-dx-mgmt",
+      "title": "Diagnosis and management of Limb-girdle muscular dystrophy D3 (HNRNPDL-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult-onset proximal limb-girdle weakness with cataracts and rimmed vacuoles",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive dysphagia, new respiratory symptoms, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory review and reassessment of the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, HNRNPDL sequencing, muscle biopsy, slit-lamp exam, muscle MRI, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic HNRNPDL variant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myotonic dystrophy, other dominant LGMD or inclusion body myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cataract surgery where cataracts develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring with ventilatory support as required",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuromuscular rehabilitation to maintain ambulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow progression; many retain ambulation for years; cataracts may need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

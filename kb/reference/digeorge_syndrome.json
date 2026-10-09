@@ -1,173 +1,433 @@
 {
- "id": "digeorge_syndrome",
- "name": "DiGeorge syndrome",
- "aliases": [
-  "22q11.2 deletion syndrome",
-  "velocardiofacial syndrome",
-  "Shprintzen syndrome",
-  "CATCH-22",
-  "22q11"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and cardiac outflow tract",
-   "Conotruncal cardiac defects such as tetralogy of Fallot, interrupted aortic arch, and truncus arteriosus are common",
-   "Hypocalcaemia from parathyroid hypoplasia may present with neonatal tetany or seizures",
-   "Thymic hypoplasia causes variable T-cell immunodeficiency and susceptibility to infection",
-   "Characteristic facial features, cleft palate or velopharyngeal insufficiency, and feeding and speech difficulties are frequent",
-   "Caused by a microdeletion at chromosome 22q11.2, the most common human microdeletion syndrome",
-   "Neurodevelopmental and psychiatric conditions, including a raised risk of schizophrenia in adulthood, are important later concerns",
-   "Presentation is highly variable, ranging from severe neonatal illness to mild features diagnosed incidentally"
+  "id": "digeorge_syndrome",
+  "name": "DiGeorge syndrome",
+  "aliases": [
+    "22q11.2 deletion syndrome",
+    "velocardiofacial syndrome",
+    "Shprintzen syndrome",
+    "CATCH-22",
+    "22q11"
   ],
-  "pathophysiology": "DiGeorge syndrome is most often caused by a recurrent hemizygous microdeletion at chromosome 22q11.2, encompassing the TBX1 gene among others. TBX1 is critical for development of the pharyngeal arches and pouches, and its haploinsufficiency disrupts formation of the thymus, parathyroid glands, and cardiac outflow tract, producing immunodeficiency, hypoparathyroidism with hypocalcaemia, and conotruncal heart defects. The deletion typically arises de novo from misalignment of flanking low-copy repeats, though it can be inherited in an autosomal dominant manner. Similar phenotypes rarely result from other causes such as maternal diabetes or teratogen exposure.",
-  "additionalDifferentials": [
-   "CHARGE syndrome",
-   "Smith-Lemli-Opitz syndrome",
-   "Other conotruncal cardiac malformation syndromes",
-   "Maternal diabetes embryopathy",
-   "Other primary immunodeficiencies with hypocalcaemia"
-  ],
-  "additionalInvestigations": [
-   "Chromosomal microarray or targeted FISH for the 22q11.2 deletion",
-   "Serum calcium, phosphate, and parathyroid hormone measurement",
-   "Immunological evaluation including T-cell subsets and lymphocyte function",
-   "Echocardiography to define cardiac anatomy",
-   "Palate, feeding, hearing, and developmental assessments"
-  ],
-  "redFlags": [
-   "Neonatal hypocalcaemia causing seizures or tetany requiring urgent correction",
-   "Severe cardiac defects presenting with cyanosis or shock in the newborn",
-   "Profound T-cell immunodeficiency needing irradiated, cytomegalovirus-safe blood products and caution with live vaccines",
-   "Later emergence of serious psychiatric illness warranting monitoring in adolescence and adulthood"
-  ],
-  "prognosis": "Outcome depends chiefly on the severity of cardiac disease and immunodeficiency; most children with milder immune involvement do well, while those with complete thymic aplasia face life-threatening infection unless treated with thymic or immune reconstitution.",
-  "pitfalls": [
-   "Overlooking hypocalcaemia as a cause of neonatal seizures",
-   "Giving non-irradiated blood or live vaccines to a severely immunodeficient infant",
-   "Assuming normal cognition and missing learning and psychiatric needs",
-   "Failing to consider the diagnosis in an isolated conotruncal cardiac lesion"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating neonatal tetany or seizures urgently",
-   "Surgical correction of conotruncal cardiac defects such as tetralogy of Fallot, interrupted aortic arch or truncus arteriosus with paediatric cardiology and cardiac surgery",
-   "Immunological management guided by T-cell studies, with thymic transplantation or haematopoietic reconstitution for complete athymia and antimicrobial prophylaxis or immunoglobulin support otherwise",
-   "Avoid live vaccines and use irradiated, cytomegalovirus-negative blood products where significant T-cell immunodeficiency exists",
-   "Repair of cleft palate or velopharyngeal insufficiency with speech, feeding and hearing therapy",
-   "Developmental, educational and psychiatric support given learning difficulty and later psychiatric risk",
-   "Genetic counselling with parental testing for the 22q11.2 microdeletion, which is usually de novo but autosomal dominant when inherited"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "digeorge_syndrome-pathway",
-   "title": "DiGeorge syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and cardiac outflow tract",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal hypocalcaemia causing seizures or tetany requiring urgent correction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chromosomal microarray or targeted FISH for the 22q11.2 deletion, Serum calcium, phosphate, and parathyroid hormone measurement, Immunological evaluation including T-cell subsets and lymphocyte function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating neonatal tetany or seizures urgently"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking hypocalcaemia as a cause of neonatal seizures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of digeorge syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "digeorge_syndrome-matrix",
-   "title": "DiGeorge syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and cardiac outflow tract",
+      "Conotruncal cardiac defects such as tetralogy of Fallot, interrupted aortic arch, and truncus arteriosus are common",
+      "Hypocalcaemia from parathyroid hypoplasia may present with neonatal tetany or seizures",
+      "Thymic hypoplasia causes variable T-cell immunodeficiency and susceptibility to infection",
+      "Characteristic facial features, cleft palate or velopharyngeal insufficiency, and feeding and speech difficulties are frequent",
+      "Caused by a microdeletion at chromosome 22q11.2, the most common human microdeletion syndrome",
+      "Neurodevelopmental and psychiatric conditions, including a raised risk of schizophrenia in adulthood, are important later concerns",
+      "Presentation is highly variable, ranging from severe neonatal illness to mild features diagnosed incidentally"
     ],
-    [
-     "Key Investigations",
-     "Chromosomal microarray or targeted FISH for the 22q11.2 deletion, Serum calcium, phosphate, and parathyroid hormone measurement,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DiGeorge syndrome is most often caused by a recurrent hemizygous microdeletion at chromosome 22q11.2, encompassing the TBX1 gene among others. TBX1 is critical for development of the pharyngeal arches and pouches, and its haploinsufficiency disrupts formation of the thymus, parathyroid glands, and cardiac outflow tract, producing immunodeficiency, hypoparathyroidism with hypocalcaemia, and conotruncal heart defects. The deletion typically arises de novo from misalignment of flanking low-copy repeats, though it can be inherited in an autosomal dominant manner. Similar phenotypes rarely result from other causes such as maternal diabetes or teratogen exposure.",
+    "additionalDifferentials": [
+      "CHARGE syndrome",
+      "Smith-Lemli-Opitz syndrome",
+      "Other conotruncal cardiac malformation syndromes",
+      "Maternal diabetes embryopathy",
+      "Other primary immunodeficiencies with hypocalcaemia"
     ],
-    [
-     "Primary Differentials",
-     "CHARGE syndrome, Smith-Lemli-Opitz syndrome, Other conotruncal cardiac malformation syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chromosomal microarray or targeted FISH for the 22q11.2 deletion",
+      "Serum calcium, phosphate, and parathyroid hormone measurement",
+      "Immunological evaluation including T-cell subsets and lymphocyte function",
+      "Echocardiography to define cardiac anatomy",
+      "Palate, feeding, hearing, and developmental assessments"
     ],
-    [
-     "Management Strategy",
-     "Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal hypocalcaemia causing seizures or tetany requiring urgent correction",
+      "Severe cardiac defects presenting with cyanosis or shock in the newborn",
+      "Profound T-cell immunodeficiency needing irradiated, cytomegalovirus-safe blood products and caution with live vaccines",
+      "Later emergence of serious psychiatric illness warranting monitoring in adolescence and adulthood"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking hypocalcaemia as a cause of neonatal seizures",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the severity of cardiac disease and immunodeficiency; most children with milder immune involvement do well, while those with complete thymic aplasia face life-threatening infection unless treated with thymic or immune reconstitution.",
+    "pitfalls": [
+      "Overlooking hypocalcaemia as a cause of neonatal seizures",
+      "Giving non-irradiated blood or live vaccines to a severely immunodeficient infant",
+      "Assuming normal cognition and missing learning and psychiatric needs",
+      "Failing to consider the diagnosis in an isolated conotruncal cardiac lesion"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating neonatal tetany or seizures urgently",
+      "Surgical correction of conotruncal cardiac defects such as tetralogy of Fallot, interrupted aortic arch or truncus arteriosus with paediatric cardiology and cardiac surgery",
+      "Immunological management guided by T-cell studies, with thymic transplantation or haematopoietic reconstitution for complete athymia and antimicrobial prophylaxis or immunoglobulin support otherwise",
+      "Avoid live vaccines and use irradiated, cytomegalovirus-negative blood products where significant T-cell immunodeficiency exists",
+      "Repair of cleft palate or velopharyngeal insufficiency with speech, feeding and hearing therapy",
+      "Developmental, educational and psychiatric support given learning difficulty and later psychiatric risk",
+      "Genetic counselling with parental testing for the 22q11.2 microdeletion, which is usually de novo but autosomal dominant when inherited"
     ]
-   ],
-   "caption": "Overview comparison matrix for digeorge syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "digeorge-syndrome-real-image",
-   "title": "DiGeorge syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "digeorge_syndrome-pathway",
+      "title": "DiGeorge syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and cardiac outflow tract",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal hypocalcaemia causing seizures or tetany requiring urgent correction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chromosomal microarray or targeted FISH for the 22q11.2 deletion, Serum calcium, phosphate, and parathyroid hormone measurement, Immunological evaluation including T-cell subsets and lymphocyte function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating neonatal tetany or seizures urgently"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking hypocalcaemia as a cause of neonatal seizures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of digeorge syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "digeorge_syndrome-matrix",
+      "title": "DiGeorge syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Core features arise from abnormal development of the third and fourth pharyngeal pouches, affecting the thymus, parathyroids, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chromosomal microarray or targeted FISH for the 22q11.2 deletion, Serum calcium, phosphate, and parathyroid hormone measurement,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CHARGE syndrome, Smith-Lemli-Opitz syndrome, Other conotruncal cardiac malformation syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct hypoparathyroid hypocalcaemia with calcium and activated vitamin D analogues such as alfacalcidol or calcitriol, treating",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking hypocalcaemia as a cause of neonatal seizures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for digeorge syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "digeorge_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray or FISH for the 22q11.2 deletion",
+          "cells": [
+            {
+              "text": "22q11.2 deletion, the usual cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Hypoparathyroid hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological evaluation with T-cell subsets",
+          "cells": [
+            {
+              "text": "T-cell immunodeficiency, which can be complete in thymic aplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Conotruncal cardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palate, feeding, hearing and developmental assessment",
+          "cells": [
+            {
+              "text": "Cleft palate, velopharyngeal insufficiency and learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "digeorge_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium and activated vitamin D",
+          "cells": [
+            {
+              "text": "Alfacalcidol or calcitriol for hypoparathyroid hypocalcaemia; tetany or seizures treated urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "Conotruncal defects such as tetralogy of Fallot, interrupted aortic arch or truncus arteriosus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological management",
+          "cells": [
+            {
+              "text": "Guided by T-cell studies; thymic or haematopoietic reconstitution for complete athymia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products and vaccines",
+          "cells": [
+            {
+              "text": "Irradiated, CMV-negative products and no live vaccines where T-cell deficiency exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palate repair and therapy",
+          "cells": [
+            {
+              "text": "Speech, feeding and hearing therapy for velopharyngeal insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and psychiatric support",
+          "cells": [
+            {
+              "text": "Learning difficulty and later psychiatric risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing for the 22q11.2 microdeletion; usually de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "digeorge_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of DiGeorge syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DiGeorge syndrome: neonatal hypocalcaemia, heart defect or immune deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures or tetany, cyanosis or shock, profound T-cell deficiency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calcium correction for tetany or seizures; cardiac review for shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "22q11.2 FISH or microarray; calcium, phosphate and PTH; T-cell subsets; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the 22q11.2 deletion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CHARGE syndrome, Smith-Lemli-Opitz or other immunodeficiency with hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct hypocalcaemia with calcium and alfacalcidol or calcitriol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical correction of conotruncal defects with paediatric cardiac surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immune reconstitution guided by T-cell studies; avoid live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Irradiated, CMV-negative blood products where T-cell deficiency exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Speech, feeding and hearing therapy; developmental and psychiatric support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on heart and immune disease; complete athymia risks life-threatening infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

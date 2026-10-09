@@ -1,177 +1,484 @@
 {
- "id": "dermatofibrosarcoma_protuberans",
- "name": "Dermatofibrosarcoma protuberans",
- "aliases": [
-  "DFSP",
-  "COL1A1-PDGFB fusion tumour",
-  "Bednar tumour (pigmented variant)"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low rate of metastasis",
-   "Presents as a slowly enlarging, indurated plaque or nodule, often on the trunk or proximal limbs of young to middle-aged adults",
-   "Early lesions may be mistaken for a scar, keloid or benign dermatofibroma, delaying diagnosis",
-   "Driven by a COL1A1-PDGFB gene fusion, usually from a supernumerary ring chromosome, leading to constitutive PDGF receptor signalling",
-   "Histology shows a uniform storiform (cartwheel) arrangement of spindle cells that are diffusely CD34-positive and infiltrate subcutaneous fat in a honeycomb pattern",
-   "The infiltrative tentacle-like growth extends well beyond the clinical margin, explaining the high local recurrence rate with inadequate excision",
-   "Wide local excision with clear margins or Mohs micrographic surgery is standard, with imatinib available for unresectable, recurrent or metastatic disease"
+  "id": "dermatofibrosarcoma_protuberans",
+  "name": "Dermatofibrosarcoma protuberans",
+  "aliases": [
+    "DFSP",
+    "COL1A1-PDGFB fusion tumour",
+    "Bednar tumour (pigmented variant)"
   ],
-  "pathophysiology": "Dermatofibrosarcoma protuberans is a dermal and subcutaneous fibroblastic tumour of intermediate malignancy characterised by a COL1A1-PDGFB gene fusion, typically carried on a supernumerary ring chromosome derived from chromosomes 17 and 22. The fusion places platelet-derived growth factor B under the control of the collagen COL1A1 promoter, resulting in continuous autocrine PDGF receptor beta activation and tumour cell proliferation. The tumour grows as a storiform proliferation of CD34-positive spindle cells that infiltrates the dermis and subcutis in an insidious, finger-like fashion far beyond the visible lesion. A high-grade fibrosarcomatous transformation can occur, conferring greater metastatic risk.",
-  "additionalDifferentials": [
-   "Dermatofibroma (benign fibrous histiocytoma)",
-   "Solitary fibrous tumour",
-   "Fibrosarcoma",
-   "Desmoid-type fibromatosis",
-   "Keloid or hypertrophic scar",
-   "Malignant peripheral nerve sheath tumour"
-  ],
-  "additionalInvestigations": [
-   "MRI to define the depth and extent of the tumour before wide excision",
-   "Skin biopsy with histological assessment of storiform architecture and fat infiltration",
-   "CD34 immunohistochemistry, typically diffusely positive, aiding distinction from dermatofibroma",
-   "Molecular testing for the COL1A1-PDGFB fusion in ambiguous cases",
-   "Histological search for fibrosarcomatous transformation, which alters prognosis"
-  ],
-  "redFlags": [
-   "Rapid growth or nodularity within a long-standing plaque suggesting fibrosarcomatous transformation",
-   "Recurrent lesion after previous inadequate excision",
-   "Deep fixation to underlying fascia, muscle or bone",
-   "Metastatic disease, which is uncommon but more likely with high-grade transformation"
-  ],
-  "prognosis": "Dermatofibrosarcoma protuberans has an excellent prognosis when excised with adequate margins, but it recurs locally at high rates if margins are inadequate because of its infiltrative growth. Metastasis is rare and occurs mainly with fibrosarcomatous transformation.",
-  "pitfalls": [
-   "Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence",
-   "Mistaking it for a benign dermatofibroma, keloid or scar and delaying treatment",
-   "Overlooking fibrosarcomatous transformation on histology",
-   "Failing to consider targeted PDGFR inhibition for unresectable or metastatic disease"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not indicated since nodal spread is rare",
-   "Wide local excision with a generous margin (most series describe a minimum of about 3 cm, including underlying fascia) is a standard first line approach",
-   "Mohs micrographic surgery is an alternative first line option, particularly for tissue conservation at cosmetically or functionally sensitive sites, with comparable or lower local recurrence than wide excision",
-   "Recurrence risk tracks with margin adequacy; positive or narrow margins should prompt re-excision when feasible",
-   "Radiation therapy can be used selectively as an adjunct or alternative when adequate surgical margins cannot be achieved or resection would cause major functional or cosmetic deficit; no specific dose regimen is asserted here",
-   "For locally advanced, unresectable, or metastatic disease, a PDGF receptor tyrosine kinase inhibitor (imatinib) has the clearest documented activity, reflecting the COL1A1-PDGFB driver fusion present in most tumors",
-   "Conventional cytotoxic chemotherapy has only limited supporting data in this disease and should be considered a fallback rather than a preferred systemic option",
-   "Advanced or unresectable disease should be managed by a multidisciplinary team including surgical oncology, radiation oncology, and medical oncology",
-   "The fibrosarcomatous variant follows a more aggressive course; treatment still centers on adequate surgical excision but warrants closer follow-up and earlier consideration of systemic options if disease becomes unresectable or metastatic",
-   "Follow-up should include regular clinical examination of the surgical site and region for an extended period, with vigilance concentrated in the first several years, since most recurrences occur within this window",
-   "Refer to a center with Mohs expertise or a multidisciplinary sarcoma or skin oncology team whenever clear margins cannot be obtained or excision would risk major functional or cosmetic compromise",
-   "Refer locally advanced, unresectable, recurrent, or metastatic disease to medical oncology for consideration of PDGFR-targeted therapy alongside multidisciplinary surgical and radiation planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatofibrosarcoma_protuberans-pathway",
-   "title": "Dermatofibrosarcoma protuberans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low rate of metastasis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth or nodularity within a long-standing plaque suggesting fibrosarcomatous transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI to define the depth and extent of the tumour before wide excision, Skin biopsy with histological assessment of storiform architecture and fat infiltration, CD34 immunohistochemistry, typically diffusely positive,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not indicated since nodal spread is rare"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatofibrosarcoma protuberans."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatofibrosarcoma_protuberans-matrix",
-   "title": "Dermatofibrosarcoma protuberans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low rate of metastasis",
+      "Presents as a slowly enlarging, indurated plaque or nodule, often on the trunk or proximal limbs of young to middle-aged adults",
+      "Early lesions may be mistaken for a scar, keloid or benign dermatofibroma, delaying diagnosis",
+      "Driven by a COL1A1-PDGFB gene fusion, usually from a supernumerary ring chromosome, leading to constitutive PDGF receptor signalling",
+      "Histology shows a uniform storiform (cartwheel) arrangement of spindle cells that are diffusely CD34-positive and infiltrate subcutaneous fat in a honeycomb pattern",
+      "The infiltrative tentacle-like growth extends well beyond the clinical margin, explaining the high local recurrence rate with inadequate excision",
+      "Wide local excision with clear margins or Mohs micrographic surgery is standard, with imatinib available for unresectable, recurrent or metastatic disease"
     ],
-    [
-     "Key Investigations",
-     "MRI to define the depth and extent of the tumour before wide excision, Skin biopsy with histological assessment of storiform",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatofibrosarcoma protuberans is a dermal and subcutaneous fibroblastic tumour of intermediate malignancy characterised by a COL1A1-PDGFB gene fusion, typically carried on a supernumerary ring chromosome derived from chromosomes 17 and 22. The fusion places platelet-derived growth factor B under the control of the collagen COL1A1 promoter, resulting in continuous autocrine PDGF receptor beta activation and tumour cell proliferation. The tumour grows as a storiform proliferation of CD34-positive spindle cells that infiltrates the dermis and subcutis in an insidious, finger-like fashion far beyond the visible lesion. A high-grade fibrosarcomatous transformation can occur, conferring greater metastatic risk.",
+    "additionalDifferentials": [
+      "Dermatofibroma (benign fibrous histiocytoma)",
+      "Solitary fibrous tumour",
+      "Fibrosarcoma",
+      "Desmoid-type fibromatosis",
+      "Keloid or hypertrophic scar",
+      "Malignant peripheral nerve sheath tumour"
     ],
-    [
-     "Primary Differentials",
-     "Dermatofibroma (benign fibrous histiocytoma), Solitary fibrous tumour, Fibrosarcoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI to define the depth and extent of the tumour before wide excision",
+      "Skin biopsy with histological assessment of storiform architecture and fat infiltration",
+      "CD34 immunohistochemistry, typically diffusely positive, aiding distinction from dermatofibroma",
+      "Molecular testing for the COL1A1-PDGFB fusion in ambiguous cases",
+      "Histological search for fibrosarcomatous transformation, which alters prognosis"
     ],
-    [
-     "Management Strategy",
-     "For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth or nodularity within a long-standing plaque suggesting fibrosarcomatous transformation",
+      "Recurrent lesion after previous inadequate excision",
+      "Deep fixation to underlying fascia, muscle or bone",
+      "Metastatic disease, which is uncommon but more likely with high-grade transformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dermatofibrosarcoma protuberans has an excellent prognosis when excised with adequate margins, but it recurs locally at high rates if margins are inadequate because of its infiltrative growth. Metastasis is rare and occurs mainly with fibrosarcomatous transformation.",
+    "pitfalls": [
+      "Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence",
+      "Mistaking it for a benign dermatofibroma, keloid or scar and delaying treatment",
+      "Overlooking fibrosarcomatous transformation on histology",
+      "Failing to consider targeted PDGFR inhibition for unresectable or metastatic disease"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not indicated since nodal spread is rare",
+      "Wide local excision with a generous margin (most series describe a minimum of about 3 cm, including underlying fascia) is a standard first line approach",
+      "Mohs micrographic surgery is an alternative first line option, particularly for tissue conservation at cosmetically or functionally sensitive sites, with comparable or lower local recurrence than wide excision",
+      "Recurrence risk tracks with margin adequacy; positive or narrow margins should prompt re-excision when feasible",
+      "Radiation therapy can be used selectively as an adjunct or alternative when adequate surgical margins cannot be achieved or resection would cause major functional or cosmetic deficit; no specific dose regimen is asserted here",
+      "For locally advanced, unresectable, or metastatic disease, a PDGF receptor tyrosine kinase inhibitor (imatinib) has the clearest documented activity, reflecting the COL1A1-PDGFB driver fusion present in most tumors",
+      "Conventional cytotoxic chemotherapy has only limited supporting data in this disease and should be considered a fallback rather than a preferred systemic option",
+      "Advanced or unresectable disease should be managed by a multidisciplinary team including surgical oncology, radiation oncology, and medical oncology",
+      "The fibrosarcomatous variant follows a more aggressive course; treatment still centers on adequate surgical excision but warrants closer follow-up and earlier consideration of systemic options if disease becomes unresectable or metastatic",
+      "Follow-up should include regular clinical examination of the surgical site and region for an extended period, with vigilance concentrated in the first several years, since most recurrences occur within this window",
+      "Refer to a center with Mohs expertise or a multidisciplinary sarcoma or skin oncology team whenever clear margins cannot be obtained or excision would risk major functional or cosmetic compromise",
+      "Refer locally advanced, unresectable, recurrent, or metastatic disease to medical oncology for consideration of PDGFR-targeted therapy alongside multidisciplinary surgical and radiation planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatofibrosarcoma protuberans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatofibrosarcoma-protuberans-real-image",
-   "title": "Dermatofibrosarcoma protuberans: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "dermatofibrosarcoma_protuberans-pathway",
+      "title": "Dermatofibrosarcoma protuberans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low rate of metastasis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth or nodularity within a long-standing plaque suggesting fibrosarcomatous transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI to define the depth and extent of the tumour before wide excision, Skin biopsy with histological assessment of storiform architecture and fat infiltration, CD34 immunohistochemistry, typically diffusely positive,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not indicated since nodal spread is rare"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatofibrosarcoma protuberans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatofibrosarcoma_protuberans-matrix",
+      "title": "Dermatofibrosarcoma protuberans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A locally aggressive dermal spindle-cell sarcoma of intermediate malignancy with a strong tendency to recur locally but a low",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI to define the depth and extent of the tumour before wide excision, Skin biopsy with histological assessment of storiform",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dermatofibroma (benign fibrous histiocytoma), Solitary fibrous tumour, Fibrosarcoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For localized disease, surgery is the primary and usually the only treatment needed; elective lymph node dissection is not",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating the infiltrative extent and taking inadequate margins, leading to recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatofibrosarcoma protuberans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatofibrosarcoma_protuberans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Depth and extent of the tumour before wide excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with histology",
+          "cells": [
+            {
+              "text": "Storiform architecture and fat infiltration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Typically diffusely positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL1A1-PDGFB fusion testing",
+          "cells": [
+            {
+              "text": "Driver fusion, in ambiguous cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological search for fibrosarcomatous transformation",
+          "cells": [
+            {
+              "text": "Transformation that alters prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatofibrosarcoma_protuberans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatofibroma",
+          "cells": [
+            {
+              "text": "Separated by diffuse CD34 positivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keloid or hypertrophic scar",
+          "cells": [
+            {
+              "text": "Mistaken for a benign scar, which delays treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrosarcoma",
+          "cells": [
+            {
+              "text": "Fibrosarcomatous transformation on histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatofibrosarcoma_protuberans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery for localised disease",
+          "cells": [
+            {
+              "text": "Primary and usually only treatment; elective nodal dissection not indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Generous margin: a minimum of about 3 cm, including underlying fascia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery",
+          "cells": [
+            {
+              "text": "Alternative first line, for tissue conservation at sensitive sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision",
+          "cells": [
+            {
+              "text": "Positive or narrow margins, when feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiation therapy",
+          "cells": [
+            {
+              "text": "Selective adjunct or alternative when margins cannot be achieved or function is at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PDGFR tyrosine kinase inhibitor (imatinib)",
+          "cells": [
+            {
+              "text": "Clearest activity for unresectable or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytotoxic chemotherapy",
+          "cells": [
+            {
+              "text": "Limited supporting data; a fallback rather than preferred option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Regular examination of the site, mainly in the first several years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatofibrosarcoma_protuberans-dx-mgmt",
+      "title": "Diagnosis and management of Dermatofibrosarcoma protuberans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatofibrosarcoma protuberans: long-standing plaque or nodule that grows",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, recurrence after inadequate excision, deep fixation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma team review for fibrosarcomatous change or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for depth; skin biopsy with CD34; COL1A1-PDGFB testing if ambiguous",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the storiform tumour diffusely CD34 positive on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dermatofibroma, keloid, solitary fibrous tumour or desmoid fibromatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide local excision with a margin of about 3 cm, including underlying fascia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mohs surgery as an alternative first line at sensitive sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Re-excise positive or narrow margins where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Imatinib for unresectable or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Selective radiation when margins cannot be achieved",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent with adequate margins; high local recurrence if margins are inadequate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

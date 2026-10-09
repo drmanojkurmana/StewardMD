@@ -1,175 +1,232 @@
 {
- "id": "bronchopulmonary_sequestration",
- "name": "Bronchopulmonary sequestration",
- "aliases": [
-  "pulmonary sequestration",
-  "intralobar sequestration",
-  "extralobar sequestration",
-  "accessory lung"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply from an anomalous systemic artery",
-   "The defining feature is a systemic feeding vessel, typically arising from the descending thoracic or upper abdominal aorta",
-   "Intralobar sequestration lies within the visceral pleura of a normal lobe and drains to pulmonary veins, whereas extralobar sequestration has its own pleural covering and usually systemic venous drainage",
-   "Often identified antenatally as a solid, well-defined echogenic lung lesion, frequently in the left lower zone",
-   "Extralobar lesions are more often found in neonates and may be associated with other anomalies such as diaphragmatic hernia",
-   "Intralobar lesions more commonly present later with recurrent infection in the same region of lung",
-   "Definitive imaging demonstrates the systemic feeding artery, and symptomatic or persistent lesions are treated by resection with careful control of the aberrant vessel"
+  "id": "bronchopulmonary_sequestration",
+  "name": "Bronchopulmonary sequestration",
+  "aliases": [
+    "pulmonary sequestration",
+    "intralobar sequestration",
+    "extralobar sequestration",
+    "accessory lung"
   ],
-  "pathophysiology": "Bronchopulmonary sequestration is thought to arise from an accessory lung bud that develops caudal to the normal lung, migrating with the developing foregut and retaining a primitive systemic arterial supply from the aorta rather than acquiring a normal pulmonary connection. The sequestered tissue therefore does not participate in gas exchange and lacks normal bronchial communication. In extralobar sequestration the accessory tissue has its own pleural investment and systemic venous drainage, while in intralobar sequestration the abnormal tissue is incorporated within a normal lobe and tends to drain via pulmonary veins. Absent normal airway clearance predisposes intralobar lesions to recurrent infection, and hybrid lesions sharing features with congenital pulmonary airway malformation are recognised.",
-  "additionalDifferentials": [
-   "Congenital pulmonary airway malformation",
-   "Congenital lobar emphysema",
-   "Congenital diaphragmatic hernia",
-   "Neuroblastoma or other posterior mediastinal mass",
-   "Bronchogenic or foregut duplication cyst",
-   "Recurrent pneumonia from another cause"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel",
-   "Fetal MRI for lesion characterisation when needed",
-   "Contrast-enhanced CT angiography of the chest to define the aberrant artery and venous drainage",
-   "Chest radiograph, recognising it may be subtle or show a persistent basal opacity",
-   "MRI or CT to distinguish it from other posterior thoracic masses",
-   "Histology of the resected specimen for confirmation and to identify hybrid features"
-  ],
-  "redFlags": [
-   "Recurrent or severe infection within the sequestered segment",
-   "High-output cardiac failure from a large systemic arteriovenous shunt",
-   "Fetal hydrops from a large lesion or associated effusion",
-   "Neonatal respiratory distress from mass effect",
-   "Haemorrhage risk from an unrecognised large systemic feeding artery at surgery"
-  ],
-  "prognosis": "Prognosis is generally excellent after complete resection, which is curative and prevents recurrent infection and shunt-related complications. Large fetal lesions causing hydrops carry a poorer outlook, and outcome may be influenced by coexisting anomalies, particularly with extralobar disease.",
-  "pitfalls": [
-   "Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage",
-   "Misclassifying the lesion as ordinary recurrent pneumonia and delaying definitive imaging",
-   "Overlooking associated anomalies such as diaphragmatic hernia with extralobar lesions",
-   "Confusing it with congenital pulmonary airway malformation without seeking the systemic vessel",
-   "Assuming a normal chest radiograph excludes a sequestration seen antenatally"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Ashcraft's Pediatric Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and prevents recurrent infection and shunt complications",
-   "Define the aberrant arterial supply and venous drainage preoperatively with CT angiography to plan safe surgery",
-   "Treat any superimposed infection with antibiotics before elective resection",
-   "Monitor antenatally, offering foetal intervention such as a thoracoamniotic shunt for large lesions causing hydrops",
-   "Assess for associated congenital anomalies, particularly diaphragmatic hernia in extralobar lesions",
-   "Refer to paediatric surgery and manage within a multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bronchopulmonary_sequestration-pathway",
-   "title": "Bronchopulmonary sequestration: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply from an anomalous systemic artery",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe infection within the sequestered segment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel, Fetal MRI for lesion characterisation when needed, Contrast-enhanced CT angiography of the chest to define the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and prevents recurrent infection and shunt complications"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bronchopulmonary sequestration."
-  }
- ],
- "tables": [
-  {
-   "id": "bronchopulmonary_sequestration-matrix",
-   "title": "Bronchopulmonary sequestration: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply from an anomalous systemic artery",
+      "The defining feature is a systemic feeding vessel, typically arising from the descending thoracic or upper abdominal aorta",
+      "Intralobar sequestration lies within the visceral pleura of a normal lobe and drains to pulmonary veins, whereas extralobar sequestration has its own pleural covering and usually systemic venous drainage",
+      "Often identified antenatally as a solid, well-defined echogenic lung lesion, frequently in the left lower zone",
+      "Extralobar lesions are more often found in neonates and may be associated with other anomalies such as diaphragmatic hernia",
+      "Intralobar lesions more commonly present later with recurrent infection in the same region of lung",
+      "Definitive imaging demonstrates the systemic feeding artery, and symptomatic or persistent lesions are treated by resection with careful control of the aberrant vessel"
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel, Fetal MRI for lesion",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bronchopulmonary sequestration is thought to arise from an accessory lung bud that develops caudal to the normal lung, migrating with the developing foregut and retaining a primitive systemic arterial supply from the aorta rather than acquiring a normal pulmonary connection. The sequestered tissue therefore does not participate in gas exchange and lacks normal bronchial communication. In extralobar sequestration the accessory tissue has its own pleural investment and systemic venous drainage, while in intralobar sequestration the abnormal tissue is incorporated within a normal lobe and tends to drain via pulmonary veins. Absent normal airway clearance predisposes intralobar lesions to recurrent infection, and hybrid lesions sharing features with congenital pulmonary airway malformation are recognised.",
+    "additionalDifferentials": [
+      "Congenital pulmonary airway malformation",
+      "Congenital lobar emphysema",
+      "Congenital diaphragmatic hernia",
+      "Neuroblastoma or other posterior mediastinal mass",
+      "Bronchogenic or foregut duplication cyst",
+      "Recurrent pneumonia from another cause"
     ],
-    [
-     "Primary Differentials",
-     "Congenital pulmonary airway malformation, Congenital lobar emphysema, Congenital diaphragmatic hernia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel",
+      "Fetal MRI for lesion characterisation when needed",
+      "Contrast-enhanced CT angiography of the chest to define the aberrant artery and venous drainage",
+      "Chest radiograph, recognising it may be subtle or show a persistent basal opacity",
+      "MRI or CT to distinguish it from other posterior thoracic masses",
+      "Histology of the resected specimen for confirmation and to identify hybrid features"
     ],
-    [
-     "Management Strategy",
-     "Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe infection within the sequestered segment",
+      "High-output cardiac failure from a large systemic arteriovenous shunt",
+      "Fetal hydrops from a large lesion or associated effusion",
+      "Neonatal respiratory distress from mass effect",
+      "Haemorrhage risk from an unrecognised large systemic feeding artery at surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally excellent after complete resection, which is curative and prevents recurrent infection and shunt-related complications. Large fetal lesions causing hydrops carry a poorer outlook, and outcome may be influenced by coexisting anomalies, particularly with extralobar disease.",
+    "pitfalls": [
+      "Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage",
+      "Misclassifying the lesion as ordinary recurrent pneumonia and delaying definitive imaging",
+      "Overlooking associated anomalies such as diaphragmatic hernia with extralobar lesions",
+      "Confusing it with congenital pulmonary airway malformation without seeking the systemic vessel",
+      "Assuming a normal chest radiograph excludes a sequestration seen antenatally"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Ashcraft's Pediatric Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and prevents recurrent infection and shunt complications",
+      "Define the aberrant arterial supply and venous drainage preoperatively with CT angiography to plan safe surgery",
+      "Treat any superimposed infection with antibiotics before elective resection",
+      "Monitor antenatally, offering foetal intervention such as a thoracoamniotic shunt for large lesions causing hydrops",
+      "Assess for associated congenital anomalies, particularly diaphragmatic hernia in extralobar lesions",
+      "Refer to paediatric surgery and manage within a multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for bronchopulmonary sequestration."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bronchopulmonary-sequestration-real-image",
-   "title": "Bronchopulmonary sequestration: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "bronchopulmonary_sequestration-pathway",
+      "title": "Bronchopulmonary sequestration: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply from an anomalous systemic artery",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe infection within the sequestered segment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel, Fetal MRI for lesion characterisation when needed, Contrast-enhanced CT angiography of the chest to define the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and prevents recurrent infection and shunt complications"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bronchopulmonary sequestration."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bronchopulmonary_sequestration-matrix",
+      "title": "Bronchopulmonary sequestration: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mass of non-functioning lung tissue that lacks a normal connection to the tracheobronchial tree and derives its blood supply",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound identifying an echogenic lung mass, with Doppler seeking a systemic feeding vessel, Fetal MRI for lesion",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital pulmonary airway malformation, Congenital lobar emphysema, Congenital diaphragmatic hernia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer definitive surgical resection with careful ligation of the anomalous systemic feeding artery, which is curative and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to identify and securely control the anomalous systemic artery, risking major haemorrhage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bronchopulmonary sequestration."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bronchopulmonary_sequestration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bronchopulmonary sequestration",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Antenatal ultrasound with Doppler", "cells": [{"text": "Solid, well-defined echogenic lung lesion; systemic feeding vessel"}], "cite": "c1"},
+        {"parameter": "Fetal MRI", "cells": [{"text": "Lesion characterisation when needed"}], "cite": "c1"},
+        {"parameter": "Contrast-enhanced CT angiography of the chest", "cells": [{"text": "Aberrant systemic artery and venous drainage"}], "cite": "c1"},
+        {"parameter": "Chest radiograph", "cells": [{"text": "May be subtle or show a persistent basal opacity"}], "cite": "c1"},
+        {"parameter": "MRI or CT", "cells": [{"text": "Distinguishes from other posterior thoracic masses"}], "cite": "c1"},
+        {"parameter": "Histology of resected specimen", "cells": [{"text": "Confirmation and hybrid features"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchopulmonary_sequestration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike lung and mediastinal lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Congenital pulmonary airway malformation", "cells": [{"text": "Sequestration has an anomalous systemic feeding artery, which must be sought"}], "cite": "c1"},
+        {"parameter": "Posterior mediastinal mass (for example neuroblastoma)", "cells": [{"text": "Definitive imaging demonstrates the systemic feeding artery in sequestration"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bronchopulmonary_sequestration-treatment",
+      "kind": "treatment",
+      "title": "Management options in bronchopulmonary sequestration",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Surgical resection", "cells": [{"text": "Resection with careful control of the anomalous systemic feeding artery"}, {"text": "Curative; prevents recurrent infection and shunt complications"}], "cite": "c1"},
+        {"parameter": "Preoperative vascular mapping", "cells": [{"text": "CT angiography to define the aberrant artery and venous drainage"}, {"text": "Plans safe surgery"}], "cite": "c1"},
+        {"parameter": "Superimposed infection", "cells": [{"text": "Antibiotics before elective resection"}, {"text": "Before surgery"}], "cite": "c1"},
+        {"parameter": "Antenatal monitoring", "cells": [{"text": "Monitor large lesions; hydrops carries a poorer outlook"}, {"text": "Large lesions"}], "cite": "c1"},
+        {"parameter": "Associated anomalies", "cells": [{"text": "Assess for diaphragmatic hernia, particularly with extralobar lesions"}, {"text": "Extralobar"}], "cite": "c1"},
+        {"parameter": "Referral", "cells": [{"text": "Paediatric surgery within a multidisciplinary team"}, {"text": "Specialist"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bronchopulmonary_sequestration-dx-mgmt",
+      "title": "Diagnosis and management of bronchopulmonary sequestration",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Non-functioning lung mass, antenatal echogenic lesion or recurrent infection in one lung region", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: hydrops, high-output cardiac failure, neonatal respiratory distress, or recurrent severe infection?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent paediatric surgical and fetal or neonatal review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Contrast-enhanced CT angiography to define the systemic feeding artery and venous drainage", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Systemic feeding artery identified?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Treat any infection with antibiotics; plan resection with vessel control", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Resection with careful control of the anomalous systemic artery", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider congenital pulmonary airway malformation, cyst or other mediastinal mass", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Complete resection is curative with an excellent prognosis", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n8", "label": "No"},
+        {"from": "n6", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,173 +1,395 @@
 {
- "id": "viral_exanthems",
- "name": "Viral Exanthems of Childhood",
- "aliases": [
-  "viral rashes in children",
-  "childhood exanthems",
-  "exanthematous viral illness"
- ],
- "class": "infective",
- "system": "Dermatological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash with fever in children.",
-   "The classic childhood exanthems include measles, rubella, erythema infectiosum (parvovirus B19), roseola (human herpesvirus 6/7), and varicella, each with fairly characteristic patterns.",
-   "Diagnosis is often clinical, based on the morphology and distribution of the rash, its timing relative to fever, and associated features such as enanthems and prodromal symptoms.",
-   "Measles is distinguished by high fever with cough, coryza, and conjunctivitis, Koplik spots on the buccal mucosa, and a rash spreading from the head downward.",
-   "Roseola typically causes several days of high fever in a well-appearing infant, followed by a rash that appears as the fever resolves.",
-   "Erythema infectiosum produces the characteristic slapped-cheek facial appearance followed by a lacy, reticular rash on the limbs.",
-   "Most viral exanthems are self-limiting and managed supportively, but measles carries a notable risk of complications and remains vaccine-preventable.",
-   "Recognising non-viral mimics, especially meningococcaemia, scarlet fever, Kawasaki disease, and drug reactions, is essential because some require urgent specific treatment."
+  "id": "viral_exanthems",
+  "name": "Viral Exanthems of Childhood",
+  "aliases": [
+    "viral rashes in children",
+    "childhood exanthems",
+    "exanthematous viral illness"
   ],
-  "pathophysiology": "In many viral exanthems the rash reflects the systemic phase of infection when virus disseminates through the bloodstream and, together with the host immune response, involves the skin. Some eruptions result from direct viral infection of skin cells (as in varicella, where the virus produces vesicular lesions), while others are largely immune-mediated, appearing as the immune response develops and sometimes coinciding with defervescence, as in roseola. The specific morphology, distribution, and timing are determined by the particular virus, its tropism, and the character of the immune reaction, which is why individual exanthems have recognisable patterns.",
-  "additionalDifferentials": [
-   "Meningococcaemia or other bacterial sepsis with petechiae or purpura",
-   "Scarlet fever",
-   "Kawasaki disease",
-   "Drug eruption or hypersensitivity reaction",
-   "Enteroviral exanthems",
-   "Other congenital or systemic infections with rash"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on rash pattern and associated features in most cases",
-   "Serology or PCR for specific viruses when confirmation is needed (e.g., measles, parvovirus)",
-   "Full blood count and inflammatory markers if a bacterial or inflammatory cause is considered",
-   "Public health notification and testing for notifiable infections such as measles",
-   "Investigations to exclude serious mimics when the child is unwell or the rash is atypical"
-  ],
-  "redFlags": [
-   "Petechial or purpuric, non-blanching rash",
-   "Toxic or septic appearance",
-   "Signs suggesting Kawasaki disease (prolonged fever with mucocutaneous features)",
-   "Mucosal involvement, blistering, or skin sloughing suggesting a severe drug reaction",
-   "Features of measles complications such as pneumonia or encephalitis"
-  ],
-  "prognosis": "The great majority of viral exanthems are benign and self-limiting with full recovery, though certain infections, notably measles and varicella in vulnerable hosts, and parvovirus in specific settings, can cause significant complications.",
-  "pitfalls": [
-   "Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem",
-   "Failing to consider Kawasaki disease in a child with prolonged fever and rash",
-   "Overlooking measles and its public health and complication implications",
-   "Attributing a drug hypersensitivity eruption to a viral cause"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are self-limiting",
-   "Antiviral aciclovir for varicella in neonates, immunocompromised or other vulnerable patients, and vitamin A supplementation during measles in at-risk children",
-   "Post-exposure prophylaxis with varicella-zoster or measles immunoglobulin, or vaccine, for susceptible vulnerable contacts",
-   "Monitor for complications such as measles pneumonia or encephalitis, varicella superinfection, and parvovirus-induced aplastic crisis or foetal risk in pregnancy",
-   "Public health notification and respiratory or contact isolation for notifiable infections such as measles and rubella",
-   "Promote routine MMR and varicella immunisation for prevention",
-   "Escalate and seek specialist input for immunocompromised or pregnant contacts and for the unwell or atypical child"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "viral_exanthems-pathway",
-   "title": "Viral Exanthems of Childhood: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash with fever in children.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Petechial or purpuric, non-blanching rash",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on rash pattern and associated features in most cases, Serology or PCR for specific viruses when confirmation is needed (e.g., measles, parvovirus), Full blood count and inflammatory markers if a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of viral exanthems of childhood."
-  }
- ],
- "tables": [
-  {
-   "id": "viral_exanthems-matrix",
-   "title": "Viral Exanthems of Childhood: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Dermatological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash with fever in children.",
+      "The classic childhood exanthems include measles, rubella, erythema infectiosum (parvovirus B19), roseola (human herpesvirus 6/7), and varicella, each with fairly characteristic patterns.",
+      "Diagnosis is often clinical, based on the morphology and distribution of the rash, its timing relative to fever, and associated features such as enanthems and prodromal symptoms.",
+      "Measles is distinguished by high fever with cough, coryza, and conjunctivitis, Koplik spots on the buccal mucosa, and a rash spreading from the head downward.",
+      "Roseola typically causes several days of high fever in a well-appearing infant, followed by a rash that appears as the fever resolves.",
+      "Erythema infectiosum produces the characteristic slapped-cheek facial appearance followed by a lacy, reticular rash on the limbs.",
+      "Most viral exanthems are self-limiting and managed supportively, but measles carries a notable risk of complications and remains vaccine-preventable.",
+      "Recognising non-viral mimics, especially meningococcaemia, scarlet fever, Kawasaki disease, and drug reactions, is essential because some require urgent specific treatment."
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on rash pattern and associated features in most cases, Serology or PCR for specific viruses when",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In many viral exanthems the rash reflects the systemic phase of infection when virus disseminates through the bloodstream and, together with the host immune response, involves the skin. Some eruptions result from direct viral infection of skin cells (as in varicella, where the virus produces vesicular lesions), while others are largely immune-mediated, appearing as the immune response develops and sometimes coinciding with defervescence, as in roseola. The specific morphology, distribution, and timing are determined by the particular virus, its tropism, and the character of the immune reaction, which is why individual exanthems have recognisable patterns.",
+    "additionalDifferentials": [
+      "Meningococcaemia or other bacterial sepsis with petechiae or purpura",
+      "Scarlet fever",
+      "Kawasaki disease",
+      "Drug eruption or hypersensitivity reaction",
+      "Enteroviral exanthems",
+      "Other congenital or systemic infections with rash"
     ],
-    [
-     "Primary Differentials",
-     "Meningococcaemia or other bacterial sepsis with petechiae or purpura, Scarlet fever, Kawasaki disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on rash pattern and associated features in most cases",
+      "Serology or PCR for specific viruses when confirmation is needed (e.g., measles, parvovirus)",
+      "Full blood count and inflammatory markers if a bacterial or inflammatory cause is considered",
+      "Public health notification and testing for notifiable infections such as measles",
+      "Investigations to exclude serious mimics when the child is unwell or the rash is atypical"
     ],
-    [
-     "Management Strategy",
-     "Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are",
-     "Core treatment modality"
+    "redFlags": [
+      "Petechial or purpuric, non-blanching rash",
+      "Toxic or septic appearance",
+      "Signs suggesting Kawasaki disease (prolonged fever with mucocutaneous features)",
+      "Mucosal involvement, blistering, or skin sloughing suggesting a severe drug reaction",
+      "Features of measles complications such as pneumonia or encephalitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority of viral exanthems are benign and self-limiting with full recovery, though certain infections, notably measles and varicella in vulnerable hosts, and parvovirus in specific settings, can cause significant complications.",
+    "pitfalls": [
+      "Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem",
+      "Failing to consider Kawasaki disease in a child with prolonged fever and rash",
+      "Overlooking measles and its public health and complication implications",
+      "Attributing a drug hypersensitivity eruption to a viral cause"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are self-limiting",
+      "Antiviral aciclovir for varicella in neonates, immunocompromised or other vulnerable patients, and vitamin A supplementation during measles in at-risk children",
+      "Post-exposure prophylaxis with varicella-zoster or measles immunoglobulin, or vaccine, for susceptible vulnerable contacts",
+      "Monitor for complications such as measles pneumonia or encephalitis, varicella superinfection, and parvovirus-induced aplastic crisis or foetal risk in pregnancy",
+      "Public health notification and respiratory or contact isolation for notifiable infections such as measles and rubella",
+      "Promote routine MMR and varicella immunisation for prevention",
+      "Escalate and seek specialist input for immunocompromised or pregnant contacts and for the unwell or atypical child"
     ]
-   ],
-   "caption": "Overview comparison matrix for viral exanthems of childhood."
-  }
- ],
- "diagrams": [
-  {
-   "id": "viral-exanthems-real-image",
-   "title": "Viral Exanthems of Childhood: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "viral_exanthems-pathway",
+      "title": "Viral Exanthems of Childhood: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash with fever in children.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Petechial or purpuric, non-blanching rash",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on rash pattern and associated features in most cases, Serology or PCR for specific viruses when confirmation is needed (e.g., measles, parvovirus), Full blood count and inflammatory markers if a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of viral exanthems of childhood."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "viral_exanthems-matrix",
+      "title": "Viral Exanthems of Childhood: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Viral exanthems are widespread skin eruptions accompanying systemic viral infections and are among the most common causes of rash",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on rash pattern and associated features in most cases, Serology or PCR for specific viruses when",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meningococcaemia or other bacterial sepsis with petechiae or purpura, Scarlet fever, Kawasaki disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care for most exanthems with antipyretics such as paracetamol, adequate fluids and antipruritic measures, as they are",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling a serious non-blanching or purpuric rash as a benign viral exanthem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for viral exanthems of childhood."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "viral_exanthems-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of rash pattern and associated features",
+          "cells": [
+            {
+              "text": "Diagnosis in most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology or PCR for specific viruses",
+          "cells": [
+            {
+              "text": "Confirmation, such as for measles or parvovirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Bacterial infection when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_exanthems-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcaemia or bacterial sepsis",
+          "cells": [
+            {
+              "text": "Non-blanching petechiae or purpura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "Prolonged fever with mucocutaneous features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug eruption or hypersensitivity reaction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_exanthems-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics such as paracetamol, adequate fluids and antipruritic measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy",
+          "cells": [
+            {
+              "text": "Aciclovir for varicella in neonates, immunocompromised or other vulnerable patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "viral_exanthems-dx-mgmt",
+      "title": "Diagnosis and management of Viral Exanthems of Childhood",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected viral exanthem: widespread rash with fever in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (non-blanching rash, septic appearance or prolonged fever)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis management or Kawasaki disease assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rash pattern review, specific virus PCR or serology, full blood count and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the rash pattern and serology fit a viral exanthem?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider meningococcaemia, scarlet fever, Kawasaki disease or drug eruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with antipyretics, fluids and antipruritic measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aciclovir for varicella in neonates or immunocompromised children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review of any serious or atypical rash at follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most exanthems are self-limiting; non-blanching rash needs urgent care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

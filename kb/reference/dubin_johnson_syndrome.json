@@ -1,174 +1,463 @@
 {
- "id": "dubin_johnson_syndrome",
- "name": "Dubin-Johnson syndrome",
- "aliases": [
-  "ABCC2",
-  "MRP2 deficiency",
-  "chronic idiopathic jaundice",
-  "conjugated hyperbilirubinaemia with pigmented liver"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated protein 2 (MRP2)",
-   "It produces chronic, predominantly conjugated (direct) hyperbilirubinaemia with otherwise normal liver enzymes and synthetic function",
-   "The liver has a characteristic grossly black pigmentation and shows dark granular melanin-like pigment within hepatocytes on biopsy",
-   "Total urinary coproporphyrin is normal but the proportion of the coproporphyrin I isomer is markedly increased, a useful biochemical fingerprint",
-   "Oral cholecystography typically fails to visualise the gallbladder, and biliary scintigraphy shows delayed hepatic clearance",
-   "Jaundice may be precipitated or worsened by pregnancy, oral contraceptives, or intercurrent illness",
-   "No specific treatment is required beyond reassurance, as the condition is benign with a normal life expectancy"
+  "id": "dubin_johnson_syndrome",
+  "name": "Dubin-Johnson syndrome",
+  "aliases": [
+    "ABCC2",
+    "MRP2 deficiency",
+    "chronic idiopathic jaundice",
+    "conjugated hyperbilirubinaemia with pigmented liver"
   ],
-  "pathophysiology": "MRP2, encoded by ABCC2, is the canalicular transporter responsible for secreting conjugated bilirubin and other organic anions from the hepatocyte into bile. In Dubin-Johnson syndrome, biallelic loss-of-function mutations impair this export step, so conjugated bilirubin that has been normally taken up and glucuronidated cannot be efficiently excreted and refluxes back into the blood, producing conjugated hyperbilirubinaemia. A parallel disturbance of organic anion handling shifts urinary coproporphyrin excretion toward the isomer I fraction. The retained dark pigment, thought to derive from adrenaline metabolites, accumulates in lysosomes and gives the liver its distinctive black appearance, but hepatocyte function and architecture remain otherwise normal.",
-  "additionalDifferentials": [
-   "Rotor syndrome",
-   "Cholestatic and obstructive liver disease",
-   "Viral and drug-induced hepatitis",
-   "Primary biliary cholangitis and other cholestatic disorders",
-   "Benign recurrent intrahepatic cholestasis",
-   "Cholestasis of pregnancy"
-  ],
-  "additionalInvestigations": [
-   "Fractionated bilirubin confirming a conjugated predominance",
-   "Normal liver enzymes and synthetic function to exclude hepatocellular or obstructive disease",
-   "Urinary coproporphyrin analysis showing a raised proportion of coproporphyrin I",
-   "Liver biopsy demonstrating characteristic dark hepatocellular pigment",
-   "Hepatobiliary scintigraphy and gallbladder imaging showing the typical excretory pattern",
-   "ABCC2 molecular genetic testing where confirmation is required"
-  ],
-  "redFlags": [
-   "Abnormal transaminases or synthetic dysfunction, which point away from this benign diagnosis",
-   "Pruritus, pale stools, or dark urine suggesting true biliary obstruction",
-   "Systemic symptoms or weight loss prompting exclusion of hepatobiliary malignancy",
-   "Marked worsening of jaundice with pregnancy warranting exclusion of other cholestatic disease"
-  ],
-  "prognosis": "Dubin-Johnson syndrome is benign with a normal life expectancy and does not progress to cirrhosis; jaundice may fluctuate with hormonal or physiological stress but requires no specific therapy.",
-  "pitfalls": [
-   "Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup",
-   "Overlooking the distinguishing coproporphyrin isomer pattern that separates it from Rotor syndrome",
-   "Attributing the abnormal liver pigment to malignancy on biopsy",
-   "Failing to reassure patients, leading to unnecessary anxiety and investigation",
-   "Assuming imaging non-visualisation of the gallbladder implies pathological obstruction"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy",
-   "Avoid unnecessary invasive investigation or treatment once the diagnosis is established through fractionated bilirubin, the coproporphyrin I isomer pattern and, where needed, ABCC2 testing",
-   "Counsel that jaundice may be precipitated or worsened by pregnancy, oestrogen-containing oral contraceptives and intercurrent illness, and consider alternative contraception if jaundice is troublesome",
-   "Confirm normal liver enzymes and synthetic function to distinguish it from hepatocellular or obstructive disease and to prevent misdirected treatment",
-   "Offer genetic counselling for this autosomal recessive condition, with family screening where relevant",
-   "Provide routine reassurance in pregnancy, as the condition itself carries a normal life expectancy and does not progress to cirrhosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dubin_johnson_syndrome-pathway",
-   "title": "Dubin-Johnson syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated protein 2 (MRP2)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abnormal transaminases or synthetic dysfunction, which point away from this benign diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fractionated bilirubin confirming a conjugated predominance, Normal liver enzymes and synthetic function to exclude hepatocellular or obstructive disease, Urinary coproporphyrin analysis showing a raised proportion of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dubin-johnson syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dubin_johnson_syndrome-matrix",
-   "title": "Dubin-Johnson syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated protein 2 (MRP2)",
+      "It produces chronic, predominantly conjugated (direct) hyperbilirubinaemia with otherwise normal liver enzymes and synthetic function",
+      "The liver has a characteristic grossly black pigmentation and shows dark granular melanin-like pigment within hepatocytes on biopsy",
+      "Total urinary coproporphyrin is normal but the proportion of the coproporphyrin I isomer is markedly increased, a useful biochemical fingerprint",
+      "Oral cholecystography typically fails to visualise the gallbladder, and biliary scintigraphy shows delayed hepatic clearance",
+      "Jaundice may be precipitated or worsened by pregnancy, oral contraceptives, or intercurrent illness",
+      "No specific treatment is required beyond reassurance, as the condition is benign with a normal life expectancy"
     ],
-    [
-     "Key Investigations",
-     "Fractionated bilirubin confirming a conjugated predominance, Normal liver enzymes and synthetic function to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MRP2, encoded by ABCC2, is the canalicular transporter responsible for secreting conjugated bilirubin and other organic anions from the hepatocyte into bile. In Dubin-Johnson syndrome, biallelic loss-of-function mutations impair this export step, so conjugated bilirubin that has been normally taken up and glucuronidated cannot be efficiently excreted and refluxes back into the blood, producing conjugated hyperbilirubinaemia. A parallel disturbance of organic anion handling shifts urinary coproporphyrin excretion toward the isomer I fraction. The retained dark pigment, thought to derive from adrenaline metabolites, accumulates in lysosomes and gives the liver its distinctive black appearance, but hepatocyte function and architecture remain otherwise normal.",
+    "additionalDifferentials": [
+      "Rotor syndrome",
+      "Cholestatic and obstructive liver disease",
+      "Viral and drug-induced hepatitis",
+      "Primary biliary cholangitis and other cholestatic disorders",
+      "Benign recurrent intrahepatic cholestasis",
+      "Cholestasis of pregnancy"
     ],
-    [
-     "Primary Differentials",
-     "Rotor syndrome, Cholestatic and obstructive liver disease, Viral and drug-induced hepatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fractionated bilirubin confirming a conjugated predominance",
+      "Normal liver enzymes and synthetic function to exclude hepatocellular or obstructive disease",
+      "Urinary coproporphyrin analysis showing a raised proportion of coproporphyrin I",
+      "Liver biopsy demonstrating characteristic dark hepatocellular pigment",
+      "Hepatobiliary scintigraphy and gallbladder imaging showing the typical excretory pattern",
+      "ABCC2 molecular genetic testing where confirmation is required"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Abnormal transaminases or synthetic dysfunction, which point away from this benign diagnosis",
+      "Pruritus, pale stools, or dark urine suggesting true biliary obstruction",
+      "Systemic symptoms or weight loss prompting exclusion of hepatobiliary malignancy",
+      "Marked worsening of jaundice with pregnancy warranting exclusion of other cholestatic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dubin-Johnson syndrome is benign with a normal life expectancy and does not progress to cirrhosis; jaundice may fluctuate with hormonal or physiological stress but requires no specific therapy.",
+    "pitfalls": [
+      "Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup",
+      "Overlooking the distinguishing coproporphyrin isomer pattern that separates it from Rotor syndrome",
+      "Attributing the abnormal liver pigment to malignancy on biopsy",
+      "Failing to reassure patients, leading to unnecessary anxiety and investigation",
+      "Assuming imaging non-visualisation of the gallbladder implies pathological obstruction"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy",
+      "Avoid unnecessary invasive investigation or treatment once the diagnosis is established through fractionated bilirubin, the coproporphyrin I isomer pattern and, where needed, ABCC2 testing",
+      "Counsel that jaundice may be precipitated or worsened by pregnancy, oestrogen-containing oral contraceptives and intercurrent illness, and consider alternative contraception if jaundice is troublesome",
+      "Confirm normal liver enzymes and synthetic function to distinguish it from hepatocellular or obstructive disease and to prevent misdirected treatment",
+      "Offer genetic counselling for this autosomal recessive condition, with family screening where relevant",
+      "Provide routine reassurance in pregnancy, as the condition itself carries a normal life expectancy and does not progress to cirrhosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for dubin-johnson syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dubin-johnson-syndrome-real-image",
-   "title": "Dubin-Johnson syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "dubin_johnson_syndrome-pathway",
+      "title": "Dubin-Johnson syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated protein 2 (MRP2)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abnormal transaminases or synthetic dysfunction, which point away from this benign diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fractionated bilirubin confirming a conjugated predominance, Normal liver enzymes and synthetic function to exclude hepatocellular or obstructive disease, Urinary coproporphyrin analysis showing a raised proportion of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dubin-johnson syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dubin_johnson_syndrome-matrix",
+      "title": "Dubin-Johnson syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign autosomal recessive disorder caused by mutations in ABCC2, encoding the canalicular multidrug resistance-associated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fractionated bilirubin confirming a conjugated predominance, Normal liver enzymes and synthetic function to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotor syndrome, Cholestatic and obstructive liver disease, Viral and drug-induced hepatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient, as this is a benign disorder of conjugated bilirubin excretion that requires no specific therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking benign conjugated hyperbilirubinaemia for obstructive or hepatocellular disease and pursuing invasive workup",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dubin-johnson syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dubin_johnson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fractionated bilirubin",
+          "cells": [
+            {
+              "text": "Conjugated predominance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver enzymes and synthetic function",
+          "cells": [
+            {
+              "text": "Normal, excluding hepatocellular or obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary coproporphyrin analysis",
+          "cells": [
+            {
+              "text": "Raised proportion of coproporphyrin I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary scintigraphy",
+          "cells": [
+            {
+              "text": "Typical excretory pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCC2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "ABCC2 variant where confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dubin_johnson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotor syndrome",
+          "cells": [
+            {
+              "text": "Separated by the coproporphyrin isomer pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign recurrent intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Recurrent cholestasis with normal enzymes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestasis of pregnancy",
+          "cells": [
+            {
+              "text": "Jaundice in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dubin_johnson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign disorder of conjugated bilirubin excretion; no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary investigation",
+          "cells": [
+            {
+              "text": "Once diagnosis is established by fractionated bilirubin and coproporphyrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on precipitants",
+          "cells": [
+            {
+              "text": "Pregnancy, oestrogen contraceptives and illness can worsen jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm normal enzymes",
+          "cells": [
+            {
+              "text": "Distinguishes it from hepatocellular or obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy reassurance",
+          "cells": [
+            {
+              "text": "Normal life expectancy; no progression to cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dubin_johnson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dubin-Johnson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dubin-Johnson syndrome: fluctuating jaundice with conjugated bilirubin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal transaminases, pruritus, weight loss, worsening jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for obstruction or malignancy if red flags present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fractionated bilirubin; liver enzymes; urinary coproporphyrin I; scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is conjugated bilirubin raised with normal enzymes and coproporphyrin I raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Rotor syndrome, obstructive or hepatocellular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign disorder of bilirubin excretion requiring no specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid invasive investigation once the diagnosis is established",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel that pregnancy and oestrogen contraceptives may precipitate jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Routine reassurance in pregnancy; no progression to cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with normal life expectancy; no progression to cirrhosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

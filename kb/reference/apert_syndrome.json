@@ -1,174 +1,483 @@
 {
- "id": "apert_syndrome",
- "name": "Apert syndrome",
- "aliases": [
-  "acrocephalosyndactyly type I",
-  "ACS1",
-  "FGFR2-related craniosynostosis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in an autosomal dominant pattern but usually arising as de novo events linked to advanced paternal age",
-   "Bicoronal synostosis produces a turribrachycephalic (tall, flat-backed) skull with a high forehead, midface hypoplasia, proptosis, hypertelorism and downslanting palpebral fissures",
-   "The defining limb feature is severe symmetrical bony and soft-tissue syndactyly of the hands and feet, often a 'mitten' or 'sock' fusion involving digits two to four",
-   "Midface retrusion narrows the airway and choanae, so obstructive sleep apnoea and feeding difficulty are common and should be screened for early",
-   "A cleft or high-arched palate, acne, and hyperhidrosis are frequently seen, and variable intellectual disability occurs",
-   "Raised intracranial pressure may develop from the restricted cranial vault or associated hydrocephalus and needs periodic surveillance",
-   "Management is multidisciplinary within a craniofacial team, staging cranial vault expansion, midface advancement and hand reconstruction over childhood",
-   "Prenatal or postnatal diagnosis is confirmed by FGFR2 sequencing when the phenotype is characteristic"
+  "id": "apert_syndrome",
+  "name": "Apert syndrome",
+  "aliases": [
+    "acrocephalosyndactyly type I",
+    "ACS1",
+    "FGFR2-related craniosynostosis"
   ],
-  "pathophysiology": "Apert syndrome results from constitutive activation of fibroblast growth factor receptor 2 (FGFR2). The gain-of-function change increases receptor signalling that normally regulates the balance between proliferation and differentiation in cranial suture mesenchyme and in developing limb tissue. Excess signalling drives premature ossification and fusion of the calvarial sutures (especially the coronal sutures) and disturbs apoptosis in the interdigital tissue, so the digits fail to separate and instead fuse. The same disordered signalling underlies the midface hypoplasia and other skeletal features.",
-  "additionalDifferentials": [
-   "Crouzon syndrome (FGFR2 craniosynostosis without complex syndactyly)",
-   "Pfeiffer syndrome (broad thumbs and great toes with craniosynostosis)",
-   "Saethre-Chotzen syndrome (TWIST1, ptosis and mild cutaneous syndactyly)",
-   "Carpenter syndrome (RAB23, polydactyly with syndactyly)",
-   "Muenke syndrome (FGFR3 coronal synostosis)",
-   "Non-syndromic bicoronal craniosynostosis"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling",
-   "Cranial CT with three-dimensional reconstruction to map suture fusion and vault shape",
-   "MRI of the brain to assess ventricles, hydrocephalus and hindbrain",
-   "Ophthalmological review and fundoscopy to detect exposure keratopathy and papilloedema",
-   "Polysomnography and airway assessment for obstructive sleep apnoea",
-   "Radiographs of the hands and feet to define the syndactyly and skeletal fusions"
-  ],
-  "redFlags": [
-   "Signs of raised intracranial pressure such as papilloedema, headache or developmental regression",
-   "Severe obstructive sleep apnoea or airway compromise from midface hypoplasia",
-   "Corneal exposure and ulceration from marked proptosis",
-   "Progressive hydrocephalus requiring neurosurgical intervention"
-  ],
-  "prognosis": "With coordinated craniofacial, neurosurgical and hand surgery, survival and functional outcomes are good, though cognitive outcome is variable and many children have some degree of learning difficulty. Lifelong follow-up is needed for airway, vision, hearing and intracranial pressure.",
-  "pitfalls": [
-   "Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia",
-   "Missing raised intracranial pressure because early signs can be subtle in infants",
-   "Confusing Apert with Crouzon when the hands are not carefully examined for the characteristic syndactyly",
-   "Underestimating the need for staged, lifelong multidisciplinary care"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: FGFR-related craniosynostosis syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial pressure, followed by midface advancement (Le Fort III or monobloc) for the midface hypoplasia",
-   "Secure the airway, screening for and treating obstructive sleep apnoea from midface retrusion with CPAP, adenotonsillectomy, midface advancement or tracheostomy as required",
-   "Reconstruct the hands and feet with staged surgical separation of the syndactyly to maximise function",
-   "Protect vision with ocular lubrication for exposure keratopathy from proptosis, and monitor for papilloedema",
-   "Surveil for raised intracranial pressure and hydrocephalus, inserting a shunt when indicated, and repair a cleft or high-arched palate with feeding support",
-   "Provide developmental assessment and educational support for variable intellectual disability, together with hearing surveillance",
-   "Coordinate a craniofacial multidisciplinary team and offer genetic counselling for this autosomal dominant FGFR2 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "apert_syndrome-pathway",
-   "title": "Apert syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in an autosomal dominant pattern but usually arising as de novo events linked to advanced paternal age",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure such as papilloedema, headache or developmental regression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling, Cranial CT with three-dimensional reconstruction to map suture fusion and vault shape, MRI of the brain to assess ventricles,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial pressure, followed by midface advancement (Le Fort III or monobloc) for the midface"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of apert syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "apert_syndrome-matrix",
-   "title": "Apert syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in an autosomal dominant pattern but usually arising as de novo events linked to advanced paternal age",
+      "Bicoronal synostosis produces a turribrachycephalic (tall, flat-backed) skull with a high forehead, midface hypoplasia, proptosis, hypertelorism and downslanting palpebral fissures",
+      "The defining limb feature is severe symmetrical bony and soft-tissue syndactyly of the hands and feet, often a 'mitten' or 'sock' fusion involving digits two to four",
+      "Midface retrusion narrows the airway and choanae, so obstructive sleep apnoea and feeding difficulty are common and should be screened for early",
+      "A cleft or high-arched palate, acne, and hyperhidrosis are frequently seen, and variable intellectual disability occurs",
+      "Raised intracranial pressure may develop from the restricted cranial vault or associated hydrocephalus and needs periodic surveillance",
+      "Management is multidisciplinary within a craniofacial team, staging cranial vault expansion, midface advancement and hand reconstruction over childhood",
+      "Prenatal or postnatal diagnosis is confirmed by FGFR2 sequencing when the phenotype is characteristic"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling, Cranial CT with three-dimensional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Apert syndrome results from constitutive activation of fibroblast growth factor receptor 2 (FGFR2). The gain-of-function change increases receptor signalling that normally regulates the balance between proliferation and differentiation in cranial suture mesenchyme and in developing limb tissue. Excess signalling drives premature ossification and fusion of the calvarial sutures (especially the coronal sutures) and disturbs apoptosis in the interdigital tissue, so the digits fail to separate and instead fuse. The same disordered signalling underlies the midface hypoplasia and other skeletal features.",
+    "additionalDifferentials": [
+      "Crouzon syndrome (FGFR2 craniosynostosis without complex syndactyly)",
+      "Pfeiffer syndrome (broad thumbs and great toes with craniosynostosis)",
+      "Saethre-Chotzen syndrome (TWIST1, ptosis and mild cutaneous syndactyly)",
+      "Carpenter syndrome (RAB23, polydactyly with syndactyly)",
+      "Muenke syndrome (FGFR3 coronal synostosis)",
+      "Non-syndromic bicoronal craniosynostosis"
     ],
-    [
-     "Primary Differentials",
-     "Crouzon syndrome (FGFR2 craniosynostosis without complex syndactyly), Pfeiffer syndrome (broad thumbs and great toes with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling",
+      "Cranial CT with three-dimensional reconstruction to map suture fusion and vault shape",
+      "MRI of the brain to assess ventricles, hydrocephalus and hindbrain",
+      "Ophthalmological review and fundoscopy to detect exposure keratopathy and papilloedema",
+      "Polysomnography and airway assessment for obstructive sleep apnoea",
+      "Radiographs of the hands and feet to define the syndactyly and skeletal fusions"
     ],
-    [
-     "Management Strategy",
-     "Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of raised intracranial pressure such as papilloedema, headache or developmental regression",
+      "Severe obstructive sleep apnoea or airway compromise from midface hypoplasia",
+      "Corneal exposure and ulceration from marked proptosis",
+      "Progressive hydrocephalus requiring neurosurgical intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia",
-     "Prevent diagnostic or management error"
+    "prognosis": "With coordinated craniofacial, neurosurgical and hand surgery, survival and functional outcomes are good, though cognitive outcome is variable and many children have some degree of learning difficulty. Lifelong follow-up is needed for airway, vision, hearing and intracranial pressure.",
+    "pitfalls": [
+      "Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia",
+      "Missing raised intracranial pressure because early signs can be subtle in infants",
+      "Confusing Apert with Crouzon when the hands are not carefully examined for the characteristic syndactyly",
+      "Underestimating the need for staged, lifelong multidisciplinary care"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: FGFR-related craniosynostosis syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial pressure, followed by midface advancement (Le Fort III or monobloc) for the midface hypoplasia",
+      "Secure the airway, screening for and treating obstructive sleep apnoea from midface retrusion with CPAP, adenotonsillectomy, midface advancement or tracheostomy as required",
+      "Reconstruct the hands and feet with staged surgical separation of the syndactyly to maximise function",
+      "Protect vision with ocular lubrication for exposure keratopathy from proptosis, and monitor for papilloedema",
+      "Surveil for raised intracranial pressure and hydrocephalus, inserting a shunt when indicated, and repair a cleft or high-arched palate with feeding support",
+      "Provide developmental assessment and educational support for variable intellectual disability, together with hearing surveillance",
+      "Coordinate a craniofacial multidisciplinary team and offer genetic counselling for this autosomal dominant FGFR2 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for apert syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "apert-syndrome-real-image",
-   "title": "Apert syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "apert_syndrome-pathway",
+      "title": "Apert syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in an autosomal dominant pattern but usually arising as de novo events linked to advanced paternal age",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of raised intracranial pressure such as papilloedema, headache or developmental regression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling, Cranial CT with three-dimensional reconstruction to map suture fusion and vault shape, MRI of the brain to assess ventricles,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial pressure, followed by midface advancement (Le Fort III or monobloc) for the midface"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of apert syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "apert_syndrome-matrix",
+      "title": "Apert syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by recurrent gain-of-function mutations in FGFR2 (classically the p.Ser252Trp and p.Pro253Arg substitutions), inherited in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of FGFR2 to confirm the diagnosis and enable counselling, Cranial CT with three-dimensional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Crouzon syndrome (FGFR2 craniosynostosis without complex syndactyly), Pfeiffer syndrome (broad thumbs and great toes with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform staged craniofacial surgery: early cranial vault expansion for the bicoronal synostosis to relieve raised intracranial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing feeding problems or noisy breathing to reflux rather than recognising airway narrowing from midface hypoplasia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for apert syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apert_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of FGFR2",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial CT with three-dimensional reconstruction",
+          "cells": [
+            {
+              "text": "Suture fusion and vault shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Ventricles, hydrocephalus and hindbrain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review and fundoscopy",
+          "cells": [
+            {
+              "text": "Exposure keratopathy and papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography and airway assessment",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the hands and feet",
+          "cells": [
+            {
+              "text": "Syndactyly and skeletal fusions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apert_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crouzon syndrome",
+          "cells": [
+            {
+              "text": "Craniosynostosis without complex syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pfeiffer syndrome",
+          "cells": [
+            {
+              "text": "Broad thumbs and great toes with craniosynostosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apert_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged craniofacial surgery",
+          "cells": [
+            {
+              "text": "Early cranial vault expansion for bicoronal synostosis, then midface advancement"
+            },
+            {
+              "text": "Relieves raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and sleep apnoea management",
+          "cells": [
+            {
+              "text": "CPAP, adenotonsillectomy or midface advancement"
+            },
+            {
+              "text": "Obstructive sleep apnoea from midface retrusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot reconstruction",
+          "cells": [
+            {
+              "text": "Staged surgical separation of syndactyly"
+            },
+            {
+              "text": "Maximises function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye protection",
+          "cells": [
+            {
+              "text": "Ocular lubrication; monitor for papilloedema"
+            },
+            {
+              "text": "Exposure keratopathy from proptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus surveillance",
+          "cells": [
+            {
+              "text": "Shunt when indicated; repair cleft or high-arched palate"
+            },
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and hearing support",
+          "cells": [
+            {
+              "text": "Assessment, educational support and hearing surveillance"
+            },
+            {
+              "text": "Variable intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FGFR2 disorder; craniofacial team"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apert_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Apert syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bicoronal craniosynostosis with midface retrusion and syndactyly at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Papilloedema, headache, airway compromise or severe apnoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and raised intracranial pressure assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FGFR2 testing, 3D cranial CT, MRI, eye review, sleep study, limb radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGFR2 variant confirms Apert syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early cranial vault expansion for bicoronal synostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat FGFR2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CPAP or adenotonsillectomy for sleep apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged hand and foot syndactyly separation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ocular lubrication; hydrocephalus surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated craniofacial care; genetic counselling for FGFR2",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,229 @@
 {
- "id": "calcaneovalgus_foot",
- "name": "Calcaneovalgus foot",
- "aliases": [
-  "calcaneovalgus deformity",
-  "positional calcaneovalgus",
-  "flexible calcaneovalgus foot",
-  "talipes calcaneovalgus"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is dorsiflexed and everted so that the dorsum lies against the front of the shin",
-   "The hallmark is flexibility: the foot can be passively brought down into plantarflexion and inversion, which distinguishes it from the rigid congenital vertical talus",
-   "There is no fixed bony malalignment, and radiographs, if taken, show a normally aligned talus unlike the vertical talus",
-   "Because it shares an association with in-utero moulding, the hips must be examined for developmental dysplasia, which coexists more often than by chance",
-   "Posteromedial bowing of the tibia can produce a similar calcaneovalgus posture but is accompanied by tibial angulation and a predictable leg-length discrepancy that needs monitoring",
-   "Most feet correct spontaneously within the first months of life, helped where needed by simple passive stretching taught to the parents",
-   "Persistent or more rigid deformity is uncommon and only occasionally requires serial casting"
+  "id": "calcaneovalgus_foot",
+  "name": "Calcaneovalgus foot",
+  "aliases": [
+    "calcaneovalgus deformity",
+    "positional calcaneovalgus",
+    "flexible calcaneovalgus foot",
+    "talipes calcaneovalgus"
   ],
-  "pathophysiology": "Calcaneovalgus foot is a soft-tissue positional deformity rather than a structural malformation, resulting from the foot being held dorsiflexed and everted in a confined intrauterine space, particularly in first pregnancies and oligohydramnios. The dorsal and lateral soft tissues are relatively contracted and the plantarflexors stretched, but the tarsal bones are normally aligned and the talonavicular joint is reduced, which is why the foot is supple and correctable. This benign packaging deformity must be separated from congenital vertical talus, in which fixed talonavicular dislocation produces a rigid rocker-bottom foot, and from posteromedial tibial bowing, where the calcaneovalgus posture accompanies a genuine tibial deformity.",
-  "additionalDifferentials": [
-   "Congenital vertical talus (rigid rocker-bottom foot)",
-   "Posteromedial bowing of the tibia",
-   "Oblique talus, an intermediate reducible deformity",
-   "Flexible flatfoot of later childhood",
-   "Paralytic calcaneus deformity from a neuromuscular disorder",
-   "Congenital absence or deficiency of the fibula with foot valgus"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of foot flexibility and passive plantarflexion",
-   "Examination of the hips, with ultrasound for developmental dysplasia where indicated",
-   "Palpation and, if needed, radiographs of the tibia to exclude posteromedial bowing",
-   "Lateral foot radiographs only when a rigid deformity or vertical talus is suspected",
-   "Measurement and monitoring of limb length when tibial bowing is present",
-   "Neurological examination if a paralytic cause is considered"
-  ],
-  "redFlags": [
-   "A rigid, non-correctable foot suggesting congenital vertical talus rather than a positional deformity",
-   "Associated tibial angulation indicating posteromedial bowing with potential leg-length discrepancy",
-   "Coexisting signs of developmental dysplasia of the hip",
-   "Asymmetry or neurological signs suggesting an underlying disorder"
-  ],
-  "prognosis": "The prognosis is excellent, as the great majority of positional calcaneovalgus feet correct spontaneously within the first few months of life, leaving a normal foot; posteromedial tibial bowing, when present, resolves its angulation but may leave a residual leg-length discrepancy requiring follow-up.",
-  "pitfalls": [
-   "Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus",
-   "Failing to examine the hips and missing developmental dysplasia",
-   "Overlooking posteromedial tibial bowing and its associated leg-length discrepancy",
-   "Overtreating a benign positional deformity that would resolve on its own",
-   "Alarming parents unnecessarily when simple stretching and reassurance suffice"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Lovell and Winter's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the first months.",
-   "Observe with clinical review to confirm progressive spontaneous correction of the flexible deformity.",
-   "Examine the hips and arrange ultrasound to detect coexisting developmental dysplasia.",
-   "Distinguish and refer a rigid rocker-bottom foot suggestive of congenital vertical talus for orthopaedic management.",
-   "Monitor limb length and tibial angulation where posteromedial tibial bowing coexists.",
-   "Reserve serial casting or orthopaedic referral for the rare foot that fails to correct."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "calcaneovalgus_foot-pathway",
-   "title": "Calcaneovalgus foot: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is dorsiflexed and everted so that the dorsum lies against the front of the shin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rigid, non-correctable foot suggesting congenital vertical talus rather than a positional deformity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of foot flexibility and passive plantarflexion, Examination of the hips, with ultrasound for developmental dysplasia where indicated, Palpation and, if needed, radiographs of the tibia to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the first months."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of calcaneovalgus foot."
-  }
- ],
- "tables": [
-  {
-   "id": "calcaneovalgus_foot-matrix",
-   "title": "Calcaneovalgus foot: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is dorsiflexed and everted so that the dorsum lies against the front of the shin",
+      "The hallmark is flexibility: the foot can be passively brought down into plantarflexion and inversion, which distinguishes it from the rigid congenital vertical talus",
+      "There is no fixed bony malalignment, and radiographs, if taken, show a normally aligned talus unlike the vertical talus",
+      "Because it shares an association with in-utero moulding, the hips must be examined for developmental dysplasia, which coexists more often than by chance",
+      "Posteromedial bowing of the tibia can produce a similar calcaneovalgus posture but is accompanied by tibial angulation and a predictable leg-length discrepancy that needs monitoring",
+      "Most feet correct spontaneously within the first months of life, helped where needed by simple passive stretching taught to the parents",
+      "Persistent or more rigid deformity is uncommon and only occasionally requires serial casting"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of foot flexibility and passive plantarflexion, Examination of the hips, with ultrasound for developmental",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Calcaneovalgus foot is a soft-tissue positional deformity rather than a structural malformation, resulting from the foot being held dorsiflexed and everted in a confined intrauterine space, particularly in first pregnancies and oligohydramnios. The dorsal and lateral soft tissues are relatively contracted and the plantarflexors stretched, but the tarsal bones are normally aligned and the talonavicular joint is reduced, which is why the foot is supple and correctable. This benign packaging deformity must be separated from congenital vertical talus, in which fixed talonavicular dislocation produces a rigid rocker-bottom foot, and from posteromedial tibial bowing, where the calcaneovalgus posture accompanies a genuine tibial deformity.",
+    "additionalDifferentials": [
+      "Congenital vertical talus (rigid rocker-bottom foot)",
+      "Posteromedial bowing of the tibia",
+      "Oblique talus, an intermediate reducible deformity",
+      "Flexible flatfoot of later childhood",
+      "Paralytic calcaneus deformity from a neuromuscular disorder",
+      "Congenital absence or deficiency of the fibula with foot valgus"
     ],
-    [
-     "Primary Differentials",
-     "Congenital vertical talus (rigid rocker-bottom foot), Posteromedial bowing of the tibia, Oblique talus, an intermediate reducible",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of foot flexibility and passive plantarflexion",
+      "Examination of the hips, with ultrasound for developmental dysplasia where indicated",
+      "Palpation and, if needed, radiographs of the tibia to exclude posteromedial bowing",
+      "Lateral foot radiographs only when a rigid deformity or vertical talus is suspected",
+      "Measurement and monitoring of limb length when tibial bowing is present",
+      "Neurological examination if a paralytic cause is considered"
     ],
-    [
-     "Management Strategy",
-     "Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the",
-     "Core treatment modality"
+    "redFlags": [
+      "A rigid, non-correctable foot suggesting congenital vertical talus rather than a positional deformity",
+      "Associated tibial angulation indicating posteromedial bowing with potential leg-length discrepancy",
+      "Coexisting signs of developmental dysplasia of the hip",
+      "Asymmetry or neurological signs suggesting an underlying disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent, as the great majority of positional calcaneovalgus feet correct spontaneously within the first few months of life, leaving a normal foot; posteromedial tibial bowing, when present, resolves its angulation but may leave a residual leg-length discrepancy requiring follow-up.",
+    "pitfalls": [
+      "Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus",
+      "Failing to examine the hips and missing developmental dysplasia",
+      "Overlooking posteromedial tibial bowing and its associated leg-length discrepancy",
+      "Overtreating a benign positional deformity that would resolve on its own",
+      "Alarming parents unnecessarily when simple stretching and reassurance suffice"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Lovell and Winter's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the first months.",
+      "Observe with clinical review to confirm progressive spontaneous correction of the flexible deformity.",
+      "Examine the hips and arrange ultrasound to detect coexisting developmental dysplasia.",
+      "Distinguish and refer a rigid rocker-bottom foot suggestive of congenital vertical talus for orthopaedic management.",
+      "Monitor limb length and tibial angulation where posteromedial tibial bowing coexists.",
+      "Reserve serial casting or orthopaedic referral for the rare foot that fails to correct."
     ]
-   ],
-   "caption": "Overview comparison matrix for calcaneovalgus foot."
-  }
- ],
- "diagrams": [
-  {
-   "id": "calcaneovalgus-foot-real-image",
-   "title": "Calcaneovalgus foot: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "calcaneovalgus_foot-pathway",
+      "title": "Calcaneovalgus foot: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is dorsiflexed and everted so that the dorsum lies against the front of the shin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rigid, non-correctable foot suggesting congenital vertical talus rather than a positional deformity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of foot flexibility and passive plantarflexion, Examination of the hips, with ultrasound for developmental dysplasia where indicated, Palpation and, if needed, radiographs of the tibia to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the first months."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of calcaneovalgus foot."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "calcaneovalgus_foot-matrix",
+      "title": "Calcaneovalgus foot: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common flexible positional deformity of the newborn foot, usually attributed to intrauterine packaging, in which the foot is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of foot flexibility and passive plantarflexion, Examination of the hips, with ultrasound for developmental",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital vertical talus (rigid rocker-bottom foot), Posteromedial bowing of the tibia, Oblique talus, an intermediate reducible",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure parents and teach gentle passive stretching into plantarflexion and inversion, as most feet correct spontaneously in the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the supple calcaneovalgus foot with the rigid congenital vertical talus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for calcaneovalgus foot."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "calcaneovalgus_foot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements in calcaneovalgus foot",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Passive flexibility of the foot", "cells": [{"text": "Foot can be brought into plantarflexion and inversion; the key distinction from vertical talus"}], "cite": "c1"},
+        {"parameter": "Examination of the hips", "cells": [{"text": "Developmental dysplasia of the hip, which coexists more often than by chance"}], "cite": "c1"},
+        {"parameter": "Palpation and radiographs of the tibia", "cells": [{"text": "Posteromedial tibial bowing"}], "cite": "c1"},
+        {"parameter": "Lateral foot radiographs", "cells": [{"text": "Only when a rigid deformity or vertical talus is suspected; normally aligned talus in calcaneovalgus"}], "cite": "c1"},
+        {"parameter": "Limb length measurement", "cells": [{"text": "Leg-length discrepancy when tibial bowing is present"}], "cite": "c1"},
+        {"parameter": "Neurological examination", "cells": [{"text": "If a paralytic cause is considered"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calcaneovalgus_foot-ddx",
+      "kind": "ddx",
+      "title": "Look-alike newborn foot deformities",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Congenital vertical talus", "cells": [{"text": "Rigid rocker-bottom foot with fixed talonavicular dislocation; calcaneovalgus is flexible with normally aligned tarsal bones"}], "cite": "c1"},
+        {"parameter": "Posteromedial bowing of the tibia", "cells": [{"text": "Tibial angulation and leg-length discrepancy accompany the posture"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calcaneovalgus_foot-treatment",
+      "kind": "treatment",
+      "title": "Management options in calcaneovalgus foot",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance and passive stretching", "cells": [{"text": "Teach parents gentle stretching into plantarflexion and inversion"}, {"text": "Most feet correct spontaneously in the first months"}], "cite": "c1"},
+        {"parameter": "Clinical observation", "cells": [{"text": "Review to confirm progressive spontaneous correction"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Hip assessment", "cells": [{"text": "Examine hips; ultrasound for developmental dysplasia where indicated"}, {"text": "Coexisting"}], "cite": "c1"},
+        {"parameter": "Referral for rigid deformity", "cells": [{"text": "Rigid rocker-bottom foot suggestive of congenital vertical talus referred for orthopaedic management"}, {"text": "Not positional"}], "cite": "c1"},
+        {"parameter": "Tibial bowing", "cells": [{"text": "Monitor limb length and tibial angulation"}, {"text": "Where present"}], "cite": "c1"},
+        {"parameter": "Serial casting", "cells": [{"text": "Reserved for the rare foot that fails to correct"}, {"text": "Uncommon"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "calcaneovalgus_foot-dx-mgmt",
+      "title": "Diagnosis and management of calcaneovalgus foot",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Newborn foot held dorsiflexed and everted against the shin", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rigid non-correctable foot, tibial angulation, or hip instability or neurological signs?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: paediatric orthopaedic referral; hip ultrasound; limb length assessment", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Test passive flexibility; examine the hips; palpate the tibia", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Foot passively corrects into plantarflexion and inversion?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Reassurance, passive stretching and clinical review", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Radiographs and orthopaedic referral to assess for vertical talus", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Most correct spontaneously within the first months, leaving a normal foot", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

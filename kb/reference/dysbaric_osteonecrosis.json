@@ -1,169 +1,493 @@
 {
- "id": "dysbaric_osteonecrosis",
- "name": "Dysbaric osteonecrosis",
- "aliases": [
-  "caisson disease of bone",
-  "diver's bone necrosis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Diving and hyperbaric medicine / Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Diving and hyperbaric medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate decompression",
-   "It characteristically affects the humeral and femoral heads and the shafts of long bones",
-   "Shaft (medullary) lesions are typically asymptomatic, whereas juxta-articular lesions can progress to joint surface collapse and arthritis",
-   "There is often a latent period of months to years between exposure and radiological changes",
-   "It is associated with cumulative dysbaric exposure and with episodes of decompression sickness",
-   "Screening imaging is used in occupationally exposed groups, and established joint disease may require orthopaedic treatment"
+  "id": "dysbaric_osteonecrosis",
+  "name": "Dysbaric osteonecrosis",
+  "aliases": [
+    "caisson disease of bone",
+    "diver's bone necrosis"
   ],
-  "pathophysiology": "Dysbaric osteonecrosis is thought to result from impaired blood supply to bone related to decompression, with proposed mechanisms including intraosseous or intravascular gas bubbles, fat embolism and altered coagulation compromising the end-arterial supply of bone. The resulting ischaemia causes death of bone and marrow, and subsequent attempted repair produces the characteristic lesions. Juxta-articular necrosis weakens the subchondral bone, leading to collapse of the articular surface and secondary degenerative joint disease.",
-  "additionalDifferentials": [
-   "Avascular necrosis from other causes (corticosteroids, alcohol, sickle cell disease)",
-   "Osteoarthritis",
-   "Bone infarct of another aetiology",
-   "Bone tumour or metastasis",
-   "Osteomyelitis"
-  ],
-  "additionalInvestigations": [
-   "Plain radiography and MRI to detect and characterise lesions",
-   "Occupational history of diving or compressed-air work and decompression incidents",
-   "Assessment for other causes of osteonecrosis",
-   "Joint imaging where articular collapse is suspected",
-   "Surveillance imaging in exposed workers"
-  ],
-  "redFlags": [
-   "Joint pain suggesting articular surface collapse",
-   "Rapidly progressive joint destruction",
-   "Features suggesting an alternative cause such as malignancy or infection",
-   "Multiple or bilateral juxta-articular lesions"
-  ],
-  "prognosis": "Shaft lesions are usually asymptomatic and stable, but juxta-articular disease can progress to disabling joint collapse requiring arthroplasty; prevention through safe decompression is key.",
-  "pitfalls": [
-   "Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes",
-   "Overlooking asymptomatic lesions that need monitoring",
-   "Missing early juxta-articular disease before collapse",
-   "Failing to review decompression practice in affected workers"
-  ],
-  "references": [
-   "Diving and hyperbaric medicine references (standard reference)",
-   "Orthopaedic reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric exposure, as there is no disease-specific drug therapy",
-   "Observe asymptomatic medullary shaft lesions, which are typically stable and require no intervention",
-   "Manage juxta-articular lesions before collapse with activity modification, analgesia and joint-preserving surgery such as core decompression where appropriate",
-   "Offer arthroplasty or joint replacement for advanced articular surface collapse and secondary degenerative disease",
-   "Undertake surveillance imaging with radiography and MRI in occupationally exposed divers and compressed-air workers",
-   "Refer to orthopaedics for established joint disease and to diving and hyperbaric medicine for fitness-to-dive assessment",
-   "Exclude other causes of osteonecrosis, such as corticosteroid use and alcohol excess, when the diagnosis is considered"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dysbaric_osteonecrosis-pathway",
-   "title": "Dysbaric osteonecrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate decompression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Joint pain suggesting articular surface collapse",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiography and MRI to detect and characterise lesions, Occupational history of diving or compressed-air work and decompression incidents, Assessment for other causes of osteonecrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric exposure, as there is no disease-specific drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dysbaric osteonecrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "dysbaric_osteonecrosis-matrix",
-   "title": "Dysbaric osteonecrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Diving and hyperbaric medicine / Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Diving and hyperbaric medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate decompression",
+      "It characteristically affects the humeral and femoral heads and the shafts of long bones",
+      "Shaft (medullary) lesions are typically asymptomatic, whereas juxta-articular lesions can progress to joint surface collapse and arthritis",
+      "There is often a latent period of months to years between exposure and radiological changes",
+      "It is associated with cumulative dysbaric exposure and with episodes of decompression sickness",
+      "Screening imaging is used in occupationally exposed groups, and established joint disease may require orthopaedic treatment"
     ],
-    [
-     "Key Investigations",
-     "Plain radiography and MRI to detect and characterise lesions, Occupational history of diving or compressed-air work and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dysbaric osteonecrosis is thought to result from impaired blood supply to bone related to decompression, with proposed mechanisms including intraosseous or intravascular gas bubbles, fat embolism and altered coagulation compromising the end-arterial supply of bone. The resulting ischaemia causes death of bone and marrow, and subsequent attempted repair produces the characteristic lesions. Juxta-articular necrosis weakens the subchondral bone, leading to collapse of the articular surface and secondary degenerative joint disease.",
+    "additionalDifferentials": [
+      "Avascular necrosis from other causes (corticosteroids, alcohol, sickle cell disease)",
+      "Osteoarthritis",
+      "Bone infarct of another aetiology",
+      "Bone tumour or metastasis",
+      "Osteomyelitis"
     ],
-    [
-     "Primary Differentials",
-     "Avascular necrosis from other causes (corticosteroids, alcohol, sickle cell disease), Osteoarthritis, Bone infarct of another",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiography and MRI to detect and characterise lesions",
+      "Occupational history of diving or compressed-air work and decompression incidents",
+      "Assessment for other causes of osteonecrosis",
+      "Joint imaging where articular collapse is suspected",
+      "Surveillance imaging in exposed workers"
     ],
-    [
-     "Management Strategy",
-     "Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric",
-     "Core treatment modality"
+    "redFlags": [
+      "Joint pain suggesting articular surface collapse",
+      "Rapidly progressive joint destruction",
+      "Features suggesting an alternative cause such as malignancy or infection",
+      "Multiple or bilateral juxta-articular lesions"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Shaft lesions are usually asymptomatic and stable, but juxta-articular disease can progress to disabling joint collapse requiring arthroplasty; prevention through safe decompression is key.",
+    "pitfalls": [
+      "Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes",
+      "Overlooking asymptomatic lesions that need monitoring",
+      "Missing early juxta-articular disease before collapse",
+      "Failing to review decompression practice in affected workers"
+    ],
+    "references": [
+      "Diving and hyperbaric medicine references (standard reference)",
+      "Orthopaedic reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric exposure, as there is no disease-specific drug therapy",
+      "Observe asymptomatic medullary shaft lesions, which are typically stable and require no intervention",
+      "Manage juxta-articular lesions before collapse with activity modification, analgesia and joint-preserving surgery such as core decompression where appropriate",
+      "Offer arthroplasty or joint replacement for advanced articular surface collapse and secondary degenerative disease",
+      "Undertake surveillance imaging with radiography and MRI in occupationally exposed divers and compressed-air workers",
+      "Refer to orthopaedics for established joint disease and to diving and hyperbaric medicine for fitness-to-dive assessment",
+      "Exclude other causes of osteonecrosis, such as corticosteroid use and alcohol excess, when the diagnosis is considered"
     ]
-   ],
-   "caption": "Overview comparison matrix for dysbaric osteonecrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dysbaric-osteonecrosis-real-image",
-   "title": "Dysbaric osteonecrosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "dysbaric_osteonecrosis-pathway",
+      "title": "Dysbaric osteonecrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate decompression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Joint pain suggesting articular surface collapse",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiography and MRI to detect and characterise lesions, Occupational history of diving or compressed-air work and decompression incidents, Assessment for other causes of osteonecrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric exposure, as there is no disease-specific drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dysbaric osteonecrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dysbaric_osteonecrosis-matrix",
+      "title": "Dysbaric osteonecrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Avascular necrosis of bone occurring in divers and compressed-air (caisson) workers exposed to repeated or inadequate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiography and MRI to detect and characterise lesions, Occupational history of diving or compressed-air work and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Avascular necrosis from other causes (corticosteroids, alcohol, sickle cell disease), Osteoarthritis, Bone infarct of another",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise prevention through safe decompression practice, adherence to dive tables and limitation of cumulative dysbaric",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing osteonecrosis to diving without excluding steroids, alcohol and other causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dysbaric osteonecrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Diving and hyperbaric medicine references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dysbaric_osteonecrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiography and MRI",
+          "cells": [
+            {
+              "text": "Lesion detection and characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational history of diving or compressed-air work",
+          "cells": [
+            {
+              "text": "Cumulative dysbaric exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for other causes of osteonecrosis",
+          "cells": [
+            {
+              "text": "Steroids, alcohol and other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint imaging where articular collapse is suspected",
+          "cells": [
+            {
+              "text": "Articular surface collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging in exposed workers",
+          "cells": [
+            {
+              "text": "Asymptomatic lesions in exposed workers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysbaric_osteonecrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Avascular necrosis from corticosteroids, alcohol or sickle cell disease",
+          "cells": [
+            {
+              "text": "Other causes must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Infection can mimic juxta-articular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone tumour or metastasis",
+          "cells": [
+            {
+              "text": "Malignancy must be considered in multiple lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysbaric_osteonecrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Safe decompression, dive table adherence and limiting cumulative exposure; no drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic shaft lesions",
+          "cells": [
+            {
+              "text": "Typically stable; observe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juxta-articular lesions",
+          "cells": [
+            {
+              "text": "Activity modification, analgesia and joint-preserving surgery such as core decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced collapse",
+          "cells": [
+            {
+              "text": "Arthroplasty for articular surface collapse and secondary degenerative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Radiography and MRI in exposed divers and compressed-air workers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referrals",
+          "cells": [
+            {
+              "text": "Orthopaedics for joint disease; diving medicine for fitness-to-dive assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dysbaric_osteonecrosis-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to osteonecrosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteonecrosis",
+          "cells": [
+            {
+              "text": "glucocorticoids, alcohol, radiation, bisphosphonates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Osteopenia",
+          "cells": [
+            {
+              "text": "glucocorticoids, chronic heparin, phenytoin, methotrexate"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Abbreviations as printed: ACE, angiotensin-converting enzyme; IL-2, interleukin 2; TNF, tumor necrosis factor."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dysbaric_osteonecrosis-dx-mgmt",
+      "title": "Diagnosis and management of Dysbaric osteonecrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dysbaric osteonecrosis: joint pain in a diver or compressed-air worker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (articular collapse, rapid joint destruction, multiple lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for articular collapse or rapid joint destruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiography and MRI; dive or compressed-air history; screen for steroid or alcohol causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show juxta-articular lesions in an exposed worker?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider steroid or alcohol osteonecrosis, osteoarthritis, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent through safe decompression practice and limiting cumulative exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe asymptomatic shaft lesions, which are typically stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Core decompression and analgesia for juxta-articular lesions before collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Arthroplasty for advanced articular collapse and degenerative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance imaging in exposed divers and fitness-to-dive assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Shaft lesions are stable; juxta-articular disease can progress to disabling collapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

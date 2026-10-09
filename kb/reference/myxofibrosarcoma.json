@@ -1,181 +1,495 @@
 {
- "id": "myxofibrosarcoma",
- "name": "Myxofibrosarcoma",
- "aliases": [
-  "MFS",
-  "myxoid malignant fibrous histiocytoma",
-  "myxoid MFH",
-  "myxofibrosarcoma of soft tissue"
- ],
- "class": "non_infective",
- "system": "Oncology / Sarcoma",
- "specialty": "Medical/Surgical Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of Soft Tissue and Bone",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and limb girdles",
-   "Characteristically shows a fibroblastic tumour with variably myxoid stroma, curvilinear vessels, and a spectrum of grades from low to high",
-   "Notorious for an infiltrative growth pattern with finger-like extensions along fascial planes that extend well beyond the apparent mass, driving a high local recurrence rate",
-   "Presents as a slowly enlarging, often painless subcutaneous mass, which may be mistaken for a benign lesion, especially when low grade",
-   "MRI often reveals infiltrative tails of tumour along fascia (the tail sign), helping to plan resection margins",
-   "Genomically complex with highly aberrant karyotypes rather than a defining recurrent fusion",
-   "Wide surgical excision with generous margins is essential, frequently combined with radiotherapy to reduce local recurrence, with chemotherapy reserved for selected high-grade cases",
-   "Repeated local recurrences may be accompanied by progression to higher grade and increasing metastatic potential"
+  "id": "myxofibrosarcoma",
+  "name": "Myxofibrosarcoma",
+  "aliases": [
+    "MFS",
+    "myxoid malignant fibrous histiocytoma",
+    "myxoid MFH",
+    "myxofibrosarcoma of soft tissue"
   ],
-  "pathophysiology": "Myxofibrosarcoma is a malignant fibroblastic tumour with a characteristically myxoid stroma and prominent curvilinear vasculature. It is genomically complex, showing marked chromosomal instability and copy-number changes rather than a single defining genetic event, which places it among the karyotypically complex sarcomas. Its striking tendency to infiltrate diffusely along fascial and subcutaneous planes, often extending microscopically far beyond the palpable or radiologically evident mass, underlies its high propensity for local recurrence. With repeated recurrence, tumours often increase in grade and cellularity, acquiring greater metastatic potential, most commonly to the lungs.",
-  "additionalDifferentials": [
-   "Myxoid liposarcoma",
-   "Low-grade fibromyxoid sarcoma",
-   "Nodular fasciitis and other benign myxoid lesions",
-   "Undifferentiated pleomorphic sarcoma",
-   "Myxoid neurogenic tumours",
-   "Superficial soft-tissue benign masses (e.g. lipoma, ganglion)"
-  ],
-  "additionalInvestigations": [
-   "MRI of the primary site to identify infiltrative fascial tails and define true extent",
-   "Chest CT for pulmonary metastases in higher-grade disease",
-   "Whole-body functional imaging for staging where indicated",
-   "Core biopsy with careful tract planning",
-   "Immunohistochemistry to exclude specific differentiation and other myxoid tumours",
-   "Molecular testing to exclude entities such as myxoid liposarcoma and low-grade fibromyxoid sarcoma"
-  ],
-  "redFlags": [
-   "An enlarging subcutaneous mass in an elderly patient, particularly if previously excised locally",
-   "Repeated local recurrence at a prior excision site",
-   "Increasing size, firmness, or pain suggesting progression to higher grade",
-   "New respiratory symptoms indicating pulmonary metastases",
-   "Extensive infiltrative disease on imaging beyond the palpable mass"
-  ],
-  "prognosis": "Prognosis relates chiefly to grade and adequacy of excision; low-grade tumours rarely metastasise but recur locally, whereas high-grade tumours carry a significant metastatic risk, and repeated recurrence with grade progression worsens the outlook.",
-  "pitfalls": [
-   "Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins",
-   "Mistaking a low-grade tumour for a benign myxoid lesion and performing marginal excision",
-   "Confusing myxofibrosarcoma with myxoid liposarcoma or low-grade fibromyxoid sarcoma without molecular testing",
-   "Neglecting adjuvant radiotherapy where indicated, contributing to local recurrence",
-   "Failing to reassess grade at recurrence, missing progression to higher-grade disease"
-  ],
-  "references": [
-   "WHO Classification of Tumours of Soft Tissue and Bone",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation oncology, medical oncology, pathology) before definitive treatment",
-   "Wide local excision with clear margins is the definitive treatment for localized, resectable disease of any grade",
-   "Plan resection assuming disease extends beyond what imaging or palpation suggests, given the tumor's tendency to infiltrate along fascial planes",
-   "Consider perioperative radiotherapy (neoadjuvant or adjuvant) for high-grade, large, deep, or marginally resectable tumors to reduce local recurrence",
-   "Consider cytotoxic systemic therapy, typically an anthracycline based regimen alone or with an alkylating agent such as ifosfamide, in selected high risk locally advanced cases as part of a multidisciplinary plan",
-   "For isolated resectable pulmonary metastases, consider metastasectomy; for disseminated metastatic disease, systemic therapy plus supportive and palliative care are the mainstay",
-   "At any local recurrence, re-stage and repeat pathological grading rather than assuming the original grade still applies, since recurrences can be higher grade",
-   "Structured surveillance should include regular clinical exam of the surgical site plus periodic local imaging, and chest imaging directed by the known pattern of lung, bone, and lymph node spread",
-   "Refer promptly for re-evaluation at any local recurrence given the risk of grade progression and rising metastatic potential",
-   "Refer patients with high grade, large, or metastatic disease, or those who may be candidates for investigational therapy, to a center with access to sarcoma clinical trials",
-   "mTOR pathway inhibition and Skp2/neddylation inhibition are investigational strategies under early phase and preclinical study, not standard of care, and should only be pursued in a trial setting"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myxofibrosarcoma-pathway",
-   "title": "Myxofibrosarcoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and limb girdles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An enlarging subcutaneous mass in an elderly patient, particularly if previously excised locally",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the primary site to identify infiltrative fascial tails and define true extent, Chest CT for pulmonary metastases in higher-grade disease, Whole-body functional imaging for staging where indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation oncology, medical oncology, pathology) before definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myxofibrosarcoma."
-  }
- ],
- "tables": [
-  {
-   "id": "myxofibrosarcoma-matrix",
-   "title": "Myxofibrosarcoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Sarcoma",
+  "specialty": "Medical/Surgical Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of Soft Tissue and Bone",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and limb girdles",
+      "Characteristically shows a fibroblastic tumour with variably myxoid stroma, curvilinear vessels, and a spectrum of grades from low to high",
+      "Notorious for an infiltrative growth pattern with finger-like extensions along fascial planes that extend well beyond the apparent mass, driving a high local recurrence rate",
+      "Presents as a slowly enlarging, often painless subcutaneous mass, which may be mistaken for a benign lesion, especially when low grade",
+      "MRI often reveals infiltrative tails of tumour along fascia (the tail sign), helping to plan resection margins",
+      "Genomically complex with highly aberrant karyotypes rather than a defining recurrent fusion",
+      "Wide surgical excision with generous margins is essential, frequently combined with radiotherapy to reduce local recurrence, with chemotherapy reserved for selected high-grade cases",
+      "Repeated local recurrences may be accompanied by progression to higher grade and increasing metastatic potential"
     ],
-    [
-     "Key Investigations",
-     "MRI of the primary site to identify infiltrative fascial tails and define true extent, Chest CT for pulmonary metastases in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myxofibrosarcoma is a malignant fibroblastic tumour with a characteristically myxoid stroma and prominent curvilinear vasculature. It is genomically complex, showing marked chromosomal instability and copy-number changes rather than a single defining genetic event, which places it among the karyotypically complex sarcomas. Its striking tendency to infiltrate diffusely along fascial and subcutaneous planes, often extending microscopically far beyond the palpable or radiologically evident mass, underlies its high propensity for local recurrence. With repeated recurrence, tumours often increase in grade and cellularity, acquiring greater metastatic potential, most commonly to the lungs.",
+    "additionalDifferentials": [
+      "Myxoid liposarcoma",
+      "Low-grade fibromyxoid sarcoma",
+      "Nodular fasciitis and other benign myxoid lesions",
+      "Undifferentiated pleomorphic sarcoma",
+      "Myxoid neurogenic tumours",
+      "Superficial soft-tissue benign masses (e.g. lipoma, ganglion)"
     ],
-    [
-     "Primary Differentials",
-     "Myxoid liposarcoma, Low-grade fibromyxoid sarcoma, Nodular fasciitis and other benign myxoid lesions",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the primary site to identify infiltrative fascial tails and define true extent",
+      "Chest CT for pulmonary metastases in higher-grade disease",
+      "Whole-body functional imaging for staging where indicated",
+      "Core biopsy with careful tract planning",
+      "Immunohistochemistry to exclude specific differentiation and other myxoid tumours",
+      "Molecular testing to exclude entities such as myxoid liposarcoma and low-grade fibromyxoid sarcoma"
     ],
-    [
-     "Management Strategy",
-     "Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation",
-     "Core treatment modality"
+    "redFlags": [
+      "An enlarging subcutaneous mass in an elderly patient, particularly if previously excised locally",
+      "Repeated local recurrence at a prior excision site",
+      "Increasing size, firmness, or pain suggesting progression to higher grade",
+      "New respiratory symptoms indicating pulmonary metastases",
+      "Extensive infiltrative disease on imaging beyond the palpable mass"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis relates chiefly to grade and adequacy of excision; low-grade tumours rarely metastasise but recur locally, whereas high-grade tumours carry a significant metastatic risk, and repeated recurrence with grade progression worsens the outlook.",
+    "pitfalls": [
+      "Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins",
+      "Mistaking a low-grade tumour for a benign myxoid lesion and performing marginal excision",
+      "Confusing myxofibrosarcoma with myxoid liposarcoma or low-grade fibromyxoid sarcoma without molecular testing",
+      "Neglecting adjuvant radiotherapy where indicated, contributing to local recurrence",
+      "Failing to reassess grade at recurrence, missing progression to higher-grade disease"
+    ],
+    "references": [
+      "WHO Classification of Tumours of Soft Tissue and Bone",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation oncology, medical oncology, pathology) before definitive treatment",
+      "Wide local excision with clear margins is the definitive treatment for localized, resectable disease of any grade",
+      "Plan resection assuming disease extends beyond what imaging or palpation suggests, given the tumor's tendency to infiltrate along fascial planes",
+      "Consider perioperative radiotherapy (neoadjuvant or adjuvant) for high-grade, large, deep, or marginally resectable tumors to reduce local recurrence",
+      "Consider cytotoxic systemic therapy, typically an anthracycline based regimen alone or with an alkylating agent such as ifosfamide, in selected high risk locally advanced cases as part of a multidisciplinary plan",
+      "For isolated resectable pulmonary metastases, consider metastasectomy; for disseminated metastatic disease, systemic therapy plus supportive and palliative care are the mainstay",
+      "At any local recurrence, re-stage and repeat pathological grading rather than assuming the original grade still applies, since recurrences can be higher grade",
+      "Structured surveillance should include regular clinical exam of the surgical site plus periodic local imaging, and chest imaging directed by the known pattern of lung, bone, and lymph node spread",
+      "Refer promptly for re-evaluation at any local recurrence given the risk of grade progression and rising metastatic potential",
+      "Refer patients with high grade, large, or metastatic disease, or those who may be candidates for investigational therapy, to a center with access to sarcoma clinical trials",
+      "mTOR pathway inhibition and Skp2/neddylation inhibition are investigational strategies under early phase and preclinical study, not standard of care, and should only be pursued in a trial setting"
     ]
-   ],
-   "caption": "Overview comparison matrix for myxofibrosarcoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myxofibrosarcoma-real-image",
-   "title": "Myxofibrosarcoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "myxofibrosarcoma-pathway",
+      "title": "Myxofibrosarcoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and limb girdles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An enlarging subcutaneous mass in an elderly patient, particularly if previously excised locally",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the primary site to identify infiltrative fascial tails and define true extent, Chest CT for pulmonary metastases in higher-grade disease, Whole-body functional imaging for staging where indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation oncology, medical oncology, pathology) before definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myxofibrosarcoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myxofibrosarcoma-matrix",
+      "title": "Myxofibrosarcoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the commoner sarcomas of elderly patients, arising typically in the dermal and subcutaneous soft tissue of the limbs and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the primary site to identify infiltrative fascial tails and define true extent, Chest CT for pulmonary metastases in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Myxoid liposarcoma, Low-grade fibromyxoid sarcoma, Nodular fasciitis and other benign myxoid lesions",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer any suspected or confirmed myxofibrosarcoma to a multidisciplinary soft tissue sarcoma team (surgical oncology, radiation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating tumour extent because infiltrative tails reach well beyond the visible mass, leading to inadequate margins",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myxofibrosarcoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of Soft Tissue and Bone",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myxofibrosarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the primary site",
+          "cells": [
+            {
+              "text": "Infiltrative fascial tails and the true extent of the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Pulmonary metastases in higher-grade disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body functional imaging",
+          "cells": [
+            {
+              "text": "Staging where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy with careful tract planning",
+          "cells": [
+            {
+              "text": "Tissue diagnosis of a myxoid fibroblastic tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Excludes specific differentiation and other myxoid tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing",
+          "cells": [
+            {
+              "text": "Excludes myxoid liposarcoma and low-grade fibromyxoid sarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxofibrosarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myxoid liposarcoma",
+          "cells": [
+            {
+              "text": "Confused with this tumour without molecular testing; molecular testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade fibromyxoid sarcoma",
+          "cells": [
+            {
+              "text": "Excluded by molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular fasciitis and other benign myxoid lesions",
+          "cells": [
+            {
+              "text": "Low-grade tumours can be mistaken for these, leading to marginal excision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxofibrosarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary referral",
+          "cells": [
+            {
+              "text": "Soft tissue sarcoma team before definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Clear margins for localised resectable disease of any grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plan a generous resection",
+          "cells": [
+            {
+              "text": "Plan assuming disease extends beyond what imaging or palpation suggests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Perioperative, for high-grade, large, deep or marginally resectable tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytotoxic systemic therapy",
+          "cells": [
+            {
+              "text": "Anthracycline-based regimen, alone or with ifosfamide, in selected high-risk locally advanced cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "Metastasectomy for isolated resectable lung metastases; systemic therapy and palliative care for disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local recurrence",
+          "cells": [
+            {
+              "text": "Re-stage and re-grade, since recurrences can be higher grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clinical examination of the site, periodic local imaging and chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigational therapy",
+          "cells": [
+            {
+              "text": "mTOR and Skp2/neddylation inhibition only within trials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myxofibrosarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Myxofibrosarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enlarging, often painless subcutaneous limb mass in an elderly patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (local recurrence, increasing size or pain, respiratory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to soft tissue sarcoma MDT before definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for infiltrative tails, chest CT, core biopsy, molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myxoid fibroblastic tumour confirmed, with myxoid liposarcoma and LGFMS excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign myxoid lesion or other myxoid sarcoma; repeat molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide local excision with clear margins, planned beyond the visible extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Perioperative radiotherapy for high-grade, large, deep or marginal tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anthracycline-based systemic therapy in selected high-risk locally advanced cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Re-stage and re-grade at any local recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome relates to grade and excision; high-grade tumours carry metastatic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
